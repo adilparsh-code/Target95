@@ -1,5 +1,6 @@
 import questions from "../../../../data/questions";
 import { notFound } from "next/navigation";
+import AnswerBox from "../../../../components/AnswerBox";
 
 export default async function QuestionPage({ params }) {
 
@@ -28,17 +29,7 @@ export default async function QuestionPage({ params }) {
           {question.question}
         </p>
 
-        <div className="mt-10 bg-green-50 border border-green-300 rounded-xl p-6">
-
-          <h2 className="font-bold text-green-700">
-            Answer
-          </h2>
-
-          <p className="mt-3 text-gray-700">
-            {question.answer}
-          </p>
-
-        </div>
+        <AnswerBox answer={question.answer} />
 
       </div>
 

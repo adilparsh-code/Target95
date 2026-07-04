@@ -38,22 +38,30 @@ const javaChapters = [
   {
     id: 6,
     title: "Methods",
+    slug: "methods",
     questions: 45,
+    difficulty: "Intermediate"
   },
   {
     id: 7,
     title: "Arrays",
+    slug: "arrays",
     questions: 80,
+    difficulty: "Advanced"
   },
   {
     id: 8,
     title: "Strings",
+    slug: "strings",
     questions: 60,
+    difficulty: "Advanced"
   },
   {
     id: 9,
     title: "Constructor",
+    slug: "constructor",
     questions: 30,
+    difficulty: "Advanced"
   }
 ];
 

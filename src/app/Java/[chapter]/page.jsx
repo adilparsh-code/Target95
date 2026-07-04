@@ -1,0 +1,51 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import javaChapters from "../../data/javaChapters";
+
+export default async function ChapterPage({ params }) {
+
+  const { chapter } = await params;
+
+  const chapterData = javaChapters.find(
+    (item) => item.slug === chapter
+  );
+
+  if (!chapterData) {
+    notFound();
+  }
+
+  return (
+    <main className="min-h-screen bg-slate-100 py-16">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10">
+
+        <div className="text-6xl text-center">📘</div>
+
+        <h1 className="text-5xl font-bold text-center text-blue-700 mt-6">
+          {chapterData.title}
+        </h1>
+
+        <div className="flex justify-center gap-4 mt-8">
+
+          <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full">
+            {chapterData.difficulty}
+          </span>
+
+          <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full">
+            {chapterData.questions} Questions
+          </span>
+
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            href={`/java/${chapter}/question/1`}
+            className="inline-block bg-blue-700 text-white px-8 py-4 rounded-xl hover:bg-blue-800 transition"
+          >
+            Start Practice →
+          </Link>
+        </div>
+console.log(chapter);
+      </div>
+    </main>
+  );
+}

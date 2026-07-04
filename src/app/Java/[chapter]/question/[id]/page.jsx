@@ -30,7 +30,7 @@ export default async function QuestionPage({ params }) {
   return (
     <main className="min-h-screen bg-slate-100 py-16">
 
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10">
+      <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-10 border border-gray-200">
 
         <h1 className="text-4xl font-extrabold text-blue-700">
   Question {question.id}
@@ -40,7 +40,7 @@ export default async function QuestionPage({ params }) {
   Progress: {currentIndex + 1} / {chapterQuestions.length}
 </p>
 
-        <p className="mt-8 text-3xl font-semibold text-gray-900 leading-relaxed">
+       <p className="mt-8 text-3xl font-semibold text-gray-900 leading-relaxed">
   {question.question}
 </p>
 
@@ -52,7 +52,7 @@ export default async function QuestionPage({ params }) {
 
             <Link
               href={`/java/${chapter}/question/${nextQuestion.id}`}
-              className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+              className="bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-800 transition"
             >
               Next Question →
             </Link>

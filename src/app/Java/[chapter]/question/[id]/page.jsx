@@ -32,17 +32,17 @@ export default async function QuestionPage({ params }) {
 
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10">
 
-        <h1 className="text-4xl font-bold text-blue-700">
-          Question {question.id}
-        </h1>
+        <h1 className="text-4xl font-extrabold text-blue-700">
+  Question {question.id}
+</h1>
 
-        <p className="mt-2 text-gray-500">
-          {currentIndex + 1} / {chapterQuestions.length}
-        </p>
+       <p className="mt-2 text-lg font-medium text-gray-700">
+  Progress: {currentIndex + 1} / {chapterQuestions.length}
+</p>
 
-        <p className="mt-8 text-2xl">
-          {question.question}
-        </p>
+        <p className="mt-8 text-3xl font-semibold text-gray-900 leading-relaxed">
+  {question.question}
+</p>
 
         <AnswerBox answer={question.answer} />
 

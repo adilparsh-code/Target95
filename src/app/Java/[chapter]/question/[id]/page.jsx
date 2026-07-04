@@ -21,7 +21,7 @@ export default async function QuestionPage({ params }) {
 
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10">
 
-        <h1 className="text-4xl font-bold text-blue-700">
+        <h1 className="text-4xl font-bold text-black-700">
           Question {question.id}
         </h1>
 

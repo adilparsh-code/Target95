@@ -36,9 +36,19 @@ export default async function QuestionPage({ params }) {
   Question {question.id}
 </h1>
 
-       <p className="mt-2 text-lg font-medium text-gray-700">
-  Progress: {currentIndex + 1} / {chapterQuestions.length}
+      <p className="mt-4 text-center text-lg font-semibold text-blue-700">
+  Progress: {currentIndex + 1} of {chapterQuestions.length} Questions
 </p>
+<div className="w-full bg-gray-200 rounded-full h-3 mt-6">
+
+  <div
+    className="bg-blue-700 h-3 rounded-full transition-all duration-500"
+    style={{
+      width: `${((currentIndex + 1) / chapterQuestions.length) * 100}%`,
+    }}
+  ></div>
+
+</div>
 
        <p className="mt-8 text-3xl font-semibold text-gray-900 leading-relaxed">
   {question.question}

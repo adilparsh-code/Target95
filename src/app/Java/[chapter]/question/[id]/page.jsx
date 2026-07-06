@@ -30,7 +30,9 @@ export default async function QuestionPage({ params }) {
 
   return (
     <main className="min-h-screen bg-slate-100 py-16">
-
+<div className="text-sm text-gray-500 mb-4">
+  Home / Java / {chapter}
+</div>
       <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-10 border border-gray-200">
 
         <h1 className="text-4xl font-extrabold text-blue-700">
@@ -58,7 +60,41 @@ export default async function QuestionPage({ params }) {
         <AnswerBox answer={question.answer} />
 
        <div className="mt-10 flex justify-between">
+<div className="mt-10">
 
+  <h3 className="text-xl font-bold text-gray-800 mb-4">
+    Questions
+  </h3>
+
+  <div className="flex flex-wrap gap-3">
+
+    {chapterQuestions.map((q) => (
+
+      <Link
+        key={q.id}
+        href={`/java/${chapter}/question/${q.id}`}
+        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition
+        ${
+          q.id === question.id
+            ? "bg-blue-700 text-white"
+            : "bg-gray-200 hover:bg-gray-300"
+        }`}
+      >
+        {q.id}
+      </Link>
+
+    ))}
+    <div className="mt-6">
+
+  <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">
+    {question.difficulty}
+  </span>
+
+</div>
+
+  </div>
+
+</div>
   <div>
     {previousQuestion && (
       <Link

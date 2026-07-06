@@ -7,6 +7,7 @@ import AnswerBox from "../../../../components/AnswerBox";
 import ProgressBar from "../../../../components/ProgressBar";
 import DifficultyBadge from "../../../../components/DifficultyBadge";
 import QuestionCard from "../../../../components/QuestionCard";
+import MCQQuestion from "../../../../components/MCQQuestion";
 
 export default async function QuestionPage({ params }) {
 
@@ -72,14 +73,20 @@ export default async function QuestionPage({ params }) {
           total={chapterQuestions.length}
         />
 
-        {/* Question */}
+       {/* Question Type */}
 
-        <QuestionCard question={question.question} />
+<p className="text-sm font-semibold text-gray-500 uppercase mt-8">
+  {question.type}
+</p>
 
-        {/* Answer */}
-
-        <AnswerBox answer={question.answer} />
-
+{question.type === "theory" ? (
+  <>
+    <QuestionCard question={question.question} />
+    <AnswerBox answer={question.answer} />
+  </>
+) : (
+  <MCQQuestion question={question} />
+)}
         {/* Palette */}
 
         <div className="mt-10">

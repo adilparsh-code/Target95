@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import questions from "../../../../data/questions";
+
 import AnswerBox from "../../../../components/AnswerBox";
+import ProgressBar from "../../../../components/ProgressBar";
+import DifficultyBadge from "../../../../components/DifficultyBadge";
+import QuestionCard from "../../../../components/QuestionCard";
 
 export default async function QuestionPage({ params }) {
 
@@ -29,105 +34,140 @@ export default async function QuestionPage({ params }) {
   const previousQuestion = chapterQuestions[currentIndex - 1];
 
   return (
-    <main className="min-h-screen bg-slate-100 py-16">
-<div className="text-sm text-gray-500 mb-4">
-  Home / Java / {chapter}
-</div>
-      <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-10 border border-gray-200">
 
-        <h1 className="text-4xl font-extrabold text-blue-700">
-  Question {question.id}
-</h1>
+    <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
 
-      <p className="mt-4 text-center text-lg font-semibold text-blue-700">
-  Progress: {currentIndex + 1} of {chapterQuestions.length} Questions
-</p>
-<div className="w-full bg-gray-200 rounded-full h-3 mt-6">
+      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-10">
 
-  <div
-    className="bg-blue-700 h-3 rounded-full transition-all duration-500"
-    style={{
-      width: `${((currentIndex + 1) / chapterQuestions.length) * 100}%`,
-    }}
-  ></div>
+        {/* Breadcrumb */}
 
-</div>
+        <p className="text-sm text-gray-500">
 
-       <p className="mt-8 text-3xl font-semibold text-gray-900 leading-relaxed">
-  {question.question}
-</p>
+          Home / Java / {chapter.replace("-", " ")}
+
+        </p>
+
+        {/* Header */}
+
+        <div className="flex justify-between items-center mt-5">
+
+          <div>
+
+            <h1 className="text-4xl font-bold text-blue-700">
+
+              📘 Question {question.id}
+
+            </h1>
+
+          </div>
+
+          <DifficultyBadge difficulty={question.difficulty} />
+
+        </div>
+
+        {/* Progress */}
+
+        <ProgressBar
+          current={currentIndex + 1}
+          total={chapterQuestions.length}
+        />
+
+        {/* Question */}
+
+        <QuestionCard question={question.question} />
+
+        {/* Answer */}
 
         <AnswerBox answer={question.answer} />
 
-       <div className="mt-10 flex justify-between">
-<div className="mt-10">
+        {/* Palette */}
 
-  <h3 className="text-xl font-bold text-gray-800 mb-4">
-    Questions
-  </h3>
+        <div className="mt-10">
 
-  <div className="flex flex-wrap gap-3">
+          <h3 className="text-lg font-semibold text-gray-600 mb-4">
 
-    {chapterQuestions.map((q) => (
+            Jump to Question
 
-      <Link
-        key={q.id}
-        href={`/java/${chapter}/question/${q.id}`}
-        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition
-        ${
-          q.id === question.id
-            ? "bg-blue-700 text-white"
-            : "bg-gray-200 hover:bg-gray-300"
-        }`}
-      >
-        {q.id}
-      </Link>
+          </h3>
 
-    ))}
-    <div className="mt-6">
+          <div className="flex gap-3 flex-wrap">
 
-  <span className="bg-green-100 text-green-700 px-4 py-2 rounded-full font-semibold">
-    {question.difficulty}
-  </span>
+            {chapterQuestions.map((q) => (
 
-</div>
+              <Link
+                key={q.id}
+                href={`/java/${chapter}/question/${q.id}`}
+                className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition
+                ${
+                  q.id === question.id
+                    ? "bg-blue-700 text-white"
+                    : "bg-gray-200 hover:bg-gray-300"
+                }`}
+              >
+                {q.id}
+              </Link>
 
-  </div>
+            ))}
 
-</div>
-  <div>
-    {previousQuestion && (
-      <Link
-        href={`/java/${chapter}/question/${previousQuestion.id}`}
-        className="bg-gray-700 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition"
-      >
-        ← Previous
-      </Link>
-    )}
-  </div>
+          </div>
 
-  <div>
-    {nextQuestion ? (
-      <Link
-        href={`/java/${chapter}/question/${nextQuestion.id}`}
-        className="bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-800 transition"
-      >
-        Next →
-      </Link>
-    ) : (
-      <Link
-        href="/java"
-        className="bg-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-green-700 transition"
-      >
-        🎉 Finish Chapter
-      </Link>
-    )}
-  </div>
+        </div>
 
-</div>
+        {/* Navigation */}
+
+        <div className="flex justify-between mt-12">
+
+          <div>
+
+            {previousQuestion && (
+
+              <Link
+                href={`/java/${chapter}/question/${previousQuestion.id}`}
+                className="bg-gray-700 text-white px-8 py-3 rounded-xl hover:bg-gray-800"
+              >
+
+                ← Previous
+
+              </Link>
+
+            )}
+
+          </div>
+
+          <div>
+
+            {nextQuestion ? (
+
+              <Link
+                href={`/java/${chapter}/question/${nextQuestion.id}`}
+                className="bg-blue-700 text-white px-8 py-3 rounded-xl hover:bg-blue-800"
+              >
+
+                Next →
+
+              </Link>
+
+            ) : (
+
+              <Link
+                href="/Java"
+                className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700"
+              >
+
+                🎉 Finish Chapter
+
+              </Link>
+
+            )}
+
+          </div>
+
+        </div>
 
       </div>
 
     </main>
+
   );
+
 }

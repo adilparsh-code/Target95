@@ -26,6 +26,7 @@ export default async function QuestionPage({ params }) {
   );
 
   const nextQuestion = chapterQuestions[currentIndex + 1];
+  const previousQuestion = chapterQuestions[currentIndex - 1];
 
   return (
     <main className="min-h-screen bg-slate-100 py-16">
@@ -56,29 +57,38 @@ export default async function QuestionPage({ params }) {
 
         <AnswerBox answer={question.answer} />
 
-        <div className="mt-10 flex justify-end">
+       <div className="mt-10 flex justify-between">
 
-          {nextQuestion ? (
+  <div>
+    {previousQuestion && (
+      <Link
+        href={`/java/${chapter}/question/${previousQuestion.id}`}
+        className="bg-gray-700 text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition"
+      >
+        ← Previous
+      </Link>
+    )}
+  </div>
 
-            <Link
-              href={`/java/${chapter}/question/${nextQuestion.id}`}
-              className="bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-800 transition"
-            >
-              Next Question →
-            </Link>
+  <div>
+    {nextQuestion ? (
+      <Link
+        href={`/java/${chapter}/question/${nextQuestion.id}`}
+        className="bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold hover:bg-blue-800 transition"
+      >
+        Next →
+      </Link>
+    ) : (
+      <Link
+        href="/java"
+        className="bg-green-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-green-700 transition"
+      >
+        🎉 Finish Chapter
+      </Link>
+    )}
+  </div>
 
-          ) : (
-
-            <Link
-              href="/java"
-              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition"
-            >
-              🎉 Chapter Completed
-            </Link>
-
-          )}
-
-        </div>
+</div>
 
       </div>
 

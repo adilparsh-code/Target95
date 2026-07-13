@@ -5,6 +5,7 @@ import javaChapters from "../../data/javaChapters";
 export default async function ChapterPage({ params }) {
 
   const { chapter } = await params;
+  console.log(chapter);
 
   const chapterData = javaChapters.find(
     (item) => item.slug === chapter
@@ -44,7 +45,7 @@ export default async function ChapterPage({ params }) {
             Start Practice →
           </Link>
         </div>
-console.log(chapter);
+
       </div>
     </main>
   );

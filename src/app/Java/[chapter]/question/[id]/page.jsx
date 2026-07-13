@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import questions from "../../../../data/questions";
-
+//import questions from "../../../../data/questions";
 import AnswerBox from "../../../../components/AnswerBox";
 import ProgressBar from "../../../../components/ProgressBar";
 import DifficultyBadge from "../../../../components/DifficultyBadge";
@@ -10,14 +10,35 @@ import QuestionCard from "../../../../components/QuestionCard";
 import MCQQuestion from "../../../../components/MCQQuestion";
 
 export default async function QuestionPage({ params }) {
-
+console.log("Imported questions file:", questions);
   const { chapter, id } = await params;
 
-  const question = questions.find(
+console.log("Questions:", questions);
+console.log("Chapter:", chapter);
+console.log("ID:", id);
+
+console.log("Questions Length:", questions.length);
+console.log(questions)
+
+console.log("Length:", questions.length);
+
+questions.forEach((q) => {
+  console.log(q.id, q.question);
+});
+
+
+
+
+const question = questions.find(
+  (item) => item.id === Number(id)
+);
+
+
+ /* const question = questions.find(
     (item) =>
       item.chapter === chapter &&
       item.id === Number(id)
-  );
+  );*/
 
   if (!question) {
     notFound();

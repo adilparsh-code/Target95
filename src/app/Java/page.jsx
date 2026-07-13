@@ -1,6 +1,5 @@
-import javaChapters from "../data/javaChapters";
 import Link from "next/link";
-
+import javaChapters from "../data/javaChapters";
 
 export default function JavaPage() {
   return (
@@ -22,7 +21,7 @@ export default function JavaPage() {
 
             <div
               key={chapter.id}
-              className="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition duration-300"
+              className="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl hover:-translate-y-1 transition duration-300"
             >
 
               <div className="text-4xl">
@@ -34,24 +33,23 @@ export default function JavaPage() {
               </h2>
 
               <p className="mt-2 text-gray-600">
-  {chapter.questions} Practice Questions
-</p>
+                {chapter.questions} Practice Questions
+              </p>
 
-<span className="inline-block mt-3 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
-  {chapter.difficulty}
-</span>
+              <span className="inline-block mt-3 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                {chapter.difficulty}
+              </span>
 
-<div className="mt-6">
- <Link
-  href={`/java/${chapter.slug}`}
-  className="inline-block mt-6 bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
->
-  Open Chapter →
-</Link>
+              <div className="mt-6">
 
-</div>
+                <Link
+                  href={`/java/${chapter.slug}`}
+                  className="inline-block bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
+                >
+                  Open Chapter →
+                </Link>
 
-              
+              </div>
 
             </div>
 

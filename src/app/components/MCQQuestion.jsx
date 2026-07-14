@@ -1,5 +1,9 @@
 "use client";
 
+const [selected, setSelected] = useState(null);
+const [submitted, setSubmitted] = useState(false);
+
+
 import { useState } from "react";
 
 export default function MCQQuestion({ question }) {
@@ -22,21 +26,55 @@ export default function MCQQuestion({ question }) {
 
         {question.options.map((option, index) => (
 
-          <button
-            key={index}
-            onClick={() => setSelected(option)}
-            className={`w-full text-left p-4 rounded-xl border transition
+         <button
+  key={index}
+  disabled={submitted}
+  onClick={() => setSelected(option)}
+  className={`w-full text-left p-4 rounded-xl border transition font-medium
 
-            ${
-              selected === option
-                ? option === question.answer
-                  ? "bg-green-100 border-green-500"
-                  : "bg-red-100 border-red-500"
-                : "bg-white hover:bg-gray-100"
-            }`}
-          >
-            {option}
-          </button>
+  ${
+    submitted
+      ? option === question.answer
+        ? "bg-green-100 border-green-500 text-green-800"
+        : option === selected
+        ? "bg-red-100 border-red-500 text-red-800"
+        : "bg-white"
+      : selected === option
+      ? "bg-blue-100 border-blue-500"
+      : "bg-white hover:bg-gray-100"
+  }`}
+>
+  {option}
+  <div className="mt-8 flex items-center gap-4">
+
+  {!submitted ? (
+
+    <button
+      onClick={() => setSubmitted(true)}
+      disabled={!selected}
+      className="bg-blue-700 text-white px-6 py-3 rounded-xl disabled:bg-gray-400"
+    >
+      Submit Answer
+    </button>
+
+  ) : (
+
+    <div
+      className={`font-bold text-lg ${
+        selected === question.answer
+          ? "text-green-600"
+          : "text-red-600"
+      }`}
+    >
+      {selected === question.answer
+        ? "✅ Correct Answer"
+        : `❌ Wrong Answer (Correct: ${question.answer})`}
+    </div>
+
+  )}
+
+</div>
+</button>
 
         ))}
 

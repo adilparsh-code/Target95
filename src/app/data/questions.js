@@ -1,4 +1,4 @@
-throw new Error("QUESTIONS FILE LOADED");
+
 const questions = [
 
   {

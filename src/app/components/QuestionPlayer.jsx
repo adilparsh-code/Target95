@@ -17,9 +17,11 @@ export default function QuestionPlayer({
   nextQuestion,
 }) {
 
-  const [answered, setAnswered] = useState(false);
+const [answered, setAnswered] = useState(false);
+const [score, setScore] = useState(0);
+const [wrong, setWrong] = useState(0);
 
-  return (    <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
+  return (<main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
 
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-10">
 
@@ -44,6 +46,19 @@ export default function QuestionPlayer({
           total={chapterQuestions.length}
         />
 
+<div className="mt-6 flex gap-4">
+
+  <div className="bg-green-100 text-green-700 px-5 py-3 rounded-xl font-bold">
+    ✅ Correct : {score}
+  </div>
+
+  <div className="bg-red-100 text-red-700 px-5 py-3 rounded-xl font-bold">
+    ❌ Wrong : {wrong}
+  </div>
+
+</div>
+
+
         <p className="text-sm font-semibold text-gray-500 uppercase mt-8">
           {question.type}
         </p>
@@ -58,9 +73,17 @@ export default function QuestionPlayer({
         ) : (
 
           <MCQQuestion
-            question={question}
-            onSubmit={() => setAnswered(true)}
-          />
+  question={question}
+  onSubmit={(correct) => {
+    setAnswered(true);
+
+    if (correct) {
+      setScore(score + 1);
+    } else {
+      setWrong(wrong + 1);
+    }
+  }}
+/>
 
         )}
 
@@ -113,16 +136,16 @@ export default function QuestionPlayer({
 
             {nextQuestion ? (
 
-              <a
-                href={`/java/${chapter}/question/${nextQuestion.id}`}
-                className={`px-8 py-3 rounded-xl text-white ${
-                  answered
-                    ? "bg-blue-700 hover:bg-blue-800"
-                    : "bg-gray-400 pointer-events-none"
-                }`}
-              >
-                Next →
-              </a>
+            <Link
+  href={`/java/${chapter}/question/${nextQuestion.id}`}
+  className={`px-8 py-3 rounded-xl text-white transition ${
+    answered
+      ? "bg-blue-700 hover:bg-blue-800"
+      : "bg-gray-400 pointer-events-none cursor-not-allowed"
+  }`}
+>
+  Next →
+</Link>
 
             ) : (
 

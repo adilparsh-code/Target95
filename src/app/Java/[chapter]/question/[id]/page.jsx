@@ -1,13 +1,16 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
-
+/*import { notFound } from "next/navigation";
 import questions from "../../../../data/questions";
-
 import AnswerBox from "../../../../components/AnswerBox";
 import ProgressBar from "../../../../components/ProgressBar";
 import DifficultyBadge from "../../../../components/DifficultyBadge";
 import QuestionCard from "../../../../components/QuestionCard";
 import MCQQuestion from "../../../../components/MCQQuestion";
+import QuestionPlayer from "../../../../components/QuestionPlayer"; 
+
+import { notFound } from "next/navigation";
+import questions from "../../../../data/questions";
+import QuestionPlayer from "../../../../components/QuestionPlayer";
 
 export default async function QuestionPage({ params }) {
 
@@ -152,5 +155,45 @@ export default async function QuestionPage({ params }) {
       </div>
 
     </main>
+  );
+}*/
+import { notFound } from "next/navigation";
+import questions from "../../../../data/questions";
+import QuestionPlayer from "../../../../components/QuestionPlayer";
+
+export default async function QuestionPage({ params }) {
+
+  const { chapter, id } = await params;
+
+  const question = questions.find(
+    (item) =>
+      item.chapter === chapter &&
+      item.id === Number(id)
+  );
+
+  if (!question) {
+    notFound();
+  }
+
+  const chapterQuestions = questions.filter(
+    (item) => item.chapter === chapter
+  );
+
+  const currentIndex = chapterQuestions.findIndex(
+    (item) => item.id === Number(id)
+  );
+
+  const nextQuestion = chapterQuestions[currentIndex + 1];
+  const previousQuestion = chapterQuestions[currentIndex - 1];
+
+  return (
+    <QuestionPlayer
+      question={question}
+      chapter={chapter}
+      chapterQuestions={chapterQuestions}
+      currentIndex={currentIndex}
+      previousQuestion={previousQuestion}
+      nextQuestion={nextQuestion}
+    />
   );
 }

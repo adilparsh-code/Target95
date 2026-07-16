@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
 
@@ -8,76 +8,101 @@ export default function ChapterQuestions({
   chapter,
   questions,
 }) {
-
   const [search, setSearch] = useState("");
 
- const filteredQuestions = questions.filter((q) => {
-  const keyword = search.toLowerCase();
+  const filteredQuestions = useMemo(() => {
+    const keyword = search.trim().toLowerCase();
+
+    if (!keyword) return questions;
+
+    return questions.filter((q) => {
+      return (
+        q.question.toLowerCase().includes(keyword) ||
+        String(q.id).includes(keyword) ||
+        q.type.toLowerCase().includes(keyword) ||
+        q.difficulty.toLowerCase().includes(keyword)
+      );
+    });
+  }, [questions, search]);
+
+  const difficultyColor = (difficulty) => {
+    switch (difficulty.toLowerCase()) {
+      case "easy":
+        return "bg-green-100 text-green-700";
+      case "medium":
+        return "bg-yellow-100 text-yellow-700";
+      case "hard":
+        return "bg-red-100 text-red-700";
+      default:
+        return "bg-gray-100 text-gray-700";
+    }
+  };
 
   return (
-    q.question.toLowerCase().includes(keyword) ||
-    q.type.toLowerCase().includes(keyword) ||
-    q.difficulty.toLowerCase().includes(keyword) ||
-    String(q.id).includes(keyword)
-  );
-});
-
-  return (    <>
+    <>
       <SearchBar
         search={search}
         setSearch={setSearch}
       />
 
-      <div className="space-y-4">
+      <p className="mb-5 text-sm text-gray-500">
+        Showing <span className="font-semibold">{filteredQuestions.length}</span>{" "}
+        of{" "}
+        <span className="font-semibold">{questions.length}</span> questions
+      </p>
 
+      <div className="space-y-5">
         {filteredQuestions.length > 0 ? (
-
           filteredQuestions.map((q) => (
-
             <Link
               key={q.id}
               href={`/java/${chapter}/question/${q.id}`}
-              className="block p-5 bg-slate-50 rounded-xl border hover:border-blue-500 hover:shadow-md transition"
+              className="block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg"
             >
-
-              <div className="flex justify-between items-center">
-
-                <div>
-
-                  <p className="font-bold text-lg text-gray-800">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-800">
                     Question {q.id}
-                  </p>
+                  </h3>
 
-                  <p className="text-gray-600 mt-1">
+                  <p className="mt-2 text-gray-600">
                     {q.question}
                   </p>
-
                 </div>
 
-                <span
-                  className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                    q.type === "mcq"
-                      ? "bg-purple-100 text-purple-700"
-                      : "bg-blue-100 text-blue-700"
-                  }`}
-                >
-                  {q.type.toUpperCase()}
-                </span>
+                <div className="flex flex-col gap-2">
+                  <span
+                    className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${
+                      q.type === "mcq"
+                        ? "bg-purple-100 text-purple-700"
+                        : "bg-blue-100 text-blue-700"
+                    }`}
+                  >
+                    {q.type.toUpperCase()}
+                  </span>
 
+                  <span
+                    className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${difficultyColor(
+                      q.difficulty
+                    )}`}
+                  >
+                    {q.difficulty}
+                  </span>
+                </div>
               </div>
-
             </Link>
-
           ))
-
         ) : (
+          <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center">
+            <h3 className="text-xl font-semibold text-gray-700">
+              No Questions Found
+            </h3>
 
-          <div className="text-center py-10 text-gray-500">
-            No questions found.
+            <p className="mt-2 text-gray-500">
+              Try searching with another keyword.
+            </p>
           </div>
-
         )}
-
       </div>
     </>
   );

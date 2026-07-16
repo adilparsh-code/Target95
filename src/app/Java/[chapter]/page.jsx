@@ -51,10 +51,14 @@ export default async function ChapterPage({ params }) {
 
         <ChapterStats questions={chapterQuestions} />
 
-        <ChapterQuestions
+        /*<ChapterQuestions
           chapter={chapter}
           questions={chapterQuestions}
-        />
+        />*/
+
+        <div className="bg-green-100 p-5 rounded-xl mt-6">
+  ChapterQuestions Test
+</div>
       </div>
     </main>
   );

@@ -3,12 +3,16 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
+import QuestionFilters from "./QuestionFilters";
 
 export default function ChapterQuestions({
   chapter,
   questions,
 }) {
   const [search, setSearch] = useState("");
+
+const [difficulty, setDifficulty] = useState("all");
+const [type, setType] = useState("all");
 
   const filteredQuestions = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -45,6 +49,12 @@ export default function ChapterQuestions({
         setSearch={setSearch}
       />
 
+<QuestionFilters
+  difficulty={difficulty}
+  setDifficulty={setDifficulty}
+  type={type}
+  setType={setType}
+/>
       <p className="mb-5 text-sm text-gray-500">
         Showing <span className="font-semibold">{filteredQuestions.length}</span>{" "}
         of{" "}

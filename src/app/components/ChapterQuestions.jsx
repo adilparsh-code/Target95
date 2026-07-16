@@ -11,9 +11,16 @@ export default function ChapterQuestions({
 
   const [search, setSearch] = useState("");
 
-  const filteredQuestions = questions.filter((q) =>
-    q.question.toLowerCase().includes(search.toLowerCase())
+ const filteredQuestions = questions.filter((q) => {
+  const keyword = search.toLowerCase();
+
+  return (
+    q.question.toLowerCase().includes(keyword) ||
+    q.type.toLowerCase().includes(keyword) ||
+    q.difficulty.toLowerCase().includes(keyword) ||
+    String(q.id).includes(keyword)
   );
+});
 
   return (    <>
       <SearchBar

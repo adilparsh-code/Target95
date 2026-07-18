@@ -25,10 +25,10 @@ export default function StudyHome() {
   });
 
   return (
-    <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+    <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8" aria-labelledby="study-home-heading">
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Study Center</p>
-        <h1 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Learn before you practice</h1>
+        <h1 id="study-home-heading" className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Learn before you practice</h1>
         <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">
           Explore chapter notes, key concepts, and revision points before attempting practice questions.
         </p>
@@ -48,13 +48,13 @@ export default function StudyHome() {
         </label>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-2" role="list" aria-label="Study chapters">
         {filteredChapters.map((chapter) => {
           const status = progress[chapter.slug] ?? "Not Started";
           const percentComplete = status === "Completed" ? 100 : status === "Studying" ? 60 : 0;
 
           return (
-            <div key={chapter.slug} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <article key={chapter.slug} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" role="listitem">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900">{chapter.title}</h2>
@@ -104,7 +104,7 @@ export default function StudyHome() {
                   Practice Questions
                 </Link>
               </div>
-            </div>
+            </article>
           );
         })}
       </div>

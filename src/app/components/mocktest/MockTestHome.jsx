@@ -12,10 +12,10 @@ export default function MockTestHome({ onStart, history }) {
   const recentHistory = useMemo(() => history.slice(0, 3), [history]);
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8" aria-labelledby="mock-test-heading">
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Mock Test</p>
-        <h1 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Create a timed practice exam</h1>
+        <h1 id="mock-test-heading" className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Create a timed practice exam</h1>
         <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">
           Choose a chapter, difficulty, number of questions, and question type to generate a fresh mock test that fits your revision goal.
         </p>

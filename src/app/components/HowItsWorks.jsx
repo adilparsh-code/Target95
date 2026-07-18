@@ -1,71 +1,46 @@
+import SectionCard from "./SectionCard";
+
+const steps = [
+  {
+    icon: "📘",
+    title: "Choose Chapter",
+    description: "Select your ICSE chapter to begin learning.",
+  },
+  {
+    icon: "📝",
+    title: "Practice Questions",
+    description: "Solve chapter-wise previous year questions.",
+  },
+  {
+    icon: "🤖",
+    title: "Learn with AI",
+    description: "Get instant explanations whenever you&apos;re stuck.",
+  },
+  {
+    icon: "🏆",
+    title: "Track Progress",
+    description: "Monitor your performance and improve every day.",
+  },
+];
+
 export default function HowItsWorks() {
   return (
-    <section className="py-24 bg-slate-100">
+    <section className="bg-slate-100 py-24" aria-labelledby="how-it-works-heading">
+      <div className="mx-auto max-w-6xl px-6">
+        <h2 id="how-it-works-heading" className="text-center text-5xl font-extrabold text-gray-900">
+          How It Works
+        </h2>
 
-      <h2 className="text-5xl font-extrabold text-center text-gray-900">
-        How It Works
-      </h2>
+        <p className="mt-4 text-center text-lg text-gray-600">
+          Learn step by step with our AI-powered platform.
+        </p>
 
-      <p className="text-center text-gray-600 mt-4 text-lg">
-        Learn step by step with our AI-powered platform.
-      </p>
-
-      <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8 mt-20">
-
-        <div className="bg-white rounded-2xl shadow p-8 text-center transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div className="text-5xl">📘</div>
-
-          <h3 className="mt-5 text-2xl font-bold text-gray-900">
-            Choose Chapter
-          </h3>
-
-          <p className="mt-3 text-gray-600">
-            Select your ICSE chapter to begin learning.
-          </p>
-
+        <div className="mt-20 grid gap-8 md:grid-cols-4">
+          {steps.map((step) => (
+            <SectionCard key={step.title} icon={step.icon} title={step.title} description={step.description} />
+          ))}
         </div>
-
-        <div className="bg-white rounded-2xl shadow p-8 text-center transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div className="text-5xl">📝</div>
-
-          <h3 className="mt-5 text-2xl font-bold text-gray-900">
-            Practice Questions
-          </h3>
-
-          <p className="mt-3 text-gray-600">
-            Solve chapter-wise previous year questions.
-          </p>
-
-        </div>
-
-        <div className="bg-white rounded-2xl shadow p-8 text-center transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div className="text-5xl">🤖</div>
-
-          <h3 className="mt-5 text-2xl font-bold text-gray-900">
-            Learn with AI
-          </h3>
-
-          <p className="mt-3 text-gray-600">
-            Get instant explanations whenever you&apos;re stuck.
-          </p>
-
-        </div>
-
-        <div className="bg-white rounded-2xl shadow p-8 text-center transition duration-300 hover:-translate-y-2 hover:shadow-xl">
-          <div className="text-5xl">🏆</div>
-
-          <h3 className="mt-5 text-2xl font-bold text-gray-900">
-            Track Progress
-          </h3>
-
-          <p className="mt-3 text-gray-600">
-            Monitor your performance and improve every day.
-          </p>
-
-        </div>
-
       </div>
-
     </section>
   );
 }

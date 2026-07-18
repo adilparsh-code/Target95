@@ -5,14 +5,32 @@ import Link from "next/link";
 import SearchBar from "./SearchBar";
 import QuestionFilters from "./QuestionFilters";
 
-export default function ChapterQuestions({
-  chapter,
-  questions,
-}) {
-  const [search, setSearch] = useState("");
+const DIFFICULTY_COLOR_CLASSES = {
+  easy: "bg-green-100 text-green-700",
+  medium: "bg-yellow-100 text-yellow-700",
+  hard: "bg-red-100 text-red-700",
+};
 
-const [difficulty, setDifficulty] = useState("all");
-const [type, setType] = useState("all");
+const QUESTION_TYPE_COLOR_CLASSES = {
+  mcq: "bg-purple-100 text-purple-700",
+  default: "bg-blue-100 text-blue-700",
+};
+
+function getDifficultyColorClass(difficulty) {
+  return (
+    DIFFICULTY_COLOR_CLASSES[difficulty.toLowerCase()] ??
+    "bg-gray-100 text-gray-700"
+  );
+}
+
+function getQuestionTypeColorClass(type) {
+  return QUESTION_TYPE_COLOR_CLASSES[type] ?? QUESTION_TYPE_COLOR_CLASSES.default;
+}
+
+export default function ChapterQuestions({ chapter, questions }) {
+  const [search, setSearch] = useState("");
+  const [difficulty, setDifficulty] = useState("all");
+  const [type, setType] = useState("all");
 
   const filteredQuestions = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -29,32 +47,16 @@ const [type, setType] = useState("all");
     });
   }, [questions, search]);
 
-  const difficultyColor = (difficulty) => {
-    switch (difficulty.toLowerCase()) {
-      case "easy":
-        return "bg-green-100 text-green-700";
-      case "medium":
-        return "bg-yellow-100 text-yellow-700";
-      case "hard":
-        return "bg-red-100 text-red-700";
-      default:
-        return "bg-gray-100 text-gray-700";
-    }
-  };
-
   return (
     <>
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-      />
+      <SearchBar search={search} setSearch={setSearch} />
 
-<QuestionFilters
-  difficulty={difficulty}
-  setDifficulty={setDifficulty}
-  type={type}
-  setType={setType}
-/>
+      <QuestionFilters
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
+        type={type}
+        setType={setType}
+      />
       <p className="mb-5 text-sm text-gray-500">
         Showing <span className="font-semibold">{filteredQuestions.length}</span>{" "}
         of{" "}
@@ -82,17 +84,15 @@ const [type, setType] = useState("all");
 
                 <div className="flex flex-col gap-2">
                   <span
-                    className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${
-                      q.type === "mcq"
-                        ? "bg-purple-100 text-purple-700"
-                        : "bg-blue-100 text-blue-700"
-                    }`}
+                    className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${getQuestionTypeColorClass(
+                      q.type
+                    )}`}
                   >
                     {q.type.toUpperCase()}
                   </span>
 
                   <span
-                    className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${difficultyColor(
+                    className={`rounded-full px-3 py-1 text-center text-xs font-semibold ${getDifficultyColorClass(
                       q.difficulty
                     )}`}
                   >

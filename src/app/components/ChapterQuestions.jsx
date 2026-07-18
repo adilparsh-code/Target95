@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import BookmarkButton from "./BookmarkButton";
+import useProgress from "../hooks/useProgress";
 import SearchBar from "./SearchBar";
 import QuestionFilters from "./QuestionFilters";
 
@@ -31,6 +33,7 @@ export default function ChapterQuestions({ chapter, questions }) {
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("all");
   const [type, setType] = useState("all");
+  const { isCompleted } = useProgress();
 
   const filteredQuestions = useMemo(() => {
     const keyword = search.trim().toLowerCase();
@@ -75,13 +78,20 @@ export default function ChapterQuestions({ chapter, questions }) {
 
       <div className="space-y-5">
         {filteredQuestions.length > 0 ? (
-          filteredQuestions.map((q) => (
-            <Link
-              key={q.id}
-              href={`/java/${chapter}/question/${q.id}`}
-              className="block rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg"
-            >
-              <div className="flex items-start justify-between gap-4">
+          filteredQuestions.map((q) => {
+            const completed = isCompleted({ chapter, questionId: q.id });
+
+            return (
+              <div key={q.id} className="relative">
+              <Link
+                href={`/java/${chapter}/question/${q.id}`}
+                className={`block rounded-2xl border p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg ${
+                  completed
+                    ? "border-green-300 bg-green-50"
+                    : "border-gray-200 bg-white"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-4 pr-12">
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-800">
                     Question {q.id}
@@ -109,9 +119,17 @@ export default function ChapterQuestions({ chapter, questions }) {
                     {q.difficulty}
                   </span>
                 </div>
+                </div>
+              </Link>
+
+              <BookmarkButton
+                chapter={chapter}
+                questionId={q.id}
+                className="absolute right-5 top-5"
+              />
               </div>
-            </Link>
-          ))
+            );
+          })
         ) : (
           <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center">
             <h3 className="text-xl font-semibold text-gray-700">

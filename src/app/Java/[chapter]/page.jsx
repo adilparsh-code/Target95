@@ -4,6 +4,7 @@ import javaChapters from "../../data/javaChapters";
 import questions from "../../data/questions";
 import ChapterQuestions from "../../components/ChapterQuestions";
 import ChapterStats from "../../components/ChapterStats";
+import ChapterProgress from "../../components/ChapterProgress";
 
 export default async function ChapterPage({ params }) {
   const { chapter } = await params;
@@ -52,6 +53,8 @@ export default async function ChapterPage({ params }) {
             <p className="text-gray-500">Questions coming soon.</p>
           )}
         </div>
+
+        <ChapterProgress chapter={chapter} questions={chapterQuestions} />
 
         <ChapterStats questions={chapterQuestions} />
 

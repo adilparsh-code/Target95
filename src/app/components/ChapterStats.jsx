@@ -1,6 +1,11 @@
 
 "use client";
+import useBookmarks from "../hooks/useBookmarks";
+import useProgress from "../hooks/useProgress";
+
 export default function ChapterStats({ questions }) {
+  const { isBookmarked } = useBookmarks();
+  const { isCompleted } = useProgress();
   const total = questions.length;
 
   const theory = questions.filter(
@@ -21,6 +26,14 @@ export default function ChapterStats({ questions }) {
 
   const hard = questions.filter(
     (q) => q.difficulty.toLowerCase() === "hard"
+  ).length;
+
+  const bookmarked = questions.filter((q) =>
+    isBookmarked({ chapter: q.chapter, questionId: q.id })
+  ).length;
+
+  const completed = questions.filter((q) =>
+    isCompleted({ chapter: q.chapter, questionId: q.id })
   ).length;
 
   return (
@@ -71,6 +84,20 @@ export default function ChapterStats({ questions }) {
           <p className="text-sm text-red-700">Hard</p>
           <p className="mt-2 text-3xl font-bold text-red-700">
             {hard}
+          </p>
+        </div>
+
+        <div className="rounded-xl bg-blue-50 p-4">
+          <p className="text-sm text-gray-700">Bookmarked</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">
+            {bookmarked}
+          </p>
+        </div>
+
+        <div className="rounded-xl bg-green-50 p-4">
+          <p className="text-sm text-gray-700">Completed</p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">
+            {completed}
           </p>
         </div>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 
 import QuestionCard from "./QuestionCard";
@@ -7,6 +8,8 @@ import AnswerBox from "./AnswerBox";
 import MCQQuestion from "./MCQQuestion";
 import ProgressBar from "./ProgressBar";
 import DifficultyBadge from "./DifficultyBadge";
+import BookmarkButton from "./BookmarkButton";
+import useProgress from "../hooks/useProgress";
 
 export default function QuestionPlayer({
   question,
@@ -16,6 +19,12 @@ export default function QuestionPlayer({
   previousQuestion,
   nextQuestion,
 }) {
+  const { markCompleted } = useProgress();
+
+  useEffect(() => {
+    markCompleted({ chapter, questionId: question.id });
+  }, [chapter, markCompleted, question.id]);
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-10">
@@ -31,7 +40,10 @@ export default function QuestionPlayer({
             📘 Question {question.id}
           </h1>
 
-          <DifficultyBadge difficulty={question.difficulty} />
+          <div className="flex items-center gap-3">
+            <DifficultyBadge difficulty={question.difficulty} />
+            <BookmarkButton chapter={chapter} questionId={question.id} />
+          </div>
         </div>
 
         {/* Progress */}

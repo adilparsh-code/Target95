@@ -41,24 +41,24 @@ export default async function ChapterPage({ params }) {
         </div>
 
         <div className="text-center mt-10">
-          <Link
-            href={`/java/${chapter}/question/1`}
+          {chapterQuestions.length > 0 ? (
+            <Link
+              href={`/java/${chapter}/question/${chapterQuestions[0].id}`}
             className="inline-block bg-blue-700 text-white px-8 py-4 rounded-xl hover:bg-blue-800 transition"
           >
             Start Practice →
-          </Link>
+            </Link>
+          ) : (
+            <p className="text-gray-500">Questions coming soon.</p>
+          )}
         </div>
 
         <ChapterStats questions={chapterQuestions} />
 
-        /*<ChapterQuestions
+        <ChapterQuestions
           chapter={chapter}
           questions={chapterQuestions}
-        />*/
-
-        <div className="bg-green-100 p-5 rounded-xl mt-6">
-  ChapterQuestions Test
-</div>
+        />
       </div>
     </main>
   );

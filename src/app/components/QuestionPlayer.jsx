@@ -16,9 +16,6 @@ export default function QuestionPlayer({
   previousQuestion,
   nextQuestion,
 }) {
-
-  const [difficulty, setDifficulty] = useState("all");
-const [type, setType] = useState("all");
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-10">

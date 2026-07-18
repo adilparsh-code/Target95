@@ -50,7 +50,7 @@ export default function MCQQuestion({ question, onSubmit }) {
           <button
            onClick={() => {
   setSubmitted(true);
-  onSubmit(selected === question.answer);
+  onSubmit?.(selected === question.answer);
 }}
             disabled={!selected}
             className="bg-blue-700 text-white px-6 py-3 rounded-xl disabled:opacity-50"

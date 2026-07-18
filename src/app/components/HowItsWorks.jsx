@@ -46,7 +46,7 @@ export default function HowItsWorks() {
           </h3>
 
           <p className="mt-3 text-gray-600">
-            Get instant explanations whenever you're stuck.
+            Get instant explanations whenever you&apos;re stuck.
           </p>
 
         </div>

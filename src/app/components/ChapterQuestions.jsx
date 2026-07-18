@@ -35,23 +35,33 @@ export default function ChapterQuestions({ chapter, questions }) {
   const filteredQuestions = useMemo(() => {
     const keyword = search.trim().toLowerCase();
 
-    if (!keyword) return questions;
+    return questions.filter((question) => {
+      const matchesSearch =
+        !keyword ||
+        question.question.toLowerCase().includes(keyword) ||
+        String(question.id).includes(keyword) ||
+        question.type.toLowerCase().includes(keyword) ||
+        question.difficulty.toLowerCase().includes(keyword);
 
-    return questions.filter((q) => {
-      return (
-        q.question.toLowerCase().includes(keyword) ||
-        String(q.id).includes(keyword) ||
-        q.type.toLowerCase().includes(keyword) ||
-        q.difficulty.toLowerCase().includes(keyword)
-      );
+      const matchesDifficulty =
+        difficulty === "all" ||
+        question.difficulty.toLowerCase() === difficulty;
+
+      const matchesType = type === "all" || question.type.toLowerCase() === type;
+
+      return matchesSearch && matchesDifficulty && matchesType;
     });
-  }, [questions, search]);
+  }, [difficulty, questions, search, type]);
 
   return (
-    <>
-      <SearchBar search={search} setSearch={setSearch} />
+  <>
+    <h3 className="mb-3 text-lg font-bold text-gray-800">
+      🔎 Find Questions
+    </h3>
 
-      <QuestionFilters
+    <SearchBar search={search} setSearch={setSearch} />
+
+    <QuestionFilters
         difficulty={difficulty}
         setDifficulty={setDifficulty}
         type={type}

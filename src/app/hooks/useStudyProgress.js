@@ -1,15 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { getStudyProgressState, saveStudyProgressState, STUDY_PROGRESS_STORAGE_KEY } from "../../lib/studyCenter";
 import { sanitizeStudyStatus } from "../../lib/mocktest";
 
 export default function useStudyProgress() {
-  const [progress, setProgress] = useState({});
-
-  useEffect(() => {
-    setProgress(getStudyProgressState());
-  }, []);
+  const [progress, setProgress] = useState(getStudyProgressState);
 
   const updateProgress = useCallback((slug, status) => {
     const safeSlug = String(slug ?? "").trim().toLowerCase();

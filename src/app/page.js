@@ -16,7 +16,7 @@ export default function Home() {
       <Stats />
       <Features />
       <HowItsWorks />
-     <Subjects />
+      <Subjects />
       <Footer />
     </main>
   );

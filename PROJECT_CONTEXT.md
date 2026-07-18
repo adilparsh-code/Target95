@@ -101,10 +101,10 @@ The explicit current focus in `AGENTS.md` is:
 
 Near-term implementation work implied by the current codebase:
 
-- Replace the chapter page's test placeholder with the existing `ChapterQuestions` component when that integration is intentionally approved.
-- Apply the existing difficulty and type state to `ChapterQuestions` result filtering.
-- Expand `questions.js` so each catalogue chapter has real practice content and the displayed chapter counts align with available data.
-- Complete or consolidate the two static question-data structures before adding more chapter content.
+- The chapter experience now uses a reusable question browser and shared presentation utilities.
+- Difficulty and type filters are applied through the shared question filtering helper.
+- Shared hooks and utilities now sanitize persisted mock-test and study-progress state.
+- Documentation now includes the architecture and security guidance for future work.
 
 ## Future roadmap
 

@@ -1,21 +1,27 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { calculateMockTestResult, formatTime, sanitizeText } from "../../../lib/mocktest";
+
+function getInitialTimeLeft(questionCount) {
+  return questionCount > 0 ? questionCount * 45 : 600;
+}
 
 export default function MockTestPlayer({ questions, config, onSubmit }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [markedForReview, setMarkedForReview] = useState({});
-  const [timeLeft, setTimeLeft] = useState(600);
+  const [timeLeft, setTimeLeft] = useState(() => getInitialTimeLeft(questions.length));
   const hasSubmittedRef = useRef(false);
 
   const currentQuestion = questions[currentIndex];
-  const answeredCount = Object.keys(answers).filter((answerId) => {
-    const response = answers[answerId];
-    return response !== undefined && response !== null && response !== "";
-  }).length;
-  const progressPercent = questions.length > 0 ? Math.round((currentIndex + 1 / questions.length) * 100) : 0;
+  const answeredCount = useMemo(() => {
+    return Object.keys(answers).filter((answerId) => {
+      const response = answers[answerId];
+      return response !== undefined && response !== null && response !== "";
+    }).length;
+  }, [answers]);
+  const progressPercent = questions.length > 0 ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
   const handleSubmit = useCallback(() => {
     if (hasSubmittedRef.current) {
@@ -50,12 +56,6 @@ export default function MockTestPlayer({ questions, config, onSubmit }) {
 
     return () => window.clearInterval(timer);
   }, [handleSubmit, questions.length]);
-
-  useEffect(() => {
-    if (questions.length > 0) {
-      setTimeLeft(questions.length * 45);
-    }
-  }, [questions.length]);
 
   const updateAnswer = (questionId, value) => {
     const safeQuestionId = Number(questionId) || 0;

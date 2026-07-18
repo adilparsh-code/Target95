@@ -1,30 +1,32 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { sanitizeText } from "../../lib/mocktest";
 
 const STORAGE_KEY = "target95-mock-test-history";
 
-export default function useMockTest() {
-  const [history, setHistory] = useState([]);
+function getInitialHistory() {
+  if (typeof window === "undefined") {
+    return [];
+  }
 
-  useEffect(() => {
-    try {
-      const savedHistory = window.localStorage.getItem(STORAGE_KEY);
+  try {
+    const savedHistory = window.localStorage.getItem(STORAGE_KEY);
 
-      if (!savedHistory) {
-        return;
-      }
-
-      const parsedHistory = JSON.parse(savedHistory);
-
-      if (Array.isArray(parsedHistory)) {
-        setHistory(parsedHistory);
-      }
-    } catch {
-      // Keep the app usable if storage is unavailable.
+    if (!savedHistory) {
+      return [];
     }
-  }, []);
+
+    const parsedHistory = JSON.parse(savedHistory);
+
+    return Array.isArray(parsedHistory) ? parsedHistory : [];
+  } catch {
+    return [];
+  }
+}
+
+export default function useMockTest() {
+  const [history, setHistory] = useState(getInitialHistory);
 
   const saveResult = useCallback((result) => {
     const safeResult = {

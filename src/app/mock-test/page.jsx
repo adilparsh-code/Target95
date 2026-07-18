@@ -48,7 +48,12 @@ export default function MockTestPage() {
       {stage === "home" ? (
         <MockTestHome onStart={handleStart} history={history} />
       ) : stage === "player" ? (
-        <MockTestPlayer questions={questions} config={config} onSubmit={handleSubmit} />
+        <MockTestPlayer
+          key={`${questions.length}-${config?.chapter ?? "all"}-${config?.difficulty ?? "all"}-${config?.type ?? "mixed"}`}
+          questions={questions}
+          config={config}
+          onSubmit={handleSubmit}
+        />
       ) : (
         <MockTestResults result={result} onRetry={handleRetry} />
       )}

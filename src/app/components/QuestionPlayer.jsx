@@ -25,20 +25,15 @@ export default function QuestionPlayer({
     markCompleted({ chapter, questionId: question.id });
   }, [chapter, markCompleted, question.id]);
 
+  const chapterLabel = String(chapter).replace(/-/g, " ");
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
-      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-2xl p-10">
+      <div className="mx-auto max-w-5xl rounded-3xl bg-white p-10 shadow-2xl">
+        <p className="text-sm text-gray-500">Home / Java / {chapterLabel}</p>
 
-        {/* Breadcrumb */}
-        <p className="text-sm text-gray-500">
-          Home / Java / {chapter.replace("-", " ")}
-        </p>
-
-        {/* Header */}
-        <div className="flex justify-between items-center mt-5">
-          <h1 className="text-4xl font-bold text-blue-700">
-            📘 Question {question.id}
-          </h1>
+        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-4xl font-bold text-blue-700">📘 Question {question.id}</h1>
 
           <div className="flex items-center gap-3">
             <DifficultyBadge difficulty={question.difficulty} />
@@ -46,18 +41,12 @@ export default function QuestionPlayer({
           </div>
         </div>
 
-        {/* Progress */}
-        <ProgressBar
-          current={currentIndex + 1}
-          total={chapterQuestions.length}
-        />
+        <div className="mt-8">
+          <ProgressBar current={currentIndex + 1} total={chapterQuestions.length} />
+        </div>
 
-        {/* Question Type */}
-        <p className="text-sm font-semibold text-gray-500 uppercase mt-8">
-          {question.type}
-        </p>
+        <p className="mt-8 text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">{question.type}</p>
 
-        {/* Question */}
         {question.type === "theory" ? (
           <>
             <QuestionCard question={question.question} />
@@ -67,21 +56,16 @@ export default function QuestionPlayer({
           <MCQQuestion question={question} />
         )}
 
-        {/* Jump Palette */}
         <div className="mt-10">
-          <h3 className="text-lg font-semibold text-gray-700 mb-4">
-            Jump to Question
-          </h3>
+          <h3 className="mb-4 text-lg font-semibold text-gray-700">Jump to Question</h3>
 
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex flex-wrap gap-3">
             {chapterQuestions.map((q) => (
               <Link
                 key={q.id}
                 href={`/java/${chapter}/question/${q.id}`}
-                className={`w-12 h-12 rounded-full flex items-center justify-center font-bold transition ${
-                  q.id === question.id
-                    ? "bg-blue-700 text-white"
-                    : "bg-gray-200 hover:bg-gray-300"
+                className={`flex h-12 w-12 items-center justify-center rounded-full font-bold transition ${
+                  q.id === question.id ? "bg-blue-700 text-white" : "bg-gray-200 hover:bg-gray-300"
                 }`}
               >
                 {q.id}
@@ -90,32 +74,28 @@ export default function QuestionPlayer({
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between mt-12">
+        <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            {previousQuestion && (
+            {previousQuestion ? (
               <Link
                 href={`/java/${chapter}/question/${previousQuestion.id}`}
-                className="bg-gray-700 text-white px-8 py-3 rounded-xl hover:bg-gray-800"
+                className="inline-flex rounded-xl bg-gray-700 px-8 py-3 font-semibold text-white transition hover:bg-gray-800"
               >
                 ← Previous
               </Link>
-            )}
+            ) : null}
           </div>
 
           <div>
             {nextQuestion ? (
               <Link
                 href={`/java/${chapter}/question/${nextQuestion.id}`}
-                className="bg-blue-700 text-white px-8 py-3 rounded-xl hover:bg-blue-800"
+                className="inline-flex rounded-xl bg-blue-700 px-8 py-3 font-semibold text-white transition hover:bg-blue-800"
               >
                 Next →
               </Link>
             ) : (
-              <Link
-                href="/java"
-                className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700"
-              >
+              <Link href="/java" className="inline-flex rounded-xl bg-green-600 px-8 py-3 font-semibold text-white transition hover:bg-green-700">
                 🎉 Finish Chapter
               </Link>
             )}

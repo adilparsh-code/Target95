@@ -4,6 +4,17 @@ import { useState, useMemo } from "react";
 import SearchBox from "../SearchBox";
 import StatusBadge from "../StatusBadge";
 
+function SortHeader({ label, sortKey: sk, activeSortKey, sortDir, onSort }) {
+  return (
+    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:text-gray-700" onClick={() => onSort(sk)}>
+      <span className="inline-flex items-center gap-1">
+        {label}
+        {activeSortKey === sk && <span className="text-blue-500">{sortDir === "asc" ? "↑" : "↓"}</span>}
+      </span>
+    </th>
+  );
+}
+
 export default function StudentTable({ students = [], onViewProfile, pageSize = 10 }) {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState(null);
@@ -42,15 +53,6 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
     setPage(0);
   };
 
-  const SortHeader = ({ label, sortKey: sk }) => (
-    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:text-gray-700" onClick={() => handleSort(sk)}>
-      <span className="inline-flex items-center gap-1">
-        {label}
-        {sortKey === sk && <span className="text-blue-500">{sortDir === "asc" ? "↑" : "↓"}</span>}
-      </span>
-    </th>
-  );
-
   const getScoreColor = (score) => {
     if (score >= 80) return "text-emerald-600";
     if (score >= 60) return "text-blue-600";
@@ -68,16 +70,16 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
         <table className="min-w-full divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <SortHeader label="ID" sortKey="id" />
-              <SortHeader label="Name" sortKey="name" />
+              <SortHeader label="ID" sortKey="id" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Name" sortKey="name" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
-              <SortHeader label="Class" sortKey="class" />
+              <SortHeader label="Class" sortKey="class" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Grade</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">School</th>
-              <SortHeader label="Solved" sortKey="questionsSolved" />
-              <SortHeader label="Avg. Score" sortKey="avgScore" />
-              <SortHeader label="Attendance" sortKey="attendance" />
-              <SortHeader label="Status" sortKey="status" />
+              <SortHeader label="Solved" sortKey="questionsSolved" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Avg. Score" sortKey="avgScore" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Attendance" sortKey="attendance" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Status" sortKey="status" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>

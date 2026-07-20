@@ -2,7 +2,13 @@
 
 import { useState } from "react";
 import SectionTitle from "@/app/components/admin/SectionTitle";
-import AdminCard from "@/app/components/admin/AdminCard";
+import ProfileSettings from "@/app/components/admin/settings/ProfileSettings";
+import AppearanceSettings from "@/app/components/admin/settings/AppearanceSettings";
+import RolesPermissions from "@/app/components/admin/settings/RolesPermissions";
+import SecuritySettings from "@/app/components/admin/settings/SecuritySettings";
+import SystemInfo from "@/app/components/admin/settings/SystemInfo";
+import BackupSettings from "@/app/components/admin/settings/BackupSettings";
+import AboutPage from "@/app/components/admin/settings/AboutPage";
 
 export default function AdminSettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
@@ -32,9 +38,16 @@ export default function AdminSettingsPage() {
 
   const tabs = [
     { id: "general", label: "General" },
+    { id: "profile", label: "Profile" },
     { id: "academic", label: "Academic" },
     { id: "features", label: "Features" },
     { id: "notifications", label: "Notifications" },
+    { id: "appearance", label: "Appearance" },
+    { id: "security", label: "Security" },
+    { id: "roles", label: "Roles" },
+    { id: "backup", label: "Backup" },
+    { id: "system", label: "System" },
+    { id: "about", label: "About" },
   ];
 
   return (
@@ -61,7 +74,7 @@ export default function AdminSettingsPage() {
       {/* General Settings */}
       {activeTab === "general" && (
         <div className="space-y-4">
-          <AdminCard>
+          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Site Name</label>
@@ -146,14 +159,22 @@ export default function AdminSettingsPage() {
                 </button>
               </div>
             </div>
-          </AdminCard>
+          </div>
+          <div className="flex justify-end">
+            <button className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+              Save Settings
+            </button>
+          </div>
         </div>
       )}
+
+      {/* Profile Settings */}
+      {activeTab === "profile" && <ProfileSettings />}
 
       {/* Academic Settings */}
       {activeTab === "academic" && (
         <div className="space-y-4">
-          <AdminCard>
+          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Default Grade</label>
@@ -194,14 +215,19 @@ export default function AdminSettingsPage() {
                 />
               </div>
             </div>
-          </AdminCard>
+          </div>
+          <div className="flex justify-end">
+            <button className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+              Save Academic Settings
+            </button>
+          </div>
         </div>
       )}
 
       {/* Features Settings */}
       {activeTab === "features" && (
         <div className="space-y-4">
-          <AdminCard>
+          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
             <div className="space-y-5">
               <div className="flex items-center justify-between max-w-md">
                 <div>
@@ -276,14 +302,19 @@ export default function AdminSettingsPage() {
                 </button>
               </div>
             </div>
-          </AdminCard>
+          </div>
+          <div className="flex justify-end">
+            <button className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+              Save Feature Settings
+            </button>
+          </div>
         </div>
       )}
 
       {/* Notifications Settings */}
       {activeTab === "notifications" && (
         <div className="space-y-4">
-          <AdminCard>
+          <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
             <div className="space-y-5">
               <div className="flex items-center justify-between max-w-md">
                 <div>
@@ -340,16 +371,32 @@ export default function AdminSettingsPage() {
                 </button>
               </div>
             </div>
-          </AdminCard>
-
-          {/* Save Button */}
+          </div>
           <div className="flex justify-end">
             <button className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
-              Save Settings
+              Save Notification Settings
             </button>
           </div>
         </div>
       )}
+
+      {/* Appearance Settings */}
+      {activeTab === "appearance" && <AppearanceSettings />}
+
+      {/* Security Settings */}
+      {activeTab === "security" && <SecuritySettings />}
+
+      {/* Roles & Permissions */}
+      {activeTab === "roles" && <RolesPermissions />}
+
+      {/* Backup Settings */}
+      {activeTab === "backup" && <BackupSettings />}
+
+      {/* System Information */}
+      {activeTab === "system" && <SystemInfo />}
+
+      {/* About Page */}
+      {activeTab === "about" && <AboutPage />}
     </div>
   );
 }

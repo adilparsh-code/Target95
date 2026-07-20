@@ -1,62 +1,136 @@
 "use client";
 
-import DataTable from "@/app/components/admin/DataTable";
+import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import SectionTitle from "@/app/components/admin/SectionTitle";
-import StatusBadge from "@/app/components/admin/StatusBadge";
-import DashboardCard from "@/app/components/admin/DashboardCard";
-
-const placeholderTeachers = [
-  { id: "T001", name: "Mrs. Priya Singh", email: "priya.singh@target95.com", subjects: "Java, Python", students: 45, status: "active", joined: "2026-01-10" },
-  { id: "T002", name: "Mr. Amit Verma", email: "amit.verma@target95.com", subjects: "Java, Data Structures", students: 38, status: "active", joined: "2026-02-15" },
-  { id: "T003", name: "Ms. Neha Gupta", email: "neha.gupta@target95.com", subjects: "Computer Science", students: 52, status: "active", joined: "2026-01-20" },
-  { id: "T004", name: "Mr. Rajesh Kumar", email: "rajesh.kumar@target95.com", subjects: "Java, Web Dev", students: 29, status: "active", joined: "2026-03-01" },
-  { id: "T005", name: "Mrs. Anjali Mehta", email: "anjali.mehta@target95.com", subjects: "Computer Science", students: 41, status: "inactive", joined: "2026-04-10" },
-  { id: "T006", name: "Mr. Suresh Reddy", email: "suresh.reddy@target95.com", subjects: "Java, Algorithms", students: 33, status: "pending", joined: "2026-06-01" },
-  { id: "T007", name: "Ms. Deepika Nair", email: "deepika.nair@target95.com", subjects: "Python, Java", students: 27, status: "active", joined: "2026-03-15" },
-  { id: "T008", name: "Mr. Vikram Joshi", email: "vikram.joshi@target95.com", subjects: "Computer Science", students: 19, status: "pending", joined: "2026-06-20" },
-];
-
-const columns = [
-  { key: "id", label: "ID" },
-  { key: "name", label: "Name" },
-  { key: "email", label: "Email" },
-  { key: "subjects", label: "Subjects" },
-  { key: "students", label: "Students" },
-  { key: "status", label: "Status", render: (val) => <StatusBadge status={val} /> },
-  { key: "joined", label: "Joined" },
-];
+import AdminCard from "@/app/components/admin/AdminCard";
+import EmptyState from "@/app/components/admin/EmptyState";
+import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/admin/LoadingSkeleton";
+import { teacherStats, placeholderTeachers } from "@/app/data/admin/mockTeachers";
+import TeacherStats from "@/app/components/admin/teachers/TeacherStats";
+import TeacherCard from "@/app/components/admin/teachers/TeacherCard";
+import TeacherTable from "@/app/components/admin/teachers/TeacherTable";
+import TeacherToolbar from "@/app/components/admin/teachers/TeacherToolbar";
+import TeacherFilters from "@/app/components/admin/teachers/TeacherFilters";
 
 export default function AdminTeachersPage() {
-  const teachers = placeholderTeachers;
-  const activeTeachers = teachers.filter((t) => t.status === "active");
-  const totalStudents = teachers.reduce((sum, t) => sum + t.students, 0);
+  const router = useRouter();
+  const [viewMode, setViewMode] = useState("grid");
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({ status: "", subject: "", experience: "", school: "" });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const filteredTeachers = useMemo(() => {
+    return placeholderTeachers.filter((t) => {
+      if (filters.status && t.status !== filters.status) return false;
+      if (filters.subject && !t.subjects.includes(filters.subject)) return false;
+      if (filters.experience) {
+        const [min, max] = filters.experience.split("-").map(Number);
+        if (filters.experience === "10+") {
+          if (t.experience < 10) return false;
+        } else {
+          if (t.experience < min || t.experience > max) return false;
+        }
+      }
+      if (filters.school && t.school !== filters.school) return false;
+      return true;
+    });
+  }, [filters]);
+
+  const handleViewProfile = (teacher) => {
+    router.push(`/admin/teachers/${teacher.id}`);
+  };
+
+  const handleAddTeacher = () => console.log("Add teacher");
+
+  const handleFilterChange = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const clearFilters = () => {
+    setFilters({ status: "", subject: "", experience: "", school: "" });
+  };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <StatsCardSkeleton count={4} />
+        <CardGridSkeleton count={6} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <DashboardCard title="Total Teachers" value={teachers.length} icon="👩‍🏫" color="cyan" />
-        <DashboardCard title="Active Teachers" value={activeTeachers.length} icon="✅" color="emerald" />
-        <DashboardCard title="Total Students" value={totalStudents} icon="👨‍🎓" color="violet" />
-        <DashboardCard title="Pending Approval" value={teachers.filter((t) => t.status === "pending").length} icon="⏳" color="amber" />
-      </div>
+      {/* Statistics */}
+      <TeacherStats stats={teacherStats} />
 
       {/* Header */}
       <div className="flex items-center justify-between">
         <SectionTitle title="Teachers" subtitle="Manage teacher accounts and assignments" />
-        <div className="flex items-center gap-2">
-          <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
-            + Add Teacher
-          </button>
-        </div>
       </div>
 
-      <DataTable
-        columns={columns}
-        data={teachers}
-        searchPlaceholder="Search teachers by name, email, subject..."
-        onRowClick={(row) => console.log("View teacher:", row.id)}
+      {/* Toolbar */}
+      <TeacherToolbar
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+        onAddTeacher={handleAddTeacher}
+        onToggleFilters={() => setShowFilters((prev) => !prev)}
+        showFilters={showFilters}
       />
+
+      {/* Main content */}
+      <div className="flex gap-6">
+        {/* Filters sidebar */}
+        {showFilters && (
+          <div className="w-full lg:w-64 shrink-0">
+            <AdminCard>
+              <TeacherFilters
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onClear={clearFilters}
+              />
+            </AdminCard>
+          </div>
+        )}
+
+        {/* Teachers content */}
+        <div className="flex-1 min-w-0">
+          {filteredTeachers.length === 0 ? (
+            <AdminCard>
+              <EmptyState
+                icon="👩‍🏫"
+                title="No teachers found"
+                description={
+                  Object.values(filters).some(Boolean)
+                    ? "Try adjusting your filters or search terms."
+                    : "No teachers have been added yet."
+                }
+                action={
+                  <button onClick={handleAddTeacher} className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                    + Add Teacher
+                  </button>
+                }
+              />
+            </AdminCard>
+          ) : viewMode === "grid" ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              {filteredTeachers.map((teacher) => (
+                <TeacherCard
+                  key={teacher.id}
+                  teacher={teacher}
+                  onViewProfile={handleViewProfile}
+                />
+              ))}
+            </div>
+          ) : (
+            <TeacherTable
+              teachers={filteredTeachers}
+              onViewProfile={handleViewProfile}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

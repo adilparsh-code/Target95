@@ -4,6 +4,17 @@ import { useState, useMemo } from "react";
 import SearchBox from "../SearchBox";
 import StatusBadge from "../StatusBadge";
 
+function SortHeader({ label, sortKey: sk, activeSortKey, sortDir, onSort }) {
+  return (
+    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:text-gray-700" onClick={() => onSort(sk)}>
+      <span className="inline-flex items-center gap-1">
+        {label}
+        {activeSortKey === sk && <span className="text-blue-500">{sortDir === "asc" ? "↑" : "↓"}</span>}
+      </span>
+    </th>
+  );
+}
+
 export default function TestTable({ tests = [], onEdit, onPreview, onResults, pageSize = 10 }) {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState(null);
@@ -42,15 +53,6 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
     setPage(0);
   };
 
-  const SortHeader = ({ label, sortKey: sk }) => (
-    <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider cursor-pointer select-none hover:text-gray-700" onClick={() => handleSort(sk)}>
-      <span className="inline-flex items-center gap-1">
-        {label}
-        {sortKey === sk && <span className="text-blue-500">{sortDir === "asc" ? "↑" : "↓"}</span>}
-      </span>
-    </th>
-  );
-
   return (
     <div className="space-y-4">
       <div className="max-w-sm">
@@ -61,15 +63,15 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
         <table className="min-w-full divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <SortHeader label="ID" sortKey="id" />
-              <SortHeader label="Title" sortKey="title" />
+              <SortHeader label="ID" sortKey="id" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Title" sortKey="title" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Subject</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Class</th>
-              <SortHeader label="Questions" sortKey="questions" />
-              <SortHeader label="Duration" sortKey="duration" />
-              <SortHeader label="Attempts" sortKey="attempts" />
-              <SortHeader label="Avg. Score" sortKey="avgScore" />
-              <SortHeader label="Status" sortKey="status" />
+              <SortHeader label="Questions" sortKey="questions" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Duration" sortKey="duration" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Attempts" sortKey="attempts" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Avg. Score" sortKey="avgScore" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Status" sortKey="status" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>

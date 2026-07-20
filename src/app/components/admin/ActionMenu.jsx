@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 
 /**
  * Reusable dropdown action menu with keyboard navigation.
@@ -14,12 +14,6 @@ export default function ActionMenu({ actions = [], variant = "dots", className =
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setFocusedIndex(-1);
-    }
-  }, [isOpen]);
 
   const handleKeyDown = (e) => {
     if (!isOpen) return;
@@ -39,11 +33,13 @@ export default function ActionMenu({ actions = [], variant = "dots", className =
         if (focusedIndex >= 0 && actions[focusedIndex]) {
           actions[focusedIndex].onClick?.();
           setIsOpen(false);
+          setFocusedIndex(-1);
         }
         break;
       case "Escape":
         e.preventDefault();
         setIsOpen(false);
+        setFocusedIndex(-1);
         buttonRef.current?.focus();
         break;
       default:
@@ -83,7 +79,7 @@ export default function ActionMenu({ actions = [], variant = "dots", className =
 
       {isOpen && (
         <>
-          <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} aria-hidden="true" />
+          <div className="fixed inset-0 z-10" onClick={() => { setIsOpen(false); setFocusedIndex(-1); }} aria-hidden="true" />
           <div
             className="absolute right-0 top-full mt-1 z-20 w-44 bg-white rounded-xl border border-gray-200 shadow-lg py-1 overflow-hidden"
             role="menu"
@@ -98,6 +94,7 @@ export default function ActionMenu({ actions = [], variant = "dots", className =
                   onClick={() => {
                     action.onClick?.();
                     setIsOpen(false);
+                    setFocusedIndex(-1);
                   }}
                   onMouseEnter={() => setFocusedIndex(idx)}
                   className={`w-full flex items-center gap-2.5 px-4 py-2 text-sm transition-colors ${

@@ -1,117 +1,93 @@
 "use client";
 
 import { useState } from "react";
-import AdminCard from "../AdminCard";
-import StatusBadge from "../StatusBadge";
+import SettingCard from "./SettingCard";
+import SectionHeader from "./SectionHeader";
+import PermissionTable from "./PermissionTable";
+import SaveBar from "./SaveBar";
 
-const roles = [
-  { id: 1, name: "Super Admin", users: 1, permissions: ["All Access"], status: "active", description: "Full platform access and control" },
-  { id: 2, name: "Admin", users: 3, permissions: ["Manage Content", "Manage Users", "View Analytics"], status: "active", description: "Content and user management" },
-  { id: 3, name: "Teacher", users: 12, permissions: ["Create Content", "View Students", "Manage Tests"], status: "active", description: "Teaching and content creation" },
-  { id: 4, name: "Moderator", users: 5, permissions: ["Review Content", "Manage Comments"], status: "active", description: "Content moderation" },
-  { id: 5, name: "Student", users: 342, permissions: ["Access Content", "Take Tests", "View Progress"], status: "active", description: "Standard student access" },
+const permissionRows = [
+  { key: "dashboard", label: "Dashboard", icon: "📊" },
+  { key: "questions", label: "Questions", icon: "❓" },
+  { key: "teachers", label: "Teachers", icon: "👨‍🏫" },
+  { key: "students", label: "Students", icon: "👨‍🎓" },
+  { key: "analytics", label: "Analytics", icon: "📈" },
+  { key: "settings", label: "Settings", icon: "⚙️" },
+  { key: "notes", label: "Notes", icon: "📄" },
+  { key: "mockTests", label: "Mock Tests", icon: "📝" },
 ];
 
-const allPermissions = [
-  "All Access",
-  "Manage Content",
-  "Manage Users",
-  "View Analytics",
-  "Create Content",
-  "View Students",
-  "Manage Tests",
-  "Review Content",
-  "Manage Comments",
-  "Access Content",
-  "Take Tests",
-  "View Progress",
-  "Manage Settings",
-  "Export Data",
-  "Manage Roles",
+const permissionColumns = [
+  { key: "admin", label: "Admin" },
+  { key: "teacher", label: "Teacher" },
+  { key: "moderator", label: "Moderator" },
+  { key: "student", label: "Student" },
+  { key: "viewer", label: "Viewer" },
 ];
+
+const defaultPermissions = {
+  "dashboard:admin": true, "dashboard:teacher": true, "dashboard:moderator": true, "dashboard:student": true, "dashboard:viewer": true,
+  "questions:admin": true, "questions:teacher": true, "questions:moderator": true, "questions:student": false, "questions:viewer": false,
+  "teachers:admin": true, "teachers:teacher": false, "teachers:moderator": false, "teachers:student": false, "teachers:viewer": false,
+  "students:admin": true, "students:teacher": true, "students:moderator": false, "students:student": false, "students:viewer": false,
+  "analytics:admin": true, "analytics:teacher": true, "analytics:moderator": true, "analytics:student": true, "analytics:viewer": true,
+  "settings:admin": true, "settings:teacher": false, "settings:moderator": false, "settings:student": false, "settings:viewer": false,
+  "notes:admin": true, "notes:teacher": true, "notes:moderator": true, "notes:student": true, "notes:viewer": true,
+  "mockTests:admin": true, "mockTests:teacher": true, "mockTests:moderator": true, "mockTests:student": true, "mockTests:viewer": false,
+};
 
 export default function RolesPermissions() {
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [permissions, setPermissions] = useState({ ...defaultPermissions });
+  const [saved, setSaved] = useState({ ...defaultPermissions });
+  const [isSaving, setIsSaving] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const hasChanges = JSON.stringify(permissions) !== JSON.stringify(saved);
+
+  const handleToggle = (permissionKey) => {
+    setPermissions((prev) => ({
+      ...prev,
+      [permissionKey]: !prev[permissionKey],
+    }));
+  };
+
+  const handleSave = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      setSaved({ ...permissions });
+      setIsSaving(false);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    }, 800);
+  };
+
+  const handleReset = () => {
+    setPermissions({ ...saved });
+  };
 
   return (
-    <div className="space-y-6">
-      {/* Roles List */}
-      <AdminCard padding={false}>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 text-sm">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Role</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Users</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Description</th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Status</th>
-                <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {roles.map((role) => (
-                <tr
-                  key={role.id}
-                  className={`hover:bg-gray-50 transition-colors cursor-pointer ${
-                    selectedRole?.id === role.id ? "bg-blue-50" : ""
-                  }`}
-                  onClick={() => setSelectedRole(role)}
-                >
-                  <td className="px-4 py-3 font-medium text-gray-900">{role.name}</td>
-                  <td className="px-4 py-3 text-gray-600">{role.users}</td>
-                  <td className="px-4 py-3 text-gray-500 max-w-xs truncate">{role.description}</td>
-                  <td className="px-4 py-3"><StatusBadge status={role.status} size="sm" /></td>
-                  <td className="px-4 py-3 text-right">
-                    <button className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" aria-label={`Edit ${role.name} role`}>
-                      ✏️
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <div className="space-y-4">
+      {showSuccess && (
+        <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700 animate-fadeIn">
+          <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          Permissions saved successfully.
         </div>
-      </AdminCard>
-
-      {/* Selected Role Permissions */}
-      {selectedRole && (
-        <AdminCard>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-sm font-semibold text-gray-900">{selectedRole.name} Permissions</h3>
-                <p className="text-xs text-gray-500 mt-0.5">Manage permissions for this role</p>
-              </div>
-              <StatusBadge status={selectedRole.status} />
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {allPermissions.map((permission) => {
-                const hasPermission = selectedRole.permissions.includes(permission) || selectedRole.permissions.includes("All Access");
-                return (
-                  <button
-                    key={permission}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
-                      hasPermission
-                        ? "bg-blue-50 text-blue-700 border-blue-200"
-                        : "bg-white text-gray-500 border-gray-200 hover:border-gray-300"
-                    }`}
-                  >
-                    {hasPermission ? "✓ " : "○ "}{permission}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </AdminCard>
       )}
 
-      <div className="flex justify-end gap-3">
-        <button className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">
-          + Add Role
-        </button>
-        <button className="px-6 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
-          Save Changes
-        </button>
+      <SettingCard>
+        <SectionHeader icon="🔐" title="Role Permissions" description="Configure access permissions for each role" />
+        <PermissionTable
+          rows={permissionRows}
+          columns={permissionColumns}
+          permissions={permissions}
+          onToggle={handleToggle}
+        />
+      </SettingCard>
+
+      <div className="flex justify-end">
+        <SaveBar onSave={handleSave} onReset={handleReset} hasChanges={hasChanges} isSaving={isSaving} />
       </div>
     </div>
   );

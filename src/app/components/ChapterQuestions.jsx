@@ -59,7 +59,7 @@ export default function ChapterQuestions({ chapter, questions }) {
             );
           })
         ) : (
-          <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center">
+          <div className ="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center">
             <h3 className="text-xl font-semibold text-gray-900">No Questions Found</h3>
             <p className="mt-2 text-gray-900">
               Try a different keyword, or reset the filters to see the full list.

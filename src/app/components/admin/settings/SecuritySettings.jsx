@@ -79,7 +79,7 @@ export default function SecuritySettings() {
   return (
     <div className="space-y-4">
       {showSuccess && (
-        <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700 animate-fadeIn">
+        <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700 animate-fade-in">
           <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
@@ -320,6 +320,92 @@ export default function SecuritySettings() {
               ))}
             </tbody>
           </table>
+        </div>
+      </SettingCard>
+
+      {/* Privacy Settings */}
+      <SettingCard>
+        <SectionHeader icon="🔒" title="Privacy Settings" description="Control your account visibility and data preferences" />
+        <div className="space-y-4">
+          <ToggleItem
+            label="Profile Visibility"
+            description="Allow other users to see your profile"
+            enabled={form.profileVisible ?? true}
+            onChange={(v) => handleChange("profileVisible", v)}
+          />
+          <ToggleItem
+            label="Search Engine Indexing"
+            description="Allow search engines to index your public profile"
+            enabled={form.searchIndexing ?? false}
+            onChange={(v) => handleChange("searchIndexing", v)}
+          />
+          <div className="border-t border-gray-100 pt-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Activity Status</label>
+              <select
+                value={form.activityVisibility ?? "public"}
+                onChange={(e) => handleChange("activityVisibility", e.target.value)}
+                className="w-full max-w-xs px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="public">Visible to everyone</option>
+                <option value="teachers">Visible to teachers only</option>
+                <option value="admins">Visible to admins only</option>
+                <option value="hidden">Hidden from everyone</option>
+              </select>
+            </div>
+          </div>
+          <div className="border-t border-gray-100 pt-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cookie Preferences</label>
+              <p className="text-xs text-gray-500 mb-3">Choose how cookies are used on the platform</p>
+              <div className="space-y-3">
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.essentialCookies ?? true}
+                    onChange={(e) => handleChange("essentialCookies", e.target.checked)}
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-700">Essential Cookies</p>
+                    <p className="text-xs text-gray-500">Required for basic platform functionality</p>
+                  </div>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.analyticsCookies ?? true}
+                    onChange={(e) => handleChange("analyticsCookies", e.target.checked)}
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-700">Analytics Cookies</p>
+                    <p className="text-xs text-gray-500">Help us understand how the platform is used</p>
+                  </div>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.marketingCookies ?? false}
+                    onChange={(e) => handleChange("marketingCookies", e.target.checked)}
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-700">Marketing Cookies</p>
+                    <p className="text-xs text-gray-500">Used for personalized content and offers</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-100 pt-4">
+            <ToggleItem
+              label="Data Sharing for Improvement"
+              description="Share anonymous usage data to help improve the platform"
+              enabled={form.dataSharing ?? true}
+              onChange={(v) => handleChange("dataSharing", v)}
+            />
+          </div>
         </div>
       </SettingCard>
 

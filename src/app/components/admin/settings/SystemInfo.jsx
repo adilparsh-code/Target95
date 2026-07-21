@@ -35,6 +35,13 @@ const recentUpdates = [
   { date: "2026-06-01", description: "Initial admin panel", version: "v2.2.0" },
 ];
 
+const storageCards = [
+  { title: "Total Storage", value: "50 GB", icon: "💾", used: "", color: "from-blue-500 to-blue-600", bgColor: "bg-blue-50" },
+  { title: "Used Storage", value: "11.6 GB", icon: "📀", used: "23%", color: "from-amber-500 to-amber-600", bgColor: "bg-amber-50" },
+  { title: "Available Storage", value: "38.4 GB", icon: "💿", used: "77%", color: "from-emerald-500 to-emerald-600", bgColor: "bg-emerald-50" },
+  { title: "Backup Storage", value: "2.4 GB", icon: "🗄️", used: "Last backup", color: "from-violet-500 to-violet-600", bgColor: "bg-violet-50" },
+];
+
 export default function SystemInfo() {
   const [activeTab, setActiveTab] = useState("info");
 
@@ -65,27 +72,61 @@ export default function SystemInfo() {
       </div>
 
       {activeTab === "info" && (
-        <SettingCard>
-          <SectionHeader icon="ℹ️" title="System Information" description="Technical details about the platform installation" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
-            {systemDetails.map((item) => {
-              const statusColors = {
-                stable: "bg-emerald-500",
-                pending: "bg-amber-500",
-                info: "bg-blue-500",
-              };
-              return (
-                <div key={item.label} className="flex items-center justify-between py-2.5 border-b border-gray-50">
-                  <span className="text-sm text-gray-600">{item.label}</span>
-                  <span className="flex items-center gap-2 text-sm font-medium text-gray-900">
-                    <span className={`w-1.5 h-1.5 rounded-full ${statusColors[item.status] || "bg-gray-400"}`} />
-                    {item.value}
-                  </span>
+        <>
+          {/* Storage Usage Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {storageCards.map((card) => (
+              <div
+                key={card.title}
+                className={`${card.bgColor} rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="text-xs font-medium text-gray-500 uppercase tracking-wider">{card.title}</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">{card.value}</p>
+                  </div>
+                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center text-lg shadow-sm`}>
+                    {card.icon}
+                  </div>
                 </div>
-              );
-            })}
+                {card.used && (
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2 bg-white rounded-full overflow-hidden">
+                      <div
+                        className={`h-full bg-gradient-to-r ${card.color} rounded-full`}
+                        style={{ width: card.used }}
+                      />
+                    </div>
+                    <span className="text-xs font-medium text-gray-600">{card.used}</span>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-        </SettingCard>
+
+          {/* System Info Details */}
+          <SettingCard>
+            <SectionHeader icon="ℹ️" title="System Information" description="Technical details about the platform installation" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
+              {systemDetails.map((item) => {
+                const statusColors = {
+                  stable: "bg-emerald-500",
+                  pending: "bg-amber-500",
+                  info: "bg-blue-500",
+                };
+                return (
+                  <div key={item.label} className="flex items-center justify-between py-2.5 border-b border-gray-50">
+                    <span className="text-sm text-gray-600">{item.label}</span>
+                    <span className="flex items-center gap-2 text-sm font-medium text-gray-900">
+                      <span className={`w-1.5 h-1.5 rounded-full ${statusColors[item.status] || "bg-gray-400"}`} />
+                      {item.value}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </SettingCard>
+        </>
       )}
 
       {activeTab === "health" && (

@@ -132,3 +132,58 @@ export function sanitizeStudyStatus(value) {
   const safeValue = sanitizeText(value);
   return VALID_STATUSES.has(safeValue) ? safeValue : "Not Started";
 }
+
+const HISTORY_KEY = "target95-mock-test-results";
+
+export function saveMockTestResult(result) {
+  try {
+    const stored = getMockTestHistory();
+    stored.unshift(result);
+    if (stored.length > 20) stored.length = 20;
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(stored));
+  } catch {
+    // Silently fail
+  }
+}
+
+export function getMockTestHistory() {
+  try {
+    const data = localStorage.getItem(HISTORY_KEY);
+    if (!data) return [];
+    const parsed = JSON.parse(data);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+export function clearMockTestHistory() {
+  try {
+    localStorage.removeItem(HISTORY_KEY);
+  } catch {
+    // Silently fail
+  }
+}
+
+export const CATEGORIES = [
+  { id: "icse-class-9", label: "ICSE Class 9", icon: "📘" },
+  { id: "icse-class-10", label: "ICSE Class 10", icon: "📗" },
+  { id: "isc-class-11", label: "ISC Class 11", icon: "📙" },
+  { id: "isc-class-12", label: "ISC Class 12", icon: "📕" },
+];
+
+export const DIFFICULTIES = [
+  { id: "easy", label: "Easy", icon: "🟢" },
+  { id: "medium", label: "Medium", icon: "🟡" },
+  { id: "hard", label: "Hard", icon: "🔴" },
+];
+
+export const QUESTION_TYPES = [
+  { id: "mixed", label: "Mixed", icon: "📋" },
+  { id: "mcq", label: "MCQ", icon: "💡" },
+  { id: "theory", label: "Theory", icon: "📝" },
+  { id: "programming", label: "Programming", icon: "💻" },
+  { id: "output", label: "Output", icon: "🔍" },
+];
+
+export const QUESTION_COUNTS = [5, 10, 15, 20];

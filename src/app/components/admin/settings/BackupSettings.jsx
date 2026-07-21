@@ -24,6 +24,7 @@ export default function BackupSettings() {
   const [saved, setSaved] = useState({ ...initialData });
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [restoreDialog, setRestoreDialog] = useState(null);
 
   const hasChanges = JSON.stringify(form) !== JSON.stringify(saved);
 
@@ -45,18 +46,90 @@ export default function BackupSettings() {
     setForm({ ...saved });
   };
 
+  const handleRestoreConfirm = () => {
+    setRestoreDialog(null);
+    setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    }, 1200);
+  };
+
   const actionButtons = [
-    { label: "Create Backup", icon: "💾", color: "bg-blue-600 hover:bg-blue-700 text-white", description: "Create a full backup now" },
-    { label: "Restore Backup", icon: "↩️", color: "bg-amber-600 hover:bg-amber-700 text-white", description: "Restore from a backup" },
-    { label: "Export JSON", icon: "📄", color: "bg-gray-100 hover:bg-gray-200 text-gray-700", description: "Export data as JSON" },
-    { label: "Export CSV", icon: "📊", color: "bg-gray-100 hover:bg-gray-200 text-gray-700", description: "Export data as CSV" },
-    { label: "Download Logs", icon: "📋", color: "bg-gray-100 hover:bg-gray-200 text-gray-700", description: "Download system logs" },
+    { label: "Create Backup", icon: "💾", color: "bg-blue-600 hover:bg-blue-700 text-white", description: "Create a full backup now", action: "create" },
+    { label: "Restore Backup", icon: "↩️", color: "bg-amber-600 hover:bg-amber-700 text-white", description: "Restore from a backup", action: "restore" },
+    { label: "Export JSON", icon: "📄", color: "bg-gray-100 hover:bg-gray-200 text-gray-700", description: "Export data as JSON", action: "json" },
+    { label: "Export CSV", icon: "📊", color: "bg-gray-100 hover:bg-gray-200 text-gray-700", description: "Export data as CSV", action: "csv" },
+    { label: "Download Logs", icon: "📋", color: "bg-gray-100 hover:bg-gray-200 text-gray-700", description: "Download system logs", action: "logs" },
   ];
 
   return (
     <div className="space-y-4">
+      {/* Restore Confirmation Dialog */}
+      {restoreDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/50" onClick={() => setRestoreDialog(null)} />
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 animate-fade-in">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-3xl">⚠️</span>
+              </div>
+              <h3 className="text-lg font-bold text-gray-900">Restore Backup</h3>
+              <p className="text-sm text-gray-500 mt-1">
+                This action will replace all current data with the selected backup.
+              </p>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Backup Date</span>
+                  <span className="font-medium text-gray-900">July 19, 2026</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Backup Size</span>
+                  <span className="font-medium text-gray-900">2.4 GB</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Type</span>
+                  <span className="font-medium text-gray-900">Full Backup</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+              <div className="flex items-start gap-3">
+                <span className="text-lg shrink-0 mt-0.5">❗</span>
+                <div>
+                  <p className="text-sm font-medium text-red-800">Warning</p>
+                  <p className="text-xs text-red-600 mt-1">
+                    All current data will be replaced. This action cannot be undone. Please ensure you have a recent backup before proceeding.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setRestoreDialog(null)}
+                className="flex-1 px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleRestoreConfirm}
+                className="flex-1 px-4 py-2.5 text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 rounded-lg transition-colors shadow-sm"
+              >
+                Confirm Restore
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showSuccess && (
-        <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700 animate-fadeIn">
+        <div className="flex items-center gap-2 px-4 py-3 bg-emerald-50 border border-emerald-200 rounded-lg text-sm text-emerald-700 animate-fade-in">
           <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
@@ -64,7 +137,7 @@ export default function BackupSettings() {
         </div>
       )}
 
-      {/* Storage Used */}
+      {/* Storage Overview */}
       <SettingCard>
         <SectionHeader icon="💿" title="Storage Overview" description="Current backup storage usage" />
         <div className="space-y-3">
@@ -97,6 +170,11 @@ export default function BackupSettings() {
         {actionButtons.map((action) => (
           <button
             key={action.label}
+            onClick={() => {
+              if (action.action === "restore") {
+                setRestoreDialog({ date: "July 19, 2026", size: "2.4 GB", type: "Full Backup" });
+              }
+            }}
             className={`p-4 rounded-xl border border-gray-200 ${action.color} transition-all hover:shadow-md text-left active:scale-[0.98]`}
           >
             <span className="text-2xl block mb-2">{action.icon}</span>

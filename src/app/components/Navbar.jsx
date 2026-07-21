@@ -6,7 +6,9 @@ const links = [
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
   { href: "/java", label: "Practice", description: "Chapters", icon: "📘" },
   { href: "/mock-test", label: "Mock Test", description: "Timed", icon: "📝" },
-  { href: "/study", label: "Study", description: "Resources", icon: "📚" },
+  { href: "/question-bank", label: "Questions", description: "Bank", icon: "📚" },
+  { href: "/study", label: "Study", description: "Resources", icon: "📖" },
+  { href: "/teacher", label: "Teacher", description: "Dashboard", icon: "👨‍🏫" },
 ];
 
 export default function Navbar() {

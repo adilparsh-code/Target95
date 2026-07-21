@@ -13,9 +13,9 @@ const links = [
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
+    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
       <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-        <Link href="/" className="text-3xl font-bold text-blue-600">
+        <Link href="/" className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300">
           🎯 Target95+
         </Link>
 
@@ -25,7 +25,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <button className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700">
+        <button className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 hover:from-blue-700 hover:to-blue-800">
           Login
         </button>
       </div>

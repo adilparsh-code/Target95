@@ -3,14 +3,12 @@ import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Features from "./components/Features";
 import HowItsWorks from "./components/HowItsWorks";
-import Footer from "./components/Footer";
+import Footer from "../components/Footer";
 import Subjects from "./components/Subjects";
-
-
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+    <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
       <Stats />

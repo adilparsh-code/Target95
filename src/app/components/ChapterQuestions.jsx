@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import useProgress from "../hooks/useProgress";
-import SearchBar from "./SearchBar";
+import SearchBar from "./ui/SearchBar";
 import QuestionFilters from "./QuestionFilters";
 import QuestionListItem from "./QuestionListItem";
 import { filterQuestions } from "../../lib/questionFilters";
@@ -37,7 +37,25 @@ export default function ChapterQuestions({ chapter, questions }) {
           </p>
         </div>
 
-        <SearchBar search={search} setSearch={setSearch} />
+        <div className="mt-6 mb-6">
+          <label className="mb-2 block text-sm font-semibold text-gray-900" htmlFor="question-search">
+            Search questions
+          </label>
+          <SearchBar
+            id="question-search"
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Try: loop, array, Question 5, easy, mcq"
+          />
+          <p className="mt-2 text-sm text-gray-900">
+            Example: <span className="font-semibold">loop</span>,
+            <span className="font-semibold"> array</span>,
+            <span className="font-semibold"> Question 5</span>,
+            <span className="font-semibold"> easy</span>,
+            <span className="font-semibold"> mcq</span>
+          </p>
+        </div>
 
         <QuestionFilters
           difficulty={difficulty}
@@ -59,7 +77,7 @@ export default function ChapterQuestions({ chapter, questions }) {
             );
           })
         ) : (
-          <div className ="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center">
+          <div className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-12 text-center">
             <h3 className="text-xl font-semibold text-gray-900">No Questions Found</h3>
             <p className="mt-2 text-gray-900">
               Try a different keyword, or reset the filters to see the full list.

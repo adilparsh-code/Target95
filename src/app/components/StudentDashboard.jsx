@@ -1,285 +1,157 @@
 "use client";
 
-import Link from "next/link";
-import { useMemo, useState, useEffect } from "react";
-import questions from "../data/questions";
-import useBookmarks from "../hooks/useBookmarks";
-import useProgress from "../hooks/useProgress";
-import { getMockTestHistory } from "../../lib/mocktest";
-
-function formatChapterName(chapter) {
-  return chapter.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-}
-
-function getQuestionById(chapter, questionId) {
-  return questions.find((q) => q.chapter === chapter && q.id === questionId);
-}
-
-const STREAK_KEY = "target95-streak";
-const TODAYS_GOAL_KEY = "target95-todays-goal";
-
-function getStreak() {
-  try {
-    const data = JSON.parse(localStorage.getItem(STREAK_KEY) || "{}");
-    const today = new Date().toDateString();
-    if (data.lastDate === today) return data.count || 0;
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    if (data.lastDate === yesterday) return data.count || 0;
-    return 0;
-  } catch {
-    return 0;
-  }
-}
-
-function updateStreak() {
-  try {
-    const today = new Date().toDateString();
-    const data = JSON.parse(localStorage.getItem(STREAK_KEY) || "{}");
-    if (data.lastDate === today) return;
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    const newCount = data.lastDate === yesterday ? (data.count || 0) + 1 : 1;
-    localStorage.setItem(STREAK_KEY, JSON.stringify({ count: newCount, lastDate: today }));
-  } catch {
-    // Silently fail
-  }
-}
+import { useState } from "react";
+import Container from "./ui/Container";
+import Card from "./ui/Card";
+import XPBar from "./Dashboard/XPBar";
+import SubjectCards from "./Dashboard/SubjectCards";
+import ActivityTimeline from "./Dashboard/ActivityTimeline";
+import Heatmap from "./Dashboard/Heatmap";
+import AchievementCard from "./Dashboard/AchievementCard";
+import SmartSuggestions from "./Dashboard/SmartSuggestions";
+import RecommendedTopics from "./Dashboard/RecommendedTopics";
+import {
+  subjectCards,
+  recentActivity,
+  achievements,
+  smartSuggestions,
+  recommendedTopics,
+  heatmapData,
+} from "../data/dashboardData";
 
 export default function StudentDashboard() {
-  const { completedQuestions } = useProgress();
-  const { bookmarks } = useBookmarks();
-  const [streak, setStreak] = useState(0);
-  const [todaysGoal, setTodaysGoal] = useState(5);
-  const [todaysCompleted, setTodaysCompleted] = useState(0);
-
-  useEffect(() => {
-    setStreak(getStreak());
-    try {
-      const saved = localStorage.getItem(TODAYS_GOAL_KEY);
-      if (saved) setTodaysGoal(parseInt(saved, 10) || 5);
-    } catch {}
-    // Count today's completed questions
-    const today = new Date().toDateString();
-    const todayCount = completedQuestions.filter((cq) => {
-      // Approximate by checking if it was completed recently
-      return cq.timestamp && new Date(cq.timestamp).toDateString() === today;
-    }).length;
-    setTodaysCompleted(todayCount);
-  }, [completedQuestions]);
-
-  const totalQuestions = questions.length;
-  const completedCount = completedQuestions.length;
-  const bookmarkedCount = bookmarks.length;
-  const progressPercent = totalQuestions > 0 ? Math.round((completedCount / totalQuestions) * 100) : 0;
-
-  const continueQuestion = useMemo(() => {
-    const next = questions.find((q) => {
-      return !completedQuestions.some(
-        (cq) => cq.chapter === q.chapter && cq.questionId === q.id
-      );
-    });
-    return next || questions[0];
-  }, [completedQuestions]);
-
-  const recentActivity = useMemo(() => {
-    const completed = completedQuestions.slice(-3).map((item) => {
-      const q = getQuestionById(item.chapter, item.questionId);
-      if (!q) return null;
-      return { type: "Completed", title: `Completed: ${q.question}`, subtitle: `${formatChapterName(q.chapter)} • Q${q.id}` };
-    }).filter(Boolean);
-
-    const bm = bookmarks.slice(-3).map((item) => {
-      const q = getQuestionById(item.chapter, item.questionId);
-      if (!q) return null;
-      return { type: "Bookmarked", title: `Bookmarked: ${q.question}`, subtitle: `${formatChapterName(q.chapter)} • Q${q.id}` };
-    }).filter(Boolean);
-
-    return [...completed, ...bm].slice(0, 5);
-  }, [bookmarks, completedQuestions]);
-
-  const mockTestHistory = useMemo(() => getMockTestHistory().slice(0, 3), []);
-  const avgScore = mockTestHistory.length > 0
-    ? Math.round(mockTestHistory.reduce((s, h) => s + h.percentage, 0) / mockTestHistory.length)
-    : 0;
-
-  const subjectProgress = useMemo(() => {
-    const subjects = [
-      { name: "Java Basics", icon: "☕", chapter: "introduction" },
-      { name: "Variables", icon: "🔤", chapter: "variables-data-types" },
-      { name: "Operators", icon: "➕", chapter: "operators" },
-      { name: "Control Flow", icon: "🔄", chapter: "if-else" },
-      { name: "Loops", icon: "🔁", chapter: "loops" },
-      { name: "Methods", icon: "⚙️", chapter: "methods" },
-      { name: "Arrays", icon: "📊", chapter: "arrays" },
-      { name: "Strings", icon: "📝", chapter: "strings" },
-      { name: "Constructors", icon: "🏗️", chapter: "constructor" },
-    ];
-    return subjects.map((s) => {
-      const total = questions.filter((q) => q.chapter === s.chapter).length;
-      const done = completedQuestions.filter((cq) => cq.chapter === s.chapter).length;
-      return { ...s, total, done, percent: total > 0 ? Math.round((done / total) * 100) : 0 };
-    });
-  }, [completedQuestions]);
+  const [dailyGoal, setDailyGoal] = useState(10);
+  const [questionsDoneToday, setQuestionsDoneToday] = useState(4);
+  const todayProgress = Math.min(100, Math.round((questionsDoneToday / dailyGoal) * 100));
 
   return (
-    <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
-      {/* Welcome Header */}
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Student Dashboard</p>
-            <h1 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Welcome back, learner. 👋</h1>
-            <p className="mt-3 text-base leading-7 text-gray-700">
-              Track your progress, review bookmarked questions, and continue your Java practice.
+    <Container className="py-8">
+      {/* Welcome Header + XP */}
+      <Card className="p-6 sm:p-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Welcome back, Student! 👋
+            </h1>
+            <p className="text-gray-500 mt-1">
+              Keep learning to reach your goals today.
             </p>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="rounded-2xl border border-yellow-200 bg-yellow-50 p-4 text-center">
-              <p className="text-sm font-semibold text-yellow-700">🔥 Streak</p>
-              <p className="mt-1 text-3xl font-bold text-yellow-700">{streak} days</p>
-            </div>
-            <div className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-center">
-              <p className="text-sm font-semibold text-gray-700">Overall</p>
-              <p className="mt-1 text-3xl font-bold text-gray-900">{progressPercent}%</p>
-              <p className="mt-1 text-xs text-gray-500">{completedCount}/{totalQuestions}</p>
-            </div>
-          </div>
+          <XPBar />
         </div>
-      </div>
+      </Card>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      {/* First Row: Today's Goal + Continue Learning + AI Suggestion */}
+      <div className="grid gap-6 lg:grid-cols-3 mt-6">
         {/* Today's Goal */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-semibold text-gray-700">🎯 Today's Goal</h3>
-          <div className="mt-3 flex items-center gap-3">
-            <div className="flex-1 h-3 rounded-full bg-gray-200 overflow-hidden">
-              <div className="h-full rounded-full bg-blue-600 transition-all" style={{ width: `${Math.min((todaysCompleted / todaysGoal) * 100, 100)}%` }} />
-            </div>
-            <span className="text-sm font-bold text-gray-900">{todaysCompleted}/{todaysGoal}</span>
+        <Card className="p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">🎯</span>
+            <h2 className="font-semibold text-gray-900">Today's Goal</h2>
           </div>
-          <p className="mt-2 text-xs text-gray-500">Questions completed today</p>
-        </div>
+          <div className="mb-3">
+            <div className="flex justify-between text-sm text-gray-600 mb-1">
+              <span>{questionsDoneToday} / {dailyGoal} questions</span>
+              <span>{todayProgress}%</span>
+            </div>
+            <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-600 rounded-full transition-all duration-500"
+                style={{ width: `${todayProgress}%` }}
+              />
+            </div>
+          </div>
+          <button
+            onClick={() => setQuestionsDoneToday((v) => Math.min(dailyGoal, v + 1))}
+            className="w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Log a Question ✅
+          </button>
+        </Card>
 
         {/* Continue Learning */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-          <h3 className="text-sm font-semibold text-gray-700">📖 Continue Learning</h3>
-          <p className="mt-2 text-sm font-semibold text-gray-900 truncate">
-            {continueQuestion ? continueQuestion.question : "No questions available"}
+        <Card className="p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">📖</span>
+            <h2 className="font-semibold text-gray-900">Continue Learning</h2>
+          </div>
+          <p className="text-sm text-gray-600 mb-2">
+            Pick up where you left off in <strong>Control Flow</strong>.
           </p>
-          <Link
-            href={continueQuestion ? `/java/${continueQuestion.chapter}/question/${continueQuestion.id}` : "/java"}
-            className="mt-3 inline-flex items-center rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 transition"
-          >
-            Continue →
-          </Link>
-        </div>
+          <div className="h-2 bg-gray-100 rounded-full overflow-hidden mb-3">
+            <div className="h-full bg-emerald-500 rounded-full" style={{ width: "45%" }} />
+          </div>
+          <button className="w-full px-4 py-2 text-sm font-medium text-emerald-700 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors">
+            Continue Chapter →
+          </button>
+        </Card>
 
         {/* AI Recommendation Card */}
-        <div className="rounded-2xl border border-purple-200 bg-purple-50 p-5 shadow-sm">
-          <h3 className="text-sm font-semibold text-purple-700">🤖 AI Recommendation</h3>
-          <p className="mt-2 text-sm text-purple-900 font-medium">
-            {avgScore > 0
-              ? `Based on your mock tests (avg ${avgScore}%), focus on ${
-                  subjectProgress.filter((s) => s.percent < 50).map((s) => s.name).slice(0, 2).join(" and ") || "your weak areas"
-                }.`
-              : "Complete a mock test to get personalized recommendations."}
+        <Card className="p-5 bg-purple-50 border-purple-200">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">🤖</span>
+            <h2 className="font-semibold text-gray-900">AI Suggestion</h2>
+          </div>
+          <p className="text-sm text-gray-700 mb-3">
+            You struggled with <strong>Method Overloading</strong> last week. Try 5 practice questions now.
           </p>
-        </div>
+          <button className="w-full px-4 py-2 text-sm font-medium text-purple-700 bg-purple-100 rounded-lg hover:bg-purple-200 transition-colors">
+            Practice Now →
+          </button>
+        </Card>
       </div>
 
-      {/* Second Row: Progress + Subject Progress */}
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+      {/* Second Row: Subjects + Activity + Smart Suggestions */}
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr] mt-6">
         {/* Subject Progress */}
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-900">Subject Progress</h2>
-          <div className="mt-4 space-y-4">
-            {subjectProgress.map((s) => (
-              <div key={s.chapter} className="flex items-center gap-4">
-                <span className="text-lg">{s.icon}</span>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-semibold text-gray-900">{s.name}</span>
-                    <span className="text-gray-700">{s.done}/{s.total}</span>
-                  </div>
-                  <div className="mt-1 h-2 rounded-full bg-gray-200">
-                    <div
-                      className={`h-full rounded-full transition-all ${
-                        s.percent === 100 ? "bg-green-500" : s.percent >= 50 ? "bg-blue-500" : "bg-yellow-500"
-                      }`}
-                      style={{ width: `${s.percent}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <Card className="p-6">
+          <h2 className="font-semibold text-gray-900 mb-4">Subject Progress</h2>
+          <SubjectCards subjects={subjectCards} />
+        </Card>
 
         {/* Right Column */}
         <div className="space-y-6">
-          {/* Weekly / Recent Activity */}
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Recent Activity</h2>
-            {recentActivity.length > 0 ? (
-              <div className="mt-4 space-y-3">
-                {recentActivity.map((item, idx) => (
-                  <div key={idx} className="rounded-2xl border border-gray-200 bg-slate-50 p-3">
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm font-semibold text-gray-900 truncate">{item.title}</p>
-                      <span className="whitespace-nowrap rounded-full bg-white px-2 py-0.5 text-xs font-semibold text-gray-700">
-                        {item.type}
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs text-gray-700">{item.subtitle}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="mt-4 rounded-2xl border border-dashed border-gray-300 bg-slate-50 p-6 text-center text-sm text-gray-700">
-                Start practicing to build your activity feed.
-              </div>
-            )}
-          </div>
+          {/* Weekly Activity */}
+          <Card className="p-6">
+            <h2 className="font-semibold text-gray-900 mb-3">Recent Activity</h2>
+            <ActivityTimeline activities={recentActivity.slice(0, 4)} />
+          </Card>
 
-          {/* Upcoming Tests */}
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Upcoming Tests</h2>
-            {mockTestHistory.length > 0 ? (
-              <div className="mt-4 space-y-3">
-                {mockTestHistory.map((h) => (
-                  <div key={h.id} className="rounded-2xl border border-gray-200 bg-slate-50 p-3">
-                    <p className="text-sm font-semibold text-gray-900">
-                      {h.category?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) || "Test"}
-                    </p>
-                    <p className="mt-1 text-xs text-gray-700">Score: {h.score}/{h.totalQuestions} ({h.percentage}%)</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="mt-4 rounded-2xl border border-dashed border-gray-300 bg-slate-50 p-6 text-center text-sm text-gray-700">
-                Take a mock test to see recent results here.
-              </div>
-            )}
-          </div>
+          {/* Smart Suggestions */}
+          <Card className="p-6">
+            <h2 className="font-semibold text-gray-900 mb-3">Quick Actions</h2>
+            <SmartSuggestions suggestions={smartSuggestions} />
+          </Card>
         </div>
+      </div>
+
+      {/* Recommended Topics */}
+      <div className="mt-6">
+        <Card className="p-6">
+          <h2 className="font-semibold text-gray-900 mb-4">Recommended Topics</h2>
+          <RecommendedTopics topics={recommendedTopics} />
+        </Card>
+      </div>
+
+      {/* Activity Heatmap */}
+      <div className="mt-6">
+        <Card className="p-6">
+          <h2 className="font-semibold text-gray-900 mb-4">Learning Activity</h2>
+          <Heatmap data={heatmapData} />
+        </Card>
       </div>
 
       {/* Achievements */}
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-bold text-gray-900">🏆 Achievements</h2>
-        <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {[
-            { icon: "🔥", label: `${streak} Day Streak`, earned: streak > 0 },
-            { icon: "📘", label: `${completedCount} Questions Done`, earned: completedCount > 0 },
-            { icon: "⭐", label: `${bookmarkedCount} Bookmarks`, earned: bookmarkedCount > 0 },
-            { icon: "🎯", label: `${mockTestHistory.length} Tests Taken`, earned: mockTestHistory.length > 0 },
-          ].map((ach, idx) => (
-            <div key={idx} className={`rounded-2xl border p-4 text-center ${ach.earned ? "border-blue-200 bg-blue-50" : "border-gray-200 bg-gray-50 opacity-50"}`}>
-              <p className="text-2xl">{ach.icon}</p>
-              <p className="mt-2 text-sm font-semibold text-gray-900">{ach.label}</p>
-            </div>
-          ))}
-        </div>
+      <div className="mt-6">
+        <Card className="p-6">
+          <h2 className="font-semibold text-gray-900 mb-4">Achievements</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            {achievements.slice(0, 5).map((achievement) => (
+              <AchievementCard key={achievement.id} {...achievement} />
+            ))}
+          </div>
+        </Card>
       </div>
-    </section>
+    </Container>
   );
 }

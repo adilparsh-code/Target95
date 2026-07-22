@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Link from "next/link";
 
 const quickLinks = [
@@ -159,6 +160,20 @@ export default function Footer() {
           </p>
         </div>
       </div>
+=======
+import Container from "./ui/Container";
+
+export default function Footer() {
+  return (
+    <footer className="bg-gray-900 py-10 text-white">
+      <Container>
+        <div className="text-center">
+          <h2 className="text-3xl font-bold">Target95+</h2>
+          <p className="mt-4 text-gray-400">AI Powered ICSE Computer Science Learning Platform</p>
+          <p className="mt-8 text-sm text-gray-500">© 2026 Target95+. All Rights Reserved.</p>
+        </div>
+      </Container>
+>>>>>>> 49ef4e8 (feat: improve Target95 UI, responsive design and admin module)
     </footer>
   );
 }

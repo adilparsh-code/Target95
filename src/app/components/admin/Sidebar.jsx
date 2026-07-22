@@ -56,19 +56,24 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex flex-col p-4 space-y-1 overflow-y-auto" style={{ height: "calc(100% - 4rem)" }}>
+        <nav className="flex flex-col p-4 space-y-1 overflow-y-auto h-[calc(100%-4rem)]">
           {menuItems.map((item) => {
             const isActive = pathname === item.href;
+            const linkClasses = `
+              flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium 
+              transition-all duration-200 focus:outline-none focus:ring-2 
+              focus:ring-blue-500 focus:ring-offset-2
+              ${isActive
+                ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600"
+                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"
+              }
+            `;
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                  isActive
-                    ? "bg-blue-50 text-blue-700 border-l-4 border-blue-600"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900 border-l-4 border-transparent"
-                }`}
+                className={linkClasses.trim()}
                 aria-current={isActive ? "page" : undefined}
               >
                 <span className="text-lg" aria-hidden="true">{item.icon}</span>

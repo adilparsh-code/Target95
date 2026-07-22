@@ -1,3 +1,5 @@
+import Container from "./ui/Container";
+
 const stats = [
   {
     number: "10K+",
@@ -19,6 +21,7 @@ const stats = [
 
 export default function Stats() {
   return (
+<<<<<<< HEAD
     <section className="relative bg-white py-20 md:py-24" aria-label="Platform highlights">
       {/* Subtle background decoration */}
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white to-white pointer-events-none" />
@@ -34,10 +37,19 @@ export default function Stats() {
                 {item.number}
               </h2>
               <p className="mt-2 text-gray-500 font-medium">{item.title}</p>
+=======
+    <section className="bg-white py-20" aria-label="Platform highlights">
+      <Container>
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
+          {stats.map((item) => (
+            <div key={item.title} className="text-center">
+              <h2 className="text-5xl font-extrabold text-blue-600">{item.number}</h2>
+              <p className="mt-3 text-gray-600">{item.title}</p>
+>>>>>>> 49ef4e8 (feat: improve Target95 UI, responsive design and admin module)
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

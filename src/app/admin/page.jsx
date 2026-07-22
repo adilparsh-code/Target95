@@ -3,8 +3,9 @@
 import DashboardCard from "../components/admin/DashboardCard";
 import QuickActionCard from "../components/admin/QuickActionCard";
 import SectionTitle from "../components/admin/SectionTitle";
-import AdminCard from "../components/admin/AdminCard";
-import StatusBadge from "../components/admin/StatusBadge";
+import WelcomeBanner from "../components/admin/WelcomeBanner";
+import RecentActivityCard from "../components/admin/RecentActivityCard";
+import RecentUpdatesCard from "../components/admin/RecentUpdatesCard";
 
 const stats = [
   { title: "Total Questions", value: 1248, icon: "❓", color: "blue", trend: 12, trendUp: true },
@@ -42,28 +43,14 @@ const recentUpdates = [
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Welcome Banner */}
-      <AdminCard className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white border-0">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-bold">Welcome back, Admin! 👋</h2>
-            <p className="text-blue-100 mt-1 text-sm">
-              Here&apos;s what&apos;s happening with Target95 today.
-            </p>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="px-3 py-1.5 bg-white/20 rounded-lg backdrop-blur-sm">
-              📅 {new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
-            </span>
-          </div>
-        </div>
-      </AdminCard>
+      <WelcomeBanner />
 
       {/* Statistics Cards */}
       <div>
         <SectionTitle title="Overview" subtitle="Key metrics at a glance" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
           {stats.map((stat) => (
             <DashboardCard key={stat.title} {...stat} />
           ))}
@@ -75,7 +62,7 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <div className="lg:col-span-2">
           <SectionTitle title="Quick Actions" subtitle="Common admin tasks" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {quickActions.map((action) => (
               <QuickActionCard key={action.title} {...action} />
             ))}
@@ -85,48 +72,14 @@ export default function AdminDashboard() {
         {/* Recent Activity */}
         <div>
           <SectionTitle title="Recent Activity" subtitle="Latest platform events" />
-          <AdminCard padding={false}>
-            <div className="divide-y divide-gray-100">
-              {recentActivity.map((item, index) => (
-                <div key={index} className="p-3 hover:bg-gray-50 transition-colors">
-                  <div className="flex items-start gap-3">
-                    <StatusBadge status={item.status} />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm font-medium text-gray-900 truncate">{item.action}</p>
-                      <p className="text-xs text-gray-500 mt-0.5 truncate">{item.detail}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{item.time}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </AdminCard>
+          <RecentActivityCard activities={recentActivity} />
         </div>
       </div>
 
       {/* Recent Updates */}
       <div>
         <SectionTitle title="Recent Updates" subtitle="Latest changes and announcements" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {recentUpdates.map((update, index) => (
-            <AdminCard key={index}>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
-                    update.type === "update" ? "bg-blue-50 text-blue-700" :
-                    update.type === "improvement" ? "bg-emerald-50 text-emerald-700" :
-                    "bg-amber-50 text-amber-700"
-                  }`}>
-                    {update.type === "update" ? "📌 Update" : update.type === "improvement" ? "✨ Improvement" : "📢 Announcement"}
-                  </span>
-                  <span className="text-xs text-gray-400">{update.date}</span>
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900">{update.title}</h3>
-                <p className="text-xs text-gray-500">{update.description}</p>
-              </div>
-            </AdminCard>
-          ))}
-        </div>
+        <RecentUpdatesCard updates={recentUpdates} />
       </div>
     </div>
   );

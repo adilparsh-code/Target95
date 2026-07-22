@@ -1,23 +1,12 @@
-"use client";
-
-/**
- * EmptyState — Standardized empty state component.
- */
-
-export default function EmptyState({
-  icon = "📭",
-  title = "Nothing here yet",
-  description = "",
-  action,
-}) {
+export default function EmptyState({ title, description, icon, className, ...props }) {
   return (
-    <div className="rounded-3xl border border-dashed border-gray-300 bg-white p-12 text-center shadow-sm">
-      <p className="mb-4 text-4xl">{icon}</p>
-      <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-      {description && (
-        <p className="mt-2 text-gray-700 max-w-md mx-auto">{description}</p>
-      )}
-      {action && <div className="mt-6">{action}</div>}
+    <div
+      className={`flex flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-300 p-12 text-center ${className}`}
+      {...props}
+    >
+      {icon && <div className="text-6xl text-gray-400">{icon}</div>}
+      <h3 className="mt-4 text-lg font-medium text-gray-900">{title}</h3>
+      <p className="mt-2 text-sm text-gray-600">{description}</p>
     </div>
   );
 }

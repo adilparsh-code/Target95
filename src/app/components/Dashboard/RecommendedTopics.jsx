@@ -1,6 +1,6 @@
 "use client";
 
-import { DifficultyBadge } from "../ui/Badge";
+import DifficultyBadge from "../DifficultyBadge";
 import Link from "next/link";
 
 export default function RecommendedTopics({ topics = [] }) {

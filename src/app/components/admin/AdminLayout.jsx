@@ -1,42 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useBreadcrumbs } from "../../hooks/useBreadcrumbs";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-const pageTitles = {
-  "/admin": "Dashboard",
-  "/admin/questions": "Questions",
-  "/admin/chapters": "Chapters",
-  "/admin/study-notes": "Study Notes",
-  "/admin/mock-tests": "Mock Tests",
-  "/admin/students": "Students",
-  "/admin/teachers": "Teachers",
-  "/admin/analytics": "Analytics",
-  "/admin/settings": "Settings",
-};
-
 export default function AdminLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const pathname = usePathname();
-
-  const { breadcrumbs, pageTitle } = useMemo(() => {
-    const segments = pathname.split("/").filter(Boolean);
-    const crumbs = [];
-    let accumulated = "";
-
-    for (const segment of segments) {
-      accumulated += `/${segment}`;
-      const label = pageTitles[accumulated] || segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, " ");
-      crumbs.push({ label, href: accumulated === pathname ? undefined : accumulated });
-    }
-
-    return {
-      breadcrumbs: crumbs.slice(0, -1), // exclude current page from breadcrumbs
-      pageTitle: pageTitles[pathname] || "Dashboard",
-    };
-  }, [pathname]);
+  const { breadcrumbs, pageTitle } = useBreadcrumbs();
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">

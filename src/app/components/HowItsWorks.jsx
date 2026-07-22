@@ -1,4 +1,6 @@
 import SectionCard from "./SectionCard";
+import Container from "./ui/Container";
+import SectionTitle from "./ui/SectionTitle";
 
 const steps = [
   {
@@ -25,6 +27,7 @@ const steps = [
 
 export default function HowItsWorks() {
   return (
+<<<<<<< HEAD
     <section className="relative bg-gradient-to-b from-slate-50 to-white py-20 md:py-28" aria-labelledby="how-it-works-heading">
       <div className="relative mx-auto max-w-6xl px-6">
         <h2 id="how-it-works-heading" className="text-center text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
@@ -34,6 +37,16 @@ export default function HowItsWorks() {
         <p className="mt-4 text-center text-lg text-gray-500 max-w-xl mx-auto">
           Learn step by step with our AI-powered platform.
         </p>
+=======
+    <section className="bg-slate-100 py-24" aria-labelledby="how-it-works-heading">
+      <Container>
+        <SectionTitle
+          id="how-it-works-heading"
+          title="How It Works"
+          subtitle="Learn step by step with our AI-powered platform."
+          className="text-center"
+        />
+>>>>>>> 49ef4e8 (feat: improve Target95 UI, responsive design and admin module)
 
         {/* Connecting line decoration (hidden on mobile) */}
         <div className="hidden md:block absolute top-44 left-1/2 -translate-x-1/2 w-[60%] h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent" />
@@ -49,7 +62,7 @@ export default function HowItsWorks() {
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -4,9 +4,11 @@ import SectionLink from "./SectionLink";
 const links = [
   { href: "/", label: "Home", description: "Overview", icon: "🏠" },
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
+  { href: "/roadmap", label: "Roadmap", description: "Classes", icon: "🗺️" },
   { href: "/java", label: "Practice", description: "Chapters", icon: "📘" },
   { href: "/mock-test", label: "Mock Test", description: "Timed", icon: "📝" },
   { href: "/question-bank", label: "Questions", description: "Bank", icon: "📚" },
+  { href: "/analytics", label: "Analytics", description: "Stats", icon: "📈" },
   { href: "/study", label: "Study", description: "Resources", icon: "📖" },
   { href: "/teacher", label: "Teacher", description: "Dashboard", icon: "👨‍🏫" },
 ];

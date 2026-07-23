@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { collection, query, where, getDocs, addDoc, updateDoc, doc, serverTimestamp } from "firebase/firestore";
-import { db, ProgressService } from "@/lib/firestore/database";
-import { COLLECTIONS } from "@/lib/firestore/collections";
+import { serverTimestamp } from "firebase/firestore";
+import { ProgressService } from "@/lib/firestore/database";
+import useFirestore from "./useFirestore";
 
 const PROGRESS_STORAGE_KEY = "target95-completed-questions";
 const PROGRESS_UPDATED_EVENT = "target95-progress-updated";
@@ -50,10 +50,13 @@ function saveCompletedQuestions(completedQuestions) {
 export default function useProgress(userId = null) {
   const [completedQuestions, setCompletedQuestions] = useState([]);
   const [firestoreProgress, setFirestoreProgress] = useState([]);
-  const [loading, setLoading] = useState(false);
   const completedQuestionsRef = useRef([]);
+  const { loading, error, queryDocuments, addDocument, deleteDocument, subscribeToCollection } = useFirestore();
 
+<<<<<<< HEAD
   // Sync from localStorage
+=======
+>>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)
   const syncLocalProgress = useCallback(() => {
     const savedProgress = readCompletedQuestions();
     completedQuestionsRef.current = savedProgress;
@@ -62,26 +65,22 @@ export default function useProgress(userId = null) {
 
   // Fetch from Firestore if user is authenticated
   const fetchFirestoreProgress = useCallback(async () => {
-    if (!userId) return;
-    
+    if (!userId) {
+      syncLocalProgress();
+      return;
+    }
+
     try {
-      setLoading(true);
-      const q = query(
-        collection(db, COLLECTIONS.PROGRESS),
-        where("userId", "==", userId)
-      );
-      const snapshot = await getDocs(q);
-      const progress = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const progress = await queryDocuments("progress", [
+        { field: "userId", operator: "==", value: userId }
+      ]);
       setFirestoreProgress(progress);
     } catch (error) {
       console.error("Error fetching Firestore progress:", error);
-    } finally {
-      setLoading(false);
+      // Fallback to localStorage
+      syncLocalProgress();
     }
-  }, [userId]);
+  }, [userId, queryDocuments, syncLocalProgress]);
 
   // Update progress in Firestore
   const updateFirestoreProgress = useCallback(async (chapterId, updates) => {
@@ -174,8 +173,36 @@ export default function useProgress(userId = null) {
       fetchFirestoreProgress();
     }
   }, [syncLocalProgress, userId, fetchFirestoreProgress]);
+      completedQuestionsRef.current = firestoreProgress;
+      setCompletedQuestions(firestoreProgress);
+      // Also save to localStorage for offline access
+      saveCompletedQuestions(firestoreProgress);
+    } catch (err) {
+      console.error("Error fetching progress from Firestore:", err);
+      // Fallback to localStorage
+      syncLocalProgress();
+    }
+  }, [userId, queryDocuments, syncLocalProgress]);
+>>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)
 
   useEffect(() => {
+    // If we have a userId, set up realtime subscription
+    if (userId) {
+      try {
+        const unsubscribe = subscribeToCollection("progress", (data) => {
+          const userProgress = data.filter(item => item.userId === userId);
+          completedQuestionsRef.current = userProgress;
+          setCompletedQuestions(userProgress);
+          saveCompletedQuestions(userProgress);
+        });
+
+        return () => unsubscribe();
+      } catch (err) {
+        console.error("Error subscribing to progress:", err);
+      }
+    }
+
+    // Always set up localStorage sync
     const handleStorageChange = (event) => {
       if (event.key === PROGRESS_STORAGE_KEY) {
         syncLocalProgress();
@@ -191,7 +218,11 @@ export default function useProgress(userId = null) {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener(PROGRESS_UPDATED_EVENT, syncLocalProgress);
     };
+<<<<<<< HEAD
   }, [syncLocalProgress]);
+=======
+  }, [userId, subscribeToCollection, syncLocalProgress]);
+>>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)
 
   const isCompleted = useCallback(
     (question) =>
@@ -202,7 +233,7 @@ export default function useProgress(userId = null) {
     [completedQuestions]
   );
 
-  const markCompleted = useCallback((question) => {
+  const markCompleted = useCallback(async (question) => {
     const questionKey = getQuestionKey(question);
 
     if (
@@ -213,14 +244,53 @@ export default function useProgress(userId = null) {
       return;
     }
 
-    const nextProgress = [...completedQuestionsRef.current, question];
+    const newProgressItem = { ...question, userId, completedAt: new Date().toISOString() };
+    const nextProgress = [...completedQuestionsRef.current, newProgressItem];
+
+    // If we have userId, also add to Firestore
+    if (userId) {
+      try {
+        const savedItem = await addDocument("progress", newProgressItem);
+        // Update with Firestore ID
+        const updatedProgress = nextProgress.map(item => 
+          getQuestionKey(item) === questionKey ? { ...item, id: savedItem.id } : item
+        );
+        completedQuestionsRef.current = updatedProgress;
+        saveCompletedQuestions(updatedProgress);
+        setCompletedQuestions(updatedProgress);
+        return;
+      } catch (err) {
+        console.error("Error adding progress to Firestore:", err);
+        // Continue with local save
+      }
+    }
 
     completedQuestionsRef.current = nextProgress;
     saveCompletedQuestions(nextProgress);
     setCompletedQuestions(nextProgress);
-  }, []);
+  }, [userId, addDocument]);
 
-  const resetProgress = useCallback((chapter) => {
+  const resetProgress = useCallback(async (chapter) => {
+    // Get all progress items for this chapter to delete from Firestore
+    const chapterProgress = completedQuestionsRef.current.filter(
+      (completedQuestion) => completedQuestion.chapter === chapter
+    );
+    
+    // If we have userId, delete from Firestore
+    if (userId && chapterProgress.length > 0) {
+      try {
+        await Promise.all(
+          chapterProgress.map(async (item) => {
+            if (item.id) {
+              await deleteDocument("progress", item.id);
+            }
+          })
+        );
+      } catch (err) {
+        console.error("Error resetting progress in Firestore:", err);
+      }
+    }
+
     const nextProgress = completedQuestionsRef.current.filter(
       (completedQuestion) => completedQuestion.chapter !== chapter
     );
@@ -228,7 +298,7 @@ export default function useProgress(userId = null) {
     completedQuestionsRef.current = nextProgress;
     saveCompletedQuestions(nextProgress);
     setCompletedQuestions(nextProgress);
-  }, []);
+  }, [userId, deleteDocument]);
 
   const stats = getStats();
   const overallAccuracy = stats.totalQuestionsSolved > 0 
@@ -238,9 +308,12 @@ export default function useProgress(userId = null) {
   return {
     // localStorage functionality (backward compatible)
     completedQuestions,
+    loading,
+    error,
     isCompleted,
     markCompleted,
     resetProgress,
+<<<<<<< HEAD
     // Firestore functionality
     firestoreProgress,
     loading,
@@ -254,3 +327,8 @@ export default function useProgress(userId = null) {
 // Legacy export for backward compatibility
 export { useUserProgress } from "@/hooks/useProgress";
 export { useChapterProgress, updateProgress } from "@/hooks/useProgress";
+=======
+    fetchUserProgress
+  };
+}
+>>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)

@@ -1,18 +1,11 @@
-/**
- * ErrorState — Standardized error state component.
- */
+import { AlertTriangle } from "lucide-react";
 
-export default function ErrorState({
-  title = "Something went wrong",
-  message = "An unexpected error occurred. Please try again.",
-  action,
-}) {
+export default function ErrorState({ message }) {
   return (
-    <div className="rounded-3xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 p-12 text-center shadow-sm">
-      <p className="mb-4 text-4xl" aria-hidden="true">⚠️</p>
-      <h3 className="text-xl font-bold text-red-800 dark:text-red-300">{title}</h3>
-      <p className="mt-2 text-red-700 dark:text-red-400 max-w-md mx-auto">{message}</p>
-      {action && <div className="mt-6">{action}</div>}
+    <div className="flex flex-col items-center justify-center text-center py-12">
+      <AlertTriangle className="h-12 w-12 text-red-500 mb-4" />
+      <h3 className="text-xl font-semibold mb-2">An Error Occurred</h3>
+      <p className="text-gray-500">{message || "Something went wrong. Please try again later."}</p>
     </div>
   );
 }

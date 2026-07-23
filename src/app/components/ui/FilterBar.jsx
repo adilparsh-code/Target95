@@ -11,7 +11,7 @@ export default function FilterBar({ filters = [], className = "" }) {
       {filters.map((filter) => (
         <div key={filter.id} className="flex items-center gap-2">
           {filter.label && (
-            <label htmlFor={filter.id} className="text-sm font-semibold text-gray-700 whitespace-nowrap">
+            <label htmlFor={filter.id} className="text-sm font-semibold text-foreground whitespace-nowrap">
               {filter.label}
             </label>
           )}
@@ -19,7 +19,7 @@ export default function FilterBar({ filters = [], className = "" }) {
             id={filter.id}
             value={filter.value}
             onChange={(e) => filter.onChange(e.target.value)}
-            className="rounded-xl border border-gray-300 bg-white p-3 text-sm text-gray-900 outline-none focus:border-blue-600"
+            className="rounded-xl border border-border bg-card p-3 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
             aria-label={filter.label || filter.id}
           >
             {filter.options.map((opt) => (
@@ -41,7 +41,7 @@ export function SearchInput({ value, onChange, placeholder = "Search..." }) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full rounded-xl border border-gray-300 bg-white p-4 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+      className="w-full rounded-xl border border-border bg-card p-4 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
       aria-label={placeholder}
     />
   );

@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { roadmapClasses, getRoadmapStats } from "../../data/roadmapData";
-import { StatusBadge } from "../ui/Badge";
+import RoadmapStatusBadge from "./RoadmapStatusBadge";
 import ProgressRing from "../ui/ProgressRing";
 
 export default function RoadmapHome() {
@@ -61,11 +61,11 @@ export default function RoadmapHome() {
                 />
               </div>
               <div className="mt-4 flex items-center gap-3 text-sm">
-                <StatusBadge status="completed" />{" "}
+                <RoadmapStatusBadge status="completed" />{" "}
                 <span className="text-xs text-gray-500">{cls.stats.completed} chapters</span>
-                <StatusBadge status="active" />{" "}
+                <RoadmapStatusBadge status="active" />{" "}
                 <span className="text-xs text-gray-500">{cls.stats.active} chapter</span>
-                <StatusBadge status="locked" />{" "}
+                <RoadmapStatusBadge status="locked" />{" "}
                 <span className="text-xs text-gray-500">{cls.stats.locked} chapters</span>
               </div>
             </button>
@@ -158,7 +158,7 @@ export default function RoadmapHome() {
                       {chapter.status === "locked" && "🔒 "}
                       {chapter.title}
                     </h3>
-                    <StatusBadge status={chapter.status} size="sm" />
+                    <RoadmapStatusBadge status={chapter.status} size="sm" />
                   </div>
                 </div>
 

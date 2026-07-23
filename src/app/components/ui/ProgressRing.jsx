@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * ProgressRing — SVG circular progress indicator.
  * @param {number} progress - 0 to 100

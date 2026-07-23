@@ -32,7 +32,7 @@ export default function Tabs({
       <div
         className={`flex ${
           isHorizontal ? "flex-row overflow-x-auto" : "flex-col"
-        } gap-1 border-b border-gray-200 ${isHorizontal ? "" : ""}`}
+        } gap-1 border-b border-border`}
         role="tablist"
         aria-orientation={orientation}
       >
@@ -47,14 +47,14 @@ export default function Tabs({
               onClick={() => handleTabClick(tab.id)}
               className={`flex items-center gap-2 whitespace-nowrap px-4 py-3 text-sm font-semibold transition border-b-2 -mb-px ${
                 isActive
-                  ? "border-blue-600 text-blue-600"
-                  : "border-transparent text-gray-700 hover:text-gray-900 hover:border-gray-300"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"
               } ${tab.disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             >
-              {tab.icon && <span>{tab.icon}</span>}
+              {tab.icon && <span aria-hidden="true">{tab.icon}</span>}
               {tab.label}
               {tab.badge != null && (
-                <span className="rounded-full bg-gray-200 px-2 py-0.5 text-xs font-bold text-gray-700">
+                <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-bold text-muted-foreground">
                   {tab.badge}
                 </span>
               )}

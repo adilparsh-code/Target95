@@ -12,7 +12,7 @@
 function SkeletonLine({ width = "100%", className = "" }) {
   return (
     <div
-      className={`h-4 bg-gray-200 rounded animate-pulse ${className}`}
+      className={`h-4 bg-muted rounded animate-pulse ${className}`}
       style={{ width }}
       aria-hidden="true"
     />
@@ -25,7 +25,7 @@ function SkeletonLine({ width = "100%", className = "" }) {
 function SkeletonBlock({ width = "100%", height = "1rem", className = "" }) {
   return (
     <div
-      className={`bg-gray-200 rounded animate-pulse ${className}`}
+      className={`bg-muted rounded animate-pulse ${className}`}
       style={{ width, height }}
       aria-hidden="true"
     />
@@ -41,10 +41,10 @@ export function CardSkeleton({ rows = 1 }) {
   return (
     <div className="animate-pulse space-y-4">
       {Array.from({ length: rows }).map((_, i) => (
-        <div key={i} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="h-4 w-1/3 rounded bg-gray-200" />
-          <div className="mt-3 h-8 w-2/3 rounded bg-gray-200" />
-          <div className="mt-2 h-4 w-full rounded bg-gray-200" />
+        <div key={i} className="rounded-3xl border border-border bg-card p-6 shadow-sm">
+          <div className="h-4 w-1/3 rounded bg-muted" />
+          <div className="mt-3 h-8 w-2/3 rounded bg-muted" />
+          <div className="mt-2 h-4 w-full rounded bg-muted" />
         </div>
       ))}
     </div>
@@ -56,9 +56,9 @@ export function CardSkeleton({ rows = 1 }) {
  */
 export function StatsCardSkeleton() {
   return (
-    <div className="animate-pulse rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-      <div className="h-3 w-1/2 rounded bg-gray-200" />
-      <div className="mt-3 h-8 w-1/3 rounded bg-gray-200" />
+    <div className="animate-pulse rounded-2xl border border-border bg-card p-5 shadow-sm">
+      <div className="h-3 w-1/2 rounded bg-muted" />
+      <div className="mt-3 h-8 w-1/3 rounded bg-muted" />
     </div>
   );
 }
@@ -70,7 +70,7 @@ export function ListSkeleton({ rows = 3 }) {
   return (
     <div className="animate-pulse space-y-3">
       {Array.from({ length: rows }).map((_, i) => (
-        <div key={i} className="h-16 rounded-2xl bg-gray-100" />
+        <div key={i} className="h-16 rounded-2xl bg-muted" />
       ))}
     </div>
   );
@@ -83,7 +83,7 @@ export function CardGridSkeleton({ count = 6 }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" aria-label="Loading cards">
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+        <div key={i} className="bg-card rounded-xl border border-border p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <SkeletonBlock width="60px" height="0.75rem" />
             <SkeletonBlock width="70px" height="1.25rem" className="rounded-full" />
@@ -108,7 +108,7 @@ export function StatsGridSkeleton({ count = 4 }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Loading stats">
       {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
+        <div key={i} className="bg-card rounded-xl border border-border p-4 shadow-sm">
           <div className="flex items-center justify-between mb-3">
             <SkeletonBlock width="80px" height="1rem" />
             <SkeletonBlock width="2.5rem" height="2.5rem" className="rounded-lg" />
@@ -141,9 +141,9 @@ function TableRowSkeleton({ columns = 6 }) {
  */
 export function TableSkeleton({ rows = 5, columns = 6 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm" aria-label="Loading table">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+    <div className="overflow-x-auto rounded-xl border border-border bg-card shadow-sm" aria-label="Loading table">
+      <table className="min-w-full divide-y divide-border">
+        <thead className="bg-muted">
           <tr>
             {Array.from({ length: columns }).map((_, i) => (
               <th key={i} className="px-4 py-3">
@@ -152,7 +152,7 @@ export function TableSkeleton({ rows = 5, columns = 6 }) {
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-border">
           {Array.from({ length: rows }).map((_, i) => (
             <TableRowSkeleton key={i} columns={columns} />
           ))}

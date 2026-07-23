@@ -66,16 +66,16 @@ export default function Modal({
     >
       <div
         ref={dialogRef}
-        className={`w-full ${sizeClasses[size] || sizeClasses.md} rounded-3xl border border-gray-200 bg-white shadow-xl animate-fade-in`}
+        className={`w-full ${sizeClasses[size] || sizeClasses.md} rounded-3xl border border-border bg-card shadow-xl animate-fade-in`}
       >
         {title && (
-          <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
-            <h2 className="text-lg font-bold text-gray-900">{title}</h2>
+          <div className="flex items-center justify-between border-b border-border px-6 py-4">
+            <h2 className="text-lg font-bold text-foreground">{title}</h2>
             {showClose && onClose && (
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-full p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition"
+                className="rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition"
                 aria-label="Close modal"
               >
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

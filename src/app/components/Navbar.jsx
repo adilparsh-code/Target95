@@ -17,20 +17,12 @@ const links = [
 
 export default function Navbar() {
   return (
-<<<<<<< HEAD
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-        <Link href="/" className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300">
-          🎯 Target95+
-        </Link>
-=======
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
+    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <Container>
         <div className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-          <Link href="/" className="text-3xl font-bold text-blue-600">
+          <Link href="/" className="text-3xl font-bold text-primary">
             🎯 Target95+
           </Link>
->>>>>>> 49ef4e8 (feat: improve Target95 UI, responsive design and admin module)
 
           <div className="flex flex-wrap gap-3">
             {links.map((link) => (
@@ -40,15 +32,7 @@ export default function Navbar() {
 
           <Button>Login</Button>
         </div>
-<<<<<<< HEAD
-
-        <button className="rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-semibold text-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 hover:from-blue-700 hover:to-blue-800">
-          Login
-        </button>
-      </div>
-=======
       </Container>
->>>>>>> 49ef4e8 (feat: improve Target95 UI, responsive design and admin module)
     </nav>
   );
 }

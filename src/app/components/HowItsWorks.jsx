@@ -27,8 +27,8 @@ const steps = [
 
 export default function HowItsWorks() {
   return (
-    <section className="bg-muted py-24 relative" aria-labelledby="how-it-works-heading">
-      <Container>
+    <section className="relative bg-gradient-to-b from-slate-50 to-white py-20 md:py-28" aria-labelledby="how-it-works-heading">
+      <Container className="relative">
         <SectionTitle
           id="how-it-works-heading"
           title="How It Works"

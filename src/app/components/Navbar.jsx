@@ -17,10 +17,10 @@ const links = [
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
       <Container>
         <div className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-          <Link href="/" className="text-3xl font-bold text-primary">
+          <Link href="/" className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300">
             🎯 Target95+
           </Link>
 

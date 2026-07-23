@@ -6,8 +6,10 @@ import SectionTitle from "./ui/SectionTitle";
 
 export default function Subjects() {
   return (
-    <section className="bg-background py-24" aria-labelledby="subjects-heading">
-      <Container>
+    <section className="relative bg-white py-20 md:py-28" aria-labelledby="subjects-heading">
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 via-white to-white pointer-events-none" />
+
+      <Container className="relative">
         <SectionTitle
           id="subjects-heading"
           title="Explore Subjects"

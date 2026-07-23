@@ -5,11 +5,15 @@ import SectionTitle from "./ui/SectionTitle";
 
 export default function Features() {
   return (
-    <section className="bg-background py-20" aria-labelledby="features-heading">
-      <Container>
+    <section className="relative bg-white py-20 md:py-28" aria-labelledby="features-heading">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50/20 to-white pointer-events-none" />
+
+      <Container className="relative">
         <SectionTitle
           id="features-heading"
           title="Why Choose Target 95+"
+          subtitle="Everything you need to master ICSE & ISC Computer Science"
           className="text-center"
         />
 

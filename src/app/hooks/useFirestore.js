@@ -23,6 +23,11 @@ export default function useFirestore() {
 
   // Get all documents from a collection
   const getCollection = useCallback(async (collectionName) => {
+    // Return empty array if running on server or no db connection
+    if (!firestoreDb) {
+      return [];
+    }
+    
     setLoading(true);
     setError(null);
     try {
@@ -42,6 +47,11 @@ export default function useFirestore() {
 
   // Get a single document by ID
   const getDocument = useCallback(async (collectionName, docId) => {
+    // Return null if running on server or no db connection
+    if (!firestoreDb) {
+      return null;
+    }
+    
     setLoading(true);
     setError(null);
     try {
@@ -62,6 +72,11 @@ export default function useFirestore() {
 
   // Add a new document
   const addDocument = useCallback(async (collectionName, data) => {
+    // Return null if running on server or no db connection
+    if (!firestoreDb) {
+      return null;
+    }
+    
     setLoading(true);
     setError(null);
     try {
@@ -81,6 +96,11 @@ export default function useFirestore() {
 
   // Update an existing document
   const updateDocument = useCallback(async (collectionName, docId, data) => {
+    // Return null if running on server or no db connection
+    if (!firestoreDb) {
+      return null;
+    }
+    
     setLoading(true);
     setError(null);
     try {
@@ -100,6 +120,11 @@ export default function useFirestore() {
 
   // Delete a document
   const deleteDocument = useCallback(async (collectionName, docId) => {
+    // Return false if running on server or no db connection
+    if (!firestoreDb) {
+      return false;
+    }
+    
     setLoading(true);
     setError(null);
     try {
@@ -116,6 +141,11 @@ export default function useFirestore() {
 
   // Query documents with conditions
   const queryDocuments = useCallback(async (collectionName, conditions) => {
+    // Return empty array if running on server or no db connection
+    if (!firestoreDb) {
+      return [];
+    }
+    
     setLoading(true);
     setError(null);
     try {
@@ -142,6 +172,11 @@ export default function useFirestore() {
 
   // Subscribe to realtime updates
   const subscribeToCollection = useCallback((collectionName, callback) => {
+    // Return no-op unsubscribe if running on server or no db connection
+    if (!firestoreDb) {
+      return () => {};
+    }
+    
     try {
       const q = collection(firestoreDb, collectionName);
       const unsubscribe = onSnapshot(q, (querySnapshot) => {

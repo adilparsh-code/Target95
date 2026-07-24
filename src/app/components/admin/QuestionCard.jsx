@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@/app/components/ui/button";
+import Button from "@/app/components/ui/Button";
 import { Bookmark, Share2, ArrowRight, BrainCircuit } from "lucide-react";
 import DifficultyBadge from "@/app/components/DifficultyBadge";
 

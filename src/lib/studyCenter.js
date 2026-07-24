@@ -6,6 +6,11 @@ export const STUDY_PROGRESS_STORAGE_KEY = "target95-study-progress";
 const chapterStudyData = {
   introduction: {
     intro: "Java is a high-level, object-oriented language that focuses on portability, readability, and strong programming fundamentals.",
+    learningObjectives: [
+      "Understand the basic principles of object-oriented programming.",
+      "Learn about the Java Virtual Machine (JVM) and its role in platform independence.",
+      "Write, compile, and run a simple Java program.",
+    ],
     concepts: ["Object-oriented programming", "Platform independence", "Java Virtual Machine"],
     definitions: ["Class: a blueprint for objects", "Object: an instance of a class", "JVM: runs Java bytecode"],
     notes: ["Java programs are compiled into bytecode before execution.", "The language is known for its strong memory safety and reusable design."],

@@ -5,38 +5,86 @@ import { useRouter } from "next/navigation";
 import SectionTitle from "@/app/components/admin/SectionTitle";
 import AdminCard from "@/app/components/admin/AdminCard";
 import EmptyState from "@/app/components/admin/EmptyState";
-import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/admin/LoadingSkeleton";
+import SearchInput from "@/app/components/admin/SearchInput";
+import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
 import { studentStats, placeholderStudents } from "@/app/data/admin/mockStudents";
 import StudentCard from "@/app/components/admin/students/StudentCard";
 import StudentTable from "@/app/components/admin/students/StudentTable";
 import StudentToolbar from "@/app/components/admin/students/StudentToolbar";
 import DashboardCard from "@/app/components/admin/DashboardCard";
+import ConfirmDialog from "@/app/components/admin/ConfirmDialog";
 
 export default function AdminStudentsPage() {
   const router = useRouter();
+  const [students, setStudents] = useState(placeholderStudents);
   const [viewMode, setViewMode] = useState("grid");
   const [showFilters, setShowFilters] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({ class: "", grade: "", status: "", scoreRange: "" });
   const [isLoading, setIsLoading] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState(null);
 
-  const filteredStudents = useMemo(() => {
-    return placeholderStudents.filter((s) => {
-      if (filters.class && s.class !== filters.class) return false;
-      if (filters.grade && s.grade !== filters.grade) return false;
-      if (filters.status && s.status !== filters.status) return false;
-      if (filters.scoreRange) {
-        const [min, max] = filters.scoreRange.split("-").map(Number);
-        if (s.avgScore < min || s.avgScore > max) return false;
-      }
-      return true;
-    });
-  }, [filters]);
+  const filteredStudentsFinal = useMemo(() => {
+    let result = [...students];
+
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(
+        (s) =>
+          s.name.toLowerCase().includes(q) ||
+          s.email.toLowerCase().includes(q) ||
+          s.school.toLowerCase().includes(q) ||
+          s.city.toLowerCase().includes(q) ||
+          s.id.toLowerCase().includes(q)
+      );
+    }
+
+    if (filters.class) result = result.filter((s) => s.class === filters.class);
+    if (filters.grade) result = result.filter((s) => s.grade === filters.grade);
+    if (filters.status) result = result.filter((s) => s.status === filters.status);
+    if (filters.scoreRange) {
+      const [min, max] = filters.scoreRange.split("-").map(Number);
+      result = result.filter((s) => s.avgScore >= min && s.avgScore <= max);
+    }
+
+    return result;
+  }, [students, searchQuery, filters]);
 
   const handleViewProfile = (student) => {
     router.push(`/admin/students/${student.id}`);
   };
 
+  const handleToggleSuspend = (student) => {
+    const isActive = student.status === "active";
+    setConfirmDialog({
+      title: isActive ? "Suspend Student" : "Activate Student",
+      message: isActive
+        ? `Are you sure you want to suspend "${student.name}"? They will lose access to the platform until reactivated.`
+        : `Are you sure you want to activate "${student.name}"? They will regain access to the platform.`,
+      confirmLabel: isActive ? "Suspend" : "Activate",
+      variant: isActive ? "danger" : "primary",
+      onConfirm: () => {
+        setStudents((prev) =>
+          prev.map((s) =>
+            s.id === student.id
+              ? { ...s, status: isActive ? "inactive" : "active" }
+              : s
+          )
+        );
+        setConfirmDialog(null);
+      },
+    });
+  };
+
   const handleInviteStudent = () => console.log("Invite student");
+
+  // Stats derived from current student data
+  const stats = useMemo(() => ({
+    totalStudents: students.length,
+    activeStudents: students.filter((s) => s.status === "active").length,
+    totalQuestionsSolved: students.reduce((sum, s) => sum + s.questionsSolved, 0),
+    averageScore: Math.round(students.reduce((sum, s) => sum + s.avgScore, 0) / students.length),
+  }), [students]);
 
   if (isLoading) {
     return (
@@ -51,15 +99,28 @@ export default function AdminStudentsPage() {
     <div className="space-y-6">
       {/* Statistics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <DashboardCard title="Total Students" value={studentStats.totalStudents} icon="👨‍🎓" color="violet" />
-        <DashboardCard title="Active Students" value={studentStats.activeStudents} icon="✅" color="emerald" />
-        <DashboardCard title="Questions Solved" value={studentStats.totalQuestionsSolved} icon="❓" color="blue" />
-        <DashboardCard title="Average Score" value={`${studentStats.averageScore}%`} icon="📊" color="amber" />
+        <DashboardCard title="Total Students" value={stats.totalStudents} icon="👨‍🎓" color="violet" />
+        <DashboardCard title="Active Students" value={stats.activeStudents} icon="✅" color="emerald" />
+        <DashboardCard title="Questions Solved" value={stats.totalQuestionsSolved} icon="❓" color="blue" />
+        <DashboardCard title="Average Score" value={`${stats.averageScore}%`} icon="📊" color="amber" />
+      </div>
+
+      {/* Search */}
+      <div className="w-full sm:w-96">
+        <SearchInput
+          placeholder="Search students by name, email, school, or city..."
+          value={searchQuery}
+          onChange={(v) => setSearchQuery(v)}
+          onClear={() => setSearchQuery("")}
+        />
       </div>
 
       {/* Header */}
       <div className="flex items-center justify-between">
-        <SectionTitle title="Students" subtitle="Monitor student activity and progress" />
+        <SectionTitle
+          title="Students"
+          subtitle={`${filteredStudentsFinal.length} of ${students.length} students · ${stats.activeStudents} active`}
+        />
       </div>
 
       {/* Toolbar */}
@@ -67,6 +128,8 @@ export default function AdminStudentsPage() {
         onInviteStudent={handleInviteStudent}
         onToggleFilters={() => setShowFilters((prev) => !prev)}
         showFilters={showFilters}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
       />
 
       {/* Main content */}
@@ -137,12 +200,16 @@ export default function AdminStudentsPage() {
 
         {/* Students content */}
         <div className="flex-1 min-w-0">
-          {filteredStudents.length === 0 ? (
+          {filteredStudentsFinal.length === 0 ? (
             <AdminCard>
               <EmptyState
                 icon="👨‍🎓"
                 title="No students found"
-                description="Try adjusting your filters or invite new students."
+                description={
+                  searchQuery || Object.values(filters).some(Boolean)
+                    ? "Try adjusting your search or filters."
+                    : "No students have joined yet."
+                }
                 action={
                   <button onClick={handleInviteStudent} className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">+ Invite Student</button>
                 }
@@ -150,22 +217,58 @@ export default function AdminStudentsPage() {
             </AdminCard>
           ) : viewMode === "grid" ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {filteredStudents.map((student) => (
-                <StudentCard
-                  key={student.id}
-                  student={student}
-                  onViewProfile={handleViewProfile}
-                />
+              {filteredStudentsFinal.map((student) => (
+                <div key={student.id} className="relative group">
+                  <StudentCard
+                    student={student}
+                    onViewProfile={handleViewProfile}
+                  />
+                  {/* Suspend/Activate button */}
+                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button
+                      onClick={() => handleToggleSuspend(student)}
+                      className={`p-1.5 rounded-lg shadow-sm border text-xs font-medium transition-colors ${
+                        student.status === "active"
+                          ? "bg-white border-gray-200 text-red-600 hover:bg-red-50"
+                          : "bg-white border-gray-200 text-emerald-600 hover:bg-emerald-50"
+                      }`}
+                      title={student.status === "active" ? "Suspend student" : "Activate student"}
+                    >
+                      {student.status === "active" ? "🔒 Suspend" : "✅ Activate"}
+                    </button>
+                  </div>
+                </div>
               ))}
             </div>
           ) : (
             <StudentTable
-              students={filteredStudents}
+              students={filteredStudentsFinal}
               onViewProfile={handleViewProfile}
+              onToggleSuspend={handleToggleSuspend}
             />
+          )}
+
+          {/* Results summary */}
+          {filteredStudentsFinal.length > 0 && (
+            <p className="text-xs text-gray-400 text-center mt-4">
+              Showing {filteredStudentsFinal.length} of {students.length} students
+            </p>
           )}
         </div>
       </div>
+
+      {/* Confirm Dialog */}
+      {confirmDialog && (
+        <ConfirmDialog
+          isOpen={true}
+          onClose={() => setConfirmDialog(null)}
+          onConfirm={confirmDialog.onConfirm}
+          title={confirmDialog.title}
+          message={confirmDialog.message}
+          confirmLabel={confirmDialog.confirmLabel}
+          variant={confirmDialog.variant}
+        />
+      )}
     </div>
   );
 }

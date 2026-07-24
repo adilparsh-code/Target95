@@ -2,8 +2,8 @@
 import { mockQuestions } from "../../../data/mockQuestions";
 import AdminLayout from "../../../components/admin/AdminLayout";
 import { notFound } from "next/navigation";
-import DifficultyBadge from "../../../../components/DifficultyBadge";
-import { Button } from "@/app/components/ui/button";
+import DifficultyBadge from "@/app/components/DifficultyBadge";
+import Button from "@/app/components/ui/Button";
 import { Lightbulb, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 

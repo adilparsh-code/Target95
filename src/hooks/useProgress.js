@@ -77,7 +77,7 @@ export function useChapterProgress(userId, chapterId) {
   return { progress, loading, error, refresh: fetchProgress };
 }
 
-export async function updateProgress(progressId, updates) => {
+export const updateProgress = async (progressId, updates) => {
   try {
     if (progressId) {
       // Update existing progress document
@@ -100,7 +100,7 @@ export async function updateProgress(progressId, updates) => {
   }
 };
 
-export function recordQuestionAttempt = async (progressId, isCorrect) => {
+export const recordQuestionAttempt = async (progressId, isCorrect) => {
   try {
     const docRef = doc(db, COLLECTIONS.PROGRESS, progressId);
     

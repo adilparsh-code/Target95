@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import SectionTitle from "@/app/components/admin/SectionTitle";
 import AdminCard from "@/app/components/admin/AdminCard";
 import EmptyState from "@/app/components/admin/EmptyState";
-import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/admin/LoadingSkeleton";
+import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
 import { teacherStats, placeholderTeachers } from "@/app/data/admin/mockTeachers";
 import TeacherStats from "@/app/components/admin/teachers/TeacherStats";
 import TeacherCard from "@/app/components/admin/teachers/TeacherCard";

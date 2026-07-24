@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../contexts/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
@@ -13,19 +13,15 @@ import QuickActions from "@/components/dashboard/QuickActions";
 import ProgressOverview from "@/components/dashboard/ProgressOverview";
 import StatsCards from "@/components/dashboard/StatsCards";
 import UpcomingMockTests from "@/components/dashboard/UpcomingMockTests";
-import { useUserProgress } from "@/hooks/useProgress";
-import { getUpcomingMockTests } from "@/hooks/useMockTests";
-
-export const metadata = {
-  title: "Student Dashboard | Target95+",
-  description: "Track your progress, bookmarks, and next learning steps on Target95+.",
-};
+import useProgress from "@/hooks/useProgress";
+import useMockTests from "@/hooks/useMockTests";
 
 export default function DashboardPage() {
-  const { user } = useAuthContext();
+  const { user } = useAuth();
   const [lastChapter, setLastChapter] = useState(null);
   const [upcomingTests, setUpcomingTests] = useState([]);
-  const { progress, loading: progressLoading, stats } = useUserProgress(user?.uid);
+  const { firestoreProgress: progress, loading: progressLoading, stats } = useProgress(user?.uid);
+  const { fetchActiveMockTests } = useMockTests();
 
   // Calculate dashboard stats from Firestore data
   const dashboardStats = {
@@ -66,7 +62,7 @@ export default function DashboardPage() {
   useEffect(() => {
     const fetchTests = async () => {
       try {
-        const tests = await getUpcomingMockTests();
+        const tests = await fetchActiveMockTests();
         setUpcomingTests(tests);
       } catch (error) {
         console.error("Error fetching mock tests:", error);
@@ -74,7 +70,7 @@ export default function DashboardPage() {
       }
     };
     fetchTests();
-  }, []);
+  }, [fetchActiveMockTests]);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">

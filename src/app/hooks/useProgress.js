@@ -53,10 +53,7 @@ export default function useProgress(userId = null) {
   const completedQuestionsRef = useRef([]);
   const { loading, error, queryDocuments, addDocument, deleteDocument, subscribeToCollection } = useFirestore();
 
-<<<<<<< HEAD
   // Sync from localStorage
-=======
->>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)
   const syncLocalProgress = useCallback(() => {
     const savedProgress = readCompletedQuestions();
     completedQuestionsRef.current = savedProgress;
@@ -168,61 +165,41 @@ export default function useProgress(userId = null) {
   }, [firestoreProgress]);
 
   useEffect(() => {
-    syncLocalProgress();
-    if (userId) {
-      fetchFirestoreProgress();
-    }
-  }, [syncLocalProgress, userId, fetchFirestoreProgress]);
-      completedQuestionsRef.current = firestoreProgress;
-      setCompletedQuestions(firestoreProgress);
-      // Also save to localStorage for offline access
-      saveCompletedQuestions(firestoreProgress);
-    } catch (err) {
-      console.error("Error fetching progress from Firestore:", err);
-      // Fallback to localStorage
+    if (!userId) {
       syncLocalProgress();
+      return;
     }
-  }, [userId, queryDocuments, syncLocalProgress]);
->>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)
 
-  useEffect(() => {
-    // If we have a userId, set up realtime subscription
-    if (userId) {
+    const fetchAndSyncProgress = async () => {
       try {
-        const unsubscribe = subscribeToCollection("progress", (data) => {
-          const userProgress = data.filter(item => item.userId === userId);
-          completedQuestionsRef.current = userProgress;
-          setCompletedQuestions(userProgress);
-          saveCompletedQuestions(userProgress);
-        });
-
-        return () => unsubscribe();
+        const progress = await queryDocuments("progress", [
+          { field: "userId", operator: "==", value: userId },
+        ]);
+        completedQuestionsRef.current = progress;
+        setCompletedQuestions(progress);
+        saveCompletedQuestions(progress);
       } catch (err) {
-        console.error("Error subscribing to progress:", err);
-      }
-    }
-
-    // Always set up localStorage sync
-    const handleStorageChange = (event) => {
-      if (event.key === PROGRESS_STORAGE_KEY) {
+        console.error("Error fetching progress from Firestore:", err);
+        // Fallback to localStorage
         syncLocalProgress();
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener(PROGRESS_UPDATED_EVENT, syncLocalProgress);
-    const syncTimeout = window.setTimeout(syncLocalProgress, 0);
+    fetchAndSyncProgress();
+
+    const unsubscribe = subscribeToCollection("progress", (data) => {
+      const userProgress = data.filter((item) => item.userId === userId);
+      completedQuestionsRef.current = userProgress;
+      setCompletedQuestions(userProgress);
+      saveCompletedQuestions(userProgress);
+    });
 
     return () => {
-      window.clearTimeout(syncTimeout);
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener(PROGRESS_UPDATED_EVENT, syncLocalProgress);
+      if (unsubscribe) {
+        unsubscribe();
+      }
     };
-<<<<<<< HEAD
-  }, [syncLocalProgress]);
-=======
-  }, [userId, subscribeToCollection, syncLocalProgress]);
->>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)
+  }, [userId, queryDocuments, subscribeToCollection, syncLocalProgress]);
 
   const isCompleted = useCallback(
     (question) =>
@@ -306,29 +283,17 @@ export default function useProgress(userId = null) {
     : 0;
 
   return {
-    // localStorage functionality (backward compatible)
     completedQuestions,
     loading,
     error,
     isCompleted,
     markCompleted,
     resetProgress,
-<<<<<<< HEAD
-    // Firestore functionality
     firestoreProgress,
-    loading,
     updateFirestoreProgress,
     recordQuestionAttempt,
     refresh: fetchFirestoreProgress,
     stats: { ...stats, overallAccuracy },
+    fetchUserProgress: fetchFirestoreProgress, // Added for compatibility
   };
 }
-
-// Legacy export for backward compatibility
-export { useUserProgress } from "@/hooks/useProgress";
-export { useChapterProgress, updateProgress } from "@/hooks/useProgress";
-=======
-    fetchUserProgress
-  };
-}
->>>>>>> a6ca139 (Initial commit - Target95+ homepage and Java module)

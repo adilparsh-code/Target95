@@ -1,6 +1,6 @@
 "use client";
 
-import ProgressRing from "../ui/ProgressRing";
+import ProgressRing from "@/app/components/ui/ProgressRing";
 
 export default function ProgressOverview({ stats }) {
   if (!stats) {

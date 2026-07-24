@@ -2,12 +2,13 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { getStudyChapterBySlug } from "../../../lib/studyCenter";
+import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
 
 export default function StudyChapter({ slug }) {
-  const chapter = useMemo(() => getStudyChapterBySlug(slug), [slug]);
+  const chapters = useMemo(() => getStudyChapters(), []);
+  const chapter = useMemo(() => chapters.find(c => c.slug === slug), [chapters, slug]);
   const [search, setSearch] = useState("");
   const { progress, updateProgress } = useStudyProgress();
 
@@ -15,10 +16,15 @@ export default function StudyChapter({ slug }) {
     return null;
   }
 
+  const currentIndex = chapters.findIndex(c => c.slug === slug);
+  const prevChapter = currentIndex > 0 ? chapters[currentIndex - 1] : null;
+  const nextChapter = currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null;
+
   const status = progress[slug] ?? "Not Started";
   const studyData = chapter.studyData;
   const searchableContent = [
     studyData.intro,
+    ...(studyData.learningObjectives || []),
     ...studyData.concepts,
     ...studyData.definitions,
     ...studyData.notes,
@@ -38,6 +44,18 @@ export default function StudyChapter({ slug }) {
 
   return (
     <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8" aria-labelledby="study-chapter-heading">
+      <div className="flex justify-between items-center">
+        {prevChapter ? (
+          <Link href={`/study/${prevChapter.slug}`} className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400">
+            &larr; {prevChapter.title}
+          </Link>
+        ) : <div />}
+        {nextChapter ? (
+          <Link href={`/study/${nextChapter.slug}`} className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400">
+            {nextChapter.title} &rarr;
+          </Link>
+        ) : <div />}
+      </div>
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -64,6 +82,17 @@ export default function StudyChapter({ slug }) {
         </div>
       </div>
 
+      {studyData.learningObjectives && (
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">Learning Objectives</h2>
+          <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-700">
+            {studyData.learningObjectives.map((objective) => (
+              <li key={objective}>{objective}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
         <label className="text-sm font-semibold text-gray-900" htmlFor="chapter-search">
           <span className="mb-2 block">Search notes</span>
@@ -78,72 +107,71 @@ export default function StudyChapter({ slug }) {
         </label>
       </div>
 
+import { BeakerIcon, BookOpenIcon, LightBulbIcon, ListBulletIcon, SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import CollapsibleSection from "./CollapsibleSection";
+
+// ... (rest of the component)
+
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Key Concepts</h2>
-            <div className="mt-4 grid gap-3">
+          <CollapsibleSection title="Key Concepts" icon={BeakerIcon}>
+            <div className="grid gap-3">
               {studyData.concepts.map((concept) => (
                 <div key={concept} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">
                   {concept}
                 </div>
               ))}
             </div>
-          </div>
+          </CollapsibleSection>
 
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Important Definitions</h2>
-            <div className="mt-4 grid gap-3">
+          <CollapsibleSection title="Important Definitions" icon={BookOpenIcon}>
+            <div className="grid gap-3">
               {studyData.definitions.map((definition) => (
                 <div key={definition} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">
                   {definition}
                 </div>
               ))}
             </div>
-          </div>
+          </CollapsibleSection>
 
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Quick Revision</h2>
-            <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <CollapsibleSection title="Quick Revision" icon={ListBulletIcon}>
+            <div className="grid gap-3 md:grid-cols-2">
               {studyData.notes.map((note) => (
                 <div key={note} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">
                   {note}
                 </div>
               ))}
             </div>
-          </div>
+          </CollapsibleSection>
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Important Points</h2>
-            <div className="mt-4 space-y-3">
+          <CollapsibleSection title="Important Points" icon={LightBulbIcon}>
+            <div className="space-y-3">
               {studyData.mistakes.map((mistake) => (
                 <div key={mistake} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">
                   {mistake}
                 </div>
               ))}
             </div>
-          </div>
+          </CollapsibleSection>
 
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Exam Tips</h2>
-            <div className="mt-4 space-y-3">
+          <CollapsibleSection title="Exam Tips" icon={SparklesIcon}>
+            <div className="space-y-3">
               {studyData.tips.map((tip) => (
                 <div key={tip} className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-sm text-gray-700">
                   {tip}
                 </div>
               ))}
             </div>
-          </div>
+          </CollapsibleSection>
 
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-xl font-bold text-gray-900">Chapter Summary</h2>
+          <CollapsibleSection title="Chapter Summary" icon={CheckCircleIcon}>
             <p className="mt-4 text-sm leading-7 text-gray-700">{studyData.summary}</p>
             <Link href={`/java/${chapter.slug}`} className="mt-5 inline-flex rounded-xl border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-blue-400 hover:bg-blue-200">
               Practice This Chapter
             </Link>
-          </div>
+          </CollapsibleSection>
         </div>
       </div>
 

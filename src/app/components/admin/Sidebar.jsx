@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: "📊" },
   { label: "Questions", href: "/admin/questions", icon: "❓" },
+  { label: "Subjects", href: "/admin/subjects", icon: "📚" },
   { label: "AI Generator", href: "/admin/ai-generator", icon: "🤖" },
   { label: "Generated Questions", href: "/admin/generated-questions", icon: "📝" },
   { label: "Chapters", href: "/admin/chapters", icon: "📚" },

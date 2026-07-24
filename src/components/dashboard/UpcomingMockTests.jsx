@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock, AlertCircle } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "@/app/components/ui/Button";
 
 const upcomingTests = [
   {

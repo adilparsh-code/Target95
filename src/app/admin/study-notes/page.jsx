@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import SectionTitle from "@/app/components/admin/SectionTitle";
 import AdminCard from "@/app/components/admin/AdminCard";
 import EmptyState from "@/app/components/admin/EmptyState";
-import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/admin/LoadingSkeleton";
+import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
 import { notesStats, placeholderNotes } from "@/app/data/admin/mockStudyNotes";
 import NotesStats from "@/app/components/admin/study-notes/NotesStats";
 import NotesToolbar from "@/app/components/admin/study-notes/NotesToolbar";

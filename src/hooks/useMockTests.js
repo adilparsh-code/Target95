@@ -24,7 +24,7 @@ export function useUserMockTests(userId) {
   return { results: data, loading, error, refresh };
 }
 
-export function getUpcomingMockTests = async () => {
+export const getUpcomingMockTests = async () => {
   try {
     const now = new Date();
     const q = query(
@@ -45,7 +45,7 @@ export function getUpcomingMockTests = async () => {
   }
 };
 
-export function submitMockTestResult = async (resultData) => {
+export const submitMockTestResult = async (resultData) => {
   try {
     const result = await ResultService.create({
       ...resultData,

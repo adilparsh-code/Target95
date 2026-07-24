@@ -66,3 +66,5 @@ export const questions = [
     estimated_time: 15,
   },
 ];
+
+export default questions;

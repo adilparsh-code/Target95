@@ -8,7 +8,7 @@ import StatusBadge from "@/app/components/admin/StatusBadge";
 import SearchInput from "@/app/components/admin/SearchInput";
 import EmptyState from "@/app/components/admin/EmptyState";
 import ChapterCard from "@/app/components/admin/ChapterCard";
-import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/admin/LoadingSkeleton";
+import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
 
 const placeholderChapters = [
   { id: 1, title: "Chapter 1 — Fundamentals", questions: 48, completedQuestions: 42, theoryCount: 20, mcqCount: 28, codingCount: 0, topics: ["Data Types", "Variables", "Classes"], status: "published", lastUpdated: "2026-07-15" },

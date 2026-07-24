@@ -1,7 +1,7 @@
 "use client";
 
 import { PlayCircle } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "@/app/components/ui/Button";
 
 export default function ContinueLearning({ lastChapter, isLoading }) {
   if (isLoading) {

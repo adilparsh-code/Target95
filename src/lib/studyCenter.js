@@ -18,6 +18,17 @@ const chapterStudyData = {
     mistakes: ["Confusing Java with JavaScript", "Forgetting that Java is case-sensitive"],
     tips: ["Practice the language syntax daily", "Focus on core concepts before moving to advanced topics"],
     summary: "Build a strong base in Java fundamentals before attempting more advanced chapters.",
+    prerequisites: [],
+    examples: [
+      {
+        title: "Hello World",
+        code: `public class HelloWorld {
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+  }
+}`,
+      },
+    ],
   },
   "variables-data-types": {
     intro: "Variables store data, while data types define the kind of values that can be stored.",
@@ -28,6 +39,7 @@ const chapterStudyData = {
     mistakes: ["Using the wrong data type for a value", "Forgetting that Java is strongly typed"],
     tips: ["Practice converting values between types", "Remember integer division behavior"],
     summary: "Use the right variable type to keep code reliable and easy to read.",
+    prerequisites: ["introduction"],
   },
   operators: {
     intro: "Operators help you manipulate values and make decisions in programs.",
@@ -38,6 +50,7 @@ const chapterStudyData = {
     mistakes: ["Mixing assignment and equality", "Ignoring operator precedence"],
     tips: ["Practice short expressions by hand", "Test compound conditions step by step"],
     summary: "Understanding operator behavior makes condition and loop logic easier.",
+    prerequisites: ["variables-data-types"],
   },
   "if-else": {
     intro: "Conditional statements let the program choose what to do based on logical conditions.",
@@ -48,6 +61,7 @@ const chapterStudyData = {
     mistakes: ["Using assignment instead of comparison", "Missing braces in nested conditions"],
     tips: ["Trace condition values manually before coding", "Keep branches simple and readable"],
     summary: "Good conditional logic is essential for writing dependable programs.",
+    prerequisites: ["operators"],
   },
   loops: {
     intro: "Loops repeat a block of code until a stopping condition is reached.",
@@ -58,6 +72,7 @@ const chapterStudyData = {
     mistakes: ["Forgetting to update the loop control variable", "Using the wrong loop for the situation"],
     tips: ["Dry-run loops with a small example", "Choose the loop that clearly matches the task"],
     summary: "Loops are powerful when you understand how they terminate.",
+    prerequisites: ["if-else"],
   },
   methods: {
     intro: "Methods make code reusable and easier to manage.",
@@ -68,6 +83,7 @@ const chapterStudyData = {
     mistakes: ["Writing methods that do too much", "Ignoring the return type"],
     tips: ["Name methods clearly", "Break large tasks into smaller units"],
     summary: "Use methods to keep code organized and manageable.",
+    prerequisites: ["loops"],
   },
   arrays: {
     intro: "Arrays store multiple values in one container.",
@@ -78,6 +94,7 @@ const chapterStudyData = {
     mistakes: ["Using an invalid index", "Forgetting array length"],
     tips: ["Practice loops that traverse arrays", "Double-check index boundaries"],
     summary: "Arrays are a core data structure in Java programming.",
+    prerequisites: ["methods"],
   },
   strings: {
     intro: "Strings represent text in Java and are commonly used in programs.",
@@ -88,6 +105,7 @@ const chapterStudyData = {
     mistakes: ["Confusing string values with character values", "Forgetting string immutability"],
     tips: ["Practice common string methods", "Test edge cases such as empty strings"],
     summary: "Good string handling improves both correctness and readability.",
+    prerequisites: ["arrays"],
   },
   constructor: {
     intro: "Constructors initialize objects when they are created.",
@@ -98,6 +116,7 @@ const chapterStudyData = {
     mistakes: ["Returning a value from a constructor", "Forgetting to initialize required fields"],
     tips: ["Compare constructors with methods carefully", "Practice object initialization with examples"],
     summary: "Constructors are a practical tool for creating well-formed objects.",
+    prerequisites: ["strings"],
   },
 };
 
@@ -108,12 +127,22 @@ export function getStudyChapters() {
     const mediumCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "medium").length;
     const hardCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "hard").length;
 
+    let difficulty;
+    if (hardCount > easyCount && hardCount > mediumCount) {
+      difficulty = "Hard";
+    } else if (mediumCount > easyCount) {
+      difficulty = "Medium";
+    } else {
+      difficulty = "Easy";
+    }
+
     return {
       ...chapter,
       totalQuestions: chapterQuestions.length,
       easyCount,
       mediumCount,
       hardCount,
+      difficulty,
       estimatedStudyTime: `${Math.max(10, chapterQuestions.length * 2)} min`,
       studyData: chapterStudyData[chapter.slug] ?? {
         intro: `Learn the core ideas for ${chapter.title}.`,

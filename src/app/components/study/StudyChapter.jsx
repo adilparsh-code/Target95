@@ -60,8 +60,12 @@ export default function StudyChapter({ slug }) {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Study Chapter</p>
-            <h1 id="study-chapter-heading" className="mt-3 text-3xl font-bold text-gray-900">{chapter.title}</h1>
+            <div className="flex items-center gap-4">
+              <h1 id="study-chapter-heading" className="mt-3 text-3xl font-bold text-gray-900">{chapter.title}</h1>
+              <span className="mt-3 inline-block rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-gray-900">{chapter.difficulty}</span>
+            </div>
             <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">{studyData.intro}</p>
+            <p className="mt-2 text-sm text-gray-600">Estimated study time: {chapter.estimatedStudyTime}</p>
           </div>
           <div className="rounded-2xl border border-gray-200 bg-slate-50 p-4">
             <p className="text-sm font-semibold text-gray-700">Study Status</p>
@@ -90,6 +94,22 @@ export default function StudyChapter({ slug }) {
               <li key={objective}>{objective}</li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {studyData.prerequisites && studyData.prerequisites.length > 0 && (
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-bold text-gray-900">Prerequisites</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {studyData.prerequisites.map((prereq) => {
+              const prereqChapter = chapters.find(c => c.slug === prereq);
+              return prereqChapter ? (
+                <Link key={prereq} href={`/study/${prereq}`} className="rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-800 transition hover:bg-gray-200">
+                  {prereqChapter.title}
+                </Link>
+              ) : null;
+            })}
+          </div>
         </div>
       )}
 
@@ -146,7 +166,7 @@ import CollapsibleSection from "./CollapsibleSection";
         </div>
 
         <div className="space-y-6">
-          <CollapsibleSection title="Important Points" icon={LightBulbIcon}>
+          <CollapsibleSection title="Common Mistakes" icon={LightBulbIcon}>
             <div className="space-y-3">
               {studyData.mistakes.map((mistake) => (
                 <div key={mistake} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">

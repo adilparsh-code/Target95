@@ -1,20 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 
-import { BeakerIcon, BookOpenIcon, LightBulbIcon, ListBulletIcon, SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import { BeakerIcon, BookOpenIcon, LightBulbIcon, ListBulletIcon, SparklesIcon, CheckCircleIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import CollapsibleSection from "./CollapsibleSection";
 import NoteCard from "./NoteCard";
 import TipCard from "./TipCard";
 import WarningCard from "./WarningCard";
 import ExampleCard from "./ExampleCard";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function StudyChapter({ slug }) {
+  const [isLoading, setIsLoading] = useState(true);
   const chapters = useMemo(() => getStudyChapters(), []);
   const chapter = useMemo(() => chapters.find(c => c.slug === slug), [chapters, slug]);
   const [search, setSearch] = useState("");
@@ -24,11 +26,26 @@ export default function StudyChapter({ slug }) {
   useEffect(() => {
     if (slug) {
       addRecentlyViewed(slug);
+      setIsLoading(false);
     }
   }, [slug, addRecentlyViewed]);
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   if (!chapter) {
-    return null;
+    return (
+      <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm sm:p-8">
+          <h1 className="text-3xl font-bold text-gray-900">Chapter Not Found</h1>
+          <p className="mt-3 text-base leading-7 text-gray-700">The chapter you are looking for does not exist.</p>
+          <Link href="/study" className="mt-6 inline-block rounded-xl border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-blue-400 hover:bg-blue-200">
+            Back to Study Center
+          </Link>
+        </div>
+      </section>
+    );
   }
 
   const currentIndex = chapters.findIndex(c => c.slug === slug);

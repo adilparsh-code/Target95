@@ -5,12 +5,33 @@ import { useMemo, useState } from "react";
 import { getStudyChapters } from "../../../lib/studyCenter";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function StudyHome() {
-  const chapters = useMemo(() => getStudyChapters(), []);
+  const [isLoading, setIsLoading] = useState(true);
+  const chapters = useMemo(() => {
+    const studyChapters = getStudyChapters();
+    setIsLoading(false);
+    return studyChapters;
+  }, []);
   const [search, setSearch] = useState("");
   const { progress } = useStudyProgress();
   const { recentlyViewed } = useRecentlyViewed();
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (chapters.length === 0) {
+    return (
+      <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 text-center shadow-sm sm:p-8">
+          <h1 className="text-3xl font-bold text-gray-900">No Chapters Available</h1>
+          <p className="mt-3 text-base leading-7 text-gray-700">There are currently no study chapters available. Please check back later.</p>
+        </div>
+      </section>
+    );
+  }
 
   const continueLearningChapter = useMemo(() => {
     const studying = chapters.find((c) => progress[c.slug] === "Studying");
@@ -41,13 +62,13 @@ export default function StudyHome() {
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8" aria-labelledby="study-home-heading">
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Study Center</p>
-        <h1 id="study-home-heading" className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Learn before you practice</h1>
+        <h1 id="study-home-heading" className="mt-3 text-2xl font-bold text-gray-900 sm:text-4xl">Learn before you practice</h1>
         <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">
           Explore chapter notes, key concepts, and revision points before attempting practice questions.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {continueLearningChapter && (
           <div className="rounded-3xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
             <h2 className="text-xl font-bold text-gray-900">Continue Learning</h2>
@@ -93,7 +114,7 @@ export default function StudyHome() {
         </label>
       </div>
 
-      <div className="grid gap-5 lg:grid-cols-2" role="list" aria-label="Study chapters">
+      <div className="grid gap-5 md:grid-cols-2" role="list" aria-label="Study chapters">
         {filteredChapters.map((chapter) => {
           const status = progress[chapter.slug] ?? "Not Started";
           const percentComplete = status === "Completed" ? 100 : status === "Studying" ? 60 : 0;

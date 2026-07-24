@@ -7,6 +7,8 @@ const pageTitles = {
   "/admin": "Dashboard",
   "/admin/questions": "Questions",
   "/admin/questions/new": "New Question",
+  "/admin/ai-generator": "AI Question Generator",
+  "/admin/generated-questions": "Generated Questions",
   "/admin/chapters": "Chapters",
   "/admin/study-notes": "Study Notes",
   "/admin/study-notes/new": "New Study Note",

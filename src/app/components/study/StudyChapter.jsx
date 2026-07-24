@@ -5,12 +5,27 @@ import Link from "next/link";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
+import useRecentlyViewed from "../../hooks/useRecentlyViewed";
+
+import { BeakerIcon, BookOpenIcon, LightBulbIcon, ListBulletIcon, SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
+import CollapsibleSection from "./CollapsibleSection";
+import NoteCard from "./NoteCard";
+import TipCard from "./TipCard";
+import WarningCard from "./WarningCard";
+import ExampleCard from "./ExampleCard";
 
 export default function StudyChapter({ slug }) {
   const chapters = useMemo(() => getStudyChapters(), []);
   const chapter = useMemo(() => chapters.find(c => c.slug === slug), [chapters, slug]);
   const [search, setSearch] = useState("");
   const { progress, updateProgress } = useStudyProgress();
+  const { addRecentlyViewed } = useRecentlyViewed();
+
+  useEffect(() => {
+    if (slug) {
+      addRecentlyViewed(slug);
+    }
+  }, [slug, addRecentlyViewed]);
 
   if (!chapter) {
     return null;
@@ -22,7 +37,7 @@ export default function StudyChapter({ slug }) {
 
   const status = progress[slug] ?? "Not Started";
   const studyData = chapter.studyData;
-  const searchableContent = [
+  const searchableContent = useMemo(() => [
     studyData.intro,
     ...(studyData.learningObjectives || []),
     ...studyData.concepts,
@@ -33,7 +48,7 @@ export default function StudyChapter({ slug }) {
     studyData.summary,
   ]
     .join(" ")
-    .toLowerCase();
+    .toLowerCase(), [studyData]);
 
   const safeSearch = sanitizeText(search).toLowerCase();
   const filteredNotes = safeSearch
@@ -77,6 +92,7 @@ export default function StudyChapter({ slug }) {
                   type="button"
                   onClick={() => updateProgress(slug, option)}
                   className={`rounded-full px-3 py-1 text-sm font-semibold transition ${status === option ? "bg-blue-100 text-gray-900" : "bg-white text-gray-700"}`}
+                  aria-label={`Set status to ${option}`}
                 >
                   {option}
                 </button>
@@ -113,24 +129,24 @@ export default function StudyChapter({ slug }) {
         </div>
       )}
 
-      <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="relative rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
         <label className="text-sm font-semibold text-gray-900" htmlFor="chapter-search">
           <span className="mb-2 block">Search notes</span>
-          <input
-            id="chapter-search"
-            type="text"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            className="w-full rounded-xl border border-gray-300 bg-white p-4 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-            placeholder="Search within notes"
-          />
+          <div className="relative">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </div>
+            <input
+              id="chapter-search"
+              type="text"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              className="w-full rounded-xl border border-gray-300 bg-white p-4 pl-11 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+              placeholder="Search within notes"
+            />
+          </div>
         </label>
       </div>
-
-import { BeakerIcon, BookOpenIcon, LightBulbIcon, ListBulletIcon, SparklesIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
-import CollapsibleSection from "./CollapsibleSection";
-
-// ... (rest of the component)
 
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
@@ -157,9 +173,7 @@ import CollapsibleSection from "./CollapsibleSection";
           <CollapsibleSection title="Quick Revision" icon={ListBulletIcon}>
             <div className="grid gap-3 md:grid-cols-2">
               {studyData.notes.map((note) => (
-                <div key={note} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">
-                  {note}
-                </div>
+                <NoteCard key={note}>{note}</NoteCard>
               ))}
             </div>
           </CollapsibleSection>
@@ -169,9 +183,7 @@ import CollapsibleSection from "./CollapsibleSection";
           <CollapsibleSection title="Common Mistakes" icon={LightBulbIcon}>
             <div className="space-y-3">
               {studyData.mistakes.map((mistake) => (
-                <div key={mistake} className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700">
-                  {mistake}
-                </div>
+                <WarningCard key={mistake}>{mistake}</WarningCard>
               ))}
             </div>
           </CollapsibleSection>
@@ -179,12 +191,22 @@ import CollapsibleSection from "./CollapsibleSection";
           <CollapsibleSection title="Exam Tips" icon={SparklesIcon}>
             <div className="space-y-3">
               {studyData.tips.map((tip) => (
-                <div key={tip} className="rounded-2xl border border-blue-200 bg-blue-50 p-4 text-sm text-gray-700">
-                  {tip}
-                </div>
+                <TipCard key={tip}>{tip}</TipCard>
               ))}
             </div>
           </CollapsibleSection>
+
+          {studyData.examples && (
+            <CollapsibleSection title="Examples" icon={BeakerIcon}>
+              <div className="space-y-3">
+                {studyData.examples.map((example) => (
+                  <ExampleCard key={example.title} title={example.title}>
+                    {example.code}
+                  </ExampleCard>
+                ))}
+              </div>
+            </CollapsibleSection>
+          )}
 
           <CollapsibleSection title="Chapter Summary" icon={CheckCircleIcon}>
             <p className="mt-4 text-sm leading-7 text-gray-700">{studyData.summary}</p>

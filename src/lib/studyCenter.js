@@ -40,6 +40,14 @@ const chapterStudyData = {
     tips: ["Practice converting values between types", "Remember integer division behavior"],
     summary: "Use the right variable type to keep code reliable and easy to read.",
     prerequisites: ["introduction"],
+    examples: [
+      {
+        title: "Declaring Variables",
+        code: `int age = 25;
+String name = "John";
+boolean isStudent = true;`,
+      },
+    ],
   },
   operators: {
     intro: "Operators help you manipulate values and make decisions in programs.",
@@ -51,6 +59,16 @@ const chapterStudyData = {
     tips: ["Practice short expressions by hand", "Test compound conditions step by step"],
     summary: "Understanding operator behavior makes condition and loop logic easier.",
     prerequisites: ["variables-data-types"],
+    examples: [
+      {
+        title: "Arithmetic Operators",
+        code: `int sum = 5 + 3; // 8
+int difference = 5 - 3; // 2
+int product = 5 * 3; // 15
+int quotient = 5 / 3; // 1
+int remainder = 5 % 3; // 2`,
+      },
+    ],
   },
   "if-else": {
     intro: "Conditional statements let the program choose what to do based on logical conditions.",
@@ -62,6 +80,19 @@ const chapterStudyData = {
     tips: ["Trace condition values manually before coding", "Keep branches simple and readable"],
     summary: "Good conditional logic is essential for writing dependable programs.",
     prerequisites: ["operators"],
+    examples: [
+      {
+        title: "If-Else Statement",
+        code: `int score = 85;
+if (score >= 90) {
+  System.out.println("A");
+} else if (score >= 80) {
+  System.out.println("B");
+} else {
+  System.out.println("C");
+}`,
+      },
+    ],
   },
   loops: {
     intro: "Loops repeat a block of code until a stopping condition is reached.",
@@ -73,6 +104,22 @@ const chapterStudyData = {
     tips: ["Dry-run loops with a small example", "Choose the loop that clearly matches the task"],
     summary: "Loops are powerful when you understand how they terminate.",
     prerequisites: ["if-else"],
+    examples: [
+      {
+        title: "For Loop",
+        code: `for (int i = 0; i < 5; i++) {
+  System.out.println(i);
+}`,
+      },
+      {
+        title: "While Loop",
+        code: `int i = 0;
+while (i < 5) {
+  System.out.println(i);
+  i++;
+}`,
+      },
+    ],
   },
   methods: {
     intro: "Methods make code reusable and easier to manage.",
@@ -84,6 +131,14 @@ const chapterStudyData = {
     tips: ["Name methods clearly", "Break large tasks into smaller units"],
     summary: "Use methods to keep code organized and manageable.",
     prerequisites: ["loops"],
+    examples: [
+      {
+        title: "Method Definition",
+        code: `public int add(int a, int b) {
+  return a + b;
+}`,
+      },
+    ],
   },
   arrays: {
     intro: "Arrays store multiple values in one container.",
@@ -95,6 +150,14 @@ const chapterStudyData = {
     tips: ["Practice loops that traverse arrays", "Double-check index boundaries"],
     summary: "Arrays are a core data structure in Java programming.",
     prerequisites: ["methods"],
+    examples: [
+      {
+        title: "Array Declaration",
+        code: `int[] numbers = new int[5];
+numbers[0] = 10;
+numbers[1] = 20;`,
+      },
+    ],
   },
   strings: {
     intro: "Strings represent text in Java and are commonly used in programs.",
@@ -106,6 +169,14 @@ const chapterStudyData = {
     tips: ["Practice common string methods", "Test edge cases such as empty strings"],
     summary: "Good string handling improves both correctness and readability.",
     prerequisites: ["arrays"],
+    examples: [
+      {
+        title: "String Concatenation",
+        code: `String firstName = "John";
+String lastName = "Doe";
+String fullName = firstName + " " + lastName;`,
+      },
+    ],
   },
   constructor: {
     intro: "Constructors initialize objects when they are created.",
@@ -117,6 +188,18 @@ const chapterStudyData = {
     tips: ["Compare constructors with methods carefully", "Practice object initialization with examples"],
     summary: "Constructors are a practical tool for creating well-formed objects.",
     prerequisites: ["strings"],
+    examples: [
+      {
+        title: "Constructor Definition",
+        code: `public class Dog {
+  String name;
+
+  public Dog(String name) {
+    this.name = name;
+  }
+}`,
+      },
+    ],
   },
 };
 

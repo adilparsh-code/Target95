@@ -4,11 +4,24 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { getStudyChapters } from "../../../lib/studyCenter";
 import useStudyProgress from "../../hooks/useStudyProgress";
+import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 
 export default function StudyHome() {
   const chapters = useMemo(() => getStudyChapters(), []);
   const [search, setSearch] = useState("");
   const { progress } = useStudyProgress();
+  const { recentlyViewed } = useRecentlyViewed();
+
+  const continueLearningChapter = useMemo(() => {
+    const studying = chapters.find((c) => progress[c.slug] === "Studying");
+    if (studying) return studying;
+    const notStarted = chapters.find((c) => !progress[c.slug] || progress[c.slug] === "Not Started");
+    return notStarted;
+  }, [chapters, progress]);
+
+  const recentlyViewedChapters = useMemo(() => {
+    return recentlyViewed.map((slug) => chapters.find((c) => c.slug === slug)).filter(Boolean);
+  }, [recentlyViewed, chapters]);
 
   const filteredChapters = chapters.filter((chapter) => {
     const query = search.trim().toLowerCase();
@@ -34,6 +47,38 @@ export default function StudyHome() {
         </p>
       </div>
 
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {continueLearningChapter && (
+          <div className="rounded-3xl border border-blue-200 bg-blue-50 p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-gray-900">Continue Learning</h2>
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold text-gray-900">{continueLearningChapter.title}</h3>
+              <p className="mt-1 text-sm text-gray-700">{continueLearningChapter.studyData.intro}</p>
+              <Link
+                href={`/study/${continueLearningChapter.slug}`}
+                className="mt-4 inline-block rounded-xl border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-blue-400 hover:bg-blue-200"
+              >
+                Jump Back In
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {recentlyViewedChapters.length > 0 && (
+          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-gray-900">Recently Viewed</h2>
+            <div className="mt-4 space-y-3">
+              {recentlyViewedChapters.map((chapter) => (
+                <Link key={chapter.slug} href={`/study/${chapter.slug}`} className="block rounded-lg p-2 hover:bg-gray-100">
+                  <h3 className="text-lg font-semibold text-gray-900">{chapter.title}</h3>
+                  <p className="text-sm text-gray-700">{chapter.difficulty}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
         <label className="text-sm font-semibold text-gray-900" htmlFor="study-search">
           <span className="mb-2 block">Search notes</span>
@@ -54,10 +99,10 @@ export default function StudyHome() {
           const percentComplete = status === "Completed" ? 100 : status === "Studying" ? 60 : 0;
 
           return (
-            <article key={chapter.slug} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" role="listitem">
+            <article key={chapter.slug} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" role="listitem" aria-labelledby={`${chapter.slug}-heading`}>
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">{chapter.title}</h2>
+                  <h2 id={`${chapter.slug}-heading`} className="text-xl font-bold text-gray-900">{chapter.title}</h2>
                   <p className="mt-2 text-sm text-gray-700">{chapter.difficulty}</p>
                 </div>
                 <span className="rounded-full border border-gray-200 bg-slate-50 px-3 py-1 text-sm font-semibold text-gray-700">
@@ -65,7 +110,7 @@ export default function StudyHome() {
                 </span>
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-gray-200 bg-slate-50 p-3">
                   <p className="text-sm text-gray-700">Questions</p>
                   <p className="mt-1 text-lg font-bold text-gray-900">{chapter.totalQuestions}</p>
@@ -95,7 +140,7 @@ export default function StudyHome() {
                   href={`/study/${chapter.slug}`}
                   className="rounded-xl border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-blue-400 hover:bg-blue-200"
                 >
-                  Continue Studying
+                  {status === "Not Started" ? "Start Studying" : "Continue Studying"}
                 </Link>
                 <Link
                   href={`/java/${chapter.slug}`}

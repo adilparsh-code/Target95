@@ -18,7 +18,6 @@ import LearningContentEngine from "../learning/LearningContentEngine";
 import { getLearningTopic, learningTopics } from "../../../lib/learningContent";
 
 export default function StudyChapter({ slug }) {
-  const [isLoading, setIsLoading] = useState(true);
   const chapters = useMemo(() => getStudyChapters(), []);
   const chapter = useMemo(() => chapters.find(c => c.slug === slug), [chapters, slug]);
   const [search, setSearch] = useState("");
@@ -28,13 +27,8 @@ export default function StudyChapter({ slug }) {
   useEffect(() => {
     if (slug) {
       addRecentlyViewed(slug);
-      setIsLoading(false);
     }
   }, [slug, addRecentlyViewed]);
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
 
   if (!chapter) {
     return (

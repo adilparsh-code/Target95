@@ -9,7 +9,7 @@ export default function WelcomeCard({ user, stats }) {
             Good to see you, {user?.name?.split(" ")[0] || "Student"}!
           </h2>
           <p className="text-gray-500 mt-1">
-            You've made great progress this week. Keep it up!
+            You{'\''}ve made great progress this week. Keep it up!
           </p>
         </div>
         <div className="text-4xl">🚀</div>

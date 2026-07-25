@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { serverTimestamp } from "firebase/firestore";
+import { collection, query, where, getDocs, getDoc, updateDoc, doc, serverTimestamp, getFirestore } from "firebase/firestore";
 import { ProgressService } from "@/lib/firestore/database";
 import useFirestore from "./useFirestore";
+import { useFirestoreQuery } from "./useFirestore";
 
 const PROGRESS_STORAGE_KEY = "target95-completed-questions";
 const PROGRESS_UPDATED_EVENT = "target95-progress-updated";
@@ -74,7 +75,6 @@ export default function useProgress(userId = null) {
       setFirestoreProgress(progress);
     } catch (error) {
       console.error("Error fetching Firestore progress:", error);
-      // Fallback to localStorage
       syncLocalProgress();
     }
   }, [userId, queryDocuments, syncLocalProgress]);
@@ -84,7 +84,6 @@ export default function useProgress(userId = null) {
     if (!userId) return;
     
     try {
-      // Find existing progress document for this chapter
       const existingProgress = firestoreProgress.find(p => p.chapterId === chapterId);
       
       if (existingProgress) {
@@ -106,7 +105,6 @@ export default function useProgress(userId = null) {
         });
       }
       
-      // Refresh progress after update
       await fetchFirestoreProgress();
     } catch (error) {
       console.error("Error updating Firestore progress:", error);
@@ -180,7 +178,6 @@ export default function useProgress(userId = null) {
         saveCompletedQuestions(progress);
       } catch (err) {
         console.error("Error fetching progress from Firestore:", err);
-        // Fallback to localStorage
         syncLocalProgress();
       }
     };
@@ -224,11 +221,9 @@ export default function useProgress(userId = null) {
     const newProgressItem = { ...question, userId, completedAt: new Date().toISOString() };
     const nextProgress = [...completedQuestionsRef.current, newProgressItem];
 
-    // If we have userId, also add to Firestore
     if (userId) {
       try {
         const savedItem = await addDocument("progress", newProgressItem);
-        // Update with Firestore ID
         const updatedProgress = nextProgress.map(item => 
           getQuestionKey(item) === questionKey ? { ...item, id: savedItem.id } : item
         );
@@ -238,7 +233,6 @@ export default function useProgress(userId = null) {
         return;
       } catch (err) {
         console.error("Error adding progress to Firestore:", err);
-        // Continue with local save
       }
     }
 
@@ -248,12 +242,10 @@ export default function useProgress(userId = null) {
   }, [userId, addDocument]);
 
   const resetProgress = useCallback(async (chapter) => {
-    // Get all progress items for this chapter to delete from Firestore
     const chapterProgress = completedQuestionsRef.current.filter(
       (completedQuestion) => completedQuestion.chapter === chapter
     );
     
-    // If we have userId, delete from Firestore
     if (userId && chapterProgress.length > 0) {
       try {
         await Promise.all(
@@ -294,6 +286,138 @@ export default function useProgress(userId = null) {
     recordQuestionAttempt,
     refresh: fetchFirestoreProgress,
     stats: { ...stats, overallAccuracy },
-    fetchUserProgress: fetchFirestoreProgress, // Added for compatibility
+    fetchUserProgress: fetchFirestoreProgress,
   };
 }
+
+// Named export: useUserProgress (compatible with src/hooks/useProgress)
+export function useUserProgress(userId) {
+  const progressRef = collection(getFirestore(), "progress");
+  const q = query(progressRef, where("userId", "==", userId));
+
+  const { data, loading, error, refresh } = useFirestoreQuery(q);
+
+  const stats = data.reduce(
+    (acc, item) => {
+      acc.totalQuestionsSolved += item.questionsSolved || 0;
+      acc.totalCorrectAnswers += item.correctAnswers || 0;
+      acc.totalStudyTime += item.studyTime || 0;
+      acc.maxStreak = Math.max(acc.maxStreak, item.streak || 0);
+      return acc;
+    },
+    { totalQuestionsSolved: 0, totalCorrectAnswers: 0, totalStudyTime: 0, maxStreak: 0 }
+  );
+
+  const overallAccuracy = stats.totalQuestionsSolved > 0 
+    ? Math.round((stats.totalCorrectAnswers / stats.totalQuestionsSolved) * 100) 
+    : 0;
+
+  return {
+    progress: data,
+    loading,
+    error,
+    refresh,
+    stats: { ...stats, overallAccuracy },
+  };
+}
+
+// Named export: useChapterProgress
+export function useChapterProgress(userId, chapterId) {
+  const [progress, setProgress] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchProgress = useCallback(async () => {
+    try {
+      setLoading(true);
+      const db = getFirestore();
+      const q = query(
+        collection(db, "progress"),
+        where("userId", "==", userId),
+        where("chapterId", "==", chapterId)
+      );
+
+      const snapshot = await getDocs(q);
+      if (snapshot.docs.length > 0) {
+        setProgress({
+          id: snapshot.docs[0].id,
+          ...snapshot.docs[0].data(),
+        });
+      } else {
+        setProgress(null);
+      }
+    } catch (err) {
+      setError(err);
+      console.error("Error fetching chapter progress:", err);
+    } finally {
+      setLoading(false);
+    }
+  }, [userId, chapterId]);
+
+  useEffect(() => {
+    if (userId && chapterId) {
+      fetchProgress();
+    }
+  }, [userId, chapterId, fetchProgress]);
+
+  return { progress, loading, error, refresh: fetchProgress };
+}
+
+// Named export: updateProgress utility
+export const updateProgress = async (progressId, updates) => {
+  try {
+    if (progressId) {
+      await ProgressService.update(progressId, {
+        ...updates,
+        lastVisited: serverTimestamp(),
+      });
+    } else {
+      const newProgress = await ProgressService.create({
+        ...updates,
+        lastVisited: serverTimestamp(),
+      });
+      return newProgress;
+    }
+    return true;
+  } catch (error) {
+    console.error("Error updating progress:", error);
+    throw error;
+  }
+};
+
+// Named export: recordQuestionAttempt utility
+export const recordQuestionAttempt = async (progressId, isCorrect) => {
+  try {
+    const db = getFirestore();
+    const docRef = doc(db, "progress", progressId);
+    
+    const updates = {
+      questionsSolved: 1,
+      lastVisited: serverTimestamp(),
+    };
+
+    if (isCorrect) {
+      updates.correctAnswers = 1;
+    }
+
+    const snap = await getDoc(docRef);
+    if (snap.exists()) {
+      const data = snap.data();
+      const newQuestionsSolved = (data.questionsSolved || 0) + 1;
+      const newCorrectAnswers = (data.correctAnswers || 0) + (isCorrect ? 1 : 0);
+      const newAccuracy = Math.round((newCorrectAnswers / newQuestionsSolved) * 100);
+      
+      await updateDoc(docRef, {
+        questionsSolved: newQuestionsSolved,
+        correctAnswers: newCorrectAnswers,
+        accuracy: newAccuracy,
+        ...updates,
+      });
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error recording question attempt:", error);
+    throw error;
+  }
+};

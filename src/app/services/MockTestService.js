@@ -88,4 +88,5 @@ class MockTestService extends BaseService {
   }
 }
 
-export default new MockTestService();
+const mockTestService = new MockTestService();
+export default mockTestService;

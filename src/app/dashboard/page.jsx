@@ -19,22 +19,27 @@ import ProtectedRoute from "../components/ProtectedRoute";
 
 export default function DashboardPage() {
   const { user } = useAuth();
-  const [lastChapter, setLastChapter] = useState(null);
   const [upcomingTests, setUpcomingTests] = useState([]);
+  const [mockTestError, setMockTestError] = useState(null);
   const { firestoreProgress: progress, loading: progressLoading, stats } = useProgress(user?.uid);
   const { fetchActiveMockTests } = useMockTests();
 
   // Calculate dashboard stats from Firestore data
+  const totalSolved = stats?.totalQuestionsSolved || 0;
+  const maxStreak = stats?.maxStreak || 0;
+  const progressCount = Array.isArray(progress) ? progress.length : 0;
+  const progressWithActivity = Array.isArray(progress) ? progress.filter(p => (p.questionsSolved || 0) > 0).length : 0;
+
   const dashboardStats = {
-    questionsSolvedToday: stats.totalQuestionsSolved > 0 ? Math.min(stats.totalQuestionsSolved, 10) : 0,
-    currentStreak: stats.maxStreak || 0,
-    chapterCompletion: progress.length > 0 
-      ? Math.round((progress.filter(p => (p.questionsSolved || 0) > 0).length / progress.length) * 100)
+    questionsSolvedToday: totalSolved > 0 ? Math.min(totalSolved, 10) : 0,
+    currentStreak: maxStreak || 0,
+    chapterCompletion: progressCount > 0 
+      ? Math.round((progressWithActivity / progressCount) * 100)
       : 0,
     dailyGoal: {
-      current: stats.totalQuestionsSolved > 0 ? Math.min(stats.totalQuestionsSolved, 10) : 0,
+      current: totalSolved > 0 ? Math.min(totalSolved, 10) : 0,
       target: 10,
-      progress: stats.totalQuestionsSolved > 0 ? Math.min(Math.round((stats.totalQuestionsSolved / 10) * 100), 100) : 0,
+      progress: totalSolved > 0 ? Math.min(Math.round((totalSolved / 10) * 100), 100) : 0,
     },
     weeklyGoal: {
       current: 5,
@@ -43,34 +48,45 @@ export default function DashboardPage() {
     },
   };
 
-  // Get last accessed chapter
-  useEffect(() => {
-    if (progress && progress.length > 0) {
-      const sorted = [...progress].sort((a, b) => {
-        return new Date(b.lastVisited?.toDate() || 0) - new Date(a.lastVisited?.toDate() || 0);
-      });
-      if (sorted[0]) {
-        setLastChapter({
-          name: "Recent Chapter",
-          subject: "Continuing Learning",
-          progress: sorted[0].accuracy || 0,
+  // Derive last accessed chapter from progress data
+  const derivedLastChapter = Array.isArray(progress) && progress.length > 0
+    ? (() => {
+        const sorted = [...progress].sort((a, b) => {
+          const aTime = a.lastVisited?.toDate ? a.lastVisited.toDate().getTime() : (a.lastVisited || 0);
+          const bTime = b.lastVisited?.toDate ? b.lastVisited.toDate().getTime() : (b.lastVisited || 0);
+          return new Date(bTime) - new Date(aTime);
         });
-      }
-    }
-  }, [progress]);
+        if (sorted[0]) {
+          return {
+            name: sorted[0].chapterName || sorted[0].chapterId || "Recent Chapter",
+            subject: sorted[0].subjectName || "Continuing Learning",
+            progress: sorted[0].accuracy || 0,
+          };
+        }
+        return null;
+      })()
+    : null;
 
   // Fetch upcoming mock tests
   useEffect(() => {
+    let mounted = true;
     const fetchTests = async () => {
       try {
         const tests = await fetchActiveMockTests();
-        setUpcomingTests(tests);
+        if (mounted) {
+          setUpcomingTests(Array.isArray(tests) ? tests : []);
+          setMockTestError(null);
+        }
       } catch (error) {
         console.error("Error fetching mock tests:", error);
-        setUpcomingTests([]);
+        if (mounted) {
+          setUpcomingTests([]);
+          setMockTestError("Could not load upcoming tests");
+        }
       }
     };
     fetchTests();
+    return () => { mounted = false; };
   }, [fetchActiveMockTests]);
 
   return (
@@ -85,7 +101,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <ContinueLearning lastChapter={lastChapter} isLoading={progressLoading} />
+            <ContinueLearning lastChapter={derivedLastChapter} isLoading={progressLoading} />
             <div className="lg:col-span-2">
               <QuickActions />
             </div>
@@ -96,7 +112,7 @@ export default function DashboardPage() {
           </div>
 
           <div className="mt-6">
-            <StatsCards stats={stats} />
+            <StatsCards stats={stats || { totalQuestionsSolved: 0, totalCorrectAnswers: 0, totalStudyTime: 0, maxStreak: 0, overallAccuracy: 0 }} />
           </div>
 
           <div className="mt-6">
@@ -105,7 +121,7 @@ export default function DashboardPage() {
 
           <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
             <RecentActivity />
-            <UpcomingMockTests mockTests={upcomingTests} />
+            <UpcomingMockTests mockTests={Array.isArray(upcomingTests) ? upcomingTests : []} />
           </div>
         </div>
         <Footer />

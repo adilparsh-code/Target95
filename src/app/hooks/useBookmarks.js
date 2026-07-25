@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { collection, query, where, getDocs, getFirestore } from "firebase/firestore";
 import useFirestore from "./useFirestore";
 
 const BOOKMARKS_STORAGE_KEY = "target95-bookmarks";
@@ -78,7 +79,6 @@ export default function useBookmarks(userId = null) {
   }, [userId, queryDocuments, syncLocalBookmarks]);
 
   useEffect(() => {
-    // If we have a userId, set up realtime subscription
     if (userId) {
       try {
         const unsubscribe = subscribeToCollection("bookmarks", (data) => {
@@ -94,7 +94,6 @@ export default function useBookmarks(userId = null) {
       }
     }
 
-    // Always set up localStorage sync
     const handleStorageChange = (event) => {
       if (event.key === BOOKMARKS_STORAGE_KEY) {
         syncLocalBookmarks();
@@ -129,12 +128,10 @@ export default function useBookmarks(userId = null) {
     
     let nextBookmarks;
     if (isSaved) {
-      // Remove from bookmarks
       nextBookmarks = bookmarksRef.current.filter(
         (savedBookmark) => getBookmarkKey(savedBookmark) !== bookmarkKey
       );
       
-      // If we have userId, also delete from Firestore
       if (userId) {
         try {
           const existingBookmark = bookmarksRef.current.find(b => getBookmarkKey(b) === bookmarkKey);
@@ -146,15 +143,12 @@ export default function useBookmarks(userId = null) {
         }
       }
     } else {
-      // Add to bookmarks
       const newBookmark = { ...bookmark, userId };
       nextBookmarks = [...bookmarksRef.current, newBookmark];
       
-      // If we have userId, also add to Firestore
       if (userId) {
         try {
           const savedBookmark = await addDocument("bookmarks", newBookmark);
-          // Replace temp bookmark with the one that has Firestore ID
           nextBookmarks = nextBookmarks.map(b => 
             getBookmarkKey(b) === bookmarkKey ? { ...b, id: savedBookmark.id } : b
           );
@@ -175,7 +169,6 @@ export default function useBookmarks(userId = null) {
       (savedBookmark) => getBookmarkKey(savedBookmark) !== bookmarkKey
     );
 
-    // If we have userId, also delete from Firestore
     if (userId) {
       try {
         const existingBookmark = bookmarksRef.current.find(b => getBookmarkKey(b) === bookmarkKey);
@@ -201,4 +194,79 @@ export default function useBookmarks(userId = null) {
     toggleBookmark,
     fetchUserBookmarks
   };
+}
+
+// Named export for backward compatibility with src/hooks/useBookmarks.js
+export function useUserBookmarks(userId) {
+  const [bookmarks, setBookmarks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!userId) return;
+    
+    const fetchBookmarks = async () => {
+      try {
+        setLoading(true);
+        const db = getFirestore();
+        const q = query(collection(db, "bookmarks"), where("userId", "==", userId));
+        const snapshot = await getDocs(q);
+        setBookmarks(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      } catch (err) {
+        setError(err);
+        console.error("Error fetching bookmarks:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookmarks();
+  }, [userId]);
+
+  return { bookmarks, loading, error };
+}
+
+export async function isQuestionBookmarked(userId, questionId) {
+  try {
+    const db = getFirestore();
+    const q = query(
+      collection(db, "bookmarks"),
+      where("userId", "==", userId),
+      where("questionId", "==", questionId)
+    );
+
+    const snapshot = await getDocs(q);
+    return {
+      isBookmarked: snapshot.docs.length > 0,
+      bookmarkId: snapshot.docs.length > 0 ? snapshot.docs[0].id : null,
+    };
+  } catch (error) {
+    console.error("Error checking bookmark status:", error);
+    throw error;
+  }
+}
+
+export async function toggleBookmark(userId, questionId) {
+  try {
+    const { isBookmarked: alreadyBookmarked, bookmarkId } = await isQuestionBookmarked(userId, questionId);
+
+    if (alreadyBookmarked) {
+      const db = getFirestore();
+      const { deleteDoc, doc } = await import("firebase/firestore");
+      await deleteDoc(doc(db, "bookmarks", bookmarkId));
+      return { action: "removed", bookmarkId: null };
+    } else {
+      const db = getFirestore();
+      const { addDoc, collection } = await import("firebase/firestore");
+      const newBookmark = await addDoc(collection(db, "bookmarks"), {
+        userId,
+        questionId,
+        notes: "",
+      });
+      return { action: "added", bookmarkId: newBookmark.id };
+    }
+  } catch (error) {
+    console.error("Error toggling bookmark:", error);
+    throw error;
+  }
 }

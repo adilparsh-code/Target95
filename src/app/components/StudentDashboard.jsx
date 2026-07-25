@@ -47,7 +47,7 @@ export default function StudentDashboard() {
         <Card className="p-5">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-2xl">🎯</span>
-            <h2 className="font-semibold text-gray-900">Today's Goal</h2>
+            <h2 className="font-semibold text-gray-900">Today{'\''}s Goal</h2>
           </div>
           <div className="mb-3">
             <div className="flex justify-between text-sm text-gray-600 mb-1">

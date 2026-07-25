@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { mockQuestions } from "../data/mockQuestions";
-import { mockSubjects, subjectStats } from "../data/admin/mockSubjects";
+import { listContent } from "../services/ContentService";
 import DashboardCard from "../components/admin/DashboardCard";
 import QuickActionCard from "../components/admin/QuickActionCard";
 import SectionTitle from "../components/admin/SectionTitle";
@@ -36,30 +35,55 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      await new Promise((r) => setTimeout(r, 600));
-      const totalQuestions = mockQuestions.length;
-      const totalSubjects = subjectStats.totalSubjects;
-      const totalChapters = subjectStats.totalChapters;
-      const totalMockTests = 12;
-      const totalStudents = 156;
-      const totalTeachers = 8;
-      const aiGeneratedQuestions = 320;
-      const activeUsers = 89;
+      try {
+        // Fetch from Firestore services
+        const [questions, subjects, chapters] = await Promise.all([
+          listContent("questions", 1000).catch(() => []),
+          listContent("subjects", 100).catch(() => []),
+          listContent("chapters", 500).catch(() => []),
+        ]);
 
-      setStats({
-        totalQuestions,
-        totalSubjects,
-        totalChapters,
-        totalMockTests,
-        totalStudents,
-        totalTeachers,
-        aiGeneratedQuestions,
-        activeUsers,
-        easyQuestions: mockQuestions.filter((q) => q.difficulty === "Easy").length,
-        mediumQuestions: mockQuestions.filter((q) => q.difficulty === "Medium").length,
-        hardQuestions: mockQuestions.filter((q) => q.difficulty === "Hard").length,
-      });
-      setLoading(false);
+        const totalQuestions = questions.length || 0;
+        const totalSubjects = subjects.length || 0;
+        const totalChapters = chapters.length || 0;
+        const totalMockTests = 12;
+        const totalStudents = 156;
+        const totalTeachers = 8;
+        const aiGeneratedQuestions = 320;
+        const activeUsers = 89;
+
+        setStats({
+          totalQuestions,
+          totalSubjects,
+          totalChapters,
+          totalMockTests,
+          totalStudents,
+          totalTeachers,
+          aiGeneratedQuestions,
+          activeUsers,
+          easyQuestions: questions.filter((q) => q.difficulty === "Easy" || q.difficulty === "easy").length,
+          mediumQuestions: questions.filter((q) => q.difficulty === "Medium" || q.difficulty === "medium").length,
+          hardQuestions: questions.filter((q) => q.difficulty === "Hard" || q.difficulty === "hard").length,
+        });
+      } catch (err) {
+        console.error("Error loading admin stats:", err);
+        // Fallback to empty stats
+        setStats({
+          totalQuestions: 0,
+          totalSubjects: 0,
+          totalChapters: 0,
+          totalMockTests: 12,
+          totalStudents: 156,
+          totalTeachers: 8,
+          aiGeneratedQuestions: 320,
+          activeUsers: 89,
+          easyQuestions: 0,
+          mediumQuestions: 0,
+          hardQuestions: 0,
+        });
+      } finally {
+        setLoading(false);
+      }
     };
     loadData();
   }, []);

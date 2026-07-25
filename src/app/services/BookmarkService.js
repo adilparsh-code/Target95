@@ -50,4 +50,5 @@ class BookmarkService extends BaseService {
   }
 }
 
-export default new BookmarkService();
+const bookmarkService = new BookmarkService();
+export default bookmarkService;

@@ -117,4 +117,5 @@ class ProgressService extends BaseService {
   }
 }
 
-export default new ProgressService();
+const progressService = new ProgressService();
+export default progressService;

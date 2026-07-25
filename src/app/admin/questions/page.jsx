@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { mockQuestions } from "../../data/mockQuestions";
+import { listContent, deleteContent } from "../../services/ContentService";
 import QuestionCard from "../../components/admin/QuestionCard";
 import QuestionForm from "../../components/admin/questions/QuestionForm";
 import SearchBox from "../../components/admin/SearchBox";
@@ -35,10 +35,12 @@ export default function QuestionsPage() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setQuestions(mockQuestions);
+        setLoading(true);
+        const data = await listContent("questions", 1000);
+        setQuestions(data);
       } catch (err) {
         setError("Failed to load questions.");
+        console.error("Error fetching questions:", err);
       } finally {
         setLoading(false);
       }
@@ -51,16 +53,22 @@ export default function QuestionsPage() {
     setCurrentPage(1);
   };
 
-  const handleSave = (question) => {
-    if (editingQuestion) {
-      setQuestions((prev) =>
-        prev.map((q) => (q.id === question.id ? { ...q, ...question } : q))
-      );
-    } else {
-      setQuestions((prev) => [question, ...prev]);
+  const handleSave = async (question) => {
+    try {
+      const { saveContent } = await import("../../services/ContentService");
+      const saved = await saveContent("questions", question);
+      if (editingQuestion) {
+        setQuestions((prev) =>
+          prev.map((q) => (q.id === saved.id || q.id === question.id ? { ...q, ...saved } : q))
+        );
+      } else {
+        setQuestions((prev) => [saved, ...prev]);
+      }
+      setFormOpen(false);
+      setEditingQuestion(null);
+    } catch (err) {
+      console.error("Error saving question:", err);
     }
-    setFormOpen(false);
-    setEditingQuestion(null);
   };
 
   const handleEdit = (q) => {
@@ -68,16 +76,22 @@ export default function QuestionsPage() {
     setFormOpen(true);
   };
 
-  const handleDuplicate = (q) => {
-    const newQuestion = {
-      ...q,
-      id: Date.now(),
-      title: `${q.title} (Copy)`,
-      slug: `${q.slug}-copy-${Date.now()}`,
-      createdAt: new Date().toISOString(),
-      status: "draft",
-    };
-    setQuestions((prev) => [newQuestion, ...prev]);
+  const handleDuplicate = async (q) => {
+    try {
+      const { saveContent } = await import("../../services/ContentService");
+      const newQuestion = {
+        ...q,
+        id: null,
+        title: `${q.title} (Copy)`,
+        slug: `${q.slug}-copy-${Date.now()}`,
+        createdAt: new Date().toISOString(),
+        status: "draft",
+      };
+      const saved = await saveContent("questions", newQuestion);
+      setQuestions((prev) => [saved, ...prev]);
+    } catch (err) {
+      console.error("Error duplicating question:", err);
+    }
   };
 
   const handleTogglePublish = (q) => {
@@ -95,12 +109,17 @@ export default function QuestionsPage() {
       message: `Are you sure you want to archive "${q.title}"? Archived questions can be restored later.`,
       confirmLabel: "Archive",
       variant: "danger",
-      onConfirm: () => {
-        setQuestions((prev) =>
-          prev.map((item) =>
-            item.id === q.id ? { ...item, status: "archived" } : item
-          )
-        );
+      onConfirm: async () => {
+        try {
+          await deleteContent("questions", q.id);
+          setQuestions((prev) =>
+            prev.map((item) =>
+              item.id === q.id ? { ...item, status: "archived" } : item
+            )
+          );
+        } catch (err) {
+          console.error("Error archiving question:", err);
+        }
         setConfirmDialog(null);
       },
     });
@@ -112,34 +131,39 @@ export default function QuestionsPage() {
       message: `Are you sure you want to permanently delete "${q.title}"? This action cannot be undone.`,
       confirmLabel: "Delete",
       variant: "danger",
-      onConfirm: () => {
-        setQuestions((prev) => prev.filter((item) => item.id !== q.id));
+      onConfirm: async () => {
+        try {
+          await deleteContent("questions", q.id);
+          setQuestions((prev) => prev.filter((item) => item.id !== q.id));
+        } catch (err) {
+          console.error("Error deleting question:", err);
+        }
         setConfirmDialog(null);
       },
     });
   };
 
   const filteredQuestions = questions
-    .filter((q) => q.title?.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter((q) => subjectFilter === "all" || q.subject === subjectFilter)
-    .filter((q) => chapterFilter === "all" || q.chapter === chapterFilter)
+    .filter((q) => (q.title || q.question || "")?.toLowerCase().includes(searchTerm.toLowerCase()))
+    .filter((q) => subjectFilter === "all" || q.subject === subjectFilter || q.subjectId === subjectFilter)
+    .filter((q) => chapterFilter === "all" || q.chapter === chapterFilter || q.chapterId === chapterFilter)
     .filter(
       (q) => difficultyFilter === "all" || q.difficulty === difficultyFilter
     )
-    .filter((q) => typeFilter === "all" || q.questionType === typeFilter);
+    .filter((q) => typeFilter === "all" || q.questionType === typeFilter || q.type === typeFilter);
 
   const sortedQuestions = [...filteredQuestions].sort((a, b) => {
-    if (sortOrder === "newest") return (b.id || 0) - (a.id || 0);
-    if (sortOrder === "oldest") return (a.id || 0) - (b.id || 0);
+    if (sortOrder === "newest") return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+    if (sortOrder === "oldest") return new Date(a.createdAt || 0) - new Date(b.createdAt || 0);
     if (sortOrder === "difficulty-asc")
       return (
-        ["Easy", "Medium", "Hard"].indexOf(a.difficulty) -
-        ["Easy", "Medium", "Hard"].indexOf(b.difficulty)
+        ["Easy", "Medium", "Hard", "easy", "medium", "hard"].indexOf(a.difficulty || "") -
+        ["Easy", "Medium", "Hard", "easy", "medium", "hard"].indexOf(b.difficulty || "")
       );
     if (sortOrder === "difficulty-desc")
       return (
-        ["Easy", "Medium", "Hard"].indexOf(b.difficulty) -
-        ["Easy", "Medium", "Hard"].indexOf(a.difficulty)
+        ["Easy", "Medium", "Hard", "easy", "medium", "hard"].indexOf(b.difficulty || "") -
+        ["Easy", "Medium", "Hard", "easy", "medium", "hard"].indexOf(a.difficulty || "")
       );
     return 0;
   });
@@ -151,10 +175,10 @@ export default function QuestionsPage() {
 
   const totalPages = Math.ceil(sortedQuestions.length / ITEMS_PER_PAGE);
 
-  const subjects = ["all", ...new Set(mockQuestions.map((q) => q.subject))];
-  const chapters = ["all", ...new Set(mockQuestions.map((q) => q.chapter))];
-  const difficulties = ["all", "Easy", "Medium", "Hard"];
-  const types = ["all", ...new Set(mockQuestions.map((q) => q.questionType))];
+  const subjects = ["all", ...new Set(questions.map((q) => q.subject || q.subjectId).filter(Boolean))];
+  const chapters = ["all", ...new Set(questions.map((q) => q.chapter || q.chapterId).filter(Boolean))];
+  const difficulties = ["all", "Easy", "Medium", "Hard", "easy", "medium", "hard"];
+  const types = ["all", ...new Set(questions.map((q) => q.questionType || q.type).filter(Boolean))];
 
   const renderContent = () => {
     if (loading) {

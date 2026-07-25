@@ -34,7 +34,7 @@ export default function EmptyState({ onSuggestionClick }) {
         Welcome to AI Tutor
       </h2>
       <p className="text-gray-600 dark:text-gray-400 max-w-md mb-8">
-        I'm here to help you understand Computer Science concepts. Ask me anything about your studies, and I'll break it down for you with clear explanations, examples, and key points.
+        I{'\''}m here to help you understand Computer Science concepts. Ask me anything about your studies, and I{'\''}ll break it down for you with clear explanations, examples, and key points.
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-2xl">

@@ -32,7 +32,7 @@ export default function ForgotPassword() {
               Reset your password
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
-              Enter your email and we'll send you a reset link
+              Enter your email and we{'\''}ll send you a reset link
             </p>
           </div>
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
@@ -42,7 +42,7 @@ export default function ForgotPassword() {
                   Password reset email sent! Check your inbox.
                 </div>
                 <p className="text-sm text-gray-600">
-                  Didn't receive the email? Check your spam folder or{" "}
+                Didn{'\''}t receive the email? Check your spam folder or{" "}
                   <button
                     onClick={() => setSubmitted(false)}
                     className="font-medium text-blue-600 hover:text-blue-500"

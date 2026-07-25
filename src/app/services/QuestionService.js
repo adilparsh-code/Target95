@@ -54,4 +54,5 @@ class QuestionService extends BaseService {
   }
 }
 
-export default new QuestionService();
+const questionService = new QuestionService();
+export default questionService;

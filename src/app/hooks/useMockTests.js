@@ -1,7 +1,10 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { collection, query, where, orderBy, getDocs, serverTimestamp, getFirestore } from "firebase/firestore";
+import { MockTestService, ResultService } from "@/lib/firestore/database";
 import useFirestore from "./useFirestore";
+import { useFirestoreQuery } from "./useFirestore";
 
 export default function useMockTests() {
   const { loading, error, getCollection, getDocument, queryDocuments, addDocument, updateDocument, deleteDocument, subscribeToCollection } = useFirestore();
@@ -108,7 +111,8 @@ export default function useMockTests() {
       const data = await queryDocuments("mockTestResults", [
         { field: "userId", operator: "==", value: userId }
       ]);
-      setTestHistory(data.sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt)));
+      const sorted = data.sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt));
+      setTestHistory(sorted);
       return data;
     } catch (err) {
       console.error("Error fetching test history:", err);
@@ -146,3 +150,62 @@ export default function useMockTests() {
     subscribeToMockTests
   };
 }
+
+// Named export: useActiveMockTests
+export function useActiveMockTests() {
+  const db = getFirestore();
+  const testsRef = collection(db, "mockTests");
+  const q = query(testsRef, where("isActive", "==", true), orderBy("scheduledDate", "asc"));
+
+  const { data, loading, error, refresh } = useFirestoreQuery(q);
+
+  return { mockTests: data, loading, error, refresh };
+}
+
+// Named export: useUserMockTests
+export function useUserMockTests(userId) {
+  const db = getFirestore();
+  const resultsRef = collection(db, "results");
+  const q = query(resultsRef, where("userId", "==", userId), orderBy("completedAt", "desc"));
+
+  const { data, loading, error, refresh } = useFirestoreQuery(q);
+
+  return { results: data, loading, error, refresh };
+}
+
+// Named export: getUpcomingMockTests
+export const getUpcomingMockTests = async () => {
+  try {
+    const db = getFirestore();
+    const now = new Date();
+    const q = query(
+      collection(db, "mockTests"),
+      where("isActive", "==", true),
+      where("scheduledDate", ">=", now),
+      orderBy("scheduledDate", "asc")
+    );
+
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+  } catch (error) {
+    console.error("Error fetching upcoming mock tests:", error);
+    throw error;
+  }
+};
+
+// Named export: submitMockTestResult
+export const submitMockTestResult = async (resultData) => {
+  try {
+    const result = await ResultService.create({
+      ...resultData,
+      completedAt: serverTimestamp(),
+    });
+    return result;
+  } catch (error) {
+    console.error("Error submitting mock test result:", error);
+    throw error;
+  }
+};

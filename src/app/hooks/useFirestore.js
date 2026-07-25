@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getFirebaseInstance } from "../lib/firebase";
 import { 
   collection, 
@@ -13,7 +13,10 @@ import {
   query, 
   where, 
   onSnapshot,
-  serverTimestamp
+  serverTimestamp,
+  orderBy,
+  limit,
+  startAfter
 } from "firebase/firestore";
 
 export default function useFirestore() {
@@ -22,7 +25,7 @@ export default function useFirestore() {
   const { db: firestoreDb } = getFirebaseInstance();
 
   // Get all documents from a collection
-  const getCollection = useCallback(async (collectionName) => {
+  const getCollection = useCallback(async (collectionName, opts = {}) => {
     // Return empty array if running on server or no db connection
     if (!firestoreDb) {
       return [];
@@ -31,13 +34,24 @@ export default function useFirestore() {
     setLoading(true);
     setError(null);
     try {
-      const querySnapshot = await getDocs(collection(firestoreDb, collectionName));
+      let q = collection(firestoreDb, collectionName);
+      const limitCount = opts.limit || 50;
+      const orderByField = opts.orderByField || "createdAt";
+      const lastDoc = opts.lastDoc || null;
+
+      if (lastDoc) {
+        q = query(q, orderBy(orderByField, "desc"), startAfter(lastDoc), limit(limitCount));
+      } else {
+        q = query(q, orderBy(orderByField, "desc"), limit(limitCount));
+      }
+
+      const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data()
       }));
       setLoading(false);
-      return data;
+      return { data, lastDoc: querySnapshot.docs[querySnapshot.docs.length - 1] || null, hasMore: querySnapshot.docs.length === limitCount };
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -140,7 +154,7 @@ export default function useFirestore() {
   }, [firestoreDb]);
 
   // Query documents with conditions
-  const queryDocuments = useCallback(async (collectionName, conditions) => {
+  const queryDocuments = useCallback(async (collectionName, conditions, opts = {}) => {
     // Return empty array if running on server or no db connection
     if (!firestoreDb) {
       return [];
@@ -152,9 +166,25 @@ export default function useFirestore() {
       let q = collection(firestoreDb, collectionName);
       
       // Build query conditions
-      conditions.forEach(condition => {
-        q = query(q, where(condition.field, condition.operator, condition.value));
-      });
+      if (conditions && conditions.length > 0) {
+        const queryConstraints = conditions.map(condition => 
+          where(condition.field, condition.operator, condition.value)
+        );
+        q = query(q, ...queryConstraints);
+      }
+
+      // Apply ordering and limit only if specified
+      const orderByField = opts.orderByField || null;
+      const limitCount = opts.limit || null;
+      const lastDoc = opts.lastDoc || null;
+
+      if (orderByField && lastDoc) {
+        q = query(q, orderBy(orderByField, "desc"), startAfter(lastDoc), limit(limitCount || 50));
+      } else if (orderByField) {
+        q = query(q, orderBy(orderByField, "desc"), limit(limitCount || 50));
+      } else if (limitCount) {
+        q = query(q, limit(limitCount));
+      }
       
       const querySnapshot = await getDocs(q);
       const data = querySnapshot.docs.map(doc => ({
@@ -203,5 +233,109 @@ export default function useFirestore() {
     deleteDocument,
     queryDocuments,
     subscribeToCollection
+  };
+}
+
+// Named hook for ad-hoc Firestore queries (replaces src/hooks/useFirestoreQuery)
+export function useFirestoreQuery(queryRef) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      const querySnapshot = await getDocs(queryRef);
+      const results = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setData(results);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  }, [queryRef]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { data, loading, error, refresh: fetchData };
+}
+
+// Hook for paginated Firestore queries
+export function usePaginatedFirestore(collectionRef, options = {}) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [lastDoc, setLastDoc] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const { limit: limitCount = 50, orderByField = "createdAt" } = options;
+  const loadingRef = useRef(false);
+
+  const fetchData = useCallback(async (isLoadMore = false) => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
+
+    try {
+      setLoading(true);
+      let q;
+      if (isLoadMore && lastDoc) {
+        q = query(collectionRef, orderBy(orderByField, "desc"), startAfter(lastDoc), limit(limitCount));
+      } else {
+        q = query(collectionRef, orderBy(orderByField, "desc"), limit(limitCount));
+      }
+
+      const querySnapshot = await getDocs(q);
+      const newData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      if (isLoadMore) {
+        setData((prev) => [...prev, ...newData]);
+      } else {
+        setData(newData);
+      }
+
+      if (querySnapshot.docs.length > 0) {
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
+        setHasMore(querySnapshot.docs.length === limitCount);
+      } else {
+        setHasMore(false);
+      }
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+      loadingRef.current = false;
+    }
+  }, [collectionRef, limitCount, orderByField, lastDoc]);
+
+  const loadMore = useCallback(() => {
+    if (hasMore && !loading) {
+      fetchData(true);
+    }
+  }, [fetchData, hasMore, loading]);
+
+  const refresh = useCallback(() => {
+    setLastDoc(null);
+    setHasMore(true);
+    fetchData(false);
+  }, [fetchData]);
+
+  useEffect(() => {
+    fetchData(false);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return {
+    data,
+    loading,
+    error,
+    hasMore,
+    loadMore,
+    refresh,
   };
 }

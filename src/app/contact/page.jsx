@@ -13,7 +13,7 @@ export default function ContactPage() {
             <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm sm:p-12">
               <h1 className="text-4xl font-bold text-gray-900">Contact Us</h1>
               <p className="mt-4 text-lg text-gray-600">
-                Have questions or feedback? We'd love to hear from you. Reach out and we'll respond as soon as possible.
+                Have questions or feedback? We{'\''}d love to hear from you. Reach out and we{'\''}ll respond as soon as possible.
               </p>
 
               <div className="mt-8 grid gap-8 md:grid-cols-2">

@@ -24,14 +24,14 @@ function createQuestions(chapter, detail, index) {
   return [
     {
       id: `${base}-mcq`, type: "mcq", ...curriculum, chapter: chapter.title, topic: chapter.title,
-      difficulty: difficultyByIndex[index % 3], tags: [chapter.slug, "java", "revision"], marks: 1, estimatedTime: 1,
+      difficulty: difficultyByIndex[index % 3], tags: [chapter.slug, "java", "revision"], section: "MCQs", marks: 1, estimatedTime: 1,
       prompt: `Which statement best describes ${chapter.title.toLowerCase()} in Java?`,
       options: [detail.definition, "It is only used to style a webpage.", "It is a database command.", "It is not part of Java programming."], answer: 0,
       explanation: detail.definition,
     },
     {
       id: `${base}-theory`, type: "theory", ...curriculum, chapter: chapter.title, topic: chapter.title,
-      difficulty: "Medium", tags: [chapter.slug, "theory", "board-exam"], marks: 3, estimatedTime: 4,
+      difficulty: "Medium", tags: [chapter.slug, "theory", "board-exam"], section: "Theory questions", marks: 3, estimatedTime: 4,
       prompt: `Define ${chapter.title.toLowerCase()} and explain one practical use in a Java program.`,
       keywords: detail.keyTerms.slice(0, 3), modelAnswer: `${detail.definition} ${detail.example}`,
       markingPoints: ["Accurate definition", "Correct Java terminology", "One relevant real-life or program example"],
@@ -39,14 +39,33 @@ function createQuestions(chapter, detail, index) {
     },
     {
       id: `${base}-programming`, type: "programming", ...curriculum, chapter: chapter.title, topic: chapter.title,
-      difficulty: "Hard", tags: [chapter.slug, "java", "programming"], marks: 5, estimatedTime: 10,
+      difficulty: "Hard", tags: [chapter.slug, "java", "programming"], section: "Programming questions", marks: 5, estimatedTime: 10,
       prompt: `Write a Java program that demonstrates ${chapter.title.toLowerCase()} for a simple student-record scenario.`,
       constraints: "Use clear identifiers, standard Java syntax, and handle the stated sample data.", sampleInput: "Aarav\n95", sampleOutput: "Student: Aarav\nScore: 95",
       explanation: `Start with the smallest valid program, then apply the rules of ${chapter.title.toLowerCase()}.`,
+      flowExplanation: `The program first prepares the required values, then applies ${chapter.title.toLowerCase()} and prints a labelled result.`,
       algorithm: ["Read or declare the sample values.", `Apply the required ${chapter.title.toLowerCase()} operation.`, "Display a clearly labelled result."],
       javaSolution: `public class Main {\n  public static void main(String[] args) {\n    String student = "Aarav";\n    int score = 95;\n    System.out.println("Student: " + student);\n    System.out.println("Score: " + score);\n  }\n}`,
       dryRun: ["student becomes Aarav", "score becomes 95", "Both labelled values are printed"], timeComplexity: "O(1)", spaceComplexity: "O(1)",
-      commonMistakes: detail.mistakes, relatedQuestions: [`${chapter.title} definition`, `${chapter.title} application`],
+      outputExplanation: "The two output lines confirm that the values were processed and displayed in the required order.",
+      commonMistakes: detail.mistakes, optimizationTips: ["Avoid repeated calculations inside loops.", "Use the simplest data type and control structure that fits the requirement."], relatedQuestions: [`${chapter.title} definition`, `${chapter.title} application`],
+    },
+    {
+      id: `${base}-practice`, type: "theory", ...curriculum, chapter: chapter.title, topic: chapter.title,
+      difficulty: "Easy", tags: [chapter.slug, "practice", "revision"], section: "Practice questions", marks: 2, estimatedTime: 3,
+      prompt: `State two rules to remember while using ${chapter.title.toLowerCase()} in Java.`,
+      keywords: detail.keyTerms.slice(0, 2), modelAnswer: `${detail.tips[0]} ${detail.mistakes[0]} should be avoided.`,
+      markingPoints: ["Two distinct valid rules", "Correct Java vocabulary"], explanation: "This short-answer practice checks recall before you move to an application question.",
+    },
+    {
+      id: `${base}-challenge`, type: "programming", ...curriculum, chapter: chapter.title, topic: chapter.title,
+      difficulty: "Hard", tags: [chapter.slug, "challenge", "expected-question"], section: "Challenge questions", marks: 8, estimatedTime: 15,
+      prompt: `Challenge: design, dry-run, and write a Java solution using ${chapter.title.toLowerCase()} to process three student scores and identify the required result.`,
+      constraints: "Use only concepts introduced up to this chapter, meaningful identifiers, and no external libraries beyond standard Java.", sampleInput: "78\n88\n91", sampleOutput: "Highest score: 91",
+      explanation: "Break the challenge into input, processing, and output before writing the final program.", flowExplanation: "Read each score, compare or process them using the chapter concept, then display the computed result.",
+      algorithm: ["Store the three scores.", "Apply the chapter concept to process the scores.", "Print the final labelled answer."],
+      javaSolution: `public class Main {\n  public static void main(String[] args) {\n    int first = 78, second = 88, third = 91;\n    int highest = Math.max(first, Math.max(second, third));\n    System.out.println("Highest score: " + highest);\n  }\n}`,
+      dryRun: ["first = 78, second = 88, third = 91", "highest becomes 91", "The labelled result is displayed"], timeComplexity: "O(1)", spaceComplexity: "O(1)", outputExplanation: "The final line reports the computed highest score.", commonMistakes: detail.mistakes, optimizationTips: ["Write the dry run before coding.", "Keep intermediate calculations in named variables."], relatedQuestions: [`${chapter.title} timed practice`, `${chapter.title} previous year pattern`],
     },
   ];
 }
@@ -59,12 +78,22 @@ export const learningTopics = javaChapters.map((chapter, index) => {
   return {
     slug: chapter.slug, title: chapter.title, ...curriculum, ...detail,
     introduction: `This topic builds the Java foundation required for ICSE Computer Applications. ${detail.definition}`,
+    detailedExplanation: `Use ${chapter.title.toLowerCase()} as a sequence: identify the values involved, choose the correct Java rule, trace the result, and then explain why it works. This is the same reasoning expected in board answers and programming questions.`,
     importantPoints: [detail.definition, "Use precise Java terminology in written answers.", "Practice with small programs before attempting exam-length questions."],
     revisionNotes: ["Review the definition and syntax.", "Explain the topic with one example.", "Attempt easy, medium, and hard practice."],
     summary: `${chapter.title} is easier to retain when you can define it, trace it, and use it in a short Java program.`,
     faqs: [
       { question: `Why is ${chapter.title.toLowerCase()} important?`, answer: "It is a core building block used repeatedly in Java programs and ICSE examination questions." },
       { question: "How should I revise it?", answer: "Read the key terms, trace the example, then answer one question of each difficulty." },
+    ],
+    examTips: ["Underline command words such as define, explain, trace, and write.", "For programming answers, show a clear algorithm before the Java code.", "Reserve the final minute to verify syntax, output labels, and edge cases."],
+    pyqs: [
+      { year: "ICSE-style", prompt: `Explain ${chapter.title.toLowerCase()} with a suitable Java example.`, marks: 3 },
+      { year: "ISC-style", prompt: `Trace the output of a program using ${chapter.title.toLowerCase()} and justify the result.`, marks: 4 },
+    ],
+    expectedQuestions: [
+      `Differentiate the key terms related to ${chapter.title.toLowerCase()}.`,
+      `Write a Java program that applies ${chapter.title.toLowerCase()} to student data.`,
     ],
     questions: createQuestions(chapter, detail, index),
   };
@@ -77,7 +106,9 @@ export function getLearningTopic(slug) { return learningTopics.find((topic) => t
 export function searchLearningQuestions(questions, filters) {
   const query = filters.query.trim().toLowerCase();
   return questions.filter((question) => {
-    const haystack = [question.prompt, question.chapter, question.topic, question.subject, question.difficulty, question.type, ...question.tags].join(" ").toLowerCase();
+    const topic = learningTopics.find((item) => item.title === question.topic);
+    const topicContent = topic ? [topic.definition, topic.detailedExplanation, topic.example, topic.syntax, ...topic.keyTerms, ...topic.importantPoints, ...topic.revisionNotes].join(" ") : "";
+    const haystack = [question.prompt, question.chapter, question.topic, question.subject, question.difficulty, question.type, question.section, topicContent, ...question.tags].join(" ").toLowerCase();
     return (!query || haystack.includes(query)) &&
       (!filters.subject || question.subject === filters.subject) &&
       (!filters.chapter || question.chapter === filters.chapter) &&

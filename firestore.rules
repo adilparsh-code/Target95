@@ -28,22 +28,26 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // Subjects collection - public read, admin write
+    // Learning content is maintained by approved teachers and administrators.
     match /subjects/{subjectId} {
       allow read: if isAuthenticated();
-      allow create, update, delete: if isAdmin();
+      allow create, update, delete: if isTeacher();
     }
 
-    // Chapters collection - public read, admin write
     match /chapters/{chapterId} {
       allow read: if isAuthenticated();
-      allow create, update, delete: if isAdmin();
+      allow create, update, delete: if isTeacher();
     }
 
-    // Questions collection - public read, admin write
+    // Topics collection - public read, admin write
+    match /topics/{topicId} {
+      allow read: if isAuthenticated();
+      allow create, update, delete: if isTeacher();
+    }
+
     match /questions/{questionId} {
       allow read: if isAuthenticated();
-      allow create, update, delete: if isAdmin();
+      allow create, update, delete: if isTeacher();
     }
 
     // Bookmarks collection - only owners can access

@@ -34,7 +34,7 @@ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0
 const db = getFirestore(app);
 
 // Base CRUD class for all collections
-class BaseService {
+export class BaseService {
   constructor(collectionName) {
     this.collectionRef = collection(db, collectionName);
     this.collectionName = collectionName;
@@ -155,6 +155,7 @@ export const MockTestService = new BaseService(COLLECTIONS.MOCK_TESTS);
 export const ResultService = new BaseService(COLLECTIONS.RESULTS);
 export const SubjectService = new BaseService(COLLECTIONS.SUBJECTS);
 export const ChapterService = new BaseService(COLLECTIONS.CHAPTERS);
+export const TopicService = new BaseService(COLLECTIONS.TOPICS);
 export const LeaderboardService = new BaseService(COLLECTIONS.LEADERBOARD);
 
 // Export database instance and utilities

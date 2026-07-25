@@ -14,6 +14,8 @@ import TipCard from "./TipCard";
 import WarningCard from "./WarningCard";
 import ExampleCard from "./ExampleCard";
 import LoadingSpinner from "./LoadingSpinner";
+import LearningContentEngine from "../learning/LearningContentEngine";
+import { getLearningTopic, learningTopics } from "../../../lib/learningContent";
 
 export default function StudyChapter({ slug }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -54,6 +56,7 @@ export default function StudyChapter({ slug }) {
 
   const status = progress[slug] ?? "Not Started";
   const studyData = chapter.studyData;
+  const learningTopic = getLearningTopic(slug);
   const searchableContent = useMemo(() => [
     studyData.intro,
     ...(studyData.learningObjectives || []),
@@ -244,6 +247,8 @@ export default function StudyChapter({ slug }) {
           ))}
         </div>
       </div>
+
+      {learningTopic && <LearningContentEngine topic={learningTopic} allTopics={learningTopics} />}
     </section>
   );
 }

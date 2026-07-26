@@ -93,6 +93,7 @@ export default function DashboardPage() {
     <ProtectedRoute>
       <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
         <Navbar />
+        <div className="h-20 sm:h-24 lg:h-28"></div>
         <div className="container mx-auto px-4 py-8 max-w-7xl">
           <DashboardHeader user={user} isLoading={!user} />
           

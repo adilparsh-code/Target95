@@ -1,28 +1,47 @@
 "use client";
 
 import { useState } from "react";
+import BookmarkButton from "../BookmarkButton";
+import DifficultyBadge from "../DifficultyBadge";
+import useProgress from "../../hooks/useProgress";
 
 const typeLabels = { mcq: "MCQ", theory: "Theory", programming: "Programming" };
 
 export default function LearningQuestionCard({ question, attempt, onAttempt }) {
   const [selection, setSelection] = useState(null);
   const [expanded, setExpanded] = useState(false);
+  const [showReport, setShowReport] = useState(false);
+  const { markCompleted } = useProgress();
   const submitted = attempt?.submitted;
   const answerCorrect = selection === question.answer;
 
   function submitMcq() {
     if (selection === null || submitted) return;
     onAttempt(question, answerCorrect);
+    markCompleted({ chapter: question.chapter, questionId: question.id });
   }
 
   return (
     <article className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
       <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
         <span className="rounded-full bg-blue-100 px-2.5 py-1 text-blue-800">{question.section || typeLabels[question.type]}</span>
-        <span className="rounded-full bg-gray-100 px-2.5 py-1 text-gray-700">{question.difficulty}</span>
+        <DifficultyBadge difficulty={question.difficulty} />
         <span className="text-gray-500">{question.marks} mark{question.marks > 1 ? "s" : ""} · {question.estimatedTime} min</span>
       </div>
-      <h3 className="mt-3 text-base font-semibold leading-6 text-gray-900">{question.prompt}</h3>
+      <div className="mt-2 flex items-center justify-between">
+        <h3 className="text-base font-semibold leading-6 text-gray-900 flex-1">{question.prompt}</h3>
+        <div className="flex items-center gap-2 ml-2">
+          <BookmarkButton chapter={question.chapter} questionId={question.id} />
+          <button
+            type="button"
+            onClick={() => setShowReport(true)}
+            className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100"
+            title="Report issue"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+          </button>
+        </div>
+      </div>
 
       {question.type === "mcq" && (
         <div className="mt-4 space-y-2">
@@ -42,6 +61,37 @@ export default function LearningQuestionCard({ question, attempt, onAttempt }) {
 
       {submitted && question.type !== "mcq" && <p className="mt-3 text-xs font-semibold text-green-700">Added to your topic practice progress.</p>}
       {submitted && <p className="mt-3 rounded-xl bg-blue-50 p-3 text-sm text-blue-900"><strong>Explanation:</strong> {question.explanation}</p>}
+
+      {showReport && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-6 shadow-xl">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">Report Issue</h2>
+              <button type="button" onClick={() => setShowReport(false)} className="rounded-full p-1 text-gray-500 hover:bg-gray-100">✕</button>
+            </div>
+            <form onSubmit={(e) => { e.preventDefault(); setShowReport(false); }} className="mt-6 space-y-4">
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">Issue Type</label>
+                <select className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-gray-900 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100">
+                  <option>Incorrect Answer</option>
+                  <option>Typo / Formatting</option>
+                  <option>Unclear Question</option>
+                  <option>Duplicate Question</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-semibold text-gray-900">Description</label>
+                <textarea rows={4} required placeholder="Please describe the issue..." className="w-full rounded-xl border border-gray-300 bg-white p-3 text-sm text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100" />
+              </div>
+              <div className="flex gap-3">
+                <button type="button" onClick={() => setShowReport(false)} className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-gray-50">Cancel</button>
+                <button type="submit" className="flex-1 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700">Submit Report</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </article>
   );
 }

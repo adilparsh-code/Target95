@@ -27,6 +27,7 @@ export default function MockTestResultPage() {
     return (
       <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
         <Navbar />
+        <div className="h-20 sm:h-24 lg:h-28"></div>
         <div className="flex items-center justify-center py-20">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
         </div>
@@ -39,6 +40,7 @@ export default function MockTestResultPage() {
     return (
       <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
         <Navbar />
+        <div className="h-20 sm:h-24 lg:h-28"></div>
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-4 py-20 text-center">
           <h1 className="text-3xl font-bold text-gray-900">No results found</h1>
           <p className="text-gray-700">Complete a mock test to see your results here.</p>
@@ -62,6 +64,7 @@ export default function MockTestResultPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navbar />
+      <div className="h-20 sm:h-24 lg:h-28"></div>
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">

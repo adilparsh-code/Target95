@@ -27,6 +27,7 @@ export default async function ChapterPage({ params }) {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navbar />
+      <div className="h-20 sm:h-24 lg:h-28"></div>
       <Container>
         <div className="py-12">
 

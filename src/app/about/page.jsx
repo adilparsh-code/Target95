@@ -6,9 +6,10 @@ import Button from "../components/ui/Button";
 
 export default function AboutPage() {
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <>
+        <Navbar />
+        <div className="h-20 sm:h-24 lg:h-28"></div>
+        <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
         {/* Hero Section */}
         <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-indigo-600/5" />

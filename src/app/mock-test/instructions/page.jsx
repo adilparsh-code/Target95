@@ -22,6 +22,7 @@ function InstructionsContent() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navbar />
+      <div className="h-20 sm:h-24 lg:h-28"></div>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Test Instructions</p>
@@ -73,10 +74,11 @@ function InstructionsContent() {
 
 export default function MockTestInstructionsPage() {
   return (
-    <Suspense fallback={
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-        <Navbar />
-        <div className="flex items-center justify-center py-20">
+      <Suspense fallback={
+        <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+          <Navbar />
+          <div className="h-20 sm:h-24 lg:h-28"></div>
+          <div className="flex items-center justify-center py-20">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
         </div>
         <Footer />

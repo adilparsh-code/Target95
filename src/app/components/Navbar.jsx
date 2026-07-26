@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
 import Button from "./ui/Button";
 import Container from "./ui/Container";
 import { useAuth } from "@/context/AuthContext";
+import StudentGlobalSearch from "./StudentGlobalSearch";
+import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const links = [
   { href: "/", label: "Home", description: "Overview", icon: "🏠" },
@@ -19,6 +22,8 @@ const links = [
 
 export default function Navbar() {
   const { user, logout, loading } = useAuth();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     await logout();
@@ -32,13 +37,37 @@ export default function Navbar() {
             🎯 Target95+
           </Link>
 
-          <div className="flex flex-wrap gap-3">
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 self-end"
+            aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? (
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            )}
+          </button>
+
+          {/* Navigation links - collapsible on mobile */}
+          <div className={`${mobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col gap-3 lg:flex-row lg:items-center`}>
             {links.map((link) => (
               <SectionLink key={link.href} href={link.href} label={link.label} description={link.description} icon={link.icon} />
             ))}
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400"
+              aria-label="Open search"
+            >
+              <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
+            </button>
             {loading ? (
               <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-md"></div>
             ) : user ? (
@@ -68,6 +97,8 @@ export default function Navbar() {
           </div>
         </div>
       </Container>
+
+      <StudentGlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>
   );
 }

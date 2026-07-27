@@ -8,6 +8,7 @@ import { useFirestoreQuery } from "./useFirestore";
 
 const PROGRESS_STORAGE_KEY = "target95-completed-questions";
 const PROGRESS_UPDATED_EVENT = "target95-progress-updated";
+const isQuestionId = (value) => typeof value === "string" || Number.isFinite(value);
 
 function getQuestionKey({ chapter, questionId }) {
   return `${chapter}:${questionId}`;
@@ -27,7 +28,7 @@ function readCompletedQuestions() {
       ? parsedProgress.filter(
           (item) =>
             typeof item?.chapter === "string" &&
-            Number.isFinite(item?.questionId)
+            isQuestionId(item?.questionId)
         )
       : [];
   } catch {

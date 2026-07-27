@@ -5,6 +5,9 @@ export default function MCQQuestion({ question, onSubmit }) {
 //export default function MCQQuestion({ question }) {
   const [selected, setSelected] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  const correctAnswer = typeof question.answer === "number"
+    ? question.options[question.answer]
+    : question.answer;
 
   return (
     <div className="mt-8">
@@ -26,7 +29,7 @@ export default function MCQQuestion({ question, onSubmit }) {
             className={`w-full text-left p-4 rounded-xl border transition font-semibold text-gray-800
               ${
   submitted
-    ? option === question.answer
+    ? option === correctAnswer
       ? "bg-green-100 border-green-500 text-green-800"
       : option === selected
       ? "bg-red-100 border-red-500 text-red-800"
@@ -50,7 +53,7 @@ export default function MCQQuestion({ question, onSubmit }) {
           <button
            onClick={() => {
   setSubmitted(true);
-  onSubmit?.(selected === question.answer);
+  onSubmit?.(selected === correctAnswer);
 }}
             disabled={!selected}
             className="bg-blue-700 text-white px-6 py-3 rounded-xl disabled:opacity-50"
@@ -62,12 +65,12 @@ export default function MCQQuestion({ question, onSubmit }) {
 
           <div
             className={`text-lg font-bold ${
-              selected === question.answer
+              selected === correctAnswer
                 ? "text-green-600"
                 : "text-red-600"
             }`}
           >
-            {selected === question.answer
+            {selected === correctAnswer
               ? "✅ Correct Answer!"
               : `❌ Wrong Answer! Correct Answer: ${question.answer}`}
           </div>

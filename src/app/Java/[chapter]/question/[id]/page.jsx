@@ -1,26 +1,20 @@
 import { notFound } from "next/navigation";
-import questions from "../../../../data/questions";
+import { getChapterQuestions, getQuestionContent } from "@/lib/curriculum";
 import QuestionPlayer from "../../../../components/QuestionPlayer";
 
 export default async function QuestionPage({ params }) {
   const { chapter, id } = await params;
 
-  const question = questions.find(
-    (item) =>
-      item.chapter === chapter &&
-      item.id === Number(id)
-  );
+  const question = getQuestionContent("java", chapter, id);
 
   if (!question) {
     notFound();
   }
 
-  const chapterQuestions = questions.filter(
-    (item) => item.chapter === chapter
-  );
+  const chapterQuestions = getChapterQuestions("java", chapter);
 
   const currentIndex = chapterQuestions.findIndex(
-    (item) => item.id === Number(id)
+    (item) => String(item.id) === String(id)
   );
 
   const previousQuestion =

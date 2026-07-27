@@ -30,18 +30,20 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
+    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <Container>
-        <div className="flex items-center justify-between py-3 sm:py-4">
+        <div className="flex min-h-16 items-center justify-between gap-3 py-2 sm:min-h-[72px] sm:py-3">
           {/* Logo */}
           <Link href="/" className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300 shrink-0">
             🎯 Target95+
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1 overflow-x-auto">
+          <div className="hidden xl:flex min-w-0 flex-1 items-center justify-center gap-1">
             {links.map((link) => (
-              <SectionLink key={link.href} href={link.href} label={link.label} description={link.description} icon={link.icon} />
+              <Link key={link.href} href={link.href} className="rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-700">
+                {link.label}
+              </Link>
             ))}
           </div>
 
@@ -85,7 +87,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
+              className="xl:hidden rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
               aria-label="Toggle menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -101,13 +103,15 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+        className={`xl:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-[calc(100dvh-64px)] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="border-t border-gray-100 bg-white px-4 py-4 space-y-1">
+        <div className="max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 bg-white px-4 py-4 space-y-1 overscroll-contain">
           {links.map((link) => (
-            <SectionLink key={link.href} href={link.href} label={link.label} description={link.description} icon={link.icon} />
+            <div key={link.href} onClick={() => setMobileMenuOpen(false)}>
+              <SectionLink href={link.href} label={link.label} description={link.description} icon={link.icon} />
+            </div>
           ))}
           <div className="border-t border-gray-100 pt-4 mt-4 space-y-2">
             {loading ? (

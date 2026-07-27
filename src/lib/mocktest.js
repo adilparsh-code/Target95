@@ -165,6 +165,53 @@ export function clearMockTestHistory() {
   }
 }
 
+const DRAFT_PREFIX = "target95-mock-test-draft";
+
+export function getMockTestDraftKey(config = {}) {
+  const values = [config.category, config.chapter, config.difficulty, config.type, config.count, config.mode, config.duration]
+    .map((value) => sanitizeText(value || "all").toLowerCase());
+  return `${DRAFT_PREFIX}:${values.join(":")}`;
+}
+
+export function saveMockTestDraft(config, draft) {
+  try {
+    localStorage.setItem(getMockTestDraftKey(config), JSON.stringify({ ...draft, savedAt: new Date().toISOString() }));
+  } catch {
+    // A test can continue even when browser storage is unavailable.
+  }
+}
+
+export function getMockTestDraft(config) {
+  try {
+    const draft = localStorage.getItem(getMockTestDraftKey(config));
+    return draft ? JSON.parse(draft) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function clearMockTestDraft(config) {
+  try {
+    localStorage.removeItem(getMockTestDraftKey(config));
+  } catch {
+    // A test can continue even when browser storage is unavailable.
+  }
+}
+
+export function getTopicPerformance(review = []) {
+  const topics = new Map();
+  review.forEach((item) => {
+    const topic = sanitizeText(item?.question?.topic || item?.question?.chapter || "General concepts");
+    const current = topics.get(topic) || { topic, correct: 0, total: 0 };
+    current.total += 1;
+    if (item.isCorrect) current.correct += 1;
+    topics.set(topic, current);
+  });
+  return Array.from(topics.values())
+    .map((item) => ({ ...item, accuracy: Math.round((item.correct / item.total) * 100) }))
+    .sort((first, second) => first.accuracy - second.accuracy || second.total - first.total);
+}
+
 export const CATEGORIES = [
   { id: "icse-class-9", label: "ICSE Class 9", icon: "📘" },
   { id: "icse-class-10", label: "ICSE Class 10", icon: "📗" },

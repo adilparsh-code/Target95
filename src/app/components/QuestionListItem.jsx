@@ -16,7 +16,11 @@ export default function QuestionListItem({ chapter, question, completed }) {
         <div className="flex items-start justify-between gap-4 pr-12">
           <div className="flex-1">
             <h3 className="text-lg font-bold text-gray-900">Question {question.id}</h3>
-            <p className="mt-2 text-gray-900">{question.question}</p>
+            <p className="mt-2 text-gray-900">{question.prompt || question.question}</p>
+            <div className="mt-3 flex flex-wrap gap-2 text-xs text-gray-600">
+              {question.topic ? <span className="rounded-full bg-gray-100 px-2 py-1">{question.topic}</span> : null}
+              {question.marks ? <span className="rounded-full bg-gray-100 px-2 py-1">{question.marks} marks</span> : null}
+            </div>
           </div>
 
           <div className="flex flex-col gap-2">

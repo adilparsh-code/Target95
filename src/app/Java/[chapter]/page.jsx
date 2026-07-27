@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import javaChapters from "../../data/javaChapters";
-import questions from "../../data/questions";
+import { getChapterContent, getChapterQuestions } from "@/lib/curriculum";
 import ChapterQuestions from "../../components/ChapterQuestions";
 import ChapterStats from "../../components/ChapterStats";
 import ChapterProgress from "../../components/ChapterProgress";
@@ -12,22 +11,17 @@ import Container from "../../components/ui/Container";
 export default async function ChapterPage({ params }) {
   const { chapter } = await params;
 
-  const chapterData = javaChapters.find(
-    (item) => item.slug === chapter
-  );
+  const chapterData = getChapterContent("java", chapter);
 
   if (!chapterData) {
     notFound();
   }
 
-  const chapterQuestions = questions.filter(
-    (item) => item.chapter === chapter
-  );
+  const chapterQuestions = getChapterQuestions("java", chapter);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navbar />
-      <div className="h-20 sm:h-24 lg:h-28"></div>
       <Container>
         <div className="py-8 sm:py-12">
           {/* Breadcrumbs */}

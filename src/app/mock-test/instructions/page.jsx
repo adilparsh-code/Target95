@@ -12,11 +12,14 @@ function InstructionsContent() {
   const difficulty = searchParams.get("difficulty") || "medium";
   const type = searchParams.get("type") || "mixed";
   const count = searchParams.get("count") || "10";
+  const chapter = searchParams.get("chapter") || "all";
+  const mode = searchParams.get("mode") || "exam";
+  const duration = searchParams.get("duration") || String(Number(count) * 1.5);
 
   const categoryLabel = category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
   const handleStart = () => {
-    router.push(`/mock-test/player?category=${category}&difficulty=${difficulty}&type=${type}&count=${count}`);
+    router.push(`/mock-test/player?category=${category}&chapter=${chapter}&difficulty=${difficulty}&type=${type}&count=${count}&mode=${mode}&duration=${duration}`);
   };
 
   return (

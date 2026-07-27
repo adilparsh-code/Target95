@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { getMockTestHistory } from "../../../lib/mocktest";
+import { getTopicPerformance } from "../../../lib/mocktest";
 
 export default function MockTestResultPage() {
   const router = useRouter();
@@ -60,6 +60,9 @@ export default function MockTestResultPage() {
   const categoryLabel = result.category?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) || "Test";
   const timeTakenMin = Math.floor(result.timeTaken / 60);
   const timeTakenSec = result.timeTaken % 60;
+  const topicPerformance = useMemo(() => getTopicPerformance(result.review), [result.review]);
+  const weakTopics = topicPerformance.filter((topic) => topic.accuracy < 70).slice(0, 3);
+  const strongTopics = [...topicPerformance].sort((first, second) => second.accuracy - first.accuracy || second.total - first.total).filter((topic) => topic.accuracy >= 70).slice(0, 3);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
@@ -74,6 +77,19 @@ export default function MockTestResultPage() {
             {categoryLabel} — {result.difficulty?.charAt(0).toUpperCase() + result.difficulty?.slice(1) || "Mixed"} Difficulty
           </p>
         </div>
+
+        <section className="grid gap-6 lg:grid-cols-2" aria-label="Performance analysis">
+          <div className="rounded-3xl border border-red-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-gray-900">Topics to strengthen</h2>
+            <p className="mt-1 text-sm text-gray-700">Revisit these concepts before your next test.</p>
+            <TopicList topics={weakTopics} emptyText="No weak topics were identified in this test." tone="red" />
+          </div>
+          <div className="rounded-3xl border border-green-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-bold text-gray-900">Strong topics</h2>
+            <p className="mt-1 text-sm text-gray-700">Keep these concepts fresh with quick revision.</p>
+            <TopicList topics={strongTopics} emptyText="Complete more questions to identify strong topics." tone="green" />
+          </div>
+        </section>
 
         {/* Score Card */}
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
@@ -237,4 +253,11 @@ export default function MockTestResultPage() {
       <Footer />
     </main>
   );
+}
+
+function TopicList({ topics, emptyText, tone }) {
+  if (!topics.length) return <p className="mt-5 rounded-xl bg-gray-50 p-4 text-sm text-gray-700">{emptyText}</p>;
+
+  const colors = tone === "green" ? "border-green-200 bg-green-50 text-green-800" : "border-red-200 bg-red-50 text-red-800";
+  return <ul className="mt-5 space-y-3">{topics.map((topic) => <li key={topic.topic} className={`flex items-center justify-between gap-3 rounded-xl border p-4 ${colors}`}><span className="text-sm font-semibold">{topic.topic}</span><span className="shrink-0 text-sm font-bold">{topic.correct}/{topic.total} · {topic.accuracy}%</span></li>)}</ul>;
 }

@@ -10,6 +10,9 @@ export function filterQuestions({ questions, search = "", difficulty = "all", ty
     const normalizedType = normalizeFilterValue(question.type);
     const searchableText = [
       question.question,
+      question.prompt,
+      question.title,
+      question.explanation,
       question.answer,
       question.chapter,
       question.id,

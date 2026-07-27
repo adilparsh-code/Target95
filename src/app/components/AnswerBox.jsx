@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function AnswerBox({ answer }) {
+export default function AnswerBox({ answer, explanation }) {
 
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -27,9 +27,15 @@ export default function AnswerBox({ answer }) {
             Answer
           </h2>
 
-          <p className="mt-4 text-gray-700">
+          <p className="mt-4 whitespace-pre-wrap text-gray-700">
             {answer}
           </p>
+          {explanation ? (
+            <div className="mt-5 border-t border-green-200 pt-4">
+              <h3 className="font-semibold text-green-800">Explanation</h3>
+              <p className="mt-2 text-gray-700">{explanation}</p>
+            </div>
+          ) : null}
 
         </div>
 

@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { CATEGORIES, DIFFICULTIES, QUESTION_TYPES, QUESTION_COUNTS, getMockTestHistory } from "../../lib/mocktest";
 import ProtectedRoute from "../components/ProtectedRoute";
+import { javaChapters } from "../data/javaCurriculum";
 
 export default function MockTestNewPage() {
   const router = useRouter();
@@ -13,11 +14,14 @@ export default function MockTestNewPage() {
   const [difficulty, setDifficulty] = useState("medium");
   const [type, setType] = useState("mixed");
   const [count, setCount] = useState(10);
+  const [chapter, setChapter] = useState("all");
+  const [mode, setMode] = useState("exam");
+  const [duration, setDuration] = useState(30);
 
   const history = useMemo(() => getMockTestHistory(), []);
 
   const handleStart = () => {
-    router.push(`/mock-test/instructions?category=${category}&difficulty=${difficulty}&type=${type}&count=${count}`);
+    router.push(`/mock-test/instructions?category=${category}&chapter=${chapter}&difficulty=${difficulty}&type=${type}&count=${count}&mode=${mode}&duration=${duration}`);
   };
 
   const handleRetake = (result) => {
@@ -91,6 +95,16 @@ export default function MockTestNewPage() {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <label className="text-sm font-semibold text-gray-900">Subject<select defaultValue="java" className="mt-2 w-full rounded-xl border border-gray-300 bg-white p-3 text-sm font-normal"><option value="java">Java Programming</option></select></label>
+                <label className="text-sm font-semibold text-gray-900">Chapter<select value={chapter} onChange={(event) => setChapter(event.target.value)} className="mt-2 w-full rounded-xl border border-gray-300 bg-white p-3 text-sm font-normal"><option value="all">All Chapters</option>{javaChapters.map((item) => <option key={item.slug} value={item.slug}>{item.title}</option>)}</select></label>
+              </div>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                <label className="text-sm font-semibold text-gray-900">Test Mode<select value={mode} onChange={(event) => setMode(event.target.value)} className="mt-2 w-full rounded-xl border border-gray-300 bg-white p-3 text-sm font-normal"><option value="practice">Practice Mode</option><option value="exam">Exam Mode</option><option value="revision">Revision Mode</option><option value="timed">Timed Mode</option></select></label>
+                <label className="text-sm font-semibold text-gray-900">Duration<select value={duration} onChange={(event) => setDuration(Number(event.target.value))} className="mt-2 w-full rounded-xl border border-gray-300 bg-white p-3 text-sm font-normal"><option value={15}>15 minutes</option><option value={30}>30 minutes</option><option value={45}>45 minutes</option><option value={60}>60 minutes</option></select></label>
               </div>
 
               {/* Question Type */}

@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
-import { saveMockTestResult } from "../../../lib/mocktest";
+import { clearMockTestDraft, getMockTestDraft, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60);
@@ -29,13 +29,18 @@ function MockTestPlayerContent() {
   const difficulty = searchParams.get("difficulty") || "medium";
   const type = searchParams.get("type") || "mixed";
   const count = parseInt(searchParams.get("count") || "10", 10);
+  const chapter = searchParams.get("chapter") || "all";
+  const mode = searchParams.get("mode") || "exam";
+  const duration = parseInt(searchParams.get("duration") || String(count * 1.5), 10);
+  const testConfig = useMemo(() => ({ category, chapter, difficulty, type, count, mode, duration }), [category, chapter, difficulty, type, count, mode, duration]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [bookmarked, setBookmarked] = useState({});
-  const [timeLeft, setTimeLeft] = useState(count * 90);
+  const [timeLeft, setTimeLeft] = useState(duration * 60);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [draftReady, setDraftReady] = useState(false);
   const hasSubmittedRef = useRef(false);
 
   const filteredQuestions = useMemo(() => {
@@ -43,18 +48,38 @@ function MockTestPlayerContent() {
       const catMatch = q.category === category;
       const diffMatch = difficulty === "all" || q.difficulty === difficulty;
       const typeMatch = type === "mixed" || q.type === type;
-      return catMatch && diffMatch && typeMatch;
+      const chapterMatch = chapter === "all" || q.chapter === chapter;
+      return catMatch && diffMatch && typeMatch && chapterMatch;
     });
     if (pool.length === 0) return [];
     const shuffled = shuffleArray(pool);
     return shuffled.slice(0, Math.min(count, shuffled.length));
-  }, [category, difficulty, type, count]);
+  }, [category, chapter, difficulty, type, count]);
 
   const questions = filteredQuestions;
   const currentQuestion = questions[currentIndex] || null;
   const answeredCount = Object.keys(answers).length;
   const bookmarkedCount = Object.keys(bookmarked).filter((k) => bookmarked[k]).length;
   const progressPercent = questions.length > 0 ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
+
+  useEffect(() => {
+    const draft = getMockTestDraft(testConfig);
+    if (draft && Array.isArray(draft.questionIds)) {
+      const restoredCount = draft.questionIds.filter((id) => questions.some((question) => question.id === id)).length;
+      if (restoredCount === questions.length) {
+        setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, questions.length - 1));
+        setAnswers(draft.answers || {});
+        setBookmarked(draft.bookmarked || {});
+        setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60));
+      }
+    }
+    setDraftReady(true);
+  }, [duration, questions, testConfig]);
+
+  useEffect(() => {
+    if (!draftReady || isSubmitted || !questions.length) return;
+    saveMockTestDraft(testConfig, { questionIds: questions.map((question) => question.id), currentIndex, answers, bookmarked, timeLeft });
+  }, [answers, bookmarked, currentIndex, draftReady, isSubmitted, questions, testConfig, timeLeft]);
 
   const handleSubmit = useCallback(() => {
     if (hasSubmittedRef.current || isSubmitted) return;
@@ -116,19 +141,22 @@ function MockTestPlayerContent() {
       unansweredCount: unanswered,
       percentage,
       accuracy,
-      timeTaken: count * 90 - timeLeft,
-      totalTime: count * 90,
+      timeTaken: duration * 60 - timeLeft,
+      totalTime: duration * 60,
+      mode,
+      chapter,
       bookmarkedCount,
       review,
     };
 
     saveMockTestResult(result);
+    clearMockTestDraft(testConfig);
     sessionStorage.setItem("mock-test-result", JSON.stringify(result));
     router.push("/mock-test/result");
-  }, [questions, answers, bookmarkedCount, count, timeLeft, category, difficulty, type, router, isSubmitted]);
+  }, [questions, answers, bookmarkedCount, duration, timeLeft, category, chapter, difficulty, type, mode, router, isSubmitted, testConfig]);
 
   useEffect(() => {
-    if (questions.length === 0 || isSubmitted) return;
+    if (questions.length === 0 || isSubmitted || mode === "practice" || mode === "revision") return;
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {

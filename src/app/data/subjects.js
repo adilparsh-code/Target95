@@ -1,5 +1,6 @@
 const subjects = [
   {
+    id: "java",
     icon: "💻",
     title: "Java Programming",
     description: "Master Java with chapter-wise study materials, practice questions, and AI-powered explanations for ICSE & ISC.",
@@ -9,8 +10,10 @@ const subjects = [
     href: "/java",
     totalChapters: 12,
     totalQuestions: 450,
+    estimatedStudyTime: "12 hours",
   },
   {
+    id: "python",
     icon: "🐍",
     title: "Python Programming",
     description: "Learn Python fundamentals with interactive lessons, coding exercises, and step-by-step tutorials.",
@@ -21,6 +24,7 @@ const subjects = [
     comingSoon: true,
     totalChapters: 8,
     totalQuestions: 200,
+    estimatedStudyTime: "8 hours",
   },
 ];
 

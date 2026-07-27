@@ -10,6 +10,9 @@ import ProgressBar from "./ProgressBar";
 import DifficultyBadge from "./DifficultyBadge";
 import BookmarkButton from "./BookmarkButton";
 import useProgress from "../hooks/useProgress";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import QuestionTutorPanel from "./ai-tutor/QuestionTutorPanel";
 
 export default function QuestionPlayer({
   question,
@@ -26,10 +29,15 @@ export default function QuestionPlayer({
   }, [chapter, markCompleted, question.id]);
 
   const chapterLabel = String(chapter).replace(/-/g, " ");
+  const questionText = question.prompt || question.question;
+  const answer = question.modelAnswer || question.javaSolution || question.answer || question.solution;
+  const isMultipleChoice = question.type === "mcq" || (Array.isArray(question.options) && question.options.length > 0);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50 py-16">
-      <div className="mx-auto max-w-5xl rounded-3xl bg-white p-10 shadow-2xl">
+    <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50">
+      <Navbar />
+      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+      <div className="rounded-2xl bg-white p-5 shadow-xl sm:rounded-3xl sm:p-8 lg:p-10">
         <p className="text-sm text-gray-500">Home / Java / {chapterLabel}</p>
 
         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -45,15 +53,19 @@ export default function QuestionPlayer({
           <ProgressBar current={currentIndex + 1} total={chapterQuestions.length} />
         </div>
 
-        <p className="mt-8 text-sm font-semibold uppercase tracking-[0.24em] text-gray-500">{question.type}</p>
+        <div className="mt-8 flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+          <span>{question.type}</span>
+          {question.topic ? <span>• {question.topic}</span> : null}
+          {question.marks ? <span>• {question.marks} marks</span> : null}
+        </div>
 
-        {question.type === "theory" ? (
-          <>
-            <QuestionCard question={question.question} />
-            <AnswerBox answer={question.answer} />
-          </>
+        {isMultipleChoice ? (
+          <MCQQuestion question={{ ...question, question: questionText }} />
         ) : (
-          <MCQQuestion question={question} />
+          <>
+            <QuestionCard question={questionText} />
+            <AnswerBox answer={answer} explanation={question.explanation || question.flowExplanation} />
+          </>
         )}
 
         <div className="mt-10">
@@ -102,6 +114,9 @@ export default function QuestionPlayer({
           </div>
         </div>
       </div>
+      </div>
+      <Footer />
+      <QuestionTutorPanel question={question} />
     </main>
   );
 }

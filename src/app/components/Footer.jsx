@@ -1,6 +1,4 @@
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="relative bg-gray-950 overflow-hidden">
       {/* Glassmorphism gradient overlay */}
@@ -29,7 +27,7 @@ export default function Footer() {
           {/* Copyright */}
           <div className="pt-4 border-t border-gray-800 w-full max-w-xs">
             <p className="text-sm text-gray-500">
-              &copy; {year} Target95
+              Target95 © 2026
             </p>
           </div>
         </div>

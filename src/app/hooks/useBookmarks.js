@@ -6,6 +6,7 @@ import useFirestore from "./useFirestore";
 
 const BOOKMARKS_STORAGE_KEY = "target95-bookmarks";
 const BOOKMARKS_UPDATED_EVENT = "target95-bookmarks-updated";
+const isQuestionId = (value) => typeof value === "string" || Number.isFinite(value);
 
 function getBookmarkKey({ chapter, questionId }) {
   return `${chapter}:${questionId}`;
@@ -25,7 +26,7 @@ function readBookmarks() {
       ? parsedBookmarks.filter(
           (bookmark) =>
             typeof bookmark?.chapter === "string" &&
-            Number.isFinite(bookmark?.questionId)
+            isQuestionId(bookmark?.questionId)
         )
       : [];
   } catch {

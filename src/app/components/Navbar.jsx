@@ -32,71 +32,113 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 shadow-sm">
       <Container>
-        <div className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
-          <Link href="/" className="text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300">
+        <div className="flex items-center justify-between py-3 sm:py-4">
+          {/* Logo */}
+          <Link href="/" className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300 shrink-0">
             🎯 Target95+
           </Link>
 
-          {/* Mobile menu button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 self-end"
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? (
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-            ) : (
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            )}
-          </button>
-
-          {/* Navigation links - collapsible on mobile */}
-          <div className={`${mobileMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col gap-3 lg:flex-row lg:items-center`}>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-1 overflow-x-auto">
             {links.map((link) => (
               <SectionLink key={link.href} href={link.href} label={link.label} description={link.description} icon={link.icon} />
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* Right section: search + auth */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400"
+              className="rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
               aria-label="Open search"
             >
               <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
             </button>
+
             {loading ? (
-              <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-md"></div>
+              <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-md hidden sm:block"></div>
             ) : user ? (
-              <>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-gray-700">
+              <div className="hidden sm:flex items-center gap-2">
+                <span className="text-sm font-medium text-gray-700 truncate max-w-[100px]">
+                  {user.fullName || user.email}
+                </span>
+                <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
+                  {user.role}
+                </span>
+                <Button variant="outline" onClick={handleLogout} className="text-sm">
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <div className="hidden sm:flex items-center gap-2">
+                <Link href="/login">
+                  <Button className="text-sm">Login</Button>
+                </Link>
+                <Link href="/register">
+                  <Button variant="outline" className="text-sm">Register</Button>
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
+              aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? (
+                <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+              ) : (
+                <Bars3Icon className="h-5 w-5" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+      </Container>
+
+      {/* Mobile Menu Dropdown */}
+      <div
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="border-t border-gray-100 bg-white px-4 py-4 space-y-1">
+          {links.map((link) => (
+            <SectionLink key={link.href} href={link.href} label={link.label} description={link.description} icon={link.icon} />
+          ))}
+          <div className="border-t border-gray-100 pt-4 mt-4 space-y-2">
+            {loading ? (
+              <div className="h-10 bg-gray-200 animate-pulse rounded-md"></div>
+            ) : user ? (
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 px-2">
+                  <span className="text-sm font-medium text-gray-700 truncate">
                     {user.fullName || user.email}
                   </span>
                   <span className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded-full">
                     {user.role}
                   </span>
                 </div>
-                <Button variant="outline" onClick={handleLogout}>
+                <Button variant="outline" onClick={handleLogout} className="w-full">
                   Logout
                 </Button>
-              </>
+              </div>
             ) : (
-              <>
-                <Link href="/login">
-                  <Button>Login</Button>
+              <div className="flex flex-col gap-2">
+                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full">Login</Button>
                 </Link>
-                <Link href="/register">
-                  <Button variant="outline">Register</Button>
+                <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full">Register</Button>
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>
-      </Container>
+      </div>
 
       <StudentGlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>

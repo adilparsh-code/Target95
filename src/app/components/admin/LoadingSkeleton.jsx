@@ -1,4 +1,4 @@
-export default function LoadingSkeleton() {
+ export default function LoadingSkeleton() {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="p-6 animate-pulse">

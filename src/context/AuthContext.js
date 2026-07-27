@@ -1,26 +1,135 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { getFirebaseInstance } from "@/app/lib/firebase";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const buildUser = useCallback(async (firebaseUser) => {
+    const { db } = getFirebaseInstance();
+    const profileSnapshot = await getDoc(doc(db, "users", firebaseUser.uid));
+    const profile = profileSnapshot.exists() ? profileSnapshot.data() : {};
+    return { uid: firebaseUser.uid, email: firebaseUser.email || "", fullName: profile.fullName || firebaseUser.displayName || "", avatarUrl: profile.avatarUrl || firebaseUser.photoURL || "", role: profile.role || "student", ...profile };
+  }, []);
+
+  useEffect(() => {
+    const { auth } = getFirebaseInstance();
+    if (!auth) {
+      setLoading(false);
+      return undefined;
+    }
+    return onAuthStateChanged(auth, async (firebaseUser) => {
+      try {
+        setUser(firebaseUser ? await buildUser(firebaseUser) : null);
+      } catch {
+        setUser(firebaseUser ? { uid: firebaseUser.uid, email: firebaseUser.email || "", fullName: firebaseUser.displayName || "", role: "student" } : null);
+      } finally {
+        setLoading(false);
+      }
+    });
+  }, [buildUser]);
 
   const login = async (email, password) => {
-    // Placeholder implementation
-    console.log("Login attempted with:", email);
-    return { success: false, message: "Auth not fully implemented" };
+    try {
+      setError(null);
+      const { auth } = getFirebaseInstance();
+      const credential = await signInWithEmailAndPassword(auth, email, password);
+      return { success: true, user: credential.user };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
+  };
+
+  const register = async (email, password, fullName) => {
+    try {
+      setError(null);
+      const { auth, db } = getFirebaseInstance();
+      const credential = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(credential.user, { displayName: fullName });
+      await setDoc(doc(db, "users", credential.user.uid), { uid: credential.user.uid, email, fullName, role: "student", board: "ICSE", studentClass: "Class 10", createdAt: serverTimestamp() });
+      return { success: true, user: credential.user };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
+  };
+
+  const loginWithGoogle = async () => {
+    try {
+      setError(null);
+      const { auth, db } = getFirebaseInstance();
+      const credential = await signInWithPopup(auth, new GoogleAuthProvider());
+      await setDoc(doc(db, "users", credential.user.uid), { uid: credential.user.uid, email: credential.user.email || "", fullName: credential.user.displayName || "", avatarUrl: credential.user.photoURL || "", role: "student", board: "ICSE", studentClass: "Class 10", updatedAt: serverTimestamp() }, { merge: true });
+      return { success: true, user: credential.user };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
+  };
+
+  const forgotPassword = async (email) => {
+    try {
+      setError(null);
+      const { auth } = getFirebaseInstance();
+      await sendPasswordResetEmail(auth, email);
+      return { success: true, message: "Password reset email sent. Check your inbox." };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
+  };
+
+  const updateStudentProfile = async (updates) => {
+    if (!user) return { success: false, message: "You must be signed in." };
+    try {
+      const { auth, db } = getFirebaseInstance();
+      const safeUpdates = { fullName: String(updates.fullName || "").trim(), board: String(updates.board || "ICSE"), studentClass: String(updates.studentClass || "Class 10"), updatedAt: serverTimestamp() };
+      await updateProfile(auth.currentUser, { displayName: safeUpdates.fullName });
+      await setDoc(doc(db, "users", user.uid), safeUpdates, { merge: true });
+      setUser((current) => ({ ...current, ...safeUpdates }));
+      return { success: true };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
   };
 
   const logout = async () => {
-    setUser(null);
+    try {
+      const { auth } = getFirebaseInstance();
+      await signOut(auth);
+      return { success: true };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
   };
 
   const value = {
     user,
+    loading,
+    error,
     login,
+    register,
+    loginWithGoogle,
+    forgotPassword,
+    updateStudentProfile,
     logout,
+    clearError: () => setError(null),
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -28,4 +137,9 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   return useContext(AuthContext);
+}
+
+function getAuthMessage(code) {
+  const messages = { "auth/email-already-in-use": "This email is already registered.", "auth/invalid-email": "Enter a valid email address.", "auth/invalid-credential": "Incorrect email or password.", "auth/popup-closed-by-user": "Google sign-in was cancelled.", "auth/network-request-failed": "Network error. Please try again." };
+  return messages[code] || "We could not complete that request. Please try again.";
 }

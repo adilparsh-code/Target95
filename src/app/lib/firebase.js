@@ -26,15 +26,11 @@ export function getFirebaseInstance() {
     return { app: null, auth: null, db: null };
   }
   
-  if (getApps().length === 0) {
-    app = initializeApp(firebaseConfig);
-    // Only initialize auth and db when running on client
-    auth = getAuth(app);
-    db = getFirestore(app);
-  }
+  app = app || getApps()[0] || initializeApp(firebaseConfig);
+  auth = auth || getAuth(app);
+  db = db || getFirestore(app);
   
   return { app, auth, db };
 }
 
 // Don't initialize on import - only when actually used on client
-export { auth, db };

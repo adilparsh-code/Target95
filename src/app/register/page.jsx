@@ -13,7 +13,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { register, loading, error, clearError } = useAuth();
+  const { register, loginWithGoogle, loading, error, clearError } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -31,6 +31,11 @@ export default function Register() {
     if (result.success) {
       router.push("/login?registered=true");
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    const result = await loginWithGoogle();
+    if (result.success) router.push("/dashboard");
   };
 
   return (
@@ -148,6 +153,9 @@ export default function Register() {
                   {loading ? "Creating account..." : "Create account"}
                 </Button>
               </div>
+
+              <div className="relative"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div><div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-gray-500">or</span></div></div>
+              <Button type="button" variant="outline" size="lg" className="w-full" disabled={loading} onClick={handleGoogleLogin}>Continue with Google</Button>
 
               <div className="text-center">
                 <p className="text-xs text-gray-500">

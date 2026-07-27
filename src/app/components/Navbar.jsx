@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
 import Button from "./ui/Button";
@@ -10,6 +11,9 @@ import StudentGlobalSearch from "./StudentGlobalSearch";
 import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const links = [
+  { href: "/daily-challenge", label: "Daily Challenge", description: "Earn XP", icon: "DC" },
+  { href: "/rewards", label: "Rewards", description: "Badges", icon: "XP" },
+  { href: "/my-learning", label: "My Learning", description: "Roadmap", icon: "ML" },
   { href: "/", label: "Home", description: "Overview", icon: "🏠" },
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
   { href: "/study", label: "Study", description: "Chapters", icon: "📖" },
@@ -22,11 +26,13 @@ const links = [
 
 export default function Navbar() {
   const { user, logout, loading } = useAuth();
+  const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
-    await logout();
+    const result = await logout();
+    if (result.success) router.push("/");
   };
 
   return (
@@ -62,6 +68,7 @@ export default function Navbar() {
               <div className="h-10 w-20 bg-gray-200 animate-pulse rounded-md hidden sm:block"></div>
             ) : user ? (
               <div className="hidden sm:flex items-center gap-2">
+                <Link href="/profile" className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700" aria-label="Open profile">{(user.fullName || user.email || "T").slice(0, 1).toUpperCase()}</Link>
                 <span className="text-sm font-medium text-gray-700 truncate max-w-[100px]">
                   {user.fullName || user.email}
                 </span>
@@ -118,6 +125,8 @@ export default function Navbar() {
               <div className="h-10 bg-gray-200 animate-pulse rounded-md"></div>
             ) : user ? (
               <div className="space-y-2">
+                <Link href="/profile" onClick={() => setMobileMenuOpen(false)} className="block rounded-lg px-2 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-50">Profile</Link>
+                <Link href="/settings" onClick={() => setMobileMenuOpen(false)} className="block rounded-lg px-2 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50">Settings</Link>
                 <div className="flex items-center gap-2 px-2">
                   <span className="text-sm font-medium text-gray-700 truncate">
                     {user.fullName || user.email}

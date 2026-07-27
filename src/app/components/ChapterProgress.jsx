@@ -1,18 +1,26 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import Link from "next/link";
 import useProgress from "../hooks/useProgress";
 
 export default function ChapterProgress({ chapter, questions }) {
   const { isCompleted, resetProgress } = useProgress();
-  const completedCount = useMemo(
-    () => questions.filter((question) => isCompleted({ chapter, questionId: question.id })).length,
-    [chapter, isCompleted, questions]
-  );
-  const completionPercentage = questions.length > 0 ? Math.round((completedCount / questions.length) * 100) : 0;
-  const nextQuestion = questions.find((question) => !isCompleted({ chapter, questionId: question.id }));
-  const continueQuestion = nextQuestion ?? questions[0];
+
+  const { completedCount, completionPercentage, continueQuestion } = useMemo(() => {
+    const completed = questions.filter((question) => isCompleted({ chapter, questionId: question.id })).length;
+    const percentage = questions.length > 0 ? Math.round((completed / questions.length) * 100) : 0;
+    const next = questions.find((question) => !isCompleted({ chapter, questionId: question.id }));
+    return {
+      completedCount: completed,
+      completionPercentage: percentage,
+      continueQuestion: next ?? questions[0],
+    };
+  }, [chapter, isCompleted, questions]);
+
+  const handleReset = useCallback(() => {
+    resetProgress(chapter);
+  }, [chapter, resetProgress]);
 
   return (
     <section className="mt-10 rounded-2xl border border-gray-200 bg-slate-50 p-6" aria-labelledby="chapter-progress-heading">
@@ -46,7 +54,7 @@ export default function ChapterProgress({ chapter, questions }) {
 
         <button
           type="button"
-          onClick={() => resetProgress(chapter)}
+          onClick={handleReset}
           disabled={completedCount === 0}
           className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900 transition hover:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50"
         >

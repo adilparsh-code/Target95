@@ -2,8 +2,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { useMemo, useState, useEffect } from "react";
-import { getStudyChapters } from "../../../lib/studyCenter";
+import { useMemo, useState, useEffect, useCallback } from "react";
+import { getStudyChapters, searchStudyContent } from "../../../lib/studyCenter";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 import {
@@ -224,7 +224,7 @@ export default function StudyHome() {
       ) : (
         <div className="rounded-3xl border-2 border-dashed border-gray-300 bg-white p-8 text-center">
           <h2 className="text-xl font-bold text-gray-900">No Chapters Found</h2>
-          <p className="mt-2 text-base text-gray-600">Your search for "{search}" did not match any chapters.</p>
+          <p className="mt-2 text-base text-gray-600">Your search for &ldquo;{search}&rdquo; did not match any chapters.</p>
         </div>
       )}
     </section>

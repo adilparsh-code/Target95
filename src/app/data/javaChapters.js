@@ -5,6 +5,9 @@ const javaChapters = [
     slug: "introduction",
     questions: 25,
     difficulty: "Beginner",
+    description: "Learn the basics of Java programming, including syntax, structure, and your first Java program.",
+    estimatedTime: 45,
+    topics: ["Java Basics", "Syntax", "First Program", "Comments"],
   },
   {
     id: 2,
@@ -12,6 +15,9 @@ const javaChapters = [
     slug: "variables-data-types",
     questions: 40,
     difficulty: "Beginner",
+    description: "Understand variables, primitive data types, type casting, and variable scope in Java.",
+    estimatedTime: 60,
+    topics: ["Variables", "Data Types", "Type Casting", "Scope"],
   },
   {
     id: 3,
@@ -19,6 +25,9 @@ const javaChapters = [
     slug: "operators",
     questions: 35,
     difficulty: "Intermediate",
+    description: "Master Java operators including arithmetic, relational, logical, and bitwise operators.",
+    estimatedTime: 55,
+    topics: ["Arithmetic", "Relational", "Logical", "Bitwise"],
   },
   {
     id: 4,
@@ -26,6 +35,9 @@ const javaChapters = [
     slug: "if-else",
     questions: 50,
     difficulty: "Intermediate",
+    description: "Practice conditional statements including if, if-else, nested if, and switch-case.",
+    estimatedTime: 70,
+    topics: ["if", "if-else", "Nested if", "Switch"],
   },
   {
     id: 5,
@@ -33,36 +45,50 @@ const javaChapters = [
     slug: "loops",
     questions: 70,
     difficulty: "Intermediate",
+    description: "Master loops in Java — for, while, do-while, and nested loops with real-world examples.",
+    estimatedTime: 90,
+    topics: ["For Loop", "While Loop", "Do-While", "Nested Loops"],
   },
-
   {
     id: 6,
     title: "Methods",
     slug: "methods",
     questions: 45,
-    difficulty: "Intermediate"
+    difficulty: "Intermediate",
+    description: "Learn method declaration, parameters, return types, method overloading, and recursion.",
+    estimatedTime: 65,
+    topics: ["Declaration", "Parameters", "Overloading", "Recursion"],
   },
   {
     id: 7,
     title: "Arrays",
     slug: "arrays",
     questions: 80,
-    difficulty: "Advanced"
+    difficulty: "Advanced",
+    description: "Explore single-dimensional and multi-dimensional arrays, array operations, and sorting.",
+    estimatedTime: 100,
+    topics: ["1D Arrays", "2D Arrays", "Array Operations", "Sorting"],
   },
   {
     id: 8,
     title: "Strings",
     slug: "strings",
     questions: 60,
-    difficulty: "Advanced"
+    difficulty: "Advanced",
+    description: "Master String class methods, StringBuilder, StringBuffer, and string manipulation techniques.",
+    estimatedTime: 80,
+    topics: ["String Methods", "StringBuilder", "StringBuffer", "Manipulation"],
   },
   {
     id: 9,
     title: "Constructor",
     slug: "constructor",
     questions: 30,
-    difficulty: "Advanced"
-  }
+    difficulty: "Advanced",
+    description: "Understand constructors, constructor overloading, copy constructors, and the 'this' keyword.",
+    estimatedTime: 50,
+    topics: ["Default Constructor", "Parameterized", "Overloading", "this Keyword"],
+  },
 ];
 
 export default javaChapters;

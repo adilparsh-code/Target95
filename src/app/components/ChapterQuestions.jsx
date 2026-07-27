@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import useProgress from "../hooks/useProgress";
 import SearchBar from "./ui/SearchBar";
 import QuestionFilters from "./QuestionFilters";
@@ -21,6 +21,10 @@ export default function ChapterQuestions({ chapter, questions }) {
       type,
     });
   }, [difficulty, questions, search, type]);
+
+  const handleSearchChange = useCallback((e) => {
+    setSearch(e.target.value);
+  }, []);
 
   return (
     <>
@@ -45,7 +49,7 @@ export default function ChapterQuestions({ chapter, questions }) {
             id="question-search"
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleSearchChange}
             placeholder="Try: loop, array, Question 5, easy, mcq"
           />
           <p className="mt-2 text-sm text-gray-900">

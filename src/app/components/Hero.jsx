@@ -128,15 +128,3 @@ function BoardCard({ board }) {
     </div>
   );
 }
-</arg_value>
-<task_progress>
-- [x] Read and understand current home page
-- [x] Redesign home page with hero and board selection
-- [ ] Add content sections (Why Target95, Features, etc.)
-- [ ] Review ICSE page structure
-- [ ] Fix ICSE page issues
-- [ ] Verify navigation and routing
-- [ ] Test responsiveness on all breakpoints
-- [ ] Run npm run build
-- [ ] Verify build status
-</task_progress></tool_call>

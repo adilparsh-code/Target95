@@ -28,6 +28,7 @@ const pageTitles = {
   "/admin/settings/profile": "Profile Settings",
   "/admin/settings/roles": "Roles & Permissions",
   "/admin/settings/system": "System Info",
+  "/java": "Java Programming",
 };
 
 export function useBreadcrumbs() {

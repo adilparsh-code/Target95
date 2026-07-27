@@ -1,5 +1,6 @@
 
 "use client";
+import { useMemo } from "react";
 import useBookmarks from "../hooks/useBookmarks";
 import useProgress from "../hooks/useProgress";
 
@@ -7,7 +8,7 @@ export default function ChapterStats({ questions }) {
   const { isBookmarked } = useBookmarks();
   const { isCompleted } = useProgress();
 
-  const stats = [
+  const stats = useMemo(() => [
     { label: "Total Questions", value: questions.length, accent: "bg-white text-blue-700" },
     { label: "Theory", value: questions.filter((q) => q.type === "theory").length, accent: "bg-white text-indigo-700" },
     { label: "MCQ", value: questions.filter((q) => q.type === "mcq").length, accent: "bg-white text-purple-700" },
@@ -16,7 +17,7 @@ export default function ChapterStats({ questions }) {
     { label: "Hard", value: questions.filter((q) => String(q.difficulty).toLowerCase() === "hard").length, accent: "bg-red-50 text-red-700" },
     { label: "Bookmarked", value: questions.filter((q) => isBookmarked({ chapter: q.chapter, questionId: q.id })).length, accent: "bg-blue-50 text-gray-900" },
     { label: "Completed", value: questions.filter((q) => isCompleted({ chapter: q.chapter, questionId: q.id })).length, accent: "bg-green-50 text-gray-900" },
-  ];
+  ], [questions, isBookmarked, isCompleted]);
 
   return (
     <section className="mt-10 rounded-2xl border border-gray-200 bg-slate-50 p-6" aria-labelledby="chapter-stats-heading">

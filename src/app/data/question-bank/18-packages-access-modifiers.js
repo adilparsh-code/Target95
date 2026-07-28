@@ -1,0 +1,140 @@
+const chapter18 = {
+  id: 18, title: "Packages & Access Modifiers", slug: "packages-access-modifiers",
+  description: "Learn about packages, import statements, access modifiers, and the classpath.",
+  topics: ["Packages", "Import", "Access Modifiers", "Classpath", "Package Structure"],
+  mcqs: [
+    { id: "CH18-MCQ-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "What is the purpose of a package in Java?", options: ["A) To organize classes and interfaces", "B) To create objects", "C) To handle errors", "D) To read input"], correctAnswer: "A", explanation: "Packages organize classes and interfaces into namespaces, preventing naming conflicts.", hint: "It organizes classes.", estimatedTime: 10, marks: 1, tags: ["package", "organization"] },
+    { id: "CH18-MCQ-002", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "Which keyword is used to import classes?", options: ["A) import", "B) package", "C) include", "D) require"], correctAnswer: "A", explanation: "The import keyword is used to bring classes from other packages into scope.", hint: "It 'imports' classes.", estimatedTime: 10, marks: 1, tags: ["import", "keyword"] },
+    { id: "CH18-MCQ-003", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Which access modifier is the most restrictive?", options: ["A) public", "B) protected", "C) private", "D) default"], correctAnswer: "C", explanation: "private is the most restrictive. Members are only accessible within the same class.", hint: "Which is the most restrictive?", estimatedTime: 10, marks: 1, tags: ["private", "restrictive"] },
+    { id: "CH18-MCQ-004", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Where must the package statement be in a Java file?", options: ["A) First line", "B) Last line", "C) After imports", "D) Anywhere"], correctAnswer: "A", explanation: "The package statement must be the first line (after comments) in a Java source file.", hint: "Where is the package statement?", estimatedTime: 10, marks: 1, tags: ["package", "first line"] },
+    { id: "CH18-MCQ-005", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Which access modifier allows access within the same package and subclasses?", options: ["A) private", "B) default", "C) protected", "D) public"], correctAnswer: "C", explanation: "protected allows access within the same package and by subclasses in any package.", hint: "Which is between default and public?", estimatedTime: 15, marks: 1, tags: ["protected", "subclass"] },
+    { id: "CH18-MCQ-006", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "What is the default package?", options: ["A) java.lang", "B) java.util", "C) An unnamed package", "D) java.io"], correctAnswer: "C", explanation: "If no package is declared, the class is in the unnamed (default) package.", hint: "What happens if no package is declared?", estimatedTime: 15, marks: 1, tags: ["default package", "unnamed"] },
+    { id: "CH18-MCQ-007", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "Which import statement imports all classes from a package?", options: ["A) import java.util.*;", "B) import java.util; ", "C) import java.util.Class;", "D) import static java.util.*;"], correctAnswer: "A", explanation: "import java.util.*; imports all classes from the java.util package.", hint: "What does the * mean?", estimatedTime: 10, marks: 1, tags: ["wildcard import", "*"] },
+    { id: "CH18-MCQ-008", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Which access modifier provides the widest visibility?", options: ["A) private", "B) protected", "C) public", "D) default"], correctAnswer: "C", explanation: "public members are accessible from anywhere.", hint: "Which is the most visible?", estimatedTime: 10, marks: 1, tags: ["public", "widest"] }
+  ],
+  assertionReasons: [
+    { id: "CH18-AR-001", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Assertion (A): Packages prevent naming conflicts.
+Reason (R): Classes in different packages can have the same name.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "Packages create namespaces. Classes in different packages can have the same name without conflict.", hint: "Can two classes have the same name in different packages?", estimatedTime: 15, marks: 2, tags: ["packages", "naming conflicts"] },
+    { id: "CH18-AR-002", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Assertion (A): private members are only accessible within the same class.
+Reason (R): private is the most restrictive access modifier.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "private members are only visible within the declaring class. This is the most restrictive level.", hint: "Where can private members be accessed?", estimatedTime: 15, marks: 2, tags: ["private", "scope"] },
+    { id: "CH18-AR-003", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Assertion (A): A class can have only one public class per file.
+Reason (R): The file name must match the public class name.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "A file can have at most one public class, and the file name must match it.", hint: "How many public classes per file?", estimatedTime: 15, marks: 2, tags: ["public class", "file name"] },
+    { id: "CH18-AR-004", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "Assertion (A): java.lang is automatically imported.
+Reason (R): Common classes like String and System are in java.lang.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "java.lang is automatically imported in every Java program. No import statement needed.", hint: "Do you need to import String?", estimatedTime: 10, marks: 2, tags: ["java.lang", "automatic"] }
+  ],
+  trueFalse: [
+    { id: "CH18-TF-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "A Java file can have multiple public classes.", correctAnswer: "False", explanation: "A Java file can have at most one public class.", hint: "How many public classes per file?", estimatedTime: 10, marks: 1, tags: ["public class", "file"] },
+    { id: "CH18-TF-002", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "java.lang package must be explicitly imported.", correctAnswer: "False", explanation: "java.lang is automatically imported in every Java program.", hint: "Do you need to import java.lang?", estimatedTime: 10, marks: 1, tags: ["java.lang", "automatic"] },
+    { id: "CH18-TF-003", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "A protected member is accessible only within the same package.", correctAnswer: "False", explanation: "protected members are accessible within the same package AND by subclasses in other packages.", hint: "Can subclasses in other packages access protected members?", estimatedTime: 15, marks: 1, tags: ["protected", "subclass"] },
+    { id: "CH18-TF-004", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "The package statement can appear anywhere in the file.", correctAnswer: "False", explanation: "The package statement must be the first non-comment line in the file.", hint: "Where must the package statement be?", estimatedTime: 10, marks: 1, tags: ["package", "position"] },
+    { id: "CH18-TF-005", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "A class member without any access modifier has public access.", correctAnswer: "False", explanation: "A member without an access modifier has default (package-private) access.", hint: "What is the default access level?", estimatedTime: 15, marks: 1, tags: ["default", "no modifier"] }
+  ],
+  fillBlanks: [
+    { id: "CH18-FIB-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "A group of related classes and interfaces is called a ________.", correctAnswer: "package", hint: "It packages classes together.", estimatedTime: 10, marks: 1, tags: ["package"] },
+    { id: "CH18-FIB-002", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "The ________ keyword is used to import classes from other packages.", correctAnswer: "import", hint: "It imports classes.", estimatedTime: 10, marks: 1, tags: ["import"] },
+    { id: "CH18-FIB-003", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "The ________ access modifier allows access only within the same class.", correctAnswer: "private", hint: "It is the most restrictive.", estimatedTime: 10, marks: 1, tags: ["private"] },
+    { id: "CH18-FIB-004", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "The ________ access modifier allows access from anywhere.", correctAnswer: "public", hint: "It is the most visible.", estimatedTime: 10, marks: 1, tags: ["public"] },
+    { id: "CH18-FIB-005", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "The ________ access modifier allows access within the same package and by subclasses.", correctAnswer: "protected", hint: "It protects access while allowing subclass access.", estimatedTime: 15, marks: 1, tags: ["protected"] }
+  ],
+  outputQuestions: [
+    { id: "CH18-OUT-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "What is the output?
+package com.example;
+public class Test {
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+}", correctAnswer: "Hello", explanation: "The package declaration does not affect the output. The program prints 'Hello'.", hint: "Does the package affect output?", estimatedTime: 10, marks: 1, tags: ["package", "output"] },
+    { id: "CH18-OUT-002", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "What will be the output?
+class A {
+    private int x = 10;
+    public int getX() { return x; }
+}
+class B {
+    public static void main(String[] args) {
+        A a = new A();
+        System.out.println(a.getX());
+    }
+}", correctAnswer: "10", explanation: "x is private but accessible through the public getter method getX().", hint: "Can you access private fields through public methods?", estimatedTime: 15, marks: 1, tags: ["private", "getter"] },
+    { id: "CH18-OUT-003", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "What will be the output?
+import java.util.ArrayList;
+public class Test {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Hello");
+        System.out.println(list.get(0));
+    }
+}", correctAnswer: "Hello", explanation: "ArrayList is imported and used to store and retrieve strings.", hint: "What does list.get(0) return?", estimatedTime: 15, marks: 1, tags: ["ArrayList", "import"] },
+    { id: "CH18-OUT-004", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "What will be the output?
+class A {
+    int x = 5;
+}
+class B extends A {
+    void display() { System.out.println(x); }
+}
+public class Test {
+    public static void main(String[] args) {
+        new B().display();
+    }
+}", correctAnswer: "5", explanation: "x has default access. B is in the same package, so it can access x.", hint: "Can classes in the same package access default members?", estimatedTime: 15, marks: 1, tags: ["default", "same package"] },
+    { id: "CH18-OUT-005", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "What will be the output?
+import static java.lang.Math.*;
+public class Test {
+    public static void main(String[] args) {
+        System.out.println(max(10, 20));
+    }
+}", correctAnswer: "20", explanation: "import static imports all static members of Math. max(10, 20) returns 20.", hint: "What does import static do?", estimatedTime: 15, marks: 1, tags: ["import static", "Math"] }
+  ],
+  errorFinding: [
+    { id: "CH18-ERR-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Find the error:
+package com.example;
+public class Test { }
+// File name: Test.java", correctAnswer: "No error. File name matches the public class name.", hint: "Does the file name match the class name?", estimatedTime: 10, marks: 1, tags: ["file name", "correct"] },
+    { id: "CH18-ERR-002", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Find the error:
+package com.example;
+public class Test { }
+// File name: Example.java", correctAnswer: "File name must match the public class name. Rename to Test.java.", hint: "What should the file name be?", estimatedTime: 10, marks: 1, tags: ["file name", "mismatch"] },
+    { id: "CH18-ERR-003", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Find the error:
+class A {
+    private int x = 10;
+}
+class B {
+    void display() { System.out.println(x); }
+}", correctAnswer: "x is private in A and not accessible in B. Add a public getter method.", hint: "Can you access private members from another class?", estimatedTime: 15, marks: 2, tags: ["private", "access"] }
+  ],
+  programmingQuestions: [
+    { id: "CH18-PRQ-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", problemStatement: "Create a package 'com.school' with a class 'Student' that has private fields and public getters/setters.", input: "No input.", output: "Name: Priya, Age: 16", logic: "Create a class with encapsulation in a package.", solution: "package com.school; public class Student { private String name; private int age; public String getName() { return name; } public void setName(String n) { name = n; } public int getAge() { return age; } public void setAge(int a) { age = a; } }", solutionExplanation: "Package declaration, private fields, public getters/setters.", sampleTestCases: [{ input: "No input", output: "Name: Priya, Age: 16" }], estimatedTime: 300, marks: 5, tags: ["package", "encapsulation"] },
+    { id: "CH18-PRQ-002", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", problemStatement: "Write a program that imports ArrayList from java.util and demonstrates its use.", input: "No input.", output: "List: [Apple, Banana, Cherry]", logic: "Import ArrayList, add elements, print the list.", solution: "import java.util.ArrayList; public class ListDemo { public static void main(String[] args) { ArrayList<String> list = new ArrayList<>(); list.add("Apple"); list.add("Banana"); list.add("Cherry"); System.out.println("List: " + list); } }", solutionExplanation: "Import ArrayList, add elements, print using toString().", sampleTestCases: [{ input: "No input", output: "List: [Apple, Banana, Cherry]" }], estimatedTime: 300, marks: 5, tags: ["import", "ArrayList"] },
+    { id: "CH18-PRQ-003", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", problemStatement: "Create a class with all four access modifiers and demonstrate their visibility.", input: "No input.", output: "publicVar: 1
+protectedVar: 2
+defaultVar: 3", logic: "Create fields with public, protected, default, and private access. Show which are accessible.", solution: "class Test { public int publicVar = 1; protected int protectedVar = 2; int defaultVar = 3; private int privateVar = 4; } public class AccessDemo { public static void main(String[] args) { Test t = new Test(); System.out.println("publicVar: " + t.publicVar); System.out.println("protectedVar: " + t.protectedVar); System.out.println("defaultVar: " + t.defaultVar); } }", solutionExplanation: "Demonstrates public, protected, and default access. privateVar is not accessible.", sampleTestCases: [{ input: "No input", output: "publicVar: 1\nprotectedVar: 2\ndefaultVar: 3" }], estimatedTime: 360, marks: 5, tags: ["access modifiers", "visibility"] }
+  ],
+  debuggingQuestions: [
+    { id: "CH18-DBG-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Identify and fix: File name is Example.java but class is public class Test.", correctAnswer: "Rename file to Test.java to match the public class name.", hint: "What should the file name match?", estimatedTime: 10, marks: 1, tags: ["file name", "mismatch"] },
+    { id: "CH18-DBG-002", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "Identify and fix: class A { private int x; } class B { void show() { System.out.println(x); } }", correctAnswer: "x is private in A. Add a public getter method in A.", hint: "Can you access private members from another class?", estimatedTime: 15, marks: 2, tags: ["private", "access"] },
+    { id: "CH18-DBG-003", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Identify and fix: package statement is not the first line.", correctAnswer: "Move the package statement to the first non-comment line.", hint: "Where must the package statement be?", estimatedTime: 15, marks: 2, tags: ["package", "position"] }
+  ],
+  caseBasedQuestions: [
+    { id: "CH18-CBQ-001", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "A software company needs to organize their code:
+a) Create a package structure for a banking system.
+b) What classes would go in each package?
+c) How would you import classes from other packages?
+d) What access modifiers would you use for sensitive data?", correctAnswer: "a) com.bank.account, com.bank.customer, com.bank.transaction
+b) Account, Customer, Transaction classes in respective packages.
+c) import com.bank.account.Account;
+d) Use private for sensitive data, public for getters/setters.", hint: "How do you organize a large project?", estimatedTime: 60, marks: 5, tags: ["packages", "organization"] },
+    { id: "CH18-CBQ-002", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "A library management system needs to:
+a) Create a Book class with private fields.
+b) Provide public getters/setters.
+c) Allow only same-package classes to access certain fields.
+d) Create a subclass in a different package that accesses protected fields.", correctAnswer: "a) private String title, author; b) public String getTitle() { return title; } etc. c) Use default access for package-specific fields. d) protected fields accessible in subclass.", hint: "How do you control access at different levels?", estimatedTime: 75, marks: 5, tags: ["access modifiers", "library"] }
+  ],
+  vivaQuestions: [
+    { id: "CH18-VIV-001", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "What is a package? Why is it used?", sampleAnswer: "A package is a namespace that organizes classes and interfaces. It prevents naming conflicts, controls access, and makes code easier to manage.", estimatedTime: 15, marks: 2, tags: ["package", "purpose"] },
+    { id: "CH18-VIV-002", difficulty: "easy", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "What are the four access modifiers in Java?", sampleAnswer: "1) private - same class only. 2) default (no modifier) - same package. 3) protected - same package + subclasses. 4) public - anywhere.", estimatedTime: 15, marks: 2, tags: ["access modifiers", "list"] },
+    { id: "CH18-VIV-003", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Import", question: "What is the difference between import and import static?", sampleAnswer: "import imports classes from other packages. import static imports static members (fields and methods) from a class, allowing you to use them without the class name.", estimatedTime: 20, marks: 2, tags: ["import", "import static", "difference"] },
+    { id: "CH18-VIV-004", difficulty: "medium", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Packages", question: "Why must the file name match the public class name?", sampleAnswer: "The Java compiler and JVM use the file name to find the class. A public class must be in a file with the same name so the compiler can locate it.", estimatedTime: 15, marks: 2, tags: ["file name", "public class"] },
+    { id: "CH18-VIV-005", difficulty: "hard", chapter: "Packages & Access Modifiers", chapterId: 18, topic: "Access Modifiers", question: "When would you use protected vs default access?", sampleAnswer: "Use protected when you want subclasses (even in different packages) to access a member. Use default when only classes in the same package should access it. Protected is wider than default.", estimatedTime: 25, marks: 3, tags: ["protected", "default", "comparison"] }
+  ]
+};
+
+export default chapter18;

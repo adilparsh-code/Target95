@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getChapterContent, getChapterQuestions } from "@/lib/curriculum";
+import { getChapterContent, getChapterQuestions, getChapterSlugs } from "@/lib/curriculum";
 import ChapterQuestions from "../../components/ChapterQuestions";
 import ChapterStats from "../../components/ChapterStats";
 import ChapterProgress from "../../components/ChapterProgress";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Container from "../../components/ui/Container";
+
+export function generateStaticParams() {
+  return getChapterSlugs("java");
+}
 
 export default async function ChapterPage({ params }) {
   const { chapter } = await params;

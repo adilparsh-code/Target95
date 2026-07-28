@@ -1,0 +1,302 @@
+[
+  {
+    "id": "dyk-001",
+    "topic": "Variables",
+    "fact": "In Java, variable names can start with a letter, underscore (_), or dollar sign ($), but not a number.\nFor example, `_score` and `$count` are valid variable names, but `1stPlace` is not.\nJava is case-sensitive, so `age` and `Age` are two different variables.",
+    "why_it_matters": "Knowing the rules for naming variables helps you avoid mysterious errors and write clean, readable code from day one."
+  },
+  {
+    "id": "dyk-002",
+    "topic": "Variables",
+    "fact": "A variable declared inside a method is called a 'local variable' and MUST be initialized before use.\nIf you try to print a local variable without giving it a value, Java will refuse to compile your program.\nThis is different from member variables, which get default values automatically.",
+    "why_it_matters": "This rule prevents bugs where you might accidentally use garbage values, keeping your programs safe and predictable."
+  },
+  {
+    "id": "dyk-003",
+    "topic": "Variables",
+    "fact": "Java has four types of variables: local, instance, static, and parameter variables.\nA static variable belongs to the class itself, not to any single object.\nAll objects of that class share the same static variable, so changing it affects every object.",
+    "why_it_matters": "Static variables let you store data that should be common across all objects, like counting how many students are in a class."
+  },
+  {
+    "id": "dyk-004",
+    "topic": "Variables",
+    "fact": "You can declare multiple variables of the same type in one line: `int a, b, c;`\nBut you cannot mix types — `int a, double b;` will give a compile-time error.\nUse commas carefully to keep your code both short and clear.",
+    "why_it_matters": "Writing compact variable declarations saves lines while keeping your code organized and easy to read."
+  },
+  {
+    "id": "dyk-005",
+    "topic": "Data Types",
+    "fact": "Java has 8 primitive data types: byte, short, int, long, float, double, char, and boolean.\nUnlike some languages, these are NOT objects — they are raw values stored directly in memory.\nThis makes them faster than objects and perfect for simple calculations.",
+    "why_it_matters": "Understanding primitives helps you write code that is both memory-efficient and lightning fast."
+  },
+  {
+    "id": "dyk-006",
+    "topic": "Data Types",
+    "fact": "The `byte` data type can only store values from -128 to 127, which is exactly 256 possible values.\nThis is because a byte uses 8 bits of memory (2⁸ = 256).\nIf you try storing 200 in a byte, your program will not compile.",
+    "why_it_matters": "Choosing the right data type saves memory — use byte when you know the numbers are small, like storing a student's age."
+  },
+  {
+    "id": "dyk-007",
+    "topic": "Data Types",
+    "fact": "The `char` data type in Java is 2 bytes (16 bits), not 1 byte like in many older languages.\nThis is because Java supports Unicode, which can represent characters from almost every written language in the world.\n`char` can store letters, digits, or even emojis like 😊.",
+    "why_it_matters": "Char's Unicode support means your Java programs can handle text in Hindi, Arabic, Chinese, and many other languages correctly."
+  },
+  {
+    "id": "dyk-008",
+    "topic": "Data Types",
+    "fact": "The `double` data type can store numbers as large as about 1.8 × 10³⁰⁸ and as precise as 15 decimal digits.\nIt uses 64 bits of memory — that's 8 bytes for just one number.\nAlways use double for scientific calculations, like gravity or distance between planets.",
+    "why_it_matters": "Using double ensures your decimal calculations are accurate enough for real-world scientific and mathematical problems."
+  },
+  {
+    "id": "dyk-009",
+    "topic": "Operators",
+    "fact": "The modulus operator `%` gives the remainder of a division, not the quotient.\nFor example, `17 % 5` gives `2` because 17 ÷ 5 leaves a remainder of 2.\nThis operator is incredibly useful for checking if a number is even or odd.",
+    "why_it_matters": "Modulus is a secret weapon — it lets you check divisibility, cycle through arrays, and solve number puzzles with one operator."
+  },
+  {
+    "id": "dyk-010",
+    "topic": "Operators",
+    "fact": "The `++` operator adds 1 to a variable, but `x++` and `++x` give different results!\n`int y = x++` first uses x, then increments it (post-increment).\n`int y = ++x` first increments x, then uses it (pre-increment).",
+    "why_it_matters": "Knowing the difference between pre and post increment prevents tricky bugs that are very common in exam questions."
+  },
+  {
+    "id": "dyk-011",
+    "topic": "Operators",
+    "fact": "The `==` operator checks if two primitive values are equal, but for Strings it checks memory addresses, not content.\nTo compare the actual text in two Strings, you must use the `.equals()` method.\nThis is one of the most common mistakes new Java students make.",
+    "why_it_matters": "Using .equals() instead of == for strings will save you hours of debugging and is a guaranteed ICSE exam question."
+  },
+  {
+    "id": "dyk-012",
+    "topic": "Operators",
+    "fact": "The ternary operator `? :` is a short if-else statement in a single line.\n`int max = (a > b) ? a : b;` assigns the larger value to max.\nIt is called 'ternary' because it takes three operands — the only operator in Java to do so.",
+    "why_it_matters": "The ternary operator makes your code shorter and cleaner when you need simple conditional assignments."
+  },
+  {
+    "id": "dyk-013",
+    "topic": "Loops",
+    "fact": "A `for` loop's three parts — initialization, condition, and update — can all be empty!\n`for (;;)` creates an infinite loop that runs forever unless you use `break`.\nThis is called an 'infinite loop' and can be useful in game loops that run until the player quits.",
+    "why_it_matters": "Understanding all parts of a for loop lets you write flexible loops that solve real-world programming problems."
+  },
+  {
+    "id": "dyk-014",
+    "topic": "Loops",
+    "fact": "The `break` statement exits only the innermost loop it is inside.\nIf you have a loop inside another loop, `break` will stop the inner loop but the outer loop continues.\nTo break out of multiple loops, you need a labeled break: `outerLoop: for(...)` then `break outerLoop;`.",
+    "why_it_matters": "Labeled breaks give you precise control over nested loops, a skill that separates beginners from advanced programmers."
+  },
+  {
+    "id": "dyk-015",
+    "topic": "Loops",
+    "fact": "The `continue` statement skips the rest of the current iteration and jumps to the next one.\nFor example, to print only odd numbers, you can use `if (i % 2 == 0) continue;` to skip even numbers.\nContinue does not exit the loop — it just skips one round.",
+    "why_it_matters": "Using continue helps you avoid deeply nested if statements and keeps your loop logic simple and readable."
+  },
+  {
+    "id": "dyk-016",
+    "topic": "Loops",
+    "fact": "A do-while loop always runs at least once, even if the condition is false.\nThis is because the condition is checked at the end, not the beginning.\nUse do-while when you need to ask a user a question and repeat until they give a valid answer.",
+    "why_it_matters": "Do-while is perfect for menus and input validation where you must show the user something at least one time."
+  },
+  {
+    "id": "dyk-017",
+    "topic": "Methods",
+    "fact": "A method can 'call itself' — this is called recursion.\nFor example, a method to calculate factorial calls itself with a smaller number until it reaches 1.\nWithout a base case (stopping condition), recursion will cause a StackOverflowError and crash your program.",
+    "why_it_matters": "Recursion solves complex problems like tree traversal and mathematical calculations in just a few lines of code."
+  },
+  {
+    "id": "dyk-018",
+    "topic": "Methods",
+    "fact": "Method overloading allows multiple methods with the SAME name but DIFFERENT parameters in the same class.\nJava decides which method to call based on the number and type of arguments you pass.\nFor example, `add(int a, int b)` and `add(int a, int b, int c)` can both exist together.",
+    "why_it_matters": "Overloading makes your code intuitive — you can have one method name that works with different inputs."
+  },
+  {
+    "id": "dyk-019",
+    "topic": "Methods",
+    "fact": "A method declared with `static` belongs to the class, not to any object.\nYou can call a static method without creating an object: `Math.max(10, 20)` works without `new Math()`.\nThe `main` method is static because the JVM must call it before any objects exist.",
+    "why_it_matters": "Static methods are the entry point of every Java program and are used for utility operations that don't need object data."
+  },
+  {
+    "id": "dyk-020",
+    "topic": "Methods",
+    "fact": "Parameters in Java are passed by value, which means the method gets a copy, not the original variable.\nHowever, for objects, the 'value' is the reference (memory address), so the method CAN modify the object's contents.\nPrimitive values inside a method can never change the original variable outside.",
+    "why_it_matters": "Understanding pass-by-value prevents confusion when your method changes an object's data but not the original reference."
+  },
+  {
+    "id": "dyk-021",
+    "topic": "Arrays",
+    "fact": "Arrays in Java have a fixed length that cannot change after creation.\nOnce you write `int[] marks = new int[5];`, that array will always hold exactly 5 elements.\nIf you try to access index 5 or higher, Java throws an ArrayIndexOutOfBoundsException.",
+    "why_it_matters": "Knowing that arrays are fixed-size helps you plan your data storage and avoid runtime crashes in your programs."
+  },
+  {
+    "id": "dyk-022",
+    "topic": "Arrays",
+    "fact": "Array indices in Java start at 0, not 1.\nSo an array of size 10 has indices 0 through 9 — accessing index 10 is an error.\nThis zero-based indexing comes from the C programming language and is used by most modern languages.",
+    "why_it_matters": "Remembering zero-based indexing is essential for loops, sort algorithms, and passing your ICSE computer exam."
+  },
+  {
+    "id": "dyk-023",
+    "topic": "Arrays",
+    "fact": "Java has a shorter way to create and fill an array in one line: `int[] nums = {10, 20, 30, 40};`\nThis is called an array initializer and works only when you declare the variable.\nJava automatically counts the elements and creates an array of the right size.",
+    "why_it_matters": "Array initializers save time and make your code cleaner when you know the values in advance."
+  },
+  {
+    "id": "dyk-024",
+    "topic": "Arrays",
+    "fact": "A 2D array in Java is actually an array of arrays — each row is itself a separate array object.\nThis means rows can have different lengths, called a 'jagged array'.\nFor example: `int[][] jagged = {{1,2}, {3,4,5}, {6}};` has rows of sizes 2, 3, and 1.",
+    "why_it_matters": "Jagged arrays let you store data efficiently when rows have different amounts of data, like storing marks of different subjects."
+  },
+  {
+    "id": "dyk-025",
+    "topic": "Strings",
+    "fact": "Strings in Java are immutable — once created, their content cannot be changed.\nWhen you use `+` to concatenate, Java actually creates a brand new String object.\nThe old String remains unchanged in memory until the garbage collector cleans it up.",
+    "why_it_matters": "Immutability makes Strings safe to share between methods without worrying about accidental changes to your data."
+  },
+  {
+    "id": "dyk-026",
+    "topic": "Strings",
+    "fact": "The `String` class has over 40 built-in methods for text manipulation.\nMethods like `length()`, `charAt()`, `substring()`, `indexOf()`, and `toUpperCase()` are the most commonly used.\nYou do not need to import any package — String is part of `java.lang` which is automatically available.",
+    "why_it_matters": "String methods are incredibly powerful — with just a few method calls you can search, extract, and transform any text."
+  },
+  {
+    "id": "dyk-027",
+    "topic": "Strings",
+    "fact": "Comparing Strings with `==` checks if they are the SAME object in memory, not if they have the same text.\nJava uses a 'String Pool' — if you create `String s = \"hello\"`, Java checks the pool first.\nIf \"hello\" already exists, s points to the existing object instead of creating a new one.",
+    "why_it_matters": "The String Pool saves massive amounts of memory when your program uses the same strings many times."
+  },
+  {
+    "id": "dyk-028",
+    "topic": "Strings",
+    "fact": "The `StringBuilder` class can modify text without creating new objects, making it much faster than String for heavy text work.\nIf you need to concatenate many strings in a loop, StringBuilder is up to 10x faster.\nUse `StringBuilder sb = new StringBuilder();` then `sb.append(\"text\");` for efficient string building.",
+    "why_it_matters": "StringBuilder is essential for writing high-performance programs that process large amounts of text efficiently."
+  },
+  {
+    "id": "dyk-029",
+    "topic": "Strings",
+    "fact": "The escape character `\\` lets you insert special characters inside a String.\n`\\\"Hello\\\"` adds a double quote inside the string, and `\\n` moves to a new line.\nTo include a backslash itself, use `\\\\` — yes, you need two backslashes to print one!",
+    "why_it_matters": "Escape sequences let you format output beautifully and include quotes, tabs, and newlines in your text."
+  },
+  {
+    "id": "dyk-030",
+    "topic": "Classes",
+    "fact": "A class is a blueprint for creating objects — it defines what properties and behaviors the objects will have.\nYou can create multiple objects from the same class, each with its own separate data.\nThink of a class like a cookie cutter and objects like the cookies you bake with it.",
+    "why_it_matters": "Classes let you organize code into reusable templates, which is the foundation of all object-oriented programming."
+  },
+  {
+    "id": "dyk-031",
+    "topic": "Classes",
+    "fact": "A class can have access modifiers: `public`, `private`, `protected`, or default (no modifier).\n`private` members are only accessible within the same class — no other class can access them.\nThis is called encapsulation, and it protects your data from accidental changes.",
+    "why_it_matters": "Using private access modifiers protects your data and follows the principle of data hiding required in ICSE exams."
+  },
+  {
+    "id": "dyk-032",
+    "topic": "Classes",
+    "fact": "Java allows only one public class per source file, and the file name must match the public class name.\nIf your class is `public class Student`, the file must be named `Student.java`.\nBut you can have multiple non-public classes in the same file for helper functionality.",
+    "why_it_matters": "Following the one-public-class rule keeps your project organized and prevents confusing filename mismatches."
+  },
+  {
+    "id": "dyk-033",
+    "topic": "Classes",
+    "fact": "The `final` keyword on a class means it cannot be extended (no subclasses allowed).\nThe `String` class is declared as `public final class String` — you cannot create a subclass of String.\nThis prevents developers from breaking how Strings work by changing their behavior.",
+    "why_it_matters": "Final classes ensure security and consistency for critical system classes that should never be modified."
+  },
+  {
+    "id": "dyk-034",
+    "topic": "Objects",
+    "fact": "An object is created using the `new` keyword followed by a constructor call.\n`Student s = new Student();` does three things: allocates memory, initializes the object, and returns the reference.\nThe reference (like `s`) is stored in the variable, not the actual object itself.",
+    "why_it_matters": "Understanding how objects are created helps you manage memory and understand what your code actually does."
+  },
+  {
+    "id": "dyk-035",
+    "topic": "Objects",
+    "fact": "Multiple reference variables can point to the same object in memory.\n`Student a = new Student(); Student b = a;` — now both a and b refer to the same student.\nChanges made through a will be visible when you access the object through b.",
+    "why_it_matters": "Multiple references are useful for sharing objects between methods, but you must be careful not to create unintended side effects."
+  },
+  {
+    "id": "dyk-036",
+    "topic": "Objects",
+    "fact": "The `null` keyword means a reference variable points to NO object.\nAccessing a method or property on a null reference throws a NullPointerException.\nAlways check `if (obj != null)` before using an object to prevent crashes.",
+    "why_it_matters": "Null checks are a professional programming practice that prevents one of the most common runtime errors in Java."
+  },
+  {
+    "id": "dyk-037",
+    "topic": "Objects",
+    "fact": "Java automatically destroys objects that are no longer referenced — this is called garbage collection.\nYou cannot manually delete an object like in C++; Java does it for you when memory is needed.\nThe garbage collector runs in the background and you rarely need to think about it.",
+    "why_it_matters": "Automatic garbage collection means you can focus on logic without worrying about memory leaks and manual cleanup."
+  },
+  {
+    "id": "dyk-038",
+    "topic": "Constructors",
+    "fact": "A constructor has the same name as the class and NO return type — not even void.\nWriting `void Student()` makes it a regular method, not a constructor.\nIf you do not create any constructor, Java provides a default constructor with no parameters automatically.",
+    "why_it_matters": "The no-return-type rule helps you identify constructors quickly and understand the special role they play."
+  },
+  {
+    "id": "dyk-039",
+    "topic": "Constructors",
+    "fact": "A class can have multiple constructors with different parameters — this is constructor overloading.\nFor example, `Student()` and `Student(String name, int age)` can both exist in the same class.\nJava calls the correct constructor based on the arguments you pass when creating the object.",
+    "why_it_matters": "Constructor overloading gives you flexibility — you can create objects with different levels of initial data."
+  },
+  {
+    "id": "dyk-040",
+    "topic": "Constructors",
+    "fact": "The `this()` call inside a constructor calls another constructor of the same class.\n`this(name, 0)` would call a two-parameter constructor from a one-parameter constructor.\nThe `this()` call must be the FIRST statement in the constructor, or Java will not compile your code.",
+    "why_it_matters": "Using this() reduces code duplication by reusing constructors, keeping your class clean and maintainable."
+  },
+  {
+    "id": "dyk-041",
+    "topic": "Constructors",
+    "fact": "A constructor can be declared `private`, which means no other class can create an object using it.\nPrivate constructors are used in special patterns like Singleton, where only one object of the class should exist.\nThis is an advanced concept, but you will see it used in library classes.",
+    "why_it_matters": "Private constructors give you complete control over how and when objects of your class are created."
+  },
+  {
+    "id": "dyk-042",
+    "topic": "Inheritance",
+    "fact": "Inheritance allows a class to acquire the properties and methods of another class using the `extends` keyword.\n`class Dog extends Animal` means Dog gets everything Animal has, plus its own special features.\nJava supports only single inheritance — a class can extend only ONE parent class.",
+    "why_it_matters": "Inheritance eliminates duplicate code by letting you reuse and build upon existing classes, saving hundreds of lines of code."
+  },
+  {
+    "id": "dyk-043",
+    "topic": "Inheritance",
+    "fact": "The `super` keyword lets a subclass call methods or constructors of its parent class.\n`super.display()` calls the parent's display method, even if the subclass has its own version.\n`super()` in a constructor calls the parent's constructor and must be the very first statement.",
+    "why_it_matters": "The super keyword is essential for working with inheritance and is a frequently tested topic in ICSE exams."
+  },
+  {
+    "id": "dyk-044",
+    "topic": "Inheritance",
+    "fact": "Java does NOT support multiple inheritance (one class extending two classes) to avoid the Diamond Problem.\nIf class C extends both A and B, and both have a method `show()`, Java cannot decide which one to use.\nInstead, Java uses interfaces to achieve multiple inheritance of behavior without the conflict.",
+    "why_it_matters": "This design choice keeps Java simple and prevents confusing conflicts that would make debugging very difficult."
+  },
+  {
+    "id": "dyk-045",
+    "topic": "Inheritance",
+    "fact": "Private members of a parent class are NOT inherited by the subclass.\nEven though a Dog extends Animal, the Dog methods cannot directly access Animal's private fields.\nThey must use public getter and setter methods defined in the Animal class to access those private fields.",
+    "why_it_matters": "This rule enforces encapsulation — your private data stays protected even when other classes inherit from yours."
+  },
+  {
+    "id": "dyk-046",
+    "topic": "Polymorphism",
+    "fact": "Polymorphism means 'many forms' — the same method name can behave differently in different classes.\nWhen a subclass overrides a parent method, the correct version is called based on the object type, not the reference type.\n`Animal a = new Dog(); a.sound();` calls Dog's sound method, even though the reference is of type Animal.",
+    "why_it_matters": "Polymorphism lets you write flexible code that works with any subclass, making your programs extensible and powerful."
+  },
+  {
+    "id": "dyk-047",
+    "topic": "Polymorphism",
+    "fact": "Method overriding occurs when a subclass provides its own implementation of a method already defined in the parent.\nThe overridden method must have the same name, return type, and parameters as the parent's method.\nThe `@Override` annotation tells Java to check that you are correctly overriding a method — use it always!",
+    "why_it_matters": "Method overriding lets subclasses customize behavior while maintaining a consistent interface across all subclasses."
+  },
+  {
+    "id": "dyk-048",
+    "topic": "Polymorphism",
+    "fact": "Compile-time polymorphism (method overloading) is resolved when your code is compiled.\nRun-time polymorphism (method overriding) is resolved when your program is actually running.\nThis is why Java is called a 'dynamically bound' language — it decides some things at runtime.",
+    "why_it_matters": "Knowing when Java decides which method to call helps you understand both exam questions and real-world program behavior."
+  },
+  {
+    "id": "dyk-049",
+    "topic": "Polymorphism",
+    "fact": "An interface in Java defines a contract of methods that a class MUST implement.\nA class can implement multiple interfaces, which is Java's way of achieving multiple inheritance.\n`interface Flyable { void fly(); }` — any class that implements Flyable must provide its own fly method.",
+    "why_it_matters": "Interfaces allow completely different classes to share common behavior, making your code modular and reusable."
+  },
+  {
+    "id": "dyk-050",
+    "topic": "Polymorphism",
+    "fact": "The `instanceof` operator checks whether an object is an instance of a particular class or interface.\n`if (obj instanceof Dog)` returns true if obj was created from the Dog class or a subclass of Dog.\nThis is often used before casting an object to a specific type to avoid ClassCastException.",
+    "why_it_matters": "Using instanceof before type casting is a safety habit that prevents runtime crashes in polymorphic code."
+  }
+]

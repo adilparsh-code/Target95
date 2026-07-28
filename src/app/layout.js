@@ -1,5 +1,5 @@
 import "./globals.css";
-import { AuthProvider } from "@/context/AuthContext";
+import AuthProviderWrapper from "./components/AuthProviderWrapper";
 import PWAPrompt from "./components/PWAPrompt";
 import OfflineBanner from "./components/OfflineBanner";
 import IOSInstallPrompt from "./components/IOSInstallPrompt";
@@ -113,10 +113,10 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-full flex flex-col">
-        <AuthProvider>
+        <AuthProviderWrapper>
           <OfflineBanner />
           {children}
-        </AuthProvider>
+        </AuthProviderWrapper>
         <PWAPrompt />
         <IOSInstallPrompt />
       </body>

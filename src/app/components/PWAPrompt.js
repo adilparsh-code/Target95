@@ -2,23 +2,29 @@
 
 import { useEffect, useState } from 'react';
 
+const DISMISSED_STORAGE_KEY = 'target95-install-dismissed';
+
 export default function PWAPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [showPrompt, setShowPrompt] = useState(false);
   const [newVersionAvailable, setNewVersionAvailable] = useState(false);
 
   useEffect(() => {
+    // Don't show install prompt if already in standalone mode (already installed)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    if (isStandalone) return;
+
+    // Check if user previously dismissed the prompt
+    const dismissed = localStorage.getItem(DISMISSED_STORAGE_KEY);
+    if (dismissed) return;
+
     // Handle beforeinstallprompt event for PWA installation
     const handleBeforeInstallPrompt = (e) => {
-      // Prevent the default prompt from showing
       e.preventDefault();
-      // Store the event so it can be triggered later
       setDeferredPrompt(e);
-      // Show our custom install prompt
       setShowPrompt(true);
     };
 
-    // Listen for the beforeinstallprompt event
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     // Check for service worker updates
@@ -26,12 +32,13 @@ export default function PWAPrompt() {
       navigator.serviceWorker.register('/sw.js').then((registration) => {
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              // New version available
-              setNewVersionAvailable(true);
-            }
-          });
+          if (newWorker) {
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                setNewVersionAvailable(true);
+              }
+            });
+          }
         });
       });
     }
@@ -44,19 +51,28 @@ export default function PWAPrompt() {
   const handleInstall = async () => {
     if (!deferredPrompt) return;
 
-    // Show the browser's install prompt
     deferredPrompt.prompt();
-
-    // Wait for the user to respond to the prompt
     const { outcome } = await deferredPrompt.userChoice;
-    
-    // We've used the prompt, can't use it again, discard it
+
     setDeferredPrompt(null);
     setShowPrompt(false);
+
+    if (outcome === 'accepted') {
+      try {
+        localStorage.setItem(DISMISSED_STORAGE_KEY, 'true');
+      } catch {
+        // localStorage not available
+      }
+    }
   };
 
   const handleDismiss = () => {
     setShowPrompt(false);
+    try {
+      localStorage.setItem(DISMISSED_STORAGE_KEY, 'true');
+    } catch {
+      // localStorage not available
+    }
   };
 
   const handleUpdate = () => {
@@ -74,15 +90,22 @@ export default function PWAPrompt() {
     <>
       {/* PWA Install Prompt */}
       {showPrompt && (
-        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white rounded-lg shadow-xl p-4 z-50 border border-gray-200">
+        <div
+          role="dialog"
+          aria-label="Install app"
+          className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white rounded-lg shadow-xl p-4 z-50 border border-gray-200"
+        >
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-gray-900">Install Target95+</h3>
-              <p className="text-sm text-gray-600 mt-1">Install our app for a better offline experience</p>
+              <p className="text-sm text-gray-600 mt-1">
+                Install our app for a better offline experience
+              </p>
             </div>
             <button
               onClick={handleDismiss}
               className="ml-4 text-gray-400 hover:text-gray-600"
+              aria-label="Dismiss install prompt"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -108,11 +131,16 @@ export default function PWAPrompt() {
 
       {/* New Version Available Notification */}
       {newVersionAvailable && (
-        <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-green-50 rounded-lg shadow-xl p-4 z-50 border border-green-200">
+        <div
+          role="alert"
+          className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-green-50 rounded-lg shadow-xl p-4 z-50 border border-green-200"
+        >
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-green-900">New Version Available!</h3>
-              <p className="text-sm text-green-700 mt-1">Refresh to update to the latest version</p>
+              <p className="text-sm text-green-700 mt-1">
+                Refresh to update to the latest version
+              </p>
             </div>
           </div>
           <div className="mt-4">

@@ -16,6 +16,11 @@ export function getSubjectContent(subjectId) {
   return curriculum.find((subject) => subject.id === subjectId);
 }
 
+export function getChapterSlugs(subjectId) {
+  const subject = getSubjectContent(subjectId);
+  return subject?.chapters.map((chapter) => ({ chapter: chapter.slug })) ?? [];
+}
+
 export function getChapterContent(subjectId, chapterSlug) {
   return getSubjectContent(subjectId)?.chapters.find((chapter) => chapter.slug === chapterSlug);
 }

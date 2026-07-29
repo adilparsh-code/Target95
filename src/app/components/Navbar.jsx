@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
@@ -8,7 +8,7 @@ import Button from "./ui/Button";
 import Container from "./ui/Container";
 import { useAuth } from "@/context/AuthContext";
 import StudentGlobalSearch from "./StudentGlobalSearch";
-import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, Bars3Icon, XMarkIcon, SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 const links = [
   { href: "/daily-challenge", label: "Daily Challenge", description: "Earn XP", icon: "DC" },
@@ -29,6 +29,25 @@ export default function Navbar() {
   const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Check localStorage or system preference on mount
+    const savedDarkMode = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedDarkMode === 'true' || (!savedDarkMode && prefersDark)) {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('darkMode', newDarkMode.toString());
+    document.documentElement.classList.toggle('dark');
+  };
 
   const handleLogout = async () => {
     const result = await logout();
@@ -36,29 +55,37 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 dark:border-gray-700 dark:bg-gray-900/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-gray-900/80">
       <Container>
         <div className="flex min-h-16 items-center justify-between gap-3 py-2 sm:min-h-[72px] sm:py-3">
           {/* Logo */}
-          <Link href="/" className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300 shrink-0">
+          <Link href="/" className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-300 shrink-0">
             🎯 Target95+
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex min-w-0 flex-1 items-center justify-center gap-1">
             {links.map((link) => (
-              <Link key={link.href} href={link.href} className="rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-700">
+              <Link key={link.href} href={link.href} className="rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 transition-colors hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-700 dark:hover:text-blue-300">
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Right section: search + auth */}
+          {/* Right section: search + dark mode + auth */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button
               type="button"
+              onClick={toggleDarkMode}
+              className="rounded-xl border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800 p-2 text-gray-700 dark:text-gray-200 transition hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700"
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <SunIcon className="h-5 w-5" aria-hidden="true" /> : <MoonIcon className="h-5 w-5" aria-hidden="true" />}
+            </button>
+            <button
+              type="button"
               onClick={() => setSearchOpen(true)}
-              className="rounded-xl border border-gray-300 bg-white p-2 text-gray-700 transition hover:border-gray-400 hover:bg-gray-50"
+              className="rounded-xl border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800 p-2 text-gray-700 dark:text-gray-200 transition hover:border-gray-400 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700"
               aria-label="Open search"
             >
               <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
@@ -114,7 +141,7 @@ export default function Navbar() {
           mobileMenuOpen ? "max-h-[calc(100dvh-64px)] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 bg-white px-4 py-4 space-y-1 overscroll-contain">
+        <div className="max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-4 space-y-1 overscroll-contain">
           {links.map((link) => (
             <div key={link.href} onClick={() => setMobileMenuOpen(false)}>
               <SectionLink href={link.href} label={link.label} description={link.description} icon={link.icon} />

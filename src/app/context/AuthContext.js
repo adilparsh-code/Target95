@@ -11,7 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db } from "@/lib/firebase";
+import { getFirebaseInstance } from "@/lib/firebase";
 
 const AuthContext = createContext(null);
 
@@ -22,6 +22,13 @@ export function AuthProvider({ children }) {
 
   // Listen to auth state changes
   useEffect(() => {
+    const { auth, db } = getFirebaseInstance();
+    
+    if (!auth || !db) {
+      setLoading(false);
+      return;
+    }
+    
     const unsubscribe = onAuthStateChanged(
       auth,
       async (firebaseUser) => {
@@ -65,6 +72,12 @@ export function AuthProvider({ children }) {
   }, []);
 
   const register = async (email, password, fullName) => {
+    const { auth, db } = getFirebaseInstance();
+    
+    if (!auth || !db) {
+      return { success: false, message: "Firebase not initialized. Please try again." };
+    }
+    
     try {
       setError(null);
       setLoading(true);
@@ -108,6 +121,12 @@ export function AuthProvider({ children }) {
   };
 
   const login = async (email, password) => {
+    const { auth } = getFirebaseInstance();
+    
+    if (!auth) {
+      return { success: false, message: "Firebase not initialized. Please try again." };
+    }
+    
     try {
       setError(null);
       setLoading(true);
@@ -138,6 +157,12 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
+    const { auth } = getFirebaseInstance();
+    
+    if (!auth) {
+      return { success: false, message: "Firebase not initialized." };
+    }
+    
     try {
       setError(null);
       await signOut(auth);
@@ -223,17 +248,4 @@ function getErrorMessage(errorCode) {
       return "Invalid email or password.";
     case "auth/too-many-requests":
       return "Too many attempts. Please try again later.";
-    case "auth/network-request-failed":
-      return "Network error. Please check your connection.";
-    case "auth/user-disabled":
-      return "This account has been disabled.";
-    case "auth/operation-not-allowed":
-      return "Email/password accounts are not enabled.";
-    case "auth/popup-closed-by-user":
-      return "Sign-in popup closed.";
-    case "auth/cancelled-popup-request":
-      return "Sign-in request cancelled.";
-    default:
-      return "An error occurred. Please try again.";
-  }
-}
+    case "a

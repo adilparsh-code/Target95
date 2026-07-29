@@ -22,15 +22,18 @@ let db;
 // Only initialize on client-side to avoid SSR issues
 export function getFirebaseInstance() {
   // Only initialize on client-side
-  if (typeof window === "undefined") {
-    return { app: null, auth: null, db: null };
+  if (typeof window !== "undefined" && (!app || !auth || !db)) {
+    app = getApps()[0] || initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
   }
-  
-  app = app || getApps()[0] || initializeApp(firebaseConfig);
-  auth = auth || getAuth(app);
-  db = db || getFirestore(app);
-  
   return { app, auth, db };
 }
 
+// Initialize on import if we're on client
+if (typeof window !== "undefined") {
+  getFirebaseInstance();
+}
+
+export { app, auth, db };
 // Don't initialize on import - only when actually used on client

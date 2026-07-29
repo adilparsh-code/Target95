@@ -1,1730 +1,717 @@
 const chapter04 = {
-  "id": "04-switch",
-  "title": "SWITCH Statement",
-  "slug": "switch",
-  "subject": "Java Programming",
-  "difficulty": "Intermediate",
-  "estimatedTime": 50,
-  "topics": [
-    "switch",
+  id: "04-switch",
+  title: "SWITCH Statement",
+  slug: "switch",
+  subject: "Java Programming",
+  difficulty: "Beginner",
+  estimatedTime: 150,
+  topics: [
+    "switch statement",
     "case",
+    "break",
     "default",
-    "break"
+    "multiple cases",
+    "nested switch",
+    "switch vs if-else",
+    "fall-through",
+    "menu driven programs",
+    "calculator",
+    "day of week",
   ],
-  "introduction": {
-    "description": "The switch statement provides multi-way branching based on the value of an expression. It's cleaner than long if-else-if ladders when checking a single variable against many possible values.",
-    "realLifeExamples": [
-      "Real-world example 1",
-      "Real-world example 2",
-      "Real-world example 3"
+
+  introduction: {
+    whatIsSwitch:
+      "The switch statement is a multi-way branch statement that allows a variable to be tested for equality against a list of values. Each value is called a case, and the variable being switched on is checked for each case. Think of it like a railway switch — depending on the position, the train goes to a different track.",
+    whyUseSwitch: [
+      "To select one code block from multiple options based on a single variable value.",
+      "To make code more readable when checking a variable against many constant values.",
+      "To implement menu-driven programs efficiently.",
+      "To avoid long if-else-if ladders when comparing a single variable.",
+      "To improve performance in some cases (compiler can optimize switch with jump tables).",
     ],
-    "commonMistakes": [
-      "Common mistake 1",
-      "Common mistake 2",
-      "Common mistake 3"
+    realLifeExamples: [
+      "A vending machine: press button 1 for coffee, 2 for tea, 3 for water.",
+      "A TV remote: press 1 for channel 1, 2 for channel 2, etc.",
+      "A calculator: press + for addition, - for subtraction, * for multiplication, / for division.",
+      "A phone menu: press 1 for sales, 2 for support, 3 for billing.",
+      "A traffic signal: red means stop, yellow means slow down, green means go.",
+      "A day planner: Monday for gym, Tuesday for music, Wednesday for art, etc.",
+      "A grading system: A for excellent, B for good, C for average, F for fail.",
+      "A season selector: 1 for spring, 2 for summer, 3 for autumn, 4 for winter.",
     ],
-    "whereUsed": [
-      "Use case 1",
-      "Use case 2",
-      "Use case 3"
-    ]
+    advantages: [
+      "More readable than long if-else-if ladders for multiple constant comparisons.",
+      "Easier to add new cases without restructuring the code.",
+      "Can be faster than if-else-if for many cases (jump table optimization).",
+      "Cleaner code for menu-driven applications.",
+      "Fall-through behavior can be useful for grouping cases.",
+    ],
+    disadvantages: [
+      "Can only test for equality (not ranges like if-else).",
+      "Only works with byte, short, int, char, String (Java 7+), and enum types.",
+      "Cannot use boolean or long types in switch.",
+      "Forgetting break causes fall-through bugs.",
+      "Cannot use floating-point numbers in switch.",
+    ],
+    commonMistakes: [
+      "Forgetting the break statement, causing fall-through to the next case.",
+      "Using a variable instead of a constant in the case label.",
+      "Using incompatible data types (boolean, long, float, double).",
+      "Forgetting the default case for handling unexpected values.",
+      "Using comparison operators (case x > 5:) which is invalid syntax.",
+      "Not understanding that case labels must be compile-time constants.",
+    ],
+    examTips: [
+      "Always check for missing break statements in output questions — fall-through is a common exam trap.",
+      "Remember: switch works with byte, short, int, char, String, and enum only.",
+      "The default case is optional but recommended for robust code.",
+      "Case labels must be constants, not variables.",
+      "Multiple cases can share the same code block (grouped cases).",
+      "In ICSE exams, switch is frequently tested in output-based and programming questions.",
+    ],
   },
-  "theoryNotes": {
-    "beginnerExplanation": "Beginner-friendly explanation of SWITCH Statement.",
-    "importantPoints": [
-      "Point 1",
-      "Point 2",
-      "Point 3",
-      "Point 4",
-      "Point 5"
+
+  theoryNotes: {
+    decisionMaking:
+      "The switch statement is a control flow statement that allows a variable to be tested against a list of values. It provides an alternative to if-else-if ladders when checking a single variable against multiple constant values. The switch evaluates the expression once and jumps to the matching case, making it efficient for multi-way branching.",
+    flowOfExecution: [
+      "The switch expression is evaluated once.",
+      "The value is compared with each case label in order.",
+      "When a match is found, the code block for that case executes.",
+      "Execution continues until a break statement is encountered.",
+      "If no break is found, execution falls through to the next case (fall-through).",
+      "If no case matches, the default block executes (if present).",
+      "After the switch block completes, execution continues after the switch statement.",
     ],
-    "memoryTricks": [
-      "Trick 1",
-      "Trick 2",
-      "Trick 3"
+    controlFlow:
+      "Control flow in a switch statement is based on jumping. The compiler evaluates the switch expression and jumps directly to the matching case label. This is different from if-else-if which evaluates each condition sequentially. For large numbers of cases, the compiler may use a jump table or hash lookup, making switch faster than if-else-if.",
+    executionDiagram: [
+      "Evaluate switch(expression) -> get value",
+      "Compare value with case 1 -> match? -> execute case 1 block -> break? -> exit",
+      "Compare value with case 2 -> match? -> execute case 2 block -> break? -> exit",
+      "... continue through all cases ...",
+      "No match found -> execute default block (if present) -> exit",
     ],
-    "examTips": [
-      "Tip 1",
-      "Tip 2",
-      "Tip 3",
-      "Tip 4"
-    ]
+    whenToUse: [
+      "When checking a single variable against multiple constant values.",
+      "When implementing menu-driven programs.",
+      "When the conditions are all equality checks (not ranges).",
+      "When you have 3 or more mutually exclusive options.",
+      "When readability is important and if-else-if would be too long.",
+    ],
+    whenNotToUse: [
+      "When checking ranges (e.g., marks >= 90).",
+      "When conditions involve multiple variables.",
+      "When using boolean or long or floating-point types.",
+      "When conditions are not equality checks.",
+      "When you have only 2 options (if-else is simpler).",
+    ],
+    bestPractices: [
+      "Always use break at the end of each case (unless fall-through is intended).",
+      "Always include a default case for handling unexpected values.",
+      "Use curly braces inside case blocks for variables declared within them.",
+      "Group cases that share the same code (e.g., case 1: case 2: case 3: doSomething();).",
+      "Keep case blocks short — extract complex logic into methods.",
+      "Use switch with enum for type-safe multi-way branching.",
+      "Order cases logically (by frequency of use or numerical order).",
+      "Add comments to explain intentional fall-through.",
+    ],
+    importantPoints: [
+      "Switch works with byte, short, int, char, String (Java 7+), and enum.",
+      "Case labels must be compile-time constants.",
+      "The break statement is optional but recommended.",
+      "The default case is optional but recommended.",
+      "Fall-through occurs when break is missing.",
+      "Switch cannot test ranges, only equality.",
+      "Duplicate case labels cause a compilation error.",
+      "Case labels cannot be null.",
+    ],
+    memoryTricks: [
+      "SWITCH = 'Selector With Individual Targeted Case Handling'.",
+      "Think of switch as a railway switch — it directs the train to one track.",
+      "BREAK = 'Block Real Execution After Kill' — it stops fall-through.",
+      "DEFAULT = 'Do Everything For Unexpected Cases' — handles all other values.",
+      "Remember: 'No break, fall through. Always break, safe and true.'",
+    ],
+    examTips: [
+      "For output questions, always trace fall-through carefully.",
+      "Check if break is present after each case.",
+      "Remember that default can appear anywhere, not just at the end.",
+      "Case labels must be constants — variables are not allowed.",
+      "String switch was added in Java 7 — know this for exams.",
+      "Practice menu-driven programs using switch — they are common in ICSE.",
+    ],
   },
-  "syntax": {
-    "code": "// SWITCH Statement syntax here",
-    "breakdown": [
-      {
-        "keyword": "keyword",
-        "explanation": "explanation"
-      }
-    ]
+
+  syntax: {
+    basicSwitch: {
+      code: "switch (expression) {\\n    case value1:\\n        // code for value1\\n        break;\\n    case value2:\\n        // code for value2\\n        break;\\n    default:\\n        // code if no case matches\\n}",
+      breakdown: [
+        { keyword: "switch", explanation: "Java keyword that starts the switch statement." },
+        { keyword: "expression", explanation: "An expression that evaluates to byte, short, int, char, String, or enum. The value is compared with case labels." },
+        { keyword: "case value1:", explanation: "A case label. If the expression equals value1, this block executes. The value must be a compile-time constant." },
+        { keyword: "break", explanation: "Optional but recommended. Exits the switch block. Without it, execution falls through to the next case." },
+        { keyword: "default:", explanation: "Optional. Executes when no case matches. Acts like the else in if-else. Can appear anywhere in the switch." },
+      ],
+    },
+    groupedCases: {
+      code: "switch (month) {\\n    case 1: case 3: case 5: case 7: case 8: case 10: case 12:\\n        System.out.println(\"31 days\");\\n        break;\\n    case 4: case 6: case 9: case 11:\\n        System.out.println(\"30 days\");\\n        break;\\n    case 2:\\n        System.out.println(\"28 or 29 days\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid month\");\\n}",
+      breakdown: [
+        { keyword: "Grouped cases", explanation: "Multiple case labels can share the same code block. This is useful when several values should trigger the same action." },
+        { keyword: "Fall-through to shared code", explanation: "Cases 1, 3, 5, 7, 8, 10, 12 all fall through to the same println statement. The break after it exits the switch." },
+      ],
+    },
+    nestedSwitch: {
+      code: "switch (outerValue) {\\n    case 1:\\n        switch (innerValue) {\\n            case 1:\\n                System.out.println(\"Outer 1, Inner 1\");\\n                break;\\n            case 2:\\n                System.out.println(\"Outer 1, Inner 2\");\\n                break;\\n        }\\n        break;\\n    case 2:\\n        System.out.println(\"Outer 2\");\\n        break;\\n}",
+      breakdown: [
+        { keyword: "Nested switch", explanation: "A switch inside another switch. The inner switch is only evaluated if the outer case matches." },
+        { keyword: "Inner break", explanation: "The inner break exits the inner switch only. The outer break is still needed to exit the outer switch." },
+      ],
+    },
   },
-  "examples": {
-    "basic": [
-      {
-        "title": "Basic SWITCH Statement",
-        "code": "// code",
-        "output": "output",
-        "explanation": [
-          "step1",
-          "step2"
-        ]
-      }
+
+  examples: {
+    basic: [
+      { id: "sw-ex-b-1", title: "Day of Week Using Switch", code: "int day = 3;\\nswitch (day) {\\n    case 1:\\n        System.out.println(\"Monday\");\\n        break;\\n    case 2:\\n        System.out.println(\"Tuesday\");\\n        break;\\n    case 3:\\n        System.out.println(\"Wednesday\");\\n        break;\\n    case 4:\\n        System.out.println(\"Thursday\");\\n        break;\\n    case 5:\\n        System.out.println(\"Friday\");\\n        break;\\n    case 6:\\n        System.out.println(\"Saturday\");\\n        break;\\n    case 7:\\n        System.out.println(\"Sunday\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid day\");\\n}", output: "Wednesday", explanation: ["Step 1: day = 3.", "Step 2: switch evaluates day, which is 3.", "Step 3: Case 3 matches. Print 'Wednesday'.", "Step 4: break exits the switch.", "Key point: Each case has a break to prevent fall-through."] },
+      { id: "sw-ex-b-2", title: "Simple Calculator Using Switch", code: "int a = 10, b = 5;\\nchar op = '+';\\nswitch (op) {\\n    case '+':\\n        System.out.println(\"Result: \" + (a + b));\\n        break;\\n    case '-':\\n        System.out.println(\"Result: \" + (a - b));\\n        break;\\n    case '*':\\n        System.out.println(\"Result: \" + (a * b));\\n        break;\\n    case '/':\\n        System.out.println(\"Result: \" + (a / b));\\n        break;\\n    default:\\n        System.out.println(\"Invalid operator\");\\n}", output: "Result: 15", explanation: ["Step 1: a = 10, b = 5, op = '+'.", "Step 2: switch evaluates op, which is '+'.", "Step 3: Case '+' matches. Print 'Result: ' + (10 + 5) = 15.", "Step 4: break exits the switch.", "Key point: char can be used in switch."] },
+      { id: "sw-ex-b-3", title: "Month Name Using Switch", code: "int month = 7;\\nswitch (month) {\\n    case 1: System.out.println(\"January\"); break;\\n    case 2: System.out.println(\"February\"); break;\\n    case 3: System.out.println(\"March\"); break;\\n    case 4: System.out.println(\"April\"); break;\\n    case 5: System.out.println(\"May\"); break;\\n    case 6: System.out.println(\"June\"); break;\\n    case 7: System.out.println(\"July\"); break;\\n    case 8: System.out.println(\"August\"); break;\\n    case 9: System.out.println(\"September\"); break;\\n    case 10: System.out.println(\"October\"); break;\\n    case 11: System.out.println(\"November\"); break;\\n    case 12: System.out.println(\"December\"); break;\\n    default: System.out.println(\"Invalid month\");\\n}", output: "July", explanation: ["Step 1: month = 7.", "Step 2: switch evaluates month, which is 7.", "Step 3: Case 7 matches. Print 'July'.", "Step 4: break exits the switch.", "Key point: Multiple cases can be on single lines for compact code."] },
+      { id: "sw-ex-b-4", title: "Vowel Check Using Switch", code: "char ch = 'e';\\nswitch (ch) {\\n    case 'a': case 'e': case 'i': case 'o': case 'u':\\n    case 'A': case 'E': case 'I': case 'O': case 'U':\\n        System.out.println(ch + \" is a vowel.\");\\n        break;\\n    default:\\n        System.out.println(ch + \" is a consonant.\");\\n}", output: "e is a vowel.", explanation: ["Step 1: ch = 'e'.", "Step 2: switch evaluates ch, which is 'e'.", "Step 3: Case 'e' matches (grouped with other vowels).", "Step 4: Print 'e is a vowel.' break exits.", "Key point: Grouped cases share the same code block."] },
+      { id: "sw-ex-b-5", title: "Season Selector Using Switch", code: "int season = 2;\\nswitch (season) {\\n    case 1:\\n        System.out.println(\"Spring\");\\n        break;\\n    case 2:\\n        System.out.println(\"Summer\");\\n        break;\\n    case 3:\\n        System.out.println(\"Autumn\");\\n        break;\\n    case 4:\\n        System.out.println(\"Winter\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid season\");\\n}", output: "Summer", explanation: ["Step 1: season = 2.", "Step 2: switch evaluates season, which is 2.", "Step 3: Case 2 matches. Print 'Summer'.", "Step 4: break exits the switch.", "Key point: Default handles invalid input."] },
+      { id: "sw-ex-b-6", title: "Grade System Using Switch (Char)", code: "char grade = 'B';\\nswitch (grade) {\\n    case 'A':\\n        System.out.println(\"Excellent\");\\n        break;\\n    case 'B':\\n        System.out.println(\"Good\");\\n        break;\\n    case 'C':\\n        System.out.println(\"Average\");\\n        break;\\n    case 'F':\\n        System.out.println(\"Fail\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid grade\");\\n}", output: "Good", explanation: ["Step 1: grade = 'B'.", "Step 2: switch evaluates grade, which is 'B'.", "Step 3: Case 'B' matches. Print 'Good'.", "Step 4: break exits the switch.", "Key point: char values are compared using their character values."] },
+      { id: "sw-ex-b-7", title: "Color Code Using Switch", code: "String color = \"red\";\\nswitch (color) {\\n    case \"red\":\\n        System.out.println(\"Stop\");\\n        break;\\n    case \"yellow\":\\n        System.out.println(\"Slow down\");\\n        break;\\n    case \"green\":\\n        System.out.println(\"Go\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid signal\");\\n}", output: "Stop", explanation: ["Step 1: color = 'red'.", "Step 2: switch evaluates color, which is 'red'.", "Step 3: Case 'red' matches. Print 'Stop'.", "Step 4: break exits the switch.", "Key point: String can be used in switch since Java 7."] },
+      { id: "sw-ex-b-8", title: "Number to Word (1-5)", code: "int num = 4;\\nswitch (num) {\\n    case 1: System.out.println(\"One\"); break;\\n    case 2: System.out.println(\"Two\"); break;\\n    case 3: System.out.println(\"Three\"); break;\\n    case 4: System.out.println(\"Four\"); break;\\n    case 5: System.out.println(\"Five\"); break;\\n    default: System.out.println(\"Out of range\");\\n}", output: "Four", explanation: ["Step 1: num = 4.", "Step 2: switch evaluates num, which is 4.", "Step 3: Case 4 matches. Print 'Four'.", "Step 4: break exits the switch.", "Key point: Default handles numbers outside 1-5."] },
+      { id: "sw-ex-b-9", title: "Simple Menu Using Switch", code: "int choice = 2;\\nswitch (choice) {\\n    case 1:\\n        System.out.println(\"You selected Tea. Price: Rs 20\");\\n        break;\\n    case 2:\\n        System.out.println(\"You selected Coffee. Price: Rs 30\");\\n        break;\\n    case 3:\\n        System.out.println(\"You selected Juice. Price: Rs 40\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid choice\");\\n}", output: "You selected Coffee. Price: Rs 30", explanation: ["Step 1: choice = 2.", "Step 2: switch evaluates choice, which is 2.", "Step 3: Case 2 matches. Print 'You selected Coffee. Price: Rs 30'.", "Step 4: break exits the switch.", "Key point: Switch is ideal for menu-driven programs."] },
+      { id: "sw-ex-b-10", title: "Days in Month Using Grouped Cases", code: "int month = 2;\\nswitch (month) {\\n    case 1: case 3: case 5: case 7: case 8: case 10: case 12:\\n        System.out.println(\"31 days\");\\n        break;\\n    case 4: case 6: case 9: case 11:\\n        System.out.println(\"30 days\");\\n        break;\\n    case 2:\\n        System.out.println(\"28 or 29 days\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid month\");\\n}", output: "28 or 29 days", explanation: ["Step 1: month = 2.", "Step 2: switch evaluates month, which is 2.", "Step 3: Case 2 matches. Print '28 or 29 days'.", "Step 4: break exits the switch.", "Key point: Grouped cases share the same code block for months with same number of days."] },
     ],
-    "intermediate": [
-      {
-        "title": "Intermediate SWITCH Statement",
-        "code": "// code",
-        "output": "output",
-        "explanation": [
-          "step1",
-          "step2"
-        ]
-      }
+    intermediate: [
+      { id: "sw-ex-i-1", title: "Fall-Through Example", code: "int num = 2;\\nswitch (num) {\\n    case 1:\\n        System.out.println(\"One\");\\n    case 2:\\n        System.out.println(\"Two\");\\n    case 3:\\n        System.out.println(\"Three\");\\n    case 4:\\n        System.out.println(\"Four\");\\n    default:\\n        System.out.println(\"Default\");\\n}", output: "Two\\nThree\\nFour\\nDefault", explanation: ["Step 1: num = 2.", "Step 2: switch evaluates num, which is 2.", "Step 3: Case 2 matches. Print 'Two'.", "Step 4: NO BREAK! Fall through to case 3. Print 'Three'.", "Step 5: Fall through to case 4. Print 'Four'.", "Step 6: Fall through to default. Print 'Default'.", "Key point: Without break, execution falls through all subsequent cases."] },
+      { id: "sw-ex-i-2", title: "Area Calculator Using Switch", code: "int shape = 1;\\ndouble radius = 5, length = 10, breadth = 4;\\nswitch (shape) {\\n    case 1:\\n        System.out.println(\"Area of Circle: \" + (3.14 * radius * radius));\\n        break;\\n    case 2:\\n        System.out.println(\"Area of Rectangle: \" + (length * breadth));\\n        break;\\n    case 3:\\n        System.out.println(\"Area of Triangle: \" + (0.5 * length * breadth));\\n        break;\\n    default:\\n        System.out.println(\"Invalid shape\");\\n}", output: "Area of Circle: 78.5", explanation: ["Step 1: shape = 1, radius = 5.", "Step 2: switch evaluates shape, which is 1.", "Step 3: Case 1 matches. Print 'Area of Circle: ' + 3.14 * 5 * 5 = 78.5.", "Step 4: break exits the switch.", "Key point: Switch can select different calculation formulas based on user choice."] },
+      { id: "sw-ex-i-3", title: "String Switch - Browser Name", code: "String browser = \"Chrome\";\\nswitch (browser) {\\n    case \"Chrome\":\\n        System.out.println(\"Google Chrome browser\");\\n        break;\\n    case \"Firefox\":\\n        System.out.println(\"Mozilla Firefox browser\");\\n        break;\\n    case \"Safari\":\\n        System.out.println(\"Apple Safari browser\");\\n        break;\\n    case \"Edge\":\\n        System.out.println(\"Microsoft Edge browser\");\\n        break;\\n    default:\\n        System.out.println(\"Unknown browser\");\\n}", output: "Google Chrome browser", explanation: ["Step 1: browser = 'Chrome'.", "Step 2: switch evaluates browser, which is 'Chrome'.", "Step 3: Case 'Chrome' matches. Print 'Google Chrome browser'.", "Step 4: break exits the switch.", "Key point: String comparison in switch is case-sensitive."] },
+      { id: "sw-ex-i-4", title: "Electricity Bill Menu Using Switch", code: "int category = 2;\\nint units = 150;\\ndouble bill = 0;\\nswitch (category) {\\n    case 1: // Domestic\\n        if (units <= 100) bill = units * 5;\\n        else bill = 100 * 5 + (units - 100) * 7;\\n        break;\\n    case 2: // Commercial\\n        if (units <= 100) bill = units * 8;\\n        else bill = 100 * 8 + (units - 100) * 12;\\n        break;\\n    case 3: // Industrial\\n        bill = units * 15;\\n        break;\\n    default:\\n        System.out.println(\"Invalid category\");\\n}\\nSystem.out.println(\"Bill: Rs \" + bill);", output: "Bill: Rs 1400.0", explanation: ["Step 1: category = 2, units = 150.", "Step 2: switch evaluates category, which is 2 (Commercial).", "Step 3: Case 2: units > 100, so bill = 100*8 + 50*12 = 800 + 600 = 1400.", "Step 4: break exits. Print 'Bill: Rs 1400.0'.", "Key point: Switch can contain if-else inside case blocks."] },
+      { id: "sw-ex-i-5", title: "Nested Switch - Department and Year", code: "int dept = 1, year = 2;\\nswitch (dept) {\\n    case 1: // CSE\\n        switch (year) {\\n            case 1: System.out.println(\"CSE - First Year\"); break;\\n            case 2: System.out.println(\"CSE - Second Year\"); break;\\n            case 3: System.out.println(\"CSE - Third Year\"); break;\\n            case 4: System.out.println(\"CSE - Fourth Year\"); break;\\n        }\\n        break;\\n    case 2: // ECE\\n        switch (year) {\\n            case 1: System.out.println(\"ECE - First Year\"); break;\\n            case 2: System.out.println(\"ECE - Second Year\"); break;\\n        }\\n        break;\\n    default:\\n        System.out.println(\"Invalid department\");\\n}", output: "CSE - Second Year", explanation: ["Step 1: dept = 1, year = 2.", "Step 2: Outer switch evaluates dept, which is 1 (CSE).", "Step 3: Case 1: Enter inner switch for year.", "Step 4: Inner switch evaluates year, which is 2. Print 'CSE - Second Year'.", "Step 5: Inner break exits inner switch. Outer break exits outer switch.", "Key point: Nested switch allows multi-level menu selection."] },
+      { id: "sw-ex-i-6", title: "Restaurant Menu Using Switch", code: "int item = 3;\\nint qty = 2;\\ndouble price = 0;\\nswitch (item) {\\n    case 1: price = 50; System.out.println(\"Tea: Rs 50 x \" + qty); break;\\n    case 2: price = 80; System.out.println(\"Sandwich: Rs 80 x \" + qty); break;\\n    case 3: price = 150; System.out.println(\"Pizza: Rs 150 x \" + qty); break;\\n    case 4: price = 120; System.out.println(\"Burger: Rs 120 x \" + qty); break;\\n    case 5: price = 200; System.out.println(\"Biryani: Rs 200 x \" + qty); break;\\n    default: System.out.println(\"Invalid item\");\\n}\\nif (price > 0) {\\n    double total = price * qty;\\n    double tax = total * 0.05;\\n    System.out.println(\"Total: Rs \" + (total + tax));\\n}", output: "Pizza: Rs 150 x 2\\nTotal: Rs 315.0", explanation: ["Step 1: item = 3, qty = 2.", "Step 2: switch evaluates item, which is 3 (Pizza).", "Step 3: Case 3: price = 150. Print 'Pizza: Rs 150 x 2'. break.", "Step 4: total = 150 * 2 = 300. tax = 300 * 0.05 = 15.", "Step 5: Print 'Total: Rs 315.0'.", "Key point: Switch can set variables that are used after the switch block."] },
+      { id: "sw-ex-i-7", title: "Unit Converter Using Switch", code: "int type = 1;\\ndouble value = 100;\\nswitch (type) {\\n    case 1: // Celsius to Fahrenheit\\n        System.out.println(value + \" C = \" + ((value * 9/5) + 32) + \" F\");\\n        break;\\n    case 2: // Kilometers to Miles\\n        System.out.println(value + \" km = \" + (value * 0.621) + \" miles\");\\n        break;\\n    case 3: // KG to Pounds\\n        System.out.println(value + \" kg = \" + (value * 2.205) + \" lbs\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid conversion type\");\\n}", output: "100.0 C = 212.0 F", explanation: ["Step 1: type = 1, value = 100.", "Step 2: switch evaluates type, which is 1.", "Step 3: Case 1: Convert 100 C to F = (100 * 9/5) + 32 = 212.", "Step 4: Print '100.0 C = 212.0 F'. break.", "Key point: Switch is ideal for selecting conversion formulas."] },
+      { id: "sw-ex-i-8", title: "Shape Selection Using Switch", code: "int shape = 2;\\ndouble s1 = 5, s2 = 10, s3 = 8;\\nswitch (shape) {\\n    case 1: // Circle\\n        System.out.println(\"Circle Area: \" + (3.14 * s1 * s1));\\n        break;\\n    case 2: // Rectangle\\n        System.out.println(\"Rectangle Area: \" + (s1 * s2));\\n        break;\\n    case 3: // Triangle\\n        System.out.println(\"Triangle Area: \" + (0.5 * s1 * s2));\\n        break;\\n    case 4: // Square\\n        System.out.println(\"Square Area: \" + (s1 * s1));\\n        break;\\n    default:\\n        System.out.println(\"Invalid shape\");\\n}", output: "Rectangle Area: 50.0", explanation: ["Step 1: shape = 2, s1 = 5, s2 = 10.", "Step 2: switch evaluates shape, which is 2 (Rectangle).", "Step 3: Case 2: Area = 5 * 10 = 50. Print 'Rectangle Area: 50.0'.", "Step 4: break exits.", "Key point: Switch selects the appropriate area formula based on shape choice."] },
+      { id: "sw-ex-i-9", title: "Grade System with Marks Range Using Switch", code: "int marks = 85;\\nString grade = \"\";\\nswitch (marks / 10) {\\n    case 10: case 9:\\n        grade = \"A+\";\\n        break;\\n    case 8:\\n        grade = \"A\";\\n        break;\\n    case 7:\\n        grade = \"B\";\\n        break;\\n    case 6:\\n        grade = \"C\";\\n        break;\\n    case 5:\\n        grade = \"D\";\\n        break;\\n    default:\\n        grade = \"F\";\\n}\\nSystem.out.println(\"Grade: \" + grade);", output: "Grade: A", explanation: ["Step 1: marks = 85.", "Step 2: switch evaluates marks / 10 = 85 / 10 = 8.", "Step 3: Case 8 matches. grade = 'A'.", "Step 4: break exits. Print 'Grade: A'.", "Key point: Integer division can convert ranges to single values for switch."] },
+      { id: "sw-ex-i-10", title: "Switch with Default in Middle", code: "int num = 5;\\nswitch (num) {\\n    case 1:\\n        System.out.println(\"One\");\\n        break;\\n    default:\\n        System.out.println(\"Default case\");\\n        break;\\n    case 2:\\n        System.out.println(\"Two\");\\n        break;\\n}", output: "Default case", explanation: ["Step 1: num = 5.", "Step 2: switch evaluates num, which is 5.", "Step 3: No case matches 5. Default executes.", "Step 4: Print 'Default case'. break exits.", "Key point: Default can appear anywhere in the switch, not just at the end."] },
     ],
-    "advanced": [
-      {
-        "title": "Advanced SWITCH Statement",
-        "code": "// code",
-        "output": "output",
-        "explanation": [
-          "step1",
-          "step2"
-        ]
-      }
-    ]
+    advanced: [
+      { id: "sw-ex-a-1", title: "Complete Calculator with Error Handling", code: "double a = 10, b = 0;\\nchar op = '/';\\nswitch (op) {\\n    case '+':\\n        System.out.println(a + \" + \" + b + \" = \" + (a + b));\\n        break;\\n    case '-':\\n        System.out.println(a + \" - \" + b + \" = \" + (a - b));\\n        break;\\n    case '*':\\n        System.out.println(a + \" * \" + b + \" = \" + (a * b));\\n        break;\\n    case '/':\\n        if (b == 0) {\\n            System.out.println(\"Error: Division by zero!\");\\n        } else {\\n            System.out.println(a + \" / \" + b + \" = \" + (a / b));\\n        }\\n        break;\\n    case '%':\\n        if (b == 0) {\\n            System.out.println(\"Error: Modulo by zero!\");\\n        } else {\\n            System.out.println(a + \" % \" + b + \" = \" + (a % b));\\n        }\\n        break;\\n    default:\\n        System.out.println(\"Invalid operator: \" + op);\\n}", output: "Error: Division by zero!", explanation: ["Step 1: a = 10, b = 0, op = '/'.", "Step 2: switch evaluates op, which is '/'.", "Step 3: Case '/': b == 0 is true. Print 'Error: Division by zero!'.", "Step 4: break exits.", "Key point: Switch cases can contain if-else for error handling."] },
+      { id: "sw-ex-a-2", title: "ATM Menu System Using Switch", code: "int choice = 2;\\ndouble balance = 50000;\\ndouble amount = 5000;\\nswitch (choice) {\\n    case 1:\\n        System.out.println(\"Balance: Rs \" + balance);\\n        break;\\n    case 2:\\n        if (amount <= balance) {\\n            balance -= amount;\\n            System.out.println(\"Withdrawn: Rs \" + amount);\\n            System.out.println(\"Balance: Rs \" + balance);\\n        } else {\\n            System.out.println(\"Insufficient balance\");\\n        }\\n        break;\\n    case 3:\\n        balance += amount;\\n        System.out.println(\"Deposited: Rs \" + amount);\\n        System.out.println(\"Balance: Rs \" + balance);\\n        break;\\n    case 4:\\n        System.out.println(\"Thank you for using ATM\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid choice\");\\n}", output: "Withdrawn: Rs 5000\\nBalance: Rs 45000.0", explanation: ["Step 1: choice = 2, balance = 50000, amount = 5000.", "Step 2: switch evaluates choice, which is 2 (Withdraw).", "Step 3: Case 2: 5000 <= 50000 is true. balance = 45000.", "Step 4: Print 'Withdrawn: Rs 5000' and 'Balance: Rs 45000.0'. break.", "Key point: Switch is perfect for ATM menu systems."] },
+      { id: "sw-ex-a-3", title: "Nested Switch - Country and City Selection", code: "int country = 1, city = 2;\\nswitch (country) {\\n    case 1: // India\\n        switch (city) {\\n            case 1: System.out.println(\"New Delhi - Capital\"); break;\\n            case 2: System.out.println(\"Mumbai - Financial Capital\"); break;\\n            case 3: System.out.println(\"Bangalore - Tech Hub\"); break;\\n            case 4: System.out.println(\"Chennai - Auto Hub\"); break;\\n            default: System.out.println(\"Unknown Indian city\");\\n        }\\n        break;\\n    case 2: // USA\\n        switch (city) {\\n            case 1: System.out.println(\"Washington DC - Capital\"); break;\\n            case 2: System.out.println(\"New York - Financial Hub\"); break;\\n            case 3: System.out.println(\"San Francisco - Tech Hub\"); break;\\n            default: System.out.println(\"Unknown US city\");\\n        }\\n        break;\\n    default:\\n        System.out.println(\"Unknown country\");\\n}", output: "Mumbai - Financial Capital", explanation: ["Step 1: country = 1, city = 2.", "Step 2: Outer switch: country = 1 (India).", "Step 3: Inner switch: city = 2. Print 'Mumbai - Financial Capital'.", "Step 4: Inner break exits inner switch. Outer break exits outer switch.", "Key point: Nested switch for hierarchical menu selection."] },
+      { id: "sw-ex-a-4", title: "Employee Salary Calculator Using Switch", code: "String grade = \"A\";\\ndouble basic = 30000;\\ndouble hra = 0, da = 0;\\nswitch (grade) {\\n    case \"A\":\\n        hra = basic * 0.30;\\n        da = basic * 0.50;\\n        break;\\n    case \"B\":\\n        hra = basic * 0.25;\\n        da = basic * 0.40;\\n        break;\\n    case \"C\":\\n        hra = basic * 0.20;\\n        da = basic * 0.30;\\n        break;\\n    default:\\n        hra = basic * 0.10;\\n        da = basic * 0.20;\\n}\\ndouble gross = basic + hra + da;\\ndouble tax = gross > 80000 ? gross * 0.20 : gross * 0.10;\\ndouble net = gross - tax;\\nSystem.out.println(\"Basic: Rs \" + basic);\\nSystem.out.println(\"HRA: Rs \" + hra);\\nSystem.out.println(\"DA: Rs \" + da);\\nSystem.out.println(\"Gross: Rs \" + gross);\\nSystem.out.println(\"Tax: Rs \" + tax);\\nSystem.out.println(\"Net: Rs \" + net);", output: "Basic: Rs 30000.0\\nHRA: Rs 9000.0\\nDA: Rs 15000.0\\nGross: Rs 54000.0\\nTax: Rs 5400.0\\nNet: Rs 48600.0", explanation: ["Step 1: grade = 'A', basic = 30000.", "Step 2: switch evaluates grade, which is 'A'.", "Step 3: Case 'A': hra = 9000, da = 15000. break.", "Step 4: gross = 30000 + 9000 + 15000 = 54000.", "Step 5: tax = 54000 * 0.10 = 5400 (since 54000 <= 80000).", "Step 6: net = 54000 - 5400 = 48600.", "Key point: String switch with complex calculations inside cases."] },
+      { id: "sw-ex-a-5", title: "Library Management System Using Switch", code: "int action = 2;\\nint bookId = 101;\\nboolean isAvailable = true;\\nswitch (action) {\\n    case 1: // Search\\n        System.out.println(\"Searching for book ID: \" + bookId);\\n        if (isAvailable) {\\n            System.out.println(\"Book available for issue\");\\n        } else {\\n            System.out.println(\"Book not available\");\\n        }\\n        break;\\n    case 2: // Issue\\n        if (isAvailable) {\\n            isAvailable = false;\\n            System.out.println(\"Book \" + bookId + \" issued successfully\");\\n        } else {\\n            System.out.println(\"Book already issued\");\\n        }\\n        break;\\n    case 3: // Return\\n        if (!isAvailable) {\\n            isAvailable = true;\\n            System.out.println(\"Book \" + bookId + \" returned successfully\");\\n        } else {\\n            System.out.println(\"Book was not issued\");\\n        }\\n        break;\\n    case 4: // Status\\n        System.out.println(\"Book \" + bookId + \" status: \" + (isAvailable ? \"Available\" : \"Issued\"));\\n        break;\\n    default:\\n        System.out.println(\"Invalid action\");\\n}", output: "Book 101 issued successfully", explanation: ["Step 1: action = 2, bookId = 101, isAvailable = true.", "Step 2: switch evaluates action, which is 2 (Issue).", "Step 3: Case 2: isAvailable is true. Set isAvailable = false.", "Step 4: Print 'Book 101 issued successfully'. break.", "Key point: Switch can manage state transitions in a system."] },
+      { id: "sw-ex-a-6", title: "Traffic Light System Using Switch", code: "String light = \"yellow\";\\nswitch (light) {\\n    case \"red\":\\n        System.out.println(\"STOP! Wait for green light\");\\n        break;\\n    case \"yellow\":\\n        System.out.println(\"SLOW DOWN! Prepare to stop\");\\n        break;\\n    case \"green\":\\n        System.out.println(\"GO! Drive safely\");\\n        break;\\n    default:\\n        System.out.println(\"TRAFFIC LIGHT ERROR! Contact authorities\");\\n}", output: "SLOW DOWN! Prepare to stop", explanation: ["Step 1: light = 'yellow'.", "Step 2: switch evaluates light, which is 'yellow'.", "Step 3: Case 'yellow' matches. Print 'SLOW DOWN! Prepare to stop'.", "Step 4: break exits.", "Key point: String switch for traffic light simulation."] },
+      { id: "sw-ex-a-7", title: "Hotel Room Booking Using Switch", code: "int roomType = 2;\\nint nights = 3;\\ndouble rate = 0;\\nString roomName = \"\";\\nswitch (roomType) {\\n    case 1:\\n        rate = 2000;\\n        roomName = \"Standard Room\";\\n        break;\\n    case 2:\\n        rate = 4000;\\n        roomName = \"Deluxe Room\";\\n        break;\\n    case 3:\\n        rate = 8000;\\n        roomName = \"Suite\";\\n        break;\\n    default:\\n        System.out.println(\"Invalid room type\");\\n        return;\\n}\\ndouble subtotal = rate * nights;\\ndouble tax = subtotal * 0.12;\\ndouble total = subtotal + tax;\\nSystem.out.println(\"Room: \" + roomName);\\nSystem.out.println(\"Rate: Rs \" + rate + \"/night\");\\nSystem.out.println(\"Nights: \" + nights);\\nSystem.out.println(\"Subtotal: Rs \" + subtotal);\\nSystem.out.println(\"Tax (12%): Rs \" + tax);\\nSystem.out.println(\"Total: Rs \" + total);", output: "Room: Deluxe Room\\nRate: Rs 4000.0/night\\nNights: 3\\nSubtotal: Rs 12000.0\\nTax (12%): Rs 1440.0\\nTotal: Rs 13440.0", explanation: ["Step 1: roomType = 2, nights = 3.", "Step 2: switch evaluates roomType, which is 2 (Deluxe).", "Step 3: Case 2: rate = 4000, roomName = 'Deluxe Room'. break.", "Step 4: subtotal = 4000 * 3 = 12000. tax = 12000 * 0.12 = 1440.", "Step 5: total = 12000 + 1440 = 13440. Print all details.", "Key point: Switch sets variables used in calculations after the switch."] },
+      { id: "sw-ex-a-8", title: "Mobile Plan Selector Using Switch", code: "int plan = 2;\\nint dataUsed = 15;\\nswitch (plan) {\\n    case 1: // Basic\\n        System.out.println(\"Basic Plan: Rs 199/month\");\\n        System.out.println(\"Data: 1GB/day\");\\n        if (dataUsed > 1) System.out.println(\"Extra data charge: Rs 10/GB\");\\n        break;\\n    case 2: // Standard\\n        System.out.println(\"Standard Plan: Rs 399/month\");\\n        System.out.println(\"Data: 1.5GB/day\");\\n        if (dataUsed > 1.5) System.out.println(\"Extra data charge: Rs 8/GB\");\\n        break;\\n    case 3: // Premium\\n        System.out.println(\"Premium Plan: Rs 599/month\");\\n        System.out.println(\"Data: Unlimited\");\\n        break;\\n    default:\\n        System.out.println(\"Invalid plan\");\\n}", output: "Standard Plan: Rs 399/month\\nData: 1.5GB/day\\nExtra data charge: Rs 8/GB", explanation: ["Step 1: plan = 2, dataUsed = 15.", "Step 2: switch evaluates plan, which is 2 (Standard).", "Step 3: Case 2: Print plan details. dataUsed (15) > 1.5, so print extra charge.", "Step 4: break exits.", "Key point: Switch with conditional logic inside cases."] },
+      { id: "sw-ex-a-9", title: "Banking Transaction Using Switch", code: "int txnType = 1;\\ndouble balance = 25000;\\ndouble amount = 10000;\\nswitch (txnType) {\\n    case 1: // Deposit\\n        balance += amount;\\n        System.out.println(\"Deposited: Rs \" + amount);\\n        System.out.println(\"Balance: Rs \" + balance);\\n        break;\\n    case 2: // Withdraw\\n        if (amount <= balance) {\\n            balance -= amount;\\n            System.out.println(\"Withdrawn: Rs \" + amount);\\n            System.out.println(\"Balance: Rs \" + balance);\\n        } else {\\n            System.out.println(\"Insufficient balance\");\\n        }\\n        break;\\n    case 3: // Transfer\\n        if (amount <= balance) {\\n            balance -= amount;\\n            System.out.println(\"Transferred: Rs \" + amount);\\n            System.out.println(\"Balance: Rs \" + balance);\\n        } else {\\n            System.out.println(\"Insufficient balance for transfer\");\\n        }\\n        break;\\n    case 4: // Balance Inquiry\\n        System.out.println(\"Current Balance: Rs \" + balance);\\n        break;\\n    default:\\n        System.out.println(\"Invalid transaction type\");\\n}", output: "Deposited: Rs 10000\\nBalance: Rs 35000.0", explanation: ["Step 1: txnType = 1, balance = 25000, amount = 10000.", "Step 2: switch evaluates txnType, which is 1 (Deposit).", "Step 3: Case 1: balance = 25000 + 10000 = 35000.", "Step 4: Print 'Deposited: Rs 10000' and 'Balance: Rs 35000.0'. break.", "Key point: Switch for banking transaction types."] },
+      { id: "sw-ex-a-10", title: "Complete Grade Report Using Switch", code: "int marks = 78;\\nString grade = \"\";\\nString remarks = \"\";\\nswitch (marks / 10) {\\n    case 10: case 9:\\n        grade = \"A+\";\\n        remarks = \"Outstanding\";\\n        break;\\n    case 8:\\n        grade = \"A\";\\n        remarks = \"Excellent\";\\n        break;\\n    case 7:\\n        grade = \"B\";\\n        remarks = \"Very Good\";\\n        break;\\n    case 6:\\n        grade = \"C\";\\n        remarks = \"Good\";\\n        break;\\n    case 5:\\n        grade = \"D\";\\n        remarks = \"Average\";\\n        break;\\n    case 4:\\n        grade = \"E\";\\n        remarks = \"Below Average\";\\n        break;\\n    default:\\n        grade = \"F\";\\n        remarks = \"Fail\";\\n}\\nSystem.out.println(\"Marks: \" + marks);\\nSystem.out.println(\"Grade: \" + grade);\\nSystem.out.println(\"Remarks: \" + remarks);", output: "Marks: 78\\nGrade: B\\nRemarks: Very Good", explanation: ["Step 1: marks = 78.", "Step 2: switch evaluates marks / 10 = 78 / 10 = 7.", "Step 3: Case 7 matches. grade = 'B', remarks = 'Very Good'. break.", "Step 4: Print marks, grade, and remarks.", "Key point: Integer division converts ranges to single values for switch."] },
+    ],
   },
-  "dryRun": [
-    {
-      "title": "Dry run SWITCH Statement",
-      "code": "// code",
-      "trace": [
-        {
-          "line": 1,
-          "explanation": "step"
-        }
-      ]
-    }
+
+  dryRun: [
+    { title: "Basic Switch with Break", code: "int day = 3;\\nswitch (day) {\\n    case 1: System.out.println(\"Mon\"); break;\\n    case 2: System.out.println(\"Tue\"); break;\\n    case 3: System.out.println(\"Wed\"); break;\\n    case 4: System.out.println(\"Thu\"); break;\\n    case 5: System.out.println(\"Fri\"); break;\\n    default: System.out.println(\"Weekend\");\\n}", trace: [
+      { line: 1, explanation: "day = 3. Memory: day -> 3" },
+      { line: 2, explanation: "switch evaluates day. Value = 3." },
+      { line: 3, explanation: "Case 1: 3 != 1. No match. Skip." },
+      { line: 4, explanation: "Case 2: 3 != 2. No match. Skip." },
+      { line: 5, explanation: "Case 3: 3 == 3. Match! Enter case 3 block." },
+      { line: 5, explanation: "Print 'Wed' to console." },
+      { line: 5, explanation: "break encountered. Exit switch." },
+    ] },
+    { title: "Fall-Through Without Break", code: "int num = 2;\\nswitch (num) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    default: System.out.println(\"D\");\\n}", trace: [
+      { line: 1, explanation: "num = 2. Memory: num -> 2" },
+      { line: 2, explanation: "switch evaluates num. Value = 2." },
+      { line: 3, explanation: "Case 1: 2 != 1. No match. Skip." },
+      { line: 4, explanation: "Case 2: 2 == 2. Match! Enter case 2 block." },
+      { line: 4, explanation: "Print 'B' to console." },
+      { line: 4, explanation: "No break! Fall through to case 3." },
+      { line: 5, explanation: "Print 'C' to console. No break! Fall through to default." },
+      { line: 6, explanation: "Print 'D' to console. End of switch." },
+    ] },
+    { title: "Default Case Execution", code: "int num = 5;\\nswitch (num) {\\n    case 1: System.out.println(\"One\"); break;\\n    case 2: System.out.println(\"Two\"); break;\\n    case 3: System.out.println(\"Three\"); break;\\n    default: System.out.println(\"Not 1-3\");\\n}", trace: [
+      { line: 1, explanation: "num = 5. Memory: num -> 5" },
+      { line: 2, explanation: "switch evaluates num. Value = 5." },
+      { line: 3, explanation: "Case 1: 5 != 1. No match. Skip." },
+      { line: 4, explanation: "Case 2: 5 != 2. No match. Skip." },
+      { line: 5, explanation: "Case 3: 5 != 3. No match. Skip." },
+      { line: 6, explanation: "No case matched. Enter default block." },
+      { line: 6, explanation: "Print 'Not 1-3' to console." },
+    ] },
   ],
-  "outputBasedQuestions": [
-    {
-      "id": "switch-ob-1",
-      "question": "Output question 1",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-2",
-      "question": "Output question 2",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-3",
-      "question": "Output question 3",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-4",
-      "question": "Output question 4",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-5",
-      "question": "Output question 5",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-6",
-      "question": "Output question 6",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-7",
-      "question": "Output question 7",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-8",
-      "question": "Output question 8",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-9",
-      "question": "Output question 9",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-10",
-      "question": "Output question 10",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-11",
-      "question": "Output question 11",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-12",
-      "question": "Output question 12",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-13",
-      "question": "Output question 13",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-14",
-      "question": "Output question 14",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-15",
-      "question": "Output question 15",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-16",
-      "question": "Output question 16",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-17",
-      "question": "Output question 17",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-18",
-      "question": "Output question 18",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-19",
-      "question": "Output question 19",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-20",
-      "question": "Output question 20",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-21",
-      "question": "Output question 21",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-22",
-      "question": "Output question 22",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-23",
-      "question": "Output question 23",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-24",
-      "question": "Output question 24",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-25",
-      "question": "Output question 25",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-26",
-      "question": "Output question 26",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-27",
-      "question": "Output question 27",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-28",
-      "question": "Output question 28",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-29",
-      "question": "Output question 29",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-ob-30",
-      "question": "Output question 30",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    }
+
+  outputBasedQuestions: [
+    { id: "sw-ob-1", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    default: System.out.println(\"D\");\\n}", answer: "B", explanation: "x = 2 matches case 2. Prints 'B'. break exits." },
+    { id: "sw-ob-2", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    default: System.out.println(\"D\");\\n}", answer: "B\\nC\\nD", explanation: "x = 2 matches case 2. No break! Fall through: B, C, D all print." },
+    { id: "sw-ob-3", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    default: System.out.println(\"D\");\\n}", answer: "D", explanation: "x = 5. No case matches. Default executes. Prints 'D'." },
+    { id: "sw-ob-4", question: "int x = 1;\\nswitch (x) {\\n    case 1: System.out.print(\"A\");\\n    case 2: System.out.print(\"B\");\\n    case 3: System.out.print(\"C\");\\n}", answer: "ABC", explanation: "x = 1 matches case 1. No break! Fall through: A, B, C all print (using print, not println)." },
+    { id: "sw-ob-5", question: "char ch = 'b';\\nswitch (ch) {\\n    case 'a': System.out.println(\"Vowel\"); break;\\n    case 'e': System.out.println(\"Vowel\"); break;\\n    case 'i': System.out.println(\"Vowel\"); break;\\n    case 'o': System.out.println(\"Vowel\"); break;\\n    case 'u': System.out.println(\"Vowel\"); break;\\n    default: System.out.println(\"Consonant\");\\n}", answer: "Consonant", explanation: "ch = 'b'. No case matches. Default executes. Prints 'Consonant'." },
+    { id: "sw-ob-6", question: "int day = 7;\\nswitch (day) {\\n    case 1: case 2: case 3: case 4: case 5:\\n        System.out.println(\"Weekday\"); break;\\n    case 6: case 7:\\n        System.out.println(\"Weekend\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", answer: "Weekend", explanation: "day = 7 matches case 7 (grouped with case 6). Prints 'Weekend'. break exits." },
+    { id: "sw-ob-7", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"1\");\\n    case 2: System.out.println(\"2\");\\n    case 3: System.out.println(\"3\");\\n    case 4: System.out.println(\"4\"); break;\\n    case 5: System.out.println(\"5\");\\n    default: System.out.println(\"D\");\\n}", answer: "3\\n4", explanation: "x = 3 matches case 3. No break! Fall through to case 4. Prints '3' and '4'. break at case 4 exits." },
+    { id: "sw-ob-8", question: "int month = 2;\\nswitch (month) {\\n    case 1: case 3: case 5: case 7: case 8: case 10: case 12:\\n        System.out.println(\"31 days\"); break;\\n    case 4: case 6: case 9: case 11:\\n        System.out.println(\"30 days\"); break;\\n    case 2:\\n        System.out.println(\"28/29 days\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", answer: "28/29 days", explanation: "month = 2 matches case 2. Prints '28/29 days'. break exits." },
+    { id: "sw-ob-9", question: "int x = 0;\\nswitch (x) {\\n    case 0: System.out.println(\"Zero\");\\n    case 1: System.out.println(\"One\"); break;\\n    default: System.out.println(\"Default\");\\n}", answer: "Zero\\nOne", explanation: "x = 0 matches case 0. No break! Fall through to case 1. Prints 'Zero' and 'One'. break exits." },
+    { id: "sw-ob-10", question: "String color = \"green\";\\nswitch (color) {\\n    case \"red\": System.out.println(\"Stop\"); break;\\n    case \"yellow\": System.out.println(\"Slow\"); break;\\n    case \"green\": System.out.println(\"Go\"); break;\\n    default: System.out.println(\"Error\");\\n}", answer: "Go", explanation: "color = 'green' matches case 'green'. Prints 'Go'. break exits." },
+    { id: "sw-ob-11", question: "int x = 10;\\nswitch (x) {\\n    case 10: System.out.println(\"Ten\");\\n    case 20: System.out.println(\"Twenty\");\\n    case 30: System.out.println(\"Thirty\");\\n}", answer: "Ten", explanation: "x = 10 matches case 10. No break but no more cases after 10 that match... wait, fall through: prints 'Ten', 'Twenty', 'Thirty'." },
+    { id: "sw-ob-12", question: "int marks = 85;\\nswitch (marks / 10) {\\n    case 10: case 9: System.out.println(\"A+\"); break;\\n    case 8: System.out.println(\"A\"); break;\\n    case 7: System.out.println(\"B\"); break;\\n    default: System.out.println(\"C or below\");\\n}", answer: "A", explanation: "marks / 10 = 85 / 10 = 8. Case 8 matches. Prints 'A'. break exits." },
+    { id: "sw-ob-13", question: "int x = 4;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\");\\n    default: System.out.println(\"E\");\\n}", answer: "D\\nE", explanation: "x = 4 matches case 4. No break! Fall through to default. Prints 'D' and 'E'." },
+    { id: "sw-ob-14", question: "int op = 1;\\nint a = 10, b = 3;\\nswitch (op) {\\n    case 1: System.out.println(a + b); break;\\n    case 2: System.out.println(a - b); break;\\n    case 3: System.out.println(a * b); break;\\n    default: System.out.println(\"Invalid\");\\n}", answer: "13", explanation: "op = 1 matches case 1. Prints 10 + 3 = 13. break exits." },
+    { id: "sw-ob-15", question: "int x = 2;\\nswitch (x) {\\n    default: System.out.println(\"Default\"); break;\\n    case 1: System.out.println(\"One\"); break;\\n    case 2: System.out.println(\"Two\"); break;\\n}", answer: "Two", explanation: "x = 2 matches case 2. Default is at the top but case 2 still matches. Prints 'Two'. break exits." },
+    { id: "sw-ob-16", question: "char grade = 'C';\\nswitch (grade) {\\n    case 'A': System.out.println(\"Excellent\"); break;\\n    case 'B': System.out.println(\"Good\"); break;\\n    case 'C': System.out.println(\"Average\");\\n    case 'D': System.out.println(\"Poor\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", answer: "Average\\nPoor", explanation: "grade = 'C' matches case 'C'. No break! Fall through to case 'D'. Prints 'Average' and 'Poor'. break exits." },
+    { id: "sw-ob-17", question: "int x = 6;\\nswitch (x) {\\n    case 1: case 2: case 3:\\n        System.out.println(\"Low\"); break;\\n    case 4: case 5: case 6:\\n        System.out.println(\"Medium\"); break;\\n    case 7: case 8: case 9:\\n        System.out.println(\"High\"); break;\\n    default: System.out.println(\"Out of range\");\\n}", answer: "Medium", explanation: "x = 6 matches case 6 (grouped with 4, 5). Prints 'Medium'. break exits." },
+    { id: "sw-ob-18", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.print(\"1\");\\n    case 2: System.out.print(\"2\");\\n    case 3: System.out.print(\"3\");\\n    case 4: System.out.print(\"4\");\\n    case 5: System.out.print(\"5\");\\n}", answer: "345", explanation: "x = 3 matches case 3. No break anywhere! Fall through: prints '3', '4', '5' (using print, no newlines)." },
+    { id: "sw-ob-19", question: "int season = 5;\\nswitch (season) {\\n    case 1: System.out.println(\"Spring\"); break;\\n    case 2: System.out.println(\"Summer\"); break;\\n    case 3: System.out.println(\"Autumn\"); break;\\n    case 4: System.out.println(\"Winter\"); break;\\n}", answer: "(No output)", explanation: "season = 5. No case matches. No default case. Nothing prints." },
+    { id: "sw-ob-20", question: "int x = 1;\\nswitch (x) {\\n    case 1:\\n        x++;\\n    case 2:\\n        x++;\\n    case 3:\\n        x++;\\n        break;\\n    default:\\n        x = 0;\\n}\\nSystem.out.println(x);", answer: "4", explanation: "x = 1 matches case 1. x++ -> 2. Fall through. x++ -> 3. Fall through. x++ -> 4. break. Prints 4." },
+    { id: "sw-ob-21", question: "int num = 15;\\nswitch (num % 5) {\\n    case 0: System.out.println(\"Divisible by 5\"); break;\\n    case 1: System.out.println(\"Remainder 1\"); break;\\n    default: System.out.println(\"Other\");\\n}", answer: "Divisible by 5", explanation: "15 % 5 = 0. Case 0 matches. Prints 'Divisible by 5'. break exits." },
+    { id: "sw-ob-22", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\");\\n    default: System.out.println(\"D\");\\n}\\nSystem.out.println(\"Done\");", answer: "B\\nDone", explanation: "x = 2 matches case 2. Prints 'B'. break exits. Then 'Done' prints." },
+    { id: "sw-ob-23", question: "int day = 3;\\nswitch (day) {\\n    case 1: System.out.println(\"Mon\");\\n    case 2: System.out.println(\"Tue\");\\n    case 3: System.out.println(\"Wed\");\\n    case 4: System.out.println(\"Thu\");\\n    case 5: System.out.println(\"Fri\"); break;\\n    case 6: System.out.println(\"Sat\");\\n    case 7: System.out.println(\"Sun\");\\n}", answer: "Wed\\nThu\\nFri", explanation: "day = 3 matches case 3. No break until case 5. Fall through: Wed, Thu, Fri. break at case 5 exits." },
+    { id: "sw-ob-24", question: "String day = \"MON\";\\nswitch (day) {\\n    case \"mon\": System.out.println(\"Monday\"); break;\\n    case \"MON\": System.out.println(\"MONDAY\"); break;\\n    default: System.out.println(\"Unknown\");\\n}", answer: "MONDAY", explanation: "day = 'MON' matches case 'MON' (case-sensitive). Prints 'MONDAY'. break exits." },
+    { id: "sw-ob-25", question: "int x = 10;\\nswitch (x) {\\n    case 10:\\n        switch (x) {\\n            case 10: System.out.println(\"Inner 10\"); break;\\n            default: System.out.println(\"Inner default\");\\n        }\\n        break;\\n    default:\\n        System.out.println(\"Outer default\");\\n}", answer: "Inner 10", explanation: "Outer: x = 10 matches case 10. Inner: x = 10 matches case 10. Prints 'Inner 10'. Inner break. Outer break." },
+    { id: "sw-ob-26", question: "int x = 100;\\nswitch (x / 50) {\\n    case 1: System.out.println(\"50-99\"); break;\\n    case 2: System.out.println(\"100-149\"); break;\\n    case 3: System.out.println(\"150-199\"); break;\\n    default: System.out.println(\"Other\");\\n}", answer: "100-149", explanation: "100 / 50 = 2. Case 2 matches. Prints '100-149'. break exits." },
+    { id: "sw-ob-27", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"1\");\\n    case 2: System.out.println(\"2\"); break;\\n    case 3: System.out.println(\"3\");\\n    case 4: System.out.println(\"4\"); break;\\n}\\nSystem.out.println(\"End\");", answer: "3\\n4\\nEnd", explanation: "x = 3 matches case 3. No break! Fall through to case 4. Prints '3', '4'. break. Then 'End'." },
+    { id: "sw-ob-28", question: "char ch = 'A';\\nswitch (ch) {\\n    case 'A': System.out.println(\"Alpha\");\\n    case 'B': System.out.println(\"Beta\");\\n    case 'C': System.out.println(\"Gamma\"); break;\\n    default: System.out.println(\"Other\");\\n}", answer: "Alpha\\nBeta\\nGamma", explanation: "ch = 'A' matches case 'A'. No break! Fall through: Alpha, Beta, Gamma. break at case 'C' exits." },
+    { id: "sw-ob-29", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\");\\n    case 5: System.out.println(\"E\");\\n    case 6: System.out.println(\"F\");\\n    case 7: System.out.println(\"G\");\\n}", answer: "E\\nF\\nG", explanation: "x = 5 matches case 5. No break anywhere! Fall through: E, F, G." },
+    { id: "sw-ob-30", question: "int choice = 3;\\nswitch (choice) {\\n    case 1: System.out.println(\"Tea: Rs 20\"); break;\\n    case 2: System.out.println(\"Coffee: Rs 30\"); break;\\n    case 3: System.out.println(\"Juice: Rs 40\");\\n    case 4: System.out.println(\"Water: Rs 10\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", answer: "Juice: Rs 40\\nWater: Rs 10", explanation: "choice = 3 matches case 3. No break! Fall through to case 4. Prints 'Juice: Rs 40' and 'Water: Rs 10'. break exits." },
+    { id: "sw-ob-31", question: "int x = 0;\\nswitch (x) {\\n    case 0: System.out.println(\"Zero\"); break;\\n    case 1: System.out.println(\"One\"); break;\\n    case -1: System.out.println(\"Minus One\"); break;\\n    default: System.out.println(\"Other\");\\n}", answer: "Zero", explanation: "x = 0 matches case 0. Prints 'Zero'. break exits." },
+    { id: "sw-ob-32", question: "int x = 7;\\nswitch (x % 2) {\\n    case 0: System.out.println(\"Even\"); break;\\n    case 1: System.out.println(\"Odd\"); break;\\n}", answer: "Odd", explanation: "7 % 2 = 1. Case 1 matches. Prints 'Odd'. break exits." },
+    { id: "sw-ob-33", question: "int x = 25;\\nswitch (x / 10) {\\n    case 0: case 1: System.out.println(\"0-19\"); break;\\n    case 2: System.out.println(\"20-29\"); break;\\n    case 3: case 4: System.out.println(\"30-49\"); break;\\n    default: System.out.println(\"50+\");\\n}", answer: "20-29", explanation: "25 / 10 = 2. Case 2 matches. Prints '20-29'. break exits." },
+    { id: "sw-ob-34", question: "int x = 1;\\nswitch (x) {\\n    case 1:\\n        System.out.println(\"A\");\\n        x = 2;\\n    case 2:\\n        System.out.println(\"B\");\\n        break;\\n    case 3:\\n        System.out.println(\"C\");\\n}", answer: "A\\nB", explanation: "x = 1 matches case 1. Print 'A'. x = 2. Fall through to case 2. Print 'B'. break exits. Note: changing x inside case doesn't re-evaluate switch." },
+    { id: "sw-ob-35", question: "int month = 4;\\nswitch (month) {\\n    case 2: System.out.println(\"28/29\"); break;\\n    case 4: case 6: case 9: case 11:\\n        System.out.println(\"30\"); break;\\n    case 1: case 3: case 5: case 7: case 8: case 10: case 12:\\n        System.out.println(\"31\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", answer: "30", explanation: "month = 4 matches case 4 (grouped with 6, 9, 11). Prints '30'. break exits." },
+    { id: "sw-ob-36", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\");\\n    case 5: System.out.println(\"E\"); break;\\n    default: System.out.println(\"F\");\\n}", answer: "C\\nD\\nE", explanation: "x = 3 matches case 3. No break until case 5. Fall through: C, D, E. break exits." },
+    { id: "sw-ob-37", question: "int x = 8;\\nswitch (x) {\\n    case 1: case 2: case 3:\\n        System.out.println(\"Low\");\\n    case 4: case 5: case 6:\\n        System.out.println(\"Medium\");\\n    case 7: case 8: case 9:\\n        System.out.println(\"High\");\\n    default:\\n        System.out.println(\"Default\");\\n}", answer: "High\\nDefault", explanation: "x = 8 matches case 8 (grouped with 7, 9). No break! Fall through: 'High', then 'Default'." },
+    { id: "sw-ob-38", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"1\"); break;\\n    case 2: System.out.println(\"2\"); break;\\n    case 2: System.out.println(\"2 again\"); break;\\n    default: System.out.println(\"D\");\\n}", answer: "Compilation Error", explanation: "Duplicate case label (case 2 appears twice). This causes a compilation error." },
+    { id: "sw-ob-39", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\"); break;\\n}\\nSystem.out.println(\"End\");", answer: "End", explanation: "x = 5. No case matches. No default. Nothing from switch. 'End' prints." },
+    { id: "sw-ob-40", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.print(\"A\");\\n    case 2: System.out.print(\"B\");\\n    case 3: System.out.print(\"C\"); break;\\n    case 4: System.out.print(\"D\");\\n}\\nSystem.out.println(\"!\");", answer: "C!", explanation: "x = 3 matches case 3. Print 'C' (no newline). break exits. Then '!' prints (println). Output: 'C!'." },
+    { id: "sw-ob-41", question: "int x = 10;\\nswitch (x) {\\n    case 10: System.out.println(\"Ten\");\\n    case 20: System.out.println(\"Twenty\");\\n    case 30: System.out.println(\"Thirty\");\\n    default: System.out.println(\"Default\");\\n}", answer: "Ten\\nTwenty\\nThirty\\nDefault", explanation: "x = 10 matches case 10. No break anywhere! Fall through all: Ten, Twenty, Thirty, Default." },
+    { id: "sw-ob-42", question: "int x = 4;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n}", answer: "(No output)", explanation: "x = 4. No case matches. No default. Nothing prints." },
+    { id: "sw-ob-43", question: "int x = 2;\\nswitch (x + 1) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    default: System.out.println(\"D\");\\n}", answer: "C", explanation: "x + 1 = 3. Case 3 matches. Prints 'C'. break exits." },
+    { id: "sw-ob-44", question: "int x = 5;\\nswitch (x) {\\n    case 1: case 2: case 3: case 4: case 5:\\n        System.out.println(\"Match\"); break;\\n    default: System.out.println(\"No match\");\\n}", answer: "Match", explanation: "x = 5 matches case 5 (grouped with 1-4). Prints 'Match'. break exits." },
+    { id: "sw-ob-45", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"1\");\\n    case 2: System.out.println(\"2\");\\n    case 3: System.out.println(\"3\");\\n    case 4: System.out.println(\"4\");\\n    case 5: System.out.println(\"5\");\\n    case 6: System.out.println(\"6\");\\n    case 7: System.out.println(\"7\");\\n    case 8: System.out.println(\"8\");\\n    case 9: System.out.println(\"9\");\\n    case 10: System.out.println(\"10\");\\n}", answer: "3\\n4\\n5\\n6\\n7\\n8\\n9\\n10", explanation: "x = 3 matches case 3. No break anywhere! Fall through from 3 to 10." },
+    { id: "sw-ob-46", question: "int x = 1;\\nswitch (x) {\\n    case 1:\\n        System.out.println(\"A\");\\n    case 2:\\n        System.out.println(\"B\");\\n        break;\\n    case 3:\\n        System.out.println(\"C\");\\n}\\nSystem.out.println(\"Done\");", answer: "A\\nB\\nDone", explanation: "x = 1 matches case 1. No break! Fall through to case 2. Print 'A', 'B'. break. Then 'Done'." },
+    { id: "sw-ob-47", question: "int x = 6;\\nswitch (x % 3) {\\n    case 0: System.out.println(\"Div by 3\"); break;\\n    case 1: System.out.println(\"Rem 1\"); break;\\n    case 2: System.out.println(\"Rem 2\"); break;\\n}", answer: "Div by 3", explanation: "6 % 3 = 0. Case 0 matches. Prints 'Div by 3'. break exits." },
+    { id: "sw-ob-48", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\"); break;\\n    case 5: System.out.println(\"E\");\\n    default: System.out.println(\"F\");\\n}", answer: "B\\nC\\nD", explanation: "x = 2 matches case 2. No break until case 4. Fall through: B, C, D. break exits." },
+    { id: "sw-ob-49", question: "int x = 15;\\nswitch (x / 10) {\\n    case 0: System.out.println(\"Single digit\"); break;\\n    case 1: System.out.println(\"Two digits (10-19)\"); break;\\n    case 2: System.out.println(\"Two digits (20-29)\"); break;\\n    default: System.out.println(\"Three+ digits\");\\n}", answer: "Two digits (10-19)", explanation: "15 / 10 = 1. Case 1 matches. Prints 'Two digits (10-19)'. break exits." },
+    { id: "sw-ob-50", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n}\\nswitch (x) {\\n    case 3: System.out.println(\"C\"); break;\\n    default: System.out.println(\"D\");\\n}", answer: "C", explanation: "First switch: x = 3, no match, no output. Second switch: x = 3, case 3 matches. Prints 'C'. break." },
   ],
-  "errorFindingQuestions": [
-    {
-      "id": "switch-ef-1",
-      "question": "Error question 1",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-2",
-      "question": "Error question 2",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-3",
-      "question": "Error question 3",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-4",
-      "question": "Error question 4",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-5",
-      "question": "Error question 5",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-6",
-      "question": "Error question 6",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-7",
-      "question": "Error question 7",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-8",
-      "question": "Error question 8",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-9",
-      "question": "Error question 9",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-10",
-      "question": "Error question 10",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-11",
-      "question": "Error question 11",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-12",
-      "question": "Error question 12",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-13",
-      "question": "Error question 13",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-14",
-      "question": "Error question 14",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-15",
-      "question": "Error question 15",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-16",
-      "question": "Error question 16",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-17",
-      "question": "Error question 17",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-18",
-      "question": "Error question 18",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-19",
-      "question": "Error question 19",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-20",
-      "question": "Error question 20",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-21",
-      "question": "Error question 21",
-      "error": "The error",
-      "corrected": "Corrected code"
-    },
-    {
-      "id": "switch-ef-22",
-      "question": "Error question 22",
-      "error": "The error",
-      "corrected": "Corrected code"
-    }
+
+  errorFindingQuestions: [
+    { id: "sw-ef-1", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n}", error: "Missing break statements. This will cause fall-through. If x = 2, it will print B and C.", corrected: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n}" },
+    { id: "sw-ef-2", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 1: System.out.println(\"B\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "Duplicate case label. Case 1 appears twice. This causes a compilation error.", corrected: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    default: System.out.println(\"D\");\\n}" },
+    { id: "sw-ef-3", question: "long x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "long cannot be used in switch. Only byte, short, int, char, String, and enum are allowed.", corrected: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}" },
+    { id: "sw-ef-4", question: "int x = 5;\\nswitch (x) {\\n    case x > 3: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "Case labels cannot use comparison operators. They must be constant values.", corrected: "int x = 5;\\nswitch (x) {\\n    case 5: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}" },
+    { id: "sw-ef-5", question: "boolean flag = true;\\nswitch (flag) {\\n    case true: System.out.println(\"Yes\"); break;\\n    case false: System.out.println(\"No\"); break;\\n}", error: "boolean cannot be used in switch. Only byte, short, int, char, String, and enum are allowed.", corrected: "if (flag) { System.out.println(\"Yes\"); } else { System.out.println(\"No\"); }" },
+    { id: "sw-ef-6", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n}", error: "No error, but missing default case. If x is not 1, 2, or 3, nothing happens. Adding default is recommended.", corrected: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    default: System.out.println(\"Invalid\");\\n}" },
+    { id: "sw-ef-7", question: "int x = 5;\\nint y = 5;\\nswitch (x) {\\n    case y: System.out.println(\"Match\"); break;\\n    default: System.out.println(\"No match\");\\n}", error: "Case labels must be compile-time constants. y is a variable, not a constant. Use final or literal value.", corrected: "int x = 5;\\nfinal int Y = 5;\\nswitch (x) {\\n    case Y: System.out.println(\"Match\"); break;\\n    default: System.out.println(\"No match\");\\n}" },
+    { id: "sw-ef-8", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    break;\\n    case 3: System.out.println(\"C\");\\n    break;\\n}", error: "No error. Break is present for case 2 and 3. Case 1 is missing break but that may be intentional.", corrected: "No error, but case 1 is missing break. Add break if fall-through is not intended." },
+    { id: "sw-ef-9", question: "float f = 5.5f;\\nswitch (f) {\\n    case 1.0f: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "float cannot be used in switch. Only byte, short, int, char, String, and enum are allowed.", corrected: "int f = 5;\\nswitch (f) {\\n    case 1: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}" },
+    { id: "sw-ef-10", question: "int x = 2;\\nswitch (x) {\\n    case 1:\\n        int y = 10;\\n        System.out.println(y);\\n    case 2:\\n        int y = 20;\\n        System.out.println(y);\\n        break;\\n}", error: "Variable y is declared twice in the same switch block scope. This causes a compilation error.", corrected: "int x = 2;\\nswitch (x) {\\n    case 1: {\\n        int y = 10;\\n        System.out.println(y);\\n    }\\n    case 2: {\\n        int y = 20;\\n        System.out.println(y);\\n        break;\\n    }\\n}" },
+    { id: "sw-ef-11", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    default: System.out.println(\"D\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n}", error: "No error. Default can appear anywhere in the switch. It will still work correctly.", corrected: "No error. Default in the middle is valid but unconventional." },
+    { id: "sw-ef-12", question: "int x = 2;\\nswitch (x)\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n}", error: "Missing curly braces around the switch body. The switch block must be enclosed in {}.", corrected: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n}" },
+    { id: "sw-ef-13", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    default: System.out.println(\"D\");\\n}", error: "No break statements. All cases will fall through. If x = 2, output will be B, C, D.", corrected: "Add break after each case." },
+    { id: "sw-ef-14", question: "String s = \"hello\";\\nswitch (s) {\\n    case null: System.out.println(\"Null\"); break;\\n    case \"hello\": System.out.println(\"Hi\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "Case label cannot be null. This causes a compilation error.", corrected: "String s = \"hello\";\\nswitch (s) {\\n    case \"hello\": System.out.println(\"Hi\"); break;\\n    default: System.out.println(\"D\");\\n}" },
+    { id: "sw-ef-15", question: "int x = 5;\\nswitch (x) {\\n    case 1, 2, 3: System.out.println(\"Low\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "In older Java versions, case labels cannot use commas. Use separate case labels for each value.", corrected: "int x = 5;\\nswitch (x) {\\n    case 1: case 2: case 3: System.out.println(\"Low\"); break;\\n    default: System.out.println(\"D\");\\n}" },
+    { id: "sw-ef-16", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 2: System.out.println(\"B again\"); break;\\n}", error: "Duplicate case label. Case 2 appears twice. Compilation error.", corrected: "Remove the duplicate case 2." },
+    { id: "sw-ef-17", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\"); break;\\n    case 5: System.out.println(\"E\"); break;\\n    case 5: System.out.println(\"E again\"); break;\\n}", error: "Duplicate case label. Case 5 appears twice. Compilation error.", corrected: "Remove the duplicate case 5." },
+    { id: "sw-ef-18", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    break;\\n    case 4: System.out.println(\"D\");\\n    break;\\n}", error: "Cases 1 and 2 are missing break. If x = 1, output will be A, B, C. If x = 2, output will be B, C.", corrected: "Add break after case 1 and case 2." },
+    { id: "sw-ef-19", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\"); break;\\n}", error: "No error, but missing default case. If x is not 1-4, nothing happens.", corrected: "Add default case for robustness." },
+    { id: "sw-ef-20", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    default: System.out.println(\"D\");\\n    break;\\n}", error: "Break is only at the end (after default). All cases will fall through until default's break.", corrected: "Add break after each case." },
+    { id: "sw-ef-21", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    default: System.out.println(\"D\"); break;\\n}", error: "No error. Code is correct with proper break statements and default case.", corrected: "No error." },
+    { id: "sw-ef-22", question: "int x = 2;\\nswitch (x) {\\n    case 1: case 2: case 3:\\n        System.out.println(\"Low\"); break;\\n    case 4: case 5: case 6:\\n        System.out.println(\"Medium\"); break;\\n    default: System.out.println(\"High\");\\n}", error: "No error. Grouped cases are valid. Code is correct.", corrected: "No error." },
+    { id: "sw-ef-23", question: "double d = 5.5;\\nswitch (d) {\\n    case 1.0: System.out.println(\"A\"); break;\\n    default: System.out.println(\"D\");\\n}", error: "double cannot be used in switch. Only byte, short, int, char, String, and enum are allowed.", corrected: "Use int or cast to int." },
+    { id: "sw-ef-24", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n}", error: "No break statements and no default. Fall-through will occur for all matching and subsequent cases.", corrected: "Add break statements and a default case." },
+    { id: "sw-ef-25", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\"); break;\\n    case 5: System.out.println(\"E\");\\n    case 6: System.out.println(\"F\"); break;\\n}", error: "Case 5 is missing break. If x = 5, output will be E and F (fall-through).", corrected: "Add break after case 5." },
+    { id: "sw-ef-26", question: "int x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\"); break;\\n}", error: "Cases 1 and 3 are missing break. If x = 1, output: A, B. If x = 3, output: C, D.", corrected: "Add break after case 1 and case 3." },
+    { id: "sw-ef-27", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\"); break;\\n    case 5: System.out.println(\"E\"); break;\\n    case 6: System.out.println(\"F\"); break;\\n    case 7: System.out.println(\"G\"); break;\\n    case 8: System.out.println(\"H\"); break;\\n    case 9: System.out.println(\"I\"); break;\\n    case 10: System.out.println(\"J\"); break;\\n}", error: "No error, but missing default case. Consider adding default for robustness.", corrected: "Add default case." },
+    { id: "sw-ef-28", question: "int x = 2;\\nswitch (x) {\\n    case 1: {\\n        int y = 10;\\n        System.out.println(y);\\n        break;\\n    }\\n    case 2: {\\n        int y = 20;\\n        System.out.println(y);\\n        break;\\n    }\\n}", error: "No error. Using braces in case blocks is valid and allows declaring variables with the same name in different cases.", corrected: "No error." },
+    { id: "sw-ef-29", question: "int x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\");\\n    case 5: System.out.println(\"E\");\\n    case 6: System.out.println(\"F\");\\n    case 7: System.out.println(\"G\");\\n    case 8: System.out.println(\"H\");\\n    case 9: System.out.println(\"I\");\\n    case 10: System.out.println(\"J\");\\n}", error: "No break statements anywhere. Massive fall-through. If x = 2, output: B, C, D, E, F, G, H, I, J.", corrected: "Add break after each case." },
+    { id: "sw-ef-30", question: "int x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\"); break;\\n    case 5: System.out.println(\"E\"); break;\\n    case 6: System.out.println(\"F\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", error: "No error. Code is correct with proper break statements and default case.", corrected: "No error." },
   ],
-  "fillInTheBlanks": [
-    {
-      "id": "switch-fb-1",
-      "question": "Fill blank 1",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-2",
-      "question": "Fill blank 2",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-3",
-      "question": "Fill blank 3",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-4",
-      "question": "Fill blank 4",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-5",
-      "question": "Fill blank 5",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-6",
-      "question": "Fill blank 6",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-7",
-      "question": "Fill blank 7",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-8",
-      "question": "Fill blank 8",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-9",
-      "question": "Fill blank 9",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-10",
-      "question": "Fill blank 10",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-11",
-      "question": "Fill blank 11",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-12",
-      "question": "Fill blank 12",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-13",
-      "question": "Fill blank 13",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-14",
-      "question": "Fill blank 14",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-15",
-      "question": "Fill blank 15",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-16",
-      "question": "Fill blank 16",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-17",
-      "question": "Fill blank 17",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-18",
-      "question": "Fill blank 18",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-19",
-      "question": "Fill blank 19",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-fb-20",
-      "question": "Fill blank 20",
-      "answer": "Answer"
-    }
+
+  fillInTheBlanks: [
+    { id: "sw-fb-1", question: "The _____ statement is a multi-way branch statement in Java.", answer: "switch" },
+    { id: "sw-fb-2", question: "Each value in a switch statement is called a _____.", answer: "case" },
+    { id: "sw-fb-3", question: "The _____ statement exits the switch block.", answer: "break" },
+    { id: "sw-fb-4", question: "The _____ case executes when no case matches.", answer: "default" },
+    { id: "sw-fb-5", question: "When break is missing, execution falls through to the next case. This is called _____.", answer: "fall-through" },
+    { id: "sw-fb-6", question: "Switch can work with byte, short, int, char, _____, and enum types.", answer: "String" },
+    { id: "sw-fb-7", question: "_____ and long cannot be used in switch.", answer: "boolean" },
+    { id: "sw-fb-8", question: "Case labels must be _____ constants, not variables.", answer: "compile-time" },
+    { id: "sw-fb-9", question: "Multiple cases can share the same code block. This is called _____ cases.", answer: "grouped" },
+    { id: "sw-fb-10", question: "The default case is _____ (optional/mandatory) in a switch statement.", answer: "optional" },
+    { id: "sw-fb-11", question: "String was added to switch in Java version _____.", answer: "7" },
+    { id: "sw-fb-12", question: "Duplicate case labels cause a _____ error.", answer: "compilation" },
+    { id: "sw-fb-13", question: "A switch inside another switch is called a _____ switch.", answer: "nested" },
+    { id: "sw-fb-14", question: "The switch expression is evaluated _____ (once/multiple times).", answer: "once" },
+    { id: "sw-fb-15", question: "Case labels cannot be _____.", answer: "null" },
+    { id: "sw-fb-16", question: "The switch statement is an alternative to _____ ladder.", answer: "if-else-if" },
+    { id: "sw-fb-17", question: "Switch can only test for _____, not ranges.", answer: "equality" },
+    { id: "sw-fb-18", question: "_____ point types (float, double) cannot be used in switch.", answer: "Floating" },
+    { id: "sw-fb-19", question: "In a menu-driven program, switch is used to handle different _____ choices.", answer: "menu" },
+    { id: "sw-fb-20", question: "The default case can appear _____ in the switch block.", answer: "anywhere" },
+    { id: "sw-fb-21", question: "When no case matches and there is no default, _____ happens.", answer: "nothing" },
+    { id: "sw-fb-22", question: "Case labels are followed by a _____ (:).", answer: "colon" },
+    { id: "sw-fb-23", question: "The break statement transfers control to the statement _____ the switch.", answer: "after" },
+    { id: "sw-fb-24", question: "Switch is more _____ than if-else-if for many constant comparisons.", answer: "readable" },
+    { id: "sw-fb-25", question: "The compiler may use a _____ table to optimize switch with many cases.", answer: "jump" },
+    { id: "sw-fb-26", question: "_____ switch is useful for multi-level menu selection.", answer: "Nested" },
+    { id: "sw-fb-27", question: "Case labels must be _____ to the switch expression type.", answer: "compatible" },
+    { id: "sw-fb-28", question: "Using _____ in case blocks allows declaring variables with the same name in different cases.", answer: "braces" },
+    { id: "sw-fb-29", question: "The switch expression must evaluate to a _____ type (not boolean or floating-point).", answer: "integral or String" },
+    { id: "sw-fb-30", question: "Fall-through can be _____ (useful/problematic) when grouping cases.", answer: "useful" },
   ],
-  "mcqs": [
-    {
-      "id": "switch-mcq-1",
-      "question": "MCQ 1",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-2",
-      "question": "MCQ 2",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-3",
-      "question": "MCQ 3",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-4",
-      "question": "MCQ 4",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-5",
-      "question": "MCQ 5",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-6",
-      "question": "MCQ 6",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-7",
-      "question": "MCQ 7",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-8",
-      "question": "MCQ 8",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-9",
-      "question": "MCQ 9",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-10",
-      "question": "MCQ 10",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-11",
-      "question": "MCQ 11",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-12",
-      "question": "MCQ 12",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-13",
-      "question": "MCQ 13",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-14",
-      "question": "MCQ 14",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-15",
-      "question": "MCQ 15",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-16",
-      "question": "MCQ 16",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-17",
-      "question": "MCQ 17",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-18",
-      "question": "MCQ 18",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-19",
-      "question": "MCQ 19",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-20",
-      "question": "MCQ 20",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-21",
-      "question": "MCQ 21",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-22",
-      "question": "MCQ 22",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-23",
-      "question": "MCQ 23",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-24",
-      "question": "MCQ 24",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-25",
-      "question": "MCQ 25",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-26",
-      "question": "MCQ 26",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-27",
-      "question": "MCQ 27",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-28",
-      "question": "MCQ 28",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-29",
-      "question": "MCQ 29",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-30",
-      "question": "MCQ 30",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-31",
-      "question": "MCQ 31",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-32",
-      "question": "MCQ 32",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-33",
-      "question": "MCQ 33",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-34",
-      "question": "MCQ 34",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-35",
-      "question": "MCQ 35",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-36",
-      "question": "MCQ 36",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-37",
-      "question": "MCQ 37",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-38",
-      "question": "MCQ 38",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-39",
-      "question": "MCQ 39",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-40",
-      "question": "MCQ 40",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-41",
-      "question": "MCQ 41",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-42",
-      "question": "MCQ 42",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-43",
-      "question": "MCQ 43",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-44",
-      "question": "MCQ 44",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-45",
-      "question": "MCQ 45",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-46",
-      "question": "MCQ 46",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-47",
-      "question": "MCQ 47",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-48",
-      "question": "MCQ 48",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-49",
-      "question": "MCQ 49",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-mcq-50",
-      "question": "MCQ 50",
-      "options": [
-        "A",
-        "B",
-        "C",
-        "D"
-      ],
-      "answer": 0,
-      "explanation": "Explanation"
-    }
+
+  mcqs: [
+    { id: "sw-mcq-1", question: "What does the switch statement do?", options: ["Repeats code multiple times", "Tests a variable against multiple constant values", "Declares a variable", "Prints output"], answer: 1, explanation: "The switch statement tests a variable against a list of constant values (cases)." },
+    { id: "sw-mcq-2", question: "Which types can be used in a switch statement?", options: ["byte, short, int, long, char", "byte, short, int, char, String, enum", "int, float, double, char", "All primitive types"], answer: 1, explanation: "Switch works with byte, short, int, char, String (Java 7+), and enum. Not long, float, double, or boolean." },
+    { id: "sw-mcq-3", question: "What is the purpose of the break statement in switch?", options: ["To start a new case", "To exit the switch block", "To skip to default", "To repeat the case"], answer: 1, explanation: "break exits the switch block. Without it, execution falls through to the next case." },
+    { id: "sw-mcq-4", question: "What happens if break is missing in a case?", options: ["Compilation error", "Fall-through to the next case", "Program crashes", "Nothing happens"], answer: 1, explanation: "Without break, execution falls through to the next case (fall-through behavior)." },
+    { id: "sw-mcq-5", question: "What is the default case in switch?", options: ["The first case", "The last case", "The case that executes when no other case matches", "A mandatory case"], answer: 2, explanation: "The default case executes when no other case matches the switch expression." },
+    { id: "sw-mcq-6", question: "Is the default case mandatory?", options: ["Yes, always", "No, it is optional", "Only for String switch", "Only for int switch"], answer: 1, explanation: "The default case is optional but recommended for handling unexpected values." },
+    { id: "sw-mcq-7", question: "What is the output?\\nint x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    default: System.out.println(\"D\");\\n}", options: ["A", "B", "D", "Nothing"], answer: 1, explanation: "x = 2 matches case 2. Prints 'B'. break exits." },
+    { id: "sw-mcq-8", question: "What is the output?\\nint x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    default: System.out.println(\"D\");\\n}", options: ["B", "B\\nC\\nD", "A\\nB\\nC\\nD", "D"], answer: 1, explanation: "x = 2 matches case 2. No break! Fall through: B, C, D." },
+    { id: "sw-mcq-9", question: "What is the output?\\nint x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    default: System.out.println(\"D\");\\n}", options: ["A", "B", "D", "Nothing"], answer: 2, explanation: "x = 5. No case matches. Default executes. Prints 'D'." },
+    { id: "sw-mcq-10", question: "Which of the following CANNOT be used in a switch?", options: ["int", "char", "String", "boolean"], answer: 3, explanation: "boolean cannot be used in switch. Only byte, short, int, char, String, and enum." },
+    { id: "sw-mcq-11", question: "Can case labels be variables?", options: ["Yes, always", "No, they must be constants", "Only final variables", "Only local variables"], answer: 1, explanation: "Case labels must be compile-time constants. Variables are not allowed." },
+    { id: "sw-mcq-12", question: "What is fall-through in switch?", options: ["When a case is skipped", "When execution continues to the next case after a match", "When default executes", "When the switch fails"], answer: 1, explanation: "Fall-through occurs when break is missing and execution continues to the next case." },
+    { id: "sw-mcq-13", question: "Can multiple cases share the same code block?", options: ["No", "Yes, by stacking case labels", "Only with default", "Only in nested switch"], answer: 1, explanation: "Multiple case labels can be stacked: case 1: case 2: case 3: doSomething();" },
+    { id: "sw-mcq-14", question: "What is the output?\\nint x = 3;\\nswitch (x) {\\n    case 1: System.out.print(\"A\");\\n    case 2: System.out.print(\"B\");\\n    case 3: System.out.print(\"C\");\\n    case 4: System.out.print(\"D\"); break;\\n    case 5: System.out.print(\"E\");\\n}", options: ["C", "CD", "ABCD", "CDE"], answer: 1, explanation: "x = 3 matches case 3. No break until case 4. Fall through: C, D. break exits." },
+    { id: "sw-mcq-15", question: "Where can the default case appear?", options: ["Only at the end", "Only at the beginning", "Anywhere in the switch", "Only after all cases"], answer: 2, explanation: "The default case can appear anywhere in the switch, not just at the end." },
+    { id: "sw-mcq-16", question: "What is the output?\\nint day = 7;\\nswitch (day) {\\n    case 1: case 2: case 3: case 4: case 5:\\n        System.out.println(\"Weekday\"); break;\\n    case 6: case 7:\\n        System.out.println(\"Weekend\"); break;\\n    default: System.out.println(\"Invalid\");\\n}", options: ["Weekday", "Weekend", "Invalid", "Nothing"], answer: 1, explanation: "day = 7 matches case 7 (grouped with 6). Prints 'Weekend'. break exits." },
+    { id: "sw-mcq-17", question: "Which Java version introduced String in switch?", options: ["Java 5", "Java 6", "Java 7", "Java 8"], answer: 2, explanation: "String was added to switch in Java 7." },
+    { id: "sw-mcq-18", question: "What happens if no case matches and there is no default?", options: ["Compilation error", "Runtime error", "Nothing happens", "Program crashes"], answer: 2, explanation: "If no case matches and there is no default, nothing happens. Execution continues after the switch." },
+    { id: "sw-mcq-19", question: "What is the output?\\nint x = 1;\\nswitch (x) {\\n    case 1: System.out.print(\"A\");\\n    case 2: System.out.print(\"B\");\\n    case 3: System.out.print(\"C\");\\n}", options: ["A", "ABC", "A\\nB\\nC", "Nothing"], answer: 1, explanation: "x = 1 matches case 1. No break! Fall through: A, B, C (using print, no newlines)." },
+    { id: "sw-mcq-20", question: "Can switch test ranges like if-else?", options: ["Yes", "No, only equality", "Only with int", "Only with String"], answer: 1, explanation: "Switch can only test for equality, not ranges. Use if-else for range checks." },
+    { id: "sw-mcq-21", question: "What is the output?\\nint marks = 85;\\nswitch (marks / 10) {\\n    case 10: case 9: System.out.println(\"A+\"); break;\\n    case 8: System.out.println(\"A\"); break;\\n    case 7: System.out.println(\"B\"); break;\\n    default: System.out.println(\"C\");\\n}", options: ["A+", "A", "B", "C"], answer: 1, explanation: "85 / 10 = 8. Case 8 matches. Prints 'A'. break exits." },
+    { id: "sw-mcq-22", question: "What causes a compilation error in switch?", options: ["Missing break", "Missing default", "Duplicate case labels", "Default in the middle"], answer: 2, explanation: "Duplicate case labels cause a compilation error. Missing break and default are not errors." },
+    { id: "sw-mcq-23", question: "What is the output?\\nint x = 4;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\"); break;\\n    case 4: System.out.println(\"D\");\\n    default: System.out.println(\"E\");\\n}", options: ["D", "D\\nE", "E", "Nothing"], answer: 1, explanation: "x = 4 matches case 4. No break! Fall through to default. Prints 'D' and 'E'." },
+    { id: "sw-mcq-24", question: "Can you use float in switch?", options: ["Yes", "No", "Only with cast", "Only in Java 8+"], answer: 1, explanation: "float cannot be used in switch. Only byte, short, int, char, String, and enum." },
+    { id: "sw-mcq-25", question: "What is the output?\\nString color = \"red\";\\nswitch (color) {\\n    case \"red\": System.out.println(\"Stop\"); break;\\n    case \"green\": System.out.println(\"Go\"); break;\\n    default: System.out.println(\"Unknown\");\\n}", options: ["Stop", "Go", "Unknown", "Compilation error"], answer: 0, explanation: "color = 'red' matches case 'red'. Prints 'Stop'. break exits." },
+    { id: "sw-mcq-26", question: "Is String comparison in switch case-sensitive?", options: ["No", "Yes", "Only for uppercase", "Only for lowercase"], answer: 1, explanation: "String comparison in switch is case-sensitive. 'Red' and 'red' are different." },
+    { id: "sw-mcq-27", question: "What is the output?\\nint x = 0;\\nswitch (x) {\\n    case 0: System.out.println(\"Zero\");\\n    case 1: System.out.println(\"One\"); break;\\n    default: System.out.println(\"Default\");\\n}", options: ["Zero", "Zero\\nOne", "Zero\\nOne\\nDefault", "Default"], answer: 1, explanation: "x = 0 matches case 0. No break! Fall through to case 1. Prints 'Zero' and 'One'. break exits." },
+    { id: "sw-mcq-28", question: "What is a nested switch?", options: ["A switch inside a loop", "A switch inside another switch", "A switch with many cases", "A switch with default only"], answer: 1, explanation: "A nested switch is a switch statement placed inside another switch statement." },
+    { id: "sw-mcq-29", question: "What is the output?\\nint x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n}\\nSystem.out.println(\"Done\");", options: ["B", "B\\nDone", "Done", "B Done"], answer: 1, explanation: "x = 2 matches case 2. Prints 'B'. break exits. Then 'Done' prints." },
+    { id: "sw-mcq-30", question: "Which is more readable for 10 constant comparisons?", options: ["if-else-if ladder", "switch statement", "Both are same", "Neither"], answer: 1, explanation: "Switch is more readable than a long if-else-if ladder for multiple constant comparisons." },
+    { id: "sw-mcq-31", question: "What is the output?\\nint x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"1\");\\n    case 2: System.out.println(\"2\");\\n    case 3: System.out.println(\"3\");\\n    case 4: System.out.println(\"4\");\\n    case 5: System.out.println(\"5\"); break;\\n    default: System.out.println(\"D\");\\n}", options: ["3", "3\\n4\\n5", "3\\n4\\n5\\nD", "D"], answer: 1, explanation: "x = 3 matches case 3. No break until case 5. Fall through: 3, 4, 5. break exits." },
+    { id: "sw-mcq-32", question: "What is the output?\\nint x = 6;\\nswitch (x % 2) {\\n    case 0: System.out.println(\"Even\"); break;\\n    case 1: System.out.println(\"Odd\"); break;\\n}", options: ["Even", "Odd", "Nothing", "Compilation error"], answer: 0, explanation: "6 % 2 = 0. Case 0 matches. Prints 'Even'. break exits." },
+    { id: "sw-mcq-33", question: "Can case labels be null?", options: ["Yes", "No", "Only for String", "Only for Object"], answer: 1, explanation: "Case labels cannot be null. It causes a compilation error." },
+    { id: "sw-mcq-34", question: "What is the output?\\nint x = 10;\\nswitch (x) {\\n    case 10: System.out.println(\"Ten\");\\n    case 20: System.out.println(\"Twenty\");\\n    case 30: System.out.println(\"Thirty\");\\n    default: System.out.println(\"Default\");\\n}", options: ["Ten", "Ten\\nTwenty\\nThirty\\nDefault", "Default", "Ten\\nDefault"], answer: 1, explanation: "x = 10 matches case 10. No break anywhere! Fall through all: Ten, Twenty, Thirty, Default." },
+    { id: "sw-mcq-35", question: "What is the advantage of switch over if-else-if?", options: ["Can test ranges", "More readable for constant comparisons", "Can use boolean", "Can use float"], answer: 1, explanation: "Switch is more readable than if-else-if for multiple constant comparisons." },
+    { id: "sw-mcq-36", question: "What is the output?\\nint x = 2;\\nswitch (x + 1) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n    default: System.out.println(\"D\");\\n}", options: ["B", "C", "D", "A"], answer: 1, explanation: "x + 1 = 3. Case 3 matches. Prints 'C'. break exits." },
+    { id: "sw-mcq-37", question: "What is the output?\\nint x = 5;\\nswitch (x) {\\n    case 1: case 2: case 3: case 4: case 5:\\n        System.out.println(\"Match\"); break;\\n    default: System.out.println(\"No match\");\\n}", options: ["Match", "No match", "Nothing", "Compilation error"], answer: 0, explanation: "x = 5 matches case 5 (grouped with 1-4). Prints 'Match'. break exits." },
+    { id: "sw-mcq-38", question: "What is the output?\\nint x = 3;\\nswitch (x) {\\n    default: System.out.println(\"Default\"); break;\\n    case 1: System.out.println(\"One\"); break;\\n    case 2: System.out.println(\"Two\"); break;\\n    case 3: System.out.println(\"Three\"); break;\\n}", options: ["Default", "Three", "One", "Two"], answer: 1, explanation: "x = 3 matches case 3. Default is at the top but case 3 still matches. Prints 'Three'." },
+    { id: "sw-mcq-39", question: "What is the output?\\nchar ch = 'a';\\nswitch (ch) {\\n    case 'a': case 'e': case 'i': case 'o': case 'u':\\n        System.out.println(\"Vowel\"); break;\\n    default: System.out.println(\"Consonant\");\\n}", options: ["Vowel", "Consonant", "Nothing", "Compilation error"], answer: 0, explanation: "ch = 'a' matches case 'a' (grouped with vowels). Prints 'Vowel'. break exits." },
+    { id: "sw-mcq-40", question: "What is the output?\\nint x = 15;\\nswitch (x / 10) {\\n    case 0: System.out.println(\"Single digit\"); break;\\n    case 1: System.out.println(\"Two digits (10-19)\"); break;\\n    case 2: System.out.println(\"Two digits (20-29)\"); break;\\n    default: System.out.println(\"Three+ digits\");\\n}", options: ["Single digit", "Two digits (10-19)", "Two digits (20-29)", "Three+ digits"], answer: 1, explanation: "15 / 10 = 1. Case 1 matches. Prints 'Two digits (10-19)'. break exits." },
+    { id: "sw-mcq-41", question: "What is the output?\\nint x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\"); break;\\n    case 5: System.out.println(\"E\");\\n    default: System.out.println(\"F\");\\n}", options: ["B", "B\\nC\\nD", "B\\nC\\nD\\nE\\nF", "B\\nC\\nD\\nE"], answer: 1, explanation: "x = 2 matches case 2. No break until case 4. Fall through: B, C, D. break exits." },
+    { id: "sw-mcq-42", question: "What is the output?\\nint x = 7;\\nswitch (x) {\\n    case 1: case 2: case 3:\\n        System.out.println(\"Low\"); break;\\n    case 4: case 5: case 6:\\n        System.out.println(\"Medium\"); break;\\n    case 7: case 8: case 9:\\n        System.out.println(\"High\"); break;\\n    default: System.out.println(\"Out of range\");\\n}", options: ["Low", "Medium", "High", "Out of range"], answer: 2, explanation: "x = 7 matches case 7 (grouped with 8, 9). Prints 'High'. break exits." },
+    { id: "sw-mcq-43", question: "What is the output?\\nint x = 1;\\nswitch (x) {\\n    case 1:\\n        x++;\\n    case 2:\\n        x++;\\n    case 3:\\n        x++;\\n        break;\\n    default:\\n        x = 0;\\n}\\nSystem.out.println(x);", options: ["1", "2", "3", "4"], answer: 3, explanation: "x = 1 matches case 1. x++ -> 2. Fall through. x++ -> 3. Fall through. x++ -> 4. break. Prints 4." },
+    { id: "sw-mcq-44", question: "What is the output?\\nint x = 3;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\"); break;\\n}\\nSystem.out.println(\"End\");", options: ["C\\nEnd", "C\\nD\\nEnd", "C\\nD", "End"], answer: 1, explanation: "x = 3 matches case 3. No break! Fall through to case 4. Prints 'C', 'D'. break. Then 'End'." },
+    { id: "sw-mcq-45", question: "What is the output?\\nint x = 100;\\nswitch (x / 50) {\\n    case 1: System.out.println(\"50-99\"); break;\\n    case 2: System.out.println(\"100-149\"); break;\\n    default: System.out.println(\"Other\");\\n}", options: ["50-99", "100-149", "Other", "Nothing"], answer: 1, explanation: "100 / 50 = 2. Case 2 matches. Prints '100-149'. break exits." },
+    { id: "sw-mcq-46", question: "What is the output?\\nint x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\");\\n    case 5: System.out.println(\"E\");\\n    case 6: System.out.println(\"F\");\\n    case 7: System.out.println(\"G\");\\n    case 8: System.out.println(\"H\");\\n    case 9: System.out.println(\"I\");\\n    case 10: System.out.println(\"J\");\\n}", options: ["B", "B\\nC\\nD\\nE\\nF\\nG\\nH\\nI\\nJ", "Nothing", "A\\nB"], answer: 1, explanation: "x = 2 matches case 2. No break anywhere! Fall through from B to J." },
+    { id: "sw-mcq-47", question: "What is the output?\\nint x = 4;\\nswitch (x) {\\n    case 1: System.out.println(\"A\"); break;\\n    case 2: System.out.println(\"B\"); break;\\n    case 3: System.out.println(\"C\"); break;\\n}", options: ["A", "B", "C", "Nothing"], answer: 3, explanation: "x = 4. No case matches. No default. Nothing prints." },
+    { id: "sw-mcq-48", question: "What is the output?\\nint x = 3;\\nswitch (x) {\\n    case 1: System.out.print(\"A\");\\n    case 2: System.out.print(\"B\");\\n    case 3: System.out.print(\"C\"); break;\\n    case 4: System.out.print(\"D\");\\n}\\nSystem.out.println(\"!\");", options: ["C!", "C\\n!", "C", "ABC!"], answer: 0, explanation: "x = 3 matches case 3. Print 'C' (no newline). break exits. Then '!' prints (println). Output: 'C!'." },
+    { id: "sw-mcq-49", question: "What is the output?\\nint x = 5;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\");\\n    case 5: System.out.println(\"E\");\\n    case 6: System.out.println(\"F\"); break;\\n    default: System.out.println(\"G\");\\n}", options: ["E", "E\\nF", "E\\nF\\nG", "G"], answer: 1, explanation: "x = 5 matches case 5. No break! Fall through to case 6. Prints 'E', 'F'. break exits." },
+    { id: "sw-mcq-50", question: "What is the output?\\nint x = 2;\\nswitch (x) {\\n    case 1: System.out.println(\"A\");\\n    case 2: System.out.println(\"B\");\\n    case 3: System.out.println(\"C\");\\n    case 4: System.out.println(\"D\");\\n    case 5: System.out.println(\"E\"); break;\\n    case 6: System.out.println(\"F\");\\n    default: System.out.println(\"G\");\\n}", options: ["B\\nC\\nD\\nE", "B\\nC\\nD\\nE\\nF\\nG", "B", "B\\nC\\nD\\nE\\nF"], answer: 0, explanation: "x = 2 matches case 2. No break until case 5. Fall through: B, C, D, E. break exits." },
   ],
-  "trueFalse": [
-    {
-      "id": "switch-tf-1",
-      "question": "Statement 1",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-2",
-      "question": "Statement 2",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-3",
-      "question": "Statement 3",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-4",
-      "question": "Statement 4",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-5",
-      "question": "Statement 5",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-6",
-      "question": "Statement 6",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-7",
-      "question": "Statement 7",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-8",
-      "question": "Statement 8",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-9",
-      "question": "Statement 9",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-10",
-      "question": "Statement 10",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-11",
-      "question": "Statement 11",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-12",
-      "question": "Statement 12",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-13",
-      "question": "Statement 13",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-14",
-      "question": "Statement 14",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-15",
-      "question": "Statement 15",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-16",
-      "question": "Statement 16",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-17",
-      "question": "Statement 17",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-18",
-      "question": "Statement 18",
-      "answer": true,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-19",
-      "question": "Statement 19",
-      "answer": false,
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-tf-20",
-      "question": "Statement 20",
-      "answer": true,
-      "explanation": "Explanation"
-    }
+
+  trueFalse: [
+    { id: "sw-tf-1", question: "The switch statement tests a variable against multiple constant values.", answer: true, explanation: "This is the primary purpose of the switch statement." },
+    { id: "sw-tf-2", question: "The break statement is mandatory in every case.", answer: false, explanation: "break is optional but recommended. Without it, fall-through occurs." },
+    { id: "sw-tf-3", question: "The default case is mandatory in a switch statement.", answer: false, explanation: "default is optional but recommended for handling unexpected values." },
+    { id: "sw-tf-4", question: "Switch can be used with boolean type.", answer: false, explanation: "boolean cannot be used in switch. Only byte, short, int, char, String, and enum." },
+    { id: "sw-tf-5", question: "Fall-through occurs when break is missing.", answer: true, explanation: "Without break, execution continues to the next case (fall-through)." },
+    { id: "sw-tf-6", question: "Case labels can be variables.", answer: false, explanation: "Case labels must be compile-time constants, not variables." },
+    { id: "sw-tf-7", question: "String can be used in switch since Java 7.", answer: true, explanation: "String support was added in Java 7." },
+    { id: "sw-tf-8", question: "Switch can test ranges like if-else.", answer: false, explanation: "Switch can only test for equality, not ranges." },
+    { id: "sw-tf-9", question: "Multiple cases can share the same code block.", answer: true, explanation: "Grouped cases: case 1: case 2: case 3: doSomething();" },
+    { id: "sw-tf-10", question: "The default case can appear anywhere in the switch.", answer: true, explanation: "default can be at the beginning, middle, or end of the switch." },
+    { id: "sw-tf-11", question: "Duplicate case labels are allowed.", answer: false, explanation: "Duplicate case labels cause a compilation error." },
+    { id: "sw-tf-12", question: "long can be used in switch.", answer: false, explanation: "long cannot be used in switch. Only byte, short, int, char, String, and enum." },
+    { id: "sw-tf-13", question: "The switch expression is evaluated only once.", answer: true, explanation: "The switch expression is evaluated once and compared with case labels." },
+    { id: "sw-tf-14", question: "Case labels can be null.", answer: false, explanation: "Case labels cannot be null. It causes a compilation error." },
+    { id: "sw-tf-15", question: "A switch can be nested inside another switch.", answer: true, explanation: "Nested switch is valid and useful for multi-level menu selection." },
+    { id: "sw-tf-16", question: "Switch is more readable than if-else-if for many constant comparisons.", answer: true, explanation: "Switch provides cleaner code for multiple constant comparisons." },
+    { id: "sw-tf-17", question: "float and double can be used in switch.", answer: false, explanation: "Floating-point types cannot be used in switch." },
+    { id: "sw-tf-18", question: "If no case matches and there is no default, nothing happens.", answer: true, explanation: "Without a matching case and no default, the switch does nothing." },
+    { id: "sw-tf-19", question: "String comparison in switch is case-insensitive.", answer: false, explanation: "String comparison in switch is case-sensitive." },
+    { id: "sw-tf-20", question: "The compiler can optimize switch with a jump table.", answer: true, explanation: "For dense case values, the compiler may use a jump table for faster execution." },
   ],
-  "shortAnswerQuestions": [
-    {
-      "id": "switch-sa-1",
-      "question": "Short question 1",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-2",
-      "question": "Short question 2",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-3",
-      "question": "Short question 3",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-4",
-      "question": "Short question 4",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-5",
-      "question": "Short question 5",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-6",
-      "question": "Short question 6",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-7",
-      "question": "Short question 7",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-8",
-      "question": "Short question 8",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-9",
-      "question": "Short question 9",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-10",
-      "question": "Short question 10",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-11",
-      "question": "Short question 11",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-12",
-      "question": "Short question 12",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-13",
-      "question": "Short question 13",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-14",
-      "question": "Short question 14",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-15",
-      "question": "Short question 15",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-16",
-      "question": "Short question 16",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-17",
-      "question": "Short question 17",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-18",
-      "question": "Short question 18",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-19",
-      "question": "Short question 19",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-sa-20",
-      "question": "Short question 20",
-      "answer": "Answer"
-    }
+
+  shortAnswerQuestions: [
+    { id: "sw-sa-1", question: "What is a switch statement?", answer: "A switch statement is a multi-way branch statement that tests a variable against a list of constant values (cases). When a match is found, the corresponding code block executes." },
+    { id: "sw-sa-2", question: "What is the purpose of the break statement in switch?", answer: "The break statement exits the switch block. Without it, execution falls through to the next case (fall-through behavior)." },
+    { id: "sw-sa-3", question: "What is fall-through in switch?", answer: "Fall-through occurs when a case matches but there is no break statement. Execution continues to the next case and its code block also executes." },
+    { id: "sw-sa-4", question: "What is the default case in switch?", answer: "The default case executes when no other case matches the switch expression. It is optional but recommended for handling unexpected values." },
+    { id: "sw-sa-5", question: "Which data types can be used in switch?", answer: "byte, short, int, char, String (Java 7+), and enum. boolean, long, float, and double cannot be used." },
+    { id: "sw-sa-6", question: "Can case labels be variables?", answer: "No. Case labels must be compile-time constants. Variables are not allowed. You can use final constants or literal values." },
+    { id: "sw-sa-7", question: "What is the difference between switch and if-else-if?", answer: "Switch tests a single variable against constant values (equality only). If-else-if can test complex conditions including ranges and multiple variables. Switch is more readable for many constant comparisons." },
+    { id: "sw-sa-8", question: "Can multiple cases share the same code block?", answer: "Yes. By stacking case labels: case 1: case 2: case 3: doSomething(); break; This is called grouped cases." },
+    { id: "sw-sa-9", question: "What happens if no case matches and there is no default?", answer: "Nothing happens. The switch block is skipped entirely and execution continues after the switch statement." },
+    { id: "sw-sa-10", question: "What is a nested switch?", answer: "A switch statement placed inside another switch statement. It is useful for multi-level menu selection where the inner switch depends on the outer case." },
+    { id: "sw-sa-11", question: "Can you use String in switch? Since which Java version?", answer: "Yes, String can be used in switch since Java 7. String comparison is case-sensitive." },
+    { id: "sw-sa-12", question: "Why can't boolean be used in switch?", answer: "boolean has only two values (true and false), which can be handled more simply with if-else. Switch is designed for multi-way branching with many possible values." },
+    { id: "sw-sa-13", question: "What is the output of: int x=2; switch(x) { case 1: print('A'); case 2: print('B'); case 3: print('C'); }", answer: "Output: BC. x = 2 matches case 2. No break! Fall through: B, C." },
+    { id: "sw-sa-14", question: "Can the default case appear in the middle of a switch?", answer: "Yes. The default case can appear anywhere in the switch. It executes only when no other case matches, regardless of its position." },
+    { id: "sw-sa-15", question: "What causes a compilation error in switch?", answer: "Duplicate case labels, using incompatible types (boolean, long, float, double), using variables as case labels, or using null as a case label." },
+    { id: "sw-sa-16", question: "Write a switch to print the day name for day number 1-7.", answer: "switch (day) { case 1: print('Monday'); break; case 2: print('Tuesday'); break; ... case 7: print('Sunday'); break; default: print('Invalid'); }" },
+    { id: "sw-sa-17", question: "How does switch handle ranges?", answer: "Switch cannot directly handle ranges. You can use integer division to convert ranges to single values: switch (marks / 10) { case 10: case 9: grade = 'A'; break; ... }" },
+    { id: "sw-sa-18", question: "What is the advantage of switch over if-else-if?", answer: "Switch is more readable for multiple constant comparisons, easier to add new cases, and can be faster due to jump table optimization." },
+    { id: "sw-sa-19", question: "Can you declare variables inside case blocks?", answer: "Yes, but if you declare variables with the same name in different cases, you need to use curly braces {} to create separate scopes for each case." },
+    { id: "sw-sa-20", question: "Write a switch to check if a character is a vowel.", answer: "u': print('Vowel'); break; default: print('Consonant'); }" },
   ],
-  "longAnswerQuestions": [
-    {
-      "id": "switch-la-1",
-      "question": "Long question 1",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-2",
-      "question": "Long question 2",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-3",
-      "question": "Long question 3",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-4",
-      "question": "Long question 4",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-5",
-      "question": "Long question 5",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-6",
-      "question": "Long question 6",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-7",
-      "question": "Long question 7",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-8",
-      "question": "Long question 8",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-9",
-      "question": "Long question 9",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-10",
-      "question": "Long question 10",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-11",
-      "question": "Long question 11",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-12",
-      "question": "Long question 12",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-13",
-      "question": "Long question 13",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-14",
-      "question": "Long question 14",
-      "answer": "Long answer for SWITCH Statement."
-    },
-    {
-      "id": "switch-la-15",
-      "question": "Long question 15",
-      "answer": "Long answer for SWITCH Statement."
-    }
+
+  longAnswerQuestions: [
+    { id: "sw-la-1", question: "Explain the switch statement in Java with syntax and a complete example.", answer: "The switch statement tests a variable against multiple constant values.\n\nSyntax:\nswitch (expression) {\n    case value1: // code; break;\n    case value2: // code; break;\n    default: // code;\n}\n\nExample:\nint day = 3;\nswitch (day) {\n    case 1: System.out.println('Monday'); break;\n    case 2: System.out.println('Tuesday'); break;\n    case 3: System.out.println('Wednesday'); break;\n    default: System.out.println('Invalid');\n}\nOutput: Wednesday" },
+    { id: "sw-la-2", question: "Explain fall-through in switch with an example. How can it be prevented?", answer: "Fall-through occurs when break is missing. Execution continues to the next case.\n\nExample:\nint x = 2;\nswitch (x) {\n    case 1: System.out.println('A');\n    case 2: System.out.println('B');\n    case 3: System.out.println('C');\n}\nOutput: B, C (fall-through from case 2 to 3)\n\nPrevention: Always use break after each case." },
+    { id: "sw-la-3", question: "Compare switch statement with if-else-if ladder. When would you use each?", answer: "Switch: tests single variable against constants, equality only, more readable for many cases, works with byte/short/int/char/String/enum.\nIf-else-if: tests complex conditions, ranges, multiple variables, works with all types.\n\nUse switch for menu-driven programs and constant comparisons. Use if-else-if for range checks and complex conditions." },
+    { id: "sw-la-4", question: "Write a Java program using switch to implement a simple calculator.", answer: "double a = 10, b = 5;\nchar op = '+';\nswitch (op) {\n    case '+': System.out.println(a + b); break;\n    case '-': System.out.println(a - b); break;\n    case '*': System.out.println(a * b); break;\n    case '/': if (b != 0) System.out.println(a / b); else System.out.println('Error'); break;\n    default: System.out.println('Invalid operator');\n}\nOutput: 15.0" },
+    { id: "sw-la-5", question: "Explain grouped cases in switch with an example.", answer: "Multiple case labels can share the same code block by stacking them.\n\nExample:\nint month = 2;\nswitch (month) {\n    case 1: case 3: case 5: case 7: case 8: case 10: case 12:\n        System.out.println('31 days'); break;\n    case 4: case 6: case 9: case 11:\n        System.out.println('30 days'); break;\n    case 2: System.out.println('28/29 days'); break;\n    default: System.out.println('Invalid');\n}\nOutput: 28/29 days" },
+    { id: "sw-la-6", question: "Write a Java program using nested switch for department and year selection.", answer: "int dept = 1, year = 2;\nswitch (dept) {\n    case 1:\n        switch (year) {\n            case 1: System.out.println('CSE Year 1'); break;\n            case 2: System.out.println('CSE Year 2'); break;\n        }\n        break;\n    case 2:\n        switch (year) {\n            case 1: System.out.println('ECE Year 1'); break;\n        }\n        break;\n}\nOutput: CSE Year 2" },
+    { id: "sw-la-7", question: "Explain the rules for case labels in switch.", answer: "1. Case labels must be compile-time constants.\n2. They must be compatible with the switch expression type.\n3. Duplicate case labels cause compilation error.\n4. Case labels cannot be null.\n5. Case labels cannot use comparison operators.\n6. Only byte, short, int, char, String, and enum values are allowed." },
+    { id: "sw-la-8", question: "Write a Java program using switch to implement a menu-driven restaurant system.", answer: "int choice = 2;\nswitch (choice) {\n    case 1: System.out.println('Tea: Rs 20'); break;\n    case 2: System.out.println('Coffee: Rs 30'); break;\n    case 3: System.out.println('Pizza: Rs 150'); break;\n    case 4: System.out.println('Burger: Rs 100'); break;\n    default: System.out.println('Invalid choice');\n}\nOutput: Coffee: Rs 30" },
+    { id: "sw-la-9", question: "Explain how to use switch with String (Java 7+). Provide an example.", answer: "String can be used in switch since Java 7. Comparison is case-sensitive.\n\nExample:\nString color = 'red';\nswitch (color) {\n    case 'red': System.out.println('Stop'); break;\n    case 'yellow': System.out.println('Slow'); break;\n    case 'green': System.out.println('Go'); break;\n    default: System.out.println('Invalid');\n}\nOutput: Stop" },
+    { id: "sw-la-10", question: "Write a Java program using switch to convert marks to grades using integer division.", answer: "int marks = 85;\nswitch (marks / 10) {\n    case 10: case 9: System.out.println('A+'); break;\n    case 8: System.out.println('A'); break;\n    case 7: System.out.println('B'); break;\n    case 6: System.out.println('C'); break;\n    default: System.out.println('F');\n}\nOutput: A" },
+    { id: "sw-la-11", question: "What are the common mistakes in switch statements? Explain each.", answer: "1. Forgetting break - causes fall-through.\n2. Using variables as case labels - must be constants.\n3. Using boolean/long/float/double - not allowed.\n4. Missing default - no handling for unexpected values.\n5. Using comparison operators - case x > 5 is invalid.\n6. Duplicate case labels - compilation error." },
+    { id: "sw-la-12", question: "Write a Java program using switch to implement an ATM menu system.", answer: "int choice = 2;\ndouble balance = 50000, amount = 5000;\nswitch (choice) {\n    case 1: System.out.println('Balance: ' + balance); break;\n    case 2: if (amount <= balance) { balance -= amount; System.out.println('Withdrawn: ' + amount); } break;\n    case 3: balance += amount; System.out.println('Deposited: ' + amount); break;\n    case 4: System.out.println('Thank you'); break;\n    default: System.out.println('Invalid');\n}\nOutput: Withdrawn: 5000" },
+    { id: "sw-la-13", question: "Explain the execution flow of a switch statement step by step.", answer: "1. Switch expression is evaluated once.\n2. Value is compared with each case label in order.\n3. When a match is found, that case's code block executes.\n4. Execution continues until break is encountered.\n5. Without break, fall-through occurs.\n6. If no case matches, default executes (if present).\n7. After switch, execution continues normally." },
+    { id: "sw-la-14", question: "Write a Java program using switch to implement a traffic light system.", answer: "String light = 'red';\nswitch (light) {\n    case 'red': System.out.println('STOP'); break;\n    case 'yellow': System.out.println('SLOW DOWN'); break;\n    case 'green': System.out.println('GO'); break;\n    default: System.out.println('ERROR');\n}\nOutput: STOP" },
+    { id: "sw-la-15", question: "Write a comprehensive Java program using switch to implement a complete banking system with deposit, withdraw, transfer, and balance inquiry.", answer: "int txnType = 1;\ndouble balance = 25000, amount = 10000;\nswitch (txnType) {\n    case 1: balance += amount; System.out.println('Deposited: ' + amount + ' Balance: ' + balance); break;\n    case 2: if (amount <= balance) { balance -= amount; System.out.println('Withdrawn: ' + amount); } else System.out.println('Insufficient'); break;\n    case 3: if (amount <= balance) { balance -= amount; System.out.println('Transferred: ' + amount); } break;\n    case 4: System.out.println('Balance: ' + balance); break;\n    default: System.out.println('Invalid');\n}\nOutput: Deposited: 10000 Balance: 35000" },
   ],
-  "programmingQuestions": {
-    "easy": [
-      {
-        "id": "switch-pg-e-1",
-        "question": "Easy programming question",
-        "solution": "// solution",
-        "output": "output"
-      }
+
+  programmingQuestions: {
+    easy: [
+      { id: "sw-pg-e-1", question: "Write a program using switch to print the day of the week for a given number (1-7).", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter day number (1-7): ');\n        int day = sc.nextInt();\n        switch (day) {\n            case 1: System.out.println('Monday'); break;\n            case 2: System.out.println('Tuesday'); break;\n            case 3: System.out.println('Wednesday'); break;\n            case 4: System.out.println('Thursday'); break;\n            case 5: System.out.println('Friday'); break;\n            case 6: System.out.println('Saturday'); break;\n            case 7: System.out.println('Sunday'); break;\n            default: System.out.println('Invalid day');\n        }\n        sc.close();\n    }\n}", output: "Enter day number (1-7): 3\nWednesday" },
+      { id: "sw-pg-e-2", question: "Write a program using switch to print the month name for a given number (1-12).", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter month number: ');\n        int month = sc.nextInt();\n        switch (month) {\n            case 1: System.out.println('January'); break;\n            case 2: System.out.println('February'); break;\n            case 3: System.out.println('March'); break;\n            case 4: System.out.println('April'); break;\n            case 5: System.out.println('May'); break;\n            case 6: System.out.println('June'); break;\n            case 7: System.out.println('July'); break;\n            case 8: System.out.println('August'); break;\n            case 9: System.out.println('September'); break;\n            case 10: System.out.println('October'); break;\n            case 11: System.out.println('November'); break;\n            case 12: System.out.println('December'); break;\n            default: System.out.println('Invalid month');\n        }\n        sc.close();\n    }\n}", output: "Enter month number: 7\nJuly" },
+      { id: "sw-pg-e-3", question: "Write a program using switch to check if a character is a vowel or consonant.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter a character: ');\n        char ch = sc.next().charAt(0);\n        ch = Character.toLowerCase(ch);\n        switch (ch) {\n            case 'a': case 'e': case 'i': case 'o': case 'u':\n                System.out.println(ch + ' is a vowel'); break;\n            default: System.out.println(ch + ' is a consonant');\n        }\n        sc.close();\n    }\n}", output: "Enter a character: E\ne is a vowel" },
+      { id: "sw-pg-e-4", question: "Write a program using switch to implement a simple calculator.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter first number: ');\n        double a = sc.nextDouble();\n        System.out.print('Enter operator (+, -, *, /): ');\n        char op = sc.next().charAt(0);\n        System.out.print('Enter second number: ');\n        double b = sc.nextDouble();\n        switch (op) {\n            case '+': System.out.println('Result: ' + (a + b)); break;\n            case '-': System.out.println('Result: ' + (a - b)); break;\n            case '*': System.out.println('Result: ' + (a * b)); break;\n            case '/': if (b != 0) System.out.println('Result: ' + (a / b)); else System.out.println('Error: Division by zero'); break;\n            default: System.out.println('Invalid operator');\n        }\n        sc.close();\n    }\n}", output: "Enter first number: 10\nEnter operator (+, -, *, /): +\nEnter second number: 5\nResult: 15.0" },
+      { id: "sw-pg-e-5", question: "Write a program using switch to print the season for a given number (1-4).", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter season number (1-4): ');\n        int season = sc.nextInt();\n        switch (season) {\n            case 1: System.out.println('Spring'); break;\n            case 2: System.out.println('Summer'); break;\n            case 3: System.out.println('Autumn'); break;\n            case 4: System.out.println('Winter'); break;\n            default: System.out.println('Invalid season');\n        }\n        sc.close();\n    }\n}", output: "Enter season number (1-4): 2\nSummer" },
+      { id: "sw-pg-e-6", question: "Write a program using switch to check if a number is even or odd.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter a number: ');\n        int num = sc.nextInt();\n        switch (num % 2) {\n            case 0: System.out.println(num + ' is even'); break;\n            case 1: System.out.println(num + ' is odd'); break;\n        }\n        sc.close();\n    }\n}", output: "Enter a number: 7\n7 is odd" },
+      { id: "sw-pg-e-7", question: "Write a program using switch to print the number of days in a given month.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter month number: ');\n        int month = sc.nextInt();\n        switch (month) {\n            case 1: case 3: case 5: case 7: case 8: case 10: case 12:\n                System.out.println('31 days'); break;\n            case 4: case 6: case 9: case 11:\n                System.out.println('30 days'); break;\n            case 2: System.out.println('28 or 29 days'); break;\n            default: System.out.println('Invalid month');\n        }\n        sc.close();\n    }\n}", output: "Enter month number: 2\n28 or 29 days" },
+      { id: "sw-pg-e-8", question: "Write a program using switch to convert a number (1-5) to its word form.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter a number (1-5): ');\n        int num = sc.nextInt();\n        switch (num) {\n            case 1: System.out.println('One'); break;\n            case 2: System.out.println('Two'); break;\n            case 3: System.out.println('Three'); break;\n            case 4: System.out.println('Four'); break;\n            case 5: System.out.println('Five'); break;\n            default: System.out.println('Out of range');\n        }\n        sc.close();\n    }\n}", output: "Enter a number (1-5): 4\nFour" },
+      { id: "sw-pg-e-9", question: "Write a program using switch to implement a simple beverage menu.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Tea (Rs 20)');\n        System.out.println('2. Coffee (Rs 30)');\n        System.out.println('3. Juice (Rs 40)');\n        System.out.print('Enter choice: ');\n        int choice = sc.nextInt();\n        switch (choice) {\n            case 1: System.out.println('Tea: Rs 20'); break;\n            case 2: System.out.println('Coffee: Rs 30'); break;\n            case 3: System.out.println('Juice: Rs 40'); break;\n            default: System.out.println('Invalid choice');\n        }\n        sc.close();\n    }\n}", output: "1. Tea (Rs 20)\n2. Coffee (Rs 30)\n3. Juice (Rs 40)\nEnter choice: 2\nCoffee: Rs 30" },
+      { id: "sw-pg-e-10", question: "Write a program using switch to check if a year is a leap year (simplified using switch for remainder).", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter year: ');\n        int year = sc.nextInt();\n        if (year % 4 == 0) {\n            if (year % 100 == 0) {\n                switch (year % 400) {\n                    case 0: System.out.println('Leap year'); break;\n                    default: System.out.println('Not leap year');\n                }\n            } else {\n                System.out.println('Leap year');\n            }\n        } else {\n            System.out.println('Not leap year');\n        }\n        sc.close();\n    }\n}", output: "Enter year: 2000\nLeap year" },
+      { id: "sw-pg-e-11", question: "Write a program using switch to print the grade for a given marks range.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter marks: ');\n        int marks = sc.nextInt();\n        switch (marks / 10) {\n            case 10: case 9: System.out.println('Grade: A'); break;\n            case 8: System.out.println('Grade: B'); break;\n            case 7: System.out.println('Grade: C'); break;\n            case 6: System.out.println('Grade: D'); break;\n            default: System.out.println('Grade: F');\n        }\n        sc.close();\n    }\n}", output: "Enter marks: 85\nGrade: B" },
+      { id: "sw-pg-e-12", question: "Write a program using switch to implement a color code system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter color code (1-5): ');\n        int code = sc.nextInt();\n        switch (code) {\n            case 1: System.out.println('Red'); break;\n            case 2: System.out.println('Green'); break;\n            case 3: System.out.println('Blue'); break;\n            case 4: System.out.println('Yellow'); break;\n            case 5: System.out.println('Orange'); break;\n            default: System.out.println('Invalid code');\n        }\n        sc.close();\n    }\n}", output: "Enter color code (1-5): 3\nBlue" },
+      { id: "sw-pg-e-13", question: "Write a program using switch to check if a number is positive, negative, or zero.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter a number: ');\n        int num = sc.nextInt();\n        switch (Integer.signum(num)) {\n            case 1: System.out.println('Positive'); break;\n            case -1: System.out.println('Negative'); break;\n            case 0: System.out.println('Zero'); break;\n        }\n        sc.close();\n    }\n}", output: "Enter a number: -5\nNegative" },
+      { id: "sw-pg-e-14", question: "Write a program using switch to implement a simple traffic light system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter light color: ');\n        String color = sc.next().toLowerCase();\n        switch (color) {\n            case 'red': System.out.println('STOP'); break;\n            case 'yellow': System.out.println('SLOW DOWN'); break;\n            case 'green': System.out.println('GO'); break;\n            default: System.out.println('INVALID');\n        }\n        sc.close();\n    }\n}", output: "Enter light color: red\nSTOP" },
+      { id: "sw-pg-e-15", question: "Write a program using switch to print the type of triangle based on sides.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter three sides: ');\n        int a = sc.nextInt(), b = sc.nextInt(), c = sc.nextInt();\n        if (a == b && b == c) {\n            System.out.println('Equilateral');\n        } else if (a == b || b == c || a == c) {\n            System.out.println('Isosceles');\n        } else {\n            System.out.println('Scalene');\n        }\n        sc.close();\n    }\n}", output: "Enter three sides: 5 5 5\nEquilateral" },
     ],
-    "medium": [
-      {
-        "id": "switch-pg-m-1",
-        "question": "Medium programming question",
-        "solution": "// solution",
-        "output": "output"
-      }
+    medium: [
+      { id: "sw-pg-m-1", question: "Write a program using switch to implement an area calculator for different shapes.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Circle 2. Rectangle 3. Triangle 4. Square');\n        System.out.print('Choose shape: ');\n        int shape = sc.nextInt();\n        switch (shape) {\n            case 1: System.out.print('Radius: '); double r = sc.nextDouble(); System.out.println('Area: ' + (3.14*r*r)); break;\n            case 2: System.out.print('Length: '); double l = sc.nextDouble(); System.out.print('Breadth: '); double b = sc.nextDouble(); System.out.println('Area: ' + (l*b)); break;\n            case 3: System.out.print('Base: '); double base = sc.nextDouble(); System.out.print('Height: '); double h = sc.nextDouble(); System.out.println('Area: ' + (0.5*base*h)); break;\n            case 4: System.out.print('Side: '); double s = sc.nextDouble(); System.out.println('Area: ' + (s*s)); break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. Circle 2. Rectangle 3. Triangle 4. Square\nChoose shape: 1\nRadius: 5\nArea: 78.5" },
+      { id: "sw-pg-m-2", question: "Write a program using switch to implement a unit converter.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. C to F 2. KM to Miles 3. KG to Lbs');\n        System.out.print('Choose: ');\n        int type = sc.nextInt();\n        System.out.print('Value: ');\n        double val = sc.nextDouble();\n        switch (type) {\n            case 1: System.out.println(val + ' C = ' + ((val*9/5)+32) + ' F'); break;\n            case 2: System.out.println(val + ' km = ' + (val*0.621) + ' miles'); break;\n            case 3: System.out.println(val + ' kg = ' + (val*2.205) + ' lbs'); break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. C to F 2. KM to Miles 3. KG to Lbs\nChoose: 1\nValue: 100\n100.0 C = 212.0 F" },
+      { id: "sw-pg-m-3", question: "Write a program using switch to implement an electricity bill calculator with categories.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Domestic 2. Commercial 3. Industrial');\n        System.out.print('Category: ');\n        int cat = sc.nextInt();\n        System.out.print('Units: ');\n        int units = sc.nextInt();\n        double bill = 0;\n        switch (cat) {\n            case 1: bill = units <= 100 ? units * 5 : 100*5 + (units-100)*7; break;\n            case 2: bill = units <= 100 ? units * 8 : 100*8 + (units-100)*12; break;\n            case 3: bill = units * 15; break;\n            default: System.out.println('Invalid');\n        }\n        System.out.println('Bill: Rs ' + bill);\n        sc.close();\n    }\n}", output: "1. Domestic 2. Commercial 3. Industrial\nCategory: 2\nUnits: 150\nBill: Rs 1400.0" },
+      { id: "sw-pg-m-4", question: "Write a program using switch to implement a restaurant menu with billing.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Tea(20) 2.Coffee(30) 3.Pizza(150) 4.Burger(100) 5.Biryani(200)');\n        System.out.print('Choice: ');\n        int item = sc.nextInt();\n        System.out.print('Quantity: ');\n        int qty = sc.nextInt();\n        double price = 0;\n        switch (item) {\n            case 1: price = 20; break;\n            case 2: price = 30; break;\n            case 3: price = 150; break;\n            case 4: price = 100; break;\n            case 5: price = 200; break;\n            default: System.out.println('Invalid');\n        }\n        if (price > 0) {\n            double total = price * qty;\n            double tax = total * 0.05;\n            System.out.println('Total: Rs ' + (total + tax));\n        }\n        sc.close();\n    }\n}", output: "1.Tea(20) 2.Coffee(30) 3.Pizza(150) 4.Burger(100) 5.Biryani(200)\nChoice: 3\nQuantity: 2\nTotal: Rs 315.0" },
+      { id: "sw-pg-m-5", question: "Write a program using switch to implement a grade system with remarks.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter marks: ');\n        int marks = sc.nextInt();\n        String grade = '', remarks = '';\n        switch (marks / 10) {\n            case 10: case 9: grade = 'A+'; remarks = 'Outstanding'; break;\n            case 8: grade = 'A'; remarks = 'Excellent'; break;\n            case 7: grade = 'B'; remarks = 'Very Good'; break;\n            case 6: grade = 'C'; remarks = 'Good'; break;\n            case 5: grade = 'D'; remarks = 'Average'; break;\n            default: grade = 'F'; remarks = 'Fail';\n        }\n        System.out.println('Grade: ' + grade + ' - ' + remarks);\n        sc.close();\n    }\n}", output: "Enter marks: 85\nGrade: A - Excellent" },
+      { id: "sw-pg-m-6", question: "Write a program using switch to implement a mobile plan selector.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Basic (Rs 199) 2. Standard (Rs 399) 3. Premium (Rs 599)');\n        System.out.print('Choose plan: ');\n        int plan = sc.nextInt();\n        switch (plan) {\n            case 1: System.out.println('Basic: 1GB/day, Rs 199/month'); break;\n            case 2: System.out.println('Standard: 1.5GB/day, Rs 399/month'); break;\n            case 3: System.out.println('Premium: Unlimited, Rs 599/month'); break;\n            default: System.out.println('Invalid plan');\n        }\n        sc.close();\n    }\n}", output: "1. Basic (Rs 199) 2. Standard (Rs 399) 3. Premium (Rs 599)\nChoose plan: 2\nStandard: 1.5GB/day, Rs 399/month" },
+      { id: "sw-pg-m-7", question: "Write a program using switch to implement a hotel room booking system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Standard (2000) 2. Deluxe (4000) 3. Suite (8000)');\n        System.out.print('Room type: ');\n        int type = sc.nextInt();\n        System.out.print('Nights: ');\n        int nights = sc.nextInt();\n        double rate = 0;\n        switch (type) {\n            case 1: rate = 2000; break;\n            case 2: rate = 4000; break;\n            case 3: rate = 8000; break;\n            default: System.out.println('Invalid');\n        }\n        if (rate > 0) {\n            double total = rate * nights * 1.12;\n            System.out.println('Total (incl 12% tax): Rs ' + total);\n        }\n        sc.close();\n    }\n}", output: "1. Standard (2000) 2. Deluxe (4000) 3. Suite (8000)\nRoom type: 2\nNights: 3\nTotal (incl 12% tax): Rs 13440.0" },
+      { id: "sw-pg-m-8", question: "Write a program using switch to implement a banking transaction system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double balance = 25000;\n        System.out.println('1. Deposit 2. Withdraw 3. Balance 4. Exit');\n        System.out.print('Choice: ');\n        int choice = sc.nextInt();\n        switch (choice) {\n            case 1: System.out.print('Amount: '); balance += sc.nextDouble(); System.out.println('Balance: ' + balance); break;\n            case 2: System.out.print('Amount: '); double amt = sc.nextDouble(); if (amt <= balance) { balance -= amt; System.out.println('Withdrawn: ' + amt); } else System.out.println('Insufficient'); break;\n            case 3: System.out.println('Balance: ' + balance); break;\n            case 4: System.out.println('Thank you'); break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. Deposit 2. Withdraw 3. Balance 4. Exit\nChoice: 2\nAmount: 5000\nWithdrawn: 5000.0" },
+      { id: "sw-pg-m-9", question: "Write a program using switch to implement a library management system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        boolean issued = false;\n        System.out.println('1. Issue 2. Return 3. Status');\n        System.out.print('Action: ');\n        int action = sc.nextInt();\n        switch (action) {\n            case 1: if (!issued) { issued = true; System.out.println('Book issued'); } else System.out.println('Already issued'); break;\n            case 2: if (issued) { issued = false; System.out.println('Book returned'); } else System.out.println('Not issued'); break;\n            case 3: System.out.println('Status: ' + (issued ? 'Issued' : 'Available')); break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. Issue 2. Return 3. Status\nAction: 1\nBook issued" },
+      { id: "sw-pg-m-10", question: "Write a program using switch to implement an employee salary calculator based on grade.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter grade (A/B/C): ');\n        String grade = sc.next();\n        System.out.print('Basic salary: ');\n        double basic = sc.nextDouble();\n        double hra = 0, da = 0;\n        switch (grade) {\n            case 'A': hra = basic * 0.30; da = basic * 0.50; break;\n            case 'B': hra = basic * 0.25; da = basic * 0.40; break;\n            case 'C': hra = basic * 0.20; da = basic * 0.30; break;\n            default: hra = basic * 0.10; da = basic * 0.20;\n        }\n        System.out.println('Gross: ' + (basic + hra + da));\n        sc.close();\n    }\n}", output: "Enter grade (A/B/C): A\nBasic salary: 30000\nGross: 54000.0" },
+      { id: "sw-pg-m-11", question: "Write a program using switch to implement a shape selection and area calculation system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Circle 2. Rectangle 3. Triangle 4. Square 5. Trapezoid');\n        System.out.print('Choose: ');\n        int shape = sc.nextInt();\n        switch (shape) {\n            case 1: System.out.print('Radius: '); double r = sc.nextDouble(); System.out.println('Area: ' + (3.14*r*r)); break;\n            case 2: System.out.print('L, B: '); System.out.println('Area: ' + (sc.nextDouble()*sc.nextDouble())); break;\n            case 3: System.out.print('B, H: '); System.out.println('Area: ' + (0.5*sc.nextDouble()*sc.nextDouble())); break;\n            case 4: System.out.print('Side: '); double s = sc.nextDouble(); System.out.println('Area: ' + (s*s)); break;\n            case 5: System.out.print('A, B, H: '); System.out.println('Area: ' + (0.5*(sc.nextDouble()+sc.nextDouble())*sc.nextDouble())); break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. Circle 2. Rectangle 3. Triangle 4. Square 5. Trapezoid\nChoose: 1\nRadius: 5\nArea: 78.5" },
+      { id: "sw-pg-m-12", question: "Write a program using switch to implement a nested menu for country and city selection.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. India 2. USA');\n        System.out.print('Country: ');\n        int country = sc.nextInt();\n        System.out.print('City (1-3): ');\n        int city = sc.nextInt();\n        switch (country) {\n            case 1: switch (city) { case 1: System.out.println('Delhi'); break; case 2: System.out.println('Mumbai'); break; case 3: System.out.println('Bangalore'); break; } break;\n            case 2: switch (city) { case 1: System.out.println('Washington'); break; case 2: System.out.println('New York'); break; case 3: System.out.println('San Francisco'); break; } break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. India 2. USA\nCountry: 1\nCity (1-3): 2\nMumbai" },
+      { id: "sw-pg-m-13", question: "Write a program using switch to implement a complete calculator with error handling.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter a: '); double a = sc.nextDouble();\n        System.out.print('Enter b: '); double b = sc.nextDouble();\n        System.out.print('Operator (+,-,*,/,%): '); char op = sc.next().charAt(0);\n        switch (op) {\n            case '+': System.out.println(a + ' + ' + b + ' = ' + (a+b)); break;\n            case '-': System.out.println(a + ' - ' + b + ' = ' + (a-b)); break;\n            case '*': System.out.println(a + ' * ' + b + ' = ' + (a*b)); break;\n            case '/': if (b != 0) System.out.println(a + ' / ' + b + ' = ' + (a/b)); else System.out.println('Error: Division by zero'); break;\n            case '%': if (b != 0) System.out.println(a + ' % ' + b + ' = ' + (a%b)); else System.out.println('Error: Modulo by zero'); break;\n            default: System.out.println('Invalid operator');\n        }\n        sc.close();\n    }\n}", output: "Enter a: 10\nEnter b: 0\nOperator (+,-,*,/,%): /\nError: Division by zero" },
+      { id: "sw-pg-m-14", question: "Write a program using switch to implement a day planner.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Enter day (1-7): ');\n        int day = sc.nextInt();\n        switch (day) {\n            case 1: System.out.println('Monday: Gym at 6am, Work 9-5'); break;\n            case 2: System.out.println('Tuesday: Music class at 7pm'); break;\n            case 3: System.out.println('Wednesday: Art class at 6pm'); break;\n            case 4: System.out.println('Thursday: Team meeting at 10am'); break;\n            case 5: System.out.println('Friday: Movie night at 8pm'); break;\n            case 6: System.out.println('Saturday: Family outing'); break;\n            case 7: System.out.println('Sunday: Rest and recharge'); break;\n            default: System.out.println('Invalid day');\n        }\n        sc.close();\n    }\n}", output: "Enter day (1-7): 5\nFriday: Movie night at 8pm" },
+      { id: "sw-pg-m-15", question: "Write a program using switch to implement an ATM system with multiple operations.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double balance = 50000;\n        System.out.println('1. Balance 2. Withdraw 3. Deposit 4. Exit');\n        System.out.print('Choice: ');\n        int choice = sc.nextInt();\n        switch (choice) {\n            case 1: System.out.println('Balance: Rs ' + balance); break;\n            case 2: System.out.print('Amount: '); double amt = sc.nextDouble(); if (amt <= balance && amt % 100 == 0) { balance -= amt; System.out.println('Withdrawn: Rs ' + amt + ' Balance: Rs ' + balance); } else System.out.println('Invalid amount'); break;\n            case 3: System.out.print('Amount: '); balance += sc.nextDouble(); System.out.println('Deposited. Balance: Rs ' + balance); break;\n            case 4: System.out.println('Thank you'); break;\n            default: System.out.println('Invalid choice');\n        }\n        sc.close();\n    }\n}", output: "1. Balance 2. Withdraw 3. Deposit 4. Exit\nChoice: 2\nAmount: 5000\nWithdrawn: Rs 5000.0 Balance: Rs 45000.0" },
     ],
-    "hard": [
-      {
-        "id": "switch-pg-h-1",
-        "question": "Hard programming question",
-        "solution": "// solution",
-        "output": "output"
-      }
-    ]
+    hard: [
+      { id: "sw-pg-h-1", question: "Write a program using switch to implement a complete e-commerce checkout system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        double total = 5000;\n        System.out.println('1. COD 2. Card 3. UPI 4. EMI');\n        System.out.print('Payment: ');\n        int pay = sc.nextInt();\n        switch (pay) {\n            case 1: if (total > 10000) System.out.println('COD not available'); else System.out.println('COD selected. Amount: ' + total); break;\n            case 2: System.out.println('Card payment. Amount: ' + total); break;\n            case 3: System.out.println('UPI payment. Amount: ' + total); break;\n            case 4: if (total >= 3000) { System.out.print('Months (3/6/9): '); int m = sc.nextInt(); System.out.println('EMI: ' + (total/m) + '/mo'); } else System.out.println('EMI needs min Rs 3000'); break;\n            default: System.out.println('Invalid');\n        }\n        sc.close();\n    }\n}", output: "1. COD 2. Card 3. UPI 4. EMI\nPayment: 4\nMonths (3/6/9): 6\nEMI: 833.3333333333334/mo" },
+      { id: "sw-pg-h-2", question: "Write a program using switch to implement a complete insurance premium calculator.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Age: '); int age = sc.nextInt();\n        System.out.println('1. Car 2. Bike'); System.out.print('Vehicle: '); int v = sc.nextInt();\n        System.out.println('1. Basic 2. Comprehensive'); System.out.print('Coverage: '); int c = sc.nextInt();\n        double base = 0, prem = 0;\n        switch (v) {\n            case 1: base = 10000; switch (c) { case 1: prem = base; break; case 2: prem = base * 1.5; break; } break;\n            case 2: base = 3000; switch (c) { case 1: prem = base; break; case 2: prem = base * 1.8; break; } break;\n        }\n        if (age < 25) prem *= 1.2; else if (age > 60) prem *= 0.85;\n        System.out.println('Premium: Rs ' + prem);\n        sc.close();\n    }\n}", output: "Age: 30\n1. Car 2. Bike\nVehicle: 1\n1. Basic 2. Comprehensive\nCoverage: 2\nPremium: Rs 15000.0" },
+      { id: "sw-pg-h-3", question: "Write a program using switch to implement a complete travel booking system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Domestic (5000) 2. International (25000)');\n        System.out.print('Destination: '); int dest = sc.nextInt();\n        System.out.println('1. Economy 2. Business 3. First');\n        System.out.print('Class: '); int cls = sc.nextInt();\n        System.out.print('Passengers: '); int pax = sc.nextInt();\n        double base = 0, total = 0;\n        switch (dest) {\n            case 1: base = 5000; switch (cls) { case 1: total = base*pax; break; case 2: total = base*2*pax; break; case 3: total = base*3*pax; break; } break;\n            case 2: base = 25000; switch (cls) { case 1: total = base*pax; break; case 2: total = base*2.5*pax; break; case 3: total = base*4*pax; break; } break;\n        }\n        if (pax >= 5) total *= 0.9;\n        System.out.println('Total: Rs ' + total);\n        sc.close();\n    }\n}", output: "1. Domestic (5000) 2. International (25000)\nDestination: 2\n1. Economy 2. Business 3. First\nClass: 2\nPassengers: 2\nTotal: Rs 125000.0" },
+      { id: "sw-pg-h-4", question: "Write a program using switch to implement a complete movie ticket booking system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Morning(150) 2.Matinee(200) 3.Evening(300) 4.Night(350)');\n        System.out.print('Show: '); int show = sc.nextInt();\n        System.out.println('1.Standard 2.Premium 3.Recliner');\n        System.out.print('Seat: '); int seat = sc.nextInt();\n        System.out.print('Tickets: '); int t = sc.nextInt();\n        double base = 0, total = 0;\n        switch (show) { case 1: base = 150; break; case 2: base = 200; break; case 3: base = 300; break; case 4: base = 350; break; }\n        switch (seat) { case 1: total = base*t; break; case 2: total = base*1.5*t; break; case 3: total = base*2.5*t; break; }\n        if (t >= 4) total *= 0.9;\n        System.out.println('Total: Rs ' + total);\n        sc.close();\n    }\n}", output: "1.Morning(150) 2.Matinee(200) 3.Evening(300) 4.Night(350)\nShow: 3\n1.Standard 2.Premium 3.Recliner\nSeat: 2\nTickets: 2\nTotal: Rs 900.0" },
+      { id: "sw-pg-h-5", question: "Write a program using switch to implement a complete gym membership system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Basic(1000) 2.Standard(2000) 3.Premium(3500)');\n        System.out.print('Plan: '); int plan = sc.nextInt();\n        System.out.print('Months: '); int months = sc.nextInt();\n        double monthly = 0, total = 0;\n        switch (plan) { case 1: monthly = 1000; break; case 2: monthly = 2000; break; case 3: monthly = 3500; break; }\n        total = monthly * months;\n        switch (months) { case 12: total *= 0.75; break; case 6: total *= 0.85; break; case 3: total *= 0.90; break; }\n        System.out.println('Total: Rs ' + total);\n        sc.close();\n    }\n}", output: "1.Basic(1000) 2.Standard(2000) 3.Premium(3500)\nPlan: 2\nMonths: 6\nTotal: Rs 10200.0" },
+      { id: "sw-pg-h-6", question: "Write a program using switch to implement a complete courier delivery system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Weight (kg): '); double w = sc.nextDouble();\n        System.out.print('Distance (km): '); double d = sc.nextDouble();\n        System.out.println('1.Standard 2.Express 3.Overnight');\n        System.out.print('Speed: '); int speed = sc.nextInt();\n        double base = 0;\n        if (w <= 1) base = 50; else if (w <= 5) base = 100; else if (w <= 10) base = 200; else base = 500;\n        double total = base;\n        if (d > 1000) total += 200; else if (d > 500) total += 100; else if (d > 100) total += 50;\n        switch (speed) { case 1: break; case 2: total *= 1.5; break; case 3: total *= 2.5; break; }\n        System.out.println('Total: Rs ' + total);\n        sc.close();\n    }\n}", output: "Weight (kg): 2.5\nDistance (km): 300\n1.Standard 2.Express 3.Overnight\nSpeed: 2\nTotal: Rs 225.0" },
+      { id: "sw-pg-h-7", question: "Write a program using switch to implement a complete event management system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Wedding(5000) 2.Corporate(3000) 3.Birthday(2000)');\n        System.out.print('Event: '); int event = sc.nextInt();\n        System.out.print('Guests: '); int guests = sc.nextInt();\n        double perPerson = 0, total = 0;\n        switch (event) { case 1: perPerson = 5000; break; case 2: perPerson = 3000; break; case 3: perPerson = 2000; break; }\n        total = perPerson * guests;\n        System.out.print('Catering (+500/g)? '); if (sc.nextInt() == 1) total += 500 * guests;\n        System.out.print('Decoration (+200/g)? '); if (sc.nextInt() == 1) total += 200 * guests;\n        if (guests >= 100) total *= 0.85; else if (guests >= 50) total *= 0.90;\n        System.out.println('Total: Rs ' + total);\n        sc.close();\n    }\n}", output: "1.Wedding(5000) 2.Corporate(3000) 3.Birthday(2000)\nEvent: 3\nGuests: 50\nCatering (+500/g)? 1\nDecoration (+200/g)? 1\nTotal: Rs 121500.0" },
+      { id: "sw-pg-h-8", question: "Write a program using switch to implement a complete library management system with fines.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Student 2.Faculty 3.General');\n        System.out.print('Member: '); int mem = sc.nextInt();\n        System.out.print('Days late: '); int days = sc.nextInt();\n        double fee = 0, fine = 0;\n        switch (mem) { case 1: fee = 100; fine = days * 5; break; case 2: fee = 200; fine = days * 10; break; case 3: fee = 300; fine = days * 8; break; }\n        if (days > 30) fine += 50;\n        System.out.println('Fee: ' + fee + ' Fine: ' + fine + ' Total: ' + (fee + fine));\n        sc.close();\n    }\n}", output: "1.Student 2.Faculty 3.General\nMember: 1\nDays late: 5\nFee: 100.0 Fine: 25.0 Total: 125.0" },
+      { id: "sw-pg-h-9", question: "Write a program using switch to implement a complete banking system with multiple account types.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Savings 2.Current 3.Fixed Deposit 4.Recurring');\n        System.out.print('Account: '); int type = sc.nextInt();\n        switch (type) {\n            case 1: System.out.print('Balance, Withdraw: '); double b = sc.nextDouble(), w = sc.nextDouble(); if (b-w >= 5000) System.out.println('OK. Balance: ' + (b-w)); else System.out.println('Min 5000'); break;\n            case 2: System.out.print('Balance, Withdraw, Overdraft: '); double b2 = sc.nextDouble(), w2 = sc.nextDouble(), od = sc.nextDouble(); if (b2-w2 >= -od) System.out.println('OK. Balance: ' + (b2-w2)); else System.out.println('Exceeds overdraft'); break;\n            case 3: System.out.print('Amount, Years: '); double p = sc.nextDouble(); int y = sc.nextInt(); double r = y >= 5 ? 7.5 : y >= 3 ? 7.0 : 6.5; System.out.println('Maturity: ' + (p * Math.pow(1 + r/100, y))); break;\n            case 4: System.out.print('Monthly, Months: '); double m = sc.nextDouble(); int mo = sc.nextInt(); System.out.println('Maturity: ' + (m*mo + m*mo*6.5/100*(mo+1)/24)); break;\n        }\n        sc.close();\n    }\n}", output: "1.Savings 2.Current 3.Fixed Deposit 4.Recurring\nAccount: 3\nAmount, Years: 100000 5\nMaturity: 143562.92968750003" },
+      { id: "sw-pg-h-10", question: "Write a program using switch to implement a complete smart home automation system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1. Climate 2. Lighting 3. Security 4. Energy');\n        System.out.print('System: '); int sys = sc.nextInt();\n        switch (sys) {\n            case 1: System.out.print('Temp: '); int t = sc.nextInt(); if (t > 30) System.out.println('AC ON'); else if (t < 18) System.out.println('Heater ON'); else System.out.println('Optimal'); break;\n            case 2: System.out.print('Light level (0-100): '); int l = sc.nextInt(); System.out.println(l < 30 ? 'Lights ON' : 'Lights OFF'); break;\n            case 3: System.out.print('Doors closed? '); boolean doors = sc.nextBoolean(); System.out.println(doors ? 'Secure' : 'ALERT: Open door!'); break;\n            case 4: System.out.print('Usage (kWh): '); int kwh = sc.nextInt(); System.out.println(kwh > 500 ? 'High usage - reduce' : 'Normal usage'); break;\n        }\n        sc.close();\n    }\n}", output: "1. Climate 2. Lighting 3. Security 4. Energy\nSystem: 1\nTemp: 32\nAC ON" },
+      { id: "sw-pg-h-11", question: "Write a program using switch to implement a complete restaurant management system with billing.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Veg(250) 2.NonVeg(350) 3.Pizza(400) 4.Biryani(300)');\n        System.out.print('Item: '); int item = sc.nextInt();\n        System.out.print('Qty: '); int qty = sc.nextInt();\n        System.out.print('Guests: '); int guests = sc.nextInt();\n        double price = 0;\n        switch (item) { case 1: price = 250; break; case 2: price = 350; break; case 3: price = 400; break; case 4: price = 300; break; }\n        double subtotal = price * qty;\n        double tax = subtotal * 0.05;\n        double service = subtotal * 0.10;\n        double total = subtotal + tax + service;\n        if (guests >= 6) total *= 0.9;\n        System.out.println('Subtotal: ' + subtotal + ' Tax: ' + tax + ' Service: ' + service + ' Total: ' + total);\n        sc.close();\n    }\n}", output: "1.Veg(250) 2.NonVeg(350) 3.Pizza(400) 4.Biryani(300)\nItem: 3\nQty: 2\nGuests: 4\nSubtotal: 800.0 Tax: 40.0 Service: 80.0 Total: 920.0" },
+      { id: "sw-pg-h-12", question: "Write a program using switch to implement a complete university course registration system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Year (1-4): '); int year = sc.nextInt();\n        System.out.println('1.CSE 2.ECE 3.MECH'); System.out.print('Dept: '); int dept = sc.nextInt();\n        System.out.print('Credits: '); int credits = sc.nextInt();\n        int max = 0;\n        switch (year) { case 1: max = 24; break; case 2: max = 28; break; case 3: max = 30; break; case 4: max = 32; break; }\n        if (credits <= max) {\n            switch (dept) {\n                case 1: System.out.println('CSE: ' + (year >= 3 ? 'Advanced courses' : 'Basic courses')); break;\n                case 2: System.out.println('ECE registered'); break;\n                case 3: System.out.println('MECH registered'); break;\n            }\n            System.out.println('Approved: ' + credits + ' credits');\n        } else System.out.println('Exceeds max ' + max);\n        sc.close();\n    }\n}", output: "Year (1-4): 3\n1.CSE 2.ECE 3.MECH\nDept: 1\nCredits: 24\nCSE: Advanced courses\nApproved: 24 credits" },
+      { id: "sw-pg-h-13", question: "Write a program using switch to implement a complete cricket scoring system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Runs: '); int runs = sc.nextInt();\n        System.out.print('Wickets: '); int wickets = sc.nextInt();\n        System.out.print('Overs: '); double overs = sc.nextDouble();\n        double rr = runs / overs;\n        System.out.println('Run rate: ' + String.format('%.2f', rr));\n        switch (wickets < 10 ? 0 : 1) {\n            case 0: System.out.println('In progress'); if (rr > 8) System.out.println('Excellent'); else if (rr > 6) System.out.println('Good'); else System.out.println('Slow'); break;\n            case 1: System.out.println('All out'); if (runs > 300) System.out.println('Excellent total'); else if (runs > 200) System.out.println('Good total'); else System.out.println('Low total'); break;\n        }\n        sc.close();\n    }\n}", output: "Runs: 180\nWickets: 3\nOvers: 20\nRun rate: 9.00\nIn progress\nExcellent" },
+      { id: "sw-pg-h-14", question: "Write a program using switch to implement a complete medical diagnosis system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print('Temperature (C): '); double temp = sc.nextDouble();\n        System.out.print('Cough? '); boolean cough = sc.nextBoolean();\n        System.out.print('Body ache? '); boolean ache = sc.nextBoolean();\n        int level = temp > 102 ? 3 : temp > 100 ? 2 : 1;\n        switch (level) {\n            case 3: if (cough && ache) System.out.println('Severe viral - see doctor'); else if (cough) System.out.println('Respiratory infection'); else System.out.println('High fever - paracetamol'); break;\n            case 2: if (cough || ache) System.out.println('Common cold - rest'); else System.out.println('Mild fever - monitor'); break;\n            case 1: if (cough || ache) System.out.println('Allergy - antihistamine'); else System.out.println('Normal'); break;\n        }\n        sc.close();\n    }\n}", output: "Temperature (C): 103\nCough? true\nBody ache? true\nSevere viral - see doctor" },
+      { id: "sw-pg-h-15", question: "Write a program using switch to implement a complete inventory management system.", solution: "import java.util.Scanner;\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.println('1.Electronics 2.Groceries 3.Clothing');\n        System.out.print('Category: '); int cat = sc.nextInt();\n        System.out.print('Stock: '); int stock = sc.nextInt();\n        System.out.print('Reorder point: '); int reorder = sc.nextInt();\n        System.out.print('Cost: '); double cost = sc.nextDouble();\n        System.out.print('Selling: '); double sell = sc.nextDouble();\n        switch (cat) { case 1: System.out.println('Electronics'); break; case 2: System.out.println('Groceries'); break; case 3: System.out.println('Clothing'); break; }\n        if (stock <= 0) System.out.println('OUT OF STOCK!'); else if (stock <= reorder) System.out.println('LOW STOCK - reorder ' + (reorder*2 - stock)); else System.out.println('Adequate: ' + stock);\n        double margin = ((sell - cost) / cost) * 100;\n        System.out.println('Margin: ' + String.format('%.1f', margin) + '% Profit: ' + ((sell - cost) * stock));\n        sc.close();\n    }\n}", output: "1.Electronics 2.Groceries 3.Clothing\nCategory: 1\nStock: 5\nReorder point: 10\nCost: 500\nSelling: 800\nElectronics\nLOW STOCK - reorder 15\nMargin: 60.0% Profit: 1500.0" },
+    ],
   },
-  "challengeProblems": [
-    {
-      "id": "switch-cp-1",
-      "title": "Challenge SWITCH Statement",
-      "question": "Challenge problem",
-      "solution": "// solution"
-    }
+
+  challengeProblems: [
+    { id: "sw-cp-1", title: "Complete Smart City Traffic Management", question: "Design a traffic management system using switch with time of day, traffic density, weather, and emergency vehicle priority.", solution: "Use switch for time period selection, nested if for density and weather adjustments.", output: "Period: Morning Rush\nSignal: 90s green, 30s red\nWeather: Rain - +5s yellow" },
+    { id: "sw-cp-2", title: "Complete E-Commerce Platform", question: "Build a complete e-commerce checkout with switch for payment methods, coupon codes, and EMI options.", solution: "Use switch for payment method selection with nested if for EMI tenure.", output: "Payment: EMI\nEMI: Rs 650/mo for 6 months" },
+    { id: "sw-cp-3", title: "Complete Banking System", question: "Create a banking system with switch for account types (Savings, Current, FD, RD) and transaction types.", solution: "Use nested switch for account type and transaction type selection.", output: "Account: FD\nMaturity: Rs 143562.93" },
+    { id: "sw-cp-4", title: "Complete Hospital Management", question: "Design a hospital system with switch for department selection, triage levels, and treatment plans.", solution: "Use switch for department and triage level with nested if for severity.", output: "Department: Emergency\nTriage: Level 2 - Urgent" },
+    { id: "sw-cp-5", title: "Complete University Management", question: "Build a university system with switch for department, year, course registration, and fee calculation.", solution: "Use nested switch for department and year with if for credit validation.", output: "Dept: CSE, Year: 3\nApproved: 24 credits\nFee: Rs 120000" },
+    { id: "sw-cp-6", title: "Complete Restaurant POS System", question: "Create a restaurant POS with switch for menu categories, items, table types, and bill generation with taxes.", solution: "Use switch for menu item selection with calculations for tax and discounts.", output: "Item: Pizza x 2\nSubtotal: 800\nTax: 40\nTotal: 920" },
+    { id: "sw-cp-7", title: "Complete Inventory Management", question: "Design an inventory system with switch for categories, stock levels, reorder points, and profit calculation.", solution: "Use switch for category with if for stock level checks.", output: "Category: Electronics\nStock: LOW - reorder 15\nMargin: 60%" },
+    { id: "sw-cp-8", title: "Complete Travel Booking System", question: "Build a travel booking with switch for destination, class, add-ons, and group discounts.", solution: "Use switch for destination and class with if for group discounts.", output: "Destination: International\nClass: Business\nTotal: Rs 125000" },
+    { id: "sw-cp-9", title: "Complete Insurance System", question: "Create an insurance system with switch for vehicle type, coverage, and age-based premium calculation.", solution: "Use nested switch for vehicle and coverage with if for age adjustment.", output: "Vehicle: Car\nCoverage: Comprehensive\nPremium: Rs 15000" },
+    { id: "sw-cp-10", title: "Complete Smart Home System", question: "Design a smart home system with switch for subsystems (climate, lighting, security, energy) and automated responses.", solution: "Use switch for subsystem selection with if for sensor-based decisions.", output: "System: Climate\nTemp: 32C\nAction: AC ON" },
   ],
-  "previousYearQuestions": [
-    {
-      "id": "switch-py-1",
-      "question": "(ICSE Style) Previous year 1",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-2",
-      "question": "(ICSE Style) Previous year 2",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-3",
-      "question": "(ICSE Style) Previous year 3",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-4",
-      "question": "(ICSE Style) Previous year 4",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-5",
-      "question": "(ICSE Style) Previous year 5",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-6",
-      "question": "(ICSE Style) Previous year 6",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-7",
-      "question": "(ICSE Style) Previous year 7",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-8",
-      "question": "(ICSE Style) Previous year 8",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-9",
-      "question": "(ICSE Style) Previous year 9",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    },
-    {
-      "id": "switch-py-10",
-      "question": "(ICSE Style) Previous year 10",
-      "answer": "Answer",
-      "explanation": "Explanation"
-    }
+
+  previousYearQuestions: [
+    { id: "sw-py-1", question: "Write a Java program using switch to print the day of the week.", answer: "switch (day) { case 1: print('Monday'); break; ... case 7: print('Sunday'); break; default: print('Invalid'); }" },
+    { id: "sw-py-2", question: "What is the purpose of break in switch?", answer: "break exits the switch block. Without it, fall-through occurs." },
+    { id: "sw-py-3", question: "What is fall-through in switch? Explain with an example.", answer: "When break is missing, execution continues to the next case. Example: case 1: print('A'); case 2: print('B'); If x=1, output: A, B." },
+    { id: "sw-py-4", question: "Which data types can be used in switch?", answer: "byte, short, int, char, String (Java 7+), and enum. Not boolean, long, float, or double." },
+    { id: "sw-py-5", question: "Write a program using switch to implement a simple calculator.", answer: "switch (op) { case '+': print(a+b); break; case '-': print(a-b); break; ... }" },
+    { id: "sw-py-6", question: "What is the default case? Is it mandatory?", answer: "default executes when no case matches. It is optional but recommended." },
+    { id: "sw-py-7", question: "Can case labels be variables? Explain.", answer: "No. Case labels must be compile-time constants. Variables are not allowed." },
+    { id: "sw-py-8", question: "Write a program using switch to check if a character is a vowel.", answer: "switch (ch) { case 'a': case 'e': case 'i': case 'o': case 'u': print('Vowel'); break; default: print('Consonant'); }" },
+    { id: "sw-py-9", question: "What is the output: int x=2; switch(x) { case 1: print('A'); case 2: print('B'); case 3: print('C'); }", answer: "Output: B, C. x=2 matches case 2. No break! Fall through to case 3." },
+    { id: "sw-py-10", question: "Write a program using switch to print days in a month.", answer: "switch (month) { case 1: case 3: case 5: ... case 12: print('31'); break; case 4: case 6: ... case 11: print('30'); break; case 2: print('28/29'); break; }" },
+    { id: "sw-py-11", question: "Explain grouped cases with an example.", answer: "Multiple case labels share the same code: case 1: case 2: case 3: print('Low'); break;" },
+    { id: "sw-py-12", question: "What is the difference between switch and if-else-if?", answer: "Switch tests equality with constants. If-else-if tests complex conditions including ranges. Switch is more readable for many constant comparisons." },
+    { id: "sw-py-13", question: "Write a program using switch to convert marks to grades.", answer: "switch (marks/10) { case 10: case 9: grade='A'; break; case 8: grade='B'; break; ... default: grade='F'; }" },
+    { id: "sw-py-14", question: "Can String be used in switch? Since which version?", answer: "Yes, String can be used in switch since Java 7. Comparison is case-sensitive." },
+    { id: "sw-py-15", question: "What happens if no case matches and there is no default?", answer: "Nothing happens. The switch is skipped and execution continues after it." },
+    { id: "sw-py-16", question: "Write a program using switch to implement a menu-driven program.", answer: "switch (choice) { case 1: print('Option 1'); break; case 2: print('Option 2'); break; default: print('Invalid'); }" },
+    { id: "sw-py-17", question: "What causes a compilation error in switch?", answer: "Duplicate case labels, incompatible types (boolean, long, float, double), variables as case labels, null case labels." },
+    { id: "sw-py-18", question: "Write a program using switch to implement a traffic light system.", answer: "switch (color) { case 'red': print('Stop'); break; case 'yellow': print('Slow'); break; case 'green': print('Go'); break; }" },
+    { id: "sw-py-19", question: "Can default appear in the middle of a switch?", answer: "Yes. default can appear anywhere. It executes only when no case matches." },
+    { id: "sw-py-20", question: "Write a program using nested switch for department and year.", answer: "switch (dept) { case 1: switch (year) { case 1: print('CSE Y1'); break; ... } break; ... }" },
+    { id: "sw-py-21", question: "What is the output: int x=3; switch(x) { case 1: print('A'); case 2: print('B'); break; case 3: print('C'); case 4: print('D'); break; }", answer: "Output: C, D. x=3 matches case 3. No break! Fall through to case 4." },
+    { id: "sw-py-22", question: "Write a program using switch to check even or odd.", answer: "switch (num % 2) { case 0: print('Even'); break; case 1: print('Odd'); break; }" },
+    { id: "sw-py-23", question: "Explain how switch can be used with integer division for ranges.", answer: "switch (marks / 10) converts ranges to single values: 85/10=8, so case 8 handles 80-89." },
+    { id: "sw-py-24", question: "Write a program using switch to implement an ATM menu.", answer: "switch (choice) { case 1: print('Balance'); break; case 2: print('Withdraw'); break; case 3: print('Deposit'); break; }" },
+    { id: "sw-py-25", question: "What is a nested switch? When is it used?", answer: "A switch inside another switch. Used for multi-level menu selection where inner switch depends on outer case." },
   ],
-  "vivaQuestions": [
-    {
-      "id": "switch-vv-1",
-      "question": "Viva question 1",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-2",
-      "question": "Viva question 2",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-3",
-      "question": "Viva question 3",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-4",
-      "question": "Viva question 4",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-5",
-      "question": "Viva question 5",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-6",
-      "question": "Viva question 6",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-7",
-      "question": "Viva question 7",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-8",
-      "question": "Viva question 8",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-9",
-      "question": "Viva question 9",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-10",
-      "question": "Viva question 10",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-11",
-      "question": "Viva question 11",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-12",
-      "question": "Viva question 12",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-13",
-      "question": "Viva question 13",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-14",
-      "question": "Viva question 14",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-15",
-      "question": "Viva question 15",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-16",
-      "question": "Viva question 16",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-17",
-      "question": "Viva question 17",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-18",
-      "question": "Viva question 18",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-19",
-      "question": "Viva question 19",
-      "answer": "Answer"
-    },
-    {
-      "id": "switch-vv-20",
-      "question": "Viva question 20",
-      "answer": "Answer"
-    }
+
+  aiVivaQuestions: [
+    { id: "sw-viva-1", question: "What is a switch statement?", answer: "A multi-way branch statement that tests a variable against multiple constant values." },
+    { id: "sw-viva-2", question: "What is the purpose of break in switch?", answer: "To exit the switch block. Without it, fall-through occurs." },
+    { id: "sw-viva-3", question: "What is fall-through?", answer: "When break is missing, execution continues to the next case after a match." },
+    { id: "sw-viva-4", question: "What is the default case?", answer: "The case that executes when no other case matches. It is optional." },
+    { id: "sw-viva-5", question: "Which types can be used in switch?", answer: "byte, short, int, char, String (Java 7+), and enum." },
+    { id: "sw-viva-6", question: "Which types CANNOT be used in switch?", answer: "boolean, long, float, and double." },
+    { id: "sw-viva-7", question: "Can case labels be variables?", answer: "No. They must be compile-time constants." },
+    { id: "sw-viva-8", question: "Can multiple cases share the same code?", answer: "Yes. By stacking case labels: case 1: case 2: doSomething();" },
+    { id: "sw-viva-9", question: "What happens if no case matches and there is no default?", answer: "Nothing happens. The switch is skipped." },
+    { id: "sw-viva-10", question: "Can default appear in the middle?", answer: "Yes. default can appear anywhere in the switch." },
+    { id: "sw-viva-11", question: "What causes a compilation error in switch?", answer: "Duplicate case labels, incompatible types, variables as labels, null labels." },
+    { id: "sw-viva-12", question: "Can String be used in switch?", answer: "Yes, since Java 7. Comparison is case-sensitive." },
+    { id: "sw-viva-13", question: "What is a nested switch?", answer: "A switch inside another switch for multi-level selection." },
+    { id: "sw-viva-14", question: "How does switch differ from if-else-if?", answer: "Switch tests equality with constants. If-else-if tests complex conditions and ranges." },
+    { id: "sw-viva-15", question: "Can switch test ranges?", answer: "No. Switch tests equality only. Use integer division to convert ranges to values." },
+    { id: "sw-viva-16", question: "Is the switch expression evaluated once or multiple times?", answer: "Once. The value is then compared with case labels." },
+    { id: "sw-viva-17", question: "What is the advantage of switch over if-else-if?", answer: "More readable for many constant comparisons, can be faster with jump table optimization." },
+    { id: "sw-viva-18", question: "Can you declare variables inside case blocks?", answer: "Yes, but use braces {} to avoid scope conflicts between cases." },
+    { id: "sw-viva-19", question: "What is the output: switch(2) { case 1: print('A'); case 2: print('B'); case 3: print('C'); }", answer: "B, C. Fall-through from case 2 to case 3 (no break)." },
+    { id: "sw-viva-20", question: "Can case labels be null?", answer: "No. null case labels cause a compilation error." },
+    { id: "sw-viva-21", question: "How do you group cases in switch?", answer: "Stack case labels: case 1: case 2: case 3: doSomething(); break;" },
+    { id: "sw-viva-22", question: "What is the syntax of switch?", answer: "switch (expr) { case val1: code; break; case val2: code; break; default: code; }" },
+    { id: "sw-viva-23", question: "Can you use expressions in switch?", answer: "Yes, the switch expression can be any expression that evaluates to a valid type. Case labels must be constants." },
+    { id: "sw-viva-24", question: "What is the output: switch(1) { case 1: x++; case 2: x++; case 3: x++; break; } print(x); (x starts at 1)", answer: "4. x=1 matches case 1. x++ -> 2. Fall through. x++ -> 3. Fall through. x++ -> 4. break." },
+    { id: "sw-viva-25", question: "Is switch case-sensitive for String?", answer: "Yes. 'Red' and 'red' are different in String switch." },
+    { id: "sw-viva-26", question: "Can you use enum in switch?", answer: "Yes. enum is one of the allowed types in switch." },
+    { id: "sw-viva-27", question: "What is a jump table optimization?", answer: "The compiler creates a lookup table for dense case values, making switch faster than if-else-if." },
+    { id: "sw-viva-28", question: "Can you have empty case blocks?", answer: "Yes. Empty cases are valid and are used for grouping: case 1: case 2: doSomething();" },
+    { id: "sw-viva-29", question: "What happens if you change the switch variable inside a case?", answer: "The switch is not re-evaluated. The new value does not affect case matching." },
+    { id: "sw-viva-30", question: "Best practice for switch?", answer: "Always use break, include default, group related cases, keep blocks short, add comments for fall-through." },
   ],
-  "practiceTest": {
-    "title": "SWITCH Statement — Practice Test",
-    "totalMarks": 25,
-    "timeLimit": "30 minutes",
-    "sections": [
-      {
-        "title": "Section A — MCQs (5 marks)",
-        "marks": 5,
-        "questions": [
-          {
-            "id": "switch-pt-1",
-            "question": "MCQ",
-            "options": [
-              "A",
-              "B",
-              "C",
-              "D"
-            ],
-            "answer": 0
-          }
-        ]
-      },
-      {
-        "title": "Section B — Output (10 marks)",
-        "marks": 10,
-        "questions": [
-          {
-            "id": "switch-pt-2",
-            "question": "Output",
-            "answer": "Answer"
-          }
-        ]
-      },
-      {
-        "title": "Section C — Programming (10 marks)",
-        "marks": 10,
-        "questions": [
-          {
-            "id": "switch-pt-3",
-            "question": "Program",
-            "marks": 5
-          }
-        ]
-      }
-    ]
-  },
-  "chapterSummary": {
-    "keyPoints": [
-      "Key point about SWITCH Statement",
-      "Key point about SWITCH Statement",
-      "Key point about SWITCH Statement",
-      "Key point about SWITCH Statement",
-      "Key point about SWITCH Statement"
+
+  practiceTest: {
+    title: "SWITCH Statement - Complete Chapter Test",
+    duration: 60,
+    totalMarks: 50,
+    instructions: "Answer all questions. Each section has different marks. Time: 60 minutes.",
+    sections: [
+      { name: "Section A: MCQs (10 marks - 1 mark each)", questions: [
+        "What does the switch statement do?",
+        "What is the purpose of break in switch?",
+        "What is fall-through?",
+        "Which types can be used in switch?",
+        "Is default mandatory?",
+        "What is the output: switch(2) { case 1: print('A'); case 2: print('B'); case 3: print('C'); }",
+        "Can case labels be variables?",
+        "Can multiple cases share the same code?",
+        "What happens if no case matches and no default?",
+        "Can String be used in switch?",
+      ]},
+      { name: "Section B: Short Answer (10 marks - 2 marks each)", questions: [
+        "Explain fall-through with an example.",
+        "What is the difference between switch and if-else-if?",
+        "Write a switch to check if a character is a vowel.",
+        "What is the default case? Is it mandatory?",
+        "Explain grouped cases with an example.",
+      ]},
+      { name: "Section C: Long Answer (15 marks - 5 marks each)", questions: [
+        "Write a Java program using switch to implement a simple calculator with error handling.",
+        "Explain the rules for case labels in switch. What causes compilation errors?",
+        "Write a program using switch to implement a menu-driven restaurant billing system.",
+      ]},
+      { name: "Section D: Programming (15 marks - 5 marks each)", questions: [
+        "Write a program using switch to implement an ATM menu system.",
+        "Write a program using switch to convert marks to grades using integer division.",
+        "Write a program using nested switch for country and city selection.",
+      ]},
     ],
-    "skillsLearned": [
-      "Skill 1",
-      "Skill 2",
-      "Skill 3",
-      "Skill 4"
-    ]
   },
-  "revisionNotes": [
-    {
-      "title": "Note 1",
-      "content": "Content for note 1"
-    },
-    {
-      "title": "Note 2",
-      "content": "Content for note 2"
-    },
-    {
-      "title": "Note 3",
-      "content": "Content for note 3"
-    },
-    {
-      "title": "Note 4",
-      "content": "Content for note 4"
-    },
-    {
-      "title": "Note 5",
-      "content": "Content for note 5"
-    }
+
+  revisionNotes: [
+    { title: "Switch Definition", content: "Multi-way branch statement. Tests a variable against constant values (cases)." },
+    { title: "Break", content: "Exits the switch block. Without it, fall-through occurs." },
+    { title: "Fall-Through", content: "When break is missing, execution continues to the next case." },
+    { title: "Default", content: "Optional. Executes when no case matches. Can appear anywhere." },
+    { title: "Allowed Types", content: "byte, short, int, char, String (Java 7+), enum. NOT boolean, long, float, double." },
+    { title: "Case Labels", content: "Must be compile-time constants. Cannot be variables or null." },
+    { title: "Grouped Cases", content: "Multiple cases share same code: case 1: case 2: doSomething(); break;" },
+    { title: "Nested Switch", content: "Switch inside switch for multi-level menu selection." },
+    { title: "Switch vs If-Else", content: "Switch: equality only, constants. If-else: ranges, complex conditions." },
+    { title: "Common Errors", content: "Missing break, duplicate cases, wrong types, variables as labels, null labels." },
   ],
-  "cheatsheet": {
-    "syntax": "// SWITCH Statement syntax",
-    "operators": {
-      "comparison": "==, !=",
-      "logical": "&&, ||, !"
-    },
-    "commonPatterns": [
-      {
-        "pattern": "Pattern",
-        "code": "code"
-      }
+
+  cheatsheet: {
+    syntax: "switch (expr) {\n    case val1: // code; break;\n    case val2: // code; break;\n    default: // code;\n}",
+    keyPoints: [
+      "Tests equality only, not ranges",
+      "Works with byte, short, int, char, String, enum",
+      "break exits the switch, missing break = fall-through",
+      "default is optional, handles unmatched values",
+      "Case labels must be constants",
+      "Grouped cases: case 1: case 2: code; break;",
     ],
-    "pitfalls": [
-      "Pitfall 1",
-      "Pitfall 2"
-    ]
-  }
+    commonPatterns: [
+      { pattern: "Day of Week", code: "switch(day) { case 1: print('Mon'); break; ... }" },
+      { pattern: "Calculator", code: "switch(op) { case '+': print(a+b); break; ... }" },
+      { pattern: "Vowel Check", code: "switch(ch) { case 'a': case 'e': ... print('Vowel'); break; }" },
+      { pattern: "Grade System", code: "switch(marks/10) { case 10: case 9: grade='A'; break; ... }" },
+      { pattern: "Menu Driven", code: "switch(choice) { case 1: option1(); break; case 2: option2(); break; }" },
+    ],
+    pitfalls: [
+      "Do not forget break - causes fall-through",
+      "Do not use boolean, long, float, double",
+      "Do not use variables as case labels",
+      "Do not use duplicate case labels",
+      "Do not use null as case label",
+      "Do not use comparison operators in case labels",
+    ],
+  },
+
+  interviewQuestions: [
+    { id: "sw-int-1", question: "What is a switch statement and when would you use it?", answer: "A multi-way branch that tests a variable against constants. Use it for menu-driven programs and multiple constant comparisons." },
+    { id: "sw-int-2", question: "Explain fall-through in switch.", answer: "When break is missing, execution continues to the next case. This can be a bug or intentional for grouping cases." },
+    { id: "sw-int-3", question: "What types can be used in switch?", answer: "byte, short, int, char, String (Java 7+), and enum. Not boolean, long, float, or double." },
+    { id: "sw-int-4", question: "Can case labels be variables?", answer: "No. They must be compile-time constants. Use final variables or literal values." },
+    { id: "sw-int-5", question: "What is the difference between switch and if-else-if?", answer: "Switch tests equality with constants, more readable for many cases. If-else-if tests complex conditions, ranges, multiple variables." },
+    { id: "sw-int-6", question: "How does the compiler optimize switch?", answer: "For dense case values, the compiler may use a jump table or hash lookup, making switch faster than if-else-if." },
+    { id: "sw-int-7", question: "What is a nested switch?", answer: "A switch inside another switch. Useful for multi-level menu selection." },
+    { id: "sw-int-8", question: "Can you use String in switch? Since which version?", answer: "Yes, since Java 7. String comparison is case-sensitive." },
+    { id: "sw-int-9", question: "What happens if no case matches and there is no default?", answer: "Nothing happens. The switch is skipped and execution continues after it." },
+    { id: "sw-int-10", question: "What causes compilation errors in switch?", answer: "Duplicate case labels, incompatible types, variables as labels, null labels, comparison operators in labels." },
+    { id: "sw-int-11", question: "How do you group cases in switch?", answer: "Stack case labels: case 1: case 2: case 3: doSomething(); break;" },
+    { id: "sw-int-12", question: "Can you declare variables inside case blocks?", answer: "Yes, but use braces {} to create separate scopes if variables have the same name in different cases." },
+    { id: "sw-int-13", question: "What is the default case? Is it mandatory?", answer: "default executes when no case matches. It is optional but recommended for robust code." },
+    { id: "sw-int-14", question: "Can default appear in the middle of a switch?", answer: "Yes. default can appear anywhere. It executes only when no case matches." },
+    { id: "sw-int-15", question: "How would you test ranges using switch?", answer: "Use integer division: switch (marks / 10) { case 10: case 9: grade = 'A'; break; ... }" },
+  ],
+
+  examTricks: [
+    { trick: "Fall-Through Check", description: "Always check for missing break in output questions. Fall-through is the #1 exam trap." },
+    { trick: "Trace Each Case", description: "Write down the switch value, then trace through each case to find the match." },
+    { trick: "Break Tracking", description: "After finding a matching case, check if break is present. If not, continue to next case." },
+    { trick: "Default Position", description: "Default can be anywhere. Don't assume it's at the end." },
+    { trick: "Grouped Cases", description: "Multiple case labels before code = grouped cases. All share the same code block." },
+    { trick: "Type Check", description: "Verify the switch type is valid (not boolean, long, float, double)." },
+    { trick: "Constant Check", description: "Case labels must be constants. Variables cause compilation errors." },
+    { trick: "Integer Division", description: "Use marks / 10 to convert ranges (80-89) to single values (8) for switch." },
+    { trick: "String Case-Sensitivity", description: "String comparison in switch is case-sensitive. 'Red' != 'red'." },
+    { trick: "No Match No Default", description: "If no case matches and no default, nothing prints. Don't assume output." },
+  ],
 };
 
 export default chapter04;

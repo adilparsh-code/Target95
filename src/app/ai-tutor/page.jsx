@@ -31,6 +31,8 @@ function AITutorContent() {
     deleteChat,
     loadChat,
     startNewChat,
+    clearCurrentChat,
+    regenerateResponse,
     clearError
   } = useAITutor(questionContext);
 
@@ -61,6 +63,8 @@ function AITutorContent() {
         historyLoading={historyLoading}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        messages={messages}
+        onClearChat={clearCurrentChat}
       />
       
       <div className="flex-1 flex flex-col min-w-0">
@@ -70,6 +74,7 @@ function AITutorContent() {
           onSend={handleSend}
           onOpenSidebar={() => setSidebarOpen(true)}
           context={questionContext}
+          onRegenerate={regenerateResponse}
         />
         
         {/* Error message */}

@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Container from "./ui/Container";
 import Card from "./ui/Card";
+import Button from "./ui/Button";
 import XPBar from "./Dashboard/XPBar";
 import SubjectCards from "./Dashboard/SubjectCards";
 import ActivityTimeline from "./Dashboard/ActivityTimeline";
@@ -10,6 +12,8 @@ import Heatmap from "./Dashboard/Heatmap";
 import AchievementCard from "./Dashboard/AchievementCard";
 import SmartSuggestions from "./Dashboard/SmartSuggestions";
 import RecommendedTopics from "./Dashboard/RecommendedTopics";
+import KpiCard from "./Dashboard/KpiCard";
+import TopicStrengthCard from "./Dashboard/TopicStrengthCard";
 import {
   subjectCards,
   recentActivity,
@@ -17,6 +21,9 @@ import {
   smartSuggestions,
   recommendedTopics,
   heatmapData,
+  userStatistics,
+  weakTopics,
+  strongTopics,
 } from "../data/dashboardData";
 
 export default function StudentDashboard() {
@@ -38,6 +45,83 @@ export default function StudentDashboard() {
             </p>
           </div>
           <XPBar />
+        </div>
+      </Card>
+
+      {/* Statistics KPI Grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 mt-6">
+        <KpiCard
+          icon="📚"
+          title="Chapters Completed"
+          value={userStatistics.chaptersCompleted}
+          subtitle={`of ${userStatistics.totalChapters}`}
+          color="blue"
+        />
+        <KpiCard
+          icon="✅"
+          title="Questions Solved"
+          value={userStatistics.questionsSolved}
+          subtitle={`${userStatistics.totalQuestionsAttempted} total attempts`}
+          color="green"
+        />
+        <KpiCard
+          icon="🎯"
+          title="Accuracy"
+          value={`${userStatistics.accuracy}%`}
+          subtitle="Correct answers rate"
+          color="purple"
+        />
+        <KpiCard
+          icon="⏱️"
+          title="Study Time"
+          value={`${userStatistics.studyTimeHours}h`}
+          subtitle="Total hours"
+          color="orange"
+        />
+        <KpiCard
+          icon="🔥"
+          title="Daily Streak"
+          value={userStatistics.dailyStreak}
+          subtitle={`Best: ${userStatistics.longestStreak} days`}
+          color="red"
+        />
+        <KpiCard
+          icon="⭐"
+          title="Current Level"
+          value={userStatistics.currentLevel}
+          subtitle="Achiever"
+          color="yellow"
+        />
+      </div>
+
+      {/* Quick Navigation Bar */}
+      <Card className="mt-6 p-4">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Link href="/study">
+            <Button variant="default" className="flex items-center gap-2">
+              📖 Resume Learning
+            </Button>
+          </Link>
+          <Link href="/java">
+            <Button variant="outline" className="flex items-center gap-2">
+              ❓ Practice Questions
+            </Button>
+          </Link>
+          <Link href="/mock-test">
+            <Button variant="outline" className="flex items-center gap-2">
+              📝 Mock Test
+            </Button>
+          </Link>
+          <Link href="/ai-tutor">
+            <Button variant="outline" className="flex items-center gap-2">
+              🤖 AI Tutor
+            </Button>
+          </Link>
+          <Link href="/bookmarks">
+            <Button variant="outline" className="flex items-center gap-2">
+              🔖 Bookmarks ({userStatistics.bookmarksCount})
+            </Button>
+          </Link>
         </div>
       </Card>
 
@@ -123,6 +207,12 @@ export default function StudentDashboard() {
             <SmartSuggestions suggestions={smartSuggestions} />
           </Card>
         </div>
+      </div>
+
+      {/* Topic Progress Cards - Weak and Strong Topics */}
+      <div className="grid gap-6 lg:grid-cols-2 mt-6">
+        <TopicStrengthCard topics={weakTopics} type="weak" />
+        <TopicStrengthCard topics={strongTopics} type="strong" />
       </div>
 
       {/* Recommended Topics */}

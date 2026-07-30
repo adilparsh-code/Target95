@@ -3,7 +3,24 @@
 import { useEffect, useState } from "react";
 
 const SETTINGS_KEY = "target95-student-settings";
-const defaults = { theme: "system", notifications: true, profileVisible: false, aiDetail: "guided" };
+const defaults = { 
+  theme: "system", 
+  notifications: true, 
+  profileVisible: false, 
+  aiDetail: "guided",
+  // New settings
+  fontSize: "medium",
+  language: "en",
+  learningReminders: true,
+  mockTestAlerts: true,
+  achievementUpdates: true,
+  weeklyReports: true,
+  dailyStudyGoal: 2,
+  dailyQuestionsGoal: 20,
+  privateProfile: true,
+  showActivityStatus: false,
+  shareProgressReports: false
+};
 
 export default function useStudentSettings() {
   const [settings, setSettings] = useState(defaults);

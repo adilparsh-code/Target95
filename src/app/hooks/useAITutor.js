@@ -142,6 +142,31 @@ export function useAITutor(initialContext = {}) {
     }
   }, [initialContext]);
 
+  // Clear current chat
+  const clearCurrentChat = useCallback(() => {
+    setMessages([]);
+    setCurrentChatId(null);
+    setError(null);
+  }, []);
+
+  // Regenerate last AI response
+  const regenerateResponse = useCallback(async () => {
+    if (loading || messages.length < 2) return;
+    
+    // Find the last user message
+    const lastUserMessageIndex = [...messages].reverse().findIndex(msg => msg.role === "user");
+    if (lastUserMessageIndex === -1) return;
+    
+    const actualIndex = messages.length - 1 - lastUserMessageIndex;
+    const lastUserMessage = messages[actualIndex];
+    
+    // Remove all messages after the last user message to regenerate
+    setMessages(messages.slice(0, actualIndex + 1));
+    
+    // Send the message again to get a new response
+    await sendMessage(lastUserMessage.content);
+  }, [messages, loading, sendMessage]);
+
   return {
     messages,
     loading,
@@ -153,6 +178,8 @@ export function useAITutor(initialContext = {}) {
     deleteChat,
     loadChat,
     startNewChat,
+    clearCurrentChat,
+    regenerateResponse,
     clearError: () => setError(null)
   };
 }

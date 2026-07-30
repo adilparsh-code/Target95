@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
+import ExportButton from "./ExportButton";
 
-export default function ChatSidebar({ history, currentChatId, onSelectChat, onNewChat, onDeleteChat, historyLoading, isOpen, onClose }) {
+export default function ChatSidebar({ history, currentChatId, onSelectChat, onNewChat, onDeleteChat, historyLoading, isOpen, onClose, messages, onClearChat }) {
   return (
     <>
       {/* Mobile overlay */}
@@ -93,6 +94,9 @@ export default function ChatSidebar({ history, currentChatId, onSelectChat, onNe
             </div>
           )}
         </div>
+
+        {/* Export and Clear Chat buttons */}
+        <ExportButton messages={messages} onClearChat={onClearChat} />
       </div>
     </>
   );

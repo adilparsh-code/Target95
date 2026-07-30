@@ -1,9 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function PromptInput({ onSend, disabled }) {
   const [input, setInput] = useState("");
+  const textareaRef = useRef(null);
+
+  // Auto-resize textarea based on content
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
+    }
+  }, [input]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,6 +35,7 @@ export default function PromptInput({ onSend, disabled }) {
       <div className="max-w-4xl mx-auto flex items-end space-x-4">
         <div className="flex-1 relative">
           <textarea
+            ref={textareaRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -34,6 +45,7 @@ export default function PromptInput({ onSend, disabled }) {
             className="w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 border border-transparent rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-200 resize-none disabled:opacity-50 disabled:cursor-not-allowed text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             style={{ minHeight: "56px", maxHeight: "200px" }}
           />
+          <p className="text-xs text-gray-400 mt-1 px-1">Press Enter to send, Shift+Enter for new line</p>
         </div>
         <button
           type="submit"

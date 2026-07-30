@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import SectionLink from "./SectionLink";
 import Button from "./ui/Button";
@@ -27,6 +27,7 @@ const links = [
 export default function Navbar() {
   const { user, logout, loading } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
@@ -41,6 +42,49 @@ export default function Navbar() {
       document.documentElement.classList.add('dark');
     }
   }, []);
+
+  // Handle Escape key to close mobile menu
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+      if (e.key === 'Escape' && searchOpen) {
+        setSearchOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [mobileMenuOpen, searchOpen]);
+
+  // Trap focus inside mobile menu when open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      const focusableElements = document.querySelectorAll(
+        '.xl\\:hidden [href], .xl\\:hidden button, .xl\\:hidden [tabindex]:not([tabindex="-1"])'
+      );
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      const handleTab = (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey && document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable?.focus();
+          } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable?.focus();
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleTab);
+      firstFocusable?.focus();
+      
+      return () => document.removeEventListener('keydown', handleTab);
+    }
+  }, [mobileMenuOpen]);
 
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
@@ -65,11 +109,24 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex min-w-0 flex-1 items-center justify-center gap-1">
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} className="rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 transition-colors hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-700 dark:hover:text-blue-300">
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const isActive = pathname === link.href || pathname.startsWith(link.href + '/') || (link.href !== '/' && pathname.includes(link.href));
+              const linkClasses = `rounded-lg px-2 py-2 text-sm font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                isActive 
+                  ? "bg-blue-100 text-blue-700 dark:bg-gray-800 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400" 
+                  : "text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-700 dark:hover:text-blue-300 border-b-2 border-transparent"
+              }`;
+              return (
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className={linkClasses.trim()}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right section: search + dark mode + auth */}
@@ -135,18 +192,45 @@ export default function Navbar() {
         </div>
       </Container>
 
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div 
+          className="xl:hidden fixed inset-0 top-16 bg-black/50 z-40"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Mobile Menu Dropdown */}
       <div
-        className={`xl:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`xl:hidden fixed inset-x-0 top-16 z-50 overflow-hidden transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "max-h-[calc(100dvh-64px)] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-4 space-y-1 overscroll-contain">
-          {links.map((link) => (
-            <div key={link.href} onClick={() => setMobileMenuOpen(false)}>
-              <SectionLink href={link.href} label={link.label} description={link.description} icon={link.icon} />
-            </div>
-          ))}
+        <div className="max-h-[calc(100dvh-64px)] overflow-y-auto border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 px-4 py-4 space-y-2 overscroll-contain">
+          {links.map((link) => {
+            const isActive = pathname === link.href || pathname.startsWith(link.href + '/') || (link.href !== '/' && pathname.includes(link.href));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-3 px-3 py-3 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                  isActive 
+                    ? "border-blue-500/50 bg-blue-50 dark:bg-gray-800 shadow-md" 
+                    : "border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:-translate-y-0.5 hover:border-blue-400/50 hover:shadow-sm"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span className="text-xl flex-shrink-0" aria-hidden="true">{link.icon}</span>
+                <div className="min-w-0 flex-1">
+                  <p className={`font-semibold text-sm ${isActive ? "text-blue-700 dark:text-blue-400" : "text-gray-900 dark:text-gray-100"}`}>{link.label}</p>
+                  {link.description && <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{link.description}</p>}
+                </div>
+                <span className={`text-lg transition-all duration-300 ${isActive ? "text-blue-500 translate-x-1" : "text-gray-400 group-hover:translate-x-1 group-hover:text-blue-500"}`} aria-hidden="true">→</span>
+              </Link>
+            );
+          })}
           <div className="border-t border-gray-100 pt-4 mt-4 space-y-2">
             {loading ? (
               <div className="h-10 bg-gray-200 animate-pulse rounded-md"></div>

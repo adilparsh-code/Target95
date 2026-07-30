@@ -85,3 +85,32 @@ export const xpLevels = [
   { level: 9, xpRequired: 10000, title: "Legend" },
   { level: 10, xpRequired: 15000, title: "Grandmaster" },
 ];
+
+export const userStatistics = {
+  chaptersCompleted: 15,
+  totalChapters: 38,
+  questionsSolved: 284,
+  totalQuestionsAttempted: 342,
+  accuracy: 83,
+  studyTimeHours: 47,
+  dailyStreak: 12,
+  longestStreak: 21,
+  totalXP: 1847,
+  currentLevel: 5,
+  mockTestsCompleted: 8,
+  bookmarksCount: 23,
+};
+
+export const weakTopics = [
+  { id: 1, title: "Method Overloading", subject: "Methods", accuracy: 45, questionsAttempted: 22 },
+  { id: 2, title: "2D Arrays", subject: "Arrays", accuracy: 52, questionsAttempted: 18 },
+  { id: 3, title: "String Manipulation", subject: "Strings", accuracy: 58, questionsAttempted: 31 },
+  { id: 4, title: "Constructors", subject: "OOP", accuracy: 61, questionsAttempted: 20 },
+];
+
+export const strongTopics = [
+  { id: 1, title: "Variables & Data Types", subject: "Basics", accuracy: 94, questionsAttempted: 45 },
+  { id: 2, title: "Basic Operators", subject: "Operators", accuracy: 91, questionsAttempted: 38 },
+  { id: 3, title: "If-Else Statements", subject: "Control Flow", accuracy: 89, questionsAttempted: 35 },
+  { id: 4, title: "Loops Basics", subject: "Loops", accuracy: 87, questionsAttempted: 30 },
+];

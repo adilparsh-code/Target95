@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
+import CopyButton from "./CopyButton";
 
-export default function MessageBubble({ message }) {
-  const { role, content, context } = message;
+export default function MessageBubble({ message, onRegenerate, isLastMessage }) {
+  const { role, content, context, timestamp } = message;
 
   // System message (context from question page)
   if (role === "system") {
@@ -77,10 +78,16 @@ export default function MessageBubble({ message }) {
           {/* Example */}
           {aiContent?.example && (
             <div>
-              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                Example
-              </h4>
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center">
+                  <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+                  Example
+                </h4>
+                <div className="flex items-center space-x-1 bg-gray-900 rounded-lg px-2 py-1">
+                  <span className="text-xs text-gray-400 mr-2">Java</span>
+                  <CopyButton text={aiContent.example} />
+                </div>
+              </div>
               <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-xs overflow-x-auto">
                 <code>{aiContent.example}</code>
               </pre>
@@ -121,6 +128,35 @@ export default function MessageBubble({ message }) {
                   </span>
                 ))}
               </div>
+            </div>
+          )}
+
+          {/* Message actions - only show on last AI message */}
+          {isLastMessage && (
+            <div className="flex items-center justify-between pt-4 mt-4 border-t border-gray-100 dark:border-gray-700">
+              <div className="flex items-center space-x-2">
+                <CopyButton 
+                  text={JSON.stringify(content, null, 2)} 
+                  className="hover:bg-gray-100 dark:hover:bg-gray-700"
+                />
+                <span className="text-xs text-gray-500 dark:text-gray-400">Copy response</span>
+              </div>
+              {onRegenerate && (
+                <button
+                  onClick={onRegenerate}
+                  className="flex items-center space-x-2 px-3 py-1.5 text-xs text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  </svg>
+                  <span>Regenerate</span>
+                </button>
+              )}
+              {timestamp && (
+                <span className="text-xs text-gray-400">
+                  {new Date(timestamp?.toDate ? timestamp.toDate() : timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              )}
             </div>
           )}
         </div>

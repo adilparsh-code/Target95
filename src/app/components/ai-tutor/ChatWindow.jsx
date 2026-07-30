@@ -5,20 +5,24 @@ import MessageBubble from "./MessageBubble";
 import TypingAnimation from "./TypingAnimation";
 import EmptyState from "./EmptyState";
 import SuggestionCards from "./SuggestionCards";
+import ScrollToBottomButton from "./ScrollToBottomButton";
 
-export default function ChatWindow({ messages, loading, onSend, onOpenSidebar, context }) {
+export default function ChatWindow({ messages, loading, onSend, onOpenSidebar, context, onRegenerate }) {
   const messagesEndRef = useRef(null);
   const containerRef = useRef(null);
 
   // Auto-scroll to bottom when new messages are added
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (!loading) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages, loading]);
 
   const hasMessages = messages.length > 0;
+  const lastMessageIndex = messages.length - 1;
 
   return (
-    <div className="flex flex-col h-full bg-gray-50 dark:bg-gray-950">
+    <div className="flex flex-col h-full bg-gray-50 dark:bg-gray-950 relative">
       {/* Chat header */}
       <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 py-3 flex items-center">
         <button
@@ -42,7 +46,12 @@ export default function ChatWindow({ messages, loading, onSend, onOpenSidebar, c
         ) : (
           <div className="max-w-4xl mx-auto px-4 py-6">
             {messages.map((message, index) => (
-              <MessageBubble key={index} message={message} />
+              <MessageBubble 
+                key={index} 
+                message={message} 
+                onRegenerate={index === lastMessageIndex && message.role === "assistant" ? onRegenerate : null}
+                isLastMessage={index === lastMessageIndex}
+              />
             ))}
             
             {loading && <TypingAnimation />}
@@ -56,6 +65,12 @@ export default function ChatWindow({ messages, loading, onSend, onOpenSidebar, c
           </div>
         )}
       </div>
+
+      {/* Scroll to bottom button */}
+      <ScrollToBottomButton 
+        containerRef={containerRef}
+        messagesEndRef={messagesEndRef}
+      />
     </div>
   );
 }

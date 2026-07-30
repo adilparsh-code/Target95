@@ -2078,6 +2078,407 @@ public static void main(String[] args) {
       explanation: "absolute(-5) returns 5 (absolute value of -5).",
     },
   ],
+
+  // ========== 10. ASSERTION & REASON QUESTIONS ==========
+  assertionReason: [
+    {
+      id: "methods-ar-1",
+      assertion: "Assertion (A): A method can execute zero or more times.",
+      reason: "Reason (R): The condition is checked before entering the loop body.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. The condition is checked before each iteration. If false initially, it executes 0 times."
+    },
+    {
+      id: "methods-ar-2",
+      assertion: "Assertion (A): The break statement exits the loop immediately.",
+      reason: "Reason (R): The continue statement also exits the loop immediately.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 2,
+      explanation: "A is true (break exits the loop), but R is false (continue skips only the current iteration)."
+    },
+    {
+      id: "methods-ar-3",
+      assertion: "Assertion (A): Nested loops are loops inside other loops.",
+      reason: "Reason (R): The inner loop completes all its iterations for each iteration of the outer loop.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. A nested loop is a loop inside another loop, and the inner loop runs completely for each outer loop iteration."
+    },
+    {
+      id: "methods-ar-4",
+      assertion: "Assertion (A): An infinite loop is always a programming error.",
+      reason: "Reason (R): Infinite loops can be useful in some applications like game loops.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 2,
+      explanation: "A is false — infinite loops are not always errors (e.g., game loops, server listeners). R is true."
+    },
+    {
+      id: "methods-ar-5",
+      assertion: "Assertion (A): A loop variable declared inside a loop is accessible outside the loop.",
+      reason: "Reason (R): Variables declared inside a block have block-level scope.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 3,
+      explanation: "A is false — loop variables are NOT accessible outside. R is true — variables have block-level scope."
+    },
+    {
+      id: "methods-ar-6",
+      assertion: "Assertion (A): Using i++ in a loop condition checks the incremented value.",
+      reason: "Reason (R): Post-increment operator increments after using the current value.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 3,
+      explanation: "A is false — i++ uses the current value for comparison, then increments. R is true."
+    },
+    {
+      id: "methods-ar-7",
+      assertion: "Assertion (A): A for loop can always be converted to a while loop.",
+      reason: "Reason (R): Both for and while loops are entry-controlled loops.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 1,
+      explanation: "Both are true. Any for loop can be rewritten as a while loop. However, the reason is not the correct explanation."
+    },
+    {
+      id: "methods-ar-8",
+      assertion: "Assertion (A): The condition in a loop is evaluated n+1 times for n iterations.",
+      reason: "Reason (R): The condition is checked before each iteration and once more when it becomes false.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. For n iterations, the condition is checked n times + 1 final check = n+1 times."
+    },
+    {
+      id: "methods-ar-9",
+      assertion: "Assertion (A): A do-while loop always executes at least once.",
+      reason: "Reason (R): The do-while loop checks the condition after executing the loop body.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. The do-while loop is exit-controlled — the body executes first, then the condition is checked."
+    },
+    {
+      id: "methods-ar-10",
+      assertion: "Assertion (A): A while loop with condition true runs infinitely.",
+      reason: "Reason (R): The condition true is always true and never becomes false.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "while(true) creates an infinite loop because the condition is always true and never changes."
+    },
+  ],
+
+  // ========== 11. DEBUG THE CODE ==========
+  debugTheCode: [
+    {
+      id: "methods-dc-1",
+      question: "Find and fix the bug:\nint i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n}",
+      bug: "The loop variable i is never incremented, causing an infinite loop.",
+      debuggedCode: "int i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}",
+      explanation: "Without i++, the value of i remains 1 forever, so the condition i <= 5 is always true."
+    },
+    {
+      id: "methods-dc-2",
+      question: "Find and fix the bug:\nfor (int i = 0; i < 3; i++);\n    System.out.println(\"Hello\");",
+      bug: "The semicolon after the for loop creates an empty loop body.",
+      debuggedCode: "for (int i = 0; i < 3; i++) {\n    System.out.println(\"Hello\");\n}",
+      explanation: "The semicolon ends the for statement, making the loop body empty. The println runs only once."
+    },
+    {
+      id: "methods-dc-3",
+      question: "Find and fix the bug:\nint sum = 0;\nfor (int i = 1; i <= 10; i++);\n    sum = sum + i;\nSystem.out.println(sum);",
+      bug: "Two bugs: (1) semicolon after for creates empty loop, (2) i is out of scope outside the for loop.",
+      debuggedCode: "int sum = 0;\nfor (int i = 1; i <= 10; i++) {\n    sum = sum + i;\n}\nSystem.out.println(sum);",
+      explanation: "The semicolon must be removed, and the sum calculation must be inside the loop body."
+    },
+    {
+      id: "methods-dc-4",
+      question: "Find and fix the bug:\nint i = 5;\nwhile (i >= 1)\n    System.out.println(i);\n    i--;",
+      bug: "Missing braces. Only the println is inside the loop. i-- is outside and never executes.",
+      debuggedCode: "int i = 5;\nwhile (i >= 1) {\n    System.out.println(i);\n    i--;\n}",
+      explanation: "Without braces, only the first statement is inside the loop. i-- is outside and never runs."
+    },
+    {
+      id: "methods-dc-5",
+      question: "Find and fix the bug:\nint num = 123;\nint sum = 0;\nwhile (num > 0) {\n    int digit = num % 10;\n    sum = sum + digit;\n}\nSystem.out.println(sum);",
+      bug: "The loop variable num is never updated (num/10 is missing), causing an infinite loop.",
+      debuggedCode: "int num = 123;\nint sum = 0;\nwhile (num > 0) {\n    int digit = num % 10;\n    sum = sum + digit;\n    num = num / 10;\n}\nSystem.out.println(sum);",
+      explanation: "Without num = num / 10, the value of num stays 123 forever, so the loop never ends."
+    },
+    {
+      id: "methods-dc-6",
+      question: "Find and fix the bug:\nint x = 5;\nif (x = 5)\n    System.out.println(\"Equal\");",
+      bug: "Using = (assignment) instead of == (comparison). Causes compilation error.",
+      debuggedCode: "int x = 5;\nif (x == 5)\n    System.out.println(\"Equal\");",
+      explanation: "Use == for comparison. The single = is for assignment and returns int, not boolean."
+    },
+    {
+      id: "methods-dc-7",
+      question: "Find and fix the bug:\nint fact = 0;\nfor (int i = 1; i <= 5; i++) {\n    fact = fact * i;\n}\nSystem.out.println(fact);",
+      bug: "fact is initialized to 0. 0 * anything = 0, so the result will always be 0.",
+      debuggedCode: "int fact = 1;\nfor (int i = 1; i <= 5; i++) {\n    fact = fact * i;\n}\nSystem.out.println(fact);",
+      explanation: "For product calculations, initialize to 1 (multiplicative identity), not 0."
+    },
+    {
+      id: "methods-dc-8",
+      question: "Find and fix the bug:\nint i = 1;\nwhile (i <= 5);\n    System.out.println(i);",
+      bug: "Semicolon after while creates empty loop. i is out of scope.",
+      debuggedCode: "int i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}",
+      explanation: "The semicolon ends the while statement. The println is outside the loop and i is out of scope."
+    },
+    {
+      id: "methods-dc-9",
+      question: "Find and fix the bug:\nint a = 5, b = 10;\nif (a > b)\n    System.out.println(a);\n    System.out.println(b);",
+      bug: "Missing braces. Only the first println is inside the if. The second always runs.",
+      debuggedCode: "int a = 5, b = 10;\nif (a > b) {\n    System.out.println(a);\n    System.out.println(b);\n}",
+      explanation: "Without braces, only the first statement after if is conditional. The second statement always executes."
+    },
+    {
+      id: "methods-dc-10",
+      question: "Find and fix the bug:\nint i = 1;\nwhile (i <= 10) {\n    if (i == 5)\n        continue;\n    System.out.println(i);\n    i++;\n}",
+      bug: "When i == 5, continue skips i++, causing an infinite loop (i stays 5 forever).",
+      debuggedCode: "int i = 1;\nwhile (i <= 10) {\n    if (i == 5) {\n        i++;\n        continue;\n    }\n    System.out.println(i);\n    i++;\n}",
+      explanation: "The continue skips the rest of the iteration including i++. Move i++ before continue or use a for loop."
+    },
+  ],
+
+  // ========== 12. CASE STUDY QUESTIONS ==========
+  caseStudyQuestions: [
+    {
+      id: "methods-cs-1",
+      title: "Student Marks Analysis",
+      scenario: "A teacher enters marks for multiple students until -1 is entered. The program calculates class average, highest, lowest, and pass count (marks >= 40).",
+      questions: [
+        {
+          id: "methods-cs-1-q1",
+          question: "Which loop is most suitable for reading marks until -1?",
+          options: ["for loop", "while loop", "do-while loop", "Any loop works"],
+          answer: 1,
+          explanation: "A while loop is best because the number of iterations is unknown."
+        },
+        {
+          id: "methods-cs-1-q2",
+          question: "What should be the loop condition?",
+          options: ["while (marks > 0)", "while (marks != -1)", "while (marks >= 0)", "while (marks == -1)"],
+          answer: 1,
+          explanation: "The loop continues while marks is NOT equal to -1 (the sentinel value)."
+        },
+        {
+          id: "methods-cs-1-q3",
+          question: "If marks are: 45, 78, 32, 90, 56, -1, how many passed?",
+          options: ["2", "3", "4", "5"],
+          answer: 2,
+          explanation: "Students with marks >= 40: 45, 78, 90, 56 = 4 students passed."
+        },
+      ]
+    },
+    {
+      id: "methods-cs-2",
+      title: "ATM Withdrawal System",
+      scenario: "An ATM allows withdrawals in multiples of 100. The user enters amount. ATM validates (multiple of 100, positive, not exceeding balance). Multiple transactions until exit.",
+      questions: [
+        {
+          id: "methods-cs-2-q1",
+          question: "What loop structure is best for the main menu?",
+          options: ["for loop with fixed count", "while loop with sentinel", "nested for loop", "for-each loop"],
+          answer: 1,
+          explanation: "A while loop with a sentinel (exit option) is best for menu-driven programs."
+        },
+        {
+          id: "methods-cs-2-q2",
+          question: "Which condition validates multiple of 100?",
+          options: ["amount % 100 == 0", "amount / 100 == 0", "amount * 100 == 0", "amount - 100 == 0"],
+          answer: 0,
+          explanation: "amount % 100 == 0 checks if remainder is 0, meaning it is a multiple of 100."
+        },
+        {
+          id: "methods-cs-2-q3",
+          question: "If balance is 5000 and user withdraws 1500, new balance?",
+          options: ["3500", "1500", "5000", "6500"],
+          answer: 0,
+          explanation: "New balance = 5000 - 1500 = 3500."
+        },
+      ]
+    },
+    {
+      id: "methods-cs-3",
+      title: "Pattern Printing",
+      scenario: "A student prints patterns using nested loops. The program asks for pattern type and size.",
+      questions: [
+        {
+          id: "methods-cs-3-q1",
+          question: "For a right-angled triangle of size 5, total stars?",
+          options: ["5", "10", "15", "25"],
+          answer: 2,
+          explanation: "Sum of 1+2+3+4+5 = 15 stars."
+        },
+        {
+          id: "methods-cs-3-q2",
+          question: "In nested loops for a square, outer loop controls:",
+          options: ["Columns", "Rows", "Both", "Pattern type"],
+          answer: 1,
+          explanation: "The outer loop controls rows, inner loop controls columns."
+        },
+        {
+          id: "methods-cs-3-q3",
+          question: "For a hollow square of size 5, boundary stars?",
+          options: ["16", "20", "25", "12"],
+          answer: 0,
+          explanation: "Perimeter = 4*(5-1) = 16 stars. Corners counted once."
+        },
+      ]
+    },
+  ],
+
+  // ========== 13. MIXED PRACTICE SETS ==========
+  mixedPracticeSets: [
+    {
+      id: "methods-mps-1",
+      title: "Practice Set 1: Method Fundamentals",
+      questions: [
+        {
+          type: "mcq",
+          id: "methods-mps-1-q1",
+          question: "What is the output if the loop condition is false initially?",
+          options: ["1 iteration", "0 iterations", "Infinite loop", "Compilation error"],
+          answer: 1
+        },
+        {
+          type: "fillInTheBlank",
+          id: "methods-mps-1-q2",
+          question: "An entry-controlled loop checks the condition _____ each iteration.",
+          answer: "before"
+        },
+        {
+          type: "output",
+          id: "methods-mps-1-q3",
+          question: "int i = 1;\nwhile (i <= 3) {\n    System.out.print(i + \" \");\n    i++;\n}",
+          answer: "1 2 3"
+        },
+        {
+          type: "trueFalse",
+          id: "methods-mps-1-q4",
+          question: "A while loop can be converted to a for loop.",
+          answer: true
+        },
+        {
+          type: "shortAnswer",
+          id: "methods-mps-1-q5",
+          question: "What is the difference between break and continue?",
+          answer: "break exits the loop completely. continue skips the current iteration."
+        },
+      ]
+    },
+    {
+      id: "methods-mps-2",
+      title: "Practice Set 2: Method Applications",
+      questions: [
+        {
+          type: "mcq",
+          id: "methods-mps-2-q1",
+          question: "Which loop is best for menu-driven programs?",
+          options: ["for", "while", "do-while", "for-each"],
+          answer: 1
+        },
+        {
+          type: "output",
+          id: "methods-mps-2-q2",
+          question: "int i = 5;\nwhile (i >= 1) {\n    System.out.print(i--);\n}",
+          answer: "54321"
+        },
+        {
+          type: "errorFinding",
+          id: "methods-mps-2-q3",
+          question: "int i = 1;\nwhile (i <= 5);\n    System.out.println(i);",
+          error: "Semicolon after while creates empty loop.",
+          corrected: "int i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}"
+        },
+        {
+          type: "programming",
+          id: "methods-mps-2-q4",
+          question: "Write a program to calculate sum of first 10 natural numbers.",
+          solution: "int sum = 0, i = 1;\nwhile (i <= 10) {\n    sum = sum + i;\n    i++;\n}\nSystem.out.println(sum);"
+        },
+        {
+          type: "assertionReason",
+          id: "methods-mps-2-q5",
+          assertion: "A while loop may execute zero times.",
+          reason: "The condition is checked before entering the loop body.",
+          answer: 0
+        },
+      ]
+    },
+  ],
+
+  // ========== 14. RAPID REVISION QUESTIONS ==========
+  rapidRevisionQuestions: [
+    { id: "methods-rr-1", question: "What type of loop is a while loop?", answer: "Entry-controlled loop" },
+    { id: "methods-rr-2", question: "How many times does a while loop execute if condition is false initially?", answer: "0 times" },
+    { id: "methods-rr-3", question: "Where is the loop variable initialized in a while loop?", answer: "Before the while loop" },
+    { id: "methods-rr-4", question: "Where is the loop variable updated in a while loop?", answer: "Inside the while loop body" },
+    { id: "methods-rr-5", question: "What happens if you forget to update the loop variable?", answer: "Infinite loop" },
+    { id: "methods-rr-6", question: "Which loop is best when the number of iterations is unknown?", answer: "While loop" },
+    { id: "methods-rr-7", question: "Which loop is best when the number of iterations is known?", answer: "For loop" },
+    { id: "methods-rr-8", question: "What does while(true) create?", answer: "An infinite loop" },
+    { id: "methods-rr-9", question: "Which statement exits a loop immediately?", answer: "break" },
+    { id: "methods-rr-10", question: "Which statement skips the current iteration?", answer: "continue" },
+    { id: "methods-rr-11", question: "Can a while loop be nested?", answer: "Yes" },
+    { id: "methods-rr-12", question: "Can a while loop be converted to a for loop?", answer: "Yes" },
+    { id: "methods-rr-13", question: "What is a sentinel value?", answer: "A special value that signals end of input" },
+    { id: "methods-rr-14", question: "What is the scope of a variable declared inside a loop?", answer: "Only within the loop" },
+    { id: "methods-rr-15", question: "What is the difference between while and do-while?", answer: "While checks before (may not execute), do-while checks after (always executes once)" },
+    { id: "methods-rr-16", question: "What is a nested loop?", answer: "A loop inside another loop" },
+    { id: "methods-rr-17", question: "What is the time complexity of a simple loop running n times?", answer: "O(n)" },
+    { id: "methods-rr-18", question: "What is the output of: int i=1; while(i<=3) { System.out.print(i); i++; }", answer: "123" },
+    { id: "methods-rr-19", question: "What is the output of: int i=5; while(i>=1) { System.out.print(i--); }", answer: "54321" },
+    { id: "methods-rr-20", question: "What is the purpose of the break statement?", answer: "To exit the loop immediately" },
+  ],
+
 };
 
 export default chapter11;

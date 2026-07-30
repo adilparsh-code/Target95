@@ -2517,6 +2517,532 @@ public class NumberProperties {
       "Java needs boolean, not int (unlike C/C++)",
     ],
   },
+
+  // ========== 21. ASSERTION & REASON QUESTIONS ==========
+  assertionReason: [
+    
+  {
+    "id": "if-ar-1",
+    "assertion": "Assertion (A): An if statement checks a condition before executing its block.",
+    "reason": "Reason (R): The condition in an if statement must evaluate to a boolean value.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 1,
+    "explanation": "Both are true. The if statement does check a condition, and that condition must be boolean. However, R explains the requirement, not the checking mechanism."
+  },
+  {
+    "id": "if-ar-2",
+    "assertion": "Assertion (A): Using = instead of == in an if condition causes a compilation error for int types.",
+    "reason": "Reason (R): The = operator is for assignment and returns the assigned value, not a boolean.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. Assignment returns int (not boolean), so Java gives a compilation error."
+  },
+  {
+    "id": "if-ar-3",
+    "assertion": "Assertion (A): A semicolon after if(condition) makes the if block always execute.",
+    "reason": "Reason (R): The semicolon ends the if statement, creating an empty body.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 2,
+    "explanation": "A is false — the semicolon creates an empty if body (the if does nothing). The next block is NOT part of the if. R is true."
+  },
+  {
+    "id": "if-ar-4",
+    "assertion": "Assertion (A): Without braces, only the first statement after if is conditional.",
+    "reason": "Reason (R): Java treats only the immediate next statement as the if body when braces are absent.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. Without braces, only the first statement belongs to the if block."
+  },
+  {
+    "id": "if-ar-5",
+    "assertion": "Assertion (A): The condition if(x > 5 && x < 10) checks if x is between 5 and 10.",
+    "reason": "Reason (R): The && operator returns true only when both conditions are true.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. x > 5 AND x < 10 means x is between 5 and 10 (exclusive)."
+  },
+  {
+    "id": "if-ar-6",
+    "assertion": "Assertion (A): The || operator short-circuits if the first condition is true.",
+    "reason": "Reason (R): In OR operation, if the first operand is true, the result is always true regardless of the second.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. || short-circuits: if left is true, right is not evaluated."
+  },
+  {
+    "id": "if-ar-7",
+    "assertion": "Assertion (A): Nested if statements allow checking multiple conditions hierarchically.",
+    "reason": "Reason (R): An if statement can be placed inside another if statement's block.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. Nested ifs allow hierarchical decision-making."
+  },
+  {
+    "id": "if-ar-8",
+    "assertion": "Assertion (A): The condition if(flag) is equivalent to if(flag == true) for boolean variables.",
+    "reason": "Reason (R): A boolean variable can be used directly as a condition.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. if(flag) is cleaner and preferred over if(flag == true)."
+  },
+  {
+    "id": "if-ar-9",
+    "assertion": "Assertion (A): The ! operator reverses a boolean value.",
+    "reason": "Reason (R): !true evaluates to false, and !false evaluates to true.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. The logical NOT operator (!) inverts the boolean value."
+  },
+  {
+    "id": "if-ar-10",
+    "assertion": "Assertion (A): An if statement can exist without an else block.",
+    "reason": "Reason (R): The else block is optional in Java's if-else construct.",
+    "options": [
+      "Both A and R are true and R is the correct explanation of A",
+      "Both A and R are true but R is NOT the correct explanation of A",
+      "A is true but R is false",
+      "A is false but R is true"
+    ],
+    "answer": 0,
+    "explanation": "Both are true. The else part is optional — if can be used alone."
+  }
+
+  ]
+      answer: 0,
+      explanation: "Both are true. The condition is checked before each iteration. If false initially, it executes 0 times."
+    },
+    {
+      id: "if-ar-2",
+      assertion: "Assertion (A): The break statement exits the loop immediately.",
+      reason: "Reason (R): The continue statement also exits the loop immediately.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 2,
+      explanation: "A is true (break exits the loop), but R is false (continue skips only the current iteration)."
+    },
+    {
+      id: "if-ar-3",
+      assertion: "Assertion (A): Nested loops are loops inside other loops.",
+      reason: "Reason (R): The inner loop completes all its iterations for each iteration of the outer loop.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. A nested loop is a loop inside another loop, and the inner loop runs completely for each outer loop iteration."
+    },
+    {
+      id: "if-ar-4",
+      assertion: "Assertion (A): An infinite loop is always a programming error.",
+      reason: "Reason (R): Infinite loops can be useful in some applications like game loops.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 2,
+      explanation: "A is false — infinite loops are not always errors (e.g., game loops, server listeners). R is true."
+    },
+    {
+      id: "if-ar-5",
+      assertion: "Assertion (A): A loop variable declared inside a loop is accessible outside the loop.",
+      reason: "Reason (R): Variables declared inside a block have block-level scope.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 3,
+      explanation: "A is false — loop variables are NOT accessible outside. R is true — variables have block-level scope."
+    },
+    {
+      id: "if-ar-6",
+      assertion: "Assertion (A): Using i++ in a loop condition checks the incremented value.",
+      reason: "Reason (R): Post-increment operator increments after using the current value.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 3,
+      explanation: "A is false — i++ uses the current value for comparison, then increments. R is true."
+    },
+    {
+      id: "if-ar-7",
+      assertion: "Assertion (A): A for loop can always be converted to a while loop.",
+      reason: "Reason (R): Both for and while loops are entry-controlled loops.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 1,
+      explanation: "Both are true. Any for loop can be rewritten as a while loop. However, the reason is not the correct explanation."
+    },
+    {
+      id: "if-ar-8",
+      assertion: "Assertion (A): The condition in a loop is evaluated n+1 times for n iterations.",
+      reason: "Reason (R): The condition is checked before each iteration and once more when it becomes false.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. For n iterations, the condition is checked n times + 1 final check = n+1 times."
+    },
+    {
+      id: "if-ar-9",
+      assertion: "Assertion (A): A do-while loop always executes at least once.",
+      reason: "Reason (R): The do-while loop checks the condition after executing the loop body.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "Both are true. The do-while loop is exit-controlled — the body executes first, then the condition is checked."
+    },
+    {
+      id: "if-ar-10",
+      assertion: "Assertion (A): A while loop with condition true runs infinitely.",
+      reason: "Reason (R): The condition true is always true and never becomes false.",
+      options: [
+        "Both A and R are true and R is the correct explanation of A",
+        "Both A and R are true but R is NOT the correct explanation of A",
+        "A is true but R is false",
+        "A is false but R is true"
+      ],
+      answer: 0,
+      explanation: "while(true) creates an infinite loop because the condition is always true and never changes."
+    },
+  ],
+
+  // ========== 22. DEBUG THE CODE ==========
+  debugTheCode: [
+    
+  {
+    "id": "if-dc-1",
+    "question": "Find and fix the bug:\nint x = 5;\nif (x = 10)\n    System.out.println(\"Equal\");",
+    "bug": "Using = instead of ==. Causes compilation error.",
+    "debuggedCode": "int x = 5;\nif (x == 10)\n    System.out.println(\"Equal\");",
+    "explanation": "Use == for comparison. = is for assignment."
+  },
+  {
+    "id": "if-dc-2",
+    "question": "Find and fix the bug:\nint x = 5;\nif (x > 3); {\n    System.out.println(\"x is greater than 3\");\n}",
+    "bug": "Semicolon after if creates empty body. Block always executes.",
+    "debuggedCode": "int x = 5;\nif (x > 3) {\n    System.out.println(\"x is greater than 3\");\n}",
+    "explanation": "Remove the semicolon after the if condition."
+  },
+  {
+    "id": "if-dc-3",
+    "question": "Find and fix the bug:\nint a = 10, b = 20;\nif (a > b)\n    System.out.println(\"a is greater\");\n    System.out.println(\"b is smaller\");",
+    "bug": "Missing braces. Second println always runs.",
+    "debuggedCode": "int a = 10, b = 20;\nif (a > b) {\n    System.out.println(\"a is greater\");\n    System.out.println(\"b is smaller\");\n}",
+    "explanation": "Without braces, only the first statement is conditional."
+  },
+  {
+    "id": "if-dc-4",
+    "question": "Find and fix the bug:\nint marks = 75;\nif (marks >= 40)\n    System.out.println(\"Pass\");\nelse\n    System.out.println(\"Fail\");\n    System.out.println(\"Result declared\");",
+    "bug": "No bug. Code is correct.",
+    "debuggedCode": "int marks = 75;\nif (marks >= 40)\n    System.out.println(\"Pass\");\nelse\n    System.out.println(\"Fail\");\n    System.out.println(\"Result declared\");",
+    "explanation": "The last println is outside if-else and always runs. This is correct."
+  },
+  {
+    "id": "if-dc-5",
+    "question": "Find and fix the bug:\nint age = 15;\nif (age >= 18);\n    System.out.println(\"Adult\");\nelse\n    System.out.println(\"Minor\");",
+    "bug": "Semicolon after if causes compilation error because else is dangling.",
+    "debuggedCode": "int age = 15;\nif (age >= 18)\n    System.out.println(\"Adult\");\nelse\n    System.out.println(\"Minor\");",
+    "explanation": "Remove the semicolon. The semicolon ends the if, leaving else without a matching if."
+  },
+  {
+    "id": "if-dc-6",
+    "question": "Find and fix the bug:\nint num = 7;\nif (num % 2 = 0)\n    System.out.println(\"Even\");",
+    "bug": "Using = instead of ==. Causes compilation error.",
+    "debuggedCode": "int num = 7;\nif (num % 2 == 0)\n    System.out.println(\"Even\");",
+    "explanation": "Use == for comparison. = is for assignment."
+  },
+  {
+    "id": "if-dc-7",
+    "question": "Find and fix the bug:\nboolean flag = true;\nif (flag == true)\n    System.out.println(\"True\");\nelse\n    System.out.println(\"False\");",
+    "bug": "No bug, but code can be cleaner.",
+    "debuggedCode": "boolean flag = true;\nif (flag)\n    System.out.println(\"True\");\nelse\n    System.out.println(\"False\");",
+    "explanation": "if(flag) is cleaner than if(flag == true). Both work correctly."
+  },
+  {
+    "id": "if-dc-8",
+    "question": "Find and fix the bug:\nint x = 10;\nif (x > 5) {\n    int y = 20;\n}\nSystem.out.println(y);",
+    "bug": "y is declared inside the if block and is not accessible outside.",
+    "debuggedCode": "int x = 10;\nint y = 0;\nif (x > 5) {\n    y = 20;\n}\nSystem.out.println(y);",
+    "explanation": "Variables declared inside a block are scoped to that block."
+  },
+  {
+    "id": "if-dc-9",
+    "question": "Find and fix the bug:\nint a = 5, b = 5;\nif (a = b)\n    System.out.println(\"Equal\");",
+    "bug": "Using = instead of ==. Causes compilation error.",
+    "debuggedCode": "int a = 5, b = 5;\nif (a == b)\n    System.out.println(\"Equal\");",
+    "explanation": "Use == for comparison. = is for assignment."
+  },
+  {
+    "id": "if-dc-10",
+    "question": "Find and fix the bug:\nint score = 85;\nif (score >= 90)\n    System.out.println(\"A\");\nif (score >= 80)\n    System.out.println(\"B\");\nif (score >= 70)\n    System.out.println(\"C\");",
+    "bug": "No bug, but using else-if would be more efficient.",
+    "debuggedCode": "int score = 85;\nif (score >= 90)\n    System.out.println(\"A\");\nelse if (score >= 80)\n    System.out.println(\"B\");\nelse if (score >= 70)\n    System.out.println(\"C\");",
+    "explanation": "Multiple ifs check all conditions. Else-if stops at first match."
+  }
+
+  ]
+
+  // ========== 23. CASE STUDY QUESTIONS ==========
+  caseStudyQuestions: [
+    {
+      id: "if-cs-1",
+      title: "Student Marks Analysis",
+      scenario: "A teacher enters marks for multiple students until -1 is entered. The program calculates class average, highest, lowest, and pass count (marks >= 40).",
+      questions: [
+        {
+          id: "if-cs-1-q1",
+          question: "Which loop is most suitable for reading marks until -1?",
+          options: ["for loop", "while loop", "do-while loop", "Any loop works"],
+          answer: 1,
+          explanation: "A while loop is best because the number of iterations is unknown."
+        },
+        {
+          id: "if-cs-1-q2",
+          question: "What should be the loop condition?",
+          options: ["while (marks > 0)", "while (marks != -1)", "while (marks >= 0)", "while (marks == -1)"],
+          answer: 1,
+          explanation: "The loop continues while marks is NOT equal to -1 (the sentinel value)."
+        },
+        {
+          id: "if-cs-1-q3",
+          question: "If marks are: 45, 78, 32, 90, 56, -1, how many passed?",
+          options: ["2", "3", "4", "5"],
+          answer: 2,
+          explanation: "Students with marks >= 40: 45, 78, 90, 56 = 4 students passed."
+        },
+      ]
+    },
+    {
+      id: "if-cs-2",
+      title: "ATM Withdrawal System",
+      scenario: "An ATM allows withdrawals in multiples of 100. The user enters amount. ATM validates (multiple of 100, positive, not exceeding balance). Multiple transactions until exit.",
+      questions: [
+        {
+          id: "if-cs-2-q1",
+          question: "What loop structure is best for the main menu?",
+          options: ["for loop with fixed count", "while loop with sentinel", "nested for loop", "for-each loop"],
+          answer: 1,
+          explanation: "A while loop with a sentinel (exit option) is best for menu-driven programs."
+        },
+        {
+          id: "if-cs-2-q2",
+          question: "Which condition validates multiple of 100?",
+          options: ["amount % 100 == 0", "amount / 100 == 0", "amount * 100 == 0", "amount - 100 == 0"],
+          answer: 0,
+          explanation: "amount % 100 == 0 checks if remainder is 0, meaning it is a multiple of 100."
+        },
+        {
+          id: "if-cs-2-q3",
+          question: "If balance is 5000 and user withdraws 1500, new balance?",
+          options: ["3500", "1500", "5000", "6500"],
+          answer: 0,
+          explanation: "New balance = 5000 - 1500 = 3500."
+        },
+      ]
+    },
+    {
+      id: "if-cs-3",
+      title: "Pattern Printing",
+      scenario: "A student prints patterns using nested loops. The program asks for pattern type and size.",
+      questions: [
+        {
+          id: "if-cs-3-q1",
+          question: "For a right-angled triangle of size 5, total stars?",
+          options: ["5", "10", "15", "25"],
+          answer: 2,
+          explanation: "Sum of 1+2+3+4+5 = 15 stars."
+        },
+        {
+          id: "if-cs-3-q2",
+          question: "In nested loops for a square, outer loop controls:",
+          options: ["Columns", "Rows", "Both", "Pattern type"],
+          answer: 1,
+          explanation: "The outer loop controls rows, inner loop controls columns."
+        },
+        {
+          id: "if-cs-3-q3",
+          question: "For a hollow square of size 5, boundary stars?",
+          options: ["16", "20", "25", "12"],
+          answer: 0,
+          explanation: "Perimeter = 4*(5-1) = 16 stars. Corners counted once."
+        },
+      ]
+    },
+  ],
+
+  // ========== 24. MIXED PRACTICE SETS ==========
+  mixedPracticeSets: [
+    {
+      id: "if-mps-1",
+      title: "Practice Set 1: If statement Fundamentals",
+      questions: [
+        {
+          type: "mcq",
+          id: "if-mps-1-q1",
+          question: "What is the output if the loop condition is false initially?",
+          options: ["1 iteration", "0 iterations", "Infinite loop", "Compilation error"],
+          answer: 1
+        },
+        {
+          type: "fillInTheBlank",
+          id: "if-mps-1-q2",
+          question: "An entry-controlled loop checks the condition _____ each iteration.",
+          answer: "before"
+        },
+        {
+          type: "output",
+          id: "if-mps-1-q3",
+          question: "int i = 1;\nwhile (i <= 3) {\n    System.out.print(i + \" \");\n    i++;\n}",
+          answer: "1 2 3"
+        },
+        {
+          type: "trueFalse",
+          id: "if-mps-1-q4",
+          question: "A while loop can be converted to a for loop.",
+          answer: true
+        },
+        {
+          type: "shortAnswer",
+          id: "if-mps-1-q5",
+          question: "What is the difference between break and continue?",
+          answer: "break exits the loop completely. continue skips the current iteration."
+        },
+      ]
+    },
+    {
+      id: "if-mps-2",
+      title: "Practice Set 2: If statement Applications",
+      questions: [
+        {
+          type: "mcq",
+          id: "if-mps-2-q1",
+          question: "Which loop is best for menu-driven programs?",
+          options: ["for", "while", "do-while", "for-each"],
+          answer: 1
+        },
+        {
+          type: "output",
+          id: "if-mps-2-q2",
+          question: "int i = 5;\nwhile (i >= 1) {\n    System.out.print(i--);\n}",
+          answer: "54321"
+        },
+        {
+          type: "errorFinding",
+          id: "if-mps-2-q3",
+          question: "int i = 1;\nwhile (i <= 5);\n    System.out.println(i);",
+          error: "Semicolon after while creates empty loop.",
+          corrected: "int i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}"
+        },
+        {
+          type: "programming",
+          id: "if-mps-2-q4",
+          question: "Write a program to calculate sum of first 10 natural numbers.",
+          solution: "int sum = 0, i = 1;\nwhile (i <= 10) {\n    sum = sum + i;\n    i++;\n}\nSystem.out.println(sum);"
+        },
+        {
+          type: "assertionReason",
+          id: "if-mps-2-q5",
+          assertion: "A while loop may execute zero times.",
+          reason: "The condition is checked before entering the loop body.",
+          answer: 0
+        },
+      ]
+    },
+  ],
+
+  // ========== 25. RAPID REVISION QUESTIONS ==========
+  rapidRevisionQuestions: [
+    { id: "if-rr-1", question: "What type of loop is a while loop?", answer: "Entry-controlled loop" },
+    { id: "if-rr-2", question: "How many times does a while loop execute if condition is false initially?", answer: "0 times" },
+    { id: "if-rr-3", question: "Where is the loop variable initialized in a while loop?", answer: "Before the while loop" },
+    { id: "if-rr-4", question: "Where is the loop variable updated in a while loop?", answer: "Inside the while loop body" },
+    { id: "if-rr-5", question: "What happens if you forget to update the loop variable?", answer: "Infinite loop" },
+    { id: "if-rr-6", question: "Which loop is best when the number of iterations is unknown?", answer: "While loop" },
+    { id: "if-rr-7", question: "Which loop is best when the number of iterations is known?", answer: "For loop" },
+    { id: "if-rr-8", question: "What does while(true) create?", answer: "An infinite loop" },
+    { id: "if-rr-9", question: "Which statement exits a loop immediately?", answer: "break" },
+    { id: "if-rr-10", question: "Which statement skips the current iteration?", answer: "continue" },
+    { id: "if-rr-11", question: "Can a while loop be nested?", answer: "Yes" },
+    { id: "if-rr-12", question: "Can a while loop be converted to a for loop?", answer: "Yes" },
+    { id: "if-rr-13", question: "What is a sentinel value?", answer: "A special value that signals end of input" },
+    { id: "if-rr-14", question: "What is the scope of a variable declared inside a loop?", answer: "Only within the loop" },
+    { id: "if-rr-15", question: "What is the difference between while and do-while?", answer: "While checks before (may not execute), do-while checks after (always executes once)" },
+    { id: "if-rr-16", question: "What is a nested loop?", answer: "A loop inside another loop" },
+    { id: "if-rr-17", question: "What is the time complexity of a simple loop running n times?", answer: "O(n)" },
+    { id: "if-rr-18", question: "What is the output of: int i=1; while(i<=3) { System.out.print(i); i++; }", answer: "123" },
+    { id: "if-rr-19", question: "What is the output of: int i=5; while(i>=1) { System.out.print(i--); }", answer: "54321" },
+    { id: "if-rr-20", question: "What is the purpose of the break statement?", answer: "To exit the loop immediately" },
+  ],
+
 };
 
 export default chapter01;

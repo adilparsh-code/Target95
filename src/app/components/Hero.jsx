@@ -6,8 +6,8 @@ import Container from "./ui/Container";
 
 const boards = [
   {
-    id: "cisce",
-    title: "CISCE",
+    id: "icse",
+    title: "ICSE",
     subtitle: "ICSE / ISC",
     description: "Comprehensive study materials, practice questions, and AI-powered learning for ICSE Class 9/10 and ISC Class 11/12 Computer Science.",
     icon: "🎓",
@@ -18,17 +18,30 @@ const boards = [
   {
     id: "cbse",
     title: "CBSE",
-    subtitle: "Coming Soon",
-    description: "CBSE Computer Science study materials, practice questions, and mock tests are being prepared. Stay tuned for the launch!",
-    icon: "📅",
-    color: "from-gray-400 to-gray-500",
-    bgColor: "bg-gray-50",
-    borderColor: "border-gray-200",
-    comingSoon: true,
+    subtitle: "Central Board of Secondary Education",
+    description: "CBSE Computer Science study materials, practice questions, and mock tests.",
+    icon: "📚",
+    color: "from-blue-600 to-indigo-700",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200",
   },
 ];
 
-export default function Hero({ onExplore }) {
+const subjects = [
+  {
+    id: "java-programming",
+    title: "Java Programming",
+    subtitle: "Core Java Fundamentals",
+    description: "Master Java programming with comprehensive chapter-wise learning, practice questions, and AI-powered explanations.",
+    icon: "☕",
+    color: "from-orange-600 to-red-700",
+    bgColor: "bg-orange-50",
+    borderColor: "border-orange-200",
+    href: "/study/introduction",
+  }
+];
+
+export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, selectedBoard }) {
   return (
     <section className="relative flex flex-col items-center overflow-hidden px-4 py-12 sm:py-16 md:py-24 lg:py-32">
       {/* Background decoration */}
@@ -56,14 +69,55 @@ export default function Hero({ onExplore }) {
           </p>
         </div>
 
-        {/* Board Selection Cards */}
-        <div className="relative mb-10 sm:mb-14 lg:mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-            {boards.map((board) => (
-              <BoardCard key={board.id} board={board} onExplore={onExplore} />
-            ))}
+        {/* Back Button */}
+        {showSubjects && (
+          <div className="relative mb-8 max-w-4xl mx-auto">
+            <button 
+              onClick={onBackToBoards}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium"
+            >
+              <span>←</span>
+              <span>Back to Boards</span>
+            </button>
           </div>
-        </div>
+        )}
+
+        {/* Board Selection Cards */}
+        {!showSubjects && (
+          <div className="relative mb-10 sm:mb-14 lg:mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+              {boards.map((board) => (
+                <BoardCard key={board.id} board={board} onBoardSelect={onBoardSelect} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Subject Selection Section */}
+        {showSubjects && (
+          <div className="relative mb-10 sm:mb-14 lg:mb-16">
+            <div className="text-center mb-10 md:mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100/80 rounded-full text-blue-700 text-sm font-semibold border border-blue-200 shadow-sm mb-4">
+                <span>📚</span>
+                <span>Subjects for {selectedBoard}</span>
+              </div>
+              <h2
+                id="subjects-heading"
+                className="text-3xl sm:text-4xl font-bold text-gray-900"
+              >
+                Explore Subjects
+              </h2>
+              <p className="mt-3 text-gray-600 max-w-xl mx-auto">
+                Start learning chapter-wise with AI-powered explanations and practice questions.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+              {subjects.map((subject, index) => (
+                <SubjectCard key={subject.id} subject={subject} index={index} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Quick Action Buttons */}
         <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -83,17 +137,17 @@ export default function Hero({ onExplore }) {
   );
 }
 
-function BoardCard({ board, onExplore }) {
+function BoardCard({ board, onBoardSelect }) {
   const handleClick = () => {
-    if (board.id === "cisce" && onExplore) {
-      onExplore();
+    if (onBoardSelect) {
+      onBoardSelect(board.title);
     }
   };
 
   const handleKeyDown = (e) => {
-    if (board.id === "cisce" && onExplore && (e.key === "Enter" || e.key === " ")) {
+    if (onBoardSelect && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
-      onExplore();
+      onBoardSelect(board.title);
     }
   };
 
@@ -101,11 +155,9 @@ function BoardCard({ board, onExplore }) {
     <div
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      role={board.id === "cisce" ? "button" : undefined}
-      tabIndex={board.id === "cisce" ? 0 : undefined}
-      className={`group relative rounded-2xl sm:rounded-3xl border-2 ${board.borderColor} ${board.bgColor} p-6 sm:p-8 lg:p-10 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:-translate-y-2 overflow-hidden ${
-        board.id === "cisce" ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" : ""
-      }`}
+      role="button"
+      tabIndex={0}
+      className={`group relative rounded-2xl sm:rounded-3xl border-2 ${board.borderColor} ${board.bgColor} p-6 sm:p-8 lg:p-10 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:-translate-y-2 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
     >
       {/* Gradient overlay on hover */}
       <div
@@ -134,16 +186,10 @@ function BoardCard({ board, onExplore }) {
         </p>
 
         {/* Action Button */}
-        {board.comingSoon ? (
-          <div className="mt-auto inline-flex items-center justify-center px-6 py-3 bg-gray-200 text-gray-500 rounded-xl font-semibold text-sm cursor-not-allowed">
-            Coming Soon
-          </div>
-        ) : (
-          <div className="mt-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-sm sm:text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">
-            Explore {board.title}
-            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </div>
-        )}
+        <div className="mt-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-sm sm:text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">
+          Explore {board.title}
+          <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </div>
       </div>
     </div>
   );

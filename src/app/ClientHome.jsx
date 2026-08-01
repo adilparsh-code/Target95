@@ -16,12 +16,23 @@ import Pricing from "./components/Pricing";
 import Newsletter from "./components/Newsletter";
 
 export default function ClientHome() {
+  const [selectedBoard, setSelectedBoard] = useState(null);
   const [showSubjects, setShowSubjects] = useState(false);
+
+  const handleBoardSelect = (board) => {
+    setSelectedBoard(board);
+    setShowSubjects(true);
+  };
+
+  const handleBackToBoards = () => {
+    setSelectedBoard(null);
+    setShowSubjects(false);
+  };
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      <Hero onExplore={() => setShowSubjects(true)} />
+      <Hero onBoardSelect={handleBoardSelect} onBackToBoards={handleBackToBoards} showSubjects={showSubjects} selectedBoard={selectedBoard} />
       <Subjects isVisible={showSubjects} />
       <Stats />
       <WhyTarget95 />

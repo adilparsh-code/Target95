@@ -667,6 +667,13 @@ export function getStudyChapters() {
       mistakes: ["Skipping the basics", "Avoiding repeated revision"],
       tips: ["Break the chapter into small study sessions"],
       summary: "Review the chapter steadily and test yourself with practice questions.",
+      syntax: [],
+      importantExamPoints: [],
+      commonMistakes: [],
+      quickRevision: [],
+      faqs: [],
+      relatedTopics: [],
+      learningObjectives: [],
     };
 
     return {

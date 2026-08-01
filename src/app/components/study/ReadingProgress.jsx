@@ -40,10 +40,10 @@ export default function ReadingProgress({ slug, sections = [] }) {
     const savedPercent = loadScrollProgress(slug);
     setProgress(savedPercent);
 
-    const handleScroll = () => {
-      const container = document.getElementById("study-chapter-content");
-      if (!container) return;
+    const container = document.getElementById("study-chapter-content");
+    if (!container) return;
 
+    const handleScroll = () => {
       const scrollTop = container.scrollTop;
       const scrollHeight = container.scrollHeight - container.clientHeight;
       const percent = scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
@@ -52,10 +52,10 @@ export default function ReadingProgress({ slug, sections = [] }) {
       saveScrollProgress(slug, percent);
     };
 
-    container?.addEventListener?.("scroll", handleScroll);
+    container.addEventListener("scroll", handleScroll);
 
     return () => {
-      container?.removeEventListener?.("scroll", handleScroll);
+      container.removeEventListener("scroll", handleScroll);
     };
   }, [slug, loadScrollProgress, saveScrollProgress]);
 

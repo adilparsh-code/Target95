@@ -147,7 +147,7 @@ export default function StudyChapter({ slug }) {
     const parts = text.split(regex);
     return parts.map((part, i) =>
       regex.test(part)
-        ? `<mark class="bg-yellow-200 rounded px-0.5">${part}</mark>`
+        ? `<mark key={i} class="bg-yellow-200 rounded px-0.5">${part}</mark>`
         : part
     ).join("");
   };
@@ -244,7 +244,7 @@ export default function StudyChapter({ slug }) {
 
       {/* Learning Objectives */}
       {studyData.learningObjectives && studyData.learningObjectives.length > 0 && (
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" id="section-learning-objectives-content">
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" id="section-learning-objectives-list">
           <CollapsibleSection title="Learning Objectives" icon={AcademicCapIcon}>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-700">
               {studyData.learningObjectives.map((objective, idx) => (

@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const menuItems = [
   { label: "Dashboard", href: "/admin", icon: "📊" },
@@ -21,6 +23,7 @@ const menuItems = [
 
 export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   return (
     <>
@@ -90,6 +93,7 @@ export default function Sidebar({ isOpen, onClose }) {
 
           {/* Logout */}
           <button
+            onClick={logout}
             className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-destructive hover:bg-destructive/10 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-destructive focus:ring-offset-2"
             aria-label="Logout from admin panel"
           >

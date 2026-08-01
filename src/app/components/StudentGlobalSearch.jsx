@@ -104,7 +104,7 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
           id: `question-${q.slug || idx}`,
           title: q.title,
           description: `${q.chapter} · ${q.difficulty} · ${q.type}`,
-          href: `/Java/${q.chapter.toLowerCase().replace(/\s+/g, "-")}`,
+          href: `/java/${q.chapter.toLowerCase().replace(/\s+/g, "-")}`,
           type: "question",
           chapter: q.chapter,
           difficulty: q.difficulty,

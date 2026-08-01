@@ -1,7 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import StudyHome from "../components/study/StudyHome";
-import ProtectedRoute from "../components/ProtectedRoute";
 
 export const metadata = {
   title: "Study Center | Target95+",
@@ -10,13 +9,11 @@ export const metadata = {
 
 export default function StudyPage() {
   return (
-    <ProtectedRoute>
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-        <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
-        <StudyHome />
-        <Footer />
-      </main>
-    </ProtectedRoute>
+    <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <Navbar />
+      <div className="h-20 sm:h-24 lg:h-28"></div>
+      <StudyHome />
+      <Footer />
+    </main>
   );
 }

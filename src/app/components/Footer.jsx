@@ -1,5 +1,3 @@
-
-
 export default function Footer() {
   return (
     <footer className="relative bg-black/80 backdrop-blur-sm overflow-hidden text-white">

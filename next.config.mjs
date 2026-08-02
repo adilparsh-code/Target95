@@ -3,6 +3,14 @@ const nextConfig = {
   reactCompiler: true,
   output: 'standalone',
   cacheComponents: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
   async headers() {
     return [
       {

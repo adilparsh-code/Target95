@@ -4,6 +4,11 @@ import Footer from "../components/Footer";
 import Container from "../components/ui/Container";
 import JavaChapterCatalog from "../components/JavaChapterCatalog";
 
+export const metadata = {
+  title: "Java Practice | Target95+",
+  description: "Practice ICSE and ISC Java programming chapters with structured questions and guided preparation.",
+};
+
 export default function JavaPage() {
   const subject = getSubjectContent("java");
 

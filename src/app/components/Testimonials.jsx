@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import Container from "./ui/Container";
 
@@ -79,9 +80,12 @@ export default function Testimonials() {
                         "{testimonial.quote}"
                       </p>
                       <div className="flex items-center justify-center gap-4">
-                        <img 
+                        <Image
                           src={testimonial.image} 
                           alt={testimonial.name}
+                          width={64}
+                          height={64}
+                          sizes="64px"
                           className="w-16 h-16 rounded-full object-cover border-4 border-blue-100"
                         />
                         <div className="text-left">

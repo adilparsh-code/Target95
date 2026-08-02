@@ -14,6 +14,7 @@ import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import Pricing from "./components/Pricing";
 import Newsletter from "./components/Newsletter";
+import ErrorBoundary from "./components/ui/ErrorBoundary";
 
 export default function ClientHome() {
   const [selectedBoard, setSelectedBoard] = useState(null);
@@ -32,17 +33,19 @@ export default function ClientHome() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      <Hero onBoardSelect={handleBoardSelect} onBackToBoards={handleBackToBoards} showSubjects={showSubjects} selectedBoard={selectedBoard} />
-      <Subjects isVisible={showSubjects} />
-      <Stats />
-      <WhyTarget95 />
-      <AIWorkflow />
-      <BoardSupport />
-      <Features />
-      <Testimonials />
-      <FAQ />
-      <Pricing />
-      <Newsletter />
+      <ErrorBoundary>
+        <Hero onBoardSelect={handleBoardSelect} onBackToBoards={handleBackToBoards} showSubjects={showSubjects} selectedBoard={selectedBoard} />
+        <Subjects isVisible={showSubjects} />
+        <Stats />
+        <WhyTarget95 />
+        <AIWorkflow />
+        <BoardSupport />
+        <Features />
+        <Testimonials />
+        <FAQ />
+        <Pricing />
+        <Newsletter />
+      </ErrorBoundary>
       <Footer />
     </main>
   );

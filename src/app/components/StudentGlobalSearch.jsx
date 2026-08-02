@@ -23,6 +23,7 @@ const typeColors = {
 
 export default function StudentGlobalSearch({ isOpen, onClose }) {
   const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [results, setResults] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef(null);
@@ -35,6 +36,7 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
     }
     if (!isOpen) {
       setQuery("");
+      setDebouncedQuery("");
       setResults([]);
       setSelectedIndex(-1);
     }
@@ -42,11 +44,24 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
 
   useEffect(() => {
     if (!query.trim()) {
+      setDebouncedQuery("");
+      return undefined;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 300);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [query]);
+
+  useEffect(() => {
+    if (!debouncedQuery.trim()) {
       setResults([]);
       return;
     }
 
-    const term = query.toLowerCase();
+    const term = debouncedQuery.toLowerCase();
     const matched = [];
 
     chapters.forEach((chapter) => {
@@ -114,7 +129,7 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
 
     setResults(matched.slice(0, 12));
     setSelectedIndex(-1);
-  }, [query, chapters]);
+  }, [debouncedQuery, chapters]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {

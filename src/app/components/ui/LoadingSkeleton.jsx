@@ -162,4 +162,98 @@ export function TableSkeleton({ rows = 5, columns = 6 }) {
   );
 }
 
+/**
+ * Chapter Card skeleton - for chapter catalog cards
+ */
+export function ChapterCardSkeleton({ count = 6 }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Loading chapters">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="bg-card rounded-2xl border border-border overflow-hidden shadow-sm animate-pulse">
+          {/* Image placeholder */}
+          <div className="h-40 bg-muted" />
+          <div className="p-5">
+            <SkeletonBlock width="70%" height="1.25rem" className="mb-3" />
+            <SkeletonBlock width="100%" height="0.875rem" className="mb-2" />
+            <SkeletonBlock width="85%" height="0.875rem" className="mb-4" />
+            <div className="flex items-center justify-between">
+              <SkeletonBlock width="60px" height="1.5rem" className="rounded-full" />
+              <SkeletonBlock width="100px" height="0.75rem" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Question Card skeleton - for question list/grid cards
+ */
+export function QuestionCardSkeleton({ count = 4 }) {
+  return (
+    <div className="space-y-4" aria-label="Loading questions">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="bg-card rounded-xl border border-border p-5 shadow-sm animate-pulse">
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <SkeletonBlock width="40px" height="40px" className="rounded-lg" />
+              <div>
+                <SkeletonBlock width="250px" height="1rem" className="mb-2" />
+                <SkeletonBlock width="120px" height="0.75rem" />
+              </div>
+            </div>
+            <SkeletonBlock width="60px" height="1.5rem" className="rounded-full" />
+          </div>
+          <div className="grid grid-cols-2 gap-3 mt-4">
+            {[1,2,3,4].map((j) => (
+              <SkeletonBlock key={j} width="100%" height="2.5rem" className="rounded-lg" />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Dashboard Cards skeleton - for main dashboard overview cards
+ */
+export function DashboardCardsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Loading dashboard">
+      {[1,2,3,4].map((i) => (
+        <div key={i} className="bg-gradient-to-br from-card to-card/80 rounded-2xl border border-border p-6 shadow-sm animate-pulse">
+          <div className="flex items-center justify-between mb-4">
+            <SkeletonBlock width="50px" height="50px" className="rounded-xl" />
+            <SkeletonBlock width="40px" height="20px" className="rounded-full" />
+          </div>
+          <SkeletonBlock width="70%" height="1.75rem" className="mb-2" />
+          <SkeletonBlock width="85%" height="0.875rem" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Search Results skeleton - for search result list items
+ */
+export function SearchResultsSkeleton({ count = 5 }) {
+  return (
+    <div className="space-y-3" aria-label="Loading search results">
+      {Array.from({ length: count }).map((_, i) => (
+        <div key={i} className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card animate-pulse">
+          <SkeletonBlock width="48px" height="48px" className="rounded-xl" />
+          <div className="flex-1">
+            <SkeletonBlock width="60%" height="1rem" className="mb-2" />
+            <SkeletonBlock width="40%" height="0.75rem" />
+          </div>
+          <SkeletonBlock width="80px" height="2rem" className="rounded-lg" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export { SkeletonLine, SkeletonBlock, TableRowSkeleton };

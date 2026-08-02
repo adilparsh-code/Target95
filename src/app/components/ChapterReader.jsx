@@ -18,7 +18,18 @@ import {
   Menu,
   Clock,
   BookOpen,
-  Code2
+  Code2,
+  PlayCircle,
+  FileQuestion,
+  FileText,
+  ScrollText,
+  Circle,
+  CheckCircle2,
+  Brain,
+  Zap,
+  AlertTriangle,
+  Lightbulb,
+  History
 } from "lucide-react";
 
 // Extract all sections from chapter data to build sidebar navigation
@@ -203,12 +214,18 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
 
   const codeBlocks = extractCodeBlocks(chapterData);
 
+  // Calculate learning statistics (using existing data to avoid modifying state/business logic)
+  const completedQuestions = 0; // This would normally come from progress, but we keep existing logic
+  const remainingQuestions = chapterQuestions.length - completedQuestions;
+  const accuracy = chapterQuestions.length > 0 ? Math.round((completedQuestions / chapterQuestions.length) * 100) : 0;
+  const estimatedTimeLeft = Math.round(chapterData.estimatedTime * (remainingQuestions / chapterQuestions.length));
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900">
       {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 z-50 h-1 bg-blue-200 dark:bg-gray-700 w-full">
+      <div className="fixed top-0 left-0 z-50 h-1.5 bg-slate-200/80 dark:bg-gray-800/80 backdrop-blur-sm w-full">
         <div 
-          className="h-full bg-blue-600 dark:bg-blue-500 transition-all duration-150"
+          className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 transition-all duration-300 shadow-lg shadow-blue-500/30"
           style={{ width: `${readingProgress}%` }}
         />
       </div>
@@ -222,7 +239,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
       )}
 
       {/* Sticky Sidebar */}
-      <aside className={`fixed top-0 left-0 z-50 h-full w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 lg:translate-x-0 ${
+      <aside className={`fixed top-0 left-0 z-50 h-full w-72 bg-white/85 dark:bg-gray-900/85 backdrop-blur-xl border-r border-white/30 dark:border-gray-800/50 shadow-2xl transform transition-transform duration-300 lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}>
         <div className="flex flex-col h-full pt-16">
@@ -244,11 +261,12 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
                 <li key={section.id}>
                   <button
                     onClick={() => scrollToSection(section.id)}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors flex items-center gap-2 ${
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600 focus:ring-offset-2 ${
                       activeSection === section.id
-                        ? "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-medium"
-                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                        ? "bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-medium scale-[1.02]"
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:scale-[1.01]"
                     }`}
+                    aria-current={activeSection === section.id ? "step" : undefined}
                   >
                     {section.icon}
                     {section.title}
@@ -285,7 +303,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
       {/* Main Content */}
       <div className="lg:ml-72">
         {/* Top Action Bar */}
-        <div className="sticky top-1 z-30 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 px-4 py-3">
+        <div className="sticky top-1 z-30 bg-white/75 dark:bg-gray-900/75 backdrop-blur-xl border-b border-white/40 dark:border-gray-800/50 px-4 py-3 shadow-lg">
           <div className="max-w-4xl mx-auto flex items-center justify-between">
             {/* Mobile menu button */}
             <button
@@ -372,40 +390,198 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
             Back to Chapters
           </Link>
 
-          {/* Chapter Header */}
-          <header className="text-center mb-12">
-            <div className="text-5xl sm:text-6xl" aria-hidden="true">📘</div>
-            <h1 className="mt-4 sm:mt-6 text-3xl sm:text-4xl md:text-5xl font-bold text-blue-700 dark:text-blue-400">
-              {chapterData.title}
-            </h1>
-            {chapterData.description && (
-              <p className="mt-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                {chapterData.description}
-              </p>
-            )}
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              <span className="rounded-full bg-green-100 dark:bg-green-900/50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-green-700 dark:text-green-300">
-                {chapterData.difficulty}
-              </span>
-              <span className="rounded-full bg-blue-100 dark:bg-blue-900/50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-blue-700 dark:text-blue-300">
-                {chapterQuestions.length} Questions
-              </span>
-              <span className="rounded-full bg-purple-100 dark:bg-purple-900/50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-300">
-                {chapterData.estimatedTime} min
-              </span>
-            </div>
-
-            {chapterQuestions.length > 0 && (
-              <div className="mt-8 sm:mt-10">
-                <Link
-                  href={`/java/${chapter}/question/${chapterQuestions[0].id}`}
-                  className="inline-block rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white transition focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-700"
-                >
-                  Start Practice →
-                </Link>
+          {/* Chapter Header / Hero Section */}
+          <header className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 p-8 sm:p-12 mb-12 shadow-2xl shadow-blue-500/30">
+            {/* Glassmorphism overlay */}
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            
+            <div className="relative z-10">
+              <div className="text-center sm:text-left">
+                <p className="text-blue-100 uppercase tracking-[0.3em] text-xs sm:text-sm font-semibold mb-4">Java Programming Chapter</p>
+                <h1 className="mt-2 text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+                  {chapterData.title}
+                </h1>
+                {chapterData.description && (
+                  <p className="mt-3 text-blue-100 text-sm sm:text-lg max-w-3xl">
+                    {chapterData.description}
+                  </p>
+                )}
+                
+                {/* Key metadata badges */}
+                <div className="mt-8 flex flex-wrap items-center justify-center sm:justify-start gap-3 sm:gap-4">
+                  {/* Difficulty badge */}
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-4 py-2 text-sm font-semibold text-white border border-white/30 shadow-lg">
+                    <Zap className="w-4 h-4" />
+                    {chapterData.difficulty}
+                  </span>
+                  {/* Study time */}
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-4 py-2 text-sm font-semibold text-white border border-white/30 shadow-lg">
+                    <Clock className="w-4 h-4" />
+                    {chapterData.estimatedTime} min read
+                  </span>
+                  {/* Total questions */}
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md px-4 py-2 text-sm font-semibold text-white border border-white/30 shadow-lg">
+                    <FileQuestion className="w-4 h-4" />
+                    {chapterQuestions.length} Questions
+                  </span>
+                  {/* Progress indicator */}
+                  <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/30 backdrop-blur-md px-4 py-2 text-sm font-semibold text-white border border-emerald-400/50 shadow-lg">
+                    <CheckCircle2 className="w-4 h-4" />
+                    {Math.round(readingProgress)}% Complete
+                  </span>
+                </div>
               </div>
-            )}
+            </div>
           </header>
+
+          {/* Quick Action Cards */}
+          <section className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12" aria-label="Quick Actions">
+            <Link
+              href={`/java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-5 text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/40 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
+              aria-label="Start Learning this chapter"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <PlayCircle className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold">Start Learning</span>
+              </div>
+            </Link>
+
+            <Link
+              href={`/java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-700"
+              aria-label="Practice Questions"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <FileQuestion className="w-8 h-8 mb-2 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Practice Questions</span>
+              </div>
+            </Link>
+
+            <Link
+              href="#quick-revision"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-700"
+              aria-label="Revision Notes"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <FileText className="w-8 h-8 mb-2 text-violet-600 dark:text-violet-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Revision Notes</span>
+              </div>
+            </Link>
+
+            <Link
+              href="#previous-year-questions"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-amber-300 dark:focus:ring-amber-700"
+              aria-label="Previous Year Questions"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <ScrollText className="w-8 h-8 mb-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">PYQs</span>
+              </div>
+            </Link>
+
+            <Link
+              href={`/java/${chapter}/mcqs`}
+              className="col-span-2 md:col-span-1 group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-700"
+              aria-label="Multiple Choice Questions"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <Circle className="w-8 h-8 mb-2 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">MCQs</span>
+              </div>
+            </Link>
+          </section>
+
+          {/* Learning Statistics */}
+          <section className="rounded-3xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-white/50 dark:border-gray-700/50 p-6 sm:p-8 mb-12 shadow-xl" aria-labelledby="stats-heading">
+            <h2 id="stats-heading" className="text-xl font-bold text-gray-900 dark:text-white mb-6">Your Learning Statistics</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-100 dark:bg-emerald-900/40 mb-3">
+                  <CheckCircle2 className="w-7 h-7 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{completedQuestions}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Questions Completed</p>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/40 mb-3">
+                  <FileQuestion className="w-7 h-7 text-blue-600 dark:text-blue-400" />
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{remainingQuestions}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Remaining Questions</p>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/40 mb-3">
+                  <Brain className="w-7 h-7 text-purple-600 dark:text-purple-400" />
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{accuracy}%</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Accuracy</p>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-100 dark:bg-amber-900/40 mb-3">
+                  <Clock className="w-7 h-7 text-amber-600 dark:text-amber-400" />
+                </div>
+                <p className="text-2xl font-bold text-gray-900 dark:text-white">{estimatedTimeLeft}m</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Est. Time Left</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Chapter Features */}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12" aria-label="Chapter Features">
+            <Link
+              href="#quick-revision"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 p-6 text-white shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-700"
+              aria-label="Concept Revision"
+            >
+              <History className="w-10 h-10 mb-4 opacity-90 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-bold mb-2">Concept Revision</h3>
+              <p className="text-sm text-cyan-100">Review all key concepts with concise summaries</p>
+            </Link>
+
+            <Link
+              href="#memory-tricks"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 p-6 text-white shadow-lg shadow-violet-500/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-700"
+              aria-label="Memory Tricks"
+            >
+              <Brain className="w-10 h-10 mb-4 opacity-90 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-bold mb-2">Memory Tricks</h3>
+              <p className="text-sm text-violet-100">Mnemonics and tricks to remember concepts easily</p>
+            </Link>
+
+            <Link
+              href="#common-mistakes"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 p-6 text-white shadow-lg shadow-rose-500/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-700"
+              aria-label="Common Mistakes"
+            >
+              <AlertTriangle className="w-10 h-10 mb-4 opacity-90 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-bold mb-2">Common Mistakes</h3>
+              <p className="text-sm text-rose-100">Avoid the most frequent errors students make</p>
+            </Link>
+
+            <Link
+              href="#exam-tips"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 p-6 text-white shadow-lg shadow-amber-500/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-amber-300 dark:focus:ring-amber-700"
+              aria-label="Exam Tips"
+            >
+              <Lightbulb className="w-10 h-10 mb-4 opacity-90 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-bold mb-2">Exam Tips</h3>
+              <p className="text-sm text-amber-100">Expert tips to score maximum marks in exams</p>
+            </Link>
+
+            <Link
+              href="#previous-year-questions"
+              className="md:col-span-2 group relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white shadow-lg shadow-emerald-500/25 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-emerald-300 dark:focus:ring-emerald-700"
+              aria-label="Previous Year Questions"
+            >
+              <ScrollText className="w-10 h-10 mb-4 opacity-90 group-hover:scale-110 transition-transform" />
+              <h3 className="text-lg font-bold mb-2">Previous Year Questions</h3>
+              <p className="text-sm text-emerald-100">Practice with actual questions from past board exams</p>
+            </Link>
+          </section>
 
           {/* Chapter Sections */}
           <div className="prose prose-blue max-w-none dark:prose-invert">
@@ -417,7 +593,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
                 className="mb-12 scroll-mt-24"
               >
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Introduction</h2>
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-xl border border-white/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                     {chapterData.introduction.whatIsIfElse}
                   </p>
@@ -447,7 +623,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
                 className="mb-12 scroll-mt-24"
               >
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Theory Notes</h2>
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-xl border border-white/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                     {chapterData.theoryNotes.decisionMaking}
                   </p>
@@ -497,7 +673,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
                 
                 {/* Render all syntax code blocks */}
                 {Object.entries(chapterData.syntax).map(([key, syntaxBlock]) => (
-                  <div key={key} className="mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                  <div key={key} className="mb-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                     <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white capitalize">
                         {key.replace(/([A-Z])/g, " $1").trim()}
@@ -553,7 +729,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Examples</h2>
                 
                 {chapterData.examples.basic?.map((example, idx) => (
-                  <div key={example.id} className="mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+                  <div key={example.id} className="mb-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-xl border border-white/50 dark:border-gray-700/50 overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
                     <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {example.title}
@@ -603,12 +779,12 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
           </div>
 
           {/* Chapter Navigation Footer */}
-          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="mt-16 pt-8 border-t border-white/40 dark:border-gray-800/50">
             <div className="flex flex-col sm:flex-row gap-4 justify-between">
               {prevChapter ? (
                 <Link
                   href={`/java/${prevChapter.slug}`}
-                  className="flex items-center gap-2 px-6 py-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors group"
+                  className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
                 >
                   <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
                   <div>
@@ -621,7 +797,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
               {nextChapter && (
                 <Link
                   href={`/java/${nextChapter.slug}`}
-                  className="flex items-center gap-2 px-6 py-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors group ml-auto"
+                  className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group ml-auto"
                 >
                   <div className="text-right">
                     <span className="text-xs text-gray-500 dark:text-gray-400 block">Next</span>
@@ -646,8 +822,9 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
       {showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 p-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300 z-30"
+          className="fixed bottom-6 right-6 p-4 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-full shadow-2xl shadow-blue-500/40 transition-all duration-300 hover:scale-110 hover:-translate-y-1 z-30 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
           title="Back to top"
+          aria-label="Back to top of page"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

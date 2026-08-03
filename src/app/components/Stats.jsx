@@ -18,7 +18,7 @@ const stats = [
   {
     end: 12,
     suffix: "",
-    title: "Subjects",
+    title: "Topics",
     icon: "📚",
   },
   {

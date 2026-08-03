@@ -1,11 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-const AuthProvider = dynamic(
-  () => import("@/context/AuthContext").then((mod) => mod.AuthProvider),
-  { ssr: false }
-);
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function AuthProviderWrapper({ children }) {
   return <AuthProvider>{children}</AuthProvider>;

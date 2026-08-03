@@ -1,0 +1,117 @@
+/**
+ * CBSE Subjects Configuration
+ * Defines all CBSE Computer Science/IT subjects across classes
+ */
+
+export const cbseSubjects = [
+  {
+    id: "computer-applications-10",
+    classId: "cbse-class-10",
+    code: "165",
+    name: "Computer Applications",
+    alternativeCode: "402",
+    alternativeName: "Information Technology",
+    icon: "💻",
+    description: "Comprehensive study of computer applications including office tools, web technologies, and programming basics.",
+    color: "from-blue-500 to-cyan-600",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200",
+    totalChapters: 20,
+    totalUnits: 5,
+    totalPracticals: 15,
+    totalMarks: 100,
+    theoryMarks: 70,
+    practicalMarks: 30,
+    duration: "3 hours",
+    eligibility: "Class 9 passed",
+    syllabus: "2024-25",
+    keywords: [
+      "Computer Applications",
+      "Office Tools",
+      "Word",
+      "Excel",
+      "PowerPoint",
+      "HTML",
+      "CSS",
+      "Scratch",
+      "Python",
+      "Cyber Safety",
+      "Internet",
+      "Class 10",
+      "CBSE",
+      "IT",
+      "Information Technology"
+    ]
+  },
+  {
+    id: "computer-science-11",
+    classId: "cbse-class-11",
+    code: "083",
+    name: "Computer Science",
+    icon: "🖥️",
+    description: "Foundational computer science concepts including programming in Python, database management, and computer systems.",
+    color: "from-purple-500 to-pink-600",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200",
+    totalChapters: 24,
+    totalUnits: 5,
+    totalPracticals: 20,
+    totalMarks: 100,
+    theoryMarks: 70,
+    practicalMarks: 30,
+    duration: "3 hours",
+    eligibility: "Class 10 passed",
+    syllabus: "2024-25",
+    keywords: [
+      "Computer Science",
+      "Python",
+      "Programming",
+      "Database",
+      "SQL",
+      "Boolean Algebra",
+      "Number System",
+      "Logic",
+      "Class 11",
+      "CBSE",
+      "Computer Fundamentals",
+      "Software"
+    ]
+  },
+  {
+    id: "computer-science-12",
+    classId: "cbse-class-12",
+    code: "083",
+    name: "Computer Science",
+    icon: "🎓",
+    description: "Advanced computer science covering OOP, data structures, database management, networking, and communication technologies.",
+    color: "from-orange-500 to-red-600",
+    bgColor: "bg-orange-50",
+    borderColor: "border-orange-200",
+    totalChapters: 22,
+    totalUnits: 5,
+    totalPracticals: 25,
+    totalMarks: 100,
+    theoryMarks: 70,
+    practicalMarks: 30,
+    duration: "3 hours",
+    eligibility: "Class 11 passed",
+    syllabus: "2024-25",
+    keywords: [
+      "Computer Science",
+      "Python",
+      "OOP",
+      "Object Oriented",
+      "Database",
+      "SQL",
+      "Boolean Algebra",
+      "Networking",
+      "Data Structures",
+      "Class 12",
+      "CBSE",
+      "Advanced",
+      "Communication"
+    ]
+  }
+];
+
+export default cbseSubjects;

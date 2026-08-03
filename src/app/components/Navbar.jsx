@@ -37,7 +37,15 @@ export default function Navbar() {
     const savedDarkMode = localStorage.getItem('darkMode');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    if (savedDarkMode === 'true' || (!savedDarkMode && prefersDark)) {
+    if (savedDarkMode === 'true') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else if (savedDarkMode === 'false') {
+      setDarkMode(false);
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    } else if (prefersDark) {
       setDarkMode(true);
       document.documentElement.classList.add('dark');
     }
@@ -90,7 +98,14 @@ export default function Navbar() {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
     localStorage.setItem('darkMode', newDarkMode.toString());
-    document.documentElement.classList.toggle('dark');
+    
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.add('light');
+      document.documentElement.classList.remove('dark');
+    }
   };
 
   const handleLogout = async () => {

@@ -129,10 +129,11 @@ export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, sele
 
         {/* Quick Action Buttons */}
         <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="/study" className="w-full sm:w-auto">
-            <Button size="lg" className="w-full sm:w-auto shadow-md hover:shadow-lg transition-shadow duration-300">
-              Start Learning
-            </Button>
+          <Link
+            href="/study"
+            className="inline-flex h-11 w-full items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-blue-700 hover:shadow-lg active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-blue-700 dark:focus-visible:ring-offset-gray-900 sm:w-auto"
+          >
+            Start Learning
           </Link>
           <Link href="/question-bank" className="w-full sm:w-auto">
             <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 hover:border-blue-400 transition-colors duration-300">

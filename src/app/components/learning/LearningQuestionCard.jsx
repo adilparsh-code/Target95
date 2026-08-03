@@ -35,7 +35,7 @@ export default function LearningQuestionCard({ question, attempt, onAttempt }) {
           <button
             type="button"
             onClick={() => setShowReport(true)}
-            className="rounded-full p-1.5 text-gray-500 hover:bg-gray-100"
+            className="min-h-[44px] min-w-[44px] rounded-full p-2 text-gray-500 hover:bg-gray-100"
             title="Report issue"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
@@ -67,7 +67,7 @@ export default function LearningQuestionCard({ question, attempt, onAttempt }) {
           <div className="w-full max-w-lg rounded-3xl border border-gray-200 bg-white p-6 shadow-xl">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-bold text-gray-900">Report Issue</h2>
-              <button type="button" onClick={() => setShowReport(false)} className="rounded-full p-1 text-gray-500 hover:bg-gray-100">✕</button>
+              <button type="button" onClick={() => setShowReport(false)} className="min-h-[44px] min-w-[44px] rounded-full p-2 text-gray-500 hover:bg-gray-100">✕</button>
             </div>
             <form onSubmit={(e) => { e.preventDefault(); setShowReport(false); }} className="mt-6 space-y-4">
               <div>

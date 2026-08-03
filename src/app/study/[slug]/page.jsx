@@ -4,8 +4,11 @@ import StudyChapter from "../../components/study/StudyChapter";
 import { notFound } from "next/navigation";
 import { getStudyChapterBySlug } from "../../../lib/studyCenter";
 
+import { getStudyChapters } from "../../../lib/studyCenter";
+
 export async function generateStaticParams() {
-  return ["introduction", "variables-data-types", "operators", "if-else", "loops", "methods", "arrays", "strings", "constructor"].map((slug) => ({ slug }));
+  const chapters = getStudyChapters();
+  return chapters.map((chapter) => ({ slug: chapter.slug }));
 }
 
 export default async function StudyChapterPage({ params }) {

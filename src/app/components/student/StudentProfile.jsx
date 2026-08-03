@@ -54,10 +54,40 @@ export default function StudentProfile() {
 
   const initials = (user?.fullName || user?.email || "T").split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase();
 
-  const stats = [
+  const premiumStats = [
+    { 
+      label: "Current Level", 
+      value: level, 
+      icon: "🏆", 
+      gradient: "from-purple-500 to-indigo-600",
+      description: `Keep learning to reach Level ${level + 1}`
+    },
+    { 
+      label: "Total XP", 
+      value: totalXP, 
+      icon: "⭐", 
+      gradient: "from-yellow-400 to-orange-500",
+      description: `${currentXP}/${nextLevelXP} XP to next level`
+    },
+    { 
+      label: "Study Streak", 
+      value: `${studyStreak}d`, 
+      icon: "🔥", 
+      gradient: "from-red-500 to-pink-600",
+      description: "Consistent learning pays off!"
+    },
+    { 
+      label: "Accuracy", 
+      value: `${accuracy}%`, 
+      icon: "🎯", 
+      gradient: "from-green-500 to-emerald-600",
+      description: "Your answer accuracy rate"
+    },
+  ];
+
+  const secondaryStats = [
     { label: "Chapters Completed", value: chaptersCompleted, icon: "📖" },
     { label: "Questions Solved", value: questionsSolved, icon: "✅" },
-    { label: "Accuracy", value: `${accuracy}%`, icon: "🎯" },
     { label: "Mock Tests Attempted", value: mockTestsAttempted, icon: "📝" },
     { label: "Total Study Time", value: `${totalStudyTime}h`, icon: "⏱️" },
   ];
@@ -81,41 +111,60 @@ export default function StudentProfile() {
             <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
               {user?.studentClass || "Class 10"}
             </span>
-            <span className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-800">
-              Level {level}
-            </span>
-            <span className="inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-medium text-orange-800">
-              🔥 {studyStreak} day streak
-            </span>
           </div>
         </div>
         <Button onClick={() => setIsEditing(true)} className="mt-2 shrink-0">Edit Profile</Button>
       </div>
 
-      {/* Level and XP Section */}
+      {/* Level and XP Progress */}
       <div className="mt-6 rounded-2xl bg-gray-50 p-4 dark:bg-gray-700/50">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Current XP</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalXP} XP <span className="text-sm font-normal text-gray-500 dark:text-gray-400">({currentXP}/{nextLevelXP} to next level)</span></p>
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Progress to Level {level + 1}</p>
+            <p className="text-lg font-bold text-gray-900 dark:text-white">{currentXP}/{nextLevelXP} XP</p>
           </div>
           <div className="text-right">
-            <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Level {level}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{progress.toFixed(0)}% to Level {level + 1}</p>
+            <p className="text-sm font-medium text-gray-600 dark:text-gray-300">{progress.toFixed(0)}% complete</p>
           </div>
         </div>
-        <div className="mt-3 h-3 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
+        <div className="mt-3 h-4 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-600">
           <div 
             className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-700 ease-in-out"
             style={{ width: `${progress}%` }}
+            role="progressbar"
+            aria-valuenow={progress}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-label={`${progress.toFixed(0)}% to next level`}
           />
         </div>
       </div>
     </header>
 
-    {/* Statistics Section */}
-    <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" aria-label="Learning statistics">
-      {stats.map((stat) => (
+    {/* Premium Statistics Section */}
+    <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Key learning statistics">
+      {premiumStats.map((stat) => (
+        <article 
+          key={stat.label} 
+          className={`relative overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br ${stat.gradient} p-6 shadow-lg dark:border-gray-700 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2`}
+          tabIndex="0"
+          aria-label={`${stat.label}: ${stat.value}. ${stat.description}`}
+        >
+          <div className="relative z-10">
+            <p className="text-4xl mb-2">{stat.icon}</p>
+            <p className="text-sm font-medium text-white/90">{stat.label}</p>
+            <p className="mt-1 text-3xl font-bold text-white">{stat.value}</p>
+            <p className="mt-2 text-xs text-white/80">{stat.description}</p>
+          </div>
+          <div className="absolute -right-8 -bottom-8 h-32 w-32 rounded-full bg-white/10"></div>
+          <div className="absolute -right-4 -bottom-4 h-20 w-20 rounded-full bg-white/10"></div>
+        </article>
+      ))}
+    </section>
+
+    {/* Secondary Statistics */}
+    <section className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Additional learning statistics">
+      {secondaryStats.map((stat) => (
         <article key={stat.label} className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800 transition-transform hover:scale-[1.02]">
           <p className="text-2xl">{stat.icon}</p>
           <p className="mt-2 text-sm font-medium text-gray-600 dark:text-gray-400">{stat.label}</p>

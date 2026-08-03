@@ -96,9 +96,9 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
                   <td className="px-4 py-3"><StatusBadge status={test.status} size="sm" /></td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center justify-end gap-1">
-                      <button onClick={() => onEdit?.(test)} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" aria-label={`Edit ${test.title}`}>✏️</button>
-                      <button onClick={() => onPreview?.(test)} className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors" aria-label={`Preview ${test.title}`}>👁</button>
-                      <button onClick={() => onResults?.(test)} className="p-1.5 text-violet-600 hover:bg-violet-50 rounded-lg transition-colors" aria-label={`Results for ${test.title}`}>📊</button>
+                      <button onClick={() => onEdit?.(test)} className="min-h-[44px] min-w-[44px] p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" aria-label={`Edit ${test.title}`}>✏️</button>
+                      <button onClick={() => onPreview?.(test)} className="min-h-[44px] min-w-[44px] p-2 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors" aria-label={`Preview ${test.title}`}>👁</button>
+                      <button onClick={() => onResults?.(test)} className="min-h-[44px] min-w-[44px] p-2 text-violet-600 hover:bg-violet-50 rounded-xl transition-colors" aria-label={`Results for ${test.title}`}>📊</button>
                     </div>
                   </td>
                 </tr>
@@ -112,9 +112,9 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
         <div className="flex items-center justify-between text-sm text-gray-500">
           <span>Showing {safePage * pageSize + 1}–{Math.min((safePage + 1) * pageSize, sorted.length)} of {sorted.length}</span>
           <div className="flex items-center gap-2">
-            <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={safePage === 0} className="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Previous</button>
+            <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={safePage === 0} className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Previous</button>
             <span className="px-2 font-medium text-gray-700">{safePage + 1} / {totalPages}</span>
-            <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={safePage >= totalPages - 1} className="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next</button>
+            <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={safePage >= totalPages - 1} className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next</button>
           </div>
         </div>
       )}

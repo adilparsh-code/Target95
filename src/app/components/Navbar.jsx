@@ -100,6 +100,14 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/95 dark:border-gray-700 dark:bg-gray-900/95 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/80 dark:supports-[backdrop-filter]:bg-gray-900/80">
+      {/* Skip link for keyboard navigation */}
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+      
       <Container>
         <div className="flex min-h-16 items-center justify-between gap-3 py-2 sm:min-h-[72px] sm:py-3">
           {/* Logo */}
@@ -268,3 +276,7 @@ export default function Navbar() {
     </nav>
   );
 }
+
+// Add id to main content areas for skip link
+// This is used in pages that use this Navbar
+export const NavbarSkipLinkId = 'main-content';

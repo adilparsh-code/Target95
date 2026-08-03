@@ -19,7 +19,7 @@ export default function FilterBar({ filters = [], className = "" }) {
             id={filter.id}
             value={filter.value}
             onChange={(e) => filter.onChange(e.target.value)}
-            className="rounded-xl border border-border bg-card p-3 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+            className="rounded-xl border border-border bg-card p-3 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             aria-label={filter.label || filter.id}
           >
             {filter.options.map((opt) => (
@@ -41,7 +41,7 @@ export function SearchInput({ value, onChange, placeholder = "Search..." }) {
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full rounded-xl border border-border bg-card p-4 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+      className="w-full rounded-xl border border-border bg-card p-4 text-foreground outline-none placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       aria-label={placeholder}
     />
   );

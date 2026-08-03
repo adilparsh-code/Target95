@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useMemo, useState, useEffect, useCallback } from "react";
 import { getStudyChapters, searchStudyContent } from "../../../lib/studyCenter";
+import { getChapterPracticeUrl } from "../../../lib/practiceUrls";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 import {
@@ -150,7 +151,7 @@ export default function StudyHome() {
           type="search"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
-          className="w-full rounded-2xl border border-gray-300 bg-white p-4 pl-11 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+          className="w-full rounded-2xl border border-gray-300 bg-white p-4 pl-11 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           placeholder="Search by chapter, topic, or difficulty"
         />
       </div>
@@ -211,7 +212,7 @@ export default function StudyHome() {
                     {status === "Not Started" ? "Start Studying" : "Continue Studying"}
                   </Link>
                   <Link
-                    href={`/java/${chapter.slug}`}
+                    href={getChapterPracticeUrl(chapter)}
                     className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-2 text-center text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
                   >
                     Practice Questions

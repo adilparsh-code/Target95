@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import StudyHome from "../components/study/StudyHome";
+import ErrorBoundary from "../components/ui/ErrorBoundary";
 
 export const metadata = {
   title: "Study Center | Target95+",
@@ -12,7 +13,9 @@ export default function StudyPage() {
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navbar />
       <div className="h-20 sm:h-24 lg:h-28"></div>
-      <StudyHome />
+      <ErrorBoundary>
+        <StudyHome />
+      </ErrorBoundary>
       <Footer />
     </main>
   );

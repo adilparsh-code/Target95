@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="relative bg-black/80 backdrop-blur-sm overflow-hidden text-white">
@@ -29,14 +31,19 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="mt-4 space-y-3">
-              {["Home", "Courses", "About", "Contact"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+              {[
+                { label: "Home", href: "/" },
+                { label: "Study", href: "/study" },
+                { label: "Practice", href: "/java" },
+                { label: "Mock Tests", href: "/mock-test" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
                     className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
                   >
-                    {item}
-                  </a>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -48,14 +55,19 @@ export default function Footer() {
               Resources
             </h3>
             <ul className="mt-4 space-y-3">
-              {["Blog", "Forum", "FAQ", "Help Center"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+              {[
+                { label: "Question Bank", href: "/question-bank" },
+                { label: "Daily Challenge", href: "/daily-challenge" },
+                { label: "Rewards", href: "/rewards" },
+                { label: "Dashboard", href: "/dashboard" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
                     className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
                   >
-                    {item}
-                  </a>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -81,14 +93,21 @@ export default function Footer() {
                 Social Media
               </h3>
               <ul className="mt-4 space-y-3">
-                {["Facebook", "Twitter", "Instagram", "LinkedIn"].map((platform) => (
-                  <li key={platform}>
+                {[
+                  { platform: "Facebook", href: "https://facebook.com/target95" },
+                  { platform: "Twitter", href: "https://twitter.com/target95" },
+                  { platform: "Instagram", href: "https://instagram.com/target95" },
+                  { platform: "LinkedIn", href: "https://linkedin.com/company/target95" },
+                ].map((item) => (
+                  <li key={item.platform}>
                     <a
-                      href="#"
-                      aria-label={platform}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={item.platform}
                       className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
                     >
-                      {platform}
+                      {item.platform}
                     </a>
                   </li>
                 ))}

@@ -9,7 +9,7 @@ export default function MockTestCard({ test, onEdit, onPreview, onResults }) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 group">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 group">
       {/* Header */}
       <div className="flex items-start justify-between mb-3">
         <div className="min-w-0 flex-1">
@@ -65,13 +65,13 @@ export default function MockTestCard({ test, onEdit, onPreview, onResults }) {
 
       {/* Actions */}
       <div className="flex items-center gap-2 pt-1 border-t border-gray-100">
-        <button onClick={() => onEdit?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+        <button onClick={() => onEdit?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors">
           Edit
         </button>
-        <button onClick={() => onPreview?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 rounded-lg hover:bg-emerald-100 transition-colors">
+        <button onClick={() => onPreview?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-emerald-600 bg-emerald-50 rounded-xl hover:bg-emerald-100 transition-colors">
           Preview
         </button>
-        <button onClick={() => onResults?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-violet-600 bg-violet-50 rounded-lg hover:bg-violet-100 transition-colors">
+        <button onClick={() => onResults?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-violet-600 bg-violet-50 rounded-xl hover:bg-violet-100 transition-colors">
           Results
         </button>
       </div>

@@ -36,29 +36,29 @@ export default function ForgotPassword() {
             </p>
           </div>
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-            {submitted ? (
-              <div className="text-center space-y-4">
-                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md text-sm">
-                  Password reset email sent! Check your inbox.
-                </div>
-                <p className="text-sm text-gray-600">
-                Didn{'\''}t receive the email? Check your spam folder or{" "}
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="font-medium text-blue-600 hover:text-blue-500"
-                  >
-                    try again
-                  </button>
-                </p>
-                <div className="pt-4">
-                  <Link href="/login">
-                    <Button variant="default" size="lg" className="w-full">
-                      Back to Login
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            ) : (
+                {submitted ? (
+                  <div className="text-center space-y-4">
+                    <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md text-sm">
+                      Password reset email sent! Check your inbox.
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      Didn{'\''}t receive the email? Check your spam folder or{" "}
+                      <button
+                        onClick={() => setSubmitted(false)}
+                        className="font-medium text-blue-600 hover:text-blue-500"
+                      >
+                        try again
+                      </button>
+                    </div>
+                    <div className="pt-4">
+                      <Link href="/login">
+                        <Button variant="default" size="lg" className="w-full">
+                          Back to Login
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
               <form className="space-y-6" onSubmit={handleSubmit}>
                 {error && (
                   <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">

@@ -115,7 +115,9 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <AuthProviderWrapper>
           <OfflineBanner />
-          {children}
+          <div id="main-content">
+            {children}
+          </div>
         </AuthProviderWrapper>
         <PWAPrompt />
         <IOSInstallPrompt />

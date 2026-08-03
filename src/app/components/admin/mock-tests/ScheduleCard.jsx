@@ -25,7 +25,7 @@ export default function ScheduleCard({ test }) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
       <h3 className="text-sm font-semibold text-gray-900 mb-4">Schedule</h3>
 
       <div className="space-y-3">

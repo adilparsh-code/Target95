@@ -9,6 +9,8 @@ import {
   sendEmailVerification,
   onAuthStateChanged,
   updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { getFirebaseInstance } from "@/lib/firebase";
@@ -174,10 +176,54 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const loginWithGoogle = async () => {
+    const { auth, db } = getFirebaseInstance();
+    
+    if (!auth || !db) {
+      return { success: false, message: "Firebase not initialized. Please try again." };
+    }
+    
+    try {
+      setError(null);
+      setLoading(true);
+      
+      const provider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      
+      // Check if user exists in Firestore, if not create profile
+      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+      if (!userDoc.exists()) {
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          uid: userCredential.user.uid,
+          email: userCredential.user.email,
+          fullName: userCredential.user.displayName || "",
+          role: "student",
+          emailVerified: userCredential.user.emailVerified,
+          createdAt: new Date(),
+        });
+      }
+      
+      setLoading(false);
+      return { success: true, user: userCredential.user };
+    } catch (err) {
+      const errorMessage = getErrorMessage(err.code);
+      setError(errorMessage);
+      setLoading(false);
+      return { success: false, message: errorMessage };
+    }
+  };
+
   const forgotPassword = async (email) => {
     try {
       setError(null);
       setLoading(true);
+      
+      const { auth } = getFirebaseInstance();
+      
+      if (!auth) {
+        setLoading(false);
+        return { success: false, message: "Firebase not initialized. Please try again." };
+      }
 
       await sendPasswordResetEmail(auth, email);
       setLoading(false);
@@ -196,6 +242,12 @@ export function AuthProvider({ children }) {
   const resendVerification = async () => {
     try {
       setError(null);
+      const { auth } = getFirebaseInstance();
+      
+      if (!auth) {
+        return { success: false, message: "Firebase not initialized." };
+      }
+      
       if (auth.currentUser) {
         await sendEmailVerification(auth.currentUser);
         return { success: true, message: "Verification email sent!" };
@@ -215,6 +267,7 @@ export function AuthProvider({ children }) {
     register,
     login,
     logout,
+    loginWithGoogle,
     forgotPassword,
     resendVerification,
     clearError: () => setError(null),

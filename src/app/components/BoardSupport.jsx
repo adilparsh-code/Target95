@@ -39,7 +39,7 @@ export default function BoardSupport() {
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* ICSE Card */}
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-blue-100 hover:shadow-2xl transition-shadow duration-300">
+          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-blue-100 hover:shadow-lg transition-shadow duration-300">
             <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
               <BookOpen className="w-8 h-8 text-white" />
             </div>
@@ -57,7 +57,7 @@ export default function BoardSupport() {
           </div>
 
           {/* ISC Card */}
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-indigo-100 hover:shadow-2xl transition-shadow duration-300">
+          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-indigo-100 hover:shadow-lg transition-shadow duration-300">
             <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6">
               <Code className="w-8 h-8 text-white" />
             </div>

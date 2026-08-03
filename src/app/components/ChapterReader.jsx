@@ -214,11 +214,12 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
 
   const codeBlocks = extractCodeBlocks(chapterData);
 
-  // Calculate learning statistics (using existing data to avoid modifying state/business logic)
-  const completedQuestions = 0; // This would normally come from progress, but we keep existing logic
+  // Learning statistics - shown only if user has progress data
+  const hasProgressData = false; // Progress tracking not yet implemented for chapter reader
+  const completedQuestions = hasProgressData ? Math.floor(chapterQuestions.length * 0.3) : 0;
   const remainingQuestions = chapterQuestions.length - completedQuestions;
-  const accuracy = chapterQuestions.length > 0 ? Math.round((completedQuestions / chapterQuestions.length) * 100) : 0;
-  const estimatedTimeLeft = Math.round(chapterData.estimatedTime * (remainingQuestions / chapterQuestions.length));
+  const accuracy = hasProgressData && chapterQuestions.length > 0 ? Math.round((completedQuestions / chapterQuestions.length) * 100) : 0;
+  const estimatedTimeLeft = hasProgressData ? Math.round(chapterData.estimatedTime * (remainingQuestions / chapterQuestions.length)) : chapterData.estimatedTime;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-slate-900 dark:to-gray-900">

@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Container from "../components/ui/Container";
 import JavaChapterCatalog from "../components/JavaChapterCatalog";
+import ErrorBoundary from "../components/ui/ErrorBoundary";
 
 export const metadata = {
   title: "Java Practice | Target95+",
@@ -15,9 +16,11 @@ export default function JavaPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       <Navbar />
-      <Container>
-        <JavaChapterCatalog subject={subject} />
-      </Container>
+      <ErrorBoundary>
+        <Container>
+          <JavaChapterCatalog subject={subject} />
+        </Container>
+      </ErrorBoundary>
       <Footer />
     </main>
   );

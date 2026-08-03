@@ -16,6 +16,7 @@ import UpcomingMockTests from "@/components/dashboard/UpcomingMockTests";
 import useProgress from "@/app/hooks/useProgress";
 import useMockTests from "@/app/hooks/useMockTests";
 import ProtectedRoute from "../components/ProtectedRoute";
+import ErrorBoundary from "../components/ui/ErrorBoundary";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -42,9 +43,9 @@ export default function DashboardPage() {
       progress: totalSolved > 0 ? Math.min(Math.round((totalSolved / 10) * 100), 100) : 0,
     },
     weeklyGoal: {
-      current: 5,
-      target: 7,
-      progress: 71,
+      current: progressWithActivity,
+      target: progressCount || 7,
+      progress: progressCount > 0 ? Math.round((progressWithActivity / progressCount) * 100) : 0,
     },
   };
 
@@ -94,37 +95,39 @@ export default function DashboardPage() {
       <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
         <Navbar />
         <div className="h-20 sm:h-24 lg:h-28"></div>
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
-          <DashboardHeader user={user} isLoading={!user} />
-          
-          <div className="mt-6">
-            <WelcomeCard user={user} stats={dashboardStats} />
-          </div>
+        <ErrorBoundary>
+          <div className="container mx-auto px-4 py-8 max-w-7xl">
+            <DashboardHeader user={user} isLoading={!user} />
+            
+            <div className="mt-6">
+              <WelcomeCard user={user} stats={dashboardStats} />
+            </div>
 
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <ContinueLearning lastChapter={derivedLastChapter} isLoading={progressLoading} />
-            <div className="lg:col-span-2">
-              <QuickActions />
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <ContinueLearning lastChapter={derivedLastChapter} isLoading={progressLoading} />
+              <div className="lg:col-span-2">
+                <QuickActions />
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <ProgressOverview stats={dashboardStats} />
+            </div>
+
+            <div className="mt-6">
+              <StatsCards stats={stats || { totalQuestionsSolved: 0, totalCorrectAnswers: 0, totalStudyTime: 0, maxStreak: 0, overallAccuracy: 0 }} />
+            </div>
+
+            <div className="mt-6">
+              <SubjectGrid />
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <RecentActivity />
+              <UpcomingMockTests mockTests={Array.isArray(upcomingTests) ? upcomingTests : []} />
             </div>
           </div>
-
-          <div className="mt-6">
-            <ProgressOverview stats={dashboardStats} />
-          </div>
-
-          <div className="mt-6">
-            <StatsCards stats={stats || { totalQuestionsSolved: 0, totalCorrectAnswers: 0, totalStudyTime: 0, maxStreak: 0, overallAccuracy: 0 }} />
-          </div>
-
-          <div className="mt-6">
-            <SubjectGrid />
-          </div>
-
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <RecentActivity />
-            <UpcomingMockTests mockTests={Array.isArray(upcomingTests) ? upcomingTests : []} />
-          </div>
-        </div>
+        </ErrorBoundary>
         <Footer />
       </main>
     </ProtectedRoute>

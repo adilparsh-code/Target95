@@ -5,6 +5,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { sanitizeText } from "../../../lib/mocktest";
+import { getChapterPracticeUrl } from "../../../lib/practiceUrls";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 import questionsData from "../../data/questions";
@@ -140,17 +141,16 @@ export default function StudyChapter({ slug }) {
     ? searchInContent(studyData, safeSearch)
     : true;
 
-  // Render section check helper for search highlighting
-  const highlightText = (text, query) => {
-    if (!query || !text) return text;
-    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
-    const parts = text.split(regex);
-    return parts.map((part, i) =>
-      regex.test(part)
-        ? `<mark key={i} class="bg-yellow-200 rounded px-0.5">${part}</mark>`
-        : part
-    ).join("");
-  };
+  // Filter sections based on search query
+  const filteredSections = useMemo(() => {
+    if (!safeSearch) return sectionIds;
+    return sectionIds.filter((s) => {
+      const data = getSectionData(studyData, s.id);
+      if (!data) return false;
+      const dataString = Array.isArray(data) ? data.join(" ") : String(data);
+      return dataString.toLowerCase().includes(safeSearch);
+    });
+  }, [safeSearch, studyData]);
 
   const readingSections = sectionIds
     .filter((s) => {
@@ -243,7 +243,7 @@ export default function StudyChapter({ slug }) {
       </div>
 
       {/* Learning Objectives */}
-      {studyData.learningObjectives && studyData.learningObjectives.length > 0 && (
+      {studyData.learningObjectives && studyData.learningObjectives.length > 0 && filteredSections.some(s => s.id === "learning-objectives") && (
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" id="section-learning-objectives-list">
           <CollapsibleSection title="Learning Objectives" icon={AcademicCapIcon}>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-700">
@@ -256,7 +256,7 @@ export default function StudyChapter({ slug }) {
       )}
 
       {/* Prerequisites */}
-      {studyData.prerequisites && studyData.prerequisites.length > 0 && (
+      {studyData.prerequisites && studyData.prerequisites.length > 0 && filteredSections.some(s => s.id === "prerequisites") && (
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm" id="section-prerequisites">
           <CollapsibleSection title="Prerequisites" icon={ChevronDoubleRightIcon}>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -306,7 +306,7 @@ export default function StudyChapter({ slug }) {
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-6">
           {/* Key Concepts */}
-          {studyData.concepts && studyData.concepts.length > 0 && (
+          {studyData.concepts && studyData.concepts.length > 0 && filteredSections.some(s => s.id === "key-concepts") && (
             <div id="section-key-concepts">
               <CollapsibleSection title="Key Concepts" icon={BeakerIcon}>
                 <div className="grid gap-3">
@@ -324,7 +324,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Important Definitions */}
-          {studyData.definitions && studyData.definitions.length > 0 && (
+          {studyData.definitions && studyData.definitions.length > 0 && filteredSections.some(s => s.id === "definitions") && (
             <div id="section-definitions">
               <CollapsibleSection title="Important Definitions" icon={BookOpenIcon}>
                 <div className="grid gap-3">
@@ -342,7 +342,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Syntax */}
-          {studyData.syntax && studyData.syntax.length > 0 && (
+          {studyData.syntax && studyData.syntax.length > 0 && filteredSections.some(s => s.id === "syntax") && (
             <div id="section-syntax">
               <CollapsibleSection title="Syntax" icon={BookOpenIcon}>
                 <div className="space-y-4">
@@ -369,7 +369,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Quick Revision */}
-          {studyData.quickRevision && studyData.quickRevision.length > 0 && (
+          {studyData.quickRevision && studyData.quickRevision.length > 0 && filteredSections.some(s => s.id === "quick-revision") && (
             <div id="section-quick-revision">
               <CollapsibleSection title="Quick Revision" icon={ListBulletIcon}>
                 <div className="grid gap-3 md:grid-cols-2">
@@ -382,7 +382,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* FAQs */}
-          {studyData.faqs && studyData.faqs.length > 0 && (
+          {studyData.faqs && studyData.faqs.length > 0 && filteredSections.some(s => s.id === "faqs") && (
             <div id="section-faqs">
               <CollapsibleSection title="Frequently Asked Questions" icon={QuestionMarkCircleIcon}>
                 <div className="space-y-4">
@@ -407,7 +407,7 @@ export default function StudyChapter({ slug }) {
 
         <div className="space-y-6">
           {/* Common Mistakes */}
-          {studyData.commonMistakes && studyData.commonMistakes.length > 0 && (
+          {studyData.commonMistakes && studyData.commonMistakes.length > 0 && filteredSections.some(s => s.id === "common-mistakes") && (
             <div id="section-common-mistakes">
               <CollapsibleSection title="Common Mistakes" icon={ExclamationTriangleIcon}>
                 <div className="space-y-3">
@@ -420,7 +420,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Exam Tips */}
-          {studyData.tips && studyData.tips.length > 0 && (
+          {studyData.tips && studyData.tips.length > 0 && filteredSections.some(s => s.id === "exam-tips") && (
             <div id="section-exam-tips">
               <CollapsibleSection title="Exam Tips" icon={SparklesIcon}>
                 <div className="space-y-3">
@@ -433,7 +433,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Mistakes (original) */}
-          {studyData.mistakes && studyData.mistakes.length > 0 && (
+          {studyData.mistakes && studyData.mistakes.length > 0 && filteredSections.some(s => s.id === "common-mistakes") && (
             <div>
               <CollapsibleSection title="Common Pitfalls" icon={LightBulbIcon}>
                 <div className="space-y-3">
@@ -446,7 +446,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Examples */}
-          {studyData.examples && studyData.examples.length > 0 && (
+          {studyData.examples && studyData.examples.length > 0 && filteredSections.some(s => s.id === "examples") && (
             <div id="section-examples">
               <CollapsibleSection title="Examples" icon={BeakerIcon}>
                 <div className="space-y-3">
@@ -461,7 +461,7 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Important Exam Points */}
-          {studyData.importantExamPoints && studyData.importantExamPoints.length > 0 && (
+          {studyData.importantExamPoints && studyData.importantExamPoints.length > 0 && filteredSections.some(s => s.id === "important-exam-points") && (
             <div id="section-important-exam-points">
               <CollapsibleSection title="Important Exam Points" icon={AcademicCapIcon}>
                 <div className="space-y-2">
@@ -480,12 +480,12 @@ export default function StudyChapter({ slug }) {
           )}
 
           {/* Chapter Summary */}
-          {studyData.summary && (
+          {studyData.summary && filteredSections.some(s => s.id === "summary") && (
             <div id="section-summary">
               <CollapsibleSection title="Chapter Summary" icon={CheckCircleIcon}>
                 <p className="mt-4 text-sm leading-7 text-gray-700">{studyData.summary}</p>
                 <Link
-                  href={`/java/${chapter.slug}`}
+                  href={getChapterPracticeUrl(chapter)}
                   className="mt-5 inline-flex items-center gap-1 rounded-xl border border-blue-300 bg-blue-100 px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-blue-400 hover:bg-blue-200"
                 >
                   Practice This Chapter

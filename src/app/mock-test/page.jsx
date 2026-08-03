@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { CATEGORIES, DIFFICULTIES, QUESTION_TYPES, QUESTION_COUNTS, getMockTestHistory } from "../../lib/mocktest";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { javaChapters } from "../data/javaCurriculum";
+import ErrorBoundary from "../components/ui/ErrorBoundary";
 
 export default function MockTestNewPage() {
   const router = useRouter();
@@ -34,7 +35,8 @@ export default function MockTestNewPage() {
       <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
         <Navbar />
         <div className="h-20 sm:h-24 lg:h-28"></div>
-        <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+        <ErrorBoundary>
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">
@@ -235,7 +237,8 @@ export default function MockTestNewPage() {
               )}
             </div>
           </div>
-        </div>
+          </div>
+        </ErrorBoundary>
         <Footer />
       </main>
     </ProtectedRoute>

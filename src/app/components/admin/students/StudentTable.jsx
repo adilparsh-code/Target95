@@ -110,7 +110,7 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
                   </td>
                   <td className="px-4 py-3"><StatusBadge status={student.status} size="sm" /></td>
                   <td className="px-4 py-3 text-right">
-                    <button onClick={() => onViewProfile?.(student)} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" aria-label={`View ${student.name} profile`}>
+                    <button onClick={() => onViewProfile?.(student)} className="min-h-[44px] min-w-[44px] p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" aria-label={`View ${student.name} profile`}>
                       👁
                     </button>
                   </td>
@@ -125,9 +125,9 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
         <div className="flex items-center justify-between text-sm text-gray-500">
           <span>Showing {safePage * pageSize + 1}–{Math.min((safePage + 1) * pageSize, sorted.length)} of {sorted.length}</span>
           <div className="flex items-center gap-2">
-            <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={safePage === 0} className="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Previous</button>
+            <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={safePage === 0} className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Previous</button>
             <span className="px-2 font-medium text-gray-700">{safePage + 1} / {totalPages}</span>
-            <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={safePage >= totalPages - 1} className="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next</button>
+            <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={safePage >= totalPages - 1} className="px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next</button>
           </div>
         </div>
       )}

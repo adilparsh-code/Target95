@@ -20,10 +20,13 @@ export default function Register() {
     clearError();
   }, [clearError]);
 
+  const passwordsMatch = password === confirmPassword;
+  const isFormValid = fullName && email && password && confirmPassword && passwordsMatch;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (!passwordsMatch) {
       return;
     }
 
@@ -115,6 +118,7 @@ export default function Register() {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? "👁️" : "👁️‍🗨️"}
                   </button>
@@ -137,7 +141,7 @@ export default function Register() {
                   className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="••••••••"
                 />
-                {confirmPassword && password !== confirmPassword && (
+                {confirmPassword && !passwordsMatch && (
                   <p className="mt-1 text-xs text-red-600">Passwords do not match</p>
                 )}
               </div>
@@ -148,7 +152,7 @@ export default function Register() {
                   variant="default"
                   size="lg"
                   className="w-full"
-                  disabled={loading || (confirmPassword && password !== confirmPassword)}
+                  disabled={loading || !isFormValid}
                 >
                   {loading ? "Creating account..." : "Create account"}
                 </Button>

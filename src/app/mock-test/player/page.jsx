@@ -157,6 +157,7 @@ function MockTestPlayerContent() {
 
   useEffect(() => {
     if (questions.length === 0 || isSubmitted || mode === "practice" || mode === "revision") return;
+    
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -167,8 +168,9 @@ function MockTestPlayerContent() {
         return prev - 1;
       });
     }, 1000);
+    
     return () => clearInterval(timer);
-  }, [handleSubmit, questions.length, isSubmitted]);
+  }, [handleSubmit, questions.length, isSubmitted, mode]);
 
   const updateAnswer = (qId, value) => {
     setAnswers((prev) => ({ ...prev, [qId]: value }));

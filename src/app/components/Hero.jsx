@@ -7,10 +7,10 @@ import subjectsData from "../data/subjects";
 
 const boards = [
   {
-    id: "icse",
-    title: "ICSE",
-    subtitle: "Indian Certificate of Secondary Education",
-    description: "Comprehensive study materials, practice questions, and AI-powered learning for ICSE Class 9/10 Computer Science.",
+    id: "cisce",
+    title: "CISCE",
+    subtitle: "Council for the Indian School Certificate Examinations",
+    description: "Comprehensive study materials, previous year questions, AI-powered learning, and mock tests for ICSE (Classes 9–10) and ISC (Classes 11–12) Computer Science.",
     icon: "🎓",
     color: "from-blue-600 to-indigo-700",
     bgColor: "bg-blue-50",
@@ -20,21 +20,11 @@ const boards = [
     id: "cbse",
     title: "CBSE",
     subtitle: "Central Board of Secondary Education",
-    description: "Comprehensive study materials, practice questions, and AI-powered learning for CBSE Class 9-12 Computer Science.",
+    description: "Comprehensive study materials, practice questions, and AI-powered learning for CBSE Computer Science (Python) for Classes 11–12.",
     icon: "🏫",
     color: "from-green-600 to-teal-700",
     bgColor: "bg-green-50",
     borderColor: "border-green-200",
-  },
-  {
-    id: "isc",
-    title: "ISC",
-    subtitle: "Indian School Certificate",
-    description: "Comprehensive study materials, practice questions, and AI-powered learning for ISC Class 11/12 Computer Science.",
-    icon: "📚",
-    color: "from-purple-600 to-pink-700",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-200",
   },
 ];
 
@@ -77,7 +67,7 @@ export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, sele
           </h1>
 
           <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
-            Practice Previous Year Questions, Solve Java Programs, Learn with AI and Score Higher in your board exams.
+            Practice Previous Year Questions, Solve Python Programs, Learn with AI and Score Higher in your board exams.
           </p>
         </div>
 

@@ -14,7 +14,20 @@ const studyChapters = [
 ];
 
 export default function sitemap() {
-  const routes = ["", "/java", "/study", "/roadmap", "/about", "/contact", "/privacy", "/terms"];
+  const routes = [
+    "",
+    "/java",
+    "/study",
+    "/roadmap",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/faq",
+    "/feedback",
+    "/report-bug",
+    "/feature-request",
+  ];
 
   return [
     ...routes.map((route) => ({

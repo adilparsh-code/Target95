@@ -1,15 +1,18 @@
-"use client";
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Button from "../components/ui/Button";
 
+export const metadata = {
+  title: "About Target95+ | Target95+",
+  description: "Learn about Target95+, the AI-powered learning platform for ICSE & ISC Computer Science students. Master Java programming and score 95+ with our comprehensive resources.",
+};
+
 export default function AboutPage() {
   return (
-      <>
-        <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
-        <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <>
+      <Navbar />
+      <div className="h-20 sm:h-24 lg:h-28"></div>
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
         {/* Hero Section */}
         <section className="relative pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-indigo-600/5" />
@@ -48,8 +51,8 @@ export default function AboutPage() {
                 targeted practice, instant feedback, and intelligent learning tools.
               </p>
               <p>
-                We understand the challenges of ICSE and ISC Computer Science curriculum. That{'\''}s why
-                we{'\''}ve built a platform that focuses on:
+                We understand the challenges of ICSE and ISC Computer Science curriculum. That's why
+                we've built a platform that focuses on:
               </p>
             </div>
           </div>
@@ -108,10 +111,10 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-white text-center mb-12">Our Impact</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { number: "500+", label: "Practice Questions" },
-                { number: "50+", label: "Chapters Covered" },
-                { number: "1000+", label: "Active Students" },
-                { number: "95%", label: "Satisfaction Rate" },
+                { number: "10,000+", label: "Students Learning" },
+                { number: "5,000+", label: "Practice Questions" },
+                { number: "12", label: "Topics Covered" },
+                { number: "200+", label: "Practice Tests" },
               ].map((stat, index) => (
                 <div key={index} className="text-center">
                   <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
@@ -128,7 +131,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Built for Students, Driven by Passion</h2>
             <p className="text-lg text-gray-600 mb-8">
               Target95+ is created by educators and developers who understand the ICSE and ISC curriculum
-              inside out. We{'\''}re committed to helping every student achieve their target score.
+              inside out. We're committed to helping every student achieve their target score.
             </p>
             <Button variant="primary" href="/contact">
               Get in Touch

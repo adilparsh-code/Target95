@@ -97,7 +97,7 @@ export default function NotFound() {
                 Back to Home
               </Button>
             </Link>
-            <Link href="/Java">
+            <Link href="/java">
               <Button variant="outline" size="lg" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">
                 Start Learning
               </Button>

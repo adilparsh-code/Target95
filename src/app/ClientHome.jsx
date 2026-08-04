@@ -19,22 +19,39 @@ import ErrorBoundary from "./components/ui/ErrorBoundary";
 export default function ClientHome() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [showSubjects, setShowSubjects] = useState(false);
+  const [showStartLearning, setShowStartLearning] = useState(false);
 
   const handleBoardSelect = (board) => {
     setSelectedBoard(board);
     setShowSubjects(true);
+    setShowStartLearning(true);
   };
 
   const handleBackToBoards = () => {
     setSelectedBoard(null);
     setShowSubjects(false);
+    setShowStartLearning(false);
+  };
+
+  const handleStartLearning = () => {
+    const subjectsSection = document.getElementById('subjects-heading');
+    if (subjectsSection) {
+      subjectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
       <ErrorBoundary>
-        <Hero onBoardSelect={handleBoardSelect} onBackToBoards={handleBackToBoards} showSubjects={showSubjects} selectedBoard={selectedBoard} />
+        <Hero 
+          onBoardSelect={handleBoardSelect} 
+          onBackToBoards={handleBackToBoards} 
+          showSubjects={showSubjects} 
+          selectedBoard={selectedBoard}
+          showStartLearning={showStartLearning}
+          onStartLearning={handleStartLearning}
+        />
         <Subjects isVisible={showSubjects} />
         <Stats />
         <WhyTarget95 />
@@ -43,7 +60,6 @@ export default function ClientHome() {
         <Features />
         <Testimonials />
         <FAQ />
-        <Pricing />
         <Newsletter />
       </ErrorBoundary>
       <Footer />

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import QuestionCard from "./QuestionCard";
 import AnswerBox from "./AnswerBox";
@@ -39,6 +40,14 @@ export default function QuestionPlayer({
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <div className="rounded-2xl bg-white p-5 shadow-xl sm:rounded-3xl sm:p-8 lg:p-10">
         <p className="text-sm text-gray-500">Home / Java / {chapterLabel}</p>
+        
+        <Link 
+           href="/java" 
+           className="mt-3 inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+         >
+           <ChevronLeft className="w-4 h-4" />
+           Back to Chapters
+         </Link>
 
         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-4xl font-bold text-blue-700">📘 Question {question.id}</h1>
@@ -76,7 +85,7 @@ export default function QuestionPlayer({
               <Link
                 key={q.id}
                 href={`/java/${chapter}/question/${q.id}`}
-                className={`flex h-12 w-12 items-center justify-center rounded-full font-bold transition ${
+                className={`flex h-14 w-14 items-center justify-center rounded-full font-bold transition ${
                   q.id === question.id ? "bg-blue-700 text-white" : "bg-gray-200 hover:bg-gray-300"
                 }`}
               >
@@ -91,9 +100,13 @@ export default function QuestionPlayer({
             {previousQuestion ? (
               <Link
                 href={`/java/${chapter}/question/${previousQuestion.id}`}
-                className="inline-flex rounded-xl bg-gray-700 px-8 py-3 font-semibold text-white transition hover:bg-gray-800"
+                className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
               >
-                ← Previous
+                <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+                <div>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 block">Previous</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">Question {previousQuestion.id}</span>
+                </div>
               </Link>
             ) : null}
           </div>
@@ -102,14 +115,25 @@ export default function QuestionPlayer({
             {nextQuestion ? (
               <Link
                 href={`/java/${chapter}/question/${nextQuestion.id}`}
-                className="inline-flex rounded-xl bg-blue-700 px-8 py-3 font-semibold text-white transition hover:bg-blue-800"
+                className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group ml-auto"
               >
-                Next →
+                <div className="text-right">
+                  <span className="text-xs text-gray-500 dark:text-gray-400 block">Next</span>
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">Question {nextQuestion.id}</span>
+                </div>
+                <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
               </Link>
             ) : (
-              <Link href="/java" className="inline-flex rounded-xl bg-green-600 px-8 py-3 font-semibold text-white transition hover:bg-green-700">
-                🎉 Finish Chapter
-              </Link>
+              <Link 
+                 href="/java" 
+                 className="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl border border-green-400/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group ml-auto"
+               >
+                 <div className="text-right">
+                   <span className="text-xs text-green-100 block">Complete!</span>
+                   <span className="text-sm font-semibold">Finish Chapter</span>
+                 </div>
+                 <ChevronRight className="w-5 h-5 text-green-100 group-hover:translate-x-1 transition-transform" />
+                </Link>
             )}
           </div>
         </div>

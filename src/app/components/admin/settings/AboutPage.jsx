@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SettingCard from "./SettingCard";
 import SectionHeader from "./SectionHeader";
 
@@ -32,6 +32,11 @@ const roadmap = [
 
 export default function AboutPage() {
   const [activeTab, setActiveTab] = useState("about");
+  const [currentYear, setCurrentYear] = useState(null);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   const tabs = [
     { id: "about", label: "About" },
@@ -200,7 +205,7 @@ export default function AboutPage() {
               MIT License
             </p>
             <p className="text-sm text-gray-600 leading-relaxed mt-2">
-              Copyright &copy; {new Date().getFullYear()} Target95+. All rights reserved.
+              Copyright &copy; {currentYear ?? ""} Target95+. All rights reserved.
             </p>
             <p className="text-sm text-gray-600 leading-relaxed mt-2">
               Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files...
@@ -227,7 +232,7 @@ export default function AboutPage() {
       )}
 
       <p className="text-center text-xs text-gray-400">
-        &copy; {new Date().getFullYear()} Target95+. All rights reserved.
+        &copy; {currentYear ?? ""} Target95+. All rights reserved.
       </p>
     </div>
   );

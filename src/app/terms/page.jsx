@@ -12,7 +12,7 @@ export default function TermsPage() {
           <div className="mx-auto max-w-4xl">
             <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm sm:p-12">
               <h1 className="text-4xl font-bold text-gray-900">Terms of Service</h1>
-              <p className="mt-4 text-sm text-gray-600">"Last updated: Last updated: Last updated: July 31, 2026"</p>
+              <p className="mt-4 text-sm text-gray-600">Last updated: July 31, 2026</p>
 
               <div className="mt-8 space-y-8 text-gray-700">
                 <section>

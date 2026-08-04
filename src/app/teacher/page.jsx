@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import mockTeacherData from "../data/teacher/mockTeacherData";
@@ -17,6 +17,12 @@ export default function TeacherDashboardPage() {
       return true;
     });
   }, [data.students, searchTerm, selectedClass]);
+
+  const [today, setToday] = useState(null);
+
+useEffect(() => {
+  setToday(new Date());
+}, []);
 
   const classes = useMemo(() => {
     return [...new Set(data.students.map((s) => s.class))];
@@ -238,24 +244,28 @@ export default function TeacherDashboardPage() {
               </div>
             </div>
 
-            {/* Calendar Widget */}
-            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-bold text-gray-900">📆 Calendar</h2>
-              <div className="mt-4 text-center">
-                <p className="text-2xl font-bold text-gray-900">
-                  {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-                </p>
-                <p className="mt-1 text-lg text-gray-700">
-                  {new Date().toLocaleDateString("en-US", { weekday: "long", day: "numeric" })}
-                </p>
-                <div className="mt-4 rounded-2xl border border-blue-200 bg-blue-50 p-3">
-                  <p className="text-sm font-semibold text-blue-700">Today's Schedule</p>
-                  <p className="mt-1 text-xs text-gray-700">10:00 AM - ICSE 10 Java Class</p>
-                  <p className="text-xs text-gray-700">12:00 PM - ISC 12 Revision</p>
-                  <p className="text-xs text-gray-700">2:00 PM - Doubt Session</p>
-                </div>
-              </div>
-            </div>
+           {/* Calendar Widget */}
+<div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+  <h2 className="text-lg font-bold text-gray-900">📆 Calendar</h2>
+  <div className="mt-4 text-center">
+    <p className="text-2xl font-bold text-gray-900">
+      {today
+        ? today.toLocaleDateString("en-US", { month: "long", year: "numeric" })
+        : "\u00A0"}
+    </p>
+    <p className="mt-1 text-lg text-gray-700">
+      {today
+        ? today.toLocaleDateString("en-US", { weekday: "long", day: "numeric" })
+        : "\u00A0"}
+    </p>
+    <div className="mt-4 rounded-2xl border border-blue-200 bg-blue-50 p-3">
+      <p className="text-sm font-semibold text-blue-700">Today's Schedule</p>
+      <p className="mt-1 text-xs text-gray-700">10:00 AM - ICSE 10 Java Class</p>
+      <p className="text-xs text-gray-700">12:00 PM - ISC 12 Revision</p>
+      <p className="text-xs text-gray-700">2:00 PM - Doubt Session</p>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </div>

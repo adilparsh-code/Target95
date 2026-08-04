@@ -51,7 +51,6 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  themeColor: "#3b82f6",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -86,6 +85,10 @@ export const metadata = {
     "msapplication-TileColor": "#3b82f6",
     "msapplication-TileImage": "/icon-144x144.png",
   },
+};
+
+export const viewport = {
+  themeColor: "#3b82f6",
 };
 
 export default function RootLayout({ children }) {

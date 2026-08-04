@@ -73,6 +73,30 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Legal */}
+          <div>
+            <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">
+              Legal
+            </h3>
+            <ul className="mt-4 space-y-3">
+              {[
+                { label: "Privacy Policy", href: "/privacy" },
+                { label: "Terms of Service", href: "/terms" },
+                { label: "About Us", href: "/about" },
+                { label: "Contact Us", href: "/contact" },
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contact and Social */}
           <div>
             <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">

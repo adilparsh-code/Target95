@@ -9,22 +9,22 @@ const boards = [
   {
     id: "icse",
     title: "ICSE",
-    subtitle: "ICSE / ISC",
-    description: "Comprehensive study materials, practice questions, and AI-powered learning for ICSE Class 9/10 and ISC Class 11/12 Computer Science.",
+    subtitle: "Indian Certificate of Secondary Education",
+    description: "Comprehensive study materials, practice questions, and AI-powered learning for ICSE Class 9/10 Computer Science.",
     icon: "🎓",
     color: "from-blue-600 to-indigo-700",
     bgColor: "bg-blue-50",
     borderColor: "border-blue-200",
   },
   {
-    id: "cbse",
-    title: "CBSE",
-    subtitle: "Central Board of Secondary Education",
-    description: "CBSE Computer Science study materials, practice questions, and mock tests.",
+    id: "isc",
+    title: "ISC",
+    subtitle: "Indian School Certificate",
+    description: "Comprehensive study materials, practice questions, and AI-powered learning for ISC Class 11/12 Computer Science.",
     icon: "📚",
-    color: "from-blue-600 to-indigo-700",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-200",
+    color: "from-purple-600 to-pink-700",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200",
   },
 ];
 
@@ -43,7 +43,7 @@ const subjects = subjectsData
     href: subject.href,
   }));
 
-export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, selectedBoard }) {
+export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, selectedBoard, showStartLearning, onStartLearning }) {
   return (
     <section className="relative flex flex-col items-center overflow-hidden px-4 py-12 sm:py-16 md:py-24 lg:py-32">
       {/* Background decoration */}
@@ -129,12 +129,15 @@ export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, sele
 
         {/* Quick Action Buttons */}
         <div className="relative flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link
-            href="/study"
-            className="inline-flex h-11 w-full items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-blue-700 hover:shadow-lg active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-blue-700 dark:focus-visible:ring-offset-gray-900 sm:w-auto"
-          >
-            Start Learning
-          </Link>
+          {showStartLearning && (
+            <button
+              type="button"
+              onClick={onStartLearning}
+              className="inline-flex h-11 w-full items-center justify-center rounded-md bg-blue-600 px-8 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:scale-[1.02] hover:bg-blue-700 hover:shadow-lg active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus-visible:ring-blue-700 dark:focus-visible:ring-offset-gray-900 sm:w-auto animate-pulse"
+            >
+              Start Learning
+            </button>
+          )}
           <Link href="/question-bank" className="w-full sm:w-auto">
             <Button variant="outline" size="lg" className="w-full sm:w-auto border-2 hover:border-blue-400 transition-colors duration-300">
               Explore Questions

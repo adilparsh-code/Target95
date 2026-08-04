@@ -1,9 +1,9 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import { getFirebaseInstance } from "@/app/lib/firebase";
+import { getFirebaseInstance, isFirebaseConfigured } from "@/app/lib/firebase";
 
 const AuthContext = createContext(null);
 
@@ -40,6 +40,11 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
       const { auth } = getFirebaseInstance();
+      if (!auth) {
+        const message = getFirebaseConfigurationMessage();
+        setError(message);
+        return { success: false, message };
+      }
       const credential = await signInWithEmailAndPassword(auth, email, password);
       return { success: true, user: credential.user };
     } catch (authError) {
@@ -53,10 +58,21 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
       const { auth, db } = getFirebaseInstance();
+      if (!auth || !db) {
+        const message = getFirebaseConfigurationMessage();
+        setError(message);
+        return { success: false, message };
+      }
       const credential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(credential.user, { displayName: fullName });
       await setDoc(doc(db, "users", credential.user.uid), { uid: credential.user.uid, email, fullName, role: "student", board: "ICSE", studentClass: "Class 10", createdAt: serverTimestamp() });
-      return { success: true, user: credential.user };
+      try {
+        await sendEmailVerification(credential.user);
+      } catch (verificationError) {
+        console.error("Verification email could not be sent:", verificationError);
+        return { success: true, user: credential.user, message: "Account created, but we could not send the verification email. Please use resend verification after signing in." };
+      }
+      return { success: true, user: credential.user, message: "Account created. Please verify your email before signing in." };
     } catch (authError) {
       const message = getAuthMessage(authError.code);
       setError(message);
@@ -68,6 +84,11 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
       const { auth, db } = getFirebaseInstance();
+      if (!auth || !db) {
+        const message = getFirebaseConfigurationMessage();
+        setError(message);
+        return { success: false, message };
+      }
       const credential = await signInWithPopup(auth, new GoogleAuthProvider());
       await setDoc(doc(db, "users", credential.user.uid), { uid: credential.user.uid, email: credential.user.email || "", fullName: credential.user.displayName || "", avatarUrl: credential.user.photoURL || "", role: "student", board: "ICSE", studentClass: "Class 10", updatedAt: serverTimestamp() }, { merge: true });
       return { success: true, user: credential.user };
@@ -82,6 +103,11 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
       const { auth } = getFirebaseInstance();
+      if (!auth) {
+        const message = getFirebaseConfigurationMessage();
+        setError(message);
+        return { success: false, message };
+      }
       await sendPasswordResetEmail(auth, email);
       return { success: true, message: "Password reset email sent. Check your inbox." };
     } catch (authError) {
@@ -95,6 +121,11 @@ export function AuthProvider({ children }) {
     if (!user) return { success: false, message: "You must be signed in." };
     try {
       const { auth, db } = getFirebaseInstance();
+      if (!auth || !db) {
+        const message = getFirebaseConfigurationMessage();
+        setError(message);
+        return { success: false, message };
+      }
       const safeUpdates = { fullName: String(updates.fullName || "").trim(), board: String(updates.board || "ICSE"), studentClass: String(updates.studentClass || "Class 10"), updatedAt: serverTimestamp() };
       await updateProfile(auth.currentUser, { displayName: safeUpdates.fullName });
       await setDoc(doc(db, "users", user.uid), safeUpdates, { merge: true });
@@ -110,6 +141,11 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     try {
       const { auth } = getFirebaseInstance();
+      if (!auth) {
+        const message = getFirebaseConfigurationMessage();
+        setError(message);
+        return { success: false, message };
+      }
       await signOut(auth);
       return { success: true };
     } catch (authError) {
@@ -140,6 +176,12 @@ export function useAuth() {
 }
 
 function getAuthMessage(code) {
-  const messages = { "auth/email-already-in-use": "This email is already registered.", "auth/invalid-email": "Enter a valid email address.", "auth/invalid-credential": "Incorrect email or password.", "auth/popup-closed-by-user": "Google sign-in was cancelled.", "auth/network-request-failed": "Network error. Please try again." };
+  const messages = { "auth/email-already-in-use": "This email is already registered.", "auth/invalid-email": "Enter a valid email address.", "auth/invalid-credential": "Incorrect email or password.", "auth/weak-password": "Password must be at least 6 characters.", "auth/operation-not-allowed": "Email/password sign-in is not enabled for this Firebase project.", "auth/popup-closed-by-user": "Google sign-in was cancelled.", "auth/network-request-failed": "Network error. Please try again." };
   return messages[code] || "We could not complete that request. Please try again.";
+}
+
+function getFirebaseConfigurationMessage() {
+  return isFirebaseConfigured
+    ? "Firebase could not be initialized. Please try again."
+    : "Firebase is not configured for this deployment. Please contact support.";
 }

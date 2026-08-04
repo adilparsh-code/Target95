@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand and Tagline */}
           <div className="md:col-span-2 lg:col-span-1">
-            <h2 className="text-3xl font-bold tracking-tight">🎯 Target95</h2>
+            <h2 className="text-3xl font-bold tracking-tight">🎯 Target95+</h2>
             <p className="mt-4 text-sm text-gray-400 leading-relaxed">
               AI Powered Learning Platform for ICSE & ISC Computer Science
               Students.
@@ -142,7 +142,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-          <p>&copy; 2026 Target95. All rights reserved.</p>
+          <p>&copy; 2026 Target95+. All rights reserved.</p>
         </div>
       </div>
     </footer>

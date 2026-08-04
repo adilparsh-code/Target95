@@ -52,7 +52,7 @@ export default function WhyTarget95() {
             Why Target95?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We're not just another learning platform. We're your partner in achieving academic excellence
+            We're not just another learning platform. We're your partner in achieving academic excellence.
           </p>
         </div>
 

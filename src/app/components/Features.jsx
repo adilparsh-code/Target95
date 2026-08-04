@@ -43,7 +43,7 @@ export default function Features() {
       <Container className="relative">
         <SectionTitle
           id="features-heading"
-          title="Why Target95+"
+          title="Key Features"
           subtitle="Everything you need to master ICSE & ISC Computer Science"
           className="text-center"
         />

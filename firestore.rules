@@ -23,8 +23,13 @@ service cloud.firestore {
     // Users collection
     match /users/{userId} {
       allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
-      allow create: if isAuthenticated() && isOwner(userId);
-      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow create: if isAuthenticated() && isOwner(userId)
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.role == 'student';
+      allow update: if isAuthenticated() && (isAdmin() || (isOwner(userId)
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.role == resource.data.role));
       allow delete: if isAdmin();
     }
 

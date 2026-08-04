@@ -3,16 +3,21 @@ import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// Replace these with your actual Firebase project configuration
+// Firebase web configuration is supplied by the deployment environment.
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "demo-api-key",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "demo-project.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "demo-project",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "demo-project.appspot.com",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "123456789",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:123456789:web:abc123def456"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
+const requiredConfigKeys = ["apiKey", "authDomain", "projectId", "storageBucket", "messagingSenderId", "appId"];
+
+export const isFirebaseConfigured = requiredConfigKeys.every(
+  (key) => Boolean(firebaseConfig[key]) && !firebaseConfig[key].startsWith("your_")
+);
 
 let app;
 let auth;
@@ -22,7 +27,7 @@ let db;
 // Only initialize on client-side to avoid SSR issues
 export function getFirebaseInstance() {
   // Only initialize on client-side
-  if (typeof window !== "undefined" && (!app || !auth || !db)) {
+  if (typeof window !== "undefined" && isFirebaseConfigured && (!app || !auth || !db)) {
     app = getApps()[0] || initializeApp(firebaseConfig);
     auth = getAuth(app);
     db = getFirestore(app);

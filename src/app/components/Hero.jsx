@@ -17,6 +17,16 @@ const boards = [
     borderColor: "border-blue-200",
   },
   {
+    id: "cbse",
+    title: "CBSE",
+    subtitle: "Central Board of Secondary Education",
+    description: "Comprehensive study materials, practice questions, and AI-powered learning for CBSE Class 9-12 Computer Science.",
+    icon: "🏫",
+    color: "from-green-600 to-teal-700",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-200",
+  },
+  {
     id: "isc",
     title: "ISC",
     subtitle: "Indian School Certificate",

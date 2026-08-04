@@ -40,10 +40,8 @@ export default function Navbar() {
     if (savedDarkMode === 'true') {
       setDarkMode(true);
       document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
     } else if (savedDarkMode === 'false') {
       setDarkMode(false);
-      document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
     } else if (prefersDark) {
       setDarkMode(true);
@@ -101,9 +99,7 @@ export default function Navbar() {
     
     if (newDarkMode) {
       document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
     } else {
-      document.documentElement.classList.add('light');
       document.documentElement.classList.remove('dark');
     }
   };

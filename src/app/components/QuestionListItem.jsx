@@ -8,7 +8,7 @@ export default function QuestionListItem({ chapter, question, completed }) {
   return (
     <div className="relative">
       <Link
-        href={`/java/${chapter}/question/${question.id}`}
+        href={`/Java/${chapter}/question/${question.id}`}
         className={`block rounded-2xl border p-5 shadow-sm transition hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg ${
           completed ? "border-green-300 bg-green-50" : "border-gray-200 bg-white"
         }`}

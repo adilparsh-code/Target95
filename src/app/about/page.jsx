@@ -33,7 +33,7 @@ export default function AboutPage() {
               <Button variant="primary" size="lg" href="/practice">
                 Start Practicing
               </Button>
-              <Button variant="outline" size="lg" href="/java">
+              <Button variant="outline" size="lg" href="/Java">
                 Browse Chapters
               </Button>
             </div>

@@ -19,7 +19,7 @@ const primaryLinks = [
     label: "Learn", 
     dropdown: [
       { href: "/study", label: "Subjects" },
-      { href: "/java", label: "Chapters" },
+      { href: "/Java", label: "Chapters" },
     ]
   },
   { 

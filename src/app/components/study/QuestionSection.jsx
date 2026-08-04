@@ -41,7 +41,7 @@ export default function QuestionSection({ chapter, questions }) {
           </p>
         </div>
         <Link
-          href={`/java/${chapter}`}
+          href={`/Java/${chapter}`}
           className="inline-flex items-center gap-1 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
           Practice All
@@ -87,7 +87,7 @@ export default function QuestionSection({ chapter, questions }) {
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <Link
-                    href={`/java/${chapter}/question/${q.id}`}
+                    href={`/Java/${chapter}/question/${q.id}`}
                     className="rounded-xl bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-700"
                   >
                     Solve
@@ -134,7 +134,7 @@ export default function QuestionSection({ chapter, questions }) {
       {questions.length > 10 && (
         <div className="mt-4 text-center">
           <Link
-            href={`/java/${chapter}`}
+            href={`/Java/${chapter}`}
             className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-800 transition"
           >
             View all {questions.length} questions

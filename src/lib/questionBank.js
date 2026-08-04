@@ -23,7 +23,7 @@ export function normalizeQuestion(question) {
     isCompleted: Boolean(question.isCompleted),
     createdAt: question.createdAt || null,
     updatedAt: question.updatedAt || null,
-    practiceHref: question.chapter ? `/java/${question.chapter}/question/${question.id}` : "/practice/setup",
+    practiceHref: question.chapter ? `/Java/${question.chapter}/question/${question.id}` : "/practice/setup",
   };
 }
 

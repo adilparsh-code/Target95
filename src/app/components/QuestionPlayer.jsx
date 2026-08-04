@@ -42,7 +42,7 @@ export default function QuestionPlayer({
         <p className="text-sm text-gray-500">Home / Java / {chapterLabel}</p>
         
         <Link 
-           href="/java" 
+           href="/Java" 
            className="mt-3 inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
          >
            <ChevronLeft className="w-4 h-4" />
@@ -84,7 +84,7 @@ export default function QuestionPlayer({
             {chapterQuestions.map((q) => (
               <Link
                 key={q.id}
-                href={`/java/${chapter}/question/${q.id}`}
+                href={`/Java/${chapter}/question/${q.id}`}
                 className={`flex h-14 w-14 items-center justify-center rounded-full font-bold transition ${
                   q.id === question.id ? "bg-blue-700 text-white" : "bg-gray-200 hover:bg-gray-300"
                 }`}
@@ -99,7 +99,7 @@ export default function QuestionPlayer({
           <div>
             {previousQuestion ? (
               <Link
-                href={`/java/${chapter}/question/${previousQuestion.id}`}
+                href={`/Java/${chapter}/question/${previousQuestion.id}`}
                 className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
               >
                 <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
@@ -114,7 +114,7 @@ export default function QuestionPlayer({
           <div>
             {nextQuestion ? (
               <Link
-                href={`/java/${chapter}/question/${nextQuestion.id}`}
+                href={`/Java/${chapter}/question/${nextQuestion.id}`}
                 className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group ml-auto"
               >
                 <div className="text-right">
@@ -125,7 +125,7 @@ export default function QuestionPlayer({
               </Link>
             ) : (
               <Link 
-                 href="/java" 
+                 href="/Java" 
                  className="flex items-center gap-2 px-6 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl border border-green-400/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group ml-auto"
                >
                  <div className="text-right">

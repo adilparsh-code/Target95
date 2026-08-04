@@ -29,7 +29,7 @@ export default function RecommendedTopics({ topics = [] }) {
                 <p className="mt-1 text-xs text-gray-500">{topic.reason}</p>
               </div>
               <Link
-                href={`/java`}
+                href={`/Java`}
                 className="ml-3 shrink-0 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-900 hover:border-gray-400 transition"
               >
                 Practice

@@ -7,7 +7,7 @@ const subjects = [
     color: "from-orange-500 to-red-600",
     bgColor: "bg-orange-50",
     borderColor: "border-orange-200",
-    href: "/java",
+    href: "/Java",
     totalChapters: 12,
     totalQuestions: 450,
     estimatedStudyTime: "12 hours",

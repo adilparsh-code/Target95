@@ -18,8 +18,8 @@ export function createLearningRecommendations(chapters, mockTests = []) {
   const activeChapter = chapters.find((chapter) => chapter.solved > 0 && chapter.remaining > 0) || chapters.find((chapter) => chapter.remaining > 0);
   const weakChapter = [...chapters].filter((chapter) => chapter.solved > 0).sort((a, b) => a.accuracy - b.accuracy)[0];
   const recommendations = [];
-  if (activeChapter) recommendations.push({ id: "continue", title: `Continue ${activeChapter.title}`, description: `${activeChapter.remaining} questions remain in this chapter.`, href: `/java/${activeChapter.slug}`, action: "Resume" });
-  if (weakChapter && weakChapter.accuracy < 70) recommendations.push({ id: "revise", title: `Revise ${weakChapter.title}`, description: `Current accuracy is ${weakChapter.accuracy}%. Review the topic before progressing.`, href: `/java/${weakChapter.slug}`, action: "Revise" });
+  if (activeChapter) recommendations.push({ id: "continue", title: `Continue ${activeChapter.title}`, description: `${activeChapter.remaining} questions remain in this chapter.`, href: `/Java/${activeChapter.slug}`, action: "Resume" });
+  if (weakChapter && weakChapter.accuracy < 70) recommendations.push({ id: "revise", title: `Revise ${weakChapter.title}`, description: `Current accuracy is ${weakChapter.accuracy}%. Review the topic before progressing.`, href: `/Java/${weakChapter.slug}`, action: "Revise" });
   recommendations.push({ id: "easy", title: "Build confidence with easy questions", description: "Use focused practice to reinforce fundamentals.", href: "/question-bank", action: "Practice" });
   recommendations.push({ id: "medium", title: "Try medium questions", description: "Move to application-based questions when you feel ready.", href: "/question-bank", action: "Explore" });
   if (!mockTests.length || mockTests.at(0)?.percentage >= 60) recommendations.push({ id: "mock", title: "Attempt a mock test", description: "Check your readiness across multiple chapters.", href: "/mock-test", action: "Start test" });

@@ -281,7 +281,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
           <div className="border-t border-gray-200 dark:border-gray-700 p-4 space-y-2">
             {prevChapter && (
               <Link
-                href={`/java/${prevChapter.slug}`}
+                href={`/Java/${prevChapter.slug}`}
                 className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -290,7 +290,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
             )}
             {nextChapter && (
               <Link
-                href={`/java/${nextChapter.slug}`}
+                href={`/Java/${nextChapter.slug}`}
                 className="flex items-center justify-end gap-2 px-3 py-2 text-sm text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               >
                 Next
@@ -371,7 +371,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
           <nav className="mb-6">
             <ol className="flex flex-wrap items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
               <li>
-                <Link href="/java" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
+                <Link href="/Java" className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-medium">
                   Java Programming
                 </Link>
               </li>
@@ -384,7 +384,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
 
           {/* Back to Java chapters */}
           <Link
-            href="/java"
+            href="/Java"
             className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-6"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -441,7 +441,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
           {/* Quick Action Cards */}
           <section className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12" aria-label="Quick Actions">
             <Link
-              href={`/java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
+              href={`/Java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
               className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-5 text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/40 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
               aria-label="Start Learning this chapter"
             >
@@ -452,7 +452,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
             </Link>
 
             <Link
-              href={`/java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
+              href={`/Java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
               className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-700"
               aria-label="Practice Questions"
             >
@@ -485,7 +485,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
             </Link>
 
             <Link
-              href={`/java/${chapter}/mcqs`}
+              href={`/Java/${chapter}/mcqs`}
               className="col-span-2 md:col-span-1 group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-700"
               aria-label="Multiple Choice Questions"
             >
@@ -784,7 +784,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
             <div className="flex flex-col sm:flex-row gap-4 justify-between">
               {prevChapter ? (
                 <Link
-                  href={`/java/${prevChapter.slug}`}
+                  href={`/Java/${prevChapter.slug}`}
                   className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
                 >
                   <ChevronLeft className="w-5 h-5 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
@@ -797,7 +797,7 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
               
               {nextChapter && (
                 <Link
-                  href={`/java/${nextChapter.slug}`}
+                  href={`/Java/${nextChapter.slug}`}
                   className="flex items-center gap-2 px-6 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/50 dark:border-gray-700/50 hover:border-blue-400 dark:hover:border-blue-600 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group ml-auto"
                 >
                   <div className="text-right">

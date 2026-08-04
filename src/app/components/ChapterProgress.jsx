@@ -43,7 +43,7 @@ export default function ChapterProgress({ chapter, questions }) {
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         {continueQuestion ? (
           <Link
-            href={`/java/${chapter}/question/${continueQuestion.id}`}
+            href={`/Java/${chapter}/question/${continueQuestion.id}`}
             className="inline-flex justify-center rounded-xl bg-blue-100 px-6 py-3 font-semibold text-gray-900 transition hover:bg-blue-200"
           >
             Continue Learning

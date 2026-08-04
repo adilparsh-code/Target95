@@ -16,7 +16,7 @@ const studyChapters = [
 export default function sitemap() {
   const routes = [
     "",
-    "/java",
+    "/Java",
     "/study",
     "/roadmap",
     "/about",

@@ -180,7 +180,7 @@ export default function StudentDashboard() {
               📖 Resume Learning
             </Button>
           </Link>
-          <Link href="/java">
+          <Link href="/Java">
             <Button variant="outline" className="flex items-center gap-2">
               ❓ Practice Questions
             </Button>

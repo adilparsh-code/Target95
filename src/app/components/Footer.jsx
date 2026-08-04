@@ -34,7 +34,7 @@ export default function Footer() {
               {[
                 { label: "Home", href: "/" },
                 { label: "Study", href: "/study" },
-                { label: "Practice", href: "/java" },
+                { label: "Practice", href: "/Java" },
                 { label: "Mock Tests", href: "/mock-test" },
               ].map((item) => (
                 <li key={item.label}>

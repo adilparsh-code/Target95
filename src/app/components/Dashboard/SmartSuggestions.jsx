@@ -20,7 +20,7 @@ export default function SmartSuggestions({ suggestions = [] }) {
               </div>
             </div>
             <Link
-              href="/java"
+              href="/Java"
               className="mt-3 inline-flex items-center text-xs font-semibold text-blue-600 hover:text-blue-700"
             >
               {suggestion.action} →

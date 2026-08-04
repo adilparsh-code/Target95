@@ -55,7 +55,7 @@ export default function BookmarksList({ questions }) {
                 
                 <div className="flex items-center justify-between p-6 pt-0 gap-4">
                   <Link
-                    href={`/java/${bookmark.chapter}/question/${question.id}`}
+                    href={`/Java/${bookmark.chapter}/question/${question.id}`}
                     className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-xl bg-blue-600 text-white font-medium transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                     aria-label={`Resume ${question.chapter} question ${question.id}`}
                   >
@@ -88,7 +88,7 @@ export default function BookmarksList({ questions }) {
               Start bookmarking questions you want to revisit for revision. They'll appear here for easy access.
             </p>
             <Link
-              href="/java"
+              href="/Java"
               className="mt-8 inline-flex items-center justify-center min-h-[44px] rounded-xl bg-blue-600 px-8 py-3 text-white font-medium transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

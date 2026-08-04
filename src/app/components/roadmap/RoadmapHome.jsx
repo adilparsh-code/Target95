@@ -192,7 +192,7 @@ export default function RoadmapHome() {
                       Start Studying
                     </Link>
                     <Link
-                      href="/java"
+                      href="/Java"
                       className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-xs font-semibold text-gray-900 hover:border-gray-400 transition"
                     >
                       Practice Questions

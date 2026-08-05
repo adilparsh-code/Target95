@@ -4,6 +4,7 @@ import Link from "next/link";
 import Button from "./ui/Button";
 import Container from "./ui/Container";
 import subjectsData from "../data/subjects";
+import { boardClassSubjectMap } from "../ClientHome";
 
 const boards = [
   {
@@ -28,10 +29,30 @@ const boards = [
   },
 ];
 
-// Use subjects from data file - filter out coming soon subjects
-const subjects = subjectsData
-  .filter(subject => !subject.comingSoon)
-  .map(subject => ({
+export default function Hero({ 
+  onBoardSelect, 
+  onBackToBoards, 
+  onClassSelect,
+  onBackToClasses,
+  showSubjects, 
+  showClasses,
+  selectedBoard, 
+  selectedClass,
+  showStartLearning, 
+  onStartLearning,
+  personalization 
+}) {
+  // Get available classes for selected board
+  const availableClasses = selectedBoard && boardClassSubjectMap[selectedBoard.toLowerCase()] 
+    ? boardClassSubjectMap[selectedBoard.toLowerCase()].classes 
+    : [];
+  
+  // Get subjects for selected class and filter them
+  const availableSubjects = selectedClass && selectedClass.subjects
+    ? subjectsData.filter(subject => selectedClass.subjects.includes(subject.id) && !subject.comingSoon)
+    : [];
+  
+  const subjects = availableSubjects.map(subject => ({
     id: subject.id,
     title: subject.title,
     subtitle: subject.title,
@@ -42,8 +63,6 @@ const subjects = subjectsData
     borderColor: subject.borderColor,
     href: subject.href,
   }));
-
-export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, selectedBoard, showStartLearning, onStartLearning }) {
   return (
     <section className="relative flex flex-col items-center overflow-hidden px-4 py-12 sm:py-16 md:py-24 lg:py-32">
       {/* Background decoration */}
@@ -72,24 +91,117 @@ export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, sele
         </div>
 
         {/* Back Button */}
-        {showSubjects && (
+        {(showSubjects || showClasses) && (
           <div className="relative mb-8 max-w-4xl mx-auto">
             <button 
-              onClick={onBackToBoards}
+              onClick={showClasses ? onBackToBoards : onBackToClasses}
               className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors font-medium"
             >
               <span>←</span>
-              <span>Back to Boards</span>
+              <span>Back to {showClasses ? "Boards" : "Classes"}</span>
             </button>
           </div>
         )}
 
+        {/* Continue Learning Section */}
+        {!showClasses && !showSubjects && personalization?.board && personalization?.class && (
+          <div className="relative mb-10 sm:mb-14 lg:mb-16">
+            <div className="max-w-2xl mx-auto">
+              <div className="rounded-3xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-8 sm:p-10 shadow-xl">
+                <div className="text-center mb-6">
+                  <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100/80 rounded-full text-blue-700 text-sm font-semibold border border-blue-200 shadow-sm mb-4">
+                    <span>📚</span>
+                    <span>Continue Learning</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                    Welcome Back!
+                  </h2>
+                  <p className="text-gray-600">
+                    You're currently studying:
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                  <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
+                    <div className="text-center sm:text-left">
+                      <p className="text-sm text-gray-500 mb-1">Board</p>
+                      <p className="text-lg font-bold text-gray-900">{personalization.board.toUpperCase()}</p>
+                    </div>
+                    <div className="hidden sm:block text-gray-300">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <p className="text-sm text-gray-500 mb-1">Class</p>
+                      <p className="text-lg font-bold text-gray-900">{personalization.class.title}</p>
+                    </div>
+                    <div className="hidden sm:block text-gray-300">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <p className="text-sm text-gray-500 mb-1">Subject</p>
+                      <p className="text-lg font-bold text-gray-900 capitalize">{personalization.subject}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    onClick={onStartLearning}
+                    className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold shadow-md hover:shadow-lg"
+                  >
+                    Continue Learning
+                    <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={onBackToBoards}
+                    className="inline-flex items-center justify-center px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold"
+                  >
+                    Change Class
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Board Selection Cards */}
-        {!showSubjects && (
+        {!showClasses && !showSubjects && (!personalization?.board || !personalization?.class) && (
           <div className="relative mb-10 sm:mb-14 lg:mb-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
               {boards.map((board) => (
                 <BoardCard key={board.id} board={board} onBoardSelect={onBoardSelect} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Class Selection Section */}
+        {showClasses && (
+          <div className="relative mb-10 sm:mb-14 lg:mb-16">
+            <div className="text-center mb-10 md:mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100/80 rounded-full text-blue-700 text-sm font-semibold border border-blue-200 shadow-sm mb-4">
+                <span>🎓</span>
+                <span>Select your class for {selectedBoard}</span>
+              </div>
+              <h2
+                id="classes-heading"
+                className="text-3xl sm:text-4xl font-bold text-gray-900"
+              >
+                Choose Your Class
+              </h2>
+              <p className="mt-3 text-gray-600 max-w-xl mx-auto">
+                Select your class to see relevant subjects for your curriculum.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+              {availableClasses.map((classItem, index) => (
+                <ClassCard key={classItem.id} classItem={classItem} onClassSelect={onClassSelect} index={index} />
               ))}
             </div>
           </div>
@@ -101,7 +213,7 @@ export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, sele
             <div className="text-center mb-10 md:mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100/80 rounded-full text-blue-700 text-sm font-semibold border border-blue-200 shadow-sm mb-4">
                 <span>📚</span>
-                <span>Subjects for {selectedBoard}</span>
+                <span>Subjects for {selectedClass?.title}</span>
               </div>
               <h2
                 id="subjects-heading"
@@ -149,17 +261,20 @@ export default function Hero({ onBoardSelect, onBackToBoards, showSubjects, sele
   );
 }
 
-function BoardCard({ board, onBoardSelect }) {
+
+function ClassCard({ classItem, onClassSelect, index }) {
+  const animationDelay = `${index * 150}ms`;
+
   const handleClick = () => {
-    if (onBoardSelect) {
-      onBoardSelect(board.title);
+    if (onClassSelect) {
+      onClassSelect(classItem);
     }
   };
 
   const handleKeyDown = (e) => {
-    if (onBoardSelect && (e.key === "Enter" || e.key === " ")) {
+    if (onClassSelect && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
-      onBoardSelect(board.title);
+      onClassSelect(classItem);
     }
   };
 
@@ -169,43 +284,47 @@ function BoardCard({ board, onBoardSelect }) {
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
-      className={`group relative rounded-2xl sm:rounded-3xl border-2 ${board.borderColor} ${board.bgColor} p-6 sm:p-8 lg:p-10 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:-translate-y-2 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+      className={`group relative rounded-2xl sm:rounded-3xl border-2 border-blue-200 bg-blue-50 p-6 sm:p-8 lg:p-10 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:-translate-y-2 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+      style={{
+        transitionDelay: animationDelay,
+        transitionProperty: "transform, opacity, box-shadow",
+        transitionDuration: "500ms",
+        transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+      }}
     >
       {/* Gradient overlay on hover */}
       <div
-        className={`absolute inset-0 bg-gradient-to-br ${board.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+        className="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-700 opacity-0 group-hover:opacity-5 transition-opacity duration-500"
       />
 
       <div className="relative flex flex-col items-center text-center h-full">
         {/* Icon */}
         <div
-          className={`w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-2xl bg-gradient-to-br ${board.color} flex items-center justify-center text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-5 lg:mb-6 shadow-md group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 ease-out`}
+          className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-5 lg:mb-6 shadow-md group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 ease-out"
         >
-          {board.icon}
+          📖
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-1 group-hover:text-blue-700 transition-colors duration-300">
-          {board.title}
-        </h2>
-        <p className="text-sm font-semibold text-gray-500 mb-3 sm:mb-4">
-          {board.subtitle}
-        </p>
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+          {classItem.title}
+        </h3>
 
         {/* Description */}
-        <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6 flex-1 max-w-sm">
-          {board.description}
+        <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-5 max-w-sm">
+          Access all the relevant study material and practice questions for {classItem.title}.
         </p>
 
         {/* Action Button */}
         <div className="mt-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-sm sm:text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">
-          Explore {board.title}
+          Select Class
           <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
         </div>
       </div>
     </div>
   );
 }
+
 
 function SubjectCard({ subject, index }) {
   const animationDelay = `${index * 150}ms`;

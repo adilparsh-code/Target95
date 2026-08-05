@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import Button from "./ui/Button";
 import Container from "./ui/Container";
 import { useAuth } from "@/context/AuthContext";
+import { usePersonalization } from "../hooks/usePersonalization";
 import StudentGlobalSearch from "./StudentGlobalSearch";
 import { 
   MagnifyingGlassIcon, Bars3Icon, XMarkIcon, SunIcon, MoonIcon, 
@@ -64,6 +65,7 @@ const mobileLinks = [
 export default function Navbar() {
   const { user, logout, loading } = useAuth();
   const { theme, setTheme } = useTheme();
+  const { board, class: selectedClassData, isHydrated } = usePersonalization();
   const router = useRouter();
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -187,6 +189,16 @@ export default function Navbar() {
             <span className="hidden sm:inline">Target95+</span>
             <span className="sm:hidden">T95+</span>
           </Link>
+
+          {/* Class indicator - show when board and class are selected */}
+          {isHydrated && board && selectedClassData && (
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-full text-xs font-medium text-blue-700 dark:text-blue-300">
+              <span className="text-sm">📚</span>
+              <span>{board.toUpperCase()}</span>
+              <span className="text-blue-400">•</span>
+              <span>{selectedClassData.title}</span>
+            </div>
+          )}
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center justify-center gap-1">
@@ -450,7 +462,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <StudentGlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <StudentGlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} personalization={typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('target95_personalization') || '{}') : {}} />
     </nav>
   );
 }

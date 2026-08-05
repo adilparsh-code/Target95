@@ -8,7 +8,7 @@ const actions = [
   ["concepts", "Key Concepts"], ["similar", "Similar Questions"], ["analysis", "Difficulty & Time"],
 ];
 
-export default function QuestionTutorPanel({ question, wrongAnswerContext }) {
+export default function QuestionTutorPanel({ question, wrongAnswerContext, personalization }) {
   const [open, setOpen] = useState(false);
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,12 @@ export default function QuestionTutorPanel({ question, wrongAnswerContext }) {
     setResponse(await getTutorResponse({ 
       action, 
       question,
-      wrongAnswerContext 
+      wrongAnswerContext,
+      board: personalization?.board,
+      class: personalization?.class,
+      subject: personalization?.subject,
+      chapter: question?.chapter || personalization?.chapter,
+      questionType: question?.type || personalization?.questionType
     }));
     setLoading(false);
   };

@@ -14,6 +14,7 @@ import useProgress from "../hooks/useProgress";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import QuestionTutorPanel from "./ai-tutor/QuestionTutorPanel";
+import { usePersonalization } from "../hooks/usePersonalization";
 
 export default function QuestionPlayer({
   question,
@@ -25,6 +26,7 @@ export default function QuestionPlayer({
 }) {
   const { markCompleted } = useProgress();
   const [wrongAnswerContext, setWrongAnswerContext] = useState(null);
+  const { board, class: classData, subject } = usePersonalization();
 
   useEffect(() => {
     markCompleted({ chapter, questionId: question.id });
@@ -150,7 +152,7 @@ export default function QuestionPlayer({
       </div>
       </div>
       <Footer />
-      <QuestionTutorPanel question={question} wrongAnswerContext={wrongAnswerContext} />
+      <QuestionTutorPanel question={question} wrongAnswerContext={wrongAnswerContext} personalization={{ board, class: classData, subject, chapter, questionType: question?.type }} />
     </main>
   );
 }

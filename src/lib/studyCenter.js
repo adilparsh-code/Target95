@@ -642,7 +642,9 @@ Student s2 = new Student("Alice", 20);`,
   },
 };
 
-export function getStudyChapters() {
+export function getStudyChapters(filters = {}) {
+  const { board, class: selectedClass } = filters;
+  
   return javaChapters.map((chapter) => {
     const chapterQuestions = questions.filter((item) => item.chapter === chapter.slug);
     const easyCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "easy").length;
@@ -698,8 +700,8 @@ export function getStudyChapters() {
   });
 }
 
-export function getStudyChapterBySlug(slug) {
-  return getStudyChapters().find((chapter) => chapter.slug === slug);
+export function getStudyChapterBySlug(slug, filters = {}) {
+  return getStudyChapters(filters).find((chapter) => chapter.slug === slug);
 }
 
 export function getStudyProgressState() {
@@ -736,13 +738,13 @@ export function saveStudyProgressState(progress) {
  * Search across all study chapters, topics, questions, and keywords.
  * Supports: subject, chapter, topic, question, keywords, instant search.
  */
-export function searchStudyContent(query) {
+export function searchStudyContent(query, filters = {}) {
   if (!query || !query.trim()) {
-    return { chapters: getStudyChapters(), results: [] };
+    return { chapters: getStudyChapters(filters), results: [] };
   }
 
   const q = query.trim().toLowerCase();
-  const chapters = getStudyChapters();
+  const chapters = getStudyChapters(filters);
 
   const results = [];
 

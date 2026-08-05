@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getStudyChapters } from "../../lib/studyCenter";
+import { getStudyChapters, searchStudyContent } from "../../lib/studyCenter";
 import { questions as practiceQuestions } from "../data/questions";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -21,14 +21,20 @@ const typeColors = {
   subject: "text-indigo-600 bg-indigo-50",
 };
 
-export default function StudentGlobalSearch({ isOpen, onClose }) {
+export default function StudentGlobalSearch({ isOpen, onClose, personalization }) {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [results, setResults] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef(null);
   const router = useRouter();
-  const chapters = useMemo(() => getStudyChapters(), []);
+  
+  const activeBoard = personalization?.board;
+  const activeClass = personalization?.class;
+  
+  const chapters = useMemo(() => {
+    return getStudyChapters({ board: activeBoard, class: activeClass });
+  }, [activeBoard, activeClass]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -63,30 +69,23 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
 
     const term = debouncedQuery.toLowerCase();
     const matched = [];
+    const filters = { board: activeBoard, class: activeClass };
 
-    chapters.forEach((chapter) => {
-      const searchText = [
-        chapter.title,
-        chapter.slug,
-        chapter.studyData?.intro || "",
-        ...(chapter.studyData?.concepts || []),
-        ...(chapter.studyData?.definitions || []),
-        ...(chapter.studyData?.notes || []),
-      ]
-        .join(" ")
-        .toLowerCase();
+    // Use centralized search function
+    const searchResults = searchStudyContent(term, filters);
+    
+    // Convert chapter results to search results
+    searchResults.chapters.forEach((chapter) => {
+      matched.push({
+        id: `chapter-${chapter.slug}`,
+        title: chapter.title,
+        description: chapter.studyData?.intro || "",
+        href: `/study/${chapter.slug}`,
+        type: "chapter",
+        chapter: chapter.slug,
+      });
 
-      if (searchText.includes(term)) {
-        matched.push({
-          id: `chapter-${chapter.slug}`,
-          title: chapter.title,
-          description: chapter.studyData?.intro || "",
-          href: `/study/${chapter.slug}`,
-          type: "chapter",
-          chapter: chapter.slug,
-        });
-      }
-
+      // Add matching concepts
       if (chapter.studyData?.concepts) {
         chapter.studyData.concepts.forEach((concept, idx) => {
           if (concept.toLowerCase().includes(term)) {
@@ -103,6 +102,7 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
       }
     });
 
+    // Search practice questions with board/class filtering
     practiceQuestions.forEach((q, idx) => {
       const searchText = [
         q.title,
@@ -115,6 +115,14 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
         .toLowerCase();
 
       if (searchText.includes(term)) {
+        // Filter by board if personalization is active
+        if (activeBoard) {
+          const questionBoard = q.board || (q.subject === 'python' ? 'cbse' : 'cisce');
+          if (questionBoard !== activeBoard) {
+            return;
+          }
+        }
+
         matched.push({
           id: `question-${q.slug || idx}`,
           title: q.title,
@@ -129,7 +137,7 @@ export default function StudentGlobalSearch({ isOpen, onClose }) {
 
     setResults(matched.slice(0, 12));
     setSelectedIndex(-1);
-  }, [debouncedQuery, chapters]);
+  }, [debouncedQuery, chapters, activeBoard, activeClass]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {

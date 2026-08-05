@@ -6,18 +6,31 @@ import ChatSidebar from "../components/ai-tutor/ChatSidebar";
 import ChatWindow from "../components/ai-tutor/ChatWindow";
 import PromptInput from "../components/ai-tutor/PromptInput";
 import { useAITutor } from "../hooks/useAITutor";
+import { usePersonalization } from "../hooks/usePersonalization";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 function AITutorContent() {
   const searchParams = useSearchParams();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { board, class: selectedClass, subject, isHydrated } = usePersonalization();
   
   // Extract context from URL parameters if coming from a question page
-  const questionContext = {
+  const urlContext = {
     question: searchParams.get("question") || "",
     chapter: searchParams.get("chapter") || "",
     difficulty: searchParams.get("difficulty") || "",
     subject: searchParams.get("subject") || "Computer Science"
+  };
+  
+  // Merge URL context with personalization context (URL params take precedence)
+  const questionContext = {
+    board: board,
+    class: selectedClass,
+    subject: subject || urlContext.subject,
+    chapter: urlContext.chapter || "",
+    question: urlContext.question || "",
+    difficulty: urlContext.difficulty || "",
+    questionType: searchParams.get("questionType") || ""
   };
 
   const {

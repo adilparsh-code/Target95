@@ -8,13 +8,18 @@ const actions = [
   ["concepts", "Key Concepts"], ["similar", "Similar Questions"], ["analysis", "Difficulty & Time"],
 ];
 
-export default function QuestionTutorPanel({ question }) {
+export default function QuestionTutorPanel({ question, wrongAnswerContext }) {
   const [open, setOpen] = useState(false);
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const askTutor = async (action) => {
     setLoading(true);
-    setResponse(await getTutorResponse({ action, question }));
+    // Pass the wrong answer context to the AI tutor if it exists
+    setResponse(await getTutorResponse({ 
+      action, 
+      question,
+      wrongAnswerContext 
+    }));
     setLoading(false);
   };
 

@@ -3,13 +3,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import Button from "./ui/Button";
 import Container from "./ui/Container";
 import { useAuth } from "@/context/AuthContext";
 import StudentGlobalSearch from "./StudentGlobalSearch";
 import { 
   MagnifyingGlassIcon, Bars3Icon, XMarkIcon, SunIcon, MoonIcon, 
-  ChevronDownIcon, BellIcon
+  ChevronDownIcon, BellIcon, ComputerDesktopIcon
 } from "@heroicons/react/24/outline";
 
 // Primary navigation items (max 6-7 visible)
@@ -62,24 +63,30 @@ const mobileLinks = [
 
 export default function Navbar() {
   const { user, logout, loading } = useAuth();
+  const { theme, setTheme } = useTheme();
   const router = useRouter();
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const dropdownRefs = useRef({});
+  const themeDropdownRef = useRef(null);
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (openDropdown && dropdownRefs.current[openDropdown] && !dropdownRefs.current[openDropdown].contains(event.target)) {
         setOpenDropdown(null);
       }
+      if (themeDropdownOpen && themeDropdownRef.current && !themeDropdownRef.current.contains(event.target)) {
+        setThemeDropdownOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [openDropdown]);
+  }, [openDropdown, themeDropdownOpen]);
 
   // Close dropdown when pressing escape
   useEffect(() => {
@@ -95,20 +102,7 @@ export default function Navbar() {
   }, [mobileMenuOpen, searchOpen]);
 
   useEffect(() => {
-    // Check localStorage or system preference on mount
-    const savedDarkMode = localStorage.getItem('darkMode');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedDarkMode === 'true') {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    } else if (savedDarkMode === 'false') {
-      setDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    } else if (prefersDark) {
-      setDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
+    setMounted(true);
   }, []);
 
   // Handle Escape key to close mobile menu
@@ -154,16 +148,11 @@ export default function Navbar() {
     }
   }, [mobileMenuOpen]);
 
-  const toggleDarkMode = () => {
-    const newDarkMode = !darkMode;
-    setDarkMode(newDarkMode);
-    localStorage.setItem('darkMode', newDarkMode.toString());
-    
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+  const getThemeIcon = () => {
+    if (!mounted) return <MoonIcon className="h-5 w-5" aria-hidden="true" />;
+    if (theme === 'dark') return <SunIcon className="h-5 w-5" aria-hidden="true" />;
+    if (theme === 'light') return <MoonIcon className="h-5 w-5" aria-hidden="true" />;
+    return <ComputerDesktopIcon className="h-5 w-5" aria-hidden="true" />;
   };
 
   const handleLogout = async () => {
@@ -275,15 +264,58 @@ export default function Navbar() {
               <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
             </button>
             
-            {/* Dark mode toggle */}
-            <button
-              type="button"
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <SunIcon className="h-5 w-5" aria-hidden="true" /> : <MoonIcon className="h-5 w-5" aria-hidden="true" />}
-            </button>
+            {/* Theme selector dropdown */}
+            <div className="relative" ref={themeDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setThemeDropdownOpen(!themeDropdownOpen)}
+                className="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+                aria-label="Toggle theme"
+                aria-expanded={themeDropdownOpen}
+              >
+                {getThemeIcon()}
+              </button>
+              
+              {/* Theme dropdown menu */}
+              {themeDropdownOpen && (
+                <div className="absolute top-full right-0 mt-2 w-40 rounded-2xl bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="absolute -top-1 right-4 w-2 h-2 bg-white dark:bg-gray-800 border-l border-t border-gray-100 dark:border-gray-700 rotate-45"></div>
+                  <button
+                    onClick={() => { setTheme('light'); setThemeDropdownOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-150 mx-2 rounded-xl ${
+                      theme === 'light' 
+                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" 
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <MoonIcon className="h-4 w-4" />
+                    Light
+                  </button>
+                  <button
+                    onClick={() => { setTheme('dark'); setThemeDropdownOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-150 mx-2 rounded-xl ${
+                      theme === 'dark' 
+                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" 
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <SunIcon className="h-4 w-4" />
+                    Dark
+                  </button>
+                  <button
+                    onClick={() => { setTheme('system'); setThemeDropdownOpen(false); }}
+                    className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-150 mx-2 rounded-xl ${
+                      theme === 'system' 
+                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400" 
+                        : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                    }`}
+                  >
+                    <ComputerDesktopIcon className="h-4 w-4" />
+                    System
+                  </button>
+                </div>
+              )}
+            </div>
 
             {/* Notifications - only show if user is logged in */}
             {user && (

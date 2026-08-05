@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -24,10 +24,16 @@ export default function QuestionPlayer({
   nextQuestion,
 }) {
   const { markCompleted } = useProgress();
+  const [wrongAnswerContext, setWrongAnswerContext] = useState(null);
 
   useEffect(() => {
     markCompleted({ chapter, questionId: question.id });
   }, [chapter, markCompleted, question.id]);
+
+  const handleExplainWithAI = (context) => {
+    setWrongAnswerContext(context);
+    // The AI Tutor panel will use this context
+  };
 
   const chapterLabel = String(chapter).replace(/-/g, " ");
   const questionText = question.prompt || question.question;
@@ -69,7 +75,10 @@ export default function QuestionPlayer({
         </div>
 
         {isMultipleChoice ? (
-          <MCQQuestion question={{ ...question, question: questionText }} />
+          <MCQQuestion 
+            question={{ ...question, question: questionText }} 
+            onExplainWithAI={handleExplainWithAI}
+          />
         ) : (
           <>
             <QuestionCard question={questionText} />
@@ -80,16 +89,17 @@ export default function QuestionPlayer({
         <div className="mt-10">
           <h3 className="mb-4 text-lg font-semibold text-gray-700">Jump to Question</h3>
 
-          <div className="flex flex-wrap gap-3">
-            {chapterQuestions.map((q) => (
+          <div className="flex flex-wrap gap-2">
+            {chapterQuestions.map((q, index) => (
               <Link
                 key={q.id}
                 href={`/Java/${chapter}/question/${q.id}`}
-                className={`flex h-14 w-14 items-center justify-center rounded-full font-bold transition ${
-                  q.id === question.id ? "bg-blue-700 text-white" : "bg-gray-200 hover:bg-gray-300"
+                className={`flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full font-bold text-sm transition ${
+                  q.id === question.id ? "bg-blue-700 text-white" : "bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
                 }`}
+                aria-label={`Go to question ${index + 1}`}
               >
-                {q.id}
+                {index + 1}
               </Link>
             ))}
           </div>
@@ -140,7 +150,7 @@ export default function QuestionPlayer({
       </div>
       </div>
       <Footer />
-      <QuestionTutorPanel question={question} />
+      <QuestionTutorPanel question={question} wrongAnswerContext={wrongAnswerContext} />
     </main>
   );
 }

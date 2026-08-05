@@ -86,10 +86,10 @@ function createTheoryQuestions(chapter) {
 
 export const javaChapters = chapterDefinitions.map((chapter, index) => {
   const questions = [
-    ...createMcqs(chapter),
-    ...createOutputQuestions(chapter),
-    ...createProgrammingQuestions(chapter),
-    ...createTheoryQuestions(chapter),
+    ...createTheoryQuestions(chapter),      // Theory first
+    ...createProgrammingQuestions(chapter), // Then Programming Questions
+    ...createOutputQuestions(chapter),      // Then Output Questions
+    ...createMcqs(chapter),                 // Then MCQs
   ];
 
   return { ...chapter, id: index + 1, questions, questionCount: questions.length };
@@ -104,4 +104,3 @@ export const javaSubject = {
   estimatedStudyTime: javaChapters.reduce((total, chapter) => total + chapter.estimatedTime, 0),
   chapters: javaChapters,
 };
-

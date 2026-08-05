@@ -21,7 +21,7 @@ const subjects = [
     bgColor: "bg-blue-50",
     borderColor: "border-blue-200",
     href: "/python",
-    comingSoon: true,
+    comingSoon: false,
     totalChapters: 8,
     totalQuestions: 200,
     estimatedStudyTime: "8 hours",

@@ -1,16 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
-import Subjects from "./components/Subjects";
 import WhyTarget95 from "./components/WhyTarget95";
 import AIWorkflow from "./components/AIWorkflow";
 import BoardSupport from "./components/BoardSupport";
-import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import Pricing from "./components/Pricing";
 import Newsletter from "./components/Newsletter";
@@ -140,6 +139,7 @@ export default function ClientHome() {
           onBoardSelect={handleBoardSelect} 
           onBackToBoards={handleBackToBoards}
           onBackToClasses={handleBackToClasses}
+          onClassSelect={handleClassSelect}
           showSubjects={showSubjects}
           showClasses={showClasses}
           selectedBoard={selectedBoard}
@@ -148,13 +148,11 @@ export default function ClientHome() {
           onStartLearning={handleStartLearning}
           personalization={{ board, class: selectedClassData, subject }}
         />
-        <Subjects isVisible={showSubjects} />
         <Stats />
         <WhyTarget95 />
         <AIWorkflow />
         <BoardSupport />
         <Features />
-        <Testimonials />
         <FAQ />
         <Newsletter />
       </ErrorBoundary>

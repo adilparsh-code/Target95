@@ -438,52 +438,57 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
             </div>
           </header>
 
-          {/* Quick Action Cards */}
-          <section className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12" aria-label="Quick Actions">
+          {/* Quick Action Cards - Learning Flow */}
+          <section className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-12" aria-label="Learning Flow">
+            {/* Theory - Scroll to introduction */}
             <Link
-              href={`/Java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
+              href="#introduction"
               className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 p-5 text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/40 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
-              aria-label="Start Learning this chapter"
+              aria-label="Theory and Definitions"
             >
               <div className="relative z-10 flex flex-col items-center text-center">
-                <PlayCircle className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-semibold">Start Learning</span>
+                <BookOpen className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold">Theory</span>
               </div>
             </Link>
 
+            {/* Examples */}
+            <Link
+              href="#examples"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-700"
+              aria-label="Examples"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <FileText className="w-8 h-8 mb-2 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Examples</span>
+              </div>
+            </Link>
+
+            {/* Important Notes */}
+            <Link
+              href="#theoryNotes"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-700"
+              aria-label="Important Notes"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <ScrollText className="w-8 h-8 mb-2 text-violet-600 dark:text-violet-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Notes</span>
+              </div>
+            </Link>
+
+            {/* Practice - Goes to questions */}
             <Link
               href={`/Java/${chapter}/question/${chapterQuestions[0]?.id || '#'}`}
-              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-700"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-amber-300 dark:focus:ring-amber-700"
               aria-label="Practice Questions"
             >
               <div className="relative z-10 flex flex-col items-center text-center">
-                <FileQuestion className="w-8 h-8 mb-2 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Practice Questions</span>
+                <FileQuestion className="w-8 h-8 mb-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Practice</span>
               </div>
             </Link>
 
-            <Link
-              href="#quick-revision"
-              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-violet-300 dark:focus:ring-violet-700"
-              aria-label="Revision Notes"
-            >
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <FileText className="w-8 h-8 mb-2 text-violet-600 dark:text-violet-400 group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Revision Notes</span>
-              </div>
-            </Link>
-
-            <Link
-              href="#previous-year-questions"
-              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-amber-300 dark:focus:ring-amber-700"
-              aria-label="Previous Year Questions"
-            >
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <ScrollText className="w-8 h-8 mb-2 text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform" />
-                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">PYQs</span>
-              </div>
-            </Link>
-
+            {/* MCQs */}
             <Link
               href={`/Java/${chapter}/mcqs`}
               className="col-span-2 md:col-span-1 group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-rose-300 dark:focus:ring-rose-700"
@@ -492,6 +497,54 @@ export default function ChapterReader({ chapter, chapterData, chapterQuestions, 
               <div className="relative z-10 flex flex-col items-center text-center">
                 <Circle className="w-8 h-8 mb-2 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform" />
                 <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">MCQs</span>
+              </div>
+            </Link>
+
+            {/* Programming */}
+            <Link
+              href={`/Java/${chapter}/question/${chapterQuestions.find(q => q.type === 'programming')?.id || chapterQuestions[0]?.id || '#'}`}
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-emerald-300 dark:focus:ring-emerald-700"
+              aria-label="Programming Questions"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <Code2 className="w-8 h-8 mb-2 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Programming</span>
+              </div>
+            </Link>
+
+            {/* Previous Year Questions */}
+            <Link
+              href="#previous-year-questions"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-orange-300 dark:focus:ring-orange-700"
+              aria-label="Previous Year Questions"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <History className="w-8 h-8 mb-2 text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">PYQs</span>
+              </div>
+            </Link>
+
+            {/* Mock Test */}
+            <Link
+              href="/mock-test"
+              className="group relative overflow-hidden rounded-2xl bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-5 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-700"
+              aria-label="Mock Test"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <FileText className="w-8 h-8 mb-2 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">Mock Test</span>
+              </div>
+            </Link>
+
+            {/* AI Tutor */}
+            <Link
+              href="/ai-tutor"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-500 to-pink-600 p-5 text-white shadow-lg shadow-purple-500/25 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/40 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-700"
+              aria-label="AI Tutor"
+            >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <Brain className="w-8 h-8 mb-2 group-hover:scale-110 transition-transform" />
+                <span className="text-xs sm:text-sm font-semibold">AI Tutor</span>
               </div>
             </Link>
           </section>

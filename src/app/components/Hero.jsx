@@ -262,6 +262,67 @@ export default function Hero({
 }
 
 
+function BoardCard({ board, onBoardSelect }) {
+  const handleClick = () => {
+    if (onBoardSelect) {
+      onBoardSelect(board.id);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (onBoardSelect && (e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      onBoardSelect(board.id);
+    }
+  };
+
+  return (
+    <div
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      className={`group relative rounded-2xl sm:rounded-3xl border-2 ${board.borderColor} ${board.bgColor} p-6 sm:p-8 lg:p-10 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 ease-out hover:-translate-y-2 overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+    >
+      {/* Gradient overlay on hover */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${board.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+      />
+
+      <div className="relative flex flex-col items-center text-center h-full">
+        {/* Icon */}
+        <div
+          className={`w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 rounded-2xl bg-gradient-to-br ${board.color} flex items-center justify-center text-4xl sm:text-5xl lg:text-6xl mb-4 sm:mb-5 lg:mb-6 shadow-md group-hover:scale-110 group-hover:shadow-xl transition-all duration-500 ease-out`}
+        >
+          {board.icon}
+        </div>
+
+        {/* Title */}
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 group-hover:text-blue-700 transition-colors duration-300">
+          {board.title}
+        </h3>
+
+        {/* Subtitle */}
+        <p className="text-sm sm:text-base text-gray-500 mb-3 font-medium">
+          {board.subtitle}
+        </p>
+
+        {/* Description */}
+        <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-5 max-w-sm">
+          {board.description}
+        </p>
+
+        {/* Action Button */}
+        <div className="mt-auto inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-sm sm:text-base hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-md hover:shadow-lg">
+          Select Board
+          <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 function ClassCard({ classItem, onClassSelect, index }) {
   const animationDelay = `${index * 150}ms`;
 

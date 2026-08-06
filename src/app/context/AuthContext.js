@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useMemo } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -260,7 +260,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const value = {
+  const value = useMemo(() => ({
     user,
     loading,
     error,
@@ -271,7 +271,7 @@ export function AuthProvider({ children }) {
     forgotPassword,
     resendVerification,
     clearError: () => setError(null),
-  };
+  }), [user, loading, error]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

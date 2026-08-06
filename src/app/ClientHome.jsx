@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -10,11 +10,26 @@ import Footer from "./components/Footer";
 import WhyTarget95 from "./components/WhyTarget95";
 import AIWorkflow from "./components/AIWorkflow";
 import BoardSupport from "./components/BoardSupport";
-import FAQ from "./components/FAQ";
-import Pricing from "./components/Pricing";
-import Newsletter from "./components/Newsletter";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import { usePersonalization } from "./hooks/usePersonalization";
+
+// Dynamic imports for below-the-fold components to reduce initial bundle
+import dynamic from "next/dynamic";
+
+const FAQ = dynamic(() => import("./components/FAQ"), { 
+  ssr: true,
+  loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
+});
+
+const Pricing = dynamic(() => import("./components/Pricing"), { 
+  ssr: true,
+  loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
+});
+
+const Newsletter = dynamic(() => import("./components/Newsletter"), { 
+  ssr: true,
+  loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
+});
 
 // Board → Class → Subjects mapping based on requirement
 export const boardClassSubjectMap = {
@@ -79,6 +94,13 @@ export default function ClientHome() {
 
   const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, isHydrated } = usePersonalization();
 
+  // Memoize personalization object to prevent unnecessary re-renders
+  const personalization = useMemo(() => ({
+    board,
+    class: selectedClassData,
+    subject
+  }), [board, selectedClassData, subject]);
+
   // Auto-select from personalization on mount
   useEffect(() => {
     if (isHydrated && board && selectedClassData && subject) {
@@ -126,7 +148,7 @@ export default function ClientHome() {
 
   const handleStartLearning = () => {
     // Navigate to the study page for the user's selected subject
-    if (personalization?.subject) {
+    if (subject) {
       window.location.href = '/study';
     }
   };

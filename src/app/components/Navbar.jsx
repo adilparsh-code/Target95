@@ -1,5 +1,6 @@
 "use client";
 
+import React, { memo } from "react";
 import { useState, useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
@@ -62,7 +63,7 @@ const mobileLinks = [
   { href: "/contact", label: "Contact", description: "Get in touch", icon: "✉️" },
 ];
 
-export default function Navbar() {
+export default memo(function Navbar() {
   const { user, logout, loading } = useAuth();
   const { theme, setTheme } = useTheme();
   const { board, class: selectedClassData, isHydrated } = usePersonalization();
@@ -107,20 +108,6 @@ export default function Navbar() {
     setMounted(true);
   }, []);
 
-  // Handle Escape key to close mobile menu
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-      }
-      if (e.key === 'Escape' && searchOpen) {
-        setSearchOpen(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [mobileMenuOpen, searchOpen]);
 
   // Trap focus inside mobile menu when open
   useEffect(() => {
@@ -465,8 +452,5 @@ export default function Navbar() {
       <StudentGlobalSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} personalization={typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('target95_personalization') || '{}') : {}} />
     </nav>
   );
-}
+});
 
-// Add id to main content areas for skip link
-// This is used in pages that use this Navbar
-export const NavbarSkipLinkId = 'main-content';

@@ -1,5 +1,6 @@
 "use client";
 
+import React, { memo } from "react";
 import Link from "next/link";
 import Button from "./ui/Button";
 import Container from "./ui/Container";
@@ -104,7 +105,7 @@ export default function Hero({
         )}
 
         {/* Continue Learning Section */}
-        {!showClasses && !showSubjects && personalization?.board && personalization?.class && (
+        {!showClasses && !showSubjects && personalization?.board && personalization?.class && personalization?.subject && (
           <div className="relative mb-10 sm:mb-14 lg:mb-16">
             <div className="max-w-2xl mx-auto">
               <div className="rounded-3xl border-2 border-blue-200 bg-gradient-to-br from-blue-50 to-indigo-50 p-8 sm:p-10 shadow-xl">
@@ -257,7 +258,7 @@ export default function Hero({
 }
 
 
-function BoardCard({ board, onBoardSelect }) {
+const BoardCard = memo(function BoardCard({ board, onBoardSelect }) {
   const handleClick = () => {
     if (onBoardSelect) {
       onBoardSelect(board.id);
@@ -315,10 +316,10 @@ function BoardCard({ board, onBoardSelect }) {
       </div>
     </div>
   );
-}
+});
 
 
-function ClassCard({ classItem, onClassSelect, index }) {
+const ClassCard = memo(function ClassCard({ classItem, onClassSelect, index }) {
   const animationDelay = `${index * 150}ms`;
 
   const handleClick = () => {
@@ -379,10 +380,10 @@ function ClassCard({ classItem, onClassSelect, index }) {
       </div>
     </div>
   );
-}
+});
 
 
-function SubjectCard({ subject, index }) {
+const SubjectCard = memo(function SubjectCard({ subject, index }) {
   const animationDelay = `${index * 150}ms`;
 
   return (
@@ -455,4 +456,4 @@ function SubjectCard({ subject, index }) {
       </div>
     </div>
   );
-}
+});

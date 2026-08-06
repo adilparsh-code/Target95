@@ -1,6 +1,6 @@
 "use client";
 
-export default function SegmentedProgress({ status }) {
+export default function SegmentedProgress({ status, percentage }) {
   const segments = [
     { id: 1, status: "Not Started" },
     { id: 2, status: "Studying" },
@@ -18,14 +18,19 @@ export default function SegmentedProgress({ status }) {
   };
 
   return (
-    <div className="flex w-full space-x-1">
-      {segments.map((segment) => (
-        <div key={segment.id} className="h-2 flex-1 rounded-full">
-          <div
-            className={`h-full rounded-full ${getSegmentClass(segment.status)}`}
-          />
+    <div className="w-full">
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex w-full space-x-1">
+          {segments.map((segment) => (
+            <div key={segment.id} className="h-2 flex-1 rounded-full">
+              <div
+                className={`h-full rounded-full ${getSegmentClass(segment.status)}`}
+              />
+            </div>
+          ))}
         </div>
-      ))}
+        <span className="ml-3 text-sm font-semibold text-gray-900">{percentage}%</span>
+      </div>
     </div>
   );
 }

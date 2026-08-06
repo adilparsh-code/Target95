@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const STORAGE_KEY = "target95_personalization";
 
@@ -33,15 +33,20 @@ export function usePersonalization() {
     }
   }, []);
 
-  // Persist to localStorage whenever state changes
+  // Persist to localStorage whenever state changes (debounced)
   useEffect(() => {
-    if (isHydrated) {
-      try {
+    if (!isHydrated) return;
+    
+    let timeoutId;
+    try {
+      timeoutId = setTimeout(() => {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (error) {
-        console.error("Failed to persist personalization state:", error);
-      }
+      }, 100); // Debounce localStorage writes
+    } catch (error) {
+      console.error("Failed to persist personalization state:", error);
     }
+    
+    return () => clearTimeout(timeoutId);
   }, [state, isHydrated]);
 
   const setBoard = (board) => {

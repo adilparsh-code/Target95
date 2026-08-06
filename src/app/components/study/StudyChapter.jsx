@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect, useCallback } from "react";
+import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
@@ -25,6 +25,7 @@ import {
   ArrowRightIcon,
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
+import { ScrollText, FileText } from "lucide-react";
 
 // Lazy load LearningContentEngine since it's heavy
 const LearningContentEngine = dynamic(

@@ -28,6 +28,7 @@ import {
   AlertTriangle,
   Lightbulb,
   History,
+  Clock,
 } from "lucide-react";
 
 import ChapterLayout, { CHAPTER_SECTIONS } from "./ChapterLayout";

@@ -204,18 +204,12 @@ export default function StudyHome() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-wrap items-center gap-3">
+                <div className="mt-6">
                   <Link
                     href={`/study/${chapter.slug}`}
                     className="flex-1 rounded-xl bg-blue-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700"
                   >
                     {status === "Not Started" ? "Start Studying" : "Continue Studying"}
-                  </Link>
-                  <Link
-                    href={getChapterPracticeUrl(chapter)}
-                    className="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-2 text-center text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
-                  >
-                    Practice Questions
                   </Link>
                 </div>
               </article>

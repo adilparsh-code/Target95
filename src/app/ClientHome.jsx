@@ -125,9 +125,9 @@ export default function ClientHome() {
   };
 
   const handleStartLearning = () => {
-    const subjectsSection = document.getElementById('subjects-heading');
-    if (subjectsSection) {
-      subjectsSection.scrollIntoView({ behavior: 'smooth' });
+    // Navigate to the study page for the user's selected subject
+    if (personalization?.subject) {
+      window.location.href = '/study';
     }
   };
 

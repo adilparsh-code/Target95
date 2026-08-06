@@ -5,7 +5,7 @@ import ErrorBoundary from "../components/ui/ErrorBoundary";
 
 export const metadata = {
   title: "Study Center | Target95+",
-  description: "A structured chapter-based study experience for Java learners.",
+  description: "A structured chapter-based study experience for learners.",
 };
 
 export default function StudyPage() {

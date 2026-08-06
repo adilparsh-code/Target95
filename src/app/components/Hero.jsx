@@ -143,7 +143,11 @@ export default function Hero({
                     </div>
                     <div className="text-center sm:text-left">
                       <p className="text-sm text-gray-500 mb-1">Subject</p>
-                      <p className="text-lg font-bold text-gray-900 capitalize">{personalization.subject}</p>
+                      <p className="text-lg font-bold text-gray-900 capitalize">
+                        {personalization.subject === 'java' ? 'Java Programming' : 
+                         personalization.subject === 'python' ? 'Python Programming' : 
+                         personalization.subject}
+                      </p>
                     </div>
                   </div>
                 </div>

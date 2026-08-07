@@ -2,48 +2,25 @@
 
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
+import { getStudyChapters } from "../../../lib/studyCenter";
 import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 import questionsData from "../../data/questions";
 import ChapterLayout, { CHAPTER_SECTIONS } from "../ChapterLayout";
 import ChapterSection from "../ChapterSection";
+import ChapterContentEngine from "../content/ChapterContentEngine";
 
 import {
-  BeakerIcon,
   BookOpenIcon,
-  LightBulbIcon,
-  ListBulletIcon,
-  SparklesIcon,
-  CheckCircleIcon,
   MagnifyingGlassIcon,
-  QuestionMarkCircleIcon,
-  ExclamationTriangleIcon,
   AcademicCapIcon,
   ArrowRightIcon,
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
-import { ScrollText, FileText } from "lucide-react";
 
-// Lazy load LearningContentEngine since it's heavy
-const LearningContentEngine = dynamic(
-  () => import("../learning/LearningContentEngine"),
-  { loading: () => <div className="p-8 text-center">Loading...</div> }
-);
-
-import CollapsibleSection from "./CollapsibleSection";
-import NoteCard from "./NoteCard";
-import TipCard from "./TipCard";
-import WarningCard from "./WarningCard";
-import ExampleCard from "./ExampleCard";
-import LoadingSpinner from "./LoadingSpinner";
-import ReadingProgress from "./ReadingProgress";
 import SegmentedProgress from "./SegmentedProgress";
 import QuestionSection from "./QuestionSection";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function StudyChapter({ slug }) {
   const chapters = useMemo(() => getStudyChapters(), []);
@@ -170,6 +147,10 @@ export default function StudyChapter({ slug }) {
   const status = progress[slug] ?? "Not Started";
   const studyData = chapter.studyData;
 
+  // Rich content from chapter-content and question-bank
+  const richContent = null;
+  const questionBankChapter = null;
+
   const safeSearch = sanitizeText(search).toLowerCase();
   const hasSearchResults = safeSearch
     ? searchInContent(studyData, safeSearch)
@@ -270,24 +251,13 @@ export default function StudyChapter({ slug }) {
           </div>
         </div>
 
-        {/* Learning Objectives */}
-        <ChapterSection
-          id="learning-objectives"
-          title="Learning Objectives"
-          icon={<AcademicCapIcon className="w-5 h-5" />}
-          estimatedTime={3}
-          isCompleted={completedSections.includes("section-learning-objectives")}
-        >
-          {studyData.learningObjectives && studyData.learningObjectives.length > 0 ? (
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-gray-700">
-              {studyData.learningObjectives.map((objective, idx) => (
-                <li key={idx}>{objective}</li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
+        {/* Chapter Content Engine - Renders all sections from structured data */}
+        <ChapterContentEngine
+          chapter={chapter}
+          content={richContent}
+          questions={questionBankChapter}
+          completedSections={completedSections}
+        />
 
         {/* Prerequisites */}
         <ChapterSection
@@ -357,235 +327,6 @@ export default function StudyChapter({ slug }) {
           )}
         </ChapterSection>
 
-        {/* Theory */}
-        <ChapterSection
-          id="theory"
-          title="Theory"
-          icon={<BeakerIcon className="w-5 h-5" />}
-          estimatedTime={15}
-          isCompleted={completedSections.includes("section-theory")}
-        >
-          {studyData.concepts && studyData.concepts.length > 0 ? (
-            <div className="grid gap-3">
-              {studyData.concepts.map((concept, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700"
-                >
-                  {concept}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Definitions */}
-        <ChapterSection
-          id="definitions"
-          title="Definitions"
-          icon={<BookOpenIcon className="w-5 h-5" />}
-          estimatedTime={5}
-          isCompleted={completedSections.includes("section-definitions")}
-        >
-          {studyData.definitions && studyData.definitions.length > 0 ? (
-            <div className="grid gap-3">
-              {studyData.definitions.map((definition, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700"
-                >
-                  {definition}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Key Terms */}
-        <ChapterSection
-          id="key-terms"
-          title="Key Terms"
-          icon={<ScrollText className="w-5 h-5" />}
-          estimatedTime={5}
-          isCompleted={completedSections.includes("section-key-terms")}
-        >
-          {studyData.keyTerms && studyData.keyTerms.length > 0 ? (
-            <div className="grid gap-3">
-              {studyData.keyTerms.map((term, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-2xl border border-gray-200 bg-slate-50 p-4 text-sm text-gray-700"
-                >
-                  {term}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Examples */}
-        <ChapterSection
-          id="examples"
-          title="Examples"
-          icon={<BeakerIcon className="w-5 h-5" />}
-          estimatedTime={20}
-          isCompleted={completedSections.includes("section-examples")}
-        >
-          {studyData.examples && studyData.examples.length > 0 ? (
-            <div className="space-y-3">
-              {studyData.examples.map((example, idx) => (
-                <ExampleCard key={idx} title={example.title}>
-                  {example.code}
-                </ExampleCard>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Diagrams */}
-        <ChapterSection
-          id="diagrams"
-          title="Diagrams"
-          icon={<FileText className="w-5 h-5" />}
-          estimatedTime={10}
-          isCompleted={completedSections.includes("section-diagrams")}
-        >
-          {studyData.diagrams && studyData.diagrams.length > 0 ? (
-            <div className="grid gap-4">
-              {studyData.diagrams.map((diagram, idx) => (
-                <div key={idx} className="rounded-2xl border border-gray-200 bg-slate-50 p-4">
-                  <p className="text-sm text-gray-700">{diagram}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Important Notes */}
-        <ChapterSection
-          id="important-notes"
-          title="Important Notes"
-          icon={<LightBulbIcon className="w-5 h-5" />}
-          estimatedTime={8}
-          isCompleted={completedSections.includes("section-important-notes")}
-        >
-          {studyData.notes && studyData.notes.length > 0 ? (
-            <div className="grid gap-3">
-              {studyData.notes.map((note, idx) => (
-                <NoteCard key={idx} note={note} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Common Mistakes */}
-        <ChapterSection
-          id="common-mistakes"
-          title="Common Mistakes"
-          icon={<ExclamationTriangleIcon className="w-5 h-5" />}
-          estimatedTime={7}
-          isCompleted={completedSections.includes("section-common-mistakes")}
-        >
-          {studyData.mistakes && studyData.mistakes.length > 0 ? (
-            <div className="grid gap-3">
-              {studyData.mistakes.map((mistake, idx) => (
-                <WarningCard key={idx} warning={mistake} />
-              ))}
-            </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
-
-        {/* Practice */}
-        <div id="section-practice">
-          <ChapterSection
-            id="practice"
-            title="Practice"
-            icon={<CheckCircleIcon className="w-5 h-5" />}
-            estimatedTime={20}
-            isCompleted={completedSections.includes("section-practice")}
-          >
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          </ChapterSection>
-        </div>
-
-        {/* MCQs */}
-        <div id="section-mcqs">
-          <ChapterSection
-            id="mcqs"
-            title="MCQs"
-            icon={<ListBulletIcon className="w-5 h-5" />}
-            estimatedTime={15}
-            isCompleted={completedSections.includes("section-mcqs")}
-          >
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          </ChapterSection>
-        </div>
-
-        {/* Programming */}
-        <div id="section-programming">
-          <ChapterSection
-            id="programming"
-            title="Programming"
-            icon={<SparklesIcon className="w-5 h-5" />}
-            estimatedTime={25}
-            isCompleted={completedSections.includes("section-programming")}
-          >
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          </ChapterSection>
-        </div>
-
-        {/* Previous Year Questions */}
-        <div id="section-previous-year-questions">
-          <ChapterSection
-            id="previous-year-questions"
-            title="Previous Year Questions"
-            icon={<AcademicCapIcon className="w-5 h-5" />}
-            estimatedTime={20}
-            isCompleted={completedSections.includes("section-previous-year-questions")}
-          >
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          </ChapterSection>
-        </div>
-
-        {/* Mock Test */}
-        <div id="section-mock-test">
-          <ChapterSection
-            id="mock-test"
-            title="Mock Test"
-            icon={<QuestionMarkCircleIcon className="w-5 h-5" />}
-            estimatedTime={30}
-            isCompleted={completedSections.includes("section-mock-test")}
-          >
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          </ChapterSection>
-        </div>
-
-        {/* AI Tutor */}
-        <div id="section-ai-tutor">
-          <ChapterSection
-            id="ai-tutor"
-            title="AI Tutor"
-            icon={<LightBulbIcon className="w-5 h-5" />}
-            estimatedTime={15}
-            isCompleted={completedSections.includes("section-ai-tutor")}
-          >
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          </ChapterSection>
-        </div>
 
         {/* Related Topics */}
         {studyData.relatedTopics && studyData.relatedTopics.length > 0 && (

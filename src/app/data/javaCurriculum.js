@@ -1,3 +1,16 @@
+import { resolveChapterMetadata } from "@/lib/icseSyllabus";
+
+/**
+ * Resolve the canonical ICSE syllabus metadata (board, class, subject,
+ * syllabusUnit, topic) for a chapter. Falls back gracefully so existing
+ * chapters are enriched, never broken.
+ */
+const metaFor = (chapter) =>
+  resolveChapterMetadata(chapter.slug, {
+    topic: chapter.title,
+    difficulty: chapter.difficulty,
+  });
+
 const chapterDefinitions = [
   { slug: "introduction-to-java", title: "Introduction to Java", difficulty: "Beginner", estimatedTime: 45, description: "Understand Java, the JVM, program structure, and how Java code is compiled and executed.", topics: ["JVM", "Program Structure", "Compilation"] },
   { slug: "data-types-variables", title: "Data Types & Variables", difficulty: "Beginner", estimatedTime: 60, description: "Work confidently with primitive data types, variables, constants, and type conversion.", topics: ["Primitive Types", "Variables", "Type Casting"] },
@@ -13,17 +26,23 @@ const chapterDefinitions = [
   { slug: "inheritance", title: "Inheritance", difficulty: "Advanced", estimatedTime: 70, description: "Reuse and extend behaviour through parent classes, child classes, and method overriding.", topics: ["extends", "Superclass", "Overriding"] },
 ];
 
-const questionMetadata = (chapter, type, index) => ({
-  id: `${chapter.slug}-${type}-${index}`,
-  subject: "Java Programming",
-  chapter: chapter.slug,
-  chapterTitle: chapter.title,
-  topic: chapter.topics[(index - 1) % chapter.topics.length],
-  difficulty: index <= 3 ? "Easy" : index <= 7 ? "Medium" : "Hard",
-  type,
-  marks: type === "mcq" ? 1 : type === "output" ? 2 : type === "theory" ? 3 : 5,
-  estimatedTime: type === "mcq" ? 1 : type === "output" ? 2 : type === "theory" ? 4 : 8,
-});
+const questionMetadata = (chapter, type, index) => {
+  const meta = metaFor(chapter);
+  return {
+    id: `${chapter.slug}-${type}-${index}`,
+    subject: meta.subject,
+    board: meta.board,
+    class: meta.class,
+    syllabusUnit: meta.syllabusUnit,
+    chapter: chapter.slug,
+    chapterTitle: chapter.title,
+    topic: chapter.topics[(index - 1) % chapter.topics.length],
+    difficulty: index <= 3 ? "Easy" : index <= 7 ? "Medium" : "Hard",
+    type,
+    marks: type === "mcq" ? 1 : type === "output" ? 2 : type === "theory" ? 3 : 5,
+    estimatedTime: type === "mcq" ? 1 : type === "output" ? 2 : type === "theory" ? 4 : 8,
+  };
+};
 
 function createMcqs(chapter) {
   return Array.from({ length: 10 }, (_, offset) => {
@@ -92,7 +111,7 @@ export const javaChapters = chapterDefinitions.map((chapter, index) => {
     ...createMcqs(chapter),                 // Then MCQs
   ];
 
-  return { ...chapter, id: index + 1, questions, questionCount: questions.length };
+  return { ...chapter, ...metaFor(chapter), id: index + 1, questions, questionCount: questions.length };
 });
 
 export const javaQuestions = javaChapters.flatMap((chapter) => chapter.questions);

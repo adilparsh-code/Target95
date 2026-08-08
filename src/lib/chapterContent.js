@@ -29,6 +29,7 @@ export function getChapterContent(chapter, content = null, questions = null) {
     diagrams: normalizeList(sd.diagrams),
     practice: normalizePractice(content?.practiceTest),
     mcqs: normalizeMcqs(questions?.mcqs, content?.mcqs),
+    output: normalizeOutput(questions?.outputQuestions, content?.outputBasedQuestions, sd.outputBasedQuestions),
     programming: normalizeProgramming(questions?.programmingQuestions, content?.programmingQuestions),
     pyqs: normalizePyqs(content?.previousYearQuestions),
     revisionNotes: normalizeRevisionNotes(content?.revisionNotes, sd.quickRevision),
@@ -239,6 +240,58 @@ function normalizePyqs(previousYearQuestions) {
     answer: q.answer,
     explanation: q.explanation,
   }));
+}
+
+/**
+ * Normalize output-based questions from question-bank, chapter-content, or studyData.
+ */
+function normalizeOutput(questionBankOutput, contentOutput, studyDataOutput) {
+  const output = [];
+
+  // From question-bank (preferred)
+  if (questionBankOutput?.length) {
+    questionBankOutput.forEach((q) => {
+      output.push({
+        id: q.id,
+        question: q.question || q.prompt,
+        answer: q.answer,
+        explanation: q.explanation,
+        difficulty: q.difficulty,
+        marks: q.marks,
+        estimatedTime: q.estimatedTime,
+      });
+    });
+  }
+
+  // From chapter-content
+  if (contentOutput?.length) {
+    contentOutput.forEach((q) => {
+      output.push({
+        id: q.id,
+        question: q.question || q.prompt,
+        answer: q.answer,
+        explanation: q.explanation,
+        difficulty: q.difficulty,
+        marks: q.marks,
+      });
+    });
+  }
+
+  // From studyData
+  if (studyDataOutput?.length) {
+    studyDataOutput.forEach((q, idx) => {
+      output.push({
+        id: `study-output-${idx}`,
+        question: typeof q === "string" ? q : q.question || q.prompt || "",
+        answer: typeof q === "string" ? "" : q.answer,
+        explanation: typeof q === "string" ? "" : q.explanation,
+        difficulty: "Medium",
+        marks: 2,
+      });
+    });
+  }
+
+  return output.length > 0 ? output : null;
 }
 
 /**

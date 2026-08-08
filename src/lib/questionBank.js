@@ -1,14 +1,19 @@
 import { javaQuestions } from "@/app/data/javaCurriculum";
+import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 
 const QUESTION_TYPES = ["mcq", "programming", "output", "theory", "fill-blank", "true-false"];
 
 export function normalizeQuestion(question) {
   const questionType = question.questionType || question.type || "theory";
+  const meta = resolveChapterMetadata(question.chapter || question.slug || "");
   return {
     id: String(question.id),
-    subject: question.subject || "Computer Science",
+    subject: question.subject || meta.subject || "Computer Science",
+    board: question.board || meta.board,
+    class: question.class || meta.class,
+    syllabusUnit: question.syllabusUnit || meta.syllabusUnit,
     chapter: question.chapter || "",
-    topic: question.topic || "General",
+    topic: question.topic || meta.topic || "General",
     difficulty: question.difficulty || "Medium",
     questionType: QUESTION_TYPES.includes(questionType) ? questionType : "theory",
     marks: question.marks ?? 1,

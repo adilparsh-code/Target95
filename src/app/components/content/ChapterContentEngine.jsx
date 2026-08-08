@@ -11,6 +11,7 @@ import {
   DiagramsSection,
   PracticeSection,
   McqSection,
+  OutputSection,
   ProgrammingSection,
   PyqSection,
   RevisionNotesSection,
@@ -94,6 +95,13 @@ export default function ChapterContentEngine({
         <McqSection
           items={sections.mcqs}
           isCompleted={isCompleted("mcqs")}
+        />
+      )}
+
+      {hasSectionContent(sections.output) && (
+        <OutputSection
+          items={sections.output}
+          isCompleted={isCompleted("output")}
         />
       )}
 

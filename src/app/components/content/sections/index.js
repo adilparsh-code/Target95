@@ -6,6 +6,7 @@ export { default as ExamplesSection } from "./ExamplesSection";
 export { default as DiagramsSection } from "./DiagramsSection";
 export { default as PracticeSection } from "./PracticeSection";
 export { default as McqSection } from "./McqSection";
+export { default as OutputSection } from "./OutputSection";
 export { default as ProgrammingSection } from "./ProgrammingSection";
 export { default as PyqSection } from "./PyqSection";
 export { default as RevisionNotesSection } from "./RevisionNotesSection";

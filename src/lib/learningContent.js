@@ -1,4 +1,5 @@
 import javaChapters from "../app/data/javaChapters";
+import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 
 // The UI consumes this stable shape whether content comes from fixtures or a future CMS.
 const topicDetails = {
@@ -18,9 +19,10 @@ const difficultyByIndex = ["Easy", "Medium", "Hard"];
 
 function createQuestions(chapter, detail, index) {
   const base = `${chapter.slug}-${index}`;
-  const curriculum = index % 2 === 0
-    ? { board: "ICSE", class: "ICSE X", subject: "Computer Applications" }
-    : { board: "ISC", class: "ISC XI", subject: "Computer Science" };
+  const curriculum = resolveChapterMetadata(chapter.slug, {
+    topic: chapter.title,
+    difficulty: difficultyByIndex[index % 3],
+  });
   return [
     {
       id: `${base}-mcq`, type: "mcq", ...curriculum, chapter: chapter.title, topic: chapter.title,
@@ -72,9 +74,10 @@ function createQuestions(chapter, detail, index) {
 
 export const learningTopics = javaChapters.map((chapter, index) => {
   const detail = topicDetails[chapter.slug] || topicDetails.introduction;
-  const curriculum = index % 2 === 0
-    ? { board: "ICSE", class: "ICSE X", subject: "Computer Applications" }
-    : { board: "ISC", class: "ISC XI", subject: "Computer Science" };
+  const curriculum = resolveChapterMetadata(chapter.slug, {
+    topic: chapter.title,
+    difficulty: difficultyByIndex[index % 3],
+  });
   return {
     slug: chapter.slug, title: chapter.title, ...curriculum, ...detail,
     introduction: `This topic builds the Java foundation required for ICSE Computer Applications. ${detail.definition}`,

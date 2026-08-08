@@ -1,5 +1,6 @@
 import javaChapters from "../app/data/javaChapters";
 import questions from "../app/data/questions";
+import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 
 export const STUDY_PROGRESS_STORAGE_KEY = "target95-study-progress";
 
@@ -680,6 +681,10 @@ export function getStudyChapters(filters = {}) {
 
     return {
       ...chapter,
+      ...resolveChapterMetadata(chapter.slug, {
+        topic: chapter.title,
+        difficulty,
+      }),
       totalQuestions: chapterQuestions.length,
       easyCount,
       mediumCount,

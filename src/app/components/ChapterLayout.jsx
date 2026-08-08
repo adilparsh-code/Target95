@@ -15,11 +15,9 @@ import {
   Lightbulb,
   History,
   FileQuestion,
-  Clock,
   CheckCircle2,
   Circle,
   Menu,
-  X,
   ArrowUp,
 } from "lucide-react";
 

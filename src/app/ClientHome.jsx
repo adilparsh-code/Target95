@@ -21,11 +21,6 @@ const FAQ = dynamic(() => import("./components/FAQ"), {
   loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
 });
 
-const Pricing = dynamic(() => import("./components/Pricing"), { 
-  ssr: true,
-  loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
-});
-
 const Newsletter = dynamic(() => import("./components/Newsletter"), { 
   ssr: true,
   loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
@@ -92,7 +87,7 @@ export default function ClientHome() {
   const [showSubjects, setShowSubjects] = useState(false);
   const [showStartLearning, setShowStartLearning] = useState(false);
 
-  const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, isHydrated } = usePersonalization();
+  const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, clearPersonalization, isHydrated } = usePersonalization();
 
   // Memoize personalization object to prevent unnecessary re-renders
   const personalization = useMemo(() => ({
@@ -136,6 +131,7 @@ export default function ClientHome() {
     setShowClasses(false);
     setShowSubjects(false);
     setShowStartLearning(false);
+    clearPersonalization();
   };
 
   const handleBackToClasses = () => {

@@ -57,9 +57,7 @@ export const metadata = {
     capable: true,
     statusBarStyle: "default",
     title: "Target95+",
-    startupImage: [
-      "/apple-touch-icon.png",
-    ],
+    startupImage: ["/apple-touch-icon.png"],
   },
   applicationName: "Target95+",
   icons: {
@@ -79,9 +77,6 @@ export const metadata = {
     ],
   },
   other: {
-    "apple-mobile-web-app-capable": "yes",
-    "apple-mobile-web-app-status-bar-style": "default",
-    "apple-mobile-web-app-title": "Target95+",
     "format-detection": "telephone=no",
     "msapplication-TileColor": "#3b82f6",
     "msapplication-TileImage": "/icon-144x144.png",
@@ -90,6 +85,9 @@ export const metadata = {
 
 export const viewport = {
   themeColor: "#3b82f6",
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }) {
@@ -97,32 +95,13 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className="h-full antialiased"
+      suppressHydrationWarning
     >
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="default"
-        />
-        <meta name="apple-mobile-web-app-title" content="Target95+" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-TileColor" content="#3b82f6" />
-        <meta name="msapplication-TileImage" content="/icon-144x144.png" />
-        <meta name="theme-color" content="#3b82f6" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
-      </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
           <AuthProviderWrapper>
             <OfflineBanner />
-            <div id="main-content">
-              {children}
-            </div>
+            <div id="main-content">{children}</div>
           </AuthProviderWrapper>
           <PWAPrompt />
           <IOSInstallPrompt />

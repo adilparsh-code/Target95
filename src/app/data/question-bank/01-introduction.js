@@ -108,23 +108,23 @@ const chapter1 = {
     },
     {
       id: "CH01-MCQ-006",
-      difficulty: "medium",
+      difficulty: "easy",
       chapter: "Introduction to Java",
       chapterId: 1,
-      topic: "JVM",
-      question: "Which component of the JVM loads the bytecode into memory?",
+      topic: "BlueJ",
+      question: "Which IDE does the ICSE syllabus recommend for Class 9 Java programming?",
       options: [
-        "A) Execution Engine",
-        "B) Class Loader",
-        "C) Garbage Collector",
-        "D) JIT Compiler"
+        "A) Eclipse",
+        "B) BlueJ",
+        "C) IntelliJ IDEA",
+        "D) NetBeans"
       ],
       correctAnswer: "B",
-      explanation: "The Class Loader is responsible for loading .class files into the JVM's memory during program execution.",
-      hint: "Think about what 'loads' classes.",
-      estimatedTime: 25,
+      explanation: "BlueJ is the official IDE recommended by CISCE for ICSE Class 9 Java programming. It has a simple, beginner-friendly interface designed specifically for teaching OOP concepts.",
+      hint: "It's the only IDE specifically mentioned in the CISCE 2028 syllabus.",
+      estimatedTime: 20,
       marks: 1,
-      tags: ["jvm", "class loader", "bytecode"]
+      tags: ["bluej", "ide", "syllabus"]
     },
     {
       id: "CH01-MCQ-007",
@@ -165,6 +165,26 @@ const chapter1 = {
       estimatedTime: 20,
       marks: 1,
       tags: ["main method", "syntax", "signature"]
+    },
+    {
+      id: "CH01-MCQ-009",
+      difficulty: "medium",
+      chapter: "Introduction to Java",
+      chapterId: 1,
+      topic: "Java Applications vs Applets",
+      question: "Which method is the entry point for a standalone Java application?",
+      options: [
+        "A) init()",
+        "B) main()",
+        "C) start()",
+        "D) run()"
+      ],
+      correctAnswer: "B",
+      explanation: "The main() method is the entry point for standalone Java applications. Java applets (which run in browsers) use init() and start() as their lifecycle methods instead.",
+      hint: "It's the method you've learned to write for all standalone programs.",
+      estimatedTime: 20,
+      marks: 1,
+      tags: ["applet", "application", "main method"]
     }
   ],
 
@@ -203,7 +223,7 @@ const chapter1 = {
         "D) A is false, but R is true"
       ],
       correctAnswer: "D",
-      explanation: "Java is NOT a pure object-oriented language because it supports primitive data types (int, char, etc.) that are not objects. However, it does support OOP features like classes, objects, inheritance, and polymorphism.",
+      explanation: "Java is NOT a pure object-oriented language because it supports primitive data types (int, char, boolean, etc.) that are not objects. However, it does support core OOP features like classes, objects, inheritance, and polymorphism. CISCE Class 9 exams frequently test this distinction—pure OOP languages like Smalltalk require all entities to be objects, which Java does not.",
       hint: "Think about primitive data types in Java.",
       estimatedTime: 35,
       marks: 2,
@@ -231,11 +251,11 @@ const chapter1 = {
     },
     {
       id: "CH01-AR-004",
-      difficulty: "hard",
+      difficulty: "medium",
       chapter: "Introduction to Java",
       chapterId: 1,
-      topic: "JIT Compiler",
-      question: "Assertion (A): JIT compiler improves the performance of Java programs.\nReason (R): JIT compiler converts bytecode into native machine code at runtime.",
+      topic: "BlueJ",
+      question: "Assertion (A): BlueJ is the recommended IDE for ICSE Class 9 Java programming.\nReason (R): BlueJ has a simple, beginner-friendly interface designed for teaching OOP concepts.",
       options: [
         "A) Both A and R are true, and R is the correct explanation of A",
         "B) Both A and R are true, but R is NOT the correct explanation of A",
@@ -243,11 +263,11 @@ const chapter1 = {
         "D) A is false, but R is true"
       ],
       correctAnswer: "A",
-      explanation: "JIT (Just-In-Time) compiler converts bytecode into native machine code at runtime, which speeds up execution by avoiding repeated interpretation of the same bytecode.",
-      hint: "JIT stands for Just-In-Time.",
-      estimatedTime: 30,
+      explanation: "BlueJ is the official IDE recommended by CISCE because it simplifies OOP learning—its visual interface lets students create objects, interact with them, and easily compile and run Java programs.",
+      hint: "BlueJ was created specifically for education.",
+      estimatedTime: 25,
       marks: 2,
-      tags: ["jit", "performance", "native code"]
+      tags: ["bluej", "ide", "education"]
     }
   ],
 

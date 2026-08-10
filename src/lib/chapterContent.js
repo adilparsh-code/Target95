@@ -21,12 +21,12 @@ export function getChapterContent(chapter, content = null, questions = null) {
   const sd = chapter?.studyData || {};
 
   return {
-    learningObjectives: normalizeList(sd.learningObjectives),
+    learningObjectives: normalizeList(sd.learningObjectives) || normalizeList(content?.learningObjectives),
     theory: normalizeTheory(sd, content),
-    definitions: normalizeList(sd.definitions),
-    keyTerms: normalizeList(sd.keyTerms),
+    definitions: normalizeList(sd.definitions) || normalizeList(content?.definitions),
+    keyTerms: normalizeList(sd.keyTerms) || normalizeList(content?.keyTerms),
     examples: normalizeExamples(sd.examples, content?.examples),
-    diagrams: normalizeList(sd.diagrams),
+    diagrams: normalizeList(sd.diagrams) || normalizeList(content?.diagrams),
     practice: normalizePractice(content?.practiceTest),
     mcqs: normalizeMcqs(questions?.mcqs, content?.mcqs),
     output: normalizeOutput(questions?.outputQuestions, content?.outputBasedQuestions, sd.outputBasedQuestions),

@@ -22,18 +22,34 @@ import {
 import SegmentedProgress from "./SegmentedProgress";
 import QuestionSection from "./QuestionSection";
 
-export default function StudyChapter({ slug }) {
-  const chapters = useMemo(() => getStudyChapters(), []);
+export default function StudyChapter({ slug, markdownContent = null }) {
+  const chapters = useMemo(() => getStudyChapters() || [], []);
   const chapter = useMemo(() => chapters.find((c) => c.slug === slug), [chapters, slug]);
+
   const [search, setSearch] = useState("");
   const { progress, updateProgress } = useStudyProgress();
   const { addRecentlyViewed } = useRecentlyViewed();
+  
   const [completedSections, setCompletedSections] = useState([]);
   const [readingProgress, setReadingProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const [activeSection, setActiveSection] = useState("learning-objectives");
+  
   const sectionRefs = useRef({});
   const contentRef = useRef(null);
+
+  // Safely parse markdownContent if passed as JSON string
+  const richContent = useMemo(() => {
+    if (!markdownContent) return null;
+    if (typeof markdownContent === "string") {
+      try {
+        return JSON.parse(markdownContent);
+      } catch {
+        return null;
+      }
+    }
+    return markdownContent;
+  }, [markdownContent]);
 
   const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -50,17 +66,15 @@ export default function StudyChapter({ slug }) {
   // Track scroll position for progress bar and active section
   useEffect(() => {
     const handleScroll = () => {
-      // Update back to top button visibility
       setShowBackToTop(window.scrollY > 300);
 
-      // Calculate reading progress
       if (contentRef.current) {
         const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
-        setReadingProgress(Math.min(progress, 100));
+        const total = scrollHeight - clientHeight;
+        const currentProgress = total > 0 ? (scrollTop / total) * 100 : 0;
+        setReadingProgress(Math.min(currentProgress, 100));
       }
 
-      // Update active section based on scroll position
       const sectionEntries = Object.entries(sectionRefs.current);
       for (const [id, ref] of sectionEntries) {
         if (ref) {
@@ -77,21 +91,25 @@ export default function StudyChapter({ slug }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scoped questions from the questions data (must be before early return)
+  // Scoped questions
   const chapterQuestions = useMemo(() => {
     if (!questionsData) return [];
     const allQuestions = Array.isArray(questionsData) ? questionsData : [];
     return allQuestions.filter((q) => q.chapter === slug || q.chapter === chapter?.title);
-  }, [slug, chapter]);
+  }, [slug, chapter?.title]);
 
+  // Track recently viewed once when slug changes (fixed dependency loop)
   useEffect(() => {
-    if (slug) {
+    if (slug && typeof addRecentlyViewed === "function") {
       addRecentlyViewed(slug);
     }
-  }, [slug, addRecentlyViewed]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug]);
 
-  // Track which sections have been viewed (scrolled into view)
+  // Track which sections have been viewed into view (fixed infinite loop trigger)
   useEffect(() => {
+    if (!slug) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -99,15 +117,7 @@ export default function StudyChapter({ slug }) {
             const sectionId = entry.target.id;
             setCompletedSections((prev) => {
               if (prev.includes(sectionId)) return prev;
-              const updated = [...prev, sectionId];
-              // Auto-update study progress when enough sections are viewed
-              if (updated.length >= 4 && progress[slug] === "Not Started") {
-                updateProgress(slug, "Studying");
-              }
-              if (updated.length >= CHAPTER_SECTIONS.length) {
-                updateProgress(slug, "Completed");
-              }
-              return updated;
+              return [...prev, sectionId];
             });
           }
         });
@@ -124,7 +134,19 @@ export default function StudyChapter({ slug }) {
     return () => {
       elements.forEach((el) => observer.unobserve(el));
     };
-  }, [slug, progress, updateProgress]);
+  }, [slug]);
+
+  // Sync completion progress separately from observer to prevent loop
+  useEffect(() => {
+    if (!slug) return;
+    const currentStatus = progress[slug] ?? "Not Started";
+
+    if (completedSections.length >= 4 && currentStatus === "Not Started") {
+      updateProgress(slug, "Studying");
+    } else if (completedSections.length >= CHAPTER_SECTIONS.length && currentStatus !== "Completed") {
+      updateProgress(slug, "Completed");
+    }
+  }, [completedSections.length, slug, progress, updateProgress]);
 
   if (!chapter) {
     return (
@@ -145,27 +167,10 @@ export default function StudyChapter({ slug }) {
   const nextChapter = currentIndex < chapters.length - 1 ? chapters[currentIndex + 1] : null;
 
   const status = progress[slug] ?? "Not Started";
-  const studyData = chapter.studyData;
-
-  // Rich content from chapter-content and question-bank
-  const richContent = null;
-  const questionBankChapter = null;
+  const studyData = chapter.studyData || {};
 
   const safeSearch = sanitizeText(search).toLowerCase();
-  const hasSearchResults = safeSearch
-    ? searchInContent(studyData, safeSearch)
-    : true;
-
-  // Filter sections based on search query
-  const filteredSections = useMemo(() => {
-    if (!safeSearch) return CHAPTER_SECTIONS;
-    return CHAPTER_SECTIONS.filter((s) => {
-      const data = getSectionData(studyData, s.id);
-      if (!data) return false;
-      const dataString = Array.isArray(data) ? data.join(" ") : String(data);
-      return dataString.toLowerCase().includes(safeSearch);
-    });
-  }, [safeSearch, studyData]);
+  const hasSearchResults = safeSearch ? searchInContent(studyData, safeSearch) : true;
 
   const readingSections = CHAPTER_SECTIONS
     .filter((s) => {
@@ -251,11 +256,11 @@ export default function StudyChapter({ slug }) {
           </div>
         </div>
 
-        {/* Chapter Content Engine - Renders all sections from structured data */}
+        {/* Chapter Content Engine */}
         <ChapterContentEngine
           chapter={chapter}
           content={richContent}
-          questions={questionBankChapter}
+          questions={null}
           completedSections={completedSections}
         />
 
@@ -327,7 +332,6 @@ export default function StudyChapter({ slug }) {
           )}
         </ChapterSection>
 
-
         {/* Related Topics */}
         {studyData.relatedTopics && studyData.relatedTopics.length > 0 && (
           <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -359,9 +363,8 @@ export default function StudyChapter({ slug }) {
   );
 }
 
-// Helper: check if search query exists in study data
 function searchInContent(studyData, query) {
-  if (!query) return true;
+  if (!query || !studyData) return true;
   const fields = [
     studyData.intro,
     studyData.summary,
@@ -374,14 +377,14 @@ function searchInContent(studyData, query) {
     ...(studyData.importantExamPoints || []),
     ...(studyData.commonMistakes || []),
     ...(studyData.quickRevision || []),
-    ...(studyData.faqs ? studyData.faqs.map((f) => f.question + " " + f.answer) : []),
-    ...(studyData.syntax ? studyData.syntax.map((s) => s.title + " " + s.code) : []),
+    ...(studyData.faqs ? studyData.faqs.map((f) => `${f.question} ${f.answer}`) : []),
+    ...(studyData.syntax ? studyData.syntax.map((s) => `${s.title} ${s.code}`) : []),
   ];
   return fields.some((f) => f && f.toLowerCase().includes(query));
 }
 
-// Helper: get relevant data for a section
 function getSectionData(studyData, sectionId) {
+  if (!studyData) return null;
   const map = {
     "overview": studyData.intro,
     "learning-objectives": studyData.learningObjectives,

@@ -7,6 +7,7 @@ import path from "path";
  */
 const chapterRegistry = {
   introduction: "Introduction_to_Java_Class9.md",
+  "introduction-to-java": "Introduction_to_Java_Class9_Theory.md",
   // Ensure all dynamic routes built during SSG are registered here:
   constructor: "Constructor_Class9.md",
   // "introduction-to-oop": "Introduction_to_OOP_Class9.md",

@@ -22,7 +22,7 @@ import {
 import SegmentedProgress from "./SegmentedProgress";
 import QuestionSection from "./QuestionSection";
 
-export default function StudyChapter({ slug, markdownContent = null }) {
+export default function StudyChapter({ slug, markdownContent = null, questionBank = null }) {
   const chapters = useMemo(() => getStudyChapters() || [], []);
   const chapter = useMemo(() => chapters.find((c) => c.slug === slug), [chapters, slug]);
 
@@ -260,7 +260,7 @@ export default function StudyChapter({ slug, markdownContent = null }) {
         <ChapterContentEngine
           chapter={chapter}
           content={richContent}
-          questions={null}
+          questions={questionBank}
           completedSections={completedSections}
         />
 

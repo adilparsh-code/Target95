@@ -1,6 +1,7 @@
 import javaChapters from "../app/data/javaChapters";
 import questions from "../app/data/questions";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
+import { adaptStudyChapterIdentity } from "@/lib/studyChapterIdentity";
 
 export const STUDY_PROGRESS_STORAGE_KEY = "target95-study-progress";
 
@@ -1490,7 +1491,8 @@ Student s2 = new Student("Alice", 20);`,
 export function getStudyChapters(filters = {}) {
   const { board, class: selectedClass } = filters;
   
-  return javaChapters.map((chapter) => {
+  return javaChapters.map((legacyChapter) => {
+    const chapter = adaptStudyChapterIdentity(legacyChapter);
     const chapterQuestions = questions.filter((item) => item.chapter === chapter.slug);
     const easyCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "easy").length;
     const mediumCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "medium").length;

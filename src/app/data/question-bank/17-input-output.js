@@ -1,5 +1,7 @@
 const chapter17 = {
-  id: 17, title: "Input/Output", slug: "input-output",
+  id: 17,
+  title: "Input/Output",
+  slug: "input-output",
   description: "Learn about Scanner, BufferedReader, System.in, System.out, and file I/O basics.",
   topics: ["Scanner", "BufferedReader", "System.in", "System.out", "File I/O"],
   mcqs: [
@@ -13,14 +15,10 @@ const chapter17 = {
     { id: "CH17-MCQ-008", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "Which method prints a line with a newline?", options: ["A) print()", "B) println()", "C) printf()", "D) write()"], correctAnswer: "B", explanation: "println() prints the text and adds a newline at the end.", hint: "It 'prints a line'.", estimatedTime: 10, marks: 1, tags: ["println"] }
   ],
   assertionReasons: [
-    { id: "CH17-AR-001", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Assertion (A): Scanner can read from any Readable source.
-Reason (R): Scanner has constructors that accept InputStream, String, and File.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "Scanner is flexible and can read from multiple sources.", hint: "What can Scanner read from?", estimatedTime: 15, marks: 2, tags: ["Scanner", "sources"] },
-    { id: "CH17-AR-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "Assertion (A): BufferedReader is faster than Scanner.
-Reason (R): BufferedReader uses a larger buffer size.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "BufferedReader reads larger chunks, making it faster for large inputs.", hint: "Why is BufferedReader faster?", estimatedTime: 15, marks: 2, tags: ["BufferedReader", "faster"] },
-    { id: "CH17-AR-003", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Assertion (A): After nextInt(), you should call nextLine() to consume the newline.
-Reason (R): nextInt() does not consume the newline character.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "nextInt() leaves the newline in the buffer. nextLine() consumes it.", hint: "What happens after nextInt()?", estimatedTime: 20, marks: 2, tags: ["nextInt", "newline"] },
-    { id: "CH17-AR-004", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "Assertion (A): System.out.println() prints text and adds a newline.
-Reason (R): The 'ln' in println stands for 'line'.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "println prints text and adds a newline. 'ln' stands for 'line'.", hint: "What does 'ln' mean?", estimatedTime: 10, marks: 2, tags: ["println", "newline"] }
+    { id: "CH17-AR-001", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Assertion (A): Scanner can read from any Readable source.\nReason (R): Scanner has constructors that accept InputStream, String, and File.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "Scanner is flexible and can read from multiple sources.", hint: "What can Scanner read from?", estimatedTime: 15, marks: 2, tags: ["Scanner", "sources"] },
+    { id: "CH17-AR-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "Assertion (A): BufferedReader is faster than Scanner.\nReason (R): BufferedReader uses a larger buffer size.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "BufferedReader reads larger chunks, making it faster for large inputs.", hint: "Why is BufferedReader faster?", estimatedTime: 15, marks: 2, tags: ["BufferedReader", "faster"] },
+    { id: "CH17-AR-003", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Assertion (A): After nextInt(), you should call nextLine() to consume the newline.\nReason (R): nextInt() does not consume the newline character.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "nextInt() leaves the newline in the buffer. nextLine() consumes it.", hint: "What happens after nextInt()?", estimatedTime: 20, marks: 2, tags: ["nextInt", "newline"] },
+    { id: "CH17-AR-004", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "Assertion (A): System.out.println() prints text and adds a newline.\nReason (R): The 'ln' in println stands for 'line'.", options: ["A) Both A and R are true, and R is the correct explanation of A", "B) Both A and R are true, but R is NOT the correct explanation of A", "C) A is true, but R is false", "D) A is false, but R is true"], correctAnswer: "A", explanation: "println prints text and adds a newline. 'ln' stands for 'line'.", hint: "What does 'ln' mean?", estimatedTime: 10, marks: 2, tags: ["println", "newline"] }
   ],
   trueFalse: [
     { id: "CH17-TF-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Scanner is faster than BufferedReader.", correctAnswer: "False", explanation: "BufferedReader is faster because it uses a larger buffer.", hint: "Which is faster?", estimatedTime: 10, marks: 1, tags: ["BufferedReader", "faster"] },
@@ -37,38 +35,69 @@ Reason (R): The 'ln' in println stands for 'line'.", options: ["A) Both A and R 
     { id: "CH17-FIB-005", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "The ________ method prints text and adds a newline.", correctAnswer: "println()", hint: "It prints a 'line'.", estimatedTime: 10, marks: 1, tags: ["println"] }
   ],
   outputQuestions: [
-    { id: "CH17-OUT-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?
-System.out.print("Hello");
-System.out.println("World");", correctAnswer: "HelloWorld", explanation: "print does not add newline. println adds newline after World.", hint: "Does print add a newline?", estimatedTime: 10, marks: 1, tags: ["print", "println"] },
-    { id: "CH17-OUT-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?
-System.out.println(5 + 3);", correctAnswer: "8", explanation: "5 + 3 = 8. println prints the result.", hint: "What is 5 + 3?", estimatedTime: 10, marks: 1, tags: ["println", "addition"] },
-    { id: "CH17-OUT-003", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?
-System.out.println("5" + 3);", correctAnswer: "53", explanation: "String concatenation: "5" + 3 = "53".", hint: "What happens when you add a String and an int?", estimatedTime: 15, marks: 1, tags: ["string concatenation"] },
-    { id: "CH17-OUT-004", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?
-System.out.printf("Name: %s, Age: %d", "Rahul", 17);", correctAnswer: "Name: Rahul, Age: 17", explanation: "printf uses format specifiers: %s for string, %d for integer.", hint: "What do %s and %d mean?", estimatedTime: 20, marks: 2, tags: ["printf", "format"] },
-    { id: "CH17-OUT-005", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?
-System.out.println(1 + 2 + "3");", correctAnswer: "33", explanation: "1 + 2 = 3 (int), then 3 + "3" = "33" (string concatenation).", hint: "What is the order of operations?", estimatedTime: 20, marks: 2, tags: ["concatenation", "order"] }
+    { id: "CH17-OUT-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?\nSystem.out.print(\"Hello\");\nSystem.out.println(\"World\");", correctAnswer: "HelloWorld", explanation: "print does not add newline. println adds newline after World.", hint: "Does print add a newline?", estimatedTime: 10, marks: 1, tags: ["print", "println"] },
+    { id: "CH17-OUT-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?\nSystem.out.println(5 + 3);", correctAnswer: "8", explanation: "5 + 3 = 8. println prints the result.", hint: "What is 5 + 3?", estimatedTime: 10, marks: 1, tags: ["println", "addition"] },
+    { id: "CH17-OUT-003", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?\nSystem.out.println(\"5\" + 3);", correctAnswer: "53", explanation: "String concatenation: \"5\" + 3 = \"53\".", hint: "What happens when you add a String and an int?", estimatedTime: 15, marks: 1, tags: ["string concatenation"] },
+    { id: "CH17-OUT-004", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?\nSystem.out.printf(\"Name: %s, Age: %d\", \"Rahul\", 17);", correctAnswer: "Name: Rahul, Age: 17", explanation: "printf uses format specifiers: %s for string, %d for integer.", hint: "What do %s and %d mean?", estimatedTime: 20, marks: 2, tags: ["printf", "format"] },
+    { id: "CH17-OUT-005", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "System.out", question: "What will be the output?\nSystem.out.println(1 + 2 + \"3\");", correctAnswer: "33", explanation: "1 + 2 = 3 (int), then 3 + \"3\" = \"33\" (string concatenation).", hint: "What is the order of operations?", estimatedTime: 20, marks: 2, tags: ["concatenation", "order"] }
   ],
   errorFinding: [
-    { id: "CH17-ERR-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Find the error:
-Scanner sc = new Scanner(System.in);
-int x = sc.nextLine();", correctAnswer: "nextLine() returns String, not int. Use nextInt() for integers.", hint: "What does nextLine return?", estimatedTime: 10, marks: 1, tags: ["type mismatch", "nextLine"] },
-    { id: "CH17-ERR-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Find the error:
-Scanner sc = new Scanner(System.in);
-int x = sc.nextInt();
-String s = sc.next();
-// Input: 10 Hello World", correctAnswer: "After nextInt(), newline remains. Call sc.nextLine() to consume it.", hint: "What happens after nextInt()?", estimatedTime: 15, marks: 2, tags: ["newline", "buffer"] },
-    { id: "CH17-ERR-003", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "Find the error:
-BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-String s = br.readLine();", correctAnswer: "readLine() throws IOException. Must add throws or try-catch.", hint: "What exception does readLine throw?", estimatedTime: 15, marks: 2, tags: ["IOException", "BufferedReader"] }
+    { id: "CH17-ERR-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Find the error:\nScanner sc = new Scanner(System.in);\nint x = sc.nextLine();", correctAnswer: "nextLine() returns String, not int. Use nextInt() for integers.", hint: "What does nextLine return?", estimatedTime: 10, marks: 1, tags: ["type mismatch", "nextLine"] },
+    { id: "CH17-ERR-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Find the error:\nScanner sc = new Scanner(System.in);\nint x = sc.nextInt();\nString s = sc.next();\n// Input: 10 Hello World", correctAnswer: "After nextInt(), newline remains. Call sc.nextLine() to consume it.", hint: "What happens after nextInt()?", estimatedTime: 15, marks: 2, tags: ["newline", "buffer"] },
+    { id: "CH17-ERR-003", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "Find the error:\nBufferedReader br = new BufferedReader(new InputStreamReader(System.in));\nString s = br.readLine();", correctAnswer: "readLine() throws IOException. Must add throws or try-catch.", hint: "What exception does readLine throw?", estimatedTime: 15, marks: 2, tags: ["IOException", "BufferedReader"] }
   ],
   programmingQuestions: [
-    { id: "CH17-PRQ-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "Scanner", problemStatement: "Write a program that reads a name and age using Scanner and displays them.", input: "Name: Priya, Age: 16", output: "Hello Priya! You are 16 years old.", logic: "Use Scanner to read String and int from System.in.", solution: "import java.util.Scanner; public class UserInfo { public static void main(String[] args) { Scanner sc = new Scanner(System.in); System.out.print(\"Enter name: \"); String name = sc.nextLine(); System.out.print(\"Enter age: \"); int age = sc.nextInt(); System.out.println(\"Hello " + name + "! You are " + age + " years old."); sc.close(); } }", solutionExplanation: "Scanner reads name and age. Output displays them.", sampleTestCases: [{ input: "Priya, 16", output: "Hello Priya! You are 16 years old." }], estimatedTime: 300, marks: 5, tags: ["Scanner", "input"] },
-    { id: "CH17-PRQ-002", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", problemStatement: "Write a program using BufferedReader to read a line of text and print it in uppercase.", input: "hello world", output: "HELLO WORLD", logic: "Use BufferedReader to read a line, then toUpperCase().", solution: "import java.io.*; public class UpperCase { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); System.out.print(\"Enter text: \"); String s = br.readLine(); System.out.println(s.toUpperCase()); } }", solutionExplanation: "BufferedReader reads a line. toUpperCase converts to uppercase.", sampleTestCases: [{ input: "hello world", output: "HELLO WORLD" }], estimatedTime: 300, marks: 5, tags: ["BufferedReader", "toUpperCase"] },
-    { id: "CH17-PRQ-003", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "Scanner", problemStatement: "Write a program that reads two numbers and prints their sum, difference, product, and quotient.", input: "10, 3", output: "Sum: 13
-Difference: 7
-Product: 30
-Quotient: 3.33", logic: "Read two numbers, perform arithmetic operations.", solution: "import java.util.Scanner; public class Calculator { public static void main(String[] args) { Scanner sc = new Scanner(System.in); System.out.print(\"Enter first number: \"); int a = sc.nextInt(); System.out.print(\"Enter second number: \"); int b = sc.nextInt(); System.out.println(\"Sum: " + (a+b)); System.out.println(\"Difference: " + (a-b)); System.out.println(\"Product: " + (a*b)); System.out.printf(\"Quotient: %.2f\n\", (double)a/b); sc.close(); } }", solutionExplanation: "Reads two numbers, performs all four operations.", sampleTestCases: [{ input: "10, 3", output: "Sum: 13\nDifference: 7\nProduct: 30\nQuotient: 3.33" }], estimatedTime: 360, marks: 5, tags: ["Scanner", "calculator"] }
+    {
+      id: "CH17-PRQ-001",
+      difficulty: "easy",
+      chapter: "Input/Output",
+      chapterId: 17,
+      topic: "Scanner",
+      problemStatement: "Write a program that reads a name and age using Scanner and displays them.",
+      input: "Name: Priya, Age: 16",
+      output: "Hello Priya! You are 16 years old.",
+      logic: "Use Scanner to read String and int from System.in.",
+      solution: "import java.util.Scanner; public class UserInfo { public static void main(String[] args) { Scanner sc = new Scanner(System.in); System.out.print(\"Enter name: \"); String name = sc.nextLine(); System.out.print(\"Enter age: \"); int age = sc.nextInt(); System.out.println(\"Hello \" + name + \"! You are \" + age + \" years old.\"); sc.close(); } }",
+      solutionExplanation: "Scanner reads name and age. Output displays them.",
+      sampleTestCases: [{ input: "Priya, 16", output: "Hello Priya! You are 16 years old." }],
+      estimatedTime: 300,
+      marks: 5,
+      tags: ["Scanner", "input"]
+    },
+    {
+      id: "CH17-PRQ-002",
+      difficulty: "medium",
+      chapter: "Input/Output",
+      chapterId: 17,
+      topic: "BufferedReader",
+      problemStatement: "Write a program using BufferedReader to read a line of text and print it in uppercase.",
+      input: "hello world",
+      output: "HELLO WORLD",
+      logic: "Use BufferedReader to read a line, then toUpperCase().",
+      solution: "import java.io.*; public class UpperCase { public static void main(String[] args) throws IOException { BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); System.out.print(\"Enter text: \"); String s = br.readLine(); System.out.println(s.toUpperCase()); } }",
+      solutionExplanation: "BufferedReader reads a line. toUpperCase converts to uppercase.",
+      sampleTestCases: [{ input: "hello world", output: "HELLO WORLD" }],
+      estimatedTime: 300,
+      marks: 5,
+      tags: ["BufferedReader", "toUpperCase"]
+    },
+    {
+      id: "CH17-PRQ-003",
+      difficulty: "hard",
+      chapter: "Input/Output",
+      chapterId: 17,
+      topic: "Scanner",
+      problemStatement: "Write a program that reads two numbers and prints their sum, difference, product, and quotient.",
+      input: "10, 3",
+      output: "Sum: 13\nDifference: 7\nProduct: 30\nQuotient: 3.33",
+      logic: "Read two numbers, perform arithmetic operations.",
+      solution: "import java.util.Scanner; public class Calculator { public static void main(String[] args) { Scanner sc = new Scanner(System.in); System.out.print(\"Enter first number: \"); int a = sc.nextInt(); System.out.print(\"Enter second number: \"); int b = sc.nextInt(); System.out.println(\"Sum: \" + (a+b)); System.out.println(\"Difference: \" + (a-b)); System.out.println(\"Product: \" + (a*b)); System.out.printf(\"Quotient: %.2f\\n\", (double)a/b); sc.close(); } }",
+      solutionExplanation: "Reads two numbers, performs all four operations.",
+      sampleTestCases: [{ input: "10, 3", output: "Sum: 13\nDifference: 7\nProduct: 30\nQuotient: 3.33" }],
+      estimatedTime: 360,
+      marks: 5,
+      tags: ["Scanner", "calculator"]
+    }
   ],
   debuggingQuestions: [
     { id: "CH17-DBG-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "Identify and fix: Scanner sc = new Scanner(System.in); int x = sc.nextLine();", correctAnswer: "nextLine() returns String. Use nextInt() for integers.", hint: "What does nextLine return?", estimatedTime: 10, marks: 1, tags: ["type mismatch"] },
@@ -76,16 +105,8 @@ Quotient: 3.33", logic: "Read two numbers, perform arithmetic operations.", solu
     { id: "CH17-DBG-003", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "Identify and fix: BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); String s = br.readLine();", correctAnswer: "Add throws IOException or wrap in try-catch.", hint: "What exception does readLine throw?", estimatedTime: 15, marks: 2, tags: ["IOException"] }
   ],
   caseBasedQuestions: [
-    { id: "CH17-CBQ-001", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "A student registration system needs to:
-a) Read student name, age, and marks.
-b) Validate that age is positive.
-c) Calculate total and average.
-d) Display a formatted report.", correctAnswer: "Use Scanner for input. Validate age > 0. Calculate total/average. Use printf for formatted output.", hint: "How do you format output in Java?", estimatedTime: 60, marks: 5, tags: ["Scanner", "registration"] },
-    { id: "CH17-CBQ-002", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "A text analysis tool needs to:
-a) Read a paragraph from the user.
-b) Count the number of words.
-c) Count the number of characters.
-d) Find the longest word.", correctAnswer: "Use BufferedReader to read paragraph. Split by spaces for word count. Use length() for character count. Iterate to find longest word.", hint: "How do you split a string into words?", estimatedTime: 75, marks: 5, tags: ["BufferedReader", "text analysis"] }
+    { id: "CH17-CBQ-001", difficulty: "medium", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "A student registration system needs to:\na) Read student name, age, and marks.\nb) Validate that age is positive.\nc) Calculate total and average.\nd) Display a formatted report.", correctAnswer: "Use Scanner for input. Validate age > 0. Calculate total/average. Use printf for formatted output.", hint: "How do you format output in Java?", estimatedTime: 60, marks: 5, tags: ["Scanner", "registration"] },
+    { id: "CH17-CBQ-002", difficulty: "hard", chapter: "Input/Output", chapterId: 17, topic: "BufferedReader", question: "A text analysis tool needs to:\na) Read a paragraph from the user.\nb) Count the number of words.\nc) Count the number of characters.\nd) Find the longest word.", correctAnswer: "Use BufferedReader to read paragraph. Split by spaces for word count. Use length() for character count. Iterate to find longest word.", hint: "How do you split a string into words?", estimatedTime: 75, marks: 5, tags: ["BufferedReader", "text analysis"] }
   ],
   vivaQuestions: [
     { id: "CH17-VIV-001", difficulty: "easy", chapter: "Input/Output", chapterId: 17, topic: "Scanner", question: "How do you read input from the user in Java?", sampleAnswer: "Use Scanner: Scanner sc = new Scanner(System.in); int x = sc.nextInt(); String s = sc.nextLine();. Or use BufferedReader for faster reading.", estimatedTime: 15, marks: 2, tags: ["Scanner", "input"] },

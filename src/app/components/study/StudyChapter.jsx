@@ -309,7 +309,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
                 placeholder="Search by keyword, concept, exam point..."
               />
             </div>
-          </label>
+          </label>  
           {search && !hasSearchResults && (
             <p className="mt-2 text-sm text-gray-500">
               No results found for &ldquo;{search}&rdquo;

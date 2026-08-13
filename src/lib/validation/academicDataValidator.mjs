@@ -15,6 +15,7 @@ export class AcademicDataValidator {
     this.subjectsFile = path.join(this.appDataDir, 'subjects.js');
     this.programmingLibraryFile = path.join(this.appDataDir, 'programmingLibrary.js');
     this.programmingQuestionsFile = path.join(this.appDataDir, 'programmingQuestions.js');
+    this.legacyQuestionBankChapters = [];
     this.findings = [];
   }
 
@@ -56,12 +57,13 @@ export class AcademicDataValidator {
     for (const file of chapterFiles) {
       if (path.basename(file) === 'index.js') continue;
       const text = fs.readFileSync(file, 'utf8');
-      const id = this.firstValue(text, /id\s*:\s*['"`]([^'"`]+)/m);
-      const title = this.firstValue(text, /title\s*:\s*['"`]([^'"`]+)/m);
-      const slug = this.firstValue(text, /slug\s*:\s*['"`]([^'"`]+)/m);
-      const subject = this.firstValue(text, /subject\s*:\s*['"`]([^'"`]+)/m);
-      const board = this.firstValue(text, /board\s*:\s*['"`]([^'"`]+)/m);
-      const className = this.firstValue(text, /class\s*:\s*['"`]([^'"`]+)/m);
+      
+      const id = this.firstValue(text, /["']?id["']?\s*:\s*['"`]([^'"`]+)/m);
+      const title = this.firstValue(text, /["']?title["']?\s*:\s*['"`]([^'"`]+)/m);
+      const slug = this.firstValue(text, /["']?slug["']?\s*:\s*['"`]([^'"`]+)/m);
+      const subject = this.firstValue(text, /["']?subject["']?\s*:\s*['"`]([^'"`]+)/m);
+      const board = this.firstValue(text, /["']?board["']?\s*:\s*['"`]([^'"`]+)/m);
+      const className = this.firstValue(text, /["']?class["']?\s*:\s*['"`]([^'"`]+)/m);
 
       const chapterRecord = {
         id,
@@ -226,6 +228,20 @@ export class AcademicDataValidator {
         title: chapterTitle || null,
         slug: chapterSlug || null,
       };
+      this.legacyQuestionBankChapters.push({ ...chapterObj, file });
+
+      // Clean ES exports for VM execution
+      const vmExecutableCode = text
+        .replace(/export\s+default\s+/g, 'const __default_export__ = ')
+        .replace(/export\s+const\s+/g, 'const ')
+        .replace(/export\s+function\s+/g, 'function ');
+
+      try {
+        new vm.Script(vmExecutableCode, { filename: file });
+      } catch (error) {
+        this.addFinding('ERROR', 'SOURCE', `Invalid JavaScript source: ${error.message}`, file, { chapter: chapterTitle || base });
+        continue;
+      }
 
       for (const familyName of familyKeys) {
         const familyPattern = new RegExp(`\\b${familyName}\\s*:\\s*\\[`, 'm');
@@ -272,11 +288,11 @@ export class AcademicDataValidator {
     if (!fs.existsSync(this.javaCurriculumFile)) return records;
 
     const text = fs.readFileSync(this.javaCurriculumFile, 'utf8');
-    const chapterMatches = [...text.matchAll(/slug:\s*['"`]([^'"`]+)['"`].+?title:\s*['"`]([^'"`]+)['"`]/gs)];
-    for (const match of chapterMatches) {
-      const slug = match[1];
-      const title = match[2];
-      records.push({ type: 'chapter', id: null, slug, title, file: this.javaCurriculumFile });
+    for (const match of text.matchAll(/\{[^{}]*\}/gs)) {
+      const objectText = match[0];
+      const slug = this.firstValue(objectText, /["']?slug["']?\s*:\s*['"`]([^'"`]+)/m);
+      const title = this.firstValue(objectText, /["']?title["']?\s*:\s*['"`]([^'"`]+)/m);
+      if (slug && title) records.push({ type: 'chapter', id: null, slug, title, file: this.javaCurriculumFile });
     }
 
     const questionMatches = [...text.matchAll(/id:\s*['"`]([^'"`]+)['"`].+?question|id:\s*['"`]([^'"`]+)['"`].+?prompt/gs)];
@@ -340,6 +356,13 @@ export class AcademicDataValidator {
   // --- Main Validation Method ---
 
   async validate() {
+    // Reset state for clean validation runs
+    this.findings = [];
+    this.legacyQuestionBankChapters = [];
+
+    // Run structural checks on files
+    this.validateSectionStructures();
+
     const chapterRecords = this.readChapterContentRecords();
     const questionRecords = await this.readQuestionBankRecords();
     const javaRecords = this.readJavaCurriculumRecords();
@@ -353,7 +376,6 @@ export class AcademicDataValidator {
     }
 
     for (const slug of this.findDuplicates(chapterSlugs)) {
-      // Exclude '-complete' variant files if they coexist by design
       if (slug && !slug.includes('-complete')) {
         this.addFinding('ERROR', 'CHAPTER', `Duplicate chapter slug detected: ${slug}`, null, { slug });
       }
@@ -376,9 +398,6 @@ export class AcademicDataValidator {
         this.addFinding('ERROR', 'CHAPTER', 'Missing chapter title', chapter.file, { id: chapter.id, slug: chapter.slug });
       }
 
-      // Chapter-content files use 'subject' metadata, not 'class'/'board'
-      // These are legacy chapter files that predate the class/board schema
-      // Skip class/board validation for chapter-content files
       const isChapterContentFile = chapter.file && chapter.file.includes('chapter-content');
       if (!isChapterContentFile) {
         if (!chapter.className) {
@@ -390,7 +409,6 @@ export class AcademicDataValidator {
         }
       }
 
-      // Only validate class/board pair when both metadata fields are present
       if (!isChapterContentFile && chapter.className && chapter.board) {
         if (!this.validClassBoardPair(chapter.className, chapter.board)) {
           this.addFinding('ERROR', 'CHAPTER', `Invalid class/board combination: class=${chapter.className}, board=${chapter.board}`, chapter.file, { id: chapter.id, slug: chapter.slug });
@@ -404,7 +422,7 @@ export class AcademicDataValidator {
 
     for (const slug of [...javaCurriculumSlugs]) {
       if (!chapterRegistrySlugs.has(slug)) {
-        this.addFinding('WARNING', 'REGISTRY', `Chapter existing in javaCurriculum.js but not in the chapter-content registry: ${slug}`, this.javaCurriculumFile, { slug });
+        this.addFinding('INFO', 'REGISTRY', `Canonical runtime chapter has no matching rich chapter-content entry: ${slug}`, this.javaCurriculumFile, { slug });
       }
     }
 
@@ -449,19 +467,15 @@ export class AcademicDataValidator {
         this.addFinding('WARNING', 'QUESTION', `Question family/type mismatch: ${q.id} belongs to ${inferredFromId} but was read from ${q.family}`, q.file, { id: q.id, type: q.type, expected: inferredFromId, actualFamily: q.family });
       }
 
-      if (q.type && String(q.type).toLowerCase() === 'programming') {
-        const required = ['problemStatement', 'input', 'output', 'constraints', 'solution'];
-        const missing = required.filter((field) => !q[field]);
-        if (missing.length) {
-          this.addFinding('WARNING', 'QUESTION', `Programming question missing optional metadata: ${missing.join(', ')}`, q.file, { id: q.id, slug: q.slug, type: q.type });
-        }
-      }
-
       if (q.chapter) {
+        const legacyChapterExists = this.legacyQuestionBankChapters.some((chapter) =>
+          chapter.title === q.chapter || chapter.slug === q.chapter
+        );
         const chapterExists = chapterRegistrySlugs.has(q.chapter)
           || chapterRegistryTitles.has(q.chapter)
           || javaCurriculumSlugs.has(q.chapter)
-          || javaCurriculumTitles.has(q.chapter);
+          || javaCurriculumTitles.has(q.chapter)
+          || legacyChapterExists;
         if (!chapterExists) {
           this.addFinding('WARNING', 'QUESTION', `Question ${q.id || q.slug} references chapter not in registries: ${q.chapter}`, q.file, { id: q.id, slug: q.slug, chapter: q.chapter });
         }

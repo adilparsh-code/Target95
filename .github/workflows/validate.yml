@@ -24,12 +24,9 @@ jobs:
 
       - name: Repair known OOP question-bank escape placeholders
         if: github.event_name == 'pull_request' && github.head_ref == 'development'
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git fetch origin development
-          git show origin/development^:.github/workflows/validate.yml > /tmp/validate-original.yml
           git switch -C development origin/development
           python3 - <<'PY'
           from pathlib import Path
@@ -41,6 +38,7 @@ jobs:
               'CH19-OUT-005': ['A ', 'B ', 'C '],
               'CH19-PRQ-001': ['Dog barks', 'Cat meows'],
           }
+          changed = False
           for qid, values in replacements.items():
               marker = f'id: "{qid}"'
               start = text.find(marker)
@@ -54,17 +52,18 @@ jobs:
                   if '\\1' not in block:
                       raise SystemExit(f'Not enough placeholders in {qid}')
                   block = block.replace('\\1', value, 1)
+                  changed = True
               text = text[:start] + block + text[end:]
           if '\\1' in text:
               raise SystemExit('Unresolved \\1 placeholders remain in OOP question bank')
-          path.write_text(text, encoding='utf-8')
+          if changed:
+              path.write_text(text, encoding='utf-8')
           PY
-          cp /tmp/validate-original.yml .github/workflows/validate.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/app/data/question-bank/19-oop-concepts.js .github/workflows/validate.yml
+          git add src/app/data/question-bank/19-oop-concepts.js
           if git diff --cached --quiet; then
-            echo 'No repair needed.'
+            echo 'No OOP repair needed.'
           else
             git commit -m 'fix: repair OOP question bank escapes'
             git push origin development

@@ -1,5 +1,5 @@
 // Question Bank Index - Target95 ICSE Computer Applications
-// Complete Java Question Bank with 19 chapters
+// Complete Java Question Bank with 20 chapters
 
 import chapter1 from "./01-introduction";
 import chapter2 from "./02-variables-data-types";
@@ -20,13 +20,14 @@ import chapter16 from "./16-exception-handling";
 import chapter17 from "./17-input-output";
 import chapter18 from "./18-packages-access-modifiers";
 import chapter19 from "./19-oop-concepts";
+import chapter20 from "./20-disruptive-technologies";
 
 const questionBank = {
   chapters: [
     chapter1, chapter2, chapter3, chapter4, chapter5,
     chapter6, chapter7, chapter8, chapter9, chapter10,
     chapter11, chapter12, chapter13, chapter14, chapter15,
-    chapter16, chapter17, chapter18, chapter19
+    chapter16, chapter17, chapter18, chapter19, chapter20
   ],
   
   getChapterById: (id) => {

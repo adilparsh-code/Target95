@@ -3,51 +3,38 @@
 const truth2 = (rows) => rows;
 
 export const BOOLEAN_TRUTH_TABLES = {
-  AND: truth2([
-    { A: 0, B: 0, Y: 0 }, { A: 0, B: 1, Y: 0 }, { A: 1, B: 0, Y: 0 }, { A: 1, B: 1, Y: 1 },
-  ]),
-  OR: truth2([
-    { A: 0, B: 0, Y: 0 }, { A: 0, B: 1, Y: 1 }, { A: 1, B: 0, Y: 1 }, { A: 1, B: 1, Y: 1 },
-  ]),
-  XOR: truth2([
-    { A: 0, B: 0, Y: 0 }, { A: 0, B: 1, Y: 1 }, { A: 1, B: 0, Y: 1 }, { A: 1, B: 1, Y: 0 },
-  ]),
-  NAND: truth2([
-    { A: 0, B: 0, Y: 1 }, { A: 0, B: 1, Y: 1 }, { A: 1, B: 0, Y: 1 }, { A: 1, B: 1, Y: 0 },
-  ]),
-  NOR: truth2([
-    { A: 0, B: 0, Y: 1 }, { A: 0, B: 1, Y: 0 }, { A: 1, B: 0, Y: 0 }, { A: 1, B: 1, Y: 0 },
-  ]),
-  XNOR: truth2([
-    { A: 0, B: 0, Y: 1 }, { A: 0, B: 1, Y: 0 }, { A: 1, B: 0, Y: 0 }, { A: 1, B: 1, Y: 1 },
-  ]),
+  AND: truth2([{ A: 0, B: 0, Y: 0 }, { A: 0, B: 1, Y: 0 }, { A: 1, B: 0, Y: 0 }, { A: 1, B: 1, Y: 1 }]),
+  OR: truth2([{ A: 0, B: 0, Y: 0 }, { A: 0, B: 1, Y: 1 }, { A: 1, B: 0, Y: 1 }, { A: 1, B: 1, Y: 1 }]),
+  XOR: truth2([{ A: 0, B: 0, Y: 0 }, { A: 0, B: 1, Y: 1 }, { A: 1, B: 0, Y: 1 }, { A: 1, B: 1, Y: 0 }]),
+  NAND: truth2([{ A: 0, B: 0, Y: 1 }, { A: 0, B: 1, Y: 1 }, { A: 1, B: 0, Y: 1 }, { A: 1, B: 1, Y: 0 }]),
+  NOR: truth2([{ A: 0, B: 0, Y: 1 }, { A: 0, B: 1, Y: 0 }, { A: 1, B: 0, Y: 0 }, { A: 1, B: 1, Y: 0 }]),
+  XNOR: truth2([{ A: 0, B: 0, Y: 1 }, { A: 0, B: 1, Y: 0 }, { A: 1, B: 0, Y: 0 }, { A: 1, B: 1, Y: 1 }]),
 };
 
-export const BOOLEAN_NOT_TRUTH_TABLE = [
-  { A: 0, Y: 1 }, { A: 1, Y: 0 },
-];
+export const BOOLEAN_NOT_TRUTH_TABLE = [{ A: 0, Y: 1 }, { A: 1, Y: 0 }];
 
 export const BOOLEAN_TERMINOLOGY = [
   { term: "Boolean variable", meaning: "A symbol whose value can be only 0 or 1.", example: "A, B, C" },
+  { term: "Constant", meaning: "A fixed Boolean value that is always 0 or always 1.", example: "0, 1" },
   { term: "Literal", meaning: "A variable or its complement.", example: "A or A'" },
   { term: "Complement", meaning: "The NOT form of a Boolean variable.", example: "A'" },
   { term: "Boolean expression", meaning: "A combination of variables, constants and Boolean operators.", example: "A + A'B" },
   { term: "Boolean function", meaning: "A rule that maps Boolean inputs to a Boolean output.", example: "F(A,B)=A+B" },
-  { term: "Truth table", meaning: "A complete table showing the output for every possible input combination.", example: "2 inputs → 4 rows" },
-  { term: "Minterm", meaning: "A product term containing every variable exactly once, complemented or uncomplemented.", example: "A'BC" },
-  { term: "Maxterm", meaning: "A sum term containing every variable exactly once, complemented or uncomplemented.", example: "A+B'+C" },
-  { term: "Canonical SOP", meaning: "Sum of minterms; every product term contains every variable.", example: "Σm(1,3,5)" },
-  { term: "Canonical POS", meaning: "Product of maxterms; every sum term contains every variable.", example: "ΠM(0,2,4)" },
+  { term: "Truth table", meaning: "A complete table showing the output for every possible input combination.", example: "2 inputs → 4 rows; 3 inputs → 8 rows" },
+  { term: "Minterm", meaning: "A product (AND) term containing every variable exactly once, complemented or uncomplemented.", example: "A'BC" },
+  { term: "Maxterm", meaning: "A sum (OR) term containing every variable exactly once, complemented or uncomplemented.", example: "A+B'+C" },
+  { term: "Canonical SOP", meaning: "Sum of minterms; every product term contains every variable exactly once.", example: "F = Σm(1,3,5)" },
+  { term: "Canonical POS", meaning: "Product of maxterms; every sum term contains every variable exactly once.", example: "F = ΠM(0,2,4)" },
   { term: "SOP", meaning: "Sum of Products: OR of AND terms.", example: "AB + AC'" },
   { term: "POS", meaning: "Product of Sums: AND of OR terms.", example: "(A+B)(A+C')" },
-  { term: "Truth-table equivalence", meaning: "Two expressions are equivalent when their outputs match for every input row.", example: "A+AB ≡ A" },
+  { term: "Truth-table equivalence", meaning: "Two expressions are equivalent when their output columns match for every input row.", example: "A+AB ≡ A" },
   { term: "Universal gate", meaning: "A gate from which any Boolean function can be built.", example: "NAND or NOR" },
-  { term: "Don't-care condition", meaning: "An input combination whose output can be treated as 0 or 1 when simplifying a design, where permitted.", example: "X entries in a truth table" },
+  { term: "Don't-care condition", meaning: "An input combination whose output may be treated as 0 or 1 for simplification, where permitted.", example: "X entries" },
 ];
 
 export const BOOLEAN_GATE_TABLE = [
-  { gate: "AND", notation: "A·B", plain: "1 only when BOTH are 1", mental: "Both must agree: ON AND ON = ON" },
-  { gate: "OR", notation: "A+B", plain: "1 when AT LEAST ONE is 1", mental: "Either path can turn it on" },
+  { gate: "AND", notation: "A·B", plain: "1 only when BOTH are 1", mental: "Both must be ON" },
+  { gate: "OR", notation: "A+B", plain: "1 when AT LEAST ONE is 1", mental: "Either path can turn it ON" },
   { gate: "NOT", notation: "A'", plain: "Flips 0↔1", mental: "Opposite of A" },
   { gate: "XOR", notation: "A⊕B", plain: "1 when inputs are DIFFERENT", mental: "Exactly one is ON" },
   { gate: "XNOR", notation: "A⊙B", plain: "1 when inputs are the SAME", mental: "Agreement detector" },
@@ -57,9 +44,9 @@ export const BOOLEAN_GATE_TABLE = [
 
 export const TRUTH_TABLE_METHOD = [
   "1. Count variables. With n variables, prepare 2^n rows.",
-  "2. List input combinations systematically; for two variables use 00, 01, 10, 11.",
-  "3. Create one column per intermediate operation instead of jumping directly to the final answer.",
-  "4. Evaluate NOT first, then grouped AND/OR operations according to the expression.",
+  "2. Write input combinations systematically: for 2 variables use 00, 01, 10, 11; for 3 use 000 through 111.",
+  "3. Create one column per intermediate operation instead of jumping to the final answer.",
+  "4. Evaluate complements first, then grouped AND/OR operations according to the expression.",
   "5. Compare the final output column with the claimed identity or target expression.",
 ];
 
@@ -69,6 +56,49 @@ export const TRUTH_TABLE_CHALLENGES_XII = [
   { id: "TT-XII-03", expression: "(A+B)'", task: "Compare the final column with A'B' row by row.", answer: "The columns match, proving De Morgan's law." },
   { id: "TT-XII-04", expression: "A⊕B", task: "Use the table to describe XOR in plain English.", answer: "XOR is 1 exactly when the two inputs are different." },
 ];
+
+export const MINTERM_MAXTERM_GUIDE = {
+  coreRule: "A minterm corresponds to a truth-table row where F=1. A maxterm corresponds to a truth-table row where F=0.",
+  variableOrder: "Always fix an order first, e.g. A, B, C. Treat ABC as a binary number to get the row index.",
+  mintermConstruction: [
+    "For a row with 1 in a variable position, write that variable uncomplemented.",
+    "For a row with 0 in a variable position, write that variable complemented.",
+    "AND the literals together to form the minterm.",
+  ],
+  maxtermConstruction: [
+    "For a row with 0 in a variable position, write that variable uncomplemented.",
+    "For a row with 1 in a variable position, write that variable complemented.",
+    "OR the literals together to form the maxterm.",
+  ],
+  notation: [
+    "Σm(...) lists the indices of rows where F=1 and names the canonical SOP.",
+    "ΠM(...) lists the indices of rows where F=0 and names the canonical POS.",
+    "For n variables, valid indices run from 0 to 2^n−1.",
+  ],
+  workedExamples: [
+    { id: "MM-01", variables: "A, B", truthRow: "A=1, B=0, F=1", minterm: "m2 = AB'", why: "10₂ = 2; 1→A and 0→B'." },
+    { id: "MM-02", variables: "A, B, C", truthRow: "A=1, B=0, C=1, F=1", minterm: "m5 = AB'C", why: "101₂ = 5; 1→A, 0→B', 1→C." },
+    { id: "MM-03", variables: "A, B, C", truthRow: "A=1, B=0, C=1, F=0", maxterm: "M5 = A' + B + C'", why: "For a maxterm, 1→complement and 0→uncomplemented; the sum is 0 exactly on row 101." },
+  ],
+  conversionWorkflow: [
+    "Truth table → mark all F=1 rows → write each row's minterm → OR them → canonical SOP → Σm(index list).",
+    "Truth table → mark all F=0 rows → write each row's maxterm → AND them → canonical POS → ΠM(index list).",
+    "Cross-check: SOP uses 1-rows; POS uses 0-rows. Their index sets are complements within 0…2^n−1.",
+  ],
+  examTraps: [
+    "Minterm: 0 means complemented, 1 means uncomplemented.",
+    "Maxterm: 0 means uncomplemented, 1 means complemented.",
+    "Do not change variable order midway; row index depends on the chosen order.",
+    "Canonical means every term contains every variable exactly once; a reduced SOP/POS is not necessarily canonical.",
+  ],
+  practice: [
+    { id: "MM-P-01", question: "For A=0,B=1,C=1 and F=1, write the minterm and index.", answer: "A'BC = m3." },
+    { id: "MM-P-02", question: "For A=0,B=1,C=1 and F=0, write the maxterm and index.", answer: "A + B' + C' = M3." },
+    { id: "MM-P-03", question: "A function is 1 at rows 1, 2 and 7 of a 3-variable table. Write canonical SOP notation.", answer: "F = Σm(1,2,7)." },
+    { id: "MM-P-04", question: "A function is 0 at rows 0, 3 and 5. Write canonical POS notation.", answer: "F = ΠM(0,3,5)." },
+    { id: "MM-P-05", question: "For F=Σm(1,2,6,7), identify the zero rows for the equivalent canonical POS.", answer: "F = ΠM(0,3,4,5)." },
+  ],
+};
 
 const booleanAlgebra = {
   id: "xii-boolean-algebra",
@@ -80,7 +110,7 @@ const booleanAlgebra = {
     { id: "truth", title: "Master Truth Tables", goal: "Build, read and verify every input/output combination." },
     { id: "laws", title: "Master the Laws", goal: "Learn each law through patterns, truth tables and intuition." },
     { id: "simplify", title: "Simplify Step-by-Step", goal: "Turn long expressions into short, exam-ready forms." },
-    { id: "canonical", title: "Minterms & Maxterms", goal: "Move from truth tables to canonical SOP/POS forms." },
+    { id: "canonical", title: "Minterms & Maxterms", goal: "Move from truth tables to minterms, maxterms, Σm, ΠM and canonical SOP/POS forms." },
     { id: "nand-nor", title: "Think Like a Circuit", goal: "Translate expressions into gates and universal-gate designs." },
     { id: "exam", title: "Exam Mode", goal: "Solve ISC-style simplification and implementation problems under time pressure." },
   ],
@@ -95,6 +125,7 @@ const booleanAlgebra = {
   truthTables: BOOLEAN_TRUTH_TABLES,
   truthTableMethod: TRUTH_TABLE_METHOD,
   truthTableChallenges: TRUTH_TABLE_CHALLENGES_XII,
+  mintermMaxtermGuide: MINTERM_MAXTERM_GUIDE,
   lawDeck: [
     { name: "Identity", rules: ["A + 0 = A", "A·1 = A"], intuition: "Adding false or ANDing with true changes nothing." },
     { name: "Null / Dominance", rules: ["A + 1 = 1", "A·0 = 0"], intuition: "True dominates OR; false dominates AND." },
@@ -131,16 +162,23 @@ const booleanAlgebra = {
     { id: "BA-P-06", difficulty: "hard", type: "design", question: "Express XOR using only AND, OR and NOT.", answer: "A'B + AB'", marks: 4 },
   ],
   debugging: [
-    { id: "BA-DBG-01", buggySteps: ["(A+B)' = A'+B'"], task: "Find the error.", answer: "Correct: (A+B)' = A'B'. De Morgan swaps OR to AND." },
-    { id: "BA-DBG-02", buggySteps: ["A+AB = AB"], task: "Find the error.", answer: "Invalid cancellation. Correct simplification is A by absorption." },
+    { id: "BA-DBG-01", buggySteps: ["(A+B)' = A'+B'"], task: "Find the mistake and correct it.", answer: "De Morgan changes OR to AND: (A+B)' = A'B'." },
+    { id: "BA-DBG-02", buggySteps: ["A + AB", "= AB + AB", "= AB"], task: "Find the first invalid transformation.", answer: "The first step is invalid. Use absorption or factor A: A(1+B)=A." },
   ],
-  examStrategy: ["Recognise the pattern before expanding.", "Mark complements and repeated literals.", "Try absorption/complement/De Morgan early.", "Name the law on every important proof step.", "Use a truth table to verify when algebraic manipulation feels uncertain.", "For minterms/maxterms, make a clean index/row map before writing canonical forms."],
+  examStrategy: [
+    "Step 1: Identify the largest obvious pattern before expanding anything.",
+    "Step 2: Circle complements and repeated literals.",
+    "Step 3: Prefer absorption/complement/De Morgan before heavy expansion.",
+    "Step 4: After every major rewrite, ask whether the expression actually became simpler.",
+    "Step 5: In a proof question, write the law used at each meaningful step.",
+    "Step 6: If stuck, build a truth table to verify the identity before trying another algebraic route.",
+  ],
   masteryChecks: [
     { id: "M-01", title: "Law Recognition", success: "Identify the correct law in 8/10 examples." },
-    { id: "M-02", title: "Truth Tables", success: "Build a correct 2-variable table and explain every output column." },
-    { id: "M-03", title: "Canonical Forms", success: "Convert a truth table to SOP/POS without row-index mistakes." },
+    { id: "M-02", title: "Truth-table Construction", success: "Build a complete 2- and 3-variable table without missing a row." },
+    { id: "M-03", title: "Canonical Forms", success: "Convert a truth table to Σm/ΠM and canonical SOP/POS correctly." },
     { id: "M-04", title: "Proof Mode", success: "Complete a 5-mark derivation with named laws and no unexplained jumps." },
-    { id: "M-05", title: "Circuit Thinking", success: "Translate between Boolean expressions and gate structures." },
+    { id: "M-05", title: "Circuit Thinking", success: "Translate between a Boolean expression and its gate structure." },
   ],
 };
 

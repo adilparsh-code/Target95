@@ -1,17 +1,5 @@
 # ICSE Class X Computer Applications — Content Audit
 
-## Audit goal
-
-Class X content is considered complete only when each syllabus area has:
-- student-friendly learning material/theory;
-- chapter/topic coverage;
-- MCQs with answer and explanation;
-- practice/programming questions where applicable;
-- exam/PYQ-style practice where applicable;
-- practical/lab coverage where applicable;
-- correct difficulty metadata and marks;
-- integration with the existing question/content architecture.
-
 ## Official Class X structure
 
 Target95 tracks the eight official ICSE Class X topic clusters from the CISCE 2028 syllabus:
@@ -26,38 +14,27 @@ Target95 tracks the eight official ICSE Class X topic clusters from the CISCE 20
 
 ## Enriched implementation delivered
 
-A new student-first content layer now covers all eight topic IDs with:
-- learning objectives;
-- key concepts;
-- remember points/common traps;
-- exam tips;
-- graded MCQs with explanations;
-- graded practice questions;
-- practical/programming task ideas.
+The new student-first Class X content layer covers all eight topic IDs with learning objectives, key concepts, remember points, exam tips, graded MCQs with explanations, graded practice questions and practical/programming task ideas.
 
-Totals in the enriched layer:
+Totals:
 - 8/8 topic records
 - 34 MCQs
 - 26 practice questions
 - 29 practical task ideas
 
-The dedicated Disruptive Technologies question-bank chapter is also retained in the legacy question-bank index for backward compatibility.
+The dedicated Disruptive Technologies question-bank chapter remains in the legacy index for backward compatibility.
 
 ## Integration delivered
 
-`src/lib/questionBankAdapter.js` now exposes the enriched Class X records through official and friendly slugs and returns:
-- normalized MCQs;
-- output/programming questions when present;
-- normalized practice questions;
-- practical task ideas.
+`src/lib/questionBankAdapter.js` exposes the enriched Class X records through official and friendly slugs and returns normalized MCQs, practice questions, practical task ideas, plus any output/programming questions when present.
 
-No route or component architecture was changed.
+No route/component architecture was changed.
 
-## Academic quality rules
+## Quality rules
 
 - Official syllabus is the baseline, not the ceiling.
-- Out-of-scope 2-D searching/sorting must not be presented as board-core Class X work.
-- Enrichment is labelled as extension where appropriate.
+- Out-of-scope 2-D searching/sorting is not presented as board-core work.
+- Enrichment is labelled where appropriate.
 - Questions favour reasoning, tracing, debugging and application over rote recall.
 - Every MCQ carries an explanation.
 
@@ -72,8 +49,8 @@ No route or component architecture was changed.
 | Practical task ideas | Present across all 8 topics |
 | Adapter integration | Complete |
 | Legacy question-bank compatibility | Preserved |
-| Build/deployment verification | Blocked by Vercel build-rate limit |
+| Production build verification | Blocked by Vercel build-rate limit |
 
-## Final release gate
+## Release gate
 
-The content layer is implementation-complete for this phase, but the PR should not be treated as production-verified until the repository build/validation passes. Current CI status is blocked by the Vercel free-tier daily build-rate limit, not a reported application-code failure.
+The content implementation for this phase is complete. Production verification remains blocked until the Vercel daily build-rate limit resets; the current failure is the deployment quota, not a reported application-code error.

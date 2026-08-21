@@ -102,6 +102,18 @@ function normalizeProgrammingQuestions(programmingQuestions) {
   }));
 }
 
+function normalizePracticeQuestions(practiceQuestions) {
+  if (!Array.isArray(practiceQuestions) || practiceQuestions.length === 0) return null;
+  return practiceQuestions.map((q) => ({
+    id: q.id,
+    question: q.question,
+    answer: q.answer || "",
+    type: q.type || "practice",
+    difficulty: q.difficulty,
+    marks: q.marks,
+  }));
+}
+
 export function getQuestionBankChapter(slug) {
   if (!slug) return null;
   const rawChapter = chapterBank[slug];
@@ -111,6 +123,8 @@ export function getQuestionBankChapter(slug) {
     mcqs: normalizeMcqs(rawChapter.mcqs),
     outputQuestions: normalizeOutputQuestions(rawChapter.outputQuestions),
     programmingQuestions: normalizeProgrammingQuestions(rawChapter.programmingQuestions),
+    practiceQuestions: normalizePracticeQuestions(rawChapter.practice),
+    practicalTasks: Array.isArray(rawChapter.practicalTasks) ? rawChapter.practicalTasks : null,
   };
 }
 

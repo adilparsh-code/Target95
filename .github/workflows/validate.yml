@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: write
-
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -21,53 +18,6 @@ jobs:
         with:
           node-version: 20
           cache: npm
-
-      - name: Repair known OOP question-bank escape placeholders
-        if: github.event_name == 'pull_request' && github.head_ref == 'development'
-        run: |
-          set -euo pipefail
-          git fetch origin development
-          git switch -C development origin/development
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path('src/app/data/question-bank/19-oop-concepts.js')
-          text = path.read_text(encoding='utf-8')
-          replacements = {
-              'CH19-OUT-001': ['A', 'B'],
-              'CH19-OUT-003': ['A', 'B'],
-              'CH19-OUT-005': ['A ', 'B ', 'C '],
-              'CH19-PRQ-001': ['Dog barks', 'Cat meows'],
-          }
-          changed = False
-          for qid, values in replacements.items():
-              marker = f'id: "{qid}"'
-              start = text.find(marker)
-              if start == -1:
-                  raise SystemExit(f'Missing question {qid}')
-              end = text.find('\n    { id:', start + len(marker))
-              if end == -1:
-                  end = len(text)
-              block = text[start:end]
-              for value in values:
-                  if '\\1' not in block:
-                      raise SystemExit(f'Not enough placeholders in {qid}')
-                  block = block.replace('\\1', value, 1)
-                  changed = True
-              text = text[:start] + block + text[end:]
-          if '\\1' in text:
-              raise SystemExit('Unresolved \\1 placeholders remain in OOP question bank')
-          if changed:
-              path.write_text(text, encoding='utf-8')
-          PY
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src/app/data/question-bank/19-oop-concepts.js
-          if git diff --cached --quiet; then
-            echo 'No OOP repair needed.'
-          else
-            git commit -m 'fix: repair OOP question bank escapes'
-            git push origin development
-          fi
 
       - name: Install dependencies
         run: npm ci

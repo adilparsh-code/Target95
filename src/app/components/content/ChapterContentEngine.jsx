@@ -17,12 +17,14 @@ import {
   RevisionNotesSection,
 } from "./sections";
 
-export default function ChapterContentEngine({
-  chapter,
-  content = null,
-  questions = null,
-  completedSections = [],
-}) {
+function hasMeaningfulContent(value) {
+  if (!value) return false;
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === "object") return Object.keys(value).length > 0;
+  return Boolean(String(value).trim());
+}
+
+export default function ChapterContentEngine({ chapter, content = null, questions = null, completedSections = [] }) {
   const sections = useMemo(
     () => getChapterContent(chapter, content, questions),
     [chapter, content, questions]

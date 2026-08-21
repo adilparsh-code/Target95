@@ -6,14 +6,13 @@ import {
   addDoc,
   getDocs,
   updateDoc,
-  deleteDoc,
   doc,
   query,
   where,
   orderBy,
   serverTimestamp,
   limit,
-  startAfter
+  documentId
 } from "firebase/firestore";
 
 export class PracticeService {
@@ -23,45 +22,34 @@ export class PracticeService {
     this.auth = auth;
   }
 
-  // Get questions based on filters
-  async getQuestions(filters = {}) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
+  requireAuth() {
+    if (!this.db || !this.auth?.currentUser) {
+      throw new Error("Please sign in to access practice questions.");
     }
+  }
+
+  async getQuestions(filters = {}) {
+    this.requireAuth();
 
     try {
       const { subject, chapter, difficulty, count = 20 } = filters;
       const questionsRef = collection(this.db, "questions");
-      
-      // Build query based on filters
-      let q = questionsRef;
       const conditions = [];
-      
       if (subject) conditions.push(where("subject", "==", subject));
       if (chapter) conditions.push(where("chapter", "==", chapter));
       if (difficulty) conditions.push(where("difficulty", "==", difficulty));
-      
-      // Add conditions to query
-      if (conditions.length > 0) {
-        q = query(questionsRef, ...conditions, limit(count));
-      } else {
-        q = query(questionsRef, limit(count));
-      }
 
-      const querySnapshot = await getDocs(q);
-      let questions = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
+      const q = conditions.length
+        ? query(questionsRef, ...conditions, limit(count))
+        : query(questionsRef, limit(count));
+
+      let questions = (await getDocs(q)).docs.map(snapshot => ({
+        id: snapshot.id,
+        ...snapshot.data()
       }));
 
-      // Shuffle questions to randomize order
       questions = this.shuffleArray(questions);
-      
-      // Mix difficulty if multiple difficulties are requested
-      if (!difficulty && questions.length > 0) {
-        questions = this.balanceDifficulty(questions);
-      }
-
+      if (!difficulty && questions.length) questions = this.balanceDifficulty(questions);
       return questions.slice(0, count);
     } catch (error) {
       console.error("Error getting questions:", error);
@@ -69,21 +57,36 @@ export class PracticeService {
     }
   }
 
-  // Save practice session to Firestore
-  async saveSession(sessionData) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+  // Rehydrate the exact questions stored in an active session without reshuffling them.
+  async getQuestionsByIds(ids = []) {
+    this.requireAuth();
+    if (!ids.length) return [];
 
+    const questionsRef = collection(this.db, "questions");
+    const chunks = [];
+    for (let i = 0; i < ids.length; i += 10) chunks.push(ids.slice(i, i + 10));
+
+    const snapshots = await Promise.all(
+      chunks.map(chunk => getDocs(query(questionsRef, where(documentId(), "in", chunk))))
+    );
+
+    const byId = new Map();
+    snapshots.forEach(snapshot => {
+      snapshot.docs.forEach(item => byId.set(item.id, { id: item.id, ...item.data() }));
+    });
+
+    return ids.map(id => byId.get(id)).filter(Boolean);
+  }
+
+  async saveSession(sessionData) {
+    this.requireAuth();
     try {
       const uid = this.auth.currentUser.uid;
       const sessionsRef = collection(this.db, `users/${uid}/practiceSessions`);
-      
       const docRef = await addDoc(sessionsRef, {
         ...sessionData,
         completedAt: serverTimestamp()
       });
-
       return { id: docRef.id, ...sessionData };
     } catch (error) {
       console.error("Error saving practice session:", error);
@@ -91,80 +94,47 @@ export class PracticeService {
     }
   }
 
-  // Save practice answers
   async saveAnswers(answers, sessionId) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+    this.requireAuth();
+    const uid = this.auth.currentUser.uid;
+    const answersRef = collection(this.db, `users/${uid}/practiceAnswers`);
+    const savedAnswers = [];
 
-    try {
-      const uid = this.auth.currentUser.uid;
-      const answersRef = collection(this.db, `users/${uid}/practiceAnswers`);
-      
-      const answersWithSession = answers.map(answer => ({
+    for (const answer of answers) {
+      const docRef = await addDoc(answersRef, {
         ...answer,
         sessionId,
         createdAt: serverTimestamp()
-      }));
-
-      // Save all answers
-      const savedAnswers = [];
-      for (const answer of answersWithSession) {
-        const docRef = await addDoc(answersRef, answer);
-        savedAnswers.push({ id: docRef.id, ...answer });
-      }
-
-      return savedAnswers;
-    } catch (error) {
-      console.error("Error saving practice answers:", error);
-      throw new Error("Failed to save practice answers. Please try again.");
+      });
+      savedAnswers.push({ id: docRef.id, ...answer });
     }
+    return savedAnswers;
   }
 
-  // Get user's practice history
   async getSessionHistory(limitCount = 10) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
-
+    this.requireAuth();
     try {
       const uid = this.auth.currentUser.uid;
       const sessionsRef = collection(this.db, `users/${uid}/practiceSessions`);
       const q = query(sessionsRef, orderBy("completedAt", "desc"), limit(limitCount));
-      const querySnapshot = await getDocs(q);
-
-      return querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      return (await getDocs(q)).docs.map(snapshot => ({ id: snapshot.id, ...snapshot.data() }));
     } catch (error) {
       console.error("Error getting session history:", error);
       throw new Error("Failed to load session history. Please refresh the page.");
     }
   }
 
-  // Update user statistics
   async updateStatistics(stats) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
-
+    this.requireAuth();
     try {
       const uid = this.auth.currentUser.uid;
       const statsRef = doc(this.db, `users/${uid}/practiceStatistics/current`);
-      
-      await updateDoc(statsRef, {
-        ...stats,
-        updatedAt: serverTimestamp()
-      });
-
+      await updateDoc(statsRef, { ...stats, updatedAt: serverTimestamp() });
       return { success: true };
     } catch (error) {
-      // If document doesn't exist, create it
-      if (error.code === 'not-found') {
+      if (error.code === "not-found") {
         const uid = this.auth.currentUser.uid;
-        const statsRef = collection(this.db, `users/${uid}/practiceStatistics`);
-        await addDoc(statsRef, {
+        await addDoc(collection(this.db, `users/${uid}/practiceStatistics`), {
           ...stats,
           createdAt: serverTimestamp()
         });
@@ -175,7 +145,6 @@ export class PracticeService {
     }
   }
 
-  // Helper: Shuffle array using Fisher-Yates algorithm
   shuffleArray(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -185,22 +154,17 @@ export class PracticeService {
     return newArray;
   }
 
-  // Helper: Balance difficulty distribution in questions
   balanceDifficulty(questions) {
     const easy = questions.filter(q => q.difficulty === "Easy");
     const medium = questions.filter(q => q.difficulty === "Medium");
     const hard = questions.filter(q => q.difficulty === "Hard");
-    
     const result = [];
     let e = 0, m = 0, h = 0;
-    
-    // Interleave questions from different difficulty levels
     while (e < easy.length || m < medium.length || h < hard.length) {
-      if (m < medium.length) result.push(medium[m++]); // Prioritize medium
+      if (m < medium.length) result.push(medium[m++]);
       if (e < easy.length) result.push(easy[e++]);
       if (h < hard.length) result.push(hard[h++]);
     }
-    
     return result;
   }
 }

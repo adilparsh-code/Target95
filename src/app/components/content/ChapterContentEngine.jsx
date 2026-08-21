@@ -17,11 +17,6 @@ import {
   RevisionNotesSection,
 } from "./sections";
 
-/**
- * ChapterContentEngine
- * Reusable content renderer that automatically renders all chapter sections
- * from structured data. Future chapters work without creating new components.
- */
 export default function ChapterContentEngine({
   chapter,
   content = null,

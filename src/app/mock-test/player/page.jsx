@@ -5,7 +5,13 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
-import { clearMockTestDraft, getMockTestDraft, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
+import {
+  clearMockTestDraft,
+  evaluateMockTestAnswer,
+  getMockTestDraft,
+  saveMockTestDraft,
+  saveMockTestResult,
+} from "../../../lib/mocktest";
 
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60);
@@ -15,7 +21,7 @@ function formatTime(seconds) {
 
 function shuffleArray(arr) {
   const shuffled = [...arr];
-  for (let i = shuffled.length - 1; i > 0; i--) {
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
@@ -32,7 +38,10 @@ function MockTestPlayerContent() {
   const chapter = searchParams.get("chapter") || "all";
   const mode = searchParams.get("mode") || "exam";
   const duration = parseInt(searchParams.get("duration") || String(count * 1.5), 10);
-  const testConfig = useMemo(() => ({ category, chapter, difficulty, type, count, mode, duration }), [category, chapter, difficulty, type, count, mode, duration]);
+  const testConfig = useMemo(
+    () => ({ category, chapter, difficulty, type, count, mode, duration }),
+    [category, chapter, difficulty, type, count, mode, duration]
+  );
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -41,44 +50,64 @@ function MockTestPlayerContent() {
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [draftReady, setDraftReady] = useState(false);
+  const [restoredQuestionIds, setRestoredQuestionIds] = useState(null);
   const hasSubmittedRef = useRef(false);
 
   const filteredQuestions = useMemo(() => {
-    let pool = mockTestQuestions.filter((q) => {
+    const pool = mockTestQuestions.filter((q) => {
       const catMatch = q.category === category;
       const diffMatch = difficulty === "all" || q.difficulty === difficulty;
       const typeMatch = type === "mixed" || q.type === type;
       const chapterMatch = chapter === "all" || q.chapter === chapter;
       return catMatch && diffMatch && typeMatch && chapterMatch;
     });
+
     if (pool.length === 0) return [];
-    const shuffled = shuffleArray(pool);
-    return shuffled.slice(0, Math.min(count, shuffled.length));
-  }, [category, chapter, difficulty, type, count]);
+
+    if (Array.isArray(restoredQuestionIds) && restoredQuestionIds.length > 0) {
+      const byId = new Map(pool.map((question) => [String(question.id), question]));
+      const restored = restoredQuestionIds
+        .map((id) => byId.get(String(id)))
+        .filter(Boolean);
+      if (restored.length === restoredQuestionIds.length) {
+        return restored.slice(0, Math.min(count, restored.length));
+      }
+    }
+
+    return shuffleArray(pool).slice(0, Math.min(count, pool.length));
+  }, [category, chapter, difficulty, type, count, restoredQuestionIds]);
 
   const questions = filteredQuestions;
   const currentQuestion = questions[currentIndex] || null;
   const answeredCount = Object.keys(answers).length;
-  const bookmarkedCount = Object.keys(bookmarked).filter((k) => bookmarked[k]).length;
+  const bookmarkedCount = Object.keys(bookmarked).filter((key) => bookmarked[key]).length;
   const progressPercent = questions.length > 0 ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
+  // Load an abandoned test before enabling autosave. The exact question IDs are restored,
+  // so a refresh no longer generates a different random test and loses the student's work.
   useEffect(() => {
     const draft = getMockTestDraft(testConfig);
-    if (draft && Array.isArray(draft.questionIds)) {
-      const restoredCount = draft.questionIds.filter((id) => questions.some((question) => question.id === id)).length;
-      if (restoredCount === questions.length) {
-        setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, questions.length - 1));
-        setAnswers(draft.answers || {});
-        setBookmarked(draft.bookmarked || {});
-        setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60));
-      }
+    if (draft && Array.isArray(draft.questionIds) && draft.questionIds.length > 0) {
+      setRestoredQuestionIds(draft.questionIds);
+      setCurrentIndex(Math.max(0, Number(draft.currentIndex) || 0));
+      setAnswers(draft.answers || {});
+      setBookmarked(draft.bookmarked || {});
+      setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60));
+    } else {
+      setRestoredQuestionIds(null);
     }
     setDraftReady(true);
-  }, [duration, questions, testConfig]);
+  }, [duration, testConfig]);
 
   useEffect(() => {
     if (!draftReady || isSubmitted || !questions.length) return;
-    saveMockTestDraft(testConfig, { questionIds: questions.map((question) => question.id), currentIndex, answers, bookmarked, timeLeft });
+    saveMockTestDraft(testConfig, {
+      questionIds: questions.map((question) => question.id),
+      currentIndex,
+      answers,
+      bookmarked,
+      timeLeft,
+    });
   }, [answers, bookmarked, currentIndex, draftReady, isSubmitted, questions, testConfig, timeLeft]);
 
   const handleSubmit = useCallback(() => {
@@ -89,44 +118,36 @@ function MockTestPlayerContent() {
     let correct = 0;
     let wrong = 0;
     let unanswered = 0;
-    const review = questions.map((q) => {
-      const userAnswer = answers[q.id] || "";
-      let isCorrect = false;
-      if (q.type === "mcq" || q.type === "output") {
-        isCorrect = userAnswer.trim().toLowerCase() === q.answer.trim().toLowerCase();
-      } else if (q.type === "theory") {
-        const norm = (s) => s.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
-        const input = norm(userAnswer);
-        const ans = norm(q.answer);
-        isCorrect = input.length > 0 && (ans.includes(input) || input.includes(ans));
-      } else {
-        const norm = (s) => s.toLowerCase().replace(/[^a-z0-9\s]/g, "").trim();
-        const input = norm(userAnswer);
-        const ans = norm(q.answer);
-        isCorrect = input.length > 0 && input === ans;
-      }
-      if (!userAnswer) {
-        unanswered++;
-        wrong++;
+
+    const review = questions.map((question) => {
+      const userAnswer = answers[question.id] || "";
+      const isAnswered = Boolean(userAnswer.trim());
+      const isCorrect = isAnswered && evaluateMockTestAnswer(question, userAnswer);
+
+      if (!isAnswered) {
+        unanswered += 1;
+        wrong += 1;
       } else if (isCorrect) {
-        correct++;
+        correct += 1;
       } else {
-        wrong++;
+        wrong += 1;
       }
+
       return {
-        question: q,
+        question,
         userAnswer: userAnswer || "No answer",
-        correctAnswer: q.answer,
-        isCorrect: userAnswer ? isCorrect : false,
-        explanation: q.explanation,
-        marks: q.marks || 1,
+        correctAnswer: question.answer,
+        isCorrect,
+        explanation: question.explanation,
+        marks: question.marks || 1,
       };
     });
 
     const totalQuestions = questions.length;
     const score = correct;
     const percentage = totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0;
-    const accuracy = totalQuestions > 0 ? Math.round((correct / (correct + wrong - unanswered)) * 100) : 0;
+    const attemptedCount = correct + wrong - unanswered;
+    const accuracy = attemptedCount > 0 ? Math.round((correct / attemptedCount) * 100) : 0;
 
     const result = {
       id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
@@ -141,7 +162,7 @@ function MockTestPlayerContent() {
       unansweredCount: unanswered,
       percentage,
       accuracy,
-      timeTaken: duration * 60 - timeLeft,
+      timeTaken: Math.max(0, duration * 60 - timeLeft),
       totalTime: duration * 60,
       mode,
       chapter,
@@ -157,7 +178,7 @@ function MockTestPlayerContent() {
 
   useEffect(() => {
     if (questions.length === 0 || isSubmitted || mode === "practice" || mode === "revision") return;
-    
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -168,7 +189,7 @@ function MockTestPlayerContent() {
         return prev - 1;
       });
     }, 1000);
-    
+
     return () => clearInterval(timer);
   }, [handleSubmit, questions.length, isSubmitted, mode]);
 
@@ -181,10 +202,10 @@ function MockTestPlayerContent() {
   };
 
   const getQuestionStatus = (index) => {
-    const q = questions[index];
-    if (!q) return "unanswered";
-    if (bookmarked[q.id]) return "bookmarked";
-    if (answers[q.id]) return "answered";
+    const question = questions[index];
+    if (!question) return "unanswered";
+    if (bookmarked[question.id]) return "bookmarked";
+    if (answers[question.id]) return "answered";
     return "unanswered";
   };
 
@@ -214,7 +235,6 @@ function MockTestPlayerContent() {
       <Navbar />
       <div className="h-20 sm:h-24 lg:h-28"></div>
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
-        {/* Top Bar */}
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -237,85 +257,43 @@ function MockTestPlayerContent() {
             <div className="h-full rounded-full bg-blue-600 transition-all" style={{ width: `${progressPercent}%` }} />
           </div>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-            <p className="text-sm font-semibold text-gray-700">
-              Question {currentIndex + 1} of {questions.length}
-            </p>
+            <p className="text-sm font-semibold text-gray-700">Question {currentIndex + 1} of {questions.length}</p>
             <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={() => setCurrentIndex((p) => Math.max(p - 1, 0))}
-                disabled={currentIndex === 0}
-                className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400 disabled:opacity-50"
-              >
+              <button type="button" onClick={() => setCurrentIndex((previous) => Math.max(previous - 1, 0))} disabled={currentIndex === 0} className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400 disabled:opacity-50">
                 ← Previous
               </button>
-              <button
-                type="button"
-                onClick={() => setCurrentIndex((p) => Math.min(p + 1, questions.length - 1))}
-                disabled={currentIndex === questions.length - 1}
-                className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400 disabled:opacity-50"
-              >
+              <button type="button" onClick={() => setCurrentIndex((previous) => Math.min(previous + 1, questions.length - 1))} disabled={currentIndex === questions.length - 1} className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400 disabled:opacity-50">
                 Next →
               </button>
             </div>
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          {/* Question Area */}
           <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <div className="flex items-center gap-3">
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
-                    {currentQuestion.type.toUpperCase()}
-                  </span>
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">
-                    {currentQuestion.marks} mark{currentQuestion.marks > 1 ? "s" : ""}
-                  </span>
-                  <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                    currentQuestion.difficulty === "easy" ? "bg-green-100 text-green-700" :
-                    currentQuestion.difficulty === "medium" ? "bg-yellow-100 text-yellow-700" :
-                    "bg-red-100 text-red-700"
-                  }`}>
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{currentQuestion.type.toUpperCase()}</span>
+                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">{currentQuestion.marks} mark{currentQuestion.marks > 1 ? "s" : ""}</span>
+                  <span className={`rounded-full px-3 py-1 text-xs font-semibold ${currentQuestion.difficulty === "easy" ? "bg-green-100 text-green-700" : currentQuestion.difficulty === "medium" ? "bg-yellow-100 text-yellow-700" : "bg-red-100 text-red-700"}`}>
                     {currentQuestion.difficulty.charAt(0).toUpperCase() + currentQuestion.difficulty.slice(1)}
                   </span>
                 </div>
-                <h2 className="mt-4 text-xl font-bold text-gray-900 leading-relaxed">
-                  {currentQuestion.question}
-                </h2>
+                <h2 className="mt-4 text-xl font-bold leading-relaxed text-gray-900">{currentQuestion.question}</h2>
               </div>
-              <button
-                type="button"
-                onClick={() => toggleBookmark(currentQuestion.id)}
-                className={`rounded-xl border px-4 py-2 text-sm font-semibold transition whitespace-nowrap ${
-                  bookmarked[currentQuestion.id]
-                    ? "border-yellow-400 bg-yellow-50 text-yellow-700"
-                    : "border-gray-300 bg-white text-gray-900 hover:border-gray-400"
-                }`}
-              >
+              <button type="button" onClick={() => toggleBookmark(currentQuestion.id)} className={`whitespace-nowrap rounded-xl border px-4 py-2 text-sm font-semibold transition ${bookmarked[currentQuestion.id] ? "border-yellow-400 bg-yellow-50 text-yellow-700" : "border-gray-300 bg-white text-gray-900 hover:border-gray-400"}`}>
                 {bookmarked[currentQuestion.id] ? "📌 Bookmarked" : "📌 Bookmark"}
               </button>
             </div>
 
-            {/* Answer Area */}
             <div className="mt-6">
               {(currentQuestion.type === "mcq" || currentQuestion.type === "output") && currentQuestion.options ? (
                 <div className="space-y-3">
                   {currentQuestion.options.map((option) => {
                     const isSelected = answers[currentQuestion.id] === option;
                     return (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => updateAnswer(currentQuestion.id, option)}
-                        className={`w-full rounded-2xl border p-4 text-left text-sm font-semibold transition ${
-                          isSelected
-                            ? "border-blue-500 bg-blue-50 text-blue-700"
-                            : "border-gray-300 bg-white text-gray-900 hover:border-gray-400"
-                        }`}
-                      >
+                      <button key={option} type="button" onClick={() => updateAnswer(currentQuestion.id, option)} className={`w-full rounded-2xl border p-4 text-left text-sm font-semibold transition ${isSelected ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-300 bg-white text-gray-900 hover:border-gray-400"}`}>
                         {option}
                       </button>
                     );
@@ -323,52 +301,32 @@ function MockTestPlayerContent() {
                 </div>
               ) : (
                 <div>
-                  <label className="text-sm font-semibold text-gray-900" htmlFor="answer">
-                    Your Answer
-                  </label>
-                  <textarea
-                    id="answer"
-                    value={answers[currentQuestion.id] || ""}
-                    onChange={(e) => updateAnswer(currentQuestion.id, e.target.value)}
-                    rows={6}
-                    className="mt-3 w-full rounded-2xl border border-gray-300 bg-white p-4 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-                    placeholder={currentQuestion.type === "programming" ? "Write your code here..." : "Type your response here..."}
-                  />
+                  <label className="text-sm font-semibold text-gray-900" htmlFor="answer">Your Answer</label>
+                  <textarea id="answer" value={answers[currentQuestion.id] || ""} onChange={(event) => updateAnswer(currentQuestion.id, event.target.value)} rows={6} className="mt-3 w-full rounded-2xl border border-gray-300 bg-white p-4 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100" placeholder={currentQuestion.type === "programming" ? "Write your code here..." : "Type your response here..."} />
                 </div>
               )}
             </div>
 
-            {/* Hint */}
             {currentQuestion.hint && (
               <details className="mt-4">
-                <summary className="cursor-pointer text-sm font-semibold text-blue-600 hover:text-blue-700">
-                  💡 Show Hint
-                </summary>
-                <p className="mt-2 rounded-xl bg-blue-50 p-4 text-sm text-gray-700">
-                  {currentQuestion.hint}
-                </p>
+                <summary className="cursor-pointer text-sm font-semibold text-blue-600 hover:text-blue-700">💡 Show Hint</summary>
+                <p className="mt-2 rounded-xl bg-blue-50 p-4 text-sm text-gray-700">{currentQuestion.hint}</p>
               </details>
             )}
           </div>
 
-          {/* Navigation Sidebar */}
           <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
             <h2 className="text-lg font-bold text-gray-900">Question Navigator</h2>
             <div className="mt-4 grid grid-cols-5 gap-2">
-              {questions.map((q, index) => {
+              {questions.map((question, index) => {
                 const status = getQuestionStatus(index);
                 const isCurrent = index === currentIndex;
-                let btnClass = "border-gray-300 bg-white text-gray-900 hover:border-gray-400";
-                if (isCurrent) btnClass = "border-blue-500 bg-blue-100 text-blue-700";
-                else if (status === "bookmarked") btnClass = "border-yellow-400 bg-yellow-50 text-yellow-700";
-                else if (status === "answered") btnClass = "border-green-400 bg-green-50 text-green-700";
+                let buttonClass = "border-gray-300 bg-white text-gray-900 hover:border-gray-400";
+                if (isCurrent) buttonClass = "border-blue-500 bg-blue-100 text-blue-700";
+                else if (status === "bookmarked") buttonClass = "border-yellow-400 bg-yellow-50 text-yellow-700";
+                else if (status === "answered") buttonClass = "border-green-400 bg-green-50 text-green-700";
                 return (
-                  <button
-                    key={q.id}
-                    type="button"
-                    onClick={() => setCurrentIndex(index)}
-                    className={`flex h-10 w-full items-center justify-center rounded-lg border text-xs font-semibold ${btnClass}`}
-                  >
+                  <button key={question.id} type="button" onClick={() => setCurrentIndex(index)} className={`flex h-10 w-full items-center justify-center rounded-lg border text-xs font-semibold ${buttonClass}`}>
                     {index + 1}
                   </button>
                 );
@@ -382,18 +340,11 @@ function MockTestPlayerContent() {
               <span className="flex items-center gap-1"><span className="h-3 w-3 rounded border border-blue-500 bg-blue-100" /> Current</span>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setShowSubmitDialog(true)}
-              className="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
-            >
-              Submit Test
-            </button>
+            <button type="button" onClick={() => setShowSubmitDialog(true)} className="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700">Submit Test</button>
           </div>
         </div>
       </div>
 
-      {/* Submit Dialog */}
       {showSubmitDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="mx-4 w-full max-w-md rounded-3xl border border-gray-200 bg-white p-6 shadow-xl">
@@ -401,29 +352,12 @@ function MockTestPlayerContent() {
             <p className="mt-2 text-sm text-gray-700">
               You have answered {answeredCount} of {questions.length} questions.
               {answeredCount < questions.length && (
-                <span className="block mt-1 font-semibold text-yellow-600">
-                  {questions.length - answeredCount} question{questions.length - answeredCount > 1 ? "s" : ""} left unanswered.
-                </span>
+                <span className="mt-1 block font-semibold text-yellow-600">{questions.length - answeredCount} question{questions.length - answeredCount > 1 ? "s" : ""} left unanswered.</span>
               )}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                onClick={() => {
-                  setShowSubmitDialog(false);
-                  handleSubmit();
-                }}
-                className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
-              >
-                Yes, Submit
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowSubmitDialog(false)}
-                className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900 hover:border-gray-400"
-              >
-                Continue Test
-              </button>
+              <button type="button" onClick={() => { setShowSubmitDialog(false); handleSubmit(); }} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Yes, Submit</button>
+              <button type="button" onClick={() => setShowSubmitDialog(false)} className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900 hover:border-gray-400">Continue Test</button>
             </div>
           </div>
         </div>
@@ -436,11 +370,11 @@ function MockTestPlayerContent() {
 
 export default function MockTestPlayerPage() {
   return (
-      <Suspense fallback={
-        <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-          <Navbar />
-          <div className="h-20 sm:h-24 lg:h-28"></div>
-          <div className="flex items-center justify-center py-20">
+    <Suspense fallback={
+      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+        <Navbar />
+        <div className="h-20 sm:h-24 lg:h-28"></div>
+        <div className="flex items-center justify-center py-20">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
         </div>
         <Footer />

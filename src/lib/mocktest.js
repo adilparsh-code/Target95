@@ -2,7 +2,7 @@ import questions from "../app/data/questions";
 
 const VALID_CHAPTERS = new Set(["all", "introduction", "variables-data-types", "operators", "if-else", "loops", "methods", "arrays", "strings", "constructor"]);
 const VALID_DIFFICULTIES = new Set(["all", "easy", "medium", "hard"]);
-const VALID_TYPES = new Set(["mixed", "theory", "mcq"]);
+const VALID_TYPES = new Set(["mixed", "theory", "mcq", "programming", "output"]);
 const VALID_STATUSES = new Set(["Not Started", "Studying", "Completed"]);
 
 export function normalizeMockText(value) {
@@ -29,11 +29,12 @@ export function getMockTestQuestionPool({ chapter, difficulty, type }) {
     const matchesDifficulty =
       safeDifficulty === "all" ||
       normalizeMockText(question.difficulty).join("") === normalizeMockText(safeDifficulty).join("");
+    const questionType = normalizeMockText(question.type).join("");
     const matchesType =
       safeType === "mixed" ||
-      question.type.toLowerCase() === safeType ||
-      (safeType === "theory" && question.type.toLowerCase() === "theory") ||
-      (safeType === "mcq" && question.type.toLowerCase() === "mcq");
+      questionType === normalizeMockText(safeType).join("") ||
+      (safeType === "theory" && questionType === "theory") ||
+      (safeType === "mcq" && questionType === "mcq");
 
     return matchesChapter && matchesDifficulty && matchesType;
   });
@@ -51,30 +52,47 @@ export function generateMockTestQuestions({ chapter, difficulty, type, count }) 
   return shuffled.slice(0, safeCount);
 }
 
+function scoreFreeTextAnswer(response, answer, type) {
+  const inputTokens = normalizeMockText(response);
+  const answerTokens = normalizeMockText(answer);
+
+  if (!inputTokens.length || !answerTokens.length) return false;
+
+  if (type === "programming") {
+    const meaningfulAnswerTokens = answerTokens.filter((token) => token.length > 1);
+    const meaningfulInputTokens = new Set(inputTokens.filter((token) => token.length > 1));
+    if (!meaningfulAnswerTokens.length) return false;
+    const matched = meaningfulAnswerTokens.filter((token) => meaningfulInputTokens.has(token)).length;
+    return matched / meaningfulAnswerTokens.length >= 0.6;
+  }
+
+  const inputSet = new Set(inputTokens);
+  const matched = answerTokens.filter((token) => inputSet.has(token)).length;
+  const requiredMatches = Math.min(2, answerTokens.length);
+  return matched >= requiredMatches && matched / answerTokens.length >= 0.45;
+}
+
+export function evaluateMockTestAnswer(question, response) {
+  const safeResponse = sanitizeText(response ?? "");
+  if (!safeResponse) return false;
+
+  const type = String(question?.type ?? "").toLowerCase();
+  if (type === "mcq" || type === "output") {
+    return safeResponse.toLowerCase() === sanitizeText(question?.answer).toLowerCase();
+  }
+
+  return scoreFreeTextAnswer(safeResponse, question?.answer, type);
+}
+
 export function calculateMockTestResult(questions, answers, markedForReview) {
   let correctCount = 0;
   let wrongCount = 0;
   let reviewedCount = 0;
 
   const review = questions.map((question) => {
-    const response = answers[question.id];
-    const safeResponse = sanitizeText(response ?? "");
+    const response = sanitizeText(answers[question.id] ?? "");
     const isMarkedForReview = Boolean(markedForReview[question.id]);
-    let isCorrect = false;
-
-    if (question.type.toLowerCase() === "mcq") {
-      isCorrect = safeResponse === sanitizeText(question.answer);
-    } else {
-      const normalizedInput = normalizeMockText(safeResponse);
-      const normalizedAnswer = normalizeMockText(question.answer);
-
-      if (normalizedInput.length === 0) {
-        isCorrect = false;
-      } else {
-        const overlap = normalizedAnswer.filter((token) => normalizedInput.includes(token));
-        isCorrect = overlap.length > 0;
-      }
-    }
+    const isCorrect = evaluateMockTestAnswer(question, response);
 
     if (isCorrect) {
       correctCount += 1;
@@ -88,11 +106,11 @@ export function calculateMockTestResult(questions, answers, markedForReview) {
 
     return {
       question,
-      response: safeResponse,
+      response,
       isCorrect,
       isMarkedForReview,
       correctAnswer: sanitizeText(question.answer),
-      selectedOption: question.type.toLowerCase() === "mcq" ? safeResponse : null,
+      selectedOption: ["mcq", "output"].includes(String(question.type).toLowerCase()) ? response : null,
     };
   });
 

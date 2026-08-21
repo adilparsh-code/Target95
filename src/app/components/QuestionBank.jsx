@@ -8,16 +8,10 @@ import { filterQuestionBank, getQuestionBankFilters, questionBankQuestions } fro
 import { getDifficultyColorClass, getQuestionTypeColorClass } from "@/lib/questionPresentation";
 
 const initialFilters = { search: "", difficulty: "all", chapter: "all", topic: "all", questionType: "all", status: "all" };
-
 const fieldClass = "h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm font-medium text-slate-700 shadow-sm outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100";
 
-function SearchIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5"><path d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>;
-}
-
-function BankIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6"><path d="M5 4h10l4 4v12H5V4Zm10 0v5h4M8 13h8M8 17h6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
-}
+function SearchIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5"><path d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>; }
+function BankIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6"><path d="M5 4h10l4 4v12H5V4Zm10 0v5h4M8 13h8M8 17h6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 
 export default function QuestionBank() {
   const [filters, setFilters] = useState(initialFilters);
@@ -28,52 +22,21 @@ export default function QuestionBank() {
   const options = useMemo(() => getQuestionBankFilters(), []);
   const questions = useMemo(() => questionBankQuestions.map((question) => ({ ...question, isBookmarked: isBookmarked({ chapter: question.chapter, questionId: question.id }), isCompleted: isCompleted({ chapter: question.chapter, questionId: question.id }) })), [isBookmarked, isCompleted]);
   const results = useMemo(() => filterQuestionBank(questions, filters), [filters, questions]);
-  const update = (key, value) => {
-    setVisibleLimit(24);
-    setFilters((current) => ({ ...current, [key]: value }));
-  };
+  const update = (key, value) => { setVisibleLimit(24); setFilters((current) => ({ ...current, [key]: value })); };
 
   return <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <header className="relative overflow-hidden rounded-[2rem] border border-blue-100 bg-gradient-to-br from-white via-white to-blue-50/80 px-6 py-8 shadow-sm sm:px-9 sm:py-10">
-      <div className="relative z-10 max-w-3xl">
-        <div className="inline-flex items-center gap-3 text-blue-700"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-200"><BankIcon /></span><p className="text-xs font-bold uppercase tracking-[0.24em]">Question Bank</p></div>
-        <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-[2.7rem]">Browse and practise with confidence</h1>
-        <p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">Search structured questions across subjects, chapters, topics, and learning outcomes.</p>
-      </div>
-      <div className="pointer-events-none absolute -right-10 -top-16 h-56 w-56 rounded-full bg-blue-100/70 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute bottom-5 right-10 hidden rounded-3xl border border-blue-100 bg-white/70 p-5 text-blue-600 shadow-sm backdrop-blur sm:block" aria-hidden="true"><SearchIcon /></div>
+      <div className="relative z-10 max-w-3xl"><div className="inline-flex items-center gap-3 text-blue-700"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-200"><BankIcon /></span><p className="text-xs font-bold uppercase tracking-[0.24em]">Question Bank</p></div><h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-[2.7rem]">Browse and practise with confidence</h1><p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">Search structured questions across subjects, chapters, topics, and learning outcomes.</p></div>
+      <div className="pointer-events-none absolute -right-10 -top-16 h-56 w-56 rounded-full bg-blue-100/70 blur-3xl" aria-hidden="true" /><div className="pointer-events-none absolute bottom-5 right-10 hidden rounded-3xl border border-blue-100 bg-white/70 p-5 text-blue-600 shadow-sm backdrop-blur sm:block" aria-hidden="true"><SearchIcon /></div>
     </header>
-
-    <section className="mt-6 rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-label="Question filters">
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-        <label className="relative md:col-span-2">
-          <span className="sr-only">Search questions</span>
-          <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"><SearchIcon /></span>
-          <input value={filters.search} onChange={(event) => update("search", event.target.value)} placeholder="Search questions, chapters, topics, or tags..." aria-label="Search questions" className={`${fieldClass} pl-11`} />
-        </label>
-        <Select label="Difficulty" value={filters.difficulty} values={options.difficulties} onChange={(value) => update("difficulty", value)} />
-        <Select label="Chapter" value={filters.chapter} values={options.chapters} onChange={(value) => update("chapter", value)} />
-        <Select label="Topic" value={filters.topic} values={options.topics} onChange={(value) => update("topic", value)} />
-        <Select label="Question type" value={filters.questionType} values={options.questionTypes} onChange={(value) => update("questionType", value)} />
-        <select value={filters.status} onChange={(event) => update("status", event.target.value)} aria-label="Learning status" className={fieldClass}><option value="all">All statuses</option><option value="bookmarked">Bookmarked</option><option value="completed">Completed</option><option value="unsolved">Unsolved</option></select>
-      </div>
-
-      <div className="mt-7 flex flex-col gap-4 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
-        <div className="inline-flex w-fit items-center gap-3 rounded-2xl bg-blue-50 px-4 py-3 text-blue-900"><span className="grid h-9 w-9 place-items-center rounded-xl bg-white text-blue-600 shadow-sm"><BankIcon /></span><span><strong className="block text-xl leading-none text-blue-700">{results.length}</strong><span className="text-sm text-slate-600">question{results.length === 1 ? "" : "s"} found</span></span></div>
-        <button type="button" onClick={() => { setFilters(initialFilters); setVisibleLimit(24); }} className="h-11 rounded-xl border border-slate-300 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-100">Reset filters</button>
-      </div>
-    </section>
-
+    <section className="mt-6 rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-label="Question filters"><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+      <label className="relative md:col-span-2"><span className="sr-only">Search questions</span><span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"><SearchIcon /></span><input value={filters.search} onChange={(event) => update("search", event.target.value)} placeholder="Search questions, chapters, topics, or tags..." aria-label="Search questions" className={`${fieldClass} pl-11`} /></label>
+      <Select label="Difficulty" value={filters.difficulty} values={options.difficulties} onChange={(value) => update("difficulty", value)} /><Select label="Chapter" value={filters.chapter} values={options.chapters} onChange={(value) => update("chapter", value)} /><Select label="Topic" value={filters.topic} values={options.topics} onChange={(value) => update("topic", value)} /><Select label="Question type" value={filters.questionType} values={options.questionTypes} onChange={(value) => update("questionType", value)} /><select value={filters.status} onChange={(event) => update("status", event.target.value)} aria-label="Learning status" className={fieldClass}><option value="all">All statuses</option><option value="bookmarked">Bookmarked</option><option value="completed">Completed</option><option value="unsolved">Unsolved</option></select>
+    </div><div className="mt-7 flex flex-col gap-4 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between"><div className="inline-flex w-fit items-center gap-3 rounded-2xl bg-blue-50 px-4 py-3 text-blue-900"><span className="grid h-9 w-9 place-items-center rounded-xl bg-white text-blue-600 shadow-sm"><BankIcon /></span><span><strong className="block text-xl leading-none text-blue-700">{results.length}</strong><span className="text-sm text-slate-600">question{results.length === 1 ? "" : "s"} found</span></span></div><button type="button" onClick={() => { setFilters(initialFilters); setVisibleLimit(24); }} className="h-11 rounded-xl border border-slate-300 bg-white px-5 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-100">Reset filters</button></div></section>
     <div className="mt-7 grid gap-4 md:grid-cols-2">{results.slice(0, visibleLimit).map((question) => <QuestionBankCard key={question.id} question={question} preview={previewId === question.id} onPreview={() => setPreviewId((id) => id === question.id ? null : question.id)} onBookmark={() => toggleBookmark({ chapter: question.chapter, questionId: question.id })} />)}</div>
     {results.length > visibleLimit ? <div className="mt-6 text-center"><button type="button" onClick={() => setVisibleLimit((limit) => limit + 24)} className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Show more questions</button></div> : null}
     {!results.length ? <div className="mt-6 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center text-slate-600">No questions match these filters. Reset them to browse the complete bank.</div> : null}
   </div>;
 }
-
-function Select({ label, value, values, onChange }) {
-  return <label className="block"><span className="sr-only">{label}</span><select value={value} onChange={(event) => onChange(event.target.value)} aria-label={label} className={fieldClass}><option value="all">All {label.toLowerCase()}s</option>{values.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>;
-}
-
-function QuestionBankCard({ question, preview, onPreview, onBookmark }) {
-  return <article className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div className="flex items-start justify-between gap-3"><div className="flex flex-wrap gap-2"><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${getDifficultyColorClass(question.difficulty)}`}>{question.difficulty}</span><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${getQuestionTypeColorClass(question.questionType)}`}>{question.questionType}</span>{question.isCompleted ? <span className="rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-700">Solved</span> : null}</div><button type="button" onClick={onBookmark} aria-label={question.isBookmarked ? "Remove bookmark" : "Bookmark question"} className="min-h-[44px] min-w-[44px] shrink-0 rounded-full border border-slate-200 p-2 text-blue-700 transition hover:bg-blue-50">{question.isBookmarked ? "★" : "☆"}</button></div><h2 className="mt-4 text-base font-semibold leading-relaxed text-slate-900">{question.question}</h2><div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-600"><span>{question.chapter}</span><span>• {question.topic}</span><span>• {question.marks} marks</span><span>• {question.estimatedTime} min</span></div>{preview ? <div className="mt-4 rounded-xl bg-blue-50 p-4 text-sm text-slate-700"><p className="font-semibold text-blue-800">Quick Preview</p><p className="mt-1">{question.explanation}</p>{question.codeSnippet ? <pre className="mt-3 overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100"><code>{question.codeSnippet}</code></pre> : null}</div> : null}<div className="mt-5 flex flex-wrap gap-3"><button type="button" onClick={onPreview} className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">{preview ? "Hide Preview" : "Quick Preview"}</button><Link href={question.practiceHref} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">Start Practice</Link></div></article>;
-}
+function Select({ label, value, values, onChange }) { return <label className="block"><span className="sr-only">{label}</span><select value={value} onChange={(event) => onChange(event.target.value)} aria-label={label} className={fieldClass}><option value="all">All {label.toLowerCase()}s</option>{values.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>; }
+function QuestionBankCard({ question, preview, onPreview, onBookmark }) { return <article className="flex min-w-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div className="flex items-start justify-between gap-3"><div className="flex flex-wrap gap-2"><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${getDifficultyColorClass(question.difficulty)}`}>{question.difficulty}</span><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${getQuestionTypeColorClass(question.questionType)}`}>{question.questionType}</span>{question.isCompleted ? <span className="rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-700">Solved</span> : null}</div><button type="button" onClick={onBookmark} aria-label={question.isBookmarked ? "Remove bookmark" : "Bookmark question"} className="min-h-[44px] min-w-[44px] shrink-0 rounded-full border border-slate-200 p-2 text-blue-700 transition hover:bg-blue-50">{question.isBookmarked ? "★" : "☆"}</button></div><h2 className="mt-4 text-base font-semibold leading-relaxed text-slate-900">{question.question}</h2><div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-600"><span>{question.chapter}</span><span>• {question.topic}</span><span>• {question.marks} marks</span><span>• {question.estimatedTime} min</span></div>{preview ? <div className="mt-4 rounded-xl bg-blue-50 p-4 text-sm text-slate-700"><p className="font-semibold text-blue-800">Quick Preview</p><p className="mt-1">{question.explanation}</p>{question.codeSnippet ? <pre className="mt-3 overflow-x-auto rounded-lg bg-slate-900 p-3 text-xs text-slate-100"><code>{question.codeSnippet}</code></pre> : null}</div> : null}<div className="mt-5 flex flex-wrap gap-3"><button type="button" onClick={onPreview} className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">{preview ? "Hide Preview" : "Quick Preview"}</button><Link href={question.practiceHref} className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">Start Practice</Link></div></article>; }

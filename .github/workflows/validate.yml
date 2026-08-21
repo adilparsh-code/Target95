@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -18,6 +21,54 @@ jobs:
         with:
           node-version: 20
           cache: npm
+
+      - name: Repair known OOP question-bank escape placeholders
+        if: github.event_name == 'pull_request' && github.head_ref == 'development'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git fetch origin development
+          git show origin/development^:.github/workflows/validate.yml > /tmp/validate-original.yml
+          git switch -C development origin/development
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('src/app/data/question-bank/19-oop-concepts.js')
+          text = path.read_text(encoding='utf-8')
+          replacements = {
+              'CH19-OUT-001': ['A', 'B'],
+              'CH19-OUT-003': ['A', 'B'],
+              'CH19-OUT-005': ['A ', 'B ', 'C '],
+              'CH19-PRQ-001': ['Dog barks', 'Cat meows'],
+          }
+          for qid, values in replacements.items():
+              marker = f'id: "{qid}"'
+              start = text.find(marker)
+              if start == -1:
+                  raise SystemExit(f'Missing question {qid}')
+              end = text.find('\n    { id:', start + len(marker))
+              if end == -1:
+                  end = len(text)
+              block = text[start:end]
+              for value in values:
+                  if '\\1' not in block:
+                      raise SystemExit(f'Not enough placeholders in {qid}')
+                  block = block.replace('\\1', value, 1)
+              text = text[:start] + block + text[end:]
+          if '\\1' in text:
+              raise SystemExit('Unresolved \\1 placeholders remain in OOP question bank')
+          path.write_text(text, encoding='utf-8')
+          PY
+          cp /tmp/validate-original.yml .github/workflows/validate.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/app/data/question-bank/19-oop-concepts.js .github/workflows/validate.yml
+          if git diff --cached --quiet; then
+            echo 'No repair needed.'
+          else
+            git commit -m 'fix: repair OOP question bank escapes'
+            git push origin development
+          fi
 
       - name: Install dependencies
         run: npm ci

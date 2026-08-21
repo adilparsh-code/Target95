@@ -6,10 +6,12 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import Button from "../components/ui/Button";
 import Container from "../components/ui/Container";
+import { validateHumanForm } from "../lib/security/inputSecurity";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { login, loginWithGoogle, loading, error, clearError } = useAuth();
   const router = useRouter();
@@ -20,7 +22,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await login(email, password);
+    const validation = validateHumanForm({ email, password, honeypot });
+    if (!validation.ok) return;
+
+    const result = await login(validation.email, password);
     if (result.success) {
       router.push("/dashboard");
     }
@@ -47,7 +52,20 @@ export default function Login() {
             </p>
           </div>
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+              <label htmlFor="website" className="sr-only">Website</label>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                className="hidden"
+                aria-hidden="true"
+              />
+
               {error && (
                 <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
                   {error}

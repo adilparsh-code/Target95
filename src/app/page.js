@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ClientHome from "./ClientHome";
+import HomeVisualLayer from "./components/HomeVisualLayer";
 
 export const metadata = {
   title: "Target95+ - Master CISCE & CBSE Computer Science with AI",
@@ -20,5 +21,12 @@ export const metadata = {
 };
 
 export default function Home() {
-  return <ClientHome />;
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-white">
+      <HomeVisualLayer />
+      <div className="relative z-10">
+        <ClientHome />
+      </div>
+    </div>
+  );
 }

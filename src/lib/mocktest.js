@@ -1,9 +1,11 @@
 import questions from "../app/data/questions";
+import { getCBSEQuestionConfig } from "../app/data/cbse/question-config-2026-27";
 
 const VALID_CHAPTERS = new Set(["all", "introduction", "variables-data-types", "operators", "if-else", "loops", "methods", "arrays", "strings", "constructor"]);
 const VALID_DIFFICULTIES = new Set(["all", "easy", "medium", "hard"]);
-const VALID_TYPES = new Set(["mixed", "theory", "mcq", "programming", "output"]);
+const VALID_TYPES = new Set(["mixed", "theory", "mcq", "programming", "output", "assertion-reason", "case-study", "short-answer", "long-answer", "fill-in-the-blanks", "true-false", "match-the-following"]);
 const VALID_STATUSES = new Set(["Not Started", "Studying", "Completed"]);
+const DEFAULT_BOARD = "ICSE";
 
 export function normalizeMockText(value) {
   return String(value ?? "")
@@ -19,43 +21,58 @@ export function sanitizeText(value) {
     .trim();
 }
 
-export function getMockTestQuestionPool({ chapter, difficulty, type }) {
+function getBoardKey(board) {
+  return sanitizeText(board || DEFAULT_BOARD).toUpperCase();
+}
+
+function isCBSE(board) {
+  return getBoardKey(board) === "CBSE";
+}
+
+function matchesType(question, safeType) {
+  if (safeType === "mixed") return true;
+  const questionType = normalizeMockText(question?.type).join("");
+  const targetType = normalizeMockText(safeType).join("");
+  return questionType === targetType;
+}
+
+export function getMockTestQuestionPool({ board = DEFAULT_BOARD, chapter = "all", difficulty = "all", type = "mixed", questions: providedQuestions } = {}) {
   const safeChapter = VALID_CHAPTERS.has(chapter) ? chapter : "all";
   const safeDifficulty = VALID_DIFFICULTIES.has(difficulty) ? difficulty : "all";
   const safeType = VALID_TYPES.has(type) ? type : "mixed";
+  const pool = Array.isArray(providedQuestions) ? providedQuestions : questions;
+  const boardKey = getBoardKey(board);
 
-  return questions.filter((question) => {
-    const matchesChapter = safeChapter === "all" || question.chapter === safeChapter;
+  return pool.filter((question) => {
+    const questionBoard = getBoardKey(question?.board || question?.boardId || "ICSE");
+    const matchesBoard = questionBoard === boardKey;
+    const matchesChapter = safeChapter === "all" || question.chapter === safeChapter || question.chapterId === safeChapter;
     const matchesDifficulty =
       safeDifficulty === "all" ||
       normalizeMockText(question.difficulty).join("") === normalizeMockText(safeDifficulty).join("");
-    const questionType = normalizeMockText(question.type).join("");
-    const matchesType =
-      safeType === "mixed" ||
-      questionType === normalizeMockText(safeType).join("") ||
-      (safeType === "theory" && questionType === "theory") ||
-      (safeType === "mcq" && questionType === "mcq");
+    const matchesQuestionType = matchesType(question, safeType);
 
-    return matchesChapter && matchesDifficulty && matchesType;
+    return matchesBoard && matchesChapter && matchesDifficulty && matchesQuestionType;
   });
 }
 
-export function generateMockTestQuestions({ chapter, difficulty, type, count }) {
-  const pool = getMockTestQuestionPool({ chapter, difficulty, type });
-  const safeCount = Math.min(Math.max(Number(count) || 5, 1), pool.length || 1);
+export function generateMockTestQuestions({ board = DEFAULT_BOARD, chapter = "all", difficulty = "all", type = "mixed", count, questions: providedQuestions } = {}) {
+  let pool = getMockTestQuestionPool({ board, chapter, difficulty, type, questions: providedQuestions });
 
-  if (pool.length === 0) {
+  if (isCBSE(board) && pool.length === 0 && !providedQuestions) {
+    // The CBSE engine is configuration-driven. An empty pool is returned instead of
+    // falling back to ICSE content, preventing cross-board contamination.
     return [];
   }
 
-  const shuffled = [...pool].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, safeCount);
+  const safeCount = Math.min(Math.max(Number(count) || 5, 1), pool.length || 1);
+  if (pool.length === 0) return [];
+  return [...pool].sort(() => Math.random() - 0.5).slice(0, safeCount);
 }
 
 function scoreFreeTextAnswer(response, answer, type) {
   const inputTokens = normalizeMockText(response);
   const answerTokens = normalizeMockText(answer);
-
   if (!inputTokens.length || !answerTokens.length) return false;
 
   if (type === "programming") {
@@ -77,14 +94,14 @@ export function evaluateMockTestAnswer(question, response) {
   if (!safeResponse) return false;
 
   const type = String(question?.type ?? "").toLowerCase();
-  if (type === "mcq" || type === "output") {
-    return safeResponse.toLowerCase() === sanitizeText(question?.answer).toLowerCase();
+  if (["mcq", "output", "true-false", "assertion-reason"].includes(type)) {
+    return safeResponse.toLowerCase() === sanitizeText(question?.answer || question?.correctAnswer).toLowerCase();
   }
 
-  return scoreFreeTextAnswer(safeResponse, question?.answer, type);
+  return scoreFreeTextAnswer(safeResponse, question?.answer || question?.correctAnswer, type);
 }
 
-export function calculateMockTestResult(questions, answers, markedForReview) {
+export function calculateMockTestResult(questions, answers, markedForReview, config = {}) {
   let correctCount = 0;
   let wrongCount = 0;
   let reviewedCount = 0;
@@ -94,29 +111,23 @@ export function calculateMockTestResult(questions, answers, markedForReview) {
     const isMarkedForReview = Boolean(markedForReview[question.id]);
     const isCorrect = evaluateMockTestAnswer(question, response);
 
-    if (isCorrect) {
-      correctCount += 1;
-    } else {
-      wrongCount += 1;
-    }
-
-    if (isMarkedForReview) {
-      reviewedCount += 1;
-    }
+    if (isCorrect) correctCount += 1;
+    else wrongCount += 1;
+    if (isMarkedForReview) reviewedCount += 1;
 
     return {
       question,
       response,
       isCorrect,
       isMarkedForReview,
-      correctAnswer: sanitizeText(question.answer),
-      selectedOption: ["mcq", "output"].includes(String(question.type).toLowerCase()) ? response : null,
+      correctAnswer: sanitizeText(question.correctAnswer || question.answer),
+      selectedOption: ["mcq", "output", "true-false", "assertion-reason"].includes(String(question.type).toLowerCase()) ? response : null,
     };
   });
 
   const totalQuestions = questions.length;
   const percentage = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
-  const accuracy = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+  const accuracy = percentage;
 
   return {
     score: correctCount,
@@ -126,6 +137,8 @@ export function calculateMockTestResult(questions, answers, markedForReview) {
     reviewedCount,
     percentage,
     accuracy,
+    board: getBoardKey(config.board || DEFAULT_BOARD),
+    subjectCode: config.subjectCode || null,
     review,
   };
 }
@@ -139,11 +152,12 @@ export function formatTime(seconds) {
 
 export function getMockTestTitle(config) {
   const safeConfig = config ?? {};
+  const boardLabel = safeConfig.board ? `${sanitizeText(safeConfig.board)} • ` : "";
+  const subjectLabel = safeConfig.subjectCode ? `Code ${sanitizeText(safeConfig.subjectCode)} • ` : "";
   const chapterLabel = safeConfig.chapter === "all" ? "All Chapters" : sanitizeText(safeConfig.chapter || "All Chapters");
   const difficultyLabel = safeConfig.difficulty === "all" ? "Mixed Difficulty" : sanitizeText(safeConfig.difficulty || "Mixed Difficulty");
   const typeLabel = safeConfig.type === "mixed" ? "Mixed Types" : sanitizeText(safeConfig.type || "Mixed Types");
-
-  return `${chapterLabel} • ${difficultyLabel} • ${typeLabel}`;
+  return `${boardLabel}${subjectLabel}${chapterLabel} • ${difficultyLabel} • ${typeLabel}`;
 }
 
 export function sanitizeStudyStatus(value) {
@@ -159,9 +173,7 @@ export function saveMockTestResult(result) {
     stored.unshift(result);
     if (stored.length > 20) stored.length = 20;
     localStorage.setItem(HISTORY_KEY, JSON.stringify(stored));
-  } catch {
-    // Silently fail
-  }
+  } catch {}
 }
 
 export function getMockTestHistory() {
@@ -176,50 +188,36 @@ export function getMockTestHistory() {
 }
 
 export function clearMockTestHistory() {
-  try {
-    localStorage.removeItem(HISTORY_KEY);
-  } catch {
-    // Silently fail
-  }
+  try { localStorage.removeItem(HISTORY_KEY); } catch {}
 }
 
 const DRAFT_PREFIX = "target95-mock-test-draft";
 
 export function getMockTestDraftKey(config = {}) {
-  const values = [config.category, config.chapter, config.difficulty, config.type, config.count, config.mode, config.duration]
+  const values = [config.board, config.subjectCode, config.category, config.chapter, config.difficulty, config.type, config.count, config.mode, config.duration]
     .map((value) => sanitizeText(value || "all").toLowerCase());
   return `${DRAFT_PREFIX}:${values.join(":")}`;
 }
 
 export function saveMockTestDraft(config, draft) {
-  try {
-    localStorage.setItem(getMockTestDraftKey(config), JSON.stringify({ ...draft, savedAt: new Date().toISOString() }));
-  } catch {
-    // A test can continue even when browser storage is unavailable.
-  }
+  try { localStorage.setItem(getMockTestDraftKey(config), JSON.stringify({ ...draft, savedAt: new Date().toISOString() })); } catch {}
 }
 
 export function getMockTestDraft(config) {
   try {
     const draft = localStorage.getItem(getMockTestDraftKey(config));
     return draft ? JSON.parse(draft) : null;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
 export function clearMockTestDraft(config) {
-  try {
-    localStorage.removeItem(getMockTestDraftKey(config));
-  } catch {
-    // A test can continue even when browser storage is unavailable.
-  }
+  try { localStorage.removeItem(getMockTestDraftKey(config)); } catch {}
 }
 
 export function getTopicPerformance(review = []) {
   const topics = new Map();
   review.forEach((item) => {
-    const topic = sanitizeText(item?.question?.topic || item?.question?.chapter || "General concepts");
+    const topic = sanitizeText(item?.question?.topic || item?.question?.chapter || item?.question?.chapterId || "General concepts");
     const current = topics.get(topic) || { topic, correct: 0, total: 0 };
     current.total += 1;
     if (item.isCorrect) current.correct += 1;
@@ -235,6 +233,10 @@ export const CATEGORIES = [
   { id: "icse-class-10", label: "ICSE Class 10", icon: "📗" },
   { id: "isc-class-11", label: "ISC Class 11", icon: "📙" },
   { id: "isc-class-12", label: "ISC Class 12", icon: "📕" },
+  { id: "cbse-class-9", label: "CBSE Class 9", icon: "📘" },
+  { id: "cbse-class-10", label: "CBSE Class 10", icon: "📗" },
+  { id: "cbse-class-11", label: "CBSE Class 11", icon: "📙" },
+  { id: "cbse-class-12", label: "CBSE Class 12", icon: "📕" },
 ];
 
 export const DIFFICULTIES = [
@@ -249,6 +251,15 @@ export const QUESTION_TYPES = [
   { id: "theory", label: "Theory", icon: "📝" },
   { id: "programming", label: "Programming", icon: "💻" },
   { id: "output", label: "Output", icon: "🔍" },
+  { id: "assertion-reason", label: "Assertion-Reason", icon: "🧠" },
+  { id: "case-study", label: "Case Study", icon: "📚" },
+  { id: "short-answer", label: "Short Answer", icon: "✍️" },
+  { id: "long-answer", label: "Long Answer", icon: "📝" },
+  { id: "fill-in-the-blanks", label: "Fill in the Blanks", icon: "🔤" },
+  { id: "true-false", label: "True / False", icon: "✅" },
+  { id: "match-the-following", label: "Match the Following", icon: "🔗" },
 ];
 
 export const QUESTION_COUNTS = [5, 10, 15, 20];
+
+export { getCBSEQuestionConfig };

@@ -10,6 +10,7 @@ import ifElseChapter from "@/app/data/question-bank/04-if-else";
 import loopsChapter from "@/app/data/question-bank/05-loops";
 import methodsChapter from "@/app/data/question-bank/06-methods";
 import arraysChapter from "@/app/data/question-bank/07-arrays";
+import { ICSE_CLASS_X_CONTENT_MAP } from "@/app/data/icseClassXContent";
 
 const chapterBank = {
   introduction: introductionChapter,
@@ -23,6 +24,23 @@ const chapterBank = {
   "iterative-statements": loopsChapter,
   methods: methodsChapter,
   arrays: arraysChapter,
+
+  // ICSE Class X enriched learning/practice layer.
+  "x-revision": ICSE_CLASS_X_CONTENT_MAP["x-revision"],
+  revision: ICSE_CLASS_X_CONTENT_MAP.revision,
+  "x-library-classes": ICSE_CLASS_X_CONTENT_MAP["x-library-classes"],
+  "library-classes": ICSE_CLASS_X_CONTENT_MAP["x-library-classes"],
+  "x-arrays": ICSE_CLASS_X_CONTENT_MAP["x-arrays"],
+  "x-strings": ICSE_CLASS_X_CONTENT_MAP["x-strings"],
+  "string-handling": ICSE_CLASS_X_CONTENT_MAP["x-strings"],
+  "x-class-computation": ICSE_CLASS_X_CONTENT_MAP["x-class-computation"],
+  "class-as-basis": ICSE_CLASS_X_CONTENT_MAP["x-class-computation"],
+  "x-constructors": ICSE_CLASS_X_CONTENT_MAP["x-constructors"],
+  constructors: ICSE_CLASS_X_CONTENT_MAP["x-constructors"],
+  "x-custom-methods": ICSE_CLASS_X_CONTENT_MAP["x-custom-methods"],
+  "custom-methods": ICSE_CLASS_X_CONTENT_MAP["x-custom-methods"],
+  "x-disruptive-technologies": ICSE_CLASS_X_CONTENT_MAP["x-disruptive-technologies"],
+  "disruptive-technologies": ICSE_CLASS_X_CONTENT_MAP["x-disruptive-technologies"],
 };
 
 const letterToIndex = (letter) => {
@@ -84,6 +102,18 @@ function normalizeProgrammingQuestions(programmingQuestions) {
   }));
 }
 
+function normalizePracticeQuestions(practiceQuestions) {
+  if (!Array.isArray(practiceQuestions) || practiceQuestions.length === 0) return null;
+  return practiceQuestions.map((q) => ({
+    id: q.id,
+    question: q.question,
+    answer: q.answer || "",
+    type: q.type || "practice",
+    difficulty: q.difficulty,
+    marks: q.marks,
+  }));
+}
+
 export function getQuestionBankChapter(slug) {
   if (!slug) return null;
   const rawChapter = chapterBank[slug];
@@ -93,6 +123,8 @@ export function getQuestionBankChapter(slug) {
     mcqs: normalizeMcqs(rawChapter.mcqs),
     outputQuestions: normalizeOutputQuestions(rawChapter.outputQuestions),
     programmingQuestions: normalizeProgrammingQuestions(rawChapter.programmingQuestions),
+    practiceQuestions: normalizePracticeQuestions(rawChapter.practice),
+    practicalTasks: Array.isArray(rawChapter.practicalTasks) ? rawChapter.practicalTasks : null,
   };
 }
 

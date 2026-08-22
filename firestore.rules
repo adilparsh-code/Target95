@@ -31,6 +31,13 @@ service cloud.firestore {
         && request.resource.data.email == resource.data.email
         && request.resource.data.role == resource.data.role));
       allow delete: if isAdmin();
+
+      // AI Tutor chat history — private to the owning user only.
+      match /aiChats/{chatId} {
+        allow read, delete: if isAuthenticated() && isOwner(userId);
+        allow create: if isAuthenticated() && isOwner(userId);
+        allow update: if false;
+      }
     }
 
     // Learning content is maintained by approved teachers and administrators.

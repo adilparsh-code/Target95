@@ -31,7 +31,6 @@ export {
 // Achievement Engine
 export {
   ACHIEVEMENTS,
-  AchievementType,
   checkAchievements,
   getUnlockedAchievements,
   getLockedAchievements,

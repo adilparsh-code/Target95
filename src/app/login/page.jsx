@@ -13,6 +13,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [honeypot, setHoneypot] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [authMode, setAuthMode] = useState("email");
   const { login, loginWithGoogle, loading, error, clearError } = useAuth();
   const router = useRouter();
 
@@ -32,9 +33,16 @@ export default function Login() {
   };
 
   const handleGoogleLogin = async () => {
+    clearError();
+    setAuthMode("google");
     const result = await loginWithGoogle();
-    if (result.success) router.push("/dashboard");
+    if (result.success) {
+      router.push("/dashboard");
+    }
+    setAuthMode("email");
   };
+
+  const busy = loading || authMode === "google";
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -67,7 +75,7 @@ export default function Login() {
               />
 
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm" role="alert">
                   {error}
                 </div>
               )}
@@ -80,7 +88,10 @@ export default function Login() {
                   id="email"
                   name="email"
                   type="email"
+                  inputMode="email"
                   autoComplete="email"
+                  autoCapitalize="none"
+                  spellCheck="false"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -124,14 +135,25 @@ export default function Login() {
                 </div>
               </div>
 
-              <div>
-                <Button type="submit" variant="default" size="lg" className="w-full" disabled={loading}>
-                  {loading ? "Signing in..." : "Sign in"}
+              <div className="space-y-3">
+                <Button type="submit" variant="default" size="lg" className="w-full" disabled={busy}>
+                  {authMode === "email" && loading ? "Signing in..." : "Sign in"}
+                </Button>
+
+                <div className="relative"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div><div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-gray-500">or</span></div></div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="w-full"
+                  disabled={busy}
+                  onClick={handleGoogleLogin}
+                  aria-label="Continue with Google"
+                >
+                  {authMode === "google" ? "Connecting to Google..." : "Continue with Google"}
                 </Button>
               </div>
-
-              <div className="relative"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div><div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-gray-500">or</span></div></div>
-              <Button type="button" variant="outline" size="lg" className="w-full" disabled={loading} onClick={handleGoogleLogin}>Continue with Google</Button>
             </form>
           </div>
         </div>

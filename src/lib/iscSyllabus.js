@@ -32,11 +32,14 @@ export const ISC_XI_PRACTICAL = {
   practicalLanguage: "Java",
 };
 
-/**
- * Class XII is intentionally kept as an explicit verification placeholder
- * until its official 2028 section is mapped topic-by-topic. This prevents
- * the old 19-chapter assumptions from silently becoming a false source of truth.
- */
-export const ISC_XII_VERIFICATION_REQUIRED = true;
+export const ISC_XII_TOPICS = [
+  { id: "xii-boolean-algebra", section: "A", title: "Boolean Algebra", class: "ISC XII", route: "/isc/class-xii/boolean-algebra", available: true },
+  { id: "xii-k-map", section: "A", title: "Karnaugh Maps (K-Maps)", class: "ISC XII", route: "/isc/class-xii/k-map", available: true },
+  { id: "xii-combinational-logic", section: "A", title: "Combinational Logic", class: "ISC XII", route: "/isc/class-xii/boolean-algebra", available: true },
+  { id: "xii-java", section: "B", title: "Programming in Java", class: "ISC XII", available: true },
+];
+
+export const ISC_XII_VERIFICATION_REQUIRED = false;
 
 export const getISCClassXITopic = (id) => ISC_XI_TOPICS.find((topic) => topic.id === id) ?? null;
+export const getISCClassXIITopic = (id) => ISC_XII_TOPICS.find((topic) => topic.id === id) ?? null;

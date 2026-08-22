@@ -77,7 +77,7 @@ export default function RoboticsAIPage() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <div className="mx-auto max-w-6xl px-6 py-10">
-        <Link href="/" className="text-sm text-slate-600">← Target95 Home</Link>
+        <Link href="/isc" className="text-sm text-slate-600">← ICSE &amp; ISC Home</Link>
 
         <header className="mt-6 rounded-[2rem] bg-gradient-to-br from-violet-950 via-fuchsia-900 to-slate-950 p-8 text-white md:p-10">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-violet-200">ICSE · Class IX · Robotics & AI</p>

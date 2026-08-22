@@ -5,7 +5,8 @@ export default function ISCClassXIPracticalsPage() {
   return (
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-900">
       <div className="mx-auto max-w-6xl">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+        <Link href="/isc/class-xi" className="text-sm font-medium text-slate-600 hover:text-slate-900">← ISC Class XI</Link>
+        <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">ISC Class XI</p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight">Practicals &amp; Project Lab</h1>

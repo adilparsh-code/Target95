@@ -1,9 +1,61 @@
 // ISC XII K-Map module: concept-first, exam-ready and truth-table connected.
 export const KMAP_GUIDE = {
   title: "Karnaugh Maps (K-Maps)",
+  bigIdea: "A K-map rearranges truth-table outputs so adjacent cells differ in only one variable. Grouping those cells removes variables that change and produces a simpler Boolean expression.",
   purpose: "A K-map rearranges truth-table outputs so adjacent cells differ in only one variable. Grouping those cells removes variables that change and produces a simpler Boolean expression.",
   variableRule: "2 variables → 4 cells; 3 variables → 8 cells; 4 variables → 16 cells.",
   grayCode: ["00", "01", "11", "10"],
+  maps: {
+    twoVariable: {
+      columns: ["B=0", "B=1"],
+      rows: ["A=0", "A=1"],
+      cells: [
+        { row: "A=0", col: "B=0", index: 0 },
+        { row: "A=0", col: "B=1", index: 1 },
+        { row: "A=1", col: "B=0", index: 2 },
+        { row: "A=1", col: "B=1", index: 3 }
+      ],
+      example: { expression: "F(A,B)=Σm(1,3)", result: "B", selected: [1, 3] }
+    },
+    threeVariable: {
+      columns: ["BC=00", "BC=01", "BC=11", "BC=10"],
+      rows: ["A=0", "A=1"],
+      cells: [
+        { row: "A=0", col: "00", index: 0 },
+        { row: "A=0", col: "01", index: 1 },
+        { row: "A=0", col: "11", index: 3 },
+        { row: "A=0", col: "10", index: 2 },
+        { row: "A=1", col: "00", index: 4 },
+        { row: "A=1", col: "01", index: 5 },
+        { row: "A=1", col: "11", index: 7 },
+        { row: "A=1", col: "10", index: 6 }
+      ],
+      example: { expression: "F(A,B,C)=Σm(1,3,5,7)", result: "C", selected: [1, 3, 5, 7] }
+    },
+    fourVariable: {
+      columns: ["CD=00", "CD=01", "CD=11", "CD=10"],
+      rows: ["AB=00", "AB=01", "AB=11", "AB=10"],
+      cells: [
+        { row: "AB=00", col: "00", index: 0 },
+        { row: "AB=00", col: "01", index: 1 },
+        { row: "AB=00", col: "11", index: 3 },
+        { row: "AB=00", col: "10", index: 2 },
+        { row: "AB=01", col: "00", index: 4 },
+        { row: "AB=01", col: "01", index: 5 },
+        { row: "AB=01", col: "11", index: 7 },
+        { row: "AB=01", col: "10", index: 6 },
+        { row: "AB=11", col: "00", index: 12 },
+        { row: "AB=11", col: "01", index: 13 },
+        { row: "AB=11", col: "11", index: 15 },
+        { row: "AB=11", col: "10", index: 14 },
+        { row: "AB=10", col: "00", index: 8 },
+        { row: "AB=10", col: "01", index: 9 },
+        { row: "AB=10", col: "11", index: 11 },
+        { row: "AB=10", col: "10", index: 10 }
+      ],
+      example: { expression: "F(A,B,C,D)=Σm(0,1,2,3)", result: "A'B'", selected: [0, 1, 2, 3] }
+    }
+  },
   coreRules: [
     "Use Gray-code order, not ordinary binary order.",
     "Groups contain 1, 2, 4, 8... cells only.",
@@ -33,10 +85,10 @@ export const KMAP_GUIDE = {
     { expression: "F(A,B,C)=ΠM(0,2,4,6)", variables: 3, result: "C", reason: "Group the four zeros; C remains 0, giving POS result C." }
   ],
   specialPatterns: [
-    "Wrap-around: first and last rows/columns are adjacent.",
-    "Corner grouping: all four corners can form a valid group in a 4-variable map.",
-    "Overlap: reuse a cell when it creates a larger or necessary group.",
-    "Don't-care X: use it as 0 or 1 only when it simplifies a useful grouping."
+    { title: "Wrap-around", rule: "First and last rows/columns are adjacent — treat the map as if it wraps top-to-bottom and left-to-right." },
+    { title: "Corner grouping", rule: "All four corners of a 4-variable K-map can form a valid group of four." },
+    { title: "Overlap", rule: "A cell can be reused in more than one group when it helps form a larger or necessary group." },
+    { title: "Don't-care (X)", rule: "Treat a don't-care cell as 0 or 1 — whichever helps form a larger, valid group." }
   ],
   examTraps: [
     "Do not use 00,01,10,11 as K-map order; use 00,01,11,10.",

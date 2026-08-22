@@ -10,6 +10,7 @@ import ifElseChapter from "@/app/data/question-bank/04-if-else";
 import loopsChapter from "@/app/data/question-bank/05-loops";
 import methodsChapter from "@/app/data/question-bank/06-methods";
 import arraysChapter from "@/app/data/question-bank/07-arrays";
+import systemOfNumerationChapter from "@/app/data/question-bank/08-system-of-numeration";
 
 const chapterBank = {
   introduction: introductionChapter,
@@ -23,6 +24,8 @@ const chapterBank = {
   "iterative-statements": loopsChapter,
   methods: methodsChapter,
   arrays: arraysChapter,
+  "system-of-numeration": systemOfNumerationChapter,
+  "xi-system-of-numeration": systemOfNumerationChapter,
 };
 
 const letterToIndex = (letter) => {

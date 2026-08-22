@@ -1,4 +1,133 @@
 import Link from "next/link";
 import kMap from "@/app/data/iscXIIKMap";
-function Grid({map,selected=[]}){return <div className="overflow-x-auto rounded-2xl border border-slate-200"><table className="min-w-[520px] w-full text-center text-sm"><thead><tr><th className="border bg-slate-50 p-3">Map</th>{map.columns.map(c=><th key={c} className="border bg-slate-950 p-3 text-white">{c}</th>)}</tr></thead><tbody>{map.rows.map(r=><tr key={r}><th className="border bg-slate-50 p-3">{r}</th>{map.columns.map(c=>{const cell=map.cells.find(x=>x.row===r&&x.col===c.replace(/^BC=|^CD=/,""));return <td key={c} className={`border p-4 font-mono ${cell&&selected.includes(cell.index)?"bg-slate-900 text-white":"bg-white"}`}>{cell?.index??""}</td>})}</tr>)}</tbody></table></div>}
-export default function KMapPage(){return <main className="min-h-screen bg-slate-50"><div className="mx-auto max-w-6xl px-6 py-10"><Link href="/isc/class-xii/boolean-algebra" className="text-sm text-slate-600">← Boolean Algebra</Link><header className="mt-6 rounded-[2rem] bg-slate-950 p-8 text-white"><p className="text-sm uppercase tracking-[0.2em] text-slate-400">ISC Class XII</p><h1 className="mt-2 text-4xl font-bold">Karnaugh Maps (K-Maps)</h1><p className="mt-4 max-w-4xl text-lg text-slate-300">{kMap.bigIdea}</p></header><div className="mt-8 grid gap-6"><section className="rounded-3xl bg-white p-6 shadow-sm"><h2 className="text-2xl font-bold">Rules</h2><ul className="mt-4 grid gap-3 md:grid-cols-2">{kMap.coreRules.map(x=><li key={x} className="rounded-xl bg-slate-50 p-3 text-sm">{x}</li>)}</ul></section><section className="rounded-3xl bg-white p-6 shadow-sm"><h2 className="text-2xl font-bold">2-variable</h2><p className="mt-2 text-sm">{kMap.maps.twoVariable.example.expression} → <b>{kMap.maps.twoVariable.example.result}</b></p><div className="mt-4"><Grid map={kMap.maps.twoVariable} selected={kMap.maps.twoVariable.example.selected}/></div></section><section className="rounded-3xl bg-white p-6 shadow-sm"><h2 className="text-2xl font-bold">3-variable</h2><p className="mt-2 text-sm">{kMap.maps.threeVariable.example.expression} → <b>{kMap.maps.threeVariable.example.result}</b></p><div className="mt-4"><Grid map={kMap.maps.threeVariable} selected={kMap.maps.threeVariable.example.selected}/></div></section><section className="rounded-3xl bg-white p-6 shadow-sm"><h2 className="text-2xl font-bold">4-variable</h2><p className="mt-2 text-sm">{kMap.maps.fourVariable.example.expression} → <b>{kMap.maps.fourVariable.example.result}</b></p><div className="mt-4"><Grid map={kMap.maps.fourVariable} selected={kMap.maps.fourVariable.example.selected}/></div></section><section className="rounded-3xl bg-white p-6 shadow-sm"><h2 className="text-2xl font-bold">Special patterns</h2><div className="mt-4 grid gap-4 md:grid-cols-2">{kMap.specialPatterns.map(x=><article key={x.title} className="rounded-2xl border p-5"><h3 className="font-bold">{x.title}</h3><p className="mt-2 text-sm text-slate-600">{x.rule}</p></article>)}</div></section><section className="rounded-3xl bg-white p-6 shadow-sm"><h2 className="text-2xl font-bold">Practice</h2><div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{kMap.practice.map(x=><details key={x.id} className="rounded-2xl border p-4"><summary className="cursor-pointer text-sm font-semibold">{x.question}</summary><p className="mt-3 text-sm">Answer: {x.answer}</p></details>)}</div></section></div></div></main>}
+
+function Grid({ map, selected = [] }) {
+  return (
+    <div className="overflow-x-auto rounded-2xl border border-slate-200">
+      <table className="min-w-[520px] w-full text-center text-sm">
+        <thead>
+          <tr>
+            <th className="border bg-slate-50 p-3">Map</th>
+            {map.columns.map((column) => (
+              <th key={column} className="border bg-slate-950 p-3 text-white">
+                {column}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {map.rows.map((row) => (
+            <tr key={row}>
+              <th className="border bg-slate-50 p-3">{row}</th>
+              {map.columns.map((column) => {
+                const normalizedColumn = column.replace(/^BC=/, "").replace(/^CD=/, "");
+                const cell = map.cells.find(
+                  (item) => item.row === row && item.col === normalizedColumn
+                );
+                const active = cell && selected.includes(cell.index);
+                return (
+                  <td
+                    key={`${row}-${column}`}
+                    className={`border p-4 font-mono ${
+                      active ? "bg-slate-900 text-white" : "bg-white"
+                    }`}
+                  >
+                    {cell?.index ?? ""}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default function KMapPage() {
+  return (
+    <main className="min-h-screen bg-slate-50">
+      <div className="mx-auto max-w-6xl px-6 py-10">
+        <Link
+          href="/isc/class-xii/boolean-algebra"
+          className="text-sm text-slate-600"
+        >
+          ← Boolean Algebra
+        </Link>
+
+        <header className="mt-6 rounded-[2rem] bg-slate-950 p-8 text-white">
+          <p className="text-sm uppercase tracking-[0.2em] text-slate-400">ISC Class XII</p>
+          <h1 className="mt-2 text-4xl font-bold">Karnaugh Maps (K-Maps)</h1>
+          <p className="mt-4 max-w-4xl text-lg text-slate-300">{kMap.bigIdea}</p>
+        </header>
+
+        <div className="mt-8 grid gap-6">
+          <section className="rounded-3xl bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold">Rules</h2>
+            <ul className="mt-4 grid gap-3 md:grid-cols-2">
+              {kMap.coreRules.map((rule) => (
+                <li key={rule} className="rounded-xl bg-slate-50 p-3 text-sm">
+                  {rule}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold">2-variable</h2>
+            <p className="mt-2 text-sm">
+              {kMap.maps.twoVariable.example.expression} → <b>{kMap.maps.twoVariable.example.result}</b>
+            </p>
+            <div className="mt-4">
+              <Grid map={kMap.maps.twoVariable} selected={kMap.maps.twoVariable.example.selected} />
+            </div>
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold">3-variable</h2>
+            <p className="mt-2 text-sm">
+              {kMap.maps.threeVariable.example.expression} → <b>{kMap.maps.threeVariable.example.result}</b>
+            </p>
+            <div className="mt-4">
+              <Grid map={kMap.maps.threeVariable} selected={kMap.maps.threeVariable.example.selected} />
+            </div>
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold">4-variable</h2>
+            <p className="mt-2 text-sm">
+              {kMap.maps.fourVariable.example.expression} → <b>{kMap.maps.fourVariable.example.result}</b>
+            </p>
+            <div className="mt-4">
+              <Grid map={kMap.maps.fourVariable} selected={kMap.maps.fourVariable.example.selected} />
+            </div>
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold">Special patterns</h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              {kMap.specialPatterns.map((item) => (
+                <article key={item.title} className="rounded-2xl border p-5">
+                  <h3 className="font-bold">{item.title}</h3>
+                  <p className="mt-2 text-sm text-slate-600">{item.rule}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="rounded-3xl bg-white p-6 shadow-sm">
+            <h2 className="text-2xl font-bold">Practice</h2>
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {kMap.practice.map((item) => (
+                <details key={item.id} className="rounded-2xl border p-4">
+                  <summary className="cursor-pointer text-sm font-semibold">{item.question}</summary>
+                  <p className="mt-3 text-sm">Answer: {item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  );
+}

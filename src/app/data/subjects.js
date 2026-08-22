@@ -26,6 +26,23 @@ const subjects = [
     totalQuestions: 200,
     estimatedStudyTime: "8 hours",
   },
+  {
+    id: "robotics-ai",
+    icon: "🤖",
+    title: "Robotics & AI",
+    description: "Explore the official ICSE Class IX–X Robotics & Artificial Intelligence pathway with robotics concepts, AI foundations, Python, and project-based learning.",
+    color: "from-violet-600 to-fuchsia-600",
+    bgColor: "bg-violet-50",
+    borderColor: "border-violet-200",
+    href: "/icse/robotics-ai",
+    comingSoon: true,
+    totalChapters: 0,
+    totalQuestions: 0,
+    estimatedStudyTime: "Planned",
+    board: "ICSE",
+    classes: ["IX", "X"],
+    subjectType: "Robotics & Artificial Intelligence",
+  },
 ];
 
 export default subjects;

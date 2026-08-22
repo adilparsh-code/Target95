@@ -12,6 +12,7 @@ export { cbseUnits } from './units';
 export { learningOutcomes } from './learning-outcomes';
 export { competencyLevels } from './competency-levels';
 export { default as cbseCurriculum2026_27, getCBSECurriculum, CBSE_CURRICULUM_SESSION } from './curriculum-2026-27';
+export { default as CBSE_402_CLASS9_2026_27 } from './class9-402-2026-27-sources';
 
 export { validateCBSEStructure } from './validation-report';
 export { curriculumInconsistencies } from './inconsistencies';

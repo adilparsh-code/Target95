@@ -11,12 +11,13 @@ export { cbseSubjects } from './subjects';
 export { cbseUnits } from './units';
 export { learningOutcomes } from './learning-outcomes';
 export { competencyLevels } from './competency-levels';
+export { default as cbseCurriculum2026_27, getCBSECurriculum, CBSE_CURRICULUM_SESSION } from './curriculum-2026-27';
 
 export { validateCBSEStructure } from './validation-report';
 export { curriculumInconsistencies } from './inconsistencies';
 
 /**
- * Get all CBSE classes
+ * Get all legacy CBSE class objects.
  */
 export const getAllCBSEClasses = () => {
   return [
@@ -27,29 +28,29 @@ export const getAllCBSEClasses = () => {
 };
 
 /**
- * Get CBSE class by ID
+ * Get CBSE class by ID.
  */
 export const getCBSEClassById = (classId) => {
   const classes = getAllCBSEClasses();
-  return classes.find(cls => cls.id === classId);
+  return classes.find((cls) => cls.id === classId);
 };
 
 /**
- * Get subject by class and subject ID
+ * Get subject by class and subject ID.
  */
 export const getCBSESubject = (classId, subjectId) => {
   const cls = getCBSEClassById(classId);
   if (!cls) return null;
-  return cls.subjects.find(sub => sub.id === subjectId);
+  return cls.subjects.find((sub) => sub.id === subjectId);
 };
 
 /**
- * Get chapter by class, subject, and chapter ID
+ * Get chapter by class, subject, and chapter ID.
  */
 export const getCBSEChapter = (classId, subjectId, chapterId) => {
   const subject = getCBSESubject(classId, subjectId);
   if (!subject) return null;
-  return subject.chapters.find(ch => ch.id === chapterId);
+  return subject.chapters?.find((ch) => ch.id === chapterId) ?? null;
 };
 
 export default {

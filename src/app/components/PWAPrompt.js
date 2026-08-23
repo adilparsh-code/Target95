@@ -10,6 +10,18 @@ export default function PWAPrompt() {
   const [newVersionAvailable, setNewVersionAvailable] = useState(false);
 
   useEffect(() => {
+    // Never register the production service worker during local development.
+    // A stale SW can cache old Next.js assets and make client-side navigation
+    // appear broken after cloning/running the project locally.
+    if (process.env.NODE_ENV !== 'production') {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          registrations.forEach((registration) => registration.unregister());
+        });
+      }
+      return;
+    }
+
     // Don't show install prompt if already in standalone mode (already installed)
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     if (isStandalone) return;
@@ -27,7 +39,7 @@ export default function PWAPrompt() {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
-    // Check for service worker updates
+    // Check for service worker updates in production only
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').then((registration) => {
         registration.addEventListener('updatefound', () => {
@@ -88,7 +100,6 @@ export default function PWAPrompt() {
 
   return (
     <>
-      {/* PWA Install Prompt */}
       {showPrompt && (
         <div
           role="dialog"
@@ -108,7 +119,7 @@ export default function PWAPrompt() {
               aria-label="Dismiss install prompt"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6L18 18" />
               </svg>
             </button>
           </div>
@@ -129,7 +140,6 @@ export default function PWAPrompt() {
         </div>
       )}
 
-      {/* New Version Available Notification */}
       {newVersionAvailable && (
         <div
           role="alert"

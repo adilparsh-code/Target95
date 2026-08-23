@@ -25,7 +25,19 @@ export default function ChatWindow({ messages, loading, onSend, onOpenSidebar, c
       hint: "Give me a hint only. Do not reveal the final answer yet.",
       practice: "Give me one board-style practice question on this topic. Wait for my answer before evaluating it.",
     };
-    onSend(prompts[mode]);
+
+    const contextParts = [
+      context?.board && `Board: ${context.board}`,
+      context?.class && `Class: ${context.class}`,
+      context?.subject && `Subject: ${context.subject}`,
+      context?.chapter && `Chapter: ${context.chapter}`,
+    ].filter(Boolean);
+
+    const contextInstruction = contextParts.length
+      ? `\n\nStudy context:\n${contextParts.join("\n")}\nUse this context to keep your response aligned with my syllabus.`
+      : "";
+
+    onSend(`${prompts[mode]}${contextInstruction}`);
   };
 
   return (
@@ -56,7 +68,7 @@ export default function ChatWindow({ messages, loading, onSend, onOpenSidebar, c
             <div className="px-4 pb-6">
               <p className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">Tutor modes</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                {[["explain", "Explain", "Understand the concept step by step"], ["hint", "Hint", "Get guidance without the final answer"], ["practice", "Practice", "Try a board-style question"]].map(([mode, title, description]) => (
+                {[['explain', 'Explain', 'Understand the concept step by step'], ['hint', 'Hint', 'Get guidance without the final answer'], ['practice', 'Practice', 'Try a board-style question']].map(([mode, title, description]) => (
                   <button key={mode} type="button" disabled={loading} onClick={() => sendTutorMode(mode)} className="text-left p-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 disabled:opacity-50 transition-colors">
                     <span className="block text-sm font-semibold text-gray-900 dark:text-white">{title}</span>
                     <span className="block mt-1 text-xs text-gray-500 dark:text-gray-400">{description}</span>

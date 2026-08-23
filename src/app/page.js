@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ClientHome from "./ClientHome";
+import HomeProductPreview from "./components/HomeProductPreview";
 
 export const metadata = {
   title: "Target95+ - Master CISCE & CBSE Computer Science with AI",
@@ -20,5 +21,17 @@ export const metadata = {
 };
 
 export default function Home() {
-  return <ClientHome />;
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-white">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute -left-32 top-20 h-80 w-80 rounded-full bg-blue-200/25 blur-3xl" />
+        <div className="absolute -right-32 top-32 h-96 w-96 rounded-full bg-indigo-200/25 blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-px w-[min(80vw,1000px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-blue-300/50 to-transparent" />
+      </div>
+      <div className="relative z-10">
+        <ClientHome />
+        <HomeProductPreview />
+      </div>
+    </div>
+  );
 }

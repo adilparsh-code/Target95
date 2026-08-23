@@ -1,149 +1,117 @@
 "use client";
 
-import { getFirebaseInstance } from "../lib/firebase";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  doc,
-  query,
-  orderBy,
-  serverTimestamp
-} from "firebase/firestore";
-
 export class AIService {
   constructor() {
-    const { db, auth } = getFirebaseInstance();
-    this.db = db;
-    this.auth = auth;
+    this.db = null;
+    this.auth = null;
+    this.firebaseReady = false;
+
+    try {
+      // Firebase stays optional during local-first Tutor development.
+      // This dynamic import avoids making the Tutor unavailable when Firebase
+      // configuration is intentionally not connected yet.
+      if (typeof window !== "undefined") {
+        import("../lib/firebase")
+          .then(({ getFirebaseInstance }) => {
+            const instance = getFirebaseInstance();
+            this.db = instance?.db ?? null;
+            this.auth = instance?.auth ?? null;
+            this.firebaseReady = Boolean(this.db && this.auth);
+          })
+          .catch(() => {
+            this.firebaseReady = false;
+          });
+      }
+    } catch {
+      this.firebaseReady = false;
+    }
   }
 
-  // Send prompt to AI and get response
   async sendPrompt(prompt, context = {}) {
     if (!prompt || prompt.trim() === "") {
       throw new Error("Empty prompt is not allowed");
     }
 
-    try {
-      // Simulate AI response generation - in production, this would call an actual AI API
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Generate a structured AI response
-      const response = this.generateAIResponse(prompt, context);
-      return response;
-    } catch (error) {
-      console.error("Error sending prompt to AI:", error);
-      if (error.message.includes("Failed to fetch") || error.name === "NetworkError") {
-        throw new Error("Network error. Please check your internet connection and try again.");
-      }
-      throw error;
-    }
+    // Local-first Tutor response. A real provider adapter can replace this
+    // method later without changing the page or hook contract.
+    return this.generateAIResponse(prompt, context);
   }
 
-  // Save chat to Firestore
   async saveChat(chatData) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
+    if (!this.firebaseReady || !this.db || !this.auth?.currentUser) {
+      return { id: `local-${Date.now()}`, ...chatData, localOnly: true };
     }
 
     try {
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
       const uid = this.auth.currentUser.uid;
       const chatsRef = collection(this.db, `users/${uid}/aiChats`);
-      
       const docRef = await addDoc(chatsRef, {
         ...chatData,
-        createdAt: serverTimestamp()
+        createdAt: serverTimestamp(),
       });
-
       return { id: docRef.id, ...chatData };
     } catch (error) {
       console.error("Error saving chat to Firestore:", error);
-      throw new Error("Failed to save chat. Please try again.");
+      return { id: `local-${Date.now()}`, ...chatData, localOnly: true };
     }
   }
 
-  // Get chat history from Firestore
   async getHistory() {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
+    if (!this.firebaseReady || !this.db || !this.auth?.currentUser) {
+      return [];
     }
 
     try {
+      const { collection, getDocs, query, orderBy } = await import("firebase/firestore");
       const uid = this.auth.currentUser.uid;
       const chatsRef = collection(this.db, `users/${uid}/aiChats`);
       const q = query(chatsRef, orderBy("createdAt", "desc"));
-      const querySnapshot = await getDocs(q);
-
-      return querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map((item) => ({ id: item.id, ...item.data() }));
     } catch (error) {
       console.error("Error getting chat history from Firestore:", error);
-      throw new Error("Failed to load chat history. Please refresh the page.");
+      return [];
     }
   }
 
-  // Delete a conversation
   async deleteConversation(chatId) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+    if (!this.firebaseReady || !this.db || !this.auth?.currentUser) return;
 
     try {
+      const { deleteDoc, doc } = await import("firebase/firestore");
       const uid = this.auth.currentUser.uid;
-      const chatRef = doc(this.db, `users/${uid}/aiChats/${chatId}`);
-      await deleteDoc(chatRef);
+      await deleteDoc(doc(this.db, `users/${uid}/aiChats/${chatId}`));
     } catch (error) {
       console.error("Error deleting conversation:", error);
-      throw new Error("Failed to delete conversation. Please try again.");
     }
   }
 
-  // Helper method to generate structured AI responses (simulation)
   generateAIResponse(prompt, context = {}) {
-    const questionContext = context.question ? `Regarding your question: "${context.question}"` : "";
-    
+    const subject = context.subject || "Computer Science";
+    const chapter = context.chapter || "the current topic";
+    const questionContext = context.question ? `
+
+Question context: ${context.question}` : "";
+
     return {
-      explanation: `${questionContext} ${prompt} is a fundamental concept in computer science. Let me break it down for you. This concept forms the building block of many programming principles and is essential for understanding more advanced topics. When implemented correctly, it can significantly improve the efficiency and readability of your code.`,
-      
+      explanation: `Let’s work through ${chapter} step by step. Your question is about ${subject}.${questionContext}`,
       stepByStep: [
-        "First, understand the basic definition and core principles behind the concept",
-        "Look at simple examples to see how it works in practice",
-        "Practice implementing it in small code snippets",
-        "Gradually integrate it into more complex projects",
-        "Review common pitfalls and how to avoid them"
+        "Identify exactly what the question is asking.",
+        "Recall the one core concept needed to solve it.",
+        "Work through the smallest useful example.",
+        "Check the result against the question.",
+        "Try one similar practice question before moving on.",
       ],
-      
-      example: `// Example implementation
-function example() {
-  // Step 1: Initialize the necessary variables
-  const data = [];
-  
-  // Step 2: Apply the concept
-  data.forEach(item => {
-    processItem(item);
-  });
-  
-  return data;
-}`,
-      
+      example: "Ask me for a worked example and I’ll structure it as: Given → Method → Steps → Answer → Quick Check.",
       keyPoints: [
-        "Fundamental concept in computer science",
-        "Improves code efficiency and readability",
-        "Essential for advanced programming topics",
-        "Widely used across all major programming languages",
-        "Can be implemented with minimal complexity"
+        "Understand the concept before memorising the answer.",
+        "Use the chapter context when solving board-style questions.",
+        "For code, trace values before deciding the output.",
+        "For Boolean Algebra, verify important identities with a truth table.",
+        "For inheritance, separate constructor order from method overriding.",
       ],
-      
-      relatedTopics: [
-        "Data Structures",
-        "Algorithms",
-        "Object-Oriented Programming",
-        "Time Complexity Analysis",
-        "Space Optimization"
-      ]
+      relatedTopics: [chapter, "Practice Questions", "Output Tracing", "Debugging", "Board Strategy"],
     };
   }
 }

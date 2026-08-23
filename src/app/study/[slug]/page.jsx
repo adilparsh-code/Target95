@@ -2,11 +2,9 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import StudyChapter from "../../components/study/StudyChapter";
 import { notFound } from "next/navigation";
-import { getStudyChapterBySlug } from "../../../lib/studyCenter";
+import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { getMarkdownChapterContent } from "../../../lib/markdownContent";
 import { getQuestionBankChapter } from "../../../lib/questionBankAdapter";
-
-import { getStudyChapters } from "../../../lib/studyCenter";
 
 export async function generateStaticParams() {
   const chapters = getStudyChapters();
@@ -17,16 +15,13 @@ export default async function StudyChapterPage({ params }) {
   const { slug } = await params;
   const chapter = getStudyChapterBySlug(slug);
 
-  if (!chapter) {
-    notFound();
-  }
+  if (!chapter) notFound();
 
-  // Load rich content from the academic Markdown source when available.
-  // Falls back gracefully (null) for chapters without a Markdown file.
-  const markdownChapter = getMarkdownChapterContent(slug);
-
-  // Load structured question-bank data for MCQs, output, and programming
-  // sections. Falls back gracefully (null) for chapters without a bank.
+  // The canonical Introduction to Java academic source currently lives under
+  // the legacy `introduction` registry entry. Reuse it for the new study slug
+  // so students receive the full academic content instead of placeholder data.
+  const markdownSlug = slug === "introduction-to-java" ? "introduction" : slug;
+  const markdownChapter = getMarkdownChapterContent(markdownSlug);
   const questionBankChapter = getQuestionBankChapter(slug);
 
   return (

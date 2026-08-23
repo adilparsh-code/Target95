@@ -1,91 +1,94 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { SessionService } from "../services/SessionService";
 
 export function useSession(initialSession = null) {
   const [session, setSession] = useState(initialSession);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  const [flaggedQuestions, setFlaggedQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(initialSession?.currentQuestionIndex || 0);
+  const [answers, setAnswers] = useState(initialSession?.answers || []);
+  const [flaggedQuestions, setFlaggedQuestions] = useState(initialSession?.flaggedQuestions || []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [timeRemaining, setTimeRemaining] = useState(null);
-  const [isComplete, setIsComplete] = useState(false);
-  const [results, setResults] = useState(null);
+  const [timeRemaining, setTimeRemaining] = useState(
+    initialSession?.hasTimer && initialSession?.duration ? initialSession.duration * 60 * 1000 : null
+  );
+  const [isComplete, setIsComplete] = useState(initialSession?.status === "completed");
+  const [results, setResults] = useState(initialSession?.results || null);
+  const sessionServiceRef = useRef(null);
+  const completionStartedRef = useRef(false);
 
-  const sessionService = new SessionService();
+  if (!sessionServiceRef.current) {
+    sessionServiceRef.current = new SessionService();
+  }
 
-  // Initialize timer if session has timer enabled
-  useEffect(() => {
-    if (session?.hasTimer && session?.duration && !timeRemaining) {
-      // Convert minutes to milliseconds
-      setTimeRemaining(session.duration * 60 * 1000);
-    }
-  }, [session, timeRemaining]);
-
-  // Timer countdown effect
-  useEffect(() => {
-    if (!timeRemaining || isComplete) return;
-
-    const timer = setInterval(() => {
-      setTimeRemaining(prev => {
-        if (prev <= 1000) {
-          // Time's up - auto complete the session
-          completeSession();
-          return 0;
-        }
-        return prev - 1000;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeRemaining, isComplete]);
-
-  // Current question getter
   const currentQuestion = session?.questions?.[currentIndex];
-  
-  // Progress calculation
-  const progress = session?.questions?.length 
-    ? ((currentIndex + 1) / session.questions.length) * 100 
+  const progress = session?.questions?.length
+    ? ((currentIndex + 1) / session.questions.length) * 100
     : 0;
 
-  // Go to next question
-  const nextQuestion = useCallback(() => {
-    if (session && currentIndex < session.questions.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    }
-  }, [session, currentIndex]);
+  // Keep local state aligned if a new session is supplied.
+  useEffect(() => {
+    setSession(initialSession);
+    setCurrentIndex(initialSession?.currentQuestionIndex || 0);
+    setAnswers(initialSession?.answers || []);
+    setFlaggedQuestions(initialSession?.flaggedQuestions || []);
+    setResults(initialSession?.results || null);
+    setIsComplete(initialSession?.status === "completed");
+    setTimeRemaining(
+      initialSession?.hasTimer && initialSession?.duration
+        ? initialSession.duration * 60 * 1000
+        : null
+    );
+    completionStartedRef.current = false;
+  }, [initialSession]);
 
-  // Go to previous question
-  const previousQuestion = useCallback(() => {
-    if (currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
-    }
-  }, [currentIndex]);
-
-  // Jump to specific question
-  const jumpToQuestion = useCallback((index) => {
-    if (session && index >= 0 && index < session.questions.length) {
-      setCurrentIndex(index);
-    }
+  const persistIndex = useCallback((nextIndex) => {
+    if (!session?.id) return;
+    sessionServiceRef.current.updateSession(session.id, {
+      currentQuestionIndex: nextIndex
+    }).catch(err => console.error("Failed to save practice position:", err));
   }, [session]);
 
-  // Submit an answer
+  const nextQuestion = useCallback(() => {
+    if (!session || currentIndex >= session.questions.length - 1) return;
+    const nextIndex = currentIndex + 1;
+    setCurrentIndex(nextIndex);
+    persistIndex(nextIndex);
+  }, [session, currentIndex, persistIndex]);
+
+  const previousQuestion = useCallback(() => {
+    if (currentIndex <= 0) return;
+    const previousIndex = currentIndex - 1;
+    setCurrentIndex(previousIndex);
+    persistIndex(previousIndex);
+  }, [currentIndex, persistIndex]);
+
+  const jumpToQuestion = useCallback((index) => {
+    if (!session || index < 0 || index >= session.questions.length) return;
+    setCurrentIndex(index);
+    persistIndex(index);
+  }, [session, persistIndex]);
+
   const submitAnswer = useCallback(async (questionId, answer, isCorrect) => {
     setLoading(true);
     setError(null);
+    const newAnswer = { questionId, answer, isCorrect: Boolean(isCorrect) };
 
     try {
-      // Update local state
-      const newAnswer = { questionId, answer, isCorrect };
-      setAnswers(prev => [...prev, newAnswer]);
-      
-      // Save to backend
-      if (session?.id) {
-        await sessionService.saveAnswer(session.id, questionId, answer, isCorrect);
-      }
+      setAnswers(prev => [
+        ...prev.filter(item => item.questionId !== questionId),
+        newAnswer
+      ]);
 
+      if (session?.id) {
+        await sessionServiceRef.current.saveAnswer(
+          session.id,
+          questionId,
+          answer,
+          isCorrect
+        );
+      }
       return newAnswer;
     } catch (err) {
       console.error("Error submitting answer:", err);
@@ -94,59 +97,77 @@ export function useSession(initialSession = null) {
     } finally {
       setLoading(false);
     }
-  }, [session, sessionService]);
+  }, [session]);
 
-  // Toggle flag on current question
   const toggleFlag = useCallback(async () => {
     if (!currentQuestion?.id || !session?.id) return;
+    const questionId = currentQuestion.id;
+    const wasFlagged = flaggedQuestions.includes(questionId);
+
+    setFlaggedQuestions(prev => (
+      wasFlagged
+        ? prev.filter(id => id !== questionId)
+        : [...prev, questionId]
+    ));
 
     try {
-      const isCurrentlyFlagged = flaggedQuestions.includes(currentQuestion.id);
-      
-      if (isCurrentlyFlagged) {
-        setFlaggedQuestions(prev => prev.filter(id => id !== currentQuestion.id));
-      } else {
-        setFlaggedQuestions(prev => [...prev, currentQuestion.id]);
-      }
-
-      await sessionService.toggleFlag(session.id, currentQuestion.id);
+      await sessionServiceRef.current.toggleFlag(session.id, questionId);
     } catch (err) {
-      console.error("Error toggling flag:", err);
+      // Roll back the optimistic update if persistence fails.
+      setFlaggedQuestions(prev => (
+        wasFlagged
+          ? [...prev, questionId]
+          : prev.filter(id => id !== questionId)
+      ));
       setError("Failed to update flag. Please try again.");
     }
-  }, [currentQuestion, session, flaggedQuestions, sessionService]);
+  }, [currentQuestion, session, flaggedQuestions]);
 
-  // Complete the session
   const completeSession = useCallback(async () => {
+    if (!session?.id || completionStartedRef.current) return null;
+    completionStartedRef.current = true;
     setLoading(true);
     setError(null);
 
     try {
-      if (!session?.id) throw new Error("No active session found");
-      
-      // Complete session on backend
-      const sessionResults = await sessionService.completeSession(session.id);
+      const sessionResults = await sessionServiceRef.current.completeSession(session.id);
       setResults(sessionResults);
       setIsComplete(true);
-      
+      setTimeRemaining(0);
       return sessionResults;
     } catch (err) {
+      completionStartedRef.current = false;
       console.error("Error completing session:", err);
       setError("Failed to complete session. Please try again.");
       throw err;
     } finally {
       setLoading(false);
     }
-  }, [session, sessionService]);
+  }, [session]);
 
-  // Format time remaining for display
+  // Timer countdown. A completed session can never be auto-submitted twice.
+  useEffect(() => {
+    if (!timeRemaining || isComplete) return undefined;
+
+    const timer = setInterval(() => {
+      setTimeRemaining(prev => {
+        if (prev <= 1000) {
+          clearInterval(timer);
+          completeSession().catch(() => {});
+          return 0;
+        }
+        return prev - 1000;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeRemaining, isComplete, completeSession]);
+
   const formatTimeRemaining = () => {
     if (!timeRemaining) return "00:00";
-    
     const minutes = Math.floor(timeRemaining / 60000);
     const seconds = Math.floor((timeRemaining % 60000) / 1000);
-    
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
 
   return {

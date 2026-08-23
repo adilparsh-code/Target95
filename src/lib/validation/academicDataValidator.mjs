@@ -241,13 +241,40 @@ export class AcademicDataValidator {
         canonical.push(group[0]);
         continue;
       }
-      // Keep the canonical runtime-style file when duplicate chapter content exists.
       const preferred = group.find((r) => path.basename(r.file) === '08-arrays-1d.js') || group.find((r) => path.basename(r.file) === '08-one-dimensional-arrays.js') || group[0];
       canonical.push(preferred);
       const duplicateFiles = group.filter((r) => r !== preferred).map((r) => path.basename(r.file));
       this.addFinding('INFO', 'REGISTRY', `Duplicate legacy chapter content collapsed to canonical record: ${key}`, preferred.file, { duplicateFiles });
     }
     return canonical;
+  }
+
+  validateSectionStructures() {
+    if (!fs.existsSync(this.chaptersDir)) return;
+    for (const file of this.collectJsFiles(this.chaptersDir)) {
+      if (path.basename(file) === 'index.js') continue;
+      const text = fs.readFileSync(file, 'utf8');
+      const missing = ['theoryNotes', 'examples'].filter((section) => !text.includes(section));
+      if (missing.length) {
+        this.addFinding('WARNING', 'CONTENT', `Chapter content file lacks expected schema sections: ${missing.join(', ')}`, file, { missing });
+      }
+
+      if (text.includes('examples: {') && !text.includes('basic:') && !text.includes('intermediate:') && !text.includes('advanced:')) {
+        this.addFinding('ERROR', 'CONTENT', 'Invalid content-engine examples structure: expected basic/intermediate/advanced examples grouping', file);
+      }
+    }
+  }
+
+  findDuplicates(values) {
+    const seen = new Map();
+    const duplicates = new Set();
+    for (const value of values) {
+      if (!value) continue;
+      const key = String(value).trim();
+      if (!seen.has(key)) seen.set(key, 1);
+      else { seen.set(key, seen.get(key) + 1); duplicates.add(key); }
+    }
+    return [...duplicates];
   }
 
   async validate() {
@@ -260,7 +287,6 @@ export class AcademicDataValidator {
     const questionRecords = await this.readQuestionBankRecords();
     const javaRecords = this.readJavaCurriculumRecords();
 
-    // The duplicate records are intentionally canonicalized above because legacy rich-content packs may coexist with canonical runtime files.
     const chapterIds = chapterRecords.map((r) => r.id).filter(Boolean);
     const chapterSlugs = chapterRecords.map((r) => r.slug).filter(Boolean);
 
@@ -286,11 +312,8 @@ export class AcademicDataValidator {
       if (q.difficulty && !this.validDifficulty(q.difficulty)) this.addFinding('WARNING', 'QUESTION', `Unrecognized difficulty: ${q.difficulty}`, q.file, { id: q.id });
       if (q.bloom && !this.validBloom(q.bloom)) this.addFinding('WARNING', 'QUESTION', `Unrecognized Bloom level: ${q.bloom}`, q.file, { id: q.id });
       if (q.subject && !this.supportedSubject(q.subject)) this.addFinding('WARNING', 'QUESTION', `Question references unsupported subject: ${q.subject}`, q.file, { id: q.id });
-
-      // Match chapter references by canonical slug first, then legacy title.
       const ref = String(q.chapter || '').trim();
       if (ref && !chapterRegistrySlugs.has(ref) && !chapterRegistryTitles.has(ref)) {
-        // Known legacy free-text chapter labels remain warnings rather than hard blockers.
         this.addFinding('WARNING', 'QUESTION', `Question ${q.id} references chapter not in registries: ${ref}`, q.file, { id: q.id, slug: q.slug, chapter: ref });
       }
     }

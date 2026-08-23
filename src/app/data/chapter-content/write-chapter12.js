@@ -1,4 +1,9 @@
 // Legacy scratch file retained for historical tooling.
-// Rich chapter 12 content is maintained in ./12-classes-objects.js.
-// Intentionally non-registry so validation can safely ignore this helper.
-export {};
+// Chapter 12 source of truth: ./12-classes-objects.js
+// This helper intentionally exports no chapter registry record.
+// Keeping it explicit prevents the validator from treating the file as
+// academic chapter content while preserving the historical path.
+export const chapter12Writer = {
+  source: "./12-classes-objects.js",
+  registry: false,
+};

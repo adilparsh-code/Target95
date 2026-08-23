@@ -1,9 +1,13 @@
-// Legacy scratch file retained for historical tooling.
-// Chapter 12 source of truth: ./12-classes-objects.js
-// This helper intentionally exports no chapter registry record.
-// Keeping it explicit prevents the validator from treating the file as
-// academic chapter content while preserving the historical path.
-export const chapter12Writer = {
-  source: "./12-classes-objects.js",
+// Legacy compatibility helper.
+//
+// Chapter 12 runtime content lives in ./12-classes-objects.js and is exported
+// through the chapter-content registry. This file is intentionally not a
+// chapter record and must not be imported by the runtime registry.
+
+export const chapter12Writer = Object.freeze({
+  source: './12-classes-objects.js',
   registry: false,
-};
+  legacy: true,
+});
+
+export default chapter12Writer;

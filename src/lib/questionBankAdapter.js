@@ -55,30 +55,30 @@ const letterToIndex = (letter) => {
 const stripOptionPrefix = (option) => {
   if (typeof option !== "string") return option;
   return option
-    .replace(/^[-*]\\s+[A-E]\\)\\s*/, "")
-    .replace(/^\\([A-E]\\)\\s*/, "")
-    .replace(/^[A-E]\\)\\s*/, "")
+    .replace(/^[-*]\s+[A-E]\)\s*/, "")
+    .replace(/^\([A-E]\)\s*/, "")
+    .replace(/^[A-E]\)\s*/, "")
     .trim();
 };
 
 function normalizeMcqs(mcqs) {
   if (!Array.isArray(mcqs) || mcqs.length === 0) return null;
-  return mcqs.map((q) => ({ id:q.id, question:q.question, options:Array.isArray(q.options) ? q.options.map(stripOptionPrefix) : [], answer:letterToIndex(q.correctAnswer ?? q.answer), explanation:q.explanation || "", difficulty:q.difficulty, marks:q.marks }));
+  return mcqs.map((q) => ({ id: q.id, question: q.question, options: Array.isArray(q.options) ? q.options.map(stripOptionPrefix) : [], answer: letterToIndex(q.correctAnswer ?? q.answer), explanation: q.explanation || "", difficulty: q.difficulty, marks: q.marks }));
 }
 
 function normalizeOutputQuestions(outputQuestions) {
   if (!Array.isArray(outputQuestions) || outputQuestions.length === 0) return null;
-  return outputQuestions.map((q) => ({ id:q.id, question:q.question || q.prompt, answer:q.correctAnswer !== undefined ? q.correctAnswer : q.answer, explanation:q.explanation || "", difficulty:q.difficulty, marks:q.marks, estimatedTime:q.estimatedTime }));
+  return outputQuestions.map((q) => ({ id: q.id, question: q.question || q.prompt, answer: q.correctAnswer !== undefined ? q.correctAnswer : q.answer, explanation: q.explanation || "", difficulty: q.difficulty, marks: q.marks, estimatedTime: q.estimatedTime }));
 }
 
 function normalizeProgrammingQuestions(programmingQuestions) {
   if (!Array.isArray(programmingQuestions) || programmingQuestions.length === 0) return null;
-  return programmingQuestions.map((q) => ({ id:q.id, question:q.problemStatement || q.question, solution:q.solution, explanation:q.solutionExplanation || q.explanation, output:q.output, difficulty:q.difficulty, marks:q.marks, input:q.input, constraints:q.constraints, logic:q.logic }));
+  return programmingQuestions.map((q) => ({ id: q.id, question: q.problemStatement || q.question, solution: q.solution, explanation: q.solutionExplanation || q.explanation, output: q.output, difficulty: q.difficulty, marks: q.marks, input: q.input, constraints: q.constraints, logic: q.logic }));
 }
 
 function normalizePracticeQuestions(practiceQuestions) {
   if (!Array.isArray(practiceQuestions) || practiceQuestions.length === 0) return null;
-  return practiceQuestions.map((q) => ({ id:q.id, question:q.question, answer:q.answer || "", type:q.type || "practice", difficulty:q.difficulty, marks:q.marks }));
+  return practiceQuestions.map((q) => ({ id: q.id, question: q.question, answer: q.answer || "", type: q.type || "practice", difficulty: q.difficulty, marks: q.marks }));
 }
 
 export function getQuestionBankChapter(slug) {

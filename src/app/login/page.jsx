@@ -6,14 +6,11 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import Button from "../components/ui/Button";
 import Container from "../components/ui/Container";
-import { validateHumanForm } from "../lib/security/inputSecurity";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [honeypot, setHoneypot] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [authMode, setAuthMode] = useState("email");
   const { login, loginWithGoogle, loading, error, clearError } = useAuth();
   const router = useRouter();
 
@@ -23,26 +20,16 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validation = validateHumanForm({ email, password, honeypot });
-    if (!validation.ok) return;
-
-    const result = await login(validation.email, password);
+    const result = await login(email, password);
     if (result.success) {
       router.push("/dashboard");
     }
   };
 
   const handleGoogleLogin = async () => {
-    clearError();
-    setAuthMode("google");
     const result = await loginWithGoogle();
-    if (result.success) {
-      router.push("/dashboard");
-    }
-    setAuthMode("email");
+    if (result.success) router.push("/dashboard");
   };
-
-  const busy = loading || authMode === "google";
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -60,22 +47,9 @@ export default function Login() {
             </p>
           </div>
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-              <label htmlFor="website" className="sr-only">Website</label>
-              <input
-                id="website"
-                name="website"
-                type="text"
-                tabIndex={-1}
-                autoComplete="off"
-                value={honeypot}
-                onChange={(e) => setHoneypot(e.target.value)}
-                className="hidden"
-                aria-hidden="true"
-              />
-
+            <form className="space-y-6" onSubmit={handleSubmit}>
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm" role="alert">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
                   {error}
                 </div>
               )}
@@ -88,10 +62,7 @@ export default function Login() {
                   id="email"
                   name="email"
                   type="email"
-                  inputMode="email"
                   autoComplete="email"
-                  autoCapitalize="none"
-                  spellCheck="false"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -135,25 +106,14 @@ export default function Login() {
                 </div>
               </div>
 
-              <div className="space-y-3">
-                <Button type="submit" variant="default" size="lg" className="w-full" disabled={busy}>
-                  {authMode === "email" && loading ? "Signing in..." : "Sign in"}
-                </Button>
-
-                <div className="relative"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div><div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-gray-500">or</span></div></div>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="lg"
-                  className="w-full"
-                  disabled={busy}
-                  onClick={handleGoogleLogin}
-                  aria-label="Continue with Google"
-                >
-                  {authMode === "google" ? "Connecting to Google..." : "Continue with Google"}
+              <div>
+                <Button type="submit" variant="default" size="lg" className="w-full" disabled={loading}>
+                  {loading ? "Signing in..." : "Sign in"}
                 </Button>
               </div>
+
+              <div className="relative"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div><div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-gray-500">or</span></div></div>
+              <Button type="button" variant="outline" size="lg" className="w-full" disabled={loading} onClick={handleGoogleLogin}>Continue with Google</Button>
             </form>
           </div>
         </div>

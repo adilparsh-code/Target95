@@ -23,7 +23,6 @@ const primaryLinks = [
     dropdown: [
       { href: "/study", label: "Subjects" },
       { href: "/Java", label: "Chapters" },
-      { href: "/isc", label: "ICSE & ISC" },
     ]
   },
   { 
@@ -53,7 +52,6 @@ const mobileLinks = [
   { href: "/", label: "Home", description: "Overview", icon: "🏠" },
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
   { href: "/study", label: "Study", description: "Chapters", icon: "📖" },
-  { href: "/isc", label: "ICSE & ISC", description: "Class IX-XII", icon: "🎓" },
   { href: "/question-bank", label: "Practice", description: "Questions", icon: "📘" },
   { href: "/mock-test", label: "Mock Tests", description: "Timed", icon: "📝" },
   { href: "/analytics", label: "Analytics", description: "Stats", icon: "📈" },

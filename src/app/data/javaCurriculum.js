@@ -1,9 +1,9 @@
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
-import { ISC_XI_ADVANCED_PRACTICE } from "@/app/data/iscXIAdvancedPracticePack";
 
 /**
- * Resolve the canonical syllabus metadata for a chapter. Falls back
- * gracefully so existing chapters are enriched, never broken.
+ * Resolve the canonical ICSE syllabus metadata (board, class, subject,
+ * syllabusUnit, topic) for a chapter. Falls back gracefully so existing
+ * chapters are enriched, never broken.
  */
 const metaFor = (chapter) =>
   resolveChapterMetadata(chapter.slug, {
@@ -23,7 +23,7 @@ const chapterDefinitions = [
   { slug: "strings", title: "Strings", difficulty: "Intermediate", estimatedTime: 65, description: "Manipulate text safely with String methods, comparison, and character operations.", topics: ["length", "equals", "String Methods"] },
   { slug: "classes-objects", title: "Classes & Objects", difficulty: "Advanced", estimatedTime: 75, description: "Model real-world entities using classes, objects, fields, and instance methods.", topics: ["Class", "Object", "Instance Members"] },
   { slug: "constructors", title: "Constructors", difficulty: "Advanced", estimatedTime: 55, description: "Initialize objects using default and parameterized constructors.", topics: ["Initialization", "this", "Overloading"] },
-  { slug: "inheritance", title: "Inheritance", difficulty: "Advanced", estimatedTime: 95, description: "Master inheritance structures, constructor chaining, protected access, overriding, arrays, methods, tracing and board-style programs.", topics: ["Single Inheritance", "Multilevel Inheritance", "Hierarchical Inheritance", "Constructor Chaining", "super() vs this()", "Method Overriding", "protected Access", "Inheritance + Methods", "Inheritance + Arrays"] },
+  { slug: "inheritance", title: "Inheritance", difficulty: "Advanced", estimatedTime: 70, description: "Reuse and extend behaviour through parent classes, child classes, and method overriding.", topics: ["extends", "Superclass", "Overriding"] },
 ];
 
 const questionMetadata = (chapter, type, index) => {
@@ -103,55 +103,13 @@ function createTheoryQuestions(chapter) {
   });
 }
 
-function normalizeAdvancedQuestion(chapter, item) {
-  const typeMap = {
-    classification: "theory",
-    comparison: "theory",
-    reasoning: "theory",
-    access: "theory",
-    methods: "theory",
-    arrays: "programming",
-    tracing: "output",
-    debugging: "programming",
-    output: "output",
-    programming: "programming",
-  };
-  const type = typeMap[item.type] ?? "theory";
-  const difficulty = item.difficulty === "foundation" ? "Easy" : item.difficulty === "board" ? "Medium" : item.difficulty === "challenge" ? "Hard" : "Hard";
-  const meta = metaFor(chapter);
-  return {
-    id: item.id,
-    subject: meta.subject,
-    board: meta.board,
-    class: meta.class,
-    syllabusUnit: meta.syllabusUnit,
-    chapter: chapter.slug,
-    chapterTitle: chapter.title,
-    topic: item.type,
-    difficulty,
-    type,
-    marks: type === "output" ? 2 : type === "theory" ? 3 : 5,
-    estimatedTime: type === "output" ? 3 : type === "theory" ? 5 : 10,
-    prompt: item.question,
-    modelAnswer: item.answer,
-    answer: item.answer,
-    explanation: item.explanation,
-  };
-}
-
 export const javaChapters = chapterDefinitions.map((chapter, index) => {
-  let questions;
-
-  if (chapter.slug === "inheritance") {
-    questions = ISC_XI_ADVANCED_PRACTICE.sections.find((section) => section.id === "inheritance").questions.map((item) => normalizeAdvancedQuestion(chapter, item));
-  } else {
-    questions = [
-      ...createTheoryQuestions(chapter),
-      ...createProgrammingQuestions(chapter),
-      ...createOutputQuestions(chapter),
-      ...createMcqs(chapter),
-    ];
-  }
+  const questions = [
+    ...createTheoryQuestions(chapter),      // Theory first
+    ...createProgrammingQuestions(chapter), // Then Programming Questions
+    ...createOutputQuestions(chapter),      // Then Output Questions
+    ...createMcqs(chapter),                 // Then MCQs
+  ];
 
   return { ...chapter, ...metaFor(chapter), id: index + 1, questions, questionCount: questions.length };
 });

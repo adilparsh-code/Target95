@@ -163,18 +163,11 @@ const chapter19 = {
   ],
   outputQuestions: [
     {
-      id: "CH19-OUT-001",
-      difficulty: "easy",
-      chapter: "OOP Concepts Overview",
-      chapterId: 19,
-      topic: "OOP Principles",
-      question: "Output?\nclass A { void show() { System.out.println(\"A\"); } }\nclass B extends A { void show() { System.out.println(\"B\"); } }\npublic class Test { public static void main(String[] args) { A a = new B(); a.show(); } }",
-      correctAnswer: "B",
-      explanation: "Runtime polymorphism: A reference, B object. B's show() is called.",
-      hint: "Which show() is called at runtime?",
-      estimatedTime: 15,
-      marks: 1,
-      tags: ["polymorphism", "overriding"]
+     { id: "CH19-OUT-001", 
+      difficulty: "easy", chapter: "OOP Concepts Overview", 
+      chapterId: 19, topic: "OOP Principles",
+      question: 'Output?\nclass A { void show() { System.out.println("A"); } }\n class B extends A { void show() { System.out.println("B"); } }\n public class Test { public static void main(String[] args) { A a = new B(); a.show(); } }', correctAnswer: "B", explanation: "Runtime polymorphism: A reference, B object. B's show() is called.", hint: "Which show() is called at runtime?", estimatedTime: 15, marks: 1,
+      tags: ["polymorphism", "overriding"] },
     },
     {
       id: "CH19-OUT-002",

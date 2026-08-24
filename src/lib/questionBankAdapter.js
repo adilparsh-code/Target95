@@ -55,9 +55,9 @@ const letterToIndex = (letter) => {
 const stripOptionPrefix = (option) => {
   if (typeof option !== "string") return option;
   return option
-    .replace(/^[-*]\\s+[A-E]\\)\\s*/, "")
-    .replace(/^\\([A-E]\\)\\s*/, "")
-    .replace(/^[A-E]\\)\\s*/, "")
+    .replace(/^[-*]\s+[A-E]\)\s*/, "")
+    .replace(/^\([A-E]\)\s*/, "")
+    .replace(/^[A-E]\)\s*/, "")
     .trim();
 };
 

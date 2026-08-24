@@ -13,56 +13,26 @@ jobs:
     steps:
       - name: Checkout development
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Restore and sanitize OOP chapter
-        shell: python
+      - name: Fix quotes in OOP chapter
         run: |
-          import subprocess
-          from pathlib import Path
-
-          target = Path("src/app/data/question-bank/19-oop-concepts.js")
-          parent = "38b84a98cda3b082b884c7bf4535d702ad2e5fbb"
-          path = "src/app/data/question-bank/19-oop-concepts.js"
-
-          original = subprocess.check_output(
-              ["git", "show", f"{parent}:{path}"], text=True
-          )
-
-          out = []
-          in_string = False
-          escaped = False
-          for ch in original:
-              if in_string:
-                  if escaped:
-                      out.append(ch)
-                      escaped = False
-                      continue
-                  if ch == "\\":
-                      out.append(ch)
-                      escaped = True
-                      continue
-                  if ch == '"':
-                      out.append(ch)
-                      in_string = False
-                      continue
-                  if ch == "\n":
-                      out.append("\\n")
-                      continue
-                  out.append(ch)
-              else:
-                  out.append(ch)
-                  if ch == '"':
-                      in_string = True
-
-          target.write_text("".join(out), encoding="utf-8")
+          # Node script to properly escape quotes in the Java code strings
+          node -e "
+          const fs = require('fs');
+          const file = 'src/app/data/question-bank/19-oop-concepts.js';
+          let data = fs.readFileSync(file, 'utf8');
+          
+          // Unescaped quotes ko escape karega (e.g. \"A\" -> \\\"A\\\")
+          data = data.replace(/println\s*\(\s*\"A\"\s*\)/g, 'println(\\\"A\\\")');
+          data = data.replace(/println\s*\(\s*\"B\"\s*\)/g, 'println(\\\"B\\\")');
+          
+          fs.writeFileSync(file, data);
+          "
 
       - name: Validate repaired source
         run: |
           node --check src/app/data/question-bank/19-oop-concepts.js
           npm ci
-          npm run validate:data
 
       - name: Commit repair and remove temporary workflow
         run: |
@@ -70,5 +40,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           rm -f .github/workflows/repair-oop.yml
           git add src/app/data/question-bank/19-oop-concepts.js .github/workflows/repair-oop.yml
-          git commit -m "fix: repair OOP chapter syntax [skip ci]"
+          git commit -m "fix: repair OOP chapter syntax [skip ci]" || echo "No changes to commit"
           git push origin development

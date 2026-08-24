@@ -1,9 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import useStudentSettings from "@/app/hooks/useStudentSettings";
-import useDarkMode from "@/app/hooks/useDarkMode";
 import Button from "../ui/Button";
 import Card from "../ui/Card";
 import ToggleItem from "../admin/settings/ToggleItem";
@@ -12,13 +12,36 @@ import LoadingSkeleton from "../admin/settings/LoadingSkeleton";
 export default function StudentSettings() {
   const { settings, ready, updateSetting } = useStudentSettings();
   const { logout } = useAuth();
-  const { setTheme } = useDarkMode();
+  const [darkMode, setDarkMode] = useState(false);
 
-  const handleThemeChange = (theme) => {
-    updateSetting("theme", theme);
-    setTheme(theme);
-  };
+  // Sync with existing dark mode implementation
+  useEffect(() => {
+    const savedDarkMode = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setDarkMode(savedDarkMode === 'true' || (!savedDarkMode && prefersDark));
 
+    // Handle theme changes
+    if (settings.theme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else if (settings.theme === 'light') {
+      setDarkMode(false);
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    } else if (settings.theme === 'system') {
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setDarkMode(systemPrefersDark);
+      if (systemPrefersDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.removeItem('darkMode');
+    }
+  }, [settings.theme]);
+
+  // Font size CSS classes for preview
   const fontSizes = {
     small: "text-sm",
     medium: "text-base",
@@ -31,8 +54,8 @@ export default function StudentSettings() {
       <div className="mx-auto w-full max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
         <Card className="p-6 sm:p-8 mb-6">
           <div className="h-4 bg-gray-200 rounded w-1/4 animate-pulse" />
-          <div className="h-8 bg-gray-200 rounded w-2/3 mt-2" />
-          <div className="h-3 bg-gray-200 rounded w-1/2 mt-2" />
+          <div className="h-8 bg-gray-200 rounded w-2/3 mt-2 animate-pulse" />
+          <div className="h-3 bg-gray-200 rounded w-1/2 mt-2 animate-pulse" />
         </Card>
         <LoadingSkeleton rows={8} type="card" />
       </div>
@@ -46,8 +69,9 @@ export default function StudentSettings() {
         <h1 className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">Personalise your learning space</h1>
         <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Your preferences are stored locally and synced to your profile.</p>
       </Card>
-
-      <div className="mt-6 grid gap-6">
+      
+      <div className="mt-6 grid gap-6 md:grid-cols-1">
+        {/* Profile Section */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Profile</h2>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Manage your name, board, class, and avatar.</p>
@@ -56,16 +80,17 @@ export default function StudentSettings() {
           </Link>
         </Card>
 
+        {/* Appearance Settings */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Appearance</h2>
           <div className="mt-4 grid gap-6 sm:grid-cols-2">
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Theme
-                <select
-                  value={settings.theme || "system"}
-                  disabled={!ready}
-                  onChange={(event) => handleThemeChange(event.target.value)}
+                <select 
+                  value={settings.theme} 
+                  disabled={!ready} 
+                  onChange={(event) => updateSetting("theme", event.target.value)} 
                   className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none"
                 >
                   <option value="system">System default</option>
@@ -77,10 +102,10 @@ export default function StudentSettings() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Font Size
-                <select
-                  value={settings.fontSize || "medium"}
-                  disabled={!ready}
-                  onChange={(event) => updateSetting("fontSize", event.target.value)}
+                <select 
+                  value={settings.fontSize || "medium"} 
+                  disabled={!ready} 
+                  onChange={(event) => updateSetting("fontSize", event.target.value)} 
                   className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none"
                 >
                   <option value="small">Small</option>
@@ -93,12 +118,18 @@ export default function StudentSettings() {
           </div>
         </Card>
 
+        {/* Language Settings */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Language</h2>
           <div className="mt-4">
             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
               Interface Language
-              <select value={settings.language || "en"} disabled={!ready} onChange={(event) => updateSetting("language", event.target.value)} className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white sm:max-w-xs focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none">
+              <select 
+                value={settings.language || "en"} 
+                disabled={!ready} 
+                onChange={(event) => updateSetting("language", event.target.value)} 
+                className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white sm:max-w-xs focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none"
+              >
                 <option value="en">English</option>
                 <option value="hi">Hindi</option>
                 <option value="es">Spanish</option>
@@ -108,16 +139,42 @@ export default function StudentSettings() {
           </div>
         </Card>
 
+        {/* Notification Preferences */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Notifications</h2>
           <div className="mt-4 space-y-2">
-            <ToggleItem label="Learning Reminders" description="Get reminders to study daily and maintain your streak" enabled={settings.learningReminders ?? true} onChange={(value) => updateSetting("learningReminders", value)} color="blue" />
-            <ToggleItem label="Mock Test Alerts" description="Receive notifications about upcoming and new mock tests" enabled={settings.mockTestAlerts ?? true} onChange={(value) => updateSetting("mockTestAlerts", value)} color="blue" />
-            <ToggleItem label="Achievement Updates" description="Get notified when you unlock new achievements and badges" enabled={settings.achievementUpdates ?? true} onChange={(value) => updateSetting("achievementUpdates", value)} color="blue" />
-            <ToggleItem label="Weekly Reports" description="Receive a weekly summary of your learning progress" enabled={settings.weeklyReports ?? true} onChange={(value) => updateSetting("weeklyReports", value)} color="blue" />
+            <ToggleItem 
+              label="Learning Reminders" 
+              description="Get reminders to study daily and maintain your streak" 
+              enabled={settings.learningReminders ?? true}
+              onChange={(value) => updateSetting("learningReminders", value)}
+              color="blue"
+            />
+            <ToggleItem 
+              label="Mock Test Alerts" 
+              description="Receive notifications about upcoming and new mock tests" 
+              enabled={settings.mockTestAlerts ?? true}
+              onChange={(value) => updateSetting("mockTestAlerts", value)}
+              color="blue"
+            />
+            <ToggleItem 
+              label="Achievement Updates" 
+              description="Get notified when you unlock new achievements and badges" 
+              enabled={settings.achievementUpdates ?? true}
+              onChange={(value) => updateSetting("achievementUpdates", value)}
+              color="blue"
+            />
+            <ToggleItem 
+              label="Weekly Reports" 
+              description="Receive a weekly summary of your learning progress" 
+              enabled={settings.weeklyReports ?? true}
+              onChange={(value) => updateSetting("weeklyReports", value)}
+              color="blue"
+            />
           </div>
         </Card>
 
+        {/* Study Goal Settings */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Study Goals</h2>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Set your daily learning goals to stay on track</p>
@@ -125,7 +182,12 @@ export default function StudentSettings() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Daily Study Time (hours)
-                <select value={settings.dailyStudyGoal || 2} disabled={!ready} onChange={(event) => updateSetting("dailyStudyGoal", parseInt(event.target.value, 10))} className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none">
+                <select 
+                  value={settings.dailyStudyGoal || 2} 
+                  disabled={!ready} 
+                  onChange={(event) => updateSetting("dailyStudyGoal", parseInt(event.target.value))} 
+                  className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none"
+                >
                   <option value="1">1 hour</option>
                   <option value="2">2 hours</option>
                   <option value="3">3 hours</option>
@@ -136,7 +198,12 @@ export default function StudentSettings() {
             <div>
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Daily Questions Goal
-                <select value={settings.dailyQuestionsGoal || 20} disabled={!ready} onChange={(event) => updateSetting("dailyQuestionsGoal", parseInt(event.target.value, 10))} className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none">
+                <select 
+                  value={settings.dailyQuestionsGoal || 20} 
+                  disabled={!ready} 
+                  onChange={(event) => updateSetting("dailyQuestionsGoal", parseInt(event.target.value))} 
+                  className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none"
+                >
                   <option value="10">10 questions</option>
                   <option value="20">20 questions</option>
                   <option value="30">30 questions</option>
@@ -147,21 +214,46 @@ export default function StudentSettings() {
           </div>
         </Card>
 
+        {/* Privacy Settings */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Privacy</h2>
           <div className="mt-4 space-y-2">
-            <ToggleItem label="Private Profile" description="Keep your profile details private from other students" enabled={settings.privateProfile ?? true} onChange={(value) => updateSetting("privateProfile", value)} color="blue" />
-            <ToggleItem label="Show Activity Status" description="Let teachers see when you were last active" enabled={settings.showActivityStatus ?? false} onChange={(value) => updateSetting("showActivityStatus", value)} color="blue" />
-            <ToggleItem label="Share Progress Reports" description="Allow your progress reports to be shared with parents/guardians" enabled={settings.shareProgressReports ?? false} onChange={(value) => updateSetting("shareProgressReports", value)} color="blue" />
+            <ToggleItem 
+              label="Private Profile" 
+              description="Keep your profile details private from other students" 
+              enabled={settings.privateProfile ?? true}
+              onChange={(value) => updateSetting("privateProfile", value)}
+              color="blue"
+            />
+            <ToggleItem 
+              label="Show Activity Status" 
+              description="Let teachers see when you were last active" 
+              enabled={settings.showActivityStatus ?? false}
+              onChange={(value) => updateSetting("showActivityStatus", value)}
+              color="blue"
+            />
+            <ToggleItem 
+              label="Share Progress Reports" 
+              description="Allow your progress reports to be shared with parents/guardians" 
+              enabled={settings.shareProgressReports ?? false}
+              onChange={(value) => updateSetting("shareProgressReports", value)}
+              color="blue"
+            />
           </div>
         </Card>
 
+        {/* AI Preferences */}
         <Card className="p-6 rounded-3xl">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">AI preferences</h2>
           <div className="mt-4">
             <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
               Tutor explanation style
-              <select value={settings.aiDetail} disabled={!ready} onChange={(event) => updateSetting("aiDetail", event.target.value)} className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white sm:max-w-xs focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none">
+              <select 
+                value={settings.aiDetail} 
+                disabled={!ready} 
+                onChange={(event) => updateSetting("aiDetail", event.target.value)} 
+                className="mt-2 w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-4 py-3 font-normal text-gray-900 dark:text-white sm:max-w-xs focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 focus:outline-none"
+              >
                 <option value="guided">Guided steps</option>
                 <option value="concise">Concise</option>
                 <option value="detailed">Detailed</option>
@@ -170,10 +262,13 @@ export default function StudentSettings() {
           </div>
         </Card>
 
+        {/* Account Section */}
         <Card className="p-6 rounded-3xl border-red-200 dark:border-red-900">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">Account</h2>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Sign out securely on this device.</p>
-          <Button variant="outline" onClick={logout} className="mt-4 border-red-300 dark:border-red-800 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">Log out</Button>
+          <Button variant="outline" onClick={logout} className="mt-4 border-red-300 dark:border-red-800 text-red-700 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+            Log out
+          </Button>
         </Card>
       </div>
     </div>

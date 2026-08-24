@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import RedesignedHero from "./components/RedesignedHero";
 import Stats from "./components/Stats";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
@@ -13,69 +13,35 @@ import BoardSupport from "./components/BoardSupport";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import { usePersonalization } from "./hooks/usePersonalization";
 
-// Dynamic imports for below-the-fold components to reduce initial bundle
 import dynamic from "next/dynamic";
 
-const FAQ = dynamic(() => import("./components/FAQ"), { 
+const FAQ = dynamic(() => import("./components/FAQ"), {
   ssr: true,
   loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
 });
 
-const Newsletter = dynamic(() => import("./components/Newsletter"), { 
+const Newsletter = dynamic(() => import("./components/Newsletter"), {
   ssr: true,
   loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
 });
 
-// Board → Class → Subjects mapping based on requirement
 export const boardClassSubjectMap = {
   cisce: {
     title: "CISCE",
     classes: [
-      {
-        id: "icse-class-9",
-        title: "ICSE Class 9",
-        subjects: ["java"]
-      },
-      {
-        id: "icse-class-10",
-        title: "ICSE Class 10",
-        subjects: ["java"] // Computer Applications
-      },
-      {
-        id: "isc-class-11",
-        title: "ISC Class 11",
-        subjects: ["java"]
-      },
-      {
-        id: "isc-class-12",
-        title: "ISC Class 12",
-        subjects: ["java"] // Computer Science
-      }
+      { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java"] },
+      { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java"] },
+      { id: "isc-class-11", title: "ISC Class 11", subjects: ["java"] },
+      { id: "isc-class-12", title: "ISC Class 12", subjects: ["java"] }
     ]
   },
   cbse: {
     title: "CBSE",
     classes: [
-      {
-        id: "class-9",
-        title: "Class 9",
-        subjects: ["python"]
-      },
-      {
-        id: "class-10",
-        title: "Class 10",
-        subjects: ["python"]
-      },
-      {
-        id: "class-11",
-        title: "Class 11",
-        subjects: ["python"] // Computer Science (Python)
-      },
-      {
-        id: "class-12",
-        title: "Class 12",
-        subjects: ["python"]
-      }
+      { id: "class-9", title: "Class 9", subjects: ["python"] },
+      { id: "class-10", title: "Class 10", subjects: ["python"] },
+      { id: "class-11", title: "Class 11", subjects: ["python"] },
+      { id: "class-12", title: "Class 12", subjects: ["python"] }
     ]
   }
 };
@@ -89,14 +55,12 @@ export default function ClientHome() {
 
   const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, clearPersonalization, isHydrated } = usePersonalization();
 
-  // Memoize personalization object to prevent unnecessary re-renders
   const personalization = useMemo(() => ({
     board,
     class: selectedClassData,
     subject
   }), [board, selectedClassData, subject]);
 
-  // Auto-select from personalization on mount
   useEffect(() => {
     if (isHydrated && board && selectedClassData && subject) {
       setSelectedBoard(board);
@@ -143,9 +107,8 @@ export default function ClientHome() {
   };
 
   const handleStartLearning = () => {
-    // Navigate to the study page for the user's selected subject
     if (subject) {
-      window.location.href = '/study';
+      window.location.href = "/study";
     }
   };
 
@@ -153,8 +116,8 @@ export default function ClientHome() {
     <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <ErrorBoundary>
-        <Hero 
-          onBoardSelect={handleBoardSelect} 
+        <RedesignedHero
+          onBoardSelect={handleBoardSelect}
           onBackToBoards={handleBackToBoards}
           onBackToClasses={handleBackToClasses}
           onClassSelect={handleClassSelect}

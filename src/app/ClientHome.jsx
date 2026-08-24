@@ -12,72 +12,30 @@ import AIWorkflow from "./components/AIWorkflow";
 import BoardSupport from "./components/BoardSupport";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import { usePersonalization } from "./hooks/usePersonalization";
-
-// Dynamic imports for below-the-fold components to reduce initial bundle
 import dynamic from "next/dynamic";
 
-const FAQ = dynamic(() => import("./components/FAQ"), { 
-  ssr: true,
-  loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
-});
+const FAQ = dynamic(() => import("./components/FAQ"), { ssr: true, loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" /> });
+const Newsletter = dynamic(() => import("./components/Newsletter"), { ssr: true, loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" /> });
 
-const Newsletter = dynamic(() => import("./components/Newsletter"), { 
-  ssr: true,
-  loading: () => <div className="py-12 animate-pulse bg-gray-50 rounded-2xl" />
-});
-
-// Board → Class → Subjects mapping based on requirement
 export const boardClassSubjectMap = {
   cisce: {
     title: "CISCE",
     classes: [
-      {
-        id: "icse-class-9",
-        title: "ICSE Class 9",
-        subjects: ["java"]
-      },
-      {
-        id: "icse-class-10",
-        title: "ICSE Class 10",
-        subjects: ["java"] // Computer Applications
-      },
-      {
-        id: "isc-class-11",
-        title: "ISC Class 11",
-        subjects: ["java"]
-      },
-      {
-        id: "isc-class-12",
-        title: "ISC Class 12",
-        subjects: ["java"] // Computer Science
-      }
-    ]
+      { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java", "robotics-ai"] },
+      { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java", "robotics-ai"] },
+      { id: "isc-class-11", title: "ISC Class 11", subjects: ["java"] },
+      { id: "isc-class-12", title: "ISC Class 12", subjects: ["java"] },
+    ],
   },
   cbse: {
     title: "CBSE",
     classes: [
-      {
-        id: "class-9",
-        title: "Class 9",
-        subjects: ["python"]
-      },
-      {
-        id: "class-10",
-        title: "Class 10",
-        subjects: ["python"]
-      },
-      {
-        id: "class-11",
-        title: "Class 11",
-        subjects: ["python"] // Computer Science (Python)
-      },
-      {
-        id: "class-12",
-        title: "Class 12",
-        subjects: ["python"]
-      }
-    ]
-  }
+      { id: "cbse-class-9", title: "CBSE Class 9", subjects: ["python"] },
+      { id: "cbse-class-10", title: "CBSE Class 10", subjects: ["python"] },
+      { id: "cbse-class-11", title: "CBSE Class 11", subjects: ["python"] },
+      { id: "cbse-class-12", title: "CBSE Class 12", subjects: ["python"] },
+    ],
+  },
 };
 
 export default function ClientHome() {
@@ -89,28 +47,40 @@ export default function ClientHome() {
 
   const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, clearPersonalization, isHydrated } = usePersonalization();
 
-  // Memoize personalization object to prevent unnecessary re-renders
-  const personalization = useMemo(() => ({
-    board,
-    class: selectedClassData,
-    subject
-  }), [board, selectedClassData, subject]);
+  const personalization = useMemo(() => ({ board, class: selectedClassData, subject }), [board, selectedClassData, subject]);
 
-  // Auto-select from personalization on mount
   useEffect(() => {
-    if (isHydrated && board && selectedClassData && subject) {
+    if (!isHydrated) return;
+    if (board && selectedClassData && subject) {
       setSelectedBoard(board);
       setSelectedClass(selectedClassData);
-      setShowSubjects(true);
+      setShowSubjects(false);
+      setShowClasses(false);
       setShowStartLearning(true);
-    } else if (isHydrated && board && !selectedClassData) {
+    } else if (board && selectedClassData) {
       setSelectedBoard(board);
+      setSelectedClass(selectedClassData);
+      setShowClasses(false);
+      setShowSubjects(true);
+      setShowStartLearning(false);
+    } else if (board) {
+      setSelectedBoard(board);
+      setSelectedClass(null);
       setShowClasses(true);
+      setShowSubjects(false);
+      setShowStartLearning(false);
+    } else {
+      setSelectedBoard(null);
+      setSelectedClass(null);
+      setShowClasses(false);
+      setShowSubjects(false);
+      setShowStartLearning(false);
     }
   }, [isHydrated, board, selectedClassData, subject]);
 
   const handleBoardSelect = (boardId) => {
     setSelectedBoard(boardId);
+    setSelectedClass(null);
     setBoard(boardId);
     setShowClasses(true);
     setShowSubjects(false);
@@ -122,16 +92,22 @@ export default function ClientHome() {
     setClass(classData);
     setShowClasses(false);
     setShowSubjects(true);
+    setShowStartLearning(false);
+  };
+
+  const handleSubjectSelect = (subjectId) => {
+    setSubject(subjectId);
+    setShowSubjects(false);
     setShowStartLearning(true);
   };
 
   const handleBackToBoards = () => {
+    clearPersonalization();
     setSelectedBoard(null);
     setSelectedClass(null);
     setShowClasses(false);
     setShowSubjects(false);
     setShowStartLearning(false);
-    clearPersonalization();
   };
 
   const handleBackToClasses = () => {
@@ -143,28 +119,28 @@ export default function ClientHome() {
   };
 
   const handleStartLearning = () => {
-    // Navigate to the study page for the user's selected subject
-    if (subject) {
-      window.location.href = '/study';
-    }
+    if (!subject) return;
+    const target = subject === "java" ? "/Java" : subject === "python" ? "/python" : "/icse/robotics-ai";
+    window.location.assign(target);
   };
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <ErrorBoundary>
-        <Hero 
-          onBoardSelect={handleBoardSelect} 
+        <Hero
+          onBoardSelect={handleBoardSelect}
           onBackToBoards={handleBackToBoards}
           onBackToClasses={handleBackToClasses}
           onClassSelect={handleClassSelect}
+          onSubjectSelect={handleSubjectSelect}
           showSubjects={showSubjects}
           showClasses={showClasses}
           selectedBoard={selectedBoard}
           selectedClass={selectedClass}
           showStartLearning={showStartLearning}
           onStartLearning={handleStartLearning}
-          personalization={{ board, class: selectedClassData, subject }}
+          personalization={personalization}
         />
         <Stats />
         <WhyTarget95 />

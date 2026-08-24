@@ -64,11 +64,11 @@ jobs:
           npm ci
           npm run validate:data
 
-      - name: Commit repair and remove temporary workflow
+      - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm -f .github/workflows/repair-oop.yml
-          git add src/app/data/question-bank/19-oop-concepts.js .github/workflows/repair-oop.yml
-          git commit -m "fix: repair OOP chapter syntax [skip ci]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "fix: auto-update files [skip ci]" || echo "No changes to commit"
+          git pull origin development --rebase
           git push origin development

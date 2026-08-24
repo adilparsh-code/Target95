@@ -2,7 +2,6 @@
 const nextConfig = {
   reactCompiler: true,
   output: 'standalone',
-  cacheComponents: true,
   images: {
     remotePatterns: [
       {

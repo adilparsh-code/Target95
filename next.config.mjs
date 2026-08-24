@@ -2,7 +2,8 @@
 const nextConfig = {
   reactCompiler: true,
   output: 'standalone',
-  cacheComponents: true,
+  // Keep development HMR stable. cacheComponents is experimental and can
+  // interfere with the dev server's webpack hot-update lifecycle.
   images: {
     remotePatterns: [
       {

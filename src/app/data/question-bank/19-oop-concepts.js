@@ -34,7 +34,7 @@ const chapter19 = {
   debuggingQuestions: [],
   caseBasedQuestions: [],
   vivaQuestions: [
-    { id: "CH19-VIV-001", difficulty: "easy", chapter: "OOP Concepts Overview", chapterId: 19, topic: "OOP Principles", question: "Name the four pillars of OOP.", correctAnswer: "Encapsulation, Inheritance, Polymorphism and Abstraction.", hint: "Recall the four pillars.", estimatedTime: 15, marks: 1, tags: ["oop"] }
+   { id: "CH19-OUT-001", difficulty: "easy", chapter: "OOP Concepts Overview", chapterId: 19, topic: "OOP Principles", question: "Output?\nclass A { void show() { System.out.println(\"A\"); } }\nclass B extends A { void show() { System.out.println(\"B\"); } }\npublic class Test { public static void main(String[] args) { A a = new B(); a.show(); } }", correctAnswer: "B", explanation: "Runtime polymorphism: A reference, B object. B's show() is called.", hint: "Which show() is called at runtime?", estimatedTime: 15, marks: 1, tags: ["polymorphism", "overriding"] },
   ]
 };
 

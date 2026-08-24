@@ -120,6 +120,10 @@ export default function ClientHome() {
 
   const handleStartLearning = () => {
     if (!subject) return;
+    if (selectedClass?.id === "isc-class-12") {
+      window.location.assign("/isc/class-xii");
+      return;
+    }
     const target = subject === "java" ? "/Java" : subject === "python" ? "/python" : "/icse/robotics-ai";
     window.location.assign(target);
   };

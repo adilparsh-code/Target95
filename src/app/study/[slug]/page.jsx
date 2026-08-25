@@ -4,7 +4,7 @@ import StudyChapter from "../../components/study/StudyChapter";
 import { notFound } from "next/navigation";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { getMarkdownChapterContent } from "../../../lib/markdownContent";
-import { getQuestionBankChapter } from "../../../lib/questionBankAdapter";
+import getQuestionBankChapter from "../../../lib/questionBankAdapter";
 
 export async function generateStaticParams() {
   const chapters = getStudyChapters();

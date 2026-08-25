@@ -15,7 +15,7 @@ export const iscXIIBooleanAlgebraStudyData = {
   // ==========================================
   propositionalLogic: {
     title: "Propositional Logic & Well-Formed Formulae (WFF)",
-    theory: `A **proposition** (or statement) is a declarative sentence that is either **True (1)** or **False (0)**, but never both simultaneously. 
+    theory: `A **proposition** (or statement) is a declarative sentence that is either **True (1)** or **False (0)**, but never both simultaneously.
 
 * **Well-Formed Formula (WFF):** An expression composed of propositional variables (p, q, r...), logical connectives, and parentheses that follows strict syntactic grammar.
 * **Truth Values:** Denoted as T/F or binary 1/0.

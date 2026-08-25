@@ -5,7 +5,7 @@ import AnimatedCounter from "./AnimatedCounter";
 
 const stats = [
   {
-    end: 47386,
+    end: 0,
     suffix: "+",
     title: "Students Learning",
     icon: "🎓",
@@ -23,7 +23,7 @@ const stats = [
     icon: "📚",
   },
   {
-    end: 2156,
+    end: 0,
     suffix: "+",
     title: "Mock Tests Taken",
     icon: "🏆",

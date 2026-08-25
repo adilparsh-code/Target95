@@ -2,6 +2,8 @@
 const nextConfig = {
   reactCompiler: true,
   output: 'standalone',
+  // Keep the stable Next.js configuration. Experimental cacheComponents was
+  // previously disabled because it interfered with stable development/build behavior.
   images: {
     remotePatterns: [
       {

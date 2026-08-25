@@ -12,20 +12,34 @@ const metaFor = (chapter) =>
   });
 
 const chapterDefinitions = [
-  { slug: "introduction-to-java", title: "Introduction to Java", difficulty: "Beginner", estimatedTime: 45, description: "Understand Java, the JVM, program structure, and how Java code is compiled and executed.", topics: ["JVM", "Program Structure", "Compilation"] },
-  { slug: "data-types-variables", title: "Data Types & Variables", difficulty: "Beginner", estimatedTime: 60, description: "Work confidently with primitive data types, variables, constants, and type conversion.", topics: ["Primitive Types", "Variables", "Type Casting"] },
-  { slug: "operators", title: "Operators", difficulty: "Beginner", estimatedTime: 50, description: "Apply arithmetic, relational, logical, assignment, and conditional operators in Java.", topics: ["Arithmetic", "Comparison", "Logic"] },
-  { slug: "input-in-java", title: "Input in Java", difficulty: "Beginner", estimatedTime: 45, description: "Read and validate keyboard input using Scanner for practical Java programs.", topics: ["Scanner", "nextInt", "nextLine"] },
-  { slug: "conditional-statements", title: "Conditional Statements", difficulty: "Intermediate", estimatedTime: 65, description: "Control program flow using if, else-if, nested conditions, and switch statements.", topics: ["if-else", "switch", "Nested Conditions"] },
-  { slug: "iterative-statements", title: "Iterative Statements", difficulty: "Intermediate", estimatedTime: 75, description: "Use for, while, and do-while loops to solve repeated-processing problems.", topics: ["for Loop", "while Loop", "do-while"] },
-  { slug: "methods", title: "Methods", difficulty: "Intermediate", estimatedTime: 60, description: "Create reusable methods with parameters, return values, and method overloading.", topics: ["Parameters", "Return Values", "Overloading"] },
-  { slug: "arrays", title: "Arrays", difficulty: "Intermediate", estimatedTime: 80, description: "Store, access, traverse, and process one-dimensional and two-dimensional arrays.", topics: ["Indexing", "Traversal", "2D Arrays"] },
-  { slug: "strings", title: "Strings", difficulty: "Intermediate", estimatedTime: 65, description: "Manipulate text safely with String methods, comparison, and character operations.", topics: ["length", "equals", "String Methods"] },
-  { slug: "classes-objects", title: "Classes & Objects", difficulty: "Advanced", estimatedTime: 75, description: "Model real-world entities using classes, objects, fields, and instance methods.", topics: ["Class", "Object", "Instance Members"] },
-  { slug: "constructors", title: "Constructors", difficulty: "Advanced", estimatedTime: 55, description: "Initialize objects using default and parameterized constructors.", topics: ["Initialization", "this", "Overloading"] },
-  { slug: "inheritance", title: "Inheritance", difficulty: "Advanced", estimatedTime: 70, description: "Reuse and extend behaviour through parent classes, child classes, and method overriding.", topics: ["extends", "Superclass", "Overriding"] },
-];
+  { slug: "introduction-to-java", title: "Introduction to Java", difficulty: "Beginner", estimatedTime: 45, description: "Understand Java, the JVM, program structure, and execution.", topics: ["JVM", "Program Structure", "Compilation"] },
+  { slug: "data-types-variables", title: "Data Types & Variables", difficulty: "Beginner", estimatedTime: 60, description: "Primitive types, variables, constants, and type conversion.", topics: ["Primitive Types", "Variables", "Type Casting"] },
+  { slug: "operators", title: "Operators", difficulty: "Beginner", estimatedTime: 50, description: "Arithmetic, relational, logical, assignment, and conditional operators.", topics: ["Arithmetic", "Comparison", "Logic"] },
+  { slug: "input-in-java", title: "Input in Java", difficulty: "Beginner", estimatedTime: 45, description: "Keyboard input using Scanner for Java programs.", topics: ["Scanner", "nextInt", "nextLine"] },
+  
+  // Granular Conditionals (matching chapter-content files)
+  { slug: "if", title: "If Statement", difficulty: "Intermediate", estimatedTime: 30, description: "Simple decision making using single if blocks.", topics: ["if Syntax", "Boolean Conditions"] },
+  { slug: "if-else", title: "If-Else Statement", difficulty: "Intermediate", estimatedTime: 35, description: "Two-way decision paths using if-else.", topics: ["if-else Syntax", "Flow of Control"] },
+  { slug: "nested-if", title: "Nested If", difficulty: "Intermediate", estimatedTime: 40, description: "Hierarchical conditions using nested if statements.", topics: ["Nested Conditions", "Logic Cascades"] },
+  { slug: "switch", title: "Switch Statement", difficulty: "Intermediate", estimatedTime: 40, description: "Multi-way branching using switch, case, and break.", topics: ["switch", "case", "break", "default"] },
+  
+  // Granular Iteration (matching chapter-content files)
+  { slug: "for-loop", title: "For Loop", difficulty: "Intermediate", estimatedTime: 40, description: "Counter-controlled iteration using for loops.", topics: ["Initialization", "Condition", "Update"] },
+  { slug: "while-loop", title: "While Loop", difficulty: "Intermediate", estimatedTime: 35, description: "Pre-tested condition iteration using while loops.", topics: ["Entry-controlled", "Loop Conditions"] },
+  { slug: "do-while-loop", title: "Do-While Loop", difficulty: "Intermediate", estimatedTime: 35, description: "Post-tested condition iteration using do-while loops.", topics: ["Exit-controlled", "Post-condition Execution"] },
 
+  { slug: "methods", title: "Methods", difficulty: "Intermediate", estimatedTime: 60, description: "Reusable methods with parameters and return values.", topics: ["Parameters", "Return Values", "Overloading"] },
+  
+  // Granular Arrays (matching chapter-content files)
+  { slug: "arrays-1d", title: "1D Arrays", difficulty: "Intermediate", estimatedTime: 60, description: "Single-dimensional array indexing, traversal, and processing.", topics: ["Indexing", "Traversal", "Array Length"] },
+  { slug: "arrays-2d", title: "2D Arrays", difficulty: "Advanced", estimatedTime: 70, description: "Multi-dimensional array grid operations and matrix manipulation.", topics: ["Row-Column Indexing", "Matrix Traversal", "Nested Loops"] },
+
+  { slug: "strings", title: "Strings", difficulty: "Intermediate", estimatedTime: 65, description: "String methods, comparison, and character operations.", topics: ["length", "equals", "String Methods"] },
+  { slug: "classes-objects", title: "Classes & Objects", difficulty: "Advanced", estimatedTime: 75, description: "Classes, objects, fields, and instance methods.", topics: ["Class", "Object", "Instance Members"] },
+  { slug: "encapsulation", title: "Encapsulation", difficulty: "Advanced", estimatedTime: 60, description: "Data hiding, access specifiers, getters, and setters.", topics: ["Access Specifiers", "Getters and Setters", "Data Hiding"] },
+  { slug: "constructors", title: "Constructors", difficulty: "Advanced", estimatedTime: 55, description: "Default and parameterized constructors.", topics: ["Initialization", "this", "Overloading"] },
+  { slug: "inheritance", title: "Inheritance", difficulty: "Advanced", estimatedTime: 70, description: "Reusing behavior via superclasses and method overriding.", topics: ["extends", "Superclass", "Overriding"] },
+];
 const questionMetadata = (chapter, type, index) => {
   const meta = metaFor(chapter);
   return {

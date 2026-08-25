@@ -1,49 +1,28 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import StudyChapter from "@/components/study/StudyChapter";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import StudyChapter from "../../components/study/StudyChapter";
 import { notFound } from "next/navigation";
-import { getStudyChapterBySlug, getStudyChapters } from "@/lib/studyCenter";
-import { getMarkdownChapterContent } from "@/lib/markdownContent";
-import * as questionBankModule from "@/lib/questionBankAdapter";
-
-// Named ya Default dono export ko safely handle karega
-const getQuestionBankChapter =
-  questionBankModule.getQuestionBankChapter ||
-  questionBankModule.default ||
-  (() => null);
+import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
+import { getMarkdownChapterContent } from "../../../lib/markdownContent";
+import getQuestionBankChapter from "../../../lib/questionBankAdapter";
 
 export async function generateStaticParams() {
-  try {
-    const chapters = getStudyChapters() || [];
-    return chapters
-      .filter((chapter) => chapter && chapter.slug)
-      .map((chapter) => ({
-        slug: String(chapter.slug),
-      }));
-  } catch (err) {
-    console.error("Error in generateStaticParams:", err);
-    return [];
-  }
+  const chapters = getStudyChapters() || [];
+  return chapters
+    .filter((chapter) => chapter && chapter.slug)
+    .map((chapter) => ({ slug: String(chapter.slug) }));
 }
 
 export default async function StudyChapterPage({ params }) {
-  const resolvedParams = await params;
-  const slug = resolvedParams?.slug;
-
-  if (!slug) {
-    notFound();
-  }
-
+  const { slug } = await params;
   const chapter = getStudyChapterBySlug(slug);
-  if (!chapter) {
-    notFound();
-  }
 
-  // Canonical Introduction to Java academic source mapping
+  if (!chapter) notFound();
+
   const markdownSlug = slug === "introduction-to-java" ? "introduction" : slug;
   const markdownChapter = getMarkdownChapterContent(markdownSlug);
-  const questionBankChapter = typeof getQuestionBankChapter === "function" 
-    ? getQuestionBankChapter(slug) 
+  const questionBankChapter = typeof getQuestionBankChapter === "function"
+    ? getQuestionBankChapter(slug)
     : null;
 
   return (

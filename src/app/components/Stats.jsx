@@ -2,6 +2,7 @@
 
 import Container from "./ui/Container";
 import AnimatedCounter from "./AnimatedCounter";
+import { javaQuestions, javaChapters } from "../data/javaCurriculum";
 
 const stats = [
   {
@@ -11,15 +12,15 @@ const stats = [
     icon: "🎓",
   },
   {
-    end: 15742,
+    end: javaQuestions.length,
     suffix: "+",
     title: "Questions Available",
     icon: "📝",
   },
   {
-    end: 1248,
-    suffix: "+",
-    title: "Topics Covered",
+    end: javaChapters.length,
+    suffix: "",
+    title: "Chapters Covered",
     icon: "📚",
   },
   {
@@ -44,7 +45,7 @@ export default function Stats() {
             Platform by the Numbers
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Real-time data from Target95+
+            Straight from our Java Programming content library
           </p>
         </div>
 

@@ -78,7 +78,10 @@ export default function RedesignedHero({
                 >
                   Choose Your Board →
                 </a>
-                <Link className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white px-6 font-bold text-slate-800 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800" href="/mock-test">
+                <Link
+                  className="inline-flex min-h-12 items-center justify-center rounded-xl border border-slate-300 bg-white px-6 font-bold text-slate-800 transition hover:border-slate-400 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+                  href="/mock-test"
+                >
                   Try a Mock Test
                 </Link>
               </div>
@@ -196,7 +199,11 @@ export default function RedesignedHero({
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   {availableSubjects.map((subject) => (
-                    <Link className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 dark:bg-slate-900" href={subject.href} key={subject.id}>
+                    <Link
+                      className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 dark:bg-slate-900"
+                      href={subject.href}
+                      key={subject.id}
+                    >
                       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-3xl dark:bg-slate-800">
                         {subject.icon}
                       </div>
@@ -250,7 +257,7 @@ export default function RedesignedHero({
                 Continue where you left off
               </h2>
               <p className="mt-3 text-slate-600 dark:text-slate-300">
-                {personalization.board.toUpperCase()} · {personalization.class.title}
+                {personalization.board?.toUpperCase()} · {personalization.class?.title}
               </p>
               <button
                 type="button"
@@ -264,10 +271,16 @@ export default function RedesignedHero({
 
         {!showClasses && !showSubjects && (
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white" href="/question-bank">
+            <Link
+              className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+              href="/question-bank"
+            >
               Explore Question Bank
             </Link>
-            <Link className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white" href="/ai-tutor">
+            <Link
+              className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+              href="/ai-tutor"
+            >
               Ask AI Tutor
             </Link>
           </div>

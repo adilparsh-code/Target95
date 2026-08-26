@@ -37,8 +37,8 @@ export default function Stats() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 max-w-4xl mx-auto">
-          {stats.map((item) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-3xl mx-auto">
+          {stats.map((item, index) => (
             <div key={item.title} className="relative text-center group">
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-500">
                 {item.icon}

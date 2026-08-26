@@ -6,12 +6,6 @@ import { javaQuestions, javaChapters } from "../data/javaCurriculum";
 
 const stats = [
   {
-    end: 0,
-    suffix: "+",
-    title: "Students Learning",
-    icon: "🎓",
-  },
-  {
     end: javaQuestions.length,
     suffix: "+",
     title: "Questions Available",
@@ -22,12 +16,6 @@ const stats = [
     suffix: "",
     title: "Chapters Covered",
     icon: "📚",
-  },
-  {
-    end: 0,
-    suffix: "+",
-    title: "Mock Tests Taken",
-    icon: "🏆",
   },
 ];
 
@@ -49,12 +37,9 @@ export default function Stats() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 md:gap-12 md:grid-cols-4">
-          {stats.map((item, index) => (
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 max-w-4xl mx-auto">
+          {stats.map((item) => (
             <div key={item.title} className="relative text-center group">
-              {index < stats.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-16 w-px bg-gradient-to-b from-transparent via-gray-200 to-transparent" />
-              )}
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-500">
                 {item.icon}
               </div>

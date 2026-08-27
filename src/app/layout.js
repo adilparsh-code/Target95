@@ -7,29 +7,31 @@ import IOSInstallPrompt from "./components/IOSInstallPrompt";
 
 export const metadata = {
   title: {
-    default: "Target95+ | ICSE & ISC Computer Science Learning",
+    default: "Target95+ | ICSE, ISC & CBSE Computer Science Learning",
     template: "%s | Target95+",
   },
   description:
-    "Master ICSE & ISC Computer Science with AI-powered practice, mock tests, study material, and progress tracking. Learn Java programming interactively.",
+    "Master ICSE, ISC & CBSE Computer Science and Information Technology with AI-powered practice, mock tests, study material, and progress tracking.",
   keywords: [
     "ICSE Computer Science",
     "ISC Computer Science",
+    "CBSE Computer Science",
+    "CBSE Information Technology",
     "Java Programming",
-    "ICSE Java",
-    "Computer Science Learning",
+    "Python Programming",
     "Target95",
     "ICSE Practice",
     "ISC Practice",
+    "CBSE Practice",
   ],
   authors: [{ name: "Target95+" }],
   creator: "Target95+",
   publisher: "Target95+",
   metadataBase: new URL("https://target95.vercel.app"),
   openGraph: {
-    title: "Target95+ | ICSE & ISC Computer Science Learning",
+    title: "Target95+ | ICSE, ISC & CBSE Computer Learning",
     description:
-      "Master ICSE & ISC Computer Science with AI-powered practice, mock tests, and progress tracking.",
+      "Master ICSE, ISC & CBSE with AI-powered practice, mock tests, and progress tracking.",
     url: "https://target95.vercel.app",
     siteName: "Target95+",
     locale: "en_US",
@@ -37,74 +39,23 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Target95+ | ICSE & ISC Computer Science Learning",
+    title: "Target95+ | ICSE, ISC & CBSE Computer Learning",
     description:
-      "Master ICSE & ISC Computer Science with AI-powered practice, mock tests, and progress tracking.",
+      "AI-powered practice, mock tests, study material, and progress tracking.",
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Target95+",
-    startupImage: ["/apple-touch-icon.png"],
-  },
-  applicationName: "Target95+",
-  icons: {
-    icon: [
-      { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
-      { url: "/icon-72x72.png", sizes: "72x72", type: "image/png" },
-      { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/icon-128x128.png", sizes: "128x128", type: "image/png" },
-      { url: "/icon-144x144.png", sizes: "144x144", type: "image/png" },
-      { url: "/icon-152x152.png", sizes: "152x152", type: "image/png" },
-      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-384x384.png", sizes: "384x384", type: "image/png" },
-      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-  other: {
-    "format-detection": "telephone=no",
-    "msapplication-TileColor": "#3b82f6",
-    "msapplication-TileImage": "/icon-144x144.png",
-  },
-};
-
-export const viewport = {
-  themeColor: "#3b82f6",
-  width: "device-width",
-  initialScale: 1,
-  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased"
-      suppressHydrationWarning
-    >
-      <body className="min-h-full flex flex-col">
+    <html lang="en" suppressHydrationWarning>
+      <body>
         <ThemeProvider>
           <AuthProviderWrapper>
             <OfflineBanner />
-            <div id="main-content">{children}</div>
+            {children}
+            <PWAPrompt />
+            <IOSInstallPrompt />
           </AuthProviderWrapper>
-          <PWAPrompt />
-          <IOSInstallPrompt />
         </ThemeProvider>
       </body>
     </html>

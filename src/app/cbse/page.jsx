@@ -1,5 +1,4 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
+export const metadata: Metadata = {import Link from 'next/link';
 import { getCBSEClassesByYear } from '../data/cbse';
 
 export const metadata: Metadata = {

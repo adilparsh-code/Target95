@@ -1,6 +1,6 @@
 /**
- * CBSE Class 10 - Computer Applications (Subject Code 165)
- * Official CBSE Curriculum Structure
+ * CBSE Class 10 - Computer Applications (Code 165)
+ * Standardized Curriculum Structure
  */
 
 import subjects from '../subjects';
@@ -50,8 +50,7 @@ const class10 = {
           ],
           keywords: ["Internet", "WWW", "IP Address", "DNS", "HTTP", "HTTPS", "FTP", "e-Commerce"],
           competencyLevel: "Understanding",
-          marksDistribution: { mcq: 3, shortAnswer: 6, longAnswer: 6, practical: 0 },
-          previousYearQuestions: [2020, 2021, 2022, 2023, 2024, 2025],
+          marksDistribution: { mcq: 3, shortAnswer: 6, longAnswer: 6 },
           metadata: {
             isPractical: false,
             isTheory: true,
@@ -95,8 +94,7 @@ const class10 = {
           ],
           keywords: ["HTML5", "Lists", "Tables", "rowspan", "colspan", "Hyperlinks", "Audio", "Video"],
           competencyLevel: "Applying",
-          marksDistribution: { mcq: 4, shortAnswer: 6, longAnswer: 5, practical: 15 },
-          previousYearQuestions: [2020, 2021, 2022, 2023, 2024, 2025],
+          marksDistribution: { mcq: 2, shortAnswer: 5, longAnswer: 6 },
           metadata: {
             isPractical: true,
             isTheory: true,
@@ -127,8 +125,7 @@ const class10 = {
           ],
           keywords: ["Forms", "Input Types", "CSS", "Selectors", "Inline CSS", "Internal CSS", "External CSS"],
           competencyLevel: "Applying",
-          marksDistribution: { mcq: 3, shortAnswer: 4, longAnswer: 3, practical: 15 },
-          previousYearQuestions: [2021, 2022, 2023, 2024, 2025],
+          marksDistribution: { mcq: 2, shortAnswer: 4, longAnswer: 6 },
           metadata: {
             isPractical: true,
             isTheory: true,
@@ -171,8 +168,7 @@ const class10 = {
           ],
           keywords: ["Netiquette", "Digital Footprint", "IPR", "Open Source", "Creative Commons", "Phishing"],
           competencyLevel: "Understanding",
-          marksDistribution: { mcq: 3, shortAnswer: 4, longAnswer: 3, practical: 0 },
-          previousYearQuestions: [2020, 2021, 2022, 2023, 2024, 2025],
+          marksDistribution: { mcq: 2, shortAnswer: 4, longAnswer: 4 },
           metadata: {
             isPractical: false,
             isTheory: true,

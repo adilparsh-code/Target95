@@ -1,62 +1,45 @@
 /**
  * CBSE Academic Data - Main Entry Point
- * Centralized export for all CBSE curriculum data
+ * 2026-27 source-of-truth data is exported separately from legacy data.
  */
 
-export { default as cbseClasses } from './classes/class10';
-export { default as cbseClass11 } from './classes/class11';
-export { default as cbseClass12 } from './classes/class12';
-
-export { cbseSubjects } from './subjects';
-export { cbseUnits } from './units';
-export { learningOutcomes } from './learning-outcomes';
-export { competencyLevels } from './competency-levels';
 export { default as cbseCurriculum2026_27, getCBSECurriculum, CBSE_CURRICULUM_SESSION } from './curriculum-2026-27';
 export { default as CBSE_402_CLASS9_2026_27 } from './class9-402-2026-27-sources';
-
-export { validateCBSEStructure } from './validation-report';
-export { curriculumInconsistencies } from './inconsistencies';
-
-/**
- * Get all legacy CBSE class objects.
- */
-export const getAllCBSEClasses = () => {
-  return [
-    require('./classes/class10').default,
-    require('./classes/class11').default,
-    require('./classes/class12').default,
-  ];
-};
+export { cbseSubjectTracks, getCBSESubjectTrack } from './subjects-2026-27';
+export { default as cbseQuestionSchema2026_27, validateCBSEQuestion } from './question-schema-2026-27';
+export { default as CBSE_SUBJECT_MOCK_CONFIG, getCBSEQuestionConfig } from './question-config-2026-27';
+export { default as CBSE_MOCK_TEST_BLUEPRINTS, getCBSEMockBlueprint } from './mock-test-blueprints-2026-27';
+export { default as CBSE_MOCK_TESTS_2026_27 } from './mock-tests-2026-27';
 
 /**
- * Get CBSE class by ID.
+ * Legacy exports retained under explicit legacy names so old consumers do not
+ * silently receive them as the current 2026-27 source of truth.
  */
-export const getCBSEClassById = (classId) => {
-  const classes = getAllCBSEClasses();
-  return classes.find((cls) => cls.id === classId);
-};
+export { default as legacyCBSEClass10 } from './classes/class10';
+export { default as legacyCBSEClass11 } from './classes/class11';
+export { default as legacyCBSEClass12 } from './classes/class12';
+export { cbseSubjects as legacyCBSESubjects } from './subjects';
+export { cbseUnits as legacyCBSEUnits } from './units';
+export { learningOutcomes as legacyCBSELearningOutcomes } from './learning-outcomes';
+export { competencyLevels as legacyCBSECompetencyLevels } from './competency-levels';
 
 /**
- * Get subject by class and subject ID.
+ * Get all current 2026-27 CBSE class entries.
  */
-export const getCBSESubject = (classId, subjectId) => {
-  const cls = getCBSEClassById(classId);
-  if (!cls) return null;
-  return cls.subjects.find((sub) => sub.id === subjectId);
-};
+export const getAllCBSE2026_27Classes = () =>
+  Object.entries(cbseCurriculum2026_27.classes).map(([classNumber, data]) => ({
+    classNumber: Number(classNumber),
+    ...data,
+  }));
 
 /**
- * Get chapter by class, subject, and chapter ID.
+ * Get the current 2026-27 class/subject record.
  */
-export const getCBSEChapter = (classId, subjectId, chapterId) => {
-  const subject = getCBSESubject(classId, subjectId);
-  if (!subject) return null;
-  return subject.chapters?.find((ch) => ch.id === chapterId) ?? null;
-};
+export const getCBSE2026_27Subject = (classNumber, subjectCode) =>
+  getCBSECurriculum(classNumber, subjectCode);
 
 export default {
-  getAllCBSEClasses,
-  getCBSEClassById,
-  getCBSESubject,
-  getCBSEChapter,
+  getAllCBSE2026_27Classes,
+  getCBSE2026_27Subject,
+  getCBSECurriculum,
 };

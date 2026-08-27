@@ -1,12 +1,18 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { getCBSEClassesByYear } from '../data/cbse';
 
-export default function CBSEHomePage() {
-  // Use a standardized format (hyphenated) for consistency across lookup keys
+export const metadata: Metadata = {
+  title: 'CBSE Curriculum 2026–27 | Target95',
+  description: 'Access CBSE class-wise syllabus, unit blueprints, practice questions, and mock tests for 2026-27.',
+};
+
+export default async function CBSEHomePage() {
   const targetYearKey = "2026-27";
   const displayAcademicYear = "2026–27"; 
 
-  const classes = getCBSEClassesByYear(targetYearKey) || [];
+  // Resolved asynchronously to maintain App Router data fetching standards
+  const classes = (await getCBSEClassesByYear(targetYearKey)) || [];
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
@@ -41,7 +47,7 @@ export default function CBSEHomePage() {
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl" role="img" aria-label="Book icon" aria-hidden="true">
+                      <span className="text-3xl" aria-hidden="true">
                         📘
                       </span>
                       <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">

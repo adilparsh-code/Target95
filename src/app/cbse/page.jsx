@@ -1,5 +1,5 @@
 export const metadata: Metadata = {import Link from 'next/link';
-import { getCBSEClassesByYear } from '../data/cbse';
+import { getAllCBSE2026_27Classes } from '../data/cbse';
 
 export const metadata: Metadata = {
   title: 'CBSE Curriculum 2026–27 | Target95',

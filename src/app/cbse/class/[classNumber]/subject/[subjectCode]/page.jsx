@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCBSECurriculum } from '../../../../../../data/cbse';
+import { getCBSECurriculum } from '../../../../data/cbse';
 
 const subjectsByClass = {
   9: ['402'],

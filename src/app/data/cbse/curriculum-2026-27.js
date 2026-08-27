@@ -3,56 +3,9 @@
  * Source of truth: official CBSE curriculum pages/PDFs.
  */
 
-export const CBSE_CURRICULUM_SESSION = '2026-27' as const;
+export const CBSE_CURRICULUM_SESSION = '2026-27';
 
-export interface PracticalAssessment {
-  practicalExamination: number;
-  vivaVoce: number;
-  writtenTest?: number;
-  practicalFileStudentPortfolio?: number;
-  projectVivaVoce?: number;
-  projectWorkFieldVisit?: number;
-  portfolioPracticalFile?: number;
-}
-
-export interface UnitHours {
-  theory: number;
-  practical: number;
-}
-
-export interface Unit {
-  id: string;
-  code: string;
-  name: string;
-  hours: number | UnitHours;
-  marks: number;
-  chapters?: Array<{ number: number; title: string }>;
-  learningOutcomes?: string[];
-  theory?: string[];
-  practicalActivities?: string[];
-}
-
-export interface SubjectCurriculum {
-  code: string;
-  id: string;
-  name: string;
-  category: string;
-  syllabusSource: string;
-  sourceUrl: string;
-  pythonRole: string;
-  assessment: {
-    theoryMarks: number;
-    practicalMarks: number;
-    totalMarks: number;
-  };
-  parts: {
-    partA: { name: string; units: Unit[] };
-    partB: { name: string; units: Unit[] };
-  };
-  practicalAssessment: PracticalAssessment;
-}
-
-const cbse402Class9: SubjectCurriculum = {
+const cbse402Class9 = {
   code: '402',
   id: 'cbse-402-class-9',
   name: 'Information Technology',
@@ -216,7 +169,7 @@ const cbse402Class9: SubjectCurriculum = {
   },
 };
 
-const cbse402Class10: SubjectCurriculum = {
+const cbse402Class10 = {
   code: '402',
   id: 'cbse-402-class-10',
   name: 'Information Technology',
@@ -382,12 +335,12 @@ export const cbseCurriculum2026_27 = {
     11: { classId: 'cbse-class-11', subjects: [] },
     12: { classId: 'cbse-class-12', subjects: [] },
   },
-} as const;
+};
 
 export const getCBSECurriculum = (
-  classNumber: keyof typeof cbseCurriculum2026_27.classes,
-  subjectCode: string | number
-): SubjectCurriculum | null => {
+  classNumber,
+  subjectCode
+) => {
   const targetClass = cbseCurriculum2026_27.classes[classNumber];
   if (!targetClass) return null;
   return targetClass.subjects.find((s) => s.code === String(subjectCode)) ?? null;

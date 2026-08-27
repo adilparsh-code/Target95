@@ -32,12 +32,14 @@ export const CBSE_SUBJECT_MOCK_CONFIG = {
     python: true,
     pythonLibraries: [],
     questionTypes: CBSE_QUESTION_TYPES,
+    note: 'Core Python programming. Do not inherit Pandas/Matplotlib from subject 065.',
   },
   '065': {
     classes: [11, 12],
     python: true,
     pythonLibraries: ['Pandas', 'Matplotlib'],
     questionTypes: CBSE_QUESTION_TYPES,
+    note: 'Track Python data-handling libraries separately from subject 083.',
   },
   '402': {
     classes: [9, 10],
@@ -54,5 +56,14 @@ export const CBSE_SUBJECT_MOCK_CONFIG = {
 
 export const getCBSEQuestionConfig = (subjectCode) =>
   CBSE_SUBJECT_MOCK_CONFIG[String(subjectCode)] ?? null;
+
+export const getCBSESubjectClassConfig = (subjectCode, classNumber) => {
+  const config = getCBSEQuestionConfig(subjectCode);
+  if (!config || !config.classes.includes(Number(classNumber))) return null;
+  return config;
+};
+
+export const isCBSESubjectClassSupported = (subjectCode, classNumber) =>
+  Boolean(getCBSESubjectClassConfig(subjectCode, classNumber));
 
 export default CBSE_SUBJECT_MOCK_CONFIG;

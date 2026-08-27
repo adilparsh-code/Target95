@@ -33,7 +33,7 @@ export default function CBSEClassPage({ params }) {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Code {subject.code}</p>
               <h2 className="mt-3 text-xl font-bold text-slate-900">{subject.name}</h2>
               <p className="mt-2 text-sm text-slate-600">Open syllabus and learning content →</p>
-            </Link>
+            </Link>      
           ))}
         </div>
       </div>

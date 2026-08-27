@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 // ISC XI Advanced Practice Pack
 // Fresh question set: inheritance, polymorphism, recursion, stacks, queues, output tracing and 2D array rows/columns.
 
@@ -8,7 +11,7 @@ export const ISC_XI_ADVANCED_PRACTICE = {
       title: "Inheritance",
       focus: "Trace inherited members, constructor order, overriding and super.",
       questions: [
-        { id: "INH-01", difficulty: "board", type: "output", question: "class A{ A(){System.out.print(\"A ");} } class B extends A{ B(){System.out.print(\"B ");} } public class Test{public static void main(String[] x){new B();}} What is the output?", answer: "A B", explanation: "The superclass constructor executes before the subclass constructor." },
+        { id: "INH-01", difficulty: "board", type: "output", question: "class A{ A(){System.out.print(\"A \");} } class B extends A{ B(){System.out.print(\"B \");} } public class Test{public static void main(String[] x){new B();}} What is the output?", answer: "A B", explanation: "The superclass constructor executes before the subclass constructor." },
         { id: "INH-02", difficulty: "board", type: "reasoning", question: "A superclass has int n=10 and subclass declares int n=20. Inside a subclass method, compare n and super.n.", answer: "n refers to the subclass field (20); super.n refers to the superclass field (10).", explanation: "Field hiding is resolved using the current scope; super explicitly selects the parent member." },
         { id: "INH-03", difficulty: "challenge", type: "debugging", question: "A subclass constructor calls super() after an executable statement. What must be corrected?", answer: "The explicit super() call must be the first statement of the constructor.", explanation: "A superclass constructor call must appear first in a Java constructor when written explicitly." },
         { id: "INH-04", difficulty: "programming", type: "write", question: "Write a superclass Account with a protected balance and a subclass Savings that adds interest. Demonstrate inherited access and method reuse.", answer: "Use extends, initialize balance in the superclass, then calculate interest in Savings without duplicating balance storage.", explanation: "The task checks inheritance as code reuse rather than merely the extends keyword." }
@@ -43,7 +46,7 @@ export const ISC_XI_ADVANCED_PRACTICE = {
       questions: [
         { id: "STK-01", difficulty: "board", type: "trace", question: "Start with empty stack. Push 10, push 20, pop, push 30. What is the top value?", answer: "30", explanation: "After pop, 20 is removed; pushing 30 makes 30 the new top." },
         { id: "STK-02", difficulty: "board", type: "reasoning", question: "A stack has capacity 3 and contains 3 items. What operation causes overflow?", answer: "A fourth push without a prior pop.", explanation: "Overflow occurs when insertion is attempted on a full stack." },
-        { id: "STK-03", difficulty: "challenge", type: "debugging", question: "A pop operation is called on an empty stack. Identify the condition and correct response.", answer: "Underflow; reject the pop or report that the stack is empty.", explanation: "Underflow is the invalid removal attempt from an empty stack." },
+        { id: "STK-03", difficulty: "challenge", type: "debugging", question: "A pop operation is called on an empty stack. Identify the condition and correct response.", answer: "Underflow; reject the pop or report that the stack is empty.", explanation: "The empty condition must be checked before removal." },
         { id: "STK-04", difficulty: "programming", type: "write", question: "Using an array, implement push and pop for an integer stack with overflow and underflow checks.", answer: "Maintain a top index; push increments then stores, pop reads then decrements, with bounds checks.", explanation: "This tests actual stack implementation rather than definition recall." }
       ]
     },
@@ -53,7 +56,7 @@ export const ISC_XI_ADVANCED_PRACTICE = {
       focus: "FIFO behavior, insertion/removal order and circular movement.",
       questions: [
         { id: "QUE-01", difficulty: "board", type: "trace", question: "Enqueue 5, 10, 15; dequeue twice. Which value remains at the front?", answer: "15", explanation: "FIFO removes 5 then 10, leaving 15 at the front." },
-        { id: "QUE-02", difficulty: "board", type: "reasoning", question: "Why can a linear array queue report false overflow even when earlier positions are empty?", answer: "Because the rear index may reach the last array cell even though freed front cells are not reused.", explanation: "A circular queue reuses those positions by wrapping indices." },
+        { id: "QUE-02", difficulty: "board", type: "reasoning", question: "Why can a linear array queue report false overflow even when earlier positions are empty?", answer: "Because the rear index may reach the last array cell even though freed front cells are not reused.", explanation: "A circular queue reuses those positions by wrapping indices with modulo capacity." },
         { id: "QUE-03", difficulty: "challenge", type: "debugging", question: "A dequeue operation increments front without checking whether the queue is empty. What bug can occur?", answer: "Queue underflow or invalid front movement when no element exists.", explanation: "The empty condition must be checked before removal." },
         { id: "QUE-04", difficulty: "programming", type: "write", question: "Design a circular queue using an array with enqueue and dequeue operations.", answer: "Use front, rear and size (or an equivalent full/empty test), wrapping indices with modulo capacity.", explanation: "Circular reuse is the core improvement over a simple linear queue." }
       ]
@@ -100,4 +103,28 @@ export const ISC_XI_ADVANCED_PRACTICE = {
   ]
 };
 
-export default ISC_XI_ADVANCED_PRACTICE;
+export const iscXIAdvancedPracticeMetadata = {
+  id: "isc-11-advanced-practice",
+  title: "ISC Class 11 Advanced Practice Pack",
+  board: "ISC",
+  class: "11",
+  subject: "Computer Science",
+};
+
+export function getISCXIAdvancedPracticeContent() {
+  try {
+    const filePath = path.join(
+      process.cwd(),
+      "src/app/data/ISC_XI_ADVANCED_PRACTICE_QA.md"
+    );
+    if (fs.existsSync(filePath)) {
+      return fs.readFileSync(filePath, "utf8");
+    }
+    return "";
+  } catch (error) {
+    console.error("Error reading ISC_XI_ADVANCED_PRACTICE_QA.md:", error);
+    return "";
+  }
+}
+
+export default iscXIAdvancedPracticeMetadata;

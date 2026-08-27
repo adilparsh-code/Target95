@@ -3,7 +3,7 @@
  * Standardized Curriculum Structure
  */
 
-import subjects from '../subjects';
+import subjects from '../../subjects';
 
 const class10 = {
   id: "cbse-class-10-165",

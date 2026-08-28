@@ -32,27 +32,27 @@ export default function MockTestNewPage() {
 
   return (
     <ProtectedRoute>
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <main className="min-h-screen bg-slate-50 text-slate-900">
         <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
+        
         <ErrorBoundary>
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">
+          <div className="relative overflow-hidden rounded-3xl bg-slate-950 p-6 text-white shadow-xl sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-200">
               Mock Test
             </p>
-            <h1 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">
+            <h1 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
               Test Dashboard
             </h1>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-300">
               Choose your class, difficulty, question type, and number of questions to generate a timed mock test.
             </p>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
             {/* Setup */}
-            <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border-0 bg-white p-6 shadow-lg ring-1 ring-slate-200">
               <h2 className="text-xl font-bold text-gray-900">Test Configuration</h2>
 
               {/* Category */}

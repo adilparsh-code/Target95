@@ -2,6 +2,25 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { 
+  Flame, 
+  Star, 
+  TrendingUp, 
+  CheckCircle, 
+  Target, 
+  Clock, 
+  Trophy, 
+  BookOpen, 
+  HelpCircle, 
+  FileText, 
+  Bot, 
+  Bookmark, 
+  PlayCircle, 
+  Gift, 
+  Calendar, 
+  Award,
+  ArrowRight
+} from "lucide-react";
 import Container from "./ui/Container";
 import Card from "./ui/Card";
 import Button from "./ui/Button";
@@ -88,21 +107,21 @@ export default function StudentDashboard() {
               {/* Key Metrics Row */}
               <div className="flex flex-wrap items-center gap-4 md:gap-6 mt-6">
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <span className="text-2xl">🔥</span>
+                  <Flame className="w-6 h-6 text-orange-300" />
                   <div>
                     <p className="text-xs text-blue-100">Current Streak</p>
                     <p className="font-bold text-lg">{userStatistics.dailyStreak} days</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <span className="text-2xl">⭐</span>
+                  <Star className="w-6 h-6 text-yellow-300" />
                   <div>
                     <p className="text-xs text-blue-100">Total XP</p>
                     <p className="font-bold text-lg">{userStatistics.totalXP.toLocaleString()}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                  <span className="text-2xl">📈</span>
+                  <TrendingUp className="w-6 h-6 text-green-300" />
                   <div>
                     <p className="text-xs text-blue-100">Overall Progress</p>
                     <p className="font-bold text-lg">{Math.round((userStatistics.chaptersCompleted / userStatistics.totalChapters) * 100)}%</p>
@@ -126,8 +145,8 @@ export default function StudentDashboard() {
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{userStatistics.questionsSolved}</p>
               <p className="text-xs text-emerald-600 mt-2 font-medium">↑ 12 this week</p>
             </div>
-            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center text-2xl">
-              ✅
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-2xl flex items-center justify-center">
+              <CheckCircle className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             </div>
           </div>
         </Card>
@@ -139,8 +158,8 @@ export default function StudentDashboard() {
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{userStatistics.accuracy}%</p>
               <p className="text-xs text-emerald-600 mt-2 font-medium">↑ 3% from last month</p>
             </div>
-            <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center text-2xl">
-              🎯
+            <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center">
+              <Target className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             </div>
           </div>
         </Card>
@@ -152,8 +171,8 @@ export default function StudentDashboard() {
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{userStatistics.studyTimeHours}h</p>
               <p className="text-xs text-emerald-600 mt-2 font-medium">↑ 5h this week</p>
             </div>
-            <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-2xl flex items-center justify-center text-2xl">
-              ⏱️
+            <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 rounded-2xl flex items-center justify-center">
+              <Clock className="w-6 h-6 text-amber-600 dark:text-amber-400" />
             </div>
           </div>
         </Card>
@@ -165,8 +184,8 @@ export default function StudentDashboard() {
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">#42</p>
               <p className="text-xs text-emerald-600 mt-2 font-medium">↑ 15 positions</p>
             </div>
-            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center text-2xl">
-              🏆
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center">
+              <Trophy className="w-6 h-6 text-purple-600 dark:text-purple-400" />
             </div>
           </div>
         </Card>
@@ -177,27 +196,27 @@ export default function StudentDashboard() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link href="/study">
             <Button variant="default" className="flex items-center gap-2 shadow-md hover:shadow-lg transition-all">
-              📖 Resume Learning
+              <BookOpen className="w-4 h-4" /> Resume Learning
             </Button>
           </Link>
           <Link href="/Java">
             <Button variant="outline" className="flex items-center gap-2">
-              ❓ Practice Questions
+              <HelpCircle className="w-4 h-4" /> Practice Questions
             </Button>
           </Link>
           <Link href="/mock-test">
             <Button variant="outline" className="flex items-center gap-2">
-              📝 Mock Test
+              <FileText className="w-4 h-4" /> Mock Test
             </Button>
           </Link>
           <Link href="/ai-tutor">
             <Button variant="outline" className="flex items-center gap-2">
-              🤖 AI Tutor
+              <Bot className="w-4 h-4" /> AI Tutor
             </Button>
           </Link>
           <Link href="/bookmarks">
             <Button variant="outline" className="flex items-center gap-2">
-              🔖 Bookmarks ({userStatistics.bookmarksCount})
+              <Bookmark className="w-4 h-4" /> Bookmarks ({userStatistics.bookmarksCount})
             </Button>
           </Link>
         </div>

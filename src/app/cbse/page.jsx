@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default function CBSEHomePage() {
-  const classes = getAllCBSE2026_27Classes();
+  const classes = getAllCBSE2026_27Classes() || [];
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-10 sm:px-6 lg:px-8">
@@ -26,29 +26,37 @@ export default function CBSEHomePage() {
         </header>
 
         <section className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {classes.map(({ classNumber, classId, subjects = [] }) => (
-            <Link
-              key={classId || `class-${classNumber}`}
-              href={`/cbse/class/${classNumber}`}
-              className="group relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-3xl" aria-hidden="true">📘</span>
-                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-                    CBSE
-                  </span>
+          {classes.map((item) => {
+            const classNumber = item?.classNumber;
+            const classId = item?.classId || `class-${classNumber}`;
+            const subjects = Array.isArray(item?.subjects) ? item.subjects : [];
+
+            return (
+              <Link
+                key={classId}
+                href={`/cbse/class/${encodeURIComponent(classNumber)}`}
+                className="group relative flex flex-col justify-between rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-3xl" aria-hidden="true">📘</span>
+                    <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+                      CBSE
+                    </span>
+                  </div>
+                  <h2 className="mt-5 text-xl font-bold text-slate-900">
+                    Class {classNumber}
+                  </h2>
+                  <p className="mt-2 text-sm text-slate-600">
+                    {subjects.length} subject track{subjects.length === 1 ? '' : 's'} configured
+                  </p>
                 </div>
-                <h2 className="mt-5 text-xl font-bold text-slate-900">Class {classNumber}</h2>
-                <p className="mt-2 text-sm text-slate-600">
-                  {subjects.length} subject track{subjects.length === 1 ? '' : 's'} configured
-                </p>
-              </div>
-              <span className="mt-5 text-sm font-semibold text-blue-700 group-hover:underline">
-                Open class →
-              </span>
-            </Link>
-          ))}
+                <span className="mt-5 text-sm font-semibold text-blue-700 group-hover:underline">
+                  Open class →
+                </span>
+              </Link>
+            );
+          })}
         </section>
       </div>
     </main>

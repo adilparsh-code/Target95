@@ -3,7 +3,12 @@
  * 2026-27 source-of-truth data is exported separately from legacy data.
  */
 
-export { default as cbseCurriculum2026_27, getCBSECurriculum, CBSE_CURRICULUM_SESSION } from './curriculum-2026-27';
+import cbseCurriculum2026_27, {
+  getCBSECurriculum,
+  CBSE_CURRICULUM_SESSION,
+} from './curriculum-2026-27';
+
+export { cbseCurriculum2026_27, getCBSECurriculum, CBSE_CURRICULUM_SESSION };
 export { default as CBSE_402_CLASS9_2026_27 } from './class9-402-2026-27-sources';
 export { cbseSubjectTracks, getCBSESubjectTrack } from './subjects-2026-27';
 export { default as cbseQuestionSchema2026_27, validateCBSEQuestion } from './question-schema-2026-27';

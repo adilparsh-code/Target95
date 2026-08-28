@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCBSECurriculum } from '@/app/data/cbse';
-import { cbseCurriculum2026_27 } from '@/app/data/cbse/curriculum-2026-27';
 
 const subjectsByClass = {
   9: ['402'],
@@ -10,22 +9,7 @@ const subjectsByClass = {
   12: ['083', '065', '802'],
 };
 
-export async function generateStaticParams() {
-  const paths = [];
-  
-  // Iterate through all classes
-  Object.entries(cbseCurriculum2026_27.classes).forEach(([classNumber, classData]) => {
-    // Iterate through all subjects in the class
-    classData.subjects.forEach(subject => {
-      paths.push({
-        classNumber: String(classNumber),
-        subjectCode: subject.code,
-      });
-    });
-  });
-  
-  return paths;
-}
+// Removed generateStaticParams to reduce memory usage during build - this page will be rendered on-demand
 
 export default async function CBSESubjectPage({ params }) {
   const resolvedParams = await params;

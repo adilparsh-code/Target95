@@ -1,19 +1,24 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCBSECurriculum } from '../../../data/cbse';
+import { getCBSECurriculum } from '@/app/data/cbse';
+import { cbseCurriculum2026_27 } from '@/app/data/cbse/curriculum-2026-27.js';
 
-interface CBSEClassPageProps {
-  params: Promise<{ classNumber: string }> | { classNumber: string };
+export async function generateStaticParams() {
+  const paths = [];
+  Object.entries(cbseCurriculum2026_27.classes).forEach(([classNumber]) => {
+    paths.push({ classNumber: String(classNumber) });
+  });
+  return paths;
 }
 
-const CLASS_SUBJECT_MAP: Record<number, string[]> = {
+const CLASS_SUBJECT_MAP = {
   9: ['402'],
   10: ['402'],
   11: ['083', '065', '802'],
   12: ['083', '065', '802'],
 };
 
-export default async function CBSEClassPage({ params }: CBSEClassPageProps) {
+export default async function CBSEClassPage({ params }) {
   const resolvedParams = await params;
   const classNumber = Number(resolvedParams?.classNumber);
 

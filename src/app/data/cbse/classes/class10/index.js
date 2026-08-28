@@ -3,7 +3,7 @@
  * Standardized Curriculum Structure
  */
 
-import subjects from '../../subjects';
+import { cbseSubjects } from '../../subjects';
 
 const class10 = {
   id: "cbse-class-10-165",
@@ -13,7 +13,7 @@ const class10 = {
   color: "border-blue-300 bg-blue-50",
   board: "CBSE",
   stream: "General",
-  subjects: [subjects.cbseSubjects[0]],
+  subjects: [cbseSubjects[0]],
   units: [
     {
       id: "unit-1-networking",

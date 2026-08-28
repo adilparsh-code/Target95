@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCBSECurriculum } from '../../../../data/cbse';
+import { getCBSECurriculum } from '@/app/data/cbse';
 
 const subjectsByClass = {
   9: ['402'],
@@ -9,9 +9,12 @@ const subjectsByClass = {
   12: ['083', '065', '802'],
 };
 
-export default function CBSESubjectPage({ params }) {
-  const classNumber = Number(params?.classNumber);
-  const subjectCode = String(params?.subjectCode || '');
+// Removed generateStaticParams to reduce memory usage during build - this page will be rendered on-demand
+
+export default async function CBSESubjectPage({ params }) {
+  const resolvedParams = await params;
+  const classNumber = Number(resolvedParams?.classNumber);
+  const subjectCode = String(resolvedParams?.subjectCode || '');
 
   if (![9, 10, 11, 12].includes(classNumber) || !subjectsByClass[classNumber].includes(subjectCode)) {
     notFound();

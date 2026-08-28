@@ -65,15 +65,15 @@ export default function AnalyticsPage() {
 
   return (
     <ProtectedRoute>
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <main className="min-h-screen bg-slate-50 text-slate-900">
         <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
+        
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Performance Analytics</p>
-            <h1 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Track Your Progress 📈</h1>
-            <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">
+          <div className="rounded-3xl bg-slate-950 p-6 text-white shadow-xl sm:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-200">Performance Analytics</p>
+            <h1 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Track Your Progress 📈</h1>
+            <p className="mt-3 max-w-2xl text-base leading-7 text-slate-300">
               Detailed analytics on your learning performance, accuracy, and progress across all subjects.
             </p>
           </div>

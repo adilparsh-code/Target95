@@ -1,19 +1,15 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCBSECurriculum } from '../../../data/cbse';
+import { getCBSECurriculum } from '@/app/data/cbse';
 
-interface CBSEClassPageProps {
-  params: Promise<{ classNumber: string }> | { classNumber: string };
-}
-
-const CLASS_SUBJECT_MAP: Record<number, string[]> = {
+const CLASS_SUBJECT_MAP = {
   9: ['402'],
   10: ['402'],
   11: ['083', '065', '802'],
   12: ['083', '065', '802'],
 };
 
-export default async function CBSEClassPage({ params }: CBSEClassPageProps) {
+export default async function CBSEClassPage({ params }) {
   const resolvedParams = await params;
   const classNumber = Number(resolvedParams?.classNumber);
 

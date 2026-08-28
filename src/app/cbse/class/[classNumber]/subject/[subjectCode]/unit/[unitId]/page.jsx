@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCBSECurriculum } from '../../../../../../data/cbse';
+import { getCBSECurriculum } from '@/app/data/cbse';
 
-export default function CBSEUnitPage({ params }) {
-  const classNumber = Number(params?.classNumber);
-  const subjectCode = String(params?.subjectCode || '');
-  const unitId = String(params?.unitId || '');
+export default async function CBSEUnitPage({ params }) {
+  const resolvedParams = await params;
+  const classNumber = Number(resolvedParams?.classNumber);
+  const subjectCode = String(resolvedParams?.subjectCode || '');
+  const unitId = String(resolvedParams?.unitId || '');
   const subject = getCBSECurriculum(classNumber, subjectCode);
 
   if (!subject) notFound();

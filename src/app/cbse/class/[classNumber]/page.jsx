@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCBSECurriculum } from '@/app/data/cbse';
+import { cbseCurriculum2026_27 } from '@/app/data/cbse/curriculum-2026-27.js';
+
+export async function generateStaticParams() {
+  const paths = [];
+  Object.entries(cbseCurriculum2026_27.classes).forEach(([classNumber]) => {
+    paths.push({ classNumber: String(classNumber) });
+  });
+  return paths;
+}
 
 const CLASS_SUBJECT_MAP = {
   9: ['402'],

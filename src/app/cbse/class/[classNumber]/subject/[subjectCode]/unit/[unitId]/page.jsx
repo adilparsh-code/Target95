@@ -1,6 +1,34 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCBSECurriculum } from '@/app/data/cbse';
+import { cbseCurriculum2026_27 } from '@/app/data/cbse/curriculum-2026-27';
+
+export async function generateStaticParams() {
+  const paths = [];
+  
+  // Iterate through all classes
+  Object.entries(cbseCurriculum2026_27.classes).forEach(([classNumber, classData]) => {
+    // Iterate through all subjects in the class
+    classData.subjects.forEach(subject => {
+      // Get all units from partA
+      const units = [
+        ...(subject.parts?.partA?.units || []),
+        ...(subject.parts?.partB?.units || []),
+      ];
+      
+      // Add a path for each unit
+      units.forEach(unit => {
+        paths.push({
+          classNumber: String(classNumber),
+          subjectCode: subject.code,
+          unitId: unit.id,
+        });
+      });
+    });
+  });
+  
+  return paths;
+}
 
 export default async function CBSEUnitPage({ params }) {
   const resolvedParams = await params;

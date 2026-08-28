@@ -9,10 +9,10 @@ export const metadata = {
 
 export default function RoadmapPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+    <main className="min-h-screen bg-slate-50 text-slate-900">
       <Navbar />
-      <div className="h-20 sm:h-24 lg:h-28"></div>
-      <RoadmapHome />
+      
+      <section className="mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 lg:px-8"><div className="mb-6 rounded-3xl bg-slate-950 p-6 text-white shadow-xl sm:p-8"><p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-200">Plan with purpose</p><h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Your Study Roadmap</h1><p className="mt-3 max-w-2xl text-slate-300">A clear path from today’s practice to exam-ready confidence.</p></div><RoadmapHome /></section>
       <Footer />
     </main>
   );

@@ -92,11 +92,11 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <main className="min-h-screen bg-slate-50 text-slate-900">
         <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
+        
         <ErrorBoundary>
-          <div className="container mx-auto px-4 py-8 max-w-7xl">
+          <div className="mx-auto max-w-7xl px-4 pb-10 pt-8 sm:px-6 lg:px-8">\n            <div className="mb-6 overflow-hidden rounded-3xl bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-6 text-white shadow-xl sm:p-8">\n              <p className="text-xs font-bold uppercase tracking-[0.22em] text-blue-200">Student command centre</p>\n              <h1 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">Your progress, in one place.</h1>\n              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">Continue learning, practise weak areas, and keep your 95+ target visible every day.</p>\n            </div>
             <DashboardHeader user={user} isLoading={!user} />
             
             <div className="mt-6">

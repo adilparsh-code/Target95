@@ -154,6 +154,66 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     answer: "Use int n=(int)(Math.random()*6)+1; because casting occurs after multiplication.",
     explanation: "Casting Math.random() first converts it to 0 before multiplication."
   },
+  {
+    id: "icse-x-loops-trace-003",
+    type: "output-tracing",
+    difficulty: "hard",
+    chapter: "Loops",
+    marks: 4,
+    question: "Predict the output: int n=3214, s=0; while(n>0){ int d=n%10; if(d%2==0) s+=d; n/=10; } System.out.println(s);",
+    answer: "6",
+    explanation: "The digits are 4,1,2,3; only even digits 4 and 2 are added."
+  },
+  {
+    id: "icse-x-numbers-program-003",
+    type: "programming",
+    difficulty: "hard",
+    chapter: "Number Systems",
+    marks: 5,
+    question: "Write a Java method isArmstrong(int n) that returns true when a three-digit number is an Armstrong number and false otherwise.",
+    answer: "Extract each digit with %10, add the cube of each digit, remove the last digit with /10, and compare the sum with the original number.",
+    explanation: "For a three-digit Armstrong number, the sum of the cubes of its digits equals the number itself."
+  },
+  {
+    id: "icse-x-inheritance-case-002",
+    type: "case-based",
+    difficulty: "hard",
+    chapter: "Inheritance",
+    marks: 5,
+    question: "A school system has Person with name and Student extending Person with rollNumber and marks. State which members should be inherited and write a constructor call that correctly initializes the inherited name using super().",
+    answer: "Student inherits accessible Person members; its constructor can call super(name) before initializing rollNumber and marks.",
+    explanation: "super() invokes the superclass constructor and ensures inherited state is initialized through the parent class."
+  },
+  {
+    id: "icse-x-constructors-trace-002",
+    type: "output-tracing",
+    difficulty: "hard",
+    chapter: "Constructors",
+    marks: 4,
+    question: "Predict the output: class A { A(){ System.out.print(\"A \" ); } } class B extends A { B(){ System.out.print(\"B\"); } } What is printed by new B()?",
+    answer: "A B",
+    explanation: "The superclass constructor executes automatically before the subclass constructor body."
+  },
+  {
+    id: "icse-x-encapsulation-debug-002",
+    type: "debugging",
+    difficulty: "hard",
+    chapter: "Encapsulation",
+    marks: 4,
+    question: "A class declares private int marks but another class tries to execute obj.marks=95. Identify the error and give the correct design using an accessor and mutator.",
+    answer: "Direct access is illegal because marks is private. Provide methods such as getMarks() and setMarks(int m), then use obj.setMarks(95).",
+    explanation: "Encapsulation hides internal state and provides controlled access through methods."
+  },
+  {
+    id: "icse-x-polymorphism-case-001",
+    type: "case-based",
+    difficulty: "hard",
+    chapter: "Polymorphism",
+    marks: 5,
+    question: "A superclass Shape defines display(). Circle overrides display(). If Shape s = new Circle(); is executed, which display() implementation runs and why?",
+    answer: "Circle's overridden display() runs because method overriding is resolved at runtime for the actual object.",
+    explanation: "The reference type is Shape, but the object created is Circle, so dynamic method dispatch selects Circle's method."
+  }
 ];
 
 export default ICSE_BOARD_PRACTICE_2026_27;

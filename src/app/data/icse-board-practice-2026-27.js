@@ -93,15 +93,14 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     question: "A school utility needs one method to return the greatest of three integers and another overloaded method to return the greatest of three doubles. State the method headers and explain how overloading selects the correct method.",
     answer: "int largest(int a,int b,int c) and double largest(double a,double b,double c). The compiler selects the method whose parameter types match the arguments.",
     explanation: "The method name may remain the same when the parameter list differs; return type alone cannot overload a method."
-  }
-
+  },
   {
     id: "icse-x-inheritance-trace-001",
     type: "output-tracing",
     difficulty: "hard",
     chapter: "Inheritance",
     marks: 4,
-    question: "Predict the output: class A { int x=10; } class B extends A { int x=20; void show(){ System.out.print(super.x+" "+x); } } What is printed by new B().show()?",
+    question: "Predict the output: class A { int x=10; } class B extends A { int x=20; void show(){ System.out.print(super.x+\" \"+x); } } What is printed by new B().show()?",
     answer: "10 20",
     explanation: "super.x refers to A's field while x refers to B's field."
   },

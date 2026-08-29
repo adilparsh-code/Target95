@@ -63,6 +63,36 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     question: "A library stores the number of books issued by 8 classes in an integer array. Write logic to find the highest value, its first position, and then count how many classes issued more than the average number of books.",
     answer: "First compute sum and average; track maximum and its first index with a left-to-right traversal; perform a second traversal to count values greater than the average.",
     explanation: "Separating the aggregate calculation from the comparison pass makes the logic clear and avoids using an incomplete average while traversing."
+  },
+  {
+    id: "icse-x-arrays-debug-002",
+    type: "debugging",
+    difficulty: "hard",
+    chapter: "Arrays",
+    marks: 3,
+    question: "A student writes int[] a={3,6,9,12}; for(int i=0;i<=a.length;i++) System.out.println(a[i]); The program fails at runtime. Identify the boundary error and give the corrected loop condition.",
+    answer: "Use i < a.length. Valid indexes are 0 through a.length-1.",
+    explanation: "The <= condition reaches index 4 for a four-element array, causing ArrayIndexOutOfBoundsException."
+  },
+  {
+    id: "icse-x-strings-trace-002",
+    type: "output-tracing",
+    difficulty: "hard",
+    chapter: "String Handling",
+    marks: 3,
+    question: "Predict the output: String s=\"COMPUTER\"; System.out.println(s.substring(2,6) + \" \" + s.indexOf('P') + \" \" + s.charAt(4));",
+    answer: "MPUT 3 U",
+    explanation: "substring(2,6) takes indexes 2 to 5, indexOf('P') returns 3, and charAt(4) returns U."
+  },
+  {
+    id: "icse-x-methods-case-002",
+    type: "case-based",
+    difficulty: "hard",
+    chapter: "Methods",
+    marks: 4,
+    question: "A school utility needs one method to return the greatest of three integers and another overloaded method to return the greatest of three doubles. State the method headers and explain how overloading selects the correct method.",
+    answer: "int largest(int a,int b,int c) and double largest(double a,double b,double c). The compiler selects the method whose parameter types match the arguments.",
+    explanation: "The method name may remain the same when the parameter list differs; return type alone cannot overload a method."
   }
 ];
 

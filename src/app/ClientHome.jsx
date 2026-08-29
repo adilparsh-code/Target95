@@ -76,6 +76,8 @@ export default function ClientHome() {
   const handleBoardSelect = (boardId) => {
     setSelectedBoard(boardId);
     setBoard(boardId);
+    setSelectedClass(null);
+    setClass(null);
     setShowClasses(true);
     setShowSubjects(false);
     setShowStartLearning(false);

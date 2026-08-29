@@ -4,26 +4,22 @@ import Container from "./ui/Container";
 import AnimatedCounter from "./AnimatedCounter";
 import { javaQuestions, javaChapters } from "../data/javaCurriculum";
 
+const topicCount = javaChapters.reduce(
+  (total, chapter) => total + (Array.isArray(chapter.topics) ? chapter.topics.length : 0),
+  0
+);
+
 const stats = [
-  {
-    end: javaQuestions.length,
-    suffix: "+",
-    title: "Questions Available",
-    icon: "📝",
-  },
-  {
-    end: javaChapters.length,
-    suffix: "",
-    title: "Chapters Covered",
-    icon: "📚",
-  },
+  { end: 0, suffix: "+", title: "Students Learning", icon: "🎓" },
+  { end: javaQuestions.length, suffix: "+", title: "Questions Available", icon: "📝" },
+  { end: topicCount, suffix: "", title: "Topics", icon: "📚" },
+  { end: 0, suffix: "+", title: "Practice Tests", icon: "🏆" },
 ];
 
 export default function Stats() {
   return (
     <section className="relative bg-white py-20 md:py-28" aria-label="Platform highlights">
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 via-white to-white pointer-events-none" />
-
       <Container className="relative">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
@@ -36,13 +32,13 @@ export default function Stats() {
             Straight from our Java Programming content library
           </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 gap-8 md:gap-12 md:grid-cols-4">
           {stats.map((item, index) => (
             <div key={item.title} className="relative text-center group">
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-500">
-                {item.icon}
-              </div>
+              {index < stats.length - 1 && (
+                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-16 w-px bg-gradient-to-b from-transparent via-gray-200 to-transparent" />
+              )}
+              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-500">{item.icon}</div>
               <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-700">
                 <AnimatedCounter end={item.end} suffix={item.suffix} />
               </h2>

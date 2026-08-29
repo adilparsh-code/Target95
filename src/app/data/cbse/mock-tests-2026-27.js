@@ -1,7 +1,9 @@
 /**
- * CBSE mock-test blueprints for session 2026-27.
- * These are configuration blueprints; generated questions are selected from the question bank.
+ * CBSE 2026-27 mock-test blueprints + question selectors.
+ * Actual question content is stored in question-bank-2026-27.js.
  */
+
+import { getCBSEPracticeQuestions } from './question-bank-2026-27';
 
 export const CBSE_MOCK_TEST_BLUEPRINTS = {
   '402': {
@@ -24,5 +26,8 @@ export const CBSE_MOCK_TEST_BLUEPRINTS = {
 
 export const getCBSEMockBlueprint = (subjectCode, classNumber) =>
   CBSE_MOCK_TEST_BLUEPRINTS[String(subjectCode)]?.[Number(classNumber)] ?? null;
+
+export const getCBSEMockQuestions = (classNumber, subjectCode, limit = 20) =>
+  getCBSEPracticeQuestions(classNumber, subjectCode).slice(0, Number(limit));
 
 export default CBSE_MOCK_TEST_BLUEPRINTS;

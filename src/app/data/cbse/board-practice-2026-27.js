@@ -75,6 +75,24 @@ const CBSE_BOARD_PRACTICE_2026_27 = [
     question: "Which database operation is most appropriate when you need to remove only records that satisfy a specified condition?",
     options: ["DELETE with WHERE", "DROP TABLE", "ALTER TABLE", "ORDER BY"], answer: "DELETE with WHERE",
     explanation: "DELETE with a WHERE clause removes matching records while preserving the table structure."
+  },
+  {
+    id: "cbse-083-xi-trace-003", subjectCode: "083", classNumber: 11, type: "output-tracing", difficulty: "Hard", marks: 3, chapter: "Python",
+    question: "Predict the output: d = {'A': 2, 'B': 3}; d['A'] += d.get('C', 4); print(d['A'], len(d))",
+    answer: "6 2",
+    explanation: "get('C', 4) supplies 4 without adding a new key, so A becomes 6 and the dictionary still has two keys."
+  },
+  {
+    id: "cbse-065-xii-case-003", subjectCode: "065", classNumber: 12, type: "case-based", difficulty: "Hard", marks: 4, chapter: "Pandas",
+    question: "A DataFrame Sales has columns City, Product and Amount. Write Pandas code to group by City and calculate total Amount, then sort the result from highest total to lowest.",
+    answer: "Sales.groupby('City', as_index=False)['Amount'].sum().sort_values('Amount', ascending=False)",
+    explanation: "groupby creates city groups, sum aggregates Amount, and sort_values ranks the totals in descending order."
+  },
+  {
+    id: "cbse-402-x-debug-003", subjectCode: "402", classNumber: 10, type: "debugging", difficulty: "Hard", marks: 3, chapter: "Spreadsheets",
+    question: "A teacher writes =IF(AND(B2>=33,C2>=33,D2>=33),\"PASS\",\"FAIL\") but the sheet reports an error because the formula was entered with a leading apostrophe. Identify the issue and state the correction.",
+    answer: "Remove the leading apostrophe so the entry begins with =IF(...). The apostrophe forces the spreadsheet to treat the formula as text.",
+    explanation: "A leading apostrophe is a text marker; it prevents the spreadsheet from evaluating the formula."
   }
 ];
 

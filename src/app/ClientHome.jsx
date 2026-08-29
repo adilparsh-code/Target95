@@ -32,7 +32,7 @@ export const boardClassSubjectMap = {
       { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java"] },
       { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java"] },
       { id: "isc-class-11", title: "ISC Class 11", subjects: ["java"] },
-      { id: "isc-class-12", title: "ISC Class 12", subjects: ["java"] }
+      { id: "isc-class-12", title: "ISC Class 12", subjects: ["boolean-algebra"] }
     ]
   },
   cbse: {

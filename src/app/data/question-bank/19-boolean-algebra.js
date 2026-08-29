@@ -28,7 +28,7 @@ const booleanAlgebraQuestions = [
   },
   {
     id: "isc-xi-boolean-trace-001",
-    type: "output-tracing",
+    type: "output",
     difficulty: "Hard",
     marks: 3,
     topic: "Boolean expression evaluation",
@@ -48,7 +48,7 @@ const booleanAlgebraQuestions = [
   },
   {
     id: "isc-xi-boolean-case-001",
-    type: "case-based",
+    type: "case-study",
     difficulty: "Hard",
     marks: 5,
     topic: "Logic design",
@@ -69,4 +69,3 @@ const booleanAlgebraQuestions = [
 ];
 
 export default booleanAlgebraQuestions;
-export { booleanAlgebraQuestions };

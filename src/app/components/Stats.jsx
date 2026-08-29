@@ -3,6 +3,7 @@
 import Container from "./ui/Container";
 import AnimatedCounter from "./AnimatedCounter";
 import { javaQuestions, javaChapters } from "../data/javaCurriculum";
+import { CATEGORIES as mockTestCategories } from "@/lib/mocktest";
 
 const topicCount = javaChapters.reduce(
   (total, chapter) => total + (Array.isArray(chapter.topics) ? chapter.topics.length : 0),
@@ -10,10 +11,10 @@ const topicCount = javaChapters.reduce(
 );
 
 const stats = [
-  { end: 0, suffix: "+", title: "Students Learning", icon: "🎓" },
+  { end: javaChapters.length, suffix: "", title: "Chapters Covered", icon: "📖" },
   { end: javaQuestions.length, suffix: "+", title: "Questions Available", icon: "📝" },
   { end: topicCount, suffix: "", title: "Topics", icon: "📚" },
-  { end: 0, suffix: "+", title: "Practice Tests", icon: "🏆" },
+  { end: mockTestCategories.length, suffix: "", title: "Practice Tests", icon: "🏆" },
 ];
 
 export default function Stats() {

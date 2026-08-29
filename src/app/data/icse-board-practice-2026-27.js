@@ -94,6 +94,67 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     answer: "int largest(int a,int b,int c) and double largest(double a,double b,double c). The compiler selects the method whose parameter types match the arguments.",
     explanation: "The method name may remain the same when the parameter list differs; return type alone cannot overload a method."
   }
+
+  {
+    id: "icse-x-inheritance-trace-001",
+    type: "output-tracing",
+    difficulty: "hard",
+    chapter: "Inheritance",
+    marks: 4,
+    question: "Predict the output: class A { int x=10; } class B extends A { int x=20; void show(){ System.out.print(super.x+" "+x); } } What is printed by new B().show()?",
+    answer: "10 20",
+    explanation: "super.x refers to A's field while x refers to B's field."
+  },
+  {
+    id: "icse-x-constructors-debug-001",
+    type: "debugging",
+    difficulty: "hard",
+    chapter: "Constructors",
+    marks: 3,
+    question: "A student writes class Box { int n; Box(int x){ n=x; } } and then creates Box b=new Box(); Identify the error and give two valid fixes.",
+    answer: "There is no no-argument constructor. Use new Box(10), or define a separate Box() constructor.",
+    explanation: "Declaring a parameterised constructor prevents Java from supplying an automatic no-argument constructor."
+  },
+  {
+    id: "icse-x-arrays-program-002",
+    type: "programming",
+    difficulty: "hard",
+    chapter: "Arrays",
+    marks: 5,
+    question: "Write Java logic to read 10 integers and display the second-largest distinct value. Assume at least two distinct values exist.",
+    answer: "Traverse once while tracking the largest and second-largest distinct values.",
+    explanation: "The distinct-value condition prevents a duplicate maximum from becoming the second-largest value."
+  },
+  {
+    id: "icse-x-string-case-003",
+    type: "case-based",
+    difficulty: "hard",
+    chapter: "String Handling",
+    marks: 5,
+    question: "Design Java logic to test whether a user-entered word is a palindrome while ignoring case. Compare matching characters from both ends.",
+    answer: "Convert to one case, use left and right indexes, compare while left < right, and report palindrome only if every pair matches.",
+    explanation: "Two-pointer comparison directly tests the palindrome condition."
+  },
+  {
+    id: "icse-x-methods-program-003",
+    type: "programming",
+    difficulty: "hard",
+    chapter: "Methods",
+    marks: 5,
+    question: "Write overloaded Java methods sum() for the first n natural numbers and the first n even numbers. Use different parameter lists.",
+    answer: "Use sum(int n) and sum(int n, boolean even), then call them with appropriate arguments.",
+    explanation: "Overloading requires different parameter lists; return type alone cannot distinguish methods."
+  },
+  {
+    id: "icse-x-library-debug-002",
+    type: "debugging",
+    difficulty: "medium",
+    chapter: "Library Classes",
+    marks: 3,
+    question: "A student writes int n=(int)Math.random()*6+1; but always gets 1. Correct it and explain why.",
+    answer: "Use int n=(int)(Math.random()*6)+1; because casting occurs after multiplication.",
+    explanation: "Casting Math.random() first converts it to 0 before multiplication."
+  },
 ];
 
 export default ICSE_BOARD_PRACTICE_2026_27;

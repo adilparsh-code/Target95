@@ -54,7 +54,7 @@ const booleanAlgebraQuestions = [
     topic: "Logic design",
     question: "A security system opens when a valid card C is present and either a correct PIN P or supervisor override S is active. Write the Boolean expression, simplify any redundant term, and state the condition for opening.",
     answer: "F = C(P + S). The system opens only when C=1 and at least one of P or S is 1.",
-    explanation: "The card condition is mandatory, so it ANDs with the alternative PIN/override condition. The expression is already minimal unless additional circuit constraints are imposed."
+    explanation: "The card condition is mandatory, so it ANDs with the alternative PIN/override condition."
   },
   {
     id: "isc-xi-boolean-programming-001",
@@ -62,10 +62,10 @@ const booleanAlgebraQuestions = [
     difficulty: "Hard",
     marks: 5,
     topic: "Boolean decision logic",
-    question: "Write a Java program that accepts three Boolean values A, B and C and prints the value of F = (A && !B) || (!A && C). Also test the program for A=true, B=false, C=false.",
-    answer: "For the test case, F=true.",
-    explanation: "A && !B is true because A=true and !B=true. The second term is false, so the OR result is true."
+    question: "Write a Java program that accepts three Boolean values A, B and C and prints F = (A && !B) || (!A && C). Test A=true, B=false, C=false.",
+    answer: "F=true.",
+    explanation: "A && !B is true for the given test case, so the OR result is true."
   }
 ];
 
-export default booleanAlgebraQuestions;
+module.exports = booleanAlgebraQuestions;

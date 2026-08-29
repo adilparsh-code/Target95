@@ -68,4 +68,4 @@ const booleanAlgebraQuestions = [
   }
 ];
 
-module.exports = booleanAlgebraQuestions;
+export default booleanAlgebraQuestions;

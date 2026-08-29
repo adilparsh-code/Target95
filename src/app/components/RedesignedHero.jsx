@@ -3,31 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import subjectsData from "../data/subjects";
-
-const boardClassSubjectMap = {
-  cisce: {
-    title: "CISCE",
-    description: "ICSE Classes 9–10 and ISC Classes 11–12 Computer Science.",
-    accent: "from-blue-600 to-indigo-600",
-    classes: [
-      { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java"] },
-      { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java"] },
-      { id: "isc-class-11", title: "ISC Class 11", subjects: ["java"] },
-      { id: "isc-class-12", title: "ISC Class 12", subjects: ["java"] },
-    ],
-  },
-  cbse: {
-    title: "CBSE",
-    description: "CBSE Computer Science with Python for Classes 9–12.",
-    accent: "from-emerald-600 to-teal-600",
-    classes: [
-      { id: "cbse-class-9", title: "Class 9", subjects: ["python"] },
-      { id: "cbse-class-10", title: "Class 10", subjects: ["python"] },
-      { id: "cbse-class-11", title: "Class 11", subjects: ["python"] },
-      { id: "cbse-class-12", title: "Class 12", subjects: ["python"] },
-    ],
-  },
-};
+import { boardClassSubjectMap } from "../ClientHome";
 
 export default function RedesignedHero({
   onBoardSelect,
@@ -46,9 +22,9 @@ export default function RedesignedHero({
   const availableClasses = board?.classes || [];
   const availableSubjects = useMemo(() => {
     if (!selectedClass?.subjects) return [];
-    return subjectsData.filter(
-      (subject) => selectedClass.subjects.includes(subject.id) && !subject.comingSoon
-    );
+    return selectedClass.subjects
+      .map((subjectId) => subjectsData.find((subject) => subject.id === subjectId))
+      .filter((subject) => subject && !subject.comingSoon);
   }, [selectedClass]);
 
   return (
@@ -114,22 +90,13 @@ export default function RedesignedHero({
                     onClick={() => onBoardSelect?.(id)}
                     className="group rounded-3xl border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-1 hover:border-slate-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-slate-600"
                   >
-                    <div
-                      className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.accent} text-2xl text-white shadow-md`}
-                    >
+                    <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${item.accent || "from-blue-600 to-indigo-600"} text-2xl text-white shadow-md`}>
                       {id === "cisce" ? "🎓" : "🏫"}
                     </div>
-                    <h3 className="mt-6 text-2xl font-black text-slate-950 dark:text-white">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                      {item.description}
-                    </p>
+                    <h3 className="mt-6 text-2xl font-black text-slate-950 dark:text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.description}</p>
                     <span className="mt-6 inline-flex items-center font-bold text-blue-600 dark:text-blue-400">
-                      Select Board{" "}
-                      <span className="ml-2 transition-transform group-hover:translate-x-1">
-                        →
-                      </span>
+                      Select Board <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
                     </span>
                   </button>
                 ))}
@@ -151,15 +118,9 @@ export default function RedesignedHero({
             {showClasses && (
               <div>
                 <div className="mb-8">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">
-                    {board?.title}
-                  </p>
-                  <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-5xl dark:text-white">
-                    Choose your class
-                  </h2>
-                  <p className="mt-3 text-slate-600 dark:text-slate-300">
-                    Pick your class to continue into the relevant Computer Science subject.
-                  </p>
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">{board?.title}</p>
+                  <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-5xl dark:text-white">Choose your class</h2>
+                  <p className="mt-3 text-slate-600 dark:text-slate-300">Pick your class to continue into the relevant Computer Science subject.</p>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {availableClasses.map((item) => (
@@ -169,15 +130,9 @@ export default function RedesignedHero({
                       onClick={() => onClassSelect?.(item)}
                       className="rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-900"
                     >
-                      <span className="text-sm font-bold text-slate-500 dark:text-slate-400">
-                        {board?.title}
-                      </span>
-                      <h3 className="mt-2 text-xl font-black text-slate-950 dark:text-white">
-                        {item.title}
-                      </h3>
-                      <span className="mt-4 inline-flex font-semibold text-blue-600 dark:text-blue-400">
-                        Continue →
-                      </span>
+                      <span className="text-sm font-bold text-slate-500 dark:text-slate-400">{board?.title}</span>
+                      <h3 className="mt-2 text-xl font-black text-slate-950 dark:text-white">{item.title}</h3>
+                      <span className="mt-4 inline-flex font-semibold text-blue-600 dark:text-blue-400">Continue →</span>
                     </button>
                   ))}
                 </div>
@@ -187,56 +142,29 @@ export default function RedesignedHero({
             {showSubjects && (
               <div>
                 <div className="mb-8">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">
-                    {selectedClass?.title}
-                  </p>
-                  <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-5xl dark:text-white">
-                    Choose your subject
-                  </h2>
-                  <p className="mt-3 text-slate-600 dark:text-slate-300">
-                    Start with the subject mapped to your selected curriculum.
-                  </p>
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">{selectedClass?.title}</p>
+                  <h2 className="mt-2 text-3xl font-black text-slate-950 sm:text-5xl dark:text-white">Choose your subject</h2>
+                  <p className="mt-3 text-slate-600 dark:text-slate-300">Start with the subject mapped to your selected curriculum.</p>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
                   {availableSubjects.map((subject) => (
                     <Link
+                      key={subject.id}
                       className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-700 dark:bg-slate-900"
                       href={subject.href}
-                      key={subject.id}
                     >
-                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-3xl dark:bg-slate-800">
-                        {subject.icon}
-                      </div>
-                      <h3 className="mt-5 text-2xl font-black text-slate-950 dark:text-white">
-                        {subject.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
-                        {subject.description}
-                      </p>
-                      <span className="mt-5 inline-flex font-bold text-blue-600 dark:text-blue-400">
-                        Open subject{" "}
-                        <span className="ml-2 transition-transform group-hover:translate-x-1">
-                          →
-                        </span>
-                      </span>
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-3xl dark:bg-slate-800">{subject.icon}</div>
+                      <h3 className="mt-5 text-2xl font-black text-slate-950 dark:text-white">{subject.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{subject.description}</p>
+                      <span className="mt-5 inline-flex font-bold text-blue-600 dark:text-blue-400">Open subject <span className="ml-2 transition-transform group-hover:translate-x-1">→</span></span>
                     </Link>
                   ))}
                 </div>
                 {showStartLearning && personalization?.subject && (
                   <div className="mt-8 rounded-3xl border border-blue-200 bg-blue-50 p-6 dark:border-blue-900 dark:bg-blue-950/40">
-                    <h3 className="text-xl font-black text-slate-950 dark:text-white">
-                      Continue your current path
-                    </h3>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                      Your saved learning path is ready.
-                    </p>
-                    <button
-                      type="button"
-                      onClick={onStartLearning}
-                      className="mt-5 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-700"
-                    >
-                      Continue Learning →
-                    </button>
+                    <h3 className="text-xl font-black text-slate-950 dark:text-white">Continue your current path</h3>
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Your saved learning path is ready.</p>
+                    <button type="button" onClick={onStartLearning} className="mt-5 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-700">Continue Learning →</button>
                   </div>
                 )}
               </div>
@@ -244,45 +172,19 @@ export default function RedesignedHero({
           </div>
         )}
 
-        {!showClasses &&
-          !showSubjects &&
-          personalization?.board &&
-          personalization?.class &&
-          personalization?.subject && (
-            <div className="mx-auto max-w-3xl rounded-3xl border border-blue-200 bg-blue-50 p-8 text-center dark:border-blue-900 dark:bg-blue-950/40">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">
-                Welcome back
-              </p>
-              <h2 className="mt-3 text-3xl font-black text-slate-950 dark:text-white">
-                Continue where you left off
-              </h2>
-              <p className="mt-3 text-slate-600 dark:text-slate-300">
-                {personalization.board?.toUpperCase()} · {personalization.class?.title}
-              </p>
-              <button
-                type="button"
-                onClick={onStartLearning}
-                className="mt-6 rounded-xl bg-blue-600 px-6 py-3 font-bold text-white hover:bg-blue-700"
-              >
-                Continue Learning →
-              </button>
-            </div>
-          )}
+        {!showClasses && !showSubjects && personalization?.board && personalization?.class && personalization?.subject && (
+          <div className="mx-auto max-w-3xl rounded-3xl border border-blue-200 bg-blue-50 p-8 text-center dark:border-blue-900 dark:bg-blue-950/40">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">Welcome back</p>
+            <h2 className="mt-3 text-3xl font-black text-slate-950 dark:text-white">Continue where you left off</h2>
+            <p className="mt-3 text-slate-600 dark:text-slate-300">{personalization.board?.toUpperCase()} · {personalization.class?.title}</p>
+            <button type="button" onClick={onStartLearning} className="mt-6 rounded-xl bg-blue-600 px-6 py-3 font-bold text-white hover:bg-blue-700">Continue Learning →</button>
+          </div>
+        )}
 
         {!showClasses && !showSubjects && (
           <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <Link
-              className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-              href="/question-bank"
-            >
-              Explore Question Bank
-            </Link>
-            <Link
-              className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
-              href="/ai-tutor"
-            >
-              Ask AI Tutor
-            </Link>
+            <Link className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white" href="/question-bank">Explore Question Bank</Link>
+            <Link className="rounded-xl border border-slate-300 bg-white px-5 py-3 font-semibold text-slate-800 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-white" href="/ai-tutor">Ask AI Tutor</Link>
           </div>
         )}
       </div>

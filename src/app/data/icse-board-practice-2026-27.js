@@ -190,7 +190,7 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     difficulty: "hard",
     chapter: "Constructors",
     marks: 4,
-    question: "Predict the output: class A { A(){ System.out.print(\"A \" ); } } class B extends A { B(){ System.out.print(\"B\"); } } What is printed by new B()?,",
+    question: "Predict the output: class A { A(){ System.out.print(\"A \" ); } } class B extends A { B(){ System.out.print(\"B\"); } } What is printed by new B()?",
     answer: "A B",
     explanation: "The superclass constructor executes automatically before the subclass constructor body."
   },

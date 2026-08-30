@@ -214,6 +214,87 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     answer: "Circle's overridden display() runs because method overriding is resolved at runtime for the actual object.",
     explanation: "The reference type is Shape, but the object created is Circle, so dynamic method dispatch selects Circle's method."
   }
+,
+  {
+    id: "icse-x-strings-program-004",
+    type: "programming",
+    difficulty: "hard",
+    chapter: "String Handling",
+    marks: 5,
+    question: "Write Java logic to count and display the number of vowels, consonants and spaces in a sentence. Treat uppercase and lowercase letters as equivalent.",
+    answer: "Traverse the string; for each character use Character.isLetter(), then convert to lowercase and test a,e,i,o,u. Count spaces separately and ignore other symbols.",
+    explanation: "The solution must distinguish letters from spaces and punctuation before classifying vowels and consonants."
+  },
+  {
+    id: "icse-x-arrays-trace-004",
+    type: "output-tracing",
+    difficulty: "hard",
+    chapter: "Arrays",
+    marks: 4,
+    question: "Predict the output: int[] a={2,4,6,8,10}; for(int i=a.length-1;i>=0;i-=2) System.out.print(a[i]+" ");",
+    answer: "10 6 2",
+    explanation: "The loop starts at index 4 and decreases by 2, visiting indexes 4, 2 and 0."
+  },
+  {
+    id: "icse-x-loops-debug-004",
+    type: "debugging",
+    difficulty: "hard",
+    chapter: "Loops",
+    marks: 3,
+    question: "A student writes for(int i=1;i<=10;i--){ System.out.println(i); } and the program does not terminate as expected. Identify the error and correct the loop for printing 1 to 10.",
+    answer: "The update i-- moves away from the condition. Use i++: for(int i=1;i<=10;i++).",
+    explanation: "A loop intended to increase from 1 to 10 must increment the control variable."
+  },
+  {
+    id: "icse-x-numbers-case-004",
+    type: "case-based",
+    difficulty: "hard",
+    chapter: "Number Systems",
+    marks: 5,
+    question: "A school wants to classify a positive integer as a palindrome number. Write Java logic that reverses the number without converting it to String and compares the reverse with the original.",
+    answer: "Store the original number, repeatedly take digit=n%10, build reverse=reverse*10+digit, then n/=10; finally compare reverse with the original.",
+    explanation: "Digit extraction with modulo and integer division is the standard numeric approach and avoids String conversion."
+  },
+  {
+    id: "icse-x-inheritance-debug-003",
+    type: "debugging",
+    difficulty: "hard",
+    chapter: "Inheritance",
+    marks: 4,
+    question: "A subclass constructor tries to execute super(); after this statement it declares another call to super(name). The compiler reports an error. Explain the rule.",
+    answer: "A constructor can invoke only one superclass constructor, and the super(...) call must be the first statement.",
+    explanation: "Java permits one explicit superclass-constructor invocation per constructor, and it must occur before any other statement."
+  },
+  {
+    id: "icse-x-constructors-case-003",
+    type: "case-based",
+    difficulty: "medium",
+    chapter: "Constructors",
+    marks: 4,
+    question: "A class Book needs objects created either with only a title or with a title and price. Design two constructors and explain why this is constructor overloading.",
+    answer: "Book(String title) and Book(String title, double price). They have the same name but different parameter lists.",
+    explanation: "Constructor overloading allows objects to be initialized with different sets of supplied values."
+  },
+  {
+    id: "icse-x-encapsulation-program-003",
+    type: "programming",
+    difficulty: "hard",
+    chapter: "Encapsulation",
+    marks: 5,
+    question: "Create a class Account with a private balance. Write a setter that rejects negative balances and a getter that returns the current balance.",
+    answer: "Use private double balance; setBalance(double b){ if(b>=0) balance=b; } and getBalance(){ return balance; }.",
+    explanation: "The setter enforces a validity rule while the private field prevents uncontrolled direct modification."
+  },
+  {
+    id: "icse-x-polymorphism-trace-002",
+    type: "output-tracing",
+    difficulty: "hard",
+    chapter: "Polymorphism",
+    marks: 4,
+    question: "Predict the output: class A{void show(){System.out.print("A");}} class B extends A{void show(){System.out.print("B");}} A obj=new B(); obj.show();",
+    answer: "B",
+    explanation: "The reference is of type A but the runtime object is B, so the overridden B.show() executes."
+  }
 ];
 
 export default ICSE_BOARD_PRACTICE_2026_27;

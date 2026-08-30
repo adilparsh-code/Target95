@@ -2,7 +2,7 @@ import { getCBSESubjectTrack } from './subjects-2026-27';
 
 /**
  * CBSE 2026-27 practice question bank.
- * Keep board, class and subject explicit so ICSE data never leaks into CBSE.
+ * Board, class and subject are always explicit so ICSE data never leaks into CBSE.
  */
 export const CBSE_PRACTICE_QUESTIONS_2026_27 = [
   { id:'CBSE-402-9-001', board:'CBSE', session:'2026-27', classNumber:9, subjectCode:'402', type:'mcq', topic:'IT and ITeS', difficulty:'easy', question:'Which term refers to services enabled or delivered through information technology?', options:['ITeS','BIOS','HTML','CPU'], answer:'ITeS', explanation:'ITeS stands for Information Technology enabled Services.' },
@@ -28,7 +28,7 @@ export const CBSE_PRACTICE_QUESTIONS_2026_27 = [
   { id:'CBSE-065-11-002', board:'CBSE', session:'2026-27', classNumber:11, subjectCode:'065', type:'mcq', topic:'CSV and Pandas', difficulty:'medium', question:'Which Pandas function commonly reads a CSV file into a DataFrame?', options:['read_csv()','to_csv()','plot()','group_sql()'], answer:'read_csv()', explanation:'read_csv() imports CSV data into a DataFrame.' },
   { id:'CBSE-065-11-003', board:'CBSE', session:'2026-27', classNumber:11, subjectCode:'065', type:'mcq', topic:'Matplotlib', difficulty:'easy', question:'Which function is commonly used to draw a line plot in Matplotlib?', options:['plot()','read_csv()','head()','drop()'], answer:'plot()', explanation:'matplotlib.pyplot.plot() is commonly used for line plots.' },
   { id:'CBSE-065-12-001', board:'CBSE', session:'2026-27', classNumber:12, subjectCode:'065', type:'mcq', topic:'SQL', difficulty:'medium', question:'Which clause groups rows with the same values for selected columns?', options:['GROUP BY','WHERE','FROM','INSERT'], answer:'GROUP BY', explanation:'GROUP BY forms groups for aggregate analysis.' },
-  { id:'CBSE-065-12-002', board:'CBSE', session:'2026-27', classNumber:12, subjectCode:'065', type:'scenario', topic:'Pandas', difficulty:'medium', question:'A DataFrame contains student marks and you need the rows with marks above 80. What should you use?', answer:"A Boolean filter such as df[df['marks'] > 80].", explanation:'Boolean filtering selects rows satisfying a condition.' },
+  { id:'CBSE-065-12-002', board:'CBSE', session:'2026-27', classNumber:12, subjectCode:'065', type:'scenario', topic:'Pandas', difficulty:'medium', question:'A DataFrame contains student marks and you need the rows with marks above 80. What should you use?', answer:"A Boolean filter such as df['marks'] > 80.", explanation:'Boolean filtering selects rows satisfying a condition.' },
   { id:'CBSE-802-11-001', board:'CBSE', session:'2026-27', classNumber:11, subjectCode:'802', type:'mcq', topic:'Cyber Safety', difficulty:'easy', question:'Which action best protects a user account from unauthorized access?', options:['Using a strong unique password','Sharing the password','Ignoring security updates','Opening unknown attachments'], answer:'Using a strong unique password', explanation:'Strong unique credentials reduce unauthorized access risk.' },
   { id:'CBSE-802-12-001', board:'CBSE', session:'2026-27', classNumber:12, subjectCode:'802', type:'scenario', topic:'Data Privacy', difficulty:'medium', question:'Before sharing a work file containing personal information, what should be checked?', answer:'Privacy, audience, and access permissions.', explanation:'Sensitive information should only be shared with appropriate authorized users.' },
 ];

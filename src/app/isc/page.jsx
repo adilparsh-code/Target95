@@ -2,10 +2,16 @@ import Link from "next/link";
 
 const sections = [
   {
-    title: "ICSE Class IX",
-    description: "Robotics & AI learning modules for ICSE Class IX.",
+    title: "ICSE Class IX · Robotics & AI",
+    description: "Robotics and Artificial Intelligence learning modules for ICSE Class IX.",
     href: "/isc/robotics-ai",
-    badge: "ICSE",
+    badge: "ICSE IX",
+  },
+  {
+    title: "ICSE Class X · AI",
+    description: "Syllabus-aligned Class X Artificial Intelligence theory, Python and board-style practice.",
+    href: "/isc/robotics-ai/class-x",
+    badge: "ICSE X",
   },
   {
     title: "ISC Class XI",
@@ -31,7 +37,7 @@ export default function ISCHubPage() {
           <h1 className="mt-3 text-4xl font-black tracking-tight md:text-6xl">Choose your class.</h1>
           <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">A direct learning hub for the ICSE and ISC Computer Science content already available in Target95.</p>
         </header>
-        <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-label="ICSE and ISC classes">
+        <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4" aria-label="ICSE and ISC classes">
           {sections.map((section) => (
             <Link key={section.href} href={section.href} className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-800 dark:bg-slate-900">
               <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white dark:bg-white dark:text-slate-950">{section.badge}</span>

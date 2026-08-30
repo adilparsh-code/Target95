@@ -1,9 +1,10 @@
 import { javaQuestions } from "@/app/data/javaCurriculum";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
+import { ICSE_BOARD_PRACTICE_2026_27 } from "@/app/data/icse-board-practice-2026-27";
 
-const QUESTION_TYPES = ["mcq", "programming", "output", "theory", "fill-blank", "true-false"];
+const QUESTION_TYPES = ["mcq", "programming", "output", "theory", "fill-blank", "true-false", "output-tracing", "debugging", "case-based"];
 
-export function normalizeQuestion(question) {
+function normalizeQuestion(question) {
   const questionType = question.questionType || question.type || "theory";
   const meta = resolveChapterMetadata(question.chapter || question.slug || "");
   return {
@@ -32,7 +33,10 @@ export function normalizeQuestion(question) {
   };
 }
 
-export const questionBankQuestions = javaQuestions.map(normalizeQuestion);
+export const questionBankQuestions = [
+  ...javaQuestions,
+  ...ICSE_BOARD_PRACTICE_2026_27,
+].map(normalizeQuestion);
 
 export function getQuestionBankFilters(questions = questionBankQuestions) {
   const unique = (key) => [...new Set(questions.map((question) => question[key]).filter(Boolean))].sort();

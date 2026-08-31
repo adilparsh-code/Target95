@@ -9,6 +9,7 @@ export class AcademicDataValidator {
     this.appDataDir = path.join(this.srcDir, 'app', 'data');
     this.chaptersDir = path.join(this.appDataDir, 'chapter-content');
     this.questionBankDir = path.join(this.appDataDir, 'question-bank');
+    this.icseSupplementalBankFile = path.join(this.appDataDir, 'icse-board-practice-2026-27.js');
     this.javaCurriculumFile = path.join(this.appDataDir, 'javaCurriculum.js');
     this.chapterContentFile = path.join(this.srcDir, 'lib', 'chapterContent.js');
     this.subjectsFile = path.join(this.appDataDir, 'subjects.js');
@@ -173,6 +174,15 @@ export class AcademicDataValidator {
     return canonical;
   }
 
+  validateSupplementalBankSource() {
+    if (!fs.existsSync(this.icseSupplementalBankFile)) return;
+    const text = fs.readFileSync(this.icseSupplementalBankFile, 'utf8');
+    try { new vm.Script(text, { filename: this.icseSupplementalBankFile }); }
+    catch (error) {
+      this.addFinding('ERROR', 'SOURCE', `ICSE supplemental question bank has invalid JavaScript: ${error.message}`, this.icseSupplementalBankFile);
+    }
+  }
+
   validateSectionStructures() {
     if (!fs.existsSync(this.chapterContentFile)) return;
     const contract = fs.readFileSync(this.chapterContentFile, 'utf8');
@@ -197,6 +207,7 @@ export class AcademicDataValidator {
   async validate() {
     this.findings = [];
     this.legacyQuestionBankChapters = [];
+    this.validateSupplementalBankSource();
     this.validateSectionStructures();
     const chapterRecords = this.normalizeDuplicateChapterRecords(this.readChapterContentRecords());
     const questionRecords = await this.readQuestionBankRecords();

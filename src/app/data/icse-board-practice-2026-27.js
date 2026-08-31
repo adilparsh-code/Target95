@@ -22,12 +22,12 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
   },
   {
     id:"icse-x-strings-debug-001",type:"debugging",difficulty:"hard",chapter:"String Handling",marks:3,
-    question:"String a="JAVA"; String b=new String("JAVA"); if(a==b) System.out.println("Same"); else System.out.println("Different"). Identify the error.",
+    question:'String a="JAVA"; String b=new String("JAVA"); if(a==b) System.out.println("Same"); else System.out.println("Different"). Identify the error.',
     answer:"Use a.equals(b) because == compares references while equals() compares String contents.",explanation:"The two String objects contain the same text but are different objects."
   },
   {
     id:"icse-x-strings-trace-002",type:"output-tracing",difficulty:"hard",chapter:"String Handling",marks:3,
-    question:"Predict the output: String s="COMPUTER"; System.out.println(s.substring(2,6)+" "+s.indexOf('P')+" "+s.charAt(4));",
+    question:'Predict the output: String s="COMPUTER"; System.out.println(s.substring(2,6)+" "+s.indexOf("P")+" "+s.charAt(4));',
     answer:"MPUT 3 U",explanation:"substring excludes index 6; P is at index 3 and index 4 is U."
   },
   {
@@ -107,7 +107,7 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
   },
   {
     id:"icse-x-constructors-trace-002",type:"output-tracing",difficulty:"hard",chapter:"Constructors",marks:4,
-    question:"Predict the output: class A{A(){System.out.print("A ");}} class B extends A{B(){System.out.print("B");}} What is printed by new B()?",
+    question:'Predict the output: class A{A(){System.out.print("A ");}} class B extends A{B(){System.out.print("B");}} What is printed by new B()?',
     answer:"A B",explanation:"The superclass constructor executes before the subclass constructor body."
   },
   {
@@ -132,7 +132,7 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
   },
   {
     id:"icse-x-polymorphism-trace-002",type:"output-tracing",difficulty:"hard",chapter:"Polymorphism",marks:4,
-    question:"Predict the output: class A{void show(){System.out.print("A");}} class B extends A{void show(){System.out.print("B");}} A obj=new B(); obj.show();",
+    question:'Predict the output: class A{void show(){System.out.print("A");}} class B extends A{void show(){System.out.print("B");}} A obj=new B(); obj.show();',
     answer:"B",explanation:"The overridden method is selected using the runtime object."
   },
   {

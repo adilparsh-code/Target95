@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 import Navbar from "./components/Navbar";
@@ -48,7 +48,7 @@ export const boardClassSubjectMap = {
 };
 
 function getStartLearningHref(board, selectedClass) {
-  if (board !== "cisce" || !selectedClass?.id) return "/study";
+  if (!selectedClass?.id) return "/study";
 
   const classRoutes = {
     "icse-class-9": "/Java",
@@ -57,7 +57,7 @@ function getStartLearningHref(board, selectedClass) {
     "isc-class-12": "/isc/class-xii",
   };
 
-  return classRoutes[selectedClass.id] || "/study";
+  return board === "cisce" ? classRoutes[selectedClass.id] || "/study" : "/study";
 }
 
 export default function ClientHome() {
@@ -67,7 +67,7 @@ export default function ClientHome() {
   const [showSubjects, setShowSubjects] = useState(false);
   const [showStartLearning, setShowStartLearning] = useState(false);
 
-  const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, clearPersonalization, isHydrated } = usePersonalization();
+  const { board, class: selectedClassData, subject, setBoard, setClass, clearPersonalization, isHydrated } = usePersonalization();
 
   const personalization = useMemo(() => ({
     board,
@@ -125,7 +125,7 @@ export default function ClientHome() {
   const startLearningHref = getStartLearningHref(board, selectedClassData || selectedClass);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <main id="main-content" className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <ErrorBoundary>
         <RedesignedHero
@@ -139,7 +139,7 @@ export default function ClientHome() {
           selectedClass={selectedClass}
           showStartLearning={showStartLearning}
           onStartLearning={() => { window.location.assign(startLearningHref); }}
-          personalization={{ board, class: selectedClassData, subject }}
+          personalization={personalization}
         />
         <Stats />
         <WhyTarget95 />

@@ -2,7 +2,8 @@
 
 import Container from "./ui/Container";
 import AnimatedCounter from "./AnimatedCounter";
-import { javaQuestions, javaChapters } from "../data/javaCurriculum";
+import { javaChapters } from "../data/javaCurriculum";
+import { allJavaChapterQuestions } from "../../lib/javaChapterQuestionBank";
 import { CATEGORIES as mockTestCategories } from "@/lib/mocktest";
 
 const topicCount = javaChapters.reduce(
@@ -12,7 +13,7 @@ const topicCount = javaChapters.reduce(
 
 const stats = [
   { end: javaChapters.length, suffix: "", title: "Chapters Covered", icon: "📖" },
-  { end: javaQuestions.length, suffix: "+", title: "Questions Available", icon: "📝" },
+  { end: allJavaChapterQuestions.length, suffix: "+", title: "Questions Available", icon: "📝" },
   { end: topicCount, suffix: "", title: "Topics", icon: "📚" },
   { end: mockTestCategories.length, suffix: "", title: "Practice Tests", icon: "🏆" },
 ];

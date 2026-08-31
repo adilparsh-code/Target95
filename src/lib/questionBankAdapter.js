@@ -1,4 +1,4 @@
-import { javaQuestions } from "@/app/data/javaCurriculum";
+import { allJavaChapterQuestions, chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 import { ICSE_BOARD_PRACTICE_2026_27 } from "@/app/data/icse-board-practice-2026-27";
 
@@ -50,14 +50,15 @@ export function normalizeQuestion(question) {
     isCompleted: Boolean(question.isCompleted),
     createdAt: question.createdAt || null,
     updatedAt: question.updatedAt || null,
-    practiceHref: question.chapter
-      ? `/Java/${question.chapter}/question/${question.id}`
-      : "/practice/setup",
+    practiceHref:
+      question.chapter && chapterQuestionBankBySlug[question.chapter]
+        ? `/Java/${question.chapter}/question/${question.id}`
+        : "/question-bank",
   };
 }
 
 export const questionBankQuestions = [
-  ...javaQuestions,
+  ...allJavaChapterQuestions,
   ...ICSE_BOARD_PRACTICE_2026_27,
 ].map(normalizeQuestion);
 

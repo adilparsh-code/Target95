@@ -1,5 +1,6 @@
 import subjects from "@/app/data/subjects";
 import { javaQuestions, javaSubject } from "@/app/data/javaCurriculum";
+import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
 
 // The single read model for the learning journey: subject → chapter → question.
 // A future content API can provide this shape without changing consuming pages.
@@ -8,7 +9,19 @@ export const curriculum = subjects.map((subject) => {
 
   return {
     ...subject,
-    chapters: javaSubject.chapters,
+    chapters: javaSubject.chapters.map((chapter) => {
+      // Prefer the real, academically-authored question bank for any java
+      // chapter it covers, so the student chapter flow never shows the
+      // generated placeholder questions. Only fall back to the legacy
+      // generated set for chapters without a real mapping.
+      const realQuestions = chapterQuestionBankBySlug[chapter.slug];
+      const questions =
+        realQuestions && realQuestions.length
+          ? realQuestions
+          : chapter.questions;
+
+      return { ...chapter, questions, questionCount: questions.length };
+    }),
   };
 });
 

@@ -93,7 +93,74 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       question: "Design a small Java class that stores data, validates input through a method, and generates a formatted result. Explain your choice of fields, constructor and methods.",
     },
   ],
+  caseBased: [
+    {
+      id: "JXII-CB01",
+      type: "case-based",
+      difficulty: "board",
+      topic: "Inheritance and polymorphism",
+      case: "A school system stores Student records and uses a specialized Scholar subclass. The program keeps a Student reference to a Scholar object and calls an overridden display() method.",
+      questions: [
+        "Identify the reference type and actual object type.",
+        "Predict which display() implementation executes.",
+        "Explain why a Scholar-only method cannot be called through the Student reference.",
+        "Name the OOP concept demonstrated."
+      ],
+      answers: [
+        "Reference type: Student; actual object type: Scholar.",
+        "Scholar's overridden display() executes at runtime.",
+        "Member access is checked against the Student reference type at compile time.",
+        "Runtime polymorphism / dynamic method dispatch."
+      ]
+    }
+  ],
+  tracing: [
+    {
+      id: "JXII-TRACE01",
+      type: "tracing",
+      difficulty: "board",
+      topic: "Recursion",
+      question: "Trace factorial for n = 4. Give the call sequence and return sequence.",
+      answer: "Calls: fact(4) -> fact(3) -> fact(2) -> fact(1). Returns: 1 -> 2 -> 6 -> 24."
+    },
+    {
+      id: "JXII-TRACE02",
+      type: "tracing",
+      difficulty: "board",
+      topic: "Array traversal",
+      question: "Trace a loop that visits every element of an integer array and accumulates values greater than 10. Include the final valid index.",
+      answer: "Evaluate the condition at every index and update the accumulator only when the value is greater than 10."
+    }
+  ],
   mcqs: [
+    {
+      id: "JXII-MCQ03",
+      question: "Which change creates an overriding relationship?",
+      options: ["A) Use unrelated classes", "B) Move the same-signature method into a subclass", "C) Rename a local variable", "D) Change a comment"],
+      answer: "B",
+      explanation: "Overriding requires inheritance and a compatible same-signature method in the subclass."
+    },
+    {
+      id: "JXII-MCQ04",
+      question: "Which loop condition visits every element of int[] a exactly once?",
+      options: ["A) i <= a.length", "B) i < a.length", "C) i < a.length - 1", "D) i == a.length"],
+      answer: "B",
+      explanation: "Valid indices are 0 through a.length - 1."
+    },
+    {
+      id: "JXII-MCQ05",
+      question: "What is the purpose of a recursive base case?",
+      options: ["A) Stop recursive expansion", "B) Create an object", "C) Overload a method", "D) Increase recursion"],
+      answer: "A",
+      explanation: "The base case terminates recursive calls."
+    },
+    {
+      id: "JXII-MCQ06",
+      question: "Which exception is raised for an invalid array index at runtime?",
+      options: ["A) IOException", "B) ArithmeticException", "C) ArrayIndexOutOfBoundsException", "D) ClassCastException"],
+      answer: "C",
+      explanation: "Java reports an invalid array index with ArrayIndexOutOfBoundsException."
+    },
     {
       id: "JXII-MCQ01",
       question: "Which statement best describes method overriding?",

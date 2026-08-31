@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
+import Link from "next/link";
 
 import Navbar from "./components/Navbar";
 import RedesignedHero from "./components/RedesignedHero";
@@ -46,6 +47,19 @@ export const boardClassSubjectMap = {
   }
 };
 
+function getStartLearningHref(board, selectedClass) {
+  if (board !== "cisce" || !selectedClass?.id) return "/study";
+
+  const classRoutes = {
+    "icse-class-9": "/Java",
+    "icse-class-10": "/Java",
+    "isc-class-11": "/isc/class-xi",
+    "isc-class-12": "/isc/class-xii",
+  };
+
+  return classRoutes[selectedClass.id] || "/study";
+}
+
 export default function ClientHome() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
@@ -76,6 +90,8 @@ export default function ClientHome() {
   const handleBoardSelect = (boardId) => {
     setSelectedBoard(boardId);
     setBoard(boardId);
+    setSelectedClass(null);
+    setClass(null);
     setShowClasses(true);
     setShowSubjects(false);
     setShowStartLearning(false);
@@ -106,11 +122,7 @@ export default function ClientHome() {
     setShowStartLearning(false);
   };
 
-  const handleStartLearning = () => {
-    if (subject) {
-      window.location.href = "/study";
-    }
-  };
+  const startLearningHref = getStartLearningHref(board, selectedClassData || selectedClass);
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -126,7 +138,7 @@ export default function ClientHome() {
           selectedBoard={selectedBoard}
           selectedClass={selectedClass}
           showStartLearning={showStartLearning}
-          onStartLearning={handleStartLearning}
+          onStartLearning={() => { window.location.assign(startLearningHref); }}
           personalization={{ board, class: selectedClassData, subject }}
         />
         <Stats />

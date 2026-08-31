@@ -104,3 +104,12 @@ export function filterQuestionBank(questions, filters) {
     );
   });
 }
+
+export function getQuestionBankChapter(slug) {
+  return questionBankQuestions.filter(q => 
+    q.chapterSlug === slug || 
+    q.chapter?.toLowerCase().replace(/\s+/g, '-') === slug
+  );
+}
+
+export default getQuestionBankChapter;

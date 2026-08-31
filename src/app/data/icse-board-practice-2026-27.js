@@ -231,7 +231,7 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     difficulty: "hard",
     chapter: "Arrays",
     marks: 4,
-    question: "Predict the output: int[] a={2,4,6,8,10}; for(int i=a.length-1;i>=0;i-=2) System.out.print(a[i]+" ");",
+    question: "Predict the output: int[] a={2,4,6,8,10}; for(int i=a.length-1;i>=0;i-=2) System.out.print(a[i]+\" \");",
     answer: "10 6 2",
     explanation: "The loop starts at index 4 and decreases by 2, visiting indexes 4, 2 and 0."
   },
@@ -291,7 +291,7 @@ const ICSE_BOARD_PRACTICE_2026_27 = [
     difficulty: "hard",
     chapter: "Polymorphism",
     marks: 4,
-    question: "Predict the output: class A{void show(){System.out.print("A");}} class B extends A{void show(){System.out.print("B");}} A obj=new B(); obj.show();",
+    question: "Predict the output: class A{void show(){System.out.print(\"A\");}} class B extends A{void show(){System.out.print(\"B\");}} A obj=new B(); obj.show();",
     answer: "B",
     explanation: "The reference is of type A but the runtime object is B, so the overridden B.show() executes."
   }

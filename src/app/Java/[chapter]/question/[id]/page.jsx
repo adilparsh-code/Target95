@@ -2,18 +2,8 @@ import { notFound } from "next/navigation";
 import { getChapterQuestions, getChapterSlugs, getQuestionContent } from "@/lib/curriculum";
 import QuestionPlayer from "../../../../components/QuestionPlayer";
 
-export async function generateStaticParams() {
-  const chapters = getChapterSlugs("java");
-  const params = [];
-  for (const { chapter } of chapters) {
-    const questions = getChapterQuestions("java", chapter);
-    for (const q of questions) {
-      params.push({ chapter, id: String(q.id) });
-    }
-  }
-  return params;
-}
-
+// Questions are rendered on demand instead of pre-rendering the entire question bank.
+// This keeps production builds within CI memory limits while preserving every route.
 export default async function QuestionPage({ params }) {
   const { chapter, id } = await params;
 

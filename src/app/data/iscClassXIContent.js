@@ -239,9 +239,14 @@ export const ISC_XI_CONTENT = [
     mcqs: [
       mcq("XI-ETH-MCQ-01", "easy", "AI", "Which is an ethical concern in AI systems?", ["A) Bias", "B) Keyboard layout", "C) Monitor size", "D) File naming"], "A", "Bias can lead to unfair outcomes and is a major AI ethics issue."),
       mcq("XI-ETH-MCQ-02", "medium", "Privacy", "Which is a good privacy practice?", ["A) Share passwords", "B) Use strong unique passwords and appropriate access controls", "C) Publish all personal data", "D) Disable updates"], "B", "Strong access controls reduce unnecessary exposure."),
+      mcq("XI-ETH-MCQ-03", "hard", "Cyber safety", "A suspicious message asks for a student portal password. What is the best first action?", ["A) Share it quickly", "B) Verify the sender through an official channel", "C) Forward it to everyone", "D) Disable security"], "B", "Independent verification helps prevent phishing and credential theft."),
     ],
     practice: [practice("XI-ETH-P-01", "medium", "case", "A school wants to use AI to rank students. Identify two risks and two safeguards.", "Risks may include bias and opacity; safeguards include human review, representative data, testing and monitoring.", 4), practice("XI-ETH-P-02", "hard", "essay", "Discuss one benefit and one risk of IoT in a smart school.", "Benefit: automation/monitoring. Risk: privacy/security exposure.", 3)],
     practicalTasks: ["AI ethics case study.", "Cybersecurity awareness poster/content brief.", "Privacy checklist for a smart classroom."],
+    boardPractice: [
+      practice("XI-ETH-BP-01", "hard", "case", "A school proposes facial recognition for attendance. Analyse two benefits, two privacy/security risks, and two safeguards.", "Benefits: automation and attendance accuracy. Risks: biometric-data exposure and false matches. Safeguards: informed policy/consent where applicable, strict access control, retention limits, testing and human review.", 6),
+      practice("XI-ETH-BP-02", "hard", "essay", "Explain why an AI model should be tested for bias before being used for high-impact student decisions.", "Training data and system design can create unequal outcomes; representative evaluation, subgroup testing, human oversight and monitoring reduce risk.", 5),
+    ],
   },
 ];
 

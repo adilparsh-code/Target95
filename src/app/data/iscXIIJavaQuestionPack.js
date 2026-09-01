@@ -76,18 +76,34 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
   caseBased: [
     {
       id: "JXII-CB01", type: "case-based", difficulty: "board", topic: "Inheritance and polymorphism",
-      case: "A school system stores Student records and uses a specialized Scholar subclass. The program keeps a Student reference to a Scholar object and calls an overridden display() method.",
+      case: "A school system stores Student records and uses a Scholar subclass. A Student reference stores a Scholar object and calls an overridden display() method.",
       questions: [
         "Identify the reference type and actual object type.",
         "Predict which display() implementation executes.",
-        "Explain why a Scholar-only method cannot be called through the Student reference.",
+        "Why can a Scholar-only method not be called through the Student reference?",
         "Name the OOP concept demonstrated."
       ],
       answers: [
         "Reference type: Student; actual object type: Scholar.",
         "Scholar's overridden display() executes at runtime.",
-        "Member access is checked against the Student reference type at compile time.",
+        "Compile-time member access is checked against the Student reference type.",
         "Runtime polymorphism / dynamic method dispatch."
+      ]
+    },
+    {
+      id: "JXII-CB02", type: "case-based", difficulty: "board", topic: "Arrays and searching",
+      case: "A school maintains marks in an integer array. The program must find the highest mark, count students above 75, and report the first position of a target mark.",
+      questions: [
+        "State the traversal condition that visits every element.",
+        "Write the update rule for the highest mark.",
+        "How should the program count marks above 75?",
+        "What should be reported if the target mark is absent?"
+      ],
+      answers: [
+        "Use i < marks.length.",
+        "If marks[i] > max, assign marks[i] to max.",
+        "Increment the counter whenever marks[i] > 75.",
+        "Report -1 or another explicitly documented not-found value."
       ]
     }
   ],
@@ -99,58 +115,46 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
     },
     {
       id: "JXII-TRACE02", type: "tracing", difficulty: "board", topic: "Array traversal",
-      question: "Trace a loop that visits every element of an integer array and accumulates values greater than 10. Include the final valid index.",
-      answer: "Evaluate the condition at every index and update the accumulator only when the value is greater than 10."
+      question: "For a loop over an array of length 5 using i < length, list the valid index values.",
+      answer: "0, 1, 2, 3, 4. The loop visits the final valid index because it stops before 5."
+    },
+    {
+      id: "JXII-TRACE03", type: "tracing", difficulty: "application", topic: "String methods",
+      question: "Trace s = "COMPUTER" for s.substring(2, 6), s.indexOf("P"), and s.charAt(4).",
+      answer: "substring(2,6) = "MPUT"; indexOf("P") = 3; charAt(4) = 'U'."
     }
   ],
   mcqs: [
     {
-      id: "JXII-MCQ03",
-      question: "Which change creates an overriding relationship?",
-      options: ["A) Use unrelated classes", "B) Move the same-signature method into a subclass", "C) Rename a local variable", "D) Change a comment"],
-      answer: "B",
-      explanation: "Overriding requires inheritance and a compatible same-signature method in the subclass."
+      id: "JXII-MCQ01", question: "Which change creates an overriding relationship?",
+      options: ["A) Unrelated classes", "B) Same-signature inherited method reimplemented in a subclass", "C) Rename a variable", "D) Change a comment"],
+      answer: "B", explanation: "Overriding requires inheritance and a compatible method signature."
     },
     {
-      id: "JXII-MCQ04",
-      question: "Which loop condition visits every element of int[] a exactly once?",
+      id: "JXII-MCQ02", question: "Which loop condition visits every element of int[] a exactly once?",
       options: ["A) i <= a.length", "B) i < a.length", "C) i < a.length - 1", "D) i == a.length"],
-      answer: "B",
-      explanation: "Valid indices are 0 through a.length - 1."
+      answer: "B", explanation: "Valid indices are 0 through a.length - 1."
     },
     {
-      id: "JXII-MCQ05",
-      question: "What is the purpose of a recursive base case?",
+      id: "JXII-MCQ03", question: "What is the purpose of a recursive base case?",
       options: ["A) Stop recursive expansion", "B) Create an object", "C) Overload a method", "D) Increase recursion"],
-      answer: "A",
-      explanation: "The base case terminates recursive calls."
+      answer: "A", explanation: "The base case terminates recursive calls."
     },
     {
-      id: "JXII-MCQ06",
-      question: "Which exception is raised for an invalid array index at runtime?",
+      id: "JXII-MCQ04", question: "Which exception is raised for an invalid array index at runtime?",
       options: ["A) IOException", "B) ArithmeticException", "C) ArrayIndexOutOfBoundsException", "D) ClassCastException"],
-      answer: "C",
-      explanation: "Java reports an invalid array index with ArrayIndexOutOfBoundsException."
+      answer: "C", explanation: "Java reports an invalid array index with ArrayIndexOutOfBoundsException."
     },
     {
-      id: "JXII-MCQ01",
-      question: "Which statement best describes method overriding?",
-      options: [
-        "A) Same method name with different parameter lists in one class",
-        "B) Subclass provides a new implementation of an inherited method with the same signature",
-        "C) A method is declared static",
-        "D) A method returns a different primitive type",
-      ],
-      answer: "B",
-      explanation: "Overriding replaces the inherited implementation in the subclass while keeping the method signature compatible.",
+      id: "JXII-MCQ05", question: "In A obj = new B(); which type controls whether obj can directly access a member?",
+      options: ["A) Actual object type only", "B) Reference type", "C) Constructor name", "D) Variable value"],
+      answer: "B", explanation: "Compile-time member visibility is checked using the reference type."
     },
     {
-      id: "JXII-MCQ02",
-      question: "In A obj = new B(); which determines whether obj.display() can be called directly?",
-      options: ["A) Object creation only", "B) Reference type", "C) Constructor name", "D) Variable value"],
-      answer: "B",
-      explanation: "Compile-time member visibility is checked using the reference type A.",
-    },
+      id: "JXII-MCQ06", question: "Which value is the last valid index of an array with length n?",
+      options: ["A) n", "B) n + 1", "C) n - 1", "D) n / 2"],
+      answer: "C", explanation: "Java array indices start at zero."
+    }
   ],
 };
 

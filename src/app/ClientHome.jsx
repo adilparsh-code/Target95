@@ -30,19 +30,19 @@ export const boardClassSubjectMap = {
   cisce: {
     title: "CISCE",
     classes: [
-      { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java"] },
-      { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java"] },
-      { id: "isc-class-11", title: "ISC Class 11", subjects: ["java"] },
-      { id: "isc-class-12", title: "ISC Class 12", subjects: ["boolean-algebra"] }
+      { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java", "ai"] },
+      { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java", "ai"] },
+      { id: "isc-class-11", title: "ISC Class 11", subjects: ["java", "ai"] },
+      { id: "isc-class-12", title: "ISC Class 12", subjects: ["java", "ai"] },
     ]
   },
   cbse: {
     title: "CBSE",
     classes: [
-      { id: "class-9", title: "Class 9", subjects: ["python"] },
-      { id: "class-10", title: "Class 10", subjects: ["python"] },
-      { id: "class-11", title: "Class 11", subjects: ["python"] },
-      { id: "class-12", title: "Class 12", subjects: ["python"] }
+      { id: "class-9", title: "Class 9", subjects: ["402"] },
+      { id: "class-10", title: "Class 10", subjects: ["402"] },
+      { id: "class-11", title: "Class 11", subjects: ["083", "065", "802"] },
+      { id: "class-12", title: "Class 12", subjects: ["083", "065", "802"] }
     ]
   }
 };
@@ -57,7 +57,7 @@ function getStartLearningHref(board, selectedClass) {
     "isc-class-12": "/isc/class-xii",
   };
 
-  return board === "cisce" ? classRoutes[selectedClass.id] || "/study" : "/python";
+  return board === "cisce" ? classRoutes[selectedClass.id] || "/study" : `/cbse/class/${selectedClass.id.replace("class-", "")}`;
 }
 
 export default function ClientHome() {
@@ -67,7 +67,7 @@ export default function ClientHome() {
   const [showSubjects, setShowSubjects] = useState(false);
   const [showStartLearning, setShowStartLearning] = useState(false);
 
-  const { board, class: selectedClassData, subject, setBoard, setClass, clearPersonalization, isHydrated } = usePersonalization();
+  const { board, class: selectedClassData, subject, setBoard, setClass, setSubject, clearPersonalization, isHydrated } = usePersonalization();
 
   const personalization = useMemo(() => ({
     board,
@@ -105,6 +105,12 @@ export default function ClientHome() {
     setShowStartLearning(true);
   };
 
+  const handleSubjectSelect = (subjectId) => {
+    setSubject(subjectId);
+    setShowSubjects(true);
+    setShowStartLearning(true);
+  };
+
   const handleBackToBoards = () => {
     setSelectedBoard(null);
     setSelectedClass(null);
@@ -133,6 +139,7 @@ export default function ClientHome() {
           onBackToBoards={handleBackToBoards}
           onBackToClasses={handleBackToClasses}
           onClassSelect={handleClassSelect}
+          onSubjectSelect={handleSubjectSelect}
           showSubjects={showSubjects}
           showClasses={showClasses}
           selectedBoard={selectedBoard}

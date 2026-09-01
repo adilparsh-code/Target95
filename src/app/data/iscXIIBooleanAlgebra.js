@@ -74,6 +74,16 @@ export const TRUTH_TABLE_CHALLENGES_XII = [
 ];
 
 export const MINTERM_MAXTERM_GUIDE = {
+  conversionWorkflow: [
+    "Write the variables in a fixed order, e.g. A, B, C.",
+    "Read the truth-table rows where F=1 for minterms or F=0 for maxterms.",
+    "Convert each selected row to its decimal index.",
+    "Write the result as Σm(...) for canonical SOP or ΠM(...) for canonical POS.",
+  ],
+  workedExamples: [
+    { id: "MM-W-01", truthRow: "A=0, B=1, C=1, F=1", minterm: "A'BC = m3", why: "The 011 row is decimal 3 and F is 1." },
+    { id: "MM-W-02", truthRow: "A=0, B=1, C=1, F=0", maxterm: "A + B' + C' = M3", why: "The 011 row is decimal 3 and F is 0." },
+  ],
   coreRule: "A minterm corresponds to a truth-table row where F=1. A maxterm corresponds to a truth-table row where F=0.",
   variableOrder: "Always fix an order first, e.g. A, B, C. Treat ABC as a binary number to get the row index.",
   mintermConstruction: ["1 means uncomplemented; 0 means complemented.", "AND the literals together to form the minterm."],
@@ -123,6 +133,18 @@ const booleanAlgebra = {
   truthTableChallenges: TRUTH_TABLE_CHALLENGES_XII,
   mintermMaxtermGuide: MINTERM_MAXTERM_GUIDE,
   kMapGuide: "See iscXIIKMap module: start with truth table/canonical form, then group adjacent cells and verify.",
+  mcqs: [
+    { id: "BA-MCQ-01", question: "Which notation represents a canonical SOP?", options: ["ΠM(1,2)", "Σm(1,2)", "ΣM(1,2)", "Πm(1,2)"], answer: "Σm(1,2)", explanation: "Canonical SOP is a sum of minterms." },
+    { id: "BA-MCQ-02", question: "How many rows are required for three Boolean variables?", options: ["3", "6", "8", "9"], answer: "8", explanation: "n variables require 2^n rows." },
+  ],
+  outputTracing: [
+    { id: "BA-OUT-01", question: "For A=1 and B=0, what is the output of A+B?", answer: "1", explanation: "OR is 1 when at least one input is 1." },
+    { id: "BA-OUT-02", question: "For A=1 and B=1, what is the output of A⊕B?", answer: "0", explanation: "XOR is 1 only when the inputs differ." },
+  ],
+  debugging: [
+    { id: "BA-DBG-01", title: "Missing complement", code: "F = A + A B", fix: "Check whether the intended expression requires a complemented literal before applying a Boolean identity." },
+    { id: "BA-DBG-02", title: "Incomplete truth table", code: "A B | F\n0 0 | ?\n0 1 | ?\n1 0 | ?\n1 1 | ?", fix: "For two variables, always evaluate all four input combinations." },
+  ],
   lawDeck: [
     { name: "Identity", rules: ["A + 0 = A", "A·1 = A"], intuition: "Adding false or ANDing with true changes nothing." },
     { name: "Null / Dominance", rules: ["A + 1 = 1", "A·0 = 0"], intuition: "True dominates OR; false dominates AND." },

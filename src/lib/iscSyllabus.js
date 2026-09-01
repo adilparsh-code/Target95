@@ -1,7 +1,6 @@
 /**
  * ISC 2028 Computer Science syllabus registry.
- * Source of truth: official CISCE Examination Year 2028 syllabus.
- * Metadata only; academic lesson content lives in the content layer.
+ * Source of truth for ISC XI/XII academic routing and completion tracking.
  */
 
 export const ISC_BOARD = "ISC";
@@ -32,11 +31,16 @@ export const ISC_XI_PRACTICAL = {
   practicalLanguage: "Java",
 };
 
-/**
- * Class XII is intentionally kept as an explicit verification placeholder
- * until its official 2028 section is mapped topic-by-topic. This prevents
- * the old 19-chapter assumptions from silently becoming a false source of truth.
- */
-export const ISC_XII_VERIFICATION_REQUIRED = true;
+export const ISC_XII_TOPICS = [
+  { id: "xii-boolean-algebra", section: "A", title: "Boolean Algebra", class: "ISC XII", estimatedTime: 120 },
+  { id: "xii-canonical-forms", section: "A", title: "Canonical Forms", class: "ISC XII", estimatedTime: 90 },
+  { id: "xii-k-map", section: "A", title: "Karnaugh Maps", class: "ISC XII", estimatedTime: 90 },
+  { id: "xii-combinational-logic", section: "A", title: "Combinational Logic", class: "ISC XII", estimatedTime: 90 },
+  { id: "xii-java-computer-science", section: "B", title: "Advanced Java and Computer Science", class: "ISC XII", estimatedTime: 150 },
+];
+
+export const ISC_XII_VERIFICATION_REQUIRED = false;
 
 export const getISCClassXITopic = (id) => ISC_XI_TOPICS.find((topic) => topic.id === id) ?? null;
+export const getISCClassXIITopic = (id) => ISC_XII_TOPICS.find((topic) => topic.id === id) ?? null;
+export const getISCClassTopics = (className) => className === "ISC XII" ? ISC_XII_TOPICS : ISC_XI_TOPICS;

@@ -39,7 +39,8 @@ export const ISC_XII_TOPICS = [
   { id: "xii-java-computer-science", section: "B", title: "Advanced Java and Computer Science", class: "ISC XII", estimatedTime: 150 },
 ];
 
-export const ISC_XII_VERIFICATION_REQUIRED = false;
+// Keep syllabus verification required until every mapped block has passed the audit.
+export const ISC_XII_VERIFICATION_REQUIRED = true;
 
 export const getISCClassXITopic = (id) => ISC_XI_TOPICS.find((topic) => topic.id === id) ?? null;
 export const getISCClassXIITopic = (id) => ISC_XII_TOPICS.find((topic) => topic.id === id) ?? null;

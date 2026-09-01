@@ -120,8 +120,8 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
     },
     {
       id: "JXII-TRACE03", type: "tracing", difficulty: "application", topic: "String methods",
-      question: "Trace s = "COMPUTER" for s.substring(2, 6), s.indexOf("P"), and s.charAt(4).",
-      answer: "substring(2,6) = "MPUT"; indexOf("P") = 3; charAt(4) = 'U'."
+      question: 'Trace s = "COMPUTER" for s.substring(2, 6), s.indexOf("P"), and s.charAt(4).',
+      answer: 'substring(2,6) = "MPUT"; indexOf("P") = 3; charAt(4) = \'U\'.'
     }
   ],
   mcqs: [

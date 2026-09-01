@@ -10,8 +10,8 @@ const modules = [
   },
   {
     title: "Canonical Forms",
-    description: "Build minterms and maxterms from truth-table rows and move confidently between canonical SOP and POS forms.",
-    href: "/isc/class-xii/boolean-algebra/canonical-forms",
+    description: "Canonical SOP/POS, minterms and maxterms are covered in the main Boolean Algebra module.",
+    href: "/isc/class-xii/boolean-algebra",
     badge: "Core Skill",
     topics: ["Minterms", "Maxterms", "Σm / ΠM", "Conversion"],
   },
@@ -24,8 +24,8 @@ const modules = [
   },
   {
     title: "Combinational Logic",
-    description: "Connect Boolean expressions to practical combinational-circuit design and reasoning.",
-    href: "/isc/class-xii/combinational-logic",
+    description: "Combinational-circuit concepts are routed through the verified Boolean/logic learning module.",
+    href: "/isc/class-xii/boolean-algebra",
     badge: "Application",
     topics: ["Circuits", "Truth Tables", "Design"],
   },
@@ -46,11 +46,11 @@ export default function ISCClassXIIPage() {
         <header className="mt-10">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">ISC Class XII · Computer Science</p>
           <h1 className="mt-3 text-4xl font-black tracking-tight md:text-6xl">Learn Class XII smarter.</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">Access the current Class XII modules from one student-facing hub, with direct routes for every mapped syllabus area.</p>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">Access the mapped Class XII learning modules from one student-facing hub, with routes that point only to verified pages.</p>
         </header>
         <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-label="ISC Class XII learning modules">
           {modules.map((module) => (
-            <Link key={module.href} href={module.href} className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-800 dark:bg-slate-900">
+            <Link key={`${module.title}-${module.href}`} href={module.href} className="group rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-800 dark:bg-slate-900">
               <div className="flex items-center justify-between gap-3">
                 <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white dark:bg-white dark:text-slate-950">{module.badge}</span>
                 <span className="text-sm font-semibold text-slate-400">Open →</span>

@@ -102,6 +102,13 @@ const booleanAlgebra = {
     { id: "kmap", title: "K-Map", goal: "Group adjacent cells to turn canonical forms into minimal expressions." },
     { id: "exam", title: "Exam Mode", goal: "Solve ISC-style simplification and implementation problems under time pressure." },
   ],
+  masteryChecks: [
+    { id: "mastery-terminology", title: "Own the terminology", success: "Define variables, literals, complements, minterms, maxterms, SOP and POS." },
+    { id: "mastery-truth-tables", title: "Build truth tables", success: "Create complete truth tables and verify Boolean identities." },
+    { id: "mastery-gates", title: "Understand logic gates", success: "Translate between Boolean expressions, gates and truth tables." },
+    { id: "mastery-simplification", title: "Simplify expressions", success: "Apply Boolean laws step-by-step and justify each transformation." },
+    { id: "mastery-kmap", title: "Use K-Maps", success: "Group cells correctly and derive minimal SOP/POS expressions." },
+  ],
   mentalModels: [
     { title: "Boolean algebra is logic with arithmetic rules", explanation: "The symbols look like algebra, but the values are only 0 and 1. Ask what logic an expression represents.", example: "A + B = A OR B; AB = A AND B; A' = NOT A." },
     { title: "Every law is a pattern", explanation: "Meaning lets you reconstruct a rule instead of memorising isolated formulas.", example: "A + 0 = A because OR with false changes nothing." },

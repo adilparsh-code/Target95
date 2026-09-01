@@ -57,7 +57,7 @@ function getStartLearningHref(board, selectedClass) {
     "isc-class-12": "/isc/class-xii",
   };
 
-  return board === "cisce" ? classRoutes[selectedClass.id] || "/study" : "/study";
+  return board === "cisce" ? classRoutes[selectedClass.id] || "/study" : "/python";
 }
 
 export default function ClientHome() {

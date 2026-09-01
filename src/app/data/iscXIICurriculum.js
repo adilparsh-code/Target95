@@ -1,4 +1,4 @@
-// ISC XII Java: question-design standard for board-level learning and practice.
+// ISC XII Java: question-design and completion standard for board-level learning and practice.
 export const ISC_XII_JAVA_STANDARD = {
   philosophy: "Use precise ISC-level concepts, fresh questions, application, tracing, debugging and programming rather than trivia or artificial difficulty.",
   tiers: [
@@ -25,6 +25,15 @@ export const ISC_XII_JAVA_STANDARD = {
     "Use realistic marks and difficulty labels.",
     "Include code-tracing and debugging alongside direct theory.",
     "Keep challenge questions difficult because of reasoning, not because of ambiguous wording.",
+    "Every student-facing practice item must include a usable answer or an explicit rubric; unanswered placeholders are invalid for completion tracking.",
+  ],
+  completionChecklist: [
+    "All mapped ISC XII topics have at least one student-facing lesson entry.",
+    "All mapped topics have board-level practice coverage.",
+    "At least one tracing and one debugging item exist for each major Java/programming cluster.",
+    "Case-based and programming questions include expected-answer guidance.",
+    "Question IDs are unique across the pack.",
+    "The question pack parses successfully before deployment.",
   ],
 };
 

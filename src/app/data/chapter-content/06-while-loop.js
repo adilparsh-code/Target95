@@ -3607,10 +3607,8 @@ public class Main {
     { id: "whileloop-rr-20", question: "What is the purpose of the break statement?", answer: "To exit the loop immediately" },
   ],
 
-};
-
-export default chapter06;
-}`,
+},
+      `,
         output: "Enter numbers: 5 10 3 8 -1\nMaximum: 10\nMinimum: 3\nCount: 4",
       },
     ],

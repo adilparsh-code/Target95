@@ -1724,7 +1724,7 @@ const chapter09 = {
       "Pitfall 1",
       "Pitfall 2"
     ]
-  }
+  },
 
   // ========== 1. ASSERTION & REASON QUESTIONS ==========
   assertionReason: [

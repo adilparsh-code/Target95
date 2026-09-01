@@ -1249,10 +1249,7 @@ class Student {
       { term: "Java Applet", definition: "Small Java program that runs in a browser, uses init()/start() as entry points" }
     ],
     quickFlow: "Source Code → javac Compiler → Bytecode → JVM → Execution"
-  }
-};
-
-export default chapter12;
+  },
     {
       id: "classes-objects-ob-10",
       question: `public class Test {

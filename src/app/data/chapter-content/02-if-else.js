@@ -4272,9 +4272,7 @@ else
     ],
     "answer": 0,
     "explanation": "Both are true. Nesting allows hierarchical decision-making."
-  }
-
-  ]
+  },
       answer: 0,
       explanation: "Both are true. The condition is checked before each iteration. If false initially, it executes 0 times."
     },

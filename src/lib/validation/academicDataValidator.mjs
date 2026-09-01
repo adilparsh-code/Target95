@@ -177,7 +177,8 @@ export class AcademicDataValidator {
   validateSupplementalBankSource() {
     if (!fs.existsSync(this.icseSupplementalBankFile)) return;
     const text = fs.readFileSync(this.icseSupplementalBankFile, 'utf8');
-    try { new vm.Script(text, { filename: this.icseSupplementalBankFile }); }
+    const vmExecutableCode = text.replace(/export\s+default\s+/g, 'const __default_export__ = ').replace(/export\s+\{[^}]+\}\s*;?/g, '');
+    try { new vm.Script(vmExecutableCode, { filename: this.icseSupplementalBankFile }); }
     catch (error) {
       this.addFinding('ERROR', 'SOURCE', `ICSE supplemental question bank has invalid JavaScript: ${error.message}`, this.icseSupplementalBankFile);
     }

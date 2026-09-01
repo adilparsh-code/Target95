@@ -301,4 +301,8 @@ function getErrorMessage(errorCode) {
       return "Invalid email or password.";
     case "auth/too-many-requests":
       return "Too many attempts. Please try again later.";
-    case "a
+    case "auth/network-request-failed":
+      return "Network error. Please check your connection.";
+    default:
+      return "An unknown error occurred. Please try again.";
+  }

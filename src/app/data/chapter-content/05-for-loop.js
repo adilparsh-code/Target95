@@ -1088,7 +1088,6 @@ const chapter05 = {
     { id: "for-fb-3", question: "The three parts of a for loop are separated by _____.", answer: "semicolons" },
     { id: "for-fb-4", question: "The initialization part of a for loop is executed _____.", answer: "once" },
     { id: "for-fb-5", question: "The condition is checked _____ each iteration.", answer: "before" },
-    },
     {
       "id": "for-loop-mcq-48",
       "question": "MCQ 48",

@@ -44,21 +44,9 @@ export const BOOLEAN_TERMINOLOGY = [
   { term: "Don't-care condition", meaning: "An input combination whose output may be treated as 0 or 1 for simplification, where permitted.", example: "X entries" },
 ];
 
-export const BOOLEAN_GATE_TABLE = [
-  { gate: "AND", notation: "A·B", plain: "1 only when BOTH are 1", mental: "Both must be ON" },
-  { gate: "OR", notation: "A+B", plain: "1 when AT LEAST ONE is 1", mental: "Either path can turn it ON" },
-  { gate: "NOT", notation: "A'", plain: "Flips 0↔1", mental: "Opposite of A" },
-  { gate: "XOR", notation: "A⊕B", plain: "1 when inputs are DIFFERENT", mental: "Exactly one is ON" },
-  { gate: "XNOR", notation: "A⊙B", plain: "1 when inputs are the SAME", mental: "Agreement detector" },
-  { gate: "NAND", notation: "(AB)'", plain: "NOT of AND", mental: "AND result flipped" },
-  { gate: "NOR", notation: "(A+B)'", plain: "NOT of OR", mental: "OR result flipped" },
-];
-
 export const GATE_CONVERSIONS = [
   { from: "Boolean expression", to: "Logic circuit", steps: ["Read NOT/complements first", "Build AND terms", "Combine terms with OR", "Verify with truth table"], example: "F=A'B+AC → NOT A → AND gates → OR gate" },
   { from: "Logic circuit", to: "Boolean expression", steps: ["Name each gate output", "Write each gate equation", "Substitute intermediate outputs", "Simplify if required"], example: "AND output X=AB; OR with C → F=X+C=AB+C" },
-  { from: "AND", to: "NAND", steps: ["Feed AND output into a NAND used as NOT", "Equivalent result: (AB)'"], example: "NAND(A,B)=(AB)'" },
-  { from: "OR", to: "NOR", steps: ["Feed OR output into a NOR used as NOT", "Equivalent result: (A+B)'"], example: "NOR(A,B)=(A+B)'" },
   { from: "NAND", to: "NOT", steps: ["Tie both NAND inputs to A"], example: "NAND(A,A)=A'" },
   { from: "NOR", to: "NOT", steps: ["Tie both NOR inputs to A"], example: "NOR(A,A)=A'" },
   { from: "NAND", to: "AND", steps: ["First NAND gives (AB)'", "Second NAND inverts it"], example: "NAND(NAND(A,B),NAND(A,B))=AB" },
@@ -71,11 +59,11 @@ export const UNIVERSAL_GATE_DESIGNS = [
 ];
 
 export const TRUTH_TABLE_METHOD = [
-  "1. Count variables. With n variables, prepare 2^n rows.",
-  "2. Write input combinations systematically: for 2 variables use 00, 01, 10, 11; for 3 use 000 through 111.",
-  "3. Create one column per intermediate operation instead of jumping to the final answer.",
-  "4. Evaluate complements first, then grouped AND/OR operations according to the expression.",
-  "5. Compare the final output column with the claimed identity or target expression.",
+  "1. Count variables: n variables require 2^n rows.",
+  "2. List input combinations systematically.",
+  "3. Create intermediate columns for each operation.",
+  "4. Evaluate complements first, then grouped AND/OR operations.",
+  "5. Compare the final output column with the target expression or identity.",
 ];
 
 export const TRUTH_TABLE_CHALLENGES_XII = [
@@ -88,16 +76,9 @@ export const TRUTH_TABLE_CHALLENGES_XII = [
 export const MINTERM_MAXTERM_GUIDE = {
   coreRule: "A minterm corresponds to a truth-table row where F=1. A maxterm corresponds to a truth-table row where F=0.",
   variableOrder: "Always fix an order first, e.g. A, B, C. Treat ABC as a binary number to get the row index.",
-  mintermConstruction: ["For a row with 1s in a variable position, write that variable uncomplemented.", "For 0s, write the variable complemented.", "AND the literals together to form the minterm."],
-  maxtermConstruction: ["For a row with 0s, write that variable uncomplemented.", "For 1s, write the variable complemented.", "OR the literals together to form the maxterm."],
-  notation: ["Σm(...) lists F=1 row indices and names canonical SOP.", "ΠM(...) lists F=0 row indices and names canonical POS.", "For n variables, valid indices run from 0 to 2^n−1."],
-  workedExamples: [
-    { id: "MM-01", variables: "A, B", truthRow: "A=1, B=0, F=1", minterm: "m2 = AB'", why: "10₂ = 2; 1→A and 0→B'." },
-    { id: "MM-02", variables: "A, B, C", truthRow: "A=1, B=0, C=1, F=1", minterm: "m5 = AB'C", why: "101₂ = 5; 1→A, 0→B', 1→C." },
-    { id: "MM-03", variables: "A, B, C", truthRow: "A=1, B=0, C=1, F=0", maxterm: "M5 = A' + B + C'", why: "For maxterms 1→complemented and 0→uncomplemented; the sum is 0 exactly on row 101." },
-  ],
-  conversionWorkflow: ["Truth table → mark F=1 rows → write each minterm → OR them → canonical SOP → Σm(index list).", "Truth table → mark F=0 rows → write each maxterm → AND them → canonical POS → ΠM(index list).", "Cross-check: SOP uses 1-rows; POS uses 0-rows; their index sets complement the full row set."],
-  examTraps: ["For minterms, 0 means complemented and 1 means uncomplemented.", "For maxterms, 0 means uncomplemented and 1 means complemented.", "Do not change variable order midway; row index depends on the chosen order.", "Canonical means every term contains every variable exactly once."],
+  mintermConstruction: ["1 means uncomplemented; 0 means complemented.", "AND the literals together to form the minterm."],
+  maxtermConstruction: ["0 means uncomplemented; 1 means complemented.", "OR the literals together to form the maxterm."],
+  notation: ["Σm(...) lists F=1 row indices and names canonical SOP.", "ΠM(...) lists F=0 row indices and names canonical POS."],
   practice: [
     { id: "MM-P-01", question: "For A=0,B=1,C=1 and F=1, write the minterm and index.", answer: "A'BC = m3." },
     { id: "MM-P-02", question: "For A=0,B=1,C=1 and F=0, write the maxterm and index.", answer: "A + B' + C' = M3." },
@@ -127,7 +108,6 @@ const booleanAlgebra = {
     { title: "Simplification is controlled rewriting", explanation: "Change one meaningful sub-expression at a time and name the law.", example: "A + AB → A(1+B) → A·1 → A." },
   ],
   terminology: BOOLEAN_TERMINOLOGY,
-  gateTable: BOOLEAN_GATE_TABLE,
   gateConversions: GATE_CONVERSIONS,
   universalGateDesigns: UNIVERSAL_GATE_DESIGNS,
   notTruthTable: BOOLEAN_NOT_TRUTH_TABLE,
@@ -139,56 +119,33 @@ const booleanAlgebra = {
   lawDeck: [
     { name: "Identity", rules: ["A + 0 = A", "A·1 = A"], intuition: "Adding false or ANDing with true changes nothing." },
     { name: "Null / Dominance", rules: ["A + 1 = 1", "A·0 = 0"], intuition: "True dominates OR; false dominates AND." },
-    { name: "Idempotent", rules: ["A + A = A", "A·A = A"], intuition: "Repeating the same condition adds no new information." },
-    { name: "Complement", rules: ["A + A' = 1", "A·A' = 0"], intuition: "A condition or its opposite covers everything; both together are impossible." },
-    { name: "Involution", rules: ["(A')' = A"], intuition: "NOT of NOT returns the original condition." },
-    { name: "Commutative", rules: ["A + B = B + A", "AB = BA"], intuition: "Order does not matter for OR or AND." },
-    { name: "Associative", rules: ["A + (B + C) = (A + B) + C", "A(BC) = (AB)C"], intuition: "Grouping can change, but order stays the same." },
-    { name: "Distributive", rules: ["A(B + C) = AB + AC", "A + BC = (A + B)(A + C)"], intuition: "Boolean algebra has both distributive forms." },
-    { name: "Absorption", rules: ["A + AB = A", "A(A + B) = A"], intuition: "A stronger condition already contains the weaker branch." },
-    { name: "De Morgan", rules: ["(A + B)' = A'B'", "(AB)' = A' + B'"], intuition: "NOT crosses a bracket: operator swaps and every literal flips." },
+    { name: "Idempotent", rules: ["A + A = A", "A·A = A"], intuition: "Repeating the same condition does not change it." },
+    { name: "Complement", rules: ["A + A' = 1", "A·A' = 0"], intuition: "A condition or its opposite is always true; both together are impossible." },
+    { name: "Involution", rules: ["(A')' = A"], intuition: "Negating twice returns the original value." },
+    { name: "Commutative", rules: ["A+B = B+A", "AB = BA"], intuition: "Order of operands does not matter for AND/OR." },
+    { name: "Associative", rules: ["A+(B+C)=(A+B)+C", "A(BC)=(AB)C"], intuition: "Grouping does not change the result." },
+    { name: "Distributive", rules: ["A(B+C)=AB+AC", "A+BC=(A+B)(A+C)"], intuition: "AND distributes over OR; Boolean OR also has its dual distributive form." },
+    { name: "Absorption", rules: ["A+AB=A", "A(A+B)=A"], intuition: "The simpler condition already includes the more specific one." },
+    { name: "De Morgan", rules: ["(A+B)'=A'B'", "(AB)'=A'+B'"], intuition: "Negating a combined condition swaps AND/OR and negates each input." },
   ],
-  workedExamples: [
-    { id: "BA-01", level: "foundation", title: "Make a long expression disappear", expression: "A + AB", steps: [{ line: "A + AB", law: "Distributive", reason: "Factor A" }, { line: "A(1+B)", law: "Dominance", reason: "1+B=1" }, { line: "A·1", law: "Identity", reason: "Factored form" }, { line: "A", law: "Identity", reason: "A·1=A" }], examTip: "When you see A+AX or A(A+X), test Absorption early." },
-    { id: "BA-02", level: "foundation", title: "De Morgan without fear", expression: "(A+B+C)'", steps: [{ line: "(A+B+C)'", law: "De Morgan", reason: "NOT enters the bracket" }, { line: "A'B'C'", law: "De Morgan", reason: "OR becomes AND; every literal complements" }], examTip: "Change the operator and flip every literal." },
-    { id: "BA-03", level: "advanced", title: "A two-route proof", expression: "A + A'B", steps: [{ line: "A + A'B", law: "Distributive", reason: "Use X+YZ=(X+Y)(X+Z)" }, { line: "(A+A')(A+B)", law: "Distributive", reason: "Dual form" }, { line: "1(A+B)", law: "Complement", reason: "A+A'=1" }, { line: "A+B", law: "Identity", reason: "1·X=X" }], examTip: "Recognise the dual distributive law before expanding randomly." },
+  simplificationExamples: [
+    { id: "SIM-XII-01", expression: "A+AB", steps: ["Factor A: A(1+B)", "Use 1+B=1", "Use A·1=A"], answer: "A" },
+    { id: "SIM-XII-02", expression: "A+A'B", steps: ["Use X+YZ=(X+Y)(X+Z): (A+A')(A+B)", "A+A'=1", "Use 1·(A+B)=A+B"], answer: "A+B" },
+    { id: "SIM-XII-03", expression: "(A+B)(A+B')", steps: ["Use (X+Y)(X+Z)=X+YZ", "A+BB'", "A+0"], answer: "A" },
   ],
-  outputTracing: [
-    { id: "OUT-BA-01", question: "For A=1, B=0, what is A' + AB?", answer: "0", explanation: "A'=0 and AB=0, so 0+0=0." },
-    { id: "OUT-BA-02", question: "If A=0 and B=1, evaluate (A+B)' + AB.", answer: "0", explanation: "A+B=1, complement=0; AB=0." },
+  boardPractice: [
+    { id: "BA-XII-01", level: "board", type: "simplification", question: "Simplify A + A'B.", answer: "A + B", marks: 2 },
+    { id: "BA-XII-02", level: "board", type: "truth-table", question: "Verify (A+B)' = A'B' using a complete truth table.", answer: "Both final output columns match for all four input combinations.", marks: 4 },
+    { id: "BA-XII-03", level: "board", type: "implementation", question: "Show how to implement NOT and AND using NAND gates only.", answer: "NOT A = A NAND A; AND = NAND the first NAND output with itself.", marks: 4 },
+    { id: "BA-XII-04", level: "board", type: "canonical", question: "For F(A,B,C)=1 at rows 1,3,5,7, write canonical SOP notation.", answer: "F=Σm(1,3,5,7).", marks: 3 },
+    { id: "BA-XII-05", level: "challenge", type: "reasoning", question: "Explain why two Boolean expressions with identical truth-table output columns are equivalent.", answer: "They produce the same output for every possible input combination, so they define the same Boolean function.", marks: 3 },
   ],
-  mcqs: [
-    { id: "BA-MCQ-01", difficulty: "easy", question: "Which expression is always 1?", options: ["A) A·A'", "B) A + A'", "C) A·0", "D) A + 0"], answer: "B", explanation: "A and its complement cover every possible Boolean input." },
-    { id: "BA-MCQ-02", difficulty: "medium", question: "Simplify A + AB.", options: ["A) B", "B) AB", "C) A", "D) A+B"], answer: "C", explanation: "Absorption: A+AB=A." },
-    { id: "BA-MCQ-03", difficulty: "medium", question: "The complement of AB is:", options: ["A) A'B'", "B) A'+B'", "C) AB'", "D) A+B"], answer: "B", explanation: "De Morgan: (AB)'=A'+B'." },
-    { id: "BA-MCQ-04", difficulty: "hard", question: "Which is equivalent to A + BC?", options: ["A) (A+B)(A+C)", "B) AB+AC", "C) A(B+C)", "D) A+B+C"], answer: "A", explanation: "Dual distributive identity: A+BC=(A+B)(A+C)." },
-  ],
-  practice: [
-    { id: "BA-P-01", difficulty: "easy", type: "simplify", question: "Simplify A + A·0.", answer: "A", marks: 2 },
-    { id: "BA-P-02", difficulty: "easy", type: "simplify", question: "Simplify A + A'.", answer: "1", marks: 2 },
-    { id: "BA-P-03", difficulty: "medium", type: "simplify", question: "Simplify AB + AB'.", answer: "A", marks: 3 },
-    { id: "BA-P-04", difficulty: "medium", type: "simplify", question: "Simplify A + A'B.", answer: "A+B", marks: 4 },
-    { id: "BA-P-05", difficulty: "hard", type: "prove", question: "Prove (A+B)(A+C)=A+BC.", answer: "Expand to A+AC+AB+BC and use absorption to reduce to A+BC.", marks: 5 },
-    { id: "BA-P-06", difficulty: "hard", type: "design", question: "Express XOR using only AND, OR and NOT.", answer: "A'B + AB'", marks: 4 },
-  ],
-  debugging: [
-    { id: "BA-DBG-01", buggySteps: ["(A+B)' = A'+B'"], task: "Find the mistake and correct it.", answer: "De Morgan changes OR to AND: (A+B)'=A'B'." },
-    { id: "BA-DBG-02", buggySteps: ["A+AB", "=AB+AB", "=AB"], task: "Find the first invalid transformation.", answer: "The first step is invalid. Use absorption or factor A: A(1+B)=A." },
-  ],
-  examStrategy: [
-    "Step 1: Identify the largest obvious pattern before expanding.",
-    "Step 2: Circle complements and repeated literals.",
-    "Step 3: Prefer absorption/complement/De Morgan before heavy expansion.",
-    "Step 4: After every rewrite, ask whether the expression became simpler.",
-    "Step 5: In proof questions, write the law used at each meaningful step.",
-    "Step 6: If stuck, build a truth table to verify the identity before trying another route.",
-  ],
-  masteryChecks: [
-    { id: "M-01", title: "Law Recognition", success: "Identify the correct law in 8/10 examples." },
-    { id: "M-02", title: "Truth-table Construction", success: "Build complete 2- and 3-variable tables without missing a row." },
-    { id: "M-03", title: "Canonical Forms", success: "Convert a truth table to Σm/ΠM and canonical SOP/POS correctly." },
-    { id: "M-04", title: "Gate Conversion", success: "Translate an expression to gates and reconstruct the expression from the circuit." },
-    { id: "M-05", title: "K-Map", success: "Place minterms, make valid groups and derive a reduced expression." },
+  examChecklist: [
+    "Fix variable order before converting rows to minterm/maxterm indices.",
+    "For simplification, write one law per meaningful step.",
+    "For truth tables, include intermediate columns when asked to verify an identity.",
+    "For universal-gate questions, show the inverter stage explicitly.",
+    "Re-check the final expression against the original for at least one or two boundary rows."
   ],
 };
 

@@ -25,6 +25,16 @@ export const BOOLEAN_TRUTH_TABLES = {
 
 export const BOOLEAN_NOT_TRUTH_TABLE = [{ A: 0, Y: 1 }, { A: 1, Y: 0 }];
 
+export const BOOLEAN_GATE_TABLE = [
+  { gate: "AND", notation: "A·B", plain: "1 only when both inputs are 1.", mental: "Think: both conditions must be true." },
+  { gate: "OR", notation: "A+B", plain: "1 when at least one input is 1.", mental: "Think: either condition is enough." },
+  { gate: "NOT", notation: "A'", plain: "Inverts the input.", mental: "Think: the opposite of the input." },
+  { gate: "NAND", notation: "(AB)'", plain: "NOT of AND.", mental: "Think: AND, then invert." },
+  { gate: "NOR", notation: "(A+B)'", plain: "NOT of OR.", mental: "Think: OR, then invert." },
+  { gate: "XOR", notation: "A⊕B", plain: "1 when the inputs are different.", mental: "Think: exactly one input is 1." },
+  { gate: "XNOR", notation: "(A⊕B)'", plain: "1 when the inputs are the same.", mental: "Think: equality detector." },
+];
+
 export const BOOLEAN_TERMINOLOGY = [
   { term: "Boolean variable", meaning: "A symbol whose value can be only 0 or 1.", example: "A, B, C" },
   { term: "Constant", meaning: "A fixed Boolean value that is always 0 or always 1.", example: "0, 1" },

@@ -9,11 +9,25 @@ const modules = [
     topics: ["Truth Tables", "Logic Gates", "Boolean Laws", "SOP/POS"],
   },
   {
+    title: "Canonical Forms",
+    description: "Build minterms and maxterms from truth-table rows and move confidently between canonical SOP and POS forms.",
+    href: "/isc/class-xii/boolean-algebra/canonical-forms",
+    badge: "Core Skill",
+    topics: ["Minterms", "Maxterms", "Σm / ΠM", "Conversion"],
+  },
+  {
     title: "K-Map",
-    description: "Karnaugh-map based minimisation with the existing guided examples and exam traps.",
+    description: "Karnaugh-map based minimisation with guided examples and exam traps.",
     href: "/isc/class-xii/k-map",
     badge: "Core Skill",
     topics: ["Gray Code", "Grouping", "Minimisation"],
+  },
+  {
+    title: "Combinational Logic",
+    description: "Connect Boolean expressions to practical combinational-circuit design and reasoning.",
+    href: "/isc/class-xii/combinational-logic",
+    badge: "Application",
+    topics: ["Circuits", "Truth Tables", "Design"],
   },
   {
     title: "Boolean Word Problems",
@@ -32,7 +46,7 @@ export default function ISCClassXIIPage() {
         <header className="mt-10">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">ISC Class XII · Computer Science</p>
           <h1 className="mt-3 text-4xl font-black tracking-tight md:text-6xl">Learn Class XII smarter.</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">Access the existing Boolean Algebra, Logic Gates, K-Map and problem-solving modules from one student-facing hub.</p>
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600 dark:text-slate-300">Access the current Class XII modules from one student-facing hub, with direct routes for every mapped syllabus area.</p>
         </header>
         <section className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-label="ISC Class XII learning modules">
           {modules.map((module) => (

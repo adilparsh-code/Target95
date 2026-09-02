@@ -4,94 +4,232 @@ const chapter09 = {
   slug: "arrays-2d",
   subject: "Java Programming",
   difficulty: "Advanced",
-  estimatedTime: 90,
-  topics: ["2D arrays", "matrix", "row-major", "nested loops", "diagonal", "transpose"],
+  estimatedTime: 100,
+  topics: [
+    "2D arrays",
+    "matrix",
+    "row-major traversal",
+    "memory model",
+    "array references",
+    "nested loops",
+    "diagonal",
+    "transpose"
+  ],
   introduction: {
-    description: "A two-dimensional array stores values in rows and columns. In Java, it is an array whose elements are themselves one-dimensional arrays.",
-    realLifeExamples: ["A school timetable can be represented as rows for periods and columns for days.", "A marks table can store students as rows and subjects as columns.", "A cinema seating chart can store seat status using row and column positions."],
-    commonMistakes: ["Using arr.length for both dimensions when rows may have different lengths.", "Starting a loop at 1 instead of 0 and skipping the first row or column.", "Mixing row and column indexes when accessing arr[i][j]."],
-    whereUsed: ["Matrices and tables", "Game boards and seating grids", "Image and numerical data processing"]
+    description: "A two-dimensional array stores values in rows and columns. In Java, a 2D array is an array whose elements are references to one-dimensional arrays.",
+    realLifeExamples: [
+      "A school timetable can be represented as rows and columns.",
+      "A marks table can store students as rows and subjects as columns.",
+      "A cinema seating chart can store seat status by row and column."
+    ],
+    commonMistakes: [
+      "Confusing a[i][j] with a[j][i].",
+      "Using arr.length for the number of columns instead of arr[i].length.",
+      "Assuming Java stores a 2D array as one guaranteed contiguous rectangular block."
+    ],
+    whereUsed: ["Matrices and tables", "Game boards and seating grids", "Numerical and image-style grid data"]
   },
   theoryNotes: {
-    beginnerExplanation: "Think of a 2D array as a table. arr[i][j] means row i, column j. Java arrays are zero-indexed, so the first element is arr[0][0].",
-    importantPoints: ["arr.length gives the number of rows.", "arr[i].length gives the number of columns in row i.", "Nested loops are commonly used to visit every element.", "Java supports jagged arrays where rows can have different lengths.", "Diagonal and transpose operations require careful index reasoning."],
-    memoryTricks: ["First index = row, second index = column.", "For every row, use a fresh j loop from 0 to a[i].length - 1.", "Main diagonal: row index equals column index."],
-    examTips: ["Write the dimensions and indexes before tracing a nested loop.", "Identify whether traversal is row-wise or column-wise.", "For jagged arrays, never assume every row has the same length.", "Show initialization, traversal condition, and final result clearly in board answers."]
+    beginnerExplanation: "Think of a 2D array as a table. a[i][j] means row i, column j. Indexing starts at 0. In Java, the outer array stores references to row arrays; each row is a separate array object.",
+    importantPoints: [
+      "a.length gives the number of row references in the outer array.",
+      "a[i].length gives the length of the particular row.",
+      "A rectangular array has equal row lengths, while a jagged array may have different row lengths.",
+      "Java does not define a single numeric memory-address formula like base + offset for every 2D access because rows are separately allocated array objects.",
+      "The expression a[i][j] first accesses the i-th row reference and then the j-th element of that row."
+    ],
+    memoryModel: {
+      heading: "2D Array Memory Location in Java",
+      explanation: "For a declaration such as int[][] a = {{10,20,30},{40,50,60}}, the variable a refers to an outer array. The outer array contains references to row arrays. Each row array has its own array object and storage. Therefore, do not teach a[i][j] as a guaranteed single contiguous memory-address calculation.",
+      diagram: "a ──► outer array [ref0, ref1]\n             │       │\n             ▼       ▼\n         row 0     row 1\n        [10,20,30] [40,50,60]\n\nAccess a[1][2]:\n1. a[1] → reference to row 1\n2. [2] → third element of row 1\n3. value = 60",
+      examNote: "For Java school-level questions, focus on index location and the two-step reference model. Avoid claiming that all rows have one fixed base address relationship unless the question explicitly defines a simplified memory model."
+    },
+    memoryAddressLocation: {
+      questionStyle: "Locate an element in a 2D array",
+      example: "int[][] a = {{11, 22, 33}, {44, 55, 66}};",
+      steps: [
+        "a[0][0] → first row, first column → 11",
+        "a[0][2] → first row, third column → 33",
+        "a[1][1] → second row, second column → 55",
+        "a[1][2] → second row, third column → 66"
+      ],
+      reminder: "First index = row; second index = column. Java's 2D array is an array of row references, so the exact runtime memory address is implementation-dependent."
+    },
+    infixNotation: {
+      heading: "Infix Notation and Operator Precedence in Java",
+      definition: "In infix notation, the operator is written between its operands, for example A + B, A * B and (A + B) * C.",
+      examples: [
+        "A + B",
+        "A - B",
+        "A * B",
+        "A / B",
+        "(A + B) * C"
+      ],
+      precedence: [
+        "Parentheses first: ( )",
+        "Unary operators such as ++, --, +, -",
+        "Multiplication, division and modulus: *, /, %",
+        "Addition and subtraction: +, -",
+        "Relational operators: <, <=, >, >=",
+        "Equality: ==, !=",
+        "Logical AND: &&",
+        "Logical OR: ||",
+        "Assignment operators are evaluated after higher-precedence expressions."
+      ],
+      examTips: [
+        "If an expression contains parentheses, solve the innermost parentheses first.",
+        "For operators at the same precedence level, Java generally evaluates left to right; associativity matters.",
+        "Do not confuse infix notation with postfix or prefix increment notation."
+      ],
+      workedExamples: [
+        {
+          expression: "8 + 3 * 2",
+          working: "Multiplication first → 8 + 6 → 14",
+          answer: "14"
+        },
+        {
+          expression: "(8 + 3) * 2",
+          working: "Parentheses first → 11 * 2",
+          answer: "22"
+        },
+        {
+          expression: "20 / 5 + 2 * 3",
+          working: "Division and multiplication first → 4 + 6",
+          answer: "10"
+        }
+      ],
+      note: "Infix notation is especially useful when tracing Java expressions inside array-processing programs."
+    },
+    memoryTricks: [
+      "First index = row, second index = column.",
+      "Outer array → row reference → element.",
+      "For columns, use a[i].length when rows may be jagged.",
+      "Infix: operand OP operand; use precedence before left-to-right evaluation."
+    ],
+    examTips: [
+      "Write dimensions and indexes before tracing a nested loop.",
+      "For a[i][j], identify i first as the row and j second as the column.",
+      "For memory questions, describe references to row arrays rather than inventing physical addresses.",
+      "For expression questions, mark parentheses and operator precedence before calculating."
+    ]
   },
   syntax: {
-    code: "int[][] a = new int[3][4];\nint[][] b = {{1, 2}, {3, 4}, {5, 6}};",
-    breakdown: [{ keyword: "int[][]", explanation: "Declares a two-dimensional integer array." }, { keyword: "new int[3][4]", explanation: "Creates 3 rows, each containing 4 integer elements." }, { keyword: "b[i][j]", explanation: "Accesses the element at row i and column j." }]
+    code: "int[][] a = new int[3][4];\nint[][] b = {{1, 2}, {3, 4}, {5, 6}};\nint x = b[1][0];",
+    breakdown: [
+      { keyword: "int[][]", explanation: "Declares a two-dimensional array of int references to row arrays." },
+      { keyword: "new int[3][4]", explanation: "Creates 3 row arrays, each with 4 integer elements." },
+      { keyword: "b[i][j]", explanation: "First obtains row i, then element j in that row." }
+    ]
   },
   examples: {
-    basic: [{ title: "Print all elements row by row", code: "int[][] a = {{10, 20}, {30, 40}};\nfor (int i = 0; i < a.length; i++) {\n    for (int j = 0; j < a[i].length; j++)\n        System.out.print(a[i][j] + \" \");\n    System.out.println();\n}", output: "10 20\n30 40", explanation: ["The outer loop selects each row.", "The inner loop visits every column in that row."] }],
-    intermediate: [{ title: "Find row sums", code: "int[][] marks = {{12, 15, 18}, {10, 14, 16}};\nfor (int i = 0; i < marks.length; i++) {\n    int sum = 0;\n    for (int j = 0; j < marks[i].length; j++) sum += marks[i][j];\n    System.out.println(sum);\n}", output: "45\n40", explanation: ["A new sum is started for each row.", "Each row's values are accumulated before printing."] }],
-    advanced: [{ title: "Transpose a 2 × 3 matrix", code: "int[][] a = {{1, 2, 3}, {4, 5, 6}};\nfor (int j = 0; j < a[0].length; j++) {\n    for (int i = 0; i < a.length; i++)\n        System.out.print(a[i][j] + \" \");\n    System.out.println();\n}", output: "1 4\n2 5\n3 6", explanation: ["The column index is fixed by the outer loop.", "The row index changes in the inner loop, producing the transpose traversal."] }]
+    basic: [{
+      title: "Print all elements row by row",
+      code: "int[][] a = {{10, 20}, {30, 40}};\nfor (int i = 0; i < a.length; i++) {\n    for (int j = 0; j < a[i].length; j++)\n        System.out.print(a[i][j] + \" \" );\n    System.out.println();\n}",
+      output: "10 20\n30 40",
+      explanation: ["The outer loop selects a row.", "The inner loop visits the elements of that row."]
+    }],
+    intermediate: [{
+      title: "Find row sums",
+      code: "int[][] marks = {{12, 15, 18}, {10, 14, 16}};\nfor (int i = 0; i < marks.length; i++) {\n    int sum = 0;\n    for (int j = 0; j < marks[i].length; j++) sum += marks[i][j];\n    System.out.println(sum);\n}",
+      output: "45\n40",
+      explanation: ["A fresh sum is started for each row.", "Each row is processed independently."]
+    }],
+    advanced: [{
+      title: "Transpose traversal",
+      code: "int[][] a = {{1, 2, 3}, {4, 5, 6}};\nfor (int j = 0; j < a[0].length; j++) {\n    for (int i = 0; i < a.length; i++)\n        System.out.print(a[i][j] + \" \" );\n    System.out.println();\n}",
+      output: "1 4\n2 5\n3 6",
+      explanation: ["The outer loop fixes a column.", "The inner loop moves through rows, giving transpose order."]
+    }]
   },
-  dryRun: [{ title: "Trace a 2 × 2 matrix", code: "int[][] a = {{2, 4}, {6, 8}};\nint s = 0;\nfor (int i = 0; i < 2; i++)\n    for (int j = 0; j < 2; j++)\n        if (i == j) s += a[i][j];", trace: [{ line: 1, explanation: "Matrix values are stored as two rows." }, { line: 2, explanation: "s starts at 0." }, { line: 3, explanation: "The loops visit (0,0), (0,1), (1,0), (1,1)." }, { line: 4, explanation: "Only diagonal positions are added, so s becomes 10." }] }],
+  dryRun: [{
+    title: "Trace a diagonal sum",
+    code: "int[][] a = {{2, 4}, {6, 8}};\nint s = 0;\nfor (int i = 0; i < 2; i++)\n    if (i == i) s += a[i][i];",
+    trace: [
+      { line: 1, explanation: "The matrix contains two rows." },
+      { line: 2, explanation: "s starts at 0." },
+      { line: 3, explanation: "i takes values 0 and 1." },
+      { line: 4, explanation: "a[0][0] and a[1][1] are added → 2 + 8 = 10." }
+    ]
+  }],
   outputBasedQuestions: [
-    { id: "arrays-2d-ob-1", question: "What is printed by int[][] a={{1,2},{3,4}}; System.out.println(a[1][0]);", answer: "3", explanation: "Row 1 is the second row and column 0 is its first element." },
-    { id: "arrays-2d-ob-2", question: "Find the output: int[][] a={{2,4},{6,8}}; int s=0; for(int i=0;i<2;i++) for(int j=0;j<2;j++) s+=a[i][j]; System.out.println(s);", answer: "20", explanation: "All four elements are added." },
-    { id: "arrays-2d-ob-3", question: "What is printed by int[][] a={{5,7,9},{2,4,6}}; System.out.println(a.length);", answer: "2", explanation: "There are two row arrays." },
-    { id: "arrays-2d-ob-4", question: "What is printed by int[][] a={{5,7,9},{2,4,6}}; System.out.println(a[0].length);", answer: "3", explanation: "The first row contains three elements." },
-    { id: "arrays-2d-ob-5", question: "Find the output: int[][] a={{1,2,3},{4,5,6}}; System.out.print(a[0][2]+a[1][1]);", answer: "8", explanation: "a[0][2] is 3 and a[1][1] is 5." },
-    { id: "arrays-2d-ob-6", question: "What is printed? int[][] a={{1,2},{3,4}}; for(int i=1;i>=0;i--) System.out.print(a[i][0]+\" \" );", answer: "3 1 ", explanation: "Rows are visited from bottom to top." },
-    { id: "arrays-2d-ob-7", question: "Find the output: int[][] a={{2,3},{4,5}}; int p=1; for(int i=0;i<2;i++) p*=a[i][i]; System.out.println(p);", answer: "10", explanation: "The main diagonal contains 2 and 5." },
-    { id: "arrays-2d-ob-8", question: "What is printed? int[][] a={{10,20},{30,40}}; System.out.println(a[1][1]-a[0][1]);", answer: "20", explanation: "40 - 20 = 20." },
-    { id: "arrays-2d-ob-9", question: "What is printed? int[][] a={{1,2},{3,4}}; for(int j=0;j<2;j++) System.out.print(a[0][j]+\" \" );", answer: "1 2 ", explanation: "Only the first row is traversed." },
-    { id: "arrays-2d-ob-10", question: "Find the output: int[][] a={{3,1},{2,5}}; int max=a[0][0]; for(int i=0;i<2;i++) for(int j=0;j<2;j++) if(a[i][j]>max) max=a[i][j]; System.out.println(max);", answer: "5", explanation: "The largest matrix element is 5." },
-    { id: "arrays-2d-ob-11", question: "What is printed? int[][] a={{1,2,3},{4,5}}; System.out.println(a[1].length);", answer: "2", explanation: "The second row has two elements; this is a jagged array." },
-    { id: "arrays-2d-ob-12", question: "Find the output: int[][] a={{1,2,3},{4,5,6}}; int s=0; for(int i=0;i<a.length;i++) s+=a[i][0]; System.out.println(s);", answer: "5", explanation: "The first column is 1 + 4." },
-    { id: "arrays-2d-ob-13", question: "What is printed? int[][] a={{2,4},{6,8}}; System.out.println(a[0][0]*a[1][1]);", answer: "16", explanation: "2 × 8 = 16." },
-    { id: "arrays-2d-ob-14", question: "What is printed? int[][] a={{1,2},{3,4}}; for(int i=0;i<2;i++) System.out.print(a[i][i]+\" \" );", answer: "1 4 ", explanation: "The loop prints main-diagonal elements." },
-    { id: "arrays-2d-ob-15", question: "Find the output: int[][] a={{2,0},{0,2}}; int c=0; for(int i=0;i<2;i++) for(int j=0;j<2;j++) if(a[i][j]==0)c++; System.out.println(c);", answer: "2", explanation: "There are two zero entries." },
-    { id: "arrays-2d-ob-16", question: "What is printed? int[][] a={{9,8},{7,6}}; System.out.print(a[0][1]+a[1][0]);", answer: "15", explanation: "8 + 7 = 15." },
-    { id: "arrays-2d-ob-17", question: "Find the output: int[][] a={{1,2},{3,4}}; int s=0; for(int i=0;i<2;i++) s+=a[i][1]; System.out.println(s);", answer: "6", explanation: "Second-column values are 2 and 4." },
-    { id: "arrays-2d-ob-18", question: "What is printed? int[][] a={{1,2,3},{4,5,6}}; int s=0; for(int j=0;j<3;j++) s+=a[0][j]; System.out.println(s);", answer: "6", explanation: "The first row sums to 1+2+3." },
-    { id: "arrays-2d-ob-19", question: "Find the output: int[][] a={{2,4},{6,8}}; for(int i=0;i<2;i++){ for(int j=0;j<2;j++) if(a[i][j]%2==0) System.out.print(1); }", answer: "1111", explanation: "All four entries are even." },
-    { id: "arrays-2d-ob-20", question: "What is printed? int[][] a={{3,5},{7,9}}; System.out.println(a[1][0]+a[0][0]);", answer: "10", explanation: "7 + 3 = 10." },
-    { id: "arrays-2d-ob-21", question: "Find the output: int[][] a={{4,1},{2,8}}; System.out.println(a[0][0] > a[1][1]);", answer: "false", explanation: "4 is not greater than 8." },
-    { id: "arrays-2d-ob-22", question: "What is printed? int[][] a={{1,2},{3,4}}; System.out.print(a[0][0]+a[0][1]);", answer: "3", explanation: "1 + 2 = 3." },
-    { id: "arrays-2d-ob-23", question: "Find the output: int[][] a={{1,2},{3,4}}; int t=a[0][1]; a[0][1]=a[1][0]; a[1][0]=t; System.out.println(a[0][1]);", answer: "3", explanation: "The off-diagonal values are swapped." },
-    { id: "arrays-2d-ob-24", question: "What is printed? int[][] a={{5,6},{7,8}}; int s=0; for(int i=0;i<2;i++) for(int j=0;j<=i;j++) s+=a[i][j]; System.out.println(s);", answer: "18", explanation: "Values added are 5, 7 and 8." },
-    { id: "arrays-2d-ob-25", question: "Find the output: int[][] a={{1,0,0},{0,1,0},{0,0,1}}; int s=0; for(int i=0;i<3;i++) s+=a[i][i]; System.out.println(s);", answer: "3", explanation: "The identity matrix has three ones on the main diagonal." }
+    { id: "arrays-2d-ob-1", question: "int[][] a={{1,2},{3,4}}; What is a[1][0]?", answer: "3", explanation: "Second row, first column." },
+    { id: "arrays-2d-ob-2", question: "int[][] a={{2,4},{6,8}}; Find the sum of all elements.", answer: "20", explanation: "2 + 4 + 6 + 8 = 20." },
+    { id: "arrays-2d-ob-3", question: "For int[][] a={{5,7,9},{2,4,6}}, what is a.length?", answer: "2", explanation: "There are two row arrays." },
+    { id: "arrays-2d-ob-4", question: "For int[][] a={{5,7,9},{2,4,6}}, what is a[0].length?", answer: "3", explanation: "The first row has three elements." },
+    { id: "arrays-2d-ob-5", question: "What is a[0][2] + a[1][1] for {{1,2,3},{4,5,6}}?", answer: "8", explanation: "3 + 5 = 8." },
+    { id: "arrays-2d-ob-6", question: "What does a[1][2] locate in {{11,22,33},{44,55,66}}?", answer: "66", explanation: "Row 1 is the second row and column 2 is its third element." },
+    { id: "arrays-2d-ob-7", question: "int[][] a={{2,3},{4,5}}; Find a[0][0] * a[1][1].", answer: "10", explanation: "2 × 5 = 10." },
+    { id: "arrays-2d-ob-8", question: "What is printed by System.out.println(8 + 3 * 2);?", answer: "14", explanation: "Multiplication has higher precedence than addition." },
+    { id: "arrays-2d-ob-9", question: "What is printed by System.out.println((8 + 3) * 2);?", answer: "22", explanation: "Parentheses are evaluated first." },
+    { id: "arrays-2d-ob-10", question: "For int[][] a={{1,2,3},{4,5}}; what is a[1].length?", answer: "2", explanation: "The second row has two elements." },
+    { id: "arrays-2d-ob-11", question: "For {{1,2},{3,4}}, what is the main-diagonal sum?", answer: "5", explanation: "1 + 4 = 5." },
+    { id: "arrays-2d-ob-12", question: "Which is correct for a rectangular 2D array: a.length or a[i].length for the columns of row i?", answer: "a[i].length", explanation: "Column count belongs to the particular row." },
+    { id: "arrays-2d-ob-13", question: "What is printed by 20 / 5 + 2 * 3?", answer: "10", explanation: "4 + 6 = 10." },
+    { id: "arrays-2d-ob-14", question: "For {{9,8},{7,6}}, find a[0][1] + a[1][0].", answer: "15", explanation: "8 + 7 = 15." },
+    { id: "arrays-2d-ob-15", question: "A jagged array has rows of lengths 3, 1 and 4. What is the length of the outer array?", answer: "3", explanation: "The outer array contains three row references." }
   ],
   errorFindingQuestions: [
-    { id: "arrays-2d-ef-1", question: "int[][] a={{1,2},{3,4}}; System.out.println(a[2][0]); What is wrong?", error: "Row index 2 does not exist in a 2-row array.", corrected: "Use a valid row index such as a[1][0]." },
-    { id: "arrays-2d-ef-2", question: "for(int i=0;i<=a.length;i++) ... Why can this fail?", error: "The last valid row index is a.length - 1.", corrected: "Use i < a.length." },
-    { id: "arrays-2d-ef-3", question: "for(int j=0;j<=a[i].length;j++) ... Why can this fail?", error: "The condition allows j == a[i].length, which is outside the row.", corrected: "Use j < a[i].length." },
-    { id: "arrays-2d-ef-4", question: "int[][] a={{1,2},{3}}; for(int j=0;j<2;j++) System.out.print(a[1][j]);", error: "The second row has only one element.", corrected: "Loop with j < a[1].length." },
-    { id: "arrays-2d-ef-5", question: "int[][] a=new int[2][3]; System.out.println(a[3][0]);", error: "There are only rows 0 and 1.", corrected: "Use a row index between 0 and 1." },
-    { id: "arrays-2d-ef-6", question: "int[][] a={{1,2},{3,4}}; System.out.println(a[0,1]);", error: "Java uses two index brackets for a 2D array.", corrected: "Write a[0][1]." },
-    { id: "arrays-2d-ef-7", question: "for(int i=0;i<a[0].length;i++) ... when rows are not known to have equal length.", error: "The outer loop should depend on the number of rows.", corrected: "Use i < a.length for rows and a[i].length for columns." },
-    { id: "arrays-2d-ef-8", question: "int sum=0; for(int i=0;i<a.length;i++) for(int j=0;j<a.length;j++) sum+=a[i][j];", error: "The inner loop incorrectly uses the row count for columns.", corrected: "Use j < a[i].length." },
-    { id: "arrays-2d-ef-9", question: "int[][] a={{1,2},{3,4}}; for(int i=0;i<2;i++) System.out.println(a[0][i]);", error: "This prints only the first row.", corrected: "Add an inner loop and access a[i][j] to print the complete matrix." },
-    { id: "arrays-2d-ef-10", question: "int[][] a={{1,2},{3,4}}; for(int j=0;j<2;j++) System.out.print(a[j][0]);", error: "This valid code traverses only the first column.", corrected: "Use nested loops when the requirement is to print the complete matrix." }
+    { id: "arrays-2d-ef-1", question: "int[][] a={{1,2},{3,4}}; System.out.println(a[2][0]);", error: "Row index 2 does not exist.", corrected: "Use a valid row index such as a[1][0]." },
+    { id: "arrays-2d-ef-2", question: "for(int i=0;i<=a.length;i++)", error: "The condition allows i == a.length.", corrected: "Use i < a.length." },
+    { id: "arrays-2d-ef-3", question: "for(int j=0;j<=a[i].length;j++)", error: "The condition allows an out-of-range column index.", corrected: "Use j < a[i].length." },
+    { id: "arrays-2d-ef-4", question: "int[][] a={{1,2},{3}}; for(int j=0;j<2;j++) System.out.print(a[1][j]);", error: "Second row has only one element.", corrected: "Use j < a[1].length." },
+    { id: "arrays-2d-ef-5", question: "System.out.println(a[0,1]);", error: "Java 2D indexing uses two bracket pairs.", corrected: "Write a[0][1]." },
+    { id: "arrays-2d-ef-6", question: "for(int j=0;j<a.length;j++) sum += a[i][j];", error: "The inner loop is using the number of rows as the column bound.", corrected: "Use j < a[i].length." },
+    { id: "arrays-2d-ef-7", question: "Explain the misconception that a Java 2D array always occupies one contiguous rectangular block.", error: "A Java 2D array is an outer array of row references; rows are separate array objects.", corrected: "Describe the two-level reference model." },
+    { id: "arrays-2d-ef-8", question: "8 + 3 * 2 is evaluated as (8 + 3) * 2.", error: "This ignores operator precedence.", corrected: "Evaluate 3 * 2 first, giving 14." },
+    { id: "arrays-2d-ef-9", question: "20 / (5 + 2 * 3) is evaluated as 20 / 5 + 6.", error: "The parentheses contain a full expression that must be evaluated first.", corrected: "Compute 5 + 6 = 11, then evaluate 20 / 11 using Java arithmetic rules." },
+    { id: "arrays-2d-ef-10", question: "a[1][0] is described as first row, second column.", error: "The row and column meanings are reversed.", corrected: "a[1][0] means second row, first column." }
   ],
   fillInTheBlanks: [
-    { id: "arrays-2d-fb-1", question: "The number of rows in a 2D array a is given by ___.", answer: "a.length" },
-    { id: "arrays-2d-fb-2", question: "The number of elements in row i is given by ___.", answer: "a[i].length" },
-    { id: "arrays-2d-fb-3", question: "The first element of a 2D array is at index ___.", answer: "a[0][0]" },
-    { id: "arrays-2d-fb-4", question: "A 2D array is commonly processed using ___ loops.", answer: "nested" },
-    { id: "arrays-2d-fb-5", question: "In a[i][j], i usually represents the ___ and j the ___.", answer: "row, column" },
-    { id: "arrays-2d-fb-6", question: "The main diagonal contains elements where ___ equals ___.", answer: "row index, column index" },
-    { id: "arrays-2d-fb-7", question: "A 2D array with rows of different lengths is called a ___ array.", answer: "jagged" },
-    { id: "arrays-2d-fb-8", question: "The last valid row index is ___.", answer: "a.length - 1" },
-    { id: "arrays-2d-fb-9", question: "For safe traversal of row i, the column condition is j < ___.", answer: "a[i].length" },
-    { id: "arrays-2d-fb-10", question: "A matrix with equal numbers of rows and columns is called a ___ matrix.", answer: "square" }
+    { id: "arrays-2d-fb-1", question: "The first index in a[i][j] represents the ______.", answer: "row" },
+    { id: "arrays-2d-fb-2", question: "The second index in a[i][j] represents the ______.", answer: "column" },
+    { id: "arrays-2d-fb-3", question: "The number of row references in a 2D array is given by ______.", answer: "a.length" },
+    { id: "arrays-2d-fb-4", question: "The length of row i is given by ______.", answer: "a[i].length" },
+    { id: "arrays-2d-fb-5", question: "Java arrays start indexing from ______.", answer: "0" },
+    { id: "arrays-2d-fb-6", question: "In infix notation, the operator is written ______ the operands.", answer: "between" },
+    { id: "arrays-2d-fb-7", question: "In 8 + 3 * 2, multiplication is evaluated before ______.", answer: "addition" },
+    { id: "arrays-2d-fb-8", question: "A Java 2D array is an outer array containing ______ to row arrays.", answer: "references" }
   ],
   mcqs: [
-    { id: "arrays-2d-mcq-1", question: "Which expression gives the number of rows in int[][] a?", options: ["a[0].length", "a.length", "a.size()", "a.columns"], answer: "B", explanation: "a.length stores the number of row arrays." },
-    { id: "arrays-2d-mcq-2", question: "Which expression accesses row 2, column 1?", options: ["a[1][2]", "a[2][1]", "a[2,1]", "a(2,1)"], answer: "B", explanation: "The row index comes first and the column index second." },
-    { id: "arrays-2d-mcq-3", question: "What is the safest inner-loop bound for row i?", options: ["j < a.length", "j <= a[i].length", "j < a[i].length", "j <= a.length"], answer: "C", explanation: "Each row may have its own length." },
-    { id: "arrays-2d-mcq-4", question: "Which structure is best for printing every element?", options: ["One if statement", "Nested loops", "One switch", "One variable"], answer: "B", explanation: "One loop handles rows and another handles columns." },
-    { id: "arrays-2d-mcq-5", question: "Which elements form the main diagonal of a square matrix?", options: ["a[i][0]", "a[0][j]", "a[i][i]", "a[i][i+1]"], answer: "C", explanation: "Main diagonal positions have equal row and column indexes." }
+    { id: "arrays-2d-mcq-1", question: "For int[][] a={{1,2},{3,4}}, what is a[1][1]?", options: ["1", "2", "3", "4"], answer: "4", explanation: "Second row, second column." },
+    { id: "arrays-2d-mcq-2", question: "Which expression gives the length of row i?", options: ["a.length", "a[i].length", "a[0]", "a[i][j]"], answer: "a[i].length", explanation: "Each row is a separate array." },
+    { id: "arrays-2d-mcq-3", question: "What is a Java 2D array most accurately described as?", options: ["Always one flat block", "An array of row references", "A linked list", "A String"], answer: "An array of row references", explanation: "Java's multidimensional arrays are arrays of arrays." },
+    { id: "arrays-2d-mcq-4", question: "What is 8 + 3 * 2 in Java?", options: ["22", "14", "16", "13"], answer: "14", explanation: "* has higher precedence than +." },
+    { id: "arrays-2d-mcq-5", question: "Which notation is infix?", options: ["+ A B", "A B +", "A + B", "++A"], answer: "A + B", explanation: "The operator appears between its operands." },
+    { id: "arrays-2d-mcq-6", question: "For a={{1,2,3},{4,5}}, which is the safest inner-loop bound?", options: ["j <= a.length", "j < a[i].length", "j < a.length", "j <= a[i].length"], answer: "j < a[i].length", explanation: "It works correctly for each row, including jagged arrays." },
+    { id: "arrays-2d-mcq-7", question: "What does a[1][2] mean?", options: ["Second column, third row", "Second row, third column", "First row, third column", "Third row, second column"], answer: "Second row, third column", explanation: "The first index is the row." },
+    { id: "arrays-2d-mcq-8", question: "What should be evaluated first in (A + B) * C?", options: ["C", "*", "A + B", "Everything left to right"], answer: "A + B", explanation: "Parentheses have higher precedence." }
   ],
   programmingQuestions: [
-    { id: "arrays-2d-pr-1", title: "Row-wise sum", prompt: "Input a 3×4 integer matrix and print the sum of each row." },
-    { id: "arrays-2d-pr-2", title: "Largest element", prompt: "Write a program to find the largest value in a 2D integer array." },
-    { id: "arrays-2d-pr-3", title: "Main diagonal", prompt: "For a square matrix, calculate and display the sum of the main diagonal." },
-    { id: "arrays-2d-pr-4", title: "Transpose", prompt: "Display the transpose of a rectangular matrix without modifying the original matrix." },
-    { id: "arrays-2d-pr-5", title: "Count even values", prompt: "Count and display how many even numbers occur in a 2D array." }
+    { id: "arrays-2d-pr-1", title: "Row and column totals", prompt: "Write a Java program to input a rectangular matrix and print the sum of each row and each column.", hints: ["Use nested loops.", "Maintain separate row and column sums."] },
+    { id: "arrays-2d-pr-2", title: "Main diagonal", prompt: "Write a Java program to print the main diagonal of a square matrix and calculate its sum.", hints: ["Main diagonal positions satisfy i == j."] },
+    { id: "arrays-2d-pr-3", title: "Transpose", prompt: "Write a Java program to display the transpose of a matrix without changing the original array.", hints: ["Outer loop can iterate through columns.", "Inner loop can iterate through rows."] },
+    { id: "arrays-2d-pr-4", title: "Memory model explanation", prompt: "Given int[][] a = {{10,20},{30,40}}, explain the reference path used to access a[1][0] and identify the value.", hints: ["Follow a → row reference → element."] },
+    { id: "arrays-2d-pr-5", title: "Expression trace", prompt: "Evaluate and explain the Java expression (a + b) * c - d / e using infix precedence and left-to-right rules where applicable.", hints: ["Parentheses first, then multiplication/division, then addition/subtraction."] }
+  ],
+  caseBasedQuestions: [
+    {
+      id: "arrays-2d-cb-1",
+      title: "School marks matrix",
+      scenario: "A school stores marks for students in a 2D array, with students as rows and subjects as columns.",
+      questions: [
+        "Explain what marks[2][1] represents.",
+        "Write the expression for the number of students.",
+        "Write the expression for the number of subjects in student row 2.",
+        "Explain why a[i].length is safer than a.length for a jagged structure."
+      ]
+    },
+    {
+      id: "arrays-2d-cb-2",
+      title: "Tracing a billing expression",
+      scenario: "A program calculates a total using the Java expression (quantity * price) + tax - discount / 100. The student must justify the evaluation order.",
+      questions: [
+        "Identify the infix operators.",
+        "State the precedence order relevant to the expression.",
+        "Explain the role of parentheses.",
+        "Show the order in which the sub-expressions should be evaluated."
+      ]
+    }
   ]
 };
 

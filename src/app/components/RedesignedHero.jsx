@@ -39,12 +39,10 @@ export default function RedesignedHero({
   onBackToBoards,
   onBackToClasses,
   onClassSelect,
-  onSubjectSelect,
   showSubjects,
   showClasses,
   selectedBoard,
   selectedClass,
-  showStartLearning,
   onStartLearning,
   personalization,
 }) {
@@ -59,10 +57,10 @@ export default function RedesignedHero({
   const selectedSubject = selectedCisceSubject || selectedCbseSubject;
   const classes = selectedBoard === "cisce" ? CISCE_CLASSES : CBSE_CLASSES;
   const subjectStep = Boolean(selectedBoard) && !selectedClass && !showSubjects;
-  const classList = useMemo(() => {
-    if (!selectedSubject) return classes;
-    return classes.filter((item) => item.subjects.includes(selectedSubject));
-  }, [classes, selectedSubject]);
+  const classList = useMemo(
+    () => (selectedSubject ? classes.filter((item) => item.subjects.includes(selectedSubject)) : classes),
+    [classes, selectedSubject]
+  );
 
   const chooseBoard = (board) => {
     setSelectedCisceSubject(null);
@@ -70,14 +68,9 @@ export default function RedesignedHero({
     onBoardSelect?.(board);
   };
 
-  const chooseCisceSubject = (subject) => {
-    setSelectedCisceSubject(subject);
-    setSelectedCbseSubject(null);
-  };
-
-  const chooseCbseSubject = (subject) => {
-    setSelectedCbseSubject(subject);
-    setSelectedCisceSubject(null);
+  const chooseSubject = (subject) => {
+    if (selectedBoard === "cisce") setSelectedCisceSubject(subject);
+    else setSelectedCbseSubject(subject);
   };
 
   const chooseClass = (item) => {
@@ -85,11 +78,11 @@ export default function RedesignedHero({
   };
 
   const handleStartLearning = () => {
-    const subjectId = selectedSubject || selectedClass?.subjects?.[0] || personalization?.subject;
+    const board = selectedBoard || personalization?.board;
     const classId = selectedClass?.id || personalization?.class?.id;
-    if (subjectId && classId) {
-      const route = getSubjectRoute(selectedBoard || personalization?.board, classId, subjectId);
-      window.location.assign(route);
+    const subjectId = selectedSubject || selectedClass?.subjects?.[0] || personalization?.subject;
+    if (board && classId && subjectId) {
+      window.location.assign(getSubjectRoute(board, classId, subjectId));
       return;
     }
     onStartLearning?.();
@@ -101,7 +94,7 @@ export default function RedesignedHero({
       setSelectedCbseSubject(null);
       return;
     }
-    if (showSubjects) {
+    if (selectedClass || showSubjects) {
       onBackToClasses?.();
       return;
     }
@@ -141,14 +134,12 @@ export default function RedesignedHero({
           </div>
         )}
 
-        {selectedBoard === "cisce" && subjectStep && (
-          <SubjectChooser subjects={["java", "ai"].map((id) => [id, SUBJECTS[id])} onSelect={chooseCisceSubject} />
-        )}
-
-        {selectedBoard === "cbse" && subjectStep && (
-          <SubjectChooser subjects={[
-            ...(selectedClass ? selectedClass.subjects : CBSE_CLASSES.flatMap((item) => item.subjects)),
-          ].filter((id, index, arr) => arr.indexOf(id) === index).map((id) => [id, SUBJECTS[id]])} onSelect={chooseCbseSubject} />
+        {selectedBoard && subjectStep && (
+          <SubjectChooser
+            title={selectedBoard === "cisce" ? "Choose Your CISCE Subject" : "Choose Your CBSE Subject"}
+            subjects={(selectedBoard === "cisce" ? ["java", "ai"] : ["402", "083", "065", "802"]).map((id) => [id, SUBJECTS[id]])}
+            onSelect={chooseSubject}
+          />
         )}
 
         {selectedBoard && !selectedClass && selectedSubject && (
@@ -185,12 +176,12 @@ export default function RedesignedHero({
   );
 }
 
-function SubjectChooser({ subjects, onSelect }) {
+function SubjectChooser({ title, subjects, onSelect }) {
   return (
     <div>
       <div className="mb-8 text-center">
         <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">Board selected</p>
-        <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">Choose Your Subject</h2>
+        <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">{title}</h2>
         <p className="mt-3 text-gray-600">This choice controls which curriculum and question bank will be shown.</p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">

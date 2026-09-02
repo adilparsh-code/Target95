@@ -27,7 +27,13 @@ const SUBJECTS = {
 
 const getSubjectRoute = (board, classId, subjectId) => {
   if (board === "cisce") {
-    if (subjectId === "ai") return "/isc/robotics-ai/class-x";
+    if (subjectId === "ai") {
+      return ["icse-class-9", "icse-class-10"].includes(classId)
+        ? "/isc/robotics-ai/class-x"
+        : classId === "isc-class-12"
+          ? "/isc/robotics-ai/class-x"
+          : "/isc/robotics-ai/class-x";
+    }
     return "/Java";
   }
   const classNumber = classId.replace("class-", "");
@@ -54,9 +60,17 @@ export default function RedesignedHero({
     if (selectedBoard !== "cbse") setSelectedCbseSubject(null);
   }, [selectedBoard]);
 
+  useEffect(() => {
+    if (selectedClass?.subjects?.length === 1) {
+      const onlySubject = selectedClass.subjects[0];
+      if (selectedBoard === "cisce") setSelectedCisceSubject(onlySubject);
+      if (selectedBoard === "cbse") setSelectedCbseSubject(onlySubject);
+    }
+  }, [selectedBoard, selectedClass]);
+
   const selectedSubject = selectedCisceSubject || selectedCbseSubject;
   const classes = selectedBoard === "cisce" ? CISCE_CLASSES : CBSE_CLASSES;
-  const subjectStep = Boolean(selectedBoard) && !selectedClass && !showSubjects;
+  const subjectStep = Boolean(selectedBoard) && !selectedClass && !selectedSubject && !showSubjects;
   const classList = useMemo(
     () => (selectedSubject ? classes.filter((item) => item.subjects.includes(selectedSubject)) : classes),
     [classes, selectedSubject]
@@ -106,6 +120,10 @@ export default function RedesignedHero({
     { id: "cbse", title: "CBSE", icon: "🏫", description: "Classes IX–XII with the correct subject path for each curriculum." },
   ];
 
+  const chooserSubjects = selectedBoard === "cisce"
+    ? ["java", "ai"]
+    : ["402", "083", "065", "802"];
+
   return (
     <section className="relative overflow-hidden px-4 py-16 sm:py-20">
       <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white pointer-events-none" />
@@ -137,7 +155,7 @@ export default function RedesignedHero({
         {selectedBoard && subjectStep && (
           <SubjectChooser
             title={selectedBoard === "cisce" ? "Choose Your CISCE Subject" : "Choose Your CBSE Subject"}
-            subjects={(selectedBoard === "cisce" ? ["java", "ai"] : ["402", "083", "065", "802"]).map((id) => [id, SUBJECTS[id]])}
+            subjects={chooserSubjects.map((id) => [id, SUBJECTS[id]])}
             onSelect={chooseSubject}
           />
         )}

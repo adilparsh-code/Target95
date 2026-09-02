@@ -248,6 +248,22 @@ export const ISC_XI_CONTENT = [
       practice("XI-ETH-BP-02", "hard", "essay", "Explain why an AI model should be tested for bias before being used for high-impact student decisions.", "Training data and system design can create unequal outcomes; representative evaluation, subgroup testing, human oversight and monitoring reduce risk.", 5),
     ],
   },
+  {
+    topicId: "xi-recursion-debugging", slug: "recursion-debugging", section: "C", title: "Recursion: Tracing and Debugging",
+    learningObjectives: ["Trace recursive calls and returns.", "Identify ineffective base cases.", "Write terminating recursive methods."],
+    keyConcepts: ["Base case", "Recursive case", "Call stack", "Termination"],
+    mcqs: [
+      { id: "XI-REC-MCQ-01", difficulty: "easy", question: "What is the main purpose of a base case?", options: ["Start a loop", "Stop recursion", "Create an object", "Declare a class"], answer: "Stop recursion", explanation: "The base case terminates recursive calls." },
+      { id: "XI-REC-MCQ-02", difficulty: "medium", question: "For factorial, which is a suitable base case?", options: ["n == 0", "n > 100", "n == 99", "n == 2 only"], answer: "n == 0", explanation: "0! is 1 and provides a natural terminating case." },
+      { id: "XI-REC-MCQ-03", difficulty: "hard", question: "A recursive method calls itself with the same argument forever. What is missing?", options: ["A package", "Progress toward the base case", "A constructor", "An import"], answer: "Progress toward the base case", explanation: "The recursive argument must move toward termination." }
+    ],
+    practice: [
+      { id: "XI-REC-P-01", difficulty: "medium", type: "tracing", question: "Trace factorial(4), listing calls and returns.", answer: "Calls: 4,3,2,1; returns: 1,2,6,24.", marks: 3 },
+      { id: "XI-REC-P-02", difficulty: "hard", type: "debugging", question: "Explain why a recursive method that never changes its argument may not terminate.", answer: "The call never reaches a state closer to the base case and may exhaust the call stack.", marks: 3 },
+      { id: "XI-REC-P-03", difficulty: "board", type: "programming", question: "Write a recursive Java method to calculate the sum from 1 to n.", answer: "Use base case n<=1 returning n; otherwise return n + sum(n-1).", marks: 4 }
+    ],
+    practicalTasks: ["Trace recursive factorial.", "Debug a non-terminating recursive method.", "Compare recursive and iterative solutions."]
+  },
 ];
 
 export const ISC_XI_CONTENT_MAP = ISC_XI_CONTENT.reduce((map, topic) => {

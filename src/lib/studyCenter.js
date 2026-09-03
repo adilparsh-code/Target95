@@ -2,6 +2,7 @@ import javaChapters from "../app/data/javaChapters";
 import questions from "../app/data/questions";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 import { adaptStudyChapterIdentity } from "@/lib/studyChapterIdentity";
+import { getChapterBySlug as getRichChapterBySlug } from "../app/data/chapter-content";
 
 export const STUDY_PROGRESS_STORAGE_KEY = "target95-study-progress";
 
@@ -1507,23 +1508,46 @@ export function getStudyChapters(filters = {}) {
       difficulty = "Easy";
     }
 
-    const sd = chapterStudyData[chapter.slug] ?? {
-      intro: `Learn the core ideas for ${chapter.title}.`,
-      concepts: ["Core concepts", "Practice questions", "Revision"],
-      definitions: ["Definition 1", "Definition 2"],
-      notes: ["Keep reviewing the material until it feels familiar."],
-      formulaBox: null,
-      mistakes: ["Skipping the basics", "Avoiding repeated revision"],
-      tips: ["Break the chapter into small study sessions"],
-      summary: "Review the chapter steadily and test yourself with practice questions.",
-      syntax: [],
-      importantExamPoints: [],
-      commonMistakes: [],
-      quickRevision: [],
-      faqs: [],
-      relatedTopics: [],
-      learningObjectives: [],
-    };
+    const legacyStudyData = chapterStudyData[chapter.slug];
+    const richChapter = getRichChapterBySlug(chapter.slug);
+    const sd = richChapter
+      ? {
+          ...(legacyStudyData || {}),
+          ...richChapter,
+          intro: richChapter.intro || legacyStudyData?.intro,
+          concepts: richChapter.concepts || legacyStudyData?.concepts || [],
+          definitions: richChapter.definitions || legacyStudyData?.definitions || [],
+          notes: richChapter.notes || legacyStudyData?.notes || [],
+          formulaBox: richChapter.formulaBox ?? legacyStudyData?.formulaBox ?? null,
+          mistakes: richChapter.mistakes || legacyStudyData?.mistakes || [],
+          tips: richChapter.tips || legacyStudyData?.tips || [],
+          summary: richChapter.summary || legacyStudyData?.summary || "",
+          syntax: richChapter.syntax || legacyStudyData?.syntax || [],
+          importantExamPoints: richChapter.importantExamPoints || legacyStudyData?.importantExamPoints || [],
+          commonMistakes: richChapter.commonMistakes || legacyStudyData?.commonMistakes || [],
+          quickRevision: richChapter.quickRevision || legacyStudyData?.quickRevision || [],
+          faqs: richChapter.faqs || legacyStudyData?.faqs || [],
+          relatedTopics: richChapter.relatedTopics || legacyStudyData?.relatedTopics || [],
+          learningObjectives: richChapter.learningObjectives || legacyStudyData?.learningObjectives || [],
+          examples: richChapter.examples || legacyStudyData?.examples || [],
+        }
+      : legacyStudyData ?? {
+          intro: `Learn the core ideas for ${chapter.title}.`,
+          concepts: ["Core concepts", "Practice questions", "Revision"],
+          definitions: ["Definition 1", "Definition 2"],
+          notes: ["Keep reviewing the material until it feels familiar."],
+          formulaBox: null,
+          mistakes: ["Skipping the basics", "Avoiding repeated revision"],
+          tips: ["Break the chapter into small study sessions"],
+          summary: "Review the chapter steadily and test yourself with practice questions.",
+          syntax: [],
+          importantExamPoints: [],
+          commonMistakes: [],
+          quickRevision: [],
+          faqs: [],
+          relatedTopics: [],
+          learningObjectives: [],
+        };
 
     return {
       ...chapter,

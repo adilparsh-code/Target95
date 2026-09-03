@@ -3608,11 +3608,6 @@ public class Main {
   ],
 
 },
-      `,
-        output: "Enter numbers: 5 10 3 8 -1\nMaximum: 10\nMinimum: 3\nCount: 4",
-      },
-    ],
-  },
 
   // ========== 14. CHALLENGE PROBLEMS ==========
   challengeProblems: [

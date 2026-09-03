@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { getMarkdownChapterContent } from "../../../lib/markdownContent";
 import getQuestionBankChapter from "../../../lib/questionBankAdapter";
+import { getChapterBySlug as getRichChapterBySlug } from "../../data/chapter-content";
 
 export async function generateStaticParams() {
   const chapters = getStudyChapters() || [];
@@ -21,6 +22,7 @@ export default async function StudyChapterPage({ params }) {
 
   const markdownSlug = slug === "introduction-to-java" ? "introduction" : slug;
   const markdownChapter = getMarkdownChapterContent(markdownSlug);
+  const richChapter = getRichChapterBySlug(slug);
   const questionBankChapter = typeof getQuestionBankChapter === "function"
     ? getQuestionBankChapter(slug)
     : null;
@@ -31,7 +33,7 @@ export default async function StudyChapterPage({ params }) {
       <div className="h-20 sm:h-24 lg:h-28" />
       <StudyChapter
         slug={slug}
-        markdownContent={markdownChapter?.content ?? null}
+        markdownContent={richChapter ?? markdownChapter?.content ?? null}
         questionBank={questionBankChapter}
       />
       <Footer />

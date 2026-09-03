@@ -27,12 +27,12 @@ export function getChapterContent(chapter, content = null, questions = null) {
     keyTerms: normalizeList(sd.keyTerms) || normalizeList(content?.keyTerms),
     examples: normalizeExamples(sd.examples, content?.examples),
     diagrams: normalizeList(sd.diagrams) || normalizeList(content?.diagrams),
-    practice: normalizePractice(content?.practiceTest),
+    practice: normalizePractice(content?.practiceTest || content?.practice),
     mcqs: normalizeMcqs(questions?.mcqs, content?.mcqs),
     output: normalizeOutput(questions?.outputQuestions, content?.outputBasedQuestions, sd.outputBasedQuestions),
     programming: normalizeProgramming(questions?.programmingQuestions, content?.programmingQuestions),
     pyqs: normalizePyqs(content?.previousYearQuestions),
-    revisionNotes: normalizeRevisionNotes(content?.revisionNotes, sd.quickRevision),
+    revisionNotes: normalizeRevisionNotes(content?.revisionNotes, sd.quickRevision || content?.memoryTricks),
   };
 }
 
@@ -86,6 +86,13 @@ function normalizeTheory(sd, content) {
     if (sections.length > 0) return sections;
   }
 
+  // Also support legacy/simple rich-content shapes.
+  if (typeof content?.theory === "string" && content.theory.trim()) {
+    return [{ type: "paragraph", text: content.theory }];
+  }
+  if (content?.introduction?.description) {
+    return [{ type: "paragraph", text: content.introduction.description }];
+  }
   // Fallback to studyData concepts
   if (sd.concepts?.length) {
     return sd.concepts.map((concept) => ({ type: "paragraph", text: concept }));
@@ -245,7 +252,7 @@ function normalizePyqs(previousYearQuestions) {
 /**
  * Normalize output-based questions from question-bank, chapter-content, or studyData.
  */
-function normalizeOutput(questionBankOutput, contentOutput, studyDataOutput) {
+function normalizeOutput(questionBankOutput, contentOutput, richContentOutput, studyDataOutput) {
   const output = [];
 
   // From question-bank (preferred)

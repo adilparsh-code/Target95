@@ -1,7 +1,7 @@
 /**
  * Target95 CBSE Practice Question Bank — Session 2026-27
  * Curated starter bank. Every question is explicitly tagged by board/class/subject/chapter.
- * Expand in batches; do not mix with the legacy ICSE/ISC questions.js dataset.
+ * CBSE programming content must remain Python-based; never mix the CISCE Java bank into CBSE.
  */
 
 export const cbsePracticeQuestions2026_27 = [
@@ -13,7 +13,7 @@ export const cbsePracticeQuestions2026_27 = [
     question: 'Which component of a computer performs arithmetic and logical operations?',
     options: ['Control Unit', 'ALU', 'Cache', 'RAM'], answer: 'ALU',
     explanation: 'The Arithmetic Logic Unit (ALU) performs arithmetic and logical operations.',
-    tags: ['CPU', 'ALU', 'computer-organisation'], estimatedTime: 1,
+    tags: ['cpu', 'alu', 'computer-organisation'], estimatedTime: 1,
   },
   {
     id: 'cbse-083-11-cso-mcq-002',
@@ -67,7 +67,6 @@ export const cbsePracticeQuestions2026_27 = [
     explanation: 'Unique credentials reduce password-reuse risk, while multi-factor authentication adds another security layer.',
     tags: ['cyber-safety', 'security'], estimatedTime: 1,
   },
-
   {
     id: 'cbse-065-11-python-mcq-001',
     board: 'CBSE', classLevel: 11, subjectCode: '065', subject: 'Informatics Practices',
@@ -88,7 +87,6 @@ export const cbsePracticeQuestions2026_27 = [
     explanation: 'SELECT retrieves data from one or more database tables.',
     tags: ['sql', 'database'], estimatedTime: 1,
   },
-
   {
     id: 'cbse-402-09-it-mcq-001',
     board: 'CBSE', classLevel: 9, subjectCode: '402', subject: 'Information Technology',
@@ -131,16 +129,15 @@ export const cbsePracticeQuestions2026_27 = [
     explanation: 'One class has many students, while each student belongs to one class.',
     tags: ['database', 'relationships', 'case-study'], estimatedTime: 6,
   },
-
   {
-    id: 'cbse-802-11-it-mcq-001',
+    id: 'cbse-802-11-it-python-mcq-001',
     board: 'CBSE', classLevel: 11, subjectCode: '802', subject: 'Information Technology',
-    unit: 'Programming', topic: 'Java',
+    unit: 'Programming', topic: 'Python',
     questionType: 'mcq', difficulty: 'easy', marks: 1, competency: 'remembering',
-    question: 'Which keyword is used to create an object in Java?',
-    options: ['class', 'new', 'this', 'void'], answer: 'new',
-    explanation: 'The new keyword allocates memory and creates an object instance.',
-    tags: ['java', 'programming'], estimatedTime: 1,
+    question: 'Which Python keyword is used to define a function?',
+    options: ['func', 'define', 'def', 'function'], answer: 'def',
+    explanation: 'Python uses the def keyword to define a function.',
+    tags: ['python', 'programming', 'functions'], estimatedTime: 1,
   },
 ];
 

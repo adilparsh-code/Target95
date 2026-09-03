@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { getStudyChapterBySlug, getStudyChapters } from "../../../lib/studyCenter";
 import { getMarkdownChapterContent } from "../../../lib/markdownContent";
 import getQuestionBankChapter from "../../../lib/questionBankAdapter";
+import { getChapterBySlug as getRichChapterBySlug } from "../../../data/chapter-content";
 
 export async function generateStaticParams() {
   const chapters = getStudyChapters() || [];
@@ -24,6 +25,7 @@ export default async function StudyChapterPage({ params }) {
   const questionBankChapter = typeof getQuestionBankChapter === "function"
     ? getQuestionBankChapter(slug)
     : null;
+  const richChapter = getRichChapterBySlug(slug);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
@@ -31,7 +33,7 @@ export default async function StudyChapterPage({ params }) {
       <div className="h-20 sm:h-24 lg:h-28" />
       <StudyChapter
         slug={slug}
-        markdownContent={markdownChapter?.content ?? null}
+        markdownContent={richChapter ?? markdownChapter?.content ?? null}
         questionBank={questionBankChapter}
       />
       <Footer />

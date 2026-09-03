@@ -101,19 +101,22 @@ export default function ClientHome() {
     setClass(classData);
     if (classData?.subjects?.length === 1) {
       setSubject(classData.subjects[0]);
+      setShowStartLearning(true);
+      setShowSubjects(false);
     } else {
       setSubject(null);
+      setShowStartLearning(false);
+      setShowSubjects(true);
     }
     setShowClasses(false);
-    setShowSubjects(false);
-    setShowStartLearning(true);
   };
 
   const handleSubjectSelect = (subjectId) => {
+    if (!subjectId || !selectedBoard) return;
     setSubject(subjectId);
     setSelectedClass((current) => current ? { ...current, subjects: [subjectId] } : current);
-    setShowSubjects(true);
-    setShowStartLearning(false);
+    setShowSubjects(false);
+    setShowStartLearning(true);
   };
 
   const handleBackToBoards = () => {

@@ -4034,3 +4034,7 @@ public class Main {
             System.out.println("Passed: " + passed);
             System.out.println("Failed: " + failed);
         }
+      }
+    },
+  ],
+};

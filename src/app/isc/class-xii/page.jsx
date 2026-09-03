@@ -11,7 +11,7 @@ const modules = [
   {
     title: "Canonical Forms",
     description: "Canonical SOP/POS, minterms and maxterms are covered in the main Boolean Algebra module.",
-    href: "/isc/class-xii/boolean-algebra",
+    href: "/isc/class-xii/boolean-algebra/canonical-forms",
     badge: "Core Skill",
     topics: ["Minterms", "Maxterms", "Σm / ΠM", "Conversion"],
   },
@@ -24,10 +24,10 @@ const modules = [
   },
   {
     title: "Combinational Logic",
-    description: "Combinational-circuit concepts are routed through the verified Boolean/logic learning module.",
-    href: "/isc/class-xii/boolean-algebra",
+    description: "Combinational-circuit concepts, encoders, decoders, multiplexers, half adders and full adders.",
+    href: "/isc/class-xii/combinational-logic",
     badge: "Application",
-    topics: ["Circuits", "Truth Tables", "Design"],
+    topics: ["Half Adder", "Full Adder", "MUX", "Truth Tables"],
   },
   {
     title: "Boolean Word Problems",
@@ -35,6 +35,13 @@ const modules = [
     href: "/isc/class-xii/boolean-algebra/word-problems",
     badge: "Problem Solving",
     topics: ["Translation", "Worked Examples", "Practice"],
+  },
+  {
+    title: "Class XII Practice Test",
+    description: "Timed ISC-style practice covering Boolean algebra, logic gates, adders, K-Maps and word problems.",
+    href: "/mock-test?board=ISC&class=12&subject=Computer%20Science",
+    badge: "Exam Mode",
+    topics: ["Practice Test", "Board Style", "Timed"],
   },
 ];
 

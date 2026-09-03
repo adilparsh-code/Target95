@@ -1,6 +1,7 @@
 /**
  * CBSE question and mock-test configuration for session 2026-27.
  * This file contains configuration only; question content stays separate.
+ * CBSE programming tracks are Python-first. Java belongs only to CISCE/ISC.
  */
 
 export const CBSE_QUESTION_TYPES = [
@@ -32,25 +33,27 @@ export const CBSE_SUBJECT_MOCK_CONFIG = {
     python: true,
     pythonLibraries: [],
     questionTypes: CBSE_QUESTION_TYPES,
-    note: 'Core Python programming. Do not inherit Pandas/Matplotlib from subject 065.',
+    note: 'Core Python programming. Do not inherit Pandas/Matplotlib from subject 065 and never use Java content.',
   },
   '065': {
     classes: [11, 12],
     python: true,
     pythonLibraries: ['Pandas', 'Matplotlib'],
     questionTypes: CBSE_QUESTION_TYPES,
-    note: 'Track Python data-handling libraries separately from subject 083.',
+    note: 'Track Python data-handling libraries separately from subject 083. Never use Java content.',
   },
   '402': {
     classes: [9, 10],
     python: false,
     questionTypes: CBSE_QUESTION_TYPES,
+    note: 'CBSE Information Technology. Do not inherit Java programming content.',
   },
   '802': {
     classes: [11, 12],
-    python: false,
-    primaryProgrammingLanguage: 'Java',
+    python: true,
+    pythonLibraries: [],
     questionTypes: CBSE_QUESTION_TYPES,
+    note: 'CBSE Information Technology senior-secondary track; keep programming examples Python-only and never inherit CISCE Java content.',
   },
 };
 

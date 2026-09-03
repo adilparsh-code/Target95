@@ -17,17 +17,17 @@ import {
   RevisionNotesSection,
 } from "./sections";
 
-function hasMeaningfulContent(value) {
-  if (!value) return false;
-  if (Array.isArray(value)) return value.length > 0;
-  if (typeof value === "object") return Object.keys(value).length > 0;
-  return Boolean(String(value).trim());
-}
-
 export default function ChapterContentEngine({ chapter, content = null, questions = null, completedSections = [] }) {
+  const resolvedContent = useMemo(() => {
+    // The student chapter page supplies the canonical rich chapter-content
+    // record. Also accept the legacy studyData shape for compatibility.
+    if (content && typeof content === "object") return content;
+    return null;
+  }, [content]);
+
   const sections = useMemo(
-    () => getChapterContent(chapter, content, questions),
-    [chapter, content, questions]
+    () => getChapterContent(chapter, resolvedContent, questions),
+    [chapter, resolvedContent, questions]
   );
 
   const isCompleted = (id) => completedSections.includes(`section-${id}`);

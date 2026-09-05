@@ -2,65 +2,26 @@ import { Search, Brain, Target, Award, ArrowRight } from "lucide-react";
 import Container from "./ui/Container";
 
 const steps = [
-  {
-    icon: Search,
-    title: "1. Identify Gaps",
-    description: "Our platform analyzes your performance to identify exactly which topics need more practice.",
-    color: "bg-blue-500"
-  },
-  {
-    icon: Brain,
-    title: "2. AI Explains",
-    description: "The AI tutor breaks down complex concepts into simple, easy-to-understand explanations.",
-    color: "bg-purple-500"
-  },
-  {
-    icon: Target,
-    title: "3. Practice Smartly",
-    description: "Solve targeted questions that focus on your weak areas with instant feedback.",
-    color: "bg-orange-500"
-  },
-  {
-    icon: Award,
-    title: "4. Master & Excel",
-    description: "Track your improvement as you master each topic and build confidence for exams.",
-    color: "bg-green-500"
-  }
+  { icon: Search, number: "01", title: "Identify gaps", description: "Find the topics where more practice will make the biggest difference." },
+  { icon: Brain, number: "02", title: "Understand", description: "Break difficult concepts down with clear, AI-assisted explanations." },
+  { icon: Target, number: "03", title: "Practise smart", description: "Focus your questions and revision on the areas that need attention." },
+  { icon: Award, number: "04", title: "Master & improve", description: "Track the progress and build confidence as your weak areas become strengths." },
 ];
 
 export default function AIWorkflow() {
   return (
-    <section className="relative bg-gradient-to-b from-slate-900 to-slate-800 py-20 md:py-32 text-white">
-      <Container>
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full text-sm font-semibold mb-4">
-            AI-Powered Learning
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            How AI Transforms Your Learning
-          </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Our intelligent learning system adapts to you, making every study session count
-          </p>
+    <section className="relative overflow-hidden bg-slate-950 py-20 text-white sm:py-24 lg:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,.2),transparent_42%)]" />
+      <Container className="relative">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-300">AI-powered learning loop</p>
+          <h2 className="mt-4 text-4xl font-black tracking-[-0.03em] sm:text-5xl">Your preparation gets smarter as you learn.</h2>
+          <p className="mt-5 text-base leading-7 text-slate-400 sm:text-lg">A simple loop: discover the gap, understand the concept, practise it and measure the improvement.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div className="bg-slate-800/50 backdrop-blur rounded-2xl p-8 border border-slate-700 h-full">
-                <div className={`${step.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6`}>
-                  <step.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{step.description}</p>
-              </div>
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                  <ArrowRight className="w-8 h-8 text-slate-600" />
-                </div>
-              )}
-            </div>
-          ))}
+        <div className="relative mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <div className="pointer-events-none absolute left-[12%] right-[12%] top-16 hidden h-px bg-gradient-to-r from-transparent via-blue-400/40 to-transparent lg:block" />
+          {steps.map((step) => { const Icon = step.icon; return <div key={step.number} className="relative rounded-3xl border border-white/10 bg-white/[0.055] p-6 backdrop-blur transition hover:border-blue-300/30 hover:bg-white/[0.08] sm:p-7"><div className="flex items-center justify-between"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500/15 text-blue-200 ring-1 ring-blue-300/10"><Icon className="h-5 w-5" /></div><span className="text-xs font-black tracking-[0.18em] text-slate-600">{step.number}</span></div><h3 className="mt-7 text-xl font-extrabold">{step.title}</h3><p className="mt-3 text-sm leading-6 text-slate-400">{step.description}</p><ArrowRight className="mt-7 h-4 w-4 text-slate-600" /></div>; })}
         </div>
       </Container>
     </section>

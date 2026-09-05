@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import Navbar from "./components/Navbar";
 import RedesignedHero from "./components/RedesignedHero";
+import SpotlightLearningCard from "./components/SpotlightLearningCard";
 import Stats from "./components/Stats";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
@@ -157,6 +158,7 @@ export default function ClientHome() {
           onStartLearning={() => window.location.assign(startLearningHref)}
           personalization={personalization}
         />
+        <SpotlightLearningCard />
         <Stats />
         <WhyTarget95 />
         <AIWorkflow />

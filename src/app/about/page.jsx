@@ -30,9 +30,6 @@ export default function AboutPage() {
               We provide comprehensive practice materials, AI-powered learning, and detailed performance analytics.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="primary" size="lg" href="/practice">
-                Start Practicing
-              </Button>
               <Button variant="outline" size="lg" href="/Java">
                 Browse Chapters
               </Button>

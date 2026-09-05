@@ -6,6 +6,7 @@ import {
   addDoc,
   updateDoc,
   doc,
+  getDoc,
   serverTimestamp
 } from "firebase/firestore";
 import { PracticeService } from './PracticeService';
@@ -18,16 +19,19 @@ export class SessionService {
     this.practiceService = new PracticeService();
   }
 
+  requireAuth() {
+    if (!this.db || !this.auth?.currentUser) {
+      throw new Error("Please sign in to access practice sessions.");
+    }
+  }
+
   // Start a new practice session
   async startSession(settings) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+    this.requireAuth();
 
     try {
       const { subject, chapter, difficulty, questionCount, hasTimer, duration } = settings;
-      
-      // Get questions based on filters
+
       const questions = await this.practiceService.getQuestions({
         subject,
         chapter,
@@ -39,10 +43,9 @@ export class SessionService {
         throw new Error("No questions found matching your criteria. Please try different filters.");
       }
 
-      // Create session document
       const uid = this.auth.currentUser.uid;
       const sessionsRef = collection(this.db, `users/${uid}/activeSessions`);
-      
+
       const sessionData = {
         subject,
         chapter,
@@ -59,11 +62,11 @@ export class SessionService {
       };
 
       const docRef = await addDoc(sessionsRef, sessionData);
-      
+
       return {
         id: docRef.id,
         ...sessionData,
-        questions: questions // Return full question objects for immediate use
+        questions
       };
     } catch (error) {
       console.error("Error starting practice session:", error);
@@ -71,16 +74,35 @@ export class SessionService {
     }
   }
 
-  // Update session progress
-  async updateSession(sessionId, updates) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+  async getSession(sessionId) {
+    this.requireAuth();
+    if (!sessionId) throw new Error("Practice session ID is required.");
 
     try {
       const uid = this.auth.currentUser.uid;
       const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-      
+      const snapshot = await getDoc(sessionRef);
+
+      if (!snapshot.exists()) {
+        throw new Error("Practice session not found. It may have expired or been removed.");
+      }
+
+      return { id: snapshot.id, ...snapshot.data() };
+    } catch (error) {
+      console.error("Error loading practice session:", error);
+      if (error.message?.includes("Practice session not found")) throw error;
+      throw new Error("Failed to load practice session. Please try again.");
+    }
+  }
+
+  // Update session progress
+  async updateSession(sessionId, updates) {
+    this.requireAuth();
+
+    try {
+      const uid = this.auth.currentUser.uid;
+      const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
+
       await updateDoc(sessionRef, {
         ...updates,
         lastUpdated: serverTimestamp()
@@ -93,26 +115,28 @@ export class SessionService {
     }
   }
 
-  // Save an answer
+  // Save or replace an answer for a question.
   async saveAnswer(sessionId, questionId, answer, isCorrect) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+    this.requireAuth();
 
     try {
       const uid = this.auth.currentUser.uid;
       const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-      
-      // Get current session to append answer
+      const answers = await this.getCurrentAnswers(sessionId);
       const answerData = {
         questionId,
         answer,
-        isCorrect,
+        isCorrect: Boolean(isCorrect),
         timestamp: new Date().toISOString()
       };
+      const nextAnswers = [
+        ...answers.filter(item => item.questionId !== questionId),
+        answerData
+      ];
 
       await updateDoc(sessionRef, {
-        answers: [...(await this.getCurrentAnswers(sessionId)), answerData]
+        answers: nextAnswers,
+        lastUpdated: serverTimestamp()
       });
 
       return answerData;
@@ -124,24 +148,20 @@ export class SessionService {
 
   // Flag/unflag a question
   async toggleFlag(sessionId, questionId) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+    this.requireAuth();
 
     try {
       const uid = this.auth.currentUser.uid;
       const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-      
-      // Get current flagged questions
       const currentFlags = await this.getCurrentFlagged(sessionId);
       const isAlreadyFlagged = currentFlags.includes(questionId);
-      
       const newFlags = isAlreadyFlagged
         ? currentFlags.filter(id => id !== questionId)
         : [...currentFlags, questionId];
 
       await updateDoc(sessionRef, {
-        flaggedQuestions: newFlags
+        flaggedQuestions: newFlags,
+        lastUpdated: serverTimestamp()
       });
 
       return { flagged: !isAlreadyFlagged };
@@ -151,44 +171,47 @@ export class SessionService {
     }
   }
 
-  // Complete a session and calculate final results
+  // Complete a session and calculate final results from persisted session data.
   async completeSession(sessionId) {
-    if (!this.db || !this.auth.currentUser) {
-      throw new Error("Firestore not initialized or user not authenticated");
-    }
+    this.requireAuth();
 
     try {
+      const session = await this.getSession(sessionId);
+      if (session.status === "completed" && session.results) {
+        return session.results;
+      }
+
+      const answers = Array.isArray(session.answers) ? session.answers : [];
+      const total = Array.isArray(session.questions) ? session.questions.length : Number(session.questionCount) || 0;
+      const correct = answers.filter(a => a.isCorrect).length;
+      const attempted = answers.length;
+      const wrong = Math.max(0, attempted - correct);
+      const skipped = Math.max(0, total - attempted);
+      const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+
       const uid = this.auth.currentUser.uid;
       const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-      
-      // Get session data
-      // We need to fetch the session first to calculate results
-      // This is a simplification - in production, you'd use getDoc
-      
-      // Calculate results
-      const answers = await this.getCurrentAnswers(sessionId);
-      const correct = answers.filter(a => a.isCorrect).length;
-      const total = answers.length;
-      const wrong = total - correct;
-      const skipped = 0; // Calculate skipped questions
-      const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
-      
-      // Mark session as completed
+      const results = {
+        correct,
+        wrong,
+        skipped,
+        accuracy,
+        score: correct,
+        total
+      };
+
       await updateDoc(sessionRef, {
         status: "completed",
         completedAt: serverTimestamp(),
-        results: {
-          correct,
-          wrong,
-          skipped,
-          accuracy,
-          score: correct
-        }
+        results
       });
 
-      // Save to permanent sessions collection
       await this.practiceService.saveSession({
         sessionId,
+        subject: session.subject,
+        chapter: session.chapter,
+        difficulty: session.difficulty,
+        questionCount: total,
         correct,
         wrong,
         skipped,
@@ -196,29 +219,21 @@ export class SessionService {
         score: correct
       });
 
-      return {
-        correct,
-        wrong,
-        skipped,
-        accuracy,
-        score: correct
-      };
+      return results;
     } catch (error) {
       console.error("Error completing session:", error);
+      if (error.message?.includes("Practice session not found")) throw error;
       throw new Error("Failed to complete session. Please try again.");
     }
   }
 
-  // Helper: Get current answers from session
   async getCurrentAnswers(sessionId) {
-    // In a real implementation, you would fetch the document first
-    // This is a placeholder - in actual code, use getDoc to retrieve current answers
-    return [];
+    const session = await this.getSession(sessionId);
+    return Array.isArray(session.answers) ? session.answers : [];
   }
 
-  // Helper: Get current flagged questions
   async getCurrentFlagged(sessionId) {
-    // In a real implementation, you would fetch the document first
-    return [];
+    const session = await this.getSession(sessionId);
+    return Array.isArray(session.flaggedQuestions) ? session.flaggedQuestions : [];
   }
 }

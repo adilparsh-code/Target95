@@ -1,7 +1,6 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Authentication helpers.
     function isAuthenticated() {
       return request.auth != null;
     }
@@ -26,19 +25,24 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'teacher'];
     }
 
-    // Users: a new account may create only its own student profile.
-    // Once verified, users may manage their own profile, while only admins
-    // may manage another user's profile or delete a profile.
     match /users/{userId} {
-      allow read: if isOwner(userId) || isAdmin();
+      // New users may create only their own student profile before verification.
       allow create: if isAuthenticated()
         && request.auth.uid == userId
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.role == 'student';
+
+      // Verified users can read their own profile; admins can read user profiles.
+      allow read: if isOwner(userId) || isAdmin();
+
+      // A normal user cannot promote themselves, change ownership, change the
+      // account email stored in the profile, or forge verification state.
       allow update: if isAdmin() || (isOwner(userId)
         && request.resource.data.uid == resource.data.uid
         && request.resource.data.email == resource.data.email
-        && request.resource.data.role == resource.data.role);
+        && request.resource.data.role == resource.data.role
+        && request.resource.data.emailVerified == resource.data.emailVerified);
+
       allow delete: if isAdmin();
 
       match /aiChats/{chatId} {
@@ -48,7 +52,6 @@ service cloud.firestore {
       }
     }
 
-    // Learning content is maintained by approved teachers and administrators.
     match /subjects/{subjectId} {
       allow read: if isVerifiedUser();
       allow create, update, delete: if isTeacher();
@@ -69,7 +72,6 @@ service cloud.firestore {
       allow create, update, delete: if isTeacher();
     }
 
-    // Bookmarks are private to the owning verified user.
     match /bookmarks/{bookmarkId} {
       allow read: if isOwner(resource.data.userId);
       allow create: if isOwner(request.resource.data.userId);
@@ -77,27 +79,23 @@ service cloud.firestore {
       allow update: if false;
     }
 
-    // Progress is private to the owning verified user.
     match /progress/{progressId} {
       allow read: if isOwner(resource.data.userId);
       allow create, update: if isOwner(request.resource.data.userId);
       allow delete: if isAdmin();
     }
 
-    // Mock tests are readable by verified users and writable only by admins.
     match /mockTests/{mockTestId} {
       allow read: if isVerifiedUser();
       allow create, update, delete: if isAdmin();
     }
 
-    // Results are private to the owner, with admin oversight.
     match /results/{resultId} {
       allow read: if isOwner(resource.data.userId) || isAdmin();
       allow create: if isOwner(request.resource.data.userId);
       allow update, delete: if isAdmin();
     }
 
-    // Leaderboard is readable by verified users and writable only by admins.
     match /leaderboard/{entryId} {
       allow read: if isVerifiedUser();
       allow write: if isAdmin();

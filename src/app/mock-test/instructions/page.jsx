@@ -11,12 +11,15 @@ function InstructionsContent() {
   const category = searchParams.get("category") || "icse-class-10";
   const difficulty = searchParams.get("difficulty") || "medium";
   const type = searchParams.get("type") || "mixed";
-  const count = searchParams.get("count") || "10";
+  const count = Number(searchParams.get("count") || "10");
   const chapter = searchParams.get("chapter") || "all";
   const mode = searchParams.get("mode") || "exam";
-  const duration = searchParams.get("duration") || String(Number(count) * 1.5);
+  const duration = Number(searchParams.get("duration") || String(count * 1.5));
 
   const categoryLabel = category.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const durationLabel = duration >= 60
+    ? `${Math.floor(duration / 60)}h ${duration % 60 ? `${duration % 60}m` : ""}`.trim()
+    : `${duration} minutes`;
 
   const handleStart = () => {
     router.push(`/mock-test/player?category=${category}&chapter=${chapter}&difficulty=${difficulty}&type=${type}&count=${count}&mode=${mode}&duration=${duration}`);
@@ -38,8 +41,8 @@ function InstructionsContent() {
           <h2 className="text-xl font-bold text-gray-900">Please read carefully before starting</h2>
           <ul className="mt-6 space-y-4">
             {[
-              { icon: "⏱️", text: `You have ${count * 1.5} minutes to complete this test (90 seconds per question).` },
-              { icon: "📝", text: type === "mixed" ? "This test includes MCQ, theory, programming, and output questions." : `This test contains only ${type} questions.` },
+              { icon: "⏱️", text: `You have ${durationLabel} to complete this test.` },
+              { icon: "📝", text: type === "mixed" ? "This test includes mixed question types." : `This test contains only ${type} questions.` },
               { icon: "📌", text: "You can bookmark questions for review and navigate freely between them." },
               { icon: "✅", text: "Unanswered questions will be marked as incorrect on submission." },
               { icon: "📊", text: "Results will show your score, accuracy, and a detailed answer review." },
@@ -77,11 +80,11 @@ function InstructionsContent() {
 
 export default function MockTestInstructionsPage() {
   return (
-      <Suspense fallback={
-        <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-          <Navbar />
-          <div className="h-20 sm:h-24 lg:h-28"></div>
-          <div className="flex items-center justify-center py-20">
+    <Suspense fallback={
+      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+        <Navbar />
+        <div className="h-20 sm:h-24 lg:h-28"></div>
+        <div className="flex items-center justify-center py-20">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
         </div>
         <Footer />

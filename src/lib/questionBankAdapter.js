@@ -7,17 +7,21 @@ import { resolveChapterMetadata } from "@/lib/icseSyllabus";
  * normalizes questions into the shape used by the student-facing bank.
  */
 const QUESTION_TYPES = ["mcq", "programming", "output", "theory", "fill-blank", "true-false", "debugging", "case-based"];
+const slugify = (value = "") => String(value).trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export function normalizeQuestion(question) {
   const questionType = question.questionType || question.type || "theory";
   const meta = resolveChapterMetadata(question.chapter || question.slug || "");
+  const chapter = question.chapter || "";
+  const chapterSlug = question.chapterSlug || question.slug || slugify(chapter);
   return {
     id: String(question.id),
     subject: question.subject || meta.subject || "Computer Science",
     board: question.board || meta.board,
     class: question.class || meta.class,
     syllabusUnit: question.syllabusUnit || meta.syllabusUnit,
-    chapter: question.chapter || "",
+    chapter,
+    chapterSlug,
     topic: question.topic || meta.topic || "General",
     difficulty: question.difficulty || "Medium",
     questionType: QUESTION_TYPES.includes(questionType) ? questionType : "theory",
@@ -57,3 +61,9 @@ export function filterQuestionBank(questions, filters) {
       matchesStatus;
   });
 }
+
+export function getQuestionBankChapter(slug) {
+  return questionBankQuestions.filter((question) => question.chapterSlug === slug);
+}
+
+export default getQuestionBankChapter;

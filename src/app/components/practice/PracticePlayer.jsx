@@ -58,6 +58,7 @@ export default function PracticePlayer() {
     session,
     currentQuestion,
     currentIndex,
+    answers,
     loading,
     error,
     isComplete,
@@ -72,13 +73,18 @@ export default function PracticePlayer() {
   } = useSession(loadedSession);
 
   const isLastQuestion = currentIndex === (session?.questions?.length || 0) - 1;
-  const isLowTime = session?.hasTimer && parseInt(timeRemaining.split(":")[0], 10) < 5;
+  const [minutes, seconds] = timeRemaining.split(":").map(Number);
+  const isLowTime = session?.hasTimer && (minutes < 5 || (minutes === 5 && seconds === 0));
 
-  const resetQuestionState = () => {
-    setSelectedAnswer(null);
-    setShowFeedback(false);
-    setIsSubmitted(false);
-  };
+  // Restore the saved answer when moving between questions, so review does not
+  // discard the student's previous selection.
+  useEffect(() => {
+    if (!currentQuestion) return;
+    const savedAnswer = answers.find(item => item.questionId === currentQuestion.id);
+    setSelectedAnswer(savedAnswer?.answer ?? null);
+    setShowFeedback(Boolean(savedAnswer));
+    setIsSubmitted(Boolean(savedAnswer));
+  }, [currentQuestion, answers]);
 
   const handleSubmitAnswer = async () => {
     if (!selectedAnswer || !currentQuestion || isSubmitted) return;
@@ -95,7 +101,10 @@ export default function PracticePlayer() {
       return;
     }
     nextQuestion();
-    resetQuestionState();
+  };
+
+  const handlePreviousQuestion = () => {
+    previousQuestion();
   };
 
   const handleCompleteSession = async () => {
@@ -184,19 +193,17 @@ export default function PracticePlayer() {
           />
         </div>
 
-        {showFeedback && (
-          <div className="max-w-4xl mx-auto">
-            <QuestionNavigator
-              currentIndex={currentIndex}
-              totalQuestions={session?.questions?.length || 0}
-              onPrevious={() => { previousQuestion(); resetQuestionState(); }}
-              onNext={handleNextQuestion}
-              onSubmit={handleCompleteSession}
-              canSubmit={!loading}
-              isLastQuestion={isLastQuestion}
-            />
-          </div>
-        )}
+        <div className="max-w-4xl mx-auto">
+          <QuestionNavigator
+            currentIndex={currentIndex}
+            totalQuestions={session?.questions?.length || 0}
+            onPrevious={handlePreviousQuestion}
+            onNext={handleNextQuestion}
+            onSubmit={handleCompleteSession}
+            canSubmit={!loading}
+            isLastQuestion={isLastQuestion}
+          />
+        </div>
       </main>
     </div>
   );

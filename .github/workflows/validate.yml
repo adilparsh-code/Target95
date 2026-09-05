@@ -20,7 +20,26 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm config set fetch-retries 5
+          npm config set fetch-retry-factor 2
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
+          npm cache clean --force
+          for attempt in 1 2 3; do
+            echo "npm install attempt ${attempt}/3"
+            if npm install --prefer-online --no-audit --no-fund; then
+              exit 0
+            fi
+            if [ "${attempt}" -lt 3 ]; then
+              npm cache clean --force
+              sleep $((attempt * 10))
+            fi
+          done
+          echo "npm install failed after 3 attempts"
+          exit 1
 
       - name: Validate academic data
         run: npm run validate:data

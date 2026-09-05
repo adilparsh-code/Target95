@@ -25,20 +25,19 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!passwordsMatch) {
-      return;
-    }
+    if (!passwordsMatch) return;
 
     const result = await register(email, password, fullName);
     if (result.success) {
-      router.push("/login?registered=true");
+      router.push("/verify-email");
     }
   };
 
   const handleGoogleLogin = async () => {
     const result = await loginWithGoogle();
-    if (result.success) router.push("/dashboard");
+    if (result.success) {
+      router.push(result.user?.role === "admin" ? "/admin" : "/dashboard");
+    }
   };
 
   return (
@@ -46,114 +45,45 @@ export default function Register() {
       <Container>
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Create your account
-            </h2>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
-              <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
-                sign in to existing account
-              </Link>
+              <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">sign in to existing account</Link>
             </p>
           </div>
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
-                  {error}
-                </div>
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm" role="alert">{error}</div>
               )}
 
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
-                  Full Name
-                </label>
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="John Doe"
-                />
+                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">Full Name</label>
+                <input id="fullName" name="fullName" type="text" autoComplete="name" required value={fullName} onChange={(e) => setFullName(e.target.value)} className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="John Doe" />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                  Email address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="you@example.com"
-                />
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email address</label>
+                <input id="email" name="email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="you@example.com" />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  Password
-                </label>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                 <div className="mt-1 relative">
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    autoComplete="new-password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
-                  >
-                    {showPassword ? "👁️" : "👁️‍🗨️"}
-                  </button>
+                  <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete="new-password" required value={password} onChange={(e) => setPassword(e.target.value)} className="appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="••••••••" />
+                  <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700" aria-label={showPassword ? "Hide password" : "Show password"}>👁️</button>
                 </div>
                 <p className="mt-1 text-xs text-gray-500">Must be at least 6 characters</p>
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                  Confirm Password
-                </label>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="new-password"
-                  required
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="••••••••"
-                />
-                {confirmPassword && !passwordsMatch && (
-                  <p className="mt-1 text-xs text-red-600">Passwords do not match</p>
-                )}
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input id="confirmPassword" name="confirmPassword" type={showPassword ? "text" : "password"} autoComplete="new-password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" placeholder="••••••••" />
+                {confirmPassword && !passwordsMatch && <p className="mt-1 text-xs text-red-600">Passwords do not match</p>}
               </div>
 
               <div>
-                <Button
-                  type="submit"
-                  variant="default"
-                  size="lg"
-                  className="w-full"
-                  disabled={loading || !isFormValid}
-                >
+                <Button type="submit" variant="default" size="lg" className="w-full" disabled={loading || !isFormValid}>
                   {loading ? "Creating account..." : "Create account"}
                 </Button>
               </div>
@@ -161,11 +91,7 @@ export default function Register() {
               <div className="relative"><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div><div className="relative flex justify-center text-xs"><span className="bg-white px-2 text-gray-500">or</span></div></div>
               <Button type="button" variant="outline" size="lg" className="w-full" disabled={loading} onClick={handleGoogleLogin}>Continue with Google</Button>
 
-              <div className="text-center">
-                <p className="text-xs text-gray-500">
-                  By signing up, you agree to our Terms of Service and Privacy Policy
-                </p>
-              </div>
+              <div className="text-center"><p className="text-xs text-gray-500">By signing up, you agree to our Terms of Service and Privacy Policy</p></div>
             </form>
           </div>
         </div>

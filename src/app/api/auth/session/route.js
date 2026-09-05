@@ -61,13 +61,17 @@ export async function GET(request) {
       return NextResponse.json({ authenticated: false }, { status: 401 });
     }
 
+    const isAdmin = decodedToken.admin === true;
+    const role = isAdmin ? "admin" : decodedToken.role || "student";
+
     return NextResponse.json({
       authenticated: true,
       user: {
         uid: decodedToken.uid,
         email: decodedToken.email || "",
         emailVerified: true,
-        role: decodedToken.role || "student",
+        role,
+        isAdmin,
       },
     });
   } catch (error) {
@@ -88,7 +92,6 @@ export async function DELETE(request) {
       const decodedToken = await getAdminAuth().verifySessionCookie(session, false);
       await getAdminAuth().revokeRefreshTokens(decodedToken.uid);
     } catch (error) {
-      // Cookie deletion is still sufficient if the session is already invalid/expired.
       console.warn("Could not revoke session token during logout:", error);
     }
   }

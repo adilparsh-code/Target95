@@ -1,92 +1,16 @@
+import { Bot, ClipboardCheck, BarChart3, Code2, Smartphone, Zap, ArrowRight } from "lucide-react";
 import Container from "./ui/Container";
-import SectionTitle from "./ui/SectionTitle";
 import Link from "next/link";
 
 const features = [
-  {
-    icon: "🤖",
-    title: "AI Assisted Learning",
-    description: "Get instant explanations and personalized help from our AI tutor whenever you're stuck on a concept.",
-    href: "/ai-tutor",
-  },
-  {
-    icon: "📋",
-    title: "Previous Year Questions",
-    description: "Practice with a vast collection of past board exam questions with detailed solutions and explanations.",
-    href: "/question-bank",
-  },
-  {
-    icon: "📈",
-    title: "Smart Progress Tracking",
-    description: "Monitor your performance with detailed analytics and identify areas that need more attention.",
-    href: "/analytics",
-  },
-  {
-    icon: "✍️",
-    title: "Interactive Practice",
-    description: "Hands-on coding exercises and interactive quizzes that reinforce your understanding of key concepts.",
-    href: "/practice",
-  },
-  {
-    icon: "📱",
-    title: "Responsive Platform",
-    description: "Seamlessly learn across all your devices — desktop, tablet, or mobile — with a consistent experience.",
-    href: null,
-  },
-  {
-    icon: "⚡",
-    title: "Fast Performance",
-    description: "Lightning-fast page loads and smooth transitions ensure zero friction in your learning journey.",
-    href: null,
-  },
+  { icon: Bot, title: "AI Assisted Learning", description: "Get clear explanations and personalised help when a concept stops making sense.", href: "/ai-tutor" },
+  { icon: ClipboardCheck, title: "Previous Year Questions", description: "Practise with board-style questions and detailed solutions built for exam preparation.", href: "/question-bank" },
+  { icon: BarChart3, title: "Smart Progress Tracking", description: "Understand your performance and see which areas deserve more attention.", href: "/analytics" },
+  { icon: Code2, title: "Interactive Practice", description: "Reinforce concepts with coding exercises, quizzes and hands-on problem solving.", href: "/practice" },
+  { icon: Smartphone, title: "Learn Anywhere", description: "A responsive experience that keeps your study flow consistent across devices.", href: null },
+  { icon: Zap, title: "Fast & Focused", description: "Clean pages, quick interactions and less friction between you and your next task.", href: null },
 ];
 
 export default function Features() {
-  return (
-    <section className="relative bg-white py-16 md:py-24" aria-labelledby="features-heading">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white pointer-events-none" />
-
-      <Container className="relative">
-        <SectionTitle
-          id="features-heading"
-          title="Key Features"
-          subtitle="Everything you need to master ICSE & ISC Computer Science"
-          className="text-center"
-        />
-
-        <div className="mt-12 md:mt-16 grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => {
-            const CardTag = feature.href ? Link : "div";
-            const cardProps = feature.href ? { href: feature.href } : {};
-            return (
-              <CardTag
-                key={feature.title}
-                {...cardProps}
-                className="group relative rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-sm hover:shadow-lg transition-all duration-500 ease-out hover:-translate-y-1 block focus:outline-none focus:ring-2 focus:ring-blue-400"
-              >
-                {/* Icon */}
-                <div className="text-3xl sm:text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
-
-                {/* Title */}
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  {feature.description}
-                </p>
-
-                {/* Bottom accent line on hover */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-full" />
-              </CardTag>
-            );
-          })}
-        </div>
-      </Container>
-    </section>
-  );
+  return <section className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28" aria-labelledby="features-heading"><Container className="relative"><div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between"><div className="max-w-2xl"><p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Everything you need</p><h2 id="features-heading" className="mt-4 text-4xl font-black tracking-[-0.03em] text-slate-950 sm:text-5xl">Tools that turn study time into progress.</h2></div><p className="max-w-md text-sm leading-6 text-slate-500 sm:text-right">Learn the concept. Practise it. Find the gap. Come back stronger.</p></div><div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{features.map((feature, index) => { const Icon = feature.icon; const CardTag = feature.href ? Link : "div"; return <CardTag key={feature.title} {...(feature.href ? { href: feature.href } : {})} className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 sm:p-7"><div className="flex items-center justify-between"><div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-950 text-white"><Icon className="h-5 w-5" /></div><span className="text-xs font-black tracking-[0.18em] text-slate-300">0{index + 1}</span></div><h3 className="mt-6 text-lg font-extrabold text-slate-950">{feature.title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{feature.description}</p>{feature.href && <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-blue-700">Explore <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" /></span>}<div className="absolute inset-x-6 bottom-0 h-px origin-left scale-x-0 bg-blue-500 transition duration-300 group-hover:scale-x-100" /></CardTag>; })}</div></Container></section>;
 }

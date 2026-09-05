@@ -1,96 +1,105 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Helper functions
+    // Authentication helpers.
     function isAuthenticated() {
       return request.auth != null;
     }
-    
-    function isOwner(userId) {
-      return request.auth.uid == userId;
-    }
-    
-    function isAdmin() {
-      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
-             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
-    }
-    
-    function isTeacher() {
-      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
-             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'teacher'];
+
+    function isVerifiedUser() {
+      return isAuthenticated() && request.auth.token.email_verified == true;
     }
 
-    // Users collection
+    function isOwner(userId) {
+      return isVerifiedUser() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isVerifiedUser()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isTeacher() {
+      return isVerifiedUser()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'teacher'];
+    }
+
+    // Users: a new account may create only its own student profile.
+    // Once verified, users may manage their own profile, while only admins
+    // may manage another user's profile or delete a profile.
     match /users/{userId} {
-      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
-      allow create: if isAuthenticated() && isOwner(userId)
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated()
+        && request.auth.uid == userId
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.role == 'student';
-      allow update: if isAuthenticated() && (isAdmin() || (isOwner(userId)
+      allow update: if isAdmin() || (isOwner(userId)
         && request.resource.data.uid == resource.data.uid
         && request.resource.data.email == resource.data.email
-        && request.resource.data.role == resource.data.role));
+        && request.resource.data.role == resource.data.role);
       allow delete: if isAdmin();
 
-      // AI Tutor chat history — private to the owning user only.
       match /aiChats/{chatId} {
-        allow read, delete: if isAuthenticated() && isOwner(userId);
-        allow create: if isAuthenticated() && isOwner(userId);
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId);
         allow update: if false;
       }
     }
 
     // Learning content is maintained by approved teachers and administrators.
     match /subjects/{subjectId} {
-      allow read: if isAuthenticated();
+      allow read: if isVerifiedUser();
       allow create, update, delete: if isTeacher();
     }
 
     match /chapters/{chapterId} {
-      allow read: if isAuthenticated();
+      allow read: if isVerifiedUser();
       allow create, update, delete: if isTeacher();
     }
 
-    // Topics collection - public read, admin write
     match /topics/{topicId} {
-      allow read: if isAuthenticated();
+      allow read: if isVerifiedUser();
       allow create, update, delete: if isTeacher();
     }
 
     match /questions/{questionId} {
-      allow read: if isAuthenticated();
+      allow read: if isVerifiedUser();
       allow create, update, delete: if isTeacher();
     }
 
-    // Bookmarks collection - only owners can access
+    // Bookmarks are private to the owning verified user.
     match /bookmarks/{bookmarkId} {
-      allow read: if isAuthenticated() && isOwner(resource.data.userId);
-      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
-      allow delete: if isAuthenticated() && isOwner(resource.data.userId);
+      allow read: if isOwner(resource.data.userId);
+      allow create: if isOwner(request.resource.data.userId);
+      allow delete: if isOwner(resource.data.userId);
+      allow update: if false;
     }
 
-    // Progress collection - only owners can access their progress
+    // Progress is private to the owning verified user.
     match /progress/{progressId} {
-      allow read: if isAuthenticated() && isOwner(resource.data.userId);
-      allow create, update: if isAuthenticated() && isOwner(request.resource.data.userId);
+      allow read: if isOwner(resource.data.userId);
+      allow create, update: if isOwner(request.resource.data.userId);
       allow delete: if isAdmin();
     }
 
-    // Mock Tests collection
+    // Mock tests are readable by verified users and writable only by admins.
     match /mockTests/{mockTestId} {
-      allow read: if isAuthenticated();
+      allow read: if isVerifiedUser();
       allow create, update, delete: if isAdmin();
     }
 
-    // Results collection
+    // Results are private to the owner, with admin oversight.
     match /results/{resultId} {
-      allow read: if isAuthenticated() && (isOwner(resource.data.userId) || isAdmin());
-      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create: if isOwner(request.resource.data.userId);
+      allow update, delete: if isAdmin();
     }
 
-    // Leaderboard - public read, admin write
+    // Leaderboard is readable by verified users and writable only by admins.
     match /leaderboard/{entryId} {
-      allow read: if isAuthenticated();
+      allow read: if isVerifiedUser();
       allow write: if isAdmin();
     }
   }

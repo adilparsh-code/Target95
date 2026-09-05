@@ -10,6 +10,7 @@ import Button from "../ui/Button";
 import { useSession } from "../../hooks/useSession";
 import { SessionService } from "../../services/SessionService";
 import { PracticeService } from "../../services/PracticeService";
+import { evaluateMockTestAnswer } from "../../../lib/mocktest";
 
 export default function PracticePlayer() {
   const router = useRouter();
@@ -65,7 +66,7 @@ export default function PracticePlayer() {
   const handleSubmitAnswer = async () => {
     if (!selectedAnswer || !currentQuestion || isSubmitted) return;
     const correctAnswer = currentQuestion.correctAnswer ?? currentQuestion.answer;
-    const isCorrect = selectedAnswer === correctAnswer;
+    const isCorrect = evaluateMockTestAnswer({ ...currentQuestion, type: currentQuestion.type || currentQuestion.questionType }, selectedAnswer, correctAnswer);
     await submitAnswer(currentQuestion.id, selectedAnswer, isCorrect);
     setShowFeedback(true);
     setIsSubmitted(true);

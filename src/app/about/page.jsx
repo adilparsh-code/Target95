@@ -29,11 +29,6 @@ export default function AboutPage() {
               Target95+ is designed to help ICSE and ISC Computer Science students achieve their best scores.
               We provide comprehensive practice materials, AI-powered learning, and detailed performance analytics.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="outline" size="lg" href="/Java">
-                Browse Chapters
-              </Button>
-            </div>
           </div>
         </section>
 

@@ -15,9 +15,16 @@ function getServiceAccount() {
   }
 }
 
-const adminApp = getApps()[0] || initializeApp({
-  credential: cert(getServiceAccount()),
-});
+function getAdminApp() {
+  return getApps()[0] || initializeApp({
+    credential: cert(getServiceAccount()),
+  });
+}
 
-export const adminAuth = getAuth(adminApp);
-export const adminDb = getFirestore(adminApp);
+export function getAdminAuth() {
+  return getAuth(getAdminApp());
+}
+
+export function getAdminDb() {
+  return getFirestore(getAdminApp());
+}

@@ -17,27 +17,20 @@ const CBSE_CLASSES = [
 ];
 
 const SUBJECTS = {
-  java: { title: "Java Programming", icon: "☕", description: "CISCE Java programming content, theory, practicals and questions." },
-  ai: { title: "Artificial Intelligence", icon: "🤖", description: "CISCE Robotics & Artificial Intelligence learning content and practice." },
+  java: { title: "Java Programming", icon: "☕", description: "CISCE Java theory, practicals and exam-focused questions." },
+  ai: { title: "Artificial Intelligence", icon: "🤖", description: "Robotics & AI learning content and targeted practice." },
   "402": { title: "Information Technology (402)", icon: "💻", description: "CBSE Information Technology learning path." },
-  "083": { title: "Computer Science (083)", icon: "🐍", description: "CBSE Computer Science with Python, theory, practicals and mocks." },
-  "065": { title: "Informatics Practices (065)", icon: "📊", description: "CBSE Informatics Practices with Python, Pandas, Matplotlib and SQL." },
-  "802": { title: "Information Technology (802)", icon: "🧑‍💻", description: "CBSE Information Technology skill-subject learning path." },
+  "083": { title: "Computer Science (083)", icon: "🐍", description: "CBSE Computer Science with Python, practicals and mocks." },
+  "065": { title: "Informatics Practices (065)", icon: "📊", description: "Python, Pandas, Matplotlib and SQL practice." },
+  "802": { title: "Information Technology (802)", icon: "🧑‍💻", description: "CBSE Information Technology skill-subject path." },
 };
 
 const getSubjectRoute = (board, classId, subjectId) => {
   if (board === "cisce") {
-    if (subjectId === "ai") {
-      return ["icse-class-9", "icse-class-10"].includes(classId)
-        ? "/isc/robotics-ai/class-x"
-        : classId === "isc-class-12"
-          ? "/isc/robotics-ai/class-x"
-          : "/isc/robotics-ai/class-x";
-    }
-    return "/Java";
+    if (subjectId === "ai") return "/isc/robotics-ai/class-x";
+    return classId === "isc-class-11" ? "/isc/class-xi" : classId === "isc-class-12" ? "/isc/class-xii" : "/Java";
   }
-  const classNumber = classId.replace("class-", "");
-  return `/cbse/class/${classNumber}/subject/${subjectId}`;
+  return `/cbse/class/${classId.replace("class-", "")}/subject/${subjectId}`;
 };
 
 export default function RedesignedHero({
@@ -116,63 +109,77 @@ export default function RedesignedHero({
   };
 
   const boardCards = [
-    { id: "cisce", title: "CISCE", icon: "🎓", description: "ICSE & ISC: Java Programming and Robotics & AI." },
-    { id: "cbse", title: "CBSE", icon: "🏫", description: "Classes IX–XII with the correct subject path for each curriculum." },
+    { id: "cisce", title: "CISCE", subtitle: "ICSE & ISC", icon: "🎓", description: "Java Programming, Robotics & AI with board-focused practice." },
+    { id: "cbse", title: "CBSE", subtitle: "Classes IX–XII", icon: "🏫", description: "The correct Python, IT and Informatics Practices paths for your class." },
   ];
 
-  const chooserSubjects = selectedBoard === "cisce"
-    ? ["java", "ai"]
-    : ["402", "083", "065", "802"];
+  const chooserSubjects = selectedBoard === "cisce" ? ["java", "ai"] : ["402", "083", "065", "802"];
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 sm:py-20">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50 via-white to-white pointer-events-none" />
-      <div className="relative mx-auto max-w-5xl">
-        <div className="mb-12 text-center">
-          <div className="mb-4 inline-flex rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700">🎯 Target95+</div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-            Learn Computer Science
-            <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Smarter with AI</span>
+    <section className="relative isolate overflow-hidden bg-slate-50 px-4 pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pt-16">
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(59,130,246,0.16),transparent_42%),linear-gradient(to_bottom,#f8fafc,#ffffff)]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-blue-300/60 to-transparent" />
+      <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-blue-400/10 blur-3xl" />
+
+      <div className="mx-auto max-w-6xl">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-700 shadow-sm backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
+            AI-powered exam preparation
+          </div>
+          <h1 className="text-4xl font-black tracking-[-0.04em] text-slate-950 sm:text-6xl lg:text-7xl">
+            Prepare smarter.
+            <span className="block bg-gradient-to-r from-blue-600 via-indigo-600 to-violet-600 bg-clip-text text-transparent">Score with confidence.</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-gray-600 sm:text-lg">Select the board, then the correct subject and class. Target95 will load only the matching content.</p>
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+            Board-aligned Computer Science learning, practice and mock tests in one focused study platform.
+          </p>
         </div>
 
-        {selectedBoard && <button type="button" onClick={back} className="mb-8 rounded-xl border border-gray-200 bg-white px-4 py-2 font-medium text-gray-700 shadow-sm hover:bg-gray-50">← Back</button>}
+        {selectedBoard && (
+          <button type="button" onClick={back} className="mx-auto mt-8 flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-blue-200 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <span aria-hidden="true">←</span> Back
+          </button>
+        )}
 
         {!selectedBoard && (
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
             {boardCards.map((board) => (
-              <button key={board.id} type="button" onClick={() => chooseBoard(board.id)} className="rounded-3xl border-2 border-blue-100 bg-white p-8 text-left shadow-lg transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl">
-                <div className="text-5xl">{board.icon}</div>
-                <h2 className="mt-5 text-3xl font-bold text-gray-900">{board.title}</h2>
-                <p className="mt-3 leading-7 text-gray-600">{board.description}</p>
-                <span className="mt-6 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white">Select {board.title} →</span>
+              <button key={board.id} type="button" onClick={() => chooseBoard(board.id)} className="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-7 text-left shadow-[0_12px_40px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-[0_22px_55px_rgba(37,99,235,0.16)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-4 sm:p-9">
+                <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-blue-500/5 blur-2xl transition duration-300 group-hover:bg-blue-500/10" />
+                <div className="relative flex items-start justify-between gap-5">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 text-3xl shadow-lg">{board.icon}</div>
+                  <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">{board.subtitle}</span>
+                </div>
+                <h2 className="relative mt-7 text-3xl font-extrabold tracking-tight text-slate-950">{board.title}</h2>
+                <p className="relative mt-3 max-w-md leading-7 text-slate-600">{board.description}</p>
+                <span className="relative mt-7 inline-flex items-center gap-2 rounded-xl bg-slate-950 px-5 py-3 text-sm font-bold text-white transition group-hover:bg-blue-600">Explore {board.title} <span aria-hidden="true">→</span></span>
               </button>
             ))}
           </div>
         )}
 
         {selectedBoard && subjectStep && (
-          <SubjectChooser
-            title={selectedBoard === "cisce" ? "Choose Your CISCE Subject" : "Choose Your CBSE Subject"}
-            subjects={chooserSubjects.map((id) => [id, SUBJECTS[id]])}
-            onSelect={chooseSubject}
-          />
+          <SubjectChooser title={`Choose Your ${selectedBoard === "cisce" ? "CISCE" : "CBSE"} Subject`} subjects={chooserSubjects.map((id) => [id, SUBJECTS[id]])} onSelect={chooseSubject} />
         )}
 
         {selectedBoard && !selectedClass && selectedSubject && (
-          <div>
+          <div className="mx-auto mt-12 max-w-5xl">
             <div className="mb-8 text-center">
-              <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">{selectedBoard.toUpperCase()}</p>
-              <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">Choose Your Class</h2>
-              <p className="mt-3 text-gray-600">{SUBJECTS[selectedSubject]?.title || selectedSubject}</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{selectedBoard.toUpperCase()} · {SUBJECTS[selectedSubject]?.title}</p>
+              <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Choose your class</h2>
+              <p className="mt-3 text-slate-600">We will take you directly to the matching learning path.</p>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {classList.map((item) => (
-                <button key={item.id} type="button" onClick={() => chooseClass(item)} className="rounded-2xl border-2 border-gray-200 bg-white p-6 text-left shadow-md transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg">
-                  <h3 className="text-2xl font-bold text-gray-900">{item.title}</h3>
-                  <p className="mt-2 text-gray-600">{SUBJECTS[selectedSubject]?.title || selectedSubject}</p>
-                  <span className="mt-5 inline-flex rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white">Open →</span>
+                <button key={item.id} type="button" onClick={() => chooseClass(item)} className="group rounded-2xl border border-slate-200 bg-white p-6 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <h3 className="text-xl font-extrabold text-slate-950">{item.title}</h3>
+                      <p className="mt-1 text-sm text-slate-500">{SUBJECTS[selectedSubject]?.title}</p>
+                    </div>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-700 transition group-hover:bg-blue-600 group-hover:text-white">→</span>
+                  </div>
                 </button>
               ))}
             </div>
@@ -180,15 +187,23 @@ export default function RedesignedHero({
         )}
 
         {selectedClass && (
-          <div className="mx-auto max-w-2xl rounded-3xl border-2 border-blue-100 bg-white p-8 text-center shadow-xl">
-            <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">{personalization?.board || selectedBoard}</p>
-            <h2 className="mt-2 text-3xl font-bold text-gray-900">{selectedClass.title}</h2>
-            <p className="mt-3 text-gray-600">{SUBJECTS[selectedClass.subjects?.[0]]?.title || selectedClass.subjects?.[0]}</p>
-            <button type="button" onClick={handleStartLearning} className="mt-7 rounded-xl bg-blue-600 px-7 py-3 font-semibold text-white hover:bg-blue-700">Start Learning →</button>
+          <div className="mx-auto mt-12 max-w-2xl rounded-[2rem] border border-blue-100 bg-white p-8 text-center shadow-[0_20px_60px_rgba(37,99,235,0.12)] sm:p-10">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-2xl">{SUBJECTS[selectedClass.subjects?.[0]]?.icon || "🎯"}</div>
+            <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-blue-600">{personalization?.board || selectedBoard}</p>
+            <h2 className="mt-2 text-3xl font-black text-slate-950">{selectedClass.title}</h2>
+            <p className="mt-2 text-slate-600">{SUBJECTS[selectedClass.subjects?.[0]]?.title || selectedClass.subjects?.[0]}</p>
+            <button type="button" onClick={handleStartLearning} className="mt-7 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-3.5 font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Start Learning <span aria-hidden="true">→</span></button>
           </div>
         )}
 
-        {!selectedBoard && <div className="mt-10 text-center"><a href="/question-bank" className="font-semibold text-blue-700 hover:underline">Explore Question Bank</a></div>}
+        {!selectedBoard && (
+          <div className="mx-auto mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-500">
+            <span>✓ Board-aligned content</span>
+            <span>✓ Practice + mocks</span>
+            <span>✓ Progress tracking</span>
+            <a href="/question-bank" className="font-bold text-blue-700 hover:underline">Explore Question Bank →</a>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -196,19 +211,21 @@ export default function RedesignedHero({
 
 function SubjectChooser({ title, subjects, onSelect }) {
   return (
-    <div>
+    <div className="mx-auto mt-12 max-w-5xl">
       <div className="mb-8 text-center">
-        <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">Board selected</p>
-        <h2 className="mt-2 text-3xl font-bold text-gray-900 sm:text-4xl">{title}</h2>
-        <p className="mt-3 text-gray-600">This choice controls which curriculum and question bank will be shown.</p>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">Board selected</p>
+        <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">{title}</h2>
+        <p className="mt-3 text-slate-600">Pick your subject to load the right curriculum.</p>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         {subjects.map(([id, subject]) => (
-          <button key={id} type="button" onClick={() => onSelect(id)} className="rounded-3xl border-2 border-blue-100 bg-white p-8 text-center shadow-lg transition hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl">
-            <div className="text-6xl">{subject.icon}</div>
-            <h3 className="mt-5 text-2xl font-bold text-gray-900">{subject.title}</h3>
-            <p className="mt-3 text-gray-600">{subject.description}</p>
-            <span className="mt-6 inline-flex rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white">Continue →</span>
+          <button key={id} type="button" onClick={() => onSelect(id)} className="group rounded-3xl border border-slate-200 bg-white p-7 text-left shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-950 text-2xl">{subject.icon}</div>
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition group-hover:bg-blue-600 group-hover:text-white">→</span>
+            </div>
+            <h3 className="mt-6 text-xl font-extrabold text-slate-950">{subject.title}</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{subject.description}</p>
           </button>
         ))}
       </div>

@@ -27,6 +27,12 @@ Use `src/app/data/icseRoboticsAIClassX.js` as the current Class X AI contract. T
 
 The Class X AI question bank should deliberately include MCQs, short answers, case-based/application questions, output tracing, debugging, programming and HOTS questions, but every question must map back to one of the syllabus topics above.
 
+## Current execution baseline
+
+The Class X source currently contains **28 board-style questions across 4 units** (6 + 6 + 7 + 9). The bank includes MCQ, short-answer, case-study, output-tracing, debugging, programming and HOTS formats. This is a baseline for expansion, not a completion declaration.
+
+Before adding volume, review each unit for topic-level coverage and question quality. Do not pad a unit with repetitive factual questions just to increase the count.
+
 ## Non-negotiable content rules
 
 - Never mix **CBSE 402/other CBSE subjects** into CISCE AI content.

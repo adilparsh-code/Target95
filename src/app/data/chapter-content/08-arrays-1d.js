@@ -32,6 +32,16 @@ const chapter08 = {
     advanced: [{ title: "Second-largest distinct", code: "int[] a={7,4,9,9,6};\nint largest=Integer.MIN_VALUE, second=Integer.MIN_VALUE;\nfor(int x:a){ if(x>largest){ second=largest; largest=x; } else if(x>second && x!=largest){ second=x; }}\nSystem.out.println(second);", output: "7", explanation: ["9 becomes the largest.", "7 becomes the second-largest distinct value."] }]
   },
   dryRun: [{ title: "Index traversal", code: "int[] a={4,1,5}; int s=0; for(int i=0;i<a.length;i++) s+=a[i];", trace: [{ line: 1, explanation: "Initially i=0 and s=0." }, { line: 2, explanation: "Visits 4, then 1, then 5; final sum is 10." }] }],
+  diagrams: [
+    {
+      type: "image",
+      title: "One-Dimensional Array Indexing",
+      explanation: "Java arrays are zero-indexed. For five elements, valid indexes are 0 through 4.",
+      src: "/visuals/icse-java/java-array-indexing.svg",
+      alt: "Array with values 72, 85, 91, 64 and 78 labelled at indexes 0 through 4.",
+      caption: "Five elements have valid indexes 0 to 4; the last valid index is length minus one."
+    }
+  ],
   outputBasedQuestions: [
     { id:"arrays-1d-ob-1", question:"Predict the output: int[] a={5,2,7}; System.out.println(a[1]+a[2]);", answer:"9", explanation:"a[1]=2 and a[2]=7, so the sum is 9." },
     { id:"arrays-1d-ob-2", question:"Predict the output: int[] a={3,6,9,12}; for(int i=0;i<a.length;i+=2) System.out.print(a[i]+\" \");", answer:"3 9", explanation:"Indexes 0 and 2 are visited." },

@@ -5,382 +5,54 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
-import {
-  clearMockTestDraft,
-  evaluateMockTestAnswer,
-  getMockTestDraft,
-  saveMockTestDraft,
-  saveMockTestResult,
-} from "../../../lib/mocktest";
+import { getCBSEMockQuestions } from "../../data/cbse/mock-tests-2026-27";
+import { clearMockTestDraft, evaluateMockTestAnswer, getMockTestDraft, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
 
-function formatTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-}
-
-function shuffleArray(arr) {
-  const shuffled = [...arr];
-  for (let i = shuffled.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
+const normalizeCBSEQuestion = (question) => ({ ...question, category: `cbse-class-${question.classNumber}`, type: question.questionType === "output-tracing" ? "output" : question.questionType === "case-based" ? "case-study" : question.questionType, chapter: question.topicId, answer: question.correctAnswer, correctAnswer: question.correctAnswer, options: question.options || [] });
+function formatTime(seconds) { const m = Math.floor(seconds / 60); const s = seconds % 60; return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`; }
+function shuffleArray(items) { const result = [...items]; for (let i = result.length - 1; i > 0; i -= 1) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; } return result; }
 
 function MockTestPlayerContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const router = useRouter(); const searchParams = useSearchParams();
   const category = searchParams.get("category") || "icse-class-10";
-  const difficulty = searchParams.get("difficulty") || "medium";
-  const type = searchParams.get("type") || "mixed";
-  const count = parseInt(searchParams.get("count") || "10", 10);
-  const chapter = searchParams.get("chapter") || "all";
-  const mode = searchParams.get("mode") || "exam";
-  const duration = parseInt(searchParams.get("duration") || String(count * 1.5), 10);
-  const testConfig = useMemo(
-    () => ({ category, chapter, difficulty, type, count, mode, duration }),
-    [category, chapter, difficulty, type, count, mode, duration]
-  );
+  const board = (searchParams.get("board") || (category.startsWith("cbse-") ? "CBSE" : category.startsWith("isc-") ? "ISC" : "ICSE")).toUpperCase();
+  const classNumber = Number(searchParams.get("class") || category.split("-").pop() || 10);
+  const subjectCode = searchParams.get("subjectCode") || ""; const subject = searchParams.get("subject") || "";
+  const difficulty = searchParams.get("difficulty") || "medium"; const type = searchParams.get("type") || "mixed";
+  const count = Number(searchParams.get("count") || 10); const chapter = searchParams.get("chapter") || "all";
+  const mode = searchParams.get("mode") || "exam"; const duration = Number(searchParams.get("duration") || 30);
+  const testConfig = useMemo(() => ({ board, classNumber, subjectCode, subject, category, chapter, difficulty, type, count, mode, duration }), [board, classNumber, subjectCode, subject, category, chapter, difficulty, type, count, mode, duration]);
+  const [currentIndex, setCurrentIndex] = useState(0); const [answers, setAnswers] = useState({}); const [bookmarked, setBookmarked] = useState({});
+  const [timeLeft, setTimeLeft] = useState(duration * 60); const [showSubmit, setShowSubmit] = useState(false); const [draftReady, setDraftReady] = useState(false); const [submitted, setSubmitted] = useState(false); const [restoredIds, setRestoredIds] = useState(null); const submittedRef = useRef(false);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [answers, setAnswers] = useState({});
-  const [bookmarked, setBookmarked] = useState({});
-  const [timeLeft, setTimeLeft] = useState(duration * 60);
-  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [draftReady, setDraftReady] = useState(false);
-  const [restoredQuestionIds, setRestoredQuestionIds] = useState(null);
-  const hasSubmittedRef = useRef(false);
-
-  const filteredQuestions = useMemo(() => {
-    const pool = mockTestQuestions.filter((q) => {
-      const catMatch = q.category === category;
-      const diffMatch = difficulty === "all" || q.difficulty === difficulty;
-      const typeMatch = type === "mixed" || q.type === type;
-      const chapterMatch = chapter === "all" || q.chapter === chapter;
-      return catMatch && diffMatch && typeMatch && chapterMatch;
-    });
-
-    if (pool.length === 0) return [];
-
-    if (Array.isArray(restoredQuestionIds) && restoredQuestionIds.length > 0) {
-      const byId = new Map(pool.map((question) => [String(question.id), question]));
-      const restored = restoredQuestionIds
-        .map((id) => byId.get(String(id)))
-        .filter(Boolean);
-      if (restored.length === restoredQuestionIds.length) {
-        return restored.slice(0, Math.min(count, restored.length));
-      }
+  const questions = useMemo(() => {
+    let pool = board === "CBSE" && subjectCode ? getCBSEMockQuestions(classNumber, subjectCode, 1000).map(normalizeCBSEQuestion) : mockTestQuestions.filter((q) => q.category === category && (difficulty === "all" || q.difficulty === difficulty) && (type === "mixed" || q.type === type) && (chapter === "all" || q.chapter === chapter));
+    if (board === "CBSE") {
+      if (difficulty !== "all") pool = pool.filter((q) => q.difficulty === difficulty);
+      if (type !== "mixed") pool = pool.filter((q) => q.type === type);
+      if (chapter !== "all" && chapter !== "all-topics") pool = pool.filter((q) => q.chapter === chapter);
     }
-
+    if (Array.isArray(restoredIds) && restoredIds.length) { const byId = new Map(pool.map((q) => [String(q.id), q])); const restored = restoredIds.map((id) => byId.get(String(id))).filter(Boolean); if (restored.length === restoredIds.length) return restored.slice(0, count); }
     return shuffleArray(pool).slice(0, Math.min(count, pool.length));
-  }, [category, chapter, difficulty, type, count, restoredQuestionIds]);
+  }, [board, classNumber, subjectCode, category, difficulty, type, chapter, count, restoredIds]);
+  const current = questions[currentIndex] || null; const answeredCount = Object.keys(answers).length; const bookmarkedCount = Object.values(bookmarked).filter(Boolean).length; const progress = questions.length ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
-  const questions = filteredQuestions;
-  const currentQuestion = questions[currentIndex] || null;
-  const answeredCount = Object.keys(answers).length;
-  const bookmarkedCount = Object.keys(bookmarked).filter((key) => bookmarked[key]).length;
-  const progressPercent = questions.length > 0 ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
+  useEffect(() => { const draft = getMockTestDraft(testConfig); if (draft?.questionIds?.length) { setRestoredIds(draft.questionIds); setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, Math.max(questions.length - 1, 0))); setAnswers(draft.answers || {}); setBookmarked(draft.bookmarked || {}); setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60)); } setDraftReady(true); }, [testConfig, duration, questions.length]);
+  useEffect(() => { if (draftReady && questions.length && !submitted) saveMockTestDraft(testConfig, { questionIds: questions.map((q) => q.id), currentIndex, answers, bookmarked, timeLeft }); }, [draftReady, submitted, testConfig, questions, currentIndex, answers, bookmarked, timeLeft]);
 
-  // Load an abandoned test before enabling autosave. The exact question IDs are restored,
-  // so a refresh no longer generates a different random test and loses the student's work.
-  useEffect(() => {
-    const draft = getMockTestDraft(testConfig);
-    if (draft && Array.isArray(draft.questionIds) && draft.questionIds.length > 0) {
-      setRestoredQuestionIds(draft.questionIds);
-      setCurrentIndex(Math.max(0, Number(draft.currentIndex) || 0));
-      setAnswers(draft.answers || {});
-      setBookmarked(draft.bookmarked || {});
-      setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60));
-    } else {
-      setRestoredQuestionIds(null);
-    }
-    setDraftReady(true);
-  }, [duration, testConfig]);
+  const submit = useCallback(() => {
+    if (submittedRef.current || submitted) return; submittedRef.current = true; setSubmitted(true); let correct = 0, wrong = 0, unanswered = 0;
+    const review = questions.map((q) => { const userAnswer = answers[q.id] || ""; const answered = Boolean(userAnswer.trim()); const isCorrect = answered && evaluateMockTestAnswer(q, userAnswer); if (!answered) unanswered += 1; else if (isCorrect) correct += 1; else wrong += 1; return { question: q, userAnswer: userAnswer || "No answer", correctAnswer: q.answer, isCorrect, explanation: q.explanation, marks: q.marks || 1 }; });
+    const totalQuestions = questions.length; const percentage = totalQuestions ? Math.round((correct / totalQuestions) * 100) : 0; const attempted = totalQuestions - unanswered;
+    const result = { id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, date: new Date().toISOString(), board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, score: correct, totalQuestions, correctCount: correct, wrongCount: wrong, unansweredCount: unanswered, percentage, accuracy: attempted ? Math.round((correct / attempted) * 100) : 0, timeTaken: Math.max(0, duration * 60 - timeLeft), totalTime: duration * 60, bookmarkedCount, review };
+    saveMockTestResult(result); clearMockTestDraft(testConfig); sessionStorage.setItem("mock-test-result", JSON.stringify(result)); router.push("/mock-test/result");
+  }, [submitted, questions, answers, board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, duration, timeLeft, bookmarkedCount, testConfig, router]);
+  useEffect(() => { if (!questions.length || submitted || mode === "practice" || mode === "revision") return; const timer = setInterval(() => setTimeLeft((previous) => { if (previous <= 1) { clearInterval(timer); submit(); return 0; } return previous - 1; }), 1000); return () => clearInterval(timer); }, [questions.length, submitted, mode, submit]);
 
-  useEffect(() => {
-    if (!draftReady || isSubmitted || !questions.length) return;
-    saveMockTestDraft(testConfig, {
-      questionIds: questions.map((question) => question.id),
-      currentIndex,
-      answers,
-      bookmarked,
-      timeLeft,
-    });
-  }, [answers, bookmarked, currentIndex, draftReady, isSubmitted, questions, testConfig, timeLeft]);
+  if (!questions.length) return <main className="min-h-screen bg-gradient-to-b from-white to-blue-50"><Navbar /><div className="mx-auto flex max-w-2xl flex-col items-center gap-5 px-4 py-32 text-center"><h1 className="text-3xl font-bold text-gray-900">No questions available</h1><p className="text-gray-700">No questions match this board, class, subject and filter combination.</p><button onClick={() => router.push(`/mock-test?board=${board}&class=${classNumber}${subjectCode ? `&subjectCode=${subjectCode}` : ""}`)} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white">Back to Setup</button></div><Footer /></main>;
 
-  const handleSubmit = useCallback(() => {
-    if (hasSubmittedRef.current || isSubmitted) return;
-    hasSubmittedRef.current = true;
-    setIsSubmitted(true);
-
-    let correct = 0;
-    let wrong = 0;
-    let unanswered = 0;
-
-    const review = questions.map((question) => {
-      const userAnswer = answers[question.id] || "";
-      const isAnswered = Boolean(userAnswer.trim());
-      const isCorrect = isAnswered && evaluateMockTestAnswer(question, userAnswer);
-
-      if (!isAnswered) {
-        unanswered += 1;
-        wrong += 1;
-      } else if (isCorrect) {
-        correct += 1;
-      } else {
-        wrong += 1;
-      }
-
-      return {
-        question,
-        userAnswer: userAnswer || "No answer",
-        correctAnswer: question.answer,
-        isCorrect,
-        explanation: question.explanation,
-        marks: question.marks || 1,
-      };
-    });
-
-    const totalQuestions = questions.length;
-    const score = correct;
-    const percentage = totalQuestions > 0 ? Math.round((correct / totalQuestions) * 100) : 0;
-    const attemptedCount = correct + wrong - unanswered;
-    const accuracy = attemptedCount > 0 ? Math.round((correct / attemptedCount) * 100) : 0;
-
-    const result = {
-      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-      date: new Date().toISOString(),
-      category,
-      difficulty,
-      type,
-      score,
-      totalQuestions,
-      correctCount: correct,
-      wrongCount: wrong,
-      unansweredCount: unanswered,
-      percentage,
-      accuracy,
-      timeTaken: Math.max(0, duration * 60 - timeLeft),
-      totalTime: duration * 60,
-      mode,
-      chapter,
-      bookmarkedCount,
-      review,
-    };
-
-    saveMockTestResult(result);
-    clearMockTestDraft(testConfig);
-    sessionStorage.setItem("mock-test-result", JSON.stringify(result));
-    router.push("/mock-test/result");
-  }, [questions, answers, bookmarkedCount, duration, timeLeft, category, chapter, difficulty, type, mode, router, isSubmitted, testConfig]);
-
-  useEffect(() => {
-    if (questions.length === 0 || isSubmitted || mode === "practice" || mode === "revision") return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          handleSubmit();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [handleSubmit, questions.length, isSubmitted, mode]);
-
-  const updateAnswer = (qId, value) => {
-    setAnswers((prev) => ({ ...prev, [qId]: value }));
-  };
-
-  const toggleBookmark = (qId) => {
-    setBookmarked((prev) => ({ ...prev, [qId]: !prev[qId] }));
-  };
-
-  const getQuestionStatus = (index) => {
-    const question = questions[index];
-    if (!question) return "unanswered";
-    if (bookmarked[question.id]) return "bookmarked";
-    if (answers[question.id]) return "answered";
-    return "unanswered";
-  };
-
-  if (questions.length === 0) {
-    return (
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-        <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-4 py-20 text-center">
-          <h1 className="text-3xl font-bold text-gray-900">No questions available</h1>
-          <p className="text-gray-700">Try different filter settings to generate a test.</p>
-          <button
-            type="button"
-            onClick={() => router.push("/mock-test")}
-            className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
-          >
-            Back to Dashboard
-          </button>
-        </div>
-        <Footer />
-      </main>
-    );
-  }
-
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-      <Navbar />
-      <div className="h-20 sm:h-24 lg:h-28"></div>
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Mock Test</p>
-              <h1 className="mt-2 text-2xl font-bold text-gray-900">Timed Practice Session</h1>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <div className={`rounded-2xl border px-4 py-3 text-sm font-semibold ${timeLeft < 60 ? "border-red-300 bg-red-50 text-red-700" : "border-gray-200 bg-slate-50 text-gray-900"}`}>
-                ⏱️ {formatTime(timeLeft)}
-              </div>
-              <div className="rounded-2xl border border-gray-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-gray-900">
-                ✅ {answeredCount}/{questions.length} Answered
-              </div>
-              <div className="rounded-2xl border border-gray-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-gray-900">
-                📌 {bookmarkedCount} Bookmarked
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 h-3 overflow-hidden rounded-full bg-gray-200">
-            <div className="h-full rounded-full bg-blue-600 transition-all" style={{ width: `${progressPercent}%` }} />
-          </div>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-            <p className="text-sm font-semibold text-gray-700">Question {currentIndex + 1} of {questions.length}</p>
-            <div className="flex gap-3">
-              <button type="button" onClick={() => setCurrentIndex((previous) => Math.max(previous - 1, 0))} disabled={currentIndex === 0} className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400 disabled:opacity-50">
-                ← Previous
-              </button>
-              <button type="button" onClick={() => setCurrentIndex((previous) => Math.min(previous + 1, questions.length - 1))} disabled={currentIndex === questions.length - 1} className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-400 disabled:opacity-50">
-                Next →
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{currentQuestion.type.toUpperCase()}</span>
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold text-gray-700">{currentQuestion.marks} mark{currentQuestion.marks > 1 ? "s" : ""}</span>
-                  <span className={`rounded-full px-3 py-1 text-xs font-semibold ${currentQuestion.difficulty === "easy" ? "bg-green-100 text-green-700" : currentQuestion.difficulty === "medium" ? "bg-yellow-100 text-yellow-700" : "bg-red-100 text-red-700"}`}>
-                    {currentQuestion.difficulty.charAt(0).toUpperCase() + currentQuestion.difficulty.slice(1)}
-                  </span>
-                </div>
-                <h2 className="mt-4 text-xl font-bold leading-relaxed text-gray-900">{currentQuestion.question}</h2>
-              </div>
-              <button type="button" onClick={() => toggleBookmark(currentQuestion.id)} className={`whitespace-nowrap rounded-xl border px-4 py-2 text-sm font-semibold transition ${bookmarked[currentQuestion.id] ? "border-yellow-400 bg-yellow-50 text-yellow-700" : "border-gray-300 bg-white text-gray-900 hover:border-gray-400"}`}>
-                {bookmarked[currentQuestion.id] ? "📌 Bookmarked" : "📌 Bookmark"}
-              </button>
-            </div>
-
-            <div className="mt-6">
-              {(currentQuestion.type === "mcq" || currentQuestion.type === "output") && currentQuestion.options ? (
-                <div className="space-y-3">
-                  {currentQuestion.options.map((option) => {
-                    const isSelected = answers[currentQuestion.id] === option;
-                    return (
-                      <button key={option} type="button" onClick={() => updateAnswer(currentQuestion.id, option)} className={`w-full rounded-2xl border p-4 text-left text-sm font-semibold transition ${isSelected ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-300 bg-white text-gray-900 hover:border-gray-400"}`}>
-                        {option}
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div>
-                  <label className="text-sm font-semibold text-gray-900" htmlFor="answer">Your Answer</label>
-                  <textarea id="answer" value={answers[currentQuestion.id] || ""} onChange={(event) => updateAnswer(currentQuestion.id, event.target.value)} rows={6} className="mt-3 w-full rounded-2xl border border-gray-300 bg-white p-4 text-gray-900 outline-none placeholder:text-gray-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100" placeholder={currentQuestion.type === "programming" ? "Write your code here..." : "Type your response here..."} />
-                </div>
-              )}
-            </div>
-
-            {currentQuestion.hint && (
-              <details className="mt-4">
-                <summary className="cursor-pointer text-sm font-semibold text-blue-600 hover:text-blue-700">💡 Show Hint</summary>
-                <p className="mt-2 rounded-xl bg-blue-50 p-4 text-sm text-gray-700">{currentQuestion.hint}</p>
-              </details>
-            )}
-          </div>
-
-          <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-bold text-gray-900">Question Navigator</h2>
-            <div className="mt-4 grid grid-cols-5 gap-2">
-              {questions.map((question, index) => {
-                const status = getQuestionStatus(index);
-                const isCurrent = index === currentIndex;
-                let buttonClass = "border-gray-300 bg-white text-gray-900 hover:border-gray-400";
-                if (isCurrent) buttonClass = "border-blue-500 bg-blue-100 text-blue-700";
-                else if (status === "bookmarked") buttonClass = "border-yellow-400 bg-yellow-50 text-yellow-700";
-                else if (status === "answered") buttonClass = "border-green-400 bg-green-50 text-green-700";
-                return (
-                  <button key={question.id} type="button" onClick={() => setCurrentIndex(index)} className={`flex h-10 w-full items-center justify-center rounded-lg border text-xs font-semibold ${buttonClass}`}>
-                    {index + 1}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-3 text-xs text-gray-700">
-              <span className="flex items-center gap-1"><span className="h-3 w-3 rounded border border-green-400 bg-green-50" /> Answered</span>
-              <span className="flex items-center gap-1"><span className="h-3 w-3 rounded border border-yellow-400 bg-yellow-50" /> Bookmarked</span>
-              <span className="flex items-center gap-1"><span className="h-3 w-3 rounded border border-gray-300 bg-white" /> Unanswered</span>
-              <span className="flex items-center gap-1"><span className="h-3 w-3 rounded border border-blue-500 bg-blue-100" /> Current</span>
-            </div>
-
-            <button type="button" onClick={() => setShowSubmitDialog(true)} className="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700">Submit Test</button>
-          </div>
-        </div>
-      </div>
-
-      {showSubmitDialog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="mx-4 w-full max-w-md rounded-3xl border border-gray-200 bg-white p-6 shadow-xl">
-            <h2 className="text-xl font-bold text-gray-900">Submit Mock Test?</h2>
-            <p className="mt-2 text-sm text-gray-700">
-              You have answered {answeredCount} of {questions.length} questions.
-              {answeredCount < questions.length && (
-                <span className="mt-1 block font-semibold text-yellow-600">{questions.length - answeredCount} question{questions.length - answeredCount > 1 ? "s" : ""} left unanswered.</span>
-              )}
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <button type="button" onClick={() => { setShowSubmitDialog(false); handleSubmit(); }} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Yes, Submit</button>
-              <button type="button" onClick={() => setShowSubmitDialog(false)} className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900 hover:border-gray-400">Continue Test</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <Footer />
-    </main>
-  );
+  return <main className="min-h-screen bg-gradient-to-b from-white to-blue-50"><Navbar /><div className="h-20" /><div className="mx-auto max-w-7xl px-4 py-8 sm:px-6"><div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"><div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"><div><p className="text-sm font-semibold uppercase tracking-[0.2em] text-gray-600">{board} • Class {classNumber}{subjectCode ? ` • Code ${subjectCode}` : ""}</p><h1 className="mt-2 text-2xl font-bold text-gray-900">{subject || "Mock Test"}</h1><p className="mt-1 text-sm text-gray-600">Question {currentIndex + 1} of {questions.length}</p></div><div className="flex gap-3"><div className="rounded-xl border px-4 py-3 font-semibold">⏱️ {formatTime(timeLeft)}</div><div className="rounded-xl border px-4 py-3 font-semibold">✅ {answeredCount}/{questions.length}</div></div></div><div className="mt-5 h-2 rounded-full bg-gray-200"><div className="h-full rounded-full bg-blue-600" style={{ width: `${progress}%` }} /></div></div>
+<div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]"><section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"><div className="flex items-center justify-between gap-3"><div className="flex gap-2"><span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">{current.type}</span><span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold">{current.difficulty}</span></div><button onClick={() => setBookmarked((p) => ({ ...p, [current.id]: !p[current.id] }))} className="rounded-xl border px-3 py-2 text-sm">{bookmarked[current.id] ? "📌 Bookmarked" : "📌 Bookmark"}</button></div><h2 className="mt-5 text-xl font-bold leading-relaxed text-gray-900">{current.question}</h2><div className="mt-6">{current.options?.length ? <div className="space-y-3">{current.options.map((option) => <button key={option} onClick={() => setAnswers((p) => ({ ...p, [current.id]: option }))} className={`w-full rounded-xl border p-4 text-left font-semibold ${answers[current.id] === option ? "border-blue-500 bg-blue-50 text-blue-700" : "border-gray-300"}`}>{option}</button>)}</div> : <textarea value={answers[current.id] || ""} onChange={(e) => setAnswers((p) => ({ ...p, [current.id]: e.target.value }))} rows={7} className="w-full rounded-xl border border-gray-300 p-4 text-gray-900" placeholder={current.type === "programming" ? "Write your code here..." : "Type your answer here..."} />}</div></section><aside className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm"><h2 className="font-bold text-gray-900">Question Navigator</h2><div className="mt-4 grid grid-cols-5 gap-2">{questions.map((q, i) => <button key={q.id} onClick={() => setCurrentIndex(i)} className={`h-10 rounded-lg border text-sm font-semibold ${i === currentIndex ? "border-blue-500 bg-blue-100" : answers[q.id] ? "border-green-400 bg-green-50" : "border-gray-300"}`}>{i + 1}</button>)}</div><div className="mt-6 flex gap-3"><button disabled={!currentIndex} onClick={() => setCurrentIndex((i) => i - 1)} className="rounded-xl border px-4 py-2 disabled:opacity-40">Previous</button><button disabled={currentIndex === questions.length - 1} onClick={() => setCurrentIndex((i) => i + 1)} className="rounded-xl border px-4 py-2 disabled:opacity-40">Next</button></div><button onClick={() => setShowSubmit(true)} className="mt-6 w-full rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white">Submit Test</button></aside></div></div>{showSubmit && <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"><div className="mx-4 max-w-md rounded-2xl bg-white p-6"><h2 className="text-xl font-bold">Submit Test?</h2><p className="mt-2 text-sm text-gray-700">You have answered {answeredCount} of {questions.length} questions.</p><div className="mt-5 flex gap-3"><button onClick={submit} className="rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white">Yes, Submit</button><button onClick={() => setShowSubmit(false)} className="rounded-xl border px-5 py-3">Continue</button></div></div></div>}<Footer /></main>;
 }
 
-export default function MockTestPlayerPage() {
-  return (
-    <Suspense fallback={
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
-        <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
-        <div className="flex items-center justify-center py-20">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
-        </div>
-        <Footer />
-      </main>
-    }>
-      <MockTestPlayerContent />
-    </Suspense>
-  );
-}
+export default function MockTestPlayerPage() { return <Suspense fallback={<main className="min-h-screen"><Navbar /><div className="flex justify-center py-24">Loading test…</div><Footer /></main>}><MockTestPlayerContent /></Suspense>; }

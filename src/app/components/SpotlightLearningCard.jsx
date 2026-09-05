@@ -5,7 +5,7 @@ import { ArrowRight, BookOpenCheck, Brain, ClipboardCheck } from "lucide-react";
 
 const ACTIONS = [
   { href: "/question-bank", label: "Practice Questions", description: "Targeted questions to build exam confidence.", icon: BookOpenCheck },
-  { href: "/mock-tests", label: "Take a Mock Test", description: "Simulate the pressure of the real exam.", icon: ClipboardCheck },
+  { href: "/mock-test", label: "Take a Mock Test", description: "Simulate the pressure of the real exam.", icon: ClipboardCheck },
   { href: "/study", label: "Study Smarter", description: "Review notes and strengthen weak topics.", icon: Brain },
 ];
 

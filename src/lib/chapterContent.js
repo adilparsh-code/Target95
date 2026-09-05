@@ -26,10 +26,10 @@ export function getChapterContent(chapter, content = null, questions = null) {
     definitions: normalizeList(sd.definitions) || normalizeList(content?.definitions),
     keyTerms: normalizeList(sd.keyTerms) || normalizeList(content?.keyTerms),
     examples: normalizeExamples(sd.examples, content?.examples),
-    diagrams: normalizeList(sd.diagrams) || normalizeList(content?.diagrams),
+    diagrams: normalizeDiagrams(sd.diagrams, content),
     practice: normalizePractice(content?.practiceTest || content?.practice),
     mcqs: normalizeMcqs(questions?.mcqs, content?.mcqs),
-    output: normalizeOutput(questions?.outputQuestions, content?.outputBasedQuestions, sd.outputBasedQuestions),
+    output: normalizeOutput(questions?.outputQuestions, questions?.outputBasedQuestions, sd.outputBasedQuestions),
     programming: normalizeProgramming(questions?.programmingQuestions, content?.programmingQuestions),
     pyqs: normalizePyqs(content?.previousYearQuestions),
     revisionNotes: normalizeRevisionNotes(content?.revisionNotes, sd.quickRevision || content?.memoryTricks),
@@ -57,6 +57,28 @@ function normalizeList(data) {
   if (!data) return null;
   if (Array.isArray(data)) return data.length > 0 ? data : null;
   if (typeof data === "string" && data.trim()) return [data];
+  return null;
+}
+
+/**
+ * Normalize diagrams and automatically promote rich memory-model diagrams
+ * into the visual section when a chapter has not supplied a dedicated list.
+ */
+function normalizeDiagrams(sdDiagrams, content) {
+  const explicit = normalizeList(sdDiagrams) || normalizeList(content?.diagrams);
+  if (explicit) return explicit;
+
+  const memoryModel = content?.theoryNotes?.memoryModel;
+  if (memoryModel?.diagram) {
+    return [{
+      type: "memory-model",
+      title: memoryModel.heading || "Concept visual",
+      diagram: memoryModel.diagram,
+      explanation: memoryModel.explanation || "Visualise the structure before tracing the code.",
+      examNote: memoryModel.examNote || "",
+    }];
+  }
+
   return null;
 }
 
@@ -137,195 +159,3 @@ function normalizeExamples(sdExamples, contentExamples) {
       });
     });
   }
-
-  return examples.length > 0 ? examples : null;
-}
-
-/**
- * Normalize practice test content.
- */
-function normalizePractice(practiceTest) {
-  if (!practiceTest) return null;
-  return {
-    title: practiceTest.title,
-    totalMarks: practiceTest.totalMarks,
-    timeLimit: practiceTest.timeLimit,
-    sections: practiceTest.sections || [],
-  };
-}
-
-/**
- * Normalize MCQs from question-bank or chapter-content.
- */
-function normalizeMcqs(questionBankMcqs, contentMcqs) {
-  const mcqs = [];
-
-  // From question-bank (preferred)
-  if (questionBankMcqs?.length) {
-    questionBankMcqs.forEach((q) => {
-      mcqs.push({
-        id: q.id,
-        question: q.question,
-        options: q.options,
-        answer: q.correctAnswer,
-        explanation: q.explanation,
-        difficulty: q.difficulty,
-        marks: q.marks,
-      });
-    });
-  }
-
-  // From chapter-content
-  if (contentMcqs?.length) {
-    contentMcqs.forEach((q) => {
-      mcqs.push({
-        id: q.id,
-        question: q.question,
-        options: q.options,
-        answer: q.answer,
-        explanation: q.explanation,
-      });
-    });
-  }
-
-  return mcqs.length > 0 ? mcqs : null;
-}
-
-/**
- * Normalize programming questions from question-bank or chapter-content.
- */
-function normalizeProgramming(questionBankProgramming, contentProgramming) {
-  const programming = [];
-
-  // From question-bank (preferred)
-  if (questionBankProgramming?.length) {
-    questionBankProgramming.forEach((q) => {
-      programming.push({
-        id: q.id,
-        question: q.problemStatement,
-        solution: q.solution,
-        explanation: q.solutionExplanation,
-        output: q.output,
-        difficulty: q.difficulty,
-        marks: q.marks,
-        input: q.input,
-        constraints: q.constraints,
-        logic: q.logic,
-      });
-    });
-  }
-
-  // From chapter-content (grouped by difficulty)
-  if (contentProgramming) {
-    const levels = ["easy", "medium", "hard"];
-    levels.forEach((level) => {
-      if (contentProgramming[level]?.length) {
-        contentProgramming[level].forEach((q) => {
-          programming.push({
-            id: q.id,
-            question: q.question,
-            solution: q.solution,
-            output: q.output,
-            difficulty: level,
-          });
-        });
-      }
-    });
-  }
-
-  return programming.length > 0 ? programming : null;
-}
-
-/**
- * Normalize previous year questions.
- */
-function normalizePyqs(previousYearQuestions) {
-  if (!previousYearQuestions?.length) return null;
-  return previousYearQuestions.map((q) => ({
-    id: q.id,
-    question: q.question,
-    answer: q.answer,
-    explanation: q.explanation,
-  }));
-}
-
-/**
- * Normalize output-based questions from question-bank, chapter-content, or studyData.
- */
-function normalizeOutput(questionBankOutput, contentOutput, richContentOutput, studyDataOutput) {
-  const output = [];
-
-  // From question-bank (preferred)
-  if (questionBankOutput?.length) {
-    questionBankOutput.forEach((q) => {
-      output.push({
-        id: q.id,
-        question: q.question || q.prompt,
-        answer: q.answer,
-        explanation: q.explanation,
-        difficulty: q.difficulty,
-        marks: q.marks,
-        estimatedTime: q.estimatedTime,
-      });
-    });
-  }
-
-  // From chapter-content
-  if (contentOutput?.length) {
-    contentOutput.forEach((q) => {
-      output.push({
-        id: q.id,
-        question: q.question || q.prompt,
-        answer: q.answer,
-        explanation: q.explanation,
-        difficulty: q.difficulty,
-        marks: q.marks,
-      });
-    });
-  }
-
-  // From studyData
-  if (studyDataOutput?.length) {
-    studyDataOutput.forEach((q, idx) => {
-      output.push({
-        id: `study-output-${idx}`,
-        question: typeof q === "string" ? q : q.question || q.prompt || "",
-        answer: typeof q === "string" ? "" : q.answer,
-        explanation: typeof q === "string" ? "" : q.explanation,
-        difficulty: "Medium",
-        marks: 2,
-      });
-    });
-  }
-
-  return output.length > 0 ? output : null;
-}
-
-/**
- * Normalize revision notes from chapter-content or studyData.
- */
-function normalizeRevisionNotes(contentRevisionNotes, quickRevision) {
-  const notes = [];
-
-  // From chapter-content (rich format)
-  if (contentRevisionNotes?.length) {
-    contentRevisionNotes.forEach((note) => {
-      notes.push({
-        title: note.title,
-        content: note.content,
-      });
-    });
-  }
-
-  // From studyData quickRevision
-  if (quickRevision?.length) {
-    quickRevision.forEach((item) => {
-      notes.push({
-        title: "Quick Revision",
-        content: item,
-      });
-    });
-  }
-
-  return notes.length > 0 ? notes : null;
-}

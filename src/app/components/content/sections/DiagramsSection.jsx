@@ -3,6 +3,7 @@
 import ChapterSection from "../../ChapterSection";
 import { FileText } from "lucide-react";
 import Image from "next/image";
+import icseJavaVisualRegistry from "../../../data/icseJavaVisualRegistry";
 
 function MemoryModelVisual() {
   return (
@@ -49,8 +50,18 @@ function MemoryModelVisual() {
   );
 }
 
-export default function DiagramsSection({ items, isCompleted }) {
-  if (!items || items.length === 0) return null;
+export default function DiagramsSection({ items, chapterSlug, isCompleted }) {
+  const registered = icseJavaVisualRegistry[chapterSlug] || [];
+  const existingImageSources = new Set(
+    (items || [])
+      .filter((item) => typeof item === "object" && item !== null && item.type === "image")
+      .map((item) => item.src)
+      .filter(Boolean)
+  );
+  const registryItems = registered.filter((item) => !existingImageSources.has(item.src));
+  const allItems = [...(items || []), ...registryItems];
+
+  if (allItems.length === 0) return null;
 
   return (
     <ChapterSection
@@ -61,7 +72,7 @@ export default function DiagramsSection({ items, isCompleted }) {
       isCompleted={isCompleted}
     >
       <div className="grid gap-4">
-        {items.map((diagram, idx) => {
+        {allItems.map((diagram, idx) => {
           const isObject = typeof diagram === "object" && diagram !== null;
           const isMemoryModel = isObject && diagram.type === "memory-model";
           const isImage = isObject && diagram.type === "image" && diagram.src;

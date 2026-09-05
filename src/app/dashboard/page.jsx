@@ -25,7 +25,6 @@ export default function DashboardPage() {
   const { firestoreProgress: progress, loading: progressLoading, stats } = useProgress(user?.uid);
   const { fetchActiveMockTests } = useMockTests();
 
-  // Calculate dashboard stats from Firestore data
   const totalSolved = stats?.totalQuestionsSolved || 0;
   const maxStreak = stats?.maxStreak || 0;
   const progressCount = Array.isArray(progress) ? progress.length : 0;
@@ -34,9 +33,7 @@ export default function DashboardPage() {
   const dashboardStats = {
     questionsSolvedToday: totalSolved > 0 ? Math.min(totalSolved, 10) : 0,
     currentStreak: maxStreak || 0,
-    chapterCompletion: progressCount > 0 
-      ? Math.round((progressWithActivity / progressCount) * 100)
-      : 0,
+    chapterCompletion: progressCount > 0 ? Math.round((progressWithActivity / progressCount) * 100) : 0,
     dailyGoal: {
       current: totalSolved > 0 ? Math.min(totalSolved, 10) : 0,
       target: 10,
@@ -49,7 +46,6 @@ export default function DashboardPage() {
     },
   };
 
-  // Derive last accessed chapter from progress data
   const derivedLastChapter = Array.isArray(progress) && progress.length > 0
     ? (() => {
         const sorted = [...progress].sort((a, b) => {
@@ -68,7 +64,6 @@ export default function DashboardPage() {
       })()
     : null;
 
-  // Fetch upcoming mock tests
   useEffect(() => {
     let mounted = true;
     const fetchTests = async () => {
@@ -92,42 +87,43 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <main className="min-h-screen bg-transparent">
         <Navbar />
-        <div className="h-20 sm:h-24 lg:h-28"></div>
-        <ErrorBoundary>
-          <div className="container mx-auto px-4 py-8 max-w-7xl">
-            <DashboardHeader user={user} isLoading={!user} />
-            
-            <div className="mt-6">
+        <div className="mx-auto max-w-7xl px-4 pb-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
+          <ErrorBoundary>
+            <section className="rounded-[28px] border border-slate-200/80 bg-white/80 p-4 shadow-[0_12px_40px_rgba(15,23,42,0.04)] backdrop-blur-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900/65">
+              <DashboardHeader user={user} isLoading={!user} />
+            </section>
+
+            <div className="mt-5">
               <WelcomeCard user={user} stats={dashboardStats} />
             </div>
 
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-3">
               <ContinueLearning lastChapter={derivedLastChapter} isLoading={progressLoading} />
               <div className="lg:col-span-2">
                 <QuickActions />
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5">
               <ProgressOverview stats={dashboardStats} />
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5">
               <StatsCards stats={stats || { totalQuestionsSolved: 0, totalCorrectAnswers: 0, totalStudyTime: 0, maxStreak: 0, overallAccuracy: 0 }} />
             </div>
 
-            <div className="mt-6">
+            <div className="mt-5">
               <SubjectGrid />
             </div>
 
-            <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-2">
               <RecentActivity />
               <UpcomingMockTests mockTests={Array.isArray(upcomingTests) ? upcomingTests : []} />
             </div>
-          </div>
-        </ErrorBoundary>
+          </ErrorBoundary>
+        </div>
         <Footer />
       </main>
     </ProtectedRoute>

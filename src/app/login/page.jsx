@@ -18,17 +18,23 @@ export default function Login() {
     clearError();
   }, [clearError]);
 
+  const redirectAfterLogin = (signedInUser) => {
+    if (signedInUser?.role === "admin") {
+      router.push("/admin");
+      return;
+    }
+    router.push("/dashboard");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await login(email, password);
-    if (result.success) {
-      router.push("/dashboard");
-    }
+    if (result.success) redirectAfterLogin(result.user);
   };
 
   const handleGoogleLogin = async () => {
     const result = await loginWithGoogle();
-    if (result.success) router.push("/dashboard");
+    if (result.success) redirectAfterLogin(result.user);
   };
 
   return (
@@ -49,7 +55,7 @@ export default function Login() {
           <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit}>
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm" role="alert">
                   {error}
                 </div>
               )}
@@ -57,7 +63,7 @@ export default function Login() {
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
-                </label>
+n                </label>
                 <input
                   id="email"
                   name="email"
@@ -93,7 +99,7 @@ export default function Login() {
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
                     aria-label={showPassword ? "Hide password" : "Show password"}
                   >
-                    {showPassword ? "👁️" : "👁️‍🗨️"}
+                    👁️
                   </button>
                 </div>
               </div>

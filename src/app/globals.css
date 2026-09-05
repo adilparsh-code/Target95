@@ -148,14 +148,9 @@ body.site-body::before {
 ::selection { background: rgba(36, 87, 214, 0.16); color: var(--foreground); }
 button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 button { font-family: inherit; }
-
 a { text-underline-offset: 3px; }
 
-h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.025em;
-  text-wrap: balance;
-}
-
+h1, h2, h3, h4, h5, h6 { letter-spacing: -0.025em; text-wrap: balance; }
 p { text-wrap: pretty; }
 
 input, textarea, select {
@@ -172,7 +167,6 @@ input:focus, textarea:focus, select:focus {
 *:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 6px; }
 img { max-width: 100%; }
 
-/* Legacy Tailwind utility harmonisation keeps older screens coherent. */
 .dark .bg-white { background-color: var(--card); }
 .dark .bg-gray-50 { background-color: var(--background); }
 .dark .bg-gray-100 { background-color: var(--muted); }
@@ -190,6 +184,77 @@ main { isolation: isolate; }
 ::-webkit-scrollbar-thumb:hover { background: #aeb7c5; }
 .dark ::-webkit-scrollbar-thumb { background: #344052; }
 .dark ::-webkit-scrollbar-thumb:hover { background: #46546a; }
+
+/* Chapter learning workspace: calm, editorial, content-first visual hierarchy. */
+.chapter-workspace { --chapter-surface: #ffffff; --chapter-soft: #f8fafc; --chapter-line: #e2e8f0; }
+.dark .chapter-workspace { --chapter-surface: #0f1724; --chapter-soft: #111b2a; --chapter-line: #253044; }
+.chapter-content { color: var(--foreground); }
+.chapter-content > div > header {
+  margin-bottom: 1.75rem !important;
+  border: 1px solid var(--chapter-line) !important;
+  border-radius: 1.25rem !important;
+  background: var(--chapter-surface) !important;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.055) !important;
+  padding: 2rem !important;
+}
+.chapter-content > div > header > div:first-child { display: none !important; }
+.chapter-content > div > header h1 { color: #0f172a !important; margin-bottom: .65rem !important; }
+.dark .chapter-content > div > header h1 { color: #f8fafc !important; }
+.chapter-content > div > header p { color: #64748b !important; }
+.dark .chapter-content > div > header p { color: #94a3b8 !important; }
+.chapter-content > div > header > div:last-child { color: inherit; }
+.chapter-content > div > header span { box-shadow: none !important; }
+.chapter-content > div > header span.bg-white\/20 { background: #f1f5f9 !important; color: #475569 !important; border-color: #e2e8f0 !important; }
+.dark .chapter-content > div > header span.bg-white\/20 { background: #172235 !important; color: #cbd5e1 !important; border-color: #2b3950 !important; }
+.chapter-content > div > header span.bg-emerald-500\/30 { background: #ecfdf5 !important; color: #047857 !important; border-color: #a7f3d0 !important; }
+.dark .chapter-content > div > header span.bg-emerald-500\/30 { background: #06281f !important; color: #6ee7b7 !important; border-color: #14532d !important; }
+
+.chapter-content > div > section[aria-label="Learning Flow"] {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: .7rem !important;
+  margin-bottom: 2.25rem !important;
+}
+.chapter-content > div > section[aria-label="Learning Flow"] a {
+  min-height: 74px !important;
+  border: 1px solid var(--chapter-line) !important;
+  border-radius: .95rem !important;
+  background: var(--chapter-surface) !important;
+  color: #334155 !important;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.035) !important;
+  padding: .9rem !important;
+}
+.chapter-content > div > section[aria-label="Learning Flow"] a:first-child,
+.chapter-content > div > section[aria-label="Learning Flow"] a:last-child { background: #eff6ff !important; color: #1d4ed8 !important; border-color: #bfdbfe !important; }
+.dark .chapter-content > div > section[aria-label="Learning Flow"] a { background: var(--chapter-surface) !important; color: #cbd5e1 !important; border-color: var(--chapter-line) !important; }
+.dark .chapter-content > div > section[aria-label="Learning Flow"] a:first-child,
+.dark .chapter-content > div > section[aria-label="Learning Flow"] a:last-child { background: #17284a !important; color: #93c5fd !important; border-color: #294b82 !important; }
+.chapter-content > div > section[aria-label="Learning Flow"] a:hover { transform: translateY(-1px) !important; box-shadow: 0 9px 24px rgba(15, 23, 42, 0.07) !important; }
+
+.chapter-content .prose > section { margin-bottom: 2.75rem !important; }
+.chapter-content .prose > section > h2 { margin-bottom: 1rem !important; font-size: 1.55rem !important; color: #0f172a !important; }
+.dark .chapter-content .prose > section > h2 { color: #f8fafc !important; }
+.chapter-content .prose > section > div {
+  border: 1px solid var(--chapter-line) !important;
+  border-radius: 1rem !important;
+  background: var(--chapter-surface) !important;
+  box-shadow: 0 7px 24px rgba(15, 23, 42, 0.035) !important;
+  backdrop-filter: none !important;
+}
+.chapter-content .prose > section > div:hover { transform: none !important; box-shadow: 0 10px 28px rgba(15, 23, 42, 0.055) !important; }
+.chapter-content .prose p, .chapter-content .prose li { color: #475569; }
+.dark .chapter-content .prose p, .dark .chapter-content .prose li { color: #cbd5e1; }
+.chapter-content .prose table { border-color: var(--chapter-line); }
+
+@media (max-width: 900px) {
+  .chapter-content > div > section[aria-label="Learning Flow"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+
+@media (max-width: 640px) {
+  .chapter-content > div > header { padding: 1.25rem !important; border-radius: 1rem !important; }
+  .chapter-content > div > section[aria-label="Learning Flow"] { gap: .55rem !important; }
+  .chapter-content > div > section[aria-label="Learning Flow"] a { min-height: 64px !important; padding: .7rem !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

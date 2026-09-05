@@ -1,65 +1,70 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { PracticeService } from "../services/PracticeService";
 import { SessionService } from "../services/SessionService";
 
+const DEFAULT_SETTINGS = {
+  board: "ICSE",
+  classNumber: 10,
+  subjectCode: "",
+  subject: "",
+  subjectName: "",
+  chapter: "",
+  difficulty: "",
+  questionCount: 20,
+  hasTimer: false,
+  duration: 30
+};
+
 export function usePractice() {
-  const [settings, setSettings] = useState({
-    subject: "",
-    chapter: "",
-    difficulty: "",
-    questionCount: 20,
-    hasTimer: false,
-    duration: 30 // minutes
-  });
-  
+  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [session, setSession] = useState(null);
 
-  const practiceService = new PracticeService();
-  const sessionService = new SessionService();
+  const practiceService = useMemo(() => new PracticeService(), []);
+  const sessionService = useMemo(() => new SessionService(), []);
 
-  // Update settings
   const updateSettings = useCallback((updates) => {
-    setSettings(prev => ({
-      ...prev,
-      ...updates
-    }));
+    setSettings(prev => ({ ...prev, ...updates }));
+    setError(null);
   }, []);
 
-  // Reset settings
   const resetSettings = useCallback(() => {
-    setSettings({
-      subject: "",
-      chapter: "",
-      difficulty: "",
-      questionCount: 20,
-      hasTimer: false,
-      duration: 30
-    });
+    setSettings(DEFAULT_SETTINGS);
     setError(null);
     setSession(null);
   }, []);
 
-  // Start practice session
   const startPractice = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      // Validate settings
+      const questionCount = Number(settings.questionCount);
+      const duration = Number(settings.duration);
+      const board = String(settings.board || "ICSE").toUpperCase();
+
       if (!settings.subject) throw new Error("Please select a subject");
-      if (!settings.difficulty && settings.chapter) throw new Error("Please select a difficulty");
-      if (settings.questionCount < 1 || settings.questionCount > 50) {
+      if (!settings.difficulty) throw new Error("Please select a difficulty");
+      if (!Number.isInteger(questionCount) || questionCount < 1 || questionCount > 50) {
         throw new Error("Please select a valid number of questions (1-50)");
       }
+      if (settings.hasTimer && (!Number.isFinite(duration) || duration < 5 || duration > 180)) {
+        throw new Error("Please select a valid timer duration (5-180 minutes)");
+      }
+      if (board === "CBSE" && (!settings.classNumber || !settings.subjectCode)) {
+        throw new Error("CBSE practice requires a valid class and subject code");
+      }
 
-      // Start the session
-      const newSession = await sessionService.startSession(settings);
+      const newSession = await sessionService.startSession({
+        ...settings,
+        board,
+        questionCount,
+        duration
+      });
       setSession(newSession);
-      
       return newSession;
     } catch (err) {
       console.error("Error starting practice:", err);
@@ -70,11 +75,9 @@ export function usePractice() {
     }
   }, [settings, sessionService]);
 
-  // Get session history
   const getHistory = useCallback(async () => {
     try {
-      const history = await practiceService.getSessionHistory(10);
-      return history;
+      return await practiceService.getSessionHistory(10);
     } catch (err) {
       console.error("Error getting history:", err);
       setError("Failed to load practice history.");

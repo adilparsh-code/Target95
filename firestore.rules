@@ -35,13 +35,13 @@ service cloud.firestore {
       // Verified users can read their own profile; admins can read user profiles.
       allow read: if isOwner(userId) || isAdmin();
 
-      // A normal user cannot promote themselves, change ownership, change the
-      // account email stored in the profile, or forge verification state.
+      // A normal user cannot promote themselves, change ownership, or change
+      // the account email stored in the profile. Firebase Auth remains the
+      // source of truth for email verification.
       allow update: if isAdmin() || (isOwner(userId)
         && request.resource.data.uid == resource.data.uid
         && request.resource.data.email == resource.data.email
-        && request.resource.data.role == resource.data.role
-        && request.resource.data.emailVerified == resource.data.emailVerified);
+        && request.resource.data.role == resource.data.role);
 
       allow delete: if isAdmin();
 

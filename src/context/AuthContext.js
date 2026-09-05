@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, reload, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { getFirebaseInstance, isFirebaseConfigured } from "@/app/lib/firebase";
 
@@ -24,7 +24,6 @@ export function AuthProvider({ children }) {
       emailVerified: firebaseUser.emailVerified,
       role: profile.role || "student",
       ...profile,
-      // Firebase Authentication is the source of truth for verification.
       emailVerified: firebaseUser.emailVerified,
     };
   }, []);
@@ -82,12 +81,13 @@ export function AuthProvider({ children }) {
         return { success: false, message };
       }
       const normalizedEmail = email.trim().toLowerCase();
+      const normalizedName = String(fullName || "").trim();
       const credential = await createUserWithEmailAndPassword(auth, normalizedEmail, password);
-      await updateProfile(credential.user, { displayName: String(fullName || "").trim() });
+      await updateProfile(credential.user, { displayName: normalizedName });
       await setDoc(doc(db, "users", credential.user.uid), {
         uid: credential.user.uid,
         email: normalizedEmail,
-        fullName: String(fullName || "").trim(),
+        fullName: normalizedName,
         role: "student",
         board: "ICSE",
         studentClass: "Class 10",
@@ -178,6 +178,22 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const refreshVerification = async () => {
+    try {
+      const { auth } = getFirebaseInstance();
+      if (!auth?.currentUser) return { success: false, message: "No signed-in user." };
+      await reload(auth.currentUser);
+      if (!auth.currentUser.emailVerified) return { success: false, message: "Your email is still not verified." };
+      const profileUser = await buildUser(auth.currentUser);
+      setUser(profileUser);
+      return { success: true, user: profileUser };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
+  };
+
   const updateStudentProfile = async (updates) => {
     if (!user) return { success: false, message: "You must be signed in." };
     try {
@@ -217,7 +233,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const value = { user, loading, error, login, register, loginWithGoogle, forgotPassword, resendVerification, updateStudentProfile, logout, clearError: () => setError(null) };
+  const value = { user, loading, error, login, register, loginWithGoogle, forgotPassword, resendVerification, refreshVerification, updateStudentProfile, logout, clearError: () => setError(null) };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

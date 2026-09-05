@@ -5,6 +5,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  setDoc,
   updateDoc,
   doc,
   query,
@@ -165,14 +166,9 @@ export class PracticeService {
     try {
       const uid = this.auth.currentUser.uid;
       const statsRef = doc(this.db, `users/${uid}/practiceStatistics/current`);
-      await updateDoc(statsRef, { ...stats, updatedAt: serverTimestamp() });
+      await setDoc(statsRef, { ...stats, updatedAt: serverTimestamp() }, { merge: true });
       return { success: true };
     } catch (error) {
-      if (error.code === "not-found") {
-        const uid = this.auth.currentUser.uid;
-        await updateDoc(doc(this.db, `users/${uid}/practiceStatistics/current`), { ...stats, updatedAt: serverTimestamp() });
-        return { success: true };
-      }
       console.error("Error updating statistics:", error);
       throw new Error("Failed to update practice statistics.");
     }

@@ -39,7 +39,13 @@ export default function ChapterContentEngine({ chapter, content = null, question
       {hasSectionContent(sections.definitions) && <DefinitionsSection items={sections.definitions} isCompleted={isCompleted("definitions")} />}
       {hasSectionContent(sections.keyTerms) && <KeyTermsSection items={sections.keyTerms} isCompleted={isCompleted("key-terms")} />}
       {hasSectionContent(sections.examples) && <ExamplesSection items={sections.examples} isCompleted={isCompleted("examples")} />}
-      {hasSectionContent(sections.diagrams) && <DiagramsSection items={sections.diagrams} isCompleted={isCompleted("diagrams")} />}
+      {hasSectionContent(sections.diagrams) && (
+        <DiagramsSection
+          items={sections.diagrams}
+          chapterSlug={chapter?.slug || chapter?.id || chapter}
+          isCompleted={isCompleted("diagrams")}
+        />
+      )}
       {hasSectionContent(sections.practice) && <PracticeSection practice={sections.practice} isCompleted={isCompleted("practice")} />}
       {hasSectionContent(sections.mcqs) && <McqSection items={sections.mcqs} isCompleted={isCompleted("mcqs")} />}
       {hasSectionContent(sections.output) && <OutputSection items={sections.output} isCompleted={isCompleted("output")} />}

@@ -30,7 +30,9 @@ export default async function CBSESubjectPage({ params }) {
   const totalTheoryTopics = units.reduce((sum, unit) => sum + (unit.theory?.length || 0), 0);
   const totalPracticalActivities = units.reduce((sum, unit) => sum + (unit.practicalActivities?.length || 0), 0);
   const subjectRoute = `/cbse/class/${classNumber}/subject/${subjectCode}`;
-  const mockTestRoute = `/mock-test?board=CBSE&class=${classNumber}&subjectCode=${encodeURIComponent(subjectCode)}&subject=${encodeURIComponent(subject.name)}`;
+  const contextParams = `board=CBSE&class=${classNumber}&subjectCode=${encodeURIComponent(subjectCode)}&subject=${encodeURIComponent(subject.name)}`;
+  const mockTestRoute = `/mock-test?${contextParams}`;
+  const practiceRoute = `/practice/setup?${contextParams}`;
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 px-4 py-8 sm:px-6 lg:px-8">
@@ -78,8 +80,9 @@ export default async function CBSESubjectPage({ params }) {
 
         <section className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Additional Resources</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100 hover:shadow-lg transition-shadow"><Trophy className="w-10 h-10 text-amber-600 mb-4" /><h3 className="text-xl font-bold text-gray-900 mb-2">Mock Tests</h3><p className="text-gray-600 mb-4">Test your knowledge with full-length mock exams designed according to CBSE pattern.</p><Link href={mockTestRoute} className="inline-flex items-center gap-2 text-amber-700 font-semibold hover:underline">Take a test <ArrowLeft className="w-4 h-4 rotate-180" /></Link></div>
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100 hover:shadow-lg transition-shadow"><BookOpen className="w-10 h-10 text-blue-600 mb-4" /><h3 className="text-xl font-bold text-gray-900 mb-2">Practice</h3><p className="text-gray-600 mb-4">Start targeted practice for this exact CBSE class and subject.</p><Link href={practiceRoute} className="inline-flex items-center gap-2 text-blue-700 font-semibold hover:underline">Start practice <ArrowLeft className="w-4 h-4 rotate-180" /></Link></div>
             <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-100 hover:shadow-lg transition-shadow"><Users className="w-10 h-10 text-emerald-600 mb-4" /><h3 className="text-xl font-bold text-gray-900 mb-2">AI Tutor</h3><p className="text-gray-600 mb-4">Get personalized help with difficult concepts from our AI-powered tutor.</p><Link href="/ai-tutor" className="inline-flex items-center gap-2 text-emerald-700 font-semibold hover:underline">Get help <ArrowLeft className="w-4 h-4 rotate-180" /></Link></div>
             <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 border border-pink-100 hover:shadow-lg transition-shadow"><BookOpen className="w-10 h-10 text-pink-600 mb-4" /><h3 className="text-xl font-bold text-gray-900 mb-2">Study Notes</h3><p className="text-gray-600 mb-4">Open notes for this selected CBSE subject only.</p><Link href={subjectRoute} className="inline-flex items-center gap-2 text-pink-700 font-semibold hover:underline">View subject <ArrowLeft className="w-4 h-4 rotate-180" /></Link></div>
           </div>

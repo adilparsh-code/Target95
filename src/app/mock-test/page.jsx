@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -16,7 +16,7 @@ const CBSE_SUBJECTS = {
   "802": "Information Technology",
 };
 
-export default function MockTestNewPage() {
+function MockTestContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const contextBoard = (searchParams.get("board") || "ICSE").toUpperCase();
@@ -31,7 +31,7 @@ export default function MockTestNewPage() {
   const [count, setCount] = useState(10);
   const [chapter, setChapter] = useState("all");
   const [mode, setMode] = useState("exam");
-  const [duration, setDuration] = useState(contextBoard === "CBSE" ? 30 : 30);
+  const [duration, setDuration] = useState(30);
   const history = useMemo(() => getMockTestHistory(), []);
 
   const activeBoard = category.startsWith("cbse-") ? "CBSE" : category.startsWith("isc-") ? "ISC" : "ICSE";
@@ -81,4 +81,12 @@ export default function MockTestNewPage() {
     </section>
     <aside className="space-y-5"><section className={`${softCard} p-5 sm:p-6`}><p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">History</p><h2 className="mt-1 text-lg font-bold text-slate-950 dark:text-white">Recent results</h2>{history.length ? <div className="mt-4 space-y-3">{history.slice(0, 5).map((item) => <div key={item.id} className="rounded-2xl border border-slate-200/80 bg-slate-50/80 p-4 dark:border-slate-800 dark:bg-slate-950/40"><div className="flex items-center justify-between"><p className="text-sm font-semibold text-slate-900 dark:text-slate-100">{String(item.category || "Test").replace(/-/g, " ")}</p><span className="text-xs font-bold text-blue-600">{item.percentage}%</span></div><p className="mt-1 text-xs text-slate-500">Score: {item.score}/{item.totalQuestions}</p><div className="mt-3 flex justify-end"><button type="button" onClick={() => handleRetake(item)} className="text-xs font-semibold text-blue-600">Retake</button></div></div>)}</div> : <div className="mt-4 rounded-2xl border border-dashed border-slate-300 p-6 text-center text-sm text-slate-600">Complete a mock test to see results here.</div>}</section></aside></div>
   </ErrorBoundary></div><Footer /></main></ProtectedRoute>;
+}
+
+export default function MockTestNewPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-pulse text-sm text-slate-500">Loading mock test…</div></div>}>
+      <MockTestContent />
+    </Suspense>
+  );
 }

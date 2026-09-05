@@ -51,14 +51,21 @@ function MemoryModelVisual() {
 }
 
 export default function DiagramsSection({ items, chapterSlug, isCompleted }) {
-  const registered = icseJavaVisualRegistry[chapterSlug] || [];
+  // Get registered visuals for this chapter, ensuring consistent slug matching
+  const registered = (icseJavaVisualRegistry && icseJavaVisualRegistry[chapterSlug]) ? icseJavaVisualRegistry[chapterSlug] : [];
+  
+  // Build a set of existing image sources to avoid duplicates
   const existingImageSources = new Set(
     (items || [])
       .filter((item) => typeof item === "object" && item !== null && item.type === "image")
       .map((item) => item.src)
       .filter(Boolean)
   );
+  
+  // Filter registry items that aren't already included
   const registryItems = registered.filter((item) => !existingImageSources.has(item.src));
+  
+  // Combine items and registry visuals
   const allItems = [...(items || []), ...registryItems];
 
   if (allItems.length === 0) return null;

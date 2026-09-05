@@ -1,14 +1,7 @@
 "use client";
 
 import { getFirebaseInstance } from "../lib/firebase";
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  doc,
-  getDoc,
-  serverTimestamp
-} from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc, getDoc, serverTimestamp } from "firebase/firestore";
 import { PracticeService } from './PracticeService';
 
 export class SessionService {
@@ -20,33 +13,22 @@ export class SessionService {
   }
 
   requireAuth() {
-    if (!this.db || !this.auth?.currentUser) {
-      throw new Error("Please sign in to access practice sessions.");
-    }
+    if (!this.db || !this.auth?.currentUser) throw new Error("Please sign in to access practice sessions.");
   }
 
-  // Start a new practice session
   async startSession(settings) {
     this.requireAuth();
-
     try {
-      const { subject, chapter, difficulty, questionCount, hasTimer, duration } = settings;
-
-      const questions = await this.practiceService.getQuestions({
-        subject,
-        chapter,
-        difficulty,
-        count: questionCount
-      });
-
-      if (questions.length === 0) {
-        throw new Error("No questions found matching your criteria. Please try different filters.");
-      }
+      const { board, classNumber, subjectCode, subject, chapter, difficulty, questionCount, hasTimer, duration } = settings;
+      const questions = await this.practiceService.getQuestions({ board, classNumber, subjectCode, subject, chapter, difficulty, count: questionCount });
+      if (questions.length === 0) throw new Error("No questions found matching your criteria. Please try different filters.");
 
       const uid = this.auth.currentUser.uid;
       const sessionsRef = collection(this.db, `users/${uid}/activeSessions`);
-
       const sessionData = {
+        board: board || null,
+        classNumber: classNumber || null,
+        subjectCode: subjectCode || null,
         subject,
         chapter,
         difficulty,
@@ -60,14 +42,8 @@ export class SessionService {
         flaggedQuestions: [],
         status: "active"
       };
-
       const docRef = await addDoc(sessionsRef, sessionData);
-
-      return {
-        id: docRef.id,
-        ...sessionData,
-        questions
-      };
+      return { id: docRef.id, ...sessionData, questions };
     } catch (error) {
       console.error("Error starting practice session:", error);
       throw error;
@@ -77,16 +53,10 @@ export class SessionService {
   async getSession(sessionId) {
     this.requireAuth();
     if (!sessionId) throw new Error("Practice session ID is required.");
-
     try {
       const uid = this.auth.currentUser.uid;
-      const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-      const snapshot = await getDoc(sessionRef);
-
-      if (!snapshot.exists()) {
-        throw new Error("Practice session not found. It may have expired or been removed.");
-      }
-
+      const snapshot = await getDoc(doc(this.db, `users/${uid}/activeSessions/${sessionId}`));
+      if (!snapshot.exists()) throw new Error("Practice session not found. It may have expired or been removed.");
       return { id: snapshot.id, ...snapshot.data() };
     } catch (error) {
       console.error("Error loading practice session:", error);
@@ -95,19 +65,11 @@ export class SessionService {
     }
   }
 
-  // Update session progress
   async updateSession(sessionId, updates) {
     this.requireAuth();
-
     try {
       const uid = this.auth.currentUser.uid;
-      const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-
-      await updateDoc(sessionRef, {
-        ...updates,
-        lastUpdated: serverTimestamp()
-      });
-
+      await updateDoc(doc(this.db, `users/${uid}/activeSessions/${sessionId}`), { ...updates, lastUpdated: serverTimestamp() });
       return { success: true };
     } catch (error) {
       console.error("Error updating session:", error);
@@ -115,30 +77,17 @@ export class SessionService {
     }
   }
 
-  // Save or replace an answer for a question.
   async saveAnswer(sessionId, questionId, answer, isCorrect) {
     this.requireAuth();
-
     try {
       const uid = this.auth.currentUser.uid;
       const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
       const answers = await this.getCurrentAnswers(sessionId);
-      const answerData = {
-        questionId,
-        answer,
-        isCorrect: Boolean(isCorrect),
-        timestamp: new Date().toISOString()
-      };
-      const nextAnswers = [
-        ...answers.filter(item => item.questionId !== questionId),
-        answerData
-      ];
-
+      const answerData = { questionId, answer, isCorrect: Boolean(isCorrect), timestamp: new Date().toISOString() };
       await updateDoc(sessionRef, {
-        answers: nextAnswers,
+        answers: [...answers.filter(item => item.questionId !== questionId), answerData],
         lastUpdated: serverTimestamp()
       });
-
       return answerData;
     } catch (error) {
       console.error("Error saving answer:", error);
@@ -146,24 +95,17 @@ export class SessionService {
     }
   }
 
-  // Flag/unflag a question
   async toggleFlag(sessionId, questionId) {
     this.requireAuth();
-
     try {
       const uid = this.auth.currentUser.uid;
       const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
       const currentFlags = await this.getCurrentFlagged(sessionId);
       const isAlreadyFlagged = currentFlags.includes(questionId);
-      const newFlags = isAlreadyFlagged
-        ? currentFlags.filter(id => id !== questionId)
-        : [...currentFlags, questionId];
-
       await updateDoc(sessionRef, {
-        flaggedQuestions: newFlags,
+        flaggedQuestions: isAlreadyFlagged ? currentFlags.filter(id => id !== questionId) : [...currentFlags, questionId],
         lastUpdated: serverTimestamp()
       });
-
       return { flagged: !isAlreadyFlagged };
     } catch (error) {
       console.error("Error toggling flag:", error);
@@ -171,16 +113,11 @@ export class SessionService {
     }
   }
 
-  // Complete a session and calculate final results from persisted session data.
   async completeSession(sessionId) {
     this.requireAuth();
-
     try {
       const session = await this.getSession(sessionId);
-      if (session.status === "completed" && session.results) {
-        return session.results;
-      }
-
+      if (session.status === "completed" && session.results) return session.results;
       const answers = Array.isArray(session.answers) ? session.answers : [];
       const total = Array.isArray(session.questions) ? session.questions.length : Number(session.questionCount) || 0;
       const correct = answers.filter(a => a.isCorrect).length;
@@ -188,26 +125,14 @@ export class SessionService {
       const wrong = Math.max(0, attempted - correct);
       const skipped = Math.max(0, total - attempted);
       const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-
+      const results = { correct, wrong, skipped, accuracy, score: correct, total };
       const uid = this.auth.currentUser.uid;
-      const sessionRef = doc(this.db, `users/${uid}/activeSessions/${sessionId}`);
-      const results = {
-        correct,
-        wrong,
-        skipped,
-        accuracy,
-        score: correct,
-        total
-      };
-
-      await updateDoc(sessionRef, {
-        status: "completed",
-        completedAt: serverTimestamp(),
-        results
-      });
-
+      await updateDoc(doc(this.db, `users/${uid}/activeSessions/${sessionId}`), { status: "completed", completedAt: serverTimestamp(), results });
       await this.practiceService.saveSession({
         sessionId,
+        board: session.board || null,
+        classNumber: session.classNumber || null,
+        subjectCode: session.subjectCode || null,
         subject: session.subject,
         chapter: session.chapter,
         difficulty: session.difficulty,
@@ -218,7 +143,6 @@ export class SessionService {
         accuracy,
         score: correct
       });
-
       return results;
     } catch (error) {
       console.error("Error completing session:", error);

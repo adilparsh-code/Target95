@@ -37,19 +37,32 @@ export class PracticeService {
       const conditions = [];
       if (subject) conditions.push(where("subject", "==", subject));
       if (chapter) conditions.push(where("chapter", "==", chapter));
-      if (difficulty) conditions.push(where("difficulty", "==", difficulty));
 
+      // Difficulty is stored inconsistently in older question records. Filter it
+      // client-side so selecting Easy/Medium/Hard works regardless of casing.
+      const requestedDifficulty = difficulty
+        ? String(difficulty).trim().toLowerCase()
+        : "";
+      const fetchLimit = requestedDifficulty ? Math.max(count * 3, 50) : count;
       const q = conditions.length
-        ? query(questionsRef, ...conditions, limit(count))
-        : query(questionsRef, limit(count));
+        ? query(questionsRef, ...conditions, limit(fetchLimit))
+        : query(questionsRef, limit(fetchLimit));
 
       let questions = (await getDocs(q)).docs.map(snapshot => ({
         id: snapshot.id,
         ...snapshot.data()
       }));
 
+      if (requestedDifficulty && requestedDifficulty !== "mixed" && requestedDifficulty !== "all") {
+        questions = questions.filter(question =>
+          String(question.difficulty || "").trim().toLowerCase() === requestedDifficulty
+        );
+      }
+
       questions = this.shuffleArray(questions);
-      if (!difficulty && questions.length) questions = this.balanceDifficulty(questions);
+      if (!requestedDifficulty || requestedDifficulty === "mixed" || requestedDifficulty === "all") {
+        questions = this.balanceDifficulty(questions);
+      }
       return questions.slice(0, count);
     } catch (error) {
       console.error("Error getting questions:", error);
@@ -147,7 +160,7 @@ export class PracticeService {
 
   shuffleArray(array) {
     const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
+    for (let i = newArray.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
@@ -155,9 +168,9 @@ export class PracticeService {
   }
 
   balanceDifficulty(questions) {
-    const easy = questions.filter(q => q.difficulty === "Easy");
-    const medium = questions.filter(q => q.difficulty === "Medium");
-    const hard = questions.filter(q => q.difficulty === "Hard");
+    const easy = questions.filter(q => String(q.difficulty || "").toLowerCase() === "easy");
+    const medium = questions.filter(q => String(q.difficulty || "").toLowerCase() === "medium");
+    const hard = questions.filter(q => String(q.difficulty || "").toLowerCase() === "hard");
     const result = [];
     let e = 0, m = 0, h = 0;
     while (e < easy.length || m < medium.length || h < hard.length) {
@@ -165,6 +178,6 @@ export class PracticeService {
       if (e < easy.length) result.push(easy[e++]);
       if (h < hard.length) result.push(hard[h++]);
     }
-    return result;
+    return result.length ? result : questions;
   }
 }

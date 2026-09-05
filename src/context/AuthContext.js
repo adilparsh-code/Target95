@@ -45,6 +45,27 @@ export function AuthProvider({ children }) {
     });
   }, [buildUser]);
 
+  const establishSession = async (firebaseUser) => {
+    const idToken = await firebaseUser.getIdToken();
+    const response = await fetch("/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ idToken }),
+    });
+
+    if (!response.ok) {
+      let message = "We could not create a secure session. Please try again.";
+      try {
+        const data = await response.json();
+        if (data?.error) message = data.error;
+      } catch {
+        // Keep the safe generic message when the response is not JSON.
+      }
+      throw new Error(message);
+    }
+  };
+
   const login = async (email, password) => {
     try {
       setError(null);
@@ -61,11 +82,20 @@ export function AuthProvider({ children }) {
         setError(message);
         return { success: false, message, requiresVerification: true };
       }
+      await establishSession(credential.user);
       const profileUser = await buildUser(credential.user);
       setUser(profileUser);
       return { success: true, user: profileUser };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      try {
+        const { auth } = getFirebaseInstance();
+        if (auth?.currentUser) await signOut(auth);
+      } catch {
+        // Ignore cleanup failures and return the original safe error.
+      }
+      const message = authError?.message?.startsWith("We could not create a secure session") || authError?.message === "Email verification required."
+        ? authError.message
+        : getAuthMessage(authError.code);
       setError(message);
       return { success: false, message };
     }
@@ -118,6 +148,12 @@ export function AuthProvider({ children }) {
         return { success: false, message };
       }
       const credential = await signInWithPopup(auth, new GoogleAuthProvider());
+      if (!credential.user.emailVerified) {
+        await signOut(auth);
+        const message = "Please use a verified Google account before continuing.";
+        setError(message);
+        return { success: false, message, requiresVerification: true };
+      }
       const profileSnapshot = await getDoc(doc(db, "users", credential.user.uid));
       if (!profileSnapshot.exists()) {
         await setDoc(doc(db, "users", credential.user.uid), {
@@ -132,11 +168,20 @@ export function AuthProvider({ children }) {
           createdAt: serverTimestamp(),
         });
       }
+      await establishSession(credential.user);
       const profileUser = await buildUser(credential.user);
       setUser(profileUser);
       return { success: true, user: profileUser };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      try {
+        const { auth } = getFirebaseInstance();
+        if (auth?.currentUser) await signOut(auth);
+      } catch {
+        // Ignore cleanup failures and return the original safe error.
+      }
+      const message = authError?.message?.startsWith("We could not create a secure session")
+        ? authError.message
+        : getAuthMessage(authError.code);
       setError(message);
       return { success: false, message };
     }
@@ -184,11 +229,14 @@ export function AuthProvider({ children }) {
       if (!auth?.currentUser) return { success: false, message: "No signed-in user." };
       await reload(auth.currentUser);
       if (!auth.currentUser.emailVerified) return { success: false, message: "Your email is still not verified." };
+      await establishSession(auth.currentUser);
       const profileUser = await buildUser(auth.currentUser);
       setUser(profileUser);
       return { success: true, user: profileUser };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      const message = authError?.message?.startsWith("We could not create a secure session")
+        ? authError.message
+        : getAuthMessage(authError.code);
       setError(message);
       return { success: false, message };
     }
@@ -223,6 +271,7 @@ export function AuthProvider({ children }) {
         setError(message);
         return { success: false, message };
       }
+      await fetch("/api/auth/session", { method: "DELETE", credentials: "same-origin" });
       await signOut(auth);
       setUser(null);
       return { success: true };

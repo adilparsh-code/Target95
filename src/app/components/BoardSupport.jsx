@@ -1,79 +1,13 @@
-import { CheckCircle2, BookOpen, Code } from "lucide-react";
+import { CheckCircle2, BookOpen, Code2, ArrowUpRight } from "lucide-react";
 import Container from "./ui/Container";
 
-const cisceFeatures = [
-  "ICSE (Classes 9–10)",
-  "ISC (Classes 11–12)",
-  "Computer Science Learning Platform",
-  "Chapter-wise notes & summaries",
-  "Full-length mock tests",
-  "10 years of previous year questions",
-];
+const cisceFeatures = ["ICSE (Classes 9–10)", "ISC (Classes 11–12)", "Java & Robotics / AI", "Chapter-wise notes & summaries", "Full-length mock tests", "Previous year questions"];
+const cbseFeatures = ["Classes 9–12", "Python Programming", "Computer Science / IP / IT", "Question Bank", "Mock Tests", "AI-assisted learning"];
 
-const cbseFeatures = [
-  "Classes 11–12",
-  "Python Programming",
-  "Question Bank",
-  "Mock Tests",
-  "AI Learning",
-];
+function BoardCard({ name, label, description, features, Icon }) {
+  return <div className="group relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-2xl sm:p-9"><div className="absolute right-0 top-0 h-40 w-40 translate-x-1/4 -translate-y-1/4 rounded-full bg-blue-500/5 blur-3xl transition group-hover:bg-blue-500/10" /><div className="relative flex items-start justify-between gap-4"><div className="flex h-13 w-13 items-center justify-center rounded-2xl bg-slate-950 text-white"><Icon className="h-6 w-6" /></div><span className="rounded-full bg-slate-100 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">{label}</span></div><h3 className="relative mt-7 text-3xl font-black tracking-tight text-slate-950">{name}</h3><p className="relative mt-2 text-sm leading-6 text-slate-500">{description}</p><div className="relative mt-7 grid gap-3 sm:grid-cols-2">{features.map((feature) => <div key={feature} className="flex items-start gap-2 text-sm text-slate-700"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" />{feature}</div>)}</div><div className="relative mt-8 flex items-center gap-2 border-t border-slate-100 pt-5 text-sm font-bold text-blue-700">View learning path <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></div></div>;
+}
 
 export default function BoardSupport() {
-  return (
-    <section className="relative bg-white py-20 md:py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 pointer-events-none" />
-      
-      <Container className="relative">
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-            Complete Board Coverage
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Board Support
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Comprehensive preparation material for all CISCE and CBSE board students
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {/* CISCE Card */}
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-blue-100 hover:shadow-lg transition-shadow duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
-              <BookOpen className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">CISCE</h3>
-            <p className="text-gray-500 mb-6">Council for the Indian School Certificate Examinations</p>
-            
-            <ul className="space-y-4">
-              {cisceFeatures.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* CBSE Card */}
-          <div className="bg-white rounded-3xl p-8 md:p-10 shadow-sm border border-green-100 hover:shadow-lg transition-shadow duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6">
-              <Code className="w-8 h-8 text-white" />
-            </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">CBSE</h3>
-            <p className="text-gray-500 mb-6">Python Programming • Classes 11–12</p>
-            
-            <ul className="space-y-4">
-              {cbseFeatures.map((feature, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700">{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Container>
-    </section>
-  );
+  return <section className="relative overflow-hidden bg-slate-50 py-20 sm:py-24 lg:py-28"><Container className="relative"><div className="mx-auto max-w-3xl text-center"><p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">One platform · two boards</p><h2 className="mt-4 text-4xl font-black tracking-[-0.03em] text-slate-950 sm:text-5xl">Built around your syllabus.</h2><p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg">Choose the board you follow and study with a path that stays relevant to your curriculum.</p></div><div className="mx-auto mt-12 grid max-w-6xl gap-5 lg:grid-cols-2"><BoardCard name="CISCE" label="ICSE + ISC" description="Board-focused Computer Science learning for Classes 9–12." features={cisceFeatures} Icon={BookOpen} /><BoardCard name="CBSE" label="CLASSES 9–12" description="Python, Computer Science, Informatics Practices and IT pathways." features={cbseFeatures} Icon={Code2} /></div></Container></section>;
 }

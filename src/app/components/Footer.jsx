@@ -3,7 +3,7 @@ import Link from "next/link";
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Study", href: "/study" },
-  { label: "Practice", href: "/Java" },
+  { label: "Practice", href: "/practice/setup" },
   { label: "Mock Tests", href: "/mock-test" },
 ];
 

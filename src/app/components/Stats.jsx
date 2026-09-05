@@ -6,45 +6,31 @@ import { javaChapters } from "../data/javaCurriculum";
 import { allJavaChapterQuestions } from "../../lib/javaChapterQuestionBank";
 import { CATEGORIES as mockTestCategories } from "@/lib/mocktest";
 
-const topicCount = javaChapters.reduce(
-  (total, chapter) => total + (Array.isArray(chapter.topics) ? chapter.topics.length : 0),
-  0
-);
-
+const topicCount = javaChapters.reduce((total, chapter) => total + (Array.isArray(chapter.topics) ? chapter.topics.length : 0), 0);
 const stats = [
-  { end: javaChapters.length, suffix: "", title: "Chapters Covered", icon: "📖" },
-  { end: allJavaChapterQuestions.length, suffix: "+", title: "Questions Available", icon: "📝" },
-  { end: topicCount, suffix: "", title: "Topics", icon: "📚" },
-  { end: mockTestCategories.length, suffix: "", title: "Practice Tests", icon: "🏆" },
+  { end: javaChapters.length, suffix: "", title: "Chapters covered", icon: "01" },
+  { end: allJavaChapterQuestions.length, suffix: "+", title: "Questions available", icon: "02" },
+  { end: topicCount, suffix: "", title: "Topics to master", icon: "03" },
+  { end: mockTestCategories.length, suffix: "", title: "Practice tests", icon: "04" },
 ];
 
 export default function Stats() {
   return (
-    <section className="relative bg-white py-20 md:py-28" aria-label="Platform highlights">
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/20 via-white to-white pointer-events-none" />
+    <section className="relative overflow-hidden bg-slate-50 py-16 sm:py-20" aria-label="Platform highlights">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-slate-200" />
       <Container className="relative">
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
-            Trusted Numbers
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Platform by the Numbers
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Straight from our Java Programming content library
-          </p>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Built for serious preparation</p>
+          <h2 className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Everything in one focused platform.</h2>
+          <p className="mt-3 text-base leading-7 text-slate-600">A growing library designed to help students learn, practise and measure progress.</p>
         </div>
-        <div className="grid grid-cols-2 gap-8 md:gap-12 md:grid-cols-4">
+        <div className="mt-10 grid overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((item, index) => (
-            <div key={item.title} className="relative text-center group">
-              {index < stats.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-16 w-px bg-gradient-to-b from-transparent via-gray-200 to-transparent" />
-              )}
-              <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-500">{item.icon}</div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-600 to-indigo-700">
-                <AnimatedCounter end={item.end} suffix={item.suffix} />
-              </h2>
-              <p className="mt-3 text-lg text-gray-600 font-medium">{item.title}</p>
+            <div key={item.title} className="group relative p-6 sm:p-7 lg:p-8">
+              {index < stats.length - 1 && <div className="absolute bottom-6 right-0 top-6 hidden w-px bg-slate-100 lg:block" />}
+              <div className="flex items-center justify-between"><span className="text-xs font-black tracking-[0.18em] text-slate-300">{item.icon}</span><span className="h-2 w-2 rounded-full bg-blue-500 transition group-hover:scale-125" /></div>
+              <div className="mt-8 text-4xl font-black tracking-tight text-slate-950"><AnimatedCounter end={item.end} suffix={item.suffix} /></div>
+              <p className="mt-2 text-sm font-semibold text-slate-500">{item.title}</p>
             </div>
           ))}
         </div>

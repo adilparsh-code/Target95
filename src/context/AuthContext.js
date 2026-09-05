@@ -16,7 +16,17 @@ export function AuthProvider({ children }) {
     const { db } = getFirebaseInstance();
     const profileSnapshot = await getDoc(doc(db, "users", firebaseUser.uid));
     const profile = profileSnapshot.exists() ? profileSnapshot.data() : {};
-    return { uid: firebaseUser.uid, email: firebaseUser.email || "", fullName: profile.fullName || firebaseUser.displayName || "", avatarUrl: profile.avatarUrl || firebaseUser.photoURL || "", role: profile.role || "student", ...profile };
+    return {
+      uid: firebaseUser.uid,
+      email: firebaseUser.email || "",
+      fullName: profile.fullName || firebaseUser.displayName || "",
+      avatarUrl: profile.avatarUrl || firebaseUser.photoURL || "",
+      emailVerified: firebaseUser.emailVerified,
+      role: profile.role || "student",
+      ...profile,
+      // Firebase Authentication is the source of truth for verification.
+      emailVerified: firebaseUser.emailVerified,
+    };
   }, []);
 
   useEffect(() => {
@@ -29,7 +39,7 @@ export function AuthProvider({ children }) {
       try {
         setUser(firebaseUser ? await buildUser(firebaseUser) : null);
       } catch {
-        setUser(firebaseUser ? { uid: firebaseUser.uid, email: firebaseUser.email || "", fullName: firebaseUser.displayName || "", role: "student" } : null);
+        setUser(firebaseUser ? { uid: firebaseUser.uid, email: firebaseUser.email || "", fullName: firebaseUser.displayName || "", emailVerified: firebaseUser.emailVerified, role: "student" } : null);
       } finally {
         setLoading(false);
       }
@@ -45,8 +55,16 @@ export function AuthProvider({ children }) {
         setError(message);
         return { success: false, message };
       }
-      const credential = await signInWithEmailAndPassword(auth, email, password);
-      return { success: true, user: credential.user };
+      const credential = await signInWithEmailAndPassword(auth, email.trim(), password);
+      if (!credential.user.emailVerified) {
+        await signOut(auth);
+        const message = "Please verify your email before logging in.";
+        setError(message);
+        return { success: false, message, requiresVerification: true };
+      }
+      const profileUser = await buildUser(credential.user);
+      setUser(profileUser);
+      return { success: true, user: profileUser };
     } catch (authError) {
       const message = getAuthMessage(authError.code);
       setError(message);
@@ -63,14 +81,24 @@ export function AuthProvider({ children }) {
         setError(message);
         return { success: false, message };
       }
-      const credential = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(credential.user, { displayName: fullName });
-      await setDoc(doc(db, "users", credential.user.uid), { uid: credential.user.uid, email, fullName, role: "student", board: "ICSE", studentClass: "Class 10", createdAt: serverTimestamp() });
+      const normalizedEmail = email.trim().toLowerCase();
+      const credential = await createUserWithEmailAndPassword(auth, normalizedEmail, password);
+      await updateProfile(credential.user, { displayName: String(fullName || "").trim() });
+      await setDoc(doc(db, "users", credential.user.uid), {
+        uid: credential.user.uid,
+        email: normalizedEmail,
+        fullName: String(fullName || "").trim(),
+        role: "student",
+        board: "ICSE",
+        studentClass: "Class 10",
+        emailVerified: false,
+        createdAt: serverTimestamp(),
+      });
       try {
         await sendEmailVerification(credential.user);
       } catch (verificationError) {
         console.error("Verification email could not be sent:", verificationError);
-        return { success: true, user: credential.user, message: "Account created, but we could not send the verification email. Please use resend verification after signing in." };
+        return { success: true, user: credential.user, message: "Account created, but we could not send the verification email. Please resend it before logging in." };
       }
       return { success: true, user: credential.user, message: "Account created. Please verify your email before signing in." };
     } catch (authError) {
@@ -90,8 +118,23 @@ export function AuthProvider({ children }) {
         return { success: false, message };
       }
       const credential = await signInWithPopup(auth, new GoogleAuthProvider());
-      await setDoc(doc(db, "users", credential.user.uid), { uid: credential.user.uid, email: credential.user.email || "", fullName: credential.user.displayName || "", avatarUrl: credential.user.photoURL || "", role: "student", board: "ICSE", studentClass: "Class 10", updatedAt: serverTimestamp() }, { merge: true });
-      return { success: true, user: credential.user };
+      const profileSnapshot = await getDoc(doc(db, "users", credential.user.uid));
+      if (!profileSnapshot.exists()) {
+        await setDoc(doc(db, "users", credential.user.uid), {
+          uid: credential.user.uid,
+          email: credential.user.email || "",
+          fullName: credential.user.displayName || "",
+          avatarUrl: credential.user.photoURL || "",
+          role: "student",
+          board: "ICSE",
+          studentClass: "Class 10",
+          emailVerified: credential.user.emailVerified,
+          createdAt: serverTimestamp(),
+        });
+      }
+      const profileUser = await buildUser(credential.user);
+      setUser(profileUser);
+      return { success: true, user: profileUser };
     } catch (authError) {
       const message = getAuthMessage(authError.code);
       setError(message);
@@ -108,8 +151,26 @@ export function AuthProvider({ children }) {
         setError(message);
         return { success: false, message };
       }
-      await sendPasswordResetEmail(auth, email);
+      await sendPasswordResetEmail(auth, email.trim().toLowerCase());
       return { success: true, message: "Password reset email sent. Check your inbox." };
+    } catch (authError) {
+      const message = getAuthMessage(authError.code);
+      setError(message);
+      return { success: false, message };
+    }
+  };
+
+  const resendVerification = async () => {
+    try {
+      setError(null);
+      const { auth } = getFirebaseInstance();
+      if (!auth?.currentUser) {
+        const message = "Please sign in first to resend the verification email.";
+        setError(message);
+        return { success: false, message };
+      }
+      await sendEmailVerification(auth.currentUser);
+      return { success: true, message: "Verification email sent. Check your inbox." };
     } catch (authError) {
       const message = getAuthMessage(authError.code);
       setError(message);
@@ -147,6 +208,7 @@ export function AuthProvider({ children }) {
         return { success: false, message };
       }
       await signOut(auth);
+      setUser(null);
       return { success: true };
     } catch (authError) {
       const message = getAuthMessage(authError.code);
@@ -155,18 +217,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const value = {
-    user,
-    loading,
-    error,
-    login,
-    register,
-    loginWithGoogle,
-    forgotPassword,
-    updateStudentProfile,
-    logout,
-    clearError: () => setError(null),
-  };
+  const value = { user, loading, error, login, register, loginWithGoogle, forgotPassword, resendVerification, updateStudentProfile, logout, clearError: () => setError(null) };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -176,12 +227,20 @@ export function useAuth() {
 }
 
 function getAuthMessage(code) {
-  const messages = { "auth/email-already-in-use": "This email is already registered.", "auth/invalid-email": "Enter a valid email address.", "auth/invalid-credential": "Incorrect email or password.", "auth/weak-password": "Password must be at least 6 characters.", "auth/operation-not-allowed": "Email/password sign-in is not enabled for this Firebase project.", "auth/popup-closed-by-user": "Google sign-in was cancelled.", "auth/network-request-failed": "Network error. Please try again." };
+  const messages = {
+    "auth/email-already-in-use": "This email is already registered.",
+    "auth/invalid-email": "Enter a valid email address.",
+    "auth/invalid-credential": "Incorrect email or password.",
+    "auth/weak-password": "Password must be at least 6 characters.",
+    "auth/operation-not-allowed": "Email/password sign-in is not enabled for this Firebase project.",
+    "auth/popup-closed-by-user": "Google sign-in was cancelled.",
+    "auth/network-request-failed": "Network error. Please try again.",
+    "auth/too-many-requests": "Too many attempts. Please try again later.",
+    "auth/user-disabled": "This account has been disabled. Please contact support.",
+  };
   return messages[code] || "We could not complete that request. Please try again.";
 }
 
 function getFirebaseConfigurationMessage() {
-  return isFirebaseConfigured
-    ? "Firebase could not be initialized. Please try again."
-    : "Firebase is not configured for this deployment. Please contact support.";
+  return isFirebaseConfigured ? "Firebase could not be initialized. Please try again." : "Firebase is not configured for this deployment. Please contact support.";
 }

@@ -1,0 +1,82 @@
+/**
+ * ICSE/ISC Java visual registry.
+ * SVG visuals are intentionally stored as text so they remain versionable,
+ * accessible, and easy to render through the existing DiagramsSection.
+ */
+
+export const icseJavaVisuals = [
+  {
+    id: "java-platform-stack",
+    chapterSlug: "introduction-to-java",
+    title: "Java Platform Stack: JDK, JRE and JVM",
+    purpose: "Show how Java source code moves through compilation and the runtime stack.",
+    caption: "Java source code is compiled into bytecode, then the JVM executes that bytecode.",
+    alt: "Layered diagram showing Java source code, compiler, bytecode, JRE and JVM.",
+    assetType: "diagram",
+    priority: "Tier 1",
+    sourceSection: "Introduction to Java",
+    path: "/visuals/icse-java/java-platform-stack.svg",
+  },
+  {
+    id: "java-program-life-cycle",
+    chapterSlug: "introduction-to-java",
+    title: "Java Program Life Cycle",
+    purpose: "Visualize source file, compilation, bytecode and execution stages.",
+    caption: "The .java file is compiled to .class bytecode before execution by the JVM.",
+    alt: "Flowchart showing Java file compilation into class bytecode and JVM execution.",
+    assetType: "flowchart",
+    priority: "Tier 1",
+    sourceSection: "Introduction to Java",
+    path: "/visuals/icse-java/java-program-life-cycle.svg",
+  },
+  {
+    id: "java-array-indexing",
+    chapterSlug: "arrays-1d",
+    title: "One-Dimensional Array Indexing",
+    purpose: "Help students connect array positions with zero-based indexes.",
+    caption: "Java arrays start at index 0 and the last valid index is length − 1.",
+    alt: "Array cells labeled with indexes 0 through 4 and sample integer values.",
+    assetType: "memory",
+    priority: "Tier 1",
+    sourceSection: "Arrays",
+    path: "/visuals/icse-java/java-array-indexing.svg",
+  },
+  {
+    id: "java-inheritance-hierarchy",
+    chapterSlug: "inheritance",
+    title: "Java Inheritance Hierarchy",
+    purpose: "Show parent-child relationships and the extends keyword visually.",
+    caption: "A subclass extends a superclass and receives accessible inherited members.",
+    alt: "Class hierarchy showing Person as parent of Student and Student as parent of Topper.",
+    assetType: "diagram",
+    priority: "Tier 1",
+    sourceSection: "Inheritance",
+    path: "/visuals/icse-java/java-inheritance-hierarchy.svg",
+  },
+  {
+    id: "java-loop-flow",
+    chapterSlug: "iterative-statements",
+    title: "Loop Execution Flow",
+    purpose: "Compare entry-controlled and exit-controlled loop flow.",
+    caption: "for and while test the condition before the body; do-while executes the body once first.",
+    alt: "Flowchart comparing condition placement for for, while and do-while loops.",
+    assetType: "flowchart",
+    priority: "Tier 1",
+    sourceSection: "Iterative Statements",
+    path: "/visuals/icse-java/java-loop-flow.svg",
+  },
+  {
+    id: "java-encapsulation-flow",
+    chapterSlug: "encapsulation",
+    title: "Encapsulation: Private Data Through Public Methods",
+    purpose: "Explain controlled access to class state.",
+    caption: "Private fields are accessed through public methods such as getters and setters.",
+    alt: "Class diagram showing private data connected to public getter and setter methods.",
+    assetType: "diagram",
+    priority: "Tier 1",
+    sourceSection: "Encapsulation",
+    path: "/visuals/icse-java/java-encapsulation-flow.svg",
+  },
+];
+
+export default icseJavaVisuals;

@@ -3,52 +3,58 @@
 :root {
   --font-geist-sans: Arial, Helvetica, sans-serif;
   --font-geist-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  --background: #f7f8fa;
+  --background: #f6f7fb;
   --foreground: #172033;
   --card: #ffffff;
   --card-foreground: #172033;
-  --border: #e5e7eb;
-  --muted: #f3f4f6;
+  --border: #e3e7ef;
+  --muted: #f1f3f7;
   --muted-foreground: #667085;
   --primary: #2457d6;
   --primary-foreground: #ffffff;
   --primary-light: #eef4ff;
   --secondary: #5146c9;
   --secondary-foreground: #ffffff;
-  --accent: #d99512;
+  --accent: #c98a12;
   --accent-foreground: #ffffff;
   --destructive: #dc4b4b;
   --destructive-foreground: #ffffff;
-  --input: #d0d5dd;
+  --input: #cfd6e2;
   --ring: #2457d6;
   --success: #198754;
   --warning: #b7791f;
   --danger: #c93636;
   --radius: 0.8rem;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06), 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 18px 48px rgba(15, 23, 42, 0.09), 0 4px 12px rgba(15, 23, 42, 0.04);
 }
 
 .dark {
-  --background: #0c111b;
+  --background: #0b1018;
   --foreground: #edf1f7;
-  --card: #121926;
+  --card: #111925;
   --card-foreground: #edf1f7;
-  --border: #263142;
-  --muted: #151d2b;
+  --border: #253044;
+  --muted: #151d2a;
   --muted-foreground: #9aa6b8;
   --primary: #78a4ff;
   --primary-foreground: #0b1220;
   --primary-light: #152744;
   --secondary: #9992ff;
   --secondary-foreground: #0b1220;
-  --accent: #e7b34b;
+  --accent: #e2ad45;
   --accent-foreground: #1b150a;
   --destructive: #f07878;
   --destructive-foreground: #230b0b;
-  --input: #3a4658;
+  --input: #39465a;
   --ring: #78a4ff;
   --success: #54bd82;
   --warning: #e4bb57;
   --danger: #f07878;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.22);
+  --shadow-lg: 0 22px 60px rgba(0, 0, 0, 0.30);
 }
 
 @theme inline {
@@ -88,12 +94,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light):not(.dark) {
-    --background: #0c111b;
+    --background: #0b1018;
     --foreground: #edf1f7;
-    --card: #121926;
+    --card: #111925;
     --card-foreground: #edf1f7;
-    --border: #263142;
-    --muted: #151d2b;
+    --border: #253044;
+    --muted: #151d2a;
     --muted-foreground: #9aa6b8;
     --primary-light: #152744;
   }
@@ -108,18 +114,49 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-body {
+body,
+body.site-body {
   margin: 0;
   overflow-x: hidden;
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% -5%, rgba(36, 87, 214, 0.055), transparent 28rem),
+    radial-gradient(circle at 92% 4%, rgba(81, 70, 201, 0.045), transparent 30rem),
+    var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
 }
 
+body.site-body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.22;
+  background-image: linear-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 70%);
+}
+
+.dark body.site-body::before {
+  opacity: 0.08;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+}
+
 ::selection { background: rgba(36, 87, 214, 0.16); color: var(--foreground); }
 button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 button { font-family: inherit; }
+
+a { text-underline-offset: 3px; }
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
 
 input, textarea, select {
   border-color: var(--input);
@@ -135,7 +172,7 @@ input:focus, textarea:focus, select:focus {
 *:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 6px; }
 img { max-width: 100%; }
 
-/* Quiet, editorial surface language for legacy screens. */
+/* Legacy Tailwind utility harmonisation: keep old screens visually coherent. */
 .dark .bg-white { background-color: var(--card); }
 .dark .bg-gray-50 { background-color: var(--background); }
 .dark .bg-gray-100 { background-color: var(--muted); }
@@ -149,7 +186,7 @@ main { isolation: isolate; }
 
 ::-webkit-scrollbar { width: 7px; height: 7px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #c8ced8; border-radius: 999px; }
+::-webkit-scrollbar-thumb { background: #c7ced9; border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: #aeb7c5; }
 .dark ::-webkit-scrollbar-thumb { background: #344052; }
 .dark ::-webkit-scrollbar-thumb:hover { background: #46546a; }

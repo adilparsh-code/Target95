@@ -2,6 +2,7 @@
 
 import ChapterSection from "../../ChapterSection";
 import { FileText } from "lucide-react";
+import Image from "next/image";
 
 function MemoryModelVisual() {
   return (
@@ -61,20 +62,40 @@ export default function DiagramsSection({ items, isCompleted }) {
     >
       <div className="grid gap-4">
         {items.map((diagram, idx) => {
-          const isMemoryModel = typeof diagram === "object" && diagram?.type === "memory-model";
+          const isObject = typeof diagram === "object" && diagram !== null;
+          const isMemoryModel = isObject && diagram.type === "memory-model";
+          const isImage = isObject && diagram.type === "image" && diagram.src;
+          const title = isObject ? diagram.title || "Visual note" : "Visual note";
           return (
-            <div
-              key={idx}
+            <article
+              key={diagram.id || idx}
               className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-5 shadow-sm"
             >
               <div className="mb-3 flex items-center gap-3">
                 <span className="grid h-9 w-9 place-items-center rounded-xl bg-blue-600 text-sm font-bold text-white shadow-sm">
                   {idx + 1}
                 </span>
-                <span className="text-sm font-semibold text-slate-800">{isMemoryModel ? diagram.title : "Visual note"}</span>
+                <h3 className="text-sm font-semibold text-slate-800">{title}</h3>
               </div>
 
-              {isMemoryModel ? (
+              {isImage ? (
+                <>
+                  <p className="text-sm leading-6 text-slate-700">{diagram.explanation}</p>
+                  <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
+                    <Image
+                      src={diagram.src}
+                      alt={diagram.alt || title}
+                      width={1200}
+                      height={700}
+                      className="h-auto w-full"
+                      sizes="(max-width: 768px) 100vw, 1200px"
+                    />
+                  </div>
+                  {diagram.caption && (
+                    <p className="mt-3 text-sm leading-6 text-slate-600"><strong>Caption:</strong> {diagram.caption}</p>
+                  )}
+                </>
+              ) : isMemoryModel ? (
                 <>
                   <p className="text-sm leading-6 text-slate-700">{diagram.explanation}</p>
                   <MemoryModelVisual />
@@ -85,9 +106,11 @@ export default function DiagramsSection({ items, isCompleted }) {
                   )}
                 </>
               ) : (
-                <p className="text-sm leading-6 text-slate-700 whitespace-pre-line">{diagram}</p>
+                <p className="text-sm leading-6 text-slate-700 whitespace-pre-line">
+                  {isObject ? diagram.explanation || diagram.caption || "" : diagram}
+                </p>
               )}
-            </div>
+            </article>
           );
         })}
       </div>

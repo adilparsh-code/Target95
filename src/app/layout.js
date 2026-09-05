@@ -48,7 +48,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className="site-body">
         <ThemeProvider>
           <AuthProviderWrapper>
             <OfflineBanner />

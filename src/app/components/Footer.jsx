@@ -1,148 +1,110 @@
 import Link from "next/link";
 
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "Study", href: "/study" },
+  { label: "Practice", href: "/Java" },
+  { label: "Mock Tests", href: "/mock-test" },
+];
+
+const resources = [
+  { label: "Question Bank", href: "/question-bank" },
+  { label: "Daily Challenge", href: "/daily-challenge" },
+  { label: "Rewards", href: "/rewards" },
+  { label: "Dashboard", href: "/dashboard" },
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
+];
+
+const socialLinks = [
+  { platform: "Facebook", href: "https://facebook.com/target95" },
+  { platform: "Twitter", href: "https://twitter.com/target95" },
+  { platform: "Instagram", href: "https://instagram.com/target95" },
+  { platform: "LinkedIn", href: "https://linkedin.com/company/target95" },
+];
+
+function LinkColumn({ title, items }) {
+  return (
+    <div>
+      <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">
+        {title}
+      </h3>
+      <ul className="mt-5 space-y-3">
+        {items.map((item) => (
+          <li key={item.label}>
+            <Link
+              href={item.href}
+              className="group inline-flex items-center text-sm text-slate-400 transition-colors duration-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/70 rounded-md"
+            >
+              <span className="mr-0 w-0 overflow-hidden transition-all duration-200 group-hover:mr-2 group-hover:w-1.5">›</span>
+              {item.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="relative bg-black/80 backdrop-blur-sm overflow-hidden text-white">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/[0.05] via-transparent to-purple-900/[0.05] pointer-events-none" />
-      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:py-24 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand and Tagline */}
-          <div className="md:col-span-2 lg:col-span-1">
-            <h2 className="text-3xl font-bold tracking-tight">🎯 Target95+</h2>
-            <p className="mt-4 text-sm text-gray-400 leading-relaxed">
-              AI Powered Learning Platform for ICSE & ISC Computer Science
-              Students.
+    <footer className="relative overflow-hidden border-t border-slate-800 bg-slate-950 text-white">
+      <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-blue-600/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-600/10 blur-3xl" />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[1.5fr_repeat(4,minmax(0,1fr))]">
+          <div className="max-w-sm">
+            <Link href="/" className="inline-flex items-center gap-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/70">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-600 text-xl shadow-lg shadow-blue-950/40">🎯</span>
+              <span className="text-2xl font-extrabold tracking-tight">Target95<span className="text-blue-400">+</span></span>
+            </Link>
+            <p className="mt-5 text-sm leading-7 text-slate-400">
+              AI-powered learning and exam preparation for ICSE, ISC and CBSE Computer Science students.
             </p>
-            <p className="mt-2 text-sm text-gray-500">
-              From the Heart of the Three Rivers{" "}
-              <span
-                className="inline-block text-red-500"
-                aria-label="love"
-                role="img"
-              >
-                ❤️
-              </span>
+            <p className="mt-4 inline-flex rounded-full border border-slate-800 bg-slate-900/70 px-3 py-1.5 text-xs font-medium text-slate-400">
+              Built with care from the Heart of the Three Rivers ❤️
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">
-              Quick Links
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {[
-                { label: "Home", href: "/" },
-                { label: "Study", href: "/study" },
-                { label: "Practice", href: "/Java" },
-                { label: "Mock Tests", href: "/mock-test" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <LinkColumn title="Quick Links" items={quickLinks} />
+          <LinkColumn title="Resources" items={resources} />
+          <LinkColumn title="Company" items={legalLinks} />
 
-          {/* Resources */}
           <div>
-            <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">
-              Resources
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {[
-                { label: "Question Bank", href: "/question-bank" },
-                { label: "Daily Challenge", href: "/daily-challenge" },
-                { label: "Rewards", href: "/rewards" },
-                { label: "Dashboard", href: "/dashboard" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">
-              Legal
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {[
-                { label: "Privacy Policy", href: "/privacy" },
-                { label: "Terms of Service", href: "/terms" },
-                { label: "About Us", href: "/about" },
-                { label: "Contact Us", href: "/contact" },
-              ].map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact and Social */}
-          <div>
-            <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">
-              Contact
-            </h3>
-            <ul className="mt-4 space-y-3">
-              <li>
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-slate-300">Contact</h3>
+            <a
+              href="mailto:support@target95.com"
+              className="mt-5 inline-block text-sm text-slate-400 transition-colors hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/70 rounded-md"
+            >
+              support@target95.com
+            </a>
+            <h3 className="mt-8 text-xs font-bold uppercase tracking-[0.18em] text-slate-300">Follow us</h3>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {socialLinks.map((item) => (
                 <a
-                  href="mailto:support@target95.com"
-                  className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
+                  key={item.platform}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.platform}
+                  className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-medium text-slate-400 transition-all hover:-translate-y-0.5 hover:border-slate-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/70"
                 >
-                  support@target95.com
+                  {item.platform}
                 </a>
-              </li>
-            </ul>
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold tracking-wider uppercase text-gray-300">
-                Social Media
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {[
-                  { platform: "Facebook", href: "https://facebook.com/target95" },
-                  { platform: "Twitter", href: "https://twitter.com/target95" },
-                  { platform: "Instagram", href: "https://instagram.com/target95" },
-                  { platform: "LinkedIn", href: "https://linkedin.com/company/target95" },
-                ].map((item) => (
-                  <li key={item.platform}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={item.platform}
-                      className="text-gray-400 hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-sm"
-                    >
-                      {item.platform}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-16 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-          <p>&copy; 2026 Target95+. All rights reserved.</p>
+        <div className="mt-14 flex flex-col gap-3 border-t border-slate-800 pt-7 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 Target95+. All rights reserved.</p>
+          <p>Learn smarter. Practice better. Target 95+.</p>
         </div>
       </div>
     </footer>

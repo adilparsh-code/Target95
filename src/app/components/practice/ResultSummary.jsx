@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Card from "../ui/Card";
 import Button from "../ui/Button";
@@ -56,6 +56,19 @@ export default function ResultSummary() {
   const subjectName = session?.subject || "Practice";
   const chapterName = session?.chapter || "All Chapters";
 
+  const practiceRoute = useMemo(() => {
+    if (!session?.board || !session?.classNumber) return "/practice/setup";
+    const params = new URLSearchParams({
+      board: String(session.board).toUpperCase(),
+      class: String(session.classNumber),
+    });
+    if (session.subjectCode) params.set("subjectCode", String(session.subjectCode));
+    if (session.subjectName) params.set("subject", String(session.subjectName));
+    else if (session.subject) params.set("subject", String(session.subject));
+    if (session.chapter && session.chapter !== "all") params.set("chapter", String(session.chapter));
+    return `/practice/setup?${params.toString()}`;
+  }, [session]);
+
   if (loading || performanceLoading) {
     return <div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600" /></div>;
   }
@@ -109,14 +122,14 @@ export default function ResultSummary() {
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Recommended Practice</h3>
           <div className="space-y-4">
             {recommendations.length > 0 ? recommendations.map((rec, index) => (
-              <RecommendationCard key={index} recommendation={rec} onPractice={() => router.push("/practice/setup")} />
+              <RecommendationCard key={index} recommendation={rec} onPractice={() => router.push(practiceRoute)} />
             )) : <Card className="p-6 text-center"><p className="text-gray-500">Keep practicing to unlock personalized recommendations.</p></Card>}
           </div>
         </div>
       </div>
 
       <div className="flex flex-wrap justify-center gap-4">
-        <Button onClick={() => router.push("/practice/setup")} variant="primary">Practice Again</Button>
+        <Button onClick={() => router.push(practiceRoute)} variant="primary">Practice Again</Button>
         <Button onClick={() => router.push("/ai-tutor")} variant="secondary">Ask AI Tutor</Button>
         <Button onClick={() => router.push("/dashboard")} variant="ghost">Go to Dashboard</Button>
       </div>

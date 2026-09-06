@@ -8,7 +8,24 @@ import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
 import { getCBSEMockQuestions } from "../../data/cbse/mock-tests-2026-27";
 import { clearMockTestDraft, evaluateMockTestAnswer, getMockTestDraft, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
 
-const normalizeCBSEQuestion = (question) => ({ ...question, category: `cbse-class-${question.classNumber}`, type: question.questionType === "output-tracing" ? "output" : question.questionType === "case-based" ? "case-study" : question.questionType, chapter: question.topicId, answer: question.correctAnswer, correctAnswer: question.correctAnswer, options: question.options || [] });
+const normalizeCBSEQuestion = (question) => {
+  if (!question || typeof question !== "object") return null;
+  const questionText = String(question.question || "").trim();
+  const correctAnswer = question.correctAnswer ?? question.answer;
+  if (!questionText || correctAnswer === null || correctAnswer === undefined) return null;
+  const rawType = question.questionType || question.type || "mcq";
+  const type = rawType === "output-tracing" ? "output" : rawType === "case-based" ? "case-study" : rawType;
+  return {
+    ...question,
+    category: `cbse-class-${question.classNumber}`,
+    type,
+    chapter: question.topicId || question.chapter || "all-topics",
+    answer: correctAnswer,
+    correctAnswer,
+    difficulty: question.difficulty || "medium",
+    options: Array.isArray(question.options) ? question.options : [],
+  };
+};
 function formatTime(seconds) { const m = Math.floor(seconds / 60); const s = seconds % 60; return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`; }
 function shuffleArray(items) { const result = [...items]; for (let i = result.length - 1; i > 0; i -= 1) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; } return result; }
 
@@ -19,18 +36,23 @@ function MockTestPlayerContent() {
   const classNumber = Number(searchParams.get("class") || category.split("-").pop() || 10);
   const subjectCode = searchParams.get("subjectCode") || ""; const subject = searchParams.get("subject") || "";
   const difficulty = searchParams.get("difficulty") || "medium"; const type = searchParams.get("type") || "mixed";
-  const count = Number(searchParams.get("count") || 10); const chapter = searchParams.get("chapter") || "all";
-  const mode = searchParams.get("mode") || "exam"; const duration = Number(searchParams.get("duration") || 30);
+  const count = Math.max(1, Number(searchParams.get("count") || 10)); const chapter = searchParams.get("chapter") || "all";
+  const mode = searchParams.get("mode") || "exam"; const duration = Math.max(1, Number(searchParams.get("duration") || 30));
   const testConfig = useMemo(() => ({ board, classNumber, subjectCode, subject, category, chapter, difficulty, type, count, mode, duration }), [board, classNumber, subjectCode, subject, category, chapter, difficulty, type, count, mode, duration]);
   const [currentIndex, setCurrentIndex] = useState(0); const [answers, setAnswers] = useState({}); const [bookmarked, setBookmarked] = useState({});
   const [timeLeft, setTimeLeft] = useState(duration * 60); const [showSubmit, setShowSubmit] = useState(false); const [draftReady, setDraftReady] = useState(false); const [submitted, setSubmitted] = useState(false); const [restoredIds, setRestoredIds] = useState(null); const submittedRef = useRef(false);
 
   const questions = useMemo(() => {
-    let pool = board === "CBSE" && subjectCode ? getCBSEMockQuestions(classNumber, subjectCode, 1000).map(normalizeCBSEQuestion) : mockTestQuestions.filter((q) => q.category === category && (difficulty === "all" || q.difficulty === difficulty) && (type === "mixed" || q.type === type) && (chapter === "all" || q.chapter === chapter));
+    let pool;
     if (board === "CBSE") {
+      pool = subjectCode
+        ? getCBSEMockQuestions(classNumber, subjectCode, 1000).map(normalizeCBSEQuestion).filter(Boolean)
+        : [];
       if (difficulty !== "all") pool = pool.filter((q) => q.difficulty === difficulty);
       if (type !== "mixed") pool = pool.filter((q) => q.type === type);
       if (chapter !== "all" && chapter !== "all-topics") pool = pool.filter((q) => q.chapter === chapter);
+    } else {
+      pool = mockTestQuestions.filter((q) => q.category === category && (difficulty === "all" || q.difficulty === difficulty) && (type === "mixed" || q.type === type) && (chapter === "all" || q.chapter === chapter));
     }
     if (Array.isArray(restoredIds) && restoredIds.length) { const byId = new Map(pool.map((q) => [String(q.id), q])); const restored = restoredIds.map((id) => byId.get(String(id))).filter(Boolean); if (restored.length === restoredIds.length) return restored.slice(0, count); }
     return shuffleArray(pool).slice(0, Math.min(count, pool.length));

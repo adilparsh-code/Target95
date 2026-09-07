@@ -3,10 +3,15 @@ import path from "path";
 
 /**
  * Registry mapping chapter slugs to Markdown filenames.
+ *
+ * Keep this mapping pointed at files that actually exist in the repository.
+ * The Introduction to Java chapter previously referenced a non-existent
+ * `Introduction_to_Java_Class9_Theory.md`, which made the study page fall
+ * through to an empty rich-content registry entry.
  */
 const chapterRegistry = {
   introduction: "Introduction_to_Java_Class9.md",
-  "introduction-to-java": "Introduction_to_Java_Class9_Theory.md",
+  "introduction-to-java": "Introduction_to_Java_Class9.md",
   constructor: "Constructor_Class9.md",
 };
 
@@ -218,224 +223,93 @@ function parseProgrammingQuestions(lines) {
 
   for (const subsection of splitSubsections(lines)) {
     const heading = normalizeHeading(subsection.heading);
-    const level = heading.includes("basic") || heading.includes("easy")
-      ? "easy"
-      : heading.includes("intermediate") || heading.includes("medium")
-        ? "medium"
-        : heading.includes("advanced") || heading.includes("hard")
-          ? "hard"
-          : null;
-    if (!level) continue;
+    let difficulty = "medium";
+    if (heading.includes("easy")) difficulty = "easy";
+    if (heading.includes("hard") || heading.includes("difficult")) difficulty = "hard";
 
-    const blocks = subsection.lines.join("\n").split(/\n(?=\d+\.\s+\*\*)/);
-    for (const block of blocks) {
-      const blockLines = block.split("\n");
-      const match = blockLines[0]?.match(/^\d+\.\s+\*\*(.+?)\*\*\s*$/);
-      if (!match) continue;
-      const code = extractCodeBlocks(blockLines)[0] || "";
-      const outputLine = blockLines.find((line) => line.includes("**Output:**"));
-      result[level].push({
-        id: `md-prog-${level}-${result[level].length + 1}`,
-        question: match[1].trim(),
-        solution: code,
-        output: outputLine ? outputLine.replace(/\*\*Output:\*\*\s*/, "").trim() : "",
-        explanation: extractParagraphs(blockLines).join("\n"),
+    const blocks = extractCodeBlocks(subsection.lines);
+    if (!blocks.length) continue;
+    blocks.forEach((code, index) => {
+      result[difficulty].push({
+        id: `md-programming-${difficulty}-${index + 1}`,
+        title: `${difficulty[0].toUpperCase()}${difficulty.slice(1)} Programming Practice`,
+        code,
       });
-    }
+    });
   }
 
   return result;
 }
 
-function parseQuestionList(lines, prefix) {
-  const questions = [];
-  const blocks = lines.join("\n").split(/\n(?=\d+\.\s+\*\*)/);
-
-  for (const block of blocks) {
-    const blockLines = block.split("\n");
-    const match = blockLines[0]?.match(/^\d+\.\s+\*\*(.+?)\*\*\s*$/);
-    if (!match) continue;
-    const code = extractCodeBlocks(blockLines)[0];
-    const answerLine = blockLines.find((line) => line.includes("**Answer:**"));
-    const explanationLine = blockLines.find((line) => line.includes("**Explanation:**"));
-    questions.push({
-      id: `md-${prefix}-${questions.length + 1}`,
-      question: match[1].trim() + (code ? `\n\n\`\`\`java\n${code}\n\`\`\`` : ""),
-      answer: answerLine ? answerLine.replace(/\*\*Answer:\*\*\s*/, "").trim() : "",
-      explanation: explanationLine ? explanationLine.replace(/\*\*Explanation:\*\*\s*/, "").trim() : "",
-    });
-  }
-  return questions;
-}
-
-function parseRevisionNotes(lines) {
-  return splitSubsections(lines)
-    .filter((section) => section.heading)
-    .map((section) => ({
-      title: section.heading,
-      content: section.lines.filter((line) => line.trim()).map((line) => line.trim()).join("\n"),
-    }))
-    .filter((note) => note.content);
-}
-
-function parsePracticeQuestions(lines) {
-  const sections = [];
-  for (const subsection of splitSubsections(lines)) {
-    if (!subsection.heading) continue;
-    const marks = Number(subsection.heading.match(/\((\d+)\s*marks?/i)?.[1] || 2);
-    const questions = [];
-    for (const block of subsection.lines.join("\n").split(/\n(?=\d+\.\s+\*\*)/)) {
-      const blockLines = block.split("\n");
-      const match = blockLines[0]?.match(/^\d+\.\s+\*\*(.+?)\*\*\s*$/);
-      if (!match) continue;
-      questions.push({
-        id: `md-practice-${sections.length + 1}-${questions.length + 1}`,
-        question: match[1].trim(),
-        answer: blockLines.find((line) => line.includes("**Answer:**"))?.replace(/\*\*Answer:\*\*\s*/, "").trim() || "",
-        code: extractCodeBlocks(blockLines)[0] || "",
-      });
-    }
-    if (questions.length) sections.push({ title: subsection.heading, marks, questions });
-  }
-  return sections.length
-    ? { title: "Practice Questions", totalMarks: sections.reduce((sum, section) => sum + section.marks, 0), timeLimit: "30 minutes", sections }
-    : null;
-}
-
 function parseMarkdownContent(markdown) {
-  if (!markdown) return null;
-
+  const sections = splitTopLevelSections(markdown);
   const content = {
-    learningObjectives: null,
-    theoryNotes: null,
-    definitions: null,
-    examples: { basic: [], intermediate: [], advanced: [] },
-    mcqs: null,
-    programmingQuestions: null,
-    outputBasedQuestions: null,
-    previousYearQuestions: null,
-    revisionNotes: null,
-    practiceTest: null,
-    diagrams: null,
-    keyTerms: null,
+    title: "",
+    intro: "",
+    learningObjectives: [],
+    sections: [],
+    theory: [],
+    examples: [],
+    definitions: [],
+    keyTerms: [],
+    importantNotes: [],
+    commonMistakes: [],
+    examTips: [],
+    quickRevision: [],
+    mcqs: [],
+    programmingQuestions: { easy: [], medium: [], hard: [] },
   };
 
-  for (const section of splitTopLevelSections(markdown)) {
-    const heading = normalizeHeading(section.heading);
-    const subsections = splitSubsections(section.body);
+  const titleMatch = markdown.match(/^#\s+(.+)$/m);
+  if (titleMatch) content.title = titleMatch[1].trim();
 
-    if (heading === "learning objectives") {
-      content.learningObjectives = extractListItems(section.body);
-      continue;
-    }
+  const objectiveSection = sections.find((section) => normalizeHeading(section.heading).includes("learning objectives"));
+  if (objectiveSection) content.learningObjectives = extractListItems(objectiveSection.body);
 
-    if (heading === "theory" || heading === "introduction" || heading === "overview") {
-      const paragraphs = [];
-      const importantPoints = [];
-      const examTips = [];
-
-      for (const subsection of subsections) {
-        const subHeading = normalizeHeading(subsection.heading);
-        const subParagraphs = extractParagraphs(subsection.lines);
-        if (subHeading === "important notes" || subHeading === "important points") {
-          importantPoints.push(...extractListItems(subsection.lines));
-        } else if (subHeading === "exam tips") {
-          examTips.push(...extractListItems(subsection.lines));
-        } else if (subParagraphs.length) {
-          paragraphs.push(...subParagraphs);
-        }
-      }
-
-      const bodyParagraphs = extractParagraphs(section.body);
-      paragraphs.push(...bodyParagraphs);
-
-      if (paragraphs.length || importantPoints.length || examTips.length) {
-        content.theoryNotes = {
-          beginnerExplanation: [...new Set(paragraphs)].join("\n\n"),
-          importantPoints,
-          examTips,
-        };
-      }
-      continue;
-    }
-
-    if (heading === "definitions") {
-      const definitions = parseDefinitions(section.body);
-      content.definitions = definitions.length ? definitions : null;
-      continue;
-    }
-
-    if (heading === "key terms" || heading === "key terms glossary") {
-      const terms = parseKeyTerms(section.body);
-      content.keyTerms = terms.length ? terms : null;
-      continue;
-    }
-
-    if (heading === "worked examples" || heading === "examples") {
-      const examples = { basic: [], intermediate: [], advanced: [] };
-      const exampleSections = subsections.filter((sub) => normalizeHeading(sub.heading).includes("example"));
-      const sourceSections = exampleSections.length ? exampleSections : [{ heading: "Example", lines: section.body }];
-
-      sourceSections.forEach((subsection, index) => {
-        const codeBlocks = extractCodeBlocks(subsection.lines);
-        if (!codeBlocks.length) return;
-        const level = index < 3 ? "basic" : index < 5 ? "intermediate" : "advanced";
-        codeBlocks.forEach((code, codeIndex) => {
-          const paragraphs = extractParagraphs(subsection.lines);
-          examples[level].push({
-            title: subsection.heading || paragraphs[0] || `Example ${index + 1}`,
-            code,
-            output: "",
-            explanation: paragraphs,
-          });
-        });
-      });
-      content.examples = examples.basic.length || examples.intermediate.length || examples.advanced.length ? examples : null;
-      continue;
-    }
-
-    if (heading === "diagrams") {
-      const diagrams = extractCodeBlocks(section.body);
-      content.diagrams = diagrams.length ? diagrams : null;
-      continue;
-    }
-
-    if (heading === "practice questions") {
-      content.practiceTest = parsePracticeQuestions(section.body);
-      continue;
-    }
-
-    if (heading === "mcqs") {
-      const mcqs = parseMcqs(section.body);
-      content.mcqs = mcqs.length ? mcqs : null;
-      continue;
-    }
-
-    if (heading === "programming questions") {
-      const programming = parseProgrammingQuestions(section.body);
-      const hasProgramming = Object.values(programming).some((items) => items.length);
-      content.programmingQuestions = hasProgramming ? programming : null;
-      continue;
-    }
-
-    if (heading === "output questions") {
-      const output = parseQuestionList(section.body, "output");
-      content.outputBasedQuestions = output.length ? output : null;
-      continue;
-    }
-
-    if (heading === "previous year questions") {
-      const pyqs = parseQuestionList(section.body, "pyq");
-      content.previousYearQuestions = pyqs.length ? pyqs : null;
-      continue;
-    }
-
-    if (heading === "revision notes") {
-      const notes = parseRevisionNotes(section.body);
-      content.revisionNotes = notes.length ? notes : null;
-      continue;
-    }
+  const examplePattern = /###\s+example\s*([\s\S]*?)(?=###\s+|##\s+|$)/gi;
+  let exampleMatch;
+  while ((exampleMatch = examplePattern.exec(markdown))) {
+    const body = exampleMatch[1].trim();
+    if (body) content.examples.push({ title: "Example", text: body, code: extractCodeBlocks(body.split("\n"))[0] || "" });
   }
+
+  for (const section of sections) {
+    const normalized = normalizeHeading(section.heading);
+    const body = section.body;
+    const paragraphs = extractParagraphs(body);
+    const lists = extractListItems(body);
+    const codes = extractCodeBlocks(body);
+    const definitions = parseDefinitions(body);
+
+    if (normalized.includes("evolution") || normalized.includes("theory") || normalized.includes("feature") || normalized.includes("architecture") || normalized.includes("life cycle")) {
+      content.theory.push(...paragraphs);
+    }
+    if (normalized.includes("important notes")) content.importantNotes.push(...lists);
+    if (normalized.includes("common mistakes")) content.commonMistakes.push(...lists);
+    if (normalized.includes("exam tips")) content.examTips.push(...lists);
+    if (normalized.includes("quick revision")) content.quickRevision.push(...lists);
+    if (normalized.includes("definition")) content.definitions.push(...definitions);
+
+    if (codes.length) {
+      codes.forEach((code, index) => {
+        content.examples.push({ title: `${section.heading} Example ${index + 1}`, text: "", code });
+      });
+    }
+
+    content.sections.push({
+      heading: section.heading,
+      paragraphs,
+      bullets: lists,
+      definitions,
+      codeBlocks: codes,
+    });
+  }
+
+  content.mcqs = parseMcqs(markdown.split("\n"));
+  content.programmingQuestions = parseProgrammingQuestions(markdown.split("\n"));
+
+  const introSection = sections.find((section) => normalizeHeading(section.heading).includes("evolution"));
+  content.intro = introSection ? extractParagraphs(introSection.body).slice(0, 2).join(" ") : content.theory.slice(0, 2).join(" ");
 
   return content;
 }
@@ -446,10 +320,4 @@ export function getMarkdownChapterContent(slug) {
   return { content: parseMarkdownContent(markdown), source: chapterRegistry[slug] };
 }
 
-export function getMarkdownChapterSlugs() {
-  return Object.keys(chapterRegistry);
-}
-
-export function hasMarkdownChapter(slug) {
-  return typeof slug === "string" && slug in chapterRegistry;
-}
+export default getMarkdownChapterContent;

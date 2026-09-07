@@ -7,8 +7,9 @@ export function ThemeProvider({ children, ...props }) {
     <NextThemesProvider
       attribute="class"
       defaultTheme="system"
-      enableSystem={true}
-      disableTransitionOnChange={true}
+      enableSystem
+      enableColorScheme
+      disableTransitionOnChange
       {...props}
     >
       {children}

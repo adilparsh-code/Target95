@@ -1,22 +1,9 @@
 /**
  * Chapter Content Normalization Layer
- * Maps various data sources (studyData, chapter-content, question-bank)
- * into a unified schema for the ChapterContentEngine.
- *
- * Every chapter automatically renders sections from structured data.
- * Future chapters work without creating new React components.
+ * Maps studyData, rich chapter-content, authored Markdown and question-bank
+ * data into the unified schema used by ChapterContentEngine.
  */
 
-/**
- * Normalize a chapter's content into a unified section schema.
- * Each section returns null if no data exists, so the engine
- * only renders sections that have content.
- *
- * @param {Object} chapter - Chapter object with studyData
- * @param {Object} content - Optional rich content from chapter-content
- * @param {Object} questions - Optional question bank data
- * @returns {Object} Normalized sections
- */
 export function getChapterContent(chapter, content = null, questions = null) {
   const sd = chapter?.studyData || {};
 
@@ -24,35 +11,33 @@ export function getChapterContent(chapter, content = null, questions = null) {
     learningObjectives: normalizeList(sd.learningObjectives) || normalizeList(content?.learningObjectives),
     theory: normalizeTheory(sd, content),
     definitions: normalizeList(sd.definitions) || normalizeList(content?.definitions),
-    keyTerms: normalizeList(sd.keyTerms) || normalizeList(content?.keyTerms),
+    keyTerms: normalizeKeyTerms(sd, content),
     examples: normalizeExamples(sd.examples, content?.examples),
     diagrams: normalizeDiagrams(sd.diagrams, content),
     practice: normalizePractice(content?.practiceTest || content?.practice),
     mcqs: normalizeMcqs(questions?.mcqs, content?.mcqs),
-    output: normalizeOutput(questions?.outputQuestions, questions?.outputBasedQuestions, sd.outputBasedQuestions),
+    output: normalizeOutput(
+      questions?.outputQuestions,
+      questions?.outputBasedQuestions,
+      content?.outputBasedQuestions,
+      sd.outputBasedQuestions
+    ),
     programming: normalizeProgramming(questions?.programmingQuestions, content?.programmingQuestions),
     pyqs: normalizePyqs(content?.previousYearQuestions),
-    revisionNotes: normalizeRevisionNotes(content?.revisionNotes, sd.quickRevision || content?.memoryTricks),
+    revisionNotes: normalizeRevisionNotes(
+      content?.revisionNotes,
+      sd.quickRevision || content?.quickRevision || content?.memoryTricks
+    ),
   };
 }
 
-/**
- * Check if a chapter has any content for a given section.
- * Used to filter which sections render.
- */
 export function hasSectionContent(section) {
   if (!section) return false;
   if (Array.isArray(section)) return section.length > 0;
-  if (typeof section === "object") {
-    return Object.keys(section).length > 0;
-  }
+  if (typeof section === "object") return Object.keys(section).length > 0;
   return !!section;
 }
 
-/**
- * Normalize a list of strings/objects.
- * Handles both array and single-value formats.
- */
 function normalizeList(data) {
   if (!data) return null;
   if (Array.isArray(data)) return data.length > 0 ? data : null;
@@ -60,10 +45,25 @@ function normalizeList(data) {
   return null;
 }
 
-/**
- * Normalize diagrams and automatically promote rich memory-model diagrams
- * into the visual section when a chapter has not supplied a dedicated list.
- */
+function normalizeKeyTerms(sd, content) {
+  const explicit = normalizeList(sd.keyTerms) || normalizeList(content?.keyTerms);
+  if (explicit) return explicit;
+
+  // Authored Markdown stores terminology in its section tables. The Markdown
+  // parser exposes those sections, so only derive terms from explicitly named
+  // terminology sections rather than guessing from unrelated tables.
+  if (Array.isArray(content?.sections)) {
+    const terms = [];
+    content.sections.forEach((section) => {
+      const heading = String(section.heading || "").toLowerCase();
+      if (!heading.includes("key term") && !heading.includes("terminology")) return;
+      if (Array.isArray(section.keyTerms)) terms.push(...section.keyTerms);
+    });
+    if (terms.length) return terms;
+  }
+  return null;
+}
+
 function normalizeDiagrams(sdDiagrams, content) {
   const explicit = normalizeList(sdDiagrams) || normalizeList(content?.diagrams);
   if (explicit) return explicit;
@@ -78,94 +78,91 @@ function normalizeDiagrams(sdDiagrams, content) {
       examNote: memoryModel.examNote || "",
     }];
   }
-
   return null;
 }
 
-/**
- * Normalize theory content from multiple sources.
- * Prefers rich content from chapter-content, falls back to studyData.
- */
 function normalizeTheory(sd, content) {
-  // Rich theory from chapter-content
-  if (content?.theoryNotes) {
-    const theory = content.theoryNotes;
-    const sections = [];
+  const sections = [];
 
-    if (theory.beginnerExplanation) {
-      sections.push({ type: "paragraph", text: theory.beginnerExplanation });
-    }
-    if (theory.importantPoints?.length) {
-      sections.push({ type: "list", title: "Important Points", items: theory.importantPoints });
-    }
-    if (theory.memoryTricks?.length) {
-      sections.push({ type: "list", title: "Memory Tricks", items: theory.memoryTricks });
-    }
-    if (theory.examTips?.length) {
-      sections.push({ type: "list", title: "Exam Tips", items: theory.examTips });
-    }
-
-    if (sections.length > 0) return sections;
+  // Rich chapter-content contract.
+  const theory = content?.theoryNotes;
+  if (theory) {
+    if (theory.beginnerExplanation) sections.push({ type: "paragraph", text: theory.beginnerExplanation });
+    if (theory.importantPoints?.length) sections.push({ type: "list", title: "Important Points", items: theory.importantPoints });
+    if (theory.memoryTricks?.length) sections.push({ type: "list", title: "Memory Tricks", items: theory.memoryTricks });
+    if (theory.examTips?.length) sections.push({ type: "list", title: "Exam Tips", items: theory.examTips });
   }
 
-  // Also support legacy/simple rich-content shapes.
-  if (typeof content?.theory === "string" && content.theory.trim()) {
-    return [{ type: "paragraph", text: content.theory }];
-  }
-  if (content?.introduction?.description) {
-    return [{ type: "paragraph", text: content.introduction.description }];
-  }
-  // Fallback to studyData concepts
-  if (sd.concepts?.length) {
-    return sd.concepts.map((concept) => ({ type: "paragraph", text: concept }));
+  // Authored Markdown parser shape: theory is an array of real paragraphs.
+  if (Array.isArray(content?.theory)) {
+    content.theory.forEach((text) => {
+      if (typeof text === "string" && text.trim()) sections.push({ type: "paragraph", text: text.trim() });
+    });
+  } else if (typeof content?.theory === "string" && content.theory.trim()) {
+    sections.push({ type: "paragraph", text: content.theory });
   }
 
+  // Preserve authored supporting material instead of replacing it with filler.
+  const supportingLists = [
+    ["Important Notes", content?.importantNotes],
+    ["Common Mistakes", content?.commonMistakes],
+    ["Exam Tips", content?.examTips],
+  ];
+  supportingLists.forEach(([title, items]) => {
+    if (Array.isArray(items) && items.length) sections.push({ type: "list", title, items });
+  });
+
+  if (content?.introduction?.description) sections.push({ type: "paragraph", text: content.introduction.description });
+
+  if (sections.length) return sections;
+  if (sd.concepts?.length) return sd.concepts.map((concept) => ({ type: "paragraph", text: concept }));
   return null;
 }
 
-/**
- * Normalize examples from multiple sources.
- * Handles both the studyData format and the chapter-content format.
- */
 function normalizeExamples(sdExamples, contentExamples) {
   const examples = [];
 
-  // From chapter-content (rich format with basic/intermediate/advanced)
-  if (contentExamples) {
-    const levels = ["basic", "intermediate", "advanced"];
-    levels.forEach((level) => {
-      if (contentExamples[level]?.length) {
-        contentExamples[level].forEach((ex) => {
-          examples.push({
-            title: ex.title,
-            code: ex.code,
-            output: ex.output,
-            explanation: ex.explanation,
-            level,
-          });
-        });
-      }
-    });
-  }
-
-  // From studyData (simple format)
-  if (sdExamples?.length) {
-    sdExamples.forEach((ex) => {
+  if (Array.isArray(contentExamples)) {
+    contentExamples.forEach((ex, index) => {
+      if (!ex || typeof ex !== "object") return;
       examples.push({
-        title: ex.title,
-        code: ex.code,
-        output: ex.output,
-        explanation: ex.explanation,
+        title: ex.title || `Example ${index + 1}`,
+        code: ex.code || "",
+        output: ex.output || "",
+        explanation: ex.explanation || ex.text || "",
+        level: ex.level,
+      });
+    });
+  } else if (contentExamples && typeof contentExamples === "object") {
+    ["basic", "intermediate", "advanced"].forEach((level) => {
+      if (!Array.isArray(contentExamples[level])) return;
+      contentExamples[level].forEach((ex, index) => {
+        examples.push({
+          title: ex.title || `${level[0].toUpperCase()}${level.slice(1)} Example ${index + 1}`,
+          code: ex.code,
+          output: ex.output,
+          explanation: ex.explanation,
+          level,
+        });
       });
     });
   }
 
-  return examples.length > 0 ? examples : null;
+  if (Array.isArray(sdExamples)) {
+    sdExamples.forEach((ex, index) => {
+      if (!ex || typeof ex !== "object") return;
+      examples.push({
+        title: ex.title || `Example ${index + 1}`,
+        code: ex.code,
+        output: ex.output,
+        explanation: ex.explanation || ex.text,
+      });
+    });
+  }
+
+  return examples.length ? examples : null;
 }
 
-/**
- * Normalize practice test content.
- */
 function normalizePractice(practiceTest) {
   if (!practiceTest) return null;
   return {
@@ -176,178 +173,68 @@ function normalizePractice(practiceTest) {
   };
 }
 
-/**
- * Normalize MCQs from question-bank or chapter-content.
- */
 function normalizeMcqs(questionBankMcqs, contentMcqs) {
   const mcqs = [];
-
-  // From question-bank (preferred)
   if (questionBankMcqs?.length) {
-    questionBankMcqs.forEach((q) => {
-      mcqs.push({
-        id: q.id,
-        question: q.question,
-        options: q.options,
-        answer: q.correctAnswer,
-        explanation: q.explanation,
-        difficulty: q.difficulty,
-        marks: q.marks,
-      });
-    });
+    questionBankMcqs.forEach((q) => mcqs.push({ id: q.id, question: q.question, options: q.options, answer: q.correctAnswer, explanation: q.explanation, difficulty: q.difficulty, marks: q.marks }));
   }
-
-  // From chapter-content
   if (contentMcqs?.length) {
-    contentMcqs.forEach((q) => {
-      mcqs.push({
-        id: q.id,
-        question: q.question,
-        options: q.options,
-        answer: q.answer,
-        explanation: q.explanation,
-      });
-    });
+    contentMcqs.forEach((q) => mcqs.push({ id: q.id, question: q.question, options: q.options, answer: q.answer, explanation: q.explanation }));
   }
-
-  return mcqs.length > 0 ? mcqs : null;
+  return mcqs.length ? mcqs : null;
 }
 
-/**
- * Normalize programming questions from question-bank or chapter-content.
- */
 function normalizeProgramming(questionBankProgramming, contentProgramming) {
   const programming = [];
-
-  // From question-bank (preferred)
   if (questionBankProgramming?.length) {
-    questionBankProgramming.forEach((q) => {
-      programming.push({
-        id: q.id,
-        question: q.problemStatement,
-        solution: q.solution,
-        explanation: q.solutionExplanation,
-        output: q.output,
-        difficulty: q.difficulty,
-        marks: q.marks,
-        input: q.input,
-        constraints: q.constraints,
-        logic: q.logic,
-      });
-    });
+    questionBankProgramming.forEach((q) => programming.push({
+      id: q.id, question: q.problemStatement, solution: q.solution, explanation: q.solutionExplanation,
+      output: q.output, difficulty: q.difficulty, marks: q.marks, input: q.input, constraints: q.constraints, logic: q.logic,
+    }));
   }
-
-  // From chapter-content (grouped by difficulty)
   if (contentProgramming) {
-    const levels = ["easy", "medium", "hard"];
-    levels.forEach((level) => {
-      if (contentProgramming[level]?.length) {
-        contentProgramming[level].forEach((q) => {
-          programming.push({
-            id: q.id,
-            question: q.question,
-            solution: q.solution,
-            output: q.output,
-            difficulty: level,
-          });
-        });
-      }
+    ["easy", "medium", "hard"].forEach((level) => {
+      if (!Array.isArray(contentProgramming[level])) return;
+      contentProgramming[level].forEach((q) => programming.push({ id: q.id, question: q.question, solution: q.solution, output: q.output, difficulty: level }));
     });
   }
-
-  return programming.length > 0 ? programming : null;
+  return programming.length ? programming : null;
 }
 
-/**
- * Normalize previous year questions.
- */
 function normalizePyqs(previousYearQuestions) {
   if (!previousYearQuestions?.length) return null;
-  return previousYearQuestions.map((q) => ({
-    id: q.id,
-    question: q.question,
-    answer: q.answer,
-    explanation: q.explanation,
-  }));
+  return previousYearQuestions.map((q) => ({ id: q.id, question: q.question, answer: q.answer, explanation: q.explanation }));
 }
 
-/**
- * Normalize output-based questions from question-bank, chapter-content, or studyData.
- */
 function normalizeOutput(questionBankOutput, contentOutput, richContentOutput, studyDataOutput) {
   const output = [];
-
-  // From question-bank (preferred)
-  if (questionBankOutput?.length) {
-    questionBankOutput.forEach((q) => {
-      output.push({
-        id: q.id,
-        question: q.question || q.prompt,
-        answer: q.answer,
-        explanation: q.explanation,
-        difficulty: q.difficulty,
-        marks: q.marks,
-        estimatedTime: q.estimatedTime,
-      });
-    });
-  }
-
-  // From chapter-content
-  if (contentOutput?.length) {
-    contentOutput.forEach((q) => {
-      output.push({
-        id: q.id,
-        question: q.question || q.prompt,
-        answer: q.answer,
-        explanation: q.explanation,
-        difficulty: q.difficulty,
-        marks: q.marks,
-      });
-    });
-  }
-
-  // From studyData
+  [questionBankOutput, contentOutput, richContentOutput].forEach((items) => {
+    if (!items?.length) return;
+    items.forEach((q) => output.push({
+      id: q.id, question: q.question || q.prompt, answer: q.answer, explanation: q.explanation,
+      difficulty: q.difficulty, marks: q.marks, estimatedTime: q.estimatedTime,
+    }));
+  });
   if (studyDataOutput?.length) {
-    studyDataOutput.forEach((q, idx) => {
-      output.push({
-        id: `study-output-${idx}`,
-        question: typeof q === "string" ? q : q.question || q.prompt || "",
-        answer: typeof q === "string" ? "" : q.answer,
-        explanation: typeof q === "string" ? "" : q.explanation,
-        difficulty: "Medium",
-        marks: 2,
-      });
-    });
+    studyDataOutput.forEach((q, idx) => output.push({
+      id: `study-output-${idx}`,
+      question: typeof q === "string" ? q : q.question || q.prompt || "",
+      answer: typeof q === "string" ? "" : q.answer,
+      explanation: typeof q === "string" ? "" : q.explanation,
+      difficulty: "Medium",
+      marks: 2,
+    }));
   }
-
-  return output.length > 0 ? output : null;
+  return output.length ? output : null;
 }
 
-/**
- * Normalize revision notes from chapter-content or studyData.
- */
 function normalizeRevisionNotes(contentRevisionNotes, quickRevision) {
   const notes = [];
-
-  // From chapter-content (rich format)
   if (contentRevisionNotes?.length) {
-    contentRevisionNotes.forEach((note) => {
-      notes.push({
-        title: note.title,
-        content: note.content,
-      });
-    });
+    contentRevisionNotes.forEach((note) => notes.push({ title: note.title, content: note.content }));
   }
-
-  // From studyData quickRevision
   if (quickRevision?.length) {
-    quickRevision.forEach((item) => {
-      notes.push({
-        title: "Quick Revision",
-        content: item,
-      });
-    });
+    quickRevision.forEach((item) => notes.push({ title: "Quick Revision", content: item }));
   }
-
-  return notes.length > 0 ? notes : null;
+  return notes.length ? notes : null;
 }

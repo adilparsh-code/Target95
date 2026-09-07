@@ -1,6 +1,7 @@
 import "./globals.css";
 import AuthProviderWrapper from "./components/AuthProviderWrapper";
 import { ThemeProvider } from "./components/ThemeProvider";
+import AdaptiveLight from "./components/AdaptiveLight";
 import PWAPrompt from "./components/PWAPrompt";
 import OfflineBanner from "./components/OfflineBanner";
 import IOSInstallPrompt from "./components/IOSInstallPrompt";
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body className="site-body">
         <ThemeProvider>
+          <AdaptiveLight />
           <AuthProviderWrapper>
             <OfflineBanner />
             {children}

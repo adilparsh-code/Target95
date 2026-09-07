@@ -1,88 +1,31 @@
 /**
  * CBSE 2026-27 learning-content index.
- *
  * Keeps unit -> learning outcomes/theory/practical navigation reusable.
- *
- * Missing academic content stays empty and is hidden by consumers.
- * Generic filler text must never be presented as syllabus-specific
- * teaching content.
+ * Missing academic content stays empty and is hidden by consumers; generic
+ * filler text must never be presented as syllabus-specific teaching content.
  */
+import { getCBSECurriculum } from './curriculum-2026-27';
 
-import { getCBSECurriculum } from "./curriculum-2026-27";
+const normalizeUnit = (unit) => ({
+  id: unit.id,
+  code: unit.code,
+  name: String(unit?.name || '').trim(),
+  learningOutcomes: Array.isArray(unit?.learningOutcomes) ? unit.learningOutcomes : [],
+  theory: Array.isArray(unit?.theory) ? unit.theory : [],
+  practicalActivities: Array.isArray(unit?.practicalActivities) ? unit.practicalActivities : [],
+  chapters: Array.isArray(unit?.chapters) ? unit.chapters : [],
+});
 
-/**
- * Safely normalize an array field.
- *
- * This prevents malformed or missing curriculum data from causing
- * runtime errors in consuming components.
- */
-const normalizeArray = (value) => {
-  return Array.isArray(value) ? value : [];
-};
-
-/**
- * Normalize a single curriculum unit into the shape expected
- * by learning-content consumers.
- */
-const normalizeUnit = (unit) => {
-  if (!unit || typeof unit !== "object") {
-    return null;
-  }
-
-  return {
-    id: unit.id ?? "",
-    code: unit.code ?? "",
-    name: String(unit.name ?? "").trim(),
-
-    learningOutcomes: normalizeArray(unit.learningOutcomes),
-    theory: normalizeArray(unit.theory),
-    practicalActivities: normalizeArray(unit.practicalActivities),
-    chapters: normalizeArray(unit.chapters),
-  };
-};
-
-/**
- * Return reusable CBSE learning content for a class and subject.
- *
- * @param {number|string} classNumber
- * @param {string} subjectCode
- * @returns {Array<object>}
- */
 export const getCBSELearningContent = (classNumber, subjectCode) => {
-  const normalizedClassNumber = Number(classNumber);
-  const normalizedSubjectCode = String(subjectCode ?? "").trim();
+  const subject = getCBSECurriculum(Number(classNumber), String(subjectCode));
+  if (!subject) return null;
 
-  // Invalid input should never reach the curriculum lookup.
-  if (
-    !Number.isFinite(normalizedClassNumber) ||
-    !normalizedSubjectCode
-  ) {
-    return [];
-  }
+  const units = [
+    ...(subject.parts?.partA?.units || []),
+    ...(subject.parts?.partB?.units || []),
+  ];
 
-  const subject = getCBSECurriculum(
-    normalizedClassNumber,
-    normalizedSubjectCode,
-  );
-
-  if (!subject || typeof subject !== "object") {
-    return [];
-  }
-
-  const partAUnits = normalizeArray(
-    subject.parts?.partA?.units,
-  );
-
-  const partBUnits = normalizeArray(
-    subject.parts?.partB?.units,
-  );
-
-  const units = [...partAUnits, ...partBUnits];
-
-  return units
-    .map(normalizeUnit)
-    .filter(Boolean);
+  return units.map(normalizeUnit);
 };
 
 export default getCBSELearningContent;
-

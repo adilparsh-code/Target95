@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -8,165 +7,96 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Copy, Check } from "lucide-react";
 
-export default function ExamplesSection({
-  items = [],
-  isCompleted = false,
-}) {
+export default function ExamplesSection({ items, isCompleted }) {
   const [copiedCode, setCopiedCode] = useState(null);
-
-  if (!Array.isArray(items) || items.length === 0) {
-    return null;
-  }
+  if (!items || items.length === 0) return null;
 
   const copyCode = async (code, id) => {
-    if (!code || typeof code !== "string") {
-      return;
-    }
-
-    try {
-      if (!navigator?.clipboard?.writeText) {
-        console.error("Clipboard API is not available.");
-        return;
-      }
-
-      await navigator.clipboard.writeText(code);
-      setCopiedCode(id);
-
-      window.setTimeout(() => {
-        setCopiedCode(null);
-      }, 2000);
-    } catch (error) {
-      console.error("Failed to copy code:", error);
-      setCopiedCode(null);
-    }
+    await navigator.clipboard.writeText(code);
+    setCopiedCode(id);
+    setTimeout(() => setCopiedCode(null), 2000);
   };
 
   return (
     <ChapterSection
       id="examples"
       title="Examples"
-      icon={<BeakerIcon className="h-5 w-5" />}
+      icon={<BeakerIcon className="w-5 h-5" />}
       estimatedTime={20}
       isCompleted={isCompleted}
     >
       <div className="space-y-4">
         {items.map((example, idx) => {
-          if (!example || typeof example !== "object") {
-            return null;
-          }
-
-          const exampleId =
-            example.id ?? example.slug ?? `example-${idx}`;
-
+          // Chapter data historically used both a single explanation string and
+          // an array of explanation steps. Normalize both shapes at the UI edge
+          // so one legacy record cannot crash the entire production build.
           const explanationSteps = Array.isArray(example.explanation)
-            ? example.explanation.filter(
-                (step) =>
-                  typeof step === "string" && step.trim().length > 0,
-              )
-            : typeof example.explanation === "string" &&
-                example.explanation.trim().length > 0
+            ? example.explanation
+            : example.explanation
               ? [example.explanation]
               : [];
 
-          const hasCode =
-            typeof example.code === "string" &&
-            example.code.trim().length > 0;
-
-          const hasOutput =
-            example.output !== undefined &&
-            example.output !== null &&
-            String(example.output).trim().length > 0;
-
           return (
             <div
-              key={exampleId}
-              className="overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800"
+              key={idx}
+              className="rounded-2xl border border-gray-200 bg-white overflow-hidden dark:border-gray-700 dark:bg-gray-800"
             >
-              <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3 dark:border-gray-700">
+              <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {example.title || `Example ${idx + 1}`}
+                  {example.title}
                 </h3>
-
                 {example.level && (
-                  <span className="text-xs font-medium uppercase text-gray-500 dark:text-gray-400">
+                  <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">
                     {example.level}
                   </span>
                 )}
               </div>
-
-              {hasCode && (
+              {example.code && (
                 <div className="relative">
                   <button
-                    type="button"
-                    onClick={() => copyCode(example.code, exampleId)}
-                    className="absolute right-3 top-3 z-10 rounded-lg bg-gray-800/50 p-2 transition-colors hover:bg-gray-700/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    title={
-                      copiedCode === exampleId
-                        ? "Code copied"
-                        : "Copy code"
-                    }
-                    aria-label={
-                      copiedCode === exampleId
-                        ? "Code copied"
-                        : "Copy code"
-                    }
+                    onClick={() => copyCode(example.code, idx)}
+                    className="absolute top-3 right-3 p-2 bg-gray-800/50 hover:bg-gray-700/50 rounded-lg transition-colors z-10"
+                    title="Copy code"
                   >
-                    {copiedCode === exampleId ? (
-                      <Check
-                        className="h-4 w-4 text-green-400"
-                        aria-hidden="true"
-                      />
+                    {copiedCode === idx ? (
+                      <Check className="w-4 h-4 text-green-400" />
                     ) : (
-                      <Copy
-                        className="h-4 w-4 text-gray-400"
-                        aria-hidden="true"
-                      />
+                      <Copy className="w-4 h-4 text-gray-400" />
                     )}
                   </button>
-
                   <SyntaxHighlighter
                     language="java"
                     style={a11yDark}
                     showLineNumbers
-                    customStyle={{
-                      margin: 0,
-                      fontSize: "0.8rem",
-                    }}
+                    customStyle={{ margin: 0, fontSize: "0.8rem" }}
                   >
                     {example.code}
                   </SyntaxHighlighter>
                 </div>
               )}
-
-              {hasOutput && (
-                <div className="border-t border-gray-100 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-900/50">
-                  <span className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              {example.output && (
+                <div className="px-4 py-3 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-100 dark:border-gray-700">
+                  <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
                     Output:
                   </span>
-
-                  <pre className="mt-1 rounded bg-green-50 px-3 py-2 font-mono text-sm text-green-600 dark:bg-green-900/20 dark:text-green-400">
-                    {String(example.output)}
+                  <pre className="mt-1 text-sm text-green-600 dark:text-green-400 font-mono bg-green-50 dark:bg-green-900/20 px-3 py-2 rounded">
+                    {example.output}
                   </pre>
                 </div>
               )}
-
               {explanationSteps.length > 0 && (
-                <div className="border-t border-gray-100 bg-gray-50 px-4 py-3 dark:border-gray-700 dark:bg-gray-900/50">
-                  <h4 className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                <div className="px-4 py-3 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-100 dark:border-gray-700">
+                  <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                     Explanation:
                   </h4>
-
                   <ol className="space-y-1.5">
                     {explanationSteps.map((step, stepIdx) => (
                       <li
-                        key={`${exampleId}-step-${stepIdx}`}
-                        className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400"
+                        key={stepIdx}
+                        className="text-sm text-gray-600 dark:text-gray-400 flex items-start gap-2"
                       >
-                        <span className="text-gray-400 dark:text-gray-500">
-                          {stepIdx + 1}.
-                        </span>
-
-                        <span>{step}</span>
+                        <span className="text-gray-400 dark:text-gray-500">{stepIdx + 1}.</span>
+                        {step}
                       </li>
                     ))}
                   </ol>
@@ -179,4 +109,3 @@ export default function ExamplesSection({
     </ChapterSection>
   );
 }
-

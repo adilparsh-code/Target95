@@ -1,22 +1,20 @@
 /**
  * CBSE 2026-27 learning-content index.
  * Keeps unit -> learning outcomes/theory/practical navigation reusable.
- * Learner-facing consumers never receive empty arrays when a unit has a usable title.
+ * Missing academic content stays empty and is hidden by consumers; generic
+ * filler text must never be presented as syllabus-specific teaching content.
  */
 import { getCBSECurriculum } from './curriculum-2026-27';
 
-const normalizeUnit = (unit) => {
-  const name = String(unit?.name || '').trim();
-  return {
-    id: unit.id,
-    code: unit.code,
-    name,
-    learningOutcomes: unit.learningOutcomes?.length ? unit.learningOutcomes : (name ? [`Explain and apply the prescribed ${name.toLowerCase()} concepts.`] : []),
-    theory: unit.theory?.length ? unit.theory : (name ? [name, 'Core concepts, terminology and applications'] : []),
-    practicalActivities: unit.practicalActivities?.length ? unit.practicalActivities : (name ? [`Complete a guided practical activity on ${name.toLowerCase()}.`] : []),
-    chapters: unit.chapters?.length ? unit.chapters : [],
-  };
-};
+const normalizeUnit = (unit) => ({
+  id: unit.id,
+  code: unit.code,
+  name: String(unit?.name || '').trim(),
+  learningOutcomes: Array.isArray(unit?.learningOutcomes) ? unit.learningOutcomes : [],
+  theory: Array.isArray(unit?.theory) ? unit.theory : [],
+  practicalActivities: Array.isArray(unit?.practicalActivities) ? unit.practicalActivities : [],
+  chapters: Array.isArray(unit?.chapters) ? unit.chapters : [],
+});
 
 export const getCBSELearningContent = (classNumber, subjectCode) => {
   const subject = getCBSECurriculum(Number(classNumber), String(subjectCode));

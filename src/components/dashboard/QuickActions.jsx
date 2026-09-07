@@ -7,7 +7,7 @@ const quickActions = [
   { id: 1, title: "Practice Questions", description: "Solve targeted questions", icon: FileQuestion, href: "/question-bank", color: "bg-blue-50 text-blue-700", comingSoon: false },
   { id: 2, title: "Mock Tests", description: "Take a timed exam", icon: BookOpen, href: "/mock-test", color: "bg-emerald-50 text-emerald-700", comingSoon: false },
   { id: 3, title: "Bookmarks", description: "Review saved questions", icon: Bookmark, href: "/bookmarks", color: "bg-violet-50 text-violet-700", comingSoon: false },
-  { id: 4, title: "AI Tutor", description: "Get personalized help", icon: Bot, href: "#", color: "bg-amber-50 text-amber-700", comingSoon: true },
+  { id: 4, title: "AI Tutor", description: "Get personalized help", icon: Bot, href: "/ai-tutor", color: "bg-amber-50 text-amber-700", comingSoon: false },
   { id: 5, title: "Leaderboard", description: "See your ranking", icon: Trophy, href: "#", color: "bg-rose-50 text-rose-700", comingSoon: true },
 ];
 

@@ -3,7 +3,7 @@
 import ChapterSection from "../../ChapterSection";
 import { FileText } from "lucide-react";
 import Image from "next/image";
-import icseJavaVisualRegistry from "../../../data/icseJavaVisualRegistry";
+import icseJavaVisualRegistry from "../../../data/chapter-content/visuals/icseJavaVisualRegistry";
 
 function MemoryModelVisual() {
   return (
@@ -50,22 +50,35 @@ function MemoryModelVisual() {
   );
 }
 
+function getRegisteredJavaVisuals(chapterSlug) {
+  if (!chapterSlug || !Array.isArray(icseJavaVisualRegistry)) return [];
+
+  return icseJavaVisualRegistry
+    .filter((visual) => visual?.chapterSlug === chapterSlug && visual?.path)
+    .map((visual) => ({
+      id: visual.id,
+      type: "image",
+      title: visual.title,
+      src: visual.path,
+      alt: visual.alt || visual.title,
+      explanation: visual.purpose || "Use this visual to connect the concept with the Java program flow.",
+      caption: visual.caption || "",
+    }));
+}
+
 export default function DiagramsSection({ items, chapterSlug, isCompleted }) {
-  // Get registered visuals for this chapter, ensuring consistent slug matching
-  const registered = (icseJavaVisualRegistry && icseJavaVisualRegistry[chapterSlug]) ? icseJavaVisualRegistry[chapterSlug] : [];
-  
-  // Build a set of existing image sources to avoid duplicates
+  // Registry entries are chapter-tagged records; normalize them into the same
+  // image shape used by authored chapter diagrams before rendering.
+  const registered = getRegisteredJavaVisuals(chapterSlug);
+
   const existingImageSources = new Set(
     (items || [])
       .filter((item) => typeof item === "object" && item !== null && item.type === "image")
       .map((item) => item.src)
       .filter(Boolean)
   );
-  
-  // Filter registry items that aren't already included
+
   const registryItems = registered.filter((item) => !existingImageSources.has(item.src));
-  
-  // Combine items and registry visuals
   const allItems = [...(items || []), ...registryItems];
 
   if (allItems.length === 0) return null;

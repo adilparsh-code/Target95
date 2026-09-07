@@ -1,7 +1,8 @@
 import javaChapters from "../app/data/javaChapters";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 
-// The UI consumes this stable shape whether content comes from fixtures or a future CMS.
+// Topic-specific learning copy. Do not silently fall back to another topic's content:
+// a filled card with unrelated content is worse than a missing card.
 const topicDetails = {
   introduction: { definition: "Java is a class-based, object-oriented programming language that is compiled to bytecode and executed by the JVM.", syntax: "public class Main { public static void main(String[] args) { } }", example: "A school fee application can model each student as an object created from a Student class.", keyTerms: ["JVM", "bytecode", "class", "object"], mistakes: ["Treating Java and JavaScript as the same language", "Using a class name that does not match the file name"], tips: ["Read compiler errors from top to bottom", "Keep one public class per source file"] },
   "variables-data-types": { definition: "A variable is a named memory location; its data type decides the values and operations it supports.", syntax: "int marks = 95;\nString name = \"Aarav\";\nboolean passed = true;", example: "A report-card program stores a student's name, marks, and pass status in variables.", keyTerms: ["variable", "primitive type", "declaration", "initialisation"], mistakes: ["Using a decimal value in an int", "Reading an uninitialised local variable"], tips: ["Choose meaningful names", "Use double only when decimal precision is needed"] },
@@ -73,7 +74,9 @@ function createQuestions(chapter, detail, index) {
 }
 
 export const learningTopics = javaChapters.map((chapter, index) => {
-  const detail = topicDetails[chapter.slug] || topicDetails.introduction;
+  const detail = topicDetails[chapter.slug];
+  if (!detail) return null;
+
   const curriculum = resolveChapterMetadata(chapter.slug, {
     topic: chapter.title,
     difficulty: difficultyByIndex[index % 3],
@@ -100,7 +103,7 @@ export const learningTopics = javaChapters.map((chapter, index) => {
     ],
     questions: createQuestions(chapter, detail, index),
   };
-});
+}).filter(Boolean);
 
 export const learningQuestions = learningTopics.flatMap((topic) => topic.questions);
 

@@ -22,6 +22,8 @@ export default function ChapterProgress({ chapter, questions }) {
     resetProgress(chapter);
   }, [chapter, resetProgress]);
 
+  if (!questions.length) return null;
+
   return (
     <section className="mt-10 rounded-2xl border border-gray-200 bg-slate-50 p-6" aria-labelledby="chapter-progress-heading">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
@@ -41,15 +43,13 @@ export default function ChapterProgress({ chapter, questions }) {
       </div>
 
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        {continueQuestion ? (
+        {continueQuestion && (
           <Link
             href={`/Java/${chapter}/question/${continueQuestion.id}`}
             className="inline-flex justify-center rounded-xl bg-blue-100 px-6 py-3 font-semibold text-gray-900 transition hover:bg-blue-200"
           >
             Continue Learning
           </Link>
-        ) : (
-          <p className="text-gray-700">Questions coming soon.</p>
         )}
 
         <button

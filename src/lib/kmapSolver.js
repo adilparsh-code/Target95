@@ -1,5 +1,5 @@
-﻿// Pure, SSR-safe K-Map solving engine for 2, 3 and 4 variables.
-// No browser APIs ΓÇö safe for static generation and server rendering.
+// Pure, SSR-safe K-Map solving engine for 2, 3 and 4 variables.
+// No browser APIs — safe for static generation and server rendering.
 
 export const GRAY_ORDER = [0, 1, 3, 2];
 
@@ -7,7 +7,7 @@ const ROW_VARS = { 2: 1, 3: 1, 4: 2 };
 const LETTERS = ["A", "B", "C", "D"];
 
 // Layout: row bits are the high-order bits (A first), column bits follow.
-// Example: 3-var ΓåÆ rows = A, columns = BC; index = (grayRow << colVars) | grayCol.
+// Example: 3-var → rows = A, columns = BC; index = (grayRow << colVars) | grayCol.
 export function buildLayout(numVars) {
   const rowVars = ROW_VARS[numVars];
   const colVars = numVars - rowVars;
@@ -47,21 +47,24 @@ function axisRuns(axisSize) {
 }
 
 function polarityTerm(numVars, cells, isPos) {
-  let term = "";
+  const literals = [];
   for (let bit = numVars - 1; bit >= 0; bit -= 1) {
     const mask = 1 << bit;
     const sawOne = cells.some((value) => value & mask);
     const sawZero = cells.some((value) => !(value & mask));
     if (sawOne && sawZero) continue; // variable changes inside the group
+
     if (isPos) {
-      // POS rule: constant 0 ΓåÆ uncomplemented, constant 1 ΓåÆ complemented.
-      term += LETTERS[bit] + (sawOne ? "'" : "");
+      // POS: constant 0 → uncomplemented; constant 1 → complemented.
+      literals.push(LETTERS[bit] + (sawOne ? "'" : ""));
     } else {
-      // SOP rule: constant 1 ΓåÆ uncomplemented, constant 0 ΓåÆ complemented.
-      term += LETTERS[bit] + (sawZero ? "'" : "");
+      // SOP: constant 1 → uncomplemented; constant 0 → complemented.
+      literals.push(LETTERS[bit] + (sawZero ? "'" : ""));
     }
   }
-  return term || "1";
+
+  if (isPos) return literals.length ? literals.join(" + ") : "0";
+  return literals.length ? literals.join("") : "1";
 }
 
 function enumerateGroups(layout, values, required) {
@@ -98,31 +101,50 @@ function filterPrime(groups) {
 }
 
 function cover(required, primes) {
-  // Exact minimal cover (maps are small): prefers larger groups first.
+  // Exact minimal cover (maps are small): minimizes the number of selected groups,
+  // then prefers larger groups via the secondary cost.
   let best = null;
 
-  const search = (remaining, chosen, start, cost) => {
-    if (best && best.cost <= cost) return;
+  const search = (remaining, chosen, start) => {
     if (remaining.length === 0) {
-      best = { groups: [...chosen], cost };
+      const groupCount = chosen.length;
+      const coveredCells = chosen.reduce((sum, group) => sum + group.size, 0);
+      const score = [groupCount, -coveredCells];
+      if (!best || score[0] < best.score[0] || (score[0] === best.score[0] && score[1] < best.score[1])) {
+        best = { groups: [...chosen], score };
+      }
       return;
     }
-    for (let i = start; i < primes.length; i += 1) {
-      const prime = primes[i];
-      if (!prime.cells.some((cell) => remaining.includes(cell))) continue;
+
+    if (best && chosen.length >= best.score[0]) return;
+
+    // Pick a required cell with the fewest available covering primes to reduce branching.
+    let pivot = remaining[0];
+    let pivotOptions = primes.filter(
+      (prime, index) => index >= start && prime.cells.includes(pivot),
+    );
+    for (const cell of remaining) {
+      const options = primes.filter((prime, index) => index >= start && prime.cells.includes(cell));
+      if (options.length < pivotOptions.length) {
+        pivot = cell;
+        pivotOptions = options;
+      }
+    }
+
+    for (const prime of pivotOptions) {
+      const index = primes.indexOf(prime);
       search(
         remaining.filter((cell) => !prime.cells.includes(cell)),
         [...chosen, prime],
-        i + 1,
-        cost + prime.size,
+        index + 1,
       );
     }
   };
-  search([...required], [], 0, 0);
+
+  search([...required], [], 0);
   return best ? best.groups : [];
 }
 
-// Evaluate a list of product terms against every input combination.
 function evaluateSOP(termMasks, numVars) {
   const output = new Array(1 << numVars).fill(false);
   for (let input = 0; input < output.length; input += 1) {
@@ -131,8 +153,23 @@ function evaluateSOP(termMasks, numVars) {
   return output;
 }
 
-function toMask(term, numVars) {
-  // Parse a product term like A'B C' into {mask, value} for verification.
+function evaluatePOS(termMasks, numVars) {
+  const output = new Array(1 << numVars).fill(false);
+  for (let input = 0; input < output.length; input += 1) {
+    // A POS expression is an AND of sum terms. A sum term is false only
+    // when every literal in that sum is false.
+    output[input] = termMasks.every((term) => {
+      const sumIsTrue = term.literals.some((literal) => {
+        const bitSet = Boolean(input & literal.bit);
+        return literal.complemented ? !bitSet : bitSet;
+      });
+      return sumIsTrue;
+    });
+  }
+  return output;
+}
+
+function parseSOPTerm(term, numVars) {
   let mask = 0;
   let value = 0;
   for (let i = 0; i < term.length; i += 1) {
@@ -145,12 +182,25 @@ function toMask(term, numVars) {
   return { mask, value };
 }
 
+function parsePOSTerm(term, numVars) {
+  return term.split("+").map((literal) => literal.trim()).filter(Boolean).map((literal) => {
+    const letterIndex = LETTERS.indexOf(literal[0]);
+    return {
+      bit: 1 << letterIndex,
+      complemented: literal[1] === "'",
+    };
+  }).filter((literal) => literal.bit && Number.isInteger(Math.log2(literal.bit)) && literal.bit <= (1 << (numVars - 1)));
+}
+
 export function solveKMap({ numVars, minterms = [], dontCares = [], mode = "SOP" }) {
+  if (![2, 3, 4].includes(numVars)) {
+    throw new Error("K-Map supports only 2, 3 and 4 variables.");
+  }
   const layout = buildLayout(numVars);
   const total = 1 << numVars;
   const valid = (m) => Number.isInteger(m) && m >= 0 && m < total;
   const ones = [...new Set(minterms.filter(valid))];
-  const donts = dontCares.filter(valid).filter((m) => !ones.includes(m));
+  const donts = [...new Set(dontCares.filter(valid))].filter((m) => !ones.includes(m));
   const zeros = [];
   for (let i = 0; i < total; i += 1) {
     if (!ones.includes(i) && !donts.includes(i)) zeros.push(i);
@@ -159,50 +209,61 @@ export function solveKMap({ numVars, minterms = [], dontCares = [], mode = "SOP"
   const isPos = mode === "POS";
   const targets = isPos ? zeros : ones;
 
-  if (targets.length === total && !isPos) {
+  if (targets.length === total) {
+    const expression = isPos ? "0" : "1";
     return {
-      layout, groups: [], terms: ["1"], expression: "1",
-      steps: ["Every cell is 1, so the function simplifies to constant 1."],
+      layout,
+      groups: [],
+      terms: [expression],
+      expression,
+      steps: [
+        `Every cell is ${isPos ? "0" : "1"}, so the function simplifies to constant ${expression}.`,
+      ],
       verified: true,
     };
   }
 
   if (targets.length === 0) {
+    const expression = isPos ? "1" : "0";
     return {
-      layout, groups: [], terms: [], expression: "0",
-      steps: [`There are no ${isPos ? "zeros" : "ones"} to group, so the function is always 0.`],
+      layout,
+      groups: [],
+      terms: [expression],
+      expression,
+      steps: [
+        `There are no ${isPos ? "zeros" : "ones"} to group, so the function is always ${expression}.`,
+      ],
       verified: true,
     };
   }
 
   const values = new Array(total).fill(0);
   for (const cell of targets) values[cell] = 1;
-  for (const cell of donts) values[cell] = 2; // don't-care
+  for (const cell of donts) values[cell] = 2;
 
   const primes = filterPrime(enumerateGroups(layout, values, targets));
   const chosen = cover(targets, primes).sort((a, b) => b.size - a.size);
 
   const terms = chosen.map((group) => polarityTerm(numVars, group.cells, isPos));
-  const expression =
-    isPos && terms.length > 1 ? `(${terms.join(")(")})` : terms.join(" + ");
+  const expression = isPos
+    ? terms.map((term) => `(${term})`).join("")
+    : terms.join(" + ");
 
   const steps = [
     `Step 1: Place ${isPos ? "zeros" : "ones"} at ${isPos ? "maxterms" : "minterms"} ${targets.join(", ")}${donts.length ? `, mark X at don't-cares ${donts.join(", ")}` : ""}.`,
     "Step 2: Form the largest rectangular groups of powers-of-two cells (wrap-around adjacency allowed; diagonals are never adjacent).",
     ...chosen.map(
       (group, i) =>
-        `Group ${i + 1} (${group.size} cells): m${group.cells.join(", m")} ΓåÆ variables that change disappear ΓåÆ term "${terms[i]}"`,
+        `Group ${i + 1} (${group.size} cells): ${isPos ? "zero cells" : "minterms"} ${group.cells.join(", ")} → variables that change disappear → term "${terms[i]}"`,
     ),
     `Final answer (${mode}): F = ${expression}`,
   ];
 
-  // Independent verification: simplified expression vs original function.
-  const actual = evaluateSOP(terms.map((term) => toMask(term, numVars)), numVars);
-  const expected = new Array(total)
-    .fill(true)
-    .map((_, i) => (isPos ? !zeros.includes(i) : ones.includes(i)));
+  const actual = isPos
+    ? evaluatePOS(terms.map((term) => ({ literals: parsePOSTerm(term, numVars) })), numVars)
+    : evaluateSOP(terms.map((term) => parseSOPTerm(term, numVars)), numVars);
+  const expected = new Array(total).fill(false).map((_, i) => ones.includes(i));
   const verified = actual.every((value, i) => value === expected[i]);
 
   return { layout, groups: chosen, terms, expression, steps, verified };
 }
-

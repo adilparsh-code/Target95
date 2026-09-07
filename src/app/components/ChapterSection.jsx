@@ -24,12 +24,15 @@ const ChapterSection = forwardRef(function ChapterSection(
   if (!children) return null;
 
   // Defense-in-depth: legacy callers may still pass a placeholder paragraph.
-  // Do not let those placeholders become visible academic sections.
-  const hasPlaceholder = Children.toArray(children).some((child) => {
+  // Only suppress the card when ALL meaningful children are placeholders;
+  // never hide real academic content just because a legacy fallback is also
+  // present.
+  const childList = Children.toArray(children);
+  const meaningfulChildren = childList.filter((child) => {
     const value = child?.props?.children;
-    return typeof value === "string" && PLACEHOLDER_TEXT.has(value.trim());
+    return !(typeof value === "string" && PLACEHOLDER_TEXT.has(value.trim()));
   });
-  if (hasPlaceholder) return null;
+  if (childList.length > 0 && meaningfulChildren.length === 0) return null;
 
   return (
     <section

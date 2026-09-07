@@ -34,10 +34,11 @@ export default function MockTestResultPage() {
   const topicPerformance = getTopicPerformance(review);
   const weakTopics = topicPerformance.filter((topic) => topic.accuracy < 70).slice(0, 3);
   const strongTopics = [...topicPerformance].sort((a, b) => b.accuracy - a.accuracy || b.total - a.total).filter((topic) => topic.accuracy >= 70).slice(0, 3);
+  const setupRoute = `/mock-test?board=${encodeURIComponent(result.board || "ICSE")}&class=${encodeURIComponent(result.classNumber || 10)}${result.subjectCode ? `&subjectCode=${encodeURIComponent(result.subjectCode)}` : ""}${result.subject ? `&subject=${encodeURIComponent(result.subject)}` : ""}`;
 
   const clearAndGoToSetup = () => {
     sessionStorage.removeItem("mock-test-result");
-    router.push("/mock-test");
+    router.push(setupRoute);
   };
 
   return <ResultShell>

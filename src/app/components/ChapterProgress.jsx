@@ -4,7 +4,7 @@ import { useMemo, useCallback } from "react";
 import Link from "next/link";
 import useProgress from "../hooks/useProgress";
 
-export default function ChapterProgress({ chapter, questions }) {
+export default function ChapterProgress({ chapter, questions = [] }) {
   const { isCompleted, resetProgress } = useProgress();
 
   const { completedCount, completionPercentage, continueQuestion } = useMemo(() => {

@@ -10,6 +10,8 @@ export function ThemeProvider({ children, ...props }) {
       enableSystem
       enableColorScheme
       disableTransitionOnChange
+      storageKey="target95-theme"
+      themes={["light", "dark", "system"]}
       {...props}
     >
       {children}

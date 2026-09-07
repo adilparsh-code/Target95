@@ -4,7 +4,7 @@ import QuestionBank from "../components/QuestionBank";
 
 export default function QuestionBankPage() {
   return (
-    <main className="min-h-screen bg-transparent">
+    <main className="internal-page internal-practice min-h-screen bg-transparent">
       <Navbar />
       <div className="mx-auto max-w-7xl px-4 pb-8 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10">
         <div className="mb-5 rounded-[28px] border border-slate-200/80 bg-white/80 p-5 shadow-[0_12px_40px_rgba(15,23,42,0.04)] backdrop-blur-sm sm:p-7 dark:border-slate-800 dark:bg-slate-900/65">

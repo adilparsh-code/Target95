@@ -1,3 +1,4 @@
+```ts
 import { FieldValue } from "firebase-admin/firestore";
 import { getAdminDb } from "./firebase-admin";
 
@@ -10,9 +11,11 @@ export const BLOG_CATEGORIES = [
   "programming",
   "opportunities",
   "trending-explainers",
-];
+] as const;
 
-export const BLOG_CATEGORY_LABELS = {
+export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+
+export const BLOG_CATEGORY_LABELS: Record<BlogCategory, string> = {
   "ai-technology": "AI & Technology",
   "education-board-updates": "Education & Board Updates",
   "school-subjects": "School Subjects",
@@ -23,7 +26,22 @@ export const BLOG_CATEGORY_LABELS = {
   "trending-explainers": "Trending Explainers",
 };
 
-export function slugify(value) {
+export interface BlogTopic {
+  title: string;
+  slug?: string;
+  status?: string;
+  [key: string]: unknown;
+}
+
+export interface BlogArticle {
+  title: string;
+  slug?: string;
+  status?: string;
+  category?: BlogCategory;
+  [key: string]: unknown;
+}
+
+export function slugify(value: unknown): string {
   return String(value || "")
     .toLowerCase()
     .trim()
@@ -41,11 +59,20 @@ export async function listPublishedArticles(limit = 30) {
     .limit(limit)
     .get();
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 }
 
-export async function listPublishedArticlesByCategory(category, limit = 30) {
-  if (!BLOG_CATEGORIES.includes(category)) return [];
+export async function listPublishedArticlesByCategory(
+  category: string,
+  limit = 30,
+) {
+  if (!BLOG_CATEGORIES.includes(category as BlogCategory)) {
+    return [];
+  }
+
   const snapshot = await getAdminDb()
     .collection("blog_articles")
     .where("status", "==", "published")
@@ -54,37 +81,55 @@ export async function listPublishedArticlesByCategory(category, limit = 30) {
     .limit(limit)
     .get();
 
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 }
 
-export async function upsertTopic(topic) {
+export async function upsertTopic(topic: BlogTopic) {
   const db = getAdminDb();
-  const ref = db.collection("blog_topics").doc(slugify(topic.title));
+  const slug = topic.slug || slugify(topic.title);
+  const ref = db.collection("blog_topics").doc(slug);
+
+  const existing = await ref.get();
+
   await ref.set(
     {
       ...topic,
-      slug: slugify(topic.title),
+      slug,
       status: topic.status || "idea",
       updatedAt: FieldValue.serverTimestamp(),
-      createdAt: FieldValue.serverTimestamp(),
+      ...(existing.exists
+        ? {}
+        : { createdAt: FieldValue.serverTimestamp() }),
     },
     { merge: true },
   );
+
   return ref.id;
 }
 
-export async function createArticle(article) {
+export async function createArticle(article: BlogArticle) {
   const db = getAdminDb();
-  const ref = db.collection("blog_articles").doc(article.slug || slugify(article.title));
+  const slug = article.slug || slugify(article.title);
+  const ref = db.collection("blog_articles").doc(slug);
+
+  const existing = await ref.get();
+
   await ref.set(
     {
       ...article,
-      slug: article.slug || slugify(article.title),
+      slug,
       status: article.status || "draft",
       updatedAt: FieldValue.serverTimestamp(),
-      createdAt: FieldValue.serverTimestamp(),
+      ...(existing.exists
+        ? {}
+        : { createdAt: FieldValue.serverTimestamp() }),
     },
     { merge: true },
   );
+
   return ref.id;
 }
+```

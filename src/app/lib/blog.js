@@ -1,4 +1,4 @@
-```ts
+
 import { FieldValue } from "firebase-admin/firestore";
 import { getAdminDb } from "./firebase-admin";
 

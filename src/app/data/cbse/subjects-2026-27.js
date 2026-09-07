@@ -5,6 +5,7 @@ export const cbseSubjectTracks = [
   { id: 'cbse-083', code: '083', name: 'Computer Science', classLevels: [11, 12], category: 'academic-subject', pythonRole: 'core-programming', pythonLibraries: [] },
   { id: 'cbse-065', code: '065', name: 'Informatics Practices', classLevels: [11, 12], category: 'academic-subject', pythonRole: 'programming-and-data-handling', pythonLibraries: ['Pandas', 'Matplotlib'] },
   { id: 'cbse-802', code: '802', name: 'Information Technology', classLevels: [11, 12], category: 'skill-subject', pythonRole: 'none' },
+  { id: 'cbse-843', code: '843', name: 'Artificial Intelligence', classLevels: [11, 12], category: 'skill-subject', pythonRole: 'ai-programming-and-data', pythonLibraries: ['NumPy', 'Pandas', 'Scikit-learn'] },
 ];
 
 export const getCBSESubjectTrack = (code) => cbseSubjectTracks.find((subject) => subject.code === String(code)) ?? null;

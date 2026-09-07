@@ -175,6 +175,25 @@ main { isolation: isolate; }
 .dark .chapter-content .prose p, .dark .chapter-content .prose li { color: #cbd5e1; }
 .chapter-content .prose table { border-color: var(--chapter-line); }
 
+/* Experimental ambient-light adaptation. Uses the device's ambient light sensor when supported. */
+html[data-ambient-light="low"]:not(.dark) {
+  --background: #eef1f5;
+  --primary-light: #e8eefb;
+}
+html[data-ambient-light="bright"]:not(.dark) {
+  --background: #fafbfe;
+  --primary-light: #f2f6ff;
+}
+html[data-ambient-light="low"].dark {
+  --background: #080c12;
+  --card: #0e1621;
+}
+html[data-ambient-light="bright"].dark {
+  --background: #111925;
+  --card: #172131;
+  --muted: #1b2636;
+}
+
 @media (max-width: 900px) {
   .chapter-content > div > section[aria-label="Learning Flow"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
 }

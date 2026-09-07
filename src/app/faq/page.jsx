@@ -4,13 +4,13 @@ import Container from "../components/ui/Container";
 
 export const metadata = {
   title: "FAQ | Target95+",
-  description: "Frequently asked questions about Target95+ - the AI-powered learning platform for ICSE & ISC Computer Science students.",
+  description: "Frequently asked questions about Target95+ - the AI-powered learning platform for ICSE, ISC, and CBSE Computer Science students.",
 };
 
 const faqs = [
   {
     question: "How do I start learning?",
-    answer: "Click the 'Get Started' button on the homepage, create an account, and select your board (ICSE/CBSE). Then choose a subject like Java Programming and start with chapter-wise study material.",
+    answer: "Click the 'Get Started' button on the homepage, create an account, and select your board (ICSE, ISC, or CBSE where available). Then choose a supported subject like Java Programming and start with chapter-wise study material.",
   },
   {
     question: "Is Target95+ free to use?",
@@ -18,11 +18,11 @@ const faqs = [
   },
   {
     question: "What boards do you support?",
-    answer: "We support ICSE (Class 9-10 Computer Applications) and ISC (Class 11-12 Computer Science) boards. CBSE content is coming soon.",
+    answer: "Target95+ currently supports Computer Science content across ICSE, ISC, and CBSE. Coverage varies by class and topic as new syllabus-aligned material is added.",
   },
   {
     question: "Do I need to install anything?",
-    answer: "No installation required. Target95+ is a web-based platform that works on any modern browser. You can also install it as a Progressive Web App (PWA) on your device for offline access.",
+    answer: "No installation required. Target95+ is a web-based platform that works on any modern browser. You can also install it as a Progressive Web App (PWA) on supported devices.",
   },
   {
     question: "How do I track my progress?",

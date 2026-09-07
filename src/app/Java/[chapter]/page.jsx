@@ -1,36 +1,38 @@
 import { notFound } from "next/navigation";
-import { getChapterContent, getChapterQuestions, getChapterSlugs, getSubjectContent } from "@/lib/curriculum";
-import ChapterReader from "../../components/ChapterReader";
+import StudyChapter from "../../components/study/StudyChapter";
+import { getStudyChapterBySlug, getStudyChapters } from "@/lib/studyCenter";
+import { getMarkdownChapterContent } from "@/lib/markdownContent";
+import getQuestionBankChapter from "@/lib/questionBankAdapter";
+import { getChapterBySlug as getRichChapterBySlug } from "../../data/chapter-content";
 
 export function generateStaticParams() {
-  return getChapterSlugs("java");
+  const chapters = getStudyChapters() || [];
+  return chapters
+    .filter((chapter) => chapter && chapter.slug)
+    .map((chapter) => ({ chapter: String(chapter.slug) }));
 }
 
 export default async function ChapterPage({ params }) {
-  const { chapter } = await params;
+  const { chapter: slug } = await params;
+  const chapter = getStudyChapterBySlug(slug);
 
-  const chapterData = getChapterContent("java", chapter);
+  if (!chapter) notFound();
 
-  if (!chapterData) {
-    notFound();
-  }
-
-  const chapterQuestions = getChapterQuestions("java", chapter);
-  
-  // Get all java chapters to find previous and next
-  const javaSubject = getSubjectContent("java");
-  const allChapters = javaSubject?.chapters || [];
-  const currentIndex = allChapters.findIndex((ch) => ch.slug === chapter);
-  const prevChapter = currentIndex > 0 ? allChapters[currentIndex - 1] : null;
-  const nextChapter = currentIndex < allChapters.length - 1 ? allChapters[currentIndex + 1] : null;
+  // Use the same canonical content pipeline as /study so /Java never falls
+  // back to the legacy ChapterReader placeholders. Prefer rich chapter data,
+  // then use the academically authored Markdown content when available.
+  const markdownSlug = slug === "introduction-to-java" ? "introduction" : slug;
+  const markdownChapter = getMarkdownChapterContent(markdownSlug);
+  const richChapter = getRichChapterBySlug(slug);
+  const questionBankChapter = typeof getQuestionBankChapter === "function"
+    ? getQuestionBankChapter(slug)
+    : null;
 
   return (
-    <ChapterReader 
-      chapter={chapter}
-      chapterData={chapterData}
-      chapterQuestions={chapterQuestions}
-      prevChapter={prevChapter}
-      nextChapter={nextChapter}
+    <StudyChapter
+      slug={slug}
+      markdownContent={richChapter ?? markdownChapter?.content ?? null}
+      questionBank={questionBankChapter}
     />
   );
 }

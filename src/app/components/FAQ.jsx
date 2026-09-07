@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     question: "Which boards and classes do you support?",
-    answer: "We currently support ICSE (Class 9-10) and ISC (Class 11-12) Computer Science students. CBSE support is currently in development and will be launching soon."
+    answer: "Target95+ currently supports Computer Science content across ICSE, ISC, and CBSE. Coverage varies by class and topic as new syllabus-aligned material is added."
   },
   {
     question: "How does the AI tutor work?",
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     question: "Are the questions aligned with the latest syllabus?",
-    answer: "Absolutely! All our content is regularly updated to align with the latest CISCE syllabus and exam patterns. We include the most recent previous year questions to ensure you're practicing with relevant material."
+    answer: "We align our content with the current syllabus and exam patterns for the supported board/class coverage, and we continuously expand and review the question bank."
   },
   {
     question: "Can I use Target95+ on my mobile phone?",
@@ -51,7 +51,7 @@ export default function FAQ() {
 
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
-            <div 
+            <div
               key={index}
               className="mb-4 last:mb-0"
             >

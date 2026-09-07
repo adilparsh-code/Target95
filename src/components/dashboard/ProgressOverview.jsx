@@ -2,64 +2,37 @@
 
 import ProgressRing from "@/app/components/ui/ProgressRing";
 
+const items = [
+  { key: "chapter", title: "Chapter completion", caption: (stats) => `${stats.chapterCompletion}% of your chapters`, value: (stats) => stats.chapterCompletion, color: "stroke-blue-600" },
+  { key: "daily", title: "Daily goal", caption: (stats) => `${stats.dailyGoal.current}/${stats.dailyGoal.target} questions`, value: (stats) => stats.dailyGoal.progress, color: "stroke-emerald-600" },
+  { key: "weekly", title: "Weekly goal", caption: (stats) => `${stats.weeklyGoal.current}/${stats.weeklyGoal.target} days`, value: (stats) => stats.weeklyGoal.progress, color: "stroke-violet-600" },
+];
+
 export default function ProgressOverview({ stats }) {
   if (!stats) {
-    return (
-      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 animate-pulse">
-        <div className="h-6 bg-gray-200 rounded w-1/3 mb-6"></div>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="h-24 bg-gray-200 rounded-full mx-auto w-24"></div>
-          <div className="h-24 bg-gray-200 rounded-full mx-auto w-24"></div>
-          <div className="h-24 bg-gray-200 rounded-full mx-auto w-24"></div>
-        </div>
-      </div>
-    );
+    return <section className="h-64 animate-pulse rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950" aria-label="Loading progress" />;
   }
 
-  const { chapterCompletion, dailyGoal, weeklyGoal } = stats;
-
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-      <h3 className="text-lg font-semibold text-gray-900 mb-6">Progress Overview</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="text-center">
-          <ProgressRing
-            progress={chapterCompletion}
-            size={120}
-            strokeWidth={8}
-            color="stroke-blue-600"
-            label={`${chapterCompletion}%`}
-          />
-          <p className="mt-3 font-medium text-gray-900">Chapter Completion</p>
-          <p className="text-sm text-gray-500">{chapterCompletion}% complete</p>
-        </div>
-        <div className="text-center">
-          <ProgressRing
-            progress={dailyGoal.progress}
-            size={120}
-            strokeWidth={8}
-            color="stroke-emerald-600"
-            label={`${dailyGoal.progress}%`}
-          />
-          <p className="mt-3 font-medium text-gray-900">Daily Goal</p>
-          <p className="text-sm text-gray-500">
-            {dailyGoal.current}/{dailyGoal.target} questions
-          </p>
-        </div>
-        <div className="text-center">
-          <ProgressRing
-            progress={weeklyGoal.progress}
-            size={120}
-            strokeWidth={8}
-            color="stroke-purple-600"
-            label={`${weeklyGoal.progress}%`}
-          />
-          <p className="mt-3 font-medium text-gray-900">Weekly Goal</p>
-          <p className="text-sm text-gray-500">
-            {weeklyGoal.current}/{weeklyGoal.target} days
-          </p>
-        </div>
+    <section className="rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
+      <div className="border-b border-slate-100 px-5 py-4 dark:border-slate-800">
+        <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">Goals</p>
+        <h3 className="mt-1 text-base font-bold tracking-tight text-slate-950 dark:text-white">Progress overview</h3>
       </div>
-    </div>
+      <div className="grid grid-cols-1 divide-y divide-slate-100 md:grid-cols-3 md:divide-x md:divide-y-0 dark:divide-slate-800">
+        {items.map((item) => {
+          const progress = Math.max(0, Math.min(100, Number(item.value(stats)) || 0));
+          return (
+            <div key={item.key} className="flex items-center gap-5 px-5 py-6">
+              <ProgressRing progress={progress} size={88} strokeWidth={7} color={item.color} label={`${progress}%`} />
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-slate-950 dark:text-white">{item.title}</p>
+                <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">{item.caption(stats)}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }

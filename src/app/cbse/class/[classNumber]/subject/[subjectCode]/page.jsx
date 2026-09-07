@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { BookOpen, FlaskConical, GraduationCap, ArrowLeft, Clock, Users, Trophy } from 'lucide-react';
+import { BookOpen, FlaskConical, GraduationCap, ArrowLeft, Clock, Users, Trophy, FolderKanban } from 'lucide-react';
 import { getCBSECurriculum } from '@/app/data/cbse';
 
 const subjectsByClass = {
   9: ['402'],
   10: ['402'],
-  11: ['083', '065', '802'],
-  12: ['083', '065', '802'],
+  11: ['083', '065', '802', '843'],
+  12: ['083', '065', '802', '843'],
 };
 
 export default async function CBSESubjectPage({ params }) {
@@ -26,6 +26,7 @@ export default async function CBSESubjectPage({ params }) {
     ...(subject.parts?.partA?.units || []),
     ...(subject.parts?.partB?.units || []),
   ];
+  const projects = subject.projects || [];
 
   const totalTheoryTopics = units.reduce((sum, unit) => sum + (unit.theory?.length || 0), 0);
   const totalPracticalActivities = units.reduce((sum, unit) => sum + (unit.practicalActivities?.length || 0), 0);
@@ -53,18 +54,18 @@ export default async function CBSESubjectPage({ params }) {
               <span className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-semibold"><Clock className="w-4 h-4" />2026-27 Session</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">{subject.name}</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mb-8">Syllabus-aligned learning, practice questions, and mock tests designed to help you master every concept.</p>
+            <p className="text-xl text-blue-100 max-w-2xl mb-8">Syllabus-aligned learning, dedicated theory, practice and project work designed to help you master every concept.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20"><p className="text-3xl font-bold">{units.length}</p><p className="text-blue-100 text-sm">Total Units</p></div>
               <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20"><p className="text-3xl font-bold">{totalTheoryTopics}</p><p className="text-blue-100 text-sm">Theory Topics</p></div>
               <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20"><p className="text-3xl font-bold">{totalPracticalActivities}</p><p className="text-blue-100 text-sm">Practical Activities</p></div>
-              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20"><p className="text-3xl font-bold">#1</p><p className="text-blue-100 text-sm">Most Popular</p></div>
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 border border-white/20"><p className="text-3xl font-bold">{projects.length}</p><p className="text-blue-100 text-sm">Projects</p></div>
             </div>
           </div>
         </div>
 
         <section className="mb-12">
-          <div className="flex items-center justify-between mb-8"><h2 className="text-2xl md:text-3xl font-bold text-gray-900">Course Units</h2><p className="text-gray-600 hidden md:block">Click on any unit to start learning</p></div>
+          <div className="flex items-center justify-between mb-8"><h2 className="text-2xl md:text-3xl font-bold text-gray-900">Course Units</h2><p className="text-gray-600 hidden md:block">Theory is kept separate from project work.</p></div>
           <div className="grid gap-6 md:grid-cols-2">
             {units.map((unit, index) => (
               <Link key={unit.id} href={`${subjectRoute}/unit/${unit.id}`} className="group bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-100">
@@ -77,6 +78,21 @@ export default async function CBSESubjectPage({ params }) {
             ))}
           </div>
         </section>
+
+        {projects.length > 0 && (
+          <section className="mb-12 rounded-3xl border border-emerald-200 bg-emerald-50 p-8 shadow-sm">
+            <div className="flex items-center gap-3 mb-6"><FolderKanban className="w-7 h-7 text-emerald-700" /><div><h2 className="text-2xl md:text-3xl font-bold text-emerald-950">AI Projects</h2><p className="text-emerald-800 mt-1">Project work is intentionally separate from the theory syllabus.</p></div></div>
+            <div className="grid gap-4 md:grid-cols-2">
+              {projects.map((project, index) => (
+                <article key={project.id} className="rounded-2xl bg-white border border-emerald-100 p-6">
+                  <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">Project {index + 1}</p>
+                  <h3 className="mt-2 text-xl font-bold text-gray-900">{project.title}</h3>
+                  <p className="mt-2 text-gray-600">{project.outcome}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="bg-white rounded-3xl border border-gray-200 p-8 shadow-sm mb-8">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Additional Resources</h2>

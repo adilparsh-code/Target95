@@ -87,7 +87,7 @@ export default function ContactPage() {
                       For technical issues, try refreshing the page or clearing your browser cache.
                     </p>
                   </div>
-                  <Button variant="primary" href="/faq">
+                  <Button variant="primary" href="/faq" size="lg" className="shrink-0 whitespace-nowrap min-w-[112px]">
                     Visit FAQ
                   </Button>
                 </div>

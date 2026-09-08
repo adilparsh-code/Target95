@@ -1,7 +1,8 @@
 /**
  * CBSE question and mock-test configuration for session 2026-27.
  * This file contains configuration only; question content stays separate.
- * CBSE programming tracks are Python-first. Java belongs only to CISCE/ISC.
+ * 083 and 065 are Python-based; 802 Information Technology is Java-based
+ * in the official 2026-27 senior-secondary curriculum.
  */
 
 export const CBSE_QUESTION_TYPES = [
@@ -50,10 +51,11 @@ export const CBSE_SUBJECT_MOCK_CONFIG = {
   },
   '802': {
     classes: [11, 12],
-    python: true,
+    python: false,
     pythonLibraries: [],
+    java: true,
     questionTypes: CBSE_QUESTION_TYPES,
-    note: 'CBSE Information Technology senior-secondary track; keep programming examples Python-only and never inherit CISCE Java content.',
+    note: 'CBSE Information Technology senior-secondary track; Java programming content follows the official 2026-27 curriculum and must remain separate from CISCE Java content.',
   },
 };
 

@@ -51,6 +51,8 @@ function getStartLearningHref(board, selectedClass) {
   if (!selectedClass?.id) return "/study";
   const subject = selectedClass.subjects?.[0];
   if (board === "cisce") {
+    if (selectedClass.id === "icse-class-9") return "/icse/class-ix";
+    if (selectedClass.id === "icse-class-10") return "/icse/class-x";
     if (subject === "ai") return "/isc/robotics-ai/class-x";
     if (selectedClass.id === "isc-class-11") return "/isc/class-xi";
     if (selectedClass.id === "isc-class-12") return "/isc/class-xii";

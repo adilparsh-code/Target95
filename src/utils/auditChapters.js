@@ -1,270 +1,109 @@
-/**
- * Chapter Content Audit Script
- * Run: node src/utils/auditChapters.js
- * 
- * Audits all chapter content files for:
- * - Schema completeness
- * - Unique IDs
- * - Duplicate content
- * - Difficulty balance
- * - Placeholder content
- */
-
 const fs = require('fs');
 const path = require('path');
 
 const CHAPTERS_DIR = path.join(__dirname, '..', 'app', 'data', 'chapter-content');
-
-// Canonical 22-section schema
 const CANONICAL_SECTIONS = [
-  'introduction',           // 1
-  'theoryNotes',            // 2
-  'syntax',                 // 3
-  'examples',               // 4
-  'dryRun',                 // 5
-  'outputBasedQuestions',   // 6
-  'errorFindingQuestions',  // 7
-  'fillInTheBlanks',        // 8
-  'mcqs',                   // 9
-  'trueFalse',              // 10
-  'shortAnswerQuestions',   // 11
-  'longAnswerQuestions',    // 12
-  'programmingQuestions',   // 13
-  'challengeProblems',      // 14
-  'previousYearQuestions',  // 15
-  'aiVivaQuestions',        // 16
-  'practiceTest',           // 17
-  'chapterSummary',         // 18
-  'revisionNotes',          // 19
-  'cheatsheet',             // 20
-  'interviewQuestions',     // 21
-  'examTricks',             // 22
-];
-
-// New sections to add
-const NEW_SECTIONS = [
-  'assertionReason',        // Assertion & Reason questions
-  'debugTheCode',           // Debug the Code questions
-  'caseStudyQuestions',     // Case Study questions
-  'mixedPracticeSets',      // Mixed Practice Sets
-  'rapidRevisionQuestions', // Rapid Revision Questions
+  'introduction','theoryNotes','syntax','examples','dryRun','outputBasedQuestions',
+  'errorFindingQuestions','fillInTheBlanks','mcqs','trueFalse','shortAnswerQuestions',
+  'longAnswerQuestions','programmingQuestions','challengeProblems','previousYearQuestions',
+  'aiVivaQuestions','practiceTest','chapterSummary','revisionNotes','cheatsheet',
+  'interviewQuestions','examTricks','assertionReason','debugTheCode','caseStudyQuestions',
+  'mixedPracticeSets','rapidRevisionQuestions',
 ];
 
 const PLACEHOLDER_PATTERNS = [
-  /question \d+/i,
-  /viva question/i,
-  /key point about/i,
-  /^(skill|note|key point|pitfall|pattern) \d+/i,
+  /question\s+\d+/i,
+  /viva\s+question/i,
+  /key\s+point\s+about/i,
+  /^(skill|note|key point|pitfall|pattern)\s+\d+/i,
   /placeholder/i,
-  /^Content for note/i,
-  /^Answer$/i,
-  /^Explanation$/i,
+  /^content\s+for\s+note/i,
+  /^answer$/i,
+  /^explanation$/i,
+  /coming\s+soon/i,
+  /will\s+be\s+added/i,
+  /available\s+soon/i,
 ];
 
-function readChapterFile(filePath) {
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    return content;
-  } catch (err) {
-    return null;
-  }
+function read(file) {
+  try { return fs.readFileSync(file, 'utf8'); } catch { return null; }
 }
 
-function extractSectionNames(content) {
-  const sectionRegex = /\/\/ =+ (\d+)\.\s*([^=]+) =+/g;
-  const sections = [];
+function sectionNames(content) {
+  const names = [];
+  const re = /\/\/\s*=+\s*(\d+)\.\s*([^=]+?)\s*=+/g;
   let match;
-  while ((match = sectionRegex.exec(content)) !== null) {
-    sections.push({
-      number: parseInt(match[1]),
-      name: match[2].trim().toLowerCase().replace(/[^a-z0-9]/g, ''),
-    });
+  while ((match = re.exec(content))) {
+    names.push(match[2].trim().toLowerCase().replace(/[^a-z0-9]/g, ''));
   }
-  return sections;
+  return names;
 }
 
-function extractIds(content) {
-  const idRegex = /id:\s*["']([^"']+)["']/g;
-  const ids = [];
-  let match;
-  while ((match = idRegex.exec(content)) !== null) {
-    ids.push(match[1]);
-  }
-  return ids;
+function ids(content) {
+  return [...content.matchAll(/id:\s*["']([^"']+)["']/g)].map((m) => m[1]);
 }
 
-function countPlaceholders(content) {
-  let count = 0;
+function placeholderMatches(content) {
+  const hits = [];
   for (const pattern of PLACEHOLDER_PATTERNS) {
-    const matches = content.match(pattern);
-    if (matches) {
-      count += matches.length;
-    }
+    const matches = content.match(new RegExp(pattern.source, pattern.flags.includes('g') ? pattern.flags : `${pattern.flags}g`));
+    if (matches) hits.push(...matches);
   }
-  return count;
-}
-
-function estimateLineCount(content) {
-  return content.split('\n').length;
+  return [...new Set(hits.map((x) => x.trim()))];
 }
 
 function audit() {
+  if (!fs.existsSync(CHAPTERS_DIR)) return { chapters: [], summary: {} };
   const files = fs.readdirSync(CHAPTERS_DIR)
-    .filter(f => f.endsWith('.js') && !f.includes('index') && !f.includes('write'));
-
-  const report = {
-    summary: {
-      totalFiles: files.length,
-      totalLines: 0,
-      totalIds: 0,
-      totalPlaceholders: 0,
-      chaptersWithDuplicates: [],
-      missingSections: {},
-    },
-    chapters: [],
-  };
-
-  const allIds = {};
+    .filter((f) => f.endsWith('.js') && !['index.js'].includes(f) && !f.includes('write-'));
+  const allIds = new Map();
+  const chapters = [];
 
   for (const file of files) {
     const filePath = path.join(CHAPTERS_DIR, file);
-    const content = readChapterFile(filePath);
-    if (!content) {
-      report.chapters.push({ file, error: 'Could not read file' });
-      continue;
-    }
-
-    const sections = extractSectionNames(content);
-    const ids = extractIds(content);
-    const placeholderCount = countPlaceholders(content);
-    const lineCount = estimateLineCount(content);
-
-    // Check for duplicate IDs within chapter
-    const idCounts = {};
-    const duplicateIds = [];
-    for (const id of ids) {
-      idCounts[id] = (idCounts[id] || 0) + 1;
-      if (idCounts[id] === 2) {
-        duplicateIds.push(id);
-      }
-    }
-
-    // Check for duplicate IDs across chapters
-    for (const id of ids) {
-      if (allIds[id] && allIds[id] !== file) {
-        duplicateIds.push(`${id} (duplicate in ${file} and ${allIds[id]})`);
-      }
-      allIds[id] = file;
-    }
-
-    // Determine missing canonical sections
-    const sectionNames = sections.map(s => s.name);
-    const missingSections = CANONICAL_SECTIONS.filter(cs => {
-      const normalized = cs.toLowerCase().replace(/[^a-z0-9]/g, '');
-      return !sectionNames.some(sn => sn.includes(normalized) || normalized.includes(sn));
+    const content = read(filePath);
+    if (!content) continue;
+    const sections = sectionNames(content);
+    const chapterIds = ids(content);
+    const placeholders = placeholderMatches(content);
+    const missing = CANONICAL_SECTIONS.filter((section) => {
+      const n = section.replace(/[^a-z0-9]/g, '').toLowerCase();
+      return !sections.some((s) => s.includes(n) || n.includes(s));
     });
-
-    // Determine if new sections exist
-    const existingNewSections = NEW_SECTIONS.filter(ns => {
-      const normalized = ns.toLowerCase().replace(/[^a-z0-9]/g, '');
-      return sectionNames.some(sn => sn.includes(normalized) || normalized.includes(sn));
-    });
-    const missingNewSections = NEW_SECTIONS.filter(ns => !existingNewSections.includes(ns));
-
-    // Estimate content quality based on sections and placeholders
-    const quality = {
-      sections: sections.length,
-      lines: lineCount,
-      questions: ids.length,
-      placeholders: placeholderCount,
-      hasPlaceholderContent: placeholderCount > 0,
-      missingSections: missingSections.length,
-      missingNewSections: missingNewSections,
-    };
-
-    const chapterInfo = {
-      file,
-      sections: sections.map(s => s.name),
-      ids: ids.length,
-      duplicateIds,
-      placeholders: placeholderCount,
-      lines: lineCount,
-      quality,
-      missingSections,
-      missingNewSections,
-    };
-
-    report.chapters.push(chapterInfo);
-    report.summary.totalLines += lineCount;
-    report.summary.totalIds += ids.length;
-    report.summary.totalPlaceholders += placeholderCount;
-    if (duplicateIds.length > 0) {
-      report.summary.chaptersWithDuplicates.push(file);
+    const duplicateIds = chapterIds.filter((id, i) => chapterIds.indexOf(id) !== i);
+    for (const id of chapterIds) {
+      if (allIds.has(id)) duplicateIds.push(`${id} (also in ${allIds.get(id)})`);
+      else allIds.set(id, file);
     }
+    chapters.push({ file, sections, missing, placeholders, duplicateIds, lines: content.split('\n').length, ids: chapterIds.length });
   }
 
-  return report;
+  return {
+    chapters,
+    summary: {
+      totalFiles: chapters.length,
+      totalLines: chapters.reduce((n, c) => n + c.lines, 0),
+      totalIds: chapters.reduce((n, c) => n + c.ids, 0),
+      totalPlaceholders: chapters.reduce((n, c) => n + c.placeholders.length, 0),
+      chaptersWithMissingSections: chapters.filter((c) => c.missing.length).length,
+      chaptersWithPlaceholders: chapters.filter((c) => c.placeholders.length).length,
+      chaptersWithDuplicateIds: chapters.filter((c) => c.duplicateIds.length).length,
+    },
+  };
 }
 
-function printReport(report) {
+function print(report) {
   console.log('='.repeat(80));
-  console.log('CHAPTER CONTENT AUDIT REPORT');
+  console.log('TARGET95 CHAPTER-BY-CHAPTER CONTENT AUDIT');
   console.log('='.repeat(80));
-  console.log(`\n📊 SUMMARY`);
-  console.log(`  Total files: ${report.summary.totalFiles}`);
-  console.log(`  Total lines: ${report.summary.totalLines}`);
-  console.log(`  Total questions (IDs): ${report.summary.totalIds}`);
-  console.log(`  Total placeholders: ${report.summary.totalPlaceholders}`);
-  console.log(`  Chapters with duplicates: ${report.summary.chaptersWithDuplicates.length > 0 ? report.summary.chaptersWithDuplicates.join(', ') : 'None'}`);
-
-  console.log(`\n📋 CHAPTER DETAILS`);
-  console.log('-'.repeat(80));
-
-  for (const ch of report.chapters) {
-    console.log(`\n📁 ${ch.file}`);
-    console.log(`  Lines: ${ch.lines} | Questions: ${ch.ids} | Placeholders: ${ch.placeholders}`);
-    
-    if (ch.duplicateIds.length > 0) {
-      console.log(`  ⚠️  DUPLICATE IDs: ${ch.duplicateIds.join(', ')}`);
-    }
-
-    if (ch.missingSections.length > 0) {
-      console.log(`  ❌ Missing canonical sections: ${ch.missingSections.join(', ')}`);
-    }
-
-    if (ch.missingNewSections.length > 0) {
-      console.log(`  🔴 Missing NEW sections: ${ch.missingNewSections.join(', ')}`);
-    }
-
-    if (ch.placeholders > 0) {
-      console.log(`  ⚠️  Has ${ch.placeholders} placeholder entries need enrichment`);
-    }
-
-    console.log(`  Existing sections (${ch.sections.length}):`);
-    ch.sections.forEach(s => console.log(`    - ${s}`));
-  }
-
-  console.log('\n' + '='.repeat(80));
-  console.log('RECOMMENDATIONS');
-  console.log('='.repeat(80));
-
-  const needsEnrichment = report.chapters.filter(ch => ch.placeholders > 0 || ch.missingNewSections.length > 0);
-  if (needsEnrichment.length > 0) {
-    console.log('\n🔧 Chapters needing enrichment:');
-    for (const ch of needsEnrichment) {
-      console.log(`  - ${ch.file} (${ch.placeholders} placeholders, ${ch.missingNewSections.length} missing new sections)`);
-    }
-  }
-
-  const needsNewSections = report.chapters.filter(ch => ch.missingNewSections.length > 0);
-  if (needsNewSections.length > 0) {
-    console.log('\n📝 New sections to add:');
-    const allMissing = new Set();
-    needsNewSections.forEach(ch => ch.missingNewSections.forEach(ns => allMissing.add(ns)));
-    allMissing.forEach(ns => console.log(`  - ${ns}`));
+  console.log(JSON.stringify(report.summary, null, 2));
+  for (const chapter of report.chapters) {
+    const status = chapter.missing.length || chapter.placeholders.length || chapter.duplicateIds.length ? 'NEEDS WORK' : 'OK';
+    console.log(`\n[${status}] ${chapter.file}`);
+    if (chapter.missing.length) console.log(`  Missing sections: ${chapter.missing.join(', ')}`);
+    if (chapter.placeholders.length) console.log(`  Placeholder content: ${chapter.placeholders.join(' | ')}`);
+    if (chapter.duplicateIds.length) console.log(`  Duplicate IDs: ${chapter.duplicateIds.join(', ')}`);
   }
 }
 
-// Run audit
-const report = audit();
-printReport(report);
+print(audit());

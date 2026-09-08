@@ -93,7 +93,6 @@ body {
 button, input, textarea, select { font: inherit; }
 :focus-visible { outline: 3px solid color-mix(in srgb, var(--ring) 35%, transparent); outline-offset: 2px; }
 
-/* Target95 shared visual language: restrained surfaces, clear hierarchy, minimal effects. */
 .site-body { min-height: 100vh; }
 .site-body::before {
   content: "";
@@ -130,6 +129,37 @@ button, input, textarea, select { font: inherit; }
 .surface { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
 .surface-hover { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
 .surface-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* Navbar responsive repair: keep the complete desktop navigation available between lg and 2xl. */
+@media (min-width: 1024px) and (max-width: 1535px) {
+  nav.sticky.top-0.z-50 > div > div > div[class*="min-w-0"][class*="flex-1"] {
+    overflow: hidden;
+    justify-content: flex-start;
+  }
+
+  nav.sticky.top-0.z-50 > div > div > div[class*="min-w-0"][class*="flex-1"] > div[class*="2xl:flex"] {
+    display: flex !important;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    flex-shrink: 1;
+    scrollbar-width: none;
+  }
+
+  nav.sticky.top-0.z-50 > div > div > div[class*="min-w-0"][class*="flex-1"] > div[class*="2xl:flex"]::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav.sticky.top-0.z-50 > div > div > div[class*="min-w-0"][class*="flex-1"] > div[class*="xl:flex"][class*="2xl:hidden"] {
+    display: none !important;
+  }
+
+  nav.sticky.top-0.z-50 > div > div > div[class*="min-w-0"][class*="flex-1"] > div[class*="2xl:flex"] > div > a,
+  nav.sticky.top-0.z-50 > div > div > div[class*="min-w-0"][class*="flex-1"] > div[class*="2xl:flex"] > div > button {
+    white-space: nowrap;
+    padding-inline: .7rem;
+  }
+}
 
 @media (max-width: 640px) {
   .page-section { width: min(100% - 20px, 1180px); }

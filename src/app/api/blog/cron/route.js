@@ -1,18 +1,7 @@
 import { NextResponse } from "next/server";
-import { BLOG_CATEGORIES, upsertTopic } from "../../../lib/blog";
+import { EDITORIAL_TOPIC_POOL, BLOG_CATEGORIES, upsertTopic } from "../../../lib/blog";
 
 export const runtime = "nodejs";
-
-const DAILY_TOPIC_POOL = [
-  ["ai-technology", "How students can use AI responsibly for learning"],
-  ["education-board-updates", "What students should check before an important board update"],
-  ["school-subjects", "A practical revision method for difficult school chapters"],
-  ["school-coding", "Common Java mistakes school students should avoid"],
-  ["development", "A beginner-friendly guide to GitHub for students"],
-  ["programming", "How to improve programming problem-solving step by step"],
-  ["opportunities", "How students can find genuine scholarships and competitions"],
-  ["trending-explainers", "A simple framework for understanding a trending technology topic"],
-];
 
 function authorized(request) {
   const secret = process.env.BLOG_CRON_SECRET;
@@ -21,28 +10,33 @@ function authorized(request) {
 }
 
 export async function GET(request) {
-  if (!authorized(request)) return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+  if (!authorized(request)) {
+    return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+  }
 
-  const today = new Date().toISOString().slice(0, 10);
+  const week = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+  const start = (week * 2) % EDITORIAL_TOPIC_POOL.length;
+  const selected = [
+    EDITORIAL_TOPIC_POOL[start],
+    EDITORIAL_TOPIC_POOL[(start + 1) % EDITORIAL_TOPIC_POOL.length],
+  ];
   const results = [];
 
-  for (const [category, title] of DAILY_TOPIC_POOL) {
-    if (!BLOG_CATEGORIES.includes(category)) continue;
+  for (const topic of selected) {
+    if (!BLOG_CATEGORIES.includes(topic.category)) continue;
     const id = await upsertTopic({
-      title,
-      category,
-      source: "target95-editorial-seed",
-      runDate: today,
+      ...topic,
+      source: "target95-editorial-pool",
+      runWeek: week,
       status: "idea",
     });
-    results.push({ id, category, title });
+    results.push({ id, ...topic });
   }
 
   return NextResponse.json({
     ok: true,
-    runDate: today,
     queued: results.length,
-    message: "Daily editorial topics queued. AI drafting can consume blog_topics with status=idea.",
+    message: "Curated editorial ideas queued. Nothing is published automatically.",
     topics: results,
   });
 }

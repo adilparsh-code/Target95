@@ -1,7 +1,6 @@
 /**
  * ICSE/ISC Java visual registry.
- * SVG visuals are intentionally stored as text so they remain versionable,
- * accessible, and easy to render through the existing DiagramsSection.
+ * SVG visuals are versioned in public/visuals/icse-java and rendered by DiagramsSection.
  */
 
 export const icseJavaVisuals = [
@@ -55,14 +54,14 @@ export const icseJavaVisuals = [
   },
   {
     id: "java-loop-flow",
-    chapterSlug: "iterative-statements",
-    title: "Loop Execution Flow",
-    purpose: "Compare entry-controlled and exit-controlled loop flow.",
-    caption: "for and while test the condition before the body; do-while executes the body once first.",
-    alt: "Flowchart comparing condition placement for for, while and do-while loops.",
+    chapterSlug: "for-loop",
+    title: "FOR Loop Execution Flow",
+    purpose: "Show initialization, condition checking, body execution and update in a for loop.",
+    caption: "A for loop initializes, checks its condition, executes the body, updates the counter and repeats.",
+    alt: "Flowchart showing the execution cycle of a Java for loop.",
     assetType: "flowchart",
     priority: "Tier 1",
-    sourceSection: "Iterative Statements",
+    sourceSection: "FOR Loop",
     path: "/visuals/icse-java/java-loop-flow.svg",
   },
   {

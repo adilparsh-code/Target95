@@ -31,13 +31,25 @@ export const ISC_XI_PRACTICAL = {
   practicalLanguage: "Java",
 };
 
+// ISC Examination Year 2028 official top-level theory distribution.
+// Canonical forms and K-maps are assessed within Boolean Algebra; adders,
+// encoders, decoders and multiplexers are assessed within Computer Hardware.
 export const ISC_XII_TOPICS = [
-  { id: "xii-boolean-algebra", section: "A", title: "Boolean Algebra", class: "ISC XII", estimatedTime: 120 },
-  { id: "xii-canonical-forms", section: "A", title: "Canonical Forms", class: "ISC XII", estimatedTime: 90 },
-  { id: "xii-k-map", section: "A", title: "Karnaugh Maps", class: "ISC XII", estimatedTime: 90 },
-  { id: "xii-combinational-logic", section: "A", title: "Combinational Logic", class: "ISC XII", estimatedTime: 90 },
-  { id: "xii-java-computer-science", section: "B", title: "Advanced Java and Computer Science", class: "ISC XII", estimatedTime: 150 },
+  { id: "xii-boolean-algebra", section: "A", title: "Boolean Algebra", class: "ISC XII", estimatedTime: 150 },
+  { id: "xii-computer-hardware", section: "A", title: "Computer Hardware", class: "ISC XII", estimatedTime: 120 },
+  { id: "xii-methods-object-parameter-return", section: "B", title: "Methods – Object as a Parameter and Return Data Type", class: "ISC XII", estimatedTime: 100 },
+  { id: "xii-arrays-strings", section: "B", title: "Arrays (Single and Double Dimensional), String Handling", class: "ISC XII", estimatedTime: 120 },
+  { id: "xii-recursion", section: "B", title: "Recursion", class: "ISC XII", estimatedTime: 90 },
+  { id: "xii-inheritance-interface", section: "B", title: "Inheritance and Interface", class: "ISC XII", estimatedTime: 130 },
+  { id: "xii-python", section: "C", title: "Programming in Python", class: "ISC XII", estimatedTime: 120 },
+  { id: "xii-data-structures", section: "C", title: "Data Structures", class: "ISC XII", estimatedTime: 100 },
+  { id: "xii-complexity-big-o", section: "C", title: "Complexity and Big O Notation", class: "ISC XII", estimatedTime: 90 },
 ];
+
+export const ISC_XII_PRACTICAL = {
+  projects: 1,
+  practicalLanguage: "Java",
+};
 
 // Keep syllabus verification required until every mapped block has passed the audit.
 export const ISC_XII_VERIFICATION_REQUIRED = true;

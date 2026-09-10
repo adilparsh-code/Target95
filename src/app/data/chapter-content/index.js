@@ -10,7 +10,7 @@ import chapter01 from "./01-if";
 import chapter02 from "./02-if-else";
 import chapter03 from "./03-nested-if";
 import chapter04 from "./04-switch";
-import chapter05 from "./05-for-loop";
+import chapter05 from "./05-for-loop-audit-fix";
 import chapter06 from "./06-while-loop";
 import chapter07 from "./07-do-while-loop";
 import chapter08 from "./08-arrays-1d";

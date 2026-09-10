@@ -1,1 +1,1 @@
-// Chapter audit utility strengthened in a prior commit; this file is intentionally unchanged in this pass.
+// Chapter audit utility strengthened in commit b39a1aa. Restoring the file from that commit before continuing the audit.

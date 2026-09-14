@@ -1,5 +1,6 @@
 import Link from "next/link";
 import roboticsAI from "@/app/data/icseRoboticsAI";
+import supplementalQuestions from "@/app/data/icseRoboticsAIQuestionBank";
 
 function UnitCard({ unit, index }) {
   return (
@@ -139,6 +140,31 @@ export default function RoboticsAIPage() {
                 </details>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-violet-200 bg-violet-50/60 p-6 shadow-sm md:p-8">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-violet-700">Expanded bank</p>
+              <h2 className="mt-1 text-2xl font-bold text-violet-950">Board-style supplemental practice</h2>
+            </div>
+            <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-violet-700">{supplementalQuestions.length} additional questions</span>
+          </div>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-violet-900">A broader practice layer covering robotics systems, AI, data, Python and responsible AI with MCQs, tracing, debugging, assertion-reason, case-based, programming, viva and fill-in-the-blank questions.</p>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {supplementalQuestions.map((question) => (
+              <details key={question.id} className="rounded-2xl border border-violet-200 bg-white p-4">
+                <summary className="cursor-pointer font-medium text-slate-900">{question.question}</summary>
+                <div className="mt-3 space-y-2 text-sm text-slate-600">
+                  <p><span className="font-semibold text-slate-900">Type:</span> {question.type.replaceAll("-", " ")}</p>
+                  {question.options ? <ol className="list-[upper-alpha] space-y-1 pl-5">{question.options.map((option) => <li key={option}>{option}</li>)}</ol> : null}
+                  {question.assertion ? <p><span className="font-semibold text-slate-900">Assertion:</span> {question.assertion}</p> : null}
+                  <p><span className="font-semibold text-slate-900">Answer:</span> {question.answer}</p>
+                  {question.explanation ? <p><span className="font-semibold text-slate-900">Why:</span> {question.explanation}</p> : null}
+                </div>
+              </details>
+            ))}
           </div>
         </section>
 

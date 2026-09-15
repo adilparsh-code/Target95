@@ -7,7 +7,7 @@
  * available; questions without a topicId remain available at unit level.
  */
 
-import { getCBSECurriculum } from '../curriculum-2026-27';
+import { getCBSECurriculum } from '../index';
 import { getCBSEMockQuestions } from '../mock-tests-2026-27';
 
 const slugify = (value) => String(value || '')
@@ -31,6 +31,8 @@ const makeChapter = ({ board, classNumber, subjectCode, unit, topic, index, part
   part,
   learningObjectives: Array.isArray(unit.learningOutcomes) ? unit.learningOutcomes : [],
   practicalActivities: Array.isArray(unit.practicalActivities) ? unit.practicalActivities : [],
+  contentVerification: unit.contentVerification || null,
+  contentSourceUrl: unit.contentSourceUrl || null,
   questions: [],
 });
 

@@ -223,7 +223,9 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
                   {chapter.difficulty}
                 </span>
               </div>
-              <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">{studyData.intro}</p>
+              {studyData.intro && (
+                <p className="mt-3 max-w-2xl text-base leading-7 text-gray-700">{studyData.intro}</p>
+              )}
               <p className="mt-2 text-sm text-gray-600">
                 Estimated study time: {chapter.estimatedStudyTime} &middot;{" "}
                 {chapter.totalQuestions} question{chapter.totalQuestions !== 1 ? "s" : ""}
@@ -264,15 +266,15 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
           completedSections={completedSections}
         />
 
-        {/* Prerequisites */}
-        <ChapterSection
-          id="prerequisites"
-          title="Prerequisites"
-          icon={<ChevronDoubleRightIcon className="w-5 h-5" />}
-          estimatedTime={2}
-          isCompleted={completedSections.includes("section-prerequisites")}
-        >
-          {studyData.prerequisites && studyData.prerequisites.length > 0 ? (
+        {/* Prerequisites: render only when the chapter has real prerequisite links. */}
+        {studyData.prerequisites && studyData.prerequisites.length > 0 && (
+          <ChapterSection
+            id="prerequisites"
+            title="Prerequisites"
+            icon={<ChevronDoubleRightIcon className="w-5 h-5" />}
+            estimatedTime={2}
+            isCompleted={completedSections.includes("section-prerequisites")}
+          >
             <div className="mt-4 flex flex-wrap gap-2">
               {studyData.prerequisites.map((prereq) => {
                 const prereqChapter = chapters.find((c) => c.slug === prereq);
@@ -287,10 +289,8 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
                 ) : null;
               })}
             </div>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
+          </ChapterSection>
+        )}
 
         {/* Search within notes */}
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm mb-8">
@@ -317,20 +317,18 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
           )}
         </div>
 
-        {/* Overview */}
-        <ChapterSection
-          id="overview"
-          title="Overview"
-          icon={<BookOpenIcon className="w-5 h-5" />}
-          estimatedTime={5}
-          isCompleted={completedSections.includes("section-overview")}
-        >
-          {studyData.intro ? (
+        {/* Overview: render only when genuine introductory content exists. */}
+        {studyData.intro && (
+          <ChapterSection
+            id="overview"
+            title="Overview"
+            icon={<BookOpenIcon className="w-5 h-5" />}
+            estimatedTime={5}
+            isCompleted={completedSections.includes("section-overview")}
+          >
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{studyData.intro}</p>
-          ) : (
-            <p className="text-sm text-gray-500">This section will be available soon.</p>
-          )}
-        </ChapterSection>
+          </ChapterSection>
+        )}
 
         {/* Related Topics */}
         {studyData.relatedTopics && studyData.relatedTopics.length > 0 && (

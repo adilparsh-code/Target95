@@ -8,8 +8,40 @@ import cbseCurriculum2026_27, {
   CBSE_CURRICULUM_SESSION,
 } from './curriculum-2026-27';
 import CBSE_843_AI_2026_27 from './cbse843-ai-2026-27';
+import CBSE_402_CLASS9_DETAILED_VERIFICATION_2026_27 from './class9-402-detailed-verification-2026-27';
 
 export { cbseCurriculum2026_27, CBSE_CURRICULUM_SESSION };
+
+const withCBSE402Class9DetailedContent = (subject) => {
+  if (!subject) return subject;
+
+  const detailedUnits = CBSE_402_CLASS9_DETAILED_VERIFICATION_2026_27.units;
+  const enrichUnits = (units = []) => units.map((unit) => {
+    const detailed = detailedUnits?.[`B${unit.code}`];
+    if (!detailed) return unit;
+
+    return {
+      ...unit,
+      learningOutcomes: detailed.learningOutcomes || unit.learningOutcomes || [],
+      theory: detailed.theory || unit.theory || [],
+      practicalActivities: detailed.practicalActivities || unit.practicalActivities || [],
+      chapters: Array.isArray(unit.chapters) && unit.chapters.length ? unit.chapters : [],
+      contentVerification: detailed.verification,
+      contentSourceUrl: CBSE_402_CLASS9_DETAILED_VERIFICATION_2026_27.sourceUrl,
+    };
+  });
+
+  return {
+    ...subject,
+    parts: {
+      ...subject.parts,
+      partB: {
+        ...subject.parts?.partB,
+        units: enrichUnits(subject.parts?.partB?.units),
+      },
+    },
+  };
+};
 
 /** AI 843 is kept as a dedicated XI/XII theory + projects contract. */
 export const getCBSECurriculum = (classNumber, subjectCode) => {
@@ -32,11 +64,18 @@ export const getCBSECurriculum = (classNumber, subjectCode) => {
       projects: ai.projects,
     };
   }
-  return getBaseCBSECurriculum(classNumber, subjectCode);
+
+  const subject = getBaseCBSECurriculum(classNumber, subjectCode);
+  if (Number(classNumber) === 9 && String(subjectCode) === '402') {
+    return withCBSE402Class9DetailedContent(subject);
+  }
+
+  return subject;
 };
 
 export { CBSE_843_AI_2026_27 };
 export { default as CBSE_402_CLASS9_2026_27 } from './class9-402-2026-27-sources';
+export { default as CBSE_402_CLASS9_DETAILED_VERIFICATION_2026_27 } from './class9-402-detailed-verification-2026-27';
 export { cbseSubjectTracks, getCBSESubjectTrack } from './subjects-2026-27';
 export { default as cbseQuestionSchema2026_27, validateCBSEQuestion } from './question-schema-2026-27';
 export { default as CBSE_SUBJECT_MOCK_CONFIG, getCBSEQuestionConfig } from './question-config-2026-27';

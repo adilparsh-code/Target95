@@ -168,9 +168,68 @@ const booleanAlgebra = {
     { name: "De Morgan", rules: ["(A+B)'=A'B'", "(AB)'=A'+B'"], intuition: "Negating a combined condition swaps AND/OR and negates each input." },
   ],
   simplificationExamples: [
-    { id: "SIM-XII-01", expression: "A+AB", steps: ["Factor A: A(1+B)", "Use 1+B=1", "Use A·1=A"], answer: "A" },
-    { id: "SIM-XII-02", expression: "A+A'B", steps: ["Use X+YZ=(X+Y)(X+Z): (A+A')(A+B)", "A+A'=1", "Use 1·(A+B)=A+B"], answer: "A+B" },
-    { id: "SIM-XII-03", expression: "(A+B)(A+B')", steps: ["Use (X+Y)(X+Z)=X+YZ", "A+BB'", "A+0"], answer: "A" },
+    {
+      id: "SIM-XII-01", level: "Starter", title: "Absorption law",
+      expression: "A + AB",
+      steps: [
+        { line: "A(1 + B)", law: "Distributive", reason: "Factor A from both terms" },
+        { line: "A · 1", law: "Null / Dominance", reason: "1 + B = 1" },
+        { line: "A", law: "Identity", reason: "A · 1 = A" },
+      ],
+      examTip: "Recognise A + AB as the absorption pattern immediately — do not expand.",
+    },
+    {
+      id: "SIM-XII-02", level: "Board", title: "Consensus / OR-AND expansion",
+      expression: "A + A'B",
+      steps: [
+        { line: "(A + A')(A + B)", law: "Distributive (dual)", reason: "X + YZ = (X+Y)(X+Z)" },
+        { line: "1 · (A + B)", law: "Complement", reason: "A + A' = 1" },
+        { line: "A + B", law: "Identity", reason: "1 · X = X" },
+      ],
+      examTip: "The dual distributive law is the key step; students who try to expand A'B first get stuck.",
+    },
+    {
+      id: "SIM-XII-03", level: "Board", title: "POS simplification",
+      expression: "(A + B)(A + B')",
+      steps: [
+        { line: "A + BB'", law: "Distributive (dual)", reason: "(X+Y)(X+Z) = X + YZ" },
+        { line: "A + 0", law: "Complement", reason: "B · B' = 0" },
+        { line: "A", law: "Identity", reason: "A + 0 = A" },
+      ],
+      examTip: "Spot the complementary pair B and B' inside the product; they collapse to 0.",
+    },
+    {
+      id: "SIM-XII-04", level: "Board", title: "De Morgan application",
+      expression: "(AB)' + B",
+      steps: [
+        { line: "A' + B' + B", law: "De Morgan", reason: "(AB)' = A' + B'" },
+        { line: "A' + 1", law: "Complement", reason: "B' + B = 1" },
+        { line: "1", law: "Null / Dominance", reason: "X + 1 = 1" },
+      ],
+      examTip: "Apply De Morgan before trying any other law when you see a complement over a product or sum.",
+    },
+    {
+      id: "SIM-XII-05", level: "Challenge", title: "Multi-step with absorption",
+      expression: "AB + AB' + A'B",
+      steps: [
+        { line: "A(B + B') + A'B", law: "Distributive", reason: "Factor A from first two terms" },
+        { line: "A · 1 + A'B", law: "Complement", reason: "B + B' = 1" },
+        { line: "A + A'B", law: "Identity", reason: "A · 1 = A" },
+        { line: "A + B", law: "Consensus (dual distributive)", reason: "A + A'B = A + B" },
+      ],
+      examTip: "Group the first two terms to eliminate B before applying the dual distributive law.",
+    },
+    {
+      id: "SIM-XII-06", level: "Challenge", title: "NAND-only implementation check",
+      expression: "((AB)'(AB)')'",
+      steps: [
+        { line: "Let X = (AB)'", law: "Substitution", reason: "Name the NAND output" },
+        { line: "(X · X)'", law: "Idempotent", reason: "X · X = X" },
+        { line: "X' = ((AB)')'", law: "Involution setup", reason: "Negate the NAND output" },
+        { line: "AB", law: "Involution", reason: "Double negation cancels" },
+      ],
+      examTip: "Two NAND gates with tied inputs implement AND. Show each stage explicitly in board answers.",
+    },
   ],
   boardPractice: [
     { id: "BA-XII-01", level: "board", type: "simplification", question: "Simplify A + A'B.", answer: "A + B", marks: 2 },

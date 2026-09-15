@@ -4,7 +4,7 @@
  * Missing academic content stays empty and is hidden by consumers; generic
  * filler text must never be presented as syllabus-specific teaching content.
  */
-import { getCBSECurriculum } from './curriculum-2026-27';
+import { getCBSECurriculum } from './index';
 
 const normalizeUnit = (unit) => ({
   id: unit.id,
@@ -14,6 +14,8 @@ const normalizeUnit = (unit) => ({
   theory: Array.isArray(unit?.theory) ? unit.theory : [],
   practicalActivities: Array.isArray(unit?.practicalActivities) ? unit.practicalActivities : [],
   chapters: Array.isArray(unit?.chapters) ? unit.chapters : [],
+  contentVerification: unit?.contentVerification || null,
+  contentSourceUrl: unit?.contentSourceUrl || null,
 });
 
 export const getCBSELearningContent = (classNumber, subjectCode) => {

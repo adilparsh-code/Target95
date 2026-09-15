@@ -1,334 +1,75 @@
 const javaQuestions = [
   {
     id: 1,
-    title: 'Sum of Two Integers',
-    slug: 'sum-of-two-integers',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Programming Basics',
-    topic: 'Variables and Input',
-    difficulty: 'Easy',
-    marks: 2,
-    question: 'Write a Java program that reads two integers and prints their sum.',
-    constraints: 'Use integers only. Assume both values are within the int range.',
-    sampleInput: '12\n8',
-    sampleOutput: '20',
-    algorithm: 'Read the two integers, add them, and print the result.',
-    explanation: 'This question checks basic input handling and arithmetic in Java.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int a = sc.nextInt();
-    int b = sc.nextInt();
-    System.out.println(a + b);
-  }
-}`,
-    complexity: 'O(1)',
-    tags: ['java', 'input', 'operators'],
+    title: 'Sum of Two Integers', slug: 'sum-of-two-integers', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Programming Basics', topic: 'Variables and Input', difficulty: 'Easy', marks: 2,
+    question: 'Write a Java program that reads two integers and prints their sum.', constraints: 'Use integers only. Assume both values are within the int range.', sampleInput: '12\n8', sampleOutput: '20', algorithm: 'Read the two integers, add them, and print the result.', explanation: 'Checks basic input handling and arithmetic in Java.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(System.in);\n    int a = sc.nextInt(); int b = sc.nextInt();\n    System.out.println(a + b);\n  }\n}`, complexity: 'O(1)', tags: ['java','input','operators']
   },
   {
-    id: 2,
-    title: 'Check Even or Odd',
-    slug: 'check-even-or-odd',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Programming Basics',
-    topic: 'Conditional Statements',
-    difficulty: 'Easy',
-    marks: 2,
-    question: 'Write a Java program that checks whether a number is even or odd.',
-    constraints: 'Input is a single integer.',
-    sampleInput: '7',
-    sampleOutput: 'Odd',
-    algorithm: 'Use the modulus operator to determine parity.',
-    explanation: 'This question tests conditional logic and arithmetic operators.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    if (n % 2 == 0) {
-      System.out.println("Even");
-    } else {
-      System.out.println("Odd");
-    }
-  }
-}`,
-    complexity: 'O(1)',
-    tags: ['java', 'conditionals', 'modulus'],
+    id: 2, title: 'Check Even or Odd', slug: 'check-even-or-odd', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Programming Basics', topic: 'Conditional Statements', difficulty: 'Easy', marks: 2,
+    question: 'Write a Java program that checks whether a number is even or odd.', constraints: 'Input is a single integer.', sampleInput: '7', sampleOutput: 'Odd', algorithm: 'Use the modulus operator to determine parity.', explanation: 'Tests conditional logic and arithmetic operators.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(System.in); int n = sc.nextInt();\n    System.out.println(n % 2 == 0 ? "Even" : "Odd");\n  }\n}`, complexity: 'O(1)', tags: ['java','conditionals','modulus']
   },
   {
-    id: 3,
-    title: 'Largest of Three Numbers',
-    slug: 'largest-of-three-numbers',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Programming Basics',
-    topic: 'Decision Making',
-    difficulty: 'Easy',
-    marks: 3,
-    question: 'Write a Java program to find the largest of three integers.',
-    constraints: 'The numbers are distinct.',
-    sampleInput: '12\n45\n30',
-    sampleOutput: '45',
-    algorithm: 'Compare the three values using conditional checks.',
-    explanation: 'This question reinforces nested conditions and comparison logic.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int a = sc.nextInt();
-    int b = sc.nextInt();
-    int c = sc.nextInt();
-    int largest = a;
-    if (b > largest) largest = b;
-    if (c > largest) largest = c;
-    System.out.println(largest);
-  }
-}`,
-    complexity: 'O(1)',
-    tags: ['java', 'conditionals', 'comparison'],
+    id: 3, title: 'Largest of Three Numbers', slug: 'largest-of-three-numbers', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Programming Basics', topic: 'Decision Making', difficulty: 'Easy', marks: 3,
+    question: 'Write a Java program to find the largest of three integers.', constraints: 'The numbers are distinct.', sampleInput: '12\n45\n30', sampleOutput: '45', algorithm: 'Compare the three values using conditional checks.', explanation: 'Reinforces nested conditions and comparison logic.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc = new Scanner(System.in); int a=sc.nextInt(), b=sc.nextInt(), c=sc.nextInt();\n    int largest=a; if(b>largest) largest=b; if(c>largest) largest=c;\n    System.out.println(largest);\n  }\n}`, complexity: 'O(1)', tags: ['java','conditionals','comparison']
   },
   {
-    id: 4,
-    title: 'Reverse a String',
-    slug: 'reverse-a-string',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'String Handling',
-    topic: 'String Manipulation',
-    difficulty: 'Medium',
-    marks: 3,
-    question: 'Write a Java program that reverses a string and prints it.',
-    constraints: 'The string contains letters only.',
-    sampleInput: 'Java',
-    sampleOutput: 'avaJ',
-    algorithm: 'Traverse the string backward and build the reversed result.',
-    explanation: 'This question tests loop usage and string handling.',
-    code: `public class Main {
-  public static void main(String[] args) {
-    String text = "Java";
-    String reversed = "";
-    for (int i = text.length() - 1; i >= 0; i--) {
-      reversed += text.charAt(i);
-    }
-    System.out.println(reversed);
-  }
-}`,
-    complexity: 'O(n)',
-    tags: ['java', 'strings', 'loops'],
+    id: 4, title: 'Reverse a String', slug: 'reverse-a-string', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'String Handling', topic: 'String Manipulation', difficulty: 'Medium', marks: 3,
+    question: 'Write a Java program that reverses a string and prints it.', constraints: 'The string contains letters only.', sampleInput: 'Java', sampleOutput: 'avaJ', algorithm: 'Traverse the string backward and build the reversed result.', explanation: 'Tests loop usage and string handling.', code: `public class Main {\n  public static void main(String[] args) {\n    String text="Java", reversed="";\n    for(int i=text.length()-1;i>=0;i--) reversed += text.charAt(i);\n    System.out.println(reversed);\n  }\n}`, complexity: 'O(n)', tags: ['java','strings','loops']
   },
   {
-    id: 5,
-    title: 'Factorial of a Number',
-    slug: 'factorial-of-a-number',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Looping Statements',
-    topic: 'Iteration',
-    difficulty: 'Medium',
-    marks: 3,
-    question: 'Write a Java program to calculate the factorial of a non-negative integer.',
-    constraints: 'The input value is non-negative.',
-    sampleInput: '5',
-    sampleOutput: '120',
-    algorithm: 'Multiply values from 1 to n using a loop.',
-    explanation: 'This question evaluates loop control and multiplication logic.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    int fact = 1;
-    for (int i = 1; i <= n; i++) {
-      fact *= i;
-    }
-    System.out.println(fact);
-  }
-}`,
-    complexity: 'O(n)',
-    tags: ['java', 'loops', 'math'],
+    id: 5, title: 'Factorial of a Number', slug: 'factorial-of-a-number', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Looping Statements', topic: 'Iteration', difficulty: 'Medium', marks: 3,
+    question: 'Write a Java program to calculate the factorial of a non-negative integer.', constraints: 'The input value is non-negative.', sampleInput: '5', sampleOutput: '120', algorithm: 'Multiply values from 1 to n using a loop.', explanation: 'Evaluates loop control and multiplication logic.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc=new Scanner(System.in); int n=sc.nextInt(), fact=1;\n    for(int i=1;i<=n;i++) fact*=i;\n    System.out.println(fact);\n  }\n}`, complexity: 'O(n)', tags: ['java','loops','math']
   },
   {
-    id: 6,
-    title: 'Check Palindrome',
-    slug: 'check-palindrome',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'String Handling',
-    topic: 'String Comparison',
-    difficulty: 'Medium',
-    marks: 3,
-    question: 'Write a Java program that checks whether a word is a palindrome.',
-    constraints: 'The input is a single word in lowercase.',
-    sampleInput: 'madam',
-    sampleOutput: 'Palindrome',
-    algorithm: 'Compare the string with its reversed version.',
-    explanation: 'This question tests string traversal and logical comparison.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    String word = sc.next();
-    String reversed = "";
-    for (int i = word.length() - 1; i >= 0; i--) {
-      reversed += word.charAt(i);
-    }
-    if (word.equals(reversed)) {
-      System.out.println("Palindrome");
-    } else {
-      System.out.println("Not Palindrome");
-    }
-  }
-}`,
-    complexity: 'O(n)',
-    tags: ['java', 'strings', 'logic'],
+    id: 6, title: 'Check Palindrome', slug: 'check-palindrome', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'String Handling', topic: 'String Comparison', difficulty: 'Medium', marks: 3,
+    question: 'Write a Java program that checks whether a word is a palindrome.', constraints: 'The input is a single word in lowercase.', sampleInput: 'madam', sampleOutput: 'Palindrome', algorithm: 'Compare the word with its reversed form.', explanation: 'Tests string traversal and logical comparison.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    Scanner sc=new Scanner(System.in); String word=sc.next(), rev="";\n    for(int i=word.length()-1;i>=0;i--) rev+=word.charAt(i);\n    System.out.println(word.equals(rev) ? "Palindrome" : "Not Palindrome");\n  }\n}`, complexity: 'O(n)', tags: ['java','strings','logic']
   },
   {
-    id: 7,
-    title: 'Count Vowels',
-    slug: 'count-vowels',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'String Handling',
-    topic: 'Character Processing',
-    difficulty: 'Medium',
-    marks: 3,
-    question: 'Write a Java program that counts the number of vowels in a string.',
-    constraints: 'The string contains lowercase letters.',
-    sampleInput: 'programming',
-    sampleOutput: '3',
-    algorithm: 'Check each character and increment the count for vowels.',
-    explanation: 'This question evaluates loop-based character processing.',
-    code: `public class Main {
-  public static void main(String[] args) {
-    String text = "programming";
-    int count = 0;
-    for (int i = 0; i < text.length(); i++) {
-      char ch = text.charAt(i);
-      if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
-        count++;
-      }
-    }
-    System.out.println(count);
-  }
-}`,
-    complexity: 'O(n)',
-    tags: ['java', 'strings', 'loops'],
+    id: 7, title: 'Count Vowels', slug: 'count-vowels', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'String Handling', topic: 'Character Processing', difficulty: 'Medium', marks: 3,
+    question: 'Write a Java program that counts the number of vowels in a string.', constraints: 'The string contains lowercase letters.', sampleInput: 'programming', sampleOutput: '3', algorithm: 'Check each character and increment the count for vowels.', explanation: 'Evaluates loop-based character processing.', code: `public class Main {\n  public static void main(String[] args) {\n    String text="programming"; int count=0;\n    for(int i=0;i<text.length();i++){ char ch=text.charAt(i); if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u') count++; }\n    System.out.println(count);\n  }\n}`, complexity: 'O(n)', tags: ['java','strings','loops']
   },
   {
-    id: 8,
-    title: 'Multiplication Table',
-    slug: 'multiplication-table',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Looping Statements',
-    topic: 'Pattern Generation',
-    difficulty: 'Medium',
-    marks: 4,
-    question: 'Write a Java program that prints the multiplication table for a given number.',
-    constraints: 'The input is a positive integer.',
-    sampleInput: '5',
-    sampleOutput: '5 10 15 20 25 30 35 40 45 50',
-    algorithm: 'Use a loop from 1 to 10 and print the product at each step.',
-    explanation: 'This question introduces repeated output generation using loops.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    for (int i = 1; i <= 10; i++) {
-      System.out.print(n * i + " ");
-    }
-  }
-}`,
-    complexity: 'O(1)',
-    tags: ['java', 'loops', 'output'],
+    id: 8, title: 'Multiplication Table', slug: 'multiplication-table', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Looping Statements', topic: 'Pattern Generation', difficulty: 'Medium', marks: 4,
+    question: 'Write a Java program that prints the multiplication table for a given number from 1 to 10.', constraints: 'The input is a positive integer.', sampleInput: '5', sampleOutput: '5 10 15 20 25 30 35 40 45 50', algorithm: 'Loop from 1 to 10 and print each product.', explanation: 'Introduces repeated output using loops.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    int n=new Scanner(System.in).nextInt();\n    for(int i=1;i<=10;i++) System.out.print(n*i+" ");\n  }\n}`, complexity: 'O(1)', tags: ['java','loops','output']
   },
   {
-    id: 9,
-    title: 'Fibonacci Series',
-    slug: 'fibonacci-series',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Looping Statements',
-    topic: 'Series Generation',
-    difficulty: 'Medium',
-    marks: 4,
-    question: 'Write a Java program that prints the first 10 Fibonacci numbers.',
-    constraints: 'The output should contain 10 numbers.',
-    sampleInput: '10',
-    sampleOutput: '0 1 1 2 3 5 8 13 21 34',
-    algorithm: 'Build each number from the previous two values.',
-    explanation: 'This question tests iterative sequence generation.',
-    code: `public class Main {
-  public static void main(String[] args) {
-    int a = 0, b = 1;
-    System.out.print(a + " " + b + " ");
-    for (int i = 2; i < 10; i++) {
-      int c = a + b;
-      System.out.print(c + " ");
-      a = b;
-      b = c;
-    }
-  }
-}`,
-    complexity: 'O(n)',
-    tags: ['java', 'loops', 'series'],
+    id: 9, title: 'Fibonacci Series', slug: 'fibonacci-series', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Looping Statements', topic: 'Series Generation', difficulty: 'Medium', marks: 4,
+    question: 'Write a Java program that prints the first n Fibonacci numbers.', constraints: 'n is a positive integer.', sampleInput: '7', sampleOutput: '0 1 1 2 3 5 8', algorithm: 'Generate each term from the previous two terms.', explanation: 'Tests iterative sequence generation.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    int n=new Scanner(System.in).nextInt(), a=0, b=1;\n    for(int i=0;i<n;i++){ System.out.print(a+" "); int c=a+b; a=b; b=c; }\n  }\n}`, complexity: 'O(n)', tags: ['java','loops','series']
   },
   {
-    id: 10,
-    title: 'Prime Number Check',
-    slug: 'prime-number-check',
-    board: 'ICSE',
-    class: '10',
-    subject: 'Computer Science',
-    language: 'Java',
-    chapter: 'Looping Statements',
-    topic: 'Number Theory',
-    difficulty: 'Medium',
-    marks: 4,
-    question: 'Write a Java program that checks if an integer is prime.',
-    constraints: 'The input is a positive integer greater than 1.',
-    sampleInput: '13',
-    sampleOutput: 'Prime',
-    algorithm: 'Test divisibility from 2 up to the square root of the number.',
-    explanation: 'This question strengthens loop and conditional reasoning.',
-    code: `import java.util.Scanner;
-public class Main {
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    boolean isPrime = true;
-    if (n < 2) isPrime = false;
-    for (int i = 2; i * i <= n; i++) {
-      if (n % i == 0) isPrime = false;
-    }
-    System.out.println(isPrime ? "Prime" : "Not Prime");
-  }
-}`,
-    complexity: 'O(sqrt(n))',
-    tags: ['java', 'loops', 'number-theory'],
+    id: 10, title: 'Prime Number Check', slug: 'prime-number-check', board: 'ICSE', class: '10', subject: 'Computer Science', language: 'Java', chapter: 'Looping Statements', topic: 'Number Theory', difficulty: 'Medium', marks: 4,
+    question: 'Write a Java program that checks if an integer is prime.', constraints: 'The input is a positive integer.', sampleInput: '13', sampleOutput: 'Prime', algorithm: 'Test divisibility from 2 through the square root range.', explanation: 'Strengthens loop and conditional reasoning.', code: `import java.util.Scanner;\npublic class Main {\n  public static void main(String[] args) {\n    int n=new Scanner(System.in).nextInt(); boolean prime=n>1;\n    for(int i=2;i*i<=n&&prime;i++) if(n%i==0) prime=false;\n    System.out.println(prime?"Prime":"Not Prime");\n  }\n}`, complexity: 'O(sqrt(n))', tags: ['java','loops','number-theory']
   },
+  { id:11, title:'Electricity Slab Bill', slug:'electricity-slab-bill', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Conditional Statements', topic:'Nested Conditions', difficulty:'Easy', marks:3, question:'Read units consumed and calculate a bill using slabs: first 100 units at 2 per unit, next 100 at 3, remaining at 5.', constraints:'Units are non-negative.', sampleInput:'250', sampleOutput:'850', algorithm:'Apply the slab rates sequentially.', explanation:'Practises multi-branch decision making.', code:'', complexity:'O(1)', tags:['java','if-else','billing'] },
+  { id:12, title:'Digit Sum', slug:'digit-sum', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'While Loop', topic:'Digit Processing', difficulty:'Starter', marks:3, question:'Read a positive integer and print the sum of its digits.', constraints:'Input is a positive integer.', sampleInput:'5832', sampleOutput:'18', algorithm:'Repeatedly take the last digit with modulus 10 and remove it with integer division.', explanation:'Builds confidence with while loops and integer arithmetic.', code:'', complexity:'O(d)', tags:['java','while','digits'] },
+  { id:13, title:'Reverse an Integer', slug:'reverse-an-integer', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'While Loop', topic:'Digit Processing', difficulty:'Starter', marks:3, question:'Read a positive integer and print its digits in reverse order as an integer.', constraints:'Input has no leading-zero requirement.', sampleInput:'4207', sampleOutput:'7024', algorithm:'Extract digits from right to left and build the reversed value.', explanation:'Practises a standard digit-processing loop.', code:'', complexity:'O(d)', tags:['java','while','digits'] },
+  { id:14, title:'Count a Chosen Digit', slug:'count-chosen-digit', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'While Loop', topic:'Digit Processing', difficulty:'Practice', marks:3, question:'Read a positive integer and a digit. Count how many times that digit occurs.', constraints:'Digit is from 0 to 9.', sampleInput:'707070 7', sampleOutput:'3', algorithm:'Inspect each digit with modulus 10 and compare it with the chosen digit.', explanation:'Combines repeated digit extraction with a condition.', code:'', complexity:'O(d)', tags:['java','while','digits','conditions'] },
+  { id:15, title:'First Multiple Above Limit', slug:'first-multiple-above-limit', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'For Loop', topic:'Loop Control', difficulty:'Practice', marks:3, question:'Read a positive integer k and limit L. Print the smallest multiple of k that is strictly greater than L.', constraints:'k and L are positive.', sampleInput:'7 30', sampleOutput:'35', algorithm:'Start at the first positive multiple and advance until the value exceeds the limit.', explanation:'Practises loop termination and boundary conditions.', code:'', complexity:'O(L/k)', tags:['java','for-loop','boundaries'] },
+  { id:16, title:'Sum of Multiples', slug:'sum-of-multiples', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'For Loop', topic:'Accumulators', difficulty:'Practice', marks:3, question:'Read n and k. Find the sum of all positive multiples of k that are at most n.', constraints:'n and k are positive.', sampleInput:'20 3', sampleOutput:'63', algorithm:'Visit multiples of k and add each to an accumulator.', explanation:'Strengthens accumulator initialization and controlled iteration.', code:'', complexity:'O(n/k)', tags:['java','for-loop','accumulator'] },
+  { id:17, title:'Alternating Series Sum', slug:'alternating-series-sum', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'For Loop', topic:'Series', difficulty:'Exam', marks:4, question:'For a given n, calculate 1 - 2 + 3 - 4 + ... up to n.', constraints:'n is a positive integer.', sampleInput:'6', sampleOutput:'-3', algorithm:'Add odd terms and subtract even terms.', explanation:'Tests parity checks inside a loop.', code:'', complexity:'O(n)', tags:['java','for-loop','series'] },
+  { id:18, title:'Star Rectangle', slug:'star-rectangle', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Nested Loops', topic:'Pattern Printing', difficulty:'Practice', marks:4, question:'Read rows and columns and print a filled rectangle of stars.', constraints:'Both dimensions are positive and at most 20.', sampleInput:'3 4', sampleOutput:'****\n****\n****', algorithm:'Use an outer loop for rows and inner loop for columns.', explanation:'Introduces nested-loop structure for patterns.', code:'', complexity:'O(rows*columns)', tags:['java','nested-loops','patterns'] },
+  { id:19, title:'Number Triangle', slug:'number-triangle', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Nested Loops', topic:'Pattern Printing', difficulty:'Exam', marks:4, question:'Read n and print row i containing the numbers 1 through i.', constraints:'n is from 1 to 20.', sampleInput:'4', sampleOutput:'1\n12\n123\n1234', algorithm:'Outer loop controls rows; inner loop prints values from 1 to the row number.', explanation:'Builds nested-loop tracing and pattern skills.', code:'', complexity:'O(n²)', tags:['java','nested-loops','patterns'] },
+  { id:20, title:'Diagonal Sum of Matrix', slug:'diagonal-sum-matrix', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'2D Arrays', topic:'Matrix Traversal', difficulty:'Exam', marks:5, question:'Read a square matrix and print the sum of its main diagonal.', constraints:'Matrix order is positive.', sampleInput:'3\n1 2 3\n4 5 6\n7 8 9', sampleOutput:'15', algorithm:'Read the matrix and add elements whose row and column indices are equal.', explanation:'Applies two-dimensional array indexing.', code:'', complexity:'O(n²)', tags:['java','arrays','2d-array'] },
+  { id:21, title:'Row With Maximum Sum', slug:'row-with-maximum-sum', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'2D Arrays', topic:'Matrix Traversal', difficulty:'Challenge', marks:5, question:'Given a rectangular matrix, print the 1-based row number having the greatest row sum. In a tie, print the smaller row number.', constraints:'All entries are integers.', sampleInput:'3 3\n1 2 3\n9 0 0\n4 4 1', sampleOutput:'2', algorithm:'Compute each row sum while scanning the matrix and retain the best row.', explanation:'Combines nested traversal, accumulators and tie handling.', code:'', complexity:'O(rows*columns)', tags:['java','2d-array','challenge'] },
+  { id:22, title:'Array Average', slug:'array-average', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'1D Arrays', topic:'Array Traversal', difficulty:'Starter', marks:3, question:'Read n integers into an array and print their average as a decimal value.', constraints:'n is positive.', sampleInput:'4\n10 20 30 40', sampleOutput:'25.0', algorithm:'Accumulate the values and divide by n using floating-point arithmetic.', explanation:'Practises array input and numeric type conversion.', code:'', complexity:'O(n)', tags:['java','arrays','average'] },
+  { id:23, title:'Second Largest Distinct', slug:'second-largest-distinct', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'1D Arrays', topic:'Searching', difficulty:'Challenge', marks:5, question:'Print the second largest distinct value in an integer array.', constraints:'At least two distinct values exist.', sampleInput:'6\n8 3 8 5 2 6', sampleOutput:'6', algorithm:'Track the largest and second-largest distinct values in one traversal.', explanation:'Develops careful comparisons and duplicate handling.', code:'', complexity:'O(n)', tags:['java','arrays','searching','challenge'] },
+  { id:24, title:'Count Occurrences', slug:'count-occurrences', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'1D Arrays', topic:'Array Searching', difficulty:'Practice', marks:3, question:'Read an array and a target value. Print how many times the target occurs.', constraints:'Array size is positive.', sampleInput:'7\n2 5 2 7 2 9 2\n2', sampleOutput:'4', algorithm:'Traverse the array and increment a counter whenever the target is found.', explanation:'A focused array traversal exercise.', code:'', complexity:'O(n)', tags:['java','arrays','counting'] },
+  { id:25, title:'Remove Repeated Adjacent Characters', slug:'remove-repeated-adjacent-characters', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Strings', topic:'String Traversal', difficulty:'Exam', marks:4, question:'Create a new string by keeping only the first character from each run of identical adjacent characters.', constraints:'Input is a non-empty word.', sampleInput:'aaabbccdaa', sampleOutput:'abcda', algorithm:'Append a character only when it differs from the previous character.', explanation:'Tests charAt(), length() and controlled string construction.', code:'', complexity:'O(n)', tags:['java','strings','charAt'] },
+  { id:26, title:'Count Words by Spaces', slug:'count-words-by-spaces', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Strings', topic:'String Processing', difficulty:'Practice', marks:3, question:'Read a sentence containing single spaces between words and print the number of words.', constraints:'No leading or trailing spaces.', sampleInput:'Java makes learning logical', sampleOutput:'4', algorithm:'Count spaces and add one for the first word.', explanation:'Provides a simple sentence-processing problem without library shortcuts.', code:'', complexity:'O(n)', tags:['java','strings','spaces'] },
+  { id:27, title:'Vowel-Consonant Classification', slug:'vowel-consonant-classification', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Strings', topic:'Character Processing', difficulty:'Exam', marks:4, question:'For a lowercase alphabetic word, print the number of vowels and consonants.', constraints:'Letters only.', sampleInput:'education', sampleOutput:'Vowels: 5\nConsonants: 4', algorithm:'Inspect each character and classify it by vowel membership.', explanation:'Combines counters and character comparisons.', code:'', complexity:'O(n)', tags:['java','strings','counting'] },
+  { id:28, title:'Method: Digit Product', slug:'method-digit-product', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Methods', topic:'User Defined Methods', difficulty:'Practice', marks:4, question:'Write a method digitProduct(int n) that returns the product of all digits of a positive integer and call it from main().', constraints:'n is positive.', sampleInput:'234', sampleOutput:'24', algorithm:'Extract each digit and multiply it into a product accumulator.', explanation:'Practises method declaration, return value and digit processing.', code:'', complexity:'O(d)', tags:['java','methods','return'] },
+  { id:29, title:'Method: Perfect Number', slug:'method-perfect-number', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Methods', topic:'Method Design', difficulty:'Challenge', marks:5, question:'Write a method isPerfect(int n) that returns true when the sum of proper positive divisors equals n.', constraints:'n is greater than 1.', sampleInput:'28', sampleOutput:'Perfect', algorithm:'Find proper divisors using a loop and compare their sum with n.', explanation:'Combines method design, loops and divisibility.', code:'', complexity:'O(n)', tags:['java','methods','divisors','challenge'] },
+  { id:30, title:'Constructor: Student Record', slug:'constructor-student-record', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Classes and Objects', topic:'Constructors', difficulty:'Exam', marks:5, question:'Create a Student class with name and marks fields, a parameterized constructor, and a method to print the record and percentage for three subjects.', constraints:'Use integer marks.', sampleInput:'Asha 78 84 91', sampleOutput:'Asha\nPercentage: 84.33', algorithm:'Initialize fields through the constructor and calculate the average in an instance method.', explanation:'Applies class design, constructors and member methods.', code:'', complexity:'O(1)', tags:['java','classes','constructors'] },
+  { id:31, title:'Class: Rectangle Metrics', slug:'class-rectangle-metrics', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Classes and Objects', topic:'Instance Methods', difficulty:'Practice', marks:4, question:'Create a Rectangle class with length and breadth and methods area() and perimeter(). Print both values.', constraints:'Dimensions are positive.', sampleInput:'8 5', sampleOutput:'Area: 40\nPerimeter: 26', algorithm:'Store dimensions in fields and calculate each metric in its own method.', explanation:'Reinforces object state and instance methods.', code:'', complexity:'O(1)', tags:['java','classes','methods'] },
+  { id:32, title:'Switch: Month Days', slug:'switch-month-days', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Switch Case', topic:'Switch Statement', difficulty:'Practice', marks:4, question:'Read a month number from 1 to 12 and print the number of days, treating February as 28 days.', constraints:'Month is valid.', sampleInput:'9', sampleOutput:'30', algorithm:'Group month cases with the same number of days.', explanation:'Practises switch grouping and case control.', code:'', complexity:'O(1)', tags:['java','switch','cases'] },
+  { id:33, title:'Switch: Grade Message', slug:'switch-grade-message', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Switch Case', topic:'Switch Statement', difficulty:'Starter', marks:3, question:'Read a grade character A, B, C or D and print a suitable performance message.', constraints:'Input is an uppercase grade.', sampleInput:'B', sampleOutput:'Good', algorithm:'Use switch cases for the four grade values.', explanation:'A compact switch practice task.', code:'', complexity:'O(1)', tags:['java','switch','conditions'] },
+  { id:34, title:'Do-While Menu Calculator', slug:'do-while-menu-calculator', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Do-While Loop', topic:'Menu Driven Program', difficulty:'Challenge', marks:5, question:'Build a menu-driven calculator using do-while: 1 Add, 2 Subtract, 3 Multiply, 4 Exit. Continue until Exit is selected.', constraints:'Operands are integers; menu choice is valid.', sampleInput:'1\n8 5\n4', sampleOutput:'13', algorithm:'Execute one operation, then repeat while the menu choice is not 4.', explanation:'Integrates switch, do-while and arithmetic into an exam-style task.', code:'', complexity:'O(k)', tags:['java','do-while','switch','challenge'] },
+  { id:35, title:'Nested If: Triangle Type', slug:'nested-if-triangle-type', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Nested If', topic:'Decision Making', difficulty:'Exam', marks:4, question:'Read three positive side lengths. First check whether they form a triangle; if so classify it as equilateral, isosceles or scalene.', constraints:'Sides are positive integers.', sampleInput:'5 5 8', sampleOutput:'Isosceles', algorithm:'Check the triangle inequality before comparing side equality.', explanation:'Tests nested decision structure and condition ordering.', code:'', complexity:'O(1)', tags:['java','nested-if','conditions'] },
+  { id:36, title:'Array Left Rotation', slug:'array-left-rotation', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'1D Arrays', topic:'Array Manipulation', difficulty:'Challenge', marks:5, question:'Read an array and a rotation count k. Print the array after rotating it left by k positions.', constraints:'k may be larger than the array length.', sampleInput:'5\n10 20 30 40 50\n2', sampleOutput:'30 40 50 10 20', algorithm:'Normalize k with the array length and print elements from k onward followed by the prefix.', explanation:'Develops index reasoning without requiring advanced library methods.', code:'', complexity:'O(n)', tags:['java','arrays','indexing','challenge'] },
+  { id:37, title:'Pattern: Hollow Square', slug:'pattern-hollow-square', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Nested Loops', topic:'Pattern Printing', difficulty:'Challenge', marks:5, question:'Read n and print an n by n hollow square using stars on the border and spaces inside.', constraints:'n is at least 2 and at most 20.', sampleInput:'4', sampleOutput:'****\n*  *\n*  *\n****', algorithm:'Print a star when the row or column is on the border; otherwise print a space.', explanation:'A controlled nested-loop pattern requiring boundary reasoning.', code:'', complexity:'O(n²)', tags:['java','nested-loops','patterns','challenge'] },
+  { id:38, title:'Trace: Nested Loop Counter', slug:'trace-nested-loop-counter', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Nested Loops', topic:'Tracing', difficulty:'Exam', marks:3, question:'Predict the final value printed by a program where an outer loop runs 3 times and an inner loop runs from 1 to the outer counter, adding the inner counter to sum.', constraints:'Answer must include the final numeric value and one-line reasoning.', sampleInput:'No input', sampleOutput:'10', algorithm:'Trace inner sums: 1 + (1+2) + (1+2+3).', explanation:'Targets exam-style dry-run accuracy for nested loops.', code:'', complexity:'O(n²)', tags:['java','nested-loops','dry-run'] },
+  { id:39, title:'Challenge: Armstrong Number', slug:'challenge-armstrong-number', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'Loops and Methods', topic:'Number Logic', difficulty:'Challenge', marks:5, question:'Read a three-digit number and determine whether it equals the sum of the cubes of its digits.', constraints:'Input is a three-digit positive integer.', sampleInput:'153', sampleOutput:'Armstrong', algorithm:'Extract each digit, cube it, sum the cubes and compare with the original number.', explanation:'A classic digit-processing challenge combining loops and arithmetic.', code:'', complexity:'O(d)', tags:['java','loops','digits','challenge'] },
+  { id:40, title:'Challenge: Common Elements', slug:'challenge-common-elements', board:'ICSE', class:'10', subject:'Computer Science', language:'Java', chapter:'1D Arrays', topic:'Array Comparison', difficulty:'Challenge', marks:5, question:'Read two integer arrays and print each value that occurs in both arrays once, preserving the order in which values first appear in the first array.', constraints:'Array sizes are positive.', sampleInput:'5\n1 4 2 4 7\n4\n9 4 8 2', sampleOutput:'4 2', algorithm:'For each first-array value, search the second array and avoid printing a repeated match.', explanation:'Builds nested traversal and duplicate-control skills.', code:'', complexity:'O(n*m)', tags:['java','arrays','searching','challenge'] }
 ];
 
 export default javaQuestions;

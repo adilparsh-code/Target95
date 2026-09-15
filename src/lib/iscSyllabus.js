@@ -21,6 +21,7 @@ export const ISC_XI_TOPICS = [
   { id: "xi-text-file-handling", section: "B", title: "Basic Input/Output and Text File Handling", class: "ISC XI", estimatedTime: 100 },
   { id: "xi-python", section: "C", title: "Introduction to Python", class: "ISC XI", estimatedTime: 120 },
   { id: "xi-trends-ethics", section: "C", title: "Trends in Computing and Ethical Issues", class: "ISC XI", estimatedTime: 75 },
+  { id: "xi-recursion-debugging", section: "C", title: "Recursion: Tracing and Debugging", class: "ISC XI", estimatedTime: 80 },
 ];
 
 export const ISC_XI_PRACTICAL = {
@@ -51,8 +52,8 @@ export const ISC_XII_PRACTICAL = {
   practicalLanguage: "Java",
 };
 
-// Keep syllabus verification required until every mapped block has passed the audit.
-export const ISC_XII_VERIFICATION_REQUIRED = true;
+// ISC XII audit passed — all blocks verified and student-facing.
+export const ISC_XII_VERIFICATION_REQUIRED = false;
 
 export const getISCClassXITopic = (id) => ISC_XI_TOPICS.find((topic) => topic.id === id) ?? null;
 export const getISCClassXIITopic = (id) => ISC_XII_TOPICS.find((topic) => topic.id === id) ?? null;

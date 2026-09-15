@@ -1,30 +1,44 @@
-import fs from "node:fs";
-import path from "node:path";
+const fs = require("node:fs");
+const path = require("node:path");
 
 const ROOT = process.cwd();
 const CONTENT_ROOT = path.join(ROOT, "src", "app", "data", "chapter-content");
 
-const SECTION_KEYS = [
-  "introduction", "theoryNotes", "syntax", "examples", "dryRun",
-  "outputBasedQuestions", "errorFindingQuestions", "fillInTheBlanks",
-  "mcqs", "trueFalse", "shortAnswerQuestions", "longAnswerQuestions",
-  "programmingQuestions", "challengeProblems", "previousYearQuestions",
-  "aiVivaQuestions", "practiceTest", "chapterSummary", "revisionNotes",
-  "cheatsheet", "interviewQuestions", "examTricks", "assertionReason",
-  "debugTheCode", "caseStudyQuestions", "mixedPracticeSets",
-  "rapidRevisionQuestions",
+const CORE_SECTIONS = [
+  "introduction",
+  "theoryNotes",
+  "examples",
+  "chapterSummary",
+  "revisionNotes",
+];
+
+const ACADEMIC_SECTIONS = [
+  ...CORE_SECTIONS,
+  "syntax", "dryRun", "outputBasedQuestions", "errorFindingQuestions",
+  "fillInTheBlanks", "mcqs", "trueFalse", "shortAnswerQuestions",
+  "longAnswerQuestions", "programmingQuestions", "challengeProblems",
+  "previousYearQuestions", "aiVivaQuestions", "practiceTest", "cheatsheet",
+  "interviewQuestions", "examTricks", "assertionReason", "debugTheCode",
+  "caseStudyQuestions", "mixedPracticeSets", "rapidRevisionQuestions",
 ];
 
 const PLACEHOLDER_PATTERNS = [
-  /^question\\s*\\d+$/i, /^viva\\s*question\\s*\\d+$/i,
-  /^key\\s+point\\s+about\\b/i, /^key\\s+point\\s*\\d+$/i,
-  /^generic\\s+(?:skill|note|key point|pitfall|pattern)\\b/i,
-  /placeholder/i, /content\\s+for\\s+(?:note|question)/i,
-  /^answer$/i, /^explanation$/i, /coming\\s+soon/i,
-  /will\\s+be\\s+added/i, /available\\s+soon/i,
+  /\bquestion\s*\d+\b/i,
+  /\bviva\s*question\s*\d+\b/i,
+  /^key\s+point\s+about\b/i,
+  /^key\s+point\s*\d+$/i,
+  /^generic\s+(?:skill|note|key point|pitfall|pattern)\b/i,
+  /\bplaceholder\b/i,
+  /\bcontent\s+for\s+(?:note|question)\b/i,
+  /^answer$/i,
+  /^explanation$/i,
+  /\bcoming\s+soon\b/i,
+  /\bwill\s+be\s+added\b/i,
+  /\bavailable\s+soon\b/i,
 ];
 
 function walk(dir) {
+  if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) return walk(full);
@@ -32,79 +46,97 @@ function walk(dir) {
   });
 }
 
-function isPlaceholder(value) {
-  if (typeof value !== "string") return false;
-  const text = value.trim();
-  return PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(text));
+function stripComments(source) {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|\s)\/\/.*$/gm, "$1");
 }
 
-function scanValue(value, location, findings) {
-  if (typeof value === "string") {
-    if (isPlaceholder(value)) findings.push({ location, value });
-    return;
-  }
-  if (Array.isArray(value)) {
-    value.forEach((item, index) => scanValue(item, `${location}[${index}]`, findings));
-    return;
-  }
-  if (value && typeof value === "object") {
-    Object.entries(value).forEach(([key, item]) => scanValue(item, `${location}.${key}`, findings));
-  }
+function propertyRegex(key) {
+  return new RegExp(`(?:^|[,{\\n])\\s*(?:["']${key}["']|${key})\\s*:`);
 }
 
-function loadModule(file) {
-  const source = fs.readFileSync(file, "utf8");
-  // This audit intentionally performs static checks rather than importing chapter
-  // modules, so it remains safe to run in CI even when a chapter has UI-only imports.
-  return source;
+function declaredSections(source) {
+  return Object.fromEntries(
+    ACADEMIC_SECTIONS.map((key) => [key, propertyRegex(key).test(source)])
+  );
+}
+
+function looksEmptySection(source, key) {
+  const match = source.match(new RegExp(`(?:["']${key}["']|\\b${key})\\s*:\\s*([\\[\\{])`));
+  if (!match) return false;
+  const open = match[1];
+  const close = open === "[" ? "]" : "}";
+  const start = match.index + match[0].length;
+  const tail = source.slice(start, start + 500);
+  return new RegExp(`^\\s*${close}`).test(tail);
+}
+
+function findPlaceholders(source) {
+  const findings = [];
+  const lines = source.split(/\r?\n/);
+  lines.forEach((line, index) => {
+    const text = line.trim();
+    if (!text || text.startsWith("//") || text.startsWith("/*") || text.startsWith("*") || text.startsWith("*/")) return;
+    if (PLACEHOLDER_PATTERNS.some((pattern) => pattern.test(text))) {
+      findings.push({ line: index + 1, value: text.slice(0, 240) });
+    }
+  });
+  return findings;
 }
 
 const files = walk(CONTENT_ROOT);
 const report = {
   generatedAt: new Date().toISOString(),
   totalFiles: files.length,
-  sections: SECTION_KEYS,
   chapters: [],
 };
 
+const allIds = new Map();
+
 for (const file of files) {
-  const source = loadModule(file);
+  const source = fs.readFileSync(file, "utf8");
+  const cleanSource = stripComments(source);
   const relative = path.relative(ROOT, file);
-  const placeholders = [];
-  for (const pattern of PLACEHOLDER_PATTERNS) {
-    const matches = source.match(new RegExp(pattern.source, "gim"));
-    if (matches) matches.forEach((value) => placeholders.push(value.trim()));
-  }
+  const sections = declaredSections(cleanSource);
+  const ids = [...cleanSource.matchAll(/\bid\s*:\s*["'`]([^"'`]+)["'`]/g)].map((m) => m[1]);
 
-  const sectionPresence = Object.fromEntries(
-    SECTION_KEYS.map((key) => [key, new RegExp(`\\b${key}\\s*:`).test(source)])
-  );
-
-  const ids = [...source.matchAll(/\\bid\\s*:\s*["'`]([^"'`]+)["'`]/g)].map((m) => m[1]);
-  const duplicateIds = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
+  ids.forEach((id) => {
+    if (!allIds.has(id)) allIds.set(id, []);
+    allIds.get(id).push(relative);
+  });
 
   report.chapters.push({
     file: relative,
-    lines: source.split(/\\r?\\n/).length,
+    lines: source.split(/\r?\n/).length,
     ids: ids.length,
-    duplicateIds,
-    placeholders: [...new Set(placeholders)],
-    missingSections: SECTION_KEYS.filter((key) => !sectionPresence[key]),
+    placeholders: findPlaceholders(source),
+    missingCoreSections: CORE_SECTIONS.filter((key) => !sections[key]),
+    emptyCoreSections: CORE_SECTIONS.filter((key) => looksEmptySection(cleanSource, key)),
+    missingOptionalSections: ACADEMIC_SECTIONS.filter((key) => !CORE_SECTIONS.includes(key) && !sections[key]),
   });
 }
 
-const missing = report.chapters.filter((chapter) => chapter.missingSections.length);
-const placeholderFiles = report.chapters.filter((chapter) => chapter.placeholders.length);
-const duplicateFiles = report.chapters.filter((chapter) => chapter.duplicateIds.length);
+const duplicateIds = [...allIds.entries()]
+  .filter(([, locations]) => locations.length > 1)
+  .map(([id, locations]) => ({ id, locations }));
 
-console.log(JSON.stringify({
-  ...report,
-  summary: {
-    totalFiles: report.totalFiles,
-    filesWithMissingSections: missing.length,
-    filesWithPlaceholders: placeholderFiles.length,
-    filesWithDuplicateIds: duplicateFiles.length,
-  },
-}, null, 2));
+report.summary = {
+  totalFiles: report.totalFiles,
+  filesWithMissingCoreSections: report.chapters.filter((c) => c.missingCoreSections.length).length,
+  filesWithEmptyCoreSections: report.chapters.filter((c) => c.emptyCoreSections.length).length,
+  filesWithPlaceholders: report.chapters.filter((c) => c.placeholders.length).length,
+  duplicateIdCount: duplicateIds.length,
+};
+report.duplicateIds = duplicateIds;
 
-if (placeholderFiles.length || duplicateFiles.length) process.exitCode = 1;
+console.log(JSON.stringify(report, null, 2));
+
+if (
+  report.summary.filesWithMissingCoreSections ||
+  report.summary.filesWithEmptyCoreSections ||
+  report.summary.filesWithPlaceholders ||
+  report.summary.duplicateIdCount
+) {
+  process.exitCode = 1;
+}

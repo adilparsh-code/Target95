@@ -143,47 +143,32 @@ export default function ClientHome() {
   const startLearningHref = getStartLearningHref(board || selectedBoard, selectedClassData || selectedClass);
 
   return (
-    <main id="main-content" className="site-body min-h-screen">
+    <main id="main-content" className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
-      <div className="home-workspace mx-auto w-full max-w-[1480px] px-3 pb-8 pt-3 sm:px-5 lg:px-6">
-        <div className="home-panel overflow-hidden rounded-[1.5rem] border border-slate-200/80 bg-white/95 shadow-[0_24px_70px_rgba(15,23,42,0.10)] dark:border-slate-800 dark:bg-slate-900/95">
-          <ErrorBoundary>
-            <div className="home-primary">
-              <RedesignedHero
-                onBoardSelect={handleBoardSelect}
-                onBackToBoards={handleBackToBoards}
-                onBackToClasses={handleBackToClasses}
-                onClassSelect={handleClassSelect}
-                onSubjectSelect={handleSubjectSelect}
-                showSubjects={showSubjects}
-                showClasses={showClasses}
-                selectedBoard={selectedBoard}
-                selectedClass={selectedClass}
-                showStartLearning={showStartLearning}
-                onStartLearning={() => window.location.assign(startLearningHref)}
-                personalization={personalization}
-              />
-              <div className="grid gap-4 border-t border-slate-100 p-4 sm:p-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,.65fr)] lg:p-6 dark:border-slate-800">
-                <SpotlightLearningCard />
-                <Stats />
-              </div>
-            </div>
-
-            <div className="home-secondary border-t border-slate-100 dark:border-slate-800">
-              <div className="grid gap-0 lg:grid-cols-2">
-                <WhyTarget95 />
-                <AIWorkflow />
-              </div>
-              <BoardSupport />
-              <Features />
-              <div className="grid gap-0 border-t border-slate-100 lg:grid-cols-2 dark:border-slate-800">
-                <FAQ />
-                <Newsletter />
-              </div>
-            </div>
-          </ErrorBoundary>
-        </div>
-      </div>
+      <ErrorBoundary>
+        <RedesignedHero
+          onBoardSelect={handleBoardSelect}
+          onBackToBoards={handleBackToBoards}
+          onBackToClasses={handleBackToClasses}
+          onClassSelect={handleClassSelect}
+          onSubjectSelect={handleSubjectSelect}
+          showSubjects={showSubjects}
+          showClasses={showClasses}
+          selectedBoard={selectedBoard}
+          selectedClass={selectedClass}
+          showStartLearning={showStartLearning}
+          onStartLearning={() => window.location.assign(startLearningHref)}
+          personalization={personalization}
+        />
+        <SpotlightLearningCard />
+        <Stats />
+        <WhyTarget95 />
+        <AIWorkflow />
+        <BoardSupport />
+        <Features />
+        <FAQ />
+        <Newsletter />
+      </ErrorBoundary>
       <Footer />
     </main>
   );

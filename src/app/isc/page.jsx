@@ -21,20 +21,36 @@ const sections = [
     label: "Board year",
   },
   {
-    title: "ISC Class XI",
-    description: "Practicals and project work for ISC Class XI Computer Science.",
+    title: "ISC Class XI · Computer Science",
+    description: "Computer Science practicals, projects and senior-secondary programming coverage.",
     href: "/isc/class-xi",
-    badge: "ISC XI",
+    badge: "ISC XI · CS",
     icon: Code2,
     label: "Senior secondary",
   },
   {
-    title: "ISC Class XII",
-    description: "Boolean Algebra, Logic Gates, K-Maps and related problem solving.",
+    title: "ISC Class XII · Computer Science",
+    description: "Boolean Algebra, hardware, Java, data structures, algorithms and board-focused problem solving.",
     href: "/isc/class-xii",
-    badge: "ISC XII",
+    badge: "ISC XII · CS",
     icon: BookOpen,
     label: "Board year",
+  },
+  {
+    title: "ISC Class XI · Artificial Intelligence",
+    description: "ISC AI 883 theory for Examination Year 2027, with syllabus units and separate project work.",
+    href: "/isc/artificial-intelligence/11",
+    badge: "ISC XI · AI",
+    icon: BrainCircuit,
+    label: "AI track",
+  },
+  {
+    title: "ISC Class XII · Artificial Intelligence",
+    description: "ISC AI 883 Class XII theory covering AI applications, neural networks, ML and computer vision.",
+    href: "/isc/artificial-intelligence/12",
+    badge: "ISC XII · AI",
+    icon: Sparkles,
+    label: "AI track",
   },
 ];
 
@@ -54,22 +70,22 @@ export default function ISCHubPage() {
               <div>
                 <div className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-[0.16em]">
                   <span className="rounded-full bg-[var(--primary-light)] px-3 py-1.5 text-[var(--primary)]">ICSE &amp; ISC</span>
-                  <span className="rounded-full border border-[var(--border)] px-3 py-1.5 text-[var(--muted-foreground)]">Computer Science</span>
+                  <span className="rounded-full border border-[var(--border)] px-3 py-1.5 text-[var(--muted-foreground)]">Computer Science &amp; AI</span>
                 </div>
                 <h1 className="mt-6 max-w-3xl text-4xl font-black tracking-[-0.04em] sm:text-5xl lg:text-6xl">Pick your path. Then get straight to learning.</h1>
                 <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--muted-foreground)] sm:text-lg">
-                  A focused hub for the ICSE and ISC Computer Science modules already available in Target95 — organised by class, not buried in menus.
+                  A focused hub for ICSE and ISC Computer Science and Artificial Intelligence — organised by board, class and subject so CS and AI stay clearly separated.
                 </p>
                 <div className="mt-8 inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--muted)] px-4 py-3 text-sm font-semibold text-[var(--muted-foreground)]">
-                  <GraduationCap className="h-4 w-4 text-[var(--primary)]" /> Four learning tracks
+                  <GraduationCap className="h-4 w-4 text-[var(--primary)]" /> Six learning tracks
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3 self-end lg:pl-8">
                 <div className="rounded-2xl border border-[var(--border)] bg-[var(--muted)] p-5"><p className="text-3xl font-black">2</p><p className="mt-1 text-sm text-[var(--muted-foreground)]">ICSE tracks</p></div>
-                <div className="rounded-2xl border border-[var(--border)] bg-[var(--muted)] p-5"><p className="text-3xl font-black">2</p><p className="mt-1 text-sm text-[var(--muted-foreground)]">ISC tracks</p></div>
+                <div className="rounded-2xl border border-[var(--border)] bg-[var(--muted)] p-5"><p className="text-3xl font-black">4</p><p className="mt-1 text-sm text-[var(--muted-foreground)]">ISC tracks</p></div>
                 <div className="col-span-2 rounded-2xl border border-[var(--border)] bg-white p-5 dark:bg-slate-950">
                   <p className="text-sm font-bold">One consistent learning flow</p>
-                  <p className="mt-1 text-sm leading-6 text-[var(--muted-foreground)]">Concepts, examples, practical work and board-focused practice — where each track supports it.</p>
+                  <p className="mt-1 text-sm leading-6 text-[var(--muted-foreground)]">Theory, examples, practical work and board-focused practice — while keeping Computer Science and Artificial Intelligence on separate learning paths.</p>
                 </div>
               </div>
             </div>
@@ -79,9 +95,9 @@ export default function ISCHubPage() {
             <div className="mb-7 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--primary)]">Learning tracks</p>
-                <h2 className="mt-2 text-3xl font-black tracking-tight">Choose your class</h2>
+                <h2 className="mt-2 text-3xl font-black tracking-tight">Choose your class and subject</h2>
               </div>
-              <p className="max-w-md text-sm leading-6 text-[var(--muted-foreground)]">Each card takes you directly to its existing learning area. No routing or content behaviour has been changed.</p>
+              <p className="max-w-md text-sm leading-6 text-[var(--muted-foreground)]">Each card takes you directly to its learning area, with ISC Computer Science and AI kept separately addressable.</p>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">

@@ -44,6 +44,9 @@ export const ISC_XII_TOPICS = [
   { id: "xii-inheritance-interface", section: "B", title: "Inheritance and Interface", class: "ISC XII", estimatedTime: 130 },
   { id: "xii-python", section: "C", title: "Programming in Python", class: "ISC XII", estimatedTime: 120 },
   { id: "xii-data-structures", section: "C", title: "Data Structures", class: "ISC XII", estimatedTime: 100 },
+  { id: "xii-stack", section: "C", title: "Stack", class: "ISC XII", estimatedTime: 90 },
+  { id: "xii-queue", section: "C", title: "Queue", class: "ISC XII", estimatedTime: 90 },
+  { id: "xii-trees", section: "C", title: "Trees", class: "ISC XII", estimatedTime: 110 },
   { id: "xii-complexity-big-o", section: "C", title: "Complexity and Big O Notation", class: "ISC XII", estimatedTime: 90 },
 ];
 

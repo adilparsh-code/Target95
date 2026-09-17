@@ -83,6 +83,14 @@ static String reverse(String s) {
       { type: "mcq", question: "Which exception is thrown when an invalid array index is accessed at runtime?", options: ["A) IOException", "B) ArithmeticException", "C) ArrayIndexOutOfBoundsException", "D) NullPointerException"], answer: "C", explanation: "Java throws ArrayIndexOutOfBoundsException for invalid array indices." },
       { type: "mcq", question: "What does substring(3, 6) return for the String \"ABCDEFG\"?", options: ["A) \"ABC\"", "B) \"DEF\"", "C) \"DEFG\"", "D) \"CDE\""], answer: "B", explanation: "substring(start, end) returns characters at indices 3, 4, 5 — which are D, E, F." },
       { type: "reasoning", question: "Why is binary search faster than linear search, and what is its prerequisite?", answer: "Binary search halves the search range each step giving O(log n) time, but the array must be sorted in the correct order first." },
+      { type: "programming", question: "Write binary search on a sorted int array. Return the index or -1. State worst-case complexity.", answer: "Keep low and high; mid = (low+high)/2; equal → return mid; key < arr[mid] → high = mid-1; else low = mid+1. Worst case O(log n)." },
+      { type: "programming", question: "Write bubble sort for an int array and state its worst-case time complexity.", answer: "Nested loops: if arr[j] > arr[j+1] swap. Worst case O(n²) comparisons and swaps." },
+      { type: "tracing", question: "Trace one full outer pass of bubble sort on [4, 1, 3, 2] and show the array after that pass.", answer: "Compare 4>1 swap → [1,4,3,2]; 4>3 swap → [1,3,4,2]; 4>2 swap → [1,3,2,4]. After pass 1 the largest value 4 is at the end." },
+    ],
+    related: [
+      { href: "/isc/class-xii/data-structures", label: "Data Structures overview" },
+      { href: "/isc/class-xii/complexity-big-o", label: "Complexity and Big O" },
+      { href: "/isc/class-xii/trees", label: "Trees" },
     ],
   },
 
@@ -214,19 +222,19 @@ def word_frequency(words):
   "data-structures": {
     title: "Data Structures",
     section: "C",
-    overview: "Understand how stacks, queues and linked lists organise data, how operations affect them, and how to choose the right structure. ISC board questions test tracing of push/pop/enqueue/dequeue sequences and reasoning about LIFO vs FIFO.",
+    overview: "Choose and reason about stacks, queues, linked lists and trees. ISC board questions test LIFO vs FIFO, overflow/underflow, node linking, and matching a structure to an operation set. Study the dedicated Stack, Queue and Trees lessons after this overview.",
     concepts: [
       "A stack follows LIFO (Last In First Out): the most recently inserted item is removed first. Operations: push (insert at top), pop (remove from top), peek/top (view top without removing).",
       "A queue follows FIFO (First In First Out): the earliest inserted item is removed first. Operations: enqueue (insert at rear), dequeue (remove from front).",
-      "Stack overflow occurs when push is called on a full stack; stack underflow occurs when pop is called on an empty stack.",
+      "Stack overflow occurs when push is called on a full stack; stack underflow occurs when pop is called on an empty stack. Queue overflow/underflow follow the same idea at rear/front.",
       "A linked list is a sequence of nodes where each node stores data and a reference (pointer) to the next node. The last node's next is null.",
-      "Linked list operations: insert at head O(1), insert at tail O(n) without tail pointer, search O(n), delete O(n).",
-      "Stack time complexity: push O(1), pop O(1), peek O(1).",
-      "Queue time complexity: enqueue O(1), dequeue O(1) with a proper implementation.",
+      "A binary tree is a hierarchical structure: each node has at most two children (left and right). Traversals are inorder, preorder and postorder.",
+      "Linked list operations: insert at head O(1), insert at tail O(n) without a tail pointer, search O(n), delete O(n).",
+      "Stack time complexity: push O(1), pop O(1), peek O(1). Queue time complexity: enqueue O(1), dequeue O(1) with a proper (circular or linked) implementation.",
       "Arrays provide O(1) indexed access; linked structures emphasise dynamic size and efficient insertion/deletion at known positions.",
-      "Choose a structure based on required operations: use a stack for undo/backtracking, a queue for scheduling/BFS, a linked list for dynamic insertion.",
+      "Choose a structure based on required operations: stack for undo/backtracking/expression evaluation, queue for scheduling/BFS, linked list for dynamic insertion, tree for hierarchical search.",
     ],
-    workedExample: "Stack trace: push(A), push(B), push(C), pop() → C, push(D), pop() → D, pop() → B. Queue trace: enqueue(A), enqueue(B), dequeue() → A, enqueue(C), dequeue() → B.",
+    workedExample: "Stack trace: push(A), push(B), push(C), pop() → C, push(D), pop() → D, pop() → B. Queue trace: enqueue(A), enqueue(B), dequeue() → A, enqueue(C), dequeue() → B. Tree: root 8 with left 3 and right 10 has inorder 3, 8, 10.",
     workedExampleCode: `// Stack using array (ISC style)
 class Stack {
     int[] data;
@@ -256,6 +264,218 @@ class Queue {
       { type: "mcq", question: "Which data structure uses LIFO order?", options: ["A) Queue", "B) Stack", "C) Linked List", "D) Array"], answer: "B", explanation: "A stack removes the most recently added element first." },
       { type: "mcq", question: "What is the time complexity of push and pop on a stack?", options: ["A) O(n)", "B) O(log n)", "C) O(1)", "D) O(n²)"], answer: "C", explanation: "Push and pop only access the top element, so they are O(1)." },
       { type: "reasoning", question: "When is a stack preferable to a queue, and when is a queue preferable?", answer: "Use a stack when the problem requires last-in-first-out processing (undo, recursive call modelling, expression evaluation). Use a queue when the problem requires first-in-first-out processing (task scheduling, BFS, print spooling)." },
+    ],
+    related: [
+      { href: "/isc/class-xii/stack", label: "Stack" },
+      { href: "/isc/class-xii/queue", label: "Queue" },
+      { href: "/isc/class-xii/trees", label: "Trees" },
+      { href: "/isc/class-xii/complexity-big-o", label: "Complexity and Big O" },
+    ],
+  },
+
+  "stack": {
+    title: "Stack",
+    section: "C",
+    overview: "A stack is a LIFO linear structure. ISC board questions require tracing push/pop/peek, detecting overflow and underflow, implementing an array stack in Java, and applying stacks to reverse, matching brackets and postfix evaluation.",
+    concepts: [
+      "LIFO: the last item pushed is the first item popped. Only the top is accessible.",
+      "Primitive operations: push (insert at top), pop (remove from top), peek/top (read top without removing), isEmpty, isFull.",
+      "Array implementation: int top = -1 for empty. Push does data[++top] = x after a full check. Pop returns data[top--] after an empty check.",
+      "Overflow: push on a full stack (top == capacity - 1). Underflow: pop or peek on an empty stack (top == -1).",
+      "Push, pop and peek are O(1) time and O(1) extra space for an array stack.",
+      "The Java method-call stack is itself a stack of frames; recursion uses the same LIFO rule.",
+      "Applications: undo, backtracking, reversing a sequence, matching parentheses, converting infix to postfix, evaluating postfix, DFS.",
+      "A linked-list stack pushes and pops at the head, so it grows until memory is exhausted and still has O(1) push/pop.",
+      "Peek never changes top. Confusing peek with pop is a common board tracing error.",
+    ],
+    workedExample: "Capacity 4, top starts at -1. push(5), push(8), push(2) → stack [5, 8, 2], top=2. pop() returns 2, top=1. peek() returns 8, top still 1. push(9) → [5, 8, 9], top=2.",
+    workedExampleCode: `class Stack {
+    int[] data;
+    int top;
+    int capacity;
+    Stack(int capacity) {
+        this.capacity = capacity;
+        data = new int[capacity];
+        top = -1;
+    }
+    boolean isEmpty() { return top == -1; }
+    boolean isFull() { return top == capacity - 1; }
+    void push(int x) {
+        if (isFull()) {
+            System.out.println("Overflow");
+            return;
+        }
+        data[++top] = x;
+    }
+    int pop() {
+        if (isEmpty()) {
+            System.out.println("Underflow");
+            return -1;
+        }
+        return data[top--];
+    }
+    int peek() {
+        if (isEmpty()) return -1;
+        return data[top];
+    }
+}
+// Trace: push(5); push(8); push(2); pop(); peek(); push(9);
+// After push 5,8,2: [5,8,2] top=2
+// pop -> 2, top=1; peek -> 8; push 9 -> [5,8,9] top=2`,
+    practice: [
+      { type: "tracing", question: "Empty stack. Operations: push(4), push(7), pop(), push(1), push(9), pop(), peek(). State each pop/peek result and the final stack from bottom to top.", answer: "pop returns 7, then 9. peek returns 1. Final stack bottom→top: 4, 1." },
+      { type: "tracing", question: "Trace postfix evaluation of 5 3 + 2 * using a stack. Show the stack after each token.", answer: "5 → [5]; 3 → [5,3]; + pops 3 and 5, pushes 8 → [8]; 2 → [8,2]; * pops 2 and 8, pushes 16 → [16]. Result 16." },
+      { type: "tracing", question: "A stack of capacity 3 contains 10, 20 (top=20). Trace push(30), push(40), pop(), pop(). Which operation fails and why?", answer: "push(30) succeeds (now full). push(40) is overflow. Then pop returns 30, pop returns 20. Remaining: 10." },
+      { type: "debugging", question: "push is written as data[top++] = x with top initially -1. Identify the defect.", answer: "The first push writes data[-1]. Use data[++top] = x so top becomes 0 before the write. pop should use data[top--]." },
+      { type: "debugging", question: "A matching-brackets method pushes every character, including letters. Why can it report a balanced string as unbalanced?", answer: "Only opening brackets should be pushed. Letters must be ignored. Pop only when a closing bracket arrives, and compare types." },
+      { type: "programming", question: "Write a Java array Stack with push, pop, peek, isEmpty and isFull, including overflow and underflow messages.", answer: "Maintain top and capacity. push checks isFull then data[++top]=x. pop checks isEmpty then returns data[top--]. peek returns data[top] without changing top." },
+      { type: "programming", question: "Write a method boolean balanced(String s) that uses a stack to check (), [] and {}.", answer: "Push opening brackets. On a closer, if the stack is empty or the popped opener does not match, return false. After the scan the stack must be empty." },
+      { type: "programming", question: "Write a method that reverses an int array in place using a stack.", answer: "Push every element, then pop back into indices 0..n-1. Time O(n), extra space O(n)." },
+      { type: "mcq", question: "After push(1), push(2), peek(), pop(), what does a second peek return?", options: ["A) 2", "B) 1", "C) Underflow", "D) 1 then 2"], answer: "B", explanation: "peek does not remove 2; pop removes 2; the new top is 1." },
+      { type: "mcq", question: "Which application is a natural fit for a stack?", options: ["A) Print-job scheduling", "B) Undo in an editor", "C) CPU round-robin", "D) Breadth-first search"], answer: "B", explanation: "Undo restores the most recent change first (LIFO)." },
+      { type: "mcq", question: "When is an array stack in overflow?", options: ["A) top == -1", "B) top == 0", "C) top == capacity - 1 and another push is attempted", "D) peek is called"], answer: "C", explanation: "The last valid index is capacity-1; a further push overflows." },
+      { type: "reasoning", question: "Why are stack push and pop O(1), and why is searching a stack for an arbitrary value O(n)?", answer: "Push and pop touch only the top cell. Finding an arbitrary value may require scanning every element from the top, which is O(n)." },
+    ],
+    related: [
+      { href: "/isc/class-xii/data-structures", label: "Data Structures overview" },
+      { href: "/isc/class-xii/queue", label: "Queue" },
+      { href: "/isc/class-xii/trees", label: "Trees" },
+      { href: "/isc/class-xii/complexity-big-o", label: "Complexity and Big O" },
+    ],
+  },
+
+  "queue": {
+    title: "Queue",
+    section: "C",
+    overview: "A queue is a FIFO linear structure. ISC board questions require tracing enqueue/dequeue, explaining linear-array false overflow, implementing a circular queue, and choosing a queue for scheduling problems.",
+    concepts: [
+      "FIFO: the earliest enqueued item is dequeued first. Insert at rear, remove from front.",
+      "Primitive operations: enqueue/insert (rear), dequeue/delete (front), peek/front, isEmpty, isFull.",
+      "Linear array queue: front starts at 0, rear at -1. enqueue does data[++rear]=x. dequeue returns data[front++]. Unused cells at the front are not reused, causing false overflow.",
+      "Circular queue: wrap with rear = (rear + 1) % capacity and front = (front + 1) % capacity. Maintain a size counter (or equivalent full/empty test) so full and empty are not confused.",
+      "Empty: size == 0 (or front == rear in some conventions). Full: size == capacity.",
+      "Enqueue and dequeue are O(1) when front and rear are maintained. Shifting every remaining element on dequeue is O(n) and is not the ISC-preferred design.",
+      "Overflow: enqueue on a full queue. Underflow: dequeue on an empty queue.",
+      "A linked-list queue uses a tail pointer so enqueue at the tail and dequeue at the head are both O(1).",
+      "Applications: print spooling, customer service, BFS, CPU scheduling, buffering.",
+    ],
+    workedExample: "Circular queue capacity 3. enqueue(A), enqueue(B), enqueue(C) → full. dequeue() → A. enqueue(D) reuses index 0. Contents in FIFO order: B, C, D.",
+    workedExampleCode: `class CircularQueue {
+    int[] data;
+    int front = 0, rear = -1, size = 0, cap;
+    CircularQueue(int cap) {
+        this.cap = cap;
+        data = new int[cap];
+    }
+    boolean isEmpty() { return size == 0; }
+    boolean isFull() { return size == cap; }
+    void enqueue(int x) {
+        if (isFull()) {
+            System.out.println("Overflow");
+            return;
+        }
+        rear = (rear + 1) % cap;
+        data[rear] = x;
+        size++;
+    }
+    int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Underflow");
+            return -1;
+        }
+        int val = data[front];
+        front = (front + 1) % cap;
+        size--;
+        return val;
+    }
+}
+// enqueue 10,20,30 (full); dequeue -> 10; enqueue 40
+// FIFO remaining: 20, 20's front, then 30, 40`,
+    practice: [
+      { type: "tracing", question: "Empty queue. enqueue(5), enqueue(8), dequeue(), enqueue(3), dequeue(), dequeue(). List each dequeue result and the final state.", answer: "dequeue returns 5, then 8, then 3. The queue is then empty." },
+      { type: "tracing", question: "Linear array capacity 3: enqueue(1), enqueue(2), enqueue(3), dequeue(), dequeue(). Can enqueue(4) succeed without shifting or wrapping? Explain.", answer: "No. rear is already at index 2 (last cell) even though two front cells are free. This is false overflow; a circular queue or a shift would be required." },
+      { type: "tracing", question: "Circular queue capacity 3, size 0. Trace enqueue(9), enqueue(6), enqueue(1), dequeue(), enqueue(4), enqueue(2). Which operation overflows? State remaining FIFO order after the overflow attempt.", answer: "enqueue(9), enqueue(6), enqueue(1) fill the queue. dequeue() returns 9 (remaining 6, 1). enqueue(4) reuses the freed slot (remaining 6, 1, 4). enqueue(2) is overflow. Remaining FIFO order: 6, 1, 4." },
+      { type: "debugging", question: "A circular queue uses front == rear for both empty and full. What bug appears and how is it fixed?", answer: "Empty and full are indistinguishable. Store a size count, or keep one slot empty, or use a separate boolean full flag." },
+      { type: "debugging", question: "dequeue is implemented by moving every remaining element one index left and decrementing rear. Why is this poor for ISC timing questions?", answer: "Each dequeue is O(n). Keep a front index (and wrap in the circular case) so dequeue stays O(1)." },
+      { type: "programming", question: "Implement a CircularQueue in Java with enqueue, dequeue, peek, isEmpty and isFull using modulo wrapping and a size field.", answer: "rear = (rear+1)%cap on enqueue; front = (front+1)%cap on dequeue; reject enqueue when size==cap and dequeue when size==0." },
+      { type: "programming", question: "Write a method that simulates a printer queue: enqueue job names, then dequeue and print until empty.", answer: "Use a queue of strings. enqueue each job, then while (!isEmpty()) print dequeue(). Jobs emerge in arrival order." },
+      { type: "programming", question: "Using two stacks, implement a queue (enqueue and dequeue). State the amortised cost.", answer: "inStack for enqueue (O(1)). dequeue: if outStack is empty, pop all from inStack onto outStack, then pop outStack. Amortised O(1) dequeue." },
+      { type: "mcq", question: "Which order does a standard queue follow?", options: ["A) LIFO", "B) FIFO", "C) Sorted order", "D) Random"], answer: "B", explanation: "First in, first out." },
+      { type: "mcq", question: "What causes false overflow in a linear array queue?", options: ["A) front == 0", "B) rear reaches the last index while earlier cells are free", "C) size == 0", "D) peek on one element"], answer: "B", explanation: "Without wrapping, freed front cells cannot be reused." },
+      { type: "mcq", question: "Which problem is best modelled with a queue?", options: ["A) Undo", "B) Recursion", "C) Print spooling", "D) Postfix evaluation"], answer: "C", explanation: "Jobs should print in the order they arrived." },
+      { type: "reasoning", question: "Compare a linear array queue, a circular array queue and a linked queue on overflow and time.", answer: "Linear array: O(1) operations but false overflow. Circular array: O(1) operations, reuses cells, overflow only when truly full. Linked queue: O(1) with tail pointer, overflow only when memory is exhausted." },
+    ],
+    related: [
+      { href: "/isc/class-xii/data-structures", label: "Data Structures overview" },
+      { href: "/isc/class-xii/stack", label: "Stack" },
+      { href: "/isc/class-xii/trees", label: "Trees" },
+      { href: "/isc/class-xii/complexity-big-o", label: "Complexity and Big O" },
+    ],
+  },
+
+  "trees": {
+    title: "Trees",
+    section: "C",
+    overview: "A binary tree organises data hierarchically. ISC-style questions test node terminology, BST insert/search, inorder/preorder/postorder tracing, and writing recursive traversal methods.",
+    concepts: [
+      "A tree is a connected acyclic hierarchy of nodes. The root has no parent; leaves have no children.",
+      "A binary tree: each node has at most two children, conventionally left and right.",
+      "Depth/level of the root is 0 (or 1, if the paper defines it that way — state the convention). Height is the number of edges on the longest root-to-leaf path.",
+      "A binary search tree (BST): for every node, all keys in the left subtree are smaller and all keys in the right subtree are larger (assuming distinct keys).",
+      "BST search and insert follow the same compare-and-descend rule and are O(h), where h is height. A balanced tree has h = O(log n); a skewed tree has h = O(n).",
+      "Inorder (left, root, right) of a BST yields keys in ascending order.",
+      "Preorder: root, left, right. Postorder: left, right, root. These are used for copying a tree and for deleting/evaluating an expression tree.",
+      "A complete binary tree fills levels from left to right. A full binary tree has 0 or 2 children on every node.",
+      "Level-order (BFS) traversal uses a queue; DFS-style traversals use recursion (the call stack) or an explicit stack.",
+    ],
+    workedExample: "Insert 8, 3, 10, 1, 6 into an empty BST. Root 8, left 3 with children 1 and 6, right 10. Inorder: 1, 3, 6, 8, 10. Preorder: 8, 3, 1, 6, 10. Postorder: 1, 6, 3, 10, 8. Search 6: 8→3→6.",
+    workedExampleCode: `class Node {
+    int data;
+    Node left, right;
+    Node(int data) { this.data = data; }
+}
+class BST {
+    Node root;
+    Node insert(Node t, int key) {
+        if (t == null) return new Node(key);
+        if (key < t.data) t.left = insert(t.left, key);
+        else if (key > t.data) t.right = insert(t.right, key);
+        return t;
+    }
+    void inorder(Node t) {
+        if (t == null) return;
+        inorder(t.left);
+        System.out.print(t.data + " ");
+        inorder(t.right);
+    }
+    boolean search(Node t, int key) {
+        if (t == null) return false;
+        if (key == t.data) return true;
+        if (key < t.data) return search(t.left, key);
+        return search(t.right, key);
+    }
+}
+// Insert 8,3,10,1,6 then inorder prints: 1 3 6 8 10`,
+    practice: [
+      { type: "tracing", question: "BST insertions in order: 50, 30, 70, 20, 40. Draw parent-child links and write the inorder sequence.", answer: "50 has left 30 and right 70. 30 has left 20 and right 40. Inorder: 20, 30, 40, 50, 70." },
+      { type: "tracing", question: "For the tree with preorder 8,3,1,6,10 and inorder 1,3,6,8,10, state the postorder sequence.", answer: "Postorder is 1, 6, 3, 10, 8. Root is 8; left subtree 3(1,6); right subtree 10." },
+      { type: "tracing", question: "Search for 40 in BST root 50, left 30 (left 20, right 40), right 70. List the nodes compared.", answer: "Compare 50 (go left), 30 (go right), 40 (found). Three comparisons." },
+      { type: "debugging", question: "A student writes inorder as print, then left, then right. What traversal is this, and what BST property is lost?", answer: "That is preorder, not inorder. The ascending-key property of BST inorder is lost." },
+      { type: "debugging", question: "insert always attaches a new node on the left, ignoring the key comparison. What happens after inserting 5, 2, 8?", answer: "The tree becomes a left chain 5-2-8 (all left). Search for 8 may fail or take a skewed path; the BST invariant is broken." },
+      { type: "programming", question: "Write recursive methods for inorder, preorder and postorder printing of a binary tree.", answer: "Base case: t==null return. Inorder: left, print, right. Preorder: print, left, right. Postorder: left, right, print." },
+      { type: "programming", question: "Write a recursive BST insert and search for distinct integer keys.", answer: "insert: null → new Node(key); key < t.data → t.left = insert(t.left,key); else t.right = insert(t.right,key). search: null → false; equal → true; else descend left or right." },
+      { type: "programming", question: "Write a method int height(Node t) returning the number of edges on the longest path to a leaf. Empty tree height is -1.", answer: "if (t==null) return -1; return 1 + Math.max(height(t.left), height(t.right));" },
+      { type: "mcq", question: "Inorder traversal of a BST produces keys in which order?", options: ["A) Insertion order", "B) Ascending order", "C) Descending only if skewed", "D) Level order"], answer: "B", explanation: "Left, root, right visits smaller keys first." },
+      { type: "mcq", question: "Worst-case search time in a skewed BST of n nodes is", options: ["A) O(1)", "B) O(log n)", "C) O(n)", "D) O(n²)"], answer: "C", explanation: "A chain of n nodes is equivalent to a linked list." },
+      { type: "mcq", question: "Which traversal visits the root first?", options: ["A) Inorder", "B) Preorder", "C) Postorder", "D) None"], answer: "B", explanation: "Preorder is root, left, right." },
+      { type: "reasoning", question: "Why can BST search be O(log n) and also O(n)? What structure restores the logarithmic bound?", answer: "Height decides the path length. Inserting in sorted order builds a skew of height n. A balanced binary tree (or careful insertion) keeps height O(log n)." },
+    ],
+    related: [
+      { href: "/isc/class-xii/data-structures", label: "Data Structures overview" },
+      { href: "/isc/class-xii/stack", label: "Stack" },
+      { href: "/isc/class-xii/queue", label: "Queue" },
+      { href: "/isc/class-xii/recursion", label: "Recursion" },
+      { href: "/isc/class-xii/complexity-big-o", label: "Complexity and Big O" },
     ],
   },
 
@@ -305,6 +525,14 @@ while (low <= high) {
       { type: "mcq", question: "What is the time complexity of binary search in the worst case?", options: ["A) O(1)", "B) O(n)", "C) O(log n)", "D) O(n²)"], answer: "C", explanation: "Binary search halves the search range each step, giving O(log n) comparisons." },
       { type: "mcq", question: "Which sorting algorithm has O(n²) worst-case time complexity?", options: ["A) Merge sort", "B) Bubble sort", "C) Binary search", "D) Linear search"], answer: "B", explanation: "Bubble sort uses nested loops and is O(n²) in the worst case." },
       { type: "reasoning", question: "Explain the difference between time complexity and space complexity with one example of each.", answer: "Time complexity measures how the number of operations grows with n (e.g., linear search is O(n)). Space complexity measures how additional memory grows with n (e.g., creating a copy of an n-element array uses O(n) extra space; an in-place sort uses O(1) extra space)." },
+      { type: "reasoning", question: "State the time complexity of stack push/pop, circular-queue enqueue/dequeue, BST search in a balanced tree, and BST search in a skewed tree.", answer: "Stack push/pop: O(1). Circular-queue enqueue/dequeue: O(1). Balanced BST search: O(log n). Skewed BST search: O(n)." },
+    ],
+    related: [
+      { href: "/isc/class-xii/data-structures", label: "Data Structures overview" },
+      { href: "/isc/class-xii/stack", label: "Stack" },
+      { href: "/isc/class-xii/queue", label: "Queue" },
+      { href: "/isc/class-xii/trees", label: "Trees" },
+      { href: "/isc/class-xii/arrays-strings", label: "Arrays and Strings" },
     ],
   },
 };

@@ -105,6 +105,23 @@ export default async function ISCClassXIITopicPage({ params }) {
           )}
         </section>
 
+        {Array.isArray(content.related) && content.related.length > 0 && (
+          <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <h2 className="text-2xl font-black">Related Class XII lessons</h2>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {content.related.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+                >
+                  {item.label} →
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="mt-8">
           <h2 className="text-2xl font-black">Board practice</h2>
           {typeOrder.map((type) => {

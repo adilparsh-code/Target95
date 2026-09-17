@@ -72,6 +72,26 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       question: "Design a small Java class that stores data, validates input through a method, and generates a formatted result. Explain your choice of fields, constructor and methods.",
       answer: "Use private fields for state, a constructor for initialization, a validation method for constraints, and a result method for formatted output.",
     },
+    {
+      id: "JXII-Q11", type: "tracing", difficulty: "board", topic: "Stack",
+      question: "Empty stack. push(4), push(9), pop(), push(1), peek(), pop(). State each pop/peek result and the final stack from bottom to top.",
+      answer: "First pop returns 9. peek returns 1. Second pop returns 1. Final stack: 4.",
+    },
+    {
+      id: "JXII-Q12", type: "debugging", difficulty: "board", topic: "Queue",
+      question: "A linear array queue of capacity 4 has had four enqueues and two dequeues. rear is at the last index. Why does the next enqueue fail, and how does a circular queue fix it?",
+      answer: "False overflow: freed front cells are not reused. A circular queue wraps rear with modulo capacity so those cells can be reused.",
+    },
+    {
+      id: "JXII-Q13", type: "programming", difficulty: "board", topic: "Trees / BST",
+      question: "Write recursive BST insert and inorder print. State the inorder sequence after inserting 8, 3, 10, 1, 6.",
+      answer: "insert compares key with the current node and descends left or right; inorder is left-root-right. Inorder after those insertions: 1, 3, 6, 8, 10.",
+    },
+    {
+      id: "JXII-Q14", type: "reasoning", difficulty: "board", topic: "Data structures / complexity",
+      question: "Compare stack push, circular-queue dequeue and skewed-BST search in Big O, and name one application of each structure.",
+      answer: "Stack push O(1) — undo. Circular-queue dequeue O(1) — print spooling. Skewed BST search O(n) — hierarchical key search that degrades to a list if insertion order is sorted.",
+    },
   ],
   caseBased: [
     {
@@ -122,6 +142,21 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       id: "JXII-TRACE03", type: "tracing", difficulty: "application", topic: "String methods",
       question: 'Trace s = "COMPUTER" for s.substring(2, 6), s.indexOf("P"), and s.charAt(4).',
       answer: 'substring(2,6) = "MPUT"; indexOf("P") = 3; charAt(4) = \'U\'.'
+    },
+    {
+      id: "JXII-TRACE04", type: "tracing", difficulty: "board", topic: "Stack / postfix",
+      question: "Evaluate postfix 6 2 3 + * using a stack. Show the stack after each token.",
+      answer: "6 → [6]; 2 → [6,2]; 3 → [6,2,3]; + pops 3 and 2, pushes 5 → [6,5]; * pops 5 and 6, pushes 30 → [30]. Result 30."
+    },
+    {
+      id: "JXII-TRACE05", type: "tracing", difficulty: "board", topic: "Queue",
+      question: "Circular queue capacity 3. enqueue(A), enqueue(B), enqueue(C), dequeue(), enqueue(D). State the overflow point if any and the remaining FIFO order.",
+      answer: "The third enqueue fills the queue. dequeue removes A. enqueue(D) reuses the freed slot. Remaining FIFO: B, C, D. No overflow."
+    },
+    {
+      id: "JXII-TRACE06", type: "tracing", difficulty: "board", topic: "Trees",
+      question: "BST insertions 50, 30, 70, 20, 40. Write inorder, preorder and postorder.",
+      answer: "Inorder: 20, 30, 40, 50, 70. Preorder: 50, 30, 20, 40, 70. Postorder: 20, 40, 30, 70, 50."
     }
   ],
   mcqs: [
@@ -154,6 +189,21 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       id: "JXII-MCQ06", question: "Which value is the last valid index of an array with length n?",
       options: ["A) n", "B) n + 1", "C) n - 1", "D) n / 2"],
       answer: "C", explanation: "Java array indices start at zero."
+    },
+    {
+      id: "JXII-MCQ07", question: "Which data structure follows LIFO?",
+      options: ["A) Queue", "B) Stack", "C) Circular queue", "D) Binary tree"],
+      answer: "B", explanation: "A stack removes the most recently inserted item first."
+    },
+    {
+      id: "JXII-MCQ08", question: "False overflow in a linear array queue occurs when",
+      options: ["A) size == 0", "B) rear is at the last index while earlier cells are free", "C) front == rear always", "D) peek is called twice"],
+      answer: "B", explanation: "Without wrapping, dequeued front cells cannot be reused."
+    },
+    {
+      id: "JXII-MCQ09", question: "Inorder traversal of a BST yields keys in",
+      options: ["A) Insertion order", "B) Ascending order", "C) Level order", "D) Reverse insertion order"],
+      answer: "B", explanation: "Left, root, right visits smaller keys first."
     }
   ],
 };

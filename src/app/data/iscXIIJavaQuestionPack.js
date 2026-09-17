@@ -92,6 +92,21 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       question: "Compare stack push, circular-queue dequeue and skewed-BST search in Big O, and name one application of each structure.",
       answer: "Stack push O(1) — undo. Circular-queue dequeue O(1) — print spooling. Skewed BST search O(n) — hierarchical key search that degrades to a list if insertion order is sorted.",
     },
+    {
+      id: "JXII-Q15", type: "reasoning", difficulty: "board", topic: "Complexity / Big O",
+      question: "A method contains a loop of n iterations followed by two nested loops each of n iterations. State the combined worst-case time complexity and justify dropping the linear term.",
+      answer: "O(n) + O(n²) = O(n²). The quadratic term dominates; constants and lower-order terms are dropped in Big O.",
+    },
+    {
+      id: "JXII-Q16", type: "debugging", difficulty: "board", topic: "Complexity / space",
+      question: "A student labels recursive factorial as O(1) extra space because it declares only one local variable. Identify the error.",
+      answer: "Each recursive call adds a stack frame. Depth n means O(n) extra stack space, not O(1).",
+    },
+    {
+      id: "JXII-Q17", type: "programming", difficulty: "board", topic: "Complexity",
+      question: "Write an in-place method to find the maximum of an int array and state time and extra-space complexity.",
+      answer: "Scan once, keep a running max. Time O(n), extra space O(1).",
+    },
   ],
   caseBased: [
     {
@@ -157,6 +172,11 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       id: "JXII-TRACE06", type: "tracing", difficulty: "board", topic: "Trees",
       question: "BST insertions 50, 30, 70, 20, 40. Write inorder, preorder and postorder.",
       answer: "Inorder: 20, 30, 40, 50, 70. Preorder: 50, 30, 20, 40, 70. Postorder: 20, 40, 30, 70, 50."
+    },
+    {
+      id: "JXII-TRACE07", type: "tracing", difficulty: "board", topic: "Complexity / Big O",
+      question: "Simplify 4n² + 12n + 7. Then state the complexity of (a) i *= 2 until i >= n (b) two nested n-loops.",
+      answer: "4n²+12n+7 is O(n²). (a) O(log n). (b) O(n²)."
     }
   ],
   mcqs: [
@@ -204,6 +224,16 @@ export const ISC_XII_JAVA_QUESTION_PACK = {
       id: "JXII-MCQ09", question: "Inorder traversal of a BST yields keys in",
       options: ["A) Insertion order", "B) Ascending order", "C) Level order", "D) Reverse insertion order"],
       answer: "B", explanation: "Left, root, right visits smaller keys first."
+    },
+    {
+      id: "JXII-MCQ10", question: "Two consecutive for-loops each running n times have complexity",
+      options: ["A) O(n)", "B) O(n²)", "C) O(log n)", "D) O(2ⁿ)"],
+      answer: "A", explanation: "Consecutive loops add: O(n)+O(n)=O(n). Nested loops would be O(n²)."
+    },
+    {
+      id: "JXII-MCQ11", question: "Recursive factorial(n) extra stack space is",
+      options: ["A) O(1)", "B) O(log n)", "C) O(n)", "D) O(n²)"],
+      answer: "C", explanation: "n stacked frames until the base case returns."
     }
   ],
 };

@@ -482,37 +482,48 @@ class BST {
   "complexity-big-o": {
     title: "Complexity and Big O Notation",
     section: "C",
-    overview: "Estimate how an algorithm's time and space requirements grow as input size increases. ISC board questions test identifying the complexity class of a given loop structure and comparing algorithms.",
+    overview: "Estimate how an algorithm's time and extra memory grow as input size n increases. ISC board questions ask you to classify a loop or recursive method, drop constants, compare two algorithms, and state both time and space complexity.",
     concepts: [
-      "Big O notation describes an asymptotic upper bound on growth rate and focuses on how cost scales with input size n, ignoring constants and lower-order terms.",
-      "O(1) — constant time: the operation takes the same time regardless of n (e.g., array index access, stack push/pop).",
-      "O(log n) — logarithmic time: the problem size is halved each step (e.g., binary search, recursive binary search).",
-      "O(n) — linear time: one pass through n elements (e.g., linear search, array traversal, counting).",
-      "O(n log n) — linearithmic time: efficient sorting algorithms (e.g., merge sort, quicksort average case).",
-      "O(n²) — quadratic time: two nested loops each running n times (e.g., bubble sort, selection sort, insertion sort).",
-      "Space complexity measures additional memory used as n grows; an in-place algorithm uses O(1) extra space.",
-      "Best case, average case and worst case describe the minimum, expected and maximum cost for a given input size.",
-      "For linear search: best case O(1) (first element), worst case O(n) (last element or not found).",
-      "For binary search: best case O(1) (middle element), worst case O(log n).",
+      "Big O is an asymptotic upper bound: keep the fastest-growing term and drop constant factors. 5n² + 3n + 8 is O(n²).",
+      "Common classes in increasing order of growth: O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³) < O(2ⁿ).",
+      "O(1) — constant: array index, stack push/pop, circular-queue enqueue/dequeue, returning a field.",
+      "O(log n) — logarithmic: each step halves (or doubles) the remaining size — binary search, the loop i *= 2.",
+      "O(n) — linear: one pass — linear search, counting, finding max/min, a single for-loop over n.",
+      "O(n log n) — linearithmic: efficient comparison sorts (merge sort; quicksort average case).",
+      "O(n²) — quadratic: two nested loops over n, or i from 0 to n with inner j from 0 to i (about n²/2, still O(n²)). Bubble, selection and insertion sort are O(n²) worst case.",
+      "O(n³) — cubic: three nested loops each running n times (e.g. naive  n×n matrix multiplication).",
+      "Independent consecutive loops add: O(n) then O(n) is O(n), not O(n²). Nested loops multiply.",
+      "Space complexity counts extra memory beyond the input. In-place work is O(1) extra space. Copying an n-element array is O(n) extra space.",
+      "Recursion uses the call stack: factorial(n) is O(n) time and O(n) extra stack space. Naive Fibonacci is O(2ⁿ) time. Recursive binary search is O(log n) time and O(log n) stack space.",
+      "Best / average / worst case: linear search is O(1) best and O(n) worst; binary search is O(1) best and O(log n) worst. Board answers usually want worst case unless asked otherwise.",
     ],
-    workedExample: "A loop that doubles i each iteration (i = 1; i < n; i *= 2) runs O(log n) times because the range is halved each step. Two independent nested loops each running n times give O(n²).",
+    workedExample: "Drop constants: 4n² + 20n + 7 → O(n²). A doubling loop (i = 1; i < n; i *= 2) is O(log n). Nested i,j loops each to n are O(n²). Two separate n-loops in sequence are still O(n). Recursion factorial(n) makes n calls so it is O(n) time and O(n) stack space.",
     workedExampleCode: `// O(n) — single loop
 for (int i = 0; i < n; i++) { /* O(1) work */ }
 
-// O(n²) — nested loops
+// still O(n) — two consecutive loops
+for (int i = 0; i < n; i++) { /* ... */ }
+for (int j = 0; j < n; j++) { /* ... */ }
+
+// O(n²) — nested loops (also if inner runs to i)
 for (int i = 0; i < n; i++)
     for (int j = 0; j < n; j++) { /* O(1) work */ }
 
-// O(log n) — halving loop
+// O(log n) — doubling / halving
 for (int i = 1; i < n; i *= 2) { /* O(1) work */ }
 
-// O(log n) — binary search
-int low = 0, high = n - 1;
-while (low <= high) {
-    int mid = (low + high) / 2;
-    if (arr[mid] == key) return mid;
-    else if (arr[mid] < key) low = mid + 1;
-    else high = mid - 1;
+// O(n) time, O(n) stack — recursion
+static int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+// O(n) time, O(1) extra space — in-place max
+static int maxOf(int[] a) {
+    int m = a[0];
+    for (int i = 1; i < a.length; i++)
+        if (a[i] > m) m = a[i];
+    return m;
 }`,
     practice: [
       { type: "reasoning", question: "What is the worst-case time complexity of linear search on an array of n elements?", answer: "O(n). In the worst case the key is the last element or not present, requiring n comparisons." },
@@ -526,6 +537,16 @@ while (low <= high) {
       { type: "mcq", question: "Which sorting algorithm has O(n²) worst-case time complexity?", options: ["A) Merge sort", "B) Bubble sort", "C) Binary search", "D) Linear search"], answer: "B", explanation: "Bubble sort uses nested loops and is O(n²) in the worst case." },
       { type: "reasoning", question: "Explain the difference between time complexity and space complexity with one example of each.", answer: "Time complexity measures how the number of operations grows with n (e.g., linear search is O(n)). Space complexity measures how additional memory grows with n (e.g., creating a copy of an n-element array uses O(n) extra space; an in-place sort uses O(1) extra space)." },
       { type: "reasoning", question: "State the time complexity of stack push/pop, circular-queue enqueue/dequeue, BST search in a balanced tree, and BST search in a skewed tree.", answer: "Stack push/pop: O(1). Circular-queue enqueue/dequeue: O(1). Balanced BST search: O(log n). Skewed BST search: O(n)." },
+      { type: "tracing", question: "Simplify 3n² + 8n log n + 100 to Big O. Which term dominates and why?", answer: "O(n²). n² grows faster than n log n, and constants 3, 8 and 100 are dropped." },
+      { type: "tracing", question: "A method runs one loop i = 0..n-1 and then a nested pair of loops each to n. What is the combined time complexity?", answer: "O(n) + O(n²) = O(n²). The quadratic nested loops dominate the single linear pass." },
+      { type: "debugging", question: "A student says two consecutive for-loops each running n times are O(n²). Correct the claim.", answer: "Consecutive loops add: O(n)+O(n)=O(n). Nested loops multiply to O(n²)." },
+      { type: "debugging", question: "A recursive factorial is labelled O(1) extra space because it has only a few local variables. What was ignored?", answer: "Each call adds a stack frame. Depth n means O(n) extra stack space." },
+      { type: "programming", question: "Write selection sort and state worst-case time and extra space.", answer: "For i from 0 to n-2 find the minimum in i..n-1 and swap with index i. Time O(n²). Extra space O(1) (in-place)." },
+      { type: "programming", question: "Write a method that copies an int array and returns the copy. State time and extra space.", answer: "Allocate int[] b = new int[a.length]; copy each element in one loop. Time O(n), extra space O(n)." },
+      { type: "mcq", question: "Which expression is O(n)?", options: ["A) 2n² + n", "B) 5n + 20", "C) n log n", "D) 3ⁿ"], answer: "B", explanation: "5n+20 is linear; drop the constant to get O(n)." },
+      { type: "mcq", question: "Naive recursive Fibonacci has which time complexity?", options: ["A) O(n)", "B) O(n log n)", "C) O(2ⁿ)", "D) O(1)"], answer: "C", explanation: "Each call branches into two further calls, producing an exponential tree." },
+      { type: "mcq", question: "Two nested loops, inner running from 0 to i (i from 0 to n-1), have complexity", options: ["A) O(n)", "B) O(n log n)", "C) O(n²)", "D) O(2ⁿ)"], answer: "C", explanation: "About n(n+1)/2 iterations, which is O(n²)." },
+      { type: "reasoning", question: "Why is merge sort O(n log n) while bubble sort is O(n²), and when would bubble sort still be acceptable?", answer: "Merge sort divides the array (log n levels) and merges in O(n) per level. Bubble sort compares adjacent pairs in nested loops. Bubble sort may be acceptable only for tiny n or nearly-sorted classroom traces, not for large n." },
     ],
     related: [
       { href: "/isc/class-xii/data-structures", label: "Data Structures overview" },
@@ -533,6 +554,7 @@ while (low <= high) {
       { href: "/isc/class-xii/queue", label: "Queue" },
       { href: "/isc/class-xii/trees", label: "Trees" },
       { href: "/isc/class-xii/arrays-strings", label: "Arrays and Strings" },
+      { href: "/isc/class-xii/recursion", label: "Recursion" },
     ],
   },
 };

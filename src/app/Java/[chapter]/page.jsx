@@ -22,30 +22,40 @@ function toJsonString(value) {
   }
 }
 
+function getChapterClientContent(slug) {
+  const richChapterJson = toJsonString(getRichChapterBySlug(slug === "constructor" ? "constructors" : slug));
+  if (richChapterJson) return richChapterJson;
+
+  // Introduction-to-Java is authored in Markdown while the rich registry is
+  // intentionally reserved for the newer structured chapter records.
+  const markdownSlug = slug === "introduction-to-java" ? "introduction" : slug;
+  try {
+    const markdownChapter = getMarkdownChapterContent(markdownSlug);
+    return toJsonString(markdownChapter?.content ?? null);
+  } catch {
+    // Never let an optional Markdown source take the whole chapter route down.
+    return null;
+  }
+}
+
 export default async function ChapterPage({ params }) {
   const { chapter: slug } = await params;
   const chapter = getStudyChapterBySlug(slug);
 
   if (!chapter) notFound();
 
-  // Some legacy /Java routes use singular slugs while the rich registry uses
-  // canonical slugs (for example `constructor` -> `constructors`).
-  const richSlug = slug === "constructor" ? "constructors" : slug;
-  const richChapterJson = toJsonString(getRichChapterBySlug(richSlug));
+  const clientContent = getChapterClientContent(slug);
 
-  // Avoid invoking the Markdown loader when rich content exists. This prevents
-  // missing legacy Markdown files from participating in the rich-content path.
-  let clientContent = richChapterJson;
-  if (!clientContent) {
-    const markdownSlug = slug === "introduction-to-java" ? "introduction" : slug;
-    const markdownChapter = getMarkdownChapterContent(markdownSlug);
-    clientContent = toJsonString(markdownChapter?.content ?? null);
+  // Question-bank data is additive; a malformed/optional bank must never blank
+  // the complete learning page.
+  let questionBankJson = null;
+  try {
+    if (typeof getQuestionBankChapter === "function") {
+      questionBankJson = toJsonString(getQuestionBankChapter(slug));
+    }
+  } catch {
+    questionBankJson = null;
   }
-
-  // Pass only JSON primitives across the Server -> Client boundary.
-  const questionBankJson = typeof getQuestionBankChapter === "function"
-    ? toJsonString(getQuestionBankChapter(slug))
-    : null;
 
   return (
     <StudyChapter

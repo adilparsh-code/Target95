@@ -2,9 +2,23 @@ import Link from "next/link";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import Container from "../../../components/ui/Container";
-import { BLOG_CATEGORIES, BLOG_CATEGORY_LABELS, listPublishedArticlesByCategory } from "../../../lib/blog";
+import { BLOG_CATEGORIES, BLOG_CATEGORY_LABELS, DEMO_ARTICLE, listPublishedArticlesByCategory } from "../../../lib/blog";
 
 export const dynamic = "force-dynamic";
+
+function renderContent(content) {
+  return String(content || "").split(/\n\n+/).map((block, index) => {
+    const text = block.trim();
+    if (!text) return null;
+    if (text.startsWith("## ")) {
+      return <h2 key={index} className="mt-10 text-2xl font-black text-slate-950 dark:text-white">{text.slice(3)}</h2>;
+    }
+    if (text.startsWith("**") && text.endsWith("**")) {
+      return <p key={index} className="font-bold text-slate-800 dark:text-slate-200">{text.slice(2, -2)}</p>;
+    }
+    return <p key={index}>{text}</p>;
+  });
+}
 
 export default async function BlogArticlePage({ params }) {
   const { category, slug } = await params;
@@ -16,6 +30,13 @@ export default async function BlogArticlePage({ params }) {
   } catch {
     articles = [];
   }
+
+  // Keep the first public article available even if Firestore is temporarily
+  // unavailable or the production Firebase configuration is incomplete.
+  if (!articles.length && category === DEMO_ARTICLE.category && slug === DEMO_ARTICLE.slug) {
+    articles = [DEMO_ARTICLE];
+  }
+
   const article = articles.find((item) => item.slug === slug);
   if (!article) return null;
 
@@ -32,7 +53,7 @@ export default async function BlogArticlePage({ params }) {
             <p className="mt-5 text-sm text-slate-500 dark:text-slate-400">Published by Target95+ · {article.publishedAt?.toDate ? article.publishedAt.toDate().toLocaleDateString("en-IN") : "Recently"}</p>
           </header>
           <div className="prose prose-slate mt-10 max-w-none dark:prose-invert">
-            {String(article.content || "").split(/\n\n+/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+            {renderContent(article.content)}
           </div>
         </Container>
       </article>

@@ -88,6 +88,11 @@ export default async function CBSESubjectPage({ params }) {
                   <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">Project {index + 1}</p>
                   <h3 className="mt-2 text-xl font-bold text-gray-900">{project.title}</h3>
                   <p className="mt-2 text-gray-600">{project.outcome}</p>
+                  {(subjectCode === '083' || subjectCode === '843') && index === 0 && (
+                    <Link href={`/cbse/class/${classNumber}/subject/${subjectCode}/project`} className="mt-4 inline-flex rounded-xl bg-emerald-700 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-800">
+                      Open complete project + code →
+                    </Link>
+                  )}
                 </article>
               ))}
             </div>

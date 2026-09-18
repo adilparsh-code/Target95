@@ -2,6 +2,24 @@ const chapter11 = {
   id: "11-methods",
   title: "Methods",
   slug: "methods",
+  diagrams: [
+    {
+      type: "image",
+      title: "Java Method Call Flow",
+      explanation: "Calling a method pauses the caller, transfers control to the method with its arguments, runs the method body, then returns a value and control back to the caller.",
+      src: "/visuals/icse-java/java-method-call-flow.svg",
+      alt: "Diagram showing main() calling square(5), which computes 25 and returns it back to main().",
+      caption: "Control returns to the exact point after the call, carrying the method's return value with it."
+    },
+    {
+      type: "image",
+      title: "Recursion Call Stack",
+      explanation: "A recursive method calls itself with a smaller input each time; each call adds a stack frame until the base case is reached, then the frames return and combine their results.",
+      src: "/visuals/icse-java/java-recursion-call-stack.svg",
+      alt: "Diagram tracing factorial(4) as a growing stack of calls down to the base case, then unwinding with each frame multiplying its result.",
+      caption: "The base case stops the recursion; without one, a recursive method would call itself forever."
+    }
+  ],
   subject: "Java Programming",
   difficulty: "Intermediate",
   estimatedTime: 60,

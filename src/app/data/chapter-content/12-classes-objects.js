@@ -1,7 +1,17 @@
 const chapter12 = {
   id: "12-classes-objects",
   title: "Classes & Objects",
-  slug: "classes-objects",
+  slug: "class-as-basis-of-computation",
+  diagrams: [
+    {
+      type: "image",
+      title: "Java Classes and Objects",
+      explanation: "A class is a blueprint defining fields and methods. Objects are separate instances created from that class, each with its own copy of the instance data.",
+      src: "/visuals/icse-java/java-classes-objects.svg",
+      alt: "Diagram showing a Student class as a blueprint, with two separate Student objects each holding their own name and marks values.",
+      caption: "Two objects of the same class share the same methods but keep independent copies of their instance fields."
+    }
+  ],
   subject: "Java Programming",
   difficulty: "Advanced",
   estimatedTime: 120,

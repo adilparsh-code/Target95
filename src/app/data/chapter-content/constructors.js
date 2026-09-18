@@ -1,7 +1,17 @@
 const chapter = {
   id: "constructors",
   title: "Constructors",
-  slug: "constructors",
+  slug: "constructor",
+  diagrams: [
+    {
+      type: "image",
+      title: "Java Constructor Flow",
+      explanation: "The new keyword allocates memory for an object, then the matching constructor runs automatically to initialize its fields before the reference is returned.",
+      src: "/visuals/icse-java/java-constructor-flow.svg",
+      alt: "Diagram showing new Student(...) allocating memory, running the matching constructor, and returning a fully initialized object.",
+      caption: "A constructor never has a return type and always shares its name with the class."
+    }
+  ],
   subject: "Java Programming",
   difficulty: "Advanced",
   estimatedTime: 65,

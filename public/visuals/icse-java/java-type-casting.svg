@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+<title id="title">Java Type Conversion and Casting</title>
+<desc id="desc">Widening conversion happens automatically from a smaller to a larger type. Narrowing conversion requires an explicit cast and may lose data.</desc>
+<defs><marker id="ch" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="460" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#0f172a">Java Type Conversion and Casting</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<text x="300" y="110" font-size="20" font-weight="700" fill="#166534">Widening (automatic)</text>
+<rect x="150" y="130" width="140" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="4"/>
+<text x="220" y="167" font-size="18" fill="#14532d">int</text>
+<path d="M290 160 L420 160" stroke="#166534" stroke-width="5" marker-end="url(#ch)"/>
+<rect x="420" y="130" width="140" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="4"/>
+<text x="490" y="167" font-size="18" fill="#14532d">double</text>
+<text x="355" y="215" font-size="15" fill="#334155">int x = 10; double y = x;  // no cast needed</text>
+
+<text x="900" y="110" font-size="20" font-weight="700" fill="#7f1d1d">Narrowing (explicit cast)</text>
+<rect x="770" y="130" width="140" height="60" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="4"/>
+<text x="840" y="167" font-size="18" fill="#7f1d1d">double</text>
+<path d="M910 160 L1040 160" stroke="#7f1d1d" stroke-width="5" marker-end="url(#ch)"/>
+<text x="975" y="145" font-size="15" fill="#7f1d1d">(int)</text>
+<rect x="1040" y="130" width="140" height="60" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="4"/>
+<text x="1110" y="167" font-size="18" fill="#7f1d1d">int</text>
+<text x="960" y="215" font-size="15" fill="#334155">double d = 9.7; int n = (int) d;  // n = 9, fraction lost</text>
+
+<rect x="200" y="280" width="800" height="130" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+<text x="600" y="315" font-size="18" font-weight="700" fill="#78350f">Order of primitive widths (smallest to largest)</text>
+<text x="600" y="350" font-size="18" fill="#78350f">byte &#8594; short &#8594; int &#8594; long &#8594; float &#8594; double</text>
+<text x="600" y="385" font-size="15" fill="#78350f">Moving right = widening (safe). Moving left = narrowing (needs a cast, may lose precision).</text>
+</g>
+</svg>

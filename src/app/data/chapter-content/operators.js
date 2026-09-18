@@ -2,6 +2,24 @@ const chapter = {
   id: "operators",
   title: "Operators",
   slug: "operators",
+  diagrams: [
+    {
+      type: "image",
+      title: "Java Operator Categories",
+      explanation: "Java's operators are grouped into arithmetic, relational, logical and assignment categories, each used for a different kind of task.",
+      src: "/visuals/icse-java/java-operator-types.svg",
+      alt: "Four boxes showing arithmetic, relational, logical and assignment operators with an example of each.",
+      caption: "Arithmetic operators compute values; relational and logical operators build conditions; assignment operators store results."
+    },
+    {
+      type: "image",
+      title: "Java Operator Precedence",
+      explanation: "When an expression uses several operators, precedence determines which operation happens first.",
+      src: "/visuals/icse-java/java-operator-precedence.svg",
+      alt: "Table ranking Java operators from highest to lowest precedence.",
+      caption: "2 + 3 * 4 evaluates to 14 because multiplication has higher precedence than addition."
+    }
+  ],
   subject: "Java Programming",
   difficulty: "Beginner",
   estimatedTime: 65,

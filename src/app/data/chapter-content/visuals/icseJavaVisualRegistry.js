@@ -30,7 +30,7 @@ export const icseJavaVisuals = [
   },
   {
     id: "java-array-indexing",
-    chapterSlug: "arrays-1d",
+    chapterSlug: "arrays",
     title: "One-Dimensional Array Indexing",
     purpose: "Help students connect array positions with zero-based indexes.",
     caption: "Java arrays start at index 0 and the last valid index is length − 1.",
@@ -54,7 +54,7 @@ export const icseJavaVisuals = [
   },
   {
     id: "java-loop-flow",
-    chapterSlug: "for-loop",
+    chapterSlug: "loops",
     title: "FOR Loop Execution Flow",
     purpose: "Show initialization, condition checking, body execution and update in a for loop.",
     caption: "A for loop initializes, checks its condition, executes the body, updates the counter and repeats.",

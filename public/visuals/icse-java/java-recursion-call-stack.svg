@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+<title id="title">Java Recursion Call Stack</title>
+<desc id="desc">Calculating factorial(4) recursively: each call pushes a new stack frame until the base case is reached, then frames return and multiply on the way back down.</desc>
+<rect width="1200" height="560" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#0f172a">Java Recursion Call Stack: factorial(4)</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<text x="300" y="95" font-size="18" font-weight="700" fill="#1e3a8a">Calls (stack grows)</text>
+<rect x="100" y="120" width="500" height="60" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<text x="350.0" y="145" font-size="17" font-weight="700" fill="#1e3a8a">factorial(4)</text>
+<text x="350.0" y="167" font-size="13" fill="#1e3a8a">waiting for factorial(3)</text>
+<rect x="130" y="192" width="440" height="60" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<text x="350.0" y="217" font-size="17" font-weight="700" fill="#1e3a8a">factorial(3)</text>
+<text x="350.0" y="239" font-size="13" fill="#1e3a8a">waiting for factorial(2)</text>
+<rect x="160" y="264" width="380" height="60" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<text x="350.0" y="289" font-size="17" font-weight="700" fill="#1e3a8a">factorial(2)</text>
+<text x="350.0" y="311" font-size="13" fill="#1e3a8a">waiting for factorial(1)</text>
+<rect x="190" y="336" width="320" height="60" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<text x="350.0" y="361" font-size="17" font-weight="700" fill="#1e3a8a">factorial(1)</text>
+<text x="350.0" y="383" font-size="13" fill="#1e3a8a">base case: returns 1</text>
+<text x="900" y="95" font-size="18" font-weight="700" fill="#78350f">Returns (stack unwinds)</text>
+<rect x="820" y="120" width="330" height="55" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="985" y="154" font-size="15" fill="#78350f">factorial(1) returns 1</text>
+<rect x="820" y="188" width="330" height="55" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="985" y="222" font-size="15" fill="#78350f">factorial(2) returns 2*1 = 2</text>
+<rect x="820" y="256" width="330" height="55" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="985" y="290" font-size="15" fill="#78350f">factorial(3) returns 3*2 = 6</text>
+<rect x="820" y="324" width="330" height="55" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="985" y="358" font-size="15" fill="#78350f">factorial(4) returns 4*6 = 24</text>
+<text x="600" y="510" font-size="16" fill="#334155">Every recursive call adds a stack frame; the base case stops the growth and returns start multiplying back up.</text>
+</g>
+</svg>

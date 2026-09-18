@@ -2,6 +2,24 @@ const chapter10 = {
   id: "10-strings",
   title: "STRINGS",
   slug: "strings",
+  diagrams: [
+    {
+      type: "image",
+      title: "Java String Memory Concept",
+      explanation: "String literals with identical text share one object in the string pool, while new String() always creates a separate object on the heap.",
+      src: "/visuals/icse-java/java-string-memory.svg",
+      alt: "Diagram showing two string literal variables pointing to the same pooled object, and a new String() variable pointing to its own heap object.",
+      caption: "a == b is true for pooled literals with the same text; a == c is false when c is created with new String()."
+    },
+    {
+      type: "image",
+      title: "Common String Methods",
+      explanation: "A quick reference for frequently used String methods and what each one returns.",
+      src: "/visuals/icse-java/java-string-methods.svg",
+      alt: "Table listing length(), charAt(), substring(), indexOf(), toUpperCase() and equals() applied to the string \"Java Rocks\".",
+      caption: "Each method returns a new result without modifying the original string, since Strings are immutable."
+    }
+  ],
   subject: "Java Programming",
   difficulty: "Intermediate",
   estimatedTime: 260,

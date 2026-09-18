@@ -1,7 +1,25 @@
 const chapter = {
   id: "data-types-variables",
   title: "Data Types & Variables",
-  slug: "data-types-variables",
+  slug: "variables-data-types",
+  diagrams: [
+    {
+      type: "image",
+      title: "Java Variables and Data Types",
+      explanation: "Java data types split into primitive types, which store a value directly, and reference types, which store an address pointing to an object.",
+      src: "/visuals/icse-java/java-variables-data-types.svg",
+      alt: "Diagram splitting Java data types into primitive types and reference types with examples of each.",
+      caption: "Primitive variables hold their value directly; reference variables hold an address pointing to an object."
+    },
+    {
+      type: "image",
+      title: "Type Conversion and Casting",
+      explanation: "Widening conversion happens automatically from a smaller type to a larger one. Narrowing conversion needs an explicit cast and may lose data.",
+      src: "/visuals/icse-java/java-type-casting.svg",
+      alt: "Diagram contrasting automatic widening conversion with explicit narrowing casts, and the order of primitive type widths.",
+      caption: "double d = 9.7; int n = (int) d; narrows d to 9, discarding the fractional part."
+    }
+  ],
   subject: "Java Programming",
   difficulty: "Beginner",
   estimatedTime: 60,

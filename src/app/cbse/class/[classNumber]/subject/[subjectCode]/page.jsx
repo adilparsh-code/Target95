@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BookOpen, FlaskConical, GraduationCap, ArrowLeft, Clock, Users, Trophy, FolderKanban } from 'lucide-react';
 import { getCBSECurriculum } from '@/app/data/cbse';
+import { getCBSEProjectCards } from '@/app/data/projects';
 
 const subjectsByClass = {
   9: ['402'],
@@ -26,7 +27,10 @@ export default async function CBSESubjectPage({ params }) {
     ...(subject.parts?.partA?.units || []),
     ...(subject.parts?.partB?.units || []),
   ];
-  const projects = subject.projects || [];
+  // Prefer the registry so every card links to its real project page; fall back to
+  // subject-level project metadata when a registry group is not (yet) authored.
+  const registryProjects = getCBSEProjectCards(classNumber, subjectCode);
+  const projects = registryProjects && registryProjects.length > 0 ? registryProjects : (subject.projects || []);
 
   const totalTheoryTopics = units.reduce((sum, unit) => sum + (unit.theory?.length || 0), 0);
   const totalPracticalActivities = units.reduce((sum, unit) => sum + (unit.practicalActivities?.length || 0), 0);
@@ -88,8 +92,8 @@ export default async function CBSESubjectPage({ params }) {
                   <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">Project {index + 1}</p>
                   <h3 className="mt-2 text-xl font-bold text-gray-900">{project.title}</h3>
                   <p className="mt-2 text-gray-600">{project.outcome}</p>
-                  {(subjectCode === '083' || subjectCode === '843') && index === 0 && (
-                    <Link href={`/cbse/class/${classNumber}/subject/${subjectCode}/project`} className="mt-4 inline-flex rounded-xl bg-emerald-700 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-800">
+                  {project.href && (
+                    <Link href={project.href} className="mt-4 inline-flex rounded-xl bg-emerald-700 px-4 py-2 text-sm font-bold text-white hover:bg-emerald-800">
                       Open complete project + code →
                     </Link>
                   )}

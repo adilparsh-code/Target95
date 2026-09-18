@@ -10,11 +10,11 @@ const modules = [
     topics: ["Java", "Python", "Arrays", "OOP", "File I/O"],
   },
   {
-    title: "Student Performance Management System",
-    description: "The guided Class XI project — build one working Java application instead of submitting an unexplained code dump.",
+    title: "Age-Appropriate Social Media Security System",
+    description: "The guided Class XI project — a complete Java console application on digital safety, built, tested and explained instead of submitted as an unexplained code dump.",
     href: "/isc/class-xi/project",
     badge: "Project",
-    topics: ["OOP", "Arrays", "Search & Sort", "Viva Prep"],
+    topics: ["Java", "Strings", "Validation", "Ethics"],
   },
 ];
 

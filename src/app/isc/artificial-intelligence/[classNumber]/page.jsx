@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ISC_AI_2027 } from '@/app/data/iscArtificialIntelligence';
+import { getProjectGroup } from '@/app/data/projects';
 
 export default async function ISCArtificialIntelligencePage({ params }) {
   const { classNumber } = await params;
@@ -7,6 +8,12 @@ export default async function ISCArtificialIntelligencePage({ params }) {
   const course = ISC_AI_2027.classes[classNo];
 
   if (!course) return null;
+
+  // Prefer the project registry so every card links to its real project page.
+  const projectGroup = getProjectGroup(`isc-ai-${classNo}`);
+  const projectCards = projectGroup
+    ? projectGroup.projects.map((project) => ({ slug: project.slug, title: project.title, outcome: project.shortOutcome || project.summary }))
+    : course.projects.map((project) => ({ slug: null, title: project.title, outcome: project.outcome }));
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-white">
@@ -50,12 +57,26 @@ export default async function ISCArtificialIntelligencePage({ params }) {
           <p className="text-sm font-bold uppercase tracking-[0.16em] text-emerald-700 dark:text-emerald-300">Separate from theory</p>
           <h2 className="mt-1 text-3xl font-black">AI Projects</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {course.projects.map((project) => (
-              <article key={project.id} className="rounded-2xl border border-emerald-200 bg-white p-5 dark:border-emerald-900 dark:bg-slate-900">
-                <h3 className="font-black">{project.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{project.outcome}</p>
-              </article>
-            ))}
+            {projectCards.map((project) => {
+              const inner = (
+                <>
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="font-black">{project.title}</h3>
+                    {project.slug && <span className="text-sm font-semibold text-emerald-600">Open →</span>}
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{project.outcome}</p>
+                </>
+              );
+              return project.slug ? (
+                <Link key={project.slug} href={`/isc/artificial-intelligence/${classNo}/project/${project.slug}`} className="group rounded-2xl border border-emerald-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 dark:border-emerald-900 dark:bg-slate-900">
+                  {inner}
+                </Link>
+              ) : (
+                <article key={project.title} className="rounded-2xl border border-emerald-200 bg-white p-5 dark:border-emerald-900 dark:bg-slate-900">
+                  {inner}
+                </article>
+              );
+            })}
           </div>
         </section>
       </div>

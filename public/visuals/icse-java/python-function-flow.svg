@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" role="img" aria-labelledby="title desc">
+<title id="title">Python Function Call Flow</title>
+<desc id="desc">Calling count_even([1,2,3,4]) passes the list into the function, which traverses it counting even values, then returns 2 to the caller.</desc>
+<defs><marker id="pfh" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="460" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a">Python Function Call Flow</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<rect x="70" y="110" width="340" height="120" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/>
+<text x="240" y="145" font-size="17" font-weight="700" fill="#1e3a8a">Caller</text>
+<text x="240" y="180" font-size="15" font-family="monospace" fill="#0f172a">result = count_even([1,2,3,4])</text>
+<text x="240" y="205" font-size="13" fill="#334155">1. call with the list</text>
+
+<path d="M410 170 L780 170" stroke="#334155" stroke-width="5" marker-end="url(#pfh)"/>
+
+<rect x="780" y="110" width="350" height="200" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+<text x="955" y="145" font-size="17" font-weight="700" fill="#78350f">def count_even(values):</text>
+<text x="955" y="175" font-size="14" font-family="monospace" fill="#0f172a">count = 0</text>
+<text x="955" y="200" font-size="14" font-family="monospace" fill="#0f172a">for v in values:</text>
+<text x="955" y="225" font-size="14" font-family="monospace" fill="#0f172a">    if v % 2 == 0: count += 1</text>
+<text x="955" y="250" font-size="14" font-family="monospace" fill="#0f172a">return count</text>
+<text x="955" y="285" font-size="13" fill="#78350f">counter: 0&#8594;1&#8594;1&#8594;2</text>
+
+<path d="M780 260 L410 260" stroke="#334155" stroke-width="5" marker-end="url(#pfh)"/>
+<text x="600" y="245" font-size="14" fill="#334155">2. return count = 2</text>
+
+<rect x="120" y="280" width="230" height="60" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<text x="235" y="317" font-size="16" fill="#14532d">result = 2</text>
+</g>
+<text x="600" y="410" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#334155">A function without a return statement implicitly returns None.</text>
+</svg>

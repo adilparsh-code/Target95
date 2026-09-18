@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ISC_XI_TOPICS } from "@/lib/iscSyllabus";
 import { getISCClassXIContent } from "@/app/data/iscClassXIContent";
@@ -67,6 +68,27 @@ export default async function ISCClassXIChapterPage({ params }) {
               <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-700">
                 {(content.remember || []).map((item) => <li key={item}>{item}</li>)}
               </ul>
+            </div>
+          </section>
+        )}
+
+        {Array.isArray(content?.diagrams) && content.diagrams.length > 0 && (
+          <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-bold">Diagrams</h2>
+            <div className="mt-4 grid gap-8">
+              {content.diagrams.map((d, i) => (
+                <figure key={i} className="rounded-xl border border-slate-200 bg-slate-50 p-5">
+                  <Image
+                    src={d.src}
+                    alt={d.alt || d.title || ""}
+                    width={1200}
+                    height={700}
+                    className="mx-auto h-auto w-full max-w-3xl"
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                  />
+                  {d.caption && <figcaption className="mt-3 text-sm text-slate-600">{d.caption}</figcaption>}
+                </figure>
+              ))}
             </div>
           </section>
         )}

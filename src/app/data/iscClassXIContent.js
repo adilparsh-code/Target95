@@ -218,6 +218,24 @@ export const ISC_XI_CONTENT = [
     slug: "introduction-python",
     section: "C",
     title: "Introduction to Python",
+    diagrams: [
+      {
+        type: "image",
+        title: "Python Variables and Data Types",
+        explanation: "Python variables need no type keyword; the type comes from the value assigned.",
+        src: "/visuals/icse-java/python-variables-datatypes.svg",
+        alt: "Table showing Python variables age, price, name, is_valid and marks alongside their int, float, str, bool and list types.",
+        caption: "Use the built-in type() function to check a variable's type at any point in a program."
+      },
+      {
+        type: "image",
+        title: "Python if/elif/else and Loops",
+        explanation: "if/elif/else runs only the first matching branch; for iterates over a sequence; while repeats based on a condition. Indentation defines every block.",
+        src: "/visuals/icse-java/python-control-flow.svg",
+        alt: "Four panels showing Python if/elif/else, a for loop with range(), a while loop, and a note on indentation defining blocks.",
+        caption: "Python has no braces; consistent indentation is what defines each block, and mixing tabs and spaces causes an IndentationError."
+      }
+    ],
     learningObjectives: ["Understand Python syntax and basic data types.", "Write small input/output and control-flow programs.", "Use functions and lists at an introductory level."],
     keyConcepts: ["Python syntax/indentation", "Variables and types", "Input/output", "if/elif/else", "for/while", "Functions", "Lists and strings"],
     remember: ["Indentation is syntactically significant in Python.", "input() returns text unless converted.", "Python lists are mutable and zero-indexed."],

@@ -232,6 +232,24 @@ a.sound();   // prints "Woof" — dynamic dispatch
   "python": {
     title: "Programming in Python",
     section: "C",
+    diagrams: [
+      {
+        type: "image",
+        title: "Python List, Tuple and Dictionary",
+        explanation: "Lists are mutable ordered sequences, tuples are immutable ordered sequences, and dictionaries map unique keys to values.",
+        src: "/visuals/icse-java/python-collections-comparison.svg",
+        alt: "Three-panel comparison of Python list, tuple and dict with example code and their supported operations.",
+        caption: "point[0] = 5 raises a TypeError on a tuple because tuples cannot be modified after creation."
+      },
+      {
+        type: "image",
+        title: "Python Function Call Flow",
+        explanation: "Calling a function passes arguments in, runs the function body, and returns a value back to the caller.",
+        src: "/visuals/icse-java/python-function-flow.svg",
+        alt: "Diagram showing count_even([1,2,3,4]) being called, traversing the list to count even values, and returning 2 to the caller.",
+        caption: "A function with no return statement implicitly returns None."
+      }
+    ],
     overview: "Write small Python programs using variables, selection, iteration, functions and core collections while reasoning about output. ISC board questions test output tracing, debugging indentation errors, and writing functions with lists and dictionaries.",
     concepts: [
       "Python uses indentation (consistent spaces or tabs) to define blocks; mixing them causes IndentationError.",

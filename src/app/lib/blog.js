@@ -56,7 +56,7 @@ export const EDITORIAL_TOPIC_POOL = [
   { pillar: "building-target95", category: "development", title: "Why I am choosing quality over publishing a new Target95 article every day" },
 ];
 
-const DEMO_ARTICLE = {
+export const DEMO_ARTICLE = {
   id: "demo-ai-study-guide",
   slug: "how-students-can-use-ai-responsibly-for-learning",
   category: "ai-technology",

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+<title id="title">Java Dynamic Method Dispatch (Runtime Polymorphism)</title>
+<desc id="desc">A superclass reference holding a subclass object calls the overridden method; Java runs the subclass's version at runtime based on the actual object type.</desc>
+<defs><marker id="dh" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="480" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a">Dynamic Method Dispatch (Runtime Polymorphism)</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<text x="300" y="105" font-size="17" fill="#334155">Animal a = new Dog();</text>
+<text x="300" y="130" font-size="17" fill="#334155">a.sound();</text>
+
+<rect x="150" y="160" width="300" height="70" rx="12" fill="#e2e8f0" stroke="#334155" stroke-width="4"/>
+<text x="300" y="192" font-size="18" fill="#0f172a">Reference type: Animal</text>
+<text x="300" y="215" font-size="14" fill="#64748b">(checked at compile time)</text>
+
+<path d="M450 195 L600 195" stroke="#334155" stroke-width="4" stroke-dasharray="6,4"/>
+<text x="525" y="180" font-size="13" fill="#64748b">refers to</text>
+
+<rect x="600" y="160" width="300" height="70" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+<text x="750" y="192" font-size="18" fill="#78350f">Actual object: Dog</text>
+<text x="750" y="215" font-size="14" fill="#78350f">(decides at runtime)</text>
+
+<path d="M750 230 L750 280" stroke="#334155" stroke-width="5" marker-end="url(#dh)"/>
+<text x="820" y="260" font-size="14" fill="#334155">runtime lookup</text>
+
+<rect x="580" y="280" width="340" height="90" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="4"/>
+<text x="750" y="315" font-size="18" font-weight="700" fill="#14532d">Dog.sound() runs</text>
+<text x="750" y="345" font-size="15" fill="#14532d">prints "Woof"</text>
+
+<rect x="80" y="280" width="380" height="90" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="4"/>
+<text x="270" y="315" font-size="16" fill="#7f1d1d">NOT Animal.sound()</text>
+<text x="270" y="345" font-size="14" fill="#7f1d1d">even though reference type is Animal</text>
+</g>
+<text x="600" y="440" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#334155">Compile-time checks use the reference type; the actual method that runs is chosen at runtime by the object's real type.</text>
+</svg>

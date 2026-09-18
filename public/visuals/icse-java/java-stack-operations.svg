@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+<title id="title">Stack Operations: Push and Pop</title>
+<desc id="desc">A stack follows LIFO order. push places a new item on top; pop removes the topmost item. Tracing push(A), push(B), push(C), pop() shows C removed first.</desc>
+<rect width="1200" height="480" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a">Stack Operations (LIFO): push and pop</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<text x="230" y="100" font-size="18" font-weight="700" fill="#1e3a8a">After push(A), push(B), push(C)</text>
+<rect x="130" y="120" width="200" height="50" fill="#e2e8f0" stroke="#334155" stroke-width="3"/><text x="230" y="152" font-size="18">C</text><text x="360" y="152" font-size="14" fill="#1e3a8a">&#8592; top</text>
+<rect x="130" y="170" width="200" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="230" y="202" font-size="18" fill="#1e3a8a">B</text>
+<rect x="130" y="220" width="200" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="230" y="252" font-size="18" fill="#1e3a8a">A</text>
+<rect x="130" y="270" width="200" height="10" fill="#334155"/>
+
+<text x="750" y="100" font-size="18" font-weight="700" fill="#7f1d1d">After pop() removes C</text>
+<rect x="650" y="150" width="200" height="50" fill="#fee2e2" stroke="#dc2626" stroke-width="3" stroke-dasharray="6,4"/><text x="750" y="182" font-size="15" fill="#7f1d1d">(C removed)</text>
+<rect x="650" y="200" width="200" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="750" y="232" font-size="18" fill="#1e3a8a">B</text><text x="880" y="232" font-size="14" fill="#7f1d1d">&#8592; new top</text>
+<rect x="650" y="250" width="200" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/><text x="750" y="282" font-size="18" fill="#1e3a8a">A</text>
+<rect x="650" y="300" width="200" height="10" fill="#334155"/>
+
+<rect x="250" y="360" width="700" height="90" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+<text x="600" y="392" font-size="17" font-weight="700" fill="#78350f">push(x): data[++top] = x;    pop(): return data[top--];</text>
+<text x="600" y="420" font-size="14" fill="#78350f">pop() always removes the item most recently pushed (Last In, First Out).</text>
+</g>
+</svg>

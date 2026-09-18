@@ -106,6 +106,16 @@ static String reverse(String s) {
   "recursion": {
     title: "Recursion",
     section: "B",
+    diagrams: [
+      {
+        type: "image",
+        title: "Recursion Call Stack",
+        explanation: "Each recursive call adds a stack frame; frames stop growing at the base case, then return and combine their results on the way back up.",
+        src: "/visuals/icse-java/java-recursion-call-stack.svg",
+        alt: "Diagram tracing factorial(4) as a growing stack of calls down to the base case, then unwinding with each frame multiplying its result.",
+        caption: "factorial(4) calls down to factorial(1), then returns 1, 2, 6, 24 back up the stack."
+      }
+    ],
     overview: "Solve problems recursively by defining a correct base case and a recursive step that moves toward termination. ISC board questions test tracing of call and return sequences, identification of missing base cases, and writing recursive methods.",
     concepts: [
       "Every recursive solution needs a base case that stops further calls and returns a direct answer.",
@@ -154,6 +164,24 @@ static String reverse(String s) {
   "inheritance-interface": {
     title: "Inheritance and Interface",
     section: "B",
+    diagrams: [
+      {
+        type: "image",
+        title: "Java Inheritance Hierarchy",
+        explanation: "A subclass inherits accessible members from its superclass and can add new members or override inherited ones.",
+        src: "/visuals/icse-java/java-inheritance-hierarchy.svg",
+        alt: "Class hierarchy diagram showing Person as parent, Student as child, and Topper as a further subclass.",
+        caption: "Each subclass inherits everything accessible from the class above it in the hierarchy."
+      },
+      {
+        type: "image",
+        title: "Dynamic Method Dispatch (Runtime Polymorphism)",
+        explanation: "When a superclass reference holds a subclass object and calls an overridden method, Java runs the subclass's version at runtime, not the superclass's.",
+        src: "/visuals/icse-java/java-dynamic-dispatch.svg",
+        alt: "Diagram showing an Animal reference pointing to a Dog object, with a.sound() resolving to Dog's overridden method at runtime.",
+        caption: "Animal a = new Dog(); a.sound(); prints \"Woof\" because dynamic dispatch uses the actual object type, not the reference type."
+      }
+    ],
     overview: "Use inheritance and interfaces to model common behaviour, override methods and understand runtime polymorphism. ISC board questions test constructor order, dynamic method dispatch, and the difference between overloading and overriding.",
     concepts: [
       "A subclass inherits all accessible (public and protected) members from its superclass and can add new members or override inherited methods.",
@@ -256,6 +284,16 @@ def word_frequency(words):
   "data-structures": {
     title: "Data Structures",
     section: "C",
+    diagrams: [
+      {
+        type: "image",
+        title: "Choosing a Data Structure",
+        explanation: "Stacks, queues, linked lists and trees each support a different set of operations efficiently; picking the right one depends on what your problem needs to do most often.",
+        src: "/visuals/icse-java/java-data-structures-overview.svg",
+        alt: "Four-panel comparison of Stack, Queue, Linked List and Binary Tree with their typical operations and use cases.",
+        caption: "Match the structure to the operations you need: LIFO, FIFO, dynamic insertion, or hierarchical search."
+      }
+    ],
     overview: "Choose and reason about stacks, queues, linked lists and trees. ISC board questions test LIFO vs FIFO, overflow/underflow, node linking, and matching a structure to an operation set. Study the dedicated Stack, Queue and Trees lessons after this overview.",
     concepts: [
       "A stack follows LIFO (Last In First Out): the most recently inserted item is removed first. Operations: push (insert at top), pop (remove from top), peek/top (view top without removing).",
@@ -310,6 +348,16 @@ class Queue {
   "stack": {
     title: "Stack",
     section: "C",
+    diagrams: [
+      {
+        type: "image",
+        title: "Stack Operations: Push and Pop",
+        explanation: "A stack follows LIFO order: push places a new item on top, and pop removes the topmost item first.",
+        src: "/visuals/icse-java/java-stack-operations.svg",
+        alt: "Diagram showing a stack after push(A), push(B), push(C), and again after pop() removes C.",
+        caption: "pop() always removes the item most recently pushed onto the stack."
+      }
+    ],
     overview: "A stack is a LIFO linear structure. ISC board questions require tracing push/pop/peek, detecting overflow and underflow, implementing an array stack in Java, and applying stacks to reverse, matching brackets and postfix evaluation.",
     concepts: [
       "LIFO: the last item pushed is the first item popped. Only the top is accessible.",
@@ -381,6 +429,16 @@ class Queue {
   "queue": {
     title: "Queue",
     section: "C",
+    diagrams: [
+      {
+        type: "image",
+        title: "Queue Operations: Enqueue and Dequeue",
+        explanation: "A queue follows FIFO order: enqueue inserts at the rear, and dequeue removes from the front, so the earliest inserted item leaves first.",
+        src: "/visuals/icse-java/java-queue-operations.svg",
+        alt: "Diagram showing a queue with front and rear ends, enqueue adding at the rear and dequeue removing from the front.",
+        caption: "Tracing enqueue(X), enqueue(Y), dequeue() returns X first, since X was inserted first."
+      }
+    ],
     overview: "A queue is a FIFO linear structure. ISC board questions require tracing enqueue/dequeue, explaining linear-array false overflow, implementing a circular queue, and choosing a queue for scheduling problems.",
     concepts: [
       "FIFO: the earliest enqueued item is dequeued first. Insert at rear, remove from front.",
@@ -450,6 +508,16 @@ class Queue {
   "trees": {
     title: "Trees",
     section: "C",
+    diagrams: [
+      {
+        type: "image",
+        title: "Binary Tree Structure and Inorder Traversal",
+        explanation: "A binary tree is hierarchical: each node has at most two children. Traversal order (inorder, preorder, postorder) determines the sequence in which nodes are visited.",
+        src: "/visuals/icse-java/java-tree-structure.svg",
+        alt: "Binary tree with root 8, left child 3, and right child 10, with inorder traversal 3, 8, 10 shown below.",
+        caption: "Inorder traversal (left, root, right) on this tree visits 3, then 8, then 10."
+      }
+    ],
     overview: "A binary tree organises data hierarchically. ISC-style questions test node terminology, BST insert/search, inorder/preorder/postorder tracing, and writing recursive traversal methods.",
     concepts: [
       "A tree is a connected acyclic hierarchy of nodes. The root has no parent; leaves have no children.",

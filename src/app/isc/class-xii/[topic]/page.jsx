@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getISCXIIJavaPythonContent, ISC_XII_JAVA_PYTHON_CONTENT } from "@/app/data/iscXIIJavaPythonContent";
 
@@ -94,6 +95,29 @@ export default async function ISCClassXIITopicPage({ params }) {
             ))}
           </ul>
         </section>
+
+        {Array.isArray(content.diagrams) && content.diagrams.length > 0 && (
+          <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-7 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <h2 className="text-2xl font-black">Diagrams</h2>
+            <div className="mt-5 grid gap-8">
+              {content.diagrams.map((d, i) => (
+                <figure key={i} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-950">
+                  <Image
+                    src={d.src}
+                    alt={d.alt || d.title || ""}
+                    width={1200}
+                    height={700}
+                    className="mx-auto h-auto w-full max-w-3xl"
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                  />
+                  {d.caption && (
+                    <figcaption className="mt-3 text-sm text-slate-600 dark:text-slate-300">{d.caption}</figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-8 rounded-3xl border border-blue-200 bg-blue-50 p-7 dark:border-blue-900 dark:bg-blue-950/30">
           <h2 className="text-2xl font-black">Worked example</h2>

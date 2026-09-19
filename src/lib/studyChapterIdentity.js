@@ -18,6 +18,43 @@ const LEGACY_TO_CANONICAL_SLUG = Object.freeze({
   constructor: "constructors",
 });
 
+/**
+ * Reverse compatibility map: a canonical javaCurriculum slug -> the legacy
+ * study-center slug whose rich chapter-content / studyData should be reused.
+ *
+ * The canonical runtime slugs (javaCurriculum) are the ones the /Java chapter
+ * catalog, the /Java/[chapter]/question/[id] route and the "My Learning"
+ * roadmap emit. The rich content and study notes are still keyed by the
+ * legacy study slugs, so this map keeps every canonical /Java chapter link
+ * resolvable instead of 404-ing.
+ */
+export const CANONICAL_TO_STUDY_SLUG = Object.freeze({
+  "introduction-to-java": "introduction",
+  "data-types-variables": "variables-data-types",
+  operators: "operators",
+  "input-in-java": "data-processing-in-java",
+  if: "if-else",
+  "if-else": "if-else",
+  "nested-if": "if-else",
+  switch: "if-else",
+  "for-loop": "loops",
+  "while-loop": "loops",
+  "do-while-loop": "loops",
+  methods: "methods",
+  "arrays-1d": "arrays",
+  "arrays-2d": "arrays",
+  strings: "strings",
+  "classes-objects": "class-as-basis-of-computation",
+  encapsulation: "class-as-basis-of-computation",
+  constructors: "constructor",
+  inheritance: "class-as-basis-of-computation",
+});
+
+/** Resolve a canonical javaCurriculum slug to the legacy study slug. */
+export function studySlugForCanonical(slug) {
+  return CANONICAL_TO_STUDY_SLUG[slug] || slug;
+}
+
 const canonicalBySlug = new Map(canonicalChapters.map((chapter) => [chapter.slug, chapter]));
 
 function canonicalSlugFor(legacySlug) {

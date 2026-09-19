@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getStudyChapters, searchStudyContent } from "../../lib/studyCenter";
+import { getStudyChapters, resolveStudyChapter, searchStudyContent } from "../../lib/studyCenter";
 import { questions as practiceQuestions } from "../data/questions";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -123,11 +123,16 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
           }
         }
 
+        const questionChapterSlug = q.chapter
+          ? String(q.chapter).trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
+          : "";
+        const resolvedQuestionChapter = questionChapterSlug ? resolveStudyChapter(questionChapterSlug) : null;
+
         matched.push({
           id: `question-${q.slug || idx}`,
           title: q.title,
           description: `${q.chapter} · ${q.difficulty} · ${q.type}`,
-          href: `/Java/${q.chapter.toLowerCase().replace(/\s+/g, "-")}`,
+          href: resolvedQuestionChapter ? `/Java/${resolvedQuestionChapter.slug}` : "/question-bank",
           type: "question",
           chapter: q.chapter,
           difficulty: q.difficulty,

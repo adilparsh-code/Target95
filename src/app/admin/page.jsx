@@ -89,11 +89,11 @@ const AdminDashboard = () => {
   }, []);
 
   const quickActions = [
-    { title: "Add New Question", description: "Create a new question for any chapter", href: "/admin/questions/new", icon: "➕", color: "blue" },
+    { title: "Add New Question", description: "Create a new question for any chapter", href: "/admin/questions", icon: "➕", color: "blue" },
     { title: "Manage Subjects", description: "Add or edit subjects", href: "/admin/subjects", icon: "📚", color: "indigo" },
     { title: "Manage Chapters", description: "Update chapter content and metadata", href: "/admin/chapters", icon: "📖", color: "emerald" },
-    { title: "Upload Study Notes", description: "Add new study material for students", href: "/admin/study-notes/new", icon: "📄", color: "emerald" },
-    { title: "Create Mock Test", description: "Design a new practice test", href: "/admin/mock-tests/new", icon: "📝", color: "amber" },
+    { title: "Upload Study Notes", description: "Add new study material for students", href: "/admin/study-notes", icon: "📄", color: "emerald" },
+    { title: "Create Mock Test", description: "Design a new practice test", href: "/admin/mock-tests", icon: "📝", color: "amber" },
     { title: "View Analytics", description: "Check platform performance metrics", href: "/admin/analytics", icon: "📊", color: "violet" },
     { title: "Settings", description: "Configure platform preferences", href: "/admin/settings", icon: "⚙️", color: "rose" },
   ];

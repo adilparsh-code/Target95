@@ -1,13 +1,18 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { ISC_AI_2027 } from '@/app/data/iscArtificialIntelligence';
 import { getProjectGroup } from '@/app/data/projects';
+
+export function generateStaticParams() {
+  return [11, 12].map((classNumber) => ({ classNumber: String(classNumber) }));
+}
 
 export default async function ISCArtificialIntelligencePage({ params }) {
   const { classNumber } = await params;
   const classNo = Number(classNumber);
   const course = ISC_AI_2027.classes[classNo];
 
-  if (!course) return null;
+  if (!course) notFound();
 
   // Prefer the project registry so every card links to its real project page.
   const projectGroup = getProjectGroup(`isc-ai-${classNo}`);

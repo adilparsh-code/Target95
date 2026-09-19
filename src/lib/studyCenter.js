@@ -1,7 +1,8 @@
 import javaChapters from "../app/data/javaChapters";
 import questions from "../app/data/questions";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
-import { adaptStudyChapterIdentity } from "@/lib/studyChapterIdentity";
+import { adaptStudyChapterIdentity, studySlugForCanonical } from "@/lib/studyChapterIdentity";
+import { javaChapters as canonicalChapters } from "../app/data/javaCurriculum";
 import { getChapterBySlug as getRichChapterBySlug } from "../app/data/chapter-content";
 
 export const STUDY_PROGRESS_STORAGE_KEY = "target95-study-progress";
@@ -1577,6 +1578,77 @@ export function getStudyChapters(filters = {}) {
 
 export function getStudyChapterBySlug(slug, filters = {}) {
   return getStudyChapters(filters).find((chapter) => chapter.slug === slug);
+}
+
+/**
+ * Resolve a chapter slug for the student chapter routes (/Java/[chapter] and
+ * /study/[slug]).
+ *
+ * Accepts BOTH the legacy study-center slugs (the keys that carry the authored
+ * studyData + rich chapter-content) AND the canonical javaCurriculum slugs
+ * emitted by the /Java catalog, the /Java/[chapter]/question/[id] route and
+ * the "My Learning" roadmap. Canonical slugs are mapped onto the legacy chapter
+ * that owns the content while keeping their canonical identity (title,
+ * difficulty), so no student-facing chapter link 404s.
+ */
+export function resolveStudyChapter(slug) {
+  if (!slug || typeof slug !== "string") return null;
+
+  const chapters = getStudyChapters();
+  const direct = chapters.find((chapter) => chapter.slug === slug);
+  if (direct) return direct;
+
+  const canonical = canonicalChapters.find((chapter) => chapter.slug === slug);
+  const aliasSlug = studySlugForCanonical(slug);
+  const aliasChapter = aliasSlug ? chapters.find((chapter) => chapter.slug === aliasSlug) : null;
+
+  if (aliasChapter) {
+    return {
+      ...aliasChapter,
+      slug,
+      requestSlug: slug,
+      canonicalSlug: canonical ? slug : aliasChapter.canonicalSlug || null,
+      legacySlug: aliasChapter.slug,
+      contentSlug: aliasChapter.slug,
+      title: canonical?.title || aliasChapter.title,
+      difficulty: canonical?.difficulty || aliasChapter.difficulty,
+      estimatedTime: canonical?.estimatedTime || aliasChapter.estimatedTime,
+    };
+  }
+
+  if (canonical) {
+    return {
+      ...canonical,
+      slug,
+      requestSlug: slug,
+      canonicalSlug: slug,
+      legacySlug: null,
+      contentSlug: null,
+      estimatedStudyTime: `${canonical.estimatedTime || 30} min`,
+      totalQuestions: canonical.questionCount ?? (Array.isArray(canonical.questions) ? canonical.questions.length : 0),
+      studyData: {
+        intro: canonical.description || "",
+        concepts: canonical.topics || [],
+        definitions: [],
+        notes: [],
+        mistakes: [],
+        tips: [],
+        summary: canonical.description || "",
+        formulaBox: null,
+        syntax: [],
+        importantExamPoints: [],
+        commonMistakes: [],
+        quickRevision: [],
+        faqs: [],
+        relatedTopics: [],
+        learningObjectives: [],
+        examples: [],
+        prerequisites: [],
+      },
+    };
+  }
+
+  return null;
 }
 
 export function getStudyProgressState() {

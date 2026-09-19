@@ -135,6 +135,22 @@ export const ISC_XI_CHAPTER_ENHANCEMENTS = {
       { title: "Intellectual property and open source", points: ["Copyright protects original expression; patents protect qualifying inventions under applicable law.", "Software licences define permitted use, modification and distribution.", "Open-source licences vary; always follow the licence terms rather than assuming all open-source software has identical permissions."], example: "Ethical analysis should consider multiple viewpoints, legal rights, user impact and responsible technology use." }
     ],
     quickPractice: [{ question: "How is phishing different from ordinary spam?", answer: "Phishing is typically deceptive communication designed to obtain information or induce an unsafe action; spam is broadly unsolicited bulk communication." }]
+  },
+
+  "xi-recursion-debugging": {
+    overview: "Recursion solves a problem by having a method call itself on a smaller instance of the same problem. For ISC XI you must trace calls and returns accurately and debug non-terminating or incorrect recursion.",
+    sections: [
+      { title: "Base case and recursive case", points: ["Every recursive method needs a base case that stops the recursion.", "The recursive case must move the argument toward the base case.", "A method without a reachable base case overflows the call stack."], example: "factorial(n): base case n == 0 returns 1; recursive case returns n * factorial(n - 1)." },
+      { title: "Tracing calls and returns", points: ["Trace downward through the calls first, then evaluate the returns on the way back up.", "Keep a table of the method, the argument and the return value at each level.", "Show the call stack, not only the final answer, in examination working."], example: "factorial(3): calls 3 → 2 → 1 → 0, then returns 1, 1, 2, 6." },
+      { title: "Common recursion defects", points: ["A missing or unreachable base case causes infinite recursion.", "Not reducing the argument (or reducing it the wrong way) breaks termination.", "Failing to use the returned value is a common logic bug.", "Excessive recursion depth can exhaust the call stack even when the logic is correct."] },
+      { title: "Recursion vs iteration", points: ["Recursion uses the call stack; iteration uses a loop variable.", "Convert a simple tail-style recursion to a loop when memory matters.", "Recursive code is often shorter but can use more memory."], example: "sum(1..n) iteratively: total = 0; for (int i = 1; i <= n; i++) total += i;" }
+    ],
+    quickPractice: [
+      { question: "Trace factorial(4): list the calls and the returns.", answer: "Calls 4, 3, 2, 1, 0; returns 1, 1, 2, 6, 24." },
+      { question: "Why does a recursive method with a constant argument fail to terminate?", answer: "It never reaches the base case, so it recurses until the call stack overflows." },
+      { question: "What does the call stack store during recursion?", answer: "Each pending call's arguments and return address, so returns can resume in order." },
+      { question: "Convert sum(1..n) recursion into an iterative loop.", answer: "total = 0; for i = 1..n: total += i; return total." }
+    ]
   }
 };
 

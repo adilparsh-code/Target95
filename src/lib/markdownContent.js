@@ -12,12 +12,11 @@ import path from "path";
 const chapterRegistry = {
   introduction: "Introduction_to_Java_Class9.md",
   "introduction-to-java": "Introduction_to_Java_Class9.md",
-  constructor: "Constructor_Class9.md",
 };
 
 function readMarkdownFile(slug) {
   if (!slug || typeof slug !== "string") return null;
-  const filename = chapterRegistry[slug];
+  const filename = Object.prototype.hasOwnProperty.call(chapterRegistry, slug) ? chapterRegistry[slug] : null;
   if (!filename) return null;
 
   try {

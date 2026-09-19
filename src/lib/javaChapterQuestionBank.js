@@ -5,35 +5,25 @@ import { resolveChapterMetadata } from "@/lib/icseSyllabus";
  * Canonical Java chapter question bank.
  *
  * The detailed, academically-authored question files live in
- * `src/app/data/question-bank/` (MCQs, output/tracing, debugging,
- * programming, case-based, true/false, fill-blanks, assertion-reason and
- * viva questions organised by broad chapter). The student chapter flow is
- * driven by the granular java chapter slugs defined in
- * `src/app/data/javaCurriculum` (for-loop, while-loop, if-else, ...).
- *
- * This module is the bridge between the two: it normalises every real
- * question category into the shape the student-facing renderers already
- * expect (`type`, `question`, `options`, `answer`, `modelAnswer`) and
- * attaches each real chapter to the java chapter slug(s) it covers.
- *
- * It REPLACES the generated placeholder questions for every java chapter
- * that has real content, so students never see filler questions.
+ * src/app/data/question-bank. This bridge normalises every real question
+ * category into the shape consumed by the student-facing renderers and
+ * maps the broad bank chapters to every supported Java route alias.
  */
 
-// real-bank chapter slug (from the question-bank index) -> java chapter slug(s)
+// broad question-bank slug -> supported Java route slugs
 const SLUG_MAP = {
-  introduction: ["introduction-to-java"],
-  "variables-data-types": ["data-types-variables"],
+  introduction: ["introduction-to-java", "introduction"],
+  "variables-data-types": ["variables-data-types", "data-types-variables"],
   operators: ["operators"],
   "input-output": ["input-in-java"],
-  "if-else": ["if", "if-else", "nested-if", "switch"],
-  loops: ["for-loop", "while-loop", "do-while-loop"],
-  methods: ["methods"],
-  arrays: ["arrays-1d", "arrays-2d"],
-  strings: ["strings"],
-  "oop-concepts": ["classes-objects"],
+  "if-else": ["conditionals", "if", "if-else", "nested-if", "switch"],
+  loops: ["loops", "for-loop", "while-loop", "do-while-loop"],
+  methods: ["methods", "custom-methods"],
+  arrays: ["arrays", "arrays-1d", "arrays-2d"],
+  strings: ["strings", "string-handling"],
+  "oop-concepts": ["class-as-basis-of-computation", "classes-objects"],
   encapsulation: ["encapsulation"],
-  constructors: ["constructors"],
+  constructors: ["constructor", "constructors"],
   inheritance: ["inheritance"],
 };
 
@@ -50,32 +40,17 @@ const TYPE_BY_CATEGORY = {
   vivaQuestions: "theory",
 };
 
-/**
- * Convert an option-prefix letter ("B") into a zero-based index.
- * @param {string} letter
- * @returns {number|null}
- */
 function letterToIndex(letter) {
-  const n =
-    String(letter || "").trim().toUpperCase().charCodeAt(0) - 65;
+  const n = String(letter || "").trim().toUpperCase().charCodeAt(0) - 65;
   return Number.isFinite(n) && n >= 0 && n <= 25 ? n : null;
 }
 
-/** Strip a leading "A) ", "B. " style prefix from an MCQ option. */
 function stripOptionPrefix(option) {
   return String(option).replace(/^[A-Ea-e][).:]\s*/, "").trim();
 }
 
-/**
- * Normalise one raw question-bank item into the field shape the existing
- * student-facing renderers consume.
- * @param {object} raw
- * @param {string} type
- * @param {string} targetSlug
- */
 function normalizeRealQuestion(raw, type, targetSlug) {
   const meta = resolveChapterMetadata(targetSlug);
-
   const isMcq = type === "mcq";
   const options = Array.isArray(raw.options)
     ? raw.options.map(stripOptionPrefix)
@@ -91,17 +66,12 @@ function normalizeRealQuestion(raw, type, targetSlug) {
   }
 
   const questionText = raw.question || "";
-
   const correctText =
     isMcq && answerIndex != null && options[answerIndex]
       ? options[answerIndex]
       : (raw.correctAnswer ?? raw.answer ?? raw.sampleAnswer ?? "");
-
-  const answerValue =
-    raw.correctAnswer ?? raw.answer ?? raw.sampleAnswer ?? "";
-
-  const isTheoryLike =
-    type === "theory" || type === "case-based" || type === "debugging";
+  const answerValue = raw.correctAnswer ?? raw.answer ?? raw.sampleAnswer ?? "";
+  const isTheoryLike = type === "theory" || type === "case-based" || type === "debugging";
 
   return {
     id: String(raw.id),
@@ -129,7 +99,6 @@ function normalizeRealQuestion(raw, type, targetSlug) {
   };
 }
 
-/** Flat list of every (normalised) real question, in a stable order. */
 function buildChapterQuestionBank() {
   const bySlug = {};
 
@@ -144,17 +113,13 @@ function buildChapterQuestionBank() {
       const items = chapter[category];
       if (!Array.isArray(items)) continue;
       for (const item of items) {
-        normalized.push(
-          normalizeRealQuestion(item, TYPE_BY_CATEGORY[category], targetSlugs[0])
-        );
+        normalized.push(normalizeRealQuestion(item, TYPE_BY_CATEGORY[category], targetSlugs[0]));
       }
     }
 
     if (normalized.length === 0) continue;
 
     for (const targetSlug of targetSlugs) {
-      // Each granular chapter gets the full real set. IDs are unique within a
-      // chapter (the real bank uses per-chapter prefixes like CH05-...).
       bySlug[targetSlug] = normalized.map((q) => ({
         ...q,
         chapter: targetSlug,
@@ -167,7 +132,6 @@ function buildChapterQuestionBank() {
 
 export const chapterQuestionBankBySlug = buildChapterQuestionBank();
 
-/** Flat canonical list of all real java questions (used by the bank page). */
 export const allJavaChapterQuestions = (() => {
   const seen = new Set();
   const out = [];

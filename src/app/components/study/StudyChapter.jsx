@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
-import { getStudyChapters } from "../../../lib/studyCenter";
+import { getStudyChapters, resolveStudyChapter } from "../../../lib/studyCenter";
 import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
@@ -24,7 +24,7 @@ import QuestionSection from "./QuestionSection";
 
 export default function StudyChapter({ slug, markdownContent = null, questionBank = null }) {
   const chapters = useMemo(() => getStudyChapters() || [], []);
-  const chapter = useMemo(() => chapters.find((c) => c.slug === slug), [chapters, slug]);
+  const chapter = useMemo(() => resolveStudyChapter(slug), [slug]);
 
   const [search, setSearch] = useState("");
   const { progress, updateProgress } = useStudyProgress();

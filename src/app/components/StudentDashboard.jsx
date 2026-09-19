@@ -26,7 +26,7 @@ const dailyMotivations = [
 ];
 
 const continueLearningData = [
-  { id: "control-flow", title: "Control Flow", progress: 45, icon: "🔄", color: "from-purple-500 to-indigo-600", href: "/study/control-flow" },
+  { id: "control-flow", title: "Control Flow", progress: 45, icon: "🔄", color: "from-purple-500 to-indigo-600", href: "/study/if-else" },
   { id: "methods", title: "Java Methods", progress: 55, icon: "⚙️", color: "from-orange-500 to-red-600", href: "/study/methods" },
   { id: "arrays", title: "Arrays Deep Dive", progress: 40, icon: "📊", color: "from-teal-500 to-emerald-600", href: "/study/arrays" },
   { id: "strings", title: "String Manipulation", progress: 50, icon: "📝", color: "from-indigo-500 to-blue-600", href: "/study/strings" },

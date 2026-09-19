@@ -9,6 +9,36 @@ import cbseCurriculum2026_27, {
 } from './curriculum-2026-27';
 import CBSE_843_AI_2026_27 from './cbse843-ai-2026-27';
 import CBSE_402_CLASS9_DETAILED_VERIFICATION_2026_27 from './class9-402-detailed-verification-2026-27';
+import { CBSE_UNIT_ENRICHMENT } from './syllabus-gap-content-2026-27';
+
+/**
+ * Fill empty theory / learning-outcome / practical arrays on CBSE units with the
+ * authored gap-fill content. Existing content always wins; enrichment is only
+ * applied when the source field is missing or empty.
+ */
+const applyUnitEnrichment = (subject) => {
+  if (!subject || !subject.parts) return subject;
+
+  const enrichUnits = (units = []) => units.map((unit) => {
+    const extra = CBSE_UNIT_ENRICHMENT[unit.id];
+    if (!extra) return unit;
+    return {
+      ...unit,
+      learningOutcomes: (Array.isArray(unit.learningOutcomes) && unit.learningOutcomes.length) ? unit.learningOutcomes : (extra.learningOutcomes || []),
+      theory: (Array.isArray(unit.theory) && unit.theory.length) ? unit.theory : (extra.theory || []),
+      practicalActivities: (Array.isArray(unit.practicalActivities) && unit.practicalActivities.length) ? unit.practicalActivities : (extra.practicalActivities || []),
+    };
+  });
+
+  return {
+    ...subject,
+    parts: {
+      ...subject.parts,
+      partA: subject.parts.partA ? { ...subject.parts.partA, units: enrichUnits(subject.parts.partA.units) } : subject.parts.partA,
+      partB: subject.parts.partB ? { ...subject.parts.partB, units: enrichUnits(subject.parts.partB.units) } : subject.parts.partB,
+    },
+  };
+};
 
 export { cbseCurriculum2026_27, CBSE_CURRICULUM_SESSION };
 
@@ -48,7 +78,7 @@ export const getCBSECurriculum = (classNumber, subjectCode) => {
   if (String(subjectCode) === '843') {
     const ai = CBSE_843_AI_2026_27.classes[Number(classNumber)];
     if (!ai) return null;
-    return {
+    return applyUnitEnrichment({
       code: '843',
       id: `cbse-843-class-${classNumber}`,
       name: 'Artificial Intelligence',
@@ -62,15 +92,15 @@ export const getCBSECurriculum = (classNumber, subjectCode) => {
         partB: { name: 'AI Subject Specific Theory', units: ai.theoryUnits },
       },
       projects: ai.projects,
-    };
+    });
   }
 
   const subject = getBaseCBSECurriculum(classNumber, subjectCode);
   if (Number(classNumber) === 9 && String(subjectCode) === '402') {
-    return withCBSE402Class9DetailedContent(subject);
+    return applyUnitEnrichment(withCBSE402Class9DetailedContent(subject));
   }
 
-  return subject;
+  return applyUnitEnrichment(subject);
 };
 
 export { CBSE_843_AI_2026_27 };

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CbseCurriculum2026_27 from "@/app/data/cbse/curriculum-2026-27";
+import { getCBSECurriculum } from "@/app/data/cbse";
 
 export async function generateStaticParams() {
   return [9, 10, 11, 12].map((classNumber) => ({ classNumber: String(classNumber) }));
@@ -9,8 +10,8 @@ export async function generateStaticParams() {
 const CLASS_SUBJECT_MAP = {
   9: ["402"],
   10: ["402"],
-  11: ["083", "065", "802"],
-  12: ["083", "065", "802"],
+  11: ["083", "065", "802", "843"],
+  12: ["083", "065", "802", "843"],
 };
 
 export default async function ClassPage({ params }) {
@@ -24,7 +25,7 @@ export default async function ClassPage({ params }) {
   if (!classData) notFound();
 
   const subjects = allowedSubjects
-    .map((code) => classData.subjects?.find((subject) => String(subject.code) === code))
+    .map((code) => classData.subjects?.find((subject) => String(subject.code) === code) || getCBSECurriculum(classNum, code))
     .filter(Boolean);
 
   return (

@@ -11,6 +11,8 @@ import { resolveChapterMetadata } from "@/lib/icseSyllabus";
  */
 
 // broad question-bank slug -> supported Java route slugs
+// (the key MUST equal the bank chapter's own slug; the values are the
+// routable chapter slugs the questions should surface under)
 const SLUG_MAP = {
   introduction: ["introduction-to-java", "introduction"],
   "variables-data-types": ["variables-data-types", "data-types-variables"],
@@ -23,8 +25,20 @@ const SLUG_MAP = {
   strings: ["strings", "string-handling"],
   "oop-concepts": ["class-as-basis-of-computation", "classes-objects"],
   encapsulation: ["encapsulation"],
-  constructors: ["constructor", "constructors"],
+  // The bank chapter slug is "constructor" (not "constructors"); keep both
+  // routable aliases so the authored constructor questions are reachable.
+  constructor: ["constructor", "constructors"],
   inheritance: ["inheritance"],
+  // Authored chapters that have no legacy/canonical route of their own still
+  // surface in the Question Bank (and resolve their practice links through the
+  // real-bank fallback) instead of being silently dropped.
+  polymorphism: ["polymorphism"],
+  "library-classes": ["library-classes"],
+  recursion: ["recursion"],
+  "searching-sorting": ["searching-sorting"],
+  "exception-handling": ["exception-handling"],
+  "packages-access-modifiers": ["packages-access-modifiers"],
+  "disruptive-technologies": ["disruptive-technologies"],
 };
 
 const TYPE_BY_CATEGORY = {
@@ -65,12 +79,14 @@ function normalizeRealQuestion(raw, type, targetSlug) {
         : null;
   }
 
-  const questionText = raw.question || "";
+  // Programming/other authored categories use different field names than the
+  // MCQ/QA categories; fall back across all of them so no item is blanked.
+  const questionText = raw.question || raw.problemStatement || raw.prompt || raw.text || "";
+  const answerValue = raw.correctAnswer ?? raw.answer ?? raw.sampleAnswer ?? raw.modelAnswer ?? raw.solution ?? raw.logic ?? raw.expectedOutput ?? "";
   const correctText =
     isMcq && answerIndex != null && options[answerIndex]
       ? options[answerIndex]
-      : (raw.correctAnswer ?? raw.answer ?? raw.sampleAnswer ?? "");
-  const answerValue = raw.correctAnswer ?? raw.answer ?? raw.sampleAnswer ?? "";
+      : answerValue;
   const isTheoryLike = type === "theory" || type === "case-based" || type === "debugging";
 
   return {
@@ -92,10 +108,10 @@ function normalizeRealQuestion(raw, type, targetSlug) {
     answer: isMcq ? (answerIndex ?? 0) : answerValue,
     correctAnswer: isMcq ? correctText : answerValue,
     modelAnswer: isTheoryLike ? answerValue : undefined,
-    explanation: raw.explanation || raw.solution || "",
+    explanation: raw.explanation || raw.logic || "",
     hint: raw.hint || "",
     tags: Array.isArray(raw.tags) ? raw.tags : [],
-    codeSnippet: raw.code || "",
+    codeSnippet: raw.code || (type === "programming" ? (raw.solution || "") : ""),
   };
 }
 

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Python Default Parameter Values</title>
+<desc id="desc">A parameter with a default value can be omitted by the caller, in which case its default is used; supplying an argument overrides that default.</desc>
+<defs><marker id="dph" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker></defs>
+<rect width="1200" height="420" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#0f172a">Python Default Parameter Values</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<rect x="400" y="90" width="400" height="60" rx="12" fill="#e2e8f0" stroke="#334155" stroke-width="4"/>
+<text x="600" y="128" font-size="18" font-family="monospace" fill="#0f172a">def f(x, y=2): return x * y</text>
+
+<rect x="80" y="200" width="440" height="120" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/>
+<text x="300" y="235" font-size="17" font-family="monospace" fill="#1e3a8a">print(f(3))</text>
+<text x="300" y="265" font-size="15" fill="#1e3a8a">y not given &#8594; uses default y=2</text>
+<text x="300" y="295" font-size="18" fill="#1e3a8a">f(3) = 3 * 2 = 6</text>
+
+<rect x="680" y="200" width="440" height="120" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+<text x="900" y="235" font-size="17" font-family="monospace" fill="#78350f">print(f(3, 4))</text>
+<text x="900" y="265" font-size="15" fill="#78350f">y=4 given &#8594; overrides the default</text>
+<text x="900" y="295" font-size="18" fill="#78350f">f(3, 4) = 3 * 4 = 12</text>
+</g>
+<text x="600" y="365" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#334155">Output:</text>
+<text x="600" y="388" text-anchor="middle" font-family="monospace" font-size="15" fill="#334155">6</text>
+<text x="600" y="408" text-anchor="middle" font-family="monospace" font-size="15" fill="#334155">12</text>
+</svg>

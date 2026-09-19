@@ -2,6 +2,16 @@ export const ISC_XII_JAVA_PYTHON_CONTENT = {
   "methods-object-parameter-return": {
     title: "Methods – Object as a Parameter and Return Data Type",
     section: "B",
+    diagrams: [
+      {
+        type: "image",
+        title: "Passing Objects by Reference-Value",
+        explanation: "A method parameter receives a copy of the object reference, not a copy of the object. Changing a field through that reference is visible to the caller, but reassigning the parameter itself is not.",
+        src: "/visuals/icse-java/java-object-reference-passing.svg",
+        alt: "Two-panel diagram: one showing a field change through a passed reference visible to the caller, the other showing a swap() of local reference copies that does not affect the caller's variables.",
+        caption: "Matches this page's own trace: swap(s1, s2) exchanges only the local copies of the references inside swap(); s1 and s2 in main are unchanged."
+      }
+    ],
     overview: "Use methods to pass objects, return objects, and design reusable algorithms with clear contracts. Understanding how Java passes object references is essential for ISC board tracing and debugging questions.",
     concepts: [
       "An object reference can be passed as a method argument; the reference value is passed by value, so the method receives a copy of the reference, not a copy of the object.",
@@ -55,6 +65,48 @@ System.out.println(winner.name); // Priya`,
   "arrays-strings": {
     title: "Arrays (Single and Double Dimensional) and String Handling",
     section: "B",
+    diagrams: [
+      {
+        type: "image",
+        title: "2D Array Traversal Order",
+        explanation: "Nested loops visit a 2D array row by row: for each row i, every column j is visited before moving to the next row.",
+        src: "/visuals/icse-java/java-2d-traversal-order.svg",
+        alt: "Diagram numbering the visit order of a 3-row, 2-column array as (0,0),(0,1),(1,0),(1,1),(2,0),(2,1).",
+        caption: "Matches this page's own example: int[][] a = {{1,2},{3,4},{5,6}} visited in exactly this order."
+      },
+      {
+        type: "image",
+        title: "String substring() and Immutability",
+        explanation: "substring(start, end) returns characters from index start up to but not including end, as a new String; the original String object is never modified.",
+        src: "/visuals/icse-java/java-string-substring-immutability.svg",
+        alt: "Diagram highlighting indices 2 through 5 of the string COMPUTER and showing substring(2,6) returning a new String MPUT.",
+        caption: "Matches this page's own example: \"COMPUTER\".substring(2,6) returns \"MPUT\", and the original String is unchanged."
+      },
+      {
+        type: "image",
+        title: "Linear Search",
+        explanation: "Linear search checks each array element in order from index 0 until it finds a match or reaches the end.",
+        src: "/visuals/icse-java/java-linear-search.svg",
+        alt: "Diagram showing linear search scanning {4,7,2,5,9} one element at a time until it finds 9 at index 4.",
+        caption: "Matches this page's own linearSearch(arr, key) code exactly."
+      },
+      {
+        type: "image",
+        title: "Binary Search",
+        explanation: "Binary search maintains low and high pointers on a sorted array and halves the search range each step by comparing the target to the middle element.",
+        src: "/visuals/icse-java/java-binary-search.svg",
+        alt: "Diagram tracing binary search on a 9-element sorted array narrowing down to the target value 23 in three steps.",
+        caption: "Matches this page's own worked example: maintain low and high, compute mid = (low + high) / 2 each iteration."
+      },
+      {
+        type: "image",
+        title: "Bubble Sort: One Full Pass",
+        explanation: "Bubble sort compares adjacent elements and swaps them if out of order; one full pass moves the largest value to the end.",
+        src: "/visuals/icse-java/java-bubble-sort.svg",
+        alt: "Diagram tracing one full outer pass of bubble sort on [4,1,3,2], showing three swaps ending in [1,3,2,4].",
+        caption: "Matches this page's own exact trace: [4,1,3,2] \u2192 [1,4,3,2] \u2192 [1,3,4,2] \u2192 [1,3,2,4] after pass 1."
+      }
+    ],
     overview: "Build reliable array and String algorithms, including traversal, searching, sorting, matrix processing and text manipulation. ISC board questions frequently test boundary conditions, off-by-one errors and String immutability.",
     concepts: [
       "Array indices run from 0 through length - 1; accessing index length or beyond throws ArrayIndexOutOfBoundsException at runtime.",
@@ -180,6 +232,22 @@ static String reverse(String s) {
         src: "/visuals/icse-java/java-dynamic-dispatch.svg",
         alt: "Diagram showing an Animal reference pointing to a Dog object, with a.sound() resolving to Dog's overridden method at runtime.",
         caption: "Animal a = new Dog(); a.sound(); prints \"Woof\" because dynamic dispatch uses the actual object type, not the reference type."
+      },
+      {
+        type: "image",
+        title: "Constructor Execution Order in Inheritance",
+        explanation: "When a subclass object is created, the superclass constructor always runs to completion before the subclass constructor body executes.",
+        src: "/visuals/icse-java/java-constructor-execution-order.svg",
+        alt: "Diagram showing new B() triggering A's constructor first, then B's constructor, producing output A then B.",
+        caption: "Matches this page's own trace: class A{A(){print('A')}} class B extends A{B(){print('B')}} new B(); prints A then B."
+      },
+      {
+        type: "image",
+        title: "Java Interfaces",
+        explanation: "An interface declares method signatures with no body. Any class can implement an interface and must provide its own version of every method; a class extends only one class but can implement multiple interfaces.",
+        src: "/visuals/icse-java/java-interfaces.svg",
+        alt: "Diagram showing interface Drawable implemented separately by Circle and Rectangle, each providing its own draw() method.",
+        caption: "Matches this page's own example: interface Drawable { void draw(); } implemented by Circle and Rectangle, called through a Drawable[] array."
       }
     ],
     overview: "Use inheritance and interfaces to model common behaviour, override methods and understand runtime polymorphism. ISC board questions test constructor order, dynamic method dispatch, and the difference between overloading and overriding.",
@@ -248,6 +316,14 @@ a.sound();   // prints "Woof" — dynamic dispatch
         src: "/visuals/icse-java/python-function-flow.svg",
         alt: "Diagram showing count_even([1,2,3,4]) being called, traversing the list to count even values, and returning 2 to the caller.",
         caption: "A function with no return statement implicitly returns None."
+      },
+      {
+        type: "image",
+        title: "Python Default Parameter Values",
+        explanation: "A parameter with a default value can be omitted by the caller, in which case its default is used; supplying an argument overrides that default.",
+        src: "/visuals/icse-java/python-default-parameters.svg",
+        alt: "Diagram showing def f(x, y=2) called as f(3), using the default y=2 to give 6, and called as f(3,4), overriding it to give 12.",
+        caption: "Matches this page's own trace: f(3) uses the default y=2 to give 6; f(3,4) overrides it to give 12."
       }
     ],
     overview: "Write small Python programs using variables, selection, iteration, functions and core collections while reasoning about output. ISC board questions test output tracing, debugging indentation errors, and writing functions with lists and dictionaries.",
@@ -374,6 +450,14 @@ class Queue {
         src: "/visuals/icse-java/java-stack-operations.svg",
         alt: "Diagram showing a stack after push(A), push(B), push(C), and again after pop() removes C.",
         caption: "pop() always removes the item most recently pushed onto the stack."
+      },
+      {
+        type: "image",
+        title: "Postfix Expression Evaluation Using a Stack",
+        explanation: "Evaluating a postfix expression with a stack: push each number, and when an operator is seen, pop two values, apply the operator, and push the result back.",
+        src: "/visuals/icse-java/java-postfix-evaluation.svg",
+        alt: "Diagram tracing the stack contents at each token of the postfix expression 5 3 + 2 *, ending in the result 16.",
+        caption: "Matches this page's own trace: 5 3 + 2 * evaluates step by step to a final result of 16."
       }
     ],
     overview: "A stack is a LIFO linear structure. ISC board questions require tracing push/pop/peek, detecting overflow and underflow, implementing an array stack in Java, and applying stacks to reverse, matching brackets and postfix evaluation.",
@@ -455,6 +539,14 @@ class Queue {
         src: "/visuals/icse-java/java-queue-operations.svg",
         alt: "Diagram showing a queue with front and rear ends, enqueue adding at the rear and dequeue removing from the front.",
         caption: "Tracing enqueue(X), enqueue(Y), dequeue() returns X first, since X was inserted first."
+      },
+      {
+        type: "image",
+        title: "Circular Queue with Wrap-Around",
+        explanation: "A circular queue wraps rear and front using modulo arithmetic, so freed slots at the front are reused instead of being wasted like in a plain linear queue.",
+        src: "/visuals/icse-java/java-circular-queue.svg",
+        alt: "Three-panel diagram showing a capacity-3 circular queue filling up, freeing a slot on dequeue, then reusing that slot on the next enqueue.",
+        caption: "Matches this page's own worked example: capacity 3, enqueue(A,B,C) fills it, dequeue() removes A, and enqueue(D) reuses index 0."
       }
     ],
     overview: "A queue is a FIFO linear structure. ISC board questions require tracing enqueue/dequeue, explaining linear-array false overflow, implementing a circular queue, and choosing a queue for scheduling problems.",
@@ -534,6 +626,14 @@ class Queue {
         src: "/visuals/icse-java/java-tree-structure.svg",
         alt: "Binary tree with root 8, left child 3, and right child 10, with inorder traversal 3, 8, 10 shown below.",
         caption: "Inorder traversal (left, root, right) on this tree visits 3, then 8, then 10."
+      },
+      {
+        type: "image",
+        title: "BST Insert and Search: Compare-and-Descend",
+        explanation: "Inserting into a binary search tree follows the same compare-and-descend rule as searching: go left if the key is smaller, right if larger, until an empty spot (insert) or a match (search) is found.",
+        src: "/visuals/icse-java/java-bst-insert-search.svg",
+        alt: "Diagram showing a BST built by inserting 8, 3, 10, 1, 6, then tracing search(6) by comparing and descending from the root.",
+        caption: "Matches this page's own worked example: insert 8,3,10,1,6; search(6) takes the path 8 \u2192 3 \u2192 6."
       }
     ],
     overview: "A binary tree organises data hierarchically. ISC-style questions test node terminology, BST insert/search, inorder/preorder/postorder tracing, and writing recursive traversal methods.",
@@ -602,6 +702,16 @@ class BST {
   "complexity-big-o": {
     title: "Complexity and Big O Notation",
     section: "C",
+    diagrams: [
+      {
+        type: "image",
+        title: "Big O Growth Comparison",
+        explanation: "Common complexity classes ordered from fastest to slowest growth, each matched to a real algorithm example.",
+        src: "/visuals/icse-java/java-big-o-comparison.svg",
+        alt: "Bar chart ordering O(1), O(log n), O(n), O(n log n), O(n squared) and O(2 to the n) from fastest to slowest, each with a real algorithm example.",
+        caption: "Matches this page's own listed classes: O(1) array index, O(log n) binary search, O(n) linear search, O(n squared) bubble sort, O(2 to the n) naive Fibonacci."
+      }
+    ],
     overview: "Estimate how an algorithm's time and extra memory grow as input size n increases. ISC board questions ask you to classify a loop or recursive method, drop constants, compare two algorithms, and state both time and space complexity.",
     concepts: [
       "Big O is an asymptotic upper bound: keep the fastest-growing term and drop constant factors. 5n² + 3n + 8 is O(n²).",

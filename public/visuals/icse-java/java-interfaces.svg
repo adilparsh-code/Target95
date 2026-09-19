@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" role="img" aria-labelledby="title desc">
+<title id="title">Java Interfaces</title>
+<desc id="desc">An interface declares method signatures with no body. Any class can implement an interface and must provide its own version of every method. A class extends only one class but can implement multiple interfaces.</desc>
+<rect width="1200" height="480" rx="32" fill="#f8fafc"/>
+<text x="600" y="55" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="700" fill="#0f172a">Java Interfaces</text>
+<g font-family="Arial,sans-serif" text-anchor="middle">
+<rect x="440" y="90" width="320" height="90" rx="14" fill="#e2e8f0" stroke="#334155" stroke-width="4"/>
+<text x="600" y="122" font-size="18" font-weight="700" fill="#0f172a">interface Drawable</text>
+<text x="600" y="150" font-size="15" font-family="monospace" fill="#334155">{ void draw(); }</text>
+
+<path d="M550 180 L280 250" stroke="#334155" stroke-width="3"/>
+<path d="M650 180 L920 250" stroke="#334155" stroke-width="3"/>
+
+<rect x="120" y="250" width="320" height="120" rx="14" fill="#dbeafe" stroke="#2563eb" stroke-width="4"/>
+<text x="280" y="282" font-size="18" font-weight="700" fill="#1e3a8a">class Circle</text>
+<text x="280" y="308" font-size="15" fill="#1e3a8a">implements Drawable</text>
+<text x="280" y="335" font-size="14" font-family="monospace" fill="#1e3a8a">draw() { ...circle... }</text>
+
+<rect x="760" y="250" width="320" height="120" rx="14" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+<text x="920" y="282" font-size="18" font-weight="700" fill="#78350f">class Rectangle</text>
+<text x="920" y="308" font-size="15" fill="#78350f">implements Drawable</text>
+<text x="920" y="335" font-size="14" font-family="monospace" fill="#78350f">draw() { ...rectangle... }</text>
+</g>
+<rect x="330" y="405" width="540" height="55" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<text x="600" y="438" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#14532d">Drawable[] items = &#123;new Circle(), new Rectangle()&#125;; each draw() runs its own version</text>
+</svg>

@@ -26,8 +26,11 @@ export function normalizeQuestion(question) {
     tags: Array.isArray(question.tags) ? question.tags : [], estimatedTime: question.estimatedTime ?? 1,
     isBookmarked: Boolean(question.isBookmarked), isCompleted: Boolean(question.isCompleted),
     createdAt: question.createdAt || null, updatedAt: question.updatedAt || null,
+    // The supplemental ICSE bank has no dedicated per-question route. Keep
+    // practice links functional instead of sending students to a non-existent
+    // /icse/question-bank/... route.
     practiceHref: board === "ICSE"
-      ? `/icse/question-bank/${chapterSlug}/${question.id}`
+      ? "/question-bank"
       : chapter && chapterQuestionBankBySlug[chapter]
         ? `/Java/${chapter}/question/${question.id}` : "/question-bank",
   };

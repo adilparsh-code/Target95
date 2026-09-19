@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { getChapterQuestions, getChapterSlugs, getQuestionContent } from "@/lib/curriculum";
+import { getChapterQuestions, getQuestionContent } from "@/lib/curriculum";
+import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
 import QuestionPlayer from "../../../../components/QuestionPlayer";
 
 // Questions are rendered on demand instead of pre-rendering the entire question bank.
@@ -7,13 +8,23 @@ import QuestionPlayer from "../../../../components/QuestionPlayer";
 export default async function QuestionPage({ params }) {
   const { chapter, id } = await params;
 
-  const question = getQuestionContent("java", chapter, id);
+  // Resolve against the canonical curriculum first (canonical Java slugs), then
+  // fall back to the real question bank so legacy aliases such as /Java/arrays
+  // or /Java/strings also resolve instead of 404-ing.
+  let question = getQuestionContent("java", chapter, id);
+  let chapterQuestions = getChapterQuestions("java", chapter);
+
+  if (!question) {
+    const bank = chapterQuestionBankBySlug[chapter];
+    if (Array.isArray(bank) && bank.length) {
+      chapterQuestions = bank;
+      question = bank.find((item) => String(item.id) === String(id)) || null;
+    }
+  }
 
   if (!question) {
     notFound();
   }
-
-  const chapterQuestions = getChapterQuestions("java", chapter);
 
   const currentIndex = chapterQuestions.findIndex(
     (item) => String(item.id) === String(id)

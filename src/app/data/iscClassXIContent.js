@@ -268,6 +268,16 @@ export const ISC_XI_CONTENT = [
   },
   {
     topicId: "xi-recursion-debugging", slug: "recursion-debugging", section: "C", title: "Recursion: Tracing and Debugging",
+    diagrams: [
+      {
+        type: "image",
+        title: "Recursion Call Stack",
+        explanation: "Each recursive call adds a stack frame; frames stop growing at the base case, then return and combine their results on the way back up.",
+        src: "/visuals/icse-java/java-recursion-call-stack.svg",
+        alt: "Diagram tracing factorial(4) as a growing stack of calls down to the base case, then unwinding with each frame multiplying its result.",
+        caption: "Matches this page's own trace: calls 4,3,2,1 then returns 1,2,6,24."
+      }
+    ],
     learningObjectives: ["Trace recursive calls and returns.", "Identify ineffective base cases.", "Write terminating recursive methods."],
     keyConcepts: ["Base case", "Recursive case", "Call stack", "Termination"],
     mcqs: [

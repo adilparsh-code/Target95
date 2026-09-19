@@ -314,10 +314,40 @@ function parseMarkdownContent(markdown) {
   return content;
 }
 
+// Diagrams for markdown-driven chapters. The markdown parser has no native
+// image syntax, and normalizeDiagrams() only ever looks at studyData.diagrams
+// (always empty for legacy javaChapters.js entries) or content.diagrams -
+// so without this, hasSectionContent(sections.diagrams) is false and
+// DiagramsSection never mounts, regardless of the visual registry.
+const chapterDiagrams = {
+  introduction: [
+    {
+      type: "image",
+      title: "Java Platform Architecture: JDK, JRE and JVM",
+      explanation: "The JDK contains the JRE plus development tools; the JRE contains the JVM plus libraries needed to run a program; the JVM is what actually executes bytecode.",
+      src: "/visuals/icse-java/java-platform-stack.svg",
+      alt: "Nested diagram showing JDK containing JRE, and JRE containing the JVM, with development tools and libraries labeled at each layer.",
+      caption: "Writing and compiling code needs the JDK; running a compiled .class file only needs the JRE."
+    },
+    {
+      type: "image",
+      title: "Java Program Life Cycle",
+      explanation: "A Java source file (.java) is compiled into platform-independent bytecode (.class), which the JVM then interprets and executes to produce output.",
+      src: "/visuals/icse-java/java-program-life-cycle.svg",
+      alt: "Flowchart showing a .java source file compiled into bytecode by javac, then executed by the JVM to produce output.",
+      caption: "The same .class bytecode file runs unchanged on any platform that has a JVM - this is WORA (Write Once, Run Anywhere)."
+    }
+  ],
+};
+chapterDiagrams["introduction-to-java"] = chapterDiagrams.introduction;
+
 export function getMarkdownChapterContent(slug) {
   const markdown = readMarkdownFile(slug);
   if (!markdown) return null;
-  return { content: parseMarkdownContent(markdown), source: chapterRegistry[slug] };
+  const content = parseMarkdownContent(markdown);
+  const diagrams = chapterDiagrams[slug];
+  if (diagrams) content.diagrams = diagrams;
+  return { content, source: chapterRegistry[slug] };
 }
 
 export default getMarkdownChapterContent;

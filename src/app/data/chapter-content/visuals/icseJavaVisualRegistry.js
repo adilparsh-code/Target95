@@ -6,7 +6,7 @@
 export const icseJavaVisuals = [
   {
     id: "java-platform-stack",
-    chapterSlug: "introduction-to-java",
+    chapterSlug: "introduction",
     title: "Java Platform Stack: JDK, JRE and JVM",
     purpose: "Show how Java source code moves through compilation and the runtime stack.",
     caption: "Java source code is compiled into bytecode, then the JVM executes that bytecode.",
@@ -18,7 +18,7 @@ export const icseJavaVisuals = [
   },
   {
     id: "java-program-life-cycle",
-    chapterSlug: "introduction-to-java",
+    chapterSlug: "introduction",
     title: "Java Program Life Cycle",
     purpose: "Visualize source file, compilation, bytecode and execution stages.",
     caption: "The .java file is compiled to .class bytecode before execution by the JVM.",

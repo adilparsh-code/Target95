@@ -329,30 +329,6 @@ const chapterArraysCombined = {
       "src": "/visuals/icse-java/java-2d-array-memory.svg",
       "alt": "Diagram showing an outer array of references, each pointing to a separate row array in memory.",
       "caption": "a[1][2] means: follow the outer array to reference 1, then read column 2 of that row."
-    },
-    {
-      "type": "image",
-      "title": "Linear Search",
-      "explanation": "Linear search checks each element one by one from the start until it finds the target value or reaches the end of the array.",
-      "src": "/visuals/icse-java/java-linear-search.svg",
-      "alt": "Diagram showing linear search scanning array elements one at a time from index 0 until a match is found.",
-      "caption": "Linear search works on any array but can take up to n comparisons in the worst case."
-    },
-    {
-      "type": "image",
-      "title": "Binary Search",
-      "explanation": "Binary search repeatedly compares the target with the middle element of a sorted array, halving the search range each time.",
-      "src": "/visuals/icse-java/java-binary-search.svg",
-      "alt": "Diagram showing binary search narrowing a sorted array by comparing the middle element and discarding half the range each step.",
-      "caption": "Binary search only works on sorted arrays; it takes about log2(n) comparisons."
-    },
-    {
-      "type": "image",
-      "title": "Bubble Sort",
-      "explanation": "Bubble sort repeatedly compares adjacent elements and swaps them if they are out of order, letting the largest values bubble to the end.",
-      "src": "/visuals/icse-java/java-bubble-sort.svg",
-      "alt": "Diagram showing adjacent array elements being compared and swapped across passes, with the largest values settling at the end.",
-      "caption": "Each full pass moves the next-largest remaining value into its correct position at the end."
     }
   ],
   "outputBasedQuestions": [

@@ -278,17 +278,6 @@ const javaChapters = [
     topics: ["Declaration", "Parameters", "Overloading", "Recursion"],
   },
   {
-    id: 106,
-    title: "Arrays (Legacy)",
-    slug: "arrays",
-    class: "Legacy",
-    questions: 80,
-    difficulty: "Advanced",
-    description: "Legacy chapter - Explore single-dimensional and multi-dimensional arrays, array operations, and sorting.",
-    estimatedTime: 100,
-    topics: ["1D Arrays", "2D Arrays", "Array Operations", "Sorting"],
-  },
-  {
     id: 107,
     title: "Strings (Legacy)",
     slug: "strings",

@@ -76,7 +76,7 @@ const chapters = [
     theory: 'Ethical computing means using technology lawfully, safely and respectfully. Students should understand intellectual property, copyright, plagiarism, privacy, cyber safety, digital citizenship, responsible social media use and software licensing.',
     commonMistakes: ['Assuming internet content is free to copy','Treating plagiarism as acceptable','Sharing personal information without consent','Confusing open source with no licence'],
     examples: ['Cite the source of an image in a project. Use licensed software. Do not publish another person’s private information without permission.'],
-    programmingQuestions: [],
+    programmingQuestions: ['Write a Java program that prints a name with all but the first character masked, to illustrate protecting personal data.','Write a Java program that reports whether a supplied quote appears in a source text and prints whether the source must be cited.','Write a Java program that validates a password (at least eight characters, one digit and one uppercase letter) and prints a safety message.'],
     theoryQuestions: ['Define plagiarism with two examples.','Differentiate copyright and plagiarism.','What is digital citizenship?','Why must personal information be protected?','Differentiate open-source and proprietary software.','Give two responsible social-media practices.','Explain intellectual property with a computing example.','What should a student check before using an online image?']
   }
 ];

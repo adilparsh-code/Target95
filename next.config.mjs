@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
+  // Cap the page-data-collection worker pool. Next.js spawns one worker per CPU
+  // by default, which OOMs memory-constrained CI/hosting environments (2GB limit)
+  // while collecting 500+ routes. Four workers keep builds deterministic.
+  experimental: {
+    cpus: 2,
+  },
   // Keep the stable Next.js configuration. Experimental cacheComponents was
   // previously disabled because it interfered with stable development/build behavior.
   images: {

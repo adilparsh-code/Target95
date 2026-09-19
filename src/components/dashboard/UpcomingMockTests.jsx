@@ -1,64 +1,73 @@
 "use client";
 
-import { Clock, AlertCircle } from "lucide-react";
+import Link from "next/link";
+import { Trophy, ClipboardList, Award } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import { formatRelativeDate } from "@/lib/learningRoadmap";
 
-const upcomingTests = [
-  {
-    id: 1,
-    name: "Java Fundamentals Mock Test",
-    date: "Jul 28, 2025",
-    time: "10:00 AM",
-    duration: "2 hours",
-    questions: 50,
-  },
-  {
-    id: 2,
-    name: "Data Structures Assessment",
-    date: "Aug 5, 2025",
-    time: "2:00 PM",
-    duration: "1.5 hours",
-    questions: 40,
-  },
-];
+function scoreTone(percentage) {
+  if (percentage >= 80) return "text-emerald-600 dark:text-emerald-400";
+  if (percentage >= 60) return "text-blue-600 dark:text-blue-400";
+  if (percentage >= 40) return "text-amber-600 dark:text-amber-400";
+  return "text-rose-600 dark:text-rose-400";
+}
 
-export default function UpcomingMockTests() {
-  if (upcomingTests.length === 0) {
-    return (
-      <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Mock Tests</h3>
-        <div className="text-center py-8 text-gray-500">
-          <Clock className="w-12 h-12 mx-auto mb-3 opacity-50" />
-          <p>No upcoming mock tests scheduled.</p>
-        </div>
-      </div>
-    );
-  }
-
+export default function UpcomingMockTests({ mockTests = [], bestScore = 0, isLoading }) {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Upcoming Mock Tests</h3>
-      <div className="space-y-4">
-        {upcomingTests.map((test) => (
-          <div
-            key={test.id}
-            className="border border-gray-100 rounded-lg p-4 hover:border-blue-200 transition-colors"
-          >
-            <div className="flex items-start justify-between">
-              <div>
-                <h4 className="font-medium text-gray-900">{test.name}</h4>
-                <p className="text-sm text-gray-500 mt-1">
-                  {test.date} at {test.time} • {test.duration} • {test.questions} questions
-                </p>
-              </div>
-              <AlertCircle className="w-5 h-5 text-amber-500 flex-shrink-0" />
-            </div>
-            <Button className="w-full mt-4" variant="secondary">
-              Prepare for Test
-            </Button>
-          </div>
-        ))}
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6 dark:border-slate-800 dark:bg-slate-950" aria-label="Mock tests">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-lg font-bold tracking-tight text-slate-950 dark:text-white">Mock tests</h3>
+        {bestScore > 0 && (
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:bg-amber-950/50 dark:text-amber-300">
+            <Award className="h-3.5 w-3.5" aria-hidden="true" /> Best {bestScore}%
+          </span>
+        )}
       </div>
-    </div>
+
+      {isLoading ? (
+        <div className="mt-4 space-y-3" aria-hidden="true">
+          {[1, 2].map((i) => (
+            <div key={i} className="h-20 animate-pulse rounded-xl bg-slate-100 dark:bg-slate-900" />
+          ))}
+        </div>
+      ) : mockTests.length === 0 ? (
+        <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center dark:border-slate-700">
+          <ClipboardList className="mx-auto mb-3 h-10 w-10 text-slate-300 dark:text-slate-600" aria-hidden="true" />
+          <p className="text-sm text-slate-500 dark:text-slate-400">No mock tests attempted yet. Simulate a real board exam to gauge readiness.</p>
+          <Link href="/mock-test" className="mt-3 inline-block">
+            <Button size="sm">Start your first test</Button>
+          </Link>
+        </div>
+      ) : (
+        <ul className="mt-4 space-y-3">
+          {mockTests.slice(0, 5).map((test, index) => {
+            const percentage = Number(test.percentage) || 0;
+            return (
+              <li key={test.id || index} className="rounded-xl border border-slate-100 p-4 transition-colors hover:border-blue-200 dark:border-slate-800 dark:hover:border-blue-900">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate font-medium text-slate-900 dark:text-white">{test.title || "Mock test"}</p>
+                    <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                      {test.correctCount != null && test.totalQuestions != null
+                        ? `${test.correctCount}/${test.totalQuestions} correct · `
+                        : ""}
+                      {formatRelativeDate(test.completedAt)}
+                    </p>
+                  </div>
+                  <span className={`shrink-0 text-sm font-bold ${scoreTone(percentage)}`}>{percentage}%</span>
+                </div>
+              </li>
+            );
+          })}
+          <li>
+            <Link href="/mock-test" className="mt-1 block">
+              <Button variant="secondary" className="w-full">
+                <Trophy className="h-4 w-4" aria-hidden="true" /> Start a new test
+              </Button>
+            </Link>
+          </li>
+        </ul>
+      )}
+    </section>
   );
 }

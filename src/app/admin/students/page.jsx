@@ -1,206 +1,181 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import SectionTitle from "@/app/components/admin/SectionTitle";
 import AdminCard from "@/app/components/admin/AdminCard";
 import EmptyState from "@/app/components/admin/EmptyState";
 import SearchInput from "@/app/components/admin/SearchInput";
-import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
-import { studentStats, placeholderStudents } from "@/app/data/admin/mockStudents";
-import StudentCard from "@/app/components/admin/students/StudentCard";
+import { StatsCardSkeleton } from "@/app/components/ui/LoadingSkeleton";
 import StudentTable from "@/app/components/admin/students/StudentTable";
-import StudentToolbar from "@/app/components/admin/students/StudentToolbar";
 import DashboardCard from "@/app/components/admin/DashboardCard";
-import ConfirmDialog from "@/app/components/admin/ConfirmDialog";
+import useAdminData from "@/app/hooks/useAdminData";
 
 export default function AdminStudentsPage() {
   const router = useRouter();
-  const [students, setStudents] = useState(placeholderStudents);
-  const [viewMode, setViewMode] = useState("grid");
+  const { data, loading, error, refresh } = useAdminData("/api/admin/students?limit=500");
+  const students = useMemo(() => data?.students || [], [data]);
+
+  const [viewMode, setViewMode] = useState("table");
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState({ class: "", grade: "", status: "", scoreRange: "" });
-  const [isLoading, setIsLoading] = useState(false);
-  const [confirmDialog, setConfirmDialog] = useState(null);
+  const [filters, setFilters] = useState({ class: "", grade: "", status: "" });
 
-  const filteredStudentsFinal = useMemo(() => {
+  // Local, instant search on top of the server directory.
+  const filteredStudents = useMemo(() => {
     let result = [...students];
-
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
         (s) =>
-          s.name.toLowerCase().includes(q) ||
+          s.fullName.toLowerCase().includes(q) ||
           s.email.toLowerCase().includes(q) ||
           s.school.toLowerCase().includes(q) ||
-          s.city.toLowerCase().includes(q) ||
           s.id.toLowerCase().includes(q)
       );
     }
-
-    if (filters.class) result = result.filter((s) => s.class === filters.class);
+    if (filters.class) result = result.filter((s) => String(s.class) === filters.class);
     if (filters.grade) result = result.filter((s) => s.grade === filters.grade);
-    if (filters.status) result = result.filter((s) => s.status === filters.status);
-    if (filters.scoreRange) {
-      const [min, max] = filters.scoreRange.split("-").map(Number);
-      result = result.filter((s) => s.avgScore >= min && s.avgScore <= max);
-    }
-
+    if (filters.status) result = result.filter((s) => s.status === filters.status || (filters.status === "inactive" && s.disabled));
     return result;
   }, [students, searchQuery, filters]);
+
+  const stats = useMemo(() => ({
+    totalStudents: students.length,
+    activeStudents: students.filter((s) => s.isActiveStudent).length,
+    totalQuestionsSolved: students.reduce((sum, s) => sum + (Number(s.questionsSolved) || 0), 0),
+    averageScore: students.length
+      ? Math.round(students.reduce((sum, s) => sum + (Number(s.averageScore) || 0), 0) / students.length)
+      : 0,
+  }), [students]);
 
   const handleViewProfile = (student) => {
     router.push(`/admin/students/${student.id}`);
   };
 
-  const handleToggleSuspend = (student) => {
-    const isActive = student.status === "active";
-    setConfirmDialog({
-      title: isActive ? "Suspend Student" : "Activate Student",
-      message: isActive
-        ? `Are you sure you want to suspend "${student.name}"? They will lose access to the platform until reactivated.`
-        : `Are you sure you want to activate "${student.name}"? They will regain access to the platform.`,
-      confirmLabel: isActive ? "Suspend" : "Activate",
-      variant: isActive ? "danger" : "primary",
-      onConfirm: () => {
-        setStudents((prev) =>
-          prev.map((s) =>
-            s.id === student.id
-              ? { ...s, status: isActive ? "inactive" : "active" }
-              : s
-          )
-        );
-        setConfirmDialog(null);
-      },
-    });
-  };
+  useEffect(() => {
+    if (!filters.class && !students.some((s) => String(s.class))) return;
+  }, [filters.class, students]);
 
-  const handleInviteStudent = () => console.log("Invite student");
+  const classes = useMemo(
+    () => Array.from(new Set(students.map((s) => String(s.class)).filter(Boolean))).sort(),
+    [students]
+  );
 
-  // Stats derived from current student data
-  const stats = useMemo(() => ({
-    totalStudents: students.length,
-    activeStudents: students.filter((s) => s.status === "active").length,
-    totalQuestionsSolved: students.reduce((sum, s) => sum + s.questionsSolved, 0),
-    averageScore: Math.round(students.reduce((sum, s) => sum + s.avgScore, 0) / students.length),
-  }), [students]);
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <SectionTitle title="Students" subtitle="Platform student directory" />
+        <EmptyState
+          title="Couldn't load students"
+          description={error}
+          primaryAction={refresh}
+          primaryActionLabel="Retry"
+        />
+      </div>
+    );
+  }
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="space-y-6">
         <StatsCardSkeleton count={4} />
-        <CardGridSkeleton count={6} />
+        <div className="h-72 animate-pulse rounded-xl bg-gray-100 dark:bg-gray-800" />
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      {/* Statistics */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <DashboardCard title="Total Students" value={stats.totalStudents} icon="👨‍🎓" color="violet" />
-        <DashboardCard title="Active Students" value={stats.activeStudents} icon="✅" color="emerald" />
+        <DashboardCard title="Active (7d)" value={stats.activeStudents} icon="✅" color="emerald" />
         <DashboardCard title="Questions Solved" value={stats.totalQuestionsSolved} icon="❓" color="blue" />
         <DashboardCard title="Average Score" value={`${stats.averageScore}%`} icon="📊" color="amber" />
       </div>
 
-      {/* Search */}
-      <div className="w-full sm:w-96">
-        <SearchInput
-          placeholder="Search students by name, email, school, or city..."
-          value={searchQuery}
-          onChange={(v) => setSearchQuery(v)}
-          onClear={() => setSearchQuery("")}
-        />
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="w-full sm:w-96">
+          <SearchInput
+            placeholder="Search by name, email, school or ID…"
+            value={searchQuery}
+            onChange={(v) => setSearchQuery(v)}
+            onClear={() => setSearchQuery("")}
+          />
+        </div>
+        <button
+          type="button"
+          onClick={() => setShowFilters((prev) => !prev)}
+          className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+          aria-expanded={showFilters}
+        >
+          {showFilters ? "Hide filters" : "Show filters"}
+        </button>
       </div>
 
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <SectionTitle
-          title="Students"
-          subtitle={`${filteredStudentsFinal.length} of ${students.length} students · ${stats.activeStudents} active`}
-        />
-      </div>
+      {showFilters && (
+        <AdminCard>
+          <div className="grid gap-5 sm:grid-cols-3">
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Class</p>
+              <div className="flex flex-wrap gap-1.5">
+                <button
+                  onClick={() => setFilters((p) => ({ ...p, class: "" }))}
+                  className={`rounded-lg px-3 py-1.5 text-sm ${!filters.class ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"}`}
+                >
+                  All
+                </button>
+                {classes.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setFilters((p) => ({ ...p, class: p.class === c ? "" : c }))}
+                    className={`rounded-lg px-3 py-1.5 text-sm ${filters.class === c ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"}`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Board</p>
+              <div className="flex flex-wrap gap-1.5">
+                {["", "ICSE", "ISC", "CBSE"].map((g) => (
+                  <button
+                    key={g || "all"}
+                    onClick={() => setFilters((p) => ({ ...p, grade: g }))}
+                    className={`rounded-lg px-3 py-1.5 text-sm ${filters.grade === g ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"}`}
+                  >
+                    {g || "All"}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Status</p>
+              <div className="flex flex-wrap gap-1.5">
+                {[["", "All"], ["active", "Active"], ["inactive", "Inactive"]].map(([val, label]) => (
+                  <button
+                    key={val || "all"}
+                    onClick={() => setFilters((p) => ({ ...p, status: val }))}
+                    className={`rounded-lg px-3 py-1.5 text-sm ${filters.status === val ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800"}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </AdminCard>
+      )}
 
-      {/* Toolbar */}
-      <StudentToolbar
-        onInviteStudent={handleInviteStudent}
-        onToggleFilters={() => setShowFilters((prev) => !prev)}
-        showFilters={showFilters}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
+      <SectionTitle
+        title="Students"
+        subtitle={`${filteredStudents.length} of ${students.length} students · ${stats.activeStudents} active this week`}
       />
 
-      {/* Main content */}
       <div className="flex gap-6">
-        {/* Filters sidebar */}
-        {showFilters && (
-          <div className="w-full lg:w-64 shrink-0">
-            <AdminCard>
-              <div className="space-y-5">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-gray-900">Filters</h3>
-                  {Object.values(filters).some(Boolean) && (
-                    <button onClick={() => setFilters({ class: "", grade: "", status: "", scoreRange: "" })} className="text-xs text-blue-600 hover:text-blue-700 font-medium">Clear all</button>
-                  )}
-                </div>
-                {/* Class filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Class</label>
-                  <div className="space-y-1">
-                    {["9", "10", "11", "12"].map((c) => (
-                      <button key={c} onClick={() => setFilters((p) => ({ ...p, class: p.class === c ? "" : c }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.class === c ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
-                        Class {c}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                {/* Grade filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Grade</label>
-                  <div className="space-y-1">
-                    {[["ICSE", "ICSE"], ["ISC", "ISC"]].map(([val, label]) => (
-                      <button key={val} onClick={() => setFilters((p) => ({ ...p, grade: p.grade === val ? "" : val }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.grade === val ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                {/* Status filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</label>
-                  <div className="space-y-1">
-                    {[["active", "Active"], ["inactive", "Inactive"], ["pending", "Pending"]].map(([val, label]) => (
-                      <button key={val} onClick={() => setFilters((p) => ({ ...p, status: p.status === val ? "" : val }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.status === val ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                {/* Score range filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Avg. Score</label>
-                  <div className="space-y-1">
-                    {[["90-100", "90-100%"], ["75-89", "75-89%"], ["60-74", "60-74%"], ["40-59", "40-59%"], ["0-39", "Below 40%"]].map(([val, label]) => (
-                      <button key={val} onClick={() => setFilters((p) => ({ ...p, scoreRange: p.scoreRange === val ? "" : val }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.scoreRange === val ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </AdminCard>
-          </div>
-        )}
-
-        {/* Students content */}
-        <div className="flex-1 min-w-0">
-          {filteredStudentsFinal.length === 0 ? (
+        <div className="min-w-0 flex-1">
+          {filteredStudents.length === 0 ? (
             <AdminCard>
               <EmptyState
                 icon="👨‍🎓"
@@ -208,67 +183,15 @@ export default function AdminStudentsPage() {
                 description={
                   searchQuery || Object.values(filters).some(Boolean)
                     ? "Try adjusting your search or filters."
-                    : "No students have joined yet."
-                }
-                action={
-                  <button onClick={handleInviteStudent} className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">+ Invite Student</button>
+                    : "No students have registered yet."
                 }
               />
             </AdminCard>
-          ) : viewMode === "grid" ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {filteredStudentsFinal.map((student) => (
-                <div key={student.id} className="relative group">
-                  <StudentCard
-                    student={student}
-                    onViewProfile={handleViewProfile}
-                  />
-                  {/* Suspend/Activate button */}
-                  <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      onClick={() => handleToggleSuspend(student)}
-                      className={`p-1.5 rounded-lg shadow-sm border text-xs font-medium transition-colors ${
-                        student.status === "active"
-                          ? "bg-white border-gray-200 text-red-600 hover:bg-red-50"
-                          : "bg-white border-gray-200 text-emerald-600 hover:bg-emerald-50"
-                      }`}
-                      title={student.status === "active" ? "Suspend student" : "Activate student"}
-                    >
-                      {student.status === "active" ? "🔒 Suspend" : "✅ Activate"}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
           ) : (
-            <StudentTable
-              students={filteredStudentsFinal}
-              onViewProfile={handleViewProfile}
-              onToggleSuspend={handleToggleSuspend}
-            />
-          )}
-
-          {/* Results summary */}
-          {filteredStudentsFinal.length > 0 && (
-            <p className="text-xs text-gray-400 text-center mt-4">
-              Showing {filteredStudentsFinal.length} of {students.length} students
-            </p>
+            <StudentTable students={filteredStudents} onViewProfile={handleViewProfile} pageSize={10} />
           )}
         </div>
       </div>
-
-      {/* Confirm Dialog */}
-      {confirmDialog && (
-        <ConfirmDialog
-          isOpen={true}
-          onClose={() => setConfirmDialog(null)}
-          onConfirm={confirmDialog.onConfirm}
-          title={confirmDialog.title}
-          message={confirmDialog.message}
-          confirmLabel={confirmDialog.confirmLabel}
-          variant={confirmDialog.variant}
-        />
-      )}
     </div>
   );
 }

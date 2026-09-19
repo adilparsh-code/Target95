@@ -17,6 +17,34 @@ import { getFirebaseInstance } from "@/lib/firebase";
 
 const AuthContext = createContext(null);
 
+// Mint the httpOnly session cookie through the secure server endpoint.
+// Server APIs (requireAdmin / requireRole) rely on this cookie for authorization.
+async function createSessionCookie(firebaseUser) {
+  try {
+    const idToken = await firebaseUser.getIdToken(true);
+    const response = await fetch("/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+    if (!response.ok) {
+      const payload = await response.json().catch(() => ({}));
+      return { success: false, message: payload.error || "Unable to create a secure session." };
+    }
+    return { success: true };
+  } catch {
+    return { success: false, message: "Network error while creating your session. Please try again." };
+  }
+}
+
+async function clearSessionCookie() {
+  try {
+    await fetch("/api/auth/session", { method: "DELETE" });
+  } catch {
+    // Best effort: the cookie also expires server-side.
+  }
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,8 +55,8 @@ export function AuthProvider({ children }) {
     const { auth, db } = getFirebaseInstance();
     
     if (!auth || !db) {
-      setLoading(false);
-      return;
+      const timer = window.setTimeout(() => setLoading(false), 0);
+      return () => window.clearTimeout(timer);
     }
     
     const unsubscribe = onAuthStateChanged(
@@ -149,7 +177,27 @@ export function AuthProvider({ children }) {
         };
       }
 
-      return { success: true, user: userCredential.user };
+      // Exchange the ID token for an httpOnly session cookie used by server APIs.
+      const session = await createSessionCookie(userCredential.user);
+      if (!session.success) {
+        await signOut(auth);
+        setLoading(false);
+        return { success: false, message: session.message };
+      }
+
+      // Resolve the profile role immediately so callers can redirect by role.
+      let role = "student";
+      try {
+        const { db } = getFirebaseInstance();
+        const profileDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+        if (profileDoc.exists()) {
+          role = profileDoc.data().role || "student";
+        }
+      } catch (profileErr) {
+        console.error("Error resolving user role after login:", profileErr);
+      }
+
+      return { success: true, user: { ...userCredential.user, role } };
     } catch (err) {
       const errorMessage = getErrorMessage(err.code);
       setError(errorMessage);
@@ -168,6 +216,7 @@ export function AuthProvider({ children }) {
     try {
       setError(null);
       await signOut(auth);
+      await clearSessionCookie();
       return { success: true };
     } catch (err) {
       const errorMessage = getErrorMessage(err.code);
@@ -189,9 +238,20 @@ export function AuthProvider({ children }) {
       
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(auth, provider);
+
+      // Exchange the ID token for an httpOnly session cookie used by server APIs.
+      if (userCredential.user.emailVerified) {
+        const session = await createSessionCookie(userCredential.user);
+        if (!session.success) {
+          await signOut(auth);
+          setLoading(false);
+          return { success: false, message: session.message };
+        }
+      }
       
       // Check if user exists in Firestore, if not create profile
       const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+      let role = "student";
       if (!userDoc.exists()) {
         await setDoc(doc(db, "users", userCredential.user.uid), {
           uid: userCredential.user.uid,
@@ -201,10 +261,12 @@ export function AuthProvider({ children }) {
           emailVerified: userCredential.user.emailVerified,
           createdAt: new Date(),
         });
+      } else {
+        role = userDoc.data().role || "student";
       }
       
       setLoading(false);
-      return { success: true, user: userCredential.user };
+      return { success: true, user: { ...userCredential.user, role } };
     } catch (err) {
       const errorMessage = getErrorMessage(err.code);
       setError(errorMessage);
@@ -301,8 +363,11 @@ function getErrorMessage(errorCode) {
       return "Invalid email or password.";
     case "auth/too-many-requests":
       return "Too many attempts. Please try again later.";
+    case "auth/user-disabled":
+      return "This account has been disabled. Please contact your administrator.";
     case "auth/network-request-failed":
       return "Network error. Please check your connection.";
     default:
       return "An unknown error occurred. Please try again.";
   }
+}

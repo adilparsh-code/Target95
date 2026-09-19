@@ -81,75 +81,21 @@ const makeUnit = (id, code, name, theory, practicalActivities = [], marks = null
 });
 
 const cbse065Class11Units = [
-  makeUnit('065-xi-u1', 1, 'Introduction to Computer System', [
-    'Introduction to computer and computing: evolution of computing devices',
-    'Components of a computer system and their interconnections',
-    'Input/output devices',
-    'Computer memory: units, primary and secondary memory',
-    'Data deletion, recovery and related security concerns',
-  ], [], 10),
-  makeUnit('065-xi-u2', 2, 'Introduction to Python', [
-    'Python programming language and features',
-    'Python program structure, modes and tokens',
-    'Variables, constants, keywords and identifiers',
-    'Data types, operators and expressions',
-    'Input/output and type conversion',
-    'Control flow: conditional statements and loops',
-    'Strings, lists and dictionaries',
-  ], ['Write, execute and debug Python programs using core data types, lists and dictionaries'], 25),
-  makeUnit('065-xi-u3', 3, 'Database Concepts and the Structured Query Language', [
-    'Database concepts and relational database management systems',
-    'Database, table, record, field, domain and keys',
-    'SQL data types and database/table creation',
-    'INSERT, UPDATE, DELETE and SELECT statements',
-    'WHERE, ORDER BY and aggregate functions',
-    'GROUP BY, HAVING and relational operations',
-  ], ['Create tables and perform SQL queries on a relational database'], 30),
-  makeUnit('065-xi-u4', 4, 'Introduction to Emerging Trends', [
-    'Artificial Intelligence and Machine Learning',
-    'Natural Language Processing and immersive technologies',
-    'Internet of Things, robotics and blockchain',
-    'Cloud computing and big data',
-  ], [], 5),
+  makeUnit('065-xi-u1', 1, 'Introduction to Computer System', ['Introduction to computer and computing: evolution of computing devices', 'Components of a computer system and their interconnections', 'Input/output devices', 'Computer memory: units, primary and secondary memory', 'Data deletion, recovery and related security concerns'], [], 10),
+  makeUnit('065-xi-u2', 2, 'Introduction to Python', ['Python programming language and features', 'Python program structure, modes and tokens', 'Variables, constants, keywords and identifiers', 'Data types, operators and expressions', 'Input/output and type conversion', 'Control flow: conditional statements and loops', 'Strings, lists and dictionaries'], ['Write, execute and debug Python programs using core data types, lists and dictionaries'], 25),
+  makeUnit('065-xi-u3', 3, 'Database Concepts and the Structured Query Language', ['Database concepts and relational database management systems', 'Database, table, record, field, domain and keys', 'SQL data types and database/table creation', 'INSERT, UPDATE, DELETE and SELECT statements', 'WHERE, ORDER BY and aggregate functions', 'GROUP BY, HAVING and relational operations'], ['Create tables and perform SQL queries on a relational database'], 30),
+  makeUnit('065-xi-u4', 4, 'Introduction to Emerging Trends', ['Artificial Intelligence and Machine Learning', 'Natural Language Processing and immersive technologies', 'Internet of Things, robotics and blockchain', 'Cloud computing and big data'], [], 5),
 ];
 
 const cbse065Class12Units = [
-  makeUnit('065-xii-u1', 1, 'Data Handling using Pandas and Data Visualization', [
-    'Introduction to Python libraries: Pandas and Matplotlib',
-    'Series: creation, indexing, selection and operations',
-    'DataFrame: creation, indexing, selection, adding/deleting rows and columns',
-    'Importing/exporting data and handling CSV data',
-    'Data visualization using line, bar, histogram and pie charts',
-  ], ['Create Series/DataFrames and visualize data with Matplotlib'], 25),
-  makeUnit('065-xii-u2', 2, 'Database Query using SQL', [
-    'Revision of database concepts and SQL',
-    'Aggregate functions: MAX, MIN, AVG, SUM and COUNT',
-    'GROUP BY and HAVING clauses',
-    'Joins and queries using multiple tables',
-    'Import/export data between SQL database and Pandas',
-  ], ['Design and execute SQL queries and exchange data between SQL and Pandas'], 25),
-  makeUnit('065-xii-u3', 3, 'Introduction to Computer Networks', [
-    'Computer network and its advantages',
-    'Network types and topologies',
-    'Networking devices and transmission media',
-    'Internet, web, URL, browser and web services',
-    'Internet security issues and safe browser configuration',
-  ], ['Identify network devices, topologies and basic internet-security settings'], 10),
-  makeUnit('065-xii-u4', 4, 'Societal Impacts', [
-    'Digital footprint, digital identity and data privacy',
-    'Intellectual property rights, plagiarism and open-source licensing',
-    'Cybercrime and cyber laws',
-    'Technology impact on society, gender and disability issues',
-    'E-waste and responsible digital citizenship',
-  ], [], 10),
+  makeUnit('065-xii-u1', 1, 'Data Handling using Pandas and Data Visualization', ['Introduction to Python libraries: Pandas and Matplotlib', 'Series: creation, indexing, selection and operations', 'DataFrame: creation, indexing, selection, adding/deleting rows and columns', 'Importing/exporting data and handling CSV data', 'Data visualization using line, bar, histogram and pie charts'], ['Create Series/DataFrames and visualize data with Matplotlib'], 25),
+  makeUnit('065-xii-u2', 2, 'Database Query using SQL', ['Revision of database concepts and SQL', 'Aggregate functions: MAX, MIN, AVG, SUM and COUNT', 'GROUP BY and HAVING clauses', 'Joins and queries using multiple tables', 'Import/export data between SQL database and Pandas'], ['Design and execute SQL queries and exchange data between SQL and Pandas'], 25),
+  makeUnit('065-xii-u3', 3, 'Introduction to Computer Networks', ['Computer network and its advantages', 'Network types and topologies', 'Networking devices and transmission media', 'Internet, web, URL, browser and web services', 'Internet security issues and safe browser configuration'], ['Identify network devices, topologies and basic internet-security settings'], 10),
+  makeUnit('065-xii-u4', 4, 'Societal Impacts', ['Digital footprint, digital identity and data privacy', 'Intellectual property rights, plagiarism and open-source licensing', 'Cybercrime and cyber laws', 'Technology impact on society, gender and disability issues', 'E-waste and responsible digital citizenship'], [], 10),
 ];
 
 const cbse802Class11PartA = [
-  makeUnit('802-xi-a1', 1, 'Communication Skills-III', [], [], 2, 10),
-  makeUnit('802-xi-a2', 2, 'Self-Management Skills-III', [], [], 3, 10),
-  makeUnit('802-xi-a3', 3, 'ICT Skills-III', [], [], 1, 10),
-  makeUnit('802-xi-a4', 4, 'Entrepreneurial Skills-III', [], [], 3, 15),
-  makeUnit('802-xi-a5', 5, 'Green Skills-III', [], [], 1, 5),
+  makeUnit('802-xi-a1', 1, 'Communication Skills-III', [], [], 2, 10), makeUnit('802-xi-a2', 2, 'Self-Management Skills-III', [], [], 3, 10), makeUnit('802-xi-a3', 3, 'ICT Skills-III', [], [], 1, 10), makeUnit('802-xi-a4', 4, 'Entrepreneurial Skills-III', [], [], 3, 15), makeUnit('802-xi-a5', 5, 'Green Skills-III', [], [], 1, 5),
 ];
 
 const cbse802Class11PartB = [
@@ -161,11 +107,7 @@ const cbse802Class11PartB = [
 ];
 
 const cbse802Class12PartA = [
-  makeUnit('802-xii-a1', 1, 'Communication Skills-IV', [], [], 2, 10),
-  makeUnit('802-xii-a2', 2, 'Self-Management Skills-IV', [], [], 3, 10),
-  makeUnit('802-xii-a3', 3, 'Information and Communication Technology Skills-IV', [], [], 1, 10),
-  makeUnit('802-xii-a4', 4, 'Entrepreneurial Skills-IV', [], [], 3, 15),
-  makeUnit('802-xii-a5', 5, 'Green Skills-IV', [], [], 1, 5),
+  makeUnit('802-xii-a1', 1, 'Communication Skills-IV', [], [], 2, 10), makeUnit('802-xii-a2', 2, 'Self-Management Skills-IV', [], [], 3, 10), makeUnit('802-xii-a3', 3, 'Information and Communication Technology Skills-IV', [], [], 1, 10), makeUnit('802-xii-a4', 4, 'Entrepreneurial Skills-IV', [], [], 3, 15), makeUnit('802-xii-a5', 5, 'Green Skills-IV', [], [], 1, 5),
 ];
 
 const cbse802Class12PartB = [
@@ -175,9 +117,9 @@ const cbse802Class12PartB = [
   makeUnit('802-xii-b4', 4, 'Work Integrated Learning IT – DMA', ['Work-integrated learning and digital media applications', 'Planning, creating and presenting an IT-based workplace project'], ['Complete a workplace-oriented IT/DMA activity or project'], 5, { theory: 10, practical: 10 }),
 ];
 
-const seniorTrack = (code, name, category, pythonRole, pythonLibraries = []) => ({
+const seniorTrack = (code, name, category, pythonRole, pythonLibraries = [], sourceUrl = 'https://cbseacademic.nic.in/') => ({
   code, id: `cbse-${code}-senior-secondary`, name, category,
-  syllabusSource: `CBSE ${code} ${name} 2026-27`, sourceUrl: 'https://cbseacademic.nic.in/',
+  syllabusSource: `CBSE ${code} ${name} 2026-27`, sourceUrl,
   pythonRole, pythonLibraries,
   assessment: { theoryMarks: 70, practicalMarks: 30, totalMarks: 100 },
   parts: { partA: { name: 'Curriculum content', units: [] }, partB: { name: 'Detailed topics', units: [] } },
@@ -185,38 +127,36 @@ const seniorTrack = (code, name, category, pythonRole, pythonLibraries = []) => 
 });
 
 const cbse083Class11 = {
-  ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming'),
+  ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Computer_Science_SecP2_2026-27.pdf'),
   parts: { partA: { name: 'Core Curriculum', units: class11Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse083Class12 = {
-  ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming'),
+  ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Computer_Science_SecP2_2026-27.pdf'),
   parts: { partA: { name: 'Core Curriculum', units: class12Units }, partB: { name: 'Practical Topics', units: [] } },
 };
-
 const cbse065Class11 = {
-  ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib']),
+  ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib'], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf'),
   parts: { partA: { name: 'Curriculum content', units: cbse065Class11Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse065Class12 = {
-  ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib']),
+  ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib'], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf'),
   parts: { partA: { name: 'Curriculum content', units: cbse065Class12Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse802Class11 = {
-  ...seniorTrack('802', 'Information Technology', 'skill-subject', 'none'),
+  ...seniorTrack('802', 'Information Technology', 'skill-subject', 'none', [], 'https://cbseacademic.nic.in/web_material/Curriculum27/SrSec/802-IT.pdf'),
   assessment: { theoryMarks: 60, practicalMarks: 40, totalMarks: 100 },
   parts: { partA: { name: 'Employability Skills', units: cbse802Class11PartA }, partB: { name: 'Subject Specific Skills', units: cbse802Class11PartB } },
   practicalAssessment: { officeAutomationTools: 15, javaProgramme: 10, mysqlCommands: 5, practicalFile: 5, vivaVoce: 5, projectWork: 10 },
 };
 const cbse802Class12 = {
-  ...seniorTrack('802', 'Information Technology', 'skill-subject', 'none'),
+  ...seniorTrack('802', 'Information Technology', 'skill-subject', 'none', [], 'https://cbseacademic.nic.in/web_material/Curriculum27/SrSec/802-IT.pdf'),
   assessment: { theoryMarks: 60, practicalMarks: 40, totalMarks: 100 },
   parts: { partA: { name: 'Employability Skills', units: cbse802Class12PartA }, partB: { name: 'Subject Specific Skills', units: cbse802Class12PartB } },
   practicalAssessment: { javaProgram: 10, sqlQueries: 10, practicalFile: 10, vivaVoce: 5, projectWork: 5 },
 };
 
 export const cbseCurriculum2026_27 = {
-  board: 'CBSE',
-  session: CBSE_CURRICULUM_SESSION,
+  board: 'CBSE', session: CBSE_CURRICULUM_SESSION,
   classes: {
     9: { classId: 'cbse-class-9', subjects: [cbse402Class9] },
     10: { classId: 'cbse-class-10', subjects: [cbse402Class10] },
@@ -231,9 +171,6 @@ export const getCBSECurriculum = (classNumber, subjectCode) => {
   return targetClass.subjects.find((subject) => subject.code === String(subjectCode)) ?? null;
 };
 
-export const getAllCBSE2026_27Classes = () =>
-  Object.entries(cbseCurriculum2026_27.classes).map(([classNumber, data]) => ({
-    classNumber: Number(classNumber), ...data,
-  }));
+export const getAllCBSE2026_27Classes = () => Object.entries(cbseCurriculum2026_27.classes).map(([classNumber, data]) => ({ classNumber: Number(classNumber), ...data }));
 
 export default cbseCurriculum2026_27;

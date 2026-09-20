@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Container from "../../components/ui/Container";
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }) {
 export default async function BlogCategoryPage({ params }) {
   const { category } = await params;
   const title = BLOG_CATEGORY_LABELS[category];
-  if (!title) return null;
+  if (!title) notFound();
 
   let articles = [];
   try {

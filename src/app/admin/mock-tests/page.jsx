@@ -1,72 +1,225 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import SectionTitle from "@/app/components/admin/SectionTitle";
 import AdminCard from "@/app/components/admin/AdminCard";
 import EmptyState from "@/app/components/admin/EmptyState";
-import { StatsCardSkeleton, CardGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
-import { mockTestStats, placeholderMockTests } from "@/app/data/admin/mockMockTests";
+import Modal from "@/app/components/ui/Modal";
+import Button from "@/app/components/ui/Button";
+import { StatsGridSkeleton } from "@/app/components/ui/LoadingSkeleton";
 import StatisticsGrid from "@/app/components/admin/mock-tests/StatisticsGrid";
 import MockTestCard from "@/app/components/admin/mock-tests/MockTestCard";
 import TestTable from "@/app/components/admin/mock-tests/TestTable";
 import TestToolbar from "@/app/components/admin/mock-tests/TestToolbar";
 import TestForm from "@/app/components/admin/mock-tests/TestForm";
 import ConfirmDialog from "@/app/components/admin/ConfirmDialog";
+import SearchInput from "@/app/components/admin/SearchInput";
+import useAdminData from "@/app/hooks/useAdminData";
+import { saveContent, deleteContent } from "@/app/services/ContentService";
+
+function formatDateTime(ms) {
+  if (!ms) return "—";
+  return new Date(ms).toLocaleString();
+}
+
+function TestDetailModal({ testId, onClose }) {
+  const [detail, setDetail] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const controller = new AbortController();
+    (async () => {
+      try {
+        const res = await fetch(`/api/admin/mock-tests/${testId}`, { cache: "no-store", signal: controller.signal });
+        const payload = await res.json().catch(() => null);
+        if (!res.ok || !payload?.success) {
+          throw new Error(payload?.error || "Unable to load test details.");
+        }
+        if (!cancelled) setDetail(payload);
+      } catch (err) {
+        if (!cancelled && err?.name !== "AbortError") setError(err.message || "Unable to load test details.");
+      }
+    })();
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [testId]);
+
+  const test = detail?.test;
+
+  return (
+    <Modal isOpen onClose={onClose} title={test ? test.title : "Mock test details"} size="2xl">
+      {error ? (
+        <p className="py-6 text-center text-sm text-red-600">{error}</p>
+      ) : !detail ? (
+        <div className="space-y-3 py-2" aria-label="Loading test details">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="h-14 animate-pulse rounded-xl bg-gray-100" />
+          ))}
+        </div>
+      ) : (
+        <div className="max-h-[70vh] space-y-6 overflow-y-auto pr-1">
+          {/* Blueprint */}
+          <section>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Test blueprint</h3>
+            <dl className="mt-3 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+              {[
+                ["Board", test.board],
+                ["Class", test.class ? `Class ${test.class}` : "—"],
+                ["Subject", test.subject],
+                ["Questions", test.questionCount ?? "—"],
+                ["Duration", test.duration ? `${test.duration} min` : "—"],
+                ["Max marks", test.maxMarks ?? "—"],
+                ["Passing marks", test.passingScore ?? 0],
+                ["Difficulty", test.difficulty || "all"],
+                ["Question type", test.type || "mixed"],
+                ["Status", test.status],
+                ["Scheduled", test.scheduledDate || "Not scheduled"],
+                ["Updated", formatDateTime(test.updatedAt)],
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-xl border border-gray-100 bg-gray-50 px-3 py-2">
+                  <dt className="text-xs font-medium uppercase tracking-wider text-gray-500">{label}</dt>
+                  <dd className="mt-0.5 font-semibold capitalize text-gray-800">{String(value ?? "—")}</dd>
+                </div>
+              ))}
+            </dl>
+            {test.instructions && (
+              <div className="mt-3 rounded-xl border border-blue-100 bg-blue-50 px-4 py-3">
+                <p className="text-xs font-semibold uppercase tracking-wider text-blue-700">Student instructions</p>
+                <p className="mt-1 whitespace-pre-wrap text-sm text-blue-900">{test.instructions}</p>
+              </div>
+            )}
+          </section>
+
+          {/* Attempts */}
+          <section>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-500">Attempts</h3>
+              <div className="flex gap-4 text-xs text-gray-600">
+                <span>Total: <strong>{detail.stats.attempts}</strong></span>
+                <span>Average: <strong>{detail.stats.averageScore}%</strong></span>
+                <span>Best: <strong>{detail.stats.bestScore}%</strong></span>
+              </div>
+            </div>
+            {detail.attempts.length === 0 ? (
+              <p className="mt-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-6 text-center text-sm text-gray-500">
+                No student attempts recorded for this test yet.
+              </p>
+            ) : (
+              <div className="mt-3 overflow-x-auto rounded-xl border border-gray-200">
+                <table className="min-w-full divide-y divide-gray-200 text-sm">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th scope="col" className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Student</th>
+                      <th scope="col" className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Score</th>
+                      <th scope="col" className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Correct</th>
+                      <th scope="col" className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Time</th>
+                      <th scope="col" className="px-4 py-2 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {detail.attempts.slice(0, 20).map((attempt) => (
+                      <tr key={attempt.id}>
+                        <td className="px-4 py-2 font-mono text-xs text-gray-500">{attempt.userId ? `${attempt.userId.slice(0, 8)}…` : "—"}</td>
+                        <td className="px-4 py-2 font-semibold text-gray-800">{attempt.percentage}%</td>
+                        <td className="px-4 py-2 text-gray-600">{attempt.correctCount}/{attempt.totalQuestions}</td>
+                        <td className="px-4 py-2 text-gray-600">{attempt.timeTaken ? `${Math.round(attempt.timeTaken / 60)} min` : "—"}</td>
+                        <td className="px-4 py-2 text-gray-600">{formatDateTime(attempt.completedAt)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        </div>
+      )}
+    </Modal>
+  );
+}
 
 export default function AdminMockTestsPage() {
-  const [tests, setTests] = useState(placeholderMockTests);
+  const { data, loading, error, refresh } = useAdminData("/api/admin/mock-tests");
+  const tests = useMemo(() => data?.tests || [], [data]);
+  const stats = useMemo(
+    () => data?.stats || { totalTests: 0, totalAttempts: 0, publishedCount: 0, draftCount: 0, averageScore: 0 },
+    [data]
+  );
+
   const [viewMode, setViewMode] = useState("grid");
   const [showFilters, setShowFilters] = useState(false);
-  const [filters, setFilters] = useState({ subject: "", class: "", status: "" });
-  const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState({ class: "", status: "", board: "" });
   const [formOpen, setFormOpen] = useState(false);
   const [editingTest, setEditingTest] = useState(null);
+  const [detailTestId, setDetailTestId] = useState(null);
   const [confirmDialog, setConfirmDialog] = useState(null);
+  const [actionError, setActionError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  const filteredTests = useMemo(() => {
-    return tests.filter((test) => {
-      if (filters.subject && test.subject !== filters.subject) return false;
-      if (filters.class && test.class !== filters.class) return false;
-      if (filters.status && test.status !== filters.status) return false;
-      return true;
-    });
-  }, [tests, filters]);
-
-  const handleSave = (test) => {
-    if (editingTest) {
-      setTests((prev) => prev.map((t) => (t.id === test.id ? { ...t, ...test } : t)));
-    } else {
-      setTests((prev) => [test, ...prev]);
-    }
-    setFormOpen(false);
-    setEditingTest(null);
+  const flashSuccess = (message) => {
+    setSuccessMessage(message);
+    window.setTimeout(() => setSuccessMessage(null), 2500);
   };
 
-  const handleEdit = (test) => {
-    setEditingTest(test);
-    setFormOpen(true);
+  const filteredTests = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return tests.filter((test) => {
+      if (filters.class && String(test.class) !== filters.class) return false;
+      if (filters.status && String(test.status) !== filters.status) return false;
+      if (q && !`${test.title} ${test.description} ${test.subject} ${test.board}`.toLowerCase().includes(q)) return false;
+      return true;
+    });
+  }, [tests, search, filters]);
+
+  const handleSave = async (test) => {
+    setActionError(null);
+    try {
+      await saveContent("mockTests", test);
+      setFormOpen(false);
+      setEditingTest(null);
+      refresh();
+      flashSuccess(editingTest ? "Mock test updated." : "Mock test created.");
+    } catch (err) {
+      setActionError(err.message || "Unable to save the mock test.");
+      throw err;
+    }
+  };
+
+  const handleTogglePublish = (test) => {
+    const nextStatus = test.status === "published" ? "draft" : "published";
+    setActionError(null);
+    (async () => {
+      try {
+        await saveContent("mockTests", { ...test, status: nextStatus });
+        refresh();
+        flashSuccess(nextStatus === "published" ? "Test published." : "Test unpublished.");
+      } catch (err) {
+        setActionError(err.message || "Unable to update the test.");
+      }
+    })();
   };
 
   const handleDelete = (test) => {
     setConfirmDialog({
       title: "Delete Mock Test",
-      message: `Are you sure you want to delete "${test.title}"? This will also remove all associated data and results.`,
+      message: `Permanently delete "${test.title}"? This cannot be undone.`,
       confirmLabel: "Delete",
       variant: "danger",
-      onConfirm: () => {
-        setTests((prev) => prev.filter((t) => t.id !== test.id));
+      onConfirm: async () => {
         setConfirmDialog(null);
+        setActionError(null);
+        try {
+          await deleteContent("mockTests", test.id);
+          refresh();
+          flashSuccess("Mock test deleted.");
+        } catch (err) {
+          setActionError(err.message || "Unable to delete the test.");
+        }
       },
     });
-  };
-
-  const handleTogglePublish = (test) => {
-    const newStatus = test.status === "published" ? "draft" : "published";
-    setTests((prev) =>
-      prev.map((t) =>
-        t.id === test.id ? { ...t, status: newStatus } : t
-      )
-    );
   };
 
   const handleAddNew = () => {
@@ -74,79 +227,118 @@ export default function AdminMockTestsPage() {
     setFormOpen(true);
   };
 
-  if (isLoading) {
-    return (
-      <div className="space-y-6">
-        <StatsCardSkeleton count={4} />
-        <CardGridSkeleton count={6} />
-      </div>
-    );
-  }
+  const showSkeleton = loading && tests.length === 0;
 
   return (
     <div className="space-y-6">
-      {/* Statistics */}
-      <StatisticsGrid stats={mockTestStats} />
+      {showSkeleton ? (
+        <StatsGridSkeleton count={4} />
+      ) : (
+        <StatisticsGrid stats={stats} />
+      )}
 
-      {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <SectionTitle
           title="Mock Tests"
-          subtitle={`${filteredTests.length} of ${tests.length} tests · ${tests.filter((t) => t.status === "published").length} published`}
+          subtitle={`${filteredTests.length} of ${tests.length} tests · ${stats.publishedCount} published`}
         />
+        <div className="flex rounded-lg border border-gray-200 overflow-hidden" role="group" aria-label="View mode">
+          {["grid", "table"].map((mode) => (
+            <button
+              key={mode}
+              type="button"
+              onClick={() => setViewMode(mode)}
+              className={`px-3 py-1.5 text-sm font-medium capitalize transition-colors ${
+                viewMode === mode ? "bg-blue-600 text-white" : "bg-white text-gray-600 hover:bg-gray-50"
+              }`}
+              aria-pressed={viewMode === mode}
+            >
+              {mode}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Toolbar */}
-      <TestToolbar
-        onAddNew={handleAddNew}
-        onToggleFilters={() => setShowFilters((prev) => !prev)}
-        showFilters={showFilters}
-      />
+      {error ? (
+        <AdminCard>
+          <EmptyState
+            type="mocktests"
+            title="Couldn't load mock tests"
+            description={error}
+            primaryAction={refresh}
+            primaryActionLabel="Retry"
+          />
+        </AdminCard>
+      ) : (
+        <>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="w-full sm:max-w-md">
+              <SearchInput
+                placeholder="Search tests by title, description…"
+                value={search}
+                onChange={setSearch}
+                onClear={() => setSearch("")}
+              />
+            </div>
+            <TestToolbar
+              onAddNew={handleAddNew}
+              onToggleFilters={() => setShowFilters((prev) => !prev)}
+              showFilters={showFilters}
+            />
+          </div>
 
-      {/* Main content */}
-      <div className="flex gap-6">
-        {/* Filters sidebar */}
-        {showFilters && (
-          <div className="w-full lg:w-64 shrink-0">
+          {showFilters && (
             <AdminCard>
-              <div className="space-y-5">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-semibold text-gray-900">Filters</h3>
-                  {Object.values(filters).some(Boolean) && (
-                    <button onClick={() => setFilters({ subject: "", class: "", status: "" })} className="text-xs text-blue-600 hover:text-blue-700 font-medium">Clear all</button>
-                  )}
-                </div>
-                {/* Subject filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Subject</label>
-                  <div className="space-y-1">
-                    {["Computer Science", "Physics", "Chemistry", "Mathematics", "Biology"].map((s) => (
-                      <button key={s} onClick={() => setFilters((p) => ({ ...p, subject: p.subject === s ? "" : s }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.subject === s ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
-                        {s}
+              <div className="grid gap-5 sm:grid-cols-3">
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Class</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[["", "All"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"]].map(([value, label]) => (
+                      <button
+                        key={value || "all"}
+                        type="button"
+                        onClick={() => setFilters((p) => ({ ...p, class: value }))}
+                        className={`rounded-lg px-3 py-1.5 text-sm ${
+                          filters.class === value ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"
+                        }`}
+                        aria-pressed={filters.class === value}
+                      >
+                        {label === "All" ? "All" : `Class ${label}`}
                       </button>
                     ))}
                   </div>
                 </div>
-                {/* Class filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Class</label>
-                  <div className="space-y-1">
-                    {["9", "10", "11", "12"].map((c) => (
-                      <button key={c} onClick={() => setFilters((p) => ({ ...p, class: p.class === c ? "" : c }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.class === c ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
-                        Class {c}
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Status</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[["", "All"], ["published", "Published"], ["draft", "Draft"], ["archived", "Archived"]].map(([value, label]) => (
+                      <button
+                        key={value || "all"}
+                        type="button"
+                        onClick={() => setFilters((p) => ({ ...p, status: value }))}
+                        className={`rounded-lg px-3 py-1.5 text-sm ${
+                          filters.status === value ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"
+                        }`}
+                        aria-pressed={filters.status === value}
+                      >
+                        {label}
                       </button>
                     ))}
                   </div>
                 </div>
-                {/* Status filter */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</label>
-                  <div className="space-y-1">
-                    {[["published", "Published"], ["draft", "Draft"], ["pending", "Pending Review"]].map(([val, label]) => (
-                      <button key={val} onClick={() => setFilters((p) => ({ ...p, status: p.status === val ? "" : val }))}
-                        className={`w-full text-left px-3 py-1.5 text-sm rounded-lg transition-colors ${filters.status === val ? "bg-blue-50 text-blue-700 font-medium ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"}`}>
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-500">Board</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[["", "All"], ["ICSE", "ICSE"], ["ISC", "ISC"], ["CBSE", "CBSE"]].map(([value, label]) => (
+                      <button
+                        key={value || "all"}
+                        type="button"
+                        onClick={() => setFilters((p) => ({ ...p, board: value }))}
+                        className={`rounded-lg px-3 py-1.5 text-sm ${
+                          (filters.board || "") === value ? "bg-blue-50 font-medium text-blue-700 ring-1 ring-blue-200" : "text-gray-600 hover:bg-gray-50"
+                        }`}
+                        aria-pressed={(filters.board || "") === value}
+                      >
                         {label}
                       </button>
                     ))}
@@ -154,100 +346,92 @@ export default function AdminMockTestsPage() {
                 </div>
               </div>
             </AdminCard>
-          </div>
-        )}
+          )}
 
-        {/* Tests content */}
-        <div className="flex-1 min-w-0">
-          {filteredTests.length === 0 ? (
-            <AdminCard>
-              <EmptyState
-                icon="📋"
-                title="No tests found"
-                description="Try adjusting your filters or create a new mock test."
-                action={
-                  <button onClick={handleAddNew} className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">+ Create Test</button>
-                }
-              />
-            </AdminCard>
-          ) : viewMode === "grid" ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {filteredTests.map((test) => (
-                <div key={test.id} className="relative group">
-                  <MockTestCard
-                    test={test}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    onPreview={(t) => console.log("Preview test:", t.id)}
-                    onResults={(t) => console.log("Results for test:", t.id)}
-                    onTogglePublish={handleTogglePublish}
-                  />
-                  {/* Quick actions overlay */}
-                  <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      onClick={() => handleEdit(test)}
-                      className="p-1.5 bg-white rounded-lg shadow-sm border border-gray-200 text-amber-600 hover:bg-amber-50 transition-colors"
-                      title="Edit test"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
-                    </button>
-                    <button
-                      onClick={() => handleTogglePublish(test)}
-                      className={`p-1.5 bg-white rounded-lg shadow-sm border border-gray-200 transition-colors ${test.status === "published" ? "text-emerald-600 hover:bg-emerald-50" : "text-gray-600 hover:bg-gray-50"}`}
-                      title={test.status === "published" ? "Unpublish" : "Publish"}
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    </button>
-                    <button
-                      onClick={() => handleDelete(test)}
-                      className="p-1.5 bg-white rounded-lg shadow-sm border border-gray-200 text-red-600 hover:bg-red-50 transition-colors"
-                      title="Delete test"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-                    </button>
-                  </div>
-                </div>
-              ))}
+          {(actionError || successMessage) && (
+            <div
+              role="status"
+              className={`rounded-xl border px-4 py-3 text-sm ${
+                actionError ? "border-red-200 bg-red-50 text-red-700" : "border-emerald-200 bg-emerald-50 text-emerald-700"
+              }`}
+            >
+              {actionError || successMessage}
             </div>
-          ) : (
-            <TestTable
-              tests={filteredTests}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onPreview={(t) => console.log("Preview test:", t.id)}
-              onResults={(t) => console.log("Results for test:", t.id)}
-            />
           )}
 
-          {/* Results summary */}
-          {filteredTests.length > 0 && (
-            <p className="text-xs text-gray-400 text-center mt-4">
-              Showing {filteredTests.length} of {tests.length} tests
-            </p>
-          )}
-        </div>
-      </div>
+          <div className="flex gap-6">
+            <div className="min-w-0 flex-1">
+              {!showSkeleton && filteredTests.length === 0 ? (
+                <AdminCard>
+                  <EmptyState
+                    type="mocktests"
+                    title="No tests found"
+                    description={
+                      search || filters.class || filters.status || filters.board
+                        ? "Try adjusting your search or filters."
+                        : "Create your first mock test to get started."
+                    }
+                    primaryAction={handleAddNew}
+                    primaryActionLabel="Create Test"
+                  />
+                </AdminCard>
+              ) : viewMode === "grid" ? (
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                  {filteredTests.map((test) => (
+                    <MockTestCard
+                      key={test.id}
+                      test={test}
+                      onEdit={(t) => {
+                        setEditingTest(t);
+                        setFormOpen(true);
+                      }}
+                      onPreview={(t) => setDetailTestId(t.id)}
+                      onResults={(t) => setDetailTestId(t.id)}
+                      onTogglePublish={handleTogglePublish}
+                      onDelete={handleDelete}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <TestTable
+                  tests={filteredTests}
+                  onEdit={(t) => {
+                    setEditingTest(t);
+                    setFormOpen(true);
+                  }}
+                  onPreview={(t) => setDetailTestId(t.id)}
+                  onResults={(t) => setDetailTestId(t.id)}
+                  onTogglePublish={handleTogglePublish}
+                  onDelete={handleDelete}
+                />
+              )}
+            </div>
+          </div>
+        </>
+      )}
 
-      {/* Test Form Modal */}
       <TestForm
+        key={formOpen ? `open-${editingTest?.id ?? "new"}` : "closed"}
         isOpen={formOpen}
-        onClose={() => { setFormOpen(false); setEditingTest(null); }}
+        onClose={() => {
+          setFormOpen(false);
+          setEditingTest(null);
+        }}
         onSave={handleSave}
         test={editingTest}
       />
 
-      {/* Confirm Dialog */}
-      {confirmDialog && (
-        <ConfirmDialog
-          isOpen={true}
-          onClose={() => setConfirmDialog(null)}
-          onConfirm={confirmDialog.onConfirm}
-          title={confirmDialog.title}
-          message={confirmDialog.message}
-          confirmLabel={confirmDialog.confirmLabel}
-          variant={confirmDialog.variant}
-        />
-      )}
+      {detailTestId && <TestDetailModal testId={detailTestId} onClose={() => setDetailTestId(null)} />}
+
+      <ConfirmDialog
+        isOpen={Boolean(confirmDialog)}
+        onClose={() => setConfirmDialog(null)}
+        onConfirm={confirmDialog?.onConfirm}
+        title={confirmDialog?.title}
+        message={confirmDialog?.message}
+        confirmLabel={confirmDialog?.confirmLabel}
+        variant={confirmDialog?.variant}
+      />
     </div>
   );
 }

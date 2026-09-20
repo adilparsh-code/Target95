@@ -3,10 +3,54 @@ import { adminGuard, serverError, toMillis } from "../../_helpers";
 export const dynamic = "force-dynamic";
 
 /**
- * GET /api/admin/students/[id]
- * Full student record for the admin profile view: profile + progress +
- * practice results + mock test results. Admin-only via requireAdmin.
+ * PATCH /api/admin/students/[id]
+ * Manage student account status (activate / deactivate). Role is intentionally
+ * immutable here — privilege changes only happen via the admin bootstrap route.
  */
+export async function PATCH(request, { params }) {
+  const guard = await adminGuard(request);
+  if (!guard.ok) return guard.response;
+
+  try {
+    const { id } = await params;
+    if (!id || typeof id !== "string" || id.length > 128) {
+      return Response.json({ success: false, error: "Invalid student id." }, { status: 400 });
+    }
+    if (guard.admin.uid === id) {
+      return Response.json({ success: false, error: "You cannot change your own account status." }, { status: 400 });
+    }
+
+    const body = await request.json().catch(() => null);
+    const status = String(body?.status || "").trim().toLowerCase();
+    if (!status || !"active inactive".split(" ").includes(status)) {
+      return Response.json({ success: false, error: "Status must be active or inactive." }, { status: 400 });
+    }
+
+    const ref = guard.adminDb.collection("users").doc(id);
+    const userDoc = await ref.get();
+    if (!userDoc.exists) {
+      return Response.json({ success: false, error: "Student not found." }, { status: 404 });
+    }
+    const role = userDoc.data()?.role || "student";
+    if (role === "admin") {
+      return Response.json({ success: false, error: "Admin accounts cannot be managed here." }, { status: 403 });
+    }
+
+    const disabled = status === "inactive";
+    await ref.update({
+      status,
+      disabled,
+      statusUpdatedAt: new Date().toISOString(),
+      statusUpdatedBy: guard.admin.uid || "admin",
+    });
+
+    return Response.json({ success: true, student: { id, status, disabled } });
+  } catch (error) {
+    console.error("Admin student status error:", error);
+    return serverError();
+  }
+}
+
 export async function GET(request, { params }) {
   const guard = await adminGuard(request);
   if (!guard.ok) return guard.response;

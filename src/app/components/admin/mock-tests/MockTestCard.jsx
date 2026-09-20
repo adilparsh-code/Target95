@@ -1,6 +1,6 @@
 import StatusBadge from "../StatusBadge";
 
-export default function MockTestCard({ test, onEdit, onPreview, onResults }) {
+export default function MockTestCard({ test, onEdit, onPreview, onResults, onTogglePublish, onDelete }) {
   const getScoreColor = (score) => {
     if (score >= 75) return "text-emerald-600";
     if (score >= 60) return "text-blue-600";
@@ -30,19 +30,19 @@ export default function MockTestCard({ test, onEdit, onPreview, onResults }) {
       <div className="grid grid-cols-4 gap-2 mb-3">
         <div className="bg-gray-50 rounded-lg p-2 text-center">
           <p className="text-[10px] text-gray-500 uppercase tracking-wider">Questions</p>
-          <p className="text-sm font-bold text-gray-900">{test.questions}</p>
+          <p className="text-sm font-bold text-gray-900">{test.questionCount ?? test.questions ?? "—"}</p>
         </div>
         <div className="bg-gray-50 rounded-lg p-2 text-center">
           <p className="text-[10px] text-gray-500 uppercase tracking-wider">Duration</p>
-          <p className="text-sm font-bold text-gray-900">{test.duration}{test.durationUnit === "min" ? "m" : "h"}</p>
+          <p className="text-sm font-bold text-gray-900">{test.duration ? `${test.duration}m` : "—"}</p>
         </div>
         <div className="bg-gray-50 rounded-lg p-2 text-center">
           <p className="text-[10px] text-gray-500 uppercase tracking-wider">Attempts</p>
-          <p className="text-sm font-bold text-gray-900">{test.attempts}</p>
+          <p className="text-sm font-bold text-gray-900">{test.attempts ?? 0}</p>
         </div>
         <div className="bg-gray-50 rounded-lg p-2 text-center">
           <p className="text-[10px] text-gray-500 uppercase tracking-wider">Avg.</p>
-          <p className={`text-sm font-bold ${getScoreColor(test.avgScore)}`}>{test.avgScore}%</p>
+          <p className={`text-sm font-bold ${getScoreColor(test.avgScore)}`}>{test.avgScore ?? 0}%</p>
         </div>
       </div>
 
@@ -58,13 +58,17 @@ export default function MockTestCard({ test, onEdit, onPreview, onResults }) {
       {/* Schedule */}
       <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
         <span>📅</span>
-        <span>Scheduled: {test.scheduledDate}</span>
-        <span className="mx-1">·</span>
-        <span>Created: {test.created}</span>
+        <span>Scheduled: {test.scheduledDate || "Not scheduled"}</span>
+        {test.createdAt ? (
+          <>
+            <span className="mx-1">·</span>
+            <span>Created: {new Date(test.createdAt).toLocaleDateString()}</span>
+          </>
+        ) : null}
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-2 pt-1 border-t border-gray-100">
+      <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-gray-100">
         <button onClick={() => onEdit?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-blue-600 bg-blue-50 rounded-xl hover:bg-blue-100 transition-colors">
           Edit
         </button>
@@ -74,6 +78,22 @@ export default function MockTestCard({ test, onEdit, onPreview, onResults }) {
         <button onClick={() => onResults?.(test)} className="flex-1 px-3 py-1.5 text-xs font-medium text-violet-600 bg-violet-50 rounded-xl hover:bg-violet-100 transition-colors">
           Results
         </button>
+        {onTogglePublish && (
+          <button
+            onClick={() => onTogglePublish(test)}
+            className="flex-1 px-3 py-1.5 text-xs font-medium rounded-xl transition-colors bg-gray-100 text-gray-700 hover:bg-gray-200"
+          >
+            {test.status === "published" ? "Unpublish" : "Publish"}
+          </button>
+        )}
+        {onDelete && (
+          <button
+            onClick={() => onDelete(test)}
+            className="flex-1 px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-xl hover:bg-red-100 transition-colors"
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

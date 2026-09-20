@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
 
@@ -35,37 +35,35 @@ const initialState = {
   status: "draft",
 };
 
+/** Build the editable form state from a stored question (or blank). */
+function buildFormState(question) {
+  if (!question) return initialState;
+  return {
+    title: question.title || "",
+    question: question.question || "",
+    solution: question.solution || "",
+    subject: question.subject || "Computer Science",
+    chapter: question.chapter || "",
+    difficulty: question.difficulty || "Medium",
+    questionType: question.questionType || "MCQ",
+    estimatedTime: question.estimatedTime || 10,
+    tags: question.tags || [],
+    options: question.options || ["", "", "", ""],
+    correctAnswer: question.correctAnswer || "",
+    blanks: question.blanks || [],
+    isTrue: question.isTrue ?? true,
+    code: question.code || "",
+    expectedOutput: question.expectedOutput || "",
+    status: question.status || "draft",
+  };
+}
+
 export default function QuestionForm({ isOpen, onClose, onSave, question }) {
-  const [form, setForm] = useState(initialState);
+  // Initialized once per mount — the parent passes a `key` so the form resets
+  // whenever the dialog opens or the edit target changes (no sync effect).
+  const [form, setForm] = useState(() => buildFormState(question));
   const [errors, setErrors] = useState({});
   const [tagInput, setTagInput] = useState("");
-
-  useEffect(() => {
-    if (question) {
-      setForm({
-        title: question.title || "",
-        question: question.question || "",
-        solution: question.solution || "",
-        subject: question.subject || "Computer Science",
-        chapter: question.chapter || "",
-        difficulty: question.difficulty || "Medium",
-        questionType: question.questionType || "MCQ",
-        estimatedTime: question.estimatedTime || 10,
-        tags: question.tags || [],
-        options: question.options || ["", "", "", ""],
-        correctAnswer: question.correctAnswer || "",
-        blanks: question.blanks || [],
-        isTrue: question.isTrue ?? true,
-        code: question.code || "",
-        expectedOutput: question.expectedOutput || "",
-        status: question.status || "draft",
-      });
-    } else {
-      setForm(initialState);
-    }
-    setErrors({});
-    setTagInput("");
-  }, [question, isOpen]);
 
   const validate = () => {
     const newErrors = {};
@@ -80,9 +78,22 @@ export default function QuestionForm({ isOpen, onClose, onSave, question }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
+
+    // Server schema expects a single canonical `answer` field.
+    const answer =
+      form.questionType === "MCQ"
+        ? form.correctAnswer
+        : form.questionType === "TrueFalse"
+          ? form.isTrue
+            ? "True"
+            : "False"
+          : form.solution;
+
     onSave({
       ...form,
-      id: question?.id || Date.now(),
+      answer,
+      // null id → ContentService POSTs a new doc; keep real ids for updates.
+      id: question?.id || null,
       tags: form.tags,
       createdAt: question?.createdAt || new Date().toISOString(),
       updatedAt: new Date().toISOString(),

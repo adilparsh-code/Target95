@@ -15,7 +15,7 @@ function SortHeader({ label, sortKey: sk, activeSortKey, sortDir, onSort }) {
   );
 }
 
-export default function TestTable({ tests = [], onEdit, onPreview, onResults, pageSize = 10 }) {
+export default function TestTable({ tests = [], onEdit, onPreview, onResults, onTogglePublish, onDelete, pageSize = 10 }) {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
@@ -25,7 +25,7 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
     if (!search.trim()) return tests;
     const q = search.toLowerCase();
     return tests.filter((t) =>
-      [t.title, t.id, t.subject, t.class, t.status].some((v) => v?.toLowerCase().includes(q))
+      [t.title, t.id, t.subject, t.class, t.board, t.status].some((v) => v?.toLowerCase().includes(q))
     );
   }, [tests, search]);
 
@@ -65,9 +65,9 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
             <tr>
               <SortHeader label="ID" sortKey="id" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <SortHeader label="Title" sortKey="title" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Subject</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Board</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Class</th>
-              <SortHeader label="Questions" sortKey="questions" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Questions" sortKey="questionCount" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <SortHeader label="Duration" sortKey="duration" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <SortHeader label="Attempts" sortKey="attempts" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <SortHeader label="Avg. Score" sortKey="avgScore" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
@@ -83,11 +83,11 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
                 <tr key={test.id} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3 text-gray-500 font-mono text-xs">{test.id}</td>
                   <td className="px-4 py-3 font-medium text-gray-900">{test.title}</td>
-                  <td className="px-4 py-3 text-gray-600">{test.subject}</td>
+                  <td className="px-4 py-3 text-gray-600">{test.board || "ICSE"}</td>
                   <td className="px-4 py-3 text-gray-600">Class {test.class}</td>
-                  <td className="px-4 py-3 text-gray-600">{test.questions}</td>
-                  <td className="px-4 py-3 text-gray-600">{test.duration}{test.durationUnit === "min" ? "m" : "h"}</td>
-                  <td className="px-4 py-3 text-gray-600">{test.attempts}</td>
+                  <td className="px-4 py-3 text-gray-600">{test.questionCount ?? "—"}</td>
+                  <td className="px-4 py-3 text-gray-600">{test.duration ? `${test.duration}m` : "—"}</td>
+                  <td className="px-4 py-3 text-gray-600">{test.attempts ?? 0}</td>
                   <td className="px-4 py-3">
                     <span className={`font-medium ${test.avgScore >= 75 ? "text-emerald-600" : test.avgScore >= 60 ? "text-blue-600" : test.avgScore >= 40 ? "text-amber-600" : "text-rose-600"}`}>
                       {test.avgScore}%
@@ -99,6 +99,24 @@ export default function TestTable({ tests = [], onEdit, onPreview, onResults, pa
                       <button onClick={() => onEdit?.(test)} className="min-h-[44px] min-w-[44px] p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" aria-label={`Edit ${test.title}`}>✏️</button>
                       <button onClick={() => onPreview?.(test)} className="min-h-[44px] min-w-[44px] p-2 text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors" aria-label={`Preview ${test.title}`}>👁</button>
                       <button onClick={() => onResults?.(test)} className="min-h-[44px] min-w-[44px] p-2 text-violet-600 hover:bg-violet-50 rounded-xl transition-colors" aria-label={`Results for ${test.title}`}>📊</button>
+                      {onTogglePublish && (
+                        <button
+                          onClick={() => onTogglePublish(test)}
+                          className="min-h-[44px] min-w-[44px] p-2 text-gray-600 hover:bg-gray-100 rounded-xl transition-colors"
+                          aria-label={test.status === "published" ? `Unpublish ${test.title}` : `Publish ${test.title}`}
+                        >
+                          {test.status === "published" ? "⬇️" : "⬆️"}
+                        </button>
+                      )}
+                      {onDelete && (
+                        <button
+                          onClick={() => onDelete(test)}
+                          className="min-h-[44px] min-w-[44px] p-2 text-red-600 hover:bg-red-50 rounded-xl transition-colors"
+                          aria-label={`Delete ${test.title}`}
+                        >
+                          🗑
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import SectionTitle from "@/app/components/admin/SectionTitle";
 import AdminCard from "@/app/components/admin/AdminCard";
@@ -8,6 +8,7 @@ import EmptyState from "@/app/components/admin/EmptyState";
 import SearchInput from "@/app/components/admin/SearchInput";
 import { StatsCardSkeleton } from "@/app/components/ui/LoadingSkeleton";
 import StudentTable from "@/app/components/admin/students/StudentTable";
+import ConfirmDialog from "@/app/components/admin/ConfirmDialog";
 import DashboardCard from "@/app/components/admin/DashboardCard";
 import useAdminData from "@/app/hooks/useAdminData";
 
@@ -20,6 +21,43 @@ export default function AdminStudentsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({ class: "", grade: "", status: "" });
+  const [statusConfirm, setStatusConfirm] = useState(null);
+  const [statusError, setStatusError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  const flashSuccess = (message) => {
+    setSuccessMessage(message);
+    window.setTimeout(() => setSuccessMessage(null), 2500);
+  };
+
+  const handleToggleStatus = (student) => {
+    const nextStatus = student.disabled || student.status === "inactive" ? "active" : "inactive";
+    setStatusConfirm({
+      student,
+      nextStatus,
+    });
+  };
+
+  const confirmToggleStatus = async () => {
+    const { student, nextStatus } = statusConfirm || {};
+    setStatusConfirm(null);
+    setStatusError(null);
+    try {
+      const res = await fetch(`/api/admin/students/${student.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: nextStatus }),
+      });
+      const payload = await res.json().catch(() => null);
+      if (!res.ok || !payload?.success) {
+        throw new Error(payload?.error || "Unable to update the student status.");
+      }
+      refresh();
+      flashSuccess(`Student account ${nextStatus === "active" ? "reactivated" : "deactivated"}.`);
+    } catch (err) {
+      setStatusError(err.message || "Unable to update the student status.");
+    }
+  };
 
   // Local, instant search on top of the server directory.
   const filteredStudents = useMemo(() => {
@@ -53,10 +91,6 @@ export default function AdminStudentsPage() {
     router.push(`/admin/students/${student.id}`);
   };
 
-  useEffect(() => {
-    if (!filters.class && !students.some((s) => String(s.class))) return;
-  }, [filters.class, students]);
-
   const classes = useMemo(
     () => Array.from(new Set(students.map((s) => String(s.class)).filter(Boolean))).sort(),
     [students]
@@ -75,6 +109,8 @@ export default function AdminStudentsPage() {
       </div>
     );
   }
+
+  const statusToggleError = statusError || successMessage;
 
   if (loading) {
     return (
@@ -173,6 +209,17 @@ export default function AdminStudentsPage() {
         subtitle={`${filteredStudents.length} of ${students.length} students · ${stats.activeStudents} active this week`}
       />
 
+      {statusToggleError && (
+        <div
+          role="status"
+          className={`rounded-xl border px-4 py-3 text-sm ${
+            statusError ? "border-red-200 bg-red-50 text-red-700" : "border-emerald-200 bg-emerald-50 text-emerald-700"
+          }`}
+        >
+          {statusToggleError}
+        </div>
+      )}
+
       <div className="flex gap-6">
         <div className="min-w-0 flex-1">
           {filteredStudents.length === 0 ? (
@@ -188,10 +235,29 @@ export default function AdminStudentsPage() {
               />
             </AdminCard>
           ) : (
-            <StudentTable students={filteredStudents} onViewProfile={handleViewProfile} pageSize={10} />
+            <StudentTable
+              students={filteredStudents}
+              onViewProfile={handleViewProfile}
+              onToggleStatus={handleToggleStatus}
+              pageSize={10}
+            />
           )}
         </div>
       </div>
+
+      <ConfirmDialog
+        isOpen={Boolean(statusConfirm)}
+        onClose={() => setStatusConfirm(null)}
+        onConfirm={confirmToggleStatus}
+        title={statusConfirm?.nextStatus === "active" ? "Reactivate Student" : "Deactivate Student"}
+        message={
+          statusConfirm?.nextStatus === "active"
+            ? `Reactivate "${statusConfirm?.student?.fullName}"? They will be able to sign in and resume learning.`
+            : `Deactivate "${statusConfirm?.student?.fullName}"? They will lose access until reactivated. Their data is preserved.`
+        }
+        confirmLabel={statusConfirm?.nextStatus === "active" ? "Reactivate" : "Deactivate"}
+        variant={statusConfirm?.nextStatus === "active" ? "primary" : "danger"}
+      />
     </div>
   );
 }

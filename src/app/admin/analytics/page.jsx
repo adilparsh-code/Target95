@@ -134,6 +134,65 @@ export default function AdminAnalyticsPage() {
             : `Based on ${analytics.totalAttempts} total test attempts.`}
         </p>
       </AdminCard>
+
+      {analytics.content && <ContentComposition content={analytics.content} />}
     </div>
+  );
+}
+
+function DistributionBars({ items, color }) {
+  const max = Math.max(...items.map((i) => i.count), 1);
+  if (items.length === 0) {
+    return <p className="py-4 text-center text-sm text-gray-500 dark:text-gray-400">No data yet.</p>;
+  }
+  return (
+    <div className="mt-4 space-y-2.5">
+      {items.slice(0, 6).map((item) => (
+        <div key={item.label} className="flex items-center gap-3">
+          <span className="w-24 truncate text-xs capitalize text-gray-600 dark:text-gray-300 sm:w-32" title={item.label}>
+            {item.label}
+          </span>
+          <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-800">
+            <div className={`h-full rounded-full ${color}`} style={{ width: `${Math.round((item.count / max) * 100)}%` }} />
+          </div>
+          <span className="w-10 shrink-0 text-right text-xs font-medium text-gray-600 dark:text-gray-300">{item.count}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ContentComposition({ content }) {
+  const statCards = [
+    ["Questions", content.questions],
+    ["Published", content.publishedQuestions],
+    ["Drafts", content.draftQuestions],
+    ["Subjects", content.subjects],
+    ["Chapters", content.chapters],
+    ["Mock Tests", content.mockTests],
+  ];
+
+  return (
+    <AdminCard>
+      <SectionTitle title="Content Library" subtitle="Live composition of the question bank and curriculum content" />
+      <div className="mt-4 grid grid-cols-3 gap-3 lg:grid-cols-6">
+        {statCards.map(([label, value]) => (
+          <div key={label} className="rounded-xl border border-gray-100 bg-gray-50 px-3 py-3 text-center dark:border-gray-800 dark:bg-gray-800/50">
+            <p className="text-xl font-bold text-gray-900 dark:text-white">{value ?? 0}</p>
+            <p className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">{label}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div>
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Questions by difficulty</h4>
+          <DistributionBars items={content.byDifficulty || []} color="bg-blue-500" />
+        </div>
+        <div>
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Questions by type</h4>
+          <DistributionBars items={content.byType || []} color="bg-violet-500" />
+        </div>
+      </div>
+    </AdminCard>
   );
 }

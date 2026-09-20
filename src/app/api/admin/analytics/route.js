@@ -14,10 +14,14 @@ export async function GET(request) {
   try {
     const adminDb = guard.adminDb;
 
-    const [progressSnap, resultsSnap, mockResultsSnap] = await Promise.all([
+    const [progressSnap, resultsSnap, mockResultsSnap, questionsSnap, subjectsSnap, chaptersSnap, mockTestsSnap] = await Promise.all([
       adminDb.collection("progress").limit(2000).get(),
       adminDb.collection("results").orderBy("completedAt", "desc").limit(500).get(),
       adminDb.collection("mockTestResults").limit(500).get(),
+      adminDb.collection("questions").limit(2000).get(),
+      adminDb.collection("subjects").limit(500).get(),
+      adminDb.collection("chapters").limit(1000).get(),
+      adminDb.collection("mockTests").limit(500).get(),
     ]);
 
     // --- Chapter performance (from per-user progress docs) ---
@@ -78,6 +82,19 @@ export async function GET(request) {
 
     const mockResults = mockResultsSnap.docs.map((d) => Number(d.data().percentage) || 0);
 
+    // --- Content composition (real counts from the CMS collections) ---
+    const questions = questionsSnap.docs.map((d) => d.data());
+    const countQuestionsBy = (pick) => {
+      const map = new Map();
+      questions.forEach((q) => {
+        const key = pick(q) || "Unknown";
+        map.set(key, (map.get(key) || 0) + 1);
+      });
+      return Array.from(map.entries())
+        .map(([label, count]) => ({ label, count }))
+        .sort((a, b) => b.count - a.count);
+    };
+
     return Response.json({
       success: true,
       analytics: {
@@ -91,6 +108,17 @@ export async function GET(request) {
             ? Math.round(mockResults.reduce((a, b) => a + b, 0) / mockResults.length)
             : 0,
         mockTestAttempts: mockResults.length,
+        content: {
+          questions: questionsSnap.size,
+          publishedQuestions: questions.filter((q) => String(q.status || "draft").toLowerCase() === "published").length,
+          draftQuestions: questions.filter((q) => String(q.status || "draft").toLowerCase() === "draft").length,
+          archivedQuestions: questions.filter((q) => String(q.status || "").toLowerCase() === "archived").length,
+          subjects: subjectsSnap.size,
+          chapters: chaptersSnap.size,
+          mockTests: mockTestsSnap.size,
+          byDifficulty: countQuestionsBy((q) => String(q.difficulty || "").toLowerCase()),
+          byType: countQuestionsBy((q) => String(q.type || q.questionType || "").toLowerCase()),
+        },
       },
     });
   } catch (error) {

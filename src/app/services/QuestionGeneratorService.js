@@ -1,20 +1,14 @@
-import { getFirebaseInstance } from "../lib/firebase";
-import { 
-  collection, 
-  addDoc, 
-  updateDoc, 
-  deleteDoc, 
-  doc, 
-  getDocs,
-  query,
-  where
-} from "firebase/firestore";
+// All generated-question persistence runs through the requireAdmin-protected
+// admin APIs — the client never touches Firestore directly.
 
-const getDb = () => {
-  const { db } = getFirebaseInstance();
-  if (!db) throw new Error("Firebase not initialized");
-  return db;
-};
+async function parseResponse(response, fallbackMessage) {
+  const payload = await response.json().catch(() => null);
+  if (!response.ok || !payload?.success) {
+    const detail = Array.isArray(payload?.errors) ? payload.errors.join(" ") : payload?.error;
+    throw new Error(detail || fallbackMessage);
+  }
+  return payload;
+}
 
 // Mock AI generation function - in production this would call an actual AI API
 const generateAIQuestions = (formData) => {
@@ -106,103 +100,103 @@ export const QuestionGeneratorService = {
     }
   },
 
-  // Save questions to Firestore
+  // Save generated questions through the admin API
   saveQuestions: async (questions) => {
     try {
-      const db = getDb();
-      const collectionRef = collection(db, "generatedQuestions");
-      const savedIds = [];
-      
-      for (const question of questions) {
-        const { id, ...questionData } = question;
-        const docRef = await addDoc(collectionRef, {
-          ...questionData,
-          createdAt: new Date().toISOString()
-        });
-        savedIds.push(docRef.id);
-      }
-      
-      return savedIds;
+      const payload = await parseResponse(
+        await fetch("/api/admin/generated-questions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ questions }),
+        }),
+        "Failed to save questions. Please try again."
+      );
+      return payload.savedIds;
     } catch (error) {
       console.error("Error saving questions:", error);
-      throw new Error("Failed to save questions. Please try again.");
+      throw error instanceof Error ? error : new Error("Failed to save questions. Please try again.");
     }
   },
 
-  // Update a question in Firestore
+  // Update a question through the admin API
   updateQuestion: async (id, updates) => {
     try {
-      const db = getDb();
-      const docRef = doc(db, "generatedQuestions", id);
-      await updateDoc(docRef, updates);
+      await parseResponse(
+        await fetch(`/api/admin/generated-questions/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updates),
+        }),
+        "Failed to update question. Please try again."
+      );
       return true;
     } catch (error) {
       console.error("Error updating question:", error);
-      throw new Error("Failed to update question. Please try again.");
+      throw error instanceof Error ? error : new Error("Failed to update question. Please try again.");
     }
   },
 
-  // Delete a question from Firestore
+  // Delete a question through the admin API
   deleteQuestion: async (id) => {
     try {
-      const db = getDb();
-      const docRef = doc(db, "generatedQuestions", id);
-      await deleteDoc(docRef);
+      await parseResponse(
+        await fetch(`/api/admin/generated-questions/${id}`, { method: "DELETE" }),
+        "Failed to delete question. Please try again."
+      );
       return true;
     } catch (error) {
       console.error("Error deleting question:", error);
-      throw new Error("Failed to delete question. Please try again.");
+      throw error instanceof Error ? error : new Error("Failed to delete question. Please try again.");
     }
   },
 
-  // Approve a question
+  // Approve a question through the admin API
   approveQuestion: async (id) => {
     try {
-      const db = getDb();
-      const docRef = doc(db, "generatedQuestions", id);
-      await updateDoc(docRef, { 
-        status: "Approved",
-        updatedAt: new Date().toISOString()
-      });
+      await parseResponse(
+        await fetch(`/api/admin/generated-questions/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: "Approved" }),
+        }),
+        "Failed to approve question. Please try again."
+      );
       return true;
     } catch (error) {
       console.error("Error approving question:", error);
-      throw new Error("Failed to approve question. Please try again.");
+      throw error instanceof Error ? error : new Error("Failed to approve question. Please try again.");
     }
   },
 
-  // Publish a question
+  // Publish a question through the admin API
   publishQuestion: async (id) => {
     try {
-      const db = getDb();
-      const docRef = doc(db, "generatedQuestions", id);
-      await updateDoc(docRef, { 
-        status: "Published",
-        updatedAt: new Date().toISOString()
-      });
+      await parseResponse(
+        await fetch(`/api/admin/generated-questions/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: "Published" }),
+        }),
+        "Failed to publish question. Please try again."
+      );
       return true;
     } catch (error) {
       console.error("Error publishing question:", error);
-      throw new Error("Failed to publish question. Please try again.");
+      throw error instanceof Error ? error : new Error("Failed to publish question. Please try again.");
     }
   },
 
-  // Get all questions from Firestore
+  // Get all questions through the admin API
   getAllQuestions: async () => {
     try {
-      const db = getDb();
-      const querySnapshot = await getDocs(collection(db, "generatedQuestions"));
-      const questions = [];
-      querySnapshot.forEach((doc) => {
-        questions.push({
-          id: doc.id,
-          ...doc.data()
-        });
-      });
-      return questions;
+      const payload = await parseResponse(
+        await fetch("/api/admin/generated-questions", { cache: "no-store" }),
+        "Failed to load questions. Please try again."
+      );
+      return payload.questions;
     } catch (error) {
-      console.error("Error getting questions:", error);
-      throw new Error("Failed to load questions. Please try again.");
+      console.error("Error loading questions:", error);
+      throw error instanceof Error ? error : new Error("Failed to load questions. Please try again.");
     }
   },
 

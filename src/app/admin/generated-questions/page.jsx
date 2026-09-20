@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import FilterPanel from "../../components/admin/ai-generator/FilterPanel";
 import ExportPanel from "../../components/admin/ai-generator/ExportPanel";
 import GeneratedQuestionCard from "../../components/admin/ai-generator/GeneratedQuestionCard";
@@ -9,7 +9,6 @@ import { QuestionGeneratorService } from "../../services/QuestionGeneratorServic
 
 export default function GeneratedQuestionsPage() {
   const [questions, setQuestions] = useState([]);
-  const [filteredQuestions, setFilteredQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState({
     subject: "",
@@ -19,9 +18,32 @@ export default function GeneratedQuestionsPage() {
     board: "",
   });
 
-  const applyFilters = useCallback(() => {
+  const [refreshNonce, setRefreshNonce] = useState(0);
+  /** Re-fetch in place (event-handler safe). */
+  const refresh = useCallback(() => setRefreshNonce((n) => n + 1), []);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function run() {
+      try {
+        const data = await QuestionGeneratorService.getAllQuestions();
+        if (!cancelled) setQuestions(data);
+      } catch (error) {
+        console.error("Error loading questions:", error);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    }
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshNonce]);
+
+  // Derived filter state — recomputed on questions/filters change without effects.
+  const filteredQuestions = useMemo(() => {
     let filtered = [...questions];
-    
+
     if (filters.subject) {
       filtered = filtered.filter(q => q.subject === filters.subject);
     }
@@ -32,40 +54,19 @@ export default function GeneratedQuestionsPage() {
       filtered = filtered.filter(q => q.difficulty === filters.difficulty);
     }
     if (filters.type) {
-      filtered = filtered.filter(q => q.type === filters.type);
+      filtered = filtered.filter(q => (q.questionType || q.type) === filters.type);
     }
     if (filters.board) {
       filtered = filtered.filter(q => q.board === filters.board);
     }
-    
-    setFilteredQuestions(filtered);
+
+    return filtered;
   }, [questions, filters]);
-
-  const loadQuestions = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const data = await QuestionGeneratorService.getAllQuestions();
-      setQuestions(data);
-      setFilteredQuestions(data);
-    } catch (error) {
-      console.error("Error loading questions:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    loadQuestions();
-  }, []);
-
-  useEffect(() => {
-    applyFilters();
-  }, [filters, questions]);
 
   const handleDelete = async (id) => {
     try {
       await QuestionGeneratorService.deleteQuestion(id);
-      loadQuestions();
+      refresh();
     } catch (error) {
       console.error("Error deleting question:", error);
     }
@@ -74,7 +75,7 @@ export default function GeneratedQuestionsPage() {
   const handleUpdate = async (id, updates) => {
     try {
       await QuestionGeneratorService.updateQuestion(id, updates);
-      loadQuestions();
+      refresh();
     } catch (error) {
       console.error("Error updating question:", error);
     }

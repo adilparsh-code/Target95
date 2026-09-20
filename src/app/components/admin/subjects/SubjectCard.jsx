@@ -34,18 +34,14 @@ export default function SubjectCard({ subject, onEdit, onDelete, onView }) {
         <StatusBadge status={subject.status} />
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-3">
+      <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="text-center p-2 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{subject.chapters}</p>
+          <p className="text-lg font-bold text-gray-900">{subject.chapters ?? 0}</p>
           <p className="text-xs text-gray-500">Chapters</p>
         </div>
         <div className="text-center p-2 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{subject.questions}</p>
+          <p className="text-lg font-bold text-gray-900">{subject.questions ?? 0}</p>
           <p className="text-xs text-gray-500">Questions</p>
-        </div>
-        <div className="text-center p-2 bg-gray-50 rounded-lg">
-          <p className="text-lg font-bold text-gray-900">{subject.students}</p>
-          <p className="text-xs text-gray-500">Students</p>
         </div>
       </div>
 

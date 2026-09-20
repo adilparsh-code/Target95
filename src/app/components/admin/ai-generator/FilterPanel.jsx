@@ -7,7 +7,7 @@ export default function FilterPanel({ filters, onFilterChange, questions }) {
   const uniqueSubjects = [...new Set(questions.map(q => q.subject).filter(Boolean))];
   const uniqueChapters = [...new Set(questions.map(q => q.chapter).filter(Boolean))];
   const uniqueDifficulties = [...new Set(questions.map(q => q.difficulty).filter(Boolean))];
-  const uniqueTypes = [...new Set(questions.map(q => q.type).filter(Boolean))];
+  const uniqueTypes = [...new Set(questions.map(q => q.questionType || q.type).filter(Boolean))];
   const uniqueBoards = [...new Set(questions.map(q => q.board).filter(Boolean))];
 
   const handleFilterChange = (name, value) => {

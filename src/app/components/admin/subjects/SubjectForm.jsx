@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
 
@@ -37,26 +37,25 @@ const initialState = {
   status: "active",
 };
 
-export default function SubjectForm({ isOpen, onClose, onSave, subject }) {
-  const [form, setForm] = useState(initialState);
-  const [errors, setErrors] = useState({});
+/** Build the editable form state from a stored subject (or blank). */
+function buildFormState(subject) {
+  if (!subject) return initialState;
+  return {
+    name: subject.name || "",
+    code: subject.code || "",
+    grade: subject.grade || "ICSE",
+    class: subject.class || "10",
+    color: subject.color || "blue",
+    icon: subject.icon || "💻",
+    status: subject.status || "active",
+  };
+}
 
-  useEffect(() => {
-    if (subject) {
-      setForm({
-        name: subject.name || "",
-        code: subject.code || "",
-        grade: subject.grade || "ICSE",
-        class: subject.class || "10",
-        color: subject.color || "blue",
-        icon: subject.icon || "💻",
-        status: subject.status || "active",
-      });
-    } else {
-      setForm(initialState);
-    }
-    setErrors({});
-  }, [subject, isOpen]);
+export default function SubjectForm({ isOpen, onClose, onSave, subject }) {
+  // Initialized once per mount — the parent passes a `key` so the form resets
+  // whenever the dialog opens or the edit target changes (no sync effect).
+  const [form, setForm] = useState(() => buildFormState(subject));
+  const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
@@ -175,28 +174,23 @@ export default function SubjectForm({ isOpen, onClose, onSave, subject }) {
         <div className="space-y-1.5">
           <label className="block text-sm font-medium text-gray-700">Status</label>
           <div className="flex gap-4">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="status"
-                value="active"
-                checked={form.status === "active"}
-                onChange={(e) => updateField("status", e.target.value)}
-                className="text-blue-600"
-              />
-              <span className="text-sm text-gray-700">Active</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="radio"
-                name="status"
-                value="draft"
-                checked={form.status === "draft"}
-                onChange={(e) => updateField("status", e.target.value)}
-                className="text-amber-600"
-              />
-              <span className="text-sm text-gray-700">Draft</span>
-            </label>
+            {[
+              ["published", "Published", "text-emerald-600"],
+              ["draft", "Draft", "text-amber-600"],
+              ["archived", "Archived", "text-gray-600"],
+            ].map(([value, label, color]) => (
+              <label key={value} className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="status"
+                  value={value}
+                  checked={form.status === value}
+                  onChange={(e) => updateField("status", e.target.value)}
+                  className={color}
+                />
+                <span className="text-sm text-gray-700">{label}</span>
+              </label>
+            ))}
           </div>
         </div>
 

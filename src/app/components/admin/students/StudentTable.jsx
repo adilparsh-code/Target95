@@ -15,7 +15,12 @@ function SortHeader({ label, sortKey: sk, activeSortKey, sortDir, onSort }) {
   );
 }
 
-export default function StudentTable({ students = [], onViewProfile, pageSize = 10 }) {
+function formatDate(ms) {
+  if (!ms) return "—";
+  return new Date(ms).toLocaleDateString();
+}
+
+export default function StudentTable({ students = [], onViewProfile, onToggleStatus, pageSize = 10 }) {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
@@ -25,7 +30,7 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
     if (!search.trim()) return students;
     const q = search.toLowerCase();
     return students.filter((s) =>
-      [s.name, s.email, s.id, s.class, s.school, s.city].some((v) => v?.toLowerCase().includes(q))
+      [s.fullName, s.email, s.id, s.class, s.school, s.city].some((v) => v?.toLowerCase().includes(q))
     );
   }, [students, search]);
 
@@ -60,6 +65,8 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
     return "text-rose-600";
   };
 
+  const isInactive = (student) => student.disabled === true || student.status === "inactive";
+
   return (
     <div className="space-y-4">
       <div className="max-w-sm">
@@ -70,49 +77,55 @@ export default function StudentTable({ students = [], onViewProfile, pageSize = 
         <table className="min-w-full divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-50">
             <tr>
-              <SortHeader label="ID" sortKey="id" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
-              <SortHeader label="Name" sortKey="name" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Name" sortKey="fullName" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email</th>
               <SortHeader label="Class" sortKey="class" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Grade</th>
+              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Board</th>
               <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">School</th>
               <SortHeader label="Solved" sortKey="questionsSolved" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
-              <SortHeader label="Avg. Score" sortKey="avgScore" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
-              <SortHeader label="Attendance" sortKey="attendance" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Avg. Score" sortKey="averageScore" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
+              <SortHeader label="Last Active" sortKey="lastActiveAt" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <SortHeader label="Status" sortKey="status" activeSortKey={sortKey} sortDir={sortDir} onSort={handleSort} />
               <th className="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {paged.length === 0 ? (
-              <tr><td colSpan={11} className="px-4 py-12 text-center text-gray-400">No students found.</td></tr>
+              <tr><td colSpan={10} className="px-4 py-12 text-center text-gray-400">No students found.</td></tr>
             ) : (
               paged.map((student) => (
                 <tr key={student.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-4 py-3 text-gray-500 font-mono text-xs">{student.id}</td>
                   <td className="px-4 py-3">
                     <button onClick={() => onViewProfile?.(student)} className="font-medium text-gray-900 hover:text-blue-600 transition-colors text-left">
-                      {student.name}
+                      {student.fullName || "Unnamed student"}
                     </button>
                   </td>
                   <td className="px-4 py-3 text-gray-600">{student.email}</td>
-                  <td className="px-4 py-3 text-gray-600">{student.class}</td>
-                  <td className="px-4 py-3 text-gray-600">{student.grade}</td>
-                  <td className="px-4 py-3 text-gray-500 max-w-[150px] truncate">{student.school}</td>
-                  <td className="px-4 py-3 text-gray-600">{student.questionsSolved}</td>
+                  <td className="px-4 py-3 text-gray-600">{student.class || "—"}</td>
+                  <td className="px-4 py-3 text-gray-600">{student.grade || "—"}</td>
+                  <td className="px-4 py-3 text-gray-500 max-w-[150px] truncate">{student.school || "—"}</td>
+                  <td className="px-4 py-3 text-gray-600">{student.questionsSolved ?? 0}</td>
                   <td className="px-4 py-3">
-                    <span className={`font-medium ${getScoreColor(student.avgScore)}`}>{student.avgScore}%</span>
+                    <span className={`font-medium ${getScoreColor(student.averageScore ?? 0)}`}>{student.averageScore ?? 0}%</span>
                   </td>
-                  <td className="px-4 py-3">
-                    <span className={`font-medium ${student.attendance >= 80 ? "text-emerald-600" : student.attendance >= 60 ? "text-blue-600" : student.attendance >= 40 ? "text-amber-600" : "text-rose-600"}`}>
-                      {student.attendance}%
-                    </span>
-                  </td>
-                  <td className="px-4 py-3"><StatusBadge status={student.status} size="sm" /></td>
+                  <td className="px-4 py-3 text-gray-600">{formatDate(student.lastActiveAt)}</td>
+                  <td className="px-4 py-3"><StatusBadge status={isInactive(student) ? "inactive" : student.status || "active"} size="sm" /></td>
                   <td className="px-4 py-3 text-right">
-                    <button onClick={() => onViewProfile?.(student)} className="min-h-[44px] min-w-[44px] p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" aria-label={`View ${student.name} profile`}>
-                      👁
-                    </button>
+                    <div className="flex items-center justify-end gap-1">
+                      <button onClick={() => onViewProfile?.(student)} className="min-h-[44px] min-w-[44px] p-2 text-blue-600 hover:bg-blue-50 rounded-xl transition-colors" aria-label={`View ${student.fullName || "student"} profile`}>
+                        👁
+                      </button>
+                      {onToggleStatus && (
+                        <button
+                          onClick={() => onToggleStatus(student)}
+                          className="min-h-[44px] min-w-[44px] p-2 rounded-xl transition-colors text-gray-600 hover:bg-gray-100"
+                          aria-label={isInactive(student) ? `Reactivate ${student.fullName || "student"}` : `Deactivate ${student.fullName || "student"}`}
+                          title={isInactive(student) ? "Reactivate account" : "Deactivate account"}
+                        >
+                          {isInactive(student) ? "✅" : "🚫"}
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))

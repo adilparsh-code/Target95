@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "@/app/components/ui/Modal";
 import Button from "@/app/components/ui/Button";
 
@@ -12,11 +12,13 @@ function Field({ label, children }) { return <label className="block space-y-1">
 const inputClass = "w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200";
 
 export default function ContentEditor({ entity, item, isOpen, onClose, onSave }) {
-  const [form, setForm] = useState(entity === "questions" ? blankQuestion : blankContent);
+  // Initialized once per mount — parents pass a `key` so the editor resets
+  // whenever the dialog opens or the edit target changes (no sync effect).
+  const [form, setForm] = useState(() =>
+    item ? { ...(entity === "questions" ? blankQuestion : blankContent), ...item } : (entity === "questions" ? blankQuestion : blankContent)
+  );
   const [saving, setSaving] = useState(false);
   const isQuestion = entity === "questions";
-
-  useEffect(() => setForm(item ? { ...(isQuestion ? blankQuestion : blankContent), ...item } : (isQuestion ? blankQuestion : blankContent)), [item, isOpen, isQuestion]);
   const update = (key, value) => setForm((current) => ({ ...current, [key]: value }));
   const submit = async (event) => {
     event.preventDefault();

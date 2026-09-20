@@ -67,7 +67,36 @@ export const DEMO_ARTICLE = {
   metaDescription: "A practical guide for school students on using AI for explanations, practice, revision and coding without becoming dependent on it.",
   keywords: ["AI for students", "AI learning", "responsible AI", "study with AI", "Target95"],
   publishedAt: new Date("2026-09-08T00:00:00.000Z"),
-  content: `## AI should be your study partner, not your answer machine\n\nArtificial intelligence can explain a difficult concept in simpler words, give you practice questions, help you find mistakes in code and suggest ways to revise. But there is an important difference between **using AI to learn** and **using AI to avoid learning**.\n\nThe best approach is simple: let AI speed up the parts of studying that need guidance while keeping the thinking, practice and final understanding with you.\n\n## 1. Ask for an explanation, not just an answer\n\nIf a chapter feels confusing, ask AI to explain the concept step by step. You can also ask for a school-level explanation, an example, and then a short question to test whether you understood it.\n\n## 2. Use AI to practise\n\nOnce you understand a topic, ask for questions at your level. Try solving them without looking at the solution. Then compare your approach and ask AI to explain only the part where your reasoning went wrong.\n\n## 3. Make revision active\n\nAI can turn your notes into flashcards, quick quizzes, short-answer questions or a chapter checklist. But do not simply read the generated material again and again. Close the notes and try to recall the ideas yourself.\n\n## 4. Be careful with facts\n\nAI systems can sometimes produce incorrect information with confidence. For board notices, dates, deadlines, eligibility rules, fees and other current information, verify important claims against the relevant official source.\n\n## 5. For coding, understand every line\n\nIf AI writes a Java or Python program for you, do not submit it immediately. Read the code and make sure you can explain the variables, loops, inputs and logic yourself.\n\n## A simple rule to remember\n\n**Use AI to reduce confusion, increase practice and get feedback — not to remove the thinking from your study.**\n`,
+  content: `## AI should be your study partner, not your answer machine
+
+Artificial intelligence can explain a difficult concept in simpler words, give you practice questions, help you find mistakes in code and suggest ways to revise. But there is an important difference between **using AI to learn** and **using AI to avoid learning**.
+
+The best approach is simple: let AI speed up the parts of studying that need guidance while keeping the thinking, practice and final understanding with you.
+
+## 1. Ask for an explanation, not just an answer
+
+If a chapter feels confusing, ask AI to explain the concept step by step. You can also ask for a school-level explanation, an example, and then a short question to test whether you understood it.
+
+## 2. Use AI to practise
+
+Once you understand a topic, ask for questions at your level. Try solving them without looking at the solution. Then compare your approach and ask AI to explain only the part where your reasoning went wrong.
+
+## 3. Make revision active
+
+AI can turn your notes into flashcards, quick quizzes, short-answer questions or a chapter checklist. But do not simply read the generated material again and again. Close the notes and try to recall the ideas yourself.
+
+## 4. Be careful with facts
+
+AI systems can sometimes produce incorrect information with confidence. For board notices, dates, deadlines, eligibility rules, fees and other current information, verify important claims against the relevant official source.
+
+## 5. For coding, understand every line
+
+If AI writes a Java or Python program for you, do not submit it immediately. Read the code and make sure you can explain the variables, loops, inputs and logic yourself.
+
+## A simple rule to remember
+
+**Use AI to reduce confusion, increase practice and get feedback — not to remove the thinking from your study.**
+`,
 };
 
 export function slugify(value) {
@@ -90,15 +119,12 @@ function withTimeout(promise, ms = FIRESTORE_TIMEOUT_MS) {
   return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
 }
 
-// Public reads never throw: if Firebase is unconfigured, unreachable, slow or
-// missing an index, the public Blog falls back to the built-in demo article.
 async function readPublished(buildQuery, fallback, limit) {
   try {
     const snapshot = await withTimeout(buildQuery(getAdminDb().collection("blog_articles")).limit(limit).get());
     const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     if (articles.length) return articles;
   } catch (error) {
-    // Log only the message: never the service-account payload.
     console.error("[blog] Firestore read failed, using fallback:", error?.message || error);
   }
   return fallback.slice(0, limit);
@@ -121,11 +147,15 @@ export async function listPublishedArticlesByCategory(category, limit = 30) {
   );
 }
 
-// Firestore Timestamp, JS Date, or ISO string -> "8 Sep 2026" (or null).
 export function formatArticleDate(value) {
   const date = value?.toDate ? value.toDate() : value ? new Date(value) : null;
   if (!date || Number.isNaN(date.getTime())) return null;
-  return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" });
+  return date.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "Asia/Kolkata",
+  });
 }
 
 export async function getTopic(topicId) {
@@ -137,13 +167,29 @@ export async function getTopic(topicId) {
 export async function upsertTopic(topic) {
   const db = getAdminDb();
   const ref = db.collection("blog_topics").doc(slugify(topic.title));
-  await ref.set({ ...topic, slug: slugify(topic.title), status: topic.status || "idea", updatedAt: FieldValue.serverTimestamp(), createdAt: FieldValue.serverTimestamp() }, { merge: true });
+  const existing = await ref.get();
+  const payload = {
+    ...topic,
+    slug: slugify(topic.title),
+    status: topic.status || "idea",
+    updatedAt: FieldValue.serverTimestamp(),
+  };
+  if (!existing.exists) payload.createdAt = FieldValue.serverTimestamp();
+  await ref.set(payload, { merge: true });
   return ref.id;
 }
 
 export async function createArticle(article) {
   const db = getAdminDb();
   const ref = db.collection("blog_articles").doc(article.slug || slugify(article.title));
-  await ref.set({ ...article, slug: article.slug || slugify(article.title), status: article.status || "draft", updatedAt: FieldValue.serverTimestamp(), createdAt: FieldValue.serverTimestamp() }, { merge: true });
+  const existing = await ref.get();
+  const payload = {
+    ...article,
+    slug: article.slug || slugify(article.title),
+    status: article.status || "draft",
+    updatedAt: FieldValue.serverTimestamp(),
+  };
+  if (!existing.exists) payload.createdAt = FieldValue.serverTimestamp();
+  await ref.set(payload, { merge: true });
   return ref.id;
 }

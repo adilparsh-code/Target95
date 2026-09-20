@@ -80,18 +80,52 @@ export function slugify(value) {
     .slice(0, 90);
 }
 
+const FIRESTORE_TIMEOUT_MS = 5000;
+
+function withTimeout(promise, ms = FIRESTORE_TIMEOUT_MS) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`Firestore request timed out after ${ms}ms`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+// Public reads never throw: if Firebase is unconfigured, unreachable, slow or
+// missing an index, the public Blog falls back to the built-in demo article.
+async function readPublished(buildQuery, fallback, limit) {
+  try {
+    const snapshot = await withTimeout(buildQuery(getAdminDb().collection("blog_articles")).limit(limit).get());
+    const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    if (articles.length) return articles;
+  } catch (error) {
+    // Log only the message: never the service-account payload.
+    console.error("[blog] Firestore read failed, using fallback:", error?.message || error);
+  }
+  return fallback.slice(0, limit);
+}
+
 export async function listPublishedArticles(limit = 30) {
-  const snapshot = await getAdminDb().collection("blog_articles").where("status", "==", "published").orderBy("publishedAt", "desc").limit(limit).get();
-  const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  return articles.length ? articles : [DEMO_ARTICLE].slice(0, limit);
+  return readPublished(
+    (col) => col.where("status", "==", "published").orderBy("publishedAt", "desc"),
+    [DEMO_ARTICLE],
+    limit
+  );
 }
 
 export async function listPublishedArticlesByCategory(category, limit = 30) {
   if (!BLOG_CATEGORIES.includes(category)) return [];
-  const snapshot = await getAdminDb().collection("blog_articles").where("status", "==", "published").where("category", "==", category).orderBy("publishedAt", "desc").limit(limit).get();
-  const articles = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  if (articles.length) return articles;
-  return category === DEMO_ARTICLE.category ? [DEMO_ARTICLE].slice(0, limit) : [];
+  return readPublished(
+    (col) => col.where("status", "==", "published").where("category", "==", category).orderBy("publishedAt", "desc"),
+    category === DEMO_ARTICLE.category ? [DEMO_ARTICLE] : [],
+    limit
+  );
+}
+
+// Firestore Timestamp, JS Date, or ISO string -> "8 Sep 2026" (or null).
+export function formatArticleDate(value) {
+  const date = value?.toDate ? value.toDate() : value ? new Date(value) : null;
+  if (!date || Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric", timeZone: "Asia/Kolkata" });
 }
 
 export async function getTopic(topicId) {

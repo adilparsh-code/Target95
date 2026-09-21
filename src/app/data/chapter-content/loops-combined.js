@@ -82,7 +82,6 @@ const chapterLoopsCombined = {
       "Counting a fixed number of items, such as processing 20 records — a natural fit for for.",
       "Reading values until a special value or condition appears — a natural fit for while.",
       "Showing a menu once and then asking whether the user wants to continue — a natural fit for do-while."
-    
     ],
     "commonMistakes": [
       "Initialize the control variable before the loop when the loop form requires it.",
@@ -3434,152 +3433,72 @@ const chapterLoopsCombined = {
   ],
   "vivaQuestions": [
     {
-      "id": "for-loop-vv-1",
-      "question": "Viva question 1",
-      "answer": "Answer"
+      "id": "loops-vv-1",
+      "question": "Why is a for loop called an entry-controlled loop?",
+      "answer": "Because the condition is tested before the body executes. If the condition is false initially, the loop body never runs even once."
     },
     {
-      "id": "for-loop-vv-2",
-      "question": "Viva question 2",
-      "answer": "Answer"
+      "id": "loops-vv-2",
+      "question": "When is a while loop preferred over a for loop?",
+      "answer": "When the number of iterations is not known in advance and depends on a condition evaluated at runtime, such as reading values until a sentinel is entered."
     },
     {
-      "id": "for-loop-vv-3",
-      "question": "Viva question 3",
-      "answer": "Answer"
+      "id": "loops-vv-3",
+      "question": "What happens if you omit the update statement in a for loop?",
+      "answer": "The loop variable never changes, so the condition remains true forever and the loop becomes an infinite loop."
     },
     {
-      "id": "for-loop-vv-4",
-      "question": "Viva question 4",
-      "answer": "Answer"
+      "id": "loops-vv-4",
+      "question": "How is a do-while loop different from a while loop?",
+      "answer": "A do-while loop is exit-controlled: its body executes at least once because the condition is checked only after the body runs."
     },
     {
-      "id": "for-loop-vv-5",
-      "question": "Viva question 5",
-      "answer": "Answer"
+      "id": "loops-vv-5",
+      "question": "Can a for loop have an empty body?",
+      "answer": "Yes. If the loop ends with a semicolon, it runs with an empty body and only the initialisation, condition and update parts execute."
     },
     {
-      "id": "for-loop-vv-6",
-      "question": "Viva question 6",
-      "answer": "Answer"
+      "id": "loops-vv-6",
+      "question": "What is a nested loop and when is the inner loop re-initialised?",
+      "answer": "A loop written inside another loop. The inner loop is fully re-initialised and completed once for every single iteration of the outer loop."
     },
     {
-      "id": "for-loop-vv-7",
-      "question": "Viva question 7",
-      "answer": "Answer"
+      "id": "loops-vv-7",
+      "question": "How many times does a do-while loop run if its condition is false from the start?",
+      "answer": "Exactly once, because the body executes before the condition is tested for the first time."
     },
     {
-      "id": "for-loop-vv-8",
-      "question": "Viva question 8",
-      "answer": "Answer"
+      "id": "loops-vv-8",
+      "question": "What is the purpose of the break statement inside a loop?",
+      "answer": "It terminates the loop immediately and transfers control to the first statement after the loop."
     },
     {
-      "id": "for-loop-vv-9",
-      "question": "Viva question 9",
-      "answer": "Answer"
+      "id": "loops-vv-9",
+      "question": "How does continue differ from break in a loop?",
+      "answer": "continue skips the remaining statements of the current iteration and jumps to the next iteration, while break exits the loop completely."
     },
     {
-      "id": "for-loop-vv-10",
-      "question": "Viva question 10",
-      "answer": "Answer"
+      "id": "loops-vv-10",
+      "question": "Why must loop control variables be initialised before the loop?",
+      "answer": "An uninitialised variable holds a garbage value, so the condition test is unpredictable and the loop may run zero times or forever."
     },
     {
-      "id": "for-loop-vv-11",
-      "question": "Viva question 11",
-      "answer": "Answer"
+      "id": "loops-vv-11",
+      "question": "What is an infinite loop? Give one example.",
+      "answer": "A loop whose condition never becomes false, such as for (;;) or while (true). It must be exited with break or the program hangs."
     },
     {
-      "id": "for-loop-vv-12",
-      "question": "Viva question 12",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-13",
-      "question": "Viva question 13",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-14",
-      "question": "Viva question 14",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-15",
-      "question": "Viva question 15",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-16",
-      "question": "Viva question 16",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-17",
-      "question": "Viva question 17",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-18",
-      "question": "Viva question 18",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-19",
-      "question": "Viva question 19",
-      "answer": "Answer"
-    },
-    {
-      "id": "for-loop-vv-20",
-      "question": "Viva question 20",
-      "answer": "Answer"
+      "id": "loops-vv-12",
+      "question": "Which loop is best suited for menu-driven programs and why?",
+      "answer": "The do-while loop, because the menu must be displayed and a choice accepted at least once before testing whether to repeat."
     }
   ],
   "practiceTest": {
-    "title": "FOR Loop — Practice Test\n\nDO-WHILE Loop - Practice Test",
-    "totalMarks": 75,
-    "timeLimit": "30 minutes",
+    "title": "Loops — Combined Practice Test",
+    "totalMarks": 50,
+    "timeLimit": "45 minutes",
     "sections": [
       {
-        "title": "Section A — MCQs (5 marks)",
-        "marks": 5,
-        "questions": [
-          {
-            "id": "for-loop-pt-1",
-            "question": "MCQ",
-            "options": [
-              "A",
-              "B",
-              "C",
-              "D"
-            ],
-            "answer": 0
-          }
-        ]
-      },
-      {
-        "title": "Section B — Output (10 marks)",
-        "marks": 10,
-        "questions": [
-          {
-            "id": "for-loop-pt-2",
-            "question": "Output",
-            "answer": "Answer"
-          }
-        ]
-      },
-      {
-        "title": "Section C — Programming (10 marks)",
-        "marks": 10,
-        "questions": [
-          {
-            "id": "for-loop-pt-3",
-            "question": "Program",
-            "marks": 5
-          }
-        ]
-      },
-      {
-        "name": "Section A: Objective Questions",
         "marks": 10,
         "questions": [
           {
@@ -3637,10 +3556,10 @@ const chapterLoopsCombined = {
             ],
             "answer": 2
           }
-        ]
+        ],
+        "title": "Section A: Objective Questions"
       },
       {
-        "name": "Section B: Output Questions",
         "marks": 10,
         "questions": [
           {
@@ -3658,10 +3577,10 @@ const chapterLoopsCombined = {
             "question": "What is the output?\nint i = 1;\ndo {\n    int j = 1;\n    do {\n        System.out.print(i * j + \" \");\n        j++;\n    } while (j <= 2);\n    i++;\n} while (i <= 3);",
             "answer": "1 2 2 4 3 6"
           }
-        ]
+        ],
+        "title": "Section B: Output Questions"
       },
       {
-        "name": "Section C: Programming Questions",
         "marks": 20,
         "questions": [
           {
@@ -3679,10 +3598,10 @@ const chapterLoopsCombined = {
             "question": "Write a program using do-while loop to check if a number is prime.",
             "answer": "boolean isPrime = true;\nint i = 2;\ndo {\n    if (num % i == 0) {\n        isPrime = false;\n        break;\n    }\n    i++;\n} while (i <= num/2);"
           }
-        ]
+        ],
+        "title": "Section C: Programming Questions"
       },
       {
-        "name": "Section D: HOTS (Higher Order Thinking Skills)",
         "marks": 10,
         "questions": [
           {
@@ -3696,10 +3615,10 @@ const chapterLoopsCombined = {
             "question": "Trace the output:\nint i = 1;\ndo {\n    int j = 1;\n    do {\n        System.out.print(j + \" \");\n        j++;\n    } while (j <= i);\n    System.out.println();\n    i++;\n} while (i <= 5);",
             "answer": "1\n1 2\n1 2 3\n1 2 3 4\n1 2 3 4 5"
           }
-        ]
+        ],
+        "title": "Section D: HOTS (Higher Order Thinking Skills)"
       }
     ],
-    "duration": "45 minutes",
     "instructions": "Attempt all questions. Write programs with proper indentation and comments."
   },
   "chapterSummary": {
@@ -3714,32 +3633,32 @@ const chapterLoopsCombined = {
       "break terminates the loop, while continue skips the remaining body of the current iteration and proceeds with the next loop cycle."
     ],
     "skillsLearned": [
-      "Skill 1",
-      "Skill 2",
-      "Skill 3",
-      "Skill 4"
+      "Write for, while and do-while loops for count-controlled and condition-controlled problems.",
+      "Trace loop execution with a trace table and predict the exact output of given code.",
+      "Detect and fix infinite loops caused by missing or incorrect loop-variable updates.",
+      "Use break and continue to control loop flow precisely, including inside nested loops."
     ]
   },
   "revisionNotes": [
     {
-      "title": "Note 1",
-      "content": "Content for note 1"
+      "title": "Trace Tables",
+      "content": "Write the value of the loop variable for every iteration in a small table. It makes output questions, especially nested loops, quick and error-free."
     },
     {
-      "title": "Note 2",
-      "content": "Content for note 2"
+      "title": "Count the Iterations",
+      "content": "For for (int i = 2; i <= 10; i += 2) the body runs 5 times. Convert between <= and < carefully; boundary mistakes cause off-by-one errors."
     },
     {
-      "title": "Note 3",
-      "content": "Content for note 3"
+      "title": "do-while Always Runs Once",
+      "content": "The body of a do-while loop executes before the first condition check, so expect output even when the condition starts false. This is a favourite exam trap."
     },
     {
-      "title": "Note 4",
-      "content": "Content for note 4"
+      "title": "break vs continue",
+      "content": "break leaves the whole loop; continue skips only the current iteration. Inside nested loops both affect the innermost loop only."
     },
     {
-      "title": "Note 5",
-      "content": "Content for note 5"
+      "title": "Pattern Questions",
+      "content": "Tables and triangle patterns use an outer loop for rows and an inner loop for columns. The inner loop bound usually depends on the outer loop variable."
     },
     {
       "title": "Key Term: while",

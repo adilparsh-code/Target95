@@ -39,6 +39,15 @@ export async function PATCH(request) {
     }
     if (!Object.keys(updates).length) return NextResponse.json({ ok: false, error: "No editable fields supplied" }, { status: 400 });
 
+    if (updates.keywords !== undefined) {
+      if (!Array.isArray(updates.keywords)) return NextResponse.json({ ok: false, error: "keywords must be an array" }, { status: 400 });
+      updates.keywords = updates.keywords.map((item) => String(item).trim()).filter(Boolean).slice(0, 20);
+    }
+    if (updates.editorNotes !== undefined) {
+      if (!Array.isArray(updates.editorNotes)) return NextResponse.json({ ok: false, error: "editorNotes must be an array" }, { status: 400 });
+      updates.editorNotes = updates.editorNotes.map((item) => String(item).trim()).filter(Boolean).slice(0, 20);
+    }
+
     updates.updatedAt = FieldValue.serverTimestamp();
     await getAdminDb().collection("blog_articles").doc(id).update(updates);
     return NextResponse.json({ ok: true, id });

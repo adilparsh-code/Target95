@@ -59,6 +59,12 @@ const cbse402Class10 = {
   practicalAssessment: { practicalExamination: 20, vivaVoce: 10, projectWorkFieldVisit: 10, portfolioPracticalFile: 10 },
 };
 
+// Unit factory — must be declared before the unit arrays below (TDZ).
+const makeUnit = (id, code, name, theory, practicalActivities = [], marks = null, hours = null) => ({
+  id, code: String(code), name, learningOutcomes: [], theory, practicalActivities,
+  chapters: [], ...(marks !== null ? { marks } : {}), ...(hours !== null ? { hours } : {}),
+});
+
 // CBSE 083 is mapped explicitly to the 2026-27 official syllabus.
 // Legacy class11/class12 files remain compatibility data only.
 const cbse083Class11Units = [
@@ -106,11 +112,6 @@ const cbse083Class12Units = [
     'Python-SQL connectivity and database operations from Python',
   ], ['Create/query databases and perform basic Python-SQL connectivity tasks'], 20),
 ];
-
-const makeUnit = (id, code, name, theory, practicalActivities = [], marks = null, hours = null) => ({
-  id, code: String(code), name, learningOutcomes: [], theory, practicalActivities,
-  chapters: [], ...(marks !== null ? { marks } : {}), ...(hours !== null ? { hours } : {}),
-});
 
 const cbse065Class11Units = [
   makeUnit('065-xi-u1', 1, 'Introduction to Computer System', ['Introduction to computer and computing: evolution of computing devices', 'Components of a computer system and their interconnections', 'Input/output devices', 'Computer memory: units, primary and secondary memory', 'Data deletion, recovery and related security concerns'], [], 10),

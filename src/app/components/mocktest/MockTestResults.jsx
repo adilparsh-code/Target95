@@ -159,7 +159,7 @@ export default function MockTestResults({ result, onRetry }) {
                         : item.isCorrect 
                           ? "border-green-300 dark:border-green-700 bg-white dark:bg-gray-800 text-green-800 dark:text-green-300" 
                           : "border-red-300 dark:border-red-700 bg-white dark:bg-gray-800 text-red-800 dark:text-red-300"
-                    }">
+                    }`">
                       {item.isMarkedForReview ? "Review" : item.isCorrect ? "Correct" : "Incorrect"}
                     </span>
                   </div>

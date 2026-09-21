@@ -77,52 +77,23 @@ const chapterLoopsCombined = {
     "sentinel value"
   ],
   "introduction": {
-    "description": "The `for` loop is a repetition control structure that allows you to efficiently write a loop that needs to execute a specific number of times. It combines three essential components — initialization, condition checking, and iteration — into a single, compact line. Think of it like a factory assembly line: you set up the starting point (initialization), define how long the line runs (condition), and specify how each item moves forward (iteration). The `for` loop is the most versatile and commonly used loop in Java, especially when you know exactly how many times you need to repeat a task.\n\nA while loop repeatedly executes a block of Java statements while a boolean condition remains true. It is entry-controlled, so the condition is checked before each iteration.\n\nThe `do-while` loop is a repetition control structure that executes a block of code at least once, and then repeatedly as long as a given condition is `true`. Unlike the `while` loop which is entry-controlled (checks condition before execution), the `do-while` loop is exit-controlled — the condition is checked AFTER each iteration. This guarantees that the loop body executes at least once, even if the condition is false initially. Think of it like a roller coaster: you must ride it at least once before you can decide whether to ride again. The safety check happens AFTER the ride, not before.",
+    "description": "Loops let a Java program repeat a set of instructions without writing the same code again and again. The three core loops in this chapter differ mainly in **when the condition is checked** and **how clearly the repetition pattern is known**.\n\n### The three loop choices\n\n**for** — use it when the repetition follows a clear counting pattern.\n\n**while** — use it when continuation depends on a condition and the number of repetitions is not fixed in advance.\n\n**do-while** — use it when the body must run at least once before the condition is checked.\n\nA useful mental model is: **for = count, while = check first, do-while = do first**.\n\nThe detailed examples below show the same idea in code so students can compare the three structures instead of memorising isolated definitions.",
     "realLifeExamples": [
-      "A teacher counting 30 students one by one to take attendance — the teacher knows there are exactly 30 students to check.",
-      "A factory worker assembling 100 products on a conveyor belt — the worker knows the exact count of items to process.",
-      "A chef adding ingredients one by one to a recipe — each ingredient is added in a specific order, and the chef knows how many ingredients there are.",
-      "A security guard checking 50 visitors' IDs at a gate — the guard knows there are 50 visitors to verify.",
-      "A cashier printing 20 receipts at the end of the day — the cashier knows the exact number of receipts to print.",
-      "A librarian shelving 40 books — the librarian knows there are 40 books to organize.",
-      "A coach counting 11 players on a sports team — the coach knows there are exactly 11 players to account for.",
-      "A chef baking 12 cupcakes — each cupcake is placed in the tray one at a time, and the chef knows there are 12 slots.",
-      "Reading values until a sentinel value is entered.",
-      "Continuing a menu until the user chooses Exit.",
-      "Processing items while a condition remains true.",
-      "A roller coaster ride — you must ride at least once before deciding to ride again (exit check).",
-      "A teacher taking attendance — calls out each student's name at least once, then checks if more students remain.",
-      "A cashier processing the first customer — serves at least one customer before checking if more are in line.",
-      "A doctor seeing patients — sees the first patient, then checks if more patients are waiting.",
-      "A vending machine — dispenses at least one item before checking if more selections are made.",
-      "A waiter taking the first order — takes at least one order before checking for more customers.",
-      "A security guard doing a final check — checks the premises at least once before deciding to continue.",
-      "A lifeguard doing an initial sweep — checks the pool at least once before deciding to continue monitoring."
+      "Counting a fixed number of items, such as processing 20 records — a natural fit for for.",
+      "Reading values until a special value or condition appears — a natural fit for while.",
+      "Showing a menu once and then asking whether the user wants to continue — a natural fit for do-while."
+    
     ],
     "commonMistakes": [
-      "Using `=` (assignment) instead of `==` (comparison) in the condition — this causes a compilation error for primitive types.",
-      "Forgetting to initialize the loop variable, causing a compilation error.",
-      "Forgetting to increment/decrement the loop variable, causing an infinite loop.",
-      "Using the wrong increment operator — `i++` vs `++i` can matter in complex expressions.",
-      "Declaring the loop variable inside the for loop and trying to access it outside — scope error.",
-      "Off-by-one errors — using `< n` instead of `<= n` or vice versa, causing one extra or one fewer iteration.",
-      "Putting a semicolon after the for loop header — `for(int i=0; i<5; i++);` — this creates an empty loop body.",
-      "Modifying the loop variable inside the loop body, which can cause unexpected behavior or infinite loops.",
-      "Using floating-point numbers in the loop counter — `for(double i=0.0; i<1.0; i+=0.1)` can cause precision issues.",
-      "Not using braces `{}` for multi-statement loop bodies, leading to only the first statement being repeated.",
-      "Forgetting to initialise the loop variable.",
-      "Forgetting to update the loop variable.",
-      "Using a condition that never becomes false.",
-      "Off-by-one errors in loop conditions.",
-      "Resetting a control variable at the wrong place.",
-      "Forgetting the semicolon after while(condition) — causes compilation error. The syntax is do { } while(condition); with a semicolon.",
-      "Using do-while when a while loop would be more appropriate — do-while is only needed when you need at least one execution.",
-      "Creating infinite loops by not updating the loop variable inside the loop body.",
-      "Using the wrong condition direction — using i++ with i > 0 instead of i >= 0.",
-      "Off-by-one errors in the condition — using i <= n when you need i < n, or vice versa.",
-      "Not using braces {} for multi-statement loop bodies, leading to only the first statement being repeated.",
-      "Using assignment = instead of comparison == in the condition.",
-      "Confusing do-while with while — do-while always executes at least once, while may not execute at all."
+[
+      "Initialize the control variable before the loop when the loop form requires it.",
+      "Make sure the condition and update move the loop toward termination.",
+      "Check boundary conditions carefully: < and <= do not produce the same number of iterations.",
+      "Do not place a stray semicolon after a for or while header unless an empty loop is intentional.",
+      "For do-while, remember the mandatory semicolon after while(condition).",
+      "Re-initialize the inner-loop variable each time an outer loop starts.",
+      "When tracing output, record the control variable after the update as well as before the next condition check."
+]
     ],
     "whereUsed": [
       "Iterating over arrays and collections to process each element.",
@@ -150,7 +121,7 @@ const chapterLoopsCombined = {
     ]
   },
   "theoryNotes": {
-    "beginnerExplanation": "The `for` loop is a control flow statement that repeats a block of code a specific number of times. It is written with three parts separated by semicolons: initialization (executed once at the start), condition (checked before each iteration — if true, the loop body runs; if false, the loop ends), and iteration (executed after each loop body execution, typically incrementing or decrementing the loop variable). For example, `for(int i=1; i<=5; i++)` means: start with i=1, keep running while i is less than or equal to 5, and increase i by 1 after each run. This loop will execute exactly 5 times.\n\nA while loop has three logical parts: initialise before the loop, test the condition, and update inside the body. If the condition is false at the beginning, the body runs zero times.\n\nThe `do-while` loop is similar to the `while` loop but with one key difference: it is exit-controlled. This means the loop body executes FIRST, and THEN the condition is checked. Because of this, the loop body is guaranteed to execute at least once, even if the condition is false initially. The syntax includes a semicolon after the while(condition) — this is mandatory and a common source of errors. The do-while loop is perfect for menu-driven programs where you want the menu to display at least once before checking if the user wants to continue.",
+    "beginnerExplanation": "## The Big Idea\n\nA loop is simply a controlled repetition. Instead of writing the same statement five times, Java lets us describe **how the repetition should begin, continue and stop**.\n\nFor the three loops in this chapter, keep one question in mind: **When is the condition checked?**\n\n- `for`: condition is checked before each iteration.\n- `while`: condition is checked before each iteration.\n- `do-while`: condition is checked after the body, so the body runs at least once.\n\n### 1. for — when the count is clear\n\nUse `for` when a counter naturally controls the repetition.\n\n`for (int i = 1; i <= 5; i++)` reads as **start at 1 → check up to 5 → move to the next value**.\n\n### 2. while — when the condition leads\n\nUse `while` when the condition is the main reason to continue. The loop may execute zero times if that condition is false from the beginning.\n\n### 3. do-while — when one execution is guaranteed\n\nUse `do-while` when the first execution must happen before you decide whether to continue. This makes it especially useful for menu-driven programs and input validation.\n\n### The exam lens\n\nMost loop-tracing questions become easier when you write the control flow in order:\n\n**for / while:** initialize → check → execute → update\n\n**do-while:** initialize → execute → update → check\n\nThat difference is more important than memorising long definitions.",
     "importantPoints": [
       "The for loop has three parts: initialization, condition, and iteration (increment/decrement).",
       "The initialization part is executed only once, at the beginning of the loop.",

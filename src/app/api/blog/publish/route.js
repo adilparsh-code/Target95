@@ -5,15 +5,10 @@ import { requireBlogAdmin } from "../../../lib/blog-admin-auth";
 
 export const runtime = "nodejs";
 
-function cronAuthorized(request) {
-  const secret = process.env.BLOG_CRON_SECRET;
-  return Boolean(secret) && request.headers.get("authorization") === `Bearer ${secret}`;
-}
-
 export async function POST(request) {
   try {
-    // Keep server automation compatible while allowing the human admin dashboard to publish.
-    if (!cronAuthorized(request)) await requireBlogAdmin(request);
+    // Publishing is intentionally human-admin-only. AI/cron credentials cannot publish. 
+    await requireBlogAdmin(request);
 
     const body = await request.json();
     const id = String(body?.id || "").trim();

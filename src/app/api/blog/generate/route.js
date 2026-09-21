@@ -75,7 +75,8 @@ Hard rules:
   }
 
   const result = await response.json();
-  const text = result.output_text || "";
+  const text = result.output?.flatMap((item) => item.content || [])
+    .find((item) => item.type === "output_text")?.text || "";
   if (!text) throw new Error("AI returned no draft text.");
   return JSON.parse(text);
 }
@@ -93,7 +94,9 @@ export async function POST(request) {
     if (topic.status === "published") return NextResponse.json({ ok: false, error: "Published topics cannot be regenerated" }, { status: 409 });
 
     const article = await generateDraft(topic);
-    const articleId = await createArticle({
+    let articleId;
+    try {
+      articleId = await createArticle({
       ...article,
       slug: slugify(article.title),
       category: topic.category,
@@ -103,7 +106,13 @@ export async function POST(request) {
       status: "review",
       needsHumanReview: true,
       aiModel: process.env.BLOG_AI_MODEL || "gpt-5.6-luna",
-    });
+      });
+    } catch (error) {
+      if (error?.code === 6 || /already exists/i.test(error?.message || "")) {
+        return NextResponse.json({ ok: false, error: "An article with this slug already exists. Regenerate with a distinct title or review the existing article." }, { status: 409 });
+      }
+      throw error;
+    }
 
     return NextResponse.json({ ok: true, articleId, status: "review", needsHumanReview: true, message: "Draft generated. Human editorial review is required before publication." });
   } catch (error) {

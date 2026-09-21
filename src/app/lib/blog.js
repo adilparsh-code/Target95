@@ -147,15 +147,89 @@ export async function listPublishedArticlesByCategory(category, limit = 30) {
   );
 }
 
-export function formatArticleDate(value) {
+// Mirrors metadataBase in src/app/layout.js and siteUrl in src/app/sitemap.js.
+export const BLOG_SITE_URL = "https://target95.vercel.app";
+
+export function articlePath(article) {
+  return `/blog/${article.category}/${article.slug}`;
+}
+
+// Firestore Timestamp, JS Date, or ISO string -> Date (or null).
+function toDateOrNull(value) {
   const date = value?.toDate ? value.toDate() : value ? new Date(value) : null;
-  if (!date || Number.isNaN(date.getTime())) return null;
+  return date && !Number.isNaN(date.getTime()) ? date : null;
+}
+
+// -> "8 Sep 2026" (or null).
+export function formatArticleDate(value) {
+  const date = toDateOrNull(value);
+  if (!date) return null;
   return date.toLocaleDateString("en-IN", {
     day: "numeric",
     month: "short",
     year: "numeric",
     timeZone: "Asia/Kolkata",
   });
+}
+
+// -> "2026-09-08T00:00:00.000Z" (or null). For <time dateTime> and structured data.
+export function toIsoDate(value) {
+  return toDateOrNull(value)?.toISOString() || null;
+}
+
+// ~200 words per minute; never less than 1.
+export function estimateReadingMinutes(content) {
+  const words = String(content || "").replace(/[#*_`>~]/g, " ").split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+// `articles` is newest-first (as returned by the list functions).
+// newer/older are the neighbours inside the same category.
+export function getAdjacentArticles(articles, current) {
+  const sameCategory = articles.filter((item) => item.category === current.category);
+  const index = sameCategory.findIndex((item) => item.slug === current.slug);
+  if (index === -1) return { newer: null, older: null };
+  return { newer: sameCategory[index - 1] || null, older: sameCategory[index + 1] || null };
+}
+
+// Same-category articles first, then the rest. `exclude` is a list of slugs to skip.
+export function getRelatedArticles(articles, current, { limit = 3, exclude = [] } = {}) {
+  const others = articles.filter((item) => item.slug !== current.slug && !exclude.includes(item.slug));
+  const sameCategory = others.filter((item) => item.category === current.category);
+  const rest = others.filter((item) => item.category !== current.category);
+  return [...sameCategory, ...rest].slice(0, limit);
+}
+
+// Only routes that exist in src/app. Routes gated by src/proxy.js are labelled "(sign-in required)".
+// Add a category key below to give it its own set.
+const LEARNING_LINK = {
+  study: { href: "/study", label: "Study Center", description: "Structured, chapter-based study material." },
+  practice: { href: "/practice", label: "Practice", description: "Practise what you have learned." },
+  javaPractice: { href: "/practice/java", label: "Java Practice Lab", description: "Progressive, syllabus-aligned Java coding practice." },
+  python: { href: "/python", label: "Python Programming", description: "Learn Python on Target95+." },
+  library: { href: "/programming-library", label: "Programming Library", description: "Explore the programming library." },
+  questionBank: { href: "/question-bank", label: "Question Bank", description: "Browse the question bank." },
+  mockTest: { href: "/mock-test", label: "Mock Tests", description: "Take a mock test (sign-in required)." },
+  aiTutor: { href: "/ai-tutor", label: "AI Tutor", description: "Get help from the AI Tutor (sign-in required)." },
+  roadmap: { href: "/roadmap", label: "Study Roadmap", description: "ICSE Class 9/10 and ISC Class 11/12 Computer Science." },
+  icseX: { href: "/icse/class-x", label: "ICSE Class X", description: "Computer Applications for ICSE Class X." },
+  iscXii: { href: "/isc/class-xii", label: "ISC Class XII", description: "Computer Science for ISC Class XII." },
+  cbse: { href: "/cbse", label: "CBSE", description: "CBSE curriculum 2026–27." },
+};
+
+const CATEGORY_LEARNING_LINKS = {
+  "ai-technology": ["aiTutor", "practice", "study"],
+  "education-board-updates": ["icseX", "iscXii", "cbse"],
+  "school-subjects": ["study", "practice", "questionBank"],
+  "school-coding": ["study", "javaPractice", "python"],
+  development: ["library", "roadmap", "study"],
+  programming: ["library", "practice", "study"],
+  opportunities: ["roadmap", "mockTest", "practice"],
+  "trending-explainers": ["study", "aiTutor", "roadmap"],
+};
+
+export function getLearningLinks(category) {
+  return (CATEGORY_LEARNING_LINKS[category] || ["study", "practice", "mockTest"]).map((key) => LEARNING_LINK[key]);
 }
 
 export async function getTopic(topicId) {

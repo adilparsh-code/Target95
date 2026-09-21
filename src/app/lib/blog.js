@@ -249,7 +249,7 @@ export async function upsertTopic(topic) {
     updatedAt: FieldValue.serverTimestamp(),
   };
   if (!existing.exists) payload.createdAt = FieldValue.serverTimestamp();
-  await ref.set(payload, { merge: true });
+  await ref.create(payload);
   return ref.id;
 }
 

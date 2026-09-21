@@ -52,6 +52,23 @@ function getChapterClientContent(slug) {
   }
 }
 
+export async function generateMetadata({ params }) {
+  const { chapter: slug } = await params;
+  const chapter = resolveStudyChapter(slug);
+  if (!chapter) return {};
+
+  const title = chapter.title || "Chapter";
+  const description =
+    chapter.description ||
+    `Learn ${title} for ICSE & ISC Computer Science with clear notes, solved examples and practice questions on Target95.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/Java/${slug}` },
+  };
+}
+
 export default async function ChapterPage({ params }) {
   const { chapter: slug } = await params;
   const chapter = resolveStudyChapter(slug);

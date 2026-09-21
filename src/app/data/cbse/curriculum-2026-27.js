@@ -59,21 +59,53 @@ const cbse402Class10 = {
   practicalAssessment: { practicalExamination: 20, vivaVoce: 10, projectWorkFieldVisit: 10, portfolioPracticalFile: 10 },
 };
 
-const class11Units = legacyCBSEClass11.units.map((unit) => ({
-  id: unit.id, code: String(unit.unitNumber), name: unit.title,
-  learningOutcomes: unit.chapters?.flatMap((chapter) => chapter.learningObjectives || []) || [],
-  theory: unit.chapters?.map((chapter) => chapter.title) || [],
-  practicalActivities: unit.chapters?.filter((chapter) => chapter.metadata?.isPractical).map((chapter) => chapter.title) || [],
-  chapters: unit.chapters || [],
-}));
+// CBSE 083 is mapped explicitly to the 2026-27 official syllabus.
+// Legacy class11/class12 files remain compatibility data only.
+const cbse083Class11Units = [
+  makeUnit('083-xi-u1', 1, 'Computer Systems and Organisation', [
+    'Basic computer organisation: hardware, software, input/output devices, CPU and memory',
+    'Types of software: operating systems, utilities, device drivers, programming tools and language translators',
+    'Operating system functions and user interface',
+    'Boolean logic, truth tables, De Morgan’s laws and logic circuits',
+    'Number systems: binary, octal, decimal and hexadecimal',
+  ], [], 10),
+  makeUnit('083-xi-u2', 2, 'Computational Thinking and Programming - 1', [
+    'Problem solving and computational thinking',
+    'Algorithms, flowcharts and basic programming concepts',
+    'Python data types, operators, expressions and input/output',
+    'Control flow: conditional statements and loops',
+    'Strings, lists, tuples and dictionaries',
+    'Functions and modular programming fundamentals',
+  ], ['Design, write, test and debug Python programs for prescribed problems'], 45),
+  makeUnit('083-xi-u3', 3, 'Society, Law, and Ethics', [
+    'Cyber safety, cyber ethics and cybercrime',
+    'Intellectual property rights and responsible technology use',
+    'Technology and society with consideration of gender and disability',
+    'Digital footprints, privacy and safe online behaviour',
+  ], [], 15),
+];
 
-const class12Units = legacyCBSEClass12?.units?.map((unit) => ({
-  id: unit.id, code: String(unit.unitNumber), name: unit.title,
-  learningOutcomes: unit.chapters?.flatMap((chapter) => chapter.learningObjectives || []) || [],
-  theory: unit.chapters?.map((chapter) => chapter.title) || [],
-  practicalActivities: unit.chapters?.filter((chapter) => chapter.metadata?.isPractical).map((chapter) => chapter.title) || [],
-  chapters: unit.chapters || [],
-})) || [];
+const cbse083Class12Units = [
+  makeUnit('083-xii-u1', 1, 'Computational Thinking and Programming – 2', [
+    'Revision of Python topics covered in Class XI',
+    'Functions: built-in, module and user-defined functions; arguments, parameters, scope and return values',
+    'Exception handling using try-except-finally',
+    'File handling: text, binary and CSV files; paths and file operations',
+    'Data structures: Stack and push/pop operations using lists',
+  ], ['Write and test Python programs using functions, exception handling, file handling and stacks'], 40),
+  makeUnit('083-xii-u2', 2, 'Computer Networks', [
+    'Network concepts, types and topologies',
+    'Networking devices and transmission media',
+    'Internet, web services and common protocols',
+    'Network security, cyber safety and basic troubleshooting',
+  ], ['Identify network components and apply basic network-security practices'], 10),
+  makeUnit('083-xii-u3', 3, 'Database Management', [
+    'Database concepts and relational data model',
+    'Tables, records, fields, keys and relationships',
+    'SQL queries, filtering, sorting, grouping and aggregate functions',
+    'Python-SQL connectivity and database operations from Python',
+  ], ['Create/query databases and perform basic Python-SQL connectivity tasks'], 20),
+];
 
 const makeUnit = (id, code, name, theory, practicalActivities = [], marks = null, hours = null) => ({
   id, code: String(code), name, learningOutcomes: [], theory, practicalActivities,
@@ -128,11 +160,11 @@ const seniorTrack = (code, name, category, pythonRole, pythonLibraries = [], sou
 
 const cbse083Class11 = {
   ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Computer_Science_SecP2_2026-27.pdf'),
-  parts: { partA: { name: 'Core Curriculum', units: class11Units }, partB: { name: 'Practical Topics', units: [] } },
+  parts: { partA: { name: 'Core Curriculum', units: cbse083Class11Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse083Class12 = {
   ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Computer_Science_SecP2_2026-27.pdf'),
-  parts: { partA: { name: 'Core Curriculum', units: class12Units }, partB: { name: 'Practical Topics', units: [] } },
+  parts: { partA: { name: 'Core Curriculum', units: cbse083Class12Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse065Class11 = {
   ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib'], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf'),

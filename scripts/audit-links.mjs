@@ -20,7 +20,7 @@ function walk(dir) {
 
 function routePattern(file) {
   let rel = path.relative(APP, file).replaceAll(path.sep, '/');
-  rel = rel.replace(/\/page\.(?:js|jsx|ts|tsx)$/, '');
+  rel = rel.replace(/(?:^|\/)page\.(?:js|jsx|ts|tsx)$/, '');
   if (!rel) return '/';
   return '/' + rel.split('/').map(seg => /^\[[^\]]+\]$/.test(seg) ? '*' : seg).join('/');
 }

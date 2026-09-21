@@ -25,7 +25,7 @@ export function getChapterContent(chapter, content = null, questions = null) {
 
     examples: normalizeExamples(sd.examples, content?.examples),
 
-    diagrams: normalizeDiagrams(sd.diagrams, content),
+    diagrams: normalizeDiagrams(chapter?.slug, sd.diagrams, content),
 
     practice: normalizePractice(
       content?.practiceTest || content?.practice
@@ -202,16 +202,34 @@ function normalizeKeyTerms(sd, content) {
   return null;
 }
 
+import icseJavaVisualRegistry from "../app/data/chapter-content/visuals/icseJavaVisualRegistry";
+
 /* -------------------------------------------------------------------------- */
 /* Diagrams                                                                  */
 /* -------------------------------------------------------------------------- */
 
-function normalizeDiagrams(sdDiagrams, content) {
+function normalizeDiagrams(chapterSlug, sdDiagrams, content) {
   const explicit =
     normalizeList(sdDiagrams) ||
     normalizeList(content?.diagrams);
 
   if (explicit) return explicit;
+
+  const registryVisuals = Array.isArray(icseJavaVisualRegistry)
+    ? icseJavaVisualRegistry
+        .filter((visual) => visual?.chapterSlug === chapterSlug && visual?.path)
+        .map((visual) => ({
+          id: visual.id,
+          type: "image",
+          title: visual.title,
+          explanation: visual.purpose || "Use this visual to connect the concept with the Java program flow.",
+          src: visual.path,
+          alt: visual.alt || visual.title,
+          caption: visual.caption || "",
+        }))
+    : [];
+
+  if (registryVisuals.length) return registryVisuals;
 
   const memoryModel = content?.theoryNotes?.memoryModel;
 

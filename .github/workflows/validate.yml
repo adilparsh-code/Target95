@@ -35,6 +35,10 @@ jobs:
         shell: bash
         run: npm run validate:data
 
+      - name: Audit internal links
+        shell: bash
+        run: npm run audit:links
+
       - name: Build application
         env:
           NODE_OPTIONS: --max-old-space-size=7168

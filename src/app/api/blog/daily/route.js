@@ -15,7 +15,7 @@ const EDITORIAL_QUEUE = [
 ];
 
 function authorized(request) {
-  const secret = process.env.BLOG_CRON_SECRET;
+  const secret = process.env.BLOG_CRON_SECRET || process.env.CRON_SECRET;
   return Boolean(secret) && request.headers.get("authorization") === `Bearer ${secret}`;
 }
 

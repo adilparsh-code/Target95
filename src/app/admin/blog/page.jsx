@@ -54,7 +54,16 @@ export default function BlogAdminPage() {
   async function save() {
     if (!selected) return;
     setBusy(true); setError(""); setMessage("");
-    try { await api("/api/blog/admin/articles", { method: "PATCH", body: JSON.stringify(selected) }); setMessage("Saved."); await loadArticles(); }
+    try {
+      const payload = {
+        ...selected,
+        keywords: String(selected.keywords || "").split(",").map((item) => item.trim()).filter(Boolean),
+        editorNotes: String(selected.editorNotes || "").split("\n").map((item) => item.trim()).filter(Boolean),
+      };
+      await api("/api/blog/admin/articles", { method: "PATCH", body: JSON.stringify(payload) });
+      setMessage("Saved.");
+      await loadArticles();
+    }
     catch (e) { setError(e.message); }
     finally { setBusy(false); }
   }
@@ -100,7 +109,11 @@ export default function BlogAdminPage() {
         <div className="mt-6 grid gap-6 lg:grid-cols-[360px_1fr]">
           <section className="space-y-3">
             {visible.length === 0 && <div className="rounded-xl border p-5 text-sm text-gray-500">No {status === "all" ? "articles" : status + " articles"} found.</div>}
-            {visible.map((article) => <button key={article.id} onClick={() => setSelected({ ...article, keywords: Array.isArray(article.keywords) ? article.keywords.join(", ") : article.keywords || "" })} className={`w-full rounded-xl border p-4 text-left ${selected?.id === article.id ? "ring-2 ring-black dark:ring-white" : ""}`}><div className="text-xs uppercase tracking-wide text-gray-500">{article.status} · {article.category}</div><div className="mt-1 font-semibold">{article.title}</div><div className="mt-1 text-xs text-gray-500">{article.id}</div></button>)}
+            {visible.map((article) => <button key={article.id} onClick={() => setSelected({
+              ...article,
+              keywords: Array.isArray(article.keywords) ? article.keywords.join(", ") : article.keywords || "",
+              editorNotes: Array.isArray(article.editorNotes) ? article.editorNotes.join("\n") : article.editorNotes || "",
+            })} className={`w-full rounded-xl border p-4 text-left ${selected?.id === article.id ? "ring-2 ring-black dark:ring-white" : ""}`}><div className="text-xs uppercase tracking-wide text-gray-500">{article.status} · {article.category}</div><div className="mt-1 font-semibold">{article.title}</div><div className="mt-1 text-xs text-gray-500">{article.id}</div></button>)}
           </section>
           <section className="rounded-xl border bg-white p-5 dark:bg-gray-900">
             {!selected ? <div className="flex min-h-96 items-center justify-center text-gray-500">Select an article to review.</div> : <div>

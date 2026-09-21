@@ -85,7 +85,6 @@ const chapterLoopsCombined = {
     
     ],
     "commonMistakes": [
-[
       "Initialize the control variable before the loop when the loop form requires it.",
       "Make sure the condition and update move the loop toward termination.",
       "Check boundary conditions carefully: < and <= do not produce the same number of iterations.",
@@ -93,7 +92,6 @@ const chapterLoopsCombined = {
       "For do-while, remember the mandatory semicolon after while(condition).",
       "Re-initialize the inner-loop variable each time an outer loop starts.",
       "When tracing output, record the control variable after the update as well as before the next condition check."
-]
     ],
     "whereUsed": [
       "Iterating over arrays and collections to process each element.",

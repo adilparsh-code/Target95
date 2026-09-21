@@ -4,7 +4,7 @@ import { EDITORIAL_TOPIC_POOL, BLOG_CATEGORIES, upsertTopic } from "../../../lib
 export const runtime = "nodejs";
 
 function authorized(request) {
-  const secret = process.env.BLOG_CRON_SECRET;
+  const secret = process.env.BLOG_CRON_SECRET || process.env.CRON_SECRET;
   if (!secret) return false;
   return request.headers.get("authorization") === `Bearer ${secret}`;
 }

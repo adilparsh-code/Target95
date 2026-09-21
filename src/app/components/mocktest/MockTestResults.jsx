@@ -187,7 +187,7 @@ export default function MockTestResults({ result, onRetry }) {
                   <div className="mt-2">
                     <button
                       type="button"
-                      onClick={() => window.location.href = `/ai-tutor?question=${encodeURIComponent(item.question.question)}`}
+                      onClick={() => { window.location.href = `/ai-tutor?question=${encodeURIComponent(item.question.question)}`; }}
                       className="inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

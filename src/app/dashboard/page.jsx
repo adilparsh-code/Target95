@@ -44,7 +44,7 @@ export default function DashboardPage() {
     },
     weeklyGoal: {
       current: overview.chaptersStarted,
-      target: overview.totalChapters || 7,
+      target: overview.totalChapters || 1,
       progress: overview.totalChapters > 0 ? Math.round((overview.chaptersStarted / overview.totalChapters) * 100) : 0,
     },
   };

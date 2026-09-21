@@ -38,14 +38,14 @@ const ChapterSection = forwardRef(function ChapterSection(
     <section
       ref={ref}
       id={id}
-      className={`mb-12 scroll-mt-24 ${className}`}
+      className={`mb-10 scroll-mt-24 ${className}`}
     >
-      <div className="flex items-center gap-3 mb-6">
-        <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg">
+      <div className="mb-5 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm">
           {icon}
         </div>
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-2xl">
             {title}
           </h2>
           {estimatedTime && (
@@ -67,7 +67,7 @@ const ChapterSection = forwardRef(function ChapterSection(
         )}
       </div>
 
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-xl border border-white/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+      <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7 dark:border-slate-700 dark:bg-slate-900">
         {children}
       </div>
     </section>

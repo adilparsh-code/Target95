@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { aiService } from "../services/AIService";
+import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 
 export function useAITutor(initialContext = {}) {
   const [messages, setMessages] = useState([]);
@@ -82,6 +83,7 @@ export function useAITutor(initialContext = {}) {
       });
       
       setCurrentChatId(savedChat.id);
+      trackEvent(LEARNING_EVENTS.AI_TUTOR_USED, { subject: initialContext.subject, chapterId: initialContext.chapter });
       // Refresh history
       await loadHistory();
       

@@ -1,9 +1,29 @@
 import { BLOG_CATEGORIES, articlePath, listPublishedArticles, toIsoDate } from "./lib/blog";
+import { getStudyChapters } from "@/lib/studyCenter";
+import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 
 const siteUrl = "https://target95.vercel.app";
 const lastModified = "2026-08-03";
 
-const studyChapters = [
+// Every routable /Java/[chapter] page (same slugs the route pre-renders),
+// so chapter pages are discoverable instead of only 9 hardcoded ones.
+function collectChapterSlugs() {
+  const slugs = new Set();
+  try {
+    (getStudyChapters() || []).forEach((chapter) => {
+      if (chapter && chapter.slug) slugs.add(String(chapter.slug));
+    });
+  } catch {
+    // Registry unavailable at build time; canonical list below still applies.
+  }
+  (canonicalChapters || []).forEach((chapter) => {
+    if (chapter && chapter.slug) slugs.add(String(chapter.slug));
+  });
+  return slugs;
+}
+
+// Kept as a fallback for environments where the registries fail to load.
+const legacyStudyChapters = [
   "introduction",
   "variables-data-types",
   "operators",
@@ -74,7 +94,13 @@ export default async function sitemap() {
       changeFrequency: route === "" ? "weekly" : "monthly",
       priority: route === "" ? 1 : 0.8,
     })),
-    ...studyChapters.map((slug) => ({
+    ...[...collectChapterSlugs()].map((slug) => ({
+      url: `${siteUrl}/Java/${slug}`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    })),
+    ...legacyStudyChapters.map((slug) => ({
       url: `${siteUrl}/study/${slug}`,
       lastModified,
       changeFrequency: "monthly",

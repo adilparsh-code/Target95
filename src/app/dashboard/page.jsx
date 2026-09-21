@@ -34,13 +34,13 @@ export default function DashboardPage() {
   } = useStudentDashboard();
 
   const dashboardStats = {
-    questionsSolvedToday: Math.min(overview.questionsSolved, 10),
+    questionsSolvedToday: overview.questionsSolvedToday ?? 0,
     currentStreak: overview.studyStreak,
     chapterCompletion: overview.overallProgress,
     dailyGoal: {
-      current: Math.min(overview.questionsSolved, 10),
+      current: overview.questionsSolvedToday ?? 0,
       target: 10,
-      progress: Math.min(Math.round((overview.questionsSolved / 10) * 100), 100),
+      progress: Math.min(Math.round(((overview.questionsSolvedToday ?? 0) / 10) * 100), 100),
     },
     weeklyGoal: {
       current: overview.chaptersStarted,
@@ -91,7 +91,7 @@ export default function DashboardPage() {
               <StudyPlan
                 roadmap={roadmap}
                 recommendations={recommendations}
-                solvedToday={Math.min(overview.questionsSolved, 10)}
+                solvedToday={overview.questionsSolvedToday ?? 0}
                 isLoading={loading}
               />
               <div className="lg:col-span-2">

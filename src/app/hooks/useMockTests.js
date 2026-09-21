@@ -120,18 +120,30 @@ export default function useMockTests() {
     }
   }, [queryDocuments]);
 
-  // Subscribe to realtime updates for mock tests
-  const subscribeToMockTests = useCallback((callback) => {
-    try {
-      return subscribeToCollection("mockTests", (data) => {
-        setMockTests(data);
-        if (callback) callback(data);
-      });
-    } catch (err) {
-      console.error("Error subscribing to mock tests:", err);
-      throw err;
-    }
-  }, [subscribeToCollection]);
+  // Subscribe to realtime updates for mock tests.
+  // Scoped to this user's results when a userId is provided so the listener
+  // never pulls the whole collection (owner-only data per the Firestore rules).
+  const subscribeToMockTests = useCallback(
+    (callback, options = {}) => {
+      try {
+        const listenerOptions = options.userId
+          ? { field: "userId", operator: "==", value: options.userId }
+          : undefined;
+        return subscribeToCollection(
+          "mockTests",
+          (data) => {
+            setMockTests(data);
+            if (callback) callback(data);
+          },
+          listenerOptions
+        );
+      } catch (err) {
+        console.error("Error subscribing to mock tests:", err);
+        throw err;
+      }
+    },
+    [subscribeToCollection]
+  );
 
   return {
     loading,

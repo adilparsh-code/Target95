@@ -82,12 +82,17 @@ export default function useBookmarks(userId = null) {
   useEffect(() => {
     if (userId) {
       try {
-        const unsubscribe = subscribeToCollection("bookmarks", (data) => {
-          const userBookmarks = data.filter(bookmark => bookmark.userId === userId);
-          bookmarksRef.current = userBookmarks;
-          setBookmarks(userBookmarks);
-          saveBookmarks(userBookmarks);
-        });
+        // Scoped to this user: bookmarks are owner-only per the Firestore rules.
+        const unsubscribe = subscribeToCollection(
+          "bookmarks",
+          (data) => {
+            const userBookmarks = data;
+            bookmarksRef.current = userBookmarks;
+            setBookmarks(userBookmarks);
+            saveBookmarks(userBookmarks);
+          },
+          { field: "userId", operator: "==", value: userId }
+        );
 
         return () => unsubscribe();
       } catch (err) {

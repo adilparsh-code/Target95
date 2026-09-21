@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -52,6 +53,11 @@ export default function QuestionPlayer({
   useEffect(() => {
     markCompleted({ chapter, questionId: question.id });
   }, [chapter, markCompleted, question.id]);
+
+  // Privacy-conscious learning-funnel event (content ids only).
+  useEffect(() => {
+    trackEvent(LEARNING_EVENTS.QUESTION_ATTEMPTED, { chapterId: chapter, questionId: question.id });
+  }, [chapter, question.id]);
 
   const handleExplainWithAI = (context) => {
     setWrongAnswerContext(context);

@@ -63,13 +63,8 @@ export default function PracticeSetup() {
   const questionCounts = [5, 10, 15, 20];
   const availableChapters = chapters;
 
-  const handleStartPractice = async () => {
-    try {
-      const session = await startPractice();
-      if (session?.id) router.push(`/practice/session?id=${session.id}`);
-    } catch (err) {
-      console.error("Failed to start practice:", err);
-    }
+  const handleStartPractice = () => {
+    router.push("/question-bank");
   };
 
   const buttonClass = (active) => `w-full rounded-xl border-2 p-3 text-left transition-all ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20" : "border-gray-200 hover:border-gray-300 dark:border-gray-700"}`;
@@ -119,7 +114,7 @@ export default function PracticeSetup() {
         </Card>
       </div>
 
-      <div className="mt-8 text-center"><Button onClick={handleStartPractice} disabled={loading || !settings.subject || !settings.difficulty} variant="primary" size="lg" className="px-12">{loading ? "Starting Practice..." : "Start Practice"}</Button></div>
+      <div className="mt-8 text-center"><Button onClick={handleStartPractice} variant="primary" size="lg" className="px-12">Start Practice</Button></div>
     </div>
   );
 }

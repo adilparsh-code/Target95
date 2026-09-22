@@ -35,6 +35,10 @@ jobs:
         shell: bash
         run: npm run validate:data
 
+      - name: Audit chapter content
+        shell: bash
+        run: npm run audit:chapters
+
       - name: Audit internal links
         shell: bash
         run: npm run audit:links

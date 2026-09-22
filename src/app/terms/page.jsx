@@ -51,7 +51,7 @@ export default function TermsPage() {
                     <li>Use the Platform for any illegal or unauthorized purpose</li>
                     <li>Attempt to gain unauthorized access to any portion of the Platform</li>
                     <li>Interfere with or disrupt the Platform's functionality</li>
-                    <li>Share, reproduce, or distribute content from the Platform without permission</li>
+                    <li>Copy, scrape, mirror, reproduce, or distribute substantial portions of Platform content without permission</li>
                     <li>Use automated systems to access the Platform without our consent</li>
                     <li>Harass, abuse, or harm other users</li>
                     <li>Post false, misleading, or fraudulent content</li>
@@ -61,7 +61,13 @@ export default function TermsPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">5. Intellectual Property</h2>
                   <p className="mt-3">
-                    All content on the Platform, including but not limited to text, graphics, logos, questions, and software, is the property of Target95+ or its licensors and is protected by copyright and other intellectual property laws. You may not copy, modify, distribute, or create derivative works without our express written permission.
+                    Target95+ owns or is authorized to use the original content and software it publishes, including original explanations, practice questions, solutions, examples, learning structures, graphics, and platform code, except where a page or item states otherwise. Such material may be protected by copyright and other intellectual-property laws.
+                  </p>
+                  <p className="mt-3">
+                    You may use Platform content for your personal learning and exam preparation. Unless permitted by applicable law or expressly authorized by Target95+, you may not reproduce substantial portions, scrape or bulk-download content, republish it on another website or app, sell or license it, or create a competing database or derivative collection from substantial portions of Target95+ content.
+                  </p>
+                  <p className="mt-3">
+                    Some examination-board, third-party, trademark, or other external material may belong to its respective owner. Target95+ does not claim ownership of material it does not own. See our <a href="/copyright" className="font-semibold text-blue-600 hover:text-blue-700">Copyright & Content Use</a> page for details and reporting instructions.
                   </p>
                 </section>
 

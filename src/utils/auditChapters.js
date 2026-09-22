@@ -8,8 +8,6 @@ const CORE_SECTIONS = [
   "introduction",
   "theoryNotes",
   "examples",
-  "chapterSummary",
-  "revisionNotes",
 ];
 
 const ACADEMIC_SECTIONS = [

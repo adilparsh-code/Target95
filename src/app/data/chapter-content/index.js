@@ -15,7 +15,7 @@ import chapterOperators from "./operators";
 import chapterConditionals from "./conditionals-combined";
 import chapterLoops from "./loops-combined";
 import chapterArrays from "./arrays-combined";
-import chapter10 from "./10-strings";
+import chapter10 from "./10-strings-master";
 import chapter11 from "./11-methods";
 import chapter12 from "./12-classes-objects";
 import chapterConstructors from "./constructors";

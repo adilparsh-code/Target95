@@ -17,6 +17,7 @@ const resources = [
 const legalLinks = [
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },
+  { label: "Copyright & Content Use", href: "/copyright" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];

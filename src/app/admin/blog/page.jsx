@@ -64,6 +64,20 @@ export default function BlogAdminPage() {
     finally { setBusy(false); }
   }
 
+  async function requestChanges() {
+    if (!selected) return;
+    const notes = window.prompt("What should be changed before publishing?", selected.reviewNotes || "");
+    if (notes === null) return;
+    setBusy(true); setError(""); setMessage("");
+    try {
+      await api("/api/blog/admin/articles", { method: "POST", body: JSON.stringify({ id: selected.id, action: "request_changes", reviewNotes: notes }) });
+      setMessage("Sent back for changes.");
+      setSelected(null);
+      await loadArticles();
+    } catch (e) { setError(e.message); }
+    finally { setBusy(false); }
+  }
+
   async function publish() {
     if (!selected) return;
     if (!window.confirm("Publish this article to the public Blog?")) return;
@@ -109,7 +123,7 @@ export default function BlogAdminPage() {
           </section>
           <section className="rounded-xl border bg-white p-5 dark:bg-gray-900">
             {!selected ? <div className="flex min-h-96 items-center justify-center text-gray-500">Select an article to review.</div> : <div>
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><div><span className="rounded-full border px-3 py-1 text-xs">{selected.status}</span><span className="ml-2 text-xs text-gray-500">{selected.category}</span></div><div className="flex gap-2"><button disabled={busy} onClick={save} className="rounded-lg border px-4 py-2 text-sm">Save</button>{selected.status === "review" && <button disabled={busy} onClick={publish} className="rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-black">Publish</button>}</div></div>
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><div><span className="rounded-full border px-3 py-1 text-xs">{selected.status}</span><span className="ml-2 text-xs text-gray-500">{selected.category}</span></div><div className="flex gap-2"><button disabled={busy} onClick={save} className="rounded-lg border px-4 py-2 text-sm">Save</button>{selected.status === "review" && <><button disabled={busy} onClick={requestChanges} className="rounded-lg border px-4 py-2 text-sm">Request changes</button><button disabled={busy} onClick={publish} className="rounded-lg bg-black px-4 py-2 text-sm font-semibold text-white dark:bg-white dark:text-black">Publish</button></>}</div></div>
               <div className="space-y-4">
                 <label className="block text-sm font-medium">Title<input className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.title || ""} onChange={(e) => setSelected({ ...selected, title: e.target.value })} /></label>
                 <label className="block text-sm font-medium">Excerpt<textarea rows="3" className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.excerpt || ""} onChange={(e) => setSelected({ ...selected, excerpt: e.target.value })} /></label>
@@ -117,6 +131,9 @@ export default function BlogAdminPage() {
                 <div className="grid gap-4 md:grid-cols-2"><label className="block text-sm font-medium">SEO title<input className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.seoTitle || ""} onChange={(e) => setSelected({ ...selected, seoTitle: e.target.value })} /></label><label className="block text-sm font-medium">Meta description<input className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.metaDescription || ""} onChange={(e) => setSelected({ ...selected, metaDescription: e.target.value })} /></label></div>
                 <label className="block text-sm font-medium">Keywords<input className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.keywords || ""} onChange={(e) => setSelected({ ...selected, keywords: e.target.value })} /></label>
                 <label className="block text-sm font-medium">Editor notes<textarea rows="4" className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.editorNotes || ""} onChange={(e) => setSelected({ ...selected, editorNotes: e.target.value })} placeholder="What should be checked or improved before publishing?" /></label>
+                <label className="block text-sm font-medium">Source URLs<textarea rows="3" className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={Array.isArray(selected.sourceUrls) ? selected.sourceUrls.join("\n") : selected.sourceUrls || ""} onChange={(e) => setSelected({ ...selected, sourceUrls: e.target.value.split("\n").map((v) => v.trim()).filter(Boolean) })} placeholder="One URL per line" /></label>
+                <label className="flex items-center gap-2 text-sm font-medium"><input type="checkbox" checked={Boolean(selected.needsVerification)} onChange={(e) => setSelected({ ...selected, needsVerification: e.target.checked })} /> Needs verification</label>
+                <label className="block text-sm font-medium">Research notes<textarea rows="4" className="mt-1 w-full rounded-lg border p-3 dark:border-gray-700 dark:bg-gray-950" value={selected.researchNotes || ""} onChange={(e) => setSelected({ ...selected, researchNotes: e.target.value })} /></label>
               </div>
             </div>}
           </section>

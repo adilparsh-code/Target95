@@ -18,7 +18,11 @@ export default async function ServerAdminGate({ children }) {
     .find((part) => part.startsWith("session="));
 
   const request = new Request("http://local", {
-    headers: { cookie: session ? session.slice("session=".length) : "" },
+    // Rebuild the cookie header with the original name. requireAdmin() reads
+    // request.cookies.get("session"), so passing only the raw token would make
+    // every server-side admin check fail (and would also make the gate diverge
+    // from the API authorization path).
+    headers: { cookie: session || "" },
   });
   const admin = await requireAdmin(request);
 

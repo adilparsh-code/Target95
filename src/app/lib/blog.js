@@ -277,15 +277,20 @@ export async function seedTopicIfMissing(topic) {
   const ref = db.collection("blog_topics").doc(id);
   const existing = await ref.get();
   if (existing.exists) return null;
-  await ref.create({
-    ...topic,
-    slug: id,
-    status: "idea",
-    attempts: 0,
-    createdAt: FieldValue.serverTimestamp(),
-    updatedAt: FieldValue.serverTimestamp(),
-  });
-  return id;
+  try {
+    await ref.create({
+      ...topic,
+      slug: id,
+      status: "idea",
+      attempts: 0,
+      createdAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+    return id;
+  } catch (error) {
+    if (error?.code === 6 || error?.code === "already-exists") return null;
+    throw error;
+  }
 }
 
 export async function seedTopicsFromPool() {

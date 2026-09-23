@@ -8,23 +8,23 @@ function wordCount(text) {
   return String(text || "")
     .replace(new RegExp(fence + "[\\s\\S]*?" + fence, "g"), " ")
     .replace(/[#*_>~]/g, " ")
-    .split(/\\s+/)
+    .split(/\s+/)
     .filter(Boolean).length;
 }
 
 function normalizeTitle(title) {
-  return String(title || "").toLowerCase().replace(/[^a-z0-9\\s]/g, "").replace(/\\s+/g, " ").trim();
+  return String(title || "").toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
 }
 
 function findEmptySections(content) {
-  const lines = String(content || "").split("\\n");
+  const lines = String(content || "").split("\n");
   const problems = [];
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i].trim();
-    if (!/^#{2,3}\\s+\\S/.test(line)) continue;
+    if (!/^#{2,3}\s+\S/.test(line)) continue;
     let j = i + 1;
     while (j < lines.length && !lines[j].trim()) j += 1;
-    if (j >= lines.length || /^#{2,3}\\s+/.test(lines[j].trim())) problems.push(line);
+    if (j >= lines.length || /^#{2,3}\s+/.test(lines[j].trim())) problems.push(line);
   }
   return problems;
 }
@@ -37,7 +37,7 @@ function findMalformedCode(content) {
   const blocks = text.matchAll(new RegExp(fence + "([a-zA-Z0-9+-]*)\\n([\\s\\S]*?)" + fence, "g"));
   for (const match of blocks) {
     const lang = match[1].trim();
-    if (!/^(java|python|py|c|cpp|c\\+\\+)?$/i.test(lang)) continue;
+    if (!/^(java|python|py|c|cpp|c\+\+)?$/i.test(lang)) continue;
     const code = match[2];
     if ((code.match(/[{(]/g) || []).length !== (code.match(/[})]/g) || []).length) {
       problems.push("Unbalanced braces/parens in a " + (lang || "code") + " block.");
@@ -91,7 +91,7 @@ export function runQualityChecks(draft, { topic, existingSlugs = new Set(), exis
   const sourceUrls = Array.isArray(draft?.sourceUrls) ? draft.sourceUrls.filter((u) => typeof u === "string" && u.trim()) : [];
   if (mustVerify && !sourceUrls.length) warnings.push({ id: "no-sources", message: "No source URLs supplied; editor must verify manually." });
 
-  const suspiciousPattern = /\\b(20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2}|deadline|last date|registration fee|₹\\s?\\d|as per the (latest|new|recent)|will be held on|\\d{1,3}%\\s+of\\s+students)\\b/i;
+  const suspiciousPattern = /\b(20\d{2}[-/]\d{1,2}[-/]\d{1,2}|deadline|last date|registration fee|₹\s?\d|as per the (latest|new|recent)|will be held on|\d{1,3}%\s+of\s+students)\b/i;
   if (suspiciousPattern.test(content) && !mustVerify) warnings.push({ id: "possible-current-claim", message: "Content contains a date/fee/statistic-like claim that should be double-checked." });
 
   return { ok: blocking.length === 0, blocking, warnings, normalized: { slug, needsVerification, sourceUrls, keywords } };

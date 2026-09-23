@@ -1,4 +1,10 @@
 import { FieldValue } from "firebase-admin/firestore";
+import { TIME_SENSITIVE_CATEGORIES } from "./blog-ai-prompt";
+
+export { TIME_SENSITIVE_CATEGORIES };
+
+const TOPIC_TERMINAL_STATUSES = ["done", "generating"];
+const MAX_TOPIC_ATTEMPTS = 3;
 import { getAdminDb } from "./firebase-admin";
 
 export const BLOG_CATEGORIES = [
@@ -54,6 +60,17 @@ export const EDITORIAL_TOPIC_POOL = [
   { pillar: "building-target95", category: "development", title: "A mistake I made while building Target95 — and what I changed afterwards" },
   { pillar: "building-target95", category: "ai-technology", title: "Where AI helps me build Target95 — and where I still need to make the decision" },
   { pillar: "building-target95", category: "development", title: "Why I am choosing quality over publishing a new Target95 article every day" },
+];
+
+export const EDITORIAL_QUEUE = [
+  { category: "ai-technology", title: "How to tell whether an AI explanation of a concept is actually correct", pillar: "curriculum" },
+  { category: "school-coding", title: "The Java mistakes students make when they understand the syntax but not the logic", pillar: "student-problems" },
+  { category: "programming", title: "How to debug a program when you do not know where the error is", pillar: "student-problems" },
+  { category: "school-subjects", title: "How to revise a difficult chapter without reading it five times", pillar: "curriculum" },
+  { category: "development", title: "What I learned while building Target95 with AI-assisted development", pillar: "building-target95" },
+  { category: "education-board-updates", title: "How students should verify an important board announcement before acting on it", pillar: "student-problems" },
+  { category: "opportunities", title: "How to evaluate a scholarship or competition before trusting the information", pillar: "student-problems" },
+  { category: "trending-explainers", title: "What an AI agent actually does, explained for school students", pillar: "curriculum" },
 ];
 
 export const DEMO_ARTICLE = {
@@ -253,17 +270,142 @@ export async function upsertTopic(topic) {
   return ref.id;
 }
 
+export async function seedTopicIfMissing(topic) {
+  const id = slugify(topic.title);
+  if (!id) return null;
+  const db = getAdminDb();
+  const ref = db.collection("blog_topics").doc(id);
+  const existing = await ref.get();
+  if (existing.exists) return null;
+  await ref.create({
+    ...topic,
+    slug: id,
+    status: "idea",
+    attempts: 0,
+    createdAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+  return id;
+}
+
+export async function seedTopicsFromPool() {
+  const seeded = [];
+  for (const item of [...EDITORIAL_TOPIC_POOL, ...EDITORIAL_QUEUE]) {
+    if (!BLOG_CATEGORIES.includes(item.category)) continue;
+    const id = await seedTopicIfMissing({ ...item, source: "target95-editorial-pool" });
+    if (id) seeded.push(id);
+  }
+  return seeded;
+}
+
+export function scoreTopicCandidate(topic, { categoryCounts = {}, pillarCounts = {} } = {}) {
+  const priorityScore = { high: 2, normal: 1, low: 0 }[topic.editorialPriority] ?? 1;
+  const categoryPenalty = (categoryCounts[topic.category] || 0) * 1.5;
+  const pillarPenalty = (pillarCounts[topic.pillar] || 0) * 1;
+  const retryPenalty = topic.status === "error" ? 0.5 : 0;
+  const ageMs = topic.createdAt?.toMillis ? Date.now() - topic.createdAt.toMillis() : 0;
+  const freshnessBonus = Math.min(ageMs / (1000 * 60 * 60 * 24 * 14), 1);
+  return priorityScore - categoryPenalty - pillarPenalty - retryPenalty + freshnessBonus;
+}
+
+export function pickBestTopic(candidates, counts) {
+  if (!candidates.length) return null;
+  return candidates.map((topic) => ({ topic, score: scoreTopicCandidate(topic, counts) }))
+    .sort((a, b) => b.score - a.score || (a.topic.createdAt?.toMillis?.() || 0) - (b.topic.createdAt?.toMillis?.() || 0))[0].topic;
+}
+
+export async function getRecentCategoryPillarCounts(days = 30) {
+  const snapshot = await getAdminDb().collection("blog_articles").where("createdAt", ">=", new Date(Date.now() - days * 86400000)).get();
+  const categoryCounts = {};
+  const pillarCounts = {};
+  for (const doc of snapshot.docs) {
+    const data = doc.data();
+    if (data.category) categoryCounts[data.category] = (categoryCounts[data.category] || 0) + 1;
+    if (data.pillar) pillarCounts[data.pillar] = (pillarCounts[data.pillar] || 0) + 1;
+  }
+  return { categoryCounts, pillarCounts };
+}
+
+export async function claimTopicForGeneration({ topicId, counts } = {}) {
+  const db = getAdminDb();
+  return db.runTransaction(async (tx) => {
+    let ref;
+    let data;
+    if (topicId) {
+      ref = db.collection("blog_topics").doc(topicId);
+      const snap = await tx.get(ref);
+      if (!snap.exists) throw new Error("Topic not found");
+      data = snap.data();
+      if (TOPIC_TERMINAL_STATUSES.includes(data.status)) throw new Error('Topic is already "' + data.status + '" and cannot be regenerated.');
+      if (data.status === "error" && (data.attempts || 0) >= MAX_TOPIC_ATTEMPTS) throw new Error("Topic has exhausted its retry attempts.");
+    } else {
+      const snap = await tx.get(db.collection("blog_topics").where("status", "in", ["idea", "error"]).orderBy("createdAt").limit(25));
+      const eligible = snap.docs.map((doc) => ({ id: doc.id, ref: doc.ref, ...doc.data() })).filter((topic) => topic.status !== "error" || (topic.attempts || 0) < MAX_TOPIC_ATTEMPTS);
+      const chosen = pickBestTopic(eligible, counts || {});
+      if (!chosen) return null;
+      ref = chosen.ref;
+      data = chosen;
+    }
+    tx.update(ref, {
+      status: "generating",
+      attempts: FieldValue.increment(1),
+      lastAttemptAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+    return { id: ref.id, ...data, status: "generating" };
+  });
+}
+
+export async function markTopicDone(topicId, { articleId }) {
+  await getAdminDb().collection("blog_topics").doc(topicId).update({
+    status: "done",
+    generatedArticleId: articleId,
+    doneAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+    lastError: FieldValue.delete(),
+  });
+}
+
+export async function markTopicError(topicId, message) {
+  await getAdminDb().collection("blog_topics").doc(topicId).update({
+    status: "error",
+    lastError: String(message || "Unknown error").slice(0, 500),
+    lastErrorAt: FieldValue.serverTimestamp(),
+    updatedAt: FieldValue.serverTimestamp(),
+  });
+}
+
+export async function getExistingArticleIndex() {
+  const snapshot = await getAdminDb().collection("blog_articles").select("slug", "title").get();
+  const slugs = new Set();
+  const titles = new Set();
+  for (const doc of snapshot.docs) {
+    const data = doc.data();
+    if (data.slug) slugs.add(data.slug);
+    if (data.title) titles.add(String(data.title).toLowerCase().replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim());
+  }
+  return { slugs, titles };
+}
+
 export async function createArticle(article) {
   const db = getAdminDb();
-  const ref = db.collection("blog_articles").doc(article.slug || slugify(article.title));
-  const existing = await ref.get();
-  const payload = {
-    ...article,
-    slug: article.slug || slugify(article.title),
-    status: article.status || "draft",
-    updatedAt: FieldValue.serverTimestamp(),
-  };
-  if (!existing.exists) payload.createdAt = FieldValue.serverTimestamp();
-  await ref.set(payload, { merge: true });
-  return ref.id;
+  const baseSlug = article.slug || slugify(article.title);
+  if (!baseSlug) throw new Error("Article has no usable slug.");
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    const candidateSlug = attempt === 0 ? baseSlug : baseSlug + "-" + (attempt + 1);
+    const ref = db.collection("blog_articles").doc(candidateSlug);
+    try {
+      await ref.create({
+        ...article,
+        slug: candidateSlug,
+        status: article.status || "draft",
+        createdAt: FieldValue.serverTimestamp(),
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+      return ref.id;
+    } catch (error) {
+      if (error?.code !== 6 && error?.code !== "already-exists") throw error;
+    }
+  }
+  throw new Error("Could not find a free slug after 20 attempts based on " + baseSlug + ".");
 }

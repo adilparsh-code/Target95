@@ -32,9 +32,19 @@ function matchesRoute(url, pattern) {
   return a.length === b.length && b.every((part, i) => part === '*' || part === a[i]);
 }
 
+// page/route paths are matched on POSIX-normalised paths: on Windows
+// path.join() yields "\" separators, the route regex below never matched and
+// a working tree reported zero routes (i.e. every link looked broken).
+const toPosix = (file) => file.split(path.sep).join('/');
+
 const files = walk(APP);
-const pageFiles = files.filter(file => /\/page\.(?:js|jsx|ts|tsx)$/.test(file));
+const pageFiles = files.filter(file => /\/page\.(?:js|jsx|ts|tsx)$/.test(toPosix(file)));
 const routes = pageFiles.map(routePattern);
+
+if (!routes.length) {
+  console.error('audit-links: no Next.js page routes were discovered - refusing to report every link as broken.');
+  process.exit(1);
+}
 const links = [];
 
 for (const file of files) {

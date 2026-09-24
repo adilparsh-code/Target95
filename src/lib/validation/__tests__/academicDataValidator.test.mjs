@@ -36,6 +36,12 @@ fs.mkdirSync(fixtureQuestionDir, { recursive: true });
 fs.writeFileSync(path.join(fixtureChapterDir, 'quoted.js'), 'const chapter = { "id": "1", "title": "Quoted", "slug": "quoted" }; export default chapter;');
 fs.writeFileSync(path.join(fixtureChapterDir, 'duplicate.js'), 'const chapter = { id: "1", title: "Duplicate", slug: "quoted" }; export default chapter;');
 fs.writeFileSync(path.join(fixtureChapterDir, 'missing.js'), 'const chapter = { id: "3", title: "Missing slug" }; export default chapter;');
+// Same id as the legacy pair but a different slug: not a collapsible duplicate
+// pair, so the duplicate-id error must still fire.
+fs.writeFileSync(path.join(fixtureChapterDir, 'same-id-other-slug.js'), 'const chapter = { id: "1", title: "Same id other slug", slug: "other" }; export default chapter;');
+// Same slug as the legacy pair but a different id: the duplicate-slug error must
+// still fire.
+fs.writeFileSync(path.join(fixtureChapterDir, 'same-slug-other-id.js'), 'const chapter = { id: "2", title: "Same slug other id", slug: "quoted" }; export default chapter;');
 fs.writeFileSync(path.join(fixtureQuestionDir, 'legacy.js'), `
   const chapter = {
     id: 1, title: "Legacy Chapter", slug: "legacy-chapter",
@@ -53,13 +59,35 @@ fs.writeFileSync(path.join(fixtureDataDir, 'javaCurriculum.js'), 'export const j
 
 const fixtureResult = await validateAcademicData(fixtureRoot);
 const fixtureFindings = fixtureResult.result.findings;
+// quoted.js and duplicate.js share both id and slug, which the validator treats
+// as a legacy duplicate pair and collapses to one canonical record.
+assert.ok(
+  fixtureFindings.some(
+    (finding) =>
+      finding.severity === 'INFO' &&
+      finding.message.includes('Duplicate legacy chapter content collapsed to canonical record: 1::quoted') &&
+      // Either file of the pair can be the canonical record (readdir order), so the
+      // payload must name exactly one counterpart from the pair.
+      (finding.record?.duplicateFiles || []).length === 1 &&
+      ['quoted.js', 'duplicate.js'].some((name) => finding.record.duplicateFiles.includes(name)),
+  ),
+);
 assert.ok(fixtureFindings.some((finding) => finding.message.includes('Duplicate chapter ID detected: 1')));
 assert.ok(fixtureFindings.some((finding) => finding.message.includes('Duplicate chapter slug detected: quoted')));
 assert.ok(fixtureFindings.some((finding) => finding.message === 'Missing chapter slug'));
 assert.ok(!fixtureFindings.some((finding) => finding.file?.endsWith('quoted.js') && finding.message === 'Missing chapter slug'));
 assert.ok(fixtureFindings.some((finding) => finding.message.includes('Duplicate question ID detected: CH01-MCQ-001')));
 assert.ok(fixtureFindings.some((finding) => finding.message.includes('references chapter not in registries: Unknown Chapter')));
-assert.ok(fixtureFindings.some((finding) => finding.message.includes('Invalid or missing difficulty value: invalid')));
+// The validator reports an unrecognised difficulty as a question-level finding;
+// assert the substance instead of one exact wording.
+assert.ok(
+  fixtureFindings.some(
+    (finding) =>
+      finding.file?.endsWith('legacy.js') &&
+      /difficulty/i.test(finding.message) &&
+      finding.message.includes('invalid'),
+  ),
+);
 assert.ok(fixtureFindings.some((finding) => finding.category === 'SOURCE' && finding.file?.endsWith('malformed.js')));
 assert.ok(!fixtureFindings.some((finding) => finding.message.includes('Programming question missing optional metadata')));
 assert.ok(!fixtureFindings.some((finding) => finding.message.includes('references chapter not in registries: Legacy Chapter')));

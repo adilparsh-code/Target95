@@ -4,13 +4,28 @@ import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 import DifficultyBadge from "./DifficultyBadge";
 import useBookmarks from "../hooks/useBookmarks";
+import legacyQuestions from "../data/questions";
+import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
 
-export default function BookmarksList({ questions }) {
+// Bookmarks are created from the real question bank (and from the question
+// player), so they must be resolved against the same source. The previous
+// lookup only searched a 5-item legacy array, which made every saved bookmark
+// silently disappear from this page. Every routable chapter alias is indexed so
+// a bookmark saved from e.g. /Java/classes-objects still resolves.
+const questionIndex = new Map();
+for (const bank of Object.values(chapterQuestionBankBySlug)) {
+  for (const question of bank) {
+    questionIndex.set(`${question.chapter}:${question.id}`, question);
+  }
+}
+for (const question of legacyQuestions) {
+  questionIndex.set(`${question.chapter}:${question.id}`, question);
+}
+
+export default function BookmarksList() {
   const { bookmarks } = useBookmarks();
   const bookmarkedQuestions = bookmarks.flatMap((bookmark) => {
-    const question = questions.find(
-      (item) => item.chapter === bookmark.chapter && item.id === bookmark.questionId
-    );
+    const question = questionIndex.get(`${bookmark.chapter}:${bookmark.questionId}`);
     return question ? [{ bookmark, question }] : [];
   });
 

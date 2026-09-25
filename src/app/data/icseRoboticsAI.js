@@ -318,14 +318,14 @@ export const ICSE_ROBOTICS_AI = {
 
   classX: {
     title: "Class X",
-    status: "planned-for-next-content-pass",
+    status: "exam-ready-content",
     plannedUnits: [
-      "Decision Making in Machines",
-      "Machine Intelligence and Cybersecurity",
-      "AI Project Framework",
-      "Python and applied AI practice"
+      "Decision Making in Machines / Computers",
+      "Machine Intelligence and Cybersecurity in Computing",
+      "Components of AI Project Framework",
+      "Introduction to Data and Programming with Python"
     ],
-    note: "Populate against the corresponding CISCE Class X syllabus before production sign-off; do not treat this placeholder as exam-ready content."
+    note: "Class X has a separate authored learning path at /icse/robotics-ai/class-x with syllabus theory, worked Python examples, practical assignments and 28 board-style AI questions. It is not a placeholder and does not reuse Java Computer Applications content."
   },
 
   projectFramework: [
@@ -346,5 +346,14 @@ export const ICSE_ROBOTICS_AI = {
     "Student study-pattern data explorer"
   ]
 };
+
+const enrichClassIXQuestions = (unit) => {
+  unit.examQuestions = (unit.examQuestions || []).map((question) => ({
+    ...question,
+    explanation: question.explanation || `The answer applies the unit's key robotics or AI concept: ${question.answer}`,
+  }));
+};
+
+ICSE_ROBOTICS_AI.classIX.units.forEach(enrichClassIXQuestions);
 
 export default ICSE_ROBOTICS_AI;

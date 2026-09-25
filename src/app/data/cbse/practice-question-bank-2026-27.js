@@ -1,7 +1,7 @@
 /**
  * Target95 CBSE Practice Question Bank — Session 2026-27
  * Curated starter bank. Every question is explicitly tagged by board/class/subject/chapter.
- * CBSE programming content must remain Python-based; never mix the CISCE Java bank into CBSE.
+ * CBSE 083/065 programming content remains Python-based; CBSE 802 Information Technology uses Java. Never mix CISCE Java content into CBSE 083/065.
  */
 
 export const cbsePracticeQuestions2026_27 = [

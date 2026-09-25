@@ -4,6 +4,12 @@ import { isAuthorizedCronRequest } from "../../../lib/blog-admin-auth";
 
 export const runtime = "nodejs";
 
+function authorized(request) {
+  const secret = process.env.BLOG_CRON_SECRET || process.env.CRON_SECRET;
+  if (!secret) return false;
+  return request.headers.get("authorization") === `Bearer ${secret}`;
+}
+
 export async function GET(request) {
   if (!isAuthorizedCronRequest(request)) return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
 

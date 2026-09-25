@@ -7,7 +7,9 @@ export const runtime = "nodejs";
 
 export async function POST(request) {
   try {
-    const admin = await requireBlogAdmin(request);
+    // Publishing is intentionally human-admin-only. AI/cron credentials cannot publish. 
+    await requireBlogAdmin(request);
+
     const body = await request.json();
     const id = String(body?.id || "").trim();
     if (!id) return NextResponse.json({ ok: false, error: "id is required" }, { status: 400 });

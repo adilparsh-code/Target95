@@ -30,6 +30,9 @@ export default function MessageBubble({ message, onRegenerate, isLastMessage }) 
 
   // AI assistant message with structured content
   const aiContent = content;
+  // Older saved chats may hold a plain string instead of the structured object.
+  const plainText = typeof aiContent === "string" ? aiContent : "";
+
   return (
     <div className="flex justify-start mb-6">
       <div className="max-w-[90%] w-full space-y-4">
@@ -44,6 +47,10 @@ export default function MessageBubble({ message, onRegenerate, isLastMessage }) 
         </div>
 
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none p-5 space-y-6 shadow-sm">
+          {plainText ? (
+            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed whitespace-pre-line">{plainText}</p>
+          ) : null}
+
           {/* Explanation */}
           {aiContent?.explanation && (
             <div>

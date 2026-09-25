@@ -411,6 +411,38 @@ export const ICSE_CLASSIFICATIONS = {
     topic: "Constructors",
     difficulty: "Advanced",
   },
+  // Authored Class X Computer Science chapters that have a full question bank
+  // in src/app/data/question-bank and therefore need real chapter routes.
+  polymorphism: {
+    ...X_BASE,
+    syllabusUnit: "Object-oriented Programming",
+    topic: "Polymorphism",
+    difficulty: "Advanced",
+  },
+  "exception-handling": {
+    ...X_BASE,
+    syllabusUnit: "Error Handling",
+    topic: "Exception Handling",
+    difficulty: "Advanced",
+  },
+  recursion: {
+    ...X_BASE,
+    syllabusUnit: "Programming Techniques",
+    topic: "Recursion",
+    difficulty: "Advanced",
+  },
+  "searching-sorting": {
+    ...X_BASE,
+    syllabusUnit: "Data Structures",
+    topic: "Searching and Sorting",
+    difficulty: "Advanced",
+  },
+  "packages-access-modifiers": {
+    ...X_BASE,
+    syllabusUnit: "Software Organisation",
+    topic: "Packages and Access Modifiers",
+    difficulty: "Advanced",
+  },
 
   // ---- javaCurriculum.js slugs ----
   "introduction-to-java": {
@@ -435,6 +467,102 @@ export const ICSE_CLASSIFICATIONS = {
     ...IX_BASE,
     syllabusUnit: "Control Flow",
     topic: "Conditional Statements in Java",
+    difficulty: "Intermediate",
+  },
+  // Granular Class IX control-flow / data-structure curriculum slugs. Without
+  // these entries they fell through to the Class X fallback and were tagged
+  // with the wrong board class in the question bank.
+  if: {
+    ...IX_BASE,
+    syllabusUnit: "Control Flow",
+    topic: "Conditional Statements in Java",
+    difficulty: "Intermediate",
+  },
+  "nested-if": {
+    ...IX_BASE,
+    syllabusUnit: "Control Flow",
+    topic: "Conditional Statements in Java",
+    difficulty: "Intermediate",
+  },
+  switch: {
+    ...IX_BASE,
+    syllabusUnit: "Control Flow",
+    topic: "Conditional Statements in Java",
+    difficulty: "Intermediate",
+  },
+  "for-loop": {
+    ...IX_BASE,
+    syllabusUnit: "Control Flow",
+    topic: "Looping / Iterative Statements in Java",
+    difficulty: "Intermediate",
+  },
+  "while-loop": {
+    ...IX_BASE,
+    syllabusUnit: "Control Flow",
+    topic: "Looping / Iterative Statements in Java",
+    difficulty: "Intermediate",
+  },
+  "do-while-loop": {
+    ...IX_BASE,
+    syllabusUnit: "Control Flow",
+    topic: "Looping / Iterative Statements in Java",
+    difficulty: "Intermediate",
+  },
+  // Granular Class X curriculum slugs.
+  "arrays-1d": {
+    ...X_BASE,
+    syllabusUnit: "Data Structures",
+    topic: "Arrays",
+    difficulty: "Intermediate",
+  },
+  "arrays-2d": {
+    ...X_BASE,
+    syllabusUnit: "Data Structures",
+    topic: "Arrays",
+    difficulty: "Advanced",
+  },
+  encapsulation: {
+    ...X_BASE,
+    syllabusUnit: "Object-oriented Programming",
+    topic: "Encapsulation",
+    difficulty: "Advanced",
+  },
+  constructors: {
+    ...X_BASE,
+    syllabusUnit: "Object-oriented Programming",
+    topic: "Constructors",
+    difficulty: "Advanced",
+  },
+
+  // ---- javaChapters.js (study path) Class X slugs without a canonical twin ----
+  "class-as-basis-of-computation": {
+    ...X_BASE,
+    syllabusUnit: "Object-oriented Programming",
+    topic: "Class as the Basis of all Computation",
+    difficulty: "Advanced",
+  },
+  "string-handling": {
+    ...X_BASE,
+    syllabusUnit: "Data Structures",
+    topic: "String Handling",
+    difficulty: "Intermediate",
+  },
+  "custom-methods": {
+    ...X_BASE,
+    syllabusUnit: "Object-oriented Programming",
+    topic: "Custom Methods",
+    difficulty: "Advanced",
+  },
+  "library-classes": {
+    ...X_BASE,
+    syllabusUnit: "Core Java APIs & Libraries",
+    topic: "Library Classes",
+    difficulty: "Intermediate",
+  },
+  "disruptive-technologies": {
+    ...X_BASE,
+    syllabusUnit: "Emerging Technologies",
+    topic: "Disruptive Technologies",
     difficulty: "Intermediate",
   },
   "iterative-statements": {

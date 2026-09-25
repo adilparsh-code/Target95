@@ -1,8 +1,8 @@
-import { ISC_AI_XI_PROJECTS_FULL } from "./iscAIProjectsXI";
-import { ISC_AI_XII_PROJECTS_FULL } from "./iscAIProjectsXII";
-import { CBSE_843_XI_PROJECTS_FULL } from "./cbseAI843ProjectsXI";
-import { CBSE_843_XII_PROJECTS_FULL } from "./cbseAI843ProjectsXII";
-import { CBSE_083_PROJECTS } from "./cbseCS083Projects";
+import { ISC_AI_XI_PROJECTS_FULL } from "./iscAIProjectsXI.js";
+import { ISC_AI_XII_PROJECTS_FULL } from "./iscAIProjectsXII.js";
+import { CBSE_843_XI_PROJECTS_FULL } from "./cbseAI843ProjectsXI.js";
+import { CBSE_843_XII_PROJECTS_FULL } from "./cbseAI843ProjectsXII.js";
+import { CBSE_083_PROJECTS } from "./cbseCS083Projects.js";
 
 const ISC_AI_PROJECTS = [...ISC_AI_XI_PROJECTS_FULL, ...ISC_AI_XII_PROJECTS_FULL];
 const CBSE_843_PROJECTS = [...CBSE_843_XI_PROJECTS_FULL, ...CBSE_843_XII_PROJECTS_FULL];

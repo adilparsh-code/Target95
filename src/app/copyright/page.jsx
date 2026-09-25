@@ -25,7 +25,7 @@ export default function CopyrightPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">2. What You May Do</h2>
                   <p className="mt-3">
-                    Students may access and use Target95+ content for their own personal learning and exam preparation through the Platform. You may quote a short portion where permitted by applicable law, provided that the use does not substitute for the Platform's content and any required attribution is given.
+                    Students may access and use Target95+ content for their own personal learning and exam preparation through the Platform. You may quote a short portion where permitted by applicable law, provided that the use does not substitute for the Platform&apos;s content and any required attribution is given.
                   </p>
                 </section>
 

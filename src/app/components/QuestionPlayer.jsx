@@ -50,10 +50,6 @@ export default function QuestionPlayer({
   const basePath = basePathProp || BOARD_ROUTE_MAP[board] || "/Java";
   const boardLabel = BOARD_LABEL_MAP[board] || board;
 
-  useEffect(() => {
-    markCompleted({ chapter, questionId: question.id });
-  }, [chapter, markCompleted, question.id]);
-
   // Privacy-conscious learning-funnel event (content ids only).
   useEffect(() => {
     trackEvent(LEARNING_EVENTS.QUESTION_ATTEMPTED, { chapterId: chapter, questionId: question.id });
@@ -61,6 +57,10 @@ export default function QuestionPlayer({
 
   const handleExplainWithAI = (context) => {
     setWrongAnswerContext(context);
+  };
+
+  const handleQuestionSubmit = () => {
+    markCompleted({ chapter, questionId: question.id });
   };
 
   const chapterLabel = String(chapter).replace(/-/g, " ");
@@ -121,6 +121,7 @@ export default function QuestionPlayer({
           {isMultipleChoice ? (
             <MCQQuestion
               question={{ ...question, question: questionText }}
+              onSubmit={handleQuestionSubmit}
               onExplainWithAI={handleExplainWithAI}
             />
           ) : (
@@ -129,6 +130,7 @@ export default function QuestionPlayer({
               <AnswerBox
                 answer={answer}
                 explanation={question.explanation || question.flowExplanation}
+                onRevealAnswer={handleQuestionSubmit}
               />
             </>
           )}

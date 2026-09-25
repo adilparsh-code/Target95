@@ -18,7 +18,7 @@ export default function PrivacyPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">1. Introduction</h2>
                   <p className="mt-3">
-                    Target95+ ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+                    Target95+ (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
                   </p>
                 </section>
 
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
                 </section>
 
                 <section>
-                  <h2 className="text-2xl font-bold text-gray-900">8. Children's Privacy</h2>
+                  <h2 className="text-2xl font-bold text-gray-900">8. Children&apos;s Privacy</h2>
                   <p className="mt-3">
                     Our platform is designed for students aged 13 and above. We do not knowingly collect personal information from children under 13. If we become aware of such collection, we will take immediate action to delete it.
                   </p>
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">9. Changes to This Policy</h2>
                   <p className="mt-3">
-                    We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the "Last updated" date.
+                    We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the &quot;Last updated&quot; date.
                   </p>
                 </section>
 

@@ -77,7 +77,7 @@ export default function Testimonials() {
                         ))}
                       </div>
                       <p className="text-lg md:text-xl text-gray-700 text-center mb-8 leading-relaxed">
-                        "{testimonial.quote}"
+                        &quot;{testimonial.quote}&quot;
                       </p>
                       <div className="flex items-center justify-center gap-4">
                         <Image

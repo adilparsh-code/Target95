@@ -48,7 +48,12 @@ export default function QuestionBank() {
     return { ...initialFilters, difficulty: validDifficulty, chapter: validChapter };
   });
   const [previewId, setPreviewId] = useState(null);
-  const [visibleLimit, setVisibleLimit] = useState(24);
+  // ?count= deep links (e.g. from /practice/setup) start with the requested
+  // batch size instead of an unrelated hard-coded page size.
+  const [visibleLimit, setVisibleLimit] = useState(() => {
+    const requested = Number(searchParams.get("count"));
+    return [5, 10, 15, 20].includes(requested) ? requested : 24;
+  });
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { isCompleted } = useProgress();
   const questions = useMemo(() => sourceQuestions.map((question) => ({ ...question, isBookmarked: isBookmarked({ chapter: question.chapter, questionId: question.id }), isCompleted: isCompleted({ chapter: question.chapter, questionId: question.id }) })), [sourceQuestions, isBookmarked, isCompleted]);

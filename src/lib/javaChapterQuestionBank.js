@@ -18,7 +18,7 @@ const SLUG_MAP = {
   "variables-data-types": ["variables-data-types", "data-types-variables"],
   operators: ["operators"],
   "input-output": ["input-in-java"],
-  "if-else": ["conditionals", "if", "if-else", "nested-if", "switch"],
+  "if-else": ["if-else", "if", "nested-if", "switch"],
   loops: ["loops", "for-loop", "while-loop", "do-while-loop"],
   methods: ["methods", "custom-methods"],
   arrays: ["arrays", "arrays-1d", "arrays-2d"],
@@ -29,9 +29,9 @@ const SLUG_MAP = {
   // routable aliases so the authored constructor questions are reachable.
   constructor: ["constructor", "constructors"],
   inheritance: ["inheritance"],
-  // Authored chapters that have no legacy/canonical route of their own still
-  // surface in the Question Bank (and resolve their practice links through the
-  // real-bank fallback) instead of being silently dropped.
+  // Authored Class X chapters that have no canonical javaCurriculum twin but do
+  // have a real study chapter route, so their questions and chapter pages stay
+  // reachable instead of being silently dropped.
   polymorphism: ["polymorphism"],
   "library-classes": ["library-classes"],
   recursion: ["recursion"],

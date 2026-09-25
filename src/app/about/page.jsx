@@ -50,8 +50,8 @@ export default function AboutPage() {
                 targeted practice, instant feedback, and intelligent learning tools.
               </p>
               <p>
-                We understand the challenges of ICSE and ISC Computer Science curriculum. That's why
-                we've built a platform that focuses on:
+                We understand the challenges of ICSE and ISC Computer Science curriculum. That&apos;s why
+                we&apos;ve built a platform that focuses on:
               </p>
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function AboutPage() {
               <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Built for Students, Driven by Passion</h2>
               <p className="mx-auto mb-8 mt-5 max-w-3xl text-lg leading-8 text-slate-600">
                 Target95+ is created by educators and developers who understand the ICSE and ISC curriculum
-                inside out. We're committed to helping every student achieve their target score.
+                inside out. We&apos;re committed to helping every student achieve their target score.
               </p>
               <Button variant="primary" href="/contact">
                 Get in Touch

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getVerifiedSession } from "@/app/lib/server-auth";
+import { extractResponseText } from "@/app/lib/blog-ai-prompt";
 import { checkAITutorAccess } from "@/lib/entitlements";
 
 export const runtime = "nodejs";
@@ -106,8 +107,7 @@ async function callOpenAI(prompt) {
   }
 
   const result = await response.json();
-  const text = result.output_text || "";
-  if (!text) throw new Error("AI returned no response text.");
+  const text = extractResponseText(result);
 
   let parsed;
   try {

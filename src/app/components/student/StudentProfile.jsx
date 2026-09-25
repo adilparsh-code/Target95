@@ -1,20 +1,23 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import useStudentProfile from "@/app/hooks/useStudentProfile";
 import Button from "../ui/Button";
 import AchievementCard from "../Dashboard/AchievementCard";
 
-const mockAchievements = [
-  { id: 1, icon: "🔥", title: "First Step", description: "Complete your first question", xp: 50, earned: true },
-  { id: 2, icon: "📚", title: "Knowledge Seeker", description: "Complete 10 chapters", xp: 100, earned: true },
-  { id: 3, icon: "🎯", title: "Sharpshooter", description: "Maintain 90% accuracy", xp: 150, earned: true },
-  { id: 4, icon: "🏆", title: "Test Champion", description: "Take 5 mock tests", xp: 200, earned: true },
-  { id: 5, icon: "⚡", title: "Speed Runner", description: "Solve 100 questions", xp: 250, earned: false },
-  { id: 6, icon: "🌟", title: "Legend", description: "Reach level 10", xp: 500, earned: false },
+// Achievement rules are declarative; the "earned" state is always derived from
+// the student's real activity data so the profile never shows fabricated badges.
+const buildAchievements = ({ questionsSolved, chaptersCompleted, accuracy, mockTestsAttempted, studyStreak, level }) => [
+  { id: 1, icon: "🔥", title: "First Step", description: "Complete your first question", xp: 50, earned: questionsSolved >= 1 },
+  { id: 2, icon: "📚", title: "Knowledge Seeker", description: "Complete 10 chapters", xp: 100, earned: chaptersCompleted >= 10 },
+  { id: 3, icon: "🎯", title: "Sharpshooter", description: "Maintain 90% accuracy", xp: 150, earned: accuracy >= 90 },
+  { id: 4, icon: "🏆", title: "Test Champion", description: "Take 5 mock tests", xp: 200, earned: mockTestsAttempted >= 5 },
+  { id: 5, icon: "⚡", title: "Speed Runner", description: "Solve 100 questions", xp: 250, earned: questionsSolved >= 100 },
+  { id: 6, icon: "🌟", title: "Legend", description: "Reach level 10", xp: 500, earned: level >= 10 },
   { id: 7, icon: "💎", title: "Diamond Mind", description: "Get a perfect score", xp: 300, earned: false },
-  { id: 8, icon: "🚀", title: "Rocket Learner", description: "7 day streak", xp: 175, earned: true },
+  { id: 8, icon: "🚀", title: "Rocket Learner", description: "7 day streak", xp: 175, earned: studyStreak >= 7 },
 ];
 
 const calculateLevel = (xp) => {
@@ -29,21 +32,34 @@ const calculateLevel = (xp) => {
 };
 
 export default function StudentProfile() {
-  const { user, joinDate, mockTests, completedQuestions, bookmarks } = useStudentProfile();
+  const { user, joinDate, mockTests, completedQuestions, bookmarks, stats } = useStudentProfile();
   const { updateStudentProfile } = useAuth();
   const [form, setForm] = useState({ fullName: user?.fullName || "", board: user?.board || "ICSE", studentClass: user?.studentClass || "Class 10" });
   const [message, setMessage] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
-  // Calculate stats with mock data for demonstration
-  const totalXP = user?.totalXP || 1250;
+  // Real activity data only. Nothing here may fall back to invented numbers,
+  // otherwise a brand new student is shown achievements and stats they never earned.
+  const totalXP = Number(user?.totalXP) || 0;
   const { level, currentXP, nextLevelXP, progress } = calculateLevel(totalXP);
-  const chaptersCompleted = user?.chaptersCompleted || 12;
-  const totalStudyTime = user?.totalStudyTime || 47; // hours
-  const accuracy = user?.accuracy || 87; // percentage
-  const studyStreak = user?.studyStreak || 11;
-  const questionsSolved = completedQuestions.length || 234;
-  const mockTestsAttempted = mockTests.length || 7;
+  const completedChapters = new Set(
+    completedQuestions.map((question) => question.chapter).filter(Boolean)
+  );
+  const chaptersCompleted = Number(user?.chaptersCompleted) || completedChapters.size;
+  const totalStudyTime = Number(user?.totalStudyTime) || 0;
+  const accuracy = Math.round(Number(stats?.accuracy) || 0);
+  const studyStreak = Number(stats?.currentStreak) || 0;
+  const questionsSolved = Number(stats?.totalQuestionsSolved) || completedQuestions.length;
+  const mockTestsAttempted = Number(stats?.mockTestsAttempted) || mockTests.length;
+  const achievements = buildAchievements({
+    questionsSolved,
+    chaptersCompleted,
+    accuracy,
+    mockTestsAttempted,
+    studyStreak,
+    level,
+  });
+  const earnedAchievements = achievements.filter((achievement) => achievement.earned).length;
 
   const saveProfile = async (event) => {
     event.preventDefault();
@@ -97,7 +113,7 @@ export default function StudentProfile() {
     <header className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-8">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
         <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-3xl font-bold text-white shadow-lg">
-          {user?.avatarUrl ? <img src={user.avatarUrl} alt="Profile avatar" className="h-full w-full rounded-full object-cover" /> : initials}
+          {user?.avatarUrl ? <Image unoptimized src={user.avatarUrl} alt="Profile avatar" width={96} height={96} className="h-full w-full rounded-full object-cover" /> : initials}
         </div>
         <div className="flex-1">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400">Student Profile</p>
@@ -179,7 +195,7 @@ export default function StudentProfile() {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">Achievements & Badges</h2>
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Unlock badges as you progress through your learning journey</p>
         <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {mockAchievements.map((achievement) => (
+          {achievements.map((achievement) => (
             <AchievementCard
               key={achievement.id}
               icon={achievement.icon}
@@ -193,11 +209,11 @@ export default function StudentProfile() {
         <div className="mt-4 rounded-xl bg-blue-50 p-4 dark:bg-blue-900/20">
           <p className="text-sm font-medium text-blue-900 dark:text-blue-300">Badge Progress</p>
           <div className="mt-2 flex items-center gap-2">
-            <p className="text-sm text-blue-700 dark:text-blue-400">{mockAchievements.filter(a => a.earned).length}/{mockAchievements.length} badges unlocked</p>
+            <p className="text-sm text-blue-700 dark:text-blue-400">{earnedAchievements}/{achievements.length} badges unlocked</p>
             <div className="flex-1 h-2 overflow-hidden rounded-full bg-blue-200 dark:bg-blue-800">
               <div 
                 className="h-full rounded-full bg-blue-600 transition-all duration-700"
-                style={{ width: `${(mockAchievements.filter(a => a.earned).length / mockAchievements.length) * 100}%` }}
+                style={{ width: `${(earnedAchievements / achievements.length) * 100}%` }}
               />
             </div>
           </div>

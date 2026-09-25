@@ -55,7 +55,7 @@ export class AIService {
 
   // Save chat to Firestore
   async saveChat(chatData) {
-    if (!this.db || !this.auth.currentUser) {
+    if (!this.db || !this.auth?.currentUser) {
       throw new Error("Firestore not initialized or user not authenticated");
     }
 
@@ -77,7 +77,7 @@ export class AIService {
 
   // Get chat history from Firestore
   async getHistory() {
-    if (!this.db || !this.auth.currentUser) {
+    if (!this.db || !this.auth?.currentUser) {
       throw new Error("Firestore not initialized or user not authenticated");
     }
 
@@ -99,7 +99,7 @@ export class AIService {
 
   // Delete a conversation
   async deleteConversation(chatId) {
-    if (!this.db || !this.auth.currentUser) {
+    if (!this.db || !this.auth?.currentUser) {
       throw new Error("Firestore not initialized or user not authenticated");
     }
 

@@ -84,7 +84,7 @@ export default function ClassXIProjectPage() {
         </section>
 
         <section className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm leading-6 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
-          <strong>Project note:</strong> This is a Target95 guided implementation aligned with the ISC Class XI project theme. Students should follow their school/teacher's project instructions for the final submission format.
+          <strong>Project note:</strong> This is a Target95 guided implementation aligned with the ISC Class XI project theme. Students should follow their school/teacher&apos;s project instructions for the final submission format.
         </section>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.2fr]">

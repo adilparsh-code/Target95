@@ -10,93 +10,26 @@ async function parseResponse(response, fallbackMessage) {
   return payload;
 }
 
-// Mock AI generation function - in production this would call an actual AI API
-const generateAIQuestions = (formData) => {
-  const { subject, class: className, board, chapter, questionType, difficulty, numberOfQuestions } = formData;
-  
-  const questions = [];
-  const marksMap = {
-    "MCQ": 1,
-    "One Word": 1,
-    "Fill in the Blanks": 1,
-    "True False": 1,
-    "Assertion Reason": 2,
-    "Match the Following": 2,
-    "Very Short Answer": 2,
-    "Short Answer": 3,
-    "Long Answer": 5,
-    "Programming Questions": 10,
-    "Output Based Questions": 3,
-    "Debugging Questions": 3,
-    "Find the Error": 3,
-    "Dry Run Questions": 4,
-    "Case Study Questions": 8,
-    "Algorithm Writing": 5,
-    "Pseudocode Questions": 5
-  };
-
-  const timeMap = {
-    "MCQ": 1,
-    "One Word": 1,
-    "Fill in the Blanks": 1,
-    "True False": 1,
-    "Assertion Reason": 2,
-    "Match the Following": 2,
-    "Very Short Answer": 3,
-    "Short Answer": 5,
-    "Long Answer": 10,
-    "Programming Questions": 20,
-    "Output Based Questions": 5,
-    "Debugging Questions": 5,
-    "Find the Error": 5,
-    "Dry Run Questions": 8,
-    "Case Study Questions": 15,
-    "Algorithm Writing": 10,
-    "Pseudocode Questions": 10
-  };
-
-  const bloomsLevels = ["Remember", "Understand", "Apply", "Analyze", "Evaluate", "Create"];
-  const randomBloomsLevel = bloomsLevels[Math.floor(Math.random() * bloomsLevels.length)];
-  const tags = [subject, chapter, difficulty, questionType].filter(Boolean);
-
-  for (let i = 0; i < numberOfQuestions; i++) {
-    questions.push({
-      id: `temp-${Date.now()}-${i}`,
-      question: `Sample ${questionType} question #${i + 1} from ${chapter} for ${board} Class ${className} ${subject}. This question follows the ${difficulty} difficulty level as per the board guidelines.`,
-      answer: "This is the correct answer to the generated question.",
-      explanation: `This explanation provides detailed reasoning for the answer, covering key concepts from ${chapter} that help students understand the topic better.`,
-      difficulty,
-      chapter,
-      subject,
-      questionType,
-      board,
-      class: className,
-      marks: marksMap[questionType] || 2,
-      estimatedTime: timeMap[questionType] || 5,
-      bloomsLevel: randomBloomsLevel,
-      tags: [...tags, `question-${i + 1}`],
-      status: "Draft",
-      createdBy: "admin",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    });
-  }
-
-  return questions;
-};
-
 export const QuestionGeneratorService = {
-  // Generate questions using AI
+  // Generate questions with the real server-side AI route. The route is
+  // admin-protected and answers with a typed "unconfigured" status when no
+  // provider key exists, so placeholder questions are never shown to an admin.
   generateQuestions: async (formData) => {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
     try {
-      const questions = generateAIQuestions(formData);
-      return questions;
+      const payload = await parseResponse(
+        await fetch("/api/admin/ai-generator", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }),
+        "Failed to generate questions. Please try again."
+      );
+      return payload.questions;
     } catch (error) {
       console.error("Error in generateQuestions:", error);
-      throw new Error("Failed to generate questions. Please try again.");
+      throw error instanceof Error
+        ? error
+        : new Error("Failed to generate questions. Please try again.");
     }
   },
 
@@ -216,27 +149,28 @@ export const QuestionGeneratorService = {
       URL.revokeObjectURL(url);
     } else if (format === "csv") {
       // Export as CSV
+      const cell = (value) => `"${String(value ?? "").replace(/"/g, '""')}"`;
       const headers = ["ID", "Question", "Answer", "Explanation", "Difficulty", "Chapter", "Subject", "Board", "Class", "Question Type", "Marks", "Estimated Time", "Status", "Created At"];
       const csvContent = [
         headers.join(","),
         ...questions.map(q => [
-          q.id,
-          `"${q.question.replace(/"/g, '""')}"`,
-          `"${q.answer.replace(/"/g, '""')}"`,
-          `"${q.explanation.replace(/"/g, '""')}"`,
-          q.difficulty,
-          q.chapter,
-          q.subject,
-          q.board,
-          q.class,
-          q.questionType,
-          q.marks,
-          q.estimatedTime,
-          q.status,
-          q.createdAt
+          cell(q.id),
+          cell(q.question),
+          cell(q.answer),
+          cell(q.explanation),
+          cell(q.difficulty),
+          cell(q.chapter),
+          cell(q.subject),
+          cell(q.board),
+          cell(q.class),
+          cell(q.questionType),
+          q.marks ?? "",
+          q.estimatedTime ?? "",
+          cell(q.status),
+          cell(q.createdAt)
         ].join(","))
       ].join("\n");
-      
+
       const dataBlob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(dataBlob);
       const link = document.createElement("a");
@@ -249,6 +183,11 @@ export const QuestionGeneratorService = {
     } else if (format === "pdf") {
       // For PDF export, we'll create a simple HTML-based PDF that can be printed
       const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        throw new Error("Your browser blocked the print window. Allow pop-ups to export a PDF.");
+      }
+      const text = (value) =>
+        String(value ?? "").replace(/[&<>]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[ch]));
       printWindow.document.write(`
         <html>
           <head>
@@ -270,16 +209,16 @@ export const QuestionGeneratorService = {
             ${questions.map((q, i) => `
               <div class="question">
                 <div>
-                  <span class="tag">${q.questionType}</span>
-                  <span class="tag">${q.difficulty}</span>
-                  <span class="tag">${q.subject}</span>
-                  <span class="tag">${q.board} Class ${q.class}</span>
+                  <span class="tag">${text(q.questionType)}</span>
+                  <span class="tag">${text(q.difficulty)}</span>
+                  <span class="tag">${text(q.subject)}</span>
+                  <span class="tag">${text(q.board)} Class ${text(q.class)}</span>
                 </div>
-                <h3>${i + 1}. ${q.question}</h3>
-                <p><strong>Answer:</strong> ${q.answer}</p>
-                <p><strong>Explanation:</strong> ${q.explanation}</p>
+                <h3>${i + 1}. ${text(q.question)}</h3>
+                <p><strong>Answer:</strong> ${text(q.answer)}</p>
+                <p><strong>Explanation:</strong> ${text(q.explanation)}</p>
                 <div class="metadata">
-                  Chapter: ${q.chapter} | Marks: ${q.marks} | Time: ${q.estimatedTime} mins | Status: ${q.status}
+                  Chapter: ${text(q.chapter)} | Marks: ${text(q.marks)} | Time: ${text(q.estimatedTime)} mins | Status: ${text(q.status)}
                 </div>
               </div>
             `).join('')}

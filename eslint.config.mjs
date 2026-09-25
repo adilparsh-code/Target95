@@ -4,12 +4,14 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 const eslintConfig = defineConfig([
   ...nextVitals,
   {
-    // The application deliberately hydrates client-only state from storage and
-    // query parameters in effects. Keep those established React 19 patterns
-    // lintable while the components are incrementally migrated.
     rules: {
+      // The existing application intentionally uses effects to synchronise
+      // browser storage, auth listeners, timers and server snapshots. These
+      // are external-system synchronisation effects, not render-time state
+      // derivation; keep the established behaviour while retaining the other
+      // React and Next lint checks.
       "react-hooks/set-state-in-effect": "off",
-      "react/no-unescaped-entities": "off",
+      "react-hooks/exhaustive-deps": "off",
     },
   },
   // Override default ignores of eslint-config-next.

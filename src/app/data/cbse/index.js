@@ -131,8 +131,10 @@ export const getAllCBSE2026_27Classes = () =>
 export const getCBSE2026_27Subject = (classNumber, subjectCode) =>
   getCBSECurriculum(classNumber, subjectCode);
 
-export default {
+const cbseIntegration = {
   getAllCBSE2026_27Classes,
   getCBSE2026_27Subject,
   getCBSECurriculum,
 };
+
+export default cbseIntegration;

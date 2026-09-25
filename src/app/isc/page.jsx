@@ -7,7 +7,7 @@ const sections = [
   {
     title: "ICSE Class IX · Robotics & AI",
     description: "Robotics and Artificial Intelligence learning modules for ICSE Class IX.",
-    href: "/isc/robotics-ai",
+    href: "/icse/robotics-ai",
     badge: "ICSE IX",
     icon: BrainCircuit,
     label: "Foundation",
@@ -15,7 +15,7 @@ const sections = [
   {
     title: "ICSE Class X · AI",
     description: "Syllabus-aligned Class X Artificial Intelligence theory, Python and board-style practice.",
-    href: "/isc/robotics-ai/class-x",
+    href: "/icse/robotics-ai/class-x",
     badge: "ICSE X",
     icon: Sparkles,
     label: "Board year",

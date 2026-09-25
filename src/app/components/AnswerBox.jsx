@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function AnswerBox({ answer, explanation }) {
+export default function AnswerBox({ answer, explanation, onRevealAnswer }) {
 
   const [showAnswer, setShowAnswer] = useState(false);
 
@@ -13,7 +13,10 @@ export default function AnswerBox({ answer, explanation }) {
       {!showAnswer ? (
 
         <button
-          onClick={() => setShowAnswer(true)}
+          onClick={() => {
+            setShowAnswer(true);
+            onRevealAnswer?.();
+          }}
           className="bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition"
         >
           👁 Show Answer

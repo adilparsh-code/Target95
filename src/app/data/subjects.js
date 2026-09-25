@@ -8,9 +8,11 @@ const subjects = [
     bgColor: "bg-orange-50",
     borderColor: "border-orange-200",
     href: "/Java",
-    totalChapters: 12,
-    totalQuestions: 450,
-    estimatedStudyTime: "12 hours",
+    // Counts come from src/app/data/javaCurriculum.js and the real question
+    // bank (src/lib/javaChapterQuestionBank.js) — never guessed.
+    totalChapters: 19,
+    totalQuestions: 830,
+    estimatedStudyTime: "16 hours",
   },
   {
     id: "boolean-algebra",
@@ -22,7 +24,10 @@ const subjects = [
     borderColor: "border-violet-200",
     href: "/isc/class-xii/boolean-algebra",
     comingSoon: false,
-    totalChapters: 1,
+    // Three topic pages are reachable under this link (overview, canonical
+    // forms, word problems). These are reference pages; there is no separate
+    // Boolean Algebra practice bank yet, so the question count stays 0.
+    totalChapters: 3,
     totalQuestions: 0,
     estimatedStudyTime: "6 hours",
   },
@@ -36,8 +41,11 @@ const subjects = [
     borderColor: "border-blue-200",
     href: "/python",
     comingSoon: true,
+    // Python has no chapter course yet. /python counts the 21 real Python-tagged
+    // practice questions that already ship in the CBSE bank and the ICSE
+    // Robotics & AI track, so the card and the page agree.
     totalChapters: 0,
-    totalQuestions: 200,
+    totalQuestions: 21,
     estimatedStudyTime: "8 hours",
   },
 ];

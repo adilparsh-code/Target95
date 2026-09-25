@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
-import { createArticle, getTopic, slugify } from "../../../lib/blog";
+import { claimTopicForGeneration } from "../../../lib/blog";
+import { runPipelineForTopic } from "../../../lib/blog-pipeline";
+import { isAuthorizedCronRequest } from "../../../lib/blog-admin-auth";
 
 export const runtime = "nodejs";
 
@@ -82,7 +84,9 @@ Hard rules:
 }
 
 export async function POST(request) {
-  if (!authorized(request)) return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+  if (!isAuthorizedCronRequest(request)) {
+    return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
+  }
 
   try {
     const body = await request.json();
@@ -116,7 +120,6 @@ export async function POST(request) {
 
     return NextResponse.json({ ok: true, articleId, status: "review", needsHumanReview: true, message: "Draft generated. Human editorial review is required before publication." });
   } catch (error) {
-    console.error("Blog draft generation failed:", error);
-    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "Draft generation failed" }, { status: 500 });
+    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "Generation failed" }, { status: 500 });
   }
 }

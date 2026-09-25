@@ -15,12 +15,9 @@ export function useSession(initialSession = null) {
   );
   const [isComplete, setIsComplete] = useState(initialSession?.status === "completed");
   const [results, setResults] = useState(initialSession?.results || null);
-  const sessionServiceRef = useRef(null);
+  // Lazily construct the service once (avoids ref writes during render).
+  const [sessionService] = useState(() => new SessionService());
   const completionStartedRef = useRef(false);
-
-  if (!sessionServiceRef.current) {
-    sessionServiceRef.current = new SessionService();
-  }
 
   const currentQuestion = session?.questions?.[currentIndex];
   const progress = session?.questions?.length
@@ -45,10 +42,10 @@ export function useSession(initialSession = null) {
 
   const persistIndex = useCallback((nextIndex) => {
     if (!session?.id) return;
-    sessionServiceRef.current.updateSession(session.id, {
+    sessionService.updateSession(session.id, {
       currentQuestionIndex: nextIndex
     }).catch(err => console.error("Failed to save practice position:", err));
-  }, [session]);
+  }, [session, sessionService]);
 
   const nextQuestion = useCallback(() => {
     if (!session || currentIndex >= session.questions.length - 1) return;
@@ -82,7 +79,7 @@ export function useSession(initialSession = null) {
       ]);
 
       if (session?.id) {
-        await sessionServiceRef.current.saveAnswer(
+        await sessionService.saveAnswer(
           session.id,
           questionId,
           answer,
@@ -97,7 +94,7 @@ export function useSession(initialSession = null) {
     } finally {
       setLoading(false);
     }
-  }, [session]);
+  }, [session, sessionService]);
 
   const toggleFlag = useCallback(async () => {
     if (!currentQuestion?.id || !session?.id) return;
@@ -111,7 +108,7 @@ export function useSession(initialSession = null) {
     ));
 
     try {
-      await sessionServiceRef.current.toggleFlag(session.id, questionId);
+      await sessionService.toggleFlag(session.id, questionId);
     } catch (err) {
       // Roll back the optimistic update if persistence fails.
       setFlaggedQuestions(prev => (
@@ -121,7 +118,7 @@ export function useSession(initialSession = null) {
       ));
       setError("Failed to update flag. Please try again.");
     }
-  }, [currentQuestion, session, flaggedQuestions]);
+  }, [currentQuestion, session, flaggedQuestions, sessionService]);
 
   const completeSession = useCallback(async () => {
     if (!session?.id || completionStartedRef.current) return null;
@@ -130,7 +127,7 @@ export function useSession(initialSession = null) {
     setError(null);
 
     try {
-      const sessionResults = await sessionServiceRef.current.completeSession(session.id);
+      const sessionResults = await sessionService.completeSession(session.id);
       setResults(sessionResults);
       setIsComplete(true);
       setTimeRemaining(0);
@@ -143,7 +140,7 @@ export function useSession(initialSession = null) {
     } finally {
       setLoading(false);
     }
-  }, [session]);
+  }, [session, sessionService]);
 
   // Timer countdown. A completed session can never be auto-submitted twice.
   useEffect(() => {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import BookmarkButton from "../BookmarkButton";
 import DifficultyBadge from "../DifficultyBadge";
 import useProgress from "../../hooks/useProgress";
+import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 
 const typeLabels = { mcq: "MCQ", theory: "Theory", programming: "Programming" };
 
@@ -19,6 +20,7 @@ export default function LearningQuestionCard({ question, attempt, onAttempt }) {
     if (selection === null || submitted) return;
     onAttempt(question, answerCorrect);
     markCompleted({ chapter: question.chapter, questionId: question.id });
+    trackEvent(LEARNING_EVENTS.QUESTION_ATTEMPTED, { chapterId: question.chapter, questionId: question.id, correct: answerCorrect });
   }
 
   return (

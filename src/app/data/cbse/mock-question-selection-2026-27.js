@@ -2,7 +2,7 @@
  * CBSE 2026-27 mock-question selection.
  * Uses the canonical CBSE practice bank and enforces class/subject separation.
  */
-import { CBSE_PRACTICE_QUESTIONS_2026_27 } from './question-bank-2026-27';
+import { CBSE_PRACTICE_QUESTIONS_2026_27 } from './question-bank-2026-27.js';
 
 export const getCBSEMockQuestions = ({ classNumber, subjectCode, limit = 20, types = [] } = {}) => {
   const filtered = CBSE_PRACTICE_QUESTIONS_2026_27.filter((question) => {

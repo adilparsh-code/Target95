@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { aiService } from "../services/AIService";
+import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 
 export function useAITutor(initialContext = {}) {
   const [messages, setMessages] = useState([]);
@@ -11,10 +12,26 @@ export function useAITutor(initialContext = {}) {
   const [historyLoading, setHistoryLoading] = useState(false);
   const [currentChatId, setCurrentChatId] = useState(null);
 
+  // Load chat history from Firestore. History is a convenience, not part of
+  // tutoring, so a Firestore/permission failure must not show an error banner
+  // that makes the AI Tutor look broken.
+  const loadHistory = useCallback(async () => {
+    setHistoryLoading(true);
+    try {
+      const chats = await aiService.getHistory();
+      setHistory(chats);
+    } catch (err) {
+      setHistory([]);
+      console.warn("AI Tutor history unavailable:", err?.message || err);
+    } finally {
+      setHistoryLoading(false);
+    }
+  }, []);
+
   // Load chat history on mount
   useEffect(() => {
     loadHistory();
-  }, []);
+  }, [loadHistory]);
 
   // If there's initial context (from question page), send it automatically
   useEffect(() => {
@@ -26,21 +43,7 @@ export function useAITutor(initialContext = {}) {
       };
       setMessages([contextMessage]);
     }
-  }, [initialContext]);
-
-  // Load chat history from Firestore
-  const loadHistory = useCallback(async () => {
-    setHistoryLoading(true);
-    setError(null);
-    try {
-      const chats = await aiService.getHistory();
-      setHistory(chats);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setHistoryLoading(false);
-    }
-  }, []);
+  }, [initialContext, messages.length]);
 
   // Send a message to AI
   const sendMessage = useCallback(async (prompt) => {
@@ -72,19 +75,24 @@ export function useAITutor(initialContext = {}) {
       };
       setMessages(prev => [...prev, aiMessage]);
 
-      // Save the chat to Firestore
-      const savedChat = await aiService.saveChat({
-        question: prompt,
-        response: aiResponse,
-        subject: initialContext.subject || "General",
-        chapter: initialContext.chapter || "General",
-        ...initialContext
-      });
-      
-      setCurrentChatId(savedChat.id);
-      // Refresh history
-      await loadHistory();
-      
+      // Persisting chat history is best effort: the answer above is already
+      // delivered, so a storage failure must not surface as a tutor error.
+      try {
+        const savedChat = await aiService.saveChat({
+          question: prompt,
+          response: aiResponse,
+          subject: initialContext.subject || "General",
+          chapter: initialContext.chapter || "General",
+          ...initialContext
+        });
+
+        setCurrentChatId(savedChat.id);
+        await loadHistory();
+      } catch (historyError) {
+        console.warn("AI Tutor chat could not be saved:", historyError?.message || historyError);
+      }
+
+      trackEvent(LEARNING_EVENTS.AI_TUTOR_USED, { subject: initialContext.subject, chapterId: initialContext.chapter });
     } catch (err) {
       setError(err.message);
     } finally {

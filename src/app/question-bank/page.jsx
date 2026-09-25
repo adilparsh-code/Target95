@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import QuestionBank from "../components/QuestionBank";
@@ -12,7 +13,9 @@ export default function QuestionBankPage() {
           <h1 className="mt-2 text-2xl font-black tracking-[-0.035em] text-slate-950 sm:text-3xl dark:text-white">Practice questions with purpose.</h1>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base dark:text-slate-400">Find the right questions, review your answers, and build exam confidence one attempt at a time.</p>
         </div>
-        <QuestionBank />
+        <Suspense fallback={<div className="h-96 animate-pulse rounded-[2rem] bg-white/60 dark:bg-slate-900/60" />}> 
+          <QuestionBank />
+        </Suspense>
       </div>
       <Footer />
     </main>

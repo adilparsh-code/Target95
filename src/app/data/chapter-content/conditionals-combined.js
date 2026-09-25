@@ -9239,7 +9239,7 @@ const chapterConditionalsCombined = {
     }
   ],
   "practiceTest": {
-    "title": "IF-ELSE Statement — Practice Test\n\nNested IF Statement - Complete Chapter Test\n\nSWITCH Statement - Complete Chapter Test",
+    "title": "If-Else, Nested If & Switch — Combined Practice Test",
     "totalMarks": 50,
     "timeLimit": "60 minutes",
     "sections": [
@@ -9426,91 +9426,8 @@ const chapterConditionalsCombined = {
             "marks": 5
           }
         ]
-      },
-      {
-        "name": "Section A: MCQs (10 marks - 1 mark each)",
-        "questions": [
-          "What is a nested if statement?",
-          "When is the inner condition of a nested if evaluated?",
-          "What is the dangling else problem?",
-          "How can you prevent the dangling else problem?",
-          "What is the maximum recommended nesting depth?",
-          "What is the output of: int x=10; if(x>5) { if(x>8) print('A'); else print('B'); } else print('C');",
-          "In nested if, if the outer condition is false, what happens to the inner condition?",
-          "What is the arrow anti-pattern?",
-          "What are guard clauses used for?",
-          "Can a nested if be placed inside an else block?"
-        ]
-      },
-      {
-        "name": "Section B: Short Answer (10 marks - 2 marks each)",
-        "questions": [
-          "Explain the dangling else problem with an example.",
-          "What is the difference between nested if and else-if ladder?",
-          "Write a nested if to find the largest of three numbers.",
-          "What is the scope of a variable declared inside an inner if-block?",
-          "Explain how guard clauses reduce nesting depth."
-        ]
-      },
-      {
-        "name": "Section C: Long Answer (15 marks - 5 marks each)",
-        "questions": [
-          "Write a Java program using three-level nested if to check if a year is a leap year. Explain each level.",
-          "Write a program using nested if to implement a grade calculation system with validation, pass/fail, and grade assignment.",
-          "Explain the best practices for writing clean nested if statements with examples."
-        ]
-      },
-      {
-        "name": "Section D: Programming (15 marks - 5 marks each)",
-        "questions": [
-          "Write a program using nested if to implement an ATM withdrawal system with PIN, balance, and denomination checks.",
-          "Write a program using nested if to implement a menu-driven restaurant system with main categories and sub-options.",
-          "Write a program using nested if to implement a loan approval system with salary, credit score, and collateral checks."
-        ]
-      },
-      {
-        "name": "Section A: MCQs (10 marks - 1 mark each)",
-        "questions": [
-          "What does the switch statement do?",
-          "What is the purpose of break in switch?",
-          "What is fall-through?",
-          "Which types can be used in switch?",
-          "Is default mandatory?",
-          "What is the output: switch(2) { case 1: print('A'); case 2: print('B'); case 3: print('C'); }",
-          "Can case labels be variables?",
-          "Can multiple cases share the same code?",
-          "What happens if no case matches and no default?",
-          "Can String be used in switch?"
-        ]
-      },
-      {
-        "name": "Section B: Short Answer (10 marks - 2 marks each)",
-        "questions": [
-          "Explain fall-through with an example.",
-          "What is the difference between switch and if-else-if?",
-          "Write a switch to check if a character is a vowel.",
-          "What is the default case? Is it mandatory?",
-          "Explain grouped cases with an example."
-        ]
-      },
-      {
-        "name": "Section C: Long Answer (15 marks - 5 marks each)",
-        "questions": [
-          "Write a Java program using switch to implement a simple calculator with error handling.",
-          "Explain the rules for case labels in switch. What causes compilation errors?",
-          "Write a program using switch to implement a menu-driven restaurant billing system."
-        ]
-      },
-      {
-        "name": "Section D: Programming (15 marks - 5 marks each)",
-        "questions": [
-          "Write a program using switch to implement an ATM menu system.",
-          "Write a program using switch to convert marks to grades using integer division.",
-          "Write a program using nested switch for country and city selection."
-        ]
       }
     ],
-    "duration": 60,
     "instructions": "Answer all questions. Each section has different marks. Time: 60 minutes."
   },
   "chapterSummary": {

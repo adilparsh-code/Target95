@@ -8,27 +8,26 @@ export const CBSE_SENIOR_CONTENT_INDEX = {
       name: 'Computer Science',
       pythonLibraries: [],
       focus: ['Computer Systems and Organisation', 'Computational Thinking and Programming - I', 'Society, Law, and Ethics'],
-      specialTopics: ['Python programming', 'CSV handling', 'exception handling', 'SQL/database concepts'],
+      specialTopics: ['Python programming', 'strings', 'lists', 'tuples', 'dictionaries', 'functions'],
     },
     '065': {
       name: 'Informatics Practices',
-      pythonLibraries: ['Pandas', 'Matplotlib'],
+      pythonLibraries: [],
       focus: ['Introduction to Computer System', 'Introduction to Python', 'Database concepts and SQL', 'Emerging Trends'],
-      specialTopics: ['Pandas DataFrame', 'CSV with Pandas', 'Matplotlib basics', 'SQL'],
+      specialTopics: ['Python programming', 'strings', 'lists', 'dictionaries', 'SQL', 'emerging trends'],
     },
     '802': {
       name: 'Information Technology',
       pythonLibraries: [],
-      focus: [],
-      specialTopics: [],
-      verificationRequired: true,
+      focus: ['Computer Organization', 'Networking And Internet', 'Office Automation Tools', 'RDBMS', 'Fundamentals of Java'],
+      specialTopics: ['Java programming', 'SQL', 'office automation', 'networking'],
     },
   },
   12: {
     '083': {
       name: 'Computer Science',
       pythonLibraries: [],
-      focus: ['Computational Thinking and Programming - II', 'Computer Networks', 'Database Management', 'Society, Law, and Ethics'],
+      focus: ['Computational Thinking and Programming - II', 'Computer Networks', 'Database Management'],
       specialTopics: ['Python programming', 'CSV handling', 'exception handling', 'SQL/database concepts'],
     },
     '065': {
@@ -40,9 +39,8 @@ export const CBSE_SENIOR_CONTENT_INDEX = {
     '802': {
       name: 'Information Technology',
       pythonLibraries: [],
-      focus: [],
-      specialTopics: [],
-      verificationRequired: true,
+      focus: ['Database Concepts – RDBMS Tool', 'Operating Web Based Applications', 'JAVA', 'Work Integrated Learning IT – DMA'],
+      specialTopics: ['Java programming', 'SQL', 'web applications', 'work-integrated learning'],
     },
   },
 };

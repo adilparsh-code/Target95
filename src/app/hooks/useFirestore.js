@@ -200,15 +200,24 @@ export default function useFirestore() {
     }
   }, [firestoreDb]);
 
-  // Subscribe to realtime updates
-  const subscribeToCollection = useCallback((collectionName, callback) => {
+  // Subscribe to realtime updates.
+  // An optional { field, operator, value } filter scopes the listener to the
+  // caller's own documents (e.g. userId == uid). Subscribing to a whole
+  // collection either leaks other users' data or fails against the
+  // owner-only Firestore security rules, so unscoped use is discouraged.
+  const subscribeToCollection = useCallback((collectionName, callback, options = {}) => {
     // Return no-op unsubscribe if running on server or no db connection
     if (!firestoreDb) {
       return () => {};
     }
-    
+
     try {
-      const q = collection(firestoreDb, collectionName);
+      const base = collection(firestoreDb, collectionName);
+      const constraints = [];
+      if (options && options.field) {
+        constraints.push(where(options.field, options.operator || "==", options.value));
+      }
+      const q = constraints.length ? query(base, ...constraints) : base;
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const data = querySnapshot.docs.map(doc => ({
           id: doc.id,
@@ -328,7 +337,7 @@ export function usePaginatedFirestore(collectionRef, options = {}) {
 
   useEffect(() => {
     fetchData(false);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     data,

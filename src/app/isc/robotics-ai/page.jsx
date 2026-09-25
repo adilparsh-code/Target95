@@ -189,8 +189,13 @@ export default function RoboticsAIPage() {
         </section>
 
         <section className="mt-8 rounded-3xl border border-amber-200 bg-amber-50 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-amber-950">Class X status</h2>
-          <p className="mt-2 text-sm text-amber-900">{roboticsAI.classX.note}</p>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <h2 className="text-2xl font-bold text-amber-950">Class X AI pathway</h2>
+              <p className="mt-2 max-w-3xl text-sm text-amber-900">{roboticsAI.classX.note}</p>
+            </div>
+            <Link href="/icse/robotics-ai/class-x" className="rounded-xl bg-amber-900 px-4 py-2 text-sm font-bold text-white hover:bg-amber-800">Open Class X AI →</Link>
+          </div>
           <ul className="mt-4 grid gap-2 md:grid-cols-2">
             {roboticsAI.classX.plannedUnits.map((item) => <li key={item} className="rounded-xl bg-white/70 p-3 text-sm">{item}</li>)}
           </ul>

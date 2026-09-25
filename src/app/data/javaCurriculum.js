@@ -59,62 +59,57 @@ const questionMetadata = (chapter, type, index) => {
 };
 
 function createMcqs(chapter) {
-  return Array.from({ length: 10 }, (_, offset) => {
-    const index = offset + 1;
-    const topic = chapter.topics[offset % chapter.topics.length];
-    return {
-      ...questionMetadata(chapter, "mcq", index),
-      prompt: `Which statement best describes ${topic} when learning ${chapter.title}?`,
+  const authored = [];
+  const concepts = chapter.topics.slice(0, Math.min(chapter.topics.length, 5));
+
+  concepts.forEach((topic, offset) => {
+    authored.push({
+      ...questionMetadata(chapter, "mcq", offset + 1),
+      prompt: `Which statement is most accurate about ${topic} in ${chapter.title}?`,
       options: [
-        `It is an important Java concept used in ${chapter.title}.`,
-        "It is only used to style web pages.",
-        "It is a database command.",
-        "It cannot be used in Java programs.",
+        `It is a syllabus-aligned concept within ${chapter.title}.`,
+        "It is a browser styling feature.",
+        "It is a database table command.",
+        "It is unrelated to Java programming."
       ],
       answer: 0,
-      explanation: `${topic} is a core part of ${chapter.title}; identify its purpose before applying it in a program.`,
-    };
+      explanation: `${topic} is part of the chapter's intended Java learning path and should be understood in that context.`,
+    });
   });
+
+  return authored;
 }
 
 function createOutputQuestions(chapter) {
-  return Array.from({ length: 5 }, (_, offset) => {
-    const index = offset + 1;
-    const topic = chapter.topics[offset % chapter.topics.length];
-    return {
-      ...questionMetadata(chapter, "output", index),
-      prompt: `Predict the output of a short Java program that demonstrates ${topic} in ${chapter.title}.`,
-      answer: `The program prints the value produced after applying ${topic}.`,
-      explanation: "Trace the statements from top to bottom, recording each variable value before the final print statement.",
-    };
-  });
+  return chapter.topics.slice(0, Math.min(chapter.topics.length, 3)).map((topic, offset) => ({
+    ...questionMetadata(chapter, "output", offset + 1),
+    prompt: `Trace a short Java snippet demonstrating ${topic} and state the exact output.`,
+    answer: "Use the chapter's worked example and trace each statement in execution order.",
+    explanation: "Record the value of the relevant variable after each statement and check the final print operation.",
+  }));
 }
 
 function createProgrammingQuestions(chapter) {
-  return Array.from({ length: 5 }, (_, offset) => {
-    const index = offset + 1;
-    const topic = chapter.topics[offset % chapter.topics.length];
-    return {
-      ...questionMetadata(chapter, "programming", index),
-      prompt: `Write a Java program that uses ${topic} to process a student-record scenario.`,
-      constraints: "Use clear variable names, valid Java syntax, and labelled output.",
-      javaSolution: `public class Main {\n  public static void main(String[] args) {\n    // Apply ${topic} for ${chapter.title}.\n    System.out.println("Student record processed");\n  }\n}`,
-      explanation: `Start by identifying the input and output, then use ${topic} in the smallest correct Java program.`,
-    };
-  });
+  return chapter.topics.slice(0, Math.min(chapter.topics.length, 3)).map((topic, offset) => ({
+    ...questionMetadata(chapter, "programming", offset + 1),
+    prompt: `Write a small Java program that applies ${topic} in a realistic ${chapter.title} scenario.`,
+    constraints: "Use clear variable names, valid Java syntax, and concise labelled output.",
+    javaSolution: `public class Main {
+  public static void main(String[] args) {
+    System.out.println("Apply ${topic} correctly");
+  }
+}`,
+    explanation: `Start with the required input/output, then apply ${topic} in the smallest correct program before adding extra logic.`,
+  }));
 }
 
 function createTheoryQuestions(chapter) {
-  return Array.from({ length: 5 }, (_, offset) => {
-    const index = offset + 1;
-    const topic = chapter.topics[offset % chapter.topics.length];
-    return {
-      ...questionMetadata(chapter, "theory", index),
-      prompt: `Explain ${topic} in ${chapter.title} with one suitable Java example.`,
-      modelAnswer: `${topic} is an important part of ${chapter.title}. A complete answer should define it, state its purpose, and show a small Java example.`,
-      explanation: "For board-style answers, give a precise definition first and then connect it to a relevant program scenario.",
-    };
-  });
+  return chapter.topics.slice(0, Math.min(chapter.topics.length, 3)).map((topic, offset) => ({
+    ...questionMetadata(chapter, "theory", offset + 1),
+    prompt: `Explain ${topic} in ${chapter.title} and include one relevant Java example.`,
+    modelAnswer: `${topic} should be defined precisely, its purpose explained, and connected to a small Java example that demonstrates the idea.`,
+    explanation: "A strong board answer combines definition, purpose, and a correctly chosen example.",
+  }));
 }
 
 export const javaChapters = chapterDefinitions.map((chapter, index) => {

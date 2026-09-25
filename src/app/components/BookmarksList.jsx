@@ -4,13 +4,28 @@ import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 import DifficultyBadge from "./DifficultyBadge";
 import useBookmarks from "../hooks/useBookmarks";
+import legacyQuestions from "../data/questions";
+import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
 
-export default function BookmarksList({ questions }) {
+// Bookmarks are created from the real question bank (and from the question
+// player), so they must be resolved against the same source. The previous
+// lookup only searched a 5-item legacy array, which made every saved bookmark
+// silently disappear from this page. Every routable chapter alias is indexed so
+// a bookmark saved from e.g. /Java/classes-objects still resolves.
+const questionIndex = new Map();
+for (const bank of Object.values(chapterQuestionBankBySlug)) {
+  for (const question of bank) {
+    questionIndex.set(`${question.chapter}:${question.id}`, question);
+  }
+}
+for (const question of legacyQuestions) {
+  questionIndex.set(`${question.chapter}:${question.id}`, question);
+}
+
+export default function BookmarksList() {
   const { bookmarks } = useBookmarks();
   const bookmarkedQuestions = bookmarks.flatMap((bookmark) => {
-    const question = questions.find(
-      (item) => item.chapter === bookmark.chapter && item.id === bookmark.questionId
-    );
+    const question = questionIndex.get(`${bookmark.chapter}:${bookmark.questionId}`);
     return question ? [{ bookmark, question }] : [];
   });
 
@@ -56,7 +71,7 @@ export default function BookmarksList({ questions }) {
           <div className="mt-16 rounded-3xl border-2 border-dashed border-gray-300 bg-gradient-to-b from-gray-50 to-white py-20 text-center">
             <div className="mx-auto w-24 h-24 rounded-full bg-blue-100 flex items-center justify-center mb-6"><svg className="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg></div>
             <h2 className="text-2xl font-bold text-gray-900">No Bookmarked Questions Yet</h2>
-            <p className="mt-3 text-lg text-gray-600 max-w-md mx-auto">Start bookmarking questions you want to revisit for revision. They'll appear here for easy access.</p>
+            <p className="mt-3 text-lg text-gray-600 max-w-md mx-auto">Start bookmarking questions you want to revisit for revision. They&apos;ll appear here for easy access.</p>
             <Link href="/practice/setup" className="mt-8 inline-flex items-center justify-center min-h-[44px] rounded-xl bg-blue-600 px-8 py-3 text-white font-medium transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 3a1 1 0 00-1 1v5H4a1 1 0 000 2h5v5a1 1 0 002 0v-5h5a1 1 0 000-2h-5V4a1 1 0 00-1-1z" clipRule="evenodd" /></svg>
               Start Practice

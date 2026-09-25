@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Card from "../ui/Card";
 import Button from "../ui/Button";
@@ -12,10 +12,14 @@ const CISE_SUBJECTS = [
   { id: "java", name: "Java Programming", board: "ICSE" },
   { id: "java", name: "Computer Science (Java)", board: "ISC" },
 ];
+// Chapter ids MUST match the real question-bank chapter slugs, otherwise the
+// deep link sent to /question-bank is ignored and the student lands on "all".
 const ICSE_CHAPTERS = [
-  ["introduction", "Introduction to Java"], ["variables", "Variables & Data Types"], ["operators", "Operators"],
-  ["control-flow", "Control Flow"], ["methods", "Methods"], ["oops", "Object-Oriented Programming"]
+  ["introduction-to-java", "Introduction to Java"], ["variables-data-types", "Variables & Data Types"], ["operators", "Operators"],
+  ["conditionals", "Conditionals & Control Flow"], ["methods", "Methods"], ["class-as-basis-of-computation", "Object-Oriented Programming"]
 ].map(([id, name]) => ({ id, name }));
+const CBSE_SUBJECTS = { "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" };
+const CBSE_CODES_BY_CLASS = { 9: ["402"], 10: ["402"], 11: ["083", "065", "802"], 12: ["083", "065", "802"] };
 
 export default function PracticeSetup() {
   const router = useRouter();
@@ -27,27 +31,42 @@ export default function PracticeSetup() {
     const classNumber = Number(searchParams.get("class") || (board === "ICSE" ? 10 : board === "ISC" ? 12 : 10));
     const subjectCode = searchParams.get("subjectCode") || "";
     const subjectName = searchParams.get("subject") || "";
-    return { board, classNumber, subjectCode, subjectName };
+    const chapter = searchParams.get("chapter") || "";
+    return { board, classNumber, subjectCode, subjectName, chapter };
   }, [searchParams]);
+  const allowedSubjectCodes = CBSE_CODES_BY_CLASS[queryContext.classNumber] || [];
+  const effectiveSubjectCode = allowedSubjectCodes.includes(queryContext.subjectCode)
+    ? queryContext.subjectCode
+    : (allowedSubjectCodes[0] || "");
+
+  // Chapter selection is local state so a ?chapter= deep link is honoured on
+  // the very first render (including SSR) instead of one effect later.
+  const [chapterChoice, setChapterChoice] = useState(() => searchParams.get("chapter") || "");
+
+  const selectChapter = (chapterId) => {
+    setChapterChoice(chapterId);
+    updateSettings({ chapter: chapterId });
+  };
 
   useEffect(() => {
-    const { board, classNumber, subjectCode, subjectName } = queryContext;
+    const { board, classNumber, subjectCode, subjectName, chapter } = queryContext;
+    setChapterChoice(chapter);
     if (board === "CBSE") {
       const code = subjectCode || (classNumber <= 10 ? "402" : "083");
       const name = subjectName || ({ "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" }[code] || "CBSE Subject");
-      updateSettings({ board, classNumber, subjectCode: code, subject: `cbse-${code}`, subjectName: name, chapter: "" });
+      updateSettings({ board, classNumber, subjectCode: code, subject: `cbse-${code}`, subjectName: name, chapter });
     } else {
-      updateSettings({ board, classNumber, subjectCode: "", subject: "java", subjectName: board === "ISC" ? "Computer Science (Java)" : "Computer Applications (Java)", chapter: "" });
+      updateSettings({ board, classNumber, subjectCode: "", subject: "java", subjectName: board === "ISC" ? "Computer Science (Java)" : "Computer Applications (Java)", chapter });
     }
   }, [queryContext, updateSettings]);
 
   const cbseQuestions = useMemo(() => {
-    if (queryContext.board !== "CBSE" || !queryContext.subjectCode) return [];
-    return getCBSEPracticeQuestions(queryContext.classNumber, queryContext.subjectCode);
-  }, [queryContext]);
+    if (queryContext.board !== "CBSE") return [];
+    return getCBSEPracticeQuestions(queryContext.classNumber, effectiveSubjectCode);
+  }, [queryContext, effectiveSubjectCode]);
 
   const subjects = queryContext.board === "CBSE"
-    ? [{ id: `cbse-${queryContext.subjectCode}`, name: `${queryContext.subjectName || "CBSE Subject"} (Code ${queryContext.subjectCode})` }]
+    ? [{ id: `cbse-${effectiveSubjectCode}`, name: `${queryContext.subjectName || CBSE_SUBJECTS[effectiveSubjectCode] || "CBSE Subject"} (Code ${effectiveSubjectCode})` }]
     : CISE_SUBJECTS.filter((item) => item.board === queryContext.board);
 
   const chapters = queryContext.board === "CBSE"
@@ -64,12 +83,25 @@ export default function PracticeSetup() {
   const availableChapters = chapters;
 
   const handleStartPractice = async () => {
-    try {
-      const session = await startPractice();
-      if (session?.id) router.push(`/practice/session?id=${session.id}`);
-    } catch (err) {
-      console.error("Failed to start practice:", err);
-    }
+    const session = await startPractice();
+    router.push(`/practice/session?id=${encodeURIComponent(session.id)}`);
+  // Keep a deep-linked chapter selectable even when it is not one of the
+  // curated entries for the current board.
+  const availableChapters = chapterChoice && !chapters.some((chapter) => chapter.id === chapterChoice)
+    ? [...chapters, { id: chapterChoice, name: chapterChoice.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }]
+    : chapters;
+
+  // The question bank already supports deep links, so carry every selected
+  // filter across instead of dropping the student's choices on the floor.
+  const handleStartPractice = () => {
+    const params = new URLSearchParams();
+    params.set("board", String(settings.board || queryContext.board));
+    params.set("class", String(settings.classNumber || queryContext.classNumber));
+    if (settings.subjectCode) params.set("subjectCode", settings.subjectCode);
+    if (settings.chapter || chapterChoice) params.set("chapter", settings.chapter || chapterChoice);
+    if (settings.difficulty) params.set("difficulty", settings.difficulty);
+    if (settings.questionCount) params.set("count", String(settings.questionCount));
+    router.push(`/question-bank?${params.toString()}`);
   };
 
   const buttonClass = (active) => `w-full rounded-xl border-2 p-3 text-left transition-all ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20" : "border-gray-200 hover:border-gray-300 dark:border-gray-700"}`;
@@ -88,7 +120,7 @@ export default function PracticeSetup() {
         <Card className="p-6">
           <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Subject</h3>
           <div className="space-y-2">
-            {subjects.map((subject) => <button key={subject.id} type="button" onClick={() => updateSettings({ subject: subject.id, chapter: "" })} className={buttonClass(settings.subject === subject.id)}>{subject.name}</button>)}
+            {subjects.map((subject) => <button key={subject.id} type="button" onClick={() => { setChapterChoice(""); updateSettings({ subject: subject.id, chapter: "" }); }} className={buttonClass(settings.subject === subject.id)}>{subject.name}</button>)}
           </div>
           {queryContext.board === "CBSE" && <p className="mt-4 text-xs text-gray-500">CBSE programming questions use Python where applicable; CISCE Java is never used here.</p>}
         </Card>
@@ -96,8 +128,8 @@ export default function PracticeSetup() {
         <Card className="p-6">
           <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Chapter / Topic</h3>
           <div className="max-h-80 space-y-2 overflow-y-auto pr-1">
-            <button type="button" onClick={() => updateSettings({ chapter: "" })} className={buttonClass(!settings.chapter)}>All Chapters / Topics</button>
-            {availableChapters.map((chapter) => <button key={chapter.id} type="button" onClick={() => updateSettings({ chapter: chapter.id })} className={buttonClass(settings.chapter === chapter.id)}>{chapter.name}</button>)}
+            <button type="button" onClick={() => selectChapter("")} className={buttonClass(!chapterChoice)}>All Chapters / Topics</button>
+            {availableChapters.map((chapter) => <button key={chapter.id} type="button" onClick={() => selectChapter(chapter.id)} className={buttonClass(chapterChoice === chapter.id)}>{chapter.name}</button>)}
           </div>
         </Card>
 
@@ -119,7 +151,7 @@ export default function PracticeSetup() {
         </Card>
       </div>
 
-      <div className="mt-8 text-center"><Button onClick={handleStartPractice} disabled={loading || !settings.subject || !settings.difficulty} variant="primary" size="lg" className="px-12">{loading ? "Starting Practice..." : "Start Practice"}</Button></div>
+      <div className="mt-8 text-center"><Button onClick={handleStartPractice} disabled={loading} variant="primary" size="lg" className="px-12">{loading ? "Preparing Practice…" : "Start Practice"}</Button></div>
     </div>
   );
 }

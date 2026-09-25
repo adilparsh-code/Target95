@@ -1,4 +1,4 @@
-import { getCBSEPracticeQuestions } from './question-bank-2026-27';
+import { getCBSEPracticeQuestions } from './question-bank-2026-27.js';
 
 export const getCBSEContentSummary = (classNumber, subjectCode) => {
   const questions = getCBSEPracticeQuestions(classNumber, subjectCode);

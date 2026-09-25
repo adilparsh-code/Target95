@@ -114,4 +114,13 @@ const ICSE_ROBOTICS_AI_CLASS_X = {
   ]
 };
 
+const enrichQuestions = (unit) => {
+  unit.questions = (unit.questions || []).map((question) => ({
+    ...question,
+    explanation: question.explanation || `The answer applies the unit's AI, cybersecurity, project or Python principle: ${question.answer}`,
+  }));
+};
+
+ICSE_ROBOTICS_AI_CLASS_X.units.forEach(enrichQuestions);
+
 export default ICSE_ROBOTICS_AI_CLASS_X;

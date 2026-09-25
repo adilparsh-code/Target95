@@ -13,6 +13,13 @@ import { getMockTestHistory } from "@/lib/mocktest";
 
 const emptyMockTests = [];
 
+function getLocalDateKey(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 function getEmptyMockTests() {
   return emptyMockTests;
 }
@@ -78,10 +85,18 @@ export default function useStudentDashboard() {
     const scores = mockTests.map((t) => Number(t.percentage) || 0).filter((n) => n > 0);
     const averageScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
     const bestScore = scores.length ? Math.max(...scores) : 0;
+    // Real "solved today" count from recorded attempt timestamps (local day).
+    const todayKey = getLocalDateKey(new Date());
+    const solvedToday = completedQuestions.filter((question) => {
+      if (typeof question.completedAt !== "string") return false;
+      const parsed = new Date(question.completedAt);
+      return !Number.isNaN(parsed.getTime()) && getLocalDateKey(parsed) === todayKey;
+    }).length;
 
     return {
       overallProgress: roadmap.length ? Math.round(roadmap.reduce((sum, c) => sum + c.completion, 0) / roadmap.length) : 0,
       questionsSolved: totalSolved,
+      questionsSolvedToday: solvedToday,
       accuracy,
       mockTestsAttempted: mockTests.length,
       averageScore,

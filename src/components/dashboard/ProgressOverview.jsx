@@ -5,7 +5,7 @@ import ProgressRing from "@/app/components/ui/ProgressRing";
 const items = [
   { key: "chapter", title: "Chapter completion", caption: (stats) => `${stats.chapterCompletion}% of your chapters`, value: (stats) => stats.chapterCompletion, color: "stroke-blue-600" },
   { key: "daily", title: "Daily goal", caption: (stats) => `${stats.dailyGoal.current}/${stats.dailyGoal.target} questions`, value: (stats) => stats.dailyGoal.progress, color: "stroke-emerald-600" },
-  { key: "weekly", title: "Weekly goal", caption: (stats) => `${stats.weeklyGoal.current}/${stats.weeklyGoal.target} days`, value: (stats) => stats.weeklyGoal.progress, color: "stroke-violet-600" },
+  { key: "weekly", title: "Chapter coverage", caption: (stats) => `${stats.weeklyGoal.current}/${stats.weeklyGoal.target} chapters started`, value: (stats) => stats.weeklyGoal.progress, color: "stroke-violet-600" },,
 ];
 
 export default function ProgressOverview({ stats }) {

@@ -18,7 +18,7 @@ export default function FeatureRequestPage() {
           <div className="mx-auto max-w-3xl">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Request a Feature</h1>
             <p className="text-lg text-gray-600 mb-8">
-              Have an idea that would make Target95+ even better? We'd love to hear it. Submit your request and our team will review it.
+              Have an idea that would make Target95+ even better? We&apos;d love to hear it. Submit your request and our team will review it.
             </p>
             <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
               <form className="space-y-6">

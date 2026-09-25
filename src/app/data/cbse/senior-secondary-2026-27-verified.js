@@ -61,10 +61,10 @@ export const CBSE_SENIOR_2026_27_VERIFIED = {
       sourceUrl: 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf',
       theoryMarks: 70, practicalMarks: 30,
       units: [
-        { code: 1, name: 'Data Handling using Pandas - I', marks: 25 },
-        { code: 2, name: 'Data Visualisation', marks: 25 },
-        { code: 3, name: 'Database Query using SQL', marks: 25 },
-        { code: 4, name: 'Societal Impacts', marks: 5 },
+        { code: 1, name: 'Data Handling using Pandas and Data Visualization', marks: 25 },
+        { code: 2, name: 'Database Query using SQL', marks: 25 },
+        { code: 3, name: 'Introduction to Computer Networks', marks: 10 },
+        { code: 4, name: 'Societal Impacts', marks: 10 },
       ],
       pythonLibraries: ['Pandas', 'Matplotlib'],
       learningOutcomes: [
@@ -78,16 +78,27 @@ export const CBSE_SENIOR_2026_27_VERIFIED = {
   },
   '802': {
     11: {
-      sourceUrl: 'https://cbseacademic.nic.in/skill-education.html',
-      units: [],
-      status: 'source-registry-pending',
-      note: 'Do not synthesize a current 2026-27 unit map until the exact official 802 curriculum PDF is verified.',
+      sourceUrl: 'https://cbseacademic.nic.in/web_material/Curriculum27/SrSec/802-IT.pdf',
+      theoryMarks: 60, practicalMarks: 40,
+      units: [
+        { code: 1, name: 'Computer Organization', marks: 5 },
+        { code: 2, name: 'Networking And Internet', marks: 10 },
+        { code: 3, name: 'Office Automation Tools', marks: 10 },
+        { code: 4, name: 'RDBMS', marks: 10 },
+        { code: 5, name: 'Fundamentals of Java', marks: 15 },
+      ],
+      programmingLanguage: 'Java',
     },
     12: {
-      sourceUrl: 'https://cbseacademic.nic.in/skill-education.html',
-      units: [],
-      status: 'source-registry-pending',
-      note: 'Do not synthesize a current 2026-27 unit map until the exact official 802 curriculum PDF is verified.',
+      sourceUrl: 'https://cbseacademic.nic.in/web_material/Curriculum27/SrSec/802-IT.pdf',
+      theoryMarks: 60, practicalMarks: 40,
+      units: [
+        { code: 1, name: 'Database Concepts – RDBMS Tool', marks: 15 },
+        { code: 2, name: 'Operating Web Based Applications', marks: 10 },
+        { code: 3, name: 'JAVA', marks: 20 },
+        { code: 4, name: 'Work Integrated Learning IT – DMA', marks: 5 },
+      ],
+      programmingLanguage: 'Java',
     },
   },
 };

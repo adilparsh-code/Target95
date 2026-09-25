@@ -27,11 +27,11 @@ Use `src/app/data/icseRoboticsAIClassX.js` as the current Class X AI contract. T
 
 The Class X AI question bank should deliberately include MCQs, short answers, case-based/application questions, output tracing, debugging, programming and HOTS questions, but every question must map back to one of the syllabus topics above.
 
-## Current execution baseline
+## Verified execution baseline — 25 September 2026
 
-The Class X source currently contains **28 board-style questions across 4 units** (6 + 6 + 7 + 9). The bank includes MCQ, short-answer, case-study, output-tracing, debugging, programming and HOTS formats. This is a baseline for expansion, not a completion declaration.
+The Class IX AI/robotics pathway contains 7 units, 63 checked questions (including the supplemental bank) and practical/project tasks. The Class X AI portion contains 4 units and 28 board-style questions (6 + 6 + 7 + 9), with theory, Python worked examples, practical assignments and assessment content. `npm run validate:cisce-ai` verifies the unit counts, checked answers/explanations, question-type coverage, class separation and Java/CBSE boundaries.
 
-Before adding volume, review each unit for topic-level coverage and question quality. Do not pad a unit with repetitive factual questions just to increase the count.
+Board-correct routes are live and preview-verified at `/icse/robotics-ai` and `/icse/robotics-ai/class-x`. The older `/isc/robotics-ai` and `/isc/robotics-ai/class-x` paths remain available as compatibility aliases, and class hub pages link to the board-correct paths.
 
 ## Non-negotiable content rules
 
@@ -54,4 +54,5 @@ A class is complete only after:
 - questions are checked for duplication and syllabus drift;
 - answers/explanations are present where needed;
 - `npm run validate:data` passes;
+- `npm run validate:cisce-ai` passes;
 - the production build passes.

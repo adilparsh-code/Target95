@@ -185,12 +185,19 @@ export default function useProgress(userId = null) {
 
     fetchAndSyncProgress();
 
-    const unsubscribe = subscribeToCollection("progress", (data) => {
-      const userProgress = data.filter((item) => item.userId === userId);
-      completedQuestionsRef.current = userProgress;
-      setCompletedQuestions(userProgress);
-      saveCompletedQuestions(userProgress);
-    });
+    // Scoped to this user: the progress collection is owner-only per the
+    // Firestore rules, so an unscoped listener would either leak other
+    // students' progress or be rejected outright.
+    const unsubscribe = subscribeToCollection(
+      "progress",
+      (data) => {
+        const userProgress = data;
+        completedQuestionsRef.current = userProgress;
+        setCompletedQuestions(userProgress);
+        saveCompletedQuestions(userProgress);
+      },
+      { field: "userId", operator: "==", value: userId }
+    );
 
     return () => {
       if (unsubscribe) {

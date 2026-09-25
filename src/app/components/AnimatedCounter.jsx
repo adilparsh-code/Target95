@@ -36,6 +36,7 @@ export default function AnimatedCounter({ end, suffix = "", duration = 2000, sta
 
     // Use IntersectionObserver with ref for reliable detection
     if (!elementRef.current) return;
+    const element = elementRef.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -48,12 +49,10 @@ export default function AnimatedCounter({ end, suffix = "", duration = 2000, sta
       { threshold: 0.3 }
     );
 
-    observer.observe(elementRef.current);
+    observer.observe(element);
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
-      }
+      observer.unobserve(element);
     };
   }, [end, startOnView, animate, duration]);
 

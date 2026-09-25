@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { FieldValue } from "firebase-admin/firestore";
 import { getAdminDb } from "../../../lib/firebase-admin";
-import { requireBlogAdmin } from "../../../lib/blog-admin-auth";
+import { authErrorResponse, requireBlogAdmin } from "../../../lib/blog-admin-auth";
 
 export const runtime = "nodejs";
 
@@ -19,18 +19,18 @@ export async function POST(request) {
     if (!snap.exists) return NextResponse.json({ ok: false, error: "Article not found" }, { status: 404 });
 
     const article = snap.data();
-    if (article.status !== "review") {
-      return NextResponse.json({ ok: false, error: "Only review articles can be published" }, { status: 409 });
-    }
+    if (article.status !== "review") return NextResponse.json({ ok: false, error: "Only review articles can be published" }, { status: 409 });
+    if (article.needsHumanReview !== true) return NextResponse.json({ ok: false, error: "Human review flag is missing" }, { status: 409 });
+    if (article.needsVerification === true) return NextResponse.json({ ok: false, error: "Article requires source verification before publishing" }, { status: 409 });
 
     await ref.update({
       status: "published",
       publishedAt: FieldValue.serverTimestamp(),
+      publishedBy: admin.uid,
       updatedAt: FieldValue.serverTimestamp(),
     });
     return NextResponse.json({ ok: true, id, status: "published" });
   } catch (error) {
-    const status = error?.message === "Forbidden" ? 403 : 401;
-    return NextResponse.json({ ok: false, error: status === 403 ? "Forbidden" : "Unauthorized" }, { status });
+    return authErrorResponse(error);
   }
 }

@@ -337,7 +337,7 @@ export function usePaginatedFirestore(collectionRef, options = {}) {
 
   useEffect(() => {
     fetchData(false);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     data,

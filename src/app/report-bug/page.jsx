@@ -18,7 +18,7 @@ export default function ReportBugPage() {
           <div className="mx-auto max-w-3xl">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Report a Bug</h1>
             <p className="text-lg text-gray-600 mb-8">
-              Found something not working? Let us know and we'll fix it right away.
+              Found something not working? Let us know and we&apos;ll fix it right away.
             </p>
             <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
               <form className="space-y-6">

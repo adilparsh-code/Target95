@@ -46,7 +46,6 @@ export default function BlogAdminPage() {
     if (!user) return;
     const timer = window.setTimeout(() => loadArticles(), 0);
     return () => window.clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   async function login(e) {

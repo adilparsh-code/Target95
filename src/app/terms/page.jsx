@@ -18,7 +18,7 @@ export default function TermsPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">1. Acceptance of Terms</h2>
                   <p className="mt-3">
-                    By accessing or using Target95+ ("the Platform"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Platform.
+                    By accessing or using Target95+ (&quot;the Platform&quot;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Platform.
                   </p>
                 </section>
 
@@ -50,7 +50,7 @@ export default function TermsPage() {
                   <ul className="mt-2 list-disc space-y-2 pl-5">
                     <li>Use the Platform for any illegal or unauthorized purpose</li>
                     <li>Attempt to gain unauthorized access to any portion of the Platform</li>
-                    <li>Interfere with or disrupt the Platform's functionality</li>
+                    <li>Interfere with or disrupt the Platform&apos;s functionality</li>
                     <li>Copy, scrape, mirror, reproduce, or distribute substantial portions of Platform content without permission</li>
                     <li>Use automated systems to access the Platform without our consent</li>
                     <li>Harass, abuse, or harm other users</li>
@@ -88,7 +88,7 @@ export default function TermsPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">8. Disclaimers</h2>
                   <p className="mt-3">
-                    The Platform is provided "as is" without warranties of any kind. We do not guarantee that the Platform will be error-free, secure, or available at all times. We are not responsible for any errors or omissions in the content. Educational outcomes may vary, and we do not guarantee specific examination results.
+                    The Platform is provided &quot;as is&quot; without warranties of any kind. We do not guarantee that the Platform will be error-free, secure, or available at all times. We are not responsible for any errors or omissions in the content. Educational outcomes may vary, and we do not guarantee specific examination results.
                   </p>
                 </section>
 

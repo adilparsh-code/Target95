@@ -118,7 +118,7 @@ export default function Hero({
                     Welcome Back!
                   </h2>
                   <p className="text-gray-600">
-                    You're currently studying:
+                    You&apos;re currently studying:
                   </p>
                 </div>
                 

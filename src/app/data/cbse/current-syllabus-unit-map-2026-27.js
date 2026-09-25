@@ -27,7 +27,7 @@ export const CBSE_CURRENT_UNIT_MAP_2026_27 = {
       { code: 'B1', name: 'Digital Documentation (Advanced)', marks: 10, theory: true, practical: true },
       { code: 'B2', name: 'Electronic Spreadsheet (Advanced)', marks: 10, theory: true, practical: true },
       { code: 'B3', name: 'Database Management System', marks: 10, theory: true, practical: true },
-      { code: 'B4', name: 'Maintain Healthy, Safe and Secure Working Environment', marks: 10, theory: true, practical: true },
+      { code: 'B4', name: 'Web Applications and Security', marks: 10, theory: true, practical: true },
     ],
   },
   '083': {

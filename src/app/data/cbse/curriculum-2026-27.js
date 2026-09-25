@@ -3,8 +3,6 @@
  * Source of truth: official CBSE curriculum pages/PDFs.
  */
 
-import legacyCBSEClass11 from './classes/class11/index.js';
-import legacyCBSEClass12 from './classes/class12/index.js';
 import CBSE_402_CLASS9_2026_27 from './class9-402-2026-27-sources.js';
 
 export const CBSE_CURRICULUM_SESSION = '2026-27';
@@ -46,7 +44,7 @@ const class10PartBUnits = [
   { id: '402-x-b1', code: '1', name: 'Digital Documentation (Advanced)', hours: { theory: 10, practical: 26 }, marks: 10 },
   { id: '402-x-b2', code: '2', name: 'Electronic Spreadsheet (Advanced)', hours: { theory: 18, practical: 35 }, marks: 10 },
   { id: '402-x-b3', code: '3', name: 'Database Management System', hours: { theory: 10, practical: 20 }, marks: 10 },
-  { id: '402-x-b4', code: '4', name: 'Maintain Healthy, Safe and Secure Working Environment', hours: { theory: 6, practical: 10 }, marks: 10 },
+  { id: '402-x-b4', code: '4', name: 'Web Applications and Security', hours: { theory: 6, practical: 10 }, marks: 10 },
 ];
 
 const cbse402Class10 = {
@@ -77,17 +75,20 @@ const cbse083Class11Units = [
   ], [], 10),
   makeUnit('083-xi-u2', 2, 'Computational Thinking and Programming - 1', [
     'Problem solving and computational thinking',
-    'Algorithms, flowcharts and basic programming concepts',
-    'Python data types, operators, expressions and input/output',
+    'Algorithms, flowcharts, pseudocode and decomposition',
+    'Python basics, tokens, data types, operators, expressions, input/output and type conversion',
+    'Syntax, logical and runtime errors; testing and debugging',
     'Control flow: conditional statements and loops',
     'Strings, lists, tuples and dictionaries',
-    'Functions and modular programming fundamentals',
+    'Python modules and functions; importing and using module functions',
   ], ['Design, write, test and debug Python programs for prescribed problems'], 45),
   makeUnit('083-xi-u3', 3, 'Society, Law, and Ethics', [
-    'Cyber safety, cyber ethics and cybercrime',
-    'Intellectual property rights and responsible technology use',
+    'Digital footprints, netiquette, communication etiquette and responsible technology use',
+    'Intellectual property rights, copyright, patents, trademarks and open-source licensing',
+    'Cybercrime, cyber safety, malware, phishing and safe online behaviour',
+    'Indian Information Technology Act and responsible reporting of cyber incidents',
+    'E-waste hazards and responsible disposal',
     'Technology and society with consideration of gender and disability',
-    'Digital footprints, privacy and safe online behaviour',
   ], [], 15),
 ];
 
@@ -107,8 +108,10 @@ const cbse083Class12Units = [
   ], ['Identify network components and apply basic network-security practices'], 10),
   makeUnit('083-xii-u3', 3, 'Database Management', [
     'Database concepts and relational data model',
-    'Tables, records, fields, keys and relationships',
-    'SQL queries, filtering, sorting, grouping and aggregate functions',
+    'Tables, records, fields, primary/candidate/alternate/foreign keys and relationships',
+    'SQL data types, constraints, DDL and DML commands',
+    'SELECT, WHERE and ORDER BY queries; aggregate functions and GROUP BY/HAVING',
+    'Equi-join and natural join across related tables',
     'Python-SQL connectivity and database operations from Python',
   ], ['Create/query databases and perform basic Python-SQL connectivity tasks'], 20),
 ];
@@ -161,29 +164,35 @@ const seniorTrack = (code, name, category, pythonRole, pythonLibraries = [], sou
 
 const cbse083Class11 = {
   ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Computer_Science_SecP2_2026-27.pdf'),
+  programmingLanguage: 'Python',
   parts: { partA: { name: 'Core Curriculum', units: cbse083Class11Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse083Class12 = {
   ...seniorTrack('083', 'Computer Science', 'academic-subject', 'core-programming', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Computer_Science_SecP2_2026-27.pdf'),
+  programmingLanguage: 'Python',
   parts: { partA: { name: 'Core Curriculum', units: cbse083Class12Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse065Class11 = {
-  ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib'], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf'),
+  ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', [], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf'),
+  programmingLanguage: 'Python',
   parts: { partA: { name: 'Curriculum content', units: cbse065Class11Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse065Class12 = {
   ...seniorTrack('065', 'Informatics Practices', 'academic-subject', 'programming-and-data-handling', ['Pandas', 'Matplotlib'], 'https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Informatics_Practices_SecP2_2026-27.pdf'),
+  programmingLanguage: 'Python',
   parts: { partA: { name: 'Curriculum content', units: cbse065Class12Units }, partB: { name: 'Practical Topics', units: [] } },
 };
 const cbse802Class11 = {
   ...seniorTrack('802', 'Information Technology', 'skill-subject', 'none', [], 'https://cbseacademic.nic.in/web_material/Curriculum27/SrSec/802-IT.pdf'),
   assessment: { theoryMarks: 60, practicalMarks: 40, totalMarks: 100 },
+  programmingLanguage: 'Java',
   parts: { partA: { name: 'Employability Skills', units: cbse802Class11PartA }, partB: { name: 'Subject Specific Skills', units: cbse802Class11PartB } },
   practicalAssessment: { officeAutomationTools: 15, javaProgramme: 10, mysqlCommands: 5, practicalFile: 5, vivaVoce: 5, projectWork: 10 },
 };
 const cbse802Class12 = {
   ...seniorTrack('802', 'Information Technology', 'skill-subject', 'none', [], 'https://cbseacademic.nic.in/web_material/Curriculum27/SrSec/802-IT.pdf'),
   assessment: { theoryMarks: 60, practicalMarks: 40, totalMarks: 100 },
+  programmingLanguage: 'Java',
   parts: { partA: { name: 'Employability Skills', units: cbse802Class12PartA }, partB: { name: 'Subject Specific Skills', units: cbse802Class12PartB } },
   practicalAssessment: { javaProgram: 10, sqlQueries: 10, practicalFile: 10, vivaVoce: 5, projectWork: 5 },
 };

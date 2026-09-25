@@ -29,8 +29,8 @@ Primary software context in the syllabus: LibreOffice Calc.
 ### Unit 3 — Database Management System
 Primary software context in the syllabus: LibreOffice Base.
 
-### Unit 4 — Maintain Healthy, Safe and Secure Working Environment
-Mapped as a workplace safety / occupational skills unit; no programming language dependency.
+### Unit 4 — Web Applications and Security
+Mapped to web applications, safe browser use, online threats, privacy and security practices; no programming-language dependency.
 
 ## Book/support-material policy
 
@@ -57,7 +57,7 @@ Therefore the legacy Class X structure is **not** used as the current 2026–27 
 - Unit 1 — Digital Documentation (Advanced) using LibreOffice Writer
 - Unit 2 — Electronic Spreadsheet (Advanced) using LibreOffice Calc
 - Unit 3 — Database Management System using LibreOffice Base
-- Unit 4 — Maintain Healthy, Safe and Secure Working Environment
+- Unit 4 — Web Applications and Security
 
 ## Final audit rule
 

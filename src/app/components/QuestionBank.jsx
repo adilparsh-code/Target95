@@ -7,6 +7,7 @@ import useBookmarks from "../hooks/useBookmarks";
 import useProgress from "../hooks/useProgress";
 import { filterQuestionBank, getQuestionBankFilters, questionBankQuestions } from "@/lib/questionBank";
 import { getDifficultyColorClass, getQuestionTypeColorClass } from "@/lib/questionPresentation";
+import { getCBSEPracticeQuestions } from "@/app/data/cbse/question-bank-2026-27";
 
 const initialFilters = { search: "", difficulty: "all", chapter: "all", topic: "all", questionType: "all", status: "all" };
 const fieldClass = "h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm font-medium text-slate-700 shadow-sm outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100";
@@ -16,7 +17,27 @@ function BankIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true" classNa
 
 export default function QuestionBank() {
   const searchParams = useSearchParams();
-  const options = useMemo(() => getQuestionBankFilters(), []);
+  const board = String(searchParams.get("board") || "").toUpperCase();
+  const classNumber = Number(searchParams.get("class") || 0);
+  const requestedSubjectCode = String(searchParams.get("subjectCode") || "");
+  const cbseCodesByClass = { 9: ["402"], 10: ["402"], 11: ["083", "065", "802"], 12: ["083", "065", "802"] };
+  const allowedCodes = cbseCodesByClass[classNumber] || [];
+  const subjectCode = allowedCodes.includes(requestedSubjectCode) ? requestedSubjectCode : (allowedCodes[0] || "");
+  const isCBSEContext = board === "CBSE" && Boolean(classNumber && subjectCode);
+  const sourceQuestions = useMemo(() => {
+    if (!isCBSEContext) return questionBankQuestions;
+    return getCBSEPracticeQuestions(classNumber, subjectCode).map((question) => ({
+      ...question,
+      id: String(question.id),
+      chapter: question.topicId,
+      topic: question.topicId,
+      questionType: question.questionType,
+      correctAnswer: question.correctAnswer,
+      estimatedTime: Math.max(1, Number(question.marks) || 1),
+      practiceHref: `/practice/setup?board=CBSE&class=${classNumber}&subjectCode=${encodeURIComponent(subjectCode)}&chapter=${encodeURIComponent(question.topicId)}`,
+    }));
+  }, [isCBSEContext, classNumber, subjectCode]);
+  const options = useMemo(() => getQuestionBankFilters(sourceQuestions), [sourceQuestions]);
   // Seed filters from URL (e.g. adaptive recommendations deep-linking
   // ?difficulty=hard&chapter=loops), validated against the real options.
   const [filters, setFilters] = useState(() => {
@@ -30,14 +51,14 @@ export default function QuestionBank() {
   const [visibleLimit, setVisibleLimit] = useState(24);
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { isCompleted } = useProgress();
-  const questions = useMemo(() => questionBankQuestions.map((question) => ({ ...question, isBookmarked: isBookmarked({ chapter: question.chapter, questionId: question.id }), isCompleted: isCompleted({ chapter: question.chapter, questionId: question.id }) })), [isBookmarked, isCompleted]);
+  const questions = useMemo(() => sourceQuestions.map((question) => ({ ...question, isBookmarked: isBookmarked({ chapter: question.chapter, questionId: question.id }), isCompleted: isCompleted({ chapter: question.chapter, questionId: question.id }) })), [sourceQuestions, isBookmarked, isCompleted]);
   const results = useMemo(() => filterQuestionBank(questions, filters), [filters, questions]);
   const update = (key, value) => { setVisibleLimit(24); setFilters((current) => ({ ...current, [key]: value })); };
   const runSearch = () => update("search", filters.search.trim());
 
   return <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
     <header className="relative overflow-hidden rounded-[2rem] border border-blue-100 bg-gradient-to-br from-white via-white to-blue-50/80 px-6 py-8 shadow-sm sm:px-9 sm:py-10">
-      <div className="relative z-10 max-w-3xl"><div className="inline-flex items-center gap-3 text-blue-700"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-200"><BankIcon /></span><p className="text-xs font-bold uppercase tracking-[0.24em]">Question Bank</p></div><h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-[2.7rem]">Browse and practise with confidence</h1><p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">Search structured questions across subjects, chapters, topics, and learning outcomes.</p></div>
+      <div className="relative z-10 max-w-3xl"><div className="inline-flex items-center gap-3 text-blue-700"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-200"><BankIcon /></span><p className="text-xs font-bold uppercase tracking-[0.24em]">Question Bank{isCBSEContext ? ` · CBSE Class ${classNumber} · ${subjectCode}` : ""}</p></div><h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-[2.7rem]">Browse and practise with confidence</h1><p className="mt-3 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">Search structured questions across subjects, chapters, topics, and learning outcomes.</p></div>
       <div className="pointer-events-none absolute -right-10 -top-16 h-56 w-56 rounded-full bg-blue-100/70 blur-3xl" aria-hidden="true" /><div className="pointer-events-none absolute bottom-5 right-10 hidden rounded-3xl border border-blue-100 bg-white/70 p-5 text-blue-600 shadow-sm backdrop-blur sm:block" aria-hidden="true"><SearchIcon /></div>
     </header>
     <section className="mt-6 rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-label="Question filters"><div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">

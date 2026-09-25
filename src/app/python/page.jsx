@@ -6,9 +6,9 @@ import ErrorBoundary from "../components/ui/ErrorBoundary";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Python Programming | Target95+",
+  title: "CBSE Python Learning Paths — Computer Science 083 & Informatics Practices 065 | Target95+",
   description:
-    "Learn Python fundamentals with interactive lessons, coding exercises, and step-by-step tutorials for CBSE Computer Science.",
+    "Choose CBSE Computer Science (083) for core Python or Informatics Practices (065) for Python data handling with Pandas, Matplotlib and SQL.",
 };
 
 export default function PythonPage() {
@@ -23,16 +23,29 @@ export default function PythonPage() {
             <section className="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm sm:p-10">
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100/80 rounded-full text-blue-700 text-sm font-semibold border border-blue-200 shadow-sm mb-6">
                 <span>🐍</span>
-                <span>CBSE Computer Science</span>
+                <span>CBSE Python Learning Paths</span>
               </div>
               <h1 className="text-3xl font-bold text-blue-700 sm:text-4xl md:text-5xl">
                 Python Programming
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-gray-600 sm:text-xl">
-                {subject && subject.description
-                  ? subject.description
-                  : "Learn Python fundamentals with interactive lessons, coding exercises, and step-by-step tutorials."}
+                CBSE Computer Science (083) develops core Python programming and computational thinking. Informatics Practices (065) is a separate pathway for Python-based data handling, Pandas, Matplotlib and SQL.
               </p>
+            </section>
+
+            <section className="mt-8 grid gap-4 md:grid-cols-2" aria-label="CBSE Python subjects">
+              <article className="rounded-2xl border border-blue-200 bg-white p-6 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wider text-blue-700">Computer Science · 083</p>
+                <h2 className="mt-2 text-xl font-bold text-gray-900">Core Python programming</h2>
+                <p className="mt-2 text-gray-600">Computational thinking, Python data types and control flow, collections and functions, followed by files, stacks, networks, databases, SQL and Python-SQL connectivity.</p>
+                <div className="mt-4 flex gap-3"><Link className="font-semibold text-blue-700 hover:underline" href="/cbse/class/11/subject/083">Class XI</Link><Link className="font-semibold text-blue-700 hover:underline" href="/cbse/class/12/subject/083">Class XII</Link></div>
+              </article>
+              <article className="rounded-2xl border border-indigo-200 bg-white p-6 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wider text-indigo-700">Informatics Practices · 065</p>
+                <h2 className="mt-2 text-xl font-bold text-gray-900">Python and data handling</h2>
+                <p className="mt-2 text-gray-600">A distinct Informatics Practices route covering Python and SQL foundations, then Pandas, Matplotlib, data visualisation, networks and societal impacts.</p>
+                <div className="mt-4 flex gap-3"><Link className="font-semibold text-indigo-700 hover:underline" href="/cbse/class/11/subject/065">Class XI</Link><Link className="font-semibold text-indigo-700 hover:underline" href="/cbse/class/12/subject/065">Class XII</Link></div>
+              </article>
             </section>
 
             <section className="mt-8 grid gap-4 sm:grid-cols-3 max-w-3xl">
@@ -65,10 +78,10 @@ export default function PythonPage() {
                 Browse the Python question bank to start practicing now.
               </p>
               <Link
-                href="/question-bank"
+                href="/question-bank?board=CBSE&class=11&subjectCode=083"
                 className="mt-4 inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-600 hover:text-blue-700"
               >
-                Browse Python questions &rarr;
+                Browse CBSE 083 Python questions &rarr;
               </Link>
             </section>
           </div>

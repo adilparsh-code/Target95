@@ -130,14 +130,14 @@ export const cbsePracticeQuestions2026_27 = [
     tags: ['database', 'relationships', 'case-study'], estimatedTime: 6,
   },
   {
-    id: 'cbse-802-11-it-python-mcq-001',
+    id: 'cbse-802-11-it-java-mcq-001',
     board: 'CBSE', classLevel: 11, subjectCode: '802', subject: 'Information Technology',
-    unit: 'Programming', topic: 'Python',
+    unit: 'Fundamentals of Java', topic: 'Java Methods',
     questionType: 'mcq', difficulty: 'easy', marks: 1, competency: 'remembering',
-    question: 'Which Python keyword is used to define a function?',
-    options: ['func', 'define', 'def', 'function'], answer: 'def',
-    explanation: 'Python uses the def keyword to define a function.',
-    tags: ['python', 'programming', 'functions'], estimatedTime: 1,
+    question: 'Which declaration is the standard entry point of a Java application?',
+    options: ['void start()', 'public static void main(String[] args)', 'static start()', 'void run()'], answer: 'public static void main(String[] args)',
+    explanation: 'The JVM starts a standard Java application through its public static main method.',
+    tags: ['java', 'programming', 'methods'], estimatedTime: 1,
   },
 ];
 

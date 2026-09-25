@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getStudyChapters, resolveStudyChapter, searchStudyContent } from "../../lib/studyCenter";
 import { questions as practiceQuestions } from "../data/questions";
+import { getCBSEChapters } from "../data/cbse/chapters";
+import { getCBSEPracticeQuestions } from "../data/cbse/question-bank-2026-27";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const typeIcons = {
@@ -31,10 +33,17 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
   
   const activeBoard = personalization?.board;
   const activeClass = personalization?.class;
+  const activeSubject = personalization?.subject;
+  const isCBSEContext = String(activeBoard || "").toLowerCase() === "cbse";
+  const cbseClassNumber = Number(String(activeClass?.id || activeClass || "").match(/(9|10|11|12)$/)?.[1] || 0);
+  const cbseSubjectCode = String(activeSubject || (cbseClassNumber <= 10 ? "402" : "083"));
   
   const chapters = useMemo(() => {
+    if (isCBSEContext && cbseClassNumber && cbseSubjectCode) {
+      return getCBSEChapters(cbseClassNumber, cbseSubjectCode);
+    }
     return getStudyChapters({ board: activeBoard, class: activeClass });
-  }, [activeBoard, activeClass]);
+  }, [activeBoard, activeClass, isCBSEContext, cbseClassNumber, cbseSubjectCode]);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -71,8 +80,9 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
     const matched = [];
     const filters = { board: activeBoard, class: activeClass };
 
-    // Use centralized search function
-    const searchResults = searchStudyContent(term, filters);
+    const searchResults = isCBSEContext
+      ? { chapters: chapters.filter((chapter) => [chapter.title, chapter.unitTitle, ...(chapter.learningObjectives || [])].join(" ").toLowerCase().includes(term)) }
+      : searchStudyContent(term, filters);
     
     // Convert chapter results to search results
     searchResults.chapters.forEach((chapter) => {
@@ -80,7 +90,9 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
         id: `chapter-${chapter.slug}`,
         title: chapter.title,
         description: chapter.studyData?.intro || "",
-        href: `/study/${chapter.slug}`,
+        href: isCBSEContext
+          ? `/cbse/class/${cbseClassNumber}/subject/${cbseSubjectCode}/unit/${chapter.unitId}`
+          : `/study/${chapter.slug}`,
         type: "chapter",
         chapter: chapter.slug,
       });
@@ -93,7 +105,9 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
               id: `concept-${chapter.slug}-${idx}`,
               title: concept,
               description: `Concept in ${chapter.title}`,
-              href: `/study/${chapter.slug}`,
+              href: isCBSEContext
+                ? `/cbse/class/${cbseClassNumber}/subject/${cbseSubjectCode}/unit/${chapter.unitId}`
+                : `/study/${chapter.slug}`,
               type: "topic",
               chapter: chapter.slug,
             });
@@ -103,7 +117,10 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
     });
 
     // Search practice questions with board/class filtering
-    practiceQuestions.forEach((q, idx) => {
+    const searchableQuestions = isCBSEContext
+      ? getCBSEPracticeQuestions(cbseClassNumber, cbseSubjectCode)
+      : practiceQuestions;
+    searchableQuestions.forEach((q, idx) => {
       const searchText = [
         q.title,
         q.question,
@@ -116,7 +133,7 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
 
       if (searchText.includes(term)) {
         // Filter by board if personalization is active
-        if (activeBoard) {
+        if (activeBoard && !isCBSEContext) {
           const questionBoard = q.board || (q.subject === 'python' ? 'cbse' : 'cisce');
           if (questionBoard !== activeBoard) {
             return;
@@ -132,7 +149,9 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
           id: `question-${q.slug || idx}`,
           title: q.title,
           description: `${q.chapter} · ${q.difficulty} · ${q.type}`,
-          href: resolvedQuestionChapter ? `/Java/${resolvedQuestionChapter.slug}` : "/question-bank",
+          href: isCBSEContext
+            ? `/practice/setup?board=CBSE&class=${cbseClassNumber}&subjectCode=${encodeURIComponent(cbseSubjectCode)}`
+            : resolvedQuestionChapter ? `/Java/${resolvedQuestionChapter.slug}` : "/question-bank",
           type: "question",
           chapter: q.chapter,
           difficulty: q.difficulty,
@@ -142,7 +161,7 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
 
     setResults(matched.slice(0, 12));
     setSelectedIndex(-1);
-  }, [debouncedQuery, chapters, activeBoard, activeClass]);
+  }, [debouncedQuery, chapters, activeBoard, activeClass, isCBSEContext, cbseClassNumber, cbseSubjectCode]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {

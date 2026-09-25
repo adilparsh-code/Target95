@@ -25,6 +25,9 @@ const makeChapter = ({ board, classNumber, subjectCode, unit, topic, index, part
   classNumber,
   subject: String(subjectCode),
   subjectCode: String(subjectCode),
+  programmingLanguage: ['083', '065'].includes(String(subjectCode))
+    ? 'Python'
+    : String(subjectCode) === '802' ? 'Java' : null,
   unitId: unit.id,
   unitCode: String(unit.code),
   unitTitle: unit.name,

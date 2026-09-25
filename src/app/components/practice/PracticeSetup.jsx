@@ -16,6 +16,8 @@ const ICSE_CHAPTERS = [
   ["introduction", "Introduction to Java"], ["variables", "Variables & Data Types"], ["operators", "Operators"],
   ["control-flow", "Control Flow"], ["methods", "Methods"], ["oops", "Object-Oriented Programming"]
 ].map(([id, name]) => ({ id, name }));
+const CBSE_SUBJECTS = { "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" };
+const CBSE_CODES_BY_CLASS = { 9: ["402"], 10: ["402"], 11: ["083", "065", "802"], 12: ["083", "065", "802"] };
 
 export default function PracticeSetup() {
   const router = useRouter();
@@ -27,27 +29,33 @@ export default function PracticeSetup() {
     const classNumber = Number(searchParams.get("class") || (board === "ICSE" ? 10 : board === "ISC" ? 12 : 10));
     const subjectCode = searchParams.get("subjectCode") || "";
     const subjectName = searchParams.get("subject") || "";
-    return { board, classNumber, subjectCode, subjectName };
+    const chapter = searchParams.get("chapter") || "";
+    return { board, classNumber, subjectCode, subjectName, chapter };
   }, [searchParams]);
+  const allowedSubjectCodes = CBSE_CODES_BY_CLASS[queryContext.classNumber] || [];
+  const effectiveSubjectCode = allowedSubjectCodes.includes(queryContext.subjectCode)
+    ? queryContext.subjectCode
+    : (allowedSubjectCodes[0] || "");
 
   useEffect(() => {
-    const { board, classNumber, subjectCode, subjectName } = queryContext;
+    const { board, classNumber, subjectCode, subjectName, chapter } = queryContext;
     if (board === "CBSE") {
-      const code = subjectCode || (classNumber <= 10 ? "402" : "083");
-      const name = subjectName || ({ "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" }[code] || "CBSE Subject");
-      updateSettings({ board, classNumber, subjectCode: code, subject: `cbse-${code}`, subjectName: name, chapter: "" });
+      const allowedCodes = CBSE_CODES_BY_CLASS[classNumber] || [];
+      const code = allowedCodes.includes(subjectCode) ? subjectCode : (allowedCodes[0] || "");
+      const name = subjectName || CBSE_SUBJECTS[code] || "CBSE Subject";
+      updateSettings({ board, classNumber, subjectCode: code, subject: `cbse-${code}`, subjectName: name, chapter });
     } else {
       updateSettings({ board, classNumber, subjectCode: "", subject: "java", subjectName: board === "ISC" ? "Computer Science (Java)" : "Computer Applications (Java)", chapter: "" });
     }
   }, [queryContext, updateSettings]);
 
   const cbseQuestions = useMemo(() => {
-    if (queryContext.board !== "CBSE" || !queryContext.subjectCode) return [];
-    return getCBSEPracticeQuestions(queryContext.classNumber, queryContext.subjectCode);
-  }, [queryContext]);
+    if (queryContext.board !== "CBSE") return [];
+    return getCBSEPracticeQuestions(queryContext.classNumber, effectiveSubjectCode);
+  }, [queryContext, effectiveSubjectCode]);
 
   const subjects = queryContext.board === "CBSE"
-    ? [{ id: `cbse-${queryContext.subjectCode}`, name: `${queryContext.subjectName || "CBSE Subject"} (Code ${queryContext.subjectCode})` }]
+    ? [{ id: `cbse-${effectiveSubjectCode}`, name: `${queryContext.subjectName || CBSE_SUBJECTS[effectiveSubjectCode] || "CBSE Subject"} (Code ${effectiveSubjectCode})` }]
     : CISE_SUBJECTS.filter((item) => item.board === queryContext.board);
 
   const chapters = queryContext.board === "CBSE"
@@ -63,8 +71,9 @@ export default function PracticeSetup() {
   const questionCounts = [5, 10, 15, 20];
   const availableChapters = chapters;
 
-  const handleStartPractice = () => {
-    router.push("/question-bank");
+  const handleStartPractice = async () => {
+    const session = await startPractice();
+    router.push(`/practice/session?id=${encodeURIComponent(session.id)}`);
   };
 
   const buttonClass = (active) => `w-full rounded-xl border-2 p-3 text-left transition-all ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20" : "border-gray-200 hover:border-gray-300 dark:border-gray-700"}`;
@@ -114,7 +123,7 @@ export default function PracticeSetup() {
         </Card>
       </div>
 
-      <div className="mt-8 text-center"><Button onClick={handleStartPractice} variant="primary" size="lg" className="px-12">Start Practice</Button></div>
+      <div className="mt-8 text-center"><Button onClick={handleStartPractice} disabled={loading} variant="primary" size="lg" className="px-12">{loading ? "Preparing Practice…" : "Start Practice"}</Button></div>
     </div>
   );
 }

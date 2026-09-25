@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import useBookmarks from "../hooks/useBookmarks";
 import useProgress from "../hooks/useProgress";
@@ -14,12 +15,21 @@ function SearchIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true" class
 function BankIcon() { return <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6"><path d="M5 4h10l4 4v12H5V4Zm10 0v5h4M8 13h8M8 17h6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>; }
 
 export default function QuestionBank() {
-  const [filters, setFilters] = useState(initialFilters);
+  const searchParams = useSearchParams();
+  const options = useMemo(() => getQuestionBankFilters(), []);
+  // Seed filters from URL (e.g. adaptive recommendations deep-linking
+  // ?difficulty=hard&chapter=loops), validated against the real options.
+  const [filters, setFilters] = useState(() => {
+    const requestedDifficulty = searchParams.get("difficulty");
+    const requestedChapter = searchParams.get("chapter");
+    const validDifficulty = options.difficulties?.includes(requestedDifficulty) ? requestedDifficulty : "all";
+    const validChapter = options.chapters?.includes(requestedChapter) ? requestedChapter : "all";
+    return { ...initialFilters, difficulty: validDifficulty, chapter: validChapter };
+  });
   const [previewId, setPreviewId] = useState(null);
   const [visibleLimit, setVisibleLimit] = useState(24);
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const { isCompleted } = useProgress();
-  const options = useMemo(() => getQuestionBankFilters(), []);
   const questions = useMemo(() => questionBankQuestions.map((question) => ({ ...question, isBookmarked: isBookmarked({ chapter: question.chapter, questionId: question.id }), isCompleted: isCompleted({ chapter: question.chapter, questionId: question.id }) })), [isBookmarked, isCompleted]);
   const results = useMemo(() => filterQuestionBank(questions, filters), [filters, questions]);
   const update = (key, value) => { setVisibleLimit(24); setFilters((current) => ({ ...current, [key]: value })); };

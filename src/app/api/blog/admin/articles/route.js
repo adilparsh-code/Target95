@@ -27,23 +27,46 @@ export async function GET(request) {
 
 export async function PATCH(request) {
   try {
-    await requireBlogAdmin(request);
+    const admin = await requireBlogAdmin(request);
     const body = await request.json();
     const id = String(body?.id || "").trim();
     if (!id) return NextResponse.json({ ok: false, error: "id is required" }, { status: 400 });
 
-    const allowedFields = ["title", "excerpt", "content", "seoTitle", "metaDescription", "keywords", "editorNotes"];
+    const allowedFields = ["title", "excerpt", "content", "seoTitle", "metaDescription", "keywords", "editorNotes", "sourceUrls", "needsVerification", "researchNotes"];
     const updates = {};
-    for (const field of allowedFields) {
-      if (body[field] !== undefined) updates[field] = body[field];
-    }
+    for (const field of allowedFields) if (body[field] !== undefined) updates[field] = body[field];
     if (!Object.keys(updates).length) return NextResponse.json({ ok: false, error: "No editable fields supplied" }, { status: 400 });
 
     updates.updatedAt = FieldValue.serverTimestamp();
+    updates.lastEditedBy = admin.uid;
     await getAdminDb().collection("blog_articles").doc(id).update(updates);
     return NextResponse.json({ ok: true, id });
   } catch (error) {
-    if (error?.code === "auth/id-token-expired" || error?.code === "auth/argument-error") return authErrorResponse(error);
+    return authErrorResponse(error);
+  }
+}
+
+export async function POST(request) {
+  try {
+    const admin = await requireBlogAdmin(request);
+    const body = await request.json();
+    const id = String(body?.id || "").trim();
+    const action = String(body?.action || "").trim();
+    if (!id || action !== "request_changes") return NextResponse.json({ ok: false, error: "id and action=request_changes are required" }, { status: 400 });
+
+    const ref = getAdminDb().collection("blog_articles").doc(id);
+    const snap = await ref.get();
+    if (!snap.exists) return NextResponse.json({ ok: false, error: "Article not found" }, { status: 404 });
+
+    await ref.update({
+      status: "draft",
+      reviewNotes: String(body?.reviewNotes || "").trim(),
+      lastReviewedBy: admin.uid,
+      lastReviewedAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+    return NextResponse.json({ ok: true, id, status: "draft" });
+  } catch (error) {
     return authErrorResponse(error);
   }
 }

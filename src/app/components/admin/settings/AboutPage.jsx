@@ -35,7 +35,8 @@ export default function AboutPage() {
   const [currentYear, setCurrentYear] = useState(null);
 
   useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
+    const timer = window.setTimeout(() => setCurrentYear(new Date().getFullYear()), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const tabs = [

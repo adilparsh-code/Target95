@@ -56,10 +56,10 @@ function polarityTerm(numVars, cells, isPos) {
 
     if (isPos) {
       // POS: constant 0 → uncomplemented; constant 1 → complemented.
-      literals.push(LETTERS[bit] + (sawOne ? "'" : ""));
+      literals.push(LETTERS[numVars - 1 - bit] + (sawOne ? "'" : ""));
     } else {
       // SOP: constant 1 → uncomplemented; constant 0 → complemented.
-      literals.push(LETTERS[bit] + (sawZero ? "'" : ""));
+      literals.push(LETTERS[numVars - 1 - bit] + (sawZero ? "'" : ""));
     }
   }
 
@@ -105,7 +105,7 @@ function cover(required, primes) {
   // then prefers larger groups via the secondary cost.
   let best = null;
 
-  const search = (remaining, chosen, start) => {
+  const search = (remaining, chosen) => {
     if (remaining.length === 0) {
       const groupCount = chosen.length;
       const coveredCells = chosen.reduce((sum, group) => sum + group.size, 0);
@@ -116,15 +116,23 @@ function cover(required, primes) {
       return;
     }
 
-    if (best && chosen.length >= best.score[0]) return;
+    // Admissible bound: each remaining cell still needs a group, and a group
+    // covers at most maxSize cells.
+    const maxSize = primes.reduce((size, prime) => Math.max(size, prime.size), 1);
+    if (best && chosen.length + Math.ceil(remaining.length / maxSize) >= best.score[0]) return;
 
-    // Pick a required cell with the fewest available covering primes to reduce branching.
+    // Branch on the uncovered cell with the fewest still-usable covering primes.
+    // Any complete cover must cover that cell, so exploring all of its covering
+    // primes keeps the search exhaustive. A previously required increasing prime
+    // index pruned valid covers, so many functions came back with no groups at all.
     let pivot = remaining[0];
     let pivotOptions = primes.filter(
-      (prime, index) => index >= start && prime.cells.includes(pivot),
+      (prime) => !chosen.includes(prime) && prime.cells.includes(pivot),
     );
     for (const cell of remaining) {
-      const options = primes.filter((prime, index) => index >= start && prime.cells.includes(cell));
+      const options = primes.filter(
+        (prime) => !chosen.includes(prime) && prime.cells.includes(cell),
+      );
       if (options.length < pivotOptions.length) {
         pivot = cell;
         pivotOptions = options;
@@ -132,16 +140,14 @@ function cover(required, primes) {
     }
 
     for (const prime of pivotOptions) {
-      const index = primes.indexOf(prime);
       search(
         remaining.filter((cell) => !prime.cells.includes(cell)),
         [...chosen, prime],
-        index + 1,
       );
     }
   };
 
-  search([...required], [], 0);
+  search([...required], []);
   return best ? best.groups : [];
 }
 
@@ -175,9 +181,10 @@ function parseSOPTerm(term, numVars) {
   for (let i = 0; i < term.length; i += 1) {
     const letterIndex = LETTERS.indexOf(term[i]);
     if (letterIndex === -1 || letterIndex >= numVars) continue;
-    mask |= 1 << letterIndex;
+    const bit = numVars - 1 - letterIndex;
+    mask |= 1 << bit;
     if (term[i + 1] === "'") i += 1;
-    else value |= 1 << letterIndex;
+    else value |= 1 << bit;
   }
   return { mask, value };
 }
@@ -185,11 +192,12 @@ function parseSOPTerm(term, numVars) {
 function parsePOSTerm(term, numVars) {
   return term.split("+").map((literal) => literal.trim()).filter(Boolean).map((literal) => {
     const letterIndex = LETTERS.indexOf(literal[0]);
+    const inRange = letterIndex !== -1 && letterIndex < numVars;
     return {
-      bit: 1 << letterIndex,
+      bit: inRange ? 1 << (numVars - 1 - letterIndex) : 0,
       complemented: literal[1] === "'",
     };
-  }).filter((literal) => literal.bit && Number.isInteger(Math.log2(literal.bit)) && literal.bit <= (1 << (numVars - 1)));
+  }).filter((literal) => literal.bit && literal.bit <= (1 << (numVars - 1)));
 }
 
 export function solveKMap({ numVars, minterms = [], dontCares = [], mode = "SOP" }) {
@@ -263,7 +271,8 @@ export function solveKMap({ numVars, minterms = [], dontCares = [], mode = "SOP"
     ? evaluatePOS(terms.map((term) => ({ literals: parsePOSTerm(term, numVars) })), numVars)
     : evaluateSOP(terms.map((term) => parseSOPTerm(term, numVars)), numVars);
   const expected = new Array(total).fill(false).map((_, i) => ones.includes(i));
-  const verified = actual.every((value, i) => value === expected[i]);
+  const dontCareCells = new Set(donts);
+  const verified = actual.every((value, i) => value === expected[i] || dontCareCells.has(i));
 
   return { layout, groups: chosen, terms, expression, steps, verified };
 }

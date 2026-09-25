@@ -13,7 +13,7 @@ export default function DashboardHeader({ user, isLoading }) {
   return (
     <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-white">
       <h1 className="text-3xl font-bold">
-        Welcome back, {user?.name || "Student"}! 👋
+        Welcome back, {user?.fullName || "Student"}! 👋
       </h1>
       <p className="text-blue-100 mt-2">
         Continue your learning journey and master computer science.

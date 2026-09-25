@@ -86,9 +86,12 @@ export default function GlobalSearch({ isOpen, onClose }) {
       inputRef.current.focus();
     }
     if (!isOpen) {
-      setQuery("");
-      setResults([]);
-      setSelectedIndex(-1);
+      const timer = window.setTimeout(() => {
+        setQuery("");
+        setResults([]);
+        setSelectedIndex(-1);
+      }, 0);
+      return () => window.clearTimeout(timer);
     }
   }, [isOpen]);
 

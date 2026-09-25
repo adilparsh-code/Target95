@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { aiService } from "../services/AIService";
+import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 
 export function useAITutor(initialContext = {}) {
   const [messages, setMessages] = useState([]);
@@ -10,23 +11,6 @@ export function useAITutor(initialContext = {}) {
   const [history, setHistory] = useState([]);
   const [historyLoading, setHistoryLoading] = useState(false);
   const [currentChatId, setCurrentChatId] = useState(null);
-
-  // Load chat history on mount
-  useEffect(() => {
-    loadHistory();
-  }, []);
-
-  // If there's initial context (from question page), send it automatically
-  useEffect(() => {
-    if (initialContext.question && messages.length === 0) {
-      const contextMessage = {
-        role: "system",
-        content: "Context loaded from question page",
-        context: initialContext
-      };
-      setMessages([contextMessage]);
-    }
-  }, [initialContext]);
 
   // Load chat history from Firestore
   const loadHistory = useCallback(async () => {
@@ -41,6 +25,23 @@ export function useAITutor(initialContext = {}) {
       setHistoryLoading(false);
     }
   }, []);
+
+  // Load chat history on mount
+  useEffect(() => {
+    loadHistory();
+  }, [loadHistory]);
+
+  // If there's initial context (from question page), send it automatically
+  useEffect(() => {
+    if (initialContext.question && messages.length === 0) {
+      const contextMessage = {
+        role: "system",
+        content: "Context loaded from question page",
+        context: initialContext
+      };
+      setMessages([contextMessage]);
+    }
+  }, [initialContext, messages.length]);
 
   // Send a message to AI
   const sendMessage = useCallback(async (prompt) => {
@@ -82,6 +83,7 @@ export function useAITutor(initialContext = {}) {
       });
       
       setCurrentChatId(savedChat.id);
+      trackEvent(LEARNING_EVENTS.AI_TUTOR_USED, { subject: initialContext.subject, chapterId: initialContext.chapter });
       // Refresh history
       await loadHistory();
       

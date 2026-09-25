@@ -6,7 +6,8 @@ export default function WelcomeBanner() {
   const [today, setToday] = useState(null);
 
   useEffect(() => {
-    setToday(new Date());
+    const timer = window.setTimeout(() => setToday(new Date()), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   return (

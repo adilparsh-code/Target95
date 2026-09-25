@@ -25,7 +25,7 @@ export function getChapterContent(chapter, content = null, questions = null) {
 
     examples: normalizeExamples(sd.examples, content?.examples),
 
-    diagrams: normalizeDiagrams(sd.diagrams, content),
+    diagrams: normalizeDiagrams(chapter?.slug, sd.diagrams, content),
 
     practice: normalizePractice(
       content?.practiceTest || content?.practice
@@ -202,16 +202,34 @@ function normalizeKeyTerms(sd, content) {
   return null;
 }
 
+import icseJavaVisualRegistry from "../app/data/chapter-content/visuals/icseJavaVisualRegistry";
+
 /* -------------------------------------------------------------------------- */
 /* Diagrams                                                                  */
 /* -------------------------------------------------------------------------- */
 
-function normalizeDiagrams(sdDiagrams, content) {
+function normalizeDiagrams(chapterSlug, sdDiagrams, content) {
   const explicit =
     normalizeList(sdDiagrams) ||
     normalizeList(content?.diagrams);
 
   if (explicit) return explicit;
+
+  const registryVisuals = Array.isArray(icseJavaVisualRegistry)
+    ? icseJavaVisualRegistry
+        .filter((visual) => visual?.chapterSlug === chapterSlug && visual?.path)
+        .map((visual) => ({
+          id: visual.id,
+          type: "image",
+          title: visual.title,
+          explanation: visual.purpose || "Use this visual to connect the concept with the Java program flow.",
+          src: visual.path,
+          alt: visual.alt || visual.title,
+          caption: visual.caption || "",
+        }))
+    : [];
+
+  if (registryVisuals.length) return registryVisuals;
 
   const memoryModel = content?.theoryNotes?.memoryModel;
 
@@ -238,58 +256,31 @@ function normalizeDiagrams(sdDiagrams, content) {
 
 function normalizeTheory(sd, content) {
   const sections = [];
-
   const theory = content?.theoryNotes;
 
+  // Treat a long beginner explanation as authored teaching prose, not one
+  // giant paragraph. Blank lines become natural reading beats.
+  if (theory?.beginnerExplanation) {
+    splitTeachingParagraphs(theory.beginnerExplanation).forEach((text) => {
+      sections.push({ type: "paragraph", text });
+    });
+  }
+
   if (theory) {
-    if (theory.beginnerExplanation) {
-      sections.push({
-        type: "paragraph",
-        text: normalizeText(theory.beginnerExplanation),
-      });
-    }
-
-    if (Array.isArray(theory.importantPoints) && theory.importantPoints.length) {
-      sections.push({
-        type: "list",
-        title: "Important Points",
-        items: theory.importantPoints,
-      });
-    }
-
-    if (Array.isArray(theory.memoryTricks) && theory.memoryTricks.length) {
-      sections.push({
-        type: "list",
-        title: "Memory Tricks",
-        items: theory.memoryTricks,
-      });
-    }
-
-    if (Array.isArray(theory.examTips) && theory.examTips.length) {
-      sections.push({
-        type: "list",
-        title: "Exam Tips",
-        items: theory.examTips,
-      });
-    }
+    addUniqueListSection(sections, "Important Points", theory.importantPoints);
+    addUniqueListSection(sections, "Memory Tricks", theory.memoryTricks);
+    addUniqueListSection(sections, "Exam Tips", theory.examTips);
   }
 
   if (Array.isArray(content?.theory)) {
     content.theory.forEach((text) => {
-      if (typeof text === "string" && text.trim()) {
-        sections.push({
-          type: "paragraph",
-          text: text.trim(),
-        });
-      }
+      splitTeachingParagraphs(text).forEach((paragraph) => {
+        sections.push({ type: "paragraph", text: paragraph });
+      });
     });
-  } else if (
-    typeof content?.theory === "string" &&
-    content.theory.trim()
-  ) {
-    sections.push({
-      type: "paragraph",
-      text: content.theory.trim(),
+  } else if (typeof content?.theory === "string" && content.theory.trim()) {
+    splitTeachingParagraphs(content.theory).forEach((paragraph) => {
+      sections.push({ type: "paragraph", text: paragraph });
     });
   }
 
@@ -300,34 +291,57 @@ function normalizeTheory(sd, content) {
   ];
 
   supportingLists.forEach(([title, items]) => {
-    if (Array.isArray(items) && items.length) {
-      sections.push({
-        type: "list",
-        title,
-        items,
-      });
-    }
+    addUniqueListSection(sections, title, items);
   });
 
   if (content?.introduction?.description) {
-    sections.push({
-      type: "paragraph",
-      text: normalizeText(content.introduction.description),
+    splitTeachingParagraphs(content.introduction.description).forEach((text) => {
+      sections.push({ type: "paragraph", text });
     });
   }
 
-  if (sections.length) {
-    return sections;
-  }
+  if (sections.length) return sections;
 
   if (Array.isArray(sd.concepts) && sd.concepts.length) {
-    return sd.concepts.map((concept) => ({
-      type: "paragraph",
-      text: normalizeText(concept),
-    }));
+    return sd.concepts.flatMap((concept) =>
+      splitTeachingParagraphs(concept).map((text) => ({
+        type: "paragraph",
+        text,
+      }))
+    );
   }
 
   return null;
+}
+
+function splitTeachingParagraphs(value) {
+  return normalizeText(value)
+    .split(/\\n\\s*\\n+/)
+    .map((part) => part.replace(/\\s+/g, " ").trim())
+    .filter(Boolean);
+}
+
+function addUniqueListSection(target, title, items) {
+  if (!Array.isArray(items) || !items.length) return;
+
+  const seen = new Set();
+  const cleaned = items
+    .map((item) => normalizeText(item))
+    .filter(Boolean)
+    .filter((item) => {
+      const key = item.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+  if (cleaned.length) {
+    target.push({
+      type: "list",
+      title,
+      items: cleaned,
+    });
+  }
 }
 
 /* -------------------------------------------------------------------------- */

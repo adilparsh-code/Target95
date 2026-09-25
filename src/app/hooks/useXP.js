@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { xpLevels } from "../data/dashboardData";
+import { xpLevels } from "../data/xpLevels";
 
 const XP_KEY = "target95-xp";
 

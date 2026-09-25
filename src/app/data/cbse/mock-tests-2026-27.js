@@ -3,7 +3,7 @@
  * Actual question content is stored in question-bank-2026-27.js.
  */
 
-import { getCBSEPracticeQuestions } from './question-bank-2026-27';
+import { getCBSEPracticeQuestions } from './question-bank-2026-27.js';
 
 export const CBSE_MOCK_TEST_BLUEPRINTS = {
   '402': {

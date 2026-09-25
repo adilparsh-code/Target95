@@ -17,10 +17,10 @@ const CBSE_BOARD_PRACTICE_2026_27 = [
     explanation: "WHERE filters rows before grouping; HAVING filters groups after aggregate functions are calculated."
   },
   {
-    id: "cbse-065-xi-case-001", subjectCode: "065", classNumber: 11, type: "case-based", difficulty: "Medium", marks: 4, chapter: "Pandas",
-    question: "A school stores marks in a DataFrame with columns Name, English and Computer. Write the Pandas statement to select students scoring at least 80 in Computer and then display Name and Computer only.",
-    answer: "df.loc[df['Computer'] >= 80, ['Name', 'Computer']]",
-    explanation: "Boolean indexing filters rows and loc selects the requested columns."
+    id: "cbse-065-xi-case-001", subjectCode: "065", classNumber: 11, type: "case-based", difficulty: "Medium", marks: 4, chapter: "Database and SQL",
+    question: "A school table Student has columns Name, English and Computer. Write an SQL query to display Name and Computer for students scoring at least 80 in Computer.",
+    answer: "SELECT Name, Computer FROM Student WHERE Computer >= 80;",
+    explanation: "SELECT chooses the requested columns and WHERE filters rows by the Computer score."
   },
   {
     id: "cbse-065-xii-programming-001", subjectCode: "065", classNumber: 12, type: "programming", difficulty: "Hard", marks: 5, chapter: "SQL",
@@ -53,10 +53,10 @@ const CBSE_BOARD_PRACTICE_2026_27 = [
     explanation: "The grouping is by Class, HAVING filters aggregate groups, and ORDER BY ranks the retained class averages."
   },
   {
-    id: "cbse-065-xi-trace-002", subjectCode: "065", classNumber: 11, type: "output-tracing", difficulty: "Hard", marks: 3, chapter: "Pandas",
-    question: "Predict the result of: import pandas as pd; s = pd.Series([10, 20, 30], index=['A','B','C']); print(s['B'] + s.iloc[0])",
+    id: "cbse-065-xi-trace-002", subjectCode: "065", classNumber: 11, type: "output-tracing", difficulty: "Hard", marks: 3, chapter: "Python Dictionaries",
+    question: "Predict the result of: d = {'A': 10, 'B': 20, 'C': 30}; print(d['B'] + d['A'])",
     answer: "30",
-    explanation: "s['B'] is 20 by label and s.iloc[0] is 10 by positional index, giving 30."
+    explanation: "The values for keys B and A are 20 and 10, giving 30."
   },
   {
     id: "cbse-065-xii-debug-002", subjectCode: "065", classNumber: 12, type: "debugging", difficulty: "Hard", marks: 3, chapter: "Pandas",

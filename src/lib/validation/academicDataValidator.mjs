@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
+import { pathToFileURL } from 'node:url';
 
 export class AcademicDataValidator {
   constructor(rootDir = process.cwd()) {
@@ -199,6 +200,169 @@ export class AcademicDataValidator {
     }
   }
 
+  async validateCBSE083Boundary() {
+    const dataFiles = [
+      'curriculum-2026-27.js',
+      'question-bank-2026-27.js',
+      'practice-question-bank-2026-27.js',
+      'practice-questions-2026-27.js',
+      'board-practice-2026-27.js',
+      'mock-test-blueprints-2026-27.js',
+      'mock-tests-2026-27.js',
+    ].map((name) => path.join(this.appDataDir, 'cbse', name));
+    dataFiles.push(path.join(this.appDataDir, 'projects', 'cbseCS083Projects.js'));
+
+    const forbiddenJava = /\b(java|bluej|constructor(?:s)?|inheritance|polymorphism)\b|public\s+static\s+void\s+main|system\.out\.println|\/java\//i;
+    const visit = (value, file, key = '') => {
+      if (Array.isArray(value)) {
+        value.forEach((item, index) => visit(item, file, `${key}[${index}]`));
+        return;
+      }
+      if (!value || typeof value !== 'object') return;
+
+      const identifies083 = String(value.subjectCode || value.code || '') === '083'
+        || /cbse[-_]?083/i.test(String(value.id || ''));
+      if (identifies083) {
+        const serialized = JSON.stringify(value);
+        if (forbiddenJava.test(serialized)) {
+          this.addFinding('ERROR', 'CBSE-083', 'CBSE 083 record resolves to Java-specific content', file, { key, id: value.id || value.slug || null });
+        }
+        if (value.programmingLanguage && String(value.programmingLanguage).toLowerCase() !== 'python') {
+          this.addFinding('ERROR', 'CBSE-083', 'CBSE 083 programmingLanguage must be Python', file, { key, programmingLanguage: value.programmingLanguage });
+        }
+        const isActiveQuestion = path.basename(file) === 'question-bank-2026-27.js' && typeof value.question === 'string';
+        if (isActiveQuestion) {
+          if (String(value.board).toUpperCase() !== 'CBSE') {
+            this.addFinding('ERROR', 'CBSE-083', 'Active CBSE 083 question must declare board: CBSE', file, { key, id: value.id || null });
+          }
+          if (![11, 12].includes(Number(value.classLevel)) || Number(value.classNumber) !== Number(value.classLevel)) {
+            this.addFinding('ERROR', 'CBSE-083', 'Active CBSE 083 question must declare matching classNumber/classLevel 11 or 12', file, { key, id: value.id || null });
+          }
+          if (String(value.questionType).toLowerCase() === 'programming' && value.programmingLanguage !== 'Python') {
+            this.addFinding('ERROR', 'CBSE-083', 'Active CBSE 083 programming question must declare Python', file, { key, id: value.id || null });
+          }
+        }
+      }
+      Object.entries(value).forEach(([childKey, child]) => visit(child, file, key ? `${key}.${childKey}` : childKey));
+    };
+
+    for (const file of dataFiles) {
+      if (!fs.existsSync(file)) continue;
+      try {
+        const importedData = await import(`${pathToFileURL(file).href}?validation=${Date.now()}`);
+        Object.entries(importedData).forEach(([name, value]) => {
+          if (name !== 'default') visit(value, file, name);
+        });
+        if (path.basename(file) === 'question-bank-2026-27.js') {
+          const activeQuestions = importedData.CBSE_PRACTICE_QUESTIONS_2026_27 || [];
+          const allowedClasses = { '402': [9, 10], '083': [11, 12], '065': [11, 12], '802': [11, 12] };
+          const forbiddenByTrack = {
+            '402': /\b(java|python|pandas|matplotlib)\b|system\.out|public\s+static\s+void\s+main/i,
+            '083': /\b(java|bluej|arraylist|pandas|matplotlib)\b|system\.out|public\s+static\s+void\s+main/i,
+            '065': /\b(java|bluej|arraylist)\b|system\.out|public\s+static\s+void\s+main/i,
+          };
+          activeQuestions.forEach((question) => {
+            const code = String(question.subjectCode || '');
+            const record = { id: question.id || null, subjectCode: code, classLevel: question.classLevel };
+            if (question.board !== 'CBSE' || !allowedClasses[code]?.includes(Number(question.classLevel)) || Number(question.classNumber) !== Number(question.classLevel)) {
+              this.addFinding('ERROR', 'CBSE', 'Active CBSE question has invalid board/class/subject metadata', file, record);
+            }
+            const requiredFields = ['unitId', 'topicId', 'questionType', 'difficulty', 'question', 'correctAnswer', 'explanation'];
+            const missing = requiredFields.filter((field) => question[field] === undefined || question[field] === null || String(question[field]).trim() === '');
+            if (missing.length) this.addFinding('ERROR', 'CBSE', 'Active CBSE question is missing required metadata/content', file, { ...record, missing });
+            if (!String(question.unitId || '').startsWith(`${code}-`)) {
+              this.addFinding('ERROR', 'CBSE', 'Active CBSE question unit does not belong to its subject', file, { ...record, unitId: question.unitId || null });
+            }
+            if (forbiddenByTrack[code]?.test(JSON.stringify(question))) {
+              this.addFinding('ERROR', 'CBSE', `Active CBSE ${code} question crosses its subject-language boundary`, file, record);
+            }
+          });
+          Object.entries(allowedClasses).forEach(([code, classes]) => classes.forEach((classNumber) => {
+            const selected = activeQuestions.filter((question) => question.subjectCode === code && question.classLevel === classNumber);
+            if (selected.length < 6) this.addFinding('ERROR', 'CBSE', `${code}-${classNumber} requires at least six active questions for practice/mock selection`, file, { count: selected.length });
+            if (['083', '065'].includes(code) && !selected.some((question) => question.programmingLanguage === 'Python')) {
+              this.addFinding('ERROR', 'CBSE', `${code}-${classNumber} must retain an active Python programming question`, file);
+            }
+            if (code === '802' && !selected.some((question) => question.programmingLanguage === 'Java')) {
+              this.addFinding('ERROR', 'CBSE', `802-${classNumber} must retain an active Java programming question`, file);
+            }
+          }));
+          for (const id of this.findDuplicates(activeQuestions.map((question) => question.id))) {
+            this.addFinding('ERROR', 'CBSE', `Duplicate active CBSE question ID: ${id}`, file, { id });
+          }
+        }
+        if (path.basename(file) === 'practice-question-bank-2026-27.js') {
+          const compatibilityQuestions = importedData.cbsePracticeQuestions2026_27 || [];
+          compatibilityQuestions.filter((question) => String(question.subjectCode) === '802').forEach((question) => {
+            if (/\bpython\b|\bdef\s+\w+\s*\(/i.test(JSON.stringify(question))) {
+              this.addFinding('ERROR', 'CBSE', 'Compatibility CBSE 802 question contains Python content', file, { id: question.id || null });
+            }
+          });
+        }
+        if (path.basename(file) === 'curriculum-2026-27.js') {
+          const curriculum = importedData.cbseCurriculum2026_27;
+          const class10IT = curriculum?.classes?.[10]?.subjects?.find((subject) => subject.code === '402');
+          const class10Units = [...(class10IT?.parts?.partA?.units || []), ...(class10IT?.parts?.partB?.units || [])];
+          if (!class10Units.some((unit) => unit.id === '402-x-b4' && unit.name === 'Web Applications and Security')) {
+            this.addFinding('ERROR', 'CBSE', '402-X Unit 4 must be Web Applications and Security', file);
+          }
+          if (class10Units.some((unit) => /Maintain Healthy, Safe and Secure Working Environment/i.test(unit.name))) {
+            this.addFinding('ERROR', 'CBSE', 'Stale 402-X workplace-safety Unit 4 remains active', file);
+          }
+        }
+        if (path.basename(file) === 'mock-test-blueprints-2026-27.js') {
+          const blueprints = importedData.CBSE_MOCK_BLUEPRINTS || {};
+          const expectedLanguages = { '083-11': 'Python', '083-12': 'Python', '065-11': 'Python', '065-12': 'Python', '802-11': 'Java', '802-12': 'Java' };
+          Object.entries(expectedLanguages).forEach(([key, language]) => {
+            if (blueprints[key]?.programmingLanguage !== language) {
+              this.addFinding('ERROR', 'CBSE', `${key} mock blueprint must use ${language}`, file, { actual: blueprints[key]?.programmingLanguage || null });
+            }
+          });
+          const expectedLibraries = { '083-11': [], '083-12': [], '065-11': [], '065-12': ['Pandas', 'Matplotlib'], '802-11': [], '802-12': [] };
+          Object.entries(expectedLibraries).forEach(([key, libraries]) => {
+            if (JSON.stringify(blueprints[key]?.pythonLibraries || []) !== JSON.stringify(libraries)) {
+              this.addFinding('ERROR', 'CBSE', `${key} mock blueprint has incorrect Python-library scope`, file, { expected: libraries, actual: blueprints[key]?.pythonLibraries || [] });
+            }
+          });
+        }
+        if (path.basename(file) === 'mock-tests-2026-27.js') {
+          const tracks = { '402': [9, 10], '083': [11, 12], '065': [11, 12], '802': [11, 12] };
+          Object.entries(tracks).forEach(([subjectCode, classes]) => classes.forEach((classNumber) => {
+            const selected = importedData.getCBSEMockQuestions(classNumber, subjectCode, 1000);
+            if (!selected.length) {
+              this.addFinding('ERROR', 'CBSE', `${subjectCode}-${classNumber} mock selection returned no questions`, file);
+            }
+            if (selected.some((question) => question.board !== 'CBSE' || question.classLevel !== classNumber || question.subjectCode !== subjectCode)) {
+              this.addFinding('ERROR', 'CBSE', `${subjectCode}-${classNumber} mock selection crossed a board/class/subject boundary`, file);
+            }
+            visit(selected, file, `getCBSEMockQuestions(${classNumber},${subjectCode})`);
+          }));
+        }
+      } catch (error) {
+        this.addFinding('ERROR', 'CBSE-083', `Unable to validate CBSE boundary data: ${error.message}`, file);
+      }
+    }
+
+    const cbseRouteDir = path.join(this.srcDir, 'app', 'cbse');
+    const pending = fs.existsSync(cbseRouteDir) ? [cbseRouteDir] : [];
+    while (pending.length) {
+      const current = pending.pop();
+      for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+        const target = path.join(current, entry.name);
+        if (entry.isDirectory()) pending.push(target);
+        else if (/\.(?:js|jsx|mjs)$/.test(entry.name)) {
+          const source = fs.readFileSync(target, 'utf8');
+          if (/from\s+['"][^'"]*(?:javaCurriculum|\/Java(?:\/|['"]))/i.test(source)) {
+            this.addFinding('ERROR', 'CBSE-083', 'CBSE route imports the generic CISCE Java curriculum or route', target);
+          }
+          if (/from\s+['"][^'"]*cbse\/classes\/class(?:11|12)|legacyCBSEClass(?:11|12)/i.test(source)) {
+            this.addFinding('ERROR', 'CBSE', 'Active CBSE route imports compatibility-only XI/XII curriculum data', target);
+          }
+        }
+      }
+    }
+  }
+
   findDuplicates(values) {
     const seen = new Set(); const duplicates = new Set();
     for (const value of values) { if (!value) continue; const key = String(value).trim(); if (seen.has(key)) duplicates.add(key); else seen.add(key); }
@@ -210,6 +374,7 @@ export class AcademicDataValidator {
     this.legacyQuestionBankChapters = [];
     this.validateSupplementalBankSource();
     this.validateSectionStructures();
+    await this.validateCBSE083Boundary();
     const chapterRecords = this.normalizeDuplicateChapterRecords(this.readChapterContentRecords());
     const questionRecords = await this.readQuestionBankRecords();
     const javaRecords = this.readJavaCurriculumRecords();

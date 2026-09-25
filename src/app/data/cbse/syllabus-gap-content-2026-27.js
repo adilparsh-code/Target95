@@ -315,9 +315,9 @@ export const CBSE_UNIT_ENRICHMENT = {
     practicalActivities: ["Create a student table with a primary key.", "Write queries to list and filter records."],
   },
   "402-x-b4": {
-    learningOutcomes: ["Maintain a healthy and safe work environment.", "Follow security and emergency procedures.", "Observe workplace hygiene and ethics.", "Manage workplace stress."],
-    theory: ["Workplace health, hygiene and safety.", "Fire safety, first aid and emergencies.", "Workplace security and safe practices.", "Ergonomics and posture at the workstation.", "Workplace ethics, rights and responsibilities."],
-    practicalActivities: ["Prepare a workplace-safety checklist.", "Demonstrate correct posture and workstation setup."],
+    learningOutcomes: ["Explain web applications and their uses.", "Use browser and web-application security controls.", "Recognise common online threats and safe responses.", "Apply privacy and responsible-use practices."],
+    theory: ["Web applications and common online services.", "Secure browsing, HTTPS and website identity.", "Passwords, multi-factor authentication and access control.", "Phishing, malware, unsafe downloads and social engineering.", "Privacy settings, digital footprints and responsible online behaviour."],
+    practicalActivities: ["Inspect browser privacy and security settings.", "Evaluate a web scenario for phishing and unsafe sharing risks."],
   },
 };
 

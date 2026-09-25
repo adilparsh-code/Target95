@@ -30,7 +30,7 @@ export const CBSE_MOCK_BLUEPRINTS = {
     board: 'CBSE', class: 11, subjectCode: '065',
     durationMinutes: 180, negativeMarking: false,
     selection: { curriculumDriven: true, competencyAware: true },
-    programmingLanguage: 'Python', pythonLibraries: ['Pandas', 'Matplotlib'],
+    programmingLanguage: 'Python', pythonLibraries: [],
   },
   '065-12': {
     board: 'CBSE', class: 12, subjectCode: '065',

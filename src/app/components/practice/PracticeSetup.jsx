@@ -18,6 +18,8 @@ const ICSE_CHAPTERS = [
   ["introduction-to-java", "Introduction to Java"], ["variables-data-types", "Variables & Data Types"], ["operators", "Operators"],
   ["conditionals", "Conditionals & Control Flow"], ["methods", "Methods"], ["class-as-basis-of-computation", "Object-Oriented Programming"]
 ].map(([id, name]) => ({ id, name }));
+const CBSE_SUBJECTS = { "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" };
+const CBSE_CODES_BY_CLASS = { 9: ["402"], 10: ["402"], 11: ["083", "065", "802"], 12: ["083", "065", "802"] };
 
 export default function PracticeSetup() {
   const router = useRouter();
@@ -32,6 +34,10 @@ export default function PracticeSetup() {
     const chapter = searchParams.get("chapter") || "";
     return { board, classNumber, subjectCode, subjectName, chapter };
   }, [searchParams]);
+  const allowedSubjectCodes = CBSE_CODES_BY_CLASS[queryContext.classNumber] || [];
+  const effectiveSubjectCode = allowedSubjectCodes.includes(queryContext.subjectCode)
+    ? queryContext.subjectCode
+    : (allowedSubjectCodes[0] || "");
 
   // Chapter selection is local state so a ?chapter= deep link is honoured on
   // the very first render (including SSR) instead of one effect later.
@@ -55,12 +61,12 @@ export default function PracticeSetup() {
   }, [queryContext, updateSettings]);
 
   const cbseQuestions = useMemo(() => {
-    if (queryContext.board !== "CBSE" || !queryContext.subjectCode) return [];
-    return getCBSEPracticeQuestions(queryContext.classNumber, queryContext.subjectCode);
-  }, [queryContext]);
+    if (queryContext.board !== "CBSE") return [];
+    return getCBSEPracticeQuestions(queryContext.classNumber, effectiveSubjectCode);
+  }, [queryContext, effectiveSubjectCode]);
 
   const subjects = queryContext.board === "CBSE"
-    ? [{ id: `cbse-${queryContext.subjectCode}`, name: `${queryContext.subjectName || "CBSE Subject"} (Code ${queryContext.subjectCode})` }]
+    ? [{ id: `cbse-${effectiveSubjectCode}`, name: `${queryContext.subjectName || CBSE_SUBJECTS[effectiveSubjectCode] || "CBSE Subject"} (Code ${effectiveSubjectCode})` }]
     : CISE_SUBJECTS.filter((item) => item.board === queryContext.board);
 
   const chapters = queryContext.board === "CBSE"
@@ -74,6 +80,11 @@ export default function PracticeSetup() {
     { id: "mixed", name: "Mixed", description: "All difficulty levels" }
   ];
   const questionCounts = [5, 10, 15, 20];
+  const availableChapters = chapters;
+
+  const handleStartPractice = async () => {
+    const session = await startPractice();
+    router.push(`/practice/session?id=${encodeURIComponent(session.id)}`);
   // Keep a deep-linked chapter selectable even when it is not one of the
   // curated entries for the current board.
   const availableChapters = chapterChoice && !chapters.some((chapter) => chapter.id === chapterChoice)
@@ -140,7 +151,7 @@ export default function PracticeSetup() {
         </Card>
       </div>
 
-      <div className="mt-8 text-center"><Button onClick={handleStartPractice} variant="primary" size="lg" className="px-12">Start Practice</Button></div>
+      <div className="mt-8 text-center"><Button onClick={handleStartPractice} disabled={loading} variant="primary" size="lg" className="px-12">{loading ? "Preparing Practice…" : "Start Practice"}</Button></div>
     </div>
   );
 }

@@ -9,8 +9,9 @@ import ICSE_ROBOTICS_AI_CLASS_X from "../data/icseRoboticsAIClassX";
 import { PROJECT_GROUPS } from "../data/projects";
 
 export const metadata = {
-  title: "Python Programming | Target95+",
+  title: "CBSE Python Learning Paths — Computer Science 083 & Informatics Practices 065 | Target95+",
   description:
+    "Choose CBSE Computer Science (083) for core Python or Informatics Practices (065) for Python data handling with Pandas, Matplotlib and SQL.",
     "Practise Python for CBSE Computer Science (083), Artificial Intelligence (843), ISC AI (883) and the ICSE Robotics & AI track, with real project packages and sample output.",
 };
 

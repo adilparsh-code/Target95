@@ -11,6 +11,25 @@ const subjectsByClass = {
   12: ['083', '065', '802', '843'],
 };
 
+export async function generateMetadata({ params }) {
+  const { classNumber: rawClassNumber, subjectCode: rawSubjectCode } = await params;
+  const classNumber = Number(rawClassNumber);
+  const subjectCode = String(rawSubjectCode || '');
+  const subject = getCBSECurriculum(classNumber, subjectCode);
+
+  if (!subject) return {};
+
+  const languageLabel = subject.programmingLanguage ? ` with ${subject.programmingLanguage}` : '';
+  return {
+    title: `CBSE Class ${classNumber} ${subject.name} (${subject.code})${languageLabel} | Target95`,
+    description: `Study the official 2026-27 CBSE Class ${classNumber} ${subject.name} (${subject.code}) curriculum${languageLabel}, with syllabus units, practice and mock tests.`,
+    keywords: subjectCode === '083'
+      ? [`CBSE Class ${classNumber} Computer Science`, 'CBSE 083', 'Python programming', 'CBSE Computer Science practice']
+      : [`CBSE Class ${classNumber} ${subject.name}`, `CBSE ${subject.code}`],
+    alternates: { canonical: `/cbse/class/${classNumber}/subject/${subjectCode}` },
+  };
+}
+
 export default async function CBSESubjectPage({ params }) {
   const resolvedParams = await params;
   const classNumber = Number(resolvedParams?.classNumber);
@@ -42,10 +61,10 @@ export default async function CBSESubjectPage({ params }) {
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <nav className="mb-6">
-          <Link href={`/cbse/class/${classNumber}`} className="inline-flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-blue-700 transition-colors bg-white px-4 py-2 rounded-full shadow-sm border border-gray-200 hover:border-blue-300 hover:shadow-md">
-            <ArrowLeft className="w-4 h-4" /> Back to Class {classNumber}
-          </Link>
+        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-sm font-medium text-gray-700">
+          <Link href="/cbse" className="hover:text-blue-700">CBSE</Link><span aria-hidden="true">/</span>
+          <Link href={`/cbse/class/${classNumber}`} className="hover:text-blue-700">Class {classNumber}</Link><span aria-hidden="true">/</span>
+          <span aria-current="page">{subject.name} ({subject.code})</span>
         </nav>
 
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 p-8 md:p-12 text-white shadow-2xl mb-8">

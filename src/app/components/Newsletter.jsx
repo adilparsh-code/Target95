@@ -35,8 +35,8 @@ export default function Newsletter() {
           {subscribed ? (
             <div className="bg-white/20 backdrop-blur rounded-2xl p-8 text-white">
               <div className="text-5xl mb-4">🎉</div>
-              <h3 className="text-2xl font-bold mb-2">You're on the list!</h3>
-              <p className="text-blue-100">Thank you for subscribing. You'll receive our next newsletter soon.</p>
+              <h3 className="text-2xl font-bold mb-2">You&apos;re on the list!</h3>
+              <p className="text-blue-100">Thank you for subscribing. You&apos;ll receive our next newsletter soon.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">

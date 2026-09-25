@@ -103,7 +103,6 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
     if (slug && typeof addRecentlyViewed === "function") {
       addRecentlyViewed(slug);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   // Track which sections have been viewed into view (fixed infinite loop trigger)

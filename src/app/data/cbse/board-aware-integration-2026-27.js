@@ -69,10 +69,12 @@ export const getMockFilterCategories = (board = 'ICSE') => {
   ];
 };
 
-export default {
+const boardAwareIntegration = {
   normalizeBoardContext,
   getQuestionRouteContext,
   getAnswerValue,
   getQuestionNavigationPath,
   getMockFilterCategories,
 };
+
+export default boardAwareIntegration;

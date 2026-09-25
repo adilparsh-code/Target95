@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import useStudentProfile from "@/app/hooks/useStudentProfile";
@@ -97,7 +98,7 @@ export default function StudentProfile() {
     <header className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-8">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
         <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-700 text-3xl font-bold text-white shadow-lg">
-          {user?.avatarUrl ? <img src={user.avatarUrl} alt="Profile avatar" className="h-full w-full rounded-full object-cover" /> : initials}
+          {user?.avatarUrl ? <Image unoptimized src={user.avatarUrl} alt="Profile avatar" width={96} height={96} className="h-full w-full rounded-full object-cover" /> : initials}
         </div>
         <div className="flex-1">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700 dark:text-blue-400">Student Profile</p>

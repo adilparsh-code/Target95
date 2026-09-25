@@ -12,7 +12,6 @@ export const metadata = {
   title: "CBSE Python Learning Paths — Computer Science 083 & Informatics Practices 065 | Target95+",
   description:
     "Choose CBSE Computer Science (083) for core Python or Informatics Practices (065) for Python data handling with Pandas, Matplotlib and SQL.",
-    "Practise Python for CBSE Computer Science (083), Artificial Intelligence (843), ISC AI (883) and the ICSE Robotics & AI track, with real project packages and sample output.",
 };
 
 const PYTHON_TOPIC = /python|sql|pandas|matplotlib|csv/i;
@@ -59,7 +58,7 @@ const destinations = [
   {
     board: "CBSE 083",
     title: "Computer Science (Python) — Class XII",
-    text: "Pandas, Matplotlib, SQL queries and Python programs aligned to the 2026-27 syllabus.",
+    text: "Functions, exception handling, text/binary/CSV files, stacks, computer networks, SQL and Python-SQL connectivity aligned to the 2026-27 syllabus.",
     href: "/cbse/class/12/subject/083",
   },
   {

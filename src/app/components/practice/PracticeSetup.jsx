@@ -80,11 +80,6 @@ export default function PracticeSetup() {
     { id: "mixed", name: "Mixed", description: "All difficulty levels" }
   ];
   const questionCounts = [5, 10, 15, 20];
-  const availableChapters = chapters;
-
-  const handleStartPractice = async () => {
-    const session = await startPractice();
-    router.push(`/practice/session?id=${encodeURIComponent(session.id)}`);
   // Keep a deep-linked chapter selectable even when it is not one of the
   // curated entries for the current board.
   const availableChapters = chapterChoice && !chapters.some((chapter) => chapter.id === chapterChoice)

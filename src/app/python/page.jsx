@@ -1,295 +1,180 @@
-/**
- * Target95 CBSE Practice Question Bank — Session 2026-27
- * Curated starter bank. Every question is explicitly tagged by board/class/subject/chapter.
- * CBSE 083/065 programming content remains Python-based; CBSE 802 Information Technology uses Java. Never mix CISCE Java content into CBSE 083/065.
- */
+import Link from "next/link";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Container from "../components/ui/Container";
+import ErrorBoundary from "../components/ui/ErrorBoundary";
+import { CBSE_PRACTICE_QUESTIONS_2026_27 } from "../data/cbse/question-bank-2026-27";
+import { ICSE_ROBOTICS_AI } from "../data/icseRoboticsAI";
+import ICSE_ROBOTICS_AI_CLASS_X from "../data/icseRoboticsAIClassX";
+import { PROJECT_GROUPS } from "../data/projects";
 
-export interface PracticeQuestion {
-  id: string;
-  board: 'CBSE' | 'CISCE';
-  classLevel: number;
-  subjectCode: string;
-  subject: string;
-  unit: string;
-  topic: string;
-  topicId?: string;
-  questionType: 'mcq' | 'output-based' | 'programming' | 'short-answer' | 'case-study';
-  difficulty: 'easy' | 'medium' | 'hard';
-  marks: number;
-  competency: 'remembering' | 'understanding' | 'applying' | 'analyzing' | 'evaluating' | 'creating';
-  question: string;
-  options?: string[];
-  answer: string;
-  explanation: string;
-  tags: string[];
-  estimatedTime: number;
-  code?: string;
-  passage?: string;
+export const metadata = {
+  title: "CBSE Python Learning Paths — Computer Science 083 & Informatics Practices 065 | Target95+",
+  description:
+    "Choose CBSE Computer Science (083) for core Python or Informatics Practices (065) for Python data handling with Pandas, Matplotlib and SQL.",
+};
+
+const PYTHON_TOPIC = /python|sql|pandas|matplotlib|csv/i;
+// ICSE Robotics & AI tags its Python questions with a "PY" id segment instead of
+// a topic label, so both signals are checked.
+const isPythonQuestion = (question) =>
+  PYTHON_TOPIC.test([question.topic, question.topicId].filter(Boolean).join(" ")) ||
+  /-PY-Q/i.test(String(question.id || ""));
+
+function countPythonQuestions(value) {
+  let total = 0;
+  const walk = (node) => {
+    if (Array.isArray(node)) {
+      node.forEach(walk);
+      return;
+    }
+    if (!node || typeof node !== "object") return;
+    if (typeof node.question === "string" && isPythonQuestion(node)) {
+      total += 1;
+      return;
+    }
+    Object.values(node).forEach(walk);
+  };
+  walk(value);
+  return total;
 }
 
-export const CBSE_PRACTICE_QUESTIONS_2026_27: PracticeQuestion[] = [
+const practiceQuestions =
+  countPythonQuestions(CBSE_PRACTICE_QUESTIONS_2026_27) +
+  countPythonQuestions(ICSE_ROBOTICS_AI) +
+  countPythonQuestions(ICSE_ROBOTICS_AI_CLASS_X);
+
+const allProjects = Object.values(PROJECT_GROUPS).flatMap((group) => group.projects);
+const pythonProjects = allProjects.filter((project) => project.code?.language === "Python");
+const researchProjects = allProjects.length - pythonProjects.length;
+
+const destinations = [
   {
-    id: 'cbse-083-11-cso-mcq-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '083',
-    subject: 'Computer Science',
-    unit: 'Computer Systems and Organisation',
-    topic: 'Computer Organisation',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'understanding',
-    question: 'Which component of a computer performs arithmetic and logical operations?',
-    options: ['Control Unit', 'ALU', 'Cache', 'RAM'],
-    answer: 'ALU',
-    explanation: 'The Arithmetic Logic Unit (ALU) performs arithmetic and logical operations.',
-    tags: ['cpu', 'alu', 'computer-organisation'],
-    estimatedTime: 1,
+    board: "CBSE 083",
+    title: "Computer Science (Python) — Class XI",
+    text: "Functions, exceptions, CSV handling, output tracing and SQL basics with practice questions.",
+    href: "/cbse/class/11/subject/083",
   },
   {
-    id: 'cbse-083-11-cso-mcq-002',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '083',
-    subject: 'Computer Science',
-    unit: 'Computer Systems and Organisation',
-    topic: 'Number System',
-    questionType: 'mcq',
-    difficulty: 'medium',
-    marks: 1,
-    competency: 'applying',
-    question: 'What is the decimal value of the binary number 101101?',
-    options: ['43', '44', '45', '46'],
-    answer: '45',
-    explanation: '101101₂ = 32 + 8 + 4 + 1 = 45.',
-    tags: ['binary', 'number-system'],
-    estimatedTime: 2,
+    board: "CBSE 083",
+    title: "Computer Science (Python) — Class XII",
+    text: "Functions, exception handling, text/binary/CSV files, stacks, computer networks, SQL and Python-SQL connectivity aligned to the 2026-27 syllabus.",
+    href: "/cbse/class/12/subject/083",
   },
   {
-    id: 'cbse-083-11-python-mcq-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '083',
-    subject: 'Computer Science',
-    unit: 'Computational Thinking and Programming – I',
-    topic: 'Python Data Types',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'understanding',
-    question: 'Which Python data type stores an ordered, mutable collection of elements?',
-    options: ['Tuple', 'List', 'Set', 'Dictionary'],
-    answer: 'List',
-    explanation: 'A list is ordered and mutable, so its elements can be changed after creation.',
-    tags: ['python', 'list', 'data-types'],
-    estimatedTime: 1,
+    board: "CBSE 843",
+    title: "Artificial Intelligence (Python) — Class XI & XII",
+    text: "Python-based AI units with practice sets and research or coding project packages.",
+    href: "/cbse/class/11/subject/843",
   },
   {
-    id: 'cbse-083-11-python-out-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '083',
-    subject: 'Computer Science',
-    unit: 'Computational Thinking and Programming – I',
-    topic: 'Python Expressions',
-    questionType: 'output-based',
-    difficulty: 'medium',
-    marks: 2,
-    competency: 'applying',
-    code: 'x = 7\ny = 2\nprint(x // y, x % y)',
-    question: 'What will be the output of the following Python code?',
-    answer: '3 1',
-    explanation: '7 // 2 gives the integer quotient 3, while 7 % 2 gives the remainder 1.',
-    tags: ['python', 'operators', 'output'],
-    estimatedTime: 2,
+    board: "ISC AI 883",
+    title: "Artificial Intelligence — Class XI project lab",
+    text: "Python project packages with runnable code, sample output, test cases and viva questions.",
+    href: "/isc/artificial-intelligence/11/project",
   },
   {
-    id: 'cbse-083-11-python-prog-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '083',
-    subject: 'Computer Science',
-    unit: 'Computational Thinking and Programming – I',
-    topic: 'Conditional Statements',
-    questionType: 'programming',
-    difficulty: 'medium',
-    marks: 3,
-    competency: 'applying',
-    question: 'Write a Python program that accepts an integer and prints whether it is positive, negative, or zero.',
-    answer: 'Use if/elif/else to test the value against 0 and print the corresponding category.',
-    explanation: 'Compare the input with zero: greater than 0 is positive, less than 0 is negative, otherwise zero.',
-    tags: ['python', 'if-elif-else', 'programming'],
-    estimatedTime: 5,
+    board: "ICSE",
+    title: "Robotics & AI — Class IX and X",
+    text: "Python fundamentals, output tracing and debugging questions inside the ICSE AI track.",
+    href: "/icse/robotics-ai",
   },
   {
-    id: 'cbse-083-11-sle-mcq-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '083',
-    subject: 'Computer Science',
-    unit: 'Society, Law and Ethics',
-    topic: 'Cyber Safety',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'understanding',
-    question: 'Which practice provides the strongest protection against account takeover?',
-    options: [
-      'Reusing one password',
-      'Sharing OTPs',
-      'Using unique strong passwords with multi-factor authentication',
-      'Disabling updates',
-    ],
-    answer: 'Using unique strong passwords with multi-factor authentication',
-    explanation: 'Unique credentials reduce password-reuse risk, while multi-factor authentication adds another security layer.',
-    tags: ['cyber-safety', 'security'],
-    estimatedTime: 1,
-  },
-  {
-    id: 'cbse-065-11-python-mcq-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '065',
-    subject: 'Informatics Practices',
-    unit: 'Introduction to Python',
-    topic: 'Python Basics',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'understanding',
-    question: 'Which Python construct is used to repeat a block of statements for each item in a sequence?',
-    options: ['if', 'for', 'def', 'try'],
-    answer: 'for',
-    explanation: 'A for loop iterates over items in a sequence or other iterable.',
-    tags: ['python', 'loops'],
-    estimatedTime: 1,
-  },
-  {
-    id: 'cbse-065-11-sql-mcq-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '065',
-    subject: 'Informatics Practices',
-    unit: 'Database concepts and the Structured Query Language',
-    topic: 'SQL',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'remembering',
-    question: 'Which SQL command is used to retrieve records from a table?',
-    options: ['SELECT', 'INSERT', 'UPDATE', 'DELETE'],
-    answer: 'SELECT',
-    explanation: 'SELECT retrieves data from one or more database tables.',
-    tags: ['sql', 'database'],
-    estimatedTime: 1,
-  },
-  {
-    id: 'cbse-402-09-it-mcq-001',
-    board: 'CBSE',
-    classLevel: 9,
-    subjectCode: '402',
-    subject: 'Information Technology',
-    unit: 'Digital Documentation',
-    topic: 'Word Processing',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'understanding',
-    question: 'Which feature reverses the most recent action in a word processor?',
-    options: ['Redo', 'Undo', 'Find', 'Replace'],
-    answer: 'Undo',
-    explanation: 'Undo reverses the most recent action; Redo reapplies an action that was undone.',
-    tags: ['digital-documentation', 'writer'],
-    estimatedTime: 1,
-  },
-  {
-    id: 'cbse-402-09-it-out-001',
-    board: 'CBSE',
-    classLevel: 9,
-    subjectCode: '402',
-    subject: 'Information Technology',
-    unit: 'Electronic Spreadsheet',
-    topic: 'Cell References',
-    questionType: 'short-answer',
-    difficulty: 'medium',
-    marks: 2,
-    competency: 'applying',
-    question: 'Differentiate between relative and absolute cell references in a spreadsheet and give one example of each.',
-    answer: 'A relative reference changes when copied, e.g. A1. An absolute reference remains fixed, e.g. $A$1.',
-    explanation: 'Relative references adapt to a new location; absolute references keep both row and column fixed.',
-    tags: ['spreadsheet', 'references', 'calc'],
-    estimatedTime: 3,
-  },
-  {
-    id: 'cbse-402-10-it-mcq-001',
-    board: 'CBSE',
-    classLevel: 10,
-    subjectCode: '402',
-    subject: 'Information Technology',
-    unit: 'Digital Documentation (Advanced) using LibreOffice Writer',
-    topic: 'Styles',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'understanding',
-    question: 'Why are styles useful in a long document?',
-    options: [
-      'They prevent saving',
-      'They provide consistent formatting',
-      'They remove all images',
-      'They disable headings',
-    ],
-    answer: 'They provide consistent formatting',
-    explanation: 'Styles apply a consistent set of formatting properties and make document-wide changes easier.',
-    tags: ['writer', 'styles'],
-    estimatedTime: 1,
-  },
-  {
-    id: 'cbse-402-10-it-case-001',
-    board: 'CBSE',
-    classLevel: 10,
-    subjectCode: '402',
-    subject: 'Information Technology',
-    unit: 'Database Management System using LibreOffice Base',
-    topic: 'Relationships',
-    questionType: 'case-study',
-    difficulty: 'medium',
-    marks: 4,
-    competency: 'analyzing',
-    passage: 'A school stores Student(StudentID, Name, ClassID) and Class(ClassID, ClassName). Each student belongs to one class, while a class can contain many students.',
-    question: 'Identify the relationship between Student and Class. Which field should act as the primary key in Class, and which field in Student can reference it?',
-    answer: 'The relationship is one-to-many from Class to Student. ClassID is the primary key of Class and Student.ClassID can be the foreign key referencing it.',
-    explanation: 'One class has many students, while each student belongs to one class.',
-    tags: ['database', 'relationships', 'case-study'],
-    estimatedTime: 6,
-  },
-  {
-    id: 'cbse-802-11-it-java-mcq-001',
-    board: 'CBSE',
-    classLevel: 11,
-    subjectCode: '802',
-    subject: 'Information Technology',
-    unit: 'Fundamentals of Java',
-    topic: 'Java Methods',
-    questionType: 'mcq',
-    difficulty: 'easy',
-    marks: 1,
-    competency: 'remembering',
-    question: 'Which declaration is the standard entry point of a Java application?',
-    options: [
-      'void start()',
-      'public static void main(String[] args)',
-      'static start()',
-      'void run()',
-    ],
-    answer: 'public static void main(String[] args)',
-    explanation: 'The JVM starts a standard Java application through its public static main method.',
-    tags: ['java', 'programming', 'methods'],
-    estimatedTime: 1,
+    board: "ICSE",
+    title: "Class X written project",
+    text: "Disruptive Technologies project guide covering AI, ML, cloud, IoT, big data and cybersecurity.",
+    href: "/icse/class-x/projects",
   },
 ];
 
-// Re-export as alias and default to support both named imports
-export const cbsePracticeQuestions2026_27 = CBSE_PRACTICE_QUESTIONS_2026_27;
-export default CBSE_PRACTICE_QUESTIONS_2026_27;
+const stats = [
+  { value: practiceQuestions, label: "Python practice questions" },
+  { value: pythonProjects.length, label: "Python coding projects" },
+  { value: researchProjects, label: "Research / design projects" },
+  { value: Object.keys(PROJECT_GROUPS).length, label: "Project labs" },
+];
+
+export default function PythonPage() {
+  return (
+    <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
+      <Navbar />
+      <ErrorBoundary>
+        <Container>
+          <div className="py-12">
+            <section className="rounded-3xl border border-blue-100 bg-white p-6 shadow-sm sm:p-10">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-100/80 px-4 py-2 text-sm font-semibold text-blue-700">
+                <span>🐍</span>
+                <span>CBSE 083 &amp; 843 · ISC AI 883 · ICSE Robotics &amp; AI</span>
+              </div>
+              <h1 className="text-3xl font-bold text-blue-700 sm:text-4xl md:text-5xl">
+                Python Programming
+              </h1>
+              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600 sm:text-xl">
+                Python is taught through the board sections that actually use it. Practise real
+                questions and full project packages with sample input, sample output, test cases and
+                viva preparation.
+              </p>
+            </section>
+
+            <section className="mt-8 grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {stats.map((stat) => (
+                <div key={stat.label} className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+                  <p className="text-2xl font-bold text-blue-700">{stat.value}</p>
+                  <p className="mt-1 text-sm text-gray-500">{stat.label}</p>
+                </div>
+              ))}
+            </section>
+
+            <section className="mt-10">
+              <h2 className="text-2xl font-bold text-gray-900">Where to practise Python now</h2>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-gray-600">
+                Every card below opens a board section that contains real Python questions or project
+                work. There is no dead link and no placeholder chapter here.
+              </p>
+              <div className="mt-6 grid gap-5 md:grid-cols-2">
+                {destinations.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md"
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+                      {item.board}
+                    </span>
+                    <h3 className="mt-2 text-lg font-bold text-gray-900">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-gray-600">{item.text}</p>
+                    <span className="mt-4 inline-block text-sm font-semibold text-blue-700">Open →</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            <section className="mt-10 rounded-2xl border border-gray-200 bg-gray-50 p-6 text-center">
+              <h2 className="mb-2 text-xl font-bold text-gray-900">Chapter-wise Python lessons — coming soon</h2>
+              <p className="mx-auto max-w-3xl text-gray-600">
+                A standalone chapter-by-chapter Python course is still in development. Until it ships,
+                the board sections above contain the complete practice and project material that is
+                ready today.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/question-bank"
+                  className="inline-flex items-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
+                >
+                  Java question bank
+                </Link>
+                <Link
+                  href="/cbse/class/12/subject/083"
+                  className="inline-flex items-center rounded-xl border border-blue-300 bg-white px-5 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-50"
+                >
+                  CBSE 083 Python practice
+                </Link>
+              </div>
+            </section>
+          </div>
+        </Container>
+      </ErrorBoundary>
+      <Footer />
+    </main>
+  );
+}

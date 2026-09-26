@@ -4,29 +4,7 @@
  * CBSE 083/065 programming content remains Python-based; CBSE 802 Information Technology uses Java.
  */
 
-export interface PracticeQuestion {
-  id: string;
-  board: 'CBSE' | 'CISCE';
-  classLevel: 9 | 10 | 11 | 12;
-  subjectCode: '083' | '065' | '402' | '802';
-  subject: string;
-  unit: string;
-  topic: string;
-  questionType: 'mcq' | 'output-based' | 'programming' | 'short-answer' | 'case-study';
-  difficulty: 'easy' | 'medium' | 'hard';
-  marks: number;
-  competency: 'remembering' | 'understanding' | 'applying' | 'analyzing' | 'evaluating';
-  question: string;
-  options?: string[];
-  code?: string;
-  passage?: string;
-  answer: string;
-  explanation: string;
-  tags: string[];
-  estimatedTime: number; // in minutes
-}
-
-export const cbsePracticeQuestions2026_27: PracticeQuestion[] = [
+export const cbsePracticeQuestions2026_27 = [
   {
     id: 'cbse-083-11-cso-mcq-001',
     board: 'CBSE',

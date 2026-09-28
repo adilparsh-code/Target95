@@ -27,10 +27,33 @@ const classOptions = {
 };
 
 
-const subjects = [
-  { id: "java", label: "Java", detail: "Computer Applications / Computer Science", icon: "☕" },
-  { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "AI curriculum & practice", icon: "✦" },
-];
+const getSubjectsForClass = (classId) => {
+  if (classId === "icse-class-9") return [
+    { id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: "/Java" },
+    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "Robotics & AI", icon: "✦", href: "/icse/robotics-ai" },
+  ];
+  if (classId === "icse-class-10") return [
+    { id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: "/Java" },
+    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "Robotics & AI", icon: "✦", href: "/icse/robotics-ai/class-x" },
+  ];
+  if (classId === "isc-class-11") return [
+    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" },
+    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "ISC AI 883", icon: "✦", href: "/isc/artificial-intelligence/11" },
+  ];
+  if (classId === "isc-class-12") return [
+    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" },
+    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "ISC AI 883", icon: "✦", href: "/isc/artificial-intelligence/12" },
+  ];
+  if (classId === "cbse-class-11") return [
+    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/cbse/class/11/subject/083" },
+    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "CBSE AI 843", icon: "✦", href: "/cbse/class/11/subject/843" },
+  ];
+  if (classId === "cbse-class-12") return [
+    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/cbse/class/12/subject/083" },
+    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "CBSE AI 843", icon: "✦", href: "/cbse/class/12/subject/843" },
+  ];
+  return [{ id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: currentClass?.href || "/Java" }];
+};
 
 const chapters = [
   { no: "04", title: "Arrays: Single & Double Dimensional", status: "Active Unit", detail: "Indexing, binary search, bubble sort, selection sort, array manipulation algorithms.", href: "/Java/arrays" },
@@ -49,7 +72,9 @@ export default function StitchHomeHub() {
   const activeBoard = board || "cisce";
   const selected = selectedClass?.id || "icse-class-10";
   const currentClass = classOptions[activeBoard].find((item) => item.id === selected) || classOptions[activeBoard][0];
-  const selectedSubject = subject?.id || "java";
+  const subjectOptions = getSubjectsForClass(currentClass.id);
+  const selectedSubject = subject?.id && subjectOptions.some((item) => item.id === subject.id) ? subject.id : "java";
+  const activeSubject = subjectOptions.find((item) => item.id === selectedSubject) || subjectOptions[0];
 
   const chooseBoard = (id) => {
     setBoard(id);
@@ -87,8 +112,8 @@ export default function StitchHomeHub() {
             <div className="mt-5 grid gap-3 lg:grid-cols-[1.05fr_1fr_1.15fr_.95fr]">
               <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 1 • Board</p><div className="mt-2 grid grid-cols-2 gap-2">{boards.map((item) => <button key={item.id} onClick={() => chooseBoard(item.id)} className={`rounded-lg border px-3 py-2 text-xs font-semibold ${activeBoard === item.id ? "border-teal-200 bg-teal-50 text-teal-700" : "border-slate-200 text-slate-600"}`}>{item.label}<span className="block text-[10px] font-normal opacity-70">{item.detail}</span></button>)}</div></div>
               <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 2 • Class</p><div className="mt-2 grid grid-cols-4 gap-1.5">{classOptions[activeBoard].map((item) => <Link key={item.id} href={item.href} onClick={() => setClass({ id: item.id, title: item.title })} className={`flex h-9 items-center justify-center rounded-md text-xs font-bold ${currentClass.id === item.id ? "bg-blue-700 text-white" : "bg-slate-50 text-slate-600 hover:bg-blue-50"}`}>{item.label}</Link>)}</div></div>
-              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjects.map((item) => <button key={item.id} type="button" onClick={() => setSubject({ id: item.id, title: item.label })} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white text-sm shadow-sm">{item.icon}</span><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
-              <div className="rounded-lg bg-blue-700 p-4 text-white"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ready to Study</p><p className="mt-1 text-sm font-bold">{currentClass.title}</p><Link href={currentClass.href} className="mt-3 flex h-8 items-center justify-center rounded-md bg-white text-[11px] font-bold text-blue-700">Open Syllabus Chapters →</Link></div>
+              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => setSubject({ id: item.id, title: item.label })} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white text-sm shadow-sm">{item.icon}</span><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
+              <div className="rounded-lg bg-blue-700 p-4 text-white"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ready to Study</p><p className="mt-1 text-sm font-bold">{currentClass.title} · {activeSubject.label}</p><Link href={activeSubject.href} className="mt-3 flex h-8 items-center justify-center rounded-md bg-white text-[11px] font-bold text-blue-700">Open Syllabus Chapters →</Link></div>
             </div>
           </section>
 

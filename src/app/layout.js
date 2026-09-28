@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./stitch-home.css";
 import AuthProviderWrapper from "./components/AuthProviderWrapper";
 import { ThemeProvider } from "./components/ThemeProvider";
 import AdaptiveLight from "./components/AdaptiveLight";

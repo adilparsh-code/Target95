@@ -69,12 +69,12 @@ function MockTestContent() {
     router.push(`/mock-test/instructions?${params.toString()}`);
   };
 
-  const softCard = "rounded-[26px] border border-slate-200/80 bg-white/85 shadow-[0_12px_40px_rgba(15,23,42,0.045)] backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/70";
+  const softCard = "stitch-surface p-0";
   const option = (active) => `rounded-2xl border p-3.5 text-center transition-all duration-200 ${active ? "border-blue-500 bg-blue-50 text-blue-700 shadow-sm dark:border-blue-400 dark:bg-blue-950/45 dark:text-blue-300" : "border-slate-200 bg-white text-slate-800 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-sm dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200"}`;
   const labelClass = "text-sm font-semibold text-slate-900 dark:text-slate-100";
   const selectClass = "mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-normal text-slate-800 shadow-sm outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100";
 
-  return <ProtectedRoute><main className="internal-page internal-mock-test min-h-screen bg-transparent"><Navbar /><div className="mx-auto max-w-7xl px-4 pb-10 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10"><ErrorBoundary>
+  return <ProtectedRoute><main className="stitch-page internal-page internal-mock-test min-h-screen"><Navbar /><div className="mx-auto max-w-7xl px-4 pb-10 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-10"><ErrorBoundary>
     <section className={`${softCard} p-5 sm:p-7`}><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">{activeBoard} • Class {activeClass}{activeSubjectCode ? ` • Code ${activeSubjectCode}` : ""}</p><h1 className="mt-2 text-2xl font-black text-slate-950 sm:text-3xl dark:text-white">Build your test.</h1><p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">Choose your board, class and subject context, then configure the test.</p></section>
     <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]"><section className={`${softCard} p-5 sm:p-7`}>
       <p className={labelClass}>Test Category</p><div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">{CATEGORIES.map((cat) => <button key={cat.id} type="button" onClick={() => handleCategoryChange(cat.id)} className={option(category === cat.id)}><span className="text-2xl">{cat.icon}</span><p className="mt-1 text-xs font-semibold">{cat.label}</p></button>)}</div>

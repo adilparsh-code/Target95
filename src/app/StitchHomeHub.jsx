@@ -13,6 +13,7 @@ const boards = [
 
 const classOptions = {
   cisce: [
+    { id: "icse-class-9", label: "IX", title: "ICSE Class 9", href: "/icse/class-ix" },
     { id: "icse-class-10", label: "X", title: "ICSE Class 10", href: "/icse/class-x" },
     { id: "isc-class-11", label: "XI", title: "ISC Class 11", href: "/isc/class-xi" },
     { id: "isc-class-12", label: "XII", title: "ISC Class 12", href: "/isc/class-xii" },

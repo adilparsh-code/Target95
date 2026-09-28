@@ -52,7 +52,7 @@ const getSubjectsForClass = (classId) => {
     { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/cbse/class/12/subject/083" },
     { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "CBSE AI 843", icon: "✦", href: "/cbse/class/12/subject/843" },
   ];
-  return [{ id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: currentClass?.href || "/Java" }];
+  return [{ id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" }];
 };
 
 const chapters = [

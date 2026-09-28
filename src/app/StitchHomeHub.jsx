@@ -56,9 +56,9 @@ const getSubjectsForClass = (classId) => {
 };
 
 const chapters = [
-  { no: "04", title: "Arrays: Single & Double Dimensional", status: "Active Unit", detail: "Indexing, binary search, bubble sort, selection sort, array manipulation algorithms.", href: "/Java/arrays" },
-  { no: "01", title: "Revision of Class IX Java Concepts", status: "Mastered (100%)", detail: "Tokens, data types, operator precedence, flow of control (if-else, switch, loops).", href: "/Java/introduction" },
-  { no: "03", title: "Class as the Basis of All Computation", status: "Mastered (95%)", detail: "Objects as instances, abstraction, encapsulation, primitive vs composite types.", href: "/Java/class-as-basis-of-computation" },
+  { no: "04", title: "Arrays: Single & Double Dimensional", status: "Active Unit", detail: "Indexing, binary search, bubble sort, selection sort, array manipulation algorithms.", href: "/Java/arrays-1d" },
+  { no: "01", title: "Revision of Class IX Java Concepts", status: "Mastered (100%)", detail: "Tokens, data types, operator precedence, flow of control (if-else, switch, loops).", href: "/Java/introduction-to-java" },
+  { no: "03", title: "Class as the Basis of All Computation", status: "Mastered (95%)", detail: "Objects as instances, abstraction, encapsulation, primitive vs composite types.", href: "/Java/classes-objects" },
   { no: "02", title: "User-Defined Methods & Constructors", status: "Practice in Progress (60%)", detail: "Parameters, return values, method overloading, default vs parameterized constructors.", href: "/Java/methods" },
   { no: "05", title: "String Handling & Library Classes", status: "Next Up", detail: "String methods, character class checks and common library operations.", href: "/Java/strings" },
 ];

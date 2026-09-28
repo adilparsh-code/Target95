@@ -183,7 +183,7 @@ export default memo(function Navbar() {
           <button
             type="button"
             onClick={() => toggleDropdown(link.label)}
-            className={`flex items-center gap-1 rounded-lg ${padding} py-2 text-[12px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 ${isActive || openDropdown === link.label ? "bg-white text-slate-950 shadow-sm dark:bg-slate-800 dark:text-white" : "text-slate-600 hover:bg-white/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/75 dark:hover:text-white"}`}
+            className={`stitch-nav-link ${isActive || openDropdown === link.label ? "stitch-nav-link-active" : ""} flex items-center gap-1 rounded-lg ${padding} py-2 text-[12px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 ${isActive || openDropdown === link.label ? "bg-white text-slate-950 shadow-sm dark:bg-slate-800 dark:text-white" : "text-slate-600 hover:bg-white/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/75 dark:hover:text-white"}`}
             aria-expanded={openDropdown === link.label}
           >
             {link.label}
@@ -192,7 +192,7 @@ export default memo(function Navbar() {
         ) : (
           <Link
             href={link.href}
-            className={`block rounded-lg ${padding} py-2 text-[12px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 ${isActive ? "bg-white text-blue-700 shadow-sm dark:bg-slate-800 dark:text-blue-300" : "text-slate-600 hover:bg-white/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/75 dark:hover:text-white"}`}
+            className={`stitch-nav-link ${isActive ? "stitch-nav-link-active" : ""} block rounded-lg ${padding} py-2 text-[12px] font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 ${isActive ? "bg-white text-blue-700 shadow-sm dark:bg-slate-800 dark:text-blue-300" : "text-slate-600 hover:bg-white/80 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-800/75 dark:hover:text-white"}`}
             aria-current={isActive ? "page" : undefined}
           >
             {link.label}
@@ -217,11 +217,11 @@ export default memo(function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 shadow-[0_6px_24px_rgba(15,23,42,0.05)] backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-[0_8px_28px_rgba(0,0,0,0.22)]">
+    <nav className="stitch-nav sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 shadow-[0_6px_24px_rgba(15,23,42,0.05)] backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-[0_8px_28px_rgba(0,0,0,0.22)]">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:shadow-lg">Skip to main content</a>
       <Container>
-        <div className="flex h-[68px] items-center gap-2 lg:gap-3">
-          <Link href="/" className="group flex shrink-0 items-center gap-2 rounded-xl px-1 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60" aria-label="Target95+ home">
+        <div className="stitch-nav-shell flex h-[68px] items-center gap-2 lg:gap-3">
+          <Link href="/" className="stitch-nav-logo group flex shrink-0 items-center gap-2 rounded-xl px-1 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60" aria-label="Target95+ home">
             <span className="grid h-9 w-9 place-items-center rounded-xl border border-blue-100 bg-blue-50 text-lg shadow-sm transition-transform duration-200 group-hover:-rotate-3 dark:border-blue-900/60 dark:bg-blue-950/60">🎯</span>
             <span className="hidden text-[17px] font-black tracking-[-0.035em] text-slate-950 sm:block dark:text-white">Target95<span className="text-blue-600 dark:text-blue-400">+</span></span>
             <span className="text-[17px] font-black tracking-[-0.035em] text-slate-950 sm:hidden dark:text-white">T95<span className="text-blue-600 dark:text-blue-400">+</span></span>

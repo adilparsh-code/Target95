@@ -78,7 +78,7 @@ export default function QuestionPlayer({
     `${basePath}/${chapter}/question/${questionId}`;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-100 to-blue-50">
+    <main className="stitch-question-player min-h-screen bg-[var(--stitch-surface)]">
       <Navbar />
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="rounded-2xl bg-white p-5 shadow-xl sm:rounded-3xl sm:p-8 lg:p-10">

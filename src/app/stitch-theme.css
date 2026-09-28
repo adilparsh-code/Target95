@@ -1,0 +1,70 @@
+/* Target95 Stitch design foundation.
+ * Visual source: Target95 Academic Precision + Modern EdTech.
+ * This layer is intentionally additive: existing product behavior and Tailwind utilities remain intact.
+ */
+:root {
+  --stitch-surface: #faf8ff;
+  --stitch-surface-card: #ffffff;
+  --stitch-canvas: #f8fafc;
+  --stitch-surface-container: #f1f3f7;
+  --stitch-surface-high: #e2e7ff;
+  --stitch-text-primary: #0f172a;
+  --stitch-text-secondary: #64748b;
+  --stitch-text-muted: #94a3b8;
+  --stitch-primary: #004ac6;
+  --stitch-primary-dark: #1d4ed8;
+  --stitch-primary-tint: #eef4ff;
+  --stitch-ai: #6366f1;
+  --stitch-ai-tint: #eef2ff;
+  --stitch-icse: #0d9488;
+  --stitch-icse-tint: #f0fdfa;
+  --stitch-cbse: #d97706;
+  --stitch-cbse-tint: #fffbeb;
+  --stitch-success: #059669;
+  --stitch-success-tint: #d1fae5;
+  --stitch-error: #e11d48;
+  --stitch-error-tint: #ffe4e6;
+  --stitch-border: #e2e8f0;
+  --stitch-border-dark: #1e293b;
+  --stitch-navy: #0f172a;
+  --stitch-midnight: #0b1120;
+  --stitch-radius-sm: .5rem;
+  --stitch-radius-md: .75rem;
+  --stitch-radius-lg: 1rem;
+  --stitch-shadow-sm: 0 1px 3px rgba(15,23,42,.06);
+  --stitch-shadow-md: 0 8px 24px rgba(15,23,42,.08);
+  --stitch-shadow-lg: 0 18px 48px rgba(15,23,42,.10);
+  --stitch-font-body: Inter, Arial, sans-serif;
+  --stitch-font-display: "Plus Jakarta Sans", Inter, Arial, sans-serif;
+  --stitch-font-code: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.stitch-surface { background: var(--stitch-surface); color: var(--stitch-text-primary); }
+.stitch-card { background: var(--stitch-surface-card); border: 1px solid var(--stitch-border); border-radius: var(--stitch-radius-lg); box-shadow: var(--stitch-shadow-sm); }
+.stitch-card-hover { transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.stitch-card-hover:hover { transform: translateY(-2px); box-shadow: var(--stitch-shadow-md); border-color: #cbd5e1; }
+.stitch-eyebrow { color: var(--stitch-primary); font-family: var(--stitch-font-body); font-size: .75rem; font-weight: 700; letter-spacing: .12em; line-height: 1rem; text-transform: uppercase; }
+.stitch-display { color: var(--stitch-text-primary); font-family: var(--stitch-font-display); font-weight: 800; letter-spacing: -.03em; }
+.stitch-heading { color: var(--stitch-text-primary); font-family: var(--stitch-font-display); font-weight: 700; letter-spacing: -.02em; }
+.stitch-body { color: var(--stitch-text-secondary); font-family: var(--stitch-font-body); }
+.stitch-code { font-family: var(--stitch-font-code); }
+.stitch-btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:2.5rem; border-radius:var(--stitch-radius-md); padding:.625rem 1rem; font-family:var(--stitch-font-body); font-size:.875rem; font-weight:700; transition:all .18s ease; }
+.stitch-btn-primary { background:var(--stitch-primary); color:#fff; box-shadow:var(--stitch-shadow-sm); }
+.stitch-btn-primary:hover { background:var(--stitch-primary-dark); transform:translateY(-1px); }
+.stitch-btn-secondary { background:var(--stitch-surface-card); color:var(--stitch-text-primary); border:1px solid var(--stitch-border); }
+.stitch-btn-secondary:hover { background:var(--stitch-canvas); }
+.stitch-status-success { background:var(--stitch-success-tint); color:var(--stitch-success); }
+.stitch-status-error { background:var(--stitch-error-tint); color:var(--stitch-error); }
+.stitch-board-icse { color:var(--stitch-icse); background:var(--stitch-icse-tint); }
+.stitch-board-cbse { color:var(--stitch-cbse); background:var(--stitch-cbse-tint); }
+.stitch-ai { color:var(--stitch-ai); background:var(--stitch-ai-tint); }
+
+.stitch-nav { background:rgba(255,255,255,.96)!important; border-color:var(--stitch-border)!important; box-shadow:0 1px 3px rgba(15,23,42,.05)!important; backdrop-filter:blur(12px); }
+.stitch-nav .stitch-nav-shell { height:4rem; }
+.stitch-nav .stitch-nav-logo { font-family:var(--stitch-font-display); letter-spacing:-.035em; }
+.stitch-nav .stitch-nav-link { font-family:var(--stitch-font-body); font-size:.8125rem; font-weight:600; color:var(--stitch-text-secondary); }
+.stitch-nav .stitch-nav-link:hover { color:var(--stitch-text-primary); background:var(--stitch-surface-container); }
+.stitch-nav .stitch-nav-link-active { color:var(--stitch-primary); background:var(--stitch-primary-tint); }
+.stitch-home { background:var(--stitch-surface); color:var(--stitch-text-primary); }
+.stitch-home .stitch-home-grid { background-image:linear-gradient(to right, rgba(0,74,198,.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,74,198,.035) 1px, transparent 1px); background-size:32px 32px; }
+@media (max-width: 640px) { .stitch-display { letter-spacing:-.025em; } .stitch-nav .stitch-nav-shell { height:3.75rem; } }

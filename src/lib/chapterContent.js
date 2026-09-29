@@ -382,10 +382,20 @@ function normalizeExample(ex, index, level = null) {
 
 function normalizeExamples(sdExamples, contentExamples) {
   const examples = [];
+  // Legacy studyData and rich content can define the same example. Dedupe on
+  // title+code so examples never render twice.
+  const seen = new Set();
+  const markUnique = (ex) => {
+    const key = `${ex?.title || ""}|${ex?.code || ""}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  };
 
   /* Rich chapter-content array */
   if (Array.isArray(contentExamples)) {
     contentExamples.forEach((ex, index) => {
+      if (!markUnique(ex)) return;
       const normalized = normalizeExample(ex, index);
 
       if (normalized) {
@@ -405,6 +415,7 @@ function normalizeExamples(sdExamples, contentExamples) {
       if (!Array.isArray(levelExamples)) return;
 
       levelExamples.forEach((ex, index) => {
+        if (!markUnique(ex)) return;
         const normalized = normalizeExample(
           ex,
           index,
@@ -421,6 +432,7 @@ function normalizeExamples(sdExamples, contentExamples) {
   /* Legacy studyData examples */
   if (Array.isArray(sdExamples)) {
     sdExamples.forEach((ex, index) => {
+      if (!markUnique(ex)) return;
       const normalized = normalizeExample(ex, index);
 
       if (normalized) {
@@ -457,37 +469,33 @@ function normalizePractice(practiceTest) {
 
 function normalizeMcqs(questionBankMcqs, contentMcqs) {
   const mcqs = [];
+  // The question bank and rich chapter content can contain the same questions
+  // (identical ids). Keep the first occurrence so sections never render a
+  // question twice and React keys stay unique.
+  const seen = new Set();
+  const pushUnique = (q) => {
+    if (!q || typeof q !== "object") return;
+    const dedupeKey = q.id || `${q.question || ""}|${q.answer || q.correctAnswer || ""}`;
+    if (seen.has(dedupeKey)) return;
+    seen.add(dedupeKey);
+
+    mcqs.push({
+      id: q.id,
+      question: q.question,
+      options: Array.isArray(q.options) ? q.options : [],
+      answer: q.correctAnswer ?? q.answer,
+      explanation: normalizeExplanation(q.explanation),
+      difficulty: q.difficulty,
+      marks: q.marks,
+    });
+  };
 
   if (Array.isArray(questionBankMcqs)) {
-    questionBankMcqs.forEach((q) => {
-      if (!q || typeof q !== "object") return;
-
-      mcqs.push({
-        id: q.id,
-        question: q.question,
-        options: Array.isArray(q.options) ? q.options : [],
-        answer: q.correctAnswer,
-        explanation: normalizeExplanation(q.explanation),
-        difficulty: q.difficulty,
-        marks: q.marks,
-      });
-    });
+    questionBankMcqs.forEach(pushUnique);
   }
 
   if (Array.isArray(contentMcqs)) {
-    contentMcqs.forEach((q) => {
-      if (!q || typeof q !== "object") return;
-
-      mcqs.push({
-        id: q.id,
-        question: q.question,
-        options: Array.isArray(q.options) ? q.options : [],
-        answer: q.answer,
-        explanation: normalizeExplanation(q.explanation),
-        difficulty: q.difficulty,
-        marks: q.marks,
-      });
-    });
+    contentMcqs.forEach(pushUnique);
   }
 
   return mcqs.length ? mcqs : null;
@@ -502,13 +510,20 @@ function normalizeProgramming(
   contentProgramming
 ) {
   const programming = [];
+  // Same dedupe contract as normalizeMcqs: question bank first, then rich
+  // content, never the same question twice.
+  const seen = new Set();
+  const pushUnique = (q, extra = {}) => {
+    if (!q || typeof q !== "object") return;
+    const dedupeKey = q.id || `${q.question || q.problemStatement || ""}`;
+    if (seen.has(dedupeKey)) return;
+    seen.add(dedupeKey);
+    programming.push({ id: q.id, ...extra });
+  };
 
   if (Array.isArray(questionBankProgramming)) {
-    questionBankProgramming.forEach((q) => {
-      if (!q || typeof q !== "object") return;
-
-      programming.push({
-        id: q.id,
+    questionBankProgramming.forEach((q) =>
+      pushUnique(q, {
         question: q.problemStatement || q.question || "",
         solution: q.solution,
         explanation: normalizeExplanation(q.solutionExplanation),
@@ -518,8 +533,8 @@ function normalizeProgramming(
         input: q.input,
         constraints: q.constraints,
         logic: q.logic,
-      });
-    });
+      })
+    );
   }
 
   if (
@@ -531,11 +546,8 @@ function normalizeProgramming(
 
       if (!Array.isArray(questions)) return;
 
-      questions.forEach((q) => {
-        if (!q || typeof q !== "object") return;
-
-        programming.push({
-          id: q.id,
+      questions.forEach((q) =>
+        pushUnique(q, {
           question: q.question || q.problemStatement || "",
           solution: q.solution,
           output: q.output,
@@ -543,8 +555,8 @@ function normalizeProgramming(
           explanation: normalizeExplanation(
             q.explanation || q.solutionExplanation
           ),
-        });
-      });
+        })
+      );
     });
   }
 
@@ -583,6 +595,16 @@ function normalizeOutput(
   studyDataOutput
 ) {
   const output = [];
+  // The question bank and rich chapter content can carry the same output
+  // questions (identical ids). Dedupe so nothing renders twice.
+  const seen = new Set();
+  const pushUnique = (item) => {
+    const dedupeKey =
+      item.id || `${item.question || ""}|${item.answer || ""}`;
+    if (seen.has(dedupeKey)) return;
+    seen.add(dedupeKey);
+    output.push(item);
+  };
 
   [
     questionBankOutput,
@@ -594,7 +616,7 @@ function normalizeOutput(
     items.forEach((q) => {
       if (!q || typeof q !== "object") return;
 
-      output.push({
+      pushUnique({
         id: q.id,
         question: q.question || q.prompt || "",
         answer: q.answer,
@@ -610,7 +632,7 @@ function normalizeOutput(
     studyDataOutput.forEach((q, idx) => {
       const isString = typeof q === "string";
 
-      output.push({
+      pushUnique({
         id:
           q?.id ||
           `study-output-${idx}`,

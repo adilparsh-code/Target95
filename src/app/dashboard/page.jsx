@@ -51,7 +51,7 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <main className="stitch-dashboard internal-page internal-dashboard min-h-screen bg-transparent">
+      <main className="stitch-dashboard internal-page internal-dashboard min-h-screen bg-[var(--stitch-surface)]">
         <Navbar />
         <div className="mx-auto max-w-7xl px-4 pb-10 pt-6 sm:px-6 sm:pt-8 lg:px-8">
           <ErrorBoundary>

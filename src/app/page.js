@@ -21,7 +21,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-white">
+    <div className="stitch-page relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute -left-32 top-20 h-80 w-80 rounded-full bg-blue-200/25 blur-3xl" />
         <div className="absolute -right-32 top-32 h-96 w-96 rounded-full bg-indigo-200/25 blur-3xl" />

@@ -217,7 +217,7 @@ export default memo(function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 shadow-[0_6px_24px_rgba(15,23,42,0.05)] backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/95 dark:shadow-[0_8px_28px_rgba(0,0,0,0.22)]">
+    <nav className="stitch-nav sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 shadow-[0_8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-slate-950/90 dark:shadow-[0_8px_30px_rgba(0,0,0,0.24)]">
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white focus:shadow-lg">Skip to main content</a>
       <Container>
         <div className="flex h-[68px] items-center gap-2 lg:gap-3">

@@ -51,11 +51,11 @@ export default function DashboardPage() {
 
   return (
     <ProtectedRoute>
-      <main className="stitch-dashboard internal-page internal-dashboard min-h-screen bg-[var(--stitch-surface)]">
+      <main className="stitch-page internal-page internal-dashboard min-h-screen">
         <Navbar />
         <div className="mx-auto max-w-7xl px-4 pb-10 pt-6 sm:px-6 sm:pt-8 lg:px-8">
           <ErrorBoundary>
-            <section className="rounded-[28px] border border-slate-200/80 bg-white/80 p-4 shadow-[0_12px_40px_rgba(15,23,42,0.04)] backdrop-blur-sm sm:p-6 dark:border-slate-800 dark:bg-slate-900/65">
+            <section className="stitch-surface p-4 sm:p-6">
               <DashboardHeader user={user} isLoading={authLoading || !user} />
             </section>
 

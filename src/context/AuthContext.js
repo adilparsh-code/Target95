@@ -21,9 +21,9 @@ export function AuthProvider({ children }) {
       email: firebaseUser.email || "",
       fullName: profile.fullName || firebaseUser.displayName || "",
       avatarUrl: profile.avatarUrl || firebaseUser.photoURL || "",
-      emailVerified: firebaseUser.emailVerified,
       role: profile.role || "student",
       ...profile,
+      // Live Firebase value always wins over any stale Firestore copy.
       emailVerified: firebaseUser.emailVerified,
     };
   }, []);
@@ -282,7 +282,11 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const value = { user, loading, error, login, register, loginWithGoogle, forgotPassword, resendVerification, refreshVerification, updateStudentProfile, logout, clearError: () => setError(null) };
+  // Stable identity so pages that clear stale errors on mount
+  // (useEffect(..., [clearError])) do not wipe fresh auth errors.
+  const clearError = useCallback(() => setError(null), []);
+
+  const value = { user, loading, error, login, register, loginWithGoogle, forgotPassword, resendVerification, refreshVerification, updateStudentProfile, logout, clearError };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
@@ -296,9 +300,14 @@ function getAuthMessage(code) {
     "auth/email-already-in-use": "This email is already registered.",
     "auth/invalid-email": "Enter a valid email address.",
     "auth/invalid-credential": "Incorrect email or password.",
+    "auth/user-not-found": "No account found with this email.",
+    "auth/wrong-password": "Incorrect email or password.",
     "auth/weak-password": "Password must be at least 6 characters.",
     "auth/operation-not-allowed": "Email/password sign-in is not enabled for this Firebase project.",
     "auth/popup-closed-by-user": "Google sign-in was cancelled.",
+    "auth/cancelled-popup-request": "Google sign-in was cancelled.",
+    "auth/popup-blocked": "Your browser blocked the Google sign-in popup. Allow popups and try again.",
+    "auth/unauthorized-domain": "This domain is not authorized for sign-in. Please contact support.",
     "auth/network-request-failed": "Network error. Please try again.",
     "auth/too-many-requests": "Too many attempts. Please try again later.",
     "auth/user-disabled": "This account has been disabled. Please contact support.",

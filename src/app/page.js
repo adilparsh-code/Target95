@@ -1,6 +1,5 @@
 import { Metadata } from "next";
-import ClientHome from "./ClientHome";
-import HomeProductPreview from "./components/HomeProductPreview";
+import StitchHomeHub from "./StitchHomeHub";
 
 export const metadata = {
   title: "Target95+ - Master CISCE & CBSE Computer Science with AI",
@@ -28,10 +27,7 @@ export default function Home() {
         <div className="absolute -right-32 top-32 h-96 w-96 rounded-full bg-indigo-200/25 blur-3xl" />
         <div className="absolute left-1/2 top-0 h-px w-[min(80vw,1000px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-blue-300/50 to-transparent" />
       </div>
-      <div className="relative z-10">
-        <ClientHome />
-        <HomeProductPreview />
-      </div>
+      <StitchHomeHub />
     </div>
   );
 }

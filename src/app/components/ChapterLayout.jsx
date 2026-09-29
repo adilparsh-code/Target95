@@ -22,6 +22,7 @@ import {
   Clock,
 } from "lucide-react";
 import Navbar from "./Navbar";
+import ReadingProgressIndicator from "./study/ReadingProgressIndicator";
 
 export const CHAPTER_SECTIONS = [
   { id: "overview", label: "Overview", icon: <BookOpen className="h-4 w-4" />, defaultTime: 5 },
@@ -140,8 +141,15 @@ export default function ChapterLayout({
           </div>
         </div>
 
-        <main className="mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-6 sm:pt-8 lg:px-8">
+        <main className="reading-panel mx-auto max-w-5xl px-4 pb-16 pt-6 sm:px-6 sm:pt-8 lg:px-8">
           <nav className="mb-5" aria-label="Breadcrumb"><ol className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400"><li><Link href={computerScienceHref} className="font-medium transition hover:text-blue-600 dark:hover:text-blue-400">Computer Science</Link></li><li aria-hidden="true" className="text-slate-300">›</li><li className="font-semibold text-slate-900 dark:text-white">{chapterTitle}</li></ol></nav>
+
+          <ReadingProgressIndicator
+            chapterTitle={chapterTitle}
+            chapterSlug={chapterSlug}
+            readingProgress={readingProgress}
+          />
+
           <div className="sticky top-[116px] z-20 mb-7 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-950/95"><div className="flex items-center justify-between gap-2">
             <button type="button" onClick={() => { const index = CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection); if (index > 0) scrollToSection(CHAPTER_SECTIONS[index - 1].id); }} disabled={CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection) === 0} className="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 disabled:pointer-events-none disabled:opacity-30 sm:px-4 sm:text-sm dark:text-slate-300 dark:hover:bg-slate-900"><ChevronLeft className="h-4 w-4" /><span className="hidden sm:inline">Previous topic</span><span className="sm:hidden">Prev</span></button>
             <div className="min-w-0 text-center"><p className="truncate text-xs font-bold text-slate-900 sm:text-sm dark:text-white">{CHAPTER_SECTIONS.find((item) => item.id === activeSection)?.label}</p><p className="text-[10px] text-slate-400 sm:text-xs">Topic {CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection) + 1} of {CHAPTER_SECTIONS.length}</p></div>

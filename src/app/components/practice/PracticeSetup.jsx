@@ -102,7 +102,7 @@ export default function PracticeSetup() {
   const buttonClass = (active) => `w-full rounded-xl border-2 p-3 text-left transition-all ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20" : "border-gray-200 hover:border-gray-300 dark:border-gray-700"}`;
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-8">
+    <div className="stitch-practice-setup mx-auto max-w-5xl px-4 py-8">
       <div className="mb-8 text-center">
         <div className="mb-3 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">{settings.board || queryContext.board} • Class {settings.classNumber || queryContext.classNumber}{settings.subjectCode ? ` • Code ${settings.subjectCode}` : ""}</div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Start a New Practice Session</h1>

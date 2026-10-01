@@ -6,6 +6,7 @@ import DifficultyBadge from "./DifficultyBadge";
 import useBookmarks from "../hooks/useBookmarks";
 import legacyQuestions from "../data/questions";
 import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
+import { useAuth } from "@/context/AuthContext";
 
 // Bookmarks are created from the real question bank (and from the question
 // player), so they must be resolved against the same source. The previous
@@ -23,7 +24,8 @@ for (const question of legacyQuestions) {
 }
 
 export default function BookmarksList() {
-  const { bookmarks } = useBookmarks();
+  const { user } = useAuth();
+  const { bookmarks } = useBookmarks(user?.uid);
   const bookmarkedQuestions = bookmarks.flatMap((bookmark) => {
     const question = questionIndex.get(`${bookmark.chapter}:${bookmark.questionId}`);
     return question ? [{ bookmark, question }] : [];

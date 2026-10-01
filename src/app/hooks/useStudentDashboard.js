@@ -176,7 +176,8 @@ export default function useStudentDashboard() {
 
   const refreshAll = useCallback(() => {
     refresh?.();
-  }, [refresh]);
+    if (uid) fetchUserTestHistory(uid).catch(() => {});
+  }, [fetchUserTestHistory, refresh, uid]);
 
   return {
     user,

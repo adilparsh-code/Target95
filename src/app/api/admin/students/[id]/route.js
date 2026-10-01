@@ -69,10 +69,9 @@ export async function GET(request, { params }) {
     }
     const userData = userDoc.data() || {};
 
-    const [progressSnap, resultsSnap, mockResultsSnap] = await Promise.all([
+    const [progressSnap, resultsSnap] = await Promise.all([
       adminDb.collection("progress").where("userId", "==", id).limit(500).get(),
       adminDb.collection("results").where("userId", "==", id).orderBy("completedAt", "desc").limit(50).get(),
-      adminDb.collection("mockTestResults").where("userId", "==", id).limit(50).get(),
     ]);
 
     const progress = progressSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -87,7 +86,9 @@ export async function GET(request, { params }) {
       const correct = Number(data.correctAnswers) || 0;
       return {
         id: d.id,
+        title: data.title || data.testTitle || "Mock test",
         score: Number(data.score) || correct,
+        correctCount: Number(data.correctCount) || correct,
         totalQuestions: total,
         percentage: total > 0 ? Math.round((correct / total) * 100) : 0,
         timeTaken: Number(data.timeTaken) || 0,
@@ -95,18 +96,7 @@ export async function GET(request, { params }) {
       };
     });
 
-    const mockResults = mockResultsSnap.docs.map((d) => {
-      const data = d.data();
-      return {
-        id: d.id,
-        title: data.title || data.testTitle || "Mock test",
-        percentage: Number(data.percentage) || 0,
-        correctCount: Number(data.correctCount) || 0,
-        totalQuestions: Number(data.totalQuestions) || 0,
-        timeTaken: Number(data.timeTaken) || 0,
-        completedAt: toMillis(data.completedAt) || toMillis(data.createdAt),
-      };
-    });
+    const mockResults = results;
 
     const bestScore = results.reduce((max, r) => Math.max(max, r.percentage), 0);
 

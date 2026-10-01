@@ -8,6 +8,7 @@ import useProgress from "../hooks/useProgress";
 import { filterQuestionBank, getQuestionBankFilters, questionBankQuestions } from "@/lib/questionBank";
 import { getDifficultyColorClass, getQuestionTypeColorClass } from "@/lib/questionPresentation";
 import { getCBSEPracticeQuestions } from "@/app/data/cbse/question-bank-2026-27";
+import { useAuth } from "@/context/AuthContext";
 
 const initialFilters = { search: "", difficulty: "all", chapter: "all", topic: "all", questionType: "all", status: "all" };
 const fieldClass = "h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm font-medium text-slate-700 shadow-sm outline-none transition placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100";
@@ -54,8 +55,9 @@ export default function QuestionBank() {
     const requested = Number(searchParams.get("count"));
     return [5, 10, 15, 20].includes(requested) ? requested : 24;
   });
-  const { isBookmarked, toggleBookmark } = useBookmarks();
-  const { isCompleted } = useProgress();
+  const { user } = useAuth();
+  const { isBookmarked, toggleBookmark } = useBookmarks(user?.uid);
+  const { isCompleted } = useProgress(user?.uid);
   const questions = useMemo(() => sourceQuestions.map((question) => ({ ...question, isBookmarked: isBookmarked({ chapter: question.chapter, questionId: question.id }), isCompleted: isCompleted({ chapter: question.chapter, questionId: question.id }) })), [sourceQuestions, isBookmarked, isCompleted]);
   const results = useMemo(() => filterQuestionBank(questions, filters), [filters, questions]);
   const update = (key, value) => { setVisibleLimit(24); setFilters((current) => ({ ...current, [key]: value })); };

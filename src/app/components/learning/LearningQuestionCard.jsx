@@ -5,6 +5,7 @@ import BookmarkButton from "../BookmarkButton";
 import DifficultyBadge from "../DifficultyBadge";
 import useProgress from "../../hooks/useProgress";
 import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
+import { useAuth } from "@/context/AuthContext";
 
 const typeLabels = { mcq: "MCQ", theory: "Theory", programming: "Programming" };
 
@@ -12,7 +13,8 @@ export default function LearningQuestionCard({ question, attempt, onAttempt }) {
   const [selection, setSelection] = useState(null);
   const [expanded, setExpanded] = useState(false);
   const [showReport, setShowReport] = useState(false);
-  const { markCompleted } = useProgress();
+  const { user } = useAuth();
+  const { markCompleted } = useProgress(user?.uid);
   const submitted = attempt?.submitted;
   const answerCorrect = selection === question.answer;
 

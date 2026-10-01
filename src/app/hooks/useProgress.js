@@ -78,6 +78,9 @@ export default function useProgress(userId = null) {
         { field: "userId", operator: "==", value: userId }
       ]);
       setFirestoreProgress(progress);
+      completedQuestionsRef.current = progress;
+      setCompletedQuestions(progress);
+      saveCompletedQuestions(progress, userId);
     } catch (error) {
       console.error("Error fetching Firestore progress:", error);
       syncLocalProgress();
@@ -179,6 +182,7 @@ export default function useProgress(userId = null) {
           { field: "userId", operator: "==", value: userId },
         ]);
         completedQuestionsRef.current = progress;
+        setFirestoreProgress(progress);
         setCompletedQuestions(progress);
         saveCompletedQuestions(progress, userId);
       } catch (err) {
@@ -196,6 +200,7 @@ export default function useProgress(userId = null) {
       "progress",
       (data) => {
         const userProgress = data;
+        setFirestoreProgress(userProgress);
         completedQuestionsRef.current = userProgress;
         setCompletedQuestions(userProgress);
         saveCompletedQuestions(userProgress, userId);

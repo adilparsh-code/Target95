@@ -21,7 +21,7 @@ export async function GET(request, { params }) {
     }
 
     const attemptsSnap = await guard.adminDb
-      .collection("mockTestResults")
+      .collection("results")
       .where("mockTestId", "==", id)
       .limit(200)
       .get()

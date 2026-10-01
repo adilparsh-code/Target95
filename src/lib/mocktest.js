@@ -1,5 +1,5 @@
-import questions from "../app/data/questions";
-import { getCBSEQuestionConfig } from "../app/data/cbse/question-config-2026-27";
+import questions from "../app/data/questions.js";
+import { getCBSEQuestionConfig } from "../app/data/cbse/question-config-2026-27.js";
 
 const VALID_CHAPTERS = new Set(["all", "introduction", "variables-data-types", "operators", "if-else", "loops", "methods", "arrays", "strings", "constructor"]);
 const VALID_DIFFICULTIES = new Set(["all", "easy", "medium", "hard"]);
@@ -104,6 +104,7 @@ export function evaluateMockTestAnswer(question, response) {
 export function calculateMockTestResult(questions, answers, markedForReview, config = {}) {
   let correctCount = 0;
   let wrongCount = 0;
+  let unansweredCount = 0;
   let reviewedCount = 0;
 
   const review = questions.map((question) => {
@@ -111,7 +112,8 @@ export function calculateMockTestResult(questions, answers, markedForReview, con
     const isMarkedForReview = Boolean(markedForReview[question.id]);
     const isCorrect = evaluateMockTestAnswer(question, response);
 
-    if (isCorrect) correctCount += 1;
+    if (!response) unansweredCount += 1;
+    else if (isCorrect) correctCount += 1;
     else wrongCount += 1;
     if (isMarkedForReview) reviewedCount += 1;
 
@@ -126,14 +128,17 @@ export function calculateMockTestResult(questions, answers, markedForReview, con
   });
 
   const totalQuestions = questions.length;
+  const attemptedCount = totalQuestions - unansweredCount;
   const percentage = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
-  const accuracy = percentage;
+  const accuracy = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
 
   return {
     score: correctCount,
     totalQuestions,
+    attemptedCount,
     correctCount,
     wrongCount,
+    unansweredCount,
     reviewedCount,
     percentage,
     accuracy,
@@ -202,25 +207,29 @@ export function clearMockTestHistory(userId = null) {
 
 const DRAFT_PREFIX = "target95-mock-test-draft";
 
-export function getMockTestDraftKey(config = {}) {
+export function getMockTestDraftKey(config = {}, userId = null) {
   const values = [config.board, config.subjectCode, config.category, config.chapter, config.difficulty, config.type, config.count, config.mode, config.duration]
     .map((value) => sanitizeText(value || "all").toLowerCase());
-  return `${DRAFT_PREFIX}:${values.join(":")}`;
+  return `${DRAFT_PREFIX}:${userId || "anonymous"}:${values.join(":")}`;
 }
 
-export function saveMockTestDraft(config, draft) {
-  try { localStorage.setItem(getMockTestDraftKey(config), JSON.stringify({ ...draft, savedAt: new Date().toISOString() })); } catch {}
+export function saveMockTestDraft(config, draft, userId = null) {
+  try { localStorage.setItem(getMockTestDraftKey(config, userId), JSON.stringify({ ...draft, savedAt: new Date().toISOString() })); } catch {}
 }
 
-export function getMockTestDraft(config) {
+export function getMockTestDraft(config, userId = null) {
   try {
-    const draft = localStorage.getItem(getMockTestDraftKey(config));
+    const draft = localStorage.getItem(getMockTestDraftKey(config, userId));
     return draft ? JSON.parse(draft) : null;
   } catch { return null; }
 }
 
-export function clearMockTestDraft(config) {
-  try { localStorage.removeItem(getMockTestDraftKey(config)); } catch {}
+export function clearMockTestDraft(config, userId = null) {
+  try { localStorage.removeItem(getMockTestDraftKey(config, userId)); } catch {}
+}
+
+export function getMockTestResultSessionKey(userId) {
+  return `target95-mock-test-result:${userId || "anonymous"}`;
 }
 
 export function getTopicPerformance(review = []) {

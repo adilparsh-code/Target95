@@ -1651,13 +1651,17 @@ export function resolveStudyChapter(slug) {
   return null;
 }
 
-export function getStudyProgressState() {
+function getStudyProgressStorageKey(userId) {
+  return userId ? `${STUDY_PROGRESS_STORAGE_KEY}:${userId}` : STUDY_PROGRESS_STORAGE_KEY;
+}
+
+export function getStudyProgressState(userId = null) {
   if (typeof window === "undefined") {
     return {};
   }
 
   try {
-    const savedProgress = window.localStorage.getItem(STUDY_PROGRESS_STORAGE_KEY);
+    const savedProgress = window.localStorage.getItem(getStudyProgressStorageKey(userId));
 
     if (!savedProgress) {
       return {};
@@ -1669,13 +1673,13 @@ export function getStudyProgressState() {
   }
 }
 
-export function saveStudyProgressState(progress) {
+export function saveStudyProgressState(progress, userId = null) {
   if (typeof window === "undefined") {
     return;
   }
 
   try {
-    window.localStorage.setItem(STUDY_PROGRESS_STORAGE_KEY, JSON.stringify(progress));
+    window.localStorage.setItem(getStudyProgressStorageKey(userId), JSON.stringify(progress));
   } catch {
     // Ignore storage failures.
   }

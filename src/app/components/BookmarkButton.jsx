@@ -1,9 +1,11 @@
 "use client";
 
 import useBookmarks from "../hooks/useBookmarks";
+import { useAuth } from "@/context/AuthContext";
 
 export default function BookmarkButton({ chapter, questionId, className = "" }) {
-  const { isBookmarked, toggleBookmark } = useBookmarks();
+  const { user } = useAuth();
+  const { isBookmarked, toggleBookmark } = useBookmarks(user?.uid);
   const bookmark = { chapter, questionId };
   const bookmarked = isBookmarked(bookmark);
   const label = bookmarked ? "Remove bookmark" : "Bookmark question";

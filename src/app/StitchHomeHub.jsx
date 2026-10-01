@@ -8,55 +8,12 @@ import HomeResumeCard from "./components/HomeResumeCard";
 import { usePersonalization } from "./hooks/usePersonalization";
 import useProgress from "./hooks/useProgress";
 import { useAuth } from "@/context/AuthContext";
+import { curriculumClasses, getSubjectsForBoardClass } from "./lib/curriculumLauncher";
 
 const boards = [
   { id: "cisce", label: "CISCE", detail: "(ICSE/ISC)" },
   { id: "cbse", label: "CBSE", detail: "(IX - XII)" },
 ];
-
-const classOptions = {
-  cisce: [
-    { id: "icse-class-9", label: "IX", title: "ICSE Class 9", href: "/icse/class-ix" },
-    { id: "icse-class-10", label: "X", title: "ICSE Class 10", href: "/icse/class-x" },
-    { id: "isc-class-11", label: "XI", title: "ISC Class 11", href: "/isc/class-xi" },
-    { id: "isc-class-12", label: "XII", title: "ISC Class 12", href: "/isc/class-xii" },
-  ],
-  cbse: [
-    { id: "cbse-class-9", label: "IX", title: "CBSE Class 9", href: "/cbse/class/9/subject/402" },
-    { id: "cbse-class-10", label: "X", title: "CBSE Class 10", href: "/cbse/class/10/subject/402" },
-    { id: "cbse-class-11", label: "XI", title: "CBSE Class 11", href: "/cbse/class/11/subject/083" },
-    { id: "cbse-class-12", label: "XII", title: "CBSE Class 12", href: "/cbse/class/12/subject/083" },
-  ],
-};
-
-
-const getSubjectsForClass = (classId) => {
-  if (classId === "icse-class-9") return [
-    { id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: "/Java" },
-    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "Robotics & AI", icon: "✦", href: "/icse/robotics-ai" },
-  ];
-  if (classId === "icse-class-10") return [
-    { id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: "/Java" },
-    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "Robotics & AI", icon: "✦", href: "/icse/robotics-ai/class-x" },
-  ];
-  if (classId === "isc-class-11") return [
-    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" },
-    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "ISC AI 883", icon: "✦", href: "/isc/artificial-intelligence/11" },
-  ];
-  if (classId === "isc-class-12") return [
-    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" },
-    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "ISC AI 883", icon: "✦", href: "/isc/artificial-intelligence/12" },
-  ];
-  if (classId === "cbse-class-11") return [
-    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/cbse/class/11/subject/083" },
-    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "CBSE AI 843", icon: "✦", href: "/cbse/class/11/subject/843" },
-  ];
-  if (classId === "cbse-class-12") return [
-    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/cbse/class/12/subject/083" },
-    { id: "artificial-intelligence", label: "Artificial Intelligence", detail: "CBSE AI 843", icon: "✦", href: "/cbse/class/12/subject/843" },
-  ];
-  return [{ id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" }];
-};
 
 const chapters = [
   { no: "04", title: "Arrays: Single & Double Dimensional", status: "Active Unit", detail: "Indexing, binary search, bubble sort, selection sort, array manipulation algorithms.", href: "/Java/arrays-1d" },
@@ -77,14 +34,19 @@ export default function StitchHomeHub() {
   const showResumePractice = Boolean(user && !authLoading && !progressLoading && firestoreProgress.length > 0);
   const activeBoard = board || "cisce";
   const selected = selectedClass?.id || "icse-class-10";
-  const currentClass = classOptions[activeBoard].find((item) => item.id === selected) || classOptions[activeBoard][0];
-  const subjectOptions = getSubjectsForClass(currentClass.id);
-  const selectedSubject = subject?.id && subjectOptions.some((item) => item.id === subject.id) ? subject.id : "java";
+  const currentClass = curriculumClasses[activeBoard].find((item) => item.id === selected) || curriculumClasses[activeBoard][0];
+  const subjectOptions = getSubjectsForBoardClass(activeBoard, currentClass.id);
+  const selectedSubject = subject && subjectOptions.some((item) => item.id === subject) ? subject : subjectOptions[0]?.id;
   const activeSubject = subjectOptions.find((item) => item.id === selectedSubject) || subjectOptions[0];
 
   const chooseBoard = (id) => {
     setBoard(id);
     setClass(null);
+    setSubject(null);
+  };
+
+  const chooseClass = (classOption) => {
+    setClass({ id: classOption.id, title: classOption.title });
     setSubject(null);
   };
 
@@ -118,9 +80,9 @@ export default function StitchHomeHub() {
               <span className="hidden text-xs text-slate-400 md:block">Jump straight into verified board syllabus & practice</span>
             </div>
             <div className="mt-5 grid gap-3 lg:grid-cols-[1.05fr_1fr_1.15fr_.95fr]">
-              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 1 • Board</p><div className="mt-2 grid grid-cols-2 gap-2">{boards.map((item) => <button key={item.id} onClick={() => chooseBoard(item.id)} className={`rounded-lg border px-3 py-2 text-xs font-semibold ${activeBoard === item.id ? "border-teal-200 bg-teal-50 text-teal-700" : "border-slate-200 text-slate-600"}`}>{item.label}<span className="block text-[10px] font-normal opacity-70">{item.detail}</span></button>)}</div></div>
-              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 2 • Class</p><div className="mt-2 grid grid-cols-4 gap-1.5">{classOptions[activeBoard].map((item) => <Link key={item.id} href={item.href} onClick={() => setClass({ id: item.id, title: item.title })} className={`flex h-9 items-center justify-center rounded-md text-xs font-bold ${currentClass.id === item.id ? "bg-blue-700 text-white" : "bg-slate-50 text-slate-600 hover:bg-blue-50"}`}>{item.label}</Link>)}</div></div>
-              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => setSubject({ id: item.id, title: item.label })} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white text-sm shadow-sm">{item.icon}</span><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
+              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 1 • Board</p><div className="mt-2 grid grid-cols-2 gap-2">{boards.map((item) => <button key={item.id} type="button" onClick={() => chooseBoard(item.id)} aria-pressed={activeBoard === item.id} className={`rounded-lg border px-3 py-2 text-xs font-semibold ${activeBoard === item.id ? "border-teal-200 bg-teal-50 text-teal-700" : "border-slate-200 text-slate-600"}`}>{item.label}<span className="block text-[10px] font-normal opacity-70">{item.detail}</span></button>)}</div></div>
+              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 2 • Class</p><div className="mt-2 grid grid-cols-4 gap-1.5">{curriculumClasses[activeBoard].map((item) => <button key={item.id} type="button" onClick={() => chooseClass(item)} aria-pressed={currentClass.id === item.id} className={`flex h-9 items-center justify-center rounded-md text-xs font-bold ${currentClass.id === item.id ? "bg-blue-700 text-white" : "bg-slate-50 text-slate-600 hover:bg-blue-50"}`}>{item.label}</button>)}</div></div>
+              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => setSubject(item.id)} aria-pressed={selectedSubject === item.id} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white text-sm shadow-sm">{item.icon}</span><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
               <div className="rounded-lg bg-blue-700 p-4 text-white"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ready to Study</p><p className="mt-1 text-sm font-bold">{currentClass.title} · {activeSubject.label}</p><Link href={activeSubject.href} className="mt-3 flex h-8 items-center justify-center rounded-md bg-white text-[11px] font-bold text-blue-700">Open Syllabus Chapters →</Link></div>
             </div>
           </section>

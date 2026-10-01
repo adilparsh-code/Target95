@@ -69,7 +69,8 @@ class ProgressStorage {
    * @returns {Object} Learning progress object
    */
   getLearningProgress(userId) {
-    return this.data.learningProgress[userId] || null;
+    const progress = this.data.learningProgress[userId];
+    return progress?.userId === userId ? progress : null;
   }
 
   /**
@@ -80,6 +81,7 @@ class ProgressStorage {
   saveLearningProgress(userId, progress) {
     this.data.learningProgress[userId] = {
       ...progress,
+      userId,
       updatedAt: new Date().toISOString(),
     };
     this._write();
@@ -119,7 +121,8 @@ class ProgressStorage {
    */
   getChapterProgress(userId, chapterId) {
     const key = `${userId}:${chapterId}`;
-    return this.data.chapterProgress[key] || null;
+    const progress = this.data.chapterProgress[key];
+    return progress?.userId === userId && progress?.chapterId === chapterId ? progress : null;
   }
 
   /**
@@ -129,7 +132,7 @@ class ProgressStorage {
    */
   getAllChapterProgress(userId) {
     return Object.entries(this.data.chapterProgress)
-      .filter(([key]) => key.startsWith(`${userId}:`))
+      .filter(([key, value]) => key.startsWith(`${userId}:`) && value?.userId === userId)
       .map(([, value]) => value);
   }
 
@@ -143,6 +146,8 @@ class ProgressStorage {
     const key = `${userId}:${chapterId}`;
     this.data.chapterProgress[key] = {
       ...progress,
+      userId,
+      chapterId,
       updatedAt: new Date().toISOString(),
     };
     this._write();
@@ -181,7 +186,8 @@ class ProgressStorage {
    * @returns {Object} Recently studied object
    */
   getRecentlyStudied(userId) {
-    return this.data.recentlyStudied[userId] || null;
+    const recentlyStudied = this.data.recentlyStudied[userId];
+    return recentlyStudied?.userId === userId ? recentlyStudied : null;
   }
 
   /**
@@ -192,6 +198,7 @@ class ProgressStorage {
   saveRecentlyStudied(userId, recentlyStudied) {
     this.data.recentlyStudied[userId] = {
       ...recentlyStudied,
+      userId,
       lastActivity: new Date().toISOString(),
     };
     this._write();

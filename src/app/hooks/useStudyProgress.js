@@ -1,11 +1,15 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getStudyProgressState, saveStudyProgressState, STUDY_PROGRESS_STORAGE_KEY } from "../../lib/studyCenter";
 import { sanitizeStudyStatus } from "../../lib/mocktest";
+import { useAuth } from "@/context/AuthContext";
 
 export default function useStudyProgress() {
-  const [progress, setProgress] = useState(getStudyProgressState);
+  const { user } = useAuth();
+  const userId = user?.uid || null;
+  const [progress, setProgress] = useState(() => getStudyProgressState(userId));
+  useEffect(() => setProgress(getStudyProgressState(userId)), [userId]);
 
   const updateProgress = useCallback((slug, status) => {
     const safeSlug = String(slug ?? "").trim().toLowerCase();
@@ -17,10 +21,10 @@ export default function useStudyProgress() {
         [safeSlug]: safeStatus,
       };
 
-      saveStudyProgressState(nextProgress);
+      saveStudyProgressState(nextProgress, userId);
       return nextProgress;
     });
-  }, []);
+  }, [userId]);
 
   return { progress, updateProgress, storageKey: STUDY_PROGRESS_STORAGE_KEY };
 }

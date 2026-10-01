@@ -3,9 +3,11 @@
 import { useMemo, useCallback } from "react";
 import Link from "next/link";
 import useProgress from "../hooks/useProgress";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ChapterProgress({ chapter, questions = [] }) {
-  const { isCompleted, resetProgress } = useProgress();
+  const { user } = useAuth();
+  const { isCompleted, resetProgress } = useProgress(user?.uid);
 
   const { completedCount, completionPercentage, continueQuestion } = useMemo(() => {
     const completed = questions.filter((question) => isCompleted({ chapter, questionId: question.id })).length;

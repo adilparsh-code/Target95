@@ -16,6 +16,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import QuestionTutorPanel from "./ai-tutor/QuestionTutorPanel";
 import { usePersonalization } from "../hooks/usePersonalization";
+import { useAuth } from "@/context/AuthContext";
 
 const BOARD_ROUTE_MAP = {
   ICSE: "/Java",
@@ -42,12 +43,16 @@ export default function QuestionPlayer({
   nextQuestion,
   board: boardProp,
   basePath: basePathProp,
+  catalogHref: catalogHrefProp,
+  questionQuery = "",
 }) {
-  const { markCompleted } = useProgress();
+  const { user } = useAuth();
+  const { markCompleted } = useProgress(user?.uid);
   const [wrongAnswerContext, setWrongAnswerContext] = useState(null);
   const { board: personalizedBoard, class: classData, subject } = usePersonalization();
   const board = getBoardKey(boardProp || personalizedBoard);
   const basePath = basePathProp || BOARD_ROUTE_MAP[board] || "/Java";
+  const catalogHref = catalogHrefProp || basePath;
   const boardLabel = BOARD_LABEL_MAP[board] || board;
 
   // Privacy-conscious learning-funnel event (content ids only).
@@ -75,7 +80,7 @@ export default function QuestionPlayer({
     (Array.isArray(question.options) && question.options.length > 0);
 
   const buildQuestionPath = (questionId) =>
-    `${basePath}/${chapter}/question/${questionId}`;
+    `${basePath}/${chapter}/question/${questionId}${questionQuery}`;
 
   return (
     <main className="stitch-question-player min-h-screen bg-[var(--stitch-surface)]">
@@ -87,7 +92,7 @@ export default function QuestionPlayer({
           </p>
 
           <Link
-            href={basePath}
+            href={catalogHref}
             className="mt-3 inline-flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
           >
             <ChevronLeft className="h-4 w-4" />
@@ -192,7 +197,7 @@ export default function QuestionPlayer({
                 </Link>
               ) : (
                 <Link
-                  href={basePath}
+                  href={catalogHref}
                   className="group ml-auto flex items-center gap-2 rounded-2xl border border-green-400/50 bg-gradient-to-r from-green-500 to-emerald-600 px-6 py-4 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
                   <div className="text-right">

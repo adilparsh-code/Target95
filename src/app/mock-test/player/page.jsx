@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
 import { getCBSEMockQuestions } from "../../data/cbse/mock-tests-2026-27";
-import { clearMockTestDraft, evaluateMockTestAnswer, getMockTestDraft, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
+import { clearMockTestDraft, evaluateMockTestAnswer, getMockTestDraft, getMockTestResultSessionKey, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
 import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 import { useAuth } from "@/context/AuthContext";
 import useMockTests from "@/app/hooks/useMockTests";
@@ -64,8 +64,8 @@ function MockTestPlayerContent() {
   }, [board, classNumber, subjectCode, category, difficulty, type, chapter, count, restoredIds]);
   const current = questions[currentIndex] || null; const answeredCount = Object.keys(answers).length; const bookmarkedCount = Object.values(bookmarked).filter(Boolean).length; const progress = questions.length ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
-  useEffect(() => { const draft = getMockTestDraft(testConfig); if (draft?.questionIds?.length) { setRestoredIds(draft.questionIds); setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, Math.max(questions.length - 1, 0))); setAnswers(draft.answers || {}); setBookmarked(draft.bookmarked || {}); setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60)); } setDraftReady(true); }, [testConfig, duration, questions.length]);
-  useEffect(() => { if (draftReady && questions.length && !submitted) saveMockTestDraft(testConfig, { questionIds: questions.map((q) => q.id), currentIndex, answers, bookmarked, timeLeft }); }, [draftReady, submitted, testConfig, questions, currentIndex, answers, bookmarked, timeLeft]);
+  useEffect(() => { if (!user?.uid) return; const draft = getMockTestDraft(testConfig, user.uid); if (draft?.questionIds?.length) { setRestoredIds(draft.questionIds); setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, Math.max(questions.length - 1, 0))); setAnswers(draft.answers || {}); setBookmarked(draft.bookmarked || {}); setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60)); } setDraftReady(true); }, [testConfig, duration, questions.length, user?.uid]);
+  useEffect(() => { if (user?.uid && draftReady && questions.length && !submitted) saveMockTestDraft(testConfig, { questionIds: questions.map((q) => q.id), currentIndex, answers, bookmarked, timeLeft }, user.uid); }, [draftReady, submitted, testConfig, questions, currentIndex, answers, bookmarked, timeLeft, user?.uid]);
 
   const submit = useCallback(() => {
     if (submittedRef.current || submitted) return; submittedRef.current = true; setSubmitted(true); let correct = 0, wrong = 0, unanswered = 0;

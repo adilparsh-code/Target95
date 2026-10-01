@@ -5,9 +5,13 @@ import { xpLevels } from "../data/xpLevels";
 
 const XP_KEY = "target95-xp";
 
-function readXP() {
+function getXPKey(userId) {
+  return userId ? `${XP_KEY}:${userId}` : XP_KEY;
+}
+
+function readXP(userId) {
   try {
-    const data = JSON.parse(localStorage.getItem(XP_KEY) || "{}");
+    const data = JSON.parse(localStorage.getItem(getXPKey(userId)) || "{}");
     return {
       xp: Math.max(0, Number(data.xp) || 0),
       coins: Math.max(0, Number(data.coins) || 0),
@@ -17,23 +21,23 @@ function readXP() {
   }
 }
 
-function saveXP(xp, coins) {
+function saveXP(xp, coins, userId) {
   try {
-    localStorage.setItem(XP_KEY, JSON.stringify({ xp, coins }));
+    localStorage.setItem(getXPKey(userId), JSON.stringify({ xp, coins }));
   } catch {
     // silently fail
   }
 }
 
-export default function useXP() {
+export default function useXP(userId = null) {
   const [xp, setXP] = useState(0);
   const [coins, setCoins] = useState(0);
 
   useEffect(() => {
-    const { xp: savedXP, coins: savedCoins } = readXP();
+    const { xp: savedXP, coins: savedCoins } = readXP(userId);
     setXP(savedXP);
     setCoins(savedCoins);
-  }, []);
+  }, [userId]);
 
   const getLevel = useCallback(() => {
     let currentLevel = xpLevels[0];
@@ -64,24 +68,24 @@ export default function useXP() {
     const safeAmount = Math.max(0, Number(amount) || 0);
     setXP((prev) => {
       const newXP = prev + safeAmount;
-      const { coins: currentCoins } = readXP();
+      const { coins: currentCoins } = readXP(userId);
       const newCoins = currentCoins + Math.floor(safeAmount / 10);
-      saveXP(newXP, newCoins);
+      saveXP(newXP, newCoins, userId);
       setCoins(newCoins);
       return newXP;
     });
-  }, []);
+  }, [userId]);
 
   const spendCoins = useCallback((amount) => {
     const safeAmount = Math.max(0, Number(amount) || 0);
     setCoins((prev) => {
       if (prev < safeAmount) return prev;
       const newCoins = prev - safeAmount;
-      const { xp: currentXP } = readXP();
-      saveXP(currentXP, newCoins);
+      const { xp: currentXP } = readXP(userId);
+      saveXP(currentXP, newCoins, userId);
       return newCoins;
     });
-  }, []);
+  }, [userId]);
 
   return {
     xp,

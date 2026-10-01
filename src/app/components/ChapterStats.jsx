@@ -3,10 +3,12 @@
 import { useMemo } from "react";
 import useBookmarks from "../hooks/useBookmarks";
 import useProgress from "../hooks/useProgress";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ChapterStats({ questions }) {
-  const { isBookmarked } = useBookmarks();
-  const { isCompleted } = useProgress();
+  const { user } = useAuth();
+  const { isBookmarked } = useBookmarks(user?.uid);
+  const { isCompleted } = useProgress(user?.uid);
 
   const stats = useMemo(() => [
     { label: "Total Questions", value: questions.length, accent: "bg-white text-blue-700" },

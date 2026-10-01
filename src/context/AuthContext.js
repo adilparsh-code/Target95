@@ -17,13 +17,13 @@ export function AuthProvider({ children }) {
     const profileSnapshot = await getDoc(doc(db, "users", firebaseUser.uid));
     const profile = profileSnapshot.exists() ? profileSnapshot.data() : {};
     return {
-      uid: firebaseUser.uid,
-      email: firebaseUser.email || "",
+      ...profile,
       fullName: profile.fullName || firebaseUser.displayName || "",
       avatarUrl: profile.avatarUrl || firebaseUser.photoURL || "",
       role: profile.role || "student",
-      ...profile,
-      // Live Firebase value always wins over any stale Firestore copy.
+      // Firebase Auth is authoritative for identity and verification fields.
+      uid: firebaseUser.uid,
+      email: firebaseUser.email || "",
       emailVerified: firebaseUser.emailVerified,
     };
   }, []);
@@ -264,16 +264,29 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
+    const { auth } = getFirebaseInstance();
+    if (!auth) {
+      const message = getFirebaseConfigurationMessage();
+      setError(message);
+      return { success: false, message };
+    }
+
+    let sessionCleared = false;
     try {
-      const { auth } = getFirebaseInstance();
-      if (!auth) {
-        const message = getFirebaseConfigurationMessage();
+      const response = await fetch("/api/auth/session", { method: "DELETE", credentials: "same-origin" });
+      sessionCleared = response.ok;
+    } catch {
+      sessionCleared = false;
+    }
+
+    try {
+      await signOut(auth);
+      setUser(null);
+      if (!sessionCleared) {
+        const message = "You were signed out locally, but the server session could not be cleared. Close this browser and try again before using a shared device.";
         setError(message);
         return { success: false, message };
       }
-      await fetch("/api/auth/session", { method: "DELETE", credentials: "same-origin" });
-      await signOut(auth);
-      setUser(null);
       return { success: true };
     } catch (authError) {
       const message = getAuthMessage(authError.code);

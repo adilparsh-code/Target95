@@ -19,7 +19,7 @@ export async function GET(request) {
 
     const [testsSnap, attemptsSnap] = await Promise.all([
       guard.adminDb.collection("mockTests").orderBy("createdAt", "desc").limit(500).get().catch(() => null),
-      guard.adminDb.collection("mockTestResults").limit(2000).get().catch(() => null),
+      guard.adminDb.collection("results").limit(2000).get().catch(() => null),
     ]);
 
     const attempts = attemptsSnap ? attemptsSnap.docs.map((d) => d.data()) : [];

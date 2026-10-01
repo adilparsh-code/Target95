@@ -32,14 +32,13 @@ class MockTestService extends BaseService {
 
   // Save user's test result
   async saveTestResult(testResult) {
-    // Create a separate collection for results
-    const resultService = new BaseService("mockTestResults");
+    const resultService = new BaseService("results");
     return resultService.add(testResult);
   }
 
   // Get user's test history
   async getUserTestHistory(userId) {
-    const resultService = new BaseService("mockTestResults");
+    const resultService = new BaseService("results");
     const results = await resultService.query([
       { field: "userId", operator: "==", value: userId }
     ]);
@@ -49,7 +48,7 @@ class MockTestService extends BaseService {
 
   // Get test results for a specific mock test
   async getTestResults(testId) {
-    const resultService = new BaseService("mockTestResults");
+    const resultService = new BaseService("results");
     return resultService.query([
       { field: "testId", operator: "==", value: testId }
     ]);

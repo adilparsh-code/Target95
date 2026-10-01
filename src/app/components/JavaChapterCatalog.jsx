@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import useProgress from "../hooks/useProgress";
+import { useAuth } from "@/context/AuthContext";
 
 const filters = {
   difficulty: ["All", "Beginner", "Intermediate", "Advanced"],
@@ -19,7 +20,8 @@ export default function JavaChapterCatalog({ subject, className = null }) {
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("All");
   const [status, setStatus] = useState("All");
-  const { isCompleted } = useProgress();
+  const { user } = useAuth();
+  const { isCompleted } = useProgress(user?.uid);
   const progress = useMemo(() => subject.chapters.map((chapter) => ({ chapter, ...getProgress(chapter, isCompleted) })), [isCompleted, subject.chapters]);
   const totals = useMemo(() => {
     const completed = progress.reduce((total, item) => total + item.completed, 0);

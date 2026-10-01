@@ -5,8 +5,10 @@ import QuestionPlayer from "../../../../components/QuestionPlayer";
 
 // Questions are rendered on demand instead of pre-rendering the entire question bank.
 // This keeps production builds within CI memory limits while preserving every route.
-export default async function QuestionPage({ params }) {
+export default async function QuestionPage({ params, searchParams }) {
   const { chapter, id } = await params;
+  const { class: requestedClass } = await searchParams;
+  const isClassIX = String(requestedClass || "").toUpperCase() === "IX";
 
   // Resolve against the canonical curriculum first (canonical Java slugs), then
   // fall back to the real question bank so legacy aliases such as /Java/arrays
@@ -48,6 +50,8 @@ export default async function QuestionPage({ params }) {
       currentIndex={currentIndex}
       previousQuestion={previousQuestion}
       nextQuestion={nextQuestion}
+      catalogHref={isClassIX ? "/Java?class=IX" : "/Java"}
+      questionQuery={isClassIX ? "?class=IX" : ""}
     />
   );
 }

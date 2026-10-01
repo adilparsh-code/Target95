@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit --project jsconfig.json",
+    "test": "node --test src/lib/validation/__tests__/*.test.mjs",
     "validate:data": "node scripts/validate-data.mjs",
     "validate:cisce-ai": "node scripts/validate-cisce-ai.mjs",
     "validate:projects": "node scripts/validate-projects.mjs",

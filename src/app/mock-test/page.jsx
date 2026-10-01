@@ -8,6 +8,7 @@ import { CATEGORIES, DIFFICULTIES, QUESTION_TYPES, QUESTION_COUNTS, getMockTestH
 import ProtectedRoute from "../components/ProtectedRoute";
 import { javaChapters } from "../data/javaCurriculum";
 import ErrorBoundary from "../components/ui/ErrorBoundary";
+import { useAuth } from "@/context/AuthContext";
 
 const CBSE_SUBJECTS = { "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" };
 const CBSE_CODES_BY_CLASS = { 9: ["402"], 10: ["402"], 11: ["083", "065", "802"], 12: ["083", "065", "802"] };
@@ -19,6 +20,7 @@ function getDefaultCBSESubjectCode(classNumber, requestedCode = "") {
 
 function MockTestContent() {
   const router = useRouter();
+  const { user } = useAuth();
   const searchParams = useSearchParams();
   const contextBoard = (searchParams.get("board") || "ICSE").toUpperCase();
   const contextClass = Number(searchParams.get("class") || (contextBoard === "ICSE" ? 10 : contextBoard === "ISC" ? 12 : 10));
@@ -36,7 +38,7 @@ function MockTestContent() {
   const [chapter, setChapter] = useState("all");
   const [mode, setMode] = useState("exam");
   const [duration, setDuration] = useState(30);
-  const history = useMemo(() => getMockTestHistory(), []);
+  const history = useMemo(() => user?.uid ? getMockTestHistory(user.uid) : [], [user?.uid]);
   const activeBoard = category.startsWith("cbse-") ? "CBSE" : category.startsWith("isc-") ? "ISC" : "ICSE";
   const activeClass = Number(category.split("-").pop());
   const activeCBSECodes = CBSE_CODES_BY_CLASS[activeClass] || [];

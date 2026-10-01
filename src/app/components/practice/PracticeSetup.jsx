@@ -86,17 +86,14 @@ export default function PracticeSetup() {
     ? [...chapters, { id: chapterChoice, name: chapterChoice.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }]
     : chapters;
 
-  // The question bank already supports deep links, so carry every selected
-  // filter across instead of dropping the student's choices on the floor.
-  const handleStartPractice = () => {
-    const params = new URLSearchParams();
-    params.set("board", String(settings.board || queryContext.board));
-    params.set("class", String(settings.classNumber || queryContext.classNumber));
-    if (settings.subjectCode) params.set("subjectCode", settings.subjectCode);
-    if (settings.chapter || chapterChoice) params.set("chapter", settings.chapter || chapterChoice);
-    if (settings.difficulty) params.set("difficulty", settings.difficulty);
-    if (settings.questionCount) params.set("count", String(settings.questionCount));
-    router.push(`/question-bank?${params.toString()}`);
+  // Create the persisted, UID-scoped session before entering the player.
+  const handleStartPractice = async () => {
+    try {
+      const session = await startPractice();
+      if (session?.id) router.push(`/practice/session?id=${encodeURIComponent(session.id)}`);
+    } catch {
+      // usePractice exposes the actionable error above the form.
+    }
   };
 
   const buttonClass = (active) => `w-full rounded-xl border-2 p-3 text-left transition-all ${active ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20" : "border-gray-200 hover:border-gray-300 dark:border-gray-700"}`;

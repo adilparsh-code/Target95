@@ -40,6 +40,20 @@ const chapterDefinitions = [
   { slug: "constructors", title: "Constructors", difficulty: "Advanced", estimatedTime: 55, description: "Default and parameterized constructors.", topics: ["Initialization", "this", "Overloading"] },
   { slug: "inheritance", title: "Inheritance", difficulty: "Advanced", estimatedTime: 70, description: "Reusing behavior via superclasses and method overriding.", topics: ["extends", "Superclass", "Overriding"] },
 ];
+
+// These later-year chapters remain in the shared Java registry for their
+// legitimate consumers, but must never be presented by the Class IX entry
+// point. This exclusion is deliberately colocated with the canonical chapter
+// definitions rather than introducing a second Class IX chapter registry.
+export const CLASS_IX_EXCLUDED_JAVA_CHAPTER_SLUGS = Object.freeze([
+  "arrays-1d",
+  "arrays-2d",
+  "strings",
+  "classes-objects",
+  "encapsulation",
+  "constructors",
+  "inheritance",
+]);
 const questionMetadata = (chapter, type, index) => {
   const meta = metaFor(chapter);
   return {
@@ -124,6 +138,11 @@ export const javaChapters = chapterDefinitions.map((chapter, index) => {
 });
 
 export const javaQuestions = javaChapters.flatMap((chapter) => chapter.questions);
+
+const classIXExcludedChapterSlugs = new Set(CLASS_IX_EXCLUDED_JAVA_CHAPTER_SLUGS);
+export const classIXJavaChapters = javaChapters.filter(
+  (chapter) => !classIXExcludedChapterSlugs.has(chapter.slug)
+);
 
 export const javaSubject = {
   id: "java",

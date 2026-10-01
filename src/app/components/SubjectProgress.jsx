@@ -3,9 +3,11 @@
 import { useMemo } from "react";
 import useProgress from "../hooks/useProgress";
 import ProgressRing from "./ui/ProgressRing";
+import { useAuth } from "@/context/AuthContext";
 
 export default function SubjectProgress({ chapters, questions }) {
-  const { isCompleted } = useProgress();
+  const { user } = useAuth();
+  const { isCompleted } = useProgress(user?.uid);
 
   const { completedCount, totalCount, percentage } = useMemo(() => {
     const total = questions.length;

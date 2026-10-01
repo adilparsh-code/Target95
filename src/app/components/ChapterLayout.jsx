@@ -56,6 +56,8 @@ export default function ChapterLayout({
   sectionTimes = {},
   showBackToTop,
   onBackToTop,
+  catalogHref = "/Java",
+  chapterQuery = "",
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sectionRefs = useRef({});
@@ -70,7 +72,7 @@ export default function ChapterLayout({
   const completedCount = completedSections.length;
   const totalSections = CHAPTER_SECTIONS.length;
   const progressPercentage = totalSections > 0 ? Math.round((completedCount / totalSections) * 100) : 0;
-  const computerScienceHref = "/Java";
+  const computerScienceHref = catalogHref;
 
   const getSectionTime = (sectionId) => {
     const section = CHAPTER_SECTIONS.find((item) => item.id === sectionId);
@@ -126,8 +128,8 @@ export default function ChapterLayout({
           </nav>
 
           <div className="border-t border-slate-200 p-3 dark:border-slate-800"><div className="grid grid-cols-2 gap-2">
-            <Link href={prevChapter ? `/study/${prevChapter.slug}` : computerScienceHref} aria-disabled={!prevChapter} className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-semibold transition ${prevChapter ? "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300" : "border-slate-100 text-slate-300 dark:border-slate-900 dark:text-slate-700"}`}><ChevronLeft className="h-3.5 w-3.5" /> Previous</Link>
-            <Link href={nextChapter ? `/study/${nextChapter.slug}` : computerScienceHref} aria-disabled={!nextChapter} className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-semibold transition ${nextChapter ? "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-900 dark:bg-blue-950/40 dark:text-blue-300" : "border-slate-100 text-slate-300 dark:border-slate-900 dark:text-slate-700"}`} >Next <ChevronRight className="h-3.5 w-3.5" /></Link>
+            <Link href={prevChapter ? `/Java/${prevChapter.slug}${chapterQuery}` : computerScienceHref} aria-disabled={!prevChapter} className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-semibold transition ${prevChapter ? "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300" : "border-slate-100 text-slate-300 dark:border-slate-900 dark:text-slate-700"}`}><ChevronLeft className="h-3.5 w-3.5" /> Previous</Link>
+            <Link href={nextChapter ? `/Java/${nextChapter.slug}${chapterQuery}` : computerScienceHref} aria-disabled={!nextChapter} className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-3 py-2.5 text-xs font-semibold transition ${nextChapter ? "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 dark:border-blue-900 dark:bg-blue-950/40 dark:text-blue-300" : "border-slate-100 text-slate-300 dark:border-slate-900 dark:text-slate-700"}`} >Next <ChevronRight className="h-3.5 w-3.5" /></Link>
           </div></div>
         </div>
       </aside>

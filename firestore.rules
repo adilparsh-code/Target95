@@ -50,6 +50,24 @@ service cloud.firestore {
         allow create: if isOwner(userId);
         allow update: if false;
       }
+
+      // Practice data is stored below the authenticated user's document.
+      // The path owner, not any client-provided field, determines access.
+      match /activeSessions/{sessionId} {
+        allow read, create, update, delete: if isOwner(userId);
+      }
+
+      match /practiceSessions/{sessionId} {
+        allow read, create, update, delete: if isOwner(userId);
+      }
+
+      match /practiceAnswers/{answerId} {
+        allow read, create, update, delete: if isOwner(userId);
+      }
+
+      match /practiceStatistics/{statisticsId} {
+        allow read, create, update, delete: if isOwner(userId);
+      }
     }
 
     match /subjects/{subjectId} {
@@ -81,8 +99,10 @@ service cloud.firestore {
 
     match /progress/{progressId} {
       allow read: if isOwner(resource.data.userId);
-      allow create, update: if isOwner(request.resource.data.userId);
-      allow delete: if isAdmin();
+      allow create: if isOwner(request.resource.data.userId);
+      allow update: if isOwner(resource.data.userId)
+        && request.resource.data.userId == resource.data.userId;
+      allow delete: if isOwner(resource.data.userId) || isAdmin();
     }
 
     match /mockTests/{mockTestId} {

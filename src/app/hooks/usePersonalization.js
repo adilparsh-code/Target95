@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 const STORAGE_KEY = "target95_personalization";
 
@@ -32,17 +33,19 @@ function normalizeStoredState(parsed) {
 }
 
 export function usePersonalization() {
+  const { user } = useAuth();
+  const storageKey = user?.uid ? `${STORAGE_KEY}:${user.uid}` : STORAGE_KEY;
   const [state, setState] = useState(defaultState);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(storageKey);
       if (stored) {
         const normalized = normalizeStoredState(JSON.parse(stored));
         setState(normalized);
         if (JSON.stringify(normalized) !== stored) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(normalized));
+          localStorage.setItem(storageKey, JSON.stringify(normalized));
         }
       }
     } catch (error) {
@@ -51,20 +54,20 @@ export function usePersonalization() {
     } finally {
       setIsHydrated(true);
     }
-  }, []);
+  }, [storageKey]);
 
   useEffect(() => {
     if (!isHydrated) return;
     let timeoutId;
     try {
       timeoutId = setTimeout(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        localStorage.setItem(storageKey, JSON.stringify(state));
       }, 100);
     } catch (error) {
       console.error("Failed to persist personalization state:", error);
     }
     return () => clearTimeout(timeoutId);
-  }, [state, isHydrated]);
+  }, [state, isHydrated, storageKey]);
 
   const setBoard = (board) => {
     setState(prev => ({ ...prev, board, class: null, subject: null }));
@@ -84,7 +87,7 @@ export function usePersonalization() {
   const clearPersonalization = () => {
     setState(defaultState);
     try {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(storageKey);
     } catch (error) {
       console.error("Failed to clear personalization state:", error);
     }

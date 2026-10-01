@@ -6,12 +6,14 @@ import SearchBar from "./ui/SearchBar";
 import QuestionFilters from "./QuestionFilters";
 import QuestionListItem from "./QuestionListItem";
 import { filterQuestions } from "../../lib/questionFilters";
+import { useAuth } from "@/context/AuthContext";
 
 export default function ChapterQuestions({ chapter, questions }) {
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("all");
   const [type, setType] = useState("all");
-  const { isCompleted } = useProgress();
+  const { user } = useAuth();
+  const { isCompleted } = useProgress(user?.uid);
 
   const filteredQuestions = useMemo(() => {
     return filterQuestions({

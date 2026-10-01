@@ -1,16 +1,20 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useAuth } from "@/context/AuthContext";
 
 const STORAGE_KEY = "target95-learning-content-progress";
 
-function readProgress() {
-  try { return JSON.parse(window.localStorage.getItem(STORAGE_KEY)) || { attempts: {}, completedTopics: {} }; } catch { return { attempts: {}, completedTopics: {} }; }
+function readProgress(storageKey) {
+  try { return JSON.parse(window.localStorage.getItem(storageKey)) || { attempts: {}, completedTopics: {} }; } catch { return { attempts: {}, completedTopics: {} }; }
 }
 
 export default function useLearningProgress() {
-  const [state, setState] = useState(() => typeof window === "undefined" ? { attempts: {}, completedTopics: {} } : readProgress());
-  const persist = useCallback((next) => { setState(next); window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); }, []);
+  const { user } = useAuth();
+  const storageKey = user?.uid ? `${STORAGE_KEY}:${user.uid}` : STORAGE_KEY;
+  const [state, setState] = useState(() => typeof window === "undefined" ? { attempts: {}, completedTopics: {} } : readProgress(storageKey));
+  useEffect(() => setState(readProgress(storageKey)), [storageKey]);
+  const persist = useCallback((next) => { setState(next); window.localStorage.setItem(storageKey, JSON.stringify(next)); }, [storageKey]);
   const recordAttempt = useCallback((question, correct = null) => {
     const previous = state.attempts[question.id];
     if (previous?.submitted) return;

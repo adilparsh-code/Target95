@@ -14,10 +14,9 @@ export async function GET(request) {
   try {
     const adminDb = guard.adminDb;
 
-    const [progressSnap, resultsSnap, mockResultsSnap, questionsSnap, subjectsSnap, chaptersSnap, mockTestsSnap] = await Promise.all([
+    const [progressSnap, resultsSnap, questionsSnap, subjectsSnap, chaptersSnap, mockTestsSnap] = await Promise.all([
       adminDb.collection("progress").limit(2000).get(),
       adminDb.collection("results").orderBy("completedAt", "desc").limit(500).get(),
-      adminDb.collection("mockTestResults").limit(500).get(),
       adminDb.collection("questions").limit(2000).get(),
       adminDb.collection("subjects").limit(500).get(),
       adminDb.collection("chapters").limit(1000).get(),
@@ -80,7 +79,7 @@ export async function GET(request) {
       };
     }).reverse();
 
-    const mockResults = mockResultsSnap.docs.map((d) => Number(d.data().percentage) || 0);
+    const mockResults = results.map((result) => result.percentage);
 
     // --- Content composition (real counts from the CMS collections) ---
     const questions = questionsSnap.docs.map((d) => d.data());
@@ -98,7 +97,7 @@ export async function GET(request) {
     return Response.json({
       success: true,
       analytics: {
-        totalAttempts: results.length + mockResults.length,
+        totalAttempts: results.length,
         averageScore,
         strongChapters: chapterPerformance.slice(0, 5),
         weakChapters: [...chapterPerformance].reverse().slice(0, 5),

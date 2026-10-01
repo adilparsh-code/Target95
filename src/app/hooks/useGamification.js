@@ -4,38 +4,42 @@ import { useEffect, useMemo, useState } from "react";
 import useXP from "./useXP";
 import usePersonalizedRoadmap from "./usePersonalizedRoadmap";
 import { BADGES, XP_REWARDS, getDailyChallenge, getMotivationMessages, getNextChallengeCountdown } from "@/lib/gamification";
+import { useAuth } from "@/context/AuthContext";
 
 const CHALLENGE_KEY = "target95-daily-challenge";
 const LOGIN_KEY = "target95-daily-login";
 
 export default function useGamification() {
-  const xpState = useXP();
+  const { user } = useAuth();
+  const userKey = user?.uid || null;
+  const xpState = useXP(userKey);
   const roadmap = usePersonalizedRoadmap();
   const [challengeComplete, setChallengeComplete] = useState(false);
   const [countdown, setCountdown] = useState("");
   const challenge = useMemo(() => getDailyChallenge(), []);
 
   useEffect(() => {
-    const saved = localStorage.getItem(CHALLENGE_KEY);
+    const saved = localStorage.getItem(`${CHALLENGE_KEY}:${userKey || "anonymous"}`);
     setChallengeComplete(saved === challenge.id);
     const updateCountdown = () => setCountdown(getNextChallengeCountdown());
     updateCountdown();
     const timer = window.setInterval(updateCountdown, 60000);
     return () => window.clearInterval(timer);
-  }, [challenge.id]);
+  }, [challenge.id, userKey]);
 
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10);
-    if (localStorage.getItem(LOGIN_KEY) !== today) {
+    const loginKey = `${LOGIN_KEY}:${userKey || "anonymous"}`;
+    if (localStorage.getItem(loginKey) !== today) {
       xpState.addXP(XP_REWARDS.dailyLogin);
-      localStorage.setItem(LOGIN_KEY, today);
+      localStorage.setItem(loginKey, today);
     }
-  }, [xpState.addXP]);
+  }, [userKey, xpState.addXP]);
 
   const completeChallenge = () => {
     if (challengeComplete) return;
     xpState.addXP(challenge.reward);
-    localStorage.setItem(CHALLENGE_KEY, challenge.id);
+    localStorage.setItem(`${CHALLENGE_KEY}:${userKey || "anonymous"}`, challenge.id);
     setChallengeComplete(true);
   };
 

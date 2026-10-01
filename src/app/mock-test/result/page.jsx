@@ -4,25 +4,32 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { getTopicPerformance } from "../../../lib/mocktest";
+import { getMockTestResultSessionKey, getTopicPerformance } from "../../../lib/mocktest";
+import { useAuth } from "@/context/AuthContext";
 
 export default function MockTestResultPage() {
   const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     try {
-      const stored = sessionStorage.getItem("mock-test-result");
-      setResult(stored ? JSON.parse(stored) : null);
+      if (!user?.uid) {
+        if (!authLoading) setLoading(false);
+        return;
+      }
+      const stored = sessionStorage.getItem(getMockTestResultSessionKey(user.uid));
+      const parsed = stored ? JSON.parse(stored) : null;
+      setResult(parsed?.userId === user.uid ? parsed : null);
     } catch {
       setResult(null);
     } finally {
-      setLoading(false);
+      if (user?.uid) setLoading(false);
     }
-  }, []);
+  }, [authLoading, user?.uid]);
 
-  if (loading) return <ResultShell><div className="flex items-center justify-center py-24"><div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" /></div></ResultShell>;
+  if (loading || authLoading) return <ResultShell><div className="flex items-center justify-center py-24"><div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" /></div></ResultShell>;
 
   if (!result) return <ResultShell><div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-4 py-20 text-center"><h1 className="text-3xl font-bold text-gray-900">No results found</h1><p className="text-gray-700">Complete a mock test to see your results here.</p><button type="button" onClick={() => router.push("/mock-test")} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Take a Mock Test</button></div></ResultShell>;
 
@@ -37,7 +44,7 @@ export default function MockTestResultPage() {
   const setupRoute = `/mock-test?board=${encodeURIComponent(result.board || "ICSE")}&class=${encodeURIComponent(result.classNumber || 10)}${result.subjectCode ? `&subjectCode=${encodeURIComponent(result.subjectCode)}` : ""}${result.subject ? `&subject=${encodeURIComponent(result.subject)}` : ""}`;
 
   const clearAndGoToSetup = () => {
-    sessionStorage.removeItem("mock-test-result");
+    sessionStorage.removeItem(getMockTestResultSessionKey(user?.uid));
     router.push(setupRoute);
   };
 

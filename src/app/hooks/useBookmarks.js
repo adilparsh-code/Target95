@@ -12,9 +12,13 @@ function getBookmarkKey({ chapter, questionId }) {
   return `${chapter}:${questionId}`;
 }
 
-function readBookmarks() {
+function getBookmarksStorageKey(userId) {
+  return userId ? `${BOOKMARKS_STORAGE_KEY}:${userId}` : BOOKMARKS_STORAGE_KEY;
+}
+
+function readBookmarks(userId = null) {
   try {
-    const savedBookmarks = window.localStorage.getItem(BOOKMARKS_STORAGE_KEY);
+    const savedBookmarks = window.localStorage.getItem(getBookmarksStorageKey(userId));
 
     if (!savedBookmarks) {
       return [];
@@ -34,10 +38,10 @@ function readBookmarks() {
   }
 }
 
-function saveBookmarks(bookmarks) {
+function saveBookmarks(bookmarks, userId = null) {
   try {
     window.localStorage.setItem(
-      BOOKMARKS_STORAGE_KEY,
+      getBookmarksStorageKey(userId),
       JSON.stringify(bookmarks)
     );
     window.dispatchEvent(new Event(BOOKMARKS_UPDATED_EVENT));
@@ -52,10 +56,10 @@ export default function useBookmarks(userId = null) {
   const { loading, error, queryDocuments, addDocument, deleteDocument, subscribeToCollection } = useFirestore();
 
   const syncLocalBookmarks = useCallback(() => {
-    const savedBookmarks = readBookmarks();
+    const savedBookmarks = readBookmarks(userId);
     bookmarksRef.current = savedBookmarks;
     setBookmarks(savedBookmarks);
-  }, []);
+  }, [userId]);
 
   // Fetch bookmarks from Firestore if userId is provided
   const fetchUserBookmarks = useCallback(async () => {
@@ -71,7 +75,7 @@ export default function useBookmarks(userId = null) {
       bookmarksRef.current = firestoreBookmarks;
       setBookmarks(firestoreBookmarks);
       // Also save to localStorage for offline access
-      saveBookmarks(firestoreBookmarks);
+      saveBookmarks(firestoreBookmarks, userId);
     } catch (err) {
       console.error("Error fetching bookmarks from Firestore:", err);
       // Fallback to localStorage
@@ -89,7 +93,7 @@ export default function useBookmarks(userId = null) {
             const userBookmarks = data;
             bookmarksRef.current = userBookmarks;
             setBookmarks(userBookmarks);
-            saveBookmarks(userBookmarks);
+            saveBookmarks(userBookmarks, userId);
           },
           { field: "userId", operator: "==", value: userId }
         );
@@ -101,7 +105,7 @@ export default function useBookmarks(userId = null) {
     }
 
     const handleStorageChange = (event) => {
-      if (event.key === BOOKMARKS_STORAGE_KEY) {
+      if (event.key === getBookmarksStorageKey(userId)) {
         syncLocalBookmarks();
       }
     };
@@ -165,7 +169,7 @@ export default function useBookmarks(userId = null) {
     }
 
     bookmarksRef.current = nextBookmarks;
-    saveBookmarks(nextBookmarks);
+    saveBookmarks(nextBookmarks, userId);
     setBookmarks(nextBookmarks);
   }, [userId, addDocument, deleteDocument]);
 
@@ -187,7 +191,7 @@ export default function useBookmarks(userId = null) {
     }
 
     bookmarksRef.current = nextBookmarks;
-    saveBookmarks(nextBookmarks);
+    saveBookmarks(nextBookmarks, userId);
     setBookmarks(nextBookmarks);
   }, [userId, deleteDocument]);
 

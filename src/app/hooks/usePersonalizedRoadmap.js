@@ -15,7 +15,7 @@ export default function usePersonalizedRoadmap() {
   const { attempts } = useLearningProgress();
   const { recentlyViewed } = useRecentlyViewed();
   const [mockTests, setMockTests] = useState([]);
-  useEffect(() => setMockTests(getMockTestHistory()), []);
+  useEffect(() => setMockTests(getMockTestHistory(user?.uid)), [user?.uid]);
   return useMemo(() => {
     const chapters = createChapterRoadmap(javaChapters, completedQuestions, attempts);
     const solved = completedQuestions.length;

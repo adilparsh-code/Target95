@@ -8,6 +8,8 @@ import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
 import { getCBSEMockQuestions } from "../../data/cbse/mock-tests-2026-27";
 import { clearMockTestDraft, evaluateMockTestAnswer, getMockTestDraft, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
 import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
+import { useAuth } from "@/context/AuthContext";
+import useMockTests from "@/app/hooks/useMockTests";
 
 const normalizeCBSEQuestion = (question) => {
   if (!question || typeof question !== "object") return null;
@@ -32,6 +34,8 @@ function shuffleArray(items) { const result = [...items]; for (let i = result.le
 
 function MockTestPlayerContent() {
   const router = useRouter(); const searchParams = useSearchParams();
+  const { user } = useAuth();
+  const { saveTestResult } = useMockTests();
   const category = searchParams.get("category") || "icse-class-10";
   const board = (searchParams.get("board") || (category.startsWith("cbse-") ? "CBSE" : category.startsWith("isc-") ? "ISC" : "ICSE")).toUpperCase();
   const classNumber = Number(searchParams.get("class") || category.split("-").pop() || 10);
@@ -67,11 +71,11 @@ function MockTestPlayerContent() {
     if (submittedRef.current || submitted) return; submittedRef.current = true; setSubmitted(true); let correct = 0, wrong = 0, unanswered = 0;
     const review = questions.map((q) => { const userAnswer = answers[q.id] || ""; const answered = Boolean(userAnswer.trim()); const isCorrect = answered && evaluateMockTestAnswer(q, userAnswer); if (!answered) unanswered += 1; else if (isCorrect) correct += 1; else wrong += 1; return { question: q, userAnswer: userAnswer || "No answer", correctAnswer: q.answer, isCorrect, explanation: q.explanation, marks: q.marks || 1 }; });
     const totalQuestions = questions.length; const percentage = totalQuestions ? Math.round((correct / totalQuestions) * 100) : 0; const attempted = totalQuestions - unanswered;
-    const result = { id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, date: new Date().toISOString(), board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, score: correct, totalQuestions, correctCount: correct, wrongCount: wrong, unansweredCount: unanswered, percentage, accuracy: attempted ? Math.round((correct / attempted) * 100) : 0, timeTaken: Math.max(0, duration * 60 - timeLeft), totalTime: duration * 60, bookmarkedCount, review };
-    saveMockTestResult(result); clearMockTestDraft(testConfig); sessionStorage.setItem("mock-test-result", JSON.stringify(result));
+    const result = { id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, userId: user?.uid || null, completedAt: new Date().toISOString(), date: new Date().toISOString(), board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, score: correct, totalQuestions, correctAnswers: correct, correctCount: correct, wrongCount: wrong, unansweredCount: unanswered, percentage, accuracy: attempted ? Math.round((correct / attempted) * 100) : 0, timeTaken: Math.max(0, duration * 60 - timeLeft), totalTime: duration * 60, bookmarkedCount, review };
+    saveMockTestResult(result, user?.uid); if (user?.uid) saveTestResult(result).catch(() => {}); clearMockTestDraft(testConfig); sessionStorage.setItem("mock-test-result", JSON.stringify(result));
     trackEvent(LEARNING_EVENTS.MOCK_TEST_COMPLETED, { board, chapterId: chapter, difficulty, score: correct, total: totalQuestions, percentage });
     router.push("/mock-test/result");
-  }, [submitted, questions, answers, board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, duration, timeLeft, bookmarkedCount, testConfig, router]);
+  }, [submitted, questions, answers, board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, duration, timeLeft, bookmarkedCount, testConfig, router, saveTestResult, user?.uid]);
   useEffect(() => { if (!questions.length || submitted || mode === "practice" || mode === "revision") return; const timer = setInterval(() => setTimeLeft((previous) => { if (previous <= 1) { clearInterval(timer); submit(); return 0; } return previous - 1; }), 1000); return () => clearInterval(timer); }, [questions.length, submitted, mode, submit]);
 
   if (!questions.length) return <main className="min-h-screen bg-gradient-to-b from-white to-blue-50"><Navbar /><div className="mx-auto flex max-w-2xl flex-col items-center gap-5 px-4 py-32 text-center"><h1 className="text-3xl font-bold text-gray-900">No questions available</h1><p className="text-gray-700">No questions match this board, class, subject and filter combination.</p><button onClick={() => router.push(`/mock-test?board=${board}&class=${classNumber}${subjectCode ? `&subjectCode=${subjectCode}` : ""}`)} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white">Back to Setup</button></div><Footer /></main>;

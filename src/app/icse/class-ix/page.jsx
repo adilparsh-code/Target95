@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const metadata = { title: 'ICSE Class IX Computer Applications | Target95' };
 
 const modules = [
-  { title:'Learn Java', text:'Class IX Computer Applications theory and chapter-wise learning.', href:'/Java', badge:'Theory' },
+  { title:'Learn Java', text:'Class IX Computer Applications theory and chapter-wise learning.', href:'/Java?class=IX', badge:'Theory' },
   { title:'20 Java Programs', text:'Recommended programming/lab set from fundamentals to problem-solving.', href:'/icse/class-ix/programs', badge:'Practice' },
   { title:'Written Project', text:'Ethical Computing project guidance, kept separate from normal programming.', href:'/icse/class-ix/projects', badge:'Project' },
   { title:'Robotics & AI', text:'The separate ICSE Class IX Robotics & Artificial Intelligence syllabus pathway.', href:'/icse/robotics-ai', badge:'AI Track' },

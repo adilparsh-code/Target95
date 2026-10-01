@@ -10,6 +10,7 @@ import questionsData from "../../data/questions";
 import ChapterLayout, { CHAPTER_SECTIONS } from "../ChapterLayout";
 import ChapterSection from "../ChapterSection";
 import ChapterContentEngine from "../content/ChapterContentEngine";
+import { classIXJavaChapters } from "../../data/javaCurriculum";
 
 import {
   BookOpenIcon,
@@ -22,8 +23,13 @@ import {
 import SegmentedProgress from "./SegmentedProgress";
 import QuestionSection from "./QuestionSection";
 
-export default function StudyChapter({ slug, markdownContent = null, questionBank = null }) {
-  const chapters = useMemo(() => getStudyChapters() || [], []);
+export default function StudyChapter({ slug, markdownContent = null, questionBank = null, className = null }) {
+  const chapters = useMemo(() => {
+    if (className === "ICSE IX") {
+      return classIXJavaChapters.map((item) => resolveStudyChapter(item.slug)).filter(Boolean);
+    }
+    return getStudyChapters() || [];
+  }, [className]);
   const chapter = useMemo(() => resolveStudyChapter(slug), [slug]);
 
   const [search, setSearch] = useState("");
@@ -207,6 +213,8 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
       sectionTimes={sectionTimes}
       showBackToTop={showBackToTop}
       onBackToTop={scrollToTop}
+      catalogHref={className === "ICSE IX" ? "/Java?class=IX" : "/Java"}
+      chapterQuery={className === "ICSE IX" ? "?class=IX" : ""}
     >
       <div ref={contentRef}>
         {/* Chapter Header / Hero Section */}

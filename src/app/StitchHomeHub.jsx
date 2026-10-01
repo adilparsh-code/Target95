@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
+import HomeResumeCard from "./components/HomeResumeCard";
 import { usePersonalization } from "./hooks/usePersonalization";
 import useProgress from "./hooks/useProgress";
 import { useAuth } from "@/context/AuthContext";

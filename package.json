@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test test/home-resume.test.mjs src/lib/validation/__tests__/academicDataValidator.test.mjs",
+    "typecheck": "tsc --noEmit --allowJs --checkJs false --skipLibCheck --jsx preserve --module preserve --moduleResolution bundler --target ES2020 src/app/StitchHomeHub.jsx src/app/components/HomeResumeCard.jsx src/app/hooks/useHomeResumeProgress.js src/lib/progress/homeResume.mjs src/lib/progress/storage.js",
     "validate:data": "node scripts/validate-data.mjs",
     "validate:cisce-ai": "node scripts/validate-cisce-ai.mjs",
     "validate:projects": "node scripts/validate-projects.mjs",

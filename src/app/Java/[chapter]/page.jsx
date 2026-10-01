@@ -69,8 +69,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ChapterPage({ params }) {
+export default async function ChapterPage({ params, searchParams }) {
   const { chapter: slug } = await params;
+  const { class: requestedClass } = await searchParams;
   const chapter = resolveStudyChapter(slug);
 
   if (!chapter) notFound();
@@ -95,6 +96,7 @@ export default async function ChapterPage({ params }) {
       slug={String(slug)}
       markdownContent={clientContent}
       questionBank={questionBankJson}
+      className={String(requestedClass || "").toUpperCase() === "IX" ? "ICSE IX" : null}
     />
   );
 }

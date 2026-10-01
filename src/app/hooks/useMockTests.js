@@ -11,6 +11,8 @@ export default function useMockTests() {
   const [mockTests, setMockTests] = useState([]);
   const [currentTest, setCurrentTest] = useState(null);
   const [testHistory, setTestHistory] = useState([]);
+  const [testHistoryLoaded, setTestHistoryLoaded] = useState(false);
+  const [testHistoryError, setTestHistoryError] = useState(null);
 
   // Fetch all mock tests
   const fetchAllMockTests = useCallback(async () => {
@@ -93,7 +95,7 @@ export default function useMockTests() {
   // Save test result
   const saveTestResult = useCallback(async (resultData) => {
     try {
-      const result = await addDocument("mockTestResults", {
+      const result = await addDocument("results", {
         ...resultData,
         completedAt: new Date().toISOString()
       });
@@ -107,16 +109,21 @@ export default function useMockTests() {
 
   // Fetch user's test history
   const fetchUserTestHistory = useCallback(async (userId) => {
+    setTestHistoryLoaded(false);
+    setTestHistoryError(null);
     try {
-      const data = await queryDocuments("mockTestResults", [
+      const data = await queryDocuments("results", [
         { field: "userId", operator: "==", value: userId }
       ]);
       const sorted = data.sort((a, b) => new Date(b.completedAt) - new Date(a.completedAt));
       setTestHistory(sorted);
       return data;
     } catch (err) {
+      setTestHistoryError(err);
       console.error("Error fetching test history:", err);
       throw err;
+    } finally {
+      setTestHistoryLoaded(true);
     }
   }, [queryDocuments]);
 
@@ -151,6 +158,8 @@ export default function useMockTests() {
     mockTests,
     currentTest,
     testHistory,
+    testHistoryLoaded,
+    testHistoryError,
     fetchAllMockTests,
     fetchActiveMockTests,
     fetchMockTestById,

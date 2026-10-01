@@ -1,5 +1,5 @@
 import subjects from "@/app/data/subjects";
-import { javaQuestions, javaSubject } from "@/app/data/javaCurriculum";
+import { classIXJavaChapters, javaQuestions, javaSubject } from "@/app/data/javaCurriculum";
 import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
 
 // The single read model for the learning journey: subject → chapter → question.
@@ -27,6 +27,21 @@ export const curriculum = subjects.map((subject) => {
 
 export function getSubjectContent(subjectId) {
   return curriculum.find((subject) => subject.id === subjectId);
+}
+
+export function getSubjectContentForClass(subjectId, className) {
+  const subject = getSubjectContent(subjectId);
+  if (!subject || className !== "ICSE IX") return subject;
+
+  const allowedSlugs = new Set(classIXJavaChapters.map((chapter) => chapter.slug));
+  return {
+    ...subject,
+    chapters: subject.chapters.filter((chapter) => allowedSlugs.has(chapter.slug)),
+    estimatedStudyTime: classIXJavaChapters.reduce(
+      (total, chapter) => total + chapter.estimatedTime,
+      0
+    ),
+  };
 }
 
 export function getChapterSlugs(subjectId) {

@@ -2,6 +2,8 @@ import { BLOG_CATEGORIES, articlePath, listPublishedArticles, toIsoDate } from "
 import { getStudyChapters } from "@/lib/studyCenter";
 import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 
+import { officeApps } from "@/data/office";
+
 const siteUrl = "https://target95.vercel.app";
 const lastModified = "2026-08-03";
 
@@ -73,6 +75,8 @@ export default async function sitemap() {
   ];
 
   const routes = [
+    "/office",
+    ...officeApps.flatMap((app) => [`/office/${app.id}`, ...app.chapters.map((chapter) => `/office/${app.id}/${chapter.id}`)]),
     "",
     "/Java",
     "/study",

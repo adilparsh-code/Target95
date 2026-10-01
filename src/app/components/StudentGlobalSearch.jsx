@@ -9,6 +9,8 @@ import { getCBSEChapters } from "../data/cbse/chapters";
 import { getCBSEPracticeQuestions } from "../data/cbse/question-bank-2026-27";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
+import { searchOfficeContent } from "@/data/office";
+
 const typeIcons = {
   topic: "📚",
   chapter: "📖",
@@ -77,7 +79,7 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
     }
 
     const term = debouncedQuery.toLowerCase();
-    const matched = [];
+    const matched = searchOfficeContent(term);
     const filters = { board: activeBoard, class: activeClass };
 
     const searchResults = isCBSEContext

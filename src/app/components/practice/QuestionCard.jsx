@@ -4,9 +4,9 @@ import Card from "../ui/Card";
 import Button from "../ui/Button";
 import DifficultyBadge from "../DifficultyBadge";
 
-export default function QuestionCard({ 
-  question, 
-  selectedAnswer, 
+export default function QuestionCard({
+  question,
+  selectedAnswer,
   onSelectAnswer,
   onSubmit,
   isSubmitted = false,
@@ -18,124 +18,80 @@ export default function QuestionCard({
   const hasAnswered = selectedAnswer !== null;
 
   return (
-    <Card className="w-full max-w-4xl mx-auto p-6 md:p-8">
-      {/* Question Header */}
-      <div className="flex items-start justify-between mb-6">
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-            {question.question}
-          </h3>
-          <div className="flex items-center gap-3 mt-2">
-            <DifficultyBadge difficulty={question.difficulty} />
-            {question.chapter && (
-              <span className="text-sm text-gray-500 dark:text-gray-400">
-                {question.chapter}
-              </span>
-            )}
-          </div>
+    <div className="mt-4">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+          <DifficultyBadge difficulty={question.difficulty} />
+          {question.chapter ? <span className="rounded bg-slate-100 px-2 py-0.5">{question.chapter}</span> : null}
+          {question.marks ? <span className="rounded bg-slate-100 px-2 py-0.5">{question.marks} MARKS</span> : null}
         </div>
       </div>
 
-      {/* Options */}
-      <div className="space-y-3 mb-6">
-        {question.options?.map((option, index) => {
-          const isSelected = selectedAnswer === option;
-          const isCorrectOption = option === question.correctAnswer;
-          
-          let optionClasses = "border-gray-200 hover:border-blue-300 dark:border-gray-700 dark:hover:border-blue-600";
-          
-          if (showFeedback && isCorrectOption) {
-            optionClasses = "border-green-500 bg-green-50 dark:bg-green-900/20 dark:border-green-500";
-          } else if (showFeedback && isSelected && !isCorrectOption) {
-            optionClasses = "border-red-500 bg-red-50 dark:bg-red-900/20 dark:border-red-500";
-          } else if (isSelected) {
-            optionClasses = "border-blue-500 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-500";
-          }
+      {question.question && (
+        <p className="mb-4 text-sm font-medium leading-6 text-slate-600">
+          Choose the best answer for the question below.
+        </p>
+      )}
 
-          return (
-            <button
-              key={index}
-              onClick={() => !showFeedback && onSelectAnswer(option)}
-              disabled={showFeedback}
-              className={`w-full p-4 text-left border-2 rounded-lg transition-all duration-200 ${optionClasses}
-                disabled:cursor-default
-              `}
-            >
-              <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 text-sm font-medium">
-                  {String.fromCharCode(65 + index)}
-                </span>
-                <span className="text-gray-800 dark:text-gray-200">{option}</span>
-                {showFeedback && isCorrectOption && (
-                  <svg className="w-5 h-5 text-green-500 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                )}
-                {showFeedback && isSelected && !isCorrectOption && (
-                  <svg className="w-5 h-5 text-red-500 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                )}
-              </div>
-            </button>
-          );
-        })}
-      </div>
+      {question.options?.length ? (
+        <div className="space-y-2.5">
+          {question.options.map((option, index) => {
+            const isSelected = selectedAnswer === option;
+            const isCorrectOption = option === question.correctAnswer;
+            let optionClasses = "border-slate-200 bg-white hover:bg-slate-50 hover:border-blue-300";
+            if (showFeedback && isCorrectOption) optionClasses = "border-emerald-300 bg-emerald-50";
+            else if (showFeedback && isSelected && !isCorrectOption) optionClasses = "border-rose-300 bg-rose-50";
+            else if (isSelected) optionClasses = "border-blue-600 bg-blue-50";
 
-      {/* Feedback section - shown after submission */}
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={() => !showFeedback && onSelectAnswer(option)}
+                disabled={showFeedback}
+                className={`stitch-choice w-full p-3.5 text-left ${optionClasses} disabled:cursor-default`}
+              >
+                <div className="flex items-start gap-3">
+                  <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg font-mono text-xs font-bold ${isSelected ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-700"}`}>
+                    {String.fromCharCode(65 + index)}
+                  </span>
+                  <span className="pt-1 text-sm leading-6 text-slate-800">{option}</span>
+                  {showFeedback && isCorrectOption ? <span className="ml-auto pt-1 text-sm font-bold text-emerald-600">✓</span> : null}
+                  {showFeedback && isSelected && !isCorrectOption ? <span className="ml-auto pt-1 text-sm font-bold text-rose-600">×</span> : null}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        <textarea
+          value={selectedAnswer || ""}
+          onChange={(e) => !isSubmitted && onSelectAnswer(e.target.value)}
+          disabled={isSubmitted}
+          rows={7}
+          className="w-full rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+          placeholder="Write your answer here..."
+        />
+      )}
+
       {showFeedback && (
-        <div className={`p-4 rounded-lg mb-6 ${isCorrect ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
-          <div className="flex items-start gap-3">
-            {isCorrect ? (
-              <>
-                <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-green-800 dark:text-green-400">Correct!</h4>
-                  <p className="text-green-700 dark:text-green-300 text-sm mt-1">Great job! You got it right.</p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-red-800 dark:text-red-400">Incorrect</h4>
-                  <p className="text-red-700 dark:text-red-300 text-sm mt-1">
-                    The correct answer is: <strong>{question.correctAnswer}</strong>
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-          
-          {/* Explanation */}
-          {question.explanation && (
-            <div className="mt-4 pt-4 border-t border-green-200 dark:border-green-800">
-              <h5 className="font-medium text-gray-900 dark:text-white mb-2">Explanation:</h5>
-              <p className="text-gray-700 dark:text-gray-300 text-sm">{question.explanation}</p>
-            </div>
-          )}
+        <div className={`mt-4 rounded-xl border p-4 ${isCorrect ? "border-emerald-200 bg-emerald-50 text-emerald-900" : "border-rose-200 bg-rose-50 text-rose-900"}`}>
+          <p className="text-sm font-bold">{isCorrect ? "Correct!" : "Incorrect"}</p>
+          {!isCorrect && <p className="mt-1 text-xs">Correct answer: <strong>{question.correctAnswer}</strong></p>}
+          {question.explanation ? <p className="mt-2 border-t border-current/10 pt-2 text-xs leading-5">{question.explanation}</p> : null}
         </div>
       )}
 
-      {/* Submit Button */}
       {!showFeedback && (
         <Button
           onClick={onSubmit}
           disabled={!hasAnswered}
           variant="primary"
-          className="w-full"
+          className="mt-4 w-full rounded-xl bg-blue-600 py-3 text-xs font-bold uppercase tracking-wider"
         >
-          Submit Answer
+          Check Answer
         </Button>
       )}
-    </Card>
+    </div>
   );
 }

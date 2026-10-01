@@ -30,6 +30,7 @@ const primaryLinks = [
       { href: "/office", label: "Microsoft Office" },
       { href: "/Java", label: "Chapters" },
       { href: "/isc", label: "ICSE & ISC" },
+      { href: "/cbse", label: "CBSE" },
     ],
   },
   {
@@ -69,6 +70,7 @@ const mobileLinks = [
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
   { href: "/study", label: "Study", description: "Chapters", icon: "📖" },
   { href: "/isc", label: "ICSE & ISC", description: "Class IX-XII", icon: "🎓" },
+  { href: "/cbse", label: "CBSE", description: "Class IX-XII", icon: "💻" },
   { href: "/question-bank", label: "Practice", description: "Questions", icon: "📘" },
   { href: "/mock-test", label: "Mock Tests", description: "Timed", icon: "📝" },
   { href: "/analytics", label: "Analytics", description: "Stats", icon: "📈" },

@@ -38,7 +38,7 @@ function MockTestContent() {
   const [chapter, setChapter] = useState("all");
   const [mode, setMode] = useState("exam");
   const [duration, setDuration] = useState(30);
-  const history = useMemo(() => user?.uid ? getMockTestHistory(user.uid) : [], [user?.uid]);
+  const history = useMemo(() => getMockTestHistory(user?.uid), [user?.uid]);
   const activeBoard = category.startsWith("cbse-") ? "CBSE" : category.startsWith("isc-") ? "ISC" : "ICSE";
   const activeClass = Number(category.split("-").pop());
   const activeCBSECodes = CBSE_CODES_BY_CLASS[activeClass] || [];

@@ -4,7 +4,10 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
+import HomeResumeCard from "./components/HomeResumeCard";
 import { usePersonalization } from "./hooks/usePersonalization";
+import useProgress from "./hooks/useProgress";
+import { useAuth } from "@/context/AuthContext";
 
 const boards = [
   { id: "cisce", label: "CISCE", detail: "(ICSE/ISC)" },
@@ -69,6 +72,9 @@ function MiniIcon({ type }) {
 
 export default function StitchHomeHub() {
   const { board, class: selectedClass, subject, setBoard, setClass, setSubject, isHydrated } = usePersonalization();
+  const { user, loading: authLoading } = useAuth();
+  const { firestoreProgress, loading: progressLoading } = useProgress(user?.uid || null);
+  const showResumePractice = Boolean(user && !authLoading && !progressLoading && firestoreProgress.length > 0);
   const activeBoard = board || "cisce";
   const selected = selectedClass?.id || "icse-class-10";
   const currentClass = classOptions[activeBoard].find((item) => item.id === selected) || classOptions[activeBoard][0];
@@ -87,22 +93,24 @@ export default function StitchHomeHub() {
       <Navbar />
       <ErrorBoundary>
         <div className="mx-auto max-w-[1280px] px-4 pb-14 pt-5 sm:px-6 lg:px-8">
-          <section className="rounded-xl border border-blue-200 bg-blue-50/60 p-4 sm:p-5">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="flex items-start gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-lg bg-blue-700 text-white">▶</span>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
-                    <span className="rounded-full bg-white px-2.5 py-1 text-teal-700">ICSE CLASS 10</span>
-                    <span className="text-slate-400">•</span><span className="text-slate-700">Computer Applications</span>
+          {showResumePractice && (
+            <section className="rounded-xl border border-blue-200 bg-blue-50/60 p-4 sm:p-5" aria-label="Continue learning">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                <div className="flex items-start gap-3">
+                  <span className="grid h-11 w-11 place-items-center rounded-lg bg-blue-700 text-white">▶</span>
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
+                      <span className="rounded-full bg-white px-2.5 py-1 text-teal-700">CONTINUE LEARNING</span>
+                      <span className="text-slate-400">•</span><span className="text-slate-700">Saved student progress</span>
+                    </div>
+                    <h1 className="mt-1 text-base font-bold sm:text-lg">Continue where you left off</h1>
+                    <p className="text-xs text-slate-500">Your saved learning progress is ready to continue.</p>
                   </div>
-                  <h1 className="mt-1 text-base font-bold sm:text-lg">Continue: Arrays & Searching</h1>
-                  <p className="text-xs text-slate-500">Paused at Question 19 of 24 (Binary Search Logic Trace) • 78% syllabus completed</p>
                 </div>
+                <Link href="/Java" className="stitch-btn stitch-btn-primary shrink-0">Resume Learning →</Link>
               </div>
-              <Link href="/Java/arrays" className="stitch-btn stitch-btn-primary shrink-0">Resume Practice (Q19) →</Link>
-            </div>
-          </section>
+            </section>
+          )}
 
           <section className="mt-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-end justify-between gap-4">

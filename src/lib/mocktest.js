@@ -166,19 +166,25 @@ export function sanitizeStudyStatus(value) {
 }
 
 const HISTORY_KEY = "target95-mock-test-results";
+export const MOCK_HISTORY_UPDATED_EVENT = "target95-mock-history-updated";
 
-export function saveMockTestResult(result) {
+function getHistoryKey(userId) {
+  return userId ? `${HISTORY_KEY}:${userId}` : HISTORY_KEY;
+}
+
+export function saveMockTestResult(result, userId = null) {
   try {
-    const stored = getMockTestHistory();
+    const stored = getMockTestHistory(userId);
     stored.unshift(result);
     if (stored.length > 20) stored.length = 20;
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(stored));
+    localStorage.setItem(getHistoryKey(userId), JSON.stringify(stored));
+    window.dispatchEvent(new Event(MOCK_HISTORY_UPDATED_EVENT));
   } catch {}
 }
 
-export function getMockTestHistory() {
+export function getMockTestHistory(userId = null) {
   try {
-    const data = localStorage.getItem(HISTORY_KEY);
+    const data = localStorage.getItem(getHistoryKey(userId));
     if (!data) return [];
     const parsed = JSON.parse(data);
     return Array.isArray(parsed) ? parsed : [];
@@ -187,8 +193,11 @@ export function getMockTestHistory() {
   }
 }
 
-export function clearMockTestHistory() {
-  try { localStorage.removeItem(HISTORY_KEY); } catch {}
+export function clearMockTestHistory(userId = null) {
+  try {
+    localStorage.removeItem(getHistoryKey(userId));
+    window.dispatchEvent(new Event(MOCK_HISTORY_UPDATED_EVENT));
+  } catch {}
 }
 
 const DRAFT_PREFIX = "target95-mock-test-draft";

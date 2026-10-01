@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import useProgress from "@/app/hooks/useProgress";
 import useMockTests from "@/app/hooks/useMockTests";
@@ -9,7 +9,7 @@ import { usePersonalization } from "@/app/hooks/usePersonalization";
 import useGamification from "@/app/hooks/useGamification";
 import { javaChapters } from "@/app/data/javaCurriculum";
 import { createChapterRoadmap, createLearningRecommendations } from "@/lib/learningRoadmap";
-import { getMockTestHistory } from "@/lib/mocktest";
+import { getMockTestHistory, MOCK_HISTORY_UPDATED_EVENT } from "@/lib/mocktest";
 
 const emptyMockTests = [];
 
@@ -18,19 +18,6 @@ function getLocalDateKey(date) {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
-}
-
-function getEmptyMockTests() {
-  return emptyMockTests;
-}
-
-function getLocalMockTestsSnapshot() {
-  return getMockTestHistory();
-}
-
-function subscribeToStorage(callback) {
-  window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
 }
 
 /**
@@ -45,14 +32,22 @@ export default function useStudentDashboard() {
   const { user } = useAuth();
   const uid = user?.uid || null;
   const { completedQuestions, firestoreProgress, loading: progressLoading, error: progressError, stats, refresh } = useProgress(uid);
-  const { fetchUserTestHistory, testHistory: firestoreTestHistory } = useMockTests();
+  const { fetchUserTestHistory, testHistory: firestoreTestHistory, testHistoryLoaded, testHistoryError } = useMockTests();
   const { recentlyViewed } = useRecentlyViewed();
   const personalization = usePersonalization();
   const gamification = useGamification();
+  const [localMockTests, setLocalMockTests] = useState(emptyMockTests);
 
-  // localStorage is only available client-side; useSyncExternalStore keeps the
-  // snapshot stable and avoids setState inside effects (React 19 compiler rule).
-  const localMockTests = useSyncExternalStore(subscribeToStorage, getLocalMockTestsSnapshot, getEmptyMockTests);
+  useEffect(() => {
+    const syncLocalHistory = () => setLocalMockTests(uid ? getMockTestHistory(uid) : emptyMockTests);
+    syncLocalHistory();
+    window.addEventListener("storage", syncLocalHistory);
+    window.addEventListener(MOCK_HISTORY_UPDATED_EVENT, syncLocalHistory);
+    return () => {
+      window.removeEventListener("storage", syncLocalHistory);
+      window.removeEventListener(MOCK_HISTORY_UPDATED_EVENT, syncLocalHistory);
+    };
+  }, [uid]);
 
   useEffect(() => {
     if (uid) {
@@ -66,16 +61,19 @@ export default function useStudentDashboard() {
   );
 
   const mockTests = useMemo(() => {
+    // A successful Firestore read is authoritative, including an empty result.
+    // The user-scoped local cache is used only when that read fails.
+    const source = testHistoryLoaded && !testHistoryError ? firestoreTestHistory : localMockTests;
     const seen = new Set();
     const merged = [];
-    for (const test of [...firestoreTestHistory, ...localMockTests]) {
+    for (const test of source) {
       const key = test.id || `${test.title}-${test.completedAt}`;
       if (seen.has(key)) continue;
       seen.add(key);
       merged.push(test);
     }
     return merged.sort((a, b) => new Date(b.completedAt || 0) - new Date(a.completedAt || 0));
-  }, [firestoreTestHistory, localMockTests]);
+  }, [firestoreTestHistory, localMockTests, testHistoryError, testHistoryLoaded]);
 
   const overview = useMemo(() => {
     const totalSolved = completedQuestions.length || stats?.totalQuestionsSolved || 0;

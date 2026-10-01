@@ -14,9 +14,13 @@ function getQuestionKey({ chapter, questionId }) {
   return `${chapter}:${questionId}`;
 }
 
-function readCompletedQuestions() {
+function getProgressStorageKey(userId) {
+  return userId ? `${PROGRESS_STORAGE_KEY}:${userId}` : PROGRESS_STORAGE_KEY;
+}
+
+function readCompletedQuestions(userId = null) {
   try {
-    const savedProgress = window.localStorage.getItem(PROGRESS_STORAGE_KEY);
+    const savedProgress = window.localStorage.getItem(getProgressStorageKey(userId));
 
     if (!savedProgress) {
       return [];
@@ -36,10 +40,10 @@ function readCompletedQuestions() {
   }
 }
 
-function saveCompletedQuestions(completedQuestions) {
+function saveCompletedQuestions(completedQuestions, userId = null) {
   try {
     window.localStorage.setItem(
-      PROGRESS_STORAGE_KEY,
+      getProgressStorageKey(userId),
       JSON.stringify(completedQuestions)
     );
     window.dispatchEvent(new Event(PROGRESS_UPDATED_EVENT));
@@ -57,10 +61,10 @@ export default function useProgress(userId = null) {
 
   // Sync from localStorage
   const syncLocalProgress = useCallback(() => {
-    const savedProgress = readCompletedQuestions();
+    const savedProgress = readCompletedQuestions(userId);
     completedQuestionsRef.current = savedProgress;
     setCompletedQuestions(savedProgress);
-  }, []);
+  }, [userId]);
 
   // Fetch from Firestore if user is authenticated
   const fetchFirestoreProgress = useCallback(async () => {
@@ -176,7 +180,7 @@ export default function useProgress(userId = null) {
         ]);
         completedQuestionsRef.current = progress;
         setCompletedQuestions(progress);
-        saveCompletedQuestions(progress);
+        saveCompletedQuestions(progress, userId);
       } catch (err) {
         console.error("Error fetching progress from Firestore:", err);
         syncLocalProgress();
@@ -194,7 +198,7 @@ export default function useProgress(userId = null) {
         const userProgress = data;
         completedQuestionsRef.current = userProgress;
         setCompletedQuestions(userProgress);
-        saveCompletedQuestions(userProgress);
+        saveCompletedQuestions(userProgress, userId);
       },
       { field: "userId", operator: "==", value: userId }
     );
@@ -236,7 +240,7 @@ export default function useProgress(userId = null) {
           getQuestionKey(item) === questionKey ? { ...item, id: savedItem.id } : item
         );
         completedQuestionsRef.current = updatedProgress;
-        saveCompletedQuestions(updatedProgress);
+        saveCompletedQuestions(updatedProgress, userId);
         setCompletedQuestions(updatedProgress);
         return;
       } catch (err) {
@@ -245,7 +249,7 @@ export default function useProgress(userId = null) {
     }
 
     completedQuestionsRef.current = nextProgress;
-    saveCompletedQuestions(nextProgress);
+    saveCompletedQuestions(nextProgress, userId);
     setCompletedQuestions(nextProgress);
   }, [userId, addDocument]);
 
@@ -273,7 +277,7 @@ export default function useProgress(userId = null) {
     );
 
     completedQuestionsRef.current = nextProgress;
-    saveCompletedQuestions(nextProgress);
+    saveCompletedQuestions(nextProgress, userId);
     setCompletedQuestions(nextProgress);
   }, [userId, deleteDocument]);
 

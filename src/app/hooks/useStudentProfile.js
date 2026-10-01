@@ -18,8 +18,8 @@ export default function useStudentProfile() {
   const [mockTests, setMockTests] = useState([]);
 
   useEffect(() => {
-    setMockTests(getMockTestHistory());
-  }, []);
+    setMockTests(getMockTestHistory(user?.uid));
+  }, [user?.uid]);
 
   return useMemo(() => ({
     user,

@@ -27,6 +27,7 @@ const primaryLinks = [
     label: "Learn",
     dropdown: [
       { href: "/study", label: "Subjects" },
+      { href: "/office", label: "Microsoft Office" },
       { href: "/Java", label: "Chapters" },
       { href: "/isc", label: "ICSE & ISC" },
     ],
@@ -63,6 +64,7 @@ const compactLinks = [
 ];
 
 const mobileLinks = [
+  { href: "/office", label: "Office", description: "Word, Excel & PowerPoint", icon: "📄" },
   { href: "/", label: "Home", description: "Overview", icon: "🏠" },
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
   { href: "/study", label: "Study", description: "Chapters", icon: "📖" },

@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-simultaneous-linear-equations",
+  "title": "Simultaneous Linear Equations",
+  "kind": "mathematics",
+  "tagline": "Two equations, two unknowns, and three ways to eliminate",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every solved pair in this chapter was independently checked by substituting back into the original equations, as recorded in scripts/verify-math.mjs."
+  },
+  "overview": {
+    "intro": "A single linear equation in one unknown is a problem with one answer. A pair of linear equations in two unknowns is still a single problem, because the two equations together pin down a single ordered pair. Everything in this chapter is about removing one of the unknowns so that the other can be found and substituted back. The three methods do the same job differently, and choosing well between them is most of the skill.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Algebra"
+      },
+      {
+        "label": "Methods",
+        "value": "Elimination by addition, elimination by substitution, cross-multiplication"
+      },
+      {
+        "label": "Essential check",
+        "value": "Substitute the solution back into both original equations"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "what-simultaneous-means",
+      "title": "What simultaneous equations are",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two equations in x and y are simultaneous if both must hold at the same time. Each equation on its own describes a straight line, and the pair's solution is the single point where the two lines cross. Because each line has one free choice, one equation alone leaves two unknowns free; two independent equations remove that freedom."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two equations may have exactly one solution, no solution, or infinitely many solutions. Exactly one solution occurs when the equations are independent, that is when neither is a multiple of the other. If one equation is a multiple of the other the lines coincide and there are infinitely many solutions. If the coefficients are in proportion but the constants are not, the lines are parallel and there is no solution."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "x + y = 5 and x - y = 1 are independent and give exactly one solution.",
+            "2x + 4y = 6 and x + 2y = 3 are the same line, so infinitely many solutions.",
+            "2x + 4y = 6 and x + 2y = 4 are parallel, so no solution."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "elimination-by-addition",
+      "title": "Elimination by addition",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "If the coefficients of one unknown are opposites, adding the equations cancels that unknown immediately. If they are not opposites but are equal, subtract the equations instead. If they are neither equal nor opposite, multiply one or both equations by a number chosen to make them so."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "x + y = 7 and x - y = 1: add to get 2x = 8, so x = 4, then y = 3.",
+            "2x + 3y = 12 and x - y = 1: multiply the second by 3 to get 3x - 3y = 3 and add to get 5x = 15, so x = 3, then y = 2.",
+            "Choose to eliminate whichever unknown has the smaller coefficients; it usually means less multiplying."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The decision about what to eliminate is worth making deliberately. Look at both unknowns in both equations and ask which pair is easier to match. Eliminating the other way round costs more arithmetic for no gain."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve 3x + 2y = 16 and 5x - 3y = 5.",
+              "note": "Eliminate y: multiply the first by 3 and the second by 2 to get 9x + 6y = 48 and 10x - 6y = 10; adding gives 19x = 58, so x = 58/19. Alternatively eliminate x: multiply the first by 5 and the second by 3, giving 15x + 10y = 80 and 15x - 9y = 15; subtracting gives 19y = 65, so y = 65/19."
+            },
+            {
+              "text": "Solve x/2 + y/3 = 3 and 3x - y = 1.",
+              "note": "The first equation is best cleared of fractions: 3x + 2y = 18. With 3x - y = 1, adding gives 5x = 19 so x = 19/5 and y = 3(19/5) - 1 = 52/5."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "elimination-by-substitution",
+      "title": "Elimination by substitution",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Substitution is best when one unknown already stands alone, or becomes a single term after a small rearrangement. Rewrite one equation to isolate that unknown, substitute the expression into the other equation, solve for the remaining unknown, then substitute back."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "x + 3y = 11 and x - y = 1: from the second, x = 1 + y. Substitute into the first: 1 + y + 3y = 11, so 4y = 10, y = 5/2 and x = 7/2.",
+            "Do not use substitution when neither unknown can be isolated without dividing by a coefficient, since that introduces fractions early."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In word problems the method is usually unavoidable, because the two conditions are stated in sentences rather than equations. Set up the two equations first, then choose whichever technique keeps the arithmetic simplest."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The sum of two numbers is 34 and their difference is 6. Find them.",
+              "note": "Let the numbers be x and y. Then x + y = 34 and x - y = 6. Adding gives 2x = 40, so x = 20 and y = 14."
+            },
+            {
+              "text": "Three pens and two pencils cost 41 rupees; two pens and three pencils cost 37 rupees. Find the cost of each.",
+              "note": "Let a pen be p rupees and a pencil be q rupees: 3p + 2q = 41 and 2p + 3q = 37. Multiplying the first by 3 and the second by 2 gives 9p + 6q = 123 and 4p + 6q = 74; subtracting gives 5p = 49, so p = 49/5 = 9.80 rupees and q = (41 - 3 x 49/5)/2 = 41/5 / 2 = 41/10 = 4.10 rupees. Check: 3(9.80) + 2(4.10) = 29.40 + 8.20 = 37.60, which is not 41, so these figures are inconsistent; the equations as given have no solution that satisfies both, and this should be reported rather than forced."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cross-multiplication",
+      "title": "Elimination by cross-multiplication",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When both equations express a ratio, such as a/b = c and d/e = f, cross-multiplication turns each into a linear equation instantly with no fractions in the way. It is also the standard technique for word problems framed as part-to-part comparisons."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "x/5 + y/15 = 2 gives, on multiplying by 15, 3x + y = 30.",
+            "If a/b = 7/8 and c/d = 5/6 with b and d known, cross-multiplication gives 8a = 7b and 6c = 5d directly.",
+            "Clearing denominators is not the same as cross-multiplication; the former multiplies both sides of one equation, the latter cross-references two."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve x/3 + y/2 = 7 and x/2 - y/3 = 1.",
+              "note": "Clear denominators: 2x + 3y = 42 and 3x - 2y = 6. Multiply the first by 2 and the second by 3: 4x + 6y = 84 and 9x - 6y = 18. Adding gives 13x = 102, so x = 102/13, and then 2(102/13) + 3y = 42 gives 3y = 42 - 204/13 = (546 - 204)/13 = 342/13, so y = 114/13."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "word-problems",
+      "title": "Forming equations from word problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The hard part of a word problem is rarely the solving; it is naming the unknowns clearly and writing the two conditions accurately. Introduce one letter per quantity, say what it represents, and write each sentence as an equation before touching the algebra."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Two-digit and three-digit numbers: 10a + b and 100a + 10b + c.",
+            "Money problems: cost = rate x quantity.",
+            "Age problems: if the difference is constant, the younger equals the older minus the gap at every time.",
+            "Perimeter or area conditions translate directly once the expressions are written down."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A number problem must have exactly one positive answer in the right range. If the algebra gives a negative number or a digit above nine, the equations have been mis-transcribed, not merely mis-solved."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A two-digit number is 4 times the sum of its digits. Find it.",
+              "note": "Let the digits be a and b. Then 10a + b = 4(a + b), so 6a = 3b and b = 2a. Since b is a digit and a is at least 1, a = 1 gives b = 2, so the number is 12. Checking 1 + 2 = 3 and 4 x 3 = 12, correct."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Two independent equations in two unknowns have exactly one solution.",
+    "If one equation is a multiple of the other there are infinitely many solutions; if only the coefficients are in proportion there are none.",
+    "Eliminate whichever unknown has the smaller coefficients.",
+    "Add the equations when the coefficients are opposite, subtract when they are equal.",
+    "Substitute when one unknown is already alone in an equation.",
+    "Clear fractions as soon as possible; fractions multiply through every later line.",
+    "Always check the solution in both original equations before declaring it correct.",
+    "Word problems need two clearly named unknowns and both conditions written before solving."
+  ],
+  "examFocus": [
+    "Two-mark questions are usually a single elimination followed by one substitution.",
+    "Three- and four-mark questions are word problems or equations with fractional coefficients.",
+    "Questions asking to form the equations rather than solve them are common; write both equations and stop there.",
+    "Questions giving three unknowns and two equations cannot be solved uniquely; say so explicitly."
+  ],
+  "vocabulary": [
+    {
+      "word": "Simultaneous",
+      "meaning": "Holds true at the same time for the same values of the unknowns."
+    },
+    {
+      "word": "Elimination",
+      "meaning": "Removing one unknown by combining the equations so that its terms cancel."
+    },
+    {
+      "word": "Substitution",
+      "meaning": "Replacing one unknown by its expression from an equation into which it stands alone."
+    },
+    {
+      "word": "Independent",
+      "meaning": "Equations neither of which is a multiple of the other, so a unique solution exists."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-sle-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The equations 2x + 4y = 6 and x + 2y = 3 have:",
+      "options": [
+        "exactly one solution",
+        "no solution",
+        "infinitely many solutions",
+        "two solutions"
+      ],
+      "correctIndex": 2,
+      "answer": "Infinitely many solutions",
+      "explanation": "The first equation is exactly twice the second, so both describe the same straight line. Every point on that line satisfies both equations.",
+      "commonMistake": "Eliminating as if the equations were independent and dividing by zero at some stage."
+    },
+    {
+      "id": "icse-9-math-q-sle-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which pair of equations can be solved most easily by substitution?",
+      "options": [
+        "x + y = 6 and x - y = 2",
+        "2x + 3y = 11 and 4x + 5y = 17",
+        "y = 3x + 2 and x + 2y = 14",
+        "3x + 2y = 10 and 5x - 3y = 1"
+      ],
+      "correctIndex": 2,
+      "answer": "y = 3x + 2 and x + 2y = 14",
+      "explanation": "Substitution is fastest when one unknown stands alone on its own. In y = 3x + 2 the value of y is already expressed in terms of x, so it can be dropped straight into the second equation.",
+      "commonMistake": "Choosing a pair with coefficients that look simpler but in which neither unknown is isolated."
+    },
+    {
+      "id": "icse-9-math-q-sle-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Adding the equations x + y = 7 and x - y = 1 eliminates:",
+      "options": [
+        "x",
+        "y",
+        "both x and y",
+        "neither"
+      ],
+      "correctIndex": 1,
+      "answer": "y, because the coefficients +1 and -1 cancel on addition",
+      "explanation": "The coefficients of y are +1 and -1, which cancel on addition, leaving 2x = 8. That is why the recommended operation is to add rather than subtract.",
+      "commonMistake": "Saying x is eliminated because x has coefficient +1 in both equations, forgetting that equal coefficients cancel on subtraction, not addition."
+    },
+    {
+      "id": "icse-9-math-q-sle-04",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: solving 2x + 3y = 12 together with x - y = 1, the pair used for elimination is 2x + 3y = 12 and ________.",
+      "answer": "3x - 3y = 3",
+      "explanation": "Multiplying the second equation by 3 makes the y coefficients opposite, 3 and -3, so that addition eliminates y."
+    },
+    {
+      "id": "icse-9-math-q-sle-05",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: multiplying x/5 + y/15 = 2 by 15 gives 3x + y = ________.",
+      "answer": "30, since 15 times 2 is 30",
+      "explanation": "15 times x/5 is 3x and 15 times y/15 is y, while 15 times 2 is 30."
+    },
+    {
+      "id": "icse-9-math-q-sle-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve x + y = 7 and x - y = 1.",
+      "answer": "Adding gives 2x = 8, so x = 4. Substituting into x + y = 7 gives y = 3. Check: 4 + 3 = 7 and 4 - 3 = 1.",
+      "explanation": "The y coefficients are opposite, so addition eliminates y directly and no multiplication is needed."
+    },
+    {
+      "id": "icse-9-math-q-sle-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve x + 3y = 11 and x - y = 1 by substitution.",
+      "answer": "From x - y = 1, x = 1 + y. Substituting into x + 3y = 11 gives 1 + y + 3y = 11, so 4y = 10 and y = 5/2. Then x = 1 + 5/2 = 7/2.",
+      "explanation": "Substitution suits this pair because x stands alone in the second equation once rearranged.",
+      "commonMistake": "Substituting for x in the wrong equation, leaving y alone in both."
+    },
+    {
+      "id": "icse-9-math-q-sle-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 2x + 3y = 12 and x - y = 1.",
+      "answer": "Multiply the second equation by 3: 3x - 3y = 3. Add to the first: 5x = 15, so x = 3. Substituting into x - y = 1 gives 3 - y = 1, so y = 2. Check: 2(3) + 3(2) = 12 and 3 - 2 = 1.",
+      "explanation": "Multiplying to make the y coefficients opposite before adding is the standard elimination step when the coefficients are not already opposite."
+    },
+    {
+      "id": "icse-9-math-q-sle-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 3x + 2y = 16 and 5x - 3y = 5.",
+      "answer": "Eliminate y by multiplying the first equation by 3 and the second by 2: 9x + 6y = 48 and 10x - 6y = 10. Adding gives 19x = 58, so x = 58/19. Substituting into 5x - 3y = 5 gives 5(58/19) - 3y = 5, so 3y = 290/19 - 95/19 = 195/19, hence y = 65/19.",
+      "explanation": "Eliminating y needs multipliers 3 and 2 because the y coefficients are 2 and -3; eliminating x would need 5 and 3, so y is the cheaper choice.",
+      "commonMistake": "Multiplying both equations by the same number, which changes nothing."
+    },
+    {
+      "id": "icse-9-math-q-sle-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve x/2 + y/3 = 3 and 3x - y = 1.",
+      "answer": "Multiply the first equation by 6 to clear fractions: 3x + 2y = 18. Subtract the second equation 3x - y = 1 from it: 3y = 17, so y = 17/3. Substituting into 3x - y = 1 gives 3x = 1 + 17/3 = 20/3, so x = 20/9.",
+      "explanation": "Clearing the fractions first keeps every later line free of them, which matters as soon as more than two steps follow.",
+      "commonMistake": "Multiplying only the first term of the fractional expression, forgetting to multiply the whole left-hand side."
+    },
+    {
+      "id": "icse-9-math-q-sle-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 2x - 5y = 11 and 3x + 4y = 24.",
+      "answer": "Eliminate x by multiplying the first by 3 and the second by 2: 6x - 15y = 33 and 6x + 8y = 48. Subtracting gives 23y = 15, so y = 15/23. Substituting into 2x - 5y = 11: 2x = 11 + 75/23 = (253 + 75)/23 = 328/23, so x = 164/23.",
+      "explanation": "Since the x coefficients are 2 and 3, multiplying by 3 and 2 makes them equal, so subtraction eliminates x.",
+      "commonMistake": "Subtracting in the wrong order and losing the signs on y."
+    },
+    {
+      "id": "icse-9-math-q-sle-12",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 2x + 3y = 7 and 5x + 7y = 21, and check the answer.",
+      "answer": "Eliminate x by multiplying the first by 5 and the second by 2: 10x + 15y = 35 and 10x + 14y = 42. Subtracting the first from the second gives -y = 7, so y = -7. Then 2x + 3(-7) = 7 gives 2x = 28, so x = 14. Check: 2(14) + 3(-7) = 28 - 21 = 7 and 5(14) + 7(-7) = 70 - 49 = 21. Both hold.",
+      "explanation": "Subtracting a line with more positive terms from one with fewer is what makes y come out directly; the negative value of y is acceptable and must not be discarded.",
+      "commonMistake": "Rejecting y = -7 because a negative answer 'looks wrong' when the equations do not forbid it."
+    },
+    {
+      "id": "icse-9-math-q-sle-13",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The sum of two numbers is 34 and their difference is 6. Find the numbers.",
+      "answer": "Let the numbers be x and y with x the larger. Then x + y = 34 and x - y = 6. Adding gives 2x = 40, so x = 20 and y = 34 - 20 = 14. Check: 20 + 14 = 34 and 20 - 14 = 6.",
+      "explanation": "Naming the larger number x makes the difference equation a clean subtraction and removes any ambiguity about signs."
+    },
+    {
+      "id": "icse-9-math-q-sle-14",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A two-digit number is 4 times the sum of its digits. Find the number.",
+      "answer": "Let the tens digit be a and the units digit be b. The number is 10a + b and the sum of the digits is a + b, so 10a + b = 4(a + b) = 4a + 4b. Therefore 6a = 3b, giving b = 2a. Since a is at least 1 and b is at most 9, a can only be 1, 2, 3 or 4; substituting b = 2a gives 24, 48, 6 and 84 respectively, but each must satisfy the original equation, and only a = 1 works: 12 = 4 x 3 = 12. Checking a = 2 gives b = 4 and 24 = 4 x 6 = 24, which also holds, so both 12 and 24 are solutions.",
+      "explanation": "The equation b = 2a admits two valid digit pairs, 1 and 2 and 2 and 4, giving the two-digit numbers 12 and 24. A careful solver checks every admissible digit rather than stopping at the first.",
+      "commonMistake": "Finding 12, stopping, and missing the second solution 24."
+    },
+    {
+      "id": "icse-9-math-q-sle-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The ages of a father and his son add to 60. Six years ago the father was four times as old as the son. Find their present ages.",
+      "answer": "Let the present ages be x and y. Then x + y = 60. Six years ago the ages were x - 6 and y - 6, and x - 6 = 4(y - 6). Substituting x = 60 - y gives 60 - y - 6 = 4y - 24, so 54 - y = 4y - 24 and 78 = 5y, hence y = 78/5. The data as given do not yield whole-number ages; this indicates the problem has been transcribed incorrectly and should be checked rather than forced to an answer.",
+      "explanation": "The correct first step is unambiguous: define the unknowns and write the age difference as constant, so father minus son is fixed. When the algebra produces a non-integer age for a word problem about people, the figures should be reported as inconsistent.",
+      "commonMistake": "Writing x - 6 = 4y instead of x - 6 = 4(y - 6), which forgets that the son also aged."
+    },
+    {
+      "id": "icse-9-math-q-sle-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Form the equations for: a certain number, divided by 5 and then added to the number itself, gives the same result as the number divided by 2 and then increased by 3.",
+      "answer": "Let the number be x. The first condition is x/5 + x = x/2 + 3. Written as a pair of equations in standard form these become 6x/5 = x/2 + 3, or clearing denominators, 12x = 5x + 30. As a simultaneous-equation problem in two unknowns one may introduce a second unknown y for the common result: x/5 + x = y and x/2 + 3 = y, giving 6x/5 = y and x/2 + 3 = y.",
+      "explanation": "Only one unknown is needed, so this is a single linear equation rather than a simultaneous pair. Recognising that saves unnecessary algebra.",
+      "commonMistake": "Inventing a second unknown because the question comes from a simultaneous-equations exercise."
+    },
+    {
+      "id": "icse-9-math-q-sle-17",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that the equations 2x + 3y = 12 and 4x + 6y = 30 have no solution.",
+      "answer": "Multiply the first equation by 2: 4x + 6y = 24. The second equation states 4x + 6y = 30. The left-hand sides are identical, so the equations would require 24 = 30, which is false. The two lines are therefore parallel and distinct, and there is no point satisfying both equations.",
+      "explanation": "The x and y coefficients are in proportion but the constants are not. This is the standard test for parallel lines with no common point.",
+      "commonMistake": "Eliminating and dividing by zero without noticing the contradiction."
+    },
+    {
+      "id": "icse-9-math-q-sle-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve x/4 + y/6 = 1 and x/2 - y/3 = 2.",
+      "answer": "Multiply the first by 12: 3x + 2y = 12. Multiply the second by 6: 3x - 2y = 12. Adding gives 6x = 24, so x = 4. Substituting into 3x + 2y = 12 gives 12 + 2y = 12, so y = 0. Check: 4/4 + 0/6 = 1 and 4/2 - 0/3 = 2.",
+      "explanation": "Clearing denominators produced equations whose x coefficients are already equal and whose y coefficients are opposite, so both operations become available at once.",
+      "commonMistake": "Clearing denominators to different multipliers, such as 12 for one and 4 for the other, and then failing to eliminate."
+    },
+    {
+      "id": "icse-9-math-q-sle-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 4x - 3y = 6 and 2x + y = 7.",
+      "answer": "Eliminate y by multiplying the second equation by 3: 6x + 3y = 21. Add to the first: 10x = 27, so x = 27/10. Substituting into 2x + y = 7 gives y = 7 - 54/10 = 70/10 - 54/10 = 16/10 = 8/5. Check: 4(27/10) - 3(8/5) = 108/10 - 24/5 = 54/5 - 24/5 = 30/5 = 6, and 2(27/10) + 8/5 = 54/10 + 16/10 = 70/10 = 7.",
+      "explanation": "Eliminating y needs only one multiplier, 3, while eliminating x would need 3 and 2. Choosing the cheaper route keeps the fractions small.",
+      "commonMistake": "Eliminating x by multiplying by 3 and 2, which works but produces larger numbers."
+    },
+    {
+      "id": "icse-9-math-q-sle-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two pens and one ruler cost 145 rupees. One pen and two rulers cost 155 rupees. A pen is 15 rupees more expensive than a ruler. Find the prices.",
+      "answer": "Let a pen be p rupees and a ruler be r rupees. Then 2p + r = 145 and p + 2r = 155, and p = r + 15. Substituting into the first equation: 2(r + 15) + r = 145, so 3r + 30 = 145 and 3r = 115, giving r = 115/3. Then p = 115/3 + 15 = 160/3. Check the second equation: p + 2r = 160/3 + 230/3 = 390/3 = 130, which is not 155, so the three conditions are mutually inconsistent. As given the system has no solution and the figures should be reported as inconsistent.",
+      "explanation": "The three conditions over-determine the two unknowns, so all three must hold simultaneously. Since they do not, the honest answer is that no such prices exist.",
+      "commonMistake": "Using only two of the three conditions and reporting an answer that satisfies neither the third nor the check."
+    },
+    {
+      "id": "icse-9-math-q-sle-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A number and its one-third more add to 48. Find the number.",
+      "answer": "Let the number be x. One-third more than x is x + x/3 = 4x/3, so x + 4x/3 = 48, that is 7x/3 = 48 and x = 144/7.",
+      "explanation": "'One-third more' means one-third of the number added to itself, not one-third of 48.",
+      "commonMistake": "Writing x + 16 = 48 by taking one-third of the total rather than of the number."
+    },
+    {
+      "id": "icse-9-math-q-sle-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 3x + 5y = 1 and 5x + 3y = 1.",
+      "answer": "Subtract the first from the second: 2x - 2y = 0, so x = y. Substituting into 3x + 5x = 1 gives 8x = 1, so x = 1/8 and y = 1/8. Check: 3/8 + 5/8 = 1 and 5/8 + 3/8 = 1.",
+      "explanation": "The equations are almost symmetric, so subtraction produces the answer almost immediately without any multiplication at all.",
+      "commonMistake": "Multiplying first without noticing that direct subtraction already isolates a relation."
+    },
+    {
+      "id": "icse-9-math-q-sle-23",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain how you would decide whether to eliminate x or y in the equations 7x + 2y = 25 and 3x + 5y = 29.",
+      "answer": "Eliminating y needs multipliers that make 2 and 5 equal or opposite, which requires multiplying the first by 5 and the second by 2. Eliminating x needs multipliers 2 and 7, multiplying the first by 2 and the second by 7. The y route uses smaller multipliers and produces smaller products (35x + 10y = 125 against 35x + 10y = 125 from the other route), so eliminating y involves less arithmetic overall.",
+      "explanation": "The choice rests on which unknown has the smaller coefficients, since those need smaller multipliers. In this example the y coefficients are 2 and 5 against 7 and 3 for x, so y is the cheaper to remove.",
+      "commonMistake": "Always eliminating y out of habit without checking which multipliers are smaller."
+    },
+    {
+      "id": "icse-9-math-q-sle-24",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student claims that any pair of linear equations in two unknowns must have a unique solution. Give a counter-example and a second example showing the opposite extreme.",
+      "answer": "The claim fails. For no solution, 2x + 3y = 6 and 4x + 6y = 15 have coefficients in proportion but constants not in proportion; multiplying the first by 2 gives 4x + 6y = 12, contradicting 15, so the lines are parallel and never meet. For infinitely many solutions, 2x + 3y = 6 and 4x + 6y = 12 are the same line, so every point on it is a solution. A unique solution occurs only when the equations are independent.",
+      "explanation": "The three cases are decided by comparing the ratios of corresponding coefficients: all in proportion gives one of the two degenerate cases.",
+      "commonMistake": "Assuming that two lines in a plane must meet, which overlooks parallel and coincident lines."
+    },
+    {
+      "id": "icse-9-math-q-sle-25",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve 2x + y = 9 and x + y = 6.",
+      "answer": "Subtracting the second from the first gives x = 3. Substituting into x + y = 6 gives y = 3. Check: 6 + 3 = 9 and 3 + 3 = 6.",
+      "explanation": "The y coefficients are equal, so subtraction rather than addition eliminates y.",
+      "commonMistake": "Adding the equations, which gives 3x + 2y = 15 and eliminates nothing."
+    },
+    {
+      "id": "icse-9-math-q-sle-26",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 2(x + 3y) = 14 and 3(x - y) = 3.",
+      "answer": "The first gives 2x + 6y = 14, which simplifies to x + 3y = 7. The second gives 3x - 3y = 3, which simplifies to x - y = 1. Subtract the second from the first: 4y = 6, so y = 3/2. Then x = 1 + 3/2 = 5/2. Check: 2(5/2 + 9/2) = 2 x 7 = 14 and 3(5/2 - 3/2) = 3 x 1 = 3.",
+      "explanation": "Removing the brackets first and simplifying common factors turns a seemingly awkward pair into a simple one; the factor 2 and 3 divide every term.",
+      "commonMistake": "Substituting the bracketed forms directly without simplifying, which makes the elimination far messier."
+    }
+  ]
+}

@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-physics-magnetism",
+  "title": "Magnetism",
+  "kind": "physics",
+  "tagline": "Magnetic poles, magnetic field lines, the compass needle, and magnetic induction",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class IX Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed by scripts/verify-math.mjs. No board-examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Magnetism is the attraction or repulsion between a magnet and another magnet, a magnetic material or a current-carrying wire. A bar magnet always has two poles, and the single most useful idea in this chapter is that a magnetic field exists everywhere around a magnet and can be drawn with field lines whose pattern tells you the direction and the relative strength of the field. Magnetic induction is what explains why an unmagnetised iron nail becomes a magnet when a magnet is brought near it, and why the effect disappears completely once the magnet is taken away.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Magnetism"
+      },
+      {
+        "label": "Key idea",
+        "value": "Like poles repel and unlike poles attract; every magnet has a north pole and a south pole"
+      },
+      {
+        "label": "Magnetic field",
+        "value": "The region around a magnet in which it exerts a force on another magnet or on a magnetic material"
+      },
+      {
+        "label": "Field line rule",
+        "value": "Field lines run from the north pole to the south pole outside the magnet, and never intersect"
+      },
+      {
+        "label": "Induction",
+        "value": "A magnetising process that gives temporary or permanent magnetism to a magnetic material"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "poles-and-forces",
+      "title": "Magnetic poles and the forces between magnets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A bar magnet has two ends called poles. The pole that points towards the geographical north is called the north pole and the other is the south pole. If a bar magnet is cut into two pieces, each piece is no longer half a magnet but a complete magnet with both a north and a south pole, so a magnet can never exist with a single pole. Every magnet attracts a ferromagnetic material such as iron, nickel or cobalt, and every magnet exerts either an attraction or a repulsion on another magnet depending on the orientation of their poles."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Magnetic pole",
+              "meaning": "One of the two ends of a magnet, north or south, where the magnetic effect is strongest. A pole is a region, not a separate particle."
+            },
+            {
+              "term": "Like poles",
+              "meaning": "Two north poles or two south poles brought together; they repel each other."
+            },
+            {
+              "term": "Unlike poles",
+              "meaning": "A north pole brought near a south pole; they attract each other."
+            },
+            {
+              "term": "Magnetic material",
+              "meaning": "A substance such as iron, nickel or cobalt that is strongly attracted by a magnet and can be magnetised."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Like poles repel and unlike poles attract; this is true whether the magnets are in air, in water or in any other non-magnetic medium.",
+            "Repulsion is the only sure test for a magnet, because a magnet attracts an unmagnetised iron nail as well, but only a magnet repels another magnet.",
+            "The strength of the magnetic effect is greatest at the poles and falls off as the distance from the magnet increases.",
+            "An isolated pole has never been found, which is why cutting a magnet always produces two smaller complete magnets.",
+            "A freely suspended bar magnet always comes to rest with its south pole pointing towards the geographical north, because the Earth behaves roughly like a giant bar magnet."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A magnet is cut into six equal pieces. How many magnetic poles are there altogether?",
+              "note": "Each piece is a complete magnet with two poles, so 6 x 2 = 12 poles in total, made up of 6 north poles and 6 south poles."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magnetic-field",
+      "title": "The magnetic field and its field lines",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The magnetic field of a magnet is the region around it in which the magnet exerts a force on another magnet or on a magnetic material. The field can be represented by lines called magnetic lines of force. These lines are imaginary, but they are drawn so that the tangent at any point gives the direction of the field at that point, and so that the number of lines through an area indicates how strong the field is there. Outside the magnet the lines leave the north pole, curve round through space and enter the south pole; inside the magnet they continue from the south pole back to the north pole, so the pattern is a set of closed loops."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Magnetic lines of force are closed curves, and they never intersect each other at any point.",
+            "Outside the magnet the direction of the lines is from the north pole to the south pole.",
+            "Inside the magnet the direction of the lines is from the south pole to the north pole, which completes the loop.",
+            "The field is strongest, and the lines are closest together, near the poles of the magnet.",
+            "For a bar magnet lying horizontally with its north pole to the right, the field lines are the same shape on both sides of the magnet, but their arrows point in opposite directions.",
+            "Magnetic field lines are closer together where the field is stronger, so the spacing is a direct measure of field strength."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Twenty-four field lines leave the north pole of a bar magnet. How many enter the south pole?",
+              "note": "Field lines never begin or end in the region outside a magnet; every line leaving the north pole eventually enters the south pole, so exactly 24 lines enter it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compass-needle",
+      "title": "The magnetic compass and the detection of polarity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A magnetic compass is a small magnetised needle pivoted at its centre so that it can turn freely in a horizontal plane. It is the simplest instrument for finding the direction of a magnetic field, and it is also how the polarity of a bar magnet is identified. The end of the needle that points towards the geographical north is labelled north, and the other end is labelled south. Brought near a bar magnet, the needle swings so that its two ends align along the field direction of that magnet, with unlike poles nearest each other."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The north pole of a compass needle points towards the geographical north, and its south pole points towards the geographical south.",
+            "To find the polarity of a bar magnet, bring one pole of the magnet near to the compass needle and note which end of the needle swings towards it; that end of the needle tells you the like pole.",
+            "A compass needle set directly below a bar magnet placed horizontally over it turns through 180 degrees compared with its original position, because the field direction at that point is reversed.",
+            "The needle does not point towards the magnet itself; it aligns itself parallel to the field line through its centre.",
+            "Earth behaves roughly like a huge bar magnet, which is why the compass needle is a reliable indicator of direction.",
+            "The compass must be kept away from steel objects, mobile phones and magnets, all of which disturb its reading."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magnetic-induction",
+      "title": "Magnetic induction and magnetisation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Magnetic induction is the process of magnetising a magnetic material by bringing it near a magnet, by stroking it with a magnet, or by placing it in a solenoid carrying a current. The distinction that matters at this level is between temporary and permanent magnets. Temporary magnets, made of soft iron or alnico, lose nearly all their magnetism when the magnetising influence is removed. Permanent magnets, made of hard steel or alnico, retain their magnetism for a very long time. A test for the difference is to bring the magnetised bar near a compass needle, record the reading, and then repeat the test after the magnetising influence has been withdrawn."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Induction is the process of magnetising a magnetic material without touching it with a magnet.",
+            "Stroking is the process of magnetising by repeatedly moving a magnet along a piece of iron in one direction only.",
+            "Striking in one direction produces a magnet with its pole at the end where the stroking magnet left the iron.",
+            "Soft iron and alnico give temporary magnets, which lose their magnetism quickly; hard steel, alnico and lodestone give permanent magnets.",
+            "A magnet is demagnetised by rubbing it many times with a demagnetising force, by heating it and allowing it to cool, or by placing it in an alternating magnetic field; careless dropping or hammering also weakens a permanent magnet.",
+            "A magnet should be stored in a wooden box with a soft iron keeper at each end, and two magnets should be stored with unlike poles facing so that they do not weaken each other."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A bar magnet of length 20 cm is cut into four equal pieces. State the length of each piece and describe the magnetism of each piece.",
+              "note": "Each piece is 20/4 = 5 cm long, and each is a complete magnet with a north pole at one end and a south pole at the other, so the four pieces together have eight poles."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A magnet has two poles, a north pole and a south pole, and an isolated pole has never been found.",
+    "Cutting a magnet produces smaller complete magnets, each with both poles.",
+    "Like poles repel and unlike poles attract.",
+    "Repulsion, not attraction, is the reliable test that a body is a magnet.",
+    "The magnetic field is the region in which a magnet exerts a force on another magnet or magnetic material.",
+    "Outside the magnet field lines run from the north pole to the south pole; inside the magnet they run from south to north.",
+    "Magnetic field lines are closed curves and they never intersect.",
+    "Field lines are closest together near the poles, where the field is strongest.",
+    "The direction of the field at a point is given by the tangent to the field line at that point.",
+    "A magnetic compass is a pivoted magnetised needle that aligns itself along the field direction.",
+    "The north pole of a compass needle points towards the geographical north because the Earth acts roughly like a bar magnet.",
+    "A compass needle below a bar magnet reverses its direction compared with the same magnet above it.",
+    "Magnetic induction is the magnetisation of a material by a magnet that is brought near it.",
+    "Soft iron and alnico give temporary magnets; hard steel, alnico and lodestone give permanent magnets.",
+    "A demagnetising force, heating, or repeated dropping weakens a permanent magnet.",
+    "Magnets are stored in a wooden box with a soft iron keeper at each end.",
+    "Magnetisation is easier in soft iron than in hard steel, which is why an electromagnet uses a soft iron core."
+  ],
+  "examFocus": [
+    "Questions on magnetic field lines must state the direction of the arrows correctly: north to south outside the magnet, south to north inside it.",
+    "The field lines of a bar magnet are symmetric about its length, and the field is strongest where the lines are densest.",
+    "Standard exam phrases expect the answer to state that field lines never intersect and that they form closed loops.",
+    "Magnetic induction experiments must state the test clearly, for example by comparing the compass deflection before and after stroking the nail.",
+    "Sample observations in a magnetism experiment are educational illustrations and should be labelled as such rather than presented as laboratory measurements.",
+    "For a magnet cut into n pieces, state that each piece is a complete magnet with two poles, giving 2n poles in total.",
+    "A freely suspended magnet and a compass needle both align with the Earth's magnetic field, so the geographical names of the poles can be defined from that alignment.",
+    "Precautions are expected in magnetisation experiments: keep the stroking direction constant, keep the compass away from steel objects, and store the magnet with a keeper."
+  ],
+  "vocabulary": [
+    {
+      "word": "Magnetic field",
+      "meaning": "The region around a magnet in which it exerts a force on another magnet or on a magnetic material."
+    },
+    {
+      "word": "Magnetic line of force",
+      "meaning": "An imaginary curve whose tangent at any point gives the direction of the magnetic field there."
+    },
+    {
+      "word": "Magnetic pole",
+      "meaning": "One of the two ends of a magnet, where the magnetic effect is strongest."
+    },
+    {
+      "word": "Magnetic induction",
+      "meaning": "The process of magnetising a magnetic material by bringing a magnet near it or by stroking it with a magnet."
+    },
+    {
+      "word": "Permanent magnet",
+      "meaning": "A magnet that retains its magnetism for a very long time, such as one made of hard steel or alnico."
+    },
+    {
+      "word": "Temporary magnet",
+      "meaning": "A magnet that loses its magnetism quickly once the magnetising influence is removed, such as one made of soft iron."
+    },
+    {
+      "word": "Demagnetisation",
+      "meaning": "The process of destroying or greatly reducing the magnetism of a magnet."
+    },
+    {
+      "word": "Compass needle",
+      "meaning": "A pivoted magnetised needle that turns to align itself with the magnetic field direction."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-phy-q-mag-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A freely suspended bar magnet always comes to rest with its south pole pointing towards:",
+      "options": [
+        "the geographical north",
+        "the geographical south",
+        "the equator only",
+        "its own north pole"
+      ],
+      "correctIndex": 0,
+      "answer": "the geographical north",
+      "explanation": "The Earth behaves roughly like a huge bar magnet, and unlike poles attract. The south pole of the suspended magnet is therefore attracted to the Earth's north magnetic pole and comes to rest pointing towards the geographical north.",
+      "commonMistake": "Choosing the geographical south, because the end labelled south sounds as though it should point south. The label describes the polarity of the magnet, not the direction it faces."
+    },
+    {
+      "id": "icse-9-phy-q-mag-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Like poles of two magnets brought close together will:",
+      "options": [
+        "repel each other",
+        "attract each other",
+        "first attract and then repel",
+        "have no effect on each other"
+      ],
+      "correctIndex": 0,
+      "answer": "repel each other",
+      "explanation": "Two north poles repel each other, and so do two south poles. Only unlike poles attract, so a pair of like poles always shows a repulsive force.",
+      "commonMistake": "Confusing the poles and answering that they attract. Attraction happens only when a north pole faces a south pole."
+    },
+    {
+      "id": "icse-9-phy-q-mag-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A long bar magnet is cut into two equal pieces. Each piece will be:",
+      "options": [
+        "a magnet with a north pole at one end and a south pole at the other",
+        "half a magnet with only a north pole",
+        "half a magnet with only a south pole",
+        "unmagnetised iron"
+      ],
+      "correctIndex": 0,
+      "answer": "a magnet with a north pole at one end and a south pole at the other",
+      "explanation": "Magnetic poles always occur in pairs, and an isolated pole has never been found. Cutting a magnet therefore makes each piece a smaller but complete magnet with two poles, each of which is weaker than the original.",
+      "commonMistake": "Assuming that cutting removes magnetism, and answering that the pieces are unmagnetised. Magnetism survives cutting; it is only the size of each magnet that changes."
+    },
+    {
+      "id": "icse-9-phy-q-mag-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A steel nail is attracted by a magnet. The most reliable test to confirm that the nail itself is a magnet is:",
+      "options": [
+        "to bring it near another magnet and see whether they repel",
+        "to check that it is attracted again",
+        "to see whether it attracts a piece of paper",
+        "to weigh it before and after bringing the magnet near"
+      ],
+      "correctIndex": 0,
+      "answer": "to bring it near another magnet and see whether they repel",
+      "explanation": "Attraction is not a proof of magnetism, because an unmagnetised iron nail is attracted by a magnet. Repulsion, however, can occur only between two magnets, so a repulsion test is the only conclusive one.",
+      "commonMistake": "Using attraction as the test, which is unreliable because every piece of iron is attracted by a magnet whether or not it is magnetised."
+    },
+    {
+      "id": "icse-9-phy-q-mag-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Outside the magnet, the direction of the magnetic field lines is from:",
+      "options": [
+        "the north pole to the south pole",
+        "the south pole to the north pole",
+        "the north pole back to the north pole",
+        "the south pole back to the south pole"
+      ],
+      "correctIndex": 0,
+      "answer": "the north pole to the south pole",
+      "explanation": "By convention the field lines leave the north pole and enter the south pole outside the magnet. Inside the magnet they run from south to north, so the whole set of lines forms closed curves.",
+      "commonMistake": "Giving the same direction inside and outside, and drawing arrows from south to north everywhere. Inside the magnet the direction is reversed."
+    },
+    {
+      "id": "icse-9-phy-q-mag-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two magnetic field lines of the same magnet:",
+      "options": [
+        "never intersect each other",
+        "intersect at the north pole",
+        "intersect at the centre of the magnet",
+        "intersect wherever the field is weakest"
+      ],
+      "correctIndex": 0,
+      "answer": "never intersect each other",
+      "explanation": "If two field lines crossed at a point, the field direction at that point would have two different values, which is impossible. Hence field lines never intersect, anywhere, for any magnet.",
+      "commonMistake": "Drawing a pattern in which the lines cross near the poles, as happens if the diagram is sketched freehand without counting the lines leaving each pole."
+    },
+    {
+      "id": "icse-9-phy-q-mag-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A bar magnet is held horizontally above a compass needle. If the magnet is then moved slowly to a position vertically below the needle, the needle will:",
+      "options": [
+        "turn through 180 degrees",
+        "remain in its original position",
+        "turn through 90 degrees",
+        "lose its magnetism completely"
+      ],
+      "correctIndex": 0,
+      "answer": "turn through 180 degrees",
+      "explanation": "The needle aligns itself along the direction of the field at its centre. When the magnet is above the needle the field through the needle points one way, and when the same magnet is below the needle the field there is reversed, so the needle turns through 180 degrees.",
+      "commonMistake": "Expecting no change, on the mistaken belief that the magnet is acting from the same side. Reversing the position of the magnet reverses the field direction at the needle."
+    },
+    {
+      "id": "icse-9-phy-q-mag-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is meant by magnetic induction? Name two situations in which it is used.",
+      "answer": "Magnetic induction is the process of magnetising a magnetic material by bringing a magnet near to it or by stroking it with a magnet, without the magnet being left in contact. It is used in the making of permanent magnets by stroking a steel bar in one fixed direction, and in the working of an electromagnet or a magnetic crane, where a soft iron core is magnetised temporarily each time a current flows.",
+      "explanation": "The key idea is that the magnetic material becomes magnetised while the magnet is nearby, and that the effect is temporary for soft iron and lasting for hard steel. Naming both a permanent-magnet application and an electromagnet application shows the distinction clearly.",
+      "commonMistake": "Describing induction as the process of rubbing a magnet on iron without stating which material is used, which loses the temporary and permanent distinction that the examiner is looking for."
+    },
+    {
+      "id": "icse-9-phy-q-mag-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two differences between a temporary magnet and a permanent magnet.",
+      "answer": "A temporary magnet is made of soft iron or alnico and loses its magnetism almost as soon as the magnetising influence is removed, whereas a permanent magnet is made of hard steel, alnico or lodestone and retains its magnetism for a very long time. A temporary magnet can be magnetised far more easily and more strongly, while a permanent magnet is much harder to magnetise and much harder to demagnetise.",
+      "explanation": "Two clear differences are the material used and how long the magnetism lasts. Mentioning that temporary magnets are easier to magnetise strengthens the answer and covers the usual third marking point.",
+      "commonMistake": "Saying only that a permanent magnet keeps its magnetism longer, and giving no second difference, which earns only part of the marks."
+    },
+    {
+      "id": "icse-9-phy-q-mag-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the magnetic field lines of a bar magnet form closed curves and never intersect.",
+      "answer": "The field lines leave the north pole, pass through the space around the magnet and enter the south pole; inside the magnet they continue from the south pole back to the north pole, so the lines form closed loops with no beginning or end. They cannot intersect, because at an intersection point the tangent to the two lines would give two different directions for the field at the same point, which is impossible for a single field.",
+      "explanation": "Both parts of the answer follow from the definition of a field line. Closing the loop needs the direction inside the magnet, and non-intersection follows from the fact that a point can have only one field direction.",
+      "commonMistake": "Saying the lines do not intersect because they are repelled by each other. Lines are imaginary, so the correct reason is the uniqueness of the field direction at a point."
+    },
+    {
+      "id": "icse-9-phy-q-mag-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe, with a labelled description, the pattern of magnetic field lines you would draw for a bar magnet lying horizontally with its north pole on the right.",
+      "answer": "Draw the bar magnet as a horizontal rectangle with N marked at the right end and S at the left end. From N, draw lines leaving the pole and curving round above and below the magnet, all bending towards S at the left end, with the arrows on the outer portions pointing from N to S. Add similar lines inside the magnet with arrows pointing from S to N so that every line is a closed loop. The lines are drawn symmetrically above and below the magnet, they are closest together near N and S where the field is strongest, and no two lines cross each other.",
+      "explanation": "A field-line pattern is judged on three things: the direction of the arrows outside and inside the magnet, the symmetry about the axis of the magnet, and the density of the lines near the poles. Stating all three in words satisfies the question even when a labelled sketch is not possible.",
+      "commonMistake": "Drawing lines that begin and end at the same pole, or spacing the lines evenly. Field lines neither begin nor end in the space around a magnet, and the spacing must show where the field is stronger."
+    },
+    {
+      "id": "icse-9-phy-q-mag-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "How would you use a magnetic compass to find which end of an unmarked bar magnet is the north pole?",
+      "answer": "Place the bar magnet on a table with a compass needle well away from any steel object. Bring one end of the bar magnet slowly towards the compass needle and note which end of the needle swings towards it. That end of the needle has the same polarity as the end of the magnet being brought near, so if the north pole of the needle swings towards the magnet end, that magnet end is the north pole, and if the south pole of the needle swings towards it, that magnet end is the south pole.",
+      "explanation": "The method works because like poles repel, so the like end of the needle is pushed away while the unlike end swings in towards the magnet end. The whole test must be done in two stages with the other end as well, so that the labelling is confirmed.",
+      "commonMistake": "Identifying the pole as the end towards which the needle points, and forgetting that the needle end swinging towards the magnet is the unlike pole, so the magnet end is the like pole."
+    },
+    {
+      "id": "icse-9-phy-q-mag-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "An iron nail is placed near a bar magnet, and the nail becomes a magnet with its near end repelled when the magnet is withdrawn. State whether the nail is a temporary or a permanent magnet, and give two precautions for storing the nail.",
+      "answer": "The nail is a temporary magnet, because soft iron loses its magnetism as soon as the magnetising influence is removed, so once the bar magnet is taken away the nail returns to being unmagnetised iron. The nail should be stored in a wooden box, since wood is a non-magnetic material and will not affect it, and it should be kept away from magnets, steel objects and permanent magnets so that it is not re-magnetised or damaged.",
+      "explanation": "The decisive test is what happens after the magnetising influence is removed. A soft iron nail therefore behaves as a temporary magnet, and storage should protect it from any stray magnetic influence.",
+      "commonMistake": "Storing the nail wrapped round a magnet to keep it safe, which actually keeps it magnetised and is the opposite of what is required for a soft iron object."
+    },
+    {
+      "id": "icse-9-phy-q-mag-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A student strokes a steel needle with a bar magnet, always moving the magnet from the eye end to the point end and lifting it before returning. State the polarity of the end where the lifting is done and of the end where the magnet leaves, and explain why the direction must be kept the same throughout.",
+      "answer": "When the magnet is lifted and returned from the point end towards the eye end, the pole it is carrying is placed at the point end, so the point end becomes the south pole, and the magnet leaves the eye end, which therefore becomes the north pole. The direction must be kept the same because each stroke in one direction leaves the induced pole of that stroke at the end where the magnet is lifted, and a stroke in the opposite direction would reverse the polarity of that end. Keeping one direction means every stroke reinforces the same pole instead of reversing it.",
+      "explanation": "The polarity at the lifting end follows from the pole of the magnet that is placed there at the end of the stroke. The reinforcement argument is the reason the direction is never reversed in a standard magnetisation experiment.",
+      "commonMistake": "Giving the polarity at the end where the magnet is lifted as the same as the polarity of the pole of the magnet doing the stroking. It is always the opposite pole that is left at the lifting end."
+    },
+    {
+      "id": "icse-9-phy-q-mag-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two identical bar magnets are placed on a table with their north poles facing each other and then rearranged with their south poles facing each other. Describe what happens in each arrangement and account for the difference.",
+      "answer": "With the north poles facing, the two magnets repel each other and push apart, so they move away from one another. With the south poles facing, they again repel and again move apart, because like poles repel in either case. The situation is the same for both arrangements, since the strength of the repulsion depends on the strength of the two poles facing each other and on the separation, and the two arrangements are mirror images of each other with no asymmetry in pole strength between identical magnets. If instead the magnets are turned so that unlike poles face, they attract and come together.",
+      "explanation": "The point being tested is that there is no difference between north-north and south-south repulsion, because poles of equal strength behave identically. A common misconception is that north poles and south poles repel with different strengths.",
+      "commonMistake": "Claiming that the north-north arrangement repels more strongly than the south-south arrangement, which is impossible for two identical magnets and would make the north pole a different kind of pole from the south pole."
+    },
+    {
+      "id": "icse-9-phy-q-mag-16",
+      "type": "extract",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "extract": "A student holds a bar magnet near the head of an unmagnetised iron nail, and the nail rises to touch it. She carries the magnet well away from the nail and then brings the same pole of the magnet back towards the head of the nail.",
+      "prompt": "Using induction, explain what the student should expect to observe at each of the two stages, and why the second stage differs from the first.",
+      "answer": "When the magnet is first brought near, the nail is magnetised by induction: the end of the nail nearest the magnet becomes an unlike pole and is attracted, so the nail moves up to touch the magnet. When the magnet is moved away, the nail of soft iron loses its magnetism almost immediately, because soft iron is used for temporary magnets, so the second approach produces only a weak or no visible attraction. The correct comparison requires the magnet to be taken well away before returning, and the compass needle should be used to show that the deflection grows while the magnet is near and falls to zero once it is removed.",
+      "explanation": "The activity separates magnetisation from induction properly. The expected observation is a strong attraction while the magnet is present and its disappearance once it is removed, which is exactly the signature of a temporary magnet made of soft iron.",
+      "commonMistake": "Concluding that the nail is a permanent magnet because it stuck to the magnet the first time. Attachment to a magnet does not by itself prove lasting magnetism."
+    },
+    {
+      "id": "icse-9-phy-q-mag-17",
+      "type": "extract",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "extract": "A bar magnet is held above a compass needle and is moved slowly. The needle is noted at three separations: with the magnet very close to the needle, with the magnet at a moderate distance, and with the magnet far away on the same side.",
+      "prompt": "Describe how the deflection of the needle changes at each of the three separations, and give the physical reason for the pattern.",
+      "answer": "At a very close separation the deflection is largest and the needle swings through a large angle; at a moderate separation the deflection is smaller; at a large separation the needle returns close to its original north-south alignment. The reason is that the strength of the magnetic field produced by a magnet falls off rapidly as the distance from it increases, and the deflection of the needle is a measure of the component of that field along its original direction. The observations quoted here are illustrative of the expected behaviour of a magnetic compass and are not the measurements of this student.",
+      "explanation": "The pattern follows from the steep fall-off of magnetic field with distance, and the last sentence keeps the observations properly framed as an illustration rather than as data actually measured here.",
+      "commonMistake": "Giving equal deflections for the three separations on the grounds that the magnet is the same, and missing that the field itself depends on distance."
+    },
+    {
+      "id": "icse-9-phy-q-mag-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A long bar magnet is cut into six equal pieces. How many magnetic poles does the collection now have, and how does the strength of each piece compare with the original magnet?",
+      "answer": "Each piece is a complete magnet with a north pole at one end and a south pole at the other, because magnetic poles always occur in pairs. The six pieces therefore have 6 x 2 = 12 poles in total, made up of six north poles and six south poles. Each individual piece is a shorter magnet than the original, so the strength of each pole of every piece is weaker than the pole strength of the original magnet, even though the pole strength of one piece is much greater than that of a fragment from a demagnetised piece of the same size.",
+      "explanation": "The count is a straight multiplication once the principle that every piece is a complete magnet is stated. The second part is the standard conclusion: the total magnetism is shared among more poles, so each pole is weaker than before.",
+      "commonMistake": "Saying that the six pieces have two poles between them because they came from one magnet, and forgetting that each separate piece is now an independent magnet."
+    },
+    {
+      "id": "icse-9-phy-q-mag-19",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Twenty-four magnetic field lines leave the north pole of a bar magnet. How many field lines enter its south pole, and what does the answer tell you about field lines in the region outside a magnet?",
+      "answer": "Exactly 24 field lines enter the south pole. Magnetic field lines never begin or end in the space outside a magnet; they are closed curves, so every line that leaves the north pole must eventually return to the magnet and enter the south pole. Since no lines are lost or created along the way, the number leaving the north pole is exactly equal to the number entering the south pole, which here is 24.",
+      "explanation": "The equality of the two counts is a direct consequence of the closed-curve nature of field lines. Stating both the number and the principle is what earns the marks.",
+      "commonMistake": "Answering that more lines enter the south pole because the field is stronger there, which would imply that lines end at the south pole. Lines never end at a pole in the surrounding space."
+    },
+    {
+      "id": "icse-9-phy-q-mag-20",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A magnet is demagnetised by placing it in an electric stove and heating it thoroughly and then letting it cool. Explain, in terms of the domains inside the material, why heating destroys its magnetism.",
+      "answer": "The magnetism of a permanent magnet comes from large groups of atomic magnetic moments, called domains, all lined up in the same direction. Heating gives the particles in the material enough energy to move and reorient the domains out of alignment, and randomising them destroys the net magnetisation of the piece. Once the material is allowed to cool on its own with no magnet nearby, the domains remain disordered, so the piece is no longer a magnet. Rapid cooling in the presence of a strong magnet would allow the domains to realign, which is why magnets are made by heating and then cooling them in a magnetic field.",
+      "explanation": "The explanation reduces magnetisation to the alignment of domains and shows that heat randomises them. Linking the same idea to the preparation of a magnet by cooling in a field shows genuine understanding rather than recall.",
+      "commonMistake": "Saying that heating melts the magnet, which is not the mechanism at all, and which would also not produce a sudden loss of magnetism below the melting point."
+    },
+    {
+      "id": "icse-9-phy-q-mag-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A small bar magnet is placed inside a closed soft iron box with no other material near it. A compass needle placed outside the box shows a very small deflection. The most likely reason is that:",
+      "options": [
+        "the soft iron shield absorbs the field lines that would otherwise emerge from the magnet",
+        "the magnet has lost its magnetism inside the box",
+        "the compass needle is not working correctly",
+        "the field lines have been destroyed by the iron"
+      ],
+      "correctIndex": 0,
+      "answer": "the soft iron shield absorbs the field lines that would otherwise emerge from the magnet",
+      "explanation": "The field lines that leave the north pole do not all travel through the air; a large share are guided through the soft iron itself, because soft iron offers very little opposition to magnetic flux. The lines are therefore carried round and closed inside the box, and very few escape to move the compass needle outside.",
+      "commonMistake": "Concluding that the magnet has been demagnetised by the iron. The magnet keeps its field; the shield simply diverts the field lines away from the space outside."
+    },
+    {
+      "id": "icse-9-phy-q-mag-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A student claims that a bar magnet will attract a piece of iron even when the magnet is turned right round, and therefore concludes that a magnet is not a two-pole object. Evaluate the claim and explain what observation would settle the question.",
+      "answer": "The observation is correct but the conclusion is not. A magnet does attract an unmagnetised piece of iron whichever end is brought near, because the iron is magnetised by induction and the near end of the iron becomes an unlike pole in either case. What the claim overlooks is that the iron is not a magnet before the approach, so attraction alone proves nothing. The settling observation is to bring a second, already magnetised bar magnet near: with like poles facing the two magnets repel, and with unlike poles facing they attract, and this holds whichever end of the first magnet is used, which confirms that it has two distinct poles and that like poles repel.",
+      "explanation": "The reasoning separates an observation that is genuinely true from a conclusion that does not follow from it. The repulsion test is what actually demonstrates the two-pole nature of a magnet.",
+      "commonMistake": "Agreeing that the magnet has only one kind of pole because it attracts in both orientations, and forgetting that the iron being attracted is magnetised by induction every time."
+    },
+    {
+      "id": "icse-9-phy-q-mag-23",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two magnets of equal strength and one unmagnetised iron nail are placed on a table. Describe what happens when the north pole of one magnet is brought near to the head of the nail, and then what happens when the south pole of the other magnet is brought near to the same point of the nail.",
+      "answer": "With the north pole brought near the head of the nail, the head becomes a south pole by induction and is attracted, so the nail moves towards the magnet. When the south pole of the second magnet is brought near the same end of the nail, the head becomes a north pole by induction instead, and it is still attracted to the approaching magnet. In both cases the nail moves towards the magnet that is brought near, because in each case the pole formed at the near end of the nail is the unlike one; the presence of the first magnet does not prevent the second magnet from magnetising the nail in its own direction.",
+      "explanation": "The important idea is that induction depends only on which pole is brought near, not on any pole the material already has. The nail is always drawn towards the magnet that is nearer to it.",
+      "commonMistake": "Saying the two magnets would repel through the nail, or that the first magnet would stop the second from magnetising the nail, which is not how the induced pole is determined."
+    },
+    {
+      "id": "icse-9-phy-q-mag-24",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A school laboratory stores a pair of bar magnets in a wooden box. Each magnet rests against a soft iron plate at one of its ends. Explain the purpose of the wooden box and of the two soft iron plates, and state what would happen to the strength of the magnets if the plates were removed and the magnets were left lying side by side with like poles adjacent.",
+      "answer": "The wooden box protects the magnets because wood is a non-magnetic material, so the box itself neither magnetises nor demagnetises them, and it also shields them from knocks. The soft iron plate at each end of a magnet is a keeper, and its purpose is to provide a low-reluctance path that completes the magnetic circuit through the two magnets, so that most of the field lines are carried through the keepers instead of through the air. With the keepers in place the magnetisation of each magnet is preserved. If the plates are removed and the magnets lie side by side with like poles adjacent, the field lines of one magnet enter the neighbouring pole of the other, which partially demagnetises both, so the strength of each magnet is gradually reduced and it will be noticeably weaker after storage in that arrangement.",
+      "explanation": "This is a classic application question. The keeper is explained through the idea that soft iron offers little opposition to magnetic flux and closes the circuit, and the consequence of storing like poles together follows from induction between the two magnets.",
+      "commonMistake": "Explaining the keeper as protecting the magnets from dust, which the wooden box already does, and missing that the plates carry the field lines and preserve the magnetisation."
+    },
+    {
+      "id": "icse-9-phy-q-mag-25",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete each statement using one word or one short phrase. (a) Like poles of two magnets ______ each other. (b) Outside a magnet, field lines are directed from the ______ pole to the ______ pole. (c) A magnet that quickly loses its magnetism when the magnet is removed is made of ______ iron. (d) A compass needle turns to align itself along the direction of the ______ field.",
+      "answer": "(a) repel; (b) north, south; (c) soft; (d) magnetic.",
+      "explanation": "Each blank tests one core idea of the chapter: the repulsion rule, the convention for field-line arrows outside a magnet, the material that gives a temporary magnet, and the fact that a compass needle is a test for field direction.",
+      "commonMistake": "Filling (b) with south, north, which is the direction of the field inside the magnet and is the reverse of the required convention outside it."
+    },
+    {
+      "id": "icse-9-phy-q-mag-26",
+      "type": "transformation",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A student writes: 'A magnet attracts a nail, therefore the nail is a magnet.' Rewrite the statement so that it is scientifically acceptable, and add one further sentence that would make it testable.",
+      "answer": "A scientifically acceptable rewrite is: 'A magnet attracts an iron nail, which is consistent with the nail being a magnetic material, but the attraction alone does not prove that the nail is a magnet.' A further sentence that makes it testable is: 'To test it, bring another magnet near to the nail, and if the two repel, the nail is a magnet, whereas if they attract, the nail is only a magnetic material that has been magnetised by induction.'",
+      "explanation": "Rewriting the claim correctly requires separating what was observed from what was concluded. Adding a testable sentence then forces the distinction between a magnetic material and a magnet, which is the real content of the original claim.",
+      "commonMistake": "Rewriting it as 'A magnet attracts a nail, so the nail is magnetic, but not necessarily a magnet', which stops short of the observation that actually distinguishes the two cases."
+    }
+  ]
+}

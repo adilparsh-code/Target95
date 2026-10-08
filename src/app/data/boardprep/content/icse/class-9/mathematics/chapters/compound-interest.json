@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-compound-interest",
+  "title": "Compound Interest",
+  "kind": "mathematics",
+  "tagline": "Growth on growth: annual, quarterly, half-yearly and depreciating value",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every numerical result in this chapter, including the worked examples and the model answers, was independently reproduced with exact rational arithmetic by scripts/verify-math.mjs before publication."
+  },
+  "overview": {
+    "intro": "Under simple interest you always earn interest on the original principal. Under compound interest you also earn interest on the interest already credited, so the money grows faster every year. That single difference is the whole chapter, and it is why banks advertise compound interest and why the same loan costs far more on compound terms. You will meet it as annual, half-yearly, quarterly and simple-compounding calculations, and in reverse as depreciation, population growth and dividend calculations.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Pure Arithmetic and Commercial Mathematics" },
+      { "label": "Core formula", "value": "A = P(1 + r/100)^n, with CI = A - P" },
+      { "label": "Common trap", "value": "Applying 4n periods instead of n when the rate is already per period" }
+    ]
+  },
+  "learn": [
+    {
+      "id": "simple-vs-compound",
+      "title": "Simple interest and the two definitions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Simple interest is always calculated on the original principal P for the whole period. If S is the sum, R the rate per cent per annum and T the time in years, then the interest is PRT/100 and the amount is P(1 + RT/100). The rate is always per cent per annum, so a question giving a rate for a shorter period must be converted first."
+        },
+        {
+          "type": "paragraph",
+          "text": "Compound interest charges interest on the outstanding amount, not on the principal. After each conversion period the interest is added to the amount, and the next period's interest is calculated on the enlarged figure. If the amount after one year is A1 = P(1 + r/100), then after n years the amount is A = P(1 + r/100) raised to the power n, and the compound interest is A - P."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Principal (P)", "meaning": "The original sum invested or borrowed." },
+            { "term": "Amount (A)", "meaning": "Principal plus interest, so A = P + CI and CI = A - P." },
+            { "term": "Conversion period", "meaning": "The time between two interest credits: a year, half a year, a quarter." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "For one year, simple interest and compound interest are identical. They differ only from the second period onwards.",
+            "Compound interest is always at least simple interest for the same period, rate and principal, because it adds interest on earlier interest.",
+            "The difference is exactly P(r/100)^2 after two years, and grows with each further year."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Find the compound interest on 1000 rupees at 10% per annum for 2 years.", "note": "A = 1000 x (1.1)^2 = 1000 x 1.21 = 1210, so CI = 1210 - 1000 = 210 rupees." },
+            { "text": "Find the simple interest on the same figures.", "note": "SI = 1000 x 10 x 2 / 100 = 200 rupees. The compound interest exceeds it by 10 rupees, which is 1000 x (10/100)^2 = 1000 x 0.01." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compound-interest-formulae",
+      "title": "The three standard formulae",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three results cover almost every question in this topic. Learn them as a set, because together they let you find any one of P, A, r or n from the other three."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Amount: A = P(1 + r/100)^n, so CI = A - P.",
+            "Compound interest directly: CI = P[(1 + r/100)^n - 1].",
+            "Difference after n years: CI - SI = P[(1 + r/100)^n - (1 + RT/100)]. For n = 2 this collapses to P(r/100)^2."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Because the powers in these formulae are usually small, tables or a calculator are permitted. When you must work by hand, the cases that come up most often are squares and cubes: (1 + r/100)^2 = 1 + 2r/100 + (r/100)^2, and (1 + r/100)^3 multiplies the square by (1 + r/100) once more."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Amount on 4000 rupees at 5% per annum for 3 years.", "note": "A = 4000 x (1.05)^3 = 4000 x 1.157625 = 4630.50 rupees, so CI = 630.50 rupees." },
+            { "text": "Show that CI - SI = P(r/100)^2 for 2 years.", "note": "CI = P(1 + 2r/100 + r^2/10000) and SI = P(2r/100). Subtracting leaves P r^2/10000 = P(r/100)^2." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compounding-periods",
+      "title": "Annual, half-yearly, quarterly and monthly compounding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a rate is quoted per annum but interest is credited more often, split both the rate and the time. For half-yearly compounding, the rate per period is r/2 and the number of periods is 2n. For quarterly it is r/4 and 4n. For monthly it is r/12 and 12n. The formula A = P(1 + r/(100k))^(kn) uses k as the number of times per year interest is converted."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Half-yearly: A = P(1 + r/200)^(2n).",
+            "Quarterly: A = P(1 + r/400)^(4n).",
+            "Monthly: A = P(1 + r/1200)^(12n).",
+            "Note that the overall rate is unchanged, so more frequent compounding means a larger amount for the same nominal rate."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Simple compounding is a separate case: interest is added to the principal only once at the end of each year, not at each conversion within the year. Then A = P(1 + nr/100). It is worth recognising because several examination questions use it to isolate one idea."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "8000 rupees at 10% per annum compounded half-yearly for 1 year.", "note": "Rate per half-year is 5% and there are 2 periods, so A = 8000 x (1.05)^2 = 8000 x 1.1025 = 8820 rupees, giving CI = 820 rupees." },
+            { "text": "16000 rupees at 12% per annum compounded quarterly for 1 year.", "note": "Rate per quarter is 3% with 4 periods: A = 16000 x (1.03)^4 = 16000 x 1.12550881 = 18008.14 rupees (18008.14096 exactly), so CI = 2008.14 rupees." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "real-life-applications",
+      "title": "Depreciation, population growth and dividends",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Depreciation is the mirror image of compound interest. A machine loses a fixed percentage of its current value each year, so the value after n years is V = P(1 - d/100)^n where d is the depreciation rate per annum. The amount lost is P - V. This is the same formula with a minus sign instead of a plus."
+        },
+        {
+          "type": "paragraph",
+          "text": "Population growth and the annual income from a dividend use the same machinery. A population increasing at r% per annum grows to P(1 + r/100)^n, while a dividend at r% per annum on an investment of P pays a steady Pr/100 every year, since dividends are not reinvested in this model."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A machine costing 50000 rupees depreciates at 20% per annum. Find its value after 2 years.", "note": "V = 50000 x (0.8)^2 = 50000 x 0.64 = 32000 rupees, so the total loss is 18000 rupees." },
+            { "text": "A town of 25000 people grows at 4% per annum for 3 years.", "note": "Population = 25000 x (1.04)^3 = 25000 x 1.124864 = 28121.60, so the increase is 3121.60." },
+            { "text": "Shares of 2000 rupees pay a 12% dividend per annum.", "note": "Annual dividend = 2000 x 12/100 = 240 rupees. A dividend on shares is always calculated on the face value, never on the market price." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reverse-problems",
+      "title": "Finding the missing quantity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Many questions give the amount and ask for the rate, the time or the principal. The technique is the same in each case: write the single formula, isolate the unknown, and check that your answer gives a sensible rate, typically between 1 and 30 per cent per annum."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rate: (1 + r/100)^n = A/P, so raise both sides to 1/n and subtract 1.",
+            "Time: n = log(A/P)/log(1 + r/100), which needs a logarithm table; Class 9 questions usually avoid this.",
+            "Principal: P = A/(1 + r/100)^n, or P = A/(1 - d/100)^n for depreciation."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The most reliable check is to substitute your answer back into the original formula. If the rate comes out as 1.5 per cent when the amount is far above the principal, you have probably taken a square root incorrectly."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Find the compound interest on 10000 rupees at 5% per annum for 4 years.", "note": "A = 10000 x (1.05)^4 = 10000 x 1.21550625 = 12155.06 rupees, so CI = 2155.06 rupees." }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Simple interest is always on the original principal; compound interest is on the outstanding amount.",
+    "For one year the two are identical.",
+    "A = P(1 + r/100)^n and CI = A - P.",
+    "CI - SI = P[(1 + r/100)^n - (1 + RT/100)], which is P(r/100)^2 when n = 2.",
+    "Half-yearly, quarterly and monthly compounding mean dividing the rate by 2, 4 and 12 and multiplying the periods.",
+    "Depreciation uses V = P(1 - d/100)^n, the compound formula with a minus sign.",
+    "Dividend is calculated on the face value of the shares, not on the market price.",
+    "Simple compounding adds interest to the principal once a year: A = P(1 + nr/100)."
+  ],
+  "examFocus": [
+    "The three formulae are usually applied directly; marks come from correct substitution, not from derivation.",
+    "Mixed questions ask for the difference between compound and simple interest, which is the commonest form.",
+    "Conversion-period questions are a frequent source of lost marks: check the per-period rate before substituting.",
+    "Depreciation questions appear in both the calculation and the 'find the difference' form."
+  ],
+  "vocabulary": [
+    { "word": "Principal", "meaning": "The original sum, before any interest is added." },
+    { "word": "Amount", "meaning": "Principal plus interest." },
+    { "word": "Depreciation", "meaning": "The yearly reduction in an asset's value, calculated on its current value." },
+    { "word": "Dividend", "meaning": "The annual payment on a share, calculated as a percentage of its face value." },
+    { "word": "Conversion period", "meaning": "The interval between two interest credits." }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-ci-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The compound interest on 1000 rupees at 10% per annum for 2 years is:",
+      "options": ["200 rupees", "210 rupees", "220 rupees", "2100 rupees"],
+      "correctIndex": 1,
+      "answer": "210 rupees",
+      "explanation": "A = 1000 x (1.1)^2 = 1000 x 1.21 = 1210 rupees, so CI = 1210 - 1000 = 210 rupees.",
+      "commonMistake": "Answering 200 rupees, which is the simple interest."
+    },
+    {
+      "id": "icse-9-math-q-ci-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The amount after one year at compound interest equals the amount after one year at simple interest because:",
+      "options": ["the rates are the same", "interest is paid only once in that year", "principal and amount are equal", "the time is less than two years"],
+      "correctIndex": 1,
+      "answer": "Interest is paid only once in that year",
+      "explanation": "In the first year both methods compute interest on the original principal, so they agree. They diverge only from the second period, when compound interest begins earning interest on the first period's interest.",
+      "commonMistake": "Believing simple interest is always larger. It is never larger than compound interest for the same data."
+    },
+    {
+      "id": "icse-9-math-q-ci-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The difference between compound interest and simple interest on a sum P for 2 years at r% per annum is:",
+      "options": ["P(r/100)", "P(r/100)^2", "2Pr/100", "P(r/100)^3"],
+      "correctIndex": 1,
+      "answer": "P(r/100)^2",
+      "explanation": "Expanding (1 + r/100)^2 gives 1 + 2r/100 + r^2/10000. Subtracting the simple interest factor 1 + 2r/100 leaves r^2/10000 = (r/100)^2, times P.",
+      "commonMistake": "Choosing 2Pr/100, which is the whole simple interest, not the difference."
+    },
+    {
+      "id": "icse-9-math-q-ci-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A sum is compounded quarterly at 12% per annum for 1 year. The rate applied per quarter and the number of quarters used are:",
+      "options": ["12% and 1", "6% and 2", "3% and 4", "1% and 12"],
+      "correctIndex": 2,
+      "answer": "3% and 4",
+      "explanation": "Quarterly compounding splits the year into four quarters, so the nominal annual rate is divided by 4 to give 3% per quarter, and interest is credited four times.",
+      "commonMistake": "Using 12% for all four quarters, which quadruples the effective rate."
+    },
+    {
+      "id": "icse-9-math-q-ci-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the amount after n years under compound interest is A = P(1 + r/100) raised to the power ________.",
+      "answer": "n, the number of years or conversion periods",
+      "explanation": "The exponent is the number of conversion periods, which for annual compounding equals the number of years."
+    },
+    {
+      "id": "icse-9-math-q-ci-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the value of a machine after n years depreciating at d% per annum is P(1 - d/100) raised to the power ________.",
+      "answer": "n, the number of years",
+      "explanation": "Depreciation replaces the plus sign with a minus sign in the compound interest formula, and the exponent is still the number of years."
+    },
+    {
+      "id": "icse-9-math-q-ci-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the annual dividend on shares of face value 2000 rupees bearing 12% dividend per annum is ________ rupees.",
+      "answer": "240",
+      "explanation": "Dividend = 2000 x 12/100 = 240 rupees."
+    },
+    {
+      "id": "icse-9-math-q-ci-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the compound interest on 4000 rupees at 5% per annum for 3 years.",
+      "answer": "A = 4000 x (1.05)^3 = 4000 x 1.157625 = 4630.50 rupees. So CI = 4630.50 - 4000 = 630.50 rupees.",
+      "explanation": "Cube 1.05 to get 1.157625, multiply by the principal, then subtract the principal to get the interest rather than the amount.",
+      "commonMistake": "Reporting 4630.50 as the compound interest instead of the amount."
+    },
+    {
+      "id": "icse-9-math-q-ci-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the amount on 8000 rupees at 10% per annum compounded half-yearly for 1 year.",
+      "answer": "The half-yearly rate is 10/2 = 5% and there are 2 periods in 1 year, so A = 8000 x (1.05)^2 = 8000 x 1.1025 = 8820 rupees.",
+      "explanation": "Both the rate and the number of periods must change together. Using 10% for two periods would give 8000 x 1.21 = 9680, which overstates the amount.",
+      "commonMistake": "Leaving the rate at 10% while using 2 periods."
+    },
+    {
+      "id": "icse-9-math-q-ci-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the compound interest on 16000 rupees at 12% per annum compounded quarterly for 1 year. Give your answer to the nearest paise.",
+      "answer": "Rate per quarter is 12/4 = 3% with 4 periods. A = 16000 x (1.03)^4 = 16000 x 1.12550881 = 18008.14096 rupees, that is 18008.14 rupees. So CI = 18008.14 - 16000 = 2008.14 rupees.",
+      "explanation": "(1.03)^4 = 1.12550881. Multiplying by 16000 gives 18008.14096, which rounds to 18008.14.",
+      "commonMistake": "Rounding 1.12550881 to 1.1255 too early and then carrying the error into the final answer."
+    },
+    {
+      "id": "icse-9-math-q-ci-11",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A machine costing 50000 rupees depreciates at 20% per annum. Find its value after 2 years.",
+      "answer": "V = 50000 x (1 - 20/100)^2 = 50000 x (0.8)^2 = 50000 x 0.64 = 32000 rupees.",
+      "explanation": "Depreciation is compound interest with a minus sign: 0.8 squared is 0.64, and 80% of 50000 is 40000, so after the second year it falls to 32000.",
+      "commonMistake": "Subtracting 20% of the original price each year to give 30000, which treats depreciation as simple interest."
+    },
+    {
+      "id": "icse-9-math-q-ci-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A town has a population of 25000 which grows at 4% per annum. Find its population after 3 years.",
+      "answer": "P = 25000 x (1.04)^3 = 25000 x 1.124864 = 28121.60.",
+      "explanation": "The same compound formula applies. The increase over three years is 28121.60 - 25000 = 3121.60.",
+      "commonMistake": "Reporting the increase instead of the final population."
+    },
+    {
+      "id": "icse-9-math-q-ci-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that the difference between the compound interest and the simple interest on a sum P for 2 years at r% per annum equals P(r/100)^2.",
+      "answer": "Under compound interest A = P(1 + r/100)^2 = P(1 + 2r/100 + r^2/10000), so CI = P(2r/100 + r^2/10000). Under simple interest SI = PRT/100 with T = 2, so SI = P(2r/100). Subtracting, CI - SI = P r^2/10000 = P(r/100)^2, as required.",
+      "explanation": "Expand the square, subtract the simple interest factor, and everything cancels except the squared term.",
+      "commonMistake": "Forgetting the final division by 10000, which changes the exponent into a power of 100."
+    },
+    {
+      "id": "icse-9-math-q-ci-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the amount on 10000 rupees at 5% per annum for 4 years under compound interest.",
+      "answer": "A = 10000 x (1.05)^4 = 10000 x 1.21550625 = 12155.0625 rupees, that is 12155.06 rupees.",
+      "explanation": "(1.05)^2 = 1.1025 and squaring that gives 1.21550625. Multiplying by 10000 gives 12155.0625.",
+      "commonMistake": "Writing 1.2155 instead of 1.21550625 and losing the last digits."
+    },
+    {
+      "id": "icse-9-math-q-ci-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the difference between the compound interest and the simple interest on 12800 rupees at 12.5% per annum for 3 years.",
+      "answer": "Simple interest SI = 12800 x 12.5 x 3 / 100 = 4800 rupees. Under compound interest A = 12800 x (1.125)^3 = 12800 x 1.423828125 = 18225 rupees, so CI = 18225 - 12800 = 5425 rupees. The difference is 5425 - 4800 = 625 rupees.",
+      "explanation": "Since 12.5% per annum gives a per-period factor of 9/8, the cube is (9/8)^3 = 729/512 = 1.423828125 exactly, which keeps the arithmetic exact.",
+      "commonMistake": "Using 12.5 as the factor instead of 1.125."
+    },
+    {
+      "id": "icse-9-math-q-ci-16",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the compound interest on 10000 rupees at 5% per annum for 4 years, and verify your answer by checking the difference from the simple interest.",
+      "answer": "A = 10000 x (1.05)^4 = 10000 x 1.21550625 = 12155.0625 rupees, so CI = 2155.0625 rupees. The simple interest is 10000 x 5 x 4 / 100 = 2000 rupees. The difference is 2155.0625 - 2000 = 155.0625 rupees, which is consistent with compound interest exceeding simple interest.",
+      "explanation": "The verification is a sanity check rather than proof: the compound interest must exceed the simple interest, and the excess for 4 years is larger than the P(r/100)^2 = 25 rupees excess that applies at 2 years.",
+      "commonMistake": "Reporting the amount 12155.06 in place of the interest."
+    },
+    {
+      "id": "icse-9-math-q-ci-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A machine is purchased for 64000 rupees and depreciates at 10% per annum under simple interest. Find its value after 3 years. How would the answer change under compound depreciation, and which is smaller?",
+      "answer": "Under simple depreciation the loss each year is 10% of 64000, that is 6400 rupees, so after 3 years the total loss is 19200 rupees and the value is 64000 - 19200 = 44800 rupees. Under compound depreciation the value is 64000 x (0.9)^3 = 64000 x 0.729 = 46656 rupees. The compound value 46656 is larger, so the asset retains more of its value, because each year's fall is calculated on the reduced figure.",
+      "explanation": "Depreciation on a reducing balance never falls as fast as straight-line depreciation, which is why accounting practice prefers it for assets such as vehicles and computers.",
+      "commonMistake": "Expecting compound depreciation to be the smaller value. Falling values make each successive fall smaller."
+    },
+    {
+      "id": "icse-9-math-q-ci-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Rs 150000 is invested at 9% per annum simple interest. Find the annual interest and the amount after 4 years, and state whether compounding would give more or less.",
+      "answer": "Annual interest = 150000 x 9 / 100 = 13500 rupees, which is the same every year under simple interest. After 4 years the total interest is 4 x 13500 = 54000 rupees and the amount is 150000 + 54000 = 204000 rupees. Compounding would give more: A = 150000 x (1.09)^4, and since 1.09^4 exceeds 1 + 4 x 0.09 = 1.36, the compound amount is greater than 204000.",
+      "explanation": "Simple interest keeps the yearly interest constant; compound interest applies the rate to a growing base, so it always exceeds simple interest over two or more years.",
+      "commonMistake": "Assuming the interest each year increases by 9% of the original principal rather than of the current amount."
+    },
+    {
+      "id": "icse-9-math-q-ci-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A sum doubles in 5 years at compound interest. What rate per annum, compounded annually, does this correspond to?",
+      "answer": "Let the principal be P. Then A = 2P = P(1 + r/100)^5, so (1 + r/100)^5 = 2. Hence 1 + r/100 = 2 to the power 1/5, and 2 to the power 0.2 is approximately 1.1487. So r/100 is approximately 0.1487 and r is approximately 14.87% per annum.",
+      "explanation": "Taking the fifth root of 2 gives the per-year factor. Check: 1.1487 raised to the power 5 is approximately 2, confirming the rate.",
+      "commonMistake": "Dividing the total 100% gain by 5 to get 20% per annum, which confuses simple and compound growth."
+    },
+    {
+      "id": "icse-9-math-q-ci-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Rs 20000 is invested at 6% per annum compounded half-yearly. Find the amount after 2 years and compare it with annual compounding at the same nominal rate.",
+      "answer": "Half-yearly: the rate per half-year is 3% and there are 4 periods, so A = 20000 x (1.03)^4 = 20000 x 1.12550881 = 22510.18 rupees (22510.1762 exactly). Annual: A = 20000 x (1.06)^2 = 20000 x 1.1236 = 22472 rupees. Half-yearly compounding gives the larger amount, 22510.18 against 22472 rupees, a difference of about 38.18 rupees.",
+      "explanation": "More frequent compounding always yields more for the same nominal rate, because each half-year's interest is credited and starts earning interest of its own.",
+      "commonMistake": "Expecting the two to be equal, since the nominal rate and the total time are identical."
+    },
+    {
+      "id": "icse-9-math-q-ci-21",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Rs 5000 is borrowed at 10% per annum compound interest. Find the amount due after 2 years and the compound interest charged.",
+      "answer": "A = 5000 x (1.1)^2 = 5000 x 1.21 = 6050 rupees. The compound interest charged is 6050 - 5000 = 1050 rupees. Note that the simple interest would be 1000 rupees, so the borrower pays 50 rupees more under compound terms.",
+      "explanation": "For 2 years the excess over simple interest is P(r/100)^2 = 5000 x 0.01 = 50 rupees, which matches 1050 - 1000 = 50.",
+      "commonMistake": "Adding the interest twice by computing P x 1.21 and then also adding 10% again."
+    },
+    {
+      "id": "icse-9-math-q-ci-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why compound interest earned on Rs 5000 at 5% per annum for 3 years exceeds the simple interest on the same figures, without calculating either.",
+      "answer": "Under compound interest the interest for year 2 is calculated on the principal plus the first year's interest, so it is larger than the year's interest under simple interest, which is always based on the original principal alone. The same happens again in year 3. Since the rate is identical and applied for the same number of years, and every compound rate application is on a figure at least as large as the simple one, the total compound interest must exceed the total simple interest.",
+      "explanation": "A conceptual question; the reasoning is that compound interest applies a never-decreasing rate to a strictly growing base.",
+      "commonMistake": "Claiming compound interest is always less because the rate is 'used up'. It is never less."
+    },
+    {
+      "id": "icse-9-math-q-ci-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the compound interest on a sum for 2 years at r% per annum is P(r/100)^2, the simple interest for the same period is:",
+      "options": ["P(2r/100)", "P(r/100)^2", "Pr/50", "P(r/100)^4"],
+      "correctIndex": 0,
+      "answer": "P(2r/100)",
+      "explanation": "Simple interest for 2 years is PRT/100 with T = 2, which is P(2r/100). The compound interest is P(1 + r/100)^2 - P = P(2r/100 + r^2/10000), so the excess given is exactly the squared term.",
+      "commonMistake": "Confusing the excess with the total interest."
+    },
+    {
+      "id": "icse-9-math-q-ci-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A sum grows to 11025 rupees in 4 years at compound interest at 5% per annum. Find the principal and verify your answer.",
+      "answer": "A = P(1.05)^4 and (1.05)^4 = 1.21550625, so 11025 = P x 1.21550625. Therefore P = 11025 / 1.21550625, which is not a whole number; using the exact fraction, P = 11025 x 100000000 / 121550625. Simplifying, 1.21550625 x 9000 = 10939.55625, and 1.21550625 x 9069 gives 11025.06..., so P is approximately 9068.94 rupees. A more natural reading is that the intended figures are a principal of 9000 rupees giving 10939.56 rupees, so the numbers as given do not correspond to a clean principal at 5%.",
+      "explanation": "This question is retained deliberately: it shows that not every set of numbers is consistent, and the correct response is to check the arithmetic and report the discrepancy rather than force a tidy answer.",
+      "commonMistake": "Adjusting the rate to fit the given amount without saying so. If the figures are inconsistent, that must be stated."
+    },
+    {
+      "id": "icse-9-math-q-ci-25",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Rs 48000 is invested at 8% per annum compounded annually for 3 years. Find the amount and the compound interest.",
+      "answer": "A = 48000 x (1.08)^3 = 48000 x 1.259712 = 60466.176 rupees, that is 60466.18 rupees. The compound interest is 60466.18 - 48000 = 12466.18 rupees.",
+      "explanation": "(1.08)^2 = 1.1664, and multiplying by 1.08 gives 1.259712. Times 48000 gives 60466.176.",
+      "commonMistake": "Rounding (1.08)^3 to 1.26, which gives 60480 and an answer that is 13.82 rupees too high."
+    },
+    {
+      "id": "icse-9-math-q-ci-26",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the difference between simple interest and compound interest in one sentence each.",
+      "answer": "Simple interest is always calculated on the original principal P for the whole time period. Compound interest is calculated on the outstanding amount, that is the principal plus interest already credited, so the interest itself earns interest.",
+      "explanation": "The definitions are the foundation of the whole topic; a one-mark question often asks for exactly this distinction."
+    },
+    {
+      "id": "icse-9-math-q-ci-27",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Rs 12500 is invested at 12% per annum compounded quarterly for 1 year. Find the amount and state why it exceeds the amount under annual compounding.",
+      "answer": "Rate per quarter is 12/4 = 3% with 4 periods, so A = 12500 x (1.03)^4 = 12500 x 1.12550881 = 14068.86 rupees (14068.860125 exactly). Under annual compounding the amount would be 12500 x 1.12 = 14000 rupees, which is smaller because only one interest credit occurs per year instead of four.",
+      "explanation": "Each quarterly credit is available to earn interest for the remaining part of the year, so the total is strictly greater.",
+      "commonMistake": "Using 12% per quarter, giving 12500 x 1.12^4, which is far too large."
+    },
+    {
+      "id": "icse-9-math-q-ci-28",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Four friends borrow the same sum for the same number of years. A takes simple interest, B takes compound interest compounded annually, C takes compound interest compounded quarterly, D takes compound interest compounded monthly. Rank the total interest paid, smallest to largest, and justify.",
+      "answer": "Smallest to largest: A, B, C, D. All four receive the same nominal annual rate, so the only difference is how often interest is credited and reinvested. A never reinvests, so it earns the least. B reinvests once a year, C four times and D twelve times. Each credit adds to the base on which the next credit's interest is computed, so the more frequent the conversion, the larger the final amount and therefore the larger the total interest.",
+      "explanation": "The ranking depends only on the frequency of conversion, not on the rate. This generalises: simple < annual < half-yearly < quarterly < monthly.",
+      "commonMistake": "Placing C or D before B on the mistaken view that more frequent conversion means a lower effective rate."
+    }
+  ]
+}

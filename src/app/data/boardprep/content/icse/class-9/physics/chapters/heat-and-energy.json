@@ -1,0 +1,541 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-physics-heat-energy",
+  "title": "Heat and Energy",
+  "kind": "physics",
+  "tagline": "Heat versus temperature, specific heat capacity, latent heat and energy sources",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class IX Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed by scripts/verify-math.mjs. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Heat is not the same thing as temperature, and confusing the two causes more errors in this unit than any other. Temperature tells you how hot something is, which depends only on how fast its particles are moving on average. Heat is the energy transferred because of a temperature difference, so it depends on how much substance there is, how hot it is and what it is made of. That dependence is captured by the specific heat capacity, and the idea that a change of state needs energy without any change of temperature leads to latent heat. The chapter closes with the anomalous behaviour of water, which is the reason lakes freeze from the top down and why life survives in winter.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Heat and Energy"
+      },
+      {
+        "label": "Key formula",
+        "value": "Heat supplied, Q = m c (t2 - t1)"
+      },
+      {
+        "label": "Units",
+        "value": "Specific heat capacity in joules per kilogram per kelvin; heat in joules or calories"
+      },
+      {
+        "label": "Conversion",
+        "value": "1 calorie = 4.2 joules and 1 kilocalorie = 4200 joules"
+      },
+      {
+        "label": "Anomalous expansion",
+        "value": "Water contracts on heating between 0 and 4 degrees Celsius and expands above 4 degrees Celsius"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "heat-vs-temperature",
+      "title": "Heat, temperature and the kinetic interpretation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Temperature is a measure of the average kinetic energy of the particles of a body and tells you nothing about the amount of energy in it. Heat is the energy transferred from a hotter body to a cooler one because of the difference in their temperatures. A bath of hot water can contain far more heat than a cup of hot water at the same temperature."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Heat",
+              "meaning": "Energy transferred because of a temperature difference. It is a process, not a substance, and is measured in joules or calories."
+            },
+            {
+              "term": "Temperature",
+              "meaning": "A measure of the average kinetic energy of the particles, measured in degrees Celsius or kelvin."
+            },
+            {
+              "term": "Specific heat capacity",
+              "meaning": "The heat needed to raise the temperature of 1 kg of a substance by 1 kelvin, measured in J/(kg K)."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heat flows from a body at higher temperature to one at lower temperature, and stops when the temperatures are equal.",
+            "Water is used as a coolant in engines because it has a high specific heat capacity, so it absorbs a lot of heat for a small rise in temperature.",
+            "The kelvin is the SI unit of temperature and the Celsius and kelvin scales have equal-sized divisions, differing by 273.",
+            "1 calorie is the heat needed to raise 1 gram of water by 1 kelvin, and equals 4.2 joules.",
+            "Metals such as aluminium and copper are good conductors of heat; wood, plastic and glass are insulators."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Convert a temperature of 25 degrees Celsius to kelvin.",
+              "note": "K = C + 273 = 25 + 273 = 298 K."
+            },
+            {
+              "text": "Express 5000 J of heat in calories, taking 1 calorie as 4.2 J.",
+              "note": "5000/4.2 = 1190.5 calories, approximately 1191 calories."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "specific-heat",
+      "title": "Calculating heat: Q = m c delta T",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The heat needed to raise the temperature of a body is proportional to its mass, to its specific heat capacity and to the rise in temperature. These three facts combine into the single formula used in almost every numerical question of this unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Q = m c delta T, where Q is the heat in joules, m the mass in kilograms, c the specific heat capacity in J/(kg K) and delta T the change in temperature in kelvin.",
+            "A change of 1 kelvin equals a change of 1 degree Celsius in size, so temperature differences may be used in either scale.",
+            "Water has a specific heat capacity of about 4200 J/(kg K) and aluminium about 900 J/(kg K).",
+            "The specific heat capacity of a substance is the energy needed per kilogram per kelvin, so a large value means much heat is absorbed for little warming.",
+            "The law of conservation of energy means the heat lost by the hot body equals the heat gained by the cold body when no heat is lost to the surroundings."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the heat required to raise 2 kg of water from 20 degrees Celsius to 60 degrees Celsius, taking the specific heat capacity of water as 4200 J per kg per K.",
+              "note": "Q = m c delta T = 2 x 4200 x (60 minus 20) = 2 x 4200 x 40 = 336000 J."
+            },
+            {
+              "text": "2000 J of heat is supplied to 500 g of aluminium of specific heat capacity 900 J per kg per K. Find the rise in temperature.",
+              "note": "Convert the mass: 500 g = 0.5 kg. The rise is delta T = Q/(mc) = 2000/(0.5 x 900) = 2000/450 = 4.44 K."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "change-of-state",
+      "title": "Latent heat and change of state",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a substance changes state, energy continues to be absorbed or released even though its temperature does not change. The energy goes into breaking down or building up the forces between the particles rather than into raising the kinetic energy. This energy is the latent heat, and it is why boiling water stays at 100 degrees Celsius until all the liquid has vaporised."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Latent heat of fusion is the heat needed to change 1 kg of solid into liquid at the same temperature.",
+            "Latent heat of vaporisation is the heat needed to change 1 kg of liquid into gas at the same temperature.",
+            "The temperature stays constant throughout a change of state; the energy supplied is the latent heat.",
+            "Steam at 100 degrees Celsius burns more severely than boiling water at 100 degrees Celsius because the steam carries a large amount of latent heat in addition to the same temperature.",
+            "Evaporation cools the remaining liquid because the fastest-moving particles escape and carry energy away."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Explain why a burn from steam is worse than a burn from water at the same temperature.",
+              "note": "Both are at the same temperature, so the sensible heat is the same. However, steam has absorbed the latent heat of vaporisation on its way from the boiling water, and it releases all of that additional energy when it condenses on the skin. Water that has never been vaporised carries none of this latent heat, so the steam delivers far more energy and burns more deeply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anomalous-expansion",
+      "title": "Anomalous expansion of water",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Almost every substance expands when heated and contracts when cooled. Water behaves in the opposite way between 0 and 4 degrees Celsius, where it expands on cooling and contracts on heating. Its density is therefore greatest at 4 degrees Celsius, which is why water bodies freeze from the surface downwards rather than from the bottom."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Water expands on cooling between 0 and 4 degrees Celsius and expands on heating above 4 degrees Celsius, so 4 degrees Celsius is the point of maximum density.",
+            "Ice is less dense than water, so it floats and insulates the water below, which is why aquatic life survives in a frozen lake.",
+            "In winter the water at the surface cools, reaches 4 degrees Celsius, then becomes colder still and less dense, rising to the top where it finally freezes.",
+            "This expansion on freezing is also why a pipe full of water can burst in winter.",
+            "Mercury, unlike water, expands uniformly on heating and does not freeze at ordinary temperatures."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why is ice less dense than water even though most substances are denser in the solid state?",
+              "note": "In ice the molecules are held in an open hexagonal arrangement with spaces between them, so a given mass occupies a larger volume than the same mass of liquid water. The density is therefore lower and the ice floats."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy-sources",
+      "title": "Forms and sources of energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Energy is measured in joules and the SI unit of power is the watt, which is one joule per second. Energy is never created or destroyed; it is only converted from one form into another, which is the law of conservation of energy."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Non-renewable sources such as coal, oil, gas and nuclear fuel will be exhausted.",
+            "Renewable sources such as sunlight, wind, water and biomass are continually replenished.",
+            "Energy is wasted as heat in most useful appliances, so efficiency is always less than 100 percent.",
+            "1 watt is one joule per second and 1 kilowatt is 1000 watts."
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Temperature measures average kinetic energy; heat is energy transferred because of a temperature difference.",
+    "The SI unit of heat is the joule; 1 calorie = 4.2 joules and 1 kilocalorie = 4200 joules.",
+    "K = C + 273, and a difference of 1 K equals a difference of 1 degree Celsius.",
+    "Q = m c delta T, with c the specific heat capacity in J/(kg K).",
+    "Specific heat capacity of water is about 4200 J/(kg K) and of aluminium about 900 J/(kg K).",
+    "Water is a good coolant because its specific heat capacity is high.",
+    "During a change of state the temperature stays constant while energy is absorbed or released.",
+    "Latent heat of fusion is for melting and latent heat of vaporisation is for boiling.",
+    "Steam burns worse than water at the same temperature because steam carries latent heat.",
+    "Evaporation cools the liquid because the fastest particles escape carrying energy.",
+    "Water expands on cooling between 0 and 4 degrees Celsius, so its density is maximum at 4 degrees Celsius.",
+    "Ice floats because it is less dense than water, insulating the water beneath it.",
+    "Energy is converted rather than created or destroyed."
+  ],
+  "examFocus": [
+    "Always convert grams to kilograms before using Q = m c delta T, since the formula assumes kilograms and this is the single most common error.",
+    "Remember that delta T is a difference in temperature, so Celsius may be used directly even though the SI unit is the kelvin.",
+    "Heat lost by the hot body equals heat gained by the cold body in a mixing question, and that equality is the key to the unknown quantity.",
+    "Questions about steam versus boiling water are always about latent heat, not about temperature.",
+    "Anomalous expansion questions should be answered by comparing densities, because 4 degrees Celsius is defined as the point of maximum density."
+  ],
+  "vocabulary": [
+    {
+      "word": "Heat",
+      "meaning": "Energy transferred between bodies because of a difference in temperature."
+    },
+    {
+      "word": "Temperature",
+      "meaning": "A measure of the average kinetic energy of the particles of a body."
+    },
+    {
+      "word": "Specific heat capacity",
+      "meaning": "The heat required to raise the temperature of 1 kg of a substance by 1 kelvin."
+    },
+    {
+      "word": "Latent heat",
+      "meaning": "The heat absorbed or released during a change of state without any change in temperature."
+    },
+    {
+      "word": "Calorie",
+      "meaning": "The heat needed to raise 1 gram of water by 1 kelvin, equal to 4.2 joules."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-phy-q-hea-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of heat is the:",
+      "options": ["joule", "calorie", "kelvin", "watt"],
+      "correctIndex": 0,
+      "answer": "joule",
+      "explanation": "Heat is a form of energy and energy is measured in joules in the SI system. The calorie is a non-SI unit equal to 4.2 joules, the kelvin measures temperature and the watt measures power.",
+      "commonMistake": "Choosing the calorie, which is widely used but is not an SI unit."
+    },
+    {
+      "id": "icse-9-phy-q-hea-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The temperature 0 degrees Celsius corresponds to:",
+      "options": ["273 K", "0 K", "373 K", "100 K"],
+      "correctIndex": 0,
+      "answer": "273 K",
+      "explanation": "The two scales have equal-sized divisions and differ by 273, so 0 degrees Celsius is 273 K and 100 degrees Celsius is 373 K.",
+      "commonMistake": "Saying 273 degrees Celsius, confusing a temperature on one scale with the same reading on the other."
+    },
+    {
+      "id": "icse-9-phy-q-hea-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Water is used as a coolant in car engines because water has:",
+      "options": ["a high specific heat capacity", "a low specific heat capacity", "a high latent heat only", "no conductivity"],
+      "correctIndex": 0,
+      "answer": "a high specific heat capacity",
+      "explanation": "A high specific heat capacity means water absorbs a large amount of heat for only a small rise in temperature, so it can carry away a great deal of heat while staying relatively cool.",
+      "commonMistake": "Choosing a low specific heat capacity, which would make the coolant heat up rapidly and fail to remove heat."
+    },
+    {
+      "id": "icse-9-phy-q-hea-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "During boiling of water at standard atmospheric pressure, the temperature of the water:",
+      "options": ["remains constant at 100 degrees Celsius", "steadily increases", "steadily decreases", "falls to 0 degrees Celsius"],
+      "correctIndex": 0,
+      "answer": "remains constant at 100 degrees Celsius",
+      "explanation": "All the heat supplied during boiling is absorbed as latent heat to convert liquid into vapour, so the temperature does not rise until the liquid has been converted.",
+      "commonMistake": "Assuming the temperature rises because heat is being supplied, ignoring that the heat is latent heat."
+    },
+    {
+      "id": "icse-9-phy-q-hea-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Water has its maximum density at:",
+      "options": ["4 degrees Celsius", "0 degrees Celsius", "100 degrees Celsius", "25 degrees Celsius"],
+      "correctIndex": 0,
+      "answer": "4 degrees Celsius",
+      "explanation": "Water expands on cooling between 0 and 4 degrees Celsius and on heating above 4 degrees Celsius, so the point of maximum density is 4 degrees Celsius.",
+      "commonMistake": "Saying 0 degrees Celsius, which is the temperature at which water is least dense because ice is even less dense."
+    },
+    {
+      "id": "icse-9-phy-q-hea-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the heat needed to raise the temperature of 1 kg of a substance by 1 kelvin is called its specific ________.",
+      "answer": "heat capacity, measured in joules per kilogram per kelvin",
+      "explanation": "Specific heat capacity is defined per kilogram and per kelvin, which is why substances such as water with a large value absorb much heat for little warming.",
+      "commonMistake": "Answering capacity alone, which omits the per-kilogram basis that makes the quantity specific."
+    },
+    {
+      "id": "icse-9-phy-q-hea-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: during a change of state the temperature remains constant because the energy absorbed is called the ________ heat.",
+      "answer": "latent heat, which goes into breaking or forming the forces between particles",
+      "explanation": "The energy supplied during a change of state changes the arrangement of the particles rather than their average kinetic energy, so the temperature stays the same.",
+      "commonMistake": "Answering sensible heat, which is the term for the energy that does change the temperature."
+    },
+    {
+      "id": "icse-9-phy-q-hea-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish clearly between heat and temperature.",
+      "answer": "Temperature is a measure of the average kinetic energy of the particles of a body, so it tells you how hot the body is but nothing about how much energy the body contains. Heat is the energy transferred from one body to another because of the difference in their temperatures, so it depends on the mass, the specific heat capacity and the change in temperature, and it is measured in joules. A cup of water at 100 degrees Celsius therefore has the same temperature as a bath of water at 100 degrees Celsius but far less heat.",
+      "explanation": "Temperature is an intensive property describing a body; heat is an extensive quantity describing a transfer of energy.",
+      "commonMistake": "Saying a larger body is at a higher temperature, when its temperature can be exactly the same as that of a smaller body."
+    },
+    {
+      "id": "icse-9-phy-q-hea-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the heat required to raise 2 kg of water from 20 degrees Celsius to 60 degrees Celsius, taking the specific heat capacity of water as 4200 J per kg per K.",
+      "answer": "Q = m c delta T = 2 x 4200 x (60 minus 20) = 2 x 4200 x 40 = 336000 J.",
+      "explanation": "The change in temperature is 40 kelvin, and a difference of 40 degrees Celsius equals a difference of 40 kelvin.",
+      "commonMistake": "Using 60 rather than 40 for the change in temperature, forgetting that the formula needs the difference."
+    },
+    {
+      "id": "icse-9-phy-q-hea-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "2000 J of heat is supplied to 500 g of aluminium of specific heat capacity 900 J per kg per K. Find the rise in temperature.",
+      "answer": "Convert the mass to kilograms: 500 g = 0.5 kg. Rearranging Q = m c delta T gives delta T = Q/(m c) = 2000/(0.5 x 900) = 2000/450 = 4.44 K, so the temperature rises by about 4.4 kelvin.",
+      "explanation": "The formula must be rearranged for the temperature change and the mass converted to kilograms before substitution.",
+      "commonMistake": "Using 500 instead of 0.5 in the mass, which makes the rise 444 times too small."
+    },
+    {
+      "id": "icse-9-phy-q-hea-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "An iron block of mass 2 kg at 100 degrees Celsius is dropped into 4 kg of water at 20 degrees Celsius in an insulated vessel, and the final temperature is the same. Taking the specific heat capacity of iron as 450 J per kg per K and of water as 4200 J per kg per K, find the final temperature.",
+      "answer": "Since the vessel is insulated, no heat escapes, so the heat lost by the iron equals the heat gained by the water. Writing 2 x 450 x (100 minus T) = 4 x 4200 x (T minus 20) gives 900(100 minus T) = 16800(T minus 20). Expanding, 90000 minus 900T = 16800T minus 336000, so 426000 = 17700T and T = 24.07 degrees Celsius. The value lies between 20 and 100 degrees Celsius, as it must.",
+      "explanation": "Conservation of energy gives one equation in the single unknown final temperature, and the answer must lie between the two initial temperatures.",
+      "commonMistake": "Assuming the final temperature is the average of the two initial temperatures, which is not how heat capacities enter the result."
+    },
+    {
+      "id": "icse-9-phy-q-hea-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "How much energy in joules is needed to melt 500 g of ice at 0 degrees Celsius, and how much additional energy is needed to raise the resulting water from 0 degrees Celsius to 20 degrees Celsius? Take the specific latent heat of fusion of ice as 334 J per g and the specific heat capacity of water as 4200 J per kg per K.",
+      "answer": "To melt the ice, Q = mL = 500 x 334 = 167000 J. The temperature stays at 0 degrees Celsius throughout the melting. To raise the 0.5 kg of water from 0 to 20 degrees Celsius, Q = m c delta T = 0.5 x 4200 x 20 = 42000 J. The total energy needed is therefore 167000 + 42000 = 209000 J.",
+      "explanation": "Melting and then warming are two separate stages requiring two separate calculations with two different formulas.",
+      "commonMistake": "Applying the m c delta T formula to the melting stage, where the temperature does not change at all."
+    },
+    {
+      "id": "icse-9-phy-q-hea-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solar water heater of area 2 m squared absorbs solar energy at an average rate of 800 W per square metre for 6 hours a day. How much energy does it collect in one day, and what mass of water is raised by 20 degrees Celsius by this energy? Take the specific heat capacity of water as 4200 J per kg per K.",
+      "answer": "The power absorbed is 800 x 2 = 1600 W, that is 1600 J per second. Over 6 hours, that is 6 x 3600 = 21600 seconds, so the energy collected is 1600 x 21600 = 34560000 J, that is 3.456 x 10 to the power 7 J. If this raises the mass m of water by 20 degrees Celsius, then m c delta T = energy, so m = 34560000/(4200 x 20) = 34560000/84000 = 411.4 kg of water.",
+      "explanation": "Power is energy per second, so the time must be converted to seconds before the energy can be found, and then Q = m c delta T gives the mass.",
+      "commonMistake": "Multiplying the power by 6 instead of by 21600 seconds, which treats the time in hours as seconds."
+    },
+    {
+      "id": "icse-9-phy-q-hea-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a burn from steam at 100 degrees Celsius is more severe than a burn from boiling water at 100 degrees Celsius.",
+      "answer": "Both substances are at the same temperature, so the sensible heat they would deliver is the same and the temperature alone cannot explain the difference. However, to become steam, water must first absorb the latent heat of vaporisation, which is a large quantity of energy per kilogram, and this energy was absorbed without any rise in temperature. When the steam touches the skin it condenses back to water and releases all of that latent heat in addition to any sensible cooling. Boiling water has never absorbed that latent heat, so it delivers far less total energy to the skin and burns less deeply.",
+      "explanation": "The extra danger comes from the latent heat the steam carries, which is released on condensation and is invisible in the temperature.",
+      "commonMistake": "Saying the steam is hotter than the water, which is false since both are at 100 degrees Celsius."
+    },
+    {
+      "id": "icse-9-phy-q-hea-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why fish survive in a lake that has frozen over during a severe winter.",
+      "answer": "Water has the anomalous property of expanding on cooling between 0 and 4 degrees Celsius, so its density is greatest at 4 degrees Celsius. As the lake cools in winter, the water at 4 degrees Celsius sinks to the bottom while the colder water above it, being less dense, rises. This convection continues until the surface water reaches 0 degrees Celsius and freezes. Ice is less dense than liquid water, so the ice floats and forms a lid on the surface. Because ice is a poor conductor of heat, it greatly reduces the rate at which heat escapes from the water beneath, so the water under the ice stays close to 4 degrees Celsius. Fish living in this layer find the temperature close to that of their normal habitat, and the oxygen dissolved in the water is trapped beneath the ice.",
+      "explanation": "The ice floats and insulates rather than sinking and freezing the whole lake, which preserves liquid water at about 4 degrees Celsius.",
+      "commonMistake": "Saying the whole lake freezes from the bottom up, which would destroy the habitat rather than protect it."
+    },
+    {
+      "id": "icse-9-phy-q-hea-16",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Convert a body of heat of 2520 J into calories and kilocalories.",
+      "answer": "In calories, 2520/4.2 = 600 calories. In kilocalories, a kilocalorie is 4200 J, so 2520/4200 = 0.6 kilocalories.",
+      "explanation": "A kilocalorie is exactly a thousand calories, and each calorie is 4.2 joules.",
+      "commonMistake": "Dividing by 4.2 once and reporting the result as kilocalories, which is off by a factor of 1000."
+    },
+    {
+      "id": "icse-9-phy-q-hea-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why a metal spoon feels much colder than a wooden spoon when both are left in the same room.",
+      "answer": "Both spoons are at exactly the same temperature as the room, since they have been left there long enough to reach thermal equilibrium. Metal is a good conductor of heat and draws heat rapidly from the hand, so the nerve endings in the skin detect a fall in skin temperature and report cold. Wood is a poor conductor of heat and passes very little heat away from the hand, so the skin hardly cools at all. The sensation of cold is therefore produced by the rate of heat loss from the skin and not by any difference in the temperature of the two spoons.",
+      "explanation": "The two spoons have equal temperatures; the difference in sensation comes entirely from the rate of heat conduction into the hand.",
+      "commonMistake": "Saying the metal spoon is actually at a lower temperature, which is only true for the brief moment it is first touched."
+    },
+    {
+      "id": "icse-9-phy-q-hea-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the presence of sweat on the skin cool the body on a hot day?",
+      "answer": "Sweat evaporates from the skin, and evaporation requires energy taken from the liquid itself. The heat required for evaporation is drawn from the surrounding skin, which lowers the temperature of the skin and so cools the body. Evaporation is faster in dry, moving air, which is why sweating cools less effectively in humid weather when the surrounding air already contains much water vapour.",
+      "explanation": "Evaporation removes energy from the liquid and hence from the body, so the cooling comes at the cost of energy in the evaporated liquid.",
+      "commonMistake": "Saying the sweat itself is cold, when the cooling is caused by the energy needed for evaporation."
+    },
+    {
+      "id": "icse-9-phy-q-hea-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A body at 80 degrees Celsius is cooled at a rate of 6 degrees Celsius per minute. How long does it take to reach 20 degrees Celsius, and what is the heat lost per kilogram if the specific heat capacity is 400 J per kg per K?",
+      "answer": "The fall in temperature is 80 minus 20 = 60 degrees Celsius, so the time is 60/6 = 10 minutes. The heat lost per kilogram is c delta T = 400 x 60 = 24000 J per kg, that is 2.4 x 10 to the power 4 J for each kilogram of the body.",
+      "explanation": "The cooling rate gives the time for the stated fall, and the heat lost depends only on the specific heat capacity and the fall.",
+      "commonMistake": "Dividing 60 by 6 and reporting 6 minutes, or omitting the multiplication by the specific heat capacity."
+    },
+    {
+      "id": "icse-9-phy-q-hea-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why the process of evaporation cools the remaining liquid, and why the cooling is greater when the surface is large and the air is moving.",
+      "answer": "At any instant the molecules in a liquid have a range of speeds, and the fastest molecules at the surface have enough energy to escape into the air. The molecules that leave are therefore the ones with above-average kinetic energy, so the average kinetic energy of the molecules remaining in the liquid falls, and its temperature drops. A larger surface area gives more molecules the chance to escape at once, so evaporation is faster and more cooling occurs. Moving air sweeps away the saturated layer of vapour above the surface, removing the vapour that would otherwise slow further escape, so evaporation and therefore cooling are again greater.",
+      "explanation": "The molecules that escape carry away more than the average energy, so their loss lowers the average and cools the liquid.",
+      "commonMistake": "Saying the escaping molecules are colder, when in fact they are hotter than average."
+    },
+    {
+      "id": "icse-9-phy-q-hea-21",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define the unit watt and state what it measures.",
+      "answer": "The watt is the SI unit of power, and it measures the rate of doing work or of transferring energy. One watt is one joule per second, so an appliance of 1000 W transfers 1000 J of energy every second. Since 1000 W is one kilowatt, a 1000 W appliance uses one kilowatt-hour of energy when run for one hour.",
+      "explanation": "Power is energy per unit time, and the watt is the SI unit that expresses this rate.",
+      "commonMistake": "Treating the watt as a unit of energy, which is the joule rather than the watt."
+    },
+    {
+      "id": "icse-9-phy-q-hea-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why is the specific heat capacity of water used in the definition of the calorie?",
+      "answer": "The calorie is defined as the heat needed to raise 1 gram of water by 1 kelvin, so the definition depends on having an agreed reference substance whose value is treated as constant. Water was chosen because it be available in pure form, because its specific heat capacity is high enough to give a measurable quantity of heat for a small mass, and because its properties are well known over a wide range of temperatures. The need for a reference substance is the same reason the kelvin scale uses the triple point of water to fix its zero.",
+      "explanation": "A definition of a unit requires a reference substance so that everyone measuring the same effect obtains the same value.",
+      "commonMistake": "Saying it is because water boils at 100 degrees Celsius, which is unrelated to the choice of reference substance."
+    },
+    {
+      "id": "icse-9-phy-q-hea-23",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the mass of water that can be heated through 10 degrees Celsius by 10000 J of energy, taking the specific heat capacity of water as 4200 J per kg per K.",
+      "answer": "Rearranging Q = m c delta T gives m = Q/(c delta T) = 10000/(4200 x 10) = 10000/42000 = 0.238 kg, that is about 238 g of water.",
+      "explanation": "The mass is the energy divided by the product of the specific heat capacity and the temperature rise.",
+      "commonMistake": "Dividing by the specific heat capacity alone, which omits the factor of the temperature rise."
+    },
+    {
+      "id": "icse-9-phy-q-hea-24",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A closed bottle of water is placed in a freezer and is found to crack. Explain why.",
+      "answer": "Water expands when it freezes, unlike almost every other substance which contracts. On cooling towards 0 degrees Celsius the water first expands normally, and between 0 and 4 degrees Celsius it continues to expand as it cools further, while on freezing into ice it expands by about one ninth of its volume. The bottle is closed and rigid, so the expanding ice has nowhere to go and the ice exerts an enormous pressure on the bottle walls, which are forced apart and crack. This is the practical reason why a water pipe left full during a frost can burst.",
+      "explanation": "The rigid closed container prevents the volume expansion, so the pressure rises until the container fails.",
+      "commonMistake": "Saying the water contracted and squeezed the bottle, when the expansion on freezing is what causes the damage."
+    },
+    {
+      "id": "icse-9-phy-q-hea-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State whether the boiling point of water changes when the atmospheric pressure on it is reduced, and in which direction.",
+      "answer": "The boiling point falls when the atmospheric pressure is reduced. Water boils when its vapour pressure equals the pressure of the surrounding atmosphere, so if the surrounding pressure is lowered the vapour pressure reaches that value at a lower temperature. This is why water boils at a temperature below 100 degrees Celsius at high altitude, and why a pressure cooker, which raises the pressure above atmospheric, boils water at a higher temperature and cooks food faster.",
+      "explanation": "Boiling occurs when vapour pressure equals external pressure, so changing the external pressure moves the boiling point.",
+      "commonMistake": "Saying the boiling point rises when pressure is reduced, which reverses the relationship."
+    },
+    {
+      "id": "icse-9-phy-q-hea-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A hot metal plate cools from 90 degrees Celsius to 60 degrees Celsius and releases 63000 J to the surroundings. If the mass of the plate is 3 kg, find its specific heat capacity.",
+      "answer": "The fall in temperature is 90 minus 60 = 30 K. Rearranging Q = m c delta T gives c = Q/(m delta T) = 63000/(3 x 30) = 63000/90 = 700 J per kg per K.",
+      "explanation": "The specific heat capacity is the energy lost per kilogram per kelvin, so both the mass and the fall in temperature must be divided out.",
+      "commonMistake": "Using the final temperature of 60 instead of the fall of 30, which would give 350 J per kg per K."
+    }
+  ]
+}

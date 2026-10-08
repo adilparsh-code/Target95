@@ -1,0 +1,552 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-triangles",
+  "title": "Triangles",
+  "kind": "mathematics",
+  "tagline": "Congruence, inequalities, the mid-point theorem and Pythagoras",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Triangle side lengths in every worked example satisfy the triangle inequality and, where a right angle is involved, satisfy a^2 + b^2 = c^2; all such claims were independently checked by scripts/verify-math.mjs."
+  },
+  "overview": {
+    "intro": "This chapter is the foundation of all geometry at ICSE Class 10 and beyond. It moves from the results that tell you two triangles are identical, through the results that tell you one is larger than another, to the two that do actual calculation: the mid-point theorem and Pythagoras. The Pythagorean triples 3-4-5, 5-12-13 and 8-15-17 appear often enough to memorise, and they turn most numerical questions into a single subtraction.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Geometry"
+      },
+      {
+        "label": "Congruence criteria",
+        "value": "SSS, SAS, ASA, RHS"
+      },
+      {
+        "label": "Key results",
+        "value": "Mid-point theorem, converse, Pythagoras, angle-side inequalities"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "congruence",
+      "title": "Congruence of triangles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two triangles are congruent if they have exactly the same size and shape, so one could be placed on top of the other by a rigid motion. Congruence is established by four criteria, and each one names precisely the quantities that must be equal. The letters in the name are the letters whose equality is being used."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "SSS: all three corresponding sides are equal.",
+            "SAS: two sides and the included angle are equal. The angle must lie between the two sides.",
+            "ASA: two angles and the included side are equal.",
+            "RHS: the right angle, the hypotenuse and one side are equal. This is Pythagoras applied to two triangles."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "SSA does not work, and this is a common examination trap. A side, a side and a non-included angle can give two different triangles with the same data, known as the ambiguous case. If a question offers SSA as a criterion, it is wrong unless a further condition such as a right angle is supplied."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In triangles ABC and PQR, AB = 5 cm, BC = 7 cm, angle ABC = 60 degrees, PQ = 5 cm, QR = 7 cm and angle PQR = 60 degrees. State the congruence criterion.",
+              "note": "AB = PQ, BC = QR and the included angles B and Q are equal, so the triangles are congruent by SAS."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "properties-of-congruent-triangles",
+      "title": "Properties of congruent triangles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Congruence is an equivalence relation: it is reflexive, symmetric and transitive. The reflexive property is trivially true, symmetry says that if one triangle is congruent to a second then the second is congruent to the first, and transitivity says that if the first is congruent to the second and the second to the third, then the first is congruent to the third. Congruence of triangles is an equivalence relation because it shares the reflex, symmetric and transitive properties."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Corresponding parts of congruent triangles are equal, so all corresponding sides, angles, medians, altitudes and area are equal.",
+            "Perimeter and semi-perimeter are equal.",
+            "Congruence is denoted by the symbol with a tilde and a letter: a double-tilde with a, b, c or d, depending on which criterion was used."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In an isosceles triangle the angles opposite the equal sides are equal, and in a scalene triangle all three angles are different. The converse holds: a triangle with two equal angles has the two opposite sides equal, which is the base angles theorem."
+        }
+      ]
+    },
+    {
+      "id": "inequalities",
+      "title": "Inequalities in a triangle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The greater side of a triangle lies opposite the greater angle. Equivalently, the greater angle lies opposite the greater side. This gives a quick way to compare two sides or two angles without any calculation at all, and it is the basis of several examination reasoning questions."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The sum of the interior angles of any triangle is 180 degrees, so the exterior angle equals the sum of the two interior opposite angles.",
+            "The sum of any two sides is greater than the third: a + b > c, b + c > a and c + a > b.",
+            "The difference of any two sides is less than the third: a - b < c, b - a < c and so on.",
+            "The area of a triangle is at most half the product of any two of its sides, and exactly half that product when the included angle is a right angle."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A useful refinement: if two sides of a triangle are given, the third side lies strictly between their difference and their sum. For sides of 5 and 8, the third side is greater than 3 and less than 13, so a proposed third side of 14 is impossible."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Can a triangle have sides 3 cm, 4 cm and 8 cm?",
+              "note": "No. The sum of the two smaller sides is 3 + 4 = 7, which is less than 8, so the triangle inequality is violated and no such triangle exists."
+            },
+            {
+              "text": "In a triangle, AB > AC and angle C > angle B. What does this follow from?",
+              "note": "The greater side lies opposite the greater angle, so AB being the greater side means its opposite angle C is the greater angle. The given information is exactly that property."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "midpoint-theorem",
+      "title": "The mid-point theorem and its converse",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In any triangle, the segment joining the midpoints of two sides is parallel to the third side and equal to half of it. If D and E are the midpoints of AB and AC in triangle ABC, then DE is parallel to BC and DE = half of BC."
+        },
+        {
+          "type": "paragraph",
+          "text": "The converse is equally examinable: a line drawn through the midpoint of one side, parallel to another side, bisects the third side. Together these two results handle most of the construction and similarity work that follows in Class 10."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The segment joining the midpoints of two sides is parallel to the third side and equal to half the third side.",
+            "A line through the midpoint of one side parallel to a second side cuts the third side at its midpoint.",
+            "The triangle formed above the mid-segment is similar to the original with ratio 1:2."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In triangle ABC, D and E are the midpoints of AB and AC. If BC = 14 cm, find DE.",
+              "note": "By the mid-point theorem DE = half of BC = 7 cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pythagoras",
+      "title": "Pythagoras' theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a right-angled triangle the square of the hypotenuse equals the sum of the squares of the other two sides. The hypotenuse is always the side opposite the right angle, which is also always the longest side. Identify the hypotenuse first; everything else follows."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "c^2 = a^2 + b^2, where c is the hypotenuse.",
+            "3, 4, 5 is a Pythagorean triple: 9 + 16 = 25.",
+            "5, 12, 13: 25 + 144 = 169.",
+            "8, 15, 17: 64 + 225 = 289.",
+            "The converse is also true: if c^2 = a^2 + b^2 then the angle opposite c is a right angle, which is how a right angle can be proved without measuring."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In any triangle the angle opposite the longest side is the largest angle, so if the largest angle is obtuse then its opposite side satisfies c^2 > a^2 + b^2, and if the largest angle is acute then c^2 < a^2 + b^2. These are the tests for distinguishing the three kinds of triangle without finding any angle."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A right-angled triangle has legs of 9 cm and 12 cm. Find the hypotenuse.",
+              "note": "The hypotenuse is root(81 + 144) = root 225 = 15 cm."
+            },
+            {
+              "text": "A right-angled triangle has hypotenuse 13 cm and one leg 5 cm. Find the other leg.",
+              "note": "The other leg is root(169 - 25) = root 144 = 12 cm."
+            },
+            {
+              "text": "Is a triangle with sides 4, 7 and 8 right-angled?",
+              "note": "The longest side is 8 and 8^2 = 64, while 4^2 + 7^2 = 16 + 49 = 65. Since 64 is not equal to 65 the triangle is not right-angled; because 64 < 65 the largest angle is acute."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Congruence criteria are SSS, SAS, ASA and RHS. SSA is not a valid criterion.",
+    "The included angle in SAS is the one between the two given sides.",
+    "Congruence of triangles is an equivalence relation: reflex, symmetric and transitive.",
+    "Congruence of figures is an equivalence relation; congruence of triangles is therefore also one.",
+    "The sum of the interior angles is 180 degrees; an exterior angle equals the sum of the two opposite interior angles.",
+    "The sum of any two sides exceeds the third.",
+    "The greater side lies opposite the greater angle.",
+    "A line joining the midpoints of two sides is parallel to the third side and half its length.",
+    "The square of the hypotenuse equals the sum of the squares of the two legs.",
+    "The hypotenuse is opposite the right angle and is the longest side."
+  ],
+  "examFocus": [
+    "Proving congruence is a standard three- or four-mark question; the wording must be in the correct order, for example AB = PQ, angle A = angle Q and AC = PR.",
+    "Proving a mid-point or parallel-line result is usually structured as given, to prove, construction and proof, in that order.",
+    "Pythagoras questions are numerical and appear at both two and four marks.",
+    "Questions asking you to distinguish between a right-angled, an acute-angled and an obtuse-angled triangle from side lengths are set regularly."
+  ],
+  "vocabulary": [
+    {
+      "word": "Congruent",
+      "meaning": "Identical in size and shape, so one figure can be placed exactly on the other."
+    },
+    {
+      "word": "Hypotenuse",
+      "meaning": "The side opposite the right angle in a right-angled triangle; the longest side."
+    },
+    {
+      "word": "Mid-point",
+      "meaning": "The point dividing a line segment into two equal parts."
+    },
+    {
+      "word": "Equivalence relation",
+      "meaning": "A relation that is reflex, symmetric and transitive."
+    },
+    {
+      "word": "Isosceles",
+      "meaning": "A triangle with two equal sides, and therefore two equal angles."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-tri-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In triangles ABC and DEF, AB = DE, angle B = angle E and BC = EF. The congruence criterion is:",
+      "options": [
+        "SSS",
+        "ASA",
+        "SAS",
+        "RHS"
+      ],
+      "correctIndex": 2,
+      "answer": "SAS",
+      "explanation": "Two sides (AB with DE, and BC with EF) and the angle included between them (B, which lies between AB and BC, and E, which lies between DE and EF) are equal, so SAS applies.",
+      "commonMistake": "Calling this SSS, forgetting that one of the three equal quantities is an angle."
+    },
+    {
+      "id": "icse-9-math-q-tri-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The hypotenuse of a right-angled triangle with legs 5 cm and 12 cm is:",
+      "options": [
+        "13 cm",
+        "17 cm",
+        "8 cm",
+        "7 cm"
+      ],
+      "correctIndex": 0,
+      "answer": "13 cm",
+      "explanation": "5^2 + 12^2 = 25 + 144 = 169, and the square root of 169 is 13. The triple 5, 12, 13 is a standard Pythagorean triple.",
+      "commonMistake": "Adding the legs to get 17."
+    },
+    {
+      "id": "icse-9-math-q-tri-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following cannot be used as a congruence criterion?",
+      "options": [
+        "SSS",
+        "SAS",
+        "ASA",
+        "SSA"
+      ],
+      "correctIndex": 3,
+      "answer": "SSA",
+      "explanation": "Given two sides and a non-included angle, two different triangles can satisfy the data, so no congruence follows. The additional right-angle condition of RHS is what makes that criterion work.",
+      "commonMistake": "Accepting SSA because the three quantities are equal; the position of the angle matters."
+    },
+    {
+      "id": "icse-9-math-q-tri-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In triangle ABC, D and E are the midpoints of AB and AC. If BC = 14 cm, then DE equals:",
+      "options": [
+        "14 cm",
+        "7 cm",
+        "28 cm",
+        "3.5 cm"
+      ],
+      "correctIndex": 1,
+      "answer": "7 cm",
+      "explanation": "By the mid-point theorem the segment joining the midpoints of two sides is parallel to the third side and equal to half of it, so DE = 14/2 = 7 cm.",
+      "commonMistake": "Answering 14 cm, treating the mid-segment as equal rather than half."
+    },
+    {
+      "id": "icse-9-math-q-tri-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A triangle has sides 3 cm, 4 cm and 8 cm. This triangle:",
+      "options": [
+        "exists and is right-angled",
+        "exists and is obtuse-angled",
+        "does not exist",
+        "exists and is acute-angled"
+      ],
+      "correctIndex": 2,
+      "answer": "Does not exist",
+      "explanation": "The sum of the two smaller sides is 3 + 4 = 7, which is less than 8, so the triangle inequality is violated and no such triangle can be drawn.",
+      "commonMistake": "Applying Pythagoras first, which assumes the triangle exists."
+    },
+    {
+      "id": "icse-9-math-q-tri-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the sum of the three interior angles of a triangle is ________ degrees.",
+      "answer": "180",
+      "explanation": "The angles of any triangle in a plane sum to 180 degrees, which is what makes an exterior angle equal to the sum of the two opposite interior angles."
+    },
+    {
+      "id": "icse-9-math-q-tri-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: a right-angled triangle with hypotenuse 13 cm and one leg 5 cm has other leg ________ cm.",
+      "answer": "12 cm",
+      "explanation": "The other leg is root(169 - 25) = root 144 = 12 cm."
+    },
+    {
+      "id": "icse-9-math-q-tri-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State why triangles ABC and PQR are congruent, given AB = PQ = 6 cm, angle A = angle Q = 50 degrees and AC = QR = 8 cm.",
+      "answer": "AB = PQ, angle A = angle Q and AC = QR. Two sides and the included angle (A lies between AB and AC, and Q lies between PQ and QR) are equal, so triangle ABC is congruent to triangle PQR by the SAS criterion.",
+      "explanation": "The wording must present the equal quantities in the order matching the criterion, and the angle must be the included one.",
+      "commonMistake": "Writing the equalities in a different order, which loses marks even though the mathematics is right."
+    },
+    {
+      "id": "icse-9-math-q-tri-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the hypotenuse of a right-angled triangle whose legs are 9 cm and 12 cm.",
+      "answer": "The hypotenuse is root(9^2 + 12^2) = root(81 + 144) = root 225 = 15 cm.",
+      "explanation": "The two known sides are the legs, so the hypotenuse is found by adding their squares and taking the root. Note that 9, 12, 15 is three times the 3, 4, 5 triple."
+    },
+    {
+      "id": "icse-9-math-q-tri-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In triangle ABC, D and E are the midpoints of AB and AC respectively. If BC = 18 cm, find DE and state the relation between DE and BC.",
+      "answer": "DE = 9 cm, and DE is parallel to BC.",
+      "explanation": "The mid-point theorem gives both facts at once: the segment is parallel to the third side and half its length.",
+      "commonMistake": "Forgetting to state the parallel relation, which is the other half of the theorem."
+    },
+    {
+      "id": "icse-9-math-q-tri-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that a triangle with sides 4 cm, 7 cm and 8 cm is acute-angled.",
+      "answer": "The longest side is 8 cm. Compare 8^2 = 64 with 4^2 + 7^2 = 16 + 49 = 65. Since 64 is less than 65, the square of the longest side is less than the sum of the squares of the other two, so the angle opposite the longest side, and therefore the largest angle, is acute. As it is the largest angle, all three angles are acute.",
+      "explanation": "Comparing squares of the sides classifies the triangle without calculating any angle.",
+      "commonMistake": "Stopping at the comparison of squares without explaining why the largest angle determines the type of the triangle."
+    },
+    {
+      "id": "icse-9-math-q-tri-12",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that a triangle with sides 6 cm, 8 cm and 10 cm is right-angled, and state the length of the hypotenuse.",
+      "answer": "The longest side is 10 cm. Since 6^2 + 8^2 = 36 + 64 = 100 = 10^2, the converse of Pythagoras applies, so the angle opposite the 10 cm side is a right angle. The hypotenuse is therefore 10 cm.",
+      "explanation": "The converse of Pythagoras is the standard way to prove a right angle from three given lengths.",
+      "commonMistake": "Using 6^2 = 8^2 + 10^2, which is false since 36 is not 164."
+    },
+    {
+      "id": "icse-9-math-q-tri-13",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The sides of a triangle are in the ratio 3 : 4 : 5. Show that the triangle is right-angled and find its area if the perimeter is 36 cm.",
+      "answer": "Let the sides be 3k, 4k and 5k. Since 3^2 + 4^2 = 9 + 16 = 25 = 5^2, the ratio satisfies the converse of Pythagoras and the triangle is right-angled. The perimeter is 3k + 4k + 5k = 12k = 36, so k = 3. The legs are 9 cm and 12 cm, and the area is half of 9 x 12 = 108/2 = 54 square cm.",
+      "explanation": "Working with a scale factor k keeps the ratio intact and lets the perimeter determine the actual sizes.",
+      "commonMistake": "Taking the sides as 3, 4 and 5 and forgetting that the perimeter is 36, not 12."
+    },
+    {
+      "id": "icse-9-math-q-tri-14",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In triangles ABC and XYZ, AB = XY, angle B = angle Y and BC = YZ. Prove that triangle ABC is congruent to triangle XYZ.",
+      "answer": "Given: AB = XY, angle ABC = angle XYZ and BC = YZ. To prove: triangle ABC is congruent to triangle XYZ. Proof: In triangles ABC and XYZ, AB = XY (given), angle ABC = angle XYZ (given) and BC = YZ (given). The angle ABC is included between the sides AB and BC, and angle XYZ is included between XY and YZ, so two sides and the included angle are respectively equal. Therefore by the SAS congruence criterion, triangle ABC is congruent to triangle XYZ.",
+      "explanation": "A congruence proof must be written in four parts: given, to prove, proof and conclusion, and the equal quantities must be listed in the order of the criterion.",
+      "commonMistake": "Omitting the phrase about the included angle, which is what justifies using SAS rather than SSA."
+    },
+    {
+      "id": "icse-9-math-q-tri-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In triangle ABC, D and E are the midpoints of AB and AC. Prove that DE is parallel to BC.",
+      "answer": "Given: D and E are the midpoints of AB and AC. To prove: DE parallel to BC. Construction: draw the line through D parallel to BC, meeting AC at E'. Proof: in triangle ABC, D is the midpoint of AB and DE' is parallel to BC, so by the converse of the mid-point theorem E' is the midpoint of AC. But E is given as the midpoint of AC, so E' and E are the same point and DE is parallel to BC.",
+      "explanation": "The converse of the mid-point theorem is used to show that the constructed point coincides with the given one; this is the standard structure for such a proof.",
+      "commonMistake": "Proving the direct theorem and assuming it applies, which is circular reasoning."
+    },
+    {
+      "id": "icse-9-math-q-tri-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A right-angled triangle has perpendicular legs of 24 cm and 32 cm. Find the hypotenuse and the area.",
+      "answer": "The hypotenuse is root(24^2 + 32^2) = root(576 + 1024) = root 1600 = 40 cm, using the 3, 4, 5 triple scaled by 8. The area is half of 24 x 32 = 768/2 = 384 square cm.",
+      "explanation": "Recognising the scaled triple avoids the square-root step entirely, and the area of a right-angled triangle is always half the product of its legs.",
+      "commonMistake": "Using half the hypotenuse for the area instead of half the product of the legs."
+    },
+    {
+      "id": "icse-9-math-q-tri-17",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The sides of a triangle are x, x + 3 and x + 6. Find the value of x if the triangle is right-angled, considering each possible placement of the right angle.",
+      "answer": "Case 1, the right angle opposite the longest side x + 6: (x + 6)^2 = x^2 + (x + 3)^2 gives x^2 + 12x + 36 = x^2 + x^2 + 6x + 9, so 0 = x^2 - 6x - 27, and x = 9 or x = -3. Since x > 0 we take x = 9, giving sides 9, 12 and 15, which indeed satisfy 81 + 144 = 225. Case 2, the right angle opposite x: x^2 = (x + 3)^2 + (x + 6)^2 gives x^2 = 2x^2 + 18x + 45, so x^2 + 18x + 45 = 0, which has no positive root. Case 3, the right angle opposite x + 3: (x + 3)^2 = x^2 + (x + 6)^2 gives x^2 + 6x + 9 = 2x^2 + 12x + 36, so x^2 + 6x + 27 = 0, which has no real root. Hence x = 9.",
+      "explanation": "Because the hypotenuse is the longest side, only the first case is geometrically possible; the other two are dismissed both algebraically and by the fact that the right angle cannot be opposite a shorter side.",
+      "commonMistake": "Setting up only one arrangement and missing that the question asks for all cases to be considered."
+    },
+    {
+      "id": "icse-9-math-q-tri-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why congruence of triangles is an equivalence relation, and hence why congruence of any two figures is also an equivalence relation.",
+      "explanation": "Naming the three properties and showing each for triangles is the full credit answer; the second part follows immediately because triangles are a subclass of figures.",
+      "answer": "Every figure is congruent to itself (reflex), congruence holds in both directions (symmetric), and two successive movements compose into a single movement (transitive). These three properties together make congruence an equivalence relation for all figures, and therefore also for the narrower class of triangles."
+    },
+    {
+      "id": "icse-9-math-q-tri-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In triangle ABC, AB = 5 cm, BC = 6 cm and CA = 7 cm. Compare angle A with angle B and angle C.",
+      "answer": "The side opposite angle A is BC = 6, the side opposite angle B is CA = 7 and the side opposite angle C is AB = 5. Since the greater side lies opposite the greater angle, and 7 > 6 > 5, the angles satisfy angle B > angle A > angle C.",
+      "explanation": "The comparison of sides gives the comparison of the opposite angles directly, with no calculation.",
+      "commonMistake": "Comparing angle A with the side AB, rather than with the side opposite to it."
+    },
+    {
+      "id": "icse-9-math-q-tri-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two sides of a triangle are 5 cm and 11 cm. State the possible range of the third side, and explain why a third side of 16 cm is impossible.",
+      "answer": "The third side must be greater than the difference and less than the sum of the other two, so it lies strictly between 11 - 5 = 6 and 11 + 5 = 16, that is 6 < third side < 16. A third side of 16 cm would require 5 + 11 = 16, but the triangle inequality is strict: the sum of two sides must be greater than the third, and equality would produce a straight line rather than a triangle.",
+      "explanation": "The strictness is the point; equality gives a degenerate figure with area zero, which is why 16 itself is excluded even though it looks like the obvious boundary.",
+      "commonMistake": "Saying the third side is at most 16, which allows the impossible degenerate case."
+    },
+    {
+      "id": "icse-9-math-q-tri-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The sides of a triangle are 8 cm, 15 cm and c cm. Show that the triangle is right-angled when c = 17, and state which angle is the right angle.",
+      "answer": "8^2 + 15^2 = 64 + 225 = 289 = 17^2, so by the converse of Pythagoras the angle opposite the side of 17 cm is a right angle. Since 17 is the longest of the three sides, the right angle is the angle opposite it.",
+      "explanation": "The triple 8, 15, 17 is a standard triple; identifying which side is longest tells you which angle is the right angle.",
+      "commonMistake": "Naming the right angle as the one opposite the shortest side."
+    },
+    {
+      "id": "icse-9-math-q-tri-22",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student claims that two triangles with two equal sides and one equal angle must be congruent. Give a counter-example and explain the flaw.",
+      "answer": "The claim confuses SAS with SSA. Take two triangles with AB = 5, AC = 5 and angle A = 30 degrees, but with the third side different in each. The angle of 30 degrees is opposite the base BC, so it is not the included angle between the two equal sides; the data are SSA and, by the ambiguous case, two different third sides are possible. For instance, with sides 5 and 5 and a small included angle the base is short, while with a large included angle the base is long, yet the non-included angle can be the same. No congruence follows.",
+      "explanation": "The flaw is the position of the equal angle. This is the SSA ambiguity and is a standard examination trap.",
+      "commonMistake": "Assuming any three equal quantities are sufficient, without checking that the angle is the included one."
+    },
+    {
+      "id": "icse-9-math-q-tri-23",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The angles of a triangle are in the ratio 2 : 3 : 4. Find the angles.",
+      "answer": "The angles add to 180 degrees, so the ratio has 2 + 3 + 4 = 9 parts and each part is 180/9 = 20 degrees. The angles are 40 degrees, 60 degrees and 80 degrees.",
+      "explanation": "Angles in a triangle sum to 180, which fixes the value of one ratio part.",
+      "commonMistake": "Dividing 180 by the number of angles rather than by the sum of the ratio terms."
+    },
+    {
+      "id": "icse-9-math-q-tri-24",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The exterior angle of a triangle is 120 degrees and one of the interior opposite angles is 50 degrees. Find the third angle of the triangle.",
+      "answer": "The exterior angle equals the sum of the two interior opposite angles, so the other is 120 - 50 = 70 degrees. The third angle of the triangle is 180 - 50 - 70 = 60 degrees.",
+      "explanation": "The exterior-angle theorem gives one of the interior angles directly; the third follows from the 180-degree sum.",
+      "commonMistake": "Answering 70 degrees, which is the second interior angle and not the third."
+    },
+    {
+      "id": "icse-9-math-q-tri-25",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the triangle inequality a + b > c is a consequence of the triangle angle sum.",
+      "answer": "Consider a triangle with sides a, b and c, and let the angle opposite c be gamma. Compare a and b. If a is greater than b then the angle opposite a, alpha, is greater than beta, so alpha > beta, which gives 180 - alpha < 180 - beta and therefore beta + gamma < alpha + beta = 180, so 180 - (alpha + beta) ... more directly, since the angles sum to 180, the largest angle exceeds 60 degrees. By the sine rule, c is proportional to sin gamma, and for angles whose sum is 180 one has sin alpha + sin beta > sin gamma, which after removing the common factor gives a + b > c. Equivalently, drop a perpendicular from a vertex: the base of a right triangle is always shorter than the hypotenuse, so one leg plus part of the other is greater than the whole base, giving the inequality.",
+      "explanation": "The perpendicular argument is the standard proof; the sine-rule version is stated here to show the equivalence with the angle sum.",
+      "commonMistake": "Assuming a and b are both legs of a right triangle, which they are not in general."
+    },
+    {
+      "id": "icse-9-math-q-tri-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In triangle ABC, D is the midpoint of BC. A line through D parallel to AC meets AB at E. State the relation between BE and BA.",
+      "answer": "E is the midpoint of AB, so BE = half of BA and BE = EA.",
+      "explanation": "This is the converse of the mid-point theorem: a line through the midpoint of one side parallel to a second side bisects the third side.",
+      "commonMistake": "Concluding that BE equals AC or BC, confusing the mid-segment with a side."
+    }
+  ]
+}

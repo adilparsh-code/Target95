@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-statistics",
+  "title": "Statistics",
+  "kind": "mathematics",
+  "tagline": "Frequency distributions, mean, median, mode and graphical presentation",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every mean, median and frequency-total in this chapter was independently recomputed from the data by scripts/verify-math.mjs. The data sets used in the questions were written for this chapter and are not taken from any board examination paper, so every question is original practice."
+  },
+  "overview": {
+    "intro": "Statistics at this level is about turning a long list of numbers into two or three figures that describe the whole list. The arithmetic mean is the workhorse, the median is the fallback when a value is extreme, and the mode is the only one of the three that can describe more than one centre. Real data is almost never given as a bare list, so most of the chapter is about reading it out of a frequency table, including a grouped table where each class stands for a whole interval and contributes its midpoint times its frequency.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Statistics"
+      },
+      {
+        "label": "Measures of central tendency",
+        "value": "Arithmetic mean, median and mode"
+      },
+      {
+        "label": "Data forms",
+        "value": "Raw data, discrete frequency distribution, continuous grouped distribution"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "raw-data",
+      "title": "Raw data and the arithmetic mean",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Raw data is a plain list of observations in no particular order. The arithmetic mean of n observations is the sum of the observations divided by n. Before dividing, it is worth rearranging the list into pairs from the ends: take the smallest with the largest, the second smallest with the second largest, and so on. Each pair usually has the same sum, which turns a long addition into two or three short ones."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the mean of 3, 7, 4, 9, 2, 8, 5, 6.",
+              "note": "Pairing from the ends gives 3 + 6 = 9, 7 + 5 = 12, 4 + 8 = 12, and 9 + 2 = 11. The sum is 9 + 12 + 12 + 11 = 44, and the mean is 44/8 = 5.5."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two properties of the mean are examined repeatedly. If every observation is increased by c, the mean also increases by c. If every observation is multiplied by k, the mean is multiplied by k. These follow directly from the formula and are the quickest way through many questions that would otherwise need a long sum."
+        }
+      ]
+    },
+    {
+      "id": "frequency",
+      "title": "Discrete frequency distributions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A discrete frequency distribution lists each distinct value once with the number of times it occurred. The total frequency must equal the number of observations. To find the mean, multiply each value by its frequency, add the products, and divide by the total frequency. The product column is the only new work; the method is identical to raw data with repetitions already grouped."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The sum of the frequencies is always the total number of observations.",
+            "The frequencies of a distribution may be plotted against the values to draw a histogram with no gaps, or against the cumulative frequencies to draw a less than ogive.",
+            "Check the total frequency before computing anything, because a mistyped frequency changes the mean."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Marks obtained by 30 students are distributed as: 2 students scored 5, 5 students scored 10, 8 students scored 15, 9 students scored 20 and 6 students scored 25. Find the mean.",
+              "note": "The total frequency is 2 + 5 + 8 + 9 + 6 = 30. The product sum is 2x5 + 5x10 + 8x15 + 9x20 + 6x25 = 10 + 50 + 120 + 180 + 150 = 510. The mean is 510/30 = 17."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grouped",
+      "title": "Continuous grouped distributions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When the data is continuous, such as heights or weights, the values are grouped into class intervals such as 10 to 20 and 20 to 30. The lower limit is the smallest value admitted, and the upper limit is the largest value admitted. The class mark, or midpoint, is the average of the two limits and is the value used in the calculation."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Class mark = lower limit + half the class width.",
+            "The exclusive method writes classes as 10 to 20, 20 to 30 so that no value belongs to two classes. The inclusive method writes 10 to 19, 20 to 29 and is converted by taking the upper limit as 19.",
+            "The mean of a grouped distribution is an estimate, because every value in a class is replaced by its midpoint."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the class mark of the class 20 to 30.",
+              "note": "The class mark is (20 + 30)/2 = 25, that is the lower limit 20 plus half the class width 10."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "median-mode",
+      "title": "Median and mode",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The median is the middle observation once the data is arranged in ascending order. If n is odd, the median is the observation at position (n + 1)/2. If n is even, the median is the mean of the observations at positions n/2 and n/2 + 1. The median is never affected by an extreme value, which is why it is preferred to the mean for data such as income."
+        },
+        {
+          "type": "paragraph",
+          "text": "The mode is the value that occurs most often. It is the only measure of central tendency that can have more than one value, and if every value occurs equally often then no mode exists. In a grouped distribution the modal class is the class with the highest frequency, and an estimate of the mode uses the class boundaries and the frequencies on either side."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the median of 4, 6, 9, 11, 15, 18.",
+              "note": "Here n = 6 is even, so the median is the mean of the 3rd and 4th observations, which are 9 and 11. The median is (9 + 11)/2 = 10."
+            },
+            {
+              "text": "Find the median of 4, 6, 9, 11, 15.",
+              "note": "Here n = 5 is odd, so the median is the (5 + 1)/2 = 3rd observation, which is 9."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Mean = sum of observations divided by the number of observations.",
+    "Pairing the smallest with the largest usually turns a long addition into a few equal sums.",
+    "Adding or subtracting a constant from every observation shifts the mean by the same constant; multiplying by a constant scales it.",
+    "For a frequency distribution, mean = sum of (value x frequency) divided by the total frequency.",
+    "The total frequency always equals the number of observations, so check it first.",
+    "Class mark = lower limit plus half the class width, that is (lower limit + upper limit)/2.",
+    "Median of odd n is the ((n+1)/2)th observation; median of even n is the mean of the (n/2)th and (n/2+1)th observations.",
+    "The median is unaffected by an extreme value, the mean is not.",
+    "Mode is the most frequent value, may be more than one, and may not exist at all.",
+    "A grouped mean is an estimate because every observation in a class is replaced by its midpoint."
+  ],
+  "examFocus": [
+    "Always compute the total frequency first; it is the quickest way to find a transcription error before the mean goes wrong.",
+    "Median questions always begin by arranging the data in ascending order, which is usually worth a mark in itself.",
+    "For a grouped distribution, write the class marks down a separate column before multiplying anything.",
+    "Quartiles are the 25th, 50th and 75th percentiles, and the 50th percentile is the median."
+  ],
+  "vocabulary": [
+    {
+      "word": "Arithmetic mean",
+      "meaning": "The sum of the observations divided by the number of observations."
+    },
+    {
+      "word": "Median",
+      "meaning": "The middle observation of the data arranged in ascending order."
+    },
+    {
+      "word": "Mode",
+      "meaning": "The value that occurs most frequently."
+    },
+    {
+      "word": "Class mark",
+      "meaning": "The midpoint of a class interval, used in place of the individual values."
+    },
+    {
+      "word": "Frequency",
+      "meaning": "The number of times a value or class occurs."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-sta-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean of the observations 4, 8, 10, 12 and 16 is:",
+      "options": [
+        "10",
+        "11",
+        "12",
+        "9"
+      ],
+      "correctIndex": 0,
+      "answer": "10, since the sum of 50 divided by 5 gives 10",
+      "explanation": "The sum is 4 + 8 + 10 + 12 + 16 = 50 and there are 5 observations, so the mean is 50/5 = 10.",
+      "commonMistake": "Adding only four of the five observations and dividing by 5."
+    },
+    {
+      "id": "icse-9-math-q-sta-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The median of the observations 3, 7, 1, 9, 5 arranged in ascending order is:",
+      "options": [
+        "5",
+        "7",
+        "3",
+        "1"
+      ],
+      "correctIndex": 0,
+      "answer": "5, the third observation in ascending order",
+      "explanation": "Arranged in ascending order the observations are 1, 3, 5, 7, 9. There are 5 of them, so the median is the third, which is 5.",
+      "commonMistake": "Taking the median of the original unsorted list and picking the middle entry by position rather than by value."
+    },
+    {
+      "id": "icse-9-math-q-sta-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The class mark of the class interval 15 to 25 is:",
+      "options": [
+        "20",
+        "15",
+        "25",
+        "10"
+      ],
+      "correctIndex": 0,
+      "answer": "20, the midpoint (15+25)/2",
+      "explanation": "The class mark is (15 + 25)/2 = 20, which is the lower limit plus half the class width of 10.",
+      "commonMistake": "Using half the lower limit, or giving the class width of 10 instead of the midpoint."
+    },
+    {
+      "id": "icse-9-math-q-sta-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a distribution the values 2, 4 and 6 occur 3, 5 and 2 times respectively. The mean is:",
+      "options": [
+        "3.8",
+        "4",
+        "4.2",
+        "3.6"
+      ],
+      "correctIndex": 0,
+      "answer": "3.8",
+      "explanation": "The total frequency is 3 + 5 + 2 = 10 and the product sum is 3x2 + 5x4 + 2x6 = 6 + 20 + 12 = 38, so the mean is 38/10 = 3.8.",
+      "commonMistake": "Dividing the product sum by the number of distinct values, that is by 3 instead of by the total frequency of 10, which would give 56/3."
+    },
+    {
+      "id": "icse-9-math-q-sta-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean of 10 observations is 24. If each observation is increased by 6, the new mean is:",
+      "options": [
+        "30",
+        "20",
+        "36",
+        "24"
+      ],
+      "correctIndex": 0,
+      "answer": "30, since 24 + 6 = 30",
+      "explanation": "Adding a constant to every observation adds the same constant to the mean, so the new mean is 24 + 6 = 30.",
+      "commonMistake": "Adding 6 once instead of adding 6 to each of the 10 observations, which would give 24 + 6/10."
+    },
+    {
+      "id": "icse-9-math-q-sta-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the value that occurs most frequently in a data set is called the ________.",
+      "answer": "mode, the most frequent value",
+      "explanation": "The mode is the only measure of central tendency that reports which value is commonest rather than averaging the values.",
+      "commonMistake": "Answering the mean, which is the commonest measure but is not defined by frequency."
+    },
+    {
+      "id": "icse-9-math-q-sta-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: for an even number of observations, the median is the mean of the two ________ observations.",
+      "answer": "central middle values, that is the nth/2 and n/2 + 1 values",
+      "explanation": "With n even there is no single middle observation, so the two central values are averaged.",
+      "commonMistake": "Taking only the lower of the two central values instead of averaging them."
+    },
+    {
+      "id": "icse-9-math-q-sta-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the mean of 12, 15, 9, 18, 21, 15.",
+      "answer": "The sum is 12 + 15 + 9 + 18 + 21 + 15 = 90 and there are 6 observations, so the mean is 90/6 = 15.",
+      "explanation": "A direct sum works, but pairing from the ends gives 12 + 21 = 33, 15 + 15 = 30 and 9 + 18 = 27, so the sum is 90 and the mean is 15.",
+      "commonMistake": "Miscounting the observations and dividing 90 by a different number."
+    },
+    {
+      "id": "icse-9-math-q-sta-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the median and the mode of 4, 7, 4, 9, 2, 7, 4, 7.",
+      "answer": "Arranged in ascending order the data is 2, 4, 4, 4, 7, 7, 7, 9. There are 8 observations, so the median is the mean of the 4th and 5th, which are 4 and 7, giving (4 + 7)/2 = 5.5. The mode is 4, because it occurs 3 times, while 7 occurs 3 times as well, so both 4 and 7 are modes and the data is bimodal.",
+      "explanation": "The median of an even data set averages the two central values, and the mode counts repetitions rather than taking a middle position.",
+      "commonMistake": "Reporting only one mode when two values tie for the highest frequency, and reporting the median as 4 instead of averaging."
+    },
+    {
+      "id": "icse-9-math-q-sta-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The ages of 20 children are distributed as follows: 3 children are 5 years old, 6 are 7 years old, 7 are 9 years old and 4 are 11 years old. Find the mean and the median.",
+      "answer": "The total frequency is 3 + 6 + 7 + 4 = 20, which matches the number of children. The product sum is 3x5 + 6x7 + 7x9 + 4x11 = 15 + 42 + 63 + 44 = 164, so the mean is 164/20 = 8.2. For the median, n = 20 is even, so the median is the mean of the 10th and 11th observations. The cumulative frequencies are 3, 9, 16, 20, so the 10th and 11th observations both fall in the 9-year group, making the median 9 years.",
+      "explanation": "The median is located by cumulative frequencies: the 10th and 11th observations both lie past the 9-year cumulative total of 9 and within the next total of 16.",
+      "commonMistake": "Averaging the 10th and 11th values across two different groups when the cumulative counts show they lie in the same group."
+    },
+    {
+      "id": "icse-9-math-q-sta-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The mean of 15 observations is 40. If each observation is multiplied by 3 and then 5 is subtracted from each, find the new mean.",
+      "answer": "Multiplying every observation by 3 multiplies the mean by 3, giving 40 x 3 = 120. Subtracting 5 from every observation subtracts 5 from the mean, giving 120 - 5 = 115. The new mean is 115.",
+      "explanation": "The two operations are handled separately because each affects the mean in its own way; multiplying scales the mean and subtracting shifts it.",
+      "commonMistake": "Doing both operations in one step and forgetting that scaling and shifting do not commute, for example subtracting 5 and then multiplying by 3."
+    },
+    {
+      "id": "icse-9-math-q-sta-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The marks scored by 40 students are grouped as follows: 0 to 10, 10 to 20, 20 to 30 and 30 to 40 with frequencies 4, 12, 18 and 6. Find the mean marks.",
+      "answer": "The class marks are (0+10)/2 = 5, (10+20)/2 = 15, (20+30)/2 = 25 and (30+40)/2 = 35. The total frequency is 4 + 12 + 18 + 6 = 40, which matches the number of students. The product sum is 4x5 + 12x15 + 18x25 + 6x35 = 20 + 180 + 450 + 210 = 860. The mean is 860/40 = 21.5 marks.",
+      "explanation": "Each class contributes its midpoint times its frequency. The result is an estimate, since a student scoring 27 is treated as scoring 25.",
+      "commonMistake": "Using the lower limits 0, 10, 20, 30 instead of the class marks, which gives the wrong result even though the frequencies are right."
+    },
+    {
+      "id": "icse-9-math-q-sta-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The heights of 50 students in cm are grouped as: 140 to 145 with frequency 4, 145 to 150 with frequency 10, 150 to 155 with frequency 16, 155 to 160 with frequency 14 and 160 to 165 with frequency 6. Find the mean height and identify the modal class.",
+      "answer": "The class marks are 142.5, 147.5, 152.5, 157.5 and 162.5. The total frequency is 4 + 10 + 16 + 14 + 6 = 50, which matches the number of students. The product sum is 4x142.5 + 10x147.5 + 16x152.5 + 14x157.5 + 6x162.5 = 570 + 1475 + 2440 + 2205 + 975 = 7665. The mean is 7665/50 = 153.3 cm. The modal class is 150 to 155 cm, because its frequency of 16 is the highest.",
+      "explanation": "The modal class is simply the class with the greatest frequency, which need not contain the mean. Here the mean of 153.3 cm does lie in the modal class, but that is a coincidence of this data.",
+      "commonMistake": "Assuming the modal class must be the class containing the mean, or that the class width of 5 was applied to the class marks."
+    },
+    {
+      "id": "icse-9-math-q-sta-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that adding the same constant to every observation increases the mean by that constant.",
+      "answer": "Let the n observations be a1, a2, ..., an with mean M, so M = (a1 + a2 + ... + an)/n. Replace each observation ai by ai + c. The new mean is ((a1 + c) + (a2 + c) + ... + (an + c))/n = (a1 + a2 + ... + an + n x c)/n = (a1 + ... + an)/n + c = M + c. Since the constant c is added n times, once per observation, and then the whole sum is divided by n, exactly one copy of c survives in the mean.",
+      "explanation": "The cancellation of n copies of c against the division by n is the whole reason the shift is exactly c.",
+      "commonMistake": "Dividing c by n as well, which would give a shift of c/n instead of c."
+    },
+    {
+      "id": "icse-9-math-q-sta-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The mean of 12 observations is 25. One observation, which is wrongly recorded as 60, should have been 30. Find the correct mean.",
+      "answer": "As recorded, the total is 12 x 25 = 300. The wrongly recorded value of 60 must be reduced by 60 - 30 = 30, so the correct total is 300 - 30 = 270. The correct mean is 270/12 = 22.5.",
+      "explanation": "Working through the total rather than re-summing the list is the reliable method, since only one value changes.",
+      "commonMistake": "Dividing the correction of 30 by 12 and subtracting that from 25, giving 22.5 only by accident; subtracting the full 30 from the mean gives the wrong answer 5."
+    },
+    {
+      "id": "icse-9-math-q-sta-16",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain, with an example, why the median is preferred to the mean for data that contains an unusually large value.",
+      "answer": "Suppose the weekly earnings of five workers are 12000, 13000, 14000, 15000 and 90000 rupees. The mean is (12000 + 13000 + 14000 + 15000 + 90000)/5 = 144000/5 = 28800 rupees, which is larger than four of the five earnings and describes none of them. The median is the third value, which is 14000 rupees, a figure that splits the workers evenly. The single large value drags the mean far above the typical value, but it cannot move the median much because the median depends only on the position of the middle observation and not on the size of the extreme value.",
+      "explanation": "The mean uses the magnitude of every observation, so one extreme value shifts it a lot; the median depends only on order and position.",
+      "commonMistake": "Saying the mean is wrong. It is not wrong, it answers a different question, and for symmetric data the mean is usually the better measure."
+    },
+    {
+      "id": "icse-9-math-q-sta-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The marks of 8 students are 45, 52, 60, 60, 67, 71, 78 and 85. Find the lower quartile and the upper quartile.",
+      "answer": "The data is already in ascending order with n = 8. The lower quartile is the value at position n/4 = 2, which is the 2nd observation, 52. The upper quartile is at position 3n/4 = 6, which is the 6th observation, 71. The median is the mean of the 4th and 5th observations, (60 + 67)/2 = 63.5, which is consistent with the median being the 50th percentile between the two quartiles.",
+      "explanation": "The quartiles sit at the 25th and 75th percentiles, that is at positions n/4 and 3n/4 of the ordered data.",
+      "commonMistake": "Using position (n+1)/4, which is the formula for the median of an odd data set rather than for a quartile."
+    },
+    {
+      "id": "icse-9-math-q-sta-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The frequency distribution of a survey is: value 3 appears 4 times, value 5 appears 6 times, value 7 appears 5 times and value 9 appears 2 times. Find the total number of observations and the mean.",
+      "answer": "The total frequency is 4 + 6 + 5 + 2 = 17 observations. The product sum is 4x3 + 6x5 + 5x7 + 2x9 = 12 + 30 + 35 + 18 = 95. The mean is 95/17 = 5.588, which is approximately 5.59.",
+      "explanation": "Total frequency comes first as a check, and the mean here does not come out exact because 17 is not a convenient divisor of 95.",
+      "commonMistake": "Dividing by 4, the number of distinct values, instead of by the total frequency of 17."
+    },
+    {
+      "id": "icse-9-math-q-sta-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The mean of 8 observations is 11 and the mean of 10 other observations is 17. Find the mean of all 18 observations together.",
+      "answer": "The total of the first 8 observations is 8 x 11 = 88. The total of the other 10 is 10 x 17 = 170. The combined total is 88 + 170 = 258 and there are 18 observations, so the combined mean is 258/18 = 14.333, which is approximately 14.33.",
+      "explanation": "Each mean must be turned back into a total by multiplying by its own frequency before the totals are added; averaging the two means directly is wrong because the groups are different sizes.",
+      "commonMistake": "Averaging 11 and 17 to get 14, which ignores the unequal sizes of the two groups."
+    },
+    {
+      "id": "icse-9-math-q-sta-20",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Construct a frequency table for the following marks scored by 30 students: 5, 12, 18, 22, 25, 30, 35, 40, 45, 50, 5, 15, 20, 25, 30, 35, 40, 45, 50, 10, 20, 30, 40, 50, 15, 25, 35, 45, 30, 40. Use the classes 1 to 10, 11 to 20, 21 to 30, 31 to 40 and 41 to 50, and find the mean of the grouped data.",
+      "answer": "Counting into classes: 1 to 10 holds 5, 5 and 10, so 3 students. 11 to 20 holds 12, 18, 15, 20, 20 and 15, so 6 students. 21 to 30 holds 22, 25, 30, 25, 30, 30, 25 and 30, so 8 students. 31 to 40 holds 35, 40, 35, 40, 40, 35 and 40, so 7 students. 41 to 50 holds 45, 50, 45, 50, 50 and 45, so 6 students. The frequencies total 3 + 6 + 8 + 7 + 6 = 30, which matches the number of students, so the count is complete. The class marks are 5.5, 15.5, 25.5, 35.5 and 45.5. The product sum is 3x5.5 + 6x15.5 + 8x25.5 + 7x35.5 + 6x45.5 = 16.5 + 93 + 204 + 248.5 + 273 = 835. The mean of the grouped data is 835/30 = 27.833, approximately 27.83 marks.",
+      "explanation": "Counting carefully and checking that the frequencies total 30 is what keeps the grouped mean correct, and a single miscount shifts the whole result.",
+      "commonMistake": "Placing a value of exactly 10 or exactly 20 in the wrong class, which changes the class marks used and therefore the mean."
+    },
+    {
+      "id": "icse-9-math-q-sta-21",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the difference between the mean and the mode of a data set.",
+      "answer": "The mean is the sum of the observations divided by their number, so it uses every value in the data set and need not be one of the observed values. The mode is simply the value that occurs most often, so it must be one of the observed values and is unaffected by how far the other values are from it. The mean is also sensitive to an extreme value while the mode is not.",
+      "explanation": "The essential distinction is that the mean is computed and need not appear in the data, while the mode is observed and must appear in the data.",
+      "commonMistake": "Saying the mode is the most accurate measure. Neither measure is more accurate; they answer different questions."
+    },
+    {
+      "id": "icse-9-math-q-sta-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A grouped distribution has classes 0 to 10, 10 to 20 and 20 to 30 with frequencies 2, 5 and 3. Find the modal class and explain why the mode itself cannot be found exactly from this data.",
+      "answer": "The modal class is 10 to 20, since its frequency of 5 is the highest. The mode itself cannot be found exactly because the distribution records only how many observations fall in each interval, not their individual values. Every value in 10 to 20 is equally consistent with the table, so the true most frequent value is unknown. The grouped data can only identify the interval containing it.",
+      "explanation": "Grouping deliberately discards the individual values, so the mode is recoverable only as a class, never as an exact value.",
+      "commonMistake": "Giving the modal class mark 15 as the mode, which would be an estimate rather than a value supported by the data."
+    },
+    {
+      "id": "icse-9-math-q-sta-23",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The median of 9 observations is 14 and the mean of the same observations is 13. If one observation is 20, what can be said about the other 8 observations?",
+      "answer": "The total of all 9 observations is 9 x 13 = 117, so the other 8 observations sum to 117 - 20 = 97 and their mean is 97/8 = 12.125. So the mean of the remaining 8 observations is about 12.13, which is below the overall mean of 13, showing that the value 20 pulls the overall mean up. The median being 14 means the 5th observation in order is 14, so with the 20 removed the middle of the remaining 8 observations shifts to the average of the 4th and 5th of the new ordering, which cannot be fixed without knowing where 20 sat in the original order.",
+      "explanation": "Removing one value and recomputing the total shows exactly how much that value is pulling the mean, which is the practical reason the median is preferred when a value is extreme.",
+      "commonMistake": "Assuming the median of the remaining 8 is still 14, since removing an observation can move the median."
+    },
+    {
+      "id": "icse-9-math-q-sta-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A survey recorded the daily attendance at a library over 20 days: 10, 12, 8, 15, 20, 18, 5, 14, 16, 9, 11, 13, 7, 17, 19, 6, 12, 14, 10, 8. Find the mean, the median and the range, and state which single measure best describes typical attendance.",
+      "answer": "The sum is 10 + 12 + 8 + 15 + 20 + 18 + 5 + 14 + 16 + 9 + 11 + 13 + 7 + 17 + 19 + 6 + 12 + 14 + 10 + 8 = 244, and there are 20 days, so the mean is 244/20 = 12.2. Arranged in ascending order the data is 5, 6, 7, 8, 8, 9, 10, 10, 11, 12, 12, 13, 14, 14, 15, 16, 17, 18, 19, 20. With n = 20, the median is the mean of the 10th and 11th observations, 12 and 12, giving 12. The range is the largest minus the smallest, 20 - 5 = 15. The mean and the median are very close at 12.2 and 12, which shows the distribution is roughly symmetric with no extreme value pulling the mean. Either the mean or the median is a reasonable description of typical attendance here; the range describes spread rather than a centre.",
+      "explanation": "The closeness of the mean and the median is the diagnostic that no extreme value is distorting the data, which is the condition under which the mean can be trusted.",
+      "commonMistake": "Reporting the range as a measure of the centre. The range describes how spread out the data is, not where it is centred."
+    }
+  ]
+}

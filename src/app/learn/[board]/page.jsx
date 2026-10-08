@@ -1,0 +1,4 @@
+import Link from 'next/link';
+import { getBoard } from '@/lib/boardprepCurriculum.mjs';
+import { notFound } from 'next/navigation';
+export default async function BoardPage({ params }) { const { board: slug } = await params; const board = getBoard(slug); if (!board) notFound(); return <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900"><div className="mx-auto max-w-6xl"><Link href="/learn" className="text-sm font-medium text-slate-600">← All boards</Link><h1 className="mt-6 text-4xl font-bold">{board.name}</h1><section className="mt-8 grid gap-5 md:grid-cols-2">{board.classes.map((item) => <Link key={item.slug} href={`/learn/${board.slug}/${item.slug}`} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200"><h2 className="text-xl font-bold">{item.label}</h2><p className="mt-2 text-sm text-slate-600">{item.description}</p></Link>)}</section></div></main>; }

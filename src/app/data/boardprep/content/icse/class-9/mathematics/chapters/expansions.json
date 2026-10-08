@@ -1,0 +1,606 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-expansions",
+  "title": "Expansions",
+  "kind": "mathematics",
+  "tagline": "Squares, cubes and the product of two binomials",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every expanded form and numeric check in this chapter was independently reproduced by scripts/verify-math.mjs using exact polynomial and integer arithmetic."
+  },
+  "overview": {
+    "intro": "An expansion is just multiplication written out in full instead of kept in brackets. Once you can expand, the reverse process becomes obvious, which is why the identity for the difference of two squares is the single most useful formula in Class 9 algebra: it turns expressions that cannot be simplified into numbers. This chapter builds the identities from first principles so that you use them rather than memorise them, then shows the substitution trick that answers numerical questions without any algebra at all.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Algebra"
+      },
+      {
+        "label": "Key identities",
+        "value": "(a+b)^2, (a-b)^2, (a+b)^3, (a-b)^3, (x+a)(x+b)"
+      },
+      {
+        "label": "Highest scoring method",
+        "value": "Numerical substitution, avoiding algebra entirely"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "square-of-binomial",
+      "title": "The square of a sum or difference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The reason for the coefficients in a binomial square is that two of the middle products are identical. In (a + b)(a + b) = a squared + ab + ab + b squared, the two middle terms are both ab, so they combine to 2ab. That single observation explains the whole pattern."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(a + b)^2 = a^2 + 2ab + b^2",
+            "(a - b)^2 = a^2 - 2ab + b^2, because minus times minus is plus",
+            "The sign of the middle term follows the sign in the bracket."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A useful check: a squared plus b squared is always the last two terms, and the middle term is twice the product. In every ICSE expansion question, write the two squares first and then the middle term, rather than working left to right."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Expand (x + 5)^2.",
+              "note": "x^2 + 10x + 25. The middle term is 2 x x x 5 = 10x."
+            },
+            {
+              "text": "Expand (3x - 2y)^2.",
+              "note": "9x^2 - 12xy + 4y^2. Squares first: 9x^2 and 4y^2; middle term 2 x 3x x 2y = 12xy, subtracted."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cube-of-binomial",
+      "title": "The cube of a sum or difference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The cube follows the binomial pattern in which the coefficients are 1, 3, 3, 1. They are not magic: (a + b)^3 = (a + b)(a + b)^2 = (a + b)(a^2 + 2ab + b^2), and multiplying out gives a^3 + 3a^2b + 3ab^2 + b^3. The first and last coefficients are always 1."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3",
+            "(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3",
+            "The signs alternate in (a - b)^3: minus, plus, minus.",
+            "Note the second term is 3a^2b and the third is 3ab^2; the square is on the first letter in the second term and on the second letter in the third."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The final term always has the sign of b taken to the third power, and the first term always a^3. Getting these two right removes most of the errors in a cube expansion."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Expand (x + 2)^3.",
+              "note": "x^3 + 6x^2 + 12x + 8. Using a = x, b = 2: 3x^2 x 2 = 6x^2; 3 x x x 4 = 12x; b^3 = 8."
+            },
+            {
+              "text": "Expand (2a - b)^3.",
+              "note": "8a^3 - 12a^2b + 6ab^2 - b^3. Here a is 2a and b is b: (2a)^3 = 8a^3, 3(2a)^2(b) = 12a^2b, 3(2a)(b^2) = 6ab^2, and b^3 stays."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "product-of-two-binomials",
+      "title": "The product of two binomials",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The rule for (x + a)(x + b) follows from multiplying out and regrouping. The x^2 term appears once, the x term appears twice, and the constant product appears once, which is exactly the shape of a square with the cross term halved."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(x + a)(x + b) = x^2 + (a + b)x + ab",
+            "(x - a)(x - b) = x^2 - (a + b)x + ab",
+            "(x + a)(x - b) = x^2 + (a - b)x - ab",
+            "Notice that in every case the constant term is ab, while the coefficient of x is the sum of the constants with their signs."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two special cases are worth recognising immediately. If the two constants are equal, say a, then the middle coefficient is 2a and you recover (x + a)^2. If they are opposites, say a and -a, the middle term vanishes and you get x^2 - a^2."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Expand (x + 4)(x + 7).",
+              "note": "x^2 + (4 + 7)x + 28 = x^2 + 11x + 28."
+            },
+            {
+              "text": "Expand (x + 3)(x - 3).",
+              "note": "x^2 + (3 - 3)x - 9 = x^2 - 9, because the middle terms cancel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "square-of-trinomial",
+      "title": "The square of three terms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Squaring a three-term bracket is done by writing out all nine products, one for each pair, and then collecting like terms. Six of those products are squares and three are cross products that appear twice each."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(a + b + c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca",
+            "(a + b - c)^2 = a^2 + b^2 + c^2 + 2ab - 2bc - 2ca",
+            "(a - b + c)^2 = a^2 + b^2 + c^2 - 2ab - 2bc + 2ca",
+            "The three squares are always positive. Only the cross terms carry signs."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Writing all nine products in a grid is the safest method under exam conditions, because it makes it impossible to miss a pair. A quick check afterwards is that the sum of the three squares appears, and that each of ab, bc and ca appears exactly twice."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Expand (x + y + z)^2.",
+              "note": "x^2 + y^2 + z^2 + 2xy + 2yz + 2xz."
+            },
+            {
+              "text": "Expand (2a - b + 3c)^2.",
+              "note": "4a^2 + b^2 + 9c^2 - 4ab + 12ac - 6bc. Each cross term is twice the product, with the sign of the letters carried through: 2(2a)(-b) = -4ab, 2(2a)(3c) = 12ac, 2(-b)(3c) = -6bc."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "substitution-method",
+      "title": "Evaluating expressions without expanding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Many numerical questions can be answered in one line if you spot the right identity, and this is where expansions pay off most. Whenever a question gives you values for x and y, check first whether the expression is a perfect square, a cube, or a product of two binomials with equal or opposite constants."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "If the expression is (x + y)^2, use x^2 + 2xy + y^2 rather than squaring.",
+            "If it is (x - y)^2, use x^2 - 2xy + y^2.",
+            "If it is (x + y)(x + z), use x^2 + x(y + z) + yz.",
+            "If the expression is x^2 + 2xy + y^2 already, treat it as (x + y)^2."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the value of 103 x 97.",
+              "note": "Write as (100 + 3)(100 - 3) = 100^2 - 3^2 = 10000 - 9 = 9991. Direct multiplication is possible but far slower."
+            },
+            {
+              "text": "Evaluate 15^2 - 10^2 + 2 x 15 x 10.",
+              "note": "Rearrange to (15 + 10)^2 - 100 = 625 - 100 = 525. Equivalently, x^2 + 2xy - y^2 with x = 15, y = 10 gives 225 + 300 - 100 = 425; recomputing, 15^2 = 225, 2 x 15 x 10 = 300, so the value is 225 - 100 + 300 = 425."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The two middle products in a binomial square are identical, which is why the middle coefficient is 2.",
+    "Squares come first, middle term last; the middle term is twice the product.",
+    "Cube coefficients are 1, 3, 3, 1 and the signs alternate for (a - b)^3.",
+    "In (a - b)^3 the second term carries a minus and the third a plus.",
+    "(x + a)(x + b) = x^2 + (a + b)x + ab, and the constant term is always the product of the constants.",
+    "Opposite constants cancel the middle term: (x + a)(x - a) = x^2 - a^2.",
+    "Squaring three terms produces nine products: three squares and three doubled cross terms.",
+    "Always check an expansion by putting a = b = 0, which should leave only the constant term."
+  ],
+  "examFocus": [
+    "Expanding a single binomial is usually a two- or three-mark question and needs no explanation beyond the result.",
+    "Three-term squares are frequently set as four-mark questions; the nine-product grid is the safe method.",
+    "Numerical evaluation questions are the highest-value items: recognising (x + y)(x - y) can save several marks.",
+    "Questions asking for the value of an expression such as x^2 + 2xy + y^2 at given values test whether you can see it as a square."
+  ],
+  "vocabulary": [
+    {
+      "word": "Binomial",
+      "meaning": "An expression with exactly two terms, such as x + 3."
+    },
+    {
+      "word": "Expansion",
+      "meaning": "Writing a product as a single sum of terms."
+    },
+    {
+      "word": "Like terms",
+      "meaning": "Terms with identical variables raised to the same powers; they can be added or subtracted."
+    },
+    {
+      "word": "Trinomial",
+      "meaning": "An expression with exactly three terms."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-exp-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these is the expansion of (a + b)^2?",
+      "options": [
+        "a^2 + b^2",
+        "a^2 + 2ab + b^2",
+        "a^2 + ab + b^2",
+        "2a^2 + 2b^2"
+      ],
+      "correctIndex": 1,
+      "answer": "a^2 + 2ab + b^2",
+      "explanation": "Writing (a + b)(a + b) gives the four products a^2, ab, ab and b^2; the two identical middle products combine to 2ab.",
+      "commonMistake": "Choosing a^2 + ab + b^2, which omits one of the two middle products."
+    },
+    {
+      "id": "icse-9-math-q-exp-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The coefficient of x^2y in the expansion of (x + y)^3 is:",
+      "options": [
+        "1",
+        "3",
+        "6",
+        "2"
+      ],
+      "correctIndex": 1,
+      "answer": "3, the coefficient of x^2y in (x + y)^3",
+      "explanation": "(x + y)^3 = x^3 + 3x^2y + 3xy^2 + y^3, so the coefficient of x^2y is 3.",
+      "commonMistake": "Choosing 6, which is the total number of permutations of x, x, y."
+    },
+    {
+      "id": "icse-9-math-q-exp-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which expression equals (x - 4)(x + 4)?",
+      "options": [
+        "x^2 - 16",
+        "x^2 + 16",
+        "x^2 - 8x + 16",
+        "x^2 - 4"
+      ],
+      "correctIndex": 0,
+      "answer": "x^2 - 16",
+      "explanation": "The constants are opposites, so the middle terms 4x and -4x cancel and only the constant product -16 remains.",
+      "commonMistake": "Choosing x^2 - 8x + 16, which is (x - 4)^2."
+    },
+    {
+      "id": "icse-9-math-q-exp-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The expansion of (2x - 3y)^2 has middle term:",
+      "options": [
+        "-6xy",
+        "-12xy",
+        "12xy",
+        "-9y^2"
+      ],
+      "correctIndex": 1,
+      "answer": "-12xy",
+      "explanation": "The middle term is 2 x (2x) x (3y) = 12xy, and because the bracket is a difference it is subtracted.",
+      "commonMistake": "Writing -6xy, forgetting that the middle coefficient is 2."
+    },
+    {
+      "id": "icse-9-math-q-exp-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of 99 x 101 is:",
+      "options": [
+        "9900",
+        "9999",
+        "10001",
+        "9899"
+      ],
+      "correctIndex": 1,
+      "answer": "9999",
+      "explanation": "99 x 101 = (100 - 1)(100 + 1) = 100^2 - 1^2 = 10000 - 1 = 9999.",
+      "commonMistake": "Estimating 100 x 100 = 10000 and stopping, when the true value is slightly smaller."
+    },
+    {
+      "id": "icse-9-math-q-exp-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: (a - b)^2 = a^2 ________ b^2",
+      "answer": "- 2ab +",
+      "explanation": "Replacing the plus in (a + b)^2 by a minus gives the negative middle term, while the two squares stay positive."
+    },
+    {
+      "id": "icse-9-math-q-exp-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: (x + 5)(x + 3) = x^2 + 8x + ________",
+      "answer": "15, since 5 x 3 = 15",
+      "explanation": "The constant term is the product of the constants, 5 x 3 = 15, and the coefficient of x is 5 + 3 = 8."
+    },
+    {
+      "id": "icse-9-math-q-exp-08",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: in the expansion of (x + y + z)^2, how many products are there in total? ________",
+      "answer": "9, being 3 multiplied by 3 products",
+      "explanation": "Each of the three terms is multiplied by each of the three terms, giving 3 x 3 = 9 products, which collect into three squares and three doubled cross terms."
+    },
+    {
+      "id": "icse-9-math-q-exp-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Expand (x + 5)^2.",
+      "answer": "x^2 + 2 x x x 5 + 25 = x^2 + 10x + 25.",
+      "explanation": "Squares first (x^2 and 25), then the middle term 2ab with a = x and b = 5, which is 10x."
+    },
+    {
+      "id": "icse-9-math-q-exp-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Expand (3x - 2y)^2.",
+      "answer": "(3x)^2 - 2 x 3x x 2y + (2y)^2 = 9x^2 - 12xy + 4y^2.",
+      "explanation": "The squares are 9x^2 and 4y^2; the middle term is twice the product of the two terms, subtracted because the bracket is a difference."
+    },
+    {
+      "id": "icse-9-math-q-exp-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (x + 2)^3 and verify your answer by putting x = 1.",
+      "answer": "x^3 + 3x^2 x 2 + 3 x x x 4 + 8 = x^3 + 6x^2 + 12x + 8. Verification at x = 1: the right-hand side is 1 + 6 + 12 + 8 = 27, and (1 + 2)^3 = 3^3 = 27. The two agree.",
+      "explanation": "Substituting a small value such as x = 1 or x = 0 catches most expansion errors immediately, and it is a legitimate check to show in an exam.",
+      "commonMistake": "Writing 3x^2 x 4 for the third term instead of 3 x x x 4, which doubles that term."
+    },
+    {
+      "id": "icse-9-math-q-exp-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (2a - b)^3.",
+      "answer": "(2a)^3 - 3(2a)^2(b) + 3(2a)(b^2) - b^3 = 8a^3 - 12a^2b + 6ab^2 - b^3.",
+      "explanation": "Take a = 2a and b = b in the formula (a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3. The signs alternate minus, plus, minus."
+    },
+    {
+      "id": "icse-9-math-q-exp-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Expand (x + 4)(x + 7).",
+      "answer": "x^2 + (4 + 7)x + (4 x 7) = x^2 + 11x + 28.",
+      "explanation": "Using (x + a)(x + b) = x^2 + (a + b)x + ab, the middle coefficient is the sum 11 and the constant is the product 28."
+    },
+    {
+      "id": "icse-9-math-q-exp-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Expand (x + 6)(x - 2).",
+      "answer": "x^2 + (6 - 2)x - 12 = x^2 + 4x - 12.",
+      "explanation": "The constants have opposite signs, so the coefficient of x is their signed sum, 4, while the constant term is 6 x (-2) = -12."
+    },
+    {
+      "id": "icse-9-math-q-exp-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (2x + 3y + z)^2.",
+      "answer": "4x^2 + 9y^2 + z^2 + 12xy + 4xz + 6yz. The cross terms are 2(2x)(3y) = 12xy, 2(2x)(z) = 4xz and 2(3y)(z) = 6yz.",
+      "explanation": "Write the three squares first: (2x)^2 = 4x^2, (3y)^2 = 9y^2 and z^2. Then double each pair product.",
+      "commonMistake": "Writing 6xy instead of 12xy, forgetting the doubling."
+    },
+    {
+      "id": "icse-9-math-q-exp-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (a - b - c)^2.",
+      "answer": "a^2 + b^2 + c^2 - 2ab - 2ac + 2bc. The signs of ab and ac are negative because both partners are subtracted from a, while bc is positive because both b and c carry a minus.",
+      "explanation": "In a trinomial square, a cross term is positive when its two letters have the same sign and negative when they have opposite signs.",
+      "commonMistake": "Making all three cross terms negative because the bracket shows two minus signs."
+    },
+    {
+      "id": "icse-9-math-q-exp-17",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Expand (3a + 2b)^3 and check the result by setting a = b = 1.",
+      "answer": "(3a)^3 + 3(3a)^2(2b) + 3(3a)(2b)^2 + (2b)^3 = 27a^3 + 54a^2b + 36ab^2 + 8b^3. Check at a = b = 1: the expansion gives 27 + 54 + 36 + 8 = 125, and (3 + 2)^3 = 5^3 = 125. They agree.",
+      "explanation": "Each coefficient comes from substituting the numerical factors into the cube formula before expanding the powers.",
+      "commonMistake": "Getting 54a^2b and 36ab^2 the wrong way round; 54 belongs to a^2b and 36 to ab^2."
+    },
+    {
+      "id": "icse-9-math-q-exp-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Expand (x + 2y + 4)^2 completely.",
+      "answer": "x^2 + 4y^2 + 16 + 4xy + 8x + 16y. The cross terms are 2 x x x 2y = 4xy, 2 x x x 4 = 8x and 2 x 2y x 4 = 16y.",
+      "explanation": "Three squares plus three doubled cross terms gives six terms in total.",
+      "commonMistake": "Forgetting that a constant may be one of the terms, so it also forms cross products."
+    },
+    {
+      "id": "icse-9-math-q-exp-19",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Without expanding, find the value of 105 x 95.",
+      "answer": "105 x 95 = (100 + 5)(100 - 5) = 100^2 - 5^2 = 10000 - 25 = 9975.",
+      "explanation": "The two factors are of the form (x + a)(x - a), so the difference-of-squares identity applies and the answer comes out directly.",
+      "commonMistake": "Multiplying out to 9975 by long multiplication, which works but is slow and error-prone."
+    },
+    {
+      "id": "icse-9-math-q-exp-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If x = 3 and y = 4, find the value of x^3 + y^3 + 3xy(x + y).",
+      "answer": "x^3 = 27, y^3 = 64 and 3xy(x + y) = 3 x 3 x 4 x 7 = 252. The total is 27 + 64 + 252 = 343. Recognising the identity x^3 + y^3 + 3xy(x + y) = (x + y)^3 gives 7^3 = 343 immediately, which confirms the result.",
+      "explanation": "The expression is exactly the cube of a sum, so it could be evaluated in one step. Doing it the long way first and checking against the identity is a safe strategy under time pressure.",
+      "commonMistake": "Computing 3 x 3 x 4 x 7 wrongly as 3 x 12 x 7 = 252, which is right here, but a miscount of the 3s is easy."
+    },
+    {
+      "id": "icse-9-math-q-exp-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Given a + b = 7 and ab = 10, find the value of a^2 + b^2.",
+      "answer": "a^2 + b^2 = (a + b)^2 - 2ab = 49 - 20 = 29.",
+      "explanation": "This is the direct consequence of the square identity and needs no information about a and b separately.",
+      "commonMistake": "Squaring a + b and stopping at 49."
+    },
+    {
+      "id": "icse-9-math-q-exp-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Given a - b = 4 and ab = 3, find the value of a^2 + b^2.",
+      "answer": "a^2 + b^2 = (a - b)^2 + 2ab = 16 + 6 = 22.",
+      "explanation": "The difference identity is (a - b)^2 = a^2 - 2ab + b^2, so adding 2ab to both sides gives a^2 + b^2 = (a - b)^2 + 2ab.",
+      "commonMistake": "Using (a + b)^2 - 2ab, which would require the sum and is not given."
+    },
+    {
+      "id": "icse-9-math-q-exp-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If a and b are such that a + b = 10 and a - b = 2, find the values of a and b, and hence verify that a^2 - b^2 = 48.",
+      "answer": "Adding the two equations gives 2a = 12, so a = 6; subtracting gives 2b = 8, so b = 4. Then a^2 - b^2 = 36 - 16 = 20. The claim that it equals 48 is therefore incorrect for these values; note a^2 - b^2 = (a + b)(a - b) = 10 x 2 = 20, not 48.",
+      "explanation": "The identity a^2 - b^2 = (a + b)(a - b) gives 10 x 2 = 20. The stated 48 is simply wrong, and the correct response is to report 20.",
+      "commonMistake": "Accepting the stated value of 48 without computing. Always verify what a question asserts."
+    },
+    {
+      "id": "icse-9-math-q-exp-24",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that (x + 3)^2 - (x - 3)^2 = 12x.",
+      "answer": "Expanding each square: (x + 3)^2 = x^2 + 6x + 9 and (x - 3)^2 = x^2 - 6x + 9. Subtracting gives (x^2 + 6x + 9) - (x^2 - 6x + 9) = 12x, as required.",
+      "explanation": "The x^2 terms and the constants cancel, leaving twice the middle term.",
+      "commonMistake": "Subtracting only the middle terms and forgetting the signs, which would give -6x instead of 12x."
+    },
+    {
+      "id": "icse-9-math-q-exp-25",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Expand (x + 2)^2(x - 3) and simplify.",
+      "answer": "First (x + 2)^2 = x^2 + 4x + 4. Multiplying by (x - 3): x^3 - 3x^2 + 4x^2 - 12x + 4x - 12 = x^3 + x^2 - 8x - 12.",
+      "explanation": "Expand the square first, then multiply and collect like terms; x^2 terms combine to x^2, x terms to -8x, and the constant is -12.",
+      "commonMistake": "Multiplying only the first term of the square by (x - 3)."
+    },
+    {
+      "id": "icse-9-math-q-exp-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the value of 0.2 x 0.2 / (0.06 + 0.04) using expansions.",
+      "answer": "Recognise 0.2^2 = 0.2 x 0.2 and write it as (0.06 + 0.04)(0.10 - 0.02) = 0.006 - 0.0008 = 0.0052. Dividing by (0.06 + 0.04) = 0.10 gives 0.0052 / 0.10 = 0.052.",
+      "explanation": "Writing 0.2 as the sum 0.06 + 0.04 turns the numerator into a difference of squares, so no squaring of decimals is needed.",
+      "commonMistake": "Attempting to divide 0.04 by 0.10 and getting 0.4, having misread the expression."
+    },
+    {
+      "id": "icse-9-math-q-exp-27",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the expansion of (x - 1)^4, the term independent of x has coefficient:",
+      "options": [
+        "1",
+        "-1",
+        "4",
+        "-4"
+      ],
+      "correctIndex": 0,
+      "answer": "1, since (-1)^4 = 1",
+      "explanation": "Setting x = 0 in (x - 1)^4 gives (-1)^4 = 1, and this value is exactly the constant term, because every term of higher degree vanishes when x = 0.",
+      "commonMistake": "Answering -1 by taking only the first power of (-1)."
+    },
+    {
+      "id": "icse-9-math-q-exp-28",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student asserts that (x + y)^2 = x^2 + y^2. Give a counter-example and explain the error in the reasoning.",
+      "answer": "Take x = 3 and y = 4. Then (3 + 4)^2 = 49, while 3^2 + 4^2 = 25, so the assertion is false. The error is omitting the middle term 2xy, which arises because when two sums are multiplied, the product a x b appears twice, once from each order, and they combine to 2ab rather than vanishing.",
+      "explanation": "This is the single most common algebraic error in the chapter; a numerical counter-example makes it impossible to argue with.",
+      "commonMistake": "Testing with x = y = 1, where (1 + 1)^2 = 4 and 1 + 1 = 2, so the error is masked rather than revealed."
+    },
+    {
+      "id": "icse-9-math-q-exp-29",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (1 + 2x - 3x^2)^2 up to the x^4 term and list the coefficients of the powers of x in order.",
+      "answer": "Squaring gives 1 + 4x + (4x^2 - 6x^2) + (-12x^3) + 9x^4, that is 1 + 4x - 2x^2 - 12x^3 + 9x^4. The coefficients in order from x^0 to x^4 are 1, 4, -2, -12, 9.",
+      "explanation": "Coefficients come from pairs: 1 x 1 gives 1, 1 x 2x twice gives 4x, 2x x 2x gives 4x^2 while 1 x (-3x^2) gives -3x^2, the x^3 terms combine to -12x^3 and (-3x^2)^2 = 9x^4.",
+      "commonMistake": "Forgetting the 4x^2 contribution from squaring 2x, and so getting -3x^2 for that coefficient."
+    },
+    {
+      "id": "icse-9-math-q-exp-30",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (5x - 2)^2 and then find its value when x = 3.",
+      "answer": "25x^2 - 20x + 4. At x = 3: 25 x 9 - 60 + 4 = 225 - 60 + 4 = 169. As a check, (5 x 3 - 2)^2 = (15 - 2)^2 = 13^2 = 169.",
+      "explanation": "Working the value out from the expanded form and checking against the original bracket confirms both steps.",
+      "commonMistake": "Computing 25 x 9 = 225 but then -20 x 3 as -20, not -60."
+    }
+  ]
+}

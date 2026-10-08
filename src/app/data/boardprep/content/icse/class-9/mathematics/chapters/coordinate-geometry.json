@@ -1,0 +1,511 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-coordinate-geometry",
+  "title": "Coordinate Geometry",
+  "kind": "mathematics",
+  "tagline": "The Cartesian plane, plotting, the distance formula and graphical solutions",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every distance, midpoint, area and line-intersection figure in this chapter was independently recomputed by scripts/verify-math.mjs. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "René Descartes' idea was to turn geometry into arithmetic: fix two perpendicular axes, give every point two numbers, and then distances become sums of squares. Once that is done, the whole of plane geometry reduces to computation, and there are no diagrams to draw badly. The distance formula is the single result that unlocks the chapter, since the midpoint and area results both follow from it.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Coordinate Geometry"
+      },
+      {
+        "label": "Core results",
+        "value": "Distance, midpoint and area from coordinates"
+      },
+      {
+        "label": "Also covered",
+        "value": "Plotting and the graphical solution of simultaneous linear equations"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "cartesian-plane",
+      "title": "The Cartesian plane and the four quadrants",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two number lines are drawn at right angles and meet at a point called the origin, written O and having coordinates (0, 0). The horizontal line is the x-axis and the vertical line is the y-axis. The point P with coordinates (x, y) is reached by moving x units from the origin along the x-axis, then y units parallel to the y-axis. The x-coordinate is always written first."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Quadrant I has x positive and y positive. Quadrant II has x negative and y positive. Quadrant III has x negative and y negative. Quadrant IV has x positive and y negative.",
+            "A point on an axis has one coordinate zero: on the x-axis y = 0, and on the y-axis x = 0.",
+            "The sign pattern decides the quadrant, so recording the signs first prevents most plotting errors."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In which quadrant does the point (-4, 7) lie?",
+              "note": "The x-coordinate -4 is negative and the y-coordinate 7 is positive, so the point lies in the second quadrant, where x is negative and y is positive."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "distance-midpoint",
+      "title": "Distance and midpoint",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The distance between two points is found by applying Pythagoras to the right triangle whose legs are the horizontal and vertical differences between them. That single observation gives the distance formula for any two points, whatever the signs."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Distance formula",
+              "meaning": "The distance between (x1, y1) and (x2, y2) is the square root of ((x1 - x2)^2 + (y1 - y2)^2)."
+            },
+            {
+              "term": "Midpoint",
+              "meaning": "The point halfway between two points, with coordinates the average of the corresponding coordinates of the two points."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Take the difference in x and the difference in y, square each, add, then take the square root.",
+            "The formula is unaffected by the order of the points, since both differences change sign and squaring removes the sign.",
+            "The midpoint of (x1, y1) and (x2, y2) is ((x1 + x2)/2, (y1 + y2)/2), which is why the midpoint of a segment also lies on the segment."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the distance between the points (2, 3) and (7, 15).",
+              "note": "The difference in x is 7 - 2 = 5 and the difference in y is 15 - 3 = 12. The distance is root(5^2 + 12^2) = root(25 + 144) = root 169 = 13."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "area",
+      "title": "Area of a triangle from its vertices",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When the three vertices of a triangle are known, the area follows from the coordinates without measuring any height. This is the coordinate form of the base-times-height rule, rearranged so that the unknown height never has to be computed."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Area = half of the absolute value of x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2).",
+            "The area is a single number, so an ordered triple of vertices gives one area and not three; the formula is symmetric in the three points.",
+            "A negative result simply means the vertices were taken in an anticlockwise order, so the absolute value is taken."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the area of the triangle with vertices (0, 0), (6, 0) and (0, 5).",
+              "note": "The two points on the axes form a right triangle of base 6 and height 5, so the area is half x 6 x 5 = 15 square units. The formula gives x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2) = 0(0 - 5) + 6(5 - 0) + 0(0 - 0) = 30, and half of 30 is 15."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphical",
+      "title": "Graphical solution of simultaneous linear equations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An equation such as 2x + 3y = 6 is a straight line. Rewriting it as y = (2/3)x - 2 makes that explicit, so it can be plotted. When two such equations are given, the solution of the pair is the point where the two lines cross, because that is the single point satisfying both."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rearrange each equation into the form y = mx + c.",
+            "Plot at least two reliable points for each line, extend them and read off the crossing point.",
+            "The lines must actually cross. If they are parallel there is no solution, and if they coincide there are infinitely many."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve graphically the equations x + y = 6 and x - y = 2.",
+              "note": "The first gives y = 6 - x, a line through (0, 6) and (6, 0). The second gives y = x - 2, a line through (0, -2) and (4, 2). They meet where 6 - x = x - 2, that is 2x = 8 and x = 4, so the crossing point is (4, 2)."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The origin O has coordinates (0, 0) and lies on no axis.",
+    "The x-coordinate is written first and measures the horizontal distance; the y-coordinate measures the vertical distance.",
+    "Quadrant II has a negative x and a positive y; quadrant III has both negative.",
+    "A point on the x-axis has y = 0, and a point on the y-axis has x = 0.",
+    "Distance between two points = root of ((x1 - x2)^2 + (y1 - y2)^2).",
+    "The distance formula is Pythagoras applied to the horizontal and vertical differences.",
+    "The midpoint of two points is the average of the corresponding coordinates.",
+    "Area of a triangle from vertices = half the absolute value of x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2).",
+    "Two parallel lines never meet, so the pair has no solution; coincident lines meet everywhere, so the pair has infinitely many.",
+    "A graphical answer is only as accurate as the scale drawn, so read off the crossing point carefully."
+  ],
+  "examFocus": [
+    "Fixing the axes scales first prevents almost every plotting error; draw them clearly and label the units.",
+    "In the distance formula, subtracting in the wrong order changes the sign but not the square, so it does not affect the answer.",
+    "A graphical question must be answered by drawing the lines and marking the crossing point, not by algebraic elimination.",
+    "Quote the solution of a graphical pair as an ordered pair of coordinates, not as two separate values."
+  ],
+  "vocabulary": [
+    {
+      "word": "Origin",
+      "meaning": "The point of intersection of the two axes, with coordinates (0, 0)."
+    },
+    {
+      "word": "Quadrant",
+      "meaning": "One of the four regions into which the axes divide the plane."
+    },
+    {
+      "word": "Abscissa",
+      "meaning": "The x-coordinate of a point, that is the horizontal distance."
+    },
+    {
+      "word": "Ordinate",
+      "meaning": "The y-coordinate of a point, that is the vertical distance."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-coo-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The point (-6, 3) lies in the:",
+      "options": [
+        "second quadrant",
+        "third quadrant",
+        "first quadrant",
+        "fourth quadrant"
+      ],
+      "correctIndex": 0,
+      "answer": "second quadrant",
+      "explanation": "The x-coordinate is negative and the y-coordinate is positive, and the quadrant with a negative x and a positive y is the second.",
+      "commonMistake": "Reading the coordinates in the order y then x, which would place the point in the fourth quadrant."
+    },
+    {
+      "id": "icse-9-math-q-coo-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance between the points (1, 2) and (4, 6) is:",
+      "options": [
+        "5",
+        "7",
+        "25",
+        "3"
+      ],
+      "correctIndex": 0,
+      "answer": "5 units, since root(9 + 16) = root 25",
+      "explanation": "The differences are 3 in x and 4 in y, so the distance is root(3^2 + 4^2) = root(9 + 16) = root 25 = 5.",
+      "commonMistake": "Giving 25, which is the square of the distance rather than the distance itself."
+    },
+    {
+      "id": "icse-9-math-q-coo-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The midpoint of the points (3, -2) and (-1, 6) is:",
+      "options": [
+        "(1, 2)",
+        "(2, 1)",
+        "(1, -2)",
+        "(-1, 2)"
+      ],
+      "correctIndex": 0,
+      "answer": "(1, 2)",
+      "explanation": "The midpoint is ((3 + -1)/2, (-2 + 6)/2) = (2/2, 4/2) = (1, 2).",
+      "commonMistake": "Subtracting the coordinates instead of adding them, which gives (2, -4)."
+    },
+    {
+      "id": "icse-9-math-q-coo-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area of the triangle with vertices (0, 0), (8, 0) and (0, 6) is:",
+      "options": [
+        "24 square units",
+        "48 square units",
+        "14 square units",
+        "12 square units"
+      ],
+      "correctIndex": 0,
+      "answer": "24 square units",
+      "explanation": "The vertices lie on the axes, so the triangle is right-angled with base 8 and height 6. The area is half x 8 x 6 = 24 square units.",
+      "commonMistake": "Using 8 x 6 = 48, which is the area of the enclosing rectangle rather than of the triangle."
+    },
+    {
+      "id": "icse-9-math-q-coo-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance of the point (-5, -12) from the origin is:",
+      "options": [
+        "13",
+        "17",
+        "144",
+        "-13"
+      ],
+      "correctIndex": 0,
+      "answer": "13 units, since root(25 + 144) = root 169",
+      "explanation": "The origin is (0, 0), so the distance is root((-5 - 0)^2 + (-12 - 0)^2) = root(25 + 144) = root 169 = 13, using the 5-12-13 triple.",
+      "commonMistake": "Giving -13, since a distance cannot be negative even though both coordinates are."
+    },
+    {
+      "id": "icse-9-math-q-coo-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: a point that lies on the x-axis has y-coordinate equal to ________.",
+      "answer": "0, because every point on the x-axis has a vertical distance of zero",
+      "explanation": "Moving along the x-axis never changes the vertical distance from the origin, so the y-coordinate stays at zero.",
+      "commonMistake": "Setting the x-coordinate to zero, which describes a point on the y-axis instead."
+    },
+    {
+      "id": "icse-9-math-q-coo-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the distance formula is the square root of the sum of the squares of the differences in the two ________.",
+      "answer": "coordinates, that is (x1 - x2)^2 and (y1 - y2)^2",
+      "explanation": "The two differences are the horizontal and vertical legs of a right triangle, so the formula is Pythagoras written in coordinates.",
+      "commonMistake": "Adding the differences instead of squaring and adding, which loses the right angle."
+    },
+    {
+      "id": "icse-9-math-q-coo-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State in which quadrant each of the following lies: (a) (-7, -2), (b) (5, -9).",
+      "answer": "(a) In (-7, -2) the x-coordinate is negative and the y-coordinate is negative, so the point lies in the third quadrant. (b) In (5, -9) the x-coordinate is positive and the y-coordinate is negative, so the point lies in the fourth quadrant.",
+      "explanation": "The sign pattern of the two coordinates determines the quadrant directly, with no plotting needed.",
+      "commonMistake": "Reversing the coordinate order, which would swap the quadrant in both cases."
+    },
+    {
+      "id": "icse-9-math-q-coo-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the distance between the points (2, -1) and (-3, 4).",
+      "answer": "The difference in x is -3 - 2 = -5 and the difference in y is 4 - (-1) = 5. The distance is root((-5)^2 + 5^2) = root(25 + 25) = root 50 = 5 root 2 units.",
+      "explanation": "Both differences here have the same magnitude, so the root simplifies to 5 root 2 rather than coming out as a whole number.",
+      "commonMistake": "Writing 4 - 2 = 2 for the difference in y, forgetting that the second coordinate is negative."
+    },
+    {
+      "id": "icse-9-math-q-coo-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the midpoint of the points (6, 4) and (-2, 10), and show that this point is equidistant from both given points.",
+      "answer": "The midpoint is ((6 + -2)/2, (4 + 10)/2) = (4/2, 14/2) = (2, 7). Its distance from (6, 4) is root((2 - 6)^2 + (7 - 4)^2) = root(16 + 9) = root 25 = 5. Its distance from (-2, 10) is root((2 - (-2))^2 + (7 - 10)^2) = root(16 + 9) = root 25 = 5. Both distances are 5, so the midpoint is equidistant from the two points as required.",
+      "explanation": "The midpoint lies exactly halfway along the segment, which is precisely what being equidistant from the endpoints means.",
+      "commonMistake": "Averaging only one of the two coordinates, or dividing by 4 instead of 2."
+    },
+    {
+      "id": "icse-9-math-q-coo-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the length of the line segment joining (1, 7) and (5, 2), and find a point that divides this segment into two equal parts.",
+      "answer": "The differences are 5 - 1 = 4 and 2 - 7 = -5, so the length is root(4^2 + (-5)^2) = root(16 + 25) = root 41 units. The midpoint is ((1 + 5)/2, (7 + 2)/2) = (6/2, 9/2) = (3, 9/2), that is (3, 4.5).",
+      "explanation": "The distance and the midpoint use the same two differences, one squared and one averaged, so both come from a single reading of the points.",
+      "commonMistake": "Getting 4.5 from the y-average while writing the coordinates in the order (4.5, 3)."
+    },
+    {
+      "id": "icse-9-math-q-coo-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the area of the triangle whose vertices are A(1, 2), B(4, 6) and C(6, 3).",
+      "answer": "Taking x1 = 1, y1 = 2, x2 = 4, y2 = 6, x3 = 6, y3 = 3, the sum is x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2) = 1(6 - 3) + 4(3 - 2) + 6(2 - 6) = 3 + 4 - 24 = -17. The area is half the absolute value, so 17/2 = 8.5 square units. As a check, AB has length root(3^2 + 4^2) = 5 and the perpendicular distance from C to the line AB is 17/5, giving half x 5 x 17/5 = 8.5 square units.",
+      "explanation": "The negative sign only records that the vertices were listed anticlockwise, and taking the absolute value is always necessary.",
+      "commonMistake": "Reporting -8.5 square units as the area, forgetting that an area cannot be negative."
+    },
+    {
+      "id": "icse-9-math-q-coo-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A quadrilateral has vertices P(0, 0), Q(8, 0), R(8, 5) and S(0, 5). Find its area using the coordinate method, and name the shape.",
+      "answer": "The four vertices are the corners of an axis-aligned figure with horizontal side PQ of length 8 and vertical side PS of length 5, so the shape is a rectangle of area 8 x 5 = 40 square units. By the triangle method, splitting along PR gives triangle PQR with vertices (0, 0), (8, 0) and (8, 5), whose area is half of root-free computation: x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2) = 0(0 - 5) + 8(5 - 0) + 8(0 - 0) = 40, so the area is 20. Triangle PRS with vertices (0, 0), (8, 5) and (0, 5) gives 0(5 - 5) + 8(5 - 0) + 0(0 - 5) = 40, so the area is 20. The total is 20 + 20 = 40 square units, which agrees.",
+      "explanation": "Splitting the quadrilateral along a diagonal turns it into two triangles, each of which the coordinate formula handles directly.",
+      "commonMistake": "Applying the triangle formula to four points without splitting, since the formula is defined for exactly three vertices."
+    },
+    {
+      "id": "icse-9-math-q-coo-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve graphically the equations 2x + y = 7 and x - y = 2.",
+      "answer": "Write the first as y = 7 - 2x, which passes through (0, 7) and (3.5, 0). Write the second as y = x - 2, which passes through (0, -2) and (2, 0). Plotting both and extending them, they cross where 7 - 2x = x - 2, that is 9 = 3x and x = 3, giving y = 1. The solution is the point (3, 1). Checking in the originals: 2(3) + 1 = 7 and 3 - 1 = 2, both correct.",
+      "explanation": "The crossing point is the unique point on both lines, so reading it off the graph is the graphical solution, and substituting back confirms it.",
+      "commonMistake": "Reading the y-intercepts as the solution, since the intercepts satisfy only one of the two equations."
+    },
+    {
+      "id": "icse-9-math-q-coo-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the point (3, 5), (4, 3) and (6, -1) are collinear.",
+      "answer": "The slope from (3, 5) to (4, 3) is (3 - 5)/(4 - 3) = -2/1 = -2. The slope from (4, 3) to (6, -1) is (-1 - 3)/(6 - 4) = -4/2 = -2. The slope from (3, 5) to (6, -1) is (-1 - 5)/(6 - 3) = -6/3 = -2. All three slopes are equal to -2, so the three points lie on the single straight line y - 5 = -2(x - 3), that is y = -2x + 11, which all three satisfy.",
+      "explanation": "Points are collinear exactly when the slope between every pair is the same, and here all three slopes agree.",
+      "commonMistake": "Checking only two of the three slopes, which is enough only when the conclusion follows from a shared pair."
+    },
+    {
+      "id": "icse-9-math-q-coo-16",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why the equations y = 2x + 1 and y = 2x + 5 have no simultaneous solution.",
+      "answer": "Both lines have slope 2, so they are parallel. The first passes through (0, 1) and the second through (0, 5), and their vertical separation of 4 units is constant everywhere because the slopes are equal. Two parallel lines never meet, so there is no point lying on both, and hence no ordered pair satisfying both equations. This is the case of a consistent pair with no solution.",
+      "explanation": "Equal slopes mean parallel lines, and parallel lines have no common point, so the system has no solution.",
+      "commonMistake": "Assuming the system is inconsistent because of arithmetic mistakes, when in fact it is perfectly consistent but has no solution."
+    },
+    {
+      "id": "icse-9-math-q-coo-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A point P is equidistant from (2, 5) and (6, 1). Find the locus of P.",
+      "answer": "Every point equidistant from two fixed points lies on the perpendicular bisector of the line segment joining them. The midpoint of the two points is ((2 + 6)/2, (5 + 1)/2) = (4, 3), and the segment has slope (1 - 5)/(6 - 2) = -4/4 = -1. The perpendicular bisector therefore has slope 1 and passes through (4, 3), so its equation is y - 3 = 1(x - 4), that is y = x - 1. The locus is the whole straight line y = x - 1, not just the one midpoint.",
+      "explanation": "Equidistant points form a line rather than a single point, and that line is the perpendicular bisector of the segment.",
+      "commonMistake": "Answering only the midpoint (4, 3), which is equidistant but is a single point rather than the full locus."
+    },
+    {
+      "id": "icse-9-math-q-coo-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the area of the triangle formed by the points (0, 0), (9, 0) and (9, 12).",
+      "answer": "The first two points lie on the x-axis and the third shares the x-coordinate 9 with the second, so the triangle is right-angled at (9, 0) with base 9 along the x-axis and height 12 up the vertical line x = 9. The area is half x 9 x 12 = 54 square units.",
+      "explanation": "A shared x-coordinate or y-coordinate means the connecting side is vertical or horizontal, which makes the height easy to read off directly.",
+      "commonMistake": "Using 9 + 12 as the base, treating the two legs as a single horizontal length."
+    },
+    {
+      "id": "icse-9-math-q-coo-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A rectangle has vertices at (2, 3), (2, 11), (10, 11) and (10, 3). Find its area, its perimeter and its centre.",
+      "answer": "The vertices share x-coordinates 2 and 10, and y-coordinates 3 and 11, so the rectangle has width 10 - 2 = 8 and height 11 - 3 = 8, making it a square. The area is 8 x 8 = 64 square units. The perimeter is 4 x 8 = 32 units. The centre is the midpoint of the diagonal from (2, 3) to (10, 11), which is ((2 + 10)/2, (3 + 11)/2) = (6, 7).",
+      "explanation": "Reading the equal coordinate differences shows the rectangle is actually a square, and the centre of any rectangle is the midpoint of either diagonal.",
+      "commonMistake": "Taking the centre as (12, 14), which adds the vertices rather than averaging them."
+    },
+    {
+      "id": "icse-9-math-q-coo-20",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the coordinates of the point that is 6 units from the origin on the positive y-axis.",
+      "answer": "A point on the positive y-axis has the form (0, y) with y positive. Its distance from the origin is root(0^2 + y^2) = root(y^2) = y since y is positive. Setting this equal to 6 gives y = 6, so the point is (0, 6).",
+      "explanation": "On an axis one coordinate is zero, so the distance from the origin is simply the magnitude of the other coordinate.",
+      "commonMistake": "Giving (0, -6), which is on the negative y-axis rather than the positive one."
+    },
+    {
+      "id": "icse-9-math-q-coo-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A line passes through the points (0, 4) and (3, 4). What kind of line is it and what is its equation?",
+      "answer": "Both points have the same y-coordinate of 4, so the line is horizontal and parallel to the x-axis. Every point on it has y = 4, so its equation is y = 4. A horizontal line has slope 0, since the vertical difference between the two points is zero.",
+      "explanation": "A constant y-coordinate means the line never rises or falls, which is exactly a line parallel to the x-axis.",
+      "commonMistake": "Writing x = 4, which is the vertical line through the same y-value rather than the horizontal one."
+    },
+    {
+      "id": "icse-9-math-q-coo-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve graphically the equations 3x + 2y = 12 and x = 2.",
+      "answer": "The first equation gives y = 6 - (3/2)x, which passes through (0, 6) and (4, 0). The second equation is the vertical line x = 2. The vertical line x = 2 meets the first line where 3(2) + 2y = 12, that is 6 + 2y = 12 and y = 3. The solution is the point (2, 3).",
+      "explanation": "A vertical line such as x = 2 is read directly off the horizontal scale, and the intersection is where it crosses the other line.",
+      "commonMistake": "Trying to rearrange x = 2 into the form y = mx + c, which is impossible for a vertical line."
+    },
+    {
+      "id": "icse-9-math-q-coo-23",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the length of the perpendicular from the point (3, 4) to the x-axis.",
+      "answer": "The perpendicular from a point to the x-axis is vertical, so its length is the magnitude of the y-coordinate of the point. Here it is 4 units. The foot of the perpendicular is (3, 0), since moving down to the x-axis changes only the y-coordinate to zero.",
+      "explanation": "The distance to the x-axis depends only on the y-coordinate, and to the y-axis only on the x-coordinate.",
+      "commonMistake": "Using 3, the x-coordinate, which would be the distance to the y-axis instead."
+    },
+    {
+      "id": "icse-9-math-q-coo-24",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the points A(1, 1), B(7, 1) and C(4, 6) form a triangle whose area is 15 square units.",
+      "answer": "Since A and B share the y-coordinate 1, the segment AB is horizontal with length 7 - 1 = 6. The perpendicular distance from C to the line y = 1 is 6 - 1 = 5. The area is half x 6 x 5 = 15 square units. Using the coordinate formula to confirm: x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2) = 1(1 - 6) + 7(6 - 1) + 4(1 - 1) = -5 + 35 + 0 = 30, and half the absolute value is 15 square units. The sides are AB = 6, AC = root(3^2 + 5^2) = root 34 and BC = root(3^2 + 5^2) = root 34, so the triangle is isosceles.",
+      "explanation": "A shared y-coordinate makes one side horizontal, which gives the base and height immediately, and the coordinate formula confirms the same value.",
+      "commonMistake": "Measuring the height as 6 instead of 5, forgetting that it is the vertical distance from C down to the line through A and B."
+    },
+    {
+      "id": "icse-9-math-q-coo-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the coordinates of the origin and of any point on either axis.",
+      "answer": "The origin has coordinates (0, 0). Any point on the x-axis has the form (x, 0) for some value of x, so its y-coordinate is zero. Any point on the y-axis has the form (0, y) for some value of y, so its x-coordinate is zero. The origin is the one point lying on both axes at once.",
+      "explanation": "The two axes are defined by the two zero conditions, and the origin is the single point where both hold.",
+      "commonMistake": "Giving the origin as (1, 1), confusing the origin with a generic unit point."
+    },
+    {
+      "id": "icse-9-math-q-coo-26",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The distance between two points P(x1, y1) and Q(x2, y2) is 13 units, the difference in their x-coordinates is 5 and the difference in their y-coordinates is 12. Find two possible pairs of coordinates for P and Q.",
+      "answer": "The distance formula gives root(5^2 + 12^2) = root(25 + 144) = root 169 = 13, so the data is consistent with the 5-12-13 triple. One pair is P(2, 1) and Q(7, 13), since the x-difference is 7 - 2 = 5 and the y-difference is 13 - 1 = 12. Another pair is P(-3, 4) and Q(2, 16), since the x-difference is 2 - (-3) = 5 and the y-difference is 16 - 4 = 12. In both cases the distance is root(25 + 144) = 13, so both pairs satisfy the conditions.",
+      "explanation": "The differences fix the length but not the position, so infinitely many pairs work; shifting both points by the same amount in both coordinates gives a further valid pair.",
+      "commonMistake": "Giving only one pair, when the question asks for two."
+    }
+  ]
+}

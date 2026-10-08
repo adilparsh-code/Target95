@@ -1,0 +1,546 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-physics-reflection-of-light",
+  "title": "Reflection of Light",
+  "kind": "physics",
+  "tagline": "Laws of reflection, plane mirrors and spherical mirrors with ray diagrams",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class IX Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed by scripts/verify-math.mjs. No board-examination paper was consulted, so every question is original practice and not a previous year question. Ray diagrams are given as labelled descriptions because the content schema carries plain text only."
+  },
+  "overview": {
+    "intro": "Light travels in straight lines and changes direction when it meets a surface. This chapter studies that change. The first law of reflection, that the angle of incidence equals the angle of reflection, is enough to build up a whole subject: reflection in a plane mirror, the virtual upright laterally inverted image it forms, and then the spherical mirrors, where a curved surface brings rays to a real focus or appears to do so. The mirror formula and the ray diagram must be learned together, because the diagram fixes the sign of every distance in the formula, and marks are lost far more often from wrong signs than from wrong arithmetic.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Light"
+      },
+      {
+        "label": "Laws of reflection",
+        "value": "The incident ray, the normal and the reflected ray all lie in one plane; the angle of incidence equals the angle of reflection"
+      },
+      {
+        "label": "Key formula",
+        "value": "1/f = 1/v + 1/u, with R = 2f"
+      },
+      {
+        "label": "Sign convention",
+        "value": "Distances measured against the incident ray are negative; the focal length of a concave mirror is negative"
+      },
+      {
+        "label": "Speed of light",
+        "value": "About 3 x 10 to the power 8 metres per second in air or vacuum"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "laws",
+      "title": "Reflection and its two laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reflection is the change of direction of light when it strikes a surface that does not allow it to pass through. The angle of incidence is the angle between the incident ray and the normal at the point of incidence, and the angle of reflection is the angle between the reflected ray and the same normal. Both angles are measured from the normal and never from the surface, which is the detail most often confused."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Normal",
+              "meaning": "The perpendicular drawn to the reflecting surface at the point of incidence."
+            },
+            {
+              "term": "Angle of incidence",
+              "meaning": "The angle between the incident ray and the normal, measured from the normal."
+            },
+            {
+              "term": "Angle of reflection",
+              "meaning": "The angle between the reflected ray and the normal, measured from the normal."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The first law states that the incident ray, the normal and the reflected ray all lie in the same plane.",
+            "The second law states that the angle of incidence equals the angle of reflection.",
+            "All angles are measured from the normal, not from the mirror surface.",
+            "Light travels in straight lines in a uniform medium, which is why shadows have sharp edges.",
+            "A ray that strikes normally returns along its own path, since the angle of incidence is zero."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A ray strikes a plane mirror at an angle of 35 degrees to the normal. State the angle of reflection and the angle between the incident ray and the mirror surface.",
+              "note": "By the second law the angle of reflection is 35 degrees. The angle between the ray and the surface is the complement, 90 minus 35 = 55 degrees."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plane-mirror",
+      "title": "Images in a plane mirror",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A plane mirror forms an image that is the same size as the object, upright, and as far behind the mirror as the object is in front. The image can never be formed on a screen because the light rays reaching the eye appear to diverge from a point behind the mirror, so the image is virtual."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The image in a plane mirror is virtual, erect and of the same size as the object.",
+            "The image is laterally inverted: the right side of the object appears on the left in the image.",
+            "The image is as far behind the mirror as the object is in front, so the two are symmetric about the mirror plane.",
+            "The image distance and the object distance are equal in magnitude and are measured from the pole or the surface along the principal axis.",
+            "Writing the letter in front of a plane mirror and looking at it in a mirror reveals lateral inversion most clearly."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An object stands 40 cm in front of a plane mirror. Find the position of the image and the distance between the object and its image.",
+              "note": "The image is 40 cm behind the mirror, so the separation of object and image is 40 + 40 = 80 cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spherical-mirrors",
+      "title": "Spherical mirrors: pole, centre, focus and radius",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A spherical mirror is a small part of a hollow sphere. It is concave when the reflecting surface lies on the inside of the sphere, so that it curves towards the object, and convex when it lies on the outside. The pole P is the point on the mirror nearest the object, the centre of curvature C is the centre of the sphere, and the principal focus F lies halfway between them, so the radius of curvature R = 2f."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "R = 2f, so once the radius is known the position of the focus follows immediately.",
+            "A concave mirror forms a real image when the object is beyond the focus, and the image can be formed on a screen.",
+            "A convex mirror always forms a virtual, erect and diminished image, whatever the position of the object.",
+            "A concave mirror with the object at the focus forms the image at infinity, which is how a searchlight or a beam of parallel light is produced.",
+            "Shaving and dentist mirrors are concave mirrors because they form an enlarged virtual image.",
+            "Road and shop sign mirrors are convex mirrors because they show a wider field of view than a plane mirror."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A concave mirror has a radius of curvature of 20 cm. Find the distance of its focus from the pole.",
+              "note": "Since R = 2f, the focal length is f = 20/2 = 10 cm, and by the new Cartesian convention the focal length of a concave mirror is negative, so f = minus 10 cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mirror-formula",
+      "title": "The mirror formula and the sign convention",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mirror formula relates the focal length, the object distance and the image distance. It only works correctly if a strict sign convention is applied, and the single most common cause of a wrong answer is a wrong sign rather than wrong arithmetic."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mirror formula: 1/f = 1/v + 1/u.",
+            "New Cartesian convention: all distances are measured from the pole, and any distance measured against the direction of the incident light is taken as negative.",
+            "For a real object in front of the mirror the object distance u is negative.",
+            "For a concave mirror the focal length f is negative; for a convex mirror it is positive.",
+            "A negative image distance v means a real image, and a positive v means a virtual image behind the mirror.",
+            "The magnification is minus v over u, and a negative magnification means the image is inverted."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A concave mirror of focal length 10 cm has an object placed 30 cm in front of it. Find the position of the image.",
+              "note": "Here f = minus 10 cm and u = minus 30 cm. Using 1/v = 1/f minus 1/u = minus 1/10 minus (-1/30) = minus 1/10 + 1/30 = (-3 + 1)/30 = -2/30 = minus 1/15, so v = minus 15 cm. The image is real, inverted, and formed 15 cm in front of the mirror."
+            },
+            {
+              "text": "A convex mirror has a focal length of 20 cm and an object is placed at 30 cm. Find the image distance.",
+              "note": "For a convex mirror f = plus 20 cm and u = minus 30 cm. Then 1/v = 1/20 minus (-1/30) = 1/20 + 1/30 = (3 + 2)/60 = 5/60 = 1/12, so v = plus 12 cm. A positive image distance confirms a virtual image behind the mirror."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Angles of incidence and reflection are measured from the normal, not from the surface.",
+    "The incident ray, the normal and the reflected ray lie in the same plane.",
+    "The angle of incidence equals the angle of reflection.",
+    "A plane mirror forms a virtual, erect, laterally inverted image of the same size as the object.",
+    "The image is as far behind the mirror as the object is in front, so the separation is twice the object distance.",
+    "A spherical mirror has a pole P, a centre of curvature C and a principal focus F.",
+    "R = 2f.",
+    "Mirror formula: 1/f = 1/v + 1/u.",
+    "New Cartesian convention: distances measured against the incident light are negative.",
+    "For a real object u is negative; for a concave mirror f is negative and for a convex mirror f is positive.",
+    "A negative v means a real image; a positive v means a virtual image behind the mirror.",
+    "Magnification is minus v over u, and a negative magnification means the image is inverted.",
+    "A convex mirror always gives a virtual, erect and diminished image.",
+    "A concave mirror with the object at the focus sends parallel rays to infinity, as in a searchlight."
+  ],
+  "examFocus": [
+    "Draw the ray diagram before substituting into the mirror formula, because the diagram fixes the sign of every distance and most wrong answers are sign errors.",
+    "State explicitly which side of the mirror each distance is measured, as the marker expects the convention to be visible in the working.",
+    "Plane mirror questions should state the three properties of the image explicitly: virtual, erect, same size, and laterally inverted.",
+    "Concave and convex mirrors must not be confused in ray diagrams: a convex mirror never gives a real image, whatever the object distance.",
+    "Magnification questions should state whether the image is inverted or erect, since that follows from the sign of the magnification."
+  ],
+  "vocabulary": [
+    {
+      "word": "Normal",
+      "meaning": "The perpendicular to the reflecting surface at the point where the light strikes it."
+    },
+    {
+      "word": "Pole",
+      "meaning": "The point on a spherical mirror nearest to the object, from which all distances are measured."
+    },
+    {
+      "word": "Focus",
+      "meaning": "The point on the principal axis where rays parallel to the axis converge, halfway between the pole and the centre of curvature."
+    },
+    {
+      "word": "Virtual image",
+      "meaning": "An image that cannot be formed on a screen because the light appears to diverge from it."
+    },
+    {
+      "word": "Lateral inversion",
+      "meaning": "The apparent left-right reversal produced by a plane mirror."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-phy-q-lig-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The angle of incidence and the angle of reflection are measured from the:",
+      "options": [
+        "normal",
+        "surface",
+        "principal axis",
+        "pole"
+      ],
+      "correctIndex": 0,
+      "answer": "normal",
+      "explanation": "Both angles are conventionally measured between the ray and the normal drawn to the surface at the point of incidence, which is why they are equal when the ray strikes a plane surface.",
+      "commonMistake": "Measuring from the surface, which gives the complementary angles and makes equality appear to fail."
+    },
+    {
+      "id": "icse-9-phy-q-lig-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The image formed by a plane mirror is:",
+      "options": [
+        "virtual and erect",
+        "real and inverted",
+        "real and erect",
+        "virtual and inverted"
+      ],
+      "correctIndex": 0,
+      "answer": "virtual and erect",
+      "explanation": "The rays reaching the eye appear to diverge from a point behind the mirror, so the image is virtual, and it is upright and the same size as the object.",
+      "commonMistake": "Saying the image is inverted, confusing a plane mirror image with the image formed by a concave mirror for a distant object."
+    },
+    {
+      "id": "icse-9-phy-q-lig-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An object is placed 25 cm in front of a plane mirror. The distance between the object and its image is:",
+      "options": [
+        "50 cm",
+        "25 cm",
+        "75 cm",
+        "12.5 cm"
+      ],
+      "correctIndex": 0,
+      "answer": "50 cm",
+      "explanation": "The image is 25 cm behind the mirror, so the separation is 25 + 25 = 50 cm, that is twice the object distance.",
+      "commonMistake": "Reporting 25 cm, which is the distance of the image behind the mirror rather than the total separation."
+    },
+    {
+      "id": "icse-9-phy-q-lig-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radius of curvature of a spherical mirror is 30 cm. Its focal length is:",
+      "options": [
+        "15 cm",
+        "30 cm",
+        "60 cm",
+        "7.5 cm"
+      ],
+      "correctIndex": 0,
+      "answer": "15 cm",
+      "explanation": "The focus is midway between the pole and the centre of curvature, so R = 2f and f = 30/2 = 15 cm.",
+      "commonMistake": "Equating f with R instead of R/2."
+    },
+    {
+      "id": "icse-9-phy-q-lig-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these always forms a virtual, erect and diminished image?",
+      "options": [
+        "a convex mirror",
+        "a concave mirror",
+        "a plane mirror",
+        "a concave mirror with the object beyond the focus"
+      ],
+      "correctIndex": 0,
+      "answer": "a convex mirror",
+      "explanation": "A convex mirror has its focus behind the mirror, so rays always appear to diverge from a point behind it and the image is always virtual, erect and diminished, whatever the object position.",
+      "commonMistake": "Choosing a plane mirror, whose image is virtual and erect but the same size as the object rather than diminished."
+    },
+    {
+      "id": "icse-9-phy-q-lig-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: in a plane mirror the image appears laterally inverted, that is the right side of the object appears on the ________.",
+      "answer": "left, and the left side appears on the right",
+      "explanation": "Each point of the image is as far behind the mirror as the corresponding point of the object is in front, but the left and right are interchanged.",
+      "commonMistake": "Saying the image is upside down, confusing lateral inversion with the top-bottom reversal of a vertical inversion."
+    },
+    {
+      "id": "icse-9-phy-q-lig-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: for a spherical mirror, the radius of curvature R and the focal length f are related by R = ________.",
+      "answer": "2f, since the focus lies midway between the pole and the centre of curvature",
+      "explanation": "The principal focus is the midpoint of the segment joining the pole to the centre of the sphere, so the focal length is half the radius.",
+      "commonMistake": "Writing f/2 or 2R, which does not correspond to the position of the focus."
+    },
+    {
+      "id": "icse-9-phy-q-lig-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the two laws of reflection of light.",
+      "answer": "First, the incident ray, the normal and the reflected ray all lie in the same plane. Second, the angle of incidence equals the angle of reflection, both being measured from the normal at the point of incidence. If the second law holds the rays are coplanar, and if the first holds then no other pair of rays in a different plane can strike the same point on the mirror.",
+      "explanation": "The two laws together determine the path of the reflected ray completely once the incident ray and the surface are fixed.",
+      "commonMistake": "Measuring one angle from the normal and the other from the surface, which makes them appear unequal."
+    },
+    {
+      "id": "icse-9-phy-q-lig-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A ray of light strikes a plane mirror at an angle of 40 degrees to the normal. Find the angle of reflection and the angle the reflected ray makes with the mirror surface.",
+      "answer": "By the second law of reflection the angle of reflection is 40 degrees. The normal is at 90 degrees to the surface, so the angle the reflected ray makes with the surface is the complement, 90 minus 40 = 50 degrees.",
+      "explanation": "The angle with the normal and the angle with the surface always add to 90 degrees.",
+      "commonMistake": "Giving 40 degrees for the angle with the surface, confusing the two complementary angles."
+    },
+    {
+      "id": "icse-9-phy-q-lig-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "An object is placed 30 cm in front of a plane mirror. Find the distance of the image from the object, and state what happens to the image if the object is moved 10 cm nearer to the mirror.",
+      "answer": "The image is 30 cm behind the mirror, so the distance between the object and the image is 30 + 30 = 60 cm. Moving the object 10 cm nearer puts it 20 cm in front of the mirror, and the image moves to 20 cm behind it, so the new separation is 40 cm. Each of the two moves closes the gap by 10 cm, so the separation falls by 20 cm.",
+      "explanation": "Both the object and its image move by the same amount towards the mirror, so the separation changes by twice the shift.",
+      "commonMistake": "Reducing the separation by only 10 cm, forgetting that the image moves as well as the object."
+    },
+    {
+      "id": "icse-9-phy-q-lig-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A concave mirror of focal length 10 cm has an object placed 30 cm in front of it. Using the new Cartesian convention, find the position of the image and state its nature.",
+      "answer": "Here f = minus 10 cm and u = minus 30 cm. Rearranging the mirror formula, 1/v = 1/f minus 1/u = minus 1/10 minus (minus 1/30) = minus 1/10 + 1/30 = (-3 + 1)/30 = minus 2/30 = minus 1/15, so v = minus 15 cm. A negative image distance means the image is in front of the mirror and therefore real. Since v = minus 15 and u = minus 30, the magnification is minus v/u = minus ((-15)/(-30)) = minus 0.5, so the image is inverted and half the size of the object.",
+      "explanation": "Working entirely in signed quantities and reading the nature of the image off the sign of v avoids ambiguity.",
+      "commonMistake": "Taking f as positive for a concave mirror, which would place the image behind the mirror and describe a mirror that does not exist."
+    },
+    {
+      "id": "icse-9-phy-q-lig-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A convex mirror has a focal length of 20 cm. An object is placed 30 cm in front of the mirror. Find the image distance and the magnification.",
+      "answer": "For a convex mirror f = plus 20 cm, and for a real object in front of the mirror u = minus 30 cm. From 1/v = 1/f minus 1/u = 1/20 plus 1/30 = (3 + 2)/60 = 5/60 = 1/12, so v = plus 12 cm. The positive sign places the image 12 cm behind the mirror, so it is virtual. The magnification is minus v/u = minus (12/(minus 30)) = plus 0.4, so the image is erect and 0.4 times the size of the object. This confirms the rule that a convex mirror always gives a diminished erect virtual image.",
+      "explanation": "A positive f for a convex mirror combined with a negative u produces a positive v and a positive magnification, which is the signature of a virtual erect diminished image.",
+      "commonMistake": "Applying the same sign for f as for a concave mirror, which would give a different and incorrect result."
+    },
+    {
+      "id": "icse-9-phy-q-lig-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "An object is placed 20 cm from a concave mirror of focal length 5 cm. Find the image distance by the mirror formula and by the method of magnification, and state the nature of the image.",
+      "answer": "Here f = minus 5 cm and u = minus 20 cm. From the mirror formula, 1/v = 1/f minus 1/u = minus 1/5 + 1/20 = (-4 + 1)/20 = minus 3/20, so v = minus 20/3 = minus 6.67 cm. The image is 6.67 cm in front of the mirror, so it is real. The magnification is minus v/u = minus ((-6.67)/(-20)) = minus 0.33, so the image is inverted and smaller than the object. As a check, the object at 4f gives an image at 4f/3, and 4 x 5/3 = 6.67 cm, which agrees with the mirror formula.",
+      "explanation": "Two independent methods agreeing is the best check that the signs were applied correctly, and the object at 4f is a standard position worth memorising.",
+      "commonMistake": "Writing v as minus 6.67 and then treating it as a virtual image, forgetting that a negative v means the image is in front of the mirror and therefore real."
+    },
+    {
+      "id": "icse-9-phy-q-lig-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why is the image formed by a plane mirror unable to be formed on a screen?",
+      "answer": "A screen can only display an image where light rays actually converge. The rays reflected by a plane mirror diverge after reflection, and when they enter the eye they appear to have come from a point behind the mirror where no light actually passes. The image is therefore virtual, and since no real convergence occurs in front of the mirror, there is no position at which a screen placed anywhere could intercept the rays to reproduce the image. A concave mirror with the object beyond the focus does form a real image, because there the reflected rays genuinely converge at a point and can be caught on a screen.",
+      "explanation": "The distinction between real and virtual images is precisely whether the rays really converge or only appear to.",
+      "commonMistake": "Saying the image is too faint to appear on a screen, which is about brightness rather than about convergence."
+    },
+    {
+      "id": "icse-9-phy-q-lig-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe, with a labelled ray diagram in words, the image formed by a concave mirror when the object is placed between the pole and the focus, and explain why a dentist uses such a mirror.",
+      "answer": "Ray diagram description: draw the principal axis and mark P, F and C on it. Place a small upright arrow for the object AB between P and F. Draw a ray from the top B parallel to the axis; it reflects through F. Draw a second ray from B passing through C; it reflects back along the same line. These two reflected rays diverge, and extending them backwards behind the mirror they meet at a point A prime. The image A prime B prime lies behind the mirror, is upright, enlarged and virtual, because the reflected rays only appear to diverge from it. The magnification exceeds one since the image distance exceeds the object distance. A dentist uses a concave mirror with the object, the tooth, inside the focal length because the resulting enlarged virtual image lets the dentist see a magnified view of a small region, including places inside the mouth that cannot be seen directly.",
+      "explanation": "When the object is inside the focus the reflected rays diverge and the image is behind the mirror, upright and enlarged, which is exactly what a concave mirror is chosen for inside the mouth.",
+      "commonMistake": "Placing the image in front of the mirror, which happens only when the object is beyond the focus."
+    },
+    {
+      "id": "icse-9-phy-q-lig-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two uses of a convex mirror and explain why a convex mirror is chosen for each.",
+      "answer": "Convex mirrors are used as rear view mirrors in vehicles because they always form a virtual, erect and diminished image, and because they show a much wider field of view than a plane mirror, so objects to the side and behind are visible. They are also used as shop and road safety mirrors at blind corners for the same reason, since a convex surface bends light rays outwards and therefore makes objects behind and to the side appear smaller but visible. In both cases the priority is the wider field of view rather than the size of the image, and the image being diminished is an acceptable price for that.",
+      "explanation": "The wide field of view comes from the outward bending of rays by the convex surface, which lets the observer see more of the surroundings.",
+      "commonMistake": "Choosing a concave mirror for a rear view mirror, which would show a much narrower field and a magnified image in the wrong places."
+    },
+    {
+      "id": "icse-9-phy-q-lig-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does a dark shirt appear brighter than a light shirt in sunlight, and which of the two is the better absorber of heat?",
+      "answer": "A surface that appears dark reflects very little of the light falling on it and absorbs most of it, whereas a light surface reflects most of the light and absorbs little. Light reflected from a light surface enters the eye strongly and the surface looks bright, while a dark surface reflects little light into the eye and looks dark even in strong sunlight. The dark shirt is the better absorber of heat because it absorbs a larger fraction of the radiant energy falling on it, and for the same reason it is the better emitter of radiation when hot.",
+      "explanation": "Good absorbers are also good emitters, and both are the opposite of good reflectors, which is why bright surfaces stay cooler in sunlight.",
+      "commonMistake": "Saying the dark shirt is hot because it is dark, which confuses appearance with absorption without stating the reasoning."
+    },
+    {
+      "id": "icse-9-phy-q-lig-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A concave mirror is placed 20 cm from a screen and forms a sharp image on the screen. If the object is then moved 5 cm towards the mirror, state whether a sharp image can still be obtained and justify the answer.",
+      "answer": "When a sharp real image is formed on a screen, the object and the image are conjugate, so their distances from the mirror satisfy the mirror formula. Moving the object 5 cm nearer to the mirror breaks that relationship, so no image can be formed sharply at the same screen position. A sharp image can be obtained again only by moving the screen to a new position, and in general the image will no longer be of the same size. This is exactly why a camera must be refocused when the distance of the object changes.",
+      "explanation": "Sharpness requires the object and image distances to satisfy the mirror formula together, so changing one alone disturbs the focus.",
+      "commonMistake": "Assuming the image on the screen simply becomes blurred and stays in the same place, without noting that refocusing recovers a sharp image."
+    },
+    {
+      "id": "icse-9-phy-q-lig-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State what is meant by lateral inversion and give one everyday observation that demonstrates it.",
+      "answer": "Lateral inversion is the apparent interchange of left and right when an object is viewed in a mirror, so that the right hand appears as the left. It is demonstrated by writing a word such as AMBULANCE on a card and looking at it in a mirror, where it appears as reversed lettering that cannot be read normally. It also explains why writing that is legible in a mirror cannot be read directly, and it is the reason ambulance lettering is written so that it can be read in a rear view mirror.",
+      "explanation": "Each point of the image lies as far behind the mirror as the object lies in front, but the left and right are interchanged.",
+      "commonMistake": "Saying lateral inversion means the image is upside down, which is a different transformation called inversion in a vertical direction."
+    },
+    {
+      "id": "icse-9-phy-q-lig-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain how a concave mirror is used as a shaving mirror and how the same mirror shape acts as a reflector in a headlight.",
+      "answer": "For a shaving mirror the face is placed between the pole and the focus, so the image is virtual, upright and magnified. A magnified image means the small facial features appear larger to the observer, which is what allows fine hair to be seen and shaved closely. In a headlight a small bulb is placed at the focus of the concave mirror, so rays leaving the bulb are reflected parallel to the principal axis. Parallel rays travel a long distance without spreading, so the beam is concentrated and far brighter than the bulb alone would give. The two applications use opposite regions of the same mirror: inside the focus for magnification, and at the focus for collimation.",
+      "explanation": "Placing the object at the focus sends rays parallel, while placing it inside the focus gives a magnified virtual image.",
+      "commonMistake": "Placing the bulb beyond the focus in a headlight, which gives converging rays that cross and spread out again."
+    },
+    {
+      "id": "icse-9-phy-q-lig-21",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is the speed of light in air or vacuum and state the order of magnitude of the wavelength of visible light.",
+      "answer": "The speed of light in air or vacuum is 3 x 10 to the power 8 metres per second. The wavelength of visible light ranges from about 4 x 10 to the power minus 7 m for violet light to about 7.6 x 10 to the power minus 7 m for red light, so it is of the order of 10 to the power minus 7 m, that is a few hundred nanometres.",
+      "explanation": "Visible light occupies a narrow band of the electromagnetic spectrum, with violet at the short wavelength end and red at the long end.",
+      "commonMistake": "Quoting the speed of sound, 330 m per second, which is some seven figures smaller than the speed of light."
+    },
+    {
+      "id": "icse-9-phy-q-lig-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A ray of light travelling in air falls on a glass surface. State the change, if any, in the speed, the frequency and the wavelength of the ray.",
+      "answer": "The speed decreases on entering glass, because glass is optically denser than air, and the typical ratio is about three halves. The frequency does not change at all, since it is set by the source and the same number of wave crests must arrive at the boundary in the same time. The wavelength decreases in proportion to the speed, so wavelength equals speed divided by frequency and with the frequency fixed a smaller speed gives a smaller wavelength. Nothing is reflected away in this idealised description, so energy conservation is not violated.",
+      "explanation": "Frequency is fixed by the source, so both the speed and the wavelength change together while the frequency stays constant.",
+      "commonMistake": "Saying the frequency changes on refraction, which would break the continuity of the wavefront at the boundary."
+    },
+    {
+      "id": "icse-9-phy-q-lig-23",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A concave mirror has a radius of curvature 40 cm. Find the position of an object for which the image is formed at infinity, and explain the arrangement.",
+      "answer": "Since R = 2f, the focal length is 40/2 = 20 cm. An image at infinity is obtained when the object is placed exactly at the focus, so the object must be 20 cm from the pole in front of the mirror. Rays leaving any point of the object then travel parallel to the principal axis before striking the mirror, and a parallel beam incident on a concave mirror is reflected through the focus, so by reversing the argument the reflected rays leave parallel to the axis and appear to come from infinity. This is how a searchlight beam is produced.",
+      "explanation": "The reversibility of light means a parallel beam converges at the focus, and reversing that gives parallel rays when the object is at the focus.",
+      "commonMistake": "Placing the object at the centre of curvature, which returns the image to the centre of curvature rather than to infinity."
+    },
+    {
+      "id": "icse-9-phy-q-lig-24",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why the image of an object viewed in a plane mirror appears to come from behind the mirror.",
+      "answer": "Each point of the object reflects a diverging pencil of rays from the mirror. Those rays reach the eye along different paths, but only one straight line passes through both the eye and any given reflected ray. Extending that reflected ray backwards, away from the mirror and behind its surface, it meets the mirror at the point where the object point is symmetrically placed. All the reflected rays from that object point, traced backwards, meet at this same symmetric point, so the brain interprets them as having come from there. No light passes through that point, so the image is virtual rather than real.",
+      "explanation": "The eye assumes light arrives in straight lines, and tracing the reflected rays backwards locates an apparent source behind the mirror.",
+      "commonMistake": "Saying light passes through the mirror to reach the eye from behind it, which would make the image real."
+    },
+    {
+      "id": "icse-9-phy-q-lig-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "An object is placed 40 cm in front of a plane mirror. A second mirror is placed parallel to the first at a distance of 20 cm behind it. Describe the images seen in the first mirror.",
+      "answer": "The first mirror forms an image 40 cm behind itself. The second mirror, 20 cm behind the first, lies between the first mirror and that image position, so the first mirror also reflects the image formed by the second mirror. Successive reflections therefore produce a sequence of images getting progressively closer together, spaced by the 20 cm separation of the mirrors, and they appear to extend indefinitely behind the second mirror. The images diminish in size and brightness as the number of reflections increases, because each reflection loses a little light.",
+      "explanation": "Two parallel mirrors reflect light back and forth between them, producing an infinite sequence of images with decreasing spacing.",
+      "commonMistake": "Saying only one image is formed, forgetting that each mirror also reflects the image in the other."
+    },
+    {
+      "id": "icse-9-phy-q-lig-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A convex mirror forms a virtual image 15 cm behind the mirror when a car is placed 60 cm in front of it. Find the magnification and describe the image.",
+      "answer": "Here u = minus 60 cm and v = plus 15 cm, so the magnification is minus v/u = minus (15/(minus 60)) = plus 0.25. The positive magnification means the image is erect, and the value 0.25 means it is one quarter of the size of the car. The positive image distance places it 15 cm behind the mirror, so the image is virtual. This is consistent with the rule that a convex mirror always gives a virtual, erect and diminished image, and the image distance of 15 cm is less than the object distance of 60 cm, as it must always be for a convex mirror.",
+      "explanation": "A positive magnification together with a positive image distance is exactly the signature of a virtual erect image, and the diminished size confirms the convex mirror rule.",
+      "commonMistake": "Reporting a negative magnification and describing the image as inverted, which would contradict the rule that a convex mirror always gives an erect image."
+    }
+  ]
+}

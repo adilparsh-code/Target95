@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-physics-fluids",
+  "title": "Fluids",
+  "kind": "physics",
+  "tagline": "Pressure with depth, Pascal's law, atmospheric pressure, upthrust and floatation",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class IX Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed by scripts/verify-math.mjs. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A fluid cannot hold its own shape, so it is identified not by its shape but by how it responds to pressure. This chapter is built on one formula, pressure equals depth multiplied by density multiplied by g, which explains why pressure increases as you dive and why a dam is built thick at its base. Pascal's law then shows that a pressure applied to a confined fluid is transmitted undiminished in all directions, which is the principle behind the hydraulic lift and the hydraulic brake. Archimedes' principle explains why a ship made of steel floats and a solid steel block sinks, the answer being density rather than mass.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Fluids"
+      },
+      {
+        "label": "Key formula",
+        "value": "Pressure due to a liquid column, p = h rho g"
+      },
+      {
+        "label": "Pascal's law",
+        "value": "A pressure applied to a confined fluid is transmitted undiminished in every direction"
+      },
+      {
+        "label": "Archimedes' principle",
+        "value": "Upthrust equals the weight of the fluid displaced by the body"
+      },
+      {
+        "label": "Reference density",
+        "value": "Density of water is 1000 kg per cubic metre, or 1 g per cubic centimetre"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "pressure",
+      "title": "Pressure and pressure in a liquid",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Pressure is the force acting normally on a given area, so pressure equals force divided by area. Its SI unit is the pascal, which is one newton per square metre. Pressure depends on the area over which a force is spread, which is why a sharp knife cuts more easily than a blunt one even though the applied force is the same."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Pressure",
+              "meaning": "Force per unit area, p = F/A, measured in pascals (N/m squared)."
+            },
+            {
+              "term": "Depth",
+              "meaning": "The vertical distance below the free surface of the liquid."
+            },
+            {
+              "term": "Pressure in a liquid",
+              "meaning": "p = h rho g, where h is the depth, rho the density of the liquid and g the acceleration due to gravity."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Pressure is a scalar, not a vector, because it acts equally in all directions at a point.",
+            "Pressure due to a liquid column does not depend on the shape or the area of the container.",
+            "Pressure increases linearly with depth, doubling at twice the depth.",
+            "Absolute pressure = atmospheric pressure + gauge pressure.",
+            "The same liquid at the same depth gives the same pressure whichever container it is in, which is the hydrostatic paradox."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the pressure at a depth of 2 m in water, taking the density of water as 1000 kg per cubic metre and g as 9.8 m per second squared.",
+              "note": "p = h rho g = 2 x 1000 x 9.8 = 19600 Pa."
+            },
+            {
+              "text": "A force of 50 N is applied normally to an area of 0.02 m squared. Find the pressure.",
+              "note": "p = F/A = 50/0.02 = 2500 Pa."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pascal-atmospheric",
+      "title": "Pascal's law and atmospheric pressure",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Pascal's law states that a pressure applied to a confined fluid is transmitted undiminished in every direction. It is the reason a hydraulic lift can raise a car: a small force on a small piston produces a pressure, and that pressure acts on a much larger piston to produce a proportionally larger force."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "In a hydraulic machine, F1/A1 = F2/A2, so the force is multiplied by the ratio of the piston areas.",
+            "Atmospheric pressure is the pressure exerted by the atmosphere, measured at sea level as about 1.013 x 10 to the power 5 Pa, or 760 mm of mercury.",
+            "A barometer measures atmospheric pressure using a column of mercury, and an aneroid barometer uses a metal box instead.",
+            "Pressure decreases with altitude because the column of air above is shorter.",
+            "A balloon rises because the density of the hot air inside is less than that of the surrounding air."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The small piston of a hydraulic lift has an area of 0.005 m squared and the large piston 0.4 m squared. If a force of 100 N is applied to the small piston, find the force on the large piston.",
+              "note": "Using F1/A1 = F2/A2, we get 100/0.005 = F2/0.4, so F2 = 0.4 x 100/0.005 = 0.4 x 20000 = 8000 N."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "buoyancy",
+      "title": "Archimedes' principle and floatation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Archimedes' principle states that a body wholly or partially immersed in a liquid experiences an upthrust equal to the weight of the liquid it displaces. The upthrust always acts vertically upwards through the centre of buoyancy. Comparing that upthrust with the weight of the body decides whether the body floats, sinks or stays suspended."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A body floats when its density is less than the density of the liquid, because the upthrust then exceeds its weight.",
+            "A body sinks when its density is greater than the density of the liquid.",
+            "A body stays suspended in mid-liquid when its density equals that of the liquid.",
+            "A floating object displaces a volume of liquid whose weight equals the weight of the object itself.",
+            "A body of the same material sinks in water but floats in mercury, since mercury is far denser."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A block of wood of volume 500 cm cubed floats in water of density 1 g per cm cubed. Find the mass of the block.",
+              "note": "By Archimedes' principle a floating body displaces its own weight of liquid, so the mass of liquid displaced is 500 x 1 = 500 g, and the block has the same mass, 500 g."
+            },
+            {
+              "text": "A body of density 800 kg per cubic metre is placed in water of density 1000 kg per cubic metre. State what happens to it and why.",
+              "note": "Since 800 is less than 1000, the body floats. Its density is lower than that of the water, so the upthrust on it when fully immersed would be greater than its weight, and it rises until only part of it is immersed and the upthrust has fallen to equal its weight."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Pressure = force divided by area, measured in pascals, which are newtons per square metre.",
+    "Pressure due to a liquid column, p = h rho g, independent of the shape and size of the container.",
+    "Pressure increases with depth and with the density of the liquid.",
+    "Pressure is a scalar and acts equally in all directions at a point.",
+    "Pascal's law: a pressure applied to a confined fluid is transmitted undiminished in every direction.",
+    "In a hydraulic machine, F1/A1 = F2/A2.",
+    "Atmospheric pressure at sea level is about 1.013 x 10 to the power 5 Pa, equal to 760 mm of mercury.",
+    "A barometer measures atmospheric pressure with a mercury column.",
+    "Archimedes' principle: upthrust equals the weight of the fluid displaced.",
+    "A body floats if its density is less than the liquid's, sinks if greater, and is suspended if equal.",
+    "A floating body displaces its own weight of liquid.",
+    "Density of water is 1000 kg per cubic metre, that is 1 g per cubic centimetre.",
+    "A body may sink in water and float in mercury, because the outcome depends on relative density and not on the material alone."
+  ],
+  "examFocus": [
+    "Pressure in a liquid must be calculated with p = h rho g and not with rho g alone, since the depth is essential.",
+    "Hydraulic machines are ratio questions: find the ratio of the areas first, then multiply the small force by it.",
+    "Floatation questions turn on comparing the density of the body with the density of the liquid, and the direction of the inequality is what decides the answer.",
+    "Always state the value of g used, because pressure and upthrust answers depend on it.",
+    "Note that upthrust equals the weight of the displaced liquid, never the weight of the body, except when the body is floating."
+  ],
+  "vocabulary": [
+    {
+      "word": "Pressure",
+      "meaning": "Force acting normally on a unit area, measured in pascals."
+    },
+    {
+      "word": "Pascal",
+      "meaning": "The SI unit of pressure, equal to one newton per square metre."
+    },
+    {
+      "word": "Upthrust",
+      "meaning": "The upward force on a body immersed in a fluid, equal to the weight of the fluid displaced."
+    },
+    {
+      "word": "Barometer",
+      "meaning": "An instrument that measures atmospheric pressure."
+    },
+    {
+      "word": "Floatation",
+      "meaning": "The state of a body resting on a liquid surface, determined by the relative densities."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-phy-q-flu-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of pressure is:",
+      "options": [
+        "pascal",
+        "newton",
+        "joule",
+        "watt"
+      ],
+      "correctIndex": 0,
+      "answer": "pascal",
+      "explanation": "Pressure is force per unit area, so its unit is newtons per square metre, which is called the pascal. The newton alone is the unit of force.",
+      "commonMistake": "Choosing the newton, which is the force and not the force per unit area."
+    },
+    {
+      "id": "icse-9-phy-q-flu-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The pressure at a depth of 4 m in water of density 1000 kg per cubic metre, taking g as 10 m per second squared, is:",
+      "options": [
+        "40000 Pa",
+        "4000 Pa",
+        "400 Pa",
+        "400000 Pa"
+      ],
+      "correctIndex": 0,
+      "answer": "40000 Pa",
+      "explanation": "Using p = h rho g gives 4 x 1000 x 10 = 40000 Pa.",
+      "commonMistake": "Dividing by the density instead of multiplying, which gives 0.04 instead of a pressure."
+    },
+    {
+      "id": "icse-9-phy-q-flu-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A solid iron block sinks in water but floats in mercury. The reason is that:",
+      "options": [
+        "the density of mercury is greater than that of water",
+        "iron becomes lighter in mercury",
+        "mercury exerts no friction",
+        "mercury is a liquid and water is not"
+      ],
+      "correctIndex": 0,
+      "answer": "the density of mercury is greater than that of water",
+      "explanation": "Floatation depends only on the comparison of the density of the body with the density of the liquid. Mercury's density is about 13600 kg per cubic metre, greater than the 8000 kg per cubic metre of iron, so the upthrust in mercury is sufficient to support the block.",
+      "commonMistake": "Saying the block becomes lighter, forgetting that the mass of a body never changes with the liquid it is in."
+    },
+    {
+      "id": "icse-9-phy-q-flu-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Pascal's law states that a pressure applied to a confined fluid is:",
+      "options": [
+        "transmitted undiminished in all directions",
+        "halved in the upward direction",
+        "doubled with depth",
+        "lost at the walls of the container"
+      ],
+      "correctIndex": 0,
+      "answer": "transmitted undiminished in all directions",
+      "explanation": "Pascal's law says the externally applied pressure is transmitted equally in every direction throughout the fluid, which is what makes hydraulic machines possible.",
+      "commonMistake": "Confusing it with the law of liquids, which states that pressure at a point depends on depth and not on the shape of the vessel."
+    },
+    {
+      "id": "icse-9-phy-q-flu-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body is suspended at rest completely inside a liquid without touching the bottom or the sides. Its density is:",
+      "options": [
+        "equal to the density of the liquid",
+        "greater than the density of the liquid",
+        "less than the density of the liquid",
+        "zero"
+      ],
+      "correctIndex": 0,
+      "answer": "equal to the density of the liquid",
+      "explanation": "Being at rest with no support means the upthrust exactly balances the weight. Since the upthrust equals the weight of the displaced liquid and the body displaces its own volume, the weight of the body must equal the weight of an equal volume of the liquid, so the densities are equal.",
+      "commonMistake": "Saying it must be less dense, which would make it rise rather than remain suspended."
+    },
+    {
+      "id": "icse-9-phy-q-flu-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the pressure exerted by a liquid column of depth h and density rho is given by p = ________.",
+      "answer": "h rho g, where g is the acceleration due to gravity",
+      "explanation": "Pressure in a liquid increases in proportion to depth and to density, with g supplying the weight of the column per unit volume.",
+      "commonMistake": "Leaving out h, which gives the weight per unit area of the surface rather than of the column."
+    },
+    {
+      "id": "icse-9-phy-q-flu-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: according to Archimedes' principle, the upthrust on a body immersed in a fluid equals the ________ of the fluid displaced.",
+      "answer": "weight, that is the mass of the displaced fluid multiplied by g",
+      "explanation": "The upthrust is equal to the weight of the displaced fluid, which is why a floating body displaces its own weight of fluid.",
+      "commonMistake": "Saying volume instead of weight, which confuses the quantity displaced with the force it produces."
+    },
+    {
+      "id": "icse-9-phy-q-flu-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A force of 80 N acts normally on an area of 4 cm squared. Find the pressure in pascals.",
+      "answer": "Convert the area: 4 cm squared = 4 x 10 to the power minus 4 m squared, that is 0.0004 m squared. The pressure is 80/0.0004 = 200000 Pa, that is 2 x 10 to the power 5 Pa.",
+      "explanation": "Pressure must be in pascals, which uses square metres, so the area must be converted from square centimetres before dividing.",
+      "commonMistake": "Computing 80/4 = 20 and reporting 20 Pa, which has the wrong units by a factor of 10000."
+    },
+    {
+      "id": "icse-9-phy-q-flu-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the pressure at a depth of 15 cm under water, taking the density of water as 1000 kg per cubic metre and g as 9.8 m per second squared.",
+      "answer": "Convert the depth: 15 cm = 0.15 m. The pressure is p = h rho g = 0.15 x 1000 x 9.8 = 1470 Pa.",
+      "explanation": "The depth must be in metres because the other quantities are in SI units.",
+      "commonMistake": "Using 15 instead of 0.15 for the depth, which inflates the answer by a factor of 100."
+    },
+    {
+      "id": "icse-9-phy-q-flu-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A cylindrical vessel stands on a horizontal surface. The force exerted by the vessel on the surface is 500 N and the contact area is 0.01 m squared. Find the pressure exerted, and state the force on an area of 0.02 m squared carrying the same pressure.",
+      "answer": "The pressure on the surface is 500/0.01 = 50000 Pa. For the same pressure over twice the area, the force is pressure multiplied by area, so F = 50000 x 0.02 = 1000 N.",
+      "explanation": "Pressure is force per unit area, so doubling the area at constant pressure doubles the force.",
+      "commonMistake": "Halving the force for the larger area, confusing pressure with total force."
+    },
+    {
+      "id": "icse-9-phy-q-flu-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The small piston of a hydraulic lift has an area of 4 cm squared and the large piston 400 cm squared. A force of 50 N is applied to the small piston. Find the force on the large piston.",
+      "answer": "Using F1/A1 = F2/A2, we have 50/4 = F2/400, so F2 = 400 x 50/4 = 5000 N. The areas have been left in the same units on both sides, so no conversion is needed.",
+      "explanation": "Because the ratio F1/A1 equals F2/A2, the areas may be used in any unit provided both are in the same unit.",
+      "commonMistake": "Converting one area to square metres and not the other, which makes the ratio meaningless."
+    },
+    {
+      "id": "icse-9-phy-q-flu-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A dam is 20 m high and 500 m long at the base. Taking the density of water as 1000 kg per cubic metre and g as 9.8 m per second squared, find the pressure at the base of the dam and the total force on a 500 m section of the base.",
+      "answer": "The pressure at the base is p = h rho g = 20 x 1000 x 9.8 = 196000 Pa. The force on the base is pressure multiplied by area, so F = 196000 x 500 = 98000000 N, that is 9.8 x 10 to the power 7 N. Since the pressure at the base is 196000 Pa while at the surface it is zero, the average pressure over the face is half the maximum, which is why the dam is built with a shape that is thickest at the base.",
+      "explanation": "The pressure at the base is the deepest value, and the total force follows from pressure multiplied by the base area.",
+      "commonMistake": "Using the average pressure for the total force, which halves the answer without justification when the question asks for the pressure at the base."
+    },
+    {
+      "id": "icse-9-phy-q-flu-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solid metal block of density 7800 kg per cubic metre and volume 200 cm cubed is fully immersed in water of density 1000 kg per cubic metre. Find its mass, its weight, and the upthrust acting on it, taking g as 9.8 m per second squared.",
+      "answer": "The volume is 200 cm cubed = 200 x 10 to the power minus 6 m cubed, that is 2 x 10 to the power minus 4 m cubed. The mass is density multiplied by volume, so 7800 x 2 x 10 to the power minus 4 = 1.56 kg. The weight is 1.56 x 9.8 = 15.288 N. The upthrust is the weight of the water displaced, which is 1000 x 2 x 10 to the power minus 4 x 9.8 = 1.96 N. Since the weight 15.288 N greatly exceeds the upthrust 1.96 N, the block sinks.",
+      "explanation": "Both the block and the displaced water occupy the same volume, so the ratio of the upthrust to the weight is simply the ratio of the density of water to the density of the metal.",
+      "commonMistake": "Using the density of the block when computing the upthrust, which would give the weight of the block instead of the weight of the displaced water."
+    },
+    {
+      "id": "icse-9-phy-q-flu-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A ship made of steel floats in water but a solid steel ball of the same material sinks. Explain why.",
+      "answer": "Floatation depends on the ratio of the density of the body to the density of the liquid, not on the material alone. A solid steel ball has a density of about 7800 kg per cubic metre, far greater than the 1000 kg per cubic metre of water, so the upthrust when it is fully immersed is much less than its weight and it sinks. A ship is hollow, so it contains a large volume of air, and averaging the density of the steel with the density of the enclosed air brings the overall density of the ship below that of water. The ship therefore floats, displacing exactly its own weight of water, while the solid ball, being far denser, does not.",
+      "explanation": "It is the average density of the whole object, including any enclosed air, that decides whether it floats.",
+      "commonMistake": "Saying the ship is made of a lighter steel, when both objects are the same material and it is the shape that differs."
+    },
+    {
+      "id": "icse-9-phy-q-flu-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why pressure in a liquid depends on depth but not on the shape or size of the vessel containing it, and state what is observed if two vessels of different shapes are connected at their bases and filled with the same liquid.",
+      "answer": "The pressure at a point in a liquid is due to the weight of the column of liquid above that point. The weight of that column is its volume multiplied by density multiplied by g, and the volume is the cross-sectional area multiplied by the depth. The cross-sectional area cancels between the weight and the area over which that weight spreads, so only the depth and the density remain, giving p = h rho g. The area and shape of the vessel therefore have no influence on the pressure. When two such vessels are joined at their bases and filled with the same liquid, the liquid finds its own level in both, and the depths of liquid above the connecting point are equal, so the pressures there balance. This is the hydrostatic paradox.",
+      "explanation": "The area cancels in the expression for pressure, which is why only depth and density survive, and the equal-level result follows directly from that.",
+      "commonMistake": "Expecting different levels in vessels of different widths, as though the pressure depended on the vessel shape."
+    },
+    {
+      "id": "icse-9-phy-q-flu-16",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two uses of atmospheric pressure in daily life.",
+      "answer": "First, we drink liquids by squeezing an inverted soft bottle or a straw, which lowers the pressure inside so that the higher atmospheric pressure acting on the surface of the liquid forces it up the straw. Second, a barometer uses atmospheric pressure to support a column of mercury, and the height of that column measures the pressure. A third example is that a rubber suction cup sticks to a wall because the reduced pressure inside lets atmospheric pressure hold it against the surface.",
+      "explanation": "In each case atmospheric pressure does the work once the pressure inside has been reduced.",
+      "commonMistake": "Saying the liquid rises because it is pulled up, when it is actually pushed up by the external atmospheric pressure."
+    },
+    {
+      "id": "icse-9-phy-q-flu-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why is it easier to swim in sea water than in fresh water?",
+      "answer": "The density of sea water is about 1025 kg per cubic metre, greater than the 1000 kg per cubic metre of fresh water, because it contains dissolved salts. For a given volume of liquid, a greater density means a greater weight, so the upthrust on a completely immersed body is larger in sea water. The body therefore floats more easily, and a swimmer experiences greater upthrust for the same displaced volume.",
+      "explanation": "Upthrust depends on the density of the liquid, so a denser liquid gives more support for the same submerged volume.",
+      "commonMistake": "Saying sea water pushes harder because it is heavier, when the relevant point is that the same displaced volume weighs more."
+    },
+    {
+      "id": "icse-9-phy-q-flu-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A body of density 600 kg per cubic metre is fully submerged in a liquid of density 800 kg per cubic metre. Find the fraction of the body that is above the surface when it floats.",
+      "answer": "For a floating body, the weight of the body equals the weight of the liquid displaced. If the fraction submerged is f, the volume of liquid displaced is f times the volume of the body. Equating densities gives 600 = 800f, so f = 600/800 = 0.75. Hence 75 percent of the body is submerged and the fraction above the surface is 1 minus 0.75 = 0.25, that is one quarter of the body.",
+      "explanation": "Floating equilibrium makes the submerged fraction equal to the ratio of the two densities.",
+      "commonMistake": "Reporting 0.75 as the fraction above the surface, which inverts the meaning of the ratio."
+    },
+    {
+      "id": "icse-9-phy-q-flu-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the difference between absolute pressure and gauge pressure.",
+      "answer": "Absolute pressure is the total pressure at a point, and it includes the pressure of the atmosphere acting on the free surface. Gauge pressure is the pressure in excess of atmospheric pressure, that is the part due to the liquid column alone. The two are related by absolute pressure = atmospheric pressure + gauge pressure. A pressure gauge is calibrated to read zero in air, so it shows the gauge pressure rather than the absolute pressure.",
+      "explanation": "Absolute pressure counts the atmosphere; gauge pressure subtracts it, which is why an open gauge reads zero.",
+      "commonMistake": "Treating gauge pressure as the pressure in an evacuated space, which is the opposite of its meaning."
+    },
+    {
+      "id": "icse-9-phy-q-flu-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a dam is built with a curved upstream face and a thicker base than top.",
+      "answer": "The pressure due to the water increases with depth, being p = h rho g, so the pressure at the base of the dam is the greatest and the pressure at the top is least. If the dam were of uniform thickness, the base would not be strong enough to withstand the largest load while the top would be stronger than necessary. The curved face and the sloping profile keep the cross-sectional area of concrete roughly proportional to the pressure it must resist at each depth, so the maximum stress throughout the dam is roughly uniform. This is why dams are narrow at the top and broad at the bottom.",
+      "explanation": "The shape distributes material in proportion to the pressure at each depth, which is greatest at the base.",
+      "commonMistake": "Giving the reason as the weight of the water only, without noting that pressure rather than weight varies with depth."
+    },
+    {
+      "id": "icse-9-phy-q-flu-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A pressure of 2000 Pa acts on an area of 0.05 m squared. Find the force and state what force would act on 0.02 m squared at the same pressure.",
+      "answer": "The force on 0.05 m squared is pressure multiplied by area, so F = 2000 x 0.05 = 100 N. At the same pressure on 0.02 m squared the force is 2000 x 0.02 = 40 N.",
+      "explanation": "At constant pressure the force is directly proportional to the area over which it acts.",
+      "commonMistake": "Keeping the force at 100 N and reporting it for the smaller area, confusing pressure with force."
+    },
+    {
+      "id": "icse-9-phy-q-flu-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A glass tube of uniform bore is 1 m long. Water is poured in until the column stands at 20 cm, and the tube is then held vertically. Find the pressure at the base of the water column, and state how the pressure changes if the same volume of water is poured into a wider vessel of the same height.",
+      "answer": "The pressure at the base is p = h rho g = 0.2 x 1000 x 9.8 = 1960 Pa, taking g as 9.8 m per second squared. If the same volume of water is poured into a wider vessel of the same height, the height of the water would be lower, and the pressure at the base would be correspondingly lower. The bore of the tube does not affect the pressure at all, because the extra area that comes with a wider tube carries extra weight in exact proportion. Pressure in a liquid depends only on depth and density.",
+      "explanation": "A wider vessel holding the same volume has a smaller height of liquid, and the pressure follows the depth rather than the volume.",
+      "commonMistake": "Expecting the pressure to rise in the wider vessel because it holds the same amount of water, confusing volume with depth."
+    },
+    {
+      "id": "icse-9-phy-q-flu-23",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the SI unit of pressure and define it in base units.",
+      "answer": "The SI unit of pressure is the pascal, abbreviated Pa. It is defined as the pressure exerted by a force of 1 newton acting normally on an area of 1 square metre, so 1 Pa = 1 N/m squared = 1 kg m per second squared, since the newton itself is 1 kg m per second squared.",
+      "explanation": "The pascal is a derived unit obtained from force and area, which themselves come from mass, length and time.",
+      "commonMistake": "Giving the pascal as 1 N per square centimetre, which is a larger unit and not the SI definition."
+    },
+    {
+      "id": "icse-9-phy-q-flu-24",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A body is completely immersed in water and the scale reading decreases from 50 N to 44 N. Find the volume of the body displaced.",
+      "answer": "The decrease in the reading is the upthrust, which is 50 minus 44 = 6 N. By Archimedes' principle this equals the weight of the water displaced, so the mass of displaced water is 6/9.8 = 0.612 kg. Since water has a density of 1000 kg per cubic metre, the volume displaced is 0.612/1000 = 0.000612 m cubed, that is 612 cm cubed.",
+      "explanation": "The apparent loss of weight in water is exactly the upthrust, which gives the weight and hence the volume of the displaced water.",
+      "commonMistake": "Reporting the upthrust of 6 N as the volume, which mixes a force with a volume."
+    },
+    {
+      "id": "icse-9-phy-q-flu-25",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a solid ball of iron sinks in water whereas the same ball floats in mercury, and state the density value of iron that supports your answer.",
+      "answer": "Archimedes' principle says a body floats when the density of the liquid is greater than the density of the body, because the upthrust on full immersion then exceeds the weight. The density of iron is about 7800 kg per cubic metre while that of water is only 1000 kg per cubic metre, so in water the upthrust is far less than the weight and the ball sinks. The density of mercury is about 13600 kg per cubic metre, which is greater than the 7800 kg per cubic metre of iron, so the ball floats in mercury. The value for iron is unchanged between the two liquids, so the change in behaviour is caused entirely by the different liquid.",
+      "explanation": "Only the relative density decides the outcome, and mercury happens to be denser than iron.",
+      "commonMistake": "Saying iron is lighter in mercury, when the mass and density of the ball are identical in both liquids."
+    },
+    {
+      "id": "icse-9-phy-q-flu-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the depth of water in a vessel at which the gauge pressure equals 2940 Pa, taking g as 9.8 m per second squared and the density of water as 1000 kg per cubic metre.",
+      "answer": "Rearranging p = h rho g for the depth gives h = p/(rho g) = 2940/(1000 x 9.8) = 2940/9800 = 0.3 m, that is 30 cm.",
+      "explanation": "The formula is rearranged so that the depth, the unknown quantity, is isolated.",
+      "commonMistake": "Multiplying by the density and g instead of dividing, which would give 28812000 m."
+    }
+  ]
+}

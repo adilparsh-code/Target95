@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-indices",
+  "title": "Indices / Exponents",
+  "kind": "mathematics",
+  "tagline": "Laws of exponents, negative and fractional indices, standard results",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every numerical result in this chapter was independently recomputed with exact rational arithmetic by scripts/verify-math.mjs."
+  },
+  "overview": {
+    "intro": "An index tells you how many times a base is multiplied by itself. That single idea generates five rules that remove almost all of the arithmetic from exponent questions, and once you can apply them you can also extend exponents to negative and fractional values, which is what connects indices to roots and to logarithms in the next chapter. The two results at the end, for a square and for a cube, account for a large share of the marks in this unit.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Algebra"
+      },
+      {
+        "label": "Core rules",
+        "value": "Multiplication, division, power of a power, power of a product, power of a quotient"
+      },
+      {
+        "label": "Highest scoring results",
+        "value": "(a + b)^2 = a^2 + 2ab + b^2 and (a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "index-notation",
+      "title": "Index notation and reading expressions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a^m, a is the base and m is the index or exponent. By definition a^m means a multiplied by itself m times, so 2^4 = 16 and 5^3 = 125. Any index of 1 leaves the base alone, and a^0 = 1 for every a not equal to zero."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "4^2 = 16 but 4 x 2 = 8; the base is 4 and the index is 2.",
+            "(3^2)^4 = 3^8, not 3^6: the outer index multiplies the inner one.",
+            "3 x 3 x 3 x 3 x 3 = 3^5, since the base 3 appears five times.",
+            "2^0 = 1, so 7^0 / 7^3 = 1/343."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In a compound expression the index belongs only to the factor immediately to its left, unless brackets say otherwise. So 2 x 3^2 means 2 x 9 = 18, while (2 x 3)^2 means 6^2 = 36. Reading this correctly prevents the most common error in the chapter."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate 2 x 3^2 and (2 x 3)^2.",
+              "note": "The first is 18 and the second is 36. The bracket is what changes the meaning."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laws-of-exponents",
+      "title": "The five laws of exponents",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "All five laws follow from the definition of an index, and between them they handle every index question in the syllabus. They hold for positive, negative and fractional indices, and the base must be non-zero except where a zero index is deliberately being considered."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "a^m x a^n = a^(m+n): multiplying powers of the same base adds the indices.",
+            "a^m / a^n = a^(m-n): dividing powers of the same base subtracts the indices.",
+            "(a^m)^n = a^(mn): the outer index multiplies the inner one.",
+            "(a x b)^n = a^n x b^n: a power of a product splits over the factors.",
+            "(a / b)^n = a^n / b^n: a power of a quotient splits over the numerator and denominator."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The fourth law is worth checking by expanding: (a x b)^n = (ab)(ab)... n times, and each a and each b appears n times in total. Note that a^m x b^n cannot be combined into a single power unless the bases are equal."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Simplify 2^3 x 2^4 x 2^2.",
+              "note": "Same base, so add: 2^(3+4+2) = 2^9 = 512."
+            },
+            {
+              "text": "Simplify 5^6 / 5^2 x 5^1.",
+              "note": "Same base, so subtract the middle exponent: 5^(6-2+1) = 5^5 = 3125."
+            },
+            {
+              "text": "Simplify (3^2)^4 x 3.",
+              "note": "3^8 x 3^1 = 3^9 = 19683."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "negative-indices",
+      "title": "Negative indices",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A negative index means division. The definition a^-n = 1/a^n makes the law for division consistent for negative exponents, and it explains why a^0 = 1: setting the exponent difference to zero leaves nothing behind."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "2^-3 = 1/2^3 = 1/8.",
+            "5^-2 = 1/25.",
+            "3^0 = 1.",
+            "7^2 x 7^-5 = 7^(2-5) = 7^-3 = 1/343."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "With a negative index the number is always a fraction, so the answer must be less than 1. A result greater than 1 signals a sign or parenthesis error."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate 4^-2 + 2^-3.",
+              "note": "1/16 + 1/8 = 1/16 + 2/16 = 3/16."
+            },
+            {
+              "text": "Evaluate 8^(2/3).",
+              "note": "8^(2/3) = (8^(1/3))^2 = 2^2 = 4. Fractional indices are handled by finding the root first."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fractional-indices",
+      "title": "Fractional and zero indices",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An index of the form m/n means the nth root of the base raised to the power m. The base is first raised to the power 1/n, then that value to the power m. Working in this order matters when the numbers are not perfect powers of the numerator."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "8^(1/3) = 2, the cube root of 8.",
+            "16^(3/4) = (16^(1/4))^3 = 2^3 = 8.",
+            "25^(1/2) = 5, and a^(1/2) is another name for the square root of a.",
+            "a^(m/n) x a^(p/n) = a^((m+p)/n), the same addition rule as before."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two fractions with the same denominator add their numerators, but two with different denominators must first be put over a common denominator. Writing 2^(1/2) x 2^(1/3) as 2^(5/6) is the first step; converting the denominator is what follows."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Simplify 9^(3/2).",
+              "note": "Take the square root of 9 to get 3, then cube it: 9^(3/2) = (9^(1/2))^3 = 3^3 = 27."
+            },
+            {
+              "text": "Simplify (1/8)^(-2/3).",
+              "note": "The cube root of 1/8 is 1/2; raise it to the power -2 to get 4, since (1/2)^-2 = 2^2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard-results",
+      "title": "Expanding with indices",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The binomial results from the Expansions unit reappear here in index form, and they are the highest-value items in the chapter. A single question asking you to expand (a + b)^3 tests three things at once: recognising the pattern, keeping the coefficients in the right place, and getting the signs right."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(a + b)^2 = a^2 + 2ab + b^2",
+            "(a - b)^2 = a^2 - 2ab + b^2",
+            "(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3",
+            "(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3",
+            "(a + b + c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Notice that the last formula cannot be written as a single power: (a + b + c)^2 does not equal a^2 + b^2 + c^2, because the cross terms cannot be omitted. This is the same point that makes (a + b)(a - b) = a^2 - b^2 work: the middle terms there genuinely cancel, whereas here they add."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Expand (2x + 3)^2.",
+              "note": "4x^2 + 12x + 9, from (2x)^2 + 2(2x)(3) + 3^2."
+            },
+            {
+              "text": "Expand (x + 2y)^3.",
+              "note": "x^3 + 3x^2(2y) + 3x(2y)^2 + (2y)^3 = x^3 + 6x^2y + 12xy^2 + 8y^3."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "a^m x a^n = a^(m+n), a^m / a^n = a^(m-n), (a^m)^n = a^(mn).",
+    "(a x b)^n = a^n x b^n, and (a / b)^n = a^n / b^n.",
+    "Bases must be the same to add or subtract indices.",
+    "a^0 = 1 for a not equal to zero.",
+    "a^-n = 1 / a^n, so a negative index always gives a value below 1.",
+    "a^(m/n) means the nth root of a, raised to the power m.",
+    "An index applies only to the factor immediately to its left unless brackets say otherwise.",
+    "(a + b)^2 needs the middle term 2ab; it is never simply a^2 + b^2."
+  ],
+  "examFocus": [
+    "Simplifying expressions using the laws of exponents is the most common one- and two-mark question.",
+    "Expanding (a + b)^3 or (a - b)^3 is regularly set for three or four marks.",
+    "Questions giving a negative index expect a fraction, and a decimal or whole-number answer should be checked.",
+    "Evaluation questions giving values for a and b reward substitution into the identity rather than expanding the original bracket."
+  ],
+  "vocabulary": [
+    {
+      "word": "Base",
+      "meaning": "The number being multiplied by itself."
+    },
+    {
+      "word": "Index",
+      "meaning": "The exponent; the number of times the base is multiplied by itself."
+    },
+    {
+      "word": "Negative index",
+      "meaning": "An exponent below zero, equal to the reciprocal of the corresponding positive power."
+    },
+    {
+      "word": "Fractional index",
+      "meaning": "An exponent written as a fraction, equal to a root."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-ind-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of 2^-3 is:",
+      "options": [
+        "-8",
+        "8",
+        "1/8",
+        "-1/8"
+      ],
+      "correctIndex": 2,
+      "answer": "1/8",
+      "explanation": "A negative index means the reciprocal of the corresponding positive power, so 2^-3 = 1/2^3 = 1/8. The base is positive, so the result is not negative.",
+      "commonMistake": "Writing -8 by confusing the negative index with a negative base."
+    },
+    {
+      "id": "icse-9-math-q-ind-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "2 x 3^2 equals:",
+      "options": [
+        "36",
+        "18",
+        "12",
+        "9"
+      ],
+      "correctIndex": 1,
+      "answer": "18, since 3^2 = 9 and 2 x 9 = 18",
+      "explanation": "The index 2 applies only to the 3, so 3^2 = 9 and 2 x 9 = 18.",
+      "commonMistake": "Choosing 36, which is (2 x 3)^2 and ignores that no bracket is present."
+    },
+    {
+      "id": "icse-9-math-q-ind-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "(3^2)^4 is equal to:",
+      "options": [
+        "3^6",
+        "3^8",
+        "3^16",
+        "9^4"
+      ],
+      "correctIndex": 1,
+      "answer": "3^8",
+      "explanation": "The power of a power rule multiplies the indices: (3^2)^4 = 3^(2 x 4) = 3^8.",
+      "commonMistake": "Choosing 3^6 by adding 2 and 4, which is the rule for multiplying two powers, not for nesting them."
+    },
+    {
+      "id": "icse-9-math-q-ind-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The expansion of (a + b)^2 is:",
+      "options": [
+        "a^2 + b^2",
+        "a^2 + ab + b^2",
+        "a^2 + 2ab + b^2",
+        "2a^2 + 2b^2"
+      ],
+      "correctIndex": 2,
+      "answer": "a^2 + 2ab + b^2",
+      "explanation": "The middle products ab and ab are identical and combine to 2ab; no term disappears because, unlike in (a + b)(a - b), the signs do not oppose each other.",
+      "commonMistake": "Choosing a^2 + b^2, which is the error the identity exists to prevent."
+    },
+    {
+      "id": "icse-9-math-q-ind-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "8^(2/3) equals:",
+      "options": [
+        "16/9",
+        "4",
+        "8/3",
+        "2"
+      ],
+      "correctIndex": 1,
+      "answer": "4, since the cube root of 8 is 2 and 2^2 = 4",
+      "explanation": "The denominator 3 means take the cube root first: the cube root of 8 is 2. Then raise to the power 2 to get 4.",
+      "commonMistake": "Dividing 8 by 3 to get 8/3, which treats the index as a quotient."
+    },
+    {
+      "id": "icse-9-math-q-ind-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Simplify: 5^4 x 5^3 = ________",
+      "answer": "5^7",
+      "explanation": "Powers of the same base have their indices added, giving 5^(4+3) = 5^7."
+    },
+    {
+      "id": "icse-9-math-q-ind-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: 7^2 x 7^-5 = ________",
+      "answer": "7^-3, which is 1/343",
+      "explanation": "Adding the indices gives 2 + (-5) = -3, and 7^-3 = 1/7^3 = 1/343."
+    },
+    {
+      "id": "icse-9-math-q-ind-08",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Simplify: (2^3)^2 x 2 = ________",
+      "answer": "2^7",
+      "explanation": "(2^3)^2 = 2^6, and 2 = 2^1, so 2^6 x 2^1 = 2^7."
+    },
+    {
+      "id": "icse-9-math-q-ind-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate 3^4 x 3^2 x 3.",
+      "answer": "3^(4+2+1) = 3^7 = 2187.",
+      "explanation": "All three terms have the same base, so the indices add. Writing the last factor as 3^1 makes this explicit."
+    },
+    {
+      "id": "icse-9-math-q-ind-10",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate 4^-2 + 2^-3.",
+      "answer": "4^-2 = 1/16 and 2^-3 = 1/8. Adding with a common denominator of 16 gives 1/16 + 2/16 = 3/16.",
+      "explanation": "Negative indices give reciprocals; the two fractions must be put over a common denominator before adding."
+    },
+    {
+      "id": "icse-9-math-q-ind-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Simplify (5^6)/(5^2) x 5.",
+      "answer": "Writing everything with base 5: 5^(6-2) x 5^1 = 5^4 x 5^1 = 5^5 = 3125.",
+      "explanation": "Powers of the same base combine by adding or subtracting indices, so division subtracts and the final factor adds."
+    },
+    {
+      "id": "icse-9-math-q-ind-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Evaluate 9^(3/2) and 16^(3/4).",
+      "answer": "9^(3/2) = (9^(1/2))^3 = 3^3 = 27. For 16^(3/4), the fourth root of 16 is 2, so 16^(3/4) = 2^3 = 8.",
+      "explanation": "With a fractional index, take the root named by the denominator first, then raise to the power given by the numerator.",
+      "commonMistake": "Raising 9 to the power 3 and dividing by 2."
+    },
+    {
+      "id": "icse-9-math-q-ind-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (2x + 3)^2 and hence find its value when x = 1.",
+      "answer": "(2x + 3)^2 = 4x^2 + 12x + 9. At x = 1 this is 4 + 12 + 9 = 25. As a check, (2 x 1 + 3)^2 = 5^2 = 25.",
+      "explanation": "Expanding first and then substituting is the systematic route; checking against the unexpanded bracket confirms it."
+    },
+    {
+      "id": "icse-9-math-q-ind-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Expand (x + 2y)^3.",
+      "answer": "x^3 + 3x^2(2y) + 3x(2y)^2 + (2y)^3 = x^3 + 6x^2y + 12xy^2 + 8y^3.",
+      "explanation": "Substituting a = x and b = 2y into the cube identity, then simplifying the powers of the numeral.",
+      "commonMistake": "Writing 3x^2 y instead of 6x^2y, forgetting to multiply by the 2."
+    },
+    {
+      "id": "icse-9-math-q-ind-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Evaluate (1/8)^(-2/3) and express the answer in exact form.",
+      "answer": "The cube root of 1/8 is 1/2, so (1/8)^(-2/3) = ((1/8)^(1/3))^(-2) = (1/2)^(-2) = 2^2 = 4.",
+      "explanation": "Taking the root first turns the expression into a simple negative power of a fraction, which is the reciprocal of its square.",
+      "commonMistake": "Ignoring the negative index and answering 1/4."
+    },
+    {
+      "id": "icse-9-math-q-ind-16",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Expand (2a - 3b)^3 and hence find its value when a = 2 and b = 1.",
+      "answer": "(2a - 3b)^3 = (2a)^3 - 3(2a)^2(3b) + 3(2a)(3b)^2 - (3b)^3 = 8a^3 - 36a^2b + 54ab^2 - 27b^3. At a = 2, b = 1: 8(8) - 36(4) + 54(2) - 27 = 64 - 144 + 108 - 27 = 1. Checking against the original bracket: (4 - 3)^3 = 1.",
+      "explanation": "The signs alternate minus, plus, minus for (a - b)^3, and each coefficient comes from substituting the numerical factors before expanding.",
+      "commonMistake": "Losing a minus sign on the middle-plus term, which would give a different total."
+    },
+    {
+      "id": "icse-9-math-q-ind-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Simplify 2^3 x 3^2 x (2 x 3)^3.",
+      "answer": "(2 x 3)^3 = 2^3 x 3^3 by the power of a product rule. So the whole expression is 2^3 x 3^2 x 2^3 x 3^3 = 2^6 x 3^5 = 64 x 243 = 15552.",
+      "explanation": "The only way to combine terms is to have identical bases, so the product rule is used first to express everything in powers of 2 and of 3.",
+      "commonMistake": "Adding the 2 and 3 inside the bracket before raising to the power, giving a different value."
+    },
+    {
+      "id": "icse-9-math-q-ind-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If 2^x = 32, find x, and hence evaluate 2^(2x) + 2^(-x).",
+      "answer": "2^5 = 32, so x = 5. Then 2^(2x) = 2^10 = 1024 and 2^(-x) = 2^-5 = 1/32. The sum is 1024 + 1/32 = 32768/32 + 1/32 = 32769/32.",
+      "explanation": "Finding x once and reusing it avoids working with 32 and its reciprocal separately, which is the point of the question.",
+      "commonMistake": "Writing 2^(-x) as -32."
+    },
+    {
+      "id": "icse-9-math-q-ind-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Simplify (a/b)^5 x (a/b)^-2 and express the result with a positive index.",
+      "answer": "Same base throughout, so the indices add: (a/b)^(5 + (-2)) = (a/b)^3 = a^3/b^3.",
+      "explanation": "Even though one index is negative, the addition rule still applies because the base is identical; only afterwards does the sign matter.",
+      "commonMistake": "Dividing the indices 5 and -2 instead of adding them."
+    },
+    {
+      "id": "icse-9-math-q-ind-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Express 0.000625 in the form a x 10^-n, stating a and n.",
+      "answer": "0.000625 = 6.25 x 10^-4, so a = 6.25 and n = 4. The first significant digit 6 lies four places after the decimal point.",
+      "explanation": "Counting the places after the decimal point gives the magnitude of the negative index.",
+      "commonMistake": "Writing 10^-3, which corresponds to 0.001."
+    },
+    {
+      "id": "icse-9-math-q-ind-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that (x + y)^3 - (x - y)^3 = 2y(3x^2 + y^2) by expansion.",
+      "answer": "(x + y)^3 = x^3 + 3x^2y + 3xy^2 + y^3 and (x - y)^3 = x^3 - 3x^2y + 3xy^2 - y^3. Subtracting gives (x^3 - x^3) + (3x^2y + 3x^2y) + (3xy^2 - 3xy^2) + (y^3 + y^3) = 6x^2y + 2y^3 = 2y(3x^2 + y^2).",
+      "explanation": "The x^3 and xy^2 terms cancel, leaving twice the x^2y term and twice the y^3 term, which factor as required.",
+      "commonMistake": "Getting the sign of the y^3 term wrong when subtracting (x - y)^3, since its last term is already negative."
+    },
+    {
+      "id": "icse-9-math-q-ind-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If a + b = 8 and ab = 12, find the value of a^3 + b^3.",
+      "answer": "a^3 + b^3 = (a + b)^3 - 3ab(a + b) = 512 - 3 x 12 x 8 = 512 - 288 = 224.",
+      "explanation": "The identity a^3 + b^3 = (a + b)(a^2 - ab + b^2) = (a + b)^3 - 3ab(a + b) converts the question into a substitution with no need to find a and b separately.",
+      "commonMistake": "Trying to determine a and b individually, which gives 2 and 6 and is unnecessary."
+    },
+    {
+      "id": "icse-9-math-q-ind-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Simplify 27 x 3^-3 x 3^2 and express the answer as a single power of 3.",
+      "answer": "27 = 3^3, so 3^3 x 3^-3 x 3^2 = 3^(3 - 3 + 2) = 3^2 = 9.",
+      "explanation": "Converting 27 into a power of 3 is the essential step; without it the expression mixes bases and cannot be combined.",
+      "commonMistake": "Treating 27 and 3^2 as separate bases and stopping after the 3 terms cancel."
+    },
+    {
+      "id": "icse-9-math-q-ind-24",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Determine which is larger, 3^(-2) or 3^(-5), without computing either.",
+      "answer": "3^(-2) is larger. For a base greater than 1, the value of the power decreases as the index decreases, so an index of -2, which is greater than -5, gives the larger value.",
+      "explanation": "For any base greater than 1 the power is an increasing function of the index, so comparing indices settles the comparison.",
+      "commonMistake": "Assuming the more negative exponent must give the smaller result because of the minus sign."
+    },
+    {
+      "id": "icse-9-math-q-ind-25",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The value of (sqrt 27)^(4/3) is:",
+      "answer": "(sqrt 27)^(4/3) = (27^(1/2))^(4/3) = 27^(2/3) = (27^(1/3))^2 = 3^2 = 9.",
+      "explanation": "Applying (a^m)^n = a^(mn) multiplies the indices, giving 27^(2/3), and the cube root of 27 is 3.",
+      "commonMistake": "Adding 1/2 and 4/3 to get 11/6 instead of multiplying to get 2/3."
+    },
+    {
+      "id": "icse-9-math-q-ind-26",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write 0.000064 in standard form.",
+      "answer": "0.000064 = 6.4 x 10^-5.",
+      "explanation": "The first significant digit 6 is five places after the decimal point, so the exponent is -5."
+    },
+    {
+      "id": "icse-9-math-q-ind-27",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student writes (a + b)^2 = a^2 + b^2 and uses it to simplify (x + 1/2)^2 to x^2 + 1/4. Identify and correct the error.",
+      "answer": "The correct identity is (a + b)^2 = a^2 + 2ab + b^2, and the student has dropped the middle term. Applying it correctly, (x + 1/2)^2 = x^2 + 2(x)(1/2) + 1/4 = x^2 + x + 1/4. Checking at x = 1: the bracket gives (3/2)^2 = 9/4, and x^2 + x + 1/4 gives 1 + 1 + 1/4 = 9/4, confirming the correction.",
+      "explanation": "Dropping the middle term works for (a + b)(a - b) because the cross products cancel, but for a square they add. This is the commonest error carried from school into Class 9.",
+      "commonMistake": "Memorising a^2 + b^2 as the square of a sum, which only holds for the difference of squares."
+    },
+    {
+      "id": "icse-9-math-q-ind-28",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If x = 2 and y = 3, find the value of (x + y)^3 - x^3 - y^3.",
+      "answer": "Using the identity, (x + y)^3 - x^3 - y^3 = 3xy(x + y). Substituting: 3 x 2 x 3 x 5 = 90. Checking directly: (2 + 3)^3 = 125, x^3 = 8, y^3 = 27, and 125 - 8 - 27 = 90.",
+      "explanation": "The identity removes the need to cube the bracket, and the direct check confirms the sign handling.",
+      "commonMistake": "Computing 125 - 8 - 27 as 125 - 35 = 110 by adding the cubes instead of subtracting them."
+    }
+  ]
+}

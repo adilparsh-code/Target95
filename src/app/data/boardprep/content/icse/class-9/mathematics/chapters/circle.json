@@ -1,0 +1,490 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-circle",
+  "title": "Circle",
+  "kind": "mathematics",
+  "tagline": "Chords, arcs, angles at the centre and circumference, and cyclic quadrilaterals",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every angle sum, ratio and numerical angle in this chapter was independently recomputed by scripts/verify-math.mjs. No board examination paper was consulted, so every question here is original practice rather than a previous year question."
+  },
+  "overview": {
+    "intro": "A circle is the set of all points at a fixed distance from a fixed point. That single definition is enough to derive everything in this chapter, because every result below is really a statement about chords and the angles they subtend. Two ideas carry the whole unit: chords that are equal stand on equal arcs, and the angle at the centre is twice the angle at the circumference standing on the same arc. Once those are in place, tangent questions, cyclic quadrilaterals and most numerical circle questions become short applications rather than new theory.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Geometry"
+      },
+      {
+        "label": "Central ideas",
+        "value": "Equal chords stand on equal arcs; angle at centre is twice angle at circumference"
+      },
+      {
+        "label": "Key result",
+        "value": "Opposite angles of a cyclic quadrilateral add to 180 degrees"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "circle-basics",
+      "title": "Chords, arcs and radii",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Let O be the centre of a circle of radius r. A chord is a line segment whose two ends lie on the circle. An arc is simply the portion of the circumference between the ends of a chord. A diameter is a chord that passes through O, so its length is 2r and it cuts the circle into two semicircles. A segment is the region between a chord and one of the arcs it cuts off, and it is the segment, not the arc, that carries an area in mensuration questions."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A chord is equidistant from the centre if and only if the chords are of equal length.",
+            "Perpendicular from the centre to a chord bisects the chord, and the line containing it also bisects the arcs subtended by the chord.",
+            "The perpendicular bisector of any chord passes through the centre, so it is the line of every diameter that bisects that chord.",
+            "Equal chords stand on equal arcs, and equal arcs stand on equal chords."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A chord of a circle of radius 13 cm is at a distance 5 cm from the centre. Find the length of the chord.",
+              "note": "Let M be the foot of the perpendicular, so OM = 5 and OA = 13. By Pythagoras, AM = root(13^2 - 5^2) = root(169 - 25) = root 144 = 12. Since OM bisects the chord, the chord is 2 x 12 = 24 cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angle-theorems",
+      "title": "Angles at the centre and at the circumference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An angle at the centre has its vertex at O. An angle at the circumference, or an inscribed angle, has its vertex on the circle. The single most important theorem of this chapter relates them, and it always refers to the same arc."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Angle at the centre theorem",
+              "meaning": "The angle subtended by an arc at the centre is twice the angle subtended by the same arc at any point on the remaining part of the circle."
+            },
+            {
+              "term": "Angle in a semicircle",
+              "meaning": "An angle standing on a diameter is a right angle, because the arc it subtends is a semicircle of 180 degrees and the angle at the centre on the same arc is 180 degrees, so the inscribed angle is 90 degrees."
+            },
+            {
+              "term": "Angles in the same segment",
+              "meaning": "Angles standing on the same chord and on the same side of that chord are equal."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "To halve an angle at the centre, draw a chord joining the two ends of the arc.",
+            "To double an angle at the circumference, join the ends of the chord to the centre.",
+            "If two inscribed angles stand on the same chord but on opposite sides, the angles are supplementary, not equal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "AB is a chord of a circle with centre O and P is a point on the major arc AB. If angle AOB = 140 degrees, find angle APB.",
+              "note": "Angle APB and angle AOB stand on the same arc AB, and P lies on the major arc while O subtends the minor arc. The angle at the centre is 140 degrees, so the inscribed angle is 140/2 = 70 degrees."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cyclic-quadrilateral",
+      "title": "Cyclic quadrilaterals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A quadrilateral is cyclic when all four of its vertices lie on one circle. For a cyclic quadrilateral ABCD the opposite angles A and C, and B and D, are supplementary. The proof is a direct use of the angle at the centre theorem: the exterior angle of a cyclic quadrilateral equals the interior opposite angle."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "ABCD is a cyclic quadrilateral with angle ABD = 62 degrees and angle ADB = 48 degrees. Find angle BCD.",
+              "note": "Angle ACD subtends the same chord AD as angle ABD, so angle ACD = 62 degrees. Angle CAD subtends the same chord CD as angle CBD. Instead, note angle ACB = angle ADB = 48 degrees by the same segment rule. Then angle BCD = 48 + 62 = 110 degrees, and indeed angle BAD = 180 - 110 = 70 degrees is consistent with the triangle sum in triangle ABD giving angle BAD = 180 - 62 - 48 = 70 degrees."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The converse is equally examinable. If a pair of opposite angles of a quadrilateral add to 180 degrees, then the quadrilateral is cyclic. This is the standard way of proving that four given points lie on one circle."
+        }
+      ]
+    },
+    {
+      "id": "tangent",
+      "title": "Tangents",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A tangent is a line that touches the circle at exactly one point. The tangent at any point of a circle is perpendicular to the radius drawn to that point, so the angle between the tangent and the radius is 90 degrees."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "From a point outside a circle, the two tangents drawn are equal in length.",
+            "The line joining the centre to the point of intersection of two tangents bisects the angle between them.",
+            "A tangent is perpendicular to the radius at the point of contact, which gives right triangles and Pythagoras in almost every numerical tangent question."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "PA and PB are tangents from an external point P to a circle with centre O and radius 8 cm. If OP = 17 cm, find PA.",
+              "note": "OA is perpendicular to PA, so triangle OAP is right-angled at A with OA = 8 and OP = 17. By Pythagoras, PA = root(17^2 - 8^2) = root(289 - 64) = root 225 = 15 cm. The triple 8-15-17 is being used here."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A chord is a segment with both ends on the circle; an arc is the circumference between those ends; a diameter is a chord through the centre and is twice the radius.",
+    "The perpendicular from the centre to a chord bisects the chord and its arcs.",
+    "Equal chords stand on equal arcs and equal arcs stand on equal chords.",
+    "The angle subtended by an arc at the centre is twice the angle subtended by the same arc at the circumference.",
+    "An angle in a semicircle is a right angle.",
+    "Angles in the same segment, that is on the same chord and same side, are equal.",
+    "Opposite angles of a cyclic quadrilateral are supplementary, adding to 180 degrees.",
+    "The exterior angle of a cyclic quadrilateral equals the interior opposite angle.",
+    "The tangent at a point is perpendicular to the radius to that point.",
+    "The two tangents from an external point to a circle are equal in length."
+  ],
+  "examFocus": [
+    "Proving that a given quadrilateral is cyclic, by showing a pair of opposite angles sums to 180 degrees, is a standard proof question.",
+    "Angle questions usually come in pairs: one at the centre and one at the circumference on the same arc, so the centre angle is twice.",
+    "Tangent questions reduce to Pythagoras in a right triangle with the radius as one leg.",
+    "Watch the side: two inscribed angles on the same chord are equal only when they are on the same side of the chord."
+  ],
+  "vocabulary": [
+    {
+      "word": "Chord",
+      "meaning": "A line segment whose two ends lie on the circle."
+    },
+    {
+      "word": "Arc",
+      "meaning": "The part of the circumference between the ends of a chord."
+    },
+    {
+      "word": "Cyclic quadrilateral",
+      "meaning": "A quadrilateral whose four vertices all lie on one circle."
+    },
+    {
+      "word": "Tangent",
+      "meaning": "A line touching the circle at exactly one point, perpendicular to the radius there."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-cir-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A chord of a circle of radius 13 cm is at a distance of 5 cm from the centre. The length of the chord is:",
+      "options": [
+        "24 cm",
+        "12 cm",
+        "10 cm",
+        "26 cm"
+      ],
+      "correctIndex": 0,
+      "answer": "24 cm",
+      "explanation": "The perpendicular from the centre bisects the chord, so the half chord is root(13^2 - 5^2) = root(169 - 25) = root 144 = 12 cm, and the full chord is 2 x 12 = 24 cm.",
+      "commonMistake": "Stopping at 12 cm, which is only the half chord."
+    },
+    {
+      "id": "icse-9-math-q-cir-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The angle subtended by a chord at the centre of a circle is 100 degrees. The angle subtended by the same chord at any point on the major arc is:",
+      "options": [
+        "50 degrees",
+        "200 degrees",
+        "130 degrees",
+        "25 degrees"
+      ],
+      "correctIndex": 0,
+      "answer": "50 degrees",
+      "explanation": "The angle at the centre is twice the angle at the circumference standing on the same arc, so the inscribed angle is 100/2 = 50 degrees.",
+      "commonMistake": "Adding instead of halving, giving 300 degrees or subtracting from 180 by mistake."
+    },
+    {
+      "id": "icse-9-math-q-cir-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A chord PQ of a circle is bisected at right angles by a radius. If the radius is 10 cm and the chord is 16 cm, the distance from the centre to the chord is:",
+      "options": [
+        "6 cm",
+        "8 cm",
+        "12 cm",
+        "26 cm"
+      ],
+      "correctIndex": 0,
+      "answer": "6 cm",
+      "explanation": "Half the chord is 8 cm, and the radius is 10 cm, so the perpendicular distance is root(10^2 - 8^2) = root(100 - 64) = root 36 = 6 cm, using the 6-8-10 triple.",
+      "commonMistake": "Using 8 cm as the distance, confusing the half chord with the perpendicular."
+    },
+    {
+      "id": "icse-9-math-q-cir-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "ABCD is a cyclic quadrilateral with angle A = 115 degrees. The value of angle C is:",
+      "options": [
+        "115 degrees",
+        "65 degrees",
+        "230 degrees",
+        "25 degrees"
+      ],
+      "correctIndex": 1,
+      "answer": "65 degrees",
+      "explanation": "Opposite angles of a cyclic quadrilateral are supplementary, so angle C = 180 - 115 = 65 degrees.",
+      "commonMistake": "Writing angle C as equal to angle A because A and C are opposite sides of the quadrilateral."
+    },
+    {
+      "id": "icse-9-math-q-cir-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "PA and PB are tangents from P to a circle with centre O and radius 12 cm. If OP = 13 cm, then PA is:",
+      "options": [
+        "5 cm",
+        "7 cm",
+        "25 cm",
+        "1 cm"
+      ],
+      "correctIndex": 0,
+      "answer": "5 cm",
+      "explanation": "The tangent is perpendicular to the radius, so triangle OAP is right-angled at A and PA = root(13^2 - 12^2) = root(169 - 144) = root 25 = 5 cm, using the 5-12-13 triple.",
+      "commonMistake": "Computing OP minus the radius, which subtracts two lengths that are not collinear."
+    },
+    {
+      "id": "icse-9-math-q-cir-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: an angle standing on a diameter of a circle is always a ________ angle.",
+      "answer": "right angle, that is 90 degrees",
+      "explanation": "A diameter cuts off a semicircle, whose arc measures 180 degrees, so the inscribed angle standing on it is half of that, namely 90 degrees.",
+      "commonMistake": "Guessing from the picture instead of using half of the semicircular arc of 180 degrees."
+    },
+    {
+      "id": "icse-9-math-q-cir-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the perpendicular drawn from the centre of a circle to a chord bisects the ________.",
+      "answer": "chord, and also the two arcs subtended by that chord",
+      "explanation": "Reflecting in the perpendicular swaps the two ends of the chord, so the chord is bisected and the two arcs it cuts off are equal.",
+      "commonMistake": "Writing only that it bisects the arc, forgetting the chord itself."
+    },
+    {
+      "id": "icse-9-math-q-cir-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two properties of a tangent to a circle.",
+      "answer": "First, a tangent touches the circle at exactly one point. Second, the tangent at a point of a circle is perpendicular to the radius drawn to that point, so the angle between them is 90 degrees.",
+      "explanation": "These are the two tangent facts used in every numerical question of this type; the perpendicular one is what converts tangent questions into Pythagoras questions.",
+      "commonMistake": "Giving only that it touches at one point, which is true but not useful for calculation."
+    },
+    {
+      "id": "icse-9-math-q-cir-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "AB is a chord of a circle with centre O and radius 10 cm. If the perpendicular from O to AB is 6 cm, find the length of AB.",
+      "answer": "The perpendicular bisects the chord, so half of AB is root(10^2 - 6^2) = root(100 - 36) = root 64 = 8 cm. Therefore AB = 2 x 8 = 16 cm.",
+      "explanation": "The right triangle formed by the radius, the perpendicular and the half chord has hypotenuse 10 and one leg 6, so the other leg is 8 by the 6-8-10 triple, and the chord is double that.",
+      "commonMistake": "Reporting 8 cm as the chord instead of doubling it."
+    },
+    {
+      "id": "icse-9-math-q-cir-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In a circle with centre O, chord PQ subtends an angle of 150 degrees at the centre. Find the angle subtended by PQ at a point R on the major arc PQ, and the angle subtended at a point S on the minor arc PQ.",
+      "answer": "R lies on the major arc, so angle PRQ stands on the minor arc whose central angle is 150 degrees, and angle PRQ = 150/2 = 75 degrees. S lies on the minor arc, so angle PSQ stands on the major arc of 360 - 150 = 210 degrees, and angle PSQ = 210/2 = 105 degrees. As a check, 75 + 105 = 180, which agrees with the fact that the two angles stand on the same chord from opposite sides and are therefore supplementary.",
+      "explanation": "The theorem always refers to the arc the angle stands on, so the side of the chord decides whether you halve the given central angle or halve its supplement.",
+      "commonMistake": "Giving 75 degrees for both points, forgetting that S is on the other side of chord PQ."
+    },
+    {
+      "id": "icse-9-math-q-cir-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two chords AB and CD of a circle intersect at P inside the circle. If PA = 4 cm, PB = 6 cm and PC = 3 cm, find PD.",
+      "answer": "For two chords intersecting inside a circle, the products of the segments of each chord are equal, so PA x PB = PC x PD. That is 4 x 6 = 3 x PD, so PD = 24/3 = 8 cm.",
+      "explanation": "The intersecting chords relation is the direct analogue of the similar triangles formed by the intersecting chords; the two products always match.",
+      "commonMistake": "Taking the ratio the wrong way round and getting PD = 4 x 3/6 = 2 cm."
+    },
+    {
+      "id": "icse-9-math-q-cir-12",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "From a point P outside a circle, a tangent PT of length 15 cm is drawn. If the radius of the circle is 9 cm, find OP, where O is the centre.",
+      "answer": "The tangent is perpendicular to the radius, so triangle OPT is right-angled at T with legs PT = 15 and OT = 9. By Pythagoras, OP = root(15^2 + 9^2) = root(225 + 81) = root 306 = 3 root 34 cm, which is approximately 17.49 cm.",
+      "explanation": "Here the tangent and the radius are the two legs and OP is the hypotenuse, the reverse of the previous tangent question. root 306 simplifies to 3 root 34 because 306 = 9 x 34.",
+      "commonMistake": "Taking root(15^2 - 9^2) instead, which applies the wrong version of Pythagoras to the same triangle."
+    },
+    {
+      "id": "icse-9-math-q-cir-13",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "AB is a diameter of a circle with centre O and radius 7 cm. Point C lies on the circle. Find the length of AC and BC if BC = 3 cm.",
+      "answer": "Since AB is a diameter, angle ACB = 90 degrees, so triangle ACB is right-angled at C with hypotenuse AB = 2 x 7 = 14 cm. By Pythagoras, AC = root(14^2 - 3^2) = root(196 - 9) = root 187 = root 187 cm, approximately 13.67 cm. Since 187 = 11 x 17 has no perfect square factor, the answer is left as root 187 cm.",
+      "explanation": "Every triangle in a semicircle is right-angled at the circumference, which converts the question into a Pythagoras question with the diameter as hypotenuse.",
+      "commonMistake": "Using the radius 7 cm as the hypotenuse instead of the diameter 14 cm."
+    },
+    {
+      "id": "icse-9-math-q-cir-14",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "ABCD is a cyclic quadrilateral in which AB is parallel to DC. Show that AD = BC.",
+      "answer": "Given: ABCD is a cyclic quadrilateral with AB parallel to DC. To prove: AD = BC. Since AB is parallel to DC and BD is a transversal, the alternate angles are equal, so angle ABD = angle BDC. In the circle, angle ABD is an inscribed angle standing on chord AD, and angle BDC is an inscribed angle standing on chord BC. Equal inscribed angles in the same circle stand on equal chords, so AD = BC. The cyclic property is what lets the angles be compared inside the same circle, and the parallel lines are what make the two angles equal in the first place.",
+      "explanation": "The route that works is: parallel lines give equal alternate angles at BD, both angles are inscribed in the same circle, and equal inscribed angles give equal chords.",
+      "commonMistake": "Attempting to prove equal sides directly from parallel lines, when parallel lines give angles and the equal-chord theorem is what turns angles into sides."
+    },
+    {
+      "id": "icse-9-math-q-cir-15",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A chord of a circle of radius 25 cm is at a distance of 7 cm from the centre. Find the length of the chord and the distance of the chord from the centre when the chord is halved in length.",
+      "answer": "Half the chord is root(25^2 - 7^2) = root(625 - 49) = root 576 = 24 cm, so the chord itself is 48 cm. If the chord is halved, its half length is 24 cm. Let the new distance from the centre be d. Then d = root(25^2 - 24^2) = root(625 - 576) = root 49 = 7 cm. This is not a coincidence: the original numbers 7, 24, 25 are a Pythagorean triple, and the chord and its half swap the leg roles.",
+      "explanation": "Halving a chord doubles the perpendicular distance only in this special 7-24-25 case; the calculation above confirms it here rather than assuming a general rule.",
+      "commonMistake": "Assuming the distance always doubles when the chord is halved, which is false in general."
+    },
+    {
+      "id": "icse-9-math-q-cir-16",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that a quadrilateral is cyclic if a pair of its opposite angles sums to 180 degrees.",
+      "answer": "Let ABCD be a quadrilateral with angle A + angle C = 180 degrees. Draw the circle through A, B and C, and let it meet the ray CD again at D prime. Since ABCD prime is cyclic, angle A + angle CD prime B = 180 degrees. But angle CD prime B = angle C, since D, C and D prime are on the same line and the angles are corresponding. Therefore angle A + angle C = 180 degrees as given. Also B and D prime lie on the same side of AC and subtend the same angle relationship, so the ray from D through A and C meets the circle at B. Since D and D prime lie on the same ray from C and on the same line, and the angle at D equals the angle at D prime by corresponding angles, D coincides with D prime. Hence D lies on the circle and ABCD is cyclic.",
+      "explanation": "The standard proof constructs the circle through three vertices and shows the fourth vertex must land on it, using corresponding angles along one straight line.",
+      "commonMistake": "Simply asserting that supplementary opposite angles make a quadrilateral cyclic without constructing the circle through three of the vertices."
+    },
+    {
+      "id": "icse-9-math-q-cir-17",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two circles with centres O1 and O2 and radii 9 cm and 15 cm touch each other externally. Find the distance O1 O2. Then find the distance if the same two circles touch each other internally.",
+      "answer": "For external touching, the line of centres passes through the point of contact and O1 O2 = r1 + r2 = 9 + 15 = 24 cm. For internal touching, the point of contact lies on the line of centres beyond the smaller circle, and O1 O2 = r2 - r1 = 15 - 9 = 6 cm. In both cases the touching point lies on the line joining the centres, which is why the radii simply add or subtract.",
+      "explanation": "Externally means the circles sit side by side so the radii add; internally means the smaller circle lies inside the larger and the radii subtract.",
+      "commonMistake": "Adding the radii for internal touching, which would give 24 cm for a configuration where the centres must be closer than the larger radius."
+    },
+    {
+      "id": "icse-9-math-q-cir-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "From an external point P, PA is a tangent to a circle with centre O and radius 6 cm, and OP = 10 cm. Find PA and state what happens to PA if the radius is doubled while OP is unchanged.",
+      "answer": "Triangle OAP is right-angled at A, so PA = root(10^2 - 6^2) = root(100 - 36) = root 64 = 8 cm. If the radius is doubled to 12 cm while OP stays at 10 cm, the new tangent length is root(10^2 - 12^2), which is not a real number. A point at distance 10 cm from O cannot reach a circle of radius 12 cm at all, because every point on that circle is at least 12 cm from O. So the configuration becomes impossible rather than merely giving a smaller answer.",
+      "explanation": "A tangent exists only when OP is at least the radius. Here 10 is less than 12, so the honest conclusion is that no tangent can be drawn, not that the length becomes smaller.",
+      "commonMistake": "Reporting a negative value under the square root instead of noticing that the point is now inside the circle."
+    },
+    {
+      "id": "icse-9-math-q-cir-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A chord AB of a circle subtends an angle of 64 degrees at a point P on the major arc. Find the angle subtended by AB at the centre.",
+      "answer": "The angle at the centre is twice the angle at the circumference on the same arc, so the angle at the centre is 2 x 64 = 128 degrees.",
+      "explanation": "The centre angle is the double, not the half; the direction of the question decides which way to go.",
+      "commonMistake": "Halving 64 to get 32 degrees, which reverses the theorem."
+    },
+    {
+      "id": "icse-9-math-q-cir-20",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a circle, chords AB and CD are equal. State two things that follow.",
+      "answer": "First, equal chords are equidistant from the centre, so the perpendicular distances from O to AB and to CD are equal. Second, equal chords subtend equal arcs, so arc AB and arc CD are equal, and consequently the angles they subtend at the centre or at the circumference are equal.",
+      "explanation": "Equal chords are the starting point for three related results: equal distances from the centre, equal arcs, and equal subtended angles.",
+      "commonMistake": "Stating only equal arcs and forgetting the equal distances from the centre."
+    },
+    {
+      "id": "icse-9-math-q-cir-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A chord of length 24 cm is at a distance of 5 cm from the centre of a circle. Find the radius of the circle.",
+      "answer": "The perpendicular from the centre bisects the chord, so half the chord is 12 cm. The radius is the hypotenuse of the right triangle with legs 12 cm and 5 cm, so the radius is root(12^2 + 5^2) = root(144 + 25) = root 169 = 13 cm, using the 5-12-13 triple.",
+      "explanation": "This is the Pythagoras question that every chord-and-distance question reduces to, with the half chord and the distance as the legs.",
+      "commonMistake": "Using the full chord 24 cm as a leg, which no right triangle in the figure contains."
+    },
+    {
+      "id": "icse-9-math-q-cir-22",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the length of each side of a regular hexagon inscribed in a circle of radius 14 cm.",
+      "answer": "Join the centre O to two adjacent vertices A and B. The six radii divide the full angle of 360 degrees into six equal angles of 60 degrees each. Now OA = OB = 14 cm, since both are radii, and angle AOB = 60 degrees, so triangle AOB is equilateral. Therefore AB = OA = 14 cm. Every side of the hexagon is a radius of the circle.",
+      "explanation": "For a hexagon the central angle is exactly 60 degrees, so the triangle formed with two radii is equilateral and each side equals the radius. This holds for every circle.",
+      "commonMistake": "Multiplying the radius by root 3 or by 2, confusing the hexagon with the equilateral triangle construction."
+    },
+    {
+      "id": "icse-9-math-q-cir-23",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the relationship between the two tangents drawn from an external point P to a circle, and the line joining P to the centre O.",
+      "answer": "The two tangents from P are equal in length, so PA = PB. The line PO bisects the angle APB between the tangents, and also bisects the angle AOB at the centre, because the right triangles POA and POB are congruent by RHS with common hypotenuse PO and equal radii.",
+      "explanation": "Both facts come from the same pair of congruent right triangles, which is why the equality of tangents and the angle bisector are usually asked together.",
+      "commonMistake": "Claiming the tangents are equal because they look equal in a diagram rather than because the triangles are congruent."
+    },
+    {
+      "id": "icse-9-math-q-cir-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A circle of radius 13 cm has two parallel chords at distances 5 cm and 12 cm from the centre, both on the same side of the centre. Find the length of each chord and the perpendicular distance between them.",
+      "answer": "The chord at distance 5 cm has half length root(13^2 - 5^2) = root(169 - 25) = root 144 = 12 cm, so the chord is 24 cm. The chord at distance 12 cm has half length root(13^2 - 12^2) = root(169 - 144) = root 25 = 5 cm, so the chord is 10 cm. Both use the 5-12-13 triple, with the legs swapping roles. Because the two chords are parallel and on the same side of the centre, the perpendicular distance between them is 12 - 5 = 7 cm. Note the check: if the second chord had been on the opposite side, the distance would have been 12 + 5 = 17 cm.",
+      "explanation": "Chord length comes from Pythagoras with the radius as hypotenuse and the distance as one leg. The gap between two parallel chords on the same side is the difference of their distances, and on opposite sides it is their sum.",
+      "commonMistake": "Adding the two distances to get 17 cm, which would only be correct if the chords were on opposite sides of the centre."
+    }
+  ]
+}

@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-rectilinear-figures",
+  "title": "Rectilinear Figures",
+  "kind": "mathematics",
+  "tagline": "Parallelograms, rhombuses, rectangles, squares and area theorems",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every area and perimeter result in this chapter was independently recomputed from the standard formulas by scripts/verify-math.mjs."
+  },
+  "overview": {
+    "intro": "Rectilinear figures are four-sided shapes with opposite sides parallel. Within that family sit the parallelogram, the rhombus, the rectangle and the square, each defined by a slightly stronger condition than the last. Because the area of every one of them is base multiplied by height, and because the diagonals of a rhombus and a rectangle satisfy their own theorems, a handful of results covers a large part of this unit. The proofs are the examinable part.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Geometry"
+      },
+      {
+        "label": "Area formulas",
+        "value": "All rectilinear figures: base multiplied by perpendicular height"
+      },
+      {
+        "label": "Key theorems",
+        "value": "Diagonals bisect each other; equal diagonals give a rectangle; perpendicular diagonals give a rhombus"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "parallelogram",
+      "title": "Properties of a parallelogram",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A parallelogram is a quadrilateral with both pairs of opposite sides parallel. From that single definition follow all the standard properties: opposite sides and opposite angles are equal, the diagonals bisect each other, and each diagonal divides the parallelogram into two congruent triangles."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Opposite sides AB = DC and AD = BC.",
+            "Opposite angles are equal: angle A = angle C and angle B = angle D.",
+            "Adjacent angles are supplementary, so angle A + angle B = 180 degrees.",
+            "The diagonals bisect each other at the point of intersection O, so AO = OC and BO = OD.",
+            "The area is base multiplied by perpendicular height, which is not the same as base multiplied by a sloping side."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The last point causes frequent errors. If the slanting side of length 10 cm has a perpendicular height of 8 cm, the area is 8 times the base, not 10 times the base, because the parallelogram is tilted and only the perpendicular distance between the parallel sides counts."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A parallelogram has sides 8 cm and 5 cm and perpendicular height 6 cm corresponding to the side of 8 cm. Find its area.",
+              "note": "Area = base multiplied by height = 8 x 6 = 48 square cm. The 5 cm side is irrelevant to this calculation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rhombus",
+      "title": "The rhombus and its diagonals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A rhombus is a parallelogram with all four sides equal. It therefore inherits every parallelogram property, and adds two of its own about the diagonals: they bisect each other at right angles, and they bisect the vertex angles. The area is half the product of the diagonals, which is the single most useful formula in this section."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "All four sides are equal.",
+            "Opposite angles are equal and adjacent angles are supplementary.",
+            "The diagonals bisect each other at right angles: they are perpendicular.",
+            "Each diagonal bisects the angles at the two vertices it joins.",
+            "Area = half of (diagonal multiplied by diagonal), that is (d1 multiplied by d2)/2."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The area formula follows from splitting the rhombus along a diagonal into two congruent right-angled triangles, each with base d1 and height d2/2. The half-diagonals are the legs of a right triangle whose hypotenuse is a side of the rhombus, which gives the relation between the diagonals and the side."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A rhombus has diagonals 12 cm and 16 cm. Find its area and its side.",
+              "note": "Area = (12 x 16)/2 = 96 square cm. The half-diagonals are 6 and 8, so the side is root(36 + 64) = root 100 = 10 cm, using the 6, 8, 10 triple."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rectangle-and-square",
+      "title": "Rectangle and square",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A rectangle is a parallelogram with one right angle, which forces all four angles to be right angles. A square is a rectangle whose adjacent sides are also equal, so it inherits everything the rectangle has and adds equal sides, equal diagonals and full symmetry."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rectangle: opposite sides equal, all angles 90 degrees, diagonals equal and bisecting each other, area = length multiplied by breadth.",
+            "Square: four equal sides, four right angles, equal diagonals, area = side squared, perimeter = 4 multiplied by side, diagonal = side multiplied by root 2.",
+            "A parallelogram with equal diagonals is a rectangle, and one with perpendicular diagonals is a rhombus.",
+            "The diagonals of a square are equal, perpendicular and bisect the vertex angles."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two converses are examinable and useful: if the diagonals of a parallelogram are equal it must be a rectangle, and if they are perpendicular it must be a rhombus. Combined, equal and perpendicular diagonals give a square, though the simpler statement is that a rhombus with equal diagonals is a square."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A rectangle has length 15 cm and breadth 8 cm. Find its diagonal.",
+              "note": "Diagonal = root(15^2 + 8^2) = root(225 + 64) = root 289 = 17 cm, using the 8, 15, 17 triple."
+            },
+            {
+              "text": "A square has diagonal 10 cm. Find its side and area.",
+              "note": "Side = 10/root 2 = 5 root 2 cm, so the area is (5 root 2)^2 = 50 square cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "area-theorems",
+      "title": "Area of a triangle and its relation to a parallelogram",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Any diagonal of a parallelogram divides it into two triangles of equal area, so the triangle on the same base and between the same parallels has exactly half the area. This is the basis of every area comparison question, and it is stated as a theorem: triangles on the same base and between the same parallels are equal in area."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Area of a triangle = half of base multiplied by perpendicular height.",
+            "Triangles on the same base and between the same parallels have equal areas, even when they are not congruent.",
+            "If a parallelogram and a triangle are on the same base and between the same parallels, the triangle has half the area.",
+            "Consequence: if P is the mid-point of a side of a triangle and a line is drawn through P parallel to another side, the small triangle cut off has one quarter of the area."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The converse of the equal-area theorem is equally valuable: if two triangles are on the same base and have equal areas, then they lie between the same parallels. This allows an unknown height to be deduced from a known area."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A triangle has base 14 cm and perpendicular height 9 cm. Find its area.",
+              "note": "Area = (1/2) x 14 x 9 = 63 square cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polygons-and-constructions",
+      "title": "Regular polygons and their construction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A regular polygon has all sides equal and all angles equal. For a polygon with n sides the sum of the interior angles is (2n - 4) right angles, or (n - 2) x 180 degrees, and each interior angle of a regular polygon is therefore (n - 2) x 180/n degrees."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Interior angle sum for n sides is (2n - 4) right angles.",
+            "Each interior angle of a regular n-gon is (2n - 4)/n right angles.",
+            "A diagonal of a regular polygon divides it into a triangle and a (n - 1)-gon.",
+            "In a parallelogram, drawing a diagonal from a vertex to the opposite one gives two congruent triangles by SAS."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find each interior angle of a regular hexagon.",
+              "note": "For n = 6 the sum is (2 x 6 - 4) = 8 right angles, so each angle is 8/6 right angles = 120 degrees."
+            },
+            {
+              "text": "Find the number of diagonals of a regular octagon.",
+              "note": "The number of diagonals of an n-sided polygon is n(n - 3)/2, so for 8 it is 8 x 5 / 2 = 20."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Area of any parallelogram, rectangle, rhombus or square is base multiplied by perpendicular height.",
+    "Opposite sides and opposite angles of a parallelogram are equal; adjacent angles are supplementary.",
+    "The diagonals of a parallelogram bisect each other.",
+    "The diagonals of a rhombus bisect each other at right angles and bisect the vertex angles.",
+    "Area of a rhombus is half the product of its diagonals.",
+    "A parallelogram with equal diagonals is a rectangle; with perpendicular diagonals, a rhombus.",
+    "The diagonal of a square is side multiplied by root 2.",
+    "Area of a triangle is half the base multiplied by the perpendicular height.",
+    "Triangles on the same base and between the same parallels have equal areas.",
+    "The interior angle sum for n sides is (2n - 4) right angles."
+  ],
+  "examFocus": [
+    "Proving that a quadrilateral is a parallelogram, rhombus, rectangle or square is a standard four-mark proof question.",
+    "Area questions almost always need the perpendicular height, and a slanted side is a deliberate distractor.",
+    "Rhombus diagonal questions always lead back to a right triangle formed by the half-diagonals.",
+    "Equal-area reasoning appears in questions that give an area and ask for an unknown parallel or height."
+  ],
+  "vocabulary": [
+    {
+      "word": "Parallelogram",
+      "meaning": "A quadrilateral with both pairs of opposite sides parallel."
+    },
+    {
+      "word": "Rhombus",
+      "meaning": "A parallelogram with all four sides equal."
+    },
+    {
+      "word": "Rectangle",
+      "meaning": "A parallelogram with four right angles."
+    },
+    {
+      "word": "Square",
+      "meaning": "A rectangle with four equal sides."
+    },
+    {
+      "word": "Perpendicular height",
+      "meaning": "The shortest distance between two parallel sides."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-rec-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A parallelogram has base 12 cm and perpendicular height 5 cm. Its area is:",
+      "options": [
+        "60 square cm",
+        "17 square cm",
+        "34 square cm",
+        "120 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "60 square cm",
+      "explanation": "Area = base multiplied by perpendicular height = 12 x 5 = 60 square cm. The slanting side is not used at all.",
+      "commonMistake": "Using a slanted side as though it were the height."
+    },
+    {
+      "id": "icse-9-math-q-rec-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A rhombus has diagonals 10 cm and 24 cm. Its area is:",
+      "options": [
+        "120 square cm",
+        "240 square cm",
+        "17 square cm",
+        "34 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "120 square cm",
+      "explanation": "Area of a rhombus is half the product of the diagonals: (10 x 24)/2 = 120 square cm.",
+      "commonMistake": "Multiplying the diagonals without halving, which gives twice the area."
+    },
+    {
+      "id": "icse-9-math-q-rec-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A rectangle has length 12 cm and breadth 5 cm. Its diagonal is:",
+      "options": [
+        "17 cm",
+        "13 cm",
+        "7 cm",
+        "119 cm"
+      ],
+      "correctIndex": 1,
+      "answer": "13 cm",
+      "explanation": "Diagonal = root(12^2 + 5^2) = root(144 + 25) = root 169 = 13 cm, using the 5, 12, 13 triple.",
+      "commonMistake": "Adding the sides to get 17, or multiplying to get 119."
+    },
+    {
+      "id": "icse-9-math-q-rec-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The diagonals of a parallelogram are equal. The parallelogram is a:",
+      "options": [
+        "square",
+        "rhombus",
+        "rectangle",
+        "trapezium"
+      ],
+      "correctIndex": 2,
+      "answer": "Rectangle",
+      "explanation": "A parallelogram with equal diagonals must be a rectangle. A rhombus has equal diagonals only in the special case where it is a square.",
+      "commonMistake": "Answering rhombus, since a rhombus has perpendicular diagonals while a rectangle has equal ones."
+    },
+    {
+      "id": "icse-9-math-q-rec-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A square has diagonal 8 cm. Its area is:",
+      "options": [
+        "32 square cm",
+        "64 square cm",
+        "16 square cm",
+        "128 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "32 square cm",
+      "explanation": "The diagonal of a square is side multiplied by root 2, so the side is 8/root 2 = 4 root 2 cm and the area is (4 root 2)^2 = 32 square cm. Equivalently, the area is half of the square of the diagonal, giving 64/2 = 32.",
+      "commonMistake": "Treating the diagonal as the side and answering 64."
+    },
+    {
+      "id": "icse-9-math-q-rec-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the area of a rhombus with diagonals d1 and d2 is ________.",
+      "answer": "half the product of the diagonals, that is (d1 multiplied by d2)/2",
+      "explanation": "The formula follows from splitting the rhombus along a diagonal into two congruent right-angled triangles."
+    },
+    {
+      "id": "icse-9-math-q-rec-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A triangle has base 18 cm and height 7 cm. Its area is ________",
+      "answer": "63 square cm",
+      "explanation": "Area = (1/2) x 18 x 7 = 63 square cm."
+    },
+    {
+      "id": "icse-9-math-q-rec-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A parallelogram has base 15 cm and perpendicular height 8 cm. Find its area and state which measurement was used.",
+      "answer": "Area = 15 x 8 = 120 square cm. The measurement used is the perpendicular height, not any slanting side.",
+      "explanation": "The parallelogram is tilted, so only the perpendicular distance between the parallel sides contributes to the area.",
+      "commonMistake": "Using a side given as, say, 17 cm, which would be the slanting side."
+    },
+    {
+      "id": "icse-9-math-q-rec-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A rhombus has diagonals 12 cm and 16 cm. Find its area and the length of one side.",
+      "answer": "Area = (12 x 16)/2 = 96 square cm. The diagonals bisect each other at right angles, so the half-diagonals 6 cm and 8 cm with a side form a right triangle; the side is root(6^2 + 8^2) = root 100 = 10 cm.",
+      "explanation": "The right triangle formed by the half-diagonals uses the 6, 8, 10 triple, so the side comes out without a messy root.",
+      "commonMistake": "Using the full diagonals with the side as the hypotenuse, which is impossible since the full diagonals are longer than any side."
+    },
+    {
+      "id": "icse-9-math-q-rec-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A rectangle has length 15 cm and breadth 8 cm. Find its diagonal and its area.",
+      "answer": "Diagonal = root(15^2 + 8^2) = root(225 + 64) = root 289 = 17 cm. Area = 15 x 8 = 120 square cm.",
+      "explanation": "The diagonal of a rectangle is found with Pythagoras, and the area is base multiplied by height because the sides are perpendicular.",
+      "commonMistake": "Using 15 + 8 for the diagonal."
+    },
+    {
+      "id": "icse-9-math-q-rec-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The diagonals of a parallelogram are 20 cm and 24 cm and they bisect each other at right angles. Find the area of the parallelogram and the length of one side.",
+      "answer": "Since the diagonals are perpendicular, the parallelogram is a rhombus, so the area is (20 x 24)/2 = 240 square cm. The half-diagonals are 10 cm and 12 cm, forming a right triangle with the side as hypotenuse, so the side is root(10^2 + 12^2) = root 244 = 2 root 61 cm, approximately 15.62 cm.",
+      "explanation": "Perpendicular diagonals are a property of a rhombus, which is what allows the rhombus area formula to be used.",
+      "commonMistake": "Using base multiplied by height, which is not available since no side or height is given."
+    },
+    {
+      "id": "icse-9-math-q-rec-12",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the diagonals of a parallelogram bisect each other.",
+      "answer": "Given: ABCD is a parallelogram with diagonals AC and BD. To prove: the diagonals bisect each other at O. Proof: join AC. In triangles ABC and CDA, AB = CD (opposite sides of a parallelogram), BC = AD (opposite sides), and angle ABC = angle CDA (alternate angles, since AB is parallel to DC and AC is a transversal). Therefore triangle ABC is congruent to triangle CDA by SAS. By corresponding parts of congruent triangles, angle BAC = angle DCA and angle BCA = angle DAC, so AC bisects both angles at A and C. Also, the two triangles on diagonal BD, namely ABD and CDB, are congruent by SAS in exactly the same way, so BD bisects both angles at B and D. Since both diagonals cut each other at O and O lies on the angle bisectors, AO = OC and BO = OD, so the diagonals bisect each other.",
+      "explanation": "Joining one diagonal splits the parallelogram into two triangles that are congruent by SAS, because two pairs of opposite sides are equal and the alternate angles from the parallel sides are equal. The corresponding parts then show each diagonal bisects the other.",
+      "commonMistake": "Assuming the diagonals bisect each other in order to prove it, which is circular."
+    },
+    {
+      "id": "icse-9-math-q-rec-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In a parallelogram ABCD, AB = 16 cm and BC = 11 cm, and the perpendicular height corresponding to AB is 8 cm. Find the area and the perimeter.",
+      "answer": "Area = base multiplied by height = 16 x 8 = 128 square cm. The perimeter is 2(AB + BC) = 2(16 + 11) = 54 cm. The height of 8 cm plays no part in the perimeter, and BC is the slanting side, which is why the height is less than it.",
+      "explanation": "Area and perimeter use different measurements: the perpendicular height for the area, and the slanting sides for the perimeter.",
+      "commonMistake": "Using 8 cm in the perimeter in place of one of the sides, or using BC in place of the height in the area."
+    },
+    {
+      "id": "icse-9-math-q-rec-14",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A square has a side of 10 cm. A rhombus has the same perimeter. If the rhombus has a diagonal of 12 cm, find the other diagonal and the area of the rhombus.",
+      "answer": "The square's perimeter is 4 x 10 = 40 cm, so the rhombus's perimeter is also 40 cm and each side is 40/4 = 10 cm. The diagonals bisect each other at right angles, giving a right triangle with hypotenuse 10 cm and one leg 6 cm. The other leg is root(100 - 36) = root 64 = 8 cm, so the other diagonal is 16 cm. The area is (12 x 16)/2 = 96 square cm.",
+      "explanation": "Equal perimeters give equal sides, and the half-diagonals with a side form a right triangle in which the side is the hypotenuse.",
+      "commonMistake": "Treating 6 cm as a full diagonal, which would halve the answer."
+    },
+    {
+      "id": "icse-9-math-q-rec-15",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A triangle and a parallelogram have the same base and lie between the same parallels. Show that the area of the triangle is half that of the parallelogram.",
+      "answer": "Draw a diagonal of the parallelogram from the end of the base opposite the third vertex of the triangle. This splits the parallelogram into two triangles with the same base and between the same parallels as the original triangle, so by the equal-area theorem the two triangles have equal area. Since the two together make up the parallelogram, each has half its area.",
+      "explanation": "The construction converts the problem into the equal-area theorem, which is the standard and expected argument.",
+      "commonMistake": "Saying the triangle has half the area because its height looks smaller, which is not a proof."
+    },
+    {
+      "id": "icse-9-math-q-rec-16",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A triangle has base 12 cm and perpendicular height 10 cm. A parallelogram on the same base has twice the area. Find the perpendicular height of the parallelogram.",
+      "answer": "The triangle's area is (1/2) x 12 x 10 = 60 square cm, so the parallelogram's area is 120 square cm. Since the area is base multiplied by height and the base is also 12 cm, the height is 120/12 = 10 cm. This confirms the theorem that a parallelogram and a triangle on the same base between the same parallels have areas in the ratio 2:1.",
+      "explanation": "Twice the area on the same base necessarily means twice the height, which is exactly what the equal-area theorem states.",
+      "commonMistake": "Halving the height to 5 cm, which would halve rather than double the area."
+    },
+    {
+      "id": "icse-9-math-q-rec-17",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that a parallelogram with perpendicular diagonals is a rhombus.",
+      "answer": "Let ABCD be a parallelogram whose diagonals AC and BD meet at O at right angles. Since the diagonals of a parallelogram bisect each other, AO = OC and BO = OD. Consider triangles AOB and BOC. In them, AO = OC, BO is common to both, and angle AOB = angle BOC = 90 degrees. Therefore triangle AOB is congruent to triangle COB by SAS, and by corresponding parts AB = BC. In the same way triangles BOC and COD give BC = CD, and triangles COD and DOA give CD = DA. Hence AB = BC = CD = DA, so ABCD is a rhombus.",
+      "explanation": "The proof needs two separate facts: that the diagonals of a parallelogram bisect each other, giving AO = OC, and that the perpendicular diagonals make triangles AOB and BOC congruent by SAS, giving AB = BC. Repeating this on the other two pairs shows all four sides are equal.",
+      "commonMistake": "Concluding the sides are equal from the perpendicular diagonals alone, without using the bisection."
+    },
+    {
+      "id": "icse-9-math-q-rec-18",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A parallelogram has area 96 square cm and base 16 cm. Find its height, and state what would be true if the height were greater than the slanting side.",
+      "answer": "Height = area divided by base = 96/16 = 6 cm. The height can never be greater than the slanting side, because the height is the perpendicular distance between the parallel sides, which is the shortest distance between them, and the slanting side runs from one line to the other. A slanting side of length s with horizontal offset d and height h satisfies s^2 = d^2 + h^2, so s is always at least h.",
+      "explanation": "The height is a perpendicular distance and is necessarily the shortest gap between the parallel sides, which is why it can never exceed a slanting side.",
+      "commonMistake": "Assuming a slanting side can be shorter than the height, which contradicts the definition of perpendicular distance."
+    },
+    {
+      "id": "icse-9-math-q-rec-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find each interior angle of a regular hexagon.",
+      "answer": "For n = 6 the interior angle sum is (2 x 6 - 4) = 8 right angles. Since the hexagon is regular, each interior angle is 8/6 right angles, that is 120 degrees.",
+      "explanation": "Divide the total angle sum by the number of sides, converting right angles to degrees by multiplying by 90."
+    },
+    {
+      "id": "icse-9-math-q-rec-20",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the number of diagonals of a regular octagon.",
+      "answer": "The number of diagonals of an n-sided polygon is n(n - 3)/2. For n = 8 this is 8 x 5 / 2 = 20.",
+      "explanation": "From each of the 8 vertices a diagonal can be drawn to 5 vertices other than itself and its two neighbours; each diagonal is counted twice.",
+      "commonMistake": "Counting sides as well as diagonals."
+    },
+    {
+      "id": "icse-9-math-q-rec-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A rhombus has side 13 cm and one diagonal 10 cm. Find the other diagonal and the area.",
+      "answer": "The half-diagonals and the side form a right triangle with hypotenuse 13, so one leg is 5 (since 5, 12, 13 is a triple) and the other is root(169 - 25) = 12. The diagonals are therefore 10 cm and 24 cm, and the area is (10 x 24)/2 = 120 square cm.",
+      "explanation": "The side is the hypotenuse of the right triangle formed by the half-diagonals, so Pythagoras recovers the missing half-diagonal directly.",
+      "commonMistake": "Using 13 as a leg rather than as the hypotenuse, since the diagonals of a rhombus are shorter than a side."
+    },
+    {
+      "id": "icse-9-math-q-rec-22",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A square and a rhombus have the same diagonals. Explain why the rhombus must be a square.",
+      "answer": "Let the common diagonal length of the square and the rhombus be d. In the rhombus, the diagonals bisect each other at right angles, so joining the centre to the four vertices cuts the rhombus into four congruent right triangles, each with legs d/2 and d/2. Since the two legs of each triangle are equal, the four angles of the rhombus are all equal to one another. But the four angles of any quadrilateral add up to 360 degrees, so each angle of the rhombus is 360 divided by 4, that is 90 degrees. The rhombus therefore has four right angles, so it is a rectangle as well as a rhombus. A rectangle that is also a rhombus has four right angles and four equal sides, which is exactly a square.",
+      "explanation": "Equal diagonals and right-angle bisection give four congruent right triangles whose legs are equal, so the four vertex angles are equal to each other. Since quadrilateral angles sum to 360 degrees, each is 90 degrees, and the rhombus is a rectangle and hence a square.",
+      "commonMistake": "Claiming equal diagonals alone make a rhombus a square, without using that the diagonals bisect the vertex angles."
+    },
+    {
+      "id": "icse-9-math-q-rec-23",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State one property that is true of every parallelogram and one additional property that makes it a rhombus.",
+      "answer": "Every parallelogram has both pairs of opposite sides parallel, and its diagonals bisect each other. To be a rhombus, all four sides must additionally be equal.",
+      "explanation": "A rhombus is a special parallelogram, so it must keep every parallelogram property and add the equal-side condition.",
+      "commonMistake": "Giving a property such as opposite angles equal as though it were the extra condition; every parallelogram already has it."
+    },
+    {
+      "id": "icse-9-math-q-rec-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The area of a parallelogram is 180 square cm. Its base is 15 cm and its slanting side is 13 cm. Find the perpendicular height and state the relationship between the three.",
+      "answer": "Height = area divided by base = 180/15 = 12 cm. The height 12 cm is less than the slanting side 13 cm, as it must be, and the two form a right triangle with a horizontal offset of root(13^2 - 12^2) = root(169 - 144) = 5 cm, using the 5, 12, 13 triple. The slanting side is the hypotenuse, the height is one leg, and the other leg is the horizontal distance by which the figure leans.",
+      "explanation": "The perpendicular height and the slanting side are two sides of a right triangle whose third side is the lean of the parallelogram.",
+      "commonMistake": "Assuming the slanting side and the height are equal, which is only true for a rectangle."
+    }
+  ]
+}

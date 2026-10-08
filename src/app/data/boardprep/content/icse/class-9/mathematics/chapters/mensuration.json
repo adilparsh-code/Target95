@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-mensuration",
+  "title": "Mensuration",
+  "kind": "mathematics",
+  "tagline": "Area, perimeter and Heron's formula, the circle, cube and cuboid",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every area, perimeter, volume and surface-area figure in this chapter was independently recomputed from the standard formulas by scripts/verify-math.mjs. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Mensuration is the arithmetic of shapes. Every formula here is derived from two facts: a rectangle is base multiplied by height, and a circle of radius r has area 22/7 of r squared. Everything else, the triangle, the rhombus, the cube, the cuboid, the arc and the sector, follows from those two. The one genuinely new tool is Heron's formula, which finds the area of a triangle from its three sides alone, and which applies exactly when you are given sides and not a height.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Mensuration"
+      },
+      {
+        "label": "Shapes covered",
+        "value": "Square, rectangle, triangle, circle, cube and cuboid"
+      },
+      {
+        "label": "Special formula",
+        "value": "Heron's formula for the area of a triangle from its three sides"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "quadrilaterals",
+      "title": "Square, rectangle and their perimeters",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The area of a rectangle is the product of its length and breadth. Its perimeter is twice the sum of the two, because there are two lengths and two breadths round the boundary. A square is a rectangle with equal sides, so the general formulas reduce to area equal to side squared and perimeter equal to four times the side."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rectangle: area = length x breadth, perimeter = 2(l + b).",
+            "Square: area = side^2, perimeter = 4 x side.",
+            "Both share the units rule: area is in square units and perimeter is in linear units, never mixed."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A rectangular field is 45 m long and 28 m broad. Find its area and the cost of levelling it at 12 rupees per square metre.",
+              "note": "The area is 45 x 28 = 1260 square m. The cost is 1260 x 12 = 15120 rupees."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "triangle",
+      "title": "Triangle and Heron's formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The area of a triangle is half the base multiplied by the perpendicular height. That is useless when the height is not given, which is the usual situation in a three-sided question. Heron's formula removes the height entirely."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Semi-perimeter",
+              "meaning": "Half the perimeter, written s. For sides a, b and c the semi-perimeter is s = (a + b + c)/2."
+            },
+            {
+              "term": "Heron's formula",
+              "meaning": "The area of a triangle with sides a, b and c is the square root of s(s - a)(s - b)(s - c)."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the area of a triangle with sides 6 cm, 8 cm and 10 cm.",
+              "note": "The semi-perimeter is s = (6 + 8 + 10)/2 = 12. The area is root(12 x (12 - 6) x (12 - 8) x (12 - 10)) = root(12 x 6 x 4 x 2) = root 576 = 24 square cm. This is the 6-8-10 right triangle, so half x 6 x 8 = 24 confirms the result."
+            },
+            {
+              "text": "Find the area of a triangle with sides 8 cm, 10 cm and 12 cm.",
+              "note": "The semi-perimeter is s = (8 + 10 + 12)/2 = 15. The area is root(15 x 7 x 5 x 3) = root 1575 = 15 root 7 square cm, approximately 39.69 square cm."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Heron's formula requires the square root to come out neatly. If it does not, the question almost always expects either pi equal to 22/7 or a simplification such as 15 root 7, and the working should show which is being used."
+        }
+      ]
+    },
+    {
+      "id": "circle-measurements",
+      "title": "Circumference, area, arc and sector",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For a circle of radius r and diameter d, the circumference is 2 pi r or pi d, and the area is pi r squared. When the question says take pi as 22/7, use 22/7 exactly; the radius is then usually chosen to be a multiple of 7 so the result is a whole number. When pi is left as pi, the answer is kept in terms of pi."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Circumference = 2 pi r; area of the circle = pi r^2; area of a semicircle = (1/2) pi r^2.",
+            "Length of an arc subtending angle theta at the centre is (theta/360) x 2 pi r.",
+            "Area of a sector subtending angle theta is (theta/360) x pi r^2.",
+            "Area of a segment is the area of the sector minus the area of the triangle formed by the two radii."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the circumference and the area of a circle of radius 14 cm, taking pi as 22/7.",
+              "note": "The circumference is 2 x (22/7) x 14 = 2 x 22 x 2 = 88 cm. The area is (22/7) x 14 x 14 = 22 x 2 x 14 = 616 square cm."
+            },
+            {
+              "text": "Find the area of a sector of angle 90 degrees in a circle of radius 12 cm, taking pi as 22/7.",
+              "note": "The sector is 90/360 = 1/4 of the circle, so the area is (1/4) x (22/7) x 12 x 12 = (1/4) x (22/7) x 144 = (1/4) x 3168/7 = 792/7 = 113.14 square cm. Keeping it exact, the area is (22 x 144)/(7 x 4) = 792/7 square cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solids",
+      "title": "Cube and cuboid",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A cuboid has three dimensions. Its volume is the product of the three. Its total surface area is twice the sum of the three different face areas, since every dimension appears on two opposite faces. A cube is a cuboid whose three dimensions are equal, so the three formulas collapse to side cubed for the volume, 6 side squared for the surface area, and 12 side for the total edge length."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cuboid: volume = l x b x h, total surface area = 2(lb + bh + lh).",
+            "Cube: volume = a^3, total surface area = 6a^2, total edge length = 12a.",
+            "Surface areas add; volumes do not. Two cubes of side a together have surface area 12a^2 but volume 2a^3."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A cuboid measures 12 cm by 8 cm by 5 cm. Find its volume and its total surface area.",
+              "note": "The volume is 12 x 8 x 5 = 480 cubic cm. The surface area is 2(12x8 + 8x5 + 12x5) = 2(96 + 40 + 60) = 2 x 196 = 392 square cm."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Rectangle: area = length x breadth; perimeter = 2(length + breadth).",
+    "Square: area = side^2; perimeter = 4 x side.",
+    "Area of a triangle = half the base multiplied by the perpendicular height.",
+    "Heron's formula: area = root of s(s - a)(s - b)(s - c), where s is the semi-perimeter (a + b + c)/2.",
+    "Circumference of a circle = 2 pi r; area of a circle = pi r^2.",
+    "Use 22/7 only when the question says to, and prefer it when the radius is a multiple of 7.",
+    "Arc length = (theta/360) x 2 pi r; sector area = (theta/360) x pi r^2.",
+    "Segment area = sector area minus the area of the triangle on the same two radii.",
+    "Cuboid: volume = l x b x h; total surface area = 2(lb + bh + lh).",
+    "Cube: volume = a^3; total surface area = 6a^2; total edge length = 12a.",
+    "Surface areas add and volumes add, but a solid's surface area is not the sum of its faces alone unless every face is counted."
+  ],
+  "examFocus": [
+    "Read whether the question gives pi as 22/7 or leaves it as pi, and match the answer to that instruction exactly.",
+    "Heron's formula is the intended method whenever three sides are given and no height; converting to a height is the usual wrong turn.",
+    "For a cuboid, work out l x b, b x h and l x h as a separate line before adding, since most errors are in that line.",
+    "Units matter: square units for area and perimeter-like linear units for edge lengths and circumferences."
+  ],
+  "vocabulary": [
+    {
+      "word": "Perimeter",
+      "meaning": "The total distance round the outside boundary of a closed figure."
+    },
+    {
+      "word": "Semi-perimeter",
+      "meaning": "Half the perimeter, written s, used in Heron's formula."
+    },
+    {
+      "word": "Sector",
+      "meaning": "The region bounded by two radii and the arc between them."
+    },
+    {
+      "word": "Segment",
+      "meaning": "The region between a chord and the arc it cuts off."
+    },
+    {
+      "word": "Volume",
+      "meaning": "The space occupied by a solid, measured in cubic units."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-men-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area of a rectangle of length 15 cm and breadth 8 cm is:",
+      "options": [
+        "120 square cm",
+        "46 square cm",
+        "23 square cm",
+        "60 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "120 square cm",
+      "explanation": "The area is length multiplied by breadth, which is 15 x 8 = 120 square cm.",
+      "commonMistake": "Adding the sides to get 23, which is half the perimeter rather than the area."
+    },
+    {
+      "id": "icse-9-math-q-men-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area of a circle of radius 21 cm, taking pi as 22/7, is:",
+      "options": [
+        "1386 square cm",
+        "132 square cm",
+        "924 square cm",
+        "66 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "1386 square cm",
+      "explanation": "The area is (22/7) x 21 x 21 = 22 x 3 x 21 = 1386 square cm.",
+      "commonMistake": "Using the circumference formula 2 x (22/7) x 21 = 132 instead of pi r squared."
+    },
+    {
+      "id": "icse-9-math-q-men-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area of a triangle with sides 6 cm, 8 cm and 10 cm is:",
+      "options": [
+        "24 square cm",
+        "48 square cm",
+        "30 square cm",
+        "12 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "24 square cm",
+      "explanation": "Since 6, 8 and 10 form a right triangle, the area is half x 6 x 8 = 24 square cm. Heron's formula confirms it: s = 12 and the area is root(12 x 6 x 4 x 2) = root 576 = 24.",
+      "commonMistake": "Using the full base x height, giving 48, which is the parallelogram area rather than the triangle area."
+    },
+    {
+      "id": "icse-9-math-q-men-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The total surface area of a cube of edge 8 cm is:",
+      "options": [
+        "384 square cm",
+        "512 square cm",
+        "192 square cm",
+        "64 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "384 square cm",
+      "explanation": "A cube has 6 equal faces each of area 8 x 8 = 64 square cm, so the total surface area is 6 x 64 = 384 square cm.",
+      "commonMistake": "Using 8 cubed = 512, which is the volume rather than the surface area."
+    },
+    {
+      "id": "icse-9-math-q-men-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A sector of angle 120 degrees in a circle of radius 14 cm, taking pi as 22/7, has area:",
+      "options": [
+        "205.33 square cm",
+        "102.67 square cm",
+        "308 square cm",
+        "411.43 square cm"
+      ],
+      "correctIndex": 0,
+      "answer": "205.33 square cm",
+      "explanation": "The whole circle has area (22/7) x 14 x 14 = 22 x 2 x 14 = 616 square cm. The sector of 120 degrees is 120/360 = 1/3 of the circle, so its area is 616/3 = 205.33 square cm.",
+      "commonMistake": "Dividing by 2 instead of by 3, since 120 degrees is a third of 360 degrees and not a half."
+    },
+    {
+      "id": "icse-9-math-q-men-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: half the perimeter of a triangle is called its ________.",
+      "answer": "semi-perimeter, written s, equal to (a + b + c)/2",
+      "explanation": "Heron's formula is written in terms of the semi-perimeter rather than the perimeter, which keeps the expression under the square root a product of four terms.",
+      "commonMistake": "Using the full perimeter a + b + c in place of s, which changes every one of the four factors."
+    },
+    {
+      "id": "icse-9-math-q-men-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the total surface area of a cuboid of dimensions l, b and h is ________.",
+      "answer": "2(lb + bh + lh), that is twice the sum of the three face areas",
+      "explanation": "Each pair of opposite faces has area lb, bh and lh, and each face must be counted, so every term is doubled.",
+      "commonMistake": "Writing lb + bh + lh without the factor 2, which counts only three of the six faces."
+    },
+    {
+      "id": "icse-9-math-q-men-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A rectangular plot is 30 m by 24 m. Find its area and its perimeter.",
+      "answer": "The area is 30 x 24 = 720 square m. The perimeter is 2(30 + 24) = 2 x 54 = 108 m.",
+      "explanation": "Area uses multiplication of the two dimensions while perimeter adds them and doubles the result.",
+      "commonMistake": "Using 30 x 24 x 2 as the perimeter, applying the area rule."
+    },
+    {
+      "id": "icse-9-math-q-men-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the area of a triangle with sides 9 cm, 12 cm and 15 cm.",
+      "answer": "The semi-perimeter is s = (9 + 12 + 15)/2 = 18. The area is root(18 x (18 - 9) x (18 - 12) x (18 - 15)) = root(18 x 9 x 6 x 3) = root 2916 = 54 square cm. Since 9, 12 and 15 form a right triangle, half x 9 x 12 = 54 confirms it.",
+      "explanation": "Heron's formula is the method indicated by giving three sides, and the 9-12-15 right triangle provides an independent check.",
+      "commonMistake": "Forgetting to halve nothing but miscomputing s as 36, which doubles every factor in the product."
+    },
+    {
+      "id": "icse-9-math-q-men-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the circumference and the area of a circle of radius 35 cm, taking pi as 22/7.",
+      "answer": "The circumference is 2 x (22/7) x 35 = 2 x 22 x 5 = 220 cm. The area is (22/7) x 35 x 35 = 22 x 5 x 35 = 3850 square cm.",
+      "explanation": "Since 35 is a multiple of 7, taking 22/7 cancels the denominator exactly and both results are whole numbers.",
+      "commonMistake": "Using the diameter in place of the radius, or leaving pi as 3.14 when the question specifies 22/7."
+    },
+    {
+      "id": "icse-9-math-q-men-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the length of the arc of a circle of radius 21 cm that subtends an angle of 60 degrees at the centre, taking pi as 22/7.",
+      "answer": "The full circumference is 2 x (22/7) x 21 = 2 x 22 x 3 = 132 cm. The arc subtending 60 degrees is 60/360 = 1/6 of the circumference, so its length is 132/6 = 22 cm.",
+      "explanation": "A 60 degree arc is exactly a sixth of the circle, so the arc length is the circumference divided by six.",
+      "commonMistake": "Dividing the area instead of the circumference by 6, or forgetting that the fraction applies to the circumference."
+    },
+    {
+      "id": "icse-9-math-q-men-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A cuboid measures 12 cm by 8 cm by 5 cm. Find its volume and its total surface area, and state how many faces each has an area of 96 square cm.",
+      "answer": "The volume is 12 x 8 x 5 = 480 cubic cm. The three different face areas are 12 x 8 = 96, 8 x 5 = 40 and 12 x 5 = 60 square cm. The total surface area is 2(96 + 40 + 60) = 2 x 196 = 392 square cm. Two faces, the pair 12 by 8, have an area of 96 square cm.",
+      "explanation": "Writing the three face areas on a separate line before adding is what keeps the arithmetic reliable, since each of them is doubled.",
+      "commonMistake": "Adding 96 + 40 + 60 = 196 and stopping there, which counts only three of the six faces."
+    },
+    {
+      "id": "icse-9-math-q-men-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A room is 15 m long, 10 m broad and 4 m high. Find the total cost of whitewashing its four walls and ceiling at 18 rupees per square metre, leaving the floor and the two doors untouched.",
+      "answer": "The four walls form a rectangle of length 2(15 + 10) = 50 m and height 4 m, so their total area is 50 x 4 = 200 square m. The ceiling has area 15 x 10 = 150 square m. The area to be whitewashed is 200 + 150 = 350 square m. The cost is 350 x 18 = 6300 rupees.",
+      "explanation": "The four walls are unrolled into a single rectangle whose two dimensions are the total of the length and breadth pairs and the height, which is quicker than adding four faces one at a time.",
+      "commonMistake": "Including the floor, which is not whitewashed, or forgetting the ceiling, which is."
+    },
+    {
+      "id": "icse-9-math-q-men-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the area of the segment cut off by a chord subtending 90 degrees at the centre of a circle of radius 20 cm, taking pi as 22/7.",
+      "answer": "The sector of 90 degrees has area (90/360) x (22/7) x 20 x 20 = (1/4) x (22/7) x 400 = (1/4) x 8800/7 = 2200/7 square cm. The triangle formed by the two radii and the chord is right-angled with both legs equal to 20 cm, so its area is (1/2) x 20 x 20 = 200 square cm. The segment is the sector minus the triangle, so its area is 2200/7 - 200 = (2200 - 1400)/7 = 800/7 = 114.29 square cm.",
+      "explanation": "A segment is always the sector minus the triangle, and the triangle here is a right isosceles one because the two radii are equal and the angle between them is 90 degrees.",
+      "commonMistake": "Adding the triangle to the sector, or giving the sector area alone as the segment area."
+    },
+    {
+      "id": "icse-9-math-q-men-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A cylindrical tank of radius 7 cm holds water to a depth of 20 cm. Find the volume of water, taking pi as 22/7. If the water is poured into a cuboid tank of base 14 cm by 10 cm, find the depth of water in it.",
+      "answer": "The volume of water is the area of the circular base multiplied by the depth, which is (22/7) x 7 x 7 x 20 = 22 x 7 x 20 = 3080 cubic cm. The cuboid tank has base area 14 x 10 = 140 square cm, so the depth of water is 3080/140 = 22 cm. This is larger than the original depth of 20 cm, which is expected because the new base area of 140 square cm is smaller than the circular base area of 154 square cm.",
+      "explanation": "Volume is conserved on pouring, so the same volume divided by the new base area gives the new depth. A smaller base must give a greater depth.",
+      "commonMistake": "Expecting the depth to fall, since the cuboid base of 140 square cm is actually smaller than the circular base of 154 square cm."
+    },
+    {
+      "id": "icse-9-math-q-men-16",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A square of side 12 cm and an equilateral triangle of side 12 cm have the same perimeter. Compare their areas.",
+      "answer": "The square has perimeter 4 x 12 = 48 cm and area 12 x 12 = 144 square cm. The equilateral triangle has the same perimeter of 48 cm, so each of its three sides is 48/3 = 16 cm. Its area is root of s(s - a)(s - b)(s - c) with s = 24, which is root(24 x 8 x 8 x 8) = root 12288 = 64 root 3 square cm, approximately 110.85 square cm. So the square has the larger area, 144 against about 110.85 square cm, even though the two figures have equal perimeters.",
+      "explanation": "Equal perimeters do not mean equal areas, because the square uses all 48 cm of its perimeter on four right-angled sides while the triangle spreads the same 48 cm over three sides and needs longer sides to enclose the same boundary.",
+      "commonMistake": "Giving the triangle a side of 12 cm, since the perimeter equality changes the triangle's side length."
+    },
+    {
+      "id": "icse-9-math-q-men-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the area of a triangle with sides 5 cm, 12 cm and 13 cm and state the type of triangle it is.",
+      "answer": "The semi-perimeter is s = (5 + 12 + 13)/2 = 15. The area is root(15 x 10 x 3 x 2) = root 900 = 30 square cm. Since 5 x 5 + 12 x 12 = 25 + 144 = 169 = 13 x 13, the triangle is right-angled, and half x 5 x 12 = 30 confirms the area.",
+      "explanation": "Checking the Pythagorean relation first identifies the triangle as right-angled, which gives an independent route to the area as a check on Heron's formula.",
+      "commonMistake": "Using 13 as the base and half of it as the height, which gives a very different and wrong area."
+    },
+    {
+      "id": "icse-9-math-q-men-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A cube has a total surface area of 600 square cm. Find its volume.",
+      "answer": "The surface area is 6a^2, so a^2 = 600/6 = 100 and a = 10 cm. The volume is a^3 = 10 x 10 x 10 = 1000 cubic cm.",
+      "explanation": "Working backwards from the surface area gives the edge first, and the volume then follows from the cube of that edge.",
+      "commonMistake": "Taking the volume as 600 divided by 6, which gives 100 rather than the cube of the edge."
+    },
+    {
+      "id": "icse-9-math-q-men-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the area of the region between a circle of radius 7 cm and the square circumscribed about it, taking pi as 22/7.",
+      "answer": "The side of the circumscribed square equals the diameter, which is 2 x 7 = 14 cm, so the square has area 14 x 14 = 196 square cm. The circle has area (22/7) x 7 x 7 = 22 x 7 = 154 square cm. The region between them is 196 - 154 = 42 square cm.",
+      "explanation": "A circumscribed square has the circle's diameter as its side, which is the only extra fact needed before subtracting the two areas.",
+      "commonMistake": "Using the radius 7 cm as the side of the square, giving an area of 49 which is smaller than the circle."
+    },
+    {
+      "id": "icse-9-math-q-men-20",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A square and an equilateral triangle both have area 36 square cm. Find the perimeter of each and say which is larger.",
+      "answer": "For the square, side^2 = 36 so the side is 6 cm and the perimeter is 4 x 6 = 24 cm. For the equilateral triangle, Heron's formula with s = 3a/2 gives area = (a^2 x root 3)/4, so a^2 = 144/root 3 = 48 root 3 and a = root(48 root 3), which is approximately 9.12 cm. The perimeter is 3a, approximately 27.35 cm. So the triangle has the larger perimeter even though the two shapes enclose the same area.",
+      "explanation": "For the same enclosed area, the shape with the longer perimeter has more boundary for its area, and here the triangle's perimeter exceeds the square's.",
+      "commonMistake": "Assuming equal areas mean equal perimeters, which is true only for similar figures."
+    },
+    {
+      "id": "icse-9-math-q-men-21",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the total edge length of a cuboid of dimensions 9 cm, 6 cm and 4 cm.",
+      "answer": "A cuboid has 12 edges: four of length 9 cm, four of length 6 cm and four of length 4 cm. The total is 4(9 + 6 + 4) = 4 x 19 = 76 cm.",
+      "explanation": "There are four edges in each of the three dimensions, so the total is four times the sum of the three dimensions.",
+      "commonMistake": "Multiplying 9 x 6 x 4 = 216, which is the volume rather than the total edge length."
+    },
+    {
+      "id": "icse-9-math-q-men-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solid iron cube of edge 10 cm is melted and recast into a cuboid of length 20 cm, breadth 5 cm and height unknown. Find the unknown height and the total surface area of the new cuboid.",
+      "answer": "The volume of iron is unchanged. The cube has volume 10 x 10 x 10 = 1000 cubic cm. Let the unknown height be h, so 20 x 5 x h = 1000, which gives 100h = 1000 and h = 10 cm. The three face areas of the new cuboid are 20 x 5 = 100, 5 x 10 = 50 and 20 x 10 = 200 square cm, so the total surface area is 2(100 + 50 + 200) = 2 x 350 = 700 square cm. This is larger than the original surface area of 6 x 100 = 600 square cm, so recasting into this cuboid has increased the surface area. That is expected, because the cuboid 20 by 5 by 10 is less compact than the cube of edge 10.",
+      "explanation": "Melting conserves volume exactly, so the unknown height follows from volume alone, and the surface area is then computed separately from the new dimensions.",
+      "commonMistake": "Assuming melting always reduces the surface area. It reduces it only when the new shape is more compact than the original."
+    },
+    {
+      "id": "icse-9-math-q-men-23",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the radius of a circle whose circumference is 88 cm, taking pi as 22/7.",
+      "answer": "The circumference is 2 pi r, so 88 = 2 x (22/7) x r, which gives 88 = 44r/7 and r = 88 x 7/44 = 14 cm.",
+      "explanation": "Working backwards from the circumference divides by 2 pi, and the 22/7 cancels cleanly.",
+      "commonMistake": "Dividing 88 by 22/7 alone and getting 28, which is the diameter rather than the radius."
+    },
+    {
+      "id": "icse-9-math-q-men-24",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A wire of length 44 cm is bent into a square. Find the area of the square, and then state what happens to the area if the same wire is bent into an equilateral triangle instead.",
+      "answer": "Bending into a square gives a side of 44/4 = 11 cm, so the area is 11 x 11 = 121 square cm. Bent into an equilateral triangle, each side is 44/3 cm. The area of an equilateral triangle of side a is (a^2 root 3)/4, so here the area is ((44/3)^2 x root 3)/4 = (1936 root 3)/(9 x 4) = 484 root 3/9 square cm, approximately 93.14 square cm. The area therefore decreases, because the triangle encloses less for the same boundary length.",
+      "explanation": "The same wire gives the same perimeter in both shapes, and the square encloses the larger area of the two.",
+      "commonMistake": "Assuming the area is unchanged because the wire length is unchanged. Perimeter being fixed does not fix the area."
+    },
+    {
+      "id": "icse-9-math-q-men-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the area of a trapezium with parallel sides 14 cm and 10 cm and a perpendicular height of 8 cm.",
+      "answer": "The area of a trapezium is half the sum of the parallel sides multiplied by the perpendicular height, which is (1/2) x (14 + 10) x 8 = (1/2) x 24 x 8 = 96 square cm.",
+      "explanation": "The trapezium splits into two triangles sharing the same height, so the area is the average of the parallel sides multiplied by the height.",
+      "commonMistake": "Using only one of the parallel sides, which would give 56 square cm for a triangle rather than the trapezium."
+    },
+    {
+      "id": "icse-9-math-q-men-26",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The floor of a hall is in the shape of a rectangle 20 m by 14 m. A carpet is laid in the centre leaving a border 1 m wide all round. Find the area of carpet laid and the cost of the border if the border is laid with tiles at 55 rupees per square metre.",
+      "answer": "The outer rectangle is 20 by 14, with area 20 x 14 = 280 square m. Since the border is 1 m wide all round, the carpet is 1 m shorter on each of the two length sides, giving 20 - 2 = 18 m, and 1 m shorter on each of the two breadth sides, giving 14 - 2 = 12 m. The carpet area is 18 x 12 = 216 square m. The border area is 280 - 216 = 64 square m. The cost of the border is 64 x 55 = 3520 rupees.",
+      "explanation": "The key step is subtracting twice the border width from each dimension, since the border eats into the length at both ends.",
+      "commonMistake": "Subtracting the border width only once from each dimension, giving a carpet of 19 by 13 and the wrong area."
+    }
+  ]
+}

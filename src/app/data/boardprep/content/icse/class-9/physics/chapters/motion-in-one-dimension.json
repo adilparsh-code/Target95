@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-physics-motion-1d",
+  "title": "Motion in One Dimension",
+  "kind": "physics",
+  "tagline": "Scalars, vectors, graphs and uniformly accelerated motion",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class IX Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed by scripts/verify-math.mjs. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Motion is a change of position with time, and the whole of this chapter is about how to describe that change with as few numbers as possible. The first job is to decide whether a quantity needs a direction, which separates scalars from vectors. The second job is to describe how that quantity changes, which for almost every school problem means assuming constant acceleration and using one of four equations that connect initial velocity, final velocity, acceleration, displacement and time. Learning to choose the right equation, rather than memorising all four, is what makes these questions quick.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Motion in One Dimension"
+      },
+      {
+        "label": "Scalars",
+        "value": "Distance, speed, mass, time, temperature, work, energy"
+      },
+      {
+        "label": "Vectors",
+        "value": "Displacement, velocity, acceleration, force, momentum"
+      },
+      {
+        "label": "Key equations",
+        "value": "v = u + at, s = ut + (1/2)at^2, v^2 = u^2 + 2as, s = ((u+v)/2)t"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "scalars-vectors",
+      "title": "Scalars, vectors, distance and displacement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A scalar quantity is fully described by its magnitude alone and obeys ordinary arithmetic. A vector quantity needs both magnitude and direction, and it does not combine by ordinary addition. Speed is a scalar; velocity is a vector. Distance is a scalar path length; displacement is a vector straight line from start to finish."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Scalar",
+              "meaning": "A quantity with magnitude only, such as distance, speed, mass, time and temperature."
+            },
+            {
+              "term": "Vector",
+              "meaning": "A quantity with magnitude and direction, such as displacement, velocity, acceleration, force and momentum."
+            },
+            {
+              "term": "Displacement",
+              "meaning": "The shortest distance from the initial position to the final position, together with its direction."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Distance is a scalar and never decreases; displacement can be zero even when the body has moved.",
+            "For motion along a closed path such as a full circle, distance is the whole circumference while displacement is zero.",
+            "1 km per hour = 1000/3600 = 5/18 m per second, and this factor is needed whenever speed is given in km per hour.",
+            "1 m per second = 18/5 = 3.6 km per hour, so 72 km per hour = 72 x 5/18 = 20 m per second."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Convert 72 km per hour into metres per second.",
+              "note": "Multiplying by 5/18 gives 72 x 5/18 = 20 m per second."
+            },
+            {
+              "text": "A body moves 4 m east and then 3 m north. Find the distance travelled and the magnitude of the displacement.",
+              "note": "The distance is 4 + 3 = 7 m. The displacement is the diagonal of the right triangle, so it is root(4^2 + 3^2) = root 25 = 5 m, directed 36.87 degrees north of east."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "velocity-acceleration",
+      "title": "Velocity, acceleration and average speed",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Velocity is the rate of change of displacement, and acceleration is the rate of change of velocity. Because velocity is a vector, acceleration is a vector too. Average speed is total distance divided by total time, which is a scalar and is always less than or equal to the magnitude of the average velocity."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Acceleration",
+              "meaning": "Rate of change of velocity, a = change in velocity divided by the time interval, measured in metres per second squared."
+            },
+            {
+              "term": "Uniform acceleration",
+              "meaning": "Constant acceleration, in which the velocity changes by equal amounts in equal times regardless of how long the interval is."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Acceleration is zero for uniform velocity, but a non-zero velocity.",
+            "An object moving at constant velocity has zero acceleration, which is different from being at rest.",
+            "The slope of a velocity-time graph gives the acceleration; the slope of a distance-time graph gives the speed.",
+            "The area under a velocity-time graph equals the displacement covered in that interval."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A car travels 120 km in 2 hours and then 90 km in 1.5 hours. Find its average speed for the whole journey.",
+              "note": "Total distance is 120 + 90 = 210 km and total time is 2 + 1.5 = 3.5 h, so the average speed is 210/3.5 = 60 km per hour. Note that this is not the mean of the two speeds."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations-motion",
+      "title": "The equations of uniformly accelerated motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four equations connect u the initial velocity, v the final velocity, a the acceleration, s the displacement and t the time. All four are derived from the definitions and are valid only when the acceleration is constant. Choosing between them is a matter of looking at which five quantities the question actually gives you."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "First equation",
+              "meaning": "v = u + at, used when u, a and t are known and v is required."
+            },
+            {
+              "term": "Second equation",
+              "meaning": "s = ut + (1/2)at^2, used when u, a and t are known and s is required."
+            },
+            {
+              "term": "Third equation",
+              "meaning": "v^2 = u^2 + 2as, used when u, v and a are known and s is required, or when u, v and s are known and a is required. It has no time in it."
+            },
+            {
+              "term": "Fourth equation",
+              "meaning": "s = ((u + v)/2)t, used when u, v and t are known and s is required, which is the average velocity multiplied by the time."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "If the body slows down, take the direction of motion as positive and the acceleration is automatically negative.",
+            "A body at rest has u = 0, which simplifies the second equation to s = (1/2)at^2.",
+            "A body thrown vertically upward has a = minus g throughout the whole flight, not only on the way down.",
+            "Choose the third equation whenever the time is not given, and the second or fourth whenever it is."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A body starts from rest and accelerates uniformly at 2 m per second squared for 5 seconds. Find its velocity and displacement.",
+              "note": "Using the first equation, v = 0 + 2 x 5 = 10 m per second. Using the second equation, s = 0 + (1/2)(2)(25) = 25 m. As a check, v squared = 100 and u squared + 2as = 0 + 2 x 2 x 25 = 100."
+            },
+            {
+              "text": "A car moving at 20 m per second brakes with a retardation of 5 m per second squared. How far does it travel before stopping?",
+              "note": "The final velocity is zero and the time is not given, so the third equation applies: v squared = u squared + 2as gives 0 = 400 + 2 x (-5) x s, so 10s = 400 and s = 40 m."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs-motion",
+      "title": "Reading graphs of motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Graphs are the fastest way to see what a motion looks like. A slope of zero means the quantity is not changing; a horizontal velocity-time graph means constant velocity; a straight line on any motion graph means constant acceleration."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A distance-time graph that curves upwards shows speeding up; one that curves downwards shows slowing down.",
+            "A horizontal distance-time graph means the body is at rest.",
+            "On a velocity-time graph the gradient is the acceleration and the area under the line is the displacement.",
+            "A graph that crosses the time axis on a velocity-time graph has zero velocity at that instant, so the body is momentarily at rest."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A body starts from rest and reaches a velocity of 20 m per second in 5 seconds with uniform acceleration. Sketch the velocity-time graph and find the distance covered in the first 5 seconds.",
+              "note": "The graph is a straight line rising from the origin to (5, 20). The distance is the area under the line, which is half x 5 x 20 = 50 m."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Scalar has magnitude only; vector has magnitude and direction.",
+    "Distance is a scalar and displacement is a vector.",
+    "Speed is a scalar; velocity is a vector.",
+    "1 km per hour = 5/18 m per second, and 1 m per second = 18/5 km per hour.",
+    "Average speed = total distance divided by total time.",
+    "Acceleration = change in velocity divided by time, in metres per second squared.",
+    "v = u + at.",
+    "s = ut + (1/2)at^2.",
+    "v^2 = u^2 + 2as, used when the time is not given.",
+    "s = ((u + v)/2)t, the average velocity multiplied by the time.",
+    "All four equations require constant acceleration.",
+    "Take the direction of motion as positive, so retardation appears as a negative acceleration.",
+    "The gradient of a velocity-time graph is the acceleration; the area under it is the displacement."
+  ],
+  "examFocus": [
+    "Convert km per hour to metres per second before substituting, since almost every equation uses SI units and forgetting the factor of 18/5 is the most frequent error in this unit.",
+    "Identify which five quantities are given before choosing an equation; using the third equation whenever the time is absent avoids most mistakes.",
+    "A vertical throw keeps a = minus g for the whole flight, including on the way up.",
+    "Graph questions should state the shape, the gradient and the area, and an actual labelled sketch is usually required."
+  ],
+  "vocabulary": [
+    {
+      "word": "Scalar",
+      "meaning": "A quantity described by magnitude alone, such as distance, speed and mass."
+    },
+    {
+      "word": "Vector",
+      "meaning": "A quantity described by magnitude and direction, such as displacement, velocity and force."
+    },
+    {
+      "word": "Displacement",
+      "meaning": "Shortest directed distance from the start to the finish position."
+    },
+    {
+      "word": "Acceleration",
+      "meaning": "Rate of change of velocity, measured in metres per second squared."
+    },
+    {
+      "word": "Retardation",
+      "meaning": "Acceleration opposite to the direction of motion, so it reduces the speed."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-phy-q-mot-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a vector quantity?",
+      "options": [
+        "velocity",
+        "speed",
+        "mass",
+        "time"
+      ],
+      "correctIndex": 0,
+      "answer": "velocity",
+      "explanation": "Velocity has both magnitude and direction, so it is a vector. Speed, mass and time have magnitude only and are scalars.",
+      "commonMistake": "Choosing speed, which is the magnitude of velocity and therefore a scalar."
+    },
+    {
+      "id": "icse-9-phy-q-mot-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "72 km per hour expressed in metres per second is:",
+      "options": [
+        "20 m per second",
+        "36 m per second",
+        "12.5 m per second",
+        "72 m per second"
+      ],
+      "correctIndex": 0,
+      "answer": "20 m per second",
+      "explanation": "Multiplying by 5/18 gives 72 x 5/18 = 20 m per second.",
+      "commonMistake": "Multiplying by 3.6 instead of dividing by it, which would give 259 m per second."
+    },
+    {
+      "id": "icse-9-phy-q-mot-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body completes half a revolution of a circle and returns to a point diametrically opposite the start. Compared with the total distance, its displacement:",
+      "options": [
+        "is half the distance",
+        "is equal to the distance",
+        "is zero",
+        "is twice the distance"
+      ],
+      "correctIndex": 0,
+      "answer": "is half the distance",
+      "explanation": "For half a circle of radius r the distance travelled along the arc is pi r and the displacement is the straight diameter 2r. Since pi is greater than 2, the displacement 2r is smaller than the distance pi r but is not zero, and the ratio is 2/pi, which is greater than one half.",
+      "commonMistake": "Giving zero, which is true only after a complete revolution, not a half one."
+    },
+    {
+      "id": "icse-9-phy-q-mot-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of acceleration is:",
+      "options": [
+        "metre per second squared",
+        "metre per second",
+        "second per metre",
+        "metre squared per second"
+      ],
+      "correctIndex": 0,
+      "answer": "metre per second squared",
+      "explanation": "Acceleration is the change in velocity divided by time, so its unit is metres per second divided by seconds, which is metres per second squared.",
+      "commonMistake": "Giving metre per second, which is the unit of velocity rather than of acceleration."
+    },
+    {
+      "id": "icse-9-phy-q-mot-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body is moving with uniform velocity. Its acceleration is:",
+      "options": [
+        "zero",
+        "constant and non-zero",
+        "decreasing steadily",
+        "increasing steadily"
+      ],
+      "correctIndex": 0,
+      "answer": "zero",
+      "explanation": "Uniform velocity means the velocity is not changing, so the rate of change of velocity, which is the acceleration, is zero. The body is still moving, which is why velocity and acceleration must not be confused.",
+      "commonMistake": "Assuming that a body which is moving must be accelerating, forgetting that uniform velocity is a special case."
+    },
+    {
+      "id": "icse-9-phy-q-mot-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the shortest distance from the initial to the final position, together with its direction, is called ________.",
+      "answer": "displacement, which is a vector quantity",
+      "explanation": "Displacement ignores the path taken and depends only on the start and end points, together with the direction between them.",
+      "commonMistake": "Answering distance, which is the path length and is a scalar."
+    },
+    {
+      "id": "icse-9-phy-q-mot-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: when the time is not given in a uniformly accelerated motion problem, the equation normally used is v squared = ________.",
+      "answer": "u squared + 2as, that is initial velocity squared plus twice the acceleration times the displacement",
+      "explanation": "The third equation is the only one of the four that contains no time term, so it is the natural choice when the time is absent.",
+      "commonMistake": "Using v = u + at, which contains t and therefore cannot be used when the time is unknown."
+    },
+    {
+      "id": "icse-9-phy-q-mot-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A car covers 90 km in 1.5 hours. Find its speed in km per hour and in metres per second.",
+      "answer": "Speed in km per hour is 90/1.5 = 60 km per hour. In metres per second, multiply by 5/18 to get 60 x 5/18 = 50/3 = 16.67 m per second.",
+      "explanation": "Speed is distance divided by time, and the conversion factor from km per hour to metres per second is 5/18.",
+      "commonMistake": "Dividing 60 by 3.6 instead of multiplying by 5/18, which reverses the conversion."
+    },
+    {
+      "id": "icse-9-phy-q-mot-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A body travels 5 m east, then 12 m north, then 5 m south. Find the distance travelled and the magnitude of the displacement.",
+      "answer": "The distance is 5 + 12 + 5 = 22 m. The net northward movement is 12 minus 5 = 7 m and the eastward movement is 5 m, so the displacement has magnitude root(5^2 + 7^2) = root(25 + 49) = root 74 = 8.60 m.",
+      "explanation": "The eastward and northward components are treated separately and then combined with Pythagoras, because only the 5 m and 12 m legs form a right triangle.",
+      "commonMistake": "Treating the 12 m north and 5 m south as a single right-angle triangle with the 5 m east, which wrongly gives 13 m."
+    },
+    {
+      "id": "icse-9-phy-q-mot-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A car starts from rest and accelerates uniformly at 4 m per second squared for 10 seconds. Find its velocity after 10 seconds and the distance covered.",
+      "answer": "Using the first equation, v = 0 + 4 x 10 = 40 m per second. Using the second equation, s = 0 x 10 + (1/2)(4)(100) = 200 m. As a check with the third equation, v squared = 1600 and u squared + 2as = 0 + 2 x 4 x 200 = 1600, which agrees.",
+      "explanation": "A body starting from rest has u = 0, so the first two equations reduce to v = at and s = (1/2)at squared.",
+      "commonMistake": "Writing s = at squared instead of (1/2)at squared, which doubles the displacement."
+    },
+    {
+      "id": "icse-9-phy-q-mot-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A train travelling at 20 m per second is brought to rest in 8 seconds by a uniform retardation. Find the retardation and the distance covered while stopping.",
+      "answer": "Taking the direction of motion as positive, u = 20 m per second, v = 0 and t = 8 s. From the first equation, 0 = 20 + 8a, so a = minus 2.5 m per second squared, giving a retardation of 2.5 m per second squared. Using the second equation, s = ut + (1/2)at squared = 20 x 8 + (1/2)(-2.5)(64) = 160 minus 80 = 80 m. The third equation confirms it: v squared = u squared + 2as gives 0 = 400 + 2 x (-2.5) x 80 = 400 minus 400 = 0.",
+      "explanation": "Taking the direction of motion as positive makes the retardation negative, and the third equation then confirms the distance because it contains neither t nor an average-velocity term where a sign could slip.",
+      "commonMistake": "Combining the average of the initial and final velocities with the time while carrying the negative retardation inconsistently; the fourth equation would give 80 m only if the acceleration sign convention were respected throughout."
+    },
+    {
+      "id": "icse-9-phy-q-mot-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A ball is thrown vertically upwards with a velocity of 19.6 m per second. Taking g as 9.8 m per second squared, find the maximum height reached and the total time of flight.",
+      "answer": "At the highest point the velocity is zero. Taking upward as positive, the acceleration is minus 9.8 m per second squared. From the first equation, 0 = 19.6 + (-9.8)t, so t = 2 s to reach the top. Using the second equation for the ascent, s = 19.6 x 2 + (1/2)(-9.8)(4) = 39.2 minus 19.6 = 19.6 m. The descent takes the same 2 s by symmetry, so the total time of flight is 2 + 2 = 4 s.",
+      "explanation": "The acceleration is minus g for the entire flight, and the upward and downward journeys take equal times because the motion is symmetric about the top.",
+      "commonMistake": "Using a positive g on the way down, which would double the total time instead of matching it."
+    },
+    {
+      "id": "icse-9-phy-q-mot-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A car of length 4.5 m travelling at 16 m per second crosses a bridge of length 27.5 m. Find the time taken to cross the bridge completely.",
+      "answer": "To cross completely the whole car must travel its own length plus the length of the bridge, so the total distance is 4.5 + 27.5 = 32 m. Since the motion is uniform, the average speed equals the constant speed of 16 m per second, and s = ((u + v)/2)t gives 32 = ((16 + 16)/2)t = 16t, so t = 2 s.",
+      "explanation": "The car's own length must be added because the front of the car must reach the far end before the whole vehicle has crossed.",
+      "commonMistake": "Using only the bridge length of 27.5 m, which gives 1.72 s and ignores the length of the car."
+    },
+    {
+      "id": "icse-9-phy-q-mot-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why can the average speed of a journey be smaller than the average velocity even when the distance travelled is greater than the displacement?",
+      "answer": "Average speed is total distance divided by total time, whereas the magnitude of the average velocity is the magnitude of the displacement divided by the total time. The time is the same in both, so any difference comes entirely from the numerator. Whenever the path is not a straight line from start to finish, the total distance exceeds the magnitude of the displacement, and therefore the average speed exceeds the magnitude of the average velocity. The two quantities are not comparable as signed numbers because velocity is a vector and speed is a scalar, so it is only their magnitudes that can be compared.",
+      "explanation": "Both share the same total time, so the whole difference is caused by distance being at least as large as the magnitude of the displacement.",
+      "commonMistake": "Comparing a positive speed with a velocity that may be negative, which is comparing a scalar with a signed vector."
+    },
+    {
+      "id": "icse-9-phy-q-mot-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A body moves with uniform acceleration and its velocity changes from 10 m per second to 30 m per second in 4 seconds. Find the acceleration and the distance covered in that time, and state the average velocity.",
+      "answer": "From the first equation, v = u + at gives 30 = 10 + 4a, so 4a = 20 and a = 5 m per second squared. Using the fourth equation, s = ((u + v)/2)t = ((10 + 30)/2) x 4 = 20 x 4 = 80 m. The average velocity is ((u + v)/2) = 20 m per second. Checking with the third equation, v squared = 900 and u squared + 2as = 100 + 2 x 5 x 80 = 100 + 800 = 900, which agrees.",
+      "explanation": "With constant acceleration the velocity changes uniformly, so the average velocity is exactly the mean of the initial and final velocities.",
+      "commonMistake": "Averaging 10 and 30 to get the distance, or forgetting that the mean of the velocities must still be multiplied by the time."
+    },
+    {
+      "id": "icse-9-phy-q-mot-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A bus covers 60 km in 1 hour and 40 minutes at a constant speed. Find its speed.",
+      "answer": "Convert the time to hours: 1 hour 40 minutes = 1 + 40/60 = 1 + 2/3 = 5/3 hours, which is 1.667 hours. The speed is 60/(5/3) = 60 x 3/5 = 36 km per hour.",
+      "explanation": "Mixed units must be converted before dividing, and 40 minutes is two thirds of an hour.",
+      "commonMistake": "Dividing 60 by 1.40, treating 1 hour 40 minutes as 1.4 hours."
+    },
+    {
+      "id": "icse-9-phy-q-mot-17",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State what the gradient and the area under a velocity-time graph represent, and state the SI unit of the area.",
+      "explanation": "The gradient of a velocity-time graph is the acceleration, because it is the change in velocity per unit time. The area under the graph is the displacement, because the area is the product of velocity and time. The unit of the area is therefore metres per second multiplied by seconds, which is metres, matching the unit of displacement.",
+      "answer": "The gradient gives the acceleration and the area under the graph gives the displacement, with the area measured in metres.",
+      "commonMistake": "Saying the area gives the distance travelled in the form of path length, forgetting that the signed area is displacement."
+    },
+    {
+      "id": "icse-9-phy-q-mot-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A body has a velocity of 12 m per second at t = 0 and 4 m per second at t = 6 s. Find its acceleration and state what kind of acceleration this is.",
+      "answer": "From the first equation, 4 = 12 + 6a, so 6a = minus 8 and a = minus 4/3 m per second squared, approximately minus 1.33 m per second squared. Since the acceleration is negative while the body is still moving in the positive direction, the body is slowing down, so this is a retardation, that is a uniform deceleration.",
+      "explanation": "A negative acceleration with a positive velocity means the body is still moving forward but at a decreasing speed, which is precisely retardation.",
+      "commonMistake": "Reporting the magnitude only and losing the sign, which hides the fact that the motion is decelerating."
+    },
+    {
+      "id": "icse-9-phy-q-mot-19",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two everyday differences between distance and displacement that a student could observe.",
+      "answer": "First, distance always increases or stays the same as a body moves, whereas displacement can decrease, and after a complete journey back to the starting point the displacement is zero while the distance is the whole path length. Second, distance has no direction and can be added arithmetically, while displacement has direction and is combined by the triangle of vectors, so two displacements of 3 m each at right angles give a resultant of root(9 + 9) = root 18 = 4.24 m and not 6 m.",
+      "explanation": "Distance is the path and is a scalar; displacement is the net change of position and is a vector, which is why they combine differently.",
+      "commonMistake": "Saying displacement is always smaller than distance, forgetting they can be equal for straight-line motion in one direction."
+    },
+    {
+      "id": "icse-9-phy-q-mot-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A body is thrown straight up and returns to the point of throw after 8 seconds. Taking g as 9.8 m per second squared, find the initial velocity and the maximum height reached.",
+      "answer": "The motion is symmetric, so the ascent takes half the total time, that is 4 s. At the top the velocity is zero, so from the first equation 0 = u + (-9.8)(4), giving u = 39.2 m per second. Using the second equation for the ascent, s = 39.2 x 4 + (1/2)(-9.8)(16) = 156.8 minus 78.4 = 78.4 m. As a check, the third equation gives 0 = 1536.64 + 2 x (-9.8) x 78.4 = 1536.64 minus 1536.64, which is zero as required.",
+      "explanation": "The total time of flight is twice the time to the highest point, which is the symmetry that lets the problem be halved before any calculation.",
+      "commonMistake": "Using the full 8 seconds as the time to reach the top, which doubles the height."
+    },
+    {
+      "id": "icse-9-phy-q-mot-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A cyclist covers 18 km in 45 minutes, rests for 15 minutes and returns over the same 18 km in 30 minutes. Find the average speed for the whole trip.",
+      "answer": "Total distance is 18 + 18 = 36 km. Total time is 45 + 15 + 30 = 90 minutes = 1.5 hours. The average speed is 36/1.5 = 24 km per hour.",
+      "explanation": "Average speed uses the total distance and the total time including the rest, since the cyclist is not moving during those 15 minutes but the time still counts.",
+      "commonMistake": "Leaving out the 15 minute rest, which would give 36/1.25 = 28.8 km per hour."
+    },
+    {
+      "id": "icse-9-phy-q-mot-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A body starts from rest with an acceleration of 10 m per second squared. How far does it travel in the 5th second?",
+      "answer": "The distance travelled in the nth second is given by u + (a/2)(2n minus 1). With u = 0, a = 10 and n = 5, this is 0 + (10/2)(10 minus 1) = 5 x 9 = 45 m. As a check, the distance in the first 5 seconds is (1/2)(10)(25) = 125 m and in the first 4 seconds is (1/2)(10)(16) = 80 m, and the difference 125 minus 80 = 45 m confirms the answer.",
+      "explanation": "The distance in the nth second is the difference between the total distance up to n seconds and the total distance up to n minus 1 seconds.",
+      "commonMistake": "Reporting the total distance after 5 seconds, which is 125 m, rather than the distance during the 5th second alone."
+    },
+    {
+      "id": "icse-9-phy-q-mot-23",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A car travels round a circular track of circumference 400 m in 50 seconds at constant speed. Find its distance, displacement, speed and velocity over the complete journey.",
+      "answer": "The distance is the whole circumference, 400 m, since the car travels the entire track. The displacement is zero, because the car finishes where it started, so the shortest directed distance from the start to the finish is nil. The speed is 400/50 = 8 m per second. The average velocity is the displacement divided by the time, which is zero divided by 50, so it is 0 m per second. This pair of answers is the clearest illustration of the difference between a scalar and a vector.",
+      "explanation": "Returning to the start leaves the position unchanged, so the displacement and therefore the average velocity vanish even though the speed is undiminished.",
+      "commonMistake": "Giving a non-zero average velocity because the car is moving at 8 m per second, confusing speed with velocity."
+    },
+    {
+      "id": "icse-9-phy-q-mot-24",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the equations of uniformly accelerated motion cannot be used for a stone dropped from rest when air resistance is taken into account.",
+      "answer": "The four equations require a constant acceleration throughout. With air resistance present the upward drag on the falling stone increases with speed, so the net downward force and therefore the downward acceleration both change as the stone speeds up. Since the acceleration is not constant, the equations do not apply and the motion must instead be found by integrating the varying acceleration, which is beyond the Class 9 syllabus. In practice the equations are used precisely because air resistance is neglected.",
+      "explanation": "The equations rest entirely on the assumption of constant acceleration, so any situation with changing acceleration invalidates them.",
+      "commonMistake": "Saying the equations cannot be used because the motion is not uniform, when uniform velocity is a different idea from constant acceleration."
+    },
+    {
+      "id": "icse-9-phy-q-mot-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two cars A and B start from the same point at the same time. Car A has a velocity of 10 m per second and car B has 20 m per second, both uniform. Find their relative velocity and state what it means.",
+      "answer": "The relative velocity of B with respect to A is the velocity of B minus the velocity of A, that is 20 minus 10 = 10 m per second, in the direction of B's motion. This means that B appears to move away from A at 10 m per second, so the separation between the two cars grows at 10 m per second. Equivalently, A appears to move backwards at 10 m per second relative to B.",
+      "explanation": "Relative velocity is found by subtracting the two velocities in the same frame, and it describes the motion an observer on one vehicle would see.",
+      "commonMistake": "Adding the velocities to get 30 m per second, which is the speed of approach only when the cars move towards one another."
+    },
+    {
+      "id": "icse-9-phy-q-mot-26",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A body travelling at 24 m per second is slowed down uniformly at 4 m per second squared. Find the time taken to stop and the distance travelled before stopping.",
+      "answer": "Taking the direction of motion as positive, u = 24 m per second, v = 0 and a = minus 4 m per second squared. From the first equation, 0 = 24 minus 4t, so t = 6 s. Using the second equation, s = 24 x 6 + (1/2)(-4)(36) = 144 minus 72 = 72 m. The check with the third equation gives 0 = 576 + 2 x (-4) x 72 = 576 minus 576, which is zero, confirming both results.",
+      "explanation": "Writing the retardation as a negative acceleration and then cross-checking with the time-free equation catches any sign error immediately.",
+      "commonMistake": "Using a = plus 4 m per second squared, which would suggest the body speeds up and never stops."
+    }
+  ]
+}

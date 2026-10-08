@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-rational-irrational-numbers",
+  "title": "Rational and Irrational Numbers",
+  "kind": "mathematics",
+  "tagline": "Real numbers, surds, proofs of irrationality and rationalisation",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep: theorems on rational and irrational numbers, proofs by contradiction, and worked rationalisation examples, all checked against the ICSE Examination Year 2027 Mathematics syllabus structure recorded in this subject's manifest."
+  },
+  "overview": {
+    "intro": "Every number you meet in the real number system is either rational or irrational, and the difference between them is about their decimal expansion, not about their size. A rational number has a decimal that either terminates or repeats; an irrational number has a decimal that does neither. This chapter gives you the tests that separate the two, the theorems that describe how they behave under addition and multiplication, and the surd techniques needed to leave an exact answer in an exam instead of a decimal.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Pure Arithmetic and Commercial Mathematics" },
+      { "label": "Key results", "value": "Irrationality of root 2, root 3, root 5; surd laws; rationalisation" },
+      { "label": "Typical difficulty", "value": "Concept proofs; marks come from stating the assumption and contradicting it" }
+    ]
+  },
+  "learn": [
+    {
+      "id": "rational-numbers",
+      "title": "Rational numbers and terminating decimals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A number is rational if it can be written in the form p/q where p and q are integers and q is not zero. Every fraction is therefore rational, and so is every integer, since n = n/1. A negative number is rational exactly when its magnitude is: if p/q is rational then so is -p/q."
+        },
+        {
+          "type": "paragraph",
+          "text": "The useful fact is about decimal expansions. Multiply the numerator by 10 until the decimal part becomes a whole number, and the expansion terminates. The number of places needed is the smallest k for which the denominator divides 10^k, that is 2^a multiplied by 5^b with k = max(a, b). For example 7/8 = 7 divided by 2 cubed needs 3 places and equals 0.875, while 7/16 needs 4 places and equals 0.4375."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "1/4 = 0.25, 3/5 = 0.6, 7/8 = 0.875 — these terminate.",
+            "11/16 = 0.6875 — note this is NOT 11/8, a very common slip.",
+            "A denominator with any prime factor other than 2 or 5, such as 7 or 3 or 11, never produces a terminating decimal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Express 7/16 as a decimal.", "note": "16 divides 10 cubed = 1000, so three places: 7/16 = 4375/10000 = 0.4375." },
+            { "text": "Does 21/28 have a terminating decimal?", "note": "Reduce first: 21/28 = 3/4 = 0.75. You must simplify before judging the denominator." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "irrational-numbers",
+      "title": "Irrational numbers and non-terminating decimals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A real number that is not rational is irrational. If a fraction cannot be written in lowest terms with a denominator dividing a power of 10, its decimal expansion goes on for ever without ever repeating a pattern. The square roots of 2, 3, 5, 6, 7, 8, 10 and so on are irrational, as is the ratio of any circle's circumference to its diameter."
+        },
+        {
+          "type": "paragraph",
+          "text": "There are two ways an irrational number can behave. Its decimal can be non-terminating and non-recurring, as with 1/3 = 0.333... and 1/7 = 0.142857142857... which are actually rational but recurring; or non-terminating and non-recurring, as with root 2 = 1.414213562... where no block of digits ever repeats. In exams the phrase 'non-terminating non-recurring' is exactly the definition of irrational, and it is worth memorising in that exact form."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Rational number", "meaning": "A number of the form p/q with integers p, q and q not zero." },
+            { "term": "Irrational number", "meaning": "A real number that cannot be written as p/q; its decimal is non-terminating and non-recurring." },
+            { "term": "Surd", "meaning": "An irrational root of a positive integer, such as root 2 or cube root 5." },
+            { "term": "Recurring decimal", "meaning": "A decimal whose digits repeat in a fixed cycle, such as 0.333... or 0.142857... ." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "irrationality-theorems",
+      "title": "Theorems on rational and irrational numbers",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "These results are the backbone of almost every proof question in this unit. They are stated as theorems and are used directly, so you do not need to re-prove them, but you must know precisely which conditions apply."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sum or difference of a rational and an irrational number is always irrational.",
+            "Product or quotient of a rational number (non-zero) and an irrational number is always irrational.",
+            "Sum of two irrational numbers may be rational or irrational: root 2 + (3 - root 2) = 3 is rational, but root 2 + root 3 is irrational.",
+            "Product or quotient of two irrational numbers may be rational or irrational: root 2 times root 2 = 2 is rational, but root 2 times root 3 = root 6 is irrational."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The pattern to notice is that operations involving exactly one irrational number and one rational number always give an irrational result, while operations mixing two of the same kind have no fixed outcome. This single observation resolves most one-mark questions."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "State whether (root 3 + 1)/(root 3 - 1) is rational or irrational.", "note": "Rationalising gives 2 + root 3, which is a rational plus an irrational, so irrational by the first theorem." },
+            { "text": "Is root 2 + root 8 rational?", "note": "root 8 = 2 root 2, so the sum is 3 root 2, which is irrational. Simplify surds before judging." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "proofs",
+      "title": "Proving root 2, root 3 and root 5 are irrational",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The standard method is a proof by contradiction. Assume the opposite of what you want, do some algebra, and arrive at a statement that is obviously false — usually that a whole number equals itself plus a positive fraction. The method has four steps and is worth learning once and reusing."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Assume root 2 is rational, so root 2 = p/q in lowest terms with p, q integers and q not zero.",
+            "Square both sides to get 2 = p squared over q squared, that is p squared = 2 q squared.",
+            "p squared is even, so p is even (the square of an odd number is odd). Write p = 2m. Then 4 m squared = 2 q squared, so q squared = 2 m squared, and therefore q is also even.",
+            "Both p and q are even, which contradicts lowest terms. Hence root 2 is irrational."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The proof for root 3 is the same shape. From p squared = 3 q squared, p is divisible by 3, write p = 3m, then 9 m squared = 3 q squared so q squared = 3 m squared, so q is divisible by 3. Again p and q share a factor. Root 5 is identical using 5 instead of 3."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Why must p and q be relatively prime?", "note": "Because the fraction is in lowest terms. Without that condition the contradiction at the end has no force." },
+            { "text": "Which single fact ends the proof of root 2?", "note": "That p and q are both even while being relatively prime, which is impossible." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "surd-laws",
+      "title": "Laws of surds and simplifying radicals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A surd is an irrational root of a positive integer. Before doing anything else with one, simplify it: pull out perfect square factors and pull in any denominator. root 50 = root 25 times 2 = 5 root 2, and root 8 divided by root 2 = root 4 = 2."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "root a times root b = root (a b)",
+            "root a divided by root b = root (a over b)",
+            "(root a) squared = a, and more generally root a to the n = a to the power n over n",
+            "The square root of a product equals the product of the square roots only when both radicals are of the same index and the numbers are non-negative."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Adding surds means combining like radicals, exactly as with letters. 3 root 5 + 2 root 5 = 5 root 5, but 3 root 5 + 2 root 7 cannot be simplified further because the radicands differ. Always simplify completely before adding."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Simplify root 72.", "note": "72 = 36 times 2, so root 72 = 6 root 2." },
+            { "text": "Simplify (root 5) cubed.", "note": "5 to the power 3/2 = 5 times root 5, not 125. Work from the outside in: (root 5)(root 5)(root 5) = 5 root 5." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rationalisation",
+      "title": "Rationalisation of the denominator",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An answer with a surd in the denominator is not considered simplified. Rationalisation means multiplying numerator and denominator by a suitable surd so the denominator becomes a whole number. The rule that decides which surd to use is: if the denominator is of the form root a plus or minus root b, multiply by the same expression with the opposite sign between the terms."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "1 over (root a + root b), multiply by (root a - root b) over (root a - root b).",
+            "The new denominator is root a squared minus root b squared, which is a - b, a whole number.",
+            "The numerator becomes a - b when multiplied out.",
+            "So 1/(root 2 + root 3) = (root 2 - root 3)/(2 - 3) = root 3 - root 2."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "For a denominator that is a single surd such as 1/root 8, multiply by root 8 itself. For a denominator such as 2 + root 5, first take the rationalising factor as the conjugate 2 - root 5, which gives a denominator of 4 - 5 = -1. Finally, check for an index: a cube root is rationalised the same way, using the conjugate for a sum."
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Rationalise 1/(2 + root 3).", "note": "Multiply by (2 - root 3): numerator 2 - root 3, denominator 4 - 3 = 1, so the answer is 2 - root 3." },
+            { "text": "Rationalise 1/(root 5 - root 3).", "note": "Multiply by (root 5 + root 3): denominator 5 - 3 = 2, so the answer is (root 5 + root 3)/2." },
+            { "text": "Show that (root 5 + 2)/(sqrt 5 - 2) is irrational.", "note": "Multiply by (root 5 + 2): numerator (root 5 + 2) squared = 9 + 4 root 5, denominator 5 - 4 = 1, giving 9 + 4 root 5, a rational plus an irrational." }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A decimal terminates if and only if the reduced denominator is of the form 2^a multiplied by 5^b.",
+    "Always simplify a fraction before deciding whether its decimal terminates.",
+    "Non-terminating non-recurring is the exact definition of an irrational number.",
+    "A rational combined with an irrational, by addition, subtraction, multiplication or non-zero division, always gives an irrational.",
+    "Two irramentals may combine to a rational or an irrational; the theorem does not decide it.",
+    "Proof by contradiction: assume rational, derive p and q both divisible, contradict lowest terms.",
+    "root a times root b = root ab, and (root a) squared = a.",
+    "Always leave a rationalised denominator in an exam answer.",
+    "Rationalising factor for root a plus root b is root a minus root b."
+  ],
+  "examFocus": [
+    "One-mark questions alternate between stating a theorem correctly and applying it to a single expression.",
+    "Proofs of irrationality of root 2, root 3 and root 5 appear regularly; learn the four steps for root 2 exactly.",
+    "Rationalisation questions usually test two surd types: root a plus/minus root b, and a whole number plus/minus a surd.",
+    "When asked to show a surd expression is irrational, rationalise it first and then apply the rational-plus-irrational theorem."
+  ],
+  "vocabulary": [
+    { "word": "Surd", "meaning": "An irrational root of a positive whole number, such as root 2." },
+    { "word": "Rationalise", "meaning": "To remove a surd from the denominator of a fraction by multiplying above and below." },
+    { "word": "Conjugate", "meaning": "The expression obtained by changing every plus to a minus and vice versa, such as 2 - root 3 for 2 + root 3." },
+    { "word": "Recurring", "meaning": "Describing a decimal whose digits repeat in a fixed cycle, such as 0.333... ." }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-rin-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following numbers is rational?",
+      "options": ["root 5", "0.333... (recurring)", "root 3", "0.101001000100001..."],
+      "correctIndex": 3,
+      "answer": "0.101001000100001... (non-terminating, non-recurring, so irrational)",
+      "explanation": "root 5, root 3 and 0.101001000100001... all have decimal expansions that do not terminate and do not recur. Only the other recurring decimal 0.333... equals 1/3 and is therefore rational.",
+      "commonMistake": "Treating 0.333... as irrational because it never ends. A recurring decimal is always rational."
+    },
+    {
+      "id": "icse-9-math-q-rin-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The decimal expansion of 11/16 is:",
+      "options": ["0.6875", "0.6116", "6.875", "0.68750 (repeating)"],
+      "correctIndex": 0,
+      "answer": "0.6875",
+      "explanation": "16 divides 10 to the power 4, so four decimal places are needed: 11/16 = 6875/10000 = 0.6875. It terminates and does not repeat.",
+      "commonMistake": "Reading the fraction as 11/8 because the digits '16' look like a decimal."
+    },
+    {
+      "id": "icse-9-math-q-rin-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which expression must always be irrational?",
+      "options": ["root 2 + root 3", "root 2 times root 2", "(root 3 + 1)/(root 3 - 1)", "root 5 - root 5"],
+      "correctIndex": 2,
+      "answer": "(root 3 + 1)/(root 3 - 1)",
+      "explanation": "Rationalising the fraction gives (root 3 + 1) squared divided by (3 - 1), that is (4 + 2 root 3)/2 = 2 + root 3, which is rational plus irrational, so irrational. The other three are rational: root 2 times root 2 = 2, root 5 - root 5 = 0, and root 2 + root 3 is the sum of two unlike surds, which is irrational but not forced by any theorem.",
+      "commonMistake": "Choosing root 2 plus root 3. That value is irrational, but the question asks which expression is *always* irrational as a consequence of a theorem."
+    },
+    {
+      "id": "icse-9-math-q-rin-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The product of a non-zero rational number and an irrational number is:",
+      "options": ["always rational", "always irrational", "rational only if the rational number is a whole number", "always a surd"],
+      "correctIndex": 1,
+      "answer": "Always irrational",
+      "explanation": "This is a standard theorem. If the product were rational, dividing it by the non-zero rational factor would make the irrational number rational, a contradiction.",
+      "commonMistake": "Thinking 0 multiplied by an irrational gives an irrational. That is why the theorem specifies a non-zero rational number."
+    },
+    {
+      "id": "icse-9-math-q-rin-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the sum of a rational number and an irrational number is always ________.",
+      "answer": "irrational",
+      "explanation": "This is the first of the standard theorems on rational and irrational numbers."
+    },
+    {
+      "id": "icse-9-math-q-rin-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Simplify: root 50 = ________",
+      "answer": "5 root 2",
+      "explanation": "50 = 25 times 2, so root 50 = root 25 times root 2 = 5 root 2."
+    },
+    {
+      "id": "icse-9-math-q-rin-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: 1/(root 2 + root 3) = ________",
+      "answer": "root 3 - root 2",
+      "explanation": "Multiply by (root 2 - root 3)/(root 2 - root 3). The denominator becomes 2 - 3 = -1 and the numerator becomes root 2 - root 3, so the fraction is (root 2 - root 3)/(-1) = root 3 - root 2.",
+      "commonMistake": "Forgetting to divide by -1 at the end."
+    },
+    {
+      "id": "icse-9-math-q-rin-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State, with a reason, whether 0.101001000100001... is rational or irrational.",
+      "answer": "It is irrational. The gaps between the 1s keep increasing, so the expansion neither terminates nor repeats any fixed block of digits. A non-terminating non-recurring decimal is irrational by definition.",
+      "explanation": "Compare with 0.333... which does repeat the block '3'. Here the pattern of zeroes grows each time, so no block repeats for ever."
+    },
+    {
+      "id": "icse-9-math-q-rin-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Express 7/16 as a decimal and state why the decimal terminates.",
+      "answer": "7/16 = 4375/10000 = 0.4375. The reduced denominator 16 = 2 to the power 4 divides 10 to the power 4, so the expansion terminates after four decimal places.",
+      "explanation": "A fraction in lowest terms has a terminating decimal exactly when its denominator is of the form 2^a multiplied by 5^b."
+    },
+    {
+      "id": "icse-9-math-q-rin-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Is 21/28 rational? Justify your answer in one step.",
+      "answer": "Yes. 21/28 = 3/4 after cancelling the common factor 7, and every fraction p/q with q not zero is rational. It equals 0.75, a terminating decimal.",
+      "explanation": "The question looks trivial, but it tests whether you reduce before judging the denominator. A student who examines 28 might wrongly suspect a recurring decimal."
+    },
+    {
+      "id": "icse-9-math-q-rin-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Without using a calculator, determine whether 7/11 has a terminating decimal.",
+      "answer": "No. 11 is not of the form 2^a multiplied by 5^b, so the decimal expansion of 7/11 never terminates. In fact 7/11 = 0.6363... which recurs but does not terminate.",
+      "explanation": "The reduced denominator 11 is prime and is neither 2 nor 5, so no power of 10 is divisible by it."
+    },
+    {
+      "id": "icse-9-math-q-rin-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Simplify 3 root 5 + 2 root 7 + 2 root 5 and state why no further simplification is possible.",
+      "answer": "3 root 5 + 2 root 5 combine to 5 root 5, giving 5 root 5 + 2 root 7. No further simplification is possible because the radicands 5 and 7 are different and neither is a perfect square.",
+      "explanation": "Surds can only be added when the radicands are identical. Unlike radicals are never combined."
+    },
+    {
+      "id": "icse-9-math-q-rin-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Rationalise the denominator of 1/(3 + root 5).",
+      "answer": "Multiply by (3 - root 5)/(3 - root 5): the result is (3 - root 5)/(9 - 5) = (3 - root 5)/4.",
+      "explanation": "The conjugate of 3 + root 5 is 3 - root 5. The denominator becomes 9 - 5 = 4, a whole number."
+    },
+    {
+      "id": "icse-9-math-q-rin-14",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Rationalise the denominator of (root 3 + 1)/(sqrt 3 - 1) and simplify.",
+      "answer": "Multiply by (root 3 + 1)/(root 3 + 1): numerator (root 3 + 1) squared = 3 + 1 + 2 root 3 = 4 + 2 root 3; denominator 3 - 1 = 2. Dividing gives 2 + root 3.",
+      "explanation": "Numerator and denominator are the same expression, so the multiplier is the expression itself rather than its conjugate.",
+      "commonMistake": "Using (root 3 - 1) as the multiplier, which leaves the denominator as 2 and does not remove the surd properly."
+    },
+    {
+      "id": "icse-9-math-q-rin-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that root 2 is irrational.",
+      "answer": "Assume, to the contrary, that root 2 is rational. Then root 2 = p/q where p and q are integers, q is not zero, and p and q are relatively prime. Squaring gives 2 = p squared/q squared, so p squared = 2 q squared. Therefore p squared is even, so p is even. Write p = 2m. Substituting gives 4 m squared = 2 q squared, hence q squared = 2 m squared, so q is also even. But then both p and q are even, contradicting the fact that they are relatively prime. Hence root 2 is irrational.",
+      "explanation": "The proof rests on three facts: the square of an odd integer is odd, so an even square implies an even base; and two even integers cannot be relatively prime.",
+      "commonMistake": "Forgetting to state that p and q are in lowest terms. Without it there is no contradiction and the proof fails."
+    },
+    {
+      "id": "icse-9-math-q-rin-16",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that root 3 is irrational.",
+      "answer": "Assume root 3 = p/q in lowest terms with q not zero. Squaring gives 3 = p squared/q squared, so p squared = 3 q squared. Hence p squared is divisible by 3, so p is divisible by 3; write p = 3m. Then 9 m squared = 3 q squared, giving q squared = 3 m squared, so q is divisible by 3. Thus 3 divides both p and q, contradicting that they are relatively prime. Therefore root 3 is irrational.",
+      "explanation": "The same argument as for root 2, replacing 2 by 3 at every step."
+    },
+    {
+      "id": "icse-9-math-q-rin-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that (root 5 + 3)/(sqrt 5 - 3) is irrational, stating the theorem you use.",
+      "answer": "Multiply by (root 5 + 3)/(root 5 + 3). The numerator becomes (root 5 + 3) squared = 5 + 9 + 6 root 5 = 14 + 6 root 5, and the denominator becomes 5 - 9 = -4. So the expression is (14 + 6 root 5)/(-4) = -(7 + 3 root 5)/2, that is -(7/2) - (3/2) root 5. This is a rational number plus a non-zero rational multiple of an irrational number, so by the theorem that a rational and an irrational sum is irrational, the given expression is irrational.",
+      "explanation": "The technique is always the same: rationalise first, then apply the rational-plus-irrational theorem to the simplified result."
+    },
+    {
+      "id": "icse-9-math-q-rin-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Simplify root 200 divided by root 8 and express the answer as a surd.",
+      "answer": "root 200 divided by root 8 = root (200/8) = root 25 = 5.",
+      "explanation": "root 25 is a perfect square, so the result is the whole number 5. The whole quotient is rational.",
+      "commonMistake": "Stopping at root 25 instead of evaluating it."
+    },
+    {
+      "id": "icse-9-math-q-rin-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Is the sum of two irrational numbers always irrational? Justify your answer with two appropriate examples.",
+      "answer": "No. The sum may be rational or irrational. For a rational sum, root 2 + (3 - root 2) = 3, where both summands are irrational but the sum is the whole number 3. For an irrational sum, root 2 + root 3 is irrational because if it were rational, subtracting root 3 (irrational) from it would give root 2 as the difference of a rational and an irrational, which must be irrational — no contradiction there, so instead argue that squaring (root 2 + root 3) gives 5 + 2 root 6, and a rational number has a rational square, forcing root 6 rational, which is false.",
+      "explanation": "Both examples are needed: one shows the sum can be rational, the other shows it can be irrational. This is why the theorem only guarantees behaviour when exactly one of the two numbers is irrational.",
+      "commonMistake": "Giving only the irrational example and concluding 'yes, it is irrational'."
+    },
+    {
+      "id": "icse-9-math-q-rin-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that the sum of root 5 and root 3 is irrational, using the fact that an even square has an even base and an odd square has an odd base.",
+      "answer": "Suppose root 5 + root 3 = r where r is rational. Squaring gives 5 + 3 + 2 root 15 = r squared, so 8 + 2 root 15 = r squared, hence 2 root 15 = r squared - 8. The right-hand side is rational, so root 15 would be rational. But that contradicts the proven irrationality of root 15 (as 15 = 3 times 5 and the standard proof applies). Therefore root 5 + root 3 is irrational.",
+      "explanation": "The key move is squaring once so that the irrational part is isolated on its own side of the equation, then applying a previously proved result."
+    },
+    {
+      "id": "icse-9-math-q-rin-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If x is irrational and y is rational, determine which of the following must be irrational, giving a reason for each: (i) x + y, (ii) x - y, (iii) x times y where y is not zero, (iv) x divided by y where y is not zero.",
+      "answer": "(i) irrational, since a rational added to an irrational gives an irrational. (ii) irrational, since -y is rational and the sum of a rational and an irrational is irrational. (iii) irrational if y is not zero, since otherwise a rational product would force x to be rational. (iv) irrational if y is not zero, by the same argument applied to the reciprocal. If y = 0 then (iii) gives 0, which is rational, so the condition y is not zero is essential.",
+      "explanation": "All four follow from the same pair of theorems; the only subtlety is the non-zero condition.",
+      "commonMistake": "Omitting the case y = 0, which breaks (iii) and (iv)."
+    },
+    {
+      "id": "icse-9-math-q-rin-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The denominator 2 - root 5 is negative. Without using a calculator, rationalise 1/(2 - root 5) and state whether the result is positive.",
+      "answer": "Multiply by (2 + root 5)/(2 + root 5). The result is (2 + root 5)/(4 - 5) = -(2 + root 5) = -2 - root 5. This is negative, which is correct because 2 - root 5 is negative (root 5 is greater than 2) and the reciprocal of a negative number is negative.",
+      "explanation": "Checking the sign at the end is a good habit: it catches the common slip of forgetting that the denominator 4 - 5 is negative.",
+      "commonMistake": "Writing 2 + root 5 and ignoring the negative denominator."
+    },
+    {
+      "id": "icse-9-math-q-rin-23",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Evaluate 0.5 + root 2 expressed as a single surd where possible, and state whether the result is rational or irrational.",
+      "answer": "No simplification is possible because 1/2 is a rational number, not a surd with the same radicand as root 2. The sum 1/2 + root 2 is a rational plus an irrational, so it is irrational.",
+      "explanation": "Like surds can only be combined. Here there is nothing to combine, so the sum stays in its simplified form and its nature follows from the theorem.",
+      "commonMistake": "Trying to write 1/2 as root(something) and then adding coefficients."
+    },
+    {
+      "id": "icse-9-math-q-rin-24",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If (a + root b)/(a - root b) is rational, where a and b are whole numbers and b is not a perfect square, show that a = 0.",
+      "answer": "Multiply numerator and denominator by (a + root b). The result is (a + root b) squared/(a squared - b) = (a squared + b + 2a root b)/(a squared - b). If a is not zero then 2a root b is irrational, and the numerator is then a rational plus an irrational, which is irrational, while the denominator is rational and non-zero. The quotient of an irrational by a non-zero rational is irrational, contradicting the hypothesis. Hence a must be zero.",
+      "explanation": "The structure is rationalise, identify the irrational term, then invoke the rational-by-irrational theorem. The special case a = 0 is what must be concluded."
+    },
+    {
+      "id": "icse-9-math-q-rin-25",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which fraction has a denominator that must be simplified before its decimal can be classified?",
+      "options": ["3/12", "21/28", "5/25", "17/40"],
+      "correctIndex": 1,
+      "answer": "21/28",
+      "explanation": "21/28 reduces to 3/4, which terminates. The other three are already in lowest terms and all have denominators of the form 2^a times 5^b, so each terminates directly.",
+      "commonMistake": "Testing 28 = 2^2 times 7 and concluding the decimal must recur."
+    },
+    {
+      "id": "icse-9-math-q-rin-26",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Simplify (root 3) cubed and express it in the form a root b.",
+      "answer": "(root 3) cubed = root 3 times root 3 times root 3 = 3 root 3.",
+      "explanation": "Multiplying out in stages: root 3 times root 3 = 3, then 3 root 3 = 3 root 3. Alternatively root 3 raised to the power 3 = 3 raised to the power 3/2 = 3 times root 3.",
+      "commonMistake": "Writing (root 3) cubed = 3 cubed = 27, which confuses a cube with a third power."
+    },
+    {
+      "id": "icse-9-math-q-rin-27",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student claims that the product of two irrational numbers is always irrational. Give one counter-example and explain why it disproves the claim.",
+      "answer": "Take root 2 and root 2. Both are irrational, but their product is root 2 times root 2 = root 4 = 2, which is rational. A single valid counter-example is enough to disprove a universal statement.",
+      "explanation": "Universal claims need only one exception to fall. This is the standard counter-example, and knowing it saves time."
+    },
+    {
+      "id": "icse-9-math-q-rin-28",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The number 0.454545... is given. Express it as a fraction in lowest terms and state its denominator's prime factorisation.",
+      "answer": "Let x = 0.454545... Then 100x = 45.4545... and 100x - x = 45, so 99x = 45 and x = 45/99 = 5/11. The reduced denominator is 11, a prime that is neither 2 nor 5, so the decimal recurs but does not terminate.",
+      "explanation": "The standard recurring-decimal technique: multiply by a power of 10 that shifts the repeating block to the same position, then subtract."
+    }
+  ]
+}

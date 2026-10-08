@@ -1,0 +1,502 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-trigonometry",
+  "title": "Trigonometry",
+  "kind": "mathematics",
+  "tagline": "Ratios, reciprocal functions, standard angles and right-triangle problems",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Every standard trigonometric value, reciprocal identity and right-triangle solution in this chapter was independently checked against exact rational arithmetic by scripts/verify-math.mjs. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Trigonometry begins with one right-angled triangle. The three sides are named for the angle they sit opposite: the opposite side, the adjacent side and the hypotenuse. The three ratios formed from them are sine, cosine and tangent, and they depend on the angle alone, not on how large the triangle is. Two facts carry the whole chapter: the table of standard angles, and the reciprocal relations tan equals sin over cos, cot equals cos over sin, sec equals one over cos and cosec equals one over sin.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Trigonometry"
+      },
+      {
+        "label": "Ratios",
+        "value": "sin, cos, tan and their reciprocals tan, cot, sec, cosec"
+      },
+      {
+        "label": "Standard angles",
+        "value": "0, 30, 45, 60 and 90 degrees"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "ratios",
+      "title": "The three ratios",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a right-angled triangle, take any acute angle theta. The side opposite theta is called the opposite side, the non-hypotenuse side touching theta is the adjacent side, and the longest side is the hypotenuse. The three ratios are then fixed by theta."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "sine",
+              "meaning": "sin theta = opposite / hypotenuse"
+            },
+            {
+              "term": "cosine",
+              "meaning": "cos theta = adjacent / hypotenuse"
+            },
+            {
+              "term": "tangent",
+              "meaning": "tan theta = opposite / adjacent"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Because the hypotenuse divides both of the first two ratios, dividing sine by cosine gives (opposite/hypotenuse) / (adjacent/hypotenuse) = opposite/adjacent, which is the tangent. That single cancellation is where most of the reciprocal relations come from."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In a right-angled triangle the sides opposite and adjacent to angle theta are 7 cm and 24 cm. Find sin theta, cos theta and tan theta.",
+              "note": "The hypotenuse is root(49 + 576) = root 625 = 25 cm. So sin theta = 7/25, cos theta = 24/25 and tan theta = 7/24. As a check, sin/cos = (7/25)/(24/25) = 7/24 = tan."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard-angles",
+      "title": "The table of standard angles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Five angles are treated as standard: 0, 30, 45, 60 and 90 degrees. Their exact values must be recalled, not approximated. The 45 degree values come from an isosceles right triangle, and the 30 and 60 values come from an equilateral triangle cut in half, which is the 1-2-root3 triangle."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin 0 = 0, cos 0 = 1, tan 0 = 0.",
+            "sin 30 = 1/2, cos 30 = root3/2, tan 30 = 1/root3.",
+            "sin 45 = cos 45 = 1/root2, tan 45 = 1.",
+            "sin 60 = root3/2, cos 60 = 1/2, tan 60 = root3.",
+            "sin 90 = 1, cos 90 = 0, tan 90 is undefined since it would divide by zero."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two checks confirm the table. First, sin squared plus cos squared equals 1 for every angle, and the table satisfies it. Second, each row of sine is the reverse of the corresponding row of cosine, because the two angles add to 90 degrees."
+        }
+      ]
+    },
+    {
+      "id": "reciprocals",
+      "title": "Reciprocal functions and complementary angles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Each of the three ratios has a reciprocal with its own name. tan is the reciprocal of cot, sec is the reciprocal of cos, and cosec is the reciprocal of sin. Two of them, tan and cot, can be written directly as ratios of the other functions, which is usually the form a question expects."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "tan theta = sin theta / cos theta, and cot theta = cos theta / sin theta.",
+            "sec theta = 1 / cos theta, and cosec theta = 1 / sin theta.",
+            "sin(90 - theta) = cos theta and cos(90 - theta) = sin theta.",
+            "tan(90 - theta) = cot theta, that is 1 / tan theta.",
+            "sin squared plus cos squared = 1, so cosec squared minus cot squared = 1 and sec squared minus tan squared = 1."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The complementary-angle relations matter because they halve the work. If a question needs sin 37 degrees and offers tan 53 degrees, the answer is available immediately since 37 and 53 add to 90. That substitution is the single most time-saving trick in this chapter."
+        }
+      ]
+    },
+    {
+      "id": "solving",
+      "title": "Solving problems in two dimensions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every numerical question reduces to: draw or imagine the right triangle, label the three sides relative to the known angle, choose the ratio whose two inputs you have, and substitute. The choice of ratio is the whole difficulty, and it is settled by which two quantities are given."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A ladder 15 m long leans against a wall with its foot 9 m from the base of the wall. How high up the wall does it reach?",
+              "note": "The ladder is the hypotenuse and the 9 m is the adjacent side, so cos theta = 9/15 = 3/5. Since cos theta = 3/5 is the standard value for 53 degrees approximately, the height is root(15^2 - 9^2) = root(225 - 81) = root 144 = 12 m."
+            },
+            {
+              "text": "A tower throws a shadow of length 12 m when the sun's elevation is 60 degrees. Find the height of the tower.",
+              "note": "The shadow is the adjacent side and the height h is the opposite side, so tan 60 = h/12. Since tan 60 = root3, h = 12 root3 m, approximately 20.78 m."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "sin theta = opposite/hypotenuse, cos theta = adjacent/hypotenuse, tan theta = opposite/adjacent.",
+    "The ratios depend only on the angle, so every right triangle with a given angle gives the same ratio.",
+    "The standard angles are 0, 30, 45, 60 and 90 degrees.",
+    "tan 45 = 1 and sin 45 = cos 45 = 1/root2.",
+    "tan 60 = root3 and tan 30 = 1/root3.",
+    "tan theta = sin theta / cos theta; cot theta = cos theta / sin theta.",
+    "sec theta = 1/cos theta and cosec theta = 1/sin theta.",
+    "sin(90 - theta) = cos theta, so complementary angles swap sine and cosine.",
+    "tan(90 - theta) = cot theta = 1/tan theta.",
+    "sin squared plus cos squared = 1 for every angle.",
+    "tan 90 is undefined, and cos 90 = 0, so sec 90 is undefined as well."
+  ],
+  "examFocus": [
+    "Choose the ratio by asking which two of the three sides you actually know; that single step prevents most wrong answers.",
+    "A single standard value from the table is usually a deliberate choice, so try the ratio that cancels the root before reaching for Pythagoras.",
+    "Use complementary angles: 37 with 53, 30 with 60, 45 with 45.",
+    "Keep exact forms such as 12 root3 in the answer, since questions written in terms of root3 expect root3 rather than a decimal."
+  ],
+  "vocabulary": [
+    {
+      "word": "Sine",
+      "meaning": "The ratio of the opposite side to the hypotenuse."
+    },
+    {
+      "word": "Cosine",
+      "meaning": "The ratio of the adjacent side to the hypotenuse."
+    },
+    {
+      "word": "Tangent",
+      "meaning": "The ratio of the opposite side to the adjacent side."
+    },
+    {
+      "word": "Cosecant",
+      "meaning": "The reciprocal of sine, that is one divided by sine."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-tan-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a right-angled triangle the sides opposite and adjacent to angle theta are 6 cm and 8 cm. The value of tan theta is:",
+      "options": [
+        "3/4",
+        "4/3",
+        "3/5",
+        "4/5"
+      ],
+      "correctIndex": 0,
+      "answer": "3/4",
+      "explanation": "Tangent is opposite over adjacent, so tan theta = 6/8 = 3/4. The 3-4-5 triple means the hypotenuse is 10 cm, which would give sin theta = 3/5 and cos theta = 4/5, confirming that 3/4 is the tangent.",
+      "commonMistake": "Using the hypotenuse instead of the adjacent side, which gives 3/5."
+    },
+    {
+      "id": "icse-9-math-q-tan-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of tan 45 degrees is:",
+      "options": [
+        "1",
+        "root2",
+        "0",
+        "root3"
+      ],
+      "correctIndex": 0,
+      "answer": "1, because the opposite and adjacent sides of an isosceles right triangle are equal",
+      "explanation": "In an isosceles right triangle the opposite and adjacent sides are equal, so the ratio is 1.",
+      "commonMistake": "Giving sin 45, which is 1/root2, instead of the tangent."
+    },
+    {
+      "id": "icse-9-math-q-tan-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If tan theta = 4/3, then sin theta is:",
+      "options": [
+        "4/5",
+        "3/5",
+        "4/7",
+        "3/4"
+      ],
+      "correctIndex": 0,
+      "answer": "4/5",
+      "explanation": "From tan theta = 4/3 the opposite and adjacent sides are in that ratio, so with a common factor k the opposite is 4k and the adjacent is 3k, giving a hypotenuse of 5k. Therefore sin theta = 4/5, using the 3-4-5 triple.",
+      "commonMistake": "Reporting 4/7, which comes from wrongly adding 4 and 3 as though they were the legs of the hypotenuse."
+    },
+    {
+      "id": "icse-9-math-q-tan-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of sin 30 degrees multiplied by cos 30 degrees is:",
+      "options": [
+        "root3/4",
+        "1/4",
+        "1/2",
+        "3/4"
+      ],
+      "correctIndex": 0,
+      "answer": "root3/4",
+      "explanation": "sin 30 = 1/2 and cos 30 = root3/2, so the product is (1/2)(root3/2) = root3/4.",
+      "commonMistake": "Adding the two values to get (1 + root3)/2 instead of multiplying them."
+    },
+    {
+      "id": "icse-9-math-q-tan-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If sin theta = 3/5, then cosec theta plus cot theta is:",
+      "options": [
+        "3",
+        "5/3",
+        "4/3",
+        "9/5"
+      ],
+      "correctIndex": 0,
+      "answer": "3, which is 5/3 + 4/3",
+      "explanation": "Cosec theta is the reciprocal of sine, so cosec theta = 1/(3/5) = 5/3. Since sin theta = 3/5 the triangle is the 3-4-5 one, so cos theta = 4/5 and cot theta = cos/sin = (4/5)/(3/5) = 4/3. The sum is 5/3 + 4/3 = 9/3 = 3.",
+      "commonMistake": "Adding 5/3 and 3/5 instead of 5/3 and 4/3, which confuses the reciprocal of sine with the reciprocal of the whole ratio set."
+    },
+    {
+      "id": "icse-9-math-q-tan-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: cosec theta is the reciprocal of ________.",
+      "answer": "sine, that is cosec theta = 1/sin theta",
+      "explanation": "Cosecant is defined as one divided by sine, just as secant is one divided by cosine.",
+      "commonMistake": "Answering cosine, which gives the secant rather than the cosecant."
+    },
+    {
+      "id": "icse-9-math-q-tan-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: the value of sin(90 - theta) is equal to ________.",
+      "answer": "cos theta, since theta and 90 minus theta are complementary angles",
+      "explanation": "For complementary angles the sine of one is the cosine of the other, which follows because the opposite and adjacent sides swap roles.",
+      "commonMistake": "Writing cot theta, which is the complementary relation for tangent rather than for sine."
+    },
+    {
+      "id": "icse-9-math-q-tan-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A right-angled triangle has sides 5 cm, 12 cm and 13 cm. Find the sine, cosine and tangent of the angle whose opposite side is 5 cm.",
+      "answer": "The hypotenuse is the longest side, 13 cm. The side opposite the angle is 5 cm and the adjacent side is 12 cm. So sin = 5/13, cos = 12/13 and tan = 5/12. As a check, sin/cos = (5/13)/(12/13) = 5/12, which is the tangent.",
+      "explanation": "Identify the hypotenuse first as the longest side, then label the other two relative to the chosen angle.",
+      "commonMistake": "Taking the 13 cm as the adjacent side, which would swap sine and cosine."
+    },
+    {
+      "id": "icse-9-math-q-tan-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate sin 45 degrees, cos 45 degrees and tan 45 degrees.",
+      "answer": "sin 45 = cos 45 = 1/root2, which is root2/2, and tan 45 = 1. These follow from an isosceles right triangle whose two legs are equal; if each leg is 1 the hypotenuse is root 2, giving both sine and cosine as 1/root2, and the ratio of the equal legs gives tangent as 1.",
+      "explanation": "The 45 degree values come directly from the isosceles right triangle, where the two non-hypotenuse sides are equal by definition.",
+      "commonMistake": "Writing 1/2 for both, which is the 30 degree value rather than the 45 degree value."
+    },
+    {
+      "id": "icse-9-math-q-tan-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A ladder 15 m long rests against a wall with its foot 9 m from the base of the wall. Find how high up the wall the ladder reaches.",
+      "answer": "The ladder is the hypotenuse of length 15 m and the 9 m is the distance along the ground, which is the adjacent side. By Pythagoras the height h satisfies h^2 + 9^2 = 15^2, so h^2 = 225 - 81 = 144 and h = 12 m. Using trigonometry instead, cos theta = 9/15 = 3/5, the standard value of cos 53 degrees approximately, so theta is about 53 degrees.",
+      "explanation": "Pythagoras gives the height exactly, and the trigonometric route confirms it since cos theta = 3/5 is the 3-4-5 ratio.",
+      "commonMistake": "Adding the two legs, giving 24 m, instead of applying Pythagoras."
+    },
+    {
+      "id": "icse-9-math-q-tan-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A tower casts a shadow 12 m long when the sun's rays make an angle of 60 degrees with the ground. Find the height of the tower.",
+      "answer": "Let the height be h. The shadow of 12 m is the adjacent side and h is the opposite side, so tan 60 = h/12. Since tan 60 = root3, h = 12 root3 m, approximately 20.78 m. Checking with Pythagoras is not direct here because no hypotenuse is given, so the exact form 12 root3 is the answer.",
+      "explanation": "When the question gives only the base and the angle, the ratio must be tangent, and the answer carries a root rather than being a whole number.",
+      "commonMistake": "Using sine or cosine, neither of which has both a known opposite or adjacent side and a known hypotenuse."
+    },
+    {
+      "id": "icse-9-math-q-tan-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Evaluate the expression (sin 30 degrees x cos 60 degrees) + (tan 45 degrees x cot 45 degrees).",
+      "answer": "sin 30 = 1/2 and cos 60 = 1/2, so the first product is (1/2)(1/2) = 1/4. tan 45 = 1 and cot 45 = 1/tan 45 = 1, so the second product is 1 x 1 = 1. The total is 1/4 + 1 = 5/4 = 1.25.",
+      "explanation": "Note that sin 30 and cos 60 are both 1/2 because the two angles are complementary and swap sine and cosine.",
+      "commonMistake": "Using cos 60 = root3/2, which is cos 30 rather than cos 60."
+    },
+    {
+      "id": "icse-9-math-q-tan-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If sec theta + tan theta = 7, find sec theta and tan theta.",
+      "answer": "The identity sec squared - tan squared = 1 gives (sec + tan)(sec - tan) = 1. Since sec + tan = 7, it follows that sec - tan = 1/7. Adding the two equations gives 2 sec = 7 + 1/7 = 50/7, so sec = 25/7. Subtracting them gives 2 tan = 7 - 1/7 = 48/7, so tan = 24/7. As a check, sec squared - tan squared = 625/49 - 576/49 = 49/49 = 1, as required.",
+      "explanation": "Multiplying the given sum by the difference of the same two terms collapses the pair to the identity sec squared minus tan squared equals 1, giving the difference immediately without squaring.",
+      "commonMistake": "Squaring the original equation, which introduces the 2 sec tan term and leaves an equation that still contains sec."
+    },
+    {
+      "id": "icse-9-math-q-tan-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that tan theta equals sine theta divided by cosine theta.",
+      "answer": "In a right-angled triangle with angle theta, let the opposite side be p, the adjacent side be a and the hypotenuse be h. By definition tan theta = p/a, sin theta = p/h and cos theta = a/h. Therefore sin theta / cos theta = (p/h) / (a/h) = (p/h) x (h/a) = p/a = tan theta. The hypotenuse cancels because it appears once in the numerator of sine and once in the denominator of cosine.",
+      "explanation": "The cancellation of the hypotenuse is the whole reason the relation holds, which is why it works in every right triangle.",
+      "commonMistake": "Multiplying instead of dividing, or cancelling the opposite and adjacent sides rather than the hypotenuse."
+    },
+    {
+      "id": "icse-9-math-q-tan-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that cosec squared minus cot squared equals 1.",
+      "answer": "Write cosec theta = 1/sin theta and cot theta = cos theta/sin theta. Then cosec squared minus cot squared = 1/sin squared - cos squared/sin squared = (1 - cos squared)/sin squared. But the identity sin squared + cos squared = 1 gives 1 - cos squared = sin squared. Substituting, the expression becomes sin squared/sin squared = 1. Hence cosec squared minus cot squared = 1.",
+      "explanation": "Clearing the denominators reduces the statement to the familiar sin squared plus cos squared equals 1, which is why the identity holds for every angle.",
+      "commonMistake": "Using cot = cos instead of cot = cos/sin, which leaves a different expression."
+    },
+    {
+      "id": "icse-9-math-q-tan-16",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that sin(90 - theta) equals cos theta.",
+      "answer": "In a right-angled triangle take the acute angle theta, so the acute angle at the other end is 90 - theta. Let the side opposite theta be p, the side opposite 90 - theta be a, and the hypotenuse be h. Then sin theta = p/h. Since the side opposite 90 - theta is a, sin(90 - theta) = a/h. But a is the side adjacent to theta, so a/h = cos theta. Therefore sin(90 - theta) = cos theta. The proof shows that the two acute angles simply exchange the roles of the opposite and adjacent sides.",
+      "explanation": "The complementary angle's opposite side is the original angle's adjacent side, which is why the two functions swap.",
+      "commonMistake": "Reasoning that the sum of sin and cos of complementary angles is 1, which confuses the function values with the angles."
+    },
+    {
+      "id": "icse-9-math-q-tan-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the values of sin 90 degrees, cos 90 degrees and tan 90 degrees, and explain the last one.",
+      "answer": "sin 90 = 1 and cos 90 = 0. Tangent is opposite over adjacent; in the limiting right triangle the opposite side becomes the whole hypotenuse and the adjacent side shrinks to zero, so tan 90 = 1/0, which is undefined. It is not infinity as a number but undefined, because there is no finite value that satisfies the ratio.",
+      "explanation": "Dividing by zero is undefined, which is different from being very large, so tan 90 has no value.",
+      "commonMistake": "Writing tan 90 as infinity or as 1, and giving it a finite value."
+    },
+    {
+      "id": "icse-9-math-q-tan-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If sin theta = cos theta, find the value of tan theta.",
+      "answer": "Since tan theta = sin theta / cos theta and the numerator equals the denominator, the ratio is 1, provided cos theta is not zero. Sin theta equals cos theta only when theta is 45 degrees in the range of acute angles, and tan 45 = 1 confirms this.",
+      "explanation": "Dividing a number by itself gives 1, and the only acute angle where sine and cosine agree is 45 degrees.",
+      "commonMistake": "Concluding sin theta equals cos theta means both are 1, forgetting that a ratio of 1 between them does not fix their individual size."
+    },
+    {
+      "id": "icse-9-math-q-tan-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A right-angled triangle has perpendicular sides 20 cm and 15 cm. Find all six trigonometric ratios for the angle opposite the 15 cm side.",
+      "answer": "The hypotenuse is root(400 + 225) = root 625 = 25 cm. For the angle opposite the 15 cm side, sin = 15/25 = 3/5, cos = 20/25 = 4/5 and tan = 15/20 = 3/4. The reciprocals follow: cot = 4/3, sec = 5/4 and cosec = 5/3. As checks, tan x cot = (3/4)(4/3) = 1, sec x cos = (5/4)(4/5) = 1 and cosec x sin = (5/3)(3/5) = 1.",
+      "explanation": "Once the three primary ratios are found the other three are simply reciprocals, and each pair must multiply to 1.",
+      "commonMistake": "Giving cot as 3/4, which is the tangent rather than its reciprocal."
+    },
+    {
+      "id": "icse-9-math-q-tan-20",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the value of (cosec 30 degrees) minus (cot 30 degrees).",
+      "answer": "Cosec 30 = 1/sin 30 = 1/(1/2) = 2. Cot 30 = cos 30/sin 30 = (root3/2)/(1/2) = root3, which is also 1/tan 30 since tan 30 = 1/root3. So the difference is 2 - root3, approximately 0.27.",
+      "explanation": "The 30 degree values come from the 1-2-root3 triangle, in which the opposite short leg is 1, the adjacent long leg is root3 and the hypotenuse is 2.",
+      "commonMistake": "Using cot 30 = 1/root3 instead of root3, which inverts the value."
+    },
+    {
+      "id": "icse-9-math-q-tan-21",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If cosec theta = 5/3, find the value of cot theta.",
+      "answer": "Cosec theta = 1/sin theta = 5/3, so sin theta = 3/5. Then cos theta = 4/5 from the 3-4-5 triple, and cot theta = cos/sin = (4/5)/(3/5) = 4/3. The identity cosec squared minus cot squared = 1 confirms it: (5/3)^2 - (4/3)^2 = 25/9 - 16/9 = 9/9 = 1.",
+      "explanation": "Inverting the cosecant recovers the sine, and the 3-4-5 triple then gives the cotangent directly.",
+      "commonMistake": "Taking cot theta as the reciprocal of cosec theta, which gives 3/5 instead of 4/3."
+    },
+    {
+      "id": "icse-9-math-q-tan-22",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A tree breaks in a storm and its top touches the ground making an angle of 30 degrees with the ground. If the point where the top touches the ground is 8 m from the foot of the tree, find the height of the tree before it broke.",
+      "answer": "The stump of height h, the ground distance of 8 m and the broken part form one right triangle. The stump is the opposite side and the 8 m is the adjacent side, so tan 30 = h/8. Since tan 30 = 1/root3, h = 8/root3 = 8 root3/3 m. The broken part is the hypotenuse of the same triangle, so its length is root(8^2 + (8 root3/3)^2) = root(64 + 64/3) = root(256/3) = 16/root3 = 16 root3/3 m. The height of the tree before it broke is the stump plus the broken part, which is 8 root3/3 + 16 root3/3 = 24 root3/3 = 8 root3 m, approximately 13.86 m.",
+      "explanation": "The stump and the fallen part are the two legs and the hypotenuse of a single right triangle. Solving the stump from the tangent, then Pythagoras for the fallen part, then adding gives the original height.",
+      "commonMistake": "Reporting only the stump height of 8 root3/3 m, which answers a different question from the height of the whole tree."
+    },
+    {
+      "id": "icse-9-math-q-tan-23",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the six trigonometric ratios in terms of the opposite side p, the adjacent side a and the hypotenuse h.",
+      "answer": "Sin theta = p/h, cos theta = a/h and tan theta = p/a. Their reciprocals are cosec theta = h/p, sec theta = h/a and cot theta = a/p. Each reciprocal is obtained by inverting its partner exactly.",
+      "explanation": "Writing the six in terms of the three sides makes it clear that the second three are the inverses of the first three.",
+      "commonMistake": "Writing cot as p/a, which repeats the tangent instead of inverting it."
+    },
+    {
+      "id": "icse-9-math-q-tan-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the value of tan theta plus cot theta is always at least 2 for any acute angle theta.",
+      "answer": "Since tan theta is positive for an acute angle, let t = tan theta so that t > 0, and cot theta = 1/t. Then tan theta + cot theta = t + 1/t. Multiplying by t, which is positive and so does not change the inequality, this is at least 2 exactly when t^2 + 1 is at least 2t, that is when t^2 - 2t + 1 is at least 0. But t^2 - 2t + 1 = (t - 1)^2, which is always at least 0 because a square is never negative. Equality holds only when t = 1, that is tan theta = 1, which is theta = 45 degrees. So the expression is at least 2, with the minimum value of 2 at 45 degrees.",
+      "explanation": "The whole result rests on a square being never negative, which is the standard algebraic form of the statement that the arithmetic mean of two numbers is at least their geometric mean.",
+      "commonMistake": "Claiming the sum equals 2, when it is only at least 2 and exceeds 2 for every angle other than 45 degrees."
+    },
+    {
+      "id": "icse-9-math-q-tan-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a right-angled triangle the tangent of an acute angle is 12/5. Find the sine of the complementary angle.",
+      "answer": "Since tan theta = 12/5, the opposite and adjacent sides are in the ratio 12 to 5, so the hypotenuse is in the ratio 13, giving sin theta = 12/13. The complementary angle is 90 - theta, and sin(90 - theta) = cos theta = 5/13. So the sine of the complementary angle is 5/13.",
+      "explanation": "The 5-12-13 triple gives the sine directly, and the complementary relation then swaps it for the cosine.",
+      "commonMistake": "Giving 12/13, which is the sine of the original angle rather than of its complement."
+    },
+    {
+      "id": "icse-9-math-q-tan-26",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A triangle has sides 7 cm, 24 cm and 25 cm. Find its area and the tangents of its two acute angles.",
+      "answer": "Since 7 x 7 + 24 x 24 = 49 + 576 = 625 = 25 x 25, the triangle is right-angled with hypotenuse 25 cm. Its area is (1/2) x 7 x 24 = 84 square cm. For the angle opposite the 7 cm side, tan = 7/24. For the angle opposite the 24 cm side, tan = 24/7. As a check, the product of the two tangents is (7/24)(24/7) = 1, which is correct because the two acute angles are complementary and their tangents are reciprocals.",
+      "explanation": "Checking the Pythagorean relation first identifies the right angle, and the product check confirms that the two tangents are reciprocals of one another.",
+      "commonMistake": "Taking 25 cm as one of the legs, which would break the right-angle structure entirely."
+    }
+  ]
+}

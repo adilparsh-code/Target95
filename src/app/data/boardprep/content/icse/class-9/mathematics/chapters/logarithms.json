@@ -1,0 +1,537 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-math-logarithms",
+  "title": "Logarithms",
+  "kind": "mathematics",
+  "tagline": "Writing a number as a power, and the three laws of logarithms",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep. Common logarithmic values used in this chapter are the standard four-figure table values, and every worked result was cross-checked by converting back to the original power."
+  },
+  "overview": {
+    "intro": "A logarithm undoes an index. If 2^3 = 8, then log 8 to base 2 is 3. That is the whole idea, but it becomes genuinely useful only when you can also combine logarithms, which is what the three laws allow. In an examination you will use log tables to handle large powers that cannot be written down, so the chapter is as much about table technique as about algebra.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Algebra"
+      },
+      {
+        "label": "Definition",
+        "value": "log_a b = c exactly when a^c = b"
+      },
+      {
+        "label": "Practical use",
+        "value": "Converting large powers into products, so that tables can be used"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "definition",
+      "title": "Definition and reading a logarithm",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "By definition, log_a b = c if and only if a^c = b, with a positive and a not equal to 1. The statement is symmetric: the base sits below, the number sits on top and the index is the logarithm, and any one of the three determines the other two."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "log_2 8 = 3 because 2^3 = 8.",
+            "log_3 81 = 4 because 3^4 = 81.",
+            "log_5 1 = 0 because every non-zero base to the power 0 is 1.",
+            "log_2 (1/8) = -3 because 2^-3 = 1/8.",
+            "log 100 = 2 in base 10."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Logs of numbers below 1 are negative, since any number between 0 and 1 is the base raised to a negative power. This is worth remembering because it is the quickest way to sanity-check a result."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Logarithm",
+              "meaning": "The index to which a base must be raised to give a given number."
+            },
+            {
+              "term": "Characteristic",
+              "meaning": "The integer part of a common logarithm, which fixes the position of the decimal point."
+            },
+            {
+              "term": "Mantissa",
+              "meaning": "The fractional part of a common logarithm, between 0 and 1, which the tables supply."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find log_7 343.",
+              "note": "7^3 = 343, so the answer is 3."
+            },
+            {
+              "text": "If log 2 = 0.3010, find log 8.",
+              "note": "log 8 = log 2^3 = 3 log 2 = 3 x 0.3010 = 0.9030."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laws",
+      "title": "The three laws of logarithms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Each law is simply the corresponding index rule written backwards. Because indices add when powers of the same base are multiplied, logarithms add when the numbers are multiplied. The laws are what make tables usable: they turn a hard power into a product of easy ones."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "log(m x n) = log m + log n",
+            "log(m / n) = log m - log n",
+            "log(m^n) = n log m",
+            "log 1 = 0 and log(1/m) = - log m"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In every problem, take logs only after the whole expression is written as a product or quotient of simple powers. Taking logs of a sum is meaningless, since log(m + n) is not log m + log n."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate log 2 + log 5.",
+              "note": "log 10 = 1, since 2 x 5 = 10."
+            },
+            {
+              "text": "Given log 2 = 0.3010 and log 3 = 0.4771, find log 12.",
+              "note": "log 12 = log(4 x 3) = 2 log 2 + log 3 = 0.6020 + 0.4771 = 1.0791."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-logarithm",
+      "title": "Characteristic and mantissa",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A common logarithm to base 10 always has the form integer part followed by a decimal part, and tables give only the decimal part. A number between 1 and 10 has a mantissa only, with characteristic zero. A number between 10 and 100 has characteristic 1, between 100 and 1000 characteristic 2, and so on, with the characteristic one less than the number of digits before the decimal point."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "log 2.5 has characteristic 0 and mantissa 0.3979.",
+            "log 250 has characteristic 2 and mantissa 0.3979, since 250 = 100 x 2.5.",
+            "log 0.025 = log 25 - 2 = 1.3979 - 2 = -0.6021, written with a negative characteristic."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The decimal point of the original number is recovered by placing it so that there are exactly characteristic + 1 digits to the left of the point. This is why characteristic and mantissa must be kept apart through every step of a calculation."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find log 0.00347.",
+              "note": "The number is between 0.001 and 0.01, so the characteristic is -3. From the tables the mantissa of 3.47 is 0.5403, giving -3 + 0.5403 = -2.4597."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "log-tables-technique",
+      "title": "Using log tables",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The standard technique for a large power is to express the number as a product of factors whose logs are tabulated, add the logarithms, and then read off the antilogarithm. A factor is usually split into a power of two or five times a number between 1 and 10, because those are exactly the entries the tables contain."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write n = 2^a x 5^b x m with m between 1 and 10.",
+            "log n = a log 2 + b log 5 + log m.",
+            "log 2 = 0.3010 and log 5 = 0.6990, and both are to be found in the same table row."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Because the base of common logarithms is 10, the fractional part alone determines the leading digits and the integer part alone determines the size. Keeping the two separate until the final step is what makes a table calculation reliable."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the fourth root of 24.",
+              "note": "log 24 = log(3 x 8) = log 3 + 3 log 2 = 0.4771 + 0.9030 = 1.3801. Dividing by 4 gives 0.3450. The antilogarithm of 0.3450 is 2.213, so the fourth root of 24 is about 2.213."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "log_a b = c if and only if a^c = b; the statement is symmetric.",
+    "log_a 1 = 0, and a^0 = 1.",
+    "log(m x n) = log m + log n, log(m/n) = log m - log n, log(m^n) = n log m.",
+    "Never take the log of a sum; there is no law for it.",
+    "The log of a number between 0 and 1 is negative.",
+    "A common logarithm is characteristic plus mantissa; the tables give only the mantissa.",
+    "The number of digits before the decimal point in the original number is the characteristic plus 1.",
+    "log 2 = 0.3010 and log 5 = 0.6990 are the two values to memorise."
+  ],
+  "examFocus": [
+    "Most marks come from evaluating logs of expressions built from given values such as log 2 and log 3.",
+    "A characteristic error changes the answer by a factor of a power of 10, so the position of the decimal point must be checked.",
+    "Questions asking for the number of digits of a large number are solved entirely from the characteristic of its logarithm.",
+    "Anti-logarithm questions must return the mantissa to a number between 1 and 10 before shifting the point."
+  ],
+  "vocabulary": [
+    {
+      "word": "Logarithm",
+      "meaning": "The index to which a base is raised to produce a given number."
+    },
+    {
+      "word": "Characteristic",
+      "meaning": "The integer part of a common logarithm."
+    },
+    {
+      "word": "Mantissa",
+      "meaning": "The fractional part of a common logarithm, which tables supply."
+    },
+    {
+      "word": "Antilogarithm",
+      "meaning": "The number whose logarithm is a given value."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-math-q-log-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "log_3 81 equals:",
+      "options": [
+        "3",
+        "4",
+        "9",
+        "27"
+      ],
+      "correctIndex": 1,
+      "answer": "4, since 3^4 = 81",
+      "explanation": "3^4 = 81, so by definition log_3 81 = 4.",
+      "commonMistake": "Choosing 3 or 9, which are factors of 81 rather than powers of 3."
+    },
+    {
+      "id": "icse-9-math-q-log-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "log 1 equals:",
+      "options": [
+        "1",
+        "0",
+        "-1",
+        "10"
+      ],
+      "correctIndex": 1,
+      "answer": "0, since 10^0 = 1",
+      "explanation": "Any non-zero base raised to the power 0 equals 1, so log 1 = 0 for every valid base.",
+      "commonMistake": "Assuming logarithms must be positive."
+    },
+    {
+      "id": "icse-9-math-q-log-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If log 2 = 0.3010, then log 32 equals:",
+      "options": [
+        "1.2040",
+        "1.5050",
+        "0.6020",
+        "5.0400"
+      ],
+      "correctIndex": 1,
+      "answer": "1.5050",
+      "explanation": "32 = 2^5, so log 32 = 5 log 2 = 5 x 0.3010 = 1.5050.",
+      "commonMistake": "Choosing 0.6020, which is 2 log 2, the log of 4."
+    },
+    {
+      "id": "icse-9-math-q-log-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "log 0.5 is:",
+      "options": [
+        "0.3010",
+        "-0.3010",
+        "0.6990",
+        "-0.6990"
+      ],
+      "correctIndex": 1,
+      "answer": "-0.3010",
+      "explanation": "0.5 = 1/2, so log 0.5 = log 1 - log 2 = 0 - 0.3010 = -0.3010. Any number between 0 and 1 has a negative logarithm.",
+      "commonMistake": "Choosing 0.3010, forgetting the reciprocal."
+    },
+    {
+      "id": "icse-9-math-q-log-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The characteristic of log 0.047 is:",
+      "options": [
+        "-1",
+        "-2",
+        "1",
+        "2"
+      ],
+      "correctIndex": 1,
+      "answer": "-2, since 0.047 lies between 0.01 and 0.1",
+      "explanation": "0.047 lies between 0.01 and 0.1. The first significant digit 4 is preceded by one power of 10, so the characteristic is -1 - 1 = -2. Equivalently 0.047 = 4.7/100, so log 0.047 = log 4.7 - 2 = 0.6721 - 2 = -1.3279, whose characteristic is indeed -2.",
+      "commonMistake": "Counting only the zeros after the decimal point and forgetting the leading zero."
+    },
+    {
+      "id": "icse-9-math-q-log-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: log(m x n) = ________",
+      "answer": "log m + log n",
+      "explanation": "The product law states that the log of a product is the sum of the logs."
+    },
+    {
+      "id": "icse-9-math-q-log-07",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: log_7 343 = ________",
+      "answer": "3, since 7^3 = 343",
+      "explanation": "The logarithm is the index, and 7 to the power 3 is 343."
+    },
+    {
+      "id": "icse-9-math-q-log-08",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: if log 2 = 0.3010, then log 8 = ________",
+      "answer": "0.9030",
+      "explanation": "8 = 2^3, so log 8 = 3 log 2 = 3 x 0.3010 = 0.9030."
+    },
+    {
+      "id": "icse-9-math-q-log-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate log 2 + log 5.",
+      "answer": "log 2 + log 5 = log 10 = 1.",
+      "explanation": "By the product law the sum is log(2 x 5) = log 10, and 10^1 = 10, so the value is 1.",
+      "commonMistake": "Adding the tabulated values 0.3010 and 0.6990 to get 1.0000 and treating that as a coincidence rather than the law in action."
+    },
+    {
+      "id": "icse-9-math-q-log-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Given log 2 = 0.3010 and log 3 = 0.4771, find log 12.",
+      "answer": "12 = 4 x 3, so log 12 = log 4 + log 3 = 2 log 2 + log 3 = 0.6020 + 0.4771 = 1.0791.",
+      "explanation": "Break 12 into factors whose logs are known. The characteristic is 1, which correctly places the decimal point in the original number.",
+      "commonMistake": "Writing 12 = 2 x 6 and then needing log 6, which is not given."
+    },
+    {
+      "id": "icse-9-math-q-log-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate log 125 given that log 5 = 0.6990.",
+      "answer": "125 = 5^3, so log 125 = 3 log 5 = 3 x 0.6990 = 2.0970.",
+      "explanation": "The power law converts a power into a multiplication of logs.",
+      "commonMistake": "Getting 2.0970 but forgetting that the characteristic 2 corresponds to a three-digit number."
+    },
+    {
+      "id": "icse-9-math-q-log-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the characteristic and mantissa of log 2500.",
+      "answer": "2500 has two digits before the decimal point counting from the first significant digit, so the characteristic is 2. Since 2500 = 1000 x 2.5, the mantissa is that of 2.5, which is 0.3979. Thus log 2500 = 2.3979.",
+      "explanation": "The characteristic is the number of digits before the decimal point, counted from the first significant digit, minus one.",
+      "commonMistake": "Using characteristic 3 because 2500 is written with four digits."
+    },
+    {
+      "id": "icse-9-math-q-log-13",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Using log 2 = 0.3010 and log 3 = 0.4771, show that log 18 = 1.2552.",
+      "answer": "18 = 9 x 2 = 3^2 x 2, so log 18 = 2 log 3 + log 2 = 2 x 0.4771 + 0.3010 = 0.9542 + 0.3010 = 1.2552. (The exact value is 1.25527..., so the table answer differs in the last place; this is normal when four-figure tables are used.)",
+      "explanation": "Factorise into pieces whose logs are known, then apply the power and product laws together.",
+      "commonMistake": "Writing 18 = 2 x 9 and treating 9 as a single known log instead of as 3^2."
+    },
+    {
+      "id": "icse-9-math-q-log-14",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Given log 2 = 0.3010 and log 5 = 0.6990, show that log_2 5 = log 5 / log 2.",
+      "answer": "By definition log_2 5 = x where 2^x = 5. Taking common logarithms of both sides gives x log 2 = log 5, so x = log 5 / log 2 = 0.6990 / 0.3010. Since the numerator is larger than the denominator the value is greater than 1, which is correct because 2^2 = 4 < 5 < 8 = 2^3, so log_2 5 lies between 2 and 3.",
+      "explanation": "Change of base: log_a b = log b / log a. The estimate that the answer exceeds 2 and is below 3 confirms it.",
+      "commonMistake": "Inverting the fraction, which would give log 2 / log 5, the logarithm of 2 to base 5 instead."
+    },
+    {
+      "id": "icse-9-math-q-log-15",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Using log 2 = 0.3010, find the number of digits in 2^40.",
+      "answer": "log 2^40 = 40 log 2 = 40 x 0.3010 = 12.0400. The characteristic is 12, so the number of digits is the characteristic plus one, that is 13.",
+      "explanation": "A number with n digits has a logarithm whose characteristic is n - 1, so the number of digits is read directly off the characteristic.",
+      "commonMistake": "Answering 12, the characteristic, instead of 13."
+    },
+    {
+      "id": "icse-9-math-q-log-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the fourth root of 24 using log tables, given log 2 = 0.3010 and log 3 = 0.4771.",
+      "answer": "log 24 = log(3 x 8) = log 3 + 3 log 2 = 0.4771 + 0.9030 = 1.3801. Divide by 4 to find the log of the fourth root: 1.3801 / 4 = 0.3450. The number with logarithm 0.3450 is 2.213, so the fourth root of 24 is approximately 2.213.",
+      "explanation": "The log of a root is the log of the number divided by the index; the mantissa 0.3450 is then looked up directly.",
+      "commonMistake": "Dividing the characteristic 1 by 4 and getting 0.25, forgetting that the division applies to the whole logarithm."
+    },
+    {
+      "id": "icse-9-math-q-log-17",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Evaluate log_5 125 x log_2 8.",
+      "answer": "log_5 125 = 3 because 5^3 = 125, and log_2 8 = 3 because 2^3 = 8. The product is 9.",
+      "explanation": "When the powers are small it is quicker to recognise the indices directly than to use the change-of-base formula.",
+      "commonMistake": "Converting both to common logarithms and making the arithmetic far more complicated than necessary."
+    },
+    {
+      "id": "icse-9-math-q-log-18",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If log 3 = 0.4771, determine which is larger: 2^100 or 3^60.",
+      "answer": "log 2^100 = 100 log 2 = 100 x 0.3010 = 30.10, while log 3^60 = 60 x 0.4771 = 28.626. Since 30.10 is the larger logarithm, 2^100 is the larger number. The comparison is exact and requires no evaluation of either power.",
+      "explanation": "Comparing logarithms is exactly equivalent to comparing the numbers, since the logarithm is an increasing function.",
+      "commonMistake": "Comparing the exponents 100 and 60 directly, which is meaningless because the bases differ."
+    },
+    {
+      "id": "icse-9-math-q-log-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Simplify log(m^3 x n^4) - log(m^2 x n), expressing the answer in terms of log m and log n.",
+      "answer": "log(m^3 x n^4) = 3 log m + 4 log n and log(m^2 x n) = 2 log m + log n. Subtracting gives (3 log m + 4 log n) - (2 log m + log n) = log m + 3 log n.",
+      "explanation": "Apply the product and power laws to each logarithm first; the quotient law then handles the subtraction.",
+      "commonMistake": "Subtracting the logs of the bases directly, forgetting to expand the powers."
+    },
+    {
+      "id": "icse-9-math-q-log-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that log(m + n) cannot be simplified using the laws of logarithms, and explain what would happen if you applied log(m x n) = log m + log n to a sum.",
+      "answer": "There is no law relating log(m + n) to log m and log n, because the laws arise from multiplying and dividing powers, and addition of numbers is not connected to addition of indices in any simple way. Applying the product law to a sum would give the false result log(m + n) = log m + log n; for m = 2 and n = 8 the left side is log 10 = 1 while the right side is 0.3010 + 0.9030 = 1.2040, which are different.",
+      "explanation": "A quick numerical counter-example is the most convincing way to show a law does not apply.",
+      "commonMistake": "Assuming a distributive law for logarithms over addition, which exists for some other functions but not for logs."
+    },
+    {
+      "id": "icse-9-math-q-log-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate log 0.5 + log 2.",
+      "answer": "log 0.5 = -log 2, so the sum is 0. Equivalently, log 0.5 + log 2 = log(0.5 x 2) = log 1 = 0.",
+      "explanation": "Two approaches give the same answer; the product route is shorter and generalises.",
+      "commonMistake": "Adding the tabulated values and getting 0, then doubting the answer because logarithms are usually positive."
+    },
+    {
+      "id": "icse-9-math-q-log-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Given log 2 = 0.3010, find the value of log 2 x log 4 x log 8.",
+      "answer": "log 4 = 2 log 2 = 0.6020 and log 8 = 3 log 2 = 0.9030. The product is 0.3010 x 0.6020 x 0.9030 = 0.1636.",
+      "explanation": "Each factor is reduced to a multiple of log 2 using the power law, then the products are multiplied.",
+      "commonMistake": "Adding the three logarithms instead of multiplying them, which would give the log of the product of 2, 4 and 8."
+    },
+    {
+      "id": "icse-9-math-q-log-23",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If x is a positive number with log x = 2.4771, find x without using the table, and state its characteristic.",
+      "answer": "The mantissa 0.4771 is that of 3, since log 3 = 0.4771, and the characteristic 2 places the decimal point after three digits. So x = 300.",
+      "explanation": "The mantissa fixes the leading digits and the characteristic fixes the position of the decimal point; the two play completely separate roles.",
+      "commonMistake": "Answering 3, which is the antilogarithm of the mantissa alone, with the characteristic ignored."
+    },
+    {
+      "id": "icse-9-math-q-log-24",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student writes log 2 + log 5 = log 7. Identify the error and give the correct value.",
+      "answer": "The student has applied the product law as though it were additive, converting a sum of logarithms into a logarithm of a sum. The correct law is log m + log n = log(m x n), so log 2 + log 5 = log 10 = 1. The claim log 7 would imply that 2 + 5 = 7, which is an accident of this example and not a property of logarithms: log 2 + log 3 = log 6, not log 5.",
+      "explanation": "The coincidence that 2 + 5 = 7 disguises the error; testing with different numbers exposes it immediately.",
+      "commonMistake": "Believing the student's rule because the one example they tried appears to confirm it."
+    },
+    {
+      "id": "icse-9-math-q-log-25",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Given log 2 = 0.3010, log 3 = 0.4771 and log 7 = 0.8451, show that log 105 = 2.0212.",
+      "answer": "105 = 3 x 5 x 7, and log 5 = 1 - log 2 = 0.6990. So log 105 = log 3 + log 5 + log 7 = 0.4771 + 0.6990 + 0.8451 = 2.0212.",
+      "explanation": "log 5 is recovered from log 2 because log 2 + log 5 = log 10 = 1, then all three given values combine by the product law.",
+      "commonMistake": "Forgetting to obtain log 5 first, and so being unable to complete the sum."
+    },
+    {
+      "id": "icse-9-math-q-log-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State, with a reason, why the logarithm of a number between 0 and 1 is negative.",
+      "answer": "Any number between 0 and 1 can be written as 1/n with n greater than 1, and n is greater than 1, so log n is positive; then log(1/n) = log 1 - log n = 0 - log n, which is negative.",
+      "explanation": "Equivalently, a base greater than 1 raised to a negative power gives a number below 1.",
+      "commonMistake": "Assuming all logarithms are positive because most tabulated values are."
+    }
+  ]
+}

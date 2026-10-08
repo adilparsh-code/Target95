@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-physics-current-electricity",
+  "title": "Current Electricity",
+  "kind": "physics",
+  "tagline": "Current, potential difference, Ohm's law, resistance, power and simple circuits",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class IX Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed by scripts/verify-math.mjs. No board-examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Electric current is the rate at which charge flows past a point, and potential difference is the energy given to each unit of charge as it moves between two points. Ohm's law links the two through the resistance of the conductor, and almost every numerical question in this chapter is a rearrangement of that one relation. The harder half of the chapter is about how resistances combine, in series and in parallel, and about power, which is the rate at which electrical energy is converted into heat.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Current Electricity"
+      },
+      {
+        "label": "Key formulas",
+        "value": "I = Q/t, V = IR, P = VI, and E = VIt"
+      },
+      {
+        "label": "Units",
+        "value": "Ampere, volt, ohm, coulomb and watt"
+      },
+      {
+        "label": "Ohm's law",
+        "value": "At constant temperature the current is directly proportional to the potential difference"
+      },
+      {
+        "label": "Series and parallel",
+        "value": "In series the resistances add; in parallel the reciprocals add"
+      }
+    ]
+  },
+  "learn": [
+    {
+      "id": "basic-quantities",
+      "title": "Charge, current and potential difference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electric current is the rate of flow of charge past a point in a conductor, so current equals charge divided by time. The current is the same throughout a single unbroken conductor, because charge cannot accumulate at an intermediate point in a steady state. Potential difference between two points is the work done in moving a unit charge from one point to the other, and is measured in volts."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Electric current",
+              "meaning": "The rate of flow of charge, I = Q/t, measured in amperes, where 1 ampere is 1 coulomb per second."
+            },
+            {
+              "term": "Potential difference",
+              "meaning": "The work done in moving one coulomb of charge between two points, measured in volts, where 1 volt is 1 joule per coulomb."
+            },
+            {
+              "term": "Electric charge",
+              "meaning": "Measured in coulombs. A current of one ampere flowing for one second transfers one coulomb of charge."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Conventional current is taken to flow from positive to negative in an external circuit, although the free electrons move from negative to positive.",
+            "1 A = 1 C per second and 1 V = 1 J per C, so 1 V = 1 J per A = 1 ohm.",
+            "Conventional current and electron flow have equal magnitudes but opposite directions, so they never add.",
+            "An ammeter is connected in series and has a very low resistance, while a voltmeter is connected in parallel and has a very high resistance.",
+            "Electrical energy is measured in joules, and the commercial unit is the kilowatt-hour, which is 1000 W x 3600 s = 3600000 J."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the current when a charge of 120 C flows through a conductor in 30 seconds.",
+              "note": "I = Q/t = 120/30 = 4 A."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "resistance-ohm",
+      "title": "Resistance and Ohm's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Resistance is the opposition offered by a conductor to the flow of current, and by Ohm's law for an ohmic conductor at constant temperature the current is directly proportional to the potential difference across it. Writing the proportionality constant as R gives V = IR, which is the form used in every calculation."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "V = IR, so R = V/I and I = V/R.",
+            "Resistance is measured in ohms, and 1 ohm is a potential difference of 1 volt for a current of 1 ampere.",
+            "Resistance depends on the length of the conductor, on its cross-sectional area and on the resistivity of the material, with R proportional to length and inversely proportional to area.",
+            "Resistance increases with temperature for a metal conductor, whose ions vibrate more and obstruct the electrons further as they are heated.",
+            "An ohmic conductor is one for which the current is directly proportional to the potential difference at constant temperature; the graph of V against I is a straight line through the origin."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A conductor carries a current of 3 A when a potential difference of 9 V is applied. Find its resistance.",
+              "note": "R = V/I = 9/3 = 3 ohms."
+            },
+            {
+              "text": "Find the potential difference across a 4 ohm resistor carrying a current of 5 A.",
+              "note": "V = IR = 5 x 4 = 20 V."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combinations",
+      "title": "Series and parallel combinations of resistance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Resistances can be joined end to end in series, or side by side in parallel. The rules for combining them are different, and using the wrong rule is the most common error in this topic. In series the same current flows through each, so the potential differences add. In parallel the same potential difference is across each, so the currents add."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Series: R = R1 + R2 + R3, and the combined resistance is always greater than the largest individual resistance.",
+            "Parallel: 1/R = 1/R1 + 1/R2 + 1/R3, so 1/R is the sum of the reciprocals.",
+            "For two resistors in parallel, R = (R1 x R2)/(R1 + R2), which is less than the smaller of the two.",
+            "Adding any extra resistance in series always increases the total resistance, while adding a branch in parallel always decreases it.",
+            "Household circuits are connected in parallel, so each appliance receives the full supply voltage and can be switched independently."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the combined resistance of 2 ohm and 3 ohm resistors connected in series.",
+              "note": "In series, R = 2 + 3 = 5 ohms."
+            },
+            {
+              "text": "Find the combined resistance of 2 ohm and 3 ohm resistors connected in parallel.",
+              "note": "In parallel, 1/R = 1/2 + 1/3 = (3 + 2)/6 = 5/6, so R = 6/5 = 1.2 ohms, which is less than the smaller resistor as expected."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power-energy",
+      "title": "Electrical power and energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electrical power is the rate at which electrical energy is consumed, and it equals the product of potential difference and current. The energy consumed in a given time is then the power multiplied by the time. Every watt of power that is consumed eventually appears almost entirely as heat, which is the basis of the heating effect of current used in appliances and fuses."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "P = VI, and by Ohm's law this is also P = I squared R and P = V squared over R.",
+            "P is measured in watts, and 1 watt is 1 joule per second.",
+            "Energy consumed, E = VIt, measured in joules; 1 kWh = 3.6 x 10 to the power 6 J.",
+            "The unit of resistance, the ohm, is derived from V divided by I, so 1 ohm is 1 volt per ampere.",
+            "A fuse wire of suitable rating protects a circuit by melting and breaking the circuit when the current is excessive."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the power consumed by a resistor of 6 ohm carrying a current of 2 A.",
+              "note": "P = I squared R = 2 x 2 x 6 = 24 W."
+            },
+            {
+              "text": "Find the energy consumed in 5 minutes by a 100 W lamp.",
+              "note": "Energy = power multiplied by time = 100 x (5 x 60) = 100 x 300 = 30000 J, that is 3 x 10 to the power 4 J."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Current I = Q/t, measured in amperes; 1 A = 1 coulomb per second.",
+    "Potential difference is measured in volts; 1 V = 1 joule per coulomb.",
+    "Conventional current flows from positive to negative externally; electrons flow the other way.",
+    "An ammeter is connected in series and a voltmeter in parallel.",
+    "Ohm's law: V = IR, and it holds for an ohmic conductor at constant temperature.",
+    "R = V/I, I = V/R and the unit of resistance is the ohm, equal to 1 V per A.",
+    "Resistance is proportional to length and inversely proportional to cross-sectional area.",
+    "Resistance of a metal increases with temperature.",
+    "In series, R = R1 + R2, greater than the largest individual resistance.",
+    "In parallel, 1/R is the sum of the reciprocals, giving a total less than the smallest resistance.",
+    "For two resistors in parallel, R = (R1 x R2)/(R1 + R2).",
+    "Household circuits are wired in parallel.",
+    "P = VI = I squared R = V squared over R, measured in watts.",
+    "Energy consumed E = VIt, and 1 kWh = 3.6 x 10 to the power 6 J.",
+    "Excessive current is interrupted by a fuse wire that melts."
+  ],
+  "examFocus": [
+    "Series and parallel rules must not be mixed up; a quick check is that a series total must exceed the largest resistor and a parallel total must be less than the smallest.",
+    "For two resistors in parallel, using R = R1 + R2 is the standard and most penalised error in this unit.",
+    "Power questions should state which form of the equation was used, and the forms P = I squared R and P = V squared over R save a step.",
+    "Energy questions must convert minutes to seconds before multiplying by power.",
+    "Ammeter in series and voltmeter in parallel is the standard circuit-drawing requirement.",
+    "An ohmic conductor gives a straight line through the origin on a graph of potential difference against current."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ampere",
+      "meaning": "The SI unit of electric current, equal to one coulomb per second."
+    },
+    {
+      "word": "Volt",
+      "meaning": "The SI unit of potential difference, equal to one joule per coulomb."
+    },
+    {
+      "word": "Ohm",
+      "meaning": "The SI unit of resistance, equal to one volt per ampere."
+    },
+    {
+      "word": "Watt",
+      "meaning": "The SI unit of power, equal to one joule per second."
+    },
+    {
+      "word": "Resistance",
+      "meaning": "The opposition of a conductor to the flow of current, measured in ohms."
+    },
+    {
+      "word": "Ohmic conductor",
+      "meaning": "A conductor for which the current is directly proportional to the potential difference at constant temperature."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-9-phy-q-ele-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of electric current is the:",
+      "options": ["ampere", "volt", "ohm", "coulomb"],
+      "correctIndex": 0,
+      "answer": "ampere",
+      "explanation": "Current is charge per unit time, so its unit is the coulomb per second, which is called the ampere. The volt measures potential difference and the ohm measures resistance.",
+      "commonMistake": "Choosing the coulomb, which is the unit of charge itself rather than of the rate of flow of charge."
+    },
+    {
+      "id": "icse-9-phy-q-ele-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of resistance, expressed in base units, is:",
+      "options": ["V/A", "A/V", "VA", "J/C"],
+      "correctIndex": 0,
+      "answer": "V/A",
+      "explanation": "Resistance is potential difference divided by current, so its unit is the volt per ampere. Since the volt is a joule per coulomb, this is also a kilogram metre squared per second cubed per coulomb squared.",
+      "commonMistake": "Choosing A/V, which is the reciprocal and would describe conductance rather than resistance."
+    },
+    {
+      "id": "icse-9-phy-q-ele-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Resistors of 6 ohm and 3 ohm are connected in parallel. Their combined resistance is:",
+      "options": ["2 ohm", "9 ohm", "4.5 ohm", "18 ohm"],
+      "correctIndex": 0,
+      "answer": "2 ohm",
+      "explanation": "Using R = (R1 x R2)/(R1 + R2) gives (6 x 3)/(6 + 3) = 18/9 = 2 ohm, which is less than the smaller resistor as a parallel combination always is.",
+      "commonMistake": "Adding the resistances to get 9 ohm, which is the series rule."
+    },
+    {
+      "id": "icse-9-phy-q-ele-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A potential difference of 12 V is applied across a 4 ohm resistor. The current is:",
+      "options": ["3 A", "48 A", "0.33 A", "8 A"],
+      "correctIndex": 0,
+      "answer": "3 A",
+      "explanation": "From Ohm's law, I = V/R = 12/4 = 3 A.",
+      "commonMistake": "Multiplying to get 48 A, which confuses Ohm's law with the power relation."
+    },
+    {
+      "id": "icse-9-phy-q-ele-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A wire is stretched so that its length is doubled and its cross-sectional area is halved. Its new resistance relative to the original is:",
+      "options": ["four times", "half", "twice", "unchanged"],
+      "correctIndex": 0,
+      "answer": "four times",
+      "explanation": "Resistance is proportional to length and inversely proportional to area, so the new resistance is (2 x L) divided by (A/2) = 4 x (L/A), that is four times the original resistance.",
+      "commonMistake": "Assuming that stretching conserves the resistance, forgetting that both the length and the area change."
+    },
+    {
+      "id": "icse-9-phy-q-ele-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: one ampere is a current of one coulomb of charge per ________.",
+      "answer": "second, since current is charge divided by time",
+      "explanation": "Current is the rate of flow of charge, so a rate of one coulomb each second is one ampere.",
+      "commonMistake": "Answering per minute, which would give a different and non-SI unit."
+    },
+    {
+      "id": "icse-9-phy-q-ele-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Fill in the blank: an instrument connected in series to measure current is called an ________.",
+      "answer": "ammeter, which is connected in series because the same current flows through it and the whole circuit",
+      "explanation": "The ammeter must carry the full current of the circuit, which is why it is placed in series, and it has a very low resistance so that it does not alter the current it measures.",
+      "commonMistake": "Saying a voltmeter, which is connected in parallel and measures potential difference instead."
+    },
+    {
+      "id": "icse-9-phy-q-ele-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the current flowing when a charge of 240 C passes through a conductor in 60 seconds.",
+      "answer": "I = Q/t = 240/60 = 4 A.",
+      "explanation": "Current is the charge flowing per unit time, so dividing the charge by the time gives the current.",
+      "commonMistake": "Multiplying the charge by the time, which would give a quantity with no physical meaning here."
+    },
+    {
+      "id": "icse-9-phy-q-ele-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the resistance of a conductor that carries a current of 4 A when a potential difference of 20 V is applied.",
+      "answer": "R = V/I = 20/4 = 5 ohms.",
+      "explanation": "Ohm's law is rearranged so that the resistance is the potential difference divided by the current.",
+      "commonMistake": "Dividing the current by the potential difference, which would give 0.2 and is the reciprocal."
+    },
+    {
+      "id": "icse-9-phy-q-ele-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two resistors of 4 ohm and 12 ohm are connected first in series and then in parallel. Find the combined resistance in each case and state which arrangement has the larger total resistance.",
+      "answer": "In series, R = 4 + 12 = 16 ohms. In parallel, R = (4 x 12)/(4 + 12) = 48/16 = 3 ohms. The series arrangement has the larger total resistance, since 16 ohms is greater than the largest individual resistor of 12 ohms, whereas the parallel total of 3 ohms is smaller than the smallest individual resistor.",
+      "explanation": "Adding resistances in series must exceed the largest one, while a parallel combination must be less than the smallest, which gives a quick check on both answers.",
+      "commonMistake": "Applying the series formula to the parallel case, which would give 16 ohms instead of 3 ohms."
+    },
+    {
+      "id": "icse-9-phy-q-ele-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A 6 ohm and a 3 ohm resistor are connected in parallel across a potential difference of 12 V. Find the current in each resistor and the total current.",
+      "answer": "Since the resistors are in parallel, each has the full 12 V across it. The current in the 6 ohm resistor is 12/6 = 2 A and in the 3 ohm resistor is 12/3 = 4 A. The total current is the sum, 2 + 4 = 6 A. As a check, the combined resistance of the parallel pair is (6 x 3)/(6 + 3) = 18/9 = 2 ohms, and the total current is then 12/2 = 6 A, which agrees.",
+      "explanation": "In parallel the potential difference is the same across each branch while the currents add, so the total current can be checked against the combined resistance.",
+      "commonMistake": "Dividing the potential difference between the two resistors, which is what happens in series and not in parallel."
+    },
+    {
+      "id": "icse-9-phy-q-ele-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the power consumed by a 20 ohm resistor carrying a current of 5 A, and find the energy it consumes in 2 minutes.",
+      "answer": "Power is P = I squared R = 5 x 5 x 20 = 500 W. The energy is power multiplied by time, and 2 minutes is 120 seconds, so E = 500 x 120 = 60000 J, that is 6 x 10 to the power 4 J. As a check, the potential difference across the resistor is V = IR = 5 x 20 = 100 V, so P = VI = 100 x 5 = 500 W, which confirms the power.",
+      "explanation": "Using P = I squared R avoids finding the voltage first, and the check through P = VI confirms the working.",
+      "commonMistake": "Using 2 as the time in seconds rather than 120, which understates the energy by a factor of 60."
+    },
+    {
+      "id": "icse-9-phy-q-ele-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 60 W and a 100 W lamp are connected in parallel across a 220 V supply. Find the current in each lamp and the total current drawn.",
+      "answer": "For each lamp, P = VI gives I = P/V. For the 60 W lamp, I = 60/220 = 0.273 A. For the 100 W lamp, I = 100/220 = 0.455 A. Since the lamps are in parallel, the total current is the sum, 0.273 + 0.455 = 0.727 A. Each lamp receives the full 220 V because parallel connection gives every branch the supply voltage, which is why each can be rated independently.",
+      "explanation": "Power is voltage times current, so the current follows from the rated power and the supply voltage for each branch independently.",
+      "commonMistake": "Splitting the supply voltage between the two lamps, which would only be valid if they were in series."
+    },
+    {
+      "id": "icse-9-phy-q-ele-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why an ammeter is connected in series and a voltmeter in parallel in a circuit.",
+      "answer": "An ammeter must measure the current flowing through that part of the circuit, so it must be placed in the path of the current. Since the current is the same everywhere in a single series loop, putting the ammeter in series ensures it carries the full current of interest. The ammeter is given a very low resistance so that it does not reduce the current it is measuring. A voltmeter must measure the potential difference between two points, so its terminals must be connected one at each of those points, which is a parallel connection. The voltmeter has a very high resistance so that very little current flows through it and the circuit is not disturbed.",
+      "explanation": "The connection follows from what each instrument must do: current flows through the ammeter and the voltage appears across the voltmeter.",
+      "commonMistake": "Swapping them, which would put the voltmeter in the main current path and risk short-circuiting the supply."
+    },
+    {
+      "id": "icse-9-phy-q-ele-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how a fuse wire protects an electrical installation, and what would happen if no fuse were fitted.",
+      "answer": "A fuse is a short piece of wire of a metal and gauge chosen so that it carries the normal current safely but melts when a current larger than the rated value passes. The heat produced in it is the product of the square of the current, the resistance of the wire and the time, so doubling the current produces four times the heat. When the current rises because of an overload or a short circuit, the fuse wire heats up, melts, and breaks the circuit, so no further current flows and the wiring and the appliance are protected from damage or fire. Without a fuse, the excessive current continues to flow, the wiring overheats, the insulation melts and a fire can result, and the appliance itself may be permanently damaged.",
+      "explanation": "The fuse works because the heating effect grows as the square of the current, so a modest increase produces a large temperature rise.",
+      "commonMistake": "Saying the fuse blocks the current by being a poor conductor, when it works by melting when it becomes too hot."
+    },
+    {
+      "id": "icse-9-phy-q-ele-16",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Ohm's law and name the conditions under which it holds.",
+      "answer": "Ohm's law states that at constant temperature and for an ohmic conductor, the current flowing through a conductor is directly proportional to the potential difference across its ends, so V is proportional to I and V = IR. It holds when the temperature is constant, since the resistance of a metal rises with temperature and would otherwise change as the current changes. It also holds only for ohmic conductors, those whose resistance is constant at that temperature.",
+      "explanation": "The temperature condition is essential because resistance is itself a function of temperature for most conductors.",
+      "commonMistake": "Claiming Ohm's law holds for all conductors at all temperatures, ignoring that non-ohmic conductors such as diodes break it."
+    },
+    {
+      "id": "icse-9-phy-q-ele-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why household appliances are connected in parallel rather than in series.",
+      "answer": "In a parallel connection each appliance receives the full supply potential difference, so each can be designed for and rated at the household voltage, and each can be switched on and off independently through its own switch. In a series connection the supply voltage would be shared among the appliances in proportion to their resistances, so the voltage across each would vary as other appliances were switched on or off, and an appliance would receive the wrong voltage whenever any other appliance was not in use. In series the current would also be the same everywhere, and a failure of one appliance would stop them all.",
+      "explanation": "Parallel connection gives each branch the full voltage and independent control, which is what domestic use requires.",
+      "commonMistake": "Arguing that series is preferable because the same current flows, which is irrelevant to the voltage each appliance needs."
+    },
+    {
+      "id": "icse-9-phy-q-ele-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the resistance of a metal wire increase when it is heated?",
+      "answer": "Heating increases the amplitude of vibration of the positive ions fixed in the metal lattice. These vibrating ions obstruct the passage of the free electrons more frequently and more strongly, so the electrons lose more energy in passing through the metal and the resistance rises. Because the heating effect of the current depends on the square of the current, a filament lamp heats rapidly when switched on, becomes hot and so its resistance is much higher when switched on than when cold.",
+      "explanation": "It is the increased vibration of the lattice ions that impedes the electrons, so resistance rises with temperature.",
+      "commonMistake": "Saying the electrons move faster and collide more, when it is the ion lattice vibration that increases the resistance."
+    },
+    {
+      "id": "icse-9-phy-q-ele-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the cost of running a 100 W lamp for 5 hours at 6 rupees per kilowatt-hour.",
+      "answer": "Power in kilowatts is 100 W = 0.1 kW. Energy consumed is 0.1 x 5 = 0.5 kWh. The cost is 0.5 x 6 = 3 rupees.",
+      "explanation": "The watt must be converted to kilowatts before using the kilowatt-hour, since the tariff is charged in kilowatt-hours.",
+      "commonMistake": "Using 100 as though it were kilowatts, which would give a cost 1000 times too large."
+    },
+    {
+      "id": "icse-9-phy-q-ele-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain what is meant by the conventional direction of current and how it differs from the actual motion of the electrons.",
+      "answer": "Conventional current is defined as flowing from the positive terminal to the negative terminal of the battery through the external circuit. The free electrons in the metal, however, are negatively charged and are repelled by the negative terminal and attracted towards the positive terminal, so they actually move from the negative terminal to the positive terminal. Since the two flows are in opposite directions but their magnitudes are exactly equal, no current is gained or lost by the difference; it is simply a choice of which direction to call positive, made before the nature of the electron was known. All the laws and equations of the subject are written in terms of the conventional direction.",
+      "explanation": "The two directions differ but are equal in magnitude, so the choice of convention has no effect on any measurable result.",
+      "commonMistake": "Saying the two currents add because they are both electric currents, when they are in fact opposite and cancel if compared."
+    },
+    {
+      "id": "icse-9-phy-q-ele-21",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define one watt and express one kilowatt-hour in joules.",
+      "answer": "One watt is one joule per second, so a 1 W appliance transfers 1 J of energy each second. One kilowatt is 1000 watts, so a 1 kW appliance running for 1 hour transfers 1000 J per second for 3600 seconds, which is 1000 x 3600 = 3600000 J, that is 3.6 x 10 to the power 6 J.",
+      "explanation": "The watt is a rate of energy transfer and the kilowatt-hour combines that rate with a time to give an amount of energy.",
+      "commonMistake": "Equating the kilowatt-hour to 1000 J, forgetting that the hour must also be converted into seconds."
+    },
+    {
+      "id": "icse-9-phy-q-ele-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the potential difference across a resistor when the current is 2 A and the resistance is 15 ohm, and state the energy dissipated in 1 minute.",
+      "answer": "By Ohm's law, V = IR = 2 x 15 = 30 V. The power is P = VI = 30 x 2 = 60 W. In 1 minute, that is 60 seconds, so the energy is E = 60 x 60 = 3600 J.",
+      "explanation": "The voltage follows directly from Ohm's law, and the energy needs the power, which needs the voltage, before multiplying by the time.",
+      "commonMistake": "Dividing the current by the resistance to get the voltage instead of multiplying."
+    },
+    {
+      "id": "icse-9-phy-q-ele-23",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Three resistors of 3 ohm each are connected in parallel. Find the combined resistance, and then find the resistance of the same three resistors in series.",
+      "answer": "In parallel, 1/R = 1/3 + 1/3 + 1/3 = 3/3 = 1, so R = 1 ohm, which is one third of a single resistor as expected for three equal resistors in parallel. In series, R = 3 + 3 + 3 = 9 ohm, which is three times a single resistor. The two arrangements therefore give values differing by a factor of nine.",
+      "explanation": "For equal resistors, the parallel total is the single value divided by the number of resistors and the series total is the single value multiplied by it.",
+      "commonMistake": "Using the series sum for the parallel case, which would give 9 ohm instead of 1 ohm."
+    },
+    {
+      "id": "icse-9-phy-q-ele-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A resistor of resistance R is connected across a battery. Show that the heat produced per second is proportional to the square of the current and to the resistance, and explain what happens when the potential difference is kept constant instead.",
+      "answer": "The electrical power is P = VI, and by Ohm's law V = IR, so P = (IR) x I = I squared R. Since power is the energy converted per second, I squared R is proportional to the heat produced per second. If the potential difference is held constant instead, the resistance is fixed, so I = V/R and the power becomes P = V squared over R, which is independent of R for a given voltage. In that case adding resistance in series would reduce the current and hence reduce the power, whereas at constant current the power increases with R.",
+      "explanation": "The two forms P = I squared R and P = V squared over R are the same relation expressed for constant current and for constant voltage respectively.",
+      "commonMistake": "Using P = I squared R while assuming the voltage is constant, which mixes the two regimes and gives the wrong dependence on resistance."
+    },
+    {
+      "id": "icse-9-phy-q-ele-25",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "How many coulombs of charge pass through a resistor in 5 minutes when a current of 2 A flows?",
+      "answer": "Since I = Q/t, the charge is Q = I x t = 2 x (5 x 60) = 2 x 300 = 600 C.",
+      "explanation": "The current multiplied by the time gives the total charge that has passed the point.",
+      "commonMistake": "Using 5 as though it were already the time in seconds, which would give 10 C instead of 600 C."
+    },
+    {
+      "id": "icse-9-phy-q-ele-26",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A resistor of 8 ohm and a resistor of 2 ohm are connected in parallel across a potential difference of 12 V. Find the total current drawn from the supply.",
+      "answer": "The current in the 8 ohm resistor is 12/8 = 1.5 A and in the 2 ohm resistor is 12/2 = 6 A. Since they are in parallel, the total current is 1.5 + 6 = 7.5 A. As a check, the combined resistance is (8 x 2)/(8 + 2) = 16/10 = 1.6 ohms, and the total current is 12/1.6 = 7.5 A, which agrees.",
+      "explanation": "Finding the branch currents and adding them is equivalent to finding the combined resistance and dividing once, and the two routes should agree.",
+      "commonMistake": "Using the series total of 10 ohms to compute the current, which would wrongly give 1.2 A."
+    }
+  ]
+}

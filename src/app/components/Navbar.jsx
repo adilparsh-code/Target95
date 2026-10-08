@@ -27,6 +27,7 @@ const primaryLinks = [
     label: "Learn",
     dropdown: [
       { href: "/study", label: "Subjects" },
+      { href: "/learn", label: "Board Curriculum" },
       { href: "/office", label: "Microsoft Office" },
       { href: "/Java", label: "Chapters" },
       { href: "/isc", label: "ICSE & ISC" },
@@ -69,6 +70,7 @@ const mobileLinks = [
   { href: "/", label: "Home", description: "Overview", icon: "🏠" },
   { href: "/dashboard", label: "Dashboard", description: "Progress", icon: "📊" },
   { href: "/study", label: "Study", description: "Chapters", icon: "📖" },
+  { href: "/learn", label: "Board Curriculum", description: "Boards & subjects", icon: "📚" },
   { href: "/isc", label: "ICSE & ISC", description: "Class IX-XII", icon: "🎓" },
   { href: "/cbse", label: "CBSE", description: "Class IX-XII", icon: "💻" },
   { href: "/question-bank", label: "Practice", description: "Questions", icon: "📘" },

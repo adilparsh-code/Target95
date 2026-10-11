@@ -99,6 +99,29 @@ export default function StitchHomeHub() {
             </Link>)}</div>
           </section>
 
+          <section className="mt-7 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="office-learning-title">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="stitch-eyebrow">Practical digital skills</p>
+                <h2 id="office-learning-title" className="stitch-heading mt-1 text-2xl">Build confidence with Microsoft Office</h2>
+                <p className="stitch-body mt-2 max-w-2xl text-sm leading-6">Supplement your board learning with guided Word, Excel and PowerPoint lessons, practical checklists and knowledge checks.</p>
+              </div>
+              <Link href="/office" className="stitch-btn stitch-btn-primary shrink-0">Explore Office lessons <span aria-hidden="true">→</span></Link>
+            </div>
+            <div className="mt-5 grid gap-3 md:grid-cols-3">
+              {[
+                ["Word", "Create, format and refine professional documents.", "/office/word", "W", "bg-blue-50 text-blue-700"],
+                ["Excel", "Work confidently with data, formulas, tables and charts.", "/office/excel", "X", "bg-emerald-50 text-emerald-700"],
+                ["PowerPoint", "Design clear presentations with purposeful visuals.", "/office/powerpoint", "P", "bg-orange-50 text-orange-700"],
+              ].map(([title, description, href, icon, color]) => <Link key={title} href={href} className="stitch-card stitch-card-hover group p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">
+                <span aria-hidden="true" className={`grid h-10 w-10 place-items-center rounded-xl text-sm font-black ${color}`}>{icon}</span>
+                <h3 className="stitch-heading mt-3 text-base">{title}</h3>
+                <p className="stitch-body mt-1.5 text-xs leading-5">{description}</p>
+                <span className="mt-3 block text-[11px] font-semibold text-blue-700">View {title} lessons <span aria-hidden="true">→</span></span>
+              </Link>)}
+            </div>
+          </section>
+
           <section className="mt-0 bg-slate-100/80 px-0 py-8">
             <p className="stitch-eyebrow">Exam Essentials</p><h2 className="stitch-heading mt-1 text-2xl">Core Practice & Mastery Tools</h2>
             <div className="mt-4 grid gap-3 md:grid-cols-3">

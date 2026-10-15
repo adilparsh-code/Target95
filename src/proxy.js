@@ -18,6 +18,12 @@ const protectedPrefixes = [
 ];
 
 const authPages = new Set(["/login", "/register", "/forgot-password"]);
+const canonicalOrigin = "https://target95.web.app";
+
+function noindex(response) {
+  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return response;
+}
 
 export function proxy(request) {
   const { pathname } = request.nextUrl;
@@ -29,17 +35,24 @@ export function proxy(request) {
   if (isProtected && !session) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(loginUrl);
+    return noindex(NextResponse.redirect(loginUrl));
   }
 
   // A valid session cookie is not treated as proof of a role here. Role
   // authorization remains enforced by Firebase/ProtectedRoute until the
   // server-side role-claims migration is completed.
   if (authPages.has(pathname) && session) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+    return noindex(NextResponse.redirect(new URL("/dashboard", request.url)));
   }
 
-  return NextResponse.next();
+  const response = NextResponse.next();
+  if (isProtected || authPages.has(pathname)) return noindex(response);
+
+  // Public pages receive a query-free HTTP canonical. The lowercase Java
+  // aliases redirect before this can be indexed, while their /Java targets
+  // retain their explicit route metadata.
+  response.headers.set("Link", `<${canonicalOrigin}${pathname}>; rel=\"canonical\"`);
+  return response;
 }
 
 export const config = {

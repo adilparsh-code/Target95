@@ -165,7 +165,7 @@ export async function listPublishedArticlesByCategory(category, limit = 30) {
 }
 
 // Mirrors metadataBase in src/app/layout.js and siteUrl in src/app/sitemap.js.
-export const BLOG_SITE_URL = "https://target95.vercel.app";
+export const BLOG_SITE_URL = "https://target95.web.app";
 
 export function articlePath(article) {
   return `/blog/${article.category}/${article.slug}`;

@@ -105,7 +105,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
 # Application URL
-NEXT_PUBLIC_APP_URL=https://target95.vercel.app
+NEXT_PUBLIC_APP_URL=https://target95.web.app
 ```
 
 4. **Run development server**
@@ -342,7 +342,7 @@ This project is proprietary software. All rights reserved.
 
 ## 📞 Support
 
-- **Website**: [https://target95.vercel.app](https://target95.vercel.app)
+- **Website**: [https://target95.web.app](https://target95.web.app)
 - **Email**: support@target95.vercel.app
 - **Issues**: [GitHub Issues](https://github.com/adilparsh-code/Target95/issues)
 

@@ -58,14 +58,16 @@ export default async function sitemap() {
       priority: 0.7,
     },
     // Only categories that have articles, so empty pages are not advertised.
-    ...BLOG_CATEGORIES.map((category) => ({ category, inCategory: articles.filter((item) => item.category === category) }))
-      .filter(({ inCategory }) => inCategory.length > 0)
-      .map(({ category, inCategory }) => ({
+    ...BLOG_CATEGORIES.map((category) => {
+      const inCategory = articles.filter((item) => item.category === category);
+      if (!inCategory.length) return null;
+      return {
         url: `${siteUrl}/blog/${category}`,
         lastModified: newestDate(inCategory) || lastModified,
         changeFrequency: "weekly",
         priority: 0.5,
-      })),
+      };
+    }).filter(Boolean),
     ...articles.map((article) => ({
       url: `${siteUrl}${articlePath(article)}`,
       lastModified: toIsoDate(article.updatedAt || article.publishedAt) || lastModified,

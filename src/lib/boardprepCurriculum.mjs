@@ -16,7 +16,6 @@ function location(...parts) {
 export function getBoards() {
   return dirs(root).filter((board) => fs.existsSync(path.join(root, board, 'board.json'))).map((board) => read(path.join(root, board, 'board.json')));
 }
-
 export function getBoard(board) { return getBoards().find((item) => item.slug === board) || null; }
 export function getClass(board, classSlug) {
   const file = location(board, classSlug, 'class.json');
@@ -30,15 +29,33 @@ export function getSubject(board, classSlug, subjectSlug) {
   const file = location(board, classSlug, subjectSlug, 'subject.json');
   return fs.existsSync(file) ? read(file) : null;
 }
+
 export function getPublishedChapters(board, classSlug, subjectSlug) {
   const subject = getSubject(board, classSlug, subjectSlug);
   return (subject?.sections || []).flatMap((section) => section.groups || []).flatMap((group) => group.chapters || []).filter((chapter) => chapter.status === 'published');
 }
+
 export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
   const metadata = getPublishedChapters(board, classSlug, subjectSlug).find((chapter) => chapter.slug === chapterSlug);
   if (!metadata?.file) return null;
-  const file = location(board, classSlug, subjectSlug, ...metadata.file.split('/'));
-  return fs.existsSync(file) ? { ...metadata, ...read(file) } : null;
+
+  // The chapter 'file' field in the BoardPrep subject metadata is relative to the
+  // subject directory (e.g. "chapters/genetics.json" or "language/grammar/tenses.json").
+  // A subset of chapters migrated earlier were stored nested under subject sub-directories
+  // (language/grammar/..., literature/poetry/..., etc.). The metadata file field already
+  // carries that relative path, so resolve it directly relative to the subject folder.
+  const subjectDir = location(board, classSlug, subjectSlug);
+  const file = path.join(subjectDir, ...metadata.file.split('/'));
+
+  if (!fs.existsSync(file)) {
+    // Defensive fallback for the flat-layout migration case where chapter files sit
+    // directly under a "chapters/" folder alongside the subject directory: try the
+    // sibling chapters/ folder only when the primary relative-path resolution misses.
+    const sibling = path.join(subjectDir, '..', 'chapters', path.basename(metadata.file));
+    if (fs.existsSync(sibling)) return { ...metadata, ...read(sibling) };
+    return null;
+  }
+  return { ...metadata, ...read(file) };
 }
 
 export function getBoardPrepCounts() {

@@ -29,12 +29,12 @@ export const metadata = {
   authors: [{ name: "Target95+" }],
   creator: "Target95+",
   publisher: "Target95+",
-  metadataBase: new URL("https://target95.vercel.app"),
+  metadataBase: new URL("https://target95.web.app"),
   openGraph: {
     title: "Target95+ | ICSE, ISC & CBSE Computer Learning",
     description:
       "Master ICSE, ISC & CBSE with AI-powered practice, mock tests, and progress tracking.",
-    url: "https://target95.vercel.app",
+    url: "https://target95.web.app",
     siteName: "Target95+",
     locale: "en_US",
     type: "website",

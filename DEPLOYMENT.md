@@ -187,7 +187,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-ABC123XYZ
 
 # Application
-NEXT_PUBLIC_APP_URL=https://target95.vercel.app
+NEXT_PUBLIC_APP_URL=https://target95.web.app
 ```
 
 ### How to Get Firebase Credentials
@@ -231,7 +231,7 @@ NEXT_PUBLIC_APP_URL=https://target95.vercel.app
    - Enable "Google" provider
    - Configure authorized domains:
      - `localhost:3000` (development)
-     - `target95.vercel.app` (production)
+     - `target95.web.app` (production)
      - Your custom domain
 
 2. **Firestore Database**
@@ -333,7 +333,7 @@ seedData();
 ### Immediate Checks (First 5 Minutes)
 
 - [ ] **Homepage loads**
-  - Visit https://target95.vercel.app
+  - Visit https://target95.web.app
   - Page loads without errors
   - All assets load (images, fonts)
 

@@ -22,6 +22,7 @@ import {
   countQuestions,
   countQuestionsByType,
   isPlaceholderText,
+  validateBlock,
   validateChapterRecord,
 } from '../src/lib/boardprepContentSchema.mjs';
 import {
@@ -68,8 +69,70 @@ const EXPECTED_TYPE_TOTALS = {
 const EXPECTED_TOTAL_QUESTIONS = 131;
 const MAP_WORK_SLUG = 'map-reading';
 
+// A chapter must carry real teaching material, not a stub. The floors below are
+// set well under the measured depth of every chapter, so that a chapter which
+// loses its lessons, its tables or its prose is caught without the check
+// becoming a trap for a future rewrite.
+const MIN_LESSON_SECTIONS = 4;
+const MIN_BLOCKS_PER_LESSON = 2;
+const MIN_PARAGRAPH_WORDS = 40;
+const MIN_BULLET_ITEMS = 3;
+const MIN_TERM_ITEMS = 3;
+const MIN_EXAMPLE_ITEMS = 2;
+const MIN_TABLES_PER_CHAPTER = 1;
+const MIN_FIGURES = 2;
+const MIN_KEY_POINTS = 8;
+const MIN_VOCABULARY = 6;
+const MIN_LEARNING_OUTCOMES = 4;
+const MIN_TEACHING_WORDS = 800;
+
 const errors = [];
 let assertions = 0;
+
+const wordCount = (value) =>
+  String(value ?? '')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+// The teaching words of a chapter: its prose, its lists, its tables and its
+// revision material, but not the practice questions.
+function teachingWords(chapter) {
+  let total = 0;
+  const add = (value) => {
+    total += wordCount(value);
+  };
+  add(chapter.tagline);
+  add(chapter.overview?.intro);
+  for (const fact of chapter.overview?.facts || []) {
+    add(fact?.label);
+    add(fact?.value);
+  }
+  for (const outcome of chapter.learningOutcomes || []) add(outcome);
+  for (const lesson of chapter.learn || []) {
+    for (const block of lesson.blocks || []) {
+      add(block.text);
+      for (const item of block.items || []) {
+        add(item?.text);
+        add(item?.note);
+        add(item?.term);
+        add(item?.meaning);
+      }
+      for (const row of block.rows || []) for (const cell of row) add(cell);
+    }
+  }
+  for (const point of chapter.keyPoints || []) add(point);
+  for (const point of chapter.examFocus || []) add(point);
+  for (const item of chapter.vocabulary || []) {
+    add(item?.word);
+    add(item?.meaning);
+  }
+  for (const figure of chapter.figures || []) {
+    add(figure?.caption);
+    add(figure?.description);
+  }
+  return total;
+}
 
 function check(condition, message) {
   assertions += 1;
@@ -157,6 +220,10 @@ if (fs.existsSync(chapterFolder)) {
 // ---------------------------------------------------------------------------
 
 const questionIds = new Set();
+// A prompt or an answer repeated in another chapter is a copy-and-paste
+// defect, so both sets span the whole subject rather than one chapter.
+const subjectPrompts = new Map();
+const subjectAnswers = new Map();
 const typeTotals = {};
 let totalQuestions = 0;
 
@@ -187,8 +254,8 @@ for (const meta of published) {
 
   // Learning outcomes are required for this subject.
   check(
-    Array.isArray(chapter.learningOutcomes) && chapter.learningOutcomes.length >= 3,
-    `Chapter "${meta.slug}" does not carry at least three learning outcomes.`,
+    Array.isArray(chapter.learningOutcomes) && chapter.learningOutcomes.length >= MIN_LEARNING_OUTCOMES,
+    `Chapter "${meta.slug}" does not carry at least ${MIN_LEARNING_OUTCOMES} learning outcomes.`,
   );
 
   // Blocks must use the vocabulary the renderer knows.
@@ -196,6 +263,80 @@ for (const meta of published) {
     for (const block of lesson.blocks || []) {
       check(BLOCK_TYPES.includes(block.type), `Chapter "${meta.slug}" uses the unknown block type "${block.type}".`);
     }
+  }
+
+  // A chapter must carry real teaching material.
+  const lessons = chapter.learn || [];
+  check(
+    lessons.length >= MIN_LESSON_SECTIONS,
+    `Chapter "${meta.slug}" has only ${lessons.length} lesson sections, expected at least ${MIN_LESSON_SECTIONS}.`,
+  );
+  const tables = lessons.flatMap((lesson) => lesson.blocks || []).filter((block) => block.type === 'table');
+  check(
+    tables.length >= MIN_TABLES_PER_CHAPTER,
+    `Chapter "${meta.slug}" carries ${tables.length} table(s), expected at least ${MIN_TABLES_PER_CHAPTER}.`,
+  );
+  const words = teachingWords(chapter);
+  check(
+    words >= MIN_TEACHING_WORDS,
+    `Chapter "${meta.slug}" carries only ${words} teaching words, expected at least ${MIN_TEACHING_WORDS}.`,
+  );
+
+  // Every lesson must be a lesson and not a single line of heading, and every
+  // block must carry enough material to be worth reading.
+  for (const lesson of lessons) {
+    const blocks = lesson.blocks || [];
+    check(
+      blocks.length >= MIN_BLOCKS_PER_LESSON,
+      `Chapter "${meta.slug}" lesson "${lesson.id}" has only ${blocks.length} block(s), expected at least ${MIN_BLOCKS_PER_LESSON}.`,
+    );
+    for (const block of blocks) {
+      const where = `Chapter "${meta.slug}" lesson "${lesson.id}"`;
+      if (block.type === 'paragraph') {
+        check(
+          wordCount(block.text) >= MIN_PARAGRAPH_WORDS,
+          `${where} has a paragraph of only ${wordCount(block.text)} words, expected at least ${MIN_PARAGRAPH_WORDS}.`,
+        );
+      } else if (block.type === 'bullets') {
+        check(
+          (block.items || []).length >= MIN_BULLET_ITEMS,
+          `${where} has a bullets block of only ${(block.items || []).length} items, expected at least ${MIN_BULLET_ITEMS}.`,
+        );
+      } else if (block.type === 'terms') {
+        check(
+          (block.items || []).length >= MIN_TERM_ITEMS,
+          `${where} has a terms block of only ${(block.items || []).length} items, expected at least ${MIN_TERM_ITEMS}.`,
+        );
+      } else if (block.type === 'examples') {
+        check(
+          (block.items || []).length >= MIN_EXAMPLE_ITEMS,
+          `${where} has an examples block of only ${(block.items || []).length} items, expected at least ${MIN_EXAMPLE_ITEMS}.`,
+        );
+      }
+    }
+  }
+
+  // The revision material of a chapter must be there as well.
+  check(
+    (chapter.keyPoints || []).length >= MIN_KEY_POINTS,
+    `Chapter "${meta.slug}" carries ${(chapter.keyPoints || []).length} key points, expected at least ${MIN_KEY_POINTS}.`,
+  );
+  check(
+    (chapter.vocabulary || []).length >= MIN_VOCABULARY,
+    `Chapter "${meta.slug}" carries ${(chapter.vocabulary || []).length} vocabulary entries, expected at least ${MIN_VOCABULARY}.`,
+  );
+  check(
+    (chapter.figures || []).length >= MIN_FIGURES,
+    `Chapter "${meta.slug}" carries ${(chapter.figures || []).length} figures, expected at least ${MIN_FIGURES}.`,
+  );
+
+  // Every figure must be labelled well enough to be drawn from memory.
+  for (const figure of chapter.figures || []) {
+    check(Boolean(figure?.caption), `Chapter "${meta.slug}" has a figure without a caption.`);
+    check(
+      Array.isArray(figure?.labels) && figure.labels.length > 0,
+      `Chapter "${meta.slug}" has a figure without any labels.`,
+    );
   }
 
   // Questions.
@@ -217,6 +358,18 @@ for (const meta of published) {
     check(question.origin === 'practice', `Question "${question.id}" is not marked as practice.`);
     check(!prompts.has(question.prompt), `Question "${question.id}" repeats a prompt used elsewhere in the chapter.`);
     prompts.add(question.prompt);
+    const promptKey = question.prompt.trim().toLowerCase().replace(/\s+/g, ' ');
+    check(
+      !subjectPrompts.has(promptKey),
+      `Question "${question.id}" repeats a prompt already used in chapter "${subjectPrompts.get(promptKey)}".`,
+    );
+    subjectPrompts.set(promptKey, meta.slug);
+    const answerKey = String(question.answer ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
+    check(
+      !subjectAnswers.has(answerKey),
+      `Question "${question.id}" repeats an answer already used in chapter "${subjectAnswers.get(answerKey)}".`,
+    );
+    subjectAnswers.set(answerKey, meta.slug);
     check(!isPlaceholderText(question.answer), `Question "${question.id}" has a blank or placeholder answer.`);
     check(
       String(question.answer ?? '').trim().length >= MIN_ANSWER_LENGTH,
@@ -323,9 +476,24 @@ if (mapWork?.assessment) {
       `The map work exercise "${exercise.id}" has no positive whole-number mark value.`,
     );
     exerciseMarks += exercise.marks || 0;
-    // Every exercise must be answerable from the data printed with it.
+    // Every exercise must be answerable from the data printed with it. There is
+    // no exemption: an exercise that depends on a map or a key that is not
+    // shown alongside it cannot be answered from the page.
     const carriesData = Boolean(exercise.table) || (Array.isArray(exercise.data) && exercise.data.length > 0);
-    check(carriesData || exercise.id === 'exercise-directions', `The map work exercise "${exercise.id}" carries no data of its own.`);
+    check(carriesData, `The map work exercise "${exercise.id}" carries no data of its own.`);
+    // A table that carries the data of an exercise must be a sound table.
+    if (exercise.table) {
+      for (const issue of validateBlock(exercise.table, MAP_WORK_SLUG, exercise.id)) {
+        errors.push(`[${MAP_WORK_SLUG}] ${issue.message}`);
+      }
+      assertions += 1;
+    }
+    for (const item of exercise.data || []) {
+      check(
+        Boolean(item?.label) && Boolean(String(item?.value ?? '').trim()),
+        `The map work exercise "${exercise.id}" has an incomplete data row.`,
+      );
+    }
   }
   check(
     exerciseMarks === assessment.marks,

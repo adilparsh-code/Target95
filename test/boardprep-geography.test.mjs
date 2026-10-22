@@ -128,7 +128,64 @@ test('the Map Reading chapter carries a complete map work assessment', () => {
       exercise.table || (Array.isArray(exercise.data) && exercise.data.length > 0),
       `${exercise.id} must carry the data its questions depend on`,
     );
+    // The data printed with an exercise must be complete, because the answer
+    // is worked out from it and from nothing else.
+    for (const row of exercise.data || []) {
+      assert.ok(row?.label, `${exercise.id} has a data row without a label`);
+      assert.ok(String(row?.value ?? '').trim(), `${exercise.id} has a data row without a value`);
+    }
+    if (exercise.table) {
+      assert.ok(exercise.table.columns.length > 0, `${exercise.id} has a table without columns`);
+      for (const row of exercise.table.rows || []) {
+        assert.equal(row.length, exercise.table.columns.length, `${exercise.id} has a ragged table row`);
+      }
+    }
   }
+});
+
+test('every Geography chapter carries teaching material of a reviewed depth', () => {
+  for (const meta of published) {
+    const chapter = getChapter(BOARD, CLASS_SLUG, SUBJECT_SLUG, meta.slug);
+    const lessons = chapter.learn || [];
+
+    assert.ok(lessons.length >= 4, `${meta.slug} must carry at least four lesson sections`);
+    assert.ok((chapter.learningOutcomes || []).length >= 4, `${meta.slug} must carry at least four learning outcomes`);
+    assert.ok((chapter.keyPoints || []).length >= 8, `${meta.slug} must carry at least eight key points`);
+    assert.ok((chapter.vocabulary || []).length >= 6, `${meta.slug} must carry at least six vocabulary entries`);
+    assert.ok((chapter.figures || []).length >= 2, `${meta.slug} must carry at least two figures`);
+
+    for (const lesson of lessons) {
+      assert.ok((lesson.blocks || []).length >= 2, `${meta.slug} lesson ${lesson.id} must carry at least two blocks`);
+      for (const block of lesson.blocks || []) {
+        if (block.type === 'paragraph') {
+          const words = String(block.text || '').trim().split(/\s+/).filter(Boolean).length;
+          assert.ok(words >= 40, `${meta.slug} lesson ${lesson.id} has a paragraph of only ${words} words`);
+        } else if (block.type === 'bullets') {
+          assert.ok((block.items || []).length >= 3, `${meta.slug} lesson ${lesson.id} needs at least three bullets`);
+        } else if (block.type === 'terms') {
+          assert.ok((block.items || []).length >= 3, `${meta.slug} lesson ${lesson.id} needs at least three terms`);
+        } else if (block.type === 'examples') {
+          assert.ok((block.items || []).length >= 2, `${meta.slug} lesson ${lesson.id} needs at least two worked examples`);
+        }
+      }
+    }
+  }
+});
+
+test('the Natural Regions chapter records that the board prints no list of regions', () => {
+  const chapter = getChapter(BOARD, CLASS_SLUG, SUBJECT_SLUG, 'natural-regions-of-the-world');
+  const note = String(chapter.sourceNote?.boardprep || '');
+  assert.match(
+    note,
+    /does not print a numbered list of regions/i,
+    'the chapter must state that the CISCE unit prints no region list',
+  );
+  assert.match(
+    note,
+    /does not present them as an official enumeration/i,
+    'the chapter must not present its region set as an official enumeration',
+  );
+  assert.equal(chapter.sourceNote.thirdParty, '', 'no third-party source is claimed for this chapter');
 });
 
 test('the subject page counts agree with the published Geography content', () => {

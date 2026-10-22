@@ -132,7 +132,10 @@ will produce misleading zero-width layout results.
 
 - Branch: `freebuff/8e542bc2c2b830b28b0e69c8`
 - Commit message: `feat(boardprep): complete ICSE class IX geography`
-- Commit SHA: recorded below once the commit is created.
+- Commit SHA: `71880bbcaf6068f27e4b6ecd3a027f41d8e399c9` (27 files changed, 7505 insertions, 67 deletions)
+- Follow-up commit: the ledger line above was added in a separate documentation commit
+  immediately after the content commit, so that the SHA recorded here is the SHA of the
+  commit that actually carries the Geography work.
 
 No push to GitHub and no deployment was performed.
 

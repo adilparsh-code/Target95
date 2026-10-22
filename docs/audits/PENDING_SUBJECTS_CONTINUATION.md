@@ -156,8 +156,10 @@ is the failure mode the earlier section in this ledger warns about.
 
 - Branch: `freebuff/8e542bc2c2b830b28b0e69c8`
 - Commit message: `fix(boardprep): audit and repair ICSE class IX geography content depth`
-- Commit SHA: recorded in the follow-up documentation commit, so that the SHA printed here is the
-  SHA of the commit that actually carries the Geography work.
+- Commit SHA: `a23dba8dce45fde00d9d03c1a07dc6838e887cc4` (9 files changed, 474 insertions, 18 deletions)
+- Follow-up commit: the SHA line above was added in a separate documentation commit immediately
+  after the content commit, so that the SHA recorded here is the SHA of the commit that actually
+  carries the Geography work.
 
 No push to GitHub and no deployment was performed.
 

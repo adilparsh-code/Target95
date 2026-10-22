@@ -1,54 +1,43 @@
 import Link from 'next/link';
 import { getChapter } from '@/lib/boardprepCurriculum.mjs';
+import { getChapterBreadcrumbs, getChapterNeighbours } from '@/lib/boardprepChapterNav.mjs';
 import { notFound } from 'next/navigation';
 
-function LessonBlock({ block }) {
-  if (block.type === 'bullets') {
-    return (
-      <ul className="list-disc space-y-2 pl-5">
-        {block.items.map((item) => <li key={item}>{item}</li>)}
-      </ul>
-    );
-  }
-  if (block.type === 'examples') {
-    return (
-      <div className="space-y-3">
-        {block.items.map((item) => (
-          <div key={item.text} className="rounded-xl bg-slate-50 p-4">
-            <p>{item.text}</p>
-            <p className="mt-2 text-sm text-slate-600">{item.note}</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-  if (block.type === 'terms') {
-    return (
-      <dl className="grid gap-3 sm:grid-cols-2">
-        {block.items.map((item) => (
-          <div key={item.term} className="rounded-xl bg-blue-50 p-3">
-            <dt className="font-semibold text-blue-900">{item.term}</dt>
-            <dd className="mt-1 text-sm text-slate-700">{item.meaning}</dd>
-          </div>
-        ))}
-      </dl>
-    );
-  }
-  return <p>{block.text}</p>;
-}
+import AssessmentPanel from '@/app/components/boardprep/AssessmentPanel';
+import ChapterBlock from '@/app/components/boardprep/ChapterBlock';
+import ChapterBreadcrumbs from '@/app/components/boardprep/ChapterBreadcrumbs';
+import ChapterPager from '@/app/components/boardprep/ChapterPager';
+import PracticeCard from '@/app/components/boardprep/PracticeCard';
 
 export default async function ChapterPage({ params }) {
   const { board, classSlug, subjectSlug, chapterSlug } = await params;
   const chapter = getChapter(board, classSlug, subjectSlug, chapterSlug);
   if (!chapter) notFound();
+
   const subjectHref = `/learn/${board}/${classSlug}/${subjectSlug}`;
+  const breadcrumbs = getChapterBreadcrumbs(board, classSlug, subjectSlug, chapterSlug);
+  const { previous, next, position, total } = getChapterNeighbours(board, classSlug, subjectSlug, chapterSlug);
+  const chapterHref = (item) => `${subjectHref}/${item.slug}`;
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900">
       <div className="mx-auto max-w-4xl">
-        <Link href={subjectHref} className="text-sm font-medium text-slate-600">← Chapters</Link>
+        <ChapterBreadcrumbs trail={breadcrumbs} />
+
         <h1 className="mt-6 text-4xl font-bold">{chapter.title}</h1>
         <p className="mt-3 text-lg text-slate-600">{chapter.tagline}</p>
+
+        {chapter.learningOutcomes?.length > 0 && (
+          <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+            <h2 className="text-xl font-bold">Learning outcomes</h2>
+            <p className="mt-1 text-sm text-slate-600">After studying this chapter you should be able to:</p>
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700">
+              {chapter.learningOutcomes.map((outcome) => (
+                <li key={outcome}>{outcome}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {chapter.overview && (
           <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
@@ -73,7 +62,7 @@ export default async function ChapterPage({ params }) {
               <h2 className="text-xl font-bold">{lesson.title}</h2>
               {lesson.blocks?.map((block, index) => (
                 <div key={index} className="mt-4 text-slate-700">
-                  <LessonBlock block={block} />
+                  <ChapterBlock block={block} />
                 </div>
               ))}
             </article>
@@ -110,7 +99,9 @@ export default async function ChapterPage({ params }) {
           <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
             <h2 className="text-2xl font-bold">Key points</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700">
-              {chapter.keyPoints.map((point) => <li key={point}>{point}</li>)}
+              {chapter.keyPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
             </ul>
           </section>
         )}
@@ -119,7 +110,9 @@ export default async function ChapterPage({ params }) {
           <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
             <h2 className="text-2xl font-bold">Exam focus</h2>
             <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700">
-              {chapter.examFocus.map((point) => <li key={point}>{point}</li>)}
+              {chapter.examFocus.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
             </ul>
           </section>
         )}
@@ -138,26 +131,29 @@ export default async function ChapterPage({ params }) {
           </section>
         )}
 
+        {chapter.assessment && <AssessmentPanel assessment={chapter.assessment} />}
+
         <section className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
           <h2 className="text-2xl font-bold">Practice</h2>
           <div className="mt-5 space-y-4">
-            {chapter.questions?.map((question) => (
-              <article key={question.id} className="rounded-xl border border-slate-200 p-4">
-                <p className="font-semibold">{question.prompt}</p>
-                {question.options && (
-                  <ul className="mt-3 list-disc pl-5 text-sm">
-                    {question.options.map((option) => <li key={option}>{option}</li>)}
-                  </ul>
-                )}
-                <details className="mt-3">
-                  <summary className="cursor-pointer font-medium text-blue-700">Show answer</summary>
-                  <p className="mt-2">{question.answer}</p>
-                  <p className="mt-2 text-sm text-slate-600">{question.explanation}</p>
-                </details>
-              </article>
+            {chapter.questions?.map((question, index) => (
+              <PracticeCard key={question.id} question={question} number={index + 1} />
             ))}
           </div>
         </section>
+
+        <ChapterPager
+          previous={previous ? { title: previous.title, href: chapterHref(previous) } : null}
+          next={next ? { title: next.title, href: chapterHref(next) } : null}
+          position={position}
+          total={total}
+        />
+
+        <p className="mt-6 text-center text-sm">
+          <Link href={subjectHref} className="font-medium text-slate-600 hover:text-blue-700">
+            ← All {chapter.kind === 'geography' ? 'geography' : 'subject'} chapters
+          </Link>
+        </p>
       </div>
     </main>
   );

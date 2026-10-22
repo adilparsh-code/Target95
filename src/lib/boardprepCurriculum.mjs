@@ -58,6 +58,17 @@ export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
   return { ...metadata, ...read(file) };
 }
 
+// Question count per published chapter slug. Reading the chapter files is the
+// only reliable way to report a count, because the registry carries metadata
+// only and the questions live in the chapter JSON.
+export function getChapterQuestionCounts(board, classSlug, subjectSlug) {
+  const counts = new Map();
+  for (const chapter of getPublishedChapters(board, classSlug, subjectSlug)) {
+    counts.set(chapter.slug, getChapter(board, classSlug, subjectSlug, chapter.slug)?.questions?.length || 0);
+  }
+  return counts;
+}
+
 export function getBoardPrepCounts() {
   let classes = 0; let subjects = 0; let chapters = 0; let questions = 0;
   for (const board of getBoards()) for (const classInfo of board.classes || []) {

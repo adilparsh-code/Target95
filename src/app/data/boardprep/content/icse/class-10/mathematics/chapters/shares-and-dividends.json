@@ -1,0 +1,610 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-shares",
+  "title": "Shares and Dividends",
+  "kind": "mathematics",
+  "tagline": "Nominal value, market value, dividend income and the percentage return that lets two shares be compared.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A company raises money by dividing its capital into equal parts called shares, and a person who buys one becomes entitled to a fraction of the profit. Three prices and one rate govern everything in this chapter. The nominal value is the printed face value of a share and fixes the dividend it pays. The market value is what the share costs today, and it may sit above or below the face value. The dividend is quoted as a percentage of the nominal value, never of the market value. And the rate of return, which converts any investment into a single comparable percentage, is the annual income divided by the amount actually spent. This chapter builds those four quantities, shows how to move between them in both directions, and finishes with the comparison problems that make the whole apparatus worthwhile.",
+    "facts": [
+      { "label": "Nominal value", "value": "The face value of a share, printed on it, on which the dividend is calculated" },
+      { "label": "Market value", "value": "The price at which the share currently trades; above par at a premium, below par at a discount" },
+      { "label": "Dividend", "value": "A percentage of the nominal value, declared per annum" },
+      { "label": "Yield", "value": "Annual income divided by the market value invested, expressed as a percentage" }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish nominal value, market value and dividend rate, and state which of them each percentage applies to.",
+    "Compute the number of shares purchased for a given investment and the annual income those shares produce.",
+    "Find the annual income from a holding when the nominal value, dividend rate and quantity are given.",
+    "Calculate the percentage return on an investment and use it to decide which of two shares is the better buy.",
+    "Work backwards from a desired yield to the market value a share must carry, or from a target income to the capital needed.",
+    "Allocate a fixed sum between two shares so as to produce a stated relation between the incomes."
+  ],
+  "learn": [
+    {
+      "id": "what-a-share-is",
+      "title": "What a share is and how it pays",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A joint stock company divides its capital into a stated number of equal units, each called a share. Buying a share makes the buyer a part owner of the company in that proportion, and entitles the holder to a periodic payment called a dividend, which is the company's way of distributing part of its profit. The dividend is quoted as a percentage, but the percentage attaches to the nominal value of the share and to nothing else. A share of face value one hundred rupees paying fifteen per cent therefore pays fifteen rupees a year, whether the buyer happened to pay ninety rupees for it or a hundred and forty. Holding that distinction firmly prevents the single most common error in this chapter."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two markets make the topic possible. The nominal value is fixed for the life of the share, printed on the certificate, and is the figure that determines the dividend. The market value floats, moving with demand for the company's stock, and is the figure the buyer actually pays. When the market value exceeds the nominal value the share trades at a premium; when it falls below, the share trades at a discount; when the two coincide the share is at par. The gap between them is the reason two shares with identical face values and identical dividends can produce very different returns for an investor, and it is the reason the yield introduced later in this chapter is indispensable."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Nominal value", "meaning": "The face value of a share, on which the dividend percentage is computed." },
+            { "term": "Market value", "meaning": "The current buying price of one share, which may be above, below or equal to the nominal value." },
+            { "term": "Dividend", "meaning": "The annual income paid per share, being the nominal value multiplied by the dividend rate." },
+            { "term": "Yield", "meaning": "The annual income expressed as a percentage of the market value actually invested." },
+            { "term": "At par", "meaning": "Trading at a market value equal to the nominal value." },
+            { "term": "Premium and discount", "meaning": "A market value above the nominal value is a premium; one below it is a discount." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The dividend is always a percentage of the nominal value, never of the market value.",
+            "The market value is what the investor pays and therefore what the yield is measured against.",
+            "A higher nominal value at the same dividend rate means a higher rupee income per share.",
+            "The number of shares for a given capital is the capital divided by the market value, not by the nominal value."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "income-from-a-holding",
+      "title": "Computing the income from a holding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The income calculation has two stages and both are worth showing. First find the number of shares, by dividing the total capital by the market value of one share, because that is the price actually paid. Second find the dividend per share, by applying the dividend rate to the nominal value. Multiplying the two gives the annual income. An alternative route reaches the same answer by multiplying the total nominal value by the dividend rate, since the dividend depends only on face value; it is worth knowing both, because a problem sometimes gives the nominal holding directly and the number of shares need never be found at all."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A man invests 14400 rupees in 60 rupee shares quoted at 96 rupees, paying 15 per cent dividend. Find his annual income.",
+              "note": "Number of shares = 14400 / 96 = 150. Dividend per share = 60 x 15 / 100 = 9 rupees. Income = 150 x 9 = 1350 rupees. Alternatively the nominal holding is 150 x 60 = 9000 and 15 per cent of 9000 is 1350 rupees."
+            },
+            {
+              "text": "A man invests 14400 rupees in 100 rupee shares quoted at 120 rupees, paying 15 per cent dividend. Find his annual income.",
+              "note": "Number of shares = 14400 / 120 = 120 shares. Nominal holding = 120 x 100 = 12000. Income = 15 per cent of 12000 = 1800 rupees."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Two investments of 14400 rupees compared",
+          "columns": ["Holding", "Market value per share", "Shares", "Nominal value", "Dividend rate", "Annual income"],
+          "rows": [
+            ["60 rupee shares", "96.00", "150", "9000.00", "15 per cent", "1350.00"],
+            ["100 rupee shares", "120.00", "120", "12000.00", "15 per cent", "1800.00"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table makes a point worth pausing over. Both investors spent exactly the same capital and both shares pay the same dividend rate, yet the second earns four hundred and fifty rupees more each year. The reason is that the first share buys only sixty rupees of dividend-bearing face value for every ninety-six spent, a ratio of five to six, while the second buys a hundred rupees of face value for every hundred and twenty spent, the same ratio of five to six. What differs is the nominal value carried per rupee of investment, one hundred over one hundred and twenty against sixty over ninety-six. Comparing those ratios, rather than the nominal values alone, is what the yield formalises in the next sections."
+        }
+      ]
+    },
+    {
+      "id": "the-yield",
+      "title": "The percentage return on an investment",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Investors rarely compare shares by rupee income, because a share that pays a large income may simply have cost more. The fair comparison is the income as a percentage of the money spent, which is called the yield or the rate of return. It is computed by dividing the annual income by the market value invested and multiplying by a hundred. Because the income itself already incorporates the nominal value and the dividend rate, the yield collapses every feature of a share into one number, and two shares are equally attractive precisely when their yields are equal. The yield is always measured against the market value, since that is the sum the investor actually parted with."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the yield on 100 rupee shares bought at 120 rupees and paying 15 per cent dividend.",
+              "note": "Income per share = 100 x 15 / 100 = 15 rupees. Yield = 15 / 120 x 100 = 12.5 per cent."
+            },
+            {
+              "text": "Find the yield on 100 rupee shares bought at 80 rupees and paying 10 per cent dividend.",
+              "note": "Income per share = 100 x 10 / 100 = 10 rupees. Yield = 10 / 80 x 100 = 12.5 per cent, the same as the first share despite the different face values and rates."
+            },
+            {
+              "text": "A man invests 11520 rupees in 10 rupee shares quoted at 12 rupees paying 15 per cent. Find his income and his yield.",
+              "note": "Shares = 11520 / 12 = 960. Income per share = 10 x 0.15 = 1.5 rupees. Income = 960 x 1.5 = 1440 rupees. Yield = 1440 / 11520 x 100 = 12.5 per cent."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The first two examples deliberately collide. One share costs a premium of twenty and pays a generous fifteen per cent on a face value of a hundred; the other costs a discount of twenty and pays only ten per cent on the same face value. Both deliver exactly twelve and a half per cent on the money invested, so an investor choosing between them should be indifferent on income grounds alone. This is the central insight of the topic: dividend rates and market prices are two different currencies, and only the yield converts them into a common one. Whenever a problem asks which share is the better investment, compute three yields and rank them; nothing else will do."
+        },
+        {
+          "type": "table",
+          "caption": "Three shares, three yields",
+          "columns": ["Share", "Nominal value", "Market value", "Dividend rate", "Income per share", "Yield"],
+          "rows": [
+            ["A", "100.00", "125.00", "15 per cent", "15.00", "15 / 125 = 12 per cent"],
+            ["B", "100.00", "100.00", "10 per cent", "10.00", "10 / 100 = 10 per cent"],
+            ["C", "50.00", "40.00", "12 per cent", "6.00", "6 / 40 = 15 per cent"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "working-backwards",
+      "title": "Working backwards to price or capital",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Because the yield relation contains four quantities, any one of them can be recovered when the other three are known, and the reverse problems are the ones that separate careful candidates from careless ones. To find the market value a share must carry in order to yield a target return, divide the income per share by the target yield expressed as a decimal. To find the capital needed for a target income, first find the income per share, divide the target income by it to get the number of shares, then multiply by the market value. In both cases the route is the same: name the formula, substitute three quantities and isolate the fourth, rather than trying to reason directly from the story."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 25 rupee share paying 18 per cent must return 12 per cent on the investment. Find the market value.",
+              "note": "Income per share = 25 x 18 / 100 = 4.5 rupees. Market value = 4.5 / 0.12 = 37.5 rupees."
+            },
+            {
+              "text": "How much must be invested in 50 rupee shares quoted at 60 rupees paying 12 per cent, to obtain an annual income of 600 rupees?",
+              "note": "Income per share = 50 x 12 / 100 = 6 rupees. Shares needed = 600 / 6 = 100. Investment = 100 x 60 = 6000 rupees."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Target market value = income per share divided by the desired yield as a decimal.",
+            "Shares for a target income = target income divided by income per share.",
+            "Capital for a target income = shares times market value, never times nominal value.",
+            "Always substitute the recovered value back and recompute the income to confirm it matches the target."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comparing-two-shares",
+      "title": "Comparing two investments",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Comparison questions come in two shapes. The direct shape gives two shares and asks which is better, and the answer is obtained by computing both yields and choosing the larger. The allocation shape gives a fixed capital and asks how to divide it between two shares so that some condition on the incomes holds, most often that the incomes are equal or stand in a given ratio. The allocation problem is a pair of linear equations, and it repays being set up in terms of the number of shares rather than the rupees, because the income relation is simplest when written per share."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A man invests 1720 rupees, partly in 10 rupee shares quoted at 12 rupees paying 12 per cent, and partly in 20 rupee shares quoted at 25 rupees paying 9 per cent. If the incomes are equal, how much is invested in each?",
+              "note": "Income per share is 1.2 rupees for the first and 1.8 for the second. Equal incomes give 1.2 x first count = 1.8 x second count, so the first count is 1.5 times the second. Investment = 12 x 1.5k + 25 x k = 43k = 1720, so k = 40. The investments are 12 x 60 = 720 and 25 x 40 = 1000 rupees."
+            },
+            {
+              "text": "Which is the better investment: 100 rupee shares at 125 paying 15 per cent, or 50 rupee shares at 40 paying 12 per cent?",
+              "note": "Yield of the first = 15 / 125 x 100 = 12 per cent. Yield of the second = 6 / 40 x 100 = 15 per cent. The second is better by three percentage points despite its smaller face value and lower dividend rate."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In the allocation example, the step that decides success is expressing the income relation before touching the capital. Twelve per cent of a ten rupee share is one rupee twenty, and nine per cent of a twenty rupee share is one rupee eighty, so equal incomes force the count of the first kind to be one and a half times the count of the second. Writing the counts as one point five k and k converts the problem into one linear equation in one unknown: twelve times one point five k plus twenty five times k equals seventeen hundred and twenty, that is eighteen k plus twenty five k, or forty three k, equals the capital. The solution k equal to forty then yields both counts and both investments in a single line each."
+        }
+      ]
+    },
+    {
+      "id": "premium-discount-and-return",
+      "title": "Premium, discount and their effect on return",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A premium is not a penalty and a discount is not a bargain; both are simply statements about how the market prices a share relative to its face value, and both flow directly into the yield. Buying at a premium means the investor pays more than face value to obtain a fixed rupee income, so the yield falls below the dividend rate. Buying at a discount means the investor pays less than face value for the same income, so the yield rises above the dividend rate. Buying at par puts the two equal. The direction of the effect is worth memorising as a single rule, and the exact size follows from the ratio of nominal value to market value."
+        },
+        {
+          "type": "table",
+          "caption": "How the market price changes the return on a 100 rupee share paying 12 per cent",
+          "columns": ["Market value", "Relation to nominal value", "Income per share", "Yield"],
+          "rows": [
+            ["80.00", "Discount of 20", "12.00", "12 / 80 = 15 per cent"],
+            ["100.00", "At par", "12.00", "12 / 100 = 12 per cent"],
+            ["120.00", "Premium of 20", "12.00", "12 / 120 = 10 per cent"],
+            ["150.00", "Premium of 50", "12.00", "12 / 150 = 8 per cent"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table isolates the mechanism cleanly: the income column never moves, because the dividend is tied to the face value and nothing else. Only the denominator changes. An investor who understands this can answer a great many questions without calculation. If the yield must exceed the dividend rate, the share must be bought below par; if it must fall below the dividend rate, above par; and if a company with a high face value and a low dividend rate is to compete with a low face value share paying a high rate, the market prices will arrange themselves so that the yields settle close together. The arithmetic is the evidence for that economic intuition, and both halves are worth stating in an answer."
+        }
+      ]
+    },
+    {
+      "id": "setting-out-the-work",
+      "title": "Setting out the work",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Share arithmetic is unforgiving of ambiguous writing, because the same word, value, appears attached to three different quantities. A disciplined layout removes the risk. Write the given data as four labelled lines: nominal value, market value, dividend rate and capital. Then compute and label the two derived quantities, the number of shares and the income per share, before combining them. Every subsequent figure should be traceable to one of those six, and the answer should be stated with its unit, since rupees, shares and percentages are all in play and a bare number is genuinely ambiguous here."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "State nominal value, market value, dividend rate and capital as four separate labelled lines.",
+            "Number of shares = capital divided by market value; never divide by the nominal value.",
+            "Income per share = nominal value times the dividend rate; never apply the rate to the market value.",
+            "Yield = annual income divided by capital invested, as a percentage.",
+            "Quote every answer with its unit: rupees, shares or per cent.",
+            "Substitute a recovered market value or capital back and confirm the income or yield reproduces."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The two errors named in the second and third bullets account for most lost marks. Dividing capital by the nominal value yields a share count that could not have been bought with the money available, and applying the dividend rate to the market value produces an income that silently changes whenever the price moves, which is not what a dividend does. Both are avoidable by writing the four given quantities down first and asking, before every division and every percentage, which of the four the operation is about to consume. That single habit is the whole of the method."
+        }
+      ]
+    },
+    {
+      "id": "checking-share-answers",
+      "title": "Checking a share answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four checks cover this topic almost completely. The scale test: the number of shares should be a plausible count, so a figure like a thousandth of a share signals that capital was divided by the wrong price. The range test: the yield should sit near the dividend rate, differing by the premium or discount factor, so a yield of a hundred per cent or of one per cent means the numerator and denominator have been exchanged. The income test: the annual income must be a modest fraction of the capital, typically five to twenty per cent. And the reconstruction test: multiply the recovered share count by the market value and confirm it returns the stated capital exactly."
+        },
+        {
+          "type": "table",
+          "caption": "Working for a 14400 rupee investment in 60 rupee shares at 96, paying 15 per cent",
+          "columns": ["Quantity", "Working", "Value", "Unit"],
+          "rows": [
+            ["Shares purchased", "14400 / 96", "150", "shares"],
+            ["Nominal value held", "150 x 60", "9000.00", "rupees"],
+            ["Income per share", "60 x 15 / 100", "9.00", "rupees"],
+            ["Annual income", "150 x 9", "1350.00", "rupees"],
+            ["Yield", "1350 / 14400 x 100", "9.375", "per cent"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The last row of the table is the one that deserves a second look, because nine and three eighths per cent is a rather exact figure and it is worth confirming rather than rounding away. Multiply it back: nine point three seven five per cent of fourteen thousand four hundred is one thousand three hundred and fifty, exactly the income. A yield that will not multiply back cleanly has been rounded too early somewhere, usually because the share count or the income per share was truncated. Keep every intermediate value exact and round only the final figure."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from recall of the definitions through income and yield computations to reverse problems and the two-share allocation. Work each one with the four given quantities written down first, and apply at least one of the four checking tests before moving on. Several questions give you two shares at the same nominal value but different prices, which is deliberate: ranking by yield rather than by dividend rate is the skill this chapter exists to build."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write nominal value, market value, dividend rate and capital as four labelled lines before any arithmetic.",
+            "Divide capital by market value to get shares, and apply the dividend rate to nominal value to get income.",
+            "Rank two investments by yield, never by dividend rate or by rupee income alone.",
+            "In an allocation problem, set up the income relation in terms of share counts before using the capital."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Nominal value, market value and the income that flows from them",
+      "description": "A schematic of a single share certificate rendered as a rectangle. A label across the top gives the nominal value of 100 rupees and is connected by a solid line to a box marked dividend at 15 per cent, which in turn points to a box showing income of 15 rupees per year. A separate label along the bottom shows the market value of 120 rupees, connected by a dashed line to a box marked investment, which points to a box showing yield as income divided by market value. The two chains are drawn side by side so that the nominal chain appears above and the market chain below, emphasising that they never mix.",
+      "labels": ["Nominal value", "Market value", "Dividend rate", "Income per share", "Investment", "Yield"]
+    },
+    {
+      "caption": "Yield against market value at a fixed income of 12 rupees",
+      "description": "A line diagram with a horizontal axis marked market value and marked at 80, 100, 120 and 150 rupees, and a vertical axis marked yield in per cent. A downward sloping curve passes through four plotted points: at a market value of 80 a yield of 15, at 100 a yield of 12, at 120 a yield of 10, and at 150 a yield of 8. A horizontal reference line at 12 per cent is drawn across the chart and labelled dividend rate, showing the single point at which the two coincide and where the share is at par.",
+      "labels": ["Market value", "Yield", "At par", "Discount", "Premium", "12 per cent line"]
+    }
+  ],
+  "keyPoints": [
+    "A share carries a fixed nominal value and a fluctuating market value; only the nominal value bears the dividend.",
+    "Dividend per share = nominal value times the dividend rate, and it never changes when the market price moves.",
+    "Number of shares = capital invested divided by the market value.",
+    "Annual income = number of shares times income per share, or total nominal value times the dividend rate.",
+    "Yield = annual income divided by capital invested, as a percentage, and it is the only fair basis for comparison.",
+    "At par the yield equals the dividend rate; above par it is lower; below par it is higher.",
+    "To hit a target yield, set market value = income per share divided by the target yield.",
+    "In an allocation problem, write the income relation in share counts first, then impose the capital constraint."
+  ],
+  "examFocus": [
+    "Write the four given quantities as labelled lines before any arithmetic; most lost marks come from consuming the wrong one.",
+    "Show the share count as an explicit division, for example 14400 / 96 = 150, so a slip in one figure does not erase the method.",
+    "When asked which share is better, compute three yields and rank them; comparing dividend rates alone will give the wrong answer.",
+    "Quote every answer with its unit, since rupees, shares and percentages all appear in a single question.",
+    "State the assumption that the dividend is declared on the nominal value and paid per annum, which is what makes the yield comparable."
+  ],
+  "vocabulary": [
+    { "word": "Nominal value", "meaning": "The face value of a share, printed on it, which fixes the dividend it pays." },
+    { "word": "Market value", "meaning": "The price at which a share trades now, used as the denominator of the yield." },
+    { "word": "Dividend", "meaning": "The annual income paid on a share, being the nominal value multiplied by the dividend rate." },
+    { "word": "Yield", "meaning": "The annual income as a percentage of the market value invested." },
+    { "word": "At par", "meaning": "Trading at a market value equal to the nominal value, so yield equals the dividend rate." },
+    { "word": "Premium", "meaning": "A market value above the nominal value, which lowers the yield below the dividend rate." },
+    { "word": "Discount", "meaning": "A market value below the nominal value, which lifts the yield above the dividend rate." },
+    { "word": "Holding", "meaning": "The number of shares an investor owns, and the capital they represent at market prices." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-shr-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A dividend of 15 per cent on a share of nominal value 100 rupees means:",
+      "options": [
+        "An income of 15 rupees per share per annum",
+        "An income of 15 rupees of market value",
+        "A total payment of 15 per cent of all shares sold",
+        "A market value fixed at 115 rupees"
+      ],
+      "correctIndex": 0,
+      "answer": "An income of 15 rupees per share per annum",
+      "explanation": "The dividend rate is applied to the nominal value alone, so 100 x 15 / 100 = 15 rupees a year. The market value plays no part in this figure; it enters only when the yield is computed.",
+      "commonMistake": "Applying the rate to the market value, which makes the income move with the share price."
+    },
+    {
+      "id": "icse-10-math-q-shr-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of shares that can be bought with a capital of 14400 rupees when each share has a market value of 96 rupees is:",
+      "options": ["150", "120", "240", "160"],
+      "correctIndex": 0,
+      "answer": "150",
+      "explanation": "Shares are bought at market value, so the count is 14400 / 96 = 150. Dividing by the nominal value instead would give 14400 / 60 = 240, which counts shares that could not have been bought with the money available.",
+      "commonMistake": "Dividing the capital by the nominal value rather than by the market value."
+    },
+    {
+      "id": "icse-10-math-q-shr-03",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A 60 rupee share paying 15 per cent dividend yields an annual income of ______ rupees per share.",
+      "answer": "9 rupees",
+      "explanation": "The dividend is a percentage of the nominal value: 60 x 15 / 100 = 9 rupees per share per annum. The market value at which the share was bought does not enter this calculation.",
+      "commonMistake": "Quoting the market value or the capital outlay instead of the income per share."
+    },
+    {
+      "id": "icse-10-math-q-shr-04",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A man invests 14400 rupees in 60 rupee shares quoted at 96 rupees paying 15 per cent. His annual income is ______ rupees.",
+      "answer": "1350",
+      "explanation": "Shares = 14400 / 96 = 150. Income per share = 60 x 0.15 = 9 rupees. Annual income = 150 x 9 = 1350 rupees. Equivalently the nominal holding is 150 x 60 = 9000 and 15 per cent of 9000 is 1350 rupees.",
+      "commonMistake": "Applying 15 per cent directly to the capital, which gives 2160 rupees and treats the investment itself as bearing the dividend."
+    },
+    {
+      "id": "icse-10-math-q-shr-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A man invests 14400 rupees in 100 rupee shares quoted at 120 rupees paying 15 per cent dividend. Find his annual income.",
+      "answer": "1800 rupees",
+      "explanation": "Shares = 14400 / 120 = 120 shares. Nominal holding = 120 x 100 = 12000 rupees. Income = 15 per cent of 12000 = 1800 rupees. Check by the other route: income per share = 100 x 0.15 = 15 rupees and 120 x 15 = 1800 rupees.",
+      "commonMistake": "Using the nominal value as the divisor, which gives 144 shares and an income of 2160 rupees."
+    },
+    {
+      "id": "icse-10-math-q-shr-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the yield on 100 rupee shares bought at 120 rupees and paying 15 per cent dividend.",
+      "answer": "12.5 per cent",
+      "explanation": "Income per share = 100 x 15 / 100 = 15 rupees. The yield measures that income against the price actually paid, so 15 / 120 x 100 = 12.5 per cent. The yield is lower than the dividend rate because the share was bought at a premium of 20 rupees.",
+      "commonMistake": "Dividing by the nominal value, which merely returns the dividend rate of 15 per cent and discards the premium."
+    },
+    {
+      "id": "icse-10-math-q-shr-07",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A man invests 11520 rupees in 10 rupee shares quoted at 12 rupees paying 15 per cent dividend. Find the number of shares, his annual income and his yield.",
+      "answer": "960 shares, income 1440 rupees, yield 12.5 per cent",
+      "explanation": "Number of shares = 11520 / 12 = 960. Income per share = 10 x 15 / 100 = 1.5 rupees. Annual income = 960 x 1.5 = 1440 rupees. Yield = 1440 / 11520 x 100 = 12.5 per cent. As a check, the nominal holding is 960 x 10 = 9600 and 15 per cent of 9600 is 1440 rupees.",
+      "commonMistake": "Reporting the nominal holding of 9600 as the income, or applying 15 per cent to the capital to get 1728 rupees."
+    },
+    {
+      "id": "icse-10-math-q-shr-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the yield on 100 rupee shares bought at 80 rupees and paying 10 per cent dividend, and compare it with the yield on 100 rupee shares bought at 120 rupees paying 15 per cent.",
+      "answer": "Both yield 12.5 per cent, so the two investments are equally attractive on income grounds",
+      "explanation": "For the discounted share, income per share = 100 x 10 / 100 = 10 rupees and yield = 10 / 80 x 100 = 12.5 per cent. For the premium share, income = 100 x 15 / 100 = 15 rupees and yield = 15 / 120 x 100 = 12.5 per cent. The lower dividend rate on the cheaper share exactly offsets the higher rate on the dearer one, which is why dividend rates alone must never be used to rank shares.",
+      "commonMistake": "Choosing the share with the 15 per cent rate without noticing it costs 40 rupees more for the same rupee of income."
+    },
+    {
+      "id": "icse-10-math-q-shr-09",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A share whose market value equals its nominal value is said to trade:",
+      "options": ["At par", "At a premium", "At a discount", "At a loss"],
+      "correctIndex": 0,
+      "answer": "At par",
+      "explanation": "Par is the state in which the two values coincide, and it is the only case in which the yield equals the dividend rate exactly. A market value above par is a premium and one below par is a discount.",
+      "commonMistake": "Calling a discount a loss, when it in fact raises the yield."
+    },
+    {
+      "id": "icse-10-math-q-shr-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A 25 rupee share paying 18 per cent dividend earns ______ rupees per share per annum.",
+      "answer": "4.5",
+      "explanation": "The dividend is applied to the nominal value: 25 x 18 / 100 = 4.5 rupees per share. This figure is then used both to find the total income from a holding and, divided by a target yield, to find the market value the share must carry.",
+      "commonMistake": "Applying 18 per cent to the market value, which changes the answer whenever the price moves."
+    },
+    {
+      "id": "icse-10-math-q-shr-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A 25 rupee share paying 18 per cent dividend must return 12 per cent on the investment. Find the market value.",
+      "answer": "37.5 rupees",
+      "explanation": "Income per share = 25 x 18 / 100 = 4.5 rupees. For a yield of 12 per cent the market value must satisfy 4.5 / market value x 100 = 12, so market value = 4.5 / 0.12 = 37.5 rupees. Check: 4.5 / 37.5 = 0.12, that is 12 per cent.",
+      "commonMistake": "Multiplying the income by the yield instead of dividing, which gives 0.54 rupees and is far too small."
+    },
+    {
+      "id": "icse-10-math-q-shr-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "How much must be invested in 50 rupee shares quoted at 60 rupees paying 12 per cent, to obtain an annual income of 600 rupees?",
+      "answer": "6000 rupees",
+      "explanation": "Income per share = 50 x 12 / 100 = 6 rupees. Shares needed = 600 / 6 = 100 shares. Capital required = 100 x 60 = 6000 rupees, since shares are bought at market value. Check: 100 shares carry a nominal value of 5000, and 12 per cent of 5000 is 600 rupees.",
+      "commonMistake": "Multiplying the share count by the nominal value, which gives 5000 rupees and understates the capital actually needed."
+    },
+    {
+      "id": "icse-10-math-q-shr-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A man invests 1720 rupees, partly in 10 rupee shares quoted at 12 rupees paying 12 per cent, and partly in 20 rupee shares quoted at 25 rupees paying 9 per cent. If the incomes from the two investments are equal, find the amount invested in each.",
+      "answer": "720 rupees in the first and 1000 rupees in the second",
+      "explanation": "Income per share is 10 x 12 / 100 = 1.2 rupees for the first kind and 20 x 9 / 100 = 1.8 rupees for the second. Writing the counts as a and b, equal incomes give 1.2 a = 1.8 b, so a = 1.5 b. The capital constraint is 12 a + 25 b = 1720, and substituting gives 12 x 1.5 b + 25 b = 18 b + 25 b = 43 b = 1720, so b = 40 and a = 60. Investments: 60 x 12 = 720 rupees and 40 x 25 = 1000 rupees, summing to 1720. Both incomes are 60 x 1.2 = 72 and 40 x 1.8 = 72 rupees.",
+      "commonMistake": "Splitting the capital equally instead of the incomes: 860 rupees in each gives unequal returns, because the two shares have different prices and different income per share."
+    },
+    {
+      "id": "icse-10-math-q-shr-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two shares have the same nominal value. The first trades at a premium, the second at a discount. Both pay the same dividend rate. Then:",
+      "options": [
+        "The second share has the higher yield",
+        "The first share has the higher yield",
+        "Both shares have the same yield",
+        "Neither share pays any dividend"
+      ],
+      "correctIndex": 0,
+      "answer": "The second share has the higher yield",
+      "explanation": "The income per share is identical, since both have the same nominal value and dividend rate. Dividing that identical income by a smaller market value gives a larger yield, so the discounted share wins. Buying at a discount lifts the yield above the dividend rate; buying at a premium pushes it below.",
+      "commonMistake": "Assuming the premium share pays more, because its price is higher."
+    },
+    {
+      "id": "icse-10-math-q-shr-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Compare the yields of three shares: A, of nominal value 100 rupees at a market value of 125 rupees paying 15 per cent; B, of nominal value 100 rupees at a market value of 100 rupees paying 10 per cent; and C, of nominal value 50 rupees at a market value of 40 rupees paying 12 per cent. Rank them and state which is the best investment.",
+      "answer": "C yields 15 per cent, A yields 12 per cent, B yields 10 per cent; C is the best investment",
+      "explanation": "Income per share: A gives 100 x 15 / 100 = 15, B gives 100 x 10 / 100 = 10, C gives 50 x 12 / 100 = 6 rupees. Yields: A = 15 / 125 x 100 = 12 per cent, B = 10 / 100 x 100 = 10 per cent, C = 6 / 40 x 100 = 15 per cent. Ranking C, A, B. Share C has the smallest face value and a middling dividend rate, yet it is bought at the deepest discount, and the discount is what lifts its return above both the others.",
+      "commonMistake": "Ranking by dividend rate, which would order A, C, B and name the wrong share as best."
+    },
+    {
+      "id": "icse-10-math-q-shr-16",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the formula for the yield on a share investment, defining every symbol you use.",
+      "answer": "Yield = annual income divided by the capital invested, multiplied by 100, expressed as a percentage",
+      "explanation": "Writing yield = income / market value of the holding x 100 makes explicit that the denominator is the money actually spent, not the nominal value. The annual income itself is the number of shares times the nominal value times the dividend rate, so the yield folds both the face value and the price paid into a single comparable figure.",
+      "commonMistake": "Using the nominal value as the denominator, which returns the dividend rate rather than the yield."
+    },
+    {
+      "id": "icse-10-math-q-shr-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A man invests 48000 rupees in 50 rupee shares quoted at 60 rupees paying 15 per cent dividend. Find his annual income and his yield.",
+      "answer": "Annual income 6000 rupees and yield 12.5 per cent",
+      "explanation": "Number of shares = 48000 / 60 = 800 shares. Nominal holding = 800 x 50 = 40000 rupees. Annual income = 15 per cent of 40000 = 6000 rupees. Yield = 6000 / 48000 x 100 = 12.5 per cent. As a check, income per share = 50 x 0.15 = 7.5 rupees and 800 x 7.5 = 6000 rupees.",
+      "commonMistake": "Applying 15 per cent to the 48000 invested, which gives 7200 rupees and ignores that only 40000 of face value was purchased."
+    },
+    {
+      "id": "icse-10-math-q-shr-18",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A 100 rupee share paying 12 per cent dividend is bought at 80 rupees. The yield is:",
+      "options": ["15 per cent", "12 per cent", "9.6 per cent", "80 per cent"],
+      "correctIndex": 0,
+      "answer": "15 per cent",
+      "explanation": "Income per share = 100 x 12 / 100 = 12 rupees. Yield = 12 / 80 x 100 = 15 per cent. Buying at a discount of 20 rupees raises the return above the dividend rate, which is why the discounted share is the more attractive of the two at par-equivalent income.",
+      "commonMistake": "Reporting the dividend rate of 12 per cent, which ignores the discount actually paid."
+    },
+    {
+      "id": "icse-10-math-q-shr-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a share bought at a premium yields less than its dividend rate, and state what happens to the yield if the market value rises further.",
+      "explanation": "The income is fixed by the nominal value, so paying more than face value spreads that unchanged income over a larger outlay and the ratio falls below the rate quoted. If the market value rises further, the denominator grows again and the yield falls still lower, so price and yield move in opposite directions.",
+      "answer": "Because the income is fixed by the nominal value while the outlay is larger than face value, so income divided by price is below the rate; a further rise in market value lowers the yield more",
+      "commonMistake": "Saying that a higher market value raises the income, when the dividend does not depend on price at all."
+    },
+    {
+      "id": "icse-10-math-q-shr-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A man buys 400 shares of nominal value 25 rupees each at 20 rupees each, the shares paying 15 per cent dividend. Find his total annual income, his yield, and the market value at which he would have had to buy the same shares to obtain a yield of exactly 10 per cent.",
+      "answer": "Income 1500 rupees, yield 18.75 per cent, required market value 37.5 rupees",
+      "explanation": "Income per share = 25 x 15 / 100 = 3.75 rupees. Total income = 400 x 3.75 = 1500 rupees. Capital = 400 x 20 = 8000 rupees, so the yield = 1500 / 8000 x 100 = 18.75 per cent. To yield 10 per cent the market value must satisfy 3.75 / market value = 0.10, so market value = 3.75 / 0.10 = 37.5 rupees. Check: 3.75 / 37.5 = 0.10, that is 10 per cent.",
+      "commonMistake": "Using the total income of 1500 rupees instead of the 3.75 rupee income per share, which gives 1500 / 0.10 = 15000 rupees; that is a capital figure, not a market price."
+    },
+    {
+      "id": "icse-10-math-q-shr-21",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If a share is bought at a premium, its yield is ______ its dividend rate.",
+      "answer": "lower than",
+      "explanation": "The income is fixed by the nominal value, but a premium means a larger outlay, so the ratio of income to price falls below the quoted rate. At par the two are equal, and at a discount the yield exceeds the rate; the yield and the price always move in opposite directions.",
+      "commonMistake": "Stating that the yield equals the dividend rate regardless of the price paid."
+    },
+    {
+      "id": "icse-10-math-q-shr-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "An investor wants an annual income of 2100 rupees from 100 rupee shares quoted at 120 rupees paying 14 per cent dividend. How much capital is required, and what yield does it give?",
+      "answer": "Capital 18000 rupees, yield 11.666... per cent, that is 11 and 2 over 3 per cent",
+      "explanation": "Income per share = 100 x 14 / 100 = 14 rupees. Shares needed = 2100 / 14 = 150 shares. Capital = 150 x 120 = 18000 rupees. Yield = 2100 / 18000 x 100 = 11.666... per cent, which is 14 / 120 x 100 = 35 / 3, that is 11 and two thirds per cent. Check: the nominal holding is 150 x 100 = 15000 and 14 per cent of 15000 is 2100 rupees.",
+      "commonMistake": "Dividing the target income by the market value directly, which confuses income per share with income per rupee invested."
+    },
+    {
+      "id": "icse-10-math-q-shr-23",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that the yield on a 100 rupee share paying 15 per cent is 12 per cent when bought at 125 rupees, 15 per cent when bought at par, and 18 per cent when bought at a market value of 83 rupees and one third.",
+      "answer": "12 per cent, 15 per cent and 18 per cent respectively",
+      "explanation": "The income is always 100 x 15 / 100 = 15 rupees, since the dividend depends only on the nominal value. At a market value of 125 the yield is 15 / 125 x 100 = 12 per cent. At par, 15 / 100 x 100 = 15 per cent. At a market value of 83 and one third, note that 15 / (250/3) = 45 / 250 = 0.18, giving 18 per cent. The three yields fall as the price rises, exactly as the fixed income spread over a growing outlay requires.",
+      "commonMistake": "Changing the income along with the price, which would keep the yield fixed at 15 per cent throughout."
+    }
+  ]
+}

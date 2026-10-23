@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-inequations",
+  "title": "Linear Inequations",
+  "kind": "mathematics",
+  "tagline": "Solving inequations in one variable, the sign-reversal rule, and expressing solution sets on the number line.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "An inequation is a statement that one expression is greater than or less than another rather than equal to it, and solving one means finding every value of the variable that keeps the statement true. Most of the machinery you already know carries over from equations: you may add or subtract the same quantity from both sides without changing the truth of the statement. One rule does not carry over, and it is the whole difficulty of the subject. Multiplying or dividing both sides by a negative number reverses the direction of the inequality, because on the number line a negative multiplier is a reflection that flips the ordering. This chapter builds the properties, applies them to single and compound inequations, and then concentrates on the part that earns marks in an examination: expressing the solution as a set and drawing it correctly on the number line.",
+    "facts": [
+      { "label": "Ordering symbols", "value": "Less than <, greater than >, less than or equal to <=, greater than or equal to >=" },
+      { "label": "Safe operations", "value": "Adding or subtracting the same quantity from both sides never changes the sense" },
+      { "label": "Reversal rule", "value": "Multiplying or dividing both sides by a negative number reverses the inequality sign" },
+      { "label": "Closed and open", "value": "A solid dot marks an included endpoint; a hollow dot marks an excluded one" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the properties of inequations and identify when the sense of the inequality must be reversed.",
+    "Solve a linear inequation in one variable and present the solution in set notation.",
+    "Solve a compound inequation by solving both parts and taking the common part of their solutions.",
+    "Represent a solution set on a number line using solid and hollow dots correctly.",
+    "Distinguish the real solution set from its integer solutions and count the integers it contains.",
+    "Apply inequations to word problems that ask for the least or greatest integer satisfying a condition."
+  ],
+  "learn": [
+    {
+      "id": "what-an-inequation-is",
+      "title": "What an inequation is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Where an equation asserts that two expressions are equal, an inequation asserts an ordering between them. The four symbols used are less than, greater than, less than or equal to, and greater than or equal to, and each has a precise meaning that must be respected when the solution set is written. Strict inequalities, the first two, exclude the boundary value; weak inequalities, the last two, include it. A statement such as three x minus five is less than seven is true for some values of x and false for others, and solving it means describing every value for which it holds. That description is the solution set, and because there are usually infinitely many solutions, it can never be listed and must be written compactly."
+        },
+        {
+          "type": "paragraph",
+          "text": "The distinction between a solution and a solution set is worth fixing early. For an equation in one variable the solution is typically a single number, so writing x equal to four settles the matter. For an inequation the answer is a region, and a candidate who writes x equal to four when asked to solve three x minus five is less than seven has answered a question that was not asked. The three usual ways of presenting a region are set notation, which is what an examiner expects in writing; a number line, which is what a diagram question expects; and a list of integer solutions when the question restricts attention to integers. All three describe the same set and all three should be available to you."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Inequation", "meaning": "A statement that two expressions are ordered by <, >, <= or >= rather than equal." },
+            { "term": "Solution set", "meaning": "Every value of the variable for which the inequation is true, written in set notation." },
+            { "term": "Sense", "meaning": "The direction of the inequality, which is reversed by multiplication or division by a negative number." },
+            { "term": "Strict", "meaning": "An inequality using < or >, which excludes the boundary value from the solution set." },
+            { "term": "Compound inequation", "meaning": "Two inequalities joined by the word and, giving a solution that is the common part of both." },
+            { "term": "Integer solutions", "meaning": "Those members of the solution set that are whole numbers, either positive or negative." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A solution set is a region of the number line, not a single value.",
+            "Strict inequalities exclude the endpoint; weak inequalities include it.",
+            "Set notation, a number line and a list of integers are three presentations of one set.",
+            "The word solve always means find the whole set, unless the question asks for integers."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "properties-of-inequations",
+      "title": "The properties that let you solve",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two families of operations preserve the truth of an inequation, and one family does not. Adding the same number to both sides leaves the ordering untouched, and so does subtracting the same number from both sides; this is exactly the transposition you already use with equations, and it needs no new justification. Multiplying or dividing both sides by a positive number likewise leaves the ordering alone, because scaling the number line by a positive factor stretches it without folding it. The dangerous case is a negative multiplier. Multiplying by a negative reflects the number line through the origin, which interchanges left and right, and the statement that was true becomes false unless the sense of the inequality is reversed at the same moment."
+        },
+        {
+          "type": "table",
+          "caption": "Effect of each operation on both sides of an inequation",
+          "columns": ["Operation", "Effect on the sense", "Reason"],
+          "rows": [
+            ["Add the same number", "Unchanged", "Translating the number line leaves the order intact"],
+            ["Subtract the same number", "Unchanged", "Translation by a negative distance is still a translation"],
+            ["Multiply by a positive number", "Unchanged", "Scaling stretches the line without folding it"],
+            ["Divide by a positive number", "Unchanged", "Scaling by a positive factor preserves order"],
+            ["Multiply by a negative number", "Reversed", "Reflection through the origin interchanges left and right"],
+            ["Divide by a negative number", "Reversed", "Dividing by a negative is multiplication by a negative"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve 3x - 5 < 7.",
+              "note": "Add 5 to both sides: 3x < 12. Divide by the positive number 3, which does not reverse the sense: x < 4. The solution set is all real x less than 4."
+            },
+            {
+              "text": "Solve -2x <= 6.",
+              "note": "Divide both sides by -2, a negative number, so the sense reverses: x >= -3. Dividing the right side, 6 / -2 = -3. The solution set is all real x greater than or equal to -3."
+            },
+            {
+              "text": "Solve 5 - 3x > 2.",
+              "note": "Subtract 5: -3x > -3. Divide by -3, reversing the sense: x < 1. Check with x = 0, which satisfies the original statement since 5 > 2."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The third example deserves attention because it shows why the reversal rule must never be skipped. A candidate who divides by negative three without reversing the sign reaches x greater than one, and that region contains two, which makes the original statement five minus six greater than two, that is minus one greater than two, false. A single counterexample is a complete disproof, and it is worth forming the habit of substituting a value from your proposed region whenever the manipulation involved a negative multiplier. The check costs one line and it is the only reliable defence against the commonest error in the subject."
+        }
+      ]
+    },
+    {
+      "id": "solving-step-by-step",
+      "title": "Solving single inequations step by step",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The method for a linear inequation in one variable is the method for a linear equation, with one additional decision at each division. Collect the variable terms on one side and the constants on the other, using only addition and subtraction, which never disturb the sense. Then divide by the coefficient of the variable. If that coefficient is positive the sense stands; if it is negative the sense must be reversed. Writing the division as an explicit step with the coefficient named makes the decision visible, and a marker can award credit for the correct reasoning even if the final number is wrong. Never fold the division and the sign change into one mental leap."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve 2x + 3 > 11 and write the solution in set notation.",
+              "note": "Subtract 3: 2x > 8. Divide by the positive number 2: x > 4. Solution set: the set of all x such that x > 4, where x is a real number."
+            },
+            {
+              "text": "Solve 7 - 4x >= 19.",
+              "note": "Subtract 7: -4x >= 12. Divide by -4, reversing the sense: x <= -3. Check with x = -3, which gives 7 + 12 = 19, and the statement 19 >= 19 holds, confirming the endpoint is included."
+            },
+            {
+              "text": "Solve (5x / 3) - 2 < 3.",
+              "note": "Add 2: 5x / 3 < 5. Multiply by 3, positive, so the sense is unchanged: 5x < 15. Divide by 5: x < 3. Solution set is all real x less than 3."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Move constants and variable terms by addition or subtraction only; the sense never changes.",
+            "Name the coefficient before dividing, so the sign decision is explicit.",
+            "Divide by a positive coefficient and keep the sense; divide by a negative one and reverse it.",
+            "Test a value from your region in the original statement before writing the answer.",
+            "Give the answer as a set, with the domain of x stated."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Fractional coefficients cause needless alarm but change nothing. Multiply through by the denominator first, provided it is positive, and the fraction disappears; if the denominator carries a variable sign you must consider cases, which this syllabus does not require. In the worked example the denominator three is a positive constant, so multiplying both sides by three is safe and reduces the problem to ordinary integer arithmetic. Treat every denominator as a positive constant unless told otherwise, and say so in your working so that the assumption is visible."
+        }
+      ]
+    },
+    {
+      "id": "number-line-representation",
+      "title": "Representing a solution on the number line",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A region of the number line is drawn as a ray or a segment, and its two endpoints carry the whole meaning of the answer. A solid, filled dot marks an endpoint that belongs to the solution set, which is what a weak inequality produces. A hollow, open dot marks an endpoint that is excluded, produced by a strict inequality. The ray then extends in the direction of the solution and stops, or continues, according to the inequality. Drawing the correct endpoint but shading the wrong way is the commonest single mark lost in this topic, and it is entirely avoidable by deciding the direction from the inequality before the pencil touches the paper."
+        },
+        {
+          "type": "paragraph",
+          "text": "Direction follows from reading the inequality out loud. If the solution says x is greater than four, the region lies to the right of four, because larger numbers are to the right. If it says x is less than or equal to minus two, the region lies to the left of minus two and the dot at minus two is solid, because the equality is included. For a compound solution the region lies between two numbers, and the two endpoints are drawn with their own dots independently: minus two open on the left and three closed on the right, for instance, describes a set that excludes minus two and includes three."
+        },
+        {
+          "type": "table",
+          "caption": "Reading an inequality into a picture",
+          "columns": ["Inequality", "Endpoint", "Dot", "Direction or region"],
+          "rows": [
+            ["x > 4", "4", "Hollow", "Ray to the right, away from 4"],
+            ["x >= 4", "4", "Solid", "Ray to the right, including 4"],
+            ["x < -2", "-2", "Hollow", "Ray to the left, away from -2"],
+            ["x <= -2", "-2", "Solid", "Ray to the left, including -2"],
+            ["-2 < x <= 3", "both -2 and 3", "hollow then solid", "Segment between them"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A useful discipline when the picture is worth marks is to label every dot with its value as well as drawing it. A hollow dot at four with the numeral 4 written beneath conveys the endpoint and its exclusion in one stroke, and it prevents a marker from having to guess which tick mark you intended. When the region is a segment, label both endpoints; when it is a ray, label the one endpoint and add an arrow at the far end to show that the region continues without limit."
+        }
+      ]
+    },
+    {
+      "id": "compound-inequations",
+      "title": "Solving compound inequations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A compound inequation places an expression between two bounds, as in minus three is less than two x plus one which is at most seven, and the task is to find the values of x that satisfy both parts at once. The efficient method is to work on all three sections together: perform the same safe operation across the whole chain, and reverse the sense in every section when you multiply or divide by a negative. Because a chain is just two inequalities sharing a middle expression, the method never produces a contradiction unless the original statement was impossible, and the final answer is the overlap of the two individual solution regions."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve -3 < 2x + 1 <= 7 and write the solution set.",
+              "note": "Subtract 1 throughout: -4 < 2x <= 6. Divide throughout by the positive number 2: -2 < x <= 3. Solution set: all real x with -2 < x <= 3."
+            },
+            {
+              "text": "Solve -6 <= 3x - 9 < 3.",
+              "note": "Add 9 throughout: 3 <= 3x < 12. Divide throughout by 3: 1 <= x < 4. Solution set: all real x with 1 <= x < 4."
+            },
+            {
+              "text": "Solve -12 < -4x <= 8.",
+              "note": "Divide throughout by -4, reversing both senses: 3 > x >= -2, that is -2 <= x < 3. Check with x = 0, which gives -12 < 0 <= 8, true."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The last example is where chains earn their reputation. Dividing by negative four must reverse both inequality signs simultaneously, and forgetting either one leaves an answer that is either empty or far too large. Rewriting the reversed chain in the conventional left-to-right order afterwards, as minus two is less than or equal to x which is less than three, makes the answer readable and makes the two endpoints available for drawing. A chain that comes out with the left endpoint larger than the right is a certain signal that a reversal was missed."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Apply each operation to all three sections of the chain in one line.",
+            "Reverse every sense when dividing by a negative number, not just one of them.",
+            "Rewrite the final chain with the smaller endpoint on the left before reading off the solution.",
+            "If the left endpoint exceeds the right, a reversal has been missed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sets-and-integers",
+      "title": "Set notation and integer solutions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Formal presentation matters in this topic, because the difference between two neighbouring answers is a symbol rather than a number. The conventional form writes the variable, then a colon, then the condition, then the domain: x colon x greater than four, where x is a real number. When the question restricts attention to whole numbers, the same region yields a finite list, and the two answers are genuinely different even though they describe the same region of the line. A question asking for the least positive integer wants a single number; a question asking for the solution set wants a region; confusing the two is a reliable way to lose the whole mark."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Write the solution of -2 < x <= 3 in set notation and list its integer solutions.",
+              "note": "Solution set: all real x with -2 < x <= 3. The integers strictly greater than -2 and at most 3 are -1, 0, 1, 2 and 3, so there are five integer solutions."
+            },
+            {
+              "text": "Find the least positive integer satisfying 3x - 7 > 5.",
+              "note": "Add 7: 3x > 12. Divide by 3: x > 4. The integers greater than 4 begin with 5, so the least positive integer solution is 5."
+            },
+            {
+              "text": "Find the greatest integer satisfying 5 - 2x >= 1.",
+              "note": "Subtract 5: -2x >= -4. Divide by -2, reversing the sense: x <= 2. The integers at most 2 include 2 itself, so the greatest is 2."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "From a region to its integer solutions",
+          "columns": ["Region", "Boundary included", "Integer solutions", "Count"],
+          "rows": [
+            ["-2 < x <= 3", "3 only", "-1, 0, 1, 2, 3", "5"],
+            ["3 <= x < 8", "3 only", "3, 4, 5, 6, 7", "5"],
+            ["-1 <= x <= 6", "both", "-1, 0, 1, 2, 3, 4, 5, 6", "8"],
+            ["x > 4", "none", "5, 6, 7 and upwards", "infinite"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The third row offers a useful counting check. The integers from minus one to six inclusive are eight in number, which you can verify by adding one to the difference of the endpoints, six minus minus one, that is seven, plus one, giving eight. For a closed interval the count is the difference of the endpoints plus one; when one endpoint is excluded the count drops by one; when both are excluded it drops by two. That rule turns a listing question into a subtraction, which is faster and less likely to skip a value."
+        }
+      ]
+    },
+    {
+      "id": "word-problems",
+      "title": "Word problems that reduce to inequations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The translation step is where these problems are won or lost. Read the statement and mark every phrase that expresses an ordering: at least means greater than or equal to, at most means less than or equal to, more than means strictly greater, and no more than means less than or equal to. Convert the phrase into its symbol before doing any algebra, then solve the inequation by the ordinary method, and finally re-read the question to check whether it wanted the region, the least integer or the greatest integer. That last rereading is not optional: a correct solution set with the wrong element picked from it still scores nothing."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The perimeter of a rectangle is at most 60 cm and its length is 8 cm. Express the condition on the breadth as an inequation and solve it.",
+              "note": "Perimeter = 2(length + breadth), so 2(8 + b) <= 60, that is 8 + b <= 30, giving b <= 22. Since breadth is positive the practical solution is 0 < b <= 22 cm."
+            },
+            {
+              "text": "Ravi is at least 18 years old. In terms of x for his present age, write and solve the inequation.",
+              "note": "At least translates directly to x >= 18, so the solution set is all real x greater than or equal to 18, and the integer solutions begin 18, 19, 20 and continue."
+            },
+            {
+              "text": "Find all integers x for which x/2 - 3 < 2 and x is positive.",
+              "note": "Add 3: x/2 < 5. Multiply by 2: x < 10. Together with positivity the integers are 1 through 9, nine solutions in all."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The rectangle example shows the extra condition that word problems always carry. Algebra alone gives breadth at most twenty two, but a breadth of zero or of a negative number does not describe a rectangle, so the physical meaning of the variable adds a lower bound that the arithmetic did not produce. When a problem involves a length, an age, a count or a sum of money, check whether positivity or some other natural bound is required, and state it as part of your solution rather than leaving it implicit."
+        }
+      ]
+    },
+    {
+      "id": "setting-out-and-checking",
+      "title": "Setting out and checking an inequation answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A well presented inequation answer has a fixed shape and every part of it earns credit. State the original statement. Show each transposition on its own line, with the sense either carried across unchanged or reversed and marked as reversed. Name the coefficient when you divide, so the sign decision is visible. Give the solution in set notation with the domain stated. And if the question asked for integers or for a number line, supply that too. The checking stage is separate and mechanical: take a value from your region, a boundary value if one exists, and a value just outside the region, and confirm the original statement behaves as predicted in each case."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write each transposition on its own line and mark every reversal of the sense explicitly.",
+            "Give the answer in set notation, with the domain of x stated.",
+            "Include the endpoint exactly when the original inequality carries an equality.",
+            "Substitute three values: one inside the region, one boundary, one outside.",
+            "Supply integers or a number line whenever the question asks for them, not just the region.",
+            "Check that a chain ends with its smaller endpoint on the left."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Checking the solution of 5 - 3x > 2",
+          "columns": ["Test value", "In the region x < 1", "5 - 3x", "Statement 5 - 3x > 2", "Verdict"],
+          "rows": [
+            ["x = 0", "yes", "5", "5 > 2 true", "consistent"],
+            ["x = 1", "no, boundary", "2", "2 > 2 false", "excluded, correct"],
+            ["x = 2", "no", "-1", "-1 > 2 false", "excluded, correct"],
+            ["x = -3", "yes", "14", "14 > 2 true", "consistent"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The boundary row of that table is the one to remember. The value one does not satisfy the strict inequality, since two is not greater than two, which is exactly what the solution x less than one predicts, and that agreement between the check and the endpoint treatment is the strongest evidence that both the algebra and the sense are right. When the original inequality is weak, the boundary row should instead confirm that the statement holds with equality, which is what justifies the solid dot on the number line."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from recall of the properties through single and compound inequations to set notation, integer solutions and word problems. Work each one by transposing first and dividing last, mark every reversal of the sense, and apply the three-value check before moving on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Transpose by addition or subtraction, then divide, deciding the sense from the sign of the coefficient.",
+            "Write the answer as a set with its domain, unless the question asks for integers or a picture.",
+            "Reverse every sense in a chain when dividing by a negative number.",
+            "On a number line use a solid dot for an included endpoint and a hollow one for an excluded endpoint."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "The solution of -2 < x <= 3 drawn on the number line",
+      "description": "A horizontal number line with integer tick marks from minus five to five and the origin labelled zero. At minus two there is a hollow dot, from which a heavy line runs rightwards to three, where there is a solid filled dot. The heavy line does not extend past either endpoint. Below the hollow dot the caption reads excluded, and below the solid dot the caption reads included. The region between the two dots is shaded to show that every value inside belongs to the solution set.",
+      "labels": ["Hollow dot at -2", "Solid dot at 3", "Included region", "Excluded endpoint", "Origin"]
+    },
+    {
+      "caption": "Reversal when dividing both sides by a negative number",
+      "description": "Two number lines stacked one above the other, both showing the same scale. The upper line is labelled after adding five and carries a heavy ray starting at twelve and running leftwards, marked three x is less than twelve. The lower line is labelled after dividing by minus three and carries a heavy ray starting at four and running rightwards, marked x is greater than four. A curved arrow joins the endpoint twelve on the upper line to the endpoint four on the lower line, and a second curved arrow joins the leftwards direction to the rightwards direction, both annotated with the word reversed.",
+      "labels": ["3x < 12", "x > 4", "Divide by -3", "Sense reversed", "Endpoint mapping"]
+    }
+  ],
+  "keyPoints": [
+    "Adding or subtracting the same quantity on both sides never changes the sense of an inequation.",
+    "Multiplying or dividing by a positive number also leaves the sense unchanged.",
+    "Multiplying or dividing by a negative number reverses the sense, and every sense in a chain must be reversed together.",
+    "A solution set is a region; a single value answers only a question about integers or a specific element.",
+    "A solid dot marks an included endpoint and a hollow dot marks an excluded one.",
+    "Set notation states the variable, the condition and the domain of the variable.",
+    "For a chain, rewrite the answer with the smaller endpoint on the left before reading off the region.",
+    "Check with one value inside the region, the boundary value and one value outside it."
+  ],
+  "examFocus": [
+    "Write each transposition on a separate line and mark every reversal of the sense explicitly, so the reasoning survives an arithmetic slip.",
+    "Give the answer in set notation with the domain stated; x less than four alone is not a solution set.",
+    "Draw endpoints before rays: a solid dot for an included endpoint, a hollow one for an excluded endpoint, both labelled with their values.",
+    "Read the final question word carefully: region, least integer and greatest integer are three different answers.",
+    "In a word problem, translate at least and at most into symbols before doing any algebra, and add any natural bound such as positivity."
+  ],
+  "vocabulary": [
+    { "word": "Inequation", "meaning": "A statement that two expressions stand in a <, >, <= or >= relation rather than equality." },
+    { "word": "Sense", "meaning": "The direction of an inequality, reversed by multiplication or division by a negative number." },
+    { "word": "Solution set", "meaning": "All values of the variable that make the inequation true, written in set notation." },
+    { "word": "Strict inequality", "meaning": "One using < or >, which excludes the boundary value from the solution." },
+    { "word": "Compound inequation", "meaning": "Two inequalities sharing a middle expression, solved by treating all three sections together." },
+    { "word": "Domain", "meaning": "The type of value x is permitted to take, such as real numbers or integers." },
+    { "word": "Integer solutions", "meaning": "The whole numbers lying inside the solution region, positive, negative or zero." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-ineq-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Multiplying both sides of an inequation by a negative number:",
+      "options": [
+        "Reverses the sense of the inequality",
+        "Leaves the sense unchanged",
+        "Makes the inequation an equation",
+        "Has no effect on the solution set"
+      ],
+      "correctIndex": 0,
+      "answer": "Reverses the sense of the inequality",
+      "explanation": "Multiplying by a negative reflects the number line through the origin, interchanging left and right, so the ordering is inverted. Unless the sign is reversed at the same moment the resulting statement describes a different set, and substituting a value immediately exposes the error.",
+      "commonMistake": "Dividing by a negative coefficient and leaving the sign alone, which inverts the answer."
+    },
+    {
+      "id": "icse-10-math-q-ineq-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solution set of 3x - 5 < 7 is:",
+      "options": [
+        "All real x less than 4",
+        "All real x greater than 4",
+        "x equal to 4",
+        "All real x less than or equal to 4"
+      ],
+      "correctIndex": 0,
+      "answer": "All real x less than 4",
+      "explanation": "Add 5 to both sides to get 3x < 12, then divide by the positive number 3 without reversing anything, giving x < 4. The inequality is strict, so 4 itself is excluded, which is why the option containing an equality is wrong.",
+      "commonMistake": "Including the endpoint when the original inequality is strict."
+    },
+    {
+      "id": "icse-10-math-q-ineq-03",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solving -2x <= 6 gives x ______ -3.",
+      "answer": "greater than or equal to",
+      "explanation": "Divide both sides by -2, a negative number, so the sense reverses from less than or equal to to greater than or equal to. The right side becomes 6 divided by -2, that is -3, so x is greater than or equal to -3. Substituting x = 0 confirms it, since 0 <= 6 holds.",
+      "commonMistake": "Dividing by -2 and writing x <= -3, which describes a set that makes the original statement false."
+    },
+    {
+      "id": "icse-10-math-q-ineq-04",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "On a number line, an endpoint that belongs to the solution set is marked with a ______ dot.",
+      "answer": "solid filled",
+      "explanation": "A weak inequality, carrying a less than or equal to or a greater than or equal to sign, includes its boundary, and the solid dot signals inclusion. A hollow dot marks the opposite case, where a strict inequality excludes the endpoint and the region begins just beyond it.",
+      "commonMistake": "Using the same style of dot at both ends of a compound region when the two endpoints behave differently."
+    },
+    {
+      "id": "icse-10-math-q-ineq-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 2x + 3 > 11 and write the solution in set notation.",
+      "answer": "The set of all real x such that x > 4",
+      "explanation": "Subtract 3 from both sides: 2x > 8. Divide by the positive number 2, keeping the sense: x > 4. In set notation this is written as all x with x greater than 4, where x is a real number. The inequality is strict, so 4 is excluded and the number line would show a hollow dot with a ray to the right.",
+      "commonMistake": "Answering x equal to four, which is a single value and not a region."
+    },
+    {
+      "id": "icse-10-math-q-ineq-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 7 - 4x >= 19 and verify your answer.",
+      "answer": "All real x less than or equal to -3",
+      "explanation": "Subtract 7 from both sides: -4x >= 12. Divide by -4, reversing the sense: x <= -3. Verification: put x = -3, giving 7 - 4(-3) = 7 + 12 = 19, and 19 >= 19 is true, so the endpoint is correctly included. Put x = -4, giving 7 + 16 = 23 >= 19, also true; put x = 0, giving 7 >= 19, false, so values to the right are correctly excluded.",
+      "commonMistake": "Dividing by -4 without reversing, which gives x >= -3 and includes values that fail the original test."
+    },
+    {
+      "id": "icse-10-math-q-ineq-07",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve the compound inequation -3 < 2x + 1 <= 7, give the answer in set notation, and state its integer solutions.",
+      "answer": "All real x with -2 < x <= 3; integer solutions -1, 0, 1, 2, 3",
+      "explanation": "Subtract 1 throughout: -4 < 2x <= 6. Divide throughout by the positive number 2: -2 < x <= 3. In set notation this is all real x with minus 2 less than x and x at most 3. The integers strictly greater than -2 and at most 3 are -1, 0, 1, 2 and 3, five in all. On a number line the left endpoint is hollow and the right endpoint is solid.",
+      "commonMistake": "Including -2 in the integer list, when the left inequality is strict and excludes it."
+    },
+    {
+      "id": "icse-10-math-q-ineq-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve -12 < -4x <= 8 and justify each step.",
+      "answer": "All real x with -2 <= x < 3",
+      "explanation": "Divide throughout by -4, which is negative, so both senses reverse: 3 > x >= -2, that is -2 <= x < 3 when rewritten left to right. Check with x = 0, giving -12 < 0 <= 8, which is true; with x = -2, giving -12 < 8 <= 8, true, so -2 is included; and with x = 3, giving -12 < -12 <= 8, false, because the first part fails, so 3 is correctly excluded.",
+      "commonMistake": "Reversing only one of the two signs, which leaves an impossible chain or a set far wider than the truth."
+    },
+    {
+      "id": "icse-10-math-q-ineq-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The integer solutions of -2 < x <= 3 are:",
+      "options": [
+        "-1, 0, 1, 2, 3",
+        "-2, -1, 0, 1, 2, 3",
+        "0, 1, 2, 3",
+        "1, 2, 3"
+      ],
+      "correctIndex": 0,
+      "answer": "-1, 0, 1, 2, 3",
+      "explanation": "The lower bound is strict, so -2 itself is excluded and the list begins at -1. The upper bound carries an equality, so 3 is included. Counting gives five integers, which matches the rule for a half-open interval of this length: the difference of the endpoints, 3 minus -2, is 5, and exactly one endpoint is included.",
+      "commonMistake": "Including -2 because it appears in the statement, ignoring that the inequality against it is strict."
+    },
+    {
+      "id": "icse-10-math-q-ineq-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the least positive integer that satisfies 3x - 7 > 5.",
+      "answer": "The least positive integer solution is 5",
+      "explanation": "Add 7 to both sides: 3x > 12. Divide by the positive number 3: x > 4. The integers strictly greater than 4 begin with 5, so the least positive integer solution is 5. Checking, 3 x 5 - 7 = 15 - 7 = 8, and 8 > 5 holds, whereas x = 4 gives 12 - 7 = 5, which is not greater than 5.",
+      "commonMistake": "Reporting 4, the boundary of the region, which does not satisfy the strict inequality."
+    },
+    {
+      "id": "icse-10-math-q-ineq-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the greatest integer that satisfies 5 - 2x >= 1.",
+      "answer": "The greatest integer solution is 2",
+      "explanation": "Subtract 5 from both sides: -2x >= -4. Divide by -2, reversing the sense: x <= 2. The integers at most 2 run upwards through 2, so the greatest is 2. Checking, 5 - 2(2) = 5 - 4 = 1, and 1 >= 1 holds with equality, confirming that 2 itself is admissible.",
+      "commonMistake": "Reporting 3, which fails since 5 - 6 = -1 is not at least 1, or reversing the sign incorrectly and getting x >= 2."
+    },
+    {
+      "id": "icse-10-math-q-ineq-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find all integers x satisfying both x/2 - 3 < 2 and x > 0, and state how many there are.",
+      "answer": "The integers 1 through 9, nine in all",
+      "explanation": "From the first part, add 3 to get x/2 < 5, then multiply by the positive number 2 to get x < 10. Combining with x > 0 gives the region 0 < x < 10. The integers in that region are 1, 2, 3, 4, 5, 6, 7, 8 and 9, which are nine in number; the count is the difference of the two excluded endpoints, 10 minus 0 is 10, minus one because neither endpoint is included, giving 9.",
+      "commonMistake": "Including 10 or 0, when both inequalities are strict and exclude their boundaries."
+    },
+    {
+      "id": "icse-10-math-q-ineq-13",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve -6 <= 3x - 9 < 3, write the solution in set notation, and draw an accurate description of its representation on a number line.",
+      "answer": "All real x with 1 <= x < 4; solid dot at 1, hollow dot at 4, segment between",
+      "explanation": "Add 9 throughout: -6 + 9 = 3 and 3 + 9 = 12, so 3 <= 3x < 12. Divide throughout by the positive number 3: 1 <= x < 4. In set notation this is all real x with one less than or equal to x and x less than 4. On the number line, put a solid filled dot at 1 because the equality includes it, a hollow dot at 4 because the inequality is strict, and shade the segment between them. The integers in the region are 1, 2 and 3, three of them, which matches the rule that a region from 1 to 4 with one endpoint included holds 4 - 1 = 3 values.",
+      "commonMistake": "Drawing both endpoints solid, which wrongly admits 4 into the solution set."
+    },
+    {
+      "id": "icse-10-math-q-ineq-14",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The phrase at most translates into which inequality symbol?",
+      "options": ["Less than or equal to", "Greater than or equal to", "Strictly less than", "Strictly greater than"],
+      "correctIndex": 0,
+      "answer": "Less than or equal to",
+      "explanation": "At most names an upper bound that may be reached, so it is a weak inequality and the boundary belongs to the solution set. By contrast more than is strict and excludes its boundary, while at least is a lower bound that may be reached and becomes greater than or equal to.",
+      "commonMistake": "Using a strict symbol for at most, which wrongly excludes the stated value."
+    },
+    {
+      "id": "icse-10-math-q-ineq-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solving (5x / 3) - 2 < 3 gives x ______ 3.",
+      "answer": "less than",
+      "explanation": "Add 2 to both sides: 5x / 3 < 5. Multiply by 3, a positive number, so the sense is unchanged: 5x < 15. Divide by 5: x < 3. Both operations used positive multipliers, so the sense never reversed. Check: x = 0 gives 0 - 2 = -2, which is less than 3, true; x = 3 gives 5 - 2 = 3, and 3 < 3 is false, confirming the endpoint is excluded.",
+      "commonMistake": "Reversing the sense out of habit, which would give x greater than 3 and include values that fail the original test."
+    },
+    {
+      "id": "icse-10-math-q-ineq-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the difference between solving 3x - 5 < 7 for real x and finding its positive integer solutions.",
+      "answer": "For real x the answer is the region x < 4, an infinite set; the positive integer solutions are the finite list 1, 2, 3",
+      "explanation": "Solving for real x asks for every value in a continuum, so the answer must be written as a set, all real x less than 4, and drawn as a ray with a hollow endpoint. Restricting to positive integers asks only for the whole numbers inside that region, which are 1, 2 and 3, three values. The region excludes 4 in both readings, since the original inequality is strict.",
+      "commonMistake": "Giving the finite list when the question asked for the set, or vice versa."
+    },
+    {
+      "id": "icse-10-math-q-ineq-17",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "The breadth of a rectangle must be positive and its perimeter must be at most 60 cm, given a length of 8 cm. Form an inequation, solve it, and state the number of whole-number values the breadth can take in centimetres.",
+      "answer": "0 < b <= 22, giving 22 whole-number values",
+      "explanation": "Perimeter = 2(length + breadth) = 2(8 + b), so 2(8 + b) <= 60, that is 8 + b <= 30, giving b <= 22. Positivity adds b > 0, so the region is 0 < b <= 22 cm. The integers in this half-open region are 1 through 22, and the count is 22: the difference of the endpoints, 22 minus 0, is 22, and one endpoint is included while the other is not, so no further adjustment is needed. Check b = 22, giving a perimeter of 2 x 30 = 60 cm, which meets the bound exactly.",
+      "commonMistake": "Quoting b <= 22 alone, which admits zero and negative breadths that describe no rectangle."
+    },
+    {
+      "id": "icse-10-math-q-ineq-18",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The solution of -12 < -4x <= 8, written with the smaller endpoint on the left, is:",
+      "options": [
+        "-2 <= x < 3",
+        "-3 < x <= 2",
+        "2 < x <= 3",
+        "-3 <= x < -2"
+      ],
+      "correctIndex": 0,
+      "answer": "-2 <= x < 3",
+      "explanation": "Dividing throughout by the negative number -4 reverses both senses, turning -12 < -4x <= 8 into 3 > x >= -2, which is -2 <= x < 3 once written conventionally. Substituting x = -2 gives -12 < 8 <= 8, true, and x = 3 gives -12 < -12 <= 8, false, confirming that -2 is included and 3 is not.",
+      "commonMistake": "Reversing only one sense, which produces a chain whose left endpoint is larger than its right."
+    },
+    {
+      "id": "icse-10-math-q-ineq-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why adding the same number to both sides of an inequation never changes its sense, whereas multiplying by a negative number does.",
+      "answer": "Addition translates the number line, preserving the left-to-right order of every pair of points; multiplication by a negative reflects the line through the origin, interchanging left and right and hence inverting the order",
+      "explanation": "A translation moves every point by the same distance in the same direction, so if a lay to the left of b before the shift, a plus c still lies to the left of b plus c, and the inequality stands unchanged. A reflection through the origin sends a to minus a and b to minus b, and now the larger of the original pair becomes the smaller of the images, so the sense must be reversed to keep the statement true. Scaling by a positive number is a stretch, which preserves order like a translation.",
+      "commonMistake": "Saying that negative multiplication changes the numbers but not explaining that it reverses their relative positions."
+    },
+    {
+      "id": "icse-10-math-q-ineq-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 4x + 9 >= 5 and 3x - 1 < 8 separately, then find the set of integers satisfying both, and draw the overlapping region.",
+      "answer": "First gives x >= -1, second gives x < 3, so the common integers are -1, 0, 1, 2",
+      "explanation": "From 4x + 9 >= 5 subtract 9 to get 4x >= -4, then divide by 4 to get x >= -1. From 3x - 1 < 8 add 1 to get 3x < 9, then divide by 3 to get x < 3. The overlap is -1 <= x < 3, and the integers inside it are -1, 0, 1 and 2, four values. On a number line the region is a segment with a solid dot at -1 and a hollow dot at 3.",
+      "commonMistake": "Finding one of the two regions and stopping, instead of taking the values common to both."
+    },
+    {
+      "id": "icse-10-math-q-ineq-21",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The integers lying in the region 3 <= x < 8 are 3, 4, 5, 6 and 7, a total of ______.",
+      "answer": "5 integers",
+      "explanation": "The left endpoint is included and the right is excluded, so the list starts at 3 and stops at 7. Counting gives 3, 4, 5, 6, 7, which is five values. Equivalently the difference of the endpoints is 8 minus 3 = 5, and with exactly one endpoint included the count equals that difference.",
+      "commonMistake": "Reporting 6 by including 8, which the strict inequality excludes."
+    },
+    {
+      "id": "icse-10-math-q-ineq-22",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve (2x - 1)/3 + 1 <= (x + 5)/2 for real x, showing every step.",
+      "answer": "All real x less than or equal to 11",
+      "explanation": "Multiply throughout by 6, the least common multiple of 3 and 2 and a positive number, so the sense is unchanged: 2(2x - 1) + 6 <= 3(x + 5). Expand: 4x - 2 + 6 <= 3x + 15, that is 4x + 4 <= 3x + 15. Subtract 3x from both sides: x + 4 <= 15. Subtract 4: x <= 11. Check with x = 11: the left side is (22 - 1)/3 + 1 = 7 + 1 = 8 and the right side is 16/2 = 8, so 8 <= 8 holds and the endpoint is correctly included. Check with x = 12: left side (24 - 1)/3 + 1 = 23/3 + 1 = 8.666... and right side 17/2 = 8.5, so 8.666... <= 8.5 is false, confirming values above 11 are excluded.",
+      "commonMistake": "Expanding one side and forgetting to multiply the constant term, which shifts the answer by several units."
+    },
+    {
+      "id": "icse-10-math-q-ineq-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Given that the solution of an inequation is x >= -1, which of these numbers is a solution?",
+      "options": ["0 is a solution", "-2 is a solution", "-1.5 is a solution", "-4 is a solution"],
+      "correctIndex": 0,
+      "answer": "0 is a solution",
+      "explanation": "The solution set contains every real number greater than or equal to -1, and 0 lies to the right of -1 on the number line, so it belongs. The other three values are all to the left of -1 and therefore outside the region: -2, -1.5 and -4 are each less than -1.",
+      "commonMistake": "Choosing -1.5 because it is close to the endpoint, when proximity has nothing to do with membership."
+    }
+  ]
+}

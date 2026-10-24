@@ -1,6 +1,6 @@
 import { getBoards, getSubjects, getPublishedChapters, getChapter, getBoardPrepCounts } from '../src/lib/boardprepCurriculum.mjs';
 
-const expected = { boards: 3, classes: 6, subjects: 75, chapters: 72, questions: 1176 };
+const expected = { boards: 3, classes: 6, subjects: 75, chapters: 83, questions: 1307 };
 const counts = getBoardPrepCounts();
 const errors = [];
 for (const [key, value] of Object.entries(expected)) if (counts[key] !== value) errors.push(`${key}: expected ${value}, found ${counts[key]}`);

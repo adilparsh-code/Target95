@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-ap",
+  "title": "Arithmetic Progression",
+  "kind": "mathematics",
+  "tagline": "The nth term, the sum of n terms, and word problems whose answers increase by a fixed step.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "An arithmetic progression is a sequence in which each term after the first differs from the one before by the same fixed amount, called the common difference. Because the step never varies, the whole sequence is determined by two numbers, the first term and the common difference, and two formulas carry everything else. One counts forward to a chosen term: the nth term equals the first term plus n minus one times the step. The other collects: the sum of n terms equals n over two times the bracket of twice the first term plus n minus one times the step, which is most easily remembered as pairing the sequence with its reverse. This chapter builds both formulas from the structure of the sequence, applies them in every direction, and closes with the word problems that make the subject useful.",
+    "facts": [
+      { "label": "General term", "value": "a, a + d, a + 2d, a + 3d and onwards, with d the common difference" },
+      { "label": "nth term", "value": "a n = a + (n - 1) d, which counts n minus one steps from the first term" },
+      { "label": "Sum of n terms", "value": "S n = n / 2 x [2a + (n - 1) d] = n / 2 x (first term + last term)" },
+      { "label": "Special sums", "value": "The sum of the first n natural numbers is n(n + 1)/2, and of the first n odd numbers is n squared" }
+    ]
+  },
+  "learningOutcomes": [
+    "Recognise an arithmetic progression from a list of terms and identify its first term and common difference.",
+    "Apply the nth term formula to find any term, and to find how many terms a progression has.",
+    "Derive and apply the sum formula for the first n terms of an arithmetic progression.",
+    "Recover the first term, the common difference or the number of terms from partial information about a progression.",
+    "Insert a required number of arithmetic means between two given numbers.",
+    "Model and solve a word problem whose quantity changes by a fixed amount at each step."
+  ],
+  "learn": [
+    {
+      "id": "what-a-progression-is",
+      "title": "What makes a progression arithmetic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A progression is simply a list of numbers written in a definite order, and the interest lies in the rule that generates it. In an arithmetic progression that rule is a constant step: subtract any term from the one after it and the answer is always the same number, called the common difference and written d. The first term is written a, and once a and d are known the entire infinite sequence is fixed, because every later term is reached by adding d one more time. Thus seven, ten, thirteen, sixteen is an arithmetic progression with a equal to seven and d equal to three, and its thousandth term is available on demand without listing anything."
+        },
+        {
+          "type": "paragraph",
+          "text": "A negative common difference is entirely ordinary and produces a sequence that decreases, for instance seventeen, twelve, seven, two, minus three, with d equal to minus five. Candidates sometimes hesitate at a negative step because the word difference sounds positive, but d is a signed quantity and its sign is simply the direction of travel. Equally, a common difference of zero is permitted and yields a constant sequence, though such a case is rarely examined. The reliable test for whether a list is arithmetic is to compute two successive differences and confirm they agree; a single disagreement disproves the progression immediately."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Sequence", "meaning": "Numbers arranged in a specific order, each with a definite position." },
+            { "term": "Term", "meaning": "One member of the sequence, addressed by its position; the nth term is the one in position n." },
+            { "term": "Common difference", "meaning": "The fixed amount added to each term to obtain the next, written d." },
+            { "term": "First term", "meaning": "The opening value of the progression, written a." },
+            { "term": "Arithmetic mean", "meaning": "A number inserted between two others so that the three stand in arithmetic progression." },
+            { "term": "Partial sum", "meaning": "The total of the first n terms of a progression, written S n." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Compute two successive differences to decide whether a list is arithmetic.",
+            "d is signed: a negative d makes the progression decrease.",
+            "Once a and d are known, every term of the progression is determined.",
+            "A progression with d equal to zero is constant and still satisfies the definition."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-nth-term-formula",
+      "title": "Building the nth term formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first term is a. The second is a plus one step of d. The third is a plus two steps, and each subsequent term adds one further step, so the position of a term and the number of steps it embodies differ by exactly one: to reach term number n you start at a and add d a total of n minus one times. That gives the formula an equals a plus n minus one times d, and the reason for the n minus one is worth holding onto rather than memorising, because forgetting it is the commonest error in the chapter. The formula is a linear function of n, which means the terms lie at equal intervals on a number line and the sequence grows without bound unless d happens to be zero."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the tenth term of the progression with a equal to 3 and d equal to 5.",
+              "note": "a ten = 3 + (10 - 1) x 5 = 3 + 45 = 48. The nine steps are five each, giving forty five, added to the opening three."
+            },
+            {
+              "text": "Find the twentieth term of the progression with a equal to 7 and d equal to minus 3.",
+              "note": "a twenty = 7 + 19 x (-3) = 7 - 57 = -50. The negative step runs the sequence downwards, so the term is negative."
+            },
+            {
+              "text": "Which term of 3, 8, 13, 18 is equal to 108?",
+              "note": "Here a = 3 and d = 5, so solve 3 + (n - 1) x 5 = 108. Then (n - 1) x 5 = 105, giving n - 1 = 21 and n = 22."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The first ten terms of the progression with a equal to 3 and d equal to 5",
+          "columns": ["Position n", "Steps of d added", "Term", "Check: previous plus d"],
+          "rows": [
+            ["1", "0", "3", "starting value"],
+            ["2", "1", "8", "3 + 5"],
+            ["3", "2", "13", "8 + 5"],
+            ["4", "3", "18", "13 + 5"],
+            ["5", "4", "23", "18 + 5"],
+            ["6", "5", "28", "23 + 5"],
+            ["7", "6", "33", "28 + 5"],
+            ["8", "7", "38", "33 + 5"],
+            ["9", "8", "43", "38 + 5"],
+            ["10", "9", "48", "43 + 5"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table also offers a second route to any term that is often quicker in the head: rather than jumping from the first term with a single multiplication, step from the nearest tabulated term by the required number of differences. From the eighth term, thirty eight, the tenth is two steps further, so thirty eight plus two fives gives forty eight. Both routes must agree, and using the second as a check on the first costs one line. When the term sought is far out, the formula wins; when it is near a term you already have, stepping wins."
+        }
+      ]
+    },
+    {
+      "id": "finding-a-and-d",
+      "title": "Recovering a and d from partial information",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Many problems hand you two pieces of information about a progression whose a and d are not given, and the task is to recover them. Since each piece of information is linear in a and d, two pieces always give two linear equations, which are then solved by elimination. The efficient form is to write both equations with the terms aligned so that a sits above a and d above d, then subtract; the a cancels and d falls out at once. Back-substitution gives a. This is the same elimination you already use for simultaneous equations, and the only new ingredient is the nth term formula that produces the equations."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The fourth term of an arithmetic progression is 14 and the ninth term is 39. Find a and d.",
+              "note": "Fourth term: a + 3d = 14. Ninth term: a + 8d = 39. Subtracting gives 5d = 25, so d = 5, and then a = 14 - 15 = -1. Check the ninth term: -1 + 8 x 5 = 39."
+            },
+            {
+              "text": "The third term of a progression is 12 and the seventh term is 36. Find the first term and the common difference.",
+              "note": "a + 2d = 12 and a + 6d = 36. Subtracting gives 4d = 24, so d = 6 and a = 12 - 12 = 0. The progression is 0, 6, 12, 18, 24, 30, 36, whose seventh term is 36 as required."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Notice in the second example that the first term came out as zero, which is perfectly legitimate and sometimes surprising to candidates who expect a to be positive. Nothing in the definition requires a positive opening value, and a progression may begin anywhere on the number line. What matters is that the differences are constant, and 6, 6, 6 confirms that here. When a problem reports unusually round numbers among its terms, it is often because a is zero or small, and recognising this saves a moment of doubt about whether the arithmetic is correct."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Translate each given term into a linear equation in a and d.",
+            "Align the equations and subtract to eliminate a at once.",
+            "Back-substitute to recover a, then verify with the second given term.",
+            "A first term of zero is an ordinary result, not an error."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-sum-formula",
+      "title": "Building the sum formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Adding the terms of an arithmetic progression one at a time works but does not scale, and the formula that replaces it comes from a neat observation. Write the sum forwards, then write the same sum backwards beneath it. Each vertical pair then adds to the same total, because the smallest term meets the largest, the second smallest meets the second largest, and so on, always giving the first term plus the last. There are n such pairs, so twice the sum equals n times the bracket containing the first and last terms, and the sum is n over two times that bracket. Substituting the nth term for the last term gives the familiar second form."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the sum of the first ten terms of the progression with a equal to 3 and d equal to 5.",
+              "note": "The tenth term is 48, so S ten = 10 / 2 x (3 + 48) = 5 x 51 = 255. Adding the ten terms directly, 3 + 8 + 13 + 18 + 23 + 28 + 33 + 38 + 43 + 48, also gives 255."
+            },
+            {
+              "text": "Find the sum of the first twenty terms of the progression with a equal to 7 and d equal to minus 3.",
+              "note": "The twentieth term is -50, so S twenty = 20 / 2 x (7 - 50) = 10 x (-43) = -430. The alternative form gives 10 x [14 + 19 x (-3)] = 10 x (14 - 57) = 10 x (-43) = -430."
+            },
+            {
+              "text": "Find the sum of the first fifty natural numbers.",
+              "note": "This is an arithmetic progression with a = 1, d = 1 and n = 50, so the sum is 50 / 2 x (1 + 50) = 25 x 51 = 1275."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The pairing argument for the sum of the first six terms of 3, 8, 13, 18, 23, 28",
+          "columns": ["Forwards", "Backwards", "Pair total"],
+          "rows": [
+            ["3", "28", "31"],
+            ["8", "23", "31"],
+            ["13", "18", "31"],
+            ["sum of forwards: 93", "sum of backwards: 93", "three pairs of 31 = 93"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table makes the mechanism visible: three pairs, each totalling thirty one, give ninety three, which is twice the sum of the six terms divided appropriately, since ninety three divided by two is not a whole number here. The subtlety is that with an even number of terms every pair appears twice across the two rows, so the sum of one row is already the answer. For an odd number of terms the middle term pairs with itself, and the same conclusion follows. Either way, the formula n over two times the bracket of first plus last always reports the correct single sum."
+        }
+      ]
+    },
+    {
+      "id": "sums-that-appear-often",
+      "title": "Two sums worth remembering",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two progressions occur so often that their sums are worth carrying as facts. The first is the natural numbers, one, two, three upwards, whose sum to n is n times n plus one over two; this is just the general formula with a and d both equal to one. The second is the odd numbers, one, three, five upwards, whose sum to n terms is exactly n squared, a result that is both surprising and easy to verify on small cases. Knowing these removes the formula from questions that would otherwise require substitution, and they double as checks on any general computation you perform."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the sum of the first thirty natural numbers.",
+              "note": "Using n(n + 1)/2 with n = 30: 30 x 31 / 2 = 465."
+            },
+            {
+              "text": "Find the sum of the first twelve odd numbers, and verify it is a square.",
+              "note": "The sum is 12 squared = 144. Listing confirms: 1 + 3 + 5 + 7 + 9 + 11 + 13 + 15 + 17 + 19 + 21 + 23, which adds in pairs of twenty four, six pairs giving 144."
+            },
+            {
+              "text": "Find the sum of the integers from 21 to 40 inclusive.",
+              "note": "Take the sum to 40 and subtract the sum to 20: 40 x 41 / 2 = 820 and 20 x 21 / 2 = 210, so the difference is 610."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Standard sums and their checks",
+          "columns": ["Sum", "Formula", "Value at the stated n", "Direct check"],
+          "rows": [
+            ["First n natural numbers", "n(n + 1)/2", "n = 50 gives 1275", "pairs of 51, twenty five of them"],
+            ["First n odd numbers", "n squared", "n = 12 gives 144", "six pairs of 24"],
+            ["First n even numbers", "n(n + 1)", "n = 10 gives 110", "two times the natural sum"],
+            ["Integers from p to q", "sum to q minus sum to p minus one", "21 to 40 gives 610", "820 - 210"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The fourth row shows the subtraction technique in its most useful form. Rather than fitting a progression whose first term is awkward, compute two friendly sums and take the difference; the endpoints work themselves out because subtracting the sum to twenty removes everything up to and including twenty, leaving twenty one onwards. This method is worth reaching for whenever a range of integers is requested with both ends included, and it also handles ranges whose first term is not one without any extra care."
+        }
+      ]
+    },
+    {
+      "id": "arithmetic-means",
+      "title": "Inserting arithmetic means",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A number inserted between two others so that the three stand in arithmetic progression is called an arithmetic mean of those two, and inserting several at once amounts to building a progression that begins with the first given number and ends with the second. The construction is simple: the gap between the two ends is divided into the required number of equal steps, so if m means are wanted then the progression has m plus two terms in total and the common difference equals the end minus the start divided by m plus one. Once d is known the intermediate terms follow by repeated addition."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Insert four arithmetic means between 6 and 24.",
+              "note": "Five equal steps separate the ends, so d = (24 - 6) / 5 = 18 / 5 = 3.6. The means are 9.6, 13.2, 16.8 and 20.4, and adding 3.6 to 20.4 returns 24."
+            },
+            {
+              "text": "Find the arithmetic mean of 7 and 17.",
+              "note": "One mean gives two equal steps, so d = (17 - 7) / 2 = 5. The mean is 7 + 5 = 12, which also equals (7 + 17) / 2 = 12."
+            },
+            {
+              "text": "Insert two arithmetic means between 5 and 20.",
+              "note": "Three equal steps give d = (20 - 5) / 3 = 5. The means are 10 and 15, and 15 plus 5 returns 20."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The single-mean case deserves its own note, because the arithmetic mean of two numbers is simply their average and this is the fastest way to obtain it whenever a question asks for one. The connection with the general construction is that one mean creates two steps, so the mean sits halfway and equals the average. For larger numbers of means the averaging shortcut no longer applies directly and the common difference method takes over, but the two always agree when the count of means is one. Recording why the denominator is m plus one, rather than m, prevents the most frequent setup error."
+        }
+      ]
+    },
+    {
+      "id": "word-problems",
+      "title": "Word problems that form a progression",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A word problem belongs to this chapter exactly when the quantity of interest changes by a fixed amount at each step. Savings that rise by a constant sum each month, rows of bricks that gain a constant number each time, audience figures that fall by a constant amount, and stack heights that grow by a constant thickness are all progressions in disguise. The translation has three parts: identify what plays the role of the first term, identify what plays the role of the common difference, and decide whether the question asks for a particular term or for a total. Naming these three before any arithmetic prevents the common failure of using the wrong quantity as d."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A man deposits 50 rupees in the first month, 60 in the second, and continues in this way for a year. Find his total saving.",
+              "note": "Here a = 50, d = 10 and n = 12. The twelfth deposit is 50 + 11 x 10 = 160, and the total is 12 / 2 x (50 + 160) = 6 x 210 = 1260 rupees."
+            },
+            {
+              "text": "A stack of bricks has 10 bricks in the top row and 2 more in each successive row. How many bricks in 20 rows, and how many in the bottom row?",
+              "note": "a = 10, d = 2, n = 20. Bottom row = 10 + 19 x 2 = 48 bricks. Total = 20 / 2 x (10 + 48) = 10 x 58 = 580 bricks."
+            },
+            {
+              "text": "The first term of a progression is 5 and the common difference is 3. Find the hundredth term.",
+              "note": "a one hundred = 5 + 99 x 3 = 5 + 297 = 302."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identify a, d and n from the wording before computing.",
+            "Decide whether the question wants a particular term or the sum of many terms.",
+            "Check the direction: a negative d means the quantity is decreasing.",
+            "State the answer with its unit and as a sentence, since the question is about a real quantity."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The brick example shows why both formulas are often needed. The question asks two different things, the size of the last row and the total across all rows, and each has its own formula. Candidates who compute only one answer half-solve the problem and lose the remaining marks. Reading the question for every quantity requested, and writing a small list of them at the top of the working, is a cheap habit that removes this risk entirely."
+        }
+      ]
+    },
+    {
+      "id": "sums-with-a-given-number-of-terms",
+      "title": "Finding how many terms a sum requires",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A recurring variation asks how many terms of a progression must be taken to reach a stated total. Substituting into the sum formula produces an equation in n alone, because a and d are usually given, and that equation is quadratic. Two routes are available. When the coefficients are friendly, factorising gives an integer root directly. When they are not, the quadratic formula settles it, and only the positive root is admissible since a negative or fractional count of terms has no meaning. The final step, which candidates frequently omit, is to confirm that the positive root is a whole number; a fractional answer would mean the stated total is not reachable."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "How many terms of the progression with a equal to 4 and d equal to 6 must be taken to give a sum of 310?",
+              "note": "310 = n / 2 x [8 + (n - 1) x 6] = n / 2 x (6n + 2) = n(3n + 1). So 3n squared + n - 310 = 0, whose discriminant is 1 + 3720 = 3721 = 61 squared. Hence n = (-1 + 61) / 6 = 10."
+            },
+            {
+              "text": "Verify the previous answer by summing the first ten terms directly.",
+              "note": "The terms are 4, 10, 16, 22, 28, 34, 40, 46, 52, 58. Their sum is 4 + 58 = 62 for the pair, and there are five such pairs, giving 5 x 62 = 310 as required."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The discriminant in the first example was a perfect square, which is not a coincidence in a well-posed problem: it must be, otherwise n would not be a whole number. That gives you an early warning system. Compute the discriminant of the quadratic in n, and if it is not a perfect square you have almost certainly set the equation up wrongly. Checking that one property before committing to the formula is far quicker than discovering a fractional answer at the end and then hunting for the earlier mistake."
+        }
+      ]
+    },
+    {
+      "id": "checking-progressions",
+      "title": "Checking a progression answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four checks cover this chapter. The difference check: compute two successive differences of your terms and confirm they agree, which validates both a and d. The boundary check: verify that the term you were asked for is really in position n, by confirming that n minus one steps were taken. The pairing check: for a sum, add the first and last terms, multiply by half the count, and confirm it matches your formula. And the reconstruction check: list a handful of terms from your recovered a and d and confirm they reproduce every condition the problem stated. Any one of these catches the arithmetic slips that dominate the topic."
+        },
+        {
+          "type": "table",
+          "caption": "Checking the sum of the first ten terms of 3, 8, 13, 18, 23, 28, 33, 38, 43, 48",
+          "columns": ["Check", "Working", "Result"],
+          "rows": [
+            ["Difference check", "8 - 3, 13 - 8, 48 - 43", "all equal 5"],
+            ["Boundary check", "3 + 9 x 5", "48, the tenth term"],
+            ["Pairing check", "10 / 2 x (3 + 48)", "5 x 51 = 255"],
+            ["Direct addition", "3 + 8 + 13 + 18 + 23 + 28 + 33 + 38 + 43 + 48", "255"],
+            ["Middle term check", "average of 3 and 48 is 25.5, times 10", "255"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The final row is the averaging view of the sum and is worth carrying, because it is independent of the pairing argument and so constitutes a genuine cross-check rather than a restatement. The average of an arithmetic progression is exactly the mean of its first and last terms, and multiplying that average by the count gives the sum. For ten terms averaging twenty five point five the total is two hundred and fifty five, which agrees with both earlier routes. Whenever two different derivations give the same number, the chance of an arithmetic error surviving is negligible."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from recognising progressions through the nth term and sum formulas to two-equation recoveries, arithmetic means, and word problems. Work each one by identifying a, d and n first, deciding whether the question wants a term or a total, and applying the checks above before moving on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Identify a, d and n explicitly before substituting into either formula.",
+            "The nth term takes n minus one steps; the sum takes n terms.",
+            "Align two term equations and subtract to eliminate a at once.",
+            "When finding n from a sum, confirm the positive root is a whole number.",
+            "Check a sum by pairing first with last, or by averaging and multiplying by the count."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "A constant step along a number line",
+      "description": "A horizontal number line with five equally spaced marks, labelled beneath with the terms 3, 8, 13, 18 and 23. Between each adjacent pair a bracket of identical width is drawn above the line and annotated with plus five, emphasising that every step is the same size. A separate arrow runs from the first mark to the last, labelled nine steps of five, and beneath it a note gives the nth term as the first term plus n minus one times d.",
+      "labels": ["First term", "Common difference", "Equal steps", "nth term", "Direction of increase"]
+    },
+    {
+      "caption": "The pairing argument for the sum of n terms",
+      "description": "Two columns of numbers shown side by side and mirror ordered. The left column runs downwards through the terms a, a + d, a + 2d and so on to the last term, and the right column runs the same list upwards. Dashed lines join the top of the left column to the bottom of the right, and each subsequent pair similarly, so every line connects the smallest remaining term with the largest. Each connecting line is annotated with the same total, the first term plus the last, and a bracket spanning all pairs is labelled n pairs, giving twice the sum.",
+      "labels": ["Forwards sum", "Backwards sum", "Equal pair totals", "n pairs", "Twice the sum"]
+    }
+  ],
+  "keyPoints": [
+    "An arithmetic progression has a fixed common difference d between successive terms.",
+    "The nth term is a + (n - 1) d, because reaching position n takes n minus one steps.",
+    "The sum of n terms is n / 2 times the first plus the last term, equivalently n / 2 x [2a + (n - 1) d].",
+    "Two given terms give two linear equations in a and d; subtract to eliminate a.",
+    "Inserting m means creates m plus two terms, so the common difference is the gap divided by m plus one.",
+    "The sum of the first n natural numbers is n(n + 1)/2; the sum of the first n odd numbers is n squared.",
+    "The average of an arithmetic progression equals the mean of its first and last terms.",
+    "Finding n from a sum produces a quadratic; only a positive whole-number root is admissible."
+  ],
+  "examFocus": [
+    "State a, d and n as a labelled line before substituting into either formula, and say whether the question wants a term or a total.",
+    "Write the substitution in full, for example 10 / 2 x (3 + 48) = 255, so partial credit survives an arithmetic slip.",
+    "When two terms are given, align the equations so a sits above a and then subtract; this avoids a longer substitution route.",
+    "For a sum, cross-check by averaging the first and last terms and multiplying by the count.",
+    "When recovering n from a sum, confirm the discriminant of the resulting quadratic is a perfect square before solving."
+  ],
+  "vocabulary": [
+    { "word": "Arithmetic progression", "meaning": "A sequence with a constant difference between successive terms." },
+    { "word": "First term", "meaning": "The opening value of the progression, written a." },
+    { "word": "Common difference", "meaning": "The fixed signed amount added to each term to obtain the next, written d." },
+    { "word": "nth term", "meaning": "The term in position n, given by a plus n minus one times d." },
+    { "word": "Partial sum", "meaning": "The total of the first n terms, written S n." },
+    { "word": "Arithmetic mean", "meaning": "A value inserted between two others so that the three form a progression." },
+    { "word": "Constant sequence", "meaning": "A progression with common difference zero, in which every term is the same." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-ap-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The nth term of an arithmetic progression is:",
+      "options": [
+        "a + (n - 1) d",
+        "a + n d",
+        "a + (n + 1) d",
+        "a d + n"
+      ],
+      "correctIndex": 0,
+      "answer": "a + (n - 1) d",
+      "explanation": "Position n is reached by adding d one fewer time than there are positions: the first term adds it not at all, the second once, and the nth term n minus one times. Using a plus n d would shift every term one place along the sequence.",
+      "commonMistake": "Using a + n d, which reports the term one position too far on."
+    },
+    {
+      "id": "icse-10-math-q-ap-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these lists is an arithmetic progression?",
+      "options": [
+        "17, 12, 7, 2",
+        "1, 2, 4, 8",
+        "2, 3, 5, 7",
+        "9, 9, 9, 10"
+      ],
+      "correctIndex": 0,
+      "answer": "17, 12, 7, 2",
+      "explanation": "Each term falls by five, so the common difference is minus five and the differences are constant. The second list doubles rather than adds, the third alternates between differences of one and two, and the fourth changes its difference at the last step.",
+      "commonMistake": "Rejecting a decreasing list because d is negative, when a negative difference still defines a progression."
+    },
+    {
+      "id": "icse-10-math-q-ap-03",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The tenth term of the progression with first term 3 and common difference 5 is ______.",
+      "answer": "48",
+      "explanation": "The tenth term is 3 + (10 - 1) x 5 = 3 + 45 = 48. The nine steps of five total forty five, added to the opening three. Listing the terms confirms: 3, 8, 13, 18, 23, 28, 33, 38, 43, 48.",
+      "commonMistake": "Using ten steps instead of nine, which gives 53 and is one position too far on."
+    },
+    {
+      "id": "icse-10-math-q-ap-04",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The sum of the first fifty natural numbers is ______.",
+      "answer": "1275",
+      "explanation": "This is an arithmetic progression with a = 1 and d = 1, so the sum is 50 / 2 x (1 + 50) = 25 x 51 = 1275. Equivalently n(n + 1)/2 gives 50 x 51 / 2 = 1275, which is the same computation written compactly.",
+      "commonMistake": "Reporting 50 x 51 = 2550, which forgets to divide by two for the pairing."
+    },
+    {
+      "id": "icse-10-math-q-ap-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the sum of the first ten terms of the progression with a equal to 3 and d equal to 5, showing your working.",
+      "answer": "255",
+      "explanation": "The tenth term is 3 + 9 x 5 = 48, so the sum is 10 / 2 x (3 + 48) = 5 x 51 = 255. The alternative form gives 5 x [6 + 9 x 5] = 5 x 51 = 255 as well. Adding the ten terms directly, 3 + 8 + 13 + 18 + 23 + 28 + 33 + 38 + 43 + 48, also yields 255.",
+      "commonMistake": "Using the tenth term as 53 by taking ten steps, which gives a sum of 280 instead."
+    },
+    {
+      "id": "icse-10-math-q-ap-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The fourth term of an arithmetic progression is 14 and the ninth term is 39. Find the first term and the common difference.",
+      "answer": "First term -1 and common difference 5",
+      "explanation": "The fourth term gives a + 3d = 14 and the ninth gives a + 8d = 39. Subtracting the first from the second gives 5d = 25, so d = 5, and then a = 14 - 3 x 5 = -1. Verification: the ninth term is -1 + 8 x 5 = 39, and the progression is -1, 4, 9, 14, 19, 24, 29, 34, 39.",
+      "commonMistake": "Subtracting in the wrong order and getting 5d = -25, which reverses both values."
+    },
+    {
+      "id": "icse-10-math-q-ap-07",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the twentieth term of the progression with a equal to 7 and d equal to minus 3, and state its sum to twenty terms.",
+      "answer": "Twentieth term -50 and sum to twenty terms -430",
+      "explanation": "The twentieth term is 7 + 19 x (-3) = 7 - 57 = -50. For the sum, 20 / 2 x (7 + (-50)) = 10 x (-43) = -430. The other form confirms it: 10 x [14 + 19 x (-3)] = 10 x (14 - 57) = 10 x (-43) = -430. The negative total simply reflects that the later terms are negative and outnumber the early positive ones.",
+      "commonMistake": "Multiplying 19 by 3 and keeping the sign positive, which gives 64 for the twentieth term."
+    },
+    {
+      "id": "icse-10-math-q-ap-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Which term of the progression 3, 8, 13, 18 is equal to 108?",
+      "answer": "The twenty second term",
+      "explanation": "Here a = 3 and d = 5, so solve 3 + (n - 1) x 5 = 108. Subtracting 3 gives (n - 1) x 5 = 105, so n - 1 = 21 and n = 22. Verification: 3 + 21 x 5 = 3 + 105 = 108.",
+      "commonMistake": "Reporting n = 21 by forgetting to add one back after dividing."
+    },
+    {
+      "id": "icse-10-math-q-ap-09",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The arithmetic mean of 7 and 17 is:",
+      "options": ["12", "10", "14", "24"],
+      "correctIndex": 0,
+      "answer": "12",
+      "explanation": "One mean creates two equal steps, so the common difference is (17 - 7) / 2 = 5 and the mean is 7 + 5 = 12. Equivalently the mean of two numbers is their average: (7 + 17) / 2 = 12.",
+      "commonMistake": "Dividing the gap by one rather than by two, which reports the second term instead of the mean."
+    },
+    {
+      "id": "icse-10-math-q-ap-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Insert four arithmetic means between 6 and 24 and write the complete progression.",
+      "answer": "6, 9.6, 13.2, 16.8, 20.4, 24",
+      "explanation": "Four means make six terms in total, so there are five equal steps. The common difference is (24 - 6) / 5 = 18 / 5 = 3.6. Adding repeatedly: 6, 9.6, 13.2, 16.8, 20.4, and 20.4 + 3.6 = 24 as required. The denominator is five because four means plus the two ends give six positions and five gaps.",
+      "commonMistake": "Dividing by four instead of five, which gives d = 4.5 and a final term of 28.5 rather than 24."
+    },
+    {
+      "id": "icse-10-math-q-ap-11",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A man deposits 50 rupees in the first month and increases the deposit by 10 rupees each month for a year. Find his twelfth deposit and his total saving.",
+      "answer": "Twelfth deposit 160 rupees and total saving 1260 rupees",
+      "explanation": "Here a = 50, d = 10 and n = 12. The twelfth deposit is 50 + 11 x 10 = 160 rupees. The total is 12 / 2 x (50 + 160) = 6 x 210 = 1260 rupees. Using the other form: 6 x [100 + 11 x 10] = 6 x 210 = 1260 rupees, which agrees.",
+      "commonMistake": "Using twelve steps for the twelfth deposit, which gives 170 and shifts every figure up by one month."
+    },
+    {
+      "id": "icse-10-math-q-ap-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A stack of bricks has 10 bricks in the top row and 2 more in each row below it. Find the number of bricks in the twentieth row and the total number of bricks in 20 rows.",
+      "answer": "Twentieth row has 48 bricks and the stack holds 580 bricks",
+      "explanation": "Here a = 10, d = 2 and n = 20. The twentieth row contains 10 + 19 x 2 = 48 bricks. The total is 20 / 2 x (10 + 48) = 10 x 58 = 580 bricks. As a difference check, consecutive rows differ by 2 throughout, and 48 - 10 = 19 x 2 confirms the row count.",
+      "commonMistake": "Answering only one of the two quantities requested and leaving the other marks unearned."
+    },
+    {
+      "id": "icse-10-math-q-ap-13",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Three numbers are in arithmetic progression and their sum is 24. Their product is 440. Find the three numbers.",
+      "answer": "5, 8 and 11",
+      "explanation": "Write the numbers as a - d, a and a + d. Their sum is 3a = 24, so a = 8. Their product is (8 - d) x 8 x (8 + d) = 8(64 - d squared) = 440, so 64 - d squared = 55 and d squared = 9, giving d = 3. The numbers are 5, 8 and 11. Verification: 5 + 8 + 11 = 24 and 5 x 8 x 11 = 440.",
+      "commonMistake": "Using a, a + d and a + 2d, which makes the sum involve d and turns one equation into two."
+    },
+    {
+      "id": "icse-10-math-q-ap-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The sum of the first n odd numbers is:",
+      "options": ["n squared", "n(n + 1)/2", "n(n + 1)", "2n squared"],
+      "correctIndex": 0,
+      "answer": "n squared",
+      "explanation": "For n = 5 the odd numbers are 1, 3, 5, 7 and 9 and they total 25, which is 5 squared. The general formula follows from the sum formula with a = 1 and d = 2, giving n / 2 x [2 + (n - 1) x 2] = n / 2 x 2n = n squared.",
+      "commonMistake": "Quoting n(n + 1)/2, which is the sum of the natural numbers rather than the odd numbers."
+    },
+    {
+      "id": "icse-10-math-q-ap-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The sum of the first thirty natural numbers is 465, and the sum of the integers from 21 to 40 inclusive is ______.",
+      "answer": "610",
+      "explanation": "Subtract the sum up to 20 from the sum up to 40: 40 x 41 / 2 = 820 and 20 x 21 / 2 = 210, so 820 - 210 = 610. This subtraction method avoids having to identify a progression whose first term is 21.",
+      "commonMistake": "Subtracting only the sum to 20 from the sum to 40 but forgetting that the sum to 20 must exclude 21, or using 30 terms with the wrong first term."
+    },
+    {
+      "id": "icse-10-math-q-ap-16",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "How many terms of the progression with a equal to 4 and d equal to 6 must be taken to give a sum of 310?",
+      "answer": "10 terms",
+      "explanation": "Substituting into the sum formula: 310 = n / 2 x [8 + (n - 1) x 6] = n / 2 x (6n + 2) = n(3n + 1). Hence 3n squared + n - 310 = 0. The discriminant is 1 + 3720 = 3721, which is 61 squared, so n = (-1 + 61) / 6 = 10. The negative branch gives a non-positive n and is rejected. Verification: the first ten terms 4, 10, 16, 22, 28, 34, 40, 46, 52, 58 pair as 62 five times, giving 310.",
+      "commonMistake": "Mishandling the expansion of n / 2 times the bracket, or accepting the negative root of the quadratic."
+    },
+    {
+      "id": "icse-10-math-q-ap-17",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The average of all the terms of a finite arithmetic progression is:",
+      "options": [
+        "The mean of the first and last terms",
+        "The last term divided by the number of terms",
+        "The first term plus the common difference",
+        "Always equal to the first term"
+      ],
+      "correctIndex": 0,
+      "answer": "The mean of the first and last terms",
+      "explanation": "Pairing first with last, second with second last and so on gives every pair the same total, so the average of the whole set equals the average of any such pair, which is the mean of the first and last terms. Multiplying that average by the count returns the sum, which is the pairing formula in another guise.",
+      "commonMistake": "Averaging the terms by eye when d is negative, forgetting that the progression descends and the mean still lies between the extremes."
+    },
+    {
+      "id": "icse-10-math-q-ap-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The third term of an arithmetic progression is 12 and the seventh term is 36. Find the first term, the common difference, and the tenth term.",
+      "answer": "First term 0, common difference 6, tenth term 54",
+      "explanation": "From a + 2d = 12 and a + 6d = 36, subtracting gives 4d = 24, so d = 6 and a = 12 - 12 = 0. The progression is 0, 6, 12, 18, 24, 30, 36, and the tenth term is 0 + 9 x 6 = 54. A first term of zero is perfectly legitimate and is confirmed by the given conditions.",
+      "commonMistake": "Rejecting a = 0 as impossible, or shifting the equation signs when subtracting."
+    },
+    {
+      "id": "icse-10-math-q-ap-19",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The first term of an arithmetic progression is 5 and the common difference is 3. Find the hundredth term.",
+      "answer": "302",
+      "explanation": "The hundredth term is 5 + (100 - 1) x 3 = 5 + 99 x 3 = 5 + 297 = 302. The count of steps is ninety nine rather than a hundred because the first term already occupies position one. As a check, the fifty first term is 5 + 50 x 3 = 155 and the progression rises steadily through it.",
+      "commonMistake": "Taking one hundred steps, which gives 305 and reports the hundred and first term."
+    },
+    {
+      "id": "icse-10-math-q-ap-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Insert two arithmetic means between 5 and 20, and state how many terms the resulting progression has and what its common difference is.",
+      "answer": "The means are 10 and 15, giving four terms with common difference 5",
+      "explanation": "Two means plus the two ends give four terms and therefore three equal gaps. The common difference is (20 - 5) / 3 = 5. The means are 5 + 5 = 10 and 10 + 5 = 15, and 15 + 5 = 20 closes the progression. The full progression is 5, 10, 15, 20, and its sum is 4 / 2 x (5 + 20) = 50, which matches the direct total.",
+      "commonMistake": "Using two gaps instead of three, which gives d = 7.5 and a middle term that does not fit."
+    },
+    {
+      "id": "icse-10-math-q-ap-21",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the progression 17, 12, 7, 2, the common difference is ______.",
+      "answer": "minus 5",
+      "explanation": "Subtracting any term from the one after it gives 12 - 17 = -5, 7 - 12 = -5 and 2 - 7 = -5, so the difference is constant at minus five. The negative sign records that the progression decreases, which is perfectly allowed.",
+      "commonMistake": "Reporting 5 and losing the sign, which reverses the direction of the sequence."
+    },
+    {
+      "id": "icse-10-math-q-ap-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the sum of the integers from 1 to 100, and hence find the sum of the integers from 1 to 100 that are not multiples of 3.",
+      "answer": "Sum to 100 is 5050 and the sum of those not divisible by 3 is 3367",
+      "explanation": "The sum from 1 to 100 is 100 x 101 / 2 = 5050. The multiples of 3 up to 100 are 3, 6, ..., 99, which is 33 terms of the progression 3, 6, 9 with common difference 3. Their sum is 33 / 2 x (3 + 99) = 33 / 2 x 102 = 33 x 51 = 1683. Subtracting gives 5050 - 1683 = 3367, so the integers from 1 to 100 that are not multiples of 3 total 3367. Check: 3367 + 1683 = 5050, so the two pieces reconstruct the whole.",
+      "commonMistake": "Forgetting to count the multiples of three as terms of a progression, or subtracting an incorrect partial total from 5050."
+    },
+    {
+      "id": "icse-10-math-q-ap-23",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If the first term of an arithmetic progression is zero, then:",
+      "options": [
+        "The progression is still valid, with terms 0, d, 2d and onwards",
+        "No arithmetic progression exists",
+        "The common difference must also be zero",
+        "The sum of any two terms is zero"
+      ],
+      "correctIndex": 0,
+      "answer": "The progression is still valid, with terms 0, d, 2d and onwards",
+      "explanation": "Nothing in the definition requires a positive or even a non-zero first term; only the constancy of the difference matters. With a = 0 the nth term reduces to (n - 1) d and the sum to n / 2 x (n - 1) d, both perfectly well defined, as the example 0, 6, 12, 18 with d = 6 illustrates.",
+      "commonMistake": "Assuming that a first term of zero makes the sum zero as well, which would require d to vanish too."
+    }
+  ]
+}

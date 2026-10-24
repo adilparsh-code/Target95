@@ -1,0 +1,658 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-coordinate",
+  "title": "Coordinate Geometry: Reflection",
+  "kind": "mathematics",
+  "tagline": "Reflection in the axes and in other lines, invariant points, the section and mid-point formulae, and the equation of a line.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Coordinate geometry puts a numerical address on every point of the plane, and this chapter uses those addresses for two connected jobs. The first is reflection: finding where a point lands when the plane is folded along a line, which turns into a rule of signs applied to the coordinates. The second is locating points between other points, which is what the section and mid-point formulae do, and which feeds directly into the equation of a straight line. Every rule in the chapter has a geometric picture behind it, and keeping the picture beside the formula is what prevents the sign errors that dominate this topic. Reflection changes signs; division along a segment changes ratios; and a line's equation encodes both its steepness and where it crosses the vertical axis.",
+    "facts": [
+      { "label": "Reflection in the x-axis", "value": "(x, y) becomes (x, -y): the ordinate changes sign" },
+      { "label": "Reflection in the y-axis", "value": "(x, y) becomes (-x, y): the abscissa changes sign" },
+      { "label": "Reflection in the origin", "value": "(x, y) becomes (-x, -y): both coordinates change sign" },
+      { "label": "Mid-point", "value": "The averages of the coordinates: ((x1 + x2) / 2, (y1 + y2) / 2)" },
+      { "label": "Section formula", "value": "A point dividing A B in the ratio m to n sits at ((m x2 + n x1) / (m + n), (m y2 + n y1) / (m + n))" }
+    ]
+  },
+  "learningOutcomes": [
+    "State and apply the rules for reflecting a point in the x-axis, the y-axis, the origin and the lines y equals x and y equals minus x.",
+    "Identify the set of points left unchanged by a given reflection and describe it geometrically.",
+    "Apply the mid-point formula and recover a second endpoint when the mid-point and one endpoint are known.",
+    "Apply the section formula for a stated ratio, and determine the ratio when a point on the segment is given.",
+    "Find the gradient of a line through two given points and write its equation in the form y equals m x plus c.",
+    "Write the equations of lines parallel to the coordinate axes and check an answer by substitution."
+  ],
+  "learn": [
+    {
+      "id": "the-axes-and-a-point-address",
+      "title": "The axes and the address of a point",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The coordinate plane is built from two perpendicular number lines that meet at the origin. The horizontal line is the x-axis and the vertical line is the y-axis, and every point is written as an ordered pair of its perpendicular distances to those axes. The first number, the abscissa, is measured along the horizontal and is positive to the right of the origin; the second, the ordinate, is measured along the vertical and is positive above it. Because the pair is ordered, three comma four is a different point from four comma three, and any operation that swaps them, as one of the reflections below does, has genuinely moved the point rather than merely relabelled it."
+        },
+        {
+          "type": "paragraph",
+          "text": "The two axes divide the plane into four quadrants, numbered anticlockwise from the top right, and each quadrant has a fixed sign pattern: positive positive, negative positive, negative negative, positive negative. Knowing those signs is the fastest way to check a reflection, because a reflection in an axis must preserve the coordinate measured along that axis and invert the other. A point reflected in the x-axis keeps its horizontal position and flips vertically, so its quadrant changes only in the sign of the second number. Keeping that geometric picture in mind is worth more than memorising four separate rules."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Abscissa", "meaning": "The first coordinate of a point, measured parallel to the x-axis." },
+            { "term": "Ordinate", "meaning": "The second coordinate of a point, measured parallel to the y-axis." },
+            { "term": "Origin", "meaning": "The point where the axes meet, with coordinates zero, zero." },
+            { "term": "Quadrant", "description": "", "meaning": "One of the four regions the axes create, distinguished by the signs of its coordinates." },
+            { "term": "Reflection", "meaning": "The transformation that maps each point to its mirror image in a given line." },
+            { "term": "Invariant point", "meaning": "A point that a reflection leaves exactly where it was." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The pair is ordered: never interchange the abscissa and the ordinate.",
+            "Reflection in an axis preserves the coordinate along that axis and inverts the other.",
+            "Use the quadrant sign pattern to sanity-check any reflected position.",
+            "The origin is the one point invariant under reflection in the origin itself."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reflection-in-the-axes",
+      "title": "Reflection in the coordinate axes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reflecting in the x-axis means folding the plane along that axis, so every point above lands directly below at the same horizontal distance, and every point below lands above. The horizontal coordinate therefore survives untouched and the vertical coordinate changes sign, giving the rule that x, y becomes x, minus y. Reflecting in the y-axis is the mirror image of that argument: the vertical position is preserved and the horizontal changes sign, so x, y becomes minus x, y. Reflecting in the origin combines both, since reflecting twice in perpendicular axes through the same point is a rotation of one hundred and eighty degrees, and both coordinates change sign."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Reflect the point with coordinates minus three, four in the x-axis, the y-axis and the origin.",
+              "note": "In the x-axis the ordinate changes sign: minus three, minus four. In the y-axis the abscissa changes sign: three, four. In the origin both change: three, minus four."
+            },
+            {
+              "text": "Find the image of three, five in the x-axis and confirm with a picture.",
+              "note": "The image is three, minus five. Both points are three units to the right of the y-axis, one five units above the x-axis and one five units below, which is exactly the mirror relation."
+            },
+            {
+              "text": "A point has coordinates two, minus six. Where does it land after reflection in the origin?",
+              "note": "Both signs change, giving minus two, six. Note that this equals reflecting first in the x-axis to two, six and then in the y-axis to minus two, six, in either order."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reflection rules and one example for each",
+          "columns": ["Mirror", "Rule on (x, y)", "Example with minus three, four", "Effect on the quadrant"],
+          "rows": [
+            ["x-axis", "(x, -y)", "minus three, minus four", "second to third"],
+            ["y-axis", "(-x, y)", "three, four", "second to first"],
+            ["Origin", "(-x, -y)", "three, minus four", "second to fourth"],
+            ["y = x", "(y, x)", "four, minus three", "second to fourth"],
+            ["y = -x", "(-y, -x)", "minus four, three", "second to first"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The final two rows extend the idea to other mirrors and are worth deriving rather than memorised. Reflecting in the line y equals x exchanges the distance to the horizontal axis with the distance to the vertical axis, which is precisely swapping the two coordinates. Reflecting in the line y equals minus x swaps them as well and additionally negates both, because that mirror lies in the quadrants where one coordinate is the negative of the other. Deriving each rule from the geometry when you need it costs a few seconds and is far more reliable than recalling a rule that may have been half remembered."
+        }
+      ]
+    },
+    {
+      "id": "invariant-points",
+      "title": "Points left unchanged by a reflection",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A point is invariant under a reflection when its image coincides with itself, and asking which points satisfy that condition is a question with a clean answer. For reflection in the x-axis the ordinate must equal its own negative, which forces it to be zero, so exactly the points on the x-axis are invariant. For reflection in the y-axis the abscissa must vanish, so the y-axis itself is the invariant set. For reflection in the origin both must vanish and only the origin survives. Each invariant set is therefore the mirror line itself, which is geometrically obvious once stated: a point on the mirror is not moved because the fold passes through it."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "State all points invariant under reflection in the x-axis, and give two examples.",
+              "note": "Every point on the x-axis, so all points of the form a, zero. Two examples are minus seven, zero and the origin zero, zero. A point with non-zero ordinate must change sign and therefore moves."
+            },
+            {
+              "text": "Find the coordinates of a point on the x-axis that is invariant under reflection in the origin.",
+              "note": "The point must lie on the x-axis, so its second coordinate is zero, and it must be its own image in the origin, which requires the first coordinate to be zero as well. The only such point is the origin itself."
+            },
+            {
+              "text": "Which points are invariant under reflection in the line y equals x?",
+              "note": "The image of a, b is b, a, so invariance needs a = b. Every point on the line y = x is invariant, for instance four, four and minus five, minus five."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The pattern across these examples is general and worth stating: the invariant set of a reflection is always the mirror line itself. The proof is one line in each case, requiring the coordinate transformation to equal the original pair. When a question asks for invariant points, the efficient route is therefore to solve the coordinate equation the rule implies rather than to test candidates one by one, and then to recognise that the solution describes a line or a point as appropriate. If the answer you obtain is not geometrically the mirror, you have made an algebraic slip."
+        }
+      ]
+    },
+    {
+      "id": "the-mid-point-formula",
+      "title": "The mid-point formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mid-point of a segment is the point halfway along it, and because the axes are perpendicular number lines, halfway horizontally and halfway vertically is exactly what is required. Averaging the two abscissae gives the horizontal position of the middle, and averaging the two ordinates gives the vertical position, so the mid-point has coordinates that are the arithmetic means of the endpoints. The formula is symmetrical in the two endpoints, which it must be, since the middle of a segment does not depend on which end you call the first. That symmetry is also a useful check: if your expression changes when you swap the endpoints, you have made an error."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the mid-point of the segment joining five, minus one and minus three, seven.",
+              "note": "Mid-point = ((5 + (-3)) / 2, (-1 + 7) / 2) = (2 / 2, 6 / 2) = (1, 3)."
+            },
+            {
+              "text": "The mid-point of a segment is three, four and one end is one, two. Find the other end.",
+              "note": "The wrong shortcut is to subtract the known end from the mid-point without doubling, which gives two, two; the mid-point of one, two and two, two is one point five, two, not the given three, four. Doubling first gives six, eight, and subtracting one, two leaves six minus one and eight minus two, that is five, six. Check: (1 + 5) / 2 = 3 and (2 + 6) / 2 = 4."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Mid-point working for the segment from five, minus one to minus three, seven",
+          "columns": ["Component", "Sum of the endpoints", "Divided by two", "Result"],
+          "rows": [
+            ["Abscissa", "5 + (-3) = 2", "2 / 2", "1"],
+            ["Ordinate", "-1 + 7 = 6", "6 / 2", "3"],
+            ["Mid-point", "", "", "1, 3"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Reversing the formula is equally common and is best handled by doubling rather than by fractions. If the mid-point and one end are known, multiply the mid-point coordinates by two, which returns the sum of the endpoints, and subtract the known end. Working with the doubled form avoids ever writing a half or a two-thirds and keeps every calculation in whole numbers, which is both quicker and less error prone. The verification is a single re-application of the ordinary mid-point formula to the recovered end."
+        }
+      ]
+    },
+    {
+      "id": "the-section-formula",
+      "title": "The section formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mid-point is the special case of a point that divides a segment in the ratio one to one, and the general question is what happens when the division is in any ratio m to n. The answer, the section formula, weights the two endpoints by the opposite parts of the ratio: the coordinate of the first endpoint is multiplied by m and the coordinate of the second by n, the results are added, and the sum is divided by m plus n. The word opposite is the key to remembering it correctly, because the endpoint nearer to the larger part receives the larger weight, and forgetting that swaps the answer."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the point dividing the segment from one, two to ten, five in the ratio two to one.",
+              "note": "P = ((2 x 10 + 1 x 1) / 3, (2 x 5 + 1 x 2) / 3) = (21 / 3, 12 / 3) = (7, 4). Check: from one, two to seven, four is a step of six, two, and from seven, four to ten, five is three, one, which is exactly half as large."
+            },
+            {
+              "text": "Find the point dividing the segment from minus one, two to four, minus three in the ratio two to three.",
+              "note": "P = ((2 x 4 + 3 x (-1)) / 5, (2 x (-3) + 3 x 2) / 5) = ((8 - 3) / 5, (-6 + 6) / 5) = (1, 0). The second coordinate is zero, so the point lies on the x-axis."
+            },
+            {
+              "text": "Find the points of trisection of the segment joining two, six and eight, twelve.",
+              "note": "Trisection means the ratios one to two and two to one. The first point is ((1 x 8 + 2 x 2) / 3, (1 x 12 + 2 x 6) / 3) = (12 / 3, 24 / 3) = (4, 8). The second is ((2 x 8 + 1 x 2) / 3, (2 x 12 + 1 x 6) / 3) = (18 / 3, 30 / 3) = (6, 10)."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The trisection points of two, six to eight, twelve",
+          "columns": ["Point", "Coordinates", "Step from the previous point"],
+          "rows": [
+            ["First end", "2, 6", "starting value"],
+            ["First trisection", "4, 8", "step of 2, 2"],
+            ["Second trisection", "6, 10", "step of 2, 2"],
+            ["Second end", "8, 12", "step of 2, 2"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table displays a property that is both a check and a theorem: the four equally spaced points differ by the same vector, here two, two. That is why trisection works at all, and it is confirmed independently by noting that all four points satisfy y = x + four, since six equals two plus four, eight equals four plus four, and so on. Whenever a section calculation is worth marks, verifying collinearity in this way, either by equal steps or by a common linear relation, closes the argument completely."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Weight each endpoint by the opposite part of the ratio, then divide by the sum of the parts.",
+            "For a mid-point both weights are one and the denominators are two.",
+            "Doubling a known mid-point returns the sum of the endpoints and avoids fractions.",
+            "Verify a section result by confirming the two sub-steps are in the stated ratio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gradient-of-a-line",
+      "title": "Gradient and the equation of a line",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The steepness of a straight line is its gradient, defined as the rise divided by the run: take any two points on the line, divide the difference of their ordinates by the difference of their abscissae, and the answer is the same whichever pair you choose. A positive gradient means the line climbs to the right, a negative one descends, and a gradient of zero describes a horizontal line. Once the gradient m is known, the equation takes the compact form y equals m x plus c, where c is the ordinate at which the line crosses the vertical axis, and both quantities are found directly from the given data."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the equation of the line through two, three and four, seven.",
+              "note": "Gradient = (7 - 3) / (4 - 2) = 4 / 2 = 2. Substituting two, three into y = 2x + c gives 3 = 4 + c, so c = -1. The equation is y = 2x - 1. Check with four, seven: 2 x 4 - 1 = 7."
+            },
+            {
+              "text": "Find the equation of the line through zero, five and three, five.",
+              "note": "The ordinates are equal, so the gradient is (5 - 5) / (3 - 0) = 0. A zero gradient means a horizontal line, and passing through an ordinate of five gives y = 5."
+            },
+            {
+              "text": "Find the equation of the line through minus two, zero and minus two, five.",
+              "note": "The abscissae are equal, so the run is zero and the gradient is undefined. The line is vertical and every point on it has abscissa minus two, so its equation is x = -2."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reading a line's equation from its gradient and intercept",
+          "columns": ["Equation", "Gradient", "Vertical intercept", "Direction"],
+          "rows": [
+            ["y = 2x - 1", "2", "minus one", "climbs two for every one across"],
+            ["y = 3x + 2", "3", "two", "climbs three for every one across"],
+            ["y = 5", "zero", "five", "horizontal"],
+            ["x = -2", "undefined", "none", "vertical"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The two special cases deserve care because they do not fit the form y equals m x plus c. A horizontal line has no dependence on x and is written as a constant ordinate; a vertical line has no dependence on y and is written as a constant abscissa, and its gradient is undefined because the run would be zero and division by zero is impossible. Recognising from the coordinates which case you are in, before attempting a gradient calculation, avoids the confusion that arises when the formula returns a division by zero. Any point on a horizontal line shares its ordinate; any point on a vertical line shares its abscissa."
+        }
+      ]
+    },
+    {
+      "id": "combining-reflection-and-section",
+      "title": "Combining reflections with the other tools",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Many examination questions link two or three of the ideas in this chapter, and the reliable way to handle them is to process one transformation at a time in the order given, writing the coordinates after each stage. A typical construction reflects a point, then finds the mid-point of the image with a third point, or applies a section formula to two points whose coordinates were themselves obtained by reflection. Writing an intermediate line after every step prevents a coordinate from being carried forward incorrectly, which is the dominant failure in multi-part questions."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A, B and C are one, two, four, six and seven, ten. Find the mid-point of A and C and verify that it is the same as B.",
+              "note": "Mid-point of one, two and seven, ten is ((1 + 7) / 2, (2 + 10) / 2) = (4, 6), which is exactly B. Hence the three points are collinear with B halfway between the other two."
+            },
+            {
+              "text": "Reflect the point three, four in the x-axis, then find the mid-point of the image and the point eight, six.",
+              "note": "The reflection is three, minus four. The mid-point with eight, six is ((3 + 8) / 2, (-4 + 6) / 2) = (11 / 2, 1), that is five point five, one."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The first example shows how a mid-point test can establish collinearity without invoking gradients at all: if one of three points is exactly the mid-point of the other two, the three must lie on a single straight line, because the mid-point is by construction on the segment joining its endpoints. The converse also holds and is frequently the intended argument. Recognising this pattern converts what looks like a question about three unrelated coordinates into one division by two, and it is a faster route than computing two gradients and confirming equality."
+        }
+      ]
+    },
+    {
+      "id": "checking-coordinate-answers",
+      "title": "Checking a coordinate answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four checks cover this chapter almost completely. The sign check: after a reflection, exactly the coordinates that the rule demands should have changed sign, and no others; count them. The symmetry check: a mid-point must be unchanged when the endpoints are swapped, and it must satisfy the equation you would write for the line through them. The ratio check: after a section calculation, verify that the step from the first end to the new point is the stated multiple of the step from the new point to the second end. And the substitution check: put any point claimed to lie on a line into the line's equation and confirm it balances."
+        },
+        {
+          "type": "table",
+          "caption": "Checking the point seven, four on the segment from one, two to ten, five in ratio two to one",
+          "columns": ["Check", "Working", "Result"],
+          "rows": [
+            ["Step from first end", "7 - 1 = 6, 4 - 2 = 2", "vector 6, 2"],
+            ["Step to second end", "10 - 7 = 3, 5 - 4 = 1", "vector 3, 1"],
+            ["Ratio of steps", "6 : 3 and 2 : 1", "both equal 2 : 1"],
+            ["Formula re-application", "(2 x 10 + 1 x 1) / 3 and (2 x 5 + 1 x 2) / 3", "7 and 4"],
+            ["Mid-point contrast", "(1 + 10) / 2 and (2 + 5) / 2", "5.5 and 3.5, which differs from 7, 4 as a ratio of two to one must"],
+            ["On the line through the ends", "Gradient of the segment is (5 - 2) / (10 - 1) = 1/3", "y - 2 = (1/3)(x - 1) gives 4 = 2 + (1/3) x 6, which balances"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The final two rows together make the point that a check failing can be just as informative as one passing. The mid-point is the ratio one to one case, so a point dividing in the ratio two to one must not coincide with it; the fact that five point five, three point five differs from seven, four confirms that the two calculations are genuinely distinct rather than one having been used in place of the other. The last row, by contrast, is supposed to succeed: a section point must lie on the segment itself, so the gradient test passes, and knowing in advance which of your tests ought to balance is part of the method. A failed test signals an error only when it was meant to pass."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from reflection rules through invariant points and the mid-point and section formulae to gradients and line equations. Work each one by writing coordinates at every stage, deriving a reflection rule from its picture when you cannot recall it, and applying at least one of the four checks before moving on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Derive a reflection rule from the geometry rather than recalling it, and then count which signs changed.",
+            "State the invariant set of a reflection as the mirror line itself.",
+            "In the section formula, weight each endpoint by the opposite part of the ratio.",
+            "Double a known mid-point to recover the sum of the endpoints and avoid fractions.",
+            "Compute the gradient only after confirming the line is not horizontal or vertical, and substitute to check."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Reflection of a point in the x-axis and in the y-axis",
+      "description": "A Cartesian diagram with labelled axes and the origin marked. The point A is plotted at minus three, four in the second quadrant, and its reflection A dash is plotted at minus three, minus four in the third quadrant, with a dashed vertical segment joining them that crosses the x-axis perpendicularly at minus three. A second point B is plotted at three, four in the first quadrant, with a dashed horizontal segment joining it to A that crosses the y-axis perpendicularly at four. Right-angle marks appear where each dashed segment meets its mirror, and each segment is annotated as equidistant from the axis.",
+      "labels": ["x-axis", "y-axis", "A at minus three, four", "Reflection in x-axis", "Reflection in y-axis", "Equidistant"]
+    },
+    {
+      "caption": "A point dividing a segment in a stated ratio",
+      "description": "A straight segment drawn between two labelled endpoints, one and two at the lower left and ten and five at the upper right. A point P is marked on the segment closer to the first endpoint, with the segment split into two visually unequal parts. The longer part is bracketed and labelled m equals two, and the shorter part bracketed and labelled n equals one. Beneath the segment, two dashed arrows show the step from the first endpoint to P as six across and two up, and the step from P to the second endpoint as three across and one up, making the two-to-one correspondence visible.",
+      "labels": ["First endpoint", "Second endpoint", "Point P", "Part m", "Part n", "Steps in the ratio"]
+    }
+  ],
+  "keyPoints": [
+    "Reflection in the x-axis changes the sign of the ordinate; in the y-axis, of the abscissa; in the origin, of both.",
+    "Reflection in y = x swaps the coordinates; in y = -x it swaps and negates both.",
+    "The invariant set of any reflection is the mirror line itself.",
+    "The mid-point has coordinates that are the averages of the endpoint coordinates.",
+    "The section formula weights each endpoint by the opposite part of the ratio and divides by the sum of the parts.",
+    "The gradient is the rise over the run and is the same for any pair of points on a line.",
+    "A horizontal line has gradient zero and equation y equal to a constant; a vertical line has undefined gradient and equation x equal to a constant.",
+    "Substitute every claimed point back into the line's equation or the reflection rule to confirm."
+  ],
+  "examFocus": [
+    "Write coordinates after every stage of a multi-part question, so that no intermediate value is carried forward wrongly.",
+    "Draw a small sketch before a reflection and then count which signs must change; the picture settles sign errors immediately.",
+    "Apply the section formula with the opposite-weighting visible in your working, since that is where most marks are lost.",
+    "Recover a missing endpoint from a mid-point by doubling rather than by dividing, keeping all arithmetic in whole numbers.",
+    "State the gradient's case before computing: horizontal, vertical or neither, since the formula fails on the first two."
+  ],
+  "vocabulary": [
+    { "word": "Abscissa", "meaning": "The first coordinate of a point, measured along the horizontal direction." },
+    { "word": "Ordinate", "meaning": "The second coordinate of a point, measured along the vertical direction." },
+    { "word": "Reflection", "meaning": "The transformation taking each point to its mirror image in a chosen line." },
+    { "word": "Invariant point", "meaning": "A point that a transformation leaves in its original position." },
+    { "word": "Mid-point", "meaning": "The point halfway along a segment, found by averaging the endpoint coordinates." },
+    { "word": "Section formula", "meaning": "The rule giving the coordinates of a point that divides a segment in a given ratio." },
+    { "word": "Trisection", "meaning": "The two points that divide a segment into three equal parts." },
+    { "word": "Gradient", "meaning": "The rise of a line divided by its run, measuring its steepness and direction." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-cg-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The reflection of the point three, five in the x-axis is:",
+      "options": ["three, minus five", "minus three, five", "minus three, minus five", "five, three"],
+      "correctIndex": 0,
+      "answer": "three, minus five",
+      "explanation": "Reflection in the x-axis preserves the horizontal position and inverts the vertical one, so the abscissa stays three and the ordinate becomes minus five. Both points remain three units to the right of the y-axis, one five above and one five below the mirror.",
+      "commonMistake": "Changing both signs, which describes reflection in the origin rather than in the x-axis."
+    },
+    {
+      "id": "icse-10-math-q-cg-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The image of minus four, seven under reflection in the y-axis is:",
+      "options": ["four, seven", "minus four, minus seven", "four, minus seven", "seven, minus four"],
+      "correctIndex": 0,
+      "answer": "four, seven",
+      "explanation": "Reflection in the y-axis preserves the ordinate and inverts the abscissa, so minus four becomes four while seven is unchanged. The point moves from the second quadrant to the first, which is exactly what a fold along the vertical axis must do.",
+      "commonMistake": "Swapping the coordinates as well as changing a sign, which would describe a different transformation entirely."
+    },
+    {
+      "id": "icse-10-math-q-cg-03",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The reflection of the point two, minus six in the origin is the point ______.",
+      "answer": "minus two, six",
+      "explanation": "Reflection in the origin inverts both coordinates, so two becomes minus two and minus six becomes six. This is the same as reflecting first in the x-axis to two, six and then in the y-axis to minus two, six, in either order.",
+      "commonMistake": "Changing only one sign, which describes a reflection in a single axis rather than in the origin."
+    },
+    {
+      "id": "icse-10-math-q-cg-04",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The mid-point of the segment joining five, minus one and minus three, seven is the point ______.",
+      "answer": "one, three",
+      "explanation": "Average the coordinates: (5 + (-3)) / 2 = 2 / 2 = 1 and (-1 + 7) / 2 = 6 / 2 = 3, giving one, three. The result is unchanged when the endpoints are swapped, as it must be, since the middle of a segment does not depend on which end is called first.",
+      "commonMistake": "Dividing the difference of the coordinates by two instead of their sum, which gives four, four."
+    },
+    {
+      "id": "icse-10-math-q-cg-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State all points that are invariant under reflection in the x-axis, and explain why.",
+      "answer": "Exactly the points on the x-axis, that is every point of the form a, zero",
+      "explanation": "Reflection in the x-axis maps a, b to a, minus b. For a point to be invariant these must be the same, so b = minus b, which forces b = 0. The first coordinate is unrestricted, so the invariant set is the whole x-axis. Two examples are minus seven, zero and the origin zero, zero.",
+      "commonMistake": "Claiming only the origin is invariant, when in fact every point on the mirror line qualifies."
+    },
+    {
+      "id": "icse-10-math-q-cg-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Give the rule for reflecting in the line y = x, apply it to four, nine, and state the invariant points of that reflection.",
+      "answer": "Rule (x, y) to (y, x); four, nine maps to nine, four; the invariant points are those on y = x",
+      "explanation": "Reflecting in y = x exchanges the distance to each axis, so the coordinates swap: four, nine becomes nine, four. Invariance requires a = b, so the fixed points are precisely those on the line y = x, such as four, four. This is confirmed by swapping four, four and obtaining four, four again.",
+      "commonMistake": "Negating the coordinates as well as swapping them, which describes reflection in y = minus x."
+    },
+    {
+      "id": "icse-10-math-q-cg-07",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Reflect the point minus three, four in the x-axis, then in the y-axis, then in the origin, and state the image under each reflection separately.",
+      "answer": "In the x-axis: minus three, minus four. In the y-axis: three, four. In the origin: three, minus four",
+      "explanation": "Reflection in the x-axis inverts the ordinate only, giving minus three, minus four. Reflection in the y-axis inverts the abscissa only, giving three, four. Reflection in the origin inverts both, giving three, minus four. Note that the last two results are related: reflecting first in the x-axis and then in the y-axis gives three, minus four, which equals the single reflection in the origin.",
+      "commonMistake": "Applying the reflections successively rather than each to the original point, and reporting a single chain instead of three separate images."
+    },
+    {
+      "id": "icse-10-math-q-cg-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the point that divides the segment joining one, two and ten, five in the ratio two to one.",
+      "answer": "seven, four",
+      "explanation": "Applying the section formula, the abscissa is (2 x 10 + 1 x 1) / (2 + 1) = 21 / 3 = 7, and the ordinate is (2 x 5 + 1 x 2) / 3 = 12 / 3 = 4. Check: the step from one, two to seven, four is six across and two up, while the step onward to ten, five is three across and one up, and the first is exactly twice the second.",
+      "commonMistake": "Weighting the endpoints by the nearer part rather than the opposite one, which gives a point outside the segment."
+    },
+    {
+      "id": "icse-10-math-q-cg-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the point dividing the segment joining minus one, two and four, minus three in the ratio two to three, and state which axis it lies on.",
+      "answer": "one, zero, which lies on the x-axis",
+      "explanation": "The abscissa is (2 x 4 + 3 x (-1)) / 5 = (8 - 3) / 5 = 1, and the ordinate is (2 x (-3) + 3 x 2) / 5 = (-6 + 6) / 5 = 0. Since the ordinate is zero, the point lies on the x-axis, which also makes it invariant under reflection in that axis.",
+      "commonMistake": "Applying the ratio in the wrong direction, which gives four, minus one and places the point elsewhere entirely."
+    },
+    {
+      "id": "icse-10-math-q-cg-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mid-point of the segment joining a, b and c, d is:",
+      "options": [
+        "((a + c) / 2, (b + d) / 2)",
+        "((a - c) / 2, (b - d) / 2)",
+        "((a + c) / 2, (b - d) / 2)",
+        "(a + c, b + d)"
+      ],
+      "correctIndex": 0,
+      "answer": "((a + c) / 2, (b + d) / 2)",
+      "explanation": "Each coordinate of the middle is the average of the corresponding coordinates of the ends, since the axes are independent number lines. The formula is symmetric in the two endpoints, as it must be, because the middle of a segment does not depend on which end is named first.",
+      "commonMistake": "Averaging the difference rather than the sum, which finds a half-way point in the wrong direction."
+    },
+    {
+      "id": "icse-10-math-q-cg-11",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the two points of trisection of the segment joining two, six and eight, twelve, and verify that all four points are collinear.",
+      "answer": "Four, eight and six, ten, all lying on the line y = x + 4",
+      "explanation": "Trisection means the ratios one to two and two to one. The first point is ((1 x 8 + 2 x 2) / 3, (1 x 12 + 2 x 6) / 3) = (12 / 3, 24 / 3) = (4, 8). The second is ((2 x 8 + 1 x 2) / 3, (2 x 12 + 1 x 6) / 3) = (18 / 3, 30 / 3) = (6, 10). Collinearity: the successive steps are two across and two up throughout, and each point satisfies y = x + 4 since six = two + four, eight = four + four, ten = six + four and twelve = eight + four.",
+      "commonMistake": "Using the same ratio for both points, which returns one endpoint twice instead of two interior points."
+    },
+    {
+      "id": "icse-10-math-q-cg-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The mid-point of a segment is three, four and one end has coordinates one, two. Find the other end.",
+      "answer": "Five, six",
+      "explanation": "Doubling the mid-point gives six, eight, which is the sum of the two endpoints. Subtracting the known end, one, two, gives six minus one and eight minus two, that is five, six. Verification with the ordinary formula: (1 + 5) / 2 = 3 and (2 + 6) / 2 = 4, reproducing the given mid-point.",
+      "commonMistake": "Subtracting without doubling first, which gives two, two and does not reproduce the stated mid-point."
+    },
+    {
+      "id": "icse-10-math-q-cg-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the gradient of the line through two, three and four, seven, and hence write its equation.",
+      "answer": "Gradient 2 and equation y = 2x - 1",
+      "explanation": "The gradient is the rise over the run: (7 - 3) / (4 - 2) = 4 / 2 = 2. Substituting two, three into y = 2x + c gives 3 = 4 + c, so c = -1 and the equation is y = 2x - 1. Substituting the second point confirms it: 2 x 4 - 1 = 7.",
+      "commonMistake": "Reversing the run and writing the gradient as one half, which describes a much shallower line."
+    },
+    {
+      "id": "icse-10-math-q-cg-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The equation of the line through minus two, zero and minus two, five is:",
+      "options": ["x = -2", "y = -2", "x = 0", "y = 5"],
+      "correctIndex": 0,
+      "answer": "x = -2",
+      "explanation": "Both points share the abscissa minus two, so the run between them is zero and the gradient is undefined; the line is vertical. Every point on it has abscissa minus two, which is exactly what the equation x = -2 asserts. A horizontal line would instead have a constant ordinate.",
+      "commonMistake": "Writing y = -2, which is a horizontal line through a different set of points entirely."
+    },
+    {
+      "id": "icse-10-math-q-cg-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The line through zero, five and three, five is horizontal with equation ______.",
+      "answer": "y = 5",
+      "explanation": "The ordinates are equal, so the rise is zero and the gradient is zero; a zero gradient means a horizontal line. Every point on it has ordinate five, hence y = 5. The first point given is already the vertical intercept of the line.",
+      "commonMistake": "Reporting x = 5, which is a vertical line rather than a horizontal one."
+    },
+    {
+      "id": "icse-10-math-q-cg-16",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the equation of the line through one, two and four, eleven, and check that both points satisfy it.",
+      "answer": "y = 3x - 1",
+      "explanation": "The gradient is (11 - 2) / (4 - 1) = 9 / 3 = 3. Substituting one, two into y = 3x + c gives 2 = 3 + c, so c = -1 and the equation is y = 3x - 1. Checks: for one, two, 3 x 1 - 1 = 2; for four, eleven, 3 x 4 - 1 = 11. Both balance, so the equation is confirmed.",
+      "commonMistake": "Finding the gradient correctly but leaving the answer as y = 3x without determining the intercept."
+    },
+    {
+      "id": "icse-10-math-q-cg-17",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The points one, two, four, six and seven, ten are claimed to be collinear. Verify this in two different ways.",
+      "answer": "The mid-point of the first and third is exactly the second, and the gradients of both segments are equal at 4/3",
+      "explanation": "First way: the mid-point of one, two and seven, ten is ((1 + 7) / 2, (2 + 10) / 2) = (4, 6), which is the middle point, so it lies on the segment joining the other two and all three are collinear. Second way: the gradient from one, two to four, six is (6 - 2) / (4 - 1) = 4 / 3, and from four, six to seven, ten it is (10 - 6) / (7 - 4) = 4 / 3. Equal gradients through a common point prove collinearity.",
+      "commonMistake": "Checking only the gradients and omitting the common point, which alone would not exclude parallel but distinct lines."
+    },
+    {
+      "id": "icse-10-math-q-cg-18",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A point is invariant under reflection in a given line precisely when:",
+      "options": [
+        "It lies on that line",
+        "It has equal coordinates",
+        "Both of its coordinates are positive",
+        "It is the origin"
+      ],
+      "correctIndex": 0,
+      "answer": "It lies on that line",
+      "explanation": "Reflecting a point on the mirror line leaves it where it is, because the fold passes through it; conversely a point off the line has a distinct mirror image and so is not invariant. For the x-axis this gives b = 0, for y = x it gives a = b, and in each case the solution is the mirror itself.",
+      "commonMistake": "Choosing equal coordinates, which is true only for the particular mirror y = x."
+    },
+    {
+      "id": "icse-10-math-q-cg-19",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A point P lies on the segment joining minus one, two and four, minus three and divides it in the ratio two to three. Give its coordinates and state the image of P under reflection in the x-axis.",
+      "answer": "P is one, zero and its reflection in the x-axis is one, zero, since P lies on that axis",
+      "explanation": "By the section formula, the abscissa is (2 x 4 + 3 x (-1)) / 5 = 1 and the ordinate is (2 x (-3) + 3 x 2) / 5 = 0, so P = one, zero. Because the ordinate is zero, P lies on the x-axis and is therefore invariant under reflection in it; its image is itself, one, zero.",
+      "commonMistake": "Reflecting before noticing that the point sits on the mirror, and reporting a moved image that does not satisfy the invariance condition."
+    },
+    {
+      "id": "icse-10-math-q-cg-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Reflect the point three, four in the x-axis and call the image A. Find the mid-point of A and the point eight, six, and then find the equation of the line through those two points.",
+      "answer": "A is three, minus four; the mid-point is five point five, one; and the line through them has equation y = 2x - 10",
+      "explanation": "Reflecting three, four in the x-axis gives A = three, minus four. The mid-point of three, minus four and eight, six is ((3 + 8) / 2, (-4 + 6) / 2) = (11 / 2, 1), that is five point five, one. The gradient from three, minus four to five point five, one is (1 - (-4)) / (5.5 - 3) = 5 / 2.5 = 2. Substituting gives -4 = 2 x 3 + c, so c = -10 and the equation is y = 2x - 10. Check with five point five, one: 2 x 5.5 - 10 = 1.",
+      "commonMistake": "Reflecting the second point as well, or computing the gradient with the coordinates in the wrong order, which flips its sign."
+    },
+    {
+      "id": "icse-10-math-q-cg-21",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The rule for reflecting the point x, y in the origin is to change the sign of ______ coordinates.",
+      "answer": "both",
+      "explanation": "Reflection in the origin sends x, y to minus x, minus y, so both coordinates change sign. Geometrically this is a rotation of one hundred and eighty degrees about the origin, and it equals successive reflections in the two axes applied in either order.",
+      "commonMistake": "Changing only one coordinate, which is a reflection in a single axis and not in the origin."
+    },
+    {
+      "id": "icse-10-math-q-cg-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the section formula for a point dividing the segment joining x1, y1 and x2, y2 in the ratio m to n, and verify it by putting m equal to n.",
+      "answer": "P = ((m x2 + n x1) / (m + n), (m y2 + n y1) / (m + n)); with m = n it reduces to the mid-point formula",
+      "explanation": "The formula weights each endpoint by the opposite part of the ratio. Setting m = n makes the ratio one to one, so m + n = 2m and each coordinate becomes (m x2 + m x1) / 2m = (x1 + x2) / 2, with the same for the ordinates. That is exactly the mid-point formula, confirming both the structure of the section formula and its consistency with the special case.",
+      "commonMistake": "Weighting each endpoint by its own part of the ratio, which swaps the two weights and generally moves the point to the wrong place."
+    },
+    {
+      "id": "icse-10-math-q-cg-23",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the coordinates of the point that divides the segment joining four, six and minus two, four internally in the ratio three to two, and check that the two sub-steps are in the stated ratio.",
+      "answer": "The point is 0.4, 4.8, and both sub-steps are in the ratio 3 to 2",
+      "explanation": "The point dividing A, four, six from B, minus two, four in the ratio three to two takes B's coordinates weighted by three and A's by two, the opposite weighting. The abscissa is (3 x (-2) + 2 x 4) / 5 = (-6 + 8) / 5 = 0.4, and the ordinate is (3 x 4 + 2 x 6) / 5 = (12 + 12) / 5 = 4.8. Check the steps: from four, six to 0.4, 4.8 the change is minus 3.6 across and minus 1.2 down, while from there to minus two, four the change is minus 2.4 across and minus 0.8 down. The ratios are 3.6 to 2.4 = 1.5 and 1.2 to 0.8 = 1.5, both equal to three halves, so the division is confirmed.",
+      "commonMistake": "Using the ratio in the wrong order, or dividing by the individual parts rather than by their sum."
+    }
+  ]
+}

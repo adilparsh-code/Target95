@@ -1,0 +1,659 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-ratio",
+  "title": "Ratio and Proportion",
+  "kind": "mathematics",
+  "tagline": "Properties of proportions, componendo and dividendo, and direct and inverse variations.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A ratio compares two quantities of the same kind by division, and a proportion declares two ratios equal. The topic has two halves that look different but share a single spine. The first is the algebra of proportions themselves: what may be added, subtracted, inverted or rearranged while the equality survives, of which componendo and dividendo is the most powerful tool. The second is variation, which describes how one quantity moves in response to another, and which turns word problems about speed, cost, work and time into one-line equations. This chapter develops both halves from the definition, gives each manipulation a reason rather than a rule to memorise, and closes with the checking habits that catch sign and setup errors before they cost marks.",
+    "facts": [
+      { "label": "Proportion", "value": "a : b = c : d written a / b = c / d, equivalently a d = b c" },
+      { "label": "Means and extremes", "value": "In a : b = c : d the means are b and c and the extremes are a and d" },
+      { "label": "Componendo and dividendo", "value": "From a / b = c / d follows (a + b) / (a - b) = (c + d) / (c - d)" },
+      { "label": "Direct variation", "value": "y = k x for some constant k; as x rises, y rises in the same proportion" },
+      { "label": "Inverse variation", "value": "x y = k for some constant k; as x rises, y falls so that the product is fixed" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the definition of a proportion and identify its means and extremes.",
+    "Apply the standard proportion properties including invertendo, componendo, dividendo and alternendo with justification.",
+    "Use componendo and dividendo to solve an equation containing the same rational expression on both sides.",
+    "Distinguish direct from inverse variation from the wording of a problem and set up the corresponding equation.",
+    "Solve a direct or inverse variation problem for an unknown value using the constant of proportionality.",
+    "Handle combined variation in which one quantity varies directly with one variable and inversely with another."
+  ],
+  "learn": [
+    {
+      "id": "ratio-and-proportion-basics",
+      "title": "Ratios, proportions, means and extremes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A ratio is a comparison of two quantities by division, written a to b or a colon b, and it is meaningful only when both quantities share a unit or a kind. A ratio carries no unit of its own, and it may be scaled freely: the ratio three to four is the same statement as six to eight or thirty to forty, because multiplying both terms by one number does not alter the comparison. A proportion is an assertion that two ratios are equal, written a to b equals c to d, and it is in every respect an equation between two fractions. Everything you know about cross multiplication applies immediately, and the product of the extremes equals the product of the means."
+        },
+        {
+          "type": "paragraph",
+          "text": "The vocabulary is worth fixing because later manipulations are quoted by name. In the proportion a to b equals c to d, the outer terms a and d are called the extremes and the inner terms b and c are called the means, and cross multiplication says their products agree. The middle two terms b and c are also called the continued means, and when b equals c the proportion is said to be in continued proportion and b is called the mean proportional between a and d. In that special case b squared equals a times d, a relation that appears whenever a quantity must be split into two parts in given proportion to each other."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Ratio", "meaning": "The quotient of two quantities of the same kind, written a : b and equal to a / b." },
+            { "term": "Proportion", "meaning": "An equality of two ratios, a : b = c : d, equivalent to a d = b c." },
+            { "term": "Extremes", "meaning": "The outer terms a and d of a proportion; their product equals the product of the means." },
+            { "term": "Means", "meaning": "The inner terms b and c of a proportion." },
+            { "term": "Mean proportional", "meaning": "The value b in a continued proportion a : b = b : d, satisfying b squared = a d." },
+            { "term": "Constant of proportionality", "meaning": "The fixed multiplier k that links the two quantities in a variation." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A ratio may be multiplied or divided by any common factor without changing what it says.",
+            "A proportion is an equation: cross multiplication and every other equation rule apply.",
+            "Extremes product equals means product: a d = b c.",
+            "For a continued proportion the mean proportional b satisfies b squared = a d.",
+            "Both terms of a ratio must be expressed in the same unit before the ratio is taken."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "properties-of-proportions",
+      "title": "The standard properties of a proportion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "From a single proportion a great family of others follows, and each has a traditional name because quoting the name is faster than re-deriving it. Invertendo exchanges each ratio with its reciprocal, and it is valid because both sides are merely numbers being divided. Alternendo moves a term across the division line, exchanging b with c, which is cross multiplication read sideways. Componendo adds one to each ratio and dividendo subtracts one, and applying the two together is the celebrated componendo and dividendo. Each of these is a consequence of ordinary algebra on the fractions, and none of them introduces information that was not already present."
+        },
+        {
+          "type": "table",
+          "caption": "Named transformations of a : b = c : d",
+          "columns": ["Name", "Result", "Reason"],
+          "rows": [
+            ["Invertendo", "b / a = d / c", "Take the reciprocal of both equal numbers"],
+            ["Alternendo", "a / c = b / d", "Cross multiplication rearranged"],
+            ["Componendo", "(a + b) / b = (c + d) / d", "Add 1 to both sides"],
+            ["Dividendo", "(a - b) / b = (c - d) / d", "Subtract 1 from both sides"],
+            ["Componendo and dividendo", "(a + b) / (a - b) = (c + d) / (c - d)", "Divide the componendo result by the dividendo result"],
+            ["Addendo", "(a + c) / (b + d) = a / b", "Both ratios equal the common value k"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Given a : b = c : d = 3 : 4, find (a + c) : (b + d).",
+              "note": "Both ratios equal the common value 3/4, so by addendo (a + c) / (b + d) = 3/4 as well. Writing a = 3k, c = 3m, b = 4k, d = 4m gives (3k + 3m) / (4k + 4m) = 3(k + m) / 4(k + m) = 3/4."
+            },
+            {
+              "text": "Verify that the means product equals the extremes product for 3 : 4 = 6 : 8.",
+              "note": "Extremes product = 3 x 8 = 24. Means product = 4 x 6 = 24. They agree, as they must for any proportion."
+            },
+            {
+              "text": "Find the mean proportional between 3 and 12.",
+              "note": "The mean proportional b satisfies b squared = 3 x 12 = 36, so b = 6. Check: 3 : 6 = 6 : 12, both equal to 1/2."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The addendo example reveals why one condition matters so much. It works only when the two ratios are equal to each other, because only then is there a common value k to factor out. Candidates often apply addendo to two different ratios and are baffled when the answer does not hold; there is no common value to cancel, so no cancellation can occur. Before using any named property, confirm that its hypothesis is actually satisfied by the given data, and write that confirmation down when the property is doing substantial work."
+        }
+      ]
+    },
+    {
+      "id": "componendo-and-dividendo",
+      "title": "Componendo and dividendo in detail",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Componendo and dividendo deserves its own section because it solves a class of equations that would otherwise need expansion and collection of terms. Start from a over b equals c over d. Componendo gives a plus b over b equals c plus d over d, and dividendo gives a minus b over b equals c minus d over d. Dividing the first by the second cancels the common denominator b on the left and d on the right, leaving a plus b over a minus b equals c plus d over c minus d. The power of the result is that the individual quantities a and b are replaced by their sum and difference, which is exactly the shape that appears when a single variable is dressed up in an expression on both sides of an equation."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If (x + 3y) / (x - 3y) = 5 / 2, find x : y.",
+              "note": "Treat x as a and 3y as b. Componendo and dividendo gives a / b = (5 + 2) / (5 - 2) = 7 / 3, so x / 3y = 7 / 3, hence 3x = 21y and x : y = 7 : 1. Check: (7 + 3) / (7 - 3) = 10 / 4 = 5 / 2."
+            },
+            {
+              "text": "If a / b = 3 / 4, find (a + b) / (a - b).",
+              "note": "Componendo and dividendo gives (3 + 4) / (3 - 4) = 7 / (-1) = -7. So (a + b) / (a - b) = -7, which is a negative number because a is smaller than b and so a minus b is negative."
+            },
+            {
+              "text": "If (x squared + 3 y squared) / (x squared - 3 y squared) = 5 / 2, find x squared : y squared.",
+              "note": "Apply componendo and dividendo with a = x squared and b = 3 y squared: a / b = 7 / 3, so x squared / 3 y squared = 7 / 3, giving x squared : y squared = 7 : 1."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A word of caution about signs. In the second example the denominator a minus b is negative, and the result correctly comes out negative as well. If you square or otherwise lose that sign you will report a positive seven, which would imply a larger than b and contradict the given ratio three to four. The reliable discipline is to substitute your answer back into the original fraction and evaluate it numerically; the check takes one line and it is the only way to be certain the sign survived the manipulation. Note also that the technique requires the same structural expression on both sides of the equation; applying it to an equation whose two sides are built differently produces nonsense."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Confirm both sides of the equation have the same structure before using componendo and dividendo.",
+            "Write the a and b you are treating as such, so the substitution is visible.",
+            "Expect a negative result whenever a is smaller than b, and do not lose the sign.",
+            "Substitute the recovered ratio back into the original fraction to confirm."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direct-variation",
+      "title": "Direct variation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "One quantity is said to vary directly with another when a fixed multiple links them: doubling one doubles the other, halving one halves it, and zero of either forces zero of the other. The formal statement is that y equals k times x for some constant k called the constant of proportionality, and the constant is always recoverable by dividing one known value of y by its corresponding x. Word problems signal direct variation with phrases such as varies as, is proportional to, or the practical versions: more workers means more work done, higher price means higher cost for the same quantity."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "y varies directly as x, and y is 12 when x is 3. Find y when x is 7.",
+              "note": "y = kx, so 12 = 3k and k = 4, that is y = 4x. When x = 7 the value is 4 x 7 = 28."
+            },
+            {
+              "text": "The cost of 5 kg of rice is 450 rupees. Find the cost of 8 kg at the same rate.",
+              "note": "Cost varies directly with mass, so the rate is 450 / 5 = 90 rupees per kg. The cost of 8 kg is 90 x 8 = 720 rupees."
+            },
+            {
+              "text": "If y is directly proportional to x and y = 20 when x = 5, find the constant of proportionality.",
+              "note": "k = y / x = 20 / 5 = 4, so the connecting law is y = 4x."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two equivalent ways of solving a direct variation problem are worth mastering, because either may be quicker depending on the numbers. The constant method finds k first and then evaluates the law; the ratio method equates the two ratios directly, since y1 over x1 equals y2 over x2 whenever both equal k. The ratio method avoids computing the constant at all and is often one line shorter. Both give the same answer, and using the ratio form makes it obvious why direct variation is sometimes described as keeping the quotient fixed."
+        }
+      ]
+    },
+    {
+      "id": "inverse-variation",
+      "title": "Inverse variation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Inverse variation describes a fixed product rather than a fixed quotient. One quantity varies inversely as another when their product stays constant, so that doubling one halves the other. The algebra is y equals k divided by x, equivalently x times y equals k, and the constant is recovered by multiplying a known pair. The everyday signals are phrases such as inversely as, varies inversely, or practical statements where a fixed total is spread over a variable number: the same job done by more people in fewer days, the same amount of money buying fewer items at a higher price, or the same distance covered at different speeds."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "y varies inversely as x, and y is 8 when x is 6. Find y when x is 24.",
+              "note": "xy = k, so k = 6 x 8 = 48. When x = 24 the value is 48 / 24 = 2."
+            },
+            {
+              "text": "Twelve men can dig a trench in 18 days. How many days will sixteen men take at the same rate?",
+              "note": "Days vary inversely with the number of men, so men times days = 12 x 18 = 216 is fixed. Days for 16 men = 216 / 16 = 13.5 days."
+            },
+            {
+              "text": "If 9 notebooks cost 540 rupees, what do 12 notebooks cost at the same price?",
+              "note": "Unit price = 540 / 9 = 60 rupees. Cost = 60 x 12 = 720 rupees, which is a direct variation in quantity with the rate held fixed."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "How the two variations behave",
+          "columns": ["Feature", "Direct variation", "Inverse variation"],
+          "rows": [
+            ["Equation", "y = k x", "x y = k"],
+            ["Fixed quantity", "The quotient y / x", "The product x y"],
+            ["Double x", "y doubles", "y halves"],
+            ["Zero of x", "Forces y to zero", "Is not permitted, since k divided by zero is undefined"],
+            ["Typical wording", "varies as, proportional to", "varies inversely as, fixed total spread over a count"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The fourth row of that table is a useful sanity check on a proposed setup. If your model says that increasing the number of men to infinity leaves the time unchanged, you have accidentally written a direct relation where an inverse one was intended, and vice versa. Ask yourself what must stay fixed. In a job problem the total work is fixed and is the product of the rate and the time, so rate and time vary inversely. In a pricing problem the unit price is fixed and is the quotient of cost and quantity, so cost and quantity vary directly. Naming the fixed quantity first makes the choice automatic."
+        }
+      ]
+    },
+    {
+      "id": "combined-variation",
+      "title": "Combined and partial variation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Real relationships often mix the two kinds at once. A quantity may vary directly with one variable and simultaneously inversely with another, as when the distance covered in a fixed time rises with speed but falls as the road grows steeper. The algebra assembles the two laws into one expression: y equals k times x divided by z, for instance, when y varies directly as x and inversely as z. Finding k requires a complete set of values for all the variables at once, and only then can any other value be predicted. Skipping the completeness of that first data set is the commonest source of error."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "y varies directly as x and inversely as z. Given y = 4 when x = 10 and z = 5, find y when x = 15 and z = 6.",
+              "note": "Write y = k x / z. Then 4 = k x 10 / 5 = 2k, so k = 2. For the second set, y = 2 x 15 / 6 = 30 / 6 = 5."
+            },
+            {
+              "text": "The pressure of a gas varies directly with its temperature and inversely with its volume. State the formula and find the change when temperature doubles at constant volume.",
+              "note": "Pressure = k x temperature / volume. At constant volume, doubling the temperature doubles the pressure, since the quotient temperature over volume simply doubles."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A partial variation is the simpler cousin, in which the quantity is a sum of separately varying parts, such as y equals four x plus a term varying directly with z. Here two constants are needed rather than one, and two complete data sets are needed to find them. The method is to substitute each complete set, producing two linear equations in the two unknowns, which you then solve simultaneously. Recognising from the wording that two constants are required prevents the frustration of a single substitution that will not determine anything."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write the law first: y = k x for direct, x y = k for inverse, y = k x / z for combined.",
+            "Substitute a complete set of values to find k before attempting any prediction.",
+            "Check the prediction by confirming the same k governs both data sets.",
+            "In a partial variation, count the separately varying parts; that count is the number of constants to find."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "translating-word-problems",
+      "title": "Translating the wording into an equation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The decisive step in a variation problem happens before any arithmetic, and it consists of naming the quantity that stays fixed. Read the problem and ask what is being spread, what is being held constant, or what total is being shared among a varying count. Once that quantity is named, the equation writes itself: a fixed total implies a product that is constant and therefore inverse variation, while a fixed rate implies a quotient that is constant and therefore direct variation. The sentence must also be checked for any implied condition, such as a rate that does not change with volume or a workforce that produces at a uniform speed, because those assumptions are what justify the model."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A pipe fills a tank in 6 hours at a constant rate. What time is needed by a pipe of twice the diameter that fills at four times the rate?",
+              "note": "Volume is fixed, so time times rate = constant: inverse variation. Rate quadruples, so time becomes one quarter, giving 6 / 4 = 1.5 hours."
+            },
+            {
+              "text": "If 15 identical machines produce 450 articles in 6 hours, how many articles do 25 such machines make in 4 hours?",
+              "note": "Output varies jointly with the number of machines and the time, so output = k x machines x hours. From 450 = k x 15 x 6 = 90k, k = 5. Then output = 5 x 25 x 4 = 500 articles."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The second example shows joint variation, in which a quantity varies directly with two separate factors at the same time. The law contains their product, and a single complete data set determines the constant because the two factors appear multiplied rather than separately. Note also that the answer of five hundred articles is larger than the original four hundred and fifty on two counts: there are more machines and there is less time, and the two effects partly offset. Writing the law makes that trade-off explicit in a way that intuition alone does not."
+        }
+      ]
+    },
+    {
+      "id": "checking-ratio-answers",
+      "title": "Checking a ratio or variation answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four checks cover the chapter. The unit check: both terms of every ratio must be in the same unit, so a ratio of centimetres to seconds is a speed and not a proportion of lengths unless both terms are lengths. The reconstruction check: substitute a recovered ratio back into the original fraction and confirm the given value reappears, including its sign. The constant check: in a variation problem, verify that your k is the same for both the given data set and the one you were asked about. And the direction check: confirm that your answer moves the way the wording demands, with more men producing fewer days in an inverse relation and more quantity producing more cost in a direct one."
+        },
+        {
+          "type": "table",
+          "caption": "Worked checking sequence for the equation (x + 3y) / (x - 3y) = 5 / 2",
+          "columns": ["Step", "Working", "Result"],
+          "rows": [
+            ["Apply componendo and dividendo", "x / 3y = (5 + 2) / (5 - 2)", "7 / 3"],
+            ["Clear the fraction", "3x = 21y", "x : y = 7 : 1"],
+            ["Substitute back", "(7 + 3) / (7 - 3)", "10 / 4"],
+            ["Reduce", "10 / 4", "5 / 2, as given"],
+            ["Sign check", "7 - 3 = 4, positive", "denominator sign consistent"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The reconstruction row is the one that matters, because it validates the entire chain without re-running it. When a problem asks for a ratio, the cheapest certain proof is to rebuild the original expression from your answer and reduce. If the reduced fraction equals the given one, the manipulation was sound whatever route you took; if it does not, the error lies somewhere in the middle and the sign is the first suspect. Candidates who perform this check rarely lose the final mark, because even a slip earlier can often be located and corrected while the answer sheet is still open."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from the definition and the named properties through componendo and dividendo to direct, inverse and combined variation. Work each one by naming the fixed quantity or confirming the hypothesis of the property first, and reconstruct the original fraction or constant before moving on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "State the hypothesis of any named property before applying it, and write the confirmation down.",
+            "For componendo and dividendo, name the a and b you are treating as such, then substitute back to check.",
+            "In a variation problem, name the fixed quantity first; that choice decides the equation.",
+            "Find the constant from a complete data set before predicting any value.",
+            "Give every ratio in its simplest form and keep any negative sign."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Componendo and dividendo assembled from two simpler steps",
+      "description": "A two-stage diagram. The top box contains the starting proportion a over b equals c over d. Two arrows leave it, one labelled componendo and leading to a box containing a plus b over b equals c plus d over d, and one labelled dividendo leading to a box containing a minus b over b equals c minus d over d. From those two boxes a pair of converging arrows, labelled divide, points to a single final box containing a plus b over a minus b equals c plus d over c minus d, showing that the common denominator has cancelled.",
+      "labels": ["Proportion", "Componendo", "Dividendo", "Divide", "Result", "Common denominator cancels"]
+    },
+    {
+      "caption": "Direct and inverse variation compared",
+      "description": "Two graphs side by side sharing the same axis labels, with x on the horizontal axis and y on the vertical. The left graph, headed direct variation, shows a straight line through the origin rising to the right, annotated with the equation y equals k x and the note that the quotient y over x is fixed. The right graph, headed inverse variation, shows a smooth curve falling from the top left towards the bottom right, never touching either axis, annotated with x y equals k and the note that the product is fixed. A marked pair of points on each graph is connected to the axes by dashed lines.",
+      "labels": ["Direct variation", "Inverse variation", "y = kx", "xy = k", "Fixed quotient", "Fixed product", "Origin"]
+    }
+  ],
+  "keyPoints": [
+    "A proportion is an equation of fractions, so cross multiplication and all equation rules apply.",
+    "Extremes product equals means product: for a : b = c : d, a d = b c.",
+    "Componendo adds one to each ratio, dividendo subtracts one, and dividing them cancels the common denominator.",
+    "Componendo and dividendo gives (a + b) / (a - b) = (c + d) / (c - d), and it requires the same structure on both sides.",
+    "Addendo holds only when the two ratios are equal to a common value.",
+    "Direct variation keeps a quotient fixed: y = k x.",
+    "Inverse variation keeps a product fixed: x y = k.",
+    "Combined variation assembles both: y = k x / z, and one complete data set fixes k."
+  ],
+  "examFocus": [
+    "Name the hypothesis of the property you are using, and write down the confirmation that it is satisfied.",
+    "For componendo and dividendo, label the a and b explicitly, then substitute the recovered ratio back into the original fraction to confirm the value and its sign.",
+    "In a variation problem, name the fixed quantity before writing the equation; that single sentence justifies the model.",
+    "Find and state the constant of proportionality before computing the requested value, and check it against both data sets.",
+    "Express every final ratio in its simplest form and preserve negative signs rather than absorbing them."
+  ],
+  "vocabulary": [
+    { "word": "Ratio", "meaning": "The quotient of two like quantities, written a : b and equal to a divided by b." },
+    { "word": "Proportion", "meaning": "An equality between two ratios, equivalent to the product of the extremes equalling the product of the means." },
+    { "word": "Extremes", "meaning": "The outer terms of a proportion, whose product equals that of the means." },
+    { "word": "Means", "meaning": "The inner terms of a proportion." },
+    { "word": "Componendo", "meaning": "The operation of adding one to each ratio of a proportion." },
+    { "word": "Dividendo", "meaning": "The operation of subtracting one from each ratio of a proportion." },
+    { "word": "Direct variation", "meaning": "A relation y = k x in which the quotient y over x stays constant." },
+    { "word": "Inverse variation", "meaning": "A relation x y = k in which the product stays constant." },
+    { "word": "Constant of proportionality", "meaning": "The fixed value k that governs a variation and is found from one complete data set." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-rat-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the proportion a : b = c : d, the product of the extremes equals:",
+      "options": [
+        "The product of the means",
+        "The sum of the means",
+        "The ratio of the means",
+        "Zero, whenever b is non-zero"
+      ],
+      "correctIndex": 0,
+      "answer": "The product of the means",
+      "explanation": "Cross multiplying a / b = c / d gives a d = b c, where a and d are the extremes and b and c are the means. For 3 : 4 = 6 : 8 the extremes product is 24 and the means product is also 24, confirming the rule.",
+      "commonMistake": "Multiplying adjacent terms rather than the outer pair against the inner pair."
+    },
+    {
+      "id": "icse-10-math-q-rat-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a : b = c : d, then componendo and dividendo gives:",
+      "options": [
+        "(a + b) / (a - b) = (c + d) / (c - d)",
+        "(a + b) / b = (c + d) / d",
+        "b / a = d / c",
+        "a / c = b / d"
+      ],
+      "correctIndex": 0,
+      "answer": "(a + b) / (a - b) = (c + d) / (c - d)",
+      "explanation": "Componendo yields a + b over b equals c + d over d, and dividendo yields a minus b over b equals c minus d over d. Dividing the first by the second cancels b and d and leaves the stated result. The second option is componendo alone, the third is invertendo and the fourth is alternendo.",
+      "commonMistake": "Quoting componendo alone and forgetting the dividendo step that cancels the denominator."
+    },
+    {
+      "id": "icse-10-math-q-rat-03",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If 3 : 4 = 6 : 8, the product of the extremes is ______ and the product of the means is the same value.",
+      "answer": "24",
+      "explanation": "The extremes are 3 and 8, whose product is 24, and the means are 4 and 6, whose product is also 24. The equality of these two products is precisely what it means for the four numbers to be in proportion.",
+      "commonMistake": "Multiplying 3 by 4 and 6 by 8, which pairs adjacent terms and gives two different numbers."
+    },
+    {
+      "id": "icse-10-math-q-rat-04",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The mean proportional between 3 and 12 is ______.",
+      "answer": "The mean proportional is 6",
+      "explanation": "A mean proportional b in a continued proportion satisfies b squared = 3 x 12 = 36, so b = 6, the positive root being taken since lengths are positive. The check is that 3 : 6 and 6 : 12 both reduce to 1 : 2, confirming the continued proportion.",
+      "commonMistake": "Reporting 36, the square of the mean proportional, rather than the mean proportional itself."
+    },
+    {
+      "id": "icse-10-math-q-rat-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If (x + 3y) / (x - 3y) = 5 / 2, find x : y and verify your answer.",
+      "answer": "x : y = 7 : 1",
+      "explanation": "Treat x as a and 3y as b, so componendo and dividendo gives a / b = (5 + 2) / (5 - 2) = 7 / 3. That is x / 3y = 7 / 3, so 3x = 21y and x / y = 7. Verification: substituting x = 7y gives (7y + 3y) / (7y - 3y) = 10y / 4y = 5 / 2, exactly as given.",
+      "commonMistake": "Reporting x / y = 7 / 3 by forgetting that the left side was x over 3y rather than over y."
+    },
+    {
+      "id": "icse-10-math-q-rat-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If a / b = 3 / 4, find the value of (a + b) / (a - b).",
+      "answer": "-7",
+      "explanation": "Componendo and dividendo gives (3 + 4) / (3 - 4) = 7 / (-1) = -7. The answer is negative because a is smaller than b, so a minus b is negative and the fraction reflects that. As a numerical check, take a = 3 and b = 4: (3 + 4) / (3 - 4) = 7 / (-1) = -7.",
+      "commonMistake": "Reporting 7 and losing the minus sign, which would contradict the given ratio."
+    },
+    {
+      "id": "icse-10-math-q-rat-07",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Given that (x squared + 3 y squared) / (x squared - 3 y squared) = 5 / 2, find x squared : y squared, and hence the ratio x : y taking positive values.",
+      "answer": "x squared : y squared = 7 : 1, so x : y = 7 : 1 under square root, that is x : y = root 7 : 1",
+      "explanation": "Apply componendo and dividendo with a = x squared and b = 3 y squared. The right hand side becomes (5 + 2) / (5 - 2) = 7 / 3, so x squared over 3 y squared equals 7 over 3, giving x squared : y squared = 7 : 1. Taking square roots of both members for positive x and y gives x : y = root 7 to 1. Verification: with x squared = 7 and y squared = 1, the left side is (7 + 3) / (7 - 3) = 10 / 4 = 5 / 2.",
+      "commonMistake": "Stopping at x squared : y squared when the question also asks for x : y, or taking the square root of only one member."
+    },
+    {
+      "id": "icse-10-math-q-rat-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If a : b = c : d = 3 : 4, find (a + c) : (b + d).",
+      "answer": "3 : 4",
+      "explanation": "Both ratios equal the common value three quarters, so by addendo the combined ratio is the same. Writing a = 3k, b = 4k, c = 3m and d = 4m gives (3k + 3m) / (4k + 4m) = 3(k + m) / 4(k + m) = 3/4. The result holds because a common value exists to be cancelled.",
+      "commonMistake": "Adding the numerators and denominators of two different ratios and expecting the result to be meaningful."
+    },
+    {
+      "id": "icse-10-math-q-rat-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "y varies inversely as x. If y is 8 when x is 6, then y when x is 24 is:",
+      "options": ["2, because the product stays at 48", "32, if the relation were direct", "4", "16"],
+      "correctIndex": 0,
+      "answer": "2, because the product stays at 48",
+      "explanation": "Inverse variation keeps the product fixed, so x y = 6 x 8 = 48. With x = 24 the value of y is 48 / 24 = 2. The direction is also right: quadrupling x must quarter y, and 8 quartered is 2.",
+      "commonMistake": "Using y = k x, which gives 32 and describes a direct rather than an inverse relation."
+    },
+    {
+      "id": "icse-10-math-q-rat-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a direct variation y = k x, the constant k is found by dividing y by x; for y = 12 when x = 3, the constant is ______.",
+      "answer": "The constant is 4, giving y = 4x",
+      "explanation": "Substituting the given pair gives 12 = k x 3, so k = 12 / 3 = 4 and the law is y = 4x. Any other value of x then gives y directly, for instance x = 7 yields y = 28.",
+      "commonMistake": "Reporting 36 as though the constant were the product rather than the quotient."
+    },
+    {
+      "id": "icse-10-math-q-rat-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Twelve men can dig a trench in 18 days. How many days will sixteen men take at the same rate?",
+      "answer": "13.5 days",
+      "explanation": "Total work is fixed, so days vary inversely with the number of men and men times days stays constant at 12 x 18 = 216. For sixteen men the days are 216 / 16 = 13.5. Direction check: more men must mean fewer days, and 13.5 is less than 18, so the answer is consistent.",
+      "commonMistake": "Setting up a direct proportion and multiplying, which gives 24 days and implies that more men take longer."
+    },
+    {
+      "id": "icse-10-math-q-rat-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The cost of 5 kg of rice is 450 rupees. Find the cost of 8 kg at the same rate.",
+      "answer": "720 rupees",
+      "explanation": "Cost varies directly with mass at a fixed unit price, so the rate is 450 / 5 = 90 rupees per kilogram. The cost of 8 kg is 90 x 8 = 720 rupees. Equivalently the ratio of costs equals the ratio of masses: 450 / 5 = c / 8, giving c = 720.",
+      "commonMistake": "Multiplying 450 by 8 without first finding the rate, which gives 3600 rupees."
+    },
+    {
+      "id": "icse-10-math-q-rat-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "y varies directly as x and inversely as z. Given that y = 4 when x = 10 and z = 5, find y when x = 15 and z = 6.",
+      "answer": "y = 5",
+      "explanation": "The law is y = k x / z. Substituting the complete first data set gives 4 = k x 10 / 5 = 2k, so k = 2 and the law is y = 2x / z. For the second set, y = 2 x 15 / 6 = 30 / 6 = 5. Check that the same constant governs both: from the second data, k = y z / x = 5 x 6 / 15 = 2, matching the first.",
+      "commonMistake": "Using only x and z to find k while dropping y, or finding k from an incomplete data set."
+    },
+    {
+      "id": "icse-10-math-q-rat-14",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which pair of quantities normally varies inversely?",
+      "options": [
+        "The number of workers and the time to finish a fixed job",
+        "The mass of apples and their cost at a fixed price",
+        "The distance travelled and the time taken at a fixed speed",
+        "The side of a square and its area"
+      ],
+      "correctIndex": 0,
+      "answer": "The number of workers and the time to finish a fixed job",
+      "explanation": "The job total is fixed and equals the rate multiplied by the time, with the rate proportional to the number of workers, so more workers means proportionally less time. The other three pairs are all direct: cost rises with mass, distance rises with time at fixed speed, and area rises with the side squared.",
+      "commonMistake": "Choosing distance and time at a fixed speed, which is a direct relation and not an inverse one."
+    },
+    {
+      "id": "icse-10-math-q-rat-15",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Fifteen identical machines produce 450 articles in 6 hours. Find how many articles twenty five such machines make in 4 hours, and state the type of variation involved.",
+      "answer": "500 articles, by joint variation",
+      "explanation": "Output varies jointly with the number of machines and the hours worked, so output = k x machines x hours. The first data set gives 450 = k x 15 x 6 = 90k, so k = 5. For the second, output = 5 x 25 x 4 = 500 articles. The rise from 450 to 500 reflects more machines outweighing fewer hours: machines rise by a factor of 5 over 3 while hours fall by a factor of 2 over 3, giving a net factor of 10 over 9, and 450 x 10 / 9 = 500.",
+      "commonMistake": "Varying only with the machine count and ignoring the change in hours, which gives 750 articles."
+    },
+    {
+      "id": "icse-10-math-q-rat-16",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the proportion a : b = c : d, the means are the two ______ terms, b and c.",
+      "answer": "inner",
+      "explanation": "The outer terms a and d are the extremes and the inner terms b and c are the means. Cross multiplication states that the product of the extremes equals the product of the means, so naming them correctly makes the rule easy to recall.",
+      "commonMistake": "Reversing the two names, which then makes the cross-multiplication rule appear to fail."
+    },
+    {
+      "id": "icse-10-math-q-rat-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State two named properties of a proportion and apply each to 3 : 4 = 6 : 8.",
+      "answer": "Invertendo gives 4 : 3 = 8 : 6, and alternendo gives 3 : 6 = 4 : 8",
+      "explanation": "Invertendo takes reciprocals of both equal ratios: 4 over 3 and 8 over 6 both equal 4/3, so the new proportion holds. Alternendo exchanges the middle terms, giving 3 over 6 equals 4 over 8, and both sides reduce to 1/2. Each property follows from ordinary algebra on the fractions and introduces no new information.",
+      "commonMistake": "Quoting a property whose hypothesis is not satisfied, such as addendo applied to two unequal ratios."
+    },
+    {
+      "id": "icse-10-math-q-rat-18",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If y varies directly as x, then the graph of y against x is:",
+      "options": [
+        "A straight line through the origin",
+        "A straight line not through the origin",
+        "A curve that never meets the axes",
+        "A horizontal line"
+      ],
+      "correctIndex": 0,
+      "answer": "A straight line through the origin",
+      "explanation": "The law y = k x is of the form y = m x with zero intercept, so the graph is a straight line through the origin, and when x is zero so is y. A curve would indicate inverse variation, and a horizontal line would mean y does not depend on x at all.",
+      "commonMistake": "Choosing a straight line with a non-zero intercept, which would model y = k x plus a constant rather than a pure variation."
+    },
+    {
+      "id": "icse-10-math-q-rat-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A pipe fills a tank in 6 hours at a constant rate. What time is needed by a pipe that fills at four times that rate?",
+      "answer": "1.5 hours",
+      "explanation": "The tank volume is fixed and equals rate multiplied by time, so time varies inversely with rate and the product stays at 6 hours times the original rate. Quadrupling the rate quarters the time, giving 6 / 4 = 1.5 hours. Direction check: a faster pipe must take less time, and 1.5 is less than 6.",
+      "commonMistake": "Multiplying by four and reporting 24 hours, which describes a slower rather than a faster pipe."
+    },
+    {
+      "id": "icse-10-math-q-rat-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that if a : b = c : d then (a + c) : (b + d) equals the common ratio, and state the hypothesis your proof requires.",
+      "answer": "(a + c) : (b + d) = a : b, provided the two ratios are equal",
+      "explanation": "Write a / b = c / d = k. Then a = k b and c = k d, so a + c = k b + k d = k (b + d), and dividing gives (a + c) / (b + d) = k, which is the common ratio. The essential hypothesis is that both ratios equal the same number k; without it the factorisation has nothing to cancel. Taking a = 3, b = 4, c = 6, d = 8, all multiples of 3 over 4, gives (3 + 6) / (4 + 8) = 9 / 12 = 3 / 4, confirming the result.",
+      "commonMistake": "Applying the result to two different ratios and assuming it still holds, when there is no common k to factor out."
+    },
+    {
+      "id": "icse-10-math-q-rat-21",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If y varies inversely as x, the product x times y is ______; for y = 8 when x = 6 this product equals 48.",
+      "answer": "constant",
+      "explanation": "Inverse variation is defined by a fixed product, written x y = k. Substituting the given pair gives k = 48, so every admissible pair must multiply to 48, and for instance x = 24 forces y = 2. This contrasts with direct variation, in which the quotient rather than the product is fixed.",
+      "commonMistake": "Saying the quotient is fixed, which describes direct variation instead."
+    },
+    {
+      "id": "icse-10-math-q-rat-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If y varies directly as x, and y = 20 when x = 5, find the value of y when x is doubled and also find the constant of proportionality.",
+      "answer": "The constant is 4 and y becomes 40 when x doubles",
+      "explanation": "From y = k x the constant is k = 20 / 5 = 4, so the law is y = 4x. Doubling x from 5 to 10 gives y = 4 x 10 = 40, which is exactly double the original 20 as direct variation requires. Equivalently, with a fixed quotient, doubling the numerator must double the value.",
+      "commonMistake": "Reporting 40 as the constant rather than as the new value of y."
+    },
+    {
+      "id": "icse-10-math-q-rat-23",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve for x using componendo and dividendo: (2x + 3) / (2x - 3) = 7 / 3.",
+      "answer": "x = 15/4, that is 3.75",
+      "explanation": "Treat 2x as a and 3 as b. Componendo and dividendo gives a / b = (7 + 3) / (7 - 3) = 10 / 4 = 5 / 2, so 2x / 3 = 5 / 2. Cross multiplying gives 4x = 15, hence x = 15/4 = 3.75. Verification: 2x = 7.5, so (7.5 + 3) / (7.5 - 3) = 10.5 / 4.5, and multiplying numerator and denominator by 2 gives 21 / 9 = 7 / 3, exactly as required.",
+      "commonMistake": "Stopping at 2x / 3 = 5 / 2 without solving for x, or reporting x = 15 by forgetting to divide by 4."
+    }
+  ]
+}

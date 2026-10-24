@@ -1,0 +1,689 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-similarity",
+  "title": "Similarity",
+  "kind": "mathematics",
+  "tagline": "Conditions for similarity, the basic proportionality theorem, areas of similar triangles, and the reading of maps and models.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Two figures are similar when one is a enlargement or a reduction of the other: every length is multiplied by the same factor while every angle is preserved. This chapter develops that idea for triangles, where it is far more powerful than it first appears. The basic proportionality theorem shows that a single parallel line inside a triangle creates proportional splits on both remaining sides, and its converse turns a measured proportion back into a statement of parallelism. The area result connects the one-dimensional scale factor to a two-dimensional quantity by squaring it, which is why areas behave differently from lengths. Maps and models are the everyday face of the same idea: a stated ratio converts real metres into page centimetres and back without any geometry being drawn at all.",
+    "facts": [
+      { "label": "Scale factor", "value": "Every corresponding length in the image is k times the length in the original" },
+      { "label": "Angles", "value": "All corresponding angles of similar figures are equal, whatever the scale factor is" },
+      { "label": "Basic proportionality", "value": "A line parallel to one side of a triangle splits the other two sides in the same ratio" },
+      { "label": "Perimeters", "value": "Two similar triangles have perimeters in the ratio of their corresponding sides" },
+      { "label": "Areas", "value": "Two similar triangles have areas in the ratio of the squares of their corresponding sides" },
+      { "label": "Map scale", "value": "A scale of 1 to n means one unit on the drawing stands for n units on the ground" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the conditions under which two triangles are similar and identify which of them applies to a given pair.",
+    "Apply the basic proportionality theorem and its converse to find a missing segment on a side of a triangle.",
+    "Use the theorem of three parallel lines to relate the intercepts cut on two transversals.",
+    "Compute the ratio of the areas of two similar triangles from the ratio of their corresponding sides, and reverse the calculation.",
+    "Use the scale factor to convert between a model, a map and the real object in both directions.",
+    "Justify a similarity argument in full, stating the equal angles or the proportional sides with their correspondence."
+  ],
+  "learn": [
+    {
+      "id": "what-similarity-means",
+      "title": "What it means for two figures to be similar",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Similarity is the statement that two figures have the same shape even though they may differ in size. Formally, two figures are similar when one can be mapped onto the other by a combination of a uniform stretching and a rigid motion, and that single sentence carries two testable consequences: all corresponding angles are equal, and all corresponding sides are in one common ratio. That common ratio is the scale factor, written k, and it is the only number needed to describe the entire relationship between the two figures."
+        },
+        {
+          "type": "paragraph",
+          "text": "Similarity is strictly weaker than congruence: every pair of congruent figures is similar with k equal to one, but a pair of similar figures need not be congruent. Congruence demands equality of length, which is a scale factor of exactly one, while similarity demands only proportionality of length. Keeping the two apart matters when reading a question, because a claim of congruence carries more information and therefore needs more evidence to establish."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two triangles have angles forty, sixty and eighty degrees in both. Are they necessarily similar?",
+              "note": "Yes. All three angles are equal, so the figures have the same shape and any ratio of corresponding sides works. The size is unconstrained, so they are similar but not necessarily congruent."
+            },
+            {
+              "text": "A triangle with sides three, four and five and another with sides six, eight and ten: state their relationship.",
+              "note": "Each side of the second is twice the corresponding side of the first, so the scale factor is two and the triangles are similar. Their angles are equal because side lengths fix the angles of a triangle."
+            },
+            {
+              "text": "Two triangles have two pairs of equal angles. Why must the third pair be equal as well?",
+              "note": "The angles of any triangle total one hundred and eighty degrees, so the third is obtained by subtracting the two known ones from that total. Two equal subtractions give equal results, so the third angles match and all three pairs are equal."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Similar figures", "meaning": "Figures with equal corresponding angles and proportional corresponding sides." },
+            { "term": "Scale factor", "meaning": "The common ratio k by which every length of one figure is multiplied to give the other." },
+            { "term": "Congruent figures", "meaning": "Figures that can be made to coincide exactly; similarity with a scale factor of one." },
+            { "term": "Correspondence", "meaning": "The matching of vertices of one figure with vertices of another in the correct order." },
+            { "term": "Enlargement", "meaning": "A transformation producing a similar figure with a scale factor other than one." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Similarity fixes angles and proportions lengths; it does not fix lengths themselves.",
+            "Always write the vertices in corresponding order when naming a similarity.",
+            "Congruence is similarity with a scale factor of exactly one.",
+            "All corresponding lengths scale by the same factor, areas by its square, and perimeters by it directly."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conditions-for-similarity",
+      "title": "The conditions for two triangles to be similar",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Proving that two triangles are similar normally needs less data than proving congruence, because proportionality replaces equality of length. Three conditions are in use. The angle condition, usually quoted as angle-angle, requires two pairs of equal angles, from which the third pair follows automatically. The side condition requires all three pairs of corresponding sides to be in one common ratio. The mixed condition requires two pairs of sides to be proportional and the included angles to be equal, so the angle must sit between the two sides that were measured."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Triangles have AB to DE equal to BC to EF equal to PQ to RS, with the first two sides meeting at B and the second two at E. Which condition applies?",
+              "note": "The two proportional pairs share vertex B in the first triangle and vertex E in the second, so the equal angles must be at B and E. That is the mixed condition, and it needs angle B = angle E as an extra hypothesis."
+            },
+            {
+              "text": "In triangle PQR, MN is drawn parallel to QR with M on PQ and N on PR. State a similarity and its scale factor when PM is three and MQ is six.",
+              "note": "Angle P is common and angle PMN equals angle PQR as corresponding angles, so triangle PMN is similar to triangle PQR by angle-angle. The scale is PM over PQ, that is three over three plus six, giving one third."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three similarity conditions and the data each one demands",
+          "columns": ["Condition", "Data required", "Common setting", "Data not required"],
+          "rows": [
+            ["Angle-angle", "Two pairs of equal angles", "A line parallel to a side", "Any side length"],
+            ["Side-side-side", "All three side pairs in one ratio", "Two triangles given by side lists", "Any angle"],
+            ["Side-angle-side", "Two side pairs proportional, included angle equal", "A shared or vertically opposite angle", "The third side"],
+            ["Right-angle hypotenuse-side", "Right angle plus one proportional pair involving the hypotenuse", "Altitudes and similar right triangles", "The second leg"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Choosing the right condition is a question of what the problem gives you rather than of preference. A parallel line inside a triangle hands you equal corresponding angles, so the angle route is immediate. A problem stating only side lengths hands you ratios, so the side route is the natural one. The mixed condition is the one most often applied carelessly, since the equal angle must be the angle contained by the two sides that were compared; an angle outside those two sides supplies no control over the shape at all."
+        }
+      ]
+    },
+    {
+      "id": "basic-proportionality-theorem",
+      "title": "The basic proportionality theorem and its converse",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The basic proportionality theorem, also called Thales' theorem, states that a line drawn parallel to one side of a triangle divides the other two sides in the same ratio. If a line through points on two sides is parallel to the third, the segment cut off above the line on one side has the same ratio to the segment below it as the corresponding pair on the other side. The proof is one application of similarity: the parallel line copies a second angle, the original angle is shared, and the resulting smaller triangle is similar to the whole, which immediately turns the shared angle and the correspondence into equal ratios."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In triangle ABC a line through D on AB and E on AC is parallel to BC. Given AD = 2, DB = 3 and AE = 4, find EC.",
+              "note": "The theorem gives AD over DB equals AE over EC, that is 2 over 3 equals 4 over EC. Cross-multiplying, 2 x EC = 12, so EC = 6. Check: 2/3 and 4/6 both reduce to two thirds."
+            },
+            {
+              "text": "In triangle PQR, MN is parallel to QR with PM = 3, MQ = 6 and PN = 5. Find NR.",
+              "note": "PM over MQ equals PN over NR, so 3 over 6 equals 5 over NR, giving NR = 10. Equivalently the ratio is one to two, and the lower segment on the second side must therefore be twice PN."
+            },
+            {
+              "text": "With the same data, find the ratio of the area of triangle PMN to that of triangle PQR.",
+              "note": "The similarity scale is PM over PQ, that is 3 over 9, equal to one third. Areas scale as the square of the linear scale, so the area ratio is one ninth."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The proportional split created by MN parallel to QR in triangle PQR",
+          "columns": ["Measurement", "Value", "Ratio used", "Result"],
+          "rows": [
+            ["PM", "3", "PM : MQ", "3 : 6, that is 1 : 2"],
+            ["MQ", "6", "PN : NR", "5 : 10, that is 1 : 2"],
+            ["PN", "5", "PM : PQ", "3 : 9, that is 1 : 3"],
+            ["NR", "10", "PN : PR", "5 : 15, that is 1 : 3"],
+            ["Scale factor of the small triangle to the large", "", "3 / 9", "1 : 3"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table shows both ratios the theorem produces and they are different quantities that are easy to confuse. The ratio of the two parts of one side is one to two, while the ratio of the small triangle to the whole is one to three, because the whole side is the sum of its two parts. Using the wrong one, particularly in an area calculation, is the classic error in this chapter. The converse of the theorem is equally useful and runs in the opposite direction: if a line divides two sides of a triangle in the same ratio, then the line is parallel to the third side, and it is proved by constructing the parallel line and showing that it would divide the sides in a ratio that forces it to coincide with the given line."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Parallel to a side means the two sides are split in the same ratio.",
+            "The ratio of the parts of one side and the ratio of the small triangle to the whole are different: one to two is not one to three.",
+            "The converse converts an observed proportion into a statement of parallelism.",
+            "State the correspondence of vertices before writing any ratio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "three-parallel-lines",
+      "title": "Three parallel lines and equal intercepts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The basic proportionality theorem extends beyond a single triangle. When three or more parallel lines are cut by two transversals, the intercepts on one transversal are proportional to the intercepts on the other, and when the parallel lines are equally spaced the intercepts are equal on every transversal. The proof again runs through a triangle: extend two transversals until they meet, and the triangle so formed is cut by the parallel lines in exactly the situation the basic proportionality theorem describes."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Three parallel lines cut one transversal into segments of four centimetres and six centimetres. What do they cut the second transversal into if the first intercept on it is nine centimetres?",
+              "note": "The ratio four to six reduces to two to three, so the second intercept must also be in the ratio two to three. With the first part nine, the second is nine x three divided by two, that is thirteen point five centimetres."
+            },
+            {
+              "text": "Three equally spaced parallel lines cut one transversal into two segments. What must the second transversal give?",
+              "note": "Equal spacing means the ratio of the intercepts is one to one, so the second transversal is also cut into two equal segments, whatever its direction. Their common length depends on how steep the transversal is."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The equally spaced case is the one worth memorising, since it is the form that appears most often: three equally spaced parallels cut equal intercepts on any transversal. It is also the statement that makes a set-square construction of a parallel line work, because the spacing transferred along one line is reproduced along another. The general proportional case is then just the same theorem with unequal spacings, and the reduction of the ratio before use is the only calculation the question normally asks for."
+        }
+      ]
+    },
+    {
+      "id": "areas-of-similar-triangles",
+      "title": "Areas of similar triangles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The area of a triangle depends on a base and a height, both of which are lengths, so if every length in a similar figure is multiplied by k then the base is multiplied by k and the height is multiplied by k, and the area is multiplied by k twice over. The ratio of the areas of two similar triangles is therefore the square of the ratio of their corresponding sides. This squaring is the single most useful computation in the chapter and it also works backwards: to recover a side ratio from an area ratio, take the square root."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two similar triangles have corresponding sides in the ratio three to five. State the ratio of their areas.",
+              "note": "Square the linear ratio: nine to twenty-five. Numerically the same result comes from computing one half times base times height for each triangle with both quantities scaled, which gives k squared overall."
+            },
+            {
+              "text": "Triangles ABC and DEF are similar with AB to DE equal to two to five and the area of ABC is forty-eight square units. Find the area of DEF.",
+              "note": "The area ratio is the square of the side ratio, so it is four to twenty-five. Forty-eight multiplied by twenty-five over four gives twelve x twenty-five, that is three hundred square units."
+            },
+            {
+              "text": "Two similar triangles have areas eighty-one and two hundred and twenty-five. Find the ratio of their corresponding sides.",
+              "note": "The ratio of areas is eighty-one to two hundred and twenty-five, and taking square roots gives nine to fifteen, which reduces to three to five. So the linear scale factor is three fifths from the first to the second."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "How quantities scale when the linear scale factor is k",
+          "columns": ["Quantity", "Scaling rule", "k = 1/3 example", "k = 2 example"],
+          "rows": [
+            ["Corresponding sides", "multiplied by k", "one third of the original", "twice the original"],
+            ["Perimeter", "multiplied by k", "one third of the original", "twice the original"],
+            ["Area", "multiplied by k squared", "one ninth of the original", "four times the original"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table makes the divergence between one-dimensional and two-dimensional quantities explicit, and it explains most real errors. A perimeter is a sum of lengths and so scales linearly, whereas an area is a product of two lengths and so scales quadratically. Two similar triangles with sides in the ratio two to three therefore have perimeters in the ratio two to three but areas in the ratio four to nine, and a question that reports an area ratio of two to three for such a pair has simply failed to square. Whenever an answer involves area, check whether the figure you wrote is the square of the length ratio you were given."
+        }
+      ]
+    },
+    {
+      "id": "maps-and-models",
+      "title": "Maps, plans and models",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A map, a plan or a model is a similar figure of the real thing, and the scale printed on it is the scale factor expressed as a ratio. A scale of one to fifty thousand means one centimetre on the paper corresponds to fifty thousand centimetres on the ground, which is five hundred metres. Converting in the direction from drawing to ground means multiplying by the second number of the ratio, and converting from ground to drawing means dividing by it, and in both directions the units must be reconciled before the arithmetic is attempted."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A map has scale one to fifty thousand and two towns are seven point five centimetres apart on it. Find the real distance.",
+              "note": "Multiply: 7.5 x 50000 = 375000 centimetres. Dividing by one hundred gives 3750 metres, which is three point seven five kilometres."
+            },
+            {
+              "text": "On a map of scale one to sixty thousand, how many centimetres represent eighteen kilometres?",
+              "note": "Eighteen kilometres is 1800000 centimetres. Dividing by sixty thousand gives 1800000 / 60000 = 30 centimetres."
+            },
+            {
+              "text": "A drawing is made to scale one to two hundred. What length on the drawing represents four and a half metres?",
+              "note": "Four and a half metres is 450 centimetres, and 450 divided by two hundred gives two point two five centimetres."
+            },
+            {
+              "text": "A model boat is built to scale one to fifty and is sixty centimetres long. What is the length of the real boat?",
+              "note": "Multiply by fifty: 60 x 50 = 3000 centimetres, which is thirty metres. The area of the model's deck would be the square of one fiftieth of the real deck, that is one twenty-five hundredth."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Common scales and what one drawing unit represents",
+          "columns": ["Scale", "One centimetre on the drawing stands for", "Use"],
+          "rows": [
+            ["1 : 100", "one metre", "Building plans"],
+            ["1 : 200", "two metres", "Larger site plans"],
+            ["1 : 50 000", "five hundred metres", "Road maps"],
+            ["1 : 60 000", "six hundred metres", "Topographic sheets"],
+            ["1 : 50", "fifty centimetres", "Working models"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table is worth deriving rather than memorised: write the scale as a fraction of drawing length over real length, then cross-multiply with the unit you were given. The frequent mistake is a unit mismatch, because the scale ratio carries no units of its own. Converting kilometres to centimetres before multiplying, or converting the final answer back into a sensible unit afterwards, are both part of the method rather than an afterthought. For areas and volumes the same ratio must be raised to the second and third powers respectively, so a one to one hundred plan represents a room one hundred times wider and ten thousand times larger in floor area."
+        }
+      ]
+    },
+    {
+      "id": "proving-similarity",
+      "title": "Setting out a similarity proof",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A similarity argument in an examination is a written object and its structure carries marks. State which two triangles are being compared, in corresponding order. List the equal angles or the proportional sides with a reason for each: a common angle, vertically opposite angles, corresponding angles from a parallel line, or the ratio already given. Name the condition being used, and only then write the consequences, which are the proportional sides or the scale factor. Skipping the correspondence and the reason is where most of the lost marks sit, not in the calculation."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Set out why the line parallel to the base of a triangle creates a smaller triangle similar to the whole.",
+              "note": "Compare triangle ADE with triangle ABC where D is on AB, E on AC and DE is parallel to BC. Angle A is common to both. Angle ADE equals angle ABC as corresponding angles for the parallel lines. Two pairs being equal, the triangles are similar by angle-angle, with correspondence A to A, D to B, E to C."
+            },
+            {
+              "text": "Two triangles have sides five, twelve, thirteen and ten, twenty-four, twenty-six. Show they are similar and give the scale factor.",
+              "note": "Each side of the second is twice the corresponding side of the first: ten over five, twenty-four over twelve and twenty-six over thirteen are all two. Three side pairs in one ratio gives similarity by side-side-side, with scale factor two."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Order of vertices is not a formality. Writing triangle ADE similar to triangle ACB instead of to ABC would assert a different correspondence and would produce ratios such as AD over AC, which are generally false even when the triangles are similar. A quick way to settle the order is to mark equal angles in both figures and match vertices by their angles rather than by their position on the page, since the angles are what the similarity condition actually fixes."
+        }
+      ]
+    },
+    {
+      "id": "checking-similarity-answers",
+      "title": "Checking a similarity answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four checks settle nearly every similarity computation. The ratio check: reduce every ratio you wrote and confirm they are genuinely equal rather than merely similar looking. The square check: whenever an area appears, confirm that the factor you used is the square of the length factor. The unit check: in map and model work, confirm both sides of the conversion are in the same unit before multiplying. And the correspondence check: substitute your vertices back into the statement of similarity and confirm that matched vertices carry matched angles."
+        },
+        {
+          "type": "table",
+          "caption": "Checking the split produced by a parallel line with PM = 3, MQ = 6, PN = 5",
+          "columns": ["Check", "Working", "Result"],
+          "rows": [
+            ["Ratio of parts", "3 : 6 reduces to 1 : 2", "one to two"],
+            ["Lower part", "5 x 2 = 10", "NR = 10"],
+            ["Whole-side ratio", "3 : 9 and 5 : 15", "both 1 : 3"],
+            ["Area factor", "square of 1/3", "1/9"],
+            ["Common failure", "using 1/2 as the scale factor", "would give an area ratio of 1/4, not 1/9"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The final row records the mistake that the rest of the table is designed to catch. The parts ratio one to two describes how one side is divided, and the triangle scale factor one to three describes how the whole side compares with its part, and only the second belongs in an area calculation. Computing with the first gives one quarter instead of the true one ninth, an error of a factor of more than two in the answer. Recognising that two different ratios coexist in the same figure, and naming which one a formula needs, is the discipline this chapter rewards."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from recognising similarity through the basic proportionality theorem and its converse, the theorem of three parallel lines, area ratios, and map and model conversions. Work each one by naming the correspondence first, writing every ratio reduced, and confirming that any area factor is the square of the length factor you started from."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Name the two triangles in corresponding order before writing a single ratio.",
+            "Separate the parts ratio of a side from the whole-side ratio of the similar triangle.",
+            "Square the linear scale for areas; take a square root to go back.",
+            "Convert to a single unit before applying a map or model scale.",
+            "Give a reason for each equal angle, and name the condition used."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "A line parallel to one side of a triangle creating a smaller similar triangle",
+      "description": "Triangle ABC drawn with A at the top, B at the lower left and C at the lower right. A line segment DE crosses the triangle with D on AB and E on AC, drawn parallel to BC and marked with a pair of small arrow symbols on DE and on BC. The angle at A is marked with a single arc in both the small triangle ADE and the whole triangle ABC. The angle at D is marked with a double arc, and the angle at B with a matching double arc, showing the corresponding pair. The segment AD is labelled two units, DB three units, AE four units and EC six units.",
+      "labels": ["Vertex A", "Side AB", "Side AC", "Line DE parallel to BC", "Base BC", "AD = 2, DB = 3", "AE = 4, EC = 6", "Equal corresponding angles"]
+    },
+    {
+      "caption": "Scaling between a map, a model and the real object",
+      "description": "Three nested rectangles drawn to visibly different sizes, arranged left to right. The smallest is labelled map with scale 1 : 50 000, the middle one plan with scale 1 : 200, and the largest real object with ground dimensions in metres. Curved arrows run from the map to the real object and back, annotated multiply by 50000 and divide by 50000. A second pair of arrows runs between the plan and the real object annotated multiply by 200 and divide by 200. Beneath the three rectangles, a short note states that lengths scale linearly while areas scale as the square of the same factor.",
+      "labels": ["Map at 1 : 50000", "Plan at 1 : 200", "Real object", "Multiply to get ground", "Divide to get drawing", "Areas scale as the square"]
+    }
+  ],
+  "keyPoints": [
+    "Similar figures have equal corresponding angles and corresponding sides in one common ratio, the scale factor.",
+    "Congruence is the special case of similarity with a scale factor of one.",
+    "Two triangles are similar by angle-angle, by side-side-side proportionality, or by side-angle-side with the angle included.",
+    "A line parallel to one side of a triangle divides the other two sides in the same ratio, and the converse turns the ratio back into parallelism.",
+    "Three parallel lines cut proportional intercepts on any two transversals, and equal intercepts when the lines are equally spaced.",
+    "The ratio of the areas of two similar triangles is the square of the ratio of their corresponding sides.",
+    "Perimeters scale linearly with the scale factor while areas scale with its square.",
+    "A map or model scale converts units only after both measurements are expressed in the same unit."
+  ],
+  "examFocus": [
+    "Write the correspondence of vertices before any ratio, since a mismatched order invalidates the whole argument.",
+    "State the equal angles with a reason each: common, vertically opposite, or corresponding from a parallel line.",
+    "Distinguish the parts ratio of a side from the whole-side scale of the triangle before computing an area.",
+    "Square the linear ratio for area and take a square root when the area ratio is given instead.",
+    "In map work, convert to a single unit first, then multiply or divide by the second number of the scale ratio."
+  ],
+  "vocabulary": [
+    { "word": "Similar", "meaning": "Having equal corresponding angles and proportional corresponding sides." },
+    { "word": "Scale factor", "meaning": "The common ratio k multiplying every corresponding length." },
+    { "word": "Congruent", "meaning": "Identical in shape and size; similar with a scale factor of one." },
+    { "word": "Correspondence", "meaning": "The pairing of vertices between two figures in matching order." },
+    { "word": "Basic proportionality", "meaning": "The theorem that a line parallel to one side splits the other two sides proportionally." },
+    { "word": "Transversal", "meaning": "A line that cuts across a set of other lines, here a set of parallels." },
+    { "word": "Intercept", "meaning": "The segment cut off between two crossing lines." },
+    { "word": "Enlargement", "meaning": "A transformation producing a similar figure with a scale factor other than one." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-sim-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two triangles are similar precisely when:",
+      "options": [
+        "All corresponding angles are equal and all corresponding sides are proportional",
+        "All corresponding sides are equal",
+        "All corresponding angles are equal and all corresponding sides are equal",
+        "Their areas are equal"
+      ],
+      "correctIndex": 0,
+      "answer": "All corresponding angles are equal and all corresponding sides are proportional",
+      "explanation": "Similarity is shape agreement without size agreement: angles are preserved exactly and lengths are all multiplied by one common factor, the scale factor. Requiring equal sides would demand a scale factor of one, which is congruence rather than similarity, and equal areas alone controls neither the shape nor the correspondence.",
+      "commonMistake": "Choosing equal corresponding sides, which describes congruent triangles and is strictly stronger than similarity."
+    },
+    {
+      "id": "icse-10-math-q-sim-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The basic proportionality theorem states that a line drawn parallel to one side of a triangle:",
+      "options": [
+        "Divides the other two sides in the same ratio",
+        "Bisects the other two sides",
+        "Divides the third side into equal parts",
+        "Is equal in length to the third side"
+      ],
+      "correctIndex": 0,
+      "answer": "Divides the other two sides in the same ratio",
+      "explanation": "The parallel line makes a smaller triangle similar to the whole, and the shared angle plus that similarity force the two sides to be cut in matching ratios. The ratio is not generally one to one, so the line need not bisect anything, and the third side is the one the line is parallel to rather than one it is equal to.",
+      "commonMistake": "Claiming the line bisects the two sides, which is true only in the special case where the line happens to pass through the mid-points."
+    },
+    {
+      "id": "icse-10-math-q-sim-03",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In triangle ABC, DE is parallel to BC with D on AB and E on AC. If AD = 2, DB = 3 and AE = 4, then EC = ______.",
+      "answer": "6",
+      "explanation": "The theorem gives AD over DB equals AE over EC, so 2 over 3 equals 4 over EC. Cross-multiplying gives 2 x EC = 12 and therefore EC = 6. Check by reducing: both 2/3 and 4/6 reduce to two thirds, confirming the two sides are split identically.",
+      "commonMistake": "Setting AD over AB equal to AE over EC, which mixes a whole-side ratio with a parts ratio and returns ten instead of six."
+    },
+    {
+      "id": "icse-10-math-q-sim-04",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that a line parallel to one side of a triangle divides the other two sides proportionally.",
+      "answer": "AD/DB = AE/EC, proved by showing the small triangle is similar to the whole and cross-multiplying",
+      "explanation": "Let DE be parallel to BC with D on AB and E on AC. In triangles ADE and ABC the angle at A is common, and angle ADE equals angle ABC as corresponding angles for the parallel lines, so the two triangles are similar by angle-angle. The correspondence A to A, D to B, E to C therefore gives AD over AB equals AE over AC. Write AB as AD + DB and AC as AE + EC and cross-multiply: AD x (AE + EC) = AE x (AD + DB), so AD x AE + AD x EC = AE x AD + AE x DB. Cancelling the common product AD x AE leaves AD x EC = AE x DB, and dividing by DB x EC gives AD over DB equals AE over EC.",
+      "commonMistake": "Stopping at AD/AB = AE/AC without converting it to the ratio of the parts, which is the statement actually asked for."
+    },
+    {
+      "id": "icse-10-math-q-sim-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two similar triangles have corresponding sides in the ratio three to five. The ratio of their areas is:",
+      "options": ["9 : 25", "3 : 5", "5 : 3", "15 : 25"],
+      "correctIndex": 0,
+      "answer": "9 : 25",
+      "explanation": "Area is a product of two lengths, so when every length is multiplied by the scale factor the area is multiplied by it twice. Squaring the linear ratio three to five gives nine to twenty-five. The ratio five to three would be the answer for a perimeter, which is a sum of lengths and therefore scales linearly.",
+      "commonMistake": "Quoting the linear ratio itself, which applies to perimeters, not to areas."
+    },
+    {
+      "id": "icse-10-math-q-sim-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two similar triangles have areas eighty-one and two hundred and twenty-five square units. The ratio of their corresponding sides is ______.",
+      "answer": "three to five",
+      "explanation": "The area ratio is eighty-one to two hundred and twenty-five, and the side ratio is its square root. The square root of eighty-one is nine and that of two hundred and twenty-five is fifteen, giving nine to fifteen, which reduces to three to five. Check: three squared to five squared is nine to twenty-five, and eighty-one to two hundred and twenty-five reduces to nine to twenty-five.",
+      "commonMistake": "Taking the square root of only one of the two areas, or leaving the ratio unreduced at nine to fifteen."
+    },
+    {
+      "id": "icse-10-math-q-sim-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Triangles ABC and PQR are similar with AB to PQ equal to two to three. If the perimeter of ABC is thirty centimetres, find the perimeter of PQR.",
+      "answer": "Forty-five centimetres",
+      "explanation": "A perimeter is a sum of lengths, so it scales exactly like a length: multiplying every side by the scale factor multiplies the total by that same factor. The scale from ABC to PQR is three halves, so thirty multiplied by three halves gives forty-five centimetres. Equivalently, thirty is to the unknown as two is to three, and cross-multiplying gives forty-five.",
+      "commonMistake": "Squaring the ratio and reporting sixty-seven point five, which would be the answer for an area rather than a perimeter."
+    },
+    {
+      "id": "icse-10-math-q-sim-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In triangle PQR, MN is parallel to QR with M on PQ and N on PR. Given PM = 3, MQ = 6 and PN = 5, find NR, state the scale factor of triangle PMN to triangle PQR, and find the ratio of their areas.",
+      "answer": "NR = 10, the scale factor is one third, and the area ratio is one to nine",
+      "explanation": "The basic proportionality theorem gives PM over MQ equals PN over NR, that is 3 over 6 equals 5 over NR, so NR is 10. The whole side PQ is PM + MQ = 9 and PR is PN + NR = 15, so the similarity scale is PM over PQ, which is 3/9 = 1/3, and it is confirmed by PN over PR, which is 5/15 = 1/3. Areas scale as the square of the linear scale, so the area ratio is (1/3) squared = 1/9. The parts ratio one to two and the scale factor one to three are different quantities, and only the latter enters the area calculation.",
+      "commonMistake": "Using the parts ratio of one to two as the scale factor, which would give an area ratio of one quarter instead of one ninth."
+    },
+    {
+      "id": "icse-10-math-q-sim-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the converse of the basic proportionality theorem and explain how it is used to prove that two lines are parallel.",
+      "answer": "A line dividing two sides of a triangle in the same ratio must be parallel to the third side",
+      "explanation": "Suppose a line meets AB at D and AC at E with AD over DB equal to AE over EC. Draw through D a line parallel to BC meeting AC at E prime. By the theorem just proved, AD over DB equals AE prime over E prime C, so the two ratios for a point on AC are equal, forcing E and E prime to coincide. The given line therefore passes through the point where the parallel through D meets AC, so it is that parallel and is parallel to BC.",
+      "commonMistake": "Quoting the direct theorem instead of the converse, or asserting parallelism without constructing and ruling out the alternative line."
+    },
+    {
+      "id": "icse-10-math-q-sim-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "On a map drawn to a scale of 1 : 50000, two towns are six centimetres apart. The real distance between them is:",
+      "options": ["Three kilometres", "Three hundred metres", "Thirty kilometres", "Six kilometres"],
+      "correctIndex": 0,
+      "answer": "Three kilometres",
+      "explanation": "Multiply the drawing length by the second number of the scale: six centimetres x 50000 = 300000 centimetres. Dividing by one hundred converts to 3000 metres, and dividing by one thousand again gives three kilometres. The scale carries no units of its own, so the conversion before and after is part of the method.",
+      "commonMistake": "Reporting thirty kilometres by forgetting that centimetres to metres divides by one hundred rather than multiplying."
+    },
+    {
+      "id": "icse-10-math-q-sim-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "On a map of scale 1 : 60000, a distance of eighteen kilometres would be drawn as ______ centimetres.",
+      "answer": "30",
+      "explanation": "Eighteen kilometres is 1800000 centimetres, and the drawing length is the ground length divided by the second number of the scale: 1800000 / 60000 = 30 centimetres. Check by reversing: thirty centimetres x 60000 = 1800000 centimetres, which is eighteen kilometres, returning the given value. Doing the division as eighteen over sixty rather than eighteen hundred thousand over sixty thousand gives the same answer in kilometres, namely 0.3 of a thousand metres, that is three hundred metres per centimetre, so thirty centimetres covers eighteen kilometres.",
+      "commonMistake": "Applying the scale to kilometres directly, which mixes units on the two sides of the ratio."
+    },
+    {
+      "id": "icse-10-math-q-sim-12",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Triangles ABC and DEF are similar with AB to DE equal to two to five and the area of triangle ABC equal to forty-eight square centimetres. Find the area of triangle DEF and state the scale factor from ABC to DEF.",
+      "answer": "Three hundred square centimetres, with a scale factor of five halves",
+      "explanation": "The linear scale from ABC to DE is the reciprocal of the given ratio, since AB corresponds to DE: the factor multiplying ABC's lengths to give DEF's is five over two. The area factor is its square, twenty-five over four, and forty-eight multiplied by twenty-five over four is twelve x twenty-five = three hundred square centimetres. Check from the other side: three hundred multiplied by four over twenty-five gives twelve x four = forty-eight, returning the given area.",
+      "commonMistake": "Multiplying by four over twenty-five instead of its reciprocal, which shrinks the figure rather than enlarging it."
+    },
+    {
+      "id": "icse-10-math-q-sim-13",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Three parallel lines cut one transversal into segments of four centimetres and six centimetres. A second transversal is cut by the same lines with its first segment measuring nine centimetres. Find the second segment, and state what happens to the second transversal if the parallel lines are equally spaced.",
+      "answer": "Thirteen point five centimetres; with equally spaced parallels the second transversal is also cut into equal segments",
+      "explanation": "The intercepts on one transversal are proportional to those on the other, so the ratio four to six, reducing to two to three, must hold again. Setting nine to the unknown in the same ratio gives the unknown as nine x 3 / 2 = 13.5 centimetres, and the check 4/6 = 0.6667 equals 9/13.5 = 0.6667 confirms it. If the parallels are equally spaced the ratio is one to one, so every transversal is cut into equal segments regardless of its direction, which is the statement behind the set-square construction of a parallel line.",
+      "commonMistake": "Adding the same amount to the second transversal instead of applying the ratio, which would give eleven centimetres."
+    },
+    {
+      "id": "icse-10-math-q-sim-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Three equally spaced parallel lines are cut by two transversals. The intercepts on the transversals are:",
+      "options": [
+        "Equal on both transversals",
+        "Proportional to the slopes of the transversals",
+        "Equal only if the transversals are perpendicular",
+        "Always in the ratio one to two"
+      ],
+      "correctIndex": 0,
+      "answer": "Equal on both transversals",
+      "explanation": "Equally spaced parallels give an intercept ratio of one to one on any transversal, so each transversal is divided into equal segments, whatever its direction. The length of an individual segment does depend on how slanted the transversal is, but within one transversal the parts are equal, and that is the claim being made.",
+      "commonMistake": "Thinking the segments have the same length on both transversals, when only the equality within each transversal is guaranteed."
+    },
+    {
+      "id": "icse-10-math-q-sim-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two similar triangles have areas in the ratio sixteen to eighty-one. State the ratio of their corresponding sides and the ratio of their perimeters.",
+      "answer": "Both are four to nine",
+      "explanation": "Taking square roots of the area ratio gives the side ratio: the square root of sixteen is four and that of eighty-one is nine, so four to nine. A perimeter is a sum of lengths and scales linearly, so the perimeter ratio equals the side ratio exactly, again four to nine. The two answers coincide here, which is a useful reminder that they coincide only because both are one-dimensional quantities.",
+      "commonMistake": "Squaring the area ratio again instead of taking its square root, which gives two hundred and fifty-six to sixty-five hundred and sixty-one."
+    },
+    {
+      "id": "icse-10-math-q-sim-16",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two similar triangles have equal areas. Their scale factor is:",
+      "options": ["1", "0", "2", "It cannot be determined"],
+      "correctIndex": 0,
+      "answer": "1",
+      "explanation": "The area factor is the square of the linear factor, so a squared factor of one forces the linear factor to be one as well. Both triangles are therefore congruent: the same shape and the same size. Any factor other than one would make the areas differ, since squaring a positive number other than one does not give one.",
+      "commonMistake": "Choosing zero, which would collapse the figure to a point and give zero area rather than equal area."
+    },
+    {
+      "id": "icse-10-math-q-sim-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A model of a boat is built to a scale of 1 : 50 and measures sixty centimetres in length. Find the length of the real boat and the ratio of the model's deck area to the real deck area.",
+      "answer": "Thirty metres, and an area ratio of one to twenty-five hundred",
+      "explanation": "Multiplying the model length by fifty gives 60 x 50 = 3000 centimetres, which is thirty metres. The area ratio is the square of the linear ratio, so (1/50) squared = 1/2500: the deck of the model is one twenty-five hundredth of the real deck. Both figures are similar by construction, which is what licenses the squaring.",
+      "commonMistake": "Reporting an area ratio of one to fifty instead of one to twenty-five hundred, forgetting to square."
+    },
+    {
+      "id": "icse-10-math-q-sim-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "State the three conditions under which two triangles are similar, and say which condition is the natural one to use when a line inside a triangle is given as parallel to the base.",
+      "answer": "Angle-angle, side-side-side proportionality, and side-angle-side with the included angle equal; the angle-angle condition is the natural one for a parallel line",
+      "explanation": "Angle-angle requires two pairs of equal angles, from which the third pair follows since the angles total one hundred and eighty degrees. Side-side-side requires all three pairs of corresponding sides to be in one common ratio. Side-angle-side requires two side pairs to be proportional together with equality of the angle contained by those sides. A line parallel to the base copies a base angle as a corresponding angle and shares the vertex angle, so two angles are given immediately and angle-angle applies with no side measurements at all.",
+      "commonMistake": "Quoting angle-angle-angle as a separate condition, or using side-angle-side with an angle that is not the one between the two measured sides."
+    },
+    {
+      "id": "icse-10-math-q-sim-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A triangle with sides three, four and five is compared with a triangle with sides six, eight and ten. Prove the two are similar, give the scale factor, find the ratio of their perimeters and the ratio of their areas, and verify the area ratio by computing both areas.",
+      "answer": "Similar by side-side-side with scale factor two; perimeter ratio two to one and area ratio four to one, confirmed by areas six and twenty-four",
+      "explanation": "Each side of the second is twice the corresponding side of the first: six over three, eight over four and ten over five all equal two, so the three side pairs are proportional and the triangles are similar by side-side-side. The scale factor from the first to the second is two. Perimeters scale linearly, so the ratio is two to one: twelve and twenty-four. Areas scale as the square, giving four to one, and direct computation confirms it: three-four-five is right angled at the side of length three and four, so its area is one half x 3 x 4 = 6, while the six-eight-ten triangle has area one half x 6 x 8 = 24, and 24 over 6 equals four.",
+      "commonMistake": "Noting that one triangle is right angled by the converse of Pythagoras but forgetting that all three ratios, not just one pair, must be checked for side-side-side."
+    },
+    {
+      "id": "icse-10-math-q-sim-20",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A photograph is enlarged by a scale factor of two point five. The area of the enlargement is ______ times the area of the original.",
+      "answer": "6.25",
+      "explanation": "Areas scale with the square of the linear factor, so two point five squared equals six point two five. The sanity check is that doubling a length gives four times the area, and the square of a factor above two must therefore exceed four, which 6.25 does, while the square of any factor exceeds the factor itself once the factor passes one, so an area increase larger than the linear increase is expected here.",
+      "commonMistake": "Reporting two point five, which applies to lengths such as the perimeter of the photograph rather than its area."
+    },
+    {
+      "id": "icse-10-math-q-sim-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why showing that two pairs of angles of one triangle are equal to two pairs of angles of a second is sufficient to prove the triangles similar.",
+      "answer": "The third angles must also be equal because the angles of a triangle total one hundred and eighty degrees",
+      "explanation": "Let the angles of the first triangle be a, b and c with a + b + c = 180, and the second be a, b and d with a + b + d = 180. Subtracting gives c = d, so all three pairs match. Equal angles mean the shapes agree, and once the angles of a triangle are fixed the side ratios are fixed as well, so similarity follows with no further data; that is why the condition is usually quoted as angle-angle.",
+      "commonMistake": "Treating angle-angle-angle as an independent third condition rather than a consequence of the first two."
+    },
+    {
+      "id": "icse-10-math-q-sim-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Two transversals are cut by three parallel lines, dividing one transversal into four centimetres and six centimetres and the other into six centimetres and nine centimetres. Verify that the intercepts are proportional, and use a triangle construction to explain why they must be.",
+      "answer": "Both ratios reduce to two to three, so the intercepts are proportional; the proof extends the basic proportionality theorem to a triangle formed by meeting the transversals",
+      "explanation": "On the first transversal the ratio is four to six, which reduces to two to three, and on the second it is six to nine, which also reduces to two to three, so the intercepts are proportional and the check passes: 4/6 = 0.6667 and 6/9 = 0.6667. For the reason, extend the two transversals until they meet at a point, forming a triangle whose sides are the transversals. The three parallel lines appear inside it as lines parallel to one side, so the basic proportionality theorem applies repeatedly, giving each intercept ratio along one side as equal to the corresponding ratio along the other, and the common vertex cancels out.",
+      "commonMistake": "Comparing four with six and six with nine as if the claim were that the pairs are equal, when the claim is that each pair has the same ratio."
+    },
+    {
+      "id": "icse-10-math-q-sim-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "By what linear scale factor must a figure be enlarged so that its area exactly doubles?",
+      "options": [
+        "The square root of two, about 1.41",
+        "Two",
+        "One half",
+        "The square root of two divided by two"
+      ],
+      "correctIndex": 0,
+      "answer": "The square root of two, about 1.41",
+      "explanation": "The area factor is the square of the linear factor, so a doubling requires k squared = 2, giving k = the square root of two, approximately 1.414. Doubling the linear size instead would give an area factor of four, which is the common overestimate; note that the answer must exceed one but be less than two, which is exactly where 1.41 sits.",
+      "commonMistake": "Choosing two, which quadruples the area rather than doubling it."
+    }
+  ]
+}

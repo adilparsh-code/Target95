@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-quadratics",
+  "title": "Quadratic Equations",
+  "kind": "mathematics",
+  "tagline": "Solving by factorisation and by formula, the discriminant and the nature of the roots, and word problems.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A quadratic equation is one in which the variable appears with power two as its highest power, and its standard form is a x squared plus b x plus c equals zero with a not equal to zero. Unlike a linear equation it generally has two solutions, sometimes the same one twice, and sometimes none at all among the real numbers. This chapter develops two methods of solution that complement each other. Factorisation is fast whenever the roots are simple, and it trains the pattern recognition that later algebra depends on. The quadratic formula works always, and its numerator and denominator encode everything about the roots. Between them sits the discriminant, b squared minus four a c, which predicts the number and type of roots before any solving begins. Word problems close the chapter by showing where quadratics come from in the first place.",
+    "facts": [
+      { "label": "Standard form", "value": "a x squared + b x + c = 0, with a not equal to zero" },
+      { "label": "Quadratic formula", "value": "x = (-b plus or minus the square root of (b squared - 4ac)) / 2a" },
+      { "label": "Discriminant", "value": "b squared - 4ac: positive gives two distinct real roots, zero gives equal roots, negative gives none real" },
+      { "label": "Sum and product of roots", "value": "Sum is -b / a and product is c / a for a x squared + b x + c = 0" }
+    ]
+  },
+  "learningOutcomes": [
+    "Write a given equation in standard form and identify the coefficients a, b and c.",
+    "Solve a quadratic equation by factorisation and verify both roots by substitution.",
+    "Apply the quadratic formula, computing the discriminant first and simplifying the radical carefully.",
+    "Use the discriminant to state in advance how many real roots an equation has.",
+    "Relate the sum and product of the roots to the coefficients and use them to check a factorisation.",
+    "Translate a word problem into a quadratic equation, solve it, and reject any root that the context does not permit."
+  ],
+  "learn": [
+    {
+      "id": "recognising-a-quadratic",
+      "title": "Recognising a quadratic equation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The word quadratic comes from quadrate, meaning square, and a quadratic equation is exactly one in which the squared term is the highest power of the unknown. Written in standard form it reads a x squared plus b x plus c equals zero, where a, b and c are constants and a must not vanish, because if a were zero the squared term would disappear and the equation would collapse back to a linear one. The coefficient a is called the leading coefficient, and it alone determines whether the graph of the expression is a cup opening upwards, when a is positive, or a cap opening downwards, when a is negative. That geometric fact will matter when the number of roots is discussed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Before any method can be applied an equation must first be brought into standard form, and this is where candidates lose easy marks. Every term must be moved to the left, leaving zero on the right; any denominators must be cleared; and any brackets expanded. Thus three x squared plus five equals two x becomes three x squared minus two x plus five equals zero, with a equal to three, b equal to minus two and c equal to five. The sign of b deserves particular care, because the linear term often arrives on the right hand side and must change sign as it crosses, while a term that was already negative on the left stays negative. Writing the three coefficients as a labelled line before solving is worth the ten seconds it costs."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Standard form", "meaning": "a x squared + b x + c = 0 with a not zero, the form every method expects." },
+            { "term": "Leading coefficient", "meaning": "The value a, which fixes the direction the parabola opens and the denominator of the formula." },
+            { "term": "Root", "meaning": "A value of x that makes the quadratic expression exactly zero." },
+            { "term": "Solution set", "meaning": "All roots of the equation, listed together; two when they are distinct, one when they coincide." },
+            { "term": "Discriminant", "meaning": "b squared minus four a c, the quantity whose sign decides the nature of the roots." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Clear fractions and expand brackets before reading off a, b and c.",
+            "Move every term to one side so that the right hand side is exactly zero.",
+            "Check that a is not zero; if it is, the equation is linear and not quadratic.",
+            "Write a, b and c as a labelled line before substituting into any method."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solution-by-factorisation",
+      "title": "Solution by factorisation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Factorisation rests on one principle: if a product of two factors equals zero then at least one factor must equal zero, because there is no way to multiply two non-zero numbers and obtain nothing. So a quadratic that can be split into two linear factors is solved the moment the split is found. The technique for a monic quadratic, one whose leading coefficient is one, is to look for two numbers that add to b and multiply to c. For a non-monic quadratic the splitting-the-middle-term method searches instead for two numbers that multiply to a times c and add to b, which then allows the middle term to be rewritten and the expression grouped."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve x squared minus 5x plus 6 equals zero.",
+              "note": "Find two numbers adding to -5 and multiplying to 6: they are -2 and -3. So (x - 2)(x - 3) = 0, giving x = 2 or x = 3. Check: 4 - 10 + 6 = 0 and 9 - 15 + 6 = 0."
+            },
+            {
+              "text": "Solve x squared plus 4x plus 4 equals zero.",
+              "note": "The numbers adding to 4 and multiplying to 4 are both 2, so (x + 2)(x + 2) = 0 and x = -2 is a repeated root. The discriminant is 16 - 16 = 0, confirming equal roots."
+            },
+            {
+              "text": "Solve 2x squared minus 5x plus 3 equals zero.",
+              "note": "Split the middle term: a x c = 2 x 3 = 6, and the two numbers multiplying to 6 and adding to -5 are -2 and -3. So 2x squared - 2x - 3x + 3 = 2x(x - 1) - 3(x - 1) = (2x - 3)(x - 1) = 0, giving x = 3/2 or x = 1."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Splitting the middle term of 2x squared minus 5x plus 3",
+          "columns": ["Step", "Working", "Result"],
+          "rows": [
+            ["Product of outer coefficients", "2 x 3", "6"],
+            ["Target sum", "coefficient of x", "-5"],
+            ["Pair found", "-2 and -3", "-2 x -3 = 6 and -2 + -3 = -5"],
+            ["Rewrite", "2x squared - 2x - 3x + 3", "four terms"],
+            ["Group", "2x(x - 1) - 3(x - 1)", "(2x - 3)(x - 1)"],
+            ["Roots", "2x - 3 = 0 or x - 1 = 0", "x = 3/2 or x = 1"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The factor-product check is the fastest way to confirm a factorisation without substituting into the whole expression. For any quadratic the product of the roots is c divided by a and their sum is minus b divided by a, so for the third example the product must be three halves and the sum five halves. The roots found were three halves and one, whose product is indeed three halves and whose sum is one and a half, that is three halves. If that check fails the factorisation is wrong, and checking costs one multiplication and one addition rather than two full substitutions."
+        }
+      ]
+    },
+    {
+      "id": "the-quadratic-formula",
+      "title": "The quadratic formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Factorisation depends on the roots being pleasant, and when they are not, the quadratic formula always works. It states that the roots of a x squared plus b x plus c equals zero are minus b, plus or minus the square root of b squared minus four a c, all divided by two a. The plus-or-minus sign is what produces the two roots: taking the positive branch gives one value and the negative branch the other, and when the radical turns out to be zero the two branches coincide and there is a single repeated root. Because division by two a follows the whole numerator, every term in the numerator must be divided, which is a common place for arithmetic to go wrong."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve 3x squared plus 2x minus 1 equals zero using the formula.",
+              "note": "a = 3, b = 2, c = -1. Discriminant = 2 squared - 4 x 3 x (-1) = 4 + 12 = 16, and the square root is 4. x = (-2 plus or minus 4) / 6, giving x = 2/6 = 1/3 or x = -6/6 = -1."
+            },
+            {
+              "text": "Solve 2x squared minus 7x plus 3 equals zero using the formula.",
+              "note": "a = 2, b = -7, c = 3. Discriminant = 49 - 24 = 25, square root 5. x = (7 plus or minus 5) / 4, giving x = 12/4 = 3 or x = 2/4 = 1/2."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The sign of b in the second example traps many candidates, because b is minus seven and the formula begins with minus b, so the numerator opens with plus seven rather than minus seven. A useful way to hold this is to compute the three ingredients separately and in order: write a, b and c; evaluate b squared, then four a c, then their difference; take the square root; then assemble. Recording the discriminant as its own line does double duty, because it both feeds the formula and answers any question about the nature of the roots, which the next section introduces."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write a, b and c as a labelled line before anything else.",
+            "Compute b squared and four a c separately, then subtract, watching the sign of c.",
+            "Take the square root of the discriminant before assembling the numerator.",
+            "Divide every numerator term by two a, not just the first one.",
+            "Substitute each root back into the original equation as a final check."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nature-of-the-roots",
+      "title": "The discriminant and the nature of the roots",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The quantity under the radical, b squared minus four a c, is called the discriminant and is conventionally denoted by the capital letter D. Its sign decides everything about the roots before any solving is attempted. When D is positive the radical is a positive real number and the plus-or-minus produces two different values, so there are two distinct real roots. When D is exactly zero the radical vanishes, both branches of the formula give the same number, and there is one repeated real root. When D is negative there is no real number whose square is negative, so no real root exists at all, although complex roots would exist if that subject were available. This three-way classification is the whole content of the nature-of-roots topic."
+        },
+        {
+          "type": "table",
+          "caption": "Reading the discriminant",
+          "columns": ["Discriminant", "Roots", "Factorable over the rationals", "Graph of the expression"],
+          "rows": [
+            ["Positive and a perfect square", "Two distinct real, rational", "Yes, by factorisation", "Crosses the x axis twice"],
+            ["Positive but not a perfect square", "Two distinct real, irrational", "Not with rational factors", "Crosses the x axis twice"],
+            ["Zero", "One repeated real root", "Yes, as a perfect square", "Touches the x axis"],
+            ["Negative", "No real root", "No", "Lies wholly above or below the axis"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "State the nature of the roots of x squared minus 2x plus 5 equals zero.",
+              "note": "D = 4 - 20 = -16, which is negative, so there is no real root. The expression never reaches zero."
+            },
+            {
+              "text": "For what value of m does m x squared plus 6x plus 9 equal zero have equal roots?",
+              "note": "Equal roots require D = 0, so 36 - 36m = 0, giving m = 1. With m = 1 the equation is x squared + 6x + 9 = (x + 3) squared = 0, confirming a repeated root at x = -3."
+            },
+            {
+              "text": "State the nature of the roots of 4x squared plus kx plus 9 equals zero, and find k for equal roots.",
+              "note": "D = k squared - 144. For equal roots k squared = 144, so k = 12 or k = -12. For any other k the discriminant is positive and the roots are distinct and real."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The perfect-square refinement of the positive case is worth carrying, because it tells you which method to reach for. A positive discriminant that happens to be a perfect square, such as one, sixteen or twenty five, yields rational roots and therefore a factorisation exists; a positive non-square such as seven yields irrational roots and only the formula will find them. Candidates who attempt factorisation on an equation with an irrational discriminant waste time hunting for a pair of numbers that does not exist. Compute D first, classify, and only then choose the method."
+        }
+      ]
+    },
+    {
+      "id": "sum-and-product-of-roots",
+      "title": "Using the sum and product of the roots",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Substituting the two roots into the quadratic formula and adding them reveals a striking simplification: the radical cancels, leaving the sum of the roots equal to minus b divided by a. Multiplying them likewise gives c divided by a. These two relations hold for every quadratic, regardless of whether the roots are rational, and they provide both a checking device and a route to problems that ask about the roots without requiring them individually. A factorisation can be confirmed in seconds, an equation can be reconstructed from a stated pair of roots, and expressions such as one over alpha plus one over beta can be evaluated without ever finding alpha and beta."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "For 2x squared minus 7x plus 3 equals zero, verify the sum and product of the roots.",
+              "note": "Predicted sum = -b/a = 7/2 = 3.5. The roots are 3 and 1/2, and 3 + 1/2 = 3.5. Predicted product = c/a = 3/2 = 1.5, and 3 x 1/2 = 1.5. Both agree."
+            },
+            {
+              "text": "If the roots of x squared minus 5x plus 3 equals zero are alpha and beta, find alpha squared plus beta squared.",
+              "note": "alpha + beta = 5 and alpha beta = 3. Now alpha squared + beta squared = (alpha + beta) squared - 2 alpha beta = 25 - 6 = 19."
+            },
+            {
+              "text": "For the same equation, find one over alpha plus one over beta.",
+              "note": "One over alpha plus one over beta = (alpha + beta) / (alpha beta) = 5/3."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Identities built from the sum and product of the roots",
+          "columns": ["Expression", "In terms of sum S and product P", "Value for S = 5, P = 3"],
+          "rows": [
+            ["alpha squared + beta squared", "S squared - 2P", "25 - 6 = 19"],
+            ["1/alpha + 1/beta", "S / P", "5/3"],
+            ["(alpha - beta) squared", "S squared - 4P", "25 - 12 = 13"],
+            ["alpha cubed + beta cubed", "S cubed - 3SP", "125 - 45 = 80"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table shows how far the two relations reach. The difference of the roots itself would require the radical, but its square does not, which is often all a question needs. The sum of cubes factorises as the sum times the square minus the product, giving S cubed minus three S P, and for the stated values that is one hundred and twenty five minus three times five times three, that is forty five, so eighty. Working with S and P rather than with the roots keeps arithmetic in integers and avoids surds altogether."
+        }
+      ]
+    },
+    {
+      "id": "word-problems",
+      "title": "Word problems that produce quadratics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Quadratics arise naturally whenever two quantities are linked by both a sum and a product, because eliminating one from the pair leaves a squared term. The classic pattern is two consecutive integers whose product is given, or a rectangle whose perimeter and area are both stated, or a speed-and-time problem in which the same distance is covered at two different rates. The method has three stages: name the unknown with a single letter, translate every condition into an equation, and then simplify to standard form. The final stage is not optional, because the factorisation and formula methods both demand zero on the right hand side."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The product of two consecutive positive integers is 306. Find the integers.",
+              "note": "Let the smaller be x, so the larger is x + 1. Then x(x + 1) = 306, that is x squared + x - 306 = 0. D = 1 + 1224 = 1225 and its square root is 35, so x = (-1 + 35)/2 = 17, giving 17 and 18. The negative branch gives -18, rejected as the integers must be positive."
+            },
+            {
+              "text": "The perimeter of a rectangle is 34 cm and its area is 60 square cm. Find its sides.",
+              "note": "Half the perimeter gives length + breadth = 17. With length times breadth = 60, the two are roots of t squared - 17t + 60 = 0, which factorises as (t - 5)(t - 12) = 0. The sides are 5 cm and 12 cm, checking to a perimeter of 34 and an area of 60."
+            },
+            {
+              "text": "Find two numbers whose sum is 27 and whose product is 180.",
+              "note": "The numbers are roots of x squared - 27x + 180 = 0. Factorising, (x - 12)(x - 15) = 0, so the numbers are 12 and 15. Check: 12 + 15 = 27 and 12 x 15 = 180."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The rectangle example illustrates an elegant shortcut that repays memorisation. When two quantities have a known sum and a known product, they are precisely the roots of the quadratic whose linear coefficient is minus the sum and whose constant term is the product. This follows directly from the sum and product relations of the previous section, read backwards. It converts a two-variable system into a one-variable quadratic in a single line, and it applies equally to consecutive integers, to ages, and to any pair of numbers described by their total and their product."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Name the unknown with one letter and write the other quantity in terms of it.",
+            "Clear fractions and expand brackets, then move everything to one side.",
+            "Compute the discriminant before choosing between factorisation and the formula.",
+            "Reject any root the context forbids: negative ages, non-positive lengths, or fractional counts.",
+            "State the answer as a sentence, not as a bare value of x."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "setting-out-and-checking",
+      "title": "Setting out and checking the work",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A quadratic solution earns credit for its structure as much as its result, and the structure is always the same. Begin by writing the equation in standard form and naming a, b and c. If you are using the formula, evaluate the discriminant on its own line and state what it implies about the roots. Then substitute, simplify the radical, and give both roots in their simplest form, keeping improper fractions rather than converting prematurely to decimals. Finally check. Substituting a root into the original expression should give exactly zero, and the sum and product of your two roots should reproduce minus b over a and c over a. Two checks, two lines, complete confidence."
+        },
+        {
+          "type": "table",
+          "caption": "Checking the roots of 2x squared minus 7x plus 3 equals zero",
+          "columns": ["Check", "Working", "Expected", "Result"],
+          "rows": [
+            ["Substitute x = 3", "2(9) - 7(3) + 3 = 18 - 21 + 3", "0", "0, correct"],
+            ["Substitute x = 1/2", "2(1/4) - 7(1/2) + 3 = 0.5 - 3.5 + 3", "0", "0, correct"],
+            ["Sum of roots", "3 + 1/2 = 3.5 and -b/a = 7/2", "3.5", "match"],
+            ["Product of roots", "3 x 1/2 = 1.5 and c/a = 3/2", "1.5", "match"],
+            ["Discriminant", "49 - 24", "25, a perfect square", "rational roots expected"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The last row of that table is worth reflecting on. The discriminant twenty five is a perfect square, which predicted rational roots before any solving began, and rational roots duly appeared. Had the discriminant been twenty six, hunting for a factorisation would have been hopeless and the formula would have been the only route. Carrying that single number with you through the whole solution tells you which method to choose, whether your final answer should be a fraction or a surd, and whether your factorisation deserves to be trusted. It is the most efficient piece of information in the chapter."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from writing equations in standard form through factorisation and the formula to discriminant questions, root identities and word problems. Work each one by naming a, b and c first, computing the discriminant before choosing a method, and verifying both roots by substitution before moving on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Bring every equation to standard form with zero on the right before reading off the coefficients.",
+            "Compute the discriminant first; its sign and its perfect-square status decide the method.",
+            "In the formula, minus b applies to the whole numerator and two a to the whole numerator.",
+            "Verify a factorisation through the sum and product of the roots rather than by two full substitutions.",
+            "In a word problem, reject roots the context forbids and state the final answer as a sentence."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Three discriminants and the behaviour of the parabola",
+      "description": "Three small graphs of y equals a x squared plus b x plus c arranged in a row, each with a horizontal x axis and a vertical y axis. The first parabola crosses the x axis at two separate points, annotated with a positive discriminant and two distinct real roots. The second touches the x axis at exactly one point, annotated with a zero discriminant and a repeated root. The third lies entirely above the x axis without meeting it, annotated with a negative discriminant and no real root. Each graph carries tick marks at the origin so the crossing positions can be read.",
+      "labels": ["Positive discriminant", "Zero discriminant", "Negative discriminant", "x axis", "Two roots", "One root", "No roots"]
+    },
+    {
+      "caption": "The two branches of the quadratic formula",
+      "description": "A flow diagram starting from a box labelled a, b and c from standard form. An arrow leads to a box computing b squared minus four a c, labelled discriminant. From there two arrows branch, one labelled positive or zero and one labelled negative; the first leads to a box taking the square root and then to two further boxes marked plus branch and minus branch, each yielding a root, while the second leads to a terminal box marked no real root. The two root boxes are joined by a bracket labelled the solution set.",
+      "labels": ["Coefficients", "Discriminant", "Square root", "Plus branch", "Minus branch", "Solution set", "No real root"]
+    }
+  ],
+  "keyPoints": [
+    "A quadratic equation must first be written as a x squared + b x + c = 0 with a not zero.",
+    "Factorisation works on the principle that a product is zero only when a factor is zero.",
+    "Split the middle term using two numbers that multiply to a times c and add to b.",
+    "The quadratic formula gives x = (-b plus or minus the square root of b squared - 4ac) / 2a.",
+    "The discriminant is positive for two distinct real roots, zero for a repeated root and negative for none.",
+    "A positive discriminant that is a perfect square signals rational roots and hence a factorisation.",
+    "Sum of roots is -b / a and product of roots is c / a, whatever the roots look like.",
+    "In a word problem, reject any root the context forbids and state the answer in words."
+  ],
+  "examFocus": [
+    "Write a, b and c as a labelled line, then evaluate the discriminant on its own line before substituting into the formula.",
+    "Give the discriminant its interpretation as well as its value; a bare number earns only part of the available credit.",
+    "Keep roots as fractions in simplest form rather than converting to decimals early, and divide the whole numerator by two a.",
+    "Verify a factorisation through the sum and product of the roots, which is quicker than two substitutions.",
+    "In a word problem, show the translation from the sentence to the equation before solving, and reject inadmissible roots explicitly."
+  ],
+  "vocabulary": [
+    { "word": "Standard form", "meaning": "The arrangement a x squared + b x + c = 0 that every solution method assumes." },
+    { "word": "Quadratic equation", "meaning": "An equation of degree two in one variable, having at most two real roots." },
+    { "word": "Root", "meaning": "A value of the variable that makes the quadratic expression equal to zero." },
+    { "word": "Repeated root", "meaning": "A single value that satisfies the equation twice, arising when the discriminant is zero." },
+    { "word": "Discriminant", "meaning": "The quantity b squared minus four a c, whose sign determines the nature of the roots." },
+    { "word": "Factorisation", "meaning": "Writing the quadratic as a product of two linear factors so that each can be set to zero." },
+    { "word": "Splitting the middle term", "meaning": "Rewriting b x as a sum of two terms whose coefficients multiply to a c and add to b." },
+    { "word": "Nature of the roots", "meaning": "Whether the roots are real, distinct, repeated or absent, decided by the discriminant." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-qe-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The roots of x squared minus 5x plus 6 equals zero are:",
+      "options": ["2 and 3", "-2 and -3", "1 and 6", "-1 and -6"],
+      "correctIndex": 0,
+      "answer": "2 and 3",
+      "explanation": "The pair adding to -5 and multiplying to 6 is -2 and -3, so the expression factorises as (x - 2)(x - 3) and the roots are 2 and 3. Their product is 6, matching c, and their sum is 5, matching minus b.",
+      "commonMistake": "Quoting -2 and -3 as the roots, when those are the numbers used inside the factors and the roots are their opposites."
+    },
+    {
+      "id": "icse-10-math-q-qe-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The discriminant of 3x squared plus 2x minus 1 equals zero is:",
+      "options": ["16", "4", "-16", "28"],
+      "correctIndex": 0,
+      "answer": "16",
+      "explanation": "With a = 3, b = 2 and c = -1, the discriminant is b squared minus four a c, that is 4 minus 4 x 3 x (-1) = 4 + 12 = 16. The sign of c matters: minus four a c becomes plus twelve because c itself is negative.",
+      "commonMistake": "Writing 4 - 12 = -8 by ignoring the negative sign on c."
+    },
+    {
+      "id": "icse-10-math-q-qe-03",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "For the equation 2x squared minus 5x plus 3 equals zero, the value of b divided by a is ______.",
+      "answer": "minus five halves",
+      "explanation": "Here a = 2 and b = -5, so b divided by a is -5/2. The sum of the roots is minus that, namely 5/2, and the roots 3 and 1/2 do indeed add to 3.5, confirming the relation.",
+      "commonMistake": "Quoting the sum of the roots as b over a instead of minus b over a, which flips the sign."
+    },
+    {
+      "id": "icse-10-math-q-qe-04",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A quadratic equation with a negative discriminant has ______ real roots.",
+      "answer": "no",
+      "explanation": "The quadratic formula requires taking the square root of the discriminant, and no real number has a negative square. Hence the formula produces no real value of x, and the corresponding graph never meets the x axis. Complex roots exist but lie outside this syllabus.",
+      "commonMistake": "Answering one real root, which corresponds to a discriminant of zero rather than a negative one."
+    },
+    {
+      "id": "icse-10-math-q-qe-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve x squared plus 4x plus 4 equals zero by factorisation and state the nature of the roots.",
+      "answer": "x = -2, a repeated root",
+      "explanation": "The pair adding to 4 and multiplying to 4 is 2 and 2, so the expression is (x + 2) squared = 0 and x = -2 is the only root, counting twice. The discriminant is 16 - 16 = 0, which confirms a repeated root, and the graph touches the x axis at that point rather than crossing it.",
+      "commonMistake": "Reporting two roots of -2 and -2 as though they were distinct, or claiming there is no solution."
+    },
+    {
+      "id": "icse-10-math-q-qe-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve 2x squared minus 5x plus 3 equals zero by factorisation.",
+      "answer": "x = 3/2 or x = 1",
+      "explanation": "Split the middle term: a x c = 6 and the pair multiplying to 6 while adding to -5 is -2 and -3. So 2x squared - 2x - 3x + 3 groups as 2x(x - 1) - 3(x - 1) = (2x - 3)(x - 1). Setting each factor to zero gives x = 3/2 or x = 1. Check by sum and product: sum = 5/2 = -b/a and product = 3/2 = c/a.",
+      "commonMistake": "Splitting into -1 and -6, which multiply to 6 but add to -7, so the grouping has no common factor."
+    },
+    {
+      "id": "icse-10-math-q-qe-07",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 3x squared plus 2x minus 1 equals zero using the quadratic formula, showing every step.",
+      "answer": "x = 1/3 or x = -1",
+      "explanation": "a = 3, b = 2, c = -1. Discriminant = 2 squared - 4 x 3 x (-1) = 4 + 12 = 16, square root 4. x = (-2 plus or minus 4) / (2 x 3) = (-2 plus or minus 4)/6. The plus branch gives 2/6 = 1/3 and the minus branch gives -6/6 = -1. Check: 3(1/9) + 2(1/3) - 1 = 1/3 + 2/3 - 1 = 0, and 3 - 2 - 1 = 0.",
+      "commonMistake": "Dividing only the first term of the numerator, which gives -2 plus or minus 4 over 6 mishandled as either 1/3 or 1."
+    },
+    {
+      "id": "icse-10-math-q-qe-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 2x squared minus 7x plus 3 equals zero using the quadratic formula and verify both roots.",
+      "answer": "x = 3 or x = 1/2",
+      "explanation": "a = 2, b = -7, c = 3. Discriminant = 49 - 24 = 25, square root 5. x = (7 plus or minus 5)/4, since minus b with b = -7 gives +7. The plus branch gives 12/4 = 3 and the minus branch gives 2/4 = 1/2. Verification: 2(9) - 21 + 3 = 0 and 2(0.25) - 3.5 + 3 = 0.5 - 3.5 + 3 = 0.",
+      "commonMistake": "Writing -7 plus or minus 5 instead of +7, which loses the minus in front of b."
+    },
+    {
+      "id": "icse-10-math-q-qe-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The equation x squared minus 2x plus 5 equals zero has:",
+      "options": [
+        "No real roots, because the discriminant is -16",
+        "Two equal real roots",
+        "Two distinct rational roots",
+        "Two distinct irrational roots"
+      ],
+      "correctIndex": 0,
+      "answer": "No real roots, because the discriminant is -16",
+      "explanation": "Here a = 1, b = -2 and c = 5, so the discriminant is 4 minus 20, that is -16. A negative discriminant means the square root in the formula is not real, so no real x satisfies the equation and the graph of the expression lies wholly above the x axis.",
+      "commonMistake": "Computing 4 - 20 as 16 by dropping the minus sign, and reporting two distinct real roots."
+    },
+    {
+      "id": "icse-10-math-q-qe-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the value of m for which m x squared plus 6x plus 9 equals zero has equal roots.",
+      "answer": "m = 1",
+      "explanation": "Equal roots require the discriminant to vanish: 6 squared - 4 x m x 9 = 0, that is 36 - 36m = 0, so m = 1. Substituting back, the equation becomes x squared + 6x + 9 = (x + 3) squared = 0, giving the repeated root x = -3, which confirms the result.",
+      "commonMistake": "Dividing 36 by 4 to get 9 before multiplying by m, which loses the coefficient of the squared term."
+    },
+    {
+      "id": "icse-10-math-q-qe-11",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find both values of k for which 4x squared plus kx plus 9 equals zero has equal roots.",
+      "answer": "k = 12 or k = -12",
+      "explanation": "Equal roots require k squared - 4 x 4 x 9 = 0, that is k squared - 144 = 0, so k squared = 144 and k = 12 or k = -12. Both signs are admissible because only k squared enters the discriminant. With k = 12 the equation is (2x + 3) squared = 0, giving x = -3/2; the same root results from k = -12 in (2x - 3) squared = 0, namely x = 3/2.",
+      "commonMistake": "Reporting only the positive root of k squared = 144 and discarding the negative one."
+    },
+    {
+      "id": "icse-10-math-q-qe-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If alpha and beta are the roots of x squared minus 5x plus 3 equals zero, find alpha squared plus beta squared, and also find one over alpha plus one over beta.",
+      "answer": "alpha squared plus beta squared = 19, and one over alpha plus one over beta = 5/3",
+      "explanation": "From the coefficients, alpha + beta = 5 and alpha beta = 3. Then alpha squared + beta squared = (alpha + beta) squared - 2 alpha beta = 25 - 6 = 19. And one over alpha plus one over beta = (alpha + beta) divided by (alpha beta) = 5/3. Neither answer requires finding alpha and beta individually, which would involve surds here.",
+      "commonMistake": "Squaring each root separately and adding, or using alpha + beta as the numerator of the fraction sum without a common denominator."
+    },
+    {
+      "id": "icse-10-math-q-qe-13",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The product of two consecutive positive integers is 306. Form a quadratic equation, solve it, and state the integers, rejecting any inadmissible root.",
+      "answer": "The integers are 17 and 18",
+      "explanation": "Let the smaller integer be x, so the larger is x + 1 and x(x + 1) = 306, that is x squared + x - 306 = 0. The discriminant is 1 + 1224 = 1225, whose square root is 35, so x = (-1 plus or minus 35)/2. The plus branch gives 34/2 = 17 and the minus branch gives -36/2 = -18, which is rejected because the integers must be positive. Hence the integers are 17 and 18, and 17 x 18 = 306 confirms it.",
+      "commonMistake": "Accepting the negative root, or writing x squared + x = 306 and forgetting to bring 306 to the left before applying a method."
+    },
+    {
+      "id": "icse-10-math-q-qe-14",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "The perimeter of a rectangle is 34 cm and its area is 60 square cm. Form a quadratic equation for its sides, solve it, and verify both given conditions.",
+      "answer": "The sides are 5 cm and 12 cm",
+      "explanation": "Half the perimeter gives length plus breadth = 34 / 2 = 17. With the product equal to 60, the two sides are the roots of t squared - 17t + 60 = 0. Factorising, the pair adding to -17 and multiplying to 60 is -5 and -12, so (t - 5)(t - 12) = 0 and the sides are 5 cm and 12 cm. Verification: perimeter = 2(5 + 12) = 34 cm and area = 5 x 12 = 60 square cm, both as given.",
+      "commonMistake": "Using 34 rather than 17 as the linear coefficient, which forgets that the sum of two sides is half the perimeter."
+    },
+    {
+      "id": "icse-10-math-q-qe-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find two numbers whose sum is 27 and whose product is 180.",
+      "answer": "12 and 15",
+      "explanation": "Two numbers with sum S and product P are the roots of x squared minus S x plus P = 0, so here x squared - 27x + 180 = 0. Factorising, the pair adding to -27 and multiplying to 180 is -12 and -15, giving (x - 12)(x - 15) = 0. The numbers are 12 and 15, checking as 12 + 15 = 27 and 12 x 15 = 180.",
+      "commonMistake": "Setting up x(27 - x) = 180 and then failing to move all terms to one side before factorising."
+    },
+    {
+      "id": "icse-10-math-q-qe-16",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A discriminant of 25 tells you that the roots are:",
+      "options": [
+        "Two distinct real and rational numbers",
+        "Two equal real numbers",
+        "Two distinct real and irrational numbers",
+        "Not real"
+      ],
+      "correctIndex": 0,
+      "answer": "Two distinct real and rational numbers",
+      "explanation": "A discriminant of 25 is positive, so the roots are distinct and real, and being a perfect square its square root, 5, is rational, so the formula divides rational numbers and gives rational roots. That in turn means a factorisation with rational coefficients exists.",
+      "commonMistake": "Seeing the positive sign and stopping, missing the perfect-square refinement that settles rationality."
+    },
+    {
+      "id": "icse-10-math-q-qe-17",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "For a x squared plus b x plus c equals zero, the sum of the roots is ______ and the product of the roots is ______.",
+      "answer": "minus b over a, and c over a",
+      "explanation": "Substituting the two branches of the formula and adding cancels the radical, leaving minus b over a; multiplying them likewise cancels it and leaves c over a. These relations hold for every quadratic, whether or not the roots are rational, and they are the fastest check on a factorisation.",
+      "commonMistake": "Quoting b over a for the sum, which misses the sign introduced by the minus b in the formula."
+    },
+    {
+      "id": "icse-10-math-q-qe-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the sum and product of the roots of 2x squared minus 7x plus 3 equals zero and confirm them against the roots you found by the formula.",
+      "answer": "Sum = 7/2 and product = 3/2",
+      "explanation": "Sum = -b/a = -(-7)/2 = 7/2 = 3.5, and product = c/a = 3/2 = 1.5. The roots found were 3 and 1/2, and 3 + 1/2 = 3.5 while 3 x 1/2 = 1.5, so both relations hold. The discriminant of 25 is a perfect square, which already predicted rational roots.",
+      "commonMistake": "Reporting -7/2 for the sum by omitting the minus sign in the formula minus b over a."
+    },
+    {
+      "id": "icse-10-math-q-qe-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Determine the value of c for which x squared plus 4x plus c equals zero has equal roots, and then write down both roots.",
+      "answer": "c = 4, giving the repeated root x = -2",
+      "explanation": "Equal roots require the discriminant to vanish: 4 squared - 4 x 1 x c = 0, that is 16 - 4c = 0, so c = 4. Substituting back gives x squared + 4x + 4 = 0, which factorises as (x + 2) squared = 0, so the repeated root is x = -2. The discriminant of the original family is 16 - 4c, which is positive for c below 4, zero at c = 4 and negative above it.",
+      "commonMistake": "Solving 16 - 4c = 0 as c = 16 by forgetting to divide by 4."
+    },
+    {
+      "id": "icse-10-math-q-qe-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how the discriminant tells you in advance whether an equation can be solved by factorisation, and apply your answer to x squared minus 2x minus 4 equals zero and to x squared minus 4x plus 4 equals zero.",
+      "answer": "The first has discriminant 20, positive but not a perfect square, so its roots are irrational and it does not factorise rationally; the second has discriminant 0 and factors as a perfect square",
+      "explanation": "Factorisation over the rational numbers exists exactly when the discriminant is a perfect square, because the quadratic formula then produces rational roots. For x squared minus 2x minus 4, D = 4 + 16 = 20, positive but not a perfect square, so the roots 1 plus or minus the square root of 5 are irrational and no rational factorisation exists. For x squared minus 4x plus 4, D = 16 - 16 = 0, a perfect square, and the expression is (x - 2) squared with the repeated root 2.",
+      "commonMistake": "Attempting factorisation on the first equation and hunting indefinitely for a pair of numbers that cannot exist."
+    },
+    {
+      "id": "icse-10-math-q-qe-21",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "For the equation x squared plus 4x plus 4 equals zero, the discriminant is ______.",
+      "answer": "zero",
+      "explanation": "With a = 1, b = 4 and c = 4 the discriminant is 16 minus 16, that is 0. A zero discriminant means the radical in the formula vanishes, both branches give the same value, and the equation has one repeated root, here x = -2.",
+      "commonMistake": "Reporting 16 by omitting the four a c term entirely."
+    },
+    {
+      "id": "icse-10-math-q-qe-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve x squared plus x minus 12 equals zero by factorisation and verify using the sum and product of the roots.",
+      "answer": "x = 3 or x = -4",
+      "explanation": "The pair adding to 1 and multiplying to -12 is 4 and -3, so the expression is (x + 4)(x - 3) = 0 and the roots are 3 and -4. Check: sum = 3 + (-4) = -1, which equals -b/a = -1, and product = 3 x (-4) = -12, which equals c/a = -12. Both relations confirm the factorisation.",
+      "commonMistake": "Reporting -4 and 3 with the factors written as (x - 4)(x + 3), which would give a different middle term."
+    },
+    {
+      "id": "icse-10-math-q-qe-23",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The speed of a boat in still water is 5 km per hour. It travels 24 km upstream and returns, taking 15 hours in all. Form a quadratic equation for the speed of the stream, solve it, and reject any root the context forbids.",
+      "answer": "The speed of the stream is 3 km per hour",
+      "explanation": "Let the speed of the stream be x. Upstream the effective speed is 5 - x and downstream it is 5 + x, so the times are 24/(5 - x) and 24/(5 + x). Their sum is 15: multiplying through by (5 - x)(5 + x) gives 24(5 + x) + 24(5 - x) = 15(25 - x squared), that is 120 + 24x + 120 - 24x = 375 - 15x squared, so 240 = 375 - 15x squared, giving 15x squared = 135 and x squared = 9. Hence x = 3 or x = -3, and the negative root is rejected because a speed is not negative. Also x must be less than 5, otherwise the boat could never make progress upstream, and 3 satisfies that. Check: 24/(5 - 3) = 12 hours upstream and 24/(5 + 3) = 3 hours downstream, totalling 15 hours as given.",
+      "commonMistake": "Adding the speeds instead of the times, or accepting a root of 5 or more, for which the upstream journey would be impossible."
+    }
+  ]
+}

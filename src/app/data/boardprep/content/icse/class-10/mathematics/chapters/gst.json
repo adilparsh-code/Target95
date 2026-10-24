@@ -1,0 +1,642 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-gst",
+  "title": "GST (Goods and Services Tax)",
+  "kind": "mathematics",
+  "tagline": "Splitting a tax into central and state parts, claiming input tax credit, and computing GST on discounted transactions.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Goods and Services Tax is a single, destination-based tax charged on the value added at every stage of a supply chain, from the manufacturer through the wholesaler and retailer to the final consumer. Its defining feature, and the one that makes it a mathematics topic rather than a legal one, is the input tax credit. Each seller collects tax on what it sells and has already paid tax on what it bought; only the difference is handed to the government. This chapter builds the vocabulary of taxable value, output tax and input tax, shows how an intra-state supply splits into a central and a state half while an inter-state supply carries a single integrated tax, and then applies the machinery to the two complications that appear in examination problems: discounts of both kinds, and prices quoted inclusive of tax.",
+    "facts": [
+      { "label": "Intra-state supply", "value": "CGST and SGST are charged, each at half the GST rate" },
+      { "label": "Inter-state supply", "value": "IGST is charged at the full GST rate" },
+      { "label": "Net tax payable", "value": "Output tax on sales minus input tax credit on purchases" },
+      { "label": "Discount order", "value": "A trade discount is deducted first, and GST is charged on the reduced value" }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain what Goods and Services Tax is and distinguish an intra-state supply from an inter-state supply.",
+    "Split a GST rate into its central and state components and state when the integrated tax applies instead.",
+    "Define input tax and output tax and compute the net GST payable to the government for a trading business.",
+    "Follow a multi-stage supply chain and show that the total tax collected equals the GST on the final sale.",
+    "Recover the taxable value and the GST component from a price that is quoted inclusive of tax.",
+    "Apply trade and cash discounts in the correct order and compute the GST payable on the discounted transaction value."
+  ],
+  "learn": [
+    {
+      "id": "what-gst-is-and-why",
+      "title": "What GST is and why it is staged",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Goods and Services Tax is an indirect tax levied on the supply of most goods and services. It is indirect in the technical sense that the person who accounts for the tax to the government is the seller, while the person who actually bears the cost is the buyer, because the seller adds the tax to the price. It is also a destination-based tax, meaning that the revenue belongs to the state where the goods are finally consumed rather than the state where they were made. For a student of mathematics the interesting property is not these legal features but the arithmetic structure they produce. Because the tax is charged on value added at each stage rather than on the full value at the end, a business pays tax on its sales and claims back the tax already embedded in its purchases, and only the balance reaches the government."
+        },
+        {
+          "type": "paragraph",
+          "text": "That structure replaces an older cascade in which a manufacturer paid a tax on raw materials, a wholesaler paid a fresh tax on the whole invoice including the previous tax, and each layer added its own charge to an ever-growing base. Under GST the tax is charged on the taxable value of each transaction, and the tax already paid on inputs is deducted rather than stacked. Two consequences matter when you set up a calculation. First, the rate never changes along the chain; what changes is the value it is applied to. Second, the amount the government finally receives is exactly the tax on what the consumer paid, because every intermediate stage has simply passed through the difference between its own output and its own input."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "GST is charged on the taxable value of a supply, which is the price before tax is added.",
+            "The seller is responsible for paying the tax, but the buyer bears the cost as part of the price.",
+            "A destination-based tax belongs to the state of consumption, not the state of production.",
+            "Each stage pays only on the value it adds, because tax already paid on inputs is credited back."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cgst-sgst-and-igst",
+      "title": "Central, state and integrated tax",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Where a supply happens decides which tax applies. If the supplier and the place of supply are inside the same state, the transaction is intra-state, and the GST rate is divided equally into two parts: the Central Goods and Services Tax, which goes to the central government, and the State Goods and Services Tax, which goes to the state government. A rate of twelve per cent therefore appears on the invoice as six per cent central plus six per cent state. If the supplier and the place of supply lie in different states, or the supply crosses a union territory boundary, the transaction is inter-state and a single Integrated Goods and Services Tax is charged at the full rate. The total the buyer pays is the same either way; only the label and the recipient of the revenue differ."
+        },
+        {
+          "type": "table",
+          "caption": "Splitting common GST rates for an intra-state supply",
+          "columns": ["GST rate", "CGST rate", "SGST rate", "IGST rate if inter-state"],
+          "rows": [
+            ["5 per cent", "2.5 per cent", "2.5 per cent", "5 per cent"],
+            ["12 per cent", "6 per cent", "6 per cent", "12 per cent"],
+            ["18 per cent", "9 per cent", "9 per cent", "18 per cent"],
+            ["28 per cent", "14 per cent", "14 per cent", "28 per cent"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table is worth committing to memory, because the halving rule lets you move between the three taxes without any new formula. Take a taxable value of twenty thousand rupees at twelve per cent, intra-state. The central part is twenty thousand times six divided by one hundred, which is one thousand two hundred rupees, and the state part is the same, so the buyer pays twenty two thousand four hundred rupees in total. Change the same transaction to inter-state and the integrated tax is twenty thousand times eighteen divided by one hundred, which is again two thousand four hundred rupees. The identical total is not a coincidence: half of eighteen is nine, and nine plus nine is eighteen, so splitting a rate can never change the sum."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Taxable value", "meaning": "The value on which GST is computed, being the price of the supply before tax is added." },
+            { "term": "Intra-state supply", "meaning": "A supply within one state, bearing CGST and SGST at half the GST rate each." },
+            { "term": "Inter-state supply", "meaning": "A supply crossing a state boundary, bearing IGST at the full GST rate." },
+            { "term": "GST invoice", "meaning": "The document that records the taxable value and the tax charged, separately for each component." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input-tax-and-output-tax",
+      "title": "Input tax, output tax and the credit",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two quantities drive every GST problem. The output tax is the tax a business collects on the goods it sells; it is computed by applying the relevant rate to the taxable value of its sales. The input tax is the tax the business has already paid on the goods it bought for resale or for use in production; it is computed the same way, on the taxable value of its purchases. Because that tax has already been handed over to the government by the supplier, the business is entitled to deduct it from what it owes. The deduction is called the input tax credit, and the arithmetic is a single subtraction: the net GST payable to the government equals the output tax minus the input tax credit."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two conditions govern the credit in practice, and it is worth knowing them even though the arithmetic ignores them. The input must have been acquired in the course of business, and the business must hold a tax invoice showing the tax separately. When a business buys on which tax is not shown separately, or buys for a purpose outside its business, no credit arises and the whole tax becomes a cost. For examination purposes the credit is assumed to be available in full unless the problem says otherwise, so the working reduces to computing two tax amounts and subtracting. A negative result is impossible in a profitable trading business, because the selling value must exceed the buying value; if your subtraction gives a negative figure, one of the two tax amounts has been computed on the wrong base."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A shopkeeper buys goods with a taxable value of 20000 rupees and sells them for a taxable value of 25000 rupees. The supply is intra-state and the GST rate is 12 per cent. Find the input tax, the output tax and the net payable.",
+              "note": "Input tax = 20000 x 12 / 100 = 2400 rupees. Output tax = 25000 x 12 / 100 = 3000 rupees. Net payable = 3000 - 2400 = 600 rupees."
+            },
+            {
+              "text": "For the same transaction, state the central and state shares of the net payable amount.",
+              "note": "Output CGST = 25000 x 6 / 100 = 1500 and input CGST = 20000 x 6 / 100 = 1200, so net CGST = 300. The state shares are identical at 300. Total = 300 + 300 = 600 rupees, as before."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-net-gst-payable",
+      "title": "Setting out the net payable calculation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A tidy layout prevents most GST errors. Begin by listing the two taxable values, the purchase value and the sale value, and state the supply type, because that decides whether you split the rate or not. Compute the input tax on the purchase value and the output tax on the sale value using the same rate, then subtract. If the question asks for the central and state shares separately, do the subtraction twice, once on each half, rather than halving the final answer, so that the two components are visible to the marker. Finally quote the selling price including tax as well, when asked, by adding the output tax back to the sale value. Marking the taxable values clearly as pre-tax figures stops the commonest slip in this topic, which is charging tax on a price that already contains tax."
+        },
+        {
+          "type": "table",
+          "caption": "Full working for a 12 per cent intra-state trade",
+          "columns": ["Quantity", "Taxable value", "Rate", "Tax", "Amount payable"],
+          "rows": [
+            ["Purchase", "20000.00", "12 per cent", "20000 x 0.12 = 2400.00", "22400.00"],
+            ["Sale", "25000.00", "12 per cent", "25000 x 0.12 = 3000.00", "28000.00"],
+            ["Net payable", "difference 5000.00", "12 per cent", "3000.00 - 2400.00 = 600.00", "600.00"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The third row of the table deserves attention. The taxable values differ by five thousand rupees, and twelve per cent of five thousand is exactly six hundred, which is the net payable figure. This is not an accident but the meaning of the input tax credit: the business is taxed only on the value it added, five thousand rupees here, and never on the full selling value. Whenever you have finished a GST calculation, check it this way. Multiply the difference of the two taxable values by the rate and confirm that the product equals your net figure. It costs one line and it catches almost every arithmetic slip."
+        }
+      ]
+    },
+    {
+      "id": "a-multi-stage-supply-chain",
+      "title": "Following a supply chain",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Real goods usually change hands more than once before reaching a consumer, and the input tax credit is what makes a chain of transactions collapse into a single clean total. Work the chain forwards. The manufacturer pays tax on nothing, or claims credit on raw materials, and pays output tax on its sale. Each subsequent seller pays output tax on its own selling value and claims credit for the tax shown on the invoice it received, which is the previous stage's output tax. The consumer, being outside the chain of businesses, claims nothing and pays the whole tax. The chain therefore telescopes: every intermediate payment cancels against the corresponding credit, and what survives is the tax on the final sale alone."
+        },
+        {
+          "type": "table",
+          "caption": "An 18 per cent chain from manufacturer to consumer",
+          "columns": ["Stage", "Sells at", "Output tax", "Input tax credit", "Net paid"],
+          "rows": [
+            ["Manufacturer to wholesaler", "5000.00", "5000 x 0.18 = 900.00", "0.00", "900.00"],
+            ["Wholesaler to retailer", "7000.00", "7000 x 0.18 = 1260.00", "900.00", "360.00"],
+            ["Retailer to consumer", "9000.00", "9000 x 0.18 = 1620.00", "1260.00", "360.00"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the total tax received by the government from the chain in the table.",
+              "note": "Total = 900 + 360 + 360 = 1620 rupees, which is 18 per cent of 9000, the value at which the consumer bought."
+            },
+            {
+              "text": "Find the amount the consumer pays.",
+              "note": "Consumer price = 9000 + 1620 = 10620 rupees."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Notice that the wholesaler and the retailer each paid exactly three hundred and sixty rupees, despite very different turnover, because each added the same two thousand rupees of value. That is the essence of a value-added tax: the charge follows the increment, not the volume. It also explains why the sum of the three payments equals the tax on the final price alone. Each stage's output tax cancels the next stage's credit, so only the last payment, the one with no credit to set against it, actually reaches the treasury."
+        }
+      ]
+    },
+    {
+      "id": "prices-inclusive-of-gst",
+      "title": "Recovering the taxable value from a gross price",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In shops and in many examination questions the price you see is the price you pay, tax already inside it. Working backwards from such a figure is a routine that repays a careful setup. If the gross price P includes GST at r per cent, then P is the taxable value V plus r per cent of V, so P equals V multiplied by 1 plus r divided by 100. Rearranging gives V = P times 100 divided by 100 plus r, and the tax itself is the difference between P and V. A quick sanity check is that the tax must be smaller than the gross price and the taxable value must be smaller still, and that their sum must return the gross price exactly."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A consumer pays 10620 rupees inclusive of GST at 18 per cent. Find the taxable value and the tax.",
+              "note": "Taxable value = 10620 x 100 / 118 = 9000 rupees. Tax = 10620 - 9000 = 1620 rupees, and 9000 x 0.18 = 1620 confirms it."
+            },
+            {
+              "text": "A price of 5880 rupees is inclusive of GST at 20 per cent. Find the taxable value, the tax and its central and state shares.",
+              "note": "Taxable value = 5880 x 100 / 120 = 4900 rupees. Tax = 5880 - 4900 = 980 rupees, and each of CGST and SGST is 490 rupees."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The first example closes a loop opened earlier in the chapter, because the nine thousand rupees it recovers is exactly the value at which the retailer sold in the supply chain table. That correspondence is a useful cross-check whenever a problem is given from both ends. If a chain problem quotes a consumer price, divide by 1 plus the rate over 100 to obtain the taxable value at the final stage, and then work backwards through the chain using the earlier stages' values. Combining the two directions in one layout turns an intimidating multi-step question into a sequence of short multiplications."
+        }
+      ]
+    },
+    {
+      "id": "trade-discounts-before-gst",
+      "title": "Trade discounts and the transaction value",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Almost no wholesale transaction is settled at the printed list price. A trade discount is a reduction offered to a class of buyer, and its essential property for our purposes is that it is deducted before GST is charged. The tax is therefore computed on the transaction value, meaning the list price less the trade discount, and never on the list price itself. If the discount is d per cent on a list price of L, the transaction value is L multiplied by 100 minus d divided by 100. Getting this order wrong is expensive, because charging tax on the list price inflates the tax by the tax on the discount, which no customer has actually paid."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The list price of an article is 8000 rupees. A trade discount of 15 per cent is allowed and GST is charged at 12 per cent. Find the invoice amount.",
+              "note": "Discount = 8000 x 15 / 100 = 1200 rupees. Transaction value = 8000 - 1200 = 6800 rupees. GST = 6800 x 12 / 100 = 816 rupees. Invoice = 6800 + 816 = 7616 rupees."
+            },
+            {
+              "text": "Repeat the previous example but allow a trade discount of 25 per cent on a list price of 12000 rupees, with GST at 12 per cent.",
+              "note": "Discount = 12000 x 25 / 100 = 3000 rupees. Transaction value = 12000 - 3000 = 9000 rupees. GST = 9000 x 12 / 100 = 1080 rupees. Invoice = 9000 + 1080 = 10080 rupees."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Two discounts on the same list price of 12000 rupees, GST at 12 per cent",
+          "columns": ["Trade discount", "Transaction value", "GST at 12 per cent", "Invoice amount"],
+          "rows": [
+            ["10 per cent, 1200", "10800.00", "10800 x 0.12 = 1296.00", "12096.00"],
+            ["25 per cent, 3000", "9000.00", "9000 x 0.12 = 1080.00", "10080.00"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The table illustrates a point students often find surprising. Moving from no discount to a ten per cent discount costs the seller twelve hundred rupees of revenue and reduces the invoice by 1200 x 1.12 = 1344 rupees, of which 1296 is revenue and 48 is tax. Pushing on to a twenty-five per cent discount costs three thousand rupees of revenue and reduces the invoice by 3000 x 1.12 = 3360 rupees, of which 1080 is tax and the rest is revenue. In every case the invoice falls by the discount multiplied by 1 plus the rate over 100, because the buyer is spared the discount itself and the tax that would have been charged on it. For a fifteen per cent discount at twelve per cent on an eight thousand rupee list price the fall is 1200 x 1.12 = 1344 rupees, and 8960 minus 7616 is exactly that, where 8960 is the invoice had no discount been allowed."
+        }
+      ]
+    },
+    {
+      "id": "cash-discounts-and-markup",
+      "title": "Cash discounts, markup and net payment",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A cash discount is a different animal. It is offered not to a class of buyer but to a buyer who settles promptly, and it is computed after the trade discount has already reduced the price. In this chapter we adopt the convention that the cash discount is calculated on the invoice amount, that is, on the figure payable including GST, since that is the sum the buyer actually remits. Under this convention the buyer subtracts the cash discount from the invoice amount to obtain the net payment, while the seller still reports the full invoice as its taxable value and its output tax. Stating the convention explicitly in your answer is good practice, because commercial usages differ."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A list price of 12000 rupees carries a trade discount of 25 per cent and GST at 12 per cent. A cash discount of 10 per cent is allowed on the invoice for prompt payment. Find the net amount paid.",
+              "note": "Transaction value = 9000 and GST = 1080, so the invoice is 10080 rupees. Cash discount = 10080 x 10 / 100 = 1008 rupees. Net payment = 10080 - 1008 = 9072 rupees."
+            },
+            {
+              "text": "An article is bought for 2400 rupees, marked up by 25 per cent, and then sold at a discount of 10 per cent on the marked price. Find the profit before tax and the profit percentage.",
+              "note": "Marked price = 2400 x 1.25 = 3000. Selling price before tax = 3000 x 0.90 = 2700. Profit = 2700 - 2400 = 300, and 300 / 2400 x 100 = 12.5 per cent."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "List price, less trade discount, gives the transaction value on which GST is charged.",
+            "Transaction value, plus GST, gives the invoice amount.",
+            "Invoice amount, less cash discount, gives the net amount the buyer remits.",
+            "Markup is applied to cost first, and the discount is then applied to the marked price, so the two percentages do not cancel unless they are equal."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The second example shows why markup and discount must never be netted against each other by eye. A markup of twenty-five per cent followed by a discount of ten per cent leaves a gain of twelve and a half per cent, not fifteen, because the discount is taken on the larger marked price rather than on cost. The reliable route is always cost to marked price by multiplication, marked price to selling price by multiplication, and only then a subtraction and a percentage. Each step is a single multiplication, and no intuition is required."
+        }
+      ]
+    },
+    {
+      "id": "checking-gst-answers",
+      "title": "Checking a GST answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "GST arithmetic is shallow but unforgiving, because a single base error propagates through every later line. The following four checks cost little and detect nearly everything. First, the split check: for an intra-state supply the central and state amounts must be equal and must add to the total GST. Second, the base check: the tax must equal the stated rate applied to the value you named as taxable, and if a discount was allowed that value must already be net of the discount. Third, the credit check: the net payable must equal the output tax minus the input tax, and must also equal the rate applied to the difference of the two taxable values. Fourth, the inclusive check: a gross price divided by 1 plus the rate over 100 must give a taxable value which, with the tax added back, returns the gross price to the rupee."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Intra-state: CGST equals SGST and their sum equals the total GST.",
+            "The tax always equals the rate times the taxable value, never times a discounted-by-something-else value.",
+            "Net payable equals the rate applied to the difference between the sale and purchase taxable values.",
+            "A gross price recovered by division must reconstitute exactly when the tax is added back.",
+            "A trade discount is applied before tax; a cash discount is applied after the invoice is struck."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "One further discipline helps with multi-part questions. Write down the taxable value, the rate and the supply type at the top of your working, once, and refer back to them rather than rewriting them in each part. Candidates frequently answer the first part correctly and then apply a different rate in the second, simply because the rate was rewritten and misread. Keeping the given data in one visible block removes that risk entirely, and it also lets a marker see at a glance that you understood the setup, which is worth credit in its own right."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from recall of the split between central and state tax, through single-stage and multi-stage computations, to discounted transactions and prices quoted inclusive of tax. Work each one with a stated taxable value and rate at the top of the page, and apply at least one of the four checking tests before moving on. Several questions give you the same transaction from two different directions, which is deliberate: being able to pass from a gross price to a taxable value and back again is the skill this chapter exists to build."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write the taxable value, the rate and the supply type before any multiplication.",
+            "Deduct a trade discount before computing tax; deduct a cash discount only from the invoice.",
+            "Check an intra-state answer by confirming that the central and state halves are equal.",
+            "Check a net payable figure by applying the rate to the difference of the two taxable values.",
+            "When a price is inclusive of tax, divide by 1 plus the rate over 100 rather than applying the rate to the gross figure."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "The input tax credit at three stages of a supply chain",
+      "description": "Three boxes in a row, labelled manufacturer, wholesaler and retailer, each pointing right to the next and the last pointing to a consumer. Under each seller a small panel shows three figures: the taxable value it sells at, its output tax, and the input tax credit it receives from the preceding invoice. Arrows carry the invoice value forward, so the wholesaler's credit arrow arrives from the manufacturer's output tax figure and the retailer's credit arrow arrives from the wholesaler's. A bracket spanning all three sellers is annotated with the total paid to the government, and a note states that it equals the tax on the consumer's purchase alone.",
+      "labels": ["Manufacturer", "Wholesaler", "Retailer", "Consumer", "Output tax", "Input tax credit", "Total to government"]
+    },
+    {
+      "caption": "From list price to net payment on an invoice",
+      "description": "A stepped diagram descending from left to right. The top step is the list price. An arrow marked trade discount drops to the transaction value. An arrow marked GST at twelve per cent rises to the invoice amount. A final arrow marked cash discount drops to the net payment. Beside the transaction value step a bracket separates the amount into the taxable value and the two equal tax halves, central and state, labelled with their individual amounts.",
+      "labels": ["List price", "Trade discount", "Transaction value", "GST", "Invoice amount", "Cash discount", "Net payment", "CGST", "SGST"]
+    }
+  ],
+  "keyPoints": [
+    "GST is charged on the taxable value, which is the price before tax and after any trade discount.",
+    "An intra-state supply bears CGST and SGST at half the rate each; an inter-state supply bears IGST at the full rate.",
+    "Output tax is charged on sales; input tax credit arises on purchases; the net payable is the difference.",
+    "The net payable also equals the rate applied to the difference between the sale and purchase taxable values.",
+    "In a multi-stage chain the intermediate payments cancel, so the total reaching the government is the tax on the final sale.",
+    "A price inclusive of tax is converted by multiplying by 100 and dividing by 100 plus the rate.",
+    "A trade discount is deducted before tax; a cash discount is deducted from the invoice after it is struck.",
+    "Markup is applied to cost and discount to marked price, so the two percentages never simply subtract."
+  ],
+  "examFocus": [
+    "State the taxable value, the rate and the supply type before any multiplication, and keep them in one visible block for every part of the question.",
+    "Show each tax as a chain of equalities, for example output tax = 25000 x 12 / 100 = 3000, so that partial credit survives an arithmetic slip.",
+    "Quote the central and state shares as separate subtractions rather than halving a final answer, so both components are visible.",
+    "When a price is inclusive of tax, name it as such and divide by 1 plus the rate over 100; never apply the rate to a gross figure.",
+    "State any convention you adopt for cash discounts, since commercial practice varies and the marker needs to know your assumption."
+  ],
+  "vocabulary": [
+    { "word": "Taxable value", "meaning": "The pre-tax value on which GST is computed, being the list price less any trade discount." },
+    { "word": "Output tax", "meaning": "The GST a business collects on the taxable value of what it sells." },
+    { "word": "Input tax", "meaning": "The GST a business has already paid on purchases made in the course of its trade." },
+    { "word": "Input tax credit", "meaning": "The deduction of input tax from output tax, leaving the net amount payable to the government." },
+    { "word": "Trade discount", "meaning": "A reduction off the list price given to a class of buyer, deducted before GST is charged." },
+    { "word": "Cash discount", "meaning": "A reduction offered for prompt settlement, computed on the invoice amount after the trade discount." },
+    { "word": "IGST", "meaning": "Integrated Goods and Services Tax, charged at the full rate on an inter-state supply." },
+    { "word": "Transaction value", "meaning": "The value actually agreed for a supply, being the list price once trade discounts are removed." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-gst-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An intra-state supply is taxed at 12 per cent. The central and state components are:",
+      "options": [
+        "CGST 6 per cent and SGST 6 per cent",
+        "CGST 12 per cent and SGST 12 per cent",
+        "CGST 6 per cent and SGST 12 per cent",
+        "CGST 3 per cent and SGST 3 per cent"
+      ],
+      "correctIndex": 0,
+      "answer": "CGST 6 per cent and SGST 6 per cent",
+      "explanation": "An intra-state supply divides the GST rate equally between the central and the state government, so 12 per cent splits into 6 per cent each. The two halves must add to the quoted rate, and 6 plus 6 is 12; option 2 would double the tax and option 3 would not split it at all.",
+      "commonMistake": "Charging the full 12 per cent to each government, which doubles the tax collected."
+    },
+    {
+      "id": "icse-10-math-q-gst-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The net GST payable to the government is the output tax on sales minus the ______ on purchases.",
+      "answer": "input tax credit",
+      "explanation": "A business has already handed over the tax embedded in its purchases, so it deducts that input tax credit from the tax it collects on sales. Only the balance is remitted, which means the government receives tax on the value the business actually added rather than on its whole turnover.",
+      "commonMistake": "Subtracting the purchase price rather than the input tax, which reduces the payable figure far too much."
+    },
+    {
+      "id": "icse-10-math-q-gst-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A shopkeeper buys goods of taxable value 20000 rupees intra-state at 12 per cent and sells them for a taxable value of 25000 rupees. The input tax is:",
+      "options": ["2400 rupees", "2240 rupees", "3000 rupees", "2000 rupees"],
+      "correctIndex": 0,
+      "answer": "2400 rupees",
+      "explanation": "Input tax is charged on the purchase taxable value, so 20000 x 12 / 100 = 2400 rupees. The figure 2240 rupees is the total cost including tax, and 3000 rupees is the output tax on the sale, not the input tax.",
+      "commonMistake": "Quoting the amount paid including tax, 22400 rupees, rather than the tax itself."
+    },
+    {
+      "id": "icse-10-math-q-gst-04",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The output tax on a sale is 3000 rupees and the input tax credit is 2400 rupees. The net GST payable is ______ rupees.",
+      "answer": "600",
+      "explanation": "Net payable = output tax minus input tax credit = 3000 - 2400 = 600 rupees. As a check, the taxable values were 25000 and 20000, a difference of 5000, and 12 per cent of 5000 is 600, confirming that only the value added has been taxed.",
+      "commonMistake": "Adding the two figures instead of subtracting, which gives 5400 rupees and overstates the liability."
+    },
+    {
+      "id": "icse-10-math-q-gst-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A supplier in one state sells to a buyer in a different state. The tax charged is:",
+      "options": [
+        "IGST at the full GST rate",
+        "CGST at half the GST rate only",
+        "SGST at half the GST rate only",
+        "No GST, because the goods cross a boundary"
+      ],
+      "correctIndex": 0,
+      "answer": "IGST at the full GST rate",
+      "explanation": "An inter-state supply attracts a single integrated tax at the whole rate, because the revenue must be apportioned between two states and a single levy avoids duplicate claims. The central and state halves apply only when supplier and place of supply lie in the same state.",
+      "commonMistake": "Splitting the rate into halves even when the supply crosses a state boundary."
+    },
+    {
+      "id": "icse-10-math-q-gst-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A consumer pays 10620 rupees inclusive of GST at 18 per cent. The taxable value is ______ rupees.",
+      "answer": "9000",
+      "explanation": "The gross price equals the taxable value times 1 plus 18 over 100, so the taxable value = 10620 x 100 / 118 = 9000 rupees. The tax is then 10620 - 9000 = 1620 rupees, and 9000 x 0.18 = 1620 confirms the recovery.",
+      "commonMistake": "Taking 18 per cent of the gross figure, which gives 1911.60 and double counts the tax."
+    },
+    {
+      "id": "icse-10-math-q-gst-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A trader buys goods of taxable value 15000 rupees from another state at 18 per cent and sells them intra-state for a taxable value of 18000 rupees. Find the net GST payable.",
+      "answer": "540 rupees",
+      "explanation": "The purchase is inter-state, so the input tax is IGST = 15000 x 18 / 100 = 2700 rupees. The sale is intra-state, so the output tax is CGST = 18000 x 9 / 100 = 1620 and SGST = 1620, giving 3240 rupees in total. Net payable = 3240 - 2700 = 540 rupees. As a check, the rate is the same on both sides, so the credit equals the rate applied to the value added: 18000 - 15000 = 3000, and 3000 x 18 / 100 = 540 rupees, which matches.",
+      "commonMistake": "Charging 9 per cent on the purchase as well as the sale, which wrongly halves the input tax credit."
+    },
+    {
+      "id": "icse-10-math-q-gst-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A manufacturer sells to a wholesaler at a taxable value of 5000 rupees, the wholesaler sells to a retailer at 7000 rupees, and the retailer sells to a consumer at 9000 rupees. GST is 18 per cent throughout and all supplies are intra-state. Find the output tax, the input tax credit and the net paid by each stage, and verify the total.",
+      "answer": "Manufacturer pays 900, wholesaler pays 360, retailer pays 360; total 1620 rupees, equal to 18 per cent of 9000",
+      "explanation": "The manufacturer's output tax is 5000 x 0.18 = 900 and it has no input tax, so it pays 900. The wholesaler's output tax is 7000 x 0.18 = 1260 and its credit is the 900 shown on the manufacturer's invoice, so it pays 1260 - 900 = 360. The retailer's output tax is 9000 x 0.18 = 1620 and its credit is 1260, so it pays 1620 - 1260 = 360. The total is 900 + 360 + 360 = 1620 rupees, and 9000 x 0.18 = 1620, so the whole chain collects exactly the tax on the final sale. The consumer pays 9000 + 1620 = 10620 rupees.",
+      "commonMistake": "Computing each stage's tax on the full chain value instead of on that stage's own selling value."
+    },
+    {
+      "id": "icse-10-math-q-gst-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The list price of an article is 8000 rupees. A trade discount of 15 per cent is allowed and GST is charged at 12 per cent. Find the invoice amount.",
+      "answer": "7616 rupees",
+      "explanation": "The trade discount is 8000 x 15 / 100 = 1200 rupees, so the transaction value is 8000 - 1200 = 6800 rupees. GST is charged on that reduced value: 6800 x 12 / 100 = 816 rupees. The invoice amount is 6800 + 816 = 7616 rupees, and as a check the invoice falls from the list price by 1200 x 1.12 = 1344 rupees, and 8000 - 1344 = 7616.",
+      "commonMistake": "Charging GST on the list price, which gives 960 rupees of tax and an invoice of 8960 rupees."
+    },
+    {
+      "id": "icse-10-math-q-gst-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A list price of 12000 rupees carries a trade discount of 25 per cent and GST at 12 per cent. A cash discount of 10 per cent on the invoice is allowed for prompt payment. Find the transaction value, the GST, the invoice amount and the net amount paid.",
+      "answer": "Transaction value 9000 rupees, GST 1080 rupees, invoice 10080 rupees, net paid 9072 rupees",
+      "explanation": "Trade discount = 12000 x 25 / 100 = 3000, so the transaction value is 12000 - 3000 = 9000 rupees. GST = 9000 x 12 / 100 = 1080 rupees, giving an invoice of 9000 + 1080 = 10080 rupees. Taking the cash discount on the invoice, 10080 x 10 / 100 = 1008 rupees, so the net payment is 10080 - 1008 = 9072 rupees. Note that the seller still accounts for 1080 rupees of output tax, since the cash discount reduces what the buyer remits, not the taxable value.",
+      "commonMistake": "Applying the cash discount to the transaction value before tax, which gives a net payment of 8100 plus tax and understates the invoice."
+    },
+    {
+      "id": "icse-10-math-q-gst-11",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these is deducted from the list price before GST is charged?",
+      "options": ["Trade discount", "Cash discount", "Markup", "Interest"],
+      "correctIndex": 0,
+      "answer": "Trade discount",
+      "explanation": "A trade discount is a reduction off the list price granted to a class of buyer, and the GST is charged on what remains. A cash discount comes later, being subtracted from the invoice after it has been struck, and therefore does not alter the taxable value.",
+      "commonMistake": "Subtracting the cash discount before computing tax, which reduces the output tax wrongly."
+    },
+    {
+      "id": "icse-10-math-q-gst-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The GST on a taxable value of 6800 rupees at 12 per cent is ______ rupees.",
+      "answer": "816",
+      "explanation": "6800 x 12 / 100 = 816 rupees. For an intra-state supply this would appear as 408 rupees of central tax and 408 rupees of state tax, and 408 + 408 = 816 confirms the split.",
+      "commonMistake": "Applying 12 per cent to the list price of 8000 instead, which gives 960 rupees."
+    },
+    {
+      "id": "icse-10-math-q-gst-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A retailer sells goods of taxable value 9000 rupees at 18 per cent and holds an input tax credit of 1260 rupees. The net GST it pays is:",
+      "options": ["360 rupees", "1620 rupees", "1260 rupees", "2880 rupees"],
+      "correctIndex": 0,
+      "answer": "360 rupees",
+      "explanation": "Output tax = 9000 x 18 / 100 = 1620 rupees, and deducting the credit of 1260 leaves 1620 - 1260 = 360 rupees. The figure 1620 rupees is the gross output tax before any credit, and 2880 rupees is that figure with the credit added rather than deducted.",
+      "commonMistake": "Reporting the output tax before claiming the credit."
+    },
+    {
+      "id": "icse-10-math-q-gst-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why, in a supply chain ending in a consumer, the total GST collected equals the tax on the final sale alone.",
+      "answer": "Each stage's output tax becomes the next stage's input tax credit, so all intermediate amounts cancel and only the last stage, which has no credit to claim, pays the government.",
+      "explanation": "Writing the payments as a sum makes the cancellation explicit: for three stages the payments are O1, O2 minus O1, and O3 minus O2, and these add to O3, the output tax of the final seller. O1 and O2 each appear once positive and once negative. The consumer claims no credit, so O3 survives untouched and equals the GST on the price the consumer paid.",
+      "commonMistake": "Saying that tax is charged only once, when in fact it is charged at every stage and merely recovered in part."
+    },
+    {
+      "id": "icse-10-math-q-gst-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A shopkeeper buys an article for 2400 rupees, marks it up by 25 per cent and then allows a discount of 10 per cent on the marked price. Find the profit before tax, the profit percentage, and the invoice amount when GST is charged at 12 per cent on the selling price.",
+      "answer": "Profit 300 rupees, profit 12.5 per cent, invoice 3024 rupees",
+      "explanation": "Marked price = 2400 x 1.25 = 3000 rupees. Selling price before tax = 3000 x 0.90 = 2700 rupees. Profit = 2700 - 2400 = 300 rupees, and 300 / 2400 x 100 = 12.5 per cent. GST is charged on the transaction value of 2700, giving 2700 x 0.12 = 324 rupees, so the invoice is 2700 + 324 = 3024 rupees. The profit is not 15 per cent, because the 10 per cent discount is taken on the larger marked price rather than on cost.",
+      "commonMistake": "Subtracting the two percentages to get 15 per cent, which ignores that they are applied to different bases."
+    },
+    {
+      "id": "icse-10-math-q-gst-16",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A price of 5880 rupees is inclusive of GST at 20 per cent. Find the taxable value, the GST, and the central and state shares if the supply is intra-state, then verify your answer.",
+      "answer": "Taxable value 4900 rupees, GST 980 rupees, CGST 490 rupees and SGST 490 rupees",
+      "explanation": "Taxable value = 5880 x 100 / 120 = 4900 rupees. GST = 5880 - 4900 = 980 rupees, and 4900 x 20 / 100 = 980 confirms it. Splitting an intra-state supply equally gives CGST = 980 / 2 = 490 and SGST = 490, and 490 + 490 = 980 returns the total. The check 4900 + 980 = 5880 restores the gross price exactly.",
+      "commonMistake": "Taking 20 per cent of 5880, which gives 1176 rupees and applies the rate to a figure that already contains the tax."
+    },
+    {
+      "id": "icse-10-math-q-gst-17",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The tax a business has already paid on goods bought for resale is called:",
+      "options": ["Input tax", "Output tax", "Final tax", "Advance tax"],
+      "correctIndex": 0,
+      "answer": "Input tax",
+      "explanation": "It is the tax on inputs, and the business recovers it by claiming an input tax credit against the tax it collects on outputs. Output tax, by contrast, is what the business charges its own customers and must account for.",
+      "commonMistake": "Calling it output tax, which reverses the direction of the transaction."
+    },
+    {
+      "id": "icse-10-math-q-gst-18",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A shopkeeper buys at a taxable value of 20000 rupees and sells at 25000 rupees, both intra-state at 12 per cent. His profit before tax is ______ rupees.",
+      "answer": "5000",
+      "explanation": "Profit before tax is the difference of the taxable values, 25000 - 20000 = 5000 rupees, and the tax plays no part in it because the input tax credit returns the tax on the purchase. As a check, 12 per cent of this profit is 600 rupees, which is exactly the net GST payable.",
+      "commonMistake": "Subtracting the total cost including tax from the selling price including tax and reporting a figure distorted by the tax amounts."
+    },
+    {
+      "id": "icse-10-math-q-gst-19",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A trader buys intra-state with a taxable value of 15000 rupees at 12 per cent and sells inter-state with a taxable value of 22000 rupees at 18 per cent. Find the output tax, the input tax credit and the net payable.",
+      "answer": "Output tax 3960 rupees, input tax credit 1800 rupees, net payable 2160 rupees",
+      "explanation": "The purchase is intra-state, so the input tax is 15000 x 12 / 100 = 1800 rupees, split 900 central and 900 state. The sale is inter-state, so the output tax is IGST = 22000 x 18 / 100 = 3960 rupees. Net payable = 3960 - 1800 = 2160 rupees. Note that the shortcut of applying one rate to the value added does not apply here, because the purchase and sale rates differ; the subtraction is the only sound route.",
+      "commonMistake": "Applying the same rate to both sides and using the value-added shortcut when the purchase and sale rates differ."
+    },
+    {
+      "id": "icse-10-math-q-gst-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A wholesaler sells to a retailer for a taxable value of 7000 rupees at 18 per cent, and the retailer sells to a consumer for 10620 rupees inclusive of tax. Verify that the retailer's net GST payable is 360 rupees.",
+      "answer": "The retailer's taxable value is 9000 rupees, its output tax is 1620 rupees, and 1620 minus the credit of 1260 gives 360 rupees",
+      "explanation": "The consumer's gross price is inclusive, so the retailer's taxable value is 10620 x 100 / 118 = 9000 rupees and the output tax is 10620 - 9000 = 1620 rupees. The retailer's input tax credit is the tax on the wholesaler's invoice, 7000 x 0.18 = 1260 rupees. Net payable = 1620 - 1260 = 360 rupees. Adding back, the retailer's selling value exceeds its buying value by 2000 rupees and 18 per cent of 2000 is 360, which confirms the result.",
+      "commonMistake": "Applying the inclusive-price formula to the retailer's purchase rather than to the consumer's payment."
+    },
+    {
+      "id": "icse-10-math-q-gst-21",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A cash discount for prompt payment is computed on:",
+      "options": [
+        "The invoice amount, after the trade discount",
+        "The list price, before the trade discount",
+        "The GST charged",
+        "The marked-up price before any discount"
+      ],
+      "correctIndex": 0,
+      "answer": "The invoice amount, after the trade discount",
+      "explanation": "The trade discount has already reduced the list price to a transaction value, GST is added to that to give the invoice amount, and the cash discount is then allowed on the sum the buyer actually remits. Computing it on the list price would reward the buyer for a discount it never received.",
+      "commonMistake": "Allowing the cash discount on the list price and so giving away more than the agreed percentage."
+    },
+    {
+      "id": "icse-10-math-q-gst-22",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the two taxes charged on an intra-state supply and give their rates when the GST rate is 18 per cent.",
+      "answer": "CGST at 9 per cent and SGST at 9 per cent",
+      "explanation": "An intra-state supply is divided equally between the Central Goods and Services Tax and the State Goods and Services Tax, so 18 per cent splits into 9 per cent each. An equivalent inter-state supply would instead bear IGST at the whole 18 per cent, leaving the buyer's total unchanged.",
+      "commonMistake": "Splitting the rate into unequal parts, or quoting 18 per cent for each component."
+    },
+    {
+      "id": "icse-10-math-q-gst-23",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A manufacturer sells to a wholesaler for 5000 rupees of taxable value at 18 per cent. The wholesaler allows the retailer a trade discount of 10 per cent on a list price of 8000 rupees and charges the same GST rate. Find the tax paid at each stage and the tax the consumer bears when buying for 10620 rupees inclusive.",
+      "answer": "Manufacturer pays 900, wholesaler pays 432, and the consumer bears 1620 rupees in total",
+      "explanation": "The manufacturer's output tax is 5000 x 0.18 = 900 rupees. The wholesaler's transaction value is 8000 less a trade discount of 8000 x 10 / 100 = 800, so 7200 rupees; its output tax is 7200 x 0.18 = 1296 rupees, and its credit is the 900 shown on the manufacturer's invoice, leaving 1296 - 900 = 396 rupees. For the final stage, the consumer's inclusive price gives a taxable value of 10620 x 100 / 118 = 9000 rupees and a tax of 1620 rupees, so the retailer pays 1620 - 1296 = 324 rupees. The three payments 900 + 396 + 324 = 1620 rupees equal the consumer's tax exactly, as the chain must.",
+      "commonMistake": "Charging the wholesaler's GST on the list price of 8000 instead of on the transaction value of 7200."
+    }
+  ]
+}

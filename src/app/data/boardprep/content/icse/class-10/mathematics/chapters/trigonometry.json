@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-trig",
+  "title": "Trigonometry",
+  "kind": "mathematics",
+  "tagline": "Trigonometric ratios, identities, angles of elevation and depression, and applications to heights and distances.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Trigonometry is the study of the relationship between the sides and angles of a right-angled triangle. The three primary trigonometric ratios — sine, cosine, and tangent — are defined for an acute angle in a right triangle. This chapter also covers the reciprocal ratios (cosec, sec, cot), standard trigonometric identities, trigonometric ratios of complementary angles, and the application of trigonometry to solve problems involving angles of elevation, angles of depression, and finding heights and distances. Angles are measured in degrees, and calculations typically use π/180 for radian conversion where needed."
+    "facts": [
+      { "label": "sin θ", "value": " Opposite / Hypotenuse" },
+      { "label": "cos θ", "value": " Adjacent / Hypotenuse" },
+      { "label": "tan θ", "value": " Opposite / Adjacent" },
+      { "label": "cosec θ", "value": " 1 / sin θ = Hypotenuse / Opposite" },
+      { "label": "sec θ", "value": " 1 / cos θ = Hypotenuse / Adjacent" },
+      { "label": "cot θ", "value": " 1 / tan θ = Adjacent / Opposite" },
+      { "label": "sin²θ + cos²θ = 1", "value": "Pythagorean identity" },
+      { "label": "cosec²θ − cot²θ = 1", "value": "Other Pythagorean identity" },
+      { "label": "sec²θ − tan²θ = 1", "value": "Third Pythagorean identity" },
+      { "label": "sin(90° − θ) = cos θ", "value": "Co-function identity" },
+      { "label": "cos(90° − θ) = sin θ", "value": "Co-function identity" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define the six trigonometric ratios for an acute angle in a right triangle.",
+    "State and prove the three Pythagorean identities: sin²θ + cos²θ = 1, cosec²θ − cot²θ = 1, sec²θ − tan²θ = 1.",
+    "Use the complementary angle relationships: sin(90° − θ) = cos θ, cos(90° − θ) = sin θ, tan(90° − θ) = cot θ.",
+    "Solve problems involving angles of elevation and angles of depression.",
+    "Find the height of an object or the distance between two objects using trigonometric ratios and angles of elevation/depression.",
+    "Calculate trigonometric ratios for standard angles: 0°, 30°, 45°, 60°, 90°.",
+    "Verify and apply trigonometric identities to simplify expressions and solve equations."
+  ],
+  "learn": [
+    {
+      "id": "trig-basics",
+      "title": "Trigonometric Ratios in Right Triangles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Consider a right-angled triangle with the right angle at C. Let the side opposite angle θ be the Opposite side, the side adjacent to angle θ (but not the hypotenuse) be the Adjacent side, and the side opposite the right angle (the longest side) be the Hypotenuse. The six trigonometric ratios for angle θ are defined as follows: sin θ = Opposite / Hypotenuse, cos θ = Adjacent / Hypotenuse, tan θ = Opposite / Adjacent, cosec θ = Hypotenuse / Opposite (reciprocal of sin), sec θ = Hypotenuse / Adjacent (reciprocal of cos), cot θ = Adjacent / Opposite (reciprocal of tan). These definitions apply only when θ is an acute angle (0° < θ < 90°) in a right triangle."
+        },
+        {
+          "type": "diagram",
+          "text": "A right triangle labelled with angle θ, opposite side, adjacent side, and hypotenuse."
+        },
+        {
+          "type": "table",
+          "caption": "Trigonometric ratios summary",
+          "columns": ["Ratio", "Definition", "Reciprocal"],
+          "rows": [
+            ["sin θ", "Opposite / Hypotenuse", "cosec θ"],
+            ["cos θ", "Adjacent / Hypotenuse", "sec θ"],
+            ["tan θ", "Opposite / Adjacent", "cot θ"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The hypotenuse is always the longest side and is opposite the right angle.",
+            "The opposite and adjacent sides depend on which angle θ is being considered.",
+            "cosec, sec, and cot are reciprocals of sin, cos, and tan respectively.",
+            "All ratios are positive for acute angles (0° < θ < 90°)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-pythagorean",
+      "title": "Pythagorean Identities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The three Pythagorean identities are derived from the Pythagorean theorem a² + b² = c² applied to a right triangle with hypotenuse c and legs a, b. Dividing by c², a², or b² gives the three forms. The first and most fundamental is sin²θ + cos²θ = 1. The other two are obtained by dividing by sin²θ or cos²θ, giving cosec²θ − cot²θ = 1 and sec²θ − tan²θ = 1. These identities hold for all values of θ for which the expressions are defined."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If sin θ = 3/5 and θ is acute, find cos θ and tan θ.",
+              "answer": "cos θ = √(1 − sin²θ) = √(1 − 9/25) = √(16/25) = 4/5. tan θ = sin θ / cos θ = (3/5) / (4/5) = 3/4.",
+              "explanation": "Using the identity sin²θ + cos²θ = 1, we find cos θ = 4/5 (positive since θ is acute). Then tan θ = sin θ / cos θ = 3/4."
+            },
+            {
+              "text": "If sec θ = 5/3, find tan θ.",
+              "answer": "sec²θ − tan²θ = 1 gives tan²θ = sec²θ − 1 = (25/9) − 1 = 16/9, so tan θ = 4/3 (positive since θ is acute).",
+              "explanation": "Using the identity sec²θ − tan²θ = 1, we find tan²θ = 16/9, and since θ is acute, tan θ = 4/3."
+            },
+            {
+              "text": "Prove the identity: (cosec θ − cot θ)(cosec θ + cot θ) = 1.",
+              "answer": "LHS = cosec²θ − cot²θ = 1 (by the Pythagorean identity). = RHS.",
+              "explanation": "The product is a difference of squares, which simplifies to the Pythagorean identity cosec²θ − cot²θ = 1."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The three Pythagorean identities are: sin²θ + cos²θ = 1, cosec²θ − cot²θ = 1, sec²θ − tan²θ = 1.",
+            "These identities hold for all θ where the expressions are defined (i.e., where the denominators are non-zero).",
+            "They can be used to find one ratio given another, or to verify/trigonometric equations.",
+            "Always check the quadrant when determining the sign of a ratio; for acute angles, all ratios are positive."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-complementary",
+      "title": "Trigonometric Ratios of Complementary Angles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two angles are complementary if they sum to 90°. In a right triangle, the two acute angles are always complementary (they sum to 90°). The trigonometric ratios of complementary angles are related by co-function identities: sin(90° − θ) = cos θ, cos(90° − θ) = sin θ, tan(90° − θ) = cot θ. Similarly, cosec(90° − θ) = sec θ, sec(90° − θ) = cosec θ, and cot(90° − θ) = tan θ. These identities are useful for simplifying expressions and solving problems where one angle is the complement of another."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Express sin 35° in terms of cosine of a complementary angle.",
+              "answer": "sin 35° = cos(90° − 35°) = cos 55°.",
+              "explanation": "Using the co-function identity sin(90° − θ) = cos θ with θ = 35°."
+            },
+            {
+              "text": "Express tan 50° in terms of cotangent of a complementary angle.",
+              "answer": "tan 50° = cot(90° − 50°) = cot 40°.",
+              "explanation": "Using the co-function identity tan(90° − θ) = cot θ with θ = 50°."
+            },
+            {
+              "text": "Simplify: sin 25° cos 65° + sin 65° cos 25°.",
+              "answer": "sin 25° cos 65° + sin 65° cos 25° = sin 25° cos(90° − 25°) + sin(90° − 25°) cos 25° = sin 25° sin 25° + cos 25° cos 25° = sin²25° + cos²25° = 1.",
+              "explanation": "Using complementary angle relationships: cos 65° = sin 25° and sin 65° = cos 25°. The expression becomes sin²25° + cos²25° = 1."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Complementary angles sum to 90°.",
+            "The co-function identities relate sin ↔ cos, cos ↔ sin, tan ↔ cot, cosec ↔ sec, sec ↔ cosec, cot ↔ tan.",
+            "These identities are especially useful in simplification problems and in proving other trigonometric identities.",
+            "Remember that in a right triangle, the two acute angles are always complementary."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-standard-angles",
+      "title": "Trigonometric Ratios of Standard Angles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The trigonometric ratios for the standard angles 0°, 30°, 45°, 60°, and 90° are derived from the special right triangles: the equilateral triangle bisected (giving the 30-60-90 triangle and the 45-45-90 triangle). These values must be memorised, as they are used extensively in ICSE Class X problems. The complete table is: sin 0° = 0, cos 0° = 1, tan 0° = 0; sin 30° = 1/2, cos 30° = √3/2, tan 30° = 1/√3; sin 45° = 1/√2, cos 45° = 1/√2, tan 45° = 1; sin 60° = √3/2, cos 60° = 1/2, tan 60° = √3; sin 90° = 1, cos 90° = 0, tan 90° is undefined."
+        },
+        {
+          "type": "table",
+          "caption": "Trigonometric ratios of standard angles",
+          "columns": ["Angle", "sin", "cos", "tan"],
+          "rows": [
+            ["0°", "0", "1", "0"],
+            ["30°", "1/2", "√3/2", "1/√3"],
+            ["45°", "1/√2", "1/√2", "1"],
+            ["60°", "√3/2", "1/2", "√3"],
+            ["90°", "1", "0", "Undefined"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Memorise these values; they are the foundation for all ICSE Class X trigonometry problems.",
+            "sin 0° = 0, cos 0° = 1, tan 0° = 0.",
+            "sin 90° = 1, cos 90° = 0, tan 90° is undefined (division by zero).",
+            "The values for 30°, 45°, 60° come from the 30-60-90 and 45-45-90 triangles.",
+            "cosec 0° and cot 0° are undefined (division by zero); sec 90° and cosec 90° are defined."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-elevation-depression",
+      "title": "Angles of Elevation and Depression",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The angle of elevation of an object as seen by an observer is the angle between the horizontal line through the observer and the line of sight to the object (above the horizontal). The angle of depression of an object as seen by an observer is the angle between the horizontal line through the observer and the line of sight to the object (below the horizontal). In practical problems, the horizontal line is parallel to the ground, and the angle of elevation from the base of the object equals the angle of depression from the top of the object (alternate interior angles). Trigonometric ratios are used to find unknown heights, distances, or angles."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "From a point on the ground 20 m from the base of a building, the angle of elevation to the top of the building is 30°. Find the height of the building.",
+              "answer": "tan 30° = height / 20, so height = 20 × tan 30° = 20 × (1/√3) = 20/√3 ≈ 11.55 m.",
+              "explanation": "The angle of elevation is 30°. In the right triangle, the opposite side is the building height, the adjacent side is the ground distance (20 m), and tan 30° = opposite / adjacent = 1/√3. So height = 20 × (1/√3)."
+            },
+            {
+              "text": "From the top of a lighthouse 50 m high, the angle of depression to a boat at sea is 45°. How far is the boat from the base of the lighthouse?",
+              "answer": "tan 45° = 50 / distance, so distance = 50 / tan 45° = 50 / 1 = 50 m.",
+              "explanation": "The angle of depression from the top is 45°. By alternate interior angles, the angle of elevation from the boat to the top of the lighthouse is also 45°. In the right triangle, opposite = 50 m (lighthouse height), adjacent = distance from base, and tan 45° = 1 = opposite / adjacent. So distance = 50 m."
+            },
+            {
+              "text": "The angle of elevation of the top of a tower from a point on the ground is 60°. From a point 20 m farther away from the tower, the angle of elevation is 30°. Find the height of the tower and the distance of the first point from the tower.",
+              "answer": "Height = 10√3 ≈ 17.32 m. Distance from the first point = 10 m.",
+              "explanation": "Let the height be h and the distance from the first point be d. From the first point: tan 60° = h / d, so h = d√3. From the second point (20 m farther): tan 30° = h / (d + 20), so h = (d + 20) / √3. Equating: d√3 = (d + 20) / √3 → 3d = d + 20 → 2d = 20 → d = 10 m. Then h = 10√3 ≈ 17.32 m."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The angle of elevation is measured above the horizontal; the angle of depression is measured below the horizontal.",
+            "The horizontal line through the observer is parallel to the ground (or the base of the object).",
+            "The angle of elevation from the base of an object equals the angle of depression from the top of the object (alternate interior angles, assuming the observer and the object are on the same horizontal plane).",
+            "Always draw a right-angled triangle marking the height, the horizontal distance, and the angle of elevation/depression.",
+            "Use the appropriate trigonometric ratio: tan for height/distance, sin for height/hypotenuse, cos for adjacent/hypotenuse."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-applications",
+      "title": "Applications of Trigonometry",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "This section presents full worked examples of ICSE Class X-style application problems, including finding the height of a tower, the distance between two objects, the width of a river, and problems involving two points of observation."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The shadow of a tower standing on level ground is 40 m long when the sun's altitude is 30°. Find the height of the tower.",
+              "answer": "tan 30° = height / 40, so height = 40 × tan 30° = 40 × (1/√3) = 40/√3 ≈ 23.09 m.",
+              "explanation": "The sun's altitude is the angle of elevation from the tip of the shadow to the top of the tower. In the right triangle, opposite = height, adjacent = 40 m (shadow), and tan 30° = 1/√3. Height = 40 × (1/√3)."
+            },
+            {
+              "text": "From the top of a 20 m high building, the angle of depression of a car on the road is 30°. If the car is on the same level as the base of the building, how far is the car from the building?",
+              "answer": "tan 30° = 20 / distance, so distance = 20 / tan 30° = 20 / (1/√3) = 20√3 ≈ 34.64 m.",
+              "explanation": "The angle of depression from the top of the building is 30°. By alternate interior angles, the angle of elevation from the car to the top of the building is also 30°. In the right triangle, opposite = 20 m (building height), adjacent = distance from building, and tan 30° = 1/√3. Distance = 20 / (1/√3) = 20√3."
+            },
+            {
+              "text": "The angle of elevation of the top of a tower from point A is 30°. Moving 20 m towards the tower to point B, the angle of elevation becomes 60°. Find the height of the tower and the distance of point A from the tower.",
+              "answer": "Height = 10√3 ≈ 17.32 m. Distance of A from tower = 30 m.",
+              "explanation": "Let the height be h and the distance of A from the tower be d. From A: tan 30° = h / d, so h = d / √3. From B (20 m closer): tan 60° = h / (d − 20), so h = (d − 20)√3. Equating: d / √3 = (d − 20)√3 → d = 3(d − 20) → d = 3d − 60 → 2d = 60 → d = 30 m. Then h = 30 / √3 = 10√3 ≈ 17.32 m."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Draw a right-angled triangle for each problem, marking the height, the horizontal distance, and the angle of elevation or depression.",
+            "The angle of elevation from the base equals the angle of depression from the top (alternate interior angles).",
+            "Use the appropriate trigonometric ratio: tan θ = opposite / adjacent is the most common for height/distanced problems.",
+            "When two observation points are given, set up two equations and solve the system by equating or subtracting.",
+            "Always check that the answer is reasonable (e.g., height must be positive, distances must be positive)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-identities-practice",
+      "title": "Trigonometric Identities: Practice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "This section provides practice in verifying and applying trigonometric identities. The key is to start from the more complex side and use the Pythagorean identities and co-function identities to simplify to the other side."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Verify the identity: (sin θ + cos θ)² = 1 + 2 sin θ cos θ.",
+              "answer": "LHS = (sin θ + cos θ)² = sin²θ + 2 sin θ cos θ + cos²θ = (sin²θ + cos²θ) + 2 sin θ cos θ = 1 + 2 sin θ cos θ = RHS.",
+              "explanation": "Expand the square, use sin²θ + cos²θ = 1, and simplify."
+            },
+            {
+              "text": "Express cosec θ in terms of cot θ, given that θ is acute.",
+              "answer": "Starting from cosec²θ − cot²θ = 1, we have cosec²θ = 1 + cot²θ, so cosec θ = √(1 + cot²θ) (positive since θ is acute).",
+              "explanation": "Use the Pythagorean identity involving cosec and cot, then take the positive square root."
+            },
+            {
+              "text": "Prove: tan θ + cot θ = sec θ cosec θ.",
+              "answer": "LHS = tan θ + cot θ = sin θ / cos θ + cos θ / sin θ = (sin²θ + cos²θ) / (sin θ cos θ) = 1 / (sin θ cos θ) = (1 / sin θ)(1 / cos θ) = cosec θ sec θ = RHS.",
+              "explanation": "Write tan and cot in terms of sin and cos, add, use sin²θ + cos²θ = 1, and recognise the reciprocals."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Start from the more complex side of the identity.",
+            "Use the Pythagorean identities: sin²θ + cos²θ = 1, cosec²θ − cot²θ = 1, sec²θ − tan²θ = 1.",
+            "Use the co-function identities for complementary angles.",
+            "Write all ratios in terms of sin and cos when stuck.",
+            "Take care with square roots: for acute angles, sin, cos, tan, cosec, sec, cot are all positive."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review Questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from defining ratios and computing standard values through proving identities to solving practical elevation/depression problems. Work each one by identifying the type, drawing the triangle, and applying the appropriate ratio or identity."
+        },
+        {
+          "type": "questions": [
+            {
+              "id": "icse-10-math-q-trig-01",
+              "type": "mcq",
+              "difficulty": "easy",
+              "marks": 1,
+              "origin": "practice",
+              "prompt": "If sin θ = 3/5 and θ is acute, the value of cos θ is _____.",
+              "options": ["4/5", "3/5", "−4/5", "5/4"],
+              "correctIndex": 0,
+              "answer": "4/5",
+              "explanation": "Using sin²θ + cos²θ = 1: cos²θ = 1 − 9/25 = 16/25, so cos θ = 4/5 (positive since θ is acute)."
+            },
+            {
+              "id": "icse-10-math-q-trig-02",
+              "type": "mcq",
+              "difficulty": "easy",
+              "marks": 1,
+              "origin": "practice",
+              "prompt": "The value of tan 45° is _____.",
+              "options": ["0", "1", "√3", "1/√3"],
+              "correctIndex": 1,
+              "answer": "1",
+              "explanation": "From the standard angles table, tan 45° = 1."
+            },
+            {
+              "id": "icse-10-math-q-trig-03",
+              "type": "mcq",
+              "difficulty": "easy",
+              "marks": 1,
+              "origin": "practice",
+              "prompt": "The value of sin 30° is _____.",
+              "options": ["1/3", "1/2", "√3/2", "2/3"],
+              "correctIndex": 1,
+              "answer": "1/2",
+              "explanation": "From the standard angles table, sin 30° = 1/2."
+            },
+            {
+              "id": "icse-10-math-q-trig-04",
+              "type": "short",
+              "difficulty": "medium",
+              "marks": 2,
+              "origin": "practice",
+              "prompt": "If cos θ = 5/13 and θ is acute, find sin θ and tan θ.",
+              "answer": "sin θ = 12/13, tan θ = 12/5.",
+              "explanation": "Using sin²θ + cos²θ = 1: sin²θ = 1 − 25/169 = 144/169, so sin θ = 12/13. Then tan θ = sin θ / cos θ = (12/13) / (5/13) = 12/5."
+            },
+            {
+              "id": "icse-10-math-q-trig-05",
+              "type": "short",
+              "difficulty": "medium",
+              "marks": 2,
+              "origin": "practice",
+              "prompt": "Express sin 50° in terms of cosine of a complementary angle.",
+              "answer": "sin 50° = cos 40°.",
+              "explanation": "Using the co-function identity sin(90° − θ) = cos θ with θ = 50° gives sin 50° = cos 40°."
+            },
+            {
+              "id": "icse-10-math-q-trig-06",
+              "type": "short",
+              "difficulty": "medium",
+              "marks": 2,
+              "origin": "practice",
+              "prompt": "Prove the identity: sec²θ − tan²θ = 1.",
+              "answer": "Starting from the definitions: sec θ = 1 / cos θ, tan θ = sin θ / cos θ. Then sec²θ − tan²θ = 1 / cos²θ − sin²θ / cos²θ = (1 − sin²θ) / cos²θ = cos²θ / cos²θ = 1.",
+              "explanation": "Express sec and tan in terms of sin and cos, combine, and use sin²θ + cos²θ = 1."
+            },
+            {
+              "id": "icse-10-math-q-trig-07",
+              "type": "short",
+              "difficulty": "medium",
+              "marks": 2,
+              "origin": "practice",
+              "prompt": "If tan θ = 4/3, find the value of sin θ.",
+              "answer": "sin θ = 4/5.",
+              "explanation": "Using 1 + tan²θ = sec²θ: 1 + 16/9 = 25/9 = sec²θ, so cos θ = 3/5. Then sin θ = √(1 − cos²θ) = √(1 − 9/25) = 4/5."
+            },
+            {
+              "id": "icse-10-math-q-trig-08",
+              "type": "short",
+              "difficulty": "medium",
+              "marks": 2,
+              "origin": "practice",
+              "prompt": "The angle of elevation of the top of a tower from a point on the ground is 30°. If the point is 50 m from the base of the tower, find the height of the tower.",
+              "answer": "Height = 50 × tan 30° = 50 / √3 ≈ 28.87 m.",
+              "explanation": "tan 30° = height / 50, so height = 50 × tan 30° = 50 × (1/√3) = 50/√3 ≈ 28.87 m."
+            },
+            {
+              "id": "icse-10-math-q-trig-09",
+              "type": "short",
+              "difficulty": "medium",
+              "marks": 2,
+              "origin": "practice",
+              "prompt": "From the top of a 30 m high cliff, the angle of depression of a boat at sea is 60°. How far is the boat from the base of the cliff?",
+              "answer": "Distance = 30 / tan 60° = 30 / √3 = 10√3 ≈ 17.32 m.",
+              "explanation": "The angle of depression from the top is 60°. By alternate interior angles, the angle of elevation from the boat to the top of the cliff is also 60°. tan 60° = 30 / distance, so distance = 30 / √3 = 10√3 m."
+            },
+            {
+              "id": "icse-10-math-q-trig-10",
+              "type": "long",
+              "difficulty": "hard",
+              "marks": 4,
+              "origin": "practice",
+              "prompt": "The angle of elevation of the top of a tower from point A is 30°. Moving 20 m towards the tower to point B, the angle of elevation becomes 60°. Find the height of the tower and the distance of point A from the tower.",
+              "answer": "Height = 10√3 ≈ 17.32 m. Distance of A from tower = 30 m.",
+              "explanation": "Let the height be h and the distance of A from the tower be d. From A: tan 30° = h / d, so h = d / √3. From B (20 m closer): tan 60° = h / (d − 20), so h = (d − 20)√3. Equating: d / √3 = (d − 20)√3 → d = 3(d − 20) → d = 3d − 60 → 2d = 60 → d = 30 m. Then h = 30 / √3 = 10√3 ≈ 17.32 m."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

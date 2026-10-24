@@ -1,0 +1,680 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-math-factorisation",
+  "title": "Factorisation of Polynomials",
+  "kind": "mathematics",
+  "tagline": "The remainder theorem, the factor theorem, and breaking cubic and quartic expressions into linear factors.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Polynomials are expressions built from powers of a variable with constant coefficients, and the two theorems in this chapter turn questions about dividing them into questions about evaluating them. The remainder theorem says that the remainder when a polynomial f of x is divided by x minus a is simply the number f of a. The factor theorem is its sharp special case: x minus a is a factor exactly when f of a is zero. Together they replace long division with substitution, and they supply a method for factoring cubics and higher expressions that would otherwise be inaccessible. This chapter develops both theorems, applies them to find unknown coefficients, and shows how a single known factor collapses a cubic into a quadratic that ordinary methods can finish.",
+    "facts": [
+      { "label": "Remainder theorem", "value": "The remainder on dividing f of x by x - a is f of a" },
+      { "label": "Factor theorem", "value": "x - a is a factor of f of x if and only if f of a equals zero" },
+      { "label": "Divisor of the form ax - b", "value": "The remainder is f of b over a, not f of a" },
+      { "label": "Cubic route", "value": "Find one linear factor by trial, divide to obtain a quadratic, then factor the quadratic" }
+    ]
+  },
+  "learningOutcomes": [
+    "Evaluate a polynomial at a given value and interpret the result as a remainder.",
+    "State the remainder theorem and apply it to find the remainder on division by a linear expression.",
+    "Apply the factor theorem to decide whether a given binomial is a factor of a polynomial.",
+    "Find an unknown coefficient that forces a stated binomial to be a factor.",
+    "Factorise a cubic expression completely by first locating one linear factor and then solving the resulting quadratic.",
+    "Adjust the remainder theorem for a divisor whose leading coefficient is not one."
+  ],
+  "learn": [
+    {
+      "id": "polynomials-and-their-values",
+      "title": "Polynomials and their values",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A polynomial in one variable is a sum of terms of the form a coefficient times a non-negative whole power of the variable, and the highest power present is called its degree. A polynomial of degree one is linear, degree two is quadratic, degree three is cubic, and so on. Evaluating a polynomial means substituting a number for the variable and reducing to a single value, and that evaluation carries more information than it appears to. Every operation you perform on the variable, substitution commutes with, so a polynomial written in a complicated form and the same polynomial written in a factored form must return identical values at every point. The theorems of this chapter exploit exactly that consistency."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two habits make evaluation reliable. First, substitute using brackets rather than mental arithmetic, because every sign error in this subject originates in an unbracketed negative. Second, work the powers before the coefficients, so that a term such as minus two times x squared with x equal to minus three becomes minus two times nine, that is minus eighteen, and not plus eighteen. Both habits cost a keystroke each and both eliminate the errors that otherwise make an evaluation disagree with the true remainder. A polynomial of degree n has at most n real roots, which bounds how many linear factors it can have, and that fact will matter when a cubic is factored near the end of the chapter."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Polynomial", "meaning": "A finite sum of terms a x raised to a whole-number power, with no negative or fractional powers." },
+            { "term": "Degree", "meaning": "The highest power of the variable present, which fixes the maximum number of linear factors." },
+            { "term": "Value at a", "meaning": "The number obtained by substituting the variable with a, written f of a." },
+            { "term": "Root or zero", "meaning": "A value of the variable at which the polynomial equals zero." },
+            { "term": "Factor", "meaning": "An expression that divides the polynomial exactly, leaving a remainder of zero." },
+            { "term": "Remainder", "meaning": "What is left after division, which the remainder theorem computes by substitution." }
+          ]
+        },
+        {
+          "type": "bullets",
+            "items": [
+            "Substitute with brackets, and raise the power before applying the coefficient.",
+            "A polynomial of degree n has at most n linear factors and at most n real roots.",
+            "The value of a polynomial at a number is the remainder on division by x minus that number.",
+            "Zero remainder is precisely the condition for a factor."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-remainder-theorem",
+      "title": "The remainder theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When one polynomial is divided by another, the result is a quotient together with a remainder of strictly lower degree than the divisor. If the divisor is linear, then its degree is one, so the remainder must have degree less than one and therefore contains no variable at all: the remainder is a plain number. The remainder theorem identifies that number without performing the division. It states that when f of x is divided by x minus a, the remainder is exactly f of a, the value of the polynomial at a. The reason is short: write f of x as the divisor times the quotient plus the remainder, then substitute x equal to a, and the divisor becomes zero and annihilates the whole quotient term."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the remainder when 2x cubed minus 3x squared plus 4x minus 5 is divided by x minus 2.",
+              "note": "Here a = 2, so the remainder is f(2) = 2(8) - 3(4) + 4(2) - 5 = 16 - 12 + 8 - 5 = 7."
+            },
+            {
+              "text": "Find the same polynomial's remainder on division by x plus 3.",
+              "note": "x plus 3 is x minus (-3), so a = -3. The remainder is f(-3) = 2(-27) - 3(9) + 4(-3) - 5 = -54 - 27 - 12 - 5 = -98."
+            },
+            {
+              "text": "Find the value of 3x cubed minus 2x squared plus 5x minus 1 at x = 2 and at x = -1.",
+              "note": "f(2) = 3(8) - 2(4) + 5(2) - 1 = 24 - 8 + 10 - 1 = 25. f(-1) = 3(-1) - 2(1) + 5(-1) - 1 = -3 - 2 - 5 - 1 = -11."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Two remainders of 2x cubed minus 3x squared plus 4x minus 5",
+          "columns": ["Divisor", "Value of a", "Substitution", "Remainder"],
+          "rows": [
+            ["x - 2", "2", "2(8) - 3(4) + 4(2) - 5", "7"],
+            ["x + 3", "-3", "2(-27) - 3(9) + 4(-3) - 5", "-98"],
+            ["x - 1", "1", "2 - 3 + 4 - 5", "-2"],
+            ["x", "0", "-5", "-5"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The last row of that table deserves a moment. Dividing by x alone should leave the constant term as the remainder, and indeed f of zero is just the constant term of the polynomial. That is a useful way to remember what the theorem is doing: the substitution extracts precisely the part of the expression that the divisor cannot remove. Row three gives another check, because f of one is the alternating sum of the coefficients with signs as written, which is one quick way to evaluate any polynomial at one."
+        }
+      ]
+    },
+    {
+      "id": "the-factor-theorem",
+      "title": "The factor theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The factor theorem is the remainder theorem pushed to its only interesting case. A linear expression divides a polynomial exactly when the remainder vanishes, and by the remainder theorem the remainder is f of a. So x minus a is a factor of f of x precisely when f of a equals zero. The condition runs in both directions, which is what makes it a practical test rather than a one-way implication: to check a proposed factor you evaluate one number, and to construct a factor you look for a number that makes the polynomial vanish. No division, no comparison of coefficients, no system of equations."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Show that x minus 2 is a factor of x cubed minus 3x squared plus 4x minus 4.",
+              "note": "Evaluate at 2: 8 - 12 + 8 - 4 = 0. Since f(2) = 0, the factor theorem gives that x - 2 divides the expression exactly."
+            },
+            {
+              "text": "Decide whether x plus 1 is a factor of x cubed minus 4x plus 1.",
+              "note": "x plus 1 means a = -1. f(-1) = -1 + 4 + 1 = 4, which is not zero, so x + 1 is not a factor."
+            },
+            {
+              "text": "Decide whether x minus 1 is a factor of x cubed minus 4x plus 3.",
+              "note": "f(1) = 1 - 4 + 3 = 0, so x - 1 is a factor. Indeed the expression factorises as (x - 1)(x squared + x - 3)."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two practical cautions belong with the theorem. First, the theorem as stated applies to divisors of the form x minus a, so x plus 1 must be read as x minus minus one before the substitution, and forgetting that sign is the commonest error in the topic. Second, a zero value proves a factor but a non-zero value proves only that the proposed expression is not a factor; it tells you nothing about whether some other factor exists. When a test fails, move to a different candidate rather than concluding that the polynomial is unfactorable. Small integers, both positive and negative, are the natural candidates to try."
+        },
+        {
+          "type": "table",
+          "caption": "Testing candidates against x cubed minus 3x squared plus 4x minus 4",
+          "columns": ["Candidate x - a", "Value of a", "f of a", "Verdict"],
+          "rows": [
+            ["x - 1", "1", "1 - 3 + 4 - 4 = -2", "not a factor"],
+            ["x - 2", "2", "8 - 12 + 8 - 4 = 0", "is a factor"],
+            ["x + 1", "-1", "-1 - 3 - 4 - 4 = -12", "not a factor"],
+            ["x - 4", "4", "64 - 48 + 16 - 4 = 28", "not a factor"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unknown-coefficients",
+      "title": "Finding unknown coefficients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A large family of problems states that a particular binomial is a factor of a polynomial containing an unknown coefficient, and asks for that coefficient. The method is entirely mechanical. Because the binomial is a factor, the polynomial vanishes at the corresponding value, so substituting that value produces one equation in the unknown, which is then solved. The equation is usually linear even though the polynomial is not, because the substitution fixes the variable and leaves only the coefficient as a letter. Setting the problem out as substitution first and equation second keeps the two kinds of symbols apart."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find k if x plus 1 is a factor of x cubed plus 3x squared plus kx plus 4.",
+              "note": "x plus 1 means a = -1, so f(-1) = -1 + 3 - k + 4 = 6 - k = 0, giving k = 6. Substituting back: f(x) = x cubed + 3x squared + 6x + 4, and f(-1) = -1 + 3 - 6 + 4 = 0."
+            },
+            {
+              "text": "Find the value of a if 2x minus 1 is a factor of 6x cubed minus 5x squared plus 7x minus 3.",
+              "note": "The divisor 2x - 1 is zero when x = 1/2, so evaluate there: 6(1/8) - 5(1/4) + 7(1/2) - 3 = 3/4 - 5/4 + 7/2 - 3 = -1/2 + 7/2 - 3 = 3 - 3 = 0. The expression is therefore divisible, with no free parameter to find."
+            },
+            {
+              "text": "Given that x cubed + a x squared + b x + 6 is divisible by both x minus 1 and x minus 3, find a and b.",
+              "note": "f(1) = 1 + a + b + 6 = 0 gives a + b = -7. f(3) = 27 + 9a + 3b + 6 = 0 gives 9a + 3b = -33, that is 3a + b = -11. Subtracting the first from the second gives 2a = -4, so a = -2 and b = -5."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The third example is the two-condition version and is worth studying, because it shows why two linear equations appear from a single cubic. Each known factor contributes one condition, each condition is linear in the two unknowns, and the pair can be solved by elimination. Subtracting the equations here eliminates b at once and leaves a alone, after which b follows by back-substitution. Substituting both values back reproduces f(1) = 1 - 2 - 5 + 6 = 0 and f(3) = 27 - 18 - 15 + 6 = 0, confirming the pair, and that confirmation is not optional when two unknowns are involved."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Convert every divisor to the form x minus a before substituting.",
+            "Write the resulting equation separately from the substitution, then solve it.",
+            "With two known factors you get two linear equations; eliminate rather than substitute repeatedly.",
+            "Always substitute the recovered coefficients back and re-verify each factor."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "divisors-with-leading-coefficients",
+      "title": "Divisors of the form ax minus b",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When the divisor has a coefficient other than one in front of the variable, the theorem still applies but the number to evaluate shifts. The divisor a x minus b is zero when x equals b divided by a, and it is that value, not a, which must be substituted. The derivation is unchanged: writing f of x as the divisor times the quotient plus the remainder and then putting x equal to b over a makes the divisor vanish and leaves the remainder behind. Candidates who substitute b instead of b over a, or a rather than b over a, produce confidently wrong answers, so writing the root of the divisor on the page first is a worthwhile habit."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the remainder when 2x cubed minus 3x squared plus 4x minus 5 is divided by 2x minus 1.",
+              "note": "The divisor vanishes at x = 1/2. f(1/2) = 2(1/8) - 3(1/4) + 4(1/2) - 5 = 1/4 - 3/4 + 2 - 5 = -1/2 - 3 = -7/2."
+            },
+            {
+              "text": "Find the remainder when x cubed minus 2x plus 5 is divided by 3x plus 2.",
+              "note": "The divisor vanishes at x = -2/3. f(-2/3) = -8/27 - 2(-2/3) + 5 = -8/27 + 4/3 + 5 = -8/27 + 36/27 + 135/27 = 163/27."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The arithmetic in these examples is heavier than in the monic case, and the reason is worth noting. Substituting a fraction forces every term to become a fraction with a power of the denominator, so the calculation is easiest when each term is converted to a common denominator at once rather than simplified piecemeal. In the second example the denominators are twenty seven, three and one, so converting everything to twenty sevenths gives minus eight, plus thirty six and plus one hundred and thirty five, summing to a hundred and sixty three over twenty seven. Writing that single line of common denominators is faster and more accurate than three separate simplifications."
+        },
+        {
+          "type": "table",
+          "caption": "Choosing the value to substitute",
+          "columns": ["Divisor", "Value of x that zeroes it", "Note"],
+          "rows": [
+            ["x - a", "a", "direct application"],
+            ["x + a", "-a", "read as x minus minus a"],
+            ["2x - 1", "1/2", "b over a, not a"],
+            ["3x + 2", "-2/3", "b over a with a negative sign"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "factoring-a-cubic",
+      "title": "Factoring a cubic completely",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A cubic expression with integer coefficients can be broken into three linear factors, but the route runs through the quadratic formula at the end rather than around it. The procedure is: locate one linear factor by testing small integer values until the polynomial vanishes; divide by that factor to obtain a quadratic; then factor or solve the quadratic by whatever method its discriminant permits. The first step is the only one with any trial in it, and the trial is bounded, because any rational root of a monic cubic with integer coefficients must be an integer dividing the constant term. That restricts the candidates to the divisors of one number."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Factorise x cubed minus 6x squared plus 11x minus 6 completely.",
+              "note": "Test x = 1: 1 - 6 + 11 - 6 = 0, so x - 1 is a factor. Dividing gives x squared - 5x + 6, which factorises as (x - 2)(x - 3). Hence the expression is (x - 1)(x - 2)(x - 3)."
+            },
+            {
+              "text": "Factorise 2x cubed minus 7x squared plus 4x plus 4 completely.",
+              "note": "Test x = 2: 16 - 28 + 8 + 4 = 0, so x - 2 is a factor. Dividing gives 2x squared - 3x - 2 = (2x + 1)(x - 2). Hence the expression is (x - 2) squared (2x + 1)."
+            },
+            {
+              "text": "Factorise x cubed minus 4x squared plus 5x minus 2 completely.",
+              "note": "Test x = 1: 1 - 4 + 5 - 2 = 0, so x - 1 is a factor. Dividing gives x squared - 3x + 2 = (x - 1)(x - 2). Hence the expression is (x - 1) squared (x - 2)."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The repeated factor in the third example is not an accident and is detectable in advance. If a value makes both the polynomial and its derivative vanish, the corresponding factor appears twice; a cheaper signal available without calculus is that the same small integer succeeds twice in succession. When your first division yields a quadratic that again has your chosen value as a root, the factor is squared. Recognising this saves a second search and also explains why a cubic can have fewer than three distinct linear factors while still having degree three."
+        },
+        {
+          "type": "table",
+          "caption": "Divisors of the constant term as candidate roots",
+          "columns": ["Cubic", "Constant term", "Candidate roots to try", "Root found"],
+          "rows": [
+            ["x cubed - 6x squared + 11x - 6", "-6", "plus or minus 1, 2, 3, 6", "1, then 2, then 3"],
+            ["2x cubed - 7x squared + 4x + 4", "4", "plus or minus 1, 2, 4, and halves", "2"],
+            ["x cubed - 4x squared + 5x - 2", "-2", "plus or minus 1, 2", "1, then 1 again, then 2"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Test the divisors of the constant term, smallest first, both positive and negative.",
+            "Divide by the first factor found to reduce the cubic to a quadratic.",
+            "Factor or solve the quadratic; use the discriminant to know what to expect.",
+            "If the same value roots the quadratic, the linear factor is squared.",
+            "Multiply all factors back out to confirm the original coefficients."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relations-between-roots-and-coefficients",
+      "title": "Roots and coefficients of a cubic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Just as a quadratic records the sum and product of its roots in its coefficients, a cubic records three combinations. For x cubed plus p x squared plus q x plus r, the sum of the roots is minus p, the sum of the products of roots taken two at a time is q, and the product of all three roots is minus r, with signs alternating as the powers descend. These relations let you check a complete factorisation in one line, and they let you answer questions about the roots without finding them, which is useful when the roots are irrational and finding them would require surds."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Verify the root relations for x cubed minus 4x squared plus 5x minus 2, whose roots are 1, 1 and 2.",
+              "note": "Sum = 1 + 1 + 2 = 4, matching minus the coefficient of x squared, which is 4. Sum of products two at a time = 1x1 + 1x2 + 1x2 = 5, matching the coefficient of x. Product = 1 x 1 x 2 = 2, matching minus the constant term."
+            },
+            {
+              "text": "Without finding the roots, state the sum of the roots of x cubed + 2x squared - 7x + 5.",
+              "note": "The sum is minus the coefficient of x squared, which is minus 2. No root needs to be computed."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Root and coefficient relations for a monic cubic",
+          "columns": ["Combination of roots", "Equals", "Sign rule"],
+          "rows": [
+            ["alpha + beta + gamma", "minus the coefficient of x squared", "alternates with the descending power"],
+            ["alpha beta + beta gamma + gamma alpha", "the coefficient of x", "same sign"],
+            ["alpha beta gamma", "minus the constant term", "alternates"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The sign pattern is easier to remember as a rule than as three separate facts: reading the coefficients from the leading one downwards, each successive root combination takes the opposite sign to the coefficient it reads. Leading coefficient positive, so the sum is minus the next coefficient; then plus; then minus. Because this only works neatly when the leading coefficient is one, any other leading coefficient must first be divided out, since otherwise every root combination acquires that coefficient in its denominator."
+        }
+      ]
+    },
+    {
+      "id": "checking-factorisation-answers",
+      "title": "Checking a factorisation answer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A factorisation is an identity, not an equation, so it must hold for every value of the variable rather than merely for the root you happened to find. The strongest check is therefore expansion: multiply the factors back together and confirm that every coefficient of the original expression reappears, including signs. Two lighter checks are available. Evaluating both sides at a second and third value of the variable tests the identity at points unrelated to your method, and the root relations of the previous section test the coefficients directly. Any one of the three will catch the sign errors that dominate this topic."
+        },
+        {
+          "type": "table",
+          "caption": "Three checks on x cubed minus 6x squared plus 11x minus 6 = (x - 1)(x - 2)(x - 3)",
+          "columns": ["Check", "Working", "Result"],
+          "rows": [
+            ["Expand first two factors", "(x - 1)(x - 2) = x squared - 3x + 2", "quadratic obtained"],
+            ["Multiply by the third", "(x squared - 3x + 2)(x - 3)", "x cubed - 6x squared + 11x - 6"],
+            ["Evaluate at x = 0", "left = -6, right = (-1)(-2)(-3)", "both -6"],
+            ["Evaluate at x = 4", "left = 64 - 96 + 44 - 6 = 6", "right = 3 x 2 x 1 = 6"],
+            ["Sum of roots", "1 + 2 + 3 = 6 against minus coefficient 6", "match"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The evaluation at x equal to zero is the cheapest of these and is worth always performing, because it compares only the constant terms and reduces to the product of the factors' own constants. Here the left side is minus six and the right is minus one times minus two times minus three, which is also minus six, so the constant terms agree. A failure there means a sign is wrong in one of the factors; a pass means the sign pattern is at least consistent, and the remaining coefficients then need checking by expansion or by a second evaluation."
+        }
+      ]
+    },
+    {
+      "id": "review-questions",
+      "title": "Review questions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The questions that follow move from direct applications of the remainder theorem through factor testing and unknown coefficients to complete factorisation of cubics. Work each one by converting the divisor to the form x minus a first, substituting with brackets, and confirming any factorisation by expansion before moving on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write the divisor in the form x minus a, or solve it for zero, before substituting.",
+            "Bracket every substitution, and raise powers before applying coefficients.",
+            "Test divisors of the constant term when hunting for a factor of a cubic.",
+            "With two known factors, write two linear equations and eliminate.",
+            "Expand your factors back to the original coefficients as a final check."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "From a zero value to a factor: the factor theorem at work",
+      "description": "A three-panel diagram. The first panel shows a curve labelled y equals f of x crossing the horizontal x axis at a single marked point, with a dashed vertical line down to the axis labelled x equals a. The second panel shows the division statement written as f of x equals the bracket x minus a times the quotient q of x plus the remainder r. The third panel shows the substitution x equals a, with the bracket x minus a struck through and annotated as zero, leaving f of a equals r, and a caption noting that r is zero exactly when the curve touches or crosses at that point.",
+      "labels": ["f(x)", "x = a", "Division statement", "x - a becomes zero", "Remainder r", "Factor when r = 0"]
+    },
+    {
+      "caption": "The cubic factorisation route",
+      "description": "A flow diagram running left to right. The starting box is a cubic expression with three terms and one unknown coefficient. An arrow labelled test divisors of the constant term leads to a small box listing candidate integers, from which a further arrow labelled f of a = 0 leads to a box containing the confirmed linear factor. From there an arrow labelled divide leads to a quadratic box, and two arrows labelled discriminant branch from it: one marked positive perfect square leading to two linear factors, and one marked negative leading to a box marked no further real factors. All branches converge to a final box labelled complete factorisation.",
+      "labels": ["Cubic", "Candidates", "Linear factor", "Divide", "Quadratic", "Discriminant", "Complete factorisation"]
+    }
+  ],
+  "keyPoints": [
+    "The remainder on dividing f of x by x minus a is f of a, because the divisor vanishes at x equal to a.",
+    "x minus a is a factor exactly when f of a equals zero; this is the factor theorem.",
+    "Always rewrite x plus a as x minus minus a before substituting.",
+    "For a divisor a x minus b, substitute x equal to b over a.",
+    "Two known factors give two linear equations in the unknown coefficients; solve by elimination.",
+    "To factor a cubic, test divisors of the constant term, divide, then factor the resulting quadratic.",
+    "A value that roots both the cubic and the quotient indicates a squared factor.",
+    "For a monic cubic, the sum of roots is minus the next coefficient and the product is minus the constant term."
+  ],
+  "examFocus": [
+    "Write the value of a, or the root of the divisor, on the page before substituting; the sign of that value is where most marks are lost.",
+    "Show the substitution with brackets so a marker can follow the arithmetic even when a final figure is wrong.",
+    "When an unknown coefficient is asked for, state the resulting linear equation separately and solve it visibly.",
+    "Expand a completed factorisation back to the original coefficients; an identity must hold term by term.",
+    "List the divisors of the constant term before hunting for a cubic's first factor, so the search is bounded and systematic."
+  ],
+  "vocabulary": [
+    { "word": "Polynomial", "meaning": "A sum of terms in non-negative whole powers of a variable with constant coefficients." },
+    { "word": "Degree", "meaning": "The highest power of the variable in a polynomial." },
+    { "word": "Remainder theorem", "meaning": "The result that dividing f of x by x minus a leaves the remainder f of a." },
+    { "word": "Factor theorem", "meaning": "The result that x minus a divides f of x exactly when f of a is zero." },
+    { "word": "Root", "meaning": "A value of the variable at which the polynomial equals zero, corresponding to a linear factor." },
+    { "word": "Repeated factor", "meaning": "A linear factor appearing more than once, so the polynomial touches rather than crosses the axis there." },
+    { "word": "Quotient", "meaning": "The polynomial left after division, of degree two when a cubic is divided by a linear expression." },
+    { "word": "Identity", "meaning": "An equality of expressions that holds for every value of the variable, as a factorisation must." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-fac-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The remainder theorem states that the remainder when f of x is divided by x minus a is:",
+      "options": ["f of a", "f of 0", "a", "zero"],
+      "correctIndex": 0,
+      "answer": "f of a",
+      "explanation": "Writing f of x as the divisor times the quotient plus the remainder and then substituting x equal to a makes the divisor zero, so the quotient term vanishes and f of a equals the remainder alone. The other options describe special cases rather than the general rule.",
+      "commonMistake": "Quoting f of 0, which is the constant term and not a remainder in general."
+    },
+    {
+      "id": "icse-10-math-q-fac-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "To test whether x plus 2 is a factor of a polynomial, you should evaluate it at:",
+      "options": ["x = -2", "x = 2", "x = 0", "x = -1/2"],
+      "correctIndex": 0,
+      "answer": "x = -2",
+      "explanation": "The factor theorem applies to divisors written as x minus a, so x plus 2 must be read as x minus minus two, giving a equal to minus two. Evaluating at plus two tests the unrelated expression x minus two instead.",
+      "commonMistake": "Substituting plus two, which tests a different binomial altogether."
+    },
+    {
+      "id": "icse-10-math-q-fac-03",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The remainder when 2x cubed minus 3x squared plus 4x minus 5 is divided by x minus 2 is ______.",
+      "answer": "The remainder is 7",
+      "explanation": "By the remainder theorem the remainder is f(2) = 2(8) - 3(4) + 4(2) - 5 = 16 - 12 + 8 - 5 = 7. Each term is computed with brackets: the powers come first, then the coefficients, then the signed sum.",
+      "commonMistake": "Evaluating at minus two because the divisor reads x minus two, which reverses the sign of every term."
+    },
+    {
+      "id": "icse-10-math-q-fac-04",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The remainder when 2x cubed minus 3x squared plus 4x minus 5 is divided by x plus 3 is ______.",
+      "answer": "-98",
+      "explanation": "x plus 3 means a = -3, so the remainder is f(-3) = 2(-27) - 3(9) + 4(-3) - 5 = -54 - 27 - 12 - 5 = -98. Each term is bracketed: the power comes first, giving plus 9 for the square of minus three, then the coefficient, so the second term contributes minus twenty seven, and the four signed terms sum to minus ninety eight.",
+      "commonMistake": "Writing the square of minus three as minus nine rather than plus nine, which changes the whole answer."
+    },
+    {
+      "id": "icse-10-math-q-fac-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that x minus 2 is a factor of x cubed minus 3x squared plus 4x minus 4, and hence write the expression as a product of two factors.",
+      "answer": "f(2) = 0, so x minus 2 is a factor and the expression equals (x - 2)(x squared - x + 2)",
+      "explanation": "Evaluate at 2: 8 - 12 + 8 - 4 = 0, so by the factor theorem x minus 2 divides the expression exactly. Dividing x cubed - 3x squared + 4x - 4 by x - 2 gives x squared - x + 2, since (x - 2)(x squared - x + 2) expands to x cubed - x squared + 2x - 2x squared + 2x - 4, that is x cubed - 3x squared + 4x - 4. The quadratic has discriminant 1 - 8 = -7, so it has no further real factors.",
+      "commonMistake": "Quoting the quotient without verifying it by expansion, or ignoring that the quadratic cannot be factored further over the reals."
+    },
+    {
+      "id": "icse-10-math-q-fac-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Decide whether x plus 1 is a factor of x cubed minus 4x plus 1, giving a reason.",
+      "answer": "It is not a factor, because f(-1) = 4",
+      "explanation": "The divisor x plus 1 corresponds to a = -1, so evaluate there: f(-1) = -1 + 4 + 1 = 4. Since the value is not zero the remainder is not zero, and by the factor theorem x plus 1 does not divide the expression exactly. A non-zero result disproves this candidate but does not rule out other factors.",
+      "commonMistake": "Evaluating at plus one instead of minus one, which gives -2 and still leads to the right verdict by accident but with invalid reasoning."
+    },
+    {
+      "id": "icse-10-math-q-fac-07",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Factorise x cubed minus 6x squared plus 11x minus 6 completely, showing how you find the first factor.",
+      "answer": "(x - 1)(x - 2)(x - 3)",
+      "explanation": "The constant term is -6, so trial candidates are plus or minus 1, 2, 3 and 6. Testing x = 1 gives 1 - 6 + 11 - 6 = 0, so x - 1 is a factor. Dividing gives x squared - 5x + 6, which factorises as (x - 2)(x - 3) since the pair adding to -5 and multiplying to 6 is -2 and -3. Hence the complete factorisation is (x - 1)(x - 2)(x - 3). Check: sum of roots 1 + 2 + 3 = 6 equals minus the coefficient of x squared, and product 6 equals minus the constant term.",
+      "commonMistake": "Testing only positive candidates, or stopping after one linear factor and leaving the quadratic unfactored."
+    },
+    {
+      "id": "icse-10-math-q-fac-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Factorise 2x cubed minus 7x squared plus 4x plus 4 completely.",
+      "answer": "(x - 2) squared (2x + 1)",
+      "explanation": "The constant term is 4, so try divisors of 4 and their halves. Testing x = 2 gives 16 - 28 + 8 + 4 = 0, so x - 2 is a factor. Dividing gives 2x squared - 3x - 2, and splitting the middle term with the pair multiplying to -4 and adding to -3 gives -4 and 1, so 2x squared - 4x + x - 2 = 2x(x - 2) + 1(x - 2) = (2x + 1)(x - 2). The full factorisation is therefore (x - 2) squared (2x + 1). Roots are 2 twice and -1/2, and their product doubled by the leading coefficient matches the constant 4.",
+      "commonMistake": "Stopping at 2x squared - 3x - 2 and missing that it factors further, or mishandling the leading coefficient when splitting."
+    },
+    {
+      "id": "icse-10-math-q-fac-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find k if x plus 1 is a factor of x cubed plus 3x squared plus kx plus 4.",
+      "answer": "k = 6",
+      "explanation": "Since x plus 1 is a factor, the polynomial vanishes at x = -1. Substituting: (-1) cubed + 3(-1) squared + k(-1) + 4 = -1 + 3 - k + 4 = 6 - k. Setting this to zero gives k = 6. Verification with k = 6: f(-1) = -1 + 3 - 6 + 4 = 0, confirming the factor.",
+      "commonMistake": "Substituting plus one and getting 8 + k = 0, which gives the wrong value and tests x minus 1 instead."
+    },
+    {
+      "id": "icse-10-math-q-fac-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Given that x cubed plus a x squared plus b x plus 6 is divisible by both x minus 1 and x minus 3, find a and b.",
+      "answer": "a = -2 and b = -5",
+      "explanation": "Divisibility by x minus 1 gives f(1) = 1 + a + b + 6 = 0, that is a + b = -7. Divisibility by x minus 3 gives f(3) = 27 + 9a + 3b + 6 = 0, that is 9a + 3b = -33, or dividing by 3, 3a + b = -11. Subtracting the first equation from this gives 2a = -4, so a = -2, and then b = -5. Verification: f(1) = 1 - 2 - 5 + 6 = 0 and f(3) = 27 - 18 - 15 + 6 = 0.",
+      "commonMistake": "Forgetting to divide the second equation by 3 before eliminating, which is arithmetically harmless only if the elimination is done carefully."
+    },
+    {
+      "id": "icse-10-math-q-fac-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The remainder when a polynomial f of x is divided by 2x minus 1 is:",
+      "options": [
+        "f of one half",
+        "f of 2",
+        "f of one half, multiplied by 2",
+        "f of 1"
+      ],
+      "correctIndex": 0,
+      "answer": "f of one half",
+      "explanation": "The divisor 2x - 1 vanishes when x = 1/2, so that is the value to substitute, because the whole quotient term is annihilated only at the root of the divisor. Substituting 2 or 1 would evaluate the polynomial at points unrelated to this divisor.",
+      "commonMistake": "Substituting b rather than b over a, or reading the coefficient as the value."
+    },
+    {
+      "id": "icse-10-math-q-fac-12",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the remainder when 2x cubed minus 3x squared plus 4x minus 5 is divided by 2x minus 1.",
+      "answer": "-7/2",
+      "explanation": "The divisor 2x - 1 vanishes at x = 1/2, so the remainder is f(1/2) = 2(1/8) - 3(1/4) + 4(1/2) - 5 = 1/4 - 3/4 + 2 - 5. Combining the quarters gives -1/2, and -1/2 + 2 - 5 = -1/2 - 3 = -7/2. Equivalently, working over a common denominator of 4 gives 1 - 3 + 8 - 20 all over 4, that is -14/4 = -7/2.",
+      "commonMistake": "Substituting x = 1 instead of one half, which gives -2 and is the remainder for the divisor x minus 1."
+    },
+    {
+      "id": "icse-10-math-q-fac-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the remainder when x cubed minus 2x plus 5 is divided by 3x plus 2.",
+      "answer": "163/27",
+      "explanation": "The divisor 3x + 2 vanishes at x = -2/3. Substituting: (-2/3) cubed = -8/27, -2(-2/3) = 4/3 = 36/27, and 5 = 135/27. Summing over the common denominator 27 gives (-8 + 36 + 135)/27 = 163/27. Converting every term at once is quicker and less error prone than simplifying each separately.",
+      "commonMistake": "Substituting x = -2 rather than -2/3, which ignores the leading coefficient of the divisor."
+    },
+    {
+      "id": "icse-10-math-q-fac-14",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Given that x cubed minus 3x squared plus 4x minus 4 equals zero has x = 2 as a root, use the factor theorem to factorise as far as possible over the real numbers and state the number of real roots.",
+      "answer": "(x - 2)(x squared - x + 2), with exactly one real root",
+      "explanation": "Since f(2) = 0, x minus 2 is a factor, and division gives the quotient x squared - x + 2. Its discriminant is 1 - 8 = -7, which is negative, so that quadratic has no real roots. Hence the complete factorisation over the reals is (x - 2)(x squared - x + 2) and the equation has exactly one real root, namely 2. The cubic must have either one or three real roots counting multiplicity, and the negative discriminant settles which.",
+      "commonMistake": "Applying the quadratic formula and reporting complex roots as if they were admissible solutions."
+    },
+    {
+      "id": "icse-10-math-q-fac-15",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The value of the polynomial 3x cubed minus 2x squared plus 5x minus 1 at x equal to 2 is ______.",
+      "answer": "25",
+      "explanation": "Substituting gives 3(8) - 2(4) + 5(2) - 1 = 24 - 8 + 10 - 1 = 25. By the remainder theorem this is also the remainder on dividing the polynomial by x minus 2, which is the practical significance of the evaluation.",
+      "commonMistake": "Mishandling the sign of the squared term, giving 41 or 9 instead."
+    },
+    {
+      "id": "icse-10-math-q-fac-16",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A cubic polynomial with integer coefficients can have at most:",
+      "options": [
+        "Three linear factors",
+        "Two linear factors",
+        "One linear factor",
+        "Four linear factors"
+      ],
+      "correctIndex": 0,
+      "answer": "Three linear factors",
+      "explanation": "Each linear factor contributes one power of the variable, and the degree counts the total. A cubic therefore has at most three linear factors, equivalently at most three real roots, and sometimes fewer when a factor is squared or when the remaining quadratic has no real roots.",
+      "commonMistake": "Assuming a cubic always has three distinct linear factors, when repeated or complex roots reduce the real count."
+    },
+    {
+      "id": "icse-10-math-q-fac-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Factorise x cubed minus 4x squared plus 5x minus 2 completely and state the multiplicity of each factor.",
+      "answer": "(x - 1) squared (x - 2), with x - 1 of multiplicity two and x - 2 of multiplicity one",
+      "explanation": "Test the divisors of -2: at x = 1 we get 1 - 4 + 5 - 2 = 0, so x - 1 is a factor. Dividing gives x squared - 3x + 2, which factorises as (x - 1)(x - 2). Hence the expression is (x - 1) squared (x - 2). The value 1 roots both the cubic and the quotient, which is the signal that its factor appears twice. Checking: expand (x squared - 2x + 1)(x - 2) = x cubed - 2x squared - 2x squared + 4x + x - 2, that is x cubed - 4x squared + 5x - 2.",
+      "commonMistake": "Reporting three distinct factors and missing the repetition, which doubles a root."
+    },
+    {
+      "id": "icse-10-math-q-fac-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Without finding the roots, state the sum and product of the roots of x cubed minus 4x squared plus 5x minus 2, and confirm them against the roots 1, 1 and 2.",
+      "answer": "Sum = 4 and product = 2",
+      "explanation": "For a monic cubic the sum of the roots is minus the coefficient of x squared, which is minus of minus 4, that is 4, and the product is minus the constant term, which is minus of minus 2, that is 2. Against the actual roots: 1 + 1 + 2 = 4 and 1 x 1 x 2 = 2, both matching. The sum of products taken two at a time should equal the coefficient of x, and indeed 1 + 2 + 2 = 5.",
+      "commonMistake": "Quoting minus 4 and minus 2 without applying the alternating sign rule."
+    },
+    {
+      "id": "icse-10-math-q-fac-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Given that x minus 1 and x plus 2 are both factors of x cubed plus a x squared plus b x minus 4, find a and b.",
+      "answer": "a = 3 and b = 0",
+      "explanation": "From x minus 1: f(1) = 1 + a + b - 4 = 0, that is a + b = 3. From x plus 2, which corresponds to substituting x = -2: f(-2) = -8 + 4a - 2b - 4 = 0, that is 4a - 2b = 12, or dividing through by 2, 2a - b = 6. Adding the two equations gives 3a = 9, so a = 3, and then b = 0. Verification: f(x) = x cubed + 3x squared - 4, and f(1) = 1 + 3 - 4 = 0 while f(-2) = -8 + 12 - 4 = 0, both zero as required.",
+      "commonMistake": "Misreading x plus 2 as x minus 2, which produces a different pair of equations and a different pair of values."
+    },
+    {
+      "id": "icse-10-math-q-fac-20",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If f of a equals zero, then by the factor theorem:",
+      "options": [
+        "x minus a is a factor of f of x",
+        "x plus a is a factor of f of x",
+        "a is a factor of f of x",
+        "f of x has no other factors"
+      ],
+      "correctIndex": 0,
+      "answer": "x minus a is a factor of f of x",
+      "explanation": "A zero remainder at x equal to a means the divisor x minus a divides the polynomial exactly, which is precisely the factor theorem. The converse also holds, so the condition is both necessary and sufficient.",
+      "commonMistake": "Reading the conclusion as a statement about the number a rather than about the expression x minus a."
+    },
+    {
+      "id": "icse-10-math-q-fac-21",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The divisors of the constant term -6, which are the candidates for a root of x cubed minus 6x squared plus 11x minus 6, include plus or minus 1, plus or minus 2, plus or minus 3 and ______.",
+      "answer": "plus or minus 6",
+      "explanation": "For a monic cubic with integer coefficients, any rational root must be an integer dividing the constant term, so the candidate list is exactly the divisors of minus 6. Trying them smallest first, 1, 2 and 3 all succeed and give the three factors.",
+      "commonMistake": "Testing only small numbers and missing a root that is a larger divisor of the constant term."
+    },
+    {
+      "id": "icse-10-math-q-fac-22",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The polynomial f of x equals x cubed minus 5x squared plus 8x minus 4 has x minus 1 as a factor. Confirm this, find the remaining quadratic factor, and state its roots.",
+      "answer": "f(1) = 0; the remaining quadratic is x squared minus 4x plus 4, with roots 2 and 2",
+      "explanation": "Evaluate at 1: 1 - 5 + 8 - 4 = 0, so by the factor theorem x minus 1 is indeed a factor. Dividing x cubed - 5x squared + 8x - 4 by x - 1 gives x squared - 4x + 4, since (x - 1)(x squared - 4x + 4) expands to x cubed - 4x squared + 4x - x squared + 4x - 4, that is x cubed - 5x squared + 8x - 4. The quotient is a perfect square, (x - 2) squared, so its roots are 2 and 2, and their sum of 4 equals minus its linear coefficient. The full factorisation is therefore (x - 1)(x - 2) squared.",
+      "commonMistake": "Accepting the stated factor without evaluating it, or missing that the quotient is a perfect square and reporting two distinct roots."
+    },
+    {
+      "id": "icse-10-math-q-fac-23",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Factorise x cubed minus 2x squared minus 5x plus 6 completely and verify by expanding your answer.",
+      "answer": "(x - 1)(x - 3)(x + 2)",
+      "explanation": "Test divisors of 6: f(1) = 1 - 2 - 5 + 6 = 0, so x minus 1 is a factor. Dividing gives x squared - x - 6, whose factor pair adding to -1 and multiplying to -6 is -3 and 2, so it equals (x - 3)(x + 2). The full factorisation is (x - 1)(x - 3)(x + 2). Verification by expansion: (x - 1)(x - 3) = x squared - 4x + 3, then times x plus 2 gives x cubed - 4x squared + 3x + 2x squared - 8x + 6 = x cubed - 2x squared - 5x + 6, matching the original. Sum of roots 1 + 3 - 2 = 2 equals minus the coefficient of x squared.",
+      "commonMistake": "Writing the constant factor with the wrong sign, so that the product of the three constants is minus 6 instead of plus 6."
+    }
+  ]
+}

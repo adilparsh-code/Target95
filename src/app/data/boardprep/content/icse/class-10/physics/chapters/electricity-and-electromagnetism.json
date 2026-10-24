@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-electricity",
+  "title": "Electricity and Electromagnetism",
+  "kind": "physics",
+  "tagline": "Ohm's law, resistors in series and parallel, electrical power, the wiring of a house, and the motor effect.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. Domestic supply figures quoted are the common 230 volt, 50 hertz mains used in India, stated as such. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "This chapter links three ideas that are best learned together: the relationship between voltage, current and resistance, the way resistors combine, and what happens when electricity does work. It opens with Ohm's law and the factors that set a conductor's resistance, then works through series and parallel combinations with their contrasting rules for current and voltage. Electrical power and the kilowatt hour follow, since they are what an appliance rating and an electricity bill actually express. The second half turns to the household circuit — live, neutral and earth wires, fuses, switches and earthing — and then to magnetism, covering what strengthens an electromagnet and how the motor effect turns electrical energy into mechanical rotation through the split-ring commutator.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Electricity and Electromagnetism" },
+      { "label": "Ohm's law", "value": "Current through a conductor is proportional to the potential difference across it at constant temperature" },
+      { "label": "Series resistance", "value": "The individual resistances add" },
+      { "label": "Parallel resistance", "value": "The reciprocals add, so the total is smaller than the smallest" },
+      { "label": "Electrical power", "value": "Current times potential difference, measured in watts" },
+      { "label": "Motor rule", "value": "Fleming's left-hand rule gives the direction of the force on a current in a magnetic field" }
+    ]
+  },
+  "learningOutcomes": [
+    "State Ohm's law, define the ohm, and calculate current, voltage or resistance in a simple circuit.",
+    "Calculate the combined resistance of resistors in series and in parallel and describe how current and voltage behave in each.",
+    "Use the expressions for electrical power and energy and explain the kilowatt hour.",
+    "Describe the wiring of a household circuit safely, and explain the working of an electromagnet and a d.c. motor."
+  ],
+  "learn": [
+    {
+      "id": "ohms-law-and-resistance",
+      "title": "Ohm's law and what sets a resistance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Current is the rate of flow of charge, measured in amperes, and the potential difference between two points is the work done in moving unit charge between them, measured in volts. Ohm's law connects the three quantities: the current through a metallic conductor is directly proportional to the potential difference across its ends, provided the temperature and the physical state of the conductor do not change, so voltage equals current times resistance. The constant of proportionality is the resistance, measured in ohms, and one ohm is defined as the resistance of a conductor through which a current of one ampere flows when the potential difference across it is one volt. The proviso about temperature matters, because a filament lamp's filament heats up enormously as it glows and its resistance therefore rises several times over as the voltage is increased, so its current is not proportional to its voltage and the lamp does not obey Ohm's law. The resistance of a wire depends on four things: it rises in direct proportion to the length, falls in inverse proportion to the cross-sectional area, depends on the material's resistivity, and usually rises with temperature, because a hotter lattice jostles the moving electrons more."
+        },
+        {
+          "type": "table",
+          "caption": "Ohm's law and the factors governing resistance",
+          "columns": ["Quantity", "Definition", "Unit", "Relationship"],
+          "rows": [
+            ["Current", "Rate of flow of charge", "ampere (A)", "I equals Q divided by t"],
+            ["Potential difference", "Work done moving unit charge", "volt (V)", "V equals W divided by Q"],
+            ["Resistance", "Opposition to current", "ohm (Ohm)", "One ohm gives one ampere at one volt"],
+            ["Ohm's law", "Current proportional to voltage at constant temperature", "—", "V equals I times R"],
+            ["Effect of length", "Resistance rises with length", "—", "Resistance proportional to length"],
+            ["Effect of area", "Resistance falls as the wire thickens", "—", "Resistance inversely proportional to area"],
+            ["Effect of material", "Different materials have different resistivities", "ohm metre", "Resistance equals resistivity times length over area"],
+            ["Effect of temperature", "Resistance usually rises as temperature rises", "—", "Metals: the lattice jostles the electrons more"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ohm's law states that current is proportional to potential difference at constant temperature, giving V = I R.",
+            "One ohm is the resistance through which one ampere flows under a potential difference of one volt.",
+            "A conductor obeys Ohm's law only while its temperature and physical state stay unchanged.",
+            "A filament lamp does not obey Ohm's law, because its resistance rises sharply as the filament gets hot.",
+            "Resistance is directly proportional to length and inversely proportional to cross-sectional area.",
+            "Resistivity is a property of the material alone and does not depend on the dimensions of the sample.",
+            "Copper and silver have very low resistivity, which is why they are used for connecting wires.",
+            "Nichrome has a high resistivity and a small temperature effect, which is why it is used for heating elements."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A potential difference of 12 V across a resistance of 4 Ohm drives a current of I = V divided by R = 12 divided by 4 = 3 A.", "note": "Rearranging V = I R gives each of the three quantities from the other two." },
+            { "text": "A wire of resistance 10 Ohm is stretched uniformly to twice its length; its cross-sectional area halves, so the resistance becomes 10 x 2 = 20 Ohm doubled again by the halved area, giving 40 Ohm.", "note": "Stretching changes length and area together, so both factors must be applied." },
+            { "text": "A copper wire 1 m long and 1 square millimetre in cross-section has a resistance of 0.017 Ohm, since resistivity divided by area gives 0.000000017 divided by 0.000001 = 0.017 Ohm.", "note": "Convert square millimetres to square metres before dividing, or the answer is out by a factor of a million." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "series-and-parallel",
+      "title": "Resistors in series and in parallel",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When resistors are connected in series there is only one path for the charge, so the same current flows through each, and the total potential difference supplied is shared between them in proportion to their resistances; the total resistance is simply the sum of the individual values, so it is always larger than the largest of them. When resistors are connected in parallel each one is connected directly across the same two points, so the potential difference across each is the same, while the total current splits between the branches in inverse proportion to their resistances; the reciprocals of the resistances add, so the total is always smaller than the smallest of them. This contrast is worth remembering as a single sentence: in series the current is common and the voltage divides, in parallel the voltage is common and the current divides. Fuses and household lighting are arranged in parallel so that each appliance receives the full supply and can be switched off independently, whereas a fuse is placed in series with the appliance it protects so that all its current must pass through it."
+        },
+        {
+          "type": "table",
+          "caption": "Series against parallel connection",
+          "columns": ["Feature", "Series", "Parallel"],
+          "rows": [
+            ["Paths for the current", "One only", "One branch for each resistor"],
+            ["Current", "The same through every resistor", "Divides between the branches"],
+            ["Potential difference", "Divides in proportion to resistance", "The same across every resistor"],
+            ["Total resistance", "The sum, so larger than the largest", "Reciprocals add, so smaller than the smallest"],
+            ["If one fails", "The whole circuit is broken", "The other branches keep working"],
+            ["Independent switching", "Not possible", "Possible for every branch"],
+            ["Typical use", "Fuses in series with an appliance; decorative strings of lamps", "Household wiring; lighting circuits"],
+            ["Working formula", "R equals R1 plus R2 plus R3", "One over R equals one over R1 plus one over R2"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "In series the same current passes through every component, and the voltages across them add to the supply.",
+            "In series the total resistance is the sum, so adding another resistor always increases it.",
+            "In parallel the potential difference across every branch is the same, being the supply voltage.",
+            "In parallel the branch currents add to the total current drawn from the supply.",
+            "In parallel the total resistance is less than the smallest individual resistance.",
+            "A fuse must be in series, so that the whole current of the appliance passes through the fuse wire.",
+            "Household appliances are in parallel, so each receives the full supply and can be switched off alone.",
+            "Two equal resistors in parallel give half the value of one of them, which is a quick check on any calculation."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Resistors of 2 Ohm, 3 Ohm and 6 Ohm in series give a total of 2 + 3 + 6 = 11 Ohm, and with a 22 V supply the current is 22 divided by 11 = 2 A through each of them.", "note": "Add the resistances first, then use Ohm's law once for the whole chain." },
+            { "text": "The same 2 Ohm, 3 Ohm and 6 Ohm in parallel give one over R = one over 2 plus one over 3 plus one over 6 = 3 over 6 plus 2 over 6 plus 1 over 6 = 6 over 6 = 1, so R = 1 Ohm, which is smaller than the smallest of them as it must be.", "note": "The reciprocal sum must come out below one, since the total has to be less than 2 Ohm." },
+            { "text": "Two identical 6 Ohm resistors in parallel give one over R = 2 over 6 = 1 over 3, so R = 3 Ohm, exactly half of one, which is the expected shortcut for equal resistors.", "note": "Useful as a check that the reciprocal arithmetic has been done correctly." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power-and-household-circuits",
+      "title": "Electrical power, energy and the household circuit",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electrical power is the rate at which electrical energy is converted into another form, and it is the product of the potential difference and the current, so one watt is one joule per second. Using Ohm's law this can be rewritten in two further forms, current squared times resistance and voltage squared divided by resistance, which are the convenient ones when the current or the voltage is the known quantity. The energy used by an appliance is its power multiplied by the time it runs, and when the power is expressed in kilowatts and the time in hours the answer comes in kilowatt hours, which is the unit an electricity meter records. A household circuit is designed around safety as much as convenience. The supply enters as a live wire, which alternates between high and low potential, and a neutral wire, which is at earth potential, and any appliance with a metal case is additionally connected to an earth wire. The live wire is the dangerous one, so the switch and the fuse are always placed in it, so that opening the switch or melting the fuse genuinely disconnects the appliance from the high potential. A fuse contains a wire of low melting point that melts when the current exceeds its rating, breaking the circuit; an earth wire provides a low-resistance path to the ground so that a fault current surges and blows the fuse rather than leaving the case live."
+        },
+        {
+          "type": "table",
+          "caption": "Electrical power and energy",
+          "columns": ["Quantity", "Formula", "Unit", "When to use it"],
+          "rows": [
+            ["Power", "Potential difference times current", "watt (W)", "The general definition"],
+            ["Power through a resistance", "Current squared times resistance", "watt (W)", "When the current and the resistance are known"],
+            ["Power across a resistance", "Voltage squared divided by resistance", "watt (W)", "When the voltage and the resistance are known"],
+            ["Energy", "Power times time", "joule (J)", "The SI unit of energy"],
+            ["Domestic energy", "Power in kW times time in hours", "kilowatt hour (kW h)", "What an electricity meter records"],
+            ["Conversion", "1 kW h = 1000 W x 3600 s", "3600000 J", "Always needed before comparing with joules"],
+            ["Large-scale rating", "One thousand watts", "kilowatt (kW)", "Appliances and supply ratings"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The wires of a household circuit",
+          "columns": ["Wire", "Function", "Colour", "What it carries"],
+          "rows": [
+            ["Live", "Supplies the alternating potential", "Brown", "At high potential relative to earth; the dangerous wire"],
+            ["Neutral", "Completes the circuit back to the supply", "Blue", "At or near earth potential"],
+            ["Earth", "Safety path from the metal case to the ground", "Green and yellow", "Carries fault current only, and only when a fault occurs"],
+            ["Fuse", "Placed in the live wire in series with the appliance", "—", "Melts at a set current and breaks the circuit"],
+            ["Switch", "Placed in the live wire", "—", "Opening it disconnects the appliance from the live supply"],
+            ["Three-pin plug", "Live, neutral and earth pins", "—", "The earth pin is longer and thicker so it connects first"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Power equals voltage times current, and can also be written as current squared times resistance or voltage squared divided by resistance.",
+            "One watt is one joule per second, and one kilowatt hour is 3600000 joules.",
+            "The switch and the fuse must both be fitted in the live wire, never in the neutral.",
+            "The earth wire gives fault current a path to the ground so that the fuse blows instead of the case becoming live.",
+            "The earth pin of a three-pin plug is longer and thicker, so it makes contact first and breaks it last.",
+            "Household appliances are wired in parallel so that each receives the full supply voltage.",
+            "A fuse wire has a low melting point, so it melts before the wiring of the circuit is damaged.",
+            "A circuit breaker performs the same protective job as a fuse but can be reset, and it acts far faster on a fault.",
+            "A rating plate states the voltage an appliance is designed for and the power it consumes at that voltage."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A heater rated at 2 kW running for 4 hours consumes 2 x 4 = 8 kW h of electrical energy.", "note": "Power in kilowatts multiplied by time in hours gives kilowatt hours directly." },
+            { "text": "A 60 W lamp on a 230 V supply draws a current of 60 divided by 230 = 0.26 A, which is well inside the rating of an ordinary fuse.", "note": "Dividing the power by the supply voltage gives the current an appliance takes." },
+            { "text": "A 100 W bulb used for 5 hours consumes 0.1 x 5 = 0.5 kW h, which is 0.5 x 3600000 = 1800000 J.", "note": "Convert watts to kilowatts before multiplying by hours." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magnetism-and-the-motor",
+      "title": "Electromagnets and the d.c. motor",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A current in a conductor produces a magnetic field around it, and coiling the wire into a solenoid concentrates that field into a strong, uniform field inside the coil, much like that of a bar magnet, with a north and a south pole. Placing a soft iron core inside the solenoid greatly strengthens the field, because the iron becomes strongly magnetised by induction and adds its own field to that of the current. Such a device is an electromagnet, and its three properties make it useful: it can be switched on and off with the current, its strength can be varied by changing the current or the number of turns, and it loses its magnetism almost at once when the current stops, because soft iron retains very little. That last property is what allows a scrap-yard crane to lift a load of iron and then release it by breaking the current. A current-carrying conductor placed in a magnetic field experiences a force at right angles to both, and this is the motor effect: the force is larger with a stronger field, a longer length of conductor in that field and a greater current. Fleming's left-hand rule gives the direction, with the first finger pointing along the field, the second finger along the current and the thumb then pointing in the direction of the force. A d.c. motor uses this effect on a rectangular coil, and because the force on each side reverses when the current in that side reverses, a split-ring commutator is fitted to reverse the current in the coil every half turn, so the coil keeps rotating in the same sense instead of swinging to and stopping at the equilibrium position."
+        },
+        {
+          "type": "table",
+          "caption": "What makes an electromagnet stronger",
+          "columns": ["Factor", "Change that strengthens it", "Why", "Reversible?"],
+          "rows": [
+            ["Current in the coil", "Increase the current", "The field of a solenoid is proportional to the current", "Yes, by varying the supply"],
+            ["Number of turns", "Add more turns", "Each turn contributes its own field inside the coil", "By rewinding the coil"],
+            ["Core material", "Use a soft iron core", "Iron is easily and strongly magnetised by induction", "The core is not switched, only the current"],
+            ["Core length", "A longer core within the coil", "More of the core lies in the strong internal field", "By redesigning the coil"],
+            ["Removing the core", "Replace iron with air or brass", "The field falls back to that of the coil alone", "This is how the magnet is switched off"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The d.c. motor and its parts",
+          "columns": ["Part", "What it does", "Why it is needed"],
+          "rows": [
+            ["Rectangular coil", "Carries the current and experiences the force", "The forces on opposite sides form a couple that turns the coil"],
+            ["Permanent magnets", "Provide the magnetic field across the coil", "The motor effect needs a field as well as a current"],
+            ["Split-ring commutator", "Reverses the current in the coil every half turn", "Keeps the coil rotating in one direction instead of stalling"],
+            ["Carbon brushes", "Carry the current from the supply to the rotating commutator", "A sliding electrical contact that does not wear the ring"],
+            ["Axle", "Transmits the rotation to the load", "Converts the internal rotation into useful mechanical work"],
+            ["Spring-loaded brushes", "Maintain contact with the commutator", "Keeps the circuit continuous as the commutator turns"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A current-carrying conductor in a magnetic field experiences a force at right angles to both the field and the current.",
+            "The size of that force rises with the field strength, the length of conductor in the field and the current.",
+            "Fleming's left-hand rule gives the direction of the force: first finger for the field, second for the current, thumb for the motion.",
+            "A solenoid behaves like a bar magnet, with a north and a south pole, and the polarity reverses when the current reverses.",
+            "An iron core makes an electromagnet far stronger than the coil alone, because iron is easily magnetised by induction.",
+            "An electromagnet can be switched off, which distinguishes it from a permanent magnet.",
+            "The split-ring commutator reverses the current every half turn so that the motor keeps turning the same way.",
+            "Without the commutator the coil would swing to the vertical position and stop there, being in unstable equilibrium.",
+            "A d.c. motor converts electrical energy into mechanical energy, which is the reverse of what a generator does."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A conductor of length 0.1 m carrying 2 A sits at right angles to a field of 0.5 T, so the force on it is 0.5 x 2 x 0.1 = 0.1 N.", "note": "The force formula applies cleanly only when the conductor lies across the field at right angles." },
+            { "text": "A scrap-yard crane lifts steel girders with an electromagnet and drops them by breaking the current, which is possible only because soft iron loses its magnetism almost immediately.", "note": "Retentivity would make the crane unable to release its load." },
+            { "text": "Increasing the current in an electromagnet's coil doubles its field, and doubling the number of turns doubles it again, so together they can make the magnet four times as strong.", "note": "The two effects multiply, which is why both are varied in practice." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Ohm's law graph and the filament lamp that departs from it",
+      "description": "Two graphs of current against potential difference. Left panel: a straight line through the origin for an ohmic conductor, labelled current proportional to voltage, with the gradient giving one over resistance. Right panel: a curve for a filament lamp that bends towards the voltage axis at higher voltages, labelled resistance rising as the filament heats.",
+      "labels": ["current on the vertical axis", "potential difference on the horizontal", "straight line through the origin", "obeys Ohm's law", "curve bending over", "resistance increases with temperature", "the lamp does not obey Ohm's law"]
+    },
+    {
+      "caption": "Figure: Resistors in series and in parallel",
+      "description": "Two circuits with the same three resistors of 2, 3 and 6 ohms. Top panel: the resistors in a single line with one current arrow through all of them, a battery across the whole chain, and the voltage shown splitting across the three. Bottom panel: the three resistors in separate parallel branches joined across the same two points, with the total current splitting into three branch arrows and the same voltage marked across each.",
+      "labels": ["series: one path only", "same current through each", "voltages add to the supply", "parallel: one branch each", "same voltage across each branch", "currents add to the total", "total resistance is smaller than the smallest"]
+    },
+    {
+      "caption": "Figure: A three-pin plug and the household circuit it connects to",
+      "description": "A plan of a three-pin plug with the fuse in the live path, the live pin marked brown, the neutral pin marked blue and the larger earth pin marked green and yellow, with the cable grip and the flex shown. A second diagram shows the appliance connected to a supply, with the switch and fuse in the live wire, the neutral returning to the supply, and the earth wire running from the metal case to an earth terminal driven into the ground.",
+      "labels": ["live pin, brown", "neutral pin, blue", "earth pin, green and yellow, longer and thicker", "fuse in the live wire", "switch in the live wire", "metal case earthed", "path to ground blows the fuse on a fault"]
+    }
+  ],
+  "keyPoints": [
+    "Ohm's law: current through a conductor is proportional to the potential difference across it at constant temperature, so V = I R.",
+    "One ohm gives one ampere under a potential difference of one volt.",
+    "Resistance rises with length, falls with cross-sectional area, depends on the material, and usually rises with temperature.",
+    "In series the current is the same through every resistor and the resistances add.",
+    "In parallel the voltage is the same across every branch and the reciprocals of the resistance add, giving a total below the smallest.",
+    "Power equals voltage times current, and also current squared times resistance or voltage squared divided by resistance.",
+    "One kilowatt hour equals 3600000 joules and is the unit an electricity meter records.",
+    "The switch and the fuse must be fitted in the live wire, and a metal-cased appliance must be earthed.",
+    "An electromagnet is strengthened by more current, more turns and a soft iron core, and it loses its magnetism when the current stops.",
+    "A d.c. motor uses the motor effect and needs a split-ring commutator to reverse the current every half turn so that it keeps rotating."
+  ],
+  "examFocus": [
+    "Write the formula, substitute the numbers with their units, and give the unit again in the answer — a bare number loses the marks for the unit.",
+    "In series and parallel questions state which quantity is shared before calculating, since that decides which formula applies.",
+    "A fuse or a switch drawn anywhere other than in the live wire is wrong and will lose the safety mark.",
+    "For the motor, name the split-ring commutator and say what it does, because a motor without it cannot keep rotating.",
+    "Quote the law or rule by name where asked — Ohm's law, Fleming's left-hand rule — since the name carries a mark of its own."
+  ],
+  "vocabulary": [
+    { "word": "Ohm's law", "meaning": "Current is proportional to potential difference at constant temperature." },
+    { "word": "Ohm", "meaning": "Resistance through which one ampere flows at one volt." },
+    { "word": "Resistivity", "meaning": "Property of a material that sets its resistance for a given size and shape." },
+    { "word": "Series", "meaning": "Components joined end to end so that one path carries the same current through all." },
+    { "word": "Parallel", "meaning": "Components joined across the same two points so that each has the full voltage." },
+    { "word": "Fuse", "meaning": "A safety device in the live wire that melts and breaks the circuit on excess current." },
+    { "word": "Electromagnet", "meaning": "Magnet produced by a current in a coil, usually with an iron core, that can be switched off." },
+    { "word": "Split-ring commutator", "meaning": "Device that reverses the current in a motor's coil every half turn." }
+  ],
+  "questions": [
+    {
+      "id": "phy-electricity-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A potential difference of 12 V is applied across a resistance of 4 Ohm. What current flows?",
+      "options": ["3 A", "48 A", "0.33 A", "16 A"],
+      "correctIndex": 0,
+      "answer": "3 A",
+      "explanation": "Ohm's law gives current equals voltage divided by resistance, so I = 12 divided by 4 = 3 A. Multiplying the two quantities would give 48, which is not the current but the product of voltage and resistance, and dividing the resistance by the voltage would give the wrong reciprocal entirely.",
+      "commonMistake": "Multiplying instead of dividing. V = I R must be rearranged to I = V divided by R."
+    },
+    {
+      "id": "phy-electricity-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a series circuit the ________ is the same through every resistor, while in a parallel circuit the ________ across every branch is the same.",
+      "answer": "current; potential difference",
+      "explanation": "A series circuit offers a single path, so the same charge per second must pass through each component, making the current common to all. A parallel circuit connects every branch directly across the same two points, so each branch experiences the same potential difference, and it is the current that divides between them.",
+      "commonMistake": "Swapping the two. In series it is the current that is shared; in parallel it is the voltage."
+    },
+    {
+      "id": "phy-electricity-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is the total resistance of three resistors of 2 Ohm, 3 Ohm and 6 Ohm connected in parallel?",
+      "options": ["11 Ohm", "1 Ohm", "3 Ohm", "1.5 Ohm"],
+      "correctIndex": 1,
+      "answer": "1 Ohm",
+      "explanation": "For a parallel connection the reciprocals add: one over R equals one over 2 plus one over 3 plus one over 6 = 3/6 + 2/6 + 1/6 = 6/6 = 1, so R = 1 Ohm. This is smaller than the smallest individual resistance of 2 Ohm, as a parallel total must be. The 11 Ohm answer would be the series total, which is always larger than the largest.",
+      "commonMistake": "Adding the resistances directly, which is the rule for a series connection, not a parallel one."
+    },
+    {
+      "id": "phy-electricity-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two factors that affect the resistance of a metallic wire and explain how each affects it.",
+      "answer": "The length of the wire affects its resistance directly: doubling the length doubles the resistance, because the electrons must make their way past twice as many scattering ions, so there is twice the opposition to the current. The cross-sectional area affects it inversely: doubling the area halves the resistance, because a wider wire offers more parallel paths for the charge to flow down at once. The material matters as well, through its resistivity, and the temperature usually matters because a hotter lattice jostles the moving electrons more and so raises the resistance.",
+      "explanation": "Two factors are required with an explanation of the mechanism for each, not merely a statement of proportionality. Linking length to the number of scattering encounters and area to the number of available paths shows the physical reason behind the formula.",
+      "commonMistake": "Stating the proportionality without explaining why. The question asks how each affects it, which invites the mechanism."
+    },
+    {
+      "id": "phy-electricity-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A heater is rated at 2 kW and is used for 3 hours a day. Calculate the energy it consumes in kilowatt hours and in joules, then calculate the current it draws from a 230 V supply, and explain why the cable supplying it must be thicker than that of an ordinary lamp.",
+      "answer": "The energy consumed is power multiplied by time, so with the power in kilowatts and the time in hours, energy = 2 x 3 = 6 kW h per day. Converting to joules, one kilowatt hour is 1000 W x 3600 s = 3600000 J, so 6 kW h = 6 x 3600000 = 21600000 J. The current drawn is power divided by voltage, so I = 2000 W divided by 230 V = 8.7 A. The cable must be thicker than that of an ordinary lamp because the heating effect of a current in a wire depends on the current squared times the resistance of the cable, and this heater draws several times the current of a lamp; a thin cable would have a greater resistance and would therefore get hot, wasting energy and possibly damaging the insulation. A thicker cable has a smaller resistance for the same length, so it carries the same current with far less heating.",
+      "explanation": "All three quantities are required and the final explanation must invoke the current-squared dependence of heating in the cable, which is why the thickness matters. Converting the kilowatt hours correctly, using 3600000 J, is a common place to lose the marks.",
+      "commonMistake": "Converting one kilowatt hour to 3600 J instead of 3600000 J, forgetting that a kilowatt is a thousand watts."
+    },
+    {
+      "id": "phy-electricity-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Why must both the switch and the fuse be fitted in the live wire of a household circuit?",
+      "options": ["Because the neutral wire carries a higher current than the live wire", "Because opening the switch or melting the fuse must disconnect the appliance from the high potential, not merely from the return path", "Because the live wire has a lower resistance than the neutral wire", "Because the fuse only works when placed in the neutral wire"],
+      "correctIndex": 1,
+      "answer": "Because opening the switch or melting the fuse must disconnect the appliance from the high potential, not merely from the return path",
+      "explanation": "The live wire is the one that alternates between high and low potential relative to earth, so it is the dangerous one. If the switch or fuse were placed in the neutral, opening it would stop the current but leave the appliance connected to the live supply at full potential, and touching an internal part would still give a severe shock. Placing both in the live wire genuinely isolates the appliance from the high potential.",
+      "commonMistake": "Thinking the fuse works better in the live wire. It works equally well in either, but only the live placement makes the circuit safe when it has operated."
+    },
+    {
+      "id": "phy-electricity-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A circuit contains a 6 Ohm resistor in series with a parallel combination of a 3 Ohm and a 6 Ohm resistor, and the whole circuit is connected to a 12 V supply. Calculate the total resistance, the total current drawn, and the current through each branch of the parallel part.",
+      "answer": "First find the resistance of the parallel section: one over R p equals one over 3 plus one over 6 = 2 over 6 plus 1 over 6 = 3 over 6 = 1 over 2, so R p = 2 Ohm. This is in series with the 6 Ohm resistor, so the total resistance of the circuit is 6 + 2 = 8 Ohm. The total current drawn from the supply is I = V divided by R = 12 divided by 8 = 1.5 A, and this current flows through the 6 Ohm resistor. The potential difference across the parallel section is its resistance times the current through it, so V p = 1.5 x 2 = 3 V, and the remaining 12 - 3 = 9 V appears across the 6 Ohm resistor, as the two voltages must add to the supply. The branch currents then follow from the common 3 V: through the 3 Ohm resistor, 3 divided by 3 = 1 A, and through the 6 Ohm resistor, 3 divided by 6 = 0.5 A. As a check, the branch currents add to 1 + 0.5 = 1.5 A, which equals the total current as it must.",
+      "explanation": "The method must reduce the parallel section first, then treat it as a series element, and the branch currents must come from the voltage across the parallel section rather than from the supply. The closing check that the branch currents sum to the total is the strongest evidence that the working is right.",
+      "commonMistake": "Applying the full supply voltage across the parallel section. Only part of the supply appears there, because the 6 Ohm series resistor takes its share."
+    },
+    {
+      "id": "phy-electricity-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Describe how the strength of an electromagnet can be increased, and explain why soft iron is used for its core.",
+      "answer": "The strength of an electromagnet can be increased by increasing the current flowing through the coil, since the magnetic field inside a solenoid is proportional to the current, and by increasing the number of turns in the coil, because each turn contributes its own field to the total inside. A longer coil relative to its diameter also produces a more uniform and stronger internal field. Soft iron is used for the core because it is very easily magnetised by induction, so it adds a field of its own that is far stronger than the field of the coil alone, and because it retains almost no magnetism once the current is switched off. That combination of a large induced field and low retentivity is exactly what is wanted, since the electromagnet must be strong while it is on and completely free of magnetism as soon as the current stops.",
+      "explanation": "The three ways of strengthening must be named with the reason each works, and the choice of soft iron must be justified on both counts — high induced magnetism and low retentivity. Stating only that iron is magnetic covers the first and misses the second.",
+      "commonMistake": "Explaining why iron strengthens the magnet but not why it is soft iron rather than steel. Steel would stay magnetised and the device could not be switched off."
+    },
+    {
+      "id": "phy-electricity-09",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is the function of the split-ring commutator in a d.c. motor?",
+      "options": ["To increase the strength of the magnetic field", "To reverse the current in the coil every half turn so that the coil keeps rotating", "To reverse the direction of the current supplied by the battery", "To stop the coil once it has turned through one complete revolution"],
+      "correctIndex": 1,
+      "answer": "To reverse the current in the coil every half turn so that the coil keeps rotating",
+      "explanation": "As the coil turns, the force on each side would otherwise reverse relative to the coil once the plane of the coil reaches the vertical, and the coil would swing to that position and stop. The split-ring commutator reverses the current in the coil at that instant, so the force on each side reverses as well and the coil continues turning in the same direction.",
+      "commonMistake": "Saying the commutator reverses the supply current. It reverses the current in the rotating coil, not in the external circuit."
+    },
+    {
+      "id": "phy-electricity-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Electrical power can be calculated as the product of potential difference and ________, or as the square of the current multiplied by the ________, or as the square of the voltage divided by the resistance.",
+      "answer": "current; resistance",
+      "explanation": "The basic definition is power equals potential difference times current, since power is the rate at which energy is transferred and the voltage is the energy per unit charge. Substituting Ohm's law into that definition gives the two further forms: current squared times resistance when the current is known, and voltage squared divided by resistance when the voltage is known. All three give the same value for the same circuit element.",
+      "commonMistake": "Writing voltage squared times resistance for the third form. It is voltage squared divided by resistance."
+    },
+    {
+      "id": "phy-electricity-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain what is meant by the motor effect, state Fleming's left-hand rule, and describe how a d.c. motor is arranged so that it continues to rotate rather than stopping after half a turn.",
+      "answer": "The motor effect is the force that acts on a conductor carrying a current when it is placed in a magnetic field, and the force acts at right angles to both the conductor and the field. Its magnitude increases with the strength of the field, with the length of the conductor that lies within the field, and with the size of the current, and it is zero if the conductor lies along the field rather than across it. Fleming's left-hand rule gives its direction: the first finger points in the direction of the magnetic field from north to south, the second finger points in the direction of the current along the conductor, and the thumb then points in the direction of the force, and all three are mutually at right angles. In a d.c. motor a rectangular coil carrying a current lies across the field of permanent magnets, and the forces on its two long sides form a couple that turns the coil. Once the plane of the coil reaches the vertical these forces line up and would stop the rotation, so a split-ring commutator is fitted: it reverses the current in the coil at that instant, which reverses the direction of the force on each side, and the couple continues to drive the coil round in the same direction, so the motor keeps rotating instead of merely swinging to and fro.",
+      "explanation": "The effect must be described with the direction and the three factors, the rule must be stated with all three fingers assigned, and the explanation of continuous rotation must name the commutator and the moment at which it acts. Omitting the vertical position leaves the need for the commutator unexplained.",
+      "commonMistake": "Using Fleming's right-hand rule, which is the generator rule. The motor effect is a left-hand rule question."
+    }
+  ]
+}

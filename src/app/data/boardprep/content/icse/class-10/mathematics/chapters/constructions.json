@@ -10,13 +10,28 @@
     "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "Constructions are geometric drawings performed using only a ruler (without measurement markings) and a compass. In ICSE Class X Mathematics, students are expected to perform standard constructions and, crucially, state the geometric justification for each step. This chapter covers the six constructions prescribed by the ICSE syllabus: bisecting a given angle, drawing the perpendicular bisector of a given segment, constructing a line perpendicular to a given line through a given point (on the line and off the line), constructing an angle equal to a given angle, and constructing a triangle given certain conditions. Each construction is presented with clearly numbered steps and a written justification."
+    "intro": "Constructions are geometric drawings performed using only a ruler (without measurement markings) and a compass. In ICSE Class X Mathematics, students are expected to perform standard constructions and, crucially, state the geometric justification for each step. This chapter covers the six constructions prescribed by the ICSE syllabus: bisecting a given angle, drawing the perpendicular bisector of a given segment, constructing a line perpendicular to a given line through a given point (on the line and off the line), constructing an angle equal to a given angle, and constructing a triangle given certain conditions. Each construction is presented with clearly numbered steps and a written justification.",
     "facts": [
-      { "label": "Ruler (no markings)", "value": "Used only to draw straight lines through existing points; never to measure lengths." },
-      { "label": "Compass", "value": "Used to transfer distances and draw arcs/circles; the pencil must not be lifted during a construction step." },
-      { "label": "Perpendicular bisector", "value": "The line that is perpendicular to a segment and passes through its midpoint." },
-      { "label": "Angle bisector", "value": "The ray that divides an angle into two equal angles." },
-      { "label": "Construction vs. drawing", "value": "A construction is justified by geometric reasoning; a drawing may be approximate." }
+      {
+        "label": "Ruler (no markings)",
+        "value": "Used only to draw straight lines through existing points; never to measure lengths."
+      },
+      {
+        "label": "Compass",
+        "value": "Used to transfer distances and draw arcs/circles; the pencil must not be lifted during a construction step."
+      },
+      {
+        "label": "Perpendicular bisector",
+        "value": "The line that is perpendicular to a segment and passes through its midpoint."
+      },
+      {
+        "label": "Angle bisector",
+        "value": "The ray that divides an angle into two equal angles."
+      },
+      {
+        "label": "Construction vs. drawing",
+        "value": "A construction is justified by geometric reasoning; a drawing may be approximate."
+      }
     ]
   },
   "learningOutcomes": [
@@ -34,11 +49,7 @@
       "blocks": [
         {
           "type": "paragraph",
-          "text": "In geometric constructions, we use two tools only: an unmarked ruler (to draw straight lines) and a compass (to draw arcs and circles and to transfer distances). The pencil must remain on the paper during each step — lifting the pencil invalidates the construction. Every construction must be justified: that is, you must give a geometric reason (such as 'triangle congruence', 'properties of isosceles triangles', 'perpendicular bisector theorem', etc.) for why each step works. Constructions are not 'drawings'; they are logically derived positions that must satisfy the stated conditions."
-        },
-        {
-          "type": "diagram",
-          "text": "A blank workspace showing the six construction types with space for step-by-step drawings."
+          "text": "In geometric constructions we use two tools only: an unmarked ruler, to draw straight lines through existing points, and a compass, to draw arcs and circles and to transfer distances. Every position in a construction is determined by logic rather than measurement, so each step must be justified by a geometric reason such as equal radii, properties of isosceles triangles, or triangle congruence. Constructions are not drawings: a drawing may be approximate, but a construction is exact by reasoning."
         },
         {
           "type": "bullets",
@@ -57,25 +68,41 @@
       "title": "Construction 1: Bisect a Given Angle",
       "blocks": [
         {
-          "type": "steps",
-          "text": "Construction: To bisect a given angle ∠ABC (with vertex B).",
-          "steps": [
-            { "step": "1", "text": "With centre B, draw a circle of any radius, cutting the arms BA and BC at points E and F respectively." },
-            { "step": "2", "text": "With centres E and F and the same radius (greater than half EF), draw two circles intersecting at point G (take the intersection inside the angle)." },
-            { "step": "3", "text": "Draw the ray BG. This ray is the bisector of ∠ABC." }
+          "type": "paragraph",
+          "text": "The angle bisector construction copies equal distances onto both arms and then uses them to build two congruent triangles. Begin with the given angle ∠ABC: an arc centred at the vertex creates two equally distant points on the arms, and a second pair of equal arcs from those points fixes a point inside the angle whose joining ray splits ∠ABC exactly in half."
+        },
+        {
+          "type": "table",
+          "caption": "Bisecting ∠ABC",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
           ],
-          "justification": [
-            { "text": "Step 1: Circle centred at B gives BE = BF (radii of the same circle)." },
-            { "text": "Step 2: Circles centred at E and F with equal radii give EG = FG (intersecting circles have equal radii from centres to the intersection point). Also, BE = BF (from step 1)." },
-            { "text": "Step 3: In triangles BEG and BF EG, we have BE = BF, EG = FG, and BG is common. By SSS congruence, ∠EBG = ∠FBG. Hence BG bisects ∠ABC." }
+          "rows": [
+            [
+              "1",
+              "With centre B, draw a circle of any radius, cutting the arms BA and BC at points E and F.",
+              "BE = BF — both are radii of the same circle."
+            ],
+            [
+              "2",
+              "With centres E and F and the same radius (greater than half EF), draw two arcs intersecting at G inside the angle.",
+              "EG = FG — radii of equal circles; the arcs meet because the radius exceeds half EF."
+            ],
+            [
+              "3",
+              "Draw the ray BG. This ray is the bisector of ∠ABC.",
+              "In triangles BEG and BFG: BE = BF, EG = FG, BG common, so △BEG ≅ △BFG (SSS) and ∠EBG = ∠FBG."
+            ]
           ]
         },
         {
           "type": "bullets",
           "items": [
-            "The compass radius in step 2 must be greater than half the distance EF for the circles to intersect.",
-            "The intersection point G must be chosen inside the angle (not outside).",
-            "The justification uses SSS congruence: BE = BF, EG = FG, BG common → ∠EBG = ∠FBG.",
+            "The compass radius in step 2 must be greater than half the distance EF, or the arcs will not intersect.",
+            "The intersection point G must be chosen inside the angle, not outside it.",
+            "The justification uses SSS congruence: BE = BF, EG = FG, BG common, hence ∠EBG = ∠FBG.",
             "Always label the intersection points clearly in your diagram."
           ]
         }
@@ -86,26 +113,42 @@
       "title": "Construction 2: Perpendicular Bisector of a Given Segment",
       "blocks": [
         {
-          "type": "steps",
-          "text": "Construction: To draw the perpendicular bisector of a given line segment AB.",
-          "steps": [
-            { "step": "1", "text": "With centre A and radius greater than half AB, draw a circle." },
-            { "step": "2", "text": "With centre B and the same radius, draw another circle, intersecting the first circle at points C and D." },
-            { "step": "3", "text": "Draw the line CD. This line is the perpendicular bisector of AB." }
+          "type": "paragraph",
+          "text": "The perpendicular bisector of a segment is the line that meets the segment at its midpoint at right angles. Two circles of equal radius centred at the segment’s endpoints meet at two points, and the line through those points is the required bisector: every point on it is equidistant from the endpoints, which is exactly the property the construction exploits."
+        },
+        {
+          "type": "table",
+          "caption": "Perpendicular bisector of segment AB",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
           ],
-          "justification": [
-            { "text": "Step 1: Circle centred at A gives that all points at that radius from A are on the circle." },
-            { "step": "2": "Circle centred at B with the same radius gives that C and D are equidistant from A and B: AC = BC and AD = BD." },
-            { "text": "Step 3: In triangles ACD and BCD, we have AC = BC, AD = BD, and CD is common. By SSS congruence, ∠ACD = ∠BCD and ∠ADC = ∠BDC. Since CD makes adjacent angles on a straight line sum to 180°, each of ∠ACD and ∠BCD is 90°. Hence CD ⟂ AB and M (the intersection of CD and AB) is the midpoint of AB." }
+          "rows": [
+            [
+              "1",
+              "With centre A and a radius greater than half AB, draw a circle.",
+              "The radius condition guarantees the two circles will meet in two points."
+            ],
+            [
+              "2",
+              "With centre B and the same radius, draw a second circle, cutting the first at C and D.",
+              "AC = BC and AD = BD — radii of equal circles."
+            ],
+            [
+              "3",
+              "Draw the line CD. It is the perpendicular bisector of AB; let it meet AB at M.",
+              "△ACD ≅ △BCD (SSS: AC = BC, AD = BD, CD common), so ∠ACD = ∠BCD. Then △ACM ≅ △BCM (SAS), so ∠AMC = ∠BMC; as a linear pair on AB each is 90°, and AM = BM."
+            ]
           ]
         },
         {
           "type": "bullets",
           "items": [
-            "The compass radius must be greater than half AB for the two circles to intersect at two points.",
-            "The line CD is the perpendicular bisector: it is perpendicular to AB and passes through the midpoint.",
-            "The justification uses SSS congruence: AC = BC, AD = BD, CD common.",
-            "The point where CD meets AB is the midpoint of AB."
+            "The compass radius must be greater than half AB, or the two circles will not intersect at two points.",
+            "The line CD is perpendicular to AB and passes through its midpoint M.",
+            "The justification uses SSS congruence first, then a linear-pair argument to turn equal adjacent angles into right angles.",
+            "The same construction locates the midpoint of any segment when only the midpoint is needed."
           ]
         }
       ]
@@ -115,59 +158,68 @@
       "title": "Construction 3: Perpendicular to a Given Line Through a Point",
       "blocks": [
         {
-          "type": "cases",
-          "text": "Case A: The point lies on the given line.",
-          "blocks": [
-            {
-              "type": "steps",
-              "text": "Construction: To draw a line perpendicular to a given line l through a point P on l.",
-              "steps": [
-                { "step": "1", "text": "With centre P, draw a circle of any radius, cutting line l at points Q and R." },
-                { "step": "2", "text": "With centres Q and R and the same radius (greater than QR), draw two circles intersecting at point S (take the intersection on the opposite side of l from P)." },
-                { "step": "3", "text": "Draw the line PS. This line is perpendicular to l." }
-              ],
-              "justification": [
-                { "text": "Step 1: Circle centred at P gives PQ = PR (radii of the same circle)." },
-                { "text": "Step 2: Circles centred at Q and R with equal radii give QS = RS (intersecting circles). Also, PQ = PR (from step 1)." },
-                { "text": "Step 3: In triangles PQS and PRS, we have PQ = PR, QS = RS, and PS is common. By SSS congruence, ∠QPS = ∠RPS. Since ∠QPS and ∠RPS form a linear pair, each is 90°. Hence PS ⟂ l." }
-              ]
-            },
-            {
-              "type": "bullets",
-              "items": [
-                "The two intersection points Q and R must be on opposite sides of P on line l.",
-                "The radius in step 2 must be large enough for the circles to intersect.",
-                "The justification uses SSS congruence: PQ = PR, QS = RS, PS common → ∠QPS = ∠RPS = 90°."
-              ]
-            }
+          "type": "paragraph",
+          "text": "A line can be drawn perpendicular to a given line through a given point whether the point lies on the line or outside it. When the point P is on the line, a circle around P marks two equally distant points on the line and the perpendicular is built from them directly. When P is off the line, the perpendicular bisector of the chord through P supplies the perpendicular."
+        },
+        {
+          "type": "table",
+          "caption": "Case A: P lies on the line l",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
+          ],
+          "rows": [
+            [
+              "1",
+              "With centre P, draw a circle of any radius, cutting line l at Q and R.",
+              "PQ = PR — radii of the same circle."
+            ],
+            [
+              "2",
+              "With centres Q and R and the same radius (greater than QR), draw arcs meeting at S on the opposite side of l from P.",
+              "QS = RS — radii of equal circles."
+            ],
+            [
+              "3",
+              "Draw the line PS. It is perpendicular to l.",
+              "△PQS ≅ △PRS (SSS: PQ = PR, QS = RS, PS common), so ∠QPS = ∠RPS; as a linear pair each is 90°."
+            ]
           ]
         },
         {
-          "type": "cases",
-          "text": "Case B: The point does not lie on the given line.",
-          "blocks": [
-            {
-              "type": "steps",
-              "text": "Construction: To draw a line perpendicular to a given line l through a point P not on l.",
-              "steps": [
-                { "step": "1", "text": "From P, draw a circle cutting line l at two points A and B (the circle must intersect l in two points)." },
-                { "step": "2", "text": "Construct the perpendicular bisector of segment AB (using Construction 2). Let the bisector meet l at point Q." },
-                { "step": "3", "text": "Draw the line PQ. This line is perpendicular to l." }
-              ],
-              "justification": [
-                { "text": "Step 1: Circle centred at P intersects l at A and B, giving PA = PB (radii of the same circle)." },
-                { "text": "Step 2: The perpendicular bisector of AB is constructed (Construction 2), so it is perpendicular to AB and passes through the midpoint of AB. Since A and B lie on l, the bisector is also perpendicular to l." },
-                { "text": "Step 3: The line PQ is the same as the perpendicular bisector of AB (since Q is the intersection of the bisector with l), so PQ ⟂ l." }
-              ]
-            },
-            {
-              "type": "bullets",
-              "items": [
-                "The circle in step 1 must be large enough to intersect line l in two points.",
-                "Construction 2 (perpendicular bisector) is used as a sub-step.",
-                "The justification chains: circle → PA = PB → perp bisector of AB → perpendicular to l."
-              ]
-            }
+          "type": "table",
+          "caption": "Case B: P does not lie on the line l",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
+          ],
+          "rows": [
+            [
+              "1",
+              "With centre P, draw a circle large enough to cut line l at two points A and B.",
+              "PA = PB — radii of the same circle, so P lies on the perpendicular bisector of AB."
+            ],
+            [
+              "2",
+              "Construct the perpendicular bisector of AB (Construction 2); let it meet l at Q.",
+              "By Construction 2 the bisector is perpendicular to AB and passes through its midpoint."
+            ],
+            [
+              "3",
+              "Draw the line PQ. It is perpendicular to l.",
+              "PQ is the perpendicular bisector of AB, and since A and B lie on l the line AB is l itself, so PQ ⟂ l."
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "In Case A the two points Q and R lie on opposite sides of P on the line.",
+            "In Case B the circle centred at P must be large enough to cut l twice.",
+            "Case B chains two constructions: the circle gives PA = PB, then the perpendicular bisector of AB gives the perpendicular.",
+            "In both cases the final justification rests on SSS congruence and the linear-pair property of right angles."
           ]
         }
       ]
@@ -177,120 +229,484 @@
       "title": "Construction 4: Construct an Angle Equal to a Given Angle",
       "blocks": [
         {
-          "type": "steps",
-          "text": "Construction: To construct an angle at point P on line l that is equal to a given angle ∠ABC.",
-          "steps": [
-            { "step": "1", "text": "With centre B, draw a circle of any radius, cutting the arms BA and BC at points E and F respectively." },
-            { "step": "2", "text": "With centre P and the same radius, draw a circle cutting line l at point Q." },
-            { "step": "3", "text": "With centre Q and radius equal to EF, draw a circle cutting the circle from step 2 at point R." },
-            { "step": "4", "text": "Draw the ray PR. The angle ∠RPQ is equal to ∠ABC." }
+          "type": "paragraph",
+          "text": "Copying an angle does not measure the angle — it reproduces the triangle that determines it. The given angle is turned into a triangle by an arc across its arms, and that triangle’s three side lengths are transferred to the new position, where SSS congruence forces the new angle to equal the original."
+        },
+        {
+          "type": "table",
+          "caption": "Copying ∠ABC to a point P on line l",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
           ],
-          "justification": [
-            { "text": "Step 1: Circle centred at B gives BE = BF (radii of the same circle)." },
-            { "text": "Step 2: Circle centred at P with the same radius gives PQ = BE = BF (all radii of circles with equal radii)." },
-            { "text": "Step 3: Circle centred at Q with radius EF gives QR = EF. Also, the arc from step 1 gives chord EF, and the arc from step 3 gives chord QR equal to EF." },
-            { "text": "Step 4: In triangles BEF and PQR, we have BE = PQ, BF = PR (radii of equal circles), and EF = QR (by construction). By SSS congruence, ∠EBF = ∠RPQ. Hence ∠RPQ = ∠ABC." }
+          "rows": [
+            [
+              "1",
+              "With centre B, draw a circle of any radius, cutting the arms BA and BC at E and F.",
+              "BE = BF — radii of the same circle; the chord EF fixes the width of the angle."
+            ],
+            [
+              "2",
+              "With centre P and the same radius, draw a circle cutting line l at Q.",
+              "PQ = BE = BF — radii of equal circles."
+            ],
+            [
+              "3",
+              "With centre Q and radius equal to the chord EF, draw an arc cutting the circle from step 2 at R.",
+              "QR = EF — the compass transfers the chord length exactly."
+            ],
+            [
+              "4",
+              "Draw the ray PR. The angle ∠RPQ equals ∠ABC.",
+              "In triangles BEF and PQR: BE = PQ, BF = PR (radii of equal circles), EF = QR (by construction), so △BEF ≅ △PQR (SSS) and ∠EBF = ∠RPQ."
+            ]
           ]
         },
         {
           "type": "bullets",
           "items": [
-            "The radius in step 1 must be chosen so that the circle cuts both arms of the given angle.",
-            "The radius in step 3 must equal the chord EF from step 1, not the radius itself.",
-            "The justification uses SSS congruence: BE = PQ, BF = PR, EF = QR → ∠EBF = ∠RPQ.",
-            "After construction, verify that the new angle measures the same as the given angle using a protractor (for verification only; constructions are not assessed by measurement)."
+            "The radius in step 1 must cut both arms of the given angle.",
+            "The radius in step 3 must equal the chord EF from step 1 — not the radius of the first arc.",
+            "The justification uses SSS congruence: BE = PQ, BF = PR, EF = QR, hence ∠EBF = ∠RPQ.",
+            "A protractor may verify the copy afterwards, but verification is not part of the construction."
           ]
         }
       ]
     },
     {
       "id": "construct-5-triangle-sum-two-sides",
-      "title": "Construction 5: Construct a Triangle Given Base, One Base Angle, and Sum of the Other Two Sides",
+      "title": "Construction 5: Triangle Given Base, Base Angle and the Sum of the Other Two Sides",
       "blocks": [
         {
-          "type": "steps",
-          "text": "Construction: To construct triangle ABC given base BC, base angle ∠B, and the sum AB + AC.",
-          "steps": [
-            { "step": "1", "text": "Draw the base BC." },
-            { "step": "2", "text": "At point B, construct the given angle ∠CBX (ray BX on one side of BC)." },
-            { "step": "3", "text": "On ray BX, mark point D such that BD = AB + AC (any convenient length, then adjust)." },
-            { "step": "4", "text": "Join D to C." },
-            { "step": "5", "text": "Construct the perpendicular bisector of DC, meeting ray BX at point A." },
-            { "step": "6", "text": "Join A to C. Triangle ABC is the required triangle." }
+          "type": "paragraph",
+          "text": "When a triangle is given by its base, one base angle and the sum of the other two sides, the sum is first carried onto a ray as a single segment. The perpendicular bisector of the chord joining the sum’s endpoint to the far base vertex then folds the sum into the two sides, because every point on the perpendicular bisector is equidistant from its endpoints."
+        },
+        {
+          "type": "table",
+          "caption": "Triangle ABC with base BC, ∠B and AB + AC given",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
           ],
-          "justification": [
-            { "text": "Step 1: Drawing the base BC gives the fixed side." },
-            { "text": "Step 2: Constructing ∠CBX at B gives the fixed base angle." },
-            { "text": "Step 3: Marking BD = AB + AC on the ray ensures that the total length from B to D equals the given sum." },
-            { "text": "Step 5: A lies on the perpendicular bisector of DC, so AD = AC (property of perpendicular bisector). Since BD = AB + AC, we have AB = BD − AD = BD − AC, which gives AB + AC = BD, the given sum." },
-            { "text": "Step 6: Triangle ABC is formed with base BC, base angle ∠B (since A lies on ray BX), and AB + AC = BD (the given sum)." }
+          "rows": [
+            [
+              "1",
+              "Draw the base BC of the given length.",
+              "BC is fixed exactly by measurement of the given length with the compass."
+            ],
+            [
+              "2",
+              "At B, construct angle ∠CBX equal to the given base angle (Construction 4).",
+              "The copied angle fixes the direction of the side BA."
+            ],
+            [
+              "3",
+              "On ray BX, mark point D with BD = AB + AC.",
+              "The compass transfers the given sum as one length onto the ray."
+            ],
+            [
+              "4",
+              "Join D to C.",
+              "Segment DC is the chord whose bisector will locate A."
+            ],
+            [
+              "5",
+              "Construct the perpendicular bisector of DC, meeting ray BX at A.",
+              "Every point of the bisector is equidistant from D and C, so AD = AC."
+            ],
+            [
+              "6",
+              "Join A to C. Triangle ABC is the required triangle.",
+              "D lies between B and A, so AB = BD − AD = BD − AC, giving AB + AC = BD; A is on ray BX, so ∠CBA is the given angle."
+            ]
           ]
         },
         {
           "type": "bullets",
           "items": [
-            "The length BD in step 3 must be set to the given sum AB + AC. In practice, any convenient length can be used, and the construction adjusts via the perpendicular bisector.",
-            "The perpendicular bisector of DC is key: any point on it is equidistant from D and C.",
-            "The justification chains: A on perp bisector of DC → AD = AC → AB = BD − AC → AB + AC = BD.",
-            "This construction works only if the given sum AB + AC > BC (triangle inequality)."
+            "The length BD must equal the given sum AB + AC — it is transferred with the compass, not guessed.",
+            "The perpendicular bisector of DC is the heart of the construction: any point on it is equidistant from D and C.",
+            "The justification chains: A on the bisector gives AD = AC, then AB = BD − AC gives AB + AC = BD.",
+            "The construction is possible only when the given sum AB + AC exceeds BC (triangle inequality)."
           ]
         }
       ]
     },
     {
       "id": "construct-6-triangle-difference-two-sides",
-      "title": "Construction 6: Construct a Triangle Given Base, One Base Angle, and Difference of the Other Two Sides",
+      "title": "Construction 6: Triangle Given Base, Base Angle and the Difference of the Other Two Sides",
       "blocks": [
         {
-          "type": "cases",
-          "text": "Case 1: AB > AC (the difference AB − AC is given).",
-          "blocks": [
-            {
-              "type": "steps",
-              "text": "Construction: To construct triangle ABC given base BC, base angle ∠B, and the difference AB − AC.",
-              "steps": [
-                { "step": "1", "text": "Draw the base BC." },
-                { "step": "2", "text": "At point B, construct the given angle ∠CBX (ray BX on one side of BC)." },
-                { "step": "3", "text": "On ray BX, mark point D such that BD = AB − AC (mark the difference length from B towards X)." },
-                { "step": "4", "text": "Join D to C." },
-                { "step": "5", "text": "Construct the perpendicular bisector of DC, meeting ray BX at point A (on the side of D towards X)." },
-                { "step": "6", "text": "Join A to C. Triangle ABC is the required triangle." }
-              ],
-              "justification": [
-                { "text": "Step 1: Drawing the base BC gives the fixed side." },
-                { "text": "Step 2: Constructing ∠CBX at B gives the fixed base angle." },
-                { "text": "Step 3: Marking BD = AB − AC on the ray ensures that the length from B to D equals the given difference." },
-                { "text": "Step 5: A lies on the perpendicular bisector of DC, so AD = AC. Since BD = AB − AC, we have AB = BD + AD = BD + AC, which gives AB − AC = BD, the given difference." },
-                { "text": "Step 6: Triangle ABC is formed with base BC, base angle ∠B, and AB − AC = BD (the given difference)." }
-              ]
-            },
-            {
-              "type": "bullets",
-              "items": [
-                "The length BD in step 3 must be set to the given difference AB − AC.",
-                "The perpendicular bisector of DC ensures AD = AC.",
-                "The justification chains: A on perp bisector of DC → AD = AC → AB = BD + AC → AB − AC = BD.",
-                "This construction works only if the given difference satisfies the triangle inequality: AB − AC < BC < AB + AC."
-              ]
-            }
+          "type": "paragraph",
+          "text": "The difference construction mirrors the sum construction. When AB exceeds AC the difference AB − AC is marked along the ray itself; when AC exceeds AB the ray is produced backwards and the difference AC − AB is marked behind the vertex. In both cases the perpendicular bisector of DC locates A so that AD = AC."
+        },
+        {
+          "type": "table",
+          "caption": "Case 1: AB > AC, with the difference AB − AC given",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
+          ],
+          "rows": [
+            [
+              "1",
+              "Draw the base BC of the given length.",
+              "BC is fixed exactly by the compass transfer."
+            ],
+            [
+              "2",
+              "At B, construct angle ∠CBX equal to the given base angle (Construction 4).",
+              "The copied angle fixes the direction of the side BA."
+            ],
+            [
+              "3",
+              "On ray BX, mark point D with BD = AB − AC.",
+              "The compass transfers the given difference onto the ray."
+            ],
+            [
+              "4",
+              "Join D to C.",
+              "Segment DC is the chord whose bisector will locate A."
+            ],
+            [
+              "5",
+              "Construct the perpendicular bisector of DC, meeting ray BX at A beyond D.",
+              "A is equidistant from D and C, so AD = AC."
+            ],
+            [
+              "6",
+              "Join A to C. Triangle ABC is the required triangle.",
+              "D lies between B and A, so AB = BD + AD = BD + AC, giving AB − AC = BD; A is on ray BX, so ∠CBA is the given angle."
+            ]
           ]
         },
         {
-          "type": "cases",
-          "text": "Case 2: AC > AB (the difference AC − AB is given).",
-          "blocks": [
-            {
-              "type": "steps",
-              "text": "Construction: To construct triangle ABC given base BC, base angle ∠B, and the difference AC − AB.",
-              "steps": [
-                { "step": "1", "text": "Draw the base BC." },
-                { "step": "2", "text": "At point B, construct the given angle ∠CBX (ray BX on one side of BC)." },
-                { "step": "3", "text": "On ray BX, mark point D such that CD = AC − AB (from C towards X, but the construction is adjusted). Actually, the standard approach uses a different marking. Let me provide the correct construction." }
-              ]
-            }
+          "type": "table",
+          "caption": "Case 2: AC > AB, with the difference AC − AB given",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
+          ],
+          "rows": [
+            [
+              "1",
+              "Draw the base BC and construct ∠CBX at B as in Case 1.",
+              "The base and the base angle are fixed by the first two steps."
+            ],
+            [
+              "2",
+              "Produce the ray XB backwards through B, and mark D on this extension with BD = AC − AB.",
+              "The compass transfers the given difference behind the vertex, so B lies between D and the ray."
+            ],
+            [
+              "3",
+              "Join D to C.",
+              "Segment DC is the chord whose bisector will locate A."
+            ],
+            [
+              "4",
+              "Construct the perpendicular bisector of DC, meeting the ray BX at A.",
+              "A is equidistant from D and C, so AD = AC."
+            ],
+            [
+              "5",
+              "Join A to C. Triangle ABC is the required triangle.",
+              "D, B, A are collinear in that order, so AD = AB + BD = AB + (AC − AB) = AC, and A stays on ray BX so ∠CBA is the given angle."
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The only difference between the two cases is where D is marked: on the ray when AB > AC, on XB produced behind B when AC > AB.",
+            "In both cases the perpendicular bisector of DC enforces AD = AC.",
+            "The justification chains: A on the bisector gives AD = AC, and the collinearity of D, B, A converts that into the required difference.",
+            "The construction fails if the marked point D makes DC perpendicular to BX, because then the bisector is parallel to the ray."
           ]
         }
       ]
+    },
+    {
+      "id": "construct-7-triangle-sss",
+      "title": "Construction 7: Triangle Given All Three Sides (SSS)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When all three side lengths are given, the construction becomes a matter of intersecting two arcs. The longest side is drawn first as the base, and arcs of the remaining two lengths swung from its endpoints must meet — they do whenever the three lengths satisfy the triangle inequality — and the meeting point is the third vertex."
+        },
+        {
+          "type": "table",
+          "caption": "Triangle ABC with sides BC = a, AC = b and AB = c given",
+          "columns": [
+            "Step",
+            "Construction",
+            "Justification"
+          ],
+          "rows": [
+            [
+              "1",
+              "Draw the base BC equal to the longest given side.",
+              "The compass transfers the longest side exactly; choosing it as base keeps both arcs short and inside the drawing."
+            ],
+            [
+              "2",
+              "With centre B and radius equal to the second side, draw an arc above BC.",
+              "Every point of this arc is at the given distance AB from B."
+            ],
+            [
+              "3",
+              "With centre C and radius equal to the third side, draw an arc cutting the first arc at A.",
+              "Every point of this arc is at the given distance AC from C; the arcs meet because the three lengths satisfy the triangle inequality."
+            ],
+            [
+              "4",
+              "Join A to B and A to C. Triangle ABC is the required triangle.",
+              "AB and AC equal the given radii by construction and BC is the given base, so all three sides are exactly as required."
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Start from the longest side: the two remaining arcs then meet without swinging across the page.",
+            "The arcs intersect precisely because the three lengths satisfy the triangle inequality — any two sides exceed the third.",
+            "No angle is constructed in this method; the sides determine the triangle completely.",
+            "Verify by comparing each drawn side with the given lengths using the compass, not a ruler."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Bisecting an angle and the perpendicular bisector of a segment",
+      "description": "Left: with centre B an arc cuts the arms of ∠ABC at E and F; equal arcs from E and F meet at G, and ray BG bisects the angle. Right: equal circles centred at A and B meet at C and D; the line CD cuts AB at its midpoint at right angles.",
+      "labels": [
+        "E and F equally far from B",
+        "G inside the angle",
+        "BG bisects ∠ABC",
+        "C and D equidistant from A and B",
+        "CD ⟂ AB at its midpoint"
+      ]
+    },
+    {
+      "caption": "Figure: Triangle constructions from base, angle, and sum or difference of sides",
+      "description": "For AB + AC the point D lies on the ray with BD = the given sum, and A is where the perpendicular bisector of DC meets the ray. For AC − AB the point D lies on XB produced behind B with BD = the given difference, and the same bisector locates A with AD = AC.",
+      "labels": [
+        "BD = AB + AC on the ray",
+        "A from the perpendicular bisector of DC",
+        "BD = AC − AB behind B",
+        "AD = AC in both cases"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Only an unmarked ruler and a compass are permitted: the ruler draws lines through points, the compass draws arcs and transfers distances.",
+    "Every construction step needs a written justification — usually equal radii together with SSS congruence.",
+    "In bisector constructions the second pair of arcs must have radius greater than half the distance between the centres, or they will not meet.",
+    "Angle bisector: BE = BF and EG = FG as radii, BG common, so △BEG ≅ △BFG (SSS) and ∠EBG = ∠FBG.",
+    "Perpendicular bisector: △ACD ≅ △BCD (SSS) gives equal angles at C and D, and the linear-pair argument turns them into right angles at the midpoint.",
+    "Copying an angle transfers the chord EF, not the arc radius, so the copied triangle is congruent by SSS.",
+    "Sum construction: BD = AB + AC on the ray and A from the perpendicular bisector of DC guarantee AD = AC, so AB + AC = BD.",
+    "Difference construction: mark BD = AB − AC on the ray when AB > AC, and BD = AC − AB on XB produced when AC > AB; the bisector of DC again gives AD = AC.",
+    "SSS triangle construction: draw the longest side, swing arcs of the other two lengths from its endpoints, and join the intersection — possible exactly when the triangle inequality holds."
+  ],
+  "examFocus": [
+    "Number your steps and label every point; an unlabelled construction loses method marks even when the drawing is correct.",
+    "The justification must name the congruence criterion (usually SSS) and list the equal lengths that supply it.",
+    "Sum and difference questions often carry a follow-up “prove that AB + AC = BD”; the perpendicular-bisector property AD = AC is the whole proof.",
+    "State the validity conditions when asked why a construction may fail: the arc radius must exceed half the chord, and the given sides must satisfy the triangle inequality."
+  ],
+  "vocabulary": [
+    {
+      "word": "Construction",
+      "meaning": "A geometric drawing made with unmarked ruler and compass only, in which every position is logically determined."
+    },
+    {
+      "word": "Bisector",
+      "meaning": "A ray or line that divides an angle or a segment into two equal parts."
+    },
+    {
+      "word": "Perpendicular bisector",
+      "meaning": "The line perpendicular to a segment at its midpoint; every point on it is equidistant from the segment’s endpoints."
+    },
+    {
+      "word": "Justification",
+      "meaning": "The geometric reason — equal radii, congruent triangles — that proves a construction step works."
+    },
+    {
+      "word": "Chord",
+      "meaning": "The straight-line segment joining two points on an arc; the distance transferred when an angle is copied."
+    },
+    {
+      "word": "Linear pair",
+      "meaning": "Two adjacent angles on a straight line; they sum to 180°, turning equal adjacent angles into right angles."
+    },
+    {
+      "word": "SSS congruence",
+      "meaning": "The criterion that triangles with three corresponding equal sides are congruent; the workhorse of construction proofs."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-constr-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which pair of tools is permitted in ruler-and-compass constructions?",
+      "options": [
+        "An unmarked ruler and a compass",
+        "A marked ruler and a protractor",
+        "A compass and a protractor",
+        "A set square and a ruler"
+      ],
+      "correctIndex": 0,
+      "answer": "An unmarked ruler and a compass",
+      "explanation": "Constructions rely on transferring distances with the compass and drawing straight lines through points with the unmarked ruler; measuring marks or angle-measuring tools would turn the construction into an approximate drawing rather than an exact, justifiable construction.",
+      "commonMistake": "Using a protractor to check angles during the construction instead of justifying the steps geometrically."
+    },
+    {
+      "id": "icse-10-math-q-constr-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the perpendicular bisector construction of segment AB, why must the compass radius exceed half of AB?",
+      "options": [
+        "So that the two circles intersect at two points",
+        "So that the line CD is drawn straight",
+        "So that the midpoint lies on AB",
+        "So that the construction uses less compass work"
+      ],
+      "correctIndex": 0,
+      "answer": "So that the two circles intersect at two points",
+      "explanation": "Circles centred at A and B with a common radius r meet only when 2r > AB, that is r > AB/2. With r ≤ AB/2 the circles touch at a single point on AB or stay apart, and the points C and D — and with them the whole construction — are never produced.",
+      "commonMistake": "Choosing a radius equal to half of AB, which makes the circles touch at one point on AB itself."
+    },
+    {
+      "id": "icse-10-math-q-constr-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the angle-bisector construction of ∠ABC, the justification that ∠EBG = ∠FBG rests on:",
+      "options": [
+        "SSS congruence of triangles BEG and BFG",
+        "ASA congruence of triangles BEG and BFG",
+        "RHS congruence of triangles BEG and BFG",
+        "The angle at the centre theorem"
+      ],
+      "correctIndex": 0,
+      "answer": "SSS congruence of triangles BEG and BFG",
+      "explanation": "BE = BF as radii of the circle centred at B, EG = FG as radii of the equal circles centred at E and F, and BG is common to both triangles. Three pairs of equal sides give congruence by SSS, and the corresponding angles at B are therefore equal.",
+      "commonMistake": "Quoting “equal radii” alone without naming the congruent triangles and the criterion."
+    },
+    {
+      "id": "icse-10-math-q-constr-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In the perpendicular bisector construction of segment AB, justify fully: (i) why every point of the line CD is equidistant from A and B, and (ii) why CD is perpendicular to AB.",
+      "answer": "(i) C and D are each obtained at the same compass radius from A and from B, so AC = BC and AD = BD; with CD common, △ACD ≅ △BCD by SSS, which makes CD the perpendicular bisector of AB — every point of which is equidistant from A and B. (ii) Let M be where CD meets AB. The congruence gives ∠ACM = ∠BCM, so △ACM ≅ △BCM by SAS (AC = BC, CM common, included angles equal); hence ∠AMC = ∠BMC, and as a linear pair on AB they sum to 180°, so each is 90° and CD ⟂ AB.",
+      "explanation": "Two facts are being proved. First, AC = BC and AD = BD (equal radii of the circles drawn from A and B) with CD common give △ACD ≅ △BCD by SSS, so CD is the perpendicular bisector of AB. Second, with M the meeting point of CD and AB, the congruence △ACM ≅ △BCM (SAS) gives ∠AMC = ∠BMC; these adjacent angles lie on the straight line AB, so they sum to 180° and each must be 90°.",
+      "commonMistake": "Stopping after SSS without the linear-pair argument that turns the equal adjacent angles into right angles."
+    },
+    {
+      "id": "icse-10-math-q-constr-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the construction that copies ∠ABC to a point P on a line, why must the arc drawn from Q have radius equal to the chord EF — and not the radius of the first arc?",
+      "answer": "The chord EF is the straight-line distance between the two points where the first arc meets the arms of ∠ABC. Reproducing that distance from Q, with QR = EF, together with PQ = BE and PR = BF (radii of equal circles) makes triangles BEF and PQR congruent by SSS, and the congruence is what forces ∠RPQ to equal ∠ABC.",
+      "explanation": "The compass must transfer the chord length EF rather than the arc’s radius. With PQ = BE and PR = BF (radii of equal circles) and QR = EF (transferred chord), △BEF ≅ △PQR by SSS, so the angle at P equals the angle at B. Transferring any other length produces a different angle at P.",
+      "commonMistake": "Setting the compass to the arc radius instead of the chord EF in step 3."
+    },
+    {
+      "id": "icse-10-math-q-constr-06",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In the construction of triangle ABC given base BC, base angle ∠B and the sum AB + AC, point A is obtained as the intersection of the perpendicular bisector of DC with the ray BX. Explain why this A satisfies AB + AC = BD.",
+      "answer": "A lies on the perpendicular bisector of DC, so it is equidistant from D and C: AD = AC. The point D lies on the ray BX between B and A, so AB = BD − AD. Substituting AD = AC gives AB = BD − AC, and adding AC to both sides yields AB + AC = BD, the given sum. Since A also lies on the ray BX, the angle at B equals the given base angle, and BC is the given base — so the triangle meets all three conditions.",
+      "explanation": "The construction encodes the sum as a single segment BD on the ray, then uses the perpendicular bisector to split it: every point of the bisector is equidistant from D and C, so the intersection point A automatically satisfies AD = AC. With D between B and A, AB = BD − AD = BD − AC, hence AB + AC = BD exactly.",
+      "commonMistake": "Marking BD equal to AB alone instead of the full sum AB + AC."
+    },
+    {
+      "id": "icse-10-math-q-constr-07",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe the construction of triangle ABC given base BC, base angle ∠B and the difference AC − AB, and justify each step.",
+      "answer": "Draw BC and construct ∠CBX at B as usual. Produce the ray XB backwards through B, and mark D on this extension with BD = AC − AB. Join D to C, and construct the perpendicular bisector of DC; let it meet the ray BX at A, and join A to C. Because A lies on the perpendicular bisector of DC, AD = AC. The points D, B, A are collinear in that order, so AD = AB + BD = AB + (AC − AB) = AC, as required. Since A stays on the ray BX, the angle at B is the given base angle, and BC is the given base — so triangle ABC satisfies all three conditions.",
+      "explanation": "The key difference from the AB − AC case is where D is marked: when AC is the longer side, D goes on XB produced behind B, so that B lies between D and A. The perpendicular bisector of DC again guarantees AD = AC. Collinearity then gives AD = AB + BD; substituting BD = AC − AB produces AD = AB + AC − AB = AC, confirming the construction.",
+      "commonMistake": "Marking D on the forward ray, as in the AB − AC case, instead of producing XB backwards — this yields the wrong difference."
+    },
+    {
+      "id": "icse-10-math-q-constr-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the sum construction (base BC, ∠B and AB + AC given), the perpendicular bisector of DC meets the ray BX at the vertex A because:",
+      "options": [
+        "Every point of the bisector is equidistant from D and C, and the required vertex must satisfy AD = AC",
+        "The perpendicular bisector of any segment meets any ray drawn",
+        "A is the midpoint of DC",
+        "DC is parallel to BX"
+      ],
+      "correctIndex": 0,
+      "answer": "Every point of the bisector is equidistant from D and C, and the required vertex must satisfy AD = AC",
+      "explanation": "The whole construction encodes the condition AB + AC = BD as the single requirement AD = AC: since AB = BD − AD, the equality AB + AC = BD holds exactly when AD = AC. Points with that property are precisely the points of the perpendicular bisector of DC, so the intersection of that bisector with the ray is the required vertex A.",
+      "commonMistake": "Thinking the bisector meets the ray by luck; it meets it precisely because the condition AD = AC is what defines A."
+    },
+    {
+      "id": "icse-10-math-q-constr-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A student bisects ∠ABC but draws the second pair of arcs with a radius less than half of EF. Explain what goes wrong and state the condition that avoids it.",
+      "answer": "Two arcs of equal radius r drawn from centres E and F meet only when 2r > EF. With a radius less than half of EF the arcs stay apart, no point G is produced, and the bisector cannot be drawn. The radius must be chosen greater than half of EF.",
+      "explanation": "Two circles of equal radius r whose centres are EF apart intersect exactly when 2r > EF. A radius of exactly half EF makes them touch at the single midpoint of EF, and anything smaller leaves them apart, so step 2 of the construction stalls. The same radius condition appears in every construction that joins two arcs.",
+      "commonMistake": "Forgetting the radius condition and blaming the compass instead of the chosen radius."
+    },
+    {
+      "id": "icse-10-math-q-constr-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why constructions are assessed by the reasoning given for each step rather than by measurement, and state what a complete answer to “Bisect a given angle” must contain.",
+      "answer": "A construction produces exact positions by geometric logic, not by measurement: the unmarked ruler and compass cannot measure, so correctness comes from the properties used — equal radii, common sides, SSS congruence. A complete answer to “Bisect a given angle” contains: (1) the numbered construction steps, naming every point introduced (centres E and F on the arms, intersection G inside the angle, ray BG); (2) the justification for each step — BE = BF and EG = FG as radii, BG common, then △BEG ≅ △BFG by SSS giving ∠EBG = ∠FBG; and (3) the concluding statement that BG bisects ∠ABC. A protractor may verify the result afterwards, but verification never replaces the reasoning.",
+      "explanation": "Because the tools carry no measurement markings, every length equality in a construction is produced by compass transfers and proved by triangle congruence or circle properties. The examiner therefore marks the correctness of the steps and the stated geometric reasons; a numerically accurate diagram with no written justification scores very little. Naming points consistently and quoting the congruence criterion are what turn a drawing into a proof-supported construction.",
+      "commonMistake": "Presenting an unlabelled diagram with no written justification, or “checking” with a protractor instead of proving."
+    },
+    {
+      "id": "icse-10-math-q-constr-11",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "To construct a triangle with sides 7 cm, 5 cm and 3 cm by the SSS method, which side should be drawn as the base, and why?",
+      "options": [
+        "The 7 cm side, so both arcs meet comfortably within the drawing",
+        "The 3 cm side, to minimise compass spread",
+        "The 5 cm side, for symmetry",
+        "It makes no difference at all"
+      ],
+      "correctIndex": 0,
+      "answer": "The 7 cm side, so both arcs meet comfortably within the drawing",
+      "explanation": "With the longest side as the base, the arcs of radii 5 cm and 3 cm centred at its endpoints must meet because 5 + 3 > 7 — the triangle inequality, which the given lengths satisfy. Starting from the longest side keeps both arcs short and their intersection well inside the page, which is why the convention is to draw the longest side first.",
+      "commonMistake": "Drawing a short base so that the arc centred at the far endpoint swings far across or off the page."
     }
   ]
 }

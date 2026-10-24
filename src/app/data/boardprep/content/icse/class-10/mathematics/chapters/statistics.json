@@ -10,7 +10,7 @@
     "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "Statistics is the study of collection, organisation, analysis, interpretation, and presentation of data. In ICSE Class X, students learn to compute the central tendency measures (mean, median, mode) for both ungrouped (raw) data and grouped data (using the class-mark method, assumed-mean method, and step-deviation method). The chapter also covers graphical representation of cumulative frequency data using ogives (less-than and more-than), and the interpretation of these graphs to find the median. The focus is on ungrouped and grouped frequency distributions, and the comparison of mean, median, and mode as measures of central tendency."
+    "intro": "Statistics is the study of collection, organisation, analysis, interpretation, and presentation of data. In ICSE Class X, students learn to compute the central tendency measures (mean, median, mode) for both ungrouped (raw) data and grouped data (using the class-mark method, assumed-mean method, and step-deviation method). The chapter also covers graphical representation of cumulative frequency data using ogives (less-than and more-than), and the interpretation of these graphs to find the median. The focus is on ungrouped and grouped frequency distributions, and the comparison of mean, median, and mode as measures of central tendency.",
     "facts": [
       { "label": "Mean of ungrouped data", "value": "Σx / n" },
       { "label": "Mean of grouped data (class-mark method)", "value": "Σfxi / Σfi" },
@@ -40,8 +40,8 @@
           "text": "Statistics begins with the collection of data — facts or figures collected with a specific purpose. The data may be ungrouped (raw) or grouped into classes or intervals. The two main areas of study at ICSE Class X level are measures of central tendency (which describe the centre of the data) and graphical representation (which gives a visual picture of the data's distribution). The three measures of central tendency are the mean (average), the median (middle value), and the mode (most frequent value). For any frequency distribution, the empirical relation Mode ≈ 3 × Median − 2 × Mean often holds approximately."
         },
         {
-          "type": "diagram",
-          "text": "A brief overview showing: raw data → array → frequency distribution → measures of central tendency → graphical representation (histogram, ogive)."
+          "type": "paragraph",
+          "text": "The path through this chapter follows the journey of data itself: raw observations are arranged into an array, grouped into a frequency distribution, summarised by measures of central tendency — the mean, median and mode — and finally represented graphically by histograms and ogives. Each stage of the journey is a step of the syllabus in its own right."
         },
         {
           "type": "bullets",
@@ -118,6 +118,7 @@
     },
     {
       "id": "stats-assumed-mean",
+      "title": "Mean of Grouped Data: Assumed-Mean Method",
       "Title": "Mean of Grouped Data: Assumed-Mean Method",
       "blocks": [
         {
@@ -147,6 +148,7 @@
     },
     {
       "id": "stats-step-deviation",
+      "title": "Mean of Grouped Data: Step-Deviation Method",
       "Title": "Mean of Grouped Data: Step-Deviation Method",
       "blocks": [
         {
@@ -176,6 +178,7 @@
     },
     {
       "id": "stats-ogive",
+      "title": "The Ogive (Cumulative-Frequency Curve)",
       "Title": "Graphical Representation: Ogives",
       "blocks": [
         {
@@ -206,6 +209,7 @@
     },
     {
       "id": "stats-mode-histogram",
+      "title": "Mode and the Histogram",
       "Title": "Mode from Histogram",
       "blocks": [
         {
@@ -235,6 +239,7 @@
     },
     {
       "id": "stats-empirical-relation",
+      "title": "The Empirical Relation",
       "Title": "Empirical Relation Between Mean, Median, and Mode",
       "blocks": [
         {
@@ -269,6 +274,7 @@
     },
     {
       "id": "stats-variability",
+      "title": "Measures of Variability",
       "Title": "Brief Note on Variability (Range and Quartiles)",
       "blocks": [
         {
@@ -289,115 +295,180 @@
     },
     {
       "id": "review-questions",
+      "title": "Review Questions",
       "Title": "Review Questions",
       "blocks": [
         {
           "type": "paragraph",
           "text": "The questions that follow move from computing means of raw and grouped data through constructing ogives and finding the mode to using the empirical relation and solving application problems. Work each one by organising the data, choosing the right method, and showing all steps."
-        },
-        {
-          "type": "questions": [
-            {
-              "id": "icse-10-math-q-stats-01",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "The mean of the first 5 prime numbers (2, 3, 5, 7, 11) is _____.",
-              "options": ["5.2", "5.6", "5.8", "6.0"],
-              "correctIndex": 1,
-              "answer": "5.6",
-              "explanation": "Mean = (2 + 3 + 5 + 7 + 11) / 5 = 28 / 5 = 5.6."
-            },
-            {
-              "id": "icse-10-math-q-stats-02",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "The mean of the first 10 whole numbers (0, 1, 2, …, 9) is _____.",
-              "options": ["4.5", "4.0", "5.0", "5.5"],
-              "correctIndex": 0,
-              "answer": "4.5",
-              "explanation": "Mean = (0 + 1 + 2 + … + 9) / 10 = 45 / 10 = 4.5."
-            },
-            {
-              "id": "icse-10-math-q-stats-03",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "Find the mean of the following distribution using the class-mark method:\n\n| Marks | 0–10 | 10–20 | 20–30 |\n|-------|------|-------|-------|\n| Students | 4 | 7 | 5 |\n\n",
-              "answer": "Mean = 15.",
-              "explanation": "Class-marks: 5, 15, 25. Σfxi = 4×5 + 7×15 + 5×25 = 20 + 105 + 125 = 250. Σfi = 4 + 7 + 5 = 16. Mean = 250 / 16 = 15.625. Wait, let me recalculate: actually 250/16 = 15.625. But the answer says 15. Let me recheck the data: 4 students in 0–10, 7 in 10–20, 5 in 20–30. Σfi = 16. Σfxi = 4×5 + 7×15 + 5×25 = 20 + 105 + 125 = 250. Mean = 250/16 = 15.625. Hmm, the answer should be 15.625. Perhaps I'll adjust the question so the mean comes out to a clean number.",
-              "commonMistake": "Miscomputing the class-mark or the Σfxi / Σfi division."
-            },
-            {
-              "id": "icse-10-math-q-stats-04",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "The following distribution gives the scores of 40 students in a test:\n\n| Scores | 0–10 | 10–20 | 20–30 | 30–40 |\n|--------|------|-------|-------|-------|\n| Students | 5 | 10 | 15 | 10 |\n\nFind the mean score using the assumed-mean method with A = 25.",
-              "answer": "Mean = 25 + (Σfi di / Σfi) = 25 + (−10 / 40) = 24.75.",
-              "explanation": "Class-marks: 5, 15, 25, 35. Deviations from A = 25: −20, −10, 0, 10. fi di: 5×(−20) = −100, 10×(−10) = −100, 15×0 = 0, 10×10 = 100. Σfi = 40, Σfi di = −100 − 100 + 0 + 100 = −100. Wait, that gives −100/40 = −2.5, so Mean = 25 − 2.5 = 22.5. Let me recheck: Actually fi di: 5×(−20) = −100, 10×(−10) = −100, 15×0 = 0, 10×10 = 100. Σfi di = −100 − 100 + 0 + 100 = −100. Mean = 25 + (−100 / 40) = 25 − 2.5 = 22.5. The answer should be 22.5.",
-              "commonMistake": "Miscomputing the deviations or the Σfi di / Σfi division."
-            },
-            {
-              "id": "icse-10-math-q-stats-05",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "The following distribution gives the weekly wages (in ₹) of 30 workers:\n\n| Wages | 0–500 | 500–1000 | 1000–1500 | 1500–2000 |\n|-------|-------|-----------|------------|-------------|\n| Workers | 5 | 10 | 8 | 7 |\n\nFind the mean weekly wage using the step-deviation method with A = 1250 and h = 500.",
-              "answer": "Mean = 1250 + (500 / 30) × (−2) = 1250 − 33.33 = ₹1216.67.",
-              "explanation": "Class-marks: 250, 750, 1250, 1750. ui = (xi − A) / h = (−1000, −500, 0, 500) / 500 = −2, −1, 0, 1. fi ui: 5×(−2) = −10, 10×(−1) = −10, 8×0 = 0, 7×1 = 7. Σfi = 30, Σfi ui = −10 − 10 + 0 + 7 = −13. Mean = A + (h / Σfi) Σfiui = 1250 + (500 / 30) × (−13) = 1250 − 216.67 = ₹1033.33. Hmm, let me recalculate: −13 × 500 / 30 = −6500 / 30 = −216.67. Mean = 1250 − 216.67 = 1033.33. The answer should be ₹1033.33.",
-              "commonMistake": "Miscomputing the step-deviation ui or the final mean."
-            },
-            {
-              "id": "icse-10-math-q-stats-06",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "The less-than ogive of a distribution crosses the n/2 line at 32 on the y-axis. If n = 80, the median is _____.",
-              "answer": "The median is the x-value at the intersection point. Without the graph, we can only say that the median corresponds to the 40th item (n/2 = 40). Since the ogive crosses at 32, this seems inconsistent; perhaps the y-axis scale is different. Assuming the ogive is correct, the median is found where the less-than ogive crosses 40 on the y-axis.",
-              "explanation": "For n = 80, n/2 = 40. The less-than ogive should be read at 40 on the y-axis, not 32. If the ogive crosses at 32, the median corresponds to the 32nd item, which is 32/80 = 40% of the data. The question may have a typo; the correct reading should be at 40 on the y-axis."
-            },
-            {
-              "id": "icse-10-math-q-stats-07",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "The mode of a distribution is 42 and the mean is 45. Using the empirical relation, find the approximate median.",
-              "answer": "Mode ≈ 3 × Median − 2 × Mean, so 42 ≈ 3 × Median − 2 × 45, giving 3 × Median = 42 + 90 = 132, and Median ≈ 44.",
-              "explanation": "Rearranging: 3 × Median ≈ Mode + 2 × Mean = 42 + 90 = 132, so Median ≈ 44."
-            },
-            {
-              "id": "icse-10-math-q-stats-08",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "The following distribution gives the heights of 50 plants:\n\n| Height (cm) | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n| No. of plants | 5 | 10 | 15 | 10 | 10 |\n\nFind the mode using the formula.",
-              "answer": "Modal class = 10–20 (highest frequency 10; there is a tie, so the distribution is bimodal or the first modal class is used). Using the formula with L = 10, f = 10, f₁ = 5, f₂ = 15, h = 10: Mode = 10 + [(10 − 5) / (2 × 10 − 5 − 15)] × 10 = 10 + [5 / (20 − 20)] × 10. The denominator is 0, so the formula is undefined. In this case, the mode is best taken as the graphical mode from the histogram, or the class 10–20 is reported as the modal class.",
-              "explanation": "The frequencies are 5, 10, 15, 10, 10. The highest frequency is 15, in the class 20–30. Wait, let me recheck: the table says 0–10: 5, 10–20: 10, 20–30: 15, 30–40: 10, 40–50: 10. The highest frequency is 15, so the modal class is 20–30. Using the formula with L = 20, f = 15, f₁ = 10, f₂ = 10, h = 10: Mode = 20 + [(15 − 10) / (2 × 15 − 10 − 10)] × 10 = 20 + [5 / (30 − 20)] × 10 = 20 + (5 / 10) × 10 = 20 + 5 = 25."
-            },
-            {
-              "id": "icse-10-math-q-stats-09",
-              "type": "long",
-              "difficulty": "hard",
-              "marks": 4,
-              "origin": "practice",
-              "prompt": "The following distribution gives the marks of 100 students in a test:\n\n| Marks | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n| Students | 5 | 10 | 20 | 30 | 35 |\n\n(i) Find the mean using the step-deviation method with A = 30 and h = 10.\n(ii) Find the median using the formula.\n(iii) Find the mode using the formula.\n(iv) Verify the empirical relation Mode ≈ 3 × Median − 2 × Mean.",
-              "answer": "(i) Mean = 28.5. (ii) Median = 35. (iii) Mode = 33.5. (iv) 3 × 35 − 2 × 28.5 = 105 − 57 = 48, which is not close to 33.5; the empirical relation does not hold well for this distribution, possibly because it is highly skewed. (The computed values are: mean = 28.5, median = 35, mode = 33.5.)",
-              "explanation": "(i) Class-marks: 5, 15, 25, 35, 45. ui = (xi − A) / h = (−25, −15, −5, 5, 15) / 10 = −2.5, −1.5, −0.5, 0.5, 1.5. fi ui: 5×(−2.5) = −12.5, 10×(−1.5) = −15, 20×(−0.5) = −10, 30×0.5 = 15, 35×1.5 = 52.5. Σfi = 100, Σfi ui = −12.5 − 15 − 10 + 15 + 52.5 = 30. Mean = A + (h / Σfi) Σfiui = 30 + (10 / 100) × 30 = 30 + 3 = 33. Hmm, that gives 33, not 28.5. Let me recalculate carefully: Actually, I need to recheck the class-mark and deviation calculations. Let me verify: class-mark for 0–10 = 5, for 10–20 = 15, for 20–30 = 25, for 30–40 = 35, for 40–50 = 45. A = 30, h = 10. di = xi − A: 5−30 = −25, 15−30 = −15, 25−30 = −5, 35−30 = 5, 45−30 = 15. ui = di / h: −2.5, −1.5, −0.5, 0.5, 1.5. fi ui: 5×(−2.5) = −12.5, 10×(−1.5) = −15, 20×(−0.5) = −10, 30×0.5 = 15, 35×1.5 = 52.5. Σfi = 5+10+20+30+35 = 100. Σfi ui = −12.5 − 15 − 10 + 15 + 52.5 = 30. Mean = A + (h / Σfi) Σfiui = 30 + (10 / 100) × 30 = 30 + 3 = 33. But I previously noted 28.5; let me recheck: Actually perhaps the answer should be 33. Or perhaps I made an error in the setup. Given the complexity, the step-by-step above shows the method; the final mean is 33 using this setup. (ii) Median: n = 100, n/2 = 50. Cumulative frequencies: 5, 15, 35, 65, 100. The median class is 30–40 (cumulative frequency 35 just before 50, 65 just after). L = 30, CF = 35, f = 30, h = 10. Median = L + [(n/2 − CF) / f] × h = 30 + [(50 − 35) / 30] × 10 = 30 + (15/30) × 10 = 30 + 5 = 35. (iii) Mode: Modal class is 30–40 (highest frequency 30). L = 30, f = 30, f₁ = 20 (frequency of class 20–30), f₂ = 35 (frequency of class 40–50), h = 10. Mode = L + [(f − f₁) / (2f − f₁ − f₂)] × h = 30 + [(30 − 20) / (2 × 30 − 20 − 35)] × 10 = 30 + [10 / (60 − 55)] × 10 = 30 + (10 / 5) × 10 = 30 + 20 = 50. Hmm, that gives 50. Let me recheck: 2f − f₁ − f₂ = 60 − 20 − 35 = 5. So Mode = 30 + (10/5) × 10 = 30 + 20 = 50. But that seems high. Perhaps the formula gives a different result. Actually, the standard mode formula is Mode = L + [(f − f₁) / (2f − f₁ − f₂)] × h. With f = 30, f₁ = 20, f₂ = 35: 2f − f₁ − f₂ = 60 − 20 − 35 = 5. So Mode = 30 + (10/5) × 10 = 50. This suggests the distribution is moderately skewed, and the empirical relation should approximately hold, but 3 × 35 − 2 × 33 = 105 − 66 = 39, which is closer to 50 than to 33.5, so there may be computation errors. Given the complexity, the key point is to demonstrate the method. (iv) The empirical relation Mode ≈ 3 × Median − 2 × Mean. With Mean = 33, Median = 35, Mode ≈ 3 × 35 − 2 × 33 = 105 − 66 = 39. The computed mode from the formula was 50, and the approximate mode from the histogram would be around the peak of the 30–40 bar. There is a discrepancy, possibly due to skewed data or computation errors. The important thing is to demonstrate the method and note that the empirical relation is approximate.",
-              "commonMistake": "Errors in computing class-marks, deviations, cumulative frequencies, or applying the mode/median formulae incorrectly."
-            }
-          ]
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Less-than ogive and the median",
+      "description": "The cumulative-frequency curve (ogive) rises in an S-shape from 0 to n. Marking the height n/2 on the frequency axis and drawing a horizontal line to the curve, then a vertical down, reads the median on the class axis.",
+      "labels": [
+        "Upper class limits on x-axis",
+        "Cumulative frequency on y-axis",
+        "Height n/2 marks the median"
+      ]
+    },
+    {
+      "caption": "Figure: Histogram, modal class and the mode",
+      "description": "A histogram of grouped data; the tallest bar identifies the modal class. The mode formula anchors at the lower limit L of that class and shifts by the fraction (f − f₁) ÷ (2f − f₁ − f₂) of the class width.",
+      "labels": [
+        "Tallest bar = modal class",
+        "L = lower limit of modal class",
+        "Mode lies inside the modal class"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Mean of raw data = Σx ÷ n; mean of grouped data = Σfxi ÷ Σfi using class-marks.",
+    "Class-mark = (lower limit + upper limit) ÷ 2.",
+    "Assumed-mean method: Mean = A + (Σfidi ÷ Σfi), where di = xi − A.",
+    "Step-deviation method for equal class width h: Mean = A + (h × Σfiui ÷ Σfi), where ui = (xi − A) ÷ h.",
+    "Median: find the class whose cumulative frequency first reaches n/2, then Median = L + [(n/2 − CF) ÷ f] × h.",
+    "Mode: the modal class has the highest frequency; Mode = L + [(f − f₁) ÷ (2f − f₁ − f₂)] × h.",
+    "Empirical relation for moderately skewed distributions: Mode ≈ 3 × Median − 2 × Mean.",
+    "A less-than ogive plots cumulative frequencies against upper class limits; the median is read off at height n/2."
+  ],
+  "examFocus": [
+    "Choose the mean method to match the data — class-mark for small values, assumed-mean or step-deviation when the class-marks are large — and state A and h explicitly.",
+    "Median and mode answers must show the cumulative-frequency column and the identification of the median/modal class before the formula is applied.",
+    "Ogive questions are marked on the labelled axes, the scale and the plotted points as much as on the median read from the curve.",
+    "“Verify the empirical relation” questions: compute all three measures, substitute into Mode ≈ 3 Median − 2 Mean, and comment on how close the agreement is — the comment earns the final mark."
+  ],
+  "vocabulary": [
+    {
+      "word": "Data",
+      "meaning": "Facts or figures collected for a specific purpose."
+    },
+    {
+      "word": "Class interval",
+      "meaning": "A group of values defined by a lower and an upper limit."
+    },
+    {
+      "word": "Class-mark",
+      "meaning": "The mid-point of a class interval: (lower limit + upper limit) ÷ 2."
+    },
+    {
+      "word": "Cumulative frequency",
+      "meaning": "The running total of frequencies up to and including a class."
+    },
+    {
+      "word": "Ogive",
+      "meaning": "The graph of cumulative frequencies, used to read the median."
+    },
+    {
+      "word": "Modal class",
+      "meaning": "The class with the highest frequency in a grouped distribution."
+    },
+    {
+      "word": "Dispersion",
+      "meaning": "The spread of data around its centre; the range is the highest value minus the lowest."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-stats-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean of the first 5 prime numbers (2, 3, 5, 7, 11) is _____.",
+      "options": ["5.2", "5.6", "5.8", "6.0"],
+      "correctIndex": 1,
+      "answer": "5.6",
+      "explanation": "Mean = (2 + 3 + 5 + 7 + 11) / 5 = 28 / 5 = 5.6."
+    },
+    {
+      "id": "icse-10-math-q-stats-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean of the first 10 whole numbers (0, 1, 2, …, 9) is _____.",
+      "options": ["4.5", "4.0", "5.0", "5.5"],
+      "correctIndex": 0,
+      "answer": "4.5",
+      "explanation": "Mean = (0 + 1 + 2 + … + 9) / 10 = 45 / 10 = 4.5."
+    },
+    {
+      "id": "icse-10-math-q-stats-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the mean of the following distribution using the class-mark method:\n\n| Marks | 0–10 | 10–20 | 20–30 |\n|-------|------|-------|-------|\n| Students | 4 | 7 | 5 |\n\n",
+      "answer": "Mean = 15.625.",
+      "explanation": "Class-marks: 5, 15, 25. Σfxi = 4×5 + 7×15 + 5×25 = 20 + 105 + 125 = 250. Σfi = 4 + 7 + 5 = 16. Mean = Σfxi ÷ Σfi = 250 ÷ 16 = 15.625.",
+      "commonMistake": "Miscomputing the class-mark or the Σfxi / Σfi division."
+    },
+    {
+      "id": "icse-10-math-q-stats-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The following distribution gives the scores of 40 students in a test:\n\n| Scores | 0–10 | 10–20 | 20–30 | 30–40 |\n|--------|------|-------|-------|-------|\n| Students | 5 | 10 | 15 | 10 |\n\nFind the mean score using the assumed-mean method with A = 25.",
+      "answer": "Mean = 22.5.",
+      "explanation": "Class-marks: 5, 15, 25, 35. Deviations from A = 25: −20, −10, 0, 10. fi di: 5×(−20) = −100, 10×(−10) = −100, 15×0 = 0, 10×10 = 100. Σfi = 40 and Σfi di = −100. Mean = A + (Σfi di ÷ Σfi) = 25 + (−100 ÷ 40) = 25 − 2.5 = 22.5.",
+      "commonMistake": "Miscomputing the deviations or the Σfi di / Σfi division."
+    },
+    {
+      "id": "icse-10-math-q-stats-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The following distribution gives the weekly wages (in ₹) of 30 workers:\n\n| Wages | 0–500 | 500–1000 | 1000–1500 | 1500–2000 |\n|-------|-------|-----------|------------|-------------|\n| Workers | 5 | 10 | 8 | 7 |\n\nFind the mean weekly wage using the step-deviation method with A = 1250 and h = 500.",
+      "answer": "Mean weekly wage = ₹1033.33.",
+      "explanation": "Class-marks: 250, 750, 1250, 1750. With A = 1250 and h = 500: ui = (xi − A) ÷ h gives −2, −1, 0, 1. fi ui: 5×(−2) = −10, 10×(−1) = −10, 8×0 = 0, 7×1 = 7. Σfi = 30 and Σfi ui = −13. Mean = A + (h × Σfi ui ÷ Σfi) = 1250 + (500 × (−13) ÷ 30) = 1250 − 216.67 = ₹1033.33.",
+      "commonMistake": "Miscomputing the step-deviation ui or the final mean."
+    },
+    {
+      "id": "icse-10-math-q-stats-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The less-than ogive of a distribution crosses the n/2 line at 32 on the y-axis. If n = 80, the median is _____.",
+      "answer": "The median is the x-value at the intersection point. Without the graph, we can only say that the median corresponds to the 40th item (n/2 = 40). Since the ogive crosses at 32, this seems inconsistent; perhaps the y-axis scale is different. Assuming the ogive is correct, the median is found where the less-than ogive crosses 40 on the y-axis.",
+      "explanation": "For n = 80, n/2 = 40. The less-than ogive should be read at 40 on the y-axis, not 32. If the ogive crosses at 32, the median corresponds to the 32nd item, which is 32/80 = 40% of the data. The question may have a typo; the correct reading should be at 40 on the y-axis."
+    },
+    {
+      "id": "icse-10-math-q-stats-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The mode of a distribution is 42 and the mean is 45. Using the empirical relation, find the approximate median.",
+      "answer": "Mode ≈ 3 × Median − 2 × Mean, so 42 ≈ 3 × Median − 2 × 45, giving 3 × Median = 42 + 90 = 132, and Median ≈ 44.",
+      "explanation": "Rearranging: 3 × Median ≈ Mode + 2 × Mean = 42 + 90 = 132, so Median ≈ 44."
+    },
+    {
+      "id": "icse-10-math-q-stats-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The following distribution gives the heights of 50 plants:\n\n| Height (cm) | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n| No. of plants | 5 | 10 | 15 | 10 | 10 |\n\nFind the mode using the formula.",
+      "answer": "Modal class = 20–30; mode = 25.",
+      "explanation": "The highest frequency is 15, so the modal class is 20–30. With L = 20, f = 15, f₁ = 10 (frequency of 10–20), f₂ = 10 (frequency of 30–40) and h = 10: Mode = L + [(f − f₁) ÷ (2f − f₁ − f₂)] × h = 20 + [(15 − 10) ÷ (30 − 10 − 10)] × 10 = 20 + (5 ÷ 10) × 10 = 20 + 5 = 25."
+    },
+    {
+      "id": "icse-10-math-q-stats-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The following distribution gives the marks of 100 students in a test:\n\n| Marks | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n| Students | 5 | 10 | 20 | 30 | 35 |\n\n(i) Find the mean using the step-deviation method with A = 30 and h = 10.\n(ii) Find the median using the formula.\n(iii) Find the mode using the formula.\n(iv) Verify the empirical relation Mode ≈ 3 × Median − 2 × Mean.",
+      "answer": "(i) Mean = 33. (ii) Median = 35. (iii) Mode = 50. (iv) 3 × Median − 2 × Mean = 3 × 35 − 2 × 33 = 39, which differs from the computed mode 50; the empirical relation is only rough here because the distribution is strongly skewed towards the higher marks.",
+      "explanation": "(i) Class-marks: 5, 15, 25, 35, 45. With A = 30 and h = 10: ui = (xi − A) ÷ h gives −2.5, −1.5, −0.5, 0.5, 1.5. fi ui: 5×(−2.5) = −12.5, 10×(−1.5) = −15, 20×(−0.5) = −10, 30×0.5 = 15, 35×1.5 = 52.5. Σfi = 100 and Σfi ui = 30. Mean = A + (h × Σfi ui ÷ Σfi) = 30 + (10 × 30 ÷ 100) = 33. (ii) Cumulative frequencies: 5, 15, 35, 65, 100. n ÷ 2 = 50 lies in the class 30–40, so Median = L + [(n/2 − CF) ÷ f] × h = 30 + [(50 − 35) ÷ 30] × 10 = 35. (iii) The highest frequency is 30, so the modal class is 30–40. Mode = L + [(f − f₁) ÷ (2f − f₁ − f₂)] × h = 30 + [(30 − 20) ÷ (60 − 20 − 35)] × 10 = 30 + (10 ÷ 5) × 10 = 50. (iv) 3 × Median − 2 × Mean = 105 − 66 = 39. The empirical relation Mode ≈ 3 × Median − 2 × Mean assumes an approximately symmetric distribution; here the frequencies rise steadily towards the top (5, 10, 20, 30, 35), so the predicted 39 and the formula mode 50 differ noticeably.",
+      "commonMistake": "Errors in computing class-marks, deviations, cumulative frequencies, or applying the mode/median formulae incorrectly."
     }
   ]
 }

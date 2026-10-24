@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-sound",
+  "title": "Sound",
+  "kind": "physics",
+  "tagline": "How sound travels and reflects, why an echo needs a distance, what resonance is, and what loudness, pitch and quality each describe.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed using the speed of sound in air at 0 degrees Celsius taken as 332 metres per second, rising by about 0.6 metres per second for each degree Celsius. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Sound is a longitudinal wave that needs a material medium, and almost everything practical about it follows from two facts: it reflects like light, and it sets other bodies vibrating. This chapter measures the speed of sound in air and shows how that speed fixes the minimum distance at which an echo can be heard, then treats the reflections that are useful — in a megaphone, a stethoscope or a sound board — and the reflections that are harmful, namely reverberation in a hall. It then separates free from forced vibration and defines resonance as the special case in which the driving frequency matches the natural frequency, before turning to the three qualities we hear: loudness set by amplitude, pitch set by frequency, and quality set by the shape of the wave.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Sound — reflection, echoes, vibration, resonance, loudness, pitch, quality" },
+      { "label": "Nature of sound", "value": "A longitudinal wave that needs a material medium and cannot travel through a vacuum" },
+      { "label": "Speed in air", "value": "About 332 m per second at 0 degrees Celsius, rising about 0.6 m per second per degree" },
+      { "label": "Minimum echo distance", "value": "About 17.2 m at ordinary room temperature" },
+      { "label": "Resonance", "value": "Forced vibration when the driving frequency equals the natural frequency" },
+      { "label": "What we hear", "value": "Loudness from amplitude, pitch from frequency, quality from waveform" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the nature of sound waves and compare the speed of sound in solids, liquids and gases.",
+    "Use the echo condition to calculate distances and the minimum distance for an echo.",
+    "Distinguish natural from forced vibration and explain resonance with an example.",
+    "Describe loudness, pitch and quality in terms of the properties of the sound wave."
+  ],
+  "learn": [
+    {
+      "id": "sound-and-its-speed",
+      "title": "What sound is and how fast it travels",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sound is produced by a vibrating body and travels as a longitudinal wave, in which the particles of the medium oscillate back and forth along the direction the wave travels, producing alternate regions of compression where the particles crowd together and rarefaction where they spread apart. Because those compressions are movements of real material, sound needs a medium to travel through and cannot cross a vacuum, which is the essential difference between it and light. The speed of sound depends on the medium and on its state: it is greatest in solids, where the particles are close and strongly bound so each passes the disturbance quickly to its neighbour, lower in liquids, and lowest in gases. In air the speed is about 332 metres per second at 0 degrees Celsius and rises by roughly 0.6 metres per second for each degree of warming, because the faster-moving molecules transmit the disturbance more readily. Sound also travels faster in warm air than in cold, and faster downwind than upwind because the wind carries the medium itself along with the wave."
+        },
+        {
+          "type": "table",
+          "caption": "Speed of sound in different media",
+          "columns": ["Medium", "Approximate speed", "Relative to air", "Why"],
+          "rows": [
+            ["Air at 0 degrees Celsius", "332 m per second", "Reference", "Particles far apart and weakly bound"],
+            ["Air at 25 degrees Celsius", "347 m per second", "Faster by about 15 m per second", "Warmer molecules transmit the disturbance faster"],
+            ["Water", "About 1500 m per second", "Roughly four to five times faster", "Particles closer together than in air"],
+            ["Steel", "About 5000 m per second", "Roughly fifteen times faster", "Very stiff and closely bound particles"],
+            ["Vacuum", "No sound at all", "—", "There are no particles to carry the disturbance"],
+            ["Downwind in air", "Speed of sound plus wind speed", "Faster", "The moving air carries the wave along with it"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sound is a longitudinal wave: the particles oscillate parallel to the direction of travel.",
+            "A compression is a region of maximum density and pressure; a rarefaction is a region of minimum.",
+            "Sound cannot travel through a vacuum because there is nothing to carry the disturbance.",
+            "Sound travels fastest in solids, then liquids, then gases, because of the closeness and stiffness of the particles.",
+            "In air at 0 degrees Celsius the speed is about 332 metres per second, rising by about 0.6 metres per second per degree.",
+            "Distance equals speed times time, so a sound covering 660 m in 2 s gives a speed of 660 divided by 2 = 330 metres per second.",
+            "Sound travels faster downwind than upwind because the wind adds its own speed to that of the wave.",
+            "A medium must be present for sound to travel, which is why no sound escapes from a ringing bell in a jar from which the air has been pumped."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A man stands 340 m from a cliff and fires a gun; he hears the echo after 2 s. The sound has covered 340 x 2 = 680 m there and back, so the speed is 680 divided by 2 = 340 metres per second.", "note": "Always double the distance, because the sound travels to the obstacle and back again." },
+            { "text": "You hear a railway engine before you see it because sound travels far more slowly than light, so the sound of the horn has been on its way for several seconds while the light has arrived almost instantly.", "note": "The gap between seeing and hearing is a direct measure of the difference between the two speeds." },
+            { "text": "A sailor hears the report of a gun and 4.5 s later the echo from a cliff; the sound covers 332 x 4.5 = 1494 m, so the cliff is 1494 divided by 2 = 747 m away.", "note": "Halve the total distance, since the sound has made the journey twice." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reflection-and-echoes",
+      "title": "Reflection of sound, echoes and reverberation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sound obeys the same law of reflection as light: the angle of incidence equals the angle of reflection, with both measured from the normal to the reflecting surface, and a hard, smooth surface reflects far better than a soft one. An echo is heard when the reflected sound reaches the ear a distinct time after the original, and this requires a minimum distance between the observer and the reflecting surface. The ear needs about a tenth of a second to distinguish a reflected sound from the original, so in that time the sound must travel to the surface and back; with the speed of sound about 345 metres per second at ordinary room temperature, that distance is 345 times 0.1 divided by 2, about 17.2 metres. Any closer and the reflection arrives too soon and simply reinforces the original sound instead of being heard separately, which is why a small room has no echo. Multiple reflections from many surfaces are collectively called reverberation, and in a concert hall a moderate amount improves the sound while too much makes speech unintelligible, so halls are fitted with sound-absorbing materials to control it. Useful reflections are put to work in a megaphone, which concentrates the sound forward, in a stethoscope, which channels it to the ear, and in the curved sound board behind a stage, which directs it towards the audience."
+        },
+        {
+          "type": "table",
+          "caption": "Reflection of sound: the useful and the harmful",
+          "columns": ["Situation", "Kind of reflection", "How it is used or controlled", "Example"],
+          "rows": [
+            ["Echo", "Single clear reflection", "Used to measure distance", "Ranging a cliff or the sea bed with SONAR"],
+            ["Megaphone", "Repeated reflection off a curved surface", "Concentrates the sound in one direction", "Announcements to a crowd"],
+            ["Stethoscope", "Reflections along a tube", "Carries the sound from the chest to the ear", "Listening to heart and lungs"],
+            ["Sound board", "Reflection from a curved wall behind the stage", "Directs sound towards the audience", "Theatre and concert halls"],
+            ["Curved ceiling of a hall", "Focusing of reflections", "Can create dead spots if badly shaped", "Architectural design of auditoria"],
+            ["Reverberation", "Many reflections arriving together", "Controlled by absorbent materials on walls and ceilings", "Curtains, carpets and acoustic tiles"],
+            ["Soft furnishings", "Absorption rather than reflection", "Reduce reverberation and deaden a room", "Rugs, drapes, foam panels"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sound obeys the law of reflection: the angle of incidence equals the angle of reflection.",
+            "A hard, smooth surface reflects sound well; a soft, porous surface absorbs it.",
+            "An echo needs the reflecting surface to be at least about 17.2 m away at ordinary room temperature.",
+            "The tenth-of-a-second requirement is a property of the ear, not of the sound itself.",
+            "Below the minimum distance the reflection merges with the original and is not heard separately.",
+            "Reverberation is the persistence of sound through many reflections in an enclosed space.",
+            "A little reverberation enriches music, while too much makes speech unintelligible.",
+            "Echo ranging is used by bats and by SONAR to find the distance of an object from the time delay.",
+            "The minimum echo distance falls slightly in cold air, because the speed of sound there is lower."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "At 22 degrees Celsius the speed of sound is 332 + 0.6 x 22 = 345.2 m per second, so the minimum distance for a separate echo is 345.2 x 0.1 divided by 2 = 17.26 m.", "note": "Work out the speed at that temperature first, then apply the echo condition." },
+            { "text": "A bat emits a squeak and receives the echo from an insect 0.04 s later; the sound has travelled 340 x 0.04 = 13.6 m, so the insect is 13.6 divided by 2 = 6.8 m away.", "note": "The same halving applies whatever is doing the listening." },
+            { "text": "An empty tiled hall sounds harsh and echoey because its hard walls reflect almost everything, while the same hall with curtains and carpets added sounds clear, because the soft materials absorb the sound instead of reflecting it.", "note": "Absorption is the opposite remedy to adding more reflecting surfaces." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vibration-and-resonance",
+      "title": "Natural vibration, forced vibration and resonance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every elastic body has a natural frequency at which it prefers to vibrate, fixed by its shape, size, mass and tension, and when it is displaced and released it oscillates at that frequency with its amplitude dying away as energy leaks into sound and heat. This is natural or free vibration, and it is what a struck tuning fork or a plucked guitar string does. Forced vibration is different: here an external periodic force drives the body, and the body then vibrates at the frequency of the driver rather than at its own natural frequency, whatever that may be. A tuning fork pressed onto a table makes the table vibrate at the fork's frequency; a bow drawn across a violin string makes the string vibrate at the frequency the bow imposes. Resonance is the special and dramatic case of forced vibration in which the driving frequency happens to equal the natural frequency of the driven body. The two match perfectly, so each swing of the driver arrives just as the body is ready to swing again, and the amplitude builds up steadily to a very large value. This is why a singer can shatter a glass by holding exactly the right note, why soldiers break step on a bridge, and why a radio is tuned by adjusting its circuit until its natural frequency matches that of the incoming signal."
+        },
+        {
+          "type": "table",
+          "caption": "Free vibration, forced vibration and resonance",
+          "columns": ["Type", "What drives the vibration", "Frequency of the body", "Amplitude", "Example"],
+          "rows": [
+            ["Natural (free) vibration", "Nothing — the body was displaced and released", "Its own natural frequency", "Large at first, then decays", "Struck tuning fork, plucked string, swinging pendulum"],
+            ["Forced vibration", "An external periodic force", "The frequency of the driving force", "Usually small", "Table top vibrating under a sounding fork"],
+            ["Resonance", "An external force at the natural frequency", "Still the driving frequency, which now equals the natural one", "Builds up to a very large value", "Singer and glass, soldier and bridge, tuned radio"],
+            ["Beats", "Two frequencies very close together", "Both are present", "Waxing and waning of loudness", "Tuning a piano against a fork"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A body's natural frequency depends on its size, shape, mass and tension, not on how hard it was struck.",
+            "In natural vibration the amplitude starts large and decays as energy is radiated away.",
+            "Forced vibration makes a body follow the driver's frequency, so the natural frequency is not used.",
+            "Resonance is forced vibration with the driving frequency equal to the natural frequency.",
+            "At resonance the amplitude grows with each cycle because every impulse arrives in step with the motion.",
+            "Soldiers break step on a bridge so that their marching frequency cannot coincide with the bridge's natural frequency.",
+            "A singer can crack a glass by sustaining exactly the note that matches the glass's natural frequency.",
+            "A radio is tuned by adjusting an electrical circuit until its natural frequency matches that of the wanted station.",
+            "Beats are heard when two sound sources of slightly different frequencies interfere, giving a periodic rise and fall in loudness."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A pendulum is pushed once and then left alone; it swings at its own natural frequency set by its length, and each push given at a different rate fails to build up the swing, but a push given once per cycle in time with it makes the swing grow steadily.", "note": "That timed build-up is resonance, and it is why the timing matters more than the size of each push." },
+            { "text": "A radio receiver contains circuits whose natural frequency can be varied by the tuning control; when it matches the frequency of a station, that signal is amplified enormously while the others are not, which is what tuning means.", "note": "Resonance is being used to select one signal out of hundreds." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loudness-pitch-quality",
+      "title": "Loudness, pitch and quality",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three separate properties of a sound wave correspond to the three things we hear about it. Loudness depends on the amplitude of the vibration, so a larger displacement of the source sends compressions with greater pressure variations, and the ear and brain register that as greater loudness; loudness is measured in decibels on a logarithmic scale, because the range of intensities the ear handles is enormous. Pitch depends on the frequency, so a source vibrating more rapidly produces more compressions per second and is heard as a higher note; frequency is measured in hertz, and a typical piano spans from about 27.5 hertz to about 4200 hertz. Quality, or timbre, is what allows two instruments playing the same note at the same loudness to be told apart at once, and it depends on the shape of the wave. A tuning fork gives an almost pure tone with a single frequency, whereas a violin or a flute gives the same fundamental together with many overtones or harmonics at different strengths, and it is the particular mixture of overtones that is the instrument's signature. Loudness and pitch can therefore be identical for two sounds while their quality differs completely."
+        },
+        {
+          "type": "table",
+          "caption": "The three attributes of sound",
+          "columns": ["Attribute", "Property of the wave that sets it", "Measured in", "Effect on what we hear"],
+          "rows": [
+            ["Loudness", "Amplitude of the vibration", "Decibel (dB)", "A large amplitude sounds loud; a small one sounds faint"],
+            ["Pitch", "Frequency of the vibration", "Hertz (Hz)", "A high frequency sounds sharp; a low one sounds deep"],
+            ["Quality (timbre)", "Shape of the wave, that is the mixture of overtones", "Not a single number", "Distinguishes a violin from a flute on the same note"],
+            ["Intensity", "Energy carried per unit area", "Watt per square metre", "Closely related to loudness, but on a physical rather than perceived scale"],
+            ["Range of hearing", "Frequency limits of the ear", "Hertz", "About 20 Hz to 20000 Hz for a young human ear"],
+            ["Infrasound", "Below about 20 Hz", "Hertz", "Inaudible to humans, though some animals use it"],
+            ["Ultrasound", "Above about 20000 Hz", "Hertz", "Inaudible to humans; used in imaging and cleaning"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Loudness depends on amplitude; increasing the amplitude of the vibration makes the sound louder.",
+            "Pitch depends on frequency; increasing the frequency raises the note.",
+            "Quality depends on the waveform, which is determined by the overtones present alongside the fundamental.",
+            "Two sounds can share pitch and loudness and still be instantly distinguishable by their quality.",
+            "A tuning fork gives nearly a pure tone because it produces very few overtones.",
+            "The decibel scale is logarithmic because the ear covers an enormous range of intensities.",
+            "The normal human hearing range is about 20 to 20000 hertz, and it narrows with age.",
+            "Infrasound lies below that range and ultrasound above it, so both are inaudible to us.",
+            "Beats are a periodic variation in loudness heard when two frequencies very close together sound at once, and they are used for tuning."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A pianist and a flautist both play middle C at the same loudness, and you can tell them apart instantly because the flute's wave contains a different set of overtones from the piano's, giving a different waveform and therefore a different quality.", "note": "This is the only one of the three attributes that depends on the number of frequencies present." },
+            { "text": "When a piano is tuned against a tuning fork, a beat can be heard as long as the two are slightly out; as the string is tightened the beats slow and finally stop, which means the frequencies have been made equal.", "note": "The disappearance of the beats is the tuning criterion." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A longitudinal sound wave in a tube",
+      "description": "A long horizontal tube with a vibrating piston at the left end. Inside, the particle distribution is drawn as a series of dots whose spacing varies, with crowded regions marked compression and widely spaced regions marked rarefaction. A single arrow above the tube shows the direction the wave travels, and a smaller arrow beside one dot shows a particle oscillating back and forth about its mean position rather than travelling with the wave.",
+      "labels": ["vibrating source", "compression: particles crowded", "rarefaction: particles spread out", "direction the wave travels", "particle oscillates about its position", "longitudinal: the two arrows are parallel"]
+    },
+    {
+      "caption": "Figure: Echo and the minimum distance for hearing one",
+      "description": "Left panel: an observer standing a distance d from a vertical cliff face, with a gun or clapper at the observer's position. A double-headed arrow marks d, and two curved arrows show the sound travelling to the cliff and the echo returning, with a time of 2d divided by v marked. Right panel: the same observer standing very close to the wall, with the reflected arrow returning almost immediately and a caption stating that below about 17.2 m the echo merges with the original sound.",
+      "labels": ["observer", "distance d", "cliff face", "sound out", "echo back", "total path 2d", "time is 2d divided by v", "closer than about 17.2 m no separate echo"]
+    },
+    {
+      "caption": "Figure: Resonance build-up compared with forced vibration off resonance",
+      "description": "Two graphs of amplitude against time driven by the same periodic force. Upper graph: the driving frequency differs from the natural frequency, and the amplitude settles at a modest steady value. Lower graph: the driving frequency equals the natural frequency, and the amplitude grows steadily with each cycle to a much larger value. A small inset shows the two frequencies as matching, with a caption explaining that each impulse arrives in step with the motion.",
+      "labels": ["driving force at a fixed frequency", "off resonance: small steady amplitude", "at resonance: amplitude builds each cycle", "natural frequency equals driving frequency", "each push arrives in step"]
+    }
+  ],
+  "keyPoints": [
+    "Sound is a longitudinal wave consisting of alternate compressions and rarefactions, and it needs a material medium.",
+    "Sound cannot travel through a vacuum, and it travels fastest in solids, then liquids, then gases.",
+    "In air at 0 degrees Celsius the speed is about 332 m per second, rising by about 0.6 m per second for each degree.",
+    "Sound obeys the law of reflection, with the angle of incidence equal to the angle of reflection.",
+    "An echo needs a reflecting surface at least about 17.2 m away, because the ear needs about 0.1 s to separate the sounds.",
+    "Reverberation is the persistence of sound through many reflections, controlled by absorbent materials.",
+    "Natural vibration is at the body's own natural frequency; forced vibration follows the frequency of an external driver.",
+    "Resonance is forced vibration at the natural frequency, and it makes the amplitude build up to a large value.",
+    "Loudness depends on amplitude and is measured in decibels; pitch depends on frequency and is measured in hertz.",
+    "Quality depends on the mixture of overtones, which is what distinguishes one instrument from another on the same note."
+  ],
+  "examFocus": [
+    "In echo problems always double the distance before applying speed equals distance over time, because the sound travels both ways.",
+    "Quote the minimum echo distance with the assumption behind it — a speed near 345 m per second and an ear needing about 0.1 s.",
+    "Separate natural from forced vibration by asking who sets the frequency: the body itself or the driver.",
+    "Resonance answers must state that the driving frequency equals the natural frequency, since that condition is the whole definition.",
+    "When asked to distinguish loudness, pitch and quality, name the wave property for each: amplitude, frequency and waveform."
+  ],
+  "vocabulary": [
+    { "word": "Longitudinal wave", "meaning": "Wave in which the particles oscillate parallel to the direction of travel." },
+    { "word": "Compression", "meaning": "Region of a sound wave where the particles are closest together." },
+    { "word": "Rarefaction", "meaning": "Region of a sound wave where the particles are most widely spaced." },
+    { "word": "Echo", "meaning": "Sound heard a distinct time after the original because of reflection." },
+    { "word": "Reverberation", "meaning": "Persistence of sound in a space due to many reflections." },
+    { "word": "Natural frequency", "meaning": "Frequency at which a body vibrates when disturbed and left alone." },
+    { "word": "Resonance", "meaning": "Large-amplitude forced vibration when the driving frequency equals the natural frequency." },
+    { "word": "Quality", "meaning": "Attribute of sound determined by the mixture of overtones, distinguishing one instrument from another." }
+  ],
+  "questions": [
+    {
+      "id": "phy-sound-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Sound waves are best described as which kind of wave?",
+      "options": ["Transverse, and they can travel through a vacuum", "Longitudinal, and they require a material medium", "Transverse, but they require a material medium", "Longitudinal, and they can travel through a vacuum"],
+      "correctIndex": 1,
+      "answer": "Longitudinal, and they require a material medium",
+      "explanation": "In a sound wave the particles of the medium oscillate back and forth along the same direction as the wave travels, producing compressions and rarefactions, which makes the wave longitudinal. Because those oscillations are movements of real material, sound needs a medium and cannot cross a vacuum at all.",
+      "commonMistake": "Confusing sound with light. Light is transverse and needs no medium; sound is longitudinal and cannot exist without one."
+    },
+    {
+      "id": "phy-sound-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The speed of sound in air at 0 degrees Celsius is about ________ metres per second, and it increases by roughly ________ metres per second for each degree Celsius of warming.",
+      "answer": "332; 0.6",
+      "explanation": "Sound travels at about 332 metres per second in air at freezing, and warmer air transmits it faster because the molecules are moving more quickly, adding about 0.6 metres per second for each degree. At 25 degrees the speed is therefore about 332 + 0.6 x 25 = 347 metres per second.",
+      "commonMistake": "Quoting 340 metres per second as the value at zero degrees. That figure is nearer the value at ordinary room temperature."
+    },
+    {
+      "id": "phy-sound-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A man stands 170 m from a high wall and fires a gun. How long after the report does he hear the echo, taking the speed of sound as 340 m per second?",
+      "options": ["0.5 s", "1.0 s", "2.0 s", "0.25 s"],
+      "correctIndex": 1,
+      "answer": "1.0 s",
+      "explanation": "The sound must travel 170 m to the wall and 170 m back, a total of 340 m, so the time is the distance divided by the speed: 340 divided by 340 = 1.0 s. Failing to double the distance gives 0.5 s, which is the time for the sound to reach the wall alone and would leave no return journey.",
+      "commonMistake": "Forgetting that the sound makes a round trip, which halves the answer."
+    },
+    {
+      "id": "phy-sound-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why a separate echo cannot be heard when you stand closer than about 17 m to a large smooth wall, and calculate the minimum distance at 22 degrees Celsius taking the speed of sound as 332 + 0.6 t metres per second.",
+      "answer": "The ear needs about a tenth of a second to distinguish a reflected sound from the original, so for the echo to be heard separately the sound must travel to the wall and back within that time. If the wall is closer than the corresponding distance, the reflection returns so soon that it merges with the original and simply seems to reinforce it rather than being heard as a second sound. At 22 degrees the speed of sound is 332 + 0.6 x 22 = 332 + 13.2 = 345.2 m per second, so the minimum distance is 345.2 x 0.1 divided by 2 = 17.26 m, which is about 17.3 m.",
+      "explanation": "The explanation must refer to the time the ear needs, and the calculation must first find the speed at that temperature before applying the round-trip condition. Halving the distance travelled is essential, since the sound goes to the wall and back.",
+      "commonMistake": "Multiplying by two instead of halving, which would give 34.5 m instead of the correct minimum."
+    },
+    {
+      "id": "phy-sound-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Distinguish between natural vibration and forced vibration, and explain what happens at resonance, giving one practical example of resonance that is useful and one that is harmful.",
+      "answer": "In natural or free vibration an elastic body is displaced and released, and it then oscillates at its own natural frequency, which is fixed by its size, shape, mass and tension and is quite independent of how hard it was struck; the amplitude is largest at the start and gradually decays as energy is radiated away as sound and heat. In forced vibration an external periodic force acts on the body, and the body then vibrates at the frequency of that driver rather than at its own natural frequency; a tuning fork resting on a table makes the table vibrate at the fork's rate. Resonance is the special case of forced vibration in which the driving frequency equals the natural frequency of the body, and because every push then arrives exactly in step with the existing motion, energy is added each cycle and the amplitude builds up to a large value. A useful example is the tuning of a radio receiver, in which a circuit is adjusted until its natural frequency matches the frequency of the wanted station, so that signal is amplified while others are not; a harmful example is a column of soldiers marching across a bridge, because if their marching frequency were to coincide with the natural frequency of the bridge the amplitude of its vibration would build until the structure was damaged, which is why soldiers are ordered to break step.",
+      "explanation": "The two kinds of vibration must be separated by what sets the frequency, and resonance must be defined by the equality of the two frequencies together with the build-up mechanism. Both examples are required, and each must show why the resonance is useful or harmful rather than merely naming it.",
+      "commonMistake": "Describing resonance as simply 'a large vibration'. It is specifically the case where the driving frequency matches the natural frequency, and without that condition the amplitude stays small."
+    },
+    {
+      "id": "phy-sound-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which property of a sound wave determines its loudness, and which determines its pitch?",
+      "options": ["Amplitude determines loudness; frequency determines pitch", "Frequency determines loudness; amplitude determines pitch", "Waveform determines loudness; wavelength determines pitch", "Amplitude and frequency together determine both"],
+      "correctIndex": 0,
+      "answer": "Amplitude determines loudness; frequency determines pitch",
+      "explanation": "Loudness depends on the amplitude of the vibration, so a larger displacement produces stronger compressions and a louder sound, measured in decibels. Pitch depends on the frequency, so a source vibrating more rapidly gives a higher note, measured in hertz. The waveform determines quality, which is the third attribute.",
+      "commonMistake": "Reversing the two. Amplitude is loudness and frequency is pitch, and the pair is worth learning as a fixed association."
+    },
+    {
+      "id": "phy-sound-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why sound travels faster in steel than in water and faster in water than in air, why a bell ringing in a jar from which the air has been pumped out cannot be heard, and calculate the time taken for the sound of the bell to reach an observer 1700 m away if it could be heard, taking the speed of sound as 340 m per second.",
+      "answer": "Sound travels as a disturbance passed from one particle to the next, so its speed depends on how closely the particles are packed and how strongly they are bound to one another. In a solid the particles are very close together and held rigidly by strong intermolecular forces, so each is quickly pushed back towards its neighbours and the disturbance is transmitted very rapidly, giving about 5000 m per second in steel. In a liquid the particles are closer than in a gas but not rigidly bound, so the speed is intermediate at about 1500 m per second. In a gas the particles are far apart and interact only weakly, so each transfer takes longer and the speed is lowest, about 332 m per second at 0 degrees. A bell cannot be heard in an evacuated jar because the clapper still strikes the bell and the bell still vibrates, but there are no air particles left to carry the compressions and rarefactions to the jar wall and on to the listener, and without a medium no sound can propagate at all. For the distance given, the time is distance divided by speed: 1700 divided by 340 = 5 s.",
+      "explanation": "The comparison must be argued from particle spacing and intermolecular forces rather than asserted, and the evacuated jar must be explained by the absence of a medium rather than by the bell failing to vibrate. The time calculation is straightforward once the round trip is excluded — the question asks only for the outward journey.",
+      "commonMistake": "Saying the bell does not vibrate without air. It vibrates perfectly well; what is missing is the medium to carry the sound onwards."
+    },
+    {
+      "id": "phy-sound-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State two ways in which reflection of sound is put to practical use, and one way in which unwanted reflection is controlled in a concert hall.",
+      "answer": "A megaphone uses repeated reflection from its curved inner surface to concentrate the sound in one direction, so a voice can be heard over a crowd. A stethoscope uses reflection along its tubes to carry the sound of the heart or lungs from the patient's chest to the doctor's ear with little loss. A sound board behind a stage performs a similar function on a larger scale by reflecting the actor's voice forwards towards the audience. Unwanted reflection in a concert hall is controlled by covering walls and ceilings with sound-absorbing materials such as curtains, carpets or acoustic panels, which absorb the sound rather than reflecting it and so reduce reverberation to a level at which music is rich but speech remains clear.",
+      "explanation": "Two uses and one control measure are required, and each use must name the reflecting surface involved. The control measure must involve absorption rather than simply saying the hall is designed well, since the mechanism is the point.",
+      "commonMistake": "Listing the echo itself as a use. An echo is a reflection, but the question asks for practical applications, which need to be named as devices."
+    },
+    {
+      "id": "phy-sound-09",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Resonance occurs when the frequency of the external driving force equals the ________ of the body being driven, and the ________ of the resulting vibration builds up to a large value.",
+      "answer": "natural frequency; amplitude",
+      "explanation": "Resonance is defined by the match between the driving frequency and the body's own natural frequency. Because each impulse then arrives exactly in step with the motion already in progress, energy is added on every cycle instead of being partly cancelled, so the amplitude grows steadily rather than settling at a modest value.",
+      "commonMistake": "Writing 'loudness' for the second blank. Loudness follows from the amplitude, but it is the amplitude itself that builds up."
+    },
+    {
+      "id": "phy-sound-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Why are soldiers ordered to break step when marching across a bridge?",
+      "options": ["Because the bridge would reflect too much sound otherwise", "Because their marching frequency might coincide with the natural frequency of the bridge and set up resonance", "Because the bridge is too narrow for them to march in step", "Because marching in step would make the soldiers hear an echo"],
+      "correctIndex": 1,
+      "answer": "Because their marching frequency might coincide with the natural frequency of the bridge and set up resonance",
+      "explanation": "If the soldiers' marching frequency matched the natural frequency of the bridge, each footfall would arrive in step with the bridge's existing vibration and add energy to it, so the amplitude would build steadily and could damage the structure. Breaking step ensures that the driving frequency never coincides with that of the bridge, so no resonance can develop.",
+      "commonMistake": "Thinking the concern is the total weight of the soldiers. It is the periodic nature of the forcing that matters, not its size."
+    },
+    {
+      "id": "phy-sound-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A ship sends a pulse of sound downwards and receives the echo from the sea bed 0.4 s later. Calculate the depth of the sea at that point if the speed of sound in water is 1500 m per second, explain why SONAR uses sound rather than light, and state what would be heard if the pulse interval were shorter than the echo time.",
+      "answer": "The pulse travels down to the sea bed and back, so the total distance covered in 0.4 s is 1500 x 0.4 = 600 m. The depth is half of that, 600 divided by 2 = 300 m. SONAR uses sound rather than light because light is strongly absorbed and scattered by water, so it penetrates only a short way into the sea, whereas sound waves of suitable frequency travel very long distances through water with relatively little loss, and the speed of sound in water is well known, which allows a depth to be computed from the time delay. If the pulse interval were shorter than the echo time, the second pulse would be emitted before the echo of the first had returned, so the echoes would arrive mixed together and it would not be possible to tell which echo belonged to which pulse; the interval must therefore exceed the echo time for each measurement to be unambiguous.",
+      "explanation": "The depth requires halving the total distance travelled, which is the step most often missed. The choice of sound over light must be justified by the behaviour of light in water, and the final part requires reasoning about overlapping measurements rather than merely stating that a problem occurs.",
+      "commonMistake": "Reporting 600 m as the depth. That is the round-trip distance; the sea bed is half that far down."
+    }
+  ]
+}

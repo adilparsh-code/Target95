@@ -10,7 +10,7 @@
     "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter extends plane geometry to three-dimensional solids. Students learn to compute the surface area and volume of the right circular cylinder, right circular cone, and sphere, as well as combinations of these solids (such as a cylinder with a conical top, or a hemisphere surmounted on a cube). The chapter also covers unit conversions (between cm³, m³, litres, and millilitres) and applies these concepts to real-world problems involving capacity, materials, and packaging."
+    "intro": "This chapter extends plane geometry to three-dimensional solids. Students learn to compute the surface area and volume of the right circular cylinder, right circular cone, and sphere, as well as combinations of these solids (such as a cylinder with a conical top, or a hemisphere surmounted on a cube). The chapter also covers unit conversions (between cm³, m³, litres, and millilitres) and applies these concepts to real-world problems involving capacity, materials, and packaging.",
     "facts": [
       { "label": "Cylinder volume", "value": "V = πr²h" },
       { "label": "Cylinder curved surface area", "value": "CSA = 2πrh" },
@@ -42,8 +42,8 @@
           "text": "Three-dimensional solids occupy space and have two measures: surface area (the total area of the outer surface) and volume (the amount of space enclosed). The solids studied in ICSE Class X are the cylinder, the cone, and the sphere (including its hemisphere). Each solid has specific formulae that must be applied correctly, paying attention to whether the problem asks for curved surface area, total surface area, or volume. The radius (r) is the distance from the centre to the curved surface; the height (h) is the perpendicular distance between the bases (for cylinder and cone); the slant height (l) is the distance from the vertex to a point on the base edge (for cone); and the diameter is twice the radius."
         },
         {
-          "type": "diagram",
-          "text": "Labels on a cylinder: r (radius), h (height), 2h (curved height), l (slant height, applicable to cone). Labels on a cone: r (radius), h (vertical height), l (slant height). Labels on a sphere: r (radius). Labels on a hemisphere: r (radius), curved surface vs. total surface."
+          "type": "paragraph",
+          "text": "Keep the dimensions of each solid firmly in mind: the cylinder is described by its radius r and height h, the cone by its radius r, vertical height h and slant height l related by l² = r² + h², and the sphere and hemisphere by the radius alone. For the hemisphere, remember that the total surface area includes the flat circular face as well as the curved one."
         },
         {
           "type": "table",
@@ -275,118 +275,182 @@
         {
           "type": "paragraph",
           "text": "The questions that follow move from straightforward formula applications through multi-step problems involving combined solids and unit conversions to reasoning about which faces are exposed. Work each one by identifying the solid(s), writing the relevant formula, and substituting the given values."
-        },
-        {
-          "type": "questions": [
-            {
-              "id": "icse-10-math-q-solids-01",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "The volume of a cylinder with radius 3 cm and height 7 cm is _____.",
-              "options": ["42π cm³", "126π cm³", "21π cm³", "84π cm³"],
-              "correctIndex": 1,
-              "answer": "126π cm³",
-              "explanation": "V = πr²h = π × 3² × 7 = π × 9 × 7 = 63π. Wait, that's 63π. Let me recheck: π × 3² × 7 = π × 9 × 7 = 63π. Hmm, but the options don't include 63π. Let me re-examine: actually π × 3² × 7 = π × 9 × 7 = 63π. But 63π is not among the options. Oh wait, 126π = 2 × 63π. I may have made an error. Let me recalculate: V = πr²h = π × 3² × 7 = π × 9 × 7 = 63π. The correct answer should be 63π, but it's not listed. Let me re-examine the options: 42π, 126π, 21π, 84π. None is 63π. This appears to be an error in the question design, but since 126π = 2 × 63π, perhaps the height is 14 cm instead of 7 cm, or the radius is 3√2. Given the options, 126π is the closest to being double the correct value, suggesting a possible typo in the problem statement. For the purpose of this practice set, the intended answer is 126π, assuming the height is 14 cm or there's a factor of 2 somewhere.",
-              "commonMistake": "Misapplying the formula V = πr²h or miscalculating r² × h."
-            },
-            {
-              "id": "icse-10-math-q-solids-02",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "The total surface area of a sphere of radius 7 cm is _____.",
-              "options": ["49π cm²", "98π cm²", "196π cm²", "392π cm²"],
-              "correctIndex": 2,
-              "answer": "196π cm²",
-              "explanation": "SA = 4πr² = 4π × 7² = 4π × 49 = 196π cm²."
-            },
-            {
-              "id": "icse-10-math-q-solids-03",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "Find the curved surface area of a cylinder with radius 5 cm and height 12 cm.",
-              "answer": "CSA = 2πrh = 2π × 5 × 12 = 120π cm².",
-              "explanation": "CSA = 2πrh = 2π × 5 × 12 = 120π cm²."
-            },
-            {
-              "id": "icse-10-math-q-solids-04",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "Find the volume of a cone with radius 4 cm and slant height 5 cm.",
-              "answer": "First find vertical height: h = √(l² − r²) = √(25 − 16) = 3 cm. Then V = (1/3)πr²h = (1/3)π × 16 × 3 = 16π cm³.",
-              "explanation": "The vertical height is found via Pythagoras: h = √(l² − r²) = √(25 − 16) = 3. Then V = (1/3)πr²h = (1/3)π × 16 × 3 = 16π cm³."
-            },
-            {
-              "id": "icse-10-math-q-solids-05",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A hemisphere of radius 3 cm is surmounted on a cube of side 6 cm. Find the total surface area of the combined solid.",
-              "answer": "Cube TSA minus top face + hemisphere curved surface = 5 × 6² + 2π × 3² = 180 + 18π cm².",
-              "explanation": "The cube has 5 exposed faces (top covered by hemisphere): 5 × 36 = 180 cm². The hemisphere contributes its curved surface area only: 2π × 3² = 18π cm². The flat base of the hemisphere is internal and not counted."
-            },
-            {
-              "id": "icse-10-math-q-solids-06",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "Convert 7500 cm³ to litres.",
-              "answer": "7500 cm³ = 7500 / 1000 = 7.5 litres.",
-              "explanation": "Since 1 litre = 1000 cm³, divide by 1000."
-            },
-            {
-              "id": "icse-10-math-q-solids-07",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "Find the volume of a sphere with radius 6 cm.",
-              "answer": "V = (4/3)π × 6³ = (4/3)π × 216 = 288π cm³ ≈ 904.8 cm³.",
-              "explanation": "V = (4/3)πr³ = (4/3)π × 216 = 288π cm³."
-            },
-            {
-              "id": "icse-10-math-q-solids-08",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A cylindrical tank of radius 2 m and height 3 m is filled with water. How many litres of water does it hold? (Use π = 22/7)",
-              "answer": "V = πr²h = (22/7) × 2² × 3 = (22/7) × 12 = 264/7 ≈ 37.71 m³ = 37,710 litres.",
-              "explanation": "V = πr²h = (22/7) × 4 × 3 = 264/7 m³ ≈ 37.71 m³. In litres: 37.71 × 1000 = 37,710 litres."
-            },
-            {
-              "id": "icse-10-math-q-solids-09",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A cone of radius 3 cm and slant height 5 cm is placed on top of a cylinder of radius 3 cm and height 7 cm. Find the total surface area of the combined solid.",
-              "answer": "Cylinder CSA + hemisphere... wait, cone on cylinder: CSA of cylinder + CSA of cylinder bottom base + CSA of cone. CSA cylinder = 2πrh = 2π × 3 × 7 = 42π. Cone CSA = πrl = π × 3 × 5 = 15π. Cylinder bottom base = πr² = 9π. Total = 42π + 15π + 9π = 66π cm².",
-              "explanation": "The combined solid has the cylinder's curved surface (42π), the cylinder's bottom base (9π), and the cone's curved surface (15π). The cylinder's top base and the cone's base are joined and not exposed."
-            },
-            {
-              "id": "icse-10-math-q-solids-10",
-              "type": "long",
-              "difficulty": "hard",
-              "marks": 4,
-              "origin": "practice",
-              "prompt": "A solid toy is in the form of a hemisphere surmounted on a right circular cone. The height of the cone is 4 cm and the diameter of the base is 6 cm. Determine (i) the volume of the solid toy, (ii) the surface area of the solid toy.",
-              "answer": "(i) Volume = volume of cone + volume of hemisphere. Cone: r = 3 cm, h = 4 cm, l = √(3² + 4²) = 5 cm. V_cone = (1/3)πr²h = (1/3)π × 9 × 4 = 12π cm³. Hemisphere: V_hemisphere = (2/3)πr³ = (2/3)π × 27 = 18π cm³. Total V = 12π + 18π = 30π cm³ ≈ 94.2 cm³. (ii) Surface area = CSA of cone + CSA of hemisphere. CSA of cone = πrl = π × 3 × 5 = 15π cm². CSA of hemisphere = 2πr² = 2π × 9 = 18π cm². Total SA = 15π + 18π = 33π cm² ≈ 103.7 cm².",
-              "explanation": "(i) Cone volume: V = (1/3)πr²h = (1/3)π × 3² × 4 = (1/3)π × 9 × 4 = 12π. Hemisphere volume: V = (2/3)πr³ = (2/3)π × 3³ = (2/3)π × 27 = 18π. Total = 30π. (ii) Cone curved surface: CSA = πrl where l = √(r² + h²) = √(9 + 16) = 5, so CSA = π × 3 × 5 = 15π. Hemisphere curved surface: 2πr² = 2π × 3² = 18π. The flat base of the hemisphere and the base of the cone are joined and not exposed. Total = 33π.",
-              "commonMistake": "Including the flat circular base of the hemisphere or the base of the cone in the surface area, which are internal and not exposed."
-            }
-          ]
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Cylinder, cone and sphere with dimensions",
+      "description": "The three solids of the syllabus with their labelled dimensions: the cylinder of radius r and height h, the cone of base radius r, vertical height h and slant height l related by l² = r² + h², and the sphere of radius r.",
+      "labels": [
+        "Cylinder: r, h",
+        "Cone: r, h, l with l² = r² + h²",
+        "Sphere: r"
+      ]
+    },
+    {
+      "caption": "Figure: Combined solids and their exposed surfaces",
+      "description": "A cylinder with a conical top and a hemisphere surmounted on a cube. For each combination only the exposed surfaces count: the joined faces are hidden and must be excluded from the total surface area.",
+      "labels": [
+        "Cylinder + cone: CSA cylinder + CSA cone + base",
+        "Hemisphere on cube: 5 cube faces + curved hemisphere",
+        "Joined faces excluded"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Cylinder: V = πr²h, curved surface area = 2πrh, total surface area = 2πr(h + r).",
+    "Cone: V = ⅓πr²h, curved surface area = πrl, total surface area = πr(l + r), with l² = r² + h².",
+    "Sphere: V = ⁴⁄₃πr³ and surface area = 4πr²; hemisphere: V = ²⁄₃πr³, curved area 2πr², total area 2πr² + πr².",
+    "For a combined solid, count each exposed surface exactly once — joined faces are never included.",
+    "Unit conversions: 1 m = 100 cm, 1 m³ = 1,000,000 cm³, and 1 litre = 1000 cm³.",
+    "Convert units before substituting into the formulae; keep π until the final step and then use 22/7 when r or h is a multiple of 7.",
+    "The slant height links a cone’s height and radius: compute l = √(r² + h²) before any curved-surface formula.",
+    "Casting and melting problems equate volumes of the two shapes — surface areas are never equated."
+  ],
+  "examFocus": [
+    "“Total surface area of a combined solid” questions: sketch the solid and list the exposed surfaces before computing; forgetting or double-counting a joined face is the classic error.",
+    "Capacity questions in litres are volume questions with a unit conversion at the end.",
+    "Painting and sheet-metal problems use surface area; containers and capacity use volume — read carefully which is asked.",
+    "Keep π through the working and substitute 22/7 or 3.14 only at the end to avoid rounding errors."
+  ],
+  "vocabulary": [
+    {
+      "word": "Radius (r)",
+      "meaning": "The distance from the centre of a circular face to its edge."
+    },
+    {
+      "word": "Height (h)",
+      "meaning": "The perpendicular distance between the bases of a cylinder, or from the base to the apex of a cone."
+    },
+    {
+      "word": "Slant height (l)",
+      "meaning": "The distance from the apex of a cone down its side to the base circle; l² = r² + h²."
+    },
+    {
+      "word": "Curved surface area",
+      "meaning": "The area of the lateral curved surface only, excluding the flat bases."
+    },
+    {
+      "word": "Total surface area",
+      "meaning": "The curved surface area plus every exposed flat face."
+    },
+    {
+      "word": "Capacity",
+      "meaning": "The volume of space inside a container, usually measured in litres."
+    },
+    {
+      "word": "Combined solid",
+      "meaning": "A solid built from two or more simple solids joined face to face."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-solids-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume of a cylinder with radius 3 cm and height 7 cm is _____.",
+      "options": ["63π cm³", "126π cm³", "21π cm³", "84π cm³"],
+      "correctIndex": 0,
+      "answer": "63π cm³",
+      "explanation": "V = πr²h = π × 3² × 7 = π × 9 × 7 = 63π cm³. The distractors correspond to common slips: 42π cm³ is the curved surface area 2πrh, 21π cm³ forgets to square the radius, and 126π cm³ doubles the correct product.",
+      "commonMistake": "Misapplying the formula V = πr²h or miscalculating r² × h."
+    },
+    {
+      "id": "icse-10-math-q-solids-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The total surface area of a sphere of radius 7 cm is _____.",
+      "options": ["49π cm²", "98π cm²", "196π cm²", "392π cm²"],
+      "correctIndex": 2,
+      "answer": "196π cm²",
+      "explanation": "SA = 4πr² = 4π × 7² = 4π × 49 = 196π cm²."
+    },
+    {
+      "id": "icse-10-math-q-solids-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the curved surface area of a cylinder with radius 5 cm and height 12 cm.",
+      "answer": "CSA = 2πrh = 2π × 5 × 12 = 120π cm².",
+      "explanation": "CSA = 2πrh = 2π × 5 × 12 = 120π cm²."
+    },
+    {
+      "id": "icse-10-math-q-solids-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the volume of a cone with radius 4 cm and slant height 5 cm.",
+      "answer": "First find vertical height: h = √(l² − r²) = √(25 − 16) = 3 cm. Then V = (1/3)πr²h = (1/3)π × 16 × 3 = 16π cm³.",
+      "explanation": "The vertical height is found via Pythagoras: h = √(l² − r²) = √(25 − 16) = 3. Then V = (1/3)πr²h = (1/3)π × 16 × 3 = 16π cm³."
+    },
+    {
+      "id": "icse-10-math-q-solids-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A hemisphere of radius 3 cm is surmounted on a cube of side 6 cm. Find the total surface area of the combined solid.",
+      "answer": "Cube TSA minus top face + hemisphere curved surface = 5 × 6² + 2π × 3² = 180 + 18π cm².",
+      "explanation": "The cube has 5 exposed faces (top covered by hemisphere): 5 × 36 = 180 cm². The hemisphere contributes its curved surface area only: 2π × 3² = 18π cm². The flat base of the hemisphere is internal and not counted."
+    },
+    {
+      "id": "icse-10-math-q-solids-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Convert 7500 cm³ to litres.",
+      "answer": "7500 cm³ = 7500 / 1000 = 7.5 litres.",
+      "explanation": "Since 1 litre = 1000 cm³, divide by 1000."
+    },
+    {
+      "id": "icse-10-math-q-solids-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the volume of a sphere with radius 6 cm.",
+      "answer": "V = (4/3)π × 6³ = (4/3)π × 216 = 288π cm³ ≈ 904.8 cm³.",
+      "explanation": "V = (4/3)πr³ = (4/3)π × 216 = 288π cm³."
+    },
+    {
+      "id": "icse-10-math-q-solids-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A cylindrical tank of radius 2 m and height 3 m is filled with water. How many litres of water does it hold? (Use π = 22/7)",
+      "answer": "V = πr²h = (22/7) × 2² × 3 = (22/7) × 12 = 264/7 ≈ 37.71 m³ = 37,710 litres.",
+      "explanation": "V = πr²h = (22/7) × 4 × 3 = 264/7 m³ ≈ 37.71 m³. In litres: 37.71 × 1000 = 37,710 litres."
+    },
+    {
+      "id": "icse-10-math-q-solids-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A cone of radius 3 cm and slant height 5 cm is placed on top of a cylinder of radius 3 cm and height 7 cm. Find the total surface area of the combined solid.",
+      "answer": "Total surface area = 42π + 9π + 15π = 66π cm².",
+      "explanation": "The combined solid has the cylinder's curved surface (42π), the cylinder's bottom base (9π), and the cone's curved surface (15π). The cylinder's top base and the cone's base are joined and not exposed."
+    },
+    {
+      "id": "icse-10-math-q-solids-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solid toy is in the form of a hemisphere surmounted on a right circular cone. The height of the cone is 4 cm and the diameter of the base is 6 cm. Determine (i) the volume of the solid toy, (ii) the surface area of the solid toy.",
+      "answer": "(i) Volume = volume of cone + volume of hemisphere. Cone: r = 3 cm, h = 4 cm, l = √(3² + 4²) = 5 cm. V_cone = (1/3)πr²h = (1/3)π × 9 × 4 = 12π cm³. Hemisphere: V_hemisphere = (2/3)πr³ = (2/3)π × 27 = 18π cm³. Total V = 12π + 18π = 30π cm³ ≈ 94.2 cm³. (ii) Surface area = CSA of cone + CSA of hemisphere. CSA of cone = πrl = π × 3 × 5 = 15π cm². CSA of hemisphere = 2πr² = 2π × 9 = 18π cm². Total SA = 15π + 18π = 33π cm² ≈ 103.7 cm².",
+      "explanation": "(i) Cone volume: V = (1/3)πr²h = (1/3)π × 3² × 4 = (1/3)π × 9 × 4 = 12π. Hemisphere volume: V = (2/3)πr³ = (2/3)π × 3³ = (2/3)π × 27 = 18π. Total = 30π. (ii) Cone curved surface: CSA = πrl where l = √(r² + h²) = √(9 + 16) = 5, so CSA = π × 3 × 5 = 15π. Hemisphere curved surface: 2πr² = 2π × 3² = 18π. The flat base of the hemisphere and the base of the cone are joined and not exposed. Total = 33π.",
+      "commonMistake": "Including the flat circular base of the hemisphere or the base of the cone in the surface area, which are internal and not exposed."
     }
   ]
 }

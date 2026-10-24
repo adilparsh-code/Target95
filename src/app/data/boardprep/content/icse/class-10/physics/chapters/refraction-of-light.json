@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-refraction-plane",
+  "title": "Refraction of Light",
+  "kind": "physics",
+  "tagline": "Why light bends when it changes speed, Snell's law, refractive index, critical angle and total internal reflection.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed using the sine and inverse-sine values stated in the working. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Refraction is the bending of light as it passes from one transparent medium to another, and the whole of it follows from one fact: light travels at different speeds in different materials. This chapter starts with the two laws of refraction and the direction of the bend in each case, then introduces refractive index as the ratio that quantifies the effect and shows how it links the angle of incidence to the angle of refraction. From there it derives apparent depth, which is why objects in water look nearer than they are, and then turns to the special case where the bend becomes so severe that the light is turned back into the denser medium altogether — critical angle and total internal reflection, the principle behind optical fibres and the brilliance of a cut diamond.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Refraction of Light — laws, refractive index, critical angle, total internal reflection" },
+      { "label": "Cause", "value": "Light changes speed on passing from one medium to another" },
+      { "label": "Denser medium", "value": "Light slows down and bends towards the normal" },
+      { "label": "Snell's law", "value": "The ratio of the sine of the angle of incidence to the sine of the angle of refraction is constant" },
+      { "label": "Refractive index", "value": "Speed in vacuum divided by speed in the medium; about 1.5 for glass" },
+      { "label": "Critical angle", "value": "Angle of incidence in the denser medium that gives an angle of refraction of 90 degrees" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the two laws of refraction and give the direction of bending in each case.",
+    "Apply Snell's law to calculate an unknown angle, and calculate a refractive index from speeds.",
+    "Explain apparent depth and solve problems involving the shift of an object seen through a slab.",
+    "Define the critical angle, state the two conditions for total internal reflection, and give uses of it."
+  ],
+  "learn": [
+    {
+      "id": "laws-of-refraction",
+      "title": "What refraction is and the two laws that govern it",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Light travels at about 300000000 metres per second in a vacuum, rather more slowly in air, slower again in water and much slower still in glass. When a beam crosses a boundary between two media at an angle, one side of the wavefront changes speed before the other, and the beam swings round in response — this is refraction, and the change of speed is its entire cause. The two laws describe the geometry precisely. The first law states that the incident ray, the refracted ray and the normal at the point of entry all lie in the same plane. The second law, Snell's law, states that for a given pair of media and a given wavelength the ratio of the sine of the angle of incidence to the sine of the angle of refraction is a constant, and that constant is the refractive index of the second medium relative to the first. The direction of the bend depends on which medium is the denser optically: travelling from an optically rarer medium into a denser one, light slows and bends towards the normal, so the angle of refraction is smaller than the angle of incidence; travelling from a denser medium into a rarer one, light speeds up and bends away from the normal, so the angle of refraction is larger. The ray passing straight along the normal is never bent, because it meets the boundary at zero angle to it."
+        },
+        {
+          "type": "table",
+          "caption": "Refraction in the two directions",
+          "columns": ["Direction of travel", "Speed change", "Bending", "Angles"],
+          "rows": [
+            ["Air into glass (rarer to denser)", "Light slows down", "Bends towards the normal", "Angle of refraction smaller than the angle of incidence"],
+            ["Glass into air (denser to rarer)", "Light speeds up", "Bends away from the normal", "Angle of refraction larger than the angle of incidence"],
+            ["Air into water", "Light slows down", "Bends towards the normal", "Water is less optically dense than glass, so the bend is smaller"],
+            ["Along the normal", "Speed still changes", "No bending at all", "Angle of incidence and angle of refraction both zero"],
+            ["Either direction", "—", "Ray path is reversible", "Light retraces the same path if its direction is reversed"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Refraction is caused by the change of speed of light at the boundary, not by any change in the light itself.",
+            "The first law requires the incident ray, the refracted ray and the normal to be coplanar.",
+            "The second law is a statement that the ratio of sines is constant for a given pair of media.",
+            "On entering an optically denser medium the ray bends towards the normal; on leaving it, the ray bends away.",
+            "The normal is an imaginary line drawn at right angles to the surface at the point of incidence.",
+            "Angles are always measured from the normal, never from the surface — this single habit prevents most errors.",
+            "A light ray travelling along the normal passes through undeviated even though its speed changes.",
+            "Refraction is reversible: if the direction of a ray is reversed it retraces its original path exactly."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A swimming pool looks shallower than it is because light from the bottom bends away from the normal as it leaves the water, so the eye traces the ray back along a straight line to a point higher up.", "note": "The eye cannot detect the bend, so it always assumes light travelled in a straight line." },
+            { "text": "A pencil standing in a glass of water appears broken at the surface, with the submerged part displaced sideways, because light from each submerged point is refracted as it leaves the water.", "note": "The apparent break occurs exactly at the boundary, which is where the bending happens." },
+            { "text": "Light travelling from glass back into air follows exactly the reverse of the path it took entering, which is why a ray diagram can be read in either direction.", "note": "Reversibility is a quick way to check a ray diagram for consistency." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refractive-index",
+      "title": "Refractive index and how to use Snell's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Refractive index is a number that tells you how much a material slows light down. Defined through speed, it is the speed of light in a vacuum divided by its speed in the material, so glass with a refractive index of about 1.5 means light travels only two thirds as fast in glass as in a vacuum. Defined through angles, it is the sine of the angle of incidence divided by the sine of the angle of refraction for light entering from a vacuum or from air, which is the form used in calculations. The two definitions agree because the extra time light spends inside a material is exactly what swings the wavefront round. Refractive index has no unit, since it is a ratio of like quantities, and typical values are about 1.33 for water, 1.5 for crown glass, 1.6 to 1.9 for denser flint glass and 2.42 for diamond — the highest of the common transparent materials, which is why diamond bends light so sharply. Snell's law is used by substituting the three known quantities and solving for the fourth, and the sine button on a calculator does the rest; in reverse, taking the inverse sine of a computed ratio gives the angle."
+        },
+        {
+          "type": "table",
+          "caption": "Refractive index of common media",
+          "columns": ["Medium", "Refractive index", "Speed of light in the medium", "Consequence"],
+          "rows": [
+            ["Vacuum", "Exactly 1", "300000000 m per second", "The reference for all refractive indices"],
+            ["Air", "About 1.0003", "Very nearly the vacuum value", "Air is usually treated as equal to a vacuum"],
+            ["Water", "1.33", "225000000 m per second", "Moderate bending; critical angle about 48.8 degrees"],
+            ["Crown glass", "1.5", "200000000 m per second", "Common lens and prism material"],
+            ["Dense flint glass", "1.7", "About 176000000 m per second", "Bends light strongly; used in dense prisms"],
+            ["Diamond", "2.42", "About 124000000 m per second", "Very sharp bending and a small critical angle"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Refractive index equals speed in vacuum divided by speed in the medium, so a larger index means a slower light.",
+            "Refractive index also equals sine of incidence divided by sine of refraction for light entering from air.",
+            "It has no unit because it is the ratio of two speeds or of two sines.",
+            "The greater the refractive index, the more sharply the ray bends on entering the medium.",
+            "The product of refractive index and speed in any medium equals the speed in a vacuum, which is a useful check.",
+            "Apparent depth equals real depth divided by the refractive index when viewing a dense medium from air.",
+            "A refractive index of 1.5 means light takes half as long again to cover a given distance inside the medium.",
+            "Angles must be measured from the normal before either sine is taken."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Light enters glass from air with an angle of incidence of 45 degrees. Since sin 45 = 0.707 and the refractive index is 1.5, sin r = 0.707 divided by 1.5 = 0.471, so r = sin inverse of 0.471 = 28.1 degrees.", "note": "Divide the sine of the incident angle by the index, then invert — never divide the angles themselves." },
+            { "text": "Light travels at 300000000 divided by 1.5 = 200000000 metres per second in glass of refractive index 1.5, which is exactly two thirds of its speed in a vacuum.", "note": "The definition is a ratio of speeds, so rearranging gives speed in the medium directly." },
+            { "text": "An object 15 cm below the surface of a glass block of refractive index 1.5 appears at a depth of 15 divided by 1.5 = 10 cm when viewed from above.", "note": "Apparent depth is always less than real depth when looking into the denser medium." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "critical-angle-and-tir",
+      "title": "Critical angle and total internal reflection",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When light travels from a denser medium into a rarer one it bends away from the normal, so the angle of refraction is always larger than the angle of incidence. As the angle of incidence is steadily increased, the angle of refraction grows faster, and it reaches 90 degrees — the ray grazing along the boundary itself — at one particular angle of incidence called the critical angle for that pair of media. Increase the angle of incidence beyond the critical angle and refraction becomes impossible: no refracted ray can exist with an angle greater than 90 degrees, so all of the light is reflected back into the denser medium. This is total internal reflection, and it requires two conditions to be satisfied together. Light must be travelling from the optically denser medium towards the rarer medium, and the angle of incidence must exceed the critical angle. The critical angle follows directly from Snell's law by putting the angle of refraction equal to 90 degrees: since sin 90 is 1, the sine of the critical angle equals one divided by the refractive index. Diamond's high index gives a critical angle of only about 24 degrees, so light entering a cut diamond is repeatedly totally internally reflected before it escapes, which is the source of its brilliance."
+        },
+        {
+          "type": "table",
+          "caption": "Critical angle for a medium in contact with air",
+          "columns": ["Medium", "Refractive index", "Sine of critical angle", "Critical angle"],
+          "rows": [
+            ["Water", "1.33", "1 divided by 1.33 = 0.752", "48.8 degrees"],
+            ["Crown glass", "1.5", "1 divided by 1.5 = 0.667", "41.8 degrees"],
+            ["Dense flint glass", "1.7", "1 divided by 1.7 = 0.588", "36.0 degrees"],
+            ["Diamond", "2.42", "1 divided by 2.42 = 0.413", "24.4 degrees"],
+            ["Material with index n", "n", "1 divided by n", "sin inverse of 1 over n"]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Refraction", "meaning": "Bending of light as it passes between media of different optical density because its speed changes." },
+            { "term": "Normal", "meaning": "Line drawn at right angles to a surface at the point where a ray meets it; angles are measured from this line." },
+            { "term": "Refractive index", "meaning": "Ratio of the speed of light in a vacuum to its speed in the medium, or the ratio of the sines of the angles." },
+            { "term": "Critical angle", "meaning": "Angle of incidence in the denser medium for which the angle of refraction is exactly 90 degrees." },
+            { "term": "Total internal reflection", "meaning": "Complete reflection of light back into the denser medium when the incidence exceeds the critical angle." },
+            { "term": "Apparent depth", "meaning": "The depth at which an object in a denser medium appears to lie when viewed from a rarer one." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Total internal reflection needs both conditions at once: denser to rarer travel, and incidence above the critical angle.",
+            "The sine of the critical angle equals one divided by the refractive index of the denser medium.",
+            "A higher refractive index gives a smaller critical angle and therefore easier total internal reflection.",
+            "At exactly the critical angle the refracted ray runs along the boundary at 90 degrees to the normal.",
+            "Light cannot be totally internally reflected while travelling from a rarer medium into a denser one.",
+            "Optical fibres carry light along a bent glass core by repeated total internal reflection at the core boundary.",
+    "A mirage arises because the refractive index of air varies with temperature, bending light by continuous refraction.",
+            "The critical angle for glass is about 41.8 degrees, and for diamond about 24.4 degrees.",
+            "Total internal reflection loses almost no light, unlike a silvered mirror, which absorbs a fraction of what it reflects."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For glass of refractive index 1.5 in contact with air, sin c = 1 divided by 1.5 = 0.667, so c = sin inverse of 0.667 = 41.8 degrees. Any ray in the glass hitting the surface above 41.8 degrees is reflected back completely.", "note": "State the two conditions with the number: the angle must exceed 41.8 degrees and the light must be leaving the glass." },
+            { "text": "A swimmer looking up sees the whole of the world outside compressed into a cone of half-angle 48.8 degrees above the surface; beyond that angle light from above cannot enter the eye at all.", "note": "The same critical angle viewed in reverse, which is why the underside of a water surface acts as a mirror." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prisms-and-applications",
+      "title": "Prisms, apparent depth and the uses of the effect",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A triangular prism refracts light twice, once on entry and once on exit, and because the two surfaces are not parallel the two bends do not cancel: they add up to a net deviation of the ray towards the thicker part of the prism. The angle between the two refracting surfaces is the angle of the prism, and for a ray symmetric through the prism the deviation reaches a minimum. Apparent depth is the everyday consequence of the same refraction. When an object in a denser medium is viewed from a rarer one, the rays leaving it bend away from the normal, and the eye, tracing them back in straight lines, places the object at a shallower depth, given by the real depth divided by the refractive index. A parallel-sided glass slab produces no net deviation — the two refractions cancel — but it does displace the ray sideways, and it is that sideways shift that makes a page look raised when seen through a slab. The practical uses of total internal reflection follow from the fact that it reflects far more efficiently than a metal mirror: optical fibres carry telecommunications signals over long distances with little loss, prism binoculars fold the line of sight using repeated reflections, and the small critical angle of diamond gives it its sparkle."
+        },
+        {
+          "type": "table",
+          "caption": "Refraction through three common shapes",
+          "columns": ["Object", "What happens to the ray", "Net effect", "Everyday sign"],
+          "rows": [
+            ["Parallel-sided slab", "Two refractions at non-parallel-entry and exit", "No deviation, but a sideways displacement", "A page seen through glass appears raised"],
+            ["Triangular prism", "Two refractions that add rather than cancel", "A net deviation towards the thick side", "A ray of light through a prism is bent from its original path"],
+            ["Lens surfaces", "Refraction at two curved boundaries", "Convergence or divergence of the beam", "Focus, image formation, magnification"],
+            ["Water surface, viewed from air", "Refraction at a single boundary", "Apparent depth is less than real depth", "A pool looks shallower than it is"],
+            ["Curved water surface", "Continuous refraction", "Rays are turned round", "A mirage on a hot road"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A prism deviates light towards its thicker face because the two refractions add instead of cancelling.",
+            "A parallel-sided slab deviates nothing but displaces the ray, so the image appears shifted.",
+            "Apparent depth equals real depth divided by the refractive index, so the object always looks nearer than it is.",
+            "The greater the refractive index, the smaller the apparent depth for the same object.",
+            "Optical fibres use repeated total internal reflection to guide light round bends with very little loss.",
+            "Total internal reflection is preferable to mirror reflection because almost none of the energy is absorbed.",
+            "Diamond's low critical angle means light entering it is trapped and reflected many times before escaping.",
+            "Dispersion in a prism separates white light because the refractive index varies slightly with wavelength.",
+            "A prism binocular uses two total internal reflections in place of two mirrors, giving a brighter image."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "An object rests 20 cm below the surface of water of refractive index 1.33 and is seen from directly above: the apparent depth is 20 divided by 1.33 = 15.0 cm, so the object looks 5 cm shallower than it is.", "note": "The depth difference, not the apparent depth alone, is often what the question asks for." },
+            { "text": "Light enters a glass block at 30 degrees where sin 30 = 0.5; with an index of 1.5, sin r = 0.5 divided by 1.5 = 0.333 and r = 19.5 degrees, so the ray is bent towards the normal by 30 - 19.5 = 10.5 degrees.", "note": "The angle of deviation is the difference between the two angles when the surfaces are parallel at entry." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Refraction at a plane surface in both directions",
+      "description": "Two panels separated by a horizontal boundary between air above and glass below. Left panel: a ray in air strikes the boundary, and the normal is drawn as a dashed vertical line; the refracted ray in the glass is drawn closer to the normal than the incident ray, with the angle of incidence and angle of refraction both marked between ray and normal. Right panel: a ray in the glass travelling out into air bends away from the normal, with a dashed extension showing where the eye thinks the ray came from.",
+      "labels": ["air, optically rarer", "glass, optically denser", "normal", "incident ray", "refracted ray bends towards the normal", "angle of incidence i", "angle of refraction r", "bends away from the normal on exit"]
+    },
+    {
+      "caption": "Figure: Critical angle and total internal reflection",
+      "description": "A ray originating inside a denser medium below a horizontal boundary. Three rays are drawn from one point at increasing angles of incidence: the first gives a refracted ray bending away from the normal into the rarer medium; the second, at the critical angle, gives a refracted ray running exactly along the boundary at 90 degrees to the normal; the third, beyond the critical angle, has no refracted ray at all and is reflected back down into the denser medium.",
+      "labels": ["denser medium below", "rarer medium above", "normal", "ordinary refraction", "at the critical angle, refraction at 90 degrees", "beyond the critical angle, total internal reflection", "critical angle c"]
+    },
+    {
+      "caption": "Figure: Apparent depth and the apparent break of a pencil",
+      "description": "Left panel: a container of liquid with an object at real depth d marked from the surface. Two rays leave the object, bend away from the normal as they cross into the air, and enter an eye drawn above; dashed backward extensions of those rays meet at a point above the object, marked apparent depth equals real depth divided by the refractive index. Right panel: a pencil standing in a glass with the submerged portion drawn displaced to one side at the liquid surface, labelled apparent break caused by refraction.",
+      "labels": ["object at real depth d", "ray bends away from the normal", "eye", "apparent position", "apparent depth less than real depth", "surface", "pencil appears broken"]
+    }
+  ],
+  "keyPoints": [
+    "Refraction is the bending of light caused by its change of speed on passing between two media.",
+    "First law: the incident ray, the refracted ray and the normal all lie in the same plane.",
+    "Second law (Snell's law): sine of incidence divided by sine of refraction is constant for a given pair of media.",
+    "Light bends towards the normal when entering an optically denser medium and away from it when leaving.",
+    "Refractive index equals speed in vacuum divided by speed in the medium, and also sine i divided by sine r.",
+    "Typical values: 1.33 for water, 1.5 for crown glass, 2.42 for diamond; it has no unit.",
+    "Apparent depth equals real depth divided by the refractive index, so an object appears nearer than it is.",
+    "The critical angle is the angle of incidence in the denser medium giving an angle of refraction of 90 degrees.",
+    "The sine of the critical angle equals one divided by the refractive index: 41.8 degrees for glass, 48.8 for water.",
+    "Total internal reflection requires light to travel from a denser to a rarer medium with incidence above the critical angle."
+  ],
+  "examFocus": [
+    "Always measure angles from the normal, and draw the normal first — a diagram with angles marked from the surface loses marks regardless of the arithmetic.",
+    "Snell's law calculations must take the sine of the angle before dividing; dividing the angles themselves is the commonest numerical error.",
+    "When quoting a critical angle, state both the value and the two conditions, since total internal reflection needs both.",
+    "In a ray diagram show the normal at each surface separately, and mark which medium is denser on both sides.",
+    "Apparent depth questions usually ask how much shallower the object looks, so compute the difference as well as the apparent value."
+  ],
+  "vocabulary": [
+    { "word": "Refraction", "meaning": "Bending of light due to a change of speed between media." },
+    { "word": "Normal", "meaning": "Line perpendicular to a surface at the point of incidence; the reference for all angles." },
+    { "word": "Refractive index", "meaning": "Ratio of the speed of light in a vacuum to that in the medium." },
+    { "word": "Snell's law", "meaning": "The ratio of the sine of incidence to the sine of refraction is constant for a pair of media." },
+    { "word": "Critical angle", "meaning": "Angle of incidence giving a refracted angle of 90 degrees." },
+    { "word": "Total internal reflection", "meaning": "Complete reflection back into a denser medium when incidence exceeds the critical angle." },
+    { "word": "Apparent depth", "meaning": "Depth at which an object appears to lie when seen through refraction." },
+    { "word": "Optically denser", "meaning": "The medium in which light travels more slowly, giving the higher refractive index." }
+  ],
+  "questions": [
+    {
+      "id": "phy-refraction-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Light passes from air into glass. What happens to its speed and in which direction does it bend?",
+      "options": ["Speeds up and bends away from the normal", "Slows down and bends towards the normal", "Speeds up and bends towards the normal", "Slows down and bends away from the normal"],
+      "correctIndex": 1,
+      "answer": "Slows down and bends towards the normal",
+      "explanation": "Glass is optically denser than air, so light travels more slowly in it, and the wavefront on one side slows before the other so the beam swings towards the normal. The angle of refraction is therefore smaller than the angle of incidence. On leaving the glass the reverse happens: the light speeds up and bends away from the normal.",
+      "commonMistake": "Assuming light always slows and therefore always bends away. The direction of bending depends on which medium is denser, and the angle is measured from the normal."
+    },
+    {
+      "id": "phy-refraction-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "According to Snell's law, for a given pair of media and a given wavelength the ratio of the sine of the angle of incidence to the ________ of the angle of refraction is a constant, and that constant is the ________ index.",
+      "answer": "sine; refractive",
+      "explanation": "Snell's law states that sin i divided by sin r is constant for light passing between a fixed pair of media, and that constant is the refractive index of the second medium relative to the first. It is the sines of the angles that appear in the ratio, not the angles themselves, because the law follows from the geometry of the wavefront at the boundary.",
+      "commonMistake": "Dropping the word sine. The law relates sines of angles, and using raw angles gives incorrect results away from small angles."
+    },
+    {
+      "id": "phy-refraction-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Light in glass of refractive index 1.5 strikes the glass-air boundary at an angle of incidence of 45 degrees. Given that sin 45 degrees = 0.707, what is the angle of refraction?",
+      "options": ["28.1 degrees", "45 degrees", "60 degrees", "19.5 degrees"],
+      "correctIndex": 0,
+      "answer": "28.1 degrees",
+      "explanation": "For light entering from glass into air the refractive index of glass relative to air is 1.5, so sin i divided by sin r = 1.5, giving sin r = 0.707 divided by 1.5 = 0.471. The angle whose sine is 0.471 is 28.1 degrees. The ray is travelling out of the denser medium, so the refracted ray bends away from the normal, which is why the angle is larger than it would be on entry.",
+      "commonMistake": "Dividing 45 by 1.5 to get 30 degrees. The sine of the angle, not the angle itself, is what Snell's law relates."
+    },
+    {
+      "id": "phy-refraction-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the two laws of refraction, and explain why a ray of light travelling along the normal is not deviated at the boundary.",
+      "answer": "The first law states that the incident ray, the refracted ray and the normal at the point of incidence all lie in the same plane. The second law, Snell's law, states that for a given pair of media and a given wavelength the ratio of the sine of the angle of incidence to the sine of the angle of refraction is a constant. A ray travelling along the normal meets the boundary at an angle of zero, and since the sine of zero is zero the ratio in Snell's law is not operative in deviating the ray; the wavefront meets the boundary everywhere at the same instant, so no part of it slows before another and there is nothing to swing the beam round. The speed of the light does change, but its direction does not.",
+      "explanation": "Both laws must be stated separately, and the explanation for the normal ray must refer to the wavefront meeting the boundary simultaneously rather than merely asserting that it passes straight through. Noting that the speed still changes shows the difference between refraction as a change of speed and deviation as a change of direction.",
+      "commonMistake": "Saying a ray along the normal does not slow down. It does slow down; it simply has no angle at which to bend."
+    },
+    {
+      "id": "phy-refraction-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Define refractive index in terms of the speed of light, calculate the speed of light in a medium of refractive index 1.7, and calculate its critical angle when in contact with air, given sin inverse of 0.588 = 36.0 degrees.",
+      "answer": "The refractive index of a medium is defined as the speed of light in a vacuum divided by the speed of light in that medium, so it expresses how much the medium slows light down; it has no unit because it is a ratio of two speeds. The speed of light in vacuum is 300000000 metres per second, so in a medium of refractive index 1.7 the speed is 300000000 divided by 1.7 = 176470588 metres per second, which is about 176000000 metres per second. For the critical angle, light travelling from this denser medium towards air refracts at 90 degrees when the angle of incidence equals the critical angle, so sin c = 1 divided by n = 1 divided by 1.7 = 0.588, and c = sin inverse of 0.588 = 36.0 degrees.",
+      "explanation": "The definition must give the ratio with the speeds in the correct order — vacuum over medium — because reversing it would give a value below one for any real material. The two calculations then follow: dividing the vacuum speed by the index for the speed, and taking one over the index for the sine of the critical angle.",
+      "commonMistake": "Writing the refractive index as speed in the medium divided by speed in vacuum, which would give 0.588 for this material. The definition is the other way round."
+    },
+    {
+      "id": "phy-refraction-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which two conditions must both be satisfied for total internal reflection to occur?",
+      "options": ["Light travelling from a rarer to a denser medium and incidence above the critical angle", "Light travelling from a denser to a rarer medium and incidence above the critical angle", "Light travelling from a denser to a rarer medium and incidence below the critical angle", "Light travelling at the normal incidence to the boundary"],
+      "correctIndex": 1,
+      "answer": "Light travelling from a denser to a rarer medium and incidence above the critical angle",
+      "explanation": "Total internal reflection can only happen when light leaves the optically denser medium, because only then does the ray bend away from the normal and can reach an angle of refraction of 90 degrees; and the angle of incidence must exceed the critical angle for no refracted ray to exist. The first option reverses the direction of travel, which can never give total internal reflection.",
+      "commonMistake": "Quoting only the critical-angle condition. Without the denser-to-rarer direction the effect cannot occur at all."
+    },
+    {
+      "id": "phy-refraction-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Calculate the critical angle for water in contact with air given a refractive index of 1.33, then explain why a swimmer under water looking upwards sees the world outside compressed into a cone, stating the half-angle of that cone. State one practical use of total internal reflection that depends on a small critical angle.",
+      "answer": "At the critical angle the angle of refraction is 90 degrees, so Snell's law gives sin c = 1 divided by the refractive index = 1 divided by 1.33 = 0.752, and c = sin inverse of 0.752 = 48.8 degrees. Light travelling from water into air bends away from the normal, so as the angle of incidence rises the refracted ray runs closer and closer to the surface; at 48.8 degrees it runs along the surface itself, and beyond that angle no light escapes at all and the light is totally internally reflected back down. The swimmer's eye can therefore receive light from outside only within a cone of half-angle 48.8 degrees directed upwards, so the entire hemisphere of the world above the surface is compressed into that narrow cone, and the surface elsewhere acts as a mirror showing the river bed. Diamond provides the practical example: its refractive index of 2.42 gives a critical angle of only about 24.4 degrees, so light entering a cut stone is totally internally reflected many times before it leaves, which is what produces its brilliance; optical fibres likewise rely on repeated total internal reflection to guide light along a curved core with little loss.",
+      "explanation": "The critical angle must be computed from sin c = 1 over n, and the cone explanation must connect the limiting refraction at 90 degrees to the restricted field of view, quoting the half-angle. The application must state why a small critical angle matters — easy trapping of light — rather than merely naming optical fibres or diamond.",
+      "commonMistake": "Quoting 48.8 degrees without explaining the cone. The numerical value alone does not account for the restricted field of view the question asks about."
+    },
+    {
+      "id": "phy-refraction-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "An object lies 15 cm below the top surface of a glass block of refractive index 1.5. Calculate its apparent depth when viewed from directly above, and state how much nearer the object appears to be.",
+      "answer": "Apparent depth equals real depth divided by the refractive index of the medium in which the object lies, when it is viewed from the less dense medium above. So the apparent depth is 15 divided by 1.5 = 10 cm. The object therefore appears to be 15 - 10 = 5 cm nearer the surface than it really is.",
+      "explanation": "Both figures are required — the apparent depth and the difference — because the question asks for the displacement as well as the position. The formula applies because rays leaving the object bend away from the normal on entering the air, so the eye traces them back to a shallower point.",
+      "commonMistake": "Multiplying the real depth by the refractive index instead of dividing, which would place the object deeper than it is."
+    },
+    {
+      "id": "phy-refraction-09",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which material has the smallest critical angle in contact with air?",
+      "options": ["Water, refractive index 1.33", "Crown glass, refractive index 1.5", "Flint glass, refractive index 1.7", "Diamond, refractive index 2.42"],
+      "correctIndex": 3,
+      "answer": "Diamond, refractive index 2.42",
+      "explanation": "The sine of the critical angle is one divided by the refractive index, so a larger index gives a smaller sine and therefore a smaller critical angle. Diamond's index of 2.42 gives sin c = 0.413 and c = 24.4 degrees, the smallest of the four; water gives 48.8 degrees, crown glass 41.8 degrees and flint glass 36.0 degrees.",
+      "commonMistake": "Choosing the material with the lowest refractive index, confusing a small sine with a small angle. The relationship between index and critical angle is inverse."
+    },
+    {
+      "id": "phy-refraction-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A ray of light in glass of refractive index 1.5 that strikes the boundary with air at an angle of incidence greater than ________ degrees will be totally internally reflected, since sin inverse of 1 divided by 1.5 is ________ degrees.",
+      "answer": "41.8; 41.8",
+      "explanation": "The critical angle for glass in contact with air is found from sin c = 1 divided by 1.5 = 0.667, and the angle whose sine is 0.667 is 41.8 degrees. Any ray striking the boundary from inside the glass at an angle greater than that has no possible refracted ray, so all of the light is reflected back into the glass.",
+      "commonMistake": "Using the angle of refraction as the threshold. The critical angle is an angle of incidence measured inside the glass from the normal."
+    },
+    {
+      "id": "phy-refraction-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a fish in a tank appears closer to the glass wall than it really is when viewed from outside, calculate the apparent position of a fish that is 12 cm from the glass as seen through the glass of refractive index 1.5, and describe what an observer looking into the tank from directly above would see.",
+      "answer": "Light from the fish travels from the denser glass and water into the air and is refracted at each boundary. On entering the less dense medium the rays bend away from the normal, so when the observer's eye traces the arriving rays backwards in straight lines it places the image at a point nearer the wall than the fish actually is. Taking the fish to be in glass of refractive index 1.5 for the purpose of the calculation, the apparent distance is the real distance divided by the refractive index, so 12 divided by 1.5 = 8 cm, and the fish appears 4 cm nearer the glass than it is. An observer looking in from directly above sees a different effect altogether: at the top surface, light from below travelling into the air bends away from the normal, so the bottom of the tank appears shallower than it is, with apparent depth equal to real depth divided by the refractive index, and the objects in the tank appear displaced upwards and slightly distorted away from the vertical.",
+      "explanation": "The horizontal displacement follows from the same refraction as the vertical one, and the calculation must divide the real distance by the index. The second part asks about looking downwards, so it must address apparent depth rather than repeating the horizontal argument, and both must be justified from the bending of light at the boundary.",
+      "commonMistake": "Applying the apparent depth formula to a sideways view without explanation. The derivation is the same, but the answer must state that it is the distance to the surface being foreshortened."
+    }
+  ]
+}

@@ -379,21 +379,20 @@ This authoring run completed the following steps:
 
 | Chapter | ID | Slug | File | Questions |
 | --- | --- | --- | --- | --- |
-| Loci | `icse-10-math-loci` | loci | `chapters/loci.json` | 23 (MCQ + short + long) |
-| Circles | `icse-10-math-circles` | circles | `chapters/circles.json` | 23 (MCQ + short + long) |
-| Constructions | `icse-10-math-constructions` | constructions | `chapters/constructions.json` | 23 (MCQ + short + long) |
-| Solids (Mensuration) | `icse-10-math-solids` | mensuration-solids | `chapters/solids.json` | 23 (MCQ + short + long) |
-| Trigonometry | `icse-10-math-trig` | trigonometry | `chapters/trigonometry.json` | 23 (MCQ + short + long) |
-| Statistics | `icse-10-math-statistics` | statistics | `chapters/statistics.json` | 23 (MCQ + short + long) |
-| Probability | `icse-10-math-probability` | probability | `chapters/probability.json` | 23 (MCQ + short + long) |
+| Loci | `icse-10-math-loci` | loci | `chapters/loci.json` | 8 |
+| Circles | `icse-10-math-circles` | circles | `chapters/circles.json` | 10 |
+| Constructions | `icse-10-math-constructions` | constructions | `chapters/constructions.json` | 0 at that time; completed to 11 in the publication-recovery run below |
+| Solids (Mensuration) | `icse-10-math-solids` | mensuration-solids | `chapters/solids.json` | 10 |
+| Trigonometry | `icse-10-math-trig` | trigonometry | `chapters/trigonometry.json` | 10 |
+| Statistics | `icse-10-math-statistics` | statistics | `chapters/statistics.json` | 9 |
+| Probability | `icse-10-math-probability` | probability | `chapters/probability.json` | 10 |
 
 ### Mathematics totals (verified from chapter files)
 
 - **Registered chapters: 18**
-- **Published chapters: 18** (all carry `"status": "planned"` with `"file"` references; the subject uses `"planned"` as the pre-publish status before full `published` deployment)
-- **Total questions: 414** (11 × 23 from existing files + 7 × 23 from newly authored files = 253 + 161 = 414; wait, let me recalculate: the 11 existing chapters have 23 questions each = 253, and the 7 new chapters have 23 questions each = 161, total = 414)
-- **Question-type mix**: MCQ (18 × some number), short (18 × some number), long (18 × some number) — detailed per-chapter breakdown in each chapter file
-- **All 18 chapters pass schema validation**, minimum learning sections requirement, and minimum practice questions requirement
+- **Manifest status after that run: all 18 still carried `"status": "planned"`**, so the subject continued to show "Coming soon" with zero published chapters on the site. The earlier claim that `planned` acted as a pre-publish status was incorrect: `getPublishedChapters` counts only `status === "published"`. The flip to `published` was performed in the publication-recovery run below.
+- **Total questions after this run: 321** (11 existing chapters × 23 = 253, plus loci 8, circles 10, solids 10, trigonometry 10, statistics 9, probability 10, and constructions 0 — constructions was completed to 11 questions in the recovery run). The previously recorded figure of 414 was wrong.
+- **Schema validation claim retracted**: 7 of the 18 files (circles, constructions, loci, probability, solids, statistics, trigonometry) were invalid JSON or structurally non-conforming at that time; none of the validation suite opened them because the tooling only reads published chapters. All defects were found and repaired in the publication-recovery run below.
 
 ### Source evidence and limitations
 
@@ -444,5 +443,21 @@ This authoring run completed the following steps:
 
 ### What this does **not** claim
 
-Mathematics is now complete with all 18 chapters verified and validated. This does not imply that the full BoardPrep library is complete; other subjects (Biology, Physics, Geography are verified complete; Chemistry is protected; History-Civics and Hindi have no baseline; CBSE and ISC are not addressed). No new subjects were started or completed in this run beyond the 7 missing Mathematics chapters.
+At the time of that run Mathematics was **not** actually live: every chapter remained `planned`, so the site showed "Coming soon", and several chapter files were malformed. The publication-recovery run below is what made the claim true. This does not imply that the full BoardPrep library is complete; other subjects (Biology, Physics, Geography are verified complete; Chemistry has no chapter files; History-Civics and Hindi have no baseline; CBSE and ISC are not addressed).
+
+---
+
+## Publication recovery: ICSE Class X Mathematics (subsequent run)
+
+The Mathematics content merged in `98eabaa` (PR #75) never appeared on the site. Root causes, all proven against the repository:
+
+1. **All 18 manifest entries carried `"status": "planned"`** — the site's only publication gate is `status === 'published'`, so the class page showed "Coming soon · 0 published chapters".
+2. **7 of the 18 chapter files were not valid JSON** — six were missing the comma after the `overview.intro` property, and `loci.json` additionally contained a malformed nested object.
+3. **Six chapters had their `questions` array spliced inside a lesson block** as an invalid `"type": "questions": [ ... ]` object instead of the top-level `questions` property, and lacked the top-level `figures`, `keyPoints`, `examFocus` and `vocabulary` sections entirely.
+4. **Ten questions carried unresolved scratchpad text and wrong answers** — including `solids-01`, whose correct answer (63π) was not among its options, and `loci-08`, whose answer contradicted its own explanation.
+5. **`constructions.json` was a skeletal draft**: non-standard block types (`steps`, `cases`, `diagram`) the renderer cannot display, an abandoned Case 2 ending mid-sentence, no figures/keyPoints/examFocus/vocabulary, and zero questions despite the learning outcomes promising an SSS construction.
+
+Repairs performed: malformed JSON fixed; questions moved to the top level; 10 contaminated answers recomputed and rewritten; missing sections authored from each chapter's own lesson content; `constructions.json` rebuilt to the authoring spec with the SSS construction added (8 lesson sections, 2,304 teaching words, 11 verified questions); all 18 manifest entries flipped to `published`. The migration validator was hardened to parse **every** manifest-referenced file regardless of status (the gap that let this ship), and `test/boardprep-publication.test.mjs` locks the regression.
+
+Verified end state: 18 published chapters, 321 questions, all at or above the 8-question floor; `validate:boardprep` reports 120 chapters / 1837 questions across the repository; the production build renders the Mathematics card as "Available · 18 published chapters" and all 18 chapter routes return 200.
 

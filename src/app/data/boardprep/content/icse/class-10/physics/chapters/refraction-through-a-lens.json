@@ -1,0 +1,410 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-refraction-lens",
+  "title": "Refraction through a Lens",
+  "kind": "physics",
+  "tagline": "Convex and concave lenses, the ray diagrams that fix every image, magnification, and lens power in dioptres.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed using the Cartesian sign convention stated in the text. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A lens bends light twice, at each of its two curved surfaces, and because those surfaces curve the same way the two refractions reinforce rather than cancel, so the beam is either brought together or spread apart. This chapter treats the convex lens as the converging case and the concave lens as the diverging one, defines the principal axis, optical centre, focus and focal length, and builds the standard ray diagrams from three simple rules. It then derives where an image forms and what it looks like as the object moves towards and past the focus, introduces magnification as a ratio of heights or of distances, and closes with lens power, which expresses the strength of a lens in dioptres and is the quantity an optician prescribes.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Refraction through a Lens — types, ray diagrams, magnification, power" },
+      { "label": "Convex lens", "value": "Thicker at the centre; converges rays parallel to the principal axis" },
+      { "label": "Concave lens", "value": "Thinner at the centre; always gives a virtual, erect and diminished image" },
+      { "label": "Lens formula", "value": "One over image distance minus one over object distance equals one over focal length" },
+      { "label": "Magnification", "value": "Image height over object height, equal to image distance over object distance" },
+      { "label": "Power of a lens", "value": "One divided by the focal length in metres, measured in dioptres" }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish convex and concave lenses by shape and by their effect on a parallel beam.",
+    "Draw ray diagrams for a convex lens with the object at the standard positions and describe each image.",
+    "Apply the lens formula and the sign convention to locate an image and calculate its magnification.",
+    "Calculate the power of a lens in dioptres and combine the powers of thin lenses in contact."
+  ],
+  "learn": [
+    {
+      "id": "lens-basics",
+      "title": "Anatomy of a lens and the two kinds",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A lens is a transparent body bounded by two surfaces of which at least one is curved, and its action is refraction at each surface in turn. The convex lens, also called a converging lens, is thicker in the middle than at the edges, and it brings rays travelling parallel to the principal axis together at a single point called the principal focus on the far side. The concave lens, or diverging lens, is thinner in the middle, spreads those rays apart, and to an observer they appear to have come from a virtual focus on the same side as the incoming light. Several pieces of vocabulary are needed before any diagram can be drawn. The principal axis is the straight line through the centres of curvature of the two lens surfaces. The optical centre is the point at the middle of the lens through which a ray passes undeviated. The principal focus is the point on the principal axis where rays parallel to the axis meet after refraction, and the focal length is the distance from the optical centre to that focus. The aperture is the diameter of the lens opening, and it governs how much light enters rather than where the image forms."
+        },
+        {
+          "type": "table",
+          "caption": "Convex lens against concave lens",
+          "columns": ["Feature", "Convex lens", "Concave lens"],
+          "rows": [
+            ["Shape", "Thicker at the centre than at the edges", "Thinner at the centre than at the edges"],
+            ["Action on a parallel beam", "Converges the beam to the principal focus", "Diverges the beam, apparently from the near focus"],
+            ["Kind of focus", "Real focus, where light genuinely meets", "Virtual focus, where light only appears to meet"],
+            ["Sign of the focal length", "Positive under the Cartesian convention", "Negative"],
+            ["Sign of the power", "Positive", "Negative"],
+            ["Image of a real object", "Can be real or virtual, magnified or diminished", "Always virtual, erect and diminished"],
+            ["Used for", "Magnifying glass, camera, projector, correcting long sight", "Correcting short sight, peepholes, lens combinations"],
+            ["Ray through the optical centre", "Passes straight through undeviated", "Passes straight through undeviated"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A convex lens converges parallel rays to a real focus, so it can form an image on a screen.",
+            "A concave lens diverges parallel rays, and they only appear to meet at a virtual focus on the incident side.",
+            "The optical centre is the single point through which a ray passes without deviation in either lens.",
+            "The principal axis passes through the optical centre and through the centres of curvature of both surfaces.",
+            "Focal length is measured from the optical centre to the principal focus, so as a length it is always positive.",
+            "A lens has two principal foci, one on each side, at equal distances from the optical centre.",
+            "Aperture affects the brightness of the image, not its position or its size.",
+            "Rays are described as parallel only when they are parallel to the principal axis."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Holding a magnifying glass above a page and moving it slowly away brings the print into sharp focus at one position, and the distance from the lens to the page at that moment is the focal length.", "note": "The object is within the focal length here, so the image is magnified, erect and virtual." },
+            { "text": "Looking at a distant object through a concave lens gives a smaller, upright view, and no position of the object will ever bring it to a focus on a screen.", "note": "A concave lens cannot form a real image of a real object." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "image-formation",
+      "title": "Ray diagrams and the images a convex lens forms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three rays are enough to locate an image, and any two of them will do because the third must pass through the same point. The first is a ray parallel to the principal axis, which after refraction passes through the principal focus on the far side. The second passes straight through the optical centre without deviation. The third passes through the near focus and emerges parallel to the principal axis. Where the refracted rays actually meet is the image, and if they meet on the far side the image is real and can be caught on a screen; if they only appear to meet when extended backwards, the image is virtual and cannot. As the object is brought from infinity towards the lens, the real image grows and moves away from the lens on the other side. With the object beyond twice the focal length the image is real, inverted and diminished, lying between one and two focal lengths beyond the lens. At twice the focal length it is real, inverted and the same size. Between one and two focal lengths it is real, inverted and magnified. At the focus the refracted rays emerge parallel and no image forms at any finite distance. Inside the focal length the rays diverge after refraction, so the image is virtual, erect and magnified, which is exactly how a magnifying glass is used."
+        },
+        {
+          "type": "table",
+          "caption": "Images formed by a convex lens as the object approaches",
+          "columns": ["Position of the object", "Nature of the image", "Size", "Position of the image"],
+          "rows": [
+            ["At infinity", "Real and inverted", "Highly diminished, a point", "At the principal focus"],
+            ["Beyond twice the focal length", "Real and inverted", "Diminished", "Between one and two focal lengths beyond the lens"],
+            ["At twice the focal length", "Real and inverted", "Same size as the object", "At twice the focal length beyond the lens"],
+            ["Between one and two focal lengths", "Real and inverted", "Magnified", "Beyond twice the focal length on the far side"],
+            ["At the principal focus", "No image formed", "—", "Rays emerge parallel; image at infinity"],
+            ["Between the focus and the optical centre", "Virtual and erect", "Magnified", "On the same side as the object, further from the lens"],
+            ["At the optical centre", "No image", "—", "All rays pass through the one point"]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Principal focus", "meaning": "Point on the principal axis where rays parallel to it meet after refraction through a convex lens." },
+            { "term": "Focal length", "meaning": "Distance from the optical centre to the principal focus." },
+            { "term": "Optical centre", "meaning": "Point at the middle of a lens through which a ray passes without deviation." },
+            { "term": "Principal axis", "meaning": "Line joining the centres of curvature of the two lens surfaces." },
+            { "term": "Aperture", "meaning": "Diameter of the lens opening, which governs the brightness of the image." },
+            { "term": "Real image", "meaning": "Image formed by rays that actually meet; it can be projected onto a screen." },
+            { "term": "Virtual image", "meaning": "Image formed where rays only appear to meet when extended backwards; it cannot be projected." },
+            { "term": "Magnification", "meaning": "Ratio of image height to object height, also equal to image distance over object distance." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Any two of the three standard rays may be drawn; the third is a check rather than a necessity.",
+            "A real image is inverted and can be caught on a screen; a virtual image is erect and cannot.",
+            "As the object moves towards the focal point, the real image moves away from the lens and grows.",
+            "At the focal point the emerging rays are parallel, so the image is said to lie at infinity.",
+            "Inside the focal length the image is always virtual, erect and magnified, which is the magnifier's working range.",
+            "A concave lens gives a virtual, erect, diminished image whatever the object position.",
+            "Rays parallel to the principal axis meet at the focus; rays through the optical centre never bend.",
+            "If the object is at infinity the image forms at the focus and is a point of light."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A slide projector uses a convex lens with the slide between one and two focal lengths from it, giving a real, inverted, magnified image on a distant screen; the slide is loaded upside down so the picture appears the right way up.", "note": "Real images are always inverted, so the object must be inverted to correct the projection." },
+            { "text": "A camera focuses a distant landscape with the film or sensor just beyond twice the focal length, giving a real, inverted, diminished image that covers the whole scene in a small space.", "note": "The same lens gives a different image as the object distance changes, which is why focusing moves the lens." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "signs-magnification-and-power",
+      "title": "Sign convention, magnification and lens power",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every numerical lens problem needs a sign convention, and the one used here is the Cartesian convention, in which all distances are measured from the optical centre and the direction in which the incident light travels is taken as positive. The object always stands on the incident side, so the object distance u is negative. Distances on the far side of the lens, where the refracted light actually goes, are positive; distances on the incident side, where light does not really go, are negative. A convex lens, which converges light to a real focus on the far side, therefore has a positive focal length, and a concave lens has a negative one. The lens formula then reads one over the image distance minus one over the object distance equals one over the focal length, and it must be used with the signs attached, never with bare numbers. Magnification is the ratio of the image height to the object height, and it also equals the image distance divided by the object distance; a positive magnification means the image is erect and a negative one means it is inverted, so a real image from a single lens always comes out negative. The power of a lens describes how strongly it bends light and is defined as one divided by the focal length measured in metres, so its unit is the dioptre: a lens of focal length 25 cm, that is 0.25 m, has a power of one divided by 0.25 = 4 dioptres. Powers add when thin lenses are placed in contact, which is why an optician can express a prescription as a single figure."
+        },
+        {
+          "type": "table",
+          "caption": "The Cartesian sign convention for lenses",
+          "columns": ["Quantity", "Measured from", "Sign", "Typical value"],
+          "rows": [
+            ["Object distance u", "Optical centre", "Negative, since the object is on the incident side", "Always negative for a real object"],
+            ["Image distance v", "Optical centre", "Positive for a real image on the far side, negative for a virtual image on the incident side", "Depends on the object position"],
+            ["Focal length f", "Optical centre", "Positive for a convex lens, negative for a concave lens", "+20 cm for a convex lens of 20 cm focal length"],
+            ["Image height h i", "Principal axis", "Positive above the axis, negative below", "Negative when the image is inverted"],
+            ["Object height h o", "Principal axis", "Positive, taken above the axis", "Positive by definition"],
+            ["Direction", "—", "The direction of incident light is positive", "Right is positive when light travels left to right"]
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Power of a lens and combinations",
+          "columns": ["Situation", "Working rule", "Unit", "Example"],
+          "rows": [
+            ["Single lens", "Power equals one divided by the focal length in metres", "dioptre (D)", "f = 0.25 m gives P = +4 D"],
+            ["Convex lens", "Positive power", "dioptre", "+2 D means a focal length of 0.5 m"],
+            ["Concave lens", "Negative power", "dioptre", "-5 D means a focal length of -0.2 m"],
+            ["Lenses in contact", "Total power is the sum of the individual powers", "dioptre", "+5 D and -2 D give +3 D"],
+            ["Combination focal length", "One divided by the total power", "metre", "+3 D gives f = 0.333 m"],
+            ["Units", "The focal length must be in metres before dividing", "—", "20 cm must be written as 0.20 m"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "All distances in the lens formula are measured from the optical centre, so mixing two reference points gives a wrong answer.",
+            "The object distance is always negative for a real object, because the light travels towards the lens from the object.",
+            "A convex lens has a positive focal length and a concave lens a negative one under the Cartesian convention.",
+            "Magnification equals image height over object height, and also equals image distance over object distance.",
+            "A positive magnification means an erect image; a negative magnification means an inverted one.",
+            "A single lens giving a real image always has a negative magnification, because real images are inverted.",
+            "Power is one divided by the focal length in metres, so the focal length must first be converted from centimetres.",
+            "Powers of thin lenses in contact simply add, so a convex and a concave lens can partly cancel."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A convex lens of focal length +20 cm has an object placed 60 cm in front of it. Here u = -60 cm and f = +20 cm, so one over v = one over 20 plus one over minus 60 = 3 over 60 minus 1 over 60 = 2 over 60, giving v = +30 cm: a real image 30 cm beyond the lens.", "note": "The image lies between f and 2f, exactly as the object beyond 2f should give." },
+            { "text": "For that same image, magnification is v over u = 30 divided by minus 60 = -0.5, so the image is inverted and half the size of the object, which matches the diminished real image predicted by the ray diagram.", "note": "The negative sign is the check that the image is inverted, and it must not be discarded." },
+            { "text": "A concave lens of focal length -15 cm has an object 45 cm in front: one over v = one over minus 15 plus one over minus 45 = minus 3 over 45 minus 1 over 45 = minus 4 over 45, so v = -11.25 cm, a virtual image on the same side as the object.", "note": "The negative image distance confirms the image is virtual, as a concave lens must give." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lens-in-practice",
+      "title": "Working with lenses in combination and in the eye",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Real optical instruments almost always use more than one lens, and the quickest way to treat thin lenses in contact is to add their powers rather than to trace rays through each one. A combination of a convex lens of +5 dioptres and a concave lens of -2 dioptres has a total power of +3 dioptres, so it behaves like a single convex lens of focal length one third of a metre, about 33.3 cm. The sign matters throughout: adding the magnitudes would give +7 dioptres and describe a completely different instrument. The eye itself is a lens system, and its lens and cornea together have a power of about +60 dioptres when relaxed, which is what makes the eye so powerful over such a short distance. Long sight is corrected by a convex lens, because the eye's own lens converges too weakly or the eyeball is too short, so the image would fall behind the retina; a converging lens brings it forward onto the retina. Short sight is corrected by a concave lens, because the eye converges too strongly and the image would fall in front of the retina; a diverging lens spreads the beam before it enters so that the image falls back onto the retina. The correction required is always stated as a power in dioptres, and its sign tells you which lens is needed."
+        },
+        {
+          "type": "table",
+          "caption": "Lens combinations and eye corrections",
+          "columns": ["Situation", "Working", "Result", "Note"],
+          "rows": [
+            ["Two lenses in contact", "Add the powers with their signs", "+5 D and -2 D give +3 D", "A positive and a negative partly cancel"],
+            ["Focal length of the combination", "One divided by the total power", "+3 D gives f = 0.333 m", "Convert the result back to metres or centimetres as asked"],
+            ["Long sight (hypermetropia)", "Converging lens prescribed", "Positive power", "The image would otherwise fall behind the retina"],
+            ["Short sight (myopia)", "Diverging lens prescribed", "Negative power", "The image would otherwise fall in front of the retina"],
+            ["Eye at rest", "Cornea and lens together", "About +60 D", "A very short focal length over a small distance"],
+            ["Reading glasses", "Usually a weak convex lens", "+1 D to +3 D", "Adds convergence so near objects focus on the retina"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Powers of thin lenses in contact add, and the signs must be kept throughout the addition.",
+            "A positive and a negative power can cancel, so a combination may be weaker than either lens alone.",
+            "Power and focal length carry the same information: given one you can always obtain the other.",
+            "Long sight is corrected with a convex lens and short sight with a concave lens; the signs of the powers follow directly.",
+            "A prescription of minus 2 dioptres means a concave lens of focal length -0.5 m.",
+            "The eye's own lens is adjustable, which is how it focuses objects at different distances.",
+            "A camera achieves the same result by moving the lens instead of changing its shape.",
+            "Always convert the focal length to metres before computing power, since the dioptre is defined on metres."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A spectacle lens of power -2.5 D has a focal length of one divided by -2.5 = -0.4 m, that is -40 cm, and the negative sign tells you it is a concave lens prescribed for short sight.", "note": "Convert metres back to centimetres when the question asks for a focal length in centimetres." },
+            { "text": "A magnifier of +10 D held close to a page focuses light from the page near the eye's near point, giving a virtual, erect, magnified image because the object lies inside the focal length of one tenth of a metre.", "note": "Ten dioptres means a focal length of 10 cm, which is a comfortable working distance for a hand lens." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Rays through a convex lens and a concave lens",
+      "description": "Two lenses drawn in section on a common principal axis, each with its optical centre marked. Left panel: three rays parallel to the axis pass through a convex lens and meet at the principal focus on the far side, with the focal length marked from the optical centre to that focus. Right panel: the same three parallel rays pass through a concave lens and spread apart, with dashed backward extensions meeting at a virtual focus on the incident side.",
+      "labels": ["principal axis", "optical centre", "convex lens, thicker at the centre", "parallel rays converge", "principal focus", "focal length f", "concave lens, thinner at the centre", "rays diverge", "virtual focus", "backward extension"]
+    },
+    {
+      "caption": "Figure: Image formation by a convex lens with the object beyond 2F",
+      "description": "A convex lens with its principal axis, focus F and the point 2F marked on both sides. An upright arrow representing the object stands beyond 2F on the left. Two rays are drawn from its tip: one parallel to the axis that refracts through the far focus, and one through the optical centre that passes straight on. They meet between F and 2F on the right, where a smaller downward arrow marks the real, inverted, diminished image.",
+      "labels": ["object beyond 2F", "ray parallel to the axis", "ray through the optical centre", "F", "2F", "real inverted image", "image between F and 2F", "diminished"]
+    },
+    {
+      "caption": "Figure: A magnifying glass and the eye's correction lenses",
+      "description": "Left panel: a convex lens close to a printed page with the object drawn inside the focal length, and the refracted rays diverging into an eye; dashed backward extensions meet above the page to form a larger upright virtual image, labelled magnified, erect and virtual. Right panel: two small eye diagrams, the first showing rays converging in front of the retina marked short sight, corrected by a concave lens, and the second showing rays converging behind the retina marked long sight, corrected by a convex lens.",
+      "labels": ["object within the focal length", "virtual magnified image", "eye", "short sight: image in front of retina", "concave lens corrects it", "long sight: image behind retina", "convex lens corrects it"]
+    }
+  ],
+  "keyPoints": [
+    "A convex lens is thicker at the centre and converges parallel rays to a real principal focus.",
+    "A concave lens is thinner at the centre and diverges parallel rays from a virtual focus.",
+    "A ray through the optical centre of a lens passes undeviated, in either type.",
+    "Under the Cartesian convention all distances are measured from the optical centre and the direction of incident light is positive.",
+    "The object distance is negative for a real object; the focal length is positive for a convex lens and negative for a concave one.",
+    "The lens formula is one over v minus one over u equals one over f, and it must be used with signs attached.",
+    "Magnification equals image height over object height, and also image distance over object distance.",
+    "A positive magnification means an erect image and a negative one an inverted image; real images from a single lens are always inverted.",
+    "A convex lens gives a real inverted diminished image beyond 2F, the same size at 2F, magnified between F and 2F, and a virtual erect magnified image inside F.",
+    "Power is one divided by the focal length in metres, measured in dioptres, and powers of thin lenses in contact add."
+  ],
+  "examFocus": [
+    "Write down u, v and f with their signs before substituting into the lens formula — the signs are where most of the marks are lost.",
+    "Never take the focal length of a concave lens as positive; under the Cartesian convention it is negative and the formula will fail without it.",
+    "State the nature and orientation of the image as well as its distance, since a question asks what the image is like, not only where it is.",
+    "For power, convert the focal length to metres first; a 20 cm lens is 0.20 m and not 20.",
+    "In a combination, add the powers with their signs, and use the total to find the focal length of the combination."
+  ],
+  "vocabulary": [
+    { "word": "Convex lens", "meaning": "Lens thicker at the centre that converges parallel rays to a real focus." },
+    { "word": "Concave lens", "meaning": "Lens thinner at the centre that diverges parallel rays from a virtual focus." },
+    { "word": "Principal focus", "meaning": "Point on the principal axis where rays parallel to it meet after refraction." },
+    { "word": "Optical centre", "meaning": "Point through which a ray passes a lens undeviated." },
+    { "word": "Focal length", "meaning": "Distance from the optical centre to the principal focus." },
+    { "word": "Magnification", "meaning": "Ratio of image height to object height, equal to v over u." },
+    { "word": "Power", "meaning": "One divided by the focal length in metres, measured in dioptres." },
+    { "word": "Dioptre", "meaning": "Unit of lens power, equal to a focal length of one metre." }
+  ],
+  "questions": [
+    {
+      "id": "phy-lens-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement correctly describes a concave lens?",
+      "options": ["Thicker at the centre and always gives a real image", "Thinner at the centre and always gives a virtual, erect, diminished image", "Thicker at the centre and always gives a magnified image", "Thinner at the centre and gives a real image of a real object"],
+      "correctIndex": 1,
+      "answer": "Thinner at the centre and always gives a virtual, erect, diminished image",
+      "explanation": "A concave lens is thinner in the middle than at the edges, so it spreads parallel rays apart and they only appear to meet at a virtual focus. The image of a real object is therefore always virtual, always erect and always diminished, whatever the object distance. A convex lens is the thicker-at-the-centre one that can form a real image.",
+      "commonMistake": "Assuming every lens can project an image on a screen. Only a convex lens can form a real image of a real object."
+    },
+    {
+      "id": "phy-lens-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The power of a lens is defined as one divided by its ________ expressed in ________, and it is measured in dioptres.",
+      "answer": "focal length; metres",
+      "explanation": "Power describes how strongly a lens converges or diverges light, and it is defined as one over the focal length with that length measured in metres, because the dioptre is defined on a one-metre focal length. A lens of focal length 0.25 m therefore has a power of 4 dioptres, while the same lens quoted as 25 cm must first be converted.",
+      "commonMistake": "Leaving the focal length in centimetres, which would give a power a hundred times too large."
+    },
+    {
+      "id": "phy-lens-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A convex lens of focal length 20 cm has an object placed 60 cm in front of it. Where does the image form?",
+      "options": ["30 cm beyond the lens", "15 cm beyond the lens", "60 cm beyond the lens", "20 cm in front of the lens"],
+      "correctIndex": 0,
+      "answer": "30 cm beyond the lens",
+      "explanation": "Using the Cartesian convention, u = -60 cm and f = +20 cm, so one over v equals one over 20 plus one over -60, which is 3 over 60 minus 1 over 60 = 2 over 60 = 1 over 30, giving v = +30 cm. The positive sign means a real image on the far side of the lens, and it lies between f and 2f, which is exactly what an object beyond 2f should give.",
+      "commonMistake": "Dropping the minus sign on u and obtaining a negative image distance, which would wrongly indicate a virtual image."
+    },
+    {
+      "id": "phy-lens-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the three rules used to draw a ray diagram for a convex lens, and explain how you would tell from your diagram whether the image is real or virtual.",
+      "answer": "The first rule is that a ray travelling parallel to the principal axis is refracted through the principal focus on the far side of the lens. The second is that a ray passing through the optical centre of the lens goes straight through without being deviated. The third is that a ray passing through the principal focus on the incident side emerges parallel to the principal axis. Only two of these need to be drawn, since the third must pass through the same point as the other two. The image is real if the refracted rays actually meet on the far side of the lens, and such an image can be caught on a screen and is inverted; it is virtual if the refracted rays only meet when they are extended backwards, in which case the image lies on the incident side, is erect, and cannot be projected onto a screen.",
+      "explanation": "All three rules must be stated, and the real against virtual distinction must be made from whether the rays genuinely meet or only appear to meet when extended. Attaching the orientation to each kind shows understanding rather than recall.",
+      "commonMistake": "Describing the third ray as one through the optical centre. It is the ray through the focus that emerges parallel; the optical centre ray is a separate rule."
+    },
+    {
+      "id": "phy-lens-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "An object 4 cm tall is placed 30 cm in front of a convex lens of focal length 10 cm. Calculate the image distance, state the nature and size of the image, and explain how the result is consistent with the ray-diagram prediction.",
+      "answer": "Taking the Cartesian convention, u = -30 cm and f = +10 cm. The lens formula gives one over v minus one over -30 equals one over 10, so one over v equals one over 10 minus one over 30 = 3 over 30 minus 1 over 30 = 2 over 30 = 1 over 15, giving v = +15 cm. The positive sign shows that the image is real and lies on the far side of the lens. Magnification is v over u = 15 divided by -30 = -0.5, so the image height is -0.5 x 4 = -2 cm: it is inverted and half the size of the object. This is consistent with the ray diagram, because the object at 30 cm stands beyond twice the focal length of 20 cm, and an object beyond 2F is predicted to give a real, inverted, diminished image lying between F and 2F; here the image at 15 cm does lie between 10 cm and 20 cm.",
+      "explanation": "The calculation gives the image distance, the magnification and the size, and the final part requires checking the numerical result against the table of positions. Quoting the magnification without its negative sign loses the fact that the image is inverted.",
+      "commonMistake": "Reporting the image size as 2 cm without the minus sign, which leaves the orientation unstated and the answer incomplete."
+    },
+    {
+      "id": "phy-lens-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is the power of a concave lens of focal length 50 cm?",
+      "options": ["+2 dioptres", "-2 dioptres", "+0.02 dioptres", "-0.02 dioptres"],
+      "correctIndex": 1,
+      "answer": "-2 dioptres",
+      "explanation": "The focal length must first be converted to metres, so 50 cm becomes 0.50 m, and a concave lens has a negative focal length under the Cartesian convention, giving f = -0.50 m. Power is one divided by the focal length, so P = 1 divided by -0.50 = -2 dioptres. The negative sign identifies the lens as diverging, which is what corrects short sight.",
+      "commonMistake": "Reporting +2 dioptres and losing the sign, or forgetting the conversion and giving 0.02 dioptres."
+    },
+    {
+      "id": "phy-lens-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A convex lens of power +5 dioptres is placed in contact with a concave lens of power -2 dioptres. Calculate the total power of the combination, its focal length, and the nature of the images a distant object would form through it. State what would happen to the total power if the second lens were removed.",
+      "answer": "Powers of thin lenses in contact add, so the total power is +5 plus -2 = +3 dioptres. The focal length of the combination is one divided by the total power, so f = 1 divided by 3 = 0.333 m, that is 33.3 cm. Since the total power is positive, the combination behaves as a converging lens, so a distant object forms a real, inverted, diminished image at its principal focus, about 33.3 cm from the combination, and this image could be caught on a screen. If the concave lens were removed, the combination would be the single convex lens alone, with a power of +5 dioptres and a focal length of one divided by 5 = 0.20 m, that is 20 cm, so the image would form nearer the lens and would be smaller than through the combination.",
+      "explanation": "The powers must be added with their signs, since adding the magnitudes would give +7 dioptres and describe a very different instrument. The focal length then follows from the reciprocal of the total power, and the comparison with the single lens shows the effect of the concave element explicitly.",
+      "commonMistake": "Adding the two powers as 5 + 2 = 7 dioptres. The concave lens has a negative power and must be subtracted."
+    },
+    {
+      "id": "phy-lens-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain, in terms of where the image forms, why a person with long sight needs a convex lens while a person with short sight needs a concave one.",
+      "answer": "In long sight the eye's lens converges the incoming light too weakly, or the eyeball is too short, so the image of a near object would form behind the retina and appears blurred. A convex lens is placed in front of the eye to add convergence, starting the rays on a more converging path so that the eye can bring them to a focus exactly on the retina instead. In short sight the eye converges the light too strongly, or the eyeball is too long, so the image of a distant object would form in front of the retina. A diverging, concave lens spreads the beam slightly before it enters the eye, so the eye's own over-strong convergence brings the image back onto the retina rather than in front of it.",
+      "explanation": "Both explanations must be given in terms of where the image falls relative to the retina and what the added lens does about it. Naming the lens type without locating the image leaves the reasoning unstated.",
+      "commonMistake": "Swapping the two corrections. Long sight is corrected by a convex lens with positive power and short sight by a concave lens with negative power."
+    },
+    {
+      "id": "phy-lens-09",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Under the Cartesian sign convention the object distance is always ________ for a real object, and the focal length of a convex lens is ________ while that of a concave lens is negative.",
+      "answer": "negative; positive",
+      "explanation": "All distances are measured from the optical centre and the direction of the incident light is taken as positive, so the object, which lies on the incident side, always has a negative object distance. A convex lens converges light to a real focus on the far side, where distances are positive, so its focal length is positive; a concave lens forms only a virtual focus on the incident side, so its focal length is negative.",
+      "commonMistake": "Taking the object distance as positive because a distance is usually positive. In the lens formula the sign carries the position, and it must be included."
+    },
+    {
+      "id": "phy-lens-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An object is placed at the principal focus of a convex lens. What image is formed?",
+      "options": ["A real, inverted image at twice the focal length", "A virtual, erect image at the focus", "No image at a finite distance, because the emerging rays are parallel", "A highly diminished image at the focus"],
+      "correctIndex": 2,
+      "answer": "No image at a finite distance, because the emerging rays are parallel",
+      "explanation": "When the object stands exactly at the principal focus, every ray from it leaves the lens parallel to the others, so they neither meet on the far side nor appear to meet when extended backwards. The image is said to lie at infinity, which is another way of saying that no image forms at any finite distance. Moving the object just inside the focus gives a virtual, erect, magnified image instead.",
+      "commonMistake": "Choosing the option that gives an image at the focus. That image at the focus belongs to an object at infinity, not to an object placed at the focus."
+    },
+    {
+      "id": "phy-lens-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "An object 6 cm tall is placed 15 cm in front of a concave lens of focal length 10 cm. Calculate the image distance and the magnification, describe the image fully, and explain why this result could not be obtained with a convex lens of the same focal length and object distance.",
+      "answer": "For a concave lens the focal length is negative under the Cartesian convention, so f = -10 cm and u = -15 cm. The lens formula gives one over v minus one over -15 equals one over -10, so one over v equals one over -10 plus one over -15 = minus 3 over 30 minus 2 over 30 = minus 5 over 30 = -1 over 6, giving v = -6 cm. The negative image distance means the image is virtual and lies on the same side as the object, 6 cm from the lens. Magnification is v over u = -6 divided by -15 = +0.4, so the image is erect and 0.4 x 6 = 2.4 cm tall, that is diminished. The result is consistent with the rule that a concave lens always gives a virtual, erect, diminished image. A convex lens of focal length 10 cm with the object at 15 cm would instead give one over v = 1 over 10 minus 1 over 15 = 3 over 30 minus 2 over 30 = 1 over 30, so v = +30 cm, a real, inverted, magnified image on the far side — an entirely different outcome from the same numbers.",
+      "explanation": "The negative focal length is the essential step, since using +10 cm would give a nonsense result for a concave lens. The magnification must be interpreted through its positive sign, and the final comparison with the convex case shows that the sign of the focal length, not the size of it, decides the outcome.",
+      "commonMistake": "Using a positive focal length for the concave lens. The sign is what makes the lens diverging, and without it the calculation describes a convex lens."
+    }
+  ]
+}

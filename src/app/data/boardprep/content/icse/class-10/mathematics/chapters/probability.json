@@ -10,7 +10,7 @@
     "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "Probability is the study of the likelihood of events occurring. In ICSE Class X, the focus is on theoretical (classical) probability, where all outcomes are equally likely. The chapter covers the definition of probability as the ratio of favourable outcomes to total equally likely outcomes, the sample space (the set of all possible outcomes), and events (subsets of the sample space). Students learn to calculate probabilities for single experiments (coin toss, die throw, card draw) and simple compound events involving 'and' (intersection) and 'or' (union). The chapter also covers the complementary event: P(not E) = 1 − P(E)."
+    "intro": "Probability is the study of the likelihood of events occurring. In ICSE Class X, the focus is on theoretical (classical) probability, where all outcomes are equally likely. The chapter covers the definition of probability as the ratio of favourable outcomes to total equally likely outcomes, the sample space (the set of all possible outcomes), and events (subsets of the sample space). Students learn to calculate probabilities for single experiments (coin toss, die throw, card draw) and simple compound events involving 'and' (intersection) and 'or' (union). The chapter also covers the complementary event: P(not E) = 1 − P(E).",
     "facts": [
       { "label": "Probability of an event E", "value": "P(E) = Number of favourable outcomes / Total number of equally likely outcomes" },
       { "label": "Complementary event", "value": "P(not E) = 1 − P(E)" },
@@ -40,8 +40,8 @@
           "text": "Probability measures the likelihood that an event will occur. It is expressed as a number between 0 and 1, where 0 means the event is impossible and 1 means the event is certain (sure). The theoretical (classical) definition of probability, which is used in ICSE Class X, assumes that all outcomes of an experiment are equally likely. The sample space is the set of all possible outcomes. An event is a subset of the sample space — one or more outcomes that we are interested in. The probability of an event E is given by P(E) = (number of outcomes favourable to E) / (total number of equally likely outcomes). The complementary event 'not E' has probability P(not E) = 1 − P(E)."
         },
         {
-          "type": "diagram",
-          "text": "A Venn diagram or list showing the sample space and events for a coin toss or die throw."
+          "type": "paragraph",
+          "text": "A convenient way to picture an experiment is to list its sample space: for a single coin toss the space is {H, T}, and for two tosses it is {HH, HT, TH, TT}. Events are selections from the space — for example, 'at least one head' collects HH, HT and TH. A Venn diagram draws the same information, with each event enclosed as a region inside the sample-space boundary."
         },
         {
           "type": "bullets",
@@ -57,6 +57,7 @@
     },
     {
       "id": "prob-sample-space",
+      "title": "Sample Space",
       "Title": "Sample Space and Equally Likely Outcomes",
       "blocks": [
         {
@@ -96,6 +97,7 @@
     },
     {
       "id": "prob-basic-calculations",
+      "title": "Probability of an Event",
       "Title": "Basic Probability Calculations",
       "blocks": [
         {
@@ -136,6 +138,7 @@
     },
     {
       "id": "prob-compound",
+      "title": "Compound Events",
       "Title": "Compound Events: 'And' and 'Or'",
       "blocks": [
         {
@@ -176,6 +179,7 @@
     },
     {
       "id": "prob-complementary",
+      "title": "Complementary Events",
       "Title": "Complementary Events",
       "blocks": [
         {
@@ -215,6 +219,7 @@
     },
     {
       "id": "prob-standard-experiments",
+      "title": "Standard Experiments",
       "Title": "Standard Probability Experiments",
       "blocks": [
         {
@@ -249,123 +254,188 @@
     },
     {
       "id": "review-questions",
+      "title": "Review Questions",
       "Title": "Review Questions",
       "blocks": [
         {
           "type": "paragraph",
           "text": "The questions that follow move from defining sample spaces and computing basic probabilities through compound events and complementary events to standard experiment problems. Work each one by identifying the experiment, writing the sample space, and applying the probability formula."
-        },
-        {
-          "type": "questions": [
-            {
-              "id": "icse-10-math-q-prob-01",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "A coin is tossed. The probability of getting a head is _____.",
-              "options": ["0", "1/2", "1", "undefined"],
-              "correctIndex": 1,
-              "answer": "1/2",
-              "explanation": "The sample space is {H, T}, with 2 equally likely outcomes. The favourable outcome is H, so P(head) = 1/2."
-            },
-            {
-              "id": "icse-10-math-q-prob-02",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "A die is thrown. The probability of getting a number greater than 6 is _____.",
-              "options": ["0", "1/6", "1", "undefined"],
-              "correctIndex": 0,
-              "answer": "0",
-              "explanation": "A standard die has faces {1, 2, 3, 4, 5, 6}; no outcome is greater than 6, so the event is impossible and P = 0."
-            },
-            {
-              "id": "icse-10-math-q-prob-03",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "A die is thrown. The probability of getting an even number is _____.",
-              "options": ["1/3", "1/2", "2/3", "5/6"],
-              "correctIndex": 1,
-              "answer": "1/2",
-              "explanation": "The even numbers are {2, 4, 6}, so 3 favourable outcomes out of 6: P = 3/6 = 1/2."
-            },
-            {
-              "id": "icse-10-math-q-prob-04",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "Two coins are tossed simultaneously. Find the probability of getting (i) exactly one head, (ii) at most one head.",
-              "answer": "(i) P(exactly one head) = 2/4 = 1/2 (favourable outcomes: HT, TH). (ii) P(at most one head) = 3/4 (favourable outcomes: HH, HT, TH; only TT has two heads).",
-              "explanation": "The sample space for two coins is {HH, HT, TH, TT}. (i) Exactly one head: HT and TH, so 2/4 = 1/2. (ii) At most one head: HH, HT, TH (three outcomes), so 3/4."
-            },
-            {
-              "id": "icse-10-math-q-prob-05",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A card is drawn from a well-shuffled deck of 52 cards. Find the probability of drawing a king or a queen.",
-              "answer": "P(king or queen) = 4/52 + 4/52 = 8/52 = 2/13. (Kings and queens are mutually exclusive.)",
-              "explanation": "There are 4 kings and 4 queens in a 52-card deck. Since a card cannot be both a king and a queen, the events are mutually exclusive, and P(A or B) = P(A) + P(B)."
-            },
-            {
-              "id": "icse-10-math-q-prob-06",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A bag contains 4 white, 5 black, and 3 red balls. A ball is drawn at random. Find the probability that the ball is white or red.",
-              "answer": "P(white or red) = 4/12 + 3/12 = 7/12.",
-              "explanation": "Total balls = 12. There are 4 white and 3 red, so 7 favourable outcomes. Since a ball cannot be both white and red, the events are mutually exclusive: P = 7/12."
-            },
-            {
-              "id": "icse-10-math-q-prob-07",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A die is thrown twice. Find the probability of getting a 5 at least once.",
-              "answer": "P(at least one 5) = 1 − P(no 5 in two throws) = 1 − (5/6)² = 1 − 25/36 = 11/36.",
-              "explanation": "The complementary event 'no 5 in two throws' has probability (5/6) × (5/6) = 25/36. So P(at least one 5) = 1 − 25/36 = 11/36."
-            },
-            {
-              "id": "icse-10-math-q-prob-08",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "From a pack of 52 cards, a card is drawn at random. Find the probability that the card is (i) a king, (ii) a heart, (iii) a king and a heart, (iv) a king or a heart.",
-              "answer": "(i) 4/52 = 1/13. (ii) 26/52 = 1/2. (iii) 1/52 (only the king of hearts). (iv) 16/52 = 4/13 (using P(A or B) = P(A) + P(B) − P(A and B) = 4/52 + 26/52 − 1/52 = 29/52. Wait, 4+26−1 = 29, so 29/52. Actually let me recheck: 4/52 + 26/52 − 1/52 = 29/52. But 29/52 doesn't simplify nicely. Let me verify: there are 4 kings, 26 hearts, and 1 king of hearts. So P(king or heart) = (4 + 26 − 1)/52 = 29/52.",
-              "explanation": "(i) 4 kings out of 52 cards. (ii) 13 hearts out of 52 cards. (iii) Only the king of hearts is both a king and a heart, so 1/52. (iv) Using the addition rule: P(king or heart) = P(king) + P(heart) − P(king and heart) = 4/52 + 26/52 − 1/52 = 29/52."
-            },
-            {
-              "id": "icse-10-math-q-prob-09",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "A box contains 3 defective and 7 non-defective bulbs. Two bulbs are drawn at random. Find the probability that both are non-defective.",
-              "answer": "P(both non-defective) = (7/10) × (6/9) = 42/90 = 7/15.",
-              "explanation": "P(first non-defective) = 7/10. Given first non-defective, there are 6 non-defective out of 9 remaining, so P(second non-defective) = 6/9 = 2/3. Multiply: 7/10 × 2/3 = 14/30 = 7/15."
-            },
-            {
-              "id": "icse-10-math-q-prob-10",
-              "type": "long",
-              "difficulty": "hard",
-              "marks": 4,
-              "origin": "practice",
-              "prompt": "A bag contains 5 white, 7 red, and 3 black balls. Two balls are drawn at random without replacement. Find the probability that (i) both are red, (ii) one is white and one is red, (iii) at least one is black.",
-              "answer": "(i) P(both red) = (7/15) × (6/14) = 42/210 = 1/5. (ii) P(one white and one red) = (5/15) × (7/14) + (7/15) × (5/14) = 35/210 + 35/210 = 70/210 = 1/3. (iii) P(at least one black) = 1 − P(no black) = 1 − [(5+7)/15 × (5+6)/14] = 1 − (12/15) × (11/14) = 1 − 132/210 = 78/210 = 13/35.",
-              "explanation": "(i) P(first red) = 7/15. Given first red, P(second red) = 6/14 = 3/7. Multiply: 7/15 × 3/7 = 3/15 = 1/5. (ii) One white and one red can happen in two orders: white then red, or red then white. P(white then red) = (5/15) × (7/14) = 35/210. P(red then white) = (7/15) × (5/14) = 35/210. Total = 70/210 = 1/3. (iii) P(at least one black) = 1 − P(no black). P(no black on first draw) = 12/15 (5 white + 7 red). Given no black on first, P(no black on second) = 11/14 (5 white + 6 red remaining). So P(no black in two draws) = (12/15) × (11/14) = 132/210. Then P(at least one black) = 1 − 132/210 = 78/210 = 13/35."
-            }
-          ]
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The probability scale",
+      "description": "Every probability lies on the scale from 0 (an impossible event) to 1 (a certain event); a value of 1/2 means the event is as likely to happen as not.",
+      "labels": [
+        "0 — impossible",
+        "1/2 — even chance",
+        "1 — certain"
+      ]
+    },
+    {
+      "caption": "Figure: Sample-space tree diagram for two experiments",
+      "description": "A tree diagram lists every outcome of a multi-stage experiment, for example a coin toss followed by a die throw: 2 × 6 = 12 equally likely outcomes, each branch carrying its probability.",
+      "labels": [
+        "Coin branches: H, T",
+        "Die branches: 1–6",
+        "12 equally likely outcomes"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "P(E) = n(E) ÷ n(S) holds only when every outcome in the sample space S is equally likely.",
+    "Every probability satisfies 0 ≤ P(E) ≤ 1: P(certain event) = 1 and P(impossible event) = 0.",
+    "P(not E) = 1 − P(E) — use the complement whenever “at least one” makes direct counting tedious.",
+    "For independent events, P(A and B) = P(A) × P(B).",
+    "For any two events, P(A or B) = P(A) + P(B) − P(A and B); the subtraction removes the double-counted overlap.",
+    "A pack of 52 cards has 4 suits of 13 cards, 13 hearts, 4 kings, and exactly one card that is both a king and a heart.",
+    "A fair die has sample space {1, 2, 3, 4, 5, 6} and a fair coin {H, T}; list the space explicitly when asked.",
+    "A probability such as 29/52 that does not simplify is left as it is — never force a simplification."
+  ],
+  "examFocus": [
+    "Card questions test the addition rule through king/heart overlaps — always subtract the intersection that is counted twice.",
+    "“At least one” wording signals the complement: compute 1 − P(none) instead of adding many cases.",
+    "Two-dice questions have 36 equally likely outcomes; count the favourable pairs rather than multiplying face probabilities blindly.",
+    "Writing the sample space earns separate marks from the final probability — show it in full."
+  ],
+  "vocabulary": [
+    {
+      "word": "Sample space",
+      "meaning": "The set of all possible equally likely outcomes of an experiment."
+    },
+    {
+      "word": "Event",
+      "meaning": "A subset of the sample space: a selection of outcomes to which a probability is assigned."
+    },
+    {
+      "word": "Favourable outcome",
+      "meaning": "An outcome that satisfies the event in question."
+    },
+    {
+      "word": "Complement (not E)",
+      "meaning": "The event that E does not occur; its probability is 1 − P(E)."
+    },
+    {
+      "word": "Independent events",
+      "meaning": "Events for which the outcome of one does not change the probability of the other."
+    },
+    {
+      "word": "Certain event",
+      "meaning": "An event that must occur; its probability is 1."
+    },
+    {
+      "word": "Impossible event",
+      "meaning": "An event that cannot occur; its probability is 0."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-prob-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A coin is tossed. The probability of getting a head is _____.",
+      "options": ["0", "1/2", "1", "undefined"],
+      "correctIndex": 1,
+      "answer": "1/2",
+      "explanation": "The sample space is {H, T}, with 2 equally likely outcomes. The favourable outcome is H, so P(head) = 1/2."
+    },
+    {
+      "id": "icse-10-math-q-prob-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A die is thrown. The probability of getting a number greater than 6 is _____.",
+      "options": ["0", "1/6", "1", "undefined"],
+      "correctIndex": 0,
+      "answer": "0",
+      "explanation": "A standard die has faces {1, 2, 3, 4, 5, 6}; no outcome is greater than 6, so the event is impossible and P = 0."
+    },
+    {
+      "id": "icse-10-math-q-prob-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A die is thrown. The probability of getting an even number is _____.",
+      "options": ["1/3", "1/2", "2/3", "5/6"],
+      "correctIndex": 1,
+      "answer": "1/2",
+      "explanation": "The even numbers are {2, 4, 6}, so 3 favourable outcomes out of 6: P = 3/6 = 1/2."
+    },
+    {
+      "id": "icse-10-math-q-prob-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two coins are tossed simultaneously. Find the probability of getting (i) exactly one head, (ii) at most one head.",
+      "answer": "(i) P(exactly one head) = 2/4 = 1/2 (favourable outcomes: HT, TH). (ii) P(at most one head) = 3/4 (favourable outcomes: HH, HT, TH; only TT has two heads).",
+      "explanation": "The sample space for two coins is {HH, HT, TH, TT}. (i) Exactly one head: HT and TH, so 2/4 = 1/2. (ii) At most one head: HH, HT, TH (three outcomes), so 3/4."
+    },
+    {
+      "id": "icse-10-math-q-prob-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A card is drawn from a well-shuffled deck of 52 cards. Find the probability of drawing a king or a queen.",
+      "answer": "P(king or queen) = 4/52 + 4/52 = 8/52 = 2/13. (Kings and queens are mutually exclusive.)",
+      "explanation": "There are 4 kings and 4 queens in a 52-card deck. Since a card cannot be both a king and a queen, the events are mutually exclusive, and P(A or B) = P(A) + P(B)."
+    },
+    {
+      "id": "icse-10-math-q-prob-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A bag contains 4 white, 5 black, and 3 red balls. A ball is drawn at random. Find the probability that the ball is white or red.",
+      "answer": "P(white or red) = 4/12 + 3/12 = 7/12.",
+      "explanation": "Total balls = 12. There are 4 white and 3 red, so 7 favourable outcomes. Since a ball cannot be both white and red, the events are mutually exclusive: P = 7/12."
+    },
+    {
+      "id": "icse-10-math-q-prob-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A die is thrown twice. Find the probability of getting a 5 at least once.",
+      "answer": "P(at least one 5) = 1 − P(no 5 in two throws) = 1 − (5/6)² = 1 − 25/36 = 11/36.",
+      "explanation": "The complementary event 'no 5 in two throws' has probability (5/6) × (5/6) = 25/36. So P(at least one 5) = 1 − 25/36 = 11/36."
+    },
+    {
+      "id": "icse-10-math-q-prob-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "From a pack of 52 cards, a card is drawn at random. Find the probability that the card is (i) a king, (ii) a heart, (iii) a king and a heart, (iv) a king or a heart.",
+      "answer": "(i) 4/52 = 1/13. (ii) 26/52 = 1/2. (iii) 1/52 — only the king of hearts is both a king and a heart. (iv) 29/52 — by the addition rule, P(king or heart) = 4/52 + 26/52 − 1/52 = 29/52.",
+      "explanation": "(i) 4 kings out of 52 cards. (ii) 13 hearts out of 52 cards. (iii) Only the king of hearts is both a king and a heart, so 1/52. (iv) Using the addition rule: P(king or heart) = P(king) + P(heart) − P(king and heart) = 4/52 + 26/52 − 1/52 = 29/52."
+    },
+    {
+      "id": "icse-10-math-q-prob-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A box contains 3 defective and 7 non-defective bulbs. Two bulbs are drawn at random. Find the probability that both are non-defective.",
+      "answer": "P(both non-defective) = (7/10) × (6/9) = 42/90 = 7/15.",
+      "explanation": "P(first non-defective) = 7/10. Given first non-defective, there are 6 non-defective out of 9 remaining, so P(second non-defective) = 6/9 = 2/3. Multiply: 7/10 × 2/3 = 14/30 = 7/15."
+    },
+    {
+      "id": "icse-10-math-q-prob-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A bag contains 5 white, 7 red, and 3 black balls. Two balls are drawn at random without replacement. Find the probability that (i) both are red, (ii) one is white and one is red, (iii) at least one is black.",
+      "answer": "(i) P(both red) = (7/15) × (6/14) = 42/210 = 1/5. (ii) P(one white and one red) = (5/15) × (7/14) + (7/15) × (5/14) = 35/210 + 35/210 = 70/210 = 1/3. (iii) P(at least one black) = 1 − P(no black) = 1 − [(5+7)/15 × (5+6)/14] = 1 − (12/15) × (11/14) = 1 − 132/210 = 78/210 = 13/35.",
+      "explanation": "(i) P(first red) = 7/15. Given first red, P(second red) = 6/14 = 3/7. Multiply: 7/15 × 3/7 = 3/15 = 1/5. (ii) One white and one red can happen in two orders: white then red, or red then white. P(white then red) = (5/15) × (7/14) = 35/210. P(red then white) = (7/15) × (5/14) = 35/210. Total = 70/210 = 1/3. (iii) P(at least one black) = 1 − P(no black). P(no black on first draw) = 12/15 (5 white + 7 red). Given no black on first, P(no black on second) = 11/14 (5 white + 6 red remaining). So P(no black in two draws) = (12/15) × (11/14) = 132/210. Then P(at least one black) = 1 − 132/210 = 78/210 = 13/35."
     }
   ]
 }

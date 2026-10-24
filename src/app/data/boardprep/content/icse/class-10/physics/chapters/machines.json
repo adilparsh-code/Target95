@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-machines",
+  "title": "Machines",
+  "kind": "physics",
+  "tagline": "The three lever classes, mechanical advantage, velocity ratio, efficiency, and how pulleys and a ramp trade force for distance.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A machine never gives you something for nothing: it lets you use a smaller force over a longer distance to achieve the same result, and this chapter makes that trade-off precise. It starts with the lever and its three classes, which are distinguished purely by the order of fulcrum, load and effort along the bar, then defines the two ratios that describe any machine — mechanical advantage, which is the force multiplication, and velocity ratio, which is the distance multiplication — and shows why a real machine's mechanical advantage can never exceed its velocity ratio. Efficiency follows naturally as the comparison between the two. The chapter then applies all of this to inclined planes and to pulley systems, where the number of supporting rope segments fixes the velocity ratio before friction is even considered.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Machines — levers, ratios, efficiency, pulleys, inclined plane" },
+      { "label": "Mechanical advantage", "value": "Load divided by effort; no units" },
+      { "label": "Velocity ratio", "value": "Distance moved by effort divided by distance moved by load; no units" },
+      { "label": "Efficiency", "value": "Mechanical advantage divided by velocity ratio, as a percentage" },
+      { "label": "Frictionless machine", "value": "Mechanical advantage equals velocity ratio, giving one hundred per cent efficiency" },
+      { "label": "Inclined plane", "value": "Velocity ratio equals the length of the slope divided by its height" }
+    ]
+  },
+  "learningOutcomes": [
+    "Identify the three classes of lever from the arrangement of fulcrum, load and effort.",
+    "Calculate mechanical advantage, velocity ratio and efficiency of a machine.",
+    "Determine the velocity ratio of an inclined plane and of a pulley system from its geometry.",
+    "Explain why a machine cannot be more than one hundred per cent efficient and account for the energy lost."
+  ],
+  "learn": [
+    {
+      "id": "levers",
+      "title": "Lever classes and what makes them different",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A lever is a rigid bar that pivots about a fixed point called the fulcrum, and it lets a small effort move a large load by trading distance for force. The three classes are distinguished only by the order in which fulcrum, load and effort sit along the bar. In a first-class lever the fulcrum lies between the load and the effort, so the bar can move either way about a central pivot — a see-saw, a crowbar, a pair of scissors or a pair of pliers all work this way, and the mechanical advantage can be greater than, equal to or less than one depending on where the two forces act. In a second-class lever the load lies between the fulcrum and the effort, so the effort is always further from the pivot than the load and the mechanical advantage is always greater than one — a wheelbarrow, a nutcracker and a bottle opener are examples. In a third-class lever the effort lies between the fulcrum and the load, so the mechanical advantage is always less than one: the load is never lifted with less force than it weighs, but it moves further and faster than the effort — a pair of tweezers, a fishing rod, a broom and the human forearm bent at the elbow all behave this way."
+        },
+        {
+          "type": "table",
+          "caption": "The three classes of lever",
+          "columns": ["Class", "Order along the bar", "Mechanical advantage", "Everyday examples"],
+          "rows": [
+            ["First class", "Fulcrum between load and effort", "Can be greater than, equal to or less than one", "See-saw, crowbar, scissors, pliers, balance"],
+            ["Second class", "Load between fulcrum and effort", "Always greater than one", "Wheelbarrow, nutcracker, bottle opener, door"],
+            ["Third class", "Effort between fulcrum and load", "Always less than one", "Tweezers, fishing rod, broom, human forearm, tongs"],
+            ["Effort arm", "Fulcrum to effort distance", "Sets how far the effort moves", "Longer effort arm means a smaller effort is needed"],
+            ["Load arm", "Fulcrum to load distance", "Sets how far the load moves", "Shorter load arm means a greater mechanical advantage"]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Machine", "meaning": "A device that overcomes a force or changes its direction, usually by multiplying the force at the cost of distance." },
+            { "term": "Fulcrum", "meaning": "The fixed point about which a lever turns." },
+            { "term": "Load", "meaning": "The force the machine is intended to overcome or lift." },
+            { "term": "Effort", "meaning": "The force applied to the machine by the person or engine operating it." },
+            { "term": "Effort arm", "meaning": "Distance from the fulcrum to the point where the effort is applied." },
+            { "term": "Load arm", "meaning": "Distance from the fulcrum to the point where the load acts." },
+            { "term": "Mechanical advantage", "meaning": "Load divided by effort; the factor by which the machine multiplies force." },
+            { "term": "Velocity ratio", "meaning": "Distance moved by the effort divided by the distance moved by the load; the factor by which the machine multiplies distance." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First-class levers reverse the direction of movement: pushing one end down raises the other.",
+            "Second-class levers always multiply the force, because the load is closer to the pivot than the effort.",
+            "Third-class levers always reduce the force but multiply the distance and the speed of the load.",
+            "A human forearm is a third-class lever: the biceps inserts just below the elbow, between the pivot and the weight in the hand.",
+            "Scissors are two first-class levers working as a pair, with the pivot between the finger loops and the blades.",
+            "To classify a lever, identify the three points first and then read off their order — the class follows immediately.",
+            "The lever's own weight matters if the bar is heavy and the pivot is not at its centre of gravity.",
+            "Work input still exceeds work output in a real lever, because friction acts at the pivot."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A crowbar lifts a load of 600 N with an effort of 100 N, giving a mechanical advantage of 600 divided by 100 = 6, and the effort end moves six times as far as the load.", "note": "A mechanical advantage above one always comes with a velocity ratio above one — the extra distance is the price." },
+            { "text": "In a pair of tweezers the effort acts between the joined end and the tips, so the class is third and the mechanical advantage is well below one: you squeeze hard at the middle to move the tips only slightly.", "note": "The third class buys precision and speed rather than force." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ratios-and-efficiency",
+      "title": "Mechanical advantage, velocity ratio and efficiency",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Mechanical advantage is the ratio of the load to the effort applied, so it tells you by what factor the machine multiplies force, and because it is a ratio of two forces it has no units. Velocity ratio is the ratio of the distance moved by the effort to the distance moved by the load, and it follows purely from the geometry of the machine, so it can be worked out without knowing any forces at all. For an ideal machine with no friction, all the work put in comes out again, which means effort times its distance equals load times its distance, and rearranging gives mechanical advantage exactly equal to the velocity ratio. No real machine achieves this, because some input work goes into overcoming friction at the pivot, the bearings or the rope; consequently the mechanical advantage of a real machine is always smaller than its velocity ratio, and efficiency is always below one hundred per cent. Efficiency is defined as the useful work output divided by the total work input, expressed as a percentage, and because the distances are the same on both sides of the definition it can also be written as mechanical advantage divided by velocity ratio multiplied by one hundred."
+        },
+        {
+          "type": "table",
+          "caption": "The three quantities compared",
+          "columns": ["Quantity", "Formula", "Units", "What it depends on"],
+          "rows": [
+            ["Mechanical advantage", "Load divided by effort", "None — it is a ratio of forces", "Forces actually applied, so friction reduces it"],
+            ["Velocity ratio", "Distance moved by effort divided by distance moved by load", "None — it is a ratio of distances", "Geometry of the machine only, unaffected by friction"],
+            ["Efficiency", "Useful output divided by total input, times 100", "Per cent", "Equal to M.A. divided by V.R., times 100"],
+            ["Ideal machine", "M.A. = V.R.", "—", "No friction, so efficiency is one hundred per cent"],
+            ["Real machine", "M.A. < V.R.", "—", "Some input work is spent against friction"],
+            ["Work input", "Effort times distance moved by effort", "joule", "Always at least equal to the output"],
+            ["Work output", "Load times distance moved by load", "joule", "Never greater than the input"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mechanical advantage and velocity ratio are both ratios, so neither carries a unit.",
+            "Velocity ratio can be found from the machine's dimensions alone, with no force measurement needed.",
+            "For any real machine, mechanical advantage is less than velocity ratio because of friction.",
+            "Efficiency equals mechanical advantage divided by velocity ratio, multiplied by one hundred per cent.",
+            "Efficiency can never exceed one hundred per cent, because that would mean more energy out than in.",
+            "A machine may be redesigned to raise efficiency, but no redesign can take it past one hundred per cent.",
+            "Work input equals effort multiplied by the distance the effort moves; work output equals load multiplied by its distance.",
+            "The missing work appears as heat at the pivot, in the bearings, or as sound in the moving parts."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A machine raises a load of 400 N when an effort of 100 N is applied, so the mechanical advantage is 400 divided by 100 = 4. If the effort moves 60 cm while the load moves 10 cm, the velocity ratio is 60 divided by 10 = 6, and the efficiency is 4 divided by 6 x 100 = 66.7 per cent.", "note": "The efficiency is obtained from the two ratios directly, without needing the actual work values." },
+            { "text": "An ideal machine with a velocity ratio of 5 would need an effort of 400 divided by 5 = 80 N to raise a 400 N load, since its mechanical advantage would equal 5.", "note": "The ideal figure is a lower bound on the effort; the real effort must be larger." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inclined-plane",
+      "title": "The inclined plane and other simple machines",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An inclined plane lets you raise a heavy load to a height by pushing it along a slope, and the whole benefit comes from spreading the work over a longer distance. For a slope of length l and height h, the load is raised through h while the effort acts over l, so the velocity ratio of the plane is the length divided by the height — it depends only on the geometry of the ramp. If the plane were frictionless, the work done by the effort would equal the gain in potential energy of the load, giving effort times length equal to load times height, and the effort would be load times height divided by length. Real ramps need a greater effort because friction must also be overcome, so the actual mechanical advantage is less than the velocity ratio. The same argument explains a screw, which is an inclined plane wrapped round a cylinder: one turn advances the screw by its pitch while the effort acts over the circumference of the circle your hand travels, so the velocity ratio is the circumference divided by the pitch. A wedge is simply two inclined planes back to back, used to split rather than to lift."
+        },
+        {
+          "type": "table",
+          "caption": "Simple machines based on the inclined plane",
+          "columns": ["Machine", "Distance the effort moves", "Distance the load moves", "Velocity ratio"],
+          "rows": [
+            ["Inclined plane", "Length of the slope", "Vertical height", "Length divided by height"],
+            ["Screw", "Circumference travelled by the handle in one turn", "Pitch, the advance in one turn", "Circumference divided by pitch"],
+            ["Wedge", "Length the wedge is driven in", "Separation produced", "Driven distance divided by separation"],
+            ["Ramp for a wheelchair", "Length of the ramp", "Height of the step", "Longer ramp means a smaller effort"],
+            ["Screw jack", "Circumference of the handle circle", "Rise of the load in one turn", "Handle circle divided by the pitch"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The velocity ratio of an inclined plane is its length divided by its height, obtained purely from geometry.",
+            "A longer ramp for the same height gives a greater velocity ratio and therefore needs a smaller effort.",
+            "On a frictionless plane, effort times length equals load times height, because work in equals gain in potential energy.",
+            "The screw converts a large distance moved by the hand into a very small advance of the load, so its velocity ratio is large.",
+            "A wedge trades a long driving distance for a small separation force, which is why a thin wedge splits wood so easily.",
+            "The mechanical advantage of any of these machines is always below its velocity ratio once friction is included.",
+            "Efficiency falls as friction rises, so a lubricated bearing or a smoother rope raises efficiency without changing the velocity ratio.",
+            "The velocity ratio of a fixed machine never changes with the load; its mechanical advantage does, because friction grows with load."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A crate is pushed up a ramp of length 5 m to a height of 1 m. The velocity ratio is 5 divided by 1 = 5, so on a frictionless ramp an effort of 400 divided by 5 = 80 N would raise a 400 N crate.", "note": "The real effort must exceed 80 N because friction is always present." },
+            { "text": "A screw has a pitch of 2 mm and the handle travels a circle of radius 5 cm, so one turn moves the handle 2 x 3.14 x 5 = 31.4 cm while the load rises 0.2 cm, giving a velocity ratio of 31.4 divided by 0.2 = 157.", "note": "Convert both distances to the same unit before dividing — here millimetres gives 314 divided by 2." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulleys",
+      "title": "Pulley systems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A single fixed pulley changes the direction of the effort so that you can pull downwards to raise a load, but it does not reduce the force required: the load and the effort are both supported by the same single rope, so its velocity ratio is one and its mechanical advantage is one when friction is ignored. A single movable pulley, by contrast, hangs with the load and is supported by two lengths of rope, so the load is shared between them and the effort needed is half the load, giving a velocity ratio of two; the cost is that the effort must move twice as far as the load rises. A pulley system combines fixed and movable pulleys in a block, and the velocity ratio equals the number of rope segments that directly support the movable block and its load. Counting those segments is the whole method: in a system where the rope is finally tied to the fixed block, the supporting segments are the ones that go down to and up from the movable block, and each additional segment reduces the effort by one more share while lengthening the distance the rope must be pulled. Real systems lose efficiency through friction in the bearings and the stiffness of the rope, so the actual effort always exceeds the ideal value."
+        },
+        {
+          "type": "table",
+          "caption": "Pulley arrangements compared",
+          "columns": ["Arrangement", "Rope segments supporting the load", "Velocity ratio", "Effect on effort and distance"],
+          "rows": [
+            ["Single fixed pulley", "One", "1", "Only the direction changes; effort equals load and moves the same distance"],
+            ["Single movable pulley", "Two", "2", "Effort is half the load, but the rope must be pulled twice as far"],
+            ["Two pulleys, one fixed one movable", "Two", "2", "Direction restored to a downward pull with half the effort"],
+            ["Block and tackle with three supporting strands", "Three", "3", "Effort is one third of the load, pulled three times the distance"],
+            ["Block and tackle with four supporting strands", "Four", "4", "Effort is one quarter of the load, pulled four times the distance"],
+            ["Rope tied to the movable block", "Adds one more segment", "Increases by one", "Every extra supporting segment lowers the ideal effort"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A fixed pulley has a velocity ratio of 1: it changes direction only, never size of force.",
+            "A movable pulley halves the ideal effort because two rope segments share the load.",
+            "The velocity ratio of a pulley system equals the number of rope lengths supporting the movable block and load.",
+            "Each extra supporting segment divides the effort further but increases the distance the rope must travel.",
+            "If the rope is finally anchored to the movable block, that segment also supports the load and is counted.",
+            "In an ideal system the work in equals the work out, so effort times rope pull distance equals load times lift distance.",
+            "Friction at the pulley bearings and rope stiffness make the real effort larger than the ideal one.",
+            "Efficiency in pulley systems generally falls as the number of pulleys rises, because there are more bearings to friction."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A block and tackle has three rope segments supporting the movable block, so the velocity ratio is 3 and a load of 600 N requires an ideal effort of 600 divided by 3 = 200 N, with the rope pulled 3 m for every 1 m of lift.", "note": "Check the two figures against each other: 200 x 3 = 600 x 1, so the work balance closes." },
+            { "text": "With the same load and a velocity ratio of 3, a real effort of 240 N gives a mechanical advantage of 600 divided by 240 = 2.5, and the efficiency is 2.5 divided by 3 x 100 = 83.3 per cent.", "note": "Efficiency is always mechanical advantage over velocity ratio, so it must come out below one hundred." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The three classes of lever",
+      "description": "Three horizontal bars, each on a triangular fulcrum, with a load shown as a downward arrow and an effort as an arrow in the direction applied. First class: fulcrum in the centre with load on the left and effort on the right, illustrated by a see-saw. Second class: fulcrum at the left end, load arrow in the middle and effort at the right end, illustrated by a wheelbarrow. Third class: fulcrum at the left end, effort arrow in the middle and load at the right end, illustrated by a pair of tweezers.",
+      "labels": ["fulcrum", "load", "effort", "first class: fulcrum in the middle", "second class: load in the middle", "third class: effort in the middle", "effort arm", "load arm"]
+    },
+    {
+      "caption": "Figure: Inclined plane and its velocity ratio",
+      "description": "A right-angled ramp with a box part way up it. The base of the ramp is drawn horizontal, the vertical height is marked h and the length of the slope is marked l. An arrow along the slope is labelled effort acting over distance l, and an arrow from the box to the top is labelled load raised through height h. A caption gives the velocity ratio as l divided by h.",
+      "labels": ["length of slope l", "vertical height h", "effort along the slope", "load raised through h", "velocity ratio equals l divided by h", "friction acts along the surface"]
+    },
+    {
+      "caption": "Figure: A single fixed pulley, a single movable pulley and a block and tackle",
+      "description": "Three panels. Left: a rope over a wheel fixed to a beam, with the load hanging on one side and a downward effort on the other, marked velocity ratio 1 and only the direction changed. Middle: a wheel carrying the load with the rope anchored above and the effort pulling upward on the free end, with the two supporting rope lengths bracketed and marked velocity ratio 2. Right: a block of three pulleys with a rope threading through them, the rope segments that support the movable block each numbered, giving a velocity ratio equal to their count.",
+      "labels": ["fixed pulley changes direction only", "velocity ratio 1", "movable pulley carries the load", "two supporting segments", "velocity ratio 2", "count the segments supporting the movable block", "block and tackle"]
+    }
+  ],
+  "keyPoints": [
+    "A machine multiplies force at the cost of distance; it never reduces the work required.",
+    "First-class lever: fulcrum between load and effort. Second class: load in the middle. Third class: effort in the middle.",
+    "Second-class levers always have a mechanical advantage above one; third-class levers always below one.",
+    "Mechanical advantage equals load divided by effort and has no units.",
+    "Velocity ratio equals distance moved by effort divided by distance moved by load, and follows from geometry alone.",
+    "For a frictionless machine, mechanical advantage equals velocity ratio and efficiency is one hundred per cent.",
+    "For any real machine, mechanical advantage is less than velocity ratio, so efficiency is below one hundred per cent.",
+    "Efficiency equals mechanical advantage divided by velocity ratio, multiplied by one hundred per cent.",
+    "The velocity ratio of an inclined plane is its length divided by its height.",
+    "The velocity ratio of a pulley system equals the number of rope segments supporting the movable block; a single fixed pulley has a ratio of one."
+  ],
+  "examFocus": [
+    "Identify the lever class by placing the fulcrum, load and effort in order first, then naming the class — the name follows from the order and not from the example.",
+    "Velocity ratio must be computed from distances or from the machine's geometry, never from the forces; using forces gives the mechanical advantage instead.",
+    "Efficiency answers should quote both ratios and their division, since the examiner's marks lie in the working rather than the percentage alone.",
+    "For pulleys, count the rope segments that actually support the movable block before doing any arithmetic, and state the count.",
+    "Always state whether a figure is ideal or real: an ideal effort assumes no friction and must be labelled as such."
+  ],
+  "vocabulary": [
+    { "word": "Machine", "meaning": "Device that overcomes or changes a force, usually trading distance for force." },
+    { "word": "Fulcrum", "meaning": "Fixed point about which a lever turns." },
+    { "word": "Mechanical advantage", "meaning": "Load divided by effort; the force multiplication of a machine." },
+    { "word": "Velocity ratio", "meaning": "Distance moved by effort divided by distance moved by load." },
+    { "word": "Efficiency", "meaning": "Useful output divided by total input, expressed as a percentage." },
+    { "word": "Effort arm", "meaning": "Distance from fulcrum to the point of effort." },
+    { "word": "Block and tackle", "meaning": "Pulley system of fixed and movable blocks giving a high velocity ratio." },
+    { "word": "Pitch", "meaning": "Distance a screw advances in one complete turn." }
+  ],
+  "questions": [
+    {
+      "id": "phy-machines-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In which class of lever does the fulcrum lie between the load and the effort?",
+      "options": ["First class", "Second class", "Third class", "All three classes"],
+      "correctIndex": 0,
+      "answer": "First class",
+      "explanation": "A first-class lever has the fulcrum in the middle, with the load on one side and the effort on the other, so the movement of one end is reversed at the other. A see-saw and a crowbar are examples. In the second class the load is in the middle and in the third class the effort is in the middle.",
+      "commonMistake": "Choosing the second class because it sounds like the 'normal' arrangement. The load is what sits in the middle in a second-class lever."
+    },
+    {
+      "id": "phy-machines-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Mechanical advantage is the ________ divided by the effort, while velocity ratio is the distance moved by the effort divided by the distance moved by the ________.",
+      "answer": "load; load",
+      "explanation": "Mechanical advantage compares the two forces — load over effort — so it says how much the machine multiplies force. Velocity ratio compares the two distances — effort movement over load movement — so it says how much the machine multiplies distance. Both are ratios of like quantities and therefore have no units.",
+      "commonMistake": "Reversing the mechanical advantage to effort over load. It is always what you get divided by what you put in for force, giving a value above one when the machine helps."
+    },
+    {
+      "id": "phy-machines-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A machine has a velocity ratio of 6 and a mechanical advantage of 4. What is its efficiency?",
+      "options": ["66.7 per cent", "150 per cent", "24 per cent", "10 per cent"],
+      "correctIndex": 0,
+      "answer": "66.7 per cent",
+      "explanation": "Efficiency is mechanical advantage divided by velocity ratio, multiplied by one hundred per cent, so 4 divided by 6 x 100 = 66.7 per cent. The remaining third of the input work has been used against friction. An efficiency above one hundred per cent, such as the second option, is impossible because it would mean more energy out than in.",
+      "commonMistake": "Multiplying the two ratios to give 24. Efficiency compares them by division, because it compares force multiplication with distance multiplication."
+    },
+    {
+      "id": "phy-machines-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the mechanical advantage of a real machine is always less than its velocity ratio, and state what happens to the missing energy.",
+      "answer": "For an ideal machine with no friction, the work input would equal the work output, and since work is force times distance, dividing one by the other shows that the mechanical advantage would exactly equal the velocity ratio. In a real machine, however, some of the input work is used to overcome friction at the pivot, the bearings, the rope and the moving surfaces, so less force is available to lift the load than the geometry alone would allow. The mechanical advantage therefore falls short of the velocity ratio. The energy that does not appear as useful output is converted into heat at the rubbing surfaces and is dissipated into the surroundings, together with a little sound, so the total energy is still conserved but the useful fraction is reduced.",
+      "explanation": "The answer must link the shortfall to friction and then account for the missing energy as heat, showing that conservation is not violated. Starting from the ideal case and then adding friction is what makes the argument complete rather than merely stating a result.",
+      "commonMistake": "Saying the machine 'loses energy'. Energy is conserved; it is converted to heat and is no longer available as useful work."
+    },
+    {
+      "id": "phy-machines-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe the three classes of lever, giving for each the position of the fulcrum, the load and the effort, and one everyday example.",
+      "answer": "In a first-class lever the fulcrum lies between the load and the effort, so a force applied at one end moves the other end in the opposite direction; the mechanical advantage may be greater than, equal to or less than one depending on the lengths of the two arms, and a see-saw or a crowbar is a familiar example. In a second-class lever the load lies between the fulcrum and the effort, so the effort is always applied further from the pivot than the load and the mechanical advantage is always greater than one, as in a wheelbarrow or a nutcracker. In a third-class lever the effort lies between the fulcrum and the load, so the mechanical advantage is always less than one and the machine never reduces the force needed, but it moves the load a greater distance and at a higher speed than the effort; a pair of tweezers and the human forearm, where the biceps acts just below the elbow, are examples of this class.",
+      "explanation": "For each class the order of the three points must be stated, together with the consequence for the mechanical advantage and a named example. The classes are defined by arrangement alone, so any answer that relies on the example instead of the arrangement risks being wrong for an unfamiliar tool.",
+      "commonMistake": "Describing only the examples. An unfamiliar object must be classifiable from the arrangement, which is why the order is the part that earns the marks."
+    },
+    {
+      "id": "phy-machines-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A single fixed pulley is used to raise a load of 500 N. Neglecting friction, what effort is required and what is the velocity ratio?",
+      "options": ["250 N, velocity ratio 2", "500 N, velocity ratio 1", "1000 N, velocity ratio 0.5", "250 N, velocity ratio 1"],
+      "correctIndex": 1,
+      "answer": "500 N, velocity ratio 1",
+      "explanation": "A fixed pulley is supported by a single rope on each side of the wheel, so the load and the effort are balanced by the same tension and the effort must equal the load, giving 500 N. The effort moves exactly as far as the load, so the velocity ratio is one. The only advantage of a fixed pulley is that you can pull downwards using your own weight.",
+      "commonMistake": "Applying the halving rule of a movable pulley to a fixed one. Halving the effort requires the pulley to move with the load."
+    },
+    {
+      "id": "phy-machines-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A load of 600 N is raised using a pulley system whose movable block is supported by three rope segments. Calculate the ideal effort, the velocity ratio, the actual effort if the efficiency is 80 per cent, and the distance the rope must be pulled to raise the load by 2 m.",
+      "answer": "The three rope segments each carry a share of the load, so the velocity ratio of the system is 3. For an ideal machine with no friction the mechanical advantage would equal the velocity ratio, so the ideal effort is 600 divided by 3 = 200 N. With an efficiency of 80 per cent, mechanical advantage divided by velocity ratio multiplied by 100 equals 80, so the mechanical advantage is 0.80 x 3 = 2.4, and the actual effort is the load divided by the mechanical advantage, 600 divided by 2.4 = 250 N. The velocity ratio also fixes the distances: the rope must be pulled three times as far as the load rises, so to lift the load by 2 m the rope must be pulled 3 x 2 = 6 m. As a check on the actual figures, the work input is 250 x 6 = 1500 J and the useful output is 600 x 2 = 1200 J, and 1200 divided by 1500 x 100 = 80 per cent, confirming the stated efficiency.",
+      "explanation": "All four quantities are required and they are linked: the geometry gives the velocity ratio, the ideal effort follows from it, the efficiency reduces the mechanical advantage to give the actual effort, and the velocity ratio again gives the distance. The closing work balance is the strongest evidence that the arithmetic is right.",
+      "commonMistake": "Taking 80 per cent of the load to get the effort, which would give 480 N. The efficiency applies to the ratio, so it must be applied to the mechanical advantage rather than to the load."
+    },
+    {
+      "id": "phy-machines-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A ramp of length 4 m is used to wheel a load of 800 N to a height of 1 m. Calculate the velocity ratio of the ramp and the effort required if the ramp were frictionless.",
+      "answer": "The velocity ratio of an inclined plane is its length divided by its height, so V.R. = 4 divided by 1 = 4. On a frictionless ramp the work done by the effort equals the gain in potential energy of the load, so effort times length equals load times height, giving effort = 800 x 1 divided by 4 = 800 divided by 4 = 200 N. Equivalently, with no friction the mechanical advantage equals the velocity ratio, so the effort is the load divided by the velocity ratio, 800 divided by 4 = 200 N.",
+      "explanation": "Both routes to the answer — work balance or ratio equality — should give the same figure, and quoting one is enough provided the frictionless assumption is stated. The velocity ratio itself comes from geometry alone and does not depend on the load.",
+      "commonMistake": "Using the horizontal base of the ramp instead of the slope length. The effort acts along the slope, so the distance it moves is the slope length."
+    },
+    {
+      "id": "phy-machines-09",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which arrangement of fulcrum, load and effort always gives a mechanical advantage greater than one?",
+      "options": ["First-class lever, fulcrum in the middle", "Second-class lever, load in the middle", "Third-class lever, effort in the middle", "Single fixed pulley"],
+      "correctIndex": 1,
+      "answer": "Second-class lever, load in the middle",
+      "explanation": "When the load sits between the fulcrum and the effort, the effort arm is necessarily longer than the load arm, so by the principle of moments a smaller effort balances a larger load and the mechanical advantage is always above one. A first-class lever can fall either side of one, a third-class lever is always below one, and a fixed pulley has a mechanical advantage of exactly one.",
+      "commonMistake": "Choosing the third class because it is used to lift things. It trades force for distance, so its mechanical advantage is below one."
+    },
+    {
+      "id": "phy-machines-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The velocity ratio of an inclined plane of length l and height h is ________ divided by ________, and it can be found without knowing any forces at all.",
+      "answer": "length; height",
+      "explanation": "The effort acts along the whole length of the slope while the load is raised through the vertical height, so the ratio of the two distances is the length divided by the height. Because both are lengths of the ramp itself, the velocity ratio follows from the geometry alone and is unaffected by friction or by the size of the load.",
+      "commonMistake": "Reversing the ratio to height over length, which would always give a value below one and could not describe a machine that reduces the effort."
+    },
+    {
+      "id": "phy-machines-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A wheelbarrow of load arm 0.4 m and effort arm 1.2 m carries a load of 600 N. Assuming the machine is frictionless, calculate the effort required, the velocity ratio if the handles move 0.6 m while the wheel rises 0.2 m, and the class of the lever.",
+      "answer": "The wheelbarrow is a second-class lever, because the load lies between the wheel, which is the fulcrum, and the effort applied at the handles. Taking moments about the wheel, the load acts at 0.4 m and the effort at 1.2 m, so effort x 1.2 = 600 x 0.4, giving effort x 1.2 = 240 and effort = 240 divided by 1.2 = 200 N. The velocity ratio is the distance moved by the effort divided by the distance moved by the load, so V.R. = 0.6 divided by 0.2 = 3. As expected for a frictionless machine the two agree: the mechanical advantage is 600 divided by 200 = 3, which equals the velocity ratio, confirming an efficiency of one hundred per cent.",
+      "explanation": "The class must be identified from the arrangement before any calculation, then the principle of moments gives the effort, and the geometry gives the velocity ratio. The final comparison of the two ratios is the built-in check that the machine was assumed frictionless, and it must show equality.",
+      "commonMistake": "Using mechanical advantage and velocity ratio interchangeably. One comes from forces and the principle of moments, the other from distances alone."
+    }
+  ]
+}

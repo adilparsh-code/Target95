@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-force",
+  "title": "Force",
+  "kind": "physics",
+  "tagline": "Moments, the principle of moments, centre of gravity, equilibrium and the force that turns a body in a circle.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed, with g taken as 9.8 m per second squared unless another value is stated. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A force can push or pull in a straight line, but it can also turn a body, and this chapter is largely about that turning action. It begins with the moment of a force and the principle of moments, which is the rule that lets you balance a beam, a see-saw or a spanner, then moves to the centre of gravity — the single point at which a body's whole weight may be considered to act — and to the two conditions a body must satisfy to remain in equilibrium. The chapter closes with uniform circular motion, where a force directed towards the centre continually changes a body's direction without changing its speed, and with the stability of a body, which turns out to depend on where its centre of gravity sits relative to its base.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Force — moment, equilibrium, centre of gravity, circular motion" },
+      { "label": "Moment of a force", "value": "Force multiplied by the perpendicular distance from the pivot" },
+      { "label": "Principle of moments", "value": "At equilibrium, the sum of the anticlockwise moments equals the sum of the clockwise moments" },
+      { "label": "Conditions of equilibrium", "value": "Resultant force zero and resultant moment zero" },
+      { "label": "Centripetal force", "value": "Directed towards the centre of the circle; equals mass times speed squared divided by radius" },
+      { "label": "Taking g", "value": "9.8 m per second squared unless stated otherwise" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define the moment of a force and calculate it with the correct unit.",
+    "Apply the principle of moments to solve for an unknown force or distance in a balanced system.",
+    "Locate the centre of gravity of a regular and an irregular lamina and explain stability in terms of it.",
+    "Calculate the centripetal force in uniform circular motion and explain why a body in equilibrium needs both conditions satisfied."
+  ],
+  "learn": [
+    {
+      "id": "moment-of-a-force",
+      "title": "Moment of a force and the principle of moments",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A force applied away from a pivot tends to turn the body about that pivot, and the measure of that turning effect is the moment of the force. Moment is defined as the force multiplied by the perpendicular distance from the axis of rotation to the line of action of the force, so its unit is the newton metre. Because a moment has both a size and a sense, moments are treated as positive when they turn a body anticlockwise and negative when they turn it clockwise; a body at rest has these two in balance. The principle of moments states that when a body is in equilibrium the sum of the anticlockwise moments about any point equals the sum of the clockwise moments about that same point. It matters that the point of moments is chosen freely: the equation holds about any pivot, and choosing the unknown force as the pivot is what usually removes it from the equation. The perpendicular distance must be used — a force applied at an angle to the beam has only its perpendicular component producing a moment, which is exactly why a spanner is pulled at right angles to its own length."
+        },
+        {
+          "type": "table",
+          "caption": "Working with moments",
+          "columns": ["Quantity", "Definition", "Unit", "Working rule"],
+          "rows": [
+            ["Moment of a force", "Force times the perpendicular distance from the pivot", "newton metre (N m)", "Take anticlockwise as positive and clockwise as negative"],
+            ["Principle of moments", "Sum of anticlockwise moments equals sum of clockwise moments", "An equation, not a quantity", "Valid about any pivot on a body in equilibrium"],
+            ["Couple", "Two equal, opposite forces not acting along the same line", "newton metre (N m)", "Moment of one force times the perpendicular distance between them"],
+            ["Torque of a couple", "The total turning effect of the couple", "newton metre (N m)", "Same as the moment of either force about the centre"],
+            ["Perpendicular distance", "Shortest distance from pivot to the line of action of the force", "metre", "Never use the distance along the beam if the force is not perpendicular"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Moment = force x perpendicular distance from the pivot, and the perpendicular qualifier is the part most often missed.",
+            "Moments are vector-like in sign: anticlockwise is conventionally positive and clockwise negative.",
+            "The principle of moments holds about any point you choose, so taking moments about the unknown gives it a moment of zero.",
+            "A couple consists of two equal and opposite forces whose lines of action do not coincide, so it produces a pure moment with no resultant force.",
+            "Turning a steering wheel or a screwdriver with two hands applies a couple.",
+            "A force applied directly through the pivot has no moment, however large it is.",
+            "The unit of moment is the newton metre; it is never written as a newton per metre, which would be something else entirely.",
+            "Increasing the distance from the pivot increases the moment in direct proportion, which is the whole reason for using a long spanner."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A force of 20 N acts perpendicular to a spanner 0.30 m from the nut, so the moment is 20 x 0.30 = 6 N m.", "note": "Write the product out before the answer; the units then follow from the two factors." },
+            { "text": "A 30 N child sits 1.5 m from the centre of a see-saw. To balance, a 45 N child must sit at a distance d with 30 x 1.5 = 45 x d, giving d = 45 divided by 45 = 1.0 m on the other side.", "note": "Check by recomputing: 45 x 1.0 = 45 N m, equal to 30 x 1.5 = 45 N m." },
+            { "text": "Two forces of 10 N act in opposite directions, 0.20 m apart, forming a couple. The moment of the couple is 10 x 0.20 = 2 N m.", "note": "For a couple, multiply one force by the separation, not by two forces added together." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "centre-of-gravity-and-equilibrium",
+      "title": "Centre of gravity and the conditions of equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every part of a body is pulled downwards by gravity, but for the purposes of moments these many small forces can be treated as one single force acting at one point, and that point is the centre of gravity. For a body of uniform density and regular shape the centre of gravity lies at the geometric centre, which is why a uniform square lamina has its centre of gravity at the intersection of its diagonals. For an irregular lamina it is found experimentally: suspend the lamina freely from a pin, hang a plumb line from the same pin and mark the line on the lamina, then repeat from a second hole. The centre of gravity is where the two lines cross, because in each position it must lie directly below the point of suspension for the body to hang at rest. Stability describes how difficult a body is to overturn, and it depends on the position of the centre of gravity relative to the base: lowering the centre of gravity and widening the base both increase stability, which is why a racing car is built low and wide and a double-decker bus is comparatively easy to tip."
+        },
+        {
+          "type": "table",
+          "caption": "The two conditions for equilibrium of a rigid body",
+          "columns": ["Condition", "Statement", "What it prevents", "Typical working"],
+          "rows": [
+            ["Translational equilibrium", "The resultant force on the body is zero", "The body accelerating away", "Resolve forces up and down, or left and right, and set each sum to zero"],
+            ["Rotational equilibrium", "The resultant moment about any point is zero", "The body starting to rotate", "Apply the principle of moments about a chosen pivot"],
+            ["Both together", "Both conditions satisfied", "Either kind of motion", "The body is at rest or moving with uniform velocity without turning"],
+            ["Single force condition alone", "Resultant force zero but moments not balanced", "Translation, but rotation still occurs", "A body may still start to turn about its pivot"]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Moment of a force", "meaning": "The turning effect of a force, equal to the force times its perpendicular distance from the pivot." },
+            { "term": "Principle of moments", "meaning": "For a body in equilibrium, anticlockwise moments equal clockwise moments about any point." },
+            { "term": "Centre of gravity", "meaning": "The point at which the whole weight of a body may be taken to act." },
+            { "term": "Couple", "meaning": "Two equal and opposite forces with different lines of action, giving a pure turning effect." },
+            { "term": "Equilibrium", "meaning": "The state in which the resultant force and the resultant moment on a body are both zero." },
+            { "term": "Stability", "meaning": "The resistance of a body to toppling over, governed by the height of its centre of gravity and the width of its base." },
+            { "term": "Centripetal force", "meaning": "The resultant force directed towards the centre of a circular path, required to keep a body moving in a circle." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A uniform body has its centre of gravity at its geometric centre; an irregular one is found by the plumb-line method.",
+            "For the body to hang freely at rest, the centre of gravity must lie vertically below the point of suspension.",
+            "A body topples when the vertical line through its centre of gravity falls outside its base.",
+            "Widening the base and lowering the centre of gravity both increase stability; raising the centre of gravity decreases it.",
+            "Resultant force zero alone does not guarantee equilibrium — a couple has no resultant force yet still turns the body.",
+            "A uniform seesaw balanced at its midpoint has its centre of gravity at the pivot, so its own weight produces no moment.",
+            "Stability is about position, not about mass: a light, low, wide object can be steadier than a heavy, tall, narrow one.",
+            "In a construction crane, a counterweight is placed to keep the centre of gravity on the safe side of the supporting wheels."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "To find the centre of gravity of a cardboard irregular shape, push a pin through hole A and hang a plumb line; mark the line, then repeat through hole B. The point where the two marked lines cross is the centre of gravity.", "note": "Three holes give a third line as a check; if all three do not meet, the shape is not of uniform density." },
+            { "text": "A book stands on edge and topples easily; laid flat it will not fall over, because the same centre of gravity now stands over a much wider base.", "note": "The height of the centre of gravity also changed, and both changes raise stability." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uniform-circular-motion",
+      "title": "Uniform circular motion and centripetal force",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a body moves in a circle at a steady speed, its velocity is nevertheless continuously changing, because velocity is a vector and the direction of motion changes at every point. A changing velocity means an acceleration, and by Newton's second law that acceleration requires a resultant force, which must act along the direction of the acceleration. For circular motion the acceleration points towards the centre of the circle and is called centripetal acceleration, so the required force is likewise directed towards the centre and is called the centripetal force. Its magnitude is mass times the speed squared divided by the radius of the path. This force is not a new kind of force — it is always supplied by something familiar: friction between the tyres and the road turns a car, the tension in the string swings a stone in a horizontal circle, and gravity pulls a satellite around the Earth. The reaction to this inward pull, as experienced by a body in a rotating frame, is the outward centrifugal effect that seems to push you outwards when a car turns sharply. If the force is removed the body moves off along the tangent, which is what happens to mud flying off a rotating wheel."
+        },
+        {
+          "type": "table",
+          "caption": "Circular motion: the quantities involved",
+          "columns": ["Quantity", "Meaning", "Direction", "Expression"],
+          "rows": [
+            ["Speed", "Distance travelled round the circle per second", "Along the tangent at each instant", "Circumference divided by time period"],
+            ["Velocity", "Speed with a direction that keeps changing", "Tangent to the circle", "Magnitude equals the speed"],
+            ["Centripetal acceleration", "Acceleration due to change of direction", "Towards the centre", "Speed squared divided by radius"],
+            ["Centripetal force", "Resultant force that produces that acceleration", "Towards the centre", "Mass times speed squared divided by radius"],
+            ["Time period", "Time for one complete turn", "—", "Circumference divided by speed"],
+            ["Centrifugal effect", "Apparent outward reaction", "Away from the centre", "Equal in magnitude to the centripetal force"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Speed can be constant while velocity is not, because velocity includes direction.",
+            "Centripetal means centre-seeking, and the force must be genuinely radial — a tangential force changes speed instead.",
+            "Friction supplies the centripetal force on a car turning on a level road, so a wet road reduces the force available.",
+            "The maximum safe speed on a bend falls with a smaller radius, since the required force rises as the speed squared.",
+            "A satellite is in free fall: gravity provides exactly the centripetal force, so it keeps falling towards the Earth but keeps missing it.",
+            "Mud leaves a wheel tangentially when the force holding it in the circle can no longer be supplied.",
+            "A conical pendulum swings with its string tension providing both the upward support against weight and the inward centripetal force.",
+            "Doubling the speed quadruples the required centripetal force, which is why high-speed cornering is so much more demanding.",
+            "Worked examples should state the direction of the centripetal force before putting numbers into the expression."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A car of mass 1000 kg turns a bend of radius 50 m at 10 m per second. The centripetal force required is m v squared divided by r = 1000 x 10 x 10 divided by 50 = 100000 divided by 50 = 2000 N.", "note": "Square the speed first, then divide by the radius, and only then multiply by the mass." },
+            { "text": "A stone of mass 0.5 kg is whirled in a circle of radius 0.8 m at 6 m per second. The tension in the string is 0.5 x 6 x 6 divided by 0.8 = 18 divided by 0.8 = 22.5 N.", "note": "Here the string's tension is the centripetal force — name the supplying force explicitly." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "forces-in-practice",
+      "title": "Putting moments and circular motion to work",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Most examination problems in this chapter combine the moment rule with a second idea rather than testing either in isolation, so it is worth working through the standard patterns. For a uniform lever the weight of the lever itself acts at its centre of gravity, which for a uniform bar is its midpoint, and that weight must be included as an extra moment unless the lever is stated to be light. For a body resting on two supports, taking moments about one support eliminates the reaction at that support and gives the reaction at the other directly, after which the first reaction follows from the fact that the total upward force equals the total downward force. For a vehicle on a circular track the friction supplies the centripetal force, so the maximum speed follows from equating the frictional limit with mass times speed squared divided by radius. In every case the method is the same three steps: choose a pivot, decide which moments are clockwise and which anticlockwise, and write the balance."
+        },
+        {
+          "type": "table",
+          "caption": "Standard problem patterns in this unit",
+          "columns": ["Pattern", "Pivot to choose", "Forces to include", "Result sought"],
+          "rows": [
+            ["Lever with its own weight", "The fulcrum", "Applied force, load, and the weight of the lever at its midpoint", "An unknown force or an unknown distance"],
+            ["Body on two supports", "One support", "Weight of the body plus both reactions", "The reaction at the other support"],
+            ["See-saw with several riders", "The centre pivot", "Every rider's weight with its own distance", "Where a rider must sit to balance"],
+            ["Car on a level circular track", "Centre of the circle", "Friction provides the centripetal force", "Maximum safe speed for that radius"],
+            ["Overturning test", "The outer edge of the base", "Weight acting through the centre of gravity", "Whether the moment of weight keeps it upright"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Always state the pivot before writing the equation — a moment is meaningless without one.",
+            "Include the weight of a lever unless the question states that it is light or uniform-and-pivoted-at-its-centre.",
+            "For a body on two supports, moments about one support give the other reaction in a single equation.",
+            "Check the final answer by taking moments about a different pivot; the balance must hold there as well.",
+            "In circular motion, identify what physically supplies the centripetal force before doing any arithmetic.",
+            "Watch the units: mass in kg, distance in m and speed in m per second give a force in newtons.",
+            "A result that is negative for a distance means you assumed the wrong side of the pivot, not that the physics has failed.",
+            "State the assumption for g explicitly — taking g as 9.8 m per second squared is not the same as taking it as 10."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A uniform metre rule of weight 1 N is pivoted at its 50 cm mark and a 2 N weight hangs at the 70 cm mark. For balance a force F acts at the 20 cm mark: 2 x 20 = F x 30, so F = 40 divided by 30 = 1.33 N anticlockwise about the pivot.", "note": "The rule's own weight acts at the pivot, so it produces no moment and drops out of the equation." },
+            { "text": "A 500 N plank rests on two supports 4 m apart with its weight acting 1.5 m from support A. Taking moments about A gives R B x 4 = 500 x 1.5 = 750, so R B = 187.5 N, and R A = 500 - 187.5 = 312.5 N.", "note": "The second step always uses total upward force equals total downward force." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Moments about a pivot",
+      "description": "A horizontal beam resting on a triangular pivot at its centre. On the left, an arrow labelled force F1 acting downward at distance d1 from the pivot; on the right an arrow labelled F2 at distance d2. Curved arrows show F1 turning the beam anticlockwise and F2 clockwise, with a caption giving F1 x d1 = F2 x d2 for balance. The distances are marked with dimension lines drawn perpendicular to the beam.",
+      "labels": ["pivot", "force F1", "distance d1", "anticlockwise moment", "force F2", "distance d2", "clockwise moment", "balance when the moments are equal"]
+    },
+    {
+      "caption": "Figure: Locating the centre of gravity of an irregular lamina",
+      "description": "An irregular cardboard shape with three holes near its edge. In the first stage it hangs from a pin at hole A with a plumb line hanging vertically from the same pin, and the line is marked on the lamina. In the second stage it hangs from hole B with a second mark drawn. The two marks cross at a single point marked with a small cross and labelled centre of gravity, with a dashed vertical line from each suspension point through it.",
+      "labels": ["point of suspension", "plumb line", "marked line from hole A", "marked line from hole B", "centre of gravity where the lines cross", "vertical through the suspension point"]
+    },
+    {
+      "caption": "Figure: Centripetal force in uniform circular motion",
+      "description": "A body of mass m moving round a circle of radius r at speed v, drawn at a point on the circumference. An arrow tangent to the circle is labelled velocity, and a second arrow from the body pointing to the centre is labelled centripetal force equals m v squared divided by r. Dashed lines show the radius and the centre, and a broken path shows the straight tangent along which the body would travel if the force were removed.",
+      "labels": ["centre", "radius r", "speed v", "velocity along the tangent", "centripetal force to the centre", "path if the force is removed"]
+    }
+  ],
+  "keyPoints": [
+    "The moment of a force is the force times the perpendicular distance from the pivot, measured in newton metres.",
+    "The principle of moments: for a body in equilibrium, the sum of the anticlockwise moments equals the sum of the clockwise moments about any point.",
+    "A couple is two equal and opposite forces with different lines of action; its moment is one force times the distance between them.",
+    "The centre of gravity is the point at which a body's whole weight may be taken to act.",
+    "For a uniform body of regular shape the centre of gravity is at its geometric centre; for an irregular lamina use the plumb-line method.",
+    "A body is in equilibrium only when the resultant force is zero and the resultant moment is zero.",
+    "A body topples when the vertical line through its centre of gravity falls outside its base.",
+    "Speed in a circle may be constant while velocity is not, because the direction keeps changing.",
+    "Centripetal force equals mass times speed squared divided by radius, and it always acts towards the centre.",
+    "The centripetal force is supplied by a real force — friction, tension or gravity — never by a force of its own."
+  ],
+  "examFocus": [
+    "Moment questions must show the perpendicular distance; drawing the distance as a dimension line at the correct angle earns the method mark before any number is substituted.",
+    "Choose the pivot at the unknown force when you can, because that force then has no moment and disappears from the equation.",
+    "Circular motion answers must name the force that supplies the centripetal force, not merely calculate its value.",
+    "State the value of g you have used, and carry units through every line — a numerical answer without units loses a mark even when the arithmetic is right.",
+    "For a body on two supports, take moments about one support first and then use total upward equals total downward for the second."
+  ],
+  "vocabulary": [
+    { "word": "Moment of a force", "meaning": "Turning effect of a force, force times its perpendicular distance from the pivot." },
+    { "word": "Principle of moments", "meaning": "Anticlockwise moments equal clockwise moments when a body is in equilibrium." },
+    { "word": "Couple", "meaning": "Two equal, opposite, non-collinear forces giving a pure turning effect." },
+    { "word": "Centre of gravity", "meaning": "Point at which a body's total weight may be taken to act." },
+    { "word": "Equilibrium", "meaning": "State with zero resultant force and zero resultant moment." },
+    { "word": "Stability", "meaning": "Resistance to toppling, set by base width and centre-of-gravity height." },
+    { "word": "Centripetal force", "meaning": "Resultant inward force required for circular motion." },
+    { "word": "Centripetal acceleration", "meaning": "Inward acceleration of a body moving in a circle, equal to speed squared over radius." }
+  ],
+  "questions": [
+    {
+      "id": "phy-force-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A force of 20 N acts at right angles to a spanner, 0.30 m from the nut. What is the moment of the force about the nut?",
+      "options": ["6.0 N m", "0.015 N m", "60 N m", "20.30 N m"],
+      "correctIndex": 0,
+      "answer": "6.0 N m",
+      "explanation": "Moment is force times the perpendicular distance from the pivot, so 20 x 0.30 = 6.0 N m. Because the force acts at right angles to the spanner, the distance along the spanner is already the perpendicular distance, so no further component needs to be resolved.",
+      "commonMistake": "Dividing instead of multiplying, or quoting 0.015 N m from an inverted calculation. Moments are always a product, never a quotient."
+    },
+    {
+      "id": "phy-force-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The principle of moments states that for a body in equilibrium the sum of the anticlockwise moments about any point is ________ to the sum of the clockwise moments about that same point.",
+      "answer": "equal",
+      "explanation": "When a body is not turning, every moment tending to turn it one way must be cancelled by moments turning it the other way. The equality must be written about a single, stated point, since moments about different points need not balance individually even though the body as a whole is at rest.",
+      "commonMistake": "Writing 'less than' or 'greater than'. The word required is equal, and it holds about any point on the body."
+    },
+    {
+      "id": "phy-force-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A uniform metre rule is pivoted at the 50 cm mark. A force of 2 N acts at the 70 cm mark. Where must a 4 N force act to balance the rule?",
+      "options": ["At the 60 cm mark", "At the 40 cm mark", "At the 10 cm mark", "At the 80 cm mark"],
+      "correctIndex": 1,
+      "answer": "At the 40 cm mark",
+      "explanation": "The 2 N force is 20 cm to the right of the pivot, giving a clockwise moment of 2 x 20 = 40 N cm. The balancing anticlockwise moment must also be 40 N cm, so the 4 N force must be 40 divided by 4 = 10 cm to the left of the pivot, that is at the 40 cm mark. The weight of the rule acts at its midpoint, the pivot itself, so it contributes no moment.",
+      "commonMistake": "Forgetting that the rule's weight acts at the pivot. It produces no moment only because it is uniform and pivoted at its centre."
+    },
+    {
+      "id": "phy-force-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Describe how you would determine experimentally the centre of gravity of a piece of irregular cardboard, and explain why the method works.",
+      "answer": "Push a pin through a hole near the edge of the cardboard and suspend it freely. Hang a plumb line from the same pin so that it hangs vertically, and mark the line of the plumb line on the cardboard. Take the cardboard down and repeat the procedure from a second hole in a different position, marking the second line. The point where the two marked lines cross is the centre of gravity. The method works because when a body hangs freely and comes to rest, its centre of gravity must lie directly beneath the point of suspension, otherwise the weight would produce a moment about that point and the body would keep swinging until it did; the centre of gravity therefore lies somewhere along each of the two marked lines, and so at their intersection.",
+      "explanation": "Both the procedure and the reason are required, and the reason must refer to the moment of the weight about the suspension point — the body settles only when the centre of gravity is vertically below the pivot. A third hole gives a check line, and all three should meet at the same point.",
+      "commonMistake": "Describing the plumb line without saying what it marks. The line must be transferred onto the cardboard, otherwise there is nothing to intersect."
+    },
+    {
+      "id": "phy-force-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the two conditions necessary for a rigid body to be in equilibrium, explain why satisfying only the first is insufficient, and give an example of a body that has a zero resultant force but still turns.",
+      "answer": "The first condition is that the resultant force acting on the body is zero, so there is no acceleration of the body as a whole in any direction. The second condition is that the resultant moment about any point is zero, so there is no tendency to start rotating. The first condition alone is insufficient because forces can cancel as vectors while still having different points of application, and therefore still producing a turning effect about any pivot. A couple illustrates this exactly: two equal and opposite forces give a resultant force of zero, yet because their lines of action do not coincide they produce a pure moment and the body does turn. Another example is a uniform beam pivoted at one end with equal and opposite vertical forces applied at its two ends — the forces sum to zero, but the beam begins to rotate because their moments about the pivot do not cancel.",
+      "explanation": "The two conditions must be stated separately and the counter-example must genuinely have zero resultant force with a non-zero moment, which is precisely what a couple is. Merely asserting that 'both are needed' without exhibiting a case where one fails does not answer the second part of the question.",
+      "commonMistake": "Saying the first condition means the body is at rest. Zero resultant force means zero acceleration, and a body may be moving steadily while satisfying it."
+    },
+    {
+      "id": "phy-force-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car of mass 1000 kg travels round a level circular bend of radius 50 m at 10 m per second. What centripetal force must the road supply through friction?",
+      "options": ["500 N", "2000 N", "1000 N", "0.5 N"],
+      "correctIndex": 1,
+      "answer": "2000 N",
+      "explanation": "The centripetal force is mass times speed squared divided by radius: 1000 x 10 x 10 divided by 50 = 100000 divided by 50 = 2000 N. The speed is squared before dividing by the radius, and the mass is applied last, so 1000 kg moving at 10 m per second round a 50 m bend needs 2000 N directed towards the centre.",
+      "commonMistake": "Squaring the radius instead of the speed. It is the speed that is squared in m v squared divided by r."
+    },
+    {
+      "id": "phy-force-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why a car must slow down on a wet road when taking the same bend at the same radius, referring to the force that provides the circular motion. State what happens to the car if that force is insufficient, and calculate the maximum speed for a radius of 40 m if the available frictional force is 3200 N for a car of mass 800 kg.",
+      "answer": "On a level road the only horizontal force available to turn the car is the friction between the tyres and the road, and this frictional force is what supplies the centripetal force required for the bend. A wet road reduces the coefficient of friction, so the maximum frictional force the tyres can develop falls, and since the centripetal force needed is mass times speed squared divided by radius, the same radius can only be maintained at a lower speed. If the required force exceeds the available friction, the tyres can no longer supply the inward pull, the car does not follow the curve, and it leaves the road along a direction closer to the tangent to the bend. For the given values, the available friction of 3200 N equals 800 x v squared divided by 40, so 800 x v squared = 3200 x 40 = 128000, giving v squared = 128000 divided by 800 = 160, and v = 12.65 m per second, which is 45.5 km per hour.",
+      "explanation": "The reasoning must identify friction as the centripetal force and explain the wet-road consequence as a reduction of the available supply rather than a change in the requirement. The calculation needs the rearrangement shown in full: friction equals m v squared divided by r, multiply by the radius, divide by the mass, then take the square root.",
+      "commonMistake": "Quoting 12.65 m per second without showing that the speed must be squared and then square-rooted, or forgetting that a decrease in friction changes the maximum safe speed rather than the radius."
+    },
+    {
+      "id": "phy-force-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why a double-decker bus is more likely to topple on a bend than a low racing car, in terms of the position of the centre of gravity and the width of the base.",
+      "answer": "A double-decker bus carries much of its mass high up, so its centre of gravity lies relatively high above the road, and its base of support is limited to the track width between its wheels. When the bus goes round a bend, the combination of the outward effect in the rotating frame and the reduction in load on the inner wheels produces a moment about the outer wheel. Because the centre of gravity is high, this moment has a long lever arm and can easily exceed the restoring moment of the bus's weight acting through the outer wheel. A racing car, by contrast, is built low so that its centre of gravity is close to the road and its track is wide, giving a large restoring moment with a short lever arm, so a much larger sideways force is needed to tip it.",
+      "explanation": "Both factors must be used — the height of the centre of gravity sets the lever arm of the overturning moment, and the width of the base sets the lever arm of the restoring moment. Naming only that the bus is 'top heavy' describes the effect without giving the mechanism.",
+      "commonMistake": "Explaining the bus's height but never mentioning the base. Stability is governed by both, and a narrow base matters as much as a high centre of gravity."
+    },
+    {
+      "id": "phy-force-09",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The centripetal force needed to keep a body moving in a circle is given by ________ times the ________ divided by the radius of the path.",
+      "answer": "mass; square of the speed",
+      "explanation": "The expression is F equals m v squared divided by r, where m is the mass in kilograms, v is the speed in metres per second and r is the radius in metres. The acceleration of a body in uniform circular motion is v squared over r and is directed towards the centre, so by Newton's second law the force is that acceleration multiplied by the mass.",
+      "commonMistake": "Writing the radius in the numerator. The centripetal acceleration is speed squared divided by radius, so the radius belongs underneath."
+    },
+    {
+      "id": "phy-force-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body is suspended freely and comes to rest with the plumb line passing vertically through the point of suspension. What does this tell you?",
+      "options": ["The body has no weight", "The centre of gravity lies directly below the point of suspension", "The resultant force on the body is not zero", "The body is rotating with uniform speed"],
+      "correctIndex": 1,
+      "answer": "The centre of gravity lies directly below the point of suspension",
+      "explanation": "While the centre of gravity is anywhere else, the weight acts at a horizontal distance from the suspension point and produces a moment that swings the body. It comes to rest only when that moment is zero, which happens when the centre of gravity lies on the vertical line through the pivot. The weight and the resultant force are both still present and balanced by the pin.",
+      "commonMistake": "Choosing the option that says the body has no weight. The weight is present; it simply has no moment about the suspension point in that position."
+    },
+    {
+      "id": "phy-force-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A uniform beam of weight 200 N and length 4 m rests horizontally on two supports, A at the left end and B at the right end, and carries a load of 300 N placed 1 m from A. Calculate the reaction at each support, showing that your answers satisfy both conditions of equilibrium.",
+      "answer": "The beam is uniform, so its own weight of 200 N acts at its centre, 2 m from A. Taking moments about support A and taking clockwise moments as positive, the load gives 300 x 1 = 300 N m clockwise, the beam's weight gives 200 x 2 = 400 N m clockwise, and the reaction at B, R B, acts upward 4 m from A giving 4 R B anticlockwise. For equilibrium these balance, so 4 R B = 300 + 400 = 700, giving R B = 700 divided by 4 = 175 N. For the first condition, total upward force equals total downward force: R A + R B = 200 + 300 = 500 N, so R A = 500 - 175 = 325 N. Check: taking moments about B, R A x 4 = 325 x 4 = 1300 N m anticlockwise, while the load acts 3 m from B giving 300 x 3 = 900 N m and the weight acts 2 m from B giving 200 x 2 = 400 N m, and 900 + 400 = 1300 N m, so the second condition holds as well.",
+      "explanation": "Both reactions are required, and the check about a second pivot demonstrates that the second condition of equilibrium is satisfied independently of the first. The beam's own weight must be placed at its midpoint because the beam is uniform, and forgetting it is the commonest error in this type of problem.",
+      "commonMistake": "Omitting the weight of the beam. A uniform beam's weight acts at its centre and produces a moment like any other force."
+    }
+  ]
+}

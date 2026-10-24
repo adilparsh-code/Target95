@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-work-energy",
+  "title": "Work, Power and Energy",
+  "kind": "physics",
+  "tagline": "Defining work and energy in joules, kinetic and potential energy, power in watts, and why energy is never lost.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Physics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed, with g taken as 9.8 m per second squared unless another value is stated. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Work, energy and power are three ideas that are constantly confused in everyday speech and must be kept apart in physics. Work is done only when a force moves a body through a distance in the direction of that force, and it is measured in joules. Energy is the capacity to do work and is measured in the same unit, which is why the two are so easily swapped. This chapter defines both, develops the two energies that dominate mechanics — kinetic energy from motion and gravitational potential energy from height — and introduces power as the rate at which work is done. It closes with the transformation of energy between forms and the conservation principle that the total never changes, which is the idea that underwrites every engine, every power station and every bill.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Work, Power and Energy" },
+      { "label": "Work", "value": "Force times distance moved in the direction of the force; measured in joules" },
+      { "label": "One joule", "value": "The work done when a force of 1 N moves a body 1 m in its direction" },
+      { "label": "Kinetic energy", "value": "One half times mass times the square of the speed" },
+      { "label": "Potential energy", "value": "Mass times g times height above the chosen level" },
+      { "label": "Power", "value": "Work done divided by the time taken; measured in watts" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define work and energy, use the joule correctly, and calculate the work done by a force.",
+    "Derive and apply the expressions for kinetic energy and gravitational potential energy.",
+    "Calculate power and distinguish it from both work and energy.",
+    "Apply the law of conservation of energy to a body falling and to a body moving horizontally."
+  ],
+  "learn": [
+    {
+      "id": "work-and-energy",
+      "title": "Work, the joule and the forms of energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In physics work is done only when a force causes a displacement, and it is calculated as the force multiplied by the distance moved in the direction of that force. If a body does not move, no work is done however large the force, which is why a man pushing against a wall grows tired while the physicist reports zero mechanical work — the energy has gone into his muscles as heat rather than into moving the wall. The unit of work is the joule, defined as the work done by a force of one newton acting through one metre, so one joule equals one newton metre. The direction qualifier matters: a porter carrying a load horizontally exerts an upward force while the displacement is horizontal, so the force and the displacement are at right angles and the mechanical work done in supporting the load is zero. Work done against gravity depends only on the change in height, so the same load is lifted to the same height in the same amount of work whether the lift is straight up or by a long staircase. Energy is the capacity to do work, measured in joules, and it exists in many forms: kinetic, gravitational potential, elastic potential, heat, sound, light, chemical, electrical and nuclear."
+        },
+        {
+          "type": "table",
+          "caption": "Forms of energy and where they are stored or used",
+          "columns": ["Form of energy", "Stored in or produced by", "Typical example", "What it becomes next"],
+          "rows": [
+            ["Kinetic", "Any body that is moving", "A rolling stone, moving traffic", "Heat on braking, or work against friction"],
+            ["Gravitational potential", "A body raised above a level", "Water held behind a dam", "Kinetic energy as it falls"],
+            ["Elastic potential", "A stretched or compressed spring or rubber", "A wound spring, a bow", "Kinetic energy when released"],
+            ["Heat (thermal)", "Random motion of molecules", "Steam, a hot body", "Mechanical work in a steam engine"],
+            ["Sound", "Vibrations of a medium", "A tuning fork, speech", "Heat in the surrounding air"],
+            ["Light", "Emitting bodies at high temperature", "The sun, a lamp", "Heat where it is absorbed"],
+            ["Chemical", "Bonds within substances", "Food, coal, petrol", "Heat and kinetic energy on burning"],
+            ["Electrical", "Moving charges", "Current in a wire", "Heat, light or kinetic energy in a motor"],
+            ["Nuclear", "The nucleus of an atom", "Uranium in a reactor", "Heat energy in the reactor"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Work is done only when a force produces a displacement in its own direction; otherwise the work is zero.",
+            "One joule equals one newton metre, and this equivalence is exact because the joule is defined from force and distance.",
+            "Work done against gravity is m g h, and it depends only on the height difference, not on the path taken.",
+            "A porter carrying a load horizontally does no mechanical work in supporting it, although he uses his muscles internally.",
+            "Energy is measured in joules because it is defined as the capacity to do work.",
+            "Energy can be transformed from one form to another but never created or destroyed.",
+            "The same joule can appear as kinetic, potential, heat or any other form — the unit does not identify the form.",
+            "Chemical energy in food is what eventually drives muscle contraction and thought."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A force of 50 N pushes a box 3 m along the floor in the direction of the force, so the work done is 50 x 3 = 150 J.", "note": "The distance must be along the line of the force; if the box moved at an angle, only that component would count." },
+            { "text": "Lifting a 10 kg box to a shelf 2 m high takes work against gravity of m g h = 10 x 9.8 x 2 = 196 J, whether the box goes straight up or is carried round by a ramp.", "note": "State the value of g you use; taking it as 10 would give 200 J instead." },
+            { "text": "A book lies on a table and is not moved: the force of gravity and the reaction of the table both act, but there is no displacement, so the work done by each is zero.", "note": "Zero displacement means zero work, however large the force." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kinetic-and-potential-energy",
+      "title": "Kinetic energy and gravitational potential energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Kinetic energy is the energy a body possesses by virtue of its motion, and it equals one half of the mass times the square of the speed. The square is what makes speed so much more important than mass: doubling the mass doubles the kinetic energy, but doubling the speed quadruples it. This expression can be derived from the work done to accelerate a body from rest, since a constant force doing work over the acceleration distance gives exactly one half m v squared. Gravitational potential energy is the energy a body has because of its position above a chosen reference level, and it equals mass times g times the height above that level. The reference level is arbitrary — what matters is the height difference — so potential energy is always quoted relative to some stated datum, commonly the ground. As a body falls, potential energy is converted into kinetic energy, and in the absence of air resistance the sum of the two remains constant at every point of the fall, so the speed gained can be found without needing to know the time taken."
+        },
+        {
+          "type": "table",
+          "caption": "Kinetic against gravitational potential energy",
+          "columns": ["Feature", "Kinetic energy", "Gravitational potential energy"],
+          "rows": [
+            ["Expression", "One half times mass times speed squared", "Mass times g times height"],
+            ["Depends on", "Mass and speed", "Mass and height above the datum"],
+            ["Symbol", "K.E. or E k", "P.E. or E p"],
+            ["Unit", "joule (J)", "joule (J)"],
+            ["Present when", "The body is moving", "The body is above the chosen level"],
+            ["Converted into", "Potential energy when the body rises", "Kinetic energy as the body falls"],
+            ["Reference needed", "No reference level required", "A stated level is essential"],
+            ["Change with height", "Independent of height", "Changes in direct proportion to height"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Kinetic energy is one half m v squared; the speed is squared, so a small speed error becomes a large energy error.",
+            "Potential energy is m g h, and h must be measured from a stated reference level.",
+            "During free fall without air resistance, potential energy lost equals kinetic energy gained.",
+            "At the top of the flight a body has maximum potential and minimum kinetic energy; at the bottom the reverse.",
+            "At the highest point of a projectile the vertical speed is zero, but the horizontal speed is not, so the kinetic energy is not zero there.",
+            "A body thrown straight up has zero kinetic energy only at the instant it stops before falling back.",
+            "The sum of kinetic and potential energy is called the mechanical energy of the body.",
+            "Air resistance converts some mechanical energy into heat, so in practice the mechanical energy slowly falls."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A car of mass 1000 kg travelling at 15 m per second has kinetic energy of one half x 1000 x 15 x 15 = 500 x 225 = 112500 J, that is 112.5 kJ.", "note": "Square the speed first, then halve — halving the mass gives the same numerical shortcut." },
+            { "text": "A ball of mass 0.5 kg held 5 m above the ground has potential energy of 0.5 x 9.8 x 5 = 24.5 J relative to the ground; just before it lands, its kinetic energy is also 24.5 J if air resistance is ignored.", "note": "The two energies are equal in value because one was completely converted into the other." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "title": "Power: the rate of doing work",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two cranes may lift the same load to the same height, doing exactly the same work, yet one takes a minute and the other an hour. Power is the quantity that tells you which is the better machine: it is the rate at which work is done, defined as the work done divided by the time taken, or equivalently the energy transferred divided by the time. Its unit is the watt, and one watt is one joule per second. Because a watt is small, power is usually quoted in kilowatts or megawatts, and in vehicles it is often given in horsepower, with one horsepower equal to 746 watts. Power can also be written as force times speed when the force acts along the direction of motion, which explains why a car needs a large engine force to keep a high speed against friction — at constant speed the power required rises directly with the speed. The electrical energy used in a home is billed in kilowatt hours, which is the energy a one kilowatt appliance uses in one hour: multiply the power in kilowatts by the time in hours to get the cost units."
+        },
+        {
+          "type": "table",
+          "caption": "Power: definitions, units and conversions",
+          "columns": ["Quantity", "Definition", "Unit", "Conversion"],
+          "rows": [
+            ["Power", "Work done divided by time taken", "watt (W)", "1 W = 1 J per second"],
+            ["Kilowatt", "One thousand watts", "kW", "1 kW = 1000 W"],
+            ["Horsepower", "A unit used for engines", "hp", "1 hp = 746 W"],
+            ["Kilowatt hour", "Energy used by a 1 kW device in 1 hour", "kW h", "1 kW h = 1000 x 3600 = 3600000 J"],
+            ["Power at constant speed", "Force times speed in the direction of motion", "watt (W)", "P = F v when force and speed are parallel"],
+            ["Megawatt", "One million watts", "MW", "1 MW = 1000 kW = 1000000 W"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Power answers the question how fast, while work answers how much — the two are not interchangeable.",
+            "One watt equals one joule per second, so a watt is a rate of energy transfer.",
+            "Two machines can do identical work at very different powers, and the higher-power machine takes less time.",
+            "For a body moving at constant speed under a driving force, power equals force times speed.",
+            "A car engine of fixed maximum power delivers less driving force as speed rises, which is why acceleration falls away at high speed.",
+            "A kilowatt hour is a unit of energy, not of power, and it is what an electricity meter records.",
+            "1 kW h equals 3600000 J, since a kilowatt is 1000 W and an hour is 3600 s.",
+            "Efficiency compares useful power output with total power input and is always expressed as a percentage."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A machine does 600 J of work in 10 s, so its power is 600 divided by 10 = 60 W.", "note": "Divide work by time, not time by work — the larger number must be on top." },
+            { "text": "A car moving at a steady 15 m per second against a total resistance of 200 N needs a driving force of 200 N, so its power is F v = 200 x 15 = 3000 W, that is 3 kW.", "note": "At steady speed the driving force equals the resistance, which is what lets you use P = F v." },
+            { "text": "A 2 kW heater left on for 3 h uses 2 x 3 = 6 kW h of electricity.", "note": "Power in kilowatts multiplied by time in hours gives kilowatt hours directly." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conservation-and-transformation",
+      "title": "Transformation and conservation of energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The law of conservation of energy states that energy can neither be created nor destroyed, but only changed from one form into another, so the total energy of an isolated system stays constant. What looks like loss is almost always conversion into heat, which spreads through the surroundings and becomes unrecoverable as useful work — that is why no engine can be one hundred per cent efficient. A falling body illustrates the law exactly: its potential energy decreases by m g h while its kinetic energy increases by the same amount, and the sum is unchanged at every stage of the fall. A pendulum swings the same energy back and forth between potential at the extremes and kinetic at the lowest point, with air resistance gradually turning a little of it into heat each swing so that the amplitude slowly dies away. In a power station the chain runs chemical energy in fuel to heat, to the kinetic energy of steam, to the kinetic energy of a turbine and generator, and finally to electrical energy, losing a considerable fraction as waste heat at each step. Efficiency measures how much of the input actually becomes the desired output, and it is expressed as useful output divided by total input, multiplied by one hundred per cent."
+        },
+        {
+          "type": "table",
+          "caption": "Energy transformations in familiar devices",
+          "columns": ["Device", "Energy in", "Energy transformations", "Energy out"],
+          "rows": [
+            ["Falling body", "Gravitational potential", "Potential to kinetic as it falls", "Kinetic, then heat on impact"],
+            ["Pendulum", "Potential at the extreme", "Potential to kinetic and back each swing", "Heat lost to air resistance"],
+            ["Electric kettle", "Electrical", "Electrical to heat in the element", "Heat in the water"],
+            ["Motor car engine", "Chemical in petrol", "Chemical to heat, heat to kinetic of the piston and wheels", "Kinetic, plus much waste heat"],
+            ["Torch", "Chemical in the cell", "Chemical to electrical, electrical to light", "Light, plus some heat"],
+            ["Power station", "Chemical or nuclear", "To heat, to kinetic of steam, to kinetic of turbine, to electrical", "Electrical, plus waste heat"],
+            ["Hydroelectric scheme", "Gravitational potential of stored water", "Potential to kinetic of the falling water, to kinetic of the turbine", "Electrical"],
+            ["Braking car", "Kinetic", "Kinetic to heat in the brake pads", "Heat"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Energy cannot be created or destroyed; only its form changes, and the total stays the same.",
+            "In free fall, potential energy lost equals kinetic energy gained when air resistance is ignored.",
+            "Efficiency is useful output divided by total input, expressed as a percentage, and can never exceed one hundred per cent.",
+            "The energy that a machine does not deliver as useful work appears as heat in the machine and the surroundings.",
+            "A perpetual motion machine is impossible because it would require useful work from no energy input.",
+            "As a body falls, its potential energy decreases while its kinetic energy increases by exactly the same amount.",
+            "Heat is the commonest final form of 'lost' energy, and once spread through the surroundings it cannot be fully reused.",
+            "Because the total is fixed, an energy account must balance in every worked solution — use that as a check."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A 0.5 kg ball held 5 m up has P.E. = 0.5 x 9.8 x 5 = 24.5 J. At 2 m up its P.E. = 0.5 x 9.8 x 2 = 9.8 J, so 24.5 - 9.8 = 14.7 J has become kinetic energy, giving a speed from one half m v squared = 14.7.", "note": "Energy lost from potential must appear as kinetic; equating the two avoids needing the time of fall." },
+            { "text": "A motor takes 1000 J of electrical energy and delivers 800 J of mechanical energy, so the efficiency is 800 divided by 1000 x 100 = 80 per cent, and 200 J has become waste heat.", "note": "Efficiency is a ratio of energies, and the missing 200 J must be accounted for as heat." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A falling body exchanging potential for kinetic energy",
+      "description": "A ball drawn at three heights — 10 m, 5 m and 0 m — above a stated ground level. At each position a bar chart beside it shows the division of the total energy: at 10 m the potential bar is full and the kinetic bar empty, at 5 m the two bars are equal, and at the ground the potential bar is empty and the kinetic bar full. A bracket along the side marks the constant total, showing that the sum does not change.",
+      "labels": ["reference level: ground", "maximum P.E. at the top", "half potential, half kinetic", "maximum K.E. at the bottom", "total energy unchanged"]
+    },
+    {
+      "caption": "Figure: Work done by a force at an angle",
+      "description": "A block on a horizontal floor with a force arrow pulling it upwards and to the right at an angle to the floor, and a horizontal displacement arrow along the floor. A dashed line resolves the force into a component along the floor and a component at right angles to it, with a caption stating that only the component along the displacement does work. A second panel shows the same force applied horizontally with the full distance counting.",
+      "labels": ["applied force", "angle to the horizontal", "component along the displacement", "component at right angles, no work", "displacement", "work equals force times distance moved along it"]
+    },
+    {
+      "caption": "Figure: Energy transformations in a simple power station",
+      "description": "A chain of labelled boxes with arrows between them. Chemical energy in fuel leads to heat in the boiler, which leads to kinetic energy of the steam, which drives the turbine giving kinetic energy of the turbine, which drives the generator giving electrical energy. From each stage a downward arrow branches off labelled waste heat, so the useful output arrow at the end is drawn thinner than the original input arrow.",
+      "labels": ["chemical energy in fuel", "heat in the boiler", "kinetic energy of steam", "kinetic energy of the turbine", "electrical energy out", "waste heat at each stage", "efficiency below 100 per cent"]
+    }
+  ],
+  "keyPoints": [
+    "Work is force times distance moved in the direction of that force, measured in joules; with no displacement the work is zero.",
+    "One joule is the work done by a force of 1 N acting through 1 m, so 1 J = 1 N m.",
+    "Work done against gravity is m g h and depends only on the change in height, not on the path.",
+    "Energy is the capacity to do work and is measured in joules.",
+    "Kinetic energy is one half m v squared, so doubling the speed quadruples it.",
+    "Gravitational potential energy is m g h measured from a stated reference level.",
+    "Power is work done divided by time taken, measured in watts, with 1 W = 1 J per second.",
+    "At constant speed power equals force times speed, and 1 horsepower equals 746 W.",
+    "A kilowatt hour is a unit of energy: 1 kW h = 3600000 J.",
+    "Energy is neither created nor destroyed, only transformed, so in free fall potential energy lost equals kinetic energy gained."
+  ],
+  "examFocus": [
+    "Show the substitution in every calculation — mass times g times height written out with numbers — because the method carries marks as well as the result.",
+    "Quote the value of g you use; taking 9.8 against 10 changes the answer and examiners look for the stated assumption.",
+    "State the reference level whenever potential energy is mentioned, since a height with no datum is meaningless.",
+    "In conservation questions write the balance explicitly: potential energy lost equals kinetic energy gained, then substitute both sides.",
+    "Efficiency must be given as a percentage with the waste energy accounted for, not just as a bare ratio."
+  ],
+  "vocabulary": [
+    { "word": "Work", "meaning": "Force times the distance moved in the direction of the force." },
+    { "word": "Joule", "meaning": "Unit of work and energy; one newton acting through one metre." },
+    { "word": "Kinetic energy", "meaning": "Energy of motion, one half mass times speed squared." },
+    { "word": "Potential energy", "meaning": "Energy of position, mass times g times height above a datum." },
+    { "word": "Power", "meaning": "Rate of doing work, work divided by time." },
+    { "word": "Watt", "meaning": "Unit of power, one joule per second." },
+    { "word": "Kilowatt hour", "meaning": "Energy used by a one kilowatt appliance in one hour." },
+    { "word": "Conservation of energy", "meaning": "Energy cannot be created or destroyed, only transformed." }
+  ],
+  "questions": [
+    {
+      "id": "phy-energy-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A force of 50 N moves a box 3 m in the direction of the force. How much work is done?",
+      "options": ["150 J", "16.7 J", "53 J", "150 N"],
+      "correctIndex": 0,
+      "answer": "150 J",
+      "explanation": "Work is the force multiplied by the distance moved in the direction of the force, so 50 x 3 = 150 J. Since the displacement is given along the line of the force, no component needs to be resolved. The unit is the joule, not the newton, so the fourth option is also wrong on its units.",
+      "commonMistake": "Dividing the force by the distance to get 16.7. Work is a product of force and distance, never a quotient."
+    },
+    {
+      "id": "phy-energy-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The kinetic energy of a body of mass m moving with speed v is given by one half of mass times the ________, while its gravitational potential energy at height h is mass times g times ________.",
+      "answer": "square of the speed; height",
+      "explanation": "Kinetic energy is one half m v squared, derived from the work done in accelerating the body from rest, and the square of the speed is why doubling the speed quadruples the energy. Potential energy is m g h, where h is the height above a stated reference level, and it changes in direct proportion to that height.",
+      "commonMistake": "Writing 'speed' instead of 'square of the speed' in the first blank. The square is essential; without it the expression is wrong."
+    },
+    {
+      "id": "phy-energy-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car of mass 1000 kg travels at 10 m per second. Its kinetic energy is E. What is its kinetic energy at 20 m per second?",
+      "options": ["2E", "4E", "1.4E", "8E"],
+      "correctIndex": 1,
+      "answer": "4E",
+      "explanation": "Kinetic energy depends on the square of the speed, so multiplying the speed by 2 multiplies the energy by 2 squared, which is 4. At 10 m per second the energy is one half x 1000 x 100 = 50000 J, and at 20 m per second it is one half x 1000 x 400 = 200000 J, which is exactly four times as much.",
+      "commonMistake": "Choosing 2E by treating kinetic energy as proportional to speed. The dependence is on the square, which is the whole point of the question."
+    },
+    {
+      "id": "phy-energy-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A porter carries a load of 200 N horizontally along a level corridor for 20 m. State the work done by the porter in supporting the load, and explain why it has that value.",
+      "answer": "The work done in supporting the load is zero. Work is defined as the force multiplied by the distance moved in the direction of that force, and although the porter exerts an upward force of 200 N to support the load, the displacement is entirely horizontal and at right angles to that force. There is therefore no displacement in the direction of the force, so the product of force and distance in the direction of the force is zero, and no mechanical work is done against gravity.",
+      "explanation": "The zero value must be justified from the definition rather than asserted, and the justification must identify that the force and the displacement are perpendicular. The porter's muscles still consume energy internally, converting chemical energy to heat, but that is not mechanical work done on the load.",
+      "commonMistake": "Calculating 200 x 20 = 4000 J. That would be the work done if the force and the displacement were in the same direction, which they are not."
+    },
+    {
+      "id": "phy-energy-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A ball of mass 0.5 kg is dropped from rest from a height of 5 m above the ground, and air resistance is ignored. Calculate its potential energy at the start, its kinetic energy just before it lands, and the speed with which it lands.",
+      "answer": "Taking g as 9.8 m per second squared, the initial potential energy relative to the ground is m g h = 0.5 x 9.8 x 5 = 24.5 J. Since air resistance is ignored, no energy is converted to heat, so all of that potential energy becomes kinetic energy, and the kinetic energy just before landing is likewise 24.5 J. Setting one half m v squared equal to 24.5 gives 0.5 x 0.5 x v squared = 24.5, so 0.25 v squared = 24.5 and v squared = 24.5 divided by 0.25 = 98, giving v = 9.90 m per second.",
+      "explanation": "All three quantities are required, and the middle step — equating the potential energy lost to the kinetic energy gained — is what avoids needing to calculate the time of fall. The final speed follows from rearranging one half m v squared correctly, which means multiplying by two and dividing by the mass before taking the square root.",
+      "commonMistake": "Halving the mass twice or forgetting to multiply by two when rearranging one half m v squared = energy. Here v squared = 2E divided by m = 2 x 24.5 divided by 0.5 = 98."
+    },
+    {
+      "id": "phy-energy-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is the correct definition of the watt?",
+      "options": ["The work done when a force of 1 N acts through 1 m", "The rate of doing work equal to one joule per second", "The energy used by a 1 kW device in one hour", "The force needed to accelerate a mass of 1 kg at 1 m per second squared"],
+      "correctIndex": 1,
+      "answer": "The rate of doing work equal to one joule per second",
+      "explanation": "The watt is the unit of power and is defined as one joule of work done per second, since power is work divided by time. The first option defines the joule, the third describes a kilowatt hour as a unit of energy, and the fourth defines the newton.",
+      "commonMistake": "Selecting the first option because both definitions involve one joule and one metre. That defines the joule, not the rate at which it is delivered."
+    },
+    {
+      "id": "phy-energy-07",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A crane lifts a load of 5000 N to a height of 10 m in 20 s. Calculate the work done, the power developed, the change in potential energy of the load, and the efficiency if the crane draws 400000 J of electrical energy from the supply.",
+      "answer": "The work done on the load is force times distance in the direction of the force, so W = 5000 x 10 = 50000 J, that is 50 kJ. The power developed is work divided by time, so P = 50000 divided by 20 = 2500 W, that is 2.5 kW. The change in the load's potential energy equals the work done against gravity, since the load rises vertically through 10 m, so the increase is also 50000 J. The useful output is 50000 J while the electrical input is 400000 J, so the efficiency is 50000 divided by 400000 x 100 = 12.5 per cent; the remaining 350000 J has appeared as heat in the motor, the cables and the surroundings.",
+      "explanation": "Four linked quantities are required and each follows from the last: work from force and distance, power from work and time, the potential energy change from the same force and height, and efficiency from output over input. The energy balance must close — 400000 in, 50000 useful and 350000 wasted — which is the check the final part invites.",
+      "commonMistake": "Computing efficiency as input divided by output, giving 800 per cent. Efficiency is useful output divided by total input and can never exceed one hundred per cent."
+    },
+    {
+      "id": "phy-energy-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the law of conservation of energy, and describe how it applies to a body falling freely from rest, ignoring air resistance.",
+      "answer": "The law of conservation of energy states that energy can neither be created nor destroyed, but only transformed from one form into another, so the total energy of an isolated system remains constant. As a body falls freely from rest, its height above the ground decreases, so its gravitational potential energy decreases by m g h for the distance fallen. That energy does not disappear: it is converted into kinetic energy, so the body's kinetic energy increases by exactly the same amount as its potential energy decreases. The sum of the kinetic and potential energies therefore stays equal to the original potential energy throughout the fall, and the body arrives at the ground with kinetic energy equal to the potential energy it started with.",
+      "explanation": "The law must be stated and then applied with the specific forms named, showing that one decreases while the other increases by the same amount so that the total is unchanged. Merely saying energy is conserved without identifying which energies trade places does not answer the second half.",
+      "commonMistake": "Saying potential energy is converted to heat as the body falls. Without air resistance, all of it becomes kinetic energy."
+    },
+    {
+      "id": "phy-energy-09",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A kettle rated at 2 kW is used for 30 minutes. The energy it consumes is ________ kilowatt hours, which is equal to ________ joules.",
+      "answer": "1; 3600000",
+      "explanation": "Energy in kilowatt hours is the power in kilowatts multiplied by the time in hours: 2 x 0.5 = 1 kW h, since thirty minutes is half an hour. Converting to joules, one kilowatt is 1000 watts and one hour is 3600 seconds, so 1 kW h = 1000 x 3600 = 3600000 J.",
+      "commonMistake": "Multiplying 2 kW by 30 as though the time were in hours, giving 60 kW h. The time must first be converted to hours."
+    },
+    {
+      "id": "phy-energy-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "At which point in the flight of a ball thrown upwards at an angle does it have the greatest kinetic energy?",
+      "options": ["At the highest point of its flight", "At the moment it leaves the hand", "At every point it is the same", "At the highest point the kinetic energy is zero"],
+      "correctIndex": 1,
+      "answer": "At the moment it leaves the hand",
+      "explanation": "As the ball rises, kinetic energy is converted into potential energy, so its kinetic energy falls continuously until it is lowest at the top of the flight. It is therefore greatest at the start, when it has not yet gained height. Note that at the highest point the vertical component of velocity is zero but the horizontal component is not, so the kinetic energy there is small but not zero.",
+      "commonMistake": "Choosing the option that says kinetic energy is zero at the top. That would be true only for a ball thrown straight up at its highest point, not for one with horizontal motion."
+    },
+    {
+      "id": "phy-energy-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A 1200 kg car accelerates uniformly from rest to 20 m per second in 10 s. Calculate the kinetic energy it gains, the average power developed by the engine, and explain why the actual power at the end of the acceleration is greater than your average figure.",
+      "answer": "The kinetic energy gained is one half m v squared = 0.5 x 1200 x 20 x 20 = 600 x 400 = 240000 J, that is 240 kJ. Since the car started from rest, this is the total kinetic energy delivered by the engine, ignoring friction. The average power is the energy divided by the time, so P = 240000 divided by 10 = 24000 W, that is 24 kW. The actual power at the end of the acceleration is greater than this average because the engine's power output depends on force times speed, and the speed is rising throughout: to keep accelerating while the speed increases requires a driving force that also rises, so the instantaneous power at 20 m per second exceeds the mean over the whole interval.",
+      "explanation": "The energy and the average power both follow directly from the standard expressions, and the third part requires the relation between power, force and speed. The reasoning is that a constant acceleration needs a constant net force, but the speed is higher at the end, so the rate of doing work is higher then than the average.",
+      "commonMistake": "Quoting power without units or confusing it with force. Power here is 24 kW, and it is an average over the ten seconds rather than the value at any instant."
+    }
+  ]
+}

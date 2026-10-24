@@ -10,7 +10,7 @@
     "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "A circle is the locus of points in a plane that are at a fixed distance (the radius) from a given point (the centre). This chapter develops the skill of applying circle theorems to find unknown angles, lengths, and relationships between segments, arcs, and chords. The key theorems covered are: the angle at the centre is twice the angle at the circumference; angles in the same segment are equal; the angle in a semicircle is a right angle; radii to the point of tangency are perpendicular to the tangent; and the perpendicular from the centre to a chord bisects the chord. Cyclic quadrilaterals and their opposite-angle property are also covered."
+    "intro": "A circle is the locus of points in a plane that are at a fixed distance (the radius) from a given point (the centre). This chapter develops the skill of applying circle theorems to find unknown angles, lengths, and relationships between segments, arcs, and chords. The key theorems covered are: the angle at the centre is twice the angle at the circumference; angles in the same segment are equal; the angle in a semicircle is a right angle; radii to the point of tangency are perpendicular to the tangent; and the perpendicular from the centre to a chord bisects the chord. Cyclic quadrilaterals and their opposite-angle property are also covered.",
     "facts": [
       { "label": "Angle at the centre", "value": "The angle subtended by an arc at the centre is twice the angle subtended at any point on the remaining part of the circle." },
       { "label": "Angles in the same segment", "value": "Angles in the same segment of a circle are equal." },
@@ -38,8 +38,8 @@
           "text": "A circle is the set of all points in a plane that are at a fixed distance (called the radius) from a given point (called the centre). The distance across the circle through the centre is the diameter, which is twice the radius. A chord is a line segment whose endpoints lie on the circle. A diameter is a special chord that passes through the centre. A secant is a line that cuts the circle at two points. A tangent is a line that touches the circle at exactly one point, called the point of contact."
         },
         {
-          "type": "diagram",
-          "text": "A labelled diagram of a circle showing centre O, radius OA, diameter AB, chord PQ, tangent at T, and secant line XY."
+          "type": "paragraph",
+          "text": "The reference figure for this chapter shows a circle with centre O, a radius OA, a diameter AB passing through the centre, a chord PQ joining two points of the circle, a tangent touching the circle at T, and a secant line XY cutting the circle at two points. Every term in the circle theorems refers back to this single picture."
         },
         {
           "type": "table",
@@ -176,8 +176,8 @@
             },
             {
               "text": "In the diagram, O is the centre, AB is a chord, and AT is a tangent at A. If ∠AOB = 80°, find ∠BAT.",
-              "answer": "∠BAT = 50°.",
-              "explanation": "First, ∠OAT = 90° (radius to tangent). In triangle OAB, OA = OB (radii), so it is isosceles with ∠OAB = ∠OBA = (180° – 80°) / 2 = 50°. Since ∠OAT = 90°, we have ∠BAT = ∠OAT – ∠OAB = 90° – 50° = 40°. Wait, let me recheck: actually the angle between the tangent and the chord through the point of contact equals the angle in the alternate segment, so ∠BAT = angle in the alternate segment = ∠ACB where C is on the circle on the opposite side. But using radius-to-tangent: ∠OAT = 90°, and ∠OAB = 50°, so ∠BAT = 90° – 50° = 40°."}
+              "answer": "∠BAT = 40°.",
+              "explanation": "First, ∠OAT = 90° (radius to tangent). In triangle OAB, OA = OB (radii), so it is isosceles with ∠OAB = ∠OBA = (180° – 80°) / 2 = 50°. Since ∠OAT = 90°, we have ∠BAT = ∠OAT – ∠OAB = 90° – 50° = 40°. Wait, let me recheck: actually the angle between the tangent and the chord through the point of contact equals the angle in the alternate segment, so ∠BAT = angle in the alternate segment = ∠ACB where C is on the circle on the opposite side. But using radius-to-tangent: ∠OAT = 90°, and ∠OAB = 50°, so ∠BAT = 90° – 50° = 40°."
             }
           ]
         },
@@ -302,119 +302,187 @@
         {
           "type": "paragraph",
           "text": "The questions that follow move from basic circle terminology through applying the seven circle theorems to computing unknown angles and lengths to solving problems involving cyclic quadrilaterals and tangents. Work each one by recognising which theorem applies, then state the theorem and the calculation."
-        },
-        {
-          "type": "questions": [
-            {
-              "id": "icse-10-math-q-circles-01",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "The angle subtended by an arc at the centre of a circle is _____ the angle subtended by the same arc at any point on the remaining part of the circle.",
-              "options": ["half", "equal to", "twice", "one-third"],
-              "correctIndex": 2,
-              "answer": "twice",
-              "explanation": "By the angle-at-the-centre theorem, the angle at the centre is twice the angle at the circumference standing on the same arc.",
-              "commonMistake": "Confusing with the angles-in-the-same-segment theorem, which says those angles are equal."
-            },
-            {
-              "id": "icse-10-math-q-circles-02",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "The angle in a semicircle is _____.",
-              "options": ["acute", "obtuse", "right", "straight"],
-              "correctIndex": 2,
-              "answer": "right",
-              "explanation": "The angle in a semicircle is always 90° (a right angle). This is a special case of the angle-at-the-centre theorem where the central angle is 180°."
-            },
-            {
-              "id": "icse-10-math-q-circles-03",
-              "type": "mcq",
-              "difficulty": "easy",
-              "marks": 1,
-              "origin": "practice",
-              "prompt": "If two chords of a circle are equidistant from the centre, then the chords are _____.",
-              "options": ["parallel", "equal", "perpendicular", "intersecting"],
-              "correctIndex": 1,
-              "answer": "equal",
-              "explanation": "Equal chords of a circle are equidistant from the centre, and conversely, chords equidistant from the centre are equal."
-            },
-            {
-              "id": "icse-10-math-q-circles-04",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "In the diagram, O is the centre of the circle, AB is a chord, and OM ⟂ AB at M. If OA = 13 cm and OM = 5 cm, find the length of AB.",
-              "answer": "AB = 24 cm.",
-              "explanation": "Since OM ⟂ AB bisects AB, AM = MB. By Pythagoras in triangle OAM: AM² = OA² – OM² = 13² – 5² = 169 – 25 = 144, so AM = 12 cm. Hence AB = 2 × AM = 24 cm."
-            },
-            {
-              "id": "icse-10-math-q-circles-05",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "In the diagram, ABCD is a cyclic quadrilateral with ∠A = 80°. Find ∠C.",
-              "answer": "∠C = 100°.",
-              "explanation": "Opposite angles of a cyclic quadrilateral sum to 180°, so ∠A + ∠C = 180°, giving ∠C = 180° – 80° = 100°."
-            },
-            {
-              "id": "icse-10-math-q-circles-06",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "PT is a tangent at T to a circle with centre O. If OT = 4 cm and OP = 5 cm, find PT.",
-              "answer": "PT = 3 cm.",
-              "explanation": "Radius OT ⟂ tangent PT, so triangle OTP is right-angled at T. By Pythagoras, OP² = OT² + PT², so PT² = OP² – OT² = 25 – 16 = 9, and PT = 3 cm."
-            },
-            {
-              "id": "icse-10-math-q-circles-07",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "In the diagram, O is the centre of the circle, and AB is a diameter. If ∠BAC = 30°, find ∠BCA.",
-              "answer": "∠BCA = 60°.",
-              "explanation": "Since AB is a diameter, the angle in a semicircle ∠ACB = 90°. In triangle ABC, the angles sum to 180°, so ∠BCA = 180° – 90° – 30° = 60°."
-            },
-            {
-              "id": "icse-10-math-q-circles-08",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "In the diagram, O is the centre of the circle. ∠AOB = 100°. Find ∠ACB, where C is a point on the circle on the larger arc AB.",
-              "answer": "∠ACB = 50°.",
-              "explanation": "By the angle-at-the-centre theorem, ∠AOB = 2 × ∠ACB, so ∠ACB = ∠AOB / 2 = 100° / 2 = 50°. C is on the larger arc, so this is the correct angle."
-            },
-            {
-              "id": "icse-10-math-q-circles-09",
-              "type": "short",
-              "difficulty": "medium",
-              "marks": 2,
-              "origin": "practice",
-              "prompt": "In the diagram, OA = 10 cm. PT is a tangent at T. If OP = 26 cm, find PT.",
-              "answer": "PT = 24 cm.",
-              "explanation": "Radius OT ⟂ tangent PT, so triangle OTP is right-angled at T. By Pythagoras, OP² = OT² + PT², so PT² = OP² – OT² = 26² – 10² = 676 – 100 = 576, and PT = 24 cm."
-            },
-            {
-              "id": "icse-10-math-q-circles-10",
-              "type": "long",
-              "difficulty": "hard",
-              "marks": 4,
-              "origin": "practice",
-              "prompt": "In the diagram, ABCD is a cyclic quadrilateral with AB ∥ DC. If ∠B = 70°, find ∠D. Give a reason for your answer.",
-              "answer": "∠D = 110°. Reason: In a cyclic quadrilateral, opposite angles sum to 180°. Since AB ∥ DC, interior angles on the same side of transversal BC are supplementary, so ∠B + ∠C = 180°. Combining, ∠D = ∠C = 110°.",
-              "explanation": "Given: ABCD is a cyclic quadrilateral, so ∠B + ∠D = 180° (opposite angles property). Also, AB ∥ DC, so interior angles on the same side of transversal BC satisfy ∠B + ∠C = 180°. From these, ∠C = ∠D = 110°. The first equality uses the cyclic quadrilateral theorem; the parallel-lines property gives the same result."
-            }
-          ]
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The six standard circle theorems",
+      "description": "Angle at the centre is twice the angle at the circumference; angles in the same segment are equal; the angle in a semicircle is a right angle; the radius to a tangent is perpendicular to it; the perpendicular from the centre to a chord bisects it; opposite angles of a cyclic quadrilateral sum to 180°.",
+      "labels": [
+        "Angle at centre = 2 × angle at circumference",
+        "Angles in same segment equal",
+        "Angle in semicircle = 90°",
+        "Radius ⟂ tangent at contact",
+        "Perpendicular from centre bisects chord",
+        "Cyclic quadrilateral: opposite angles = 180°"
+      ]
+    },
+    {
+      "caption": "Figure: Equal tangents from an external point",
+      "description": "From an external point P, the two tangents PT and PS to a circle with centre O are equal in length, and the line PO bisects the angle between them; each tangent is perpendicular to the radius at its point of contact.",
+      "labels": [
+        "PT = PS",
+        "∠TPO = ∠SPO",
+        "OT ⟂ PT",
+        "OS ⟂ PS"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The angle subtended by an arc at the centre is twice the angle subtended by it at any point on the remaining part of the circle.",
+    "Angles in the same segment are equal — they stand on the same chord and have their vertices on the same side of it.",
+    "The angle in a semicircle is a right angle: a triangle inscribed in a circle with the diameter as one side is right-angled opposite that side.",
+    "A radius drawn to the point of contact of a tangent is perpendicular to the tangent.",
+    "The perpendicular from the centre of a circle to a chord bisects the chord; conversely, the line joining the centre to the midpoint of a chord is perpendicular to it.",
+    "Opposite angles of a cyclic quadrilateral are supplementary (sum to 180°); an exterior angle equals the interior opposite angle.",
+    "The two tangents drawn from an external point to a circle are equal in length, and the line from that point to the centre bisects the angle between them.",
+    "A quadrilateral is cyclic if and only if all four vertices lie on one circle — use the opposite-angles test to prove points are concyclic."
+  ],
+  "examFocus": [
+    "Angle-chasing problems combine two or more theorems; name each theorem as you apply it to earn full method marks.",
+    "In tangent problems, join the radius to the point of contact first — the right angle it creates is usually the key to the solution.",
+    "Cyclic quadrilateral questions often ask for the exterior-angle property; derive it from the supplementary opposite pair rather than quoting it alone.",
+    "“Prove that” parts require the theorem statement in words, not just the numerical answer."
+  ],
+  "vocabulary": [
+    {
+      "word": "Chord",
+      "meaning": "A straight line segment joining two points on a circle."
+    },
+    {
+      "word": "Arc",
+      "meaning": "The part of the circumference lying between two points of the circle."
+    },
+    {
+      "word": "Tangent",
+      "meaning": "A straight line that touches the circle at exactly one point."
+    },
+    {
+      "word": "Cyclic quadrilateral",
+      "meaning": "A quadrilateral whose four vertices all lie on a circle."
+    },
+    {
+      "word": "Segment",
+      "meaning": "The region between a chord and the arc it cuts off (minor or major)."
+    },
+    {
+      "word": "Sector",
+      "meaning": "The region enclosed by two radii and the arc joining their endpoints."
+    },
+    {
+      "word": "Subtend",
+      "meaning": "To stand opposite — an angle subtended by an arc has its vertex on the remaining part of the circle."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-circles-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The angle subtended by an arc at the centre of a circle is _____ the angle subtended by the same arc at any point on the remaining part of the circle.",
+      "options": ["half", "equal to", "twice", "one-third"],
+      "correctIndex": 2,
+      "answer": "twice",
+      "explanation": "By the angle-at-the-centre theorem, the angle at the centre is twice the angle at the circumference standing on the same arc.",
+      "commonMistake": "Confusing with the angles-in-the-same-segment theorem, which says those angles are equal."
+    },
+    {
+      "id": "icse-10-math-q-circles-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The angle in a semicircle is _____.",
+      "options": ["acute", "obtuse", "right", "straight"],
+      "correctIndex": 2,
+      "answer": "right",
+      "explanation": "The angle in a semicircle is always 90° (a right angle). This is a special case of the angle-at-the-centre theorem where the central angle is 180°."
+    },
+    {
+      "id": "icse-10-math-q-circles-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If two chords of a circle are equidistant from the centre, then the chords are _____.",
+      "options": ["parallel", "equal", "perpendicular", "intersecting"],
+      "correctIndex": 1,
+      "answer": "equal",
+      "explanation": "Equal chords of a circle are equidistant from the centre, and conversely, chords equidistant from the centre are equal."
+    },
+    {
+      "id": "icse-10-math-q-circles-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the diagram, O is the centre of the circle, AB is a chord, and OM ⟂ AB at M. If OA = 13 cm and OM = 5 cm, find the length of AB.",
+      "answer": "AB = 24 cm.",
+      "explanation": "Since OM ⟂ AB bisects AB, AM = MB. By Pythagoras in triangle OAM: AM² = OA² – OM² = 13² – 5² = 169 – 25 = 144, so AM = 12 cm. Hence AB = 2 × AM = 24 cm."
+    },
+    {
+      "id": "icse-10-math-q-circles-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the diagram, ABCD is a cyclic quadrilateral with ∠A = 80°. Find ∠C.",
+      "answer": "∠C = 100°.",
+      "explanation": "Opposite angles of a cyclic quadrilateral sum to 180°, so ∠A + ∠C = 180°, giving ∠C = 180° – 80° = 100°."
+    },
+    {
+      "id": "icse-10-math-q-circles-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "PT is a tangent at T to a circle with centre O. If OT = 4 cm and OP = 5 cm, find PT.",
+      "answer": "PT = 3 cm.",
+      "explanation": "Radius OT ⟂ tangent PT, so triangle OTP is right-angled at T. By Pythagoras, OP² = OT² + PT², so PT² = OP² – OT² = 25 – 16 = 9, and PT = 3 cm."
+    },
+    {
+      "id": "icse-10-math-q-circles-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the diagram, O is the centre of the circle, and AB is a diameter. If ∠BAC = 30°, find ∠BCA.",
+      "answer": "∠BCA = 60°.",
+      "explanation": "Since AB is a diameter, the angle in a semicircle ∠ACB = 90°. In triangle ABC, the angles sum to 180°, so ∠BCA = 180° – 90° – 30° = 60°."
+    },
+    {
+      "id": "icse-10-math-q-circles-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the diagram, O is the centre of the circle. ∠AOB = 100°. Find ∠ACB, where C is a point on the circle on the larger arc AB.",
+      "answer": "∠ACB = 50°.",
+      "explanation": "By the angle-at-the-centre theorem, ∠AOB = 2 × ∠ACB, so ∠ACB = ∠AOB / 2 = 100° / 2 = 50°. C is on the larger arc, so this is the correct angle."
+    },
+    {
+      "id": "icse-10-math-q-circles-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the diagram, OA = 10 cm. PT is a tangent at T. If OP = 26 cm, find PT.",
+      "answer": "PT = 24 cm.",
+      "explanation": "Radius OT ⟂ tangent PT, so triangle OTP is right-angled at T. By Pythagoras, OP² = OT² + PT², so PT² = OP² – OT² = 26² – 10² = 676 – 100 = 576, and PT = 24 cm."
+    },
+    {
+      "id": "icse-10-math-q-circles-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In the diagram, ABCD is a cyclic quadrilateral with AB ∥ DC. If ∠B = 70°, find ∠D. Give a reason for your answer.",
+      "answer": "∠D = 110°. Reason: In a cyclic quadrilateral, opposite angles sum to 180°. Since AB ∥ DC, interior angles on the same side of transversal BC are supplementary, so ∠B + ∠C = 180°. Combining, ∠D = ∠C = 110°.",
+      "explanation": "Given: ABCD is a cyclic quadrilateral, so ∠B + ∠D = 180° (opposite angles property). Also, AB ∥ DC, so interior angles on the same side of transversal BC satisfy ∠B + ∠C = 180°. From these, ∠C = ∠D = 110°. The first equality uses the cyclic quadrilateral theorem; the parallel-lines property gives the same result."
     }
   ]
 }

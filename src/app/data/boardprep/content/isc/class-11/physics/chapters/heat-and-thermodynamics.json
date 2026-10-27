@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-thermodynamics",
+  "title": "Heat and Thermodynamics",
+  "kind": "physics",
+  "tagline": "Expansion, calorimetry and transfer of heat, then the laws that govern every heat engine.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Heat has two halves in this syllabus and the chapter keeps them in order. The first is the everyday physics of temperature: expansion of solids, liquids and gases, calorimetry and the latent heats, and the three mechanisms by which heat travels. The second is thermodynamics proper: the zeroth law behind temperature itself, the first law as a conservation statement, the specific heats of gases with their molecular explanation, the second law with its irreversible direction, and the heat engines whose efficiency is capped by the Carnot limit. Examiners draw the two halves together — a numerical on calorimetry and a conceptual question on the second law appear together in almost every paper.",
+    "facts": [
+      {
+        "label": "Expansion",
+        "value": "A solid expands by αLΔT in length, a liquid through its apparent expansion with a real expansion of γ − α, and a gas through V/T = constant at fixed pressure."
+      },
+      {
+        "label": "Calorimetry",
+        "value": "Heat lost equals heat gained: m s Δθ, with latent heat mL for a change of state at constant temperature."
+      },
+      {
+        "label": "First law",
+        "value": "ΔQ = ΔU + W: the heat supplied to a gas goes into its internal energy and into the work it does."
+      },
+      {
+        "label": "Efficiency",
+        "value": "A reversible engine between T₁ and T₂ has efficiency 1 − T₂/T₁; no engine can beat it, and no engine reaches it in practice."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Calculate expansion in solids, liquids and gases, including the anomalous behaviour of water near 4°C.",
+    "Solve calorimetry problems involving specific and latent heats with heat gained equal to heat lost.",
+    "Distinguish conduction, convection and radiation and state the laws governing each.",
+    "Apply the first law of thermodynamics to isochoric, isobaric, isothermal and adiabatic processes.",
+    "State the second law, derive the Carnot efficiency and explain the molecular basis of specific heat."
+  ],
+  "learn": [
+    {
+      "id": "expansion",
+      "title": "Expansion of solids, liquids and gases",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Matter expands when it is heated because the increased vibration of its molecules increases their average separation, and the effect is quantified by a coefficient of expansion. For a solid the linear expansivity α gives an increase of length equal to α L ΔT, and because each dimension grows, the volume expansion is approximately 3α, which is why bimetallic strips bend: two metals with different α bonded together must curve when heated, a simple device that thermostats and fire alarms rely on. Liquids have no fixed shape, so only a container and the expansion of the liquid itself are distinguishable, and the apparent expansivity is the real expansivity of the liquid less that of the vessel, giving γ = β − α. Water is the celebrated exception: between 0°C and 4°C it contracts as it warms, so its density is greatest at 4°C, which is why the deep water of a lake stays near 4°C in winter and fish survive beneath the ice. Gases behave in the simplest way of all because their molecules are far apart: at constant pressure the volume varies directly with the absolute temperature, and at constant volume the pressure varies directly with it, which together with the observation that a gas falls in pressure on cooling at fixed volume gives Charles’s law in either form and the definition of the absolute scale on which the kelvin is built."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Solid: increase in length = α L ΔT, in area ≈ 2α, in volume ≈ 3α for isotropic solids.",
+            "Bimetallic strips bend on heating because the two metals have different linear expansivities.",
+            "Liquid: apparent expansivity β = real expansivity γ − expansivity of the vessel α.",
+            "Water is anomalous between 0 and 4°C, contracting on warming so that its density is greatest at 4°C.",
+            "Gas at constant pressure: V ∘ T in kelvin; at constant volume: p ∘ T in kelvin.",
+            "Expansion is a change of separation, not of the molecules themselves, which is why solids and liquids expand only slightly."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Expansion summary",
+          "columns": [
+            "State",
+            "Coefficient",
+            "Law",
+            "Everyday example"
+          ],
+          "rows": [
+            [
+              "Solid",
+              "α linear",
+              "ΔL = α L ΔT",
+              "gaps in railway lines"
+            ],
+            [
+              "Liquid",
+              "γ real, β apparent",
+              "apparent = γ − α",
+              "mercury in a thermometer"
+            ],
+            [
+              "Gas",
+              "expands freely",
+              "V/T = constant at fixed p",
+              "hot air balloon"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A railway gap",
+              "note": "A 10 m rail with α = 12 × 10⁻⁶ expands by about 12 mm over 100°C, which is exactly the size of gap left between rails."
+            },
+            {
+              "text": "Water at 4°C",
+              "note": "On a freezing night the surface water cools towards 4°C, sinks, and only then does the lake cool further, so the ice forms from the top down."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Linear expansivity",
+              "meaning": "The fractional increase in length per kelvin rise of temperature, symbol α."
+            },
+            {
+              "term": "Anomalous expansion",
+              "meaning": "The contraction of water on warming between 0°C and 4°C."
+            },
+            {
+              "term": "Apparent expansivity",
+              "meaning": "The expansion of a liquid relative to its container, β = γ − α."
+            },
+            {
+              "term": "Absolute zero",
+              "meaning": "The temperature at which a gas would exert no pressure, the zero of the kelvin scale."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calorimetry-transfer",
+      "title": "Calorimetry, latent heat and the transfer of heat",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Calorimetry rests on the conservation of energy: in an isolated exchange the heat lost by the hot body equals the heat gained by the cold one, and each is calculated as mass times specific heat capacity times the change in temperature. The latent heats are the counterpart for changes of state, where the temperature does not move at all while the energy goes into breaking or forming the bonds between molecules: the specific latent heat of fusion is the energy to melt a kilogram at constant temperature, and of vaporisation to convert a kilogram of liquid to vapour. Because vaporisation requires far more energy than fusion — the vapour must also be separated entirely — steam at 100°C burns far more severely than boiling water at the same temperature, since it first condenses and gives out the latent heat of vaporisation on the skin. Heat itself travels by three mechanisms. Conduction is the transfer through a material without bulk motion, proceeding by molecular vibration passing down the chain and by free electrons in metals, which is why good conductors are metals and why a wooden handle on a saucepan stays cool; convection is the transfer by the bulk movement of the fluid itself, with warm fluid rising and cool sinking, and it can be free or forced by a pump or fan; and radiation is the transfer by electromagnetic waves, which needs no medium, occurs at the speed of light, and follows the Stefan-Boltzmann law that the power radiated varies as the fourth power of the absolute temperature, with a net transfer depending on the difference of the fourth powers between the two bodies."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heat lost = heat gained: m₁s₁Δθ₁ = m₂s₂Δθ₂ in an isolated exchange.",
+            "Latent heat acts at constant temperature during a change of state, mL for mass m.",
+            "Steam at 100°C is far more damaging than water at 100°C because it releases the latent heat of vaporisation on condensing.",
+            "Conduction: molecular vibration passed along, assisted by free electrons in metals; no bulk movement of the material.",
+            "Convection: transfer by the movement of the fluid itself, natural or forced, and impossible in a vacuum.",
+            "Radiation: electromagnetic waves needing no medium, with emitted power ∘ T⁴ in kelvin, and net exchange by the difference of fourth powers."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Three modes of heat transfer",
+          "columns": [
+            "Mode",
+            "Carrier",
+            "Needs a medium?",
+            "Dependence"
+          ],
+          "rows": [
+            [
+              "Conduction",
+              "molecular vibration and electrons",
+              "yes",
+              "temperature gradient and conductivity"
+            ],
+            [
+              "Convection",
+              "bulk movement of fluid",
+              "yes",
+              "temperature difference and fluid motion"
+            ],
+            [
+              "Radiation",
+              "electromagnetic waves",
+              "no",
+              "fourth power of absolute temperature"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Cooling tea in a room",
+              "note": "The tea loses heat by conduction to the cup, convection in the air above it and radiation to the walls, and the process slows as the tea and the room approach the same temperature."
+            },
+            {
+              "text": "A calorimeter measurement",
+              "note": "Mixing 0.1 kg of ice at 0°C with 0.2 kg of water at 30°C gives a final temperature by equating 0.1 × 3.34 × 10⁵ plus the warming of the meltwater to the 0.2 × 4200 × 30 of heat available."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first-law",
+      "title": "The first law of thermodynamics and the processes it describes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law is the conservation of energy applied to a gas: the heat supplied to it equals the increase in its internal energy plus the work it does on its surroundings, ΔQ = ΔU + W. The internal energy of an ideal gas depends only on temperature, because it is the total kinetic energy of the molecules, and this makes the four standard processes easy to separate. At constant volume no work is done, so all the heat goes into raising the internal energy and the temperature; at constant pressure the gas heats and expands, so the heat must pay for both; isothermally the temperature is fixed, the internal energy does not change, and all the heat supplied becomes work done by the gas; adiabatically no heat enters at all, so work done by the gas comes at the cost of its internal energy and the gas cools — which is why compressed air warms and expanding gas chills. The molar heat capacity is the quantity that measures how much heat raises the temperature of a mole, and for a diatomic gas at ordinary temperatures it is about five halves R because the molecules store energy in translation and rotation as well, a result that classical theory derived and the equipartition theorem explains: each active degree of freedom holds one half R of energy per mole per kelvin."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First law: ΔQ = ΔU + W, with the sign convention that heat into the system and work done by it are positive.",
+            "For an ideal gas the internal energy depends only on temperature, since it is the kinetic energy of the molecules.",
+            "Constant volume: W = 0, so all heat becomes internal energy and the temperature rises fastest.",
+            "Constant pressure: heat pays for both the temperature rise and the expansion work.",
+            "Isothermal: ΔU = 0, so every joule supplied is work done by the gas.",
+            "Adiabatic: ΔQ = 0, so expansion cools the gas and compression warms it.",
+            "Molar heat capacity of a diatomic gas ≈ 5R/2, from three translational and two rotational degrees of freedom."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The four standard processes",
+          "columns": [
+            "Process",
+            "Fixed quantity",
+            "First-law consequence"
+          ],
+          "rows": [
+            [
+              "Isochoric",
+              "volume",
+              "W = 0, all heat raises U"
+            ],
+            [
+              "Isobaric",
+              "pressure",
+              "heat shared between U and W"
+            ],
+            [
+              "Isothermal",
+              "temperature",
+              "ΔU = 0, heat becomes work"
+            ],
+            [
+              "Adiabatic",
+              "no heat exchange",
+              "work comes from U, gas cools"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A compressed syringe",
+              "note": "Rapidly closing the nozzle and pressing the plunger compresses the air and heats it enough to ignite cotton wool — adiabatic heating in a demonstration."
+            },
+            {
+              "text": "A cooling can",
+              "note": "Letting a refrigerant expand through a narrow valve removes heat from the space, using the adiabatic cooling of the expanding vapour."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Internal energy",
+              "meaning": "The total kinetic and potential energy of the molecules of a substance."
+            },
+            {
+              "term": "Isothermal",
+              "meaning": "A process at constant temperature, so the internal energy of an ideal gas does not change."
+            },
+            {
+              "term": "Adiabatic",
+              "meaning": "A process with no heat exchange with the surroundings."
+            },
+            {
+              "term": "Degrees of freedom",
+              "meaning": "Independent ways a molecule can store energy, each contributing about R/2 per mole per kelvin."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "second-law-engines",
+      "title": "The second law, engines and efficiency",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The second law states the direction that the first law permits but does not impose: heat does not of itself flow from a cooler body to a hotter one, and no process can have as its sole result the complete conversion of heat from a single reservoir into work. From this follow both the Kelvin-Planck and Clausius statements, which are equivalent because a violation of either could be used to violate the other, and the concept of entropy, which never decreases in an isolated system — a measure of the dispersal of energy that explains why every real process runs one way. The idealised engine that sets the limit is the Carnot engine: it takes heat Q₁ from a hot reservoir at T₁, does work, and rejects Q₂ to a cold reservoir at T₂ through a cycle of two reversible isotherms and two adiabats, and its efficiency is 1 − T₂/T₁ with both temperatures in kelvin. No engine operating between the same reservoirs can be more efficient, and a real engine always less, because real processes involve friction, unrestrained expansion and finite temperature differences that make them irreversible. The practical consequences are the whole of power engineering: raising T₁ or lowering T₂ improves efficiency, which is why steam plants run at the highest practisable temperature; a perfect engine converting all heat to work would need a reservoir at absolute zero, which is unattainable; and every refrigerator must pay for its work by dumping more heat outside than it removes inside, since energy must still be conserved."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Second law: heat will not pass from cold to hot of itself, and no sole result of a cycle can be heat converted entirely to work.",
+            "Kelvin-Planck and Clausius statements are equivalent; violating one permits violating the other.",
+            "Entropy of an isolated system never decreases, which fixes the direction of every real process.",
+            "Carnot efficiency η = 1 − T₂/T₁ with temperatures in kelvin; it is the maximum possible.",
+            "Real engines fall short through friction, unrestrained expansion and finite temperature differences.",
+            "Efficiency improves by raising the source temperature or lowering the sink temperature, never by changing the working substance.",
+            "A refrigerator must pump out more heat than it extracts, because the work it consumes is added to the heat removed."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Statements of the second law and their consequence",
+          "columns": [
+            "Statement",
+            "In words",
+            "What it forbids"
+          ],
+          "rows": [
+            [
+              "Clausius",
+              "heat will not flow from cold to hot of itself",
+              "a refrigerator with no work input"
+            ],
+            [
+              "Kelvin-Planck",
+              "no sole result is heat from one reservoir becoming work",
+              "a perfect single-reservoir engine"
+            ],
+            [
+              "Entropy form",
+              "entropy of an isolated system never increases",
+              "spontaneous reversal of mixing or cooling"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A Carnot engine",
+              "note": "Working between 500 K and 300 K, the ideal efficiency is 1 − 300/500 = 0.4, so at most forty per cent of the heat can ever become work."
+            },
+            {
+              "text": "A broken refrigerator",
+              "note": "One that pumped heat from the cold room to the kitchen without work would cool the kitchen as a whole, violating the Clausius statement."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Second law",
+              "meaning": "The law fixing the direction of heat flow and forbidding the complete conversion of heat into work from one reservoir."
+            },
+            {
+              "term": "Carnot engine",
+              "meaning": "The reversible ideal engine whose efficiency is the maximum possible between two temperatures."
+            },
+            {
+              "term": "Entropy",
+              "meaning": "A measure of the dispersal of energy, which never decreases in an isolated system."
+            },
+            {
+              "term": "Reversible process",
+              "meaning": "One that could be reversed with no change in the universe, the ideal limit assumed by Carnot."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "putting-together",
+      "title": "Bringing expansion, calorimetry and thermodynamics together",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The three parts of this chapter are connected by energy at every point, and the examination answers improve when the connection is made explicit. Expansion is what heat does to matter because added energy increases molecular vibration; calorimetry measures that energy as it moves between bodies while conservation guarantees what leaves one arrives at another; thermodynamics generalises the same accounting to a working substance in a machine, where the first law is the budget and the second law is the rule that the budget can never be balanced in the other direction. For solving, three habits pay. Convert every temperature to kelvin before using any gas law or efficiency formula, because a Celsius number in T₂/T₁ gives an answer that is not an efficiency at all. Draw the process on a pressure-volume sketch when a first-law question names a process, since the area under the curve is the work and the shape identifies the process at once. And in calorimetry list every term before calculating, including the latent heat of any change of state, because the commonest mistake is to forget that ice at 0°C must first melt before its temperature can rise at all."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Expansion, calorimetry and the first law are the same energy accounting viewed at three scales.",
+            "Kelvin is compulsory in gas laws and in efficiency — 27°C is 300 K, not 27.",
+            "On a pressure-volume diagram the area under the curve is the work done by the gas.",
+            "In calorimetry, account for every change of state: melt first, then warm.",
+            "Efficiency questions must state both reservoir temperatures in kelvin before substitution.",
+            "The second law explains why the answers to calorimetry problems always run from hot to cold and never back."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ice in warm water",
+              "note": "The ice first absorbs its latent heat of fusion at 0°C, and only the melted water then warms; omitting the latent term is the classic lost mark."
+            },
+            {
+              "text": "An efficiency answer in Celsius",
+              "note": "Between 127°C and 27°C the efficiency is 1 − 300/400 = 25 per cent, while writing 1 − 27/127 would give a meaningless figure."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The first law as an energy budget",
+      "description": "A box representing the gas with an arrow of heat entering from the hot reservoir, an arrow of work leaving to the surroundings, and an arrow of internal energy change, each labelled with its sign convention.",
+      "labels": [
+        "heat in: ΔQ positive",
+        "work done by the gas: W positive",
+        "internal energy change: ΔU",
+        "ΔQ = ΔU + W",
+        "ideal gas: U depends only on temperature"
+      ]
+    },
+    {
+      "caption": "Figure: Efficiency against temperature difference",
+      "description": "A graph of Carnot efficiency against the source temperature with the sink temperature fixed, the curve rising towards an asymptote of one, with two worked points marked in kelvin.",
+      "labels": [
+        "efficiency η = 1 − T₂/T₁",
+        "sink T₂ fixed at 300 K",
+        "source 400 K gives 25 per cent",
+        "source 500 K gives 40 per cent",
+        "rises with source temperature, never reaches one"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A solid expands by αLΔT, and its volume expansion is approximately three times the linear coefficient.",
+    "Bimetallic strips bend because two bonded metals have different expansivities.",
+    "A liquid’s apparent expansivity is its real expansivity less that of its container.",
+    "Water contracts on warming between 0°C and 4°C, so it is densest at 4°C.",
+    "For a gas at constant pressure V/T is constant, and at constant volume p/T is constant.",
+    "Calorimetry sets heat lost equal to heat gained, including any latent heat of change of state.",
+    "Steam at 100°C damages skin far more than water at 100°C because of the latent heat released on condensing.",
+    "Conduction needs a medium and molecular contact, convection needs fluid motion, radiation needs no medium at all.",
+    "Radiated power varies as the fourth power of the absolute temperature.",
+    "The first law ΔQ = ΔU + W is energy conservation for a gas.",
+    "The internal energy of an ideal gas depends only on its temperature.",
+    "The second law fixes the direction of heat flow, and Carnot efficiency 1 − T₂/T₁ is the maximum attainable."
+  ],
+  "examFocus": [
+    "Always convert temperatures to kelvin before using a gas law or an efficiency formula.",
+    "First-law sketches on a pressure-volume diagram earn method marks; the area under the curve is the work.",
+    "Calorimetry solutions must list every term first, including latent heats of melting and boiling.",
+    "Second-law answers should quote both the statement and the reason a real engine falls short of Carnot."
+  ],
+  "vocabulary": [
+    {
+      "word": "Expansivity",
+      "meaning": "The fractional change in size per kelvin rise of temperature."
+    },
+    {
+      "word": "Specific heat capacity",
+      "meaning": "The energy to raise one kilogram of a substance by one kelvin."
+    },
+    {
+      "word": "Latent heat",
+      "meaning": "Energy absorbed or released at constant temperature during a change of state."
+    },
+    {
+      "word": "Convection",
+      "meaning": "Heat transfer by the bulk movement of a fluid."
+    },
+    {
+      "word": "Radiation",
+      "meaning": "Heat transfer by electromagnetic waves, needing no medium."
+    },
+    {
+      "word": "First law",
+      "meaning": "The conservation of energy for a thermodynamic system: ΔQ = ΔU + W."
+    },
+    {
+      "word": "Adiabatic",
+      "meaning": "A process with no heat exchange, so work is done at the expense of internal energy."
+    },
+    {
+      "word": "Carnot efficiency",
+      "meaning": "The maximum efficiency 1 − T₂/T₁ between two reservoirs in kelvin."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-heat-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume expansion coefficient of a liquid is approximately equal to:",
+      "options": [
+        "α",
+        "2α",
+        "3α",
+        "α/3"
+      ],
+      "correctIndex": 2,
+      "answer": "3α",
+      "explanation": "A liquid has no fixed shape, and its cubic expansion is three times its linear expansion coefficient."
+    },
+    {
+      "id": "isc11-phy-heat-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The efficiency of a Carnot engine operating between 500 K and 300 K is:",
+      "options": [
+        "20 per cent",
+        "40 per cent",
+        "60 per cent",
+        "67 per cent"
+      ],
+      "correctIndex": 1,
+      "answer": "40 per cent",
+      "explanation": "η = 1 − T₂/T₁ = 1 − 300/500 = 0.4, that is 40 per cent."
+    },
+    {
+      "id": "isc11-phy-heat-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which mode of heat transfer requires no medium?",
+      "options": [
+        "Conduction",
+        "Convection",
+        "Radiation",
+        "Conduction and convection only"
+      ],
+      "correctIndex": 2,
+      "answer": "Radiation",
+      "explanation": "Radiation is electromagnetic and travels through a vacuum, which is how the Sun heats the Earth."
+    },
+    {
+      "id": "isc11-phy-heat-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A gas is compressed adiabatically. Its temperature:",
+      "options": [
+        "Falls",
+        "Rises",
+        "Stays constant",
+        "First rises then falls"
+      ],
+      "correctIndex": 1,
+      "answer": "Rises",
+      "explanation": "No heat enters, so the work done on the gas increases its internal energy and therefore its temperature."
+    },
+    {
+      "id": "isc11-phy-heat-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The energy required to change the state of a kilogram of a substance at constant temperature is called the latent __________.",
+      "answer": "heat",
+      "explanation": "Latent heat of fusion governs melting and latent heat of vaporisation governs boiling."
+    },
+    {
+      "id": "isc11-phy-heat-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The first law of thermodynamics states that the heat supplied equals the change in internal energy plus the __________ done by the gas.",
+      "answer": "work",
+      "explanation": "Written as ΔQ = ΔU + W with the sign convention that heat in and work out are positive."
+    },
+    {
+      "id": "isc11-phy-heat-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the second law of thermodynamics in the Kelvin-Planck form and explain what it forbids.",
+      "answer": "The Kelvin-Planck statement of the second law asserts that it is impossible for any device working in a cycle to take in heat from a single reservoir and convert all of it entirely into work, with no other change. It forbids a perfect heat engine of efficiency one, and it does not contradict the first law, which would happily allow such a conversion; the second law adds the direction that energy must be dispersed. The equivalent Clausius statement forbids heat flowing from a colder to a hotter body without work being done.",
+      "explanation": "Statement and what it forbids, with a note on the equivalence to the Clausius form."
+    },
+    {
+      "id": "isc11-phy-heat-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between conduction, convection and radiation.",
+      "answer": "Conduction is the transfer of energy through a material by the passing of molecular vibration from one layer to the next, assisted by free electrons in metals, and it requires contact and a medium. Convection is the transfer by the bulk movement of the fluid itself, warm portions rising and cool sinking, so it occurs only in fluids and can be natural or forced. Radiation is the emission and absorption of electromagnetic waves, which needs no medium at all and travels at the speed of light with emitted power proportional to the fourth power of the absolute temperature.",
+      "explanation": "One definition each with the medium requirement and the dependence in each case."
+    },
+    {
+      "id": "isc11-phy-heat-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why is steam at 100°C more effective at scalding than boiling water at 100°C?",
+      "answer": "Both are at the same temperature, so on cooling to body temperature they would give up the same sensible heat. Steam, however, must first condense to water at 100°C, and in doing so it releases the latent heat of vaporisation, which is a large quantity of energy, before it gives up any sensible heat at all. The total energy delivered by a kilogram of steam is therefore much greater than that of a kilogram of water at the same temperature.",
+      "explanation": "The latent heat released on condensing, on top of the sensible heat afterwards."
+    },
+    {
+      "id": "isc11-phy-heat-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "State the first law of thermodynamics and describe what happens in isochoric, isothermal and adiabatic processes.",
+      "answer": "The first law is the conservation of energy applied to a thermodynamic system: the heat supplied to the system equals the increase in its internal energy plus the work done by the system on its surroundings, ΔQ = ΔU + W, with heat into the system and work done by it taken as positive. In an isochoric process the volume is fixed, so no work is done and every joule of heat supplied goes into raising the internal energy and therefore the temperature of the gas. In an isothermal process the temperature is held constant, so for an ideal gas the internal energy does not change, and every joule of heat supplied appears as work done by the gas as it expands. In an adiabatic process no heat is exchanged at all, so ΔQ = 0 and the work done by the gas comes entirely from its internal energy, which therefore falls and the gas cools during expansion, while compression warms it. These three cases are distinguished by which of heat, volume and temperature is held fixed.",
+      "explanation": "The law with sign convention, then each process with its first-law consequence and the physical outcome."
+    },
+    {
+      "id": "isc11-phy-heat-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 0.2 kg block of ice at 0°C is dropped into 0.5 kg of water at 20°C in a calorimeter. Analyse the final state, taking the latent heat of fusion of ice as 3.34 × 10⁵ J kg⁻¹ and the specific heat of water as 4200 J kg⁻¹ K⁻¹.",
+      "answer": "First test whether the water has enough energy to melt all the ice: melting 0.2 kg requires 0.2 × 3.34 × 10⁵ = 6.68 × 10⁴ J, while the water cooling from 20°C to 0°C can supply 0.5 × 4200 × 20 = 4.2 × 10⁴ J. Since the available 4.2 × 10⁴ J is less than the 6.68 × 10⁴ J needed, the ice does not melt completely: the final state is a mixture of ice and water at exactly 0°C. The mass of ice that does melt is the available heat divided by the latent heat, 4.2 × 10⁺ / 3.34 × 10⁵ ≈ 0.126 kg, so about 0.074 kg of ice remains. The pattern of the calculation is what earns the marks: test the endpoint first, decide the state, and only then compute quantities — never assume all the ice melts and solve backwards.",
+      "explanation": "Energy needed to melt all the ice against the energy available from the water, the conclusion that the final temperature is 0°C, and the mass actually melted."
+    },
+    {
+      "id": "isc11-phy-heat-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A gas is taken around the cycle of isochoric heating at constant volume followed by isobaric expansion and isothermal cooling. Using the first law, describe the energy accounting of each leg.",
+      "answer": "On the isochoric leg the volume is fixed, so the work done by the gas is zero and the first law reduces to ΔQ = ΔU: all the heat supplied raises the internal energy and the temperature, and the pressure rises in proportion. On the isobaric leg the gas expands at constant pressure, so it does work equal to pΔV, and the heat supplied now pays for both a further rise in internal energy and that work, which is why the heat needed in this leg is greater than the temperature rise alone would suggest — it is the origin of the difference between the constant-volume and constant-pressure molar heat capacities. On the isothermal leg the temperature returns to its initial value, so the internal energy change is zero, and the first law gives ΔQ = W: every joule of heat the gas absorbs is handed out as work during the expansion. Summing the three legs, the total change in internal energy over the cycle is zero, as it must be for any complete cycle, while the net heat absorbed equals the net work done.",
+      "explanation": "Each leg with the first-law simplification, the reason for the difference between heat capacities, and the cycle sum returning to zero."
+    }
+  ]
+}

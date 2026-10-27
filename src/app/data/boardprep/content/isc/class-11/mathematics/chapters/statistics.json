@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-statistics",
+  "title": "Statistics",
+  "kind": "mathematics",
+  "tagline": "Mean deviation, variance and standard deviation for ungrouped and grouped data, and what the numbers say about consistency.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "An average tells you where a set of data sits; this chapter tells you how far it spreads. Three measures carry the unit — mean deviation, variance and standard deviation — each answering the same question with a different sensitivity, and standard deviation being the one that statisticians actually use because its squaring step behaves well under manipulation. The chapter works through ungrouped data first, converts to the mid-point method for grouped data, and finishes with the comparison of two series, where a smaller standard deviation means the more consistent performance.",
+    "facts": [
+      {
+        "label": "Variance",
+        "value": "σ² = (1/n) Σ (xᵢ − x̄)², the mean of the squared deviations from the mean."
+      },
+      {
+        "label": "Standard deviation",
+        "value": "σ = √σ², in the same units as the data itself."
+      },
+      {
+        "label": "Mean deviation",
+        "value": "MD about the mean = (1/n) Σ |xᵢ − x̄|, using absolute values rather than squares."
+      },
+      {
+        "label": "Computational form",
+        "value": "σ² = Σxᵢ²/n − (Σxᵢ/n)², which avoids re-subtracting the mean from every value."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute the mean, mean deviation about the mean and about the median of ungrouped data.",
+    "Calculate variance and standard deviation using both the definition and the computational formula.",
+    "Apply the properties of standard deviation under addition and multiplication of a constant.",
+    "Organise grouped data into a frequency table and compute its variance and mean deviation using mid-values.",
+    "Compare two data series and judge which is more consistent from their standard deviations."
+  ],
+  "learn": [
+    {
+      "id": "measures-of-spread",
+      "title": "Range, deviations and the idea of spread",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two data sets can share a mean and still look nothing alike, and dispersion measures quantify the difference. The crudest is the range, max minus min, which uses only two values and is therefore easily disturbed by an outlier. The mean deviation improves on it by averaging the distances of every observation from a centre — the mean or the median — using absolute values so that positive and negative deviations do not cancel each other into nothing. Its weakness is mathematical rather than statistical: absolute values resist the algebra of further manipulation, which is why the variance replaces them with squares. Squared deviations are always non-negative, they differentiate and sum cleanly, and their average — the variance — becomes the foundation of the standard deviation, the measure this unit returns to constantly."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Range = maximum − minimum; quick but sensitive to a single extreme value.",
+            "Mean deviation about the mean = (1/n) Σ|xᵢ − x̄|.",
+            "Mean deviation about the median uses the same formula with the median as centre.",
+            "Absolute values prevent positive and negative deviations from cancelling.",
+            "Squaring instead of absolute value gives the variance, which is algebraically tractable."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Data 2, 4, 6, 8, 10: mean = 6, deviations −4, −2, 0, 2, 4, so MD = 12/5 = 2.4",
+              "note": "Sum the absolute deviations and divide by the number of observations."
+            },
+            {
+              "text": "Data 1, 2, 3, 4, 10: mean = 4, median = 3 — the centres already differ",
+              "note": "An extreme value drags the mean but leaves the median where it was."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Centres and their companion deviations",
+          "columns": [
+            "Centre",
+            "Deviation measure",
+            "Formula"
+          ],
+          "rows": [
+            [
+              "Mean x̄",
+              "Mean deviation about the mean",
+              "(1/n) Σ|xᵢ − x̄|"
+            ],
+            [
+              "Median",
+              "Mean deviation about the median",
+              "(1/n) Σ|xᵢ − m|"
+            ],
+            [
+              "Mean",
+              "Variance",
+              "(1/n) Σ(xᵢ − x̄)²"
+            ],
+            [
+              "Variance",
+              "Standard deviation",
+              "√(variance)"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "variance-and-standard-deviation",
+      "title": "Variance and standard deviation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The variance averages the squared deviations from the mean, σ² = (1/n)Σ(xᵢ − x̄)², and the standard deviation is its square root — the square root being necessary because squaring changed the units from metres to square metres, and σ restores them. The subtraction of the mean inside the square makes the definition clear but the arithmetic tedious, so the computational formula σ² = Σxᵢ²/n − (1/n Σxᵢ)² is what is actually used: square each value, average the squares, subtract the square of the average. Two properties follow from the definition and appear constantly in questions: adding the same constant to every observation moves the centre but leaves the spread untouched, while multiplying every observation by k multiplies the standard deviation by |k|. Zero variance is the signature of data with no spread at all — every value identical."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "σ² = (1/n)Σ(xᵢ − x̄)² and σ = √σ²; variance is in squared units, σ in original units.",
+            "Computational form: σ² = Σxᵢ²/n − x̄², the average of squares minus the square of the average.",
+            "Adding a constant c to every value changes neither variance nor standard deviation.",
+            "Multiplying every value by k multiplies σ by |k| and σ² by k².",
+            "σ = 0 exactly when all observations are equal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "2, 4, 6, 8, 10: mean 6, squared deviations 16, 4, 0, 4, 16, variance = 40/5 = 8, σ = √8 ≈ 2.83",
+              "note": "The definition path: deviations, squares, average, square root."
+            },
+            {
+              "text": "Same data shifted to 12, 14, 16, 18, 20: mean 12, σ unchanged at √8",
+              "note": "A constant shift moves every point equally, so the spread cannot change."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Computational check on 1, 2, 3, 4, 5: Σx² = 55, x̄ = 3, so σ² = 55/5 − 9 = 2",
+              "note": "Average of squares minus square of average, matching the definition-based result."
+            },
+            {
+              "text": "Doubling every value of a set with σ = 2 gives σ = 4",
+              "note": "Multiplication scales the spread by the same factor as the data."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mean-deviation-in-depth",
+      "title": "Mean deviation about mean and median",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Mean deviation measures typical distance from a chosen centre, and the choice of centre changes the answer. About the mean, each absolute deviation |xᵢ − x̄| is summed and divided by n; about the median, the same is done against the median, which for skewed data usually gives the smaller figure because the median is the point that minimises total absolute deviation. For grouped data the calculation switches to class mid-values: each observation is represented by the midpoint of its class, and the frequencies weight everything that follows. The full routine for grouped data is a table — class, frequency, mid-value x, fx, fx² — and from those columns the mean is Σfx/n, the variance is Σfx²/n − x̄², and the mean deviation follows from the absolute column. Building the table carefully is most of the work; the arithmetic afterwards is short."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "MD about mean = (1/n)Σ|xᵢ − x̄|; MD about median = (1/n)Σ|xᵢ − m|.",
+            "The median generally gives the smaller mean deviation for skewed data.",
+            "Grouped data: replace each observation by its class mid-value x = (lower + upper)/2.",
+            "The standard table carries columns: class, frequency f, mid-value x, fx, fx².",
+            "From the table: x̄ = Σfx/n and σ² = Σfx²/n − x̄²."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Data 1, 2, 3, 4, 10: about the mean 4 → (3 + 2 + 1 + 0 + 6)/5 = 2.4; about the median 3 → (2 + 1 + 0 + 1 + 7)/5 = 2.2",
+              "note": "Both centres give valid answers; the median wins by 0.2 here."
+            },
+            {
+              "text": "Classes 0–10, 10–20, 20–30 with frequencies 3, 5, 2: mid-values 5, 15, 25",
+              "note": "n = 10 and Σfx = 15 + 75 + 50 = 140, so the mean is 14 — the midpoint method in one pass."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Variance",
+              "meaning": "Average of squared deviations from the mean, σ²."
+            },
+            {
+              "term": "Standard deviation",
+              "meaning": "Square root of the variance, in the data’s own units."
+            },
+            {
+              "term": "Mean deviation",
+              "meaning": "Average of absolute deviations from a chosen centre."
+            },
+            {
+              "term": "Mid-value",
+              "meaning": "Centre of a class interval, used to represent grouped observations."
+            },
+            {
+              "term": "Consistency",
+              "meaning": "Low variability; a series with smaller σ is the more consistent one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grouped-data-and-comparison",
+      "title": "Grouped data and comparing series",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Grouped data arrives already cut into classes with frequencies, and every measure of this chapter extends to it by treating each class as a single representative value — its mid-point. The mean becomes Σfx/n, the variance Σfx²/n − x̄², and both mean deviations follow the same pattern with absolute columns instead of squares. The final skill is comparison: given two series — two bowlers, two machines, two students’ test scores — the series with the smaller standard deviation is the more consistent, because its values cluster more tightly around their own mean. A common examination trap is comparing means to judge consistency: means locate the centres and say nothing about spread, so a higher average with a larger σ may well be the less dependable of the two. State σ for both series before drawing any conclusion, and give the conclusion in words."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Grouped mean: x̄ = Σfx / n, with f the frequency and x the class mid-value.",
+            "Grouped variance: σ² = Σfx²/n − x̄², computed from the same table.",
+            "Consistency is decided by σ alone: smaller σ means tighter clustering, hence greater consistency.",
+            "The mean decides the level of performance; σ decides its reliability.",
+            "Always present both series’ means and standard deviations before writing the comparison."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Scores A: 7, 9, 10, 11, 13 give mean 10, σ² = 20/5 = 4, σ = 2",
+              "note": "Squared deviations 9, 1, 0, 1, 9 total 20, giving variance 4."
+            },
+            {
+              "text": "Scores B: 5, 8, 11, 14, 17 give mean 11, σ² = 90/5 = 18, σ ≈ 4.24",
+              "note": "B has the higher mean but far larger spread, so A is the more consistent series."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "A complete grouped-data working table",
+          "columns": [
+            "Class",
+            "Frequency f",
+            "Mid-value x",
+            "fx",
+            "fx²"
+          ],
+          "rows": [
+            [
+              "0–10",
+              "3",
+              "5",
+              "15",
+              "75"
+            ],
+            [
+              "10–20",
+              "5",
+              "15",
+              "75",
+              "1125"
+            ],
+            [
+              "20–30",
+              "2",
+              "25",
+              "50",
+              "1250"
+            ],
+            [
+              "Total",
+              "n = 10",
+              "—",
+              "Σfx = 140",
+              "Σfx² = 2450"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Deviations measured on a number line",
+      "description": "A number line carrying the values 2, 4, 6, 8 and 10, the mean marked at 6, and brackets drawn from the mean to each value showing the four-unit and two-unit distances on either side.",
+      "labels": [
+        "mean marked at the centre of the data",
+        "deviations −4, −2, 0, +2, +4",
+        "absolute deviations all positive",
+        "sum of absolute deviations = 12",
+        "mean deviation = 12/5 = 2.4"
+      ]
+    },
+    {
+      "caption": "Figure: Two distributions with the same mean and different spreads",
+      "description": "Two histograms drawn above one axis: one tall and narrow clustered tightly about the common mean, the other short and wide stretching far to both sides, with the standard deviation marked as a span for each.",
+      "labels": [
+        "both centres sit at the same mean",
+        "narrow distribution: small standard deviation",
+        "wide distribution: large standard deviation",
+        "span shown = ±1σ about the mean",
+        "the tighter series is the more consistent"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Range uses only the extremes; mean deviation uses every observation’s distance from a centre.",
+    "Mean deviation about the mean = (1/n)Σ|xᵢ − x̄|; about the median uses m in place of x̄.",
+    "Variance σ² = (1/n)Σ(xᵢ − x̄)²; standard deviation σ is its square root in original units.",
+    "Computational form σ² = Σxᵢ²/n − x̄² avoids repeated subtraction of the mean.",
+    "Adding a constant leaves σ unchanged; multiplying by k scales σ by |k|.",
+    "σ = 0 exactly when every observation equals the same value.",
+    "Grouped data uses class mid-values and the columns f, x, fx, fx².",
+    "Grouped mean = Σfx/n; grouped variance = Σfx²/n − x̄².",
+    "The series with the smaller standard deviation is the more consistent one.",
+    "Means locate the centre and say nothing about spread; consistency is judged by σ."
+  ],
+  "examFocus": [
+    "Show the table of deviations or the f, x, fx, fx² columns — method marks attach to the working table, not the final figure.",
+    "State σ in the data’s own units; leaving a standard deviation unitless loses the interpretation mark.",
+    "For comparison questions, quote both standard deviations, then the conclusion in words: smaller σ means more consistent.",
+    "Use the computational formula only after writing x̄; the two-term expression must be visibly split before subtracting."
+  ],
+  "vocabulary": [
+    {
+      "word": "Dispersion",
+      "meaning": "Spread of data about its centre."
+    },
+    {
+      "word": "Range",
+      "meaning": "Difference between the maximum and minimum values."
+    },
+    {
+      "word": "Mean deviation",
+      "meaning": "Average of the absolute deviations from a centre."
+    },
+    {
+      "word": "Variance",
+      "meaning": "Average of squared deviations from the mean, σ²."
+    },
+    {
+      "word": "Standard deviation",
+      "meaning": "Square root of the variance, in the data’s own units."
+    },
+    {
+      "word": "Mid-value",
+      "meaning": "Midpoint of a class, representing that class in grouped calculations."
+    },
+    {
+      "word": "Frequency",
+      "meaning": "Number of observations falling in a class."
+    },
+    {
+      "word": "Consistency",
+      "meaning": "Dependability of a series, indicated by a small standard deviation."
+    },
+    {
+      "word": "Skew",
+      "meaning": "Asymmetry that pulls the mean away from the median."
+    },
+    {
+      "word": "Outlier",
+      "meaning": "Value far from the rest, inflating the range and variance."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-statistics-01",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The variance of the data 2, 4, 6, 8, 10 is:",
+      "options": [
+        "8 units²",
+        "40 units²",
+        "√8 units",
+        "6 units²"
+      ],
+      "correctIndex": 0,
+      "answer": "8 units²",
+      "explanation": "The mean is 6 and the squared deviations are 16, 4, 0, 4 and 16, totalling 40; the variance is 40/5 = 8 units²."
+    },
+    {
+      "id": "isc11-math-statistics-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If every observation of a data set is increased by 5, the standard deviation:",
+      "options": [
+        "increases by 5",
+        "remains unchanged",
+        "decreases by 5",
+        "becomes zero"
+      ],
+      "correctIndex": 1,
+      "answer": "remains unchanged",
+      "explanation": "Adding a constant shifts the centre without changing any deviation, so the standard deviation is unchanged."
+    },
+    {
+      "id": "isc11-math-statistics-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The standard deviation of the data 1, 2, 3, 4, 5 is approximately:",
+      "options": [
+        "√2 ≈ 1.41",
+        "√10 ≈ 3.16",
+        "2",
+        "5"
+      ],
+      "correctIndex": 0,
+      "answer": "√2 ≈ 1.41",
+      "explanation": "Mean 3, squared deviations 4, 1, 0, 1, 4 total 10, giving variance 10/5 = 2 and σ = √2 ≈ 1.41."
+    },
+    {
+      "id": "isc11-math-statistics-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean deviation about the mean of the data 2, 4, 6, 8, 10 is:",
+      "options": [
+        "2.4",
+        "12",
+        "24",
+        "6"
+      ],
+      "correctIndex": 0,
+      "answer": "2.4",
+      "explanation": "Absolute deviations from the mean 6 are 4, 2, 0, 2 and 4, totalling 12; dividing by 5 gives 2.4."
+    },
+    {
+      "id": "isc11-math-statistics-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The square root of the variance of a data set is called its ______ deviation.",
+      "answer": "standard",
+      "explanation": "Variance is measured in squared units, so its square root — the standard deviation — restores the original units."
+    },
+    {
+      "id": "isc11-math-statistics-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In grouped-data calculations, each class is represented by its class ______ , the midpoint of the class interval.",
+      "answer": "mid-point",
+      "explanation": "The mid-value stands in for every observation of its class, turning grouped data into usable numbers for fx and fx² columns."
+    },
+    {
+      "id": "isc11-math-statistics-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define variance and standard deviation for n ungrouped observations, giving both formulae.",
+      "answer": "The variance is σ² = (1/n) Σ(xᵢ − x̄)², the average of the squared deviations of the observations from their mean. The standard deviation is σ = √σ², the positive square root of the variance, expressed in the same units as the data. An equivalent computational form is σ² = Σxᵢ²/n − x̄².",
+      "explanation": "The definition measures spread through squared deviations, while the square root returns to the data’s units; the computational form is the practical route through an examination question."
+    },
+    {
+      "id": "isc11-math-statistics-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State how the standard deviation changes when every observation is multiplied by a non-zero constant k, and justify the answer.",
+      "answer": "Multiplying every observation by k multiplies the mean by k and every deviation by k, so each squared deviation is multiplied by k²; the variance therefore becomes k²σ² and the standard deviation becomes |k|σ. The absolute value matters: multiplying by a negative constant reverses the data’s order but cannot make the spread negative.",
+      "explanation": "The justification follows straight from the definition — deviations scale linearly, squares scale quadratically, and the square root brings it back to |k|."
+    },
+    {
+      "id": "isc11-math-statistics-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the mean and the standard deviation of the first five positive odd integers 1, 3, 5, 7, 9.",
+      "answer": "The mean is x̄ = (1 + 3 + 5 + 7 + 9)/5 = 25/5 = 5. The deviations are −4, −2, 0, 2, 4, whose squares are 16, 4, 0, 4, 16, totalling 40. The variance is 40/5 = 8, so the standard deviation is √8 = 2√2 ≈ 2.83. (The computational form confirms this: Σx² = 1 + 9 + 25 + 49 + 81 = 165, 165/5 = 33, and 33 − 5² = 8.)",
+      "explanation": "Compute the mean first, then either tabulate squared deviations or use the computational formula; showing both routes and matching answers is the full-credit response."
+    },
+    {
+      "id": "isc11-math-statistics-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The scores of two players over five matches are A: 7, 9, 10, 11, 13 and B: 5, 8, 11, 14, 17. Find the mean and standard deviation of each and state which player is the more consistent.",
+      "answer": "Player A: mean = (7 + 9 + 10 + 11 + 13)/5 = 50/5 = 10; squared deviations are 9, 1, 0, 1, 9, totalling 20, so σ² = 20/5 = 4 and σ = 2. Player B: mean = (5 + 8 + 11 + 14 + 17)/5 = 55/5 = 11; squared deviations are 36, 9, 0, 9, 36, totalling 90, so σ² = 90/5 = 18 and σ = √18 ≈ 4.24. Although B averages more, A’s standard deviation is much smaller, so A is the more consistent player — A’s scores cluster tightly about 10 while B’s scatter across a twelve-run band.",
+      "explanation": "Both means and both standard deviations must appear before any verdict; consistency is read from σ alone, and the closing sentence interprets the numbers in the language of the question."
+    }
+  ]
+}

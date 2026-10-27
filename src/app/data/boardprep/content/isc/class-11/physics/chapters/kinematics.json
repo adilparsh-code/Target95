@@ -1,0 +1,606 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-kinematics",
+  "title": "Kinematics",
+  "kind": "physics",
+  "tagline": "Describing motion without asking why: graphs, projectiles, relative velocity and circular motion.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Kinematics is the geometry of motion — displacement, velocity and acceleration treated as functions of time — and it supplies the language in which every later chapter is written. This chapter builds the equations of uniformly accelerated motion, reads motion through position-time and velocity-time graphs, works the projectile as two independent motions, sets out relative velocity in one and two dimensions, and finishes with circular motion, where the same ideas reappear as angular quantities. The examiner’s habits are consistent: one graph, one derivation and one numerical from each of the equations, the projectile, relative velocity and the conical pendulum.",
+    "facts": [
+      {
+        "label": "Equations of motion",
+        "value": "v = u + at, s = ut + ½at², v² = u² + 2as, each valid only for uniform acceleration."
+      },
+      {
+        "label": "Projectile range",
+        "value": "Horizontal range R = u² sin 2θ / g, maximum at 45°; the time of flight is 2u sin θ / g."
+      },
+      {
+        "label": "Relative velocity",
+        "value": "The velocity of A relative to B is the vector difference vₐ − vᵇ; in two dimensions the relative path is found by vector subtraction."
+      },
+      {
+        "label": "Circular motion",
+        "value": "Centripetal acceleration v²/r, angular velocity ω = v/r, period T = 2π/ω."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Derive and apply the three equations of uniformly accelerated motion, including motion under gravity.",
+    "Interpret distance-time and velocity-time graphs and extract displacement, velocity and acceleration from them.",
+    "Resolve a projectile into independent horizontal and vertical motions and derive time of flight, height and range.",
+    "Apply relative velocity to one-dimensional approach and separation and to two-dimensional interception.",
+    "Describe uniform circular motion, centripetal acceleration, angular quantities and the conical pendulum."
+  ],
+  "learn": [
+    {
+      "id": "straight-line",
+      "title": "Straight-line motion and the equations of motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Motion is described by position, displacement — the vector change of position — velocity, the rate of change of displacement, and acceleration, the rate of change of velocity. For a body moving with uniform acceleration the three equations follow directly from the definitions: taking velocity as u plus at, then averaging the initial and final velocities to write displacement as the mean velocity multiplied by time, and finally eliminating time to obtain v² equals u² plus 2as. Each equation carries a condition, and the examiner looks for it: the acceleration must be constant, the signs must be fixed by a chosen positive direction, and s in the third equation means displacement rather than distance. Special cases then follow by substitution — starting from rest sets u to zero, free fall near the Earth’s surface takes a as 9.8 metres per second squared downwards, and retardation is acceleration whose sign opposes the motion. Vertical motion upward is the classic application: the body decelerates to zero at the highest point, after which the same equations describe the fall with the signs reversed, and the symmetry of the flight means the time up equals the time down when the body returns to the launch height."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Displacement is the vector change in position; distance is the path length and is never smaller than the magnitude of displacement.",
+            "Uniform acceleration means a constant rate of change of velocity, which is what allows the three equations to be used.",
+            "The three equations: v = u + at; s = ut + ½at⁻; v² = u² + 2as.",
+            "Sign convention must be declared before substituting; upward positive makes g negative during ascent.",
+            "Free fall: a = 9.8 m s⁻² directed towards the Earth, independent of mass.",
+            "At the highest point of a vertical throw the velocity is zero but the acceleration is still g."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Equations of uniformly accelerated motion",
+          "columns": [
+            "Equation",
+            "Best used when",
+            "Missing quantity"
+          ],
+          "rows": [
+            [
+              "v = u + at",
+              "no displacement involved",
+              "s"
+            ],
+            [
+              "s = ut + ½at⁻",
+              "no final velocity involved",
+              "v"
+            ],
+            [
+              "v² = u² + 2as",
+              "no time involved",
+              "t"
+            ],
+            [
+              "s = ½(u + v)t",
+              "no acceleration involved",
+              "a"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A body starting from rest",
+              "note": "With u = 0, s = 80 m and a = 2 m s⁻², v² = 2as gives v = √320 ≈ 17.9 m s⁻¹, found without needing the time."
+            },
+            {
+              "text": "A stone thrown upward",
+              "note": "Thrown at 19.6 m s⁻¹, it rises for t = u/g = 2 s to a height of 19.6 m, and by symmetry returns after another 2 s."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Displacement",
+              "meaning": "The straight-line vector from initial to final position, with direction."
+            },
+            {
+              "term": "Uniform acceleration",
+              "meaning": "Acceleration that does not change with time, so the equations of motion apply."
+            },
+            {
+              "term": "Retardation",
+              "meaning": "Acceleration opposite in direction to the velocity, which reduces the speed."
+            },
+            {
+              "term": "Free fall",
+              "meaning": "Motion under gravity alone with the acceleration g taken as constant near the Earth."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Reading motion from graphs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A graph converts an equation into a shape, and three readings must be automatic. On a distance-time or position-time graph the slope is the velocity: a flat section means the body is at rest, a steeper line means greater speed, and a curve means changing velocity. On a velocity-time graph the slope is the acceleration and the area under the curve is the displacement, which is the single most useful fact in kinematics because it handles non-uniform motion that no formula reaches. A straight velocity-time line sloping upward shows uniform acceleration, a horizontal line shows uniform velocity, and a line crossing the time axis shows the moment the body reverses direction. The area must be taken with signs: area below the axis is negative displacement, so a body that goes out and returns shows a positive triangle followed by a negative one of equal size and a net displacement of zero, while the total distance is the sum of the magnitudes. Free fall graphs are the standard examination figure: velocity increasing linearly with time through zero, displacement following a parabola, and acceleration constant at 9.8 metres per second squared throughout."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Position-time graph: the slope gives velocity; a curve indicates acceleration.",
+            "Velocity-time graph: the slope gives acceleration; the area under it gives displacement.",
+            "Area below the time axis counts as negative displacement, so a return journey shows equal positive and negative areas.",
+            "A horizontal velocity-time line means zero acceleration; a sloping line means uniform acceleration.",
+            "Distance is the sum of the magnitudes of the areas; displacement is their algebraic sum.",
+            "For free fall the velocity-time graph is a straight line of slope g and the displacement-time graph is a parabola."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "What each graph gives you",
+          "columns": [
+            "Graph",
+            "Slope",
+            "Area under the curve"
+          ],
+          "rows": [
+            [
+              "Position against time",
+              "velocity",
+              "not directly used"
+            ],
+            [
+              "Velocity against time",
+              "acceleration",
+              "displacement"
+            ],
+            [
+              "Acceleration against time",
+              "jerk",
+              "change in velocity"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A car that stops and returns",
+              "note": "The velocity-time trace dips below the axis after the turning moment, and the equal areas above and below show zero net displacement for the whole trip."
+            },
+            {
+              "text": "Reading acceleration from a slope",
+              "note": "A velocity line rising from 0 to 20 m s⁻¹ in 5 s has a slope of 4 m s⁻², which is the acceleration without any equation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projectile",
+      "title": "Projectile motion: one motion seen as two",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The projectile is the standard example of independence of perpendicular components: horizontally there is no force once the body has left the hand, so the horizontal velocity remains constant, while vertically the body accelerates downward at g from the instant of launch. Taking the launch speed u at an angle θ to the horizontal, the components are u cos θ horizontally and u sin θ vertically. The vertical motion gives the time of flight as twice u sin θ over g, since the body takes u sin θ / g to reach the highest point and the same time to fall back to the launch level, and the maximum height is u² sin²θ over 2g. The horizontal distance covered in that time is the range, R = u² sin 2θ / g, which is greatest when sin 2θ has its maximum value of one, that is at 45°; two angles equally distant from 45°, such as 30° and 60°, give the same range. The trajectory is a parabola because y varies as x² when the constant horizontal velocity is eliminated from the two parametric equations. At every point on the path the acceleration remains g vertically downward, including at the top of the flight where the velocity is purely horizontal and equal to u cos θ."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Horizontal motion: uniform velocity u cos θ because no horizontal force acts after launch.",
+            "Vertical motion: uniformly accelerated motion with initial velocity u sin θ and acceleration g downward.",
+            "Time of flight T = 2u sin θ / g, valid when the landing height equals the launch height.",
+            "Maximum height H = u² sin²θ / 2g and range R = u² sin 2θ / g.",
+            "Maximum range occurs at 45°, and complementary angles give the same range with different times of flight.",
+            "The trajectory is a parabola, and the acceleration at the highest point is still g downward."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Projectile formulae at a glance",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Horizontal component",
+              "u cos θ",
+              "constant throughout"
+            ],
+            [
+              "Vertical component",
+              "u sin θ − gt",
+              "reverses at the top"
+            ],
+            [
+              "Time of flight",
+              "2u sin θ / g",
+              "same launch and landing height"
+            ],
+            [
+              "Maximum height",
+              "u² sin²θ / 2g",
+              "vertical velocity zero there"
+            ],
+            [
+              "Range",
+              "u² sin 2θ / g",
+              "maximum at 45°"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two angles, one range",
+              "note": "A ball launched at 30° and another at 60° with equal speed land at the same point, but the 60° flight stays in the air longer."
+            },
+            {
+              "text": "Ball projected horizontally",
+              "note": "Dropped and thrown with the same horizontal speed, two balls released together strike the ground together — horizontal motion does not affect the fall."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Projectile",
+              "meaning": "A body moving under gravity alone after being given an initial velocity at an angle."
+            },
+            {
+              "term": "Trajectory",
+              "meaning": "The parabolic path traced by a projectile."
+            },
+            {
+              "term": "Range",
+              "meaning": "The horizontal distance between the points of launch and landing at the same height."
+            },
+            {
+              "term": "Component",
+              "meaning": "The part of a vector along a chosen direction, found by resolution."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relative-circular",
+      "title": "Relative velocity and uniform circular motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Relative velocity answers the question how fast does A appear to move from B: it is the vector difference vₐ minus vᵇ, found component by component. In one dimension two bodies approaching each other with speeds u and v have a relative speed of u plus v, which is why head-on encounters are over so quickly, while two bodies moving in the same direction have a relative speed equal to the difference of their speeds, which is what makes overtaking a matter of the gap divided by that difference. In two dimensions the subtraction is performed along each axis: a swimmer crossing a river must add the water’s velocity to the swimmer’s own and then read the resultant, and a plane must point its nose into the wind to follow the intended track. Uniform circular motion then applies the same vector idea to a changing direction: the speed may be constant while the velocity turns continuously, and that turning is an acceleration — centripetal, directed towards the centre, of magnitude v² over r. Written angularly, ω = v/r, the period is 2π/ω and the frequency is ω/2π, and the conical pendulum is the everyday case in which the tension’s vertical component supports the weight while its horizontal component supplies the centripetal force."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Relative velocity in one dimension: approaching bodies add speeds; bodies in the same direction subtract them.",
+            "In two dimensions subtract the components separately and then find the magnitude of the resultant.",
+            "A river crossing is solved by adding the swimmer’s velocity relative to the water to the velocity of the water.",
+            "In uniform circular motion the speed is constant but the velocity direction changes continuously.",
+            "Centripetal acceleration a = v²/r directed towards the centre; without it there is no circular path.",
+            "Angular quantities: ω = v/r, period T = 2π/ω, frequency f = 1/T; a conical pendulum hangs on a cone."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Linear and angular quantities",
+          "columns": [
+            "Linear",
+            "Angular",
+            "Relation"
+          ],
+          "rows": [
+            [
+              "displacement",
+              "angle θ",
+              "s = rθ"
+            ],
+            [
+              "velocity",
+              "angular velocity ω",
+              "v = ωr"
+            ],
+            [
+              "acceleration",
+              "angular acceleration α",
+              "a = αr"
+            ],
+            [
+              "period",
+              "period",
+              "T = 2π/ω"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Overtaking",
+              "note": "A car at 20 m s⁻¹ closes on another at 15 m s⁻¹ at a relative speed of 5 m s⁻¹, so a 30 m gap is covered in 6 s."
+            },
+            {
+              "text": "A stone on a string",
+              "note": "Doubling the speed of a stone whirled at fixed radius quadruples the tension needed, because the centripetal force follows v²."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solving",
+      "title": "Solving kinematics problems without error",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Almost every lost mark in this chapter comes from method rather than from physics, and the remedy is a fixed routine. First draw the situation and mark the positive direction before writing a number; sign errors cause more damage than any misunderstanding of the formula. Second list what is given and what is asked, and choose the equation that omits the unused quantity — this single habit prevents the common mistake of using all three equations indiscriminately. Third, check the answer against the story: a time cannot be negative, a speed at the top of a vertical throw must be zero, and a projectile’s horizontal component must be smaller than its launch speed. For graphs, quote the slope or the area as the reason, because an answer given as a number without the reading that produced it rarely earns full marks. For relative velocity, state the frame from which the motion is described, and for circular motion remember that the centripetal force is not a new force but the name for whichever real force points at the centre — tension, friction, gravity or a component of them."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Draw the situation and declare the positive direction before substituting any value.",
+            "List the knowns and pick the equation that does not contain the quantity you do not have.",
+            "Test the answer against the physical story: negative times, speeds larger than the launch and impossible heights all signal a sign error.",
+            "In graph questions quote the slope or the area as the justification for the number.",
+            "Name the frame of reference in every relative-velocity statement.",
+            "Centripetal force is a role, not a new force: identify which real force points at the centre."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Choosing the equation",
+              "note": "Given u, a and s with v unknown, the relation v² = u² + 2as reaches the answer directly, while using s = ut + ½at⁻ would force an unnecessary calculation of time."
+            },
+            {
+              "text": "Identifying the centripetal force",
+              "note": "On a level road it is friction alone; on a banked track it is a component of the normal reaction; on a conical pendulum it is the horizontal component of the tension."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Decomposing a projectile",
+      "description": "A parabolic trajectory with the launch velocity vector at angle θ resolved into horizontal u cos θ and vertical u sin θ components, marked apex with zero vertical velocity, and the range and height labelled.",
+      "labels": [
+        "launch speed u at angle θ",
+        "horizontal component u cos θ stays constant",
+        "vertical component u sin θ reduced by g",
+        "apex: vertical velocity zero, acceleration still g",
+        "range R = u² sin 2θ / g"
+      ]
+    },
+    {
+      "caption": "Figure: Two graphs of the same motion",
+      "description": "Paired panels: a position-time curve rising as a parabola and a velocity-time straight line of slope a, with the shaded area under the velocity line marked as the displacement.",
+      "labels": [
+        "position-time: slope is the velocity",
+        "velocity-time: slope is the acceleration",
+        "area under velocity-time is displacement",
+        "area below the axis is negative displacement",
+        "crossing the axis marks reversal of direction"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Displacement is the vector change of position; distance is the path length and is always greater or equal.",
+    "The three equations of motion apply only when acceleration is constant.",
+    "Signs must be fixed by an declared positive direction before any substitution.",
+    "On a position-time graph the slope is velocity; on a velocity-time graph the slope is acceleration and the area is displacement.",
+    "Area below the velocity-time axis counts as negative displacement.",
+    "A projectile is one motion resolved into uniform horizontal motion and vertical motion under gravity.",
+    "Time of flight is 2u sin θ / g, height is u² sin²θ / 2g and range is u² sin 2θ / g.",
+    "The range is greatest at 45°, and complementary angles give the same range.",
+    "The acceleration of a projectile is always g vertically downward, including at the apex.",
+    "Relative velocity is the vector difference of the two velocities, component by component.",
+    "Approaching bodies add their relative speed; bodies moving together subtract it.",
+    "Uniform circular motion has centripetal acceleration v²/r towards the centre, with ω = v/r and T = 2π/ω."
+  ],
+  "examFocus": [
+    "Equation questions are marked on the choice of equation as much as the arithmetic: state which quantity is missing.",
+    "Graph questions must quote slope or area as the reason for every number given.",
+    "Derive the three projectile results rather than quoting them; the derivations carry the method marks.",
+    "In relative velocity, declare the frame and the direction first; in circular motion, name the real force providing the centripetal pull."
+  ],
+  "vocabulary": [
+    {
+      "word": "Displacement",
+      "meaning": "Vector change of position from start to finish."
+    },
+    {
+      "word": "Acceleration",
+      "meaning": "Rate of change of velocity, positive or negative according to direction."
+    },
+    {
+      "word": "Projectile",
+      "meaning": "A body in free flight under gravity alone after an initial angled throw."
+    },
+    {
+      "word": "Range",
+      "meaning": "Horizontal distance covered by a projectile returning to its launch height."
+    },
+    {
+      "word": "Relative velocity",
+      "meaning": "Velocity of one body as observed from another, found by vector subtraction."
+    },
+    {
+      "word": "Centripetal acceleration",
+      "meaning": "Acceleration directed towards the centre of a circular path, equal to v²/r."
+    },
+    {
+      "word": "Angular velocity",
+      "meaning": "Rate of change of angle, ω = v/r for circular motion."
+    },
+    {
+      "word": "Trajectory",
+      "meaning": "The curved path followed by a projectile, which is a parabola."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-kin-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body starts from rest and moves with uniform acceleration 4 m s⁻². Its velocity after 5 s is:",
+      "options": [
+        "9 m s⁻¹",
+        "20 m s⁻¹",
+        "1.25 m s⁻¹",
+        "45 m s⁻¹"
+      ],
+      "correctIndex": 1,
+      "answer": "20 m s⁻¹",
+      "explanation": "v = u + at = 0 + 4 × 5 = 20 m s⁻¹."
+    },
+    {
+      "id": "isc11-phy-kin-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The slope of a velocity-time graph represents:",
+      "options": [
+        "Displacement",
+        "Velocity",
+        "Acceleration",
+        "Distance"
+      ],
+      "correctIndex": 2,
+      "answer": "Acceleration",
+      "explanation": "The rate of change of velocity with time is acceleration, which is the slope of that graph."
+    },
+    {
+      "id": "isc11-phy-kin-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A projectile has its maximum range when the angle of projection is:",
+      "options": [
+        "30°",
+        "45°",
+        "60°",
+        "90°"
+      ],
+      "correctIndex": 1,
+      "answer": "45°",
+      "explanation": "R = u² sin 2θ / g is greatest when sin 2θ = 1, that is 2θ = 90° and θ = 45°."
+    },
+    {
+      "id": "isc11-phy-kin-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car travelling at 25 m s⁻¹ overtakes another at 15 m s⁻¹ moving in the same direction. The relative velocity of the first with respect to the second is:",
+      "options": [
+        "40 m s⁻¹",
+        "10 m s⁻¹ in the direction of motion",
+        "10 m s⁻¹ opposite to the direction of motion",
+        "25 m s⁻¹"
+      ],
+      "correctIndex": 1,
+      "answer": "10 m s⁻¹ in the direction of motion",
+      "explanation": "For bodies in the same direction the relative speed is the difference: 25 − 15 = 10 m s⁻¹."
+    },
+    {
+      "id": "isc11-phy-kin-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The acceleration of a body moving in a circle with uniform speed is directed towards the __________ of the circle.",
+      "answer": "centre",
+      "explanation": "It is the centripetal acceleration v²/r, and it changes the direction rather than the speed."
+    },
+    {
+      "id": "isc11-phy-kin-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area under a velocity-time graph gives the __________ of the body.",
+      "answer": "displacement",
+      "explanation": "Areas below the time axis count as negative displacement, so distance and displacement differ."
+    },
+    {
+      "id": "isc11-phy-kin-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the three equations of motion and the condition under which they hold.",
+      "answer": "The three equations are v = u + at, s = ut + ½at⁻ and v² = u² + 2as, where u is the initial velocity, v the final velocity, a the acceleration, t the time and s the displacement. They hold only when the acceleration is uniform, that is constant in magnitude and direction, because they are derived by integrating a constant acceleration. Signs must be assigned consistently with a declared positive direction.",
+      "explanation": "The three formulae and the uniform-acceleration condition with the sign convention."
+    },
+    {
+      "id": "isc11-phy-kin-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the expression for the range of a projectile.",
+      "answer": "Resolve the launch velocity u at angle θ into the horizontal component u cos θ and the vertical component u sin θ. Horizontally there is no acceleration, so the distance covered in time t is u cos θ multiplied by t. Vertically the body decelerates under g, and the time of flight is found by putting the vertical displacement equal to zero, giving t = 2u sin θ / g. Substituting this into the horizontal distance gives R = u cos θ × 2u sin θ / g, and using 2 sin θ cos θ = sin 2θ this becomes R = u² sin 2θ / g.",
+      "explanation": "Resolution, constant horizontal motion, the time of flight from vertical displacement, and the double-angle identity."
+    },
+    {
+      "id": "isc11-phy-kin-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is a conical pendulum? State the forces acting on it.",
+      "answer": "A conical pendulum is a bob whirled in a horizontal circle while the string describes a cone, so the bob moves in a horizontal circle at a constant height. Two forces act on it: the weight mg vertically downwards and the tension T along the string. The vertical component of the tension balances the weight, while the horizontal component of the tension provides the centripetal force that keeps the bob in its circle.",
+      "explanation": "Definition plus the two forces and the two components, with the horizontal component named as centripetal."
+    },
+    {
+      "id": "isc11-phy-kin-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe projectile motion as two independent motions and derive the time of flight, maximum height and range.",
+      "answer": "A projectile has only the force of gravity acting on it after launch, so the horizontal acceleration is zero and the vertical acceleration is g downward. The two perpendicular motions are therefore independent and can be treated separately. Resolving the launch speed u at angle θ, the horizontal component is u cos θ and remains constant, while the vertical component starts at u sin θ and decreases at g. Taking upward as positive, the vertical velocity is u sin θ minus gt, which vanishes at the top, giving the time to the apex as u sin θ / g and therefore a total time of flight of 2u sin θ / g for a return to the launch height. The height follows from v² = u² + 2as with the final vertical velocity zero, giving H = u² sin²θ / 2g. The range is the horizontal component multiplied by the total time, u cos θ × 2u sin θ / g, which with the identity 2 sin θ cos θ = sin 2θ becomes R = u² sin 2θ / g, a maximum at 45°.",
+      "explanation": "Independence of components, the three derivations in order and the condition for maximum range."
+    },
+    {
+      "id": "isc11-phy-kin-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A ball is thrown vertically upward at 25 m s⁻¹ from the top of a 30 m tower and strikes the ground 6 s later. Taking g = 10 m s⁻², analyse the motion, giving the height of the apex above the launch level and the speed on impact.",
+      "answer": "The motion has three phases: an ascent of 25 divided by 10, that is 2.5 s, to the apex; a fall back to the launch level after a further 2.5 s; and a final fall past the launch level to the ground. The apex stands u²/2g above the launch level, which is 625 divided by 20, that is 31.25 m. The whole journey can be taken in one step by taking upward as positive and the launch level as origin: the displacement at t = 6 s is 25 × 6 − ½ × 10 × 36 = 150 − 180 = − 30 m, which is exactly the 30 m height of the tower below the launch level, so the data are consistent. The velocity at impact is v = u − gt = 25 − 60 = − 35 m s⁻¹, that is 35 m s⁻¹ directed downwards, and the negative sign confirms the body is falling as it reaches the ground.",
+      "explanation": "Three phases with times, the apex height from u²/2g, the consistency check on the 30 m displacement, and the impact speed from v = u − gt."
+    },
+    {
+      "id": "isc11-phy-kin-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A swimmer can swim at 4 m s⁻¹ in still water and wishes to cross a river 100 m wide flowing at 3 m s⁻¹. Analyse the crossing if she aims straight across.",
+      "answer": "Aiming straight across, her velocity relative to the water is 4 m s⁻¹ along the width, and the water carries her downstream at 3 m s⁻¹. The crossing time is set only by the across-river component: 100 divided by 4 gives 25 s, because the downstream flow does not affect motion across the river. In those 25 s she drifts downstream by 3 × 25 = 75 m, so she lands 75 m below the point opposite her starting bank. Her actual speed relative to the ground is the vector resultant of 4 and 3, which is 5 m s⁻¹, and the path relative to the bank is a straight line at an angle whose tangent is 3/4. To land at the point directly opposite she would have to head upstream at an angle whose sine is 3/4, using part of her swimming speed to cancel the current.",
+      "explanation": "Independence of the two components, crossing time from the across component, drift from the current, and the heading needed to cancel it."
+    }
+  ]
+}

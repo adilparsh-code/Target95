@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-chem-gaseous-state",
+  "title": "The Gaseous State",
+  "kind": "chemistry",
+  "tagline": "Formative study: the gas laws, the ideal gas equation, and why real gases deviate from the behaviour the equation assumes.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Chemistry syllabus for subject code 043 registered for the Academic Year 2026-27 (CBSE, Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). The official document lists this topic in the syllabus but states that it is assessed only formatively, without adding to summative assessments. No examination paper was consulted, and the NCERT Chemistry textbooks are identified by title only.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Chemistry (043) syllabus for the Academic Year 2026-27. This topic is printed in the official document under the note that it is included in the syllabus but assessed only formatively to reinforce understanding, so it is presented here as formative study material and is never described as summatively examined content."
+  },
+  "overview": {
+    "intro": "The official CBSE document includes the gaseous state in the syllabus but assesses it only formatively. Gases are the simplest state of matter to treat quantitatively because their particles are far apart and move independently, and this chapter develops the qualitative reasoning behind Boyle, Charles and Gay-Lussac laws, shows how they combine into the ideal gas equation, and then examines the two assumptions that equation makes — that the molecules themselves occupy no volume and that they exert no force on each other — and how the failure of those assumptions at high pressure and low temperature produces the deviations that real gases actually show.",
+    "facts": [
+      {
+        "label": "Assessment status",
+        "value": "Included in the official syllabus but assessed formatively only, per the CBSE 2026-27 document"
+      },
+      {
+        "label": "Ideal gas equation",
+        "value": "pV = nRT, with R = 8.314 J K⁻¹ mol⁻¹ (also 0.0821 L atm K⁻¹ mol⁻¹)"
+      },
+      {
+        "label": "Boyle's law",
+        "value": "At constant temperature and fixed amount, volume is inversely proportional to pressure"
+      },
+      {
+        "label": "Why gases deviate",
+        "value": "Real molecules have finite volume and exert intermolecular attractions, both neglected by the ideal equation"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the qualitative basis of Boyle, Charles, Gay-Lussac and Avogadro laws and combine them into the ideal gas equation.",
+    "Use pV = nRT in the standard, molar and density forms to solve problems about gases.",
+    "Explain the two postulates of the kinetic molecular picture that the ideal gas equation assumes.",
+    "Describe the causes and conditions of deviation from ideal behaviour and relate them to the liquefaction of gases.",
+    "Relate temperature to the average kinetic energy of gas molecules and explain how lighter gases move faster than heavier ones at the same temperature."
+  ],
+  "learn": [
+    {
+      "id": "gas-laws",
+      "title": "The gas laws and the ideal gas equation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Each of the classical gas laws isolates one variable. Boyle's law states that at constant temperature and for a fixed amount of gas the volume is inversely proportional to the pressure: p ∝ 1/V, or pV = constant, because doubling the pressure on a piston halves the space the same molecules can occupy, doubling the frequency with which they strike the walls. Charles's law states that at constant pressure the volume is directly proportional to the absolute temperature: V ∝ T, or V/T = constant, since heating a gas increases the average kinetic energy and hence the force of each collision, so the gas expands until the outward push again balances the external pressure. Gay-Lussac's law completes the set at constant volume: pressure is directly proportional to absolute temperature. Avogadro's hypothesis, that equal volumes of gases at the same temperature and pressure contain equal numbers of molecules, supplies the amount term, and combining all four gives the ideal gas equation pV = nRT."
+        },
+        {
+          "type": "paragraph",
+          "text": "The gas constant R takes different values with different units: 8.314 J K⁻¹ mol⁻¹ in SI, 0.0821 L atm K⁻¹ mol⁻¹ with litre-atmospheres, and 2 cal K⁻¹ mol⁻¹ in the older thermal unit. The equation is most useful rearranged in three ways: for the molar volume, Vm = RT/p, which gives 22.7 L mol⁻¹ at 273.15 K and 1 bar and 22.4 L mol⁻¹ at 1 atm; for density, ρ = pM/RT, which lets the molar mass of an unknown gas be measured directly; and for the amount, n = pV/RT, which converts any measured state into moles. Because the law depends on absolute temperature, every gas calculation must be done in kelvin — a rise from 10 °C to 20 °C is not a doubling of the temperature, but 283 K to 293 K is a 3.5% increase, which is the figure the gas laws require."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A gas occupies 500 mL at 25 °C and 740 mmHg. What volume would it occupy at 0 °C and standard pressure?",
+              "note": "Convert to kelvin: T₁ = 298 K, T₂ = 273 K, and to consistent pressure units, p₁ = 740 mmHg and p₂ = 760 mmHg. Using p₁V₁/T₁ = p₂V₂/T₂ gives V₂ = 740 × 500 × 273/(760 × 298) = 446 mL, showing that both the fall in temperature and the rise in pressure reduce the volume."
+            },
+            {
+              "text": "Find the density of carbon dioxide at 27 °C and 1 atm, given R = 0.0821 L atm K⁻¹ mol⁻¹.",
+              "note": "ρ = pM/RT = (1 × 44.01)/(0.0821 × 300) = 44.01/24.63 = 1.79 g L⁻¹. Measuring the density of an unknown gas in the same way gives its molar mass immediately."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The classical gas laws",
+          "columns": [
+            "Law",
+            "Constant quantities",
+            "Relationship"
+          ],
+          "rows": [
+            [
+              "Boyle",
+              "T and n",
+              "pV = constant (V ∝ 1/p)"
+            ],
+            [
+              "Charles",
+              "p and n",
+              "V/T = constant (V ∝ T)"
+            ],
+            [
+              "Gay-Lussac",
+              "V and n",
+              "p/T = constant (p ∝ T)"
+            ],
+            [
+              "Avogadro",
+              "T and p",
+              "V ∝ n, equal volumes hold equal numbers of molecules"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ideal-assumptions",
+      "title": "What the ideal gas equation assumes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The ideal gas equation follows from two postulates of the molecular picture. The first is that the volume of the molecules themselves is negligible compared with the volume of the container: at room temperature the molecules of a gas occupy roughly 0.1% of the space, and the ideal treatment treats them as point particles with no size. The second is that there are no attractive forces between molecules — no van der Waals attraction, no dipole interaction — so a molecule in flight is not slowed or pulled back by its neighbours and the only collisions are perfectly elastic collisions with the container walls. Under these assumptions the pressure comes entirely from the momentum transferred in wall collisions, and with elastic collisions the average kinetic energy depends only on temperature, which is why temperature alone fixes the pressure and volume of a given amount of gas."
+        },
+        {
+          "type": "paragraph",
+          "text": "Both assumptions fail in a predictable direction. Because real molecules occupy space, the volume actually available for them to move in is smaller than the container volume, so the real pressure... the correction enters as a volume term and is most important at high pressure, where the free volume matters relative to the container. Because real molecules attract one another, a molecule reaching the wall is pulled back by its neighbours and strikes with less force, so the real pressure is lower than the ideal prediction, an effect most important at low temperature, where slow molecules are held together more easily. The two corrections appear in the van der Waals equation, (p + an²/V²)(V − nb) = nRT, where a measures the strength of the attraction and b the excluded volume of the molecules themselves."
+        }
+      ]
+    },
+    {
+      "id": "deviations",
+      "title": "Deviation from ideal behaviour and liquefaction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The extent of deviation is measured by the compressibility factor Z = pV/(nRT), which equals exactly 1 for an ideal gas. For most gases at moderate pressures Z falls below 1 first, because attraction dominates and the gas is easier to compress than ideal; at higher pressures Z rises above 1, because the finite volume of the molecules dominates and the gas becomes harder to compress. Hydrogen and helium are exceptions that show Z above 1 from the start, because their attractions are so weak that only the volume term operates. The same two causes explain when a real gas can be liquefied: attraction between molecules allows a gas to be condensed into a liquid, so every gas has a critical temperature above which no amount of pressure will liquefy it, because thermal motion overwhelms the attraction. Carbon dioxide is readily liquefied at room temperature, oxygen requires both cooling and pressure, and hydrogen and helium have critical temperatures so low that they were called permanent gases until cooling methods improved."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Boyle: pV = constant at constant T; Charles: V/T = constant at constant p.",
+            "pV = nRT with R = 8.314 J K⁻¹ mol⁻¹ or 0.0821 L atm K⁻¹ mol⁻¹; temperatures must be in kelvin.",
+            "Density form ρ = pM/RT lets the molar mass of a gas be found from its density.",
+            "Ideal assumptions: negligible molecular volume and no intermolecular attraction.",
+            "Compressibility factor Z = pV/nRT: below 1 attraction dominates, above 1 molecular volume dominates.",
+            "A gas can be liquefied only below its critical temperature, because attraction must be able to hold the molecules together."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kinetic-molecular-theory",
+      "title": "What the molecules are doing: the kinetic molecular picture",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The ideal gas equation is a compact summary of a simple but exact molecular picture. On this view a gas is a very large number of particles that move randomly and in straight lines until they collide with either another molecule or the walls of the container, and the pressure of the gas is the average force those collisions exert on unit area of the walls. Between collisions the molecules are so far apart that their only significant interaction is a perfectly elastic collision, meaning that neither total momentum nor total kinetic energy is lost when they meet. This picture is called the kinetic molecular theory, and the power of it is that it turns three macroscopic quantities — pressure, volume and temperature — into three things that can be visualised: the frequency of wall collisions, the area of the walls, and the average speed of the molecules, which is set by their temperature."
+        },
+        {
+          "type": "paragraph",
+          "text": "Temperature in this theory is nothing other than a measure of the average translational kinetic energy of the molecules: at a given temperature every gas has, on average, the same energy per molecule. The average kinetic energy is proportional to absolute temperature in kelvin, so the average kinetic energy doubles when the temperature goes from 300 K to 600 K, and halves when it falls from 300 K to 150 K. Because the mass of the molecules is not the same for every gas, this does not mean all gases have the same average speed: at the same temperature a lighter gas moves faster than a heavier one, which is why hydrogen diffuses so quickly through air. The formula that follows is simple: the average kinetic energy equals (3/2) kT, where k is the Boltzmann constant 1.38 × 10⁻²³ J K⁻¹, and the corresponding average speed of a gas molecule can be shown, by equating this with half the mass times the mean square speed, to be the square root of 3RT divided by M, with M the molar mass in kilograms per mole. For hydrogen at 27 °C this gives an average speed of about 1.9 × 10³ m s⁻¹, for oxygen about 4.8 × 10² m s⁻¹, and for nitrogen about 5.2 × 10² m s⁻¹, which are the order-of-magnitude speeds the theory and the experiment agree on."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "What is the average kinetic energy per molecule of nitrogen at 27 °C, and what is correspondingly the average speed of an N₂ molecule with M = 0.0280 kg mol⁻¹?",
+              "note": "T = 27 + 273 = 300 K. Average kinetic energy per molecule = (3/2) kT = 1.5 × 1.38 × 10⁻²³ × 300 = 6.21 × 10⁻²¹ J. The equivalent average speed is the square root of 3RT/M = (3 × 8.314 × 300) / 0.0280 = 74826 / 0.0280 = 2.67 × 10⁶, square rooted to about 1.63 × 10³ m s⁻¹. A student who forgets to convert the molar mass to kg mol⁻¹ gets a value 1000 times too small and must note the units to see the mistake. Both calculations - energy per molecule and average speed - use the same temperature, which is why the two results are linked."
+            },
+            {
+              "text": "At what temperature would the average kinetic energy per molecule be doubled from its value at 300 K?",
+              "note": "Average kinetic energy is proportional to absolute temperature, so doubling it requires doubling T from 300 K to 600 K, i.e. from about 27 °C to 327 °C. This is the core reason gases heat up when compressed: the temperature of the gas is a direct measure of the microscopic motion of the molecules. The answer is useful because it shows why the Celsius scale cannot be used for kinetic energy calculations and why absolute zero, 0 K, is the temperature at which molecular motion would on this picture cease altogether."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Three interpretations of temperature in the kinetic molecular picture",
+          "columns": [
+            "Quantity",
+            "Macroscopic reading",
+            "Microscopic reading"
+          ],
+          "rows": [
+            [
+              "Temperature",
+              "A measure of hotness on an absolute scale",
+              "The average translational kinetic energy per molecule"
+            ],
+            [
+              "Pressure",
+              "Force per unit area on the walls",
+              "Rate of change of momentum of the molecules striking the walls"
+            ],
+            [
+              "Volume",
+              "Space occupied by the gas",
+              "Space through which the molecules move between collisions"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Temperature in kelvin is proportional to the average kinetic energy of the molecules: higher T means faster molecules, not more of them.",
+            "Lighter molecules at the same temperature move faster than heavier ones, which is why hydrogen escapes the atmosphere and why gases diffuse at different rates.",
+            "The average kinetic energy formula uses k (Boltzmann constant) per molecule, or equivalently (3/2) RT per mole.",
+            "An elastic collision conserves both momentum and kinetic energy, so the molecules simply exchange velocities rather than losing energy to the collision.",
+            "At a fixed temperature all ideal gases have the same average kinetic energy per molecule, which is why the average speeds scale with the inverse square roots of their molar masses."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Pressure-volume isotherms for an ideal and a real gas",
+      "description": "A plot of pressure against volume at one temperature, with the ideal curve as a smooth hyperbola following pV = constant, and the real-gas curve drawn below it at moderate pressure (attraction reducing the pressure) and crossing above it at high pressure (molecular volume resisting compression). A second small panel plots the compressibility factor Z against pressure with Z starting at 1, dipping below 1 and then rising above it.",
+      "labels": [
+        "Ideal gas: pV = nRT exactly at all pressures",
+        "Real gas below the ideal curve: attraction dominates",
+        "Real gas above the curve: molecular volume dominates",
+        "Z = 1 is the definition of ideal behaviour"
+      ]
+    },
+    {
+      "caption": "Figure: Boyle's law and Charles's law as straight-line plots",
+      "description": "Two panels: on the left a plot of pressure against 1/V gives a straight line through the origin for one temperature, with a steeper line for a higher temperature; on the right a plot of volume against temperature in kelvin gives straight lines through the origin, one for each pressure, all extrapolating to zero volume at 0 K — the absolute zero that the law predicts.",
+      "labels": [
+        "p versus 1/V is linear: pV = constant",
+        "Steeper slope at higher temperature",
+        "V versus T (kelvin) passes through the origin",
+        "Extrapolation gives absolute zero, 0 K"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Boyle's law: at constant temperature, pV is constant for a fixed amount of gas.",
+    "Charles's law: at constant pressure, V/T is constant; absolute temperature is required.",
+    "Avogadro's hypothesis: equal volumes of gases at the same T and p hold equal numbers of molecules.",
+    "Ideal gas equation pV = nRT, R = 8.314 J K⁻¹ mol⁻¹ or 0.0821 L atm K⁻¹ mol⁻¹.",
+    "The ideal equation assumes negligible molecular volume and no intermolecular attraction.",
+    "Compressibility factor Z = pV/nRT measures deviation: Z < 1 means attraction dominates.",
+    "van der Waals corrects pressure for attraction (a) and volume for molecular size (b).",
+    "Gases liquefy only below their critical temperature; hydrogen and helium have very low critical temperatures.",
+    "Formative topic: understand the reasoning rather than memorising numerical values of constants."
+  ],
+  "examFocus": [
+    "Assessed formatively only, so no summative question is set on this topic; it supports the numerical work of the theory units.",
+    "The gas-law reasoning underpins the solutions and thermodynamics units, and the pV = nRT habit of converting to kelvin is worth acquiring here.",
+    "Use the chapter to understand why a real gas departs from the ideal equation rather than to memorise the van der Waals constants."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ideal gas",
+      "meaning": "A hypothetical gas obeying pV = nRT exactly because its molecules have no volume and no attraction."
+    },
+    {
+      "word": "Isotherm",
+      "meaning": "A curve relating pressure and volume at a single constant temperature."
+    },
+    {
+      "word": "Compressibility factor",
+      "meaning": "Z = pV/(nRT), a measure of how far a real gas departs from ideal behaviour."
+    },
+    {
+      "word": "Critical temperature",
+      "meaning": "The temperature above which a gas cannot be liquefied by pressure alone."
+    },
+    {
+      "word": "van der Waals forces",
+      "meaning": "The short-range attractions between neutral molecules arising from momentary dipoles."
+    },
+    {
+      "word": "Molar volume",
+      "meaning": "The volume occupied by one mole of gas at a stated temperature and pressure."
+    },
+    {
+      "word": "Absolute zero",
+      "meaning": "0 K, the lowest possible temperature, at which molecular motion is minimal."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-chem-gas-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A given mass of gas is compressed to half its volume at constant temperature. Its pressure becomes:",
+      "options": [
+        "half",
+        "twice",
+        "unchanged",
+        "four times"
+      ],
+      "correctIndex": 1,
+      "answer": "twice",
+      "explanation": "Boyle's law states that at constant temperature pV is constant for a fixed amount of gas. Halving the volume therefore doubles the pressure, because the same number of molecules strikes a wall of half the area twice as often."
+    },
+    {
+      "id": "cbse11-chem-gas-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of the gas constant R in SI units is:",
+      "options": [
+        "8.314 J K⁻¹ mol⁻¹",
+        "0.0821 J K⁻¹ mol⁻¹",
+        "8.314 L atm K⁻¹ mol⁻¹",
+        "0.0821 L atm K⁻¹ mol⁻¹"
+      ],
+      "correctIndex": 0,
+      "answer": "8.314 J K⁻¹ mol⁻¹",
+      "explanation": "In SI units R is 8.314 J K⁻¹ mol⁻¹, which is the product of pressure times volume per mole per kelvin expressed in joules. The value 0.0821 carries the units L atm K⁻¹ mol⁻¹, so options B and D each mismatch the number and the unit."
+    },
+    {
+      "id": "cbse11-chem-gas-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which assumption of the ideal gas equation is chiefly responsible for real gases showing Z below 1 at moderate pressures?",
+      "options": [
+        "That the molecules occupy no volume",
+        "That collisions are perfectly elastic",
+        "That molecules attract one another",
+        "That temperature is uniform throughout"
+      ],
+      "correctIndex": 2,
+      "answer": "That molecules attract one another",
+      "explanation": "Z below 1 means the measured pV is smaller than the ideal prediction, which happens when the pressure at the wall is reduced. Intermolecular attraction pulls a molecule back as it approaches the wall, lowering the force of impact, so attraction is the cause; molecular volume would raise Z above 1, which is what happens at high pressures."
+    },
+    {
+      "id": "cbse11-chem-gas-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A real gas can be liquefied only below its critical temperature because:",
+      "options": [
+        "its molecules become smaller when cooled",
+        "above that temperature the intermolecular attractions cannot overcome the thermal motion",
+        "the gas becomes ideal above that temperature",
+        "its molecules lose their charge above that temperature"
+      ],
+      "correctIndex": 1,
+      "answer": "above that temperature the intermolecular attractions cannot overcome the thermal motion",
+      "explanation": "Liquefaction requires intermolecular attractions to hold the molecules together against their kinetic energy. Above the critical temperature the molecules move too fast for those attractions to bind them, so no increase in pressure can condense the gas; below it, pressure can bring the molecules close enough for attraction to take over and the gas to condense."
+    },
+    {
+      "id": "cbse11-chem-gas-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume occupied by one mole of any ideal gas at 273.15 K and 1 atm is approximately __________ litres.",
+      "answer": "22.4",
+      "explanation": "At the older standard temperature and pressure of 273.15 K and 1 atm, pV/nT gives a molar volume of 22.4 L; at 1 bar the same temperature gives 22.7 L, which is why the pressure standard must always be stated."
+    },
+    {
+      "id": "cbse11-chem-gas-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The law stating that the volume of a fixed mass of gas at constant pressure is directly proportional to its absolute temperature is __________ law.",
+      "answer": "Charles",
+      "explanation": "Charles's law, V/T = constant at constant pressure, follows from heating a gas: the molecules gain kinetic energy, strike the walls harder, and the gas expands until the outward push again equals the external pressure. It is valid only on the absolute scale, and its extrapolation predicts zero volume at 0 K."
+    },
+    {
+      "id": "cbse11-chem-gas-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Boyle's law and explain it in terms of molecular collisions with the container walls.",
+      "answer": "Boyle's law states that for a fixed amount of gas at constant temperature, the volume is inversely proportional to the pressure, so pV = constant. In molecular terms the pressure arises from the momentum transferred whenever a molecule strikes a wall. Halving the volume keeps the same number of molecules but brings them twice as close to any given wall, so the number of collisions per unit area per second doubles, while the temperature being unchanged means each collision carries the same average momentum. The pressure therefore doubles, which is exactly the inverse relationship the law states.",
+      "explanation": "The explanation must connect the macroscopic law to collision frequency and collision force; quoting the formula alone earns only part of the mark."
+    },
+    {
+      "id": "cbse11-chem-gas-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Give the two postulates of the kinetic molecular picture that the ideal gas equation depends on, and state how each fails for a real gas.",
+      "answer": "The first postulate is that the volume of the molecules themselves is negligible compared with the volume of the container, so the gas is treated as point particles. It fails at high pressure, where the molecules occupy a significant fraction of the container and the space actually available for movement is less than the measured volume, making the real gas harder to compress than ideal. The second postulate is that there are no attractive forces between molecules, so a molecule in free flight neither accelerates towards nor is retarded by its neighbours. It fails at low temperature and moderate pressure, where van der Waals attractions pull molecules together, reduce the force with which they strike the wall, and make the real gas easier to compress than ideal. The van der Waals equation corrects the pressure for the first effect... for the attraction, and the volume for the excluded molecular volume.",
+      "explanation": "Both corrections must be matched to their cause and to the conditions under which each becomes important, since the exam rewards the direction of the deviation as well as its origin."
+    },
+    {
+      "id": "cbse11-chem-gas-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A sample of a gas occupies 750 mL at 27 °C and 750 mmHg pressure. Calculate its volume at STP (273.15 K, 760 mmHg), stating the law used and showing every unit conversion.",
+      "answer": "The combined gas law follows from Boyle and Charles: p₁V₁/T₁ = p₂V₂/T₂ for a fixed amount of gas. Convert to kelvin first: T₁ = 27 + 273 = 300 K and T₂ = 273 K. Pressures are already in the same units, mmHg, so p₁ = 750 and p₂ = 760. Substituting: V₂ = p₁V₁T₂/(T₁p₂) = (750 × 750 × 273)/(300 × 760). Evaluating the numerator gives 153,562,500 and the denominator 228,000, so V₂ = 673.5 mL. Both changes act in the same direction: the fall from 300 K to 273 K contracts the gas and the rise from 750 to 760 mmHg compresses it further, so the final volume of about 674 mL is smaller than the original 750 mL, as the two effects predict. The law used is the combined gas law, valid because the amount of gas does not change.",
+      "explanation": "The method marks are for converting to kelvin before substituting and for checking that the direction of the answer agrees with the direction of both changes."
+    },
+    {
+      "id": "cbse11-chem-gas-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain, using the compressibility factor, why hydrogen shows Z greater than 1 even at moderate pressures while nitrogen first falls below 1, and relate this to the possibility of liquefying the two gases.",
+      "answer": "The compressibility factor Z = pV/(nRT) equals 1 only for an ideal gas, and its departure from 1 shows which of the two real-gas corrections dominates. Nitrogen molecules attract one another appreciably, so at moderate pressures a molecule approaching the wall is pulled back by its neighbours and strikes with less force; the measured pressure, and hence pV, is lower than ideal and Z falls below 1. As the pressure rises the molecules are forced so close together that their finite size becomes the controlling factor: the free volume is much less than the container volume, the collisions become more frequent, and Z rises above 1. Hydrogen molecules are so small and non-polar that their mutual attraction is negligible at ordinary temperatures, so the volume correction operates from the outset and Z exceeds 1 at all moderate pressures. The same difference explains their liquefaction behaviour: nitrogen, with real attractions, is readily liquefied because cooling and pressure let those attractions bind the molecules, and its critical temperature is 126 K. Hydrogen, whose attractions are feeble, needs to be cooled to about 33 K — below its critical temperature — before pressure can condose it, and helium requires still lower temperatures because its attractions are weaker still. Z below 1 is therefore the signature of attractions strong enough to bring about liquefaction.",
+      "explanation": "The answer must tie the sign of the deviation to the dominant intermolecular effect and then to the practical consequence, since the question asks for both the cause and the liquefaction link."
+    }
+  ]
+}

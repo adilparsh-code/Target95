@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-chem-thermo",
+  "title": "Chemical Thermodynamics",
+  "kind": "chemistry",
+  "tagline": "Heat, work, enthalpy and entropy: measuring the energy of reaction and predicting which reactions can actually happen.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Chemistry syllabus for subject code 043 registered for the Academic Year 2026-27 (CBSE, Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Chemistry textbooks and the Microscale Chemistry laboratory manual are identified by title only: every definition, worked calculation, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Chemistry (043) syllabus for the Academic Year 2026-27: every explanation, worked calculation, figure, example, question and answer was written for this page. Only the topics printed in the official document are taught, and topics the document marks formative are labelled as such on this page."
+  },
+  "overview": {
+    "intro": "Thermodynamics is the branch of chemistry that deals with energy changes without asking how fast they happen. This unit develops the first law of thermodynamics and the state functions internal energy and enthalpy, shows how calorimetry measures the heat of a reaction, builds enthalpy changes from standard enthalpies of formation, combustion and bond enthalpies, and applies Hess's law to cycles that cannot be measured directly. It then addresses the question every chemist eventually asks — will this reaction occur? — through entropy and Gibbs energy, and shows how the sign of ΔG at a given temperature decides spontaneity and connects to equilibrium.",
+    "facts": [
+      {
+        "label": "Marks in the theory paper",
+        "value": "9 marks (Unit 5 of the official 70-mark CBSE Class XI theory course)"
+      },
+      {
+        "label": "First law of thermodynamics",
+        "value": "ΔU = q + w — the change in internal energy equals heat plus work on the system"
+      },
+      {
+        "label": "Sign convention used in this course",
+        "value": "Heat absorbed by the system is positive; work done on the system is positive"
+      },
+      {
+        "label": "Criterion of spontaneity",
+        "value": "A process is spontaneous at constant T and p when ΔG = ΔH − TΔS is negative"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the first law and calculate ΔU for processes involving heat and pressure-volume work.",
+    "Distinguish system and surroundings, state and path functions, and explain the measurement of ΔU and ΔH by calorimetry.",
+    "Apply Hess's law and standard enthalpies of formation, combustion and bond enthalpies to find reaction enthalpies.",
+    "Use entropy and the Gibbs equation to predict spontaneity and explain the temperature dependence of spontaneity."
+  ],
+  "learn": [
+    {
+      "id": "first-law",
+      "title": "Thermodynamic terms and the first law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thermodynamics divides the universe into the system — the part under study — and the surroundings, everything else. A system may be open (exchange matter and energy), closed (energy only) or isolated (neither). Certain properties describe the system at any instant regardless of how it got there: these are state functions such as internal energy U, enthalpy H, entropy S and Gibbs energy G. Heat (q) and work (w), by contrast, are path functions — the same overall change in internal energy can be achieved by a hot bath or by vigorous stirring, and the two contributions differ between the paths."
+        },
+        {
+          "type": "paragraph",
+          "text": "The first law of thermodynamics is the conservation of energy applied to chemical systems: energy can neither be created nor destroyed, so the change in internal energy of a system equals the heat absorbed by it plus the work done on it, ΔU = q + w. For a chemical system the internal energy is the sum of the kinetic and potential energies of its molecules, and because it depends on temperature, pressure and composition, a change of state gives a definite ΔU regardless of path. Expansion work against a constant external pressure is w = −pΔV, negative because the system pushes the surroundings away; hence for a reaction that produces gas at constant pressure, ΔU is less than the heat absorbed by an amount equal to the work of expansion."
+        },
+        {
+          "type": "paragraph",
+          "text": "Enthalpy is defined as H = U + pV, and its change at constant pressure is ΔH = ΔU + pΔV. At constant pressure the heat exchanged with the surroundings, qp, equals ΔH exactly, which is why ordinary laboratory reactions — open beakers at atmospheric pressure — are described by enthalpy changes rather than internal energy changes. For reactions in solution where ΔV is negligible, ΔH and ΔU are practically equal, but for reactions producing gaseous products the pΔV term can be thousands of joules."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "System",
+              "meaning": "The portion of the universe being studied, separated from the surroundings by a real or imaginary boundary."
+            },
+            {
+              "term": "State function",
+              "meaning": "A property whose value depends only on the current state, not on the path taken to reach it."
+            },
+            {
+              "term": "Enthalpy",
+              "meaning": "H = U + pV; at constant pressure its change equals the heat exchanged with the surroundings."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enthalpy-changes",
+      "title": "Enthalpy change, calorimetry and Hess's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An enthalpy change is accompanied by a definite sign: exothermic reactions release heat to the surroundings and have ΔH < 0, while endothermic reactions absorb heat and have ΔH > 0. Several standard enthalpy changes are defined for comparison at 298 K and 1 bar. The standard enthalpy of formation, ΔfH°, is the enthalpy change when one mole of a compound forms from its elements in their most stable forms under standard conditions; by convention ΔfH° = 0 for an element in its standard state, so graphite carbon and O₂ gas contribute nothing. The standard enthalpy of combustion, ΔcH°, is the enthalpy released when one mole of a substance burns completely in oxygen, and the standard enthalpy of neutralisation is the heat evolved when one mole of acid and base react to form one mole of water — about −57.1 kJ mol⁻¹ for a strong acid with a strong base."
+        },
+        {
+          "type": "paragraph",
+          "text": "Calorimetry measures these quantities directly. In solution calorimetry, q = mcΔT, where m is the mass of the solution or water, c its specific heat capacity (4.18 J g⁻¹ K⁻¹ for water) and ΔT the measured temperature rise; dividing the heat by the number of moles of solute gives the enthalpy change per mole. Combustion calorimetry burns a weighed sample in a bomb calorimeter held in a water bath, and because the bomb is rigid the measurement gives ΔU rather than ΔH, converted afterwards by ΔH = ΔU + Δn(g)RT. Bond enthalpies offer a third route: breaking bonds costs energy and forming them releases it, so ΔrH ≈ Σ(bonds broken) − Σ(bonds formed), an estimate that ignores intermolecular contributions and is therefore approximate."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hess's law states that the total enthalpy change of a reaction is the same whether it occurs in one step or in several, because enthalpy is a state function. It lets an inaccessible route be replaced by a set of measurable ones: if the formation of CO₂ and the combustion of CO are both known, the partial combustion of carbon to carbon monoxide follows by subtraction. The same logic underlies Born-Haber cycles for lattice energies and Kirchhoff's equation for the temperature dependence of ΔH."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Calculate the enthalpy of combustion of methane given ΔfH°(CO₂) = −393.5 and ΔfH°(H₂O, l) = −285.8 kJ mol⁻¹, with ΔfH°(CH₄) = −74.8 kJ mol⁻¹.",
+              "note": "CH₄ + 2O₂ → CO₂ + 2H₂O. ΔcH° = Σ ΔfH°(products) − Σ ΔfH°(reactants) = [−393.5 + 2(−285.8)] − [−74.8 + 0] = −965.1 + 74.8 = −890.3 kJ mol⁻¹."
+            },
+            {
+              "text": "Estimate ΔrH for H₂(g) + Cl₂(g) → 2HCl(g) using bond enthalpies H–H 436, Cl–Cl 242 and H–Cl 431 kJ mol⁻¹.",
+              "note": "Bonds broken: H–H and Cl–Cl = 436 + 242 = 678 kJ. Bonds formed: 2 × H–Cl = 862 kJ. ΔrH = 678 − 862 = −184 kJ mol⁻¹, exothermic as expected for HCl formation."
+            },
+            {
+              "text": "5.0 g of sodium hydroxide is dissolved in enough water to make 100 g of solution, and the temperature rises by 6.0 °C. Find the enthalpy of solution.",
+              "note": "q = mcΔT = 100 × 4.18 × 6.0 = 2508 J = 2.51 kJ. Moles of NaOH = 5.0/40.00 = 0.125 mol. ΔH = −2.51/0.125 = −20.1 kJ mol⁻¹ (negative because the temperature rose, so the dissolution is exothermic)."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Standard enthalpy changes you must be able to define and use",
+          "columns": [
+            "Quantity",
+            "Definition",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Formation, ΔfH°",
+              "One mole of compound from its elements in standard states",
+              "Zero for an element in its standard state"
+            ],
+            [
+              "Combustion, ΔcH°",
+              "One mole of substance burnt completely in O₂",
+              "Always exothermic"
+            ],
+            [
+              "Neutralisation",
+              "One mole of water formed from acid and base",
+              "About −57.1 kJ mol⁻¹ (strong/strong)"
+            ],
+            [
+              "Atomisation",
+              "One mole of gaseous atoms from the element",
+              "Always endothermic"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entropy",
+      "title": "Spontaneity and entropy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A spontaneous process is one that proceeds on its own without continuous external intervention — ice melting above 0 °C, magnesium burning in air, a solute dissolving. Entropy S is the measure of disorder or, more precisely, of the number of ways the energy of a system can be distributed among its particles: the second law of thermodynamics states that the total entropy of the universe increases in any spontaneous process. At constant temperature the entropy change of the surroundings is −ΔH/T, so for an isothermal process the universe's entropy change is ΔS(system) + ΔS(surroundings) ≥ 0, with equality only at equilibrium."
+        },
+        {
+          "type": "paragraph",
+          "text": "The entropy of a system increases whenever it becomes more disordered: a solid dissolving, a liquid evaporating, a gas being produced from solids or liquids and raising the temperature all increase S. A reaction can therefore be spontaneous even when it is endothermic, provided the disorder it creates compensates: at low temperature the enthalpy term dominates and the endothermic direction is unfavourable, while at high temperature the entropy term −TΔS dominates and the same reaction becomes spontaneous. This is exactly why calcium carbonate decomposes to lime and CO₂ only when strongly heated."
+        }
+      ]
+    },
+    {
+      "id": "gibbs",
+      "title": "Gibbs energy and the criterion of spontaneity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Gibbs combined enthalpy and entropy into a single quantity, G = H − TS, whose change at constant temperature and pressure decides spontaneity: ΔG = ΔH − TΔS. When ΔG is negative the process is spontaneous in the forward direction; when it is zero the system is at equilibrium; when it is positive the reverse process is spontaneous. The four sign combinations cover every case: negative ΔH with positive ΔS is spontaneous at all temperatures; positive ΔH with negative ΔS is non-spontaneous at all temperatures; and when both terms have the same sign the temperature decides — the crossover occurs at T = ΔH/ΔS."
+        },
+        {
+          "type": "paragraph",
+          "text": "Standard Gibbs energies of formation allow the same calculation from tabulated data: ΔrG° = Σ ΔfG°(products) − Σ ΔfG°(reactants). Gibbs's relation also connects directly to equilibrium: ΔrG° = −RT ln K, so a large positive ΔG° corresponds to a very small equilibrium constant and a reaction that hardly proceeds, while a large negative ΔG° corresponds to K ≫ 1. Industrial processes exploit this: the Haber process is exothermic and entropy-decreasing, so a low temperature would favour ammonia, but a high temperature is used with a catalyst and high pressure to obtain a workable rate and acceptable yield at equilibrium."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "For N₂(g) + 3H₂(g) → 2NH₃(g), ΔH° = −92.4 kJ mol⁻¹ and ΔS° = −192.4 J K⁻¹ mol⁻¹. Is the reaction spontaneous at 298 K?",
+              "note": "ΔG° = ΔH° − TΔS° = −92.4 − 298 × (−0.1924) = −92.4 + 57.3 = −35.1 kJ mol⁻¹. ΔG is negative, so the reaction is spontaneous under standard conditions at 298 K."
+            },
+            {
+              "text": "At what temperature does the reaction in the previous example cease to be spontaneous?",
+              "note": "Set ΔG = 0: T = ΔH/ΔS = −92.4 kJ mol⁻¹ / (−0.1924 kJ K⁻¹ mol⁻¹) = 480 K. Above about 480 K the −TΔS term outweighs the exothermic enthalpy and the forward reaction is no longer spontaneous."
+            },
+            {
+              "text": "Calculate the equilibrium constant at 298 K for a reaction with ΔG° = −11.4 kJ mol⁻¹.",
+              "note": "ΔG° = −RT ln K, so ln K = 11,400/(8.314 × 298) = 4.60, giving K = e^4.60 ≈ 100. A modestly negative ΔG° corresponds to a K of about 10², so products are favoured but not overwhelmingly."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "ΔG = ΔH − TΔS at constant T and p: negative is spontaneous, zero is equilibrium, positive is not spontaneous.",
+            "Spontaneous does not mean fast — the kinetics of a reaction are a separate question from its thermodynamics.",
+            "ΔS of the universe is the true criterion of spontaneity; ΔG is its equivalent for a system at constant T and p.",
+            "ΔG° = −RT ln K links the standard Gibbs energy to the equilibrium constant of the reaction.",
+            "Temperature reverses the spontaneity of reactions with ΔH and ΔS of the same sign, at T = ΔH/ΔS."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Enthalpy profile of an exothermic reaction",
+      "description": "A reaction-coordinate diagram with enthalpy on the vertical axis: reactants drawn at a raised plateau, a curved path rising over a humped transition state to a lower product plateau, with a downward arrow between the two plateaus labelled ΔH < 0 and the activation energy marked as the height from reactants to the hump; the surroundings shown gaining the same quantity of heat.",
+      "labels": [
+        "Reactants at higher enthalpy than products",
+        "ΔH < 0: heat released to the surroundings",
+        "Activation energy hump must still be crossed",
+        "The height difference is independent of path (Hess's law)"
+      ]
+    },
+    {
+      "caption": "Figure: The four signs of ΔH and ΔS in the Gibbs equation",
+      "description": "A two-by-two grid of panels: top-left ΔH < 0 with ΔS > 0 is labelled \"spontaneous at all temperatures\" with a green tick; bottom-right ΔH > 0 with ΔS < 0 is labelled \"non-spontaneous at all temperatures\" with a cross; the other two panels are split diagonally and marked \"spontaneous above/below T = ΔH/ΔS\" with the crossover temperature formula written in.",
+      "labels": [
+        "ΔG = ΔH − TΔS decides spontaneity",
+        "ΔH < 0, ΔS > 0 → always spontaneous",
+        "ΔH > 0, ΔS < 0 → never spontaneous",
+        "Same-sign terms flip at T = ΔH/ΔS"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "First law: ΔU = q + w; internal energy is a state function, heat and work are path functions.",
+    "At constant pressure ΔH = qp; at constant volume ΔU = qv.",
+    "Expansion work against constant pressure is w = −pΔV.",
+    "Exothermic reactions have ΔH < 0; endothermic reactions have ΔH > 0.",
+    "Calorimetry: q = mcΔT with c = 4.18 J g⁻¹ K⁻¹ for water.",
+    "Hess's law: total enthalpy change is independent of the route, because enthalpy is a state function.",
+    "ΔrH° = Σ ΔfH°(products) − Σ ΔfH°(reactants); ΔrH° = Σ D(bonds broken) − Σ D(bonds formed) approximately.",
+    "Entropy measures the dispersal of energy; the second law requires total entropy of the universe to increase.",
+    "ΔG = ΔH − TΔS is negative for a spontaneous process at constant temperature and pressure.",
+    "ΔG° = −RT ln K connects standard Gibbs energy to the equilibrium constant."
+  ],
+  "examFocus": [
+    "This 9-mark unit carries numerical work: calorimetry, Hess's law cycles, bond enthalpy sums and the ΔG = ΔH − TΔS sign analysis each appear regularly.",
+    "Definitions of formation, combustion, neutralisation enthalpy and entropy are short-answer staples; give the \"per mole of\" clause precisely.",
+    "Expect an analytical question on why a reaction is spontaneous at one temperature but not another — answer with the relative sizes of ΔH and TΔS."
+  ],
+  "vocabulary": [
+    {
+      "word": "Exothermic",
+      "meaning": "A process that releases heat to the surroundings, with ΔH negative."
+    },
+    {
+      "word": "Hess's law",
+      "meaning": "The enthalpy change of a reaction is the same by any route, since enthalpy is a state function."
+    },
+    {
+      "word": "Calorimetry",
+      "meaning": "The measurement of heat flow from a measured temperature change, q = mcΔT."
+    },
+    {
+      "word": "Entropy",
+      "meaning": "A measure of the dispersal of energy among the particles of a system, denoted S."
+    },
+    {
+      "word": "Gibbs energy",
+      "meaning": "G = H − TS; its change at constant T and p gives the criterion of spontaneity."
+    },
+    {
+      "word": "Spontaneous process",
+      "meaning": "A process that proceeds without continuous external intervention, having ΔG < 0."
+    },
+    {
+      "word": "Standard enthalpy of formation",
+      "meaning": "Enthalpy change when one mole of a compound forms from its elements in their standard states."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-chem-thermo-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For an exothermic reaction carried out at constant pressure:",
+      "options": [
+        "ΔH is negative and heat is released",
+        "ΔH is positive and heat is absorbed",
+        "ΔH is zero",
+        "ΔH equals ΔS"
+      ],
+      "correctIndex": 0,
+      "answer": "ΔH is negative and heat is released",
+      "explanation": "At constant pressure the heat exchanged equals ΔH. Exothermic reactions give heat to the surroundings, so the system loses enthalpy and ΔH carries a negative sign."
+    },
+    {
+      "id": "cbse11-chem-thermo-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The standard enthalpy of formation of an element in its most stable form under standard conditions is:",
+      "options": [
+        "always negative",
+        "always positive",
+        "zero",
+        "equal to its atomisation enthalpy"
+      ],
+      "correctIndex": 2,
+      "answer": "zero",
+      "explanation": "By convention the standard enthalpy of formation of a substance formed from itself — O₂ gas, graphite carbon, liquid bromine — is zero, which is what makes formation enthalpies of compounds directly comparable and additive in Hess's law calculations."
+    },
+    {
+      "id": "cbse11-chem-thermo-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A reaction has ΔH > 0 and ΔS > 0. It is spontaneous:",
+      "options": [
+        "at all temperatures",
+        "at no temperature",
+        "only above a certain temperature",
+        "only below a certain temperature"
+      ],
+      "correctIndex": 2,
+      "answer": "only above a certain temperature",
+      "explanation": "ΔG = ΔH − TΔS with both terms positive. The −TΔS contribution grows with temperature, so at low temperatures ΔG stays positive, while above T = ΔH/ΔS the entropy term wins and ΔG becomes negative: the reaction is spontaneous only above a certain temperature."
+    },
+    {
+      "id": "cbse11-chem-thermo-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the reaction 2NO(g) + O₂(g) → 2NO₂(g) at 298 K, ΔH° = −114 kJ mol⁻¹ and ΔS° = −146 J K⁻¹ mol⁻¹. The value of ΔG° is:",
+      "options": [
+        "−70.5 kJ mol⁻¹",
+        "−114 kJ mol⁻¹",
+        "−157.5 kJ mol⁻¹",
+        "+70.5 kJ mol⁻¹"
+      ],
+      "correctIndex": 0,
+      "answer": "−70.5 kJ mol⁻¹",
+      "explanation": "ΔG° = ΔH° − TΔS° = −114 − 298 × (−0.146) = −114 + 43.5 = −70.5 kJ mol⁻¹. The negative value shows the reaction is spontaneous under standard conditions, and the calculation shows how a favourable enthalpy is partly offset by the fall in entropy as three gas molecules become two."
+    },
+    {
+      "id": "cbse11-chem-thermo-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The heat capacity of water used in calorimetric calculations is __________ J g⁻¹ K⁻¹.",
+      "answer": "4.18",
+      "explanation": "The specific heat capacity of water is 4.18 J g⁻¹ K⁻¹ (4.184 J g⁻¹ K⁻¹ to greater precision), so raising one gram of water by one kelvin requires 4.18 joules of heat."
+    },
+    {
+      "id": "cbse11-chem-thermo-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The relationship between internal energy, enthalpy, pressure and volume is H = __________.",
+      "answer": "U + pV",
+      "explanation": "Enthalpy is defined as H = U + pV, so at constant pressure the enthalpy change ΔH = ΔU + pΔV equals the heat exchanged with the surroundings (qp)."
+    },
+    {
+      "id": "cbse11-chem-thermo-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the first law of thermodynamics and define its terms.",
+      "answer": "The first law states that energy can neither be created nor destroyed, so the change in the internal energy of a system equals the heat absorbed by the system plus the work done on it: ΔU = q + w. Here U is the internal energy — the total kinetic and potential energy of the particles — q is the heat exchanged with the surroundings (positive when absorbed), and w is the work done on the system (positive when the surroundings compress it).",
+      "explanation": "The law is the conservation of energy applied to chemistry, and the sign convention for q and w must be stated explicitly because both conventions appear in different textbooks."
+    },
+    {
+      "id": "cbse11-chem-thermo-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between a state function and a path function, giving one example of each.",
+      "answer": "A state function has a value that depends only on the present state of the system, not on how it reached that state: internal energy, enthalpy, entropy and Gibbs energy are state functions, so ΔH is the same for a reaction performed in one step or several. A path function depends on the route taken: heat and work are path functions, so a system taken from 300 K to 400 K by a single large heating or by many small steps absorbs the same ΔU but exchanges different amounts of q and w along the way.",
+      "explanation": "Hess's law follows directly from enthalpy being a state function, which is why the distinction between state and path functions is frequently examined together with it."
+    },
+    {
+      "id": "cbse11-chem-thermo-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Using the standard enthalpies of formation ΔfH°: CH₄ −74.8, CO₂ −393.5, H₂O(l) −285.8 kJ mol⁻¹, calculate the standard enthalpy of combustion of methane and state whether the sign is consistent with its use as a fuel.",
+      "answer": "The combustion reaction is CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l). By Hess's law, ΔcH° = Σ ΔfH°(products) − Σ ΔfH°(reactants) = [ΔfH°(CO₂) + 2 × ΔfH°(H₂O)] − [ΔfH°(CH₄) + 2 × ΔfH°(O₂)] = [−393.5 + 2(−285.8)] − [−74.8 + 0] = −965.1 + 74.8 = −890.3 kJ mol⁻¹. The large negative sign means 890 kJ of heat is released per mole of methane burned, which is exactly why methane is used as a domestic and industrial fuel; oxygen in its standard state has ΔfH° = 0 and does not contribute.",
+      "explanation": "Formation-enthalpy calculations require the reactants to be subtracted from the products and the standard-state elements to be included as zero terms."
+    },
+    {
+      "id": "cbse11-chem-thermo-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The decomposition of calcium carbonate, CaCO₃ → CaO + CO₂, has ΔH° = +178 kJ mol⁻¹ and ΔS° = +160 J K⁻¹ mol⁻¹. Explain why it does not occur at room temperature, calculate the temperature above which it becomes spontaneous, and account for this in terms of the balance between enthalpy and entropy.",
+      "answer": "The decomposition is endothermic, so the enthalpy term opposes the reaction, and at 298 K ΔG = +178 − 298 × 0.160 = +178 − 47.7 = +130.3 kJ mol⁻¹, which is strongly positive: the reaction is non-spontaneous at room temperature and limestone stays intact. The entropy change is positive because a solid produces a gas, so the disorder term −TΔS increasingly favours the products as temperature rises. Setting ΔG = 0 gives T = ΔH/ΔS = 178/0.160 = 1112 K (about 840 °C), above which ΔG turns negative and the decomposition proceeds spontaneously. This is why lime is made in a kiln at high temperature rather than at ambient conditions, and it also shows that a large positive ΔH does not forbid a reaction — it only sets the temperature at which the entropy gain takes over.",
+      "explanation": "Sign analysis of ΔG = ΔH − TΔS earns full marks only when all three steps are shown: the value at 298 K, the crossover temperature, and the physical reason the entropy term grows."
+    }
+  ]
+}

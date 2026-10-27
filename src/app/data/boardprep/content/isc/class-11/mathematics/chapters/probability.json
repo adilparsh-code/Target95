@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-probability",
+  "title": "Probability",
+  "kind": "mathematics",
+  "tagline": "Random experiments and sample spaces, the axiomatic definition, events as subsets and the addition theorem for two events.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "Probability begins with an experiment whose outcome cannot be predicted but whose list of possible outcomes can. This chapter builds that list — the sample space — defines events as its subsets, and then states the three axioms that every probability must satisfy, from which all the working rules follow. The addition theorem completes the unit: it is the set-theoretic counting rule n(A ∪ B) = n(A) + n(B) − n(A ∩ B) dressed in probability, and every problem about at least one or neither is a direct application of it.",
+    "facts": [
+      {
+        "label": "Sample space",
+        "value": "S, the set of all possible outcomes; P(S) = 1 and P(∅) = 0."
+      },
+      {
+        "label": "Axioms",
+        "value": "0 ≤ P(E) ≤ 1 for every event E; P(S) = 1; probabilities of mutually exclusive events add."
+      },
+      {
+        "label": "Addition theorem",
+        "value": "P(A ∪ B) = P(A) + P(B) − P(A ∩ B) for any two events A and B."
+      },
+      {
+        "label": "Complement",
+        "value": "P(A′) = 1 − P(A), which turns at-least-one questions into none questions."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "List the sample space of a random experiment and identify events as its subsets.",
+    "State the axioms of probability and derive the basic properties from them.",
+    "Compute probabilities of simple events with equally likely outcomes.",
+    "Apply the addition theorem for two events, including the mutually exclusive case.",
+    "Solve at-least-one and neither problems using the complement rule."
+  ],
+  "learn": [
+    {
+      "id": "experiments-and-sample-spaces",
+      "title": "Random experiments, outcomes and sample spaces",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A random experiment is any process that can be repeated under identical conditions with an outcome that cannot be predicted in advance — throwing a die, drawing a card, tossing two coins. The sample space is the complete list of possible outcomes, written as a set, and its structure decides everything that follows: finite and equally likely means each outcome carries probability 1/|S|, and any event is simply a subset of S whose probability is its share of that total. Two coins, for instance, produce four outcomes rather than two, because the coins are distinguishable even when they land alike — counting H and T twice, once for each coin, is the decision that prevents the classic undercount. An event with no outcomes has probability zero, an event containing the whole sample space has probability one, and every question in this chapter begins by getting this list right."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sample space S: the exhaustive list of mutually exclusive possible outcomes.",
+            "Two coins give S = {HH, HT, TH, TT} — four outcomes, not three.",
+            "One die gives six equally likely outcomes, so each face carries probability 1/6.",
+            "An event A is a subset of S; elementary events contain a single outcome.",
+            "The impossible event ∅ has probability 0; the sure event S has probability 1."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two dice: 6 × 6 = 36 ordered outcomes, each with probability 1/36",
+              "note": "Ordered pairs keep (2, 3) and (3, 2) apart, which the sum questions require."
+            },
+            {
+              "text": "Drawing a card: 52 outcomes, 4 suits of 13, so P(heart) = 13/52 = 1/4",
+              "note": "Favourable outcomes over total outcomes, with each card equally likely."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sample spaces worth knowing",
+          "columns": [
+            "Experiment",
+            "Sample space",
+            "Size"
+          ],
+          "rows": [
+            [
+              "One coin",
+              "{H, T}",
+              "2"
+            ],
+            [
+              "Two coins",
+              "{HH, HT, TH, TT}",
+              "4"
+            ],
+            [
+              "One die",
+              "{1, 2, 3, 4, 5, 6}",
+              "6"
+            ],
+            [
+              "Two dice",
+              "ordered pairs (i, j)",
+              "36"
+            ],
+            [
+              "One card from a pack",
+              "52 cards",
+              "52"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "axiomatic-approach",
+      "title": "The axiomatic definition and its properties",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The axiomatic approach, due to Kolmogorov, stops explaining what probability means and instead states three rules that every assignment must obey: each probability lies between 0 and 1 inclusive, the whole sample space has probability 1, and probabilities of mutually exclusive events add together. From these three lines every working property is derived rather than memorised. Taking the mutually exclusive pair A and A′ — whose union is the whole space — the third axiom plus the second give P(A) + P(A′) = 1, hence the complement rule. The impossible event follows by taking B = ∅, which shares nothing with A, so P(A) + P(∅) = P(A) and P(∅) = 0. The axioms also make probability monotone: a subset carries no more probability than its superset, because the extra part can only add non-negative amounts."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Axiom 1: 0 ≤ P(E) ≤ 1 for every event E.",
+            "Axiom 2: P(S) = 1 — the sample space is certain.",
+            "Axiom 3: A ∩ B = ∅ implies P(A ∪ B) = P(A) + P(B).",
+            "Complement rule: P(A′) = 1 − P(A), derived from axioms 2 and 3.",
+            "Monotonicity: A ⊆ B implies P(A) ≤ P(B); in particular P(∅) = 0."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If P(A) = 0.3, then P(not A) = 1 − 0.3 = 0.7",
+              "note": "The complement rule in its plainest form."
+            },
+            {
+              "text": "Mutually exclusive A and B with P(A) = 1/4 and P(B) = 1/6: P(A ∪ B) = 5/12",
+              "note": "With no overlap the probabilities simply add: 3/12 + 2/12."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Random experiment",
+              "meaning": "Process with unpredictable outcome but listable possibilities."
+            },
+            {
+              "term": "Sample space",
+              "meaning": "Set of all possible outcomes of an experiment."
+            },
+            {
+              "term": "Event",
+              "meaning": "Subset of the sample space to which a probability is assigned."
+            },
+            {
+              "term": "Mutually exclusive",
+              "meaning": "Events with no common outcome, so A ∩ B = ∅."
+            },
+            {
+              "term": "Complement",
+              "meaning": "A′, the outcomes not in A; P(A′) = 1 − P(A)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "addition-theorem",
+      "title": "The addition theorem for two events",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The addition theorem is the probability form of inclusion–exclusion: P(A ∪ B) = P(A) + P(B) − P(A ∩ B). Adding P(A) and P(B) counts the overlap twice — once inside each — and the correction subtracts it once. Two special cases are worth separating. When the events are mutually exclusive there is no overlap at all and the theorem collapses to plain addition, which is exactly the third axiom; when the events overlap, forgetting the subtraction is the most common error in this chapter, and it is always detectable by asking whether the answer exceeds 1. A closely related quantity is the probability of exactly one of two events occurring: take the union and remove twice the intersection, or equivalently add the two exclusive differences P(A ∩ B′) + P(A′ ∩ B). Both routes appear in examination questions phrased as exactly one, but not both."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "P(A ∪ B) = P(A) + P(B) − P(A ∩ B) for any two events.",
+            "Mutually exclusive: P(A ∩ B) = 0, so P(A ∪ B) = P(A) + P(B).",
+            "P(A ∪ B) ≤ 1 always — a result that bounds the intersection: P(A ∩ B) ≥ P(A) + P(B) − 1.",
+            "Exactly one of A and B: P(A) + P(B) − 2P(A ∩ B).",
+            "P(A ∩ B) = P(A) + P(B) − P(A ∪ B) — the theorem read in reverse."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "P(A) = 0.4, P(B) = 0.5, P(A ∪ B) = 0.7: P(A ∩ B) = 0.4 + 0.5 − 0.7 = 0.2",
+              "note": "Rearranging the theorem gives the overlap directly from the union."
+            },
+            {
+              "text": "Exactly one in the same data: 0.4 + 0.5 − 2(0.2) = 0.5",
+              "note": "Remove the overlap twice: both-neither side of it counts once each."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reading the addition theorem",
+          "columns": [
+            "Given",
+            "Rearranged form",
+            "Finds"
+          ],
+          "rows": [
+            [
+              "P(A), P(B), P(A ∪ B)",
+              "P(A ∩ B) = P(A) + P(B) − P(A ∪ B)",
+              "the overlap"
+            ],
+            [
+              "P(A), P(B), P(A ∩ B)",
+              "P(A ∪ B) = P(A) + P(B) − P(A ∩ B)",
+              "at least one"
+            ],
+            [
+              "mutually exclusive events",
+              "P(A ∪ B) = P(A) + P(B)",
+              "union without correction"
+            ],
+            [
+              "P(A), P(B), P(A ∩ B)",
+              "P(A) + P(B) − 2P(A ∩ B)",
+              "exactly one"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "At least one, neither and worked problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The phrase at least one is the signal that the complement rule should lead, because the opposite of at least one success is no successes at all, and counting the failures is usually far easier than enumerating every way of succeeding. The same reasoning resolves neither, which is simply the complement of the union, and exactly one, which removes the both-case from the union entirely. Classical problems with coins, dice and cards supply the arithmetic: count the favourable outcomes over the total, or use the theorem when the events are described rather than listed. Whichever route is taken, the answer must be a probability — a number between 0 and 1 — and that range check is the fastest way to catch a missing or duplicated overlap before the answer sheet is submitted."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "At least one = 1 − P(none), which is almost always the shorter calculation.",
+            "Neither = P((A ∪ B)′) = 1 − P(A ∪ B).",
+            "Exactly one = P(A ∪ B) − P(A ∩ B) = P(A) + P(B) − 2P(A ∩ B).",
+            "Classical probability: favourable outcomes ÷ total outcomes, when all outcomes are equally likely.",
+            "Check: every probability you write must lie in [0, 1] — a violation means an overlap was mishandled."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A student plays cricket (25) and football (18) with 7 both, out of 40: P(at least one) = 36/40 = 9/10",
+              "note": "n(C ∪ F) = 25 + 18 − 7 = 36; the complement, neither, is 4/40 = 1/10."
+            },
+            {
+              "text": "Two dice: probability the sum is 7 is 6/36 = 1/6, since (1,6), (2,5), (3,4) and their reverses qualify",
+              "note": "Count the ordered pairs; the reverse orderings are distinct outcomes."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Drawing an ace from a full pack: 4/52 = 1/13",
+              "note": "Four aces among 52 equally likely cards."
+            },
+            {
+              "text": "At least one six in one throw: P = 1/6, so P(no six) = 5/6 — the complement in one line",
+              "note": "The complement rule handles single-event at-least questions without any addition theorem."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Two events drawn inside a sample-space rectangle",
+      "description": "A rectangle marked S holding two overlapping event circles A and B, the overlap shaded darkest, each crescent shaded lightly, and the region outside both left clear to show the complement of the union.",
+      "labels": [
+        "rectangle S: the sample space with P(S) = 1",
+        "circle A carries probability P(A)",
+        "overlap is P(A ∩ B), counted twice before correction",
+        "union A ∪ B is at least one event",
+        "outside both circles is P((A ∪ B)′) = 1 − P(A ∪ B)"
+      ]
+    },
+    {
+      "caption": "Figure: The sample space of two coin tosses as a tree",
+      "description": "A tree splitting first by the outcome of coin one into H and T, each branch splitting again by coin two, ending in four leaves labelled HH, HT, TH and TT with their probabilities.",
+      "labels": [
+        "first toss: two branches, each with probability 1/2",
+        "second toss: two branches per starting branch",
+        "four equally likely leaves",
+        "each leaf carries probability 1/4",
+        "exactly one head holds two leaves: HT and TH"
+      ]
+    },
+    {
+      "caption": "Figure: The addition theorem as areas",
+      "description": "Two overlapping circles with the left circle labelled P(A) = 0.4, the right P(B) = 0.5 and the lens labelled P(A ∩ B) = 0.2, with an arrow indicating the union formed by adding and subtracting the lens once.",
+      "labels": [
+        "P(A) + P(B) counts the lens twice",
+        "subtract P(A ∩ B) once to correct",
+        "union area equals 0.7",
+        "exactly one = union minus the lens",
+        "mutually exclusive means no lens at all"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The sample space is the exhaustive list of outcomes; each event is a subset of it.",
+    "Equally likely outcomes give P(E) = favourable ÷ total.",
+    "Axioms: probabilities lie in [0, 1], P(S) = 1, and mutually exclusive probabilities add.",
+    "P(A′) = 1 − P(A) follows from the axioms and turns at-least questions into none questions.",
+    "P(A ∪ B) = P(A) + P(B) − P(A ∩ B); the subtraction removes the double-counted overlap.",
+    "Mutually exclusive events have P(A ∩ B) = 0, collapsing the theorem to plain addition.",
+    "Exactly one of A and B = P(A) + P(B) − 2P(A ∩ B).",
+    "Neither = 1 − P(A ∪ B); at least one = 1 − P(nothing happened).",
+    "Two coins give four outcomes and two dice give 36 — order makes them distinct.",
+    "Every probability you write must lie between 0 and 1; a violation exposes a counting slip."
+  ],
+  "examFocus": [
+    "Write the sample space (or its size) before computing any probability — the listing is where marks are lost.",
+    "Name the theorem being used: addition theorem, complement rule — the attribution carries its own mark.",
+    "For at-least-one questions, state the complement step explicitly rather than jumping to the answer.",
+    "When events are not mutually exclusive, show the subtracted intersection as a visible line; omitting it is the standard error."
+  ],
+  "vocabulary": [
+    {
+      "word": "Random experiment",
+      "meaning": "Repeatable process with an unpredictable but listable outcome."
+    },
+    {
+      "word": "Sample space",
+      "meaning": "Set of all possible outcomes, written S."
+    },
+    {
+      "word": "Outcome",
+      "meaning": "One possible result of an experiment."
+    },
+    {
+      "word": "Event",
+      "meaning": "Subset of the sample space assigned a probability."
+    },
+    {
+      "word": "Equally likely",
+      "meaning": "Outcomes each having the same probability."
+    },
+    {
+      "word": "Mutually exclusive",
+      "meaning": "Events sharing no outcome, so their probabilities add."
+    },
+    {
+      "word": "Complement",
+      "meaning": "The event not occurring; P(A′) = 1 − P(A)."
+    },
+    {
+      "word": "Addition theorem",
+      "meaning": "P(A ∪ B) = P(A) + P(B) − P(A ∩ B) for two events."
+    },
+    {
+      "word": "Sure event",
+      "meaning": "The whole sample space, with probability exactly 1."
+    },
+    {
+      "word": "Impossible event",
+      "meaning": "The empty set, with probability exactly 0."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-probability-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A fair die is thrown once. The probability of getting a prime number is:",
+      "options": [
+        "1/6",
+        "1/3",
+        "1/2",
+        "2/3"
+      ],
+      "correctIndex": 2,
+      "answer": "1/2",
+      "explanation": "The primes on a die are 2, 3 and 5 — three outcomes out of six — giving 3/6 = 1/2."
+    },
+    {
+      "id": "isc11-math-probability-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two fair dice are thrown. The probability that the sum of the numbers is 7 is:",
+      "options": [
+        "1/6",
+        "1/9",
+        "5/36",
+        "1/12"
+      ],
+      "correctIndex": 0,
+      "answer": "1/6",
+      "explanation": "Six of the 36 ordered outcomes give a sum of 7 — (1,6), (2,5), (3,4) and their reverses — so the probability is 6/36 = 1/6."
+    },
+    {
+      "id": "isc11-math-probability-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If P(A) = 0.3 for an event A, then the probability of not A is:",
+      "options": [
+        "0.3",
+        "0.7",
+        "1",
+        "0.03"
+      ],
+      "correctIndex": 1,
+      "answer": "0.7",
+      "explanation": "The complement rule gives P(A′) = 1 − P(A) = 1 − 0.3 = 0.7."
+    },
+    {
+      "id": "isc11-math-probability-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "When two fair coins are tossed, the number of outcomes in the sample space is:",
+      "options": [
+        "2 outcomes",
+        "4 outcomes",
+        "6 outcomes",
+        "8 outcomes"
+      ],
+      "correctIndex": 1,
+      "answer": "4 outcomes",
+      "explanation": "The coins are distinguishable, giving HH, HT, TH and TT — four equally likely outcomes of probability 1/4 each."
+    },
+    {
+      "id": "isc11-math-probability-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of ordered outcomes in the sample space of throwing two dice together is ______ .",
+      "answer": "36",
+      "explanation": "Six possibilities for the first die multiplied by six for the second gives 6 × 6 = 36 ordered pairs."
+    },
+    {
+      "id": "isc11-math-probability-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "One card is drawn from a well-shuffled pack of 52; the probability that it is an ace is ______ .",
+      "answer": "1/13",
+      "explanation": "There are four aces in 52 cards, so P = 4/52, which reduces to 1/13."
+    },
+    {
+      "id": "isc11-math-probability-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the axioms of the axiomatic (Kolmogorov) definition of probability.",
+      "answer": "For every event E of a sample space S: (i) 0 ≤ P(E) ≤ 1 — the probability of an event lies between zero and one inclusive; (ii) P(S) = 1 — the sample space, being certain, has probability one; (iii) for mutually exclusive events A and B, meaning A ∩ B = ∅, P(A ∪ B) = P(A) + P(B) — probabilities of disjoint events add. From these three axioms the complement rule and every working property follow by deduction.",
+      "explanation": "The three axioms are stated with their conditions: the range, the certainty of the whole space, and additivity restricted to mutually exclusive events — the restriction is what the third axiom turns on."
+    },
+    {
+      "id": "isc11-math-probability-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the addition theorem for two events and its special case when the events are mutually exclusive.",
+      "answer": "For any two events A and B, P(A ∪ B) = P(A) + P(B) − P(A ∩ B): the individual probabilities are added and the intersection, counted twice, is subtracted once. When A and B are mutually exclusive, A ∩ B = ∅ and P(A ∩ B) = 0, so the theorem reduces to P(A ∪ B) = P(A) + P(B) — precisely the third axiom.",
+      "explanation": "The theorem is inclusion–exclusion in probability language; the mutually exclusive case is not a different rule but the axiom recovered by setting the overlap to zero."
+    },
+    {
+      "id": "isc11-math-probability-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In a class of 40 students, 25 play cricket, 18 play football and 7 play both. One student is chosen at random. Find the probability that the student plays (i) at least one game, (ii) neither game, (iii) exactly one game.",
+      "answer": "Students playing at least one game: n(C ∪ F) = 25 + 18 − 7 = 36, so P(at least one) = 36/40 = 9/10. Students playing neither: 40 − 36 = 4, so P(neither) = 4/40 = 1/10. Exactly one game: cricket only = 25 − 7 = 18 and football only = 18 − 7 = 11, totalling 29, so P(exactly one) = 29/40. The three probabilities check out as 9/10 + 1/10 = 1 for the complement pair, and 29/40 + 7/40 = 36/40 confirms the union.",
+      "explanation": "Apply the addition theorem for the union, take the complement for neither, and remove the both-group twice for exactly one; the final consistency check demonstrates that the regions partition the class."
+    },
+    {
+      "id": "isc11-math-probability-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two dice are thrown together. Find the probability that the sum of the numbers shown is divisible by 4 or is a prime number.",
+      "answer": "Sums divisible by 4 are 4, 8 and 12, with 3, 5 and 1 outcomes respectively — 9 outcomes in all. Prime sums are 2, 3, 5, 7 and 11, with 1, 2, 4, 6 and 2 outcomes — 15 outcomes in all. The two sets of sums are disjoint, since no number is both divisible by 4 and prime, so by the addition theorem the favourable outcomes total 9 + 15 = 24 out of 36. The required probability is 24/36 = 2/3.",
+      "explanation": "List the sums in each category, count their ordered outcomes, confirm the categories are disjoint so no intersection correction is needed, then add and reduce — the addition theorem with P(A ∩ B) = 0."
+    }
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-quadratics",
+  "title": "Quadratic Equations",
+  "kind": "mathematics",
+  "tagline": "Roots by factorisation and formula, the discriminant and the nature of roots, and the links between roots and coefficients.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "A quadratic equation is the simplest equation that can have two answers, and the whole chapter is about finding them and understanding what they look like. Three tools do the work: factorisation when the roots are friendly, the quadratic formula when they are not, and the discriminant when the question is not asking for the roots at all but only what kind they are. The relations between roots and coefficients then replace the roots with sums and products, which is how examiners write questions that look impossible until you notice you never need the roots themselves.",
+    "facts": [
+      {
+        "label": "Standard form",
+        "value": "ax² + bx + c = 0 with a ≠ 0; divide by a first so the leading coefficient is 1."
+      },
+      {
+        "label": "Quadratic formula",
+        "value": "x = (−b ± √(b² − 4ac)) / 2a, valid over the complex numbers."
+      },
+      {
+        "label": "Discriminant",
+        "value": "D = b² − 4ac: D > 0 real distinct, D = 0 real equal, D < 0 non-real complex pair."
+      },
+      {
+        "label": "Roots and coefficients",
+        "value": "α + β = −b/a and αβ = c/a; the equation is x² − (α + β)x + αβ = 0."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Solve a quadratic equation by factorisation, by completing the square and by the quadratic formula.",
+    "Compute the discriminant and state the nature of the roots without solving the equation.",
+    "Use the relations between roots and coefficients to form and solve symmetric root problems.",
+    "Construct a quadratic equation whose roots are given, including reciprocal and shifted roots.",
+    "Translate a word problem into a quadratic equation, solve it and reject the root that the context forbids."
+  ],
+  "learn": [
+    {
+      "id": "roots-and-formula",
+      "title": "Three ways to find the roots",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every quadratic equation is first written in standard form ax² + bx + c = 0 with a ≠ 0, and dividing through by a puts the leading coefficient at one. Factorisation then looks for two numbers that multiply to the constant and add to the middle coefficient, and it fails gracefully when the roots are irrational or fractional — the formula takes over. The quadratic formula is nothing more than completing the square on the general equation: move c, divide by a, add (b/2a)² to both sides, collapse the left into a perfect square, and take the square root. That derivation is worth reproducing in an examination, because the method marks for completing the square are separate from the formula itself. Over the real numbers the formula always gives an answer once complex numbers are admitted, which is historically why the complex numbers were invented."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Standard form: ax² + bx + c = 0, a ≠ 0; the coefficient a must never be zero.",
+            "Factorisation works when the roots are rational: find p and q with p + q = b/a and pq = c/a.",
+            "Completing the square: x² + (b/a)x = −c/a, then add (b/2a)² to both sides.",
+            "Quadratic formula: x = (−b ± √(b² − 4ac)) / 2a — the same for every quadratic, ever.",
+            "Check each root by substitution before writing the answer; one arithmetic slip halves the marks."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "x² − 5x + 6 = 0: (x − 2)(x − 3) = 0, so x = 2 or x = 3",
+              "note": "Two numbers adding to −5 and multiplying to +6 are −2 and −3."
+            },
+            {
+              "text": "2x² − 4x − 6 = 0 → x = (4 ± √(16 + 48))/4 = (4 ± 8)/4, giving x = 3 or x = −1",
+              "note": "Identify a = 2, b = −4, c = −6, compute D = 64, then substitute into the formula."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Choosing a method",
+          "columns": [
+            "Situation",
+            "Method",
+            "Why"
+          ],
+          "rows": [
+            [
+              "Integer roots visible",
+              "Factorisation",
+              "Fastest and self-checking"
+            ],
+            [
+              "Irrational or fractional roots",
+              "Quadratic formula",
+              "No factor pair will be found"
+            ],
+            [
+              "Asked to derive the formula",
+              "Completing the square",
+              "The derivation itself is the answer"
+            ],
+            [
+              "Asked only about the kind of roots",
+              "Discriminant",
+              "No root need be computed"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nature-of-roots",
+      "title": "The discriminant and the nature of roots",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The discriminant D = b² − 4ac is the part of the quadratic formula under the square root, so it alone decides what kind of roots an equation has. If D is positive the square root is a real non-zero number and the ± sign gives two distinct real roots; if D is zero the roots coincide; if D is negative no real square root exists and the two roots form a complex conjugate pair. When the coefficients are rational, a further refinement applies: D is a perfect square if and only if the roots are rational, which is how a question can ask about rationality without asking for the roots. Because D is a single expression, it is also cheap to manipulate: to make a quadratic have equal roots for every value of a parameter, solve D = 0 for that parameter in one line."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "D = b² − 4ac with the coefficients taken after dividing through so that a ≠ 0.",
+            "D > 0: two distinct real roots; D = 0: two equal real roots; D < 0: non-real complex conjugate roots.",
+            "Rational coefficients plus D a perfect square is exactly the condition for rational roots.",
+            "Non-real roots always appear as a conjugate pair a + ib and a − ib.",
+            "Setting D = 0 is the standard way to find a parameter value that makes roots equal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "x² − 6x + 9 = 0 has D = 36 − 36 = 0, so the root x = 3 occurs twice",
+              "note": "A vanishing discriminant marks a perfect-square trinomial."
+            },
+            {
+              "text": "x² + x + 1 = 0 has D = 1 − 4 = −3 < 0, so no real roots exist",
+              "note": "A negative D sends both roots off the real line into the complex plane."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "2x² − 4x + 2 = 0: D = 16 − 16 = 0 — real and equal",
+              "note": "Substitute a = 2, b = −4, c = 2 without simplifying the equation first."
+            },
+            {
+              "text": "For kx² + 4x + 1 = 0 to have no real roots, 16 − 4k < 0, so k > 4",
+              "note": "Apply D < 0 to the parameter and solve the resulting linear inequality."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "roots-and-coefficients",
+      "title": "Roots and coefficients: sums and products",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For ax² + bx + c = 0 with roots α and β, the two relations α + β = −b/a and αβ = c/a are the heart of the second half of the chapter, because they let a question about roots be answered without finding them. If a problem asks about α² + β², or 1/α + 1/β, or α³ + β³, the expression is rewritten in terms of the sum and the product — the identity α² + β² = (α + β)² − 2αβ being the first one to reach for. The relations also run backwards: given any two numbers, the equation having them as roots is x² − (sum)x + product = 0, and once a is chosen the equation follows by clearing fractions. Reciprocal roots force the product to one, which with αβ = c/a means a = c; roots that are negatives of each other force the sum to zero, meaning b = 0."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "α + β = −b/a and αβ = c/a for the equation ax² + bx + c = 0.",
+            "α² + β² = (α + β)² − 2αβ; use it before touching any squares.",
+            "1/α + 1/β = (α + β)/αβ and α³ + β³ = (α + β)³ − 3αβ(α + β).",
+            "Equation from roots: x² − (α + β)x + αβ = 0, multiplied by a to clear fractions.",
+            "Reciprocal roots ⇔ αβ = 1 ⇔ a = c; opposite roots ⇔ α + β = 0 ⇔ b = 0."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If α + β = 5 and αβ = 6, then α² + β² = 25 − 12 = 13",
+              "note": "Apply the identity instead of finding 2 and 3 individually."
+            },
+            {
+              "text": "Roots 2 and −2 give x² − 0·x − 4 = 0, i.e. x² − 4 = 0",
+              "note": "Sum zero kills the linear term; the product gives the constant."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Symmetric expressions in the roots",
+          "columns": [
+            "Expression",
+            "In terms of sum S and product P",
+            "Example with S = 5, P = 6"
+          ],
+          "rows": [
+            [
+              "α² + β²",
+              "S² − 2P",
+              "25 − 12 = 13"
+            ],
+            [
+              "1/α + 1/β",
+              "S / P",
+              "5/6"
+            ],
+            [
+              "(α − β)²",
+              "S² − 4P",
+              "25 − 24 = 1"
+            ],
+            [
+              "α³ + β³",
+              "S³ − 3PS",
+              "125 − 90 = 35"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "problems-in-one-variable",
+      "title": "Word problems that become quadratics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The last lesson is about translation: taking a sentence and producing an equation. Almost every applied quadratic follows one of two patterns — a quantity split into parts, where the parts multiply to a constant, or a rate and time relationship, where work adds as reciprocals. Once the equation exists the algebra is routine, but the answer is not: a quadratic normally returns two roots and a real problem returns one, so the second root is rejected only after the reason is stated. Speed problems reject a negative time, geometry problems reject a negative length, and reciprocal-time problems reject any root that makes a denominator zero. Writing the rejection down is part of the answer — an unstated rejection looks like an oversight."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Let the unknown be the smallest quantity the problem speaks of, then write everything else against it.",
+            "Work problems: add the rates, not the times — 1/x + 1/(x + 10) = 1/12.",
+            "Geometry problems: side lengths must be positive, so a negative root dies on contact.",
+            "Check the surviving root by substituting it back into the original sentence.",
+            "State why the second root is rejected; the reason carries a mark of its own."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A does a job in 10 days more than B; together they finish in 12 days",
+              "note": "1/x + 1/(x + 10) = 1/12 leads to x² − 14x − 120 = 0 with x = 20, so B takes 20 days and A takes 30."
+            },
+            {
+              "text": "Two numbers differ by 3 and their product is 40: x(x + 3) = 40 → x² + 3x − 40 = 0",
+              "note": "Factorising gives (x + 8)(x − 5) = 0; the negative root is rejected for a positive number, giving 5 and 8."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Root",
+              "meaning": "Value of x that satisfies the equation exactly."
+            },
+            {
+              "term": "Discriminant",
+              "meaning": "D = b² − 4ac, deciding the nature of the roots."
+            },
+            {
+              "term": "Repeated root",
+              "meaning": "A root occurring twice, found when D = 0."
+            },
+            {
+              "term": "Reciprocal equation",
+              "meaning": "Equation whose roots are multiplicative inverses of each other."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The three discriminant cases as intersections with the x-axis",
+      "description": "Three small parabolas side by side: one cutting the x-axis twice, one touching it at its vertex, and one floating entirely above the axis, each annotated with the sign of the discriminant.",
+      "labels": [
+        "D > 0: parabola crosses the axis at two points",
+        "D = 0: vertex touches the axis, one repeated root",
+        "D < 0: no intersection with the x-axis",
+        "open upwards means a > 0",
+        "roots are the x-coordinates of the intersections"
+      ]
+    },
+    {
+      "caption": "Figure: Reading a quadratic from its graph",
+      "description": "A parabola with vertex marked, intercepts with both axes marked, and a horizontal dashed line showing the axis of symmetry halfway between the two roots.",
+      "labels": [
+        "x-intercepts are the roots of ax² + bx + c = 0",
+        "axis of symmetry x = −b/2a lies midway between the roots",
+        "y-intercept equals the constant c",
+        "vertex is the maximum or minimum value",
+        "α + β = −b/a places the roots symmetrically"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Standard form ax² + bx + c = 0, a ≠ 0, precedes every method of solution.",
+    "Factorisation handles rational roots; the quadratic formula handles all others.",
+    "Completing the square derives the formula and earns its own method marks.",
+    "D = b² − 4ac: positive means distinct real roots, zero means a repeated root, negative means a conjugate pair.",
+    "Rational roots require rational coefficients and a discriminant that is a perfect square.",
+    "α + β = −b/a and αβ = c/a answer symmetric questions without finding the roots.",
+    "α² + β² = (α + β)² − 2αβ is the identity that most root questions require.",
+    "The equation with given roots α and β is x² − (α + β)x + αβ = 0.",
+    "Reciprocal roots force a = c; opposite roots force b = 0.",
+    "Applied problems reject one root, and the rejection must be stated with its reason."
+  ],
+  "examFocus": [
+    "Write a, b and c explicitly before substituting into the formula; sign slips on b are the most common lost mark.",
+    "For nature-of-roots questions, quote the discriminant condition alongside the conclusion — both lines are marked.",
+    "Roots-and-coefficients questions are answered with identities: state α + β and αβ first, then rewrite the expression.",
+    "In word problems, define the variable in words with units, and give the final answer as a sentence, not just a number."
+  ],
+  "vocabulary": [
+    {
+      "word": "Quadratic equation",
+      "meaning": "Polynomial equation of degree two, ax² + bx + c = 0 with a ≠ 0."
+    },
+    {
+      "word": "Root",
+      "meaning": "Value of the variable satisfying the equation; the same as a solution or zero."
+    },
+    {
+      "word": "Discriminant",
+      "meaning": "b² − 4ac, the quantity deciding the nature of the roots."
+    },
+    {
+      "word": "Repeated root",
+      "meaning": "Double root arising when the discriminant vanishes."
+    },
+    {
+      "word": "Completing the square",
+      "meaning": "Rewriting a quadratic as a perfect square plus a constant."
+    },
+    {
+      "word": "Factorisation",
+      "meaning": "Writing the quadratic as a product of two linear factors."
+    },
+    {
+      "word": "Sum of roots",
+      "meaning": "α + β = −b/a for the standard quadratic."
+    },
+    {
+      "word": "Product of roots",
+      "meaning": "αβ = c/a for the standard quadratic."
+    },
+    {
+      "word": "Complex conjugate pair",
+      "meaning": "Non-real roots a + ib and a − ib, occurring together."
+    },
+    {
+      "word": "Reciprocal roots",
+      "meaning": "Roots related by α = 1/β, forcing the product to be 1."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-quadratic-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The discriminant of 2x² − 4x + 2 = 0 shows that its roots are:",
+      "options": [
+        "real and distinct",
+        "real and equal",
+        "non-real",
+        "irrational"
+      ],
+      "correctIndex": 1,
+      "answer": "real and equal",
+      "explanation": "D = (−4)² − 4(2)(2) = 16 − 16 = 0, and a zero discriminant means two equal real roots — in fact x = 2 twice."
+    },
+    {
+      "id": "isc11-math-quadratic-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sum of the roots of 3x² − 5x + 2 = 0 is:",
+      "options": [
+        "5/3",
+        "−5/3",
+        "2/3",
+        "−2/3"
+      ],
+      "correctIndex": 0,
+      "answer": "5/3",
+      "explanation": "α + β = −b/a = −(−5)/3 = 5/3, positive because the middle coefficient is negative."
+    },
+    {
+      "id": "isc11-math-quadratic-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The roots of the equation x² + 4 = 0 are:",
+      "options": [
+        "real and equal",
+        "real and distinct",
+        "non-real complex conjugates",
+        "rational"
+      ],
+      "correctIndex": 2,
+      "answer": "non-real complex conjugates",
+      "explanation": "x² = −4 gives x = ±2i: the discriminant is −16, so both roots lie off the real axis and are conjugates of each other."
+    },
+    {
+      "id": "isc11-math-quadratic-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For an equation with integer coefficients to have rational roots, its discriminant must be:",
+      "options": [
+        "positive",
+        "a perfect square",
+        "zero",
+        "an even number"
+      ],
+      "correctIndex": 1,
+      "answer": "a perfect square",
+      "explanation": "The formula divides √D by 2a, so the roots are rational exactly when √D is rational — for integers, when D is a perfect square."
+    },
+    {
+      "id": "isc11-math-quadratic-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The condition for ax² + bx + c = 0 (a ≠ 0) to have equal roots is that the discriminant ______ equals zero.",
+      "answer": "b² − 4ac",
+      "explanation": "Setting b² − 4ac = 0 makes the ± term vanish, collapsing both roots onto the single value −b/2a."
+    },
+    {
+      "id": "isc11-math-quadratic-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The product of the roots of ax² + bx + c = 0 is ______ .",
+      "answer": "c/a",
+      "explanation": "From the factorisation a(x − α)(x − β), the constant term is aαβ, so αβ = c/a."
+    },
+    {
+      "id": "isc11-math-quadratic-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the relations between the coefficients and the roots of a quadratic equation, and the equation built from them.",
+      "answer": "For ax² + bx + c = 0 with roots α and β: α + β = −b/a and αβ = c/a. Conversely, the equation whose roots are α and β is x² − (α + β)x + αβ = 0, which may be multiplied through by any non-zero constant.",
+      "explanation": "These two lines replace root-finding in every symmetric question; they come straight from expanding a(x − α)(x − β)."
+    },
+    {
+      "id": "isc11-math-quadratic-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the nature of the roots of a quadratic equation when its discriminant is negative.",
+      "answer": "There are no real roots: the pair of roots is non-real and complex conjugate, of the form a + ib and a − ib with b ≠ 0. The square root of the negative discriminant introduces i, and conjugacy follows because the coefficients remain real.",
+      "explanation": "A negative discriminant blocks the real square root, and complex numbers restore it with the ± pair, which are conjugates of each other."
+    },
+    {
+      "id": "isc11-math-quadratic-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve x² − 5x + 6 = 0 by factorisation and verify your answer with the relations between roots and coefficients.",
+      "answer": "The factorisation is (x − 2)(x − 3) = 0 because −2 and −3 add to −5 and multiply to +6, giving roots 2 and 3. Check: α + β = 2 + 3 = 5, which equals −b/a = −(−5)/1, and αβ = 2 × 3 = 6, which equals c/a = 6/1. Both relations confirm the roots.",
+      "explanation": "Factorise by finding the pair matching b and c, then verify through both coefficient relations rather than by substitution alone — the question asks for the verification explicitly."
+    },
+    {
+      "id": "isc11-math-quadratic-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A job is done by A alone in 10 days more than B alone, and together they finish it in 12 days. Find the time each takes alone.",
+      "answer": "Let B take x days, so A takes x + 10. Their combined rate is 1/x + 1/(x + 10) = 1/12. Multiplying by 12x(x + 10) gives 12(x + 10) + 12x = x(x + 10), that is x² − 14x − 120 = 0, with roots x = (14 ± √(196 + 480))/2 = (14 ± 26)/2, so x = 20 or x = −10. Time cannot be negative, so x = 20: B takes 20 days and A takes 30 days. Together 1/20 + 1/30 = 5/60 = 1/12, matching the given 12 days.",
+      "explanation": "Add rates rather than times, clear the denominators to reach a standard quadratic, and reject the negative root with a stated reason before verifying the answer against the original condition."
+    }
+  ]
+}

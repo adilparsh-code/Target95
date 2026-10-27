@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-binomial",
+  "title": "Binomial Theorem",
+  "kind": "mathematics",
+  "tagline": "Pascal’s triangle, the expansion for positive integral indices, and the coefficient arithmetic it makes possible.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Expanding a bracket raised to a power by repeated multiplication works, but only up to a point; the binomial theorem replaces that labour with a formula that reads the coefficients straight off a triangle. The chapter opens with the historical perspective the syllabus asks for, states and proves the theorem for positive integral indices, and then applies it to expansions and coefficient questions — including the general and middle term, which the official syllabus places in the formative-only list.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Algebra (25 marks shared with the other Algebra chapters)."
+      },
+      {
+        "label": "The theorem",
+        "value": "(x + y)ⁿ = Σ from r = 0 to n of nCr · xⁿ⁻ʳ · yʳ, for n a positive integer."
+      },
+      {
+        "label": "Pascal’s triangle",
+        "value": "Each entry is the sum of the two above it; its rows are the coefficients nCr."
+      },
+      {
+        "label": "Formative topic",
+        "value": "The general term and the middle term of a binomial expansion — taught here, assessed only formatively."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the binomial theorem and explain the role of the binomial coefficients.",
+    "Generate Pascal’s triangle and read coefficients from it.",
+    "Expand brackets with positive integral exponents.",
+    "Find a required coefficient by comparing terms of the expansion.",
+    "Locate the general and middle terms of an expansion."
+  ],
+  "learn": [
+    {
+      "id": "history",
+      "title": "Historical perspective: the triangle before Pascal",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The pattern of coefficients was known centuries before Pascal published his 1654 treatise. Indian mathematicians described the triangle while working on what is now the binomial coefficients — the number of combinations — and the same array appears in Chinese and Persian mathematics of the medieval period, where it was used to organise the coefficients of expanded powers. Pascal’s contribution was to study the triangle systematically as a mathematical object, and the history matters for two reasons: it shows that the theorem grew out of combinatorics rather than algebra — nCr is the coefficient because it counts the ways of picking which of the n factors supply the y — and it reminds us that the same structure was discovered independently wherever people counted selections."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reading the triangle gives the coefficients without any formula: row n begins and ends with 1, every interior entry is the sum of the two entries above it, and row n therefore lists nC0, nC1, …, nCn. The symmetry of each row reflects nCr = n(n − C), the addition of adjacent entries reflects the identity nCr + nCr+1 = nC(r+1), and the row sums are powers of 2, reflecting Σ nCr = 2ⁿ. The triangle is thus not a mnemonic but a picture of the combinatorial identities from the previous chapter, and building two or three rows by hand before using the theorem makes those identities intuitive."
+        },
+        {
+          "type": "table",
+          "caption": "The first rows of Pascal’s triangle against the expansions",
+          "columns": [
+            "n",
+            "Row of coefficients",
+            "Expansion"
+          ],
+          "rows": [
+            [
+              "0",
+              "1",
+              "(x + y)⁰ = 1"
+            ],
+            [
+              "1",
+              "1 1",
+              "x + y"
+            ],
+            [
+              "2",
+              "1 2 1",
+              "x² + 2xy + y²"
+            ],
+            [
+              "3",
+              "1 3 3 1",
+              "x³ + 3x²y + 3xy² + y³"
+            ],
+            [
+              "4",
+              "1 4 6 4 1",
+              "x⁴ + 4x³y + 6x²y² + 4xy³ + y⁴"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "theorem",
+      "title": "The theorem, its statement and proof",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The binomial theorem states that for any positive integer n, (x + y)ⁿ equals the sum, as r runs from 0 to n, of nCr · xⁿ⁻ʳ · yʳ. Two features deserve attention before any computation. The exponents of x descend from n to 0 while those of y ascend from 0 to n, so every term is of total degree n; and the coefficient of each term is the corresponding combination, because when the product (x + y)(x + y)… is expanded, choosing y from exactly r of the n factors determines a term xⁿ⁻ʳyʳ, and there are nCr ways to make that choice. The formula is therefore combinatorics written as algebra — the coefficient counts the selections, not the other way round."
+        },
+        {
+          "type": "paragraph",
+          "text": "The syllabus requires a proof, and the natural method is the induction you met at the start of Unit-II, which is a pleasing internal link. The base case n = 1 is the identity itself. For the step, write (x + y)ᵏ⁺¹ as (x + y) times the expansion of (x + y)ᵏ from the hypothesis, distribute, and collect the coefficients of each xᵏ⁺¹⁻ʳyʳ: one contribution comes from x times the term of degree k, and another from y times the term of degree k − 1, giving nC(r − 1) + nCr = (n + 1)Cr by the Pascal identity — exactly the coefficient the statement predicts for k + 1. The proof therefore rests on two pillars, the induction frame and the addition rule for adjacent coefficients, and both were already in place before this chapter began."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(x + y)ⁿ = Σ nCr xⁿ⁻ʳ yʳ for positive integral n.",
+            "Each term has total degree n; exponents move in opposite directions.",
+            "nCr is the coefficient because it counts the choices of r factors supplying y.",
+            "Row n of Pascal’s triangle is exactly the list of coefficients.",
+            "Proof by induction uses the identity nC(r − 1) + nCr = (n + 1)Cr."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Expansions and coefficient extraction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The two standard applications are expanding a bracket and recovering a single coefficient from an expansion you do not wish to write out fully. For expansion, identify x, y and n, list the coefficients from the appropriate row of the triangle, and attach the descending and ascending powers in order — a systematic table prevents the common slip of running the exponents backwards. For coefficient extraction, find the general term first, set its power of the variable equal to the target, solve for r, and read the coefficient at that r. For example, the coefficient of x³ in (1 + x)⁸ comes from 8C3 = 56, because with x = 1 in the theorem’s first slot the term is 8C3 · 1⁵ · x³."
+        },
+        {
+          "type": "paragraph",
+          "text": "A word of caution about signs and about two-variable expansions: when the bracket contains a subtraction, the alternating signs of the binomial coefficients’ contributions appear automatically only if you take y as the negative part and remember that odd powers of a negative number are negative. It is safer to carry the sign inside y from the start. In two-variable problems — find the coefficient of x²y³ in (2x − 3y)⁵ — substitute each part into the general term: 5C2 (2x)³(−3y)², giving 10 × 8 × 9 = 720 as the coefficient. Working term by term from the general term, rather than expanding first and then searching, is both faster and less error-prone."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Coefficient of x³ in (1 + x)⁸.",
+              "note": "8C3 = 56 — pick which three factors supply the x."
+            },
+            {
+              "text": "Expand (x + 2)⁴ completely.",
+              "note": "x⁴ + 8x³ + 24x² + 32x + 16, reading row 4 and attaching powers of 2."
+            },
+            {
+              "text": "Coefficient of x²y³ in (2x − 3y)⁵.",
+              "note": "5C2(2x)³(−3y)² = 10 · 8x³ · 9y² — the x²y³ term is 5C3(2x)²(−3y)³ = 10 · 4x² · (−27y³) = −1,080."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "terms",
+      "title": "General and middle term (formative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The formative list adds the general term and the middle term, and both are worth mastering because they turn the theorem into a tool rather than a table. The general term of (x + y)ⁿ, written T(r + 1), is nCr · xⁿ⁻ʳ · yʳ — the (r + 1)-th term, since r counts from 0. Once written down, any specific term is a substitution: to reach the fifth term, set r = 4; to find the coefficient of a particular power, solve for r as in the previous lesson. The extra care needed with indexing — r = 0 produces the first term — is the standard source of off-by-one errors."
+        },
+        {
+          "type": "paragraph",
+          "text": "For an expansion with n + 1 terms, when n is even there is a single middle term, the (n/2 + 1)-th; when n is odd there are two, at positions (n + 1)/2 and (n + 3)/2. So in (x + y)¹⁰ the middle term is the sixth, with r = 5, while in (x + y)⁹ the middle pair are the fifth and sixth, with r = 4 and r = 5. Because this material is assessed formatively, practise it as structural understanding: the middle term sits where the descending and ascending powers meet, which is why its exponents are equal when the two parts of the bracket are compared — a fact that also answers the familiar “term independent of x” questions when they appear."
+        },
+        {
+          "type": "table",
+          "caption": "Middle terms by parity of n",
+          "columns": [
+            "n",
+            "Number of terms",
+            "Middle term(s)",
+            "r values"
+          ],
+          "rows": [
+            [
+              "Even (e.g. 10)",
+              "n + 1 odd",
+              "Single: (n/2 + 1)-th",
+              "r = 5 for n = 10"
+            ],
+            [
+              "Odd (e.g. 9)",
+              "n + 1 even",
+              "Two: (n+1)/2-th and (n+3)/2-th",
+              "r = 4 and 5 for n = 9"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Middle term of (x + y)¹⁰.",
+              "note": "The sixth term: T6 = 10C5 x⁵y⁵ = 252 x⁵y⁵."
+            },
+            {
+              "text": "General term of (1 + x)ⁿ.",
+              "note": "T(r + 1) = nCr · xʳ, since x = 1 raised to any power stays 1."
+            },
+            {
+              "text": "Fourth term of (2x + 1)⁶.",
+              "note": "r = 3: 6C3(2x)³ = 20 · 8x³ = 160x³."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Pascal’s triangle and the expansions it produces",
+      "description": "A triangular array of numbers in five rows, each entry drawn as a node connected by two lines to the pair above it, with each row aligned to its bracket expansion printed alongside and an annotation that each node is the sum of the two above.",
+      "labels": [
+        "Row edges are always 1",
+        "Each node = sum of the two above",
+        "Row n lists nC0 … nCn",
+        "Row sums: powers of 2",
+        "Adjacent sum: nCr + nCr+1 = nC(r+1)"
+      ]
+    },
+    {
+      "caption": "Figure: How one term of the expansion is chosen",
+      "description": "Eight small boxes representing the eight factors of (x + y)⁸, with exactly three of them marked as supplying y and the rest supplying x; an arrow points to the resulting term 8C3 · x⁵ · y³, annotated with the note that choosing which three factors is exactly a combination.",
+      "labels": [
+        "Eight factors of (x + y)",
+        "Choose which r supply y",
+        "The choice is a combination nCr",
+        "The term becomes nCr xⁿ⁻ʳ yʳ",
+        "Sum over all r gives the theorem"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The binomial theorem holds for positive integral exponents.",
+    "(x + y)ⁿ = Σ from r = 0 to n of nCr xⁿ⁻ʳ yʳ.",
+    "Every term has total degree n; powers of x fall while powers of y rise.",
+    "nCr is the coefficient because it counts choices of which factors supply y.",
+    "Pascal’s triangle: each entry is the sum of the two above it.",
+    "The proof runs by induction using nC(r − 1) + nCr = (n + 1)Cr.",
+    "For coefficient questions, write the general term and solve for r.",
+    "Keep the sign inside the bracket term to avoid sign errors.",
+    "The general term is T(r + 1) = nCr xⁿ⁻ʳ yʳ (formative).",
+    "Even n gives one middle term; odd n gives two (formative)."
+  ],
+  "examFocus": [
+    "State x, y and n before expanding — the setup is method marks.",
+    "Coefficient questions: general term first, then solve for r.",
+    "Negative parts inside the bracket: carry the sign through odd powers.",
+    "Middle term: locate by parity of n, then set r accordingly."
+  ],
+  "vocabulary": [
+    {
+      "word": "Binomial",
+      "meaning": "An expression with exactly two terms."
+    },
+    {
+      "word": "Binomial coefficient",
+      "meaning": "The nCr multiplying a term of the expansion."
+    },
+    {
+      "word": "Pascal’s triangle",
+      "meaning": "The triangular array whose rows list nCr."
+    },
+    {
+      "word": "General term",
+      "meaning": "T(r + 1) = nCr xⁿ⁻ʳ yʳ, the term at arbitrary position r + 1."
+    },
+    {
+      "word": "Middle term",
+      "meaning": "The central term(s) of an expansion, located by n’s parity."
+    },
+    {
+      "word": "Positive integral index",
+      "meaning": "A whole-number exponent — the theorem’s stated range."
+    },
+    {
+      "word": "Coefficient extraction",
+      "meaning": "Recovering the multiplier of a chosen power without full expansion."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-bin-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of terms in the expansion of (x + y)⁷ is:",
+      "options": [
+        "8 terms",
+        "7 terms",
+        "14 terms",
+        "128 terms"
+      ],
+      "correctIndex": 0,
+      "answer": "8 terms",
+      "explanation": "An expansion of a positive integer power n has n + 1 terms, one for each r from 0 to n."
+    },
+    {
+      "id": "cbse11-math-bin-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The coefficient of x³y² in (x + y)⁵ is:",
+      "options": [
+        "10",
+        "20",
+        "5",
+        "30"
+      ],
+      "correctIndex": 0,
+      "answer": "10",
+      "explanation": "It is 5C2 = 10 — the r = 2 term supplies y twice and x three times."
+    },
+    {
+      "id": "cbse11-math-bin-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The fourth term of (1 + x)⁶ is:",
+      "options": [
+        "6C3 x³",
+        "6C4 x⁴",
+        "6C3 x⁴",
+        "6C1 x"
+      ],
+      "correctIndex": 0,
+      "answer": "6C3 x³",
+      "explanation": "Terms start at r = 0, so the fourth term has r = 3: 6C3 · 1³ · x³."
+    },
+    {
+      "id": "cbse11-math-bin-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the expansion of (x + y)¹⁰, the middle term is:",
+      "options": [
+        "The fifth term",
+        "The sixth term",
+        "The eleventh term",
+        "The tenth term"
+      ],
+      "correctIndex": 1,
+      "answer": "The sixth term",
+      "explanation": "Even n gives a single middle term at position n/2 + 1 = 6, where r = 5 and the powers of x and y both equal 5."
+    },
+    {
+      "id": "cbse11-math-bin-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The triangle whose rows give the binomial coefficients is called ________ triangle.",
+      "answer": "Pascal’s",
+      "explanation": "Each entry is the sum of the two directly above it."
+    },
+    {
+      "id": "cbse11-math-bin-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "By the theorem, the coefficient of xⁿ⁻ʳyʳ in (x + y)ⁿ is ________ .",
+      "answer": "nCr",
+      "explanation": "It counts the ways of choosing which r factors supply the y."
+    },
+    {
+      "id": "cbse11-math-bin-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the binomial theorem and expand (x + y)³ using it.",
+      "answer": "The binomial theorem states that for any positive integer n, (x + y)ⁿ = Σ from r = 0 to n of nCr · xⁿ⁻ʳ · yʳ. For n = 3 the coefficients are the row 1 3 3 1 of Pascal’s triangle, so the expansion is (x + y)³ = 3C0x³ + 3C1x²y + 3C2xy² + 3C3y³ = x³ + 3x²y + 3xy² + y³. Each term has total degree 3, the powers of x fall from 3 to 0 while the powers of y rise from 0 to 3, and the coefficients 1, 3, 3, 1 match the combinations 1, 3, 3, 1 as the theorem requires.",
+      "explanation": "The formula stated with its range and the expansion with all four terms shown in coefficient form."
+    },
+    {
+      "id": "cbse11-math-bin-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the coefficient of x⁴ in the expansion of (1 + 2x)⁷.",
+      "answer": "Apply the theorem with x-part = 1, y-part = 2x and n = 7. The general term is T(r + 1) = 7Cr · 1⁷⁻ʳ · (2x)ʳ = 7Cr · 2ʳ · xʳ. To obtain x⁴ set r = 4: T5 = 7C4 · 2⁴ · x⁴ = 35 · 16 · x⁴ = 560x⁴. The coefficient is therefore 560. Note the two multiplications that are easy to separate: the binomial coefficient 7C4 = 35 counts the selections, and the factor 2⁴ = 16 comes from the coefficient inside the bracket raised to the same power — forgetting the second is the usual error.",
+      "explanation": "The general term written with 2x substituted, r = 4 identified, and both 7C4 and 2⁴ evaluated in the final product."
+    },
+    {
+      "id": "cbse11-math-bin-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that the sum of the coefficients in the expansion of (1 + x)ⁿ is 2ⁿ, and use it to find the sum of ⁸C0 + ⁸C1 + … + ⁸C8.",
+      "answer": "Setting x = 1 in the identity (1 + x)ⁿ = Σ nCr xʳ gives 2ⁿ = Σ from r = 0 to n of nCr, which is exactly the claim: the left side evaluates (1 + 1)ⁿ and the right side collects all the binomial coefficients, each multiplied by 1ʳ = 1. So the sum of the coefficients of (1 + x)ⁿ is 2ⁿ. Applying it with n = 8: ⁸C0 + ⁸C1 + … + ⁸C8 = 2⁸ = 256. As a verification, the individual values are 1 + 8 + 28 + 56 + 70 + 56 + 28 + 8 + 1, whose running totals are 1, 9, 37, 93, 163, 219, 247, 255, 256 — matching 256, and the symmetry about the central 70 confirms the arithmetic. The same substitution with x = −1 yields the alternating sum, 0, which is worth noting as the companion identity.",
+      "explanation": "The substitution x = 1 derived from the theorem, the value 2⁸, and the arithmetic verification with the individual coefficients."
+    },
+    {
+      "id": "cbse11-math-bin-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The theorem is stated for positive integral n. What goes wrong for a fractional exponent such as (1 + x)^½, and what does that tell you about why the syllabus states the range it does?",
+      "answer": "The proof and the formula both depend on n being a positive integer in three specific places. First, the induction proof advances from one whole-number power to the next: the step multiplies (x + y)ᵏ by (x + y) and uses the Pascal identity to recombine coefficients, a process that requires the exponent to move through the integers. Second, the binomial coefficient nCr = n!/(r!(n − r)!) is defined by factorials, and factorials count selections — there is no such thing as choosing a fractional number of objects, so the coefficients themselves are undefined. Third, the expansion has exactly n + 1 terms with exponents descending from n to 0 by whole steps; a fractional exponent permits neither a last term nor the descending ladder, since (1 + x)^½ expanded by the same pattern would need terms with exponents ½, 0, −½, −1, … — an infinite series rather than a finite sum. That is precisely what happens: for non-integral exponents the binomial theorem becomes an infinite series, convergent only when |x| < 1, which is a topic beyond this course. The lesson about the syllabus statement is therefore substantive rather than timid: the qualifier positive integral index marks the exact boundary at which the finite formula, the factorial coefficients and the induction proof all hold simultaneously — inside that boundary the theorem is exact and finite, outside it a different and more delicate theory is required.",
+      "explanation": "Full marks require the three specific dependencies named (induction step, factorial coefficients, finite term count), the observation that the pattern continues as an infinite series, and a judgement about what the stated range is protecting."
+    }
+  ]
+}

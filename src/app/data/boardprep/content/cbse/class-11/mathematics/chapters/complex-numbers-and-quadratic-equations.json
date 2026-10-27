@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-complex",
+  "title": "Complex Numbers and Quadratic Equations",
+  "kind": "mathematics",
+  "tagline": "Why √−1 must exist: algebraic operations, the Argand plane, and quadratics that only the complex system can solve.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "The chapter begins with a gap in the real numbers: equations such as x² + 4 = 0 have no real solution because no real square is negative. Rather than leave those equations unsolvable, the syllabus introduces the imaginary unit i with i² = −1 and builds the complex numbers a + bi, in which the reals sit along one axis and the newly needed dimension along another. The unit then develops the algebra of these numbers — addition, multiplication, conjugates and modulus — and locates them geometrically in the Argand plane, before closing with the formative-only topics the syllabus attaches: polar representation, the Fundamental Theorem of Algebra, and the solution of quadratics with real coefficients inside the complex system.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Algebra (25 marks shared with the other Algebra chapters)."
+      },
+      {
+        "label": "The unit",
+        "value": "i = √−1 with i² = −1; powers cycle i, −1, −i, 1 with period 4."
+      },
+      {
+        "label": "Standard form",
+        "value": "z = a + bi, with a the real part and b the imaginary part; conjugate a − bi and modulus √(a² + b²)."
+      },
+      {
+        "label": "Formative topics",
+        "value": "Polar representation, the Fundamental Theorem of Algebra, and solving real-coefficient quadratics in the complex system."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Motivate complex numbers from unsolvable quadratic equations.",
+    "Add, subtract, multiply and divide complex numbers in standard form.",
+    "Use the conjugate to rationalise a denominator.",
+    "Locate complex numbers in the Argand plane and compute their modulus.",
+    "Solve quadratics with real coefficients, giving complex roots in conjugate pairs."
+  ],
+  "learn": [
+    {
+      "id": "need",
+      "title": "The need for i, and the algebra it enables",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Within the real numbers every square is non-negative, so x² = −4 has no solution — not because the equation is malformed but because the number system is too small for it. adjoining a symbol i defined by i² = −1 repairs the gap without breaking anything: the extended numbers, called complex numbers, take the form a + bi with a and b real, and they inherit the full rules of arithmetic — you add and multiply exactly as you would with two terms, remembering to replace i² by −1 wherever it appears. The powers of i then cycle: i, −1, −i, 1, and every higher power reduces to one of these four by dividing the exponent by 4 and keeping the remainder."
+        },
+        {
+          "type": "paragraph",
+          "text": "The set-up has a structural payoff. Two complex numbers a + bi and c + di are equal precisely when their real parts match and their imaginary parts match — two equations hiding inside one — which is how simultaneous equations in complex form are solved. Subtraction follows addition; multiplication uses distributivity and the collapse i² = −1; and division is tamed by the conjugate: multiplying numerator and denominator by the conjugate of the denominator makes the denominator real, because (a + bi)(a − bi) = a² + b², a sum of squares that cannot vanish unless both parts do. Every division of complex numbers therefore ends as a single fraction with a real bottom."
+        },
+        {
+          "type": "table",
+          "caption": "The first powers of i and the standard operations",
+          "columns": [
+            "Expression",
+            "Simplifies to",
+            "Rule used"
+          ],
+          "rows": [
+            [
+              "i¹, i², i³, i⁴",
+              "i, −1, −i, 1",
+              "Cycle of period 4"
+            ],
+            [
+              "(a + bi) + (c + di)",
+              "(a + c) + (b + d)i",
+              "Add parts"
+            ],
+            [
+              "(a + bi)(a − bi)",
+              "a² + b²",
+              "Conjugate product"
+            ],
+            [
+              "1 / (a + bi)",
+              "(a − bi)/(a² + b²)",
+              "Multiply by conjugate"
+            ],
+            [
+              "i⁴⁵",
+              "i",
+              "45 = 4 × 11 + 1, remainder 1"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Simplify (2 + 3i)(1 − 4i).",
+              "note": "2 − 8i + 3i − 12i² = 14 − 5i, since i² = −1 adds 12."
+            },
+            {
+              "text": "Evaluate i⁴⁵.",
+              "note": "Remainder 1 on division by 4, so i⁴⁵ = i."
+            },
+            {
+              "text": "Divide (3 + 2i)/(1 + i).",
+              "note": "Multiply by (1 − i)/(1 − i): (3 + 2i)(1 − i)/2 = (5 + i)/2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "argand",
+      "title": "The Argand plane: modulus, conjugate and geometry",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Plotting z = a + bi at the point (a, b) turns complex arithmetic into geometry, and this picture — the Argand plane — is what makes the numbers intuitive. The horizontal axis carries the reals, the vertical the pure imaginaries, and every complex number claims exactly one point. The modulus |z| = √(a² + b²) is then simply the distance from the origin, the same expression Pythagoras gives for the point, and the argument — the angle the ray to the point makes with the positive real axis — is the quantity that the formative polar representation will use: z = r(cos θ + i sin θ) with r the modulus."
+        },
+        {
+          "type": "paragraph",
+          "text": "The conjugate a − bi is the reflection of z across the real axis, and three of its properties recur constantly: the product of a number and its conjugate is the squared modulus, the conjugate of a sum is the sum of the conjugates, and a complex number is real exactly when it equals its own conjugate. Geometric readings settle many questions quickly — |z₁ − z₂| is the distance between two points, the condition |z| = 2 is a circle, and z + z̄ = 2a extracts the real part. The syllabus keeps the Argand plane to the main list while polar form sits in the formative list, so the emphasis is on reading modulus and position confidently rather than on heavy calculation in polar coordinates."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "z = a + bi plots at (a, b); reals lie on the horizontal axis.",
+            "Modulus = distance from the origin: √(a² + b²).",
+            "Conjugate = reflection in the real axis; z is real iff z = z̄.",
+            "z · z̄ = a² + b² = |z|².",
+            "|z₁ − z₂| is the distance between the two points."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quadratics",
+      "title": "Quadratic equations in the complex system (with formative extensions)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The main-list treatment: a quadratic ax² + bx + c = 0 with a ≠ 0 has the familiar formula x = (−b ± √(b² − 4ac))/(2a), and the discriminant Δ = b² − 4ac decides what the roots look like. When Δ > 0 the roots are real and distinct; when Δ = 0 they coincide; when Δ < 0 the square root is of a negative number, and the complex system converts an unsolvable equation into two solutions. Because the syllabus specifies quadratics with real coefficients, the two roots always appear as a conjugate pair — if p + qi is a root, so is p − qi — a fact that lets you reconstruct a quadratic from its roots without seeing the original."
+        },
+        {
+          "type": "paragraph",
+          "text": "The formative list adds two completions. The Fundamental Theorem of Algebra, stated rather than proved at this level, guarantees that a polynomial of degree n has exactly n complex roots counted with multiplicity, so no equation of positive degree is left rootless once the complex numbers are admitted. And polar representation expresses any non-zero z as r(cos θ + i sin θ), which is the form that makes multiplication transparent — multiply moduli, add arguments — and which sets up every later use of complex numbers in higher mathematics. Both are taught here as understanding, in keeping with the syllabus’s formative placement."
+        },
+        {
+          "type": "table",
+          "caption": "Discriminant and what it promises",
+          "columns": [
+            "Δ = b² − 4ac",
+            "Roots of a real-coefficient quadratic",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Δ > 0",
+              "Two distinct real roots",
+              "x² − 5x + 6 = 0 → 2, 3"
+            ],
+            [
+              "Δ = 0",
+              "One repeated real root",
+              "x² − 4x + 4 = 0 → 2, 2"
+            ],
+            [
+              "Δ < 0",
+              "Conjugate pair of complex roots",
+              "x² + 4 = 0 → 2i, −2i"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve x² + 4 = 0.",
+              "note": "x² = −4, so x = ±√(−4) = ±2i — no real solution exists, but two complex ones do."
+            },
+            {
+              "text": "Solve x² − 2x + 5 = 0.",
+              "note": "Δ = 4 − 20 = −16 < 0; x = (2 ± 4i)/2 = 1 ± 2i, a conjugate pair."
+            },
+            {
+              "text": "Form the quadratic with roots 3 + i and 3 − i.",
+              "note": "Sum 6, product 10, so x² − 6x + 10 = 0 (real coefficients)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam",
+      "title": "Exam craft: complex arithmetic without avoidable slips",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Marks in this chapter are lost to arithmetic discipline rather than to difficulty. The recurring slips are leaving i² as −1 instead of −1, forgetting to conjugate both parts of a fraction, taking the modulus of only the real part, and writing the root pair without checking that the coefficients came out real. A compact routine prevents each: expand with distributivity, replace every i² immediately, conjugate for division, and verify at the end that your quadratic’s coefficients are real — if they are not, an error occurred earlier."
+        },
+        {
+          "type": "paragraph",
+          "text": "For written answers, structure earns method marks: state the standard form a + bi before simplifying, name the conjugate you are multiplying by, and for a solve-the-equation question show the discriminant before the formula so the reader can see why complex roots were expected. Interpretation questions — what does |z| = 3 mean geometrically, why are the coefficients real — reward the Argand picture, so keep that diagram in mind during revision. The worked examples in this chapter are the exact pattern to imitate: form, substitute, simplify with i² = −1, then interpret."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Replace i² by −1 at the moment it appears — never leave it pending.",
+            "Conjugate both parts when clearing a complex denominator.",
+            "Modulus uses both parts: √(a² + b²), not just a.",
+            "Check your quadratic’s coefficients are real before submitting.",
+            "For Δ < 0, state the conjugate-pair property explicitly."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The Argand plane",
+      "description": "Perpendicular axes labelled Re (real) and Im (imaginary) with the point a + bi plotted, a dashed line from the origin to the point marked r = |z| with √(a² + b²) beside it, its reflection a − bi marked below the real axis, and the angle θ against the positive real axis labelled as the argument.",
+      "labels": [
+        "Horizontal axis: real parts",
+        "Vertical axis: imaginary parts",
+        "Point (a, b) represents z = a + bi",
+        "Length from origin: modulus r",
+        "Mirror image across the real axis: the conjugate z̄"
+      ]
+    },
+    {
+      "caption": "Figure: Where the roots of a quadratic land",
+      "description": "Three mini number lines and planes side by side: Δ > 0 with two points on the real line, Δ = 0 with one point, and Δ < 0 with two points off the line forming a conjugate pair above and below the axis, each panel captioned with its discriminant condition.",
+      "labels": [
+        "Δ > 0: two distinct real roots",
+        "Δ = 0: repeated root at −b/2a",
+        "Δ < 0: conjugate pair off the real axis",
+        "Symmetry across the axis: equal real parts",
+        "Real coefficients force the pair"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "i² = −1; powers of i cycle i, −1, −i, 1 with period 4.",
+    "z = a + bi: a is the real part, b the imaginary part.",
+    "Equality of complex numbers means equality of both parts.",
+    "(a + bi)(a − bi) = a² + b² — the basis of division by conjugate.",
+    "The Argand plane plots z at (a, b); the modulus is the distance from the origin.",
+    "z̄ is the reflection across the real axis; z is real iff z = z̄.",
+    "Δ = b² − 4ac classifies roots: positive real, zero repeated, negative conjugate pair.",
+    "A real-coefficient quadratic with Δ < 0 has roots that are conjugates of each other.",
+    "The Fundamental Theorem of Algebra: degree n gives n complex roots (formative).",
+    "Polar form z = r(cos θ + i sin θ) — multiply moduli, add arguments (formative)."
+  ],
+  "examFocus": [
+    "Show the standard form before simplifying; method marks live in the structure.",
+    "Conjugate for division, and check the final coefficients are real.",
+    "State the discriminant before applying the formula when Δ < 0 is possible.",
+    "Argand questions: translate modulus statements into distances or circles."
+  ],
+  "vocabulary": [
+    {
+      "word": "Imaginary unit (i)",
+      "meaning": "The symbol with i² = −1."
+    },
+    {
+      "word": "Complex number",
+      "meaning": "A number a + bi with a, b real."
+    },
+    {
+      "word": "Real / imaginary part",
+      "meaning": "The a and b of a + bi respectively."
+    },
+    {
+      "word": "Conjugate (z̄)",
+      "meaning": "a − bi: reflection of z in the real axis."
+    },
+    {
+      "word": "Modulus (|z|)",
+      "meaning": "√(a² + b²), the distance from the origin."
+    },
+    {
+      "word": "Argand plane",
+      "meaning": "The plane with reals on x and imaginaries on y."
+    },
+    {
+      "word": "Discriminant",
+      "meaning": "b² − 4ac, which fixes the nature of the roots."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-cx-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of i⁴ is:",
+      "options": [
+        "−1",
+        "+1",
+        "i",
+        "−i"
+      ],
+      "correctIndex": 1,
+      "answer": "+1",
+      "explanation": "The powers cycle with period 4, so i⁴ = 1 — divide the exponent by 4 and keep the remainder."
+    },
+    {
+      "id": "cbse11-math-cx-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The conjugate of 3 − 5i is:",
+      "options": [
+        "−3 + 5i",
+        "3 + 5i",
+        "5 + 3i",
+        "−3 − 5i"
+      ],
+      "correctIndex": 1,
+      "answer": "3 + 5i",
+      "explanation": "The conjugate flips the sign of the imaginary part only, reflecting the point across the real axis."
+    },
+    {
+      "id": "cbse11-math-cx-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The modulus of 1 − 2i equals:",
+      "options": [
+        "√3",
+        "3",
+        "√5",
+        "5"
+      ],
+      "correctIndex": 2,
+      "answer": "√5",
+      "explanation": "|z| = √(1² + (−2)²) = √5, the distance of the point (1, −2) from the origin."
+    },
+    {
+      "id": "cbse11-math-cx-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If 2 + 3i is a root of a quadratic with real coefficients, the other root must be:",
+      "options": [
+        "−2 + 3i",
+        "2 − 3i",
+        "−2 − 3i",
+        "any real number"
+      ],
+      "correctIndex": 1,
+      "answer": "2 − 3i",
+      "explanation": "Real coefficients force roots into conjugate pairs, so 2 − 3i accompanies it — equivalently the sum 4 and the product 13 are both real."
+    },
+    {
+      "id": "cbse11-math-cx-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The equation x² = −1 has no real solution, so the unit i is defined by i² = ________ .",
+      "answer": "−1",
+      "explanation": "This single definition makes every negative square root expressible."
+    },
+    {
+      "id": "cbse11-math-cx-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a quadratic with real coefficients, a negative discriminant gives a pair of ________ roots.",
+      "answer": "complex",
+      "explanation": "Conjugate complex roots — the pair mirrors across the real axis."
+    },
+    {
+      "id": "cbse11-math-cx-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Express (3 + 2i) + (1 − 5i) and (3 + 2i)(1 − 5i) in standard form.",
+      "answer": "Addition joins like parts: (3 + 1) + (2 − 5)i = 4 − 3i. Multiplication uses distributivity: (3 + 2i)(1 − 5i) = 3 − 15i + 2i − 10i² = 3 − 13i + 10 = 13 − 13i, since i² = −1 turns −10i² into +10. Both answers are in the standard form a + bi with integer parts.",
+      "explanation": "Both products in a + bi form, with the i² = −1 substitution shown in the multiplication."
+    },
+    {
+      "id": "cbse11-math-cx-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve x² − 6x + 13 = 0 and verify your roots by substitution.",
+      "answer": "Apply the formula with a = 1, b = −6, c = 13: the discriminant is 36 − 52 = −16, which is negative, so the roots are complex. x = (6 ± √(−16))/2 = (6 ± 4i)/2 = 3 ± 2i. Verification: substitute x = 3 + 2i — x² = 9 + 12i + 4i² = 5 + 12i, so x² − 6x + 13 = 5 + 12i − 18 − 6i + 13 = 0 + 0i = 0 ✓. By conjugate symmetry, 3 − 2i also satisfies the equation. Note also that the roots sum to 6 and multiply to 9 + 4 = 13, matching the coefficients — Vieta’s check in complex dress.",
+      "explanation": "The discriminant stated, both roots, and one full substitution check — the sum/product check earns the remaining credit."
+    },
+    {
+      "id": "cbse11-math-cx-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Define the Argand plane and the modulus. Show that |z₁z₂| = |z₁||z₂| for z₁ = 3 + 4i and z₂ = 1 − 2i, and interpret the result geometrically.",
+      "answer": "The Argand plane represents the complex number z = a + bi by the point (a, b), with the horizontal axis carrying real parts and the vertical axis imaginary parts; the modulus |z| = √(a² + b²) is the distance of that point from the origin. Compute the product first: (3 + 4i)(1 − 2i) = 3 − 6i + 4i − 8i² = 11 − 2i. Its modulus is √(121 + 4) = √125 = 5√5. Separately, |z₁| = √(9 + 16) = 5 and |z₂| = √(1 + 4) = √5, so |z₁||z₂| = 5√5. The two agree, confirming |z₁z₂| = |z₁||z₂| for this pair. Geometric interpretation: multiplying z₁ by z₂ scales the distance from the origin by |z₂| = √5 and rotates the ray by the argument of z₂, since arguments add under multiplication — so products act as combined scaling and rotation, and the modulus relation is the scaling half of that statement. The general proof follows the same pattern on symbols: expand the product, collect real and imaginary parts, and use the identity (ac − bd)² + (ad + bc)² = (a² + b²)(c² + d²).",
+      "explanation": "Definition, both computations shown, the equality, and the scaling-plus-rotation reading of multiplication."
+    },
+    {
+      "id": "cbse11-math-cx-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why every quadratic with real coefficients can be solved in the complex number system, and why its non-real roots come in conjugate pairs. What does the Fundamental Theorem of Algebra add?",
+      "answer": "First — solvability: the formula x = (−b ± √(b² − 4ac))/(2a) requires only square roots, and the complex numbers close the reals under square roots of negatives: when the discriminant is negative, √(−d) = i√d exists, so the formula always yields two values in ℂ whatever sign Δ carries. Nothing beyond arithmetic and the definition i² = −1 is invoked, which is why the system is closed under the operation the quadratic demands. Second — the pairing: let the coefficients be real and suppose p + qi (with q ≠ 0) is a root. Substituting and separating real and imaginary parts gives two real equations; conjugating the whole equation and using that the coefficients equal their own conjugates shows directly that p − qi satisfies the same equation. Equivalently, if p + qi is a root then the factor (x − (p + qi)) divides the polynomial, and since the coefficients are real its conjugate factor (x − (p − qi)) must divide it too — a single non-real factor could never produce real coefficients when multiplied out. Concretely, x² − 6x + 13 = 0 has roots 3 ± 2i: their sum 6 and product 13 are exactly the real coefficients. Third — what the Fundamental Theorem adds: the quadratic case is settled by the formula alone, but the theorem generalises the guarantee to every polynomial of degree n, asserting exactly n complex roots counted with multiplicity. That converts the complex numbers from a clever repair for one equation into an algebraically closed setting where no polynomial equation is ever without a solution — which is precisely why the theorem is stated as part of the syllabus’s formative extension, where the idea matters more than the proof.",
+      "explanation": "Full marks require the closure argument from the formula, the pairing argument (conjugation or factor divisibility), and a clear statement of what the Fundamental Theorem guarantees beyond quadratics."
+    }
+  ]
+}

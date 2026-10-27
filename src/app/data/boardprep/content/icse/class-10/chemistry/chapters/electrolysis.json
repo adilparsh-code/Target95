@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-chem-electrolysis",
+  "title": "Electrolysis",
+  "kind": "chemistry",
+  "tagline": "Ions on the move: which ions discharge at which electrode, and how that drives the chlor-alkali process and electroplating.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ICSE Chemistry syllabus for Examination Year 2027 (CISCE Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ICSE Chemistry syllabus for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Electrolysis is the decomposition of an electrolyte by the passage of electric current, and everything in this unit follows from one simple picture: positive ions drift to the cathode, negative ions drift to the anode, and each gives up or takes electrons at the electrode surface. On top of that picture sit three ideas the examination always tests — which ion discharges when several are present, what mass is deposited for a given charge, and how the process is used industrially. Learn the picture, then the exceptions.",
+    "facts": [
+      {
+        "label": "Electrolytic cell",
+        "value": "Contains the electrolyte, a direct-current source and two electrodes."
+      },
+      {
+        "label": "Cathode",
+        "value": "Negative electrode; cations migrate to it and gain electrons."
+      },
+      {
+        "label": "Anode",
+        "value": "Positive electrode; anions migrate to it and lose electrons."
+      },
+      {
+        "label": "Faraday’s laws",
+        "value": "Mass deposited is proportional to the quantity of electricity passed."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe the electrolytic cell and state the direction of migration of cations and anions.",
+    "Explain preferential discharge and predict the products of electrolysis for named molten and aqueous electrolytes.",
+    "Write the half-equations at each electrode for standard electrolysis cases.",
+    "Apply Faraday’s laws to relate charge passed to mass deposited.",
+    "Describe the chlor-alkali process, the purification of copper and electroplating, with the conditions used in each."
+  ],
+  "learn": [
+    {
+      "id": "cell-and-migration",
+      "title": "The cell, the electrodes and where each ion goes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electrolysis needs three things: a substance that conducts only when molten or dissolved, because its ions are free to move; two electrodes connected to a direct-current supply; and a circuit that lets electrons flow through the external wires while ions carry the charge inside the liquid. The battery pulls electrons towards the cathode, making it negative, and pulls them away from the anode, making it positive. Cations are therefore attracted to the cathode, where they gain electrons and are reduced, while anions travel to the anode, where they lose electrons and are oxidised. The electrode names date from this arrangement: cathode carries current into the electrolyte and anode carries it away, and the oxidation always happens at the anode, which is the mnemonic students find most reliable."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cations migrate to the negative cathode and are reduced by gaining electrons.",
+            "Anions migrate to the positive anode and are oxidised by losing electrons.",
+            "The electrolyte conducts because its ions move; the electrodes conduct because they are metals or graphite.",
+            "Electrons travel only through the external circuit — inside the electrolyte it is ions that carry the charge."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Molten lead(II) bromide",
+              "note": "Pb2+ ions move to the cathode and gain two electrons to give lead metal; Br- ions move to the anode and lose electrons to give bromine vapour."
+            },
+            {
+              "text": "Copper electrode in copper sulphate solution",
+              "note": "Copper ions are discharged at the cathode while the copper anode dissolves, keeping the concentration steady."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Electrolysis",
+              "meaning": "Decomposition of an electrolyte by an electric current passing through it."
+            },
+            {
+              "term": "Electrolyte",
+              "meaning": "Substance that conducts electricity when molten or in solution because it produces ions."
+            },
+            {
+              "term": "Cathode",
+              "meaning": "Negative electrode to which cations migrate; reduction occurs there."
+            },
+            {
+              "term": "Anode",
+              "meaning": "Positive electrode to which anions migrate; oxidation occurs there."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "preferential-discharge",
+      "title": "Preferential discharge: which ion actually reacts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A solution usually contains several kinds of ion, and only one can be discharged at each electrode. The order of discharge depends mainly on the ease with which each ion gains or loses electrons, modified by concentration and by the nature of the electrode surface. At the cathode, less reactive metals and hydrogen are discharged in preference to the ions of reactive metals such as sodium. At the anode, halide ions and hydroxide ions compete, and raising the halide concentration favours the halide, which is why concentrated brine yields chlorine while dilute solutions yield oxygen. Two further rules matter for answers: a metal is never liberated from an aqueous solution of a salt if the metal is above hydrogen in the reactivity series, and silver and copper are the exceptions that can be discharged from solution even though they are displaced by hydrogen in chemical terms."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "At the cathode, discharge order roughly follows: silver and copper first, then hydrogen, with sodium and potassium never discharged from aqueous solution.",
+            "At the anode, concentrated halide solutions give the halogen; dilute solutions give oxygen from hydroxide ions.",
+            "The electrode material can matter, because overvoltage makes some gases harder to discharge than theory predicts.",
+            "Concentration changes the winner: the more concentrated an ion is, the more likely it is to be discharged."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Concentrated sodium chloride solution",
+              "note": "Chlorine is discharged at the anode rather than hydroxide because chloride ions are far more abundant."
+            },
+            {
+              "text": "Dilute sodium sulphate solution",
+              "note": "No halide is present, so hydroxide ions discharge at the anode giving oxygen, and hydrogen is given off at the cathode."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Predicted products of electrolysis",
+          "columns": [
+            "Electrolyte",
+            "Cathode product",
+            "Anode product",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Molten lead(II) bromide",
+              "Lead metal",
+              "Bromine vapour",
+              "No water present to compete"
+            ],
+            [
+              "Concentrated brine",
+              "Hydrogen",
+              "Chlorine",
+              "Sodium stays in solution; hydroxide forms too"
+            ],
+            [
+              "Dilute sulphuric acid",
+              "Hydrogen",
+              "Oxygen",
+              "Water electrolysis in effect"
+            ],
+            [
+              "Aqueous copper(II) sulphate with copper electrodes",
+              "Copper",
+              "Copper dissolves at anode",
+              "Concentration unchanged"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faraday-laws",
+      "title": "Faraday’s laws and the arithmetic of deposition",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Faraday’s first law says that the mass of substance deposited or liberated at an electrode is directly proportional to the quantity of electricity passed. The second law says that for the same quantity of electricity the masses deposited are proportional to the chemical equivalent of each substance, which is the atomic mass divided by the valence. In practice one faraday, 96 500 coulombs, deposits one mole of a singly charged ion, half a mole of a doubly charged ion and so on. The working recipe is fixed: convert time to seconds, multiply by current to get coulombs, divide by 96 500 to get faradays, then multiply by the equivalent weight to get grams. Charge is what matters, not voltage, so a long low current deposits more than a brief high one."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mass is proportional to charge, not to time alone or current alone.",
+            "Equivalent weight = atomic mass ÷ valence, so silver deposits faster per coulomb than copper because its equivalent is higher.",
+            "One faraday deposits one gram-equivalent of any substance.",
+            "Time must be converted to seconds before multiplying by amperes to obtain coulombs."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Passing 2 A for 30 minutes",
+              "note": "Charge = 2 × 1800 = 3600 C, which is 3600 ÷ 96 500 faradays, about 0.037 of a faraday."
+            },
+            {
+              "text": "Depositing copper from Cu2+",
+              "note": "One faraday deposits half a mole of copper, because each ion needs two electrons."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Faraday",
+              "meaning": "Quantity of electricity equal to 96 500 coulombs, the charge on one mole of electrons."
+            },
+            {
+              "term": "Equivalent weight",
+              "meaning": "Atomic mass divided by valence; the mass deposited by one faraday."
+            },
+            {
+              "term": "Coulomb",
+              "meaning": "Unit of charge equal to one ampere flowing for one second."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uses-chlor-alkali-plating",
+      "title": "Industrial uses: chlor-alkali, purified copper and plating",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The chlor-alkali process electrolyses concentrated brine to make three saleable products: chlorine at the anode, hydrogen at the cathode and sodium hydroxide left in solution because sodium ions are never discharged from water. Modern plants use a membrane cell that keeps the products apart, so the alkali stays pure. Copper purification uses the same current for two jobs: the anode is impure copper which dissolves, and the cathode is pure copper onto which copper ions deposit, leaving the impurities behind as anode slime. Electroplating coats one metal with another for appearance or protection — silver on cutlery, tin on steel for food contact, chromium on car trim — and requires a clean article as cathode, a coating metal as anode, and a solution containing ions of the coating metal. Cyanide baths once gave the smoothest silver plates because they keep a low free-ion concentration; safer complex baths are now preferred."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Chlor-alkali products: chlorine, hydrogen and sodium hydroxide, from concentrated brine only.",
+            "Copper refining: impure anode dissolves, pure copper plates onto the cathode, impurities settle as slime.",
+            "Electroplating requires the article to be the cathode, since reduction must deposit the metal onto it.",
+            "Plating protects against corrosion and improves appearance; tin on steel prevents iron from contacting food acids."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Silver plating a spoon",
+              "note": "The spoon is the cathode, a silver rod is the anode, and the electrolyte is a silver salt solution; silver plates onto the spoon."
+            },
+            {
+              "text": "Refining copper",
+              "note": "Anode loses copper into solution while an equal mass of pure copper builds up on the cathode over the same time."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Three electrolytic industries",
+          "columns": [
+            "Process",
+            "Anode",
+            "Cathode",
+            "Electrolyte",
+            "Main product"
+          ],
+          "rows": [
+            [
+              "Chlor-alkali",
+              "Graphite or titanium",
+              "Hydrogen evolve",
+              "Concentrated brine",
+              "Sodium hydroxide with Cl2 and H2"
+            ],
+            [
+              "Copper refining",
+              "Impure copper",
+              "Pure copper",
+              "Acidified copper sulphate",
+              "Cathode copper over 99.9 % pure"
+            ],
+            [
+              "Electroplating",
+              "Coating metal",
+              "Article to be plated",
+              "Solution of coating metal ions",
+              "Thin uniform coating"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "answers-that-score",
+      "title": "Writing electrolysis answers that earn full marks",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electrolysis answers lose marks in predictable ways: naming the wrong electrode, forgetting to say gained or lost electrons, or describing a process without the half-equation that proves it. A full answer names the electrode, states which ion arrives there, says whether it gains or loses electrons, gives the product, and writes the half-equation. For aqueous solutions, add one sentence about why the other ion was not discharged, because that is where the examiner looks for understanding of preferential discharge. For calculations, state the formula you are using before substituting, and give the answer to a sensible number of significant figures with its unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Always name the electrode as well as the ion: at the anode, not simply at the positive end.",
+            "Say gained or lost electrons, then write the half-equation, for example Cu2+ + 2e- → Cu.",
+            "In aqueous cases, explain which ion lost the competition and why — concentration is usually the reason.",
+            "In numerical work, quote the charge in coulombs, convert to faradays, then use the equivalent weight."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Describing the anode reaction in brine",
+              "note": "Chloride ions are concentrated, so they lose electrons: 2Cl- → Cl2 + 2e-, chlorine being evolved."
+            },
+            {
+              "text": "Explaining why sodium is not deposited",
+              "note": "Water’s hydrogen ions discharge more easily than sodium ions from aqueous solution, so hydrogen is evolved instead."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Half-equation",
+              "meaning": "Equation showing what happens to one ion at one electrode, including its electrons."
+            },
+            {
+              "term": "Overvoltage",
+              "meaning": "Extra voltage needed beyond theory because a product is hard to discharge on a given electrode."
+            },
+            {
+              "term": "Anode slime",
+              "meaning": "Insoluble impurities that fall from the impure copper anode during refining."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Electrolysis of molten lead(II) bromide",
+      "description": "A cell with a battery, a graphite cathode and anode dipping into molten lead(II) bromide, with Pb2+ ions shown moving to the cathode and Br- ions moving to the anode, lead collecting at the cathode and brown bromine vapour at the anode.",
+      "labels": [
+        "cathode: Pb2+ + 2e- → Pb",
+        "anode: 2Br- → Br2 + 2e-",
+        "cations move to cathode",
+        "anions move to anode",
+        "electron flow shown outside the cell"
+      ]
+    },
+    {
+      "caption": "Figure: Membrane cell for the chlor-alkali process",
+      "description": "Brine entering one compartment, chlorine gas leaving near the graphite anode, hydrogen leaving near the cathode, and sodium hydroxide solution drawn off from the cathode compartment with a cation-exchange membrane separating the two sides.",
+      "labels": [
+        "concentrated brine feed",
+        "Cl2 at anode",
+        "H2 at cathode",
+        "NaOH solution collected",
+        "cation-exchange membrane"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Electrolysis decomposes an electrolyte by current; ions carry charge inside the cell, electrons outside it.",
+    "Cations go to the cathode and are reduced; anions go to the anode and are oxidised.",
+    "From aqueous solution, hydrogen rather than a reactive metal is discharged at the cathode.",
+    "Concentrated halide solutions give halogen at the anode; dilute solutions give oxygen from hydroxide.",
+    "Faraday’s first law: mass deposited is proportional to the charge passed.",
+    "One faraday, 96 500 C, deposits one gram-equivalent of any substance.",
+    "The chlor-alkali process gives chlorine, hydrogen and sodium hydroxide from concentrated brine.",
+    "Copper refining uses an impure anode and a pure cathode in acidified copper sulphate.",
+    "Electroplating needs the object as cathode and an electrolyte containing ions of the coating metal.",
+    "Half-equations must show electrons explicitly: gained at the cathode, lost at the anode."
+  ],
+  "examFocus": [
+    "Name the electrode, the ion, the electron change, the product and the half-equation — that five-part answer is the marking scheme.",
+    "Explain non-discharge as well as discharge: say which ion lost the competition and on what grounds.",
+    "For Faraday calculations, convert time to seconds first, then coulombs, then faradays, then grams.",
+    "Industrial questions expect conditions: concentrated brine, membrane cell, clean article as cathode."
+  ],
+  "vocabulary": [
+    {
+      "word": "Electrolyte",
+      "meaning": "A substance that conducts when molten or dissolved because it contains free ions."
+    },
+    {
+      "word": "Preferential discharge",
+      "meaning": "Preference shown by an electrode for one kind of ion when several are present."
+    },
+    {
+      "word": "Faraday",
+      "meaning": "96 500 coulombs of charge, the charge carried by one mole of electrons."
+    },
+    {
+      "word": "Equivalent weight",
+      "meaning": "Atomic mass divided by valence; the mass deposited by one faraday."
+    },
+    {
+      "word": "Cathode",
+      "meaning": "Negative electrode where reduction takes place."
+    },
+    {
+      "word": "Anode",
+      "meaning": "Positive electrode where oxidation takes place."
+    },
+    {
+      "word": "Overvoltage",
+      "meaning": "Additional voltage required beyond the theoretical value to discharge a product."
+    },
+    {
+      "word": "Electrorefining",
+      "meaning": "Purification of a metal by electrolysis using an impure anode and a pure cathode."
+    }
+  ],
+  "questions": [
+    {
+      "id": "chem-electro-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "During electrolysis, cations migrate towards the:",
+      "options": [
+        "Anode",
+        "Cathode",
+        "Electrolyte surface",
+        "Battery positive terminal"
+      ],
+      "correctIndex": 1,
+      "answer": "Cathode",
+      "explanation": "Cations are positive and are attracted to the negative cathode, where they gain electrons."
+    },
+    {
+      "id": "chem-electro-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Electrolysis of concentrated aqueous sodium chloride gives at the anode:",
+      "options": [
+        "Hydrogen",
+        "Oxygen",
+        "Chlorine",
+        "Sodium"
+      ],
+      "correctIndex": 2,
+      "answer": "Chlorine",
+      "explanation": "Chloride ions are concentrated enough to be discharged in preference to hydroxide, so chlorine evolves."
+    },
+    {
+      "id": "chem-electro-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mass deposited when 96 500 coulombs are passed is:",
+      "options": [
+        "One mole of any ion",
+        "One gram-equivalent of the substance",
+        "One gram of copper always",
+        "Equal to the atomic mass"
+      ],
+      "correctIndex": 1,
+      "answer": "One gram-equivalent of the substance",
+      "explanation": "One faraday deposits one equivalent weight, which is atomic mass divided by valence."
+    },
+    {
+      "id": "chem-electro-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "During the purification of copper, the anode is made of:",
+      "options": [
+        "Pure copper",
+        "Impure copper",
+        "Graphite",
+        "Iron"
+      ],
+      "correctIndex": 1,
+      "answer": "Impure copper",
+      "explanation": "The impure copper anode dissolves, copper plates onto the pure cathode, and insoluble impurities fall as slime."
+    },
+    {
+      "id": "chem-electro-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The decomposition of an electrolyte by the passage of electric current is called __________.",
+      "answer": "electrolysis",
+      "explanation": "Electrolysis requires free ions, which exist only when the electrolyte is molten or dissolved."
+    },
+    {
+      "id": "chem-electro-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The quantity of electricity equal to 96 500 coulombs is called one __________.",
+      "answer": "faraday",
+      "explanation": "One faraday corresponds to one mole of electrons and deposits one gram-equivalent."
+    },
+    {
+      "id": "chem-electro-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why sodium metal is not obtained when aqueous sodium chloride is electrolysed.",
+      "answer": "Water provides hydrogen ions which are discharged more easily than sodium ions, so hydrogen is evolved at the cathode while sodium ions remain in solution as sodium hydroxide.",
+      "explanation": "Reactive metals above hydrogen in the activity series cannot be deposited from aqueous solution."
+    },
+    {
+      "id": "chem-electro-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Faraday’s first law of electrolysis.",
+      "answer": "The mass of a substance deposited or liberated at an electrode is directly proportional to the quantity of electricity passed through the electrolyte.",
+      "explanation": "Charge is the deciding variable, so doubling the time at constant current doubles the deposit."
+    },
+    {
+      "id": "chem-electro-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is the function of the cation-exchange membrane in a chlor-alkali cell?",
+      "answer": "It allows sodium ions to pass into the cathode compartment while preventing chlorine and hydroxide from mixing, so the sodium hydroxide produced stays pure and no explosive mixture forms.",
+      "explanation": "Separating the products protects both the quality of the alkali and the safety of the process."
+    },
+    {
+      "id": "chem-electro-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe the electrolysis of molten lead(II) bromide, naming the product at each electrode and writing the half-equations.",
+      "answer": "With no water present, only lead ions and bromide ions are available. Lead ions migrate to the cathode, where they gain two electrons and are reduced to lead metal: Pb2+ + 2e- → Pb. Bromide ions migrate to the anode, where each loses an electron and the atoms combine to give brown bromine vapour: 2Br- → Br2 + 2e-. Lead therefore collects at the cathode and bromine is liberated at the anode, and the electrolyte level falls as the salt is decomposed.",
+      "explanation": "Migration follows charge and discharge follows ease of electron loss or gain, giving one product at each electrode."
+    },
+    {
+      "id": "chem-electro-11",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why dilute sodium sulphate solution electrolyses to give hydrogen and oxygen, and state why sodium sulphate is not used up.",
+      "answer": "Sodium ions and sulphate ions are joined by hydrogen ions and hydroxide ions from the water. At the cathode hydrogen ions discharge in preference to sodium ions, giving hydrogen gas. At the anode hydroxide ions discharge in preference to sulphate ions, giving oxygen. The overall change is the electrolysis of water: 2H2O → 2H2 + O2. Sodium ions and sulphate ions merely carry current through the solution and recombine, so sodium sulphate stays in solution unchanged in amount.",
+      "explanation": "Sodium sulphate acts as the electrolyte while the water itself is decomposed, so only its concentration rises."
+    },
+    {
+      "id": "chem-electro-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A current of 2 A is passed through copper(II) sulphate solution for 30 minutes. Calculate the mass of copper deposited, taking the equivalent weight of copper as 32.",
+      "answer": "Charge = current × time = 2 × 1800 = 3600 coulombs. In faradays this is 3600 ÷ 96 500 = 0.0373 faradays. Mass deposited = faradays × equivalent weight = 0.0373 × 32 = 1.19 g of copper. The answer follows directly from Faraday’s law, since mass is proportional to charge, and the time had to be converted from minutes to seconds before multiplication.",
+      "explanation": "Coulombs from amperes times seconds, then faradays, then equivalent weight — the standard four-step chain."
+    }
+  ]
+}

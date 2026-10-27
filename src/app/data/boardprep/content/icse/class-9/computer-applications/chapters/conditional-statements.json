@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-conditionals",
+  "slug": "conditional-statements",
+  "title": "Conditional Statements in Java",
+  "kind": "computer-applications",
+  "tagline": "if, if-else, the ladder and switch — how a program chooses a path, and where each choice form fits.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "A program that runs its statements only from top to bottom can never answer a question; it can only display. Every useful program asks something — is the marks value at least the pass mark, is the number positive or negative, is the day code valid — and a conditional statement runs a block only when a boolean condition is true, so the program chooses a path through itself. This chapter builds the single if, the if-else ladder and the switch statement, and shows the trap each one hides.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Conditional statements and branching (ICSE Class IX)"
+      },
+      {
+        "label": "Condition rule",
+        "value": "A conditional test must be boolean — Java refuses a plain number"
+      },
+      {
+        "label": "Operators",
+        "value": "= assigns a value; == compares two values"
+      },
+      {
+        "label": "The ladder",
+        "value": "Chained else if tests, read top down, stopping at the first success"
+      },
+      {
+        "label": "switch",
+        "value": "Labels on int, char, String or enum; break stops fall-through"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Write single if and if-else statements whose conditions are proper boolean expressions.",
+    "Build an if-else ladder that routes every possible input to exactly one branch.",
+    "Use a switch statement with correct case labels, break statements and a default branch.",
+    "Explain the difference between the = and == operators and why Java rejects a non-boolean condition."
+  ],
+  "learn": [
+    {
+      "id": "cond-decide",
+      "title": "Why programs must decide",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A program that can only run its statements top to bottom can never answer a question — it can only display. Every useful program asks something: is the marks value at least the pass mark, is the number positive or negative, is the character a vowel or a consonant. A conditional statement is a statement that runs a block only when a boolean condition evaluates to true, so the program chooses a path through itself instead of executing everything."
+        },
+        {
+          "type": "paragraph",
+          "text": "The condition of a conditional statement is always a boolean expression — one that ends in true or false. Relational operators (==, !=, <, <=, >, >=) compare two values and produce exactly that boolean. The compiler will not let you write if (marks) or if (n): a number is not a condition, even if it happens to be zero. Python accepts the first form; Java refuses it, and that single rule prevents a whole family of bugs."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "if runs a block for a true condition and nothing otherwise.",
+            "if-else chooses between two blocks — exactly one of them runs on every execution.",
+            "switch chooses among many, keyed on a fixed set of labels, and is the honest choice for a menu of named options."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cond-if",
+      "title": "The if statement and its commonest trap",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The simplest decision is a single if: if (condition) { block }. When the condition is true the block runs; when it is false the block is skipped and the program continues with the next statement after it. The braces group the block, and although Java permits an if with no braces when the body is a single statement, keeping the braces always is the habit that prevents bugs."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int marks = 78; if (marks >= 60) { System.out.println(\"Distinction\"); } System.out.println(\"Result declared\");",
+              "note": "The marks value 78 makes the condition true, so Distinction prints. The second println stands outside the if entirely and therefore always runs. With marks set to 40 the first line would vanish and only the second would appear."
+            },
+            {
+              "text": "int n = -3; if (n > 0) { System.out.println(\"Positive\"); } else { System.out.println(\"Not positive\"); }",
+              "note": "The else branch supplies the alternative path. With n at -3 the condition is false, so the first block is skipped and Not positive prints — exactly one of the two blocks runs on every execution."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Here is the trap every examiner plants. Writing if (marks = 60) assigns 60 to marks and treats the result as the condition. C and C++ accept this and produce a mysterious bug; Python raises a syntax error; and Java rejects it at compile time because an assignment is not boolean. The condition must always be a comparison: == asks the question, = copies the value."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Boolean expression",
+              "meaning": "An expression that evaluates to either true or false.",
+              "context": "marks >= 60 is boolean; marks + 5 is not."
+            },
+            {
+              "term": "Conditional statement",
+              "meaning": "A statement that runs its block only when a condition is true.",
+              "context": "if (n > 0) System.out.println(\"Positive\");"
+            },
+            {
+              "term": "Single selection",
+              "meaning": "An if with no else — the block runs only for a true condition.",
+              "context": "Printing a warning only when marks fall below the pass line."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cond-ifelse",
+      "title": "if-else and the ladder — choosing between paths",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a program must react differently to a false condition, the else branch provides the alternative: if (condition) { true block } else { false block }. Exactly one of the two blocks runs on every pass — never both, never neither. The if-else ladder extends the idea into a chain of else if conditions, each with its own block, ending in a final else that catches everything the earlier tests rejected."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int marks = 78; if (marks >= 90) { System.out.println(\"Grade A+\"); } else if (marks >= 75) { System.out.println(\"Grade A\"); } else if (marks >= 60) { System.out.println(\"Grade B\"); } else { System.out.println(\"Fail\"); }",
+              "note": "The ladder is read from the top and stops at the first test that succeeds. Marks of 78 fails the first test, passes the second, and prints Grade A — the remaining tests are never evaluated, which is why ladder order matters. The final else with no condition catches every value that matched nothing above it."
+            },
+            {
+              "text": "int year = 2000; if (year % 4 == 0) { if (year % 100 == 0) { if (year % 400 == 0) System.out.println(\"Leap year\"); else System.out.println(\"Not a leap year\"); } else System.out.println(\"Leap year\"); } else System.out.println(\"Not a leap year\");",
+              "note": "A nested ladder: with year at 2000 the value is divisible by 4, by 100 and by 400, so it reaches the innermost test and prints \"Leap year\". Change the declaration to int year = 1900; and the same ladder prints \"Not a leap year\" — 1900 passes the first two tests but fails the 400 test — which is how exceptions to a rule are placed inside the rule."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Marks ladder — which branch each score reaches",
+          "columns": [
+            "Score",
+            "First test passed",
+            "Output"
+          ],
+          "rows": [
+            [
+              "95",
+              "marks >= 90",
+              "Grade A+"
+            ],
+            [
+              "80",
+              "marks >= 75",
+              "Grade A"
+            ],
+            [
+              "65",
+              "marks >= 60",
+              "Grade B"
+            ],
+            [
+              "40",
+              "none — the else branch",
+              "Fail"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A nested if places one decision inside another — for example, checking that a number is positive before checking whether it is even. Each opening brace must eventually close, and a nested if without braces is the surest way to lose track of which block belongs to which condition. Indentation helps the reader; braces tell the compiler, and only the compiler is authoritative."
+        }
+      ]
+    },
+    {
+      "id": "cond-switch",
+      "title": "The switch statement — menus and multiway choice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When the choice is among a fixed set of named values, a long else if ladder becomes unreadable. The switch statement handles it directly: the switch expression is evaluated once, then compared against each case label in order, and control jumps to the first label whose value matches. Each case block normally ends with break, which sends control past the whole switch."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int day = 3; switch (day) { case 1: System.out.println(\"Monday\"); break; case 2: System.out.println(\"Tuesday\"); break; case 3: System.out.println(\"Wednesday\"); break; default: System.out.println(\"Invalid day\"); } System.out.println(\"End of week check\");",
+              "note": "The expression day holds 3, so control jumps to case 3, prints Wednesday, and the break sends it past the switch to the final line. The default branch runs only when no case matched — the switch's equivalent of the ladder's final else."
+            },
+            {
+              "text": "int month = 5; switch (month) { case 1: case 3: case 5: System.out.println(\"31 days\"); break; case 4: case 6: System.out.println(\"30 days\"); break; default: System.out.println(\"Check February\"); }",
+              "note": "Deliberate grouping: months 1, 3 and 5 share one answer because the labels stack without break between them — control falls through each label into the shared block, so with month at 5 the program prints \"31 days\". Set month to 2 instead and default answers with \"Check February\". Grouping labels this way is the feature fall-through exists for."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Without break, control falls through into the next case — a deliberate feature for grouping labels and a bug when it is accidental. Two labels may share one block simply by omitting the break between them, so case 1 and case 2 can both print Monday without repeating the statement. Modern Java also offers the arrow form, case 1 -> ..., which runs its statement without falling through and needs no break at all."
+        },
+        {
+          "type": "table",
+          "caption": "if-else ladder versus switch — choosing the right tool",
+          "columns": [
+            "Aspect",
+            "if-else ladder",
+            "switch"
+          ],
+          "rows": [
+            [
+              "Condition type",
+              "Any boolean expression",
+              "Equality against fixed labels"
+            ],
+            [
+              "Tested value",
+              "Ranges, inequalities, any types",
+              "int, char, String or enum"
+            ],
+            [
+              "How many tests run",
+              "Until one succeeds",
+              "Labels compared in order"
+            ],
+            [
+              "Best suited to",
+              "Marks ranges, numeric conditions",
+              "Menus, day codes, option symbols"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "In Java a switch may key on an int, a char, a String or an enum — never a double or a boolean, and the compiler enforces it. Python has no switch at all and relies on dictionary dispatch or a chain of elif. Knowing what each language refuses is worth marks in comparison questions."
+        }
+      ]
+    },
+    {
+      "id": "cond-examples",
+      "title": "Worked programs — sign check, leap year and calculator",
+      "blocks": [
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int n = 12; if (n > 0) System.out.println(\"Positive\"); else if (n < 0) System.out.println(\"Negative\"); else System.out.println(\"Zero\");",
+              "note": "The sign of a number. The final else catches zero without a third test, so every possible int reaches exactly one branch — with n at 12 the output is \"Positive\"."
+            },
+            {
+              "text": "int year = 1900; boolean leap; if (year % 400 == 0) leap = true; else if (year % 100 == 0) leap = false; else leap = year % 4 == 0; System.out.println(year + \" leap year: \" + leap);",
+              "note": "The leap year rule. The century test must come before the four-year rule: with year at 1900 the program prints \"1900 leap year: false\", because 1900 divides by 100 but not by 400 — ladder order carries the logic."
+            },
+            {
+              "text": "int a = 20, b = 6; String op = \"+\"; double result = 0; switch (op) { case \"+\": result = a + b; break; case \"-\": result = a - b; break; case \"*\": result = a * b; break; case \"/\": result = a / b; break; default: System.out.println(\"Invalid operator\"); } System.out.println(\"Result: \" + result);",
+              "note": "A calculator keyed on the operator symbol: one case per symbol, and a default that reports an unknown symbol rather than silently computing nothing. For a = 20, b = 6 and op = \"+\" the program prints \"Result: 26.0\" — the double result keeps its decimal point."
+            },
+            {
+              "text": "String ch = \"A\"; char c = ch.toLowerCase().charAt(0); if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') System.out.println(\"Vowel\"); else System.out.println(\"Consonant\");",
+              "note": "The || operator joins five equality tests into one condition, so a single if covers the whole vowel set. Lower-casing first means both A and a are accepted — with ch at \"A\" the program prints \"Vowel\"."
+            },
+            {
+              "text": "int n = 6; if (n % 2 == 0) { if (n % 4 == 0) System.out.println(\"Divisible by 4\"); else System.out.println(\"Even but not by 4\"); } else System.out.println(\"Odd\");",
+              "note": "A nested decision: the inner choice exists only when the outer one is true. The braces around the inner if-else keep the else attached to the inner condition rather than the outer one — with n at 6 the output is \"Even but not by 4\"."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Every program above was chosen because its shape recurs in examination questions: three-way decisions with a bare final else, the leap year rule whose exceptions nest inside the general rule, and a calculator whose menu is a switch. Write each one from memory until the structure — not the wording — is yours."
+        }
+      ]
+    },
+    {
+      "id": "cond-practice",
+      "title": "Exam drills — building and reading decisions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Drill one: convert every ladder you read into a table of condition and output, then check that every possible input reaches exactly one row — a table with a gap or a double entry is a broken decision. Drill two: hunt the trap lines — an assignment where a comparison belongs, a missing break in a switch, an else attached to the wrong if. Drill three: write the same decision twice, once with a ladder and once with a switch, then justify which version a maintainer would prefer."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ladder order is logic: thresholds must be tested from the highest down, or the low test swallows every case above it.",
+            "A missing break makes one case print two lines — the classic accidental fall-through.",
+            "The final else has no condition, and it is what guarantees every input receives an answer.",
+            "= in a condition is a compile error in Java; recognising it on sight saves a whole question."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two habits finish the subject. First, brace every branch even when it holds one statement, so that a later edit cannot silently re-parent an else. Second, trace a ladder before answering: write the input at the top, cross out each test as it fails, and stop at the first success — the printed value is then a fact rather than a guess."
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The if-else ladder in flow",
+      "description": "A diamond labelled marks >= 90 whose true branch prints Grade A+ and whose false branch enters a second diamond labelled marks >= 75, continuing to a third diamond. Each true branch exits to its print box; the final false branch exits to a Fail box. One arrow from every exit merges into the statement after the ladder.",
+      "labels": [
+        "Test marks >= 90",
+        "True: print A+",
+        "Test marks >= 75",
+        "True: print A",
+        "Test marks >= 60",
+        "Final else: print Fail"
+      ]
+    },
+    {
+      "caption": "Figure: switch control flow with fall-through",
+      "description": "A vertical stack of case labels for 1, 2 and 3 plus a default. An arrow from a matched case enters its block, and a break arrow leaves the stack for the statement after the switch. A dashed arrow continues from a block with no break down into the next case, labelled fall-through, showing execution sliding into the following label.",
+      "labels": [
+        "Switch expression evaluated",
+        "Case labels in order",
+        "Matched case enters",
+        "break exits the switch",
+        "No break: fall-through",
+        "default when nothing matches"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A conditional condition must be boolean; Java refuses a plain number even when it is zero.",
+    "= assigns and == compares, and only == belongs inside a condition.",
+    "The ladder stops at the first true test, so thresholds must be written from highest to lowest.",
+    "switch suits fixed labels keyed on int, char, String or enum, and needs break to stop fall-through.",
+    "The final else, or the default case, is what guarantees every input receives an answer.",
+    "A nested if only runs when its outer condition is also true — inner tests inherit the outer gate.",
+    "Deliberate fall-through groups two labels onto one block, as when case 10 and case 9 share a grade.",
+    "An if with braces around its single statement is the habit that keeps an else attached to the right condition."
+  ],
+  "examFocus": [
+    "Output question: trace the ladder and name the first test that succeeds — the rest never run.",
+    "Error question: explain why if (marks = 60) fails to compile and supply the corrected line.",
+    "Rewrite question: convert a long ladder into a switch, grouping labels that share an answer.",
+    "Program question: a three-way decision (positive, negative, zero) that routes every int exactly once."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ladder",
+      "meaning": "A chain of if / else if tests ending in an optional final else.",
+      "context": "A grading ladder tests 90, then 75, then 60."
+    },
+    {
+      "word": "Fall-through",
+      "meaning": "Execution continuing from one case into the next when no break is present.",
+      "context": "Two case labels sharing one print statement."
+    },
+    {
+      "word": "Nested if",
+      "meaning": "An if written inside the block of another if.",
+      "context": "Checking evenness only after checking positivity."
+    },
+    {
+      "word": "Default case",
+      "meaning": "The switch branch taken when no case label matches.",
+      "context": "Reporting an invalid menu choice."
+    },
+    {
+      "word": "Selection",
+      "meaning": "Choosing one branch of code to execute based on a condition.",
+      "context": "Printing Distinction only when marks >= 60."
+    },
+    {
+      "word": "Boolean condition",
+      "meaning": "An expression evaluating to true or false, as every conditional test must.",
+      "context": "year % 400 == 0 in the leap year rule."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-cond-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What does the following print?\nint x = 5;\nif (x > 3) {\n    System.out.println(\"A\");\n}\nSystem.out.println(\"B\");",
+      "options": [
+        "A then B",
+        "A only",
+        "B only",
+        "Nothing"
+      ],
+      "correctIndex": 0,
+      "answer": "A then B",
+      "explanation": "The condition is true, so A prints inside the if. The final println stands outside the if entirely and always runs, so B follows it.",
+      "commonMistake": "Thinking the program stops after the if — an if has no effect on the statements that come after it."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The switch statement in Java may inspect a value of type:",
+      "options": [
+        "int",
+        "double",
+        "boolean",
+        "float"
+      ],
+      "correctIndex": 0,
+      "answer": "int",
+      "explanation": "A switch may key on int, char, String or an enum. Floating-point and boolean values are refused — the compiler rejects them.",
+      "commonMistake": "Assuming any variable works — switch is restricted to discrete, comparable types."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the statement if (marks = 60), the single = sign means:",
+      "options": [
+        "Assignment of 60 into marks",
+        "Comparison of marks with 60",
+        "A compile error in every language",
+        "Logical equality"
+      ],
+      "correctIndex": 0,
+      "answer": "Assignment of 60 into marks",
+      "explanation": "The = operator copies a value; == is the comparison. Java's compiler rejects the assignment here because a conditional requires a boolean, which is why the trap is worth remembering.",
+      "commonMistake": "Believing the line runs and tests something — in Java it never compiles, so no output is possible."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "When a case in a switch statement has no break, control:",
+      "options": [
+        "Falls through to the next case",
+        "Skips to default immediately",
+        "Ends the switch at once",
+        "Repeats the same case"
+      ],
+      "correctIndex": 0,
+      "answer": "Falls through to the next case",
+      "explanation": "Without break the flow continues into the next case's block — fall-through. It is useful for grouping labels and a bug when accidental.",
+      "commonMistake": "Thinking the switch ends at the matched case regardless — the break, not the match, is what ends it."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the statement so it prints Positive for positive numbers:\nif (n > 0) {\n    System.out.println(\"Positive\");\n} ______ {\n    System.out.println(\"Not positive\");\n}",
+      "answer": "else",
+      "explanation": "The else branch provides the alternative path taken when the condition is false, so exactly one of the two blocks runs on every execution.",
+      "commonMistake": "Writing else if (n <= 0), which works but re-tests a condition already implied by the first test."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate between the = operator and the == operator in Java, quoting one context for each.",
+      "answer": "= is the assignment operator: it copies the value on its right into the variable on its left, as in marks = 60;. == is the relational equality operator: it compares two values and produces the boolean true or false, as in if (marks == 60), the form a conditional statement requires.",
+      "explanation": "One mark is for naming assignment and one for comparison, and each earns its mark only with a correct context showing where the operator belongs.",
+      "commonMistake": "Describing both as \"equals\" — the difference between copying and asking is the whole question."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is the purpose of the default case in a switch statement?",
+      "answer": "default is the branch taken when no case label matches the switch expression — the equivalent of the final else in a ladder. It guarantees that unexpected or invalid input is reported rather than silently ignored, so the switch always produces some response.",
+      "explanation": "The first mark is for \"runs when nothing matches\" and the second for its protective purpose — a switch without default can silently do nothing on bad input.",
+      "commonMistake": "Saying default always runs last in execution order — it runs last only because of how the labels are written; its defining property is having no matching case."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a Java program that reads an integer and prints whether it is positive, negative or zero.",
+      "answer": "import java.util.Scanner; public class SignCheck { public static void main(String[] args) { Scanner in = new Scanner(System.in); System.out.print(\"Enter a number: \"); int n = in.nextInt(); if (n > 0) System.out.println(\"Positive\"); else if (n < 0) System.out.println(\"Negative\"); else System.out.println(\"Zero\"); } } For the input 12 the program prints Positive.",
+      "explanation": "The reading earns the first mark, the three-way ladder the second, and the exact zero test the third — the else must be bare, catching the single remaining value.",
+      "commonMistake": "Testing n >= 0 and n < 0, which files zero under positive and loses the third mark."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-09",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Trace the ladder below for marks = 82 and state the output, then explain why the order of the tests cannot be reversed:\nif (marks >= 90) System.out.println(\"A\");\nelse if (marks >= 75) System.out.println(\"B\");\nelse if (marks >= 60) System.out.println(\"C\");\nelse System.out.println(\"D\");",
+      "answer": "For marks = 82 the output is B. The first test, marks >= 90, is false. The second, marks >= 75, is true because 82 is at least 75, so B prints and the rest of the ladder is skipped. The order cannot be reversed because the ladder stops at the first success: written from 60 upward, the value 82 would satisfy marks >= 60 immediately and print C, collapsing every score above 60 into the lowest band. The ladder must therefore run from the highest threshold down so that each band keeps its own answer.",
+      "explanation": "Two marks are for the correct trace to B and two for the first-match-wins reasoning. Stating what the reversed ladder would print for 82 is the concrete proof the examiner looks for.",
+      "commonMistake": "Claiming all three tests run and the last true one wins — the ladder short-circuits at the first success."
+    },
+    {
+      "id": "cisce-9-ca-q-cond-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Rewrite the grade ladder using a switch statement on the tens digit of the marks, and explain why a switch suits this better than a long if-else ladder once the number of bands grows.",
+      "answer": "int band = marks / 10; switch (band) { case 10: case 9: System.out.println(\"Grade A+\"); break; case 8: case 7: System.out.println(\"Grade A\"); break; case 6: System.out.println(\"Grade B\"); break; default: System.out.println(\"Fail\"); } For marks = 82 the band is 8, so Grade A prints. The labels 10 and 9 share one block through deliberate fall-through, because a score of 100 belongs with the 90s. As bands grow, each new band is one more case label rather than another else if line with its own condition, so the switch stays readable and the shared answers stay grouped.",
+      "explanation": "The working switch earns two marks, the correct grouping of 10 with 9 one more, and the default another. The final mark is for the readability argument: labels versus repeated conditions.",
+      "commonMistake": "Omitting the break after Grade A+, so every band below it also prints — the classic accidental fall-through."
+    }
+  ]
+}

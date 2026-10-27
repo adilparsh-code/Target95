@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-3d",
+  "title": "Introduction to Three-dimensional Geometry",
+  "kind": "mathematics",
+  "tagline": "Coordinates in space, the distance formula, section formula and the section formula for a point dividing a segment in a given ratio.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Adding a third coordinate axis turns every fact you know about the line on a plane into a fact about the line in space, and this short chapter makes that transfer explicit. Distance becomes the three-dimensional version of Pythagoras, the midpoint formula gains a z, and a point dividing a segment in a ratio m : n acquires an internal and an external case. The chapter closes with the idea of a point satisfying an equation in three variables, which is the doorway to planes and surfaces in later study.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-V: Calculus (8 marks) begins after this chapter, which closes Unit-IV."
+      },
+      {
+        "label": "Distance",
+        "value": "|P₁P₂| = √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²)."
+      },
+      {
+        "label": "Section formula",
+        "value": "Internally: ((mx₂ + nx₁)/(m + n), (my₂ + ny₁)/(m + n), (mz₂ + nz₁)/(m + n))."
+      },
+      {
+        "label": "Midpoint",
+        "value": "The ratio 1 : 1 case: ((x₁ + x₂)/2, (y₁ + y₂)/2, (z₁ + z₂)/2)."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Locate points in a rectangular box and identify the coordinate planes.",
+    "Apply the distance formula in three dimensions.",
+    "Use the section formula for internal and external division.",
+    "Find a point satisfying an equation in three variables.",
+    "Verify collinearity of points in space using coordinates."
+  ],
+  "learn": [
+    {
+      "id": "coordinates",
+      "title": "The coordinate system in space",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three mutually perpendicular axes — OX, OY and OZ — meeting at the origin define a rectangular coordinate system in space, and every point is an ordered triple (x, y, z) reached by walking along the axes in turn. The three coordinate planes, each formed by a pair of axes, divide space into eight octants rather than four quadrants, and each plane is named by the coordinate that is constant on it: z = 0 is the floor-like xy-plane, while x = a is a wall parallel to the yz-plane. Recognising which plane a point lies in is a small skill with a large payoff: a point with z = 0 is in the xy-plane, a point with any coordinate zero lies in a coordinate plane, and only points with all three coordinates non-zero are strictly inside an octant."
+        },
+        {
+          "type": "paragraph",
+          "text": "The distance formula follows from two applications of Pythagoras. The base of the right triangle formed by the projection onto the xy-plane has length √((x₂ − x₁)² + (y₂ − y₁)²) — the familiar planar distance — and standing on that base, the vertical leg is (z₂ − z₁), so the hypotenuse in space is the square root of the sum of all three squared differences. The formula is therefore not a new idea but the old idea applied twice, and it reduces to the planar formula whenever the z-coordinates agree, a consistency check worth stating in an answer. The same structure carries to the midpoint: each coordinate averages independently, because the midpoint’s x is the midpoint of the x-interval, its y of the y-interval, and its z of the z-interval."
+        },
+        {
+          "type": "table",
+          "caption": "Basic formulas of 3D geometry",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "Reduces to (planar) when"
+          ],
+          "rows": [
+            [
+              "Distance P₁P₂",
+              "√((Δx)² + (Δy)² + (Δz)²)",
+              "Δz = 0 gives √(Δx² + Δy²)"
+            ],
+            [
+              "Midpoint",
+              "((x₁+x₂)/2, (y₁+y₂)/2, (z₁+z₂)/2)",
+              "z₁ = z₂ gives the planar midpoint"
+            ],
+            [
+              "Origin distance",
+              "√(x² + y² + z²)",
+              "z = 0 gives √(x² + y²)"
+            ],
+            [
+              "Section (internal)",
+              "((mx₂+nx₁)/(m+n), …)",
+              "Same pattern in each coordinate"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A point is a triple (x, y, z); the axes are pairwise perpendicular.",
+            "xy-plane: z = 0; xz-plane: y = 0; yz-plane: x = 0.",
+            "Eight octants; a coordinate plane contains four of them.",
+            "Distance in space = planar distance in the base, then Pythagoras again vertically."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section",
+      "title": "Section and midpoint formulae in space",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A point dividing the segment from P₁(x₁, y₁, z₁) to P₂(x₂, y₂, z₂) in the ratio m : n has coordinates found coordinate by coordinate: x = (mx₂ + nx₁)/(m + n), and likewise for y and z. The pattern is worth reading carefully — the multiplier of each endpoint is the weight of the opposite section, so m pairs with the far endpoint P₂ because a larger m means the point sits closer to P₂. Setting m = n gives the midpoint formula as a special case, which is a neat unification: averaging is just equal-ratio division. Negative values of the ratio correspond to external division, where the point lies outside the segment on the side of the more heavily weighted endpoint, and the formula retains its form with m + n becoming a difference."
+        },
+        {
+          "type": "paragraph",
+          "text": "A classic problem type uses these formulas in reverse: given a divided segment and one unknown coordinate, solve for the parameter. The method is mechanical — write the section formula with the unknown, set it equal to the given coordinate, solve — and it works identically in each of the three coordinates, so the dimension adds no difficulty, only an extra equation to check. Collinearity in space is likewise decided the same way as in the plane: three points are collinear when the distance from the first to the third equals the sum of the other two distances, or when two computed slopes (in the plane sense, coordinate-wise ratios) agree. Both tests are worth practising because coordinate proofs in 3D often reduce to one of them."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Midpoint of (2, −1, 4) and (4, 3, −2).",
+              "note": "(3, 1, 1) — each coordinate averaged."
+            },
+            {
+              "text": "Point dividing (1, 2, 3) and (5, 6, 7) in 2 : 1 internally.",
+              "note": "((10 + 1)/3, (12 + 2)/3, (14 + 3)/3) = (11/3, 14/3, 17/3)."
+            },
+            {
+              "text": "Distance of (3, −4, 12) from the origin.",
+              "note": "√(9 + 16 + 144) = √169 = 13 — the 3D Pythagorean triple."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations",
+      "title": "Points, equations and collinearity in space",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An equation in three variables, such as 2x − y + z = 6, does not pick out a point but a surface: the set of all triples satisfying it, which here is a plane. Checking whether a given point satisfies the equation is the same substitution test you use in two dimensions, and questions in this chapter use it to ask which of several points lies on the surface, or to find the value of a parameter so that a particular point does. The idea that one equation in three unknowns leaves two degrees of freedom — a whole plane of solutions rather than a single point — is the essential conceptual step of the chapter, and it prepares the later study of planes and lines in space."
+        },
+        {
+          "type": "paragraph",
+          "text": "Collinearity deserves a worked pattern because it is a favourite exam question. Given three points A, B, C, compute the three distances AB, BC and AC; the points are collinear exactly when the largest equals the sum of the other two, since that means B (or whichever lies between) really lies on the segment joining the ends. Alternatively, compare the coordinate-wise ratios (x₂ − x₁)/(x₃ − x₂) and (y₂ − y₁)/(y₃ − y₂): agreement means the same direction is being travelled at the same relative rate, and the z-ratios must agree too. Both methods are elementary — the work lies in careful arithmetic with signed numbers, which is where most errors occur. A quick sketch in the mind, placing the points in a box rather than a plane, helps catch a sign slip before it propagates."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Is (1, 2, 3) on 2x − y + z = 6?",
+              "note": "2 − 2 + 3 = 3 ≠ 6, so no — the point is not on the plane."
+            },
+            {
+              "text": "Collinear? A(1, 0, 0), B(2, 1, 1), C(3, 2, 2).",
+              "note": "AB = √3, BC = √3, AC = 2√3: AB + BC = AC ✓, so collinear."
+            },
+            {
+              "text": "Find k so that (2, k, 4) lies on x + y + z = 10.",
+              "note": "2 + k + 4 = 10 gives k = 4."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technique",
+      "title": "Working carefully in three dimensions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Most three-dimensional errors are arithmetic rather than conceptual, and the antidote is a fixed routine. Write coordinates in a column so that x aligns with x, y with y and z with z — transposed coordinates are the single most frequent mistake. Compute each coordinate of an answer separately and check that it lies between the endpoints for internal division; a result outside the range means a sign or ratio error. For distances, square each difference before adding, and remember that squaring destroys sign information, so the difference itself must be taken in the correct order only where direction matters (it does not for distance, but it does for section formulas)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Verification strategies are cheap in this topic because everything is explicit. Check a midpoint by measuring from it to each endpoint — the distances must match. Check a section point by re-deriving the ratio from the coordinates: (x − x₁)/(x₂ − x) should return m/n. Check a distance against the planar special case by setting the z-differences to zero mentally. And for any point claimed to lie on a surface, substitute it fully. These three or four seconds of verification distinguish answers that are merely plausible from answers that are certainly right, and in a chapter where the formulas are short, that is where the marks live."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Align coordinates in columns before computing anything.",
+            "Internal division must land between the endpoints — check it does.",
+            "Recover the ratio from a section point to verify: (x − x₁)/(x₂ − x) = m/n.",
+            "Substitute to test whether a point satisfies a surface equation.",
+            "Collinear ⟺ one distance equals the sum of the other two."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The three coordinate axes and the eight octants",
+      "description": "A three-dimensional axes drawing with OX to the right, OY receding into the page and OZ upward, the three coordinate planes shaded as two translucent rectangles and a floor, a point P marked with dotted drop-lines to the three axes and the coordinates (x, y, z) labelled at the feet of those lines.",
+      "labels": [
+        "O: the origin (0, 0, 0)",
+        "x-axis: OX, rightward",
+        "y-axis: OY, into the page",
+        "z-axis: OZ, upward",
+        "Drop-lines show each coordinate",
+        "Three planes → eight octants"
+      ]
+    },
+    {
+      "caption": "Figure: Internal and external division of a segment",
+      "description": "Two panels. Left: a segment P₁P₂ with point R between them, the sub-lengths marked m and n, and the coordinates of R written as (mx₂ + nx₁)/(m + n). Right: the same segment extended beyond P₂ with R′ outside on the P₂ side, sub-lengths marked m and n, and the corresponding formula with m − n in the denominator.",
+      "labels": [
+        "Internal: R lies inside P₁P₂",
+        "m pairs with the far endpoint",
+        "External: R′ lies outside",
+        "Negative ratio = external division",
+        "m = n gives the midpoint"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A point in space is an ordered triple (x, y, z).",
+    "Coordinate planes: x = 0, y = 0, z = 0; space divides into eight octants.",
+    "Distance: √((Δx)² + (Δy)² + (Δz)²) — Pythagoras applied twice.",
+    "Distance from origin: √(x² + y² + z²).",
+    "Midpoint: average each coordinate independently.",
+    "Section formula: weight each endpoint by the opposite part of the ratio.",
+    "m = n gives the midpoint; negative ratio gives external division.",
+    "Three points are collinear when one distance equals the sum of the other two.",
+    "An equation in x, y, z describes a surface; test points by substitution.",
+    "Align coordinates in columns — transposition is the classic error."
+  ],
+  "examFocus": [
+    "State each coordinate separately; partial marks attach to each.",
+    "Show the distance steps as two right triangles when asked to derive.",
+    "Verify a section point by recovering the ratio from it.",
+    "Check collinearity with the distance-sum test and state the conclusion."
+  ],
+  "vocabulary": [
+    {
+      "word": "Coordinate axes",
+      "meaning": "The three mutually perpendicular lines OX, OY, OZ."
+    },
+    {
+      "word": "Coordinate plane",
+      "meaning": "A plane containing two axes, on which one coordinate is zero."
+    },
+    {
+      "word": "Octant",
+      "meaning": "One of the eight regions the coordinate planes divide space into."
+    },
+    {
+      "word": "Internal division",
+      "meaning": "A point lying inside a segment, dividing it in a positive ratio."
+    },
+    {
+      "word": "External division",
+      "meaning": "A point outside a segment; corresponds to a negative ratio."
+    },
+    {
+      "word": "Section formula",
+      "meaning": "Coordinates of the point dividing a segment in ratio m : n."
+    },
+    {
+      "word": "Collinear",
+      "meaning": "Lying on a single straight line — verified by distances."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-3d-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance of the point (3, 4, 12) from the origin is:",
+      "options": [
+        "13",
+        "17",
+        "12",
+        "√169 is undefined"
+      ],
+      "correctIndex": 0,
+      "answer": "13",
+      "explanation": "√(9 + 16 + 144) = √169 = 13 — the 3D Pythagorean triple 5, 12, 13."
+    },
+    {
+      "id": "cbse11-math-3d-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The midpoint of (2, 4, 6) and (8, 10, 14) is:",
+      "options": [
+        "(5, 7, 10)",
+        "(6, 7, 8)",
+        "(5, 6, 10)",
+        "(4, 6, 8)"
+      ],
+      "correctIndex": 0,
+      "answer": "(5, 7, 10)",
+      "explanation": "Average each coordinate: ((2+8)/2, (4+10)/2, (6+14)/2) = (5, 7, 10)."
+    },
+    {
+      "id": "cbse11-math-3d-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The point dividing (1, 2, 3) and (7, 8, 9) in the ratio 1 : 2 internally is:",
+      "options": [
+        "(3, 4, 5)",
+        "(5, 6, 7)",
+        "(4, 5, 6)",
+        "(2, 4, 6)"
+      ],
+      "correctIndex": 0,
+      "answer": "(3, 4, 5)",
+      "explanation": "((1·7 + 2·1)/3, (1·8 + 2·2)/3, (1·9 + 2·3)/3) = (9/3, 12/3, 15/3) = (3, 4, 5)."
+    },
+    {
+      "id": "cbse11-math-3d-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The point (1, 0, 3) lies in the:",
+      "options": [
+        "xy-plane",
+        "xz-plane",
+        "yz-plane",
+        "First octant interior"
+      ],
+      "correctIndex": 1,
+      "answer": "xz-plane",
+      "explanation": "The y-coordinate is zero, and y = 0 defines the xz-plane."
+    },
+    {
+      "id": "cbse11-math-3d-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The three coordinate planes divide space into ________ octants.",
+      "answer": "eight",
+      "explanation": "Each plane splits space in two, giving 2 × 2 × 2 = 8 regions."
+    },
+    {
+      "id": "cbse11-math-3d-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance between (x₁, y₁, z₁) and (x₂, y₂, z₂) is the square root of the sum of the squared differences of the three ________ .",
+      "answer": "coordinates",
+      "explanation": "Pythagoras is applied twice: once in the base plane, then vertically."
+    },
+    {
+      "id": "cbse11-math-3d-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the distance formula in three dimensions from the planar distance formula.",
+      "answer": "Let P₁(x₁, y₁, z₁) and P₂(x₂, y₂, z₂) be the points. Project them onto the xy-plane, giving A(x₁, y₁, 0) and B(x₂, y₂, 0). By the planar distance formula, AB = √((x₂ − x₁)² + (y₂ − y₁)²). Now the segment P₁P₂ stands vertically above this projection: the horizontal displacement from A to B together with the vertical displacement (z₂ − z₁) form the two legs of a right triangle with P₁P₂ as hypotenuse, the right angle being at B’s vertical line through P₁. By Pythagoras, P₁P₂² = AB² + (z₂ − z₁)² = (x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)². Taking square roots gives P₁P₂ = √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²). When z₁ = z₂ the formula collapses to the planar one, confirming the extension is consistent.",
+      "explanation": "The projection argument, the right triangle identified, the Pythagorean step, and the planar special case."
+    },
+    {
+      "id": "cbse11-math-3d-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the coordinates of the point which divides the segment joining (2, −1, 4) and (6, 3, 8) in the ratio 3 : 1 internally.",
+      "answer": "Using the section formula with P₁(2, −1, 4), P₂(6, 3, 8) and m : n = 3 : 1: x = (3·6 + 1·2)/(3 + 1) = (18 + 2)/4 = 20/4 = 5; y = (3·3 + 1·(−1))/4 = (9 − 1)/4 = 8/4 = 2; z = (3·8 + 1·4)/4 = (24 + 4)/4 = 28/4 = 7. The point is (5, 2, 7). Verification: it must lie between the endpoints — 5 lies between 2 and 6 ✓, 2 between −1 and 3 ✓, 7 between 4 and 8 ✓. Recover the ratio: (x − x₁)/(x₂ − x) = (5 − 2)/(6 − 5) = 3/1 ✓ as required.",
+      "explanation": "All three coordinates from the formula, the betweenness check, and the ratio recovered as verification."
+    },
+    {
+      "id": "cbse11-math-3d-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the points A(1, 0, 4), B(3, 2, 6) and C(5, 4, 8) are collinear, and find the ratio in which B divides AC.",
+      "answer": "Method 1 — distances. AB = √((3 − 1)² + (2 − 0)² + (6 − 4)²) = √(4 + 4 + 4) = √12 = 2√3. BC = √((5 − 3)² + (4 − 2)² + (8 − 6)²) = √(4 + 4 + 4) = 2√3. AC = √((5 − 1)² + (4 − 0)² + (8 − 4)²) = √(16 + 16 + 16) = √48 = 4√3. Since AB + BC = 2√3 + 2√3 = 4√3 = AC, the middle point B lies exactly on the segment AC, so the three points are collinear. Method 2 — coordinate ratios: (x₂ − x₁)/(x₃ − x₂) = (3 − 1)/(5 − 3) = 1, (y₂ − y₁)/(y₃ − y₂) = 2/2 = 1, (z₂ − z₁)/(z₃ − z₂) = 2/2 = 1 — all three coordinate ratios agree, confirming a single direction of travel. The ratio in which B divides AC: AB = 2√3 and BC = 2√3, so AB : BC = 1 : 1 — B is the midpoint, which a direct check confirms: ((1 + 5)/2, (0 + 4)/2, (4 + 8)/2) = (3, 2, 6) = B ✓.",
+      "explanation": "Both distance computation and the sum equality, the coordinate-ratio confirmation, and the 1 : 1 ratio with midpoint verification."
+    },
+    {
+      "id": "cbse11-math-3d-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A plane has equation x + y + z = 6. Determine which of the points (1, 2, 3), (2, 2, 2) and (0, 0, 6) lie on it, describe geometrically what the equation represents, and explain why one equation in three unknowns cannot determine a unique point.",
+      "answer": "Substitution decides each: for (1, 2, 3), 1 + 2 + 3 = 6 ✓ the point lies on the surface; for (2, 2, 2), 2 + 2 + 2 = 6 ✓ also on it; for (0, 0, 6), 0 + 0 + 6 = 6 ✓ as well — all three lie on the plane. Geometrically the equation represents a flat plane: every triple whose coordinates sum to 6 is included, and the intercepts make this concrete — the plane meets the axes at (6, 0, 0), (0, 6, 0) and (0, 0, 6), so it slices off a corner of the first octant as an equilateral triangle of side 6√2. Why no unique point: a single linear equation imposes one condition on three unknowns, so two degrees of freedom remain free — choose x and y arbitrarily and z is forced to 6 − x − y, giving a whole family of solutions parametrised by two parameters, which is exactly the two dimensions of a plane. Points, lines and surfaces correspond to the codimension count: in three dimensions a point needs three independent conditions (three equations), a line two, and a plane one; each additional independent equation cuts the solution set down by one dimension. That is why this chapter, having mastered points, moves next to surfaces: an equation in three variables is the language of planes, and solving systems of such equations is the business of finding where surfaces meet.",
+      "explanation": "All three substitutions performed and correct, the plane identified with its intercepts, and the degrees-of-freedom argument explaining why one equation gives a surface rather than a point."
+    }
+  ]
+}

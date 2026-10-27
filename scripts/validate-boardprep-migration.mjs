@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { getBoards, getSubjects, getSubject, getPublishedChapters, getChapter, getBoardPrepCounts } from '../src/lib/boardprepCurriculum.mjs';
 
-const expected = { boards: 3, classes: 6, subjects: 75, chapters: 120, questions: 1837 };
+const expected = { boards: 3, classes: 6, subjects: 81, chapters: 381, questions: 4551 };
 const counts = getBoardPrepCounts();
 const errors = [];
 for (const [key, value] of Object.entries(expected)) if (counts[key] !== value) errors.push(`${key}: expected ${value}, found ${counts[key]}`);

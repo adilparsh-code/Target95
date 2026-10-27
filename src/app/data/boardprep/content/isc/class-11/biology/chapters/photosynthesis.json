@@ -1,0 +1,575 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-bio-photosynthesis",
+  "title": "Photosynthesis",
+  "kind": "biology",
+  "tagline": "Where light is trapped, how electrons run, and how carbon is fixed into sugar.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Biology syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Biology, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Biology syllabus for Examination Year 2027: every explanation, classification scheme, table, figure specification, example, question and answer was written for this page. Taxonomy, anatomical descriptions and physiological values follow standard school biology and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Photosynthesis is the reaction on which almost every food chain depends, and the syllabus examines it in three layers: the evidence for where and how it happens, the light-dependent reactions that capture energy, and the light-independent reactions that fix carbon. This chapter works through the early experiments that established the requirements and products, the structure of the chloroplast and the pigments, the light reactions including photolysis and chemiosmosis, the Calvin cycle and the two carbon-fixing pathways, and the factors that limit the rate — a favourite examination topic that expects the limiting-factor curve to be explained, not just drawn.",
+    "facts": [
+      {
+        "label": "Overall equation",
+        "value": "6CO2 + 12H2O → C6H12O6 + 6O2 + 6H2O, with light energy trapped by chlorophyll in the chloroplast."
+      },
+      {
+        "label": "Site",
+        "value": "The chloroplast, with thylakoid membranes carrying the pigments and stroma holding the Calvin cycle enzymes."
+      },
+      {
+        "label": "Photolysis",
+        "value": "Water is split at photosystem II, supplying electrons, protons and the oxygen that is released."
+      },
+      {
+        "label": "Carbon fixation",
+        "value": "RuBisCO attaches CO2 to ribulose bisphosphate in the Calvin cycle; C4 plants pre-fix carbon in bundle sheath cells."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Summarise the early experiments and what each proved about photosynthesis.",
+    "Describe chloroplast structure and the absorption spectra of chlorophylls and carotenoids.",
+    "Trace the light reactions through both photosystems, photolysis and chemiosmosis.",
+    "Explain the Calvin cycle and distinguish C3 from C4 photosynthesis.",
+    "Analyse limiting-factor curves and state which factor controls the rate at each point."
+  ],
+  "learn": [
+    {
+      "id": "evidence",
+      "title": "The evidence: early experiments",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The requirements of photosynthesis were established one variable at a time, and each experiment is a model of how to isolate a single factor. Van Helmont in the seventeenth century weighed a willow seedling, grew it for five years in a measured quantity of soil, and found that the tree had gained some seventy kilograms while the soil had lost only a few grams; he concluded wrongly that the increase came from water, but the experiment correctly excluded soil as the main source of biomass. Joseph Priestley in 1774 showed that a plant restores the ability of a candle to burn and of a mouse to breathe after air has been made harmful by combustion — he had discovered the gas we call oxygen, which he called deoxygenated air. Ingenhousz in 1779 demonstrated that only the green parts of a plant purify air and that sunlight is necessary, which located the process in the leaves and made light an explicit requirement. Saussure showed that the plant gains dry mass in excess of the mass of carbon dioxide it takes up, so water must also contribute — revising Priestley’s and van Helmont’s incomplete accounts. Later, Sachs established that starch is the storage product of photosynthesis by destarching a plant in darkness, exposing part of a leaf to light and testing with iodine — only the illuminated region turns blue-black. Engelmann in 1882 used a filament of Spirogyra and aerobic bacteria, which clustered where light fell after being split by a prism, to show that the red and blue parts of the spectrum are the most effective and to locate photosynthesis in the chloroplasts. These experiments also show the logic the examiner looks for: control conditions, expose one variable, and test the product with a specific reagent."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Van Helmont: mass gain is not from soil alone, though he wrongly credited water.",
+            "Priestley: plants restore air made unfit by combustion — the production of oxygen.",
+            "Ingenhousz: only green parts act, and only in light.",
+            "Saussure: water contributes to the dry mass as well as carbon dioxide.",
+            "Sachs: starch is formed in the illuminated part of a destarched leaf, shown by iodine.",
+            "Engelmann: red and blue light are most effective, and the chloroplast is the site.",
+            "Each experiment holds other variables constant and tests the product specifically."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Early experiments and their conclusions",
+          "columns": [
+            "Experiment",
+            "Observation",
+            "Conclusion"
+          ],
+          "rows": [
+            [
+              "van Helmont",
+              "tree gained mass, soil lost little",
+              "soil alone is not the source of biomass"
+            ],
+            [
+              "Priestley",
+              "candle relights and mouse survives near a plant",
+              "plants release a gas that supports burning"
+            ],
+            [
+              "Ingenhousz",
+              "only green parts in light restore air",
+              "green matter and light are both required"
+            ],
+            [
+              "Sachs",
+              "only lit leaf region gives blue-black with iodine",
+              "starch is the product and light is needed"
+            ],
+            [
+              "Engelmann",
+              "bacteria cluster in red and blue light",
+              "those wavelengths are absorbed most for photosynthesis"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Destarching first",
+              "note": "A plant is kept in darkness before the leaf test so that any starch found must have formed during the experiment rather than being stored earlier."
+            },
+            {
+              "text": "Why the mouse mattered",
+              "note": "The mouse tested function rather than appearance: air that supports life is chemically different from air that merely exists."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "light-reactions",
+      "title": "Chloroplasts, pigments and the light reactions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The chloroplast is a double-membraned organelle containing a fluid called the stroma and a system of flattened sacs, the thylakoids, arranged in stacks called grana, with the thylakoid lumen forming a separate internal compartment. The thylakoid membranes hold the pigments — chlorophyll a, chlorophyll b, and the carotenoids — arranged with proteins into photosystems, each with an antenna complex of hundreds of pigment molecules that absorb light and funnel the energy to a reaction centre. Chlorophyll absorbs red and blue light strongly and reflects green, which is why leaves look green, and the accessory pigments extend the range of wavelengths captured. When a photon reaches the reaction centre of photosystem II, an electron in the special chlorophyll a pair is raised to a higher energy level and passed to an electron acceptor — this is photoionisation, and it is the event that converts light energy into chemical energy. The lost electron is replaced by splitting water, the photolysis of water, which releases electrons, hydrogen ions and the oxygen we breathe; this is the source of atmospheric oxygen and it occurs at photosystem II. The excited electron then travels down an electron transport chain of carriers embedded in the thylakoid membrane, losing energy as it goes, and that energy is used to pump protons from the stroma into the lumen, building a proton gradient. The protons return to the stroma through ATP synthase, and the energy of their flow drives the phosphorylation of ADP to ATP — photophosphorylation by chemiosmosis, exactly the mechanism in mitochondria but with the gradient built by light rather than by oxidation. The electron arrives at photosystem I, is re-energised by a second photon, and is finally passed to the electron carrier NADP+, which joins it with a proton to form NADPH. The products of the light reactions are therefore ATP, NADPH and oxygen, with NADPH carrying both electrons and hydrogen to the next stage."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Chloroplast: double membrane, stroma fluid, thylakoids in grana, lumen as a separate compartment.",
+            "Pigments absorb red and blue light and reflect green; accessory pigments widen the range captured.",
+            "Photoionisation raises an electron from the reaction centre chlorophyll of photosystem II.",
+            "Photolysis of water replaces that electron and releases oxygen, protons and more electrons.",
+            "The electron transport chain pumps protons into the lumen, building a gradient across the thylakoid membrane.",
+            "Protons returning through ATP synthase drive ATP formation — photophosphorylation by chemiosmosis.",
+            "Photosystem I re-energises the electron, which finally reduces NADP+ to NADPH.",
+            "Light reactions yield ATP, NADPH and oxygen in the thylakoid membranes."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The two photosystems and their roles",
+          "columns": [
+            "Feature",
+            "Photosystem II",
+            "Photosystem I"
+          ],
+          "rows": [
+            [
+              "Reaction centre",
+              "P680, absorbs at 680 nm",
+              "P700, absorbs at 700 nm"
+            ],
+            [
+              "First event",
+              "electron raised and passed to acceptor",
+              "electron re-energised by a second photon"
+            ],
+            [
+              "Electron source",
+              "photolysis of water",
+              "the electron arriving from the transport chain"
+            ],
+            [
+              "Final output",
+              "electrons into the chain and protons into the lumen",
+              "NADPH formed from NADP+"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why plants release oxygen",
+              "note": "Every oxygen molecule comes from water split at photosystem II, which is why photosynthesis links sunlight to the oxygen in the air."
+            },
+            {
+              "text": "Non-cyclic flow",
+              "note": "The Z scheme runs from water to NADPH, producing ATP and NADPH together and releasing oxygen."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Photolysis",
+              "meaning": "The splitting of water using light energy to supply electrons, protons and oxygen."
+            },
+            {
+              "term": "Photophosphorylation",
+              "meaning": "The synthesis of ATP using energy from light-driven electron transport."
+            },
+            {
+              "term": "Chemiosmosis",
+              "meaning": "ATP synthesis driven by protons flowing down their gradient through ATP synthase."
+            },
+            {
+              "term": "Assimilatory power",
+              "meaning": "The ATP and NADPH of the light reactions that drive carbon fixation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbon-fixation",
+      "title": "The Calvin cycle, C4 plants and the factors that limit the rate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The light-independent reactions take place in the stroma and use the ATP and NADPH of the light reactions to fix carbon dioxide into sugar. The Calvin cycle, discovered by Calvin, Benson and Bassham using radioactive carbon-14, turns in three phases. Fixation: the enzyme ribulose bisphosphate carboxylase, universally shortened to RuBisCO, attaches one molecule of carbon dioxide to the five-carbon acceptor ribulose bisphosphate, and the unstable six-carbon product immediately splits into two molecules of the three-carbon compound 3-phosphoglycerate. Reduction: ATP and NADPH from the light reactions convert 3-phosphoglycerate into glyceraldehyde-3-phosphate, a high-energy three-carbon sugar; some of this leaves the cycle to build glucose, starch and the other organic molecules of the plant. Regeneration: the remaining glyceraldehyde-3-phosphate is rearranged using further ATP to regenerate ribulose bisphosphate so that the cycle can continue. For every three carbon dioxide fixed, six molecules of glyceraldehyde-3-phosphate are produced of which one is a net gain, so the cycle must turn three times per triose phosphate and six times per glucose. C3 plants, which include most of the world’s crop plants, fix carbon dioxide directly by this route, and they suffer from photorespiration: when the stomata close on a hot, dry day the oxygen concentration inside the leaf rises, RuBisCO begins to add oxygen instead of carbon dioxide to ribulose bisphosphate, and the resulting compounds are broken down with a loss of fixed carbon and energy. C4 plants such as maize, sugarcane and millet solve the problem by a spatial division of labour: carbon dioxide is first fixed in the mesophyll cells by the enzyme PEP carboxylase, which has no affinity for oxygen, into a four-carbon acid; that acid is transported into the bundle sheath cells, where it is decarboxylated and releases a concentrated supply of carbon dioxide around RuBisCO, so the Calvin cycle runs with photorespiration suppressed. The anatomical correlate is Kranz anatomy, a wreath of bundle sheath cells with thick walls around the veins. The rate of photosynthesis is then limited by whichever factor is in shortest supply — carbon dioxide concentration, light intensity or temperature — and the classic limiting-factor curve shows the rate rising linearly with light intensity at low levels, bending as another factor becomes limiting, and plateauing when carbon dioxide or temperature holds it back; increasing carbon dioxide shifts the plateau upwards, while raising temperature raises the rate up to the optimum of about 30 to 35 degrees, beyond which enzymes denature and the rate collapses."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Calvin cycle: fixation by RuBisCO, reduction using ATP and NADPH, and regeneration of the acceptor.",
+            "Three turns of the cycle fix three carbon dioxide and give one net triose phosphate.",
+            "C3 plants fix carbon directly and are prone to photorespiration when stomata close.",
+            "C4 plants pre-fix carbon with PEP carboxylase in mesophyll cells and release it in bundle sheath cells.",
+            "Kranz anatomy is the thick-walled wreath of bundle sheath cells seen in C4 plants.",
+            "Photorespiration wastes fixed carbon and energy and lowers yield in hot, dry conditions.",
+            "Rate is limited by whichever factor is in shortest supply: light, carbon dioxide or temperature.",
+            "Beyond the optimum temperature, enzyme denaturation makes the rate fall sharply."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "C3 against C4 plants",
+          "columns": [
+            "Feature",
+            "C3 plants",
+            "C4 plants"
+          ],
+          "rows": [
+            [
+              "First enzyme",
+              "RuBisCO in mesophyll cells",
+              "PEP carboxylase in mesophyll cells"
+            ],
+            [
+              "First product",
+              "a three-carbon compound",
+              "a four-carbon acid"
+            ],
+            [
+              "Anatomy",
+              "no Kranz anatomy",
+              "Kranz anatomy with bundle sheath wreath"
+            ],
+            [
+              "Photorespiration",
+              "significant when stomata close",
+              "suppressed by concentrated carbon dioxide"
+            ],
+            [
+              "Examples",
+              "wheat, rice, pea",
+              "maize, sugarcane, millet"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A dry hot afternoon",
+              "note": "Stomata close to save water, oxygen builds up inside the leaf and photorespiration rises — which is why C4 crops outyield C3 crops in the heat."
+            },
+            {
+              "text": "Reading the curve",
+              "note": "A plateau that rises when carbon dioxide is added tells you carbon dioxide was limiting; if it does not rise, temperature or light was."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "integrating",
+      "title": "Bringing the stages together, and measuring the rate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The two stages of photosynthesis are best held as a single accounting, because every examination question about the process as a whole is really asking what enters, what leaves, and which stage uses which. Overall, six molecules of carbon dioxide and twelve molecules of water are converted into one molecule of glucose, six molecules of oxygen and six molecules of water, with light energy trapped by chlorophyll throughout. The light reactions in the thylakoid membranes take in light and water and give out oxygen, ATP and NADPH; the Calvin cycle in the stroma takes in carbon dioxide with that ATP and NADPH and gives out carbohydrate, returning ADP and NADP+ to be recharged. The two stages are therefore interdependent: without light the cycle cannot regenerate its acceptor and stops within minutes even though carbon dioxide is present, which is why the light-independent reactions are now called light-dependent-but-not-directly rather than dark reactions — in a plant they never actually run in darkness for long. The rate of the whole process can be measured in several ways, and each measures a different product. Oxygen evolution can be followed by counting bubbles from a cut aquatic weed such as Elodea in a beaker, with the distance from a lamp varied to change light intensity; starch formation is tested by killing a leaf in boiling water, decolourising it in alcohol and adding iodine, which turns blue-black where photosynthesis has occurred; and the rate of carbon dioxide uptake can be followed with sodium hydroxide, which absorbs carbon dioxide, by comparing a covered and an uncovered leaf. The pigments themselves can be separated by chromatography: a leaf extract is run up paper in a solvent, and the different pigments travel different distances because of their solubility and their affinity for the paper, giving a characteristic pattern of bands — chlorophyll a, chlorophyll b, carotenoids and xanthophylls — with the ratio of distance travelled to distance moved by the solvent giving the Rf value of each. Together the experiments form the evidence base of the topic: one measures the gas, one measures the product, one measures the substrate and one separates the machinery."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Overall equation: six carbon dioxide and twelve water give one glucose, six oxygen and six water.",
+            "Light reactions take light and water and give oxygen, ATP and NADPH; the cycle takes carbon dioxide and gives carbohydrate.",
+            "The cycle cannot continue without light because regenerating the acceptor needs ATP and NADPH.",
+            "Oxygen evolution can be measured by bubble counts from an aquatic weed.",
+            "Starch is tested by the killing, decolourising and iodine sequence on a destarched leaf.",
+            "Carbon dioxide is absorbed by sodium hydroxide so its absence can be tested by difference.",
+            "Chromatography separates the pigments and gives an Rf value for each band.",
+            "Each experiment holds the other variables steady and changes only the one under test."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "What enters and leaves each stage",
+          "columns": [
+            "Stage",
+            "Inputs",
+            "Outputs"
+          ],
+          "rows": [
+            [
+              "Light reactions",
+              "light, water, NADP+, ADP",
+              "oxygen, ATP, NADPH"
+            ],
+            [
+              "Calvin cycle",
+              "carbon dioxide, ATP, NADPH",
+              "carbohydrate, ADP, NADP+"
+            ],
+            [
+              "Overall",
+              "carbon dioxide, water, light",
+              "carbohydrate and oxygen"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why a leaf in a dark cupboard has no starch",
+              "note": "The cycle runs briefly on stored ATP, then the acceptor is not regenerated and fixation stops — so no new starch forms and the iodine test stays pale."
+            },
+            {
+              "text": "Reading a chromatogram",
+              "note": "A band that travels far with the solvent is the more soluble pigment, which is why the carotenoids run ahead of the chlorophylls on the paper."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The chloroplast in section",
+      "description": "A cut-away chloroplast showing the outer and inner membranes, the stroma as the fluid space, a granum of stacked thylakoids, a stroma lamella connecting grana, and the thylakoid lumen marked within one thylakoid, with a close-up inset of the membrane carrying a photosystem, electron carriers and ATP synthase.",
+      "labels": [
+        "outer and inner double membrane",
+        "stroma holding the Calvin cycle enzymes",
+        "granum as a stack of thylakoids",
+        "thylakoid lumen where protons accumulate",
+        "ATP synthase spanning the thylakoid membrane"
+      ]
+    },
+    {
+      "caption": "Figure: The Z scheme of the light reactions",
+      "description": "An energy-level diagram running left to right: water splitting at photosystem II, an electron raised to a high energy level, a downward chain of carriers with protons pumped into the lumen, a second rise at photosystem I, and the final fall onto NADP+ forming NADPH, with ATP shown branching from the proton gradient.",
+      "labels": [
+        "photolysis of water supplying electrons and oxygen",
+        "photosystem II reaction centre raised by a photon",
+        "electron transport chain pumping protons into the lumen",
+        "photosystem I re-energising the electron",
+        "NADP+ reduced to NADPH, with ATP from the gradient"
+      ]
+    },
+    {
+      "caption": "Figure: Limiting-factor curves for photosynthesis rate",
+      "description": "Rate against light intensity for three carbon dioxide concentrations: each curve rises steeply then bends and plateaus at a different height, with the lowest carbon dioxide plateau first, and a second inset showing rate against temperature with an optimum near 30 to 35 degrees and a fall beyond it.",
+      "labels": [
+        "linear rise: light is limiting",
+        "plateau: carbon dioxide or temperature is limiting",
+        "higher carbon dioxide gives a higher plateau",
+        "temperature optimum near 30 to 35 degrees",
+        "sharp fall beyond the optimum as enzymes denature"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Photosynthesis traps light energy and stores it as chemical energy in carbohydrate.",
+    "Priestley showed plants release oxygen; Ingenhousz required green parts and light.",
+    "Sachs showed starch forms only in the illuminated region of a destarched leaf.",
+    "Chlorophyll absorbs red and blue light and reflects green; carotenoids widen the range.",
+    "Chloroplasts have grana of thylakoids for the light reactions and stroma for carbon fixation.",
+    "Photolysis of water supplies electrons and releases oxygen.",
+    "The electron transport chain builds a proton gradient that drives ATP synthesis.",
+    "Photosystem I produces NADPH; the light reactions yield ATP, NADPH and oxygen.",
+    "The Calvin cycle fixes carbon dioxide with RuBisCO, reduces it and regenerates the acceptor.",
+    "C4 plants pre-fix carbon in mesophyll cells to suppress photorespiration.",
+    "The rate of photosynthesis is set by the factor in shortest supply.",
+    "Beyond the optimum temperature the rate falls as enzymes denature."
+  ],
+  "examFocus": [
+    "Experiment questions want the control, the variable changed and the reagent used.",
+    "The light reaction sequence must name both photosystems, photolysis and the products.",
+    "Calvin cycle answers name the three phases and the enzymes, not just the inputs and outputs.",
+    "Limiting-factor questions must say which factor limits each part of the curve.",
+    "C4 questions expect PEP carboxylase, Kranz anatomy and the suppression of photorespiration."
+  ],
+  "vocabulary": [
+    {
+      "word": "Thylakoid",
+      "meaning": "The flattened membrane sac of the chloroplast holding the pigments."
+    },
+    {
+      "word": "Photolysis",
+      "meaning": "Light-driven splitting of water releasing oxygen and electrons."
+    },
+    {
+      "word": "Photophosphorylation",
+      "meaning": "ATP formation powered by light-driven electron transport."
+    },
+    {
+      "word": "RuBisCO",
+      "meaning": "The enzyme fixing carbon dioxide onto ribulose bisphosphate in the Calvin cycle."
+    },
+    {
+      "word": "Photorespiration",
+      "meaning": "The wasteful oxygenase activity of RuBisCO when carbon dioxide is scarce."
+    },
+    {
+      "word": "Kranz anatomy",
+      "meaning": "The bundle sheath wreath of C4 leaves surrounding the veins."
+    },
+    {
+      "word": "Limiting factor",
+      "meaning": "The factor in shortest supply that sets the rate of a process."
+    },
+    {
+      "word": "Chemiosmosis",
+      "meaning": "ATP synthesis driven by protons flowing through ATP synthase."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-bio-photo-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The oxygen released during photosynthesis comes from the splitting of:",
+      "options": [
+        "Carbon dioxide",
+        "Glucose",
+        "Water",
+        "Chlorophyll"
+      ],
+      "correctIndex": 2,
+      "answer": "Water",
+      "explanation": "Photolysis of water at photosystem II supplies the electrons and releases oxygen."
+    },
+    {
+      "id": "isc11-bio-photo-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The enzyme that fixes carbon dioxide in the Calvin cycle is:",
+      "options": [
+        "PEP carboxylase",
+        "RuBisCO",
+        "ATP synthase",
+        "Amylase"
+      ],
+      "correctIndex": 1,
+      "answer": "RuBisCO",
+      "explanation": "RuBisCO attaches carbon dioxide to ribulose bisphosphate to begin the cycle."
+    },
+    {
+      "id": "isc11-bio-photo-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which scientist showed that only green parts of a plant restore air in light?",
+      "options": [
+        "Priestley",
+        "Ingenhousz",
+        "Van Helmont",
+        "Engelmann"
+      ],
+      "correctIndex": 1,
+      "answer": "Ingenhousz",
+      "explanation": "Ingenhousz demonstrated that green parts in sunlight purify the air."
+    },
+    {
+      "id": "isc11-bio-photo-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Photorespiration is largely avoided in C4 plants because:",
+      "options": [
+        "They lack RuBisCO",
+        "PEP carboxylase fixes carbon dioxide first and bundle sheath cells concentrate it",
+        "They keep their stomata permanently open",
+        "They photosynthesise only at night"
+      ],
+      "correctIndex": 1,
+      "answer": "PEP carboxylase fixes carbon dioxide first and bundle sheath cells concentrate it",
+      "explanation": "PEP carboxylase has no oxygenase activity, and the decarboxylation in bundle sheath cells raises carbon dioxide around RuBisCO."
+    },
+    {
+      "id": "isc11-bio-photo-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The stack of thylakoids inside a chloroplast is called a __________.",
+      "answer": "granum",
+      "explanation": "Grana are connected by stroma lamellae and hold the light-trapping pigments."
+    },
+    {
+      "id": "isc11-bio-photo-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The light-dependent reactions produce ATP, oxygen and __________, which supplies reducing power to the Calvin cycle.",
+      "answer": "NADPH",
+      "explanation": "NADP+ accepts electrons from photosystem I together with a proton."
+    },
+    {
+      "id": "isc11-bio-photo-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is photolysis of water and why is it necessary?",
+      "answer": "Photolysis is the splitting of water molecules using light energy at photosystem II, which yields electrons, hydrogen ions and molecular oxygen. It is necessary because when a photon raises an electron in the reaction centre chlorophyll, that electron is lost to the electron transport chain, and water is the source that replaces it. The released electrons enter the chain, the protons contribute to the gradient used for ATP synthesis, and the oxygen is released as a waste product — which is the origin of the oxygen in the atmosphere.",
+      "explanation": "Definition, the replacement of the lost electron, the proton contribution to the gradient, and the oxygen release."
+    },
+    {
+      "id": "isc11-bio-photo-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the three phases of the Calvin cycle.",
+      "answer": "The three phases are fixation, reduction and regeneration. In fixation, RuBisCO attaches carbon dioxide to the five-carbon acceptor ribulose bisphosphate, and the unstable six-carbon intermediate splits immediately into two molecules of 3-phosphoglycerate. In reduction, ATP and NADPH from the light reactions convert 3-phosphoglycerate into glyceraldehyde-3-phosphate, part of which leaves the cycle to form glucose and other organic molecules. In regeneration, the remaining glyceraldehyde-3-phosphate is rearranged using further ATP to reform ribulose bisphosphate, so the cycle can accept another carbon dioxide.",
+      "explanation": "Fixation, reduction and regeneration, each with what enters and what leaves."
+    },
+    {
+      "id": "isc11-bio-photo-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Name two factors that limit the rate of photosynthesis.",
+      "answer": "Light intensity limits the rate at low levels, because the light reactions cannot supply ATP and NADPH fast enough, and the curve rises with intensity until another factor takes over. Carbon dioxide concentration limits the rate when light is plentiful, since the Calvin cycle cannot fix carbon dioxide fast enough, and raising it raises the plateau. Temperature also limits the rate because the enzymes of the cycle work faster up to an optimum, beyond which denaturation reduces the rate again.",
+      "explanation": "Any two of light intensity, carbon dioxide concentration and temperature, each with a line of explanation."
+    },
+    {
+      "id": "isc11-bio-photo-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe the light-dependent reactions of photosynthesis and explain how light energy is converted into chemical energy.",
+      "answer": "The light-dependent reactions occur in the thylakoid membranes, where pigments are organised into two photosystems. Light is absorbed by the antenna pigments of photosystem II and the energy is funneled to the reaction centre, where a photon raises an electron in the special chlorophyll a pair to a higher energy level — the photoionisation that begins the conversion of light into chemical energy. The electron is captured by an acceptor and its place is taken by electrons from the photolysis of water, which also releases protons and the oxygen that is discharged. The excited electron passes along a chain of carriers in the membrane, and as it moves downhill in energy the energy released is used to pump protons from the stroma into the thylakoid lumen, establishing a steep proton gradient. Protons flow back into the stroma through ATP synthase, and their energy drives the phosphorylation of ADP to ATP — chemiosmotic photophosphorylation. The electron then reaches photosystem I, where a second photon re-energises it, and it finally passes to NADP+, which together with a proton forms NADPH. The chemical energy now stored in ATP and NADPH, together with the oxygen released from water, is the entire product of the light reactions, and it is that energy that will drive carbon dioxide fixation in the stroma.",
+      "explanation": "Both photosystems, water splitting, the electron chain and proton gradient, ATP synthesis by chemiosmosis, and NADPH formation, with the energy conversion made explicit."
+    },
+    {
+      "id": "isc11-bio-photo-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A plant is kept at constant light intensity and temperature while carbon dioxide concentration is increased. The rate of photosynthesis rises and then plateaus. Explain the shape of the curve and state what would happen if light intensity were then increased.",
+      "answer": "At the start of the experiment the carbon dioxide concentration is low, so the Calvin cycle runs slowly: RuBisCO has insufficient substrate and the light reactions accumulate ATP and NADPH that cannot be used. Carbon dioxide is therefore the limiting factor, and raising its concentration increases the rate in direct proportion — this is the rising part of the curve. As concentration continues to increase, the rate of improvement slows because the enzyme RuBisCO is approaching saturation, with most of its active sites occupied at any instant, and because the supply of ATP and NADPH from the light reactions begins to set a ceiling on how fast the cycle can run. Eventually another factor becomes limiting — at constant light intensity the production of ATP and NADPH is fixed — and the curve plateaus: further carbon dioxide changes nothing because the light reactions cannot supply reducing power any faster. If the light intensity were then increased, the light reactions would produce ATP and NADPH more rapidly, releasing the constraint, and the rate would rise again to a new plateau, now set by light rather than carbon dioxide. The exercise shows the central rule: a plateau identifies whatever factor is in shortest supply, and it moves only when that particular factor is increased.",
+      "explanation": "Rising phase with carbon dioxide limiting, saturation of RuBisCO and the shift to light as limiting factor at the plateau, then the effect of raising light."
+    },
+    {
+      "id": "isc11-bio-photo-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why C4 plants outyield C3 plants in hot, dry conditions.",
+      "answer": "In hot, dry weather a C3 plant closes its stomata to conserve water, and the carbon dioxide already inside the leaf is consumed by the Calvin cycle while oxygen from the light reactions accumulates. RuBisCO then behaves as an oxygenase, adding oxygen to ribulose bisphosphate instead of carbon dioxide, and the products are broken down in a process that releases previously fixed carbon dioxide and consumes ATP with no sugar produced — photorespiration, which can reduce the yield of a C3 crop substantially in the heat. C4 plants avoid this by separating the two steps in space. In the mesophyll cells, PEP carboxylase — an enzyme with no affinity for oxygen — fixes carbon dioxide into a four-carbon acid even when the internal concentration is low and the stomata are partly closed. That acid is shuttled into the bundle sheath cells, which have thick walls and little exposure to oxygen, and is decarboxylated there, releasing a high concentration of carbon dioxide directly around RuBisCO. The Calvin cycle then runs with plenty of substrate and almost no oxygenase activity, so fixed carbon is not wasted. The cost is extra ATP to run the shuttle, but in hot, bright conditions energy is abundant while carbon dioxide is scarce, so the trade pays: C4 crops such as maize and sugarcane maintain their yield where wheat and rice lose theirs.",
+      "explanation": "The C3 problem with stomatal closure and oxygen, the C4 mechanism of PEP carboxylase and bundle sheath concentration, the anatomical Kranz feature, and the trade-off in ATP."
+    }
+  ]
+}

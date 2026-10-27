@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-oscillations",
+  "title": "Oscillations",
+  "kind": "physics",
+  "tagline": "Simple harmonic motion, its energy, and the two systems that exemplify it: the spring and the pendulum.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Oscillation is motion that repeats about an equilibrium, and the syllabus concentrates on the special case in which the restoring force is proportional to the displacement and directed towards the equilibrium position — simple harmonic motion. This chapter defines that condition and derives the equations that follow from it, tracks the energy as it shuttles between kinetic and potential, and then applies the analysis to the mass-spring system and the simple pendulum, which are the two systems every question is built from. The final section sets out the practical method: identify the restoring force, match it to the defining condition, and read off the period without re-deriving it each time.",
+    "facts": [
+      {
+        "label": "Defining condition",
+        "value": "Restoring force proportional to displacement and opposed to it: a = −ω²x, giving x = A sin(ωt + φ)."
+      },
+      {
+        "label": "Time period",
+        "value": "T = 2π/ω; for a spring T = 2π√(m/k), for a simple pendulum T = 2π√(l/g) for small angles."
+      },
+      {
+        "label": "Energy",
+        "value": "Total energy is constant and equals ½kA²; it is wholly kinetic at the centre and wholly potential at the extremes."
+      },
+      {
+        "label": "Small angles",
+        "value": "The pendulum formula is accurate only for a few degrees, because sin θ ≈ θ then."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the defining condition of simple harmonic motion and recognise it in a given motion.",
+    "Derive and use the equations of displacement, velocity and acceleration in simple harmonic motion.",
+    "Show that the total energy of a simple harmonic oscillator is constant and equally shared at the mean and extreme.",
+    "Derive the periods of a mass-spring system and a simple pendulum.",
+    "Compare free, damped and forced oscillations and explain resonance with an example."
+  ],
+  "learn": [
+    {
+      "id": "shm-definition",
+      "title": "Simple harmonic motion: definition and equations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A body executes simple harmonic motion when its acceleration is at every instant proportional to its displacement from a fixed equilibrium position and directed towards that position, which is written a = −ω² x. The minus sign is the whole content of the definition: the acceleration must always point home, so the body is driven back whenever it is displaced and overshoots the centre, which is exactly why oscillation rather than a simple return occurs. Integrating the definition gives the standard results: the displacement varies as a sine or cosine of ωt plus a phase, x = A sin(ωt + φ), the velocity is the derivative with its own maximum of Aω at the equilibrium position where the displacement is zero, and the acceleration reaches its maximum of Aω² at the extremes where the displacement is largest. Three quantities then describe any oscillation: the amplitude A, which fixes the energy; the angular frequency ω, which sets the rhythm and is related to the period by T = 2π/ω and to the frequency by f = ω/2π; and the phase φ, which fixes where in the cycle the body is at t = 0. A useful check on any answer is that velocity and acceleration are a quarter of a cycle out of step with the displacement: the acceleration is always maximum where the displacement is maximum, and the speed is greatest at the centre where the displacement vanishes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Definition: acceleration is proportional to displacement and directed towards the equilibrium, a = −ω²x.",
+            "The minus sign means the force always restores, which is why the body overshoots and keeps oscillating.",
+            "Displacement x = A sin(ωt + φ); velocity v = Aω cos(ωt + φ); acceleration = −ω²x.",
+            "Maximum speed Aω occurs at the equilibrium position; maximum acceleration Aω² occurs at the extremes.",
+            "Period T = 2π/ω and frequency f = 1/T = ω/2π, with the period independent of amplitude for a simple harmonic oscillator.",
+            "Displacement, velocity and acceleration differ in phase by a quarter of a cycle each."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The kinematics of simple harmonic motion",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Where it is maximum"
+          ],
+          "rows": [
+            [
+              "Displacement",
+              "x = A sin(ωt + φ)",
+              "at the extremes"
+            ],
+            [
+              "Velocity",
+              "v = Aω cos(ωt + φ)",
+              "at the centre"
+            ],
+            [
+              "Acceleration",
+              "a = −ω²x",
+              "at the extremes, towards the centre"
+            ],
+            [
+              "Period",
+              "T = 2π/ω",
+              "independent of amplitude"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Testing a motion",
+              "note": "For x = 0.05 cos 4t, the acceleration is −16 times the displacement, which matches −ω²x with ω = 4, so the motion is simple harmonic with period π/2 seconds."
+            },
+            {
+              "text": "A motion that is not",
+              "note": "For x = t² the acceleration is constant rather than proportional to displacement, so the motion fails the definition outright."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Simple harmonic motion",
+              "meaning": "Oscillation with acceleration proportional and opposite to displacement from equilibrium."
+            },
+            {
+              "term": "Amplitude",
+              "meaning": "The greatest displacement from equilibrium, which fixes the oscillator’s energy."
+            },
+            {
+              "term": "Angular frequency",
+              "meaning": "ω, the rate of change of phase, related to the period by 2π/ω."
+            },
+            {
+              "term": "Phase",
+              "meaning": "The fraction of the cycle completed, which fixes the position in the oscillation at a given instant."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "title": "Energy in simple harmonic motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The oscillator is a closed system when friction is ignored, and its energy shuttles between two stores without ever disappearing. The kinetic energy is ½ m v² and, substituting the velocity of simple harmonic motion, becomes ½ m A²ω² cos²(ωt + φ); the potential energy of a spring is ½ k x², which using k = mω² becomes ½ m A²ω² sin²(ωt + φ). Adding them uses the identity sin² + cos² = 1 and produces a constant total of ½ m A²ω², which is the proof that the energy is conserved, and it can equally be written as ½ k A². Physically the exchange is transparent: at the extreme the body is instantaneously at rest and all the energy is potential, at the centre the displacement is zero and all the energy is kinetic, and in between the two are shared in proportions set by the square of the position in the cycle. Damping modifies this by removing energy to the surroundings, so the amplitude decays, usually exponentially, while the period stays very nearly constant; the motion is then damped harmonic motion, and when the damping is heavy the body creeps back to equilibrium without oscillating at all. Forced oscillations and resonance belong with this energy account: if an external driver supplies energy at the natural frequency, the amplitude grows because each cycle replenishes what damping removes, and the amplitude peaks sharply at resonance — which is why a bridge can be shaken by marching soldiers, a wine glass can be shattered by a matching note, and a radio picks out one station from many."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Kinetic energy ½ m v² = ½ m A²ω² cos²(ωt + φ); potential energy ½ k x² = ½ m A²ω² sin²(ωt + φ).",
+            "The total is constant at ½ m A²ω², written ½ k A², because sin² + cos² = 1.",
+            "Energy is wholly potential at the extremes and wholly kinetic at the equilibrium position.",
+            "Damping drains energy to the surroundings so the amplitude decays, with the period scarcely changed.",
+            "Forced oscillation: an external driver supplies energy each cycle, and the response depends on the driving frequency.",
+            "Resonance: driving at the natural frequency gives the largest amplitude because supply matches the system’s own rhythm."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Energy through one cycle",
+          "columns": [
+            "Position",
+            "Displacement",
+            "Kinetic",
+            "Potential"
+          ],
+          "rows": [
+            [
+              "Extreme",
+              "A",
+              "zero",
+              "½ k A²"
+            ],
+            [
+              "Quarter point",
+              "A/√2",
+              "quarter of the total",
+              "three quarters"
+            ],
+            [
+              "Centre",
+              "0",
+              "½ m A²ω²",
+              "zero"
+            ],
+            [
+              "Any instant",
+              "x",
+              "total − potential",
+              "½ k x²"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A mass on a spring",
+              "note": "With k = 100 N m⁻± and amplitude 0.05 m, the total energy is ½ × 100 × 0.0025 = 0.125 J, which is the figure at every point of the motion."
+            },
+            {
+              "text": "Breaking a glass by resonance",
+              "note": "A singer sustains a note matching the glass’s natural frequency, the amplitude grows each cycle until the stress exceeds the material’s limit and the glass shatters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spring-pendulum",
+      "title": "The mass-spring system and the simple pendulum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mass-spring system is the cleanest example because its restoring force is exactly proportional to the displacement with no approximation: a spring of stiffness k carrying a mass m obeys F = −kx, and comparing with F = ma gives a = −(k/m)x, so ω² = k/m and the period is 2π√(m/k). Two consequences are worth stating because they are commonly asked: the period is independent of the amplitude, which is the isochronism that makes clocks useful, and it is independent of g, so the same spring oscillates at the same rate on the Moon. The simple pendulum is the companion case, and here the restoration comes from gravity: for a bob at angle θ the restoring component of weight is mg sin θ along the arc, giving an acceleration of −g sin θ / l, which equals −ω²θ only when sin θ may be replaced by θ itself. That approximation holds to better than one per cent below about five degrees, and it yields T = 2π√(l/g), which is independent of the bob’s mass and of the amplitude for small swings. The clock pendulum exploits both properties, and the seconds pendulum of length about 1 m, which swings once a second each way, is a standard examination fact. Errors in this area come from using the small-angle result outside its range, from forgetting to take the square root, and from confusing angular frequency with frequency in the final substitution."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mass on a spring: F = −kx gives ω² = k/m, so T = 2π√(m/k), independent of amplitude and of g.",
+            "Simple pendulum: the restoring force is the tangential component of weight, mg sin θ.",
+            "For small angles sin θ ≈ θ, giving a = −gθ/l and therefore T = 2π√(l/g).",
+            "The pendulum period is independent of the mass and, for small swings, of the amplitude.",
+            "The formula fails for large angles, where the period grows with amplitude and the motion ceases to be simple harmonic.",
+            "A seconds pendulum has length about 0.99 m, giving a half-period of one second."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Spring against pendulum",
+          "columns": [
+            "Feature",
+            "Mass-spring",
+            "Simple pendulum"
+          ],
+          "rows": [
+            [
+              "Restoring agent",
+              "elastic force kx",
+              "component of weight mg sin θ"
+            ],
+            [
+              "Period",
+              "2π√(m/k)",
+              "2π√(l/g)"
+            ],
+            [
+              "Depends on mass",
+              "yes, in the period",
+              "no"
+            ],
+            [
+              "Depends on g",
+              "no",
+              "yes"
+            ],
+            [
+              "Exactness",
+              "exact for an ideal spring",
+              "small angles only"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Doubling the mass",
+              "note": "Four times the mass on the same spring doubles the period, because m sits inside the square root."
+            },
+            {
+              "text": "Pendulum on the Moon",
+              "note": "The same pendulum on the Moon, with g one sixth of the Earth’s, takes about 2.45 times as long for each swing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "free-damped-resonance",
+      "title": "Free, damped and forced oscillations and resonance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Real oscillators are classified by what supplies and what removes energy. Free oscillation is the ideal case in which the body is displaced once and left alone, oscillating forever at its natural frequency because no energy is lost; a tuning fork struck once, a frictionless mass on a spring and a grandfather clock’s pendulum in the idealised treatment are all presented this way. Damped oscillation is the reality: resistance drains energy, so the amplitude decays, usually approximately exponentially, while the frequency falls only slightly, and with heavy damping the body returns to equilibrium without passing it — the case of a door closer or a shock absorber. Forced oscillation occurs when an external periodic driver adds energy, and the steady-state frequency becomes that of the driver rather than of the system, with the amplitude depending on how close the driving frequency is to the natural one. That dependence peaks at resonance, where the driver is in step with the natural motion and supplies energy exactly when the oscillator can use it, so even a small repeated push — a soldier’s march, a gust at the right interval, a note matching a wine glass — builds a large amplitude. Applications and hazards are the standard examination pair: the tuning of a radio and the vibration of a bridge or an aircraft wing in flight, where resonance must be avoided by ensuring that no natural frequency of the structure coincides with the forcing frequency."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Free oscillation: one initial displacement and no further driving, at the natural frequency with constant amplitude.",
+            "Damped oscillation: amplitude decays as energy is lost; frequency changes little, and heavy damping prevents overshoot.",
+            "Forced oscillation: the driver sets the eventual frequency, and the amplitude depends on the frequency mismatch.",
+            "Resonance: driving at the natural frequency gives maximum amplitude because energy is added in step with the motion.",
+            "Uses: tuning circuits and musical instruments select a frequency by resonance.",
+            "Hazards: bridges, aircraft wings and buildings must have natural frequencies away from likely forcing frequencies."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Three kinds of oscillation",
+          "columns": [
+            "Kind",
+            "What drives it",
+            "Amplitude",
+            "Frequency"
+          ],
+          "rows": [
+            [
+              "Free",
+              "initial displacement only",
+              "constant in theory",
+              "natural"
+            ],
+            [
+              "Damped",
+              "initial displacement only",
+              "decays",
+              "natural, slightly lower"
+            ],
+            [
+              "Forced",
+              "external driver",
+              "settles to a steady value",
+              "driver’s, peaking at resonance"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A swing being pushed",
+              "note": "A child on a swing adds a push at each natural cycle and the arc grows — textbook resonance, and no push at the wrong moment helps."
+            },
+            {
+              "text": "Marching over a bridge",
+              "note": "Soldiers were once ordered to break step on bridges because their cadence could match a natural frequency of the span."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solving",
+      "title": "Solving oscillation problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Oscillation questions reward a fixed routine more than memory. Start by identifying the restoring force in words: the spring force for a mass-spring system, the tangential component of weight for a pendulum, buoyancy for a floating body, and so on. Then write it as proportional to the displacement and read off ω² from the coefficient, since the period follows immediately as 2π/ω and every candidate who writes the formula directly risks using a frequency where an angular frequency was meant. Check the conditions before quoting a result: the pendulum formula needs small angles, the spring formula needs an ideal spring whose own mass is negligible compared with the load, and the amplitude independence needs oscillations within the elastic limit. Finally, use the energy relations as a cross-check, because the total energy ½ k A² must equal the kinetic energy at the centre, ½ m vₘₐₓ², and that single equality answers several questions about maximum speed without any calculus at all. In examination answers, state the definition of simple harmonic motion before applying it, quote the approximation used when the pendulum is involved, and give the period with its unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Name the restoring force first, then write it proportional to displacement to find ω².",
+            "Convert to the period with T = 2π/ω in one step, and never confuse ω with f.",
+            "State the conditions: small angles for the pendulum, ideal spring, motion inside the elastic limit.",
+            "Cross-check with energy: ½ k A² = ½ m vₘₐₓ² gives the maximum speed directly.",
+            "Quote the period with its unit and, where relevant, the amplitude for which it was derived.",
+            "Identify whether the question describes free, damped or forced motion before discussing energy or amplitude."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Maximum speed from energy",
+              "note": "A 0.2 kg mass on a spring of 50 N m⁻± oscillating at 0.04 m amplitude reaches 0.63 m s⁻¹ at the centre, from ½ k A² = ½ m v² without any phase calculation."
+            },
+            {
+              "text": "Choosing the formula",
+              "note": "A floating cylinder bobbing on water is driven by buoyancy rather than by a spring or gravity alone, so the restoring force must be written out before the period can be found."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Simple harmonic motion as a projection of circular motion",
+      "description": "A reference circle with a rotating phasor, its projection traced onto a displacement axis showing a sine curve, with the amplitude and one period marked on the trace.",
+      "labels": [
+        "rotating phasor at angular speed ω",
+        "projection on the axis gives x = A sin(ωt + φ)",
+        "amplitude A is the circle radius",
+        "one full turn equals one period T",
+        "speed of projection is greatest at the centre"
+      ]
+    },
+    {
+      "caption": "Figure: Energy exchange in a spring oscillator",
+      "description": "Two bar pairs at the extreme and at the centre showing potential and kinetic shares, with a continuous curve of the two energies against displacement crossing at ±A/√2.",
+      "labels": [
+        "at x = A: all potential, zero kinetic",
+        "at x = 0: all kinetic, zero potential",
+        "total line is flat: energy conserved",
+        "potential follows x², kinetic follows A² − x²",
+        "crossing points at x = ±A/√2"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Simple harmonic motion needs acceleration proportional to displacement and directed towards equilibrium: a = −ω²x.",
+    "The minus sign is the defining feature: the restoring acceleration always points home.",
+    "Displacement x = A sin(ωt + φ), maximum speed Aω at the centre, maximum acceleration Aω² at the extremes.",
+    "The period T = 2π/ω does not depend on the amplitude for a simple harmonic oscillator.",
+    "Total energy ½ m A²ω² = ½ k A², constant because sin² + cos² = 1.",
+    "Energy is wholly potential at the extremes and wholly kinetic at the equilibrium position.",
+    "Damping removes energy so the amplitude decays while the period changes little.",
+    "Forced oscillation settles at the driver’s frequency, with maximum amplitude at resonance.",
+    "A mass-spring system has T = 2π√(m/k), independent of amplitude and of g.",
+    "A simple pendulum has T = 2π√(l/g) for small angles, independent of the mass and of small amplitudes.",
+    "The pendulum formula fails at large angles, where the period lengthens with amplitude.",
+    "Resonance explains tuning, musical instruments, and the hazards of matching forcing and natural frequencies."
+  ],
+  "examFocus": [
+    "Definition questions must quote both proportionality and direction of the acceleration.",
+    "Derive the pendulum period including the small-angle substitution; the approximation is itself a mark.",
+    "Energy answers should show the addition of the kinetic and potential terms using sin² + cos² = 1.",
+    "Resonance answers need one use and one hazard as concrete instances."
+  ],
+  "vocabulary": [
+    {
+      "word": "Simple harmonic motion",
+      "meaning": "Oscillation with acceleration proportional and opposite to displacement."
+    },
+    {
+      "word": "Amplitude",
+      "meaning": "The maximum displacement from equilibrium."
+    },
+    {
+      "word": "Period",
+      "meaning": "The time for one complete cycle, T = 2π/ω."
+    },
+    {
+      "word": "Phase",
+      "meaning": "The point reached in the cycle, expressed by the angle in the sine function."
+    },
+    {
+      "word": "Damping",
+      "meaning": "The gradual drain of energy from an oscillator, reducing its amplitude."
+    },
+    {
+      "word": "Resonance",
+      "meaning": "The large response of a system driven at its natural frequency."
+    },
+    {
+      "word": "Natural frequency",
+      "meaning": "The frequency at which a system oscillates when disturbed and left alone."
+    },
+    {
+      "word": "Isochronism",
+      "meaning": "The property of an oscillator whose period does not depend on amplitude."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-osc-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The time period of a simple pendulum does not depend on:",
+      "options": [
+        "Its length",
+        "The acceleration due to gravity",
+        "The mass of the bob",
+        "The amplitude for small swings"
+      ],
+      "correctIndex": 2,
+      "answer": "The mass of the bob",
+      "explanation": "The mass cancels when the restoring force mg sin θ is compared with ma, leaving T = 2π√(l/g)."
+    },
+    {
+      "id": "isc11-phy-osc-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In simple harmonic motion the speed of the body is greatest:",
+      "options": [
+        "At the extreme position",
+        "At the equilibrium position",
+        "At a quarter of the amplitude",
+        "Everywhere for a given energy"
+      ],
+      "correctIndex": 1,
+      "answer": "At the equilibrium position",
+      "explanation": "All the energy is kinetic where the displacement is zero, so the speed peaks at the centre."
+    },
+    {
+      "id": "isc11-phy-osc-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The condition for a motion to be simple harmonic is that the acceleration is:",
+      "options": [
+        "Constant",
+        "Proportional to displacement and directed towards the equilibrium",
+        "Proportional to the square of displacement",
+        "Always opposite to the velocity"
+      ],
+      "correctIndex": 1,
+      "answer": "Proportional to displacement and directed towards the equilibrium",
+      "explanation": "Both the proportionality and the direction towards equilibrium are required, written a = −ω²x."
+    },
+    {
+      "id": "isc11-phy-osc-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the amplitude of a mass-spring oscillator is doubled while the mass stays the same, its time period:",
+      "options": [
+        "Doubles",
+        "Is halved",
+        "Is unchanged",
+        "Becomes four times"
+      ],
+      "correctIndex": 2,
+      "answer": "Is unchanged",
+      "explanation": "T = 2π√(m/k) contains neither the amplitude nor the energy, so the period is unchanged."
+    },
+    {
+      "id": "isc11-phy-osc-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The maximum acceleration of a particle executing simple harmonic motion is A __________, where ω is the angular frequency.",
+      "answer": "ω²",
+      "explanation": "It occurs at the extreme positions, where the displacement is a maximum and the restoring force is greatest."
+    },
+    {
+      "id": "isc11-phy-osc-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "When a system is driven at its natural frequency, the amplitude of oscillation becomes very large, a condition called __________.",
+      "answer": "resonance",
+      "explanation": "The driver supplies energy in step with the motion, so it accumulates cycle by cycle."
+    },
+    {
+      "id": "isc11-phy-osc-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the defining characteristics of simple harmonic motion.",
+      "answer": "A particle executes simple harmonic motion when its acceleration is at every instant directly proportional to its displacement from a fixed equilibrium position and is directed towards that position, so a = −ω²x for a constant ω. From this follow the sinusoidal displacement x = A sin(ωt + φ), a period T = 2π/ω that does not depend on the amplitude, and an acceleration that is greatest at the extremes while the speed is greatest at the centre.",
+      "explanation": "Proportionality, direction towards equilibrium, and the consequences for the form of the motion and the period."
+    },
+    {
+      "id": "isc11-phy-osc-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Show that the total energy of a mass-spring oscillator is constant.",
+      "answer": "The kinetic energy is ½ m v² and the potential energy stored in the spring is ½ k x². For simple harmonic motion v = Aω cos(ωt + φ) and x = A sin(ωt + φ), and k = mω² for this oscillator, so the potential term becomes ½ m A²ω² sin²(ωt + φ) while the kinetic term is ½ m A²ω² cos²(ωt + φ). Adding them gives ½ m A²ω² (sin² + cos²), and since the bracket is always one, the total is ½ m A²ω² = ½ k A², a constant independent of time.",
+      "explanation": "Substitution of the standard velocity and displacement, the identity sin² + cos² = 1 and the constant result."
+    },
+    {
+      "id": "isc11-phy-osc-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is resonance? Give one example where it is useful and one where it is dangerous.",
+      "answer": "Resonance is the condition in which a periodic driving force has a frequency equal or very close to the natural frequency of the system, so that energy is supplied in step with the motion and the amplitude grows to a large value. A useful instance is the tuning of a radio circuit, which selects one station’s frequency from many by resonance; a dangerous instance is the vibration of a bridge when soldiers march in step or wind gusts match a natural frequency of the span, which can build up to structural damage.",
+      "explanation": "Definition in terms of matching frequencies, then one useful and one hazardous example."
+    },
+    {
+      "id": "isc11-phy-osc-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive the expression for the time period of a simple pendulum.",
+      "answer": "Consider a bob of mass m suspended from a fixed point by a light inextensible thread of length l, displaced through a small angle θ. Two forces act: the weight mg vertically downwards and the tension along the thread. Resolving the weight along the arc and perpendicular to it, the component perpendicular to the thread is balanced by the tension, while the tangential component mg sin θ acts towards the equilibrium position and is therefore the restoring force. Newton’s second law along the arc gives m a = −mg sin θ, so a = −g sin θ / l. For small angles sin θ may be replaced by θ itself, and since the arc displacement s equals lθ the acceleration becomes a = −(g/l)θ = −(g/l)s, which is proportional to the displacement and directed towards equilibrium — the defining condition of simple harmonic motion with ω² = g/l. The time period is therefore T = 2π/ω = 2π√(l/g), independent of the mass of the bob and of the amplitude for small swings, which is why pendulums are used to regulate clocks. The derivation is valid only while sin θ ≈ θ holds, that is for angles of a few degrees.",
+      "explanation": "Resolution of the weight, the small-angle substitution, the identification of ω² and the final period with its conditions."
+    },
+    {
+      "id": "isc11-phy-osc-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A mass of 0.5 kg attached to a spring of stiffness 200 N m⁻± is displaced and released. Find the period, the angular frequency and the maximum speed if the amplitude is 0.03 m.",
+      "answer": "The angular frequency follows from ω² = k/m, so ω² = 200/0.5 = 400 and ω = 20 rad s⁻¹. The period is then T = 2π/ω = 2π/20 = 0.314 s, and the ordinary frequency is f = 1/T ≈ 3.18 Hz. The maximum speed occurs as the mass passes the equilibrium position and is Aω = 0.03 × 20 = 0.6 m s⁻¹. The same speed can be obtained from energy, since ½ k A² = ½ m vₘₐₓ² gives vₘₐₓ = A√(k/m) = 0.6 m s⁻¹, confirming the result. Two checks are worth noting: the period is independent of the amplitude, so 0.03 m was needed only for the speed, and doubling the amplitude would double the maximum speed while leaving the period at 0.314 s.",
+      "explanation": "ω from k and m, the period, the maximum speed from Aω, the energy cross-check and the amplitude independence."
+    },
+    {
+      "id": "isc11-phy-osc-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A pendulum clock keeps correct time at 20°C but loses time on a hot day when the pendulum rod expands. Analyse the effect.",
+      "answer": "The period of a pendulum is 2π√(l/g), so it depends on the length of the rod through the square root. When the rod is heated it expands by α l ΔT, increasing the length to l(1 + αΔT) and the period to T(1 + αΔT/2) to a first approximation, so the period becomes longer and each swing takes more time than it should. The clock therefore registers less elapsed time than has actually passed and loses, by roughly half the fractional expansion of the rod per degree; for a steel rod with α = 12 × 10⁻⁶ K⁻¹ the error is of the order of six parts in a million per kelvin, which is seconds per day over a wide temperature range. The remedy historically was a pendulum of grid or tube construction in which an inner rod of one material expands in a way that cancels the outer frame, or a mercury pendulum where the rising mercury shortens the effective length, and the modern equivalent is an electronic oscillator whose frequency depends on a quartz crystal rather than on any mechanical length.",
+      "explanation": "Period-length relation, the fractional change in period, the direction of the error, and one compensating design."
+    }
+  ]
+}

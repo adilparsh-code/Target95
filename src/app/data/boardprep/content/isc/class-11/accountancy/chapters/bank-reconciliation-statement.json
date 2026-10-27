@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-acct-brs",
+  "title": "Bank Reconciliation Statement",
+  "kind": "accountancy",
+  "tagline": "Why the cash book and the pass book disagree, and the three standard ways of reconciling them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Accountancy syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Accountancy, subject code 858). No board examination paper, textbook or commercial guide was consulted. Journal entries, ledger accounts, statements and worked figures were worked out for this page and are not reproduced from any published source.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Accountancy syllabus registered for Examination Year 2027 (subject code 858): every explanation, format, worked example, figure specification, question and answer was written for this page. Accounting treatment follows standard double-entry practice as prescribed for the ISC Class XI course."
+  },
+  "overview": {
+    "intro": "A firm keeps its cash book; the bank keeps its own record of the same account, called the pass book or statement of account. The two rarely agree on a given day, not because either is wrong, but because each records events the other has not yet seen or does not record at all. Cheques issued but not yet presented, cheques deposited but not yet cleared, bank charges debited without instruction and interest credited by the bank all open a gap. The bank reconciliation statement explains that gap in a ruled form, and the unit examines three situations: starting from the balance of one book alone, starting from extracts of both books, and starting from a cash book that must first be amended for items the bank knew about and the firm did not.",
+    "facts": [
+      {
+        "label": "Cash vs pass book",
+        "value": "Debit and credit meanings are opposite: an asset cash book debit balance is a credit balance in the bank’s books for the same account."
+      },
+      {
+        "label": "Common causes of difference",
+        "value": "Cheques issued but not presented, cheques deposited but not cleared, direct deposits, bank charges, interest, standing instructions, dishonoured cheques."
+      },
+      {
+        "label": "Three problem types",
+        "value": "From one balance, from extracts of both, and with an amended cash book."
+      },
+      {
+        "label": "Exam weight",
+        "value": "A compulsory ten-mark reconciliation problem appears in most yearly ISC papers."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain why the cash book balance and the pass book balance differ.",
+    "Identify the direction of each timing difference on either balance.",
+    "Prepare a bank reconciliation statement starting from the cash book balance.",
+    "Prepare a reconciliation from extracts of both books.",
+    "Amend the cash book for bank charges and interest before reconciling."
+  ],
+  "learn": [
+    {
+      "id": "need-and-causes",
+      "title": "The meaning and need for a bank reconciliation statement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a business banks its receipts and issues cheques for its payments, the bank maintains a ledger of the business’s account. The business records the same movements in the bank column of its cash book. The two balances differ because of timing and because of items known only to one side. A cheque deposited on the 28th may be credited by the bank on the 30th, so the cash book is ahead of the pass book. A cheque issued on the 25th may be presented on the 5th of the next month, so the cash book is behind. The bank may also charge for services, pay interest, or dishonour a cheque credited earlier, and the firm learns of these only when the statement arrives."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cheques issued but not yet presented for payment: cash book lower than pass book.",
+            "Cheques deposited but not yet cleared: cash book higher than pass book.",
+            "Direct deposits or collections by the bank: pass book higher.",
+            "Bank charges, commission and rent of safe: pass book lower.",
+            "Interest credited on deposits: pass book higher.",
+            "Standing instructions and direct debits such as insurance premiums: pass book lower.",
+            "Cheques previously deposited but dishonoured: pass book lower.",
+            "Errors by either party: may move the balance in either direction."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Reconciliation is therefore needed for three reasons: it proves that the bank balance used in the accounts is genuine, it detects errors and omissions in the cash book, and it prevents the same item being counted twice or omitted when the accounts are prepared. Without it, a firm might treat a cheque in transit as cash in hand."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Balance as per cash book ₹50,000; cheques deposited ₹12,000 not cleared. Balance as per pass book is ₹38,000.",
+              "note": "The bank has not yet seen the deposit, so the pass book is lower by the full amount deposited."
+            },
+            {
+              "text": "Balance as per pass book ₹75,000; cheques issued ₹9,000 not presented. Cash book balance is ₹66,000.",
+              "note": "The firm has already reduced its cash book but the bank has not yet paid out, so the cash book is lower."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "one-sided-reconciliation",
+      "title": "Reconciliation from the balance of one book",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The simplest problem gives the balance of one book and a list of items, and asks for the balance of the other. The whole question turns on direction. Start by writing down which balance you hold, then for each item decide whether it makes the other balance higher or lower. A cheque deposited but not cleared reduces the pass book balance relative to the cash book because the bank has not credited it. A cheque issued but not presented raises the pass book balance relative to the cash book because the bank has not debited it. Bank charges and interest are known to the bank only, so they move the pass book and not the cash book."
+        },
+        {
+          "type": "table",
+          "caption": "Effect of each item on the two balances",
+          "columns": [
+            "Item",
+            "Cash book effect",
+            "Pass book effect",
+            "Direction of difference"
+          ],
+          "rows": [
+            [
+              "Cheque deposited not cleared",
+              "Already debited",
+              "Not yet credited",
+              "Cash book higher"
+            ],
+            [
+              "Cheque issued not presented",
+              "Already credited",
+              "Not yet debited",
+              "Cash book lower"
+            ],
+            [
+              "Bank charges",
+              "Not recorded",
+              "Debited by bank",
+              "Cash book higher"
+            ],
+            [
+              "Interest credited",
+              "Not recorded",
+              "Credited by bank",
+              "Cash book higher"
+            ],
+            [
+              "Cheque dishonoured",
+              "Still shown as received",
+              "Reversed by bank",
+              "Cash book higher"
+            ],
+            [
+              "Direct deposit by customer",
+              "Not recorded",
+              "Credited by bank",
+              "Cash book lower"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Cash book balance ₹80,000; cheques issued ₹15,000 not presented; charges ₹2,000. Pass book balance = 80,000 + 15,000 − 2,000 = ₹93,000.",
+              "note": "The unpresented cheque makes the bank’s figure higher and the unrecorded charges make it lower."
+            },
+            {
+              "text": "Pass book balance ₹64,000; cheques deposited ₹20,000 not cleared; interest credited ₹1,500. Cash book balance = 64,000 − 20,000 + 1,500 = ₹45,500.",
+              "note": "Removing the deposit the bank has not yet credited and the interest the firm has not yet recorded gives the firm’s own figure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "extracts-of-both",
+      "title": "Reconciliation from extracts of both books",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A harder problem shows two ledgers, each containing receipts and payments, some of which are common to both and some peculiar to one. The method is systematic. List the balance of one book, add receipts and deduct payments peculiar to it, then deduct receipts and add payments that are peculiar to the other book, and the result is the balance of the other. Items appearing in both books are irrelevant to the difference and are simply ignored; only the items that one book has recorded and the other has not can move the balance."
+        },
+        {
+          "type": "table",
+          "caption": "Extract of cash book and pass book for April",
+          "columns": [
+            "Particulars",
+            "Cash book (₹)",
+            "Pass book (₹)",
+            "Reconciling?"
+          ],
+          "rows": [
+            [
+              "Balance b/d",
+              "25,000 (Dr)",
+              "31,000 (Cr)",
+              "No, both see it"
+            ],
+            [
+              "Cheques deposited",
+              "18,000",
+              "14,000",
+              "₹4,000 not cleared"
+            ],
+            [
+              "Cheques issued",
+              "12,000",
+              "9,000",
+              "₹3,000 not presented"
+            ],
+            [
+              "Bank charges",
+              "—",
+              "600",
+              "Yes, bank only"
+            ],
+            [
+              "Direct deposit by Anand",
+              "—",
+              "5,000",
+              "Yes, bank only"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Working from the cash book: start at ₹25,000, add the ₹4,000 deposited and not yet cleared and the ₹5,000 direct deposit the firm has not recorded, deduct the ₹3,000 issued but not presented and the ₹600 charges, and the pass book balance of ₹30,400 is obtained. Reversing the same four adjustments from the pass book returns to the cash book, which is the check the examiner expects you to show."
+        }
+      ]
+    },
+    {
+      "id": "amended-cash-book",
+      "title": "The amended or adjusted cash book",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When the bank has recorded items the firm has not, the cash book itself is wrong and must be corrected before any reconciliation is attempted. This is the amended cash book. Charges, commission, interest, dishonoured cheques and direct debits are entered in the bank column with a narrating item, and the new bank balance is found. The amended balance is then reconciled with the pass book using only the timing differences that remain: cheques deposited and not cleared, and cheques issued and not presented."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Enter bank charges and commission paid by the bank on the payment side.",
+            "Enter interest credited by the bank on the receipt side.",
+            "Reverse any cheque previously deposited that has been dishonoured.",
+            "Enter any direct debit such as an insurance premium under a standing instruction.",
+            "Find the amended bank balance, then reconcile it with the pass book using cheques in transit only."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Cash book bank balance ₹52,000, charges ₹1,400, interest ₹900, cheque dishonoured ₹6,000.",
+              "note": "Amended balance = 52,000 + 900 − 1,400 − 6,000 = ₹45,500, which is then compared with the pass book."
+            },
+            {
+              "text": "Amended balance ₹45,500; cheques deposited not cleared ₹8,000; cheques issued not presented ₹3,000. Pass book balance = 45,500 − 8,000 + 3,000 = ₹40,500.",
+              "note": "Only transit items remain after amendment, so the reconciliation is short and can be checked in one line."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "format-and-disclosure",
+      "title": "Format, sign convention and disclosure",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The statement is ruled in three columns: particulars, debit or credit, and amount. A short note at the foot states the purpose, for example this statement is prepared to reconcile the balance as per cash book with the balance as per pass book. The sign convention differs between problem types. When starting from a debit balance of the cash book, items that increase that balance are shown on the debit side and items that reduce it on the credit side; starting from a credit balance in the bank’s books, the treatment reverses. The reliable rule is to write the opening balance first, then show every adjustment that increases it on one side and every reduction on the other, so that the closing figure can be proved by a single subtraction."
+        },
+        {
+          "type": "table",
+          "caption": "Pro forma of a bank reconciliation statement",
+          "columns": [
+            "Particulars",
+            "Debit (₹)",
+            "Credit (₹)"
+          ],
+          "rows": [
+            [
+              "Balance as per cash book (debit balance)",
+              "50,000",
+              "—"
+            ],
+            [
+              "Add: cheques issued not presented",
+              "9,000",
+              "—"
+            ],
+            [
+              "Less: cheques deposited not cleared",
+              "—",
+              "12,000"
+            ],
+            [
+              "Balance as per pass book (credit balance)",
+              "—",
+              "47,000"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A reconciliation is a statement of explanation, not a part of the double-entry books, so no entry is passed for it. It is prepared as often as the statement is received, usually monthly, and the difference at any year end should be fully explained so that the bank balance appearing in the balance sheet can be relied upon."
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: How the cash book and the pass book fall out of step",
+      "description": "Two parallel horizontal tracks, one labelled cash book and one labelled pass book, each carrying event markers; four vertical dashed links mark the events recorded on one track only, with a bracket showing the resulting difference in balance.",
+      "labels": [
+        "Cheque deposited: cash book ahead of pass book",
+        "Cheque issued: cash book behind pass book",
+        "Bank charges: pass book records an event the cash book has not",
+        "Direct deposit: pass book ahead of cash book",
+        "Difference closes once every item is recorded on both tracks"
+      ]
+    },
+    {
+      "caption": "Figure: The amended cash book route to reconciliation",
+      "description": "A three-stage flow: the original cash book balance enters a box of bank-only adjustments, the output feeds the amended cash book balance, and a final box adds or removes cheques in transit to reach the pass book balance.",
+      "labels": [
+        "Stage 1: original bank column balance",
+        "Stage 2: charges, interest, dishonoured cheque, direct debit",
+        "Stage 3: amended cash book balance",
+        "Stage 4: adjust for cheques in transit",
+        "Result: balance as per pass book"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A bank reconciliation explains the difference between the cash book bank balance and the pass book balance.",
+    "Timing differences arise from cheques deposited but not cleared and cheques issued but not presented.",
+    "Items known only to the bank are charges, commission, interest, direct deposits and dishonoured cheques.",
+    "The debit and credit meanings of the two books are opposite for the same account.",
+    "Reconciliation is a statement and requires no journal entry.",
+    "An amended cash book must be prepared before reconciling when the cash book omits bank-only items.",
+    "Items appearing in both books are ignored because they cannot cause a difference.",
+    "Reconcile in one direction and then reverse the adjustments as a check.",
+    "Reconciliation detects errors and confirms that the bank balance in the accounts is genuine.",
+    "The statement is prepared at least monthly and fully explained at the year end."
+  ],
+  "examFocus": [
+    "Read the opening phrase carefully: balance as per cash book versus balance as per pass book changes the sign of every adjustment.",
+    "Show the working under the statement; the arithmetic with the reasoning earns more than a bare figure.",
+    "For amended cash book problems, correct the cash book first and never mix bank-only items into the reconciliation stage."
+  ],
+  "vocabulary": [
+    {
+      "word": "Pass book",
+      "meaning": "The bank’s record of the business’s current account, also called a bank statement."
+    },
+    {
+      "word": "Cheque in transit",
+      "meaning": "A cheque deposited but not yet cleared by the bank on the date of reconciliation."
+    },
+    {
+      "word": "Unpresented cheque",
+      "meaning": "A cheque issued and recorded in the cash book but not yet paid by the bank."
+    },
+    {
+      "word": "Amended cash book",
+      "meaning": "The cash book corrected for bank charges, interest and dishonoured cheques before reconciliation."
+    },
+    {
+      "word": "Direct deposit",
+      "meaning": "Money paid into the account by a third party, known to the bank before the firm."
+    },
+    {
+      "word": "Dishonour",
+      "meaning": "Refusal of the bank to honour a cheque credited earlier, reversing the credit."
+    },
+    {
+      "word": "Standing instruction",
+      "meaning": "An order to the bank to make a fixed payment automatically, such as an insurance premium."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-acct-brs-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Cheques issued but not yet presented for payment make the:",
+      "options": [
+        "Cash book balance higher than the pass book balance",
+        "Pass book balance higher than the cash book balance",
+        "Both balances fall equally",
+        "Both balances rise equally"
+      ],
+      "correctIndex": 1,
+      "answer": "Pass book balance higher than the cash book balance",
+      "explanation": "The firm has already credited its cash book with the payment while the bank has not yet debited it, so the pass book balance stands higher."
+    },
+    {
+      "id": "isc11-acct-brs-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Bank charges debited by the bank are shown in a reconciliation statement as:",
+      "options": [
+        "A deduction from the cash book balance",
+        "An addition to the cash book balance",
+        "An addition to the pass book balance",
+        "Ignored entirely"
+      ],
+      "correctIndex": 0,
+      "answer": "A deduction from the cash book balance",
+      "explanation": "The firm has not recorded the charges, so its cash book balance is overstated relative to the bank and must be reduced when reconciling from it."
+    },
+    {
+      "id": "isc11-acct-brs-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these would NOT cause a difference between the two balances?",
+      "options": [
+        "A cheque deposited on the last day of the month",
+        "A cheque issued but not presented",
+        "Bank interest credited on a fixed deposit",
+        "Both books containing the same recorded transaction"
+      ],
+      "correctIndex": 3,
+      "answer": "Both books containing the same recorded transaction",
+      "explanation": "Items recorded identically in both books appear in both and therefore cancel out in the comparison; only one-sided items cause a difference."
+    },
+    {
+      "id": "isc11-acct-brs-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A cheque for ₹7,000 deposited last month and shown in the cash book is dishonoured this month. The cash book balance is now:",
+      "options": [
+        "Higher than the pass book, because the receipt remains recorded",
+        "Lower than the pass book, because the bank has reversed the credit",
+        "Unchanged, because the bank will clear it later",
+        "Equal to the pass book in every case"
+      ],
+      "correctIndex": 0,
+      "answer": "Higher than the pass book, because the receipt remains recorded",
+      "explanation": "The bank has reversed the credit, but the cash book still shows the money received, so the cash book figure is too high until it is amended."
+    },
+    {
+      "id": "isc11-acct-brs-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The bank’s record of the business’s account, printed periodically, is called the __________ book.",
+      "answer": "pass",
+      "explanation": "The pass book or bank statement is the bank’s copy of the same account recorded in the business’s bank column."
+    },
+    {
+      "id": "isc11-acct-brs-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A cheque issued and recorded in the cash book but not yet paid by the bank is described as a __________ cheque.",
+      "answer": "unpresented",
+      "explanation": "The cheque is awaiting presentation, so the bank has not yet debited the account and the pass book balance is higher by that amount."
+    },
+    {
+      "id": "isc11-acct-brs-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Give four reasons why the cash book balance and the pass book balance may differ.",
+      "answer": "Four reasons are: cheques have been deposited but not yet cleared by the bank; cheques have been issued but not yet presented for payment; the bank has debited charges or commission without informing the firm in advance; and the bank has credited interest or made a direct collection on the account.",
+      "explanation": "Each valid reason earns a mark; repeating the same timing difference twice does not."
+    },
+    {
+      "id": "isc11-acct-brs-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is an amended cash book and when is it prepared?",
+      "answer": "An amended cash book is the bank column of the cash book corrected for items the bank has recorded but the firm has not, such as bank charges, interest credited, dishonoured cheques and standing-order payments. It is prepared before preparing the bank reconciliation statement whenever the cash book itself contains an error or an omission, so that only genuine timing differences remain to be reconciled.",
+      "explanation": "The answer must state both what it corrects and when it is used; giving the definition alone loses the second half of the marks."
+    },
+    {
+      "id": "isc11-acct-brs-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Cash book bank balance ₹96,000 debit. Cheques issued ₹18,000 not presented, cheques deposited ₹22,000 not cleared, bank charges ₹2,400 and interest credited ₹1,200. Prepare the bank reconciliation statement.",
+      "answer": "Balance as per cash book ₹96,000; add cheques issued not presented ₹18,000; add interest credited ₹1,200; less cheques deposited not cleared ₹22,000; less bank charges ₹2,400; balance as per pass book ₹90,800. The unpresented cheque raises the bank figure because the bank has not paid out, while the interest likewise belongs to the bank’s figure until recorded; the deposit in transit and the charges are deducted because they reduce the bank’s balance in this direction.",
+      "explanation": "Full marks require the correct direction for each of the four items and a closing balance that actually agrees with the arithmetic shown."
+    },
+    {
+      "id": "isc11-acct-brs-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Cash book bank balance ₹40,000; bank charges ₹1,500, interest credited ₹600, a cheque of ₹5,000 deposited dishonoured; cheques deposited not cleared ₹9,000; cheques issued not presented ₹4,000. Give the amended cash book balance and then the pass book balance.",
+      "answer": "Amended cash book balance = 40,000 + 600 − 1,500 − 5,000 = ₹34,100. Then balance as per pass book = 34,100 − 9,000 + 4,000 = ₹29,100. The three bank-only items must be corrected in the cash book itself first, because its balance is wrong; only after that do the two transit items remain, and they are then applied to reach the bank’s figure.",
+      "explanation": "The two-stage structure is the point of the question: correcting the cash book and then reconciling. Students who apply all five items in one statement double count the bank-only items."
+    }
+  ]
+}

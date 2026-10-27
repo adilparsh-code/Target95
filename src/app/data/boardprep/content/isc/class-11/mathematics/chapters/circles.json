@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-circles",
+  "title": "Circles",
+  "kind": "mathematics",
+  "tagline": "Standard and general equations, positions of a point relative to a circle, tangents and the conditions for contact.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "The circle is the first curve whose equation carries real geometric information in its coefficients, and this chapter reads that information out. Two forms matter: the standard form, which names the centre and radius outright, and the general form, which hides them behind g, f and c until you complete the squares. Points are then classified by one substitution, lines are tested for tangency by one distance condition, and tangents — at a point, from a point, and between two circles — reduce to conditions that a single formula decides. Every step is coordinate geometry reusing the straight-line chapter, which is why circles are also the proof that the earlier unit was worth mastering.",
+    "facts": [
+      {
+        "label": "Standard form",
+        "value": "(x − h)² + (y − k)² = r² with centre (h, k) and radius r."
+      },
+      {
+        "label": "General form",
+        "value": "x² + y² + 2gx + 2fy + c = 0 has centre (−g, −f) and radius √(g² + f² − c)."
+      },
+      {
+        "label": "Real-circle condition",
+        "value": "g² + f² − c > 0; equal to zero gives a point circle, negative gives no real circle."
+      },
+      {
+        "label": "Tangency",
+        "value": "Line y = mx + c touches x² + y² = r² exactly when c² = r²(1 + m²)."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Write the equation of a circle from its centre and radius and convert between standard and general forms.",
+    "Decide whether a point lies inside, on or outside a circle using the sign of S₁.",
+    "Find the centre and radius of a circle given in general form by completing the squares.",
+    "Apply the tangency condition for a line and find the tangent at a given point of contact.",
+    "Compute the length of a tangent from an external point and find tangents drawn from it."
+  ],
+  "learn": [
+    {
+      "id": "equations-of-a-circle",
+      "title": "The standard and general equations of a circle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A circle is the set of points at a fixed distance r from a centre (h, k), and writing that condition with the distance formula gives (x − h)² + (y − k)² = r² — the standard form, which reads the centre and radius without further work. Expanding it produces x² + y² − 2hx − 2ky + (h² + k² − r²) = 0, and renaming the middle coefficients gives the general form x² + y² + 2gx + 2fy + c = 0. The conversion runs both ways: to read a general equation, complete the squares in x and y, which moves the equation back to standard form; the centre then appears as (−g, −f) and the radius as √(g² + f² − c). That square root delivers the chapter’s first condition — for a real circle of positive radius, g² + f² − c must be positive, and when it equals zero the equation names a single point rather than a circle."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Standard: (x − h)² + (y − k)² = r² — centre (h, k), radius r.",
+            "General: x² + y² + 2gx + 2fy + c = 0 — centre (−g, −f), radius √(g² + f² − c).",
+            "The coefficients of x² and y² are equal and stand alone: that signature marks a circle equation.",
+            "Complete the squares to pass from general to standard form.",
+            "g² + f² − c > 0 for a real circle; = 0 for a point circle; < 0 for no real locus."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "x² + y² − 6x + 4y − 12 = 0: complete squares to (x − 3)² + (y + 2)² = 25",
+              "note": "Centre (3, −2) and radius 5, read straight off after the rearrangement."
+            },
+            {
+              "text": "Centre (1, 2), radius 4: (x − 1)² + (y − 2)² = 16",
+              "note": "Substitute h, k and r into the standard form; expand only if the general form is demanded."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reading a circle equation at a glance",
+          "columns": [
+            "Given form",
+            "Centre",
+            "Radius",
+            "First move"
+          ],
+          "rows": [
+            [
+              "(x − 3)² + (y + 2)² = 25",
+              "(3, −2)",
+              "5",
+              "read directly"
+            ],
+            [
+              "x² + y² − 6x + 4y − 12 = 0",
+              "(3, −2)",
+              "√(9 + 4 + 12) = 5",
+              "complete the squares"
+            ],
+            [
+              "x² + y² + 4x = 0",
+              "(−2, 0)",
+              "2",
+              "g = 2, f = 0, c = 0"
+            ],
+            [
+              "x² + y² + 2x + 2y + 5 = 0",
+              "(−1, −1)",
+              "no real radius",
+              "g² + f² − c = −2 < 0"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "points-and-lines",
+      "title": "Points relative to a circle and lines through it",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Substituting a point into the circle’s left-hand side classifies it instantly. Writing S(x, y) = x² + y² + 2gx + 2fy + c, a point inside the circle makes S negative, a point on it gives S = 0, and a point outside gives S positive — because S₁ = d² − r² where d is the point’s distance from the centre. The same substitution works for a line: put the line’s equation into the circle’s and the intersection reduces to a quadratic, whose discriminant decides how many times the line meets the circle — twice for a secant, once (zero discriminant) for a tangent, never for a miss. When a line does cut a circle in two points, the perpendicular from the centre to that chord bisects it, which is the geometric fact behind every chord-length calculation: half-chord = √(r² − d²)."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "S₁ < 0 inside, S₁ = 0 on, S₁ > 0 outside; equivalently compare d² with r².",
+            "S₁ = d² − r², so the sign of S₁ is the sign of the distance squared minus the radius squared.",
+            "Line meets circle ⇔ substituting gives a quadratic; the discriminant counts the intersections.",
+            "Tangent ⇔ discriminant zero ⇔ distance from the centre equals the radius.",
+            "The perpendicular from the centre to a chord bisects it: half-chord length = √(r² − d²)."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Point (0, 0) against x² + y² − 4x − 6y + 9 = 0 gives S₁ = 9 > 0, so the point lies outside",
+              "note": "Substitute without expanding anything; the sign of the result answers the question."
+            },
+            {
+              "text": "Chord at distance 3 from a centre with radius 5: half-chord = √(25 − 9) = 4, so the chord is 8 long",
+              "note": "The right triangle of radius, distance and half-chord is the whole calculation."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The line y = 0 meets x² + y² = 25 at x = ±5: two real roots, a secant",
+              "note": "A quadratic with two real roots intersects the circle in two points."
+            },
+            {
+              "text": "Distance from centre (2, 3) to 3x + 4y − 10 = 0 is |6 + 12 − 10|/5 = 8/5",
+              "note": "Use the straight-line distance formula; compare it with r to classify the line."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tangents",
+      "title": "Tangents to a circle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A tangent touches the circle at exactly one point and, crucially, meets the radius at that point at a right angle — that single geometric fact generates every tangency formula in the chapter. The tangent at a point (x₁, y₁) on the circle x² + y² = r² is xx₁ + yy₁ = r², an elegant formula obtained by replacing one x with x₁, one y with y₁ and halving the squares; for a circle with centre not at the origin the same replacement rule gives xx₁ + yy₁ + g(x + x₁) + f(y + y₁) + c = 0. For a line in slope form y = mx + c touching x² + y² = r², substituting into the circle and setting the discriminant to zero gives c² = r²(1 + m²) — the tangency condition, which solves every question that asks for the slope of a tangent through a given point. Parallel tangents, tangents at the ends of a diameter, and tangents from an external point are all applications of these two results."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Tangent at (x₁, y₁) on x² + y² = r²: xx₁ + yy₁ = r².",
+            "General circle: xx₁ + yy₁ + g(x + x₁) + f(y + y₁) + c = 0 for (x₁, y₁) on the circle.",
+            "The tangent is perpendicular to the radius at the point of contact.",
+            "y = mx + c touches x² + y² = r² when c² = r²(1 + m²).",
+            "The condition follows by substituting into the circle and setting the discriminant to zero."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Tangent at (3, 4) on x² + y² = 25: 3x + 4y = 25",
+              "note": "Apply xx₁ + yy₁ = r² with x₁ = 3, y₁ = 4 and r² = 25."
+            },
+            {
+              "text": "Slope of a tangent through the origin-side line form: y = mx + 7 touching x² + y² = 49 needs 49 = 49(1 + m²)",
+              "note": "The tangency condition forces m = 0, so the tangent is the horizontal line y = 7."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Three tangency statements and their meanings",
+          "columns": [
+            "Question asked",
+            "Condition used",
+            "Answer form"
+          ],
+          "rows": [
+            [
+              "Tangent at a known point",
+              "xx₁ + yy₁ = r²",
+              "a single linear equation"
+            ],
+            [
+              "Line y = mx + c tangent?",
+              "c² = r²(1 + m²)",
+              "a yes/no test or a value of c"
+            ],
+            [
+              "Tangents from an external point",
+              "distance from centre = r",
+              "a quadratic in m with two slopes"
+            ]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Tangent",
+              "meaning": "Line touching a circle at exactly one point, perpendicular to the radius there."
+            },
+            {
+              "term": "Secant",
+              "meaning": "Line cutting a circle in two distinct points."
+            },
+            {
+              "term": "Point of contact",
+              "meaning": "The unique common point of a tangent and its circle."
+            },
+            {
+              "term": "Chord",
+              "meaning": "Segment joining two points of a circle; a diameter is the longest chord."
+            },
+            {
+              "term": "Length of a tangent",
+              "meaning": "Distance from an external point to its point of contact, √S₁."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "external-tangents-and-contact",
+      "title": "Tangents from an external point and contact of circles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "From a point outside a circle exactly two tangents run, symmetric about the line joining the point to the centre, and both have the same length √S₁, where S₁ is the circle’s expression evaluated at that point. To find the tangent equations themselves, write the line through the point with an unknown slope m, impose that its distance from the centre equals the radius, and solve the resulting quadratic in m — two roots, two tangents, and a special case worth remembering: when one root does not exist (the line is vertical), the point-slope setup must be replaced by the vertical line x = a. The chapter’s last condition concerns two circles: their centres and radii determine contact, since touching externally means the distance between centres equals r₁ + r₂, touching internally means |r₁ − r₂|, intersection needs the distance to lie strictly between |r₁ − r₂| and r₁ + r₂, and separation means the distance exceeds the sum."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Length of the tangent from (x₁, y₁) to S = 0 is √S₁, real only when S₁ > 0.",
+            "Two tangents from an external point: impose distance from centre = radius, solve a quadratic in m.",
+            "Slopes come in a pair; the pair of lines is symmetric about the centre–point line.",
+            "Two circles touch externally when d = r₁ + r₂, internally when d = |r₁ − r₂|.",
+            "Circles intersect in two points when |r₁ − r₂| < d < r₁ + r₂."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Tangents from (10, 5) to x² + y² = 25: (5 − 10m)² = 25(m² + 1) gives 75m² − 100m = 0",
+              "note": "So m = 0 and m = 4/3: the tangents are y = 5 and 4x − 3y − 25 = 0."
+            },
+            {
+              "text": "Circles with centres 5 apart and radii 3 and 2: d = 5 = 3 + 2, so they touch externally",
+              "note": "Compare the centre distance with the sum and difference of the radii."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Length of tangent from (9, 12) to x² + y² = 25: √(81 + 144 − 25) = √200 = 10√2",
+              "note": "Evaluate S₁ at the point and take the positive square root."
+            },
+            {
+              "text": "Two circles (x − 1)² + y² = 4 and (x + 2)² + y² = 1: d = 3, r₁ + r₂ = 3",
+              "note": "Equal values mean external contact at exactly one point on the line of centres."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A circle drawn from its standard equation",
+      "description": "A circle centred at (3, −2) with radius 5 units, axes drawn through it, the centre marked with a cross, the radius segment labelled, and the intercepts where the circle crosses the axes indicated.",
+      "labels": [
+        "centre (h, k) = (3, −2)",
+        "radius r = 5 units",
+        "equation (x − 3)² + (y + 2)² = 25",
+        "every point on the curve is 5 from the centre",
+        "intercepts read by setting y = 0 and x = 0"
+      ]
+    },
+    {
+      "caption": "Figure: A point inside, on and outside a circle",
+      "description": "One circle with three marked points: P₁ inside with a radius segment showing its shorter distance, P₂ on the circumference, and P₃ outside with a longer segment to the centre, each annotated with the sign of S₁.",
+      "labels": [
+        "inside: d < r, S₁ < 0",
+        "on the circle: d = r, S₁ = 0",
+        "outside: d > r, S₁ > 0",
+        "S₁ = d² − r² measures the difference",
+        "only outside points can draw tangents"
+      ]
+    },
+    {
+      "caption": "Figure: The tangent perpendicular to the radius",
+      "description": "A circle with centre O, a tangent line touching at point P, the radius OP drawn, and a square marking the right angle between them; a second tangent from an external point Q is drawn touching at T.",
+      "labels": [
+        "radius OP meets the tangent at 90°",
+        "point of contact P lies on the circle",
+        "tangent touches exactly once",
+        "lengths QP and QT are equal",
+        "two tangents come from each external point"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Standard form (x − h)² + (y − k)² = r² reads centre and radius directly.",
+    "General form x² + y² + 2gx + 2fy + c = 0 has centre (−g, −f) and radius √(g² + f² − c).",
+    "A real circle needs g² + f² − c > 0; zero gives a point circle, negative nothing real.",
+    "Substituting a point gives S₁ < 0 inside, 0 on and > 0 outside.",
+    "Half-chord length = √(r² − d²) for a chord at distance d from the centre.",
+    "Tangent at (x₁, y₁) on x² + y² = r² is xx₁ + yy₁ = r².",
+    "Line y = mx + c touches x² + y² = r² exactly when c² = r²(1 + m²).",
+    "The tangent is perpendicular to the radius at the point of contact — the source of every condition.",
+    "Length of tangent from an external point = √S₁; two tangents arise, with slopes from a quadratic.",
+    "Two circles touch when d = r₁ + r₂ or d = |r₁ − r₂|; they intersect when |r₁ − r₂| < d < r₁ + r₂."
+  ],
+  "examFocus": [
+    "Complete the squares visibly — each completed square line is a method mark in centre-radius questions.",
+    "State the tangency condition (distance = radius or c² = r²(1 + m²)) before substituting numbers.",
+    "When asked for tangents from a point, write the point-slope line first; a missing slope quadratic loses the second tangent.",
+    "Classify point or line positions with the sign of S₁ or a distance comparison and state the comparison explicitly."
+  ],
+  "vocabulary": [
+    {
+      "word": "Circle",
+      "meaning": "Set of points at a fixed distance (radius) from a centre."
+    },
+    {
+      "word": "Radius",
+      "meaning": "Distance from the centre to the circle; half a diameter."
+    },
+    {
+      "word": "Chord",
+      "meaning": "Segment joining two points of a circle, perpendicular to which a radius bisects it."
+    },
+    {
+      "word": "Tangent",
+      "meaning": "Line touching the circle at exactly one point, perpendicular to the radius."
+    },
+    {
+      "word": "Secant",
+      "meaning": "Line intersecting a circle in two points."
+    },
+    {
+      "word": "Point of contact",
+      "meaning": "Common point of a tangent and its circle."
+    },
+    {
+      "word": "S₁",
+      "meaning": "Value of the circle’s expression at a point; its sign classifies the point."
+    },
+    {
+      "word": "General form",
+      "meaning": "x² + y² + 2gx + 2fy + c = 0, the expanded circle equation."
+    },
+    {
+      "word": "Standard form",
+      "meaning": "(x − h)² + (y − k)² = r², exposing centre and radius."
+    },
+    {
+      "word": "Internal contact",
+      "meaning": "Two circles touching with one inside the other, d = |r₁ − r₂|."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-circle-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The centre and radius of x² + y² − 6x + 4y − 12 = 0 are:",
+      "options": [
+        "(3, −2) and 5 units",
+        "(−3, 2) and 5 units",
+        "(3, −2) and 25 units",
+        "(6, −4) and 5 units"
+      ],
+      "correctIndex": 0,
+      "answer": "(3, −2) and 5 units",
+      "explanation": "Completing the squares gives (x − 3)² + (y + 2)² = 25, so the centre is (3, −2) and the radius 5 units."
+    },
+    {
+      "id": "isc11-math-circle-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The point (0, 0) lies with respect to the circle x² + y² − 4x − 6y + 9 = 0:",
+      "options": [
+        "inside the circle",
+        "on the circle",
+        "outside the circle",
+        "at the centre"
+      ],
+      "correctIndex": 2,
+      "answer": "outside the circle",
+      "explanation": "Substitution gives S₁ = 9 > 0, which means the point’s distance from the centre exceeds the radius — it lies outside."
+    },
+    {
+      "id": "isc11-math-circle-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The equation of the tangent to x² + y² = 25 at the point (3, 4) is:",
+      "options": [
+        "3x + 4y = 25",
+        "4x + 3y = 25",
+        "3x − 4y = 25",
+        "3x + 4y = 7"
+      ],
+      "correctIndex": 0,
+      "answer": "3x + 4y = 25",
+      "explanation": "The tangent rule xx₁ + yy₁ = r² gives 3x + 4y = 25; the point (3, 4) itself satisfies the equation, confirming contact."
+    },
+    {
+      "id": "isc11-math-circle-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The condition for the line y = mx + c to touch the circle x² + y² = r² is:",
+      "options": [
+        "c = r(1 + m²)",
+        "c² = r²(1 + m²)",
+        "c² = r² + m²",
+        "c² = r²(1 − m²)"
+      ],
+      "correctIndex": 1,
+      "answer": "c² = r²(1 + m²)",
+      "explanation": "Substituting the line into the circle and setting the discriminant of the resulting quadratic to zero yields c² = r²(1 + m²)."
+    },
+    {
+      "id": "isc11-math-circle-05",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radius of the circle x² + y² + 2gx + 2fy + c = 0 is the square root of ______ .",
+      "answer": "g² + f² − c",
+      "explanation": "Completing the squares moves the centre to (−g, −f) and leaves g² + f² − c as the squared radius."
+    },
+    {
+      "id": "isc11-math-circle-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the equation x² + y² + 2gx + 2fy + c = 0 to represent a real circle of positive radius, the quantity g² + f² − c must be ______ .",
+      "answer": "positive",
+      "explanation": "The quantity is the squared radius, so it must be strictly positive; zero gives a single point and a negative value gives no real circle."
+    },
+    {
+      "id": "isc11-math-circle-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the standard form of a circle’s equation and identify the centre and radius of (x − 2)² + (y + 3)² = 16.",
+      "answer": "The standard form is (x − h)² + (y − k)² = r², where (h, k) is the centre and r the radius. Comparing with (x − 2)² + (y + 3)² = 16 gives h = 2, k = −3 and r² = 16, so the centre is (2, −3) and the radius is 4 units.",
+      "explanation": "The standard form exposes the centre and radius as the constants in the brackets and on the right; note that the y bracket reads k = −3 because the form is y − k."
+    },
+    {
+      "id": "isc11-math-circle-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the condition c² = r²(1 + m²) for the line y = mx + c to be a tangent to the circle x² + y² = r².",
+      "answer": "Substituting y = mx + c into x² + y² = r² gives x² + (mx + c)² = r², that is (1 + m²)x² + 2mcx + (c² − r²) = 0. For the line to touch the circle this quadratic must have exactly one root, so its discriminant vanishes: 4m²c² − 4(1 + m²)(c² − r²) = 0. Expanding gives m²c² − (c² − r² + m²c² − m²r²) = 0, that is −c² + r² + m²r² = 0, which rearranges directly to c² = r²(1 + m²).",
+      "explanation": "One intersection point means one repeated root, so the discriminant of the substituted quadratic is set to zero and the terms cancel to the stated condition."
+    },
+    {
+      "id": "isc11-math-circle-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the equation of the circle passing through the points (0, 0), (4, 0) and (0, 3), and state its centre and radius.",
+      "answer": "Substituting (0, 0) into x² + y² + 2gx + 2fy + c = 0 gives c = 0. Then (4, 0) gives 16 + 8g = 0, so g = −2, and (0, 3) gives 9 + 6f = 0, so f = −3/2. The equation is x² + y² − 4x − 3y = 0. Completing the squares gives (x − 2)² + (y − 3/2)² = 4 + 9/4 = 25/4, so the centre is (2, 3/2) and the radius is 5/2 units.",
+      "explanation": "Three points give three equations in g, f and c; solving them and then completing the squares converts the general equation back to standard form for the centre and radius."
+    },
+    {
+      "id": "isc11-math-circle-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the equations of the two tangents drawn from the point (10, 5) to the circle x² + y² = 25.",
+      "answer": "A line through (10, 5) with slope m is y − 5 = m(x − 10), or mx − y + (5 − 10m) = 0. For it to be a tangent, its distance from the centre (0, 0) must equal the radius 5: |5 − 10m|/√(m² + 1) = 5, so (5 − 10m)² = 25(m² + 1). Expanding gives 25 − 100m + 100m² = 25m² + 25, hence 75m² − 100m = 0 and m(75m − 100) = 0. The slopes are m = 0 and m = 4/3, giving the tangents y = 5 and, from y − 5 = (4/3)(x − 10), 4x − 3y − 25 = 0. Both are confirmed by their distances from the centre: 5 and 25/5 = 5.",
+      "explanation": "Set up the tangent through the external point with an unknown slope, impose the radius distance condition, solve the quadratic in m, and remember that the quadratic yields both tangents — including the horizontal one that a vertical-line oversight would miss."
+    }
+  ]
+}

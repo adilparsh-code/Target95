@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-oop-concepts",
+  "slug": "introduction-to-oop-concepts",
+  "title": "Introduction to Object Oriented Programming Concepts",
+  "kind": "computer-applications",
+  "tagline": "Objects, classes, the four principles, and the tool chain that turns Java source into a running program.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Object-oriented programming models software the way the world is modelled: as objects that carry both data and the actions that work on that data. A class is the blueprint; an object is one thing built from that blueprint. Java source code is compiled into bytecode, and the Java Virtual Machine executes that bytecode on whatever machine it is running. This chapter builds the vocabulary you will use for the rest of the course — object, class, abstraction, encapsulation, inheritance and polymorphism — and shows where each one lives in the compile-and-run pipeline that BlueJ makes visible.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Object-oriented Programming Concepts (ICSE Class IX)"
+      },
+      {
+        "label": "Central idea",
+        "value": "Software built as objects that combine state and behaviour"
+      },
+      {
+        "label": "The four principles",
+        "value": "Abstraction, encapsulation, inheritance, polymorphism"
+      },
+      {
+        "label": "Tool chain",
+        "value": "Source (.java) → javac → bytecode (.class) → JVM → output"
+      },
+      {
+        "label": "Development environment",
+        "value": "BlueJ, the IDE prescribed for Class IX work"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe object-oriented programming in terms of objects, classes, state and behaviour.",
+    "Explain the four principles — abstraction, encapsulation, inheritance and polymorphism — each with a concrete example.",
+    "Trace a Java program from source file to running output through javac, bytecode and the JVM.",
+    "Distinguish the roles of the JDK, the JRE and the JVM in running a Java program."
+  ],
+  "learn": [
+    {
+      "id": "why-objects",
+      "title": "Why programs are organised as objects",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Early programs were written as long lists of instructions that operated on shared variables anywhere in the program. That style works for small tasks, but in a larger program nobody can track which instruction changed which variable. Object-oriented programming solves this by packaging each distinct thing in the problem together with the data it owns and the operations that are allowed on that data. A student record, for example, becomes one object that holds its own name and marks and knows how to display itself, rather than a dozen loose variables that any part of the program may alter."
+        },
+        {
+          "type": "paragraph",
+          "text": "The payoff is that objects can be reasoned about independently. Because an object controls its own state, you can test it on its own, reuse it in another program, and replace it with an improved version without disturbing the rest of the code. Java was designed around this idea from the beginning: even simple Java programs live inside a class, and the main method is just the object-aware entry point Java chose for starting work."
+        }
+      ]
+    },
+    {
+      "id": "principles",
+      "title": "The four principles, each with a working example",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Four principles define the object-oriented style, and exam questions regularly ask you to state all four and give an example of each. Abstraction means exposing only the useful detail and hiding the machinery behind it. Encapsulation means bundling data with the methods that touch it and guarding the data with access modifiers. Inheritance lets a new class take over the fields and methods of an existing one. Polymorphism lets one message be answered in different ways by different objects."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Abstraction",
+              "meaning": "Showing the essential features while hiding the background detail.",
+              "context": "A driver uses a accelerator pedal without seeing the throttle linkage — a method hides its working the same way."
+            },
+            {
+              "term": "Encapsulation",
+              "meaning": "Binding data and methods together and restricting direct access with access modifiers.",
+              "context": "private fields with public methods let a class decide how its balance may change."
+            },
+            {
+              "term": "Inheritance",
+              "meaning": "Creating a new class from an existing one so it reuses and extends that behaviour.",
+              "context": "A LibraryBook class can inherit common fields from a general Book class."
+            },
+            {
+              "term": "Polymorphism",
+              "meaning": "One reference, one message, different behaviour depending on the actual object.",
+              "context": "The same draw call can paint a circle or a rectangle depending on the object behind it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-object",
+      "title": "Class as blueprint, object as thing built from it",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A class describes what every object of that kind has and can do, without being a particular object itself. It is a plan: these fields, these methods, this behaviour. An object is a concrete instance of that plan, allocated in memory with the new keyword, with its own copy of the fields. Two objects of the same class share the blueprint but never share their field values, which is exactly why one student’s marks can change without touching another student’s record."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A class defines fields (the data each object holds) and methods (the behaviour each object offers).",
+            "The new keyword allocates one object and returns a reference to it.",
+            "Each object owns its own set of instance variables, so objects of one class never share field values.",
+            "A reference variable stores the address of an object; it is not the object itself, and it may initially hold nothing at all."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pipeline",
+      "title": "Source to bytecode to output: the Java tool chain",
+      "blocks": [
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "class Hello { public static void main(String[] args) { System.out.println(\"Objects combine state and behaviour.\"); } }",
+              "note": "Output: Objects combine state and behaviour. — the whole program lives inside a class, and main is the entry point the JVM starts from."
+            },
+            {
+              "text": "class Student { String name; int marks; void display() { System.out.println(name + \" \" + marks); } public static void main(String[] a) { Student s = new Student(); s.name = \"Aman\"; s.marks = 82; s.display(); } }",
+              "note": "Output: Aman 82 — one blueprint, one object, one object-owned state printed by the object’s own method."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three components of the Java tool chain",
+          "columns": [
+            "Component",
+            "What it contains",
+            "Its role"
+          ],
+          "rows": [
+            [
+              "JDK (Java Development Kit)",
+              "Compiler (javac), core libraries and the JRE",
+              "Needed to write and compile programs"
+            ],
+            [
+              "JRE (Java Runtime Environment)",
+              "Libraries and the JVM",
+              "Enough to run a compiled program, but cannot compile one"
+            ],
+            [
+              "JVM (Java Virtual Machine)",
+              "The bytecode interpreter and runtime machinery",
+              "Executes .class files and makes Java platform-independent"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bluej",
+      "title": "What BlueJ adds for a Class IX programmer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "BlueJ is the teaching IDE that makes the pipeline visible instead of hidden. It shows your classes as boxes, lets you create an object by clicking, and lets you invoke its methods directly, so you can watch state change without first writing a full main method. That directness matters while you are learning: you can isolate one class, test it, and only then assemble it into a complete program, which is the same discipline professional developers follow with their own unit tests."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Compile errors appear before any code runs, so syntax mistakes are caught at the editor rather than in front of the user.",
+            "The object bench lets you instantiate a class and call one method at a time to inspect its state.",
+            "A compiled class is stored as a .class file of bytecode; deleting it is safe because the compiler regenerates it from the source.",
+            "The same bytecode runs unchanged on any machine that has a compatible JVM, which is the origin of Java’s write-once-run-anywhere claim."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam-prep",
+      "title": "Preparing for the examination",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Definition questions on this chapter are marks you should never lose: learn the four principles as a set, and train yourself to attach a one-line example to each, because an example is usually what separates a full-marks answer from a half-marks one. Pipeline questions want sequence rather than prose — source file, compiler, bytecode, JVM, output — and the commonest trap is writing that the JVM compiles the program, which it never does. For application questions, describe state and behaviour together: a real object always has both."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Learn all four principles together and keep abstraction (hiding detail) distinct from encapsulation (guarding data).",
+            "State the pipeline in order and name javac as the compiler and the JVM as the executor.",
+            "For JDK/JRE/JVM questions, remember the nesting: the JDK contains the JRE, and the JRE contains the JVM.",
+            "Anchor every definition to a small example so you can supply evidence inside the same answer."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The compile-and-run pipeline",
+      "description": "Left-to-right flow: Hello.java (source) → javac compiler → Hello.class (bytecode) → JVM on a specific operating system → printed output. A second arrow from the compiler labels compilation errors as the stage where syntax mistakes are caught.",
+      "labels": [
+        "Hello.java source file",
+        "javac compiler",
+        "Hello.class bytecode",
+        "JVM interprets bytecode",
+        "Printed output",
+        "Compile-time errors caught here"
+      ]
+    },
+    {
+      "caption": "Figure: One blueprint, many objects",
+      "description": "A class box labelled Student holding fields name and marks and a display() method, with arrows pointing to two separate object boxes in memory. Object one holds Aman/82, object two holds Riya/91, each with its own field values but both wired to the same blueprint.",
+      "labels": [
+        "Class Student: blueprint",
+        "Fields name, marks",
+        "Method display()",
+        "Object 1: Aman, 82",
+        "Object 2: Riya, 91"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Object-oriented programming organises software around objects that carry both state and behaviour.",
+    "A class is the blueprint; an object is a concrete instance of that blueprint created with new.",
+    "The four principles are abstraction, encapsulation, inheritance and polymorphism.",
+    "Abstraction hides background detail; encapsulation bundles data with methods and guards it with access modifiers.",
+    "Inheritance lets a class reuse and extend an existing class; polymorphism lets one message behave differently by object.",
+    "Compilation turns .java source into .class bytecode using javac; the JVM then executes that bytecode.",
+    "The JVM never compiles — it interprets bytecode, which is why Java can run on any platform with a JVM.",
+    "The JDK contains the JRE, and the JRE contains the JVM: compile needs the JDK, running needs at least the JRE.",
+    "Java is called not purely object-oriented because primitives such as int are values, not objects.",
+    "BlueJ makes the pipeline hands-on with an object bench for instantiating and testing classes directly."
+  ],
+  "examFocus": [
+    "Definition question: state all four principles with a one-line example attached to each.",
+    "Pipeline question: source → javac → bytecode → JVM → output; never say the JVM compiles.",
+    "JDK versus JRE: the JDK compiles and runs, the JRE only runs, and both sit on the JVM.",
+    "Application question: describe any real-world entity as fields (state) plus methods (behaviour) inside a class."
+  ],
+  "vocabulary": [
+    {
+      "word": "Object",
+      "meaning": "A concrete instance of a class held in memory with its own state.",
+      "context": "Each Student created with new is a separate object with its own marks."
+    },
+    {
+      "word": "Class",
+      "meaning": "A blueprint defining the fields and methods its objects will have.",
+      "context": "The Student class declares name, marks and display() before any student exists."
+    },
+    {
+      "word": "Bytecode",
+      "meaning": "Platform-neutral instructions produced by javac and stored in a .class file.",
+      "context": "The JVM interprets bytecode, which is what makes the same .class file portable."
+    },
+    {
+      "word": "JVM",
+      "meaning": "Java Virtual Machine — the runtime that executes bytecode.",
+      "context": "The JVM runs the compiled program; it does not compile it."
+    },
+    {
+      "word": "Encapsulation",
+      "meaning": "Binding data with the methods that use it and restricting access to the data.",
+      "context": "private fields behind public methods keep object state under the class’s control."
+    },
+    {
+      "word": "Inheritance",
+      "meaning": "Deriving a class from an existing class to reuse its fields and methods.",
+      "context": "Inheritance is one of the four principles and must appear in any full answer about them."
+    },
+    {
+      "word": "Polymorphism",
+      "meaning": "The ability of different objects to respond to the same message differently.",
+      "context": "Polymorphism lets shared code work with objects of several related classes."
+    },
+    {
+      "word": "Instance",
+      "meaning": "One particular object created from a class.",
+      "context": "Every instance of Student has its own copy of the marks field."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-oop-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these is NOT one of the four principles of object-oriented programming?",
+      "options": [
+        "Compilation",
+        "Encapsulation",
+        "Inheritance",
+        "Polymorphism"
+      ],
+      "correctIndex": 0,
+      "answer": "Compilation",
+      "explanation": "The four principles are abstraction, encapsulation, inheritance and polymorphism. Compilation is a step in the tool chain that converts source into bytecode, not a principle of the programming style.",
+      "commonMistake": "Listing abstraction but forgetting that compilation belongs to the tool chain, not to the four principles."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which component of the Java tool chain converts a .java source file into a .class file?",
+      "options": [
+        "The Java compiler, javac",
+        "The Java Virtual Machine",
+        "The bytecode interpreter",
+        "The BlueJ editor"
+      ],
+      "correctIndex": 0,
+      "answer": "The Java compiler, javac",
+      "explanation": "javac reads source code and, if it is free of syntax errors, writes bytecode into a .class file. The JVM later executes that bytecode; it never produces it.",
+      "commonMistake": "Crediting the JVM with compiling — the JVM interprets bytecode, while javac does the compiling."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A program has been compiled successfully and must now be executed on a machine that has only a JRE installed. What is correct?",
+      "options": [
+        "The program will run, but it cannot be recompiled on that machine",
+        "The program will not run because the JVM is missing from a JRE",
+        "The program will run only if BlueJ is also installed",
+        "The program will run only after being rewritten in machine code"
+      ],
+      "correctIndex": 0,
+      "answer": "The program will run, but it cannot be recompiled on that machine",
+      "explanation": "The JRE contains the JVM and the libraries needed to run bytecode, so a compiled program executes. Compilation itself needs javac, which is part of the JDK and not the JRE.",
+      "commonMistake": "Assuming a JRE lacks the JVM — it contains it; what a JRE lacks is the compiler."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two objects are created from the same class. What is true of their instance variables?",
+      "options": [
+        "Each object holds its own separate copy of every instance variable",
+        "Both objects share one copy of every instance variable",
+        "Only the first object created receives copies",
+        "Instance variables are stored in the class and objects read them read-only"
+      ],
+      "correctIndex": 0,
+      "answer": "Each object holds its own separate copy of every instance variable",
+      "explanation": "The class defines the blueprint, but memory for the fields is allocated per object when new is called. Changing one object’s marks therefore never changes another’s.",
+      "commonMistake": "Believing objects of one class share field values — they share only the blueprint, never the data."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Java source code is compiled by __________ into __________, which is executed by the __________.",
+      "answer": "javac (the Java compiler); bytecode; JVM (Java Virtual Machine)",
+      "explanation": "The compiler javac translates source into bytecode and stores it in a .class file, and the Java Virtual Machine then executes those instructions on the host machine. Each stage has a distinct name, and answers that blur them lose marks.",
+      "commonMistake": "Writing \"the JVM compiles the code\". The JVM executes bytecode only; compilation is entirely javac’s job."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the four principles of object-oriented programming and give one line on what abstraction means.",
+      "answer": "The four principles are abstraction, encapsulation, inheritance and polymorphism. Abstraction means exposing only the features that matter for the task at hand while hiding the background detail behind them.",
+      "explanation": "Examiners award the list and the explanation separately, so state all four first even if the question then asks about only one. Abstraction is about selective showing of detail, not about protecting data — protection is encapsulation.",
+      "commonMistake": "Swapping abstraction and encapsulation: abstraction hides detail, encapsulation guards the data."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain the difference between a class and an object, and name the keyword used to create an object.",
+      "answer": "A class is the blueprint that declares the fields and methods its instances will have, while an object is one concrete instance of that blueprint held in memory with its own field values. The new keyword allocates the object and returns a reference to it.",
+      "explanation": "The distinction is potential versus actual: the class exists once in the program, objects exist in memory, one per instance, each with separate state. Naming new earns the final mark.",
+      "commonMistake": "Describing the class as a \"variable\" or saying objects are created by calling the class name — allocation happens with new."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain each of the four object-oriented principles and support each one with a suitable example.",
+      "answer": "Abstraction exposes only the useful features and hides the mechanism behind them: a program calls area() on a shape without seeing how the formula is coded. Encapsulation bundles data with the methods that operate on it and restricts direct access, so a BankAccount keeps balance private and allows deposits only through a deposit() method that checks the amount. Inheritance lets a new class reuse and extend an existing one, so a LibraryBook can take over the common fields of Book and add a loanDate field of its own. Polymorphism lets one message be handled differently by different objects, so a draw() call can paint a circle when the reference holds a circle and a rectangle when it holds a rectangle. Together the four principles produce code that hides complexity, guards its data, reuses what already works and stays flexible about what it may later need to hold.",
+      "explanation": "Full marks need the four names in a logical order plus an example for each — the example is where most available marks sit. Keep abstraction (hiding detail) and encapsulation (guarding data) clearly separate, since examiners commonly deduct for merging them.",
+      "commonMistake": "Listing the four principles without examples, or giving an example under the wrong principle — especially calling data hiding \"abstraction\"."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-09",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A student writes: \"In Java the source file is executed directly by the JVM, and only if it fails does the compiler run.\" Comment on this statement with reference to the actual tool chain.",
+      "answer": "The statement reverses the tool chain. Java first compiles: javac reads the .java source and, if the syntax is valid, writes bytecode to a .class file. Only then does the JVM execute that bytecode on the target machine. Compilation happens before any execution and catches syntax errors at that earlier stage, which is why a program with a missing semicolon never starts running at all. Execution errors, such as dividing by zero, happen later inside the JVM. The correct sequence is therefore source → javac → bytecode → JVM → output, with compile-time errors detected at the compiler stage and runtime errors at the JVM stage.",
+      "explanation": "To score full marks, restate the correct order first, then identify the two false claims — direct execution of source and compilation triggered by failure — and finally separate compile-time from runtime errors, since the question asks about both stages.",
+      "commonMistake": "Only correcting the order without saying where each kind of error is caught, which leaves the comment incomplete."
+    },
+    {
+      "id": "cisce-9-ca-q-oop-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Java is described as \"not purely object-oriented\". Explain what that means, and argue whether it weakens the four principles for a Class IX programmer.",
+      "answer": "Java is called not purely object-oriented because primitives such as int, double and boolean are plain values rather than objects, and because non-object-oriented features such as static methods and arithmetic operators exist alongside classes. In a purely object-oriented language every value would be an object. This does not weaken the four principles in practice: Java still wraps a primitive whenever a true object is needed, as in the wrapper classes, so collections and generic code continue to work in an object-oriented way. For a Class IX programmer the practical consequence is simply that you can compute with values directly instead of sending messages for every arithmetic step, while all design-level decisions — hiding detail, guarding state, reusing classes and handling one message in many forms — remain fully available. The language offers convenience at the value level without giving up object-oriented design at the architecture level.",
+      "explanation": "A strong answer first gives the technical reason — primitives and static members — then evaluates the consequence rather than merely repeating it, and finally relates it back to the four principles as the question demands.",
+      "commonMistake": "Answering only that \"Java uses int instead of objects\" and never discussing whether the four principles are affected, which is the part that carries the marks."
+    }
+  ]
+}

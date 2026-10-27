@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-structure-atom",
+  "title": "Structure of Atom",
+  "kind": "chemistry",
+  "tagline": "From the Bohr atom and the hydrogen spectrum to quantum numbers, orbital shapes and electronic configuration.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "The chapter begins where the electron was a particle orbiting a nucleus and ends where it is described by a probability cloud. Between those two pictures sit the experiments that forced the change: the discrete lines of the hydrogen spectrum, the black-body puzzle that gave Planck his quantum, and the double-slit behaviour that made orbits untenable. ISC questions favour the calculable parts — energy levels of hydrogen, the four quantum numbers and the rules that fill orbitals — so each section here ends with the arithmetic and the rules in a form you can reproduce in an examination.",
+    "facts": [
+      {
+        "label": "Bohr radius",
+        "value": "0.529 Å for the ground state of hydrogen; energy of level n is −13.6/n^2 eV."
+      },
+      {
+        "label": "Dual nature",
+        "value": "de Broglie: a moving particle has a wavelength λ = h/mv; Davisson and Germer confirmed it for electrons."
+      },
+      {
+        "label": "Uncertainty",
+        "value": "Δx · Δp ≥ h/4π; position and momentum cannot both be sharply defined."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Spectrum calculations, quantum numbers and configuration rules carry the most marks."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe the discovery of the electron and the nucleus and state the limitations of the Rutherford model.",
+    "Apply Bohr’s postulates to calculate energy levels, radii and spectral line frequencies of hydrogen.",
+    "State the photoelectric equation, de Broglie relation and Heisenberg uncertainty principle with their uses.",
+    "Assign the four quantum numbers to an electron and relate them to sub-shell capacity and orbital shape.",
+    "Write electronic configurations using Aufbau, Hund and pairing rules and explain anomalous configurations."
+  ],
+  "learn": [
+    {
+      "id": "subatomic-discovery",
+      "title": "Discovery of the electron and the nuclear atom",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three experiments built the atom in the laboratory. Cathode rays deflected by electric and magnetic fields showed a negatively charged particle far lighter than any atom, J. J. Thomson’s electron, with a charge-to-mass ratio that fixed its lightness. Gold-foil scattering then showed that almost all of an atom is empty space: most alpha particles passed straight through, a few deflected at large angles, and Thomson’s plum-pudding model could not produce the rare big deflections. Rutherford’s answer was a tiny, dense, positively charged nucleus holding nearly all the mass, with electrons occupying the remaining volume. The model solved the scattering but failed on stability: an accelerating charged particle radiates energy, so a spiralling electron should collapse into the nucleus in about 10^-11 seconds."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cathode rays bend towards the positive plate, proving the ray carries negative charge.",
+            "e/m for the electron is 1.76 × 10^11 C kg^-1, identical whatever the gas or electrode material.",
+            "The nucleus carries essentially all the mass in a volume about 10^-15 m across.",
+            "Rutherford’s model cannot explain a stable atom or the observed line spectrum."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Most alpha particles pass through gold foil",
+              "note": "The atom is mostly empty space, so the default outcome is no deflection."
+            },
+            {
+              "text": "About 1 in 8000 alpha particles rebounds almost straight back",
+              "note": "They meet a massive positive charge concentrated in a volume much smaller than the atom."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Cathode ray",
+              "meaning": "Stream of electrons emitted from the cathode in a discharged tube."
+            },
+            {
+              "term": "Nucleus",
+              "meaning": "Tiny dense central core of protons and neutrons holding nearly all atomic mass."
+            },
+            {
+              "term": "Plum-pudding model",
+              "meaning": "Thomson’s model of electrons embedded in a diffuse sphere of positive charge."
+            },
+            {
+              "term": "Alpha scattering",
+              "meaning": "Bombardment of a thin foil with helium nuclei to probe atomic structure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bohr-and-the-spectrum",
+      "title": "Bohr’s model and the hydrogen spectrum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bohr rescued the planetary picture by adding two quantum postulates: an electron circles the nucleus only in certain allowed orbits with fixed angular momentum nh/2π, and it radiates energy only when it jumps between them. The energy of level n in hydrogen is E_n = −13.6/n^2 electron volts, so the ground state sits at −13.6 eV and every higher level climbs towards zero. A photon emitted when an electron falls from n2 to n1 has energy equal to the difference, and since photon energy is hc/λ, the wavelength follows. Because the levels are fixed, the wavelengths are fixed, which is why a discharge tube gives sharp lines rather than a smear of colour."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Energy levels are negative and get closer together as n rises, converging to zero at n = ∞.",
+            "A transition from a higher level to a lower one emits a photon; absorption runs the opposite way.",
+            "The Lyman series falls to n = 1 in the ultraviolet, the Balmer series to n = 2 in the visible, the Paschen series to n = 3 in the infrared.",
+            "Radius of the nth orbit is r_n = 0.529 × n^2 Å, so the fourth orbit is 8.46 Å across.",
+            "Bohr’s model works exactly for hydrogen-like species (He+, Li2+) with Z added to the numerator: E = −13.6 Z^2/n^2 eV."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Energy of the n = 3 level of hydrogen",
+              "note": "E = −13.6 / 9 = −1.51 eV."
+            },
+            {
+              "text": "Photon from n = 4 to n = 2",
+              "note": "ΔE = −0.85 − (−3.40) = 2.55 eV, which falls in the visible Balmer region."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Hydrogen energy levels and their series",
+          "columns": [
+            "Level n",
+            "Energy (eV)",
+            "Radius (Å)",
+            "Series ending here"
+          ],
+          "rows": [
+            [
+              "1",
+              "−13.60",
+              "0.53",
+              "Lyman, ultraviolet"
+            ],
+            [
+              "2",
+              "−3.40",
+              "2.12",
+              "Balmer, visible"
+            ],
+            [
+              "3",
+              "−1.51",
+              "4.76",
+              "Paschen, infrared"
+            ],
+            [
+              "4",
+              "−0.85",
+              "8.46",
+              "Brackett, infrared"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dual-nature-and-uncertainty",
+      "title": "Photoelectric effect, wave-particle duality and uncertainty",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Light shining on a metal ejects electrons, but only above a threshold frequency, and the emitted electrons carry a kinetic energy that depends on frequency rather than brightness. Einstein explained this by treating light as packets: each photon of energy hν either frees one electron or does nothing, and any energy left over after paying the work function becomes kinetic energy. de Broglie then ran the idea backwards, proposing that a moving particle such as an electron has a wavelength λ = h/mv, which Davisson and Germer confirmed by diffracting electrons off a nickel crystal. Heisenberg made the wave nature precise: the more sharply you fix position, the less sharply you can fix momentum, with Δx · Δp ≥ h/4π, which rules out Bohr’s definite orbits altogether."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Photoelectric equation: KE_max = hν − φ, where φ is the work function of the metal.",
+            "Below the threshold frequency no electrons emerge, however intense the light.",
+            "de Broglie wavelength of an electron accelerated through V volts: λ = 12.27 / √V ångströms.",
+            "Uncertainty principle: Δx · Δp ≥ h/4π, which forbids assigning both position and momentum exactly.",
+            "Light behaves as a wave in interference and as a particle in the photoelectric effect; matter shows the mirror image."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 100 W lamp does not eject electrons from sodium",
+              "note": "Its photons may be numerous but each carries too little energy to overcome the work function."
+            },
+            {
+              "text": "Electron through 150 V",
+              "note": "λ = 12.27 / √150 ≈ 1.00 Å, comparable with crystal spacings, so diffraction is observable."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Photoelectric effect",
+              "meaning": "Emission of electrons from a metal when light of sufficient frequency falls on it."
+            },
+            {
+              "term": "Work function",
+              "meaning": "Minimum energy needed to free an electron from a particular metal surface."
+            },
+            {
+              "term": "de Broglie wavelength",
+              "meaning": "Wavelength λ = h/mv associated with any moving particle."
+            },
+            {
+              "term": "Uncertainty principle",
+              "meaning": "Fundamental limit Δx · Δp ≥ h/4π on simultaneously knowing position and momentum."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quantum-numbers-and-filling",
+      "title": "Quantum numbers, orbital shapes and configuration rules",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A complete description of an electron in an atom is the set of four quantum numbers. The principal number n gives the shell and the main energy; the azimuthal number l (0 to n−1) gives the sub-shell and its shape, with s spherical, p dumb-bell, d clover-leaf and f complex; the magnetic number m_l (−l to +l) picks the orbital’s orientation in space; and the spin number m_s, either +½ or −½, gives the direction of the electron’s intrinsic angular momentum. Because two electrons cannot share all four numbers (the Pauli exclusion principle), an s sub-shell holds 2 electrons, a p sub-shell 6, a d sub-shell 10 and an f sub-shell 14. Orbitals fill in order of rising energy, degenerate orbitals fill singly before pairing (Hund), and a few atoms cheat the order because half-filled and fully filled sub-shells are extra stable."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "n = 1, 2, 3 … gives shell size and energy; l = 0 … n−1 gives s, p, d, f sub-shells.",
+            "m_l runs from −l to +l, giving 2l + 1 orbitals; each holds two electrons of opposite spin.",
+            "Aufbau order: 1s 2s 2p 3s 3p 4s 3d 4p 5s 4d 5p 6s 4f 5d 6p.",
+            "Chromium is 3d^5 4s^1 rather than 3d^4 4s^2, and copper is 3d^10 4s^1 rather than 3d^9 4s^2.",
+            "Ions of transition metals lose the 4s electrons first, because 4s is higher in energy once the 3d orbitals begin to fill."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An electron with n = 3, l = 1, m_l = 0, m_s = +½",
+              "note": "It is a 3p electron in the orbital lying along the z-axis, spin up."
+            },
+            {
+              "text": "Maximum electrons in the shell n = 4",
+              "note": "2n^2 = 2 × 16 = 32, filling 4s, 4p, 4d and 4f with 2 + 6 + 10 + 14 electrons."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Quantum numbers and what each one decides",
+          "columns": [
+            "Quantum number",
+            "Symbol",
+            "Allowed values",
+            "What it fixes"
+          ],
+          "rows": [
+            [
+              "Principal",
+              "n",
+              "1, 2, 3 …",
+              "Shell, size and main energy level"
+            ],
+            [
+              "Azimuthal",
+              "l",
+              "0 to n − 1",
+              "Sub-shell shape: s, p, d, f"
+            ],
+            [
+              "Magnetic",
+              "m_l",
+              "−l to +l",
+              "Orientation of the orbital"
+            ],
+            [
+              "Spin",
+              "m_s",
+              "+½ or −½",
+              "Direction of electron spin"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Energy levels of the hydrogen atom and the spectral series",
+      "description": "Horizontal level lines at −13.6, −3.4, −1.51 and −0.85 eV converging towards zero, with downward arrows showing the Lyman, Balmer and Paschen transitions and their regions of the spectrum marked.",
+      "labels": [
+        "n = 1 ground state at −13.6 eV",
+        "n = 2 Balmer series endpoint",
+        "downward arrow = photon emitted",
+        "levels converge as n rises",
+        "n = ∞ ionisation limit at 0 eV"
+      ]
+    },
+    {
+      "caption": "Figure: Shapes and orientations of s, p and d orbitals",
+      "description": "A spherical s orbital, three mutually perpendicular dumb-bell p orbitals labelled p_x, p_y and p_z, and a four-lobed clover-leaf d orbital, each drawn around a small central nucleus.",
+      "labels": [
+        "s orbital: sphere, l = 0",
+        "p orbitals: three orientations, l = 1",
+        "d orbitals: five orientations, l = 2",
+        "node at the nucleus",
+        "each drawing holds two electrons"
+      ]
+    },
+    {
+      "caption": "Figure: Filling order of the atomic orbitals",
+      "description": "A diagonal-arrow diagram running 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p, 6s, 4f, 5d, 6p with arrows crossing each energy group in the order the orbitals are occupied.",
+      "labels": [
+        "Aufbau filling order",
+        "4s fills before 3d",
+        "one arrow per energy group",
+        "half-filled sub-shell extra stability",
+        "electron enters the lowest available level"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Thomson found the electron by deflection of cathode rays; Rutherford found the nucleus by alpha scattering.",
+    "Rutherford’s model fails because an accelerating electron should radiate and spiral into the nucleus.",
+    "Bohr fixed the orbits by quantising angular momentum as nh/2π and gave E_n = −13.6/n^2 eV for hydrogen.",
+    "The hydrogen spectrum is line because only discrete energy differences are allowed.",
+    "Photoelectric effect: KE_max = hν − φ, proving light behaves as particles of energy hν.",
+    "de Broglie wavelength λ = h/mv explains electron diffraction; uncertainty Δx · Δp ≥ h/4π forbids definite orbits.",
+    "Four quantum numbers: n, l, m_l and m_s; Pauli forbids any two electrons sharing all four.",
+    "Sub-shell capacities are 2, 6, 10 and 14 for s, p, d and f, giving 2n^2 electrons per shell.",
+    "Aufbau gives the filling order, Hund the singly-first rule, and stability explains the chromium and copper exceptions.",
+    "Transition-metal ions lose 4s electrons before 3d electrons."
+  ],
+  "examFocus": [
+    "Give each Bohr postulate separately before calculating; postulate marks are independent of the arithmetic.",
+    "Write the energy difference as a positive quantity for an emitted photon and label the series it belongs to.",
+    "For quantum-number questions, check n first, then l against n−1, then m_l against l, and always end with the two spin values.",
+    "Configuration questions reward the exception: quote why chromium is 3d^5 4s^1 rather than just stating it."
+  ],
+  "vocabulary": [
+    {
+      "word": "Quantum",
+      "meaning": "Smallest discrete packet of energy, equal to hν for light of frequency ν."
+    },
+    {
+      "word": "Photoelectric effect",
+      "meaning": "Ejection of electrons from a metal by light above a threshold frequency."
+    },
+    {
+      "word": "Work function",
+      "meaning": "Minimum energy needed to remove an electron from a metal surface."
+    },
+    {
+      "word": "de Broglie wavelength",
+      "meaning": "λ = h/mv, the wavelength associated with a moving particle."
+    },
+    {
+      "word": "Uncertainty principle",
+      "meaning": "Δx · Δp ≥ h/4π, the fundamental limit on simultaneous position and momentum knowledge."
+    },
+    {
+      "word": "Orbital",
+      "meaning": "Three-dimensional region with about 90% probability of finding an electron."
+    },
+    {
+      "word": "Pauli exclusion principle",
+      "meaning": "No two electrons in an atom may have the same four quantum numbers."
+    },
+    {
+      "word": "Hund’s rule",
+      "meaning": "Degenerate orbitals fill singly with parallel spins before any pairing occurs."
+    },
+    {
+      "word": "Aufbau principle",
+      "meaning": "Electrons enter orbitals in order of increasing energy."
+    },
+    {
+      "word": "Isotopes",
+      "meaning": "Atoms of one element with the same atomic number but different mass numbers."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-chem-atom-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The energy of the first orbit of a hydrogen atom is:",
+      "options": [
+        "−13.6 eV",
+        "−3.4 eV",
+        "−1.51 eV",
+        "0 eV"
+      ],
+      "correctIndex": 0,
+      "answer": "−13.6 eV",
+      "explanation": "E_n = −13.6/n^2 eV, so for n = 1 the ground-state energy is −13.6 eV."
+    },
+    {
+      "id": "isc11-chem-atom-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sub-shell designated by the quantum numbers n = 4, l = 2 is:",
+      "options": [
+        "4s",
+        "4p",
+        "4d",
+        "4f"
+      ],
+      "correctIndex": 2,
+      "answer": "4d",
+      "explanation": "l = 2 denotes a d sub-shell, and n = 4 fixes the shell as 4, giving 4d."
+    },
+    {
+      "id": "isc11-chem-atom-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The electronic configuration of chromium in the ground state is:",
+      "options": [
+        "[Ar] 3d^4 4s^2",
+        "[Ar] 3d^5 4s^1",
+        "[Ar] 3d^6 4s^0",
+        "[Ar] 3d^3 4s^2"
+      ],
+      "correctIndex": 1,
+      "answer": "[Ar] 3d^5 4s^1",
+      "explanation": "A half-filled 3d sub-shell is extra stable, so one 4s electron shifts to 3d giving 3d^5 4s^1."
+    },
+    {
+      "id": "isc11-chem-atom-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The uncertainty principle states that the product of the uncertainties in position and momentum is:",
+      "options": [
+        "Equal to zero",
+        "Less than h/4π",
+        "At least h/4π",
+        "Equal to the de Broglie wavelength"
+      ],
+      "correctIndex": 2,
+      "answer": "At least h/4π",
+      "explanation": "Heisenberg’s relation is Δx · Δp ≥ h/4π, so the product can never fall below h/4π."
+    },
+    {
+      "id": "isc11-chem-atom-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The quantum number that decides the shape of an orbital, with allowed values 0, 1, 2 and so on, is the __________ quantum number.",
+      "answer": "azimuthal",
+      "explanation": "The azimuthal number l runs from 0 to n − 1 and labels the sub-shell as s, p, d or f, which fixes its shape."
+    },
+    {
+      "id": "isc11-chem-atom-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The minimum energy required to remove an electron from a metal surface is called the work __________ .",
+      "answer": "function",
+      "explanation": "The work function is the threshold energy; below it no photoelectrons are emitted at any intensity."
+    },
+    {
+      "id": "isc11-chem-atom-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Bohr’s quantisation condition for the angular momentum of an electron.",
+      "answer": "The angular momentum of an electron in an allowed orbit is an integral multiple of h/2π, written as mvr = nh/2π where n is a positive integer.",
+      "explanation": "Only orbits satisfying this condition are allowed, which is why the atom has fixed energy levels."
+    },
+    {
+      "id": "isc11-chem-atom-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the line spectrum of hydrogen proves that energy levels are discrete.",
+      "answer": "Each emitted photon carries the energy difference between two fixed levels, so its frequency is fixed by ΔE = hν. Only certain frequencies are possible, giving sharp lines instead of a continuous band, exactly as observed in the discharge tube.",
+      "explanation": "Discrete differences give discrete frequencies; a continuum of energies would give a continuous spectrum."
+    },
+    {
+      "id": "isc11-chem-atom-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Calculate the wavelength of the light emitted when an electron in hydrogen falls from n = 4 to n = 2, and name the series.",
+      "answer": "The energies are E_4 = −13.6/16 = −0.85 eV and E_2 = −13.6/4 = −3.40 eV, so the photon carries ΔE = 3.40 − 0.85 = 2.55 eV = 4.08 × 10^-19 J. Using λ = hc/ΔE with h = 6.626 × 10^-34 J s and c = 3.00 × 10^8 m s^-1 gives λ = 4.87 × 10^-7 m, or 487 nm, which lies in the visible region and belongs to the Balmer series.",
+      "explanation": "The energy difference, converted to joules, fed into λ = hc/ΔE; the visible Balmer series ends at n = 2."
+    },
+    {
+      "id": "isc11-chem-atom-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "How many electrons, sub-shells and orbitals are present in the shell with n = 4, and which sub-shell fills first?",
+      "answer": "The shell n = 4 holds 2n^2 = 32 electrons in 16 orbitals. Its sub-shells are 4s, 4p, 4d and 4f with 1, 3, 5 and 7 orbitals, holding 2, 6, 10 and 14 electrons. By the Aufbau order the 4s sub-shell fills first because it lies lower in energy than 3d and 4p, and it fills before the 3d sub-shell of the previous shell.",
+      "explanation": "Shell capacity is 2n^2; sub-shell capacity is 2(2l + 1); filling follows energy, not shell number."
+    }
+  ]
+}

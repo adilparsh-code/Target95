@@ -6,7 +6,7 @@ import { getBoards, getPublishedChapters, getSubjects } from "@/lib/boardprepCur
 import { officeApps } from "@/data/office";
 
 const siteUrl = "https://target95.web.app";
-const lastModified = "2026-10-15";
+const lastModified = "2026-10-27";
 
 // Every routable /Java/[chapter] page (same slugs the route pre-renders),
 // so chapter pages are discoverable instead of only 9 hardcoded ones.
@@ -127,6 +127,7 @@ export default async function sitemap() {
     "/about",
     "/contact",
     "/privacy",
+    "/privacy-and-data-protection",
     "/terms",
     "/copyright",
     "/faq",

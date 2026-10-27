@@ -9,10 +9,71 @@
   "syllabusBaselines": [
     {
       "examYear": 2027,
-      "status": "pending",
-      "source": "To be verified against the official board syllabus document.",
-      "note": "Syllabus structure not yet verified against an official source. No chapter titles are listed, so no unverified content is presented to students."
+      "status": "official-verified",
+      "source": "CISCE, ISC Examination Year 2027 Regulations and Syllabuses - Computer Science (868), February 2025 document (www.cisce.org).",
+      "note": "Verified October 2026 against the CISCE-copyrighted 'ISC YEAR 2027 / INDIAN SCHOOL CERTIFICATE EXAMINATION / COMPUTER SCIENCE (868), February 2025' document (page footers 'ISC Examination Year 2027', CISCE copyright notice, mission statement), read through a reproduction because cisce.org returns 403 to automated fetches. This resolves the earlier gap: the previous search had found only a Class XII 2027 document, whereas this document carries an explicit CLASS XI section before its CLASS XII section. Corroboration: an independent copy of the same document with the same heading and Class XI paper structure, and a Jagran Josh article stating that CISCE released Computer Science (868) for the Year 2027 evaluation cycle with the same 70/30 structure and the same Java requirement. Class XI prescribes Paper I Theory (3 hours, 70 marks) in Section A Basic Computer Hardware and Software (topics 1-3), Section B object-oriented programming with Java (topics 4-10) and Section C (topics 11-15), with the Java version 5.0 or later and BlueJ strongly recommended, plus Paper II Practical (3 hours, 30 marks) evaluated internally: three programming problems of which one is attempted, a Planning Session and an Examination Session of at most 90 minutes each, at least twenty assignments and one project through the year. All fifteen theory topics and the practical paper are registered below exactly as the document numbers them; no topics have been added, merged or split."
     }
   ],
-  "sections": []
+  "sections": [
+    {
+      "id": "isc-11-cs-paper-1",
+      "slug": "paper-1",
+      "title": "Computer Science (Paper I)",
+      "paperLabel": "ISC Class XI · Paper I · Theory (70 marks)",
+      "kind": "computer-science",
+      "description": "Section A hardware and software foundations, Section B object-oriented programming with Java, Section C data handling, recursion and computing issues.",
+      "groups": [
+        {
+          "id": "isc-11-cs-section-a",
+          "title": "Section A: Basic Computer Hardware and Software",
+          "chapters": [
+            { "id": "isc-11-cs-numbers", "slug": "numbers", "title": "Numbers", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Representation of numbers in different bases and interconversion between them, addition and subtraction in different bases, and the positional system explained with pseudo code conversions." },
+            { "id": "isc-11-cs-encodings", "slug": "encodings", "title": "Encodings", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Binary encoding of integers and real numbers with a finite number of bits: sign-magnitude, two's complement, mantissa-exponent notation, arithmetic and shift operations, and character encodings from ASCII to ISCII and Unicode." },
+            { "id": "isc-11-cs-propositional-logic", "slug": "propositional-logic-hardware-arithmetic", "title": "Propositional Logic, Hardware Implementation and Arithmetic Operations", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Propositional logic with well-formed formulae and truth tables, logic gates including universality of NAND and NOR, half and full adders, and the realisation of arithmetic operations in hardware." }
+          ]
+        },
+        {
+          "id": "isc-11-cs-section-b",
+          "title": "Section B: Object-Oriented Programming with Java",
+          "chapters": [
+            { "id": "isc-11-cs-oop-intro", "slug": "introduction-to-oop-using-java", "title": "Introduction to Object-Oriented Programming using Java", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "The programming element of the syllabus aimed at algorithmic problem solving: Java 5.0 or later, development environments with BlueJ strongly recommended for its objects-first approach, the JVM, compilation and execution, and compile-time versus run-time errors with exceptions." },
+            { "id": "isc-11-cs-objects", "slug": "objects", "title": "Objects", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Objects as data plus behaviour, object as an instance of a class, the difference between object and class, real-world modelling examples, and the interface that provides access to behaviour." },
+            { "id": "isc-11-cs-primitive-values", "slug": "primitive-values-wrapper-classes", "title": "Primitive Values, Wrapper Classes, Types and Casting", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "The eight primitive types and their wrapper classes, classes as user-defined types, user-defined casting and automatic type coercion, and why casting in general is to be avoided where possible." },
+            { "id": "isc-11-cs-variables", "slug": "variables-and-expressions", "title": "Variables and Expressions", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Variables as names for values, named constants, expression evaluation with operators, associativity and precedence, assignment, and the difference between variables holding primitive values and variables holding object references." },
+            { "id": "isc-11-cs-statements", "slug": "statements-and-scope", "title": "Statements and Scope", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Conditional and looping statements, the ternary operator, continue and break, grouping statements in blocks, and the scope and visibility of variables across block, method and class scopes." },
+            { "id": "isc-11-cs-methods", "slug": "methods-and-constructors", "title": "Methods and Constructors", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Methods as abstractions for user-defined operations, formal and actual arguments, primitive versus object arguments, static methods and variables, the this operator, constructors and the new operator, and algorithmic problem solving with methods." },
+            { "id": "isc-11-cs-arrays", "slug": "arrays-and-strings", "title": "Arrays and Strings", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Single and multi-dimensional arrays, searching and sorting techniques, constant-time array access, structured data types defined by classes, and the Java String class with substring, concatenation, replacement and index-of operations." }
+          ]
+        },
+        {
+          "id": "isc-11-cs-section-c",
+          "title": "Section C: Data Handling, Recursion and Computing Issues",
+          "chapters": [
+            { "id": "isc-11-cs-input-output", "slug": "input-output-and-data-file-handling", "title": "Basic Input/Output and Data File Handling (Binary and Text)", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Input and output with the Scanner and Printer classes, tokens and StringTokenizer, and data file handling with byte and character streams for creation, reading, writing, appending and searching." },
+            { "id": "isc-11-cs-recursion", "slug": "recursion", "title": "Recursion", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "The concept of recursion with simple recursive methods such as factorial, GCD, binary search and base conversion, recursive equations, and why every recursion must have a base case." },
+            { "id": "isc-11-cs-algorithms", "slug": "implementation-of-algorithms", "title": "Implementation of Algorithms to Solve Problems", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "The laboratory strand of the syllabus: assignments in which each major topic is covered at least once, requiring algorithm design, attention to correctness, implementation and execution in Java, and debugging where necessary." },
+            { "id": "isc-11-cs-packages", "slug": "packages", "title": "Packages", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Definition and creation of packages, importing user-defined packages, interaction of objects across packages, and application development using the Java API alongside user-defined packages." },
+            { "id": "isc-11-cs-trends", "slug": "trends-in-computing-and-ethics", "title": "Trends in Computing and Ethical Issues", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "Artificial intelligence, the Internet of Things, virtual and augmented reality; cyber security, privacy, netiquette, spam and phishing; and intellectual property, software copyright and patents, licensing, piracy and the Free Software Foundation, with social impact debated in class." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "isc-11-cs-paper-2",
+      "slug": "paper-2",
+      "title": "Practical",
+      "paperLabel": "ISC Class XI · Paper II · Practical (30 marks)",
+      "kind": "computer-science",
+      "description": "Internally evaluated practical work: programming assignments, a project and a three-hour practical examination.",
+      "groups": [
+        {
+          "id": "isc-11-cs-practical-group",
+          "title": "Paper II: Practical (30 marks)",
+          "chapters": [
+            { "id": "isc-11-cs-practical", "slug": "practical-work", "title": "Practical Work: Assignments, Project and Examination", "kind": "computer-science", "status": "planned", "syllabusStatus": "listed", "examYears": [2027], "blurb": "The internally evaluated practical: at least twenty programming assignments and one project through the year (continuous evaluation, 10 + 5 marks) and a three-hour practical examination (15 marks) in which one of three programming problems is attempted after a Planning Session and an Examination Session of at most 90 minutes each." }
+          ]
+        }
+      ]
+    }
+  ]
 }

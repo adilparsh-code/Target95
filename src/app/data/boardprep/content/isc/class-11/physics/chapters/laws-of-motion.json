@@ -1,0 +1,599 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-laws-of-motion",
+  "title": "Laws of Motion",
+  "kind": "physics",
+  "tagline": "Inertia, force and momentum: Newton’s three laws, friction, connected bodies and circular dynamics.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Newton’s three laws are the foundation on which the rest of mechanics is built: the first defines force by naming what happens without it, the second supplies the equation that solves almost every dynamics problem, and the third explains why forces always come in pairs. This chapter works through the three laws with the free-body diagram that makes them usable, then the two subjects that examiners ask for at length — friction in its static and kinetic forms with limiting equilibrium, and circular dynamics with banking and the conical pendulum — and finishes with connected bodies, where the whole method of solution matters more than any single formula.",
+    "facts": [
+      {
+        "label": "Second law",
+        "value": "The rate of change of momentum equals the applied force: F = ma for constant mass, with direction that of the force."
+      },
+      {
+        "label": "Third law",
+        "value": "To every action there is an equal and opposite reaction; the two act on different bodies and never cancel."
+      },
+      {
+        "label": "Friction",
+        "value": "Static friction rises to match the applied force up to µₛ N; kinetic friction is µₚ N and is slightly smaller."
+      },
+      {
+        "label": "Circular dynamics",
+        "value": "Centripetal force is required for circular motion, and the banking angle satisfies tan θ = v²/rg."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State Newton’s three laws and apply each to a familiar situation, naming the force in every case.",
+    "Draw free-body diagrams and resolve forces before applying F = ma.",
+    "Explain static and kinetic friction, limiting friction and the coefficient of friction, and solve problems on a body on a rough surface.",
+    "Solve problems on connected bodies, banked tracks and the conical pendulum.",
+    "Distinguish mass from weight and derive the relationship between units of force and mass."
+  ],
+  "learn": [
+    {
+      "id": "three-laws",
+      "title": "Newton’s three laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law defines force: a body continues in its state of rest or of uniform motion in a straight line unless an external unbalanced force compels it to change, which means that force is nothing other than the agent that disturbs uniform motion, and the property of resisting that disturbance is inertia, proportional to mass. The second law quantifies force: the rate of change of momentum is proportional to the applied force and takes its direction, which for constant mass becomes the familiar F equals ma, and which also gives the definition of the newton as the force that imparts an acceleration of one metre per second squared to a mass of one kilogram. The equation is vectorial and must be written along one axis at a time, and the acceleration it yields always points along the resultant force — a point examiners test by asking why a body moving uniformly still needs no force to keep it going. The third law completes the structure: every action has an equal and opposite reaction, both are parts of a single interaction, they act on two different bodies and therefore never cancel each other, and they are of the same kind — a gravitational pull is answered by a gravitational pull and a contact force by a contact force."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First law: uniform motion persists without a resultant force; it defines force and introduces inertia.",
+            "Inertia is the resistance to change of state and is measured by mass, which is why mass and weight differ.",
+            "Second law: F = dp/dt, which for constant mass is F = ma in the direction of the resultant.",
+            "One newton accelerates one kilogram at one metre per second squared, so 1 N = 1 kg m s⁻².",
+            "Third law: equal, opposite, simultaneous forces arising from one interaction and acting on different bodies.",
+            "Action and reaction never cancel because they act on different bodies; the net force on one body is what matters."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three laws and what each is used for",
+          "columns": [
+            "Law",
+            "Statement in one line",
+            "What it gives you"
+          ],
+          "rows": [
+            [
+              "First",
+              "No resultant force, no change of motion",
+              "Definition of force; inertia"
+            ],
+            [
+              "Second",
+              "F = ma, direction of the resultant",
+              "The equation of dynamics"
+            ],
+            [
+              "Third",
+              "Action equals reaction on different bodies",
+              "Tension, normal reaction, propulsion"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A passenger lurching forward",
+              "note": "When a bus brakes the passenger’s body keeps its forward velocity — inertia under the first law — until the seat belt supplies the force that stops it."
+            },
+            {
+              "text": "A book resting on a table",
+              "note": "The book pushes the table with its weight and the table answers with an equal normal reaction; the two act on different bodies, so the book stays in equilibrium."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Inertia",
+              "meaning": "The tendency of a body to resist any change in its state of rest or uniform motion, measured by mass."
+            },
+            {
+              "term": "Momentum",
+              "meaning": "Mass multiplied by velocity, a vector whose change is measured by impulse."
+            },
+            {
+              "term": "Impulse",
+              "meaning": "The effect of a force acting for a time, equal to the change of momentum it produces."
+            },
+            {
+              "term": "Equilibrium",
+              "meaning": "The state in which the resultant force on a body is zero, so acceleration vanishes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "friction",
+      "title": "Friction: static, kinetic and limiting equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Friction is the contact force that opposes the start or the continuance of relative motion between two surfaces, and it acts along the surface rather than perpendicular to it. Its first surprising property is that it is self-adjusting: as a small force is applied to a resting body the friction grows exactly to match it, so the body remains at rest, until the applied force reaches the limiting value µₚ multiplied by the normal reaction, at which point the body just begins to slide and the friction of motion, µₚ N, takes over with a slightly smaller coefficient. The coefficient of friction is the ratio of the frictional force to the normal reaction and has no units, and for ordinary surfaces the coefficient of limiting static friction lies between about 0.3 and 0.8 with kinetic friction about twenty per cent lower. Friction is independent of the area of contact and of the speed once the body is sliding, but it depends on the nature of the materials — which is why lubrication, ball bearings and treads work. On an inclined plane the component of weight down the slope is mg sin θ and the normal reaction is mg cos θ, so the body begins to slide when tan θ exceeds the coefficient of limiting friction, and on a level road the friction alone supplies the centripetal force, which caps the safe speed at √(µ g r)."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Friction acts along the contact surface and opposes relative motion or its tendency.",
+            "Static friction is self-adjusting up to the limiting value µₚ N; beyond that the body slides.",
+            "Kinetic friction is µₚ N with a coefficient usually smaller than that of limiting static friction.",
+            "The coefficient of friction µ = frictional force / normal reaction, with no dimensions.",
+            "Friction is independent of contact area and, once sliding, of speed; it depends on the materials.",
+            "On an incline the body slides when tan θ exceeds µ; on a level road the safe speed is √(µ g r)."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Static against kinetic friction",
+          "columns": [
+            "Feature",
+            "Static friction",
+            "Kinetic friction"
+          ],
+          "rows": [
+            [
+              "Magnitude",
+              "Self-adjusting up to µₚ N",
+              "Fixed at µₚ N"
+            ],
+            [
+              "Value",
+              "Never exceeds the applied force",
+              "Usually about 80 per cent of the limiting value"
+            ],
+            [
+              "Direction",
+              "Opposes the tendency to move",
+              "Opposes the sliding"
+            ],
+            [
+              "Coefficient",
+              "Coefficient of limiting friction",
+              "Coefficient of kinetic friction"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Pushing a heavy crate",
+              "note": "A push of 200 N moves nothing because friction matches it; at 310 N with N = 1000 N and µ = 0.3 the crate just starts to slide, and thereafter 300 N keeps it moving at steady speed."
+            },
+            {
+              "text": "A vehicle on a level curve",
+              "note": "At 15 m s⁻¹ on a curve of radius 50 m the required centripetal acceleration is 4.5 m s⁻², so µ must exceed 0.46 or the car skids."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Limiting friction",
+              "meaning": "The greatest value of static friction, reached just before a body begins to slide, equal to µₚ N."
+            },
+            {
+              "term": "Coefficient of friction",
+              "meaning": "The ratio of frictional force to normal reaction, a dimensionless number for a pair of surfaces."
+            },
+            {
+              "term": "Normal reaction",
+              "meaning": "The perpendicular force with which a surface supports the body resting on it."
+            },
+            {
+              "term": "Rolling friction",
+              "meaning": "The small resistance to rolling motion, far smaller than sliding friction, which is why wheels are used."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "circular-dynamics",
+      "title": "Circular dynamics: centripetal force, banking and the conical pendulum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A body moving in a circle is accelerating even when its speed is constant, because the velocity keeps changing direction, and that acceleration is directed towards the centre with magnitude v squared over r. By the second law a resultant force of that size must exist, and the name for it is centripetal — the centre-seeking force — which is never a new kind of force but always the name of whichever real force plays the role: tension in a whirling stone, friction under a car, the normal component on a banked road, gravity for a satellite. The consequences follow directly. On a level road the maximum safe speed before skidding follows from µ m g = m v²/r, giving v = √(µ g r); on a banked track the horizontal component of the normal reaction supplies the pull, and the speed for which no friction at all is needed satisfies tan θ = v² over r g, which is why mountain roads are banked and racing circuits are canted. The conical pendulum is the same analysis applied to a bob swung in a horizontal circle: the vertical component of the tension balances the weight and the horizontal component provides the centripetal force, giving an angular velocity of √(g cos θ over l) for a string of length l held at θ to the vertical, with the period of revolution following as 2π divided by that."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Centripetal acceleration is v²/r towards the centre; the centripetal force is m v²/r in the same direction.",
+            "The centripetal force is always a real force in disguise — tension, friction, gravity or a component of them.",
+            "Level curve: friction supplies the pull, so the safe speed is √(µ g r).",
+            "Banked track: no friction needed when tan θ = v²/rg; friction only widens the safe range.",
+            "Conical pendulum: T cos θ = mg and T sin θ = mω²l sin θ, giving ω = √(g/l cos θ).",
+            "A change of direction without a change of speed still requires a force, which is what the first two laws together demand."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Where the centripetal force comes from",
+          "columns": [
+            "Situation",
+            "Force playing the role"
+          ],
+          "rows": [
+            [
+              "Stone whirled on a string",
+              "Tension in the string"
+            ],
+            [
+              "Car on a level road",
+              "Friction between tyres and road"
+            ],
+            [
+              "Car on a banked road",
+              "Horizontal component of the normal reaction"
+            ],
+            [
+              "Conical pendulum",
+              "Horizontal component of the tension"
+            ],
+            [
+              "Satellite in orbit",
+              "Gravitational pull of the Earth"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why banking helps",
+              "note": "A banked curve lets the road’s own normal force do the turning, so even on an icy road a car can take the curve at a designed speed without relying on friction."
+            },
+            {
+              "text": "Tension at the top of a loop",
+              "note": "At the top of a vertical circle both weight and tension point downwards, so the tension there is smallest and must stay positive or the string goes slack."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connected-bodies",
+      "title": "Connected bodies and the method of solution",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Connected bodies — blocks joined by strings, bodies resting on each other, bodies on connected pulleys — are solved by one repeatable method, and marks follow the method as much as the result. Draw the system and mark the direction of the assumed acceleration. Isolate each body and draw its free-body diagram, showing only the forces acting on that body: weight, normal reaction, tension, friction, any applied push. Resolve every force along the direction of motion and write F equals m a for each body separately, taking care that the tension pulling one body is the same tension pulling the other if the string is light and inextensible. Solve the resulting equations simultaneously, and check the answer against limits — a heavier body should fall faster, and removing friction should not change a result that friction never entered. Two classic results are worth knowing as patterns: two bodies on a smooth table connected over a pulley accelerate at g times the difference of the masses over their sum, and a body pushed on a rough horizontal surface needs the applied force to exceed friction before any acceleration appears at all. Impulse and momentum offer a second route when forces vary with time, since impulse equals the change of momentum and area under a force-time graph gives the impulse directly."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Choose the direction of acceleration, then isolate each body and draw its free-body diagram.",
+            "Write F = ma for each body along its line of motion, one equation per body.",
+            "For a light inextensible string the tension is the same throughout it; for a light frictionless pulley it only reverses direction.",
+            "Two masses over a pulley: a = g(m₁ − m₂)/(m₁ + m₂), directed towards the heavier.",
+            "Check answers against limiting cases: zero friction, equal masses, or an infinite slope.",
+            "Impulse equals change of momentum, and the area under a force-time graph gives the impulse."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The solution routine for dynamics problems",
+          "columns": [
+            "Step",
+            "What to write"
+          ],
+          "rows": [
+            [
+              "1. Situation",
+              "Sketch with the direction of assumed acceleration marked"
+            ],
+            [
+              "2. Isolation",
+              "Free-body diagram for each body separately"
+            ],
+            [
+              "3. Resolution",
+              "Components along the line of motion only"
+            ],
+            [
+              "4. Equation",
+              "F = m a for each body"
+            ],
+            [
+              "5. Solve",
+              "Simultaneous equations, then a limit check"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two blocks on a smooth table",
+              "note": "A 6 kg block pulled by a 4 kg block hanging free accelerates the system at 4g/10, that is 3.92 m s⁻², with a tension of 23.5 N in the string."
+            },
+            {
+              "text": "Impulse of a bouncing ball",
+              "note": "A ball of mass 0.1 kg rebounding at 8 m s⁻¹ from a wall struck at 10 m s⁻¹ has a change of momentum of 1.8 kg m s⁻¹, so the wall delivered that impulse."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-errors",
+      "title": "The errors that cost marks in this chapter",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three errors account for most of the lost marks in laws of motion. The first is treating action and reaction as a pair that cancels: they act on different bodies, and only forces on one body may be added when finding its acceleration, so when a horse pulls a cart the force that moves the cart is the ground pushing the horse backward through friction, not the pull of the horse on itself. The second is the sign of friction: friction opposes relative motion or its tendency, so in a problem where a body is being pushed in one direction the friction must be drawn in the other, and if the body is already sliding the kinetic value replaces the static one. The third is assuming the normal reaction always equals the weight: it does so only on a level surface with no vertical push; on an incline it is mg cos θ, and when a force has a vertical component the normal reaction changes accordingly, which changes the friction at the same time. Beyond these, the habit that converts partial answers into full ones is to name the physical law before applying it — writing by Newton’s second law along x — and to give the answer with its unit and, where the question asks for it, its direction."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Action and reaction act on different bodies, so they never cancel within one free-body diagram.",
+            "On a rough surface the normal reaction equals the weight only when nothing else pushes vertically.",
+            "Friction points opposite to relative motion or its tendency — check the direction before substituting.",
+            "Static gives way to kinetic friction the moment the body slides; use the correct coefficient.",
+            "State the law before the equation, and finish with unit and direction.",
+            "Never carry a result past its assumptions: F = ma with constant mass does not apply while mass is being lost."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The horse and cart puzzle",
+              "note": "The cart moves because friction on the horse from the ground propels the system forward; the horse’s pull on the cart and the cart’s pull on the horse are an action-reaction pair acting on different bodies."
+            },
+            {
+              "text": "An inclined push",
+              "note": "A push applied at an angle to the horizontal reduces the normal reaction and therefore reduces the friction — a detail that changes the answer to the whole problem."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Free-body diagram of a block pulled on a rough surface",
+      "description": "A block with weight and normal reaction drawn vertically, the applied force at an angle resolved into horizontal and vertical parts, and kinetic friction drawn opposite to the direction of sliding.",
+      "labels": [
+        "weight mg acting down",
+        "normal reaction N raised by the vertical component",
+        "applied force resolved into two components",
+        "friction µ N opposing the motion",
+        "resultant along the surface gives a = F/m"
+      ]
+    },
+    {
+      "caption": "Figure: A car on a banked curve",
+      "description": "Cross-section of a banked road with the normal reaction tilted from the vertical, its horizontal component marked as the centripetal force and its vertical component shown balancing the weight.",
+      "labels": [
+        "banking angle θ",
+        "normal reaction tilted by θ",
+        "horizontal component supplies m v²/r",
+        "vertical component balances mg",
+        "friction adds or subtracts for other speeds"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The first law defines force and introduces inertia as the resistance to change of state.",
+    "Inertia is measured by mass; mass is invariant while weight depends on g.",
+    "The second law gives F = dp/dt, which is F = ma for constant mass, in the direction of the resultant.",
+    "One newton accelerates one kilogram at one metre per second squared.",
+    "The third law gives equal and opposite forces acting on different bodies, which therefore never cancel.",
+    "Static friction is self-adjusting up to the limiting value µₚ N; kinetic friction is µₚ N and smaller.",
+    "The coefficient of friction is friction divided by normal reaction and has no units.",
+    "On an incline the body slides when tan θ exceeds µ; on a level road the safe speed is √(µ g r).",
+    "Centripetal force m v²/r is a role played by tension, friction, a normal component or gravity.",
+    "Banking with tan θ = v²/rg lets the road turn a car without relying on friction.",
+    "Connected bodies are solved by isolating each body and writing F = ma once for each.",
+    "Impulse equals the change of momentum and is the area under a force-time graph."
+  ],
+  "examFocus": [
+    "Free-body diagrams carry marks in their own right: label every force and draw nothing that does not act on that body.",
+    "Friction questions expect the distinction between self-adjusting static friction and the fixed kinetic value.",
+    "Circular dynamics must name the real force providing the centripetal pull before any substitution.",
+    "In connected bodies, one equation per body and a limit check are the fastest route to full marks."
+  ],
+  "vocabulary": [
+    {
+      "word": "Inertia",
+      "meaning": "The tendency to resist any change of state of rest or uniform motion."
+    },
+    {
+      "word": "Momentum",
+      "meaning": "The product of mass and velocity, a vector quantity."
+    },
+    {
+      "word": "Impulse",
+      "meaning": "The effect of a force over a time interval, equal to the change of momentum."
+    },
+    {
+      "word": "Normal reaction",
+      "meaning": "The perpendicular supporting force exerted by a surface on a body."
+    },
+    {
+      "word": "Limiting friction",
+      "meaning": "The maximum static friction just before sliding begins."
+    },
+    {
+      "word": "Coefficient of friction",
+      "meaning": "The ratio of frictional force to normal reaction for two surfaces."
+    },
+    {
+      "word": "Centripetal force",
+      "meaning": "The resultant inward force required for circular motion, equal to m v²/r."
+    },
+    {
+      "word": "Banking",
+      "meaning": "Canting a curved road so that the normal reaction helps provide the centripetal force."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-laws-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body of mass 5 kg is acted on by a resultant force of 20 N. Its acceleration is:",
+      "options": [
+        "0.25 m s⁻²",
+        "4 m s⁻²",
+        "100 m s⁻²",
+        "25 m s⁻²"
+      ],
+      "correctIndex": 1,
+      "answer": "4 m s⁻²",
+      "explanation": "By F = ma, a = 20/5 = 4 m s⁻² in the direction of the force."
+    },
+    {
+      "id": "isc11-phy-laws-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement about action and reaction forces is correct?",
+      "options": [
+        "They act on the same body",
+        "They may cancel within one free-body diagram",
+        "They act on different bodies and cannot cancel",
+        "The action is larger when the body accelerates"
+      ],
+      "correctIndex": 2,
+      "answer": "They act on different bodies and cannot cancel",
+      "explanation": "The pair acts on two different bodies, so there is no single body on which both act to cancel."
+    },
+    {
+      "id": "isc11-phy-laws-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body just begins to slide when the applied force reaches 60 N on a surface with normal reaction 200 N. The coefficient of limiting friction is:",
+      "options": [
+        "0.2",
+        "0.3",
+        "3.3",
+        "1200"
+      ],
+      "correctIndex": 1,
+      "answer": "0.3",
+      "explanation": "µ = limiting friction / normal reaction = 60/200 = 0.3, with no units."
+    },
+    {
+      "id": "isc11-phy-laws-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car takes a level curve safely at a certain speed. If its speed is doubled, the frictional force needed to keep it on the curve becomes:",
+      "options": [
+        "Twice",
+        "Four times",
+        "Half",
+        "Unchanged"
+      ],
+      "correctIndex": 1,
+      "answer": "Four times",
+      "explanation": "The friction must supply the centripetal force m v²/r, so doubling the speed quadruples the force needed — “twice” is the trap for anyone who forgets the square."
+    },
+    {
+      "id": "isc11-phy-laws-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The property of a body that resists a change in its state of rest or uniform motion is called __________.",
+      "answer": "inertia",
+      "explanation": "Inertia is measured by mass, which is why a heavier body is harder to set in motion."
+    },
+    {
+      "id": "isc11-phy-laws-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "On a banked road of radius r banked at angle θ, the speed at which no friction is needed satisfies tan θ = v²/__ .",
+      "answer": "rg",
+      "explanation": "The horizontal component of the normal reaction then supplies the whole centripetal force."
+    },
+    {
+      "id": "isc11-phy-laws-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Newton’s second law and derive the unit of force from it.",
+      "answer": "Newton’s second law states that the rate of change of momentum of a body is directly proportional to the applied force and takes place in the direction of that force, which for constant mass becomes F = m a. The unit of force, the newton, is therefore defined as the force that produces an acceleration of one metre per second squared in a mass of one kilogram. In base units 1 N = 1 kg m s⁻⁻, which is the form used when checking dimensions.",
+      "explanation": "Statement, F = ma for constant mass, and the definition with base units."
+    },
+    {
+      "id": "isc11-phy-laws-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between static and kinetic friction.",
+      "answer": "Static friction acts between surfaces that are not sliding relative to each other and is self-adjusting: it grows to equal whatever small force is applied, up to the limiting value µₚ N, at which the body just begins to move. Kinetic friction acts once the surfaces are sliding and has the constant value µₚ N with a coefficient typically about twenty per cent smaller than the static one. This is why it is harder to start a body moving than to keep it moving, and why a pushed object tends to jerk forward when it finally breaks free.",
+      "explanation": "Self-adjusting against constant, the limiting value, and the practical consequence."
+    },
+    {
+      "id": "isc11-phy-laws-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does a body moving in a circle with uniform speed still have an acceleration?",
+      "answer": "Even when the speed is constant, the direction of the velocity vector changes continuously as the body turns, and acceleration is the rate of change of velocity including its direction. The change of velocity over a short interval points towards the centre of the circle, so the acceleration is centripetal, of magnitude v²/r, and by the second law a resultant force of m v²/r towards the centre must be acting.",
+      "explanation": "Direction changes, the change points inward, and therefore acceleration and the required force exist."
+    },
+    {
+      "id": "isc11-phy-laws-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain friction on a level surface and on an incline, and derive the condition for a body to slide down a rough incline.",
+      "answer": "Friction is the contact force along the surface that opposes relative motion or its tendency. On a level surface a body of mass m pressed against the floor has normal reaction N equal to mg, and as a horizontal force P is applied the static friction grows to match it, so the body stays at rest, until P reaches the limiting value µₚ N; beyond that the body slides and the friction of motion, slightly smaller, takes over. On an incline of angle θ the weight resolves into mg sin θ down the slope and mg cos θ perpendicular to it, so the normal reaction becomes mg cos θ rather than mg, and the limiting friction is µ mg cos θ. The body begins to slide when the downward component exceeds that limit: mg sin θ greater than µ mg cos θ, so tan θ must exceed µ. At that critical angle the body slides with acceleration g(sin θ − µ cos θ), which is zero at the angle of repose — the same angle at which the body, placed gently, would just remain at rest.",
+      "explanation": "Level surface behaviour, resolution on the incline, the tan θ > µ condition and the acceleration below the angle of repose."
+    },
+    {
+      "id": "isc11-phy-laws-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A block of mass 4 kg rests on a rough horizontal surface with µ = 0.4. It is pulled with a force of 20 N applied at 30° to the horizontal. Taking g = 10 m s⁻², analyse whether the block moves and find its acceleration if it does.",
+      "answer": "The applied force has a horizontal component 20 cos 30° = 17.3 N and a vertical component 20 sin 30° = 10 N acting upward, which reduces the normal reaction to N = mg − 10 = 40 − 10 = 30 N. The limiting static friction is therefore µ N = 0.4 × 30 = 12 N, while the pulling component is 17.3 N. Since 17.3 N exceeds 12 N the block does move, and the kinetic friction, taking it as the same value for this data, is 12 N. The resultant along the surface is 17.3 − 12 = 5.3 N, so the acceleration is 5.3 divided by 4, that is 1.33 m s⁻² in the direction of the horizontal component of the pull. The analysis also shows why the vertical component matters: had the force been applied at 60° the normal reaction and hence the friction would both have been smaller.",
+      "explanation": "Resolve the force, adjust the normal reaction, compare the pull with the limiting friction, then apply F = ma to the resultant."
+    },
+    {
+      "id": "isc11-phy-laws-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two bodies of masses 6 kg and 4 kg are connected by a light inextensible string and hung over a smooth pulley. Find the acceleration of the system and the tension in the string, taking g = 10 m s⁻².",
+      "answer": "Take the 6 kg mass as falling and the 4 kg mass as rising, and let the acceleration be a and the tension T. For the falling mass, the weight exceeds the tension, so 60 − T = 6a. For the rising mass the tension exceeds its weight, so T − 40 = 4a. Adding the two equations eliminates T and gives 20 = 10a, so a = 2 m s⁻². Substituting back, T = 40 + 4 × 2 = 48 N. The checks confirm the answer: the acceleration is less than free fall, as a shared string must make it, and the tension lies between the two weights, as it must if it is to hold the lighter up and restrain the heavier.",
+      "explanation": "One equation per body, addition to eliminate tension, the acceleration, the tension and the two limiting checks."
+    }
+  ]
+}

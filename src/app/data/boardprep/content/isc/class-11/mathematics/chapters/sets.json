@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-sets",
+  "title": "Sets",
+  "kind": "mathematics",
+  "tagline": "Set notation, subsets and Venn diagrams, the laws of union and intersection, and counting problems that no later chapter can avoid.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "A set is the most economical description of a collection: name the property once and every object that satisfies it belongs. This chapter builds the language the whole course uses — roster, set-builder and interval forms, the subset relation and the power set — and then puts that language to work in Venn diagrams. The counting rule n(A ∪ B) = n(A) + n(B) − n(A ∩ B) closes the chapter, because every classification problem that follows, from solutions of equations to event probabilities, is a problem about which regions overlap.",
+    "facts": [
+      {
+        "label": "Notation",
+        "value": "∈ for membership, ⊆ for subset, ∅ for the empty set, U for the universal set, A′ for the complement."
+      },
+      {
+        "label": "Power set",
+        "value": "A set with n elements has 2^n subsets, one of which is the empty set and one the set itself."
+      },
+      {
+        "label": "Inclusion–exclusion",
+        "value": "n(A ∪ B) = n(A) + n(B) − n(A ∩ B); for three sets subtract the pairwise overlaps and add the triple back."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Set language, Venn diagrams and counting questions recur in the yearly paper and underpin every later unit."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Represent a set in roster, set-builder and interval form and classify it as finite, infinite, equal or equivalent.",
+    "Determine the subsets and the power set of a set and state how many subsets a set of n elements has.",
+    "Draw and read a Venn diagram, take complements with respect to a universal set and apply De Morgan’s laws.",
+    "Apply union, intersection, difference and the standard set laws to given finite sets.",
+    "Solve practical survey problems with the inclusion–exclusion principle for two and three sets."
+  ],
+  "learn": [
+    {
+      "id": "representations-and-subsets",
+      "title": "Set notation, representations and subsets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A set is a well-defined collection of distinct objects, where well-defined means that membership can be decided without ambiguity. Three forms describe the same set. Roster form lists every element once, separated by commas. Set-builder form states the rule the elements obey, as {x : x ∈ N and x < 5}. Interval notation compresses real-number conditions, so {x : −2 < x ≤ 5} becomes (−2, 5], with a round bracket for the excluded end and a square bracket for the included one. Two sets are equal when they hold exactly the same elements, whatever the order or repetition in which they were written. The subset relation A ⊆ B holds when every element of A is also an element of B, and by convention every set is a subset of itself."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Roster form lists each element once: A = {2, 4, 6, 8} or B = {x ∈ Z : −1 ≤ x < 3} = {−1, 0, 1, 2}.",
+            "A ⊆ B means every element of A lies in B; A ⊊ B (proper subset) additionally requires A ≠ B.",
+            "A set with n elements has exactly 2^n subsets and 2^n − 1 proper subsets.",
+            "The empty set ∅ is a subset of every set, and the power set P(A) is the set of all subsets of A.",
+            "Order and repetition never matter: {1, 2, 1} and {2, 1} both name the two-element set {1, 2}."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Subsets of {a, b, c}: ∅, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c} — eight in all",
+              "note": "Count them as 2^3 = 8 and check the list length against the formula."
+            },
+            {
+              "text": "A = {x : x ∈ Z and −1 ≤ x < 3} = {−1, 0, 1, 2}",
+              "note": "Translate the condition element by element: the left end is included by ≤, the right end excluded by <."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Set",
+              "meaning": "Well-defined collection of distinct objects."
+            },
+            {
+              "term": "Element",
+              "meaning": "A single object contained in a set, written a ∈ A."
+            },
+            {
+              "term": "Subset",
+              "meaning": "Set A is a subset of B when every element of A is an element of B."
+            },
+            {
+              "term": "Power set",
+              "meaning": "Set of all subsets of A, containing 2^n members when A holds n elements."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "venn-diagrams-and-complements",
+      "title": "Venn diagrams, the universal set and complements",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A Venn diagram draws the universal set U as a rectangle and each set of interest as a circle inside it, arranged so that every region the question needs is visible as a separate space. The complement A′ collects everything in U outside A, so A ∪ A′ = U and A ∩ A′ = ∅. Circles that do not overlap represent disjoint sets, whose intersection is empty. The subset relation has three equivalent readings in the diagram: A ⊆ B exactly when the circle A sits wholly inside B, when A ∩ B′ is empty, and when A ∪ B = B. Shading the region a question names, before any counting begins, is the habit that prevents most Venn errors."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Draw the rectangle for U first, then position the circles so every required region is a separate closed area.",
+            "A′ = {x : x ∈ U and x ∉ A}; taking a complement twice returns the original set: (A′)′ = A.",
+            "Two sets are disjoint when A ∩ B = ∅, so their circles do not meet.",
+            "A ⊆ B holds simultaneously with A ∩ B = A, A ∪ B = B and A ∩ B′ = ∅.",
+            "Shade or label the region named by the question before substituting any numbers."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "U = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} and A = {2, 4, 6, 8, 10} give A′ = {1, 3, 5, 7, 9}",
+              "note": "Take every element of U that fails the rule for A."
+            },
+            {
+              "text": "With U = {1, 2, 3, 4, 5}, A = {1, 2, 3} and B = {3, 4}: B′ = {1, 2, 5}, so A ∪ B′ = {1, 2, 3, 5}",
+              "note": "Work the inner complement first, then take the union of the two resulting sets."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reading the regions of a two-set Venn diagram",
+          "columns": [
+            "Region",
+            "Set expression",
+            "How to read it"
+          ],
+          "rows": [
+            [
+              "Inside both circles",
+              "A ∩ B",
+              "Elements common to A and B"
+            ],
+            [
+              "Inside A only",
+              "A ∩ B′ (the difference A \\ B)",
+              "Elements of A that are not in B"
+            ],
+            [
+              "Inside B only",
+              "A′ ∩ B",
+              "Elements of B that are not in A"
+            ],
+            [
+              "Inside either circle",
+              "A ∪ B",
+              "All elements of A or B, each counted once"
+            ],
+            [
+              "Outside both circles",
+              "(A ∪ B)′",
+              "Elements of U belonging to neither set"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operations-and-laws",
+      "title": "Union, intersection, difference and the laws of sets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The four operations build every expression the syllabus uses. The union A ∪ B gathers everything in A or in B; the intersection A ∩ B keeps only what they share; the difference A \\ B removes from A whatever lies in B; and the symmetric difference A △ B keeps what is in either set but not both. De Morgan’s laws then move the complement across a bracket, swapping the operation as it goes: the complement of a union is the intersection of the complements. Alongside them sit the commutative, associative and distributive laws, the idempotent laws A ∪ A = A and A ∩ A = A, and the absorption laws that reduce A ∪ (A ∩ B) straight to A. Together they let a long expression collapse to a short one before any element is listed."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Commutative: A ∪ B = B ∪ A and A ∩ B = B ∩ A.",
+            "Distributive: A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C), and union distributes over intersection likewise.",
+            "De Morgan: (A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′.",
+            "Idempotent and absorption: A ∪ A = A, A ∩ A = A, and A ∪ (A ∩ B) = A.",
+            "Symmetric difference A △ B = (A ∪ B) \\ (A ∩ B) = (A \\ B) ∪ (B \\ A)."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A = {1, 2, 3, 4}, B = {3, 4, 5}: A \\ B = {1, 2} and A △ B = {1, 2, 5}",
+              "note": "Remove B from A for the difference; keep whichever side the element is alone for the symmetric difference."
+            },
+            {
+              "text": "Verify (A ∪ B)′ with U = {1, …, 6}, A = {1, 2}, B = {2, 3}: A ∪ B = {1, 2, 3}, so (A ∪ B)′ = {4, 5, 6}",
+              "note": "A′ ∩ B′ = {3, 4, 5, 6} ∩ {1, 4, 5, 6} = {4, 5, 6}, matching the direct complement."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The standard laws of set algebra",
+          "columns": [
+            "Law",
+            "Union form",
+            "Intersection form"
+          ],
+          "rows": [
+            [
+              "Commutative",
+              "A ∪ B = B ∪ A",
+              "A ∩ B = B ∩ A"
+            ],
+            [
+              "Associative",
+              "(A ∪ B) ∪ C = A ∪ (B ∪ C)",
+              "(A ∩ B) ∩ C = A ∩ (B ∩ C)"
+            ],
+            [
+              "Distributive",
+              "A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)",
+              "A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)"
+            ],
+            [
+              "De Morgan",
+              "(A ∪ B)′ = A′ ∩ B′",
+              "(A ∩ B)′ = A′ ∪ B′"
+            ],
+            [
+              "Identity and complement",
+              "A ∪ ∅ = A, A ∪ U = U",
+              "A ∩ U = A, A ∩ ∅ = ∅"
+            ]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Union",
+              "meaning": "A ∪ B, the set of elements in A or in B (or both)."
+            },
+            {
+              "term": "Intersection",
+              "meaning": "A ∩ B, the set of elements common to A and B."
+            },
+            {
+              "term": "Difference",
+              "meaning": "A \\ B, elements of A that are not elements of B."
+            },
+            {
+              "term": "Symmetric difference",
+              "meaning": "A △ B, elements in exactly one of A and B."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "counting-with-sets",
+      "title": "Counting with Venn diagrams: inclusion–exclusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Counting the members of overlapping groups double-counts whatever lies in the overlap, so the correction is to subtract it once. That is the whole content of n(A ∪ B) = n(A) + n(B) − n(A ∩ B). With three sets the correction itself overlaps: the three pairwise intersections are each subtracted once, but the triple intersection was added three times and subtracted three times, so it must be added back. Before writing any formula, fill the diagram from the inside out — the region common to everything first, then the pairwise-only regions, then the single regions. The number in neither group is the grand total minus the union, and phrases such as exactly one and at least one refer to different collections of regions and must never share a line of working."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Two sets: n(A ∪ B) = n(A) + n(B) − n(A ∩ B).",
+            "Three sets: n(A ∪ B ∪ C) = sum of singles − sum of pairs + the triple intersection.",
+            "Exactly one means three separate regions; at least one means the whole union.",
+            "Fill the innermost region of the diagram first, then work outwards.",
+            "Neither = total − n(A ∪ B ∪ C); only A means n(A) − n(A ∩ B) − n(A ∩ C) + n(A ∩ B ∩ C)."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "n(A) = 25, n(B) = 18, n(A ∩ B) = 7 gives n(A ∪ B) = 25 + 18 − 7 = 36",
+              "note": "The intersection was counted twice in the two singles, so it is subtracted once."
+            },
+            {
+              "text": "n(A) = 40, n(B) = 35, n(C) = 30, pairwise overlaps 15, 10 and 5, triple overlap 3",
+              "note": "Union = 105 − 30 + 3 = 78: add the singles, subtract the pairs, add the triple back."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Inclusion–exclusion at a glance",
+          "columns": [
+            "Data given",
+            "Formula",
+            "Line to write"
+          ],
+          "rows": [
+            [
+              "Two groups, both counts and the overlap",
+              "n(A ∪ B) = n(A) + n(B) − n(A ∩ B)",
+              "25 + 18 − 7 = 36"
+            ],
+            [
+              "Three groups, all overlaps known",
+              "sum of singles − sum of pairs + triple",
+              "105 − 30 + 3 = 78"
+            ],
+            [
+              "Grand total and the union known",
+              "neither = total − union",
+              "100 − 78 = 22"
+            ],
+            [
+              "Exactly one of three groups",
+              "singles − 2 × pairs + 3 × triple",
+              "105 − 60 + 9 = 54"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A two-set Venn diagram with every region named",
+      "description": "A rectangle marked U holds two overlapping circles, A on the left and B on the right; the overlapping lens, the two crescents and the area outside both circles are each labelled with their set expression.",
+      "labels": [
+        "U: the universal set, drawn as the enclosing rectangle",
+        "A ∩ B: the overlapping region",
+        "A \\ B: inside A only",
+        "B \\ A: inside B only",
+        "(A ∪ B)′: the region outside both circles"
+      ]
+    },
+    {
+      "caption": "Figure: Membership, subset and complement in one diagram",
+      "description": "A large circle A contains a smaller circle B wholly inside it, with an element marked x inside B, an element y inside A but outside B, and an element z outside A entirely, all within the rectangle of U.",
+      "labels": [
+        "B ⊆ A: circle B lies entirely inside circle A",
+        "x ∈ B and therefore x ∈ A",
+        "y ∈ A \\ B: in A but not in B",
+        "z ∈ A′: outside A altogether",
+        "A ∩ B = B and A ∪ B = A when B ⊆ A"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A set is a well-defined collection of distinct objects; order and repetition never change it.",
+    "Roster, set-builder and interval forms are three writings of one set.",
+    "A ⊆ B exactly when every element of A lies in B; every set is a subset of itself.",
+    "A set of n elements has 2^n subsets, including the empty set and the set itself.",
+    "A′ = U \\ A, with A ∪ A′ = U and A ∩ A′ = ∅; complementing twice returns the original set.",
+    "De Morgan: (A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′.",
+    "A ⊆ B is equivalent to A ∩ B = A, to A ∪ B = B and to A ∩ B′ = ∅.",
+    "n(A ∪ B) = n(A) + n(B) − n(A ∩ B) removes the double count of the overlap.",
+    "Three-set counting subtracts the pairwise overlaps and adds the triple intersection back.",
+    "Every counting error is a region error: draw the diagram and fill it inside out."
+  ],
+  "examFocus": [
+    "Name the law before you apply it — De Morgan, distributive, inclusion–exclusion — because method marks follow the named rule.",
+    "When a problem says only A, do not enter it as n(A); mark the region on the diagram before calculating.",
+    "In survey questions, label the four regions A only, B only, both and neither before any arithmetic; markers look for those labels.",
+    "Power-set answers expect the count 2^n written beside the listing so that a missing subset is visible."
+  ],
+  "vocabulary": [
+    {
+      "word": "Set",
+      "meaning": "Well-defined collection of distinct objects."
+    },
+    {
+      "word": "Element",
+      "meaning": "Object belonging to a set, written a ∈ A."
+    },
+    {
+      "word": "Subset",
+      "meaning": "A ⊆ B when every element of A is an element of B."
+    },
+    {
+      "word": "Power set",
+      "meaning": "Collection of all subsets of a set, of size 2^n."
+    },
+    {
+      "word": "Universal set",
+      "meaning": "Set containing every object under discussion, drawn as the rectangle of a Venn diagram."
+    },
+    {
+      "word": "Complement",
+      "meaning": "A′, the elements of U that are not in A."
+    },
+    {
+      "word": "Disjoint sets",
+      "meaning": "Sets with no common element, so A ∩ B = ∅."
+    },
+    {
+      "word": "Union",
+      "meaning": "A ∪ B, all elements in A or in B."
+    },
+    {
+      "word": "Intersection",
+      "meaning": "A ∩ B, the elements common to A and B."
+    },
+    {
+      "word": "Inclusion–exclusion",
+      "meaning": "Counting principle that corrects overlaps: subtract pairs, add back the triple."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-sets-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "How many subsets does a set with five elements have?",
+      "options": [
+        "10",
+        "16",
+        "32",
+        "64"
+      ],
+      "correctIndex": 2,
+      "answer": "32",
+      "explanation": "A set of n elements has 2^n subsets, and 2^5 = 32."
+    },
+    {
+      "id": "isc11-math-sets-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In roster form, the set {x : x ∈ N and 3 < x < 10} is:",
+      "options": [
+        "{3, 4, 5, 6, 7, 8, 9, 10}",
+        "{4, 5, 6, 7, 8, 9}",
+        "{4, 5, 6, 7, 8, 9, 10}",
+        "{2, 3, 4, 5, 6, 7, 8, 9}"
+      ],
+      "correctIndex": 1,
+      "answer": "{4, 5, 6, 7, 8, 9}",
+      "explanation": "Both inequalities are strict, so 3 and 10 are excluded, leaving the six naturals from 4 to 9."
+    },
+    {
+      "id": "isc11-math-sets-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "By De Morgan's law, the complement (A ∪ B)′ equals:",
+      "options": [
+        "A′ ∪ B′",
+        "A ∩ B",
+        "A′ ∩ B′",
+        "A ∪ B′"
+      ],
+      "correctIndex": 2,
+      "answer": "A′ ∩ B′",
+      "explanation": "De Morgan's first law moves the complement inside and flips the operation: the complement of a union is the intersection of the complements."
+    },
+    {
+      "id": "isc11-math-sets-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A ⊆ B, then the intersection A ∩ B is:",
+      "options": [
+        "A ∩ B = B",
+        "A ∩ B = A",
+        "A ∩ B = the empty set",
+        "A ∩ B = A ∪ B"
+      ],
+      "correctIndex": 1,
+      "answer": "A ∩ B = A",
+      "explanation": "When A lies wholly inside B, everything in A is also in B, so their intersection is A itself."
+    },
+    {
+      "id": "isc11-math-sets-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The power set of the empty set contains exactly ______ element(s).",
+      "answer": "one",
+      "explanation": "The only subset of the empty set is the empty set itself, so P(∅) = {∅} holds a single element."
+    },
+    {
+      "id": "isc11-math-sets-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The inclusion–exclusion formula reads n(A ∪ B) = n(A) + n(B) − ______ .",
+      "answer": "n(A ∩ B)",
+      "explanation": "The intersection was counted once inside each single count, so it is subtracted once to correct the double count."
+    },
+    {
+      "id": "isc11-math-sets-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define a proper subset and state how many proper subsets a set with four elements has.",
+      "answer": "A set B is a proper subset of A, written B ⊊ A, when every element of B is an element of A and B is not equal to A. A set with four elements has 2^4 − 1 = 15 proper subsets.",
+      "explanation": "All subsets except the set itself are proper, which is why the count is 2^n − 1 rather than 2^n."
+    },
+    {
+      "id": "isc11-math-sets-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State De Morgan's laws for the complement of a union and of an intersection.",
+      "answer": "(A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′: the complement of a union is the intersection of the complements, and the complement of an intersection is the union of the complements.",
+      "explanation": "Each law swaps the operation as the complement passes through the bracket, which is what makes long complemented expressions collapse."
+    },
+    {
+      "id": "isc11-math-sets-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In a class of 60 students, 25 play cricket, 20 play football and 10 play both games. Find the number of students who play neither game.",
+      "answer": "Students playing at least one game: n(C ∪ F) = 25 + 20 − 10 = 35. The students playing neither game are 60 − 35 = 25 in number.",
+      "explanation": "Add the two single counts, subtract the intersection once to remove the double count, then take the union away from the class total."
+    },
+    {
+      "id": "isc11-math-sets-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In a survey of 100 students, 40 read magazine A, 35 read B, 30 read C, 15 read A and B, 10 read B and C, 5 read A and C and 3 read all three. Find how many read exactly one magazine and how many read none.",
+      "answer": "n(A ∪ B ∪ C) = (40 + 35 + 30) − (15 + 10 + 5) + 3 = 105 − 30 + 3 = 78, so 100 − 78 = 22 read none. The pairwise-only regions are 15 − 3 = 12, 10 − 3 = 7 and 5 − 3 = 2, so A only = 40 − 12 − 2 − 3 = 23, B only = 35 − 12 − 7 − 3 = 13 and C only = 30 − 2 − 7 − 3 = 18, giving 23 + 13 + 18 = 54 students who read exactly one magazine.",
+      "explanation": "Fill the triple region first, then the pairwise-only regions, then the single regions; exactly one is the sum of the three outermost regions and none is the total minus the union."
+    }
+  ]
+}

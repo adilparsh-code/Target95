@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-work-energy",
+  "title": "Work, Energy and Power",
+  "kind": "physics",
+  "tagline": "The work-energy theorem, conservation, potential energy and collisions in one dimension.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Work and energy are two descriptions of the same transfer, and the chapter is built on that identity: work is the transfer that produces it, energy is the capacity that results, and power is the rate at which the transfer happens. This chapter derives the work-energy theorem, separates conservative from non-conservative forces, builds gravitational and elastic potential energy, states conservation and its working conditions, and then applies all of it to collisions in one dimension, where momentum and energy are used together to separate elastic from inelastic events. The numerical pattern examiners repeat is a block sliding with friction, a spring release, and a two-body collision with or without restitution.",
+    "facts": [
+      {
+        "label": "Work",
+        "value": "W = F s cos θ, positive, zero or negative according to the angle between force and displacement."
+      },
+      {
+        "label": "Work-energy theorem",
+        "value": "The net work done on a body equals the change in its kinetic energy, W = ½ m v² − ½ m u²."
+      },
+      {
+        "label": "Conservation",
+        "value": "Total mechanical energy is conserved when only conservative forces do work; friction converts it to heat."
+      },
+      {
+        "label": "Collisions",
+        "value": "Momentum is conserved in every collision; kinetic energy is conserved only in a perfectly elastic one."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Calculate work for a constant force at an angle and interpret negative and zero work.",
+    "State and prove the work-energy theorem and use it in place of the equations of motion where convenient.",
+    "Distinguish conservative and non-conservative forces and derive gravitational and elastic potential energy.",
+    "Apply the conservation of mechanical energy to falling bodies, swings and springs.",
+    "Analyse one-dimensional collisions using conservation of momentum together with the coefficient of restitution."
+  ],
+  "learn": [
+    {
+      "id": "work",
+      "title": "Work, energy and the work-energy theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Work is done when a force displaces its point of application, and its measure is the product of the force, the displacement and the cosine of the angle between them, W = F s cos θ. The cosine is what makes the idea subtle: pushing a wall does no work because the displacement is zero, carrying a bag horizontally does no work on the bag because the force is vertical while the displacement is horizontal, and the work done by friction is negative because the force opposes the motion. Power is the rate of working, P = W/t = F v, and its unit is the watt, one joule per second, with the horsepower sometimes quoted for engines. Kinetic energy follows as one half m v squared, and it is derived rather than assumed by integrating the work done: since F s equals m a s, and v squared minus u squared equals two a s, the work done is exactly one half m v squared minus one half m u squared. That equality is the work-energy theorem — the net work done on a body equals the change in its kinetic energy — and it is the bridge that lets a problem be solved without ever finding the time, which is its great practical advantage when the force varies with position."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Work W = F s cos θ; the unit is the joule, and 1 J = 1 N m.",
+            "Work is zero when the force is perpendicular to the displacement, and negative when it opposes the motion.",
+            "Power P = W/t = F v, measured in watts; 1 W = 1 J s⁻¹.",
+            "Kinetic energy is ½ m v², the energy a body possesses by virtue of its motion.",
+            "Work-energy theorem: the net work on a body equals the change in its kinetic energy.",
+            "The theorem is useful when force varies with position or when the time of travel is not asked for."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sign of work and what it means",
+          "columns": [
+            "Angle between F and s",
+            "Cosine",
+            "Work",
+            "Example"
+          ],
+          "rows": [
+            [
+              "0°",
+              "+1",
+              "positive",
+              "A crane lifting a load"
+            ],
+            [
+              "90°",
+              "0",
+              "zero",
+              "Tension in a stone whirled in a circle"
+            ],
+            [
+              "180°",
+              "−1",
+              "negative",
+              "Friction slowing a sliding block"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Carrying a bag",
+              "note": "The hand supports the bag vertically while the walk is horizontal, so the work done on the bag during the walk is zero — a classic one-mark trap."
+            },
+            {
+              "text": "Finding speed without time",
+              "note": "A body pushed from rest through 5 m by a steady 10 N gains 50 J of kinetic energy; for the 2 kg body of the example that gives ½ × 2 × v² = 50 and v = √50 ≈ 7.07 m s⁻¹ without ever computing the acceleration."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Work",
+              "meaning": "Force multiplied through displacement in the direction of the force, W = F s cos θ."
+            },
+            {
+              "term": "Power",
+              "meaning": "The rate of doing work, P = W/t = F v, measured in watts."
+            },
+            {
+              "term": "Kinetic energy",
+              "meaning": "The energy of motion, one half m v squared."
+            },
+            {
+              "term": "Work-energy theorem",
+              "meaning": "The net work done on a body equals the change in its kinetic energy."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "potential-and-conservation",
+      "title": "Potential energy, conservative forces and conservation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Potential energy belongs to configuration rather than motion, and the gravitational form near the Earth is m g h, the work that would be needed to raise the body to that height. A force is conservative when the work it does in going between two points depends only on those points and not on the path taken, and gravity and the ideal spring force are the two conservative forces of the syllabus, while friction and drag are the standard non-conservative examples because they turn mechanical energy irreversibly into heat. The conservation of mechanical energy states that the sum of kinetic and potential energy stays constant whenever only conservative forces do work, and the standard proofs are two: a body falling freely from height h converts m g h of potential into ½ m v² of kinetic, giving v = √(2gh) independent of mass; and a body sliding down a smooth incline reaches the bottom with the same speed whichever slope it used, since only the height mattered. When a non-conservative force does work, the work it performs is exactly the change in the total mechanical energy, which is the form of the statement that handles friction: the loss of mechanical energy equals the work done against friction, appearing as heat. Springs supply the elastic form, ½ k x², since the restoring force grows with extension and the work is the area of the triangular force-extension graph."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Gravitational potential energy near the Earth: U = m g h, defined relative to a chosen reference level.",
+            "Conservative force: work depends only on the end points, not the path; gravity and spring force are conservative.",
+            "Non-conservative force: friction and drag convert mechanical energy into heat and reduce the mechanical total.",
+            "Conservation: kinetic plus potential stays constant when only conservative forces do work.",
+            "A body falling freely from height h reaches the ground at v = √(2gh), independent of its mass.",
+            "Elastic potential energy in a spring is ½ k x², the area under the linear restoring-force graph."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Energy bookkeeping in common situations",
+          "columns": [
+            "Situation",
+            "Mechanical energy",
+            "Where the rest goes"
+          ],
+          "rows": [
+            [
+              "Free fall in vacuum",
+              "constant",
+              "nothing — only gravity acts"
+            ],
+            [
+              "Block sliding with friction",
+              "decreases",
+              "heat at the surface"
+            ],
+            [
+              "Oscillating spring, ideal",
+              "constant",
+              "nothing — spring force is conservative"
+            ],
+            [
+              "Car on a rough road",
+              "decreases",
+              "heat, sound and deformation"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A roller coaster run",
+              "note": "At the top of the first hill the car has maximum potential energy, and every later height converts back into speed, which is why the first hill must be the tallest."
+            },
+            {
+              "text": "A spring release",
+              "note": "A spring compressed 0.1 m with k = 400 N m⁻¹ stores ½ × 400 × 0.01 = 2 J, all of which becomes kinetic energy when released without friction."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collisions",
+      "title": "Collisions in one dimension",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A collision is the brief interaction in which two bodies exchange momentum and, possibly, kinetic energy, and its analysis always proceeds in the same order. Momentum is conserved in every collision, because the external forces during the brief impact are negligible, and that single equation contains two unknowns after the collision. Energy supplies the second equation but only in a restricted form: in a perfectly elastic collision kinetic energy is also conserved, which for two bodies gives the result that the relative speed of separation equals the relative speed of approach. The coefficient of restitution e measures exactly this, the ratio of the relative speed after to the relative speed before the collision, with e equal to one for a perfectly elastic event and zero for a perfectly inelastic one in which the bodies stick together and move with a common velocity. Real collisions lie between the two limits, and the lost kinetic energy reappears as heat, sound and deformation. The standard results worth knowing as checks are that equal masses in a perfectly elastic head-on collision exchange velocities, and that in a perfectly inelastic collision of a moving body with a stationary one the common speed is the original speed multiplied by the moving mass over the total mass."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Momentum is conserved in every collision because impact forces are internal and brief.",
+            "Kinetic energy is conserved only in a perfectly elastic collision; otherwise it becomes heat, sound and deformation.",
+            "Coefficient of restitution e = relative speed of separation / relative speed of approach.",
+            "e = 1 perfectly elastic; e = 0 perfectly inelastic, the bodies moving together afterwards.",
+            "Equal masses in an elastic head-on collision exchange velocities.",
+            "Perfectly inelastic collision with a stationary body: common speed = m₁v₁ / (m₁ + m₂)."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Elastic against inelastic collision",
+          "columns": [
+            "Feature",
+            "Perfectly elastic",
+            "Perfectly inelastic"
+          ],
+          "rows": [
+            [
+              "Momentum",
+              "conserved",
+              "conserved"
+            ],
+            [
+              "Kinetic energy",
+              "conserved",
+              "maximum loss consistent with momentum"
+            ],
+            [
+              "Coefficient of restitution",
+              "e = 1",
+              "e = 0"
+            ],
+            [
+              "Bodies afterwards",
+              "separate with changed speeds",
+              "move with a common velocity"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Equal masses exchanging",
+              "note": "A billiard ball at 4 m s⁻¹ striking an identical ball at rest transfers its entire velocity in a head-on elastic encounter, leaving the striker at rest."
+            },
+            {
+              "text": "A bullet into a block",
+              "note": "A 0.01 kg bullet at 400 m s⁻¹ lodging in a 1.99 kg block carries the combined mass forward at 2 m s⁻¹, and the kinetic energy lost to heat is 800 − 4 = 796 J."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power-and-applications",
+      "title": "Power, energy in practice and the method of solving",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Power measures how fast energy is transferred, and its practical forms are worth fixing: an engine delivering a force at a speed develops power equal to force times speed, which is why the same power can climb slowly or race quickly but not both, and why gear changes trade force for speed. Energy problems themselves fall into three families and the choice between them is what examiners reward. The energy route suits problems where a force varies or where only speeds and heights are wanted, since conservation replaces the equations of motion entirely. The work-energy route suits a body acted on by a net force over a distance when the time is not wanted. The momentum route is compulsory in collisions and in explosions, where forces are unknown and vary wildly during the impact. Mixing them wrongly is the standard failure: energy is not conserved when friction acts, and momentum is conserved in a collision only when no external resultant acts during the impact. The routine that avoids the error is to write down what is conserved before any arithmetic — momentum always, mechanical energy only if the surfaces are smooth — and then to count the unknowns against the equations available."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Power P = W/t = F v; the same power gives less force at higher speed, which is the reason for gears.",
+            "Energy route: use when forces vary or only heights and speeds are asked; conservation replaces the equations of motion.",
+            "Work-energy route: use when a net force acts through a distance and the time is not required.",
+            "Momentum route: compulsory for collisions and explosions where the forces are unknown.",
+            "Write down the conservation laws before arithmetic: momentum always, mechanical energy only when smooth.",
+            "Count unknowns against equations, and remember energy is lost to heat wherever friction does work."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A car at constant power",
+              "note": "A car of 1000 kg at constant power of 20 kW can sustain only a limited force at high speed, so its acceleration falls away as speed rises even though the engine works no less hard."
+            },
+            {
+              "text": "Choosing the law first",
+              "note": "For a bullet lodging in a block, energy is visibly lost, so conservation of mechanical energy would give a wrong answer while momentum gives the right one immediately."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Energy conversion along a fall",
+      "description": "A body at height h with mgh of potential energy, arrows at successive heights showing potential falling and kinetic rising, and a marker at the ground where the whole of the energy has become kinetic.",
+      "labels": [
+        "top: U = m g h, K = 0",
+        "mid-fall: U + K constant",
+        "ground: K = m g h = ½ m v²",
+        "v = √(2gh), independent of mass",
+        "with friction: the missing part is heat"
+      ]
+    },
+    {
+      "caption": "Figure: Force against displacement in a spring",
+      "description": "A straight-line graph of restoring force against extension from the origin, the shaded triangular area marked as the work stored, and the formula ½ k x² annotated beside it.",
+      "labels": [
+        "F = −k x, a straight line through the origin",
+        "area under the graph is the work done",
+        "shaded triangle gives ½ k x²",
+        "that energy is stored as potential energy",
+        "released as kinetic energy when let go"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Work is F s cos θ; it is zero when the force is perpendicular to the displacement and negative when it opposes motion.",
+    "Power is the rate of doing work, P = W/t = F v, measured in watts.",
+    "Kinetic energy is one half m v squared, and the work-energy theorem equates net work to its change.",
+    "A conservative force does path-independent work; gravity and the spring force are conservative.",
+    "Mechanical energy is conserved only while conservative forces do all the work.",
+    "A body falling freely from height h reaches speed √(2gh), independent of its mass.",
+    "Elastic potential energy in a spring is one half k x squared.",
+    "Friction converts mechanical energy irreversibly into heat, so the mechanical total falls.",
+    "Momentum is conserved in every collision; kinetic energy only in a perfectly elastic one.",
+    "The coefficient of restitution is the ratio of relative speeds after and before impact, from one to zero.",
+    "Equal masses exchange velocities in a perfectly elastic head-on collision.",
+    "Choose the law first: energy or work for distances and speeds, momentum for impacts."
+  ],
+  "examFocus": [
+    "Sign questions on work are quick marks: state the angle and the cosine value that gives the sign.",
+    "Derive kinetic energy or the work-energy theorem from F s = m a s and v² = u² + 2a s when asked.",
+    "Collisions need two equations: momentum always, and the coefficient of restitution or energy conservation second.",
+    "Always declare what is conserved before calculating; that declaration is itself often a mark."
+  ],
+  "vocabulary": [
+    {
+      "word": "Work",
+      "meaning": "Force acting through a displacement in its own direction."
+    },
+    {
+      "word": "Joule",
+      "meaning": "The work done by one newton acting through one metre."
+    },
+    {
+      "word": "Watt",
+      "meaning": "One joule of work done per second."
+    },
+    {
+      "word": "Kinetic energy",
+      "meaning": "Energy possessed by a body by virtue of its motion, ½mv²."
+    },
+    {
+      "word": "Potential energy",
+      "meaning": "Energy due to position or configuration, such as mgh or ½kx²."
+    },
+    {
+      "word": "Conservative force",
+      "meaning": "A force whose work depends only on the end points, not the path."
+    },
+    {
+      "word": "Coefficient of restitution",
+      "meaning": "Ratio of relative speed after to relative speed before a collision."
+    },
+    {
+      "word": "Elastic collision",
+      "meaning": "A collision in which both momentum and kinetic energy are conserved."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-work-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The work done by a force of 10 N acting through 5 m in the direction of the force is:",
+      "options": [
+        "2 J",
+        "15 J",
+        "50 J",
+        "0.5 J"
+      ],
+      "correctIndex": 2,
+      "answer": "50 J",
+      "explanation": "W = F s = 10 × 5 = 50 J."
+    },
+    {
+      "id": "isc11-phy-work-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The work done by the centripetal force on a body moving in a circle with uniform speed is:",
+      "options": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Equal to the kinetic energy"
+      ],
+      "correctIndex": 2,
+      "answer": "Zero",
+      "explanation": "The force is perpendicular to the displacement at every instant, so F s cos 90° = 0."
+    },
+    {
+      "id": "isc11-phy-work-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a perfectly inelastic collision the coefficient of restitution has the value:",
+      "options": [
+        "exactly zero",
+        "0.5",
+        "exactly one",
+        "more than one"
+      ],
+      "correctIndex": 0,
+      "answer": "exactly zero",
+      "explanation": "The bodies move together afterwards, so there is no relative speed of separation and the coefficient is exactly zero."
+    },
+    {
+      "id": "isc11-phy-work-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body falls freely from rest through a distance of 45 m. Taking g = 10 m s⁻², its speed on reaching the ground is:",
+      "options": [
+        "15 m s⁻¹",
+        "30 m s⁻¹",
+        "45 m s⁻¹",
+        "900 m s⁻¹"
+      ],
+      "correctIndex": 1,
+      "answer": "30 m s⁻¹",
+      "explanation": "v = √(2gh) = √(2 × 10 × 45) = √900 = 30 m s⁻¹."
+    },
+    {
+      "id": "isc11-phy-work-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The energy possessed by a body by virtue of its motion is called __________ energy.",
+      "answer": "kinetic",
+      "explanation": "It equals one half of the mass multiplied by the square of the speed."
+    },
+    {
+      "id": "isc11-phy-work-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A force whose work depends only on the end points and not on the path taken is called a __________ force.",
+      "answer": "conservative",
+      "explanation": "Gravity and the ideal spring force are conservative; friction is not."
+    },
+    {
+      "id": "isc11-phy-work-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the work-energy theorem and give one situation where it is more useful than the equations of motion.",
+      "answer": "The work-energy theorem states that the net work done on a body equals the change in its kinetic energy, so F s = ½ m v² − ½ m u² when the force is constant. It is more useful than the equations of motion when the force varies with position or when the time of travel is not asked for, because integrating the varying force gives the energy change directly while a constant acceleration would be unavailable. A block sliding on a surface whose friction varies with position is the standard example.",
+      "explanation": "Statement of the theorem and one situation with the reason it beats the kinematics equations."
+    },
+    {
+      "id": "isc11-phy-work-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between conservative and non-conservative forces with examples.",
+      "answer": "A conservative force is one for which the work done in moving a body between two points depends only on those points and not on the path followed; gravity and the force of an ideal spring are conservative, and around any closed path their total work is zero. A non-conservative force depends on the path: friction does work proportional to the length of the path travelled, so a body returned to its starting point has a net negative work from friction, and that energy has become heat. The practical consequence is that mechanical energy is conserved only in the presence of conservative forces.",
+      "explanation": "Path independence with examples against path dependence with the heat consequence."
+    },
+    {
+      "id": "isc11-phy-work-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define the coefficient of restitution and state its value for a perfectly elastic collision.",
+      "answer": "The coefficient of restitution e is the ratio of the relative speed of separation of two bodies after a collision to their relative speed of approach before it. For a perfectly elastic collision it equals one, since kinetic energy is conserved and the relative speed of approach is exactly regained; for a perfectly inelastic collision it equals zero because the bodies move together afterwards.",
+      "explanation": "Definition as a ratio of relative speeds, and the values one and zero for the two limits."
+    },
+    {
+      "id": "isc11-phy-work-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive the expression for the kinetic energy of a moving body and state the work-energy theorem.",
+      "answer": "Start from a body of mass m moving with velocity u on which a constant net force F acts along its motion for a distance s, giving an acceleration a. By the second law F = m a, and the work done is W = F s = m a s. From the equation of motion that connects speed and distance without time, v² = u² + 2a s, we get a s = (v² − u²)/2. Substituting gives W = m (v² − u²)/2 = ½ m v² − ½ m u². The quantity ½ m v² is therefore the kinetic energy, the energy a body has by virtue of its motion, and the result just obtained is the work-energy theorem: the net work done on a body equals the change in its kinetic energy. The theorem holds for varying forces as well once the work is written as an integral of the force over the path, and it is the reason problems about speed over a distance can be solved without ever computing the time taken.",
+      "explanation": "Derivation from F = ma and v² = u² + 2as, the definition of kinetic energy, and the theorem with its generalisation."
+    },
+    {
+      "id": "isc11-phy-work-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 2 kg block is pushed 4 m along a rough horizontal surface with µ = 0.3 by a force of 20 N. Taking g = 10 m s⁻², find the speed gained from rest using the work-energy theorem.",
+      "answer": "The weight is 20 N so the normal reaction on the level surface is 20 N, and the friction is µ N = 0.3 × 20 = 6 N opposing the motion. The net force along the surface is the applied 20 N less the 6 N of friction, that is 14 N. The net work done over the 4 m is 14 × 4 = 56 J, and by the work-energy theorem this equals the gain in kinetic energy, ½ m v² = ½ × 2 × v² = v². Hence v² = 56 and v = √56 ≈ 7.48 m s⁻¹. The same answer can be read as an energy balance: the work done by the applied force, 80 J, is split into 56 J of kinetic energy and 24 J dissipated as heat by friction, 6 N × 4 m, which is a useful check that nothing was lost from the accounting.",
+      "explanation": "Normal reaction, friction, net force, net work, equating to ½mv², and the energy split as a check."
+    },
+    {
+      "id": "isc11-phy-work-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 4 kg body moving at 6 m s⁻¹ collides with a stationary body of 2 kg, and they move together afterwards. Find the common velocity and the kinetic energy lost.",
+      "answer": "Momentum is conserved because no external resultant acts during the brief impact: the initial momentum is 4 × 6 = 24 kg m s⁻¹ and the final momentum is the total mass 6 kg times the common velocity v. Hence 6 v = 24 and v = 4 m s⁻¹. The initial kinetic energy is ½ × 4 × 36 = 72 J and the final kinetic energy is ½ × 6 × 16 = 48 J, so 24 J has been lost, appearing as heat, sound and deformation of the bodies. The collision is perfectly inelastic, the coefficient of restitution is zero, and the result illustrates the rule that momentum survives every collision while kinetic energy survives only an elastic one.",
+      "explanation": "Conservation of momentum for the common speed, the two kinetic energies, their difference, and the classification of the collision."
+    }
+  ]
+}

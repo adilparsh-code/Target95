@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-equilibrium",
+  "title": "Chemical Equilibrium",
+  "kind": "chemistry",
+  "tagline": "Dynamic balance, Le Chatelier’s principle and the pH arithmetic of acids and salts.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "A reaction at equilibrium has not stopped: forward and reverse reactions continue at equal rates, so concentrations stay constant while molecules keep reacting. This chapter builds the equilibrium constant from that picture, sets out Le Chatelier’s principle as a set of four testable shifts, and then works through the two special cases the syllabus emphasises — ionic equilibria in water and the hydrolysis of salts. The calculations are short but exact: pH is minus the log of the hydrogen ion concentration, and every buffer or salt question reduces to recognising which species is doing the reacting.",
+    "facts": [
+      {
+        "label": "Equilibrium constant",
+        "value": "Kc = [products]^coefficients ÷ [reactants]^coefficients, constant at a fixed temperature."
+      },
+      {
+        "label": "Kp and Kc",
+        "value": "Kp = Kc(RT)^Δn, where Δn counts gaseous product moles minus gaseous reactant moles."
+      },
+      {
+        "label": "pH scale",
+        "value": "pH = −log[H+]; neutral water is pH 7 at 298 K, acidic below 7 and basic above."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Le Chatelier shifts, Kc arithmetic and buffer/salt pH carry the marks every year."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe dynamic equilibrium and write the equilibrium constant expression for a given reaction.",
+    "Relate Kc to Kp and calculate one from the other using Δn.",
+    "Apply Le Chatelier’s principle to changes in concentration, pressure, temperature and catalysts.",
+    "Calculate pH, pOH and hydrogen ion concentration for strong acids, bases and their mixtures.",
+    "Predict the acidic, basic or neutral character of a salt and explain hydrolysis."
+  ],
+  "learn": [
+    {
+      "id": "dynamic-equilibrium",
+      "title": "Dynamic equilibrium and the equilibrium constant",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A reversible reaction in a closed container reaches dynamic equilibrium when the rate of the forward reaction equals the rate of the reverse one. Nothing observable changes — pressure, colour and concentration stay constant — yet both reactions continue, which is why the label dynamic matters. The equilibrium constant expression is written by multiplying the concentrations of the products each raised to its coefficient and dividing by the same for the reactants, with pure solids and liquids left out because their concentrations are fixed. The value of K tells you where the balance lies: a very large K means products dominate at equilibrium, a very small K means reactants do, and because K depends only on temperature, adding more of a substance cannot change it."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Kc uses equilibrium concentrations; Kp uses partial pressures of gases.",
+            "Pure solids and liquids do not appear in the expression because their active mass is constant.",
+            "K changes only with temperature; concentration, pressure and catalyst changes shift position but never K.",
+            "Reaction quotients compare with K: Q < K proceeds forward, Q > K proceeds backward, Q = K is equilibrium.",
+            "For a reversed equation the new K is the reciprocal; for doubling, it is the square."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "N2 + 3H2 ⇌ 2NH3",
+              "note": "Kc = [NH3]^2 / ([N2][H2]^3); the solids are absent because none appear here."
+            },
+            {
+              "text": "CaCO3(s) ⇌ CaO(s) + CO2(g)",
+              "note": "Kp = p(CO2), since both solids are omitted and only carbon dioxide exerts pressure."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reading the size of an equilibrium constant",
+          "columns": [
+            "Value of K",
+            "Position at equilibrium",
+            "Dominant species"
+          ],
+          "rows": [
+            [
+              "K much greater than 10^3",
+              "Far to the right",
+              "Products"
+            ],
+            [
+              "K near 1",
+              "Balanced mixture",
+              "Both comparable"
+            ],
+            [
+              "K much less than 10^-3",
+              "Far to the left",
+              "Reactants"
+            ],
+            [
+              "K written for the reverse",
+              "Reciprocal of the forward value",
+              "Inverted ratio"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "le-chatelier",
+      "title": "Le Chatelier’s principle in practice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Le Chatelier’s principle states that a system at equilibrium subjected to a change will shift to partially oppose that change. Concentration is the clearest case: adding a reactant consumes it, pushing the position forward; removing a product does the same. Pressure only matters when the balanced equation has different numbers of gas molecules on the two sides, because increasing pressure favours the side with fewer gas moles and volume changes follow the same logic. Temperature is the only change that alters K itself: raising the temperature favours the endothermic direction, because absorbing heat opposes the imposed heating, and lowering it favours the exothermic direction. A catalyst is different from all of these — it speeds both directions equally, so it changes neither K nor the position, only the time taken to get there."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Add reactant or remove product → shift forward; add product or remove reactant → shift backward.",
+            "Increase total pressure → shift towards the side with fewer gas molecules.",
+            "Increase temperature → shift in the endothermic direction and change the value of K.",
+            "A catalyst increases both rates equally: equilibrium is reached sooner but K and the yield are unchanged.",
+            "An inert gas at constant volume changes nothing, because partial pressures of the reacting gases are unchanged."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Haber process: N2 + 3H2 ⇌ 2NH3, ΔH negative",
+              "note": "High pressure favours ammonia (4 moles of gas to 2) and moderate temperature keeps a workable rate despite the yield loss."
+            },
+            {
+              "text": "Contact process: 2SO2 + O2 ⇌ 2SO3, exothermic",
+              "note": "Excess oxygen and about 450 °C with vanadium(V) oxide give the best rate-yield compromise."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Dynamic equilibrium",
+              "meaning": "State where forward and reverse rates are equal, so concentrations stay constant."
+            },
+            {
+              "term": "Le Chatelier’s principle",
+              "meaning": "A system at equilibrium shifts to oppose an imposed change."
+            },
+            {
+              "term": "Position of equilibrium",
+              "meaning": "The extent to which products rather than reactants are present at balance."
+            },
+            {
+              "term": "Catalyst",
+              "meaning": "Substance that speeds a reaction without being consumed or changing K."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ionic-equilibria",
+      "title": "Acids, bases and the pH scale",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ionic equilibrium applies the same ideas to water. Arrhenius defined acids as hydrogen-ion donors and bases as hydroxide-ion donors in water, while Brønsted–Lowry generalised the pair: an acid is a proton donor and a base a proton acceptor, which is what makes water itself amphiprotic — it can donate a proton to become hydroxide or accept one to become hydronium. The ion product of water, Kw = [H+][OH−] = 1.0 × 10^-14 at 298 K, links the two concentrations at all times, which is why raising [H+] necessarily lowers [OH−]. pH is defined as minus the logarithm to base ten of the hydrogen ion concentration, so a solution of pH 3 has a hundred times the hydrogen ion concentration of pH 5, and for very dilute acids below 10^-6 M the water’s own contribution must be added before the pH is calculated."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Kw = [H+][OH−] = 1.0 × 10^-14 mol² L^-2 at 298 K, and it rises with temperature as autoionisation is endothermic.",
+            "pH + pOH = 14 at 298 K.",
+            "Strong acids are fully ionised, so [H+] equals the acid concentration; weak acids ionise only slightly.",
+            "pH = −log[H+]; reverse with [H+] = 10^(−pH).",
+            "For very dilute acids below about 10^-6 M, add the [H+] contributed by water before taking the logarithm."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "0.001 M HCl",
+              "note": "Fully ionised, so [H+] = 10^-3 M and pH = 3.0."
+            },
+            {
+              "text": "A solution with pH 4.5",
+              "note": "[H+] = 10^-4.5 ≈ 3.16 × 10^-5 M, and pOH = 9.5."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "pH arithmetic you should be able to do without a calculator",
+          "columns": [
+            "Given",
+            "Conversion",
+            "Result"
+          ],
+          "rows": [
+            [
+              "[H+] = 10^-2 M",
+              "pH = −log",
+              "pH 2"
+            ],
+            [
+              "pH = 11",
+              "[H+] = 10^(−pH)",
+              "[H+] = 10^-11 M"
+            ],
+            [
+              "pOH = 3",
+              "pH = 14 − pOH",
+              "pH 11, basic"
+            ],
+            [
+              "0.0001 M H2SO4",
+              "diprotic, ×2",
+              "[H+] = 2 × 10^-4, pH 3.7"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salts-buffers-hydrolysis",
+      "title": "Salt hydrolysis, buffers and practical equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a salt dissolves, its ions may react with water, and that is hydrolysis. A salt of a strong acid and a strong base, such as sodium chloride, hydrolyses not at all and gives a neutral solution. A salt of a strong acid and a weak base, such as ammonium chloride, has a cation that accepts hydroxide from water, making the solution acidic. A salt of a weak acid and a strong base, such as sodium acetate, has an anion that accepts protons, releasing hydroxide and making the solution basic. Buffers are the practical consequence: a mixture of a weak acid and its salt, or a weak base and its salt, resists changes in pH because added acid is consumed by the added base and added base by the weak acid, which is why blood at pH 7.4 is held steady by the carbonic acid–hydrogen carbonate pair."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Strong acid + strong base salt → neutral, no hydrolysis.",
+            "Strong acid + weak base salt → acidic, the cation hydrolyses.",
+            "Weak acid + strong base salt → basic, the anion hydrolyses.",
+            "Weak acid + weak base salt → the stronger ionisation decides the pH.",
+            "A buffer contains a weak acid and its conjugate salt, or a weak base and its salt, in comparable amounts.",
+            "Hydrolysis is the reverse of neutralisation: salt + water ⇌ acid + base."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ammonium chloride in water gives pH below 7",
+              "note": "NH4+ + H2O ⇌ NH3 + H3O+, producing hydronium ions."
+            },
+            {
+              "text": "Sodium acetate solution is alkaline",
+              "note": "CH3COO− + H2O ⇌ CH3COOH + OH−, releasing hydroxide ions."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Hydrolysis",
+              "meaning": "Reaction of a salt’s ions with water to give an acidic, basic or neutral solution."
+            },
+            {
+              "term": "Amphiprotic",
+              "meaning": "Able to donate or accept a proton, as water does."
+            },
+            {
+              "term": "Buffer solution",
+              "meaning": "Solution that resists a change in pH when small amounts of acid or base are added."
+            },
+            {
+              "term": "Conjugate base",
+              "meaning": "Species left after an acid has donated its proton."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Rates meeting at dynamic equilibrium",
+      "description": "A graph of reaction rate against time with the forward rate falling and the reverse rate rising until both flatten at one common value, with concentrations shown constant from that point onwards.",
+      "labels": [
+        "forward rate falls as reactants are used",
+        "reverse rate rises as products form",
+        "rates become equal at equilibrium",
+        "concentrations stay constant afterwards",
+        "both reactions continue = dynamic"
+      ]
+    },
+    {
+      "caption": "Figure: Le Chatelier’s response to added reactant",
+      "description": "An equilibrium mixture shown before and after extra reactant is injected, with arrows showing the net forward shift and a smaller amount of the added reactant remaining at the new balance.",
+      "labels": [
+        "extra reactant added at t = 0",
+        "system shifts forward",
+        "product amount increases",
+        "added reactant partly consumed",
+        "K unchanged because T unchanged"
+      ]
+    },
+    {
+      "caption": "Figure: The pH scale with common substances",
+      "description": "A horizontal scale from 0 to 14 with markers for battery acid, gastric acid, vinegar, black coffee, pure water, baking soda, ammonia and drain cleaner, and the neutral point highlighted at 7.",
+      "labels": [
+        "pH 7 neutral at 298 K",
+        "acidic side: [H+] greater than [OH−]",
+        "basic side: [OH−] greater than [H+]",
+        "each unit is a factor of ten",
+        "pH + pOH = 14"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Dynamic equilibrium has equal forward and reverse rates, so concentrations stay constant while reaction continues.",
+    "Kc omits pure solids and liquids and depends only on temperature.",
+    "Kp = Kc(RT)^Δn converts between pressure and concentration forms.",
+    "Q compared with K predicts the direction a mixture will move.",
+    "Le Chatelier: concentration, pressure and temperature changes shift the position; catalysts do not.",
+    "Only a temperature change alters the value of K.",
+    "pH = −log[H+], and pH + pOH = 14 at 298 K.",
+    "Kw = [H+][OH−] = 1.0 × 10^-14 at 298 K and rises with temperature.",
+    "Salt hydrolysis decides whether a solution is acidic, basic or neutral from the strength of the parent acid and base.",
+    "A buffer resists pH change because it contains a weak acid or base together with its salt."
+  ],
+  "examFocus": [
+    "Write the equilibrium expression before substituting; the powers are coefficients and forgetting them is the commonest error.",
+    "For Le Chatelier answers, state the imposed change, the shift, and the observable consequence in that order.",
+    "Temperature questions must name the direction of shift and say that K changes; nothing else changes K.",
+    "In pH calculations, show the log step, and for dilute acids state that water’s contribution is included."
+  ],
+  "vocabulary": [
+    {
+      "word": "Dynamic equilibrium",
+      "meaning": "Equal rates of forward and reverse reactions with constant concentrations."
+    },
+    {
+      "word": "Equilibrium constant",
+      "meaning": "Ratio of product to reactant concentrations at equilibrium, each raised to its coefficient."
+    },
+    {
+      "word": "Reaction quotient",
+      "meaning": "The same ratio evaluated at any moment, used to predict the direction of change."
+    },
+    {
+      "word": "Le Chatelier’s principle",
+      "meaning": "A system at equilibrium shifts to oppose an imposed change."
+    },
+    {
+      "word": "pH",
+      "meaning": "Negative logarithm of the hydrogen ion concentration."
+    },
+    {
+      "word": "Brønsted acid",
+      "meaning": "Species that donates a proton in a reaction."
+    },
+    {
+      "word": "Hydrolysis",
+      "meaning": "Reaction of salt ions with water, producing an acidic or basic solution."
+    },
+    {
+      "word": "Buffer",
+      "meaning": "Mixture that resists changes in pH on addition of small amounts of acid or base."
+    },
+    {
+      "word": "Conjugate pair",
+      "meaning": "Acid and base differing only by one proton."
+    },
+    {
+      "word": "Amphiprotic",
+      "meaning": "Capable of acting as either a proton donor or a proton acceptor."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-chem-eq-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "At dynamic equilibrium in a closed container, the forward and reverse reactions:",
+      "options": [
+        "Stop completely",
+        "Occur at equal rates",
+        "Stop in the forward direction only",
+        "Occur at rates proportional to their enthalpies"
+      ],
+      "correctIndex": 1,
+      "answer": "Occur at equal rates",
+      "explanation": "Both reactions continue, but at the same rate, so no observable quantity changes."
+    },
+    {
+      "id": "isc11-chem-eq-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the reaction N2(g) + 3H2(g) ⇌ 2NH3(g), the relationship between Kp and Kc is:",
+      "options": [
+        "Kp = Kc",
+        "Kp = Kc(RT)^2",
+        "Kp = Kc(RT)^-2",
+        "Kp = Kc(RT)^-4"
+      ],
+      "correctIndex": 2,
+      "answer": "Kp = Kc(RT)^-2",
+      "explanation": "Δn = 2 − (1 + 3) = −2, so Kp = Kc(RT)^−2."
+    },
+    {
+      "id": "isc11-chem-eq-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Adding a catalyst to a system at equilibrium causes:",
+      "options": [
+        "K to increase",
+        "K to decrease",
+        "The position to shift towards the products",
+        "No change in position or K, only a faster rate"
+      ],
+      "correctIndex": 3,
+      "answer": "No change in position or K, only a faster rate",
+      "explanation": "A catalyst speeds forward and reverse rates equally, so equilibrium is reached sooner with the same composition."
+    },
+    {
+      "id": "isc11-chem-eq-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A solution of ammonium chloride in water is acidic because:",
+      "options": [
+        "Chloride ion hydrolyses to give HCl",
+        "Ammonium ion donates a proton to water, releasing hydronium",
+        "Ammonium ion accepts hydroxide from water and the solution is basic",
+        "The salt is neutral and the water ionises further"
+      ],
+      "correctIndex": 1,
+      "answer": "Ammonium ion donates a proton to water, releasing hydronium",
+      "explanation": "NH4+ + H2O ⇌ NH3 + H3O+ produces hydronium ions, and NH4+ is the conjugate acid of a weak base."
+    },
+    {
+      "id": "isc11-chem-eq-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The negative logarithm to base ten of the hydrogen ion concentration is called the __________ value.",
+      "answer": "pH",
+      "explanation": "A lower pH corresponds to a higher hydrogen ion concentration, one unit being a factor of ten."
+    },
+    {
+      "id": "isc11-chem-eq-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The principle that a system at equilibrium shifts to oppose an imposed change is known as __________ ’s principle.",
+      "answer": "Le Chatelier",
+      "explanation": "The system counteracts the disturbance by shifting towards the side that reduces it."
+    },
+    {
+      "id": "isc11-chem-eq-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the effect of increasing temperature on the position of an exothermic forward reaction and on the value of K.",
+      "answer": "Increasing temperature shifts the equilibrium in the endothermic direction, that is backwards for an exothermic forward reaction, because absorbing heat opposes the imposed heating. The value of K decreases, since the products are now favoured less than before.",
+      "explanation": "Temperature is the only change that alters K itself; the shift reduces the imposed rise in temperature."
+    },
+    {
+      "id": "isc11-chem-eq-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define pH and calculate the pH of a 0.001 M solution of hydrochloric acid.",
+      "answer": "pH is minus the base-ten logarithm of the hydrogen ion concentration. Hydrochloric acid is a strong acid and ionises completely, so [H+] = 10^-3 mol L^-1 and pH = −log(10^-3) = 3.",
+      "explanation": "Complete ionisation makes the acid concentration equal to the hydrogen ion concentration."
+    },
+    {
+      "id": "isc11-chem-eq-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain, using Le Chatelier’s principle, why the Haber process uses a high pressure of about 200 atm even though a lower pressure would be cheaper.",
+      "answer": "The balanced equation N2 + 3H2 ⇌ 2NH3 has four moles of gaseous reactants and two moles of gaseous product. Increasing the total pressure shifts the equilibrium towards the side with fewer gas molecules, which is the product side, so the yield of ammonia rises with pressure. Around 200 atm gives a high enough yield to justify the cost of compression while keeping the plant affordable; raising the pressure further gives diminishing yield gains and much greater equipment costs, so the operating value is an economic compromise rather than a thermodynamic maximum.",
+      "explanation": "Count the gas moles on each side first, apply the pressure shift, then note that the chosen value balances yield against cost."
+    },
+    {
+      "id": "isc11-chem-eq-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Calculate the pH of a solution prepared by mixing 50 mL of 0.10 M HCl with 50 mL of 0.10 M NaOH, and state what would differ if 0.10 M ethanoic acid replaced the HCl.",
+      "answer": "The two solutions contain equal numbers of moles, 0.005 mol each, so they neutralise completely leaving sodium chloride, a salt of a strong acid and a strong base, in a total volume of 100 mL. Sodium chloride does not hydrolyse, so the solution is neutral with pH 7. If 0.10 M ethanoic acid replaced the hydrochloric acid, the salt formed would be sodium ethanoate, whose ethanoate ion hydrolyses to give hydroxide, making the solution basic with a pH above 7.",
+      "explanation": "Neutralisation first, then the identity of the salt decides pH through hydrolysis."
+    }
+  ]
+}

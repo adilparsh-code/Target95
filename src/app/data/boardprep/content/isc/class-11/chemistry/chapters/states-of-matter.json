@@ -1,0 +1,521 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-states-matter",
+  "title": "States of Matter",
+  "kind": "chemistry",
+  "tagline": "Kinetic theory, the gas laws, the van der Waals correction and how liquids and solids differ.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Gases are the simplest state because their particles are far apart and remember nothing about each other, which is why a single equation describes them all. This chapter builds the kinetic picture first, then the individual laws, then the combined ideal-gas equation, and finally the van der Waals correction that explains where the ideal picture fails. The liquid and solid sections concentrate on the forces that give a substance its shape, vapour pressure and melting behaviour, because every applied question in this unit asks why one substance is a gas, another a liquid and a third a solid at the same temperature.",
+    "facts": [
+      {
+        "label": "Gas constant R",
+        "value": "8.314 J K^-1 mol^-1, also 0.0821 L atm K^-1 mol^-1 and 2 cal K^-1 mol^-1."
+      },
+      {
+        "label": "Molar volume",
+        "value": "22.7 L at 298 K and 1 bar; 22.4 L at 273 K and 1 atm."
+      },
+      {
+        "label": "Kinetic energy",
+        "value": "Average translational KE = 3/2 kT per molecule, independent of the gas."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Gas-law numericals, Graham’s law and vapour-pressure reasoning carry the marks."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the postulates of the kinetic molecular theory and derive the pressure of a gas from molecular motion.",
+    "Apply Boyle’s, Charles’s, Avogadro’s, Dalton’s and Graham’s laws to gaseous mixtures and reactions.",
+    "Use the ideal-gas equation and the combined gas law, converting units between atm, bar and mmHg.",
+    "Explain real-gas behaviour through the van der Waals equation and the critical constants.",
+    "Describe the forces and properties of liquids and solids, including vapour pressure, boiling and crystal types."
+  ],
+  "learn": [
+    {
+      "id": "kinetic-theory",
+      "title": "The kinetic molecular theory of gases",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The kinetic theory explains gas behaviour from the motion of its molecules. It assumes that a gas consists of tiny particles in continuous random motion, that the volume of the particles themselves is negligible compared with the space between them, that there are no attractive forces between them, and that collisions with each other and with the walls are perfectly elastic, so no kinetic energy is lost. Pressure arises as momentum transfer: each collision with the wall reverses the molecule’s momentum, and the sum of these impulses per unit area per unit time is the pressure. Temperature, in this picture, is nothing more than the average translational kinetic energy of the molecules, which is why all gases behave alike at the same temperature."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Pressure ∝ number of collisions per unit area per second and ∝ momentum change per collision.",
+            "Temperature measures average translational kinetic energy: 3/2 kT per molecule.",
+            "At a given temperature all gases have the same average kinetic energy, so lighter molecules move faster.",
+            "Root mean square speed u = √(3RT/M), which is why hydrogen escapes from a container faster than oxygen.",
+            "The theory explains Boyle’s law through more volume meaning fewer wall collisions, and Charles’s law through faster molecules striking harder."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Hydrogen at 25 °C has a root speed near 1.8 km s^-1",
+              "note": "Its molar mass of 2 g mol^-1 makes it the fastest common gas at any given temperature."
+            },
+            {
+              "text": "Compressing a gas to half its volume doubles the pressure",
+              "note": "The same molecules now strike a wall half the size, twice as often."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Elastic collision",
+              "meaning": "Collision in which total kinetic energy is conserved."
+            },
+            {
+              "term": "Mean free path",
+              "meaning": "Average distance a molecule travels between two collisions."
+            },
+            {
+              "term": "Root mean square speed",
+              "meaning": "Speed u = √(3RT/M) giving the average kinetic energy of the molecules."
+            },
+            {
+              "term": "Effusion",
+              "meaning": "Escape of a gas through a tiny aperture into a region of lower pressure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gas-laws",
+      "title": "The individual gas laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Each gas law isolates one variable while holding the others fixed, and the examiner expects the statement, the graph and the application for each. Boyle’s law fixes temperature and amount, so pressure varies inversely with volume and the pV plot at constant temperature is a rectangular hyperbola. Charles’s law fixes pressure, so volume is directly proportional to absolute temperature and the graph is a straight line through the origin when plotted in kelvin — which is why the Celsius scale must be converted before any calculation. Avogadro’s law adds the amount variable, and Dalton’s law of partial pressures handles mixtures by adding the pressures each gas would exert alone. Graham’s law completes the set by relating the rate of effusion to the square root of molar mass, giving the classic argument for the heavier gas moving more slowly."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Boyle’s law: pV = constant at constant T and n; p1V1 = p2V2.",
+            "Charles’s law: V/T = constant at constant p and n; V1/T1 = V2/T2, with T in kelvin.",
+            "Avogadro’s law: V ∝ n at constant T and p; one mole occupies the same volume whatever the gas.",
+            "Dalton’s law: total pressure equals the sum of partial pressures, each equal to its mole fraction times the total.",
+            "Graham’s law: rate of effusion ∝ 1/√M, so the ratio of rates equals √(M2/M1).",
+            "Gay-Lussac’s law links p and T at constant volume: p/T is constant."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A gas at 1.00 atm occupies 2.00 L; at 4.00 atm its volume is 0.50 L",
+              "note": "p1V1 = p2V2 gives V2 = 2.00/4.00."
+            },
+            {
+              "text": "Oxygen and hydrogen effusing through the same pinhole",
+              "note": "Rate ratio = √(32/2) = 4, so hydrogen escapes four times faster."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The gas laws at a glance",
+          "columns": [
+            "Law",
+            "Constant quantity",
+            "Relationship",
+            "Straight-line plot"
+          ],
+          "rows": [
+            [
+              "Boyle",
+              "T and n",
+              "p ∝ 1/V",
+              "p against 1/V"
+            ],
+            [
+              "Charles",
+              "p and n",
+              "V ∝ T",
+              "V against T in kelvin"
+            ],
+            [
+              "Avogadro",
+              "T and p",
+              "V ∝ n",
+              "V against n"
+            ],
+            [
+              "Dalton",
+              "T and V",
+              "p(total) = Σ p(i)",
+              "p(total) against total moles"
+            ],
+            [
+              "Graham",
+              "T and p",
+              "rate ∝ 1/√M",
+              "rate against 1/√M"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ideal-and-real-gases",
+      "title": "The ideal-gas equation and van der Waals correction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Combining the individual laws gives the ideal-gas equation pV = nRT, which works whenever the particles are far apart and interactions are negligible. Real gases deviate at high pressure and low temperature, precisely the conditions under which molecules are pushed together and the assumptions break down. van der Waals repaired the equation with two corrections: a volume term b, because the molecules themselves occupy space, so the free volume is V − nb; and a pressure term an²/V², because attractions to neighbours reduce the force of wall impacts, so the observed pressure is lower than the ideal value. The constants a measures the strength of attraction and b the size of the molecules, which is why carbon dioxide, a large polarisable molecule, has a much larger a than helium. Liquefaction follows from this: attraction plus low kinetic energy lets the molecules settle into a liquid."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ideal equation pV = nRT; the compressibility factor Z = pV/nRT equals 1 for an ideal gas.",
+            "Z < 1 means attraction dominates and the gas is easier to compress; Z > 1 means molecular volume dominates.",
+            "van der Waals: (p + an²/V²)(V − nb) = nRT, with a in L² atm mol^-2 and b in L mol^-1.",
+            "A gas is most ideal at low pressure and high temperature, where particles are far apart relative to their size.",
+            "Hydrogen and helium show Z > 1 even at moderate pressures because their attractions are extremely weak."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "At high pressure, nCO2 exceeds 1 for carbon dioxide",
+              "note": "Its own molecular volume becomes a real fraction of the container, so the gas is less compressible than ideal."
+            },
+            {
+              "text": "Liquefying chlorine is easier than helium",
+              "note": "Chlorine’s larger a value means stronger attractive forces that can hold the molecules together at higher temperature."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Ideal gas",
+              "meaning": "Gas with no intermolecular forces and negligible particle volume, obeying pV = nRT exactly."
+            },
+            {
+              "term": "Compressibility factor",
+              "meaning": "Z = pV/nRT; equals 1 for an ideal gas and departs from 1 as a gas becomes real."
+            },
+            {
+              "term": "van der Waals constants",
+              "meaning": "a measuring attraction and b measuring the excluded volume of the molecules."
+            },
+            {
+              "term": "Critical temperature",
+              "meaning": "Highest temperature at which a gas can be liquefied by pressure alone."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "liquids-and-solids",
+      "title": "Liquids and solids: forces, vapour pressure and structure",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a liquid the molecules are still in contact but slide past one another, so the substance has a fixed volume but takes the shape of its container. The molecules with enough energy to escape the surface become vapour, and as vapour accumulates the rate of condensation rises until the two rates match: the pressure at that point is the boiling point definition’s partner, the equilibrium vapour pressure. Heating raises vapour pressure until it equals the external pressure, and that temperature is the boiling point, which is why water boils at a lower temperature on a hill. Solids go further: particles sit in fixed positions, and the arrangement is either crystalline, with a regular repeating lattice that gives flat faces and a sharp melting point, or amorphous, with no long-range order and a gradual softening."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Vapour pressure depends only on temperature and the substance, not on the amount of liquid.",
+            "Boiling point is the temperature at which vapour pressure equals the external pressure.",
+            "Sublimation is the direct change from solid to vapour, seen with camphor and dry ice.",
+            "Crystalline solids have sharp melting points and definite geometry; amorphous solids soften over a range.",
+            "Crystal types are ionic, covalent network, molecular and metallic, each with its characteristic properties.",
+            "Viscosity, surface tension and diffusion all fall as temperature rises because molecules move more freely."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A sealed flask of ether lowers its level over days at room temperature",
+              "note": "Ether has a high vapour pressure, so molecules escape the liquid continuously."
+            },
+            {
+              "text": "Iodine crystals sublime on gentle warming",
+              "note": "The vapour pressure of the solid exceeds atmospheric pressure before melting occurs."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Crystal types and the properties they produce",
+          "columns": [
+            "Type",
+            "Particles held by",
+            "Melting point",
+            "Conducts"
+          ],
+          "rows": [
+            [
+              "Ionic",
+              "Electrostatic attraction between ions",
+              "High",
+              "Molten or dissolved only"
+            ],
+            [
+              "Covalent network",
+              "Covalent bonds throughout",
+              "Very high, decomposes",
+              "No, unless doped"
+            ],
+            [
+              "Molecular",
+              "Weak forces between molecules",
+              "Low",
+              "No"
+            ],
+            [
+              "Metallic",
+              "Positive ions in electron sea",
+              "Variable, usually high",
+              "Yes, in every state"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Boyle’s law and Charles’s law graphs",
+      "description": "Two plots side by side: a rectangular hyperbola of pressure against volume at constant temperature, and a straight line through the origin for volume against temperature in kelvin.",
+      "labels": [
+        "p against V, hyperbola at constant T",
+        "pV = constant at every point",
+        "V against T in kelvin, straight line",
+        "absolute zero where the line meets the axis",
+        "both plots need fixed n"
+      ]
+    },
+    {
+      "caption": "Figure: What the van der Waals corrections fix",
+      "description": "A container drawn with molecules occupying part of the volume and attracting their neighbours, with the ideal free volume V − nb and the reduced wall pressure p + an²/V² annotated.",
+      "labels": [
+        "molecular volume b subtracted from V",
+        "attraction reduces wall impact",
+        "p(observed) lower than p(ideal)",
+        "cohesive forces between neighbours",
+        "corrections matter at high pressure"
+      ]
+    },
+    {
+      "caption": "Figure: Vapour pressure and the boiling point",
+      "description": "A curve of vapour pressure against temperature rising to meet a horizontal line marking external pressure, with the intersection marked as the normal boiling point at 100 °C for water.",
+      "labels": [
+        "vapour pressure rises with temperature",
+        "horizontal line = external pressure",
+        "intersection = boiling point",
+        "water boils at 100 °C at 1 atm",
+        "lower external pressure, lower boiling point"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Pressure comes from molecular collisions with the wall; temperature measures average translational kinetic energy.",
+    "Boyle’s law p1V1 = p2V2, Charles’s law V1/T1 = V2/T2, both requiring absolute temperature.",
+    "Dalton’s law adds partial pressures; each partial pressure is its mole fraction times the total.",
+    "Graham’s law: rate of effusion is inversely proportional to the square root of molar mass.",
+    "pV = nRT describes an ideal gas and holds best at low pressure and high temperature.",
+    "van der Waals corrects for molecular volume through b and for attraction through a.",
+    "Vapour pressure depends only on temperature; boiling occurs when it equals the external pressure.",
+    "Crystalline solids have sharp melting points; amorphous solids soften over a range.",
+    "Crystal type predicts the properties: ionic high-melting and conducting only when molten, molecular soft and non-conducting.",
+    "Liquefaction becomes possible below the critical temperature, where attraction can overcome kinetic energy."
+  ],
+  "examFocus": [
+    "Convert every temperature to kelvin before substituting into a gas law; Celsius answers are wrong by construction.",
+    "Quote Graham’s law as a ratio of rates, and state which mass is under the square root.",
+    "For vapour-pressure questions, answer in two steps: temperature changes the vapour pressure, and boiling is where it meets external pressure.",
+    "Structure-to-property answers name the crystal type first, then the particles, then the observed property."
+  ],
+  "vocabulary": [
+    {
+      "word": "Kinetic theory",
+      "meaning": "Explanation of gas behaviour in terms of the motion and collisions of molecules."
+    },
+    {
+      "word": "Partial pressure",
+      "meaning": "Pressure a component gas would exert alone in the same volume at the same temperature."
+    },
+    {
+      "word": "Effusion",
+      "meaning": "Escape of gas molecules through a tiny hole into a vacuum."
+    },
+    {
+      "word": "Diffusion",
+      "meaning": "Spreading of one gas through another by random motion."
+    },
+    {
+      "word": "Vapour pressure",
+      "meaning": "Pressure of the vapour in equilibrium with its liquid at a given temperature."
+    },
+    {
+      "word": "Boiling point",
+      "meaning": "Temperature at which a liquid’s vapour pressure equals the external pressure."
+    },
+    {
+      "word": "Compressibility factor",
+      "meaning": "Z = pV/nRT, measuring departure from ideal-gas behaviour."
+    },
+    {
+      "word": "Van der Waals forces",
+      "meaning": "Weak intermolecular attractions arising from instantaneous dipoles."
+    },
+    {
+      "word": "Sublimation",
+      "meaning": "Direct transition from the solid state to the vapour state."
+    },
+    {
+      "word": "Crystalline solid",
+      "meaning": "Solid with a regular, repeating three-dimensional arrangement of particles."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-chem-states-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The gas law that relates pressure and volume at constant temperature is:",
+      "options": [
+        "Charles’s law",
+        "Boyle’s law",
+        "Avogadro’s law",
+        "Graham’s law"
+      ],
+      "correctIndex": 1,
+      "answer": "Boyle’s law",
+      "explanation": "Boyle’s law states that pV is constant at fixed temperature and amount of gas."
+    },
+    {
+      "id": "isc11-chem-states-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A gas occupies 5.00 L at 1.00 atm. Its volume at 2.50 atm, with temperature constant, is:",
+      "options": [
+        "2.00 L",
+        "12.5 L",
+        "1.25 L",
+        "0.40 L"
+      ],
+      "correctIndex": 0,
+      "answer": "2.00 L",
+      "explanation": "p1V1 = p2V2 gives V2 = (1.00 × 5.00)/2.50 = 2.00 L."
+    },
+    {
+      "id": "isc11-chem-states-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Graham’s law states that the rate of effusion of a gas is inversely proportional to the:",
+      "options": [
+        "Square root of its density",
+        "Square root of its molar mass",
+        "Molar mass itself",
+        "Temperature of the gas"
+      ],
+      "correctIndex": 1,
+      "answer": "Square root of its molar mass",
+      "explanation": "Rate ∝ 1/√M, so at the same temperature and pressure hydrogen effuses four times faster than oxygen."
+    },
+    {
+      "id": "isc11-chem-states-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the van der Waals equation the term an²/V² corrects for:",
+      "options": [
+        "The volume occupied by the molecules themselves",
+        "The attraction between molecules reducing the observed pressure",
+        "The non-elasticity of molecular collisions",
+        "The kinetic energy of the molecules"
+      ],
+      "correctIndex": 1,
+      "answer": "The attraction between molecules reducing the observed pressure",
+      "explanation": "Neighbouring molecules attract each other, so impacts on the wall are weaker and the real pressure is lower than the ideal value."
+    },
+    {
+      "id": "isc11-chem-states-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The temperature at which a liquid’s vapour pressure equals the external atmospheric pressure is called the __________ point.",
+      "answer": "boiling",
+      "explanation": "Raising the temperature raises vapour pressure until it meets atmospheric pressure, at which stage bulk boiling begins."
+    },
+    {
+      "id": "isc11-chem-states-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The pressure of an ideal gas is related to volume, amount and temperature by the equation pV = nRT, where R is the universal gas __________ .",
+      "answer": "constant",
+      "explanation": "R has the value 8.314 J K^-1 mol^-1 in SI units and links pressure, volume, amount and temperature."
+    },
+    {
+      "id": "isc11-chem-states-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Dalton’s law of partial pressures.",
+      "answer": "The total pressure of a mixture of non-reacting gases equals the sum of the partial pressures that each gas would exert alone at the same volume and temperature.",
+      "explanation": "Each component behaves independently because ideal-gas molecules neither attract nor repel one another."
+    },
+    {
+      "id": "isc11-chem-states-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why must a temperature in degrees Celsius be converted to kelvin before use in a gas law?",
+      "answer": "Gas laws depend on the absolute temperature, at which molecular motion ceases; the kelvin scale starts at absolute zero. The Celsius scale is arbitrary, so ratios such as V1/V2 computed in degrees give wrong answers, while T in kelvin gives correct proportionality.",
+      "explanation": "Charles’s law is a proportionality to absolute temperature, so the zero point of the scale decides the ratio."
+    },
+    {
+      "id": "isc11-chem-states-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how the kinetic molecular theory accounts for (a) the pressure of a gas and (b) the increase in pressure when the gas is heated at constant volume.",
+      "answer": "The molecules of a gas are in constant random motion and undergo elastic collisions with the container walls. Each collision transfers momentum to the wall; the total impulse per unit area per unit time is the pressure, so more molecules, faster molecules or a smaller wall area all raise it. When the gas is heated at constant volume the average translational kinetic energy of the molecules rises, since kinetic energy is proportional to absolute temperature. Faster molecules strike the walls more often and with greater momentum change per impact, and both effects increase the force per unit area, so the pressure rises as Charles’s law requires.",
+      "explanation": "Pressure is a momentum-transfer phenomenon and temperature fixes the average molecular speed; combining them explains Gay-Lussac’s law directly."
+    },
+    {
+      "id": "isc11-chem-states-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A container holds 2.00 mol of oxygen and 1.00 mol of nitrogen at 3.00 atm total pressure. Calculate the partial pressure of oxygen.",
+      "answer": "The mole fraction of oxygen is 2.00/3.00 = 0.667, so by Dalton’s law its partial pressure is 0.667 × 3.00 = 2.00 atm, and that of nitrogen is 1.00 atm. The two partial pressures add to the measured 3.00 atm, which is the check on the working.",
+      "explanation": "Partial pressure is mole fraction multiplied by total pressure; the partial pressures must sum to the measured total."
+    }
+  ]
+}

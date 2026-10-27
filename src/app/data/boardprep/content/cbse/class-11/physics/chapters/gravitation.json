@@ -1,0 +1,411 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-gravitation",
+  "title": "Gravitation",
+  "kind": "physics",
+  "tagline": "Kepler, Newton and the satellites: one inverse-square law from falling apples to orbiting moons.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Gravitation is the first truly universal force the student meets — it acts between every pair of masses, needs no contact, and follows one rule from pebble to planet. This chapter derives the universal law, shows how Kepler’s three laws are its consequence, develops the acceleration due to gravity and its variations, and then uses energy methods to reach escape speed and satellite orbits. The topic also completes the energy toolkit: gravitational potential and potential energy introduce the field language that Class XII electrostatics will reuse almost verbatim.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-VI: Gravitation (17 marks shared with Work-Energy-Power and Rotational Motion)."
+      },
+      {
+        "label": "Newton’s law",
+        "value": "F = Gm₁m₂/r², with G = 6.67 × 10⁻¹¹ N·m²/kg² — attractive, always along the line joining the masses."
+      },
+      {
+        "label": "Surface gravity",
+        "value": "g = GM/R² ≈ 9.8 m/s²; it falls as 1/(R+h)² with altitude and as (1 − d/R) with depth."
+      },
+      {
+        "label": "Orbits",
+        "value": "Orbital speed v₀ = √(GM/r); escape speed vₑ = √(2GM/R) = √2 × v₀ at the surface."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State Newton's law of gravitation and apply it to two-body problems.",
+    "Relate Kepler's laws to the inverse-square force.",
+    "Compute g at altitude and at depth and explain why it varies.",
+    "Derive escape speed and orbital speed from energy conservation.",
+    "Apply the energy accounting of an orbiting satellite."
+  ],
+  "learn": [
+    {
+      "id": "newton",
+      "title": "The universal law and its character",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Newton's law of gravitation states that every pair of masses attracts every other with a force proportional to the product of their masses and inversely proportional to the square of the distance between them: F = Gm₁m₂/r², where G is a universal constant measured as 6.67 × 10⁻¹¹ N·m²/kg². Three properties define its character. It is always attractive — there is no gravitational repulsion — so the signs in every problem are settled before algebra begins. It is mutual: the force on m₁ from m₂ equals in magnitude the force on m₂ from m₁ and forms the third-law pair that guarantees the two-body centre of mass never accelerates. And it is central, acting along the line joining the masses, which is why angular momentum is conserved in planetary motion and why Kepler's second law holds."
+        },
+        {
+          "type": "paragraph",
+          "text": "The law is also a superposition: in a many-body system the net force on any mass is the vector sum of the individual attractions, with no interference between the pairs. The smallness of G is itself instructive — two 1 kg masses a metre apart attract with about 7 × 10⁻¹¹ N, utterly unmeasurable by any school instrument, which is why gravitation only becomes visible at planetary scales where the masses are enormous. That same smallness explains why gravity is irrelevant inside an atom and dominates between stars, and it is the reason the electric force, though vastly stronger per pair, cancels in bulk matter while gravity — never negative — accumulates. Every satellite problem, from raindrops to galaxies, is an application of this one line of algebra."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "F = Gm₁m₂/r²: attractive, mutual, central, inverse-square.",
+            "G = 6.67 × 10⁻¹¹ N·m²/kg² — gravity is weak per pair, dominant in bulk.",
+            "Forces on the two bodies form a third-law pair.",
+            "Many-body force on one mass = vector sum over the pairs.",
+            "Central force ⇒ angular momentum conserved (Kepler II)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kepler",
+      "title": "Kepler's laws as consequences",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Kepler's three laws, drawn from Tycho Brahe's meticulous observations of Mars, precede Newton's law historically but follow from it logically. The first law — every planet moves in an ellipse with the Sun at one focus — is the orbit shape selected by the inverse-square force. The second law — the line joining planet and Sun sweeps equal areas in equal times — expresses angular momentum conservation, since equal-area sweeping is exactly the statement that the areal velocity is constant, and it holds even though the law's premise (a central force) is only one of two possible orbits. The third law — the square of the period is proportional to the cube of the semi-major axis, T² ∝ a³ — follows by balancing the gravitational pull against the centripetal requirement of the circular special case, and its constant of proportionality turns out to be 4π²/GM, which allows the Sun's mass to be inferred from planetary periods alone."
+        },
+        {
+          "type": "paragraph",
+          "text": "The derivation of the third law is worth carrying out because it is the template for every orbital calculation that follows. For a circular orbit of radius r around mass M: G Mm/r² = mv²/r gives v = √(GM/r); the period T = 2πr/v then yields T² = (4π²/GM)r³. Newton's genius was reading the law backwards: since the same T² ∝ r³ constant governs Galileo's moons of Jupiter with Jupiter's mass in it, and the planets with the Sun's mass in it, one law with different central masses was operating — the first real evidence that the force holding the Moon up is the same one pulling the apple down. In examinations, the law is applied through this circular-orbit template, extended by scaling arguments: double the orbital radius and the period grows by 2√2, whatever the central mass."
+        },
+        {
+          "type": "table",
+          "caption": "Kepler's three laws and their origin",
+          "columns": [
+            "Law",
+            "Statement",
+            "Origin in Newtonian mechanics"
+          ],
+          "rows": [
+            [
+              "First (orbit)",
+              "Elliptical orbit, Sun at one focus",
+              "Shape selected by the inverse-square force"
+            ],
+            [
+              "Second (area)",
+              "Equal areas in equal times",
+              "Conservation of angular momentum (central force)"
+            ],
+            [
+              "Third (period)",
+              "T² ∝ a³",
+              "Balance of gravitation against centripetal demand"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Force between two 5 kg masses 1 m apart.",
+              "note": "F = 6.67 × 10⁻¹¹ × 25 ≈ 1.7 × 10⁻⁹ N — immeasurably small."
+            },
+            {
+              "text": "The Moon’s orbit: T² ∝ r³ with r ≈ 3.84 × 10⁵ km.",
+              "note": "T ≈ 27.3 days — the same constant as the planets, with Earth central."
+            },
+            {
+              "text": "Double a satellite’s orbital radius: period factor.",
+              "note": "T ∝ r^{3/2}: factor 2^{1.5} ≈ 2.83."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gravity",
+      "title": "Acceleration due to gravity and its variations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "On a spherical body of mass M and radius R, Newton's law becomes the weight relation mg = GMm/R², so g = GM/R² — independent of the test mass, as experiments with different masses falling together confirm. Near the Earth's surface g ≈ 9.8 m/s², but it varies: with altitude h, g falls as g₀R²/(R+h)², since the distance from the centre grows; with depth d inside a uniform sphere, the shell of matter outside contributes nothing (a result worth quoting even though its proof is beyond this course) while the mass beneath shrinks, giving g ≈ g₀(1 − d/R). The two variations behave oppositely — altitude reduces g through the squared distance factor, depth reduces it linearly — so g is maximum at the surface. The variation with latitude, smaller at the equator than the poles, comes from the Earth's rotation and oblate shape, and each cause must be named separately in examination answers."
+        },
+        {
+          "type": "paragraph",
+          "text": "The same law explains weightlessness, which deserves precise language: a satellite and its occupant are both in free fall around the Earth, so the floor does not need to press up on the astronaut and the apparent weight vanishes — not because gravity has switched off (at the ISS's altitude it is still about 90% of surface g), but because the support force has. The distinction between true weight (gravitational attraction) and apparent weight (the normal force) is exactly the one the earlier chapters built, and it resolves the apparent paradox. Centrifugal effects at the equator also reduce apparent weight slightly — the same reduction that makes g smaller there — and this topic’s exam questions usually test whether the student can attribute each variation to its correct cause: distance, rotating frame, or shape."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "g = GM/R²: independent of the test mass, maximum at the surface.",
+            "Altitude: g falls as 1/(R+h)² — squared-law distance effect.",
+            "Depth: g falls linearly as (1 − d/R) — only the inner mass pulls.",
+            "Equatorial g is smaller: rotation plus the Earth’s oblate shape.",
+            "Weightlessness is absence of support, not absence of gravity."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "title": "Escape speed, orbits and satellite energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Escape speed is the minimum speed with which a body thrown from a surface can escape the planet's gravity forever, and energy conservation gives it in three lines: the kinetic energy must at least equal the binding energy, ½mvₑ² ≥ GMm/R, so vₑ = √(2GM/R). For the Earth this is about 11.2 km/s, remarkable independence of the launching mass — light and heavy rockets need the same escape speed, differing only in how quickly they can supply it. The result is also the reason rocket stages shed mass rather than carry it: the escape condition involves only speed. Note that the escape trajectory is marginal (arriving at infinity with zero speed); any surplus speed simply becomes residual kinetic energy there."
+        },
+        {
+          "type": "paragraph",
+          "text": "An orbiting satellite is the same energy problem with a different boundary: bound to the Earth, it has negative total energy — kinetic ½mv² exceeds half the magnitude of the negative potential, and the sum E = −GMm/2r fixes the orbit's size, since larger orbits are less tightly bound (energy rises toward zero as r grows). Circular-orbit speed v₀ = √(GM/r) is exactly √2 times smaller than the local escape speed, a useful check relation. The energy bookkeeping of orbits carries a famous surprise: adding energy to a satellite (by firing a rocket forward) raises and enlarges its orbit, and at the larger radius it moves more slowly — orbital mechanics inverts the everyday intuition that speeding up means going faster. Deriving v₀ and vₑ by the same conservation method, in the same sitting, shows the two results as siblings rather than separate formulae, and that pairing is the syllabus's intent."
+        },
+        {
+          "type": "table",
+          "caption": "Orbital and escape quantities at radius r",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Value at the Earth’s surface"
+          ],
+          "rows": [
+            [
+              "Orbital speed (near surface)",
+              "√(GM/R)",
+              "≈ 7.9 km/s"
+            ],
+            [
+              "Escape speed",
+              "√(2GM/R)",
+              "≈ 11.2 km/s"
+            ],
+            [
+              "Total orbital energy",
+              "−GMm/2r",
+              "Negative: the satellite is bound"
+            ],
+            [
+              "Relation",
+              "vₑ = √2 v₀",
+              "Same energy method, different boundary"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Escape speed from the Earth.",
+              "note": "vₑ = √(2 × 6.67×10⁻¹¹ × 6×10²⁴/6.4×10⁶) ≈ 11.2 km/s."
+            },
+            {
+              "text": "Orbital speed of a near-Earth satellite.",
+              "note": "v₀ = √(GM/R) ≈ 7.9 km/s = vₑ/√2 ✓."
+            },
+            {
+              "text": "Why does a forward burn raise an orbit?",
+              "note": "Energy rises ⇒ radius rises, but speed at the new radius falls."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: An elliptical orbit with the Sun at a focus",
+      "description": "An ellipse with the Sun marked at the left focus, the planet drawn at perihelion and aphelion with radius vectors to the Sun, equal-area sectors shaded at each end marked \"equal times, equal areas\", and the semi-major axis a labelled between the foci and the far vertex.",
+      "labels": [
+        "Sun at one focus, not the centre",
+        "Perihelion: closest, fastest",
+        "Aphelion: farthest, slowest",
+        "Equal areas in equal times",
+        "Semi-major axis a sets the period"
+      ]
+    },
+    {
+      "caption": "Figure: Energy balance of a satellite in circular orbit",
+      "description": "A planet with a circular orbit drawn and a bar chart beside it for one satellite: kinetic energy bar of magnitude ½mv² and potential energy bar of magnitude −GMm/r drawn twice as long downward, with the small negative total bar −GMm/2r shown at the side and a note that doubling the radius raises (lessens) the total toward zero.",
+      "labels": [
+        "Kinetic: positive, ½mv²",
+        "Potential: negative, deeper",
+        "Total energy negative: bound",
+        "Larger orbit: higher (less negative) energy",
+        "Escape: energy reaches zero"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "F = Gm₁m₂/r² — attractive, mutual, central, inverse-square.",
+    "G is tiny per pair; gravity dominates only at large masses.",
+    "Kepler I: elliptical orbit. II: equal areas in equal times (angular momentum). III: T² ∝ a³.",
+    "g = GM/R²; maximum at the surface.",
+    "Altitude reduces g by the squared distance factor; depth reduces it linearly.",
+    "Weightlessness is the absence of support force, not of gravity.",
+    "Escape speed vₑ = √(2GM/R), independent of the mass launched.",
+    "Circular orbital speed v₀ = √(GM/r) = vₑ/√2 at the same radius.",
+    "Total orbital energy −GMm/2r is negative: adding energy enlarges the orbit but slows the satellite.",
+    "Angular momentum conservation underlies the area law and elliptical speed changes."
+  ],
+  "examFocus": [
+    "Quote G and the radii from the centre, not the surface, of the planet.",
+    "Derive escape speed from energy conservation — do not just state it.",
+    "Name the cause when asked why g varies: distance, depth, rotation or shape.",
+    "Energy answers must state the zero of potential energy being used."
+  ],
+  "vocabulary": [
+    {
+      "word": "Universal law",
+      "meaning": "F = Gm₁m₂/r², applying to every pair of masses."
+    },
+    {
+      "word": "Kepler’s laws",
+      "meaning": "The three empirical laws Newton later derived."
+    },
+    {
+      "word": "Areal velocity",
+      "meaning": "Area swept per unit time; constant for a central force."
+    },
+    {
+      "word": "Escape speed",
+      "meaning": "Minimum launch speed to leave a gravity well forever."
+    },
+    {
+      "word": "Orbital speed",
+      "meaning": "Speed needed for a circular orbit at a given radius."
+    },
+    {
+      "word": "Binding energy",
+      "meaning": "The energy that must be supplied to unbind a satellite: GMm/2r."
+    },
+    {
+      "word": "Weightlessness",
+      "meaning": "Apparent absence of weight from free fall, not from gravity."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-grav-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The gravitational force between two masses is:",
+      "options": [
+        "Repulsive always",
+        "Proportional to r²",
+        "Inversely proportional to r²",
+        "Proportional to r"
+      ],
+      "correctIndex": 2,
+      "answer": "Inversely proportional to r²",
+      "explanation": "F = Gm₁m₂/r² — attractive and inversely proportional to the square of the separation."
+    },
+    {
+      "id": "cbse11-phy-grav-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The escape speed from the Earth’s surface is closest to:",
+      "options": [
+        "7.9 km/s",
+        "9.8 km/s",
+        "11.2 km/s",
+        "15 km/s"
+      ],
+      "correctIndex": 2,
+      "answer": "11.2 km/s",
+      "explanation": "vₑ = √(2GM/R) ≈ 11.2 km/s; 7.9 km/s is the near-surface orbital speed, exactly vₑ/√2."
+    },
+    {
+      "id": "cbse11-phy-grav-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A satellite in a circular orbit fires its engine forward briefly. Its orbit radius will:",
+      "options": [
+        "Decrease",
+        "Stay the same",
+        "Increase",
+        "Depend on the satellite mass"
+      ],
+      "correctIndex": 2,
+      "answer": "Increase",
+      "explanation": "The burn adds energy, and total energy −GMm/2r rises toward zero only at larger r: the orbit expands, though the satellite ends up moving more slowly there."
+    },
+    {
+      "id": "cbse11-phy-grav-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The acceleration due to gravity at the Earth’s surface is g. At a depth of R/2 (uniform density) it is approximately:",
+      "options": [
+        "g/2",
+        "g/4",
+        "3g/4",
+        "g"
+      ],
+      "correctIndex": 0,
+      "answer": "g/2",
+      "explanation": "Inside a uniform sphere only the mass beneath pulls: g falls linearly with depth, g(1 − d/R) = g(1 − ½) = g/2."
+    },
+    {
+      "id": "cbse11-phy-grav-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The line joining a planet and the Sun sweeps equal areas in equal ________ .",
+      "answer": "times",
+      "explanation": "Kepler’s second law, expressing conservation of angular momentum for the central force."
+    },
+    {
+      "id": "cbse11-phy-grav-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The total mechanical energy of a satellite in a bound orbit is ________ .",
+      "answer": "negative",
+      "explanation": "E = −GMm/2r: the kinetic energy is smaller than half the potential’s magnitude, so the sum is negative."
+    },
+    {
+      "id": "cbse11-phy-grav-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Newton’s law of gravitation and explain what the value of G tells us about the strength of gravity.",
+      "answer": "Newton’s law of gravitation states that every pair of masses attracts each other with a force directly proportional to the product of their masses and inversely proportional to the square of the distance between them: F = Gm₁m₂/r², where G is the universal constant of gravitation, measured as 6.67 × 10⁻¹¹ N·m²/kg². The force is always attractive, acts along the line joining the masses, and the pair of forces forms a Newton’s third-law couple. The value of G tells us that gravity is extraordinarily weak per pair of ordinary masses: two 1 kg spheres a metre apart attract with a force of only about 7 × 10⁻¹¹ N, far below any school instrument’s sensitivity. Gravity becomes significant only when the masses are planetary or stellar, because the force grows with the product of the masses — which is why atoms feel no gravitational effects while planets feel enormous ones. G’s smallness is also why the electric force, vastly stronger per pair, governs atomic structure while gravity governs the cosmos.",
+      "explanation": "The law stated with its proportionality and constant, the three properties, and the interpretation of G’s magnitude for atomic versus cosmic scales."
+    },
+    {
+      "id": "cbse11-phy-grav-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the expression for the escape speed from the surface of a planet of mass M and radius R.",
+      "answer": "Escape speed is the minimum launch speed with which a body can move infinitely far away, arriving there with zero speed — the marginal case for unbinding. Apply conservation of energy between the surface and infinity, taking the potential energy zero at infinity: initial energy = ½mvₑ² − GMm/R; final energy at rest at infinity = 0. Setting them equal: ½mvₑ² = GMm/R. The mass m cancels — escape speed is the same for a pebble and a rocket — leaving vₑ² = 2GM/R, so vₑ = √(2GM/R). Numerically for the Earth: M = 6 × 10²⁴ kg, R = 6.4 × 10⁶ m, so vₑ = √(2 × 6.67 × 10⁻¹¹ × 6 × 10²⁴ / 6.4 × 10⁶) ≈ √(1.25 × 10⁸) ≈ 1.12 × 10⁴ m/s = 11.2 km/s. Checks: the dimensions √(N·m²/kg² × kg / m) = √(m²/s²) = m/s ✓; and the orbital speed at the same radius is vₑ/√2 ≈ 7.9 km/s, the expected relation ✓.",
+      "explanation": "The marginal-boundary statement, the energy equation, the mass cancellation, and both checks."
+    },
+    {
+      "id": "cbse11-phy-grav-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Using Newton’s law and the centripetal requirement, derive the orbital speed of a satellite at radius r and the period of its orbit, and show that T² ∝ r³.",
+      "answer": "A satellite of mass m in a circular orbit of radius r around a planet of mass M is held in its circle by gravity alone, so the gravitational pull provides exactly the centripetal force: GMm/r² = mv²/r. Solving for the speed: v² = GM/r, so v = √(GM/r) — the orbital speed, independent of the satellite’s own mass. The period follows from the circumference divided by the speed: T = 2πr/v = 2πr/√(GM/r) = 2πr^{3/2}/√(GM). Squaring: T² = 4π²r³/(GM), so T² ∝ r³ — Kepler’s third law, here derived rather than observed, with the constant of proportionality 4π²/GM that identifies the central mass. Note the mass cancellation means all satellites at the same radius share one period, whatever their mass — why geostationary satellites all sit at one altitude. Checks: the dimensions of 4π²/GM · r³ work out to time squared ✓; increasing r increases v’s denominator so higher orbits are slower, matching the earlier energy result ✓; and substituting the Earth–Moon values (r = 3.84 × 10⁸ m, M = 6 × 10²⁴ kg) returns T ≈ 2.36 × 10⁶ s ≈ 27.3 days ✓.",
+      "explanation": "The force-balance equation, the speed, the period derivation, the proportionality with its constant named, and all checks including the Moon comparison."
+    },
+    {
+      "id": "cbse11-phy-grav-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why astronauts aboard the International Space Station float as though gravity were absent, when the gravitational field there is still about 90% of its surface value. Then compute the station’s orbital speed at an altitude of 400 km and account for the apparent paradox.",
+      "answer": "The station and everything in it — including the astronauts — are in continuous free fall around the Earth: each follows its own orbit under gravity alone, so no support force ever develops between them. Since apparent weight is exactly that support force (the normal reaction, as the Laws of Motion chapter defined it), and it has vanished, the astronauts register no weight — floating relative to their cabin while both fall together at the same rate, exactly as a lift whose cable is cut would allow its passengers to float. Gravity has not switched off: at 400 km it is still ≈ 0.89 g, which is why the station keeps curving back toward the Earth instead of flying off. Orbital speed: r = R + h = 6.4 × 10⁶ + 4 × 10⁵ = 6.8 × 10⁶ m, and v = √(GM/r) = √(6.67 × 10⁻¹¹ × 6 × 10²⁴ / 6.8 × 10⁶) = √(5.88 × 10⁷) ≈ 7.67 × 10³ m/s ≈ 7.7 km/s. Paradox resolved by separating the two notions of weight: true weight (gravitational pull, ~88% of surface) is present and is precisely what supplies the centripetal acceleration; apparent weight (the floor’s push) is absent because nothing needs to push — the floor and the astronaut accelerate identically. A useful check on the orbit: the period T = 2πr/v ≈ 5.43 × 10³ s ≈ 92 min, the well-known low-Earth-orbit period ✓, and v is slightly below the near-surface 7.9 km/s since the radius is larger ✓.",
+      "explanation": "The free-fall account with apparent weight defined as the support force, the orbital speed computed at the correct radius, the apparent-weight/gravity separation, and the period cross-check."
+    }
+  ]
+}

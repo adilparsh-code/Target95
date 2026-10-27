@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-gravitation",
+  "title": "Gravitation",
+  "kind": "physics",
+  "tagline": "Newton’s law, field and potential, satellites, and the speeds that let a body leave the Earth.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Gravitation is the weakest of the fundamental forces and the only one that always attracts, which is why it governs the motion of moons, planets and stars while doing almost nothing at the human scale. This chapter states Newton’s law and the idea of a gravitational field, separates gravitational potential from potential energy, derives the acceleration due to gravity and how it varies with height, latitude, depth and rotation, and then works through the three speeds examiners always ask about: orbital, escape and the condition for a satellite at rest relative to the ground. The pattern of the questions is fixed — one derivation of g variation, one satellite numerical, one comparison of orbital and escape speed.",
+    "facts": [
+      {
+        "label": "Newton’s law",
+        "value": "F = G m₁ m₂ / r², with G = 6.67 × 10⁻¹¹ N m² kg⁻², attractive and along the line joining the particles."
+      },
+      {
+        "label": "Field and potential",
+        "value": "g = F/m at a point; potential V = −Gm/r, always negative with the reference at infinity."
+      },
+      {
+        "label": "Variation of g",
+        "value": "Falls as 1/r² with height, is unchanged by depth for a uniform sphere, and is slightly reduced by the Earth’s rotation."
+      },
+      {
+        "label": "Satellite speeds",
+        "value": "vₒ = √(GM/r); escape speed at the surface is √(2GM/R) = 11.2 km s⁻¹, exactly √2 times the orbital speed."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State Newton’s law of gravitation and apply it to two-body problems and to superposition.",
+    "Define gravitational field intensity and gravitational potential, and relate them to potential energy.",
+    "Derive the expression for g and account for its variation with height, depth, latitude and rotation.",
+    "Derive the orbital speed, period and energy of a satellite and explain why all satellites at a given height share one speed.",
+    "Distinguish orbital from escape speed and calculate each from the given data."
+  ],
+  "learn": [
+    {
+      "id": "newton-law",
+      "title": "Newton’s law of gravitation and the field idea",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Newton’s law states that every particle of matter attracts every other particle with a force proportional to the product of their masses and inversely proportional to the square of the distance between them, acting along the line that joins them. Three features are emphasised in every examination answer: the force is always attractive, unlike electrostatic force; it is mutual, so the force that A exerts on B equals in magnitude the force that B exerts on A, forming an action-reaction pair on different bodies; and it obeys the inverse square law, so doubling the separation quarters the force. Gravitation is also the only force that cannot be shielded, and its constant G, first measured by Cavendish with a torsion balance, is a property of the universe rather than of any material. The field formulation then replaces action at a distance by a local quantity: the gravitational field strength at a point is the force experienced per unit mass placed there, numerically equal to the acceleration that the mass would acquire, and the superposition principle lets the fields of several masses be added as vectors to give the resultant at any point."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "F = G m₁ m₂/r², always attractive, mutual, and along the line joining the two particles.",
+            "The inverse-square law means doubling the distance reduces the force to one quarter.",
+            "G = 6.67 × 10⁻¹¹ N m² kg⁻², found by Cavendish with a torsion balance.",
+            "Gravitational field strength g = F/m, which is also the acceleration a mass would acquire there.",
+            "Superposition: the field at a point due to several masses is the vector sum of their individual fields.",
+            "Gravitation cannot be screened or shielded, and it acts between all forms of energy, not matter alone."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Gravitation at a glance",
+          "columns": [
+            "Property",
+            "Statement"
+          ],
+          "rows": [
+            [
+              "Direction",
+              "Always attractive, along the line joining the masses"
+            ],
+            [
+              "Dependence",
+              "Product of masses over the square of the separation"
+            ],
+            [
+              "Constancy",
+              "G is universal and does not change with medium"
+            ],
+            [
+              "Field",
+              "Force per unit mass, in N kg⁻¹ or m s⁻²"
+            ],
+            [
+              "Shielding",
+              "None — gravitation cannot be blocked"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Halving the distance",
+              "note": "Two bodies brought to half their separation experience four times the force, because the distance sits in the denominator squared."
+            },
+            {
+              "text": "Why the floor does not rise",
+              "note": "The floor attracts you and you attract the floor with equal force, but the Earth’s pull on the far larger floor makes its acceleration negligible."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Gravitational constant",
+              "meaning": "The universal constant G in Newton’s law, measured with a Cavendish torsion balance."
+            },
+            {
+              "term": "Gravitational field",
+              "meaning": "The region around a mass in which it exerts a force, measured as force per unit mass at a point."
+            },
+            {
+              "term": "Inverse square law",
+              "meaning": "A relation in which the force falls as the square of the distance increases."
+            },
+            {
+              "term": "Superposition",
+              "meaning": "The vector addition of the fields or forces due to several masses acting at one point."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "potential-energy",
+      "title": "Gravitational potential, field and potential energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Gravitational potential at a point is defined as the work that must be done per unit mass in bringing a small test mass from infinity, where the potential is taken as zero, to that point without acceleration. Because the force is attractive, that work is negative, so every potential in this field is negative and increases towards zero with distance: near a mass M the potential is −GM/r. The potential energy of a pair of masses is then m times the potential of one acting on the other, U = −GMm/r, and the negative sign carries the physical meaning that the system is bound — energy must be supplied to pull the bodies apart to infinity, and that supplied amount is exactly GMm/r. Potential and field are linked: the field is the negative rate of change of potential with distance, which for a point mass reproduces the inverse square law from the 1/r potential. Equipotential surfaces join points of equal potential, they are always perpendicular to the field lines, and no work is done in moving a mass along one. This apparatus makes the energy questions straightforward: a body falling from rest at height h above the surface reaches speed √(2gh) because the potential energy lost equals the kinetic energy gained, a result that also follows directly from the work-energy theorem."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Potential V = −GM/r: the work per unit mass from infinity to the point, always negative.",
+            "Potential energy of a pair U = −GMm/r; the system is bound and GMm/r must be supplied to separate it to infinity.",
+            "The field is the negative gradient of the potential, so g = −dV/dr, and the 1/r potential gives the inverse square field.",
+            "Equipotential surfaces are perpendicular to the field and require no work to traverse.",
+            "Near the Earth’s surface the potential energy is written mgh for small heights measured from a chosen level.",
+            "A falling body converts potential into kinetic energy: m g h = ½ m v² gives v = √(2gh)."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Field, potential and energy",
+          "columns": [
+            "Quantity",
+            "Expression near a mass M",
+            "Nature"
+          ],
+          "rows": [
+            [
+              "Field strength",
+              "G M / r²",
+              "vector, towards the mass"
+            ],
+            [
+              "Potential",
+              "−G M / r",
+              "scalar, always negative"
+            ],
+            [
+              "Potential energy of a pair",
+              "−G M m / r",
+              "scalar, negative for a bound pair"
+            ],
+            [
+              "Near the Earth",
+              "m g h for small heights",
+              "measured from a chosen level"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A bound pair",
+              "note": "Two bodies in orbit have negative total mechanical energy; adding energy until the total reaches zero is precisely what escape requires."
+            },
+            {
+              "text": "Falling from a height",
+              "note": "A stone dropped from 20 m reaches the ground at √(2 × 10 × 20) = 20 m s⁻¹, whether found from energy or from the equations of motion."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "variation-of-g",
+      "title": "The variation of acceleration due to gravity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "On the surface of a uniform sphere the acceleration due to gravity is g = GM/R², which shows immediately that g depends on the mass of the body attracting and on the radius of the sphere, not on the mass of the falling object — the observation that led Einstein towards the equivalence principle. With height, the inverse square law gives g at height h as GM/(R+h)², so g falls with distance, and for h much smaller than R it may be approximated as g(1 − 2h/R). With depth, the mass lying outside a radius r contributes no field at the centre, so only the mass within r attracts, and for a uniform sphere this gives g proportional to r; at the centre g vanishes, and the value at depth d is g(1 − d/R). With latitude, the Earth’s rotation reduces the effective gravity: a body at latitude λ circles the Earth’s axis with radius R cos λ, and the required centripetal force is supplied partly by the true gravitational pull, leaving an effective g of g₀ − ω²R cos²θ. Two consequences are always examined: the equator has the largest reduction and the poles none, and the Earth is therefore an oblate spheroid, flattened at the poles and bulging at the equator, which in turn makes the true g still smaller at the equator than the rotation alone predicts."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Surface value: g = GM/R², independent of the mass of the falling body.",
+            "With height: g = GM/(R+h)², decreasing as the inverse square of the distance from the centre.",
+            "With depth: only the mass inside radius r attracts, giving g proportional to r and zero at the centre.",
+            "With latitude: the rotation requires centripetal force, so g_eff = g₀ − ω²R cos²λ.",
+            "The reduction is greatest at the equator and zero at the poles, where the body does not rotate about the axis.",
+            "The rotation-induced difference makes the Earth oblate: a larger equatorial radius and a smaller polar radius."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "How g changes",
+          "columns": [
+            "Change",
+            "Behaviour of g",
+            "Reason"
+          ],
+          "rows": [
+            [
+              "Going up",
+              "decreases as 1/r²",
+              "greater distance from the centre"
+            ],
+            [
+              "Going down",
+              "decreases linearly to zero",
+              "only the inner mass attracts"
+            ],
+            [
+              "Equator to pole",
+              "increases",
+              "less effect of rotation and smaller equatorial radius"
+            ],
+            [
+              "Above the Earth’s surface",
+              "never zero",
+              "only tends to zero at infinite distance"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A satellite’s g",
+              "note": "At 400 km above the surface g is about 8.7 m s⁻² rather than 9.8, which is why astronauts experience apparent weightlessness."
+            },
+            {
+              "text": "At the centre",
+              "note": "Inside a uniform sphere the pull from every direction cancels exactly, so g at the centre is zero though the pressure is enormous."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "satellites",
+      "title": "Orbits, satellites and the two speeds that matter",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A satellite is simply a body in free fall that travels sideways fast enough to keep missing the Earth, and the whole analysis follows from equating the gravitational pull to the required centripetal force: GMm/r² = m v²/r gives the orbital speed √(GM/r). The striking consequence is that the speed depends only on the distance from the centre — every satellite at a given height moves at the same speed whatever its mass — and the period follows as 2πr³⁽/² over √(GM), which is Kepler’s third law in its exact form: the square of the period is proportional to the cube of the radius. A special case is the geostationary satellite, which must lie in the equatorial plane, circle in the same direction as the Earth rotates and have a period of 24 hours, placing it at a fixed radius of about 42 200 km from the centre; only such a satellite stays above one point, which is why communication and television satellites use that orbit and nothing else. Escape speed is the speed at which the kinetic energy just cancels the negative potential energy, giving √(2GM/R), which at the Earth’s surface is 11.2 km s⁻¹, and because the orbital speed at the surface would be √(GM/R), the escape speed is always √2 times the orbital speed — about 1.41 times, a relationship that holds for any planet."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Orbital speed follows from GMm/r² = m v²/r, giving v = √(GM/r), independent of the satellite’s mass.",
+            "Period T = 2π √(r³/GM), the exact form of Kepler’s third law.",
+            "Kinetic energy of a satellite is half the magnitude of its potential energy, and the total energy is the negative of the kinetic.",
+            "Geostationary: equatorial plane, eastward, period 24 h, radius about 42 200 km from the centre.",
+            "Escape speed √(2GM/R) = 11.2 km s⁻¹ for the Earth, exactly √2 times the near-surface orbital speed.",
+            "Energy for escape equals the magnitude of the binding energy GMm/R, which is independent of how the speed is reached."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Orbital and escape speed compared",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "Earth value at the surface"
+          ],
+          "rows": [
+            [
+              "Orbital speed",
+              "√(GM/r)",
+              "≈ 7.9 km s⁻¹ at the surface"
+            ],
+            [
+              "Escape speed",
+              "√(2GM/R)",
+              "11.2 km s⁻¹"
+            ],
+            [
+              "Ratio",
+              "√2",
+              "1.41"
+            ],
+            [
+              "Total orbital energy",
+              "−GMm/2r",
+              "negative: the orbit is bound"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why all satellites at one height match",
+              "note": "At 700 km every satellite, heavy or light, moves at about 7.5 km s⁻¹, because the mass of the satellite cancels out of the force balance."
+            },
+            {
+              "text": "A half-orbit launch",
+              "note": "A body given the orbital speed at the surface would circle the Earth; given √2 times that speed it leaves orbit entirely — speed alone decides the fate."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Orbital speed",
+              "meaning": "The speed needed to maintain a circular orbit at a given radius, √(GM/r)."
+            },
+            {
+              "term": "Geostationary orbit",
+              "meaning": "An equatorial circular orbit of 24 h period keeping a satellite above a fixed point on the equator."
+            },
+            {
+              "term": "Escape speed",
+              "meaning": "The minimum speed at which a body leaves a gravitating body forever, √(2GM/R)."
+            },
+            {
+              "term": "Weightlessness",
+              "meaning": "The apparent absence of weight when a body and its surroundings fall freely together."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solving",
+      "title": "Solving gravitation problems without slips",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Gravitation problems have a small number of shapes and the marks come from recognising the shape first. Any question about a satellite begins with force balance, GMm/r² = m v²/r, and the mass of the satellite cancels at once — a candidate who carries it through is doing unnecessary work and inviting an error. Any question about variation of g must declare which variable changes: height, depth, latitude or rotation, because the three formulae are different and mixing them produces answers that are wrong by large factors. Any energy question benefits from working with total energy rather than with speed alone: the total energy of a circular orbit is −GMm/2r, the kinetic is half its magnitude and the potential is twice it, and these three relations answer most satellite energy questions in a line. Units are the other trap: masses in kilograms, distances in metres, and G in SI, so a radius quoted in kilometres must be converted before substitution, and an answer in metres per second divided by a thousand before it is quoted in kilometres per second."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Start satellite problems with force balance and cancel the satellite’s mass immediately.",
+            "Name which variation of g is in play — height, depth, latitude or rotation — before using a formula.",
+            "Use total orbital energy −GMm/2r with kinetic half the magnitude and potential twice it.",
+            "Convert every quantity to SI before substituting, and convert the final answer back to convenient units.",
+            "The period and speed of an orbit depend only on the radius, never on the satellite’s mass.",
+            "Check limits: a larger orbit must mean a slower speed and a longer period."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A quick energy answer",
+              "note": "To move a satellite from radius r to 2r requires adding GMm/4r of energy, found as the difference of two total energies without ever computing a speed."
+            },
+            {
+              "text": "A limit check",
+              "note": "If a calculated orbital speed falls as the radius grows, the answer agrees with Kepler; if it rises, a sign or an exponent is wrong."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A satellite in circular orbit",
+      "description": "The Earth with a circular orbit drawn around it, the gravitational pull shown as an arrow towards the centre labelled GMm/r², the velocity arrow drawn tangentially, and the radius and height marked.",
+      "labels": [
+        "pull GMm/r² acts as centripetal force",
+        "velocity tangent to the path",
+        "radius r = R + h from the centre",
+        "speed v = √(GM/r), same for all masses",
+        "period T = 2π√(r³/GM)"
+      ]
+    },
+    {
+      "caption": "Figure: How g varies with distance from the centre",
+      "description": "A graph of g against radial distance: linear rise from zero at the centre to the surface value, then a 1/r² fall, with the depth, surface and height regions labelled.",
+      "labels": [
+        "g rises linearly inside the sphere",
+        "zero at the centre",
+        "maximum at the surface: GM/R²",
+        "falls as 1/r² above the surface",
+        "tends to zero only at infinity"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Newton’s law gives F = G m₁ m₂/r²: attractive, mutual, along the line joining and inverse-square.",
+    "G = 6.67 × 10⁻¹¹ N m² kg⁻² is universal and cannot be shielded.",
+    "Gravitational field strength is force per unit mass and equals the acceleration a body would acquire.",
+    "Potential is the work per unit mass from infinity to the point and is always negative near a mass.",
+    "Potential energy of a pair is −GMm/r; the negative sign shows the system is bound.",
+    "On the surface g = GM/R², independent of the mass of the falling body.",
+    "g falls as the inverse square with height and linearly with depth to zero at the centre.",
+    "Rotation reduces the effective g most at the equator and not at all at the poles, making the Earth oblate.",
+    "Orbital speed is √(GM/r) and does not depend on the satellite’s mass.",
+    "A geostationary satellite circles in the equatorial plane eastward with a 24-hour period.",
+    "Escape speed is √(2GM/R), 11.2 km s⁻¹ for the Earth, and equals √2 times the orbital speed.",
+    "The total energy of a circular orbit is negative: −GMm/2r."
+  ],
+  "examFocus": [
+    "Derive the variation of g with depth and with height separately; the two derivations are distinct and often asked together.",
+    "Satellite numericals must begin with the force balance so the satellite’s mass cancels.",
+    "State the three conditions for a geostationary orbit: equatorial plane, eastward direction, 24-hour period.",
+    "Quote escape speed with its derivation from energy balance, and give the √2 ratio to orbital speed."
+  ],
+  "vocabulary": [
+    {
+      "word": "Gravitation",
+      "meaning": "The universal attraction between masses, following the inverse square law."
+    },
+    {
+      "word": "Field strength",
+      "meaning": "Force per unit mass at a point, numerically equal to the acceleration there."
+    },
+    {
+      "word": "Potential",
+      "meaning": "Work done per unit mass bringing a test mass from infinity to the point."
+    },
+    {
+      "word": "Bound system",
+      "meaning": "A pair with negative total energy, which needs energy supplied to separate to infinity."
+    },
+    {
+      "word": "Orbit",
+      "meaning": "The path of a body under gravitation alone, circular when the speed matches √(GM/r)."
+    },
+    {
+      "word": "Geostationary",
+      "meaning": "An equatorial 24-hour orbit holding a satellite above a fixed point."
+    },
+    {
+      "word": "Escape speed",
+      "meaning": "The minimum speed to leave a gravitating body permanently."
+    },
+    {
+      "word": "Weightlessness",
+      "meaning": "Apparent absence of weight in free fall, where everything falls at the same rate."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-grav-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the distance between two masses is doubled, the gravitational force between them becomes:",
+      "options": [
+        "Half",
+        "One quarter",
+        "Double",
+        "Four times"
+      ],
+      "correctIndex": 1,
+      "answer": "One quarter",
+      "explanation": "The force follows the inverse square law, so doubling the distance divides the force by four."
+    },
+    {
+      "id": "isc11-phy-grav-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The escape speed from the surface of the Earth is approximately:",
+      "options": [
+        "7.9 km s⁻¹",
+        "9.8 km s⁻¹",
+        "11.2 km s⁻¹",
+        "15.0 km s⁻¹"
+      ],
+      "correctIndex": 2,
+      "answer": "11.2 km s⁻¹",
+      "explanation": "√(2GM/R) works out at 11.2 km s⁻¹, which is √2 times the near-surface orbital speed."
+    },
+    {
+      "id": "isc11-phy-grav-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A satellite in a circular orbit has total mechanical energy which is:",
+      "options": [
+        "Positive and equal to the kinetic",
+        "Zero",
+        "Negative, equal in magnitude to the kinetic energy",
+        "Negative, twice the kinetic energy"
+      ],
+      "correctIndex": 2,
+      "answer": "Negative, equal in magnitude to the kinetic energy",
+      "explanation": "The total is −GMm/2r while the kinetic is GMm/2r, so the total is negative and equal in magnitude to the kinetic."
+    },
+    {
+      "id": "isc11-phy-grav-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The acceleration due to gravity at the centre of the Earth is:",
+      "options": [
+        "equal to g at the surface",
+        "half of g",
+        "vanishes at the centre",
+        "infinite"
+      ],
+      "correctIndex": 2,
+      "answer": "vanishes at the centre",
+      "explanation": "Inside a uniform sphere the mass in every direction pulls equally and cancels, so the field vanishes at the centre."
+    },
+    {
+      "id": "isc11-phy-grav-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The force of attraction between two masses is inversely proportional to the square of the distance between them, which is Newton’s law of __________.",
+      "answer": "gravitation",
+      "explanation": "The same law governs planetary orbits and the fall of a stone."
+    },
+    {
+      "id": "isc11-phy-grav-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A satellite that stays above a fixed point on the equator must have a period of __________ hours.",
+      "answer": "24",
+      "explanation": "It must also circle eastward in the equatorial plane to keep pace with the Earth’s rotation."
+    },
+    {
+      "id": "isc11-phy-grav-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Newton’s law of gravitation and two of its important features.",
+      "answer": "Newton’s law states that every particle of matter attracts every other particle with a force directly proportional to the product of their masses and inversely proportional to the square of the distance between them, acting along the line joining them: F = G m₁ m₂ / r². Two important features are that the force is always attractive, unlike the electrostatic force which may repel, and that it is mutual, so the force of A on B is equal and opposite to that of B on A and forms an action-reaction pair on different bodies. It also cannot be shielded.",
+      "explanation": "The formula in words plus any two of attraction, mutuality, inverse square and no shielding."
+    },
+    {
+      "id": "isc11-phy-grav-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "How does the acceleration due to gravity vary with depth and with height?",
+      "answer": "With height h above the surface, g = GM/(R+h)², so it decreases as the inverse square of the distance from the Earth’s centre, and for small h it may be written g(1 − 2h/R). With depth d, only the mass inside the radius R − d attracts, and for a uniform sphere g decreases linearly as g(1 − d/R), becoming zero at the centre where the pulls from all directions cancel. The two variations therefore differ in form: inverse square above the surface and linear below it.",
+      "explanation": "Both variations with the reason for each and the behaviour at the extremes."
+    },
+    {
+      "id": "isc11-phy-grav-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is a geostationary satellite? State two conditions it must satisfy.",
+      "answer": "A geostationary satellite is one that appears to hang above a fixed point on the equator because its period of revolution equals the Earth’s period of rotation. It must therefore orbit in the equatorial plane, and it must circle in the same direction as the Earth rotates, that is eastward, with a period of 24 hours, which fixes its radius at about 42 200 km from the Earth’s centre.",
+      "explanation": "Definition plus two of equatorial plane, eastward direction and 24-hour period."
+    },
+    {
+      "id": "isc11-phy-grav-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive an expression for the acceleration due to gravity on the surface of the Earth and explain how it varies with height and with depth.",
+      "answer": "On the surface the force on a mass m is the gravitational pull GMm/R², where M is the mass of the Earth and R its radius, and this force gives the mass its acceleration g. Equating, m g = G M m / R², and the mass m cancels, giving g = GM/R² — which shows why all bodies fall with the same acceleration. With height, the distance from the centre becomes R + h, so g at that height is GM/(R+h)², and the acceleration falls as the inverse square of the distance; expanded for small h it is approximately g(1 − 2h/R). With depth d the attracting mass is only that within radius R − d, because a uniform spherical shell exerts no field inside itself, so g at that depth is G M′ / (R−d)² with M′ the inner mass; substituting the density gives g proportional to (R−d), that is g(1 − d/R), falling linearly and reaching zero at the centre.",
+      "explanation": "Surface derivation with the cancelling mass, the inverse-square law with height, and the shell result giving linear fall with depth."
+    },
+    {
+      "id": "isc11-phy-grav-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A satellite is to be moved from a circular orbit of radius r to one of radius 2r. Analyse the energy that must be supplied, taking the satellite’s mass as m.",
+      "answer": "The total energy of a circular orbit is −GMm/2r, so at radius r the energy is −GMm/2r and at radius 2r it is −GMm/4r. The energy of the higher orbit is therefore larger, since −1/4 is greater than −1/2, and the difference is −GMm/4r − (−GMm/2r) = +GMm/4r, which is the energy that must be supplied. That energy has to be delivered in stages: a tangential impulse raises the apogee of an elliptical transfer orbit, and a second impulse circularises at the higher radius, and the two impulses together supply exactly GMm/4r. The analysis also explains why the higher satellite moves more slowly: although its total energy is greater, its speed is √(GM/2r), which is less than √(GM/r), because the extra energy has gone into potential rather than kinetic energy. The check on the sign is essential — moving outward always requires energy input, since the total energy of an orbit becomes less negative as the radius grows.",
+      "explanation": "Both total energies, their difference, the physical reason for the speed decrease, and the sign check."
+    },
+    {
+      "id": "isc11-phy-grav-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why astronauts in a satellite appear weightless, and distinguish this from having no gravitational pull.",
+      "answer": "Inside a satellite both the astronaut and the spacecraft are in free fall under gravity alone, and both accelerate towards the Earth with the same acceleration GM/r², because that acceleration is independent of the mass of the falling body. There is therefore no relative push between the astronaut and the floor of the spacecraft: the floor is falling at exactly the same rate, so it never supports the astronaut, and the reading of a scale would be zero. Weightlessness is thus the absence of a contact force rather than the absence of gravity — at orbital altitude the pull of the Earth is still about 8.7 m s⁻², nearly nine tenths of its surface value, and it is precisely that pull which keeps the satellite and the astronaut in orbit. The same effect is seen in a lift whose cable is cut, where everything inside falls together, and it is only a true absence of gravity if the body is moved to infinite distance where the field vanishes.",
+      "explanation": "Common acceleration, no contact force, the surviving field value at orbit, and the lift analogy."
+    }
+  ]
+}

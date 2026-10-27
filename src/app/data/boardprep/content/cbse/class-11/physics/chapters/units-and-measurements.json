@@ -1,0 +1,430 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-units",
+  "title": "Units and Measurements",
+  "kind": "physics",
+  "tagline": "SI units, significant figures and dimensional analysis — the language every answer in physics must speak correctly.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Physics is measurement, and this chapter builds the discipline that makes a number meaningful: a value without a unit is a rumour, and a unit without a system is chaos. It opens with the seven SI base quantities and the derived units built from them, develops the arithmetic of significant figures and uncertainty that governs every computed result, and finishes with dimensional analysis — the technique that checks equations, converts between unit systems and derives relations you have half-forgotten. Every later chapter in this course assumes the habits formed here.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-I: Physical World and Measurement (23 marks shared with the Kinematics and Laws of Motion chapters)."
+      },
+      {
+        "label": "SI base units",
+        "value": "metre (m), kilogram (kg), second (s), ampere (A), kelvin (K), mole (mol), candela (cd)."
+      },
+      {
+        "label": "Significant figures",
+        "value": "All non-zero digits plus trapped and trailing zeros in decimals; operations combine precisions, they do not multiply them."
+      },
+      {
+        "label": "Dimensional method",
+        "value": "An equation must be dimensionally homogeneous; dimensionless constants such as 2 and π are invisible to the check."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Name the seven SI base quantities and their units and build derived units from them.",
+    "Apply the rules of significant figures to products, quotients, sums and differences.",
+    "Estimate the uncertainty of a computed result from the uncertainties of its data.",
+    "Test the dimensional homogeneity of an equation and derive simple relations by dimensional analysis.",
+    "Convert between SI and other unit systems using dimensional formulae."
+  ],
+  "learn": [
+    {
+      "id": "units",
+      "title": "Systems of units and the SI",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A unit is a agreed-upon standard against which a quantity is compared, and a system of units is a complete, consistent set of such standards. Physics recognises three base quantities at school level — length, mass and time — from which every mechanical unit is built, and historically three systems used them differently: the CGS (centimetre, gram, second), the FPS (foot, pound, second) and the MKS (metre, kilogram, second). The MKS family won, generalised into the Système International (SI) by fixing seven base quantities — the metre, kilogram, second, ampere, kelvin, mole and candela — with which all other units are constructed by multiplication and division. Derived units such as the newton (kg·m·s⁻² for force) and the joule (kg·m²·s⁻² for energy) are not new standards but products of the base ones, which is what makes the system coherent: no conversion factors creep into Newton’s second law when everything is already in SI."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two practical habits complete the topic. First, prefixes: the same quantity spans enormous ranges, so the SI prefix set — from yocto to yotta, with the school-level workhorse being kilo, centi, milli, micro and nano — lets any value be written as a number between 0.1 and 1000 times a power of ten, the form in which mental arithmetic is safe. Second, unit discipline in working: convert to SI before substituting, keep the unit attached through every line, and read the final unit back to check that the physics is plausible — a computed \"speed\" carrying units of m·s⁻² has betrayed an algebra slip long before the number looks wrong. The dimensional analysis in the third lesson systematises that last check, but the manual habit is worth forming immediately."
+        },
+        {
+          "type": "table",
+          "caption": "The seven SI base quantities",
+          "columns": [
+            "Base quantity",
+            "SI unit",
+            "Symbol"
+          ],
+          "rows": [
+            [
+              "Length",
+              "metre",
+              "m"
+            ],
+            [
+              "Mass",
+              "kilogram",
+              "kg"
+            ],
+            [
+              "Time",
+              "second",
+              "s"
+            ],
+            [
+              "Electric current",
+              "ampere",
+              "A"
+            ],
+            [
+              "Thermodynamic temperature",
+              "kelvin",
+              "K"
+            ],
+            [
+              "Amount of substance",
+              "mole",
+              "mol"
+            ],
+            [
+              "Luminous intensity",
+              "candela",
+              "cd"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The SI unit of force: build it from base units.",
+              "note": "F = ma → kg·m·s⁻², named the newton (N)."
+            },
+            {
+              "text": "Express 4.7 mm in SI metres.",
+              "note": "4.7 × 10⁻³ m — prefix replaced by a power of ten."
+            },
+            {
+              "text": "The unit of pressure: pascal.",
+              "note": "N/m² = kg·m⁻¹·s⁻²; one pascal is one newton per square metre."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "figures",
+      "title": "Significant figures and uncertainty",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A measurement is never exact: it carries the resolution of the instrument that made it, and significant figures are the bookkeeping system that preserves that information through computation. Count every non-zero digit; count zeros trapped between non-zeros and zeros trailing a decimal part; ignore leading zeros, which only place the decimal. So 0.004 20 has three significant figures while 4 200 has two (ambiguously, until a decimal point or scientific notation settles it — 4.2 × 10³ states three unambiguously). When numbers are multiplied or divided, the answer keeps the same number of significant figures as the least precise input; when added or subtracted, it keeps the same number of decimal places as the least precise input. The two rules answer different questions — relative precision for products, absolute position for sums — and mixing them up is the classic error."
+        },
+        {
+          "type": "paragraph",
+          "text": "Uncertainty is the same idea expressed numerically. If a length is measured as (5.00 ± 0.05) cm, the ± 0.05 states the instrument’s resolution, and it propagates: for a sum or difference, absolute uncertainties add; for a product or quotient, relative uncertainties add in quadrature-simple form at school level — the usual treatment adds the fractional uncertainties. The worked pattern is always the same: write each datum with its uncertainty, identify the operation, apply the appropriate propagation rule, and report the result rounded to the precision the uncertainty supports — an uncertainty in the first decimal place forces the answer to be quoted to the first decimal place too. Rounding early is the enemy: keep extra digits through the working and trim only the final line, or accumulated rounding error silently corrupts the last significant figure."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Significant figures carry the instrument’s resolution into the answer.",
+            "Products/quotients: keep as many figures as the least precise input.",
+            "Sums/differences: keep as many decimal places as the least precise input.",
+            "Uncertainties add for sums; fractional uncertainties add for products.",
+            "Carry extra digits, round only the final line."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dimensions",
+      "title": "Dimensional analysis and its applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every physical quantity can be written as a product of powers of the base quantities, and the resulting triplet — the dimensional formula — is the quantity’s passport. Force is [MLT⁻²], velocity [LT⁻¹], energy [ML²T⁻²], and the central rule is dimensional homogeneity: in any valid equation, every term must carry the same dimensions, because you cannot add metres to seconds. That single rule has three uses. It checks proposed equations — if the two sides of your derivation disagree dimensionally, the derivation is wrong. It converts units — because only the magnitudes of base units differ between systems, the numerical ratio follows from the ratio of the unit magnitudes, which is how a CGS erg becomes a joule by dimensional bookkeeping. And it derives relations — when the variables involved and their dimensions are known, matching powers of M, L and T produces the unknown exponents."
+        },
+        {
+          "type": "paragraph",
+          "text": "The technique’s honest limits deserve as much attention as its power. Dimensional analysis cannot find dimensionless constants — the period of a pendulum comes out proportional to √(l/g) with the factor 2π invisible — and it cannot handle sums inside a dependence, since (u + v) and (uv) have the same dimensions as each other and cannot be told apart. It also cannot derive a relation involving more dimensionless groups than unknown exponents. So the method is a constructor and a checker, not a proof machine: relations it produces are always confirmed by experiment or fuller theory. In examinations, the marks attach to showing the dimensional formulae of every quantity, writing the general proportionality with unknown exponents, and solving the three simultaneous equations — a method best practised until it is mechanical."
+        },
+        {
+          "type": "table",
+          "caption": "Worked: the period of a simple pendulum by dimensions",
+          "columns": [
+            "Step",
+            "Working"
+          ],
+          "rows": [
+            [
+              "Assume dependence",
+              "T ∝ lᵃ gᵇ"
+            ],
+            [
+              "Write dimensions",
+              "[T] = [L]ᵃ [LT⁻²]ᵇ = [Lᵃ⁺ᵇ T⁻²ᵇ]"
+            ],
+            [
+              "Match powers of T",
+              "1 = −2b → b = −½"
+            ],
+            [
+              "Match powers of L",
+              "0 = a + b → a = ½"
+            ],
+            [
+              "Result",
+              "T ∝ √(l/g); the constant 2π is invisible to dimensions"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Dimensional formula of the coefficient of viscosity η.",
+              "note": "From F = 6πηrv: [η] = [ML⁻¹T⁻¹]."
+            },
+            {
+              "text": "Check: is v = u + at dimensionally consistent?",
+              "note": "[LT⁻¹] = [LT⁻¹] + [LT⁻²][T] = [LT⁻¹] ✓."
+            },
+            {
+              "text": "Convert 1 J to erg using dimensions.",
+              "note": "1 kg·m²·s⁻² = 10⁷ g·cm²·s⁻² = 10⁷ erg."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "technique",
+      "title": "Exam technique for measurement problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Measurement questions reward method. Begin every numerical by listing the given values in SI with their uncertainties and stating what is required — this single step catches unit mismatches before they enter the arithmetic and earns method marks even when the final number slips. For significant-figure answers, decide the rule from the operation (product or sum) before rounding, and quote the answer to the same number of figures or decimal places as the governing input. For dimensional questions, write the dimensional formula of every symbol at the start of the solution; examiners look for those lines, and they also protect you from substituting a formula whose sides disagree."
+        },
+        {
+          "type": "paragraph",
+          "text": "Three verifications are cheap and catch most slips. Dimensional: the final answer’s units must reduce to what the question asks for. Magnitude: an order-of-magnitude estimate — is a classroom length plausibly 1.7 m rather than 170 m? Precision: does the number of quoted figures match the instrument named in the question (a metre scale cannot justify four figures)? Estimation itself is examinable: questions asking for the number of seconds in a year, or the mass of a student in kilograms, test not recall but structured approximation — break the quantity into products of familiar sizes, bound each factor, and quote one significant figure with a stated assumption. That discipline, applied throughout the course, is the chapter’s real deliverable."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "List givens in SI with uncertainties before substituting.",
+            "Choose the significant-figure rule from the operation, not from habit.",
+            "Write dimensional formulae of all symbols at the start of a solution.",
+            "Check units of the answer, its order of magnitude, and its precision.",
+            "Estimation answers need one figure plus a stated assumption."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The vernier calliper measuring a sphere",
+      "description": "A labelled line drawing of a vernier calliper gripping a small sphere: fixed jaw and sliding jaw marked, main scale graduations in centimetres along the beam, the vernier scale below marked with its ten divisions spanning nine main-scale divisions, and the measured diameter indicated between the jaws.",
+      "labels": [
+        "Main scale: centimetre graduations",
+        "Vernier scale: 10 divisions = 9 mm",
+        "Least count = 0.1 mm",
+        "Jaws grip the sphere diameter",
+        "Depth rod at the far end"
+      ]
+    },
+    {
+      "caption": "Figure: Dimensional homogeneity as a balance of powers",
+      "description": "Two stacked panels comparing a valid equation (v = u + at) and an invalid one (v = u + a t²). Each term is boxed with its dimensional formula [LT⁻¹], [LT⁻¹] and [LT⁻²·T]; the valid panel shows all three equal with a tick, the invalid panel shows [LT⁻²·T²] = [LT⁰] mismatched against [LT⁻¹] with a cross.",
+      "labels": [
+        "Every term boxed with dimensions",
+        "Valid: all terms share [LT⁻¹]",
+        "Invalid: one term breaks the pattern",
+        "You cannot add unlike dimensions",
+        "The check needs no numbers at all"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A physical quantity is meaningless without its unit.",
+    "SI fixes seven base units; every other unit is built from them.",
+    "Derived units like the newton and pascal are products of base units.",
+    "Convert to SI before substituting and keep units on every line.",
+    "Significant figures carry the measuring instrument’s resolution.",
+    "Products keep least-precise figure counts; sums keep least-precise decimal places.",
+    "Uncertainties add for sums and differences; fractional uncertainties add for products.",
+    "Dimensional homogeneity: every term of a valid equation shares its dimensions.",
+    "Dimensional analysis checks, converts units and derives proportionality — but never finds dimensionless constants such as 2π.",
+    "Verify every answer by its units, its magnitude and its precision."
+  ],
+  "examFocus": [
+    "Show the dimensional formula of every symbol before using a relation.",
+    "State which significant-figure rule you applied and why.",
+    "Quote uncertainties to one figure and match the answer’s precision to it.",
+    "Estimation questions need a stated assumption, not a memorised number."
+  ],
+  "vocabulary": [
+    {
+      "word": "Base quantity",
+      "meaning": "A quantity defined independently, such as length or time."
+    },
+    {
+      "word": "Derived unit",
+      "meaning": "A unit built by multiplying and dividing base units, like the newton."
+    },
+    {
+      "word": "Significant figures",
+      "meaning": "The digits carrying measured information, including justified zeros."
+    },
+    {
+      "word": "Uncertainty",
+      "meaning": "The range within which the true value is expected to lie."
+    },
+    {
+      "word": "Dimensional formula",
+      "meaning": "The expression of a quantity as powers of base quantities."
+    },
+    {
+      "word": "Homogeneity",
+      "meaning": "The requirement that every term of an equation share the same dimensions."
+    },
+    {
+      "word": "Least count",
+      "meaning": "The smallest reading an instrument can resolve."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-units-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of force, the newton, corresponds to:",
+      "options": [
+        "g·cm·s⁻²",
+        "kg·m·s⁻²",
+        "kg·m²·s⁻²",
+        "kg·m⁻¹·s⁻²"
+      ],
+      "correctIndex": 1,
+      "answer": "kg·m·s⁻²",
+      "explanation": "From F = ma with mass in kg and acceleration in m·s⁻², force is kg·m·s⁻²; the third option is the joule and the fourth the pascal."
+    },
+    {
+      "id": "cbse11-phy-units-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of significant figures in 0.004 200 is:",
+      "options": [
+        "three",
+        "four",
+        "five",
+        "seven"
+      ],
+      "correctIndex": 1,
+      "answer": "four",
+      "explanation": "Leading zeros never count, but the trailing zeros after the decimal do: 4, 2, 0, 0 give four significant figures."
+    },
+    {
+      "id": "cbse11-phy-units-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The dimensional formula of the coefficient of viscosity is:",
+      "options": [
+        "[MLT⁻¹]",
+        "[ML⁻¹T⁻¹]",
+        "[ML²T⁻²]",
+        "[MT⁻²]"
+      ],
+      "correctIndex": 1,
+      "answer": "[ML⁻¹T⁻¹]",
+      "explanation": "From Stokes’ law F = 6πηrv, η = F/(6πrv), giving kg·m⁻¹·s⁻¹ — dimensions of mass per length per time."
+    },
+    {
+      "id": "cbse11-phy-units-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A dimensionless physical quantity is one whose dimensional formula contains:",
+      "options": [
+        "Only [T]",
+        "Only [L]",
+        "No powers of M, L or T",
+        "Equal powers of L and T"
+      ],
+      "correctIndex": 2,
+      "answer": "No powers of M, L or T",
+      "explanation": "A dimensionless quantity — strain, refractive index, solid angle — has every base exponent equal to zero, so it carries no unit at all."
+    },
+    {
+      "id": "cbse11-phy-units-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI base unit of thermodynamic temperature is the ________ .",
+      "answer": "kelvin",
+      "explanation": "One of the seven base units; Celsius and Fahrenheit are permitted scales, not SI base units."
+    },
+    {
+      "id": "cbse11-phy-units-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a product or quotient, the answer must carry as many significant figures as the ________ precise input.",
+      "answer": "least",
+      "explanation": "Relative precision is governed by the weakest measurement in the product."
+    },
+    {
+      "id": "cbse11-phy-units-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the rule of dimensional homogeneity and use it to check whether the equation s = ut + ½at² is dimensionally valid.",
+      "answer": "The rule states that in any physically valid equation every term must have the same dimensions, because quantities with different dimensions cannot be added or subtracted. Check each term of s = ut + ½at². The left side is displacement, [LT⁻¹] × [T] = ... more carefully: [s] = [L]. First term on the right: [u][t] = [LT⁻¹][T] = [L] ✓. Second term: ½ is dimensionless, [a][t²] = [LT⁻²][T²] = [L] ✓. Both terms and the left side carry [L], so the equation is dimensionally homogeneous and therefore not ruled out. Note what the check cannot do: the factor ½ is dimensionless, so dimensions cannot confirm it — that requires kinematics, not bookkeeping.",
+      "explanation": "The rule stated in full, all three terms’ dimensions computed separately, and the explicit note about the dimensionless factor."
+    },
+    {
+      "id": "cbse11-phy-units-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Using dimensional analysis, derive the relation between the period T of a simple pendulum, its length l and the acceleration due to gravity g.",
+      "answer": "Assume the period depends on length and gravity as a product of powers: T ∝ lᵃ gᵇ, where a and b are unknown exponents to be determined. Write the dimensions of each symbol: [T] = [T], [l] = [L], [g] = [LT⁻²]. Substituting: [T] = [L]ᵃ [LT⁻²]ᵇ = [Lᵃ⁺ᵇ][T⁻²ᵇ]. For the equation to be dimensionally homogeneous the powers of each base quantity must match on both sides. Matching powers of T: 1 = −2b, so b = −½. Matching powers of L: 0 = a + b, so a = −b = ½. Therefore T ∝ l^½ g^(−½) = √(l/g). The full physical result is T = 2π√(l/g); the factor 2π is dimensionless and cannot be found by this method, which is the technique’s documented limitation.",
+      "explanation": "The proportionality assumption, both exponents derived from matched powers, the final proportionality and the explicit note on the invisible constant."
+    },
+    {
+      "id": "cbse11-phy-units-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain the rules of significant figures for multiplication and for addition, then compute (2.1 × 10³ m) × (1.72 × 10⁻² m) and (3.64 m + 1.5 m), quoting each answer correctly.",
+      "answer": "Multiplication rule: when quantities are multiplied or divided, the answer is rounded to the same number of significant figures as the least precise factor — the rule protects relative precision, since each factor’s relative error contributes. Addition rule: when quantities are added or subtracted, the answer is rounded to the same number of decimal places as the least precise term — the rule protects absolute position on the number line. First computation: 2.1 × 10³ × 1.72 × 10⁻² = (2.1 × 1.72) × 10¹ = 3.612 × 10¹ = 36.12 m. The least precise factor, 2.1 × 10³, has two significant figures, so the answer rounds to 36 m (3.6 × 10¹ m). Second computation: 3.64 + 1.5 = 5.14 m; the least precise term, 1.5 m, is given to one decimal place, so the answer rounds to 5.1 m. Verification of both: 36 m lies between the bounds 2.05×10³ × 1.65×10⁻² = 33.8 m and 2.15×10³ × 1.77×10⁻² = 38.1 m, consistent with the rounding; and 5.1 lies one rounding step from 5.14, matching the 0.1 m precision of the weakest input.",
+      "explanation": "Both rules stated with their reasons, both computations carried out with correct rounding, and bounds showing the quoted figures are justified."
+    },
+    {
+      "id": "cbse11-phy-units-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A resistance is measured as R = (100 ± 5) Ω and a current as I = (10.0 ± 0.2) A. Find the voltage V = IR with its uncertainty, and explain how the relative uncertainties of the inputs combine into the answer.",
+      "answer": "V = IR = 100 × 10.0 = 1000 V as the central value. For the uncertainty, note that V is a product, so relative (fractional) uncertainties combine: ΔV/V = ΔR/R + ΔI/I. The resistance contributes 5/100 = 0.05 and the current contributes 0.2/10.0 = 0.02, giving ΔV/V = 0.07. Hence ΔV = 0.07 × 1000 = 70 V, and the result is V = (1000 ± 70) V — quoted to the tens place, matching the uncertainty’s first significant figure, which is the reporting rule for uncertainties. Why relative uncertainties: in a product, a 5% error in either factor produces a 5% error in the product regardless of the factors’ magnitudes, so the fractional contributions add rather than the absolute ones — this is also why the current, though its absolute uncertainty (0.2) looks tiny, still contributes its full 2% share. Compare with addition for contrast: had we been computing V = R₁ + R₂ with the same data, the absolute uncertainties would have added instead (5 + 0.2), producing a completely different error budget — the operation, not the numbers, decides the rule. Sanity check on the size: the total 7% sits between the two input shares (2% and 5%), as a sum of two positive contributions must, and doubling neither input’s share suggests no arithmetic slip in the combination.",
+      "explanation": "The central value, the relative-uncertainty combination with both shares shown, the final uncertainty with correctly quoted precision, and the contrast with the additive rule."
+    }
+  ]
+}

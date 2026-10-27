@@ -1,0 +1,616 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-rotational",
+  "title": "System of Particles and Rotational Motion",
+  "kind": "physics",
+  "tagline": "Centre of mass, torque and angular momentum, moment of inertia, and the physics of rolling.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Rotational dynamics repeats the whole of linear mechanics with new names, and the exam rewards the candidate who sees the parallel rather than memorising a second set of laws: force becomes torque, mass becomes moment of inertia, velocity becomes angular velocity and momentum becomes angular momentum. This chapter builds the centre of mass, states the conditions of equilibrium, derives the rotational analogues of Newton’s laws, develops moment of inertia with the parallel and perpendicular axis theorems, proves the conservation of angular momentum and applies it to the classic demonstrations — the spinning skater, the falling cat and the gyroscope — and closes with rolling motion, where the condition of pure rolling links the two halves of mechanics.",
+    "facts": [
+      {
+        "label": "Centre of mass",
+        "value": "The point that moves as if all the mass were concentrated there and all external forces acted there; for two bodies, x = (m₁x₁ + m₂x₂)/(m₁ + m₂)."
+      },
+      {
+        "label": "Torque",
+        "value": "τ = r × F = I α, the rotational analogue of F = ma, measured in newton metres."
+      },
+      {
+        "label": "Angular momentum",
+        "value": "L = Iω, conserved when no external torque acts, as it is for a spinning skater who changes shape."
+      },
+      {
+        "label": "Rolling",
+        "value": "Pure rolling requires v = ωR, and the kinetic energy of a rolling body splits into translational and rotational parts."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Locate the centre of mass of a system and state how it moves under external force.",
+    "State the conditions of equilibrium for concurrent and for rigid bodies.",
+    "Apply torque, moment of inertia and the rotational form of Newton’s second law.",
+    "Use the parallel and perpendicular axis theorems to find moments of inertia of standard bodies.",
+    "Apply conservation of angular momentum and analyse translational, rotational and combined motion of a rolling body."
+  ],
+  "learn": [
+    {
+      "id": "centre-equilibrium",
+      "title": "Centre of mass and the conditions of equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The centre of mass of a system is the point that behaves as though the whole mass were collected there and the resultant external force acted there, and for a two-body system it lies on the line joining them at a point that divides the separation in the inverse ratio of the masses — which is why the Earth and the Moon orbit a point inside the Earth’s body rather than about the Earth itself. The acceleration of the centre of mass is fixed by the external forces alone, F = M a, and internal forces, however violent, cannot move it; that is why a bomb’s fragments follow parabolae whose centre of mass continues on the original trajectory, and why a falling cat can turn in mid-air with zero angular momentum to begin with by redistributing its parts. Equilibrium has two conditions. For a body acted on by concurrent forces the vector sum of the forces must vanish; for a rigid body the sums of the forces and of the torques about any point must both vanish, since a vanishing force sum still allows a couple to produce rotation. Stable equilibrium is identified by the second derivative of the potential energy being positive, with a displaced body returning to its position, while a maximum of potential energy marks unstable equilibrium and a flat region marks neutral."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Centre of mass: the point where the mass may be concentrated for translational motion, given by the weighted mean of positions.",
+            "Internal forces cannot accelerate the centre of mass; only the resultant external force can.",
+            "A system’s centre of mass follows the parabola it would follow if all forces acted at that one point.",
+            "Equilibrium of concurrent forces: the vector sum of all forces is zero.",
+            "Equilibrium of a rigid body: sum of forces zero and sum of torques about any point zero.",
+            "Stable equilibrium: potential energy minimum; unstable: maximum; neutral: constant."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Two conditions, two kinds of motion",
+          "columns": [
+            "Condition",
+            "What it prevents",
+            "Applies to"
+          ],
+          "rows": [
+            [
+              "Σ F = 0",
+              "acceleration of the centre of mass",
+              "any body"
+            ],
+            [
+              "Σ τ = 0 about any point",
+              "angular acceleration",
+              "rigid bodies"
+            ],
+            [
+              "Both together",
+              "either kind of acceleration",
+              "static equilibrium"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two ice skaters pushing off",
+              "note": "The skaters move in opposite directions so that the centre of mass of the pair stays where it was — no external force acted."
+            },
+            {
+              "text": "A leaning ladder",
+              "note": "A ladder against a wall is in equilibrium only while the torques about the foot balance; add a slight lean past the limit and the torque sum changes sign."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Centre of mass",
+              "meaning": "The point whose motion is governed by the external forces of the system alone."
+            },
+            {
+              "term": "Torque",
+              "meaning": "The turning effect of a force, r multiplied by the perpendicular component of F, measured in N m."
+            },
+            {
+              "term": "Couple",
+              "meaning": "Two equal and opposite forces whose lines of action do not coincide, producing rotation with no resultant force."
+            },
+            {
+              "term": "Equilibrium",
+              "meaning": "Zero resultant force and zero resultant torque, so neither linear nor angular acceleration exists."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rotation-laws",
+      "title": "Torque, angular momentum and the rotational laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Torque measures the turning effect of a force and equals the force multiplied by the perpendicular distance from the axis to its line of action; it is a vector along the axis by the right-hand rule, and its unit is the newton metre. The rotational form of the second law is that the resultant torque equals the moment of inertia multiplied by the angular acceleration, which reduces to F = m a when all the mass sits at one radius. Angular momentum is L = Iω, the analogue of linear momentum, and it obeys its own conservation law: when the resultant external torque vanishes, L stays constant, which is why a skater who pulls in the arms spins faster — the moment of inertia falls, so the angular velocity must rise to keep the product unchanged. The impulse form survives too: the angular impulse, torque multiplied by the time it acts, equals the change of angular momentum, which is the natural tool when a torque acts for a short interval such as a blow on a pivoted rod. Work has an analogue as well, since the work done by a torque is τθ, and the corresponding energy is the rotational kinetic energy ½ Iω², which appears alongside the translational term whenever a body both moves and spins."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Torque τ = r F sin θ = force × perpendicular arm, directed along the axis by the right-hand rule.",
+            "Rotational second law: τ = I α, the exact analogue of F = m a.",
+            "Angular momentum L = Iω, with the same conservation status as linear momentum under the matching condition.",
+            "Conservation of L: no external torque means Iω stays constant, so pulling in the arms speeds the spin up.",
+            "Angular impulse τ t equals the change of angular momentum, the tool for impulsive torques.",
+            "Work done by a torque is τθ and rotational kinetic energy is ½ Iω²."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Linear and rotational analogues",
+          "columns": [
+            "Linear",
+            "Rotational",
+            "Relation"
+          ],
+          "rows": [
+            [
+              "force",
+              "torque",
+              "τ = Iα"
+            ],
+            [
+              "mass",
+              "moment of inertia",
+              "I = Σ m r²"
+            ],
+            [
+              "momentum",
+              "angular momentum",
+              "L = Iω"
+            ],
+            [
+              "kinetic energy",
+              "rotational kinetic energy",
+              "½ Iω²"
+            ],
+            [
+              "impulse",
+              "angular impulse",
+              "τ t = ΔL"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The skater",
+              "note": "Pulling the arms in from 1 m to 0.4 m of effective radius can multiply the moment of inertia by six, so the spin rate rises sixfold to conserve angular momentum."
+            },
+            {
+              "text": "A door and its handle",
+              "note": "Pushing near the hinge gives a small torque because the lever arm is short, which is why handles are placed as far from the hinges as possible."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moment-of-inertia",
+      "title": "Moment of inertia, radius of gyration and the axis theorems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The moment of inertia I = Σ m r² is the rotational counterpart of mass, and its defining feature is that it depends not only on the mass but on how that mass is distributed relative to the chosen axis: the same ring has a different moment about a diameter from its moment about an axis through its centre perpendicular to the plane. Because the answer changes with the axis, two theorems save enormous labour. The parallel axis theorem states that the moment about any axis parallel to one through the centre of mass equals Iₐₜ plus M d², where d is the separation, and it is the fastest route to the moment of a disc about a tangent or of a rod about its end. The perpendicular axis theorem applies only to plane laminas and states that the moment about an axis perpendicular to the plane equals the sum of the moments about two perpendicular axes lying in the plane, which converts a difficult out-of-plane calculation into two familiar ones. The radius of gyration k is defined by I = M k², and it reports the effective distance from the axis at which the whole mass could be concentrated to give the same inertia, so a ring has k equal to its radius while a solid disc has k equal to R/√2."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Moment of inertia I = Σ m r², depending on mass distribution and on the chosen axis.",
+            "The axis must always be stated: the same body has different moments about different axes.",
+            "Parallel axis theorem: I = Iₐₜ + M d² for an axis parallel to one through the centre of mass.",
+            "Perpendicular axis theorem, plane bodies only: Iₖ = Iₓ + Iᵧ for three mutually perpendicular axes.",
+            "Radius of gyration k defined by I = M k², the equivalent distance at which the mass could be concentrated.",
+            "Standard results: ring MR², disc and solid cylinder MR²/2, rod ML²/12 about the centre and ML²/3 about the end, solid sphere 2MR²/5."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Moments of inertia worth memorising",
+          "columns": [
+            "Body",
+            "Axis",
+            "Moment"
+          ],
+          "rows": [
+            [
+              "Ring",
+              "through centre, perpendicular to plane",
+              "M R²"
+            ],
+            [
+              "Solid disc",
+              "through centre, perpendicular to plane",
+              "M R² / 2"
+            ],
+            [
+              "Rod",
+              "through centre, perpendicular to length",
+              "M L² / 12"
+            ],
+            [
+              "Rod",
+              "through one end",
+              "M L² / 3"
+            ],
+            [
+              "Solid sphere",
+              "any diameter",
+              "2 M R² / 5"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A disc about a tangent",
+              "note": "Using the parallel axis theorem, the moment about a tangent in the plane is MR²/2 + MR² = 3MR²/2, a result that would take calculus to obtain directly."
+            },
+            {
+              "text": "Why a flywheel is heavy at the rim",
+              "note": "Placing mass far from the axis raises I for a given mass, which is exactly what a flywheel needs in order to store rotational energy."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rolling",
+      "title": "Rolling motion and the condition for pure rolling",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Rolling without slipping is the combination of translation of the centre of mass with rotation about it, and it is constrained by one relation: the contact point must be instantaneously at rest, so v = ω R and a = α R. Under that condition the kinetic energy of the body splits neatly into the translational part ½ M v² and the rotational part ½ Iω², and for a body rolling down an incline only the component of weight along the slope does work, part of it going into translation and part into rotation — which is why every rolling body reaches the bottom more slowly than a sliding body without friction. The distribution of mass then decides the race: because a solid sphere has a smaller moment of inertia relative to its mass than a hollow cylinder, it converts a smaller share into rotation and wins, giving the familiar result that a solid sphere beats a hollow one and both beat a hoop of the same radius. Static friction acts at the contact point but does no work in pure rolling, since the point of application is instantaneously at rest — a subtlety that examiners ask for directly — and it is this force that provides the torque producing the angular acceleration in the first place."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Pure rolling means the contact point is instantaneously at rest, so v = ω R and a = α R.",
+            "Total kinetic energy when rolling = ½ M v² (translation) + ½ Iω² (rotation).",
+            "Down an incline, the acceleration is g sin θ divided by (1 + k²/R²), using the radius of gyration.",
+            "A body with mass concentrated at the rim converts the most energy into rotation and arrives last.",
+            "Static friction at the contact point provides the torque in pure rolling but does no work, since the point does not move.",
+            "If the required friction exceeds the limiting value, slipping begins and the motion is no longer pure rolling."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Race down an incline, same radius and mass",
+          "columns": [
+            "Body",
+            "Moment",
+            "Share going to rotation",
+            "Arrives"
+          ],
+          "rows": [
+            [
+              "Solid sphere",
+              "2MR²/5",
+              "smallest",
+              "first"
+            ],
+            [
+              "Solid disc or cylinder",
+              "MR²/2",
+              "middle",
+              "second"
+            ],
+            [
+              "Hollow sphere",
+              "2MR²/3",
+              "larger",
+              "third"
+            ],
+            [
+              "Hoop",
+              "MR²",
+              "largest",
+              "last"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A ball and a hoop",
+              "note": "Released together, the solid sphere reaches the foot first because less of its share of the work is tied up in spinning."
+            },
+            {
+              "text": "A wheel that does not slip",
+              "note": "A car tyre in pure rolling has a contact patch that is stationary at the instant it touches the road, which is the whole reason grip exists at all."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Pure rolling",
+              "meaning": "Motion in which the contact point is instantaneously at rest, so v = ωR."
+            },
+            {
+              "term": "Radius of gyration",
+              "meaning": "The distance at which the whole mass could be concentrated to give the same moment of inertia."
+            },
+            {
+              "term": "Flywheel",
+              "meaning": "A heavy wheel designed with mass at the rim to store rotational energy."
+            },
+            {
+              "term": "Precession",
+              "meaning": "The slow turning of the axis of a spinning body caused by an external torque, as in a gyroscope."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Conservation of angular momentum and the classic demonstrations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The conservation of angular momentum is the single most examined idea in this chapter, and it is always tested through a demonstration rather than a definition. A skater spins with arms outstretched and draws them in: no external torque about the vertical axis acts, so Iω remains constant, the moment of inertia falls and the angular velocity rises in the same proportion; the rotational kinetic energy increases, and the increase is paid for by the skater’s muscles doing work against the centrifugal tendency as the arms are pulled inward. A diver or gymnast tucks: the moment of inertia about the somersault axis falls, the rotation speeds up, and extending the body again slows it before landing — all with no external torque available. A falling cat uses internal redistribution to rotate from feet-up to feet-up-with-no-angular-momentum-beginning, which is possible because the conservation law constrains the total, not each part. The gyroscope adds the vector point: the spin angular momentum is large and directed along the axis, an applied torque then produces precession at right angles to both the torque and the spin rather than a topple, which is why a spinning bicycle wheel held by one axle refuses to fall."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "No external torque means Iω is constant, so reducing the moment of inertia increases the spin rate.",
+            "The skater’s rotational energy rises as the arms come in, paid for by muscular work.",
+            "A tucked diver rotates faster; extending the body slows the rotation before landing.",
+            "Internal rearrangement can change the shape of a body without changing the total angular momentum of the system.",
+            "A gyroscope’s spin angular momentum resists change of direction, and an applied torque causes precession instead of falling.",
+            "Angular impulse τ t equals ΔL, which handles short sharp torques such as a blow on a pivoted rod."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Opening the arms",
+              "note": "A skater whose moment of inertia falls from 4.0 to 1.6 kg m² sees the spin rate rise from 2 to 5 rad s⁻¹, keeping Iω at 8.0 kg m² s⁻¹ throughout."
+            },
+            {
+              "text": "The bicycle wheel",
+              "note": "Held at one end of its axle the wheel does not rotate downwards but instead precesses horizontally, because the angular momentum must change in the direction the torque dictates."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Torque about a pivot",
+      "description": "A rod pivoted at one end with a force applied at an angle, the perpendicular lever arm marked, and the turning sense of the resulting torque shown by a curved arrow about the pivot.",
+      "labels": [
+        "pivot at the end of the rod",
+        "force F applied at distance r",
+        "perpendicular arm r sin θ",
+        "torque τ = r F sin θ",
+        "direction given by the right-hand rule"
+      ]
+    },
+    {
+      "caption": "Figure: Energy split in pure rolling",
+      "description": "A rolling body on a slope with the centre-of-mass velocity arrow and a rotational arrow, and a bar beneath showing the translational and rotational shares of the total kinetic energy.",
+      "labels": [
+        "centre moves with v = ωR",
+        "rotation about the centre with ω",
+        "translational energy ½ M v²",
+        "rotational energy ½ Iω²",
+        "contact point instantaneously at rest"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The centre of mass moves under the resultant external force alone; internal forces cannot accelerate it.",
+    "Equilibrium of a rigid body needs both Σ F = 0 and Σ τ = 0 about any point.",
+    "Torque is force times perpendicular lever arm, and the rotational second law is τ = Iα.",
+    "Angular momentum L = Iω is conserved when no external torque acts.",
+    "Moment of inertia I = Σ m r² depends on mass distribution and on the axis chosen.",
+    "Parallel axis theorem: I = Iₐₜ + M d² for a parallel axis.",
+    "Perpendicular axis theorem for plane bodies: Iₖ = Iₓ + Iᵧ.",
+    "Ring MR², disc MR²/2, rod ML²/12 at the centre and ML²/3 at the end, solid sphere 2MR²/5.",
+    "Radius of gyration is defined by I = M k².",
+    "Pure rolling requires v = ωR, and the total kinetic energy splits into translational and rotational parts.",
+    "Static friction provides the torque in pure rolling but does no work at the contact point.",
+    "Mass concentrated at the rim converts most energy to rotation, so a hoop arrives last down an incline."
+  ],
+  "examFocus": [
+    "State the parallel and perpendicular axis theorems with their symbols; one of them is asked in most papers.",
+    "Conservation of angular momentum answers must name why no external torque acts before applying Iω = constant.",
+    "In equilibrium questions take torques about a point that eliminates an unknown force, usually a hinge.",
+    "Rolling answers must quote the condition v = ωR and the energy split before any substitution."
+  ],
+  "vocabulary": [
+    {
+      "word": "Centre of mass",
+      "meaning": "The point whose motion follows the external resultant of a system."
+    },
+    {
+      "word": "Torque",
+      "meaning": "The turning effect of a force, measured in newton metres."
+    },
+    {
+      "word": "Couple",
+      "meaning": "Equal opposite forces with offset lines of action producing pure rotation."
+    },
+    {
+      "word": "Moment of inertia",
+      "meaning": "The rotational analogue of mass, Σ m r² about the chosen axis."
+    },
+    {
+      "word": "Angular momentum",
+      "meaning": "Iω, conserved when no external torque acts."
+    },
+    {
+      "word": "Radius of gyration",
+      "meaning": "Distance k with I = M k², the equivalent concentration radius."
+    },
+    {
+      "word": "Pure rolling",
+      "meaning": "Rolling without slipping, so the contact point is instantaneously at rest."
+    },
+    {
+      "word": "Precession",
+      "meaning": "The slow sweep of a spinning body’s axis under an applied torque."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-rot-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The moment of inertia of a uniform disc about an axis through its centre and perpendicular to its plane is:",
+      "options": [
+        "M R²",
+        "M R²/2",
+        "2M R²/5",
+        "M R²/3"
+      ],
+      "correctIndex": 1,
+      "answer": "M R²/2",
+      "explanation": "A disc of the same mass and radius as a ring has much of its mass inside the rim rather than all at it, which reduces the ring’s MR² to MR²/2."
+    },
+    {
+      "id": "isc11-phy-rot-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A skater pulls in her arms and spins faster because:",
+      "options": [
+        "Torque increases",
+        "Angular momentum is conserved and the moment of inertia falls",
+        "Linear momentum is conserved",
+        "Friction does work"
+      ],
+      "correctIndex": 1,
+      "answer": "Angular momentum is conserved and the moment of inertia falls",
+      "explanation": "With no external torque, Iω stays constant, so a smaller I demands a larger ω."
+    },
+    {
+      "id": "isc11-phy-rot-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The condition for pure rolling without slipping is:",
+      "options": [
+        "v = ω R",
+        "v = ω/R",
+        "v = α R",
+        "a = v²/R"
+      ],
+      "correctIndex": 0,
+      "answer": "v = ω R",
+      "explanation": "The contact point must be instantaneously at rest, which ties the centre speed to the spin by v = ωR."
+    },
+    {
+      "id": "isc11-phy-rot-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A rod of mass M and length L has moment of inertia ML²/12 about its centre. About an axis through one end and parallel to it, the moment is:",
+      "options": [
+        "ML²/12",
+        "ML²/3",
+        "ML²/4",
+        "ML²/2"
+      ],
+      "correctIndex": 1,
+      "answer": "ML²/3",
+      "explanation": "By the parallel axis theorem add M(L/2)²: ML²/12 + ML²/4 = ML²/3."
+    },
+    {
+      "id": "isc11-phy-rot-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The turning effect of a force about a pivot is called __________.",
+      "answer": "torque",
+      "explanation": "It equals the force multiplied by the perpendicular distance from the pivot to the line of action."
+    },
+    {
+      "id": "isc11-phy-rot-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The moment of inertia of a uniform solid sphere about any diameter is __________ M R².",
+      "answer": "2/5",
+      "explanation": "Written as a fraction, the standard result is two fifths M R squared."
+    },
+    {
+      "id": "isc11-phy-rot-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the two conditions for a rigid body to be in equilibrium.",
+      "answer": "The first condition is that the vector sum of all the forces acting on the body must be zero, so that the centre of mass has no acceleration. The second is that the sum of the torques about any point chosen must also be zero, so that there is no angular acceleration. Both are required because the forces may sum to zero while still forming a couple that would rotate the body, and either condition may be satisfied without the other.",
+      "explanation": "Both conditions with the reason each is necessary."
+    },
+    {
+      "id": "isc11-phy-rot-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the parallel axis theorem and one use of it.",
+      "answer": "The parallel axis theorem states that the moment of inertia of a body about any axis parallel to an axis through the centre of mass is equal to the moment about the centre-of-mass axis plus the product of the mass of the body and the square of the distance between the two axes: I = Iₐₜ + M d². A typical use is finding the moment of a uniform disc about a tangent in its plane, where MR²/2 from the centre axis is increased by MR² to give 3MR²/2.",
+      "explanation": "Statement with symbols and one worked use on a standard body."
+    },
+    {
+      "id": "isc11-phy-rot-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the static friction acting at the point of contact of a rolling wheel do no work?",
+      "answer": "In pure rolling the point of the wheel in contact with the ground is instantaneously at rest, because the backward rotational velocity at that point exactly cancels the forward velocity of the centre of mass. Since work requires a displacement of the point of application in the direction of the force, and there is no displacement at that instant, the friction does no work even though it is the force that provides the torque producing the angular acceleration.",
+      "explanation": "Instantaneous rest of the contact point and therefore no displacement along the force."
+    },
+    {
+      "id": "isc11-phy-rot-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive the expression for the moment of inertia of a uniform circular disc about an axis through its centre perpendicular to its plane.",
+      "answer": "Divide the disc into concentric rings of radius r and thickness dr, and let σ be the mass per unit area, equal to M divided by πR². The area of a ring is 2πr dr, so its mass is 2πr σ dr, and every part of that ring lies at essentially the same distance r from the axis, so its moment of inertia is r² times its mass, that is 2πσ r³ dr. Integrating from r = 0 to r = R gives πσ R´/2, and substituting σ = M/πR² gives MR²/2. The result shows that a disc has half the inertia of a ring of the same mass and radius, because much of its mass lies closer to the axis than the rim, and the same calculation with the mass distributed throughout a cylinder gives the identical result for its rotation about the symmetry axis.",
+      "explanation": "Ring division, mass of the ring, integration limits, substitution of the surface density and the comparison with the ring."
+    },
+    {
+      "id": "isc11-phy-rot-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solid cylinder and a hollow cylinder of the same mass and radius race down an identical incline from rest. Analyse which reaches the bottom first and why.",
+      "answer": "Both start with the same gravitational potential energy at the top, and that energy divides between translational and rotational kinetic energy in a ratio set by the moment of inertia. For pure rolling the constraint v = ωR converts the rotational term ½ Iω² into ½ (I/R²) v², so the total kinetic energy becomes ½ M v² (1 + k²/R²) where k is the radius of gyration. The solid cylinder has I = MR²/2, giving a factor of 1.5, while the hollow cylinder has I = MR², giving a factor of 2. The solid cylinder therefore needs less speed to carry the same share of energy, so for equal energy converted it attains a higher speed and arrives first. Equivalently the acceleration down the slope is g sin θ divided by (1 + k²/R²), which is 2g sin θ/3 for the solid cylinder and g sin θ/2 for the hollow one. Both race without slipping provided the friction is static and sufficient; if the surfaces were frictionless neither would rotate at all and both would slide down together.",
+      "explanation": "Energy split with the rolling constraint, the factor for each cylinder, the acceleration comparison and the friction condition."
+    },
+    {
+      "id": "isc11-phy-rot-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A playground roundabout can be modelled as a disc of mass 100 kg and radius 1.5 m, spinning at 0.5 rad s⁻¹. Find its rotational kinetic energy and the angular momentum, and comment.",
+      "answer": "The moment of inertia of a disc about its axis is MR²/2, which is 100 × 1.5² / 2 = 112.5 kg m². The rotational kinetic energy is ½ Iω² = ½ × 112.5 × 0.25 = 14.1 J, and the angular momentum is Iω = 112.5 × 0.5 = 56.25 kg m² s⁻¹. The energy is modest despite the large mass because the disc’s mass lies close to the axis relative to its rim, and had the same mass been concentrated at the rim the energy would have doubled. The angular momentum figure is what matters when a child jumps on: with no external torque the product Iω must stay at 56.25, so increasing I by adding the child’s mass at the rim slows the rotation in exact proportion.",
+      "explanation": "Moment of inertia, both energy and momentum figures, and the conservation consequence for adding mass."
+    }
+  ]
+}

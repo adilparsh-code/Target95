@@ -1,0 +1,540 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-carbonyl",
+  "title": "Aldehydes, Ketones and Carboxylic Acids",
+  "kind": "chemistry",
+  "tagline": "The carbonyl group: nucleophilic addition, the tests that separate aldehydes from ketones, and the acidity of the carboxyl group.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "The carbonyl group is a carbon double-bonded to oxygen, and everything about this chapter follows from the polarity of that bond: carbon carries a partial positive charge and attracts nucleophiles, so the dominant reaction of the family is nucleophilic addition. An aldehyde carries the group at the end of a chain and is easily oxidised; a ketone carries it in the middle and resists oxidation, and that single difference is what the Tollens and Fehling tests exploit. Carboxylic acids take the oxidation state to its limit, and the released proton makes them the acidic family of organic chemistry. The chapter builds the preparation and reactions of each class, the named reactions — aldol condensation, Cannizzaro, Clemmensen and Wolff–Kishner reduction — and the chemical tests the practical examination expects you to perform and interpret.",
+    "facts": [
+      {
+        "label": "Carbonyl group",
+        "value": "C=O with an electronegative oxygen, giving a polar bond that nucleophiles attack."
+      },
+      {
+        "label": "Aldehyde vs ketone",
+        "value": "Aldehydes oxidise with Tollens and Fehling reagents; ketones do not."
+      },
+      {
+        "label": "Carboxylic acids",
+        "value": "Acidity from the stabilised carboxylate ion; stronger than carbonic acid."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Preparation, named reactions and distinguishing tests recur every year."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe the structure of the carbonyl group and name aldehydes, ketones and carboxylic acids by IUPAC rules.",
+    "Prepare aldehydes and ketones by named methods and explain why partial oxidation stops the aldehyde at the aldehyde stage.",
+    "Explain nucleophilic addition and the reactions that follow it, including aldol condensation and the Cannizzaro reaction.",
+    "Distinguish aldehydes from ketones using Tollens’ reagent, Fehling’s solution and the iodoform test.",
+    "Prepare carboxylic acids and account for their acidity, including the effect of substituents on acid strength."
+  ],
+  "learn": [
+    {
+      "id": "carbonyl-structure",
+      "title": "The carbonyl group: structure, nomenclature and preparation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The carbonyl group consists of a carbon atom double-bonded to an oxygen atom, with the carbon also bonded to two other atoms. Because oxygen is far more electronegative than carbon, the pi electrons are drawn towards oxygen, leaving the carbon electron-deficient and open to attack by nucleophiles; simultaneously the oxygen carries lone pairs that can accept a proton, so the group is both electrophilic at carbon and basic at oxygen. Aldehydes have at least one hydrogen on the carbonyl carbon and are named by dropping the -e of the parent alkane and adding -al; ketones have two carbon groups and take the suffix -one, with the position of the carbonyl numbered from the end that gives it the lower locant. Preparation of carbonyl compounds follows three main routes: partial oxidation of primary alcohols and of primary alcohols with copper at moderate temperature, dehydrogenation, and Friedel–Crafts acylation for aromatic ketones. Aldehydes cannot be prepared by oxidising a secondary alcohol, and further oxidation of an aldehyde gives the carboxylic acid, so the choice of reagent and conditions decides whether the aldehyde survives."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The C=O bond is polar: carbon carries a partial positive charge and oxygen a partial negative charge.",
+            "Aldehydes: RCHO, named with the suffix -al; the carbonyl carbon is always carbon 1.",
+            "Ketones: RCOR′, named with the suffix -one and the lowest possible locant for the carbonyl.",
+            "Partial oxidation of a primary alcohol with PCC or with copper at 573 K stops at the aldehyde.",
+            "Friedel–Crafts acylation of benzene with an acyl chloride and AlCl3 gives acetophenone.",
+            "Both families are liquids at room temperature below about five carbons and can hydrogen bond to water but not to themselves."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ethanol oxidised with copper at 573 K",
+              "note": "Dehydrogenation gives ethanal rather than ethanoic acid because the copper catalyst removes hydrogen without a further oxidant."
+            },
+            {
+              "text": "Benzene with CH3COCl and AlCl3",
+              "note": "Friedel–Crafts acylation gives acetophenone directly, with no rearrangement possible."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Naming carbonyl compounds",
+          "columns": [
+            "Compound",
+            "Class",
+            "IUPAC name",
+            "Feature"
+          ],
+          "rows": [
+            [
+              "CH3CHO",
+              "aldehyde",
+              "ethanal",
+              "carbonyl at the chain end"
+            ],
+            [
+              "CH3COCH3",
+              "ketone",
+              "propanone",
+              "carbonyl between two carbons"
+            ],
+            [
+              "C6H5CHO",
+              "aromatic aldehyde",
+              "benzaldehyde",
+              "aldehyde attached to the ring"
+            ],
+            [
+              "CH3CH2COCH3",
+              "ketone",
+              "butan-2-one",
+              "locant gives the lower number"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nucleophilic-addition",
+      "title": "Reactions of the carbonyl group: nucleophilic addition and its variants",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Because the carbonyl carbon is electrophilic, the family’s characteristic reaction is nucleophilic addition: a nucleophile donates a pair of electrons to the carbon, the pi bond breaks, and the oxygen takes the negative charge that is then neutralised by a proton. Hydrogen cyanide adds to give cyanohydrins, sodium bisulphite adds to give crystalline addition products useful for purification, Grignard reagents add to give alcohols after hydrolysis, and alcohols add under acid catalysis to give hemiacetals and acetals — the acetal protecting group. Ketones are less reactive than aldehydes because the two alkyl groups release electrons towards the carbonyl carbon, reducing its positive character, and because they crowd the approach of the nucleophile. When an aldehyde with an alpha hydrogen is treated with dilute alkali, the enolate formed at the alpha carbon attacks a second carbonyl molecule in the aldol condensation, giving a beta-hydroxy aldehyde that dehydrates on heating to an alpha,beta-unsaturated aldehyde. An aldehyde lacking alpha hydrogens, such as benzaldehyde, cannot form an enolate and instead disproportionates with concentrated alkali in the Cannizzaro reaction, one molecule being oxidised to acid and the other reduced to the alcohol."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Nucleophilic addition: Nu attacks the carbonyl carbon, the pi bond opens, oxygen is protonated on work-up.",
+            "HCN gives cyanohydrins; the reaction is base-catalysed because CN- is the attacking nucleophile.",
+            "Grignard reagent followed by hydrolysis converts C=O into a C–OH with a new carbon chain.",
+            "Aldol condensation needs an alpha hydrogen; heating the aldol gives an alpha,beta-unsaturated carbonyl.",
+            "Cannizzaro reaction: concentrated alkali with an aldehyde having no alpha hydrogens gives an acid salt and an alcohol.",
+            "Ketones are less reactive than aldehydes because alkyl groups release electrons and hinder attack."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ethanal with dilute sodium hydroxide",
+              "note": "Aldol gives 3-hydroxybutanal, which dehydrates on heating to but-2-enal."
+            },
+            {
+              "text": "Benzaldehyde with 50% NaOH",
+              "note": "Cannizzaro gives sodium benzoate and benzyl alcohol because no alpha hydrogen is present."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reagents that add to the carbonyl group",
+          "columns": [
+            "Reagent",
+            "Intermediate product",
+            "After work-up",
+            "Use"
+          ],
+          "rows": [
+            [
+              "HCN",
+              "cyanohydrin",
+              "alpha-hydroxy nitrile",
+              "extends the carbon chain"
+            ],
+            [
+              "NaHSO3",
+              "bisulphite adduct",
+              "crystalline solid",
+              "purification of aldehydes"
+            ],
+            [
+              "RMgX",
+              "alkoxide",
+              "secondary or tertiary alcohol",
+              "builds carbon skeletons"
+            ],
+            [
+              "ROH, H+",
+              "hemiacetal then acetal",
+              "stable acetal",
+              "protecting group for C=O"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tests-and-reduction",
+      "title": "Oxidation, reduction and the tests that separate aldehydes from ketones",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The single most examinable difference between the two families is that an aldehyde is easily oxidised while a ketone resists oxidation, and three reagents turn this into a laboratory test. Tollens’ reagent, ammoniacal silver nitrate, oxidises the aldehyde and reduces silver ion to metallic silver, which coats the test tube as a bright mirror — the silver-mirror test. Fehling’s solution, an alkaline tartrato-cuprate(II), oxidises an aliphatic aldehyde and gives a red precipitate of copper(I) oxide, while a ketone and even an aromatic aldehyde such as benzaldehyde give no reaction. Potassium permanganate and acidified dichromate oxidise both families but under forcing conditions, and ketones are attacked only vigorously, giving a mixture of smaller carboxylic acids with cleavage on both sides of the carbonyl. Reduction is the reverse move: sodium borohydride or lithium aluminium hydride reduces both classes to alcohols, while the Clemmensen reduction with zinc amalgam and hydrochloric acid and the Wolff–Kishner reduction with hydrazine and alkali convert the carbonyl all the way to a methylene group, removing the oxygen entirely."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Tollens’ reagent: a silver mirror forms with an aldehyde; ketones give no reaction.",
+            "Fehling’s solution: red precipitate of Cu2O with aliphatic aldehydes only.",
+            "Both reagents oxidise the aldehyde to the carboxylate ion in the alkaline medium.",
+            "NaBH4 and LiAlH4 reduce aldehydes to primary alcohols and ketones to secondary alcohols.",
+            "Clemmensen reduction (Zn-Hg, HCl) and Wolff–Kishner (NH2NH2, KOH) give the methylene group.",
+            "Oxidative cleavage of ketones with hot KMnO4 gives mixtures of acids, so ketones are not prepared by oxidation."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ethanal with Tollens’ reagent",
+              "note": "A silver mirror deposits on the walls, confirming the aldehyde group."
+            },
+            {
+              "text": "Propanone with Fehling’s solution",
+              "note": "The blue solution stays blue on boiling; a ketone gives no precipitate."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Silver-mirror test",
+              "meaning": "Tollens’ reagent reducing to metallic silver with an aldehyde."
+            },
+            {
+              "term": "Cyanohydrin",
+              "meaning": "Adduct of HCN across C=O bearing both –OH and –CN on the same carbon."
+            },
+            {
+              "term": "Aldol",
+              "meaning": "Beta-hydroxy aldehyde or ketone formed by self-addition of an enolate."
+            },
+            {
+              "term": "Cannizzaro reaction",
+              "meaning": "Disproportionation of a non-enolisable aldehyde with concentrated alkali."
+            },
+            {
+              "term": "Clemmensen reduction",
+              "meaning": "Conversion of C=O to CH2 using zinc amalgam and hydrochloric acid."
+            },
+            {
+              "term": "Hemiacetal",
+              "meaning": "Intermediate with –OH and –OR on the same carbon, formed by alcohol addition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carboxylic-acids",
+      "title": "Carboxylic acids: preparation, acidity and reactions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Carboxylic acids contain the carboxyl group, a carbonyl bonded to a hydroxyl, and they are the strongest common organic acids because the released proton gives a carboxylate ion whose negative charge is shared equally by the two oxygens through resonance. They are prepared by oxidising primary alcohols and aldehydes with acidified dichromate or permanganate, by hydrolysing nitriles — which itself extends the chain by one carbon — and by hydrolysing esters with acid or alkali. Their reactions follow from the two functional parts: the OH group is replaced by chlorine, bromine or an amine-derived group using phosphorus pentachloride, thionyl chloride or ammonia, while the acid as a whole reacts with alcohols under acid catalysis to give esters in the reversible Fischer esterification. Heating the acid with soda lime decarboxylates it, losing carbon dioxide and giving the alkane. Acidity is strengthened by electron-withdrawing substituents, which spread the carboxylate charge, and weakened by electron-releasing groups, which concentrate it; this is why chloroacetic acid is a stronger acid than acetic acid."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Preparation: oxidation of primary alcohols or aldehydes; hydrolysis of nitriles; hydrolysis of esters.",
+            "Acidity: the carboxylate ion delocalises its charge over two equivalent oxygens.",
+            "With PCl5, PCl3 or SOCl2 the –OH is replaced by chlorine, giving acyl chlorides.",
+            "With ammonia the acid gives the ammonium salt, which loses water on heating to the amide.",
+            "Fischer estification: acid plus alcohol with concentrated sulphuric acid gives an ester and water.",
+            "Soda-lime decarboxylation: RCOONa + NaOH with CaO and heat gives RH and sodium carbonate."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ethanoic acid with thionyl chloride",
+              "note": "Ethanoyl chloride forms with SO2 and HCl escaping, so the product is easy to isolate."
+            },
+            {
+              "text": "Ethanoic acid with soda lime",
+              "note": "Heating the sodium salt with NaOH and CaO gives methane, shortening the chain by one carbon."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Effect of substituents on acid strength",
+          "columns": [
+            "Acid",
+            "Substituent effect",
+            "Relative strength",
+            "Reason"
+          ],
+          "rows": [
+            [
+              "chloroacetic acid",
+              "electron-withdrawing Cl",
+              "stronger than ethanoic",
+              "charge spread over the carboxylate"
+            ],
+            [
+              "ethanoic acid",
+              "electron-releasing CH3",
+              "reference acid",
+              "methyl concentrates the charge"
+            ],
+            [
+              "methanoic acid",
+              "no alkyl group",
+              "stronger than ethanoic",
+              "less electron release towards COO-"
+            ],
+            [
+              "trichloroethanoic acid",
+              "three chlorine atoms",
+              "much stronger",
+              "strong inductive withdrawal"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Nucleophilic addition to the carbonyl group",
+      "description": "The carbonyl drawn with its polarised bond, a nucleophile approaching the carbon along the Burgi–Dunitz angle, the pi bond opening onto oxygen, and the protonated alkoxide that results after work-up.",
+      "labels": [
+        "partial positive charge on carbon",
+        "nucleophile attacks the carbon",
+        "pi electrons move to oxygen",
+        "alkoxide intermediate",
+        "work-up protonates the oxygen"
+      ]
+    },
+    {
+      "caption": "Figure: Tollens’ silver-mirror test for the aldehyde group",
+      "description": "A clean test tube with ammoniacal silver nitrate before heating, and the same tube after heating showing a bright silver coating on the inner wall, with the aldehyde oxidised to carboxylate.",
+      "labels": [
+        "Tollens’ reagent: Ag(NH3)2+",
+        "aldehyde reduces Ag+ to metallic silver",
+        "silver deposits as a mirror",
+        "aldehyde is oxidised to carboxylate",
+        "ketone leaves the reagent unchanged"
+      ]
+    },
+    {
+      "caption": "Figure: Resonance stabilisation of the carboxylate ion",
+      "description": "Two equivalent resonance structures of the carboxylate ion with the negative charge shared between the two oxygen atoms, and the hybrid drawn with partial bonds showing equal C–O bond lengths.",
+      "labels": [
+        "negative charge shared by two oxygens",
+        "two equivalent contributors",
+        "C–O bond lengths equalise",
+        "delocalisation stabilises the anion",
+        "explains acidity of carboxylic acids"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The carbonyl bond is polar, so nucleophiles attack the carbon in the family’s characteristic addition reaction.",
+    "Aldehydes are named -al and ketones -one, with the carbonyl given the lowest possible locant.",
+    "Partial oxidation of a primary alcohol with PCC or copper at 573 K stops at the aldehyde.",
+    "Aldol condensation needs an alpha hydrogen and gives a beta-hydroxy carbonyl that dehydrates on heating.",
+    "Cannizzaro disproportionation happens only with aldehydes that carry no alpha hydrogen.",
+    "Tollens’ reagent gives a silver mirror and Fehling’s solution a red precipitate with aldehydes only.",
+    "Clemmensen and Wolff–Kishner reductions convert the carbonyl group entirely to a methylene group.",
+    "Carboxylic acids are acidic because the carboxylate charge is delocalised over two oxygens.",
+    "Thionyl chloride converts the acid to an acyl chloride; soda lime decarboxylates it to the alkane.",
+    "Electron-withdrawing substituents strengthen the acid; electron-releasing groups weaken it."
+  ],
+  "examFocus": [
+    "Distinguishing questions want reagent, observation and conclusion for Tollens and Fehling — write all three.",
+    "Aldol answers must show the enolate attacking the second molecule, not just name the product.",
+    "Give the conditions in reduction questions: Clemmensen is acidic, Wolff–Kishner is alkaline.",
+    "Acidity comparisons must invoke the stability of the carboxylate ion, not the word electronegativity alone."
+  ],
+  "vocabulary": [
+    {
+      "word": "Carbonyl group",
+      "meaning": "The C=O group in which carbon is electrophilic because oxygen withdraws electrons."
+    },
+    {
+      "word": "Nucleophilic addition",
+      "meaning": "Addition in which a nucleophile attacks the carbonyl carbon and the pi bond opens."
+    },
+    {
+      "word": "Cyanohydrin",
+      "meaning": "Product of HCN addition carrying both –OH and –CN on the former carbonyl carbon."
+    },
+    {
+      "word": "Aldol condensation",
+      "meaning": "Base-mediated self-addition of an enolisable carbonyl giving a beta-hydroxy carbonyl."
+    },
+    {
+      "word": "Cannizzaro reaction",
+      "meaning": "Disproportionation of a non-enolisable aldehyde to an acid and an alcohol."
+    },
+    {
+      "word": "Tollens’ reagent",
+      "meaning": "Ammoniacal silver nitrate that gives a silver mirror with aldehydes."
+    },
+    {
+      "word": "Fehling’s solution",
+      "meaning": "Alkaline copper(II) tartrate giving a red Cu2O precipitate with aliphatic aldehydes."
+    },
+    {
+      "word": "Carboxyl group",
+      "meaning": "–COOH, the acidic functional group of the carboxylic acids."
+    },
+    {
+      "word": "Fischer esterification",
+      "meaning": "Reversible acid-catalysed reaction of a carboxylic acid with an alcohol."
+    },
+    {
+      "word": "Decarboxylation",
+      "meaning": "Loss of carbon dioxide from a carboxylate on heating with soda lime."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-chem-carbonyl-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which reagent gives a silver mirror with an aldehyde but no reaction with a ketone?",
+      "options": [
+        "Fehling’s solution",
+        "Tollens’ reagent",
+        "Sodium bisulphite",
+        "Bromine water"
+      ],
+      "correctIndex": 1,
+      "answer": "Tollens’ reagent",
+      "explanation": "Tollens’ reagent oxidises the aldehyde and reduces silver ion to a bright metallic mirror; ketones cannot be oxidised by it."
+    },
+    {
+      "id": "isc11-chem-carbonyl-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Aldol condensation of ethanal followed by heating gives:",
+      "options": [
+        "Butanoic acid",
+        "Butan-2-ol",
+        "But-2-enal",
+        "Butanal"
+      ],
+      "correctIndex": 2,
+      "answer": "But-2-enal",
+      "explanation": "The aldol 3-hydroxybutanal dehydrates on heating to the conjugated alpha,beta-unsaturated aldehyde but-2-enal."
+    },
+    {
+      "id": "isc11-chem-carbonyl-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The Cannizzaro reaction is shown by:",
+      "options": [
+        "Propanal",
+        "Propanone",
+        "Benzaldehyde",
+        "Butanal"
+      ],
+      "correctIndex": 2,
+      "answer": "Benzaldehyde",
+      "explanation": "Benzaldehyde has no alpha hydrogen, so it cannot form an enolate and disproportionates in concentrated alkali."
+    },
+    {
+      "id": "isc11-chem-carbonyl-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Chloroacetic acid is a stronger acid than ethanoic acid because the chlorine atom:",
+      "options": [
+        "Donates electrons towards the carboxylate",
+        "Withdraws electrons inductively, spreading the carboxylate charge",
+        "Forms a hydrogen bond with the hydroxyl group",
+        "Increases the size of the conjugate base"
+      ],
+      "correctIndex": 1,
+      "answer": "Withdraws electrons inductively, spreading the carboxylate charge",
+      "explanation": "The electron-withdrawing chlorine disperses the negative charge of the carboxylate through the inductive effect, stabilising the anion."
+    },
+    {
+      "id": "isc11-chem-carbonyl-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The bright metallic coating formed when an aldehyde reduces Tollens’ reagent is called the silver __________ .",
+      "answer": "mirror",
+      "explanation": "Silver ion is reduced to metallic silver, which deposits on the walls of the test tube."
+    },
+    {
+      "id": "isc11-chem-carbonyl-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The conversion of a carbonyl group directly to a methylene group using zinc amalgam and hydrochloric acid is called the __________ reduction.",
+      "answer": "Clemmensen",
+      "explanation": "The Clemmensen reduction uses Zn-Hg and concentrated HCl; the Wolff–Kishner reduction achieves the same with hydrazine and alkali."
+    },
+    {
+      "id": "isc11-chem-carbonyl-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why Fehling’s solution gives a red precipitate with ethanal but no reaction with acetone.",
+      "answer": "Fehling’s reagent is an alkaline copper(II) tartrate complex that oxidises aldehydes to carboxylate ions while the copper(II) is reduced to a red precipitate of copper(I) oxide. Ethanal, being an aliphatic aldehyde, is readily oxidised and therefore gives the precipitate. Acetone is a ketone: its carbonyl carbon is flanked by two electron-releasing alkyl groups that reduce its electrophilic character and it has no hydrogen on the carbonyl carbon, so it resists oxidation and the blue solution remains unchanged on boiling.",
+      "explanation": "Only aldehydes, and aliphatic ones at that, are oxidised under the mild conditions of Fehling’s solution."
+    },
+    {
+      "id": "isc11-chem-carbonyl-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Give two differences in the products obtained when ethanal and acetone react with a Grignard reagent followed by hydrolysis.",
+      "answer": "First, the alcohol class differs: ethanal with methylmagnesium bromide gives a secondary alcohol, propan-2-ol, while acetone with the same reagent gives a tertiary alcohol, 2-methylpropan-2-ol. Second, the position of the hydroxyl group differs: in the aldehyde product the –OH sits on a carbon bearing one alkyl group and one hydrogen, whereas in the ketone product it sits on a carbon carrying three alkyl groups and no hydrogen.",
+      "explanation": "The carbonyl carbon of an aldehyde carries one hydrogen, so addition gives a secondary alcohol; a ketone gives a tertiary one."
+    },
+    {
+      "id": "isc11-chem-carbonyl-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe the aldol condensation of ethanal, including the role of the base, and explain why benzaldehyde cannot undergo this reaction.",
+      "answer": "Dilute sodium hydroxide abstracts an alpha hydrogen from ethanal, which is acidic because the resulting carbinol-type carbanion is stabilised by the adjacent carbonyl group; the resonance-stabilised enolate ion is formed. This enolate acts as a nucleophile and attacks the carbonyl carbon of a second ethanal molecule, and protonation of the resulting alkoxide gives 3-hydroxybutanal, the aldol, a beta-hydroxy aldehyde. On heating, the aldol loses a molecule of water between the alpha and beta carbons to give the conjugated product but-2-enal, in which the new double bond is stabilised by conjugation with the carbonyl. Benzaldehyde cannot follow this route because it has no alpha hydrogen at all — the carbonyl carbon is attached directly to the ring and the adjacent ring carbon carries no removable proton — so no enolate can form. In concentrated alkali it therefore takes the Cannizzaro path instead, disproportionating to sodium benzoate and benzyl alcohol.",
+      "explanation": "Aldol requires an enolisable alpha hydrogen; without one, the Cannizzaro disproportionation takes over."
+    },
+    {
+      "id": "isc11-chem-carbonyl-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A compound with molecular formula C2H4O gives a silver mirror with Tollens’ reagent and a yellow precipitate with alkaline iodine. Identify the compound, and say what is observed when it is oxidised with acidified potassium dichromate and when its product is heated with soda lime.",
+      "answer": "The compound is ethanal, CH3CHO. The silver mirror with Tollens’ reagent identifies it as an aldehyde, and the yellow precipitate of iodoform with alkaline iodine identifies the CH3CH(OH)– or CH3CO– grouping that ethanal carries, so together the two tests distinguish it from propanal, which gives no iodoform. Oxidation with acidified potassium dichromate converts the aldehyde to ethanoic acid, and the orange dichromate is reduced to green chromium(III) as the oxidation proceeds. Heating the sodium salt of that acid with soda lime decarboxylates it: carbon dioxide is lost and methane is formed, shortening the chain from two carbons to one.",
+      "explanation": "Tollens plus iodoform pin the structure; dichromate oxidises the aldehyde to the acid and soda lime removes its carbon dioxide."
+    }
+  ]
+}

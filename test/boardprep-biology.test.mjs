@@ -52,7 +52,7 @@ const PRESERVED_SUBJECTS = [
   { classSlug: 'class-9', subjectSlug: 'mathematics', chapters: 14, questions: 372 },
   { classSlug: 'class-9', subjectSlug: 'chemistry', chapters: 6, questions: 84 },
   { classSlug: 'class-9', subjectSlug: 'history-civics', chapters: 14, questions: 168 },
-  { classSlug: 'class-9', subjectSlug: 'english', chapters: 15, questions: 173 },
+  { classSlug: 'class-9', subjectSlug: 'english', chapters: 21, questions: 233 },
   { classSlug: 'class-10', subjectSlug: 'biology', chapters: 14, questions: 145 },
 ];
 

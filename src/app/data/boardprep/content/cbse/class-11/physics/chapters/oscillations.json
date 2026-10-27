@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-oscillations",
+  "title": "Oscillations",
+  "kind": "physics",
+  "tagline": "Simple harmonic motion: the to-and-fro that models springs, pendulums, sound and everything that trembles.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Oscillation is motion that repeats about an equilibrium, and the special case this syllabus develops — simple harmonic motion — is the one with a restoring force proportional to displacement. The chapter builds the topic from periodic functions through the reference-circle picture of SHM, computes the energy exchange in a vibrating system, and derives the pendulum’s period rather than merely quoting it. Since SHM is the seed of the entire waves unit and of the Class XII alternating-current chapter, the definitions and phase conventions established here repay careful attention many times over.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-X: Oscillations and Waves (10 marks shared with the Waves chapter)."
+      },
+      {
+        "label": "SHM condition",
+        "value": "Restoring force (and acceleration) proportional to displacement, directed toward equilibrium: a = −ω²x."
+      },
+      {
+        "label": "Period and frequency",
+        "value": "T = 2π/ω; for a spring T = 2π√(m/k); for a simple pendulum T = 2π√(l/g)."
+      },
+      {
+        "label": "Energy",
+        "value": "Total mechanical energy constant: E = ½kA² = ½mω²A², shared between kinetic and potential."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe periodic motion with period, frequency and displacement-time functions.",
+    "Recognise SHM from its restoring-force condition and relate it to uniform circular motion.",
+    "Derive and apply the periods of the spring-mass system and the simple pendulum.",
+    "Track the energy exchange between kinetic and potential forms in SHM.",
+    "Use phase to compare simultaneous oscillations."
+  ],
+  "learn": [
+    {
+      "id": "periodic",
+      "title": "Periodic motion, SHM and its description",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Periodic motion repeats itself at regular intervals: the hands of a clock, the beating of a heart, a mass on a spring. Its description needs only three quantities — the displacement x from equilibrium as a function of time, the time period T for one complete cycle, and the frequency f = 1/T counting cycles per second, measured in hertz. The angular frequency ω = 2πf = 2π/T is not itself a rotation rate but a convenience that makes the trigonometry clean: it counts radians of the phase cycle per second. Simple harmonic motion is the special periodic motion whose acceleration is everywhere proportional to the displacement and directed toward the equilibrium point — a = −ω²x — and the minus sign is the whole physics: it says the acceleration always opposes the displacement, always pulling the oscillator home."
+        },
+        {
+          "type": "paragraph",
+          "text": "The defining relation produces the displacement law directly: the function whose second derivative is a negative constant times itself is a sine or cosine, so x = A cos(ωt + φ), with amplitude A the maximum displacement and φ the phase constant fixing where the motion starts. Velocity and acceleration follow by differentiation: v = −Aω sin(ωt + φ) and a = −Aω² cos(ωt + φ), and reading these three together gives the shape of SHM without any further work — speed is maximum at the equilibrium point (where the sine term peaks) and zero at the extremes, while acceleration is maximum at the extremes and zero at the centre, always of opposite sign to x. The cleanest way to hold all three in mind is the reference circle: project uniform circular motion of radius A and angular speed ω onto a diameter, and the projection executes SHM exactly — the velocity and acceleration of the rotating point project onto the velocity and acceleration of the oscillator in the same way."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Period T, frequency f = 1/T, angular frequency ω = 2πf.",
+            "SHM: a = −ω²x — restoring acceleration proportional to displacement.",
+            "Displacement x = A cos(ωt + φ); amplitude A sets the scale.",
+            "Speed maximum at equilibrium; acceleration maximum at the extremes.",
+            "The reference circle: SHM is the projection of uniform circular motion."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "systems",
+      "title": "The spring and the pendulum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two systems carry the syllabus, and both yield their periods from the restoring-force law. For a mass on a spring, Hooke’s law gives F = −kx, so a = −(k/m)x and matching against a = −ω²x gives ω = √(k/m) and therefore T = 2π√(m/k) — heavier masses and weaker springs oscillate more slowly, the period being directly proportional to √m and inversely to √k. The result is independent of the amplitude, a property called isochronism, which is why a mechanical watch keeps the same time whether its spring swings widely or narrowly. The horizontal spring avoids gravity entirely, making it the cleanest example; on a vertical spring the weight stretches the equilibrium position but changes nothing about the period, since only the displacement from the new equilibrium enters the restoring force."
+        },
+        {
+          "type": "paragraph",
+          "text": "The simple pendulum — a point mass on an inextensible, massless string — derives its period from the tangential component of gravity: the restoring force is mg sin θ, which for small angles replaces sin θ by θ, giving F ≈ −(mg/l)x and hence T = 2π√(l/g). The small-angle condition is essential and honest: the replacement is why the pendulum is only approximately isochronous, with wide swings running slightly slow, and why a grandfather clock is accurate only while its amplitude stays small. The same derivation illustrates a general technique worth noting: linearising a nonlinear restoring force about the equilibrium point always produces SHM with a frequency set by the curvature of the force there — the reason so many systems, from vibrating molecules to swaying buildings, admit SHM analysis near rest even when their large-amplitude behaviour is complicated. The seconds pendulum (T = 2 s) then follows, and with it the historical determination of g from a measured length and period."
+        },
+        {
+          "type": "table",
+          "caption": "The two standard oscillators",
+          "columns": [
+            "System",
+            "Restoring force",
+            "Period"
+          ],
+          "rows": [
+            [
+              "Spring–mass",
+              "F = −kx",
+              "T = 2π√(m/k)"
+            ],
+            [
+              "Simple pendulum (small θ)",
+              "F ≈ −(mg/l)x",
+              "T = 2π√(l/g)"
+            ],
+            [
+              "Both",
+              "Proportional to displacement",
+              "Independent of amplitude (isochronous)"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Spring k = 100 N/m, m = 0.5 kg: period?",
+              "note": "T = 2π√(0.5/100) ≈ 0.44 s."
+            },
+            {
+              "text": "Pendulum of 1 m: period?",
+              "note": "T = 2π√(1/9.8) ≈ 2.0 s — the seconds pendulum."
+            },
+            {
+              "text": "Double the pendulum length: period factor?",
+              "note": "√2 ≈ 1.41 times longer."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "title": "Energy in SHM",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Simple harmonic motion is conservative in the ideal case, and its energy story is one of continuous exchange. The potential energy of the spring, U = ½kx², is largest at the extremes where the mass is momentarily at rest; the kinetic energy K = ½mv² peaks at the equilibrium point where the speed is maximum; and their sum stays constant, equal to the total E = ½kA² = ½mω²A² — expressible entirely in terms of amplitude. Reading the two quadratic curves against each other produces the characteristic rhythm of SHM: near the extremes the mass moves slowly through a region of rapidly rising potential energy, while near the centre it sweeps at full speed through a shallow potential valley. The turning points are exactly where E = U, which is the standard route to finding the amplitude of an oscillation from its energy, and the nodes of the standing waves in the next chapter inherit this same energy exchange in spatial form."
+        },
+        {
+          "type": "paragraph",
+          "text": "Damping is the honest addition: every real oscillator loses energy to friction or drag, so the amplitude decays with time and the motion is damped SHM rather than perpetual. A lightly damped system (the balance wheel of a watch, a well-designed door closer) is driven at intervals to replenish what is lost — the driving force timed to the natural frequency is what keeps grandfather clocks running for a week. Heavily damped systems do not oscillate at all but creep back to equilibrium, which is the design goal of shock absorbers and door stays. When a question asks about energy in SHM, the complete answer quotes the conservation relation, identifies where each form peaks, and acknowledges the damping that the idealisation omits; when it asks about driven systems, the resonance that results from matching the driving frequency to the natural one is the concept to invoke — and the collapse of the Tacoma Narrows bridge its most dramatic cautionary tale."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "U = ½kx² peaks at the extremes; K = ½mv² peaks at the centre.",
+            "Total E = ½kA² = ½mω²A² is constant for ideal SHM.",
+            "Turning points: x = ±A, where E = U and v = 0.",
+            "Damping: amplitude decays as energy leaks to friction.",
+            "Driving at the natural frequency sustains or resonates the motion."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase",
+      "title": "Phase, and comparing two oscillations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Phase is the clock of an oscillation: the quantity (ωt + φ) inside the cosine, measured in radians, which fixes where in the cycle the oscillator stands at any instant. Two oscillations of the same frequency are compared by their phase difference, and the vocabulary is precise: in phase (difference 0 or 2π) means crest meets crest; π out of phase means crest meets trough, so the motions cancel if superposed; π/2 means one is a quarter-cycle ahead, which is exactly the relationship between the displacement and velocity of a single SHM oscillator — velocity leads displacement by π/2, since the mass crosses equilibrium at maximum speed a quarter period before reaching the extreme. This is not bookkeeping: phase is the quantity that decides interference in the waves chapter, the phase relationships of voltages and currents in Class XII alternating current, and the timing of driven oscillators at resonance."
+        },
+        {
+          "type": "paragraph",
+          "text": "Working with phase requires one reliable habit: when comparing two SHM expressions, write both in the same trigonometric form (both cosines, say) before comparing the brackets, because a sine and a cosine of the same argument differ by a quarter cycle and the comparison otherwise silently fails. The reference-circle picture helps here too: phase is simply the angle on the reference circle, so a phase difference is an angular separation between two rotating points, and their projections oscillate with precisely that lag. Exam questions typically supply two displacement-time functions and ask for the phase relation, or supply a phase relation and ask which oscillator leads — both are answered by the same bracket comparison, made explicit in the working. The habit costs seconds and eliminates the single most common error in this small but examinable corner of the topic."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Phase (ωt + φ) fixes the point within the cycle.",
+            "In phase: crest with crest. π out of phase: crest with trough.",
+            "Velocity leads displacement by π/2 in SHM.",
+            "Write both expressions in the same trig form before comparing.",
+            "Phase difference = angular separation on the reference circle."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Simple harmonic motion as a projection",
+      "description": "A reference circle of radius A with a rotating point, its projection dropped onto the horizontal diameter and marked as the oscillator; snapshots at four phases show the projected position, velocity and acceleration arrows, with the correspondence table beside it and the cosine curve traced beneath against time.",
+      "labels": [
+        "Uniform circular motion on the reference circle",
+        "Projection onto the diameter is SHM",
+        "Amplitude A = circle radius",
+        "Angular speed ω = rate of phase advance",
+        "Speed max at centre, zero at ends"
+      ]
+    },
+    {
+      "caption": "Figure: Energy exchange in a spring oscillator",
+      "description": "A horizontal spring-mass system drawn at three positions (left extreme, equilibrium, right extreme) with paired energy bar charts beside each: at the extremes the potential bar is full and the kinetic bar empty, at equilibrium the kinetic bar is full and the potential empty, and each pair sums to the same total height E = ½kA².",
+      "labels": [
+        "Potential energy ½kx² at the extremes",
+        "Kinetic energy ½mv² at the centre",
+        "Sum stays constant: E = ½kA²",
+        "Turning points: all energy potential",
+        "Equilibrium: all energy kinetic"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Periodic motion: T and f = 1/T; ω = 2πf.",
+    "SHM: a = −ω²x, acceleration proportional and opposite to displacement.",
+    "x = A cos(ωt + φ); v and a follow by differentiation.",
+    "SHM is the projection of uniform circular motion (reference circle).",
+    "Spring: T = 2π√(m/k). Pendulum (small angle): T = 2π√(l/g).",
+    "Isochronism: period independent of amplitude — for small angles in the pendulum.",
+    "Energy: U = ½kx² at extremes, K = ½mv² at centre, sum constant.",
+    "Turning points: E = U and v = 0.",
+    "Damping decays amplitude; driving at the natural frequency sustains or resonates.",
+    "Phase difference decides superposition; velocity leads displacement by π/2."
+  ],
+  "examFocus": [
+    "State the restoring force and linearise it before quoting a period.",
+    "The small-angle condition for the pendulum must be named.",
+    "Energy answers: identify where each form peaks, not just the total.",
+    "Compare phases only after writing both expressions in the same form."
+  ],
+  "vocabulary": [
+    {
+      "word": "Period (T)",
+      "meaning": "Time for one complete cycle."
+    },
+    {
+      "word": "Frequency (f)",
+      "meaning": "Cycles per second, in hertz."
+    },
+    {
+      "word": "Amplitude (A)",
+      "meaning": "Maximum displacement from equilibrium."
+    },
+    {
+      "word": "SHM",
+      "meaning": "Motion with acceleration proportional to displacement and opposite in sign."
+    },
+    {
+      "word": "Phase",
+      "meaning": "The argument (ωt + φ) fixing the point within the cycle."
+    },
+    {
+      "word": "Isochronism",
+      "meaning": "Independence of the period from amplitude."
+    },
+    {
+      "word": "Damping",
+      "meaning": "Amplitude decay as energy is dissipated by friction or drag."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-osc-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The defining feature of simple harmonic motion is that acceleration is:",
+      "options": [
+        "Constant",
+        "Proportional to displacement and opposite in sign",
+        "Proportional to velocity",
+        "Always directed away from equilibrium"
+      ],
+      "correctIndex": 1,
+      "answer": "Proportional to displacement and opposite in sign",
+      "explanation": "a = −ω²x: the restoring acceleration grows with displacement and always points toward the equilibrium position."
+    },
+    {
+      "id": "cbse11-phy-osc-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A spring of constant 200 N/m carries a mass of 0.5 kg. Its period of oscillation is:",
+      "options": [
+        "0.31 s",
+        "0.16 s",
+        "3.16 s",
+        "6.28 s"
+      ],
+      "correctIndex": 0,
+      "answer": "0.31 s",
+      "explanation": "T = 2π√(m/k) = 2π√(0.5/200) = 2π × 0.05 ≈ 0.31 s."
+    },
+    {
+      "id": "cbse11-phy-osc-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In SHM, the speed of the oscillator is maximum:",
+      "options": [
+        "At the extreme displacement",
+        "Halfway to the extreme",
+        "At the equilibrium position",
+        "It is constant throughout"
+      ],
+      "correctIndex": 2,
+      "answer": "At the equilibrium position",
+      "explanation": "At equilibrium all the energy is kinetic, so the mass sweeps through at maximum speed; at the extremes it is instantaneously at rest."
+    },
+    {
+      "id": "cbse11-phy-osc-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A simple pendulum’s length is quadrupled. Its period becomes:",
+      "options": [
+        "half the period",
+        "the same period",
+        "twice the period",
+        "four times the period"
+      ],
+      "correctIndex": 2,
+      "answer": "twice the period",
+      "explanation": "T ∝ √l, so quadrupling the length doubles the period — the square-root dependence, not a linear one."
+    },
+    {
+      "id": "cbse11-phy-osc-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of complete oscillations per unit time is the ________ .",
+      "answer": "frequency",
+      "explanation": "Measured in hertz; it is the reciprocal of the period T."
+    },
+    {
+      "id": "cbse11-phy-osc-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The argument (ωt + φ) inside the cosine of an SHM displacement is called the ________ .",
+      "answer": "phase",
+      "explanation": "It fixes the point within the cycle; differences between phases decide interference."
+    },
+    {
+      "id": "cbse11-phy-osc-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define simple harmonic motion and state the condition on its restoring force.",
+      "answer": "Simple harmonic motion is the periodic motion of a body about a stable equilibrium position in which the acceleration at any instant is directly proportional to the displacement from that position and is always directed toward it. The defining condition is therefore a = −ω²x, equivalently a restoring force F = −kx — the negative sign expressing that the force always opposes the displacement and pulls the body home. Consequences that follow immediately: the motion is symmetric about the equilibrium, it is isochronous (the period does not depend on the amplitude), and the displacement varies sinusoidally as x = A cos(ωt + φ). The proportionality is essential: only when the restoring force is linear in the displacement is the motion simple harmonic; a restoring force with any other dependence on x gives periodic motion, but not SHM, with an amplitude-dependent period.",
+      "explanation": "The definition with the acceleration condition, the restoring-force form with the sign’s meaning, and the linearity requirement contrasted with general periodic motion."
+    },
+    {
+      "id": "cbse11-phy-osc-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the expression for the period of a simple pendulum, stating the approximation used.",
+      "answer": "Consider a simple pendulum: a point mass m on a light inextensible string of length l, displaced by a small angle θ from the vertical. The forces are gravity mg downward and the tension along the string; the component of gravity tangential to the arc is the restoring force, F = −mg sin θ (negative because it opposes the displacement). For small angles, sin θ ≈ θ (in radians), and with the arc displacement x = lθ this gives F ≈ −mgθ = −(mg/l)x — a force proportional to displacement, so the motion is SHM with the effective constant k = mg/l. Comparing with ω² = k/m = g/l gives ω = √(g/l), and since T = 2π/ω, T = 2π√(l/g). The approximation used is sin θ ≈ θ, valid for small angles (below roughly 10°), which is why the pendulum is isochronous only for small swings — at larger amplitudes the true period grows slightly. Checks: the dimensions √(m/(m/s²)) = √s² = s ✓; a longer pendulum has a longer period, matching the slower swing of a long grandfather clock ✓; and for l = 1 m, T ≈ 2.0 s — the seconds pendulum, whose half-swing marks one second ✓.",
+      "explanation": "The tangential-force identification, the small-angle replacement, the ω matching, the period, and all three checks including the approximation’s consequence."
+    },
+    {
+      "id": "cbse11-phy-osc-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe the energy changes in a spring-mass system executing SHM, and compute the total energy and maximum speed of a 0.2 kg mass on a spring of constant 800 N/m oscillating with amplitude 5 cm.",
+      "answer": "A mass on a spring in SHM continuously exchanges energy between kinetic and gravitational-independent elastic potential forms. At the extreme positions (x = ±A) the mass is instantaneously at rest, so all its energy is potential: U_max = ½kA². As it moves inward the spring force does positive work, converting potential to kinetic, and at the equilibrium position (x = 0) the potential vanishes and the kinetic energy is maximum: K_max = ½mv²_max. Total mechanical energy E = ½kA² = ½mv²_max is conserved throughout (ideal, frictionless case). Numerically: A = 5 cm = 0.05 m, so E = ½ × 800 × (0.05)² = 400 × 0.0025 = 1 J. Maximum speed: ½mv²_max = 1 gives v²_max = 2/0.2 = 10, so v_max = 3.16 m/s. Cross-check via ω: ω = √(k/m) = √(800/0.2) = √4000 ≈ 63.2 rad/s, so v_max = Aω = 0.05 × 63.2 = 3.16 m/s ✓ — the two routes agree, which is the content of the energy relation. Sanity: the period T = 2π/ω ≈ 0.1 s, so the mass covers 4A = 0.2 m of path in a tenth of a second, consistent with a maximum speed of about 3 m/s ✓.",
+      "explanation": "The energy conversion described, the total energy computed, the maximum speed by two agreeing routes, and the period sanity check."
+    },
+    {
+      "id": "cbse11-phy-osc-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why a mass-spring system is isochronous while a simple pendulum is only approximately so, and describe what happens when a child adds weight to a swing and an adult pushes at the wrong rhythm.",
+      "answer": "Isochronism of the spring: the restoring force F = −kx is exactly linear in displacement at all amplitudes, so matching against a = −ω²x always gives ω = √(k/m) with no amplitude anywhere in the result — the period is strictly independent of how far the mass is pulled. The pendulum is only approximate: its true restoring force is −mg sin θ, which is linear in θ solely because of the small-angle replacement sin θ ≈ θ. At larger amplitudes sin θ < θ, so the true restoring force is slightly weaker than the linear idealisation, the effective ω is slightly smaller, and the period lengthens — a wide-swinging pendulum runs slow, measurably so beyond about 10°. The swing and the adult: adding weight to the swing increases the pendulum’s effective length (the child plus seat mass lowers the centre of mass), which lengthens the period T = 2π√(l/g) and slows the natural rhythm — so the adult must push less frequently, matching the new natural frequency rather than the old one. Pushing at the wrong rhythm fails because the driving force then alternately aids and opposes the motion: half the pushes land while the swing is moving away (doing negative work) and half while it approaches (positive work), so the contributions largely cancel and the swing barely grows. Pushing in step — at the natural frequency and timed at the right point of each cycle — makes every push add energy constructively, and the amplitude grows until losses balance the input: that synchronisation is resonance, the same principle that makes a well-timed finger on a wine glass sing and that destroyed the Tacoma Narrows bridge when the wind’s driving frequency matched the deck’s natural one.",
+      "explanation": "Exact versus approximate linearity contrasted, the large-amplitude slowdown explained, and the swing example developed into a full resonance account with the negative-work/positive-work cancellation spelled out."
+    }
+  ]
+}

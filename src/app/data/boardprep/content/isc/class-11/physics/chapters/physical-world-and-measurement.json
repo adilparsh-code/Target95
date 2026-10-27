@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-measurement",
+  "title": "Physical World and Measurement",
+  "kind": "physics",
+  "tagline": "Units, dimensions and the discipline of measuring: why a number without an uncertainty is not physics.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Physics is the study of matter, energy and their interactions, and every statement it makes is ultimately a statement about quantities that have been measured. This chapter establishes the working vocabulary of that measurement: the SI base units and the derived units built from them, dimensional analysis as a tool for checking equations and deducing relations, the classification of errors and the handling of significant figures. The examination pattern rewards precision — the unit, the dimension and the rule must be quoted exactly — so each section below ends with the numbers and formulas an examiner looks for.",
+    "facts": [
+      {
+        "label": "Seven base quantities",
+        "value": "Length, mass, time, electric current, thermodynamic temperature, amount of substance and luminous intensity."
+      },
+      {
+        "label": "The SI second",
+        "value": "Defined by the caesium-133 atom: the radiation corresponding to the transition between the two hyperfine levels of the ground state, 9 192 631 770 periods."
+      },
+      {
+        "label": "Dimensional method",
+        "value": "A relation is dimensionally correct only if the powers of M, L and T agree on both sides; it is not sufficient for a relation to be true."
+      },
+      {
+        "label": "Relative error",
+        "value": "The absolute error of a measurement divided by the measured value; for a quantity raised to a power the relative error is multiplied by that power."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the seven SI base units and derive the units of common physical quantities from them.",
+    "Apply dimensional analysis to check an equation and to deduce a relation between variables.",
+    "Distinguish systematic, random and least-count errors and calculate absolute and relative error.",
+    "Round measurements to the correct number of significant figures and combine them correctly.",
+    "Explain the nature and scope of physics and the role of measurement in building its laws."
+  ],
+  "learn": [
+    {
+      "id": "what-physics-is",
+      "title": "The scope of physics and the meaning of a physical quantity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Physics is the natural science that studies matter, motion, energy and the forces that connect them, and it reaches from the scale of a nucleus to the scale of the observable universe — from the femtometre of a proton to the gigaparsec of a galaxy. Its method is not merely to describe but to quantify: a physical quantity is one that can be measured and expressed as the product of a number and a unit, so that the statement a body accelerates at 9.8 metres per second squared is both a claim about nature and an instruction for reproducing the measurement. Measurements are made against standards, and the modern standard is the International System of Units, the SI, in which seven base quantities are fixed by definition and every other quantity is expressed through them. The scope of the subject is usually surveyed under its classical, thermodynamic, electromagnetic, relative, quantum, atomic and nuclear divisions, and the unifying habit across all of them is the same: define the quantity, choose the unit, measure with a stated uncertainty, and test a law against the numbers."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Physics studies matter, energy, motion and their interactions, from nuclear to cosmic scales.",
+            "A physical quantity = numerical value × unit; without the unit the number carries no meaning.",
+            "The SI fixes seven base quantities; all derived quantities are formed from them.",
+            "Divisions of the subject: classical mechanics, heat and thermodynamics, electromagnetism, relativity, quantum, atomic and nuclear physics.",
+            "The scientific method in physics: observation, hypothesis, quantitative test, law or theory, and further test."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The seven SI base units",
+          "columns": [
+            "Base quantity",
+            "Unit",
+            "Symbol"
+          ],
+          "rows": [
+            [
+              "Length",
+              "metre",
+              "m"
+            ],
+            [
+              "Mass",
+              "kilogram",
+              "kg"
+            ],
+            [
+              "Time",
+              "second",
+              "s"
+            ],
+            [
+              "Electric current",
+              "ampere",
+              "A"
+            ],
+            [
+              "Thermodynamic temperature",
+              "kelvin",
+              "K"
+            ],
+            [
+              "Amount of substance",
+              "mole",
+              "mol"
+            ],
+            [
+              "Luminous intensity",
+              "candela",
+              "cd"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Speed as a derived quantity",
+              "note": "Speed has the dimension L T⁻¹ and the unit metre per second, both obtained by dividing length by time."
+            },
+            {
+              "text": "A quantity without a unit",
+              "note": "Stating that a rope holds 500 is useless in physics; the claim must read 500 newtons before it can be checked or compared."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Physical quantity",
+              "meaning": "A property expressed as a numerical value multiplied by a unit, measurable in principle."
+            },
+            {
+              "term": "Base quantity",
+              "meaning": "One of the seven quantities — length, mass, time, current, temperature, amount and luminous intensity — chosen as independent in the SI."
+            },
+            {
+              "term": "Derived quantity",
+              "meaning": "Any quantity expressed as a product of powers of the base quantities, such as force or velocity."
+            },
+            {
+              "term": "Standard",
+              "meaning": "An agreed definition of a unit against which other measurements are compared."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dimensions",
+      "title": "Dimensions and dimensional analysis",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every physical quantity can be written in terms of the base dimensions M for mass, L for length, T for time, and where needed Θ for temperature, A for current and others. The dimensions of a quantity are the powers to which the base quantities must be raised to reproduce it: force is M L T⁻², since force equals mass times acceleration; pressure is M L⁻¹ T⁻², because it is force divided by area; and the dimensionless quantities such as strain, angle and refractive index have no dimensions at all. Dimensional analysis rests on the principle of homogeneity, which says that only quantities of the same dimension can be added or subtracted, and therefore that both sides of a correct equation must carry identical dimensions. The method has three uses: to check whether a proposed equation can possibly be correct, to derive the relation between variables when the dependence is known up to an unknown constant, and to convert one system of units into another. Its limits matter as much as its uses: it cannot reveal dimensionless constants such as 2π or ½, and it cannot detect additive relations such as s = ut + ½at² in which terms of the same dimension cancel."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Dimensions are written M, L, T (plus Θ, A, J and others where required); force is M L T⁻² and pressure is M L⁻¹ T⁻².",
+            "Principle of homogeneity: both sides of a valid equation must have the same dimensions, and only like dimensions may be added.",
+            "Uses: checking equations, deducing relations between quantities, and converting units between systems.",
+            "Limitation: dimensional analysis cannot supply dimensionless constants such as 2π or one half.",
+            "Limitation: it cannot handle relations built from sums of terms, nor distinguish between quantities of identical dimension.",
+            "Dimensionless groups such as refractive index, strain and relative density have the dimension one."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Dimensions of common quantities",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Dimensions"
+          ],
+          "rows": [
+            [
+              "Velocity",
+              "displacement / time",
+              "L T⁻¹"
+            ],
+            [
+              "Acceleration",
+              "velocity / time",
+              "L T⁻²"
+            ],
+            [
+              "Force",
+              "mass × acceleration",
+              "M L T⁻²"
+            ],
+            [
+              "Work or energy",
+              "force × distance",
+              "M L² T⁻²"
+            ],
+            [
+              "Pressure",
+              "force / area",
+              "M L⁻¹ T⁻²"
+            ],
+            [
+              "Power",
+              "work / time",
+              "M L² T⁻³"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Checking v = u + at",
+              "note": "Both sides carry L T⁻¹ — velocity plus acceleration times time — so the equation is dimensionally consistent."
+            },
+            {
+              "text": "Checking s = ut + ½at⁻",
+              "note": "Each of the three terms carries L, so the equation passes the test; note that the factor one half cannot be found by this method."
+            },
+            {
+              "text": "A wrong equation",
+              "note": "If a proposed relation gives energy as M L³ T⁻², it fails at once, because energy must be M L² T⁻²."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Dimensions",
+              "meaning": "The powers of the base quantities that enter a physical quantity, written M, L, T and so on."
+            },
+            {
+              "term": "Homogeneity",
+              "meaning": "The requirement that both sides of an equation, and every term added, share the same dimensions."
+            },
+            {
+              "term": "Dimensional constant",
+              "meaning": "A constant such as the gravitational constant whose dimensions follow from the equation containing it."
+            },
+            {
+              "term": "Dimensionless quantity",
+              "meaning": "A quantity whose dimensions cancel, such as strain or refractive index, with dimension one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "measurement-errors",
+      "title": "Measurement, errors and significant figures",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "No measurement is exact, so a complete statement of a result has three parts: the measured value, its unit and its uncertainty. The absolute error of a measurement is the difference between the measured value and the true value, and in practice the true value is unknown, so the mean of a large number of readings is taken as the best estimate and the deviation of each reading from that mean is reported. The relative error is the absolute error divided by the measured value, and the percentage error is the relative error in per cent; relative error is what allows two measurements of different quantities to be compared for quality. Errors are classified as systematic, which shift every reading in the same direction through a zero error or a calibration fault; random, which scatter readings because of unpredictable fluctuations; and least count errors, which arise from reading between the smallest divisions of an instrument. When quantities are combined, the rule is fixed: in addition and subtraction, the result carries the least number of decimal places; in multiplication and division, the least number of significant figures. Significant figures count all certain digits plus one uncertain digit, and a zero between non-zero digits or a trailing zero after a decimal point both count."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Absolute error = measured value − true value; the mean of many readings is used in place of the unknown true value.",
+            "Relative error = absolute error / measured value; percentage error = relative error × 100.",
+            "Systematic errors shift all readings — zero error, faulty calibration, parallax — while random errors scatter them.",
+            "Least count error comes from reading the smallest division of the instrument, and personal error from the observer.",
+            "Combining measurements: addition and subtraction keep the least decimal places; multiplication and division keep the least significant figures.",
+            "Significant figures: all certain digits plus one uncertain digit; zeros between digits and after a decimal point count."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Errors and how they are treated",
+          "columns": [
+            "Kind of error",
+            "Cause",
+            "Remedy"
+          ],
+          "rows": [
+            [
+              "Systematic",
+              "Zero error, bad calibration, parallax",
+              "Correction, recalibration, eye positioned correctly"
+            ],
+            [
+              "Random",
+              "Fluctuations in conditions",
+              "Repeat many readings and take the mean"
+            ],
+            [
+              "Least count",
+              "Reading between scale divisions",
+              "Use a finer instrument or estimate one digit further"
+            ],
+            [
+              "Personal",
+              "Reaction time, colour perception",
+              "Average over observers; standardise the method"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Adding readings",
+              "note": "If two lengths are 12.4 cm and 7.45 cm, the sum is 19.85 cm but must be reported as 19.9 cm because the first value has only one decimal place."
+            },
+            {
+              "text": "Percentage error",
+              "note": "A length measured as 20.0 cm with an error of 0.2 cm carries a percentage error of one per cent, which then multiplies when the quantity is squared."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "units-and-standards",
+      "title": "Units, prefixes and the practical art of measurement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A unit must be reproducible anywhere, which is why the modern definitions are anchored in nature rather than in artefacts: the metre is the distance light travels in a vacuum in 1/299 792 458 of a second, the second is defined by the caesium-133 transition, and the kilogram is now defined through the Planck constant. Derived units are then formed mechanically, with the newton for force, the joule for work and energy, the watt for power and the pascal for pressure, and the litre, the bar and the calorie are accepted alongside them with their stated relations. Metric prefixes run in powers of a thousand — kilo, mega and giga above; milli, micro and nano below — and the skill examiners test is the movement of the decimal point together with the statement of the result in scientific notation. Practical measurement then becomes a matter of choosing the instrument to the precision the question demands: a metre scale read to a millimetre, a screw gauge to a hundredth of a millimetre, a stopwatch to a tenth of a second, and a spring balance or a common balance for force and mass respectively."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The metre is the distance light travels in vacuum in 1/299 792 458 s, and the kilogram is fixed by the Planck constant.",
+            "Derived SI units: newton (force), joule (work, energy), watt (power), pascal (pressure), hertz (frequency).",
+            "Prefixes in powers of a thousand: T, G, M, k above and m, µ, n, p below the base unit.",
+            "Scientific notation writes a number as a single digit times a power of ten, which keeps significant figures visible.",
+            "Instruments and their readings: metre scale 1 mm, screw gauge 0.01 mm, vernier callipers by their least count, stopwatch 0.1 s.",
+            "Unit conversion is a multiplication by factors of one, so the dimensions never change."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Frequently used derived units",
+          "columns": [
+            "Quantity",
+            "Unit",
+            "Symbol",
+            "In base units"
+          ],
+          "rows": [
+            [
+              "Force",
+              "newton",
+              "N",
+              "kg m s⁻²"
+            ],
+            [
+              "Work, energy",
+              "joule",
+              "J",
+              "kg m² s⁻²"
+            ],
+            [
+              "Power",
+              "watt",
+              "W",
+              "kg m² s⁻³"
+            ],
+            [
+              "Pressure",
+              "pascal",
+              "Pa",
+              "kg m⁻¹ s⁻²"
+            ],
+            [
+              "Frequency",
+              "hertz",
+              "Hz",
+              "s⁻¹"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Reading a prefix",
+              "note": "A wavelength written as 5 × 10⁻⁷ m is 50 nanometres, since 10⁻⁷ m equals 100 × 10⁻⁹ m."
+            },
+            {
+              "text": "Choosing the instrument",
+              "note": "Measuring the diameter of a wire with a metre scale would make the error larger than the quantity itself, which is the argument for a screw gauge."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "using-dimensions",
+      "title": "Working with dimensions: the habits that score marks",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Dimensional work in examinations follows a fixed pattern, and the candidate who identifies the dimensions of the unknown quantity before writing anything usually finishes first. For checking an equation, reduce both sides to M, L, T form and compare powers; if they differ, the equation is wrong however plausible it looks. For deducing a relation, assume the quantity equals a product of the known variables raised to unknown powers, write the dimensional equation, and equate the powers of M, L and T on the two sides to obtain three equations for the three unknowns; the dimensionless constant will remain undetermined and must be found by experiment. For unit conversion, multiply by the conversion factors written as fractions equal to one. The discipline that prevents marks being lost is to state the assumption clearly, to write the dimensions of every symbol used, and to interpret the final relation in words as well as symbols — a dimensional answer that ends with a formula and no sentence has usually missed the second mark."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Checking: write both sides in M, L, T and compare powers term by term.",
+            "Deduction: assume the product form, form the dimensional equation and equate powers of M, L and T.",
+            "The dimensionless constant cannot be found dimensionally and must come from experiment.",
+            "Conversion: multiply by factors equal to one, written so that the unwanted unit cancels.",
+            "Presentation: state the assumption, show each symbol’s dimensions, and close with a sentence interpreting the result."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The period of a simple pendulum",
+              "note": "Assuming T ∝ lᵢ gⁿ gives i = ½ and n = − ½ dimensionally, so T = k√(l/g); the constant is later found to be 2π by experiment."
+            },
+            {
+              "text": "The time of fall",
+              "note": "From h ∝ gᵢ tⁿ one obtains n = 2, giving t ∝ √(h/g) — a relation whose constant, one, dimensional analysis alone could not supply."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: From observation to physical law",
+      "description": "A cycle running observation, quantitative measurement with units, hypothesis, controlled test, empirical law, theory, and prediction feeding back into new observation.",
+      "labels": [
+        "observation and question",
+        "measurement with units and stated error",
+        "hypothesis expressed as a relation",
+        "controlled test and data analysis",
+        "law, theory and further prediction"
+      ]
+    },
+    {
+      "caption": "Figure: The family tree of the SI units",
+      "description": "Seven base unit boxes at the centre with arrows forming the derived units newton, joule, watt, pascal and hertz around them, each arrow labelled with the base combination.",
+      "labels": [
+        "kg, m, s form the newton: kg m s⁻²",
+        "the joule is newton metre: kg m² s⁻²",
+        "the watt is joule per second",
+        "the pascal is newton per metre squared",
+        "the hertz is one over second"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Physics studies matter, energy and their interactions across scales from the nucleus to the universe.",
+    "A physical quantity is a numerical value multiplied by a unit; dimensions describe the base powers involved.",
+    "The seven SI base units are the metre, kilogram, second, ampere, kelvin, mole and candela.",
+    "Derived units such as the newton, joule, watt and pascal are built from the base units.",
+    "Dimensional analysis checks equations, deduces relations and converts units, but cannot supply dimensionless constants.",
+    "The principle of homogeneity requires both sides of an equation to carry identical dimensions.",
+    "Absolute error, relative error and percentage error express measurement uncertainty.",
+    "Systematic errors shift readings in one direction; random errors scatter them; least count errors come from the scale.",
+    "In addition and subtraction keep the least decimal places; in multiplication and division keep the least significant figures.",
+    "Significant figures count every certain digit plus one uncertain digit, and scientific notation keeps them visible.",
+    "Precision is the closeness of repeated readings to one another; accuracy is closeness to the true value.",
+    "Choose the instrument for the precision required, and state the result with its unit and its uncertainty."
+  ],
+  "examFocus": [
+    "Dimensional questions are marked on method: state the assumption, write each dimension, equate powers and interpret in words.",
+    "Error questions expect the definitions of absolute, relative and percentage error with one worked numeric.",
+    "Significant-figure rules are tested directly: quote the rule for sums and the rule for products separately.",
+    "Remember the limitations of the dimensional method — no constants and no sums — because they are frequently asked."
+  ],
+  "vocabulary": [
+    {
+      "word": "Base quantity",
+      "meaning": "One of the seven independent quantities of the SI from which others are formed."
+    },
+    {
+      "word": "Derived unit",
+      "meaning": "A unit formed from base units, such as the newton or the joule."
+    },
+    {
+      "word": "Dimensions",
+      "meaning": "The powers of M, L, T and other base quantities in a physical quantity."
+    },
+    {
+      "word": "Homogeneity",
+      "meaning": "The requirement that both sides of an equation share the same dimensions."
+    },
+    {
+      "word": "Systematic error",
+      "meaning": "A repeatable error shifting all readings in the same direction."
+    },
+    {
+      "word": "Random error",
+      "meaning": "An unpredictable fluctuation that scatters readings about a mean."
+    },
+    {
+      "word": "Significant figures",
+      "meaning": "Certain digits plus one uncertain digit in a reported measurement."
+    },
+    {
+      "word": "Relative error",
+      "meaning": "Absolute error divided by the measured value, often expressed as a percentage."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-measure-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a base quantity in the SI?",
+      "options": [
+        "Force",
+        "Energy",
+        "Time",
+        "Pressure"
+      ],
+      "correctIndex": 2,
+      "answer": "Time",
+      "explanation": "Time is one of the seven base quantities; force, energy and pressure are all derived from mass, length and time."
+    },
+    {
+      "id": "isc11-phy-measure-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The dimensions of pressure are:",
+      "options": [
+        "M L T⁻²",
+        "M L⁻¹ T⁻²",
+        "M L² T⁻²",
+        "M L⁻² T⁻²"
+      ],
+      "correctIndex": 1,
+      "answer": "M L⁻¹ T⁻²",
+      "explanation": "Pressure is force per unit area, so M L T⁻² divided by L² gives M L⁻¹ T⁻²."
+    },
+    {
+      "id": "isc11-phy-measure-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The error arising from reading between the smallest divisions of an instrument is called:",
+      "options": [
+        "Systematic error",
+        "Random error",
+        "Least count error",
+        "Gross error"
+      ],
+      "correctIndex": 2,
+      "answer": "Least count error",
+      "explanation": "Least count error is set by the smallest division the instrument can show, and it is reduced only by a finer instrument."
+    },
+    {
+      "id": "isc11-phy-measure-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Dimensional analysis cannot determine:",
+      "options": [
+        "The dimensions of a constant",
+        "A dimensionless numerical constant such as 2π",
+        "The relation between two variables",
+        "Whether an equation is dimensionally wrong"
+      ],
+      "correctIndex": 1,
+      "answer": "A dimensionless numerical constant such as 2π",
+      "explanation": "The method can check consistency and deduce dependences, but constants such as 2π or one half are invisible to it."
+    },
+    {
+      "id": "isc11-phy-measure-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of work and energy is the __________.",
+      "answer": "joule",
+      "explanation": "One joule is the work done by a force of one newton acting through one metre."
+    },
+    {
+      "id": "isc11-phy-measure-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The principle of __________ requires both sides of a correct equation to have identical dimensions.",
+      "answer": "homogeneity",
+      "explanation": "It is also the reason every term added in an equation must share the same dimensions."
+    },
+    {
+      "id": "isc11-phy-measure-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the dimensions of force and of work, and show how the second follows from the first.",
+      "answer": "Force is mass times acceleration, and acceleration has dimensions L T⁻², so force is M L T⁻². Work is force multiplied through a distance, so its dimensions are those of force multiplied by L, giving M L² T⁻². Energy shares these dimensions because energy is the capacity to do work.",
+      "explanation": "Force M L T⁻², work M L² T⁻², with the step of multiplying by length shown."
+    },
+    {
+      "id": "isc11-phy-measure-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between systematic and random errors and give one example of each.",
+      "answer": "A systematic error shifts every reading in the same direction because of a fault in the instrument or the method, such as a zero error in a micrometer or parallax taken while reading a scale; it is removed by correcting the instrument or the technique. A random error scatters readings about the mean for unpredictable reasons, such as fluctuating temperature or the observer’s reaction time; it is reduced by taking many readings and averaging.",
+      "explanation": "Same-direction shift against scatter, with an example of each and the remedy for each."
+    },
+    {
+      "id": "isc11-phy-measure-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is meant by significant figures? State the rule for a product.",
+      "answer": "Significant figures are all the certain digits in a measurement together with one estimated uncertain digit, which together express the precision of the instrument. In a product or a quotient the result must be rounded to the same number of significant figures as the factor with the fewest significant figures, which is the rule that prevents a weak measurement from being dressed up as a precise one.",
+      "explanation": "Certain plus one uncertain digit, and the least-significant-figures rule for products."
+    },
+    {
+      "id": "isc11-phy-measure-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain dimensional analysis, state its uses and its limitations.",
+      "answer": "Dimensional analysis expresses every physical quantity in terms of the base dimensions M, L, T and, where needed, temperature, current and others, using the fact that a relation can only be correct if both sides carry the same dimensions — the principle of homogeneity, which also requires every term in a sum to share the dimensions of the others. Its first use is checking a proposed equation: write both sides in M, L, T form and compare powers, and any mismatch proves the relation wrong. Its second use is deduction: assume the unknown quantity as a product of the variables raised to unknown powers, form the dimensional equation, and equate the powers of M, L and T to solve for those powers. Its third use is converting between systems of units by treating conversion factors as one. Its limitations are serious and must be stated: it cannot determine dimensionless constants such as 2π or one half, it cannot handle relations made from sums of terms where cancellations occur, and it cannot distinguish between quantities that share the same dimensions, such as distance and work per unit force.",
+      "explanation": "Definition with homogeneity, three uses and three limitations, each stated plainly."
+    },
+    {
+      "id": "isc11-phy-measure-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A length is measured as 25.4 cm with an absolute error of 0.2 cm, and the quantity is later required as an area in square centimetres. Analyse how the error propagates.",
+      "answer": "The relative error in the length is 0.2 divided by 25.4, which is about 0.0079 or 0.79 per cent; the percentage error is therefore just under one per cent. Area depends on the length squared, so the relative error in the area is twice the relative error in the length, about 1.58 per cent, which on an area of 645.16 square centimetres gives an absolute error of roughly 10 square centimetres. Two conclusions follow. First, squaring a quantity doubles its percentage error, so every power in a formula must be counted when an uncertainty budget is prepared. Second, the result should be reported with a precision consistent with the input: 6.45 × 10² square centimetres with an uncertainty of about 10, rather than the false precision of 645.16. The general rule is that relative errors add when quantities are multiplied, and multiply by the power when a quantity is raised to one.",
+      "explanation": "Compute the relative error, double it for the square, convert to an absolute error, and conclude with the propagation rule and correct reporting."
+    },
+    {
+      "id": "isc11-phy-measure-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The period of a pendulum is assumed to depend on its length and on the acceleration due to gravity. Deduce the relation dimensionally and discuss what the method leaves unresolved.",
+      "answer": "Assume the period T is proportional to the length raised to a power a and to the acceleration due to gravity raised to a power b. The dimensions are T for the period, L for length and L T⁻² for g, so the dimensional equation reads T¹ = Lᵢ (L T⁻²)ⁿ, that is L to the power a plus b and T to the power minus 2b. Equating powers of T gives minus 2b equals one, so b is minus one half; equating powers of L gives a plus b equals zero, so a is plus one half. The relation is therefore the period proportional to the square root of length over g, or T equals k times the square root of l over g for some constant k. What the method leaves unresolved is k itself: dimensional analysis cannot produce 2π, and only experiment or a full dynamical derivation fixes the constant. The method also assumes the form of the dependence — a product of powers — and would miss any additional variable such as amplitude if the amplitude had been omitted from the original assumption.",
+      "explanation": "Set up the product assumption, equate powers to find the exponents, state the final proportionality, and name what remains undetermined."
+    }
+  ]
+}

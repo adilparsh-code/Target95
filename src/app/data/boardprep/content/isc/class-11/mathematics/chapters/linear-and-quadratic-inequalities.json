@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-inequalities",
+  "title": "Linear and Quadratic Inequalities",
+  "kind": "mathematics",
+  "tagline": "Solving inequalities in one variable, the sign rule that flips under multiplication, solution sets on the number line and sign charts.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "An inequality asks a different question from an equation: not where a graph meets the axis, but where it lies above or below it. The algebra of linear inequalities is almost trivial — with one dangerous exception, the sign flip when multiplying by a negative number — so the chapter’s real content is bookkeeping: representing solutions as intervals, intersecting and uniting solution sets, and reading the sign of a quadratic across the critical points that its roots define. These skills reappear immediately in the discriminant conditions of quadratics, in the domain of a function, and later in calculus.",
+    "facts": [
+      {
+        "label": "The one rule",
+        "value": "Multiplying or dividing an inequality by a negative number reverses the inequality sign."
+      },
+      {
+        "label": "Interval notation",
+        "value": "(a, b) excludes the ends, [a, b] includes them; ∪ joins sets, ∩ intersects them."
+      },
+      {
+        "label": "Quadratic sign rule",
+        "value": "For a > 0, ax² + bx + c > 0 outside the roots and < 0 between them."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Inequality solving feeds the discriminant and domain questions that carry steady marks."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Solve linear inequalities in one variable and represent the solution on a number line and in interval notation.",
+    "Combine solution sets by intersection and union and solve compound inequalities.",
+    "Determine the sign of a quadratic expression in each interval defined by its roots.",
+    "Solve quadratic and rational inequalities using a sign chart with critical points.",
+    "Answer applied inequality questions, including parameter conditions from discriminant constraints."
+  ],
+  "learn": [
+    {
+      "id": "linear-inequalities",
+      "title": "Solving linear inequalities in one variable",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A linear inequality is solved exactly like an equation, with one exception that dominates every mistake in this chapter: adding or subtracting the same quantity preserves the direction of the sign, but multiplying or dividing by a negative quantity reverses it. The reason is visible on the number line — multiplying by −1 reflects the line about zero, turning every point greater than a value into one less than its image. The solution of a linear inequality is therefore an interval rather than a point: 2x − 3 < 5 becomes x < 4, meaning every number below 4 works, and the answer is written as the interval (−∞, 4). The endpoint itself is excluded for a strict inequality and included for a weak one, which is the difference between a round bracket and a square bracket in interval notation. The usual strategy for a compound inequality is to isolate the middle term first: multiply out, move constants, and let x stand alone in the centre."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Adding or subtracting a number keeps the sign; multiplying or dividing by a negative number flips it.",
+            "Solution sets are written as intervals: (a, b) open, [a, b] closed, [a, b) or (a, b] half-open.",
+            "The extended real endpoints: (−∞, ∞) is the whole line, and ±∞ always takes a round bracket.",
+            "Compound inequalities are solved by isolating the middle expression in one chain.",
+            "Dividing by an expression of unknown sign is forbidden — bring everything to one side instead."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "−2x > 6 divides to x < −3",
+              "note": "Dividing by −2 reverses the sign; a quick test at x = −4 confirms −2(−4) = 8 > 6."
+            },
+            {
+              "text": "2 ≤ (3x + 1)/2 < 5 becomes 4 ≤ 3x + 1 < 10, then 3 ≤ 3x < 9, so 1 ≤ x < 3",
+              "note": "Multiply the chain by 2, subtract 1, then divide by 3 — the direction never changes because 3 > 0."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Number-line reading of inequality signs",
+          "columns": [
+            "Sign",
+            "Interval form",
+            "Dot on the number line"
+          ],
+          "rows": [
+            [
+              "x < a",
+              "(−∞, a)",
+              "open circle at a"
+            ],
+            [
+              "x ≤ a",
+              "(−∞, a]",
+              "solid dot at a"
+            ],
+            [
+              "a < x < b",
+              "(a, b)",
+              "open circles at both ends"
+            ],
+            [
+              "a ≤ x ≤ b",
+              "[a, b]",
+              "solid dots at both ends"
+            ],
+            [
+              "x > b or x < a",
+              "(−∞, a) ∪ (b, ∞)",
+              "two rays joined by ∪"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solution-sets",
+      "title": "Solution sets, intersections and unions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A solution set collects every value that satisfies the inequality, and the operations on sets give two ways to combine sets. The union of two solution sets asks for values satisfying at least one condition and is written with ∪; the intersection asks for values satisfying both at once and is written with ∩. Graphically the union paints both shaded regions and the intersection paints only their overlap, which is why intersecting two finite intervals always produces an interval no larger than the smaller of them, while the union may stretch to infinity. Membership testing finishes the job: substitute a test point from each region cut out by the critical values, record its sign, and the sign of the whole region follows. This habit — cut, test, record — is the same routine the quadratic sign chart uses in the next lesson."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Union ∪ = values satisfying at least one condition; intersection ∩ = values satisfying every condition.",
+            "[2, 5) ∪ (8, ∞) covers two pieces; [2, 5) ∩ (4, 9) collapses to (4, 5).",
+            "The intersection of two intervals never extends beyond the smaller endpoint bound.",
+            "Test one point per region to fix the sign of an expression across that whole region.",
+            "A graph of y = f(x) solves f(x) > 0 by reading where the curve stands above the axis."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve x − 1 > 0 and 3x ≤ 12 together: x > 1 and x ≤ 4 give the interval (1, 4]",
+              "note": "Both conditions must hold, so take the overlap of the two rays."
+            },
+            {
+              "text": "The set {x : x < 2} ∪ {x : x ≥ 5} is the whole line minus [2, 5)",
+              "note": "The union keeps both pieces; only the gap between them is missing."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Solution set",
+              "meaning": "All values of the variable satisfying the inequality."
+            },
+            {
+              "term": "Union",
+              "meaning": "Set of values satisfying at least one of the given conditions, written ∪."
+            },
+            {
+              "term": "Intersection",
+              "meaning": "Set of values satisfying all conditions at once, written ∩."
+            },
+            {
+              "term": "Interval",
+              "meaning": "Connected run of real numbers, open or closed at each end."
+            },
+            {
+              "term": "Test point",
+              "meaning": "A sample value from a region used to fix the sign of the expression there."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quadratic-inequalities",
+      "title": "Quadratic inequalities and sign charts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A quadratic expression changes sign only where it equals zero, so its roots cut the number line into regions on which the sign is constant. The recipe is fixed: bring everything to one side so the expression reads f(x) > 0, < 0, ≥ 0 or ≤ 0; find the critical points by solving f(x) = 0; mark those points on a number line; test one value from each region; then collect the regions whose sign matches the question. For a quadratic with a positive leading coefficient the shape is an upward parabola, so the expression is negative between the roots and positive outside them — a fact that lets a solved question skip the testing when the picture is clear. The endpoints join the solution only for the weak inequalities ≥ and ≤, and a repeated root touches zero without changing sign, so a square such as (x − 2)² is positive everywhere except at x = 2."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Bring all terms to one side: never divide by a factor whose sign is unknown.",
+            "Critical points are the roots of f(x) = 0; they are the only places the sign can change.",
+            "For a > 0: f(x) > 0 outside the roots, f(x) < 0 between them; for a < 0 the pattern reverses.",
+            "Include the endpoints only for ≥ or ≤; strict inequalities exclude every root.",
+            "A repeated root such as (x − 1)² does not change sign — the curve touches and turns back."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "x² − 4 < 0 has roots ±2 and opens upward, so the solution is the interval (−2, 2)",
+              "note": "Test x = 0: 0 − 4 = −4 < 0, confirming the middle region is the one to keep."
+            },
+            {
+              "text": "x² − 5x + 6 ≥ 0 factors as (x − 2)(x − 3) ≥ 0 with roots 2 and 3",
+              "note": "Positive outside the roots, so the solution is (−∞, 2] ∪ [3, ∞), endpoints included by the ≥."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sign chart for x² − 5x + 6 across its roots",
+          "columns": [
+            "Region",
+            "Test value",
+            "Sign of the expression",
+            "Satisfies > 0?"
+          ],
+          "rows": [
+            [
+              "x < 2",
+              "x = 0",
+              "+6, positive",
+              "yes"
+            ],
+            [
+              "2 < x < 3",
+              "x = 2.5",
+              "−0.25, negative",
+              "no"
+            ],
+            [
+              "x > 3",
+              "x = 4",
+              "+2, positive",
+              "yes"
+            ],
+            [
+              "x = 2 or x = 3",
+              "the roots",
+              "exactly 0",
+              "only for ≥ 0"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applied-inequalities",
+      "title": "Applied inequalities and parameter conditions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Applied inequality questions come in two shapes. The first is a word problem whose sentence converts into an inequality — a quantity required to exceed a threshold, a length that must stay positive, a cost kept within a budget — and whose solution set must then be trimmed by the context, since a length between 4 and 7 metres is not a licence for 4.5 metres to be negative. The second shape hides the inequality inside a condition: for a quadratic to have no real roots, its discriminant must be negative, and solving that inequality in the parameter gives the range of admissible values. The same move handles conditions such as a parabola lying entirely above the axis (discriminant negative and a > 0 together). In both shapes the discipline is identical — write the condition, reduce it to a standard inequality, solve it, and read the answer back in the language of the question."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Translate the sentence first; solve second; interpret third.",
+            "Discriminant conditions are inequalities in the parameter: D < 0 for no real roots, D ≥ 0 for real roots.",
+            "A parabola above the axis for all x needs a > 0 together with D < 0.",
+            "Trim the algebraic solution set by the context: positive lengths, integer counts, non-negative times.",
+            "State the final answer as a range of values, not only as an inequality symbol."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "kx² + 4x + 1 = 0 has no real roots: D = 16 − 4k < 0 gives k > 4",
+              "note": "The case k = 0 must be excluded separately, because it turns the equation into the linear 4x + 1 = 0, which has a root."
+            },
+            {
+              "text": "A rectangle of perimeter 24 m needs an area above 35 m²: x(12 − x) > 35 → x² − 12x + 35 < 0",
+              "note": "Factor as (x − 5)(x − 7) < 0, so the side must lie strictly between 5 m and 7 m."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find x with 3x − 7 ≤ 2x + 5 and x + 1 > 0: x ≤ 12 and x > −1 give (−1, 12]",
+              "note": "Solve each half separately, then intersect the two intervals."
+            },
+            {
+              "text": "For which integers is (2x − 1)/3 > x − 4? Clearing the 3 gives 2x − 1 > 3x − 12, so x < 11",
+              "note": "Multiplying by 3 preserves the sign; the integer solutions are every whole number below 11."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The solution set of a quadratic inequality on the number line",
+      "description": "A horizontal number line with open circles at −2 and 2, the segment between them shaded, and open circles at the ends of the two rays outside the interval drawn faintly to show the complementary set.",
+      "labels": [
+        "critical points at the roots −2 and 2",
+        "shaded segment is the solution of x² − 4 < 0",
+        "open circle means the endpoint is excluded",
+        "regions are tested with one sample point each",
+        "the complementary set x² − 4 > 0 is the two outer rays"
+      ]
+    },
+    {
+      "caption": "Figure: Where a parabola stands relative to the x-axis",
+      "description": "An upward parabola crossing the x-axis at 2 and 3, with the portion between the roots drawn below the axis and shaded downward, and the portions outside the roots above the axis.",
+      "labels": [
+        "above the axis: expression positive",
+        "below the axis: expression negative",
+        "roots 2 and 3 are the critical points",
+        "sign can change only at a root",
+        "vertex below the axis means two real roots exist"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Multiplying or dividing an inequality by a negative number reverses the sign — the one rule to remember.",
+    "The solution of an inequality is a set of values, written as an interval or a union of intervals.",
+    "Round brackets exclude an endpoint; square brackets include it; infinities always take round brackets.",
+    "Intersection ∩ keeps values satisfying every condition; union ∪ keeps values satisfying at least one.",
+    "Quadratic inequalities are solved by critical points, a sign chart and one test point per region.",
+    "For a > 0 the quadratic is positive outside its roots and negative between them.",
+    "Include the endpoints only when the inequality is weak (≥ or ≤).",
+    "A repeated root does not change sign, so (x − a)² > 0 holds everywhere except at x = a.",
+    "Discriminant conditions on parameters are ordinary inequalities once D is written out.",
+    "Always trim the algebraic solution set back to what the context permits."
+  ],
+  "examFocus": [
+    "Never divide by an expression whose sign is unknown; move every term to one side instead — losing a sign flips the whole answer.",
+    "Show the sign chart with the test value and its sign written in each region; markers look for the tested values.",
+    "When the answer is an interval, also mark it on the number line — graphical representation is separately assessed.",
+    "Parameter questions need the degenerate case checked: k = 0 changes the equation’s degree and must be discussed."
+  ],
+  "vocabulary": [
+    {
+      "word": "Inequality",
+      "meaning": "Statement relating two expressions with <, ≤, > or ≥ rather than =."
+    },
+    {
+      "word": "Solution set",
+      "meaning": "Set of all values satisfying an inequality."
+    },
+    {
+      "word": "Interval notation",
+      "meaning": "Compact writing of a solution set, as (2, 5] or [−1, 3)."
+    },
+    {
+      "word": "Critical point",
+      "meaning": "Value where the expression equals zero, where a sign change can occur."
+    },
+    {
+      "word": "Sign chart",
+      "meaning": "Table recording the sign of an expression on each region between critical points."
+    },
+    {
+      "word": "Union",
+      "meaning": "Combination ∪ of sets keeping elements of either set."
+    },
+    {
+      "word": "Intersection",
+      "meaning": "Combination ∩ of sets keeping only common elements."
+    },
+    {
+      "word": "Strict inequality",
+      "meaning": "One using < or >, whose endpoints are excluded from the solution."
+    },
+    {
+      "word": "Compound inequality",
+      "meaning": "Two inequalities joined, as a < x ≤ b, solved as a single chain."
+    },
+    {
+      "word": "Degenerate case",
+      "meaning": "The parameter value that reduces the equation to a lower degree."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-inequality-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solution of −2x > 6 is:",
+      "options": [
+        "x > −3",
+        "x < −3",
+        "x > 3",
+        "x < 3"
+      ],
+      "correctIndex": 1,
+      "answer": "x < −3",
+      "explanation": "Dividing both sides by −2 reverses the inequality sign, giving x < −3; checking x = −4 gives 8 > 6, which holds."
+    },
+    {
+      "id": "isc11-math-inequality-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solution set of x² − 4 < 0 on the real line is:",
+      "options": [
+        "(−∞, −2) ∪ (2, ∞)",
+        "(−2, 2)",
+        "[−2, 2]",
+        "the empty set"
+      ],
+      "correctIndex": 1,
+      "answer": "(−2, 2)",
+      "explanation": "The parabola opens upward with roots ±2, so it lies below the axis strictly between them: the open interval (−2, 2)."
+    },
+    {
+      "id": "isc11-math-inequality-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solution of 3(x − 1) ≤ 2x + 4 is:",
+      "options": [
+        "x ≥ 7",
+        "x ≤ 7",
+        "x ≤ 1",
+        "x ≥ 1"
+      ],
+      "correctIndex": 1,
+      "answer": "x ≤ 7",
+      "explanation": "Expanding gives 3x − 3 ≤ 2x + 4; subtracting 2x and adding 3 leaves x ≤ 7."
+    },
+    {
+      "id": "isc11-math-inequality-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these points lies inside the region y > 2x + 1?",
+      "options": [
+        "(0, 0)",
+        "(2, 5)",
+        "(1, 4)",
+        "(3, 7)"
+      ],
+      "correctIndex": 2,
+      "answer": "(1, 4)",
+      "explanation": "Testing each point: 0 > 1 fails, 5 > 5 fails, 4 > 3 holds, and 7 > 7 fails; only (1, 4) satisfies the inequality strictly."
+    },
+    {
+      "id": "isc11-math-inequality-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Multiplying both sides of an inequality by a negative number ______ the inequality sign.",
+      "answer": "reverses",
+      "explanation": "Multiplication by a negative reflects the number line, so greater becomes smaller and the sign must flip to keep the statement true."
+    },
+    {
+      "id": "isc11-math-inequality-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For x² − 9 > 0 the solution lies outside the interval ______ written in interval notation.",
+      "answer": "(−3, 3)",
+      "explanation": "The expression factors as (x − 3)(x + 3), positive outside the roots ±3, so the excluded middle is exactly the interval from −3 to 3."
+    },
+    {
+      "id": "isc11-math-inequality-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve the compound inequality 2 ≤ (3x + 1)/2 < 5 and give the answer in interval notation.",
+      "answer": "Multiplying by 2 gives 4 ≤ 3x + 1 < 10; subtracting 1 gives 3 ≤ 3x < 9; dividing by 3 gives 1 ≤ x < 3. In interval notation the solution set is [1, 3).",
+      "explanation": "Isolate the middle term through the chain — every operation is applied to all three parts, and the direction never changes because the multipliers are positive."
+    },
+    {
+      "id": "isc11-math-inequality-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the sign of (x − a)(x − b), with a < b, can change only at x = a and x = b.",
+      "answer": "The product is a continuous expression built from two linear factors, each of which vanishes only at its own root. Away from a and b each factor keeps a fixed non-zero sign, so their product keeps a fixed sign as well; only at the zeros can the sign be swapped by a factor passing through zero. Hence the number line splits into three regions, and one test point settles the sign in each.",
+      "explanation": "Zeros are the only places a product of continuous factors can change sign, which is exactly why critical points partition the line into constant-sign regions."
+    },
+    {
+      "id": "isc11-math-inequality-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve the rational inequality (x − 3)/(x + 2) ≥ 0.",
+      "answer": "The expression is zero at x = 3 and undefined at x = −2, so the critical points are −2 and 3. Testing the three regions: for x < −2 both numerator and denominator are negative, giving a positive quotient; for −2 < x < 3 the signs differ, giving a negative quotient; for x > 3 both are positive. The quotient is ≥ 0 on (−∞, −2) ∪ [3, ∞): the endpoint 3 is included because the expression equals zero there, while −2 is excluded because the denominator vanishes.",
+      "explanation": "Mark both critical points, test one value in each region, then include the zero of the numerator and exclude the zero of the denominator — the two endpoints follow different rules."
+    },
+    {
+      "id": "isc11-math-inequality-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find all values of k for which the equation kx² + 4x + 1 = 0 has no real roots.",
+      "answer": "If k = 0 the equation becomes the linear 4x + 1 = 0, which has the real root x = −1/4, so k = 0 does not qualify. For k ≠ 0 the equation is quadratic, and it has no real roots exactly when the discriminant is negative: D = 16 − 4k < 0, that is 4k > 16, giving k > 4. Combining both parts, the equation has no real roots precisely for k > 4.",
+      "explanation": "The degenerate case k = 0 must be discussed first because it changes the degree of the equation; then apply D < 0 to the genuine quadratic and solve the resulting inequality in the parameter."
+    }
+  ]
+}

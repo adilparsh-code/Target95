@@ -1,0 +1,503 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-ethical-computing",
+  "slug": "ethical-computing",
+  "title": "Ethical Computing",
+  "kind": "computer-applications",
+  "tagline": "Copyright, plagiarism, licences and privacy — the rules of a good digital citizen, and the exam questions that test them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Code copies perfectly, moves instantly and reaches everyone, so the smallest dishonesty in computing scales into a large harm. Ethical computing is the practice of working in ways that respect other people’s rights, protect your own data, and follow both the law and the good judgement that sits above it. This chapter covers the four areas the syllabus examines every year: intellectual property, plagiarism, software licences, and privacy and safety online — each with the vocabulary, the comparisons and the scenario analysis that earn full marks.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Ethical & Social Computing (ICSE Class IX)"
+      },
+      {
+        "label": "Copyright",
+        "value": "Protection arises automatically the moment a work is created"
+      },
+      {
+        "label": "Plagiarism",
+        "value": "Presenting another’s work or code as your own, even when copying was allowed"
+      },
+      {
+        "label": "Licences",
+        "value": "Proprietary restricts use; open source permits study, change and redistribution on its terms"
+      },
+      {
+        "label": "Privacy",
+        "value": "Personal data is anything that identifies a person — share less, verify more"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Define intellectual property and distinguish copyright, trademarks and plagiarism.",
+    "Compare proprietary and open-source licences and state what each one grants.",
+    "Identify privacy and cyber-safety risks in everyday online situations.",
+    "Apply a responsible-user checklist to a realistic digital scenario."
+  ],
+  "learn": [
+    {
+      "id": "ethics-why",
+      "title": "Why computing needs ethics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Computing amplifies intention: a message reaches millions in seconds, a copied file is indistinguishable from the original, and an online post can be read years after it was written by people it was never meant for. Law sets the floor of acceptable conduct, but it cannot be written fast enough to cover every new tool, which is where ethics steps in — the habits of asking what the right action is before discovering what the legal one happens to be. Responsibility in computing follows capability: the more a person can do with code, the more their choices weigh on other people."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Law defines what may be punished; ethics defines what ought to be done, and the two are not always the same.",
+            "Online actions scale and persist — one careless post can reach an audience its author never imagined.",
+            "A digital citizen is someone whose online habits respect other people’s rights and their own safety alike."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Ethics",
+              "meaning": "The set of principles that distinguish right conduct from wrong conduct in a field.",
+              "context": "Citing the source of code you adapted rather than presenting it as your own."
+            },
+            {
+              "term": "Digital citizenship",
+              "meaning": "Responsible, respectful participation in the online world.",
+              "context": "Reporting abuse instead of forwarding it."
+            },
+            {
+              "term": "Digital footprint",
+              "meaning": "The trail of posts, logs and data that remains after online activity.",
+              "context": "Old posts an admissions officer can still read."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ethics-ip",
+      "title": "Intellectual property in computing",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Intellectual property covers creations of the mind — source code, writing, music, designs, inventions — and grants their creators certain rights over how others may use them. The three rights the syllabus asks about are copyright, which protects the expression of a work; trademark, which protects an identity such as a name or logo; and patent, which protects an invention. Copyright is the one that surprises students most: it arises automatically the instant a work is fixed in a form, with no registration and no notice, and it protects the expression of an idea rather than the idea itself."
+        },
+        {
+          "type": "table",
+          "caption": "Three rights compared",
+          "columns": [
+            "Right",
+            "What it protects",
+            "How it is obtained",
+            "Everyday example"
+          ],
+          "rows": [
+            [
+              "Copyright",
+              "The expression of a work — code, text, music",
+              "Automatically, on creation",
+              "Your program’s source code, the day you write it"
+            ],
+            [
+              "Trademark",
+              "An identity — name, logo, slogan",
+              "By registration and genuine use",
+              "A company logo on an app icon"
+            ],
+            [
+              "Patent",
+              "A technical invention or process",
+              "By application and examination",
+              "A new compression algorithm"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A student writes a game at home, never publishes it, and never prints a copyright notice. A classmate finds the file and distributes it.",
+              "note": "The work was copyrighted the moment it was written — no notice and no registration were needed, so distribution without permission infringes the creator’s rights even though the file was never formally \"published\"."
+            },
+            {
+              "text": "An app developer draws a logo that closely imitates a well-known brand’s mark so users think the app is official.",
+              "note": "That is a trademark problem rather than a copyright one: the expression differs, but the identity is being passed off. Confusing users about who made something is the harm trademarks exist to prevent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ethics-plagiarism",
+      "title": "Plagiarism — copying that may be allowed but is still wrong",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Plagiarism is presenting another person’s work, words or code as your own, and it is judged by the misrepresentation rather than by whether the copying broke any law. That is what separates it from infringement: a student may have every right to read a program — an open-source one, a permitted sample, a friend’s shared file — and still plagiarise it by submitting it without attribution as though it were original work. In programming the disguises are predictable: renaming the variables, reordering the statements, rewriting the comments, and hoping the similarity has been laundered away."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A student downloads a completed program from a public repository, renames the variables, changes the comments, and submits the file as their own coursework.",
+              "note": "This is plagiarism: the logic was authored by someone else and the submission claims otherwise. Renaming identifiers changes nothing about authorship, and the licence of the repository — if cited — would at least have made the reuse lawful; the claim of originality is what makes it wrong."
+            },
+            {
+              "text": "Two students discuss how a sorting algorithm works, then return home and each write their own implementation from that shared understanding.",
+              "note": "This is legitimate collaboration: ideas were exchanged with attribution in mind and each program is independently written. Understanding may be shared freely; authorship of the code itself may not be surrendered."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cite every source you adapted — a named reference turns borrowed work into honest scholarship.",
+            "Discuss algorithms with classmates, but write your own code: ideas are shared, authorship is not.",
+            "Keep drafts and history — they are proof of your own process if authorship is ever questioned.",
+            "Collusion is presenting group work as individual; the fix is the same — state honestly who did what."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ethics-licence",
+      "title": "Licences: proprietary and open source",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A licence is the legal permission attached to a piece of software, and its absence has a default meaning: with no licence granted, all rights remain reserved by the creator and using the program at all is technically unauthorised. A proprietary licence grants use under conditions — install limits, no modification, no redistribution — and often hides the source code entirely, so users run the program but cannot inspect or change it. An open-source licence grants the source itself along with explicit rights to study it, modify it and redistribute it, provided the terms of that licence travel with the copies."
+        },
+        {
+          "type": "table",
+          "caption": "Proprietary versus open-source licences",
+          "columns": [
+            "Aspect",
+            "Proprietary licence",
+            "Open-source licence"
+          ],
+          "rows": [
+            [
+              "Source code",
+              "Hidden — only the program is supplied",
+              "Visible and readable by anyone"
+            ],
+            [
+              "Modify",
+              "Not permitted",
+              "Permitted, on the licence’s terms"
+            ],
+            [
+              "Redistribute",
+              "Restricted by the agreement",
+              "Allowed, often with attribution"
+            ],
+            [
+              "Typical form",
+              "A paid product with an EULA",
+              "MIT, GPL and similar public licences"
+            ],
+            [
+              "User’s power",
+              "Run under conditions",
+              "Run, study, change and share"
+            ]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Licence",
+              "meaning": "A grant of permission defining what a user may do with a work or program.",
+              "context": "The MIT licence that lets you reuse a library with attribution."
+            },
+            {
+              "term": "EULA",
+              "meaning": "An end-user licence agreement — the conditions accepted when installing proprietary software.",
+              "context": "A single-install restriction in paid software."
+            },
+            {
+              "term": "Copyleft",
+              "meaning": "A licence rule requiring distributed derivatives to carry the same freedoms, as in the GPL.",
+              "context": "Modified open-source code that must itself stay open when shared."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Free of charge and free of rules are different ideas: an open-source licence is full of rules — attribution, notice preservation, share-alike conditions — and breaking them is infringement even though no money changed hands. The responsible habit is to read the licence of anything you embed, quote or redistribute before you use it, because the licence, not the price tag, defines what you are allowed to do next."
+        }
+      ]
+    },
+    {
+      "id": "ethics-privacy",
+      "title": "Privacy, data and staying safe online",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Personal data is any information that can identify a person — a name, a phone number, a location, a photograph, a message history — and the defining risk of modern platforms is that they collect more of it than users realise. Every grant of permission and every careless post extends the digital footprint, a trail that outlasts the mood that created it and can be read by colleges, employers and strangers alike. Safety habits are therefore mostly habits of restraint: verify before you trust, share the minimum, and think once before posting anything permanent."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Use strong, unique passwords and two-factor authentication, so one leaked site cannot unlock the rest.",
+            "Treat unexpected links and calls for urgent verification as phishing — check with the sender through another channel.",
+            "Question every app permission: a game that wants your contacts is asking for far more than its purpose needs.",
+            "Think before posting — locations, photos and opinions become a permanent footprint that you do not fully control."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A free game requests permission to read contacts, location and photos during installation.",
+              "note": "The responsible response is to deny by default and ask what the permission is for: none of the three is needed to play, and data handed over can be stored, shared or leaked. Access should be granted only for features genuinely used, from a publisher the user trusts."
+            },
+            {
+              "text": "A student posts a photograph of a classmate at an event, with a mocking caption, before checking with them.",
+              "note": "Two issues combine: the classmate’s privacy and consent over their image, and the social responsibility of what is said about them. The correct course is to ask permission before posting and to refuse captions that ridicule — reach and permanence make the harm larger, not smaller."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ethics-practice",
+      "title": "Exam drills — definitions, comparisons and scenarios",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Theory marks in this chapter come in three shapes. Definitions ask for a term with one example — write the term first, then ground it. Comparisons ask for a table-like answer with a row per aspect, so structure your response as paired contrasts rather than two loose paragraphs. Scenarios present a story and ask you to identify the issues: name each distinct ethical problem separately, then give the correct course of action for it, because examiners award marks per identified issue and per matched remedy."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Learn the three-rights table — copyright, trademark, patent — with one example for each cell.",
+            "Practise the licence comparison as paired rows: source, modify, redistribute, cost, power.",
+            "In scenario answers, count your issues: one point is lost for merging two problems into one sentence.",
+            "Quote the remedy in action words — cite, seek permission, deny access, ask consent, report."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: From creation to reuse — a work’s journey",
+      "description": "A left-to-right lifecycle: an author creates a work, and copyright attaches automatically at that moment. A licence box then states what others may do with it. Two exits follow: a lawful path labelled reuse with attribution, and two fault paths — plagiarism, where reuse is claimed as one’s own, and infringement, where reuse happens without permission at all.",
+      "labels": [
+        "Author creates the work",
+        "Copyright arises automatically",
+        "Licence states permitted uses",
+        "Reuse with attribution: lawful",
+        "Plagiarism: reuse claimed as own",
+        "Infringement: reuse without permission"
+      ]
+    },
+    {
+      "caption": "Figure: Where personal data goes",
+      "description": "Concentric layers around a user icon: the innermost layer is what the user posts deliberately; the next is what apps collect through permissions; the next is location and device trails gathered passively; the outer layer is sharing with third parties and advertisers. An arrow labelled digital footprint points outward from the figure, showing that the trail persists after the session ends.",
+      "labels": [
+        "What you post",
+        "What apps collect",
+        "Location and device trails",
+        "Third-party sharing",
+        "The lasting footprint"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Copyright arises automatically on creation — no notice, registration or publication is required.",
+    "Copyright protects the expression of an idea, not the idea itself; trademark protects identity, patent protects invention.",
+    "Plagiarism is misrepresentation of authorship and can occur even when the copying itself was permitted.",
+    "A proprietary licence restricts use and hides source; an open-source licence grants study, modification and redistribution.",
+    "Free of charge is not free of rules — every licence carries conditions that must travel with copies.",
+    "Personal data is anything that identifies a person, and permissions hand over more of it than users expect.",
+    "The digital footprint persists: what is posted today can be read years later by unexpected audiences.",
+    "Scenario answers earn per issue identified and per matched remedy, so name each problem separately."
+  ],
+  "examFocus": [
+    "Definition question: state the term, then one example — copyright and plagiarism are the favourites.",
+    "Differentiate question: answer as paired rows — what each right protects, how it is obtained, one example.",
+    "Licence comparison: source visibility, modification, redistribution and cost, with a named example of each kind.",
+    "Scenario question: list each distinct ethical issue, then the correct course of action for it."
+  ],
+  "vocabulary": [
+    {
+      "word": "Intellectual property",
+      "meaning": "Creations of the mind protected by law.",
+      "context": "Source code, music and writing."
+    },
+    {
+      "word": "Copyright",
+      "meaning": "The automatic right over the expression of a created work.",
+      "context": "Your program, protected from the day you wrote it."
+    },
+    {
+      "word": "Plagiarism",
+      "meaning": "Presenting another’s work or code as your own.",
+      "context": "Renaming variables in a downloaded program."
+    },
+    {
+      "word": "Licence",
+      "meaning": "The permission terms attached to a work or program.",
+      "context": "MIT permitting reuse with attribution."
+    },
+    {
+      "word": "Personal data",
+      "meaning": "Any information that identifies a person.",
+      "context": "A phone number or a geotagged photo."
+    },
+    {
+      "word": "Digital footprint",
+      "meaning": "The trail of posts, logs and data left by online activity.",
+      "context": "Old posts an employer can still read."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-ethics-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Copyright on an original work arises:",
+      "options": [
+        "Automatically, the moment the work is created",
+        "Only when a copyright notice is printed",
+        "On registration with a government office",
+        "After the work is published for the first time"
+      ],
+      "correctIndex": 0,
+      "answer": "Automatically, the moment the work is created",
+      "explanation": "Protection attaches as soon as the work is fixed in tangible form — no notice, fee or registration is required. Notices and registration may help in a dispute, but they are not what creates the right.",
+      "commonMistake": "Believing a copyright notice is what grants protection; it only declares a right that already exists."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An open-source licence typically permits:",
+      "options": [
+        "Viewing, modifying and redistributing the program on the licence’s terms",
+        "Using the program only on one personal computer",
+        "Changing the program but never sharing it",
+        "Nothing — open source means the code is free of any licence"
+      ],
+      "correctIndex": 0,
+      "answer": "Viewing, modifying and redistributing the program on the licence’s terms",
+      "explanation": "The source is visible and the licence explicitly grants study, change and redistribution — subject to its conditions, such as preserving the notice or keeping derivatives open.",
+      "commonMistake": "Reading \"open source\" as \"no licence\": every open-source program is licensed, and the licence is what grants the freedoms."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which action is plagiarism?",
+      "options": [
+        "Submitting a friend’s program with renamed variables as your own coursework",
+        "Quoting a book with the author named in your answer",
+        "Using an open-source library and crediting its licence",
+        "Discussing an algorithm with a classmate and then writing your own code"
+      ],
+      "correctIndex": 0,
+      "answer": "Submitting a friend’s program with renamed variables as your own coursework",
+      "explanation": "Plagiarism is the false claim of authorship — renaming identifiers disguises the source but does not change who wrote the logic. The other options all attribute or create honestly.",
+      "commonMistake": "Thinking plagiarism requires breaking a copyright rule — it is judged on the misrepresentation, not on illegality."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these is personal data?",
+      "options": [
+        "A user’s phone number",
+        "The average temperature of a city",
+        "A public bus timetable",
+        "The colour of the sky at noon"
+      ],
+      "correctIndex": 0,
+      "answer": "A user’s phone number",
+      "explanation": "Personal data is information that identifies a person. A phone number points straight at an individual, while the other three describe the world and identify nobody.",
+      "commonMistake": "Treating any online data as personal — the test is whether it can single out a person."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the statement:\nCopyright arises ______ the moment an original work is created.",
+      "answer": "automatically",
+      "explanation": "The right attaches by the act of creation itself — no form, fee or office is involved. The word is what makes copyright different from trademark and patent, both of which must be applied for.",
+      "commonMistake": "Writing \"on registration\": registration may strengthen a claim but never creates the right."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate plagiarism from copyright infringement with one example of each.",
+      "answer": "Copyright infringement breaches the legal rights of a creator — using a protected work without permission, such as distributing a program its author never authorised. Plagiarism is presenting another’s work as your own, which is a matter of honest attribution rather than law: submitting a friend’s openly shared program as your own coursework may infringe no copyright at all, yet it is still plagiarism. Infringement is judged against the owner’s rights; plagiarism against the truth of your claim.",
+      "explanation": "One mark is for locating infringement in law and plagiarism in misrepresentation, and one for an example showing they can occur independently.",
+      "commonMistake": "Describing plagiarism as a \"type of infringement\" — the two overlap often but neither contains the other."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Compare proprietary and open-source licences, quoting one example of each.",
+      "answer": "A proprietary licence grants use under conditions while keeping the source hidden: modification and redistribution are restricted, and terms are set by the seller — a paid program installed under an end-user licence agreement is the typical case. An open-source licence supplies the source along with the rights to study, modify and redistribute it on stated terms — MIT and GPL are the familiar examples, with GPL additionally requiring distributed derivatives to stay open.",
+      "explanation": "One mark is for the source-and-modification contrast and one for a correct named example of each kind.",
+      "commonMistake": "Focusing on price instead of rights — the difference is what the licence permits, not what the software costs."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a note on intellectual property rights in computing, covering three rights with an example of each.",
+      "answer": "Intellectual property covers creations of the mind, and in computing three rights matter most. First, copyright protects the expression of a work — source code, documentation, music — and arises automatically the moment the work is written, with no registration: a student’s unpublished program is copyrighted from the day it was created, and copying it without permission infringes that right. Second, trademark protects an identity — a name, logo or slogan — obtained through registration and genuine use; an app that imitates a well-known brand’s icon to look official infringes the trademark even though no code was copied. Third, patent protects a technical invention, granted only after application and examination; a genuinely new algorithm could be patented by its inventor, barring others from using the process without a licence. The common thread is that creators control how their work is used, and everyone else must seek permission or stay within a licence.",
+      "explanation": "One mark per right correctly named with what it protects, one per valid example, and one for the closing synthesis about permission.",
+      "commonMistake": "Listing the three rights without examples — the question demands one example for each, and the example carries its own mark."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-09",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student downloads a program from a public repository, renames its variables, submits it as coursework, and later posts a classmate’s photo with a mocking caption. Identify three separate ethical issues in these actions and state the correct course of action for each.",
+      "answer": "Three distinct issues arise. First, plagiarism: the submitted logic was authored by someone else and the coursework claims otherwise — the correct action is to write the program personally and cite any source consulted, keeping drafts as evidence of original work. Second, licence compliance: even openly published code carries a licence, and reuse must follow its terms — attribution, preserved notices and permission to redistribute — so the correct action is to read the licence and credit the repository before any reuse, or not reuse it at all. Third, privacy and responsible social media: posting a classmate’s photograph without consent and with a mocking caption violates their privacy and amounts to ridiculing them publicly — the correct action is to ask permission before posting and to refuse content that mocks, removing the post if it was already shared.",
+      "explanation": "One mark per issue correctly named — plagiarism, licence compliance, privacy — and one more for remedies that answer all three rather than a single generic apology.",
+      "commonMistake": "Merging the first two issues into \"copying is wrong\": plagiarism and licence compliance fail differently — one breaks honest attribution, the other breaks the licence’s terms."
+    },
+    {
+      "id": "cisce-9-ca-q-ethics-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A free game asks permission to read your contacts, location and photos. A friend says \"it is free, so it is fine\". Write the four questions a responsible digital citizen asks before granting access, and state the rule you would apply.",
+      "answer": "Four questions. One — necessity: does a game have any legitimate need for contacts, location and photos to function, or is it collecting far beyond its purpose? Two — destination: who receives this data, is it shared with third parties or advertisers, and can it be sold or leaked? Three — terms: what does the app’s licence and privacy policy actually permit it to do with what I hand over, and who publishes it? Four — consequence: what persists if this data escapes — my friends’ numbers, my movements, my private images — and is that risk acceptable? The rule I apply is deny by default: grant only the minimum permission a trusted publisher genuinely needs for a feature I use, decline the rest, and remember that free of charge says nothing about what my data is worth to the collector.",
+      "explanation": "One mark per well-formed question covering necessity, destination, terms and consequence, and two for the deny-by-default rule with its minimum-permission reasoning.",
+      "commonMistake": "Answering only that \"free apps show adverts\": the question is about permissions and data, not about the price of the app."
+    }
+  ]
+}

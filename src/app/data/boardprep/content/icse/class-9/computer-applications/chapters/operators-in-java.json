@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-operators",
+  "slug": "operators-in-java",
+  "title": "Operators in Java",
+  "kind": "computer-applications",
+  "tagline": "Arithmetic, comparison, logic and order of evaluation — and the three traps that catch everyone.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Operators act on values to produce new ones, and every program you write depends on knowing both what each operator does and in what order the compiler evaluates it. Java groups arithmetic above comparison, comparison above logic, and assignment last, so 2 + 3 × 4 is 14 rather than 20 without any brackets. Alongside the big families — arithmetic, relational, logical, assignment, increment and decrement, and the conditional operator — sit three traps that account for most lost marks: confusing assignment with comparison, expecting integer division to keep its fraction, and mixing up pre- with post-increment.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Language Fundamentals (ICSE Class IX)"
+      },
+      {
+        "label": "Operator families",
+        "value": "Arithmetic, relational, logical, assignment, unary, conditional"
+      },
+      {
+        "label": "Precedence order",
+        "value": "Unary → multiplicative → additive → relational → equality → logical → assignment"
+      },
+      {
+        "label": "Integer division",
+        "value": "Discards the fractional part: 17 / 5 is 3, not 3.4"
+      },
+      {
+        "label": "Remainder",
+        "value": "The % operator returns what division leaves over: 17 % 5 is 2"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Use arithmetic operators correctly, including integer division and the remainder operator.",
+    "Apply relational and logical operators to build compound conditions that evaluate as intended.",
+    "Evaluate an expression by applying the rules of precedence and associativity step by step.",
+    "Distinguish assignment from equality and pre-increment from post-increment in given code."
+  ],
+  "learn": [
+    {
+      "id": "arithmetic",
+      "title": "Arithmetic operators, and what integer division really does",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The arithmetic family holds the familiar plus, minus and multiply alongside two operators that surprise beginners. Division between two integers discards everything after the decimal point, because the result must fit back into an integer: 17 divided by 5 is 3, not 3.4, and the discarded part does not round — it simply vanishes. The remainder operator % reports what that division left over, so 17 % 5 is 2. Together the pair answers the two questions every division hides: how many whole times it fits, and what is left."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int a = 17, b = 5; System.out.println(a / b); System.out.println(a % b); System.out.println((double) a / b);",
+              "note": "Output: 3, then 2, then 3.4 — integer division truncates, the remainder operator keeps the leftovers, and casting one operand forces true division."
+            },
+            {
+              "text": "System.out.println(10 + 20 * 2); System.out.println((10 + 20) * 2);",
+              "note": "Output: 50 then 60 — multiplication binds tighter than addition, and brackets override that order."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relational-logical",
+      "title": "Relational and logical operators",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Relational operators compare two values and answer with a boolean: greater than, less than, greater or equal, less or equal, equal to and not equal to. Logical operators then combine those answers: && requires both sides to be true, || needs at least one, and ! inverts. Because their results are true or false, these are the operators that build every condition an if statement or loop will ever test, which makes precision here directly useful rather than academic."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The six relational operators are >, <, >=, <=, == and != — note that equality is a pair of equals signs.",
+            "&& is true only when both operands are true; || is true when at least one is.",
+            "Java evaluates && and || lazily: if the left side already decides the answer the right side is never computed.",
+            "Logical operators return booleans and are used to join conditions, not to compare numbers directly."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assignment-unary",
+      "title": "Assignment, increment and decrement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The single equals sign assigns: it stores the value on the right into the variable on the left, and it evaluates to that value. The increment and decrement operators add or subtract one, and their position decides when the change happens. Written before a variable, ++i changes the value first and yields the new one; written after, i++ yields the old value and changes the variable afterwards. That one-frame difference is the source of a classic output question, so trace these operators one statement at a time."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int i = 5; System.out.println(i++); System.out.println(i); System.out.println(++i);",
+              "note": "Output: 5, then 6, then 7 — post-increment prints before changing, pre-increment changes before printing."
+            },
+            {
+              "text": "int x = 10; x += 5; System.out.println(x); x -= 3; System.out.println(x);",
+              "note": "Output: 15 then 12 — the shorthand assignment operators update the same variable in place."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "precedence",
+      "title": "Order of evaluation: precedence and associativity",
+      "blocks": [
+        {
+          "type": "table",
+          "caption": "Precedence groups from highest to lowest",
+          "columns": [
+            "Level",
+            "Operators",
+            "Worked result"
+          ],
+          "rows": [
+            [
+              "1. Unary",
+              "! , ++, -- , (type)",
+              "!true is false; ++i changes i first"
+            ],
+            [
+              "2. Multiplicative",
+              "* / %",
+              "2 + 3 * 4 = 14"
+            ],
+            [
+              "3. Additive",
+              "+ -",
+              "14 - 2 * 3 = 8"
+            ],
+            [
+              "4. Relational",
+              "< > <= >=",
+              "5 > 3 && 2 < 1 is false"
+            ],
+            [
+              "5. Equality",
+              "== !=",
+              "4 + 2 == 6 is true"
+            ],
+            [
+              "6. Logical",
+              "&& ||",
+              "true || false && false is true"
+            ],
+            [
+              "7. Assignment",
+              "= += -=",
+              "Evaluated last, right to left"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "When operators sit at the same level, associativity decides the direction: arithmetic operators group left to right, while assignment groups right to left. Precedence is only a default — brackets always win, so writing (10 + 20) * 2 forces the addition first and gives 60 instead of 50. In an examination, the reliable method for an evaluation question is to rewrite the expression one layer at a time, applying the highest remaining level each pass, until a single value is left."
+        }
+      ]
+    },
+    {
+      "id": "conditional",
+      "title": "The conditional operator, Java’s one three-part operator",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The conditional operator takes the form condition ? valueIfTrue : valueIfFalse and evaluates the condition once, then yields one of the two values. It is a compact substitute for a small if-else, and it is invaluable when you need to choose the larger of two numbers or convert a boolean into a label without opening a whole block. Because it returns a value rather than performing an action, it can appear inside an expression, which no if statement can do."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int a = 17, b = 5; int max = (a > b) ? a : b; System.out.println(max);",
+              "note": "Output: 17 — the test a > b is true, so the operator yields the first value."
+            },
+            {
+              "text": "int marks = 85; String result = (marks >= 75) ? \"pass\" : \"fail\"; System.out.println(result);",
+              "note": "Output: pass — the same three-part operator chooses between text values without an if statement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam-prep",
+      "title": "Preparing for the examination",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Output questions dominate this topic, and they are won by discipline rather than speed: evaluate one operator at a time in precedence order, and never let a familiar-looking pair of symbols mislead you. The three traps — single equals inside a condition, integer division dropping its fraction, and pre- versus post-increment — account for the majority of wrong answers, so check your working against them before committing. Where the question asks for a corrected statement, name the fix precisely: == for comparison, a cast or floating-point operand for division, and a stated position for the increment."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rewrite complex expressions layer by layer, applying precedence groups from the top down.",
+            "Check every = versus == before running a condition mentally.",
+            "For division questions, first ask whether both operands are integers; if so, the result is truncated.",
+            "When an increment appears inside a larger expression, write the variable’s value before and after on separate lines."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Precedence decides the answer",
+      "description": "The expression 2 + 3 * 4 shown twice with brackets. The upper path marks * with a \"first\" badge leading to 2 + 12, then + leading to 14. The lower path shows (2 + 3) * 4 evaluated as 5 * 4 = 20, with a note that explicit brackets always override precedence.",
+      "labels": [
+        "Multiplication binds tighter",
+        "2 + 12 = 14",
+        "Brackets override",
+        "5 * 4 = 20"
+      ]
+    },
+    {
+      "caption": "Figure: The two timelines of increment",
+      "description": "Two timeline strips for i = 5. The post-increment strip shows \"value 5 returned\" first, then \"i becomes 6\". The pre-increment strip shows \"i becomes 6\" first, then \"value 6 returned\". A shared endpoint marks the final value of i after both operators have run.",
+      "labels": [
+        "Post: value then change",
+        "Pre: change then value",
+        "Start i = 5",
+        "Final value of i"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Arithmetic operators are +, -, *, / and % (remainder).",
+    "Integer division truncates: 17 / 5 evaluates to 3 and the remainder is 2.",
+    "Casting one operand to double forces true division: (double) 17 / 5 is 3.4.",
+    "Relational operators return boolean values; equality is written ==, not =.",
+    "&& needs both sides true, || needs one, and ! inverts a boolean.",
+    "Assignment stores a value; it is not a comparison, and using = inside a condition is a classic error.",
+    "Post-increment i++ yields the old value then changes the variable; pre-increment ++i changes it first.",
+    "Precedence runs unary → multiplicative → additive → relational → equality → logical → assignment.",
+    "Brackets always override precedence, which is why (10 + 20) * 2 differs from 10 + 20 * 2.",
+    "The conditional operator condition ? a : b evaluates the condition once and yields one of two values."
+  ],
+  "examFocus": [
+    "Output question: evaluate strictly in precedence order, one operator per line of working.",
+    "Correction question: = versus == for conditions, cast for decimal division, position for increments.",
+    "Evaluation question: show the expression rewritten layer by layer until one value remains.",
+    "Application question: use the conditional operator where a compact choice between two values is needed."
+  ],
+  "vocabulary": [
+    {
+      "word": "Operand",
+      "meaning": "A value an operator acts upon.",
+      "context": "In 17 / 5 both 17 and 5 are operands of division."
+    },
+    {
+      "word": "Remainder",
+      "meaning": "What division leaves over, produced by the % operator.",
+      "context": "17 % 5 gives 2 because 5 fits three times with 2 left over."
+    },
+    {
+      "word": "Precedence",
+      "meaning": "The rule deciding which operator is evaluated first in a mixed expression.",
+      "context": "Multiplication has higher precedence than addition."
+    },
+    {
+      "word": "Associativity",
+      "meaning": "The direction evaluation takes when operators share one precedence level.",
+      "context": "Arithmetic groups left to right; assignment groups right to left."
+    },
+    {
+      "word": "Truncation",
+      "meaning": "Dropping the fractional part of a number rather than rounding it.",
+      "context": "Integer division of 17 / 5 truncates 3.4 to 3."
+    },
+    {
+      "word": "Post-increment",
+      "meaning": "i++ yields the current value and increments afterwards.",
+      "context": "println(i++) prints the value the variable held before the change."
+    },
+    {
+      "word": "Pre-increment",
+      "meaning": "++i increments first and then yields the new value.",
+      "context": "println(++i) prints the value after the increment."
+    },
+    {
+      "word": "Conditional operator",
+      "meaning": "The three-part operator condition ? a : b that selects one of two values.",
+      "context": "It replaces a small if-else whenever a value rather than an action is needed."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-oper-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is the value of 17 / 5 in Java when both operands are int?",
+      "options": [
+        "It evaluates to 3",
+        "It evaluates to 3.4",
+        "It evaluates to 4",
+        "It evaluates to 2"
+      ],
+      "correctIndex": 0,
+      "answer": "It evaluates to 3",
+      "explanation": "Integer division discards the fractional part rather than rounding it, so 17 divided by 5 evaluates to 3, and the leftover 2 is reported separately by 17 % 5.",
+      "commonMistake": "Writing 3.4 — that result requires at least one operand to be a double."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What does 17 % 5 evaluate to?",
+      "options": [
+        "It evaluates to 2",
+        "It evaluates to 3",
+        "It evaluates to 5",
+        "It evaluates to 0"
+      ],
+      "correctIndex": 0,
+      "answer": "It evaluates to 2",
+      "explanation": "Five fits into seventeen three times, using 15, and 17 − 15 leaves a remainder of 2 — which is exactly what the % operator returns.",
+      "commonMistake": "Confusing % with division: % reports the leftover, not the number of times it fits."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Evaluate 2 + 3 * 4.",
+      "options": [
+        "14",
+        "20",
+        "24",
+        "9"
+      ],
+      "correctIndex": 0,
+      "answer": "14",
+      "explanation": "Multiplication has higher precedence than addition, so 3 * 4 is evaluated first to give 12, and 2 + 12 yields 14. Writing (2 + 3) * 4 would give 20 instead.",
+      "commonMistake": "Evaluating strictly left to right and reporting 20 — precedence, not position, decides the order."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "After int i = 5; the statement i++; executes, what does System.out.println(i++); print?",
+      "options": [
+        "It prints 6",
+        "It prints 5",
+        "It prints 7",
+        "The program does not compile"
+      ],
+      "correctIndex": 0,
+      "answer": "It prints 6",
+      "explanation": "The first i++ leaves i at 6. The second statement is post-increment, so it yields the current value 6 to println before incrementing the variable to 7 — the printed value is 6.",
+      "commonMistake": "Reporting 7 — that would be the result of ++i, which changes the value before yielding it."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The operator that returns what division leaves over is __________, and the operator used to compare two values for equality inside a condition is __________.",
+      "answer": "% (modulus / remainder); == (equality)",
+      "explanation": "The remainder operator % gives the leftover of a division, while equality comparison needs two equals signs. A single = assigns a value and would not compare anything.",
+      "commonMistake": "Writing = for the equality test — that is assignment, and using it in a condition is the most common operator error of all."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain the difference between the = operator and the == operator.",
+      "answer": "= is the assignment operator: it stores the value on its right into the variable on its left. == is the equality (relational) operator: it compares the two operands and yields true when they hold the same value, without changing either.",
+      "explanation": "Both halves matter — what each operator does and what it produces. Assignment writes and yields the stored value; comparison reads both sides and yields a boolean.",
+      "commonMistake": "Describing == as \"two equals signs\" without saying it performs a comparison that returns a boolean."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Rewrite 17 / 5 so that the result is 3.4, and explain the change you made.",
+      "answer": "(double) 17 / 5 or 17 / 5.0 — casting one operand to double (or writing one operand as a decimal literal) converts the operation into floating-point division, which keeps the fractional part and gives 3.4.",
+      "explanation": "Either form is accepted; the underlying idea is that a single decimal operand promotes the whole expression to floating point. Both operands must not remain integers, or the result truncates again.",
+      "commonMistake": "Casting the result afterwards — (int) 3.4 would still be 3; the cast must apply to an operand before the division."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Evaluate int r = 17 % 5 + 3 * 2; step by step, stating the precedence rules you apply, and give the final value of r.",
+      "answer": "Step 1 — multiplicative operators bind tightest, so 3 * 2 evaluates to 6, giving 17 % 5 + 6. Step 2 — the remainder operator is also multiplicative, so 17 % 5 evaluates next: 5 fits into 17 three times using 15, leaving 2, and the expression becomes 2 + 6. Step 3 — the additive operator finally adds, giving 8. The final value of r is 8. The precedence rule applied is that multiplicative operators (*, / and %) are evaluated before additive operators (+ and −), and among operators of one level evaluation proceeds left to right.",
+      "explanation": "Marks are awarded per step, so showing the expression rewritten after each evaluation is worth more than jumping to the answer. Naming % as multiplicative is the detail that proves the rule rather than the arithmetic.",
+      "commonMistake": "Evaluating + before % by reading left to right, which produces 4 × 2 = 8 by coincidence of a different route — examiners look for the stated order, not just the number."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-09",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A student writes if (marks = 75) System.out.println(\"pass\"); and the program refuses to compile. Explain the error, what the correct statement should be, and why Java rejects the original.",
+      "answer": "The student used the assignment operator = where a comparison was intended. marks = 75 stores 75 into marks and itself evaluates to 75, an integer, while an if condition must produce a boolean — either true or false. Java rejects the statement because no integer can stand in for a condition, so compilation fails with a type error rather than the program silently misbehaving. The corrected statement is if (marks == 75), which compares marks with 75 and yields a proper boolean. If the intent was to test whether marks has reached a threshold, the relational form if (marks >= 75) is the appropriate test. The general lesson is that = writes a value while == asks a question, and the if statement only accepts questions.",
+      "explanation": "The full answer has three parts: naming the operator mix-up, explaining the boolean requirement that makes Java reject it, and supplying the corrected line. Explaining why the compiler catches it — rather than the program running wrongly — is what separates complete answers from partial ones.",
+      "commonMistake": "Saying only that \"one equals sign should be two\" without explaining that an if condition must be boolean, which is the reason the compiler rejects it."
+    },
+    {
+      "id": "cisce-9-ca-q-oper-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Predict the output of: int a = 17, b = 5; System.out.println(a / b + \" \" + a % b + \" \" + (double) a / b); and justify each part of the result.",
+      "answer": "The output is 3 2 3.4. The first component, a / b, is integer division of 17 by 5: five fits three times and the fraction is discarded, giving 3. The second, a % 5, is the remainder of that same division: 17 − 15 leaves 2. The third component casts a to double before dividing, so the operation becomes 7.0-style floating-point division and 17 / 5 yields 3.4. The three results are joined by spaces because each \" \" between them is a string, which turns every + into concatenation rather than addition — so the line prints one line reading 3 2 3.4.",
+      "explanation": "The question combines three ideas deliberately: truncation, remainder, and promotion to double, all inside one concatenation. Justifying each component separately, and noting why the + signs join rather than add, earns every mark.",
+      "commonMistake": "Reporting 3.4 for the first component or forgetting that the string operands change every + in the line into joining."
+    }
+  ]
+}

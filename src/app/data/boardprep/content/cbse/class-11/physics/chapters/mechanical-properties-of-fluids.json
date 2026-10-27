@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-fluids",
+  "title": "Mechanical Properties of Fluids",
+  "kind": "physics",
+  "tagline": "Pressure, viscosity, Bernoulli and surface tension — the four ideas that make fluids behave differently from solids.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "A fluid yields where a solid stands firm, and the study of that difference organises into four ideas this chapter develops in sequence: pressure and its transmission (Pascal), flow and its resistance (viscosity and Stokes), the energetic balance of streamline flow (Bernoulli), and the surface effects that dominate at small scales (surface tension and capillarity). Each carries the syllabus’s named applications — hydraulic brakes, terminal velocity, Torricelli’s law, rising sap in trees — and each is taught through the same habit of resolving forces and balancing energies that the earlier mechanics chapters established.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-VII: Properties of Bulk Matter (20 marks shared with Solids and Thermal Properties)."
+      },
+      {
+        "label": "Hydrostatic pressure",
+        "value": "p = ρgh; Pascal’s law transmits applied pressure undiminished — hydraulic lift and brakes."
+      },
+      {
+        "label": "Bernoulli's theorem",
+        "value": "p + ½ρv² + ρgh = constant along a streamline for ideal, incompressible, non-viscous flow."
+      },
+      {
+        "label": "Surface tension",
+        "value": "Force per unit length along the surface, or energy per unit area; drives drops, bubbles and capillary rise."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute pressure in a static fluid and apply Pascal’s law to hydraulic devices.",
+    "Describe streamline and turbulent flow and apply Stokes’ law to terminal velocity.",
+    "Apply Bernoulli's theorem to Torricelli's law and dynamic lift.",
+    "Compute surface tension effects including excess pressure and capillary rise.",
+    "Explain viscosity, critical velocity and the role of surface-active agents qualitatively."
+  ],
+  "learn": [
+    {
+      "id": "pressure",
+      "title": "Fluid pressure and Pascal’s law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Pressure in a static fluid has two sources and one governing law. A fluid at rest supports its own weight, so pressure increases with depth as p = ρgh — the reason dam walls are thicker at the base and why your ears pop when you dive. The atmosphere adds the surface contribution of about 10⁵ Pa, transmitted by the same mechanism, which is why barometers read what they read. Pascal’s law completes the statics: pressure applied to an enclosed fluid is transmitted undiminished to every part of the fluid and the walls of the container. The consequence is the hydraulic multiplier: on connected pistons of areas A₁ and A₂ the shared pressure satisfies p = F₁/A₁ = F₂/A₂, so F₂ = F₁ × (A₂/A₁) — a small force on the small piston becomes a large force on the large one, which is exactly how hydraulic lifts, car brakes and hydraulic jacks multiply effort. The energy bookkeeping protects the illusion: the small piston must move a long way for the large one to move a little, so no work is created — only force, at the price of distance."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two companion effects round out the statics. Surface tension (a later lesson) makes the free surface of a liquid behave like a stretched membrane, and atmospheric pressure acting over a larger area than the enclosed air pressure is what lets a drinking straw work and what supports the famous Magdeburg hemispheres. And hydrostatic paradoxes — that the pressure at the bottom of a vessel depends only on depth and density, not on the vessel’s shape or the total weight above — resolve themselves once p = ρgh is taken as the operative law rather than the intuitive \"weight pressing down\" picture. Exam questions on dams, dams’ walls, ship hulls and block-on-floor pressure all reduce to one of these two ideas, and the reliable approach is to compute the pressure at the point of interest from the depth, then multiply by the relevant area for the force."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Static pressure rises with depth: p = ρgh, independent of vessel shape.",
+            "Atmospheric pressure ≈ 10⁵ Pa acts on every exposed surface.",
+            "Pascal’s law: applied pressure transmits undiminished in an enclosed fluid.",
+            "Hydraulic multiplication: F₂ = F₁(A₂/A₁), paid for in distance.",
+            "Straws and suction: it is atmosphere that pushes, not partial vacuum that pulls."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flow",
+      "title": "Viscosity, Stokes’ law and flow regimes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Viscosity is internal friction in a moving fluid: layers slide over one another at different speeds, and the drag between them is F = ηA(dv/dz), with η the coefficient of viscosity. Honey has large η, water modest, air tiny — and among gases, viscosity rises with temperature, unlike liquids where it falls, because gas viscosity comes from molecular momentum transfer between layers while liquid viscosity comes from weakened intermolecular bonds as heating proceeds. Streamline (laminar) flow moves in smooth parallel layers and obeys this linear law; beyond a critical velocity the flow turns turbulent, mixing chaotically, and drag rises steeply — the reason turbulent water wastes a pipe’s capacity and why streamlined vehicle shapes matter."
+        },
+        {
+          "type": "paragraph",
+          "text": "Stokes’ law is the syllabus’s showcase application: a small sphere falling through a viscous liquid experiences drag 6πηrv that grows with speed until it equals the net weight, whereupon the sphere descends at constant terminal velocity, vₜ = 2r²(ρ − σ)g/9η. Every factor is physically transparent: bigger or denser spheres fall faster, more viscous liquids slow them more — which is why a dropped feather meets its terminal velocity almost at once while a marble ploughs on. The apparatus applications follow directly: measuring the terminal velocity of a falling ball bearings out a liquid’s viscosity, and the same balance of forces governs raindrop fall, sedimentation and the operation of a oil-drop experiment. The method students should carry away is the pattern itself: forces that grow with speed always produce a terminal state, and the terminal velocity is found by setting the growing force equal to the constant one."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Viscosity: internal friction between fluid layers; F = ηA dv/dz.",
+            "Gas η rises with temperature; liquid η falls with it.",
+            "Streamline flow: smooth layers, drag ∝ speed.",
+            "Turbulent flow above the critical velocity: mixing, steep drag.",
+            "Stokes: 6πηrv balances net weight at vₜ = 2r²(ρ − σ)g/9η."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bernoulli",
+      "title": "Bernoulli's theorem and its applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bernoulli’s theorem states that for steady flow of an ideal fluid — incompressible, non-viscous, streamline — the sum p + ½ρv² + ρgh is constant along a streamline: pressure energy, kinetic energy per volume and potential energy per volume trade freely between themselves. The physical content is the trade: where the fluid speeds up, its kinetic term rises and so its pressure must fall, which is why parallel streamlines crowd (faster flow) at a constriction and the pressure dips there. Every named application of the syllabus is an instance of this one sentence. Torricelli’s law — efflux speed √(2gh) — is energy conservation for the escaping liquid; dynamic lift on an aerofoil arises because the faster flow over the curved upper surface carries lower pressure, so the wing is pushed upward; and the atomiser, carburettor, chimney draught and the curve of a spinning ball all follow the same pressure-velocity trade."
+        },
+        {
+          "type": "paragraph",
+          "text": "The theorem’s assumptions deserve the same attention as its uses, because the assumptions mark where it fails. Real fluids are viscous, so Bernoulli’s constant actually declines along a streamline as energy is dissipated — the theorem is exact only for the idealisation. Flow must also be steady: an oscillating or turbulent flow invalidates the streamline statement entirely. When applying the theorem, choose two points on the same streamline, state the height difference explicitly, and set up the full equation p₁ + ½ρv₁² + ρgh₁ = p₂ + ½ρv₂² + ρgh₂ rather than dropping terms by reflex — dropping the potential term is correct only when the two points are at the same level, and saying so is method marks. The venturi meter, the syllabus’s standard quantitative application, follows immediately: measure the pressure difference between a wide and narrow section to read off the flow speed, which is how many industrial flow meters work to this day."
+        },
+        {
+          "type": "table",
+          "caption": "The terms of Bernoulli’s theorem",
+          "columns": [
+            "Term",
+            "Name",
+            "Rises where"
+          ],
+          "rows": [
+            [
+              "p",
+              "Pressure energy per volume",
+              "Flow is slow or high"
+            ],
+            [
+              "½ρv²",
+              "Kinetic energy per volume",
+              "Flow is fast"
+            ],
+            [
+              "ρgh",
+              "Potential energy per volume",
+              "The streamline is high"
+            ],
+            [
+              "Sum",
+              "Constant along a streamline",
+              "Ideal, steady flow only"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Efflux speed from a hole at depth h.",
+              "note": "v = √(2gh) — Torricelli, energy conservation."
+            },
+            {
+              "text": "Why does an aerofoil lift?",
+              "note": "Faster flow above ⇒ lower pressure there ⇒ upward push."
+            },
+            {
+              "text": "Two parallel papers blown between: they converge.",
+              "note": "Fast air has low pressure; atmosphere pushes them together."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "title": "Surface tension, capillarity and their applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "At a liquid’s surface, molecules are pulled inward by their neighbours, so the surface behaves as a stretched elastic membrane with surface energy γ per unit area, equivalently a surface tension force γ per unit length. The consequence for curved surfaces is Laplace’s pressure: excess pressure inside a drop is 2γ/r, and inside a soap bubble (two surfaces!) it is 4γ/r — which is why small bubbles are harder to blow and why drops tend to become spherical, the shape enclosing a given volume with the least surface. Angle of contact decides whether a liquid climbs a solid: water wets glass (acute contact angle) and rises in a capillary, mercury does not (obtuse angle) and is depressed, with the height given by h = 2γcos θ/(ρgr) — the driving mechanism of water transport in plants, ink rising in blotting paper and oil creeping along a cloth wick."
+        },
+        {
+          "type": "paragraph",
+          "text": "Surface tension’s practical face is everywhere once you look for it: detergent lowers water’s surface tension so it penetrates fabric fibres (the syllabus’s detergent activity), sap rises in tall trees through capillary tubes and transpiration pull, and insects walk on pond water because their weight is supported by the surface film over a large contact area. The distinction of dimensions matters in analysis: surface effects scale with length while weight scales with volume, so small objects are dominated by surface tension and large ones by gravity — which is exactly why a paperclip floats but an iron ball of the same shape does not. In exam answers, state which excess-pressure formula applies (drop versus bubble), keep the two surfaces of a soap film in mind, and quote the contact angle’s role explicitly rather than treating capillary rise as a bare formula."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Surface tension γ: force per length or energy per area.",
+            "Excess pressure: 2γ/r for a drop, 4γ/r for a soap bubble.",
+            "Drops are spherical: minimum surface for a given volume.",
+            "Capillary rise h = 2γcos θ/(ρgr); wetting liquids rise, non-wetting are depressed.",
+            "Detergents work by lowering surface tension.",
+            "Surface effects dominate at small scale; gravity dominates at large scale."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A hydraulic lift multiplying force",
+      "description": "Two connected cylinders with pistons of small area A₁ and large area A₂, fluid filling both, a small force F₁ pressed on the small piston and a heavy load lifted by the large piston; both piston areas labelled, the shared pressure annotated p = F₁/A₁ = F₂/A₂, and a note that the small piston travels proportionally further.",
+      "labels": [
+        "Small piston: area A₁, force F₁",
+        "Large piston: area A₂, load F₂",
+        "Pressure equal everywhere",
+        "F₂ = F₁ × (A₂/A₁)",
+        "Distance traded for force"
+      ]
+    },
+    {
+      "caption": "Figure: Bernoulli’s trade across a venturi constriction",
+      "description": "A horizontal pipe with a narrowed mid-section; streamlines drawn crowded in the constriction and sparse in the wide sections, pressure-tap manometers attached at the wide and narrow parts showing lower liquid height (lower pressure) at the constriction, and the constant p + ½ρv² annotated along the pipe.",
+      "labels": [
+        "Streamlines crowd where flow is fast",
+        "Wide section: low speed, high pressure",
+        "Constriction: high speed, low pressure",
+        "Pressure difference measured by taps",
+        "Sum p + ½ρv² stays constant"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Static fluid pressure p = ρgh; depends on depth, not vessel shape.",
+    "Pascal’s law: applied pressure transmits undiminished; hydraulic force ratios follow area ratios.",
+    "Viscosity is internal friction between fluid layers.",
+    "Streamline flow below the critical velocity; turbulent above it.",
+    "Stokes’ law 6πηrv gives terminal velocity vₜ = 2r²(ρ − σ)g/9η.",
+    "Bernoulli: p + ½ρv² + ρgh constant along a streamline of an ideal fluid.",
+    "Torricelli: efflux speed √(2gh).",
+    "Dynamic lift: faster flow means lower pressure.",
+    "Surface tension γ: 2γ/r excess pressure in a drop, 4γ/r in a bubble.",
+    "Capillarity h = 2γcos θ/(ρgr) drives sap rise and ink absorption."
+  ],
+  "examFocus": [
+    "State Bernoulli’s assumptions before applying the theorem.",
+    "Capillary answers must name the contact angle and which surface formula applies.",
+    "Hydraulic problems: pressure equality first, force ratio second.",
+    "Terminal velocity: show the force balance that defines it."
+  ],
+  "vocabulary": [
+    {
+      "word": "Pressure",
+      "meaning": "Force per unit area; in fluids, same in all directions at a point."
+    },
+    {
+      "word": "Pascal’s law",
+      "meaning": "Applied pressure transmits undiminished through an enclosed fluid."
+    },
+    {
+      "word": "Viscosity",
+      "meaning": "Internal friction of a moving fluid; η in F = ηA dv/dz."
+    },
+    {
+      "word": "Terminal velocity",
+      "meaning": "Constant speed when drag equals net weight."
+    },
+    {
+      "word": "Bernoulli's theorem",
+      "meaning": "Pressure, kinetic and potential energy per volume sum to a constant."
+    },
+    {
+      "word": "Surface tension",
+      "meaning": "Surface energy per area, or force per length, at a liquid surface."
+    },
+    {
+      "word": "Capillary rise",
+      "meaning": "Climbing of a wetting liquid in a narrow tube, h = 2γcos θ/(ρgr)."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-fluids-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The pressure at the bottom of a tank of water 2 m deep (ρ = 1000 kg/m³, g = 10 m/s²) is:",
+      "options": [
+        "2000 Pa",
+        "20 000 Pa",
+        "2 × 10⁵ Pa",
+        "10 000 Pa"
+      ],
+      "correctIndex": 1,
+      "answer": "20 000 Pa",
+      "explanation": "p = ρgh = 1000 × 10 × 2 = 2 × 10⁴ Pa, above whatever atmospheric pressure is also present."
+    },
+    {
+      "id": "cbse11-phy-fluids-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Excess pressure inside a soap bubble of radius r and surface tension γ is:",
+      "options": [
+        "2γ/r",
+        "4γ/r",
+        "γ/r",
+        "8γ/r"
+      ],
+      "correctIndex": 1,
+      "answer": "4γ/r",
+      "explanation": "A bubble has two surfaces (inner and outer), so the excess pressure is 2 × 2γ/r = 4γ/r."
+    },
+    {
+      "id": "cbse11-phy-fluids-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In Bernoulli's theorem, where a streamline passes through a constriction, the fluid's speed:",
+      "options": [
+        "Falls and pressure rises",
+        "Rises and pressure falls",
+        "Rises and pressure rises",
+        "Is unchanged"
+      ],
+      "correctIndex": 1,
+      "answer": "Rises and pressure falls",
+      "explanation": "The constant p + ½ρv² forces the trade: faster flow at the constriction means lower pressure there — the venturi effect."
+    },
+    {
+      "id": "cbse11-phy-fluids-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A ball falling through a viscous liquid reaches terminal velocity when:",
+      "options": [
+        "Gravity exceeds drag",
+        "Drag equals its weight",
+        "Drag exceeds weight and grows",
+        "The buoyant force vanishes"
+      ],
+      "correctIndex": 1,
+      "answer": "Drag equals its weight",
+      "explanation": "Terminal velocity is the constant-speed state where the growing drag (6πηrv) exactly balances the net downward weight; before it, drag is smaller, after it cannot be."
+    },
+    {
+      "id": "cbse11-phy-fluids-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The force per unit length along the surface of a liquid is its ________ tension.",
+      "answer": "surface",
+      "explanation": "Numerically equal to the surface energy per unit area; it makes surfaces minimise their area."
+    },
+    {
+      "id": "cbse11-phy-fluids-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The minimum speed of efflux from an orifice at depth h below the surface is ________ (2gh).",
+      "answer": "square",
+      "explanation": "Torricelli’s law: v = √(2gh), which is energy conservation for the escaping liquid element."
+    },
+    {
+      "id": "cbse11-phy-fluids-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Pascal's law and explain how a hydraulic car brake uses it to multiply the driver's foot force.",
+      "answer": "Pascal’s law states that pressure applied to an enclosed fluid at rest is transmitted undiminished to every part of the fluid and to the walls of its container. A hydraulic brake exploits this: the driver’s foot presses a small piston (master cylinder) of area A₁ with force F₁, producing pressure p = F₁/A₁ throughout the connected brake fluid. At each wheel, the fluid acts on a larger piston (wheel cylinder) of area A₂, and the force it delivers is F₂ = pA₂ = F₁(A₂/A₁) — larger than the foot force in the ratio of the areas. With A₂ ten times A₁, a 300 N press of the pedal becomes 3000 N at the brake shoes, enough to stop a car. No energy is created: the small piston moves ten times further than the large one advances, so the work in equals the work out — the device multiplies force, not work. The incompressibility and non-drying of brake fluid keep the transmission efficient, which is why the pedal feels firm rather than spongy.",
+      "explanation": "The law stated, the area-ratio multiplication shown, and the no-created-work clarification with the distance trade."
+    },
+    {
+      "id": "cbse11-phy-fluids-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive Torricelli's law for the speed of efflux from an orifice at depth h below the free surface of a liquid.",
+      "answer": "Apply Bernoulli’s theorem (equivalently, energy conservation) between two points on the same streamline: point 1 at the free surface and point 2 at the orifice, both at atmospheric pressure p₀. At the surface the liquid is effectively at rest (v₁ ≈ 0 for a large tank) and its height above the orifice is h; at the orifice the liquid emerges with speed v₂ at height zero. Bernoulli: p₀ + 0 + ρgh = p₀ + ½ρv₂² + 0. The pressures cancel (both atmospheric), leaving ρgh = ½ρv₂², so v₂² = 2gh and v₂ = √(2gh). The remarkable content: the efflux speed equals that of a body free-falling through the same height h — the liquid element leaving the orifice behaves exactly like a dropped stone. Checks: the dimensions √((m/s²)(m)) = m/s ✓; doubling the depth multiplies the speed by √2, not 2, as the square root demands ✓; and for h = 0.45 m, v ≈ 3 m/s, an everyday water-pistol speed ✓.",
+      "explanation": "The two points chosen on one streamline, the cancellation of pressures, the result, and the free-fall equivalence with checks."
+    },
+    {
+      "id": "cbse11-phy-fluids-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A steel ball of radius 0.5 mm falls through a viscous oil. Given the oil’s density 900 kg/m³, the steel’s 8000 kg/m³ and viscosity 1.5 Pa·s, find the terminal velocity using Stokes’ law and comment on the role of each factor.",
+      "answer": "At terminal velocity the drag balances the net weight: 6πηrvₜ = (4/3)πr³(ρ − σ)g. Solving: vₜ = 2r²(ρ − σ)g/(9η). Substituting r = 0.5 × 10⁻³ m, ρ − σ = 8000 − 900 = 7100 kg/m³, g = 10 and η = 1.5 Pa·s: vₜ = 2 × (2.5 × 10⁻⁷) × 7100 × 10/(9 × 1.5) = (3.55 × 10⁻²)/(13.5) ≈ 2.6 × 10⁻³ m/s — about 2.6 mm/s, a slow, stately descent typical of a ball in thick oil. Factor roles: vₜ grows with r² — double the radius and it falls four times faster, which is why fine powders suspend in liquids while coarse grains settle; it grows with the density difference (heavier spheres sink faster relative to the fluid) and with g, and it falls as 1/η — more viscous liquids slow the fall inversely, which is exactly how a falling-ball viscometer measures viscosity. Checks: the dimensions of 2r²(ρ−σ)g/(9η) reduce to m/s ✓; and Stokes’ law assumes streamline flow, valid here because the small radius and thick oil keep the Reynolds number tiny — with a large ball or low-viscosity liquid the formula would fail as turbulence set in.",
+      "explanation": "The force balance, the computed value, all four factor dependences explained, and the validity condition stated."
+    },
+    {
+      "id": "cbse11-phy-fluids-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why a shower curtain is pulled inward when the water is running, why a spinning ball curves in flight, and which common principle unites both effects. Then state the assumptions behind that principle and where it fails.",
+      "answer": "Both effects are instances of Bernoulli’s theorem: in steady flow of an ideal fluid, faster motion means lower pressure. The shower: the falling water drags air along with it, so the air between you and the curtain moves faster than the still air outside the bath; by the pressure-velocity trade the fast air inside has lower pressure, and the still air’s full atmospheric pressure outside pushes the curtain inward — the same effect that makes parallel sheets of paper converge when you blow between them. The spinning ball: the spin drags air around on one side, where the surface motion adds to the airflow, and opposes it on the other; the faster side therefore has lower pressure and the ball is pushed toward it, curving its path — the magnus effect behind every curved delivery in cricket and football. The unifying principle is p + ½ρv² + ρgh = constant along a streamline: where v is large, p must be small, provided heights are comparable. Its assumptions: the fluid is incompressible, non-viscous, and the flow steady and streamline. It fails when the flow is turbulent (the shower spray and the ball’s wake are turbulent — the explanation is approximate there, not exact), when compressibility matters (fast aerofoils and sound), and over long distances where viscosity steadily dissipates the mechanical energy the theorem conserves. The honest statement of these limits is what separates a full-mark answer from a formula recital.",
+      "explanation": "Both effects explained through the pressure-velocity trade, the theorem quoted, all three assumptions named, and the failure modes identified including the honesty note about the turbulent shower spray."
+    }
+  ]
+}

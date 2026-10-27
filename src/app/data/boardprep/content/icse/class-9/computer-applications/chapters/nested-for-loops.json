@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-nested-loops",
+  "slug": "nested-for-loops",
+  "title": "Nested for Loops",
+  "kind": "computer-applications",
+  "tagline": "The outer loop chooses the row, the inner loop runs the whole row — the pass matrix behind every pattern program.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "A loop inside another loop is a nested loop, and its behaviour follows one rule: the inner loop starts fresh and runs to completion on every single pass of the outer one. That rule turns two small headers into a grid of executions — five outer passes each carrying three inner passes produce fifteen executions of the inner body — and it is the engine behind multiplication tables, row-and-column grids and every star pattern in the syllabus. This chapter builds that mental model, then applies it to patterns and to the dry-run discipline that debugs them.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Nested for Loops (ICSE Class IX)"
+      },
+      {
+        "label": "Reading rule",
+        "value": "The inner loop restarts from its initialisation on every outer pass"
+      },
+      {
+        "label": "Multiplication",
+        "value": "5 outer passes times 3 inner passes execute the body 15 times"
+      },
+      {
+        "label": "Rows and columns",
+        "value": "The outer counter is the row number; the inner counter is the column"
+      },
+      {
+        "label": "Discipline",
+        "value": "Dry-run a nested loop with a trace table before trusting its output"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Predict how many times a nested loop body executes from its two headers alone.",
+    "Write nested for loops that print multiplication tables and row-and-column grids.",
+    "Build star and number patterns, including triangles and pyramids, from loop bounds.",
+    "Dry-run a nested loop with a trace table and repair one that prints too much."
+  ],
+  "learn": [
+    {
+      "id": "nested-idea",
+      "title": "Two loops, one counter each",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A nested loop is simply a second for statement written inside the body braces of the first. The rule that governs it never bends: for every single pass of the outer loop, the inner loop begins again at its own initialisation and runs all the way to its own condition failing. The inner counter therefore walks its full range once per outer pass — it does not pause where it last stopped — and because of that the body of the inner loop executes outer-count times inner-count times, a product you can read straight from the two headers."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "for (int i = 1; i <= 2; i++) { for (int j = 1; j <= 3; j++) { System.out.print(i + \"-\" + j + \" \"); } System.out.println(); }",
+              "note": "The outer counter runs twice and the inner three times per pass, so six pairs print in two lines: \"1-1 1-2 1-3\" on the first and \"2-1 2-2 2-3\" on the second. The inner j restarts at 1 the moment i becomes 2 — that restart is the whole behaviour of a nest."
+            },
+            {
+              "text": "int count = 0; for (int i = 1; i <= 4; i++) { for (int j = 1; j <= 5; j++) { count++; } } System.out.println(\"Executions: \" + count);",
+              "note": "Counting executions makes the product visible: 4 outer passes times 5 inner passes is 20, so the program prints \"Executions: 20\". The inner body never sees which outer pass it belongs to — it simply runs once more, twenty times in all."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Passes of a three-by-four nest",
+          "columns": [
+            "Outer i",
+            "Inner passes",
+            "Inner body executions"
+          ],
+          "rows": [
+            [
+              "1",
+              "1, 2, 3, 4",
+              "4"
+            ],
+            [
+              "2",
+              "1, 2, 3, 4",
+              "4"
+            ],
+            [
+              "3",
+              "1, 2, 3, 4",
+              "4"
+            ],
+            [
+              "Total",
+              "All outer passes",
+              "12"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nested-tables",
+      "title": "Rectangles of output and multiplication grids",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every rectangular output is two loops: the outer loop counts the lines and the inner loop counts the items on each line. Change the outer bound and the shape gains or loses lines; change the inner bound and each line grows or shrinks — the printed shape is nothing more than a picture of the two headers, which is why pattern questions are really header questions. The multiplication grid follows the same shape, with the printed value computed from both counters instead of a fixed symbol."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "for (int i = 1; i <= 3; i++) { for (int j = 1; j <= 4; j++) { System.out.print(i * j + \" \"); } System.out.println(); }",
+              "note": "A three-line multiplication grid: each row prints the products of one i across every j, so the output is \"1 2 3 4\", then \"2 4 6 8\", then \"3 6 9 12\", each row ending with its trailing spaces before the line break."
+            },
+            {
+              "text": "int rows = 3, cols = 5; for (int i = 0; i < rows; i++) { for (int j = 0; j < cols; j++) { System.out.print(\"*\"); } System.out.println(); }",
+              "note": "A rectangle of three rows and five stars per row. The two variables make the dimensions explicit: rows controls how many lines the outer loop produces and cols controls how many stars the inner loop puts on each one."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Placement of the println is what keeps rows as rows. It sits inside the outer loop but outside the inner loop, so it fires once per line — after that line’s items are printed and before the next line begins. Move it inside the inner loop and every item lands on its own line; remove it entirely and the whole rectangle becomes one endless-looking line. The position of one statement decides the geometry of the output."
+        }
+      ]
+    },
+    {
+      "id": "nested-patterns",
+      "title": "Triangles and squares",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A square has a fixed inner bound, because every line holds the same number of items. A right-angled triangle grows because the inner bound is tied to the outer counter: with the inner loop running while j is at most i, line one prints one item, line two prints two, and so on. The same tie produces number patterns, where the printed value is the inner counter itself rather than a repeated symbol — one structural change, a completely different picture."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "for (int i = 1; i <= 4; i++) { for (int j = 1; j <= i; j++) { System.out.print(\"*\"); } System.out.println(); }",
+              "note": "A right-angled triangle of height four: rows of one, two, three and four stars. The inner condition j <= i is the growth rule — each new outer pass grants the inner loop one more pass of its own."
+            },
+            {
+              "text": "for (int i = 1; i <= 4; i++) { for (int j = 1; j <= i; j++) { System.out.print(j + \" \"); } System.out.println(); }",
+              "note": "The same shape filled with numbers: each row prints its own counting sequence, so the output is \"1\", then \"1 2\", then \"1 2 3\", then \"1 2 3 4\". Printing j instead of a star changes only what appears, never how many times."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A fixed inner bound produces a rectangle; an inner bound tied to the outer counter produces a triangle.",
+            "Printing a literal such as a star gives a shape; printing the inner counter gives a number pattern.",
+            "Keep both counters consistent — starting one loop at 0 and the other at 1 shifts the picture by one row.",
+            "The println stays inside the outer loop and outside the inner loop, or the rows collapse."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nested-shapes",
+      "title": "Inverted shapes and pyramids",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Inversion is a matter of direction: letting the outer counter fall from the height down to 1 produces the same triangle upside down, and an equivalent result comes from keeping the counter rising while the inner bound falls — j at most height minus i plus one. A pyramid is the pattern that earns full marks, because it needs two inner loops per row: a first loop that prints the leading spaces, which shrink as the rows descend, and a second that prints the stars, which grow as odd numbers."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "for (int i = 4; i >= 1; i--) { for (int j = 1; j <= i; j++) { System.out.print(\"*\"); } System.out.println(); }",
+              "note": "An inverted triangle of height four: the outer counter falls through 4, 3, 2, 1, so the rows print four stars, then three, two and one. The inner loop is unchanged — only the direction of the outer range reversed."
+            },
+            {
+              "text": "int n = 4; for (int i = 0; i < n; i++) { for (int s = 0; s < n - 1 - i; s++) System.out.print(\" \"); for (int k = 0; k < 2 * i + 1; k++) System.out.print(\"*\"); System.out.println(); }",
+              "note": "A centred pyramid of height four: the first inner loop prints n minus 1 minus i leading spaces, shrinking from three down to none, and the second prints 2 times i plus 1 stars — one, three, five, seven — so the rows line up as a triangle pointing upwards."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The space formula is derived, not guessed: draw the required pyramid on paper, count the leading spaces on the first row of a height-n figure, and they number n minus one; each row gives up one space while gaining two stars, because an odd-numbered sequence grows by two. Whenever a pattern question demands centring, sketch one row before writing a single counter — the arithmetic of the shape tells you the bounds of the loops."
+        }
+      ]
+    },
+    {
+      "id": "nested-dryrun",
+      "title": "Dry runs and debugging nested loops",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A dry run is the discipline of tracing a nested loop on paper before trusting it: draw columns for the outer counter, the inner counter and what was printed, and add one row for each execution of the inner body. Stop only when the outer condition fails, and check the total against the product of the two ranges — if your rows show eleven executions but the headers promise twelve, the mistake is in your trace or in your reading of a bound, and the disagreement itself locates the fault. Examiners award marks for the table, not only for the final output."
+        },
+        {
+          "type": "table",
+          "caption": "Dry run: the star triangle of lesson three",
+          "columns": [
+            "Outer i",
+            "Inner j runs",
+            "Row printed"
+          ],
+          "rows": [
+            [
+              "1",
+              "1",
+              "*"
+            ],
+            [
+              "2",
+              "1, 2",
+              "**"
+            ],
+            [
+              "3",
+              "1, 2, 3",
+              "***"
+            ],
+            [
+              "4",
+              "1, 2, 3, 4",
+              "****"
+            ],
+            [
+              "—",
+              "outer test i <= 4 fails",
+              "loop ends"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Too many rows means the outer bound is wrong — check for <= where < was needed, or an off-by-one start.",
+            "Too many items per row means the inner bound is wrong, usually a fixed value where a tie to the outer counter was intended.",
+            "One item per line means the println migrated inside the inner loop; it belongs outside it.",
+            "Count the executions as outer times inner before reading any output — the product is a quick sanity check."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nested-practice",
+      "title": "Exam drills — patterns from headers alone",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Drill one: given two headers, write the output before running anything — the grid of executions is arithmetic, not mystery. Drill two: given a shape, write the headers: count the rows for the outer range and the items on the widest line for the inner rule, then check the narrowest line to see whether the bound is tied to the outer counter. Drill three: repair broken patterns by asking which dimension is wrong — rows or items — so the fix lands on the correct header."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rows come from the outer loop, items per row from the inner loop — every pattern is one of the two or a variation.",
+            "A growing shape ties the inner bound to the outer counter; a fixed shape keeps it constant.",
+            "The product of the two ranges is the number of times the inner body executes — use it to check your trace.",
+            "Pyramids need two inner loops per row: spaces that shrink, then stars that grow as odd numbers."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The pass matrix of a three-by-four nest",
+      "description": "A grid of twelve cells arranged as three rows of four columns. Each cell is numbered with the execution it represents, from 1 to 12, running left to right along the inner loop and top to bottom along the outer loop. Row labels read outer i equals 1, 2 and 3; column labels read inner j equals 1 to 4.",
+      "labels": [
+        "Outer loop: rows",
+        "Inner loop: columns",
+        "Cell = one execution",
+        "12 cells = 3 times 4",
+        "Inner restarts each row",
+        "Execution order left to right"
+      ]
+    },
+    {
+      "caption": "Figure: A pattern gallery with its loop bounds",
+      "description": "Four small output shapes side by side, each annotated with the headers that produce it: a rectangle labelled fixed inner bound, a right-angled triangle labelled inner bound j at most i, an inverted triangle labelled outer counter falling, and a pyramid labelled spaces n minus 1 minus i then stars 2i plus 1.",
+      "labels": [
+        "Rectangle: fixed inner bound",
+        "Triangle: j <= i",
+        "Inverted: i falls to 1",
+        "Pyramid: shrinking spaces",
+        "Pyramid: odd stars",
+        "println outside the inner loop"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The inner loop restarts from its initialisation on every pass of the outer loop — it never resumes where it stopped.",
+    "The inner body executes outer-count times inner-count times; the product is readable from the two headers.",
+    "The outer counter is the row and the inner counter is the column, so the printed shape mirrors the headers.",
+    "The println belongs inside the outer loop and outside the inner loop, or rows collapse into one item per line.",
+    "A fixed inner bound prints a rectangle; an inner bound tied to the outer counter prints a triangle.",
+    "Inverting a shape means reversing the outer range or making the inner bound fall as the outer rises.",
+    "A pyramid needs two inner loops per row: n minus 1 minus i spaces, then 2 times i plus 1 stars.",
+    "A dry-run table with outer, inner and printed columns checks itself against the product of the ranges."
+  ],
+  "examFocus": [
+    "Output question: draw the grid of executions first, then read the rows off it — never guess the shape.",
+    "Count question: multiply the two ranges for total executions, and justify with one row of the trace.",
+    "Program question: write a triangle or pyramid from a described shape, stating each bound.",
+    "Repair question: name which dimension is wrong — rows or items — before touching a header."
+  ],
+  "vocabulary": [
+    {
+      "word": "Nested loop",
+      "meaning": "A loop written inside the body of another loop.",
+      "context": "Two for statements, one inside the other."
+    },
+    {
+      "word": "Outer counter",
+      "meaning": "The variable the outer loop controls; usually the row number.",
+      "context": "i, choosing which line is being printed."
+    },
+    {
+      "word": "Inner counter",
+      "meaning": "The variable the inner loop controls; usually the column.",
+      "context": "j, walking the items on one line."
+    },
+    {
+      "word": "Pass matrix",
+      "meaning": "A grid recording every execution of the inner body.",
+      "context": "Twelve numbered cells for a three-by-four nest."
+    },
+    {
+      "word": "Dry run",
+      "meaning": "Hand-tracing variables pass by pass before trusting the program.",
+      "context": "The trace table in the debugging lesson."
+    },
+    {
+      "word": "Pattern program",
+      "meaning": "Code whose output forms a shape from its loop bounds alone.",
+      "context": "A right-angled star triangle of height four."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-nested-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The body of the INNER loop executes how many times?\nfor (int i = 1; i <= 5; i++) {\n    for (int j = 1; j <= 3; j++) {\n        // work\n    }\n}",
+      "options": [
+        "15 times",
+        "8 times",
+        "5 times",
+        "3 times"
+      ],
+      "correctIndex": 0,
+      "answer": "15 times",
+      "explanation": "The inner loop runs three times on each of five outer passes — five times three is fifteen. The inner body never runs outside an outer pass.",
+      "commonMistake": "Adding the two counts instead of multiplying them, which answers 8."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a pattern program, which counter decides how many rows are printed?",
+      "options": [
+        "The outer loop's counter",
+        "The inner loop's counter",
+        "Both counters together",
+        "Neither — println prints the rows"
+      ],
+      "correctIndex": 0,
+      "answer": "The outer loop's counter",
+      "explanation": "Each pass of the outer loop produces exactly one row, so its range is the number of rows. The inner counter fills the current row with its items.",
+      "commonMistake": "Attributing rows to println — println only ends each row; the outer loop decides how many there are."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is printed?\nfor (int i = 1; i <= 3; i++) {\n    for (int j = 1; j <= i; j++) {\n        System.out.print(\"*\");\n    }\n    System.out.println();\n}",
+      "options": [
+        "A triangle of three rows: one, two and three stars",
+        "Three rows of three stars each",
+        "A single row of six stars",
+        "A square of three by three stars"
+      ],
+      "correctIndex": 0,
+      "answer": "A triangle of three rows: one, two and three stars",
+      "explanation": "The inner bound j <= i is tied to the outer counter, so row one grants one inner pass, row two grants two, and row three grants three — a growing triangle, not a rectangle.",
+      "commonMistake": "Reading the outer bound alone and answering three rows of three — the inner bound must be read as a condition on i."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a pyramid of height n whose rows are numbered i starting from 0, how many leading spaces does row i print?",
+      "options": [
+        "n - 1 - i",
+        "i",
+        "n + i",
+        "2 * i + 1"
+      ],
+      "correctIndex": 0,
+      "answer": "n - 1 - i",
+      "explanation": "The first row needs n minus one spaces to centre the tip, and each row gives up one space as it descends — so row i prints n minus 1 minus i. The expression 2 times i plus 1 counts the stars, not the spaces.",
+      "commonMistake": "Choosing 2 * i + 1, which is the star count — spaces shrink while stars grow, so the two formulas run in opposite directions."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the inner header so every row prints exactly n columns:\nfor (int i = 1; i <= rows; i++) {\n    for (int j = 1; j ______ n; j++) {\n        System.out.print(\"*\");\n    }\n    System.out.println();\n}",
+      "answer": "<= — less than or equal to, so the nth column itself is printed",
+      "explanation": "The columns run from 1 to n inclusive, so the condition must admit n itself. With < the row stops at n minus one columns and the rectangle is one star narrow.",
+      "commonMistake": "Writing < and losing the last column — the off-by-one returns, now on the inner loop."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the outer loop is called the row counter and the inner loop the column counter, quoting a three-by-four example.",
+      "answer": "Each pass of the outer loop produces exactly one line of output, so its counter names the row being printed; the inner loop runs once per item on that line, so its counter names the column. For a nest of outer 1 to 3 and inner 1 to 4, the outer loop prints three lines and the inner loop puts four items on each — twelve executions in total, arranged as three rows of four columns.",
+      "explanation": "One mark is for the row/column roles and one for working the example through to the product of twelve.",
+      "commonMistake": "Describing both loops as \"repeating the same work\" without distinguishing which output dimension each one controls."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A nested star program prints each star on a line of its own instead of one line per row. State the cause and the correction.",
+      "answer": "The println was placed inside the inner loop, so it fires after every star rather than after every row — each item therefore begins a fresh line. The correction is to move the println into the outer loop but outside the inner loop, so it runs exactly once per row: the inner loop prints all the stars of the line, and the println ends that line before the next row begins.",
+      "explanation": "One mark is for locating the println inside the inner loop and one for stating its correct position between the loops.",
+      "commonMistake": "Blaming the inner bound — the number of stars printed is correct; only the statement that ends the line is in the wrong place."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a Java program that reads a height and prints a right-angled star triangle of that height.",
+      "answer": "import java.util.Scanner; public class StarTriangle { public static void main(String[] args) { Scanner in = new Scanner(System.in); System.out.print(\"Height: \"); int n = in.nextInt(); for (int i = 1; i <= n; i++) { for (int j = 1; j <= i; j++) System.out.print(\"*\"); System.out.println(); } } } For the input 4 the output is four rows: one star, then two, three and four stars.",
+      "explanation": "Reading the height earns the first mark, the outer loop as the row counter the second, and the inner bound tied to i — plus the println in its correct position — the third.",
+      "commonMistake": "Fixing the inner bound at the height, which prints a rectangle instead of a triangle."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-09",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Dry-run the program below and give its exact output, then state how many times the inner body executes:\nfor (int i = 1; i <= 3; i++) {\n    for (int j = 1; j <= 4; j++) {\n        System.out.print(i + j + \" \");\n    }\n    System.out.println();\n}",
+      "answer": "The output is three rows of four values. Row one: i is 1, so the sums are 2 3 4 5. Row two: i is 2, giving 3 4 5 6. Row three: i is 3, giving 4 5 6 7. Each row ends with the line break the println adds after the inner loop finishes. The inner body executes three times four equals twelve times — four executions per outer pass across three passes — and each printed value is the sum of the two current counters followed by a space.",
+      "explanation": "One mark per correctly traced row and one for the execution count of twelve with its justification from the two ranges.",
+      "commonMistake": "Printing i times j instead of i plus j, or forgetting that each value is followed by a space so the rows read as four separated numbers."
+    },
+    {
+      "id": "cisce-9-ca-q-nested-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Write the centred pyramid of height 4 shown below, and derive the space and star formulas from the shape rather than from memory.\n   *\n  ***\n *****\n*******",
+      "answer": "int n = 4; for (int i = 0; i < n; i++) { for (int s = 0; s < n - 1 - i; s++) System.out.print(\" \"); for (int k = 0; k < 2 * i + 1; k++) System.out.print(\"*\"); System.out.println(); } The derivation: the first row of a height-4 figure needs 3 leading spaces to centre its single star, so spaces number n minus 1 minus i as i climbs from 0 and they shrink by one per row. The stars form the odd numbers — 1, 3, 5, 7 — and each row gains two, so the count is 2 times i plus 1. The printed output is the four-row pyramid quoted in the question.",
+      "explanation": "Two marks are for the working program with both inner loops, two for the derivation of each formula from a drawn row, and one for the exact output.",
+      "commonMistake": "Deriving the star count as i + 1, which prints only four stars on the last row instead of seven — the growth is by two, not by one."
+    }
+  ]
+}

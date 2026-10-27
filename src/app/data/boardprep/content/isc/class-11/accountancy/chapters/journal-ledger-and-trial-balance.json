@@ -1,0 +1,551 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-acct-journal-ledger",
+  "title": "Journal, Ledger and Trial Balance",
+  "kind": "accountancy",
+  "tagline": "Double entry in practice: journalising, posting, balancing, subsidiary books and the trial balance that tests them all.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Accountancy syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Accountancy, subject code 858). No board examination paper, textbook or commercial guide was consulted. Journal entries, ledger accounts, statements and worked figures were worked out for this page and are not reproduced from any published source.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Accountancy syllabus registered for Examination Year 2027 (subject code 858): every explanation, format, worked example, figure specification, question and answer was written for this page. Accounting treatment follows standard double-entry practice as prescribed for the ISC Class XI course."
+  },
+  "overview": {
+    "intro": "Once transactions have been identified they must be recorded in a form that cannot lose information. The journal records them in date order with a matching debit and credit; the ledger reorganises them by account so that the balance of any one person or item can be read at a glance; and the trial balance extracts those balances to test whether the books are arithmetically in order. Subsidiary books sit in front of these, catching repeated transactions of one kind in a dedicated register before they reach the journal. Together the three stages form the backbone of the accounting cycle, and the marks in this unit come from passing entries correctly and from knowing exactly what each stage can and cannot prove.",
+    "facts": [
+      {
+        "label": "Golden rules",
+        "value": "Personal: debit the receiver, credit the giver. Real: debit what comes in, credit what goes out. Nominal: debit expenses and losses, credit incomes and gains."
+      },
+      {
+        "label": "Journal form",
+        "value": "Date, particulars with the debit account first, ledger folio, debit amount and credit amount on the next line indented."
+      },
+      {
+        "label": "Trial balance",
+        "value": "A list of ledger balances on one date; agreement proves arithmetic accuracy only."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Journal entries, ledger posting and cash book problems are the most frequent numerical questions in this unit."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Classify accounts as personal, real or nominal and apply the golden rules.",
+    "Record transactions in a journal and post them to ledger accounts.",
+    "Balance ledger accounts and explain the meaning of each balance.",
+    "Prepare a cash book and a trial balance from given ledger balances.",
+    "Distinguish between errors that a trial balance detects and those it cannot."
+  ],
+  "learn": [
+    {
+      "id": "double-entry-and-accounts",
+      "title": "Double entry and the classification of accounts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Double entry rests on a simple observation: every transaction has two faces. If one party receives something, another party gives it, so every debit has a matching credit of the same amount. To apply this mechanically, accounts are classified into three groups. Personal accounts relate to persons and firms, including the owner’s capital account. Real accounts relate to assets such as cash, furniture and machinery, and they carry a balance forward because the asset still exists. Nominal accounts relate to expenses, losses, incomes and gains; they are temporary and are closed at the end of the period. The golden rules convert the classification into an entry: debit the receiver and credit the giver for personal accounts, debit what comes in and credit what goes out for real accounts, and debit expenses and losses while crediting incomes and gains for nominal accounts."
+        },
+        {
+          "type": "table",
+          "caption": "Classification of accounts with the rule applied",
+          "columns": [
+            "Type of account",
+            "Examples",
+            "Rule applied",
+            "Closed at year end?"
+          ],
+          "rows": [
+            [
+              "Personal",
+              "Debtors, creditors, banker, capital",
+              "Debit the receiver, credit the giver",
+              "Capital only, by closing entries"
+            ],
+            [
+              "Real",
+              "Cash, stock, machinery, buildings",
+              "Debit what comes in, credit what goes out",
+              "No, balance carried forward"
+            ],
+            [
+              "Nominal",
+              "Rent, salaries, sales, commission",
+              "Debit expenses and losses, credit incomes and gains",
+              "Yes, transferred to trading or profit and loss account"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Rent of ₹4,000 paid in cash: debit Rent a/c (nominal, expense), credit Cash a/c (real, goes out).",
+              "note": "The payment is an expense, so the nominal rule decides the debit side."
+            },
+            {
+              "text": "Received ₹7,000 from Ramesh: debit Cash a/c (real, comes in), credit Ramesh’s a/c (personal, giver).",
+              "note": "Cash entering the business is debited under the real-account rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "journal-and-posting",
+      "title": "Journalising and posting to the ledger",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The journal is the book of original entry. Each entry gives the date, the account to be debited written first and flush to the left, the account to be credited introduced by the word To and indented, the ledger folio showing where the entry is posted, and the two amounts. A narration in brackets briefly explains the entry and is then closed. Journalising is a translation exercise: read the sentence of the transaction, identify the two accounts, classify each one, apply the golden rule and write the debit first."
+        },
+        {
+          "type": "paragraph",
+          "text": "Posting transfers the journal into the ledger, which is the book of final entry arranged by account. Each account has a debit side on the left and a credit side on the right. The posting takes the amount from the journal to the same side of the ledger account, enters the folio of the journal so that the two books can be traced in either direction, and the opposite side of the journal entry carries the ledger folio of the account just used. This cross-referencing is what makes an audit trail possible."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Enter the date and the debit account first, with its amount on the debit side.",
+            "Enter the credit account on the next line, indented and preceded by To.",
+            "Write the journal folio in the ledger and the ledger folio in the journal.",
+            "Add a short narration in brackets, for example being rent paid for the month.",
+            "Total both sides of each ledger account and carry the larger balance down."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Journal entries for a week of ordinary transactions",
+          "columns": [
+            "Date",
+            "Particulars",
+            "Debit (₹)",
+            "Credit (₹)"
+          ],
+          "rows": [
+            [
+              "1 April",
+              "Cash a/c … Dr to Capital a/c (started business)",
+              "2,00,000",
+              "2,00,000"
+            ],
+            [
+              "3 April",
+              "Purchases a/c … Dr to Supplier a/c (goods on credit)",
+              "60,000",
+              "60,000"
+            ],
+            [
+              "5 April",
+              "Cash a/c … Dr to Sales a/c (cash sales)",
+              "35,000",
+              "35,000"
+            ],
+            [
+              "8 April",
+              "Rent a/c … Dr to Cash a/c (rent paid)",
+              "8,000",
+              "8,000"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "subsidiary-books",
+      "title": "Subsidiary books and the cash book",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A business that records every transaction first in the journal soon finds the journal unwieldy. Subsidiary books solve this by giving each recurring class of transaction its own register. The purchases book records credit purchases of goods only; the sales book records credit sales of goods only; the purchases return and sales return books record returns; and the cash book records every receipt and payment of cash and bank. Because the cash book is both a subsidiary book and a ledger account, it removes most cash transactions from the journal altogether."
+        },
+        {
+          "type": "table",
+          "caption": "Subsidiary books and what they capture",
+          "columns": [
+            "Book",
+            "Transactions recorded",
+            "What it excludes"
+          ],
+          "rows": [
+            [
+              "Purchases book",
+              "Credit purchases of goods dealt in",
+              "Cash purchases and purchases of fixed assets"
+            ],
+            [
+              "Sales book",
+              "Credit sales of goods dealt in",
+              "Cash sales and sale of fixed assets"
+            ],
+            [
+              "Return book",
+              "Returns outward and returns inward",
+              "Cash refunds of price"
+            ],
+            [
+              "Cash book",
+              "All receipts and payments of cash and bank",
+              "Non-cash transactions such as bills accepted"
+            ],
+            [
+              "Journal proper",
+              "Entries with no special book: opening, closing, bad debts, depreciation",
+              "Anything already in a subsidiary book"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The cash book is maintained in three columns when the business uses bank as well as cash: a cash column and a bank column on both sides, and often a discount column on the receipt side for discount allowed and on the payment side for discount received. A bank overdraft appears as a debit balance in the bank column, while a favourable bank balance appears as a credit balance."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Goods bought from Anil on credit ₹12,000 goes to the purchases book, not the journal.",
+              "note": "The purchases book is meant only for credit purchases of goods in the ordinary course of trade."
+            },
+            {
+              "text": "A cheque for ₹9,000 received and banked the same day appears as a receipt in the cash book.",
+              "note": "If the cheque is banked on the following day, the entry is Cash at bank and a separate bank column receipt one day later."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "balancing-ledgers",
+      "title": "Balancing ledger accounts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Balancing means totalling both sides of an account and writing the difference on the smaller side so that both sides agree. The wording of that difference carries the meaning. An asset account or an expense account that shows a debit excess gives a debit balance, which is the normal position: cash, rent and machinery all carry debit balances. A liability or income account shows a credit excess and therefore a credit balance: creditors, sales and capital all carry credit balances. An account with a credit balance on the debit side is called a contra entry position, and a debit balance in the bank column of the cash book is an overdraft, which is a liability in substance."
+        },
+        {
+          "type": "table",
+          "caption": "Reading the balance of a ledger account",
+          "columns": [
+            "Account type",
+            "Larger side",
+            "Balance written as",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Asset",
+              "Debit",
+              "Debit balance",
+              "Cash ₹42,500"
+            ],
+            [
+              "Expense",
+              "Debit",
+              "Debit balance",
+              "Rent ₹8,000"
+            ],
+            [
+              "Liability",
+              "Credit",
+              "Credit balance",
+              "Creditors ₹60,000"
+            ],
+            [
+              "Income or gain",
+              "Credit",
+              "Credit balance",
+              "Commission received ₹3,500"
+            ],
+            [
+              "Bank column showing payment excess",
+              "Debit",
+              "Overdraft, a liability",
+              "Bank overdraft ₹12,000"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Personal accounts are balanced only when the party is expected to settle; a customer who trades continuously may be left with the amount due rather than forced to a zero balance. Nominal accounts are not balanced to carry forward but are closed by transferring the total to the trading or profit and loss account."
+        }
+      ]
+    },
+    {
+      "id": "trial-balance",
+      "title": "The trial balance and what it proves",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The trial balance is a statement of all ledger balances drawn on a particular date, arranged in one column of debit balances and one of credit balances. If the two columns agree, it may be concluded that for every debit posted there was an equal credit, and that the arithmetic of the books is correct. It is prepared in three ways: from the ledger balances directly, from a total and a balance of each account, or from a memorandum of balances. The agreement is a necessary but not sufficient condition of accuracy, because errors of omission, commission, principle and original entry, and compensating errors, leave the two sides equal."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Catches: arithmetical mistakes in posting, posting to the wrong side, one-sided omission of an entry.",
+            "Cannot catch: a transaction completely omitted, an entry of the correct amount in the wrong account of the same class, an error of principle such as charging capital to revenue, and two mistakes that cancel each other.",
+            "All ledgers must be balanced first, and the balances must be classified as debit or credit.",
+            "Cash and bank balances are shown separately, and a suspense account is opened while differences remain."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Extract of a trial balance as on 31 March",
+          "columns": [
+            "Account",
+            "Debit (₹)",
+            "Credit (₹)"
+          ],
+          "rows": [
+            [
+              "Capital",
+              "—",
+              "5,00,000"
+            ],
+            [
+              "Drawings",
+              "40,000",
+              "—"
+            ],
+            [
+              "Furniture and fittings",
+              "1,20,000",
+              "—"
+            ],
+            [
+              "Debtors",
+              "3,15,000",
+              "—"
+            ],
+            [
+              "Creditors",
+              "—",
+              "2,60,000"
+            ],
+            [
+              "Bank overdraft",
+              "—",
+              "75,000"
+            ],
+            [
+              "Purchases",
+              "8,40,000",
+              "—"
+            ],
+            [
+              "Sales",
+              "—",
+              "4,80,000"
+            ],
+            [
+              "Total",
+              "13,15,000",
+              "13,15,000"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: From source document to trial balance",
+      "description": "A left-to-right chain of five boxes connected by arrows: source document, journal, ledger, trial balance and final accounts, with a return arrow from ledger to trial balance marked checking.",
+      "labels": [
+        "Source document: cash memo, invoice, pay-in slip",
+        "Journal: book of original entry",
+        "Ledger: book of final entry, arranged by account",
+        "Trial balance: debit and credit columns compared",
+        "Final accounts: prepared only after the trial balance agrees",
+        "Folio numbers link each entry in both directions"
+      ]
+    },
+    {
+      "caption": "Figure: The three account classes and their balancing side",
+      "description": "Three stacked panels for personal, real and nominal accounts; each panel shows the golden rule, the normal balance side and whether the account is closed at the year end.",
+      "labels": [
+        "Personal: debit the receiver, credit the giver",
+        "Real: debit what comes in, credit what goes out",
+        "Nominal: debit expenses and losses, credit incomes and gains",
+        "Real and personal accounts carry a balance forward",
+        "Nominal accounts are closed to the trading and profit and loss account"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Every debit must have an equal credit, which is the whole basis of double entry.",
+    "Personal accounts follow debit the receiver and credit the giver.",
+    "Real accounts follow debit what comes in and credit what goes out.",
+    "Nominal accounts follow debit expenses and losses and credit incomes and gains.",
+    "The journal is the book of original entry; the ledger is the book of final entry.",
+    "The purchases book records credit purchases of goods only, never a fixed asset.",
+    "A debit balance in the bank column of the cash book is an overdraft and is a liability.",
+    "Balances carry forward: assets and expenses debit, liabilities and incomes credit.",
+    "A trial balance agreement proves arithmetic accuracy only, not correctness of principle.",
+    "Errors of omission, commission, principle, original entry and compensating errors escape the trial balance."
+  ],
+  "examFocus": [
+    "Entry questions carry the largest share of marks: classify the account before writing the debit, and always write the debit line first with the credit indented and preceded by To.",
+    "Cash book problems reward the discount columns being totalled and the bank overdraft being shown on the payment side.",
+    "In theory questions, quote one example of each error a trial balance cannot detect; naming the error without an example rarely earns full marks."
+  ],
+  "vocabulary": [
+    {
+      "word": "Journal",
+      "meaning": "Book of original entry recording transactions in date order with debit and credit."
+    },
+    {
+      "word": "Ledger",
+      "meaning": "Book of final entry in which transactions are classified under individual accounts."
+    },
+    {
+      "word": "Posting",
+      "meaning": "Transferring an amount from the journal to the correct side of a ledger account."
+    },
+    {
+      "word": "Trial balance",
+      "meaning": "Statement of ledger balances on a date used to test arithmetic accuracy."
+    },
+    {
+      "word": "Cash book",
+      "meaning": "Subsidiary book recording all cash and bank receipts and payments."
+    },
+    {
+      "word": "Folio",
+      "meaning": "Page reference that links a journal entry with its ledger posting."
+    },
+    {
+      "word": "Suspense account",
+      "meaning": "Temporary account holding the difference while errors are located."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-acct-journal-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Rent paid in cash is recorded by:",
+      "options": [
+        "Debit Rent a/c, credit Cash a/c",
+        "Debit Cash a/c, credit Rent a/c",
+        "Debit Capital a/c, credit Rent a/c",
+        "Debit Rent a/c, credit Capital a/c"
+      ],
+      "correctIndex": 0,
+      "answer": "Debit Rent a/c, credit Cash a/c",
+      "explanation": "Rent is a nominal account and an expense, so it is debited; cash goes out, so the real account is credited."
+    },
+    {
+      "id": "isc11-acct-journal-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which book records credit purchases of goods only?",
+      "options": [
+        "Purchases journal",
+        "Sales journal",
+        "Cash book",
+        "Journal proper"
+      ],
+      "correctIndex": 0,
+      "answer": "Purchases journal",
+      "explanation": "The purchases book, or purchases journal, captures credit purchases of goods in the ordinary course of trade and excludes cash purchases and fixed assets."
+    },
+    {
+      "id": "isc11-acct-journal-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A debit balance appearing in the bank column of the cash book represents:",
+      "options": [
+        "A favourable bank balance",
+        "A bank overdraft, which is a liability",
+        "Capital introduced by the owner",
+        "Cash collected from debtors"
+      ],
+      "correctIndex": 1,
+      "answer": "A bank overdraft, which is a liability",
+      "explanation": "Payments exceed receipts in the bank column, so the business owes the bank: an overdraft is a liability shown as a debit balance in the cash book."
+    },
+    {
+      "id": "isc11-acct-journal-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these errors will NOT be revealed by a trial balance?",
+      "options": [
+        "Posting ₹500 as ₹50 in both the debit and the credit entry",
+        "Posting an amount on the wrong side of one account",
+        "Omitting the entire transaction from the books",
+        "Totalling a ledger account incorrectly"
+      ],
+      "correctIndex": 2,
+      "answer": "Omitting the entire transaction from the books",
+      "explanation": "A transaction omitted completely leaves both sides short by the same amount, so the trial balance still agrees; the others produce unequal totals."
+    },
+    {
+      "id": "isc11-acct-journal-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The book in which transactions are recorded first, in date order, is called the __________ book.",
+      "answer": "journal",
+      "explanation": "The journal is the book of original entry; the ledger, which is organised by account, is the book of final entry."
+    },
+    {
+      "id": "isc11-acct-journal-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The temporary account opened to hold an unexplained difference in the trial balance is the __________ account.",
+      "answer": "suspense",
+      "explanation": "The suspense account absorbs the difference so that the books can be closed while the error is traced, and it is eliminated once found."
+    },
+    {
+      "id": "isc11-acct-journal-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the three golden rules of accounting and give one example for each.",
+      "answer": "Personal: debit the receiver and credit the giver, for example debit Hari and credit Cash when cash is paid to Hari. Real: debit what comes in and credit what goes out, for example debit Machinery and credit Cash on buying machinery. Nominal: debit expenses and losses and credit incomes and gains, for example debit Commission Received and credit Cash.",
+      "explanation": "One rule with a matching example earns each mark; an example that belongs to a different class of account earns nothing for that rule."
+    },
+    {
+      "id": "isc11-acct-journal-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain four errors that a trial balance cannot detect.",
+      "answer": "The four are: an error of omission, where the transaction is left out of the books entirely; an error of commission, where the correct amount is posted to the wrong account of the same class; an error of principle, where a capital item such as a delivery van is charged to repairs revenue; and compensating errors, where two mistakes of equal size cancel each other. Errors of original entry also escape, where the wrong figure was copied from the source document.",
+      "explanation": "The examiner wants the class of error plus a concrete example, because naming without illustration shows only recall."
+    },
+    {
+      "id": "isc11-acct-journal-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Journalise: (a) started business with cash ₹1,50,000; (b) bought goods from Verma on credit ₹45,000; (c) sold goods for cash ₹20,000; (d) paid Verma ₹40,000 by cheque; (e) paid house rent of the proprietor ₹5,000.",
+      "answer": "(a) Cash a/c Dr 1,50,000 to Capital a/c 1,50,000. (b) Purchases a/c Dr 45,000 to Verma 45,000. (c) Cash a/c Dr 20,000 to Sales a/c 20,000. (d) Verma Dr 40,000 to Bank a/c 40,000. (e) Drawings a/c Dr 5,000 to Cash a/c 5,000. The last entry is the trap: the proprietor’s household expense is drawings, not a business expense, because of the business entity concept.",
+      "explanation": "All five entries are needed for full marks and the fifth distinguishes a student who understands the entity concept from one who applies the nominal rule blindly."
+    },
+    {
+      "id": "isc11-acct-journal-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A trial balance shows a difference of ₹1,200 on the debit side. Explain how a suspense account is used and state what happens when the error is found.",
+      "answer": "The difference is posted to the credit of the suspense account so that both columns agree and the final accounts can be prepared. When the error is located, the correcting entry is passed through suspense: if a rent payment of ₹1,200 was posted to the debit of wages instead of rent, the fix is Rent a/c Dr 1,200 and Suspense a/c Cr 1,200. Once every rupee of the difference is explained, the suspense account balance becomes nil and the corrected trial balance agrees on its own merits.",
+      "explanation": "The explanation must show both stages, the opening entry that balances the books and the correcting entry that empties suspense, otherwise the purpose of the account is not demonstrated."
+    }
+  ]
+}

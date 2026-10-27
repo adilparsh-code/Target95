@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-math-library",
+  "slug": "mathematical-library-methods",
+  "title": "Mathematical Library Methods",
+  "kind": "computer-applications",
+  "tagline": "The Math class in java.lang: sqrt, pow, abs, ceil, floor, round and random, and the types they hand back.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Before writing your own method, look for one that already exists. The Java library contains thousands of tested, documented methods, and using them is professional practice rather than shortcut work: a program that approximates a square root when Math.sqrt exists is longer, slower and more likely to be wrong. This chapter covers the mathematical library itself — the Math class in java.lang — and the two habits that surround it: knowing what type each method returns, and never throwing a returned value away.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Mathematical Library Methods (ICSE Class IX)"
+      },
+      {
+        "label": "Class home",
+        "value": "Math lives in java.lang, so no import line is required"
+      },
+      {
+        "label": "Calling style",
+        "value": "Every method is static — Math.method(arguments), with no object"
+      },
+      {
+        "label": "Return types",
+        "value": "sqrt, pow, ceil, floor and random return double; round returns long"
+      },
+      {
+        "label": "The rule",
+        "value": "A method returns a value and never prints it — println does the printing"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Call Math.sqrt, Math.pow, Math.abs, Math.ceil, Math.floor and Math.round with correct arguments.",
+    "State the exact type each Math method returns and explain why a decimal point appears in some outputs.",
+    "Generate a random integer in any stated range by scaling, casting and shifting in the correct order.",
+    "Write programs that use library methods instead of hand-typed approximations for mathematical work."
+  ],
+  "learn": [
+    {
+      "id": "math-why",
+      "title": "Why the library comes first",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Math class holds the numerical methods this course needs — powers, roots, rounding, absolute values and random numbers — as static methods, so they are called on the class itself with no object: Math.methodName(arguments). Because Math lives in the java.lang package, it needs no import line; it is available in every program the moment you type it. Each method takes zero or more arguments, performs its calculation, and hands a value back to the exact place the call was written, ready to be stored, printed or used inside a larger expression."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Static method",
+              "meaning": "A method belonging to the class itself, callable without creating any object.",
+              "context": "Math.abs(-5) is called on the class Math, not on a Math value."
+            },
+            {
+              "term": "Argument",
+              "meaning": "A value passed into a method for it to work on.",
+              "context": "Math.pow(2, 10) passes the arguments 2 and 10."
+            },
+            {
+              "term": "Return value",
+              "meaning": "The result a method hands back to its caller; displaying it is the caller’s job.",
+              "context": "Math.sqrt(25) returns the double 5.0 to the statement that called it."
+            },
+            {
+              "term": "java.lang",
+              "meaning": "The package of core classes that is imported automatically into every program.",
+              "context": "Math and String need no import line because they live in java.lang."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The habit that surrounds every library call is protecting the return value. A statement such as Math.sqrt(25); computes 5.0 and then discards it — nothing is printed and nothing is stored, so the screen stays blank. The computation happened; its result simply went nowhere. To make it visible the value must be passed to a printing method, as in System.out.println(Math.sqrt(25));, and to make it reusable it must be assigned to a variable of the matching type. When a program produces no output, ask first whether the returned value was ever used."
+        }
+      ]
+    },
+    {
+      "id": "math-measure",
+      "title": "Measuring: sqrt, pow and abs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three methods cover most of the measuring work in the syllabus. Math.sqrt returns the square root of its argument as a double, so even the exact root of 25 prints as 5.0 with its decimal point. Math.pow(base, exponent) raises the first argument to the power of the second, and it too returns a double. Math.abs returns the absolute value of its argument with the sign removed, and unlike the other two it mirrors the type it was given: abs of an int is an int, while abs of a double is a double."
+        },
+        {
+          "type": "table",
+          "caption": "The core Math methods and what each one returns",
+          "columns": [
+            "Method",
+            "Returns",
+            "Example",
+            "Result"
+          ],
+          "rows": [
+            [
+              "Math.sqrt(x)",
+              "Square root as a double",
+              "Math.sqrt(25)",
+              "5.0"
+            ],
+            [
+              "Math.pow(a, b)",
+              "a raised to the power b",
+              "Math.pow(2, 10)",
+              "1024.0"
+            ],
+            [
+              "Math.abs(x)",
+              "The absolute value, type preserved",
+              "Math.abs(-17)",
+              "17"
+            ],
+            [
+              "Math.max(a, b)",
+              "The larger of two values",
+              "Math.max(12, 7)",
+              "12"
+            ],
+            [
+              "Math.min(a, b)",
+              "The smaller of two values",
+              "Math.min(12, 7)",
+              "7"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "double root = Math.sqrt(144); double area = Math.PI * Math.pow(7, 2); System.out.println(root + \" and \" + area);",
+              "note": "The root of 144 prints as 12.0 and the circle of radius 7 as 153.93804002589985 — the decimal tail shows that both values are doubles carrying pi to full library precision rather than a typed 3.14."
+            },
+            {
+              "text": "int d = Math.abs(-42); double e = Math.abs(-2.5); int g = Math.max(Math.max(12, 7), 30); System.out.println(d + \" \" + e + \" \" + g);",
+              "note": "Abs mirrors its argument: the int -42 becomes the int 42 while the double -2.5 becomes 2.5, so the printed line is \"42 2.5 30\". Nesting max twice reaches three values in a single expression."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math-rounding",
+      "title": "Rounding three ways: round, ceil and floor",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The three moving methods answer slightly different questions. Math.round returns the nearest long — a whole number without a decimal point — and ties round upwards, so 6.5 becomes 7. Math.ceil returns the smallest double that sits at or above its argument, rounding anything fractional up to the next whole value. Math.floor returns the largest double at or below the argument, rounding anything fractional down. Two of the three return double and one returns long, and the printed decimal point is the visible clue that tells you which one ran."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "System.out.println(Math.round(6.6) + \" \" + Math.round(6.4) + \" \" + Math.round(-6.6));",
+              "note": "Round moves each value to the nearest whole number: 6.6 goes up to 7, 6.4 goes down to 6, and -6.6 moves to -7 because nearest means nearest on the number line, not \"always upwards\". The printed line is \"7 6 -7\" with no decimal points, because round returns long."
+            },
+            {
+              "text": "System.out.println(Math.ceil(6.1) + \" \" + Math.floor(6.9) + \" \" + Math.ceil(-6.1));",
+              "note": "Ceil and floor always move one way: ceil(6.1) climbs to 7.0, floor(6.9) drops to 6.0, and ceil(-6.1) climbs to -6.0 — upwards means towards the greater value, which for negatives is away from zero. The printed line is \"7.0 6.0 -6.0\", decimals intact because both methods return double."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Rounding to a stated number of decimal places is a three-step pattern built from these methods: scale the value up by the required power of ten, round the scaled value to a whole number, then divide it back down by the matching double. The divisor must be a double such as 100.0, because dividing a long by an int performs integer division and quietly deletes the decimal places the whole exercise was meant to keep — the difference between an answer of 153.94 and a wrong answer of 153."
+        }
+      ]
+    },
+    {
+      "id": "math-random",
+      "title": "Math.random and the range arithmetic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Math.random takes no arguments and returns a double in the fixed range from 0.0 up to, but not including, 1.0 — the same slice every time it is called, with no way to predict or repeat it. Turning that slice into a useful range is always three steps in order: scale by the width of the range you want with multiplication, cast to int to drop the fraction, then shift with addition so the range begins where the question says. Reorder the steps and the range is wrong in a way that still compiles."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int roll = (int) (Math.random() * 6) + 1; System.out.println(\"Roll: \" + roll);",
+              "note": "A dice roll from 1 to 6. Multiplying by 6 widens the slice to 0.0 up to below 6.0, casting truncates it to the whole numbers 0 to 5, and adding 1 shifts the floor to 1 — so the printed value is one of 1, 2, 3, 4, 5, 6, never 0 and never 7. A run prints a line such as \"Roll: 4\" for whatever face the call produced."
+            },
+            {
+              "text": "int percent = (int) (Math.random() * 101); System.out.println(\"Random percent: \" + percent);",
+              "note": "An inclusive range needs the width plus one: 0 to 100 contains 101 values, so the multiplier is 101 and no shift is needed because the range already starts at zero. A possible output is \"Random percent: 37\"."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Scale first: multiplication widens the 0.0-to-below-1.0 slice to the width of the target range.",
+            "Cast second: the (int) truncation drops the fraction — it never rounds, so 5.9 becomes 5.",
+            "Shift last: addition moves the floor of the range to where the question wants it, which is why a 1-to-6 range adds 1 after casting.",
+            "A range that is inclusive at the top needs a multiplier of width plus one, or the final value can never appear."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "math-programs",
+      "title": "Programs that lean on the library",
+      "blocks": [
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "double r = 7; double area = Math.PI * Math.pow(r, 2); long scaled = Math.round(area * 100.0); System.out.println(\"Area = \" + scaled / 100.0);",
+              "note": "Circle area reported to two decimal places: pi from the constant rather than a typed 3.14, pow for the square, round on the scaled value, and division by the double 100.0 so both decimal places survive. The output is \"Area = 153.94\"."
+            },
+            {
+              "text": "double a = 3, b = 4; double c = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)); System.out.println(\"Hypotenuse = \" + c);",
+              "note": "The hypotenuse of a right triangle from Pythagoras: pow squares each side, sqrt closes the calculation, and the single line prints \"Hypotenuse = 5.0\" for the sides 3 and 4 — a library answer with no approximation anywhere."
+            },
+            {
+              "text": "int low = Math.min(78, Math.min(82, 90)); int high = Math.max(78, Math.max(82, 90)); System.out.println(\"Spread = \" + (high - low));",
+              "note": "The spread of three marks uses nested min and max in one expression each, then reports the difference. For 78, 82 and 90 the output is \"Spread = 12\" — the arithmetic sits outside the library calls, which only supply the comparison."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Every program above follows the same three stages: read or set the inputs, compute with library calls wherever the work already exists, then report the result with println. When a question says \"using a library method\", the call itself must appear in your answer — a hand-written approximation of a square root scores nothing, because the requirement is precisely that you know the method exists and how to reach it."
+        }
+      ]
+    },
+    {
+      "id": "math-practice",
+      "title": "Exam drills — calling with confidence",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Drill one: read a question and name the method before writing any code — the phrase \"using a library method\" means the exact call must appear. Drill two: predict every output together with its type, because the decimal point in 5.0 and its absence in 7 are how a marker sees which method ran. Drill three: write the random-range expression from memory in all three steps, since range questions appear in some form almost every year."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A bare call with a semicolon computes and then throws the value away — pass it to println to display it.",
+            "sqrt, pow, ceil, floor and random return double; round returns long; abs mirrors its argument.",
+            "Rounding to k decimal places scales by 10 to the k, rounds, then divides by a double of the same magnitude.",
+            "Casting truncates rather than rounds, so range ends are scaled by width plus one before the cast."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A return value has two fates",
+      "description": "Two parallel statements, each calling Math.sqrt(25). The first feeds its result into a grey sink labelled result discarded, beside an empty screen box. The second feeds the same result into a println box, which points to a screen box showing 5.0 — the same computation, two fates for its return value.",
+      "labels": [
+        "Math.sqrt(25) computes 5.0",
+        "Bare call: result discarded",
+        "Screen stays empty",
+        "Result passed to println",
+        "println displays 5.0",
+        "Return type: double"
+      ]
+    },
+    {
+      "caption": "Figure: Reaching 1 to 20 from Math.random",
+      "description": "A left-to-right pipeline in three stages: a band labelled 0.0 up to below 1.0 enters a times-20 box, becoming 0.0 up to below 20.0, then a cast box truncating to the whole numbers 0 to 19, then a plus-one box shifting the band to 1 to 20. Each stage is labelled with the operation it applies.",
+      "labels": [
+        "0.0 <= v < 1.0 from random",
+        "Multiply by 20 (scale)",
+        "0.0 <= v < 20.0",
+        "Cast to int (truncate)",
+        "Whole numbers 0 to 19",
+        "Add 1: range 1 to 20"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Math lives in java.lang, needs no import, and every method is called on the class: Math.method(arguments).",
+    "sqrt, pow, ceil, floor and random return double; round returns long; abs mirrors its argument.",
+    "A method returns a value and never prints it — pass the result to println to display it.",
+    "round moves to the nearest long with ties going upwards, while ceil and floor each move in one direction only.",
+    "Rounding to k decimal places: scale by the power of ten, round, then divide by a double so the decimals survive.",
+    "Math.random yields 0.0 up to below 1.0; scale, cast, then shift to reach any stated range.",
+    "A cast truncates rather than rounds, so an inclusive range end is scaled by width plus one.",
+    "Library precision beats typed constants: Math.PI answers correctly wherever accuracy is checked."
+  ],
+  "examFocus": [
+    "Output question: state the value and its type — 5.0 from sqrt, 7 from round, 6.0 from floor.",
+    "Common-error question: explain why Math.sqrt(25); prints nothing and supply the corrected line.",
+    "Program question: read values, compute with at least three library methods, and report with correct formatting.",
+    "Range question: build a random integer in a stated range and justify each of the three steps."
+  ],
+  "vocabulary": [
+    {
+      "word": "Static method",
+      "meaning": "A method callable on the class without creating an object.",
+      "context": "Math.abs(-5)."
+    },
+    {
+      "word": "Argument",
+      "meaning": "A value handed to a method for it to work on.",
+      "context": "The 2 and the 10 in Math.pow(2, 10)."
+    },
+    {
+      "word": "Return value",
+      "meaning": "The result a method hands back; it displays nothing by itself.",
+      "context": "The 5.0 that Math.sqrt(25) returns."
+    },
+    {
+      "word": "Truncation",
+      "meaning": "Dropping the fraction when a decimal is cast to an int.",
+      "context": "(int) 5.9 becomes 5."
+    },
+    {
+      "word": "Constant",
+      "meaning": "A fixed value the library supplies instead of a typed approximation.",
+      "context": "Math.PI in a circle calculation."
+    },
+    {
+      "word": "Range arithmetic",
+      "meaning": "Scaling, casting and shifting a random slice to a required range.",
+      "context": "Turning 0.0-to-below-1.0 into 1 to 6."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-math-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is printed by System.out.println(Math.sqrt(25));?",
+      "options": [
+        "5.0",
+        "5",
+        "25",
+        "Nothing — the result is discarded"
+      ],
+      "correctIndex": 0,
+      "answer": "5.0",
+      "explanation": "sqrt returns a double, so the printed value carries its decimal point. It is 5, not 25 — and it appears only because the result was passed to println.",
+      "commonMistake": "Answering 5 without the decimal point — the double return type is what the question is really testing."
+    },
+    {
+      "id": "cisce-9-ca-q-math-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The expression Math.pow(2, 10) evaluates to:",
+      "options": [
+        "1024.0",
+        "1024",
+        "32.0",
+        "25"
+      ],
+      "correctIndex": 0,
+      "answer": "1024.0",
+      "explanation": "pow raises 2 to the tenth power, which is 1024 — and because pow returns a double, the printed form keeps its decimal point: 1024.0. The whole number 1024 is the distractor for anyone who forgets the return type, and 32.0 is the answer for the fifth power, not the tenth.",
+      "commonMistake": "Dropping the decimal point, or answering for the wrong exponent — the question names both the base and the power for a reason."
+    },
+    {
+      "id": "cisce-9-ca-q-math-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The expression Math.floor(6.9) returns:",
+      "options": [
+        "6.0",
+        "6",
+        "7.0",
+        "6.9"
+      ],
+      "correctIndex": 0,
+      "answer": "6.0",
+      "explanation": "floor moves downwards to the greatest value at or below the argument, so 6.9 becomes 6.0 — as a double, decimals intact.",
+      "commonMistake": "Answering 7 by confusing floor with ceil, or 6 by forgetting that floor returns double."
+    },
+    {
+      "id": "cisce-9-ca-q-math-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The expression Math.round(6.6) returns a value of type:",
+      "options": [
+        "long",
+        "int",
+        "double",
+        "boolean"
+      ],
+      "correctIndex": 0,
+      "answer": "long",
+      "explanation": "round returns the nearest long — whole, with no decimal point. The other Math methods in this chapter return double.",
+      "commonMistake": "Assuming every Math method returns double — round is the deliberate exception."
+    },
+    {
+      "id": "cisce-9-ca-q-math-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the statement so root holds the square root of 144:\ndouble root = Math.______(144);",
+      "answer": "sqrt",
+      "explanation": "sqrt is the method that returns a square root, and the result must be stored in a double because that is what the method returns.",
+      "commonMistake": "Writing squareRoot or root — the library name must match exactly, character for character."
+    },
+    {
+      "id": "cisce-9-ca-q-math-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why Math.sqrt(25); on a line of its own produces no output.",
+      "answer": "Math.sqrt(25) computes the value 5.0 and returns it to the calling context — the method never displays anything itself. Discarding the result with a bare semicolon throws the value away, so nothing reaches the screen. Writing System.out.println(Math.sqrt(25)); passes the returned value to println, which is what actually prints 5.0.",
+      "explanation": "One mark is for \"returns rather than prints\" and one for naming println as what displays the returned value.",
+      "commonMistake": "Saying the program has an error — the line is perfectly legal, it simply does nothing visible."
+    },
+    {
+      "id": "cisce-9-ca-q-math-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate round, ceil and floor, quoting one example of each.",
+      "answer": "round moves its argument to the nearest whole number and returns a long — Math.round(6.6) gives 7. ceil climbs to the smallest double at or above the argument — Math.ceil(6.1) gives 7.0. floor drops to the largest double at or below it — Math.floor(6.9) gives 6.0. The first answers \"nearest\" while the other two each move in one fixed direction, and round is the only one of the three that does not return a double.",
+      "explanation": "One mark is for the three directions with correct examples and one for naming the return-type difference.",
+      "commonMistake": "Saying floor and round are the same — round picks the nearest, floor always moves down, which differs for values such as 6.5."
+    },
+    {
+      "id": "cisce-9-ca-q-math-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a Java program that reads the radius of a circle and prints its area rounded to two decimal places, using library methods for pi and for rounding.",
+      "answer": "import java.util.Scanner; public class CircleArea { public static void main(String[] args) { Scanner in = new Scanner(System.in); System.out.print(\"Radius: \"); double r = in.nextDouble(); double area = Math.PI * Math.pow(r, 2); long scaled = Math.round(area * 100.0); System.out.println(\"Area = \" + scaled / 100.0); } } For the input 7 the program prints \"Area = 153.94\": the exact area 153.938... is multiplied by 100, rounded to the long 15394, and divided by the double 100.0 so both decimal places survive.",
+      "explanation": "The pi-and-pow computation earns the first mark, the three-step rounding pattern the second, and the division by a double rather than an int the third.",
+      "commonMistake": "Dividing by 100 instead of 100.0 — integer division turns 15394 into 153 and the decimal places vanish."
+    },
+    {
+      "id": "cisce-9-ca-q-math-09",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "State the output of each line and explain the type of every result:\ndouble a = Math.sqrt(16);\ndouble b = Math.pow(2, 5);\nlong c = Math.round(7.5);\nint d = Math.abs(-9);\nSystem.out.println(a + \" \" + b + \" \" + c + \" \" + d);",
+      "answer": "The output is 4.0 32.0 8 9. sqrt returns a double, so the square root of 16 prints as 4.0 with its decimal point. pow also returns a double, so two raised to the power five prints as 32.0. round returns the nearest long, and 7.5 rounds up to the long 8, printed without a decimal point. abs mirrors the type of its argument, so the int -9 becomes the int 9. The decimals in the first two values reveal which methods returned floating-point results, while the last two are whole numbers.",
+      "explanation": "One mark per correctly identified result and its type; the decimal points in 4.0 and 32.0 earn their own credit as the visible trace of the double return type.",
+      "commonMistake": "Writing 4 and 32 without decimal points, or claiming round returns an int."
+    },
+    {
+      "id": "cisce-9-ca-q-math-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Write a program that generates a random integer from 1 to 20 and reports whether it is even or odd. Explain the range arithmetic step by step.",
+      "answer": "public class RandomEvenOdd { public static void main(String[] args) { int n = (int) (Math.random() * 20) + 1; System.out.println(\"Number: \" + n); if (n % 2 == 0) System.out.println(n + \" is even\"); else System.out.println(n + \" is odd\"); } } Math.random yields a double from 0.0 up to below 1.0; multiplying by 20 widens it to 0.0 up to below 20.0; casting truncates it to an int from 0 to 19; and adding 1 shifts the range to 1 to 20. A possible output is \"Number: 14\" followed by \"14 is even\".",
+      "explanation": "Two marks are for the correct range arithmetic, one for the even test through %, and two for the step-by-step explanation naming what each of the three operations contributes.",
+      "commonMistake": "Multiplying by 21 instead of 20, which extends the range to 0-20 and can yield a zero the question forbids."
+    }
+  ]
+}

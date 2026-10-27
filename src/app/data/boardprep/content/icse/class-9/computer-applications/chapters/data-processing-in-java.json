@@ -1,0 +1,509 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-data-processing",
+  "slug": "data-processing-in-java",
+  "title": "Data Processing in Java",
+  "kind": "computer-applications",
+  "tagline": "Scanner, the reading methods, the input-buffer gap, and validation loops that refuse bad data.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Until now the values in our programs have been typed into the code itself, which answers only the question it was compiled for. Real programs read their data while they run — a marks register asks for each score, a calculator asks for both operands — and in Java the console reader for that job is the Scanner class. This chapter builds the three steps of every read, the methods that match each data type, and the buffer gap that makes the first character read fail.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Input and output handling with Scanner (ICSE Class IX)"
+      },
+      {
+        "label": "Three steps",
+        "value": "import Scanner, construct with System.in, call the typed reading method"
+      },
+      {
+        "label": "Reading methods",
+        "value": "nextInt, nextDouble, next (one word), nextLine (whole line)"
+      },
+      {
+        "label": "Buffer gap",
+        "value": "The Enter left after a numeric read returns an empty string to the next nextLine"
+      },
+      {
+        "label": "Validation",
+        "value": "Loop the prompt until the input satisfies the stated range"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Read ints, doubles, words and full lines from the console with the correct Scanner method.",
+    "Explain why the first nextLine after a nextInt returns an empty string, and fix it.",
+    "Write a validation loop that rejects input outside an allowed range.",
+    "Use the hasNext family to check an input's type before consuming it."
+  ],
+  "learn": [
+    {
+      "id": "input-why",
+      "title": "Why a program must listen",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A program with its values typed into the code answers only the question it was compiled for. Real programs read their data while they run — a marks register asks for each student's score, a calculator asks for both operands, a game asks for the player's move. In Java the console reader for that job is the Scanner class, found in the java.util package."
+        },
+        {
+          "type": "paragraph",
+          "text": "Three steps precede any reading, and all three are mandatory. Import the class with import java.util.Scanner;. Create the object bound to the keyboard with Scanner in = new Scanner(System.in);. Then call the reading method that matches the value's type — nextInt for a whole number, nextDouble for a decimal, next for a single word, nextLine for a whole line. Each method pauses the program and waits until the user types something and presses Enter."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Scanner",
+              "meaning": "The class that reads typed input from a stream and converts it to Java values.",
+              "context": "Scanner in = new Scanner(System.in); binds it to the keyboard."
+            },
+            {
+              "term": "Standard input",
+              "meaning": "The keyboard stream, referenced as System.in.",
+              "context": "The argument passed to the Scanner constructor."
+            },
+            {
+              "term": "Input buffer",
+              "meaning": "The storage holding typed input that no read method has consumed yet.",
+              "context": "The Enter key left behind after nextInt is read by the next nextLine."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input-methods",
+      "title": "The reading methods and what each one consumes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "nextInt and nextDouble read up to the next whitespace and convert what they read into numbers. next reads one word — everything up to the next space. nextLine reads an entire line, spaces included, up to the Enter key. The difference between next and nextLine is the difference between a word and a sentence, and examinations test it directly."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "import java.util.Scanner; public class ReadThree { public static void main(String[] args) { Scanner in = new Scanner(System.in); System.out.print(\"Enter your name: \"); String name = in.nextLine(); System.out.print(\"Enter your class: \"); String cls = in.next(); System.out.print(\"Enter your marks: \"); int marks = in.nextInt(); System.out.println(name + \" of class \" + cls + \" scored \" + marks + \".\"); } }",
+              "note": "For the inputs \"Ananya Rao\", then \"IX-A\", then 87, the program prints \"Ananya Rao of class IX-A scored 87.\" The first read takes the whole line so both parts of the name survive; the second takes a single word, which is all a class code needs; the third converts digits into an int."
+            },
+            {
+              "text": "String city = in.next(); String detail = in.nextLine(); System.out.println(\"[\" + city + \"][\" + detail + \"]\");",
+              "note": "next stops at the first space, so for the input \"Kolkata West Bengal\" city holds only \"Kolkata\" and the following nextLine returns \" West Bengal\" — the remainder of the same line. One word versus the rest of the line is exactly the difference the reading method chooses."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Scanner methods and the input each one consumes",
+          "columns": [
+            "Method",
+            "Returns",
+            "Consumes"
+          ],
+          "rows": [
+            [
+              "nextInt()",
+              "int",
+              "Digits up to the next whitespace"
+            ],
+            [
+              "nextDouble()",
+              "double",
+              "A decimal number up to whitespace"
+            ],
+            [
+              "next()",
+              "String",
+              "One word, up to the next space"
+            ],
+            [
+              "nextLine()",
+              "String",
+              "The whole remaining line, spaces included"
+            ],
+            [
+              "nextBoolean()",
+              "boolean",
+              "The text true or false"
+            ],
+            [
+              "hasNextInt()",
+              "boolean",
+              "Nothing — it peeks to report what comes next"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input-gap",
+      "title": "The input-buffer gap — the first character read fails",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Here is the mistake every Java beginner meets once. After nextInt reads a number, the Enter key the user pressed is still sitting in the input buffer — nothing has consumed it. A following nextLine finds that leftover newline immediately, treats it as an empty line, and returns an empty string. The first character typed after the number is then read by the wrong call, and the program appears to skip its next question entirely."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Scanner in = new Scanner(System.in); System.out.print(\"Marks: \"); int marks = in.nextInt(); System.out.print(\"Name: \"); String name = in.nextLine(); System.out.print(\"City: \"); String city = in.nextLine(); System.out.println(marks + \" \" + name + \" \" + city);",
+              "note": "With marks, then Ananya, then Kolkata typed on separate lines, the middle read swallows only the Enter left by the number, name becomes empty, and the final read takes Ananya as the city. The printed line is therefore \"87  Ananya\" — two spaces with the empty name slot between them — and Kolkata is never read at all."
+            },
+            {
+              "text": "Scanner in = new Scanner(System.in); System.out.print(\"Marks: \"); int marks = in.nextInt(); in.nextLine(); System.out.print(\"Name: \"); String name = in.nextLine(); System.out.println(marks + \" \" + name);",
+              "note": "The fix: one in.nextLine(); immediately after the numeric read drains the leftover Enter, so the real line read that follows returns the name. The same drain works after nextDouble and next."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The rule worth memorising is one line long: whenever a number read is followed by a line read, insert one in.nextLine(); between them to drain the Enter key. When a line read is followed by a number read, no drain is needed — nextInt skips leading whitespace on its own before it starts collecting digits."
+        }
+      ]
+    },
+    {
+      "id": "input-validation",
+      "title": "Validating input — refusing what is not acceptable",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reading is only half the work; the other half is refusing to continue on bad data. A marks register must not accept 150 or a negative score, and a program that simply believes its input will produce nonsense downstream. Validation is the practice of checking input against the rules of the problem before it is used, and its natural shape is a loop that repeats the prompt until the value qualifies."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int marks; do { System.out.print(\"Enter marks (0-100): \"); marks = in.nextInt(); } while (marks < 0 || marks > 100); System.out.println(\"Accepted: \" + marks);",
+              "note": "The do-while is the natural shape for validation: the prompt must be asked before its answer can be judged, so the body must run at least once. The || operator joins the two bounds into one condition — below zero, or above one hundred — and only a legal value escapes the loop."
+            },
+            {
+              "text": "String choice; do { System.out.print(\"Continue? (y/n): \"); choice = in.next(); } while (!choice.equals(\"y\") && !choice.equals(\"n\"));",
+              "note": "Validating a word rather than a number: the loop insists on exactly one of the two accepted answers, and ! joins the two rejections into a single continue-testing condition. Any other keystroke simply asks again."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Scanner also offers the hasNext family — hasNextInt, hasNextDouble — which peek at the upcoming input and report whether it is of the required type without consuming it. They let a program refuse text where a number is required instead of crashing with an InputMismatchException the moment a letter is typed, which is the difference between a helpful message and a stack trace."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Validate the range: a mark must lie between 0 and 100 before it enters any calculation.",
+            "Validate the type: hasNextInt reports whether digits are coming before nextInt commits to reading them.",
+            "Loop the prompt: a single rejection should re-ask, not terminate — the user gets another chance.",
+            "State the accepted range in the prompt itself, so the user can satisfy it without guessing."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input-examples",
+      "title": "Worked programs — average, swap and reverse",
+      "blocks": [
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int a = in.nextInt(); int b = in.nextInt(); int c = in.nextInt(); double avg = (a + b + c) / 3.0; System.out.println(\"Average = \" + avg);",
+              "note": "The average of three marks. Dividing by 3.0 rather than 3 forces true division, so the fractional part survives into the double result — for the marks 78, 82 and 90 the program prints \"Average = 83.33333333333333\", and the decimal tail is the proof that true division ran."
+            },
+            {
+              "text": "int a = 3, b = 4; int t = a; a = b; b = t; System.out.println(\"a = \" + a + \", b = \" + b);",
+              "note": "The swap. The temporary variable holds a while b moves into a, then the saved value moves into b — with a at 3 and b at 4 the program prints \"a = 4, b = 3\". The pattern works for any type, objects included."
+            },
+            {
+              "text": "String w = in.next(); String rev = \"\"; for (int i = w.length() - 1; i >= 0; i--) rev = rev + w.charAt(i); System.out.println(rev);",
+              "note": "Reversing a word letter by letter. The loop walks the positions backwards and appends each character to an accumulator string."
+            },
+            {
+              "text": "if (in.hasNextInt()) { int n = in.nextInt(); System.out.println(\"You entered \" + n); } else { System.out.println(\"That was not a number.\"); }",
+              "note": "Peeking before reading. hasNextInt reports what is coming without consuming it, so the program answers politely instead of throwing an exception."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The order of the reads is part of the design. Read the free-text values first while the buffer holds a full line, then the numbers, and the buffer gap never appears — this is why names come before marks in every example above. When the question forces the other order, the drain line is the repair, and recognising which situation you are in saves the mark."
+        }
+      ]
+    },
+    {
+      "id": "input-processing",
+      "title": "Processing what was read — String methods on input",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The text a program reads is not yet an answer: it arrives with stray spaces, mixed capitalisation and letters that must be reached one by one before the value can be used. The String methods are what turn typed text into usable data — trim removes padding, the case methods normalise, charAt and substring reach individual letters, and equals performs the comparison that == cannot. A program that reads a name and greets it properly is doing this work on every line."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "String name = in.nextLine(); String clean = name.trim(); String shown = clean.substring(0, 1).toUpperCase() + clean.substring(1); System.out.println(\"Hello, \" + shown);",
+              "note": "Cleaning a read name: trim strips the padding spaces, the first letter is extracted and capitalised, and substring(1) supplies the rest — for the input \"  ananya  \" the program greets \"Hello, Ananya\"."
+            },
+            {
+              "text": "String word = in.next(); int vowels = 0; for (int i = 0; i < word.length(); i++) { char c = word.charAt(i); if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') vowels++; } System.out.println(word + \" has \" + vowels + \" vowels\");",
+              "note": "Counting vowels in a read word: length sets the loop bounds and charAt reaches each character in turn. For the input \"computer\" the program prints \"computer has 3 vowels\"."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two rules keep this work safe. Compare with equals and never with ==, because == asks whether two references share one object rather than whether the letters match. And guard any charAt behind a length test when the text might be empty, because position 0 of an empty string does not exist — the short-circuit in the second example is what makes that guard free."
+        }
+      ]
+    },
+    {
+      "id": "input-practice",
+      "title": "Exam drills — reading without surprises",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Drill one: for every reading sequence, list what remains in the buffer after each call and predict what the next call will return — this is how the buffer gap stops being a surprise. Drill two: write the buffer-drain line from memory whenever a numeric read precedes a line read. Drill three: wrap every read in a validation loop whose condition states the accepted range in words before you write it in code."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Reading order matters: text reads first, numbers after, and the buffer gap never appears.",
+            "The prompt must state the accepted range, so a rejecting loop is a correction rather than a mystery.",
+            "hasNextInt before nextInt turns a crash into a message.",
+            "The average of integers needs a 3.0-style divisor to avoid integer division."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The input buffer after a numeric read",
+      "description": "A box representing the input buffer holding typed text, with an arrow from nextInt consuming the digits and stopping before the newline character, which stays inside the box. A second arrow from nextLine meets the leftover newline immediately and returns an empty string. A third box shows the drain call consuming the newline so the following nextLine reaches the real text.",
+      "labels": [
+        "Typed line: 87 Enter",
+        "nextInt consumes digits",
+        "Enter remains in buffer",
+        "nextLine returns empty",
+        "Drain call consumes Enter",
+        "Next nextLine reads text"
+      ]
+    },
+    {
+      "caption": "Figure: A validation loop round trip",
+      "description": "A cycle: prompt box to read box to a diamond testing marks < 0 || marks > 100. The true branch loops back to the prompt with the label rejected, re-asking; the false branch exits to an accepted box. The diamond shows the two bounds as one joined condition with the || symbol.",
+      "labels": [
+        "Prompt the user",
+        "Read the value",
+        "Test both bounds",
+        "Out of range: re-prompt",
+        "In range: accept",
+        "do body runs first"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Import Scanner, construct it with System.in, then call the method matching the value's type.",
+    "next reads a word; nextLine reads the whole line — the distinction is examined directly.",
+    "After nextInt the Enter stays in the buffer, so the next nextLine returns an empty string.",
+    "The fix is one drain line: in.nextLine(); between the numeric read and the line read.",
+    "Validation loops re-prompt until the input satisfies the stated range.",
+    "A do-while suits validation because the prompt must run before its answer can be judged.",
+    "hasNextInt peeks without consuming, letting a program report bad input instead of crashing.",
+    "Dividing a marks total by 3.0 rather than 3 is what keeps the fractional part of an average."
+  ],
+  "examFocus": [
+    "Output question: follow the buffer after every read and name what each call actually returns.",
+    "Error question: explain why the first name line comes back empty and supply the corrected program.",
+    "Program question: read a name and marks together without the buffer gap appearing.",
+    "Validation question: write the do-while that refuses marks outside 0 to 100."
+  ],
+  "vocabulary": [
+    {
+      "word": "Buffer",
+      "meaning": "The holding area for typed input not yet consumed by a read.",
+      "context": "The Enter left after nextInt is read by the next nextLine."
+    },
+    {
+      "word": "Drain",
+      "meaning": "A throwaway read whose only purpose is to consume leftover input.",
+      "context": "The bare in.nextLine(); after nextInt."
+    },
+    {
+      "word": "Validation",
+      "meaning": "Checking input against the problem's rules before using it.",
+      "context": "Rejecting a mark of 150 in a 0-100 register."
+    },
+    {
+      "word": "Peek",
+      "meaning": "Reporting what input is next without consuming it.",
+      "context": "hasNextInt before nextInt."
+    },
+    {
+      "word": "Standard input",
+      "meaning": "The keyboard stream, referenced as System.in.",
+      "context": "The argument passed to the Scanner constructor."
+    },
+    {
+      "word": "InputMismatchException",
+      "meaning": "The error thrown when input does not match the reading method's type.",
+      "context": "next() called where digits were expected."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-input-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which Scanner method reads a whole line of text, spaces included?",
+      "options": [
+        "nextLine()",
+        "next()",
+        "nextInt()",
+        "readLine()"
+      ],
+      "correctIndex": 0,
+      "answer": "nextLine()",
+      "explanation": "nextLine consumes everything up to the Enter key, spaces included. next stops at the first space, and readLine belongs to a different class entirely.",
+      "commonMistake": "Choosing next() and losing everything after the first word of the input."
+    },
+    {
+      "id": "cisce-9-ca-q-input-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "After in.nextInt() has read a number, the next in.nextLine() usually returns:",
+      "options": [
+        "An empty string — the leftover Enter",
+        "The number just read",
+        "The following full line",
+        "A compile error"
+      ],
+      "correctIndex": 0,
+      "answer": "An empty string — the leftover Enter",
+      "explanation": "nextInt consumes the digits but not the Enter key pressed after them. The nextLine then meets that newline at once and reports an empty line — the buffer gap.",
+      "commonMistake": "Expecting nextLine to skip the newline as nextInt does — only the numeric readers skip leading whitespace."
+    },
+    {
+      "id": "cisce-9-ca-q-input-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The object that reads console input in Java is created with:",
+      "options": [
+        "Scanner in = new Scanner(System.in);",
+        "Scanner in = new Scanner(System.out);",
+        "Input in = new Input();",
+        "System.read();"
+      ],
+      "correctIndex": 0,
+      "answer": "Scanner in = new Scanner(System.in);",
+      "explanation": "Scanner is constructed with System.in, the standard input stream — the keyboard. Passing System.out would attempt to read from the output stream, which is not a readable source.",
+      "commonMistake": "Passing System.out because it \"is the console\" — input and output streams are separate objects."
+    },
+    {
+      "id": "cisce-9-ca-q-input-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The method that reports whether the next input is an integer — without consuming it — is:",
+      "options": [
+        "hasNextInt()",
+        "nextInt()",
+        "checkInt()",
+        "isNextInt()"
+      ],
+      "correctIndex": 0,
+      "answer": "hasNextInt()",
+      "explanation": "The hasNext family peeks at the upcoming input and returns a boolean. It never consumes anything, so the value it reports about can still be read afterwards.",
+      "commonMistake": "Calling nextInt to \"check\" the input — it consumes the value whether or not you keep it."
+    },
+    {
+      "id": "cisce-9-ca-q-input-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the statement that creates the console reader:\n______ in = new Scanner(System.in);",
+      "answer": "Scanner",
+      "explanation": "Scanner is the class from java.util that wraps a keyboard stream. The import java.util.Scanner; at the top of the file is required before this line will compile.",
+      "commonMistake": "Forgetting the import and receiving a \"cannot find symbol\" error on the very first reading line."
+    },
+    {
+      "id": "cisce-9-ca-q-input-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why the first nextLine after a nextInt returns an empty string.",
+      "answer": "nextInt reads only the digits of the number and stops at the first whitespace, leaving the Enter key in the input buffer. The nextLine then begins at that leftover newline, finds the end of a line immediately, and returns an empty string — so the input typed after the number is picked up by whichever read follows, shifting every later value by one.",
+      "explanation": "One mark is for the leftover Enter in the buffer and one for the consequence: the following reads each take the wrong piece of input.",
+      "commonMistake": "Blaming nextLine for \"skipping\" input — it reads faithfully; the problem is what the buffer still holds."
+    },
+    {
+      "id": "cisce-9-ca-q-input-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate between next() and nextLine() with an example input of your choice.",
+      "answer": "next() reads a single word — everything up to the next space. For the input \"Ananya Rao\" it returns \"Ananya\" and leaves \" Rao\" in the buffer. nextLine reads the whole remaining line, spaces included, so for the same input it returns \"Ananya Rao\". A sentence needs nextLine; a name part or a code needs next.",
+      "explanation": "One mark is for the word-versus-line distinction and one for a correct example of each showing what remains in the buffer.",
+      "commonMistake": "Saying nextLine \"reads everything including later lines\" — it reads exactly one line, up to the next Enter."
+    },
+    {
+      "id": "cisce-9-ca-q-input-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate between == and equals() when comparing two strings, with an example.",
+      "answer": "== compares whether two references point to the same object in memory. equals() compares the actual characters of the two strings, one by one, and is case-sensitive. For String a = \"Hi\"; String b = new String(\"Hi\");, a == b reports false even though the letters match, while a.equals(b) reports true. Strings read from input should therefore always be compared with equals.",
+      "explanation": "One mark is for reference versus character comparison and one for the example that shows identical letters still failing ==.",
+      "commonMistake": "Claiming == \"sometimes works\" for strings and leaving it there — the answer must state which operator is correct, not which one survived a test."
+    },
+    {
+      "id": "cisce-9-ca-q-input-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a Java program that reads a student's name and three subject marks, then prints the average to two decimal places.",
+      "answer": "import java.util.Scanner; public class Average { public static void main(String[] args) { Scanner in = new Scanner(System.in); System.out.print(\"Name: \"); String name = in.nextLine(); System.out.print(\"Three marks: \"); int a = in.nextInt(); int b = in.nextInt(); int c = in.nextInt(); double avg = (a + b + c) / 3.0; double shown = Math.round(avg * 100.0) / 100.0; System.out.println(name + \"'s average = \" + shown); } } For the name Ananya and the marks 78, 82 and 90 the program prints \"Ananya's average = 83.33\": the mean 83.333... is scaled by 100, rounded to the long 8333, and divided by the double 100.0 so exactly two decimal places remain.",
+      "explanation": "The reading order earns the first mark, the true-division mean the second, and the scale-round-divide pattern that delivers exactly two decimal places the third.",
+      "commonMistake": "Dividing the total by 3, which truncates to 83 before any rounding — and dividing the scaled value by 100 instead of 100.0, which integer-divides it back down to 83."
+    },
+    {
+      "id": "cisce-9-ca-q-input-09",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student reads a number and then a line, and reports that the line always comes back empty. Show the corrected program, and state the output for the input sequence 25 then Kolkata.",
+      "answer": "The correction is a drain read between the two: import java.util.Scanner; public class DrainDemo { public static void main(String[] args) { Scanner in = new Scanner(System.in); System.out.print(\"Number: \"); int n = in.nextInt(); in.nextLine(); System.out.print(\"City: \"); String city = in.nextLine(); System.out.println(n + \" \" + city); } } For the inputs 25 and Kolkata the output is \"25 Kolkata\". Without the drain line the city variable would be empty and the output would be \"25 \" followed by a blank.",
+      "explanation": "Two marks are for placing the drain call in the right place, one for the correct output, and one for explaining what the uncorrected program would print instead.",
+      "commonMistake": "Placing the drain after the second nextLine instead of before it — the gap is created by the numeric read, so the drain must follow that read."
+    },
+    {
+      "id": "cisce-9-ca-q-input-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Write a validation loop that keeps asking for a mark until it lies between 0 and 100, and explain why do-while is preferred here over while.",
+      "answer": "import java.util.Scanner; public class ValidMarks { public static void main(String[] args) { Scanner in = new Scanner(System.in); int marks; do { System.out.print(\"Enter marks (0-100): \"); marks = in.nextInt(); } while (marks < 0 || marks > 100); System.out.println(\"Accepted: \" + marks); } } For the inputs -5 and then 40, the program prompts twice and then prints \"Accepted: 40\". The do-while is preferred because the prompt must run before its answer can be judged: its test sits after the body, so exactly one read always happens. A while version would need the variable pre-seeded with an invalid value simply to force the first pass, which states the intent less clearly.",
+      "explanation": "Two marks are for the correct loop with the full two-sided condition, two for the do-while reasoning, and one for the demonstrated output.",
+      "commonMistake": "Using while (true) with a break inside — it works, but it abandons the test-in-header structure the question is asking you to demonstrate."
+    }
+  ]
+}

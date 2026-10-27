@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-vectors",
+  "title": "Motion in a Plane",
+  "kind": "physics",
+  "tagline": "Vectors, projectiles and circular motion — the two-dimensional toolkit every later topic reuses.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Two dimensions is where physics acquires its true geometry, and the chapter begins by building the tool that makes it tractable: vector algebra — addition by components, resolution onto unit vectors, and the scalar and vector products. That toolkit is then applied to the syllabus’s two canonical plane motions: projectile motion, resolved into independent perpendicular halves, and uniform circular motion, where the acceleration points inward and the speed never changes. The resolution method introduced here is not topic-specific: every force analysis in the course, and much of the electricity and magnetism work in Class XII, depends on it.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Kinematics (23 marks shared with Motion in a Straight Line and the Laws of Motion chapter)."
+      },
+      {
+        "label": "Resultant of two vectors",
+        "value": "R = √(A² + B² + 2AB cos θ) at angle tan⁻¹(B sin θ/(A + B cos θ))."
+      },
+      {
+        "label": "Projectile range",
+        "value": "Horizontal range R = u² sin 2θ/g, maximum at θ = 45°; time of flight 2u sin θ/g."
+      },
+      {
+        "label": "Circular motion",
+        "value": "a = v²/r directed radially inward; period T = 2πr/v; speed v = rω."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Add and subtract vectors by the component and parallelogram methods.",
+    "Resolve a vector into rectangular components using unit vectors.",
+    "Apply the scalar and vector products and state their physical uses.",
+    "Solve projectile problems for range, height and time of flight.",
+    "Compute the centripetal acceleration and period of uniform circular motion."
+  ],
+  "learn": [
+    {
+      "id": "vectors",
+      "title": "Vector algebra: addition, resolution, products",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A scalar carries magnitude alone; a vector carries magnitude and direction, and the distinction governs how the two combine. Vectors add by the parallelogram law — the diagonal through the common origin of two vectors drawn as adjacent sides — and analytically by components, which is the method examinations reward because it never fails where the cosine rule becomes awkward. Writing a vector as a sum of perpendicular components using the unit vectors î (along x) and ĵ (along y), A = Aₓî + Aᵧĵ, turns addition into ordinary arithmetic: add the components separately, then recombine for the magnitude R = √(Rₓ² + Rᵧ²) and direction tan θ = Rᵧ/Rₓ. Resolution is the same operation in reverse: a vector of magnitude A at angle θ to the axis decomposes as A cos θ along the axis and A sin θ perpendicular to it."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two products complete the algebra, and each has a distinct physical home. The scalar (dot) product A·B = AB cos θ returns a number and answers questions about alignment: work is force dot displacement, and the dot product is maximum when the vectors are parallel, zero when perpendicular. The vector (cross) product A × B has magnitude AB sin θ and direction by the right-hand rule, perpendicular to both factors: torque is r × F and angular momentum is r × mv, so the cross product is the algebraic engine of the rotation chapter that follows. Multiplying a vector by a real number simply rescales its magnitude and preserves its direction (or reverses it for a negative scalar), which is how unit vectors are used to isolate components. A vector equality, finally, requires both components to match — two equations for one statement."
+        },
+        {
+          "type": "table",
+          "caption": "The vector toolkit",
+          "columns": [
+            "Operation",
+            "Result",
+            "Physical use"
+          ],
+          "rows": [
+            [
+              "Addition (components)",
+              "A + B = (Aₓ+Bₓ)î + (Aᵧ+Bᵧ)ĵ",
+              "Net force, resultant velocity"
+            ],
+            [
+              "Scalar product",
+              "A·B = AB cos θ",
+              "Work, power, projection"
+            ],
+            [
+              "Vector product",
+              "|A × B| = AB sin θ, right-hand rule",
+              "Torque, angular momentum"
+            ],
+            [
+              "Scalar × vector",
+              "Magnitude scaled, direction kept",
+              "Unit-vector resolution"
+            ],
+            [
+              "Magnitude of a vector",
+              "√(Aₓ² + Aᵧ²)",
+              "Resultant size after resolution"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Add 3î + 4ĵ and −î + 2ĵ.",
+              "note": "Resultant 2î + 6ĵ; magnitude √40 ≈ 6.3 units."
+            },
+            {
+              "text": "Work done by F = (5î + 2ĵ) N over d = (4î − 3ĵ) m.",
+              "note": "F·d = 20 − 6 = 14 J."
+            },
+            {
+              "text": "Two unit vectors at 60°: magnitude of their sum.",
+              "note": "√(1 + 1 + 2cos 60°) = √3."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projectile",
+      "title": "Projectile motion: independence of perpendicular motions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The projectile problem is solved by a single idea: horizontal and vertical motions do not interact. With air resistance neglected, no force acts horizontally, so the horizontal velocity component remains constant, while the vertical component suffers the constant downward acceleration g. Every projectile question is therefore two one-dimensional kinematics problems sharing a clock. Projected with speed u at angle θ: the components are u cos θ and u sin θ; the time of flight follows from the vertical motion returning to its starting height, t = 2u sin θ/g; the maximum height from v² = u² + 2as with the vertical component vanishing at the top, H = u² sin²θ/(2g); and the range by multiplying the constant horizontal speed by the time of flight, R = u² sin 2θ/g."
+        },
+        {
+          "type": "paragraph",
+          "text": "The range formula repays attention: since sin 2θ is largest when 2θ = 90°, the maximum range occurs at θ = 45°, and complementary angles (30° and 60°, say) give the same range because sin 60° = sin 120° — a fact with a concrete counterpart in the artillery insight that a gun and its mirror elevation strike the same point, though the 45° flight is flatter and faster in arriving. The trajectory itself is a parabola: eliminating t between x = (u cos θ)t and y = (u sin θ)t − ½gt² gives y = x tan θ − gx²/(2u²cos²θ), quadratic in x. Two habits prevent errors: resolve at the moment of projection and keep the components labelled throughout, and remember that at the highest point only the vertical velocity vanishes — the projectile is still moving horizontally at u cos θ, a point examiners love to test."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Perpendicular components of motion are independent of each other.",
+            "Horizontal: constant velocity u cos θ. Vertical: uniform deceleration g.",
+            "Time of flight 2u sin θ/g; height u² sin²θ/(2g); range u² sin 2θ/g.",
+            "Maximum range at 45°; complementary angles share the same range.",
+            "The trajectory is a parabola; the horizontal velocity never vanishes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "circular",
+      "title": "Uniform circular motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Uniform circular motion holds the speed constant while the direction of motion changes continuously, and because velocity is magnitude plus direction, that makes it accelerated motion even on a perfectly steady merry-go-round. The acceleration is centripetal — directed radially inward toward the centre — with magnitude a = v²/r, derivable from the geometry of a small velocity change perpendicular to v: over a short interval the velocity vector rotates through angle Δθ = Δs/r without changing size, so Δv = vΔθ = vΔs/r, and dividing by Δt = Δs/v returns a = v²/r. The angular description pairs with it: ω = 2π/T is the angular speed, v = rω links the two, and the period T = 2πr/v = 2π/ω depends only on the radius and speed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Since centripetal acceleration is produced by a net force, every circular motion has a real agent of that force, and identifying it is the physics of the topic. For a car on a level circular road the agent is friction between tyres and road, limiting the safe speed because friction cannot exceed μmg — beyond it the car skids outward. Bank the road, and the normal reaction acquires a horizontal component that supplies part or all of the needed centripetal force, which is why banked bends permit higher speeds and why racing circuits are steeply banked. The syllabus asks for both cases explicitly, and the method for each is identical: draw the forces, resolve them, set the horizontal resultant equal to mv²/r and the vertical resultant equal to zero when there is no vertical acceleration. That resolution-and-equate pattern is the same one used for banking in aerodynamics and for charged particles in Class XII magnetic fields."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Centripetal acceleration of a point on the equator.",
+              "note": "v ≈ 460 m/s, R ≈ 6.4 × 10⁶ m → a ≈ 0.03 m/s²."
+            },
+            {
+              "text": "A car takes a 50 m bend at 10 m/s: required friction.",
+              "note": "a = v²/r = 2 m/s², so friction must supply 2 N per kilogram."
+            },
+            {
+              "text": "Period of the second’s hand of length 5 cm.",
+              "note": "T = 2πr/v with v = 2πr/60 → T = 60 s."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "title": "Exam method for plane motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every two-dimensional problem yields to the same choreography, and following it in order is worth more than any individual formula. Draw the situation with axes chosen to simplify the components — along and perpendicular to the initial velocity for projectiles, radial and tangential for circular motion. Resolve every vector into those components and label them, carrying the component labels through the whole solution rather than collapsing back to magnitudes. Write the kinematic or dynamic equation for each direction separately, since the directions never mix, and solve the pair as simultaneous pieces of information rather than a single equation. Finally, read the answer back against the picture: does the range come out positive, is the height smaller than the range for a low angle, does the banked speed feel plausible?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Marks in this topic are concentrated in the setup. Examiners award credit for the resolved components, the free-body diagram and the equation per direction, even where arithmetic slips later — so showing the resolution explicitly is worth real marks and is also the discipline that prevents slips. Common pitfalls to hold in mind: the horizontal velocity in a projectile never changes, so any answer implying it stops at the apex is wrong; centripetal acceleration points at the centre, not outward (the outward sensation in a turning car is inertia, not a force); and a vector’s components change with your axis choice while its magnitude does not, so recomputing the magnitude from any axis pair must give the same value — a free check on every resolution you perform."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Choose axes that simplify components; resolve and label everything.",
+            "One equation per direction; the two directions never mix.",
+            "Projectile apex: vertical velocity zero, horizontal velocity unchanged.",
+            "Centripetal acceleration points inward; identify the force producing it.",
+            "Recompute the magnitude from any axis pair — it must never change."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A projectile resolved into independent motions",
+      "description": "A parabolic trajectory launched from the origin at angle θ with initial speed u; the launch velocity drawn as a vector split into horizontal u cos θ and vertical u sin θ components, three intermediate positions each showing the unchanged horizontal component and the shrinking vertical component, and the apex marked with height H and only a horizontal velocity arrow.",
+      "labels": [
+        "Launch angle θ, speed u",
+        "Horizontal component u cos θ stays constant",
+        "Vertical component shrinks under g",
+        "Apex: vertical component zero",
+        "Range R at the returning level"
+      ]
+    },
+    {
+      "caption": "Figure: A car on a banked circular road",
+      "description": "A cross-section of a car on a banked road of angle φ negotiating a horizontal circle of radius r; the weight mg drawn downward, the normal reaction N drawn perpendicular to the road surface, N resolved into vertical N cos φ and horizontal N sin φ components, the horizontal component annotated as the centripetal force mv²/r.",
+      "labels": [
+        "Weight mg acts downward",
+        "Normal reaction N ⊥ to surface",
+        "Vertical component N cos φ balances mg",
+        "Horizontal component N sin φ = mv²/r",
+        "Banking reduces reliance on friction"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Vectors combine by components; the parallelogram law is the geometric picture.",
+    "A = Aₓî + Aᵧĵ with magnitude √(Aₓ² + Aᵧ²) and direction tan⁻¹(Aᵧ/Aₓ).",
+    "Scalar product: AB cos θ — used for work; vector product: AB sin θ with right-hand rule — used for torque.",
+    "Projectile motion: perpendicular components are independent.",
+    "Range R = u² sin 2θ/g is maximum at 45°; complements share a range.",
+    "At the projectile’s apex only the vertical velocity vanishes.",
+    "Centripetal acceleration a = v²/r points radially inward.",
+    "v = rω and T = 2πr/v link linear and angular descriptions.",
+    "A level road relies on friction; banking supplies centripetal force from the normal reaction.",
+    "Resolve, label, and solve one equation per direction — every time."
+  ],
+  "examFocus": [
+    "Draw the resolution explicitly; method marks attach to the components.",
+    "Quote both magnitude and direction of any resultant.",
+    "Projectile answers must state which component each formula uses.",
+    "Banking problems: resolve N, then set horizontal = mv²/r and vertical = mg."
+  ],
+  "vocabulary": [
+    {
+      "word": "Scalar",
+      "meaning": "A quantity with magnitude only, like mass or speed."
+    },
+    {
+      "word": "Vector",
+      "meaning": "A quantity with magnitude and direction, like force or velocity."
+    },
+    {
+      "word": "Unit vector",
+      "meaning": "A vector of magnitude one marking a direction, such as î or ĵ."
+    },
+    {
+      "word": "Resolution",
+      "meaning": "Splitting a vector into perpendicular components."
+    },
+    {
+      "word": "Scalar product",
+      "meaning": "AB cos θ — a number measuring alignment."
+    },
+    {
+      "word": "Centripetal acceleration",
+      "meaning": "v²/r directed toward the centre of the circle."
+    },
+    {
+      "word": "Banking",
+      "meaning": "Sloping a road so the normal reaction supplies centripetal force."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-vectors-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The resultant of two vectors of equal magnitude A at 60° to each other has magnitude:",
+      "options": [
+        "A",
+        "√3 A",
+        "2A",
+        "A/2"
+      ],
+      "correctIndex": 1,
+      "answer": "√3 A",
+      "explanation": "R = √(A² + A² + 2A² cos 60°) = √(3A²) = √3 A — the equilateral-triangle configuration."
+    },
+    {
+      "id": "cbse11-phy-vectors-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a projectile the horizontal range is maximum when the angle of projection is:",
+      "options": [
+        "30°",
+        "45°",
+        "60°",
+        "90°"
+      ],
+      "correctIndex": 1,
+      "answer": "45°",
+      "explanation": "R = u² sin 2θ/g is largest when sin 2θ = 1, that is 2θ = 90° and θ = 45°."
+    },
+    {
+      "id": "cbse11-phy-vectors-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The centripetal acceleration of a particle moving in a circle of radius 2 m at 4 m/s is:",
+      "options": [
+        "8 m/s²",
+        "2 m/s²",
+        "16 m/s²",
+        "4 m/s²"
+      ],
+      "correctIndex": 0,
+      "answer": "8 m/s²",
+      "explanation": "a = v²/r = 16/2 = 8 m/s², directed toward the centre."
+    },
+    {
+      "id": "cbse11-phy-vectors-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car negotiates a level circular bend. If its speed doubles, the required centripetal force becomes:",
+      "options": [
+        "Double",
+        "Half",
+        "Four times",
+        "Unchanged"
+      ],
+      "correctIndex": 2,
+      "answer": "Four times",
+      "explanation": "F = mv²/r, so doubling v multiplies the required force by four — which is why fast bends must be banked or radiused generously."
+    },
+    {
+      "id": "cbse11-phy-vectors-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The vector product of two vectors is ________ by the right-hand rule.",
+      "answer": "directed",
+      "explanation": "A × B points perpendicular to both A and B, with the fingers curling from A to B and the thumb giving the direction."
+    },
+    {
+      "id": "cbse11-phy-vectors-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The trajectory of an ideal projectile is a ________ curve.",
+      "answer": "parabolic",
+      "explanation": "Eliminating time between x = (u cos θ)t and y = (u sin θ)t − ½gt² gives a quadratic in x."
+    },
+    {
+      "id": "cbse11-phy-vectors-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A ball is projected at 20 m/s at 30° to the horizontal. Find its horizontal and vertical components of initial velocity.",
+      "answer": "Resolve the initial velocity along and perpendicular to the horizontal. Horizontal component: uₓ = u cos θ = 20 cos 30° = 20 × (√3/2) = 17.3 m/s. Vertical component: uᵧ = u sin θ = 20 sin 30° = 20 × ½ = 10 m/s. Verification: the magnitude of the original velocity must be recovered — √(17.3² + 10²) = √(300 + 100) = √400 = 20 m/s ✓. And the angle: tan⁻¹(10/17.3) = tan⁻¹(0.577) = 30° ✓. Throughout the flight the horizontal component stays at 17.3 m/s (no horizontal force) while the vertical component decreases by 9.8 m/s every second, vanishing after about 1.02 s at the apex.",
+      "explanation": "Both components computed, the magnitude and angle recovered as checks, and the note about the components’ subsequent behaviour."
+    },
+    {
+      "id": "cbse11-phy-vectors-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the expression for the centripetal acceleration of a particle in uniform circular motion.",
+      "answer": "Consider a particle moving at constant speed v around a circle of radius r. Over a short interval Δt the particle moves along the arc Δs = vΔt, and its velocity vector rotates through the same angle Δθ = Δs/r that the radius turns through, without changing magnitude. The change in velocity Δv is directed perpendicular to v (a pure rotation of the vector) with magnitude vΔθ — the chord of a rotation of a vector of length v through angle Δθ. Substituting Δθ = Δs/r = vΔt/r gives Δv = v²Δt/r. Dividing by Δt: |a| = Δv/Δt = v²/r. The direction in the limit is radially inward, since Δv points toward the centre of the circle as the interval shrinks. Checks: the dimensions are [LT⁻²] as acceleration must be ✓; doubling the speed at fixed radius quadruples the acceleration ✓; and shrinking the radius at fixed speed increases it, as a tighter bend demands more ✓.",
+      "explanation": "The vector-rotation argument, the substitution linking Δθ to Δs, the limit giving v²/r, and the direction justified."
+    },
+    {
+      "id": "cbse11-phy-vectors-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A projectile is launched at 40 m/s at 30° to the horizontal. Find the time of flight, maximum height and horizontal range, taking g = 10 m/s².",
+      "answer": "Components: uₓ = 40 cos 30° = 34.6 m/s, uᵧ = 40 sin 30° = 20 m/s. Time of flight: the vertical displacement returns to zero, so 0 = uᵧt − ½gt² gives t = 2uᵧ/g = 40/10 = 4 s (the non-zero root). Maximum height: at the apex the vertical velocity vanishes, so 0 = uᵧ² − 2gH gives H = uᵧ²/(2g) = 400/20 = 20 m. Range: the horizontal velocity is constant, so R = uₓt = 34.6 × 4 = 138.6 m; equivalently R = u² sin 2θ/g = 1600 sin 60°/10 = 1600 × 0.866/10 = 138.6 m ✓ — the two routes agree. Sanity checks: the time to the apex is 2 s, half the flight, as symmetry demands ✓; H = 20 m is well below the range, consistent with a shallow 30° launch ✓; and the range formula with sin 60° confirms the angle doubling was handled correctly.",
+      "explanation": "All three quantities computed with both routes for the range, the symmetry check on the time of flight, and the consistency remarks."
+    },
+    {
+      "id": "cbse11-phy-vectors-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A car takes a bend of radius 30 m on a level road. With g = 10 m/s² and coefficient of friction 0.4, find the maximum safe speed. Then find the banking angle at which the same speed needs no friction at all, and explain physically why banking permits the higher speed.",
+      "answer": "Level road: the centripetal force is friction alone, f = μmg at the limit, so mv²/r = μmg gives v = √(μgr) = √(0.4 × 10 × 30) = √120 ≈ 10.95 m/s. Above this the tyres cannot supply the required inward force and the car skids outward — not because it is flung out, but because it continues straight while the road curves away beneath it. Banked road with no friction: resolve the normal reaction N, which is tilted inward by the banking angle φ. Vertically, N cos φ = mg (no vertical acceleration); horizontally, N sin φ = mv²/r. Dividing the second by the first: tan φ = v²/(rg) = 120/300 = 0.4, so φ = tan⁻¹(0.4) ≈ 21.8°. Physical reason: on the level road only friction — a limited, speed-dependent contact force — supplies the centripetal component, whereas banking tilts the normal reaction, a force that grows automatically with the load, so a horizontal component of it is always available toward the centre; the steeper the bank, the larger that component and the higher the safe speed. That is why racetracks and fast motorway bends are banked: the road itself, not the grip of rubber, does the turning. Check: at φ ≈ 21.8°, tan φ = 0.4 = v²/(rg) reproduces the earlier speed ✓, and at φ = 45° the same relation would permit v = √(rg) ≈ 17.3 m/s — higher, as the banking argument predicts.",
+      "explanation": "Both speeds computed with their derivations, the force-resolution argument for banking, the physical explanation, and the cross-check linking the two results."
+    }
+  ]
+}

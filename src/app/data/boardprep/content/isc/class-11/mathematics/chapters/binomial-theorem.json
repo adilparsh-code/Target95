@@ -1,0 +1,495 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-binomial",
+  "title": "Binomial Theorem",
+  "kind": "mathematics",
+  "tagline": "Expanding powers of a sum, the general term, middle terms and the identities satisfied by the binomial coefficients.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "Multiplying (x + y) by itself seven times is possible and pointless; the binomial theorem writes the answer in one line. This chapter develops the expansion for positive integral indices, extracts any single term without performing the whole expansion, and then turns to the coefficients themselves, which obey striking identities — they sum to 2ⁿ, they alternate to zero, and the largest of them sits exactly in the middle. Extracting a particular term, especially the middle term or a term independent of x, is the examination’s favourite way of testing the chapter.",
+    "facts": [
+      {
+        "label": "Expansion",
+        "value": "(x + y)ⁿ = ⁿC₀xⁿ + ⁿC₁xⁿ⁻¹y + … + ⁿCₙyⁿ for a positive integer n."
+      },
+      {
+        "label": "General term",
+        "value": "T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ — the term number is always one more than r."
+      },
+      {
+        "label": "Middle term",
+        "value": "n even: the (n/2 + 1)th term alone; n odd: the (n+1)/2 th and the next."
+      },
+      {
+        "label": "Coefficient sums",
+        "value": "Sum of all ⁿCᵣ = 2ⁿ; even-index sum = odd-index sum = 2ⁿ⁻¹; alternating sum = 0."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Expand a binomial power for a positive integral index using the binomial theorem.",
+    "Write down the general term and use it to extract any specified term without full expansion.",
+    "Identify the middle term or terms according to whether the index is even or odd.",
+    "Apply the identities of binomial coefficients, including the sums of even and odd indexed coefficients.",
+    "Find particular coefficients and terms independent of x in a given expansion."
+  ],
+  "learn": [
+    {
+      "id": "the-expansion",
+      "title": "The binomial expansion for a positive integral index",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The binomial theorem states that (x + y)ⁿ, for a positive integer n, expands into n + 1 terms whose coefficients are the binomial coefficients ⁿC₀ through ⁿCₙ and whose powers of x fall from n to zero while the powers of y rise from zero to n, always adding to n in each term. The coefficients read across Pascal’s triangle — each the sum of the two above — because splitting the sum of the powers produces exactly that recurrence. The last term of the expansion carries no y at all, and the first carries no power of x below n, which is why the expansion of (1 + x)ⁿ begins with 1 and continues nx, n(n − 1)/2 · x² and so on. Checking any expansion at x = 1 or y = 1 immediately produces the coefficient identities of the last lesson, so the two halves of the chapter are one idea seen twice."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(x + y)ⁿ = Σ from r = 0 to n of ⁿCᵣ xⁿ⁻ʳ yʳ, giving n + 1 terms.",
+            "Coefficients read from Pascal’s triangle: 1; 1 1; 1 2 1; 1 3 3 1; 1 4 6 4 1.",
+            "The powers of x and y in each term always sum to n.",
+            "Setting x = y = 1 gives Σ ⁿCᵣ = 2ⁿ.",
+            "Setting x = 1 and y = −1 gives the alternating sum ⁿC₀ − ⁿC₁ + … = 0."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "(x + y)³ = x³ + 3x²y + 3xy² + y³, with coefficients 1, 3, 3, 1",
+              "note": "Row three of Pascal’s triangle supplies the four coefficients directly."
+            },
+            {
+              "text": "(1 + x)⁴ = 1 + 4x + 6x² + 4x³ + x⁴",
+              "note": "With x = 1 the powers of x alone carry the expansion, exposing the coefficients."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The first rows of Pascal’s triangle and their uses",
+          "columns": [
+            "n",
+            "Coefficients ⁿCᵣ",
+            "Instant result"
+          ],
+          "rows": [
+            [
+              "2",
+              "1 2 1",
+              "(x + y)² = x² + 2xy + y²"
+            ],
+            [
+              "3",
+              "1 3 3 1",
+              "sum of coefficients = 8 = 2³"
+            ],
+            [
+              "4",
+              "1 4 6 4 1",
+              "greatest coefficient = 6"
+            ],
+            [
+              "5",
+              "1 5 10 10 5 1",
+              "two middle coefficients equal"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general-and-middle-terms",
+      "title": "The general term and the middle terms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The general term T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ is the working tool of the chapter, and its offset — the term indexed r + 1 rather than r — is the source of most avoidable slips. Once the formula is written, any single term can be pulled out of an expansion without multiplying anything: to find the coefficient of x⁵, arrange the powers so that only x survives, solve for r, and read off the coefficient. The middle terms follow from the same formula. An expansion of n + 1 terms has a single middle term when n is even, sitting at position n/2 + 1, and two middle terms when n is odd, at positions (n + 1)/2 and (n + 3)/2 — or, more safely, found by solving n − 2r = 0 or n − 2r = ±1 for the power you need. Terms independent of x are the special case where the equation on the exponent has an integer solution for r."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ: term number = r + 1, never r.",
+            "To find the coefficient of a target power, equate the exponent of x to that power and solve for r.",
+            "n even → one middle term at n/2 + 1; n odd → two middle terms at (n ± 1)/2 + 1.",
+            "A term independent of x has exponent zero on x — solve that equation for r first.",
+            "If the solved r is not a whole number, the requested term simply does not exist."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The 5th term of (2x − y)⁸: T₅ = 8C4 (2x)⁴ (−y)⁴ = 70 × 16x⁴y⁴ = 1120 x⁴y⁴",
+              "note": "r = 4 since the term number is r + 1; (−y)⁴ is positive because the power is even."
+            },
+            {
+              "text": "Middle term of (1 + x)⁶: n = 6, so the 4th term = 6C3 x³ = 20x³",
+              "note": "n/2 + 1 = 4 picks the single middle term of an even-index expansion."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "General term",
+              "meaning": "T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ, giving any term of the expansion."
+            },
+            {
+              "term": "Middle term",
+              "meaning": "Central term of the expansion — one if n is even, two if n is odd."
+            },
+            {
+              "term": "Independent term",
+              "meaning": "Term in which the variable cancels completely, its exponent being zero."
+            },
+            {
+              "term": "Binomial coefficient",
+              "meaning": "ⁿCᵣ, the number of ways of choosing r items from n, used as a coefficient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coefficient-identities",
+      "title": "Properties of the binomial coefficients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The binomial coefficients carry arithmetic of their own, and every identity in this lesson is a substitution into the expansion of the previous one. Putting x = y = 1 shows that all coefficients together sum to 2ⁿ; putting y = −1 shows that the alternating sum vanishes, so the even-indexed coefficients equal the odd-indexed ones, each carrying half the total 2ⁿ⁻¹. The symmetry ⁿCᵣ = ⁿC(n − r) explains why the triangle is left-right symmetric and why choosing r objects is the same as choosing which n − r to leave behind. The largest coefficient sits in the middle for even n, and the two equal middle coefficients are the largest for odd n. Together with Pascal’s rule ⁿCᵣ + ⁿC(r+1) = ⁿ⁺¹C(r+1), these identities answer most questions that ask about coefficients without naming an expansion at all."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "ⁿC₀ + ⁿC₁ + … + ⁿCₙ = 2ⁿ.",
+            "ⁿC₀ + ⁿC₂ + … = ⁿC₁ + ⁿC₃ + … = 2ⁿ⁻¹.",
+            "ⁿCᵣ = ⁿC(n − r): the triangle is symmetric.",
+            "ⁿCᵣ + ⁿC(r+1) = ⁿ⁺¹C(r+1): Pascal’s addition rule.",
+            "For even n the greatest coefficient is ⁿC(n/2); for odd n the two middle coefficients tie as greatest."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "For n = 6: 1 + 6 + 15 + 20 + 15 + 6 + 1 = 64 = 2⁶, and the even and odd halves each total 32",
+              "note": "Add the row directly to verify both the total and its halving."
+            },
+            {
+              "text": "⁶C₂ = 15 = ⁶C₄, since choosing 2 to keep is choosing 4 to leave",
+              "note": "The symmetry identity turns a hard coefficient into an easy one."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Substitutions that produce the coefficient identities",
+          "columns": [
+            "Substitution in (x + y)ⁿ",
+            "Result",
+            "Identity"
+          ],
+          "rows": [
+            [
+              "x = y = 1",
+              "sum of all coefficients",
+              "Σ ⁿCᵣ = 2ⁿ"
+            ],
+            [
+              "x = 1, y = −1",
+              "alternating sum cancels",
+              "even-index sum = odd-index sum = 2ⁿ⁻¹"
+            ],
+            [
+              "x = 1, y = 0",
+              "first coefficient alone",
+              "ⁿC₀ = 1"
+            ],
+            [
+              "compare ⁿCᵣ with ⁿC(n − r)",
+              "mirror symmetry",
+              "ⁿCᵣ = ⁿC(n − r)"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Applications: particular terms and coefficients",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Applied binomial questions all reduce to the general term, and the skill is setting it up once in the general form rather than hunting for the term by trial. Write T(r+1) with the exact powers, gather everything that depends on r into a single exponent or coefficient, and then read the question as an equation on r. For a coefficient question, solve for r and demand that r be a whole number in range — a fractional r means the requested power does not appear at all, and saying so is a complete answer. For a term independent of x, set the exponent to zero. When two different powers are requested, two equations in r follow and each is solved separately. Negative signs must be kept inside the base until the exponent is fixed, since (−y) raised to an odd power flips the term’s sign while an even power erases it."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write T(r+1) in full before simplifying; the examiner sees the general term being used.",
+            "Equate the required exponent to get an equation in r; solve and check that r is an integer within 0 ≤ r ≤ n.",
+            "A negative base keeps its sign through the exponent: (−y)^r is negative for odd r.",
+            "Coefficient of a power and coefficient of a term are different questions — the former ignores other terms.",
+            "If no integer r satisfies the equation, state that the term does not exist rather than forcing a value."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Constant term of (x² − 1/x)⁹: T(r+1) = 9Cᵣ (−1)^r x^(18 − 3r); zero exponent needs r = 6",
+              "note": "Then 9C₆ (−1)⁶ = 84, so the term independent of x is 84."
+            },
+            {
+              "text": "Coefficient of x³ in (1 + 2x)⁶: 6C₃ (2x)³ = 20 × 8 x³ = 160x³",
+              "note": "Isolate the single term whose exponent matches, then multiply the numeric factors together."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The 8th term of (x + 2/x²)¹¹ needs r = 7: 11C₇ x⁴ × 2⁷ / x¹⁴",
+              "note": "Substitute r = 7 into the general term and combine the powers of x to reach the final expression."
+            },
+            {
+              "text": "Finding the greatest coefficient of (1 + x)^8: n even, so 8C4 = 70 sits in the middle",
+              "note": "The middle position always carries the largest coefficient of the row."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Pascal’s triangle and the expansion it generates",
+      "description": "Six rows of Pascal’s triangle stacked as a triangle with each number the sum of the pair above it, and the row for n = 4 connected by arrows to the coefficients of (x + y)⁴.",
+      "labels": [
+        "apex row: n = 0, coefficient ⁿC₀ = 1",
+        "each entry is the sum of the two above",
+        "row n holds n + 1 coefficients",
+        "row n = 4 gives 1 4 6 4 1",
+        "symmetry: ⁿCᵣ = ⁿC(n − r)"
+      ]
+    },
+    {
+      "caption": "Figure: The exponent pattern of the general term",
+      "description": "A table-like diagram of the expansion of (x + y)ⁿ with powers of x falling from n to 0 across the top and powers of y rising from 0 to n beneath, each column showing exponents summing to n.",
+      "labels": [
+        "first term: x raised to n, y absent",
+        "last term: y raised to n, x absent",
+        "exponents always total n",
+        "term number equals r + 1",
+        "coefficients ⁿCᵣ across the columns"
+      ]
+    },
+    {
+      "caption": "Figure: Middle terms for even and odd indices",
+      "description": "Two rows of boxes: for n = 6 a single highlighted central box marked as the 4th term, and for n = 5 two highlighted central boxes marked as the 3rd and 4th terms.",
+      "labels": [
+        "n = 6 has 7 terms, one middle term",
+        "middle term position n/2 + 1",
+        "n = 5 has 6 terms, two middle terms",
+        "middle positions (n + 1)/2 and the next",
+        "odd rows mirror around two equal centres"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "(x + y)ⁿ expands into n + 1 terms with coefficients ⁿC₀ … ⁿCₙ.",
+    "The general term T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ — term number is r + 1, not r.",
+    "In every term the powers of x and y sum to n.",
+    "n even gives one middle term at position n/2 + 1; n odd gives two.",
+    "Σ ⁿCᵣ = 2ⁿ, and the even-indexed and odd-indexed coefficients each total 2ⁿ⁻¹.",
+    "The alternating sum of the coefficients is zero, which is the even-odd halving in disguise.",
+    "ⁿCᵣ = ⁿC(n − r), so the triangle is symmetric and hard coefficients become easy ones.",
+    "The greatest coefficient is the middle one: ⁿC(n/2) for even n.",
+    "A term independent of x is found by setting the exponent of x to zero and solving for r.",
+    "If the equation for r has no integer solution, the requested term does not exist."
+  ],
+  "examFocus": [
+    "Write the general term with r left as a symbol before targeting any particular term; the setup carries method marks.",
+    "State the term number explicitly — the off-by-one between r and term number is the most common single lost mark.",
+    "When a question asks for the greatest coefficient, quote the rule about the middle position before giving the value.",
+    "Keep negative bases intact until the exponent is fixed, and note whether the power is odd before simplifying the sign."
+  ],
+  "vocabulary": [
+    {
+      "word": "Binomial",
+      "meaning": "Algebraic expression with exactly two terms, as x + y."
+    },
+    {
+      "word": "Binomial theorem",
+      "meaning": "Rule expanding (x + y)ⁿ for a positive integral exponent n."
+    },
+    {
+      "word": "Binomial coefficient",
+      "meaning": "ⁿCᵣ, the coefficient of the term indexed by r in the expansion."
+    },
+    {
+      "word": "General term",
+      "meaning": "T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ, the r-th symbolic term of the expansion."
+    },
+    {
+      "word": "Middle term",
+      "meaning": "Central term of the expansion; unique when n is even, paired when n is odd."
+    },
+    {
+      "word": "Independent term",
+      "meaning": "Term free of the variable, found by zeroing its exponent."
+    },
+    {
+      "word": "Pascal’s triangle",
+      "meaning": "Triangular array whose rows are the binomial coefficients."
+    },
+    {
+      "word": "Pascal’s rule",
+      "meaning": "ⁿCᵣ + ⁿC(r+1) = ⁿ⁺¹C(r+1), the addition rule generating the triangle."
+    },
+    {
+      "word": "Coefficient",
+      "meaning": "Numeric factor multiplying a power of a variable in a term."
+    },
+    {
+      "word": "Alternating sum",
+      "meaning": "Sum taken with signs alternating +, −, +, − … which equals zero here."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-binomial-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The middle term of the expansion of (1 + x)⁶ is:",
+      "options": [
+        "15x²",
+        "20x³",
+        "15x³",
+        "20x²"
+      ],
+      "correctIndex": 1,
+      "answer": "20x³",
+      "explanation": "n = 6 is even, so the single middle term is the 4th term: 6C3 x³ = 20x³."
+    },
+    {
+      "id": "isc11-math-binomial-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of 7C3 is:",
+      "options": [
+        "35",
+        "21",
+        "42",
+        "105"
+      ],
+      "correctIndex": 0,
+      "answer": "35",
+      "explanation": "7C3 = (7 × 6 × 5)/(3 × 2 × 1) = 210/6 = 35."
+    },
+    {
+      "id": "isc11-math-binomial-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The greatest coefficient in the expansion of (1 + x)⁸ is:",
+      "options": [
+        "56",
+        "70",
+        "28",
+        "256"
+      ],
+      "correctIndex": 1,
+      "answer": "70",
+      "explanation": "For even n the middle coefficient is the largest: 8C4 = 70."
+    },
+    {
+      "id": "isc11-math-binomial-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The general term T(r+1) of (x + y)ⁿ is:",
+      "options": [
+        "ⁿCᵣ xʳ yⁿ⁻ʳ",
+        "ⁿCᵣ xⁿ⁻ʳ yʳ",
+        "ⁿPᵣ xⁿ⁻ʳ yʳ",
+        "ⁿCᵣ xⁿ yⁿ"
+      ],
+      "correctIndex": 1,
+      "answer": "ⁿCᵣ xⁿ⁻ʳ yʳ",
+      "explanation": "The exponent of x falls from n as r grows while the exponent of y rises, and the two always sum to n."
+    },
+    {
+      "id": "isc11-math-binomial-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sum ⁿC₀ + ⁿC₁ + … + ⁿCₙ equals ______ for every positive integer n.",
+      "answer": "2^n",
+      "explanation": "Setting x = y = 1 in the expansion makes every term 1, so the sum of the coefficients is 2ⁿ."
+    },
+    {
+      "id": "isc11-math-binomial-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The binomial coefficient ⁿCᵣ is always equal to the coefficient ______ .",
+      "answer": "nC(n − r)",
+      "explanation": "Choosing r objects to keep is the same decision as choosing the n − r objects to leave, so the triangle reads the same forwards and backwards."
+    },
+    {
+      "id": "isc11-math-binomial-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the binomial theorem for a positive integral index and write down the general term.",
+      "answer": "For a positive integer n, (x + y)ⁿ = ⁿC₀xⁿ + ⁿC₁xⁿ⁻¹y + ⁿC₂xⁿ⁻²y² + … + ⁿCₙyⁿ, an expansion with n + 1 terms. The general term is T(r+1) = ⁿCᵣ xⁿ⁻ʳ yʳ for r = 0, 1, …, n.",
+      "explanation": "The theorem names the coefficients and the exponent pattern; the general term is the formula that extracts any single term, remembering that its number is r + 1."
+    },
+    {
+      "id": "isc11-math-binomial-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the 5th term of (2x − y)⁸ without expanding the whole binomial.",
+      "answer": "With r = 4 (the 5th term corresponds to r + 1 = 5), T₅ = 8C4 (2x)⁸⁻⁴ (−y)⁴ = 70 × 16x⁴ × y⁴ = 1120 x⁴y⁴.",
+      "explanation": "Substitute r = 4 into the general term; the power (−y)⁴ is positive because the exponent is even, and 8C4 = 70 multiplies 2⁴ = 16."
+    },
+    {
+      "id": "isc11-math-binomial-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the middle term or terms of the expansion (x² + 1/x)⁹ and simplify each fully.",
+      "answer": "Here n = 9 is odd, so there are two middle terms: the 5th and the 6th. For the 5th term r = 4: T₅ = 9C4 (x²)⁴ (1/x)⁵ = 126 · x⁸ · x⁻⁵ = 126 x³. For the 6th term r = 5: T₆ = 9C5 (x²)⁵ (1/x)⁴ = 126 · x¹⁰ · x⁻⁴ = 126 x⁶. The two middle terms are therefore 126x³ and 126x⁶.",
+      "explanation": "An odd index produces two central positions at r = 4 and r = 5; substitute each into the general term and combine the powers of x by adding their exponents."
+    },
+    {
+      "id": "isc11-math-binomial-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the term independent of x in the expansion of (x² − 1/x)⁹.",
+      "answer": "The general term is T(r+1) = 9Cᵣ (x²)⁹⁻ʳ (−1/x)^r = 9Cᵣ (−1)^r x^(18 − 2r) x^(−r) = 9Cᵣ (−1)^r x^(18 − 3r). The term is independent of x when the exponent vanishes: 18 − 3r = 0, so r = 6, which is a whole number within range. Substituting gives 9C₆ (−1)⁶ = 84 × 1 = 84, so the constant term is 84.",
+      "explanation": "Collect every power of x into one exponent before solving; the integer requirement on r confirms the term exists, and the sign of the constant follows from the parity of r."
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-thermal",
+  "title": "Thermal Properties of Matter",
+  "kind": "physics",
+  "tagline": "Expansion, calorimetry and heat transfer: how matter stores and moves thermal energy.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Temperature tells you how hot a body is; this chapter asks what heat does to matter once it arrives. It develops the three expansion mechanisms (solids, liquids, gases) including water’s famous anomaly, builds the calorimetric balance of specific and latent heats, and completes the picture with the three modes of transfer — conduction, convection and radiation — plus the qualitative laws of blackbody radiation the syllabus names. The applications are unusually concrete in this topic: mercury thermometers, cracking cold-water pipes, cooling towers and kitchen foil all follow from one paragraph of physics each.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-VII: Properties of Bulk Matter (20 marks shared with the Solids and Fluids chapters)."
+      },
+      {
+        "label": "Expansion",
+        "value": "L = L₀(1 + αΔT); volume expansion ≈ 3α for solids; liquids expand more, gases enormously."
+      },
+      {
+        "label": "Calorimetry",
+        "value": "Heat gained = heat lost: Q = mcΔT for temperature change, Q = mL for a change of state."
+      },
+      {
+        "label": "Radiation",
+        "value": "Stefan's law: power = εσAT⁴; Wien's law: λ_m T = constant — the hotter the body, the shorter its peak wavelength."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute solid, liquid and gas expansion and apply the α to 3α relation.",
+    "Use the principle of heat conservation in calorimetry with phase changes.",
+    "Distinguish conduction, convection and radiation and apply the conduction formula.",
+    "State Stefan's and Wien's laws qualitatively and quantitatively at the level specified.",
+    "Explain the anomalous expansion of water and its ecological significance."
+  ],
+  "learn": [
+    {
+      "id": "expansion",
+      "title": "Thermal expansion in solids, liquids and gases",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Heating a body increases the amplitude of its particles’ vibrations, and the resulting increase in mean separation is thermal expansion. For solids the relation is linear: L = L₀(1 + αΔT), where α is the coefficient of linear expansion — about 10⁻⁵ to 10⁻⁶ per kelvin for metals — and the corresponding volume expansion uses β ≈ 3α, a relation worth knowing because it follows from applying the length expansion in all three dimensions. Railway lines are laid with expansion gaps, bimetallic strips bend because two joined metals expand differently (the basis of thermostats), and the same effect limits how hot an engine block may run before its clearances vanish. The magnitudes are small but never negligible: a 50 m steel bridge expands by about 3.6 cm over a 60 K summer-to-winter swing (ΔL = 50 × 1.2 × 10⁻⁵ × 60), and that is exactly why expansion joints are cut into it."
+        },
+        {
+          "type": "paragraph",
+          "text": "Liquids share the volume expansion mechanism but no fixed shape, so only β is defined, and it exceeds solids’ — which is why a mercury or alcohol thermometer’s liquid must rise against a calibrated scale rather than merely fatten the tube. Gases behave differently again: at fixed pressure their expansion is enormous (β ≈ 1/273 per kelvin, the same for every gas), a universality that hinted at absolute zero and underlies the ideal gas law studied in the Kinetic Theory chapter. Water’s anomaly sits apart from all of this: below 4 °C water expands as it cools, so its density peaks at 4 °C. Lakes freeze from the top rather than the bottom, insulating the liquid beneath and letting aquatic life survive winter — a genuinely consequential exception that examiners expect students to both state and explain via the hydrogen-bond structure of ice."
+        },
+        {
+          "type": "table",
+          "caption": "Coefficients of expansion, in order of size",
+          "columns": [
+            "State",
+            "Coefficient",
+            "Typical value (per K)"
+          ],
+          "rows": [
+            [
+              "Solid (linear)",
+              "α",
+              "10⁻⁶ to 10⁻⁵ (steel ≈ 1.2 × 10⁻⁵)"
+            ],
+            [
+              "Solid (volume)",
+              "β ≈ 3α",
+              "≈ 3.6 × 10⁻⁵ for steel"
+            ],
+            [
+              "Liquid",
+              "β",
+              "10⁻⁴ range (mercury ≈ 1.8 × 10⁻⁴)"
+            ],
+            [
+              "Gas (fixed pressure)",
+              "β",
+              "≈ 1/273 ≈ 3.67 × 10⁻³ — same for all ideal gases"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 2 m steel rod heats by 50 K: extension?",
+              "note": "ΔL = 2 × 1.2×10⁻⁵ × 50 = 1.2 mm."
+            },
+            {
+              "text": "Water between 0 and 4 °C: density behaviour?",
+              "note": "Rises with cooling — maximum at 4 °C, the anomaly."
+            },
+            {
+              "text": "Volume expansion of a solid from α = 10⁻⁵.",
+              "note": "β ≈ 3 × 10⁻⁵ per K."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calorimetry",
+      "title": "Heat, specific heat and latent heat",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Calorimetry is the bookkeeping of heat flow, resting on the principle that in an isolated exchange the heat lost by the hot body equals the heat gained by the cold one. The working equation for temperature changes is Q = mcΔT, where c is the specific heat capacity — 4200 J/kg·K for water, anomalously large, which is why oceans moderate coastal climates and why water is the coolant of industry and the body. A change of state is different in kind: at the melting or boiling point, heat goes into breaking or forming the intermolecular structure rather than raising the temperature, so Q = mL with L the latent heat of fusion or vaporisation. That separation — temperature climbs through sensible heat, pauses through latent heat, then resumes — is the shape of every heating curve, and reading one correctly is a standard exam skill."
+        },
+        {
+          "type": "paragraph",
+          "text": "The practical machinery is the mixtures method: drop a hot solid into a calorimeter of known mass containing water of known temperature, and the final equilibrium temperature yields the solid’s specific heat from the balance equation, corrections for the calorimeter’s own heat capacity included. The same balance with a vapour lead-in gives the latent heat of vaporisation, and the same apparatus inverted — measuring cooling — gives relative specific heats by Newton’s law of cooling, which states that a body’s rate of loss of temperature is proportional to its excess over the surroundings (valid for small excesses and gentle air currents, the conditions the syllabus’s activity specifies). Two habits keep calorimetry problems correct: keep every mass in kilograms and every temperature in kelvin or in differences of degrees Celsius (the intervals are identical), and decide whether each term is a temperature change (mcΔT) or a state change (mL) before writing it — mixing the two is the topic’s principal error."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heat lost = heat gained in an isolated exchange.",
+            "Q = mcΔT for temperature change; Q = mL for change of state.",
+            "Water’s c ≈ 4200 J/kg·K is unusually large — climatic and industrial consequences.",
+            "Latent heat pauses the thermometer: energy goes into structure, not speed.",
+            "Newton’s law of cooling: rate ∝ excess temperature, for small excesses."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transfer",
+      "title": "Conduction, convection and radiation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Heat transfers by three distinct mechanisms, and distinguishing them is half the topic. Conduction is energy hand-to-hand between neighbouring particles without bulk motion — the vibration passing down a metal rod — and it is quantified by Q/t = KA(T₁ − T₂)/d, with K the thermal conductivity: metals conduct well because free electrons carry energy as well as lattice vibrations, which is also why the best electrical conductors are the best thermal ones. Wool, foam and feathers work not because they are warm but because trapped still air (K tiny) halts conduction, and a vacuum flask stops conduction and convection entirely, leaving only radiation. Convection is the bulk movement of the fluid itself — warm air rising, cool air sinking — and it is why sea breezes reverse between day and night, why heating systems place radiators low, and why stirring a pot cooks it evenly; unlike conduction, it cannot occur in solids."
+        },
+        {
+          "type": "paragraph",
+          "text": "Radiation is the third mode: electromagnetic waves carrying energy with no medium required, emitted by every body above absolute zero and governed at school level by two laws. Stefan’s law states that the power radiated is P = εσAT⁴ — the fourth-power dependence means doubling the absolute temperature multiplies the radiated power sixteen-fold, which is why a stove element glows red-hot while a kettle merely warms the room. Wien’s displacement law states that the wavelength of peak emission satisfies λ_m T = constant (2.898 × 10⁻³ m·K): the hotter the body, the shorter the peak wavelength, tracing the familiar progression from dull red through orange to blinding white-blue as temperature climbs. Qualitatively, the syllabus adds blackbody behaviour — an ideal absorber and emitter whose spectrum depends on temperature alone — and the real-world conclusion that follows: matte dark surfaces both absorb and radiate better than shiny ones, which is why radiators are painted white and satellite thermal blankets are gold."
+        },
+        {
+          "type": "table",
+          "caption": "The three modes of heat transfer",
+          "columns": [
+            "Mode",
+            "Mechanism",
+            "Needs medium?",
+            "Governing relation"
+          ],
+          "rows": [
+            [
+              "Conduction",
+              "Particle-to-particle energy transfer",
+              "Yes (solids best)",
+              "Q/t = KAΔT/d"
+            ],
+            [
+              "Convection",
+              "Bulk fluid motion carrying heat",
+              "Fluids only",
+              "No universal school formula"
+            ],
+            [
+              "Radiation",
+              "Electromagnetic waves",
+              "No",
+              "P = εσAT⁴; λ_m T = constant"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Double the temperature (in K) of a body: radiation factor?",
+              "note": "2⁴ = 16 times the power."
+            },
+            {
+              "text": "Why is a kitchen foil shiny?",
+              "note": "A polished surface radiates and absorbs poorly — it is a bad radiator."
+            },
+            {
+              "text": "Why are loft insulations fluffy?",
+              "note": "Trapped still air minimises conduction and suppresses convection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "title": "Exam method for thermal problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Thermal problems mix several small ideas, so a written plan pays for itself. For expansion questions, state the coefficient being used and the temperature difference in kelvin (identical in size to degrees Celsius), remember that only differences matter, and apply β ≈ 3α where a volume is asked for. For calorimetry, tabulate the bodies involved with their masses, states and temperatures, write the heat-gain and heat-loss sides separately, and include every term — the calorimeter itself, the water equivalent of any container, any latent heat absorbed on the way. For transfer questions, identify the mode before computing: the presence of a temperature difference across a solid means conduction (use the KAΔT/d formula), a moving fluid means convection (qualitative), and a glowing or shining surface means radiation (Stefan or Wien)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Temperature discipline underlies all three: absolute temperature in kelvin enters Stefan’s law and the gas laws, while temperature differences alone enter expansion, calorimetry and conduction — confusing the two is the most frequent source of absurd answers (a radiation computation using Celsius routinely produces nonsense, which is why the conversion must be automatic: T(K) = t(°C) + 273). The plausibility pass at the end is the final defence: expansion results should be small, calorimetry temperatures must lie between the initial ones, and radiation powers should grow steeply with temperature. Those three sanity checks, applied in the last thirty seconds of a solution, catch most of what goes wrong in this friendly but arithmetic-heavy topic."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Kelvin for radiation and gas laws; differences for expansion and calorimetry.",
+            "Apply β ≈ 3α when a volume expansion is asked.",
+            "Calorimetry: include the calorimeter’s own heat capacity and all latent heats.",
+            "Identify the transfer mode before choosing a formula.",
+            "Check: small expansions, intermediate equilibrium temperatures, steep radiation growth."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The heating curve of water from ice to steam",
+      "description": "A graph of temperature against heat supplied: a rising segment from −20 °C to 0 °C, a flat melting plateau at 0 °C labelled latent heat of fusion, a long rising segment to 100 °C, a flat boiling plateau at 100 °C labelled latent heat of vaporisation, and a final rising superheated-steam segment; the water-specific segment annotated with slope set by c = 4200 J/kg·K.",
+      "labels": [
+        "Sensible heat raises temperature",
+        "Melting plateau: structure changes",
+        "Water’s steep slope: large c",
+        "Boiling plateau: latent heat of vaporisation",
+        "Flat means temperature is fixed"
+      ]
+    },
+    {
+      "caption": "Figure: Three modes of heat transfer in one scene",
+      "description": "A cutaway of a room with a radiator: conduction shown along the radiator’s metal wall as a chain of vibrating-atom marks, convection shown as a circulation loop of rising warm air and sinking cool air with curved arrows, and radiation shown as wavy arrows crossing the air gap from the radiator to the occupant.",
+      "labels": [
+        "Conduction through the solid wall",
+        "Convection loop: warm air rises",
+        "Cool air sinks and reheats",
+        "Radiation crosses empty space",
+        "Modes act together, not instead"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Linear expansion L = L₀(1 + αΔT); volume coefficient β ≈ 3α.",
+    "Gases expand far more than liquids, which expand more than solids.",
+    "Water is densest at 4 °C — the anomaly that freezes lakes from the top.",
+    "Calorimetry: heat lost = heat gained.",
+    "Q = mcΔT for temperature change; Q = mL for change of state.",
+    "Water’s large specific heat moderates climate and cools engines.",
+    "Conduction: Q/t = KAΔT/d; metals conduct via electrons and lattice.",
+    "Convection: bulk fluid motion; drives sea breezes and heating design.",
+    "Radiation: P = εσAT⁴ (Stefan) and λ_m T = constant (Wien).",
+    "Use kelvin in radiation laws; differences in expansion and calorimetry."
+  ],
+  "examFocus": [
+    "State every coefficient and temperature difference before substituting.",
+    "Calorimetry tables prevent missed terms — draw one before writing equations.",
+    "Name the transfer mode before computing anything.",
+    "Convert to kelvin for Stefan’s law; a Celsius radiation answer is always wrong."
+  ],
+  "vocabulary": [
+    {
+      "word": "Coefficient of linear expansion (α)",
+      "meaning": "Fractional length change per kelvin."
+    },
+    {
+      "word": "Specific heat capacity (c)",
+      "meaning": "Heat needed to raise 1 kg by 1 K."
+    },
+    {
+      "word": "Latent heat (L)",
+      "meaning": "Heat absorbed per kilogram at a change of state, with no temperature change."
+    },
+    {
+      "word": "Calorimetry",
+      "meaning": "Measuring heat flow by the mixtures balance."
+    },
+    {
+      "word": "Conduction",
+      "meaning": "Heat transfer by particle interaction, without bulk motion."
+    },
+    {
+      "word": "Convection",
+      "meaning": "Heat transfer by the movement of the fluid itself."
+    },
+    {
+      "word": "Stefan’s law",
+      "meaning": "Radiated power proportional to T⁴ of absolute temperature."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-therm-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The specific heat capacity of water is approximately:",
+      "options": [
+        "420 J/kg·K",
+        "4200 J/kg·K",
+        "42 J/kg·K",
+        "2100 J/kg·K"
+      ],
+      "correctIndex": 1,
+      "answer": "4200 J/kg·K",
+      "explanation": "c = 4200 J/kg·K — nearly ten times that of most metals, which is why water warms slowly and stores heat well."
+    },
+    {
+      "id": "cbse11-phy-therm-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Water reaches its maximum density at:",
+      "options": [
+        "0 °C",
+        "4 °C",
+        "100 °C",
+        "25 °C"
+      ],
+      "correctIndex": 1,
+      "answer": "4 °C",
+      "explanation": "The anomalous expansion means density peaks at 4 °C, so lakes freeze from the top and aquatic life survives winter."
+    },
+    {
+      "id": "cbse11-phy-therm-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the absolute temperature of a blackbody doubles, its radiated power becomes:",
+      "options": [
+        "Twice",
+        "Four times",
+        "Eight times",
+        "Sixteen times"
+      ],
+      "correctIndex": 3,
+      "answer": "Sixteen times",
+      "explanation": "Stefan's law P ∝ T⁴: doubling T multiplies power by 2⁴ = 16."
+    },
+    {
+      "id": "cbse11-phy-therm-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A 2 kg block of ice at 0 °C melts completely. With L_f = 3.36 × 10⁵ J/kg, the heat absorbed is:",
+      "options": [
+        "3.36 × 10⁵ J",
+        "6.72 × 10⁵ J",
+        "1.68 × 10⁵ J",
+        "8.4 × 10⁴ J"
+      ],
+      "correctIndex": 1,
+      "answer": "6.72 × 10⁵ J",
+      "explanation": "Q = mL = 2 × 3.36 × 10⁵ = 6.72 × 10⁵ J, absorbed at constant temperature — latent, not sensible, heat."
+    },
+    {
+      "id": "cbse11-phy-therm-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The heat required to raise the temperature of 1 kg of a substance by 1 K is its specific heat ________ .",
+      "answer": "capacity",
+      "explanation": "Measured in J/kg·K; water’s value of 4200 is unusually large."
+    },
+    {
+      "id": "cbse11-phy-therm-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume expansion coefficient of a solid is approximately its linear coefficient ________ .",
+      "answer": "tripled",
+      "explanation": "β ≈ 3α, because the linear expansion applies in all three dimensions."
+    },
+    {
+      "id": "cbse11-phy-therm-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between specific heat capacity and latent heat, stating the units of each and when each is used.",
+      "answer": "Specific heat capacity c is the heat needed to raise the temperature of 1 kg of a substance by 1 K, measured in J/kg·K; it governs sensible heating, where supplied heat appears as increased molecular kinetic energy and the thermometer rises. The working relation is Q = mcΔT. Latent heat L is the heat absorbed per kilogram during a change of state at constant temperature — fusion at the melting point, vaporisation at the boiling point — measured in J/kg; it goes into breaking or forming the intermolecular structure rather than raising temperature, so the thermometer stands still while the heat flows. The working relation is Q = mL. The distinction is visible on any heating curve: sloped segments carry specific heat, flat plateaus carry latent heat. For water the magnitudes differ markedly — c = 4200 J/kg·K while L_f = 3.36 × 10⁵ J/kg and L_v = 22.6 × 10⁵ J/kg — which is why boiling a kettle costs far more than warming one.",
+      "explanation": "Both quantities defined with units and working relations, the molecular account of where the energy goes, and the heating-curve connection."
+    },
+    {
+      "id": "cbse11-phy-therm-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the principle of calorimetry and solve: 0.5 kg of water at 80 °C is mixed with 1.5 kg of water at 20 °C. Find the equilibrium temperature, ignoring heat loss to the container.",
+      "answer": "The principle of calorimetry: in an isolated exchange, total heat lost by the hotter body equals total heat gained by the colder body, since energy is not created or destroyed. Let the equilibrium temperature be T. The hot water cools from 80 °C to T, losing Q_lost = 0.5 × 4200 × (80 − T); the cold water warms from 20 °C to T, gaining Q_gained = 1.5 × 4200 × (T − 20). Equating: 0.5(80 − T) = 1.5(T − 20), so 40 − 0.5T = 1.5T − 30, giving 70 = 2T and T = 35 °C. The specific heat cancels since both bodies are water — a shortcut worth noticing whenever the substances match. Checks: 35 °C lies between 20 and 80 ✓, and it lies closer to 20 than to 80, as it must since the cold mass is three times the hot mass ✓ (the mass ratio 1:3 places the equilibrium one quarter of the way from the cold temperature).",
+      "explanation": "The principle stated, the balance equation solved, and both the betweenness and mass-ratio checks."
+    },
+    {
+      "id": "cbse11-phy-therm-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive the expression for heat conduction through a slab and compute the heat flowing per second through a glass window of area 2 m², thickness 4 mm and thermal conductivity 0.8 W/m·K, when the inside is 25 °C and the outside 5 °C.",
+      "answer": "Conduction transfers energy between neighbouring particles without bulk motion; the flux is proportional to the area A, the temperature difference ΔT across the slab, and the conductivity K, and inversely proportional to the thickness d: Q/t = KA(T₁ − T₂)/d. Derivation sketch: consider a slab of thickness x carrying temperature difference ΔT_x; the rate of flow is proportional to A and to ΔT_x/x, and integrating across the thickness with linear steady-state profile gives the stated form. Substituting: K = 0.8 W/m·K, A = 2 m², ΔT = 20 K, d = 4 × 10⁻³ m, so Q/t = 0.8 × 2 × 20/(4 × 10⁻³) = 32/0.004 = 8000 W = 8 kW. Interpretation: eight kilowatts of heat pour out through that single window every second while the heating runs — an enormous figure that explains why double glazing (a trapped air gap with far smaller K, plus suppressed convection) is such an effective retrofit. Checks: the units W/m·K × m² × K / m = W ✓; thickening the window to 8 mm halves the loss, as 1/d demands ✓; and the magnitude, roughly that of a domestic heater, is plausible for a large single-pane window across a 20 K difference.",
+      "explanation": "The formula derived or justified, all values substituted in SI, the computed flux, the physical interpretation, and the checks including the double-glazing link."
+    },
+    {
+      "id": "cbse11-phy-therm-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why a mercury thermometer uses mercury rather than water, why dew forms on a cold morning, and why polished chrome feels colder than a wooden floor at the same room temperature — unifying your answers with the ideas of expansion, radiation and conduction.",
+      "answer": "Mercury over water for the thermometer: water expands non-uniformly (and anomalously below 4 °C), is transparent rather than a visible column, boils at 100 °C limiting the upper range and freezes at 0 °C limiting the lower, while mercury expands uniformly with temperature (a nearly constant α), is opaque so the column reads clearly, remains liquid from −39 to 357 °C covering the clinical and laboratory range, and does not wet the glass so it retracts cleanly. A uniformly expanding liquid column against a calibrated scale is exactly what a thermometer needs, and mercury supplies it while water cannot. Dew: overnight, the ground and vegetation radiate energy to the cold sky (net radiation loss since they radiate more than they absorb), cooling below the surrounding air; the air in contact then cools by conduction, and once its temperature reaches the dew point, the water vapour in it condenses onto the cold surfaces — radiation causes the cooling, conduction transmits it to the air, and condensation is the visible result. The chrome-versus-wood floor: both surfaces are at the same room temperature, but chrome is an excellent thermal conductor, so it rapidly draws heat from your sole, chilling that patch of skin fast; wood conducts poorly, so the heat your foot supplies stays near the surface and your skin temperature barely drops. The sensation of coldness is therefore a measure of the rate of heat extraction, not of temperature — the same reason a metal chair feels colder than a plastic one in the same room. The unifying thread across all three: temperature is a state, but what we experience and what instruments register depend on transport — how quickly energy moves by expansion-driven conduction, radiation and conduction respectively.",
+      "explanation": "Each phenomenon explained with its own mechanism, correct identification of the governing mode in each case, and the unifying statement distinguishing temperature state from energy-transport rate."
+    }
+  ]
+}

@@ -1,0 +1,500 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-sequences",
+  "title": "Sequences and Series",
+  "kind": "mathematics",
+  "tagline": "Arithmetic and geometric progressions, their sums, the AM–GM relationship and the sums of the special series.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "A sequence lists numbers by rule; a series adds them up. This chapter builds the two progressions that model every pattern an examination uses — a fixed difference and a fixed ratio — and gives each one a sum formula that turns an addition problem into an arithmetic one. The arithmetic and geometric means then provide the chapter’s one inequality, AM ≥ GM, which is also the fastest route to optimisation questions. The chapter closes with the sums of n, n² and n³, which convert a listing such as 1·2 + 2·3 + 3·4 + … into a closed form in two lines.",
+    "facts": [
+      {
+        "label": "Arithmetic progression",
+        "value": "nth term a + (n − 1)d; sum Sₙ = n/2 [2a + (n − 1)d] = n/2 (first + last)."
+      },
+      {
+        "label": "Geometric progression",
+        "value": "nth term arⁿ⁻¹; sum Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1, and a/(1 − r) for an infinite series with |r| < 1."
+      },
+      {
+        "label": "AM and GM",
+        "value": "AM = (a + b)/2, GM = √(ab), and AM ≥ GM with equality exactly when a = b."
+      },
+      {
+        "label": "Special sums",
+        "value": "Σn = n(n+1)/2, Σn² = n(n+1)(2n+1)/6, Σn³ = [n(n+1)/2]²."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Identify the first term and common difference or ratio of a progression and find any term.",
+    "Apply the sum formulae for arithmetic and geometric progressions, including the infinite geometric series.",
+    "Insert arithmetic or geometric means between two given numbers.",
+    "State and apply the AM–GM inequality with its equality condition.",
+    "Evaluate the sums of n, n² and n³ and use them to sum a series given by a general term."
+  ],
+  "learn": [
+    {
+      "id": "arithmetic-progressions",
+      "title": "Arithmetic progressions: terms and sums",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An arithmetic progression is a list in which each term exceeds the one before by a fixed common difference d, so knowing the first term a and the difference gives every term: aₙ = a + (n − 1)d. The sum formula follows by adding the progression to its reverse — each pair totals the first term plus the last — which gives Sₙ = n/2 (first + last) in its most practical form, and n/2 [2a + (n − 1)d] when the last term is not known. Most examination questions are two-line problems in disguise: an nth term condition and a sum condition together form two equations in a and d, which are solved simultaneously. Working in differences often short-circuits the algebra, since subtracting the two given equations eliminates a at once."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "nth term: aₙ = a + (n − 1)d, with d = aₙ − aₙ₋₁ between consecutive terms.",
+            "Sum: Sₙ = n/2 [2a + (n − 1)d] = n/2 (a + l), where l is the last term.",
+            "Two conditions (a given term and a given sum) give two equations in a and d.",
+            "A term equal to a fixed value: solve a + (n − 1)d = given term for n.",
+            "The sequence of differences of any AP is itself an AP with common difference d."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "AP 3, 7, 11, …: a = 3, d = 4, so the 10th term is 3 + 9 × 4 = 39",
+              "note": "Read a and d from the first two terms, then substitute into a + (n − 1)d with n = 10."
+            },
+            {
+              "text": "Sum of the first 20 terms of that AP: S₂₀ = 20/2 [2(3) + 19(4)] = 10 × 82 = 820",
+              "note": "Use the bracketed form when the last term has not been computed."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Arithmetic progression formulae at one view",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "Use it when"
+          ],
+          "rows": [
+            [
+              "nth term",
+              "a + (n − 1)d",
+              "a particular term is asked for"
+            ],
+            [
+              "Common difference",
+              "d = aₙ − aₙ₋₁",
+              "the pattern must be verified"
+            ],
+            [
+              "Sum of n terms",
+              "n/2 [2a + (n − 1)d]",
+              "the last term is unknown"
+            ],
+            [
+              "Sum with last term",
+              "n/2 (a + l)",
+              "both ends of the progression are known"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometric-progressions",
+      "title": "Geometric progressions and infinite series",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A geometric progression multiplies by a fixed ratio r at each step, so the nth term is arⁿ⁻¹ and the terms grow geometrically rather than additively — which is why populations, interest and repeated halving all model as GPs. The sum of the first n terms comes from multiplying the series by r and subtracting, cancelling every middle term, giving Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1. The formula’s real beauty appears when |r| < 1: the terms shrink towards zero, the infinite sum converges, and the answer is the finite expression a/(1 − r). Zeno’s paradox of halving distances, and any everyday situation where a fraction of a fraction is repeatedly taken, resolves into exactly this expression. For r ≥ 1 the infinite series has no finite sum, and saying so is part of the answer."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "nth term: aₙ = arⁿ⁻¹, with r = aₙ / aₙ₋₁.",
+            "Sum: Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1; for r = 1 the sum is simply na.",
+            "Infinite sum: S∞ = a/(1 − r), valid only when |r| < 1.",
+            "Geometric means: insert between a and b by using ratio (b/a)^(1/(k+1)).",
+            "Compound growth: amount = principal × (1 + rate)^years, a GP with ratio 1 + rate."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "GP 2, 6, 18, …: a = 2, r = 3, so the 5th term is 2 × 3⁴ = 162",
+              "note": "The ratio is 6/2 = 3; apply arⁿ⁻¹ with n = 5."
+            },
+            {
+              "text": "8 + 4 + 2 + 1 + …: a = 8, r = 1/2, so S∞ = 8/(1 − 1/2) = 16",
+              "note": "Since |r| < 1 the infinite series converges to the closed form a/(1 − r)."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Arithmetic progression",
+              "meaning": "Sequence with a constant difference between consecutive terms."
+            },
+            {
+              "term": "Common difference",
+              "meaning": "d = aₙ − aₙ₋₁, fixed throughout an AP."
+            },
+            {
+              "term": "Common ratio",
+              "meaning": "r = aₙ / aₙ₋₁, fixed throughout a GP."
+            },
+            {
+              "term": "Convergent series",
+              "meaning": "Infinite series with a finite sum, occurring here when |r| < 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "means-and-am-gm",
+      "title": "Arithmetic and geometric means",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Between two numbers a and b sit two natural middles: the arithmetic mean (a + b)/2, which averages them additively, and the geometric mean √(ab), which averages them multiplicatively. Inserting several means simply extends the progression — k arithmetic means between a and b create a (k + 2)-term AP whose common difference is (b − a)/(k + 1), and k geometric means do the same with ratio (b/a)^(1/(k + 1)). The relationship between the two means is the inequality AM ≥ GM, proved in one line from (a − b)² ≥ 0: expanding gives a + b ≥ 2√ab, which is exactly the statement after dividing by two. Equality holds only when a = b, and that condition is what makes the inequality useful — to minimise a sum with a fixed product, or maximise a product with a fixed sum, set the quantities equal."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "AM of a and b is (a + b)/2; GM is √(ab), defined only for numbers of the same sign.",
+            "AM ≥ GM, with equality if and only if a = b — write the condition every time.",
+            "k arithmetic means between a and b: common difference (b − a)/(k + 1).",
+            "k geometric means between a and b: common ratio (b/a)^(1/(k + 1)).",
+            "For a fixed product, the sum is least when the parts are equal; for a fixed sum, the product is greatest when the parts are equal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "AM of 9 and 16 is 12.5; GM is √144 = 12, so AM > GM as expected",
+              "note": "Substitute into both formulas; 12.5 > 12 confirms the inequality."
+            },
+            {
+              "text": "Three arithmetic means between 7 and 19: five-term AP with d = (19 − 7)/4 = 3",
+              "note": "The means are 10, 13 and 16 — four steps carry 7 up to 19."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "AM and GM compared",
+          "columns": [
+            "Property",
+            "Arithmetic mean",
+            "Geometric mean"
+          ],
+          "rows": [
+            [
+              "Formula",
+              "(a + b)/2",
+              "√(ab)"
+            ],
+            [
+              "Requires",
+              "any two real numbers",
+              "two numbers of the same sign"
+            ],
+            [
+              "Relative size",
+              "always at least the GM",
+              "never exceeds the AM"
+            ],
+            [
+              "Equality",
+              "a = b",
+              "a = b"
+            ],
+            [
+              "Means inserted",
+              "forms an AP",
+              "forms a GP"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special-series",
+      "title": "Sums of n, n² and n³ and series in closed form",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Many series are neither arithmetic nor geometric but are built from the counting numbers themselves, and three identities finish them: the sum of the first n integers is n(n + 1)/2, the sum of their squares is n(n + 1)(2n + 1)/6, and the sum of their cubes is the square of the first identity, [n(n + 1)/2]². The method of proof is induction or a telescoping argument, but at this level the identities are used as tools: express the general term as a combination of n, n² and n³, split the sum using linearity, and substitute. Thus 1·2 + 2·3 + … + n(n + 1) expands into Σn² + Σn, which collapses to n(n + 1)(n + 2)/3. The habit worth building is to recognise the general term before summing — the kth term written as k(k + 1) is half the problem solved already."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Σn = 1 + 2 + … + n = n(n + 1)/2.",
+            "Σn² = n(n + 1)(2n + 1)/6.",
+            "Σn³ = [n(n + 1)/2]², the square of the triangular-number formula.",
+            "Linearity: Σ (aₖ + bₖ) = Σ aₖ + Σ bₖ, which is how every series splits.",
+            "Write the general term first; many series then separate into two standard sums immediately."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Σn² for n = 5: 5 × 6 × 11 / 6 = 55, matching 1 + 4 + 9 + 16 + 25",
+              "note": "Substitute into the formula and verify against the direct addition."
+            },
+            {
+              "text": "1·2 + 2·3 + … + n(n + 1) = Σn² + Σn = n(n + 1)(2n + 1)/6 + n(n + 1)/2",
+              "note": "Factoring n(n + 1)/6 leaves (2n + 1) + 3, giving n(n + 1)(n + 2)/3."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Sum of the cubes of the first 4 integers: (4 × 5/2)² = 100, equal to 1 + 8 + 27 + 64",
+              "note": "The cube-sum identity is the square of the triangular-number formula."
+            },
+            {
+              "text": "Σ(2n − 1) for n terms: 2Σn − Σ1 = 2 · n(n + 1)/2 − n = n²",
+              "note": "Odd numbers sum to a perfect square, which the split verifies algebraically."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Arithmetic and geometric growth compared on one graph",
+      "description": "Two plots from the same start: a straight line rising by equal steps for the arithmetic progression with points marked at each term, and a curve rising more steeply for the geometric progression whose steps multiply.",
+      "labels": [
+        "AP: straight line, constant difference d",
+        "GP: curve, constant ratio r > 1",
+        "both start at the first term a",
+        "AP terms are equally spaced in n",
+        "GP terms soon outgrow AP terms"
+      ]
+    },
+    {
+      "caption": "Figure: The sum of an AP as paired terms",
+      "description": "The progression 2, 5, 8, 11, 14 written twice, once reversed beneath it, with brackets pairing 2 with 14 and 5 with 11, each pair totalling 16.",
+      "labels": [
+        "first + last = 16 in every pair",
+        "n terms make n/2 such pairs",
+        "Sₙ = n/2 (first + last)",
+        "the reversed copy adds no new information",
+        "works for any common difference"
+      ]
+    },
+    {
+      "caption": "Figure: A convergent infinite geometric series as shrinking steps",
+      "description": "A line segment of length 8 with halves, quarters and eighths marked successively, the shaded pieces approaching but never passing the point marked 16 as the total distance of the infinite walk.",
+      "labels": [
+        "first term a = 8",
+        "common ratio r = 1/2",
+        "each step halves the remaining gap",
+        "sum to infinity = 8/(1 − 1/2) = 16",
+        "convergence requires |r| < 1"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "AP: aₙ = a + (n − 1)d and Sₙ = n/2 [2a + (n − 1)d] = n/2 (first + last).",
+    "GP: aₙ = arⁿ⁻¹ and Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1.",
+    "An infinite geometric series sums to a/(1 − r) only when |r| < 1.",
+    "A term-and-sum pair of conditions gives two simultaneous equations in a and d.",
+    "AM = (a + b)/2 and GM = √(ab), with AM ≥ GM and equality iff a = b.",
+    "k means between two numbers create a progression of k + 2 terms.",
+    "Fixed product with least sum, or fixed sum with greatest product: make the parts equal.",
+    "Σn = n(n+1)/2, Σn² = n(n+1)(2n+1)/6, Σn³ = [n(n+1)/2]².",
+    "Series built from powers of n split by linearity and collapse through these three identities.",
+    "Recognise the general term before summing: k(k + 1) separates into k² + k at once."
+  ],
+  "examFocus": [
+    "Write a and d (or a and r) explicitly before using any formula; the identification is separately marked.",
+    "For a term-and-sum problem, display both equations before solving — markers follow the simultaneous system.",
+    "Quote AM ≥ GM together with its equality condition; the condition earns the mark in optimisation answers.",
+    "Infinite-sum answers must state |r| < 1; a sum to infinity without its condition is incomplete."
+  ],
+  "vocabulary": [
+    {
+      "word": "Sequence",
+      "meaning": "Ordered list of numbers following a rule."
+    },
+    {
+      "word": "Series",
+      "meaning": "Sum of the terms of a sequence."
+    },
+    {
+      "word": "Common difference",
+      "meaning": "Constant d added to reach each next term of an AP."
+    },
+    {
+      "word": "Common ratio",
+      "meaning": "Constant r multiplying to reach each next term of a GP."
+    },
+    {
+      "word": "Arithmetic mean",
+      "meaning": "(a + b)/2, the average of two quantities."
+    },
+    {
+      "word": "Geometric mean",
+      "meaning": "√(ab), the mean appropriate to multiplicative growth."
+    },
+    {
+      "word": "Convergence",
+      "meaning": "Approaching a finite limit, as an infinite GP with |r| < 1."
+    },
+    {
+      "word": "Triangular number",
+      "meaning": "n(n + 1)/2, the sum of the first n integers."
+    },
+    {
+      "word": "General term",
+      "meaning": "Formula giving the nth member of a sequence directly."
+    },
+    {
+      "word": "Optimisation",
+      "meaning": "Finding the maximum or minimum, often via AM ≥ GM."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-sequence-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The 10th term of the AP 3, 7, 11, 15, … is:",
+      "options": [
+        "35",
+        "39",
+        "43",
+        "37"
+      ],
+      "correctIndex": 1,
+      "answer": "39",
+      "explanation": "With a = 3 and d = 4, the 10th term is 3 + 9 × 4 = 39."
+    },
+    {
+      "id": "isc11-math-sequence-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sum of the first 20 natural numbers is:",
+      "options": [
+        "190",
+        "200",
+        "210",
+        "220"
+      ],
+      "correctIndex": 2,
+      "answer": "210",
+      "explanation": "Σn = n(n + 1)/2 with n = 20 gives 20 × 21/2 = 210."
+    },
+    {
+      "id": "isc11-math-sequence-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The 5th term of the GP 2, 6, 18, … is:",
+      "options": [
+        "54",
+        "162",
+        "486",
+        "81"
+      ],
+      "correctIndex": 1,
+      "answer": "162",
+      "explanation": "a = 2 and r = 3, so the 5th term is 2 × 3⁴ = 2 × 81 = 162."
+    },
+    {
+      "id": "isc11-math-sequence-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the arithmetic mean and the geometric mean of two positive numbers are equal, then the numbers are:",
+      "options": [
+        "equal",
+        "reciprocals of each other",
+        "co-prime",
+        "consecutive integers"
+      ],
+      "correctIndex": 0,
+      "answer": "equal",
+      "explanation": "AM ≥ GM with equality only at a = b, so equal means force the two numbers to coincide."
+    },
+    {
+      "id": "isc11-math-sequence-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An arithmetic progression has first term 3 and common difference 4; its nth term, written as an expression in n, is ______ .",
+      "answer": "4n − 1",
+      "explanation": "From a + (n − 1)d = 3 + 4(n − 1) = 3 + 4n − 4 = 4n − 1, which returns 3 at n = 1 and rises by 4 with every step."
+    },
+    {
+      "id": "isc11-math-sequence-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sum to infinity of the geometric series 8, 4, 2, 1, … is ______ .",
+      "answer": "16",
+      "explanation": "Here a = 8 and r = 1/2, so S∞ = 8/(1 − 1/2) = 16, and |r| < 1 confirms convergence."
+    },
+    {
+      "id": "isc11-math-sequence-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the formulae for the nth term and the sum of the first n terms of an AP, defining every symbol used.",
+      "answer": "For an arithmetic progression with first term a and common difference d: the nth term is aₙ = a + (n − 1)d, and the sum of the first n terms is Sₙ = n/2 [2a + (n − 1)d], equivalently n/2 (a + l) where l is the last term. Here n is the number of terms, d is the fixed difference between consecutive terms, and l = a + (n − 1)d.",
+      "explanation": "Both formulae need a and d identified first; the alternative sum form using the last term is what makes pair-wise addition visible."
+    },
+    {
+      "id": "isc11-math-sequence-08",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Prove that the arithmetic mean of two positive numbers is at least their geometric mean, stating when equality holds.",
+      "answer": "Start from (a − b)² ≥ 0, which is true for all real a and b. Expanding gives a² − 2ab + b² ≥ 0, so a² + 2ab + b² ≥ 4ab, that is (a + b)² ≥ 4ab. Taking positive square roots (a and b are positive) yields a + b ≥ 2√ab, and dividing by 2 gives (a + b)/2 ≥ √ab — the AM is at least the GM. Equality holds exactly when (a − b)² = 0, that is when a = b.",
+      "explanation": "The proof runs from the non-negativity of a square through a perfect-square rearrangement; the equality condition is not optional, since every optimisation use of the inequality depends on it."
+    },
+    {
+      "id": "isc11-math-sequence-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The 8th term of a geometric progression is 128 and its common ratio is 2. Find the first term and the sum of the first 10 terms.",
+      "answer": "The nth term is arⁿ⁻¹, so the 8th term gives ar⁷ = 128. With r = 2, r⁷ = 128, hence a = 128/128 = 1. The sum of the first 10 terms is S₁₀ = a(r¹⁰ − 1)/(r − 1) = 1 × (1024 − 1)/(2 − 1) = 1023.",
+      "explanation": "Use the nth-term condition to isolate a first, then substitute both a and r into the geometric sum formula; 2¹⁰ = 1024 is worth memorising for exactly this step."
+    },
+    {
+      "id": "isc11-math-sequence-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the sum of the first n terms of the series 1·2 + 2·3 + 3·4 + … + n(n + 1).",
+      "answer": "The general term is k(k + 1) = k² + k. Summing from k = 1 to n and splitting by linearity gives Σk² + Σk = n(n + 1)(2n + 1)/6 + n(n + 1)/2. Factoring n(n + 1)/6 leaves (2n + 1) + 3 = 2n + 4, so the total is n(n + 1)(2n + 4)/6 = n(n + 1)(n + 2)/3. The sum to n terms is therefore n(n + 1)(n + 2)/3, a closed form that checks at n = 1 (it gives 1 · 2 = 2) and at n = 2 (it gives 2 · 3 · 4/3 = 8, matching 1·2 + 2·3 = 8).",
+      "explanation": "Identify the general term, expand it into standard powers, apply the two sum identities and factorise; checking n = 1 against the identity gives 1·2 = 2, confirming the closed form."
+    }
+  ]
+}

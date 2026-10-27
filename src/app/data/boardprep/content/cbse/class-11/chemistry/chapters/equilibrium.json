@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-chem-equilibrium",
+  "title": "Equilibrium",
+  "kind": "chemistry",
+  "tagline": "Dynamic balance: equilibrium constants, Le Chatelier's principle, pH, buffers and the solubility of sparingly soluble salts.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Chemistry syllabus for subject code 043 registered for the Academic Year 2026-27 (CBSE, Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Chemistry textbooks and the Microscale Chemistry laboratory manual are identified by title only: every definition, worked calculation, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Chemistry (043) syllabus for the Academic Year 2026-27: every explanation, worked calculation, figure, example, question and answer was written for this page. Only the topics printed in the official document are taught, and topics the document marks formative are labelled as such on this page."
+  },
+  "overview": {
+    "intro": "Equilibrium is the state in which the rates of the forward and reverse reactions become equal, so that concentrations stop changing even though both reactions continue. The unit develops this dynamic picture first for physical equilibria and then for chemical ones, deriving the law of chemical equilibrium and the reaction quotient, and using Le Chatelier's principle to predict how a system responds to changes in concentration, pressure and temperature. The second half is ionic equilibrium: the pH scale, the ionisation of weak acids and bases, buffer solutions that resist a change in pH, and the solubility equilibria that control precipitation, the common ion effect and the analysis of salts.",
+    "facts": [
+      {
+        "label": "Marks in the theory paper",
+        "value": "7 marks (Unit 6 of the official 70-mark CBSE Class XI theory course)"
+      },
+      {
+        "label": "Relationship of Kp to Kc",
+        "value": "Kp = Kc(RT)^Δn, where Δn is the change in moles of gaseous species"
+      },
+      {
+        "label": "pH scale",
+        "value": "pH = −log[H⁺]; neutral water is pH 7 at 25 °C, and pH + pOH = 14"
+      },
+      {
+        "label": "Henderson-Hasselbalch equation",
+        "value": "pH = pKa + log([salt]/[acid]) for an acidic buffer"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain dynamic equilibrium in physical and chemical processes and apply Le Chatelier's principle qualitatively.",
+    "Write the equilibrium constant expression, relate Kp to Kc, and compare Q with K to predict the direction of a reaction.",
+    "Calculate pH, pOH, the degree of ionisation of weak acids and bases, and the pH of buffer solutions.",
+    "Apply the solubility product to the common ion effect, precipitation and the comparison of solubilities."
+  ],
+  "learn": [
+    {
+      "id": "dynamic-equilibrium",
+      "title": "Equilibrium in physical and chemical processes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Physical equilibrium is visible in a closed vessel containing liquid water and its vapour. Evaporation and condensation both continue, but at a given temperature the vapour reaches a fixed pressure — the equilibrium vapour pressure — because the two rates have become equal. The same idea governs the dissolution of a saturated solution in contact with undissolved solid and the transfer of a solute between two immiscible solvents. Chemical equilibrium shows the same dynamic behaviour: in a closed vessel, H₂ and I₂ continue to form HI while HI continues to decompose into H₂ and I₂. The concentrations become constant not because the reactions stop but because the forward and reverse rates are exactly equal, which is what the phrase dynamic equilibrium means. The catalyst does not shift the position of equilibrium — it speeds both directions equally — but it does shorten the time taken to reach it."
+        },
+        {
+          "type": "paragraph",
+          "text": "Le Chatelier's principle states that when a system at equilibrium is subjected to a change, it shifts its position so as to partially undo that change. Increasing the concentration of a reactant favours the forward reaction until some of it is consumed; removing a product likewise pulls the reaction forward. Increasing the pressure of a gaseous equilibrium shifts it towards the side with fewer moles of gas, since that relieves the pressure. Changing the temperature is different in kind: raising the temperature favours the endothermic direction, which absorbs the added heat, so an exothermic reaction yields less product at high temperature. This last point governs industrial chemistry — the Haber process uses a moderate temperature as a compromise between yield and rate, and high pressure to favour the side with fewer gas molecules."
+        }
+      ]
+    },
+    {
+      "id": "law-of-equilibrium",
+      "title": "The law of chemical equilibrium and the reaction quotient",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For a general reaction aA + bB ⇌ cC + dD, the law of chemical equilibrium states that at a given temperature the product of the equilibrium concentrations of the products, each raised to the power of its coefficient, divided by the product of the concentrations of the reactants similarly raised, is a constant: Kc = [C]^c[D]^d / [A]^a[B]^b. Pure solids and pure liquids are omitted because their activities are constant and are taken as unity — the amount of limestone in a limestone-lime equilibrium does not appear in the expression. If the equation is multiplied by a factor, K is raised to that factor; if it is reversed, K is inverted; and adding two equilibria multiplies their constants."
+        },
+        {
+          "type": "paragraph",
+          "text": "Because concentrations of gases are often expressed in pressure, the same law written in partial pressures gives Kp, and the two are related by Kp = Kc(RT)^Δn, where Δn is the number of moles of gaseous products minus the number of moles of gaseous reactants. If Δn = 0 the two constants are equal. The reaction quotient Q is calculated from the current concentrations rather than the equilibrium ones: if Q < K the reaction proceeds forwards, if Q > K it proceeds backwards, and if Q = K the system is at equilibrium. Comparing Q with K is the rigorous way to decide the direction a mixture will move, and the same construction using Gibbs energy, ΔrG = ΔrG° + RT ln Q, connects kinetics-free reasoning to thermodynamics."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Write Kc and Kp for N₂(g) + 3H₂(g) ⇌ 2NH₃(g), and relate them.",
+              "note": "Kc = [NH₃]² / ([N₂][H₂]³). Here Δn = 2 − (1 + 3) = −2, so Kp = Kc(RT)⁻² = Kc / (RT)². Because Δn is negative, raising the pressure by reducing the volume increases the value of Q relative to K and drives the reaction forward."
+            },
+            {
+              "text": "At 500 K a mixture contains [N₂] = 0.5, [H₂] = 1.0 and [NH₃] = 0.2 mol L⁻¹ with Kc = 0.5. Which way does it shift?",
+              "note": "Q = (0.2)² / (0.5 × 1.0³) = 0.04/0.5 = 0.08. Since Q = 0.08 < Kc = 0.5, the ratio of products to reactants is too small, so the forward reaction proceeds until Q rises to 0.5."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "What changes the value of K?",
+          "columns": [
+            "Change",
+            "Effect on K",
+            "Effect on position of equilibrium"
+          ],
+          "rows": [
+            [
+              "Concentration",
+              "None",
+              "Shifts to oppose the change"
+            ],
+            [
+              "Pressure / volume",
+              "None",
+              "Shifts to the side with fewer gas moles"
+            ],
+            [
+              "Catalyst",
+              "None",
+              "Both rates rise equally; equilibrium reached sooner"
+            ],
+            [
+              "Temperature",
+              "Changes K",
+              "Shifts in the endothermic direction"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ionic-equilibrium",
+      "title": "Ionic equilibrium: acids, bases and pH",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Water self-ionises as 2H₂O ⇌ H₃O⁺ + OH⁻, and at 25 °C the product of these concentrations is constant, Kw = [H₃O⁺][OH⁻] = 1.0 × 10⁻¹⁴ mol² L⁻². Pure water is neutral with both concentrations 1.0 × 10⁻⁷ mol L⁻¹, giving pH 7; adding acid raises [H₃O⁺] and lowers [OH⁻] so their product stays at Kw. The pH is defined as −log[H₃O⁺], so a solution of pH 3 has 10⁻³ mol L⁻¹ of hydrogen ions, and pH + pOH = 14 at 25 °C. A strong acid such as HCl ionises completely in water; a weak acid such as acetic acid ionises only partially and establishes its own equilibrium, Ka = [H₃O⁺][A⁻]/[HA]."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ostwald's dilution law quantifies the partial ionisation of a weak electrolyte. If a concentration C of a monobasic weak acid ionises to a degree α, then Ka = Cα²/(1 − α), and because α is small this simplifies to α = √(Ka/C). The degree of ionisation therefore increases as the solution is diluted — the counter-intuitive result that diluting a weak acid ionises a greater fraction of it. The same treatment gives the pH of a weak acid, and by analogy Kb for weak bases with Kb = Kw/Ka for a conjugate pair. Salts formed from a weak acid and a strong base are hydrolysed to give an alkaline solution, salts of a strong acid and weak base give an acidic solution, and a salt of a weak acid and weak base is acidic or alkaline according to the relative magnitudes of Ka and Kb."
+        },
+        {
+          "type": "paragraph",
+          "text": "A buffer solution resists a change in pH when small amounts of acid or base are added. An acidic buffer is made from a weak acid and its salt, for example 0.1 M ethanoic acid with 0.1 M sodium ethanoate, and its pH is given by the Henderson-Hasselbalch equation, pH = pKa + log([salt]/[acid]). Because the ratio appears in the log term, equal concentrations give pH = pKa, and adding a strong acid converts some of the added H⁺ into undissociated weak acid while added base is neutralised by the weak acid present — so the pH barely moves. Blood is buffered mainly by the carbonic acid-hydrogen carbonate pair, which holds its pH near 7.4; this is why blood can carry the carbon dioxide of respiration without a dangerous shift in acidity."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Calculate the pH of 0.001 M hydrochloric acid.",
+              "note": "HCl is a strong acid and ionises completely, so [H₃O⁺] = 1 × 10⁻³ mol L⁻¹. pH = −log(10⁻³) = 3.0, and pOH = 14 − 3 = 11."
+            },
+            {
+              "text": "Find the pH of a buffer made from 0.1 M CH₃COOH and 0.1 M CH₃COONa, given pKa = 4.74.",
+              "note": "Henderson-Hasselbalch: pH = pKa + log([salt]/[acid]) = 4.74 + log(0.1/0.1) = 4.74 + log 1 = 4.74 + 0 = 4.74. Equal concentrations of acid and salt give a pH equal to the pKa."
+            },
+            {
+              "text": "Calculate the degree of ionisation of a 0.1 M solution of a weak acid with Ka = 1.8 × 10⁻⁵.",
+              "note": "α = √(Ka/C) = √(1.8 × 10⁻⁵ / 0.1) = √(1.8 × 10⁻⁴) = 1.34 × 10⁻² = 0.0134, so about 1.34% of the acid is ionised — the small value that defines a weak acid."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solubility",
+      "title": "Solubility equilibria of sparingly soluble salts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A saturated solution of a sparingly soluble salt is a heterogeneous equilibrium between the undissolved solid and its ions, for example AgCl(s) ⇌ Ag⁺(aq) + Cl⁻(aq). Because the solid is pure, its amount does not appear in the expression, and the equilibrium constant is called the solubility product, Ksp = [Ag⁺][Cl⁻]. If the solubility of the salt is s mol L⁻¹ then Ksp = s² for a 1:1 salt such as silver chloride, while for a 2:1 salt such as calcium fluoride, CaF₂ ⇌ Ca²⁺ + 2F⁻, Ksp = s(2s)² = 4s³. Comparing Ksp values alone is valid only for salts of the same stoichiometry; for salts of different types the molar solubilities must be calculated first."
+        },
+        {
+          "type": "paragraph",
+          "text": "The common ion effect describes the decrease in solubility of a salt when a second compound supplying one of the same ions is dissolved with it — silver chloride is far less soluble in hydrochloric acid than in pure water, because the added chloride ions push the equilibrium back towards the solid. The same principle governs precipitation: if the ion product Q exceeds Ksp, a precipitate forms until the product falls back to Ksp, and this is the basis of gravimetric analysis and of the qualitative analysis scheme used to separate cations. It also explains why a precipitate of barium sulphate dissolves only in acidified water when competing equilibria such as sulphate protonation remove the sulphate ion."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The solubility of silver chloride is 1.3 × 10⁻⁵ mol L⁻¹. Calculate Ksp.",
+              "note": "AgCl ⇌ Ag⁺ + Cl⁻, so Ksp = s² = (1.3 × 10⁻⁵)² = 1.69 × 10⁻¹⁰ ≈ 1.7 × 10⁻¹⁰ mol² L⁻²."
+            },
+            {
+              "text": "Calculate the solubility of CaF₂ in water given Ksp = 3.9 × 10⁻¹¹.",
+              "note": "CaF₂ ⇌ Ca²⁺ + 2F⁻, so Ksp = s(2s)² = 4s³. Hence s = ∛(3.9 × 10⁻¹¹ / 4) = ∛(9.75 × 10⁻¹²) = 2.1 × 10⁻⁴ mol L⁻¹."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ksp depends only on temperature; it does not change when concentrations are altered, only the position does.",
+            "Precipitation begins when the ion product Q exceeds Ksp.",
+            "A common ion suppresses solubility; an acid can raise solubility by removing the anion of a weak acid.",
+            "Buffer capacity depends on the amounts of weak acid and conjugate salt present, not on their ratio alone.",
+            "pH of a strong acid: take −log of the concentration; of a weak acid: use Ka or the Henderson-Hasselbalch form."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Le Chatelier's response to each disturbance",
+      "description": "A central equilibrium box labelled \"A + B ⇌ C + D, ΔH < 0\" with four labelled arrows around it: adding reactant A points right with \"shifts forward\"; increasing pressure points to the side with fewer gas molecules; adding heat (raising temperature) points left because the reverse direction is endothermic; removing product C points right. Each arrow notes that K changes only when the temperature changes.",
+      "labels": [
+        "Concentration changes shift, but K stays constant",
+        "Pressure favours the side with fewer gas moles",
+        "Temperature change is the only change that alters K",
+        "A catalyst changes the rate, not the position"
+      ]
+    },
+    {
+      "caption": "Figure: Titration curve of a strong acid with a strong base",
+      "description": "A graph of pH against volume of NaOH added: pH starts near 1, rises slowly and almost flatly, then shoots up almost vertically through pH 7 at the equivalence point, and levels off near pH 13; the vertical section is shaded and labelled \"usable indicator range 8-10\", and phenolphthalein is marked as changing colour within that jump.",
+      "labels": [
+        "Equivalence point at pH 7 for strong acid + strong base",
+        "Steep vertical jump spans about pH 4 to 10",
+        "Choose an indicator changing inside the jump",
+        "Half-equivalence point gives pH = pKa for a weak acid"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Dynamic equilibrium: forward and reverse rates are equal, so concentrations stay constant while reactions continue.",
+    "Le Chatelier's principle: a system shifts to partially oppose any imposed change.",
+    "Kc = [products]^coefficients / [reactants]^coefficients; pure solids and liquids are excluded.",
+    "Kp = Kc(RT)^Δn; if Δn = 0 the two constants are equal.",
+    "Q < K means the reaction proceeds forwards; Q > K means backwards; Q = K means equilibrium.",
+    "Only temperature changes the value of K; concentration and pressure change the position only.",
+    "Kw = [H₃O⁺][OH⁻] = 1.0 × 10⁻¹⁴ at 25 °C, so pH + pOH = 14.",
+    "pH = −log[H₃O⁺]; a strong acid gives pH = −log C directly.",
+    "Buffer: pH = pKa + log([salt]/[acid]) resists changes in pH on small additions of acid or base.",
+    "Ksp = s² for a 1:1 salt and 4s³ for a 2:1 salt; the common ion reduces solubility."
+  ],
+  "examFocus": [
+    "Expect a numerical every year: pH of a strong or weak acid, buffer pH from Henderson-Hasselbalch, or Ksp to solubility and back.",
+    "Le Chatelier questions ask you to predict the shift and then explain it in terms of rates or of Q compared with K — state which.",
+    "Writing Kc and Kp expressions, including the exclusion of solids, and deducing the direction from Q versus K is standard 2-3 mark material."
+  ],
+  "vocabulary": [
+    {
+      "word": "Dynamic equilibrium",
+      "meaning": "The state in which forward and reverse reactions continue at equal rates, so concentrations stay constant."
+    },
+    {
+      "word": "Equilibrium constant",
+      "meaning": "The fixed ratio of product to reactant concentrations at a given temperature, written Kc or Kp."
+    },
+    {
+      "word": "Reaction quotient",
+      "meaning": "Q, the same ratio calculated at any instant; comparing Q with K gives the direction of shift."
+    },
+    {
+      "word": "Le Chatelier's principle",
+      "meaning": "A system at equilibrium shifts to partially counteract any change imposed on it."
+    },
+    {
+      "word": "Buffer solution",
+      "meaning": "A solution that resists a change in pH when small amounts of acid or base are added."
+    },
+    {
+      "word": "Solubility product",
+      "meaning": "Ksp, the equilibrium constant for a saturated solution of a sparingly soluble salt."
+    },
+    {
+      "word": "Common ion effect",
+      "meaning": "The reduction in solubility of a salt when a second compound supplies one of the same ions."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-chem-equilibrium-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which change alters the value of the equilibrium constant K for a reaction?",
+      "options": [
+        "Changing the concentration of a reactant",
+        "Changing the total pressure",
+        "Changing the temperature",
+        "Adding a catalyst"
+      ],
+      "correctIndex": 2,
+      "answer": "Changing the temperature",
+      "explanation": "The equilibrium constant depends only on temperature. Concentration and pressure shift the position of equilibrium without changing K, and a catalyst speeds the forward and reverse reactions equally so neither K nor the position changes."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the reaction N₂(g) + 3H₂(g) ⇌ 2NH₃(g), the relation between Kp and Kc is:",
+      "options": [
+        "Kp = Kc",
+        "Kp = Kc(RT)²",
+        "Kp = Kc(RT)⁻²",
+        "Kp = Kc(RT)"
+      ],
+      "correctIndex": 2,
+      "answer": "Kp = Kc(RT)⁻²",
+      "explanation": "Δn = moles of gaseous products − moles of gaseous reactants = 2 − 4 = −2. Since Kp = Kc(RT)^Δn, we get Kp = Kc(RT)⁻² = Kc/(RT)², so Kp is much smaller than Kc for this synthesis of ammonia."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The pH of a 1.0 × 10⁻⁴ M solution of hydrochloric acid is:",
+      "options": [
+        "pH 4",
+        "pH 10",
+        "pH 3",
+        "pH 5"
+      ],
+      "correctIndex": 0,
+      "answer": "pH 4",
+      "explanation": "HCl is a strong acid and ionises completely, so [H₃O⁺] = 1.0 × 10⁻⁴ mol L⁻¹. pH = −log(10⁻⁴) = 4, and correspondingly pOH = 14 − 4 = 10."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solubility of a 1:1 salt MX is 1.4 × 10⁻⁵ mol L⁻¹. Its Ksp is:",
+      "options": [
+        "1.4 × 10⁻⁵",
+        "1.96 × 10⁻¹⁰",
+        "2.8 × 10⁻⁵",
+        "1.4 × 10⁻³"
+      ],
+      "correctIndex": 1,
+      "answer": "1.96 × 10⁻¹⁰",
+      "explanation": "For MX ⇌ M⁺ + X⁻ the ions are produced in a 1:1 ratio, so Ksp = s × s = s² = (1.4 × 10⁻⁵)² = 1.96 × 10⁻¹⁰ mol² L⁻². Option C forgets to square, and option D takes a square root instead."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The ionic product of water at 25 °C is __________ mol² L⁻².",
+      "answer": "1.0 × 10⁻¹⁴",
+      "explanation": "Kw = [H₃O⁺][OH⁻] = 1.0 × 10⁻¹⁴ at 25 °C. In neutral water both ions are 1.0 × 10⁻⁷ mol L⁻¹, and any increase in one is compensated by a decrease in the other."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The pH of a buffer containing equal concentrations of a weak acid and its salt equals the __________ of the acid.",
+      "answer": "pKa",
+      "explanation": "From the Henderson-Hasselbalch equation, pH = pKa + log([salt]/[acid]); when the two concentrations are equal the log term is log 1 = 0, so pH = pKa."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define dynamic equilibrium and explain why the concentration of a reactant stops changing even though the reaction has not stopped.",
+      "answer": "Dynamic equilibrium is the state in which the forward and reverse reactions occur at exactly equal rates, so that the net concentrations of reactants and products remain constant. The reaction has not stopped: molecules continue to react in both directions, but for every molecule of reactant consumed in the forward direction one is regenerated in the reverse direction. Because the two rates are equal, the measured concentrations become steady, which is why the term dynamic is essential — a system at equilibrium is microscopically very active even though it appears unchanged.",
+      "explanation": "The word dynamic is essential: markers look for the statement that both reactions continue at equal rates rather than that the reactions have stopped."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Le Chatelier's principle and predict the effect of increasing the pressure on the equilibrium N₂ + 3H₂ ⇌ 2NH₃.",
+      "answer": "Le Chatelier's principle states that if a system at equilibrium is subjected to a change in concentration, pressure or temperature, the system shifts its equilibrium position so as to oppose the change. Increasing the pressure by decreasing the volume raises the concentration of every gaseous species. The system responds by shifting towards the side with fewer moles of gas, which is the product side: four moles of gaseous reactants produce two moles of gaseous ammonia, so the equilibrium shifts forward and the yield of ammonia rises.",
+      "explanation": "Le Chatelier questions require both the prediction and its justification, and for pressure changes the justification is always the comparison of gas moles on either side."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how a buffer works, then calculate the pH of a buffer prepared from 0.2 M ethanoic acid and 0.1 M sodium ethanoate (pKa = 4.74), and state the pH after adding a negligible amount of strong acid.",
+      "answer": "A buffer consists of a weak acid and its conjugate salt in comparable amounts. The weak acid reservoir neutralises added base, while the conjugate base neutralises added acid, so additions are converted into the much weaker members of the pair and the hydrogen-ion concentration changes very little. Using Henderson-Hasselbalch, pH = 4.74 + log(0.1/0.2) = 4.74 + log 0.5 = 4.74 − 0.30 = 4.44. Because the reservoirs of acid and conjugate base are large relative to a negligible addition of strong acid, that acid is consumed by the ethanoate ions and the pH remains at about 4.44 — the practical meaning of resistance to pH change.",
+      "explanation": "Buffer answers must name both reservoirs - the weak acid neutralising added base and the conjugate salt neutralising added acid - before any pH calculation is attempted."
+    },
+    {
+      "id": "cbse11-chem-equilibrium-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two bottles contain saturated calcium fluoride. One is pure water, the other is 0.1 M hydrofluoric acid (a weak acid, Ka = 6.6 × 10⁻⁴). Explain, using the common ion effect and acid-base equilibrium together, why the solubilities differ, and calculate the molar solubility in pure water given Ksp(CaF₂) = 3.9 × 10⁻¹¹.",
+      "answer": "In pure water CaF₂ ⇌ Ca²⁺ + 2F⁻ with Ksp = 4s³, so s = ∛(3.9 × 10⁻¹¹/4) = ∛(9.75 × 10⁻¹²) = 2.1 × 10⁻⁴ mol L⁻¹. In 0.1 M HF two effects act in opposite directions. The common ion effect — the HF supplies F⁻ ions — increases Q above Ksp and drives precipitation, reducing solubility. But HF is a weak acid, so its F⁻ is present only in small amount, and in the acid environment some F⁻ is protonated to HF, which removes free fluoride and pulls the dissolution equilibrium forward, increasing solubility. Which effect wins depends on the concentration of free F⁻: for the concentrated common-ion case solubility falls markedly, while in a sufficiently acidic solution the fluoride is buffered away as HF and the salt becomes more soluble. The comparison shows why the standard qualitative analysis separates cations by controlling both pH and anion concentration rather than by Ksp values alone.",
+      "explanation": "This is a two-effect problem: the common ion reduces solubility while protonation of fluoride by the acid increases it, and the net result depends on which equilibrium is stronger."
+    }
+  ]
+}

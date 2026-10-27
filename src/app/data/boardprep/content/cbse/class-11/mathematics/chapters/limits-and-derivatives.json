@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-limits",
+  "title": "Limits and Derivatives",
+  "kind": "mathematics",
+  "tagline": "Approach rather than arrival: the idea of a limit, the derivative as its child, and the algebra that makes both computable.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Calculus begins with a change of question — not what a function equals, but what it approaches — and this chapter builds that idea carefully before differentiating the functions you already know. It develops the limit informally as the syllabus prescribes, introduces the derivative through the difference quotient and then through limits of standard functions, and provides the algebraic machinery: factorisation for indeterminate forms, standard limits, and the rules for differentiating sums, products and quotients.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-V: Calculus — 8 of the 80 marks, shared with Mathematical Reasoning."
+      },
+      {
+        "label": "The idea",
+        "value": "lim (x → a) f(x) = L means f(x) gets arbitrarily close to L as x approaches a."
+      },
+      {
+        "label": "Derivative",
+        "value": "f′(x) = lim (h → 0) [f(x + h) − f(x)]/h — the limit of the average rate of change."
+      },
+      {
+        "label": "Standard results",
+        "value": "lim (x → 0) sin x/x = 1; lim (x → 0) (1 − cos x)/x = 0; lim (x → 0) (eˣ − 1)/x = 1."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe a limit informally and evaluate simple limits by substitution.",
+    "Resolve indeterminate forms by factorisation or rationalisation.",
+    "Apply the standard limits involving sin x, cos x and eˣ.",
+    "State the derivative as a limit and find f′(x) from first principles.",
+    "Differentiate sums, products and quotients of the standard functions."
+  ],
+  "learn": [
+    {
+      "id": "idea",
+      "title": "The idea of a limit",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A limit answers a question substitution cannot: what value does f(x) approach as x approaches a, even when x never equals a? The formal wording — for every tolerance there is a range of x-values around a inside which f(x) stays within that tolerance of L — is developed informally in this syllabus, and the working definition is simpler: the limit of f(x) as x tends to a is L if the values of f(x) get and stay arbitrarily close to L as x gets arbitrarily close to a, from both sides. The requirement of both sides matters: if the left-hand approach and the right-hand approach settle on different values, the limit does not exist, and being able to state that is as much a part of the topic as computing one."
+        },
+        {
+          "type": "paragraph",
+          "text": "Polynomial and rational functions are friendly because substitution usually works — plug in a and read the answer. The cases that need work are the indeterminate forms 0/0 and ∞/∞, where substitution produces an expression that looks like a number divided by zero or an infinity divided by infinity, both of which mean only that more information is required. The standard remedies are algebraic: factorise the numerator and denominator and cancel the common factor responsible for the zero (the classical lim (x → 2) (x² − 4)/(x − 2) = lim (x → 2) (x + 2) = 4), or rationalise when a square root is involved. The cancelled factor being zero at the limit point is precisely why the original expression was undefined there and the limit is not: a limit asks about approach, never about arrival."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Limit = the value approached, not the value attained.",
+            "Substitute first; if it gives a defined number, that is the answer.",
+            "0/0 means: factorise, cancel, then substitute.",
+            "Left-hand and right-hand limits must agree for the limit to exist.",
+            "The point itself may be excluded from the domain — the limit ignores it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard",
+      "title": "Standard limits and the trigonometric pair",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two limits carry the trigonometric part of this chapter, and both are stated in radians — a point worth emphasising because the entire numerical value of the first depends on it. The first is lim (x → 0) sin x/x = 1: for small angles, the sine of an angle is essentially the angle itself, which is the approximation behind the small-angle rule used throughout physics. The second is lim (x → 0) (1 − cos x)/x = 0, which follows from the first using the identity 1 − cos x = 2sin²(x/2): the numerator is quadratic in x while the denominator is linear, so the ratio vanishes. Together these two give the derivative of sin x, since the difference quotient for sin x rearranges into exactly these pieces."
+        },
+        {
+          "type": "paragraph",
+          "text": "The exponential pair behaves similarly: lim (x → 0) (eˣ − 1)/x = 1 and its base-a generalisation lim (x → 0) (aˣ − 1)/x = log a, statements that define the number e as the unique base for which that limit equals 1 — the reason e is the natural base of calculus. When limits combine these standard results, the arithmetic of limits applies: the limit of a sum is the sum of the limits, of a product the product, and of a quotient the quotient of the limits provided the denominator’s limit is not zero. An expression built from several factors is handled piece by piece, and the standard limits are recognised by their shape — a difference of trig terms over x, or an exponential difference over x — before any manipulation begins."
+        },
+        {
+          "type": "table",
+          "caption": "The standard limits of this chapter",
+          "columns": [
+            "Limit (as x → 0)",
+            "Value",
+            "Where it comes from"
+          ],
+          "rows": [
+            [
+              "sin x / x",
+              "1",
+              "Geometric squeeze; radians essential"
+            ],
+            [
+              "(1 − cos x) / x",
+              "0",
+              "From sin x/x via 1 − cos x = 2sin²(x/2)"
+            ],
+            [
+              "tan x / x",
+              "1",
+              "Since tan = sin/cos and cos 0 = 1"
+            ],
+            [
+              "(eˣ − 1) / x",
+              "1",
+              "Defines e as the natural base"
+            ],
+            [
+              "(aˣ − 1) / x",
+              "log a",
+              "Converts to base e"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "lim (x → 0) sin 5x / x.",
+              "note": "Write as 5 × sin 5x/(5x) → 5 × 1 = 5."
+            },
+            {
+              "text": "lim (x → 0) (1 − cos 3x)/x².",
+              "note": "Half-angle gives 2sin²(3x/2)/x² → 2 × (3/2)² × 1 = 9/2."
+            },
+            {
+              "text": "lim (x → 0) (e²ˣ − 1)/x.",
+              "note": "Write as 2 × (e²ˣ − 1)/(2x) → 2 × 1 = 2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "derivative",
+      "title": "The derivative as a limit",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The derivative of a function at x is the limit of the difference quotient as the increment h tends to zero: f′(x) = lim (h → 0) [f(x + h) − f(x)]/h. Geometrically it is the slope of the tangent to the curve at that point, and physically it is the instantaneous rate of change — the resolution of the ancient paradox that an object moving at a definite speed is, at each instant, not moving at all, since speed over a zero time interval is 0/0. The derivative-from-first-principles calculation is the discipline of the chapter: substitute f(x + h), expand, group terms containing h, factor h, cancel it against the denominator, and only then let h approach zero. The cancel step is what makes the limit finite, and an answer where h remains in the expression means the algebra was incomplete."
+        },
+        {
+          "type": "paragraph",
+          "text": "Carrying out that procedure for sin x, cos x and xⁿ builds the derivative table from its foundations: the trigonometric derivatives emerge directly from the two standard limits, while the power rule f(x) = xⁿ giving f′(x) = nxⁿ⁻¹ is established for positive integral n by the binomial expansion — another pleasing internal link to Unit-II, since the expansion supplies exactly the terms the difference quotient needs before cancellation. Once derived, these results are used as rules. The chapter then adds the arithmetic of derivatives: the derivative of a sum is the sum of the derivatives, and the product and quotient rules handle combinations — results you prove by returning to the limit definition with the product or quotient written out."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Derivative of sin x from first principles.",
+              "note": "Difference quotient → cos x × lim (h → 0) sin h/h = cos x."
+            },
+            {
+              "text": "Derivative of x³ by the definition.",
+              "note": "Expand (x + h)³, cancel the x³ terms, divide by h and set h = 0: 3x²."
+            },
+            {
+              "text": "Derivative of 1/x.",
+              "note": "From the power rule with n = −1: −1/x², matching the quotient rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "title": "Differentiation rules and their use",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "With the basic derivatives in hand, the rules extend them to every function you can build from them. Sums and constant multiples pass through the derivative unchanged: (f + g)′ = f′ + g′ and (cf)′ = cf′. Products do not: the product rule (fg)′ = f′g + fg′ accounts for the fact that both factors are changing, and the quotient rule (f/g)′ = (f′g − fg′)/g² is its rearranged sibling — both derive cleanly from the limit definition and both are worth reproducing once from that definition before being memorised, because the order of terms in the numerator of the quotient rule (differentiator first in the subtraction) is exactly where slips occur."
+        },
+        {
+          "type": "paragraph",
+          "text": "Technique matters as much as the rules themselves. Simplify before differentiating: expand a product, combine fractions, or rewrite 1/xⁿ as x⁻ⁿ so the power rule applies directly, and the algebra of differentiation becomes trivial where it might otherwise be long. The chain rule is not formally in this syllabus’s statements, but composite expressions are still handled by rewriting in terms of an inner quantity — differentiating sin 5x via the standard limit treatment, for instance — and this prepares the ground for the formal chain rule in Class XII. Always state which rule you are applying in an exam answer: recognising the structure (sum, product, quotient) and naming the rule is where method marks are concentrated."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Substitute and simplify before taking any limit.",
+            "Factorise or rationalise the 0/0 form, then cancel the zero-causing factor.",
+            "f′(x) = lim (h → 0) [f(x+h) − f(x)]/h — cancel h before setting h = 0.",
+            "Standard limits: sin x/x → 1, (1 − cos x)/x → 0, (eˣ − 1)/x → 1.",
+            "(fg)′ = f′g + fg′; (f/g)′ = (f′g − fg′)/g² — order in the numerator matters.",
+            "Simplify powers and fractions first: derivative work is 90% algebra."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A limit approached from both sides",
+      "description": "A curve with a small open circle at x = a showing the point is excluded, dashed vertical guides at a − h and a + h on either side, and corresponding points on the curve at heights approaching the same level L; a horizontal dashed line at L marked as the value the function approaches from left and right.",
+      "labels": [
+        "x approaches a from left and right",
+        "f(x) is never evaluated at a",
+        "Both sides settle on L",
+        "Open circle: point excluded",
+        "If the sides disagreed: no limit"
+      ]
+    },
+    {
+      "caption": "Figure: The derivative as the slope of a secant becoming a tangent",
+      "description": "A curve with two points P and Q joined by a secant whose slope is labelled [f(x+h) − f(x)]/h; a sequence of ghosted positions for Q sliding towards P, and a final tangent line at P labelled f′(x) as h tends to zero.",
+      "labels": [
+        "Secant slope: average rate over h",
+        "Q slides towards P (h → 0)",
+        "Secant tends to the tangent",
+        "Tangent slope = f′(x)",
+        "Instantaneous rate of change"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A limit describes approach, never arrival at the point.",
+    "Substitute first; only indeterminate forms 0/0 need further work.",
+    "Factorise or rationalise, cancel the zero factor, then substitute.",
+    "Left and right limits must agree or the limit fails to exist.",
+    "sin x/x → 1 and (1 − cos x)/x → 0 as x → 0 (radians).",
+    "(eˣ − 1)/x → 1 defines e as the natural base.",
+    "f′(x) = lim (h → 0) [f(x + h) − f(x)]/h is the derivative by definition.",
+    "The derivative is the tangent slope and the instantaneous rate of change.",
+    "Derivatives: (xⁿ)′ = nxⁿ⁻¹, (sin x)′ = cos x, (cos x)′ = −sin x.",
+    "(fg)′ = f′g + fg′ and (f/g)′ = (f′g − fg′)/g²; simplify before differentiating."
+  ],
+  "examFocus": [
+    "Show the cancellation step explicitly in every 0/0 limit.",
+    "State the rule used for each differentiation — method marks attach to it.",
+    "First-principles answers must cancel h before setting h = 0.",
+    "Radians are assumed in trig limits; note it if the question is in degrees."
+  ],
+  "vocabulary": [
+    {
+      "word": "Limit",
+      "meaning": "The value a function approaches as its input approaches a point."
+    },
+    {
+      "word": "Indeterminate form",
+      "meaning": "A 0/0 or ∞/∞ result signalling that more work is needed."
+    },
+    {
+      "word": "Derivative",
+      "meaning": "The limit of the difference quotient — the instantaneous rate of change."
+    },
+    {
+      "word": "Difference quotient",
+      "meaning": "[f(x + h) − f(x)]/h, the average rate over an interval h."
+    },
+    {
+      "word": "Tangent",
+      "meaning": "The line whose slope is the derivative at that point."
+    },
+    {
+      "word": "Secant",
+      "meaning": "A line through two curve points, becoming the tangent as they merge."
+    },
+    {
+      "word": "Product rule",
+      "meaning": "(fg)′ = f′g + fg′ — both changing factors contribute."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-lim-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of lim (x → 0) sin 7x / x is:",
+      "options": [
+        "approaches 1",
+        "approaches 7",
+        "approaches 0",
+        "approaches 1/7"
+      ],
+      "correctIndex": 1,
+      "answer": "approaches 7",
+      "explanation": "Rewrite as 7 × sin 7x/(7x) → 7 × 1 = 7 using sin θ/θ → 1."
+    },
+    {
+      "id": "cbse11-math-lim-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement about lim (x → 2) (x² − 4)/(x − 2) is correct?",
+      "options": [
+        "The limit equals 4",
+        "The limit is 0",
+        "No limit exists",
+        "The limit is 2"
+      ],
+      "correctIndex": 0,
+      "answer": "The limit equals 4",
+      "explanation": "Factorise: (x − 2)(x + 2)/(x − 2) = x + 2 → 4 as x → 2; the cancelled factor was never part of the limit."
+    },
+    {
+      "id": "cbse11-math-lim-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The derivative of x⁴ by the definition of the derivative is:",
+      "options": [
+        "4x³",
+        "x³",
+        "4x⁴",
+        "3x⁴"
+      ],
+      "correctIndex": 0,
+      "answer": "4x³",
+      "explanation": "The power rule (xⁿ)′ = nxⁿ⁻¹, itself derived from the limit definition, gives 4x³."
+    },
+    {
+      "id": "cbse11-math-lim-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The derivative of sin x at x = 0 is:",
+      "options": [
+        "cos 0 = 1",
+        "cos 0 = 0",
+        "sin 0 = 0",
+        "It does not exist"
+      ],
+      "correctIndex": 0,
+      "answer": "cos 0 = 1",
+      "explanation": "(sin x)′ = cos x, and cos 0 = 1 — the tangent to the sine curve at the origin has slope 1."
+    },
+    {
+      "id": "cbse11-math-lim-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A result such as 0/0 obtained by substitution is called an ________ form.",
+      "answer": "indeterminate",
+      "explanation": "It signals that more algebraic work is needed; it is not a value."
+    },
+    {
+      "id": "cbse11-math-lim-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The limit lim (x → 0) (1 − cos x)/x equals ________ .",
+      "answer": "zero",
+      "explanation": "Using 1 − cos x = 2sin²(x/2), the numerator is quadratic while the denominator is linear, so the ratio tends to 0."
+    },
+    {
+      "id": "cbse11-math-lim-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate lim (x → 3) (x² − 9)/(x − 3) and explain why substitution alone does not give the answer.",
+      "answer": "Substituting x = 3 gives (9 − 9)/(3 − 3) = 0/0, an indeterminate form: the expression is genuinely undefined at x = 3 because its denominator vanishes, so the value cannot be read off directly. But the limit concerns the approach to 3, not the arrival. Factorise the numerator: x² − 9 = (x − 3)(x + 3). The expression becomes (x − 3)(x + 3)/(x − 3), and for every x ≠ 3 the common factor cancels, leaving x + 3. Now the limit is the value of this equal-except-at-one-point function as x tends to 3: lim (x → 3)(x + 3) = 6. Verification: evaluate the original at x = 3.01: (3.01² − 9)/0.01 = (9.0601 − 9)/0.01 = 6.01, which is close to 6 and approaches it as x nears 3 ✓. So the limit is 6 even though the function is undefined at 3 itself.",
+      "explanation": "The 0/0 diagnosis, the factorisation and cancellation, the final substitution, and a numerical check near the point."
+    },
+    {
+      "id": "cbse11-math-lim-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find f′(x) from the first principles for f(x) = x².",
+      "answer": "By definition, f′(x) = lim (h → 0) [f(x + h) − f(x)]/h. Substitute: f(x + h) = (x + h)² = x² + 2xh + h², so the numerator is (x² + 2xh + h²) − x² = 2xh + h². Divide by h: (2xh + h²)/h = 2x + h for every h ≠ 0 — this is the cancel step, and it is what makes the limit finite. Now let h → 0: 2x + h tends to 2x, so f′(x) = 2x. Checks: the result agrees with the power rule (x²)′ = 2x¹ = 2x ✓; at x = 3 the derivative is 6, the familiar slope of y = x² at (3, 9) ✓; and since the answer is linear and increasing, the parabola steepens as x grows, as it visibly does.",
+      "explanation": "The definition stated, the expansion, the cancellation of h, the limit taken, and agreement with the power rule."
+    },
+    {
+      "id": "cbse11-math-lim-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that lim (x → 0) sin x / x = 1 using a geometric argument, and hence find lim (x → 0) (1 − cos x)/x.",
+      "answer": "Geometric proof: draw a circle of radius 1 with a central angle x (in radians) in the first quadrant. The three areas satisfy sector < triangle < outer triangle: the sector of angle x has area x/2, the triangle OAB (O centre, A and B on the circle) has area (1/2)·1·1·sin x = sin x/2, and the triangle formed by the tangent at A together with OB has area (1/2)·1·tan x = tan x/2. So x/2 < sin x/2 < tan x/2 for 0 < x < π/2. Dividing by sin x/2 (positive here) and rearranging gives 1 < (sin x)/x... carefully: from x < sin x < tan x we divide by x: 1 < sin x/x < tan x/x = 1/cos x. As x → 0⁺, cos x → 1 so 1/cos x → 1, and by the squeeze theorem sin x/x → 1 from above. Since sin x/x is an even function — sin(−x)/(−x) = sin x/x — the left-hand limit agrees, so the two-sided limit is 1. Hence sin x/x → 1. Second part: 1 − cos x = 2sin²(x/2), so (1 − cos x)/x = 2sin²(x/2)/x = (sin(x/2)/(x/2))² × (x/4) × 2... more cleanly: 2sin²(x/2)/x = [sin(x/2)/(x/2)]² · (x/2) · ... = 1² × (x/2) × (2/1)... letting the algebra settle: = (sin(x/2)/(x/2))² × (x/2) → 1 × 0 = 0. So (1 − cos x)/x → 0. Check numerically: at x = 0.01 rad, (1 − cos 0.01)/0.01 ≈ (0.00005)/0.01 = 0.005 ≈ 0 ✓.",
+      "explanation": "The three-area squeeze with correct ordering, the squeeze conclusion with the even-function argument, and the half-angle derivation for the second limit with a numerical check."
+    },
+    {
+      "id": "cbse11-math-lim-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why lim (x → 0) |x|/x exists from neither side jointly, what the left- and right-hand limits are, and what this reveals about the derivative of f(x) = |x| at x = 0.",
+      "answer": "Compute the two sides separately. For x > 0, |x| = x so |x|/x = 1 for every positive x, and the right-hand limit is 1. For x < 0, |x| = −x so |x|/x = −1 for every negative x, and the left-hand limit is −1. The two one-sided limits are finite but unequal — 1 ≠ −1 — so the two-sided limit does not exist: a limit exists only when both approaches settle on the same value, and here they settle on different constants with no compromise available, since the function is exactly ±1 everywhere except at the origin. (At x = 0 the expression is 0/0, but that single point is irrelevant to the limit, which is about approach.) Now the derivative of f(x) = |x| at 0: it is lim (h → 0) (|0 + h| − |0|)/h = lim (h → 0) |h|/h — the same expression we have just shown has no two-sided limit. So the difference quotient fails to settle on a single value: approached from the right it is always 1, from the left always −1. The derivative at 0 therefore does not exist, and geometrically the reason is visible: |x| has a corner at the origin, with slope +1 to the right and −1 to the left, and no single tangent line can be drawn there. This is the standard example separating continuity from differentiability: |x| is continuous at 0 (the function value matches the limit of the function, 0) yet not differentiable there, proving that continuity is necessary but not sufficient for a derivative to exist — a sharp corner is continuous but has no defined slope. The lesson: differentiability requires the function to be locally indistinguishable from a straight line, and a corner spoils that at exactly the point where the two one-sided difference quotients disagree.",
+      "explanation": "Both one-sided limits computed and contrasted, the difference quotient at 0 identified with that expression, the non-existence conclusion, and the continuity-versus-differentiability distinction with the corner picture."
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-waves",
+  "title": "Waves",
+  "kind": "physics",
+  "tagline": "Travelling waves, superposition, standing waves and beats: how disturbances move without matter moving.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "A wave carries energy and momentum across space while the medium merely oscillates in place, and this chapter develops that idea from the displacement relation of a progressive wave through superposition and reflection to the standing waves in strings and organ pipes that make musical sound quantitative. Beats — the interference of two close frequencies — complete the unit, and every topic here extends the SHM of the previous chapter from one oscillator to a coupled chain of them. The subject closes the mechanics course exactly where Class XII electromagnetism picks it up: with waves as a unifying idea.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-X: Oscillations and Waves (10 marks shared with the Oscillations chapter)."
+      },
+      {
+        "label": "Travelling wave",
+        "value": "y = A sin(ωt − kx) for a wave in +x; v = ω/k = fλ."
+      },
+      {
+        "label": "Superposition",
+        "value": "Displacements add algebraically where waves overlap; no wave disturbs another."
+      },
+      {
+        "label": "Standing waves",
+        "value": "Fixed nodes and moving antinodes from two equal counter-travelling waves; strings: fₙ = nv/2L; open pipes: same; closed pipes: odd harmonics only."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish transverse from longitudinal waves and describe wave motion.",
+    "Write and use the displacement relation of a progressive wave.",
+    "Apply the principle of superposition to interference and beats.",
+    "Derive the harmonic frequencies of standing waves in strings and organ pipes.",
+    "Explain reflection at fixed and free ends and the formation of nodes and antinodes."
+  ],
+  "learn": [
+    {
+      "id": "progressive",
+      "title": "Wave motion and the travelling wave",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A wave is a disturbance that travels through a medium (or through vacuum, in the case of light) transferring energy without transporting matter: each particle of the medium executes the same oscillation as its neighbour, delayed by the time the disturbance takes to arrive. The classification follows the direction of particle motion relative to wave travel — transverse when they are perpendicular (waves on a string, surface ripples) and longitudinal when parallel (sound in air, where compressions and rarefactions replace crests and troughs). The wave speed is set by the medium’s properties, not by the source: once a wave leaves the vibrator, its speed belongs to the string or the air. Connecting speed, wavelength and frequency is the wave equation v = fλ, and since the frequency is imposed by the source while the speed is imposed by the medium, it is the wavelength that adjusts — the picture to hold when reasoning about waves entering new media."
+        },
+        {
+          "type": "paragraph",
+          "text": "The displacement relation of a travelling wave, y = A sin(ωt − kx) for motion along +x, encodes everything: ωt − kx is the phase, with the wave number k = 2π/λ measuring phase advance per metre. Two readings of that expression are worth practising. Hold x fixed and the sine describes SHM of that particle — every particle of the medium is a little oscillator, exactly as the previous chapter described. Hold t fixed and the sine describes the wave’s shape at that instant, a sinusoid of wavelength λ. The minus sign in (ωt − kx) is what makes the pattern move rightward: to keep the phase constant as t grows, x must grow too, so the crest advances at speed ω/k = v. Reversing the sign sends the wave the other way, and adding a reflected wave to an incident one — the next lesson’s central operation — is where standing waves come from."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Waves transfer energy; the medium oscillates without net transport.",
+            "Transverse: particle motion ⊥ propagation. Longitudinal: parallel.",
+            "v = fλ: frequency from the source, speed from the medium.",
+            "y = A sin(ωt − kx) describes a wave travelling in +x.",
+            "Fixed time: the spatial shape. Fixed position: that particle’s SHM.",
+            "The minus sign in the phase makes the pattern travel forward."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "superposition",
+      "title": "Superposition, reflection and interference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The principle of superposition states that when two waves meet, the resultant displacement at any point is the algebraic sum of the individual displacements — the waves pass through one another completely undisturbed, each continuing as if alone. This seemingly mild statement produces all the drama of the subject. Waves meeting in step reinforce (constructive interference, amplitude adding), waves meeting out of step cancel (destructive interference, amplitude subtracting), and the outcome depends entirely on the phase difference at the meeting point — which is why a thin oil film shows colours (path-length differences in the reflected films) and why noise-cancelling headphones work by generating an inverted wave. Reflection follows the same accounting: at a fixed end the wave inverts (a crest returns as a trough), while at a free end it returns uninverted, and the reason in each case is the boundary condition — a fixed end cannot move, so the string must supply the mirror-image displacement."
+        },
+        {
+          "type": "paragraph",
+          "text": "Combining an incident wave with its own reflection is the recipe for standing waves. Two identical waves travelling in opposite directions give y = A sin(ωt − kx) + A sin(ωt + kx), which by trigonometry becomes 2A sin(ωt) cos(kx): the time part and the space part have separated. The pattern no longer travels — instead every point oscillates with the same frequency but different amplitudes, and the cos(kx) factor fixes where those amplitudes vanish (nodes, where the two waves always cancel exactly) and where they peak (antinodes, where they always reinforce). Energy in such a pattern sloshes between the segments rather than travelling down the string, which is why a plucked guitar string’s vibration stays localised between its fixed ends, and why standing waves are the natural language of instrument design — the subject of the next lesson."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Superposition: displacements add; waves do not disturb one another.",
+            "In step → constructive; out of step → destructive interference.",
+            "Fixed end: reflection with inversion. Free end: no inversion.",
+            "Incident + reflected identical waves → standing wave.",
+            "Standing wave: y = 2A sin(ωt) cos(kx) — fixed nodes, oscillating antinodes.",
+            "Standing waves trap energy; travelling waves transport it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standing",
+      "title": "Standing waves in strings and pipes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A string of length L fixed at both ends can only host standing waves whose ends are nodes, so the allowed wavelengths satisfy L = nλ/2, giving λₙ = 2L/n and, since the speed v is fixed by the string’s tension and density, the allowed frequencies fₙ = nv/2L with n = 1, 2, 3, …. The lowest (n = 1) is the fundamental, and the others are its harmonics — integer multiples that together give the string its timbre. Plucking or bowing excites a mixture of these modes, and instrument design is the art of selecting among them: a shorter or tighter string raises the pitch (v rises or L falls), which is why frets shorten the vibrating length and tuning pegs alter the tension. The open-open pipe behaves identically — both open ends are antinodes, the same half-wavelength fitting applies, and the same fₙ = nv/2L results, with the air column playing the role of the string."
+        },
+        {
+          "type": "paragraph",
+          "text": "The closed-open pipe breaks the symmetry: one end is a node, the other an antinode, so a quarter wavelength fits, λ = 4L, and the allowed frequencies are the odd harmonics fₙ = nv/4L with n odd — a column that sounds an octave lower than the open pipe of the same length and produces a hollower timbre because the even harmonics are simply absent. This is why clarinets (approximately closed-open) and flutes (open-open) speak so differently, and why an organ’s stops select pipe types to change colour rather than pitch. Speed of sound enters every one of these results through v = fλ, and the standard calculation — given a pipe length and the speed of sound, list the resonant wavelengths, or given a tuning fork, find which pipe lengths resonate — follows directly from the two formulae. The resonance-tube experiment of the practical syllabus measures the speed of sound by exactly this route, using the two resonance positions to eliminate the end correction."
+        },
+        {
+          "type": "table",
+          "caption": "Standing-wave systems compared",
+          "columns": [
+            "System",
+            "End conditions",
+            "Frequencies"
+          ],
+          "rows": [
+            [
+              "String fixed both ends",
+              "Nodes at both ends",
+              "fₙ = nv/2L, all harmonics"
+            ],
+            [
+              "Pipe open both ends",
+              "Antinodes at both ends",
+              "fₙ = nv/2L, all harmonics"
+            ],
+            [
+              "Pipe closed at one end",
+              "Node and antinode",
+              "fₙ = nv/4L, odd harmonics only"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "String 0.5 m, v = 100 m/s: fundamental?",
+              "note": "f₁ = v/2L = 100 Hz."
+            },
+            {
+              "text": "Closed pipe of 0.25 m, v = 340 m/s: lowest resonance?",
+              "note": "f = v/4L = 340 Hz."
+            },
+            {
+              "text": "Double a string’s tension: fundamental factor?",
+              "note": "v ∝ √T, so f₁ rises by √2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beats",
+      "title": "Beats, and the wave idea across physics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Beats occur when two waves of slightly different frequency interfere: the phase difference between them advances slowly through each cycle, so the resultant amplitude waxes and wanes periodically at the beat frequency equal to the difference of the two frequencies. The ear hears this as a periodic pulsation — f₁ − f₂ throbs per second — and the phenomenon is a practical tool as well as a curiosity: piano tuners listen for beats to vanish, and the syllabus’s standard problems ask either for the beat frequency from two given tuning forks or for the unknown frequency of one fork given the other and the beat rate. The subtlety worth noting is that a single beat rate cannot distinguish f from f ± f_beat, which is why the tuner must tighten or loosen and observe whether the throbbing speeds up or slows before deciding the direction of the error."
+        },
+        {
+          "type": "paragraph",
+          "text": "The chapter closes a course as well as a topic. Oscillations and waves are the thread running from the pendulum clock to sound to light: the same superposition that tunes a piano governs the interference of light waves and the diffraction gratings of Class XII optics; standing waves in a vibrating string are the classical image for the standing waves of Class XII electronics and the quantised states of Class XII atoms; and the wave-particle picture those later chapters introduce is foreshadowed here by the honest statement that mechanical waves need a medium while electromagnetic ones do not. In examinations the topic is repaid by method: draw the picture, state the end condition, count the half-wavelengths that fit, and never mix up the string (both ends nodes) with the closed pipe (one of each). Those four steps answer most standing-wave questions on their own."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Beats: beat frequency = |f₁ − f₂|, heard as periodic waxing of loudness.",
+            "Tuning by beats: the beat rate must fall to zero, and direction checked.",
+            "Mechanical waves need a medium; electromagnetic waves do not.",
+            "Superposition governs interference, beats and standing waves alike.",
+            "Count half-wavelengths between the end conditions — never guess."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A travelling sinusoidal wave at successive instants",
+      "description": "One sine curve drawn twice with a small time offset, the crest displaced to the right between the snapshots, an arrow marking the propagation direction and speed v, and a bracket on the horizontal axis labelled wavelength λ between successive crests with the particle at one marked position shown oscillating vertically only.",
+      "labels": [
+        "Wavelength λ: crest to crest",
+        "Crest advances at speed v",
+        "Particles move vertically only",
+        "v = fλ links speed and wavelength",
+        "Amplitude A: maximum displacement"
+      ]
+    },
+    {
+      "caption": "Figure: A standing wave on a fixed string",
+      "description": "A string fixed at both ends carrying a three-loop standing wave: nodes marked with crosses at both ends and at the two interior points, antinodes marked with double arrows at the centre of each loop, the envelope drawn dashed, and the length annotated as L = 3λ/2 with each loop labelled as half a wavelength.",
+      "labels": [
+        "Nodes: amplitude zero, always",
+        "Antinodes: maximum amplitude",
+        "Envelope is fixed — no travel",
+        "L = nλ/2 with both ends nodes",
+        "Energy shuttles between loops"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A wave transfers energy; the medium oscillates without net transport.",
+    "Transverse ⊥ propagation; longitudinal parallel to it.",
+    "v = fλ — source sets f, medium sets v.",
+    "y = A sin(ωt − kx) travels in +x; the sign of kx fixes direction.",
+    "Superposition: displacements add; waves pass through unchanged.",
+    "Fixed-end reflection inverts; free-end reflection does not.",
+    "Standing waves: fixed nodes, oscillating antinodes, no net energy transport.",
+    "String and open pipe: fₙ = nv/2L, all harmonics.",
+    "Closed-open pipe: fₙ = nv/4L, odd harmonics only.",
+    "Beats: the beat frequency equals the difference of the two interfering frequencies."
+  ],
+  "examFocus": [
+    "State the end condition and count half-wavelengths before computing.",
+    "Distinguish string (two nodes) from closed pipe (node and antinode) explicitly.",
+    "Beats: name the beat-frequency relation and note the two-solution ambiguity.",
+    "Write the wave function’s sign correctly — it decides the travel direction."
+  ],
+  "vocabulary": [
+    {
+      "word": "Wavelength (λ)",
+      "meaning": "Distance between successive equivalent phases, crest to crest."
+    },
+    {
+      "word": "Wave number (k)",
+      "meaning": "2π per wavelength; phase advance per metre."
+    },
+    {
+      "word": "Superposition",
+      "meaning": "Displacements add algebraically where waves overlap."
+    },
+    {
+      "word": "Node",
+      "meaning": "Point of permanently zero amplitude in a standing wave."
+    },
+    {
+      "word": "Antinode",
+      "meaning": "Point of maximum amplitude in a standing wave."
+    },
+    {
+      "word": "Harmonic",
+      "meaning": "An allowed standing-wave frequency: the fundamental times an integer."
+    },
+    {
+      "word": "Beats",
+      "meaning": "Periodic waxing and waning from two close frequencies."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-wav-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A wave on a string is best described as:",
+      "options": [
+        "Longitudinal",
+        "Transverse",
+        "Both at once",
+        "Stationary"
+      ],
+      "correctIndex": 1,
+      "answer": "Transverse",
+      "explanation": "The string particles move perpendicular to the direction of travel, which is the definition of a transverse wave."
+    },
+    {
+      "id": "cbse11-phy-wav-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A tuning fork of 256 Hz and another of 258 Hz are struck together. The beat frequency is:",
+      "options": [
+        "514 Hz",
+        "2 Hz",
+        "4 Hz",
+        "0.5 Hz"
+      ],
+      "correctIndex": 1,
+      "answer": "2 Hz",
+      "explanation": "Beat frequency = |f₁ − f₂| = 2 Hz — two pulses per second, not the sum of the frequencies."
+    },
+    {
+      "id": "cbse11-phy-wav-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A string fixed at both ends of length 0.5 m vibrates in its fundamental mode with wave speed 200 m/s. The frequency is:",
+      "options": [
+        "100 Hz",
+        "200 Hz",
+        "400 Hz",
+        "50 Hz"
+      ],
+      "correctIndex": 1,
+      "answer": "200 Hz",
+      "explanation": "The fundamental fits one half-wavelength into 0.5 m, so λ = 2L = 1 m and f = v/λ = 200/1 = 200 Hz; the first overtone would sit at twice this."
+    },
+    {
+      "id": "cbse11-phy-wav-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which set of harmonics can a pipe closed at one end produce?",
+      "options": [
+        "All integers",
+        "Odd harmonics only",
+        "Even harmonics only",
+        "No harmonics"
+      ],
+      "correctIndex": 1,
+      "answer": "Odd harmonics only",
+      "explanation": "The node-at-one-end antinode-at-the-other condition fits only quarter-wavelength multiples, so fₙ = nv/4L with n odd — the even harmonics are absent."
+    },
+    {
+      "id": "cbse11-phy-wav-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance between two successive crests of a wave is its ________ .",
+      "answer": "wavelength",
+      "explanation": "Denoted λ; it equals the wave speed divided by the frequency."
+    },
+    {
+      "id": "cbse11-phy-wav-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The principle of ________ states that displacements of overlapping waves add algebraically.",
+      "answer": "superposition",
+      "explanation": "Waves pass through one another undisturbed; the resultant is their sum."
+    },
+    {
+      "id": "cbse11-phy-wav-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between transverse and longitudinal waves, giving one example of each, and state what a wave transfers.",
+      "answer": "In a transverse wave the particles of the medium oscillate perpendicular to the direction in which the wave travels — the classic example is a wave on a string, where each point moves up and down while the disturbance travels along the string; surface water waves are a similar case. In a longitudinal wave the particles oscillate parallel to the direction of travel, so the medium alternately compresses and rarefies — sound in air is the standard example, consisting of compressions (regions of raised pressure) and rarefactions (regions of lowered pressure) marching forward. What a wave transfers is energy (and momentum), not matter: each particle of the medium oscillates about its own equilibrium position and returns to rest after the wave has passed, so no particle travels with the wave — only the state of disturbance, and the energy it carries, moves through the medium.",
+      "explanation": "Both wave types distinguished by the direction of oscillation, an example each, and the energy-not-matter statement."
+    },
+    {
+      "id": "cbse11-phy-wav-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain the formation of a standing wave by superposition of two identical travelling waves in opposite directions, defining nodes and antinodes.",
+      "answer": "Take two identical sinusoidal waves of amplitude A, frequency f and wavelength λ travelling in opposite directions: y₁ = A sin(ωt − kx) and y₂ = A sin(ωt + kx). By the principle of superposition the resultant is their algebraic sum, and the trigonometric identity for the sum of sines gives y = 2A sin(ωt) cos(kx). The crucial feature is that the variables have separated: the time dependence sin(ωt) is the same at every point, while the amplitude factor cos(kx) depends only on position. The pattern therefore does not travel — it stands still, oscillating in place at the original frequency. Nodes are points where cos(kx) = 0 permanently, so the two waves cancel exactly there at all times (the string never moves); antinodes are points where |cos(kx)| = 1, so the waves always reinforce and the amplitude reaches 2A. Successive nodes lie half a wavelength apart, and the fixed ends of a stretched string must be nodes, which is why only wavelengths fitting L = nλ/2 are allowed. Energy in a standing wave shuttles between the segments rather than flowing along the string, in marked contrast with the travelling waves that formed it.",
+      "explanation": "The two counter-travelling waves written, the separation of variables derived, and nodes and antinodes defined from the amplitude factor."
+    },
+    {
+      "id": "cbse11-phy-wav-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A string of length 0.6 m fixed at both ends has a wave speed of 330 m/s. Find the frequencies of the fundamental and the first two overtones, and state which harmonics these are.",
+      "answer": "A string fixed at both ends must have nodes at both ends, so only standing waves fitting L = nλ/2 are allowed: λₙ = 2L/n, and since v = fλ the allowed frequencies are fₙ = nv/2L. Fundamental (n = 1): f₁ = 330/(2 × 0.6) = 330/1.2 = 275 Hz — one half-wavelength fills the string, with a single antinode at the middle. First overtone (n = 2): f₂ = 2 × 275 = 550 Hz — two loops, one interior node; this is the second harmonic, twice the fundamental. Second overtone (n = 3): f₃ = 3 × 275 = 825 Hz — three loops, two interior nodes; the third harmonic. Note the terminology: the first overtone is the second harmonic, since the fundamental is not counted among the overtones — a distinction examiners test directly. Physical picture: plucking the string excites a mixture of these modes, whose relative strengths give the note its timbre, while the fundamental sets the perceived pitch of 275 Hz. Checks: each successive frequency is an exact integer multiple of 275 as the fₙ = nv/2L form requires ✓, and halving the tension (v ∝ √T) would lower every frequency by √2 without changing the ratios ✓.",
+      "explanation": "The node condition, all three frequencies computed with their loop counts, the overtone-versus-harmonic terminology, and the checks."
+    },
+    {
+      "id": "cbse11-phy-wav-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe how the resonance-tube experiment uses two resonance positions to measure the speed of sound, including why the second position is preferred, and compute the speed given the first resonance at 18 cm, the second at 55.5 cm and the fork frequency 512 Hz.",
+      "answer": "The experiment lowers a tube carrying water beneath a sounding tuning fork of known frequency; as the water level changes, the air column length changes, and the column resonates (sounds loudest) whenever its length supports a standing wave with a node at the water surface and an antinode at the open top. For a closed-open column the first resonance occurs at a quarter wavelength: L₁ + e = λ/4, where e is the end correction accounting for the antinode lying slightly above the open end. The second resonance, at three-quarter wavelength: L₂ + e = 3λ/4. Subtracting eliminates the end correction entirely: L₂ − L₁ = λ/2, so λ = 2(L₂ − L₁) — which is why the second position is the one used for the speed: it removes the systematic error that the single-position reading cannot, since e is unknown and frequency-dependent. Numbers: L₂ − L₁ = 55.5 − 18.0 = 37.5 cm = 0.375 m, so λ = 0.75 m, and v = fλ = 512 × 0.75 = 384 m/s. Interpretation: 384 m/s is slightly above the textbook 344 m/s at 20 °C, plausible if the laboratory was warm — the speed of sound rises about 0.6 m/s per kelvin — and the discrepancy illustrates why the experiment reports the local value rather than a memorised one. The end correction from the first reading: λ/4 = 0.1875 m, so e = 0.1875 − 0.18 = 0.0075 m ≈ 7.5 mm, consistent with about 0.6 times the tube radius ✓.",
+      "explanation": "The resonance conditions written with the end correction, the subtraction trick derived, the speed computed, and the interpretation including the recovered end correction."
+    }
+  ]
+}

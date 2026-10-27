@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-identifiers-literals",
+  "slug": "identifiers-and-literals",
+  "title": "Identifiers and Literals",
+  "kind": "computer-applications",
+  "tagline": "Tokens, naming rules, the eight primitive types and the difference between a name and a value.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Java source is built from tokens: identifiers that name things, keywords that belong to the language, literals that supply fixed values, operators that act and separators that divide. This chapter concentrates on the two tokens students must command — identifiers, the names you invent, and literals, the values you write down. An identifier must obey five naming rules and must never collide with a keyword; a literal must be written in the form its type demands, so a character takes single quotes and a string double quotes. Underneath sit the eight primitive data types, and the rules that decide when one type may be converted into another.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Language Fundamentals (ICSE Class IX)"
+      },
+      {
+        "label": "Token kinds",
+        "value": "Identifiers, keywords, literals, operators, separators"
+      },
+      {
+        "label": "Naming rules",
+        "value": "Letters, digits, _ and $ only; no leading digit; case-sensitive; no keyword"
+      },
+      {
+        "label": "Primitive types",
+        "value": "byte, short, int, long, float, double, char, boolean"
+      },
+      {
+        "label": "Literal forms",
+        "value": "42, 3.14, 'A', \"text\", true"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Classify a given token as an identifier, keyword or literal and justify the classification.",
+    "Apply the identifier naming rules to decide whether a candidate name is valid.",
+    "Declare variables of all eight primitive types and assign correctly formed literals to them.",
+    "Distinguish widening conversion from narrowing casting and predict the result of each."
+  ],
+  "learn": [
+    {
+      "id": "tokens",
+      "title": "The five kinds of token",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The compiler reads a Java source file as a stream of tokens, the smallest units that carry meaning. An identifier is a name you choose, a keyword is a word the language keeps for itself, a literal is a fixed value written directly in the code, an operator is a symbol that performs an action, and a separator — a semicolon, comma or bracket — marks structure. Exam questions often hand you a list of strings and ask you to sort them into these five baskets, so the skill worth practising is fast, justified classification rather than memorised definition alone."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Token",
+              "meaning": "The smallest meaningful unit the compiler recognises in source code.",
+              "context": "Every name, value, symbol and keyword in a statement is a token."
+            },
+            {
+              "term": "Identifier",
+              "meaning": "A programmer-defined name for a class, variable, method or constant.",
+              "context": "marks, Student and display are all identifiers written by the programmer."
+            },
+            {
+              "term": "Keyword",
+              "meaning": "A reserved word with a fixed meaning that may not be used as an identifier.",
+              "context": "class, int, void and return are keywords and are off-limits as names."
+            },
+            {
+              "term": "Literal",
+              "meaning": "A fixed value written directly in the source code.",
+              "context": "42, 3.14, 'A' and \"Riya\" are literals of four different types."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "naming-rules",
+      "title": "The identifier naming rules",
+      "blocks": [
+        {
+          "type": "bullets",
+          "items": [
+            "Only letters, digits, the underscore and the dollar sign are permitted — no spaces, hyphens or other punctuation.",
+            "An identifier may not begin with a digit, so 2ndPlace is invalid while secondPlace is fine.",
+            "Java is case-sensitive, so Score and score are two entirely different identifiers.",
+            "No keyword may be used as an identifier, which rules out names such as int, class or while.",
+            "There is no length limit, and a name may not be blank or consist only of punctuation."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Classifying candidate identifiers",
+          "columns": [
+            "Candidate",
+            "Valid?",
+            "Reason"
+          ],
+          "rows": [
+            [
+              "marks",
+              "Yes",
+              "Letters only, does not start with a digit, not a keyword"
+            ],
+            [
+              "total_Marks",
+              "Yes",
+              "Underscore is allowed and letters begin the name"
+            ],
+            [
+              "2ndPlace",
+              "No",
+              "Starts with a digit"
+            ],
+            [
+              "my marks",
+              "No",
+              "Contains a space"
+            ],
+            [
+              "int",
+              "No",
+              "It is a reserved keyword"
+            ],
+            [
+              "price$",
+              "Yes",
+              "Dollar sign is permitted in identifiers"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "literals-types",
+      "title": "Literals and the eight primitive types",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A literal is a value the programmer writes down as it is, with no calculation involved, and its written form reveals its type. Whole numbers default to int, decimal numbers to double, a single character sits between single quotes, a text string between double quotes, and a truth value is one of true or false. Java’s eight primitive types reserve memory for these values without wrapping them in objects: byte, short, int and long for whole numbers of increasing size, float and double for decimals, char for one character, and boolean for truth."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int age = 14; double percentage = 87.5; char grade = 'A'; boolean passed = true; String name = \"Riya\";",
+              "note": "Five declarations showing the literal forms: a whole number, a decimal, a character in single quotes, a truth value, and a text value in double quotes."
+            },
+            {
+              "text": "System.out.println(42); System.out.println(4.2); System.out.println('A'); System.out.println(true);",
+              "note": "Output: 42, then 4.2, then A, then true — each literal prints exactly as written because no operation is applied to it."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The eight primitive data types",
+          "columns": [
+            "Type",
+            "Holds",
+            "Example literal"
+          ],
+          "rows": [
+            [
+              "byte",
+              "Very small whole numbers",
+              "byte b = 100;"
+            ],
+            [
+              "short",
+              "Small whole numbers",
+              "short s = 5000;"
+            ],
+            [
+              "int",
+              "Ordinary whole numbers (default for integers)",
+              "int n = 42;"
+            ],
+            [
+              "long",
+              "Large whole numbers",
+              "long big = 100000L;"
+            ],
+            [
+              "float",
+              "Decimal numbers, single precision",
+              "float f = 3.5f;"
+            ],
+            [
+              "double",
+              "Decimal numbers, double precision (default)",
+              "double d = 3.14;"
+            ],
+            [
+              "char",
+              "One single character",
+              "char c = 'A';"
+            ],
+            [
+              "boolean",
+              "true or false only",
+              "boolean ok = true;"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "char-string",
+      "title": "Why char uses single quotes and String uses double quotes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The two quoting rules are enforced by the compiler because the types differ in kind. A char holds exactly one character in one pair of single quotes, so 'A' is a character value while \"A\" is a string of length one — a different type entirely. Strings are not primitive; they are objects of a library class, which is why text can do things no primitive can, such as joining with the plus operator or reporting its length. When you write 'AB' the compiler objects because two characters do not fit one char, and when you write \"AB\" it accepts it because a string may be any length."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "char takes exactly one character between single quotes: 'A', '9', ''+'' is a common trap since an empty pair is invalid.",
+            "String takes any number of characters between double quotes, including none at all.",
+            "The plus operator joins strings but adds numbers — 10 + 20 is 30, while \"10\" + 20 is \"1020\".",
+            "A character is stored as its numeric code, which is why arithmetic can be performed on char values."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conversion",
+      "title": "Type compatibility: widening and narrowing",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Java converts smaller numeric types into larger ones automatically, a widening conversion that never loses information: assigning an int to a double simply gives a decimal with the same value. The reverse direction is a narrowing conversion and may discard part of the value, so Java demands an explicit cast before it will compile. This is why assigning a double to an int without a cast is an error, and why adding a cast such as (int) 9.7 produces 9 rather than 10 — the cast removes the fraction rather than rounding it."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int a = 65; double b = a; System.out.println(b); char c = (char) a; System.out.println(c);",
+              "note": "Output: 65.0 then A — the int widens to a decimal, and an explicit cast converts the numeric code 65 back into its character."
+            },
+            {
+              "text": "double x = 9.7; int n = (int) x; System.out.println(n);",
+              "note": "Output: 9 — the cast truncates toward zero instead of rounding, so 9.7 becomes 9 and not 10."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Widening — byte to short to int to long to float to double — happens automatically and safely.",
+            "Narrowing needs a cast because part of the value may be lost.",
+            "A cast such as (int) truncates the fractional part; it does not round to the nearest integer.",
+            "char converts to its numeric code automatically, and a cast back restores the character."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam-prep",
+      "title": "Preparing for the examination",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Questions under this heading are quick wins if you are precise. Classification questions want the token kind named first and the reason second. Validity questions are decided by the five rules, so test a candidate name against each rule in turn rather than judging it by feel. Conversion questions almost always hide a trap — a cast that truncates rather than rounds, or a string concatenation that swallows an addition — so read the operators before committing to an answer."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Learn the five naming rules in order and apply them one at a time to any candidate identifier.",
+            "Remember the two quoting conventions and the reason behind them: one char, many characters in a String.",
+            "For conversions, ask first whether information can be lost; if yes, a cast is mandatory.",
+            "In output questions, check every + operator: numbers add, but any string operand turns the whole expression into joining."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Sorting tokens into the five kinds",
+      "description": "A central \"source statement\" node branching into five labelled buckets: identifiers (marks, Student), keywords (int, class), literals (42, 3.14, 'A'), operators (+, =, >) and separators (; , ( )). Each bucket holds two or three concrete examples from the statement.",
+      "labels": [
+        "Identifier bucket",
+        "Keyword bucket",
+        "Literal bucket",
+        "Operator bucket",
+        "Separator bucket"
+      ]
+    },
+    {
+      "caption": "Figure: Widening versus narrowing conversion",
+      "description": "Two horizontal bars. The widening bar runs byte → short → int → long → float → double with a green arrow marked \"automatic\". The narrowing bar runs the reverse direction with an orange arrow marked \"cast required\", and a side note shows (int) 9.7 → 9 losing the fraction.",
+      "labels": [
+        "byte → int widening",
+        "Automatic conversion",
+        "double → int narrowing",
+        "Cast required",
+        "Fraction lost on cast"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The five token kinds are identifiers, keywords, literals, operators and separators.",
+    "Identifiers may contain only letters, digits, underscores and dollar signs.",
+    "An identifier may not start with a digit, be blank, or be a keyword.",
+    "Java is case-sensitive, so Score and score are different identifiers.",
+    "Literals are fixed values written directly in the code; their form determines their type.",
+    "The eight primitives are byte, short, int, long, float, double, char and boolean.",
+    "char uses single quotes for exactly one character; String uses double quotes for any length.",
+    "Widening conversions happen automatically; narrowing conversions need an explicit cast.",
+    "A cast truncates rather than rounds: (int) 9.7 evaluates to 9.",
+    "With the + operator, numbers add but any string operand makes the expression join text instead."
+  ],
+  "examFocus": [
+    "Classification question: name the token kind, then give the reason in one clause.",
+    "Validity question: test the candidate against all five naming rules rather than guessing.",
+    "Literal-form question: single quotes for char, double quotes for String, no quotes for numbers.",
+    "Conversion question: identify whether information can be lost, and remember casts truncate decimals."
+  ],
+  "vocabulary": [
+    {
+      "word": "Identifier",
+      "meaning": "A programmer-defined name for a class, variable or method.",
+      "context": "marks obeys the naming rules; 2ndPlace does not."
+    },
+    {
+      "word": "Keyword",
+      "meaning": "A reserved word with a fixed meaning that cannot double as a name.",
+      "context": "You may not name a variable int because int is a keyword."
+    },
+    {
+      "word": "Literal",
+      "meaning": "A fixed value written directly in source code.",
+      "context": "42, 3.14, 'A' and true are literals."
+    },
+    {
+      "word": "Primitive type",
+      "meaning": "One of the eight basic types that store simple values rather than objects.",
+      "context": "int and char are primitives; String is not."
+    },
+    {
+      "word": "Widening",
+      "meaning": "Automatic conversion from a smaller numeric type to a larger one.",
+      "context": "Assigning an int to a double widens without losing value."
+    },
+    {
+      "word": "Narrowing",
+      "meaning": "Conversion to a smaller type that may discard information and needs a cast.",
+      "context": "double to int is narrowing, so a cast must be written."
+    },
+    {
+      "word": "Case-sensitive",
+      "meaning": "Treating uppercase and lowercase letters as different characters.",
+      "context": "Score and score are two distinct identifiers in Java."
+    },
+    {
+      "word": "Cast",
+      "meaning": "An explicit type conversion written as (type) value.",
+      "context": "(int) 9.7 truncates the decimal part to give 9."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-ident-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a valid Java identifier?",
+      "options": [
+        "total_Marks",
+        "2ndPlace",
+        "my marks",
+        "int"
+      ],
+      "correctIndex": 0,
+      "answer": "total_Marks",
+      "explanation": "total_Marks uses only letters and an underscore and does not begin with a digit. 2ndPlace starts with a digit, \"my marks\" contains a space, and int is a reserved keyword.",
+      "commonMistake": "Accepting \"int\" because it looks ordinary — keywords are always invalid as identifiers."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "How is the character A written as a literal?",
+      "options": [
+        "'A'",
+        "\"A\"",
+        "A",
+        "char A"
+      ],
+      "correctIndex": 0,
+      "answer": "'A'",
+      "explanation": "A char literal is exactly one character between single quotes. \"A\" is a String of length one — a different type — while bare A would be read as an identifier.",
+      "commonMistake": "Using double quotes for a single character; the compiler treats it as a String, not a char."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is the result of the expression 10 + 20 when 10 is written as a string?",
+      "options": [
+        "The text 1020, because any string operand turns + into joining",
+        "The number 30, because + always adds first",
+        "A compile-time error, because text cannot meet a number",
+        "The text 10 20, because Java inserts a space"
+      ],
+      "correctIndex": 0,
+      "answer": "The text 1020, because any string operand turns + into joining",
+      "explanation": "If either operand of + is a String the compiler concatenates instead of adding, so \"10\" + 20 produces the text 1020. Write 10 + 20 with both numbers to obtain 30.",
+      "commonMistake": "Assuming addition happens first — the presence of text anywhere in the expression changes the operator entirely."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which conversion happens automatically without a cast?",
+      "options": [
+        "int to double",
+        "double to int",
+        "long to byte",
+        "double to char"
+      ],
+      "correctIndex": 0,
+      "answer": "int to double",
+      "explanation": "Widening conversions to a larger type preserve the value, so Java performs them silently. Narrowing conversions such as double to int may lose data and must be written explicitly with a cast.",
+      "commonMistake": "Expecting double to int to work without a cast — it is narrowing and will not compile."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A token that the programmer defines is an __________, a word reserved by the language is a __________, and a fixed value written directly in the code is a __________.",
+      "answer": "identifier; keyword; literal",
+      "explanation": "These three token kinds cover names, reserved words and values. The definitions are short but the terms are exact, so misspelling any of them costs the mark.",
+      "commonMistake": "Swapping identifier and literal — remember that one names a thing and the other is a value."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State three rules that every Java identifier must obey.",
+      "answer": "Any three of: it may contain only letters, digits, underscores and dollar signs; it may not start with a digit; it may not be a keyword; it may not contain spaces or punctuation such as hyphens; it is case-sensitive, so Score and score differ.",
+      "explanation": "Each rule is worth a mark. The three most reliably cited are the permitted characters, the no-leading-digit rule and the keyword restriction.",
+      "commonMistake": "Describing style preferences such as camelCase as rules — those are conventions, not compiler-enforced rules."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why (int) 9.7 evaluates to 9 and state what you would write to obtain 10 instead.",
+      "answer": "The cast (int) narrows a double to an integer and does so by discarding the fractional part rather than rounding, so 9.7 becomes 9. To obtain 10 the value must be rounded first, for example (int) Math.round(9.7): round returns the long 10 for 9.7, and the cast then converts that whole number into the int 10.",
+      "explanation": "The mark turns on the word truncation: a cast cuts the fraction, it does not choose the nearest integer. Naming Math.round as the rounding step supplies the requested alternative.",
+      "commonMistake": "Claiming casts round to the nearest value — that is the single most common error in conversion questions."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Declare suitable variables for a student record containing a name, an age, a height in metres and a boolean indicating whether the student passed, then explain why each type was chosen.",
+      "answer": "String name = \"Riya\"; int age = 14; double height = 1.62; boolean passed = true; The name is text of variable length, and String is the appropriate type even though it is not primitive, because names have no fixed numeric form. Age is a whole number with no fractional part, so int suffices and uses memory economically compared with long. Height is measured in metres to two decimal places, so a floating-point type is required; double is chosen because it is Java’s default decimal type and no precision is lost. Passed is a two-state fact — yes or no — and boolean with the literals true or false expresses that directly, avoiding the error-prone habit of using 0 and 1 as flags.",
+      "explanation": "Full marks need four correctly declared variables with appropriate types and a justification for each. The strongest answers explain why the rejected alternatives — long for age, float for height, int for the flag — would be worse choices.",
+      "commonMistake": "Declaring everything as int or using char for the name; the justification is what carries the marks, so a declaration alone is not enough."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-09",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Classify each token in the statement int marks = 42; and state what the compiler would do with the name marks if the keyword int were used in its place.",
+      "answer": "In int marks = 42; the tokens are: int, a keyword declaring the type; marks, an identifier chosen by the programmer to name the variable; =, the assignment operator; 42, an integer literal; and ;, a separator ending the statement. If the name marks were replaced by int — as in int int = 42; — the declaration would be invalid, because int is a reserved keyword and keywords may never be used as identifiers. The compiler would reject the line with a syntax error at the point where the identifier was expected, and the program would fail to compile rather than run with a changed meaning.",
+      "explanation": "The classification must cover every token in the statement, including the separator, to earn full marks. The second half tests the keyword rule: reserved words are not merely discouraged as names, they are rejected at compile time.",
+      "commonMistake": "Forgetting the semicolon when listing tokens — separators are one of the five kinds and their omission loses a mark."
+    },
+    {
+      "id": "cisce-9-ca-q-ident-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A program contains the line int 2ndMark = 85;. Identify every error in the line and rewrite it in a form a compiler would accept.",
+      "answer": "The line has one fatal error and one poor choice. The name 2ndMark begins with a digit, which violates the identifier rule that names may not start with a digit, so the compiler rejects the declaration outright. Rewritten correctly, the line becomes int secondMark = 85; or int mark2 = 85;, both of which begin with a letter and use only permitted characters. The keyword int and the literal 85 are perfectly legal in this position; the assignment and the semicolon are also correct, so the digit-leading name is the sole cause of failure. As a secondary point, choosing a descriptive name such as secondMark rather than a cryptic abbreviation keeps the code readable, which matters when the same record is handled across several methods.",
+      "explanation": "Full marks require isolating the identifier rule as the compile-time failure while confirming that the rest of the line is well formed, then producing at least one legal rewrite. The bonus observation about naming quality shows awareness beyond the mechanical fix.",
+      "commonMistake": "Blaming the value 85 or the keyword int for the error — both are valid; only the leading digit in the name breaks the rule."
+    }
+  ]
+}

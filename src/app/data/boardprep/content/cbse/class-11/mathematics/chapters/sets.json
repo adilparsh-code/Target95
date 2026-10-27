@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-sets",
+  "title": "Sets",
+  "kind": "mathematics",
+  "tagline": "The language of collections: notation, subsets and intervals, and the Venn-diagram arithmetic of union, intersection and complement.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Everything in this course that involves grouping, counting or excluding is written in the language of sets, which makes this first unit load-bearing rather than introductory. The chapter builds the notation carefully — how a set is described, when two sets are equal, what subsets and intervals mean — and then develops the three operations the rest of the syllabus leans on: union, intersection and difference, with the complement completing the picture. It closes on the practical problems on union and intersection of two sets, which the official syllabus places in the chapter but assesses only formatively, so those problems are practised here as reasoning exercises rather than exam drills.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-I: Sets and Functions (23 marks shared with Functions and Trigonometry)."
+      },
+      {
+        "label": "Representations",
+        "value": "Roster form, set-builder form, and the Venn diagram as a picture of a set."
+      },
+      {
+        "label": "Key laws",
+        "value": "Commutative, associative and distributive laws, and De Morgan’s laws for complements."
+      },
+      {
+        "label": "Formative topic",
+        "value": "Practical problems on the union and intersection of two sets — taught and practised, not summatively examined."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe a set in roster and set-builder form and judge when two sets are equal.",
+    "Classify sets as empty, finite or infinite and work with subsets, including intervals.",
+    "Draw and read Venn diagrams for union, intersection, difference and complement.",
+    "Apply De Morgan’s laws and the complement laws to simplify set expressions.",
+    "Solve counting problems with the relation |A ∪ B| = |A| + |B| − |A ∩ B|."
+  ],
+  "learn": [
+    {
+      "id": "language",
+      "title": "Describing sets: notation, equality and subsets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A set is a well-defined collection of distinct objects, and the phrase well-defined is doing real work: a set must be decidable — either a given object belongs to it or it does not, with no argument left over. Sets are written in two forms. Roster form lists the elements inside curly brackets, as in {2, 4, 6, 8}, which suits finite collections you can enumerate; set-builder form states the property its members satisfy, as in {x : x is an even natural number less than 10}, which suits collections too large or too abstract to list. The order of elements never matters and repetitions never count twice, so {1, 2, 3} and {3, 2, 1} are the same set — equality of sets means exactly this, that each is a subset of the other."
+        },
+        {
+          "type": "paragraph",
+          "text": "From equality the chapter moves to the two classifications you will use constantly. First, sets are empty, finite or infinite: the empty set ∅ contains nothing and must be written with braces and nothing inside — {∅} is a set containing the empty set, a different thing entirely. Second, subsets: A is a subset of B, written A ⊆ B, when every element of A is an element of B, and the empty set is a subset of everything for the same reason everything is a subset of itself. The subset relation generates the power set — the collection of all subsets, which for a set of n elements has 2ⁿ members. Intervals are the applied case: (a, b), [a, b], and their one-sided variants are just sets of real numbers described by an inequality, and the square versus round bracket records whether the endpoint belongs."
+        },
+        {
+          "type": "table",
+          "caption": "Interval notation against inequalities",
+          "columns": [
+            "Interval",
+            "Inequality",
+            "Endpoint included?"
+          ],
+          "rows": [
+            [
+              "(a, b)",
+              "a < x < b",
+              "Neither"
+            ],
+            [
+              "[a, b]",
+              "a ≤ x ≤ b",
+              "Both"
+            ],
+            [
+              "[a, b)",
+              "a ≤ x < b",
+              "Left only"
+            ],
+            [
+              "(a, b]",
+              "a < x ≤ b",
+              "Right only"
+            ],
+            [
+              "(a, ∞)",
+              "x > a",
+              "No upper end"
+            ],
+            [
+              "[a, ∞)",
+              "x ≥ a",
+              "No upper end"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Well-defined means membership can be decided without argument.",
+            "Roster form lists; set-builder form specifies a property.",
+            "Equality of sets means mutual subsetting.",
+            "A ⊆ B asks only that A’s elements all appear in B.",
+            "A set with n elements has 2ⁿ subsets."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "title": "Union, intersection, difference and complement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The four operations are most easily learned as pictures before they are used as symbols. The union A ∪ B collects everything in either set; the intersection A ∩ B keeps only what the sets share; the difference A − B keeps what is in A and not in B; and the complement A′ (also written Aᶜ) is everything in the universal set that A leaves out. A Venn diagram — a rectangle for the universal set, overlapping circles for the sets — makes all four visible at once, and shading the region an expression describes is the single most reliable way to check an answer before committing to algebra."
+        },
+        {
+          "type": "paragraph",
+          "text": "The algebra of these operations is regular. Union and intersection are commutative and associative, and intersection distributes over union just as ordinary multiplication distributes over addition; the distributive law in both directions is what lets you expand set expressions exactly as you expand brackets in arithmetic. The complement interacts with both operations through De Morgan’s laws: the complement of a union is the intersection of the complements, and the complement of an intersection is the union of the complements — in words, nothing is outside both sets exactly when it is outside each of them. The complement laws then collapse expressions: A ∪ A′ is the universal set, A ∩ A′ is empty, and applying a complement twice returns the original set."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Simplify (A ∪ B) ∩ (A ∪ C).",
+              "note": "Distribute ∩ over ∪: the result is A ∪ (B ∩ C) — union is the common factor."
+            },
+            {
+              "text": "If U = {1…6}, A = {1, 2, 3}, find (A ∩ B)′ with B = {3, 4}.",
+              "note": "A ∩ B = {3}, so the complement relative to U is {1, 2, 4, 5, 6}."
+            },
+            {
+              "text": "De Morgan: (A ∪ B)′ written as an intersection.",
+              "note": "(A ∪ B)′ = A′ ∩ B′ — shade the outside of both circles."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "counting",
+      "title": "Practical problems on union and intersection (formative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus places practical problems on the union and intersection of two sets in this chapter but assesses them formatively, which means they are here to build reasoning rather than to be memorised for a paper. The engine of every such problem is one counting identity: for two finite sets, the number of elements in their union is the number in the first, plus the number in the second, minus the number counted twice — |A ∪ B| = |A| + |B| − |A ∩ B|. That single line rearranges to answer three questions at once: how many are in at least one set, how many are in both, and how many are in neither when a universal set is given."
+        },
+        {
+          "type": "paragraph",
+          "text": "The problems become interesting when three categories are involved, because the identity must then be applied in stages. In a survey of people who like tea, coffee or both, those who like only tea are found by subtracting the both-group from the tea total, and the neither-group appears once the union is known and compared with the whole survey. The method never changes: name the sets, record each number against the region it belongs to, work from the innermost region outward, and check at the end that no person is counted twice. Practised this way, the problems teach the structure of overlapping categories, which is exactly what makes them useful even though no examiner will charge marks for them."
+        },
+        {
+          "type": "table",
+          "caption": "The two-set counting identity and its rearrangements",
+          "columns": [
+            "Given",
+            "Wanted",
+            "Use"
+          ],
+          "rows": [
+            [
+              "|A|, |B|, |A ∩ B|",
+              "|A ∪ B|",
+              "|A| + |B| − |A ∩ B|"
+            ],
+            [
+              "|A|, |B|, |A ∪ B|",
+              "|A ∩ B|",
+              "|A| + |B| − |A ∪ B|"
+            ],
+            [
+              "|A|, |B|, |A ∩ B|",
+              "Only A (or only B)",
+              "|A| − |A ∩ B|"
+            ],
+            [
+              "|A ∪ B|, |U|",
+              "Neither",
+              "|U| − |A ∪ B|"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "40 like tea, 30 like coffee, 12 like both. How many like at least one?",
+              "note": "40 + 30 − 12 = 58."
+            },
+            {
+              "text": "Of 100 surveyed, 58 like at least one of the two. How many like neither?",
+              "note": "100 − 58 = 42."
+            },
+            {
+              "text": "50 students play cricket, 35 play football, 20 play both. Only cricket?",
+              "note": "50 − 20 = 30 students."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam",
+      "title": "Exam craft: reading set questions without over-reading",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Most set questions in the paper are won or lost on notation rather than on difficulty. The commonest errors are predictable: writing {∅} where ∅ was meant; treating A ⊆ B as if it required A ≠ B, when a set is always a subset of itself; shading the wrong region of a Venn diagram because the expression was read left to right instead of bracket by bracket; and applying De Morgan’s laws to the symbols without checking the sense of the statement. A short practice fixes each: translate every expression into words before computing, and shade before you count."
+        },
+        {
+          "type": "paragraph",
+          "text": "For written answers, show the identity you are using before substituting numbers, because method marks attach to the structure — stating |A ∪ B| = |A| + |B| − |A ∩ B| with the values named earns credit even if a later arithmetic slip costs the final figure. Where a problem gives a universal set, always compute the neither-group, since a question about people who do neither is the usual closing part and it is only available once the union is known. The worked examples above are the pattern to imitate: name, substitute, compute, then interpret the number back in the language of the question."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Translate symbols into words before calculating.",
+            "A set is a subset of itself — do not exclude equality by reflex.",
+            "Shade the Venn region bracket by bracket, outermost operation last.",
+            "State the identity before substituting to collect method marks.",
+            "In survey problems, always finish with the neither-group."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A Venn diagram for two overlapping sets",
+      "description": "A rectangle labelled the universal set U containing two overlapping circles A and B; the lens-shaped overlap is shaded for A ∩ B, the two moons together carry a bracket labelled A ∪ B, the part of A outside B is marked A − B, and the region outside both circles is hatched for the complement.",
+      "labels": [
+        "U: the universal set (rectangle)",
+        "A ∩ B: the shaded overlap",
+        "A ∪ B: both circles together",
+        "A − B: the part of A outside B",
+        "A′: the hatched region outside both circles"
+      ]
+    },
+    {
+      "caption": "Figure: Intervals on the number line",
+      "description": "A number line with four rows: a solid dot at a and b joined by a thick segment for [a, b]; open circles at a and b for (a, b); a solid dot at a with an arrow running right for [a, ∞); and an open circle at a with an arrow for (a, ∞), each labelled with its inequality beneath.",
+      "labels": [
+        "Solid dot: endpoint included",
+        "Open circle: endpoint excluded",
+        "[a, b]: a ≤ x ≤ b",
+        "(a, b): a < x < b",
+        "[a, ∞): x ≥ a, arrow to the right"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A set is a well-defined collection of distinct objects; order and repetition do not matter.",
+    "Roster form lists elements; set-builder form states the property members satisfy.",
+    "The empty set ∅ has no elements; {∅} contains one element.",
+    "A ⊆ B means every element of A lies in B; every set is a subset of itself.",
+    "A set with n elements has 2ⁿ subsets.",
+    "Intervals translate between bracket notation and inequalities; square brackets include the endpoint.",
+    "Union, intersection and difference are read off a Venn diagram directly.",
+    "Intersection distributes over union: A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C).",
+    "De Morgan: (A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′.",
+    "Two-set counting: |A ∪ B| = |A| + |B| − |A ∩ B| — the engine of every survey problem."
+  ],
+  "examFocus": [
+    "Translate every symbol into words before computing; notation errors dominate this chapter.",
+    "Shade Venn regions bracket by bracket, then count — never the reverse.",
+    "State the counting identity before substituting to collect method marks.",
+    "Survey questions finish with the neither-group: |U| − |A ∪ B|."
+  ],
+  "vocabulary": [
+    {
+      "word": "Well-defined",
+      "meaning": "Membership can be decided without argument or opinion."
+    },
+    {
+      "word": "Roster form",
+      "meaning": "A set written by listing its elements in braces."
+    },
+    {
+      "word": "Set-builder form",
+      "meaning": "A set written as the elements satisfying a stated property."
+    },
+    {
+      "word": "Subset (⊆)",
+      "meaning": "Every element of one set is an element of the other."
+    },
+    {
+      "word": "Universal set (U)",
+      "meaning": "The set containing everything under discussion for a problem."
+    },
+    {
+      "word": "Complement (A′)",
+      "meaning": "Everything in the universal set that A does not contain."
+    },
+    {
+      "word": "De Morgan’s laws",
+      "meaning": "(A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-sets-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of subsets of a set containing 5 elements is:",
+      "options": [
+        "10",
+        "25",
+        "32",
+        "36"
+      ],
+      "correctIndex": 2,
+      "answer": "32",
+      "explanation": "Subsets number 2ⁿ, and 2⁵ = 32 — including the empty set and the set itself."
+    },
+    {
+      "id": "cbse11-math-sets-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is the empty set?",
+      "options": [
+        "{∅}",
+        "{x : x² = 4 and x is odd}",
+        "{0}",
+        "{x : x + 2 = 2}"
+      ],
+      "correctIndex": 1,
+      "answer": "{x : x² = 4 and x is odd}",
+      "explanation": "No odd number squares to 4, so the collection has no members; {∅} contains the empty set and {0} and {x : x + 2 = 2} = {0} both hold one element."
+    },
+    {
+      "id": "cbse11-math-sets-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, then A − B equals:",
+      "options": [
+        "{1, 2}",
+        "{5, 6}",
+        "{3, 4}",
+        "{1, 2, 5, 6}"
+      ],
+      "correctIndex": 0,
+      "answer": "{1, 2}",
+      "explanation": "The difference keeps what is in A and not in B, so the shared elements 3 and 4 are removed, leaving {1, 2}."
+    },
+    {
+      "id": "cbse11-math-sets-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "De Morgan’s law rewrites (A ∩ B)′ as:",
+      "options": [
+        "A′ ∩ B′",
+        "A′ ∪ B′",
+        "A ∪ B",
+        "A − B"
+      ],
+      "correctIndex": 1,
+      "answer": "A′ ∪ B′",
+      "explanation": "The complement of an intersection is the union of the complements: a point escapes A ∩ B exactly when it misses A or misses B — so shade everything except the lens."
+    },
+    {
+      "id": "cbse11-math-sets-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The set with no elements is called the ________ set.",
+      "answer": "empty",
+      "explanation": "The empty set has no members and is written ∅."
+    },
+    {
+      "id": "cbse11-math-sets-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of subsets of a set with n elements is ________ .",
+      "answer": "2ⁿ",
+      "explanation": "Every element is independently in or out of a subset, giving 2ⁿ choices."
+    },
+    {
+      "id": "cbse11-math-sets-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write {x : x is a positive integer less than 6} in roster form and name one of its subsets.",
+      "answer": "In roster form the set is {1, 2, 3, 4, 5}: the positive integers strictly below 6. Any subset of it is acceptable — for example {2, 4}, since both members belong to the set, or the empty set, which is a subset of every set, or the whole set {1, 2, 3, 4, 5}, because every set is a subset of itself.",
+      "explanation": "The roster form must be complete with correct members, and the subset must genuinely satisfy A ⊆ B rather than merely intersect it."
+    },
+    {
+      "id": "cbse11-math-sets-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State De Morgan’s two laws and verify one of them on U = {1, 2, 3, 4, 5, 6}, A = {1, 2, 3}, B = {3, 4}.",
+      "answer": "The laws are (A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′. Verification of the first: A ∪ B = {1, 2, 3, 4}, so its complement in U is {5, 6}. Separately A′ = {4, 5, 6} and B′ = {1, 2, 5, 6}, whose intersection is {5, 6}. The two results agree, so the law holds on these sets. The second law checks the same way: A ∩ B = {3} has complement {1, 2, 4, 5, 6}, and A′ ∪ B′ = {4, 5, 6} ∪ {1, 2, 5, 6} = {1, 2, 4, 5, 6}.",
+      "explanation": "Both statements of the law plus one complete verification with each intermediate set shown is required."
+    },
+    {
+      "id": "cbse11-math-sets-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In a survey of 100 students, 52 read the newspaper, 40 read a magazine, and 12 read both. How many read neither? Show every step.",
+      "answer": "Let N be the set of newspaper readers and M the set of magazine readers, with the universal set U of all 100 students. Step one: state the identity, |N ∪ M| = |N| + |M| − |N ∩ M|. Step two: substitute, |N ∪ M| = 52 + 40 − 12 = 80, so 80 students read at least one of the two. Step three: the readers of neither are the complement of that union inside U, so neither = |U| − |N ∪ M| = 100 − 80 = 20. Interpretation: twenty students read neither the newspaper nor the magazine. As a check, the readers of only the newspaper are 52 − 12 = 40, the readers of only the magazine are 40 − 12 = 28, and 40 + 28 + 12 = 80, matching the union — so no student has been counted twice or missed.",
+      "explanation": "The identity must be stated before substitution, the neither-group computed from the universal set, and the answer checked by adding the three disjoint regions."
+    },
+    {
+      "id": "cbse11-math-sets-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A college runs two clubs. Of 120 students, 70 join the drama club, 65 join the music club, and 30 join both. The principal claims every student joins at least one club. Test the claim, and find how many students would need to join exactly one club for the claim to become true.",
+      "answer": "Step one — test the claim as stated: by the counting identity, |D ∪ M| = 70 + 65 − 30 = 105. Since 105 of 120 students join at least one club, the number joining neither is 120 − 105 = 15, so the claim is false: fifteen students belong to no club at all. Step two — exactly-one membership at present: drama only is 70 − 30 = 40, music only is 65 − 30 = 35, giving 40 + 35 = 75 students in exactly one club. Step three — what would make the claim true: the claim requires |D ∪ M| = 120, that is 70 + 65 − |D ∩ M| = 120, so the intersection would have to be 15 rather than 30 — the clubs would need to overlap by only fifteen students while total membership stays at 135 across the two clubs. Under that arrangement, exactly-one membership becomes (70 − 15) + (65 − 15) = 55 + 50 = 105, and the neither-group falls to zero. The insight worth carrying from the problem is that with fixed totals the union is largest when the overlap is smallest: fifteen more single-club members is not what creates universal membership — a halved overlap is, and it simultaneously changes the exactly-one count from 75 to 105.",
+      "explanation": "Full marks require the claim tested with the identity, the current exactly-one figure, and the recomputed intersection with its effect on the exactly-one count explained."
+    }
+  ]
+}

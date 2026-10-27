@@ -1,0 +1,527 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-trigonometry",
+  "title": "Trigonometric Functions",
+  "kind": "mathematics",
+  "tagline": "Radian measure, the identities, compound and multiple angles, and general solutions of trigonometric equations.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "Trigonometry at this level stops being about triangles and becomes the algebra of circular motion. The chapter opens by measuring angles the way calculus needs them — in radians — and then builds the identity sin²θ + cos²θ = 1 that anchors everything else. Compound-angle formulae let an unknown angle be split into two known ones, multiple-angle formulae run that idea in reverse, and the chapter closes by solving equations whose solutions repeat forever. Exact values such as sin 15° and the general solution θ = nπ + (−1)ⁿ α are the two products an examination expects to see in working.",
+    "facts": [
+      {
+        "label": "Radian measure",
+        "value": "180° = π rad, so 1 rad = 180/π degrees and 1° = π/180 radians."
+      },
+      {
+        "label": "Arc and sector",
+        "value": "s = rθ and area of sector = ½r²θ, with θ measured in radians."
+      },
+      {
+        "label": "Fundamental identity",
+        "value": "sin²θ + cos²θ = 1 for every θ; dividing by cos²θ gives 1 + tan²θ = sec²θ."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Identities and compound-angle proofs carry long-answer marks; equations are steady short questions."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Convert between degrees and radians and compute arc length and sector area.",
+    "Verify and use the fundamental and derived trigonometric identities.",
+    "Apply the compound-angle formulae for sine, cosine and tangent to find exact values.",
+    "Use multiple-angle formulae to expand sin 2θ, cos 2θ and tan 2θ and to evaluate exact angles.",
+    "Solve trigonometric equations and state their complete general solutions."
+  ],
+  "learn": [
+    {
+      "id": "radians-and-identities",
+      "title": "Radian measure, standard values and the fundamental identities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A radian is the angle that subtends an arc equal in length to the radius, so the whole circle holds 2π radians — the relation 180° = π rad is therefore a definition rather than a formula to memorise. Radians make the arc length s = rθ and the sector area ½r²θ true without a conversion factor, which is precisely why calculus insists on them. The right-then ratios follow the same circle: on the unit circle the coordinates of an angle θ are (cos θ, sin θ), which makes sin²θ + cos²θ = 1 the equation of the circle itself. Dividing that identity by cos²θ and by sin²θ produces the two companions 1 + tan²θ = sec²θ and 1 + cot²θ = cosec²θ, and the signs of all six ratios fall out of the quadrant the terminal side lies in."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Degree to radian: multiply by π/180; radian to degree: multiply by 180/π.",
+            "Arc length s = rθ and sector area = ½r²θ, both requiring θ in radians.",
+            "sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ and 1 + cot²θ = cosec²θ follow from one another.",
+            "ASTC rule: sine is positive in quadrants I and II, cosine in I and IV, tangent in I and III.",
+            "Standard values: 0°, 30°, 45°, 60° and 90° for all six ratios should be recalled without hesitation."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "150° = 150 × π/180 = 5π/6 radians, and 7π/4 radians = 7 × 180/4 = 315°",
+              "note": "Apply whichever conversion factor cancels the unit you are leaving."
+            },
+            {
+              "text": "A circle of radius 6 cm cut by 2π/3 rad: arc = 6 × 2π/3 = 4π cm, sector area = ½ × 36 × 2π/3 = 12π cm²",
+              "note": "Substitute into s = rθ and ½r²θ with θ kept in radians."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Exact trigonometric values of the standard angles",
+          "columns": [
+            "Angle θ",
+            "sin θ",
+            "cos θ",
+            "tan θ"
+          ],
+          "rows": [
+            [
+              "0°",
+              "0",
+              "1",
+              "0"
+            ],
+            [
+              "30°",
+              "1/2",
+              "√3/2",
+              "1/√3"
+            ],
+            [
+              "45°",
+              "1/√2",
+              "1/√2",
+              "1"
+            ],
+            [
+              "60°",
+              "√3/2",
+              "1/2",
+              "√3"
+            ],
+            [
+              "90°",
+              "1",
+              "0",
+              "undefined"
+            ]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Radian",
+              "meaning": "Angle subtending an arc equal to the radius; π radians equal 180°."
+            },
+            {
+              "term": "Arc length",
+              "meaning": "s = rθ, the distance along the circle cut off by angle θ."
+            },
+            {
+              "term": "Identity",
+              "meaning": "Equation true for every value of the variable, unlike a conditional equation."
+            },
+            {
+              "term": "Quadrant rule",
+              "meaning": "Sign convention (ASTC) fixing which ratios are positive in each quadrant."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compound-angles",
+      "title": "Compound-angle formulae",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The compound-angle formulae express the ratio of a sum or difference of two angles in terms of the ratios of each angle alone, and they are the working engine of the whole chapter. Sine takes the form sin(A + B) = sin A cos B + cos A sin B, cosine runs with opposite signs as cos(A + B) = cos A cos B − sin A sin B, and tangent is the quotient of the two. Their power lies in combining a known angle with another known angle: 75° is 45° + 30°, 15° is 45° − 30°, and neither appears in the standard table. Setting B = A recovers the double-angle results immediately, so the multiple-angle formulae are consequences rather than separate facts to learn. Sign errors are the common failure — cosine alone changes sign across the bracket."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin(A ± B) = sin A cos B ± cos A sin B.",
+            "cos(A ± B) = cos A cos B ∓ sin A sin B — note the opposite signs.",
+            "tan(A ± B) = (tan A ± tan B) / (1 ∓ tan A tan B).",
+            "Substituting B = A gives the double-angle formulae in one line.",
+            "Use the identity with the angle split that both parts are standard: 75° = 45° + 30°, not 60° + 15°."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "sin 75° = sin(45° + 30°) = (1/√2)(√3/2) + (1/√2)(1/2) = (√6 + √2)/4",
+              "note": "Apply sine addition, then put both terms over the common denominator 4."
+            },
+            {
+              "text": "cos 105° = cos(60° + 45°) = (1/2)(1/√2) − (√3/2)(1/√2) = (√2 − √6)/4",
+              "note": "Cosine subtraction flips the sign between the products."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "tan 75° = (tan 45° + tan 30°)/(1 − tan 45° tan 30°) = (1 + 1/√3)/(1 − 1/√3) = 2 + √3",
+              "note": "Rationalise the numerator and denominator by multiplying through by √3."
+            },
+            {
+              "text": "sin 75° can also be written cos 15°, since the two are co-functions of the same angle",
+              "note": "Complementary-angle identities connect the two families."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "multiple-angles",
+      "title": "Multiple and sub-multiple angles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Replacing B by A in the compound formulae produces the double-angle family: sin 2θ = 2 sin θ cos θ, cos 2θ = cos²θ − sin²θ, which through the fundamental identity rewrites itself as 2 cos²θ − 1 or 1 − 2 sin²θ, and tan 2θ = 2 tan θ / (1 − tan²θ). The three cosine forms are the most useful line in the chapter, because the right one depends on what is known: the sin² form when a sine is given, the cos² form when a cosine is given. Triple angles follow by writing sin 3θ = sin(2θ + θ), giving sin 3θ = 3 sin θ − 4 sin³θ and its cosine twin. The formulae also run forwards to exact values: taking cos 2θ = 1 − 2 sin²θ with θ = 18°, and noting 2θ = 36° = 90° − 54°, yields the standard results sin 18° = (√5 − 1)/4 and cos 36° = (√5 + 1)/4."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin 2θ = 2 sin θ cos θ; cos 2θ = cos²θ − sin²θ = 2 cos²θ − 1 = 1 − 2 sin²θ.",
+            "tan 2θ = 2 tan θ / (1 − tan²θ), valid whenever tan θ and tan 2θ exist.",
+            "sin 3θ = 3 sin θ − 4 sin³θ and cos 3θ = 4 cos³θ − 3 cos θ.",
+            "The three forms of cos 2θ let you choose the one that eliminates the ratio you do not know.",
+            "Half-angle readings: sin²θ = (1 − cos 2θ)/2 and cos²θ = (1 + cos 2θ)/2."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Given sin θ = 3/5 with θ acute, cos 2θ = 1 − 2(9/25) = 7/25",
+              "note": "Choose the sin² form so the unknown cosine never appears."
+            },
+            {
+              "text": "sin 3θ at θ = 30°: 3(1/2) − 4(1/8) = 3/2 − 1/2 = 1, matching sin 90°",
+              "note": "Substitute into the triple-angle identity as a self-check of the formula."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Double-angle formulae and when to use each form",
+          "columns": [
+            "Identity",
+            "Use it when",
+            "Example"
+          ],
+          "rows": [
+            [
+              "sin 2θ = 2 sin θ cos θ",
+              "Either ratio is known",
+              "sin θ = 3/5, cos θ = 4/5 → sin 2θ = 24/25"
+            ],
+            [
+              "cos 2θ = 1 − 2 sin²θ",
+              "Only sin θ is known",
+              "sin θ = 3/5 → cos 2θ = 7/25"
+            ],
+            [
+              "cos 2θ = 2 cos²θ − 1",
+              "Only cos θ is known",
+              "cos θ = 5/13 → cos 2θ = 119/169"
+            ],
+            [
+              "tan 2θ = 2 tan θ/(1 − tan²θ)",
+              "Only tan θ is known",
+              "tan θ = 1 → tan 2θ is undefined at 90°"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trig-equations",
+      "title": "Trigonometric equations and general solutions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A trigonometric equation has infinitely many solutions whenever it has one, because the ratios repeat every full turn. The particular solutions inside 0 ≤ θ < 2π are the principal set; the general solution adds the periodicity back and is the answer an examination asks for. Three standard results cover almost every case: sin θ = sin α gives θ = nπ + (−1)ⁿ α, cos θ = cos α gives θ = 2nπ ± α, and tan θ = tan α gives θ = nπ + α, with n standing for any integer. Equations that are quadratic in one ratio — 2 sin²θ − 3 sin θ + 1 = 0 — factorise first and then apply these results to each root, discarding any value of the ratio that lies outside [−1, 1]. Identities reduce the rest: an equation mixing sin² and cos² becomes an equation in a single ratio before it is solved at all."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Principal solutions lie in 0 ≤ θ < 2π; the general solution counts every coterminal angle.",
+            "sin θ = sin α ⇒ θ = nπ + (−1)ⁿ α; cos θ = cos α ⇒ θ = 2nπ ± α; tan θ = tan α ⇒ θ = nπ + α.",
+            "If the equation is quadratic in sin θ or cos θ, factorise and solve each root separately.",
+            "Reject any root with |sin θ| > 1 or |cos θ| > 1 — the ratio cannot exceed one.",
+            "Replace sin²θ by 1 − cos²θ (or the reverse) to reduce the equation to a single ratio first."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "sin θ = 1/2 with 0 ≤ θ < 2π: θ = π/6 or 5π/6",
+              "note": "Both angles have sine 1/2 — the first quadrant reference angle and its supplement."
+            },
+            {
+              "text": "2 sin²θ − 3 sin θ + 1 = 0 factors as (2 sin θ − 1)(sin θ − 1) = 0",
+              "note": "sin θ = 1/2 gives π/6 and 5π/6; sin θ = 1 gives π/2 — three solutions in [0, 2π)."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Principal solution",
+              "meaning": "Solution lying in the principal period, usually 0 ≤ θ < 2π."
+            },
+            {
+              "term": "General solution",
+              "meaning": "θ = nπ + (−1)ⁿ α type expression giving every solution for integer n."
+            },
+            {
+              "term": "Periodicity",
+              "meaning": "Repetition of a ratio after 2π (or π for tangent), which creates infinitely many roots."
+            },
+            {
+              "term": "Reference angle",
+              "meaning": "Acute angle with the same ratio, used to locate solutions in other quadrants."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The unit circle, its coordinates and the four quadrants",
+      "description": "A circle of radius 1 centred at the origin with an angle θ marked from the positive x-axis, the point (cos θ, sin θ) on the circle, a right triangle dropped to the axis, and the four quadrants numbered.",
+      "labels": [
+        "point P = (cos θ, sin θ) on the unit circle",
+        "x-coordinate of P is cos θ",
+        "y-coordinate of P is sin θ",
+        "arc length from the x-axis equals θ in radians",
+        "quadrants numbered I to IV anticlockwise"
+      ]
+    },
+    {
+      "caption": "Figure: Arc length and sector area of a circle",
+      "description": "A circle with centre O and radius r, an angle θ at the centre, the arc between the radii marked s, and the wedge between the two radii shaded as the sector.",
+      "labels": [
+        "radius r drawn from centre O",
+        "central angle θ measured in radians",
+        "arc length s = rθ",
+        "shaded sector area = ½r²θ",
+        "the full circle corresponds to θ = 2π"
+      ]
+    },
+    {
+      "caption": "Figure: Adding two angles on the unit circle",
+      "description": "Two adjacent angles A and B marked from the x-axis, their sum A + B marked beyond them, with perpendiculars dropped from each terminal side to show the right triangles used in the compound-angle proof.",
+      "labels": [
+        "angle A measured first from the x-axis",
+        "angle B placed adjacent to A",
+        "terminal side of A + B",
+        "right triangles built on each radius",
+        "sine and cosine read as coordinates"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "180° = π rad, so every conversion is one multiplication by π/180 or 180/π.",
+    "Arc length s = rθ and sector area ½r²θ both require the angle in radians.",
+    "sin²θ + cos²θ = 1 generates 1 + tan²θ = sec²θ and 1 + cot²θ = cosec²θ.",
+    "sin(A + B) = sin A cos B + cos A sin B; cosine alone reverses the sign pattern.",
+    "cos 2θ has three forms — cos² − sin², 2cos² − 1, 1 − 2sin² — chosen to match what is known.",
+    "sin 3θ = 3 sin θ − 4 sin³θ and cos 3θ = 4 cos³θ − 3 cos θ follow by expanding the sum.",
+    "General solutions: sin θ = sin α gives θ = nπ + (−1)ⁿ α; cos gives 2nπ ± α; tan gives nπ + α.",
+    "Quadratic equations in sin θ or cos θ factorise first, then each root is solved separately.",
+    "Reject ratio roots with magnitude above 1 before solving — they are extraneous.",
+    "Exact values such as sin 15° = (√6 − √2)/4 come from compound angles, not from tables."
+  ],
+  "examFocus": [
+    "Show the identity transformation one line at a time; each valid manipulation carries its own method mark even when the final line is missed.",
+    "Write the compound-angle formula before substituting values — markers award the recalled formula separately.",
+    "In equation questions, state the quadrant reasoning for each principal solution before giving the general form with n.",
+    "When using a double-angle form, say why you chose it (what is known, what must vanish); the choice itself is assessed."
+  ],
+  "vocabulary": [
+    {
+      "word": "Radian",
+      "meaning": "Angle subtending an arc equal to the radius; π rad = 180°."
+    },
+    {
+      "word": "Identity",
+      "meaning": "Equation true for every admissible value of the variable."
+    },
+    {
+      "word": "Compound angle",
+      "meaning": "Sum or difference of two angles, as A + B."
+    },
+    {
+      "word": "Double angle",
+      "meaning": "Twice a given angle, 2θ, expanded through the compound formulae."
+    },
+    {
+      "word": "Principal solution",
+      "meaning": "Solution lying in one principal period, usually 0 ≤ θ < 2π."
+    },
+    {
+      "word": "General solution",
+      "meaning": "Expression with integer n giving every solution of a trigonometric equation."
+    },
+    {
+      "word": "Quadrant",
+      "meaning": "One of the four regions the axes divide the plane into."
+    },
+    {
+      "word": "Reference angle",
+      "meaning": "Acute angle sharing the magnitude of a given ratio, used to place a solution."
+    },
+    {
+      "word": "Periodicity",
+      "meaning": "Property of repeating ratios every 2π, or π for tangent."
+    },
+    {
+      "word": "Extraneous root",
+      "meaning": "Algebraic root rejected because it violates |sin θ| ≤ 1 or the domain."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-trig-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radian measure of an angle of 180° is:",
+      "options": [
+        "π/2 rad",
+        "π rad",
+        "2π rad",
+        "π/4 rad"
+      ],
+      "correctIndex": 1,
+      "answer": "π rad",
+      "explanation": "By definition 180° subtends half the circle, and a full circle is 2π radians, so 180° = π rad."
+    },
+    {
+      "id": "isc11-math-trig-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The exact value of sin 75° is:",
+      "options": [
+        "(√6 − √2)/4",
+        "(√6 + √2)/4",
+        "(√6 + √2)/2",
+        "(√2 − √6)/4"
+      ],
+      "correctIndex": 1,
+      "answer": "(√6 + √2)/4",
+      "explanation": "sin 75° = sin(45° + 30°) = sin 45° cos 30° + cos 45° sin 30° = (√6 + √2)/4."
+    },
+    {
+      "id": "isc11-math-trig-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a correct form of cos 2θ?",
+      "options": [
+        "2 cos²θ + 1",
+        "1 − 2 sin²θ",
+        "1 + 2 sin²θ",
+        "2 sin²θ − 1"
+      ],
+      "correctIndex": 1,
+      "answer": "1 − 2 sin²θ",
+      "explanation": "cos 2θ = cos²θ − sin²θ rewrites as 2 cos²θ − 1 or 1 − 2 sin²θ through sin²θ = 1 − cos²θ; only 1 − 2 sin²θ is listed correctly."
+    },
+    {
+      "id": "isc11-math-trig-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The general solution of sin θ = 0 is:",
+      "options": [
+        "θ = 2nπ",
+        "θ = nπ",
+        "θ = nπ + π/2",
+        "θ = 2nπ + π"
+      ],
+      "correctIndex": 1,
+      "answer": "θ = nπ",
+      "explanation": "sin θ vanishes at every multiple of π — both 0 and π give zero — so θ = nπ for any integer n."
+    },
+    {
+      "id": "isc11-math-trig-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radian measure of an angle of 30° is ______ .",
+      "answer": "π/6",
+      "explanation": "Multiplying 30° by π/180 reduces to π/6 radians, one sixth of a half-turn."
+    },
+    {
+      "id": "isc11-math-trig-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The arc cut off by an angle θ in a circle of radius r has length ______ .",
+      "answer": "rθ",
+      "explanation": "Arc length is radius times angle in radians, s = rθ, which is the very definition of the radian."
+    },
+    {
+      "id": "isc11-math-trig-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the compound-angle formulae for sin(A + B) and cos(A + B).",
+      "answer": "sin(A + B) = sin A cos B + cos A sin B, while cos(A + B) = cos A cos B − sin A sin B. The sine expansion keeps the same sign between its terms; the cosine expansion reverses it.",
+      "explanation": "The sign contrast between the two expansions is the detail examinations test, since it is the usual source of error."
+    },
+    {
+      "id": "isc11-math-trig-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the exact value of sin 15° using a compound-angle formula.",
+      "answer": "sin 15° = sin(45° − 30°) = sin 45° cos 30° − cos 45° sin 30° = (1/√2)(√3/2) − (1/√2)(1/2) = (√6 − √2)/4.",
+      "explanation": "Split 15° into two standard angles, apply the sine difference formula and combine the terms over the denominator 4."
+    },
+    {
+      "id": "isc11-math-trig-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that (sin 2θ)/(1 + cos 2θ) = tan θ.",
+      "answer": "Using the double-angle identities, sin 2θ = 2 sin θ cos θ and 1 + cos 2θ = 1 + (2 cos²θ − 1) = 2 cos²θ. The left side becomes 2 sin θ cos θ / 2 cos²θ, and cancelling 2 cos θ leaves sin θ / cos θ = tan θ, which is the right side.",
+      "explanation": "Substitute the double-angle forms first, simplify the denominator to 2 cos²θ, then cancel one common factor of 2 cos θ."
+    },
+    {
+      "id": "isc11-math-trig-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 2 sin²θ − 3 sin θ + 1 = 0 for 0 ≤ θ < 2π.",
+      "answer": "Factorising gives (2 sin θ − 1)(sin θ − 1) = 0, so sin θ = 1/2 or sin θ = 1. sin θ = 1/2 yields θ = π/6 and θ = 5π/6, and sin θ = 1 yields θ = π/2. The complete solution set in [0, 2π) is therefore {π/6, π/2, 5π/6}.",
+      "explanation": "Treat the equation as quadratic in the single ratio sin θ, factorise, then solve each root within the given interval, rejecting nothing since both roots lie in [−1, 1]."
+    }
+  ]
+}

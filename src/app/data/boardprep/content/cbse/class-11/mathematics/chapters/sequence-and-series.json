@@ -1,0 +1,427 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-sequences",
+  "title": "Sequence and Series",
+  "kind": "mathematics",
+  "tagline": "Arithmetic and geometric progressions, infinite sums, and the AM–GM inequality that connects them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "A sequence lists numbers by rule; a series adds them up, and the whole chapter is about recognising which rule is at work and using its formulas rather than its terms. Arithmetic progressions add a fixed difference, geometric progressions multiply by a fixed ratio, and the interplay between the two produces the chapter’s central inequality — arithmetic mean at least geometric mean. The formative extension attaches the special sums of k, k² and k³, which turn up throughout later mathematics and are worth knowing regardless of the examination scheme.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Algebra (25 marks shared with the other Algebra chapters)."
+      },
+      {
+        "label": "A.P.",
+        "value": "Common difference d; aₙ = a + (n − 1)d; sum = n/2 · [2a + (n − 1)d]."
+      },
+      {
+        "label": "G.P.",
+        "value": "Common ratio r; aₙ = a rⁿ⁻¹; sum = a(rⁿ − 1)/(r − 1); infinite sum a/(1 − r) when |r| < 1."
+      },
+      {
+        "label": "Formative topic",
+        "value": "The special sums of k, k² and k³ — taught here, assessed only formatively."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Identify a sequence as arithmetic or geometric from its terms.",
+    "Apply the nth-term and sum formulas of both progressions.",
+    "Sum a finite geometric series and recognise when an infinite sum exists.",
+    "State and apply AM ≥ GM with its equality condition.",
+    "Derive and use the special sums of the first n integers, squares and cubes."
+  ],
+  "learn": [
+    {
+      "id": "types",
+      "title": "Seences, series and the two progressions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A sequence is an ordered list of numbers governed by a rule — the positions carry meaning — while a series is the sum of the terms of a sequence. The two progressions the syllabus studies are distinguished by what stays constant. An arithmetic progression has a common difference: subtract any term from its successor and the answer is always d, so the terms march at a steady pace and the nth term is a + (n − 1)d, since the first term needs no steps and the nth needs n − 1. A geometric progression has a common ratio instead: divide any term by its predecessor and the answer is always r, so the nth term is arⁿ⁻¹, and the terms grow or decay exponentially rather than steadily."
+        },
+        {
+          "type": "paragraph",
+          "text": "Recognition comes before computation. Given a short list, test the differences first; if they fail, test the ratios; if both fail, look for a pattern such as alternating signs or squares. Both progressions also have sum formulas that deserve their derivations rather than memorisation alone. For the arithmetic series, pair the first term with the last, the second with the second-last, and so on: each pair sums to a + last, and there are n/2 pairs, giving S = n/2 × (first + last) — the formula that also solves the famous story of Gauss adding 1 to 100. For the geometric series, multiplying the sum by r and subtracting cancels every middle term, leaving S(r − 1) = a(rⁿ − 1), which is the origin of the formula written in the facts above."
+        },
+        {
+          "type": "table",
+          "caption": "Arithmetic and geometric progressions compared",
+          "columns": [
+            "Feature",
+            "A.P.",
+            "G.P."
+          ],
+          "rows": [
+            [
+              "Constant",
+              "Common difference d",
+              "Common ratio r"
+            ],
+            [
+              "nth term",
+              "a + (n − 1)d",
+              "a rⁿ⁻¹"
+            ],
+            [
+              "Sum of n terms",
+              "n/2 [2a + (n − 1)d]",
+              "a(rⁿ − 1)/(r − 1), r ≠ 1"
+            ],
+            [
+              "Infinite sum",
+              "Diverges unless d = 0",
+              "a/(1 − r) when |r| < 1"
+            ],
+            [
+              "Shape of growth",
+              "Linear",
+              "Exponential"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A.P.: consecutive differences equal; G.P.: consecutive ratios equal.",
+            "nth term of A.P. is a + (n − 1)d; of G.P. is arⁿ⁻¹.",
+            "Sum of A.P. = number of pairs × (first + last).",
+            "Sum of G.P. obtained by subtracting rS from S.",
+            "An infinite G.P. converges only when |r| < 1."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infinite",
+      "title": "Infinite geometric series",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The sum of a geometric series with |r| < 1 tends to a fixed value as more terms are added, because each additional term is a smaller and smaller fraction of the whole. Letting n grow without bound in S = a(rⁿ − 1)/(r − 1) makes rⁿ vanish — for |r| < 1, powers of r shrink towards zero — and the sum settles at a/(1 − r). When |r| ≥ 1 the terms do not shrink, the powers do not vanish, and no finite sum exists: the series diverges, and writing a/(1 − r) in that case would be a number with no meaning behind it. The condition on r is therefore not a formality but the entire content of the theorem."
+        },
+        {
+          "type": "paragraph",
+          "text": "The classic illustration converts a repeating decimal into a fraction: 0.333… is the infinite series 3/10 + 3/100 + 3/1000 + … with a = 3/10 and r = 1/10, so the sum is (3/10)/(1 − 1/10) = 1/3 — the familiar result obtained by series arithmetic. Similar applications — distance travelled by a bouncing ball, the total length of an infinite zig-zag construction — all share one structure: a first quantity, a constant shrinking ratio, and the formula a/(1 − r). When you meet a problem whose story repeats at smaller and smaller scale, look for the ratio first; if it is constant and below one in size, the answer is one division away."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Sum to infinity of 1 + ½ + ¼ + …",
+              "note": "a = 1, r = ½, so sum = 1/(1 − ½) = 2."
+            },
+            {
+              "text": "Convert 0.4545… to a fraction.",
+              "note": "a = 45/100, r = 1/100: sum = (45/100)/(99/100) = 45/99 = 5/11."
+            },
+            {
+              "text": "Does 2 + 4 + 8 + … have an infinite sum?",
+              "note": "No: r = 2 has |r| ≥ 1, so the terms grow and the series diverges."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "means",
+      "title": "Arithmetic mean, geometric mean and their relation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The arithmetic mean of a set of numbers is their total divided by their count — the average you already know — while the geometric mean of positive numbers is the nth root of their product; for two numbers a and b it is √(ab). The chapter’s central result is the AM–GM inequality: for positive a and b, (a + b)/2 ≥ √(ab), with equality exactly when a = b. The proof is short and worth carrying: it begins from the evident (a − b)² ≥ 0, expands to a² − 2ab + b² ≥ 0, adds 4ab to both sides to get (a + b)² ≥ 4ab, and takes square roots of the non-negative sides to reach the statement."
+        },
+        {
+          "type": "paragraph",
+          "text": "The inequality’s use is practical: it gives a minimum or a maximum without calculus. If the product of two positive quantities is fixed, their sum is least when they are equal; if their sum is fixed, their product is greatest when they are equal — the standard optimisation in this syllabus. The equality condition must always be stated, both because marks attach to it and because the answer to an application problem is usually the equality case itself: a farmer with fixed fencing maximises area at equality, a number split to minimise the sum of squares splits evenly. The general AM–GM for more than two numbers follows the same idea, but the two-number form is what this chapter uses."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "AM and GM of 4 and 9.",
+              "note": "AM = 13/2 = 6.5; GM = √36 = 6; and 6.5 ≥ 6 ✓."
+            },
+            {
+              "text": "Two positives multiply to 36 — least possible sum?",
+              "note": "By AM–GM the sum is ≥ 2√36 = 12, attained at 6 and 6."
+            },
+            {
+              "text": "Equality check: when does 5 and 5 differ from AM–GM?",
+              "note": "Equality holds only at a = b, which is exactly the optimum case."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "special",
+      "title": "Special sums (formative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus places three formulas in the formative list, and each has a standard derivation that is more useful than the formula itself. The sum of the first n integers pairs as Gauss did: 1 + n, 2 + (n − 1), and so on, each pair summing to n + 1 with n/2 pairs, giving n(n + 1)/2. The sum of squares, n(n + 1)(2n + 1)/6, follows the telescoping identity k³ − (k − 1)³ = 3k² − 3k + 1, summed from 1 to n so that the cubes cancel. The sum of cubes, [n(n + 1)/2]², is the square of the triangular number — the same expression the induction proof in Unit-II established — a symmetry worth remembering because it links the arithmetic sum to its square."
+        },
+        {
+          "type": "paragraph",
+          "text": "These formulas matter beyond assessment: they convert sums into closed form, which is exactly what makes sums manipulable in calculus and in probability later. Practised by deriving rather than copying, they also rehearse the telescoping technique — writing each term as a difference so that intermediate terms cancel — which recurs throughout higher mathematics. Use them first to check numerical work: compute 1² + 2² + 3² both directly (14) and by the formula (3·7·6/6 = 14), and the agreement builds the trust the formula needs when n is large."
+        },
+        {
+          "type": "table",
+          "caption": "The three special sums (formative)",
+          "columns": [
+            "Sum",
+            "Closed form",
+            "Check at n = 3"
+          ],
+          "rows": [
+            [
+              "1 + 2 + … + n",
+              "n(n + 1)/2",
+              "6"
+            ],
+            [
+              "1² + 2² + … + n²",
+              "n(n + 1)(2n + 1)/6",
+              "14"
+            ],
+            [
+              "1³ + 2³ + … + n³",
+              "[n(n + 1)/2]²",
+              "36"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Sum of the first 100 positive integers.",
+              "note": "100 × 101/2 = 5050 — Gauss’s answer."
+            },
+            {
+              "text": "Sum of squares of the first 10.",
+              "note": "10 × 11 × 21/6 = 385."
+            },
+            {
+              "text": "Sum of cubes of the first 4.",
+              "note": "(4 × 5/2)² = 100, matching 1 + 8 + 27 + 64."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Arithmetic against geometric growth",
+      "description": "One pair of axes carrying two plots from the same starting value: the arithmetic sequence as evenly spaced dots rising along a straight line with the constant difference d marked between successive heights, and the geometric sequence as dots on a curve whose vertical gaps multiply by the ratio r, with both gap patterns annotated.",
+      "labels": [
+        "A.P.: constant gap d between terms",
+        "G.P.: gaps multiply by r each step",
+        "Straight line versus exponential curve",
+        "Same first term, different behaviour",
+        "Sum formulas mirror that difference"
+      ]
+    },
+    {
+      "caption": "Figure: The sum of an infinite geometric series as a limit",
+      "description": "A bar divided into halves, quarters, eighths and sixteenths stacked within a unit square, each new piece visibly smaller, with a bracket spanning the whole marked a/(1 − r) = 2 and a note that the pieces never exceed the unit — illustrating convergence when |r| < 1.",
+      "labels": [
+        "First term a: the biggest piece",
+        "Each piece is r times the last",
+        "Pieces shrink: r < 1 in size",
+        "Total approaches a/(1 − r)",
+        "If r ≥ 1 the pieces never shrink"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A sequence is an ordered list; a series is the sum of its terms.",
+    "A.P. has common difference d; nth term a + (n − 1)d.",
+    "A.P. sum: pair first with last, n/2 pairs of equal sums.",
+    "G.P. has common ratio r; nth term arⁿ⁻¹.",
+    "G.P. sum: a(rⁿ − 1)/(r − 1) for r ≠ 1, obtained by subtracting rS.",
+    "Infinite G.P. sums to a/(1 − r) only when |r| < 1; otherwise it diverges.",
+    "AM = (a + b)/2, GM = √(ab) for positive a, b.",
+    "AM ≥ GM with equality exactly at a = b — the optimisation tool of this chapter.",
+    "Σk = n(n + 1)/2, Σk² = n(n + 1)(2n + 1)/6, Σk³ = [n(n + 1)/2]² (formative).",
+    "Telescoping — writing terms as differences — is the technique behind the sum-of-squares derivation."
+  ],
+  "examFocus": [
+    "Test differences, then ratios, before choosing a formula.",
+    "For infinite sums, state |r| < 1 before applying a/(1 − r).",
+    "AM–GM answers must include the equality condition.",
+    "Large-index sums: use the closed form and verify with small n first."
+  ],
+  "vocabulary": [
+    {
+      "word": "Sequence",
+      "meaning": "An ordered list of numbers governed by a rule."
+    },
+    {
+      "word": "Series",
+      "meaning": "The sum of the terms of a sequence."
+    },
+    {
+      "word": "Common difference (d)",
+      "meaning": "The constant gap between successive terms of an A.P."
+    },
+    {
+      "word": "Common ratio (r)",
+      "meaning": "The constant quotient between successive terms of a G.P."
+    },
+    {
+      "word": "Converge",
+      "meaning": "Approach a finite limit — what |r| < 1 guarantees for infinite sums."
+    },
+    {
+      "word": "Arithmetic mean",
+      "meaning": "The total divided by the count: (a + b)/2 for two numbers."
+    },
+    {
+      "word": "Geometric mean",
+      "meaning": "The nth root of the product: √(ab) for two numbers."
+    },
+    {
+      "word": "Telescoping",
+      "meaning": "Writing terms as differences so intermediate terms cancel."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-seq-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The 12th term of the A.P. 5, 9, 13, … is:",
+      "options": [
+        "45",
+        "49",
+        "53",
+        "48"
+      ],
+      "correctIndex": 1,
+      "answer": "49",
+      "explanation": "d = 4, so a₁₂ = 5 + 11 × 4 = 49 — the first term plus eleven steps of the common difference."
+    },
+    {
+      "id": "cbse11-math-seq-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sum to infinity of 8 + 4 + 2 + … exists and equals:",
+      "options": [
+        "16",
+        "24",
+        "12",
+        "8"
+      ],
+      "correctIndex": 0,
+      "answer": "16",
+      "explanation": "a = 8 and r = ½ with |r| < 1, so the sum is 8/(1 − ½) = 16."
+    },
+    {
+      "id": "cbse11-math-seq-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For positive a and b with a + b = 20, the maximum product ab occurs when:",
+      "options": [
+        "a = b = 10",
+        "a = 19, b = 1",
+        "a = 15, b = 5",
+        "Never — the product is constant"
+      ],
+      "correctIndex": 0,
+      "answer": "a = b = 10",
+      "explanation": "AM ≥ GM rearranged says ab ≤ ((a + b)/2)² = 100, with equality only at a = b = 10 — the equality case is the answer."
+    },
+    {
+      "id": "cbse11-math-seq-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The sum 1² + 2² + … + 10² equals:",
+      "options": [
+        "385",
+        "505",
+        "330",
+        "100"
+      ],
+      "correctIndex": 0,
+      "answer": "385",
+      "explanation": "The formula n(n + 1)(2n + 1)/6 at n = 10 gives 10 × 11 × 21/6 = 385."
+    },
+    {
+      "id": "cbse11-math-seq-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A progression in which each term is a fixed multiple of the previous one is a geometric ________ .",
+      "answer": "progression",
+      "explanation": "The constant multiplier is the common ratio r, which defines the progression."
+    },
+    {
+      "id": "cbse11-math-seq-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An infinite geometric series has a finite sum only when the magnitude of r is ________ 1.",
+      "answer": "less",
+      "explanation": "The condition is |r| < 1, which makes the powers rⁿ vanish as n grows."
+    },
+    {
+      "id": "cbse11-math-seq-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the 15th term and the sum of the first 15 terms of the A.P. 7, 11, 15, …",
+      "answer": "Here a = 7 and the common difference is d = 11 − 7 = 4. The nth term formula gives a₁₅ = a + 14d = 7 + 14 × 4 = 7 + 56 = 63. For the sum, use S = n/2 × (first + last) = 15/2 × (7 + 63) = 15/2 × 70 = 15 × 35 = 525. Alternatively S = n/2 [2a + (n − 1)d] = 15/2 [14 + 56] = 15/2 × 70 = 525 — the two forms agree, which is a useful check. A third check: the mean of an A.P. is the average of first and last, 35, and 15 × 35 = 525 as above.",
+      "explanation": "Both the term and the sum, with d identified and at least one cross-check of the result."
+    },
+    {
+      "id": "cbse11-math-seq-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A ball is dropped from 16 m and bounces back to half its previous height each time. Find the total distance travelled when it has come to rest.",
+      "answer": "Each drop-and-rise cycle covers a height that is half the previous one, so the journey splits into two geometric series. The descent series is 16 + 8 + 4 + … with a = 16 and r = ½, summing to 16/(1 − ½) = 32 m. The ascent series is 8 + 4 + 2 + … with a = 8 and r = ½, summing to 8/(1 − ½) = 16 m. Adding both: total distance = 32 + 16 = 48 m. The condition for using a/(1 − r) is satisfied since |r| = ½ < 1; had the ball rebound at full height the series would diverge and the total distance would be infinite. A useful partial check: after two bounces the ball has covered 16 + 8 + 8 + 4 = 36 m, which already approaches the predicted 48 m from below.",
+      "explanation": "Both series identified with their parameters, the convergence condition stated, both sums computed and added, and a partial-sum check."
+    },
+    {
+      "id": "cbse11-math-seq-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that AM ≥ GM for positive a and b, state when equality holds, and apply it to find two positive numbers of sum 30 whose product is greatest.",
+      "answer": "Proof: begin from the square (a − b)², which is ≥ 0 for all real a, b because squares are non-negative. Expanding gives a² − 2ab + b² ≥ 0. Add 4ab to both sides: a² + 2ab + b² ≥ 4ab, that is (a + b)² ≥ 4ab. Both sides are non-negative, so taking square roots preserves the order: a + b ≥ 2√(ab), and dividing by 2 gives (a + b)/2 ≥ √(ab) — AM ≥ GM. Equality holds exactly when (a − b)² = 0, that is when a = b, and no other case. Application: let the numbers be a and b with a + b = 30. By AM ≥ GM, √(ab) ≤ 15, so ab ≤ 225, with equality when a = b = 15. Hence the greatest product is 225, attained at 15 and 15. Verification of the bound: 14 × 16 = 224 < 225 and 10 × 20 = 200 < 225, so moving away from equality reduces the product as the inequality predicts.",
+      "explanation": "A complete derivation with the non-negativity step, the equality condition stated, the optimisation applied with its equality case, and a numerical verification."
+    },
+    {
+      "id": "cbse11-math-seq-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Compare the arithmetic and geometric series 100 + 97 + 94 + … and 100 + 50 + 25 + … over the first 20 terms: which sums first reaches 1000, and what general principle does the comparison illustrate?",
+      "answer": "Series one is arithmetic with a = 100, d = −3: S₂₀ = 20/2 × [200 + 19(−3)] = 10 × [200 − 57] = 10 × 143 = 1,430. Series two is geometric with a = 100 and r = ½: S₂₀ = 100(1 − ½²⁰)/(1 − ½) = 200(1 − 2⁻²⁰) ≈ 200(1 − 0.00000095) ≈ 199.9998. So over twenty terms the arithmetic sum reaches 1,430 while the geometric sum only approaches 200 — the arithmetic series passes 1,000 while the geometric one never gets near it in this window. The general principle is that arithmetic accumulation and geometric accumulation fail in opposite directions: an A.P. with constant negative difference decreases its terms linearly, so its sum keeps growing without bound (just ever more slowly), whereas a G.P. with |r| < 1 has terms that shrink geometrically, so its sum is capped at a/(1 − r) — here 100/(1 − ½) = 200 for all time, no matter how many terms are added. The comparison also explains the syllabus’s asymmetry: infinite sums are defined for geometric series precisely because the cap exists, while an infinite arithmetic series with non-zero difference has no finite sum since its partial sums never stop growing. The crossover intuition is worth stating too: geometric decay dominates arithmetic decay early — after just four terms the geometric terms (100, 50, 25, 12.5) are already far smaller than the arithmetic ones (100, 97, 94, 91) — but only the arithmetic sum continues to climb past every bound.",
+      "explanation": "Full marks require both sums computed with their formulas, the correct verdict for twenty terms, and the contrast between unbounded arithmetic accumulation and the geometric cap a/(1 − r)."
+    }
+  ]
+}

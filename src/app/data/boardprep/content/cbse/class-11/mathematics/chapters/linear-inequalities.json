@@ -1,0 +1,433 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-inequalities",
+  "title": "Linear Inequalities",
+  "kind": "mathematics",
+  "tagline": "Solving, combining and picturing solution sets — on a line, and on a plane for the formative graphical work.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Inequalities are equations with direction, and the whole chapter turns on the one rule that changes when multiplication goes negative. The main-list material solves linear inequalities in one variable and represents the answers on the number line — including compound inequalities joined by and or or — while the formative extension the syllabus attaches to this chapter draws the solutions of inequalities in two variables as half-planes, and combinations of them as the regions where systems overlap.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Algebra (25 marks shared with the other Algebra chapters)."
+      },
+      {
+        "label": "The rule",
+        "value": "Adding or multiplying by a positive number preserves the sense; multiplying or dividing by a negative number reverses it."
+      },
+      {
+        "label": "Reading",
+        "value": "Solutions are sets: an open circle excludes the endpoint, a closed one includes it, and shading shows every value that works."
+      },
+      {
+        "label": "Formative topic",
+        "value": "Graphical solution of inequalities in two variables and of systems of two linear inequalities."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Solve linear inequalities in one variable, applying the sign rule correctly.",
+    "Represent solution sets on a number line and in interval notation.",
+    "Combine conditions with and (intersection) and or (union).",
+    "Translate a word problem into a linear inequality and solve it.",
+    "Draw the half-plane solution of a two-variable inequality and find a system’s feasible region."
+  ],
+  "learn": [
+    {
+      "id": "rules",
+      "title": "The algebra of inequality",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An inequality behaves like an equation under addition and multiplication by positive numbers: you may add the same quantity to both sides, or multiply both sides by the same positive number, without changing which side is larger. Multiplication or division by a negative number is different, because it reflects the number line: 2 < 3 but −4 > −6, so the sense must be reversed whenever a negative factor is introduced. Forgetting this single rule is the most common error in the chapter, and it is worth practising deliberately — solve an inequality involving a negative coefficient slowly, flipping the sign as the step that earns or loses the marks."
+        },
+        {
+          "type": "paragraph",
+          "text": "The strategy for a linear inequality in one variable mirrors solving an equation: expand brackets, collect variable terms on one side and constants on the other, then divide by the coefficient — checking its sign as you do. Compound expressions add one decision. A double inequality such as −2 < 3x − 5 ≤ 7 is best handled by performing the same operation on all three parts at once, which keeps the two boundaries locked together; and when two conditions are joined by and, the solution is the overlap of their sets, while or asks for the union. Translating the answer into interval notation at the end — (a, b), [a, ∞) and so on — both confirms the reading and prepares the two-variable work, where the same words describe regions."
+        },
+        {
+          "type": "table",
+          "caption": "Operations and whether the sense survives",
+          "columns": [
+            "Operation",
+            "Sense",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Add or subtract the same quantity",
+              "Preserved",
+              "2 < 5 ⇒ 2 + 3 < 5 + 3"
+            ],
+            [
+              "Multiply by a positive number",
+              "Preserved",
+              "2 < 5 ⇒ 6 < 15"
+            ],
+            [
+              "Multiply by a negative number",
+              "Reversed",
+              "2 < 5 ⇒ −6 > −15"
+            ],
+            [
+              "Divide by a negative number",
+              "Reversed",
+              "−3x > 9 ⇒ x < −3"
+            ],
+            [
+              "Take reciprocals (both sides positive)",
+              "Reversed",
+              "2 < 5 ⇒ ½ > ⅕"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Adding or multiplying by a positive preserves the sense.",
+            "Multiplying or dividing by a negative reverses it — the chapter’s key rule.",
+            "Double inequalities: operate on all three parts together.",
+            "and means intersection; or means union.",
+            "Finish in interval notation: (a, b), [a, b], [a, ∞)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "numberline",
+      "title": "Solution sets on the number line",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A solution set for one variable is a set of points on the real line, and the picture makes the algebra auditable. An open circle at the endpoint means the endpoint is excluded (strict inequality), a closed circle means it is included, and the shading between or beyond shows the values that survive the test. When two conditions are combined, the diagram settles what the words mean: for and, shade only where both shadings coexist — typically a bounded segment; for or, shade everything either condition claimed — typically a ray stretching to infinity in one or both directions."
+        },
+        {
+          "type": "paragraph",
+          "text": "The representation also protects against a classic misreading. Students frequently solve each part of a double inequality correctly and then present the intersection where the union was asked for, or vice versa; the picture exposes the error at a glance because and visibly narrows while or visibly widens. Practise drawing the two shadings separately before combining them, and always test one value from your stated solution and one value outside it by substituting back into the original inequality. That two-point check takes ten seconds and catches most mistakes before submission."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve 3x − 5 < 7 and x > 1.",
+              "note": "First gives x < 4; the intersection with x > 1 is 1 < x < 4, or (1, 4)."
+            },
+            {
+              "text": "Solve x − 2 ≤ 0 or x + 3 > 8.",
+              "note": "x ≤ 2 union x > 5: (−∞, 2] ∪ (5, ∞)."
+            },
+            {
+              "text": "Test the endpoint: is x = 4 in 3x − 5 < 7?",
+              "note": "No — substitution gives 7 < 7, false, so the circle at 4 stays open."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wordproblems",
+      "title": "From sentences to inequalities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Word problems are translations, and the vocabulary is finite. More than, at least, exceeds and a minimum of become strict or non-strict lower bounds (>, ≥); at most, no more than and cannot exceed become upper bounds (≤); within means a bounded interval; and consecutive-integer or age problems supply the expressions to compare. Once translated, the algebra is the same as everywhere else in the chapter — the entire difficulty sits in the sentence, which is why the habit of stating the variable in words (“let x be the number of …”) before writing the inequality is worth its line of space."
+        },
+        {
+          "type": "paragraph",
+          "text": "Applied answers must also be rounded to their context. If x counts people, a solution such as x > 6.2 means at least 7 people, and the rounding direction depends on the inequality: greater-than-6.2 rounds up, while at-most-6.2 rounds down to 6. Writing the mathematical solution and then the contextually correct integer answer as two separate lines is the standard the examiner expects, and it is where the final marks of these questions are usually awarded or lost."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A taxi charges ₹50 plus ₹12 per km; ₹200 buys at most how far?",
+              "note": "50 + 12x ≤ 200 ⇒ x ≤ 12.5, so at most 12.5 km — 12 full kilometres."
+            },
+            {
+              "text": "Twice a number exceeds 15 by at least 7. Find the least value.",
+              "note": "2x ≥ 22, so x ≥ 11; the least value is 11."
+            },
+            {
+              "text": "“At most 8” written as an interval.",
+              "note": "x ≤ 8, i.e. (−∞, 8] — the closed bracket at 8."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "twovar",
+      "title": "Half-planes and systems (formative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The formative extension moves the same idea to the plane. An inequality in x and y, say y > 2x − 1, is satisfied by whole regions: first draw the boundary line y = 2x − 1 — dashed when the inequality is strict, solid when it includes equality — and then test one convenient point not on the line, usually the origin. If the point satisfies the inequality, shade the side containing it; if not, shade the opposite side. The result is a half-plane, and the discipline of drawing the boundary first and testing second prevents the most frequent error in this topic, which is shading the correct line on the wrong side."
+        },
+        {
+          "type": "paragraph",
+          "text": "A system of two or more inequalities has as its solution the overlap of the individual half-planes — the feasible region — which is the foundation of the optimisation work commerce and economics students meet later. Each added inequality cuts the region further; the region may be a polygon, a strip or empty, and emptiness is itself a meaningful answer, showing that the conditions contradict one another. Since this material is assessed only formatively, practise it as spatial reasoning: draw carefully, test the origin or another clear point for each line, and read the overlap from the picture rather than from algebra."
+        },
+        {
+          "type": "table",
+          "caption": "Drawing the solution of a linear inequality in two variables",
+          "columns": [
+            "Step",
+            "Action",
+            "Why"
+          ],
+          "rows": [
+            [
+              "1",
+              "Rewrite as y = mx + c for the boundary",
+              "The line is the edge of the region"
+            ],
+            [
+              "2",
+              "Solid line if ≤ or ≥, dashed if < or >",
+              "Equality decides whether the edge counts"
+            ],
+            [
+              "3",
+              "Test a point off the line (often the origin)",
+              "Determines which side works"
+            ],
+            [
+              "4",
+              "Shade the satisfying side",
+              "The picture is the answer"
+            ],
+            [
+              "5",
+              "For a system, shade each region and take the overlap",
+              "and means intersection"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Boundary for y ≤ 3x + 2.",
+              "note": "The line y = 3x + 2 drawn solid, since equality is included."
+            },
+            {
+              "text": "Test the origin in y > x + 4.",
+              "note": "0 > 4 is false, so shade the side away from the origin."
+            },
+            {
+              "text": "System: y ≥ 0 and x + y ≤ 4 and x ≥ 0.",
+              "note": "The triangle with vertices (0, 0), (4, 0), (0, 4) — the feasible region."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Solution sets on the number line",
+      "description": "Four stacked number lines: 1 < x < 4 drawn as open circles at 1 and 4 with the segment between shaded; x ≥ −2 as a closed circle with shading to the right; the union of x ≤ 2 or x > 5 as two separate shaded pieces; and a double inequality solved by operations on all three parts.",
+      "labels": [
+        "Open circle: endpoint excluded",
+        "Closed circle: endpoint included",
+        "and: only the overlap is shaded",
+        "or: everything either set claims",
+        "Test a value inside and outside before submitting"
+      ]
+    },
+    {
+      "caption": "Figure: Half-planes and the feasible region of a system",
+      "description": "A coordinate plane with the line y = 2x − 1 dashed and its satisfying side lightly hatched, a second solid line x + y = 4 with its side hatched in the opposite direction, and the lens-shaped overlap of the two hatchings outlined boldly and labelled feasible region, with the origin marked as a test point.",
+      "labels": [
+        "Dashed boundary: strict inequality",
+        "Solid boundary: equality included",
+        "Test point (often the origin) picks the side",
+        "Overlap of the shadings: the feasible region",
+        "Empty overlap: the system has no solution"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Adding or multiplying by a positive preserves the inequality sense.",
+    "Multiplying or dividing by a negative reverses it — the rule that costs most marks.",
+    "Double inequalities: apply each operation to all three parts together.",
+    "and joins conditions by intersection; or by union.",
+    "Open circle excludes the endpoint; closed circle includes it.",
+    "Interval notation: (a, b) open, [a, b] closed, [a, ∞) unbounded.",
+    "Word problems: state the variable in words before writing the inequality.",
+    "Round the final answer to the context — people and items are integers.",
+    "Two-variable inequalities shade a half-plane: boundary first, test point second.",
+    "A system’s solution is the overlap of its half-planes — the feasible region (formative)."
+  ],
+  "examFocus": [
+    "Flip the sign when multiplying by a negative; show that step explicitly.",
+    "Draw both shadings before combining them — or narrows, and widens.",
+    "State the variable in words at the start of every word problem.",
+    "Give the mathematical solution and then the contextual integer answer."
+  ],
+  "vocabulary": [
+    {
+      "word": "Inequality",
+      "meaning": "A comparison with <, >, ≤ or ≥ instead of equality."
+    },
+    {
+      "word": "Sense of an inequality",
+      "meaning": "Which side is larger — preserved or reversed by operations."
+    },
+    {
+      "word": "Solution set",
+      "meaning": "All values satisfying the inequality, written as a set or interval."
+    },
+    {
+      "word": "Compound inequality",
+      "meaning": "Two conditions joined by and or or."
+    },
+    {
+      "word": "Half-plane",
+      "meaning": "One side of a line — the solution region of a linear inequality in two variables."
+    },
+    {
+      "word": "Feasible region",
+      "meaning": "The overlap where every inequality of a system holds."
+    },
+    {
+      "word": "Boundary line",
+      "meaning": "The line where equality holds; solid or dashed by inclusion."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-ineq-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Solving −3x > 9 gives:",
+      "options": [
+        "x > −3",
+        "x < −3",
+        "x > 3",
+        "x < 3"
+      ],
+      "correctIndex": 1,
+      "answer": "x < −3",
+      "explanation": "Dividing both sides by the negative number −3 reverses the sense, so x < −3 — the rule the chapter is built on."
+    },
+    {
+      "id": "cbse11-math-ineq-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solution of 1 < x ≤ 5 written in interval notation is:",
+      "options": [
+        "(1, 5)",
+        "(1, 5]",
+        "[1, 5]",
+        "[1, 5)"
+      ],
+      "correctIndex": 1,
+      "answer": "(1, 5]",
+      "explanation": "The strict inequality at 1 excludes it (round bracket) while x ≤ 5 includes 5 (square bracket)."
+    },
+    {
+      "id": "cbse11-math-ineq-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For “x ≥ 3 or x < 1”, the number line shows:",
+      "options": [
+        "The segment between 1 and 3",
+        "Two separate shaded pieces",
+        "The whole line except [1, 3)",
+        "Only x = 3"
+      ],
+      "correctIndex": 1,
+      "answer": "Two separate shaded pieces",
+      "explanation": "An or-join takes the union: everything at or above 3 together with everything below 1 — two pieces, with 1 open and 3 closed."
+    },
+    {
+      "id": "cbse11-math-ineq-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The solution set of y > 2x − 1 drawn on a plane is:",
+      "options": [
+        "The line y = 2x − 1 itself",
+        "A half-plane bounded by a dashed line",
+        "A half-plane bounded by a solid line",
+        "The region below the line only"
+      ],
+      "correctIndex": 1,
+      "answer": "A half-plane bounded by a dashed line",
+      "explanation": "Strict inequality excludes the boundary (dashed line) and the solution is one side of it — tested by checking a point such as the origin."
+    },
+    {
+      "id": "cbse11-math-ineq-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Multiplying both sides of an inequality by a negative number ________ the sense of the inequality.",
+      "answer": "reverses",
+      "explanation": "Reflection about zero swaps which side is larger: 2 < 3 but −4 > −6."
+    },
+    {
+      "id": "cbse11-math-ineq-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The compound conditions joined by “and” combine by ________ of their solution sets.",
+      "answer": "intersection",
+      "explanation": "Both conditions must hold, so only the overlap belongs to the answer."
+    },
+    {
+      "id": "cbse11-math-ineq-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve 5x − 7 ≤ 3x + 1 and represent the answer on the number line.",
+      "answer": "Subtract 3x from both sides: 2x − 7 ≤ 1. Add 7: 2x ≤ 8. Divide by the positive number 2: x ≤ 4. The solution set is (−∞, 4]. On the number line this is a closed circle at 4 — the equality is included — with shading running to the left without end. A check with x = 4 gives 13 ≤ 13, true, and with x = 5 gives 18 ≤ 16, false, confirming that 4 is the last value in the set.",
+      "explanation": "The solved inequality, the interval, the closed-circle picture described, and a boundary check."
+    },
+    {
+      "id": "cbse11-math-ineq-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Solve the double inequality −2 ≤ 3x − 5 < 7 and give the answer in interval notation.",
+      "answer": "Operate on all three parts together. Add 5: 3 ≤ 3x < 12. Divide by the positive number 3: 1 ≤ x < 4. The solution set is therefore [1, 4) — closed at 1 because the original inequality there was ≤, open at 4 because it was strict. Checks: x = 1 gives −2 ≤ −2 ✓ and −2 < 7 ✓; x = 4 would give 7 < 7, false, so the endpoint is correctly excluded; a middle value such as x = 2 gives −2 ≤ 1 < 7 ✓.",
+      "explanation": "Every operation applied to three parts, both endpoint checks, and the mixed bracket notation."
+    },
+    {
+      "id": "cbse11-math-ineq-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The cost of renting a hall is ₹2000 plus ₹80 per guest. With a budget of ₹6800, find how many guests can be hosted, and explain the rounding in context.",
+      "answer": "Let x be the number of guests. The total cost is 2000 + 80x, and it must not exceed the budget: 2000 + 80x ≤ 6800. Subtract 2000: 80x ≤ 4800. Divide by the positive number 80: x ≤ 60. So the mathematical solution set is (−∞, 60] — at most sixty guests. Contextual rounding: since x counts people it must be a whole number, and because the bound itself is the integer 60 with ≤ included, no rounding adjustment is needed — the answer is exactly 60 guests. Had the algebra produced x ≤ 59.4, the answer would be 59, because the largest integer not exceeding 59.4 is 59; and had it produced x > 59.4, the answer would begin at 60. Verification: 60 guests cost 2000 + 4800 = 6800, exactly the budget, which the ≤ permits; 61 guests would cost 6880 and break it.",
+      "explanation": "The inequality set up from the sentence, solved without the sign rule being violated, with the rounding explained in context and a boundary verification."
+    },
+    {
+      "id": "cbse11-math-ineq-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student solves −2x + 1 > 5 as “−2x > 4 so x > −2”. Find the error, correct it, and then determine all integers satisfying 1 < |x − 3| ≤ 4, explaining the geometric meaning of the modulus inequality.",
+      "answer": "The error is the missing reversal: dividing both sides of −2x > 4 by the negative number −2 must flip the sense. Correctly: −2x > 4 ⇒ x < −2 (check x = −3: 7 > 5 ✓; x = 0: 1 > 5 ✗ — so values below −2 work, as the corrected answer says). Second part: |x − 3| is the distance from x to 3 on the number line, so the condition 1 < distance ≤ 4 describes the points lying strictly more than 1 but at most 4 away from 3 — an annular band on the line, i.e. the union of two intervals. Algebraically split it: 1 < |x − 3| means x − 3 > 1 or x − 3 < −1, that is x > 4 or x < 2; and |x − 3| ≤ 4 means −4 ≤ x − 3 ≤ 4, that is −1 ≤ x ≤ 7. Taking the intersection (both conditions must hold): on the right, 4 < x ≤ 7; on the left, −1 ≤ x < 2. The solution set is [−1, 2) ∪ (4, 7], and the integers it contains are −1, 0, 1 and 5, 6, 7 — six integers in total. The geometric reading explains the answer’s two-piece shape: points at distance at most 4 from 3 form the segment [−1, 7], and removing the points within distance 1 — the open interval (2, 4) — leaves exactly the two shaded pieces found algebraically.",
+      "explanation": "Full marks require identifying the sign-reversal error with a check, the corrected solution, the modulus inequality solved as a two-piece set with the integers listed, and the distance interpretation stated."
+    }
+  ]
+}

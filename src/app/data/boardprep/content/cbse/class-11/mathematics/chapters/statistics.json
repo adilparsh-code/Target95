@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-statistics",
+  "title": "Statistics",
+  "kind": "mathematics",
+  "tagline": "Range, mean deviation, variance and standard deviation — four rulers for spread, and how to choose between them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "The measures of central tendency tell you where a data set sits; this chapter asks the harder question of how widely it is scattered, and gives four instruments for answering it. Range is the quick glance, mean deviation is the honest average distance, and variance with standard deviation are the precise, algebraically powerful tools that statistical theory itself uses. Each is developed for ungrouped and grouped data, each is carried through worked numerical examples, and the chapter closes with the comparison that decides which measure a particular distribution deserves.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-V: Statistics and Probability — 12 marks shared with the Probability chapter."
+      },
+      {
+        "label": "Range",
+        "value": "Largest value minus smallest value — the simplest, most outlier-sensitive measure."
+      },
+      {
+        "label": "Mean deviation",
+        "value": "The average of the absolute deviations from the mean (or median)."
+      },
+      {
+        "label": "Variance and S.D.",
+        "value": "σ² = mean of squared deviations; σ = √σ², in the same units as the data."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute range and mean deviation for ungrouped and grouped data.",
+    "Calculate variance and standard deviation from a deviation table.",
+    "Apply the shortcut using assumed mean for grouped data.",
+    "Compare distributions using the coefficient of variation.",
+    "State which measure of spread suits a given distribution and why."
+  ],
+  "learn": [
+    {
+      "id": "spread",
+      "title": "Why spread matters and the range",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two classes may average the same marks and yet be completely different: one clusters tightly about the average, the other straggles from very low to very high. Any statement about an average that ignores the scatter is half a statement, because the average alone cannot tell you what to expect from an individual case — the risk in insurance, medicine and quality control lives in the spread. The simplest measure is the range: the largest observation minus the smallest. It is one subtraction, it uses only two of the values, and that is exactly its weakness — a single extreme value moves it, while the other ninety-nine data points contribute nothing at all. Range is a useful first glance and a poor final word."
+        },
+        {
+          "type": "paragraph",
+          "text": "Better measures must consult every observation, and the natural idea is distance from the middle. Take each observation, subtract the mean, and you have its deviation; the mean of those deviations is zero by construction — positive and negative deviations cancel — so to get a non-zero summary you either discard the signs or square them. Discarding the signs gives mean deviation, an average distance that stays in the original units and is easy to interpret: the typical value sits about this far from the mean. Squaring gives variance, which is the quantity statistical theory prefers because squared deviations behave well under addition. Both routes, and the standard deviation that comes from the second, are the content of the following lessons, each worked for ungrouped data first and then for the grouped case where frequencies must be carried along."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Spread decides what an average alone cannot: what to expect from one case.",
+            "Range = max − min: instant but hostage to outliers.",
+            "Deviation = observation − mean; deviations from the mean always sum to zero.",
+            "Signs discarded → mean deviation; signs squared → variance.",
+            "Every measure must use every observation, not just the extremes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "meandev",
+      "title": "Mean deviation for ungrouped and grouped data",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For ungrouped data the mean deviation about the mean is computed in three moves: find the mean, tabulate |xᵢ − x̄| for each observation, and average those absolute values. Using the median as the reference instead of the mean gives the mean deviation about the median, which is occasionally the smaller of the two and is worth knowing as an alternative — the median is itself the value that minimises the total absolute deviation, which is why it pairs naturally with absolute distances. For grouped data, each observation is replaced by its frequency: the mean becomes the weighted mean Σfᵢxᵢ/Σfᵢ, and the deviations are weighted too, giving mean deviation = Σfᵢ|xᵢ − x̄|/Σfᵢ. The method is identical in structure; only the bookkeeping changes."
+        },
+        {
+          "type": "paragraph",
+          "text": "The absolute value is both the strength and the limitation of mean deviation. Strength: it stays in the units of the data, so a mean deviation of 4.2 marks means an average observation sits about four marks from the mean — no interpretation required. Limitation: |·| is not differentiable at zero, which stops algebra from carrying mean deviation through the theory of estimation; squared deviations have no such obstacle, which is precisely why variance becomes the standard in everything beyond this course. In an exam setting, mean deviation questions are arithmetic exercises in careful tabulation: build the columns (xᵢ, xᵢ − x̄, |xᵢ − x̄| or the f-weighted versions), sum carefully, divide by n — and check that the sum of deviations used for the mean is indeed zero before trusting the absolute-value column."
+        },
+        {
+          "type": "table",
+          "caption": "Mean deviation: the two cases",
+          "columns": [
+            "Data",
+            "Centre used",
+            "Formula"
+          ],
+          "rows": [
+            [
+              "Ungrouped",
+              "Mean x̄",
+              "Σ|xᵢ − x̄| / n"
+            ],
+            [
+              "Ungrouped",
+              "Median M",
+              "Σ|xᵢ − M| / n"
+            ],
+            [
+              "Grouped (discrete)",
+              "Mean x̄",
+              "Σfᵢ|xᵢ − x̄| / Σfᵢ"
+            ],
+            [
+              "Grouped (continuous)",
+              "Mean x̄ of class marks",
+              "Σfᵢ|mᵢ − x̄| / Σfᵢ"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Data 6, 7, 10, 12, 13, 4: mean deviation about the mean.",
+              "note": "Mean = 52/6 ≈ 8.67; deviations 2.67, 1.67, 1.33, 3.33, 4.33, 4.67 sum to 18 → MD = 3."
+            },
+            {
+              "text": "Deviation check: do deviations from the mean sum to zero?",
+              "note": "Yes — that identity is the fastest way to catch a wrong mean."
+            },
+            {
+              "text": "Grouped: frequencies 2, 3, 5 at values 10, 20, 30.",
+              "note": "Mean = (20 + 60 + 150)/10 = 23; MD = (2×13 + 3×3 + 5×7)/10 = 80/10 = 8."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "variance",
+      "title": "Variance and standard deviation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Variance is the mean of the squared deviations from the mean: σ² = Σ(xᵢ − x̄)²/n for ungrouped data and Σfᵢ(xᵢ − x̄)²/Σfᵢ when frequencies are attached. Squaring before averaging has two consequences that define the whole character of the measure. First, every contribution is non-negative, so distant observations are penalised quadratically rather than linearly — an observation five units away counts twenty-five squared units, which is why variance is sensitive to outliers in a way mean deviation is not. Second, the units are squared: if the data are in marks, the variance is in marks², which is not interpretable on its own. Taking the square root returns to the original units, and that root is the standard deviation — the single most widely used measure of spread in statistics."
+        },
+        {
+          "type": "paragraph",
+          "text": "For computation, the raw-data identity σ² = (Σxᵢ²)/n − x̄² is faster than a full deviation table and is worth using as a cross-check of the tabular method rather than as a replacement for understanding. For grouped data the assumed-mean shortcut plays the same role: shift the origin by taking dᵢ = xᵢ − A for a convenient assumed mean A, compute the mean of the dᵢ, and rebuild σ² from those smaller numbers — because deviations from a shifted origin differ from deviations from the true mean only by a constant, the final standard deviation is unchanged. This invariance is worth stating explicitly in an answer: the standard deviation measures scatter about the centre, so moving the whole dataset or changing the origin cannot alter it, and questions that ask you to show this are testing the concept rather than the arithmetic."
+        },
+        {
+          "type": "table",
+          "caption": "The variance toolkit",
+          "columns": [
+            "Situation",
+            "Formula",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Ungrouped data",
+              "Σ(xᵢ − x̄)²/n",
+              "Definition — use a deviation table"
+            ],
+            [
+              "Cross-check form",
+              "(Σxᵢ²)/n − x̄²",
+              "Same answer, less tabulating"
+            ],
+            [
+              "Grouped data",
+              "Σfᵢ(xᵢ − x̄)²/Σfᵢ",
+              "Frequency-weighted squares"
+            ],
+            [
+              "Assumed mean A",
+              "σ² = [Σfᵢdᵢ²]/N − ([Σfᵢdᵢ]/N)²",
+              "dᵢ = xᵢ − A; result identical"
+            ],
+            [
+              "Standard deviation",
+              "σ = √σ²",
+              "Back in the data’s own units"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Data 2, 4, 6, 8, 10: variance and S.D.",
+              "note": "Mean 6; squared deviations 16, 4, 0, 4, 16 = 40 → σ² = 8, σ = 2√2 ≈ 2.83."
+            },
+            {
+              "text": "Cross-check with the raw identity.",
+              "note": "Σx² = 220, /5 = 44; 44 − 36 = 8 ✓ matches the table."
+            },
+            {
+              "text": "Effect of adding 5 to every value.",
+              "note": "Mean rises by 5; σ and variance unchanged — scatter is unaffected by shift."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compare",
+      "title": "Comparison, choice and exam technique",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "To compare the spreads of two distributions with different units or widely different averages, the coefficient of variation — the standard deviation expressed as a percentage of the mean, CV = (σ/x̄) × 100 — puts them on one scale. The distribution with the larger CV is the more variable relative to its size, which is why a salary spread of ₹5,000 around a mean of ₹20,000 represents far more relative inequality than the same ₹5,000 around ₹2,00,000. The questions that ask “which series is more consistent” are answered by this number and nothing else, and the working must show both σ and the mean before the ratio, because marks follow the displayed comparison."
+        },
+        {
+          "type": "paragraph",
+          "text": "Choosing among the measures follows from their properties rather than preference. Range when only extremes matter or as an instant check. Mean deviation when you want an interpretable average distance in the data’s own units and the distribution is unremarkable. Standard deviation as the default for comparisons, calculations and anything feeding further statistics, because squared deviations add cleanly across combined groups. And always remember the sensitivity ranking: range most, variance next, mean deviation least — so if a single outlier must not dominate the summary, that ordering tells you which to reach for. In the examination, the arithmetic is the easy part; the marks that separate candidates are in stating formulas, showing deviation tables, and verifying with a second method (raw identity against table, shift-invariance argument, or a quick recomputation of the mean)."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "CV = (σ/x̄) × 100 compares variability across different scales.",
+            "Larger CV = greater relative variability = less consistency.",
+            "Range: outliers dominate. Mean deviation: they barely register. Variance: quadratic sensitivity.",
+            "σ is invariant under change of origin and scales with the data’s units.",
+            "Verify: deviation sums zero; raw identity matches the table; units of σ match the data."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Two distributions, one mean, different spread",
+      "description": "Two bar charts side by side over the same axis of marks, both centred on the same average line, but the left chart clustered narrowly around the centre and the right chart spread from low to high; brackets under each chart labelled with their equal mean and unequal standard deviations.",
+      "labels": [
+        "Same mean in both panels",
+        "Left: small σ, tight cluster",
+        "Right: large σ, wide scatter",
+        "Average alone hides the difference",
+        "Range spans the outermost bars"
+      ]
+    },
+    {
+      "caption": "Figure: Squared deviations from the mean",
+      "description": "A number line of six data points with the mean marked by a vertical rule, vertical stems from each point to the mean labelled with the raw deviations, and beside each stem a square whose area is drawn in proportion to the squared deviation, with the total area divided by n giving the variance.",
+      "labels": [
+        "Stem length: deviation (xᵢ − x̄)",
+        "Deviations sum to zero",
+        "Square area: (xᵢ − x̄)²",
+        "Total area / n = variance",
+        "Square root of that = σ"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Spread is indispensable: averages alone describe distributions incompletely.",
+    "Range = max − min; quick, but controlled by the extremes.",
+    "Deviations from the mean always sum to zero — a free correctness check.",
+    "Mean deviation averages the absolute deviations, in the data’s units.",
+    "Grouped data: weight everything by frequency, using class marks for intervals.",
+    "Variance is the mean of squared deviations; standard deviation is its square root.",
+    "σ² = (Σx²)/n − x̄² is the fast cross-check of the deviation table.",
+    "Change of origin leaves σ unchanged; change of scale multiplies σ.",
+    "Coefficient of variation = (σ/x̄) × 100 compares consistency across series.",
+    "Sensitivity ranking: range > variance > mean deviation for outlier influence."
+  ],
+  "examFocus": [
+    "Write the formula before substituting values — it carries method marks.",
+    "Build deviation tables column by column; sum the first column to check the mean.",
+    "State units: variance is squared units, σ and mean deviation are not.",
+    "“More consistent” questions require the CV of both series computed and compared.",
+    "Cross-check with the raw identity or a shift argument where the question allows."
+  ],
+  "vocabulary": [
+    {
+      "word": "Dispersion",
+      "meaning": "The degree of scatter of values about a centre."
+    },
+    {
+      "word": "Range",
+      "meaning": "Largest minus smallest observation."
+    },
+    {
+      "word": "Deviation",
+      "meaning": "Observation minus the chosen centre (mean or median)."
+    },
+    {
+      "word": "Mean deviation",
+      "meaning": "Average of the absolute deviations from the centre."
+    },
+    {
+      "word": "Variance (σ²)",
+      "meaning": "Mean of the squared deviations — in squared units."
+    },
+    {
+      "word": "Standard deviation (σ)",
+      "meaning": "The square root of variance, in the data’s units."
+    },
+    {
+      "word": "Coefficient of variation",
+      "meaning": "σ as a percentage of the mean — a scale-free spread measure."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-stat-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The range of the data 12, 25, 7, 19, 31, 4 is:",
+      "options": [
+        "27",
+        "31",
+        "17",
+        "28"
+      ],
+      "correctIndex": 0,
+      "answer": "27",
+      "explanation": "Largest minus smallest: 31 − 4 = 27."
+    },
+    {
+      "id": "cbse11-math-stat-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The variance of the data 2, 4, 6, 8, 10 is:",
+      "options": [
+        "8 square units",
+        "2√2 units",
+        "40 square units",
+        "6 units"
+      ],
+      "correctIndex": 0,
+      "answer": "8 square units",
+      "explanation": "Mean 6; squared deviations 16 + 4 + 0 + 4 + 16 = 40, and 40/5 = 8 square units; the standard deviation is √8 = 2√2 units, which is why the units distinguish the two options."
+    },
+    {
+      "id": "cbse11-math-stat-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If every observation of a data set is increased by 10, then its standard deviation:",
+      "options": [
+        "Increases by 10",
+        "Remains unchanged",
+        "Is multiplied by 10",
+        "Becomes zero"
+      ],
+      "correctIndex": 1,
+      "answer": "Remains unchanged",
+      "explanation": "A change of origin shifts the mean and every deviation together, leaving all deviations, and hence σ, exactly as they were."
+    },
+    {
+      "id": "cbse11-math-stat-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two series have means 100 and 20 and standard deviations 10 and 5. Which is the more consistent series by coefficient of variation?",
+      "options": [
+        "The first series",
+        "The second series",
+        "Both are equally consistent",
+        "Cannot be determined from the data"
+      ],
+      "correctIndex": 0,
+      "answer": "The first series",
+      "explanation": "CV₁ = (10/100) × 100 = 10% and CV₂ = (5/20) × 100 = 25%; the smaller coefficient means less relative variability, so the first series is the more consistent."
+    },
+    {
+      "id": "cbse11-math-stat-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The difference between the largest and smallest observations of a data set is its ________ .",
+      "answer": "range",
+      "explanation": "Range = maximum − minimum: the quickest but least robust measure of spread."
+    },
+    {
+      "id": "cbse11-math-stat-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The square root of the variance is called the ________ deviation.",
+      "answer": "standard",
+      "explanation": "It returns the measure to the data’s own units after variance squared them."
+    },
+    {
+      "id": "cbse11-math-stat-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the range and mean deviation about the mean for the data 6, 7, 10, 12, 13, 4.",
+      "answer": "Range: largest − smallest = 13 − 4 = 9. Mean: (6 + 7 + 10 + 12 + 13 + 4)/6 = 52/6 ≈ 8.67. Deviations from the mean: 6 − 8.67 = −2.67, 7 − 8.67 = −1.67, 10 − 8.67 = 1.33, 12 − 8.67 = 3.33, 13 − 8.67 = 4.33, 4 − 8.67 = −4.67; their sum is 0 as it must be, confirming the mean. Absolute deviations: 2.67, 1.67, 1.33, 3.33, 4.33, 4.67, totalling 18. Mean deviation = 18/6 = 3. Interpretation: an average observation sits about 3 marks from the mean, and the range of 9 shows how much wider the full spread is.",
+      "explanation": "Range computation, the mean with the zero-sum check, the absolute-deviation total, and the final division with its interpretation."
+    },
+    {
+      "id": "cbse11-math-stat-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Calculate the variance and standard deviation of 2, 4, 6, 8, 10 using a deviation table, and verify with the raw-data identity.",
+      "answer": "Mean = (2 + 4 + 6 + 8 + 10)/5 = 30/5 = 6. Deviation table: xᵢ − x̄ = −4, −2, 0, 2, 4 (sum 0 ✓); squares = 16, 4, 0, 4, 16, totalling 40. Variance σ² = 40/5 = 8, so σ = √8 = 2√2 ≈ 2.83, in the same units as the data. Cross-check with σ² = (Σxᵢ²)/n − x̄²: Σx² = 4 + 16 + 36 + 64 + 100 = 220, so (Σx²)/n = 44 and 44 − 6² = 44 − 36 = 8 ✓ — the two methods agree. Sanity check on magnitude: no observation lies more than 4 from the mean, so σ must be below 4, and 2.83 satisfies that.",
+      "explanation": "The deviation table with the zero-sum check, both formulas evaluated, the agreement between them, and the magnitude sanity check."
+    },
+    {
+      "id": "cbse11-math-stat-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the mean deviation about the mean for the grouped data: values 10, 20, 30, 40 with frequencies 2, 3, 4, 1.",
+      "answer": "Step 1: total frequency N = 2 + 3 + 4 + 1 = 10. Step 2: the mean is Σfᵢxᵢ/N = (20 + 60 + 120 + 40)/10 = 240/10 = 24. Step 3: absolute deviations from 24: |10 − 24| = 14, |20 − 24| = 4, |30 − 24| = 6, |40 − 24| = 16. Step 4: weight by frequency: 2×14 = 28, 3×4 = 12, 4×6 = 24, 1×16 = 16, totalling 80. Step 5: mean deviation = 80/10 = 8. Verification: the frequency-weighted signed deviations must sum to zero — 2 × (10 − 24) = −28, 3 × (20 − 24) = −12, 4 × (30 − 24) = +24, 1 × (40 − 24) = +16, and −28 − 12 + 24 + 16 = 0 ✓, confirming the mean of 24 was computed correctly before the absolute values were taken. Second check: the weighted absolute column totals 80 against a maximum possible of 10 × 16 = 160, so 8 sits sensibly inside the range of the data (10 to 40), and since no deviation exceeds 16 the mean deviation cannot exceed it — 8 satisfies that bound.",
+      "explanation": "All five steps with frequency weighting, the zero-sum verification of the mean, and a bound check on the result."
+    },
+    {
+      "id": "cbse11-math-stat-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A factory’s two machines produce bolts with mean diameter 10 mm; machine A has σ = 0.2 mm and machine B has σ = 0.6 mm. Explain which machine you would keep, what each σ implies about defect rates if the tolerance is 10 ± 0.5 mm, and why range alone could mislead you here.",
+      "answer": "Choice of machine: keep machine A. Both are centred correctly — accuracy is equal — but consistency differs threefold, and consistency is what tolerance demands. Machine A’s σ = 0.2 mm means its typical bolt sits 0.2 mm from the target, so the tolerance half-width of 0.5 mm equals 2.5σ; machine B’s 0.6 mm makes it only 0.83σ. Under the rough empirical rule that about 95% of a roughly normal spread lies within 2σ, machine A sends about 5% of bolts outside ±0.4 mm and well under 1% beyond ±0.5 mm, while machine B places a large fraction beyond ±0.5 mm — with 0.5 mm less than one σ, roughly a third of its bolts fall outside tolerance on each side combined, near 32%. Precise defect percentages require the distributional assumption, but the ordering does not: smaller σ at the same mean means fewer out-of-tolerance parts, and the A-keeps conclusion is robust to that assumption because 2.5σ versus 0.83σ is an enormous separation. Why range alone misleads: range is decided by the single widest pair of observations, so with a modest sample it is volatile — a rare outlier inflates machine B’s range while a lucky sample shrinks machine A’s, and two machines with genuinely different consistency can post overlapping or even reversed ranges. Range also fails to use most of the data and cannot be combined or compared across different sample sizes; σ uses every observation, and the coefficient of variation would confirm the comparison even if the means were not identical. The broader lesson: tolerance problems are statements about spread relative to a limit, which is exactly what standard deviation measures and what range does not — quality control is therefore built on σ and control charts, not on extremes.",
+      "explanation": "A clear recommendation at equal accuracy, the σ-versus-tolerance reasoning with the 2.5σ and 0.83σ comparison, an honest caveat about the distributional assumption, and a specific explanation of why range is outlier-driven and sample-size dependent."
+    }
+  ]
+}

@@ -1,0 +1,505 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-limits",
+  "title": "Limits",
+  "kind": "mathematics",
+  "tagline": "The intuitive idea of approaching, the algebra of limits, standard results and the trigonometric limits that anchor calculus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "Calculus begins when a value is approached rather than attained, and limits are the language of that idea. This chapter starts with what it means for f(x) to approach L as x approaches a, builds the arithmetic rules that let complicated limits be assembled from simple ones, and then proves the two techniques that resolve the indeterminate form 0/0 — factorisation and rationalisation. The chapter closes on the trigonometric limits, above all lim sin x/x = 1, whose provision that x be measured in radians is not a technicality but the reason calculus uses radians everywhere.",
+    "facts": [
+      {
+        "label": "Notation",
+        "value": "lim x→a f(x) = L: the values of f approach L as x approaches a without ever reaching it."
+      },
+      {
+        "label": "Algebra of limits",
+        "value": "Limits of sums, differences, products and quotients combine the individual limits (denominator non-zero)."
+      },
+      {
+        "label": "Standard trigonometric limits",
+        "value": "lim x→0 sin x/x = 1 and lim x→0 (1 − cos x)/x = 0, with x in radians."
+      },
+      {
+        "label": "Indeterminate 0/0",
+        "value": "Factorise or rationalise to cancel the vanishing factor before substituting."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain the intuitive idea of a limit and evaluate limits of polynomials by substitution.",
+    "Apply the algebra of limits to sums, differences, products and quotients of functions.",
+    "Resolve 0/0 indeterminate forms by factorisation and by rationalisation.",
+    "Apply the standard trigonometric limits, including scaled arguments such as sin 3x.",
+    "Use the sandwich theorem to settle limits bounded between two approaching functions."
+  ],
+  "learn": [
+    {
+      "id": "intuitive-and-algebraic",
+      "title": "The intuitive idea and the algebra of limits",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A limit describes behaviour under approach: f(x) gets arbitrarily close to L as x creeps towards a from either side, whatever happens — or does not happen — at a itself. The function may be undefined there, or defined to a different value; the limit is about the neighbourhood, not the point. On that idea sits the algebra of limits, which is as mechanical as arithmetic: the limit of a sum is the sum of the limits, of a product the product, of a quotient the quotient provided the denominator’s limit is not zero. For a polynomial, every term is continuous, so the limit is simply the value obtained by substitution, and the same is true for any rational function whose denominator does not vanish at the point. Trouble appears only where substitution produces 0/0 — a signal that a factor is waiting to be cancelled, which is the subject of the next lesson."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "lim x→a f(x) = L depends on values near a, never on the value at a.",
+            "Rules: lim(f ± g) = L ± M, lim(fg) = LM, lim(f/g) = L/M when M ≠ 0.",
+            "For a polynomial, substitute x = a directly.",
+            "For a rational function, substitute unless the denominator vanishes at a.",
+            "An output of 0/0 means an unresolved common factor — it is a signal, not an answer."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "lim x→3 (2x² − 5x + 1) = 18 − 15 + 1 = 4 by direct substitution",
+              "note": "Polynomials are continuous everywhere, so evaluation equals the limit."
+            },
+            {
+              "text": "lim x→1 (x² − 1)/(x − 1) is 0/0 at x = 1, so factorise: (x − 1)(x + 1)/(x − 1) → 2",
+              "note": "Cancel the common factor first; only then substitute x = 1 to get 2."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The algebra of limits",
+          "columns": [
+            "Rule",
+            "Statement",
+            "Condition"
+          ],
+          "rows": [
+            [
+              "Sum",
+              "lim(f + g) = L + M",
+              "both limits exist"
+            ],
+            [
+              "Product",
+              "lim(f · g) = L · M",
+              "both limits exist"
+            ],
+            [
+              "Quotient",
+              "lim(f / g) = L / M",
+              "M ≠ 0"
+            ],
+            [
+              "Constant multiple",
+              "lim(c · f) = cL",
+              "c is a constant"
+            ],
+            [
+              "Power",
+              "lim(f)ⁿ = Lⁿ",
+              "the relevant root exists if n is fractional"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "techniques",
+      "title": "Resolving the 0/0 form: factorisation and rationalisation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The indeterminate form 0/0 is the everyday obstacle in limit work, and two techniques clear it. Factorisation is for rational functions: factor numerator and denominator, cancel the factor that vanishes at the point, then substitute — the cancellation is valid because the limit never evaluates the function at the point itself. Rationalisation is for expressions containing a square root: multiply numerator and denominator by the conjugate, which converts a difference of roots into a difference of squares, after which the vanishing factor appears and cancels. Both techniques share one discipline: do not substitute before the obstruction is removed, and never cancel a factor that is not actually common. Worked in the right order, the same expression that first returned 0/0 returns a perfectly ordinary number."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Factorisation: factor both sides, cancel the common vanishing factor, then substitute.",
+            "Rationalisation: multiply by the conjugate of the expression containing the root.",
+            "(√A − √B)(√A + √B) = A − B removes the roots in one step.",
+            "Cancel only factors that are genuinely common to numerator and denominator.",
+            "Check the final value by substitution once the form is no longer indeterminate."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "lim x→0 (√(x + 4) − 2)/x: multiply by (√(x + 4) + 2)/(√(x + 4) + 2)",
+              "note": "This gives x/(x(√(x + 4) + 2)) = 1/(√(x + 4) + 2) → 1/4."
+            },
+            {
+              "text": "lim x→2 (x³ − 8)/(x − 2): factorise as (x − 2)(x² + 2x + 4)/(x − 2)",
+              "note": "Cancel x − 2 and substitute to obtain 4 + 4 + 4 = 12."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Limit",
+              "meaning": "Value approached by a function as its input approaches a point."
+            },
+            {
+              "term": "Indeterminate form",
+              "meaning": "Inconclusive output such as 0/0 that must be rewritten before evaluation."
+            },
+            {
+              "term": "Rationalisation",
+              "meaning": "Multiplying by a conjugate to remove a square root from an expression."
+            },
+            {
+              "term": "Factorisation",
+              "meaning": "Writing a polynomial as a product to expose a cancelable factor."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trigonometric-limits",
+      "title": "The standard trigonometric limits",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The two trigonometric limits that calculus rests on are lim x→0 sin x/x = 1 and lim x→0 (1 − cos x)/x = 0, and both hold only when x is measured in radians — in degrees the first limit would be π/180 instead, which is exactly why radians are the natural unit. The companion lim x→0 tan x/x = 1 follows immediately by writing tan as sin over cos. Applications come from scaling the argument: lim x→0 sin 3x/x = 3, because sin 3x/x = 3 · (sin 3x)/(3x) and the bracket tends to 1. The pattern to internalise is that sin(kx) behaves like kx near zero, so any ratio of such terms is decided by comparing their linear coefficients. Meanwhile (1 − cos x) vanishes faster than x, which is why the second limit is zero rather than a finite non-zero number."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "lim x→0 sin x/x = 1 with x in radians; in degrees the limit would be π/180.",
+            "lim x→0 tan x/x = 1 follows by splitting tan into sin/cos.",
+            "lim x→0 (1 − cos x)/x = 0: the numerator is quadratic in x, the denominator linear.",
+            "Scaled argument: lim x→0 sin kx/x = k, obtained by inserting and cancelling k.",
+            "Ratio pattern: sin(kx)/sin(mx) → k/m as x → 0."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "lim x→0 sin 3x/x: write 3 · sin 3x/(3x) → 3 × 1 = 3",
+              "note": "The inserted factor 3 in the denominator is matched outside the fraction."
+            },
+            {
+              "text": "lim x→0 sin 5x / tan 5x = 1, since tan 5x has the same linear behaviour as sin 5x",
+              "note": "Both vanish at the same rate, so their ratio approaches 1."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Standard limits worth knowing by heart",
+          "columns": [
+            "Limit",
+            "Value",
+            "Where it comes from"
+          ],
+          "rows": [
+            [
+              "lim x→0 sin x/x",
+              "1",
+              "geometry of the unit circle, radians only"
+            ],
+            [
+              "lim x→0 tan x/x",
+              "1",
+              "sin/cos with cos → 1"
+            ],
+            [
+              "lim x→0 (1 − cos x)/x",
+              "0",
+              "numerator of order x²"
+            ],
+            [
+              "lim x→0 sin kx/x",
+              "k",
+              "scaled version of the first limit"
+            ],
+            [
+              "lim x→0 sin kx/sin mx",
+              "k/m",
+              "compare linear coefficients"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sandwich-and-combinations",
+      "title": "Combining limits and the sandwich theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Some limits cannot be evaluated by substitution or cancellation because the function oscillates or hides its size, and the sandwich theorem handles them: if g(x) ≤ f(x) ≤ h(x) near a and both g and h approach the same value L, then f is forced to L as well. Its classic use is x sin(1/x) → 0 as x → 0, where sin(1/x) swings between −1 and 1 without settling while x squeezes the whole product to zero. The theorem also justifies the trigonometric limits themselves, since sin x ≤ x ≤ tan x on the way to lim sin x/x = 1. Beyond it, the practical skill is composition: split a compound expression into pieces whose limits are known, apply the algebra rules, and read off the result — sin 4x/(x cos 3x), for instance, separates into (sin 4x/x) · (1/cos 3x), with limits 4 and 1 multiplying to 4."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sandwich theorem: g ≤ f ≤ h near a and both ends → L forces f → L.",
+            "Use it when a factor oscillates: x sin(1/x) → 0 because |sin| ≤ 1 bounds the product.",
+            "The theorem underlies lim x→0 sin x/x = 1 through sin x ≤ x ≤ tan x.",
+            "Split compound expressions into factors with known limits and multiply.",
+            "For quotients of small trigonometric terms, compare the linear parts: sin kx ~ kx."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "lim x→0 x cos(1/x) = 0, since −|x| ≤ x cos(1/x) ≤ |x| and both bounds approach 0",
+              "note": "The cosine factor is bounded, so the shrinking factor x decides the limit."
+            },
+            {
+              "text": "lim x→0 (sin 4x)/(x cos 3x) = (sin 4x/x) · (1/cos 3x) → 4 × 1 = 4",
+              "note": "Separate the factors, take each limit, and multiply using the product rule."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "lim x→0 (1 − cos 2x)/x²: use 1 − cos 2x = 2 sin²x, giving 2(sin x/x)² → 2",
+              "note": "Rewrite the numerator through a half-angle identity before applying the standard limit."
+            },
+            {
+              "text": "lim x→0 (tan x − sin x)/x³ = 1/2, after writing sin x(1 − cos x)/(x³ cos x)",
+              "note": "The three factors sin x/x, (1 − cos x)/x² and 1/cos x contribute 1, 1/2 and 1."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A function approaching a limit at a hole",
+      "description": "A curve rising towards the point above x = a, an open circle drawn at the height L where the curve would meet x = a, and a second solid dot elsewhere to show the value at a being irrelevant.",
+      "labels": [
+        "x approaches a from the left and right",
+        "the limit L is the height approached",
+        "open circle: value at a does not matter",
+        "function may be undefined at a",
+        "limit exists when both sides approach the same height"
+      ]
+    },
+    {
+      "caption": "Figure: The 0/0 form disappearing after cancellation",
+      "description": "The graph of y = (x² − 4)/(x − 2) as a straight line with a hole at x = 2, next to the algebraic cancellation showing the equivalent function y = x + 2 which fills the hole at the value 4.",
+      "labels": [
+        "hole at x = 2 shows 0/0",
+        "factor (x − 2) cancels from both sides",
+        "equivalent function y = x + 2",
+        "limit as x → 2 equals 4",
+        "the point itself remains excluded"
+      ]
+    },
+    {
+      "caption": "Figure: The unit-circle reason behind lim sin x/x = 1",
+      "description": "A sector of the unit circle with angle x, the perpendicular sin x drawn, the tangent segment tan x outside the circle, and the three areas compared: triangle, sector and outer triangle.",
+      "labels": [
+        "angle x measured in radians",
+        "sin x is the vertical segment",
+        "sector area is x/2",
+        "tan x is the outer tangent segment",
+        "sin x < x < tan x squeezes the ratio to 1"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A limit concerns values near a point, never the value at the point.",
+    "Limits combine through sums, differences, products and quotients of their parts.",
+    "Polynomials: substitute. Rational functions: substitute unless the denominator vanishes.",
+    "0/0 is a signal to factorise or rationalise, never a final answer.",
+    "Rationalisation uses the conjugate: (√A − √B)(√A + √B) = A − B.",
+    "lim x→0 sin x/x = 1 holds only with x in radians; in degrees the value would be π/180.",
+    "lim x→0 (1 − cos x)/x = 0 because the numerator is of order x².",
+    "A scaled argument gives lim x→0 sin kx/x = k.",
+    "Sandwich theorem: equal bounds on both sides force the middle function to the same limit.",
+    "Split compound expressions into factors with known limits and recombine them by the algebra rules."
+  ],
+  "examFocus": [
+    "Always state why substitution fails (0/0) before applying a technique; the diagnosis is part of the method marks.",
+    "Write the cancelling step explicitly — limits at a hole are justified by cancellation, not by substitution.",
+    "Quote the trigonometric limit with its radian condition; omitting the condition costs the mark.",
+    "For scaled arguments, show the inserted factor: writing sin 3x/x as 3 · sin 3x/3x makes the reasoning visible."
+  ],
+  "vocabulary": [
+    {
+      "word": "Limit",
+      "meaning": "Value a function approaches as its input approaches a point."
+    },
+    {
+      "word": "Approaches",
+      "meaning": "Gets arbitrarily close to without needing to reach."
+    },
+    {
+      "word": "Indeterminate form",
+      "meaning": "Inconclusive value such as 0/0 requiring further manipulation."
+    },
+    {
+      "word": "Continuity",
+      "meaning": "Property of a function whose limit at a point equals its value there."
+    },
+    {
+      "word": "Rationalisation",
+      "meaning": "Conjugate multiplication that removes square roots."
+    },
+    {
+      "word": "Sandwich theorem",
+      "meaning": "A function bounded by two functions with the same limit shares it."
+    },
+    {
+      "word": "Radian",
+      "meaning": "Natural angle unit in which lim sin x/x equals exactly 1."
+    },
+    {
+      "word": "Oscillation",
+      "meaning": "Repeated variation with no settling value, as in sin(1/x) near zero."
+    },
+    {
+      "word": "Removable hole",
+      "meaning": "Missing point on a graph restored in value by the limit."
+    },
+    {
+      "word": "Algebra of limits",
+      "meaning": "Rules allowing limits of sums, products and quotients to be computed from parts."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-limit-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of lim x→0 sin 3x/x is:",
+      "options": [
+        "1",
+        "3 times",
+        "1/3",
+        "0"
+      ],
+      "correctIndex": 1,
+      "answer": "3 times",
+      "explanation": "Write sin 3x/x as 3 × sin 3x/(3x); the bracket tends to 1, so the limit is 3."
+    },
+    {
+      "id": "isc11-math-limit-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The expression (x² − 4)/(x − 2) approaches which value as x → 2?",
+      "options": [
+        "2, since x approaches 2",
+        "4, since x + 2 approaches 4",
+        "0, since both parts vanish",
+        "undefined, because it is 0/0"
+      ],
+      "correctIndex": 1,
+      "answer": "4, since x + 2 approaches 4",
+      "explanation": "Factorising gives (x − 2)(x + 2)/(x − 2) = x + 2 for x ≠ 2, so the limit is 4 even though the function is undefined at 2."
+    },
+    {
+      "id": "isc11-math-limit-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The standard limit lim x→0 sin x/x = 1 requires the angle x to be measured in:",
+      "options": [
+        "degrees",
+        "radians",
+        "gradians",
+        "either unit"
+      ],
+      "correctIndex": 1,
+      "answer": "radians",
+      "explanation": "The geometric proof compares arc length with chord length on the unit circle, where the arc is x only when x is in radians; in degrees the limit would be π/180."
+    },
+    {
+      "id": "isc11-math-limit-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The limit of (1 − cos x)/x as x → 0 is:",
+      "options": [
+        "0, since 1 − cos x vanishes faster than x",
+        "1, since cos x approaches 1",
+        "1/2, from the half-angle formula",
+        "does not exist"
+      ],
+      "correctIndex": 0,
+      "answer": "0, since 1 − cos x vanishes faster than x",
+      "explanation": "1 − cos x behaves like x²/2 near zero, so the ratio behaves like x/2 and approaches 0; both the standard limit and the order argument confirm it."
+    },
+    {
+      "id": "isc11-math-limit-05",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Applying the standard trigonometric limits, lim x→0 sin 3x / sin 5x = ______ .",
+      "answer": "3/5",
+      "explanation": "Divide numerator and denominator by x: the ratio becomes (sin 3x/x)/(sin 5x/x), whose limits are 3 and 5, giving 3/5."
+    },
+    {
+      "id": "isc11-math-limit-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The limit of the function 1/x² as x increases without bound is ______ .",
+      "answer": "zero",
+      "explanation": "The denominator grows without bound, so the fraction shrinks towards zero; formally lim x→∞ 1/x² = 0."
+    },
+    {
+      "id": "isc11-math-limit-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the algebra of limits for two functions f and g with finite limits L and M at a point.",
+      "answer": "lim(f ± g) = L ± M; lim(f · g) = L · M; lim(f / g) = L / M provided M ≠ 0; and lim(c · f) = cL for a constant c. The rules mean a complicated limit may be split into pieces, evaluated separately and recombined, provided each piece has a limit of its own.",
+      "explanation": "The four rules are the working machinery of the chapter; the quotient rule carries the only condition, which is why a vanishing denominator limit must be removed before it is applied."
+    },
+    {
+      "id": "isc11-math-limit-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate lim x→0 (√(x + 4) − 2)/x, showing the rationalisation step.",
+      "answer": "Multiply numerator and denominator by the conjugate √(x + 4) + 2: the numerator becomes (x + 4) − 4 = x, so the expression equals x/(x(√(x + 4) + 2)) = 1/(√(x + 4) + 2) for x ≠ 0. Substituting x = 0 now gives 1/(2 + 2) = 1/4.",
+      "explanation": "Rationalising converts the difference of roots into a difference of squares, exposing the factor x that caused the 0/0 form; after cancellation, substitution is legitimate."
+    },
+    {
+      "id": "isc11-math-limit-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Evaluate lim x→0 (tan x − sin x)/x³, stating each standard limit you use.",
+      "answer": "Write tan x − sin x = sin x(1/cos x − 1) = sin x (1 − cos x)/cos x. The limit becomes (sin x/x) · ((1 − cos x)/x²) · (1/cos x). The first factor tends to 1 (standard trigonometric limit), the second tends to 1/2 (since 1 − cos x ~ x²/2, itself derived from 1 − cos x = 2 sin²(x/2)), and the third tends to 1/1 = 1. Multiplying gives 1 × 1/2 × 1 = 1/2.",
+      "explanation": "The algebraic rearrangement separates the expression into three factors with individually known limits; each attribution is required, since the product of the three is the answer."
+    },
+    {
+      "id": "isc11-math-limit-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Use the standard limits to evaluate lim x→0 (sin 4x · tan 5x)/x², showing the splitting step.",
+      "answer": "Split the fraction: (sin 4x · tan 5x)/x² = (sin 4x/x) · (tan 5x/x). Each factor tends to its linear coefficient: sin 4x behaves like 4x near zero, so sin 4x/x → 4, and tan 5x behaves like 5x, so tan 5x/x → 5. By the product rule the limit is 4 × 5 = 20.",
+      "explanation": "The product rule applies once the denominator is split to match each factor; the underlying principle is that sin kx and tan 5x both have linear approximation kx near zero, so the product of the coefficients decides the answer."
+    }
+  ]
+}

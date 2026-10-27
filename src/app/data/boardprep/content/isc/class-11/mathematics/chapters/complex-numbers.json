@@ -1,0 +1,504 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-complex-numbers",
+  "title": "Complex Numbers",
+  "kind": "mathematics",
+  "tagline": "The Argand plane, modulus and conjugate, arithmetic in a + ib form, polar representation and square roots.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "The quadratic x² + 1 = 0 has no real solution, and the fix is to admit a number whose square is −1. That single admission, i² = −1, turns every quadratic into one with solutions and gives the number system a second dimension. This chapter works with complex numbers as ordered pairs of reals: addition acts componentwise, multiplication rotates and stretches, the conjugate reflects across the real axis, and the modulus is the distance from the origin. The Argand plane makes all of this visible, and polar form turns hard multiplications into easy ones.",
+    "facts": [
+      {
+        "label": "Definition",
+        "value": "z = a + ib with a = Re z, b = Im z and i² = −1; z is real when b = 0."
+      },
+      {
+        "label": "Powers of i",
+        "value": "i¹ = i, i² = −1, i³ = −i, i⁴ = 1, and the cycle of four repeats for every higher power."
+      },
+      {
+        "label": "Modulus and conjugate",
+        "value": "|z| = √(a² + b²), z̄ = a − ib and z · z̄ = a² + b² = |z|²."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Argand diagrams, modulus questions and the square roots of i recur in the yearly paper."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Add, subtract and multiply complex numbers and simplify powers of i.",
+    "State the conjugate and modulus of a complex number and verify modulus properties.",
+    "Represent a complex number on the Argand plane and read its quadrant from its parts.",
+    "Convert a complex number between a + ib form and polar form r(cos θ + i sin θ).",
+    "Solve equations over the complex numbers and describe loci such as |z − a| = r geometrically."
+  ],
+  "learn": [
+    {
+      "id": "algebra-of-complex-numbers",
+      "title": "Definition, powers of i and basic arithmetic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A complex number is written z = a + ib, where a and b are real numbers, i is the unit with i² = −1, a is called the real part and b the imaginary part. Equality is componentwise: two complex numbers are equal exactly when both parts match, which is how equations over the complex numbers split into a real equation and an imaginary one. Addition and subtraction act on the parts separately, while multiplication uses the distributive law together with i² = −1, so (2 + 3i)(1 − 4i) collapses to a real part plus an imaginary part in one sweep. The powers of i cycle with period four — i, −1, −i, 1 — so any power reduces by taking its exponent modulo four. The conjugate z̄ = a − ib reflects z in the real axis, and multiplying a number by its conjugate always lands on the non-negative real number a² + b²."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "z = a + ib: Re z = a, Im z = b, and z is real exactly when b = 0.",
+            "z₁ = z₂ requires both real parts and both imaginary parts to be equal.",
+            "i² = −1, so i³ = −i, i⁴ = 1 and the powers repeat with period 4.",
+            "Conjugate z̄ = a − ib; the conjugate of a sum is the sum of the conjugates.",
+            "z · z̄ = a² + b² = |z|², which is real and never negative."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "(2 + 3i)(1 − 4i) = 2 − 8i + 3i − 12i² = 2 − 5i + 12 = 14 − 5i",
+              "note": "Expand as a binomial and replace every i² by −1 before collecting terms."
+            },
+            {
+              "text": "i^23: since 23 = 4 × 5 + 3, i^23 = i³ = −i",
+              "note": "Reduce the exponent modulo 4 and read the remainder from the cycle i, −1, −i, 1."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Arithmetic of two complex numbers z₁ = a + bi and z₂ = c + di",
+          "columns": [
+            "Operation",
+            "Result",
+            "Geometry on the Argand plane"
+          ],
+          "rows": [
+            [
+              "Addition",
+              "(a + c) + (b + d)i",
+              "Parallelogram rule: add the vectors"
+            ],
+            [
+              "Subtraction",
+              "(a − c) + (b − d)i",
+              "Vector from the tip of z₂ to the tip of z₁"
+            ],
+            [
+              "Multiplication",
+              "(ac − bd) + (ad + bc)i",
+              "Moduli multiply, arguments add"
+            ],
+            [
+              "Conjugate",
+              "a − bi",
+              "Reflection in the real axis"
+            ],
+            [
+              "Modulus",
+              "√(a² + b²)",
+              "Distance from the origin"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "argand-and-polar",
+      "title": "The Argand plane and polar representation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Argand plane plots a complex number z = a + ib at the point (a, b), with the horizontal axis carrying real parts and the vertical axis imaginary parts. The diagram turns algebra into geometry: the distance from the origin is the modulus r = |z| = √(a² + b²), and the angle θ measured from the positive real axis is the argument. Writing z = r(cos θ + i sin θ) is the polar form, and it explains what multiplication does — moduli multiply while arguments add — because stretching by r and turning by θ compose exactly that way. Conversion runs both directions: from a + ib to r and θ by tan θ = b/a with the quadrant fixed by the signs of a and b, and back by expanding r(cos θ + i sin θ). Quadrant care is the whole difficulty of the forward direction; atan alone returns the wrong angle for a number in the second or third quadrant."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Plot (Re z, Im z); the quadrant of the point is fixed by the signs of a and b.",
+            "Modulus r = √(a² + b²); argument θ satisfies tan θ = b/a, adjusted to the correct quadrant.",
+            "Polar form: z = r(cos θ + i sin θ), also written r cis θ for short.",
+            "Multiplication: moduli multiply and arguments add; division divides them.",
+            "z = r(cos θ + i sin θ) = r e^(iθ) in exponential language, though the syllabus works with cis form."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "z = 1 + i: r = √2 and θ = 45°, so z = √2(cos 45° + i sin 45°)",
+              "note": "Both parts positive places the point in the first quadrant, so the reference angle 45° is the argument."
+            },
+            {
+              "text": "z = −1: r = 1 and θ = 180°, giving z = cos 180° + i sin 180°",
+              "note": "A negative real number lies on the negative axis, whose argument is a half-turn."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Argand plane",
+              "meaning": "Plane with the real axis horizontal and the imaginary axis vertical."
+            },
+            {
+              "term": "Modulus",
+              "meaning": "|z|, the distance of z from the origin."
+            },
+            {
+              "term": "Argument",
+              "meaning": "Angle θ from the positive real axis to the ray through z."
+            },
+            {
+              "term": "Polar form",
+              "meaning": "z = r(cos θ + i sin θ), the modulus–argument representation."
+            },
+            {
+              "term": "Conjugate",
+              "meaning": "z̄ = a − ib, the reflection of z in the real axis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modulus-and-equations",
+      "title": "Modulus properties and equations in z",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The modulus collects the metric facts of the plane: |z₁ z₂| = |z₁| |z₂|, |z₁ + z₂| ≤ |z₁| + |z₂| by the triangle inequality, and |z| = |z̄|. In equations these properties pair with the conjugate to strip away i: the condition that z + z̄ is real and z − z̄ is purely imaginary holds for every z, and conversely a complex expression forced to equal its own conjugate is being forced onto the real axis. The same idea solves for unknowns: write z = x + iy, expand, equate the real and imaginary parts, and read off two real equations in two real unknowns. Loci come from the same translation — |z − z₀| = k describes every point at distance k from z₀, which is a circle, while |z − z₁| = |z − z₂| describes the points equidistant from two fixed points, the perpendicular bisector of the segment joining them."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "|z₁ z₂| = |z₁| |z₂| and |z₁ / z₂| = |z₁| / |z₂| for z₂ ≠ 0.",
+            "Triangle inequality: |z₁ + z₂| ≤ |z₁| + |z₂|, with equality when the arguments agree.",
+            "z + z̄ = 2a is always real; z − z̄ = 2bi is always purely imaginary.",
+            "|z − z₀| = r is the circle with centre z₀ and radius r.",
+            "|z − z₁| = |z − z₂| is the perpendicular bisector of the segment joining z₁ and z₂."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "|z − (3 + 2i)| = 5 describes a circle of radius 5 centred at the point (3, 2)",
+              "note": "Read the modulus equation as a fixed distance from a fixed point."
+            },
+            {
+              "text": "|z − 4| = |z − 2i|: squaring gives (x − 4)² + y² = x² + (y − 2)², which simplifies to y = 2x − 3",
+              "note": "Expand both squares, cancel x² and y², and what remains is a straight line in x and y."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If (x + iy)(2 − 3i) = 5 + i, expand to (2x + 3y) + (2y − 3x)i = 5 + i",
+              "note": "Equate real and imaginary parts to obtain 2x + 3y = 5 and −3x + 2y = 1."
+            },
+            {
+              "text": "The modulus of z = 3 + 4i is √(9 + 16) = 5, so z lies five units from the origin",
+              "note": "Apply |z| = √(a² + b²) with the two components of the number."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "square-roots-and-applications",
+      "title": "Square roots and solving over the complex numbers",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every complex number has exactly two square roots, and they are negatives of each other. To find the square root of a negative real number, write it as −k² and take ±ki; to find the root of a general complex number a + ib, set (x + iy)² = a + ib and equate parts, giving x² − y² = a and 2xy = b, then solve with the modulus condition x² + y² = √(a² + b²). The method produces the classic results √i = ±(1 + i)/√2 and √−1 = ±i, and it is also how a quadratic with a negative discriminant gets its roots: once the discriminant is written as a complex number, the same formula applies. The Argand plane shows why no root is missing — doubling the argument and squaring the modulus maps each pair of roots onto the original point."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "√−k² = ±ki for any positive real k; the two roots are always negatives of each other.",
+            "To find √(a + ib), set (x + iy)² = a + ib and solve x² − y² = a together with 2xy = b.",
+            "Adding the modulus relation x² + y² = √(a² + b²) gives x² and y² directly, removing the sign ambiguity.",
+            "A quadratic x² + px + q = 0 with p² − 4q < 0 has complex conjugate roots, symmetric about the real axis.",
+            "In polar form, squaring doubles the argument and squares the modulus, so root-taking halves and square-roots."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "√i: with (x + iy)² = i we need x² − y² = 0 and 2xy = 1, so x = y = 1/√2, giving (1 + i)/√2",
+              "note": "The modulus condition x² + y² = 1 then splits the unit circle into the two equal coordinates."
+            },
+            {
+              "text": "Solve z² = −4: z = ±2i, since (±2i)² = 4i² = −4",
+              "note": "Write the right-hand side in the form −k² and read off ±ki immediately."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Square roots and their squares",
+          "columns": [
+            "Number",
+            "Square roots",
+            "Check"
+          ],
+          "rows": [
+            [
+              "−4",
+              "±2i",
+              "(2i)² = 4i² = −4"
+            ],
+            [
+              "i",
+              "±(1 + i)/√2",
+              "((1 + i)/√2)² = (1 + 2i − 1)/2 = i"
+            ],
+            [
+              "−i",
+              "±(1 − i)/√2",
+              "((1 − i)/√2)² = (1 − 2i − 1)/2 = −i"
+            ],
+            [
+              "3 + 4i",
+              "±(2 + i)",
+              "(2 + i)² = 4 + 4i − 1 = 3 + 4i"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A complex number plotted on the Argand plane",
+      "description": "A horizontal real axis and vertical imaginary axis with the point z = 3 + 4i marked in the first quadrant, a line from the origin to the point marked r, and the angle θ between that line and the positive real axis.",
+      "labels": [
+        "horizontal axis: real part a = 3",
+        "vertical axis: imaginary part b = 4",
+        "modulus r = |z| = 5 units from the origin",
+        "argument θ measured from the positive real axis",
+        "the point lies in the first quadrant since both parts are positive"
+      ]
+    },
+    {
+      "caption": "Figure: Conjugate reflection and the circle |z − z₀| = r",
+      "description": "The point z = 2 + 3i with its conjugate 2 − 3i reflected below the real axis, alongside a circle centred at z₀ = 3 + 2i with radius 5 and a point z on its circumference joined to the centre.",
+      "labels": [
+        "z and z̄ are mirror images in the real axis",
+        "real axis is the mirror line",
+        "centre z₀ of the circle |z − z₀| = r",
+        "radius r fixed at every point of the locus",
+        "modulus |z − z₀| is the distance from centre to point"
+      ]
+    },
+    {
+      "caption": "Figure: Multiplication as modulus times and argument added",
+      "description": "Two vectors from the origin, z₁ at angle θ₁ with length r₁ and z₂ at angle θ₂ with length r₂, with the product vector drawn at angle θ₁ + θ₂ and length r₁ r₂.",
+      "labels": [
+        "z₁ has modulus r₁ and argument θ₁",
+        "z₂ has modulus r₂ and argument θ₂",
+        "product has modulus r₁ × r₂",
+        "product argument is θ₁ + θ₂",
+        "angles add anticlockwise"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "z = a + ib with i² = −1; equality requires both parts to match.",
+    "Powers of i cycle every four: i, −1, −i, 1 — reduce the exponent mod 4.",
+    "The conjugate reflects in the real axis, and z · z̄ = |z|² is real and non-negative.",
+    "Addition acts on parts separately; multiplication distributes and then replaces i² by −1.",
+    "On the Argand plane |z| is the distance from the origin and arg z the angle from the positive real axis.",
+    "Polar form z = r(cos θ + i sin θ): multiplication multiplies moduli and adds arguments.",
+    "The quadrant of the argument is decided by the signs of a and b, not by tan θ alone.",
+    "|z − z₀| = r is a circle; |z − z₁| = |z − z₂| is a perpendicular bisector.",
+    "Solve z equations by writing z = x + iy and equating real and imaginary parts.",
+    "Every complex number has two square roots, found by equating parts of (x + iy)² = a + ib."
+  ],
+  "examFocus": [
+    "Show the replacement of every i² by −1 explicitly in multiplication steps; the substitution is where marks accumulate.",
+    "When stating an argument, write the quadrant first and adjust the calculator value afterwards.",
+    "For modulus loci, translate to a geometric sentence (circle, bisector) before sketching; the description carries a mark.",
+    "Equations in z are answered in x and y: set z = x + iy, equate parts, and solve the resulting real system."
+  ],
+  "vocabulary": [
+    {
+      "word": "Imaginary unit",
+      "meaning": "i, defined by i² = −1."
+    },
+    {
+      "word": "Real part",
+      "meaning": "The a in z = a + ib, written Re z."
+    },
+    {
+      "word": "Imaginary part",
+      "meaning": "The b in z = a + ib, written Im z — a real number, despite the name."
+    },
+    {
+      "word": "Conjugate",
+      "meaning": "z̄ = a − ib, the reflection of z in the real axis."
+    },
+    {
+      "word": "Modulus",
+      "meaning": "|z| = √(a² + b²), the distance from the origin."
+    },
+    {
+      "word": "Argument",
+      "meaning": "Angle of the ray from the origin to z, measured from the positive real axis."
+    },
+    {
+      "word": "Argand plane",
+      "meaning": "Coordinate plane with a real horizontal axis and an imaginary vertical axis."
+    },
+    {
+      "word": "Polar form",
+      "meaning": "Representation z = r(cos θ + i sin θ) using modulus and argument."
+    },
+    {
+      "word": "Locus",
+      "meaning": "Set of points satisfying a condition such as |z − z₀| = r."
+    },
+    {
+      "word": "Complex conjugate roots",
+      "meaning": "Pair of roots a + ib and a − ib, symmetric in the real axis."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-complex-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The modulus of z = 3 + 4i is:",
+      "options": [
+        "5 units",
+        "√7 units",
+        "7 units",
+        "25 units"
+      ],
+      "correctIndex": 0,
+      "answer": "5 units",
+      "explanation": "|z| = √(3² + 4²) = √25 = 5 units from the origin on the Argand plane."
+    },
+    {
+      "id": "isc11-math-complex-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of i^23 is:",
+      "options": [
+        "i",
+        "−i",
+        "−1",
+        "1"
+      ],
+      "correctIndex": 1,
+      "answer": "−i",
+      "explanation": "23 leaves remainder 3 on division by 4, so i^23 = i³ = −i."
+    },
+    {
+      "id": "isc11-math-complex-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The conjugate of 2 − 5i is:",
+      "options": [
+        "−2 − 5i",
+        "2 + 5i",
+        "−2 + 5i",
+        "5 + 2i"
+      ],
+      "correctIndex": 1,
+      "answer": "2 + 5i",
+      "explanation": "The conjugate keeps the real part and reverses the sign of the imaginary part: 2 − 5i becomes 2 + 5i."
+    },
+    {
+      "id": "isc11-math-complex-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The point representing z = −2 − 3i lies in:",
+      "options": [
+        "the first quadrant",
+        "the second quadrant",
+        "the third quadrant",
+        "the fourth quadrant"
+      ],
+      "correctIndex": 2,
+      "answer": "the third quadrant",
+      "explanation": "Both the real and imaginary parts are negative, so the point (−2, −3) lies below the real axis and left of the imaginary axis — the third quadrant."
+    },
+    {
+      "id": "isc11-math-complex-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The product of a complex number z and its conjugate equals the square of its ______ .",
+      "answer": "modulus",
+      "explanation": "z · z̄ = a² + b², and |z|² = a² + b² as well, so the product is the squared modulus."
+    },
+    {
+      "id": "isc11-math-complex-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In polar form a complex number is written as z = r(cos θ + i ______ ).",
+      "answer": "sin θ",
+      "explanation": "The modulus–argument form pairs the cosine of the argument with i times its sine."
+    },
+    {
+      "id": "isc11-math-complex-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Express z = 1 + i in modulus–argument form.",
+      "answer": "The modulus is |z| = √(1² + 1²) = √2 and the argument is 45°, since both parts are equal and positive. Hence z = √2(cos 45° + i sin 45°).",
+      "explanation": "Find the modulus by Pythagoras and the argument by tan θ = b/a, choosing 45° because the point lies in the first quadrant on the line b = a."
+    },
+    {
+      "id": "isc11-math-complex-08",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the square roots of −9 and explain how they arise from the definition of i.",
+      "answer": "Since i² = −1, writing −9 as 9i² gives √−9 = √(9i²) = ±3i. The two roots are 3i and −3i, both squaring to −9 because (3i)² = 9i² = −9 and (−3i)² = 9i² = −9.",
+      "explanation": "Factor −1 out as i² first, then take the ordinary square root of 9 and attach i, remembering that every number has two square roots."
+    },
+    {
+      "id": "isc11-math-complex-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Express z = (3 + i)/(1 − i) in the form a + ib and state its modulus.",
+      "answer": "Multiply numerator and denominator by the conjugate of the denominator: z = (3 + i)(1 + i) / ((1 − i)(1 + i)) = (3 + 3i + i + i²) / (1 − i²) = (3 + 4i − 1)/2 = (2 + 4i)/2 = 1 + 2i. The modulus is |z| = √(1² + 2²) = √5.",
+      "explanation": "Rationalising with the conjugate removes i from the denominator in one step; expand carefully, replace i² by −1, then apply |z| = √(a² + b²)."
+    },
+    {
+      "id": "isc11-math-complex-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the locus of points satisfying |z − 4| = |z − 2i| and describe it geometrically.",
+      "answer": "Write z = x + iy. Then |z − 4|² = (x − 4)² + y² and |z − 2i|² = x² + (y − 2)². Equating gives x² − 8x + 16 + y² = x² + y² − 4y + 4, so −8x + 16 = −4y + 4, i.e. 8x − 4y = 12 or y = 2x − 3. The locus is a straight line — the perpendicular bisector of the segment joining the points (4, 0) and (0, 2) — because it is exactly the set of points equidistant from those two fixed points.",
+      "explanation": "Square both sides to remove the radicals, cancel the squared terms, and read the residual linear equation; the equidistance interpretation then identifies the line as a perpendicular bisector."
+    }
+  ]
+}

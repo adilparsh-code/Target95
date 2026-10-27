@@ -1,0 +1,525 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-pnc",
+  "title": "Permutations and Combinations",
+  "kind": "mathematics",
+  "tagline": "The two counting principles, arrangements with and without order, repetition, identical objects and circular arrangements.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "Counting looks easy until the cases multiply against each other, and this chapter exists to replace guesswork with two principles. The multiplication principle turns a sequence of choices into a product, the addition principle turns a split into a sum, and everything else — factorials, permutations, circular arrangements, combinations — is bookkeeping on top of them. The single question that decides every problem is whether order matters: arranging people in a row is a permutation, choosing them for a committee is a combination. Getting that call right is worth more than any formula on this page.",
+    "facts": [
+      {
+        "label": "Multiplication principle",
+        "value": "If a task takes k independent steps with a₁, a₂ … aₖ options, the total is a₁ × a₂ × … × aₖ."
+      },
+      {
+        "label": "Addition principle",
+        "value": "If a task can be done in mutually exclusive ways, the totals add."
+      },
+      {
+        "label": "Permutation",
+        "value": "nPr = n! / (n − r)!, the number of ordered selections of r objects from n."
+      },
+      {
+        "label": "Combination",
+        "value": "nCr = n! / (r! (n − r)!), counting selections where order is ignored."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Apply the multiplication and addition principles to decompose a counting problem into steps.",
+    "Compute permutations and combinations and use factorial notation confidently.",
+    "Arrange objects that include identical items, using division by the factorials of the repeats.",
+    "Count circular arrangements, including arrangements of beads on a necklace.",
+    "Translate a selection problem into nCr or nPr and handle committee and grouping conditions."
+  ],
+  "learn": [
+    {
+      "id": "counting-principles",
+      "title": "The fundamental principles and factorial notation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every counting problem in this chapter is a decision tree, and the two principles describe the tree from opposite directions. The multiplication principle applies when steps follow one another: choose a shirt, then a tie, then a jacket, and the total number of outfits is the product of the options at each step, because every earlier choice is repeated for each later one. The addition principle applies when the alternatives are exclusive branches: either do task X in a₁ ways or task Y in a₂ ways, and the totals add because no outcome is counted twice. Factorials are the raw material of both: n! counts the arrangements of n distinct objects taken all at a time, equals n × (n − 1) × … × 1, and is defined so that 0! = 1, which keeps the combination formula valid at the edges r = 0 and r = n."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Multiplication: sequential independent steps → multiply the number of choices.",
+            "Addition: mutually exclusive alternatives → add the number of choices.",
+            "n! = n × (n − 1) × … × 2 × 1, with 0! = 1 and 1! = 1 by definition.",
+            "n! = n × (n − 1)! — the recursion that simplifies every cancellation.",
+            "Only use addition when the cases share no outcome; otherwise you double-count."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 4-digit PIN with no repeated digit: 10 × 9 × 8 × 7 = 5040 arrangements",
+              "note": "Each position has one fewer option than the last because repetition is forbidden."
+            },
+            {
+              "text": "Choosing a route: 3 roads then 2 bridges gives 3 × 2 = 6 routes in all",
+              "note": "The bridge choice repeats for every road, so the options multiply."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Factorial values used constantly in this unit",
+          "columns": [
+            "n",
+            "n!",
+            "Value"
+          ],
+          "rows": [
+            [
+              "0",
+              "1",
+              "1 by definition"
+            ],
+            [
+              "3",
+              "6",
+              "3 × 2 × 1"
+            ],
+            [
+              "5",
+              "120",
+              "5 × 4!"
+            ],
+            [
+              "6",
+              "720",
+              "6 × 120"
+            ],
+            [
+              "7",
+              "5040",
+              "7 × 720"
+            ]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Factorial",
+              "meaning": "n! = n × (n − 1) × … × 1, the number of orderings of n distinct objects."
+            },
+            {
+              "term": "Trial",
+              "meaning": "One complete performance of a process under study."
+            },
+            {
+              "term": "Mutually exclusive",
+              "meaning": "Alternatives that cannot both occur, so their counts add."
+            },
+            {
+              "term": "Independent choices",
+              "meaning": "Choices whose options do not depend on earlier selections, so they multiply."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "permutations",
+      "title": "Permutations: arrangements where order matters",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A permutation is an arrangement, so the answer changes whenever two objects swap places. Choosing r objects from n and lining them up gives nPr = n!/(n − r)! — the denominator cancelling the tail of the factorial that the unchosen objects would have contributed. Two variants matter. With repetition allowed, each of the r positions draws from the full n options and the count becomes nʳ, which is why a dial with four digits has 10⁴ combinations. With identical objects in the set, arrangements that look the same must be divided away: the letters of SUCCESS, containing three identical S letters, give 7!/3! distinct words, because each distinct word was counted 3! times by the permutations of its repeated letter. The habit that prevents errors is to decide the denominator by asking which objects are interchangeable."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "nPr = n!/(n − r)! counts arrangements of r distinct objects chosen from n.",
+            "Arranging all n objects gives nPr = n!.",
+            "Repetition allowed: n options in each of r places give nʳ arrangements.",
+            "Identical objects: divide by the factorial of each repeated count, as in 7!/3!."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Five different books on a shelf: 5! = 120 arrangements",
+              "note": "All objects are distinct and all are used, so the count is the plain factorial."
+            },
+            {
+              "text": "Arrangements of APPLE: five letters with P repeated twice, so 5!/2! = 60 words",
+              "note": "The two P positions are interchangeable, so their 2! permutations are divided away."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Three-letter codes from the 26 letters with repeats allowed: 26³ = 17 576",
+              "note": "Repetition restores the full option list at every position, so multiply instead of cancelling."
+            },
+            {
+              "text": "nPr for n = 10, r = 3: 10!/7! = 10 × 9 × 8 = 720",
+              "note": "Cancel the factorial tail before multiplying — the first three factors are all that survive."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "circular-and-identical",
+      "title": "Circular arrangements and interchangeable objects",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a circle there is no first place: rotating a seating does not create a new arrangement, so one of the n positions must be fixed to break the symmetry and the count drops from n! to (n − 1)!. That is the whole adjustment — anchor one person or one bead, arrange the remaining n − 1 relative to it. A necklace or a garland adds a second symmetry, because flipping the circle over is also invisible, and the count halves again to (n − 1)!/2. The same anchoring logic governs every problem where objects are interchangeable: divide by whatever can be swapped without changing what is seen. Grouping problems follow next — splitting 2n objects into two equal groups of unordered pairs needs care, because the two groups themselves may or may not be distinguishable, and forgetting that distinction is the classic double-count."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Circular arrangements of n distinct objects: (n − 1)! — fix one object to remove rotations.",
+            "Necklace, garland or key-ring arrangements: (n − 1)!/2 — reflections are invisible too.",
+            "Identical objects inside a group: divide by the factorial of each repeated quantity.",
+            "Splitting into groups of different sizes: divide by the factorial of the number of equal-sized groups.",
+            "Ask what can be swapped without changing what is observed; divide by that count."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Four people around a round table: (4 − 1)! = 6 arrangements",
+              "note": "Fix one diners position; the remaining three arrange in 3! = 6 ways."
+            },
+            {
+              "text": "Four different beads on a necklace: (4 − 1)!/2 = 3 arrangements",
+              "note": "The 6 linear-circular arrangements pair up under flipping, halving the count to 3."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Which symmetry to divide out",
+          "columns": [
+            "Setting",
+            "Count",
+            "Symmetry removed"
+          ],
+          "rows": [
+            [
+              "Row of n distinct objects",
+              "n!",
+              "none — the ends are fixed"
+            ],
+            [
+              "Round table, n distinct people",
+              "(n − 1)!",
+              "rotation"
+            ],
+            [
+              "Necklace of n distinct beads",
+              "(n − 1)!/2",
+              "rotation and reflection"
+            ],
+            [
+              "Word with one letter repeated k times",
+              "n! / k!",
+              "permutations of the identical letter"
+            ],
+            [
+              "Two equal unordered groups",
+              "(nCr × nCr) / 2",
+              "swapping the two groups"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combinations",
+      "title": "Combinations: selections where order is ignored",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When the question says choose, select, form a committee or draw a sample, order has stopped mattering and the count is a combination: nCr = n!/(r!(n − r)!), the permutation count divided by r! because every selection of r objects was counted in r! different orders. Combinations satisfy the symmetry nCr = nC(n−r), which often lets a hard calculation become an easy one — choosing who to exclude is the same as choosing who to include. Committee problems add conditions that are handled either by direct cases or by subtraction: at least one woman in a committee is far quicker as total minus all-men than as a sum over one woman, two women and so on. The addition principle then stitches together the cases when a sum is genuinely easier, and every case must be disjoint or the count double-counts its overlaps."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "nCr = n! / (r! (n − r)!) counts subsets of size r; nCr = nC(n − r) always holds.",
+            "Sum rule: nCr + nCr+1 = n+1Cr+1, the Pascal identity behind Pascal’s triangle.",
+            "At least one conditions are fastest as total − forbidden case.",
+            "Case sums are legitimate only when the cases are mutually exclusive.",
+            "Choosing a team and choosing its complement are the same decision viewed twice."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A committee of 3 from 9: 9C3 = 84 ways, whatever the members’ order",
+              "note": "Divide 9 × 8 × 7 by 3! = 6 to remove the 6 orderings of each triple."
+            },
+            {
+              "text": "At least one woman from 5 men and 4 women: 9C3 − 5C3 = 84 − 10 = 74",
+              "note": "Subtract the forbidden all-men committee from the unrestricted total."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Combination",
+              "meaning": "Selection of r objects from n where order is irrelevant, nCr."
+            },
+            {
+              "term": "Permutation",
+              "meaning": "Arrangement of r objects from n where order matters, nPr."
+            },
+            {
+              "term": "Case analysis",
+              "meaning": "Splitting a count into mutually exclusive cases that are then added."
+            },
+            {
+              "term": "Complementary counting",
+              "meaning": "Counting the forbidden outcomes and subtracting from the total."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The decision tree behind the multiplication principle",
+      "description": "A branching tree: 3 first-level branches, each splitting into 4 second-level branches, which split into 2 leaves, with the leaf count written as the product 3 × 4 × 2 = 24.",
+      "labels": [
+        "first choice: 3 options",
+        "second choice: 4 options per branch",
+        "third choice: 2 options per branch",
+        "leaves count the complete outcomes",
+        "total = 3 × 4 × 2 = 24"
+      ]
+    },
+    {
+      "caption": "Figure: Arrangements counted on a line and around a circle",
+      "description": "A row of four labelled objects with 4! marked above it, beside a circle of the same four objects with one shaded as the anchor and (4 − 1)! = 6 marked below.",
+      "labels": [
+        "row: every position is distinguishable",
+        "circle: rotations do not create new arrangements",
+        "shaded object anchors the circle",
+        "remaining 3 objects arrange in 3! ways",
+        "necklace would halve this again for flipping"
+      ]
+    },
+    {
+      "caption": "Figure: nPr counts ordered tuples while nCr counts the underlying sets",
+      "description": "Three objects A, B, C shown once as an ordered list (A, B, C) with its six reorderings beneath, and once as a single bracketed set {A, B, C} with the reorderings crossed out.",
+      "labels": [
+        "permutations distinguish (A, B, C) from (B, A, C)",
+        "combinations keep one set {A, B, C}",
+        "each set corresponds to r! ordered lists",
+        "divide nPr by r! to reach nCr",
+        "order matters only in arrangements"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Sequential choices multiply; mutually exclusive alternatives add.",
+    "n! = n × (n − 1)! with 0! = 1, keeping edge cases of nCr valid.",
+    "nPr = n!/(n − r)! counts ordered arrangements of r objects from n.",
+    "Repetition allowed multiplies the option count per position: nʳ arrangements.",
+    "Identical objects divide the count by the factorial of each repeated quantity.",
+    "Circular arrangements give (n − 1)!; a necklace halves that again to (n − 1)!/2.",
+    "nCr = n!/(r!(n − r)!) counts unordered selections and equals nC(n − r).",
+    "At least-one conditions are fastest as total minus the forbidden cases.",
+    "Pascal’s rule nCr + nCr+1 = n+1Cr+1 links the row of the triangle.",
+    "Every case in a case count must be disjoint, or the total double-counts."
+  ],
+  "examFocus": [
+    "Write whether order matters in words before choosing nPr or nCr; the justification is part of the mark.",
+    "Decompose the problem into named steps on the page — markers follow the multiplication principle when it is written out.",
+    "For at-least-one questions, state the complementary count and the subtraction as two visible lines.",
+    "Identical-object divisions must be shown as division by a factorial, not applied silently."
+  ],
+  "vocabulary": [
+    {
+      "word": "Factorial",
+      "meaning": "n! = n × (n − 1) × … × 1, counting orderings."
+    },
+    {
+      "word": "Permutation",
+      "meaning": "Ordered arrangement of objects, nPr."
+    },
+    {
+      "word": "Combination",
+      "meaning": "Unordered selection of objects, nCr."
+    },
+    {
+      "word": "Multiplication principle",
+      "meaning": "Total for sequential steps equals the product of step counts."
+    },
+    {
+      "word": "Addition principle",
+      "meaning": "Total for exclusive alternatives equals their sum."
+    },
+    {
+      "word": "Circular permutation",
+      "meaning": "Arrangement around a circle counted as (n − 1)!."
+    },
+    {
+      "word": "Distinct objects",
+      "meaning": "Objects that are distinguishable from one another."
+    },
+    {
+      "word": "Identical objects",
+      "meaning": "Objects interchangeable in appearance, requiring division."
+    },
+    {
+      "word": "Complementary counting",
+      "meaning": "Counting forbidden cases and subtracting from the total."
+    },
+    {
+      "word": "Selection",
+      "meaning": "Choice of a subset, where order is disregarded."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-pnc-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of ways of arranging five different books on a shelf is:",
+      "options": [
+        "24",
+        "60",
+        "120",
+        "720"
+      ],
+      "correctIndex": 2,
+      "answer": "120",
+      "explanation": "Five distinct books arrange in 5! = 120 orders."
+    },
+    {
+      "id": "isc11-math-pnc-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of 8C3 is:",
+      "options": [
+        "56",
+        "336",
+        "28",
+        "64"
+      ],
+      "correctIndex": 0,
+      "answer": "56",
+      "explanation": "8C3 = 8!/(3!5!) = (8 × 7 × 6)/6 = 56, after the 3! cancels the ordered triples."
+    },
+    {
+      "id": "isc11-math-pnc-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of ways four different beads can be arranged on a necklace is:",
+      "options": [
+        "6 ways",
+        "3 ways",
+        "24 ways",
+        "12 ways"
+      ],
+      "correctIndex": 1,
+      "answer": "3 ways",
+      "explanation": "A necklace allows rotation and flipping, so the count is (4 − 1)!/2 = 6/2 = 3 arrangements."
+    },
+    {
+      "id": "isc11-math-pnc-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of distinct arrangements of the letters of the word APPLE is:",
+      "options": [
+        "120",
+        "60",
+        "30",
+        "20"
+      ],
+      "correctIndex": 1,
+      "answer": "60",
+      "explanation": "Five letters with P repeated twice give 5!/2! = 120/2 = 60 distinct words."
+    },
+    {
+      "id": "isc11-math-pnc-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of ways to choose 4 students from a class of 30, written in combination notation, is ______ .",
+      "answer": "30C4",
+      "explanation": "A committee choice ignores order, so it is the combination 30C4 = 27 405 ways."
+    },
+    {
+      "id": "isc11-math-pnc-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of distinct arrangements of all the letters of the word SISTER is ______ .",
+      "answer": "360",
+      "explanation": "Six letters with S repeated twice give 6!/2! = 720/2 = 360 arrangements."
+    },
+    {
+      "id": "isc11-math-pnc-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the multiplication principle of counting and give a worked example of it.",
+      "answer": "If a process consists of k successive steps in which the first can be done in a₁ ways, the second in a₂ ways and so on, with the number of options at each step independent of the choices made earlier, then the whole process can be done in a₁ × a₂ × … × aₖ ways. Example: a traveller has 3 roads then 2 bridges into a city, giving 3 × 2 = 6 distinct routes.",
+      "explanation": "The principle applies only to sequential steps whose option counts do not shrink as earlier choices are made; independent branches multiply rather than add."
+    },
+    {
+      "id": "isc11-math-pnc-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between a permutation and a combination, giving one example of each.",
+      "answer": "A permutation counts arrangements in which the order of the chosen objects matters — the 120 ways of lining up five different books on a shelf. A combination counts selections in which only membership matters — the number of ways of choosing 3 of those 5 books to carry, which is 5C3 = 10. Permutations divide into combinations by a factor of r! because each set of r objects can be arranged in r! orders.",
+      "explanation": "The dividing line is whether swapping two chosen objects creates a new outcome; the example must show the same objects counted both ways."
+    },
+    {
+      "id": "isc11-math-pnc-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A committee of 3 members is to be chosen from 5 men and 4 women. In how many ways can the committee be formed if it must contain at least one woman?",
+      "answer": "The unrestricted count is 9C3 = 84 committees. The only forbidden case is the committee of three men, which is 5C3 = 10. Subtracting gives 84 − 10 = 74 committees containing at least one woman. (Equivalently, the direct sum is 5C2 × 4C1 + 5C1 × 4C2 + 4C3 = 40 + 30 + 4 = 74.)",
+      "explanation": "Complementary counting avoids a three-term sum: count all committees, remove the single forbidden configuration, and the direct case sum confirms the result."
+    },
+    {
+      "id": "isc11-math-pnc-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "How many distinct words can be formed using all the letters of MISSISSIPPI, and how many of these begin with a vowel?",
+      "answer": "MISSISSIPPI has 11 letters: one M, four I, four S and two P, so the distinct arrangements are 11!/(4! 4! 2!) = 39 916 800 / 1152 = 34 650. For words beginning with a vowel, fix one I at the front; the remaining ten letters contain three I, four S, two P and one M, giving 10!/(3! 4! 2!) = 3 628 800 / 288 = 12 600 words.",
+      "explanation": "Divide the factorial of the total by the factorials of each repeated letter; for the vowel condition, remove the fixed letter from the multiset and repeat the same division on the remaining ten positions."
+    }
+  ]
+}

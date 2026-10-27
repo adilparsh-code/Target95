@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-relations-functions",
+  "title": "Relations and Functions",
+  "kind": "mathematics",
+  "tagline": "Ordered pairs and Cartesian products, the three properties that classify a relation, and the domain, range and graphs of functions.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "A relation links elements of one set to elements of another, and a function is a relation with discipline: one image for every input. This chapter starts at the ordered pair and builds the Cartesian product as its stage, then reads relations as subsets of that stage and tests them for reflexivity, symmetry and transitivity. The second half turns to functions — the vertical line test, one-one and onto classification, even and odd symmetry — because every later chapter, from trigonometry to derivatives, assumes fluency with domain, range and the shape of a graph.",
+    "facts": [
+      {
+        "label": "Ordered pair",
+        "value": "(a, b) = (c, d) exactly when a = c and b = d; order is the whole content of the pair."
+      },
+      {
+        "label": "Cartesian product",
+        "value": "A × B holds n(A) × n(B) ordered pairs, and A × B ≠ B × A unless A = B."
+      },
+      {
+        "label": "Function test",
+        "value": "A relation is a function only when every domain element has exactly one image."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Domain, range and classification of relations and functions are steady short-question topics every year."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Form ordered pairs and Cartesian products and count and list their elements.",
+    "Read a relation as a subset of A × B and state its domain, range, codomain and inverse.",
+    "Test a relation for reflexivity, symmetry and transitivity and classify it as an equivalence relation or not.",
+    "Decide whether a relation is a function and distinguish one-one, onto, many-one and into functions.",
+    "Find the domain and range of a function from its rule and decide from its graph whether it is a function, even or odd."
+  ],
+  "learn": [
+    {
+      "id": "ordered-pairs-and-products",
+      "title": "Ordered pairs and the Cartesian product",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An ordered pair (a, b) is a pair in which position carries meaning: (1, 2) and (2, 1) are different objects, and equality of pairs demands equality in both slots, so (a, b) = (c, d) precisely when a = c and b = d. The Cartesian product A × B is the set of all ordered pairs with first component in A and second in B, written A × B = {(a, b) : a ∈ A, b ∈ B}. Its size multiplies: three elements against four gives twelve pairs. The product is neither commutative nor associative in general, but it does distribute across union and intersection — A × (B ∪ C) = (A × B) ∪ (A × C) — and it annihilates emptiness, since A × ∅ and ∅ × B are both empty. If any pair of the products equals the other’s first coordinate, careful bookkeeping with these rules keeps a messy expression honest."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "(a, b) = (c, d) iff a = c and b = d; (a, b) ≠ (b, a) unless a = b.",
+            "n(A × B) = n(A) × n(B), and the listing runs through A for each element of B or the reverse.",
+            "A × B ≠ B × A in general, but (A × B) × C and A × (B × C) both hold mnk ordered pairs.",
+            "A × (B ∪ C) = (A × B) ∪ (A × C), and the same distributive law holds for intersection.",
+            "If A × B = A × C with A non-empty, then B = C; if either factor is empty the product is empty."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A = {1, 2, 3}, B = {x, y}: A × B = {(1, x), (1, y), (2, x), (2, y), (3, x), (3, y)}",
+              "note": "Six pairs = 3 × 2, listed by holding the first component fixed and running through the second."
+            },
+            {
+              "text": "(2, 3) = (2, 3) but (2, 3) ≠ (3, 2), and (a, b) = (b, a) only when a = b",
+              "note": "Both coordinates must match; swapping them breaks the equality."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Cartesian products at a glance",
+          "columns": [
+            "Question",
+            "Answer",
+            "Reason"
+          ],
+          "rows": [
+            [
+              "How many pairs?",
+              "n(A) × n(B)",
+              "Each choice of first component pairs with every second"
+            ],
+            [
+              "Does order matter?",
+              "Yes, (a, b) ≠ (b, a)",
+              "Position is part of the pair’s identity"
+            ],
+            [
+              "Empty factor?",
+              "A × ∅ = ∅",
+              "No second component exists to complete a pair"
+            ],
+            [
+              "Distribution?",
+              "A × (B ∪ C) = (A × B) ∪ (A × C)",
+              "First components are chosen from A either way"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relations-domain-range",
+      "title": "Relations as subsets: domain, range and inverse",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A relation from A to B is simply any subset of the Cartesian product A × B, so a relation is defined by which pairs it admits and nothing else. The domain collects the first components of those pairs, the range collects the second components actually used, and the codomain is the whole target set B. The inverse relation R⁻¹ reverses every pair, which swaps the domain of R with the range of R⁻¹. These four objects — R, its domain, its range and its inverse — answer most short questions in this chapter, and they are read directly off a mapping diagram: arrows leave the domain and land in the range, and reversing the arrows draws the inverse."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A relation R from A to B is a subset of A × B; the universal relation is A × B itself, the empty relation is ∅.",
+            "Domain of R = {first components of the pairs in R}; range = {second components actually used}.",
+            "Inverse R⁻¹ = {(b, a) : (a, b) ∈ R}; the domain of R⁻¹ is the range of R.",
+            "R is onto B when its range equals B; otherwise the relation does not reach all of the codomain.",
+            "A mapping diagram shows the relation: one arrow leaving an element of A means one ordered pair."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "R = {(1, 2), (2, 3), (3, 2)} from A = {1, 2, 3} to B = {2, 3, 4}",
+              "note": "Domain = {1, 2, 3}, range = {2, 3}; the element 4 of the codomain is never used."
+            },
+            {
+              "text": "R⁻¹ of the same relation is {(2, 1), (3, 2), (2, 3)}",
+              "note": "Every pair reverses, so the new domain {2, 3} is the old range."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Relation",
+              "meaning": "Any subset of A × B, associating some elements of A with some of B."
+            },
+            {
+              "term": "Domain",
+              "meaning": "Set of first components of the pairs of a relation."
+            },
+            {
+              "term": "Range",
+              "meaning": "Set of second components actually appearing in the pairs."
+            },
+            {
+              "term": "Codomain",
+              "meaning": "The whole target set B into which the relation maps."
+            },
+            {
+              "term": "Inverse relation",
+              "meaning": "R⁻¹, formed by reversing every ordered pair of R."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "types-of-relations",
+      "title": "Reflexive, symmetric and transitive relations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three properties classify every relation the syllabus names. A relation is reflexive when every element is related to itself, so (a, a) must belong to R for each a in A; it is symmetric when relating a to b always brings b back to a; and it is transitive when relating a to b and b to c forces a to c. A relation satisfying all three at once is an equivalence relation, and equivalence relations are exactly the ones that sort a set into clean, non-overlapping classes — equality of numbers, equality of triangles by shape, same remainder on division by three. The three properties are tested separately, because a relation may hold any combination of them: a relation can be perfectly symmetric yet fail transitivity the moment one return pair lacks its closure."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Reflexive: (a, a) ∈ R for every a ∈ A — one missing self-pair destroys it.",
+            "Symmetric: (a, b) ∈ R implies (b, a) ∈ R for all a, b.",
+            "Transitive: (a, b) ∈ R and (b, c) ∈ R imply (a, c) ∈ R.",
+            "Equivalence relation = reflexive + symmetric + transitive, all three together.",
+            "The empty relation on a non-empty set is not reflexive; the universal relation always is."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "R = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1)} on {1, 2, 3}",
+              "note": "Reflexive (all three self-pairs present), symmetric (1 and 2 point both ways) and transitive (the products close on existing pairs), so it is an equivalence relation."
+            },
+            {
+              "text": "S = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1), (2, 3), (3, 2)} on {1, 2, 3}",
+              "note": "Symmetric and reflexive, but (1, 2) and (2, 3) hold while (1, 3) is missing, so S is not transitive."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three properties of a relation",
+          "columns": [
+            "Property",
+            "Condition to check",
+            "A quick counter-example to look for"
+          ],
+          "rows": [
+            [
+              "Reflexive",
+              "(a, a) ∈ R for every a ∈ A",
+              "A self-pair missing for some element"
+            ],
+            [
+              "Symmetric",
+              "(a, b) ∈ R ⇒ (b, a) ∈ R",
+              "A one-way pair with no return pair"
+            ],
+            [
+              "Transitive",
+              "(a, b), (b, c) ∈ R ⇒ (a, c) ∈ R",
+              "A path a → b → c with no closing pair a → c"
+            ],
+            [
+              "Equivalence",
+              "All three conditions hold together",
+              "Failure of any one condition"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions-and-graphs",
+      "title": "Functions: one-one, onto, even and odd",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A function from A to B is a relation in which every element of A has exactly one image in B: no input is left unmapped and none is mapped twice. Geometrically the rule becomes the vertical line test — a curve is the graph of a function exactly when every vertical line meets it at most once. Classification then splits two ways. Injective, or one-one, means distinct inputs keep distinct images; surjective, or onto, means every element of the codomain is hit; a function that is both is a bijection. Symmetry gives a second classification: f is even when f(−x) = f(x), giving a mirror about the y-axis, and odd when f(−x) = −f(x), giving a half-turn about the origin. Domain comes first in every case: a rule that divides by zero or takes a root of a negative is undefined there, and the domain must be stated before any other property."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Vertical line test: a graph represents a function only if no vertical line cuts it twice.",
+            "One-one: f(a) = f(b) ⇒ a = b; onto: every y in the codomain has some x with f(x) = y.",
+            "Even: f(−x) = f(x), symmetric about the y-axis; odd: f(−x) = −f(x), symmetric about the origin.",
+            "Find the domain first: denominators must be non-zero and radicands non-negative.",
+            "A many-one function such as f(x) = x² still qualifies as a function — the restriction is on inputs, not outputs."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The set {(1, 2), (2, 3), (3, 4)} is a function; {(1, 2), (1, 3)} is not",
+              "note": "The element 1 carries two different images in the second set, breaking the one-image rule."
+            },
+            {
+              "text": "f(x) = 1/(x − 2) has domain all real numbers except x = 2, and f(x) = x² is even because (−x)² = x²",
+              "note": "Exclude the zero of the denominator; verify evenness by substituting −x and simplifying."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Classifying functions",
+          "columns": [
+            "Type",
+            "Condition",
+            "Example"
+          ],
+          "rows": [
+            [
+              "One-one (injective)",
+              "f(a) = f(b) forces a = b",
+              "f(x) = 2x + 3 on ℝ"
+            ],
+            [
+              "Many-one",
+              "Two distinct inputs share an image",
+              "f(x) = x² on ℝ"
+            ],
+            [
+              "Onto (surjective)",
+              "Every y ∈ codomain has a pre-image",
+              "f(x) = 3x from ℝ to ℝ"
+            ],
+            [
+              "Into",
+              "Range is a proper subset of the codomain",
+              "f(x) = eˣ from ℝ to ℝ"
+            ],
+            [
+              "Even",
+              "f(−x) = f(x)",
+              "f(x) = x², f(x) = cos x"
+            ],
+            [
+              "Odd",
+              "f(−x) = −f(x)",
+              "f(x) = x³, f(x) = sin x"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A relation drawn as a mapping diagram",
+      "description": "Two oval sets, A on the left and B on the right, with four elements in A and four in B; arrows connect (1, p), (2, q), (3, q) and (4, r), and the landed elements p, q, r are shaded to mark the range.",
+      "labels": [
+        "set A: the domain of the relation",
+        "set B: the codomain",
+        "each arrow is one ordered pair (a, b)",
+        "two arrows leaving one element would break the function rule",
+        "the elements struck by arrows form the range"
+      ]
+    },
+    {
+      "caption": "Figure: The vertical line test separates functions from non-functions",
+      "description": "Two small graphs side by side: on the left a parabola cut once by each dashed vertical line; on the right a sideways U-curve cut twice by one vertical line, marked with a cross.",
+      "labels": [
+        "one intersection per vertical line: a function",
+        "two intersections at one x: not a function",
+        "horizontal axis: inputs from the domain",
+        "vertical axis: images on the range",
+        "the test reads the graph, not the formula"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "(a, b) = (c, d) exactly when a = c and b = d; order is the content of a pair.",
+    "A × B holds n(A) × n(B) pairs and is not commutative unless A = B.",
+    "A relation is any subset of A × B; its domain and range are read from the pairs themselves.",
+    "The inverse relation reverses every pair, swapping the domain with the range.",
+    "Reflexive needs (a, a) everywhere, symmetric needs a return pair, transitive needs the closing pair.",
+    "An equivalence relation is reflexive, symmetric and transitive all at once.",
+    "A function gives every input exactly one image; the vertical line test is its graph form.",
+    "One-one means distinct inputs keep distinct images; onto means every codomain element is hit.",
+    "Even functions mirror about the y-axis; odd functions rotate by half a turn about the origin.",
+    "Find the domain before any classification: exclude zero denominators and negative radicands."
+  ],
+  "examFocus": [
+    "State the three equivalence conditions in order and check them one at a time; each check carries its own mark.",
+    "When asked for domain and range, write them as sets — an interval or a listing, never the rule alone.",
+    "In one-one proofs, start from f(a) = f(b) and simplify to a = b; the implication direction is the mark.",
+    "Classify a function only after ruling on its domain, because a formula can be defined on a smaller set than it appears."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ordered pair",
+      "meaning": "Pair (a, b) whose order matters, so (a, b) ≠ (b, a) unless a = b."
+    },
+    {
+      "word": "Cartesian product",
+      "meaning": "A × B, the set of all ordered pairs with first part in A and second in B."
+    },
+    {
+      "word": "Relation",
+      "meaning": "Any subset of a Cartesian product A × B."
+    },
+    {
+      "word": "Domain",
+      "meaning": "Set of first components used by a relation or function."
+    },
+    {
+      "word": "Range",
+      "meaning": "Set of images actually attained by a relation or function."
+    },
+    {
+      "word": "Reflexive relation",
+      "meaning": "Relation containing (a, a) for every element a of its set."
+    },
+    {
+      "word": "Equivalence relation",
+      "meaning": "Relation that is reflexive, symmetric and transitive together."
+    },
+    {
+      "word": "Function",
+      "meaning": "Relation in which every input has exactly one output."
+    },
+    {
+      "word": "One-one function",
+      "meaning": "Injection: distinct inputs always have distinct images."
+    },
+    {
+      "word": "Even function",
+      "meaning": "Function with f(−x) = f(x), symmetric about the y-axis."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-relations-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A = {1, 2, 3} and B = {a, b}, then n(A × B) is best computed as:",
+      "options": [
+        "3 + 2 = 5 elements",
+        "3 × 2 = 6 elements",
+        "2 × 3 = 5 elements",
+        "3² = 9 elements"
+      ],
+      "correctIndex": 1,
+      "answer": "3 × 2 = 6 elements",
+      "explanation": "The product rule gives n(A) × n(B) = 3 × 2 = 6 ordered pairs, since each of the three first components pairs with both second components."
+    },
+    {
+      "id": "isc11-math-relations-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The relation R = {(1, 1), (2, 2), (3, 3), (1, 2), (2, 1)} on {1, 2, 3} is:",
+      "options": [
+        "Neither reflexive nor symmetric",
+        "Reflexive, symmetric and transitive",
+        "Symmetric but not reflexive",
+        "Transitive but not symmetric"
+      ],
+      "correctIndex": 1,
+      "answer": "Reflexive, symmetric and transitive",
+      "explanation": "All three self-pairs are present, every pair has its return, and every two-step path closes on an existing pair, so R satisfies all three conditions."
+    },
+    {
+      "id": "isc11-math-relations-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following functions is odd?",
+      "options": [
+        "f(x) = x²",
+        "f(x) = |x|",
+        "f(x) = x³",
+        "f(x) = x + 1"
+      ],
+      "correctIndex": 2,
+      "answer": "f(x) = x³",
+      "explanation": "Substituting −x gives (−x)³ = −x³ = −f(x), which is exactly the odd condition; the other options fail it."
+    },
+    {
+      "id": "isc11-math-relations-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The domain of the function f(x) = 1/(x − 2) is:",
+      "options": [
+        "All real numbers",
+        "All real numbers except 2",
+        "All real numbers except −2",
+        "All real numbers greater than 2"
+      ],
+      "correctIndex": 1,
+      "answer": "All real numbers except 2",
+      "explanation": "The denominator vanishes at x = 2, so the rule is undefined there and the domain excludes that single value."
+    },
+    {
+      "id": "isc11-math-relations-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The set of the first components of the ordered pairs of a relation is called its ______ .",
+      "answer": "domain",
+      "explanation": "The domain collects the inputs; the second components instead form the range."
+    },
+    {
+      "id": "isc11-math-relations-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A × B contains exactly ______ ordered pairs when A has 5 elements and B has 4.",
+      "answer": "20",
+      "explanation": "The product rule gives n(A) × n(B) = 5 × 4 = 20 pairs."
+    },
+    {
+      "id": "isc11-math-relations-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the three properties that a relation must satisfy to be an equivalence relation.",
+      "answer": "It must be reflexive — (a, a) belongs to R for every element a; symmetric — (a, b) in R implies (b, a) in R; and transitive — (a, b) and (b, c) in R imply (a, c) in R. All three must hold together, because an equivalence relation is exactly one that partitions its set into disjoint classes.",
+      "explanation": "The three conditions are independent, so each must be checked separately; equality of numbers is the standard example that satisfies all three."
+    },
+    {
+      "id": "isc11-math-relations-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define a function and state what makes a relation fail to be one.",
+      "answer": "A function is a relation in which every element of the domain has exactly one image in the codomain. A relation fails to be a function if some element of its domain has no image at all, or if any element carries two or more different images.",
+      "explanation": "One image per input is the whole rule; the mapping diagram shows the failure as two arrows leaving a single element."
+    },
+    {
+      "id": "isc11-math-relations-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Let R = {(x, y) : x + y = 5, x, y ∈ {1, 2, 3, 4}}. Write R as a set of ordered pairs and state, with reasons, whether it is reflexive, symmetric or transitive on {1, 2, 3, 4}.",
+      "answer": "The pairs are R = {(1, 4), (2, 3), (3, 2), (4, 1)}. It is symmetric, because (a, b) ∈ R always brings (b, a) ∈ R; it is not reflexive, since (1, 1) is missing; and it is not transitive, because (1, 4) and (4, 1) both lie in R while (1, 1) does not.",
+      "explanation": "List the pairs from the condition first, then test each property separately: one missing self-pair kills reflexivity, and a two-step path without its closing pair kills transitivity."
+    },
+    {
+      "id": "isc11-math-relations-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that the function f : ℝ → ℝ defined by f(x) = 2x + 3 is both one-one and onto, and hence state the value of f(4).",
+      "answer": "One-one: suppose f(a) = f(b); then 2a + 3 = 2b + 3, so 2a = 2b and a = b, which proves injectivity. Onto: for an arbitrary y ∈ ℝ choose x = (y − 3)/2, which is a real number, and f(x) = 2 · (y − 3)/2 + 3 = y, so every real number is an image. The function is therefore a bijection, and f(4) = 2(4) + 3 = 11.",
+      "explanation": "Both directions of the bijection must be shown: cancel to a = b for one-one, and construct the pre-image (y − 3)/2 for onto; the value of f(4) then follows by substitution."
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-solids",
+  "title": "Mechanical Properties of Solids",
+  "kind": "physics",
+  "tagline": "Stress, strain and the elastic moduli: why materials bend, stretch and break — and when they stop springing back.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Elasticity is the study of how solids deform under load and recover when the load is removed, and the chapter treats it as a quantitative science: stress as force per area, strain as fractional deformation, and Hooke’s law as the linear proportionality that holds up to the elastic limit. Three moduli — Young’s, bulk and shear — measure the three ways a body can be deformed, and the energy stored in the deformation explains why a catapult works and why a bridge bounces. The practical applications the syllabus names are handled qualitatively, as the document specifies.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-VII: Properties of Bulk Matter (20 marks shared with the Fluids and Thermal Properties chapters)."
+      },
+      {
+        "label": "Stress",
+        "value": "Force per unit area, SI unit pascal; types: longitudinal, shearing and hydraulic (volumetric)."
+      },
+      {
+        "label": "Hooke's law",
+        "value": "Stress = E × strain, valid up to the elastic limit; E is the modulus for that deformation type."
+      },
+      {
+        "label": "Young's modulus",
+        "value": "Y = longitudinal stress / longitudinal strain — stiff wires have large Y (steel ≈ 2 × 10¹¹ Pa)."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish the three types of stress and strain and their units.",
+    "Apply Hooke's law to compute extensions and loads within the elastic limit.",
+    "Explain Young's, bulk and shear moduli and identify the deformation each governs.",
+    "Compute the elastic potential energy stored in a strained body.",
+    "Discuss the practical significance of elasticity qualitatively, as the syllabus requires."
+  ],
+  "learn": [
+    {
+      "id": "stress",
+      "title": "Stress, strain and Hooke’s law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a force deforms a body, the internal response is stress: the restoring force per unit area the material develops, with the SI unit pascal (Pa = N/m²), numerically equal to the applied load per area once equilibrium is reached. Deformation itself is strain — the fractional change in shape or size, dimensionless, since it is a ratio of lengths. The pairing is deliberate: stress has units, strain does not, so their ratio is a material constant with the units of stress. That constant is the modulus, and the linear regime in which stress is proportional to strain is Hooke’s law, named after the springs that obey it — but applying equally to wires, beams and fluid compression within the proportional limit."
+        },
+        {
+          "type": "paragraph",
+          "text": "Three deformations, three stress–strain pairs, complete the classification. Stretch a wire and the longitudinal stress F/A produces a longitudinal strain ΔL/L, with ratio Y, Young’s modulus. Shear a block and the tangential force over area produces an angular deformation, the ratio being the shear modulus G (or η). Compress a body uniformly and the hydraulic stress F/A produces the volumetric strain ΔV/V, giving the bulk modulus K, with its reciprocal the compressibility. Each modulus therefore measures resistance to one specific shape change, and their magnitudes differ enormously within one material — most solids resist shear and compression far more than stretching, which is why a wire is easy to pull long but impossible to compress sideways appreciably. The stress-strain graph shows the whole story in one picture: a linear region, a yield point, plastic flow, and finally fracture — and only the linear region belongs to Hooke’s law."
+        },
+        {
+          "type": "table",
+          "caption": "The three elastic moduli",
+          "columns": [
+            "Modulus",
+            "Stress / strain pair",
+            "Measures"
+          ],
+          "rows": [
+            [
+              "Young's (Y)",
+              "Longitudinal / longitudinal",
+              "Resistance to stretching (a wire)"
+            ],
+            [
+              "Shear (G)",
+              "Shearing stress / shear strain",
+              "Resistance to change of shape at constant volume"
+            ],
+            [
+              "Bulk (K)",
+              "Hydraulic stress / volumetric strain",
+              "Resistance to change of volume (uniform compression)"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A steel wire of area 1 mm² supports 100 N: stress?",
+              "note": "100/10⁻⁶ = 10⁸ Pa."
+            },
+            {
+              "text": "Y of steel ≈ 2 × 10¹¹ Pa: strain of the above?",
+              "note": "strain = 10⁸/2×10¹¹ = 5 × 10⁻⁴ — tiny, as expected."
+            },
+            {
+              "text": "Extend a 2 m wire by 0.5 mm: strain?",
+              "note": "0.5 × 10⁻³/2 = 2.5 × 10⁻⁴, dimensionless."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moduli",
+      "title": "Young’s, bulk and shear in detail",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Young's modulus is the workhorse of the syllabus, defined for a wire or rod under tension as Y = (F/A)/(ΔL/L), and the rearranged form ΔL = FL/(AY) is the engineer's first calculation: extension grows with load and length and shrinks with cross-sectional area and stiffness. Typical values span many orders — rubber ~10⁷ Pa, aluminium ~7 × 10¹⁰, steel ~2 × 10¹¹ — which is why steel cables carry suspension bridges and rubber mounts isolate machinery. The bulk modulus K = −(Δp)/(ΔV/V) resists uniform compression, with the minus sign recording that increasing pressure decreases volume; gases have small K (easily compressed) while liquids and solids are nearly incompressible, a fact every hydraulic system relies on. The shear modulus G quantifies shape change at constant volume, from the leaning of a skyscraper in wind to the rigidity of a wrench grip, and the syllabus treats it qualitatively."
+        },
+        {
+          "type": "paragraph",
+          "text": "Poisisson’s ratio completes the geometric picture: when a wire is stretched longitudinally it contracts laterally, and the ratio of lateral contraction to longitudinal extension — typically 0.2 to 0.4 for metals, bounded below by −1 and above by 0.5 in stable isotropic materials — measures that coupling. Values near 0.5 describe nearly incompressible materials such as rubber, whose volume barely changes even as its shape does enormously. The elastic potential energy stored in a stretched wire follows the same triangular-logic as the spring: the force grows linearly with extension, so the work done — the energy stored — is ½ × load × extension, giving energy per unit volume ½ × stress × strain. That density of stored energy explains why a loaded bow, a wound spring or a bent diving board holds so much capability in so small a volume, and it is the quantitative form of the qualitative applications the syllabus names."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Stress = F/A (Pa); strain = fractional deformation (dimensionless).",
+            "Hooke's law: linear proportionality up to the elastic limit.",
+            "Young's Y for stretching, shear G for shape change, bulk K for compression.",
+            "Extension ΔL = FL/(AY): scales with load and length, inversely with area and stiffness.",
+            "Poisson’s ratio: lateral contraction / longitudinal extension.",
+            "Stored elastic energy per volume = ½ × stress × strain."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Elastic behaviour in use (qualitative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus asks for qualitative ideas of application, and the ideas are worth stating crisply because they explain the built world. Why do metals fatigue and fail after repeated bending? Because cycling beyond the elastic limit drives the material along the plastic portion of its stress-strain curve, accumulating damage until fracture — which is why bridge supports are designed to work well below their elastic limit and are inspected for cracks that concentrate stress. Why do long transmission cables sag and need periodic re-tensioning? Because under their own weight they slowly undergo plastic deformation — creep — at stresses far below their breaking strength. Why are buildings fitted with deep foundations and why does a heavy lorry flatten soft road surfaces? Because the same load over a larger area produces smaller stress, the principle behind wide tyres and the snowshoe."
+        },
+        {
+          "type": "paragraph",
+          "text": "The design logic runs in both directions: stiff materials (large Y) are chosen where deformation must be minimised — machine frames, bridge cables, dental fillings — while compliant materials (small Y) are chosen where energy absorption or vibration isolation matters — rubber engine mounts, shoe soles, crash structures. Thermal stress is the same idea with temperature as the driver: a rail heated in summer expands against its constraints and the resulting stress σ = YαΔT can buckle the track, which is why rails are laid with gaps in temperate climates and welded continuously where temperature control allows. Every one of these examples returns to the same three quantities — load, area, and modulus — and the exam answer that names the stress mechanism involved, rather than describing the phenomenon vaguely, is the one that collects full marks."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Wide tyres and snowshoes: same load, larger area, smaller stress.",
+            "Fatigue: cycling beyond the elastic limit accumulates plastic damage.",
+            "Cables sag by creep: slow plastic flow below the breaking stress.",
+            "Stiffness is chosen for precision; compliance for cushioning and isolation.",
+            "Thermal stress σ = YαΔT — why rails are laid with gaps."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "title": "Exam method for elasticity problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Elasticity problems are substitution exercises once the moduli are sorted, so the marks are won by setup. Begin every wire problem by listing F, A, L and Y with units converted to SI — mm² to m² is the standard trap, and a missed 10⁻⁶ corrupts every downstream figure. Decide which modulus governs: stretching means Young’s, uniform compression means bulk, shape change means shear; misidentification is the most common single error. Then write the defining ratio with the quantity you need as the subject, substitute, and check that the strain is small (below about 10⁻³ for metal in its linear range) — a large computed strain signals either an overstressed scenario or a unit mistake, and either way deserves a second look before the answer is committed."
+        },
+        {
+          "type": "paragraph",
+          "text": "Energy questions follow the spring pattern exactly: work done = average force × displacement = ½FΔL for linear elasticity, which converts to ½ × stress × strain × volume for energy stored per body. When comparing materials, the ratio method beats full substitution: two wires of the same material, one twice as long and half the area, extend by a factor of 4 — and saying so with the proportionalities shown earns the marks faster and with less arithmetic risk than plugging numbers twice. Finally, remember the syllabus’s own boundary: Poisson’s ratio and the applications are treated at the level the official document specifies, and answers should match that depth — precise about the definitions, qualitative about the mechanisms beyond them."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Convert everything to SI before substituting — mm² → m² is the trap.",
+            "Identify the modulus from the deformation type first.",
+            "Check the computed strain is small; large strains mean an error or failure.",
+            "Use proportional ratios when comparing two configurations.",
+            "Energy stored = ½ × stress × strain × volume."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The stress-strain curve of a metal",
+      "description": "A graph of stress against strain for a mild-steel wire: a straight proportional region ending at the proportionality limit, then a curved region to the elastic limit and yield point, a gently rising plastic plateau, a necking region to the fracture point, and the initial slope annotated as Young’s modulus.",
+      "labels": [
+        "Straight region: Hooke’s law holds",
+        "Proportionality limit ends linearity",
+        "Elastic limit: last point of full recovery",
+        "Beyond: plastic (permanent) deformation",
+        "Fracture point ends the curve"
+      ]
+    },
+    {
+      "caption": "Figure: A stretched wire and its dimensions",
+      "description": "A wire of original length L and cross-sectional area A hanging vertically with load F attached, the extension ΔL marked at the bottom, the cross-section drawn beside it as a circle of area A with the load arrow perpendicular to it, and annotations pairing F/A with ΔL/L as the stress and strain.",
+      "labels": [
+        "Load F along the wire",
+        "Cross-section area A",
+        "Original length L",
+        "Extension ΔL is tiny",
+        "Stress = F/A, strain = ΔL/L"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Stress = restoring force per unit area; unit pascal.",
+    "Strain = fractional deformation; dimensionless.",
+    "Hooke's law: stress proportional to strain up to the elastic limit.",
+    "Young's modulus Y governs stretching; ΔL = FL/(AY).",
+    "Bulk modulus K resists compression; compressibility is its reciprocal.",
+    "Shear modulus G resists shape change at constant volume.",
+    "Poisson’s ratio couples lateral contraction to longitudinal extension.",
+    "Elastic energy per volume = ½ × stress × strain.",
+    "Fatigue, creep and thermal stress are the practical limits of elasticity.",
+    "Wider contact area means lower stress for the same load."
+  ],
+  "examFocus": [
+    "List F, A, L and Y in SI before substituting — area units are the trap.",
+    "Name which modulus governs; the choice carries method marks.",
+    "Verify the computed strain is small before accepting the answer.",
+    "State the elastic limit when discussing when Hooke’s law fails."
+  ],
+  "vocabulary": [
+    {
+      "word": "Stress",
+      "meaning": "Restoring force per unit area inside the deformed body."
+    },
+    {
+      "word": "Strain",
+      "meaning": "Fractional deformation — dimensionless."
+    },
+    {
+      "word": "Hooke's law",
+      "meaning": "Stress ∝ strain within the proportional limit."
+    },
+    {
+      "word": "Young's modulus",
+      "meaning": "Longitudinal stress over longitudinal strain."
+    },
+    {
+      "word": "Bulk modulus",
+      "meaning": "Hydraulic stress over volumetric strain; resistances to compression."
+    },
+    {
+      "word": "Shear modulus",
+      "meaning": "Shearing stress over shear strain; resistance to shape change."
+    },
+    {
+      "word": "Elastic limit",
+      "meaning": "The greatest stress from which the body still fully recovers."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-sol-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of stress is the:",
+      "options": [
+        "newton",
+        "pascal",
+        "joule",
+        "newton per metre"
+      ],
+      "correctIndex": 1,
+      "answer": "pascal",
+      "explanation": "Stress is force per area, N/m², which is exactly the pascal."
+    },
+    {
+      "id": "cbse11-phy-sol-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A wire of length L and area A extends by ΔL under load F. Its longitudinal strain is:",
+      "options": [
+        "F/A",
+        "ΔL/L",
+        "L/ΔL",
+        "FL/(AΔL)"
+      ],
+      "correctIndex": 1,
+      "answer": "ΔL/L",
+      "explanation": "Strain is the fractional change of length, ΔL/L — dimensionless, unlike the stress F/A."
+    },
+    {
+      "id": "cbse11-phy-sol-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which modulus governs the uniform compression of a body by excess pressure?",
+      "options": [
+        "Young's modulus",
+        "Shear modulus",
+        "Bulk modulus",
+        "Poisson's ratio"
+      ],
+      "correctIndex": 2,
+      "answer": "Bulk modulus",
+      "explanation": "Bulk modulus pairs hydraulic stress with volumetric strain; its reciprocal is the compressibility."
+    },
+    {
+      "id": "cbse11-phy-sol-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two identical wires are stretched by the same load. One is twice as long. Compared with the shorter wire, its extension is:",
+      "options": [
+        "Half",
+        "The same",
+        "Double",
+        "Four times"
+      ],
+      "correctIndex": 2,
+      "answer": "Double",
+      "explanation": "From ΔL = FL/(AY), extension is proportional to length at fixed load, area and material — twice the length gives twice the extension."
+    },
+    {
+      "id": "cbse11-phy-sol-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The fractional change in length of a stretched body is its ________ strain.",
+      "answer": "longitudinal",
+      "explanation": "Paired with longitudinal stress F/A it defines Young’s modulus."
+    },
+    {
+      "id": "cbse11-phy-sol-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The ratio of lateral contraction to longitudinal extension of a stretched wire is called ________ ratio.",
+      "answer": "Poisson’s",
+      "explanation": "Typically 0.2 to 0.4 for metals; near 0.5 for nearly incompressible materials such as rubber."
+    },
+    {
+      "id": "cbse11-phy-sol-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define stress and strain and state Hooke’s law with its condition of validity.",
+      "answer": "Stress is the restoring force developed per unit area of a deformed body, measured in pascals (1 Pa = 1 N/m²); for a stretched wire it is the longitudinal stress F/A. Strain is the corresponding fractional deformation, dimensionless: for the wire it is the longitudinal strain ΔL/L. Hooke’s law states that within the elastic limit, stress is directly proportional to strain, the constant of proportionality being the elastic modulus for that type of deformation — Young’s modulus for stretching, the shear modulus for shape change, the bulk modulus for compression. The condition of validity matters: proportionality holds only up to the proportional limit, beyond which the body deforms plastically and does not fully recover — a spring bent too far stays bent. Thus stress = modulus × strain is a linear relation whose domain is the initial straight portion of the stress-strain graph, and answers must state that domain rather than applying the law unconditionally.",
+      "explanation": "Both definitions with units, the law stated, and the validity domain emphasised with the plastic-deformation consequence."
+    },
+    {
+      "id": "cbse11-phy-sol-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A steel wire of length 2 m and cross-sectional area 1 mm² is stretched by a 100 N load. With Y = 2 × 10¹¹ Pa, find the extension.",
+      "answer": "Convert the area to SI first: 1 mm² = 1 × 10⁻⁶ m² — the step on which the whole answer depends. Stress = F/A = 100/10⁻⁶ = 10⁸ Pa. Longitudinal strain = stress/Y = 10⁸/(2 × 10¹¹) = 5 × 10⁻⁴, which is small, confirming the wire remains in its linear (Hookean) range. Extension ΔL = strain × L = 5 × 10⁻⁴ × 2 = 10⁻³ m = 1 mm. Cross-check via ΔL = FL/(AY) directly: (100 × 2)/(10⁻⁶ × 2 × 10¹¹) = 200/(2 × 10⁵) = 10⁻³ m ✓. Physical reading: a 2 m steel wire stretches by a mere millimetre under a 10 kg load — steel is stiff, which is precisely why it carries cables and structural members rather than springs.",
+      "explanation": "The unit conversion, both routes to the extension, and the small-strain plausibility check."
+    },
+    {
+      "id": "cbse11-phy-sol-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive an expression for the elastic potential energy stored in a stretched wire and compute it for the wire in the previous question.",
+      "answer": "When a load is applied gradually, the wire extends from zero to ΔL while the restoring force grows linearly from zero to F (Hooke’s law), because stress is proportional to strain throughout the elastic range. The work done against this growing force is therefore the average force times the extension: W = ½F × ΔL. This work is stored as elastic potential energy in the wire. For the wire of the previous question, F = 100 N and ΔL = 10⁻³ m, so U = ½ × 100 × 10⁻³ = 0.05 J. The same energy expressed per unit volume follows by dividing by AL and substituting: U/(AL) = ½FΔL/(AL) = ½(F/A)(ΔL/L) = ½ × stress × strain — the general formula, valid for any elastic deformation. Checks: with the numbers, ½ × 10⁸ × 5 × 10⁻⁴ = 0.25 × 10⁵ J/m³... careful: ½ × 10⁸ × 5 × 10⁻⁴ = 2.5 × 10⁴ J/m³, and the wire’s volume is A L = 10⁻⁶ × 2 = 2 × 10⁻⁶ m³, giving 2.5 × 10⁴ × 2 × 10⁻⁶ = 0.05 J ✓ — the two forms agree. The magnitude — fifty millijoules — is consistent with the tiny extension stored, and the energy is fully recoverable on unloading in the elastic range.",
+      "explanation": "The triangular-work argument, the numeric energy, the per-volume general form, and the agreement check between the two."
+    },
+    {
+      "id": "cbse11-phy-sol-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why a long steel cable and a short steel cable of the same diameter stretch differently under the same load, why designers increase cable diameter for longer spans, and what happens if the load exceeds the elastic limit.",
+      "answer": "From ΔL = FL/(AY) the extension is directly proportional to the original length: for the same load, area and material, doubling L doubles ΔL. So a long cable always stretches more than a short one — not because it is weaker per unit length, but because every metre contributes its own small extension, and the total is their sum. This is why the extension of a suspension bridge’s main cable (hundreds of metres) is measured in metres while a laboratory wire’s is in millimetres. Designers increase diameter for longer spans because extension falls as the cross-sectional area rises, and stress itself falls with area: doubling the diameter quadruples A, quartering both the strain and the extension at the same load — while also lowering the working stress further below the elastic limit, adding margin against fatigue. Exceeding the elastic limit changes the regime qualitatively: the material deforms plastically, so on unloading it does not return to its original length — permanent set results — and repeated cycling in this regime causes fatigue failure at loads far below the ultimate breaking stress, which is why bridge cables are never allowed near their limit and are inspected for the cracks that localise stress. The complete design philosophy follows: choose diameter so that working stress sits safely below the proportional limit, letting the linear law govern the structure’s behaviour, and reserve the plastic range for energy-absorbing safety components that are meant to deform.",
+      "explanation": "The proportionality to L and inverse proportionality to A stated from the formula, the diameter-doubling arithmetic, and the elastic-limit consequences with the design conclusion."
+    }
+  ]
+}

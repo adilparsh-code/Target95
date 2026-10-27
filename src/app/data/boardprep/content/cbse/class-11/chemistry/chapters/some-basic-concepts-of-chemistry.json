@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-chem-basic-concepts",
+  "title": "Some Basic Concepts of Chemistry",
+  "kind": "chemistry",
+  "tagline": "Matter, measurement, the laws of chemical combination and the mole — the quantitative language every calculation in chemistry is written in.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Chemistry syllabus for subject code 043 registered for the Academic Year 2026-27 (CBSE, Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Chemistry textbooks and the Microscale Chemistry laboratory manual are identified by title only: every definition, worked calculation, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Chemistry (043) syllabus for the Academic Year 2026-27: every explanation, worked calculation, figure, example, question and answer was written for this page. Only the topics printed in the official document are taught, and topics the document marks formative are labelled as such on this page."
+  },
+  "overview": {
+    "intro": "Chemistry is the science of matter: what it is made of, what its properties are, and how it changes into other substances. The first unit of the CBSE Class XI course equips you with the quantitative side of that science. You will learn how matter is classified, how every physical quantity is measured and expressed, why every measurement carries an uncertainty, how the classical laws of chemical combination led to Dalton's atomic theory, and how the mole concept connects the mass of a sample that you can weigh on a balance to the number of atoms and molecules that actually take part in a reaction. Nearly every numerical problem in the rest of the chemistry course — from stoichiometry to the gas laws to thermodynamics — rests on the ideas developed here.",
+    "facts": [
+      {
+        "label": "Marks in the theory paper",
+        "value": "7 marks (Unit 1 of the official 70-mark CBSE Class XI theory course)"
+      },
+      {
+        "label": "SI base unit of amount of substance",
+        "value": "The mole (mol); one mole contains exactly 6.022 × 10²³ elementary entities"
+      },
+      {
+        "label": "Molar mass of a substance",
+        "value": "Its relative formula mass expressed in grams per mole (g mol⁻¹)"
+      },
+      {
+        "label": "Why measurements are reported with error",
+        "value": "Every instrument has a least count, so a measured value is always a value ± an uncertainty"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Classify samples of matter as elements, compounds or mixtures and relate each to atoms, molecules and formula units.",
+    "Express measured quantities in scientific notation with the correct number of significant figures and combine them correctly.",
+    "State and apply the laws of chemical combination and explain how they supported Dalton's atomic theory.",
+    "Use the mole concept to convert among mass, number of moles, number of particles and volume at STP, and to carry out stoichiometric and percentage-composition calculations."
+  ],
+  "learn": [
+    {
+      "id": "matter-and-measurement",
+      "title": "Matter and its measurement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Chemistry studies matter — anything that has mass and occupies space. At the smallest scale, matter is built from atoms, the smallest particles of an element that retain its identity. Atoms combine into molecules in covalent substances and into formula units held together by ionic bonds in ionic substances. This gives the three top-level classes of matter: an element is a pure substance made of only one kind of atom and cannot be broken down by chemical means; a compound is a pure substance formed when two or more elements combine in fixed proportions by mass, and whose properties differ completely from those of its elements; and a mixture is a combination of two or more substances in which each substance retains its own chemical identity and the proportions can vary from sample to sample."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every substance has characteristic properties that let us identify it. Intensive properties, such as density, melting point, boiling point and refractive index, do not depend on the amount of sample taken and are therefore used to identify a substance. Extensive properties, such as mass and volume, do depend on the amount. Chemical properties describe the ability of a substance to change into a different substance, as when iron rusts or magnesium burns in air; physical properties such as colour, odour, solubility and hardness can be observed without changing the identity of the sample."
+        },
+        {
+          "type": "paragraph",
+          "text": "To talk about quantities precisely, chemists measure seven base quantities and express them in the International System of Units (SI). Length is measured in the metre (m), mass in the kilogram (kg), time in the second (s), electric current in the ampere (A), thermodynamic temperature in the kelvin (K), amount of substance in the mole (mol) and luminous intensity in the candela (cd). Every other quantity is a derived unit built from these: area in square metres, volume in cubic metres or litres, speed in metres per second, force in newtons and energy in joules. Because a chemist routinely handles quantities that range from grams of reagent to 10²³ particles, very large and very small numbers are written in scientific notation as a decimal multiplied by a power of ten, so that 602,200,000,000,000,000,000,000 is written 6.022 × 10²³."
+        },
+        {
+          "type": "table",
+          "caption": "SI base units and the quantities they measure",
+          "columns": [
+            "Base quantity",
+            "SI unit",
+            "Symbol",
+            "Everyday chemistry example"
+          ],
+          "rows": [
+            [
+              "Length",
+              "metre",
+              "m",
+              "The 25.0 cm length of a test tube"
+            ],
+            [
+              "Mass",
+              "kilogram",
+              "kg",
+              "A 5.00 g sample of sodium chloride weighed out for a titration"
+            ],
+            [
+              "Time",
+              "second",
+              "s",
+              "The 30 s taken for a precipitate to form"
+            ],
+            [
+              "Amount of substance",
+              "mole",
+              "mol",
+              "0.050 mol of hydrochloric acid in a standard solution"
+            ],
+            [
+              "Temperature",
+              "kelvin",
+              "K",
+              "A reaction carried out at 298 K (25 °C)"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A pure substance has a fixed composition and characteristic properties; a mixture has a variable composition and can be separated by physical methods.",
+            "A homogeneous mixture (solution) appears uniform throughout, such as salt water; a heterogeneous mixture, such as sand and water, shows distinct phases.",
+            "Derived units are combinations of base units: volume is m³ (or dm³, where 1 dm³ = 1 L = 1000 cm³) and density is kg m⁻³ (or g cm⁻³).",
+            "Dimensional analysis converts units by multiplying by factors equal to one, such as 1 kg/1000 g, so the original quantity never changes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uncertainty",
+      "title": "Uncertainty in measurement and significant figures",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "No measurement is exact. Every reading carries an uncertainty that comes from the least count of the instrument, from the observer, and from variations in the conditions of measurement. A burette that can be read to ±0.05 mL, an analytical balance that reads to ±0.001 g and a measuring cylinder graduated in 1 mL steps all give readings of different precision. Chemists therefore report a measurement as a measured value together with an uncertainty, most commonly using the average deviation of repeated readings: if three titres of 20.10 mL, 20.14 mL and 20.12 mL are obtained, the mean is 20.12 mL and the average deviation is ±0.02 mL, so the result is written 20.12 ± 0.02 mL."
+        },
+        {
+          "type": "paragraph",
+          "text": "The precision of a recorded value is shown by its significant figures — the digits that are known with certainty plus the first uncertain digit. A rule of thumb counts all non-zero digits as significant, counts zeros between non-zero digits as significant, and treats leading zeros as placeholders that are never significant: 0.0045 g has two significant figures while 4.500 g has four. Trailing zeros after a decimal point are significant because they record readings that were actually taken. When a number ends in zeros without a decimal point, such as 4500 g, the count is ambiguous, so the value is written in scientific notation — 4.5 × 10³ g for two significant figures. Exact numbers, such as the 2 in H₂O or a count of 10 test tubes, have unlimited significant figures."
+        },
+        {
+          "type": "paragraph",
+          "text": "Significant figures govern arithmetic. In multiplication and division the answer carries the same number of significant figures as the quantity with the fewest significant figures; in addition and subtraction the answer carries the same number of decimal places as the quantity with the fewest decimal places. Extra digits produced by a calculator are rounded off, and a digit of 5 is rounded to the nearest even digit to avoid a systematic upward bias. When a measured value is combined with an exact number, the exact number does not limit the result: 4.500 g divided by 2 (an exact count) is still 2.250 g."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 7.32 g sample of a metal occupies 1.05 cm³. Calculate its density.",
+              "note": "Density = mass/volume = 7.32 g ÷ 1.05 cm³ = 6.97 g cm⁻³. Both inputs have three significant figures, so the answer is reported to three significant figures."
+            },
+            {
+              "text": "Add 25.6 mL and 0.55 mL, then multiply the result by 10 (an exact factor).",
+              "note": "25.6 mL has one decimal place and 0.55 mL has two, so the sum is 26.2 mL. Multiplying by the exact number 10 keeps three significant figures: 262 mL."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Uncertainty",
+              "meaning": "A quantitative estimate of the range within which the true value of a measurement is expected to lie."
+            },
+            {
+              "term": "Significant figures",
+              "meaning": "All the reliably known digits in a measured value, including the first estimated digit."
+            },
+            {
+              "term": "Least count",
+              "meaning": "The smallest reading that can be taken on an instrument, such as 0.05 mL on a burette."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "laws-and-dalton",
+      "title": "Laws of chemical combination and Dalton's atomic theory",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Eighteenth-century chemists established by experiment that chemical change obeys exact quantitative laws. The law of conservation of mass, stated by Lavoisier, says that mass can be neither created nor destroyed in a chemical reaction: the total mass of the products equals the total mass of the reactants. The law of definite proportions, stated by Proust, says that a pure compound always contains the same elements in the same proportion by mass — water is 88.89% oxygen and 11.11% hydrogen by mass no matter where it comes from. The law of multiple proportions, stated by Dalton, says that when two elements form more than one compound, the masses of one element that combine with a fixed mass of the other are in a simple whole-number ratio: carbon monoxide contains 1.33 g of oxygen per gram of carbon, carbon dioxide contains 2.66 g of oxygen per gram of carbon, and 2.66/1.33 = 2."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two further laws describe gases. Gay-Lussac's law of combining volumes states that when gases react they do so in volumes that bear a simple whole-number ratio to one another, measured at the same temperature and pressure: hydrogen and chlorine combine in a 1:1 volume ratio to form hydrogen chloride, and hydrogen and oxygen in a 2:1 ratio to form water vapour. Avogadro's hypothesis explains this — equal volumes of gases at the same temperature and pressure contain equal numbers of molecules — and lets a balanced equation be read directly as a ratio of volumes as well as a ratio of molecules."
+        },
+        {
+          "type": "paragraph",
+          "text": "Dalton's atomic theory, proposed in 1808, provided the mechanism behind all of these laws. Its postulates are that every element is made of extremely small indivisible particles called atoms; an atom of a given element is identical in mass and properties to every other atom of that element, while atoms of different elements differ; atoms cannot be created, destroyed or transformed into atoms of another element in a chemical reaction; atoms combine in simple whole-number ratios to form compounds; and a molecule is the smallest particle of a substance that retains its chemical identity. The theory explained conservation of mass because atoms are only rearranged, definite proportions because a compound's formula fixes the atom ratio, and multiple proportions because atoms combine in whole numbers. Modern chemistry has amended two postulates — atoms are divisible into sub-atomic particles, and atoms of one element can differ in mass (isotopes) — but the theory remains the foundation of quantitative chemistry."
+        },
+        {
+          "type": "table",
+          "caption": "The classical laws of chemical combination",
+          "columns": [
+            "Law",
+            "Statement",
+            "What it says about a reaction"
+          ],
+          "rows": [
+            [
+              "Conservation of mass (Lavoisier)",
+              "Mass is neither created nor destroyed.",
+              "Total mass of products = total mass of reactants"
+            ],
+            [
+              "Definite proportions (Proust)",
+              "A compound has a fixed composition by mass.",
+              "Every sample of pure water is 88.89% O by mass"
+            ],
+            [
+              "Multiple proportions (Dalton)",
+              "Two elements in different compounds combine in simple ratios.",
+              "CO and CO₂ hold O in the ratio 1:2 per gram of carbon"
+            ],
+            [
+              "Combining volumes (Gay-Lussac)",
+              "Gaseous volumes react in simple ratios.",
+              "H₂ + Cl₂ → 2HCl, volumes in 1:1:2 ratio"
+            ],
+            [
+              "Avogadro's hypothesis",
+              "Equal volumes of gases at same T, P have equal molecules.",
+              "Reads a balanced equation as a volume ratio"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mole-and-stoichiometry",
+      "title": "Mole concept, molar mass and stoichiometry",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Chemists need a counting unit for atoms and molecules, because a balance measures mass while a reaction occurs particle by particle. That unit is the mole: one mole is the amount of substance that contains exactly 6.02214076 × 10²³ elementary entities, a number called the Avogadro constant and given the symbol Nₐ. The entities may be atoms, molecules, ions, electrons or any other specified particle — one mole of carbon atoms, one mole of CO₂ molecules and one mole of chloride ions each contain Nₐ particles. The molar mass of a substance is the mass of one mole of it, numerically equal to its relative molecular or formula mass and expressed in grams per mole: carbon has a molar mass of 12.01 g mol⁻¹, water 18.02 g mol⁻¹ and sodium hydroxide 40.00 g mol⁻¹."
+        },
+        {
+          "type": "paragraph",
+          "text": "The mole is the hub of every conversion in chemistry. Mass in grams divided by molar mass gives moles; moles multiplied by Nₐ gives the number of particles; moles multiplied by the molar volume of a gas gives its volume at standard temperature and pressure — 22.7 L mol⁻¹ at 273.15 K and 1 bar, or 22.4 L mol⁻¹ at the older 1 atm standard; and moles divided by the volume of solution in litres gives molarity. Percentage composition states each element's mass as a percentage of the total mass of the compound, and dividing those percentages by the respective atomic masses gives the mole ratio, which yields the empirical formula — the simplest whole-number ratio of atoms. The molecular formula is then a whole-number multiple of the empirical formula, fixed by comparing the empirical formula mass with the measured molar mass."
+        },
+        {
+          "type": "paragraph",
+          "text": "A balanced chemical equation is a recipe, and its coefficients give the stoichiometric ratio between reactants and products. Stoichiometric calculations follow a fixed path: convert the given quantity to moles, divide by the coefficient of that substance to obtain \"reaction units\", multiply by the coefficient of the required substance, and convert to the required unit. When one reactant is used up before the others it is the limiting reagent, and it determines the amount of product; the reactant present in excess remains after the reaction stops. The percentage yield compares the amount actually obtained with the amount the equation predicts."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "How many moles and how many molecules are present in 33.0 g of carbon dioxide?",
+              "note": "Molar mass of CO₂ = 12.01 + 2(16.00) = 44.01 g mol⁻¹. Moles = 33.0/44.01 = 0.750 mol. Molecules = 0.750 × 6.022 × 10²³ = 4.52 × 10²³ molecules of CO₂."
+            },
+            {
+              "text": "A compound contains 4.07% hydrogen, 24.27% carbon and 71.65% chlorine by mass, and has a molar mass of 98.96 g mol⁻¹. Find its empirical and molecular formulas.",
+              "note": "Divide by atomic masses: H 4.07/1.008 = 4.04, C 24.27/12.01 = 2.02, Cl 71.65/35.45 = 2.02. Divide by the smallest (2.02): CH₂Cl₂. The empirical formula mass is 12.01 + 2(1.008) + 2(35.45) = 84.93 g mol⁻¹, and 98.96/84.93 is close to 1, so the molecular formula is CH₂Cl₂."
+            },
+            {
+              "text": "Calculate the mass of water produced when 5.00 g of hydrogen burns completely in excess oxygen.",
+              "note": "2H₂ + O₂ → 2H₂O. Moles of H₂ = 5.00/2.016 = 2.48 mol. The ratio H₂:H₂O is 1:1, so 2.48 mol of water forms; mass = 2.48 × 18.02 = 44.7 g of H₂O."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The mole as a conversion hub",
+          "columns": [
+            "Given",
+            "Divide by",
+            "To obtain"
+          ],
+          "rows": [
+            [
+              "Mass (g)",
+              "molar mass (g mol⁻¹)",
+              "moles of substance"
+            ],
+            [
+              "Moles",
+              "molar volume at STP (22.7 L at 1 bar)",
+              "volume of a gas (L)"
+            ],
+            [
+              "Moles",
+              "Nₐ = 6.022 × 10²³ mol⁻¹",
+              "number of particles"
+            ],
+            [
+              "Moles of solute",
+              "volume of solution (L)",
+              "molarity (mol L⁻¹)"
+            ],
+            [
+              "Mass of element",
+              "mass of compound × 100",
+              "percentage composition"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Classification of matter down to atoms and molecules",
+      "description": "A tree diagram whose root is Matter, branching into Pure Substances and Mixtures; Pure Substances branch into Elements (one kind of atom, e.g. Fe, O₂) and Compounds (fixed ratio of atoms, e.g. H₂O, NaCl); Mixtures branch into Homogeneous (salt solution) and Heterogeneous (sand and water); atoms and molecules drawn as labelled clusters beneath the element and compound branches.",
+      "labels": [
+        "Matter → pure substances or mixtures",
+        "Elements: one kind of atom, cannot be decomposed",
+        "Compounds: fixed mass ratio, decomposable",
+        "Mixtures: variable composition, separable physically"
+      ]
+    },
+    {
+      "caption": "Figure: The mole bridges mass and number of particles",
+      "description": "A flow map with three stacked boxes — \"Mass on the balance (g)\", \"Amount (mol)\", and \"Number of particles\" — joined by two-way arrows: the left arrow labelled \"÷ molar mass / × molar mass\", the right arrow labelled \"÷ Nₐ / × Nₐ (6.022 × 10²³)\", with a side branch from the mole box to \"gas volume at STP, × molar volume\".",
+      "labels": [
+        "Grams ÷ molar mass gives moles",
+        "Moles × Nₐ gives number of particles",
+        "Moles × molar volume gives gas volume at STP",
+        "Every stoichiometric ratio is a mole ratio"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Elements have one kind of atom; compounds have a fixed composition by mass; mixtures have a variable composition.",
+    "Seven SI base units underlie all derived units; amount of substance is measured in the mole.",
+    "Significant figures: non-zero digits and captive zeros count, leading zeros do not, trailing zeros after a decimal count.",
+    "In × and ÷, the answer takes the fewest significant figures; in + and −, the fewest decimal places.",
+    "Law of conservation of mass: atoms are rearranged, never created or destroyed.",
+    "Law of multiple proportions: masses of one element per fixed mass of the other differ by simple whole numbers.",
+    "One mole = 6.022 × 10²³ entities = molar mass in grams = about 22.7 L of a gas at STP (1 bar).",
+    "Empirical formula is the simplest whole-number atom ratio; the molecular formula is a whole-number multiple of it.",
+    "The limiting reagent is completely consumed and fixes the amount of product formed.",
+    "Percentage yield = (actual yield / theoretical yield) × 100."
+  ],
+  "examFocus": [
+    "A 7-mark unit in the theory paper; CBSE weights this paper 40% remembering, 30% applying and 30% analysing, so numerical application is expected alongside definitions.",
+    "Practise unit-conversion chains (g → mol → particles → volume) and empirical/molecular formula determination from percentage data; these recur as applying-domain questions.",
+    "Learn each law with its statement and one worked illustration — laws of chemical combination are frequently asked as short-answer definitions."
+  ],
+  "vocabulary": [
+    {
+      "word": "Mole",
+      "meaning": "The amount of substance containing exactly 6.022 × 10²³ specified entities."
+    },
+    {
+      "word": "Avogadro constant",
+      "meaning": "Nₐ = 6.02214076 × 10²³ mol⁻¹, the number of entities in one mole."
+    },
+    {
+      "word": "Molar mass",
+      "meaning": "The mass of one mole of a substance, in g mol⁻¹, numerically equal to its relative formula mass."
+    },
+    {
+      "word": "Empirical formula",
+      "meaning": "The simplest whole-number ratio of atoms of each element in a compound."
+    },
+    {
+      "word": "Limiting reagent",
+      "meaning": "The reactant that is consumed first and therefore limits the amount of product."
+    },
+    {
+      "word": "Stoichiometry",
+      "meaning": "The quantitative relationship between reactants and products in a balanced chemical equation."
+    },
+    {
+      "word": "Scientific notation",
+      "meaning": "A number written as a decimal between 1 and 10 multiplied by a power of ten."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-chem-basic-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a pure substance with a fixed composition by mass?",
+      "options": [
+        "Sodium chloride",
+        "Air",
+        "Brass",
+        "Sea water"
+      ],
+      "correctIndex": 0,
+      "answer": "Sodium chloride",
+      "explanation": "Sodium chloride is a compound, so every sample contains sodium and chlorine in the same 1:1 ratio by atom count and the same mass ratio. Air, brass and sea water are mixtures whose composition varies from sample to sample."
+    },
+    {
+      "id": "cbse11-chem-basic-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of significant figures in 0.03040 g is:",
+      "options": [
+        "two figures",
+        "three figures",
+        "four figures",
+        "five figures"
+      ],
+      "correctIndex": 2,
+      "answer": "four figures",
+      "explanation": "The leading zeros are placeholders and never count, while the captive 3, 4 and the trailing zero after the decimal point all count. That gives four significant figures: 3, 0, 4 and 0."
+    },
+    {
+      "id": "cbse11-chem-basic-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A compound contains 40.0% carbon, 6.7% hydrogen and 53.3% oxygen by mass. Its empirical formula is:",
+      "options": [
+        "CH₂O",
+        "C₂H₄O₂",
+        "CHO",
+        "C₃H₆O₃"
+      ],
+      "correctIndex": 0,
+      "answer": "CH₂O",
+      "explanation": "Divide each percentage by the atomic mass: C 40.0/12.01 = 3.33, H 6.7/1.008 = 6.65, O 53.3/16.00 = 3.33. Dividing by the smallest value gives C : H : O = 1 : 2 : 1, so the empirical formula is CH₂O."
+    },
+    {
+      "id": "cbse11-chem-basic-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "5.0 g each of hydrogen and oxygen are allowed to react according to 2H₂ + O₂ → 2H₂O. The mass of water formed is:",
+      "options": [
+        "5.6 g",
+        "9.0 g",
+        "45.0 g",
+        "10.0 g"
+      ],
+      "correctIndex": 0,
+      "answer": "5.6 g",
+      "explanation": "Moles: H₂ = 5.0/2.016 = 2.48 mol and O₂ = 5.0/32.00 = 0.156 mol. The equation demands twice as many moles of H₂ as O₂, so oxygen is limiting: 0.156 mol of O₂ forms 0.312 mol of water = 0.312 × 18.02 = 5.6 g, and 0.63 g of hydrogen is consumed while the rest of the hydrogen is left over. Equivalently, 32 g of O₂ gives 36 g of water, so 5.0 g of O₂ gives (36/32) × 5.0 = 5.6 g."
+    },
+    {
+      "id": "cbse11-chem-basic-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI base unit for the amount of substance is the __________.",
+      "answer": "mole",
+      "explanation": "The mole (symbol mol) is one of the seven SI base units and is defined by a fixed value of the Avogadro constant, 6.022 × 10²³ entities per mole."
+    },
+    {
+      "id": "cbse11-chem-basic-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume occupied by one mole of any gas at STP (273.15 K, 1 bar) is approximately __________.",
+      "answer": "22.7 litres",
+      "explanation": "At the current standard state of 273.15 K and 1 bar, one mole of an ideal gas occupies about 22.7 L; the older definition of STP at 1 atm gave the familiar 22.4 L figure. Both appear in textbooks, so the pressure used must always be stated."
+    },
+    {
+      "id": "cbse11-chem-basic-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the law of definite proportions and give one example.",
+      "answer": "Law of definite proportions: a pure compound always contains the same elements in the same proportion by mass, whatever the source or method of preparation. Example: any pure sample of water is 11.11% hydrogen and 88.89% oxygen by mass, and any pure calcium carbonate is 40.0% calcium, 12.0% carbon and 48.0% oxygen.",
+      "explanation": "The law of definite proportions is what makes a chemical formula meaningful: without it, a compound could not be given a fixed composition, and percentage composition could not be used to find an empirical formula."
+    },
+    {
+      "id": "cbse11-chem-basic-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate between empirical formula and molecular formula with an example.",
+      "answer": "The empirical formula gives the simplest whole-number ratio of atoms of each element, while the molecular formula gives the actual number of atoms of each element in one molecule. For glucose the empirical formula is CH₂O (ratio 1:2:1) and the molecular formula is C₆H₁₂O₆, which is six times the empirical formula because the molar mass 180 g mol⁻¹ is six times the empirical formula mass 30 g mol⁻¹.",
+      "explanation": "Examiners look for both halves of the distinction and a worked link between them: the empirical formula mass is compared with the measured molar mass to obtain the whole-number multiplier."
+    },
+    {
+      "id": "cbse11-chem-basic-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 2.0 g sample of a hydrocarbon contains 1.6 g of carbon and 0.4 g of hydrogen, and has a molar mass of 30 g mol⁻¹. Determine its empirical and molecular formulas, and state the number of molecules present in the sample.",
+      "answer": "Percentage composition: carbon = (1.6/2.0) × 100 = 80.0%, hydrogen = (0.4/2.0) × 100 = 20.0%. Moles: C = 80.0/12.01 = 6.66 and H = 20.0/1.008 = 19.84. Dividing by the smallest gives C : H = 1 : 3, so the empirical formula is CH₃ with an empirical formula mass of 15.03 g mol⁻¹. The ratio of molar mass to empirical formula mass is 30/15.03 = 2.0, so the molecular formula is C₂H₆ (molar mass 30.07 g mol⁻¹), the alkane ethane. The number of molecules = moles × Nₐ = (2.0/30) × 6.022 × 10²³ = 4.01 × 10²² molecules.",
+      "explanation": "The method converts mass percentages to mole ratios, rounds to whole numbers, and then uses the molar mass to scale the empirical formula up to the molecular formula before applying Avogadro's constant."
+    },
+    {
+      "id": "cbse11-chem-basic-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In an experiment 3.0 g of carbon are burnt in 8.0 g of oxygen to give carbon dioxide, and 4.0 g of the dioxide is obtained. Use the result to comment on the laws of chemical combination, and identify the limiting reagent.",
+      "answer": "Carbon burns as C + O₂ → CO₂, so by the law of definite proportions 12.01 g of carbon requires 32.00 g of oxygen, i.e. 1 g of carbon requires 2.66 g of oxygen. Here 3.0 g of carbon needs 8.0 g of oxygen exactly, so the reactants are present in the exact stoichiometric ratio and neither is limiting; by the law of conservation of mass the expected yield is 3.0 + 8.0 = 11.0 g of carbon dioxide. The actual yield of 4.0 g is therefore far below the theoretical 11.0 g, giving a percentage yield of (4.0/11.0) × 100 = 36.4%. The shortfall does not violate any law of chemical combination: the laws describe complete reactions and closed systems, so the experiment shows an incomplete or open-system burn — carbon monoxide or unburnt carbon remained, or gases escaped — rather than a failure of conservation of mass.",
+      "explanation": "Stoichiometric data must be read against the balanced equation first; the shortfall in yield here shows an incomplete or open-system reaction rather than any failure of the conservation of mass."
+    }
+  ]
+}

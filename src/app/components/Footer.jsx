@@ -12,15 +12,14 @@ const resources = [
   { label: "Daily Challenge", href: "/daily-challenge" },
   { label: "Rewards", href: "/rewards" },
   { label: "Dashboard", href: "/dashboard" },
-];
-
-const legalLinks = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms of Service", href: "/terms" },
-  { label: "Copyright & Content Use", href: "/copyright" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
-];
+];  const legalLinks = [
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Privacy & Data Protection", href: "/privacy-and-data-protection" },
+    { label: "Terms of Service", href: "/terms" },
+    { label: "Copyright & Content Use", href: "/copyright" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
+  ];
 
 const socialLinks = [
   { platform: "Facebook", href: "https://facebook.com/target95" },

@@ -1,0 +1,558 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-iterative",
+  "slug": "iterative-statements",
+  "title": "Looping / Iterative Statements in Java",
+  "kind": "computer-applications",
+  "tagline": "for, while and do-while — the three questions every loop answers before it runs.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "A loop is a statement that runs a block of code again and again under the control of a condition or a counter, so the repetition lives in the structure of the program rather than in the length of the code. Copying forty println statements to print forty marks is fragile and impossible to edit; a loop answers the same question in three lines and stays correct when the data changes. This chapter builds the three loop forms of Java and the discipline of tracing them.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Introduction to Programming — Java control structures (ICSE Class IX)"
+      },
+      {
+        "label": "The three questions",
+        "value": "Initialisation, condition and update — every loop answers all three"
+      },
+      {
+        "label": "for loop",
+        "value": "Count-controlled: the header holds all three parts together"
+      },
+      {
+        "label": "while / do-while",
+        "value": "Condition-controlled; do-while runs its body at least once"
+      },
+      {
+        "label": "Loop escapes",
+        "value": "break ends the loop; continue abandons only the current pass"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Write for, while and do-while loops that answer a stated repetition question exactly.",
+    "Trace a loop pass by pass to its final value using a trace table.",
+    "Explain what break and continue do, and where control goes in each case.",
+    "Recognise and repair a loop that never ends or ends one pass too early."
+  ],
+  "learn": [
+    {
+      "id": "loop-why",
+      "title": "Why loops exist — the cost of repetition",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Suppose you must print the marks of forty students. Without a loop you would write forty System.out.println lines — forty chances to mistype a number, forty lines to edit when the marks change, and a program that answers only this one question. The computer does not tire of repetition; the programmer does, and more importantly the programmer makes mistakes that repetition is meant to remove. A loop hands the repetition to the machine so the code stays short and stays correct."
+        },
+        {
+          "type": "paragraph",
+          "text": "Every loop answers three questions. The initialisation sets the value that starts the repetition, and it happens once, before the loop is entered. The condition states what must remain true for the loop to keep running, and it is checked before every pass — one false result ends the loop. The update moves the loop towards its own end, and without it the condition may never turn false. Miss any of the three and the loop either never runs, runs for ever, or stops one pass too soon."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "for — the count-controlled loop: use it when you know in advance how many times the work must run.",
+            "while — the condition-controlled loop: use it when you know what must remain true, but not how many passes it takes.",
+            "do-while — the run-at-least-once loop: use it when the test belongs after the work, as in prompting until a valid answer arrives."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three-part anatomy shared by every loop",
+          "columns": [
+            "Part",
+            "Question it answers",
+            "for loop location",
+            "while loop location"
+          ],
+          "rows": [
+            [
+              "Initialisation",
+              "What value starts the count?",
+              "First slot of the header",
+              "Before the while statement"
+            ],
+            [
+              "Condition",
+              "When should the loop keep running?",
+              "Middle slot of the header",
+              "The while ( ... ) test itself"
+            ],
+            [
+              "Update",
+              "How does the loop advance?",
+              "Last slot of the header",
+              "Inside the body, usually the last line"
+            ],
+            [
+              "Body",
+              "What work is repeated?",
+              "The block in braces",
+              "The block in braces"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loop-for",
+      "title": "The for loop — counting with a counter",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The for loop packs the three questions into one header: for (initialisation; condition; update). The initialisation runs once when the loop begins; the condition is checked before every pass; the update runs after every pass, just before the condition is checked again. Between them sits the body, the block that does the actual work. Because all three parts are visible in one line, the for loop is the clearest choice whenever the number of passes is known in advance."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int sum = 0; for (int i = 1; i <= 5; i++) { sum = sum + i; System.out.println(\"After adding \" + i + \", sum = \" + sum); } System.out.println(\"Total = \" + sum);",
+              "note": "The counter i starts at 1 and the loop runs while i is at most 5, growing by one after each pass — five passes in all. Each pass adds the current i to sum and reports it. After the fifth pass i becomes 6, the test turns false, control skips past the block, and the program reports the grand total 15 of the integers one to five."
+            },
+            {
+              "text": "for (int i = 10; i >= 1; i -= 2) System.out.print(i + \" \");",
+              "note": "The same header counting downwards in steps of two: the counter starts at 10, the condition demands at least 1, and the update subtracts two after each pass, so the output is 10 8 6 4 2. Nothing forces a loop to grow — the update only has to move the counter towards falsifying the condition."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The same header can count downwards — for (int i = 10; i >= 1; i--) runs ten passes while the counter falls — or step by two with i += 2. The counter variable is declared inside the header, so its life ends with the loop: a later attempt to print i outside the block fails to compile, and that protection is deliberate. It stops a finished counter from leaking into the rest of the program."
+        },
+        {
+          "type": "paragraph",
+          "text": "Off-by-one errors are the commonest loop mistake in examinations. The header i <= 5 runs five times, taking the values 1 to 5; the header i < 5 runs only four times, because the value 5 never enters the body. Before writing the loop, say aloud which values the counter takes and how many passes that is. The count you speak must match the count the question asks for, word for word."
+        }
+      ]
+    },
+    {
+      "id": "loop-while",
+      "title": "The while and do-while loops — condition-controlled repetition",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The while loop tests its condition before every pass: while (condition) { body }. If the condition is false when the loop is first reached, the body never runs — not even once. That makes while the right choice when the number of passes is not known in advance, such as adding whole numbers until a total crosses a limit, or reading input until a valid value arrives."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int n = 1; int sum = 0; while (sum < 100) { sum = sum + n; n = n + 1; } System.out.println(\"Reached \" + sum + \" after \" + (n - 1) + \" terms\");",
+              "note": "The loop keeps adding the next whole number while the total stays below one hundred. The counter n advances inside the body, because a while header has no update slot of its own. The test happens first, so had the total already been 100 the body would not have run at all — a while loop can run zero times."
+            },
+            {
+              "text": "import java.util.Scanner; Scanner in = new Scanner(System.in); int marks; do { System.out.print(\"Enter marks (0-100): \"); marks = in.nextInt(); } while (marks < 0 || marks > 100); System.out.println(\"Accepted: \" + marks);",
+              "note": "The prompt and the read run first, so the user is always asked at least once. The condition then judges the answer, and any value outside the range sends the program round again. Note the semicolon after the while test — a do-while statement ends with it, and leaving it out is a compile error."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "while versus do-while — when the test happens",
+          "columns": [
+            "Feature",
+            "while",
+            "do-while"
+          ],
+          "rows": [
+            [
+              "Test happens",
+              "Before the body",
+              "After the body"
+            ],
+            [
+              "Minimum runs",
+              "Zero",
+              "One"
+            ],
+            [
+              "Header ends with",
+              "No semicolon",
+              "A semicolon"
+            ],
+            [
+              "Best for",
+              "Guarding work behind a condition",
+              "Prompts, menus, retries"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The difference that matters is the order of the test. A while loop asks permission before acting, so it can decline entirely; a do-while acts first and asks afterwards, so it is guaranteed one pass. Menus, prompts and retry loops are do-while work because the question must be posed before its answer can be judged."
+        }
+      ]
+    },
+    {
+      "id": "loop-tracing",
+      "title": "Tracing loops and escaping them — break, continue and nesting",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tracing is the examination skill of following a loop pass by pass until it ends. Write the tested variable and the affected variables as table columns and add one row per pass. Stop exactly when the condition first turns false: the row after that belongs to no pass and must not exist. A trace that invents one extra pass has usually miscounted the final update."
+        },
+        {
+          "type": "table",
+          "caption": "Trace of the sum loop, pass by pass",
+          "columns": [
+            "Pass",
+            "i (tested)",
+            "sum after the pass"
+          ],
+          "rows": [
+            [
+              "1",
+              "1",
+              "1"
+            ],
+            [
+              "2",
+              "2",
+              "3"
+            ],
+            [
+              "3",
+              "3",
+              "6"
+            ],
+            [
+              "4",
+              "4",
+              "10"
+            ],
+            [
+              "5",
+              "5",
+              "15"
+            ],
+            [
+              "—",
+              "6: test i <= 5 is false",
+              "loop ends"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Two statements alter a loop from inside. break leaves the loop immediately — control jumps past the block, and the loop is over whatever the condition still says. continue skips the rest of the current pass and jumps to the update and the next test, so the remaining lines of that pass are abandoned but the loop itself carries on with the next value."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "for (int i = 1; i <= 10; i++) { if (i == 7) { break; } System.out.print(i + \" \"); } System.out.println(\"  <- stopped before 7\");",
+              "note": "The loop would run ten passes, but the moment i reaches 7 the break fires and control leaves the loop entirely. The output is one to six. break hides the stopping rule somewhere other than the header, so it must be used sparingly."
+            },
+            {
+              "text": "for (int i = 1; i <= 8; i++) { if (i % 2 == 0) { continue; } System.out.print(i + \" \"); } System.out.println(\"  <- odd numbers only\");",
+              "note": "Every even i triggers the continue, which abandons the rest of that pass and jumps to the next test. The println survives only for odd values, so the output is one, three, five and seven. continue skips a pass; break ends the loop."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A loop may also live inside another loop — a nested loop. The inner loop runs to completion on every single pass of the outer one, so five passes of an outer loop each carrying an inner loop of three passes produce fifteen executions of the inner body. Multiplication tables and rectangular patterns of stars are built this way, and the total pass count is always the product of the two counts."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "break",
+              "meaning": "Leaves the loop at once; control continues after the loop block.",
+              "context": "A search loop breaks as soon as the target value is found."
+            },
+            {
+              "term": "continue",
+              "meaning": "Abandons the rest of the current pass and jumps to the next condition test.",
+              "context": "A summarising loop continues past every negative entry without printing it."
+            },
+            {
+              "term": "infinite loop",
+              "meaning": "A loop whose condition can never turn false, usually because the update is missing.",
+              "context": "while (i <= 5) without any change to i never ends."
+            },
+            {
+              "term": "nested loop",
+              "meaning": "A loop written inside the body of another loop; the inner one completes on each outer pass.",
+              "context": "A pattern of five rows of five stars is two nested loops of five passes each."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "loop-examples",
+      "title": "Worked programs — tables, sums and countdowns",
+      "blocks": [
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "for (int i = 1; i <= 10; i++) System.out.println(\"7 x \" + i + \" = \" + (7 * i));",
+              "note": "The table of 7 — the counter doubles as the multiplier, so one loop produces all ten lines."
+            },
+            {
+              "text": "int sum = 0; for (int i = 2; i <= 100; i += 2) sum = sum + i; System.out.println(\"Sum = \" + sum);",
+              "note": "Sum of the even numbers from 2 to 100. Stepping the counter by two removes the need for an if test inside the body — the header alone guarantees every value is even — and the program reports \"Sum = 2550\"."
+            },
+            {
+              "text": "int n = 10; while (n > 0) { System.out.println(n); n--; } System.out.println(\"Liftoff\");",
+              "note": "A countdown. The update n-- walks the counter towards the falsifying value 0, and the final line prints once the loop is over."
+            },
+            {
+              "text": "int n = 4096, count = 0; while (n > 0) { count++; n = n / 10; } System.out.println(\"Digits: \" + count);",
+              "note": "Counts the digits of a number: each integer division by ten chops off one digit, and the loop stops when nothing is left — for n = 4096 the program prints \"Digits: 4\"."
+            },
+            {
+              "text": "int n = 1234, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n = n / 10; } System.out.println(\"Reversed: \" + rev);",
+              "note": "Reverses a number: the remainder takes the last digit, the division removes it, and the accumulator rebuilds the number backwards — for n = 1234 the program prints \"Reversed: 4321\"."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Each example answers the three questions out loud before any code is written: what starts, what stays true, and what changes. The digit-counting and reversing loops deserve special attention — they combine the % and / operators with a loop, and they appear in examinations in some form almost every year."
+        }
+      ]
+    },
+    {
+      "id": "loop-practice",
+      "title": "Exam drills — writing and fixing loops",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Drill one: write loops that answer questions precisely, letting the count in the header match the question word for word. Drill two: repair loops that are broken on purpose — a loop that ends too early has a strict comparison where an inclusive one belongs, and a loop that never ends is missing its update entirely. Drill three: predict the output before running anything, then verify; prediction first is how examiners distinguish programmers from typists."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A loop ending one pass early almost always has < where <= belongs — check the boundary value first.",
+            "A loop that never ends has a tested variable that does not change inside the body.",
+            "A do-while that runs twice when it should run once has its test written to accept a value the question rejects.",
+            "When a trace disagrees with the code, trust the code and re-check the final update step."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The life of a for loop",
+      "description": "A left-to-right flow: initialisation runs once, then the condition test, then the body, then the update, with an arrow looping from the update back to the test. An arrow from the test labelled false exits the loop to the statement after it. Each stage is labelled with the part of the header it comes from.",
+      "labels": [
+        "Initialisation (once)",
+        "Condition test",
+        "Body executes",
+        "Update runs",
+        "Loop back to test",
+        "False: exit loop"
+      ]
+    },
+    {
+      "caption": "Figure: while versus do-while test order",
+      "description": "Two parallel flows for the same body. In the while flow the diamond test sits before the body box and its false branch bypasses the body entirely, showing zero possible runs. In the do-while flow the body box comes first and the test after it, with its false branch leaving from the far side, so the body box is on every path from start to exit.",
+      "labels": [
+        "while: test before body",
+        "while false: skip body",
+        "do-while: body first",
+        "do-while test after",
+        "do-while always runs once",
+        "Update inside body"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "for, while and do-while all answer three questions: initialisation, condition and update.",
+    "for is chosen when the pass count is known; while when only the condition is known; do-while when one pass is guaranteed.",
+    "i <= 5 runs five times; i < 5 runs four times — the boundary comparison decides the count.",
+    "break ends the loop immediately; continue abandons only the current pass.",
+    "A loop that never ends is missing the update that walks its tested variable towards falsifying the condition.",
+    "A do-while always executes its body at least once, because the condition is examined after the work.",
+    "Nested loops multiply: five outer passes of a three-pass inner loop execute the inner body fifteen times.",
+    "Tracing stops at the row where the condition first turns false — the value that fails the test never runs the body."
+  ],
+  "examFocus": [
+    "Output question: trace the loop pass by pass and stop exactly when the condition first turns false.",
+    "Fill in the blank: the missing operator in a loop header is almost always the inclusive <= or the update step.",
+    "Repair question: name the missing part — initialisation, condition or update — before rewriting the line.",
+    "Program question: write a counting loop whose header states the range the question asks for."
+  ],
+  "vocabulary": [
+    {
+      "word": "Iteration",
+      "meaning": "One complete pass through the loop body.",
+      "context": "A loop with five passes performs five iterations."
+    },
+    {
+      "word": "Loop counter",
+      "meaning": "The variable whose value controls how many passes occur.",
+      "context": "i in for (int i = 1; i <= 5; i++)."
+    },
+    {
+      "word": "Loop condition",
+      "meaning": "The boolean test checked before every pass; false ends the loop.",
+      "context": "i <= 10 in a ten-pass loop."
+    },
+    {
+      "word": "Update expression",
+      "meaning": "The change applied to the counter after each pass.",
+      "context": "i++ advances the counter by one."
+    },
+    {
+      "word": "Trace table",
+      "meaning": "A row-per-pass record of a loop's variables, used to predict its output.",
+      "context": "Columns for i and sum, one row for each of the five passes."
+    },
+    {
+      "word": "Off-by-one error",
+      "meaning": "A boundary mistake that makes a loop run one pass too many or too few.",
+      "context": "Using i < 5 where the question needs 1 to 5 inclusive."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-loop-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "How many times does the body of for (int i = 0; i < 5; i++) execute?",
+      "options": [
+        "Five times",
+        "Four times",
+        "Six times",
+        "Infinite times"
+      ],
+      "correctIndex": 0,
+      "answer": "Five times",
+      "explanation": "The counter takes the values 0, 1, 2, 3 and 4 — five values, five passes. When i reaches 5 the test turns false and the loop ends.",
+      "commonMistake": "Counting from 1 to 5 and answering four, or forgetting that a counter starting at 0 still runs the stated number of passes."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A do-while loop differs from a while loop because it:",
+      "options": [
+        "Runs the body at least once before testing",
+        "Tests the condition before the body runs",
+        "Cannot use a semicolon",
+        "Ignores its condition entirely"
+      ],
+      "correctIndex": 0,
+      "answer": "Runs the body at least once before testing",
+      "explanation": "The do-while body always executes once; only afterwards is the condition examined. A while loop can skip its body completely if the condition is false at the first test.",
+      "commonMistake": "Thinking both loops test first — the order of the test is the entire difference."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The statement break inside a loop causes:",
+      "options": [
+        "The loop to end immediately",
+        "The current pass to restart",
+        "The rest of the current pass to be skipped",
+        "The condition to be re-evaluated only"
+      ],
+      "correctIndex": 0,
+      "answer": "The loop to end immediately",
+      "explanation": "break transfers control past the loop at once, whatever the condition says. It is continue, not break, that abandons only the rest of the current pass.",
+      "commonMistake": "Swapping break with continue — continue skips a pass, break ends the loop."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which single change makes this loop terminate after printing 1, 2, 3?\nint i = 1;\nwhile (i <= 4) {\n    System.out.println(i);\n    i--;\n}",
+      "options": [
+        "Replacing i-- with i++;",
+        "Replacing i-- with i = i - 1;",
+        "Removing the println statement",
+        "Changing the test to i <= 44"
+      ],
+      "correctIndex": 0,
+      "answer": "Replacing i-- with i++;",
+      "explanation": "Decrementing sends i away from the test's upper bound, so the loop never ends. Incrementing once per pass walks i through 1, 2 and 3, and the test fails at 4.",
+      "commonMistake": "Choosing a larger bound instead of fixing the update — a wider test only delays the same failure to stop."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the loop header so it prints the even numbers from 2 to 20:\nfor (int i = 2; i ______ 20; i += 2) { ... }",
+      "answer": "<= (less than or equal to)",
+      "explanation": "The loop must include 20 itself, so the inclusive comparison <= is required. With < alone the counter stops at 18 and the table of even numbers misses its last entry.",
+      "commonMistake": "Writing < instead of <=, which silently drops the final value the question asked for."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate between the for loop and the while loop, and give one suitable example of each.",
+      "answer": "The for loop is count-controlled: its initialisation, condition and update sit together in one header, so it is chosen when the number of passes is known in advance — for (int i = 1; i <= 5; i++) System.out.println(i);. The while loop is condition-controlled: only the test appears in the header, while the initialisation happens before it and the update inside the body, so it suits situations where the pass count is unknown — int n = 1; while (n <= 5) { System.out.println(n); n++; }.",
+      "explanation": "Examiners award the count-controlled versus condition-controlled distinction first and the examples second. Both examples must show the update in the correct place for their loop form.",
+      "commonMistake": "Describing both as \"the same thing with different syntax\" — the placement of the update is the real difference."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the difference between break and continue, quoting in each case where control goes afterwards.",
+      "answer": "break transfers control out of the loop entirely, so the statement immediately after the loop executes and the condition is never tested again. continue transfers control to the update and the next condition test, so only the remainder of the current pass is abandoned and the loop carries on with the next value.",
+      "explanation": "One mark is for break leaving the loop and one for continue skipping to the next pass. Naming the destination of control in both cases is what the second mark buys.",
+      "commonMistake": "Saying continue \"stops the loop\" — it stops only the current pass, and the loop keeps running."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a Java program using a for loop that prints all numbers from 1 to 100 that are divisible by 7, five per line.",
+      "answer": "public class SevenPrint { public static void main(String[] args) { int printed = 0; for (int i = 7; i <= 100; i += 7) { System.out.print(i + \" \"); printed++; if (printed % 5 == 0) System.out.println(); } } } The output is five numbers per line: 7 14 21 28 35 on the first line, then 42 49 56 63 70, then 77 84 91 98 on the last, which holds only four because fourteen numbers are divisible by 7 below 100.",
+      "explanation": "Stepping the counter by seven makes every value divisible by 7 by construction, so no if test is needed inside the loop. The separate printed counter, tested modulo 5, is what breaks the line after every fifth value.",
+      "commonMistake": "Looping i from 1 to 100 and testing i % 7 == 0 inside — correct in result, but it misses the point of a divisibility loop that the step itself can carry the property."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-09",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Trace the following program and state its exact output, justifying each pass:\nint x = 2;\nwhile (x < 20) {\n    System.out.print(x + \" \");\n    x = x * 2;\n}",
+      "answer": "The output is 2 4 8 16. Pass one: x is 2, which is below 20, so 2 is printed and x doubles to 4. Pass two: 4 is printed and x becomes 8. Pass three: 8 is printed and x becomes 16. Pass four: 16 is still below 20, so it is printed and x becomes 32. Pass five: the test x < 20 now fails, the body is skipped, and the program ends. Four values are printed, and the growth is geometric rather than arithmetic — a step of x++ would instead have produced eighteen passes.",
+      "explanation": "Marks are per pass, so rewriting x's value after each doubling is worth more than jumping to the final string. Noting why the loop stops at 32 proves the condition was understood rather than guessed.",
+      "commonMistake": "Printing 32 as well — the value that fails the test is never printed, because the body never runs for it."
+    },
+    {
+      "id": "cisce-9-ca-q-loop-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A student writes the program below intending to print the numbers 1 to 5. Explain what is wrong, and rewrite the program correctly.\nint i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n}",
+      "answer": "The loop never ends. The condition i <= 5 is tested on every pass, but i is never changed inside the body — it stays at 1 for ever, the test stays true for ever, and the same 1 is printed endlessly. The missing part is the update. Corrected: int i = 1; while (i <= 5) { System.out.println(i); i++; } The output is then 1, 2, 3, 4, 5 on separate lines.",
+      "explanation": "The diagnosis must name the missing update rather than vaguely blaming \"the condition\". Placing i++ after the println is what keeps the printed sequence starting at 1 rather than 2.",
+      "commonMistake": "Moving i++ before the println, which prints 2 to 6 instead of 1 to 5 — the loop now terminates but answers a different question."
+    }
+  ]
+}

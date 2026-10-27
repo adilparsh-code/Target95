@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-basic-structure",
+  "slug": "basic-structure-of-a-class",
+  "title": "Basic Structure of a Class in Java",
+  "kind": "computer-applications",
+  "tagline": "The skeleton every Java program shares — class header, main method, println, comments — and what compilation does in between.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "Every Java program, however short or long, has the same skeleton: a class declaration that names the file, a main method that names the starting point, statements that do the work, and braces that hold it all together. This chapter builds that skeleton line by line, then follows it through compilation — where javac turns source text into bytecode — and finishes by separating the three kinds of error every programmer must be able to name: syntax, run-time and logical.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Basic Structure of a Class (ICSE Class IX)"
+      },
+      {
+        "label": "The skeleton",
+        "value": "class header, then main method, then statements — all inside nested braces"
+      },
+      {
+        "label": "Entry point",
+        "value": "public static void main(String[] args) is where the JVM begins"
+      },
+      {
+        "label": "Output",
+        "value": "println ends the line; print leaves the cursor where it is"
+      },
+      {
+        "label": "Tool chain",
+        "value": "javac compiles .java into .class bytecode, and the JVM runs it"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Assemble a complete, compilable Java program from the class header down to the closing brace.",
+    "Choose between print and println and predict the exact layout of their output.",
+    "Write single-line and multi-line comments that guide a reader without changing behaviour.",
+    "Distinguish syntax, run-time and logical errors, and say which stage catches each one."
+  ],
+  "learn": [
+    {
+      "id": "struct-skeleton",
+      "title": "The skeleton of every program",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A Java program is a class, and a class is a container. The declaration public class Hello opens the container and names it, and in a file compiled as a public class the name must match the file name exactly — Hello.java holds public class Hello. Inside the braces sits the main method, the single entry point the JVM starts from, and inside its braces sit the statements, each one an action ended by a semicolon. Every opening brace needs a closing brace, and indentation shows the reader which level each line belongs to."
+        },
+        {
+          "type": "table",
+          "caption": "The skeleton, part by part",
+          "columns": [
+            "Part of the skeleton",
+            "What it is for",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Class declaration",
+              "Opens the class and must match the file name",
+              "public class Hello {"
+            ],
+            [
+              "Main method",
+              "The single entry point the JVM starts from",
+              "public static void main(String[] args)"
+            ],
+            [
+              "Statement",
+              "One action, ended by a semicolon",
+              "System.out.println(\"Hi\");"
+            ],
+            [
+              "Braces",
+              "Group the class body and the method body",
+              "Each { matched by a }"
+            ],
+            [
+              "Comment",
+              "Explains code to readers; the compiler ignores it",
+              "// greet the user"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "public class Hello { public static void main(String[] args) { System.out.println(\"Hello, world\"); } }",
+              "note": "The smallest complete program: one class, one main method, one statement. Save it as Hello.java, compile it, run it, and the single line Hello, world appears — nothing else is required, and nothing may be left out."
+            },
+            {
+              "text": "public class Count { public static void main(String[] args) { int n = 5; System.out.println(\"Count: \" + n); } }",
+              "note": "A slightly fuller skeleton: a declaration inside main before the printing statement. Statements run top to bottom inside main, so Count: 5 is reported after n holds its value — order inside the braces is the program’s logic."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "struct-println",
+      "title": "System.out.println: saying things precisely",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "System.out.println prints its argument and then moves the cursor to a new line, while System.out.print prints the argument and leaves the cursor exactly where it ended. Concatenation with the plus operator joins text and values into one string at the moment of printing, and parentheses decide when arithmetic runs before the joining. Because examination output questions award marks for the exact layout — which characters share a line and which start a new one — the choice between print and println is never cosmetic."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "System.out.print(\"A\"); System.out.println(\"B\"); System.out.println(\"C\");",
+              "note": "The first call leaves the cursor after A, so the second appends B on the same line and then breaks it — the first output line reads AB. The third call prints C on its own line. Two statements, two lines of output, and the layout follows directly from where each cursor was left."
+            },
+            {
+              "text": "System.out.println(\"Marks: \" + 78 + \" total \" + (78 + 82));",
+              "note": "Concatenation joins in order: the text, then the number 78, then the tail. The parenthesised sum runs as arithmetic first, so the printed line is \"Marks: 78 total 160\" — without the parentheses the second 82 would have been appended as text instead of added."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Escape sequences for layout",
+          "columns": [
+            "Sequence",
+            "What it does",
+            "Where you need it"
+          ],
+          "rows": [
+            [
+              "Backslash n",
+              "Starts a new line inside the printed text",
+              "Splitting one println across several output lines"
+            ],
+            [
+              "Backslash t",
+              "Inserts a tab space",
+              "Aligning columns of numbers"
+            ],
+            [
+              "Backslash double-quote",
+              "Prints a quotation mark inside text",
+              "Quoting a title within a sentence"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "struct-comments",
+      "title": "Comments: the story beside the code",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A comment is text written for human readers, and the compiler treats it as empty space — deleting every comment from a program changes nothing about how it runs. Java offers two forms: a single-line comment that begins with two slashes and ends at the end of the line, and a multi-line comment that begins with slash-star and ends with star-slash, which commonly carries the file header naming the author, the date and the purpose. Good comments explain why a piece of code exists, not what an obvious line mechanically does."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "// Print a formatted student record\npublic class Record {\n    public static void main(String[] args) {\n        System.out.println(\"Name: Ananya\");   // identity line\n        System.out.println(\"Class: IX-A\");\n    }\n}",
+              "note": "Single-line comments sit before a block to describe it and after a statement to justify it. Both are invisible to javac — compiling this program behaves exactly as if the two comment lines were absent."
+            },
+            {
+              "text": "/*\n * Program: Average of three marks\n * Author: A. Rao\n * Purpose: demonstrates true division with 3.0\n */\npublic class Avg { ... }",
+              "note": "A multi-line header gives the reader the context no single line can: what the file is, who wrote it and what it demonstrates. The block runs from slash-star to star-slash, and anything written inside it is ignored by the compiler."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The compiler skips comments entirely, so a comment can never change the output of a program.",
+            "A useful comment states intent or reason; a comment that merely re-reads the code adds noise.",
+            "Multi-line headers carry author, date and purpose; single-line comments clarify the line beside them.",
+            "Commenting out a statement is also how a programmer temporarily disables a line while debugging."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "struct-compile",
+      "title": "From source to screen: compilation and BlueJ",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Between the text you write and the output you see stand two tools. The compiler javac reads the .java source file, checks every statement against the rules of the language, and — if nothing is wrong — writes a .class file containing bytecode, instructions that are portable across machines rather than tied to one processor. The Java Virtual Machine then loads that .class file and executes it. In BlueJ the same chain is wrapped in buttons: you type the class, press Compile, watch the banner for errors, then right-click the main method and open the terminal to see what it printed."
+        },
+        {
+          "type": "table",
+          "caption": "The stages between writing and seeing output",
+          "columns": [
+            "Stage",
+            "Tool or place",
+            "What exists afterwards"
+          ],
+          "rows": [
+            [
+              "1. Write source",
+              "The BlueJ editor",
+              "Hello.java — text you can read and edit"
+            ],
+            [
+              "2. Compile",
+              "javac, or the BlueJ compile button",
+              "Hello.class bytecode, or syntax errors reported"
+            ],
+            [
+              "3. Load",
+              "The JVM reads the class file",
+              "A running program held in memory"
+            ],
+            [
+              "4. Execute",
+              "The JVM runs main from its first statement",
+              "The printed output in the terminal"
+            ]
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Source file",
+              "meaning": "The readable .java text a programmer writes and edits.",
+              "context": "Hello.java holds the class Hello as plain text."
+            },
+            {
+              "term": "Bytecode",
+              "meaning": "The platform-neutral instructions the compiler produces instead of machine code.",
+              "context": "The contents of Hello.class after javac runs."
+            },
+            {
+              "term": ".class file",
+              "meaning": "The file that stores bytecode ready for any JVM to execute.",
+              "context": "Hello.class is what the JVM actually loads."
+            },
+            {
+              "term": "Compilation",
+              "meaning": "The checking and translating of source into bytecode by javac.",
+              "context": "Pressing the compile button in BlueJ."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "struct-errors",
+      "title": "Three kinds of error every programmer must name",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A syntax error is a grammatical mistake — a missing semicolon, an unclosed brace, a misspelled keyword — and the compiler catches it before anything runs, so no output at all is produced. A run-time error is syntactically legal but impossible at execution, such as dividing by zero or reaching past the end of a string, and it stops the program in the middle of its work. A logical error is the hardest: the program compiles, runs to the end, and produces a confident wrong answer, because the code did not express the rule the question actually meant."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "int total = 250; int count = 3; int average = total / count; System.out.println(\"Average: \" + average);",
+              "note": "A logical error in three compiles-and-runs lines: integer division truncates 83.33 to 83, so the program prints \"Average: 83\" while the true mean is 83.33. Nothing fails — the wrongness lives entirely in the rule the code expressed."
+            },
+            {
+              "text": "System.out.println(\"Hello\")   // no semicolon before the closing brace",
+              "note": "A syntax error: javac stops at the end of the line looking for the semicolon that should terminate the statement and reports that it expected one. The class file is never written, so the program cannot be run at all."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three errors compared",
+          "columns": [
+            "Error kind",
+            "When it is caught",
+            "Example",
+            "How it is found"
+          ],
+          "rows": [
+            [
+              "Syntax",
+              "At compilation, before anything runs",
+              "Missing semicolon or brace",
+              "The compiler reports it"
+            ],
+            [
+              "Run-time",
+              "While the program is executing",
+              "Dividing by zero",
+              "The program stops with a message"
+            ],
+            [
+              "Logical",
+              "Never automatically — only by testing",
+              "Integer division truncating a mean",
+              "Checking the output against expectations"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "struct-practice",
+      "title": "Exam drills — reading and building skeletons",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Drill one: write the empty skeleton — class header, main signature, paired braces — from memory until it is automatic, because every program question begins there and a misplaced brace costs more than the rest of the answer. Drill two: read a printed output and decide which print or println calls produced its layout before looking at any code. Drill three: when an answer is wrong, name the error kind first — syntax, run-time or logical — because the diagnosis earns marks even before the fix."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The main signature is exact: public static void main(String[] args), with the square brackets on the type.",
+            "A public class must be saved in a file of the same name, or javac refuses to compile it.",
+            "print leaves the cursor in place; println breaks the line — layout questions turn on this pair.",
+            "Only testing finds logical errors: the compiler is silent because the grammar was perfect."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: An annotated Java program skeleton",
+      "description": "A program listing with callout arrows: the first line labelled class declaration that must match the file name; the second line labelled main method as the entry point; each brace labelled with the level it closes; a comment line labelled ignored by the compiler; and the println statement labelled action ended by a semicolon.",
+      "labels": [
+        "Class declaration matches file",
+        "Main method: entry point",
+        "Nested braces by level",
+        "Statement ends with semicolon",
+        "Comment ignored by javac",
+        "Indentation shows nesting"
+      ]
+    },
+    {
+      "caption": "Figure: From .java to running program",
+      "description": "A pipeline: Hello.java source entering a javac box, an arrow out labelled bytecode to a Hello.class box, then into a JVM box, then to printed output. A side arrow from the javac box labelled syntax errors points to an error report, showing that the chain breaks before any execution when the grammar is wrong.",
+      "labels": [
+        "Hello.java source text",
+        "javac compiles",
+        "Syntax errors reported here",
+        "Hello.class bytecode",
+        "JVM loads and runs",
+        "Printed output"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Every program is a class whose name matches its file, containing a main method and statements inside braces.",
+    "public static void main(String[] args) is the exact entry point signature the JVM looks for.",
+    "println breaks the line after its argument; print does not — layout questions turn on the pair.",
+    "Concatenation joins with +, and parentheses decide whether arithmetic runs before the joining.",
+    "Comments are ignored by the compiler: they can explain code but never change its output.",
+    "javac compiles .java source into .class bytecode, and the JVM executes that bytecode.",
+    "Syntax errors stop compilation, run-time errors stop execution, and logical errors never announce themselves.",
+    "An integer division such as total / count is legal, runs happily, and can still be the wrong answer."
+  ],
+  "examFocus": [
+    "Output question: trace print and println calls to state exactly which characters share each line.",
+    "Fill in the blank: the missing piece is usually the main method name or a missing semicolon.",
+    "Error question: name the error kind and stage — compiler, run time, or testing only.",
+    "Program question: write a complete class with comments, correct signature and correct output layout."
+  ],
+  "vocabulary": [
+    {
+      "word": "Source file",
+      "meaning": "The readable .java text a programmer writes.",
+      "context": "Hello.java in the BlueJ editor."
+    },
+    {
+      "word": "Bytecode",
+      "meaning": "Platform-neutral instructions produced by the compiler.",
+      "context": "What Hello.class contains."
+    },
+    {
+      "word": "Entry point",
+      "meaning": "The main method where the JVM begins executing statements.",
+      "context": "public static void main(String[] args)."
+    },
+    {
+      "word": "Concatenation",
+      "meaning": "Joining values into one string with the + operator.",
+      "context": "\"Total: \" + (78 + 82)."
+    },
+    {
+      "word": "Syntax error",
+      "meaning": "A grammatical mistake the compiler refuses to translate.",
+      "context": "A println without its semicolon."
+    },
+    {
+      "word": "Logical error",
+      "meaning": "Code that runs correctly but computes the wrong answer.",
+      "context": "Integer division truncating an average."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-struct-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these is the correct main method signature in Java?",
+      "options": [
+        "public static void main(String[] args)",
+        "public void main(String args)",
+        "static public main(String[] args)",
+        "public static void main()"
+      ],
+      "correctIndex": 0,
+      "answer": "public static void main(String[] args)",
+      "explanation": "The JVM requires the public static void modifiers in that order, the name main, and a String array parameter — the square brackets sit on the type, not the name.",
+      "commonMistake": "Writing String args[] or dropping void — the parameter declares an array of String, and the method must return nothing."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Running the compiler javac on Hello.java produces:",
+      "options": [
+        ".class file containing bytecode",
+        ".java file containing machine code",
+        "A .exe file for the machine",
+        "The printed output of the program"
+      ],
+      "correctIndex": 0,
+      "answer": ".class file containing bytecode",
+      "explanation": "javac translates source into bytecode and stores it in a .class file. Machine code is never produced — the JVM interprets the bytecode at run time instead.",
+      "commonMistake": "Believing the compiler runs the program: compilation and execution are separate stages with separate tools."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What is the exact layout of this output?\nSystem.out.print(\"A\");\nSystem.out.println(\"B\");\nSystem.out.println(\"C\");",
+      "options": [
+        "AB on the first line and C on the second",
+        "ABC on one line",
+        "A on the first line and B, C on the second",
+        "A, B and C each on its own line"
+      ],
+      "correctIndex": 0,
+      "answer": "AB on the first line and C on the second",
+      "explanation": "print leaves the cursor after A, so B joins it on the same line and then println breaks the line. The final println prints C on the next line by itself.",
+      "commonMistake": "Assuming every statement starts a new line — only println breaks the line, and only after it prints."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of these is a logical error?",
+      "options": [
+        "A program that compiles, runs, and prints an average of 83 when the true mean is 83.33",
+        "A program missing a semicolon after a println statement",
+        "A public class saved under a different file name",
+        "A program that divides by zero while running"
+      ],
+      "correctIndex": 0,
+      "answer": "A program that compiles, runs, and prints an average of 83 when the true mean is 83.33",
+      "explanation": "A logical error survives compilation and execution and simply computes the wrong answer — here integer division truncates the mean. The other options are caught by the compiler or stop at run time.",
+      "commonMistake": "Calling any wrong answer a syntax error: syntax is grammar, and this program’s grammar is perfect."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Complete the main method signature:\npublic static void ______(String[] args) {\n    ...\n}",
+      "answer": "main",
+      "explanation": "The JVM starts execution at the method named main, with exactly that spelling and capitalisation — Main or MAIN would be an ordinary method the JVM never looks for.",
+      "commonMistake": "Capitalising it as Main: Java is case-sensitive, so the program simply fails to find an entry point."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate a syntax error from a logical error, with one example of each.",
+      "answer": "A syntax error breaks the grammar of the language and is caught by the compiler before anything runs — a println statement missing its semicolon is one, and no class file is produced. A logical error is grammatically perfect: the program compiles, runs to the end and produces a wrong answer — an average printed as 83 from integer division where 83.33 was required. The compiler stays silent about logical errors because there is no rule to break; only testing reveals them.",
+      "explanation": "One mark is for naming the stages — compiler versus testing — and one for a correct example of each kind.",
+      "commonMistake": "Describing both as \"mistakes the compiler finds\": the compiler can never find a logical error."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State what exists after compilation, which tool performs it, and what happens to that file afterwards.",
+      "answer": "The compiler javac reads the .java source file, checks it against the rules of the language, and writes a .class file containing bytecode — platform-neutral instructions rather than machine code. Nothing runs at this stage. The Java Virtual Machine then loads that .class file and executes it, starting from the main method, which is what produces the printed output.",
+      "explanation": "One mark is for the .class file with bytecode and javac as its producer, and one for the JVM executing it from main.",
+      "commonMistake": "Saying the compiler produces an .exe or machine code — Java’s portability comes precisely from bytecode plus the JVM."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-08",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Write a complete Java program with both single-line and multi-line comments that prints a student record as shown, and state the exact output.",
+      "answer": "/* A student record: name, class and total marks */\npublic class StudentRecord {\n    public static void main(String[] args) {\n        System.out.println(\"Name: Ananya Rao\");    // identity line\n        System.out.println(\"Class: IX-A\");\n        System.out.print(\"Total: \");               // no newline here\n        System.out.println(78 + 82 + 90);          // arithmetic runs first\n    }\n}\n\n// Output:\n// Name: Ananya Rao\n// Class: IX-A\n// Total: 250",
+      "explanation": "The skeleton earns the first mark, both comment forms the second, and the exact three-line layout the third. The total must be printed as arithmetic inside concatenation, and the label must use print so the number joins its line.",
+      "commonMistake": "Using println for the Total label, which puts it on its own line, or writing the sum inside quotes so the digits concatenate to 788290 instead of adding to 250."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-09",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student expects this program to report a mean of 83.33 but it prints 83. Identify the kind of error, explain why the compiler says nothing, and give the corrected program.\nint total = 250;\nint count = 3;\nint average = total / count;\nSystem.out.println(\"Average: \" + average);",
+      "answer": "This is a logical error. The grammar is flawless, so javac accepts every line and produces a class file without complaint — the compiler checks structure, not meaning. The fault is that total / count divides int by int, and Java’s integer division truncates 83.33 to 83 before the assignment happens. Corrected: double average = (double) total / count; — casting one operand to double promotes the whole division to true division. The printed line then reads \"Average: 83.33333333333333\". If two decimal places are wanted, round as the library chapter teaches: double shown = Math.round(average * 100.0) / 100.0;.",
+      "explanation": "Two marks are for naming the error kind and explaining the compiler’s silence, one for diagnosing integer division, and one for a corrected program with the true output.",
+      "commonMistake": "Calling it a syntax error because the answer is wrong — nothing about the grammar is wrong, which is exactly why the compiler stays quiet."
+    },
+    {
+      "id": "cisce-9-ca-q-struct-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "This program should print Hello and then 10, but it does not compile. List every fault, give the corrected program, and state its output.\npublic class Demo {\n    public static void main(String[] args) {\n        System.out.println(\"Hello\")\n        int a = 5\n        System.out.println(a * 2);\n    }",
+      "answer": "There are three faults: the first println statement has no terminating semicolon, the declaration int a = 5 also lacks its semicolon, and the class’s closing brace is missing entirely, so the class body never ends. Corrected:\n\npublic class Demo {\n    public static void main(String[] args) {\n        System.out.println(\"Hello\");\n        int a = 5;\n        System.out.println(a * 2);\n    }\n}\n\n// Output:\n// Hello\n// 10",
+      "explanation": "Two marks are for finding all three faults — javac names only the first, so the rest must be found by reading — two for the corrected program, and one for the exact two-line output.",
+      "commonMistake": "Fixing only the first semicolon the compiler reports, or overlooking the missing brace, which changes where every later error is reported."
+    }
+  ]
+}

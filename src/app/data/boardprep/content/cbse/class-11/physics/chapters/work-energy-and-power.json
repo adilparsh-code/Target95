@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-wep",
+  "title": "Work, Energy and Power",
+  "kind": "physics",
+  "tagline": "The scalar bookkeeping of mechanics: work, kinetic and potential energy, and the theorem that connects them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Force and acceleration are vectors, and every collision problem solved with them is a small algebraic ordeal; energy is the scalar that replaces that ordeal with bookkeeping. This chapter defines work as force through displacement, builds kinetic energy from it via the work-energy theorem, introduces potential energy for conservative fields and the spring, and completes the picture with power and the classification of collisions by energy loss. The conservation law that results is the single most used principle in physics, and this chapter shows exactly when it applies and when it does not.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-IV: Work, Energy and Power (17 marks shared with the Rotational Motion and Gravitation chapters)."
+      },
+      {
+        "label": "Work",
+        "value": "W = Fs cos θ; positive when the force has a component along the displacement."
+      },
+      {
+        "label": "Kinetic energy",
+        "value": "K = ½mv²; the work-energy theorem states that net work equals the change in kinetic energy."
+      },
+      {
+        "label": "Potential energy",
+        "value": "U = mgh near the Earth; U = ½kx² for a spring; force is the negative gradient, F = −dU/dx."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute work done by constant and variable forces.",
+    "Apply the work-energy theorem to single-body problems.",
+    "Distinguish conservative from non-conservative forces and use energy conservation.",
+    "Analyse elastic, inelastic and perfectly inelastic collisions in one and two dimensions.",
+    "Compute power and relate it to velocity via P = Fv."
+  ],
+  "learn": [
+    {
+      "id": "work",
+      "title": "Work, kinetic energy and the theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Work is force times displacement along the direction of the force: W = Fs cos θ, where θ is the angle between them. Three immediate consequences shape every problem: a force perpendicular to the motion does no work (why the tension in a whirling string never speeds the stone up); a force at an obtuse angle does negative work (why friction drains kinetic energy); and work is a scalar, so the total work on a body is the plain sum of the individual works with their signs. For a variable force — a spring’s push, a charge in a field — the work is the area under the force-displacement graph, which is what the elementary integration the syllabus mentions performs. The sign convention is the whole physics here: energy enters the body when work is positive and leaves it when work is negative."
+        },
+        {
+          "type": "paragraph",
+          "text": "The work-energy theorem follows by combining work with Newton’s second law: since W = ∫F dx = ∫ma dx = ∫m(dv/dt)dx = ∫mv dv, the net work on a body equals ½mv² − ½mu² — the change in its kinetic energy. The theorem is more useful than it looks because it sidesteps time entirely: questions asking for a speed after a known force has acted over a known distance never need the acceleration or the duration, only the energies. Kinetic energy itself, K = ½mv², grows with the square of the speed, which is the reason doubling speed quadruples stopping distance — a fact with life-and-death consequences in road safety that appears in exam questions precisely because it makes the arithmetic memorable. Note also that kinetic energy is frame-dependent and always positive, while work can be either sign: the two are different kinds of quantity and the theorem relates a process (work) to a state change (energy)."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "W = Fs cos θ; perpendicular force does no work.",
+            "Variable force: work is the area under the F–x graph.",
+            "Work-energy theorem: net work = change in ½mv².",
+            "Doubling speed quadruples kinetic energy and stopping distance.",
+            "Work is a process quantity (signed); kinetic energy is a state quantity (positive)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "potential",
+      "title": "Potential energy, springs and conservative forces",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Potential energy is the energy a body possesses by virtue of its position or configuration, and it belongs only to conservative forces — those whose work over any closed path is zero. Gravity near the Earth gives U = mgh, with the zero level arbitrary (only differences matter), and the spring gives U = ½kx², energy stored in the deformation itself. The defining link between force and potential energy is F = −dU/dx: the minus sign encodes that conservative forces pull toward lower potential, which is why a ball at height mgh can convert exactly that amount into kinetic energy on the way down. Non-conservative forces — friction, drag, applied pushes — have no potential energy at all, because their work depends on the path taken: the longer the slide, the more energy they dissipate, and no position function can encode that."
+        },
+        {
+          "type": "paragraph",
+          "text": "The conservation of mechanical energy follows: when only conservative forces act, K + U is constant, so the speed at any height follows from energy bookkeeping without a single line of kinematics. The vertical circle is the syllabus’s showcase application — a body on a string must retain enough speed at the top that the string stays taut, giving the minimum bottom speed √(5gr) for a full loop, a result far quicker to obtain by energy conservation than by force analysis at every point. When non-conservative forces do act, the more general statement repairs the bookkeeping: the work they perform equals the change in mechanical energy, which is why a block sliding to a stop on a rough surface ends with all its initial ½mv² converted to heat. Choosing the zero level of potential energy sensibly — usually at the lowest point of the problem — is a small habit that removes sign errors from every energy solution."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Potential energy belongs to conservative forces only.",
+            "U = mgh near Earth; U = ½kx² for a spring; only differences matter.",
+            "F = −dU/dx: conservative forces point toward lower potential.",
+            "Only conservative forces acting ⇒ K + U constant.",
+            "Work of non-conservative forces = change in mechanical energy.",
+            "Minimum speed at the top of a vertical loop: √(2gr) for a track, √(5gr) for a string."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "title": "Power, efficiency and energy in use",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Power is the rate of doing work, P = W/t, and for a force acting at a moving point the instantaneous form P = Fv follows immediately. The two forms answer different questions: a generator’s kilowatt rating is about energy delivered per second (the average form), while a car’s advertised power is best used through P = Fv to read off its tractive force at a given speed — which explains why maximum speed occurs exactly when the driving force falls to equal the drag. The SI unit watt is a joule per second, and the horsepower (746 W) survives in engineering contexts; efficiency compares useful power out to total power in, and every real machine loses the difference as heat, a statement of the second law in practical dress even before thermodynamics is studied."
+        },
+        {
+          "type": "paragraph",
+          "text": "Energy conversion is the theme that ties the chapter to the world outside the examination hall. A lift motor’s rating determines how quickly it can raise a load (P = mgv at constant speed), a hill’s gradient determines the power a cyclist must sustain (mgv sin θ against gravity), and the kinetic-energy–speed-squared relation underlies every stopping-distance rule taught in driver education. Exam questions in this area typically require the student to select the right form of the power relation, convert units carefully (kW to W is a habit worth stating aloud), and interpret the answer physically rather than leaving it as a bare number. The interpretation is where the marks cluster: an answer of 4 kW for a car climbing a hill should be recognised as plausible — about five horsepower — and that plausibility check is itself part of the solution."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 50 kg climber ascends 400 m in 30 min: power output?",
+              "note": "W = mgh = 196 kJ; P = 196000/1800 ≈ 109 W."
+            },
+            {
+              "text": "A car at constant 20 m/s against 500 N drag: needed power?",
+              "note": "P = Fv = 10 kW."
+            },
+            {
+              "text": "Energy stored in a spring of k = 200 N/m stretched 10 cm.",
+              "note": "U = ½kx² = 0.5 × 200 × 0.01 = 1 J."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collisions",
+      "title": "Collisions classified by energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A collision is governed by momentum conservation — external forces are negligible during the brief interaction — but the treatment of kinetic energy divides the family. In a perfectly elastic collision both momentum and kinetic energy are conserved, and the two conservation statements can be solved together for the final velocities; in one dimension this yields the neat result that relative velocity of approach equals relative velocity of separation. In a perfectly inelastic collision the bodies stick, kinetic energy is at its maximum consistent loss, and only momentum constrains the outcome. Real collisions lie in between, with the lost kinetic energy appearing as heat, sound and permanent deformation — and the fraction retained defines the coefficient of restitution, though this syllabus needs only the classification."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two-dimensional collisions extend the method without changing it: momentum is conserved separately along two perpendicular axes, giving two equations, and the elastic case adds the energy equation. The billiard-ball situation — an equal-mass elastic collision sending a stationary target off at right angles to the striker’s new path — is the geometric jewel of the topic and follows from combining the momentum triangle with energy conservation. In solving any collision, three habits prevent error: take the initial and final states just before and just after the interaction (never during), state which quantities are conserved and why, and check that the computed kinetic energy never increases — an apparent energy gain in a collision almost always signals an algebra slip, since friction and deformation can only ever remove energy from the mechanical account."
+        },
+        {
+          "type": "table",
+          "caption": "One-dimensional elastic collision: final velocities",
+          "columns": [
+            "Body",
+            "Before",
+            "After (equal masses swap)"
+          ],
+          "rows": [
+            [
+              "m₁",
+              "u₁",
+              "(m₁ − m₂)u₁/(m₁ + m₂) + 2m₂u₂/(m₁ + m₂)"
+            ],
+            [
+              "m₂",
+              "u₂",
+              "(m₂ − m₁)u₂/(m₁ + m₂) + 2m₁u₁/(m₁ + m₂)"
+            ],
+            [
+              "Equal masses, m₂ at rest",
+              "u₁, 0",
+              "0 and u₁ — the velocities exchange"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Elastic, equal masses, target at rest: outcome?",
+              "note": "Velocities exchange — the striker stops, the target departs at u."
+            },
+            {
+              "text": "Perfectly inelastic: 4 kg at 5 m/s meets 2 kg at rest.",
+              "note": "Momentum 20 = 6v → v = 3.33 m/s; energy falls from 50 J to 33.3 J."
+            },
+            {
+              "text": "Check on the last: energy lost?",
+              "note": "16.7 J became heat and sound — never negative, as required."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The work-energy theorem as an area",
+      "description": "A force-displacement graph for a spring being compressed: a straight line rising from zero at x = 0 to F = kx at x = 0.1 m, the triangular area beneath shaded and labelled work = ½kx² = stored energy, with the corresponding kinetic-energy bar of a released block shown converting the same area at the side.",
+      "labels": [
+        "Force grows linearly with x",
+        "Area under F–x graph = work",
+        "Triangle area = ½kx²",
+        "Stored as potential energy",
+        "Converts to kinetic on release"
+      ]
+    },
+    {
+      "caption": "Figure: Energy transformation in a vertical loop",
+      "description": "A vertical circular loop with a bead on it: heights marked at the bottom, the three-quarter point and the top, with energy bars beside each showing kinetic energy shrinking and potential energy growing with height, and an annotation that the total bar height stays constant while only conservative forces act.",
+      "labels": [
+        "Total mechanical energy constant",
+        "Kinetic converts to potential climbing",
+        "Minimum speed needed at the top",
+        "Fastest point: the bottom",
+        "No energy lost if frictionless"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Work W = Fs cos θ; perpendicular force does no work.",
+    "Variable-force work is the area under the F–x graph.",
+    "Kinetic energy K = ½mv²; the work–energy theorem: net work = ΔK.",
+    "Doubling speed quadruples kinetic energy and stopping distance.",
+    "Potential energy exists only for conservative forces; U = mgh, ½kx².",
+    "F = −dU/dx points toward lower potential energy.",
+    "Mechanical energy is conserved when only conservative forces act.",
+    "Power P = W/t = Fv; maximum speed when driving force equals drag.",
+    "Elastic collisions conserve kinetic energy; perfectly inelastic ones lose the most.",
+    "Momentum is conserved in every collision; energy never increases in one."
+  ],
+  "examFocus": [
+    "State which energies are present and which forces are conservative before writing conservation.",
+    "Work–energy solutions must show the theorem, not just the arithmetic.",
+    "Collision answers: state the conserved quantities and check energy does not grow.",
+    "Quote power answers in watts and interpret them physically."
+  ],
+  "vocabulary": [
+    {
+      "word": "Work",
+      "meaning": "Force through displacement along the force: W = Fs cos θ."
+    },
+    {
+      "word": "Kinetic energy",
+      "meaning": "Energy of motion, ½mv²."
+    },
+    {
+      "word": "Potential energy",
+      "meaning": "Energy of position or configuration, owned by conservative forces."
+    },
+    {
+      "word": "Conservative force",
+      "meaning": "One doing zero work over any closed path, like gravity."
+    },
+    {
+      "word": "Work–energy theorem",
+      "meaning": "Net work equals the change in kinetic energy."
+    },
+    {
+      "word": "Power",
+      "meaning": "Rate of doing work: P = W/t = Fv."
+    },
+    {
+      "word": "Perfectly inelastic",
+      "meaning": "A collision in which the bodies stick and kinetic energy loss is maximal."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-wep-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A force of 10 N acts at 60° to a displacement of 5 m. The work done is:",
+      "options": [
+        "50 J",
+        "25 J",
+        "43.3 J",
+        "0 J"
+      ],
+      "correctIndex": 1,
+      "answer": "25 J",
+      "explanation": "W = Fs cos θ = 10 × 5 × cos 60° = 50 × 0.5 = 25 J; cos 60° = 0.5 halves the maximum 50 J that a parallel force would do, and 43.3 J would require cos 30°."
+    },
+    {
+      "id": "cbse11-phy-wep-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The kinetic energy of a 2 kg body moving at 6 m/s is:",
+      "options": [
+        "12 J",
+        "36 J",
+        "72 J",
+        "3 J"
+      ],
+      "correctIndex": 1,
+      "answer": "36 J",
+      "explanation": "K = ½mv² = ½ × 2 × 36 = 36 J; the square of the speed dominates the mass."
+    },
+    {
+      "id": "cbse11-phy-wep-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a perfectly inelastic one-dimensional collision, which quantity is conserved?",
+      "options": [
+        "Kinetic energy only",
+        "Momentum only",
+        "Both momentum and kinetic energy",
+        "Neither"
+      ],
+      "correctIndex": 1,
+      "answer": "Momentum only",
+      "explanation": "Momentum is always conserved in collisions; kinetic energy is at its maximum loss, converted to heat, sound and deformation."
+    },
+    {
+      "id": "cbse11-phy-wep-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body falls freely from height h and its speed at the bottom is v. To double that speed, the body must fall from:",
+      "options": [
+        "2h",
+        "4h",
+        "h/2",
+        "√2 h"
+      ],
+      "correctIndex": 1,
+      "answer": "4h",
+      "explanation": "From v² = 2gh, doubling v quadruples v², so h must become 4h — consistent with kinetic energy growing as the square of speed."
+    },
+    {
+      "id": "cbse11-phy-wep-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The rate of doing work is called ________ .",
+      "answer": "power",
+      "explanation": "P = W/t in the average form and P = Fv instantaneously; SI unit watt = joule per second."
+    },
+    {
+      "id": "cbse11-phy-wep-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A force is ________ if the work it does over any closed path is zero.",
+      "answer": "conservative",
+      "explanation": "Only conservative forces (gravity, spring force) can be assigned a potential energy."
+    },
+    {
+      "id": "cbse11-phy-wep-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the work-energy theorem and use it to find the speed of a 4 kg body after a net force of 10 N acts on it over 8 m starting from rest.",
+      "answer": "The work-energy theorem states that the net work done on a body equals the change in its kinetic energy: W = ΔK = ½mv² − ½mu². Here the net work is W = Fs = 10 × 8 = 80 J (force and displacement in the same direction, so cos 0 = 1). Starting from rest, u = 0, so 80 = ½ × 4 × v² = 2v², giving v² = 40 and v = 6.32 m/s. Cross-check by the dynamics route: a = F/m = 2.5 m/s², then v² = u² + 2as = 0 + 2 × 2.5 × 8 = 40, so v = 6.32 m/s — the two methods agree, which is the theorem’s content rather than a coincidence. Note the theorem avoided computing the time entirely: 5.7 s was never needed.",
+      "explanation": "The theorem stated, the work computed, the speed found, and the dynamics cross-check demonstrating the theorem."
+    },
+    {
+      "id": "cbse11-phy-wep-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A spring of force constant 250 N/m is compressed by 12 cm. How much work is done, and what energy has it stored?",
+      "answer": "The spring force F = kx grows linearly from zero at the uncompressed position to k × 0.12 = 30 N at full compression, so the work done against it is the area of the triangle under the F–x graph: W = ½ × base × height = ½ × kx × x = ½kx². Substituting: W = ½ × 250 × (0.12)² = 0.5 × 250 × 0.0144 = 1.8 J. This work is stored as elastic potential energy in the compressed spring, U = 1.8 J, and is fully recoverable on release in the ideal case — the force is conservative, so no energy is lost in the cycle. Checks: using the average force (half the maximum, 15 N) times the distance (0.12 m) gives 1.8 J ✓; the dimensions N·m = J ✓; and the stored energy must be positive regardless of compression direction, which the square in ½kx² guarantees ✓.",
+      "explanation": "The linear force law noted, the triangular-area computation, the storage interpretation and the average-force cross-check."
+    },
+    {
+      "id": "cbse11-phy-wep-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 0.1 kg ball moving at 8 m/s collides elastically with an identical stationary ball. Find the velocities after the collision and verify that kinetic energy is conserved.",
+      "answer": "For an elastic collision between equal masses with the target at rest, the known result is that the velocities exchange: the striker stops and the target departs at the original speed. Derivation rather than recall earns the marks — momentum conservation gives 0.1 × 8 = 0.1v₁ + 0.1v₂, that is 8 = v₁ + v₂; kinetic energy conservation gives ½ × 0.1 × 64 = ½ × 0.1 × v₁² + ½ × 0.1 × v₂², that is 64 = v₁² + v₂². From the first, v₂ = 8 − v₁; substituting: 64 = v₁² + (8 − v₁)² = 2v₁² − 16v₁ + 64, so 2v₁(v₁ − 8) = 0, giving v₁ = 8 (the trivial no-collision solution) or v₁ = 0. The physical solution is v₁ = 0, v₂ = 8 m/s. Verification of momentum: 0.1 × 0 + 0.1 × 8 = 0.8 = initial ✓. Verification of energy: 0 + ½ × 0.1 × 64 = 3.2 J = initial 3.2 J ✓. The relative-velocity test of elastic collisions also passes: speed of approach 8 = speed of separation 8 ✓.",
+      "explanation": "Both conservation equations set up, the quadratic solved with the trivial root rejected, and all three verifications performed."
+    },
+    {
+      "id": "cbse11-phy-wep-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 2 kg block is pushed against a spring of k = 800 N/m, compressing it by 10 cm, then released on a frictionless surface. The block then slides onto a rough patch of coefficient 0.4 and comes to rest. Find the speed on release, the distance it slides on the rough patch, and explain the energy account of the whole process.",
+      "answer": "Energy stored in the spring: U = ½kx² = ½ × 800 × (0.10)² = 4 J. On release all of it converts to kinetic energy (frictionless surface, conservative spring force): 4 = ½mv² = ½ × 2 × v² = v², so v = 2 m/s — the release speed. On the rough patch, kinetic friction f = μmg = 0.4 × 2 × 10 = 8 N does negative work until the block stops; by the work-energy theorem, 0 − ½mv² = −f·d, so 4 = 8d and d = 0.5 m. Energy account: the 4 J of elastic potential became 4 J of kinetic on the smooth section, then 4 J of internal (thermal) energy in the block-patch contact as friction did 4 J of negative work — mechanical energy is not conserved across the rough patch because friction is non-conservative, yet total energy including heat is conserved throughout. Cross-check by dynamics on the rough patch: deceleration a = f/m = 4 m/s², so v² = 2as gives 4 = 8d and d = 0.5 m ✓ — the same answer by the route that also would have required the time. Sanity: the slide of half a metre from 2 m/s against 4 m/s² deceleration is of a plausible everyday scale ✓.",
+      "explanation": "The stored energy, the release speed, the slide distance by two routes, and the full energy account naming each conversion."
+    }
+  ]
+}

@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-eco-statistics",
+  "title": "Statistics",
+  "kind": "economics",
+  "tagline": "Definition, scope and limits of statistics, collection and presentation, measures of central value and dispersion, correlation, index numbers and the mathematical tools used in economics.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Economics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Economics, subject code 856). No board examination paper, textbook or commercial guide was consulted. Statistical formulae, worked calculations and economic reasoning were worked out for this page, and every question was written for this page.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Economics syllabus registered for Examination Year 2027 (subject code 856): every explanation, table, figure specification, worked calculation, question and answer was written for this page. The three registered units are covered in their syllabus order and every numerical example is computed here."
+  },
+  "overview": {
+    "intro": "Economics argues in words and proves in numbers, and statistics is the bridge between the two. This unit covers the definition and scope of statistics together with the limitations that make a careless figure dangerous, the methods of collecting and presenting data, the measures of central value and dispersion that summarise a distribution, correlation and index numbers, and the mathematical tools economics uses. Every figure in this chapter is computed here so that the method can be followed rather than memorised.",
+    "facts": [
+      {
+        "label": "Definition",
+        "value": "Statistics is the collection, presentation, analysis and interpretation of quantitative data."
+      },
+      {
+        "label": "Central values",
+        "value": "Mean, median and mode, each answering a slightly different question about the centre of a distribution."
+      },
+      {
+        "label": "Dispersion",
+        "value": "Range, quartile deviation, mean deviation and standard deviation measure spread about the centre."
+      },
+      {
+        "label": "Tools",
+        "value": "Correlation measures association, index numbers measure change over time, and algebra and graphs carry the reasoning."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Define statistics and state its scope and limitations.",
+    "Describe the methods of collecting and presenting data.",
+    "Compute mean, median and mode from given data.",
+    "Compute measures of dispersion and interpret them.",
+    "Explain correlation, index numbers and the mathematical tools used in economics."
+  ],
+  "learn": [
+    {
+      "id": "definition-scope-limits",
+      "title": "Definition, scope and limitations of statistics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Statistics may be defined as the collection, presentation, analysis and interpretation of quantitative data. Four elements are involved. Collection means gathering facts with a clear purpose and suitable methods. Presentation means arranging the data in a form that can be understood, such as tables, bar diagrams and pie charts. Analysis means applying measures such as averages and dispersion to extract meaning. Interpretation means drawing conclusions from the results in the light of the problem being studied. The word quantitative is essential: statistics deals with data that can be measured and expressed in numbers."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Data",
+              "meaning": "Facts in numerical form collected for a purpose."
+            },
+            {
+              "term": "Population",
+              "meaning": "The complete set of items about which information is required."
+            },
+            {
+              "term": "Sample",
+              "meaning": "A part of the population selected for study."
+            },
+            {
+              "term": "Variable",
+              "meaning": "A quantity that takes different values, such as height or price."
+            },
+            {
+              "term": "Frequency",
+              "meaning": "Number of times a particular value occurs in a distribution."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Scope and limitations of statistics",
+          "columns": [
+            "Scope",
+            "Limitations"
+          ],
+          "rows": [
+            [
+              "Quantitative study of economic and social data",
+              "Statistics deals only with quantitative facts, not qualitative attributes"
+            ],
+            [
+              "Aggregation of facts into meaningful measures",
+              "Statistical conclusions are true on average, not in every individual case"
+            ],
+            [
+              "Comparison between groups and over time",
+              "Figures collected carelessly mislead more than they inform"
+            ],
+            [
+              "Basis of planning, forecasting and policy",
+              "Results depend on the definition and method chosen"
+            ],
+            [
+              "Measurement of relationship between variables",
+              "Association is not the same as causation"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Average income of a district rises while every household is poorer.",
+              "note": "An average describes the group and not any member of it, which is the first limitation of statistics."
+            },
+            {
+              "text": "Two surveys of the same town giving different unemployment figures.",
+              "note": "Different definitions of employment produce different results, so the method must be stated with the number."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collection-and-presentation",
+      "title": "Collection and presentation of data",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Data may be collected directly or indirectly. Direct methods are interviews, questionnaires, schedules and personal observation, which give accurate and current information but are expensive and slow. Indirect methods use records already kept, such as government reports, company accounts and registration data, which are cheap and quick but may be outdated or incomplete. Secondary data must be checked for the source, the definition used, the period covered and the method of collection before it is relied upon."
+        },
+        {
+          "type": "paragraph",
+          "text": "Presentation turns raw figures into a readable form. A textual presentation describes in sentences, a tabular presentation arranges data in rows and columns with clear headings and units, and a diagrammatic presentation uses bar charts, pie charts and line graphs. The choice depends on the audience: a table for precise values, a bar diagram for comparison between categories, a pie chart for proportions of a whole, and a line graph for change over time."
+        },
+        {
+          "type": "table",
+          "caption": "Methods of presentation and their use",
+          "columns": [
+            "Form",
+            "Best used for",
+            "Weakness"
+          ],
+          "rows": [
+            [
+              "Textual",
+              "A small amount of data needing explanation",
+              "Cannot show comparison quickly"
+            ],
+            [
+              "Tabular",
+              "Precise values and several variables together",
+              "Requires careful reading"
+            ],
+            [
+              "Bar diagram",
+              "Comparison of quantities across categories",
+              "Cannot show composition as a share"
+            ],
+            [
+              "Pie chart",
+              "Showing proportions of a single whole",
+              "Unusable when slices are close in size"
+            ],
+            [
+              "Line graph",
+              "Change over time and trends",
+              "Not suitable for unrelated categories"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A frequency distribution groups values into classes and counts them.",
+            "An open-ended class such as above 100 avoids losing extreme values.",
+            "Cumulative frequency gives the number below a value, which is how a median is located.",
+            "Every table needs a title, clear column headings and a stated unit."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "central-value",
+      "title": "Measures of central value: mean, median and mode",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mean, or arithmetic average, is the sum of the values divided by their number of observations. It uses every observation and is therefore the most representative for further calculation, but it is badly affected by a few extreme values. The median is the middle value when the observations are arranged in order, and it is unaffected by extreme values, which makes it the better measure for skewed data such as incomes. The mode is the value that occurs most frequently, and it is useful when the most common item matters, such as the most common shoe size sold."
+        },
+        {
+          "type": "paragraph",
+          "text": "Worked example: for the data 12, 15, 18, 20, 22, 25, 30 the mean is 142 divided by 7, which is 20.29. The median is the fourth value in the ordered list, which is 20. There is no repeated value, so no mode exists in this set. With an even number of observations the median is the average of the two middle values, for example the median of 4, 7, 9, 12 is 8."
+        },
+        {
+          "type": "table",
+          "caption": "Mean, median and mode compared",
+          "columns": [
+            "Measure",
+            "How it is found",
+            "Strength",
+            "Weakness"
+          ],
+          "rows": [
+            [
+              "Mean",
+              "Sum of values divided by number of values",
+              "Uses every observation; suited to further arithmetic",
+              "Distorted by extreme values"
+            ],
+            [
+              "Median",
+              "Middle value of the ordered series",
+              "Unaffected by extremes",
+              "Ignores the size of other values"
+            ],
+            [
+              "Mode",
+              "Most frequently occurring value",
+              "Shows what is most common",
+              "May not exist or may be ambiguous"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Wages 10, 12, 12, 13, 40 in thousands.",
+              "note": "Mean is 17.4 while median is 12: one high wage pulls the mean but cannot move the median."
+            },
+            {
+              "text": "Sizes of shirts sold: 38, 40, 40, 42, 44.",
+              "note": "Mode is 40, which is exactly what a shopkeeper needs for stock planning."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dispersion",
+      "title": "Measures of dispersion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A central value alone is dangerous, because two distributions can share a mean and be entirely different in spread. Dispersion measures the degree of variation around the centre. The range is the difference between the highest and lowest values and is quick but says nothing about the values between. The quartile deviation is half the interquartile range and is unaffected by extremes. Mean deviation takes the average of the absolute deviations from a central value. Standard deviation, the square root of the average of squared deviations from the mean, is the most used measure because it is mathematically tractable and forms the basis of further analysis."
+        },
+        {
+          "type": "paragraph",
+          "text": "Worked example: for 12, 15, 18, 20, 22, 25, 30 the mean is 20.29 and the standard deviation is the square root of the average of the squared deviations. The squared deviations are 68.6, 28.0, 5.3, 0.08, 2.9, 22.2 and 94.3, which sum to 221.4; dividing by 7 gives 31.6 and the square root is 5.62. A coefficient of variation expresses this as a percentage of the mean, giving 5.62 divided by 20.29 times 100, which is 27.7 per cent, so that two series of different units can be compared."
+        },
+        {
+          "type": "table",
+          "caption": "Measures of dispersion compared",
+          "columns": [
+            "Measure",
+            "How found",
+            "When used"
+          ],
+          "rows": [
+            [
+              "Range",
+              "Highest value less lowest value",
+              "Quick check where values are few"
+            ],
+            [
+              "Quartile deviation",
+              "Half the difference between the third and first quartile",
+              "Skewed data with extreme values"
+            ],
+            [
+              "Mean deviation",
+              "Average of absolute deviations from a central value",
+              "Simple measure when signs are a nuisance"
+            ],
+            [
+              "Standard deviation",
+              "Square root of the mean of squared deviations from the mean",
+              "Most analysis, comparison and further statistical work"
+            ],
+            [
+              "Coefficient of variation",
+              "Standard deviation as a percentage of the mean",
+              "Comparing variability between series with different units"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "correlation-and-index",
+      "title": "Correlation, index numbers and mathematical tools",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Correlation measures the degree of association between two variables. A positive correlation means the variables move in the same direction, as height and weight generally do; a negative correlation means they move in opposite directions, as price and quantity demanded usually do; and zero correlation means no linear relationship. The coefficient runs from minus one to plus one, and its value measures strength as well as direction. Correlation describes association only, and a high coefficient never by itself proves that one variable causes the other."
+        },
+        {
+          "type": "paragraph",
+          "text": "An index number measures the change in a variable or a set of variables over time, taking a base period value of one hundred. A price index measured at 125 means prices are 25 per cent above the base year. The consumer price index is built from a weighted basket of goods, where weights reflect the share of each item in total expenditure, so that a rise in an item families actually buy heavily counts more than a rise in a rare purchase. Inflation is then calculated as the percentage change in the index between two periods."
+        },
+        {
+          "type": "table",
+          "caption": "Price index numbers and their construction",
+          "columns": [
+            "Step",
+            "What is done"
+          ],
+          "rows": [
+            [
+              "Select the basket",
+              "Choose representative goods and services actually consumed"
+            ],
+            [
+              "Assign weights",
+              "Give each item its share in total household expenditure"
+            ],
+            [
+              "Fix the base",
+              "Take base year quantities or values as 100"
+            ],
+            [
+              "Compute the index",
+              "Compare current cost of the basket with base cost and multiply by 100"
+            ],
+            [
+              "Read the result",
+              "Index 125 means a 25 per cent rise over the base year"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A simple index compares one period with one base period.",
+            "A weighted index corrects the distortion of treating all items as equally important.",
+            "Index numbers are affected by the choice of base year and of basket.",
+            "The mathematical tools used in economics are averages, percentages, ratio, algebra and graphs.",
+            "A demand schedule is read as a curve, with price on the vertical axis and quantity on the horizontal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Basket costing 2,000 in the base year costing 2,500 now.",
+              "note": "The index is 2,500 divided by 2,000 times 100, which is 125, meaning a 25 per cent price rise."
+            },
+            {
+              "text": "Price and quantity moving in opposite directions along a demand curve.",
+              "note": "Negative correlation in the ordinary case, though causation runs through the whole set of determinants."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A distribution, its centre and its spread",
+      "description": "A histogram of seven bars with a solid vertical line marking the mean, a dashed line marking the median, a dotted line marking the mode, and a horizontal double-headed arrow beneath marked standard deviation showing the spread around the mean.",
+      "labels": [
+        "Bars: frequency of each value in the distribution",
+        "Mean line: sum divided by number of observations",
+        "Median line: middle value of the ordered series",
+        "Mode line: most frequent value",
+        "Spread arrow: standard deviation about the mean"
+      ]
+    },
+    {
+      "caption": "Figure: Building a weighted index number",
+      "description": "A four-step flow from a basket of goods with weight percentages, to base year values, to a division producing the ratio, to a final box showing the index with a note translating it into a percentage change.",
+      "labels": [
+        "Basket: representative goods with weights",
+        "Base year values fixed at 100",
+        "Ratio of current cost to base cost",
+        "Index = ratio × 100",
+        "Index 125 means prices 25 per cent above base"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Statistics is the collection, presentation, analysis and interpretation of quantitative data.",
+    "Its limitations are that it deals only with quantitative facts, that averages are true on average, and that carelessness misleads.",
+    "Data collection is direct through interviews and schedules or indirect through existing records.",
+    "Presentation is textual, tabular or diagrammatic, chosen for the audience.",
+    "Mean uses every observation but is distorted by extremes; median and mode are resistant to them.",
+    "Standard deviation is the square root of the mean of squared deviations from the mean.",
+    "The coefficient of variation compares spread between series of different units.",
+    "Correlation measures association from minus one to plus one and never proves causation.",
+    "An index number measures change over time with the base period set at 100.",
+    "Weights in an index reflect each item’s share in total expenditure."
+  ],
+  "examFocus": [
+    "Numerical questions must show the formula, the substitution and the unit of the answer, since method carries marks.",
+    "When mean and median are both asked for, give both and say which better describes the given data and why.",
+    "In index number questions state the base year and the weights, because an index without them cannot be interpreted."
+  ],
+  "vocabulary": [
+    {
+      "word": "Statistics",
+      "meaning": "Collection, presentation, analysis and interpretation of quantitative data."
+    },
+    {
+      "word": "Population",
+      "meaning": "Complete set of items about which information is required."
+    },
+    {
+      "word": "Mean",
+      "meaning": "Arithmetic average, being the sum of values divided by the number of observations."
+    },
+    {
+      "word": "Median",
+      "meaning": "Middle value of an ordered series, unaffected by extreme values."
+    },
+    {
+      "word": "Mode",
+      "meaning": "Value that occurs most frequently in a distribution."
+    },
+    {
+      "word": "Standard deviation",
+      "meaning": "Square root of the mean of the squared deviations from the mean."
+    },
+    {
+      "word": "Index number",
+      "meaning": "Number expressing the value of a variable relative to its base period value of 100."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-eco-sta-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The measure of central value unaffected by a few extreme observations is:",
+      "options": [
+        "Mean",
+        "Median",
+        "Standard deviation",
+        "Range"
+      ],
+      "correctIndex": 1,
+      "answer": "Median",
+      "explanation": "The median depends only on position in the ordered series, so an extreme value cannot pull it away from the centre."
+    },
+    {
+      "id": "isc11-eco-sta-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the data 10, 12, 12, 15, 20 the mean is:",
+      "options": [
+        "12",
+        "13.8",
+        "14.8",
+        "15"
+      ],
+      "correctIndex": 1,
+      "answer": "13.8",
+      "explanation": "The values sum to 69 and there are five observations, so 69 divided by 5 gives 13.8."
+    },
+    {
+      "id": "isc11-eco-sta-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A price index of 130 for the current year means:",
+      "options": [
+        "Prices are 130 per cent lower than the base year",
+        "Prices are 30 per cent above the base year",
+        "Prices rose by 130 rupees",
+        "The base year index was 130"
+      ],
+      "correctIndex": 1,
+      "answer": "Prices are 30 per cent above the base year",
+      "explanation": "The index is read against a base of 100, so 130 indicates a rise of 30 per cent over the base period."
+    },
+    {
+      "id": "isc11-eco-sta-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A correlation coefficient of minus 0.9 between price and quantity demanded indicates:",
+      "options": [
+        "No relationship",
+        "A strong negative association, not proof of causation",
+        "A weak positive association",
+        "That price causes quantity with certainty"
+      ],
+      "correctIndex": 1,
+      "answer": "A strong negative association, not proof of causation",
+      "explanation": "The value is close to minus one, showing a strong inverse association, but correlation alone never establishes causation."
+    },
+    {
+      "id": "isc11-eco-sta-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The square root of the mean of the squared deviations from the mean is the __________ deviation.",
+      "answer": "standard",
+      "explanation": "Standard deviation is the most widely used measure of spread because it suits further statistical analysis."
+    },
+    {
+      "id": "isc11-eco-sta-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The measure of variation that expresses standard deviation as a percentage of the mean is the coefficient of __________ .",
+      "answer": "variation",
+      "explanation": "The coefficient of variation allows two series measured in different units or at different levels to be compared."
+    },
+    {
+      "id": "isc11-eco-sta-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State four limitations of statistics.",
+      "answer": "Four limitations are: statistics deals only with quantitative facts and cannot measure qualitative attributes such as happiness; statistical conclusions are true for the group as a whole and not necessarily for any individual member; figures collected carelessly or with a hidden definition mislead more than they inform; and correlation shows association without proving that one variable causes the other. Dependence on the choice of definition and base period is also accepted.",
+      "explanation": "Each limitation needs a line of explanation or an illustration, since a bare list earns only partial credit."
+    },
+    {
+      "id": "isc11-eco-sta-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between mean and median on three bases.",
+      "answer": "On calculation, the mean is the sum of the observations divided by their number, while the median is the middle value of the series after arranging it in order. On sensitivity, the mean is pulled by extreme values, whereas the median is unaffected by them. On use, the mean is preferred where further arithmetic is required and the data are fairly symmetrical, while the median is preferred for skewed data such as wages or incomes. For an even number of observations the median is taken as the average of the two middle values.",
+      "explanation": "Three bases of comparison are required, each drawn as a contrast rather than a description of one measure."
+    },
+    {
+      "id": "isc11-eco-sta-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Define statistics, state its scope, and explain the measures of central value with the circumstances in which each is used.",
+      "answer": "Statistics is the collection, presentation, analysis and interpretation of quantitative data. Its scope covers the study of economic and social facts in numerical form, the comparison between groups and over time, the measurement of relationships between variables, and its role as the basis of planning, forecasting and policy. Its limitations are that it deals only with quantitative facts, that its conclusions hold for the group rather than for every member, and that careless collection produces misleading results. The mean is the arithmetic average, found by dividing the sum of observations by their number, and is used when the data are fairly symmetrical and further calculation is needed, since it uses every observation. The median is the middle value of the ordered series and is used for skewed data such as incomes because extreme values cannot move it. The mode is the most frequent value and is used when the most common item matters, such as the shoe size most often sold. Where two series must be compared, the measures of dispersion such as standard deviation and the coefficient of variation are reported alongside the centre.",
+      "explanation": "Full marks need the definition, scope, limitations and all three measures with the situation that suits each."
+    },
+    {
+      "id": "isc11-eco-sta-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A trader reports the wages 10, 12, 12, 13 and 40 (in thousands) as showing a healthy average wage of 17.4 thousand. Evaluate the claim using measures of central value and dispersion and state what should be reported instead.",
+      "answer": "The arithmetic mean is indeed 87 divided by 5, which is 17.4 thousand, so the trader’s figure is correct as arithmetic. It is however a poor description of these wages, because the single value of 40 pulls the mean well above four of the five observations. The median is 12 thousand, and the mode is also 12 thousand, both of which show what a typical worker in this group actually earns. The dispersion confirms the problem: the range is 30 thousand, from 10 to 40, which is more than twice the median itself, so the wages are widely spread rather than comfortably clustered. The trader should report the median as the typical wage, with the range or standard deviation to show the spread, and mention the mean only with a note that it is affected by the highest earner. The lesson is that a healthy-looking average can be produced by one outlier, and a claim about typical wages should rest on a resistant measure.",
+      "explanation": "The answer is marked on computing correctly, identifying the outlier effect, and specifying a better reporting convention rather than merely saying the average is misleading."
+    }
+  ]
+}

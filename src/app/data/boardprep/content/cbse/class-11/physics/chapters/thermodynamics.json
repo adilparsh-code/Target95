@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-thermo",
+  "title": "Thermodynamics",
+  "kind": "physics",
+  "tagline": "The zeroth, first and second laws: what heat, work and internal energy can and cannot do.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Thermodynamics is the subject that taught physics the meaning of impossible. This chapter builds its three laws in order: the zeroth, which defines temperature itself through thermal equilibrium; the first, which is energy conservation with heat and work as its two accounting entries; and the second, which grades processes by direction and explains why every real engine falls short of perfection. The gaseous processes — isothermal, adiabatic, reversible, irreversible, cyclic — follow as worked cases, and the whole is the conceptual foundation of both the engine under a car and the refrigerator in a kitchen.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-VIII: Thermodynamics (20 marks shared with Properties of Bulk Matter and Kinetic Theory)."
+      },
+      {
+        "label": "Zeroth law",
+        "value": "If A and B are each in thermal equilibrium with C, they are in equilibrium with each other — temperature is the quantity it makes transitive."
+      },
+      {
+        "label": "First law",
+        "value": "ΔU = q + W (work done on the gas) — energy conservation for thermal systems."
+      },
+      {
+        "label": "Second law",
+        "value": "Heat flows spontaneously from hot to cold; no cyclic process can convert heat wholly into work."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the zeroth law and explain how it defines temperature.",
+    "Apply the first law to isothermal, isobaric and isochoric changes.",
+    "Distinguish reversible from irreversible and cyclic processes.",
+    "State the second law in its Kelvin-Planck and Clausius forms.",
+    "Account for internal energy changes in ideal gases."
+  ],
+  "learn": [
+    {
+      "id": "laws",
+      "title": "The zeroth law and the definition of temperature",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Before heat can be quantified, \"hotter than\" must be made transitive, and the zeroth law does exactly that: if system A is in thermal equilibrium with system C, and B is likewise in equilibrium with C, then A and B are in equilibrium with each other. The law seems obvious — its content is precisely that it is not automatic for any arbitrary relation — and its achievement is to justify a state function called temperature, measurable by any system in equilibrium with the pair. A mercury thermometer works because mercury, glass and the patient’s body all reach equilibrium, so the mercury’s expansion reads the body’s temperature: the zeroth law is the licence behind every thermometer ever built. It is called zeroth because it was recognised after the first and second laws were named but logically precedes them both."
+        },
+        {
+          "type": "paragraph",
+          "text": "Heat itself is energy in transit, flowing between bodies at different temperatures and appearing in the accounting as q, while work w is the other mode of energy transfer, mechanical here and electrical or other forms in general. The distinction matters because heat and work are process quantities — they describe what happened to the system, not what it possesses — whereas internal energy U is a state quantity fixed by the system’s condition alone. That asymmetry generates the most common student puzzle in this subject: how can a gas have a temperature but no heat? The answer is that temperature tracks internal energy, and internal energy can be changed by work alone (stirring a fluid, compressing a gas), which is precisely what Joule’s paddle-wheel experiments demonstrated and what the first law now encodes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Zeroth law: transitivity of thermal equilibrium defines temperature.",
+            "Heat q and work w are energy in transit — process quantities.",
+            "Internal energy U is a state quantity of the system itself.",
+            "Joule showed work alone can raise temperature — no heat required.",
+            "A thermometer works because the zeroth law makes its readings valid."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first",
+      "title": "The first law and the gaseous processes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law of thermodynamics is conservation of energy with thermal bookkeeping: the change of a system’s internal energy equals the heat added to it plus the work done on it, ΔU = q + w (equivalently ΔU = q − W with W the work done by the gas — state your convention explicitly, as sign errors dominate this topic). For an ideal gas, U depends on temperature alone, so ΔU is fixed by the temperature change regardless of how the change was achieved. Isothermal change (constant T) forces ΔU = 0, hence q = −w: heat added leaves entirely as work done by the gas, and the familiar isothermal expansion is the process by which a gas does work at no cost to its internal energy. Isochoric change (constant volume) does no work, so ΔU = q: all heat goes into raising the temperature. Isobaric change (constant pressure) does work pΔV while also changing temperature, so both entries contribute — and the three special cases together illustrate the law’s full flexibility."
+        },
+        {
+          "type": "paragraph",
+          "text": "Adiabatic change deserves separate treatment because it isolates the second term: with q = 0 (rapid compression or good insulation), ΔU = w entirely, so compressing a gas heats it — the reason a bicycle pump grows hot and diesel engines ignite fuel by compression alone. The reversible process is the idealisation in which the system and surroundings could be returned to their original states by an infinitesimal reversal — slow, frictionless, equilibrium-preserving — while every real process is irreversible, generating entropy the syllabus will quantify in Class XII. A cyclic process returns the system to its initial state, so ΔU = 0 over the cycle, and the first law then states the engine designer’s constraint in one line: the net work per cycle equals the net heat absorbed. Everything the second law adds is about which part of that heat may be usefully converted — a question the next lesson answers."
+        },
+        {
+          "type": "table",
+          "caption": "The three standard processes",
+          "columns": [
+            "Process",
+            "Fixed quantity",
+            "First-law reading"
+          ],
+          "rows": [
+            [
+              "Isothermal",
+              "Temperature (ΔU = 0)",
+              "q = −w: heat added leaves as work"
+            ],
+            [
+              "Isochoric",
+              "Volume (w = 0)",
+              "ΔU = q: heat all becomes internal energy"
+            ],
+            [
+              "Isobaric",
+              "Pressure",
+              "Both terms live: ΔU = q − pΔV (by-gas convention)"
+            ],
+            [
+              "Adiabatic",
+              "Heat (q = 0)",
+              "ΔU = w: compression alone heats the gas"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Isothermal expansion, gas does 50 J of work.",
+              "note": "q = +50 J absorbed; ΔU = 0."
+            },
+            {
+              "text": "Isochoric heating with q = 200 J.",
+              "note": "ΔU = 200 J; no work done at fixed volume."
+            },
+            {
+              "text": "Rapid compression, w = 40 J on the gas.",
+              "note": "Adiabatic: ΔU = 40 J — temperature rises."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "second",
+      "title": "The second law and its consequences",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law permits every energy-conserving process; the second law selects the ones that actually occur, and it does so in two equivalent statements. The Kelvin-Planck statement: no cyclic process can take heat from a single reservoir and convert it wholly into work — some heat must always be discharged to a colder reservoir. The Clausius statement: heat does not spontaneously flow from a colder body to a hotter one; external work is required, which is precisely what a refrigerator supplies. Each implies the other — a violation of one constructs a violation of the other, which is the standard examination argument — and both encode the same asymmetry: dissipation is easy and irreversible, concentration is hard and costs work. Engines and refrigerators are the law’s two engineering faces, and both are graded by efficiency (or coefficient of performance) against the limits the law imposes."
+        },
+        {
+          "type": "paragraph",
+          "text": "The practical consequences are worth stating precisely because they are so often overstated. The second law does not forbid converting heat entirely into work — an isothermal expansion does exactly that — but forbids it as a cyclic, continuous source of work, which is what an engine must be. Nor does it forbid heat flowing from cold to hot, only the spontaneous version. Real processes move the other way: gas expands freely into a vacuum (irreversibly, with no work extracted), hot tea cools to room temperature (never the reverse), and every real engine falls below its theoretical maximum because of friction, turbulence and finite temperature differences. When a question asks why a process is irreversible, the answer is not that energy would be lost — the first law forbids that — but that no practical mechanism reverses the entropy increase, and the exam answer should say exactly that."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Zeroth law defines temperature; the first law conserves energy.",
+            "First law: ΔU = q + w — state your sign convention.",
+            "Ideal gas U depends on T alone; isothermal means ΔU = 0.",
+            "Adiabatic: q = 0, so compression alone heats the gas.",
+            "Second law (Kelvin-Planck): no cyclic heat-to-work conversion at 100%.",
+            "Second law (Clausius): heat will not flow cold → hot without work.",
+            "Reversible processes are idealisations; real ones are irreversible.",
+            "Over a cycle ΔU = 0, so net work = net heat absorbed."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processes",
+      "title": "Cyclic processes and exam technique",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A cyclic process draws a closed loop on a p–V diagram, and the area enclosed is the net work done per cycle — the reason such diagrams are the engineer’s native language. For a heat engine the loop runs clockwise (net work out, by the working substance), absorbing heat Q₁ from the hot reservoir and rejecting Q₂ to the cold one, with efficiency η = W/Q₁ = (Q₁ − Q₂)/Q₁ < 1 always, the inequality being the second law in formula form. For a refrigerator the loop runs anticlockwise, work is put in to move heat from cold to hot, and the performance is the desired heat divided by the required work. Reading these diagrams — identifying which segments absorb and which reject heat (the isothermal legs in the Carnot idealisation) and computing the enclosed area — is the standard examination exercise, and it converts the abstract second law into arithmetic."
+        },
+        {
+          "type": "paragraph",
+          "text": "Method-wise, thermodynamics rewards a fixed routine. Write the first law at the top of the answer with your sign convention stated. For each leg of a process, identify what is fixed (T, V, p, or q) — that one word decides which terms survive. Compute w from the p–V area or the appropriate formula, decide q from the law, and read ΔU from the temperature change for an ideal gas. For statement questions, quote the law in its standard form before applying it, and when comparing two proposed processes, track what happens to the surroundings as well as the system — reversibility is a two-system property. The final check is always the same: does the cycle’s net work equal the enclosed area, and does every efficiency come out below 100%? If either fails, the signs are wrong somewhere, and the first place to look is the w convention."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Closed loop on p–V: enclosed area = net work per cycle.",
+            "Clockwise loop: engine (work out). Anticlockwise: refrigerator (work in).",
+            "η = (Q₁ − Q₂)/Q₁ — always below 1, by the second law.",
+            "Fix each leg by what is constant, then apply the first law.",
+            "Reversibility concerns the system AND its surroundings.",
+            "Efficiency above 100% means a sign error, not a breakthrough."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A cyclic process on a p–V diagram",
+      "description": "A clockwise closed loop drawn on pressure-volume axes, the enclosed area shaded and labelled net work done per cycle; the two isothermal legs marked as heat-absorbing (from the hot reservoir) and heat-rejecting (to the cold reservoir), with Q₁ and Q₂ arrows entering and leaving the system at the appropriate legs.",
+      "labels": [
+        "Closed loop: cyclic process",
+        "Enclosed area = net work",
+        "Clockwise: heat engine",
+        "Q₁ absorbed from the hot source",
+        "Q₂ rejected to the cold sink"
+      ]
+    },
+    {
+      "caption": "Figure: The first law as an energy account",
+      "description": "A system drawn as a box with three arrows: heat q entering, work w shown in both conventions (w done on the gas and W done by the gas labelled on opposite sides), and internal energy change ΔU marked inside; beside it three mini-cases (isothermal, isochoric, adiabatic) each with the surviving terms highlighted.",
+      "labels": [
+        "Heat crosses the boundary as q",
+        "Work crosses as mechanical transfer",
+        "Internal energy is the stored state",
+        "Convention must be stated",
+        "Each process zeroes a different term"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Zeroth law: transitivity of thermal equilibrium defines temperature.",
+    "Heat and work are process quantities; internal energy is a state quantity.",
+    "First law ΔU = q + w — state the sign convention every time.",
+    "Ideal-gas internal energy depends on temperature alone.",
+    "Isothermal: ΔU = 0, so q = −w. Isochoric: w = 0, so ΔU = q.",
+    "Adiabatic: q = 0, so compression heats the gas (bicycle pump, diesel).",
+    "Second law: heat will not flow cold→hot spontaneously (Clausius).",
+    "Second law: no cyclic process converts heat wholly to work (Kelvin-Planck).",
+    "Over a cycle ΔU = 0, so net work equals net heat absorbed.",
+    "Enclosed p–V area = work per cycle; efficiency is always below 100%."
+  ],
+  "examFocus": [
+    "State the sign convention before writing the first law — it carries marks.",
+    "Name what is fixed in each leg before computing anything.",
+    "Quotable law statements earn marks in “explain why” questions.",
+    "Check every efficiency is below 100% before submitting."
+  ],
+  "vocabulary": [
+    {
+      "word": "Thermal equilibrium",
+      "meaning": "No net heat flow between systems in contact."
+    },
+    {
+      "word": "Internal energy (U)",
+      "meaning": "The energy a system possesses, as opposed to transfers."
+    },
+    {
+      "word": "First law",
+      "meaning": "ΔU = q + w — conservation of energy with heat and work."
+    },
+    {
+      "word": "Isothermal",
+      "meaning": "Constant temperature; ΔU = 0 for an ideal gas."
+    },
+    {
+      "word": "Adiabatic",
+      "meaning": "No heat exchange; q = 0."
+    },
+    {
+      "word": "Reversible process",
+      "meaning": "One that could be undone with no trace, given infinitesimal adjustments."
+    },
+    {
+      "word": "Second law",
+      "meaning": "The direction-selecting law: heat flows hot → cold; no 100% cyclic conversion."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-td-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The law that defines temperature is the:",
+      "options": [
+        "First law",
+        "Second law",
+        "Zeroth law",
+        "Third law"
+      ],
+      "correctIndex": 2,
+      "answer": "Zeroth law",
+      "explanation": "The zeroth law’s transitivity of thermal equilibrium is what makes a state function called temperature meaningful."
+    },
+    {
+      "id": "cbse11-phy-td-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "During an isothermal expansion of an ideal gas, the change in internal energy is:",
+      "options": [
+        "Positive",
+        "Negative",
+        "Zero",
+        "Equal to the heat added"
+      ],
+      "correctIndex": 2,
+      "answer": "Zero",
+      "explanation": "Ideal-gas internal energy depends on temperature alone; at constant temperature ΔU = 0, so all absorbed heat leaves as work done by the gas."
+    },
+    {
+      "id": "cbse11-phy-td-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In an adiabatic compression of an ideal gas, its temperature:",
+      "options": [
+        "Falls",
+        "Rises",
+        "Is unchanged",
+        "Falls to zero"
+      ],
+      "correctIndex": 1,
+      "answer": "Rises",
+      "explanation": "With q = 0 the first law gives ΔU = w: the work done on the gas becomes internal energy, so it heats — the diesel engine’s principle."
+    },
+    {
+      "id": "cbse11-phy-td-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A cyclic process absorbs 500 J from a hot reservoir and rejects 300 J to a cold one. Its efficiency is:",
+      "options": [
+        "40%",
+        "60%",
+        "100%",
+        "167%"
+      ],
+      "correctIndex": 0,
+      "answer": "40%",
+      "explanation": "W = 500 − 300 = 200 J, and η = W/Q₁ = 200/500 = 40% — necessarily below 100% by the second law."
+    },
+    {
+      "id": "cbse11-phy-td-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The flow of energy between bodies due to a temperature difference is called ________ .",
+      "answer": "heat",
+      "explanation": "A process quantity — energy in transit, not energy stored."
+    },
+    {
+      "id": "cbse11-phy-td-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The statement that heat cannot spontaneously flow from a colder body to a hotter one is the ________ form of the second law.",
+      "answer": "Clausius",
+      "explanation": "The equivalent Kelvin-Planck form concerns the impossibility of cyclic heat-to-work conversion."
+    },
+    {
+      "id": "cbse11-phy-td-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the first law of thermodynamics and explain, with an example, why internal energy is a state quantity while heat and work are not.",
+      "answer": "The first law of thermodynamics states that the change in the internal energy of a system equals the heat supplied to it plus the work done on it: ΔU = q + w (with the alternative convention ΔU = q − W where W is the work done by the system; the convention must be stated). Internal energy is a state quantity because it depends only on the current condition of the system — for an ideal gas, its temperature — and not on how the system arrived there: any path between the same initial and final states gives the same ΔU. Heat and work are not state quantities because they measure transfers that occur along the path: consider compressing a gas isothermally by two different routes — slowly (lots of heat leaving, modest work) or jerkily with cooling (different shares of each) — the same ΔU = 0 results, but q and w differ between the routes. A state function can be read off a p–V diagram from the endpoints; a process quantity requires the whole journey, which is exactly why a cycle, returning to its start, has ΔU = 0 while its q and w need not vanish.",
+      "explanation": "The law stated with the convention named, the state/process distinction, and the isothermal-route counterexample."
+    },
+    {
+      "id": "cbse11-phy-td-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A gas is compressed adiabatically so that 400 J of work is done on it. Find the change in internal energy and the heat exchanged, and explain the temperature change.",
+      "answer": "Adiabatic means no heat is exchanged with the surroundings in either direction: q = 0. The first law then reduces to ΔU = w, so with 400 J of work done on the gas, ΔU = +400 J — the entire work appears as an increase in the gas’s internal energy. Since the internal energy of an ideal gas depends only on temperature, a rise of 400 J in internal energy means the temperature rises, by an amount set by the gas’s heat capacity at constant volume (ΔU = nCᵥΔT). Concretely this is why a bicycle pump grows hot during rapid pumping and why a diesel engine can ignite fuel with no spark: compression alone raises the temperature. Checks: the sign is consistent — work done on the system increases its energy ✓; energy is conserved since no heat crossed the boundary and the mechanical work went entirely into the gas ✓; and the reverse process, adiabatic expansion, would do work at the expense of internal energy and therefore cool the gas, the principle behind refrigeration by expansion ✓.",
+      "explanation": "The adiabatic condition, ΔU = w computed with sign, the temperature conclusion, and the reverse-process check."
+    },
+    {
+      "id": "cbse11-phy-td-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A heat engine takes 1000 J from a hot reservoir at 500 K and rejects 600 J to a cold reservoir at 300 K per cycle. Find the work done, the efficiency, and explain why the efficiency cannot reach 100%.",
+      "answer": "Work done per cycle: by the first law applied to a cycle (ΔU = 0 over the complete loop), the net work equals the net heat absorbed: W = Q₁ − Q₂ = 1000 − 600 = 400 J. Efficiency: η = W/Q₁ = 400/1000 = 40%. Why it cannot reach 100%: the second law, in the Kelvin-Planck form, forbids any cyclic process from converting the heat taken from a single reservoir wholly into work — some must always be discharged to a colder reservoir, so Q₂ > 0 and η < 1 necessarily. The Clausius form gives the same conclusion from the other side: heat would have to flow spontaneously from cold to hot to reclaim Q₂ without extra work, which nature does not permit. The theoretical maximum for any engine between these temperatures is the Carnot efficiency 1 − T₂/T₁ = 1 − 300/500 = 40% — and remarkably, this engine attains it, meaning it is ideal and reversible in the hypothetical sense; any real engine with friction or finite-rate transfer does worse. Checks: 40% < 100% ✓ as the law demands; the temperatures must be absolute (kelvin) for the Carnot formula, and 300/500 = 0.6 is dimensionless as required ✓.",
+      "explanation": "The work from cycle bookkeeping, the efficiency computed, the second-law argument in both statements, and the Carnot comparison with the kelvin note."
+    },
+    {
+      "id": "cbse11-phy-td-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain what is meant by a reversible process, contrast it with an irreversible one using three concrete examples, and state precisely what the second law adds beyond the first.",
+      "answer": "A reversible process is one carried out so slowly and without friction that the system passes through a continuous sequence of equilibrium states, such that an infinitesimal change in the conditions (an infinitesimal reversal of temperature or pressure difference) would retrace the path exactly, restoring both system and surroundings to their original states with no trace. It is an idealisation: real processes always involve some finite driving difference, friction or turbulence, and cannot be undone without leaving a mark. Three irreversible examples: (1) a gas expanding freely into a vacuum does no work and cannot spontaneously reconcentrate itself; (2) a hot block placed in cold water reaches a common intermediate temperature, and no mechanism returns the heat to the block without external work; (3) a falling weight stirring a fluid converts its ordered kinetic energy into distributed thermal energy, unrecoverably as bulk motion. What the second law adds beyond the first: the first law is a bookkeeping identity — it permits every energy-conserving process and is indifferent to direction. The second law imposes direction and grades quality: heat flows only down a temperature gradient of its own accord; no cyclic engine converts absorbed heat wholly into work; and the entropy of the universe (a Class XII refinement of these ideas) never decreases in a real process. Thus the first law tells you what may happen energetically; the second law tells you what will happen, and how much of the transferred energy can ever be useful work rather than dispersed heat. Two processes may both conserve energy, yet only one is physically realisable — that distinction is the second law’s whole content.",
+      "explanation": "A precise reversibility definition, three distinct irreversible examples, and the first/second-law contrast framed as energy-accounting versus direction-and-quality."
+    }
+  ]
+}

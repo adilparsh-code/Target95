@@ -1,0 +1,596 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-waves",
+  "title": "Waves",
+  "kind": "physics",
+  "tagline": "Progressive waves, superposition, beats, stationary waves and the Doppler effect.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "A wave is a disturbance that travels while the medium only oscillates locally, and this chapter follows that idea through the whole of the syllabus: the description of a travelling wave and the relation between its speed, frequency and wavelength; the superposition of two waves with interference, beats and stationary waves as its three consequences; sound in particular with its speed in media and its resonance in air columns; and finally the Doppler effect, where relative motion shifts the observed frequency. The paper tests one numerical from each of these four areas, so each is developed to the point of a worked relation rather than a description.",
+    "facts": [
+      {
+        "label": "Wave equation",
+        "value": "v = fλ, linking speed, frequency and wavelength; the frequency is set by the source and does not change with motion."
+      },
+      {
+        "label": "Superposition",
+        "value": "Displacements add during overlap: constructive interference when the waves arrive in step, destructive when they arrive half a cycle apart."
+      },
+      {
+        "label": "Beats",
+        "value": "Two sources of nearly equal frequency give a beat frequency equal to the difference of the two, heard as a waxing and waning."
+      },
+      {
+        "label": "Doppler shift",
+        "value": "f′ = f (v ± vₒ)/(v − vₐ), with the sign chosen according to whether the source and observer approach or separate."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish transverse and longitudinal waves and describe how a mechanical wave transfers energy without net transport of matter.",
+    "Relate speed, frequency and wavelength and use the wave equation in one medium and across a boundary.",
+    "Apply the principle of superposition to interference, beats and the formation of stationary waves.",
+    "Explain the formation of stationary waves in a stretched string and in an air column, and state the resonance conditions.",
+    "Derive and apply the Doppler effect formula for a source and observer moving along the line joining them."
+  ],
+  "learn": [
+    {
+      "id": "wave-basics",
+      "title": "Describing a wave",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every wave is a disturbance that propagates while the particles of the medium execute an oscillation about their own positions, which is the central fact that separates a wave from a projectile: energy travels across the room while the air merely moves to and fro. Waves are classified by the direction of oscillation relative to the direction of travel, giving transverse waves in which the medium oscillates at right angles to the propagation, as on a stretched string or in light, and longitudinal waves in which the oscillation is along the propagation itself, as in a sound wave where compressions and rarefactions alternate. The description of any wave uses amplitude for the size of the disturbance, wavelength λ for the distance between equivalent points of successive cycles, frequency f for the number of oscillations per second at a point, and period T as its reciprocal, and the wave speed relates them through v = fλ. The speed is a property of the medium alone — it does not depend on the frequency — while the frequency is a property of the source, which is why the pitch of a note does not change as it travels. A wave front is a surface of constant phase, and the ray drawn perpendicular to it gives the direction of travel, a construction that makes reflection, refraction and diffraction geometrical rather than mysterious once the wave nature is accepted."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A wave transfers energy and momentum without any net transport of the medium itself.",
+            "Transverse: oscillation perpendicular to travel, as on a string or in light; longitudinal: oscillation along travel, as in sound.",
+            "v = fλ: the speed belongs to the medium, the frequency to the source, and the wavelength adjusts to fit both.",
+            "Amplitude sets the energy, which for a mechanical wave goes as the square of the amplitude.",
+            "Wave fronts are surfaces of constant phase and rays are perpendicular to them.",
+            "One particle completes a cycle in one period while the disturbance advances one wavelength in the same time."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Transverse against longitudinal",
+          "columns": [
+            "Feature",
+            "Transverse",
+            "Longitudinal"
+          ],
+          "rows": [
+            [
+              "Oscillation",
+              "across the direction of travel",
+              "along the direction of travel"
+            ],
+            [
+              "Distinct features",
+              "crests and troughs",
+              "compressions and rarefactions"
+            ],
+            [
+              "Can they cross a vacuum",
+              "yes, for electromagnetic waves",
+              "no — a material medium is needed"
+            ],
+            [
+              "Typical example",
+              "light, a taut string",
+              "sound in air"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A ripple on a pond",
+              "note": "The water moves up and down while the ripple travels outward, so a floating cork bobs without being carried along with the wave."
+            },
+            {
+              "text": "A note and its speed",
+              "note": "The same middle C travels at about 343 m s⁻¹ in air whatever instrument plays it, because the speed belongs to the air and not to the source."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Wavelength",
+              "meaning": "The distance between corresponding points of successive cycles, λ."
+            },
+            {
+              "term": "Frequency",
+              "meaning": "The number of complete oscillations per second at a point, in hertz."
+            },
+            {
+              "term": "Wave front",
+              "meaning": "A surface on which the wave has the same phase, with rays drawn perpendicular to it."
+            },
+            {
+              "term": "Medium",
+              "meaning": "The material through which a mechanical wave travels, which fixes the wave speed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "superposition-beats",
+      "title": "Superposition, interference and beats",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The principle of superposition states that when two waves occupy the same region the resultant displacement at any instant is the vector sum of the separate displacements, and everything interesting about interference follows from that single sentence. When two waves of the same frequency arrive at a point in step, their amplitudes add and the point vibrates with the sum — constructive interference — while arrival exactly out of step gives cancellation, destructive interference, and in between the result is partial. Whether a particular point sees one or the other depends on the path difference from the two sources: for sources in phase, a path difference of whole wavelengths gives reinforcement and a path difference of odd numbers of half wavelengths gives cancellation, so widening the slit separation or changing the wavelength moves the fringes. Beats are the audible consequence when the frequencies are close rather than equal: the two wave trains drift in and out of step at a rate equal to the difference of their frequencies, producing a resultant whose amplitude rises and falls once per difference-frequency, which the ear hears as a waxing and waning of loudness. The tuning of instruments uses this directly — a tuner listens for the disappearance of beats between the instrument and the standard, since zero beats means the frequencies have become identical."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Superposition: the resultant displacement is the sum of the separate displacements during overlap.",
+            "Constructive interference occurs when the waves arrive in step; destructive when they are half a cycle out of step.",
+            "Path difference of whole wavelengths gives reinforcement; odd numbers of half wavelengths give cancellation.",
+            "Interference requires coherent sources with a constant phase relationship, which a single source split in two guarantees.",
+            "Beats occur between two frequencies that are close but not equal, at a beat frequency equal to the difference.",
+            "Beats are used for tuning: adjust until the beating stops, and the two frequencies match."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Path difference and the result",
+          "columns": [
+            "Path difference",
+            "Phase relationship",
+            "Result"
+          ],
+          "rows": [
+            [
+              "0, λ, 2λ …",
+              "in step",
+              "constructive: amplitudes add"
+            ],
+            [
+              "λ/2, 3λ/2 …",
+              "half a cycle apart",
+              "destructive: amplitudes cancel"
+            ],
+            [
+              "neither",
+              "partly in step",
+              "partial reinforcement"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two loudspeakers",
+              "note": "Walking between two speakers fed from the same amplifier, a listener passes through loud and quiet places set by the difference in distance — interference of sound in an ordinary room."
+            },
+            {
+              "text": "Tuning a guitar",
+              "note": "A slight mismatch gives slow beating; tightening the string raises the frequency and the beats speed up until they vanish at unison."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stationary-resonance",
+      "title": "Stationary waves and resonance in columns",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A stationary wave is formed when two identical waves travel in opposite directions in the same medium and superpose, and the result is a pattern of nodes, where the medium never moves, and antinodes, where the oscillation is largest, with every point in a given loop vibrating in phase. The condition for the pattern is that the length of the medium must contain a whole number of half wavelengths for the fixed-fixed or free-free case, giving resonant lengths of nλ/2, and because the wave speed is set by the medium these lengths correspond to a set of equally spaced frequencies — the fundamental and its harmonics. In a stretched string the speed depends on the tension and the linear density through v = √(T/μ), so the frequency of the fundamental is (1/2L)√(T/μ), which is why a guitar string plays higher when tightened and higher still when a shorter length of it is stopped. In an air column both open and closed tubes resonate: an open end is a displacement antinode, a closed end is necessarily a displacement node, and the closed tube therefore supports only odd harmonics of the fundamental, which is the acoustic reason a stopped pipe has a different timbre from an open one. Resonance itself occurs when a driving frequency matches one of these natural frequencies, and the demonstration with a tuning fork over a tube of adjustable length shows it directly: the loudness jumps when the air column length reaches a resonant value."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A stationary wave arises from two identical waves travelling in opposite directions in the same medium.",
+            "Nodes are points of zero amplitude; antinodes are points of maximum amplitude; the parts of one loop move in phase.",
+            "Resonance condition: the length must contain n half-wavelengths, giving resonant frequencies spaced by the fundamental.",
+            "Speed in a string v = √(T/μ), so the fundamental frequency is (1/2L)√(T/μ).",
+            "An open end is a displacement antinode, a closed end a node, so a closed tube has length (2n−1)λ/4.",
+            "A closed tube therefore radiates only odd harmonics, which is why its tone differs from an open tube of the same length."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Resonant lengths of air columns",
+          "columns": [
+            "Column",
+            "Fundamental length",
+            "Harmonics present"
+          ],
+          "rows": [
+            [
+              "Open at both ends",
+              "λ/2",
+              "all: nλ/2"
+            ],
+            [
+              "Closed at one end",
+              "λ/4",
+              "odd only: (2n−1)λ/4"
+            ],
+            [
+              "String fixed at both ends",
+              "L = nλ/2",
+              "all harmonics of (1/2L)√(T/μ)"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Lengthening a stopped pipe",
+              "note": "Opening the water tap to lengthen a closed column lowers its pitch, because a longer column resonates at a longer wavelength and a lower frequency."
+            },
+            {
+              "text": "A string stopped mid-span",
+              "note": "Pressing a guitar string at the twelfth fret halves the vibrating length, doubles the frequency and raises the note by an octave."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Stationary wave",
+              "meaning": "A fixed pattern of nodes and antinodes formed by two identical waves travelling in opposite directions."
+            },
+            {
+              "term": "Node",
+              "meaning": "A point of a stationary wave with zero amplitude."
+            },
+            {
+              "term": "Antinode",
+              "meaning": "A point of maximum amplitude in a stationary wave."
+            },
+            {
+              "term": "Harmonic",
+              "meaning": "A frequency that is an integral multiple of the fundamental of a vibrating system."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "doppler",
+      "title": "The Doppler effect",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Doppler effect is the change in observed frequency when there is relative motion between a source and an observer, and it arises because the motion changes the spacing between successive wave fronts as they are emitted. If the source approaches, each front is emitted closer to the previous one, so the wavelength in the medium shortens and the observer meets fronts more often, hearing a higher pitch; if the source recedes, the fronts spread and the pitch falls. The general formula for motion along the line of sight is f′ = f (v ± vₒ)/(v − vₐ), where v is the speed of the wave in the medium, vₒ the speed of the observer and vₐ that of the source, with the signs chosen to give the observed direction: plus in the numerator when the observer moves towards the source, minus in the denominator when the source moves towards the observer. Three points are examined repeatedly. The frequency of the source itself never changes; what changes is the frequency received. The effect depends on motion relative to the medium, not merely relative to the other body, which is why a source moving with the observer in the same medium still shifts the pitch. And the classical formula fails when a source exceeds the wave speed in the medium, where the wave fronts pile into a shock front — the sonic boom — a regime the relativity of light waves does not share because there is no medium for light."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The Doppler effect is the change in observed frequency caused by relative motion between source and observer.",
+            "Approach shortens the wavelength between wave fronts, so the observed frequency rises; recession lengthens it.",
+            "The source’s own frequency never changes; it is the received frequency that shifts.",
+            "f′ = f (v ± vₒ)/(v − vₐ), with signs chosen for approach or separation of each body.",
+            "The shift depends on motion relative to the medium, since the wave speed is fixed by the medium.",
+            "A source exceeding the wave speed in the medium piles up its fronts into a shock wave, the sonic boom."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Signs in the Doppler formula",
+          "columns": [
+            "Situation",
+            "Sign",
+            "Effect on observed frequency"
+          ],
+          "rows": [
+            [
+              "Observer moves towards source",
+              "numerator: plus vₒ",
+              "higher"
+            ],
+            [
+              "Observer moves away",
+              "numerator: minus vₒ",
+              "lower"
+            ],
+            [
+              "Source moves towards observer",
+              "denominator: minus vₐ",
+              "higher"
+            ],
+            [
+              "Source moves away",
+              "denominator: plus vₐ",
+              "lower"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An approaching siren",
+              "note": "An ambulance at 30 m s⁻± sounding 700 Hz is heard at about 766 Hz on approach in air at 343 m s⁻¹, and at about 644 Hz once it has passed."
+            },
+            {
+              "text": "Radar and medicine",
+              "note": "The Doppler shift in reflected radar gives traffic speeds, and the same principle in ultrasound measures blood flow without any incision."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "putting-together",
+      "title": "Solving wave problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Wave questions are all variations on four templates, and choosing the right one is most of the work. If the question names a frequency and a speed or a wavelength, the wave equation v = fλ will supply the third quantity, and the only care needed is to keep the frequency in hertz and the wavelength in metres so that the speed comes out in metres per second. If the question describes two waves meeting, decide first whether the sources are coherent and then compare the path difference with whole and half wavelengths before adding amplitudes — never add intensities where the question asked for displacements, since intensity goes as the square of the amplitude. If the question names a vibrating string or an air column, draw the stationary wave that the boundary conditions allow, count the half-wavelengths in the length, and read off the resonant frequency; for a closed column remember that only odd multiples are available. If the question involves relative motion, write the Doppler formula, assign the signs by asking separately whether the observer and the source approach or recede, and check the sense of the answer — a source approaching must give a higher frequency, and if the arithmetic says otherwise a sign is wrong. Throughout, the habit of stating the principle before the substitution is what converts a correct number into a complete answer."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Wave equation template: v = fλ, with consistent SI units throughout.",
+            "Interference template: establish coherence, compare path difference with λ and λ/2, then add displacements.",
+            "Resonance template: draw the allowed stationary wave, count the half-wavelengths and convert to frequency.",
+            "Doppler template: write the formula, assign each sign separately, then check the sense of the result.",
+            "Amplitudes add during superposition; intensities, being as the square of amplitude, do not add in the same way.",
+            "State the principle first — it is often the first mark in a multi-part question."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Choosing between templates",
+              "note": "A question about an open pipe is a stationary-wave count, not a wave equation question, and using v = fλ without the boundary condition misses the allowed frequencies entirely."
+            },
+            {
+              "text": "A sign check that catches an error",
+              "note": "An ambulance receding must be heard lower; if the formula returns a higher figure, the denominator sign was chosen for approach instead of recession."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Constructive and destructive interference",
+      "description": "Two pairs of wave traces: one pair in step whose sum is a larger wave, and one pair half a cycle apart whose sum is a flat line, with the path differences labelled in wavelengths.",
+      "labels": [
+        "waves in step: amplitudes add",
+        "path difference of a whole wavelength",
+        "result is constructive, amplitude doubled",
+        "waves half a cycle apart cancel",
+        "path difference of λ/2 gives a null"
+      ]
+    },
+    {
+      "caption": "Figure: Stationary wave in a closed air column",
+      "description": "A tube closed at the right end with the displacement pattern of the fundamental: a node at the closed end, an antinode at the open end, and the quarter-wavelength marked along the length.",
+      "labels": [
+        "closed end: displacement node",
+        "open end: displacement antinode",
+        "fundamental length = λ/4",
+        "next resonance at 3λ/4",
+        "only odd harmonics present"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A wave transfers energy while the medium oscillates locally without net transport.",
+    "Transverse waves oscillate across the direction of travel; longitudinal waves oscillate along it.",
+    "v = fλ: the speed belongs to the medium and the frequency to the source.",
+    "Superposition adds the displacements of overlapping waves.",
+    "Constructive interference needs a path difference of whole wavelengths; destructive needs odd half-wavelengths.",
+    "Beats occur between two nearly equal frequencies at a rate equal to their difference.",
+    "A stationary wave has nodes of zero amplitude and antinodes of maximum amplitude.",
+    "A string of length L resonates when L = nλ/2, with speed √(T/μ).",
+    "An open column has an antinode at each end; a closed column has a node at the closed end.",
+    "A closed column radiates only odd harmonics because its resonant lengths are (2n−1)λ/4.",
+    "The Doppler effect changes the observed frequency through relative motion, leaving the source frequency unchanged.",
+    "The Doppler shift depends on motion relative to the medium, and beyond the wave speed a shock front forms."
+  ],
+  "examFocus": [
+    "Superposition questions must state the principle before adding anything; the statement carries a mark.",
+    "Stationary-wave answers should include a sketch showing the nodes and antinodes allowed by the boundaries.",
+    "The Doppler formula needs each sign justified separately and a final check that the shift has the expected sense.",
+    "Always keep frequency in hertz and wavelength in metres so that wave speed comes out in metres per second."
+  ],
+  "vocabulary": [
+    {
+      "word": "Wavelength",
+      "meaning": "The distance between successive equivalent points of a wave."
+    },
+    {
+      "word": "Superposition",
+      "meaning": "The addition of displacements when waves overlap."
+    },
+    {
+      "word": "Interference",
+      "meaning": "The resultant pattern formed when two coherent waves superpose."
+    },
+    {
+      "word": "Beats",
+      "meaning": "Periodic variation of loudness from two close frequencies, at their difference."
+    },
+    {
+      "word": "Stationary wave",
+      "meaning": "A pattern of fixed nodes and antinodes from counter-running identical waves."
+    },
+    {
+      "word": "Harmonic",
+      "meaning": "A resonant frequency that is a whole-number multiple of the fundamental."
+    },
+    {
+      "word": "Doppler effect",
+      "meaning": "The shift in observed frequency caused by relative motion between source and observer."
+    },
+    {
+      "word": "Shock wave",
+      "meaning": "The cone of compressed fronts formed when a source exceeds the wave speed in the medium."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-wave-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The speed, frequency and wavelength of a wave are related by:",
+      "options": [
+        "v = f/λ",
+        "v = fλ",
+        "v = λ/f",
+        "v = f²λ"
+      ],
+      "correctIndex": 1,
+      "answer": "v = fλ",
+      "explanation": "One cycle advances the disturbance by one wavelength in one period, giving v = fλ."
+    },
+    {
+      "id": "isc11-phy-wave-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two identical waves travel in opposite directions along a string. The result is:",
+      "options": [
+        "A travelling wave of double amplitude",
+        "A stationary wave with nodes and antinodes",
+        "Complete cancellation everywhere",
+        "A wave of doubled frequency"
+      ],
+      "correctIndex": 1,
+      "answer": "A stationary wave with nodes and antinodes",
+      "explanation": "Their superposition fixes nodes where they always cancel and antinodes where they always reinforce."
+    },
+    {
+      "id": "isc11-phy-wave-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two tuning forks of frequencies 256 Hz and 258 Hz sound together. The beat frequency heard is:",
+      "options": [
+        "2 Hz",
+        "4 Hz",
+        "514 Hz",
+        "1 Hz"
+      ],
+      "correctIndex": 0,
+      "answer": "2 Hz",
+      "explanation": "The beat frequency equals the difference of the two frequencies, that is 2 Hz."
+    },
+    {
+      "id": "isc11-phy-wave-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A pipe closed at one end resonates in its fundamental when its length is L. The next resonance occurs at a length of:",
+      "options": [
+        "2L",
+        "3L",
+        "L/3",
+        "4L"
+      ],
+      "correctIndex": 1,
+      "answer": "3L",
+      "explanation": "Closed pipes resonate at odd quarter-wavelengths: fundamental λ/4 = L, next at 3λ/4 = 3L."
+    },
+    {
+      "id": "isc11-phy-wave-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The points of a stationary wave at which the medium has zero amplitude are called __________.",
+      "answer": "nodes",
+      "explanation": "The points of maximum amplitude between them are the antinodes."
+    },
+    {
+      "id": "isc11-phy-wave-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The change in the observed frequency of a wave caused by relative motion between the source and the observer is called the __________ effect.",
+      "answer": "Doppler",
+      "explanation": "The source’s own frequency is unchanged; only the frequency received shifts."
+    },
+    {
+      "id": "isc11-phy-wave-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the principle of superposition and explain what it means for two waves arriving in step.",
+      "answer": "The principle of superposition states that when two or more waves occupy the same region of a medium at the same time, the resultant displacement of the medium at any instant and at any point is the vector sum of the displacements that each wave would produce separately. If the two waves arrive exactly in step their displacements have the same sign throughout, so the amplitudes add and the point vibrates with the sum of the two amplitudes — constructive interference. If they arrive half a cycle out of step the displacements are equal and opposite and cancel, giving destructive interference.",
+      "explanation": "Statement of the principle, then the consequence for in-step and out-of-step arrival."
+    },
+    {
+      "id": "isc11-phy-wave-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between a travelling wave and a stationary wave.",
+      "answer": "A travelling wave moves its profile through the medium, carrying energy from one place to another, and every particle of the medium oscillates with the same amplitude except where the wave has not yet reached. A stationary wave does not travel: it is formed by two identical waves moving in opposite directions and it shows a fixed pattern of nodes, which never move, and antinodes, which oscillate with maximum amplitude, and every particle within one loop moves in phase but with an amplitude that varies from node to node. Energy in a stationary wave is not transmitted through the medium but is exchanged between the kinetic and potential forms within each loop.",
+      "explanation": "Travel against fixed pattern, amplitude distribution and the question of energy transport."
+    },
+    {
+      "id": "isc11-phy-wave-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the pitch of an approaching siren sound higher than the same siren when it has passed?",
+      "answer": "As the source approaches, each successive wave front is emitted from a position closer to the observer, so the fronts are crowded together and the wavelength in the air is shortened; the observer therefore meets more fronts per second and hears a higher frequency. Once the source recedes the fronts are emitted further apart, the wavelength lengthens and fewer fronts reach the observer each second, so the pitch falls. The frequency of the siren itself never changed — only the received frequency did.",
+      "explanation": "Crowding of fronts on approach, spreading on recession, and the note that the source frequency is unchanged."
+    },
+    {
+      "id": "isc11-phy-wave-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain the formation of a stationary wave in a stretched string fixed at both ends and derive the frequencies at which it resonates.",
+      "answer": "When a wave travels along a string fixed at one end it is reflected with a reversal of displacement, and the incident and reflected trains occupy the same string at the same time, so their superposition must be considered. Because the fixed end can never move, the reflected wave must cancel the incident wave exactly there, producing a node, and the same argument applies at the other fixed end. A stationary wave can exist only if the boundary conditions are met at both ends, which requires the length L of the string to contain a whole number of half-wavelengths: L = nλ/2 for n = 1, 2, 3 … The speed of a wave on the string is fixed by the medium, v = √(T/μ) with T the tension and μ the mass per unit length, so substituting λ = 2L/n into v = fλ gives the resonant frequencies f = (n/2L)√(T/μ). The lowest of these, n = 1, is the fundamental, and the rest are its harmonics, all of them multiples of the fundamental because the string is fixed at both ends. Tightening the string raises the speed and therefore every resonant frequency, which is why a guitar is tuned by adjusting the tension.",
+      "explanation": "Reflection and the node at the fixed end, the L = nλ/2 condition, the speed formula and the resulting set of frequencies."
+    },
+    {
+      "id": "isc11-phy-wave-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "An ambulance sounding a 700 Hz siren moves towards a stationary observer at 30 m s⁻¹. Taking the speed of sound as 343 m s⁻¹, find the observed frequency on approach and after it has passed.",
+      "answer": "On approach the source moves towards the observer, so each wave front is emitted closer to the previous one and the denominator of the Doppler formula decreases: f′ = f v/(v − vₐ) = 700 × 343/(343 − 30) = 700 × 343/313 ≈ 766 Hz, an increase of about 66 Hz. After the ambulance passes the same source recedes, so the fronts spread out and f′ = f v/(v + vₐ) = 700 × 343/373 ≈ 644 Hz, a drop of about 56 Hz. The observer is stationary throughout, so the numerator is uninvolved and only the denominator changes sign between the two cases. The asymmetry of the two shifts — a rise of 66 Hz against a fall of 56 Hz — is real rather than a rounding artefact, and it follows because the denominator differs in the two cases. The check is that approach must raise the pitch and recession lower it, which both results satisfy.",
+      "explanation": "Both substitutions with the correct denominator in each case, the two observed frequencies, and the explanation of the asymmetry."
+    },
+    {
+      "id": "isc11-phy-wave-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two loudspeakers fed from the same source are 2.0 m apart, and a listener stands 5.0 m from the nearer one on the line joining them. For a sound of wavelength 0.5 m, analyse whether the interference is constructive or destructive at that point.",
+      "answer": "Because both speakers are fed from the same source they are coherent and have a fixed phase relationship, so the result at the listener depends on the path difference. The listener is on the line joining them, 5.0 m from the nearer speaker, so the distance to the farther speaker is 5.0 + 2.0 = 7.0 m and the path difference is 2.0 m. Dividing by the wavelength, 2.0/0.5 = 4, that is exactly four whole wavelengths, so the two waves arrive in step and the interference is constructive: the amplitudes add and the listener hears the maximum. Had the path difference been 1.75 m, four and a half wavelengths, the waves would have arrived out of step and cancelled completely. A useful general test in these line-of-sight problems is that the separation itself is the path difference, and comparing it with the wavelength decides the answer at once.",
+      "explanation": "Coherence, the geometry giving the path difference, its division by the wavelength and the conclusion with the counter-case."
+    }
+  ]
+}

@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-rotation",
+  "title": "System of Particles and Rotational Motion",
+  "kind": "physics",
+  "tagline": "Centre of mass, torque and angular momentum — mechanics with a second, parallel set of laws.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Rotation is not a new subject but a mirror of the first one: force is replaced by torque, mass by moment of inertia, velocity by angular velocity, and every law acquires a rotational twin with the same structure. This chapter builds that dictionary deliberately — centre of mass first, so that translation of a system can be separated from motion about it, then torque and angular momentum with the conservation law that follows, then the equations of rotational motion and the moments of inertia that feed them. Students who see the parallels need half the memory; those who do not need double.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-V: Motion of System of Particles and Rigid Body (17 marks shared with Work-Energy-Power and Gravitation)."
+      },
+      {
+        "label": "Centre of mass",
+        "value": "x_cm = Σmᵢxᵢ/Σmᵢ; for a two-particle system it divides the joining line in the inverse ratio of the masses."
+      },
+      {
+        "label": "Torque",
+        "value": "τ = r × F; the rotational analogue of force, producing angular acceleration."
+      },
+      {
+        "label": "Moment of inertia",
+        "value": "I = Σmᵢrᵢ² — the rotational mass; the syllabus gives standard values without derivation."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Locate the centre of mass of two-particle systems and simple rigid bodies.",
+    "Compute torque and use the condition for rotational equilibrium.",
+    "Apply conservation of angular momentum to real situations.",
+    "Use the equations of rotational motion with their linear analogues.",
+    "Read off standard moments of inertia and apply the parallel-axis idea qualitatively."
+  ],
+  "learn": [
+    {
+      "id": "com",
+      "title": "Centre of mass and its motion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A system of particles moves in a complicated way, yet one point within it moves simply: the centre of mass, located at x_cm = Σmᵢxᵢ/Σmᵢ (and its y and z analogues), obeys Newton’s second law as though all the mass were concentrated there and all external forces acted there. For a two-particle system this reduces to a dividing ratio: the centre of mass lies on the line joining the particles, closer to the heavier one, dividing the segment inversely as the masses — the reason a heavy hammer’s handle feels like the balanced point is nearer its head. For symmetric rigid bodies the centre of mass sits at the geometric centre by inspection, which is why finding it is a matter of symmetry arguments rather than summation in practice."
+        },
+        {
+          "type": "paragraph",
+          "text": "The power of the concept is the separation it enables: the motion of any system splits into translation of the centre of mass, governed by external forces alone, plus motion about the centre of mass, governed by internal forces and torques. Internal forces — whether a firework’s fragments pushing apart or a skater’s arms pulling in — can never move the centre of mass, which is why a thrown ball spinning in flight follows a smooth parabola while its surface tumbles, and why an exploding shell’s fragments have a centre of mass that continues on the original trajectory. A striking corollary: if the centre of mass of a system starts at rest, it stays at rest — the basis of the classic question about a man walking on a floating boat, where the boat slides backward so that the combined centre of mass never moves."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "x_cm = Σmᵢxᵢ/M; for two particles, masses divide the line inversely.",
+            "External forces decide the centre-of-mass motion; internal forces cannot shift it.",
+            "Symmetry locates the centre of mass of uniform bodies.",
+            "System motion = centre-of-mass translation + motion about it.",
+            "If no external force acts, the centre of mass keeps its state of rest or uniform motion."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "torque",
+      "title": "Torque, angular momentum and their conservation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Force applied off-axis produces rotation, and the measure of that tendency is torque, τ = r × F, with magnitude rF sin θ — the product of the force and its lever arm, the perpendicular distance from the axis to the force’s line of action. Torque is the exact rotational analogue of force, and angular momentum L = Iω (equivalently r × p) is the analogue of linear momentum, so the structural parallels run deep: Newton’s second law in rotational form is τ = dL/dt = Iα, and when no external torque acts, L is conserved. That single conservation law explains an enormous range of otherwise puzzling behaviour — a spinning skater speeds up when she pulls her arms in because I falls while L stays fixed, a diver tucks to rotate faster, and a collapsing star spins enormously faster for the same reason."
+        },
+        {
+          "type": "paragraph",
+          "text": "Rotational equilibrium deserves separate attention because so much of engineering is it: a body is in rotational equilibrium when the net torque about any axis vanishes, which is the principle behind the beam balance, the seesaw and the crane’s counterweight. In practice, choose the axis through an unknown force to eliminate its torque from the equation, a trick that solves lever problems in one line. The parallelogram of forces generalises: equilibrium of a rigid body requires both ΣF = 0 (no linear acceleration) and Στ = 0 (no angular acceleration), and problems typically supply one to find the other — a ladder resting against a wall, a crane lifting a load, a sign hanging from a hinged rod. Working the torque equation with the lever arm stated explicitly, rather than computing rF and hoping the angle is right, is the habit that keeps these solutions correct."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Torque τ = rF sin θ; the lever arm form is often faster.",
+            "Rotational second law: τ = Iα = dL/dt.",
+            "No external torque ⇒ angular momentum conserved.",
+            "Pulling mass inward lowers I and raises ω at constant L.",
+            "Rigid-body equilibrium needs ΣF = 0 AND Στ = 0.",
+            "Choose the axis through an unknown force to eliminate its torque."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rotation",
+      "title": "Rigid body rotation and its equations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A rigid body rotating about a fixed axis has every particle moving in a circle about that axis with the same angular velocity, so a single ω describes the whole body — the great simplification that makes rotation tractable. The kinematics then mirror linear motion exactly, with θ replacing x, ω replacing v and α replacing a: ω = ω₀ + αt, θ = ω₀t + ½αt², ω² = ω₀² + 2αθ. The dynamics need one new quantity, the moment of inertia I = Σmᵢrᵢ², which measures how mass is distributed relative to the axis and plays the role mass plays in translation. Because mass far from the axis contributes quadratically, the same wheel is much harder to spin about its rim than about its centre — the physical content of every flywheel, figure skater and helicopter rotor design."
+        },
+        {
+          "type": "paragraph",
+          "text": "The syllabus gives the standard moments of inertia without derivation: a ring MR² about its axis, a disc or solid cylinder ½MR², a solid sphere ⅖MR² and a hollow sphere ⅔MR², a rod ML²/12 about its centre and ML²/3 about its end. These six cover nearly every school problem, and their relative sizes are worth memorising as a set — at the same mass and radius, a sphere is easier to spin than a disc, which is easier than a ring, because the ring carries all its mass at the rim. Rotational kinetic energy, ½Iω², completes the energy side, and combining it with the potential and translational terms gives the rolling-body problems where energy conservation finds the speed at the bottom of an incline without ever resolving the friction that causes the rolling. The parallel-axis theorem — I about any axis = I_cm + Md² — appears qualitatively here and is used qualitatively: moving the axis outward always increases the moment of inertia."
+        },
+        {
+          "type": "table",
+          "caption": "The linear–rotational dictionary",
+          "columns": [
+            "Linear",
+            "Rotational",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Force F",
+              "Torque τ",
+              "Off-axis force produces rotation"
+            ],
+            [
+              "Mass m",
+              "Moment of inertia I",
+              "Depends on axis, not just amount of mass"
+            ],
+            [
+              "Velocity v",
+              "Angular velocity ω",
+              "v = rω at the rim"
+            ],
+            [
+              "Momentum mv",
+              "Angular momentum Iω",
+              "Conserved when no external torque acts"
+            ],
+            [
+              "Acceleration a",
+              "Angular acceleration α",
+              "a = rα at the rim"
+            ],
+            [
+              "Kinetic energy ½mv²",
+              "½Iω²",
+              "Sum both for a rolling body"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Moment of inertia of a 2 kg ring of radius 0.1 m about its axis.",
+              "note": "I = MR² = 0.02 kg·m²."
+            },
+            {
+              "text": "Same mass as a disc: I = ?",
+              "note": "½MR² = 0.01 kg·m² — half as hard to spin."
+            },
+            {
+              "text": "A figure skater’s I falls from 6 to 4 kg·m²: ω ratio?",
+              "note": "L fixed: ω₂/ω₁ = 6/4 = 1.5 — spins 50% faster."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Exam method for rotation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Rotation problems are solved by first classifying them: is this a torque-and-equilibrium question (statics), a τ = Iα dynamics question, an angular-momentum conservation question, or an energy question with both ½mv² and ½Iω²? The classification decides the tool, and choosing correctly is most of the work. For equilibrium problems, draw the body, mark every force at its point of application, and take moments about a point that eliminates unknowns. For dynamics, remember that a pure rolling body’s friction does no work (the contact point is instantaneously at rest), which is why energy methods give rolling-incline answers so quickly. For conservation, identify the axis and confirm no external torque acts about it before writing L before = L after."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two distinctions prevent most errors. First, the moment of inertia is meaningless without its axis: always state I about which axis, since the same disc has I = ½MR² about its centre and 3½MR² about a rim diameter — a factor of seven hiding an unstated axis. Second, rolling is not spinning alone: a rolling body’s kinetic energy has both parts, ½mv²_cm + ½Iv²_cm/r², and omitting the translational half is the classic loss of marks. In written answers, state the axis, quote the standard I being used, and show the substitution; in numerical answers, check the dimensions (torque N·m, inertia kg·m², angular momentum kg·m²/s) and the plausibility of the magnitude. Those habits, plus the dictionary table drilled until automatic, carry the whole unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Classify the problem first: equilibrium, dynamics, conservation or energy.",
+            "Always state the axis for any moment of inertia.",
+            "Rolling energy = ½Mv²_cm + ½Iω²; both halves are needed.",
+            "Pure rolling: friction does no work, so energy methods are safe.",
+            "Check torque, inertia and angular-momentum answers by dimension."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Torque as force times lever arm",
+      "description": "A spanner turning a nut viewed from above: the axis marked at the nut’s centre, the applied force drawn at the handle at angle θ to the spanner, the perpendicular lever arm dashed from the axis to the force’s line of action and labelled d, with the rotation arrow marked τ = Fd.",
+      "labels": [
+        "Axis at the nut centre",
+        "Force applied at the handle",
+        "θ between r and F",
+        "Lever arm d = r sin θ",
+        "Torque τ = Fd turns the nut"
+      ]
+    },
+    {
+      "caption": "Figure: The spinning skater — conservation of angular momentum",
+      "description": "Two side-by-side figures of a skater with arms extended and arms pulled in, each with an angular-momentum annotation: I₁ω₁ = I₂ω₂, the extended pose labelled large I small ω and the tucked pose small I large ω, with the total L printed as unchanged between the panels.",
+      "labels": [
+        "Arms out: large moment of inertia",
+        "Arms in: mass near the axis",
+        "No external torque acts",
+        "Angular momentum stays constant",
+        "Smaller I means larger ω"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Centre of mass: x_cm = Σmᵢxᵢ/M; two masses divide their line inversely.",
+    "Internal forces cannot move the centre of mass of a system.",
+    "Torque τ = r × F with magnitude rF sin θ.",
+    "Rotational second law: τ = Iα = dL/dt.",
+    "Angular momentum is conserved when no external torque acts.",
+    "Moment of inertia I = Σmr² depends on the axis as well as the mass.",
+    "Standard values: ring MR², disc ½MR², solid sphere ⅖MR², rod ML²/12 at its centre.",
+    "Kinematics twins: ω = ω₀ + αt and its siblings, with θ for x.",
+    "Rolling kinetic energy = ½mv² + ½Iω² — both halves required.",
+    "Rigid-body equilibrium needs zero net force and zero net torque."
+  ],
+  "examFocus": [
+    "State the axis before quoting any moment of inertia.",
+    "Show the lever arm in every torque calculation.",
+    "Conservation of angular momentum needs an explicit no-external-torque statement.",
+    "Rolling questions: quote both energy terms and the v = rω link."
+  ],
+  "vocabulary": [
+    {
+      "word": "Centre of mass",
+      "meaning": "The point obeying Newton’s laws for the system as a whole."
+    },
+    {
+      "word": "Torque (τ)",
+      "meaning": "r × F — the rotational analogue of force."
+    },
+    {
+      "word": "Lever arm",
+      "meaning": "Perpendicular distance from the axis to the force’s line of action."
+    },
+    {
+      "word": "Angular momentum (L)",
+      "meaning": "Iω — conserved when no external torque acts."
+    },
+    {
+      "word": "Moment of inertia (I)",
+      "meaning": "Σmr² — rotational mass, axis-dependent."
+    },
+    {
+      "word": "Radius of gyration",
+      "meaning": "The effective distance k where I = Mk²."
+    },
+    {
+      "word": "Pure rolling",
+      "meaning": "Rolling without slipping: v = rω at the contact point."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-rot-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The moment of inertia of a uniform disc of mass M and radius R about an axis through its centre perpendicular to its plane is:",
+      "options": [
+        "MR²",
+        "½MR²",
+        "⅖MR²",
+        "2MR²"
+      ],
+      "correctIndex": 1,
+      "answer": "½MR²",
+      "explanation": "I = ½MR² — smaller than a ring’s MR² because part of the disc’s mass lies nearer the axis."
+    },
+    {
+      "id": "cbse11-phy-rot-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A 20 N force acts at the end of a 0.5 m spanner, perpendicular to it. The torque about the nut is:",
+      "options": [
+        "40 N·m",
+        "10 N·m",
+        "0.025 N·m",
+        "25 N·m"
+      ],
+      "correctIndex": 1,
+      "answer": "10 N·m",
+      "explanation": "τ = F × lever arm = 20 × 0.5 = 10 N·m; a perpendicular force gives the maximum torque for that lever arm."
+    },
+    {
+      "id": "cbse11-phy-rot-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A skater’s moment of inertia decreases from 6 to 3 kg·m² with no external torque. Her angular velocity:",
+      "options": [
+        "Halves",
+        "Doubles",
+        "Stays the same",
+        "Quadruples"
+      ],
+      "correctIndex": 1,
+      "answer": "Doubles",
+      "explanation": "L = Iω is conserved, so I₁ω₁ = I₂ω₂ gives ω₂ = 2ω₁ — halving the inertia doubles the spin rate."
+    },
+    {
+      "id": "cbse11-phy-rot-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a system of particles, the centre of mass:",
+      "options": [
+        "Moves under the net internal force",
+        "Moves under the net external force only",
+        "Never moves once at rest",
+        "Coincides with the geometric centre always"
+      ],
+      "correctIndex": 1,
+      "answer": "Moves under the net external force only",
+      "explanation": "Internal forces occur in pairs and cancel in the total, so only external forces accelerate the centre of mass; coinciding with the geometric centre holds only for uniform symmetric bodies."
+    },
+    {
+      "id": "cbse11-phy-rot-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The rotational analogue of force is ________ .",
+      "answer": "torque",
+      "explanation": "Its SI unit is the newton-metre, and it produces angular acceleration via τ = Iα."
+    },
+    {
+      "id": "cbse11-phy-rot-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The moment of inertia of a uniform rod of mass M and length L about an axis through its ________ and perpendicular to it is ML²/12.",
+      "answer": "centre",
+      "explanation": "About an end the same rod has I = ML²/3, four times larger, because more mass lies farther from the axis."
+    },
+    {
+      "id": "cbse11-phy-rot-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the conditions for a rigid body to be in complete equilibrium, and explain why both are needed.",
+      "answer": "A rigid body is in complete equilibrium when two conditions hold simultaneously: the vector sum of all external forces is zero (ΣF = 0), and the vector sum of all external torques about any axis is zero (Στ = 0). Both are needed because they control different motions. Zero net force prevents translation — the centre of mass cannot accelerate — but permits rotation: two equal opposite forces forming a couple (like turning a steering wheel with both hands) have zero resultant force yet produce a net torque and therefore angular acceleration. Conversely, zero net torque prevents rotation but permits translation: a single force through the centre of mass exerts no torque about it yet accelerates the body linearly. Only together do they guarantee the body remains at rest or in uniform motion, with both its linear and angular momenta constant.",
+      "explanation": "Both conditions stated, the couple counterexample for force-only, the through-centre force counterexample for torque-only, and the completeness argument."
+    },
+    {
+      "id": "cbse11-phy-rot-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the relation between linear and angular acceleration for a body rolling without slipping.",
+      "answer": "For pure rolling, the contact point of the body with the surface is instantaneously at rest: the body’s centre moves forward with speed v while the body rotates with angular velocity ω, and these combine so that the rim’s backward tangential speed rω exactly cancels the forward speed v at the contact point. Hence v = rω. Differentiating with respect to time, since the radius is constant: dv/dt = r dω/dt, that is a = rα — linear acceleration of the centre equals radius times angular acceleration. The same relation follows from the geometry of rolling: in time t the body advances a distance equal to the arc it has turned through, s = rθ, and differentiating twice gives both relations at once. Checks: the dimensions work ([LT⁻²] = [L][T⁻²]) ✓; a larger radius converts the same angular acceleration into a larger linear one, as a bigger wheel accelerating at the same rate covers more ground per second ✓; and when slipping occurs the equality fails, which is precisely how we detect slip ✓.",
+      "explanation": "The instantaneous-rest argument, the differentiation, and the checks including the slipping contrast."
+    },
+    {
+      "id": "cbse11-phy-rot-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A uniform rod of mass 2 kg and length 1 m is hinged at one end and held horizontal by a vertical force applied at the other end. Find that force and the hinge reaction, taking g = 10 m/s².",
+      "answer": "The rod’s weight acts at its centre of mass, 0.5 m from the hinge: W = mg = 2 × 10 = 20 N downward. Take moments about the hinge, the choice that eliminates the unknown hinge reaction from the equation. Clockwise torque from the weight: 20 N × 0.5 m = 10 N·m. For rotational equilibrium the net torque must vanish, so the force F at the free end (lever arm 1 m) must supply 10 N·m anticlockwise, which means F = 10 N acting upward. Vertical force balance then fixes the hinge reaction: R + F = mg gives R = 20 − 10 = 10 N, also upward. Verification by taking moments about the free end instead: the weight acts 0.5 m from that end giving 10 N·m clockwise, and the hinge reaction acts 1 m from it giving 10 N × 1 m = 10 N·m anticlockwise, so the torques balance there too — all three choices of axis agree, which is the mark of a consistent equilibrium solution. Physical reading: the hinge carries half the rod’s weight and the applied force carries the rest, because the two lever arms stand in the ratio 1 : 0.5; a support nearer the centre of mass would bear more, which is the seesaw principle. The force must be upward because the weight alone would swing the rod down about the hinge, so the applied force must lift at the far end to hold it level.",
+      "explanation": "Moments taken about the hinge with the weight located at the centre of mass, the upward force found, the hinge reaction from vertical balance, and the second-axis verification confirming equilibrium."
+    },
+    {
+      "id": "cbse11-phy-rot-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solid sphere of mass 3 kg and radius 0.2 m rolls without slipping down an incline of 30°. Find its acceleration and the friction force, using I = ⅖MR² and g = 10 m/s².",
+      "answer": "Forces on the sphere: gravity mg downward, normal reaction perpendicular to the slope, and static friction f up the slope (it prevents slip, acting up-slope for rolling without slipping). Along the slope: mg sin θ − f = Ma. About the centre: the only torque is friction’s, τ = fR = Iα, and rolling ties them by α = a/R, so fR = Ia/R, giving f = Ia/R² = (⅖MR²)a/R² = ⅖Ma. Substituting into the first equation: mg sin θ − ⅖Ma = Ma, so mg sin θ = 7/5 Ma and a = 5g sin θ/7 = 5 × 10 × 0.5/7 = 3.57 m/s². The friction force: f = ⅖ × 3 × 3.57 = 4.29 N — static friction, well below the limiting value needed to prevent slip (μmg cos θ with μ ≈ 0.3 gives about 7.8 N, so pure rolling is sustainable ✓). Comparison: a sliding frictionless block would accelerate at g sin θ = 5 m/s²; the rolling sphere is slower because part of the gravitational work must go into rotational kinetic energy, which is exactly what the 5/7 factor encodes. Energy check: after distance s, Mg h = ½Mv² + ½Iω² = ½Mv²(1 + ⅖) = ½Mv²(7/5), giving v² = (10/7)gs sin θ and a = v²/(2s) = 5g sin θ/7 ✓ — the same acceleration from energy, confirming the force analysis.",
+      "explanation": "Both force and torque equations set up, the rolling constraint used, the acceleration and friction computed, and the energy-method cross-check with the limiting-friction check."
+    }
+  ]
+}

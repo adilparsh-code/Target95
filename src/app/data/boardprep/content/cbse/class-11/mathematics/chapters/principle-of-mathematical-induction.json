@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-induction",
+  "title": "Principle of Mathematical Induction",
+  "kind": "mathematics",
+  "tagline": "The two-step argument that proves infinitely many statements: establish the first domino, then every knock-over.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Induction is the method the syllabus offers for statements indexed by the natural numbers, and the official 2026-27 placement of the topic is worth stating plainly: it is included in the syllabus but assessed only formatively, so it is taught here to build proof technique rather than to prepare a summative question. The chapter develops the idea of an inductive set, states the principle, and then works the method hard — base case, hypothesis, step — through algebraic identities and divisibility problems, because a proof method is only learned by doing it.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Algebra — registered as its own chapter because the syllabus lists it as a distinct topic."
+      },
+      {
+        "label": "Status",
+        "value": "Included in the syllabus; assessed only formatively in the 2026-27 examination scheme."
+      },
+      {
+        "label": "Core idea",
+        "value": "The natural numbers are the least inductive subset of the reals; to prove a statement for all of them, prove it for 1 and show P(k) ⇒ P(k+1)."
+      },
+      {
+        "label": "Two obligations",
+        "value": "The base case must be verified, not assumed; the inductive step must be proved from P(k) alone."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the principle of mathematical induction and the idea of an inductive set.",
+    "Structure a proof with a verified base case and a genuine inductive step.",
+    "Prove algebraic summation identities by induction.",
+    "Prove divisibility statements by induction.",
+    "Diagnose the standard fallacies: skipping the base case, using what must be proved."
+  ],
+  "learn": [
+    {
+      "id": "idea",
+      "title": "Why induction works: the inductive set",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A subset S of the real numbers is called inductive when it contains 1 and, whenever it contains a natural number n, it contains n + 1 as well. The principle of mathematical induction rests on a single fact about the natural numbers: they form the least inductive subset of the reals — any inductive set containing 1 must swallow every natural number, because starting at 1 and repeatedly adding one can reach no other place. So to prove a statement P(n) for every natural number, it is enough to exhibit a set containing 1 and closed under adding one, and show P(n) lives inside it. That set is exactly the collection of n for which P(n) is true."
+        },
+        {
+          "type": "paragraph",
+          "text": "The domino image is the standard way to hold the logic: the first tile must fall (the base case), and each falling tile must knock over the next (the inductive step); once both are secured, every tile falls — no matter how many there are. The image also exposes both possible failures. If the first tile stands, nothing starts; if some tile fails to touch its successor, the chain breaks there even though earlier tiles fell. In proof language: verifying P(1) proves nothing about P(7) unless the step P(k) ⇒ P(k+1) has been established for every k, and establishing the step for a particular k only — say by substituting a number — proves nothing at all."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "S is inductive if 1 ∈ S and n ∈ S implies n + 1 ∈ S.",
+            "The natural numbers are the least inductive subset of the reals.",
+            "P(n) true for all n ⇔ the truth-set of P contains 1 and is closed under +1.",
+            "Dominoes: the first must fall; each must knock the next.",
+            "Failures: skipped base case, or a step proved only for a special k."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "method",
+      "title": "The two-step method, written properly",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A complete induction proof has three visible parts, and marking schemes award credit for each. First, the base case: substitute n = 1 and verify both sides of the statement are equal — this is computation, and it must actually be carried out rather than asserted. Second, the hypothesis: assume the statement P(k) holds for an arbitrary admissible k; the word arbitrary is essential, because the assumption is about a general member of the set, not about a convenient number. Third, the step: starting only from P(k), deduce P(k + 1). This is where the algebra lives — substitute k + 1 for n on the left, use the hypothesis to replace the k-expression, and manipulate until the right-hand side for k + 1 appears."
+        },
+        {
+          "type": "paragraph",
+          "text": "The discipline that students must acquire is that the inductive step is a conditional: it proves that if the statement holds for k it holds for k + 1, and combined with the verified base case this propagates truth along the whole sequence. The commonest error is circularity — proving the step by assuming P(k + 1) in the first place, which would make the argument assume its conclusion. A useful audit question before submitting: did I use the hypothesis exactly once, at the point where the k-expression appears, and did everything else follow by ordinary algebra? If the hypothesis was never needed, the step probably did not prove anything; if the conclusion was assumed, the proof is invalid."
+        },
+        {
+          "type": "table",
+          "caption": "Anatomy of an induction proof",
+          "columns": [
+            "Part",
+            "What is written",
+            "What it earns"
+          ],
+          "rows": [
+            [
+              "Base case",
+              "P(1) checked by substitution",
+              "The first domino falls"
+            ],
+            [
+              "Hypothesis",
+              "Assume P(k) for arbitrary k ≥ 1",
+              "The standing assumption"
+            ],
+            [
+              "Step",
+              "From P(k), deduce P(k + 1)",
+              "The knock-over"
+            ],
+            [
+              "Conclusion",
+              "By the principle, P(n) for all n",
+              "The whole row of dominoes"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "worked",
+      "title": "Worked proofs: an identity and a divisibility",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first standard family is summation identities. To prove 1 + 3 + 5 + … + (2n − 1) = n²: the base case n = 1 reads 1 = 1, true. Assume the sum of the first k odd numbers equals k². The sum of the first k + 1 odd numbers is that sum plus its next term, (2(k + 1) − 1) = 2k + 1, giving k² + 2k + 1 by the hypothesis, which is (k + 1)² — exactly the right-hand side with n replaced by k + 1. The proof is complete: each line follows from the previous one, and the hypothesis was used at precisely the moment the k-sum appeared."
+        },
+        {
+          "type": "paragraph",
+          "text": "The second family is divisibility, where the statement P(n) asserts that some expression is a multiple of a fixed number. Take 4ⁿ + 6n − 1 is divisible by 9: for n = 1 the value is 4 + 6 − 1 = 9, divisible by 9. Assuming 4ᵏ + 6k − 1 = 9m for some integer m, examine the expression at k + 1: 4ᵏ⁺¹ + 6(k + 1) − 1 = 4·4ᵏ + 6k + 5. Writing 4ᵏ = 9m − 6k + 1 from the hypothesis gives 4(9m − 6k + 1) + 6k + 5 = 36m − 24k + 4 + 6k + 5 = 36m − 18k + 9, which is 9(4m − 2k + 1) — a multiple of 9. Both templates — rewrite the target, substitute the hypothesis, factor out the divisor — recur in every induction problem the syllabus has in store."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Prove 1 + 3 + 5 + … + (2n − 1) = n².",
+              "note": "Base 1 = 1; step k² + (2k + 1) = (k + 1)²."
+            },
+            {
+              "text": "Prove 4ⁿ + 6n − 1 is divisible by 9.",
+              "note": "Base 9; step yields 9(4m − 2k + 1) after substituting 4ᵏ = 9m − 6k + 1."
+            },
+            {
+              "text": "Where might a proof go wrong? \"Assume the result for k + 1.\"",
+              "note": "That assumes the conclusion — the step must be derived from P(k) alone."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "craft",
+      "title": "Exam craft for a formative topic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Because the topic is assessed formatively, the goal is transferable proof skill rather than memorised answers, and the skills transfer directly to the rest of the course. Writing every base case explicitly, keeping the hypothesis general, and finishing with the formal sentence invoking the principle are habits that the marking of any later proof rewards. In this chapter’s own practice, always state what P(n) actually claims before starting — students lose more marks by proving a nearby statement than by algebra slips."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two further drills are worth the time. First, reconstruct the statement from a pattern: given 1³ + 2³ + … + n³ = n²(n + 1)²/4 for small n, guess the general form and then prove it — guessing precedes induction, since induction verifies rather than discovers. Second, practise the algebra of replacing k by k + 1 in sums, because that mechanical step — writing out the extra term with its index shifted — is where most first attempts stumble. Treat the topic as training for Unit-II’s series work and Unit-IV’s limiting arguments, both of which rely on the same comfort with indexed expressions."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "State P(n) in words before proving it.",
+            "Compute the base case; never assert it.",
+            "Use the hypothesis exactly where the k-expression appears.",
+            "Finish with the sentence invoking the principle of induction.",
+            "Reconstruct-then-prove is the pattern for sum-identification problems."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The domino argument",
+      "description": "A row of ten standing dominoes with the first tipping into the second and a chain reaction continuing to the right; a callout over the first tile reads base case P(1), a callout over the second reads inductive step P(k) ⇒ P(k+1), and a bracket over the remaining tiles reads every natural number is reached.",
+      "labels": [
+        "First tile: base case verified by substitution",
+        "Each tile knocks the next: P(k) ⇒ P(k+1)",
+        "Bracket over the row: P(n) for all natural n",
+        "A gap between tiles: the chain of proof breaks there"
+      ]
+    },
+    {
+      "caption": "Figure: The structure of the proof on a number line",
+      "description": "A number line marked at 1, 2, 3 and onward to k, k+1 and beyond, with 1 shaded solid for the base case, an arrow from k to k+1 labelled the inductive step, and a lighter repeating pattern of arrows continuing past k+1 to indicate propagation to infinity.",
+      "labels": [
+        "1 shaded: the verified base",
+        "Arrow k → k+1: the conditional step",
+        "Repeating arrows: propagation",
+        "The set of truth is itself inductive",
+        "Least inductive subset = natural numbers"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A subset containing 1 and closed under adding one is called inductive.",
+    "The natural numbers are the least inductive subset of the reals.",
+    "Induction proves a statement by verifying the base case and the step.",
+    "The base case must be computed, not assumed.",
+    "The inductive step proves a conditional from P(k) alone.",
+    "Assuming P(k + 1) inside the step is circular reasoning.",
+    "Summation proofs: add the (k+1)-th term to the assumed sum.",
+    "Divisibility proofs: rewrite the hypothesis as “expression = multiple”, then factor.",
+    "Induction verifies a guessed statement; it does not discover the pattern.",
+    "The 2026-27 syllabus assesses this topic only formatively."
+  ],
+  "examFocus": [
+    "Write the three parts visibly: base, hypothesis, step, conclusion.",
+    "Always restate P(n) before starting — proving the wrong claim wastes everything.",
+    "In sums, write the extra term with its index shifted explicitly.",
+    "Since the topic is formative, use it to train proof writing for Units II and IV."
+  ],
+  "vocabulary": [
+    {
+      "word": "Inductive set",
+      "meaning": "A set containing 1 and closed under the successor operation."
+    },
+    {
+      "word": "Base case",
+      "meaning": "The verification of the statement at the first value, n = 1."
+    },
+    {
+      "word": "Inductive hypothesis",
+      "meaning": "The assumption that P(k) holds for an arbitrary admissible k."
+    },
+    {
+      "word": "Inductive step",
+      "meaning": "The proof that P(k) implies P(k + 1)."
+    },
+    {
+      "word": "Divisibility",
+      "meaning": "An expression leaving remainder zero when divided by a fixed integer."
+    },
+    {
+      "word": "Formative assessment",
+      "meaning": "Assessment for learning rather than for the summative grade."
+    },
+    {
+      "word": "Least inductive subset",
+      "meaning": "The smallest set satisfying both inductive conditions — the naturals."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-ind-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "To apply induction to a statement P(n), the first obligation is:",
+      "options": [
+        "To prove P(k + 1) is true",
+        "To verify P(1) by substitution",
+        "To assume P(n) for all n",
+        "To disprove a counterexample"
+      ],
+      "correctIndex": 1,
+      "answer": "To verify P(1) by substitution",
+      "explanation": "Without a verified base case the chain of implications has no starting point, and the step alone proves nothing."
+    },
+    {
+      "id": "cbse11-math-ind-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The inductive step of a proof establishes:",
+      "options": [
+        "P(k) is true for one value k",
+        "P(1) ⇒ P(2)",
+        "P(k) ⇒ P(k + 1) for arbitrary k ≥ 1",
+        "P(n) for every real n"
+      ],
+      "correctIndex": 2,
+      "answer": "P(k) ⇒ P(k + 1) for arbitrary k ≥ 1",
+      "explanation": "It is a conditional for general k; combined with the base case it propagates truth to all natural numbers."
+    },
+    {
+      "id": "cbse11-math-ind-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In proving 1 + 2 + … + n = n(n + 1)/2 by induction, the inductive step adds to the assumed sum:",
+      "options": [
+        "k(k + 1)/2",
+        "The term k + 1",
+        "The term 2k + 1",
+        "k²"
+      ],
+      "correctIndex": 1,
+      "answer": "The term k + 1",
+      "explanation": "Going from k terms to k + 1 terms means appending exactly the next term, k + 1, to the hypothesised sum."
+    },
+    {
+      "id": "cbse11-math-ind-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which step is circular reasoning?",
+      "options": [
+        "Computing P(1) and finding it true",
+        "Assuming P(k) and deriving P(k + 1)",
+        "Assuming P(k + 1) and deriving P(k)",
+        "Concluding P(n) for all n by the principle"
+      ],
+      "correctIndex": 2,
+      "answer": "Assuming P(k + 1) and deriving P(k)",
+      "explanation": "Deriving the smaller case from the larger by assumption uses the conclusion as a premise — the step must run forward from P(k)."
+    },
+    {
+      "id": "cbse11-math-ind-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The subset of the reals containing 1 and closed under adding one is called an ________ set.",
+      "answer": "inductive",
+      "explanation": "Inductive sets are the framework in which the principle is stated."
+    },
+    {
+      "id": "cbse11-math-ind-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The principle of mathematical induction concerns statements indexed by the ________ numbers.",
+      "answer": "natural",
+      "explanation": "The natural numbers are the least inductive subset of the reals — the reason the principle applies to them."
+    },
+    {
+      "id": "cbse11-math-ind-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the principle of mathematical induction in your own words.",
+      "answer": "If a statement P(n) is true for n = 1, and if the truth of P(k) always guarantees the truth of P(k + 1) for any natural number k, then P(n) is true for every natural number n. The justification is that the set of values where P holds is then an inductive set — it contains 1 and is closed under the successor operation — and the natural numbers are the smallest such set, so no natural number can escape it.",
+      "explanation": "Both conditions (verified base, valid step for arbitrary k) plus the least-inductive-subset justification are required."
+    },
+    {
+      "id": "cbse11-math-ind-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Show that 9ⁿ − 8n − 1 is divisible by 64 for every natural number n.",
+      "answer": "Base case: n = 1 gives 9 − 8 − 1 = 0, and 0 is divisible by 64 (0 = 64 × 0), so P(1) holds. Inductive hypothesis: assume 9ᵏ − 8k − 1 = 64m for some integer m. For k + 1, expand 9ᵏ⁺¹ − 8(k + 1) − 1 = 9·9ᵏ − 8k − 9. From the hypothesis, 9ᵏ = 64m + 8k + 1, so 9(64m + 8k + 1) − 8k − 9 = 576m + 72k + 9 − 8k − 9 = 576m + 64k = 64(9m + k), which is a multiple of 64. Since the base case holds and the step is valid for arbitrary k, the statement holds for every natural number by the principle of induction.",
+      "explanation": "A computed base case, the hypothesis written as an equality, the substitution at k + 1 and the final factorisation of 64 are all required."
+    },
+    {
+      "id": "cbse11-math-ind-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove by induction that 1³ + 2³ + 3³ + … + n³ = [n(n + 1)/2]² for all natural numbers n.",
+      "answer": "Statement P(n): the sum of the first n cubes equals the square of the sum of the first n integers. Base case n = 1: left side 1³ = 1; right side [1·2/2]² = 1² = 1 — both sides agree, so P(1) is true. Inductive hypothesis: assume P(k), that is 1³ + … + k³ = [k(k + 1)/2]² for an arbitrary k ≥ 1. Step: consider the sum of the first k + 1 cubes. By the hypothesis it equals [k(k + 1)/2]² + (k + 1)³. Factor out (k + 1)²/4: (k + 1)² [k²/4 + (k + 1)] = (k + 1)² (k² + 4k + 4)/4 = (k + 1)² (k + 2)²/4 = [(k + 1)(k + 2)/2]². This is precisely the right-hand side with n replaced by k + 1, so P(k + 1) follows from P(k). Conclusion: since P(1) is true and P(k) ⇒ P(k + 1) for every k ≥ 1, the principle of mathematical induction gives P(n) for all natural numbers n. Interpretation: the result says the sum of cubes equals the square of the triangular number, which is a pleasing symmetry worth remembering even after the proof.",
+      "explanation": "Full marks require all four parts — restated statement, computed base, hypothesis, and the factorisation producing (k+1)(k+2)/2 squared — with the hypothesis used exactly where the k-sum appears."
+    },
+    {
+      "id": "cbse11-math-ind-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student writes: “Assume the statement is true for k + 1. Then adding 1 to both sides gives it for k + 2, so it holds for all n.” Identify every flaw, and then prove the statement 2ⁿ > 2n + 1 for all n ≥ 3 correctly.",
+      "answer": "The student’s argument has three flaws. First, it never verifies a base case, so there is no starting point — and indeed the statement may simply be false at n = 1 (2 > 3 fails), which a base check would have exposed. Second, the inductive step runs backwards: it assumes P(k + 1) and derives P(k + 2), which, even if valid, still needs a first case to set the chain moving. Third, and worst, it assumes the very thing it must prove — the hypothesis must be P(k), from which P(k + 1) is derived; assuming the target makes any statement provable. Correct proof for 2ⁿ > 2n + 1: base case n = 3 gives 2³ = 8 and 2·3 + 1 = 7, and 8 > 7, so P(3) holds. Hypothesis: assume 2ᵏ > 2k + 1 for some k ≥ 3. Step: 2ᵏ⁺¹ = 2·2ᵏ > 2(2k + 1) = 4k + 2 (multiplying the hypothesis by the positive number 2 preserves the inequality). It remains to show 4k + 2 ≥ 2(k + 1) + 1 = 2k + 3, and indeed 4k + 2 − (2k + 3) = 2k − 1 ≥ 5 > 0 for k ≥ 3, so 2ᵏ⁺¹ > 4k + 2 > 2k + 3 = 2(k+1) + 1, establishing P(k + 1). By the principle, the inequality holds for every n ≥ 3. The lesson: inequalities in induction need a second, elementary comparison after the hypothesis is used, and the base must start where the statement becomes true.",
+      "explanation": "Full marks require all three flaws identified by name, and the full correct proof including the auxiliary comparison 4k + 2 > 2k + 3 with its justification for k ≥ 3."
+    }
+  ]
+}

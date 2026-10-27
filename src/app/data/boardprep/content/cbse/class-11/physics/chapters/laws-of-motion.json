@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-laws",
+  "title": "Laws of Motion",
+  "kind": "physics",
+  "tagline": "Newton’s three laws, friction and circular dynamics — the force analysis that every later chapter builds on.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "This chapter is the working core of mechanics. It converts the intuitive idea of force into Newton’s three precise laws, adds the conservation of linear momentum that follows from the third law, and equips the student with the two indispensable techniques of the subject: the free-body diagram and the resolution of forces. Friction, equilibrium of concurrent forces and the dynamics of circular motion complete the unit, and each is presented as an application of the same method — draw the bodies, draw the forces, resolve, and apply F = ma per direction.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-III: Laws of Motion (23 marks shared with the Kinematics chapters)."
+      },
+      {
+        "label": "Newton’s laws",
+        "value": "First: inertia. Second: F = dp/dt = ma at constant mass. Third: action and reaction are equal and opposite, on different bodies."
+      },
+      {
+        "label": "Momentum",
+        "value": "p = mv; total momentum of an isolated system is conserved in every collision."
+      },
+      {
+        "label": "Friction",
+        "value": "f ≤ μN, with limiting friction μₛN and kinetic friction μₖN < μₛN opposing relative sliding."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Apply each of Newton’s laws to identify forces and write equations of motion.",
+    "Draw free-body diagrams and resolve forces along convenient axes.",
+    "Use conservation of momentum in collisions and in the recoil of guns.",
+    "Compute friction in limiting and kinetic regimes and solve connected-body problems.",
+    "Solve level-road and banked-road circular motion problems."
+  ],
+  "learn": [
+    {
+      "id": "laws",
+      "title": "Newton’s laws and the free-body diagram",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law defines force by describing its absence: a body remains at rest or in uniform straight-line motion unless a net external force compels otherwise — this property is inertia, and the law also fixes inertial frames as the frames in which the law holds. The second law quantifies force: the net force equals the rate of change of momentum, F = dp/dt, which at constant mass becomes the familiar F = ma, and it fixes the newton as the force giving a kilogram an acceleration of one metre per second squared. The third law completes the set: every force is paired with an equal and opposite reaction acting on a different body — a fact whose most important consequence is that internal forces cannot change the total momentum of a system, which is why momentum conservation follows from the third law rather than being an independent principle."
+        },
+        {
+          "type": "paragraph",
+          "text": "Applying the laws reliably requires one tool above all others: the free-body diagram. Isolate the body, draw only the forces acting on it from outside (never its own weight as a force on something else, and never the reaction it exerts), label each with its source, and choose axes that reduce the number of components. Then apply F = ma per direction — along the incline and perpendicular to it for a block on a slope, horizontal and vertical for a hanging pulley problem. The most common conceptual error is including a fictitious forward force \"of motion\" on a projectile or a sliding block: once a push ends, no forward force exists, and the object coasts by inertia while friction or drag decelerates it. Stating which body the diagram is for, and rejecting forces that act elsewhere, prevents this and is exactly what examiners reward."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First law: defines inertia and inertial frames.",
+            "Second law: F = dp/dt = ma; force is a vector with SI unit newton.",
+            "Third law: equal and opposite forces act on different bodies.",
+            "Free-body diagrams isolate one body and its external forces only.",
+            "Apply F = ma separately along each chosen axis.",
+            "No forward force of motion exists — inertia is not a force."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "momentum",
+      "title": "Impulse, conservation and its applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Momentum p = mv is the quantity of motion, and the second law written as F = dp/dt says that force is momentum’s rate of change. Integrating over a time interval gives the impulse–momentum theorem: the impulse Ft equals the change in momentum — the reason heavy, slow stops and light, fast ones can share the same impulse, and the entire design logic of airbags, crumple zones and padded gloves. When the net external force on a system is zero, the total momentum cannot change: that is conservation of linear momentum, and it holds even while individual bodies exchange enormous internal forces, because those forces appear in equal and opposite pairs that cancel in the total."
+        },
+        {
+          "type": "paragraph",
+          "text": "Collisions are the standard laboratory of the idea. Perfectly elastic collisions conserve both momentum and kinetic energy; perfectly inelastic ones conserve momentum alone, the bodies sticking together and sharing a common final velocity; and every real collision lies between the two. One dimension suffices for the syllabus, and the pattern is always the same: write momentum conservation for the pair, add the energy statement for elastic cases, and solve the two equations for the two final velocities. The gun-recoil problem is the third-law twin of the collision: the explosion is entirely internal, so momentum stays zero, and the bullet’s forward momentum is matched by the gun’s backward momentum — which is why heavy guns kick less. Throughout, the conservation statement must be made for a system whose external forces are genuinely negligible over the interaction time; gravity acting during a long flight, for instance, means momentum is conserved horizontally but not vertically."
+        },
+        {
+          "type": "table",
+          "caption": "Types of collision",
+          "columns": [
+            "Type",
+            "Momentum",
+            "Kinetic energy",
+            "Result"
+          ],
+          "rows": [
+            [
+              "Elastic",
+              "Conserved",
+              "Conserved",
+              "Bodies rebound with shared energies"
+            ],
+            [
+              "Perfectly inelastic",
+              "Conserved",
+              "Lost to heat/deformation",
+              "Bodies share one final velocity"
+            ],
+            [
+              "General (real)",
+              "Conserved",
+              "Decreases",
+              "Partial rebound, some energy converted"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 5 kg body at 8 m/s hits a stationary 3 kg body and they stick: final velocity?",
+              "note": "Momentum 40 = 8v → v = 5 m/s."
+            },
+            {
+              "text": "Bullet 0.05 kg at 400 m/s from a 2 kg gun: recoil speed?",
+              "note": "0.05 × 400 = 2 × v → v = 1 m/s backward."
+            },
+            {
+              "text": "A force of 20 N acts for 0.5 s: impulse delivered?",
+              "note": "Ft = 10 N·s = change in momentum."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "friction",
+      "title": "Friction, equilibrium and connected bodies",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Friction is the tangential force resisting relative motion between surfaces in contact, and it is not a fixed number: it adjusts up to a maximum, the limiting friction fₘ = μₛN, proportional to the normal reaction and independent of the contact area. Below that limit, static friction exactly opposes the applied force — a block pushed gently does not move because friction matches your push, not because of some constant property. Beyond the limit the surfaces slide, and kinetic friction μₖN takes over, slightly smaller than the static maximum and independent of speed — which is why a body already sliding needs less force to keep moving than to start it. Lubrication, tyres and treads, and the road-grit treatment of icy roads are all manipulations of these coefficients, and the topic’s practical importance is why examiners return to it constantly."
+        },
+        {
+          "type": "paragraph",
+          "text": "Equilibrium problems join friction to Newton’s laws in the standard technique: for a body at rest or in uniform motion, the net force vanishes in every direction, so ΣFₓ = 0 and ΣFᵧ = 0 give simultaneous equations. Connected bodies — blocks linked by strings over pulleys — are handled by isolating each body, drawing its diagram, and adding the constraint that the string’s tension is uniform and the bodies share the magnitude of acceleration. An inclined plane adds resolution: the component of weight along the slope is mg sin θ and perpendicular to it is mg cos θ, so a block slides when mg sin θ exceeds the limiting friction μₛmg cos θ — that is, when tan θ exceeds μₛ, a beautifully clean result independent of both mass and area. Work these two facts together and the whole of school friction becomes one diagram and two equations."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Limiting friction fₘ = μₛN; kinetic friction μₖN is smaller and speed-independent.",
+            "Static friction matches the applied force up to the limit — it is not constant.",
+            "On an incline: mg sin θ down the slope, mg cos θ into the surface.",
+            "Sliding begins when tan θ > μₛ — independent of mass and area.",
+            "Equilibrium: ΣF = 0 per direction; tension is uniform over an ideal pulley."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "circular",
+      "title": "Circular dynamics: level and banked roads",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Uniform circular motion requires a centripetal force, and this chapter supplies the force analysis that the kinematics chapter’s a = v²/r demanded. For a car on a level circular road the agent is friction: mv²/r = μₛmg gives the safe speed v = √(μₛgr), beyond which the tyres can no longer turn the car and it slides outward — not flung out by a mysterious force, but continuing in a straighter path than the road while the road curves away. For a banked road, the normal reaction is tilted inward by the banking angle φ, and its horizontal component supplies part of the centripetal force: with no friction needed, tan φ = v²/(rg). Real bends combine both — the friction limit rises by the banked contribution — which is why motorway ramps are banked and racing circuits steeply so."
+        },
+        {
+          "type": "paragraph",
+          "text": "The same analysis describes any object in circular motion under identified forces, and the syllabus expects fluency with the standard cases: a stone whirled in a horizontal circle (tension provides the centripetal force), a car over a crest or through a dip (weight and normal reaction combine, with the apparent weight changing), and a conical pendulum (tension’s horizontal component turns the bob). In every case the recipe is identical — identify the circle and its plane, find the real forces pointing toward its centre, resolve, and set the resultant equal to mv²/r. What varies is only the force inventory. Practise the crest-and-dip case in particular: over a crest, mg − N = mv²/r so the apparent weight is less than mg (the light-headed moment on a roller coaster), while in a dip N − mg = mv²/r so it is more — a question that tests Newton’s laws rather than any circular-motion formula."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 1 000 kg car on a 50 m bend at 10 m/s: centripetal force?",
+              "note": "F = mv²/r = 2 000 N toward the centre."
+            },
+            {
+              "text": "Safe speed on a level road, μ = 0.4, r = 30 m, g = 10.",
+              "note": "v = √(0.4 × 10 × 30) = √120 ≈ 11 m/s."
+            },
+            {
+              "text": "Over a crest at 15 m/s, r = 30 m: apparent weight ratio.",
+              "note": "N/mg = 1 − v²/(rg) = 1 − 7.5/10 = 0.25 — a quarter of the true weight."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A free-body diagram of a block on a rough incline",
+      "description": "A block at rest on an incline of angle θ, isolated from the surface; arrows drawn from its centre show weight mg downward, normal reaction N perpendicular to the slope, friction f up the slope, and a component frame splitting mg into mg sin θ down the slope and mg cos θ into it, with the axis labels marked.",
+      "labels": [
+        "Weight mg resolved into two components",
+        "mg sin θ pulls down the slope",
+        "mg cos θ presses into the surface",
+        "Normal reaction N = mg cos θ",
+        "Friction f opposes the slide tendency"
+      ]
+    },
+    {
+      "caption": "Figure: Action and reaction forces on two blocks",
+      "description": "Two blocks in contact pushed together; the first block pushed by force P, contact force N₂₁ drawn on block one pointing right, its reaction N₁₂ drawn on block two pointing left, each arrow labelled with the body it acts on, and a caption noting the pair never cancels because the two arrows act on different bodies.",
+      "labels": [
+        "Applied force P on block one",
+        "Contact force acts on each block",
+        "The pair is equal and opposite",
+        "Acts on different bodies, so never cancels",
+        "Internal pairs cannot change total momentum"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "First law: inertia; defines inertial frames.",
+    "Second law: F = dp/dt = ma; the newton is defined by it.",
+    "Third law: forces come in equal and opposite pairs on different bodies.",
+    "Free-body diagrams isolate one body and its external forces only.",
+    "Impulse Ft equals the change in momentum.",
+    "Momentum is conserved for any system with no net external force.",
+    "Elastic collisions conserve kinetic energy; inelastic ones do not.",
+    "Limiting friction μₛN is the maximum; static friction adjusts up to it.",
+    "A block slides down a rough incline when tan θ > μₛ.",
+    "Circular motion needs a centripetal force: friction on a level road, normal-reaction component when banked."
+  ],
+  "examFocus": [
+    "Draw and label the free-body diagram — it earns method marks on its own.",
+    "State which body and which law each equation comes from.",
+    "Momentum answers must name the system whose external forces are negligible.",
+    "Friction questions: say whether static or kinetic regime applies before computing."
+  ],
+  "vocabulary": [
+    {
+      "word": "Inertia",
+      "meaning": "Resistance to change of motion; measured by mass."
+    },
+    {
+      "word": "Momentum (p)",
+      "meaning": "Mass times velocity — the quantity of motion."
+    },
+    {
+      "word": "Impulse",
+      "meaning": "Force times time; equals the change in momentum."
+    },
+    {
+      "word": "Conservation of momentum",
+      "meaning": "Total momentum fixed when net external force vanishes."
+    },
+    {
+      "word": "Free-body diagram",
+      "meaning": "One body with all external forces drawn and labelled."
+    },
+    {
+      "word": "Coefficient of friction",
+      "meaning": "Ratio of friction to normal reaction: μ = f/N."
+    },
+    {
+      "word": "Centripetal force",
+      "meaning": "The net inward force that turns a body in a circle."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-laws-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body of mass 5 kg experiences a net force of 20 N. Its acceleration is:",
+      "options": [
+        "100 m/s²",
+        "0.25 m/s²",
+        "4 m/s²",
+        "25 m/s²"
+      ],
+      "correctIndex": 2,
+      "answer": "4 m/s²",
+      "explanation": "From F = ma: a = 20/5 = 4 m/s² in the direction of the force."
+    },
+    {
+      "id": "cbse11-phy-laws-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A bullet of mass 0.05 kg moving at 400 m/s embeds itself in a 1.95 kg block initially at rest. The common final velocity is:",
+      "options": [
+        "10 m/s",
+        "4 m/s",
+        "8 m/s",
+        "20 m/s"
+      ],
+      "correctIndex": 0,
+      "answer": "10 m/s",
+      "explanation": "Momentum: 0.05 × 400 = (0.05 + 1.95)v, so 20 = 2v and v = 10 m/s; kinetic energy is not conserved in this perfectly inelastic collision."
+    },
+    {
+      "id": "cbse11-phy-laws-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A block just slides down a rough incline of angle θ. The coefficient of static friction equals:",
+      "options": [
+        "sin θ",
+        "cos θ",
+        "tan θ",
+        "cot θ"
+      ],
+      "correctIndex": 2,
+      "answer": "tan θ",
+      "explanation": "Sliding begins when mg sin θ = μₛmg cos θ, so μₛ = tan θ — independent of both mass and contact area."
+    },
+    {
+      "id": "cbse11-phy-laws-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car travels over a circular crest of radius 30 m at 15 m/s. The driver feels:",
+      "options": [
+        "Heavier than usual",
+        "Lighter than usual",
+        "Exactly normal weight",
+        "No change until the dip"
+      ],
+      "correctIndex": 1,
+      "answer": "Lighter than usual",
+      "explanation": "Over the crest, mg − N = mv²/r, so N = mg(1 − v²/rg) < mg — the reduced normal reaction is felt as lightness (v²/rg = 225/300 = 0.75, so only a quarter of the weight presses on the seat)."
+    },
+    {
+      "id": "cbse11-phy-laws-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The tendency of a body to resist a change in its state of motion is called ________ .",
+      "answer": "inertia",
+      "explanation": "Mass is the quantitative measure of inertia — heavier bodies resist changes more."
+    },
+    {
+      "id": "cbse11-phy-laws-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The maximum value of static friction, reached just before a body slides, is the ________ friction.",
+      "answer": "limiting",
+      "explanation": "Its value is μₛN; below it, static friction adjusts to match the applied force exactly."
+    },
+    {
+      "id": "cbse11-phy-laws-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Newton’s third law and explain why the forces in an action-reaction pair do not cancel each other.",
+      "answer": "Newton’s third law states that for every force there is a reaction equal in magnitude and opposite in direction, acting on a different body. If body A exerts force F on body B, then B exerts −F on A. The pair does not cancel because the two forces act on different objects: cancelling requires forces on the same body, and here each force belongs to a separate free-body diagram. Consider a book resting on a table: the book presses down on the table with its weight, and the table pushes up on the book with a normal reaction of equal size. The book’s motion is decided only by the forces on the book — gravity down and the table’s reaction up, which balance. The table’s forces are gravity and the book’s push, which it absorbs. Attempting to cancel the book’s push against the table’s reaction would mix two diagrams and produce nonsense — for instance concluding that no force acts on anything at all, which no experience supports.",
+      "explanation": "The law stated with its two-body requirement, the explicit reason the pair cannot cancel, and the book-on-table illustration with the free-body argument."
+    },
+    {
+      "id": "cbse11-phy-laws-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the expression for the maximum safe speed of a car on a level circular road of radius r with coefficient of friction μ.",
+      "answer": "On a level circular road, the car turning in a horizontal circle needs a centripetal force of magnitude mv²/r directed toward the centre. No physical cable acts: the only horizontal force available is the friction between tyres and road, directed radially inward at the limiting value when the car is at its safe maximum. Setting the friction limit equal to the required centripetal force: μmg = mv²/r. The mass cancels — a fact of real practical importance, since it means the safe speed does not depend on how heavy the car is. Solving: v² = μgr, so v = √(μgr). Check the dimensions: √((m/s²)(m)) = √(m²/s²) = m/s ✓, a speed. Limits: a larger radius raises the safe speed (gentler bends are safer) and a higher μ raises it (grippy tyres or dry roads), both as road experience confirms. With μ = 0.4, r = 30 m and g = 10 m/s²: v = √120 ≈ 11 m/s ≈ 39 km/h, the order of magnitude expected for a tight 30 m bend.",
+      "explanation": "The centripetal requirement, the friction identification, the mass cancellation, and the dimensional and practical checks."
+    },
+    {
+      "id": "cbse11-phy-laws-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two blocks of mass 4 kg and 2 kg are in contact on a frictionless surface. A force of 18 N pushes the 4 kg block. Find the acceleration and the contact force between the blocks.",
+      "answer": "Method 1 — system first, then isolation. Treat both blocks as one body of mass 6 kg: the net external horizontal force is 18 N, so a = F/m = 18/6 = 3 m/s². Now isolate the 2 kg block: the only horizontal force on it is the contact force N from the 4 kg block, so N = 2 × 3 = 6 N. Verify with the 4 kg block: 18 − N = 4 × 3 = 12, so N = 6 N ✓ — the same value, as the third law requires, since the contact force is an internal pair. Method 2 — isolation of both from the start: on the 4 kg block, 18 − N = 4a; on the 2 kg block, N = 2a. Substituting the second into the first: 18 − 2a = 4a, so a = 3 m/s² and N = 6 N, matching. Sanity checks: the contact force 6 N is less than the applied 18 N, as it must be (part of the push is spent accelerating the pushing block itself); it is also exactly proportional to the masses being pushed (one third of 18 N for the one-third-mass block) ✓.",
+      "explanation": "Both methods with the same result, the third-law consistency check, and the proportional-mass sanity check."
+    },
+    {
+      "id": "cbse11-phy-laws-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain, using Newton’s laws, why a cyclist must lean into a bend, derive the lean angle for a frictionless banked turn, and describe what happens if the bend is taken too fast.",
+      "answer": "The cyclist and machine must undergo centripetal acceleration v²/r toward the centre of the bend, which requires a net horizontal force of that magnitude. On a frictionless banked surface only two forces act: gravity mg downward and the normal reaction N perpendicular to the road. Resolving: vertically N cos φ = mg (no vertical acceleration), horizontally N sin φ = mv²/r. Dividing: tan φ = v²/(rg), so the lean or banking angle φ = tan⁻¹(v²/rg). Physically, leaning (or banking) tilts the normal reaction so its horizontal component turns the rider; the lean angle therefore grows with speed and shrinks with radius — steep for tight slow bends, gentle for fast motorways. If the bend is taken too fast for the given angle, the required horizontal component exceeds what the tilted normal can supply: with friction present, extra grip fills the gap until the friction limit is reached, beyond which the tyres slide and the rider continues on a straighter path than the curve — outward relative to the road — while the road curves away beneath. Taken too slowly the rider falls inward, since the same tilt that matched the faster speed now over-supplies horizontal force. The deeper point is that no mysterious outward force exists: in the ground frame the rider simply obeys Newton’s first law until friction or the road surface provides the centripetal force the curved path demands.",
+      "explanation": "Both resolutions, the tan φ derivation, the physical reading of the lean, and the over-speed failure explained without any fictitious force."
+    }
+  ]
+}

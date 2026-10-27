@@ -1,0 +1,390 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-pnc",
+  "title": "Permutations and Combinations",
+  "kind": "mathematics",
+  "tagline": "Counting without listing: the multiplication principle, the two formulae, and the question that decides which one you need.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Combinatorics is the art of counting objects you have no intention of enumerating, and this chapter builds the two instruments the syllabus requires. It starts from the fundamental principle of counting — sequential choices multiply, alternative cases add — and derives the formulae for nPr and nCr from factorial arithmetic, showing how the two are connected. The real difficulty of the subject is not the formulae but the diagnosis that precedes them: deciding whether a problem asks for an arrangement or a selection, and every worked example here is chosen to sharpen that judgement.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Algebra (25 marks shared with the other Algebra chapters)."
+      },
+      {
+        "label": "Multiplication principle",
+        "value": "If a task takes r stages with a₁, a₂, … ways, the total is a₁ × a₂ × …"
+      },
+      {
+        "label": "The pair",
+        "value": "nPr = n!/(n − r)! counts arrangements; nCr = nPr/r! = n!/(r!(n − r)!) counts selections."
+      },
+      {
+        "label": "Connection",
+        "value": "Every selection of r objects can be arranged in r! ways, so nPr = nCr × r!."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Apply the fundamental principle of counting to multi-stage tasks.",
+    "Evaluate factorials and derive the permutation formula.",
+    "Derive the combination formula and relate it to permutations.",
+    "Decide whether a problem needs arrangements, selections or a case split.",
+    "Solve standard word problems on committees, selections and arrangements."
+  ],
+  "learn": [
+    {
+      "id": "principle",
+      "title": "The fundamental principle of counting",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Suppose a task is completed in stages: first choose one of a₁ options, then one of a₂ options, and so on through r stages. The number of complete ways to run the task is the product a₁ × a₂ × … × aᵣ, because every first choice can be paired with every second choice, and each of those pairings with every third, and so on down the chain. This is the multiplication principle, and it is the engine under every formula in the chapter. Its companion is the addition principle: if a task can be done in one of several mutually exclusive ways — this route or that one — the counts add, since the options do not overlap."
+        },
+        {
+          "type": "paragraph",
+          "text": "The distinction between the principles is decided by the word or. Sequential requirements (this and then that) multiply; alternative cases (this or that) add. Most counting errors come from mixing them — multiplying when one of two exclusive cases was available, or adding when both stages were compulsory. A disciplined solver writes the stages down before computing: name each stage, decide whether its choices are simultaneous or alternative, and only then reach for the appropriate operation. The factorial emerges naturally from this framework: n! counts the ways to arrange n distinct objects in order, because the first position can take any of n objects, the second any of the remaining n − 1, and the product n(n − 1)…1 is exactly n factorial."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Stages that all must happen: multiply the counts.",
+            "Alternatives that are mutually exclusive: add the counts.",
+            "n! = n(n − 1)(n − 2)…1 counts orderings of n distinct objects.",
+            "0! = 1 by convention, which keeps the formulae consistent.",
+            "Write the stages before computing — the error is usually in the setup."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "permutations",
+      "title": "Permutations: arrangements and their derivation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A permutation is an arrangement in which order matters, and the formula follows directly from the multiplication principle. To place r of n distinct objects into r ordered positions: the first position takes any of n objects, the second any of the remaining n − 1, and the r-th any of the n − r + 1 still free, so the count is n(n − 1)(n − 2)…(n − r + 1). Writing the full factorial and cancelling the unchosen tail gives the compact formula nPr = n!/(n − r)!, which is the expression the syllabus asks you to derive. When r = n, this returns n! — the count of all orderings of the whole set, a useful consistency check."
+        },
+        {
+          "type": "paragraph",
+          "text": "Permutation problems vary in how the objects behave. Where objects are distinct, the formula applies directly; where some objects repeat, identical items are indistinguishable, so arrangements that differ only in the positions of identical objects count once rather than r! times — the count becomes the total factorial divided by the factorial of each repeated group, which is how the arrangements of MISSISSIPPI are computed: eleven letters with four, four and two repetitions give 11!/(4!4!2!). Where a problem imposes restrictions — a particular person must sit at an end, a vowel must lead — the cleanest method is to fill the restricted positions first and then the rest, so the constraint is satisfied by construction rather than by subtraction afterwards."
+        },
+        {
+          "type": "table",
+          "caption": "Deriving nPr step by step",
+          "columns": [
+            "Step",
+            "Choices available",
+            "Running product"
+          ],
+          "rows": [
+            [
+              "Position 1",
+              "n objects",
+              "n"
+            ],
+            [
+              "Position 2",
+              "n − 1 objects",
+              "n(n − 1)"
+            ],
+            [
+              "Position r",
+              "n − r + 1 objects",
+              "n(n − 1)…(n − r + 1)"
+            ],
+            [
+              "As factorials",
+              "Multiply and cancel the tail",
+              "n!/(n − r)!"
+            ],
+            [
+              "Check r = n",
+              "All positions filled",
+              "n!/0! = n!"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Arrange 5 distinct books on a shelf.",
+              "note": "5! = 120 arrangements."
+            },
+            {
+              "text": "Number of 3-letter words from ABCDE with no repetition.",
+              "note": "5P3 = 5!/(5 − 3)! = 60."
+            },
+            {
+              "text": "Arrangements of MISSISSIPPI (11 letters, 4·4·2 alike).",
+              "note": "11!/(4!·4!·2!) = 34,650."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combinations",
+      "title": "Combinations: selections and the connection",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A combination is a selection in which order does not matter: a committee of three chosen from twelve is the same group whichever order the names were taken in. Every selection of r objects from n can be rearranged in r! ways, and each rearrangement is a distinct permutation, so the number of permutations equals the number of selections times r!. Solving for the selection count gives nCr = nPr/r! = n!/(r!(n − r)!) — the second formula the syllabus requires you to derive — and the same equation states the connection between the two: nPr = nCr × r!. Two structural facts follow immediately and are used constantly: nCr = n(n − C) by symmetry (choosing r to include is choosing n − r to leave), and nC0 = nCn = 1."
+        },
+        {
+          "type": "paragraph",
+          "text": "The diagnosis that decides between the two formulae is the whole craft of the chapter. Ask what a valid answer looks like: if two candidates written in different orders would be judged different, order matters and you want permutations; if they describe the same thing, you want combinations. Committees, teams, tasting menus and choice sets are combinations; races, rankings, codes and word formations are permutations. Many problems need both — arrange the committee’s speaker after choosing the committee, for instance — and then the structure is a product of a selection and a subsequent arrangement. When neither formula fits because conditions interlock, fall back on the two principles themselves: split into cases and count each one."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A committee of 3 from 10 people.",
+              "note": "10C3 = 120 — order of choosing is irrelevant."
+            },
+            {
+              "text": "A president, secretary and treasurer from 10.",
+              "note": "10P3 = 720 — the three posts are distinguishable."
+            },
+            {
+              "text": "Ways to choose 2 then arrange those 2.",
+              "note": "nC2 × 2! = nP2 — the connection in action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strategy",
+      "title": "Exam strategy: choosing the right model",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Before touching a formula, translate the problem into a stage diagram: list what must be decided and in what order, and mark whether each decision is an alternative (add) or a further requirement (multiply). This single habit resolves the majority of ambiguous wordings. The typical traps are worth naming: problems that secretly care about order (assigning three different posts) are read as committees because the word group appears; problems that restrict positions are easier built than corrected; and problems mixing both operations are solved in two steps — select, then arrange — rather than by one grand formula."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two verification habits repay themselves. First, sanity-check with small numbers: replace n and r by 3 and 2 and count on your fingers — if your formula disagrees with your fingers, the model is wrong. Second, use the identity checks: nCr must be an integer, nC1 must equal n, and the sum of nCr over r from 0 to n must equal 2ⁿ, since every subset of an n-set is being counted. Those three checks are cheap, and they catch the errors that multiple-choice questions are designed to reward."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write the stages; mark alternatives with or (add) and requirements with and (multiply).",
+            "Order matters → permutations; order irrelevant → combinations.",
+            "Restricted positions: fill them first.",
+            "Mixed problems: select, then arrange.",
+            "Check with small n and with nC1 = n and Σ nCr = 2ⁿ."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The multiplication principle as a branch diagram",
+      "description": "A tree with 3 first-stage branches, each splitting into 4 second-stage branches, each of those splitting into 2 leaves; the roots labelled stage 1 choices, the middle labelled stage 2 choices, and a bracket at the right counting 3 × 4 × 2 = 24 complete paths.",
+      "labels": [
+        "Stage 1: 3 choices",
+        "Stage 2: 4 choices for each",
+        "Stage 3: 2 choices for each",
+        "Every path is one complete outcome",
+        "Total = product of the stage counts"
+      ]
+    },
+    {
+      "caption": "Figure: Selection against arrangement",
+      "description": "Two panels side by side. Left: three names in a circle marked committee — the same three names in a different order fade to identical, captioned order does not matter. Right: the same three names in three labelled posts A, B, C, with arrows showing the orders remain distinct, captioned order matters.",
+      "labels": [
+        "Committee: {X, Y, Z} is one outcome",
+        "Different orders of choosing collapse",
+        "Posts: XYZ, XZY … are six outcomes",
+        "Same objects, different question",
+        "Combination on the left, permutation on the right"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Sequential stages multiply; exclusive alternatives add.",
+    "n! counts orderings of n distinct objects; 0! = 1.",
+    "nPr = n!/(n − r)! counts arrangements of r objects from n.",
+    "nCr = n!/(r!(n − r)!) counts selections of r objects from n.",
+    "nPr = nCr × r! — every selection can be ordered r! ways.",
+    "nCr = n(n − C) by symmetry; nC1 = n; Σ nCr = 2ⁿ.",
+    "Repeated objects: divide by the factorial of each identical group.",
+    "Restricted positions are filled first, not subtracted afterwards.",
+    "Two-step problems: select, then arrange among themselves.",
+    "Sanity-check small cases against the formula before committing."
+  ],
+  "examFocus": [
+    "Diagnose order-sensitivity before selecting a formula — that is the real question.",
+    "Show the stage breakdown; method marks attach to the setup.",
+    "Committee plus office-bearer problems are two-step: nCr then r!.",
+    "Verify with symmetry identities: nC1 = n and total subsets 2ⁿ."
+  ],
+  "vocabulary": [
+    {
+      "word": "Factorial (n!)",
+      "meaning": "The product of the positive integers up to n; counts orderings."
+    },
+    {
+      "word": "Permutation",
+      "meaning": "An arrangement where order matters."
+    },
+    {
+      "word": "Combination",
+      "meaning": "A selection where order does not matter."
+    },
+    {
+      "word": "Multiplication principle",
+      "meaning": "Compulsory stages multiply their counts."
+    },
+    {
+      "word": "Addition principle",
+      "meaning": "Exclusive cases add their counts."
+    },
+    {
+      "word": "Distinct vs identical",
+      "meaning": "Repeated objects collapse otherwise different arrangements."
+    },
+    {
+      "word": "Sanity check",
+      "meaning": "Testing the formula on a case you can count by hand."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-pnc-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of 6P4 equals:",
+      "options": [
+        "360",
+        "720",
+        "15",
+        "24"
+      ],
+      "correctIndex": 0,
+      "answer": "360",
+      "explanation": "6P4 = 6!/2! = 720/2 = 360 — four ordered positions drawn from six objects."
+    },
+    {
+      "id": "cbse11-math-pnc-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of ways to choose a committee of 3 from 10 people is:",
+      "options": [
+        "720",
+        "120",
+        "30",
+        "1000"
+      ],
+      "correctIndex": 1,
+      "answer": "120",
+      "explanation": "A committee ignores order, so 10C3 = (10 × 9 × 8)/(3 × 2 × 1) = 120."
+    },
+    {
+      "id": "cbse11-math-pnc-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Using the multiplication principle, three different posts filled from 8 candidates give:",
+      "options": [
+        "8C3 ways",
+        "8P3 ways",
+        "3⁸ ways",
+        "8³ ways"
+      ],
+      "correctIndex": 1,
+      "answer": "8P3 ways",
+      "explanation": "The posts are distinguishable, so order matters: 8P3 = 8 × 7 × 6 = 336 ways."
+    },
+    {
+      "id": "cbse11-math-pnc-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If nC3 = nC5, then n equals:",
+      "options": [
+        "3 + 5 = 8",
+        "5 − 3 = 2",
+        "3 × 5 = 15",
+        "3 ÷ 5 = 0.6"
+      ],
+      "correctIndex": 0,
+      "answer": "3 + 5 = 8",
+      "explanation": "By symmetry nCr = nC(n−r) gives n = 3 + 5 = 8; the only other possibility would be r = n − r, which does not apply here."
+    },
+    {
+      "id": "cbse11-math-pnc-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The product n(n − 1)(n − 2)…1 is written n factorial, with the notation ________ .",
+      "answer": "n!",
+      "explanation": "The factorial collects the descending product and counts orderings of n distinct objects."
+    },
+    {
+      "id": "cbse11-math-pnc-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The connection between the two formulae is nPr = nCr × ________ .",
+      "answer": "r!",
+      "explanation": "Each selection of r objects can be arranged among itself in r! ways, giving that many permutations per combination."
+    },
+    {
+      "id": "cbse11-math-pnc-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive nPr = n!/(n − r)! from the multiplication principle.",
+      "answer": "Fill r ordered positions from n distinct objects. Position 1 has n choices, position 2 has n − 1 remaining choices, position 3 has n − 2, and the r-th position has n − r + 1 choices, since each placement removes one object. By the multiplication principle the total is n(n − 1)(n − 2)⋯(n − r + 1). Multiply and divide by the missing tail (n − r)!: the numerator becomes n! and the denominator (n − r)!, so nPr = n!/(n − r)!. As a check, taking r = n gives n!/0! = n!, the count of all orderings, which agrees with the direct product.",
+      "explanation": "The position-by-position counts, the multiplication principle invoked, and the conversion to factorials with a check."
+    },
+    {
+      "id": "cbse11-math-pnc-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A team of 4 is to be chosen from 6 men and 5 women, and must contain at least 3 women. In how many ways can the team be formed?",
+      "answer": "Split into the two exclusive cases that satisfy the condition. Case A: exactly 3 women and 1 man — choose 3 of the 5 women in 5C3 = 10 ways and 1 of the 6 men in 6C1 = 6 ways, giving 10 × 6 = 60 teams by the multiplication principle. Case B: exactly 4 women — choose 4 of the 5 in 5C4 = 5 ways, giving 5 teams. The cases are alternatives, so add: 60 + 5 = 65 teams in total. Check the reading of the condition: at least 3 women excludes teams with 2, 1 or 0 women, and the two cases written above are the only ones with 3 or more, so nothing has been double-counted or omitted.",
+      "explanation": "Both cases with their separate counts, the addition of exclusive cases, and a check that the cases are disjoint and complete."
+    },
+    {
+      "id": "cbse11-math-pnc-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find how many 4-letter words can be formed from the letters of the word MOMENT if all letters are used exactly once, and how many of them begin with a vowel.",
+      "answer": "The word MOMENT has six letters: M twice, and O, E, N, T once each — one repeated group of size 2. Total arrangements of six objects with two identical: 6!/2! = 720/2 = 360 words. Second part: count those beginning with a vowel. The vowels available are O and E. If the first letter is O, the remaining five letters are M, M, E, N, T with two M’s alike: 5!/2! = 60 words. If the first letter is E, the remaining five are M, M, O, N, T, again with a pair of M’s: 5!/2! = 60 words. The two starting letters are exclusive alternatives, so add: 60 + 60 = 120 words begin with a vowel. Sanity checks: 120 does not exceed the 360 total, and by symmetry the two vowels and four consonants give a vowel-first fraction of 2/6 of all words, and 360 × (2/6) = 120 — the reasoning agrees.",
+      "explanation": "The division by 2! for the repeated letter, both vowel cases counted separately, and the symmetry check confirming the result."
+    },
+    {
+      "id": "cbse11-math-pnc-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain precisely when to use nPr, when to use nCr, and what to do when neither fits. Apply your rule to: a 5-person queue is to be formed from 8 people, but two particular people refuse to stand next to each other.",
+      "answer": "The diagnostic rule: a problem is about permutations when two outcomes differing only in order describe different situations — posts, ranks, arrangements, codes — and about combinations when they describe the same situation — committees, selections, groups. When neither single formula fits, abandon formulas for principles: split the population into cases with or (add) and stages with and (multiply), filling restricted positions first. Applying the rule to the queue: the queue plainly cares about order, so the unrestricted count would be 8P5 = 6,720. The restriction forbids two particular people, call them A and B, from being adjacent — a condition that a single permutation formula does not express, so we count by complement: unrestricted minus the forbidden. Count the forbidden arrangements: treat A and B as one block, giving 7 objects to arrange in 5 positions... more precisely, choose the remaining 3 queue members from the other 6 people in 6C3 = 20 ways, then for each such set of 5 people count orderings where A and B are adjacent. With A and B bound as a unit there are 4 units (the pair plus 3 others), arranged in 4P4 = 24 ways, and the pair itself internalises in 2! = 2 ways, giving 48 orderings per chosen trio... careful bookkeeping: alternatively count directly — choose 3 others (20 ways), arrange all 5 (5! = 120) giving 2,400 total for those containing both A and B; of these, the fraction with A and B adjacent is (positions of the pair: 4 possible adjacent slot-pairs out of 5P2 = 20 ordered position pairs) = 4/20 = 1/5, giving 480 adjacent arrangements. Forbidden = 480, so valid queues = 6,720 − 480 = 6,240. The general lesson: complement counting turns an awkward adjacency condition into a subtraction, and the case-by-case principle — not the formula — is what solves it.",
+      "explanation": "Full marks require the three-part rule stated clearly and the complement count carried through with both the total and the forbidden figure derived and subtracted."
+    }
+  ]
+}

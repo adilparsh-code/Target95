@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-thermodynamics",
+  "title": "Chemical Thermodynamics",
+  "kind": "chemistry",
+  "tagline": "The first law, enthalpy, Hess’s law and the entropy test that decides whether a reaction happens.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Thermodynamics answers two questions: how much energy a reaction exchanges, and whether it can happen at all. The first law gives the bookkeeping rule for energy, enthalpy and the heat terms q and w; Hess’s law lets you assemble an unknown enthalpy from known ones; and the second law adds the direction test through entropy and Gibbs free energy. The ISC course concentrates on the calculations — bond enthalpies, Hess cycles, standard enthalpies of formation and combustion — and on the reasoning that a reaction is spontaneous only when the total entropy of the universe increases, which the Gibbs equation expresses in convenient chemical units.",
+    "facts": [
+      {
+        "label": "First law",
+        "value": "ΔU = q + w; energy is conserved and can only change form."
+      },
+      {
+        "label": "Standard enthalpies",
+        "value": "ΔfH° is zero for elements in their standard states; ΔcH° for combustion is always exothermic."
+      },
+      {
+        "label": "Entropy",
+        "value": "ΔS = q(rev)/T; the universe’s entropy increases in every spontaneous process."
+      },
+      {
+        "label": "Exam weight",
+        "value": "Hess cycle calculations and ΔG = ΔH − TΔS reasoning appear every year."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the first law of thermodynamics and distinguish system, surroundings, state functions and path functions.",
+    "Calculate enthalpy changes from heat capacity, bond enthalpies and calorimetry data.",
+    "Apply Hess’s law using enthalpies of formation, combustion and a drawn cycle.",
+    "Calculate entropy changes for phase transitions and reactions and state the second law.",
+    "Use ΔG = ΔH − TΔS to predict spontaneity and the temperature at which a reaction becomes feasible."
+  ],
+  "learn": [
+    {
+      "id": "first-law-and-enthalpy",
+      "title": "The first law, heat and enthalpy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Energy cannot be created or destroyed, only converted; the first law states that the change in internal energy of a system equals the heat absorbed by the system plus the work done on it, ΔU = q + w, with signs chosen so that heat into the system and work done on it are positive. Internal energy is a state function, so ΔU depends only on the initial and final states, while q and w individually depend on the path taken. Most laboratory reactions run at constant atmospheric pressure, where the only work is pressure–volume work, and the heat exchanged is then the enthalpy change ΔH rather than ΔU. Enthalpy is defined as H = U + pV, so ΔH = ΔU + Δ(pV) and for reactions producing gases ΔH = ΔU + Δn_g RT. Exothermic reactions release heat and have negative ΔH; endothermic reactions absorb heat and have positive ΔH."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "State functions: U, H, S, G, T, p, V. Path functions: q and w, which have no meaning without a route.",
+            "At constant pressure q_p = ΔH; at constant volume q_v = ΔU.",
+            "Work done on the gas by compression is w = −p_ext ΔV, negative when the gas expands.",
+            "ΔH = ΔU + Δn_g RT, where Δn_g counts gaseous product moles minus gaseous reactant moles.",
+            "Standard conditions are 298 K and 1 bar, with all substances in their most stable form at that pressure."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ice melting at 0 °C absorbs 6.01 kJ mol^-1",
+              "note": "ΔH_fusion is positive because heat goes into breaking the lattice, not into raising temperature."
+            },
+            {
+              "text": "Combustion of methane gives ΔH = −890 kJ mol^-1",
+              "note": "The negative sign means heat leaves the system and warms the surroundings."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "System",
+              "meaning": "The part of the universe under study, separated from the surroundings by a boundary."
+            },
+            {
+              "term": "State function",
+              "meaning": "Property depending only on the current state, not on how the state was reached."
+            },
+            {
+              "term": "Enthalpy",
+              "meaning": "H = U + pV, the heat exchanged at constant pressure."
+            },
+            {
+              "term": "Exothermic",
+              "meaning": "Process releasing heat to the surroundings, with ΔH negative."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enthalpy-calculations",
+      "title": "Calculating enthalpy change: calorimetry, bonds and Hess’s law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Three methods cover the syllabus. Calorimetry measures heat directly: q = mcΔT for a solution, with c the specific heat capacity, and dividing by the moles of limiting reactant gives ΔH per mole. Bond enthalpies estimate reactions from the energy needed to break gaseous bonds minus the energy released in forming them, and the approximation is good only when everything is gaseous. Hess’s law is the exact method: enthalpy change is path-independent, so the same overall transformation gives the same ΔH by any route, and a cycle can be drawn from formation enthalpies, which are zero for elements, or from combustion enthalpies, which are zero for the combustion products. Whichever route is used, the algebra is the same: sum the enthalpies of the steps, taking care with signs and with multiplying coefficients."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Calorimetry: q = mcΔT, then ΔH = −q/n for an exothermic reaction in solution.",
+            "Bond enthalpy estimate: ΔH ≈ Σ(bonds broken) − Σ(bonds formed); broken costs, formed releases.",
+            "Hess’s law from formation: ΔH = ΣΔfH°(products) − ΣΔfH°(reactants).",
+            "Hess’s law from combustion: ΔH = ΣΔcH°(reactants) − ΣΔcH°(products), note the reversed subtraction.",
+            "Every enthalpy quoted per mole of the substance named, so coefficients must be multiplied in."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "20 g of water warms by 5.0 °C in a coffee cup",
+              "note": "q = 20 × 4.18 × 5.0 = 418 J; per mole of water that is 418/18 = 23 kJ mol^-1."
+            },
+            {
+              "text": "H2 + Cl2 → 2HCl from bonds: break 436 + 242, form 2 × 431",
+              "note": "ΔH = 678 − 862 = −184 kJ mol^-1, close to the measured −185 kJ mol^-1."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Choosing the right enthalpy method",
+          "columns": [
+            "Data available",
+            "Method",
+            "Sign convention to remember"
+          ],
+          "rows": [
+            [
+              "Temperature rise in solution",
+              "q = mcΔT, then divide by moles",
+              "exothermic gives ΔH negative"
+            ],
+            [
+              "Bond enthalpies",
+              "broken minus formed",
+              "breaking always costs energy"
+            ],
+            [
+              "Formation enthalpies",
+              "products minus reactants",
+              "elements are zero by definition"
+            ],
+            [
+              "Combustion enthalpies",
+              "reactants minus products",
+              "the subtraction reverses"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entropy",
+      "title": "Entropy and the second law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Entropy is a measure of how many ways the particles of a system can be arranged while still giving the same macroscopic state, so a gas has far more arrangements than a solid and therefore a higher entropy. Thermodynamically, the entropy change of a system is defined for a reversible path as ΔS = q_rev/T, and unlike heat itself entropy is a state function, so a real path can be compared by inventing a reversible one between the same states. The second law states that the total entropy of the universe increases in every spontaneous process; a process that leaves the system more disordered must therefore release enough heat to the surroundings to pay for it, which is why an endothermic reaction that increases entropy only runs when the temperature is high enough."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Melting, boiling, dissolution and heating all increase entropy.",
+            "Condensation, freezing and crystallisation decrease the entropy of the system.",
+            "Entropy rises when a solid dissolves and when the number of gas molecules increases in a reaction.",
+            "ΔS(universe) = ΔS(system) + ΔS(surroundings) > 0 for any spontaneous change.",
+            "At equilibrium ΔS(universe) = 0 and the forward and reverse processes occur at equal rates.",
+            "Entropy changes for phase transitions use ΔS = ΔH/T with T at the transition temperature in kelvin."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Ice melting at 273 K with ΔH = 6.01 kJ mol^-1",
+              "note": "ΔS = 6010/273 = 22.0 J K^-1 mol^-1, positive as the rigid lattice breaks down."
+            },
+            {
+              "text": "Water freezing releases 22.0 J K^-1 mol^-1 to the surroundings",
+              "note": "The system’s entropy falls, but the surroundings gain more, so the universe’s total rises."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Entropy (S)",
+              "meaning": "Measure of the number of microscopic arrangements consistent with a macroscopic state."
+            },
+            {
+              "term": "Second law",
+              "meaning": "The total entropy of the universe increases in every spontaneous process."
+            },
+            {
+              "term": "Reversible process",
+              "meaning": "Infinitely slow process carried out with the system always at equilibrium."
+            },
+            {
+              "term": "Third law",
+              "meaning": "The entropy of a perfect crystalline substance is zero at absolute zero."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gibbs-and-spontaneity",
+      "title": "Gibbs free energy and the feasibility test",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The second law is correct but awkward, because it requires the surroundings as well as the system. The Gibbs equation repackages it: ΔG = ΔH − TΔS, where G is the free energy available to do useful work, and a reaction is feasible at constant temperature and pressure when ΔG is negative. The sign pattern falls into four cases. An exothermic reaction with an entropy increase is feasible at every temperature; an endothermic reaction with an entropy decrease never is; and the two mixed cases depend on temperature, with the crossover at T = ΔH/ΔS. That single formula therefore explains why calcium carbonate only decomposes when strongly heated, why ammonium chloride dissolves endothermically on cooling water, and why a reaction with a favourable enthalpy but a large entropy penalty stops being feasible above a certain temperature."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "ΔG < 0: feasible in the forward direction; ΔG = 0: at equilibrium; ΔG > 0: not feasible as written.",
+            "Exothermic with ΔS positive → feasible at all temperatures.",
+            "Endothermic with ΔS negative → not feasible at any temperature.",
+            "Exothermic with ΔS negative → feasible only below T = ΔH/ΔS.",
+            "Endothermic with ΔS positive → feasible only above T = ΔH/ΔS.",
+            "ΔG° = ΔH° − TΔS° uses standard values; ΔG° = −RT ln K links the same quantity to the equilibrium constant."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Melting of ice is feasible above 273 K",
+              "note": "Endothermic and entropy-increasing, so ΔG turns negative once TΔS exceeds ΔH."
+            },
+            {
+              "text": "Decomposition of calcium carbonate needs a high temperature",
+              "note": "Endothermic with a large entropy gain, so feasibility begins only above about 1100 K."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Sign pattern for ΔG = ΔH − TΔS",
+          "columns": [
+            "ΔH",
+            "ΔS",
+            "Feasibility",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Negative",
+              "Positive",
+              "Feasible at all temperatures",
+              "Combustion of a hydrocarbon"
+            ],
+            [
+              "Positive",
+              "Negative",
+              "Never feasible",
+              "Decomposition of CaO into Ca and O2"
+            ],
+            [
+              "Negative",
+              "Negative",
+              "Feasible below T = ΔH/ΔS",
+              "Freezing of water"
+            ],
+            [
+              "Positive",
+              "Positive",
+              "Feasible above T = ΔH/ΔS",
+              "Thermal decomposition of CaCO3"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A Hess’s law cycle from elements to compound",
+      "description": "A triangular cycle with elements at the bottom left, the compound at the top and gaseous atoms at the bottom right, with three arrows carrying the enthalpy values for formation, atomisation and bond formation.",
+      "labels": [
+        "elements in standard states",
+        "ΔfH° arrow to the compound",
+        "atomisation of each element",
+        "exothermic bond formation",
+        "path independence of ΔH"
+      ]
+    },
+    {
+      "caption": "Figure: Enthalpy profile with and without a catalyst",
+      "description": "Reaction progress against enthalpy showing reactants and products at different heights, an uncatalysed hump and a lower catalysed hump, with ΔH marked as the difference between the levels.",
+      "labels": [
+        "reactants at the starting level",
+        "products at the final level",
+        "ΔH = products − reactants",
+        "activation energy barrier",
+        "catalyst lowers the barrier only"
+      ]
+    },
+    {
+      "caption": "Figure: Feasibility regions of ΔG = ΔH − TΔS",
+      "description": "A graph with ΔG on the vertical axis against temperature, four straight lines of different slope labelled by the sign pair, crossing zero at their respective crossover temperatures.",
+      "labels": [
+        "ΔG = 0 line is the feasibility boundary",
+        "below zero = spontaneous",
+        "slope set by ΔS",
+        "intercept set by ΔH",
+        "crossing temperature T = ΔH/ΔS"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "First law: ΔU = q + w, energy conserved and internal energy a state function.",
+    "At constant pressure q_p = ΔH; at constant volume q_v = ΔU.",
+    "ΔH = ΔU + Δn_g RT whenever the number of gas molecules changes.",
+    "Calorimetry uses q = mcΔT; bond enthalpies use broken minus formed.",
+    "Hess’s law: enthalpy change is path-independent, so a cycle gives the same answer by any route.",
+    "From formation enthalpies subtract reactants from products; from combustion enthalpies reverse the subtraction.",
+    "Entropy counts arrangements; melting, boiling and heating increase it.",
+    "Second law: the total entropy of the universe increases in every spontaneous process.",
+    "ΔG = ΔH − TΔS; negative ΔG marks a feasible reaction at constant temperature and pressure.",
+    "The crossover temperature is T = ΔH/ΔS, where ΔG changes sign."
+  ],
+  "examFocus": [
+    "Draw the Hess cycle before any arithmetic; a labelled cycle earns marks even when the final number slips.",
+    "Sign discipline: breaking bonds is positive, forming is negative, and exothermic answers must be negative.",
+    "Quote ΔG = ΔH − TΔS, substitute with ΔS converted to kJ, and state the sign conclusion in words.",
+    "In feasibility answers, name both terms and the temperature range; a bare number earns only part marks."
+  ],
+  "vocabulary": [
+    {
+      "word": "First law",
+      "meaning": "Energy is conserved: ΔU = q + w for any process."
+    },
+    {
+      "word": "Enthalpy",
+      "meaning": "H = U + pV, whose change equals the heat exchanged at constant pressure."
+    },
+    {
+      "word": "Hess’s law",
+      "meaning": "Total enthalpy change is independent of the route taken between the same states."
+    },
+    {
+      "word": "Standard enthalpy of formation",
+      "meaning": "Enthalpy change forming one mole of a compound from its elements in standard states."
+    },
+    {
+      "word": "Bond enthalpy",
+      "meaning": "Energy needed to break one mole of a specified gaseous bond."
+    },
+    {
+      "word": "Entropy",
+      "meaning": "Measure of disorder or the number of microscopic arrangements of a system."
+    },
+    {
+      "word": "Second law",
+      "meaning": "Total entropy of the universe increases in every spontaneous process."
+    },
+    {
+      "word": "Gibbs free energy",
+      "meaning": "G = H − TS, whose decrease at constant T and p measures feasibility."
+    },
+    {
+      "word": "Spontaneous",
+      "meaning": "Occurring without continuous external influence, with ΔG negative."
+    },
+    {
+      "word": "Reversible path",
+      "meaning": "Idealised path traversed infinitely slowly with the system always at equilibrium."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-chem-thermo-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a reaction carried out at constant pressure, the heat exchanged equals the change in:",
+      "options": [
+        "Internal energy",
+        "Enthalpy",
+        "Entropy",
+        "Free energy"
+      ],
+      "correctIndex": 1,
+      "answer": "Enthalpy",
+      "explanation": "By definition ΔH = ΔU + Δ(pV), and at constant pressure the pV work term makes q_p equal to ΔH."
+    },
+    {
+      "id": "isc11-chem-thermo-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A reaction has ΔH negative and ΔS negative. It is feasible:",
+      "options": [
+        "At all temperatures",
+        "At no temperature",
+        "Only below a certain temperature",
+        "Only above a certain temperature"
+      ],
+      "correctIndex": 2,
+      "answer": "Only below a certain temperature",
+      "explanation": "The enthalpy term favours feasibility but the entropy term opposes it, so −TΔS only becomes small enough below T = ΔH/ΔS."
+    },
+    {
+      "id": "isc11-chem-thermo-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The standard enthalpy of formation of an element in its most stable form is:",
+      "options": [
+        "Always negative",
+        "Always positive",
+        "Zero by definition",
+        "Equal to its atomisation enthalpy"
+      ],
+      "correctIndex": 2,
+      "answer": "Zero by definition",
+      "explanation": "Elements in their standard states are the reference point of the formation scale, so ΔfH° is exactly zero."
+    },
+    {
+      "id": "isc11-chem-thermo-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which process has a negative entropy change for the system?",
+      "options": [
+        "Melting of ice",
+        "Evaporation of water",
+        "Dissolution of sodium chloride in water",
+        "Freezing of water into a crystal lattice"
+      ],
+      "correctIndex": 3,
+      "answer": "Freezing of water into a crystal lattice",
+      "explanation": "Ordering molecules into a rigid lattice reduces the arrangements available, so the system’s entropy falls."
+    },
+    {
+      "id": "isc11-chem-thermo-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A reaction that releases heat to its surroundings is described as __________ .",
+      "answer": "exothermic",
+      "explanation": "An exothermic reaction has a negative enthalpy change because the system loses heat to the surroundings."
+    },
+    {
+      "id": "isc11-chem-thermo-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The energy available from a system to do useful work at constant temperature and pressure is called Gibbs free __________ .",
+      "answer": "energy",
+      "explanation": "Free energy combines enthalpy and entropy so that a negative change marks a feasible process."
+    },
+    {
+      "id": "isc11-chem-thermo-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the first law of thermodynamics.",
+      "answer": "The change in the internal energy of a system equals the heat absorbed by the system plus the work done on it, ΔU = q + w; energy can neither be created nor destroyed, only converted from one form to another.",
+      "explanation": "The law is a conservation statement and applies to every physical and chemical change."
+    },
+    {
+      "id": "isc11-chem-thermo-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Hess’s law and give one consequence used in calculation.",
+      "answer": "The total enthalpy change of a reaction is independent of the route taken, provided the initial and final conditions are the same. Consequently an unknown enthalpy can be obtained by adding the enthalpy changes of a complete alternative route, such as forming the same compound from its elements in one step or through several steps.",
+      "explanation": "Because enthalpy is a state function, only the endpoints matter, not the path between them."
+    },
+    {
+      "id": "isc11-chem-thermo-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Using the bond enthalpies H–H 436, Cl–Cl 242 and H–Cl 431 kJ mol^-1, calculate the enthalpy change of H2(g) + Cl2(g) → 2HCl(g) and interpret the sign.",
+      "answer": "Bonds broken are one H–H and one Cl–Cl, costing 436 + 242 = 678 kJ mol^-1. Bonds formed are two H–Cl, releasing 2 × 431 = 862 kJ mol^-1. ΔH = 678 − 862 = −184 kJ mol^-1. The negative sign shows that more energy is released in forming the product bonds than is absorbed in breaking the reactant bonds, so the reaction is exothermic and heat passes to the surroundings.",
+      "explanation": "Breaking always costs and forming always releases; the difference decides the sign of ΔH."
+    },
+    {
+      "id": "isc11-chem-thermo-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "For the reaction CaCO3(s) → CaO(s) + CO2(g), ΔH° = +178 kJ mol^-1 and ΔS° = +161 J K^-1 mol^-1. Determine whether the reaction is feasible at 298 K and estimate the temperature above which it becomes feasible.",
+      "answer": "At 298 K, ΔG = ΔH − TΔS = 178 − 298 × 0.161 = 178 − 48.0 = +130 kJ mol^-1, which is positive, so the decomposition is not feasible at room temperature. Feasibility requires ΔG < 0, which occurs above T = ΔH/ΔS = 178/0.161 ≈ 1106 K. Consistently, calcium carbonate only decomposes when strongly heated in a lime kiln.",
+      "explanation": "Convert ΔS into kJ before subtracting; the crossover temperature is the ratio ΔH/ΔS and matches the industrial practice."
+    }
+  ]
+}

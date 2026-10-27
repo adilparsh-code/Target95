@@ -1,0 +1,595 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-bulk-matter",
+  "title": "Properties of Bulk Matter",
+  "kind": "physics",
+  "tagline": "Elasticity, fluid pressure, viscosity and surface tension: how matter resists, flows and holds together.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus for Examination Year 2027 (CISCE ISC Regulations and Syllabuses - Physics, corroborated by the Oswal Publishers 2026-27 reproduction). No board examination paper and no published textbook wording was consulted or reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus for Examination Year 2027: every explanation, derivation outline, table, figure specification, example, question and answer was written for this page. Constants, formulae and numerical values follow standard school physics and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Bulk matter is studied through the ways it deforms, flows and holds a surface, and the four ideas in this chapter — elasticity, pressure in fluids, viscosity and surface tension — are unified by one question: what internal forces arise when a body is disturbed from its shape or its equilibrium. This chapter works stress and strain with Young’s modulus and the energy stored in a stretched wire, then the hydrostatic laws of Pascal and Archimedes, then the viscous flow described by Stokes and Poiseuille, and finally surface tension with its excess pressure, capillarity and the energy of a soap film. The numerical pattern is predictable: one elastic constant, one buoyancy, one terminal velocity and one capillary rise in every paper.",
+    "facts": [
+      {
+        "label": "Elasticity",
+        "value": "Stress is force per unit area; strain is the fractional deformation; Young’s modulus is stress over longitudinal strain, about 10¹¹ N m⁻² for steel."
+      },
+      {
+        "label": "Hydrostatics",
+        "value": "Pressure increases with depth as ǁgh; Pascal’s law transmits applied pressure undiminished; buoyancy equals the weight of the displaced fluid."
+      },
+      {
+        "label": "Viscosity",
+        "value": "Stress proportional to velocity gradient, with viscosity the constant of proportionality; Stokes gives terminal speed 2(ǁₛ − ǁ)g r²/9η."
+      },
+      {
+        "label": "Surface tension",
+        "value": "Force per unit length, or energy per unit area; excess pressure in a drop 2T/r and in a bubble 4T/r; capillary rise 2T cos θ / rǁg."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Define stress and strain, state Hooke’s law and compute Young’s modulus and the energy stored in a wire.",
+    "Apply the laws of fluid pressure, Pascal and Archimedes to problems in equilibrium and flotation.",
+    "Explain viscosity, Stokes’ law and terminal velocity, and the dependence of flow rate on Poiseuille’s law.",
+    "Explain surface tension, excess pressure in curved surfaces and capillary rise with the contact angle.",
+    "Distinguish the elastic, viscous and surface behaviours of solids, liquids and gases in a comparison."
+  ],
+  "learn": [
+    {
+      "id": "elasticity",
+      "title": "Elasticity, stress and strain",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Elasticity is the property by which a body returns to its original shape when the deforming force is removed, and it exists because intermolecular forces pull the atoms back to their equilibrium spacing once the external stress ends. The quantitative description begins with stress, the restoring force per unit area, measured in pascals, and strain, the fractional change in size or shape, which has no units. Within the elastic limit Hooke’s law states that stress is proportional to strain, and the constant of proportionality is the modulus of elasticity for the particular deformation: Young’s modulus for a change in length, the shear modulus for a change in shape and the bulk modulus for a change in volume, with the bulk modulus carrying a negative sign because an increase in pressure reduces the volume. Young’s modulus for steel is about 2 × 10¹¹ pascals, which means an enormous force is needed to produce an ordinary stretch, and this is why a wire elongates only slightly however heavy the load. The energy stored in a stretched wire follows from the work done against the restoring force and equals one half times stress times strain times the volume, or one half times load times extension, which is the energy a spring or a loaded beam holds and releases. Beyond the limit of proportionality the wire yields, and beyond the elastic limit it does not recover — the distinction between a temporary and a permanent set is the practical boundary the syllabus expects candidates to state."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Stress = force/area in pascals; strain = change divided by the original, with no units.",
+            "Hooke’s law: within the limit of proportionality, stress is directly proportional to strain.",
+            "Young’s modulus E = longitudinal stress / longitudinal strain, about 2 × 10¹¹ Pa for steel.",
+            "Shear modulus relates shear stress to shear strain; bulk modulus relates pressure change to fractional volume change, with a minus sign.",
+            "Energy stored per unit volume = ½ × stress × strain; total energy = ½ × load × extension.",
+            "Beyond the limit of proportionality Hooke’s law fails; beyond the elastic limit the body does not recover."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three moduli",
+          "columns": [
+            "Modulus",
+            "Stress",
+            "Strain",
+            "Governs"
+          ],
+          "rows": [
+            [
+              "Young’s modulus",
+              "longitudinal",
+              "change in length / length",
+              "stretching a wire or bar"
+            ],
+            [
+              "Shear modulus",
+              "tangential",
+              "lateral displacement / height",
+              "bending or shearing"
+            ],
+            [
+              "Bulk modulus",
+              "pressure",
+              "− change in volume / volume",
+              "compression of a fluid"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A steel wire under load",
+              "note": "A 2 mm diameter steel wire carrying 100 N stretches by less than a millimetre per metre because E is of the order of 10¹¹ Pa."
+            },
+            {
+              "text": "Worked spring energy",
+              "note": "A wire extended by 2 mm under a load of 400 N stores ½ × 400 × 0.002 = 0.4 J, which is released if the load is removed."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Elasticity",
+              "meaning": "The property of recovering original shape after the deforming force is removed."
+            },
+            {
+              "term": "Stress",
+              "meaning": "Restoring force per unit area within the deformed body, measured in pascals."
+            },
+            {
+              "term": "Strain",
+              "meaning": "The fractional deformation, having no dimensions."
+            },
+            {
+              "term": "Limit of proportionality",
+              "meaning": "The value of stress beyond which stress and strain cease to be directly proportional."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fluid-pressure",
+      "title": "Pressure in fluids, Pascal and Archimedes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A fluid at rest supports no shear stress, so the force it exerts on any surface is normal to that surface, and pressure is the normal force per unit area. Two consequences follow. Pressure at a depth h in a liquid of density ǁ is ǁ g h, and because the weight of the column depends only on the depth, the pressure at the same depth is the same in all directions and is the same in connected vessels whatever their shapes — which is the hydrostatic paradox that a wide lake and a narrow pipe of the same depth hold the same pressure. Pascal’s law extends this to an applied pressure: pressure applied to an enclosed fluid is transmitted undiminished to every part of the fluid and the walls of the container, and it is the principle behind hydraulic brakes, hydraulic jacks and presses, where a small force on a small piston balances a large force on a large one because the pressure is common to both. Archimedes’ principle states that a body immersed in a fluid experiences an upward thrust equal to the weight of the fluid displaced, and the conditions of flotation follow at once: a body floats when its weight equals the weight of the fluid it displaces, so a ship floats low in water because it displaces its own weight in a shape of large volume, and a hydrometer sinks deeper in less dense liquid because it must displace the same weight at every level it reads."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Pressure in a fluid at rest: p = ǁ g h, increasing with depth and equal in all directions at one level.",
+            "The hydrostatic paradox: equal depths mean equal pressures regardless of the total weight above.",
+            "Pascal’s law: an applied pressure is transmitted undiminished throughout an enclosed fluid.",
+            "Hydraulic machines gain force by area: F₁/A₁ = F₂/A₂ because the pressure is common.",
+            "Archimedes’ principle: the upward thrust equals the weight of fluid displaced.",
+            "Floating condition: weight of body = weight of displaced fluid; a hydrometer reads density by how deep it sits."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Buoyancy and flotation",
+          "columns": [
+            "Situation",
+            "Condition",
+            "Consequence"
+          ],
+          "rows": [
+            [
+              "Fully submerged",
+              "thrust > weight",
+              "the body rises"
+            ],
+            [
+              "Floating",
+              "weight = weight of displaced fluid",
+              "draft set by density ratio"
+            ],
+            [
+              "Sinking",
+              "thrust < weight",
+              "the body descends"
+            ],
+            [
+              "Same body, different fluids",
+              "displaced weight fixed",
+              "denser fluid means less volume displaced"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Hydraulic lift",
+              "note": "A force of 200 N on a piston of 0.01 m² gives 2 × 10⁴ Pa, which on a piston of 0.5 m² supports 10¹ N — a car lifted by a small push."
+            },
+            {
+              "text": "Why a ship does not sink",
+              "note": "The hull encloses air, so the average density of ship and cargo is below that of water and the vessel floats while displacing its own weight."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viscosity",
+      "title": "Viscosity, Stokes and the flow of fluids",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Viscosity is the internal friction of a fluid, the property that resists one layer sliding over another, and it is large in oils and small in water and smaller still in gases because the transfer is between molecules rather than through stronger liquid bonds. Newton’s law of viscous force states that the drag between two layers is proportional to the area of contact and to the velocity gradient across the layers, with the constant of proportionality being the coefficient of viscosity, measured in pascal seconds; a fluid in which the relation is linear is called Newtonian, which water and air are while paints and blood are not. When a sphere falls through a viscous fluid its speed rises until the drag equals the apparent weight, and Stokes showed the drag is 6πη r v, giving a terminal speed of 2(ǁₛ − ǁ) g r² / 9η — which makes the terminal speed proportional to the square of the radius, the reason small raindrops fall gently while large drops fall fast, and the reason a cloud of dust can hang in the air. The flow of a fluid through a pipe follows Poiseuille’s law, that the volume per second is proportional to the fourth power of the radius, so halving a pipe’s radius cuts the flow to a sixteenth — a dependence that dominates the circulation of blood through capillaries and the draft of a chimney."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Viscosity is internal friction between fluid layers; it is larger in oils than in water and smallest in gases.",
+            "Newton’s viscous law: force = η A (dv/dx), with η in pascal seconds.",
+            "Stokes’ drag on a sphere: F = 6πη r v, valid for slow, smooth flow.",
+            "Terminal speed = 2(ǁₛ − ǁ) g r² / 9η, proportional to the square of the radius.",
+            "Terminal speed is reached when drag equals the apparent weight, so acceleration then vanishes.",
+            "Poiseuille’s law: volume flow per second ∘ r⁴, so radius dominates any pipe’s capacity."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "What controls the motion of a falling body in a fluid",
+          "columns": [
+            "Factor",
+            "Effect on terminal speed"
+          ],
+          "rows": [
+            [
+              "Radius",
+              "as the square — larger bodies fall much faster"
+            ],
+            [
+              "Density difference",
+              "directly — denser bodies fall faster"
+            ],
+            [
+              "Viscosity",
+              "inversely — thick fluid slows the fall"
+            ],
+            [
+              "g",
+              "directly — the same body falls faster on the Moon"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Rain and cloud droplets",
+              "note": "A droplet ten times larger reaches ten times the terminal speed, which is why cloud droplets float and raindrops do not."
+            },
+            {
+              "text": "A capillary tube",
+              "note": "Reducing a vessel’s radius by half restricts flow to one sixteenth, which is exactly how narrow capillaries regulate blood flow."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Viscosity",
+              "meaning": "The resistance of a fluid to flow arising from friction between adjacent layers."
+            },
+            {
+              "term": "Coefficient of viscosity",
+              "meaning": "The constant in Newton’s viscous law, measured in pascal seconds."
+            },
+            {
+              "term": "Terminal velocity",
+              "meaning": "The constant speed reached when drag and buoyancy balance the apparent weight."
+            },
+            {
+              "term": "Poiseuille’s law",
+              "meaning": "The result that volume flow through a pipe varies as the fourth power of its radius."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "surface-tension",
+      "title": "Surface tension, excess pressure and capillarity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A liquid surface behaves like a stretched membrane because molecules in the surface have no neighbours above and therefore experience a net inward pull, and surface tension is the energy required to increase that surface by unit area, numerically equal to the force acting along unit length of the surface, measured in newtons per metre. Two consequences are examined constantly. The first is excess pressure: because the surface is curved inwards, the pressure just beneath a spherical drop exceeds the outside pressure by 2T/r, while a soap bubble with two surfaces has 4T/r, and the same reasoning explains why small bubbles are the harder ones to blow. The second is capillarity: a liquid rises or falls in a narrow tube according to how it wets the surface, rising when the contact angle is less than 90 degrees and falling when it is greater, and the height is given by 2T cos θ / rǁg, which shows the rise is inversely proportional to the radius — narrow tubes climb higher. Energy considerations explain the shapes as well: a free surface minimises its area, which is why free drops are spherical, why two drops merge to reduce total area, and why a soap film must do work when stretched, that work being T times the increase in area. Mercury in glass depresses rather than rises because it does not wet the glass, giving a contact angle near 140 degrees and a negative cos θ in the same formula."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Surface tension T is force per unit length and also energy per unit area, in N m⁻¹ or J m⁻².",
+            "It arises because surface molecules lack neighbours above, giving a net inward pull and a tendency to minimise area.",
+            "Excess pressure inside a spherical drop is 2T/r; inside a soap bubble with two surfaces it is 4T/r.",
+            "Capillary rise h = 2T cos θ / rǁg: rise for contact angle below 90°, depression above it.",
+            "A rise of pressure beneath a wetting liquid pulls the liquid up the tube until the column’s weight balances it.",
+            "Free surfaces minimise area, so drops are spherical and two drops merge to reduce the total surface energy."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Wetting, contact angle and what happens in a tube",
+          "columns": [
+            "Liquid and surface",
+            "Contact angle",
+            "In a narrow tube"
+          ],
+          "rows": [
+            [
+              "Water and clean glass",
+              "small, below 90°",
+              "rises"
+            ],
+            [
+              "Mercury and glass",
+              "about 140°",
+              "is depressed"
+            ],
+            [
+              "Water and waxed glass",
+              "above 90°",
+              "is depressed"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why small bubbles are harder",
+              "note": "Halving a bubble’s radius doubles its excess pressure, so a small bubble offers more resistance than the large one beside it."
+            },
+            {
+              "text": "Ink drawn up paper",
+              "note": "The pores of paper act as fine capillaries, pulling the ink along them, which is the same mechanism that carries water up a plant stem."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comparing",
+      "title": "Comparing the three behaviours and solving the problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The three subjects are best held together by a single comparison: elasticity concerns a solid returning to its shape because intermolecular forces resist a change of spacing, so the response is to stress and vanishes when the stress is removed within the limit; viscosity concerns a liquid or gas continuing to flow while resisting the rate of flow, so the response is to a velocity gradient and involves continuous dissipation of energy as heat; and surface tension concerns a liquid surface alone, arising from the missing neighbours above and acting to reduce area, so it behaves like a stretched skin with its own tension and its own energy. Solving the problems then follows one of three templates. For elasticity, identify which deformation is described, choose the matching modulus, and keep the area and length consistent in their units. For hydrostatics, build the pressure as atmospheric plus ǁ g h and apply it to both sides of a piston or both faces of a submerged object. For a falling body, write the forces at the start and at the terminal speed, where acceleration is zero, because the terminal condition rather than the dynamics gives the answer. For surface tension, decide at once whether the surface is a drop, a bubble or a film, and use 2T/r, 4T/r or the capillary formula accordingly; the most common error is using the drop formula on a soap bubble and halving the answer."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Elasticity: a solid’s return to shape under intermolecular forces; response to stress, reversible within the limit.",
+            "Viscosity: a fluid’s resistance to rate of flow; response to a velocity gradient, dissipating energy as heat.",
+            "Surface tension: a liquid surface’s tendency to minimise area; behaves as a stretched skin with its own energy.",
+            "Elasticity template: pick the deformation, pick the modulus, check the units of area and length.",
+            "Hydrostatic template: pressure = p₀ + ǁgh applied consistently on both sides.",
+            "Motion in a fluid: apply the terminal condition, acceleration zero, rather than trying to integrate the motion."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Choosing the right formula",
+              "note": "A question about a soap bubble needs 4T/r because there are two surfaces, while a question about a hanging drop needs 2T/r — the difference is a factor of two in the final answer."
+            },
+            {
+              "text": "A submerged body",
+              "note": "The upward thrust is ǁ g V where V is the submerged volume, so the effective weight in water is the true weight less that thrust — the whole of the buoyancy calculation in one line."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Stress against strain for a wire",
+      "description": "A straight proportional region rising from the origin, marked limit of proportionality, followed by a curved region ending at the limit of elasticity and then a fracture point, with the permanent set shown on the unloading line.",
+      "labels": [
+        "Hooke region: stress proportional to strain",
+        "limit of proportionality",
+        "limit of elasticity: no recovery beyond",
+        "fracture point where the wire breaks",
+        "unloading leaves a permanent set beyond the elastic limit"
+      ]
+    },
+    {
+      "caption": "Figure: Capillary rise in a wetting liquid",
+      "description": "A narrow tube dipped in liquid with the meniscus curved upwards, the contact angle marked, the risen column height h labelled, and the pressure below the meniscus shown as lower than atmospheric.",
+      "labels": [
+        "meniscus concave for a wetting liquid",
+        "contact angle θ below 90°",
+        "rise h = 2T cos θ / rǁg",
+        "narrower tube means greater rise",
+        "mercury shows the opposite, a depression"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Elastic bodies recover their shape; the recovery fails beyond the limit of elasticity.",
+    "Stress is force per unit area; strain is the fractional deformation and has no units.",
+    "Hooke’s law holds within the limit of proportionality, where stress is proportional to strain.",
+    "Young’s modulus is longitudinal stress over strain, about 2 × 10¹¹ Pa for steel.",
+    "Energy stored in a stretched wire is half the load times the extension.",
+    "Pressure in a fluid at rest is ǁgh, equal in all directions at a given depth.",
+    "Pascal’s law transmits applied pressure undiminished, which is how hydraulic machines multiply force.",
+    "Archimedes’ principle: the upward thrust equals the weight of fluid displaced, giving the condition for floating.",
+    "Viscosity is internal friction between fluid layers, and Newton’s law makes the drag proportional to the velocity gradient.",
+    "Terminal velocity is 2(ǁₛ − ǁ)gr²/9η, proportional to the square of the radius.",
+    "Poiseuille’s law makes flow proportional to the fourth power of the radius.",
+    "Surface tension gives excess pressure 2T/r in a drop and 4T/r in a bubble, and capillary rise of 2T cos θ / rǁg."
+  ],
+  "examFocus": [
+    "Modulus questions are marked on the definition as well as the number: give the ratio and its units each time.",
+    "Buoyancy answers must state what volume is submerged — the whole body or only the immersed part.",
+    "Terminal velocity derivations must show the balance of forces at zero acceleration.",
+    "Surface tension questions must first decide drop, bubble or film before choosing 2T/r or 4T/r."
+  ],
+  "vocabulary": [
+    {
+      "word": "Stress",
+      "meaning": "Internal restoring force per unit area, measured in pascals."
+    },
+    {
+      "word": "Strain",
+      "meaning": "Fractional change in dimension, dimensionless."
+    },
+    {
+      "word": "Young’s modulus",
+      "meaning": "Ratio of longitudinal stress to longitudinal strain."
+    },
+    {
+      "word": "Buoyancy",
+      "meaning": "The upward thrust on a body immersed in a fluid, equal to the weight displaced."
+    },
+    {
+      "word": "Viscosity",
+      "meaning": "A fluid’s internal resistance to flow between adjacent layers."
+    },
+    {
+      "word": "Terminal velocity",
+      "meaning": "The steady speed reached when drag balances apparent weight."
+    },
+    {
+      "word": "Surface tension",
+      "meaning": "The energy per unit area of a liquid surface, or force per unit length."
+    },
+    {
+      "word": "Capillarity",
+      "meaning": "The rise or fall of a liquid in a narrow tube according to the contact angle."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-phy-bulk-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of pressure is:",
+      "options": [
+        "newton",
+        "pascal",
+        "joule",
+        "newton per metre"
+      ],
+      "correctIndex": 1,
+      "answer": "pascal",
+      "explanation": "One pascal is one newton per square metre, so pressure is measured in pascals."
+    },
+    {
+      "id": "isc11-phy-bulk-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The excess pressure inside a small soap bubble of radius r and tension T is:",
+      "options": [
+        "T/r",
+        "2T/r",
+        "4T/r",
+        "8T/r"
+      ],
+      "correctIndex": 2,
+      "answer": "4T/r",
+      "explanation": "A bubble has two surfaces, each contributing 2T/r, giving 4T/r in total."
+    },
+    {
+      "id": "isc11-phy-bulk-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The terminal speed of a small sphere falling through a viscous fluid is proportional to:",
+      "options": [
+        "the radius",
+        "the square of the radius",
+        "the inverse of the radius",
+        "the square root of the radius"
+      ],
+      "correctIndex": 1,
+      "answer": "the square of the radius",
+      "explanation": "Stokes’ result 2(ǁₛ−ǁ)gr²/9η makes terminal speed vary as the square of the radius."
+    },
+    {
+      "id": "isc11-phy-bulk-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body floats with three fifths of its volume outside the liquid. The density of the liquid relative to that of the body is:",
+      "options": [
+        "3/5",
+        "5/3",
+        "2/5",
+        "5/2"
+      ],
+      "correctIndex": 3,
+      "answer": "5/2",
+      "explanation": "Three fifths of the body lies outside the liquid, so two fifths is submerged. Floating means the weight of the displaced liquid equals the weight of the body: ǁₗ × (2/5)V = ǁₘ × V, and cancelling V and the common factor gives ǁₗ/ǁₘ = 5/2, so the liquid is two and a half times as dense as the body."
+    },
+    {
+      "id": "isc11-phy-bulk-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The upward thrust on a body immersed in a fluid is equal to the weight of the __________ displaced.",
+      "answer": "fluid",
+      "explanation": "This is Archimedes’ principle, and it fixes the condition for floating."
+    },
+    {
+      "id": "isc11-phy-bulk-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The rise of a liquid in a narrow tube is given by h = 2T cos θ / rǁg, so a tube of smaller radius gives a __________ rise.",
+      "answer": "greater",
+      "explanation": "The height is inversely proportional to the radius, which is why capillary action is visible only in fine tubes."
+    },
+    {
+      "id": "isc11-phy-bulk-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define stress and strain and state Hooke’s law.",
+      "answer": "Stress is the restoring force per unit area developed inside a deformed body, measured in pascals, and strain is the fractional change produced in the dimension concerned, being a pure ratio with no units. Hooke’s law states that within the limit of proportionality the stress in a body is directly proportional to the strain produced, the constant of proportionality being the modulus of elasticity for that kind of deformation.",
+      "explanation": "Both definitions with units and the law with its limit stated."
+    },
+    {
+      "id": "isc11-phy-bulk-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Pascal’s law and give two applications.",
+      "answer": "Pascal’s law states that pressure applied at any point of an enclosed fluid at rest is transmitted undiminished to every other part of the fluid and to the walls of the containing vessel, in all directions. It follows that the pressure is the same throughout, so a force applied to a small piston creates the same pressure on a large piston and is multiplied in proportion to the areas. Hydraulic brakes and hydraulic jacks or lifts are the standard applications, both gaining force from area difference rather than from any multiplication of energy.",
+      "explanation": "Statement of the law plus two applications with the area argument."
+    },
+    {
+      "id": "isc11-phy-bulk-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does a liquid rise in a narrow glass tube when the liquid is water?",
+      "answer": "Water wets clean glass, so the contact angle between the surface and the wall is small, and the curved meniscus means the pressure just beneath the surface is lower than the atmospheric pressure acting on the open surface. Liquid is therefore pushed up the tube until the pressure due to the risen column balances that difference, giving a rise h = 2T cos θ / rǁg. Because the height is inversely proportional to the radius, the rise is easily visible only in a narrow tube.",
+      "explanation": "Wetting, the pressure deficit under the curved surface, and the balance giving the height."
+    },
+    {
+      "id": "isc11-phy-bulk-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive an expression for the terminal velocity of a sphere falling through a viscous medium.",
+      "answer": "When a sphere is released in a fluid it accelerates under its apparent weight, which is its true weight less the buoyancy, so the driving force is (4/3)πr³(ǁₛ − ǁ)g with ǁₛ the density of the sphere and ǁ that of the fluid. As the speed rises the viscous drag rises in proportion, and Stokes showed for slow smooth flow that the drag equals 6πη r v, where η is the coefficient of viscosity. The acceleration therefore falls continuously until the drag and buoyancy together balance the weight, at which point the net force is zero and the sphere attains its terminal velocity. Equating the weight less buoyancy to the drag gives (4/3)πr³(ǁₛ − ǁ)g = 6πη r v, and solving for v gives v = 2(ǁₛ − ǁ) g r² / 9η. The result shows the terminal speed rising with the square of the radius and falling as the viscosity rises, which is why fine droplets hang in a cloud while large drops fall as rain.",
+      "explanation": "Driving force with buoyancy, Stokes’ drag, the zero-acceleration condition, and the final formula with its physical reading."
+    },
+    {
+      "id": "isc11-phy-bulk-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A block of wood of density 600 kg m⁻³ floats in water of density 1000 kg m⁻³. Analyse how much of it is submerged and what happens if it is pushed down and released.",
+      "answer": "For a floating body the weight equals the weight of the water displaced, so if V is the total volume of the block and v the submerged volume, ǁₘ V g = ǁₗ v g, giving v/V = ǁₘ/ǁₗ = 600/1000 = 0.6. Six tenths of the block is therefore under water and four tenths above. If the block is pushed fully under, the upward thrust becomes the weight of the whole volume of water displaced, ǁₗ V g, while the weight is only 600 V g, so the excess upward force is 400 V g and the block accelerates upwards with an initial acceleration of 4 m s⁻² taking g = 10. It overshoots the equilibrium, oscillates briefly and settles at the same six-tenths immersion once the damping of the water has removed the energy.",
+      "explanation": "Equilibrium fraction from the density ratio, then the forces when fully submerged with the resulting acceleration and the return to equilibrium."
+    },
+    {
+      "id": "isc11-phy-bulk-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A wire of length 2 m and diameter 1 mm is stretched by 0.5 mm by a load. Taking Young’s modulus of the material as 2 × 10¹¹ Pa, find the stress in the wire and the load applied.",
+      "answer": "The longitudinal strain is the extension divided by the original length: 0.5 mm divided by 2 m is 0.0005/2 = 2.5 × 10⁻⁴. The stress is then Young’s modulus multiplied by the strain, 2 × 10¹¹ × 2.5 × 10⁻⁴ = 5 × 10⁷ Pa. The cross-sectional area of the wire is π r² with r = 0.5 mm, that is π × (5 × 10⁻⁴)² = 7.85 × 10⁻⁷ m², so the load is stress times area, 5 × 10· × 7.85 × 10⁻⁷ ≈ 393 N. The check is instructive: a hair-thin wire holding nearly forty kilograms illustrates why steel’s modulus is so large and why only a small extension appears for a large load.",
+      "explanation": "Strain from extension and length, stress from modulus, area from the radius, and the load with a sanity comment."
+    }
+  ]
+}

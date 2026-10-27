@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-probability",
+  "title": "Probability",
+  "kind": "mathematics",
+  "tagline": "Random experiments, conditional probability and Bayes’ theorem — measuring uncertainty with arithmetic you can defend.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Probability closes the course by putting numbers on uncertainty, moving from equally likely outcomes to the conditional and compound events that model real decisions. The chapter develops sample spaces and events, states the addition and multiplication rules that keep double-counting out of the arithmetic, and then builds conditional probability and Bayes’ theorem — the tool for reasoning backwards from an effect to its likely cause. Worked examples are drawn from cards, dice, drawn lots and diagnostic tests, so the abstract rules land in concrete situations.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-VI: Probability — 6 marks of the 80."
+      },
+      {
+        "label": "Range",
+        "value": "0 ≤ P(E) ≤ 1 for every event E, with P(S) = 1 and P(∅) = 0."
+      },
+      {
+        "label": "Addition",
+        "value": "P(A ∪ B) = P(A) + P(B) − P(A ∩ B); mutually exclusive means P(A ∩ B) = 0."
+      },
+      {
+        "label": "Bayes",
+        "value": "P(Aᵢ | B) = P(Aᵢ)P(B | Aᵢ) / Σ P(Aⱼ)P(B | Aⱼ) — posterior from prior and likelihood."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe random experiments, sample spaces and events.",
+    "Compute classical probabilities with and without equally likely outcomes.",
+    "Apply the addition and multiplication rules, including conditional probability.",
+    "State Bayes' theorem and apply it to two- and three-hypothesis problems.",
+    "Interpret probabilities correctly, including the complement shortcut."
+  ],
+  "learn": [
+    {
+      "id": "basics",
+      "title": "Experiments, sample spaces and events",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A random experiment is any process with a well-defined set of possible outcomes and an unpredictable individual result: tossing a coin, drawing a card, measuring a response. The set of all possible outcomes is the sample space S, and an event is any subset of it — “the toss gives heads” is the subset of outcomes beginning with H, the draw “is a spade” is the thirteen-card subset of the pack, and the impossible event ∅ has probability zero while the certain event S has probability one. Probability assigns each event a number between 0 and 1, and in the equally likely case — the classical definition this syllabus develops first — it is simply the count of favourable outcomes divided by the count of all outcomes. That fraction is the whole idea; everything else in the chapter is technique for counting the numerator and denominator of complex events without double-counting or omission."
+        },
+        {
+          "type": "paragraph",
+          "text": "Careful enumeration is where marks are won or lost. For two coin tosses the sample space has four members, {HH, HT, TH, TT}, not two — students who list only “two heads, one head, no heads” collapse distinct outcomes with different probabilities and produce wrong answers. For cards, remember the structure: 52 cards in four suits of thirteen, face cards being jacks, queens and kings (twelve in all), and ace often treated as a face card depending on the question’s wording. For conditional words — “given that”, “ knowing that”, “provided that” — the sample space itself shrinks to the conditioning information, which is exactly what conditional probability formalises in the next lesson. A habit worth forming: write the sample space explicitly for any problem with fewer than a dozen outcomes before computing anything."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sample space = all possible outcomes; event = a subset of it.",
+            "0 ≤ P(E) ≤ 1; P(certain) = 1; P(impossible) = 0.",
+            "Classical probability: favourable outcomes / total outcomes, when equally likely.",
+            "Complement: P(not E) = 1 − P(E) — often the fastest route.",
+            "List the sample space before counting; hidden outcomes cause most errors."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "title": "Addition, multiplication and the two kinds of dependence",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two events can be combined in two ways, and each has its rule. For unions (“A or B”) the addition rule applies: P(A ∪ B) = P(A) + P(B) − P(A ∩ B), where the subtraction corrects for outcomes counted twice in the overlap; when A and B are mutually exclusive the intersection is empty, the correction vanishes, and the rule reduces to plain addition. For intersections (“A and B”) the multiplication rule applies: P(A ∩ B) = P(A) × P(B | A) — the probability that A occurs, times the probability that B occurs once A has. When the occurrence of one does not affect the other, the events are independent, P(B | A) = P(B), and the rule collapses to the product of the individual probabilities. Independence is a technical condition to be checked or stated, not assumed from mere non-exclusion: mutually exclusive events are maximally dependent, since knowing one occurred tells you the other did not."
+        },
+        {
+          "type": "paragraph",
+          "text": "The distinction between these ideas is the conceptual heart of the chapter, and each classic example illustrates a different one. Drawing cards without replacement makes draws dependent — the first removal changes the second deck — while with replacement they are independent. Mutually exclusive events cannot occur together, which is a statement about the intersection, not about influence. Conditional probability itself, P(B | A) = P(A ∩ B)/P(A), is the natural generalisation: restricting attention to A rescales the sample space to A alone, and within that world the probability of B is its overlap with A over the size of A. Every compound probability problem is solved by deciding which of these three tools the wording calls for — union, intersection with dependence, or conditioning — and then applying the corresponding rule with a clearly defined event for each clause of the problem."
+        },
+        {
+          "type": "table",
+          "caption": "Which rule when",
+          "columns": [
+            "Question wording",
+            "Rule",
+            "Key condition"
+          ],
+          "rows": [
+            [
+              "A or B",
+              "P(A) + P(B) − P(A ∩ B)",
+              "Subtract the overlap"
+            ],
+            [
+              "A and B, independent",
+              "P(A) · P(B)",
+              "One does not affect the other"
+            ],
+            [
+              "A and B, dependent",
+              "P(A) · P(B | A)",
+              "Order matters; state the conditioning"
+            ],
+            [
+              "Not A",
+              "1 − P(A)",
+              "Complement shortcut"
+            ],
+            [
+              "Either of several cases",
+              "Sum of the case probabilities",
+              "Cases must be exclusive"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two cards drawn without replacement: both aces?",
+              "note": "(4/52) × (3/51) = 1/221 — dependence changes the second factor."
+            },
+            {
+              "text": "P(A ∪ B) with P(A) = 0.4, P(B) = 0.5, P(A ∩ B) = 0.2.",
+              "note": "0.4 + 0.5 − 0.2 = 0.7."
+            },
+            {
+              "text": "Two dice: sum is 7.",
+              "note": "6 favourable of 36: 6/36 = 1/6."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conditional",
+      "title": "Conditional probability and independence",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Conditional probability is probability with a smaller world: given that event A has occurred, the only outcomes still possible are those in A, so the sample space becomes A and each event is re-measured relative to it. The formula P(B | A) = P(A ∩ B)/P(A) is nothing more than that rescaling, and it carries two immediate consequences. First, conditioning is asymmetric — P(B | A) generally differs from P(A | B), which is precisely why medical-test questions are so counterintuitive: a test that is 99% accurate can still yield a low probability of disease after a positive result when the disease is rare, because the healthy population swamps the count. Second, independence is exactly the condition under which conditioning changes nothing: A and B are independent when P(B | A) = P(B), equivalently when P(A ∩ B) = P(A)P(B), and either form can be used as the definition depending on which is convenient."
+        },
+        {
+          "type": "paragraph",
+          "text": "Repeated trials are the natural home of independence: drawing with replacement, successive coin tosses, independent manufactured items. In such settings the probability of a sequence is the product of the individual probabilities, and counting the favourable sequences falls back on combinatorics — the topic of Unit-II — so probability problems routinely blend the two chapters. When trials are without replacement the independence fails and the multiplication rule must use the updated conditional at each step, as with the successive aces above. The discipline is to write events as named symbols first (A = “first is an ace”, B = “second is an ace”), state whether independence is claimed and why, and then compute: unlabelled reasoning in probability is where confident errors hide."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two tossed coins: P(both | at least one head).",
+              "note": "Favourable {HH} of {HH, HT, TH}: 1/3, not 1/2 — the space has shrunk."
+            },
+            {
+              "text": "Draw with replacement: P(ace then king).",
+              "note": "(4/52)(4/52) = 1/169 — independent trials."
+            },
+            {
+              "text": "Is “draw a heart” independent of “draw a king”?",
+              "note": "P(H ∩ K) = 1/52 = (13/52)(4/52) ✓ independent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bayes",
+      "title": "Bayes' theorem and total probability",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Bayes' theorem reverses the direction of a conditional: it gives the probability of a cause given an effect, when the forward probabilities are the ones known from data. The mechanism is the definition of conditional read from the other side — P(A | B) = P(A ∩ B)/P(B) = P(B | A)P(A)/P(B) — and when the hypothesis B comes from several mutually exclusive possibilities covering all cases, the denominator expands by the law of total probability: P(B) = Σ P(Aⱼ)P(B | Aⱼ). The result is the familiar posterior = prior × likelihood divided by total likelihood, and each symbol has a plain reading: the prior is how probable the cause was before the evidence, the likelihood is how probable the evidence is if that cause holds, and the posterior is the updated belief afterwards."
+        },
+        {
+          "type": "paragraph",
+          "text": "The standard exam shape is a diagnostic: a test with a known false-positive and false-negative rate, applied to a population with a known prevalence. The single most common error is reporting the test’s accuracy where the question asks for the probability of the condition given a positive result — these are different conditionals, and Bayes’ theorem exists precisely to convert one into the other. The reliable procedure: name the hypotheses (diseased, healthy), name the evidence (positive test), write down the prior and both likelihoods from the problem statement, compute the two joint probabilities P(hypothesis) × P(evidence | hypothesis), and divide the one you want by their sum. With three hypotheses the denominator simply gains a third term; nothing else changes. Verifying that the posteriors over all hypotheses sum to 1 is a fast and reliable check on the arithmetic."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Test: 90% sensitive, 5% false positive, 2% prevalence. P(disease | +).",
+              "note": "0.02×0.9 = 0.018 over 0.018 + 0.98×0.05 = 0.049: 0.018/0.067 ≈ 0.269."
+            },
+            {
+              "text": "Two bags: bag 1 has 3 red of 5, bag 2 has 1 red of 4; bag chosen at random. P(red).",
+              "note": "(½)(3/5) + (½)(1/4) = 3/10 + 1/8 = 17/40."
+            },
+            {
+              "text": "Given the colour was red in the last problem, which bag?",
+              "note": "P(bag1 | R) = (3/10)/(17/40) = 12/17 — bag 1 most likely."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A Venn diagram of the addition rule",
+      "description": "Two overlapping circles labelled A and B inside a rectangle marked S; the A-only crescent marked P(A) − P(A ∩ B), the overlap marked P(A ∩ B) and shaded distinctly, the B-only crescent marked P(B) − P(A ∩ B), with a bracket spanning both circles annotated P(A ∪ B) = P(A) + P(B) − P(A ∩ B).",
+      "labels": [
+        "S: the sample space rectangle",
+        "Overlap counted once, not twice",
+        "Mutually exclusive: circles do not touch",
+        "Union = both circles together",
+        "Complement lies outside both circles"
+      ]
+    },
+    {
+      "caption": "Figure: Bayes’ theorem as updating a belief",
+      "description": "A flow diagram: two cause boxes D (diseased) and D′ (healthy) with prior probabilities, arrows to a common evidence box E (positive test) each arrow labelled with its likelihood, and return arrows from E to the causes labelled posterior; the two joint products 0.018 and 0.049 shown beside the return arrows with their shares of the total.",
+      "labels": [
+        "Prior: P(cause) before evidence",
+        "Likelihood: P(evidence | cause)",
+        "Joint: prior × likelihood",
+        "Normalise by the total",
+        "Posterior: P(cause | evidence)"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Probability lies in [0, 1]; certain = 1, impossible = 0.",
+    "Classical probability counts favourable over total equally likely outcomes.",
+    "Complement rule: P(not E) = 1 − P(E) — use it before counting.",
+    "P(A ∪ B) = P(A) + P(B) − P(A ∩ B); exclusive events simply add.",
+    "P(A ∩ B) = P(A)P(B | A) always; = P(A)P(B) only when independent.",
+    "Conditional probability rescales the sample space to the given event.",
+    "Mutually exclusive and independent are different notions — exclusive implies dependence.",
+    "Bayes: posterior = prior × likelihood / total likelihood.",
+    "The total-probability denominator sums the joint probabilities of all hypotheses.",
+    "Positive-test probability and disease-given-positive-test are different conditionals."
+  ],
+  "examFocus": [
+    "Name events with letters before computing — full marks follow the setup.",
+    "State independence or mutual exclusivity explicitly; do not assume it.",
+    "Bayes answers: show both joint products and their sum.",
+    "Check posteriors sum to 1 as an arithmetic safeguard."
+  ],
+  "vocabulary": [
+    {
+      "word": "Random experiment",
+      "meaning": "A process with defined outcomes but an unpredictable result."
+    },
+    {
+      "word": "Sample space (S)",
+      "meaning": "The set of all possible outcomes."
+    },
+    {
+      "word": "Event",
+      "meaning": "A subset of the sample space."
+    },
+    {
+      "word": "Mutually exclusive",
+      "meaning": "Events that cannot occur together: empty intersection."
+    },
+    {
+      "word": "Independent",
+      "meaning": "Events where knowing one does not change the other’s probability."
+    },
+    {
+      "word": "Conditional probability",
+      "meaning": "P(B | A): probability of B once A is known to have occurred."
+    },
+    {
+      "word": "Bayes' theorem",
+      "meaning": "The rule for reversing a conditional using priors and likelihoods."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-prob-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two unbiased coins are tossed. The probability of getting at least one head is:",
+      "options": [
+        "1/4",
+        "1/2",
+        "3/4",
+        "1"
+      ],
+      "correctIndex": 2,
+      "answer": "3/4",
+      "explanation": "Sample space {HH, HT, TH, TT}; only TT fails, so P = 1 − 1/4 = 3/4."
+    },
+    {
+      "id": "cbse11-math-prob-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A card is drawn from a standard pack. The probability it is a king is:",
+      "options": [
+        "1/13",
+        "1/52",
+        "4/13",
+        "1/4"
+      ],
+      "correctIndex": 0,
+      "answer": "1/13",
+      "explanation": "Four kings among 52 cards: 4/52 = 1/13."
+    },
+    {
+      "id": "cbse11-math-prob-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If P(A) = 0.6, P(B) = 0.5 and P(A ∩ B) = 0.3, then P(A ∪ B) is:",
+      "options": [
+        "1.4",
+        "0.8",
+        "0.9",
+        "0.3"
+      ],
+      "correctIndex": 1,
+      "answer": "0.8",
+      "explanation": "Addition rule: 0.6 + 0.5 − 0.3 = 0.8 — the overlap is subtracted once."
+    },
+    {
+      "id": "cbse11-math-prob-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A test is 95% sensitive with a 10% false-positive rate, and 4% of people have the condition. Given a positive result, the probability of having the condition is closest to:",
+      "options": [
+        "0.95",
+        "0.28",
+        "0.04",
+        "0.10"
+      ],
+      "correctIndex": 1,
+      "answer": "0.28",
+      "explanation": "Bayes: 0.04 × 0.95 = 0.038 over 0.038 + 0.96 × 0.10 = 0.096 → 0.038/0.134 ≈ 0.283 — far below the 95% accuracy because the healthy group dominates."
+    },
+    {
+      "id": "cbse11-math-prob-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The probability of the complement of an event E equals 1 minus ________ .",
+      "answer": "P(E)",
+      "explanation": "P(not E) = 1 − P(E), since an event and its complement exhaust the sample space."
+    },
+    {
+      "id": "cbse11-math-prob-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two events for which occurring one rules out occurring the other are called ________ events.",
+      "answer": "mutually",
+      "explanation": "They are mutually exclusive: their intersection is empty, so P(A ∪ B) = P(A) + P(B)."
+    },
+    {
+      "id": "cbse11-math-prob-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two dice are rolled. Find the probability that the sum of the numbers showing is 8.",
+      "answer": "The sample space of two dice has 6 × 6 = 36 equally likely outcomes. The favourable outcomes summing to 8 are (2, 6), (3, 5), (4, 4), (5, 3) and (6, 2) — five ordered pairs; note (4, 4) is listed once because both dice show the same number, while every other pair appears in both orders. So the probability is 5/36. Checks: the count does not exceed the 36 total ✓; by symmetry the sum-7 probability (six outcomes) is the largest, and 5/36 sits just below 6/36 = 1/6 as expected ✓. The distribution of sums confirms it: the outcome counts by sum run 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1 for sums 2 through 12, so the total is 36 as required and the sum-8 row contributes exactly 5 — matching the five pairs enumerated above.",
+      "explanation": "The 36-element sample space, the complete list of five favourable pairs, the fraction 5/36, and a symmetry check."
+    },
+    {
+      "id": "cbse11-math-prob-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "From a pack of 52 cards, two cards are drawn one after another without replacement. Find the probability that both are spades.",
+      "answer": "Let A be “the first card is a spade” and B be “the second is a spade”. There are 13 spades in the pack, so P(A) = 13/52 = 1/4. Given that the first card was a spade, 51 cards remain of which 12 are spades, so P(B | A) = 12/51. The draws are without replacement, so the events are dependent and the multiplication rule applies: P(A ∩ B) = P(A) × P(B | A) = (13/52) × (12/51) = (1/4)(12/51) = 12/204 = 1/17. Verification by combination counting: the number of spade pairs is 13C2 = 78 out of 52C2 = 1,326 total pairs, and 78/1,326 = 1/17 ✓ — the two methods agree, confirming the dependence was handled correctly. Had the draws been with replacement the answer would be (1/4)² = 1/16, slightly larger, as independence with a restored deck predicts.",
+      "explanation": "Both conditional factors stated, the multiplication rule named, the product reduced, and the combination-based verification."
+    },
+    {
+      "id": "cbse11-math-prob-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A bag contains 3 red and 5 black balls; a second bag contains 4 red and 4 black balls. A bag is chosen at random and a ball drawn is red. Find the probability it came from the first bag.",
+      "answer": "Let B₁ and B₂ be the events of choosing the first and second bag, each with probability 1/2 since the choice is random. Let R be “the drawn ball is red”. The likelihoods are read from the contents: P(R | B₁) = 3/8 (three red of eight total) and P(R | B₂) = 4/8 = 1/2 (four red of eight). The joint probabilities are P(B₁ ∩ R) = (1/2)(3/8) = 3/16 and P(B₂ ∩ R) = (1/2)(1/2) = 1/4 = 4/16. By the law of total probability, P(R) = 3/16 + 4/16 = 7/16. Bayes’ theorem then gives P(B₁ | R) = P(B₁ ∩ R)/P(R) = (3/16)/(7/16) = 3/7. Interpretation: before seeing the ball each bag was equally likely, but red is more probable from bag 2, so a red draw shifts belief towards bag 2 — 3/7 ≈ 0.43 is less than 1/2, exactly as the evidence demands. Verification: P(B₂ | R) = (4/16)/(7/16) = 4/7, and 3/7 + 4/7 = 1 ✓, so the posteriors over the two hypotheses form a valid distribution.",
+      "explanation": "Priors and likelihoods written, both joints computed, the total probability found, the Bayes ratio, and the posterior-sum check."
+    },
+    {
+      "id": "cbse11-math-prob-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A factory has two machines: A makes 60% of the items and B makes 40%; 2% of A’s items and 5% of B’s items are defective. An item is inspected at random and found defective. Find the probability it came from machine B, and discuss why this differs from 5%.",
+      "answer": "Let A and B be the machine events with priors P(A) = 0.6 and P(B) = 0.4, and D the event of a defect. The likelihoods are P(D | A) = 0.02 and P(D | B) = 0.05. Joint probabilities: P(A ∩ D) = 0.6 × 0.02 = 0.012 and P(B ∩ D) = 0.4 × 0.05 = 0.020. Total probability of defect: P(D) = 0.012 + 0.020 = 0.032 — that is, 3.2% of all items are defective, a figure worth stating on its own. Bayes: P(B | D) = 0.020/0.032 = 0.625. So a defective item is 62.5% likely to have come from machine B. Why this differs from the 5% defect rate of B: the two numbers answer opposite questions. P(D | B) = 0.05 goes forward — knowing the machine, how likely is a defect? P(B | D) = 0.625 goes backward — knowing the defect, how likely the machine? The reversal changes the answer because the priors are unequal and the machines’ defect rates differ: even though machine B produces only 40% of items, it contributes 0.020 of the 0.032 total defects — 62.5% of all defects — because each of its items is 2.5 times likelier to be defective than A’s. The base-rate effect is the same phenomenon that makes medical screening counterintuitive: a low prior (or high alternative volume) can dominate a higher conditional rate, which is why a test’s accuracy is not the probability of illness after a positive test. Verification: P(A | D) = 0.012/0.032 = 0.375, and 0.625 + 0.375 = 1 ✓.",
+      "explanation": "Both joints and the total computed, the Bayes result 0.625, an explanation contrasting the two conditionals with the contribution shares, and the posterior-sum check."
+    }
+  ]
+}

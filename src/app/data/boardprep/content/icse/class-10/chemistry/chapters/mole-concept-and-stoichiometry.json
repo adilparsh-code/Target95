@@ -1,0 +1,542 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-chem-mole-concept",
+  "title": "Mole Concept and Stoichiometry",
+  "kind": "chemistry",
+  "tagline": "Counting particles by weighing them: the mole, the balanced equation and every conversion a numerical asks for.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ICSE Chemistry syllabus for Examination Year 2027 (CISCE Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ICSE Chemistry syllabus for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Chemical equations are ratios of particles, but laboratory balances read grams, so the mole is the bridge between the two. This chapter builds that bridge in one direction at a time — mass to moles, moles to particles, moles of gas to volume — then shows how a balanced equation turns one measured quantity into every other quantity in the reaction. Almost every numerical in this unit is the same three-step dance: convert to moles, use the equation ratio, convert back to what was asked.",
+    "facts": [
+      {
+        "label": "One mole",
+        "value": "6.022 × 10^23 particles, the number of atoms in exactly 12 g of carbon-12."
+      },
+      {
+        "label": "Molar volume",
+        "value": "One mole of any gas occupies 22.4 dm3 at STP (0 °C, 1 atm)."
+      },
+      {
+        "label": "Molar mass",
+        "value": "Mass in grams of one mole of a substance, numerically equal to relative formula mass."
+      },
+      {
+        "label": "Balanced equation",
+        "value": "Coefficients give the mole ratio; they are never read as gram ratios."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the laws of chemical combination and show how each is illustrated experimentally.",
+    "Define the mole and Avogadro’s number and convert between mass, moles, particles and gas volume.",
+    "Determine empirical and molecular formulae from percentage or mass composition, including using vapour density.",
+    "Use a balanced equation to relate the amounts of reactants and products, identifying a limiting reagent where required.",
+    "Calculate percentage composition and solve concentration problems using molarity."
+  ],
+  "learn": [
+    {
+      "id": "laws-and-avogadro",
+      "title": "The laws behind the arithmetic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Before any calculation can be trusted, four experimental laws have to be in place. The law of conservation of mass says that mass is unchanged in a chemical reaction, because atoms are only rearranged. The law of definite proportions says that a pure compound always contains the same elements in the same proportions by mass. The law of multiple proportions applies when two elements form more than one compound: the masses of one element that combine with a fixed mass of the other stand in simple whole-number ratios. Gay-Lussac’s law says that gases combining in a reaction do so in simple volume ratios, and Avogadro’s law interprets that as a statement about the number of molecules: equal volumes of gases at the same temperature and pressure contain equal numbers of molecules. From these laws the mole grows naturally as a counting unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Conservation of mass: the total mass of products equals the total mass of reactants.",
+            "Definite proportions: pure water is always 11.11 % hydrogen and 88.89 % oxygen by mass.",
+            "Multiple proportions: carbon monoxide and carbon dioxide give oxygen masses in the ratio 1 : 2 for the same carbon mass.",
+            "Avogadro: equal volumes of hydrogen and chlorine under the same conditions contain equal numbers of molecules, which is why the reaction needs one volume of each."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Water by mass",
+              "note": "18 g of water contains 2 g of hydrogen and 16 g of oxygen, giving 11.11 % and 88.89 % every time."
+            },
+            {
+              "text": "Carbon oxides",
+              "note": "With 12 g of carbon, carbon monoxide takes 16 g of oxygen and carbon dioxide takes 32 g, a 1 : 2 ratio."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Law of conservation of mass",
+              "meaning": "Mass is neither created nor destroyed in a chemical reaction."
+            },
+            {
+              "term": "Law of definite proportions",
+              "meaning": "A compound always contains its elements in fixed proportions by mass."
+            },
+            {
+              "term": "Avogadro’s law",
+              "meaning": "Equal volumes of gases at the same temperature and pressure contain equal numbers of molecules."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-mole",
+      "title": "The mole and its four conversions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mole is the amount of substance containing 6.022 × 10^23 specified particles, and that number is fixed by counting the atoms in exactly 12 g of carbon-12. Molar mass converts grams to moles by division, Avogadro’s number converts moles to particles by multiplication, and for gases the molar volume does the same job for volume: one mole of any gas occupies 22.4 dm3 at standard temperature and pressure. Work the four conversions as two separate pairs rather than one long chain, and always write the balanced equation before touching a number, because the coefficients are the only link between the quantities of different substances. A single mismatched unit is the most common reason a numerical goes wrong."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Moles = mass in grams ÷ molar mass in grams per mole.",
+            "Particles = moles × 6.022 × 10^23, and the particle may be an atom, molecule or formula unit.",
+            "Gas volume in dm3 at STP = moles × 22.4.",
+            "Every conversion keeps the unit attached to the number, so cancellation shows the way to the answer."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "44 g of carbon dioxide",
+              "note": "44 ÷ 44 = 1 mole, which is 6.022 × 10^23 molecules and 22.4 dm3 of gas at STP."
+            },
+            {
+              "text": "3.01 × 10^23 atoms of neon",
+              "note": "Dividing by Avogadro’s number gives 0.5 mole, which is 10 g of neon."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The four standard conversions",
+          "columns": [
+            "From",
+            "To",
+            "Multiplied by"
+          ],
+          "rows": [
+            [
+              "Grams",
+              "Moles",
+              "÷ molar mass"
+            ],
+            [
+              "Moles",
+              "Particles",
+              "× 6.022 × 10^23"
+            ],
+            [
+              "Moles of gas",
+              "Volume at STP in dm3",
+              "× 22.4"
+            ],
+            [
+              "Moles of gas",
+              "Volume at STP in cm3",
+              "× 22 400"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formulae",
+      "title": "Empirical formula, molecular formula and percentage composition",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Percentage composition gives the starting data for every formula problem. Divide each element’s percentage by its atomic mass to get the relative number of atoms, then divide all the results by the smallest to reach the simplest whole-number ratio; that ratio is the empirical formula. To reach the molecular formula, compare the empirical formula mass with the given molecular mass and scale up by a whole-number factor. Vapour density offers a shortcut, since molecular mass equals twice the vapour density. Percentage composition runs the other way: add up the atomic masses contributed by each element and divide by the formula mass. Both directions use the same idea — the formula is a recipe, and the masses follow the recipe."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Empirical formula: simplest whole-number ratio of atoms in the compound.",
+            "Molecular formula: actual number of atoms, always a whole-number multiple of the empirical formula.",
+            "Molecular mass from vapour density: molecular mass = 2 × vapour density.",
+            "A hydrate’s water of crystallisation is included in the formula mass when percentage water is asked."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A compound with 40 % carbon, 6.7 % hydrogen and 53.3 % oxygen",
+              "note": "Divide by 12, 1 and 16 to get 3.33, 6.7 and 3.33, giving 1 : 2 : 1, so the empirical formula is CH2O."
+            },
+            {
+              "text": "Glucose with empirical formula CH2O and molecular mass 180",
+              "note": "Empirical mass is 30, and 180 ÷ 30 = 6, so the molecular formula is C6H12O6."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Empirical formula",
+              "meaning": "Simplest whole-number ratio of the atoms of each element in a compound."
+            },
+            {
+              "term": "Molecular formula",
+              "meaning": "Actual number of atoms of each element in one molecule."
+            },
+            {
+              "term": "Vapour density",
+              "meaning": "Mass of a volume of gas compared with the same volume of hydrogen; twice it gives molecular mass."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stoichiometry",
+      "title": "Stoichiometry: using the equation ratio",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Stoichiometry is the quantitative use of a balanced equation. The coefficients state how many moles of each substance react or form, so a single known quantity can be turned into every other quantity by a chain of two conversions: convert the known to moles, multiply by the mole ratio from the equation, then convert the answer into whatever unit was asked for. When the reactants are not in the correct ratio, one of them runs out first; that is the limiting reagent, and it decides the yield. The excess reagent remains in the mixture. Exam questions frequently disguise this by giving masses of two reactants and asking for the mass of product, so the routine is: convert both to moles, divide by their coefficients, the smaller quotient belongs to the limiting reagent."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write and balance the equation first; an unbalanced equation gives the wrong ratio for every step after it.",
+            "Mole ratio from the coefficients converts moles of one substance into moles of another.",
+            "Limiting reagent: divide moles of each reactant by its coefficient; the smallest value limits the reaction.",
+            "Percentage yield compares the actual mass obtained with the mass the calculation predicts.",
+            "The coefficients of N2 + 3H2 → 2NH3 fix the ratio: one mole of nitrogen needs three moles of hydrogen and yields two moles of ammonia.",
+            "CaCO3 → CaO + CO2 is the simplest ratio to read, and it is also the equation behind the mass loss measured in a crucible experiment."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Decomposing calcium carbonate",
+              "note": "10 g of CaCO3 is 0.1 mole, so 0.1 mole of CO2 forms, which is 4.4 g at the masses involved."
+            },
+            {
+              "text": "Hydrogen and oxygen to water",
+              "note": "Two volumes of hydrogen with one of oxygen leave hydrogen in excess if the ratio offered is three to one."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The standard three-step numerical",
+          "columns": [
+            "Step",
+            "Operation",
+            "Unit check"
+          ],
+          "rows": [
+            [
+              "1",
+              "Convert the given quantity to moles",
+              "grams ÷ molar mass, or cm3 ÷ 22 400"
+            ],
+            [
+              "2",
+              "Apply the mole ratio from the equation",
+              "ratio taken from coefficients only"
+            ],
+            [
+              "3",
+              "Convert back to the unit asked",
+              "moles × molar mass, or × 22.4 for gas volume"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "concentration-and-yield",
+      "title": "Concentration, yield and the practical side",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Solution work adds one more conversion. Molarity is the number of moles of solute in one cubic decimetre of solution, written mol dm-3, and it converts volume to moles by multiplication: moles = molarity × volume in dm3. A titration is nothing more than this arithmetic in reverse, using the neutralisation ratio to find an unknown concentration. Two practical ideas round off the unit. Percentage yield compares what was obtained with what theory predicts, because losses during transfer, filtration and crystallisation are real. Percentage purity asks how much of a weighed sample is actually the substance claimed, which matters for reagents that contain moisture or unreacted starting material. Both are simple ratios, but they must be written as fractions before they are turned into percentages."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Molarity = moles of solute ÷ volume of solution in dm3.",
+            "Titration calculations always begin with moles of the standard solution, not its volume alone.",
+            "Percentage yield = actual yield ÷ theoretical yield × 100.",
+            "Percentage purity = mass of pure substance ÷ mass of sample × 100."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "50 cm3 of 0.1 mol dm-3 NaOH",
+              "note": "Volume in dm3 is 0.05, so moles are 0.05 × 0.1 = 0.005 mol of sodium hydroxide."
+            },
+            {
+              "text": "A sample giving 8 g of product from a theoretical 10 g",
+              "note": "Yield is 8 ÷ 10 × 100 = 80 %, with the shortfall lost during transfer and drying."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Molarity",
+              "meaning": "Number of moles of solute per cubic decimetre of solution, written mol dm-3."
+            },
+            {
+              "term": "Limiting reagent",
+              "meaning": "Reactant fully consumed first, which fixes the amount of product formed."
+            },
+            {
+              "term": "Percentage yield",
+              "meaning": "Actual mass obtained expressed as a percentage of the theoretical mass."
+            },
+            {
+              "term": "Purity",
+              "meaning": "Fraction of a sample that is the substance it is claimed to be."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The mole bridge between the laboratory and the particle world",
+      "description": "A central box labelled one mole, 6.022 × 10^23 particles, with arrows out to grams on one side, gas volume in cubic decimetres on another, and particle count on a third, each arrow labelled with its conversion factor.",
+      "labels": [
+        "1 mole = 6.022 × 10^23",
+        "÷ molar mass for grams",
+        "× 22.4 dm3 at STP",
+        "× Avogadro for particles",
+        "ratios come from coefficients"
+      ]
+    },
+    {
+      "caption": "Figure: Limiting reagent in a reaction vessel",
+      "description": "Two beakers of reactant particles shown before mixing, with one beaker emptied and leftover particles of the other remaining after reaction, and product particles collected at the side.",
+      "labels": [
+        "reactant A fully consumed",
+        "reactant B left in excess",
+        "product fixed by A",
+        "quotient with coefficient decides",
+        "theoretical yield shown separately"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "One mole contains 6.022 × 10^23 particles and has a mass in grams equal to the relative formula mass.",
+    "Moles = mass ÷ molar mass; particles = moles × Avogadro’s number; gas volume at STP = moles × 22.4 dm3.",
+    "Equal volumes of gases at the same temperature and pressure contain equal numbers of molecules.",
+    "Empirical formula is the simplest ratio; molecular formula is a whole-number multiple of it.",
+    "Molecular mass equals twice vapour density.",
+    "Coefficients in a balanced equation give the mole ratio between reactants and products.",
+    "The limiting reagent is found by dividing moles by coefficients; the smallest quotient limits the reaction.",
+    "Molarity is moles of solute per cubic decimetre of solution; titrations convert volume to moles first.",
+    "Percentage yield and percentage purity are both ratios written as fractions before multiplying by 100.",
+    "Conservation of mass holds in every calculation: the atoms in equal the atoms out."
+  ],
+  "examFocus": [
+    "Write the balanced equation before any arithmetic; most lost marks in this unit come from a missing or wrong coefficient.",
+    "Keep units attached at every step and cancel them visibly — the marker gives credit for the method as well as the answer.",
+    "When two reactant masses are given, test both as limiting reagents before calculating the product.",
+    "Percentage and empirical formula questions are worked in the same sequence: convert to moles, divide by smallest, scale up."
+  ],
+  "vocabulary": [
+    {
+      "word": "Mole",
+      "meaning": "Amount of substance containing 6.022 × 10^23 specified particles."
+    },
+    {
+      "word": "Avogadro’s number",
+      "meaning": "6.022 × 10^23, the number of particles in one mole."
+    },
+    {
+      "word": "Molar volume",
+      "meaning": "Volume occupied by one mole of a gas: 22.4 dm3 at STP."
+    },
+    {
+      "word": "Molarity",
+      "meaning": "Moles of solute per cubic decimetre of solution."
+    },
+    {
+      "word": "Limiting reagent",
+      "meaning": "Reactant consumed first, controlling how much product can form."
+    },
+    {
+      "word": "Empirical formula",
+      "meaning": "Simplest whole-number ratio of atoms in a compound."
+    },
+    {
+      "word": "Vapour density",
+      "meaning": "Mass of a gas relative to the same volume of hydrogen; twice it gives molecular mass."
+    },
+    {
+      "word": "Stoichiometry",
+      "meaning": "Quantitative calculation of reactants and products from a balanced equation."
+    }
+  ],
+  "questions": [
+    {
+      "id": "chem-mole-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "One mole of any substance contains:",
+      "options": [
+        "6.022 × 10^23 particles",
+        "3.14 × 10^8 particles",
+        "1 g of particles",
+        "22.4 particles"
+      ],
+      "correctIndex": 0,
+      "answer": "6.022 × 10^23 particles",
+      "explanation": "Avogadro’s number is the defining count for one mole of any species."
+    },
+    {
+      "id": "chem-mole-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume occupied by 2 moles of carbon dioxide at STP is:",
+      "options": [
+        "11.2 dm3",
+        "22.4 dm3",
+        "44.8 dm3",
+        "44 dm3"
+      ],
+      "correctIndex": 2,
+      "answer": "44.8 dm3",
+      "explanation": "Each mole occupies 22.4 dm3 at STP, so two moles occupy 44.8 dm3."
+    },
+    {
+      "id": "chem-mole-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A compound with empirical formula CH2O and molecular mass 180 has the molecular formula:",
+      "options": [
+        "CH2O",
+        "C2H4O2",
+        "C3H6O3",
+        "C6H12O6"
+      ],
+      "correctIndex": 3,
+      "answer": "C6H12O6",
+      "explanation": "The empirical mass is 30 and 180 ÷ 30 = 6, so six empirical units make the molecule."
+    },
+    {
+      "id": "chem-mole-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the reaction of 4 g of hydrogen with 32 g of oxygen, the limiting reagent is:",
+      "options": [
+        "Hydrogen",
+        "Oxygen",
+        "Both are in excess",
+        "Water limits the reaction"
+      ],
+      "correctIndex": 1,
+      "answer": "Oxygen",
+      "explanation": "Four grams of hydrogen is 2 moles against 1 mole of oxygen; the equation needs 2 : 1, so oxygen runs out first at that ratio."
+    },
+    {
+      "id": "chem-mole-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mass in grams of one mole of a substance is numerically equal to its relative __________ mass.",
+      "answer": "formula",
+      "explanation": "Molar mass in grams per mole equals the relative formula mass of the substance."
+    },
+    {
+      "id": "chem-mole-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of moles of solute in one cubic decimetre of solution is called the __________ of the solution.",
+      "answer": "molarity",
+      "explanation": "Molarity is written in mol dm-3 and converts volume to moles by multiplication."
+    },
+    {
+      "id": "chem-mole-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Avogadro’s law.",
+      "answer": "Equal volumes of all gases, at the same temperature and pressure, contain equal numbers of molecules.",
+      "explanation": "The law compares numbers of molecules rather than masses, which is why volume ratios equal mole ratios for gases."
+    },
+    {
+      "id": "chem-mole-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Calculate the number of molecules in 4.4 g of carbon dioxide.",
+      "answer": "Molar mass of CO2 is 44 g mol-1, so 4.4 g is 0.1 mole. Number of molecules = 0.1 × 6.022 × 10^23 = 6.022 × 10^22 molecules.",
+      "explanation": "Divide mass by molar mass first, then multiply by Avogadro’s number."
+    },
+    {
+      "id": "chem-mole-09",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is meant by empirical formula?",
+      "answer": "The empirical formula is the simplest whole-number ratio of the atoms of each element present in one molecule or formula unit of a compound.",
+      "explanation": "It is obtained by converting percentages to moles and dividing by the smallest value."
+    },
+    {
+      "id": "chem-mole-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how the law of conservation of mass is satisfied when 24 g of magnesium burns in air to form about 40 g of magnesium oxide.",
+      "answer": "Magnesium combines with oxygen from the air: 24 g of magnesium is 1 mole and takes 1 mole of oxygen, 32 g, so 40 g of magnesium oxide forms. The oxygen was never weighed in the open crucible, but the mass of magnesium plus the mass of oxygen absorbed equals the mass of the product, so no mass is created or destroyed — atoms are only rearranged from magnesium and oxygen into magnesium oxide.",
+      "explanation": "The apparently lost mass is the gaseous reactant; adding it back restores the balance required by the law."
+    },
+    {
+      "id": "chem-mole-11",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Describe how to find the empirical formula of a compound containing 37.5 % carbon, 12.5 % hydrogen and 50 % oxygen by mass.",
+      "answer": "Take 100 g so the percentages become grams: 37.5 g carbon, 12.5 g hydrogen, 50 g oxygen. Divide each by its atomic mass to get relative numbers of atoms: 37.5 ÷ 12 = 3.125, 12.5 ÷ 1 = 12.5, 50 ÷ 16 = 3.125. Divide all three by the smallest value, 3.125, to get 1 : 4 : 1. The empirical formula is therefore CH4O, that is CH3OH written as a 1 : 4 : 1 ratio, and any molecular formula must be a whole-number multiple of it.",
+      "explanation": "Percentages are converted to moles of atoms, then to the simplest whole-number ratio by dividing by the smallest quotient."
+    },
+    {
+      "id": "chem-mole-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In the reaction N2 + 3H2 → 2NH3, 28 g of nitrogen is mixed with 6 g of hydrogen. Identify the limiting reagent, the moles of ammonia formed and the mass of the excess reagent left over.",
+      "answer": "Nitrogen: 28 ÷ 28 = 1 mole. Hydrogen: 6 ÷ 2 = 3 moles. The equation demands a 1 : 3 ratio, which is exactly what is present, so neither is in excess and both are consumed. Ammonia formed = 2 moles, with mass 2 × 17 = 34 g. Because the ratio is exactly stoichiometric, the mass of excess reagent remaining is zero; had any hydrogen been left over it would be found by subtracting the three moles consumed from the three moles offered.",
+      "explanation": "Dividing moles by coefficients gives equal quotients of 1 for both reactants, which is the signature of an exactly balanced mixture."
+    }
+  ]
+}

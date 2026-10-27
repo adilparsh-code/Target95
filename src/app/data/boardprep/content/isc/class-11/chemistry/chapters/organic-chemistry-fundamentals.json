@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-organic-basics",
+  "title": "Organic Chemistry: Fundamental Concepts",
+  "kind": "chemistry",
+  "tagline": "Electronic effects, IUPAC names, isomerism and the mechanisms that explain why reactions happen.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Chemistry, corroborated by Oswal Publishers). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Chemistry syllabus registered for Examination Year 2027: every explanation, table, figure specification, example, question and answer was written for this page. Chemical facts follow standard school chemistry and the prescribed syllabus topic list."
+  },
+  "overview": {
+    "intro": "Organic chemistry becomes manageable when two skills are secure: naming any structure you are shown, and reading a reaction arrow as a movement of electrons rather than a rearrangement of letters. This chapter builds the language — functional groups, the IUPAC rules, the four types of isomerism — and then the two inductive and resonance effects that control where a reaction goes, before setting out the mechanism types the syllabus names: SN1, SN2, electrophilic addition and electrophilic substitution. Mechanism questions reward a precise sequence, so each one here is given as numbered steps with the electron movement described in words.",
+    "facts": [
+      {
+        "label": "Tetravalent carbon",
+        "value": "Four covalent bonds in tetrahedral geometry at 109.5° around sp^3 carbon."
+      },
+      {
+        "label": "Functional groups",
+        "value": "–OH, –CHO, –COOH, –X, –NH2, C=C, C≡C decide the chemistry."
+      },
+      {
+        "label": "Isomerism",
+        "value": "Structural (chain, position, functional, metamerism, tautomerism) and stereo (geometrical, optical)."
+      },
+      {
+        "label": "Exam weight",
+        "value": "IUPAC naming, isomer identification and mechanism steps carry the largest share."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Write IUPAC names and condensed formulae for compounds containing the principal functional groups.",
+    "Distinguish the classes of structural and stereoisomerism and identify examples of each.",
+    "Explain the inductive, resonance, hyperconjugation and electromeric effects with examples.",
+    "Describe SN1 and SN2 mechanisms, their kinetics and their stereochemical outcomes.",
+    "Describe electrophilic addition to alkenes and electrophilic substitution in benzene."
+  ],
+  "learn": [
+    {
+      "id": "naming",
+      "title": "The language of organic chemistry: functional groups and IUPAC naming",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every organic name has three parts: a root that gives the longest chain carrying the principal group, a suffix that names that group, and prefixes that locate branches and substituents. The IUPAC rules follow a fixed order of priority, with carboxylic acid above aldehyde, above ketone, above alcohol, above amine, and only the highest group takes the suffix while the others become prefixes. Numbering starts from the end nearer the principal group, the lowest locant set wins, and substituents are listed alphabetically with di, tri and tetra used for repeats. Cyclic compounds take the ring as the parent unless the chain carries the principal group, and unsaturation is located by the number of the first atom of the double or triple bond. Writing the name from a structure and drawing the structure from a name are the same skill in reverse, and both are examined every year."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Principal group gets the suffix; all other groups and halogens become prefixes.",
+            "Number to give the principal group the lowest number, then the lowest locant set overall.",
+            "List substituents alphabetically; ignore di, tri and tetra when alphabetising.",
+            "The suffix -ene marks a double bond and -yne a triple bond, each located by the first carbon involved.",
+            "A ring is the parent only when no chain carries a higher-priority group."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "CH3CH(OH)CH2CH3",
+              "note": "Butan-2-ol: four carbons, alcohol on the second."
+            },
+            {
+              "text": "CH3CH=CHCOOH",
+              "note": "But-2-enoic acid: four carbons with the double bond starting at carbon 2 and the acid taking priority."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Functional group priority for suffixes",
+          "columns": [
+            "Priority",
+            "Group",
+            "Suffix",
+            "Prefix when not principal"
+          ],
+          "rows": [
+            [
+              "1",
+              "–COOH",
+              "-oic acid",
+              "carboxy"
+            ],
+            [
+              "2",
+              "–CHO",
+              "-al",
+              "formyl or oxo"
+            ],
+            [
+              "3",
+              "–CO–",
+              "-one",
+              "oxo"
+            ],
+            [
+              "4",
+              "–OH",
+              "-ol",
+              "hydroxy"
+            ],
+            [
+              "5",
+              "–NH2",
+              "-amine",
+              "amino"
+            ],
+            [
+              "6",
+              "C=C / C≡C",
+              "-ene / -yne",
+              "none"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "isomerism",
+      "title": "Isomerism: structural and stereoisomerism",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Isomers share a molecular formula but differ in constitution or in space. Structural isomers differ in connectivity: chain isomers differ in the carbon skeleton, position isomers in where a functional group or multiple bond sits, functional-group isomers in the family itself, as ethanol and dimethyl ether, and metamerism in how alkyl groups are distributed around a polyvalent functional group. Tautomerism is a special dynamic case where two forms interconvert through the migration of a proton, as the keto and enol forms of a carbonyl compound. Stereoisomers have the same connectivity but differ in arrangement: geometrical isomers arise from restricted rotation about a double bond or a ring, giving cis and trans forms with different physical properties, while optical isomers are non-superimposable mirror images distinguished by the rotation of plane-polarised light and labelled R or S by the Cahn–Ingold–Prelog rules."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Chain: butane against 2-methylpropane, same formula different skeleton.",
+            "Position: butan-1-ol against butan-2-ol, group on different carbons.",
+            "Functional: ethanol against methoxymethane, alcohol against ether.",
+            "Metamerism: diethyl ether against methyl propyl ether, groups around the oxygen differ.",
+            "Geometrical: cis-but-2-ene against trans-but-2-ene, differing in polarity and boiling point.",
+            "Optical: a chiral carbon carries four different groups and gives two enantiomers."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Propanal and propanone",
+              "note": "Both are C3H6O but belong to different functional families: aldehyde and ketone."
+            },
+            {
+              "text": "Lactic acid has one chiral centre",
+              "note": "The carboxyl, hydroxyl, methyl and hydrogen groups are all different, so two optical isomers exist."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Structural isomerism",
+              "meaning": "Isomerism in which atoms are connected in a different order."
+            },
+            {
+              "term": "Position isomerism",
+              "meaning": "Isomerism from a different position of the same functional group or bond."
+            },
+            {
+              "term": "Geometrical isomerism",
+              "meaning": "cis–trans isomerism from restricted rotation, as in alkenes and rings."
+            },
+            {
+              "term": "Chirality",
+              "meaning": "The property of a molecule that makes it non-superimposable on its mirror image."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electronic-effects",
+      "title": "Electronic effects: inductive, resonance, hyperconjugation and electromeric",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reactions are explained by where electron density lies and how it moves, and four effects supply the vocabulary. The inductive effect is a permanent pull or push of electrons through sigma bonds by an electronegative atom, weakening with distance and denoted −I for electron-withdrawing groups such as nitro and halogen, +I for electron-releasing alkyl groups. Resonance, or mesomeric effect, is the delocalisation of pi electrons over more than two atoms, represented by resonance structures whose hybrid is the real molecule; +M donors such as –OH and –NH2 push density into a ring while −M withdrawers such as –NO2 and –COOH pull it out. Hyperconjugation is the delocalisation of a sigma C–H bond into an adjacent empty or half-filled p orbital, which stabilises more substituted alkenes and carbocations. The electromeric effect is temporary: on the approach of a reagent, a pi pair moves entirely to one atom, denoted +E or −E. Acidity and basicity questions are answered by comparing how well the conjugate base stabilises its charge through these effects."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "−I groups: NO2 > CN > COOH > F > Cl > Br > I; they increase carboxylic acid acidity.",
+            "+I groups: tertiary alkyl > secondary > primary > methyl; they destabilise anions and reduce acidity.",
+            "+M donors: –OH, –NH2, –OR push electrons into a ring and activate it towards substitution.",
+            "−M withdrawers: –NO2, –CHO, –COOH pull electrons out and deactivate the ring.",
+            "Hyperconjugation stabilises alkenes in the order tetrasubstituted > trisubstituted > disubstituted.",
+            "The electromeric effect operates only during reaction and reverses when the reagent leaves."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Chloroacetic acid is stronger than acetic acid",
+              "note": "The −I effect of chlorine disperses the negative charge of the conjugate base, stabilising it."
+            },
+            {
+              "text": "Phenol is more acidic than cyclohexanol",
+              "note": "The phenoxide charge delocalises into the ring by resonance, while the alkoxide cannot."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Comparing the four electronic effects",
+          "columns": [
+            "Effect",
+            "Type of electrons",
+            "Permanent or temporary",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Inductive",
+              "sigma",
+              "permanent",
+              "Cl withdrawing in CH2ClCOOH"
+            ],
+            [
+              "Resonance or mesomeric",
+              "pi and p",
+              "permanent",
+              "–NH2 donating into benzene"
+            ],
+            [
+              "Hyperconjugation",
+              "sigma into p",
+              "permanent",
+              "stability of but-2-ene"
+            ],
+            [
+              "Electromeric",
+              "pi, full transfer",
+              "temporary only",
+              "alkene attacking H+"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reaction-mechanisms",
+      "title": "Reaction mechanisms: SN1, SN2, addition and substitution",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A mechanism is the step-by-step path of electron movement from reactants to products, and the syllabus names four. SN2 is a single concerted step in which the nucleophile attacks the back of the carbon bearing the leaving group while the leaving group departs, giving a pentavalent transition state and inversion of configuration; rate depends on both substrates, so it is second order. SN1 is a two-step path in which the leaving group departs first to give a planar carbocation, which the nucleophile then attacks from either face; the rate depends only on the substrate, giving first-order kinetics and partial racemisation, and stability of the carbocation decides the ease, tertiary fastest. Electrophilic addition to an unsymmetrical alkene follows Markovnikov’s rule because the more substituted carbocation forms first. Electrophilic substitution in benzene replaces a hydrogen rather than adding across the ring, because addition would destroy the stable aromatic system; the cycle is generation of the electrophile, attack to form a sigma complex, and loss of a proton to restore the ring."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "SN2: one step, second order, inversion of configuration, favoured by methyl and primary substrates and by good nucleophiles in polar aprotic solvents.",
+            "SN1: two steps, first order, carbocation intermediate, racemisation, favoured by tertiary substrates and polar protic solvents.",
+            "Carbocation stability order: tertiary > secondary > primary > methyl.",
+            "Markovnikov addition: hydrogen adds to the carbon already carrying more hydrogens, because the more substituted carbocation is more stable.",
+            "Peroxide effect reverses addition of HBr only, because a radical chain gives the anti-Markovnikov product.",
+            "Benzene substitution needs a strong electrophile: Br2 with a halogen carrier, or NO2+ from nitric and sulphuric acids.",
+            "The sigma complex loses a proton to restore aromaticity, which is why substitution beats addition."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "2-bromopropane solvolysis in water",
+              "note": "Loss of bromide gives a secondary carbocation, then water attacks and deprotonation gives propan-2-ol by SN1."
+            },
+            {
+              "text": "Bromination of methylethene",
+              "note": "H+ adds to the CH2 end giving a secondary carbocation, then Br− attacks the central carbon, giving 2-bromopropane."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "SN1 against SN2",
+          "columns": [
+            "Feature",
+            "SN1",
+            "SN2"
+          ],
+          "rows": [
+            [
+              "Steps",
+              "two, through a carbocation",
+              "one, concerted"
+            ],
+            [
+              "Kinetics",
+              "first order in substrate",
+              "second order, substrate and nucleophile"
+            ],
+            [
+              "Stereochemistry",
+              "racemisation with some inversion",
+              "complete inversion"
+            ],
+            [
+              "Favoured substrate",
+              "tertiary",
+              "methyl and primary"
+            ],
+            [
+              "Solvent",
+              "polar protic",
+              "polar aprotic"
+            ],
+            [
+              "Rate depends on",
+              "substrate only",
+              "substrate and nucleophile"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The SN2 backside attack and inversion of configuration",
+      "description": "A carbon centre with its three other groups, the nucleophile approaching from the side opposite the leaving group, a trigonal bipyramidal transition state, and the product with its groups inverted like an umbrella.",
+      "labels": [
+        "nucleophile attacks from the back",
+        "leaving group departs simultaneously",
+        "pentavalent transition state",
+        "inversion of configuration",
+        "one-step, second-order kinetics"
+      ]
+    },
+    {
+      "caption": "Figure: SN1 through a planar carbocation",
+      "description": "Stepwise scheme: the leaving group departs to give a planar three-coordinate carbocation, then the nucleophile attacks from either face giving a mixture of configurations.",
+      "labels": [
+        "step 1: leaving group leaves",
+        "planar carbocation intermediate",
+        "step 2: nucleophile attacks",
+        "attack from either face",
+        "partial racemisation results"
+      ]
+    },
+    {
+      "caption": "Figure: Electrophilic substitution in benzene",
+      "description": "Benzene reacting with an electrophile to give a bracketed sigma complex with the positive charge spread over three carbons, then losing H+ to restore the aromatic ring.",
+      "labels": [
+        "electrophile generated by the catalyst",
+        "ring attacks the electrophile",
+        "sigma complex with broken aromaticity",
+        "proton lost to restore the ring",
+        "substitution preserves the sextet"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Carbon is tetravalent and forms four bonds in a tetrahedral arrangement.",
+    "The IUPAC name combines root, suffix for the principal group and numbered prefixes.",
+    "Structural isomers differ in connectivity; stereoisomers differ only in arrangement.",
+    "Chirality with four different groups on one carbon gives optical isomers.",
+    "Inductive, resonance, hyperconjugation and electromeric effects explain electron movement.",
+    "SN2 is concerted with inversion and second-order kinetics; SN1 is stepwise with racemisation.",
+    "Carbocation stability follows tertiary > secondary > primary > methyl.",
+    "Markovnikov addition proceeds through the more substituted carbocation.",
+    "Benzene undergoes substitution to preserve aromatic stability, in three mechanistic steps.",
+    "Electron-donating groups activate a ring towards electrophilic substitution; withdrawing groups deactivate it."
+  ],
+  "examFocus": [
+    "Name the parent, locate the principal group, then number and alphabetise; show the steps in the margin.",
+    "In isomer questions, state the class first and then point to the specific difference.",
+    "Mechanism answers need arrows described as electron movement, a named intermediate or transition state, and the kinetic consequence.",
+    "For addition to an unsymmetrical alkene, draw the carbocation and justify its stability before naming the product."
+  ],
+  "vocabulary": [
+    {
+      "word": "Functional group",
+      "meaning": "Atom or group responsible for the characteristic reactions of a compound."
+    },
+    {
+      "word": "Homologous series",
+      "meaning": "Family of compounds differing by CH2 and showing similar properties."
+    },
+    {
+      "word": "Isomers",
+      "meaning": "Compounds with the same molecular formula but different structures or arrangement."
+    },
+    {
+      "word": "Chiral",
+      "meaning": "Non-superimposable on the mirror image, usually from a carbon with four different groups."
+    },
+    {
+      "word": "Inductive effect",
+      "meaning": "Transmission of electron displacement through sigma bonds by an electronegative atom."
+    },
+    {
+      "word": "Resonance",
+      "meaning": "Delocalisation of pi electrons over more than two atoms, described by several structures."
+    },
+    {
+      "word": "Hyperconjugation",
+      "meaning": "Delocalisation of a C–H sigma bond into an adjacent p orbital."
+    },
+    {
+      "word": "Nucleophile",
+      "meaning": "Electron-pair donor that attacks an electron-deficient carbon."
+    },
+    {
+      "word": "Electrophile",
+      "meaning": "Electron-pair acceptor that attacks an electron-rich site."
+    },
+    {
+      "word": "Carbocation",
+      "meaning": "Carbon bearing a positive charge with three bonds and an empty p orbital."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-chem-org-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The IUPAC name of CH3CH2CH2OH is:",
+      "options": [
+        "Propan-1-ol",
+        "Propan-2-ol",
+        "Propanal",
+        "Ethyl methyl ether"
+      ],
+      "correctIndex": 0,
+      "answer": "Propan-1-ol",
+      "explanation": "A three-carbon chain with the hydroxyl group on carbon 1 gives propan-1-ol."
+    },
+    {
+      "id": "isc11-chem-org-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Propanal and propanone are examples of which class of isomerism?",
+      "options": [
+        "Chain isomerism",
+        "Position isomerism",
+        "Functional group isomerism",
+        "Geometrical isomerism"
+      ],
+      "correctIndex": 2,
+      "answer": "Functional group isomerism",
+      "explanation": "Both have the formula C3H6O but belong to different families, aldehyde and ketone."
+    },
+    {
+      "id": "isc11-chem-org-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An SN2 reaction is characterised by:",
+      "options": [
+        "A carbocation intermediate and first-order kinetics",
+        "A single concerted step with inversion of configuration",
+        "Racemisation and dependence on the nucleophile only",
+        "Two steps and second-order kinetics"
+      ],
+      "correctIndex": 1,
+      "answer": "A single concerted step with inversion of configuration",
+      "explanation": "Backside attack and departure occur together, giving a transition state and complete inversion in one step."
+    },
+    {
+      "id": "isc11-chem-org-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The addition of hydrogen bromide to propene in the presence of organic peroxides gives predominantly:",
+      "options": [
+        "1-bromopropane by Markovnikov addition",
+        "2-bromopropane by Markovnikov addition",
+        "1-bromopropane by the anti-Markovnikov radical route",
+        "Propan-2-ol"
+      ],
+      "correctIndex": 2,
+      "answer": "1-bromopropane by the anti-Markovnikov radical route",
+      "explanation": "Peroxides initiate a radical chain that adds bromine to the less substituted carbon, reversing the usual orientation."
+    },
+    {
+      "id": "isc11-chem-org-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The temporary transfer of a pair of pi electrons towards one atom on the approach of a reagent is called the __________ effect.",
+      "answer": "electromeric",
+      "explanation": "The electromeric effect operates only during a reaction and is denoted +E or −E."
+    },
+    {
+      "id": "isc11-chem-org-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A carbon atom bonded to four different groups is described as __________ and shows optical isomerism.",
+      "answer": "chiral",
+      "explanation": "A chiral centre gives a non-superimposable mirror image that rotates plane-polarised light."
+    },
+    {
+      "id": "isc11-chem-org-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define a nucleophile and give two examples.",
+      "answer": "A nucleophile is an electron-pair donor that attacks an electron-deficient atom, usually carbon; examples are the hydroxide ion, the cyanide ion, ammonia and water. Nucleophiles are Lewis bases and appear in substitution and addition reactions.",
+      "explanation": "The defining act is the donation of an electron pair into an empty or electron-poor orbital."
+    },
+    {
+      "id": "isc11-chem-org-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between chain isomerism and position isomerism with one example each.",
+      "answer": "Chain isomerism arises from a different arrangement of the carbon skeleton, as butane against 2-methylpropane. Position isomerism arises from the same functional group or multiple bond attached at a different carbon, as butan-1-ol against butan-2-ol.",
+      "explanation": "The skeleton changes in one case; only the location changes in the other."
+    },
+    {
+      "id": "isc11-chem-org-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Compare the SN1 and SN2 mechanisms with respect to steps, kinetics, stereochemistry and substrate preference.",
+      "answer": "SN2 is a single concerted step: the nucleophile attacks the carbon from the side opposite the leaving group, and as the new bond forms the old one breaks through a pentavalent transition state. The rate depends on both species, so the reaction is second order, and the carbon’s configuration inverts. SN1 proceeds in two steps: the leaving group departs to give a planar carbocation, then the nucleophile attacks from either face. Only the substrate appears in the rate law, making it first order, and attack from both faces gives racemisation with slight inversion. SN2 is favoured by methyl and primary substrates in polar aprotic solvents; SN1 by tertiary substrates in polar protic solvents, because the carbocation is stabilised by alkyl groups.",
+      "explanation": "The carbocation decides everything about SN1 and the backside attack decides everything about SN2."
+    },
+    {
+      "id": "isc11-chem-org-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why trifluoroacetic acid is a much stronger acid than acetic acid, using the inductive effect.",
+      "answer": "After the carboxyl group loses a proton, the negative charge on the conjugate base is stabilised if it can be dispersed. The three fluorine atoms of the CF3 group are strongly electronegative and exert a powerful −I effect through the sigma bonds, pulling electron density away from the carboxylate and spreading the charge over a larger volume. This stabilisation makes the loss of the proton much more favourable, so trifluoroacetic acid ionises far more completely than acetic acid, where the methyl group instead donates density weakly by the +I effect and destabilises the anion.",
+      "explanation": "Acidity follows the stability of the conjugate base; electron withdrawal disperses charge while donation concentrates it."
+    }
+  ]
+}

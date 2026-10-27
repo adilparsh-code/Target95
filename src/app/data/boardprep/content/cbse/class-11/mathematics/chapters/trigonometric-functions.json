@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-trigonometry",
+  "title": "Trigonometric Functions",
+  "kind": "mathematics",
+  "tagline": "Radians, the unit circle and the identity that anchors everything: from addition formulas to sum-to-product and multiple angles.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "Trigonometry in Class XI stops being a catalogue of ratios and becomes a study of the unit circle. The chapter starts with measurement — radians against degrees and the conversions between them — then defines the six functions from circle coordinates, derives the fundamental identity sin²x + cos²x = 1, and builds the addition formulas from which every other identity in the syllabus descends: the sum-to-product family, the double and triple angle formulas, and finally the general solutions that the official syllabus places in the formative-only list.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-I: Sets and Functions (23 marks shared with Sets and Relations)."
+      },
+      {
+        "label": "Radian measure",
+        "value": "π radians = 180°, so 1 radian = 180/π degrees and 1° = π/180 radians."
+      },
+      {
+        "label": "Anchor identity",
+        "value": "sin²x + cos²x = 1 for every x, true for all angles by construction of the circle."
+      },
+      {
+        "label": "Formative topic",
+        "value": "General solutions of equations of the type sin y = sin a, cos y = cos a, tan y = tan a."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Convert angles freely between degrees and radians.",
+    "Read the trigonometric functions from the unit circle including signs in all quadrants.",
+    "Derive and apply the addition formulas for sin(x ± y) and cos(x ± y).",
+    "Transform sum-to-product and multiple-angle identities in both directions.",
+    "Write the general solution of a simple trigonometric equation."
+  ],
+  "learn": [
+    {
+      "id": "measure",
+      "title": "Measuring angles: degrees, radians and the unit circle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An angle is measured by the rotation that produces it, and the two systems on the syllabus differ only in how much rotation earns one unit. In degrees the full turn is divided into 360 parts; in radians it is divided into 2π parts, because one radian is the angle subtended at the centre of a circle by an arc equal in length to the radius, and the whole circumference is 2πr. The conversion therefore rests on a single equivalence, π radians = 180°, from which everything follows by proportion: multiply degrees by π/180 for radians, and by 180/π for the reverse. Radians are the natural unit for calculus later in the course precisely because the formula for arc length, s = rθ, needs no constant — the ratio is already in its simplest form."
+        },
+        {
+          "type": "paragraph",
+          "text": "The unit circle — radius one, centred at the origin — turns measurement into coordinates. For an angle θ measured counterclockwise from the positive x-axis, the terminal ray meets the circle at a point whose coordinates are (cos θ, sin θ), and this single fact defines the functions geometrically: cosine is the x-coordinate, sine the y-coordinate, and the remaining four ratios are their quotients. Because the coordinates obey x² + y² = 1 for every point on the circle, the fundamental identity sin²θ + cos²θ = 1 is not an algebraic coincidence but the equation of the circle itself. Signs then follow from which quadrant the ray lands in: all positive in the first, sine positive in the second, tangent positive in the third, cosine positive in the fourth."
+        },
+        {
+          "type": "table",
+          "caption": "Degree–radian conversions worth knowing cold",
+          "columns": [
+            "Degrees",
+            "Radians",
+            "Where it appears"
+          ],
+          "rows": [
+            [
+              "180°",
+              "π",
+              "The base equivalence"
+            ],
+            [
+              "90°",
+              "π/2",
+              "First quadrant boundary"
+            ],
+            [
+              "60°",
+              "π/3",
+              "Standard triangle"
+            ],
+            [
+              "45°",
+              "π/4",
+              "Standard triangle"
+            ],
+            [
+              "30°",
+              "π/6",
+              "Standard triangle"
+            ],
+            [
+              "360°",
+              "2π",
+              "One full turn"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "π radians = 180°: multiply by π/180 or 180/π to convert.",
+            "One radian = 180/π ≈ 57.3°.",
+            "(cos θ, sin θ) is where the terminal ray meets the unit circle.",
+            "sin²θ + cos²θ = 1 is the circle’s equation in trigonometric dress.",
+            "Quadrant signs: A positive all, S sine, T tan, C cosine."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Domain, range and the graphs of the functions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The graphs are the syllabus’s way of making abstract restrictions visible. Sine and cosine are waves of period 2π, bounded between −1 and 1, the sine starting at the origin and the cosine at its maximum — the same wave shifted by π/2, which is the graphical form of the co-function relationship. Tangent has period π, passes through the origin, and blows up at odd multiples of π/2 where the cosine it divides by vanishes; that is why its domain excludes those points while its range remains all real numbers. The signs in each quadrant and the behaviour at the boundaries together settle most domain-and-range questions without any calculation."
+        },
+        {
+          "type": "paragraph",
+          "text": "Periodicity is the practical payoff. Since adding 2π to an angle returns the same point on the circle, sin(x + 2π) = sin x and cos(x + 2π) = cos x for every x, while tangent repeats every π. This lets any angle be reduced to a convenient equivalent — 150° behaves like 30° in magnitude, with the quadrant supplying the sign — and every later chapter, from solving equations to integrating, relies on that reduction. The symmetry properties complete the toolkit: sine is odd, cosine is even, so sin(−x) = −sin x and cos(−x) = cos x, a pair of facts that shorten many derivations to one line."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Convert 240° to radians.",
+              "note": "240 × π/180 = 4π/3, in the third quadrant where sine is negative."
+            },
+            {
+              "text": "Find sin(−30°) without a table.",
+              "note": "Odd function: sin(−30°) = −sin 30° = −½."
+            },
+            {
+              "text": "Domain of tan x.",
+              "note": "All reals except x = (2n + 1)π/2, where cos x = 0."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "identities",
+      "title": "Addition formulas and the identities they generate",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Everything in the syllabus’s identity list descends from two addition formulas: sin(x ± y) = sin x cos y ± cos x sin y and cos(x ± y) = cos x cos y ∓ sin x sin y. The syllabus asks you to express sin(x ± y) and cos(x ± y) in terms of the single angles and then to deduce the rest, which is exactly how the family is built. Setting y = x gives the double angles sin 2x = 2 sin x cos x and cos 2x = cos²x − sin²x, whose companions in sin²x and cos²x follow from the fundamental identity; setting x = y in the tangent formula gives tan 2x, and combining the double and addition formulas yields the triple angles sin 3x, cos 3x and tan 3x."
+        },
+        {
+          "type": "paragraph",
+          "text": "The sum-to-product formulas come from the addition formulas run backwards — replace the angles by sums and differences and the products appear: sin α + sin β = 2 sin((α+β)/2) cos((α−β)/2), cos α + cos β = 2 cos((α+β)/2) cos((α−β)/2), and cos α − cos β = −2 sin((α+β)/2) sin((α−β)/2). Note the minus sign in the last one; it is the standard place where a derivation goes wrong. Their inverses, product-to-sum, serve the same formulas in the other direction. The practical skill the examiner wants is transformation: a sum turned into a product so it can be factorised or evaluated at a convenient angle, and knowing which direction to travel is the entire art."
+        },
+        {
+          "type": "table",
+          "caption": "The identity family, all from the addition formulas",
+          "columns": [
+            "Family",
+            "Members",
+            "Built by"
+          ],
+          "rows": [
+            [
+              "Addition",
+              "sin(x ± y), cos(x ± y)",
+              "Given directly by the syllabus"
+            ],
+            [
+              "Double angle",
+              "sin 2x = 2 sin x cos x; cos 2x = 2cos²x − 1 = 1 − 2sin²x",
+              "Put y = x"
+            ],
+            [
+              "Triple angle",
+              "sin 3x = 3 sin x − 4 sin³x; cos 3x = 4 cos³x − 3 cos x",
+              "Combine double and addition"
+            ],
+            [
+              "Sum-to-product",
+              "sin α + sin β = 2 sin½(α+β) cos½(α−β)",
+              "Addition formulas reversed"
+            ],
+            [
+              "Cosine difference",
+              "cos α − cos β = −2 sin½(α+β) sin½(α−β)",
+              "Mind the minus sign"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate sin 75° exactly.",
+              "note": "sin(45° + 30°) = sin45·cos30 + cos45·sin30 = (√6 + √2)/4."
+            },
+            {
+              "text": "Simplify cos²x − sin²x with the double angle.",
+              "note": "It is cos 2x directly — the definition of the double-angle cosine."
+            },
+            {
+              "text": "Write cos 20° + cos 80° as a product.",
+              "note": "2 cos 50° cos 30° = 2 cos 50° · (√3/2) = √3 cos 50°."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations",
+      "title": "General solutions (formative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus assesses only formatively the general solution of equations of the type sin y = sin a, cos y = cos a and tan y = tan a, but the idea belongs to the chapter’s logic and repays study. A single equation of these types has infinitely many solutions, because the circle can be completed again and again: if sin y = sin a, then y = nπ + (−1)ⁿa for any integer n, which alternates between the two families a and π − a as n advances. For cosine the pairing is different — y = 2nπ ± a — because cosine is symmetric about the horizontal axis, and for tangent, whose period is π alone, y = nπ + a with no sign alternation."
+        },
+        {
+          "type": "paragraph",
+          "text": "The reason three different answers exist for three superficially similar equations is worth stating rather than memorising: sine equal at two points means the points are reflections across the vertical midline of the wave, cosine equal means reflections across the horizontal, and tangent simply repeats every π. Working from the graph keeps them apart where rote memory mixes them up. In practice, start any trigonometric equation by reducing it to one of these three forms — factorise, use an identity, divide by a common cosine — and only then write the general solution. Since this material is formative, the goal is understanding that a general solution names a whole set rather than a number, a habit that Unit-IV’s limits will thank you for."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "General solution of sin y = ½ with a = π/6.",
+              "note": "y = nπ + (−1)ⁿ(π/6), n ∈ ℤ."
+            },
+            {
+              "text": "General solution of cos y = cos(π/3).",
+              "note": "y = 2nπ ± π/3, n ∈ ℤ."
+            },
+            {
+              "text": "General solution of tan y = 1.",
+              "note": "y = nπ + π/4, n ∈ ℤ — tangent repeats every π."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The unit circle and the four quadrants",
+      "description": "A circle of radius one on perpendicular axes with an angle θ marked from the positive x-axis to a point P on the circle; P is labelled (cos θ, sin θ), a right-angled drop to the x-axis shows the cosine as the adjacent side, and the four quadrants carry badges for which of sine, cosine and tangent is positive there.",
+      "labels": [
+        "P = (cos θ, sin θ) on the circle",
+        "x-coordinate: cosine; y-coordinate: sine",
+        "Quadrant I: all three positive",
+        "Quadrant II: sine positive only",
+        "Radius 1 makes x² + y² = 1 the identity sin²θ + cos²θ = 1"
+      ]
+    },
+    {
+      "caption": "Figure: Sine, cosine and tangent over one period",
+      "description": "Three stacked axes panels: sine starting at the origin rising to 1 at π/2 and falling to −1 at 3π/2; cosine starting at 1 falling through zero at π/2; tangent rising through the origin with dashed vertical asymptotes at π/2 and −π/2 and period π marked between consecutive asymptotes.",
+      "labels": [
+        "Sine wave: amplitude 1, period 2π",
+        "Cosine: the same wave shifted by π/2",
+        "Tangent: period π, asymptotes at odd multiples of π/2",
+        "All bounded between −1 and 1 except tangent",
+        "Zeroes and maxima land at quadrantal angles"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "π radians = 180°; multiply by π/180 to convert degrees to radians.",
+    "One radian ≈ 57.3°; arc length s = rθ needs radians to be constant-free.",
+    "(cos θ, sin θ) is the point where the terminal ray meets the unit circle.",
+    "sin²θ + cos²θ = 1 is the unit circle’s equation.",
+    "Sine and cosine have period 2π; tangent has period π.",
+    "Sine is odd, cosine is even: sin(−x) = −sin x, cos(−x) = cos x.",
+    "sin(x ± y) and cos(x ± y) generate every other identity in the syllabus.",
+    "cos 2x = 2cos²x − 1 = 1 − 2sin²x — the bridge between squares and doubles.",
+    "Sum-to-product turns sums into products; cos α − cos β keeps a minus sign.",
+    "General solutions: sine gives nπ + (−1)ⁿa, cosine 2nπ ± a, tangent nπ + a (formative)."
+  ],
+  "examFocus": [
+    "Reduce every angle to its reference angle; let the quadrant supply the sign.",
+    "Derive identities from the addition formulas — derivations earn method marks.",
+    "Sum-to-product before factorising; product-to-sum before integrating later.",
+    "State n ∈ ℤ in every general solution — the integer is what makes it general."
+  ],
+  "vocabulary": [
+    {
+      "word": "Radian",
+      "meaning": "The angle subtended by an arc equal to the radius; 2π per full turn."
+    },
+    {
+      "word": "Unit circle",
+      "meaning": "Circle of radius one; coordinates give cosine and sine directly."
+    },
+    {
+      "word": "Period",
+      "meaning": "Smallest shift after which a function repeats: 2π for sine and cosine."
+    },
+    {
+      "word": "Odd / even function",
+      "meaning": "f(−x) = −f(x) versus f(−x) = f(x)."
+    },
+    {
+      "word": "Reference angle",
+      "meaning": "The acute angle a terminal ray makes with the x-axis."
+    },
+    {
+      "word": "Identity",
+      "meaning": "An equation true for every value of the variable."
+    },
+    {
+      "word": "General solution",
+      "meaning": "The complete solution set, written with an integer parameter."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-trig-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "225° expressed in radians is:",
+      "options": [
+        "5π/4",
+        "4π/5",
+        "3π/4",
+        "9π/4"
+      ],
+      "correctIndex": 0,
+      "answer": "5π/4",
+      "explanation": "225 × π/180 = 5π/4 — the angle lies in the third quadrant, one π/4 beyond π."
+    },
+    {
+      "id": "cbse11-math-trig-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "sin(−420°) equals:",
+      "options": [
+        "−½",
+        "½",
+        "−√3/2",
+        "√3/2"
+      ],
+      "correctIndex": 3,
+      "answer": "√3/2",
+      "explanation": "Reduce the angle into the first turn: −420° + 720° = 300°, and sin 300° = −sin 60° = −√3/2, since 300° lies in the fourth quadrant where sine is negative with a reference angle of 60°."
+    },
+    {
+      "id": "cbse11-math-trig-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of cos²x − sin²x is:",
+      "options": [
+        "sin 2x",
+        "cos 2x",
+        "1",
+        "tan²x"
+      ],
+      "correctIndex": 1,
+      "answer": "cos 2x",
+      "explanation": "This is the definition of the double-angle cosine: cos 2x = cos²x − sin²x."
+    },
+    {
+      "id": "cbse11-math-trig-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The general solution of cos y = cos a is:",
+      "options": [
+        "nπ + (−1)ⁿa",
+        "2nπ ± a",
+        "nπ + a",
+        "2nπ + a"
+      ],
+      "correctIndex": 1,
+      "answer": "2nπ ± a",
+      "explanation": "Cosine repeats every 2π and is symmetric about the horizontal axis, giving the pair 2nπ + a and 2nπ − a; the alternating form belongs to sine and the nπ + a form to tangent."
+    },
+    {
+      "id": "cbse11-math-trig-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The fundamental identity sin²x + cos²x = 1 is simply the equation of the ________ circle.",
+      "answer": "unit",
+      "explanation": "Every point on a circle of radius one satisfies x² + y² = 1, and its coordinates are exactly cos x and sin x."
+    },
+    {
+      "id": "cbse11-math-trig-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The tangent function completes its cycle every ________ degrees rather than 360.",
+      "answer": "180",
+      "explanation": "Tangent repeats every π radians — half a turn — which is why its general solution uses nπ."
+    },
+    {
+      "id": "cbse11-math-trig-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Convert 7π/6 radians to degrees and state the quadrant in which it lies.",
+      "answer": "Using 180°/π: (7π/6) × (180°/π) = 7 × 30° = 210°. Since 180° < 210° < 270°, the angle lies in the third quadrant, where sine and cosine are both negative and tangent is positive — which agrees with sin(7π/6) = −½ and cos(7π/6) = −√3/2.",
+      "explanation": "The conversion, the quadrant, and the sign check that confirms it are all required."
+    },
+    {
+      "id": "cbse11-math-trig-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Prove that sin(x + π/2) = cos x using the addition formula.",
+      "answer": "The addition formula for sine states sin(a + b) = sin a cos b + cos a sin b. Substituting a = x and b = π/2 gives sin x · cos(π/2) + cos x · sin(π/2). Since cos(π/2) = 0 and sin(π/2) = 1, the expression reduces to sin x · 0 + cos x · 1 = cos x. Therefore sin(x + π/2) = cos x, which is the co-function relationship: shifting the sine wave by a quarter period produces the cosine wave — the same fact visible in the graphs, where the two curves are identical up to that horizontal shift.",
+      "explanation": "The formula quoted, the two quadrantally-known values substituted, and the simplification — with the graphical reading as confirmation."
+    },
+    {
+      "id": "cbse11-math-trig-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that sin 3x = 3 sin x − 4 sin³x, and hence find the exact value of sin 18° ... express sin 18° in surd form using the identity.",
+      "answer": "Part one: write sin 3x as sin(2x + x) and apply the addition formula: sin 2x cos x + cos 2x sin x. Substitute sin 2x = 2 sin x cos x and cos 2x = 1 − 2 sin²x, giving 2 sin x cos²x + (1 − 2 sin²x) sin x. Replace cos²x by 1 − sin²x: 2 sin x (1 − sin²x) + sin x − 2 sin³x = 2 sin x − 2 sin³x + sin x − 2 sin³x = 3 sin x − 4 sin³x, as required. Part two: let θ = 18°, so 5θ = 90° and therefore 2θ = 90° − 3θ, whence sin 2θ = cos 3θ. Expand both: 2 sin θ cos θ = 4 cos³θ − 3 cos θ, and dividing by cos θ (nonzero at 18°) gives 2 sin θ = 4 cos²θ − 3 = 4(1 − sin²θ) − 3 = 1 − 4 sin²θ. Rearranging, 4 sin²θ + 2 sin θ − 1 = 0, a quadratic in sin θ with roots (−2 ± √(4 + 16))/8 = (−1 ± √5)/4. Since sin 18° > 0, sin 18° = (√5 − 1)/4.",
+      "explanation": "Full marks require the triple-angle derivation with each substitution shown, and the 5θ = 90° argument leading to the quadratic and the positive root."
+    },
+    {
+      "id": "cbse11-math-trig-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Without a table, decide which is larger: sin 50° or cos 50°, and justify using the addition formulas and the graphs. Then solve sin y = ½ completely.",
+      "answer": "Method one — addition formulas: cos 50° = sin(90° − 50°) = sin 40°, and since sine increases on [0°, 90°], sin 50° > sin 40°, so sin 50° > cos 50°. Method two — graphs: at 45° the sine and cosine curves cross (both equal √2/2); beyond that, in the first quadrant, sine is rising towards 1 while cosine falls towards 0, so any angle above 45° gives the larger sine, and 50° qualifies. Both methods agree without tables. Solving sin y = ½: in one turn the reference angle with sine ½ is 30° = π/6, attained at π/6 in the first quadrant and at π − π/6 = 5π/6 in the second; the fourth quadrant contributes only negative sine, so there are no further families beyond these two. Together with the 2π periodicity, the complete set is y = nπ + (−1)ⁿ(π/6) for every integer n — the general-solution form for sine, which alternates between the two families as n runs over even and odd values. Check: n = 0 gives π/6, n = 1 gives π − π/6 = 5π/6, n = 2 gives 2π + π/6, and the pattern continues correctly in both directions.",
+      "explanation": "Full marks require both the comparison with justification (not tables) and the complete general solution with the alternation explained and checked."
+    }
+  ]
+}

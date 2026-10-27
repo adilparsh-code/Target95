@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-relations",
+  "title": "Relations and Functions",
+  "kind": "mathematics",
+  "tagline": "From ordered pairs to graphs: how a relation becomes a function, and the standard real functions every later chapter uses.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "This chapter converts the set language of the previous unit into the language of correspondence. It begins with ordered pairs and the Cartesian product — the raw material of every relation — then studies relations as sets of pairs with a domain, a co-domain and a range, and isolates the special relations we call functions. The heart of the unit is the catalogue of real-valued functions with their graphs, because every later chapter in the course plots, shifts or composes one of them; the chapter closes with arithmetic on functions and composition, the latter placed by the official syllabus in the formative-only list.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-I: Sets and Functions (23 marks shared with Sets and Trigonometry)."
+      },
+      {
+        "label": "Core idea",
+        "value": "A function assigns each element of its domain exactly one element of its co-domain."
+      },
+      {
+        "label": "Standard functions",
+        "value": "Constant, identity, polynomial, rational, modulus, signum, exponential, logarithmic and greatest integer, with their graphs."
+      },
+      {
+        "label": "Formative topic",
+        "value": "Composition of functions — taught and practised here, assessed only formatively."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Form Cartesian products and count their elements.",
+    "Read a relation from a table, set of pairs or arrow diagram and state its domain and range.",
+    "Distinguish functions from non-functions using the vertical-line and arrow tests.",
+    "Sketch the graphs of the standard real-valued functions.",
+    "Combine functions arithmetically and apply composition in context."
+  ],
+  "learn": [
+    {
+      "id": "pairs",
+      "title": "Ordered pairs and the Cartesian product",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An ordered pair (a, b) is an object in which order is the whole point: (a, b) and (b, a) are equal only when a and b are themselves equal. The Cartesian product of two sets A and B, written A × B, is the set of all ordered pairs whose first entry lies in A and the second in B. For finite sets the count is immediate — if A has m elements and B has n, then A × B has mn elements — and this multiplication rule is the first place where set theory starts to feel like counting. The product of the set of reals with itself, R × R, is the coordinate plane, and extending to R × R × R gives three-dimensional space, which is where Unit-III will pick this idea up again."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two properties of the product matter for later work. First, it is not commutative: A × B and B × A contain the same number of pairs but are different sets unless A equals B. Second, if either factor is empty, the product is empty — a fact that occasionally decides a whole question in one line. From products, relations are defined: a relation from A to B is simply any subset of A × B, which means every relation inherits a domain (the set of first entries actually used), a co-domain (the set B it was defined on) and a range (the set of second entries that actually appear). The distinction between co-domain and range is the one students most often blur: the co-domain is chosen in advance, the range is what the relation manages to reach."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ordered pairs are order-sensitive: (a, b) ≠ (b, a) in general.",
+            "A × B contains all pairs (a, b) with a in A and b in B.",
+            "|A × B| = |A| × |B| for finite sets; either factor empty gives an empty product.",
+            "A relation from A to B is any subset of A × B.",
+            "Domain = used first entries; range = used second entries; co-domain = the target set as declared."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "When a relation deserves the name function",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A function f from A to B is a relation with one extra discipline: every element of A is paired with exactly one element of B. Two conditions, often overlooked in pairs, must therefore hold together — each input has an output (no input is left out) and each input has one output (no input is duplicated to different targets). An arrow diagram makes the test visible: from every point of A exactly one arrow must leave. A table or a set of pairs is read the same way, and the vertical-line test converts it for graphs: a vertical line must never cut the curve twice, because two cuts would mean one x-value with two y-values."
+        },
+        {
+          "type": "paragraph",
+          "text": "The distinction explains why some familiar-looking correspondences are not functions. A circle centred at the origin assigns two y-values to an x inside its radius, so x² + y² = 25 describes a relation but not a function of x; likewise the rule assigning to each person their mother is a function (one output each), while assigning to each mother her children generally is not. The vocabulary then settles: the domain of a function is the set of inputs it actually accepts, the range the set of outputs it actually produces, and the co-domain the outputs it is declared to aim at. Equality of functions follows the same discipline as equality of sets — two functions are equal when they share a domain and agree at every point of it."
+        },
+        {
+          "type": "table",
+          "caption": "Function or not? The two conditions at work",
+          "columns": [
+            "Correspondence",
+            "Every input used?",
+            "One output each?",
+            "Function?"
+          ],
+          "rows": [
+            [
+              "x → x² from R to R",
+              "Yes",
+              "Yes",
+              "Yes"
+            ],
+            [
+              "y → ±√y from R to R",
+              "Yes",
+              "No (both signs)",
+              "No"
+            ],
+            [
+              "A person → their mother",
+              "Yes",
+              "Yes",
+              "Yes"
+            ],
+            [
+              "A mother → her children",
+              "Yes",
+              "Not always",
+              "No"
+            ],
+            [
+              "A vertical line on a graph",
+              "—",
+              "Infinitely many y per x",
+              "No"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "catalogue",
+      "title": "The standard real functions and their graphs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus names nine real-valued functions, and the fastest route to competence is to know each one’s shape before any problem is attempted. The constant function y = c is a horizontal line; the identity y = x is a diagonal through the origin; polynomials are smooth curves whose degree governs the number of turns; rational functions are ratios of polynomials with vertical asymptotes where the denominator vanishes; the modulus y = |x| is a V that is negative-x made positive; the signum returns −1, 0 or 1 and jumps between them; the exponential y = aˣ with a > 1 rises through (0, 1) and never touches the axis; the logarithm is its mirror across y = x, defined only for positive arguments; and the greatest integer function y = ⌊x⌋ forms a staircase, constant on each interval [n, n+1)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Domain questions are answered from these pictures rather than from memory. The modulus and polynomials accept every real input; the rational function refuses values that zero its denominator; the logarithm refuses zero and negatives; the square root (the other common guest) refuses negatives; and the greatest integer, signum and constant accept everything. Range questions are read off the same graphs: the exponential range is positive reals, the modulus range is non-negative reals, the signum range is the three-element set {−1, 0, 1}. Practise reading the domain and range straight off each sketch, because later chapters — limits, derivatives, even probability — assume this fluency."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Domain of f(x) = 1/(x − 3).",
+              "note": "All reals except x = 3, since the denominator must not vanish: (−∞, 3) ∪ (3, ∞)."
+            },
+            {
+              "text": "Range of g(x) = |x| − 2.",
+              "note": "The modulus is ≥ 0, so g(x) ≥ −2: range [−2, ∞)."
+            },
+            {
+              "text": "Is h(x) = x² a function from R to R? Yes; from R to R⁺? ",
+              "note": "It is a function either way — each input has one output — but as a map onto the positives it is not onto, since no input produces a negative value."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combining",
+      "title": "Arithmetic on functions and composition (formative)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Functions combine like numbers. Given f and g with a shared domain, the sum f + g, difference f − g, product fg and quotient f/g are defined pointwise: at the input x the new function takes the value f(x) + g(x), and so on — with the quotient defined only where g(x) is not zero, which is the detail most often forgotten in an otherwise correct answer. The notation f(x) is read as the value of f at x, and treating f and f(x) as interchangeable while working is a shortcut worth resisting: f is the rule, f(x) is a number."
+        },
+        {
+          "type": "paragraph",
+          "text": "Composition, which the official syllabus places in the formative-only list, chains two rules: (f ∘ g)(x) means apply g first and then f, so f(g(x)). The order is the whole difficulty — composition is not commutative, and f ∘ g and g ∘ f are typically different functions, or one of them may not even be defined because the range of the inner rule does not sit inside the domain of the outer. Composition is also the idea behind the chain rule that appears in Unit-IV, so practising it now pays interest in calculus: a composite function is a machine inside a machine, and later the derivative of such a machine will be computed one layer at a time."
+        },
+        {
+          "type": "table",
+          "caption": "Composition: order matters",
+          "columns": [
+            "Given",
+            "Notation",
+            "Value at x",
+            "Comment"
+          ],
+          "rows": [
+            [
+              "f(x) = x², g(x) = x + 1",
+              "(f ∘ g)(x)",
+              "f(g(x)) = (x + 1)²",
+              "Shift first, then square"
+            ],
+            [
+              "f(x) = x², g(x) = x + 1",
+              "(g ∘ f)(x)",
+              "g(f(x)) = x² + 1",
+              "Square first, then shift"
+            ],
+            [
+              "g: range must sit inside domain of f",
+              "f ∘ g",
+              "f(g(x))",
+              "Undefined otherwise"
+            ],
+            [
+              "g: range must sit inside domain of f",
+              "g ∘ f",
+              "g(f(x))",
+              "A different function entirely"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If f(x) = 2x + 3 and g(x) = x², find (f ∘ g)(2).",
+              "note": "g(2) = 4, then f(4) = 11 — apply the inner rule first."
+            },
+            {
+              "text": "If (f ∘ g)(x) = (x + 1)² with g(x) = x + 1, find f.",
+              "note": "f must be the square function: f(t) = t²."
+            },
+            {
+              "text": "Domain of f/g where f(x) = x and g(x) = x − 2.",
+              "note": "All reals except 2 — division by zero is the only exclusion."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The nine standard functions at a glance",
+      "description": "A grid of nine miniature axes: constant as a horizontal line, identity as a rising diagonal, a parabola for polynomial, a hyperbola with asymptote for rational, a V for modulus, three horizontal steps at −1, 0 and 1 for signum, a rising exponential through (0,1), its mirror logarithm for log, and a staircase for the greatest integer — each tile captioned with its domain and range.",
+      "labels": [
+        "Constant y = c: horizontal line, range {c}",
+        "Identity y = x: diagonal through the origin",
+        "Modulus y = |x|: the V-shape, range [0, ∞)",
+        "Exponential aˣ (a > 1): through (0, 1), never zero",
+        "Greatest integer ⌊x⌋: staircase, constant on [n, n+1)"
+      ]
+    },
+    {
+      "caption": "Figure: Reading domain and range from a graph",
+      "description": "A curve with a hole at x = 2 and a break at x = 5, a dashed vertical line at each excluded value, horizontal bracket lines marking the span of y-values actually reached, and callouts naming the domain as two intervals and the range as a single interval.",
+      "labels": [
+        "Vertical dashed lines: excluded x-values",
+        "Hole at x = 2: value not in the domain",
+        "Domain read horizontally: which x are permitted",
+        "Range read vertically: which y are produced",
+        "Co-domain: everything the rule was declared to aim at"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "An ordered pair is order-sensitive; A × B is the set of all such pairs.",
+    "|A × B| = |A| × |B|; an empty factor makes an empty product.",
+    "A relation from A to B is any subset of A × B.",
+    "A function gives every input exactly one output — both conditions together.",
+    "Domain is what is used, range what is reached, co-domain what is declared.",
+    "The vertical-line test on a graph, the arrow test on a diagram.",
+    "Modulus and signum are non-negative-input devices; logarithm needs positives.",
+    "f/g is defined only where g(x) ≠ 0.",
+    "(f ∘ g)(x) = f(g(x)) — inner rule first, and composition is not commutative.",
+    "Composition is formative-only in the syllabus, but it is the shape of the chain rule in Unit-IV."
+  ],
+  "examFocus": [
+    "Domain before range: exclusions come from denominators, roots and logs.",
+    "Show both function conditions when asked to justify — one is never enough.",
+    "Sketch first, then answer: the standard nine graphs settle most parts.",
+    "In composition questions, state the order and check the range-inside-domain condition."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ordered pair",
+      "meaning": "A pair whose entries matter: (a, b) ≠ (b, a) unless a = b."
+    },
+    {
+      "word": "Cartesian product (A × B)",
+      "meaning": "The set of all ordered pairs with first entry in A, second in B."
+    },
+    {
+      "word": "Relation",
+      "meaning": "Any subset of a Cartesian product."
+    },
+    {
+      "word": "Function",
+      "meaning": "A relation giving each input exactly one output."
+    },
+    {
+      "word": "Domain / range / co-domain",
+      "meaning": "Inputs used / outputs produced / outputs declared."
+    },
+    {
+      "word": "Vertical-line test",
+      "meaning": "No vertical line cuts a function’s graph more than once."
+    },
+    {
+      "word": "Composition (f ∘ g)",
+      "meaning": "Apply g first, then f: f(g(x))."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-rel-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A has 3 elements and B has 4, the number of elements in A × B is:",
+      "options": [
+        "7",
+        "12",
+        "9",
+        "81"
+      ],
+      "correctIndex": 1,
+      "answer": "12",
+      "explanation": "The product counts ordered pairs: each of the 3 first entries pairs with 4 second entries, giving 3 × 4 = 12."
+    },
+    {
+      "id": "cbse11-math-rel-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The relation { (1, 2), (1, 3), (2, 3) } from R to R is:",
+      "options": [
+        "A function",
+        "Not a function, because 1 has two images",
+        "Not a function, because 2 is missing",
+        "A one-one function"
+      ],
+      "correctIndex": 1,
+      "answer": "Not a function, because 1 has two images",
+      "explanation": "The input 1 is paired with both 2 and 3, breaking the exactly-one-output rule; the missing image of other inputs is irrelevant to that failure."
+    },
+    {
+      "id": "cbse11-math-rel-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The domain of f(x) = √(x − 4) is:",
+      "options": [
+        "All reals",
+        "x ≥ 4",
+        "x > 4",
+        "x ≤ 4"
+      ],
+      "correctIndex": 1,
+      "answer": "x ≥ 4",
+      "explanation": "A square root requires a non-negative radicand, so x − 4 ≥ 0, giving x ≥ 4."
+    },
+    {
+      "id": "cbse11-math-rel-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "With f(x) = x² and g(x) = x + 1, the functions f ∘ g and g ∘ f:",
+      "options": [
+        "Are equal for all x",
+        "Differ: (x+1)² against x² + 1",
+        "Are both undefined somewhere",
+        "Differ only at x = 0"
+      ],
+      "correctIndex": 1,
+      "answer": "Differ: (x+1)² against x² + 1",
+      "explanation": "Composition is not commutative: f(g(x)) = (x + 1)² expands to x² + 2x + 1, while g(f(x)) = x² + 1 — the cross term 2x separates them everywhere except x = 0."
+    },
+    {
+      "id": "cbse11-math-rel-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A relation in which every element of the domain is paired with exactly one element of the co-domain is called a ________ .",
+      "answer": "function",
+      "explanation": "Both conditions — used and single-valued — are contained in this one word."
+    },
+    {
+      "id": "cbse11-math-rel-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The greatest integer function y = ⌊x⌋ is constant on each interval [n, ________ ).",
+      "answer": "n+1",
+      "explanation": "Between consecutive integers the staircase holds its step, closing at n and opening at the next integer."
+    },
+    {
+      "id": "cbse11-math-rel-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Let A = {1, 2} and B = {a, b, c}. Write A × B, and state the domain and range of the relation R = {(1, a), (2, b)}.",
+      "answer": "A × B = {(1, a), (1, b), (1, c), (2, a), (2, b), (2, c)} — six ordered pairs, since 2 × 3 = 6. The relation R is a subset of this product containing only (1, a) and (2, b), so its domain is {1, 2} — both first entries are used — and its range is {a, b}, while its co-domain remains the whole set {a, b, c} as declared when R was defined.",
+      "explanation": "The full product, the domain, the range and the distinction between range and co-domain are all required."
+    },
+    {
+      "id": "cbse11-math-rel-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the domain and range of f(x) = 1/(x − 2) and explain how each is read from the rule.",
+      "answer": "The domain excludes any input that would divide by zero: x − 2 = 0 at x = 2, so the domain is all real numbers except 2, written (−∞, 2) ∪ (2, ∞). For the range, the fraction can never equal zero — a quotient is zero only when its numerator is — and every other real value is attained: giving y any non-zero value and solving y = 1/(x − 2) yields x = 2 + 1/y, which exists precisely when y ≠ 0. The range is therefore all reals except 0. The method generalises: exclusions in the domain come from operations that break (division by zero), while the range is settled by asking which outputs the rule can be forced to produce.",
+      "explanation": "Both sets in interval form, with the reasoning for each — division by zero for the domain, solvability of y = f(x) for the range."
+    },
+    {
+      "id": "cbse11-math-rel-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Define Cartesian product and function. For f(x) = (2x − 1)/(x + 3), state the domain and range, and compute (f ∘ f)(1).",
+      "answer": "The Cartesian product of sets A and B is A × B = {(a, b) : a ∈ A, b ∈ B}, the set of all ordered pairs with first entry in A and second in B; |A × B| = |A|·|B| for finite sets. A function f: A → B is a subset of A × B in which every element of A appears exactly once as a first entry — each input used, each input with a single output. Domain of the given f: the denominator vanishes at x = −3, so the domain is all reals except −3. Range: set y = (2x − 1)/(x + 3) and solve for x — y(x + 3) = 2x − 1 gives x(y − 2) = −1 − 3y, so x = (1 + 3y)/(2 − y), which exists except at y = 2; therefore the range is all reals except 2. Composition: f(1) = (2 − 1)/(1 + 3) = ¼, then f(¼) = (2·¼ − 1)/(¼ + 3) = (−½)/(13/4) = −2/13. So (f ∘ f)(1) = −2/13.",
+      "explanation": "The definition of product and function, both sets of the rational function with reasoning, and the two-step composition with each evaluation shown."
+    },
+    {
+      "id": "cbse11-math-rel-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A relation on R is given by xRy exactly when x − y is an integer. Is it an equivalence relation? Does it define a function?",
+      "answer": "First, classify the relation: xRy holds when x − y ∈ ℤ, that is, when x and y differ by a whole number. Reflexive: x − x = 0, an integer, so xRx for every x. Symmetric: if x − y is an integer then y − x is its negative, also an integer, so yRx. Transitive: if x − y and y − z are integers their sum x − z is an integer, so xRz. All three hold, so it is an equivalence relation — its classes are the sets of numbers sharing a fractional part, each class {..., x − 1, x, x + 1, ...}. Second, is it a function? No, and decisively so: take x = 0, which relates to 0, 1, −1, 2 and every other integer — one input with many outputs, which fails the single-output condition outright. The deeper point the question is testing is that equivalence relations and functions pull in opposite directions: an equivalence relation links each element to a whole class of partners, while a function demands exactly one partner, so the only way a relation can be both is when each class collapses to a single element.",
+      "explanation": "Full marks require the three properties verified with the integer argument, the counterexample showing multiple images, and the closing observation about classes versus single outputs."
+    }
+  ]
+}

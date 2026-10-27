@@ -1,0 +1,568 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-derivatives",
+  "title": "Derivatives",
+  "kind": "mathematics",
+  "tagline": "The derivative as an instantaneous rate of change, the first-principles definition, and the rules that make differentiation routine.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Mathematics, corroborated by Oswal Publishers’ 2026-27 reproduction). No board examination paper was consulted. Textbook wording, worked examples from commercial guides and any board paper are not reproduced.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Mathematics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page. Every computation shown here was worked out for this page and checked by the subject validator."
+  },
+  "overview": {
+    "intro": "The derivative answers one question with precision: how fast is something changing right now? A distance gives a velocity, a curve gives the slope of its tangent, and the limit that defines it turns an average rate over an interval into an instantaneous rate at a point. This chapter builds that limit from first principles, then replaces it with a set of rules — power, product, quotient — and two standard derivatives, those of sin x and cos x. The rules are the entire practical content: once they are fluent, every later application in calculus is a matter of choosing the right one.",
+    "facts": [
+      {
+        "label": "Definition",
+        "value": "f′(x) = lim h→0 [f(x + h) − f(x)] / h — the instantaneous rate of change at x."
+      },
+      {
+        "label": "Power rule",
+        "value": "d/dx (xⁿ) = n xⁿ⁻¹ for every real exponent n."
+      },
+      {
+        "label": "Product and quotient",
+        "value": "(uv)′ = u′v + uv′; (u/v)′ = (u′v − uv′)/v²."
+      },
+      {
+        "label": "Standard derivatives",
+        "value": "d/dx (sin x) = cos x and d/dx (cos x) = −sin x, with x in radians."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain the derivative as the limit of average rates of change and as the slope of a tangent.",
+    "Compute derivatives from first principles for simple polynomial functions.",
+    "Apply the sum, constant-multiple and power rules to differentiate any polynomial.",
+    "Differentiate products and quotients using the product and quotient rules.",
+    "Differentiate sin x and cos x and combine all the rules on compound expressions."
+  ],
+  "learn": [
+    {
+      "id": "rate-of-change",
+      "title": "The derivative as a rate of change",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Average rate of change is honest arithmetic: divide the change in the quantity by the change in time over the interval you measured. Instantaneous rate asks a harder question — the speed at this very instant — and the answer is the limit as the interval shrinks to nothing. That limit is the derivative: f′(x) = lim h→0 [f(x + h) − f(x)]/h. Geometrically the same object appears as the slope of the tangent to the curve y = f(x) at the point, because a secant through two nearby points on the curve has slope equal to an average rate, and as the second point slides towards the first the secant rotates into the tangent. The chapter’s two readings — rate of change and tangent slope — are therefore one idea, and every rule that follows computes the same limit without ever repeating the algebra."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Average rate over [a, a + h] is [f(a + h) − f(a)]/h; the derivative lets h → 0.",
+            "f′(x) = lim h→0 [f(x + h) − f(x)]/h, when the limit exists.",
+            "The derivative at a point equals the slope of the tangent to the curve there.",
+            "dy/dx, f′(x) and y′ all denote the same object.",
+            "Units of a derivative are units of y per unit of x — metres per second, say."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Speed from distance s(t) = 4t²: average over [1, 1 + h] is (4(1+h)² − 4)/h = 8 + 4h, tending to 8",
+              "note": "Form the difference quotient first, simplify, then let h vanish."
+            },
+            {
+              "text": "The tangent to y = x² at x = 1 has slope 2 — the derivative 2x evaluated at 1",
+              "note": "The geometric and computational readings agree by construction."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Average versus instantaneous rate",
+          "columns": [
+            "Aspect",
+            "Average rate",
+            "Instantaneous rate"
+          ],
+          "rows": [
+            [
+              "Interval",
+              "non-zero interval of length h",
+              "interval shrinks to a point"
+            ],
+            [
+              "Formula",
+              "[f(a + h) − f(a)]/h",
+              "lim h→0 of the same quotient"
+            ],
+            [
+              "Geometry",
+              "slope of a secant",
+              "slope of the tangent"
+            ],
+            [
+              "Answer for s = 4t² at t = 1",
+              "8 + 4h for interval h",
+              "8 exactly"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first-principles",
+      "title": "Differentiation from first principles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "First principles means applying the definition directly: expand f(x + h), subtract f(x), divide by h, cancel every factor of h that vanishes with it, and only then let h → 0. The method is slow but it is also the proof of every rule — working through it on x² shows the pattern that the power rule generalises, and working through it on sin x shows where cos x comes from. The crucial habit is the order of operations: substituting h = 0 before cancelling leaves 0/0, which tells you that you stopped early. Polynomials reduce cleanly because every term after subtraction carries at least one factor of h, and the same is true of any expression that is continuous at the point."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Steps: expand f(x + h), subtract f(x), divide by h, cancel h, then let h → 0.",
+            "Never substitute h = 0 before the cancellation — 0/0 means the simplification is unfinished.",
+            "d/dx (x²) = 2x and d/dx (x³) = 3x² fall out directly from the binomial expansion.",
+            "For sin x, the derivative arises from lim h→0 sin h/h = 1 — the previous chapter’s limit earns its keep.",
+            "First principles is also the check: a rule-derived answer can be verified on a simple case."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "f(x) = x³: f′(x) = lim (3x²h + 3xh² + h³)/h = 3x²",
+              "note": "After subtracting x³ every term carries h, which cancels before h → 0."
+            },
+            {
+              "text": "f(x) = 2x + 1: f′(x) = lim (2h)/h = 2, the constant vanishing in the difference",
+              "note": "Linear functions have constant derivative equal to their slope."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Derivative",
+              "meaning": "Limit of the difference quotient, the instantaneous rate of change."
+            },
+            {
+              "term": "First principles",
+              "meaning": "Differentiation performed directly from the definition."
+            },
+            {
+              "term": "Secant",
+              "meaning": "Chord joining two points of a curve; its slope is an average rate."
+            },
+            {
+              "term": "Tangent",
+              "meaning": "Line touching a curve at a point with the slope of the curve there."
+            },
+            {
+              "term": "Difference quotient",
+              "meaning": "[f(x + h) − f(x)]/h, the average rate before h shrinks."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rules-of-differentiation",
+      "title": "The algebra of derivatives: sum, product and quotient rules",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Repeating the limit for every function would be absurd, so the limit is proved once and packaged into rules. Sums and constant multiples pass straight through: the derivative of a combination is the same combination of the derivatives, which handles every polynomial by itself — bring down the power, reduce it by one. The two rules that need care are the product and quotient rules, because differentiation does not distribute over multiplication or division. The product rule says (uv)′ = u′v + uv′, not u′v′, and its memory aid is to differentiate each factor in turn while leaving the other alone. The quotient rule (u/v)′ = (u′v − uv′)/v² carries the minus in the numerator and the squared denominator, and the order of the numerator matters: the derivative of the top times the top’s partner comes first."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sum rule: (f + g)′ = f′ + g′; constant multiple: (cf)′ = c f′.",
+            "Power rule: d/dx (xⁿ) = n xⁿ⁻¹, which differentiates every monomial at once.",
+            "Product rule: (uv)′ = u′v + uv′ — differentiate each factor once, in turn.",
+            "Quotient rule: (u/v)′ = (u′v − uv′)/v² — the derivative of the numerator leads.",
+            "Derivative of a constant is zero; constants survive only as multipliers."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "d/dx (3x⁴ − 2x + 7) = 12x³ − 2",
+              "note": "Apply the power rule term by term; the constant 7 differentiates to nothing."
+            },
+            {
+              "text": "d/dx (x² sin x) = 2x sin x + x² cos x",
+              "note": "Product rule: differentiate x² first, then sin x, and add the two halves."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The differentiation rules in one place",
+          "columns": [
+            "Rule",
+            "Statement",
+            "Watch out for"
+          ],
+          "rows": [
+            [
+              "Power",
+              "d/dx xⁿ = n xⁿ⁻¹",
+              "the exponent drops by one, not by n alone"
+            ],
+            [
+              "Sum",
+              "(f + g)′ = f′ + g′",
+              "applies term by term"
+            ],
+            [
+              "Constant multiple",
+              "(cf)′ = c f′",
+              "constants ride along unchanged"
+            ],
+            [
+              "Product",
+              "(uv)′ = u′v + uv′",
+              "not u′v′"
+            ],
+            [
+              "Quotient",
+              "(u/v)′ = (u′v − uv′)/v²",
+              "numerator order and the square below"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard-derivatives",
+      "title": "Standard derivatives: sin x, cos x and combined expressions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two standard derivatives carry the trigonometric half of the syllabus: d/dx (sin x) = cos x and d/dx (cos x) = −sin x, both proved from first principles using lim h→0 sin h/h = 1 and the radian condition of the limits chapter. From them flow the rest — differentiating sin 3x needs the chain of the argument handled carefully as 3 cos 3x in the courses where it appears, while tan x follows from the quotient rule applied to sin x / cos x. What matters in examination answers is that every rule used is named as it is used: a compound expression is a sequence of rule applications, and markers award credit per step. The sign of cos when differentiating sine, and the minus introduced by cosine, are the two places where fluency and care must meet."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "d/dx (sin x) = cos x; d/dx (cos x) = −sin x — both with x in radians.",
+            "d/dx (tan x) = sec²x follows from the quotient rule on sin x/cos x.",
+            "A scaled argument such as sin kx differentiates to k cos kx.",
+            "Constants multiply through: d/dx (5 sin x) = 5 cos x.",
+            "Combine with the power rule for expressions mixing powers and trigonometric functions."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "d/dx (x² + sin x) = 2x + cos x, term by term",
+              "note": "The sum rule lets each term take its own rule."
+            },
+            {
+              "text": "d/dx (sin 2x) = 2 cos 2x — the inner factor differentiates as well",
+              "note": "The coefficient of x inside the function appears as a multiplier outside."
+            }
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "d/dx (5x³ − 4x + 2) = 15x² − 4",
+              "note": "Power rule on each term; the constant 2 differentiates away entirely."
+            },
+            {
+              "text": "d/dx (cos x) at x = 0: −sin 0 = 0, so the cosine curve is flat at the origin",
+              "note": "Evaluate after differentiating; a zero derivative marks a stationary point."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "derivatives-in-action",
+      "title": "Tangent slopes and rates in practice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The derivative earns its place by being applied, and two applications dominate this level. The first is geometry: the slope of the tangent to y = f(x) at a point is f′ evaluated there, and the equation of the tangent follows from point-slope once the slope is known — the curve equation supplies the point, the derivative supplies the slope. The second is motion: from a distance function s(t), the derivative gives the velocity v(t), and a further differentiation gives acceleration, while the times at which a particle is at rest are exactly the roots of v(t) = 0. Both applications follow the same three-step shape — differentiate, evaluate, interpret — and the interpretation step is where the marks live, because a velocity of zero at t = 3 seconds means something physical that the number alone does not say."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Slope of the tangent at x = a is f′(a); the tangent line is y − f(a) = f′(a)(x − a).",
+            "Velocity is the first derivative of distance; acceleration is the second.",
+            "A body is at rest where its velocity vanishes — solve v(t) = 0.",
+            "A negative velocity means motion in the chosen negative direction, not an error.",
+            "Always evaluate the derivative before interpreting; the substitution step is its own mark."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "y = x³ − 2x + 5 at x = 1: slope = 3(1)² − 2 = 1, point (1, 4), so y − 4 = 1(x − 1)",
+              "note": "Differentiate for the slope, read the point off the curve, then use point-slope."
+            },
+            {
+              "text": "s = t³ − 6t² + 9t gives v = 3t² − 12t + 9 = 3(t − 1)(t − 3)",
+              "note": "The particle is at rest at t = 1 s and t = 3 s, where the quadratic changes sign."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "From distance to acceleration",
+          "columns": [
+            "Quantity",
+            "Found by",
+            "Example with s = t³ − 6t² + 9t"
+          ],
+          "rows": [
+            [
+              "Distance s(t)",
+              "given",
+              "cubic in t"
+            ],
+            [
+              "Velocity v(t)",
+              "first derivative",
+              "3t² − 12t + 9"
+            ],
+            [
+              "Acceleration a(t)",
+              "second derivative",
+              "6t − 12"
+            ],
+            [
+              "Rest times",
+              "solve v(t) = 0",
+              "t = 1 s and t = 3 s"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Secants closing in on a tangent",
+      "description": "A curve with a point P marked, two secants through P and a further-out point Q, a third secant with Q slid close to P, and the tangent drawn at P as the limiting position.",
+      "labels": [
+        "secant PQ has slope = average rate",
+        "as Q slides to P the secant rotates",
+        "limiting position is the tangent",
+        "tangent slope equals f′(x) at P",
+        "the smaller h, the better the approximation"
+      ]
+    },
+    {
+      "caption": "Figure: A function and its derivative on one pair of axes",
+      "description": "Two stacked graphs: above, a cubic falling to a minimum and then rising; below, its derivative as a downward line crossing zero exactly above the minimum of the cubic.",
+      "labels": [
+        "f decreasing where f′ < 0",
+        "minimum of f sits where f′ = 0",
+        "f increasing where f′ > 0",
+        "steepest descent matches most negative f′",
+        "roots of f′ align with turning points of f"
+      ]
+    },
+    {
+      "caption": "Figure: Velocity as the slope of the distance–time graph",
+      "description": "A distance–time curve rising steeply then flattening, with a tangent drawn at one instant and the rise and run of that tangent marked to show the velocity reading.",
+      "labels": [
+        "gradient of the tangent = instantaneous velocity",
+        "flatter curve means smaller speed",
+        "tangent at rest time is horizontal",
+        "run measured in seconds, rise in metres",
+        "acceleration is how the gradient itself changes"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "f′(x) = lim h→0 [f(x + h) − f(x)]/h defines the derivative as an instantaneous rate.",
+    "The derivative equals the slope of the tangent to the curve at the point.",
+    "First principles: expand, subtract, divide, cancel h, and only then let h → 0.",
+    "Power rule: d/dx (xⁿ) = n xⁿ⁻¹; constants differentiate to zero.",
+    "Sum and constant-multiple rules make every polynomial a term-by-term exercise.",
+    "(uv)′ = u′v + uv′ — never u′v′; the product rule differentiates one factor at a time.",
+    "(u/v)′ = (u′v − uv′)/v², with the derivative of the numerator coming first.",
+    "d/dx sin x = cos x and d/dx cos x = −sin x, both resting on the radian limit sin x/x → 1.",
+    "Tangent line: y − f(a) = f′(a)(x − a), using the curve for the point and the derivative for the slope.",
+    "Distance, velocity and acceleration are successive derivatives; rest times solve v(t) = 0."
+  ],
+  "examFocus": [
+    "Name each rule as it is applied — product rule, power rule — since the attribution carries marks.",
+    "In first-principles answers, show the cancellation of h explicitly; the limit step alone is not enough.",
+    "When writing a tangent equation, compute f(a) and f′(a) as two labelled lines before combining them.",
+    "In rate problems, state the physical meaning of the value found (at rest, moving backwards) — interpretation is assessed."
+  ],
+  "vocabulary": [
+    {
+      "word": "Derivative",
+      "meaning": "Instantaneous rate of change of a function, written f′(x) or dy/dx."
+    },
+    {
+      "word": "First principles",
+      "meaning": "Differentiation straight from the limit definition."
+    },
+    {
+      "word": "Tangent",
+      "meaning": "Line touching a curve at a point with the curve’s slope there."
+    },
+    {
+      "word": "Secant",
+      "meaning": "Line through two points of a curve, approximating the tangent as they merge."
+    },
+    {
+      "word": "Power rule",
+      "meaning": "d/dx xⁿ = n xⁿ⁻¹, the everyday differentiation rule."
+    },
+    {
+      "word": "Product rule",
+      "meaning": "(uv)′ = u′v + uv′, differentiating a product of two functions."
+    },
+    {
+      "word": "Quotient rule",
+      "meaning": "(u/v)′ = (u′v − uv′)/v² for a ratio of functions."
+    },
+    {
+      "word": "Stationary point",
+      "meaning": "Point where the derivative is zero."
+    },
+    {
+      "word": "Velocity",
+      "meaning": "First derivative of distance with respect to time."
+    },
+    {
+      "word": "Acceleration",
+      "meaning": "Rate of change of velocity, the second derivative of distance."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc11-math-derivative-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The derivative of x⁵ with respect to x is:",
+      "options": [
+        "5x⁴",
+        "x⁴",
+        "5x⁵",
+        "5x"
+      ],
+      "correctIndex": 0,
+      "answer": "5x⁴",
+      "explanation": "The power rule brings the exponent down as a multiplier and reduces it by one: 5x⁵⁻¹ = 5x⁴."
+    },
+    {
+      "id": "isc11-math-derivative-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The derivative of sin x at x = 0 follows from which evaluation?",
+      "options": [
+        "sin 0 = 0",
+        "cos 0 = 1",
+        "−sin 0 = 0",
+        "tan 0 = 0"
+      ],
+      "correctIndex": 1,
+      "answer": "cos 0 = 1",
+      "explanation": "Since d/dx (sin x) = cos x, the derivative at zero is cos 0 = 1 — the sine curve leaves the origin with slope one."
+    },
+    {
+      "id": "isc11-math-derivative-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Differentiating 3x² from first principles gives:",
+      "options": [
+        "3x",
+        "6x",
+        "6x²",
+        "3x²"
+      ],
+      "correctIndex": 1,
+      "answer": "6x",
+      "explanation": "The difference quotient is 3[(x + h)² − x²]/h = 3(2x + h), which tends to 6x as h → 0."
+    },
+    {
+      "id": "isc11-math-derivative-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The derivative of the product uv with respect to x is:",
+      "options": [
+        "u′v′",
+        "u′v + uv′",
+        "u′v − uv′",
+        "(u′v − uv′)/v²"
+      ],
+      "correctIndex": 1,
+      "answer": "u′v + uv′",
+      "explanation": "The product rule differentiates each factor in turn while holding the other fixed: (uv)′ = u′v + uv′."
+    },
+    {
+      "id": "isc11-math-derivative-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "By the power rule, the derivative of xⁿ with respect to x is ______ .",
+      "answer": "nxⁿ⁻¹",
+      "explanation": "Bring the exponent down as a factor and reduce it by one — valid for every real exponent n."
+    },
+    {
+      "id": "isc11-math-derivative-06",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The derivative of cos x with respect to x equals ______ .",
+      "answer": "−sin x",
+      "explanation": "Differentiating cosine introduces a minus sign: d/dx (cos x) = −sin x, with x measured in radians."
+    },
+    {
+      "id": "isc11-math-derivative-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define the derivative of f at x using limit notation, and state its geometric meaning.",
+      "answer": "The derivative of f at x is f′(x) = lim h→0 [f(x + h) − f(x)]/h, provided the limit exists. Geometrically, f′(x) is the slope of the tangent to the curve y = f(x) at the point with abscissa x, and numerically it is the instantaneous rate of change of f at x — the value the average rate approaches as the measuring interval shrinks to nothing.",
+      "explanation": "The definition and the geometry are two readings of one limit: the difference quotient is a secant slope whose limit is the tangent slope."
+    },
+    {
+      "id": "isc11-math-derivative-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the quotient rule and use it to differentiate (x + 1)/(x − 1).",
+      "answer": "The quotient rule is (u/v)′ = (u′v − uv′)/v², where u is the numerator and v the denominator. With u = x + 1 (so u′ = 1) and v = x − 1 (so v′ = 1): d/dx [(x + 1)/(x − 1)] = [1·(x − 1) − (x + 1)·1]/(x − 1)² = (x − 1 − x − 1)/(x − 1)² = −2/(x − 1)².",
+      "explanation": "The rule must be quoted with the correct numerator order; the simplification leaves only the constant −2 on top, which is why the derivative never vanishes."
+    },
+    {
+      "id": "isc11-math-derivative-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the derivative of f(x) = x³ − 2x + 5 from first principles, and hence evaluate it at x = 2.",
+      "answer": "f′(x) = lim h→0 [(x + h)³ − 2(x + h) + 5 − (x³ − 2x + 5)]/h. Expanding (x + h)³ = x³ + 3x²h + 3xh² + h³, the x³ and 5 terms cancel, leaving lim h→0 (3x²h + 3xh² + h³ − 2h)/h = lim (3x² + 3xh + h² − 2) = 3x² − 2. Evaluating at x = 2 gives 3(4) − 2 = 10.",
+      "explanation": "Follow the four steps in order — expand, subtract, divide by h, cancel — and only then let h → 0; the final evaluation substitutes x = 2 into the simplified derivative."
+    },
+    {
+      "id": "isc11-math-derivative-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A particle moves along a line so that its distance from a fixed point after t seconds is s = t³ − 6t² + 9t metres. Find its velocity after t seconds, the times at which it is at rest, and its acceleration.",
+      "answer": "Velocity is the first derivative: v = ds/dt = 3t² − 12t + 9 = 3(t² − 4t + 3) = 3(t − 1)(t − 3) m/s. The particle is at rest when v = 0, that is at t = 1 s and t = 3 s. Between these times the velocity is negative, so the motion reverses there. Acceleration is a = dv/dt = 6t − 12 m/s², which vanishes at t = 2 s — the instant the particle changes from slowing down to speeding up in the positive direction.",
+      "explanation": "Differentiate once for velocity and again for acceleration, factorise the velocity quadratic to find the rest times, and interpret the sign change between them as the reversal of motion."
+    }
+  ]
+}

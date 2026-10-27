@@ -1,0 +1,383 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-rectilinear",
+  "title": "Motion in a Straight Line",
+  "kind": "physics",
+  "tagline": "Position, velocity and acceleration along one dimension — where calculus earns its keep in physics.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Rectilinear motion is the simplest motion physics has, and that simplicity is precisely why it teaches the most: every quantity depends on time alone, so the relationships between position, velocity and acceleration can be seen, graphed and derived without geometric distraction. This chapter builds those relationships from the definitions of average and instantaneous velocity, introduces the elementary differentiation and integration the syllabus asks for, and treats the equations of uniformly accelerated motion both graphically and with calculus, so that the formulae you memorise become statements you can reconstruct.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-II: Kinematics (23 marks shared with Motion in a Plane and the Laws of Motion chapter)."
+      },
+      {
+        "label": "Instantaneous velocity",
+        "value": "v = dx/dt — the limiting value of the average velocity as the interval shrinks."
+      },
+      {
+        "label": "Acceleration",
+        "value": "a = dv/dt = d²x/dt²; uniform acceleration means a is constant in time."
+      },
+      {
+        "label": "Graphical reading",
+        "value": "The slope of an x–t graph is velocity; the area under a v–t graph is displacement."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish distance from displacement and speed from velocity in one dimension.",
+    "Compute instantaneous velocity and acceleration by differentiation.",
+    "Recover displacement from velocity by integration.",
+    "Read slopes and areas on position-time and velocity-time graphs.",
+    "Derive and apply the equations of uniformly accelerated motion."
+  ],
+  "learn": [
+    {
+      "id": "basics",
+      "title": "Position, displacement and the two velocities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Motion is a change of position with time, and describing it needs a frame of reference — an origin plus a set of axes plus a clock — before any word about motion has meaning. Position x locates a particle on the axis; displacement Δx = x₂ − x₁ is the directed change of position and is therefore a vector in one dimension, positive or negative according to the sign convention you fix at the start. Distance is its scalar cousin: the total path length travelled, always positive, and larger than or equal to the magnitude of the displacement. The distinction is not pedantry — a runner finishing where she started has zero displacement and a large distance, and any question about average speed versus average velocity turns exactly on that difference."
+        },
+        {
+          "type": "paragraph",
+          "text": "Average velocity divides displacement by the time taken, so it reports the overall rate of change of position; instantaneous velocity is its limit as the interval shrinks, v = dx/dt, and equals the slope of the tangent to the position-time graph. Average speed, by contrast, divides total distance by total time and can never be negative. Acceleration is the rate of change of velocity, a = dv/dt = d²x/dt², and its sign tells you whether the particle is speeding up in the positive direction or slowing down: a particle with positive velocity and negative acceleration is decelerating. Uniform acceleration — constant in magnitude and direction — is the special case the syllabus treats completely, because then the calculus integrates to the familiar quadratic position law and the linear velocity law, which the next lessons derive rather than assume."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Displacement is directed and path-independent; distance is total path length.",
+            "Average velocity = Δx/Δt; average speed = total distance/total time.",
+            "v = dx/dt is the slope of the x–t graph; a = dv/dt is the slope of the v–t graph.",
+            "Velocity and acceleration of opposite signs mean slowing down.",
+            "A frame of reference must be stated before motion statements mean anything."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculus",
+      "title": "Differentiation and integration in kinematics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus asks only for elementary calculus, and the elementary idea is enough: the derivative of a function at a point is the slope of its tangent there, found by letting a secant’s interval shrink to zero. For powers the rule that emerges is d(xⁿ)/dx = nxⁿ⁻¹, and for motion it converts a position law into a velocity law and a velocity law into an acceleration law in one line each. Take x = 5 + 12t − 3t²: v = dx/dt = 12 − 6t and a = dv/dt = −6 — a uniformly decelerated particle whose velocity vanishes at t = 2 s, after which it reverses. Integration runs the process backwards: velocity is the slope of position, so position is the area under the velocity-time curve, and the constant of integration is fixed by the initial position."
+        },
+        {
+          "type": "paragraph",
+          "text": "The two operations are inverse, and recognising that fact converts kinematics problems into a standard choreography. Given x(t), differentiate twice for a(t). Given a(t), integrate once for v(t) with v(0) supplied, and again for x(t) with x(0) supplied. Given a graph rather than a function, read the same relations geometrically: slope for the derivative, area for the integral. The uniform-acceleration formulae are exactly the special case of this choreography with a constant, and deriving them once by integration — v = u + at from integrating a, and s = ut + ½at² from integrating v — makes them available even when a memory lapse would otherwise lose the marks. The elementary chain of reasoning, position → velocity → acceleration by slope, and back by area, is the single most reusable idea in the whole mechanics syllabus."
+        },
+        {
+          "type": "table",
+          "caption": "The calculus of one-dimensional motion",
+          "columns": [
+            "Given",
+            "Operation",
+            "Result"
+          ],
+          "rows": [
+            [
+              "x(t)",
+              "Differentiate",
+              "v(t) = dx/dt"
+            ],
+            [
+              "v(t)",
+              "Differentiate",
+              "a(t) = dv/dt"
+            ],
+            [
+              "a(t)",
+              "Integrate + initial velocity",
+              "v(t) = u + ∫a dt"
+            ],
+            [
+              "v(t)",
+              "Integrate + initial position",
+              "x(t) = x₀ + ∫v dt"
+            ],
+            [
+              "v–t graph",
+              "Area under the curve",
+              "Displacement"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "x = 5 + 12t − 3t²: velocity and acceleration at t = 1 s.",
+              "note": "v = 12 − 6t = 6 m/s; a = −6 m/s²."
+            },
+            {
+              "text": "a = −10 m/s², u = 20 m/s: v after 2 s.",
+              "note": "Integrate: v = 20 − 10t = 0 m/s — it stops exactly then."
+            },
+            {
+              "text": "Displacement from the area of a v–t triangle.",
+              "note": "½ × base × height = ½ × 2 × 20 = 20 m."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "uniform",
+      "title": "Uniformly accelerated motion, graphically and with calculus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Uniform acceleration produces the two laws every physics student carries for life: v = u + at and s = ut + ½at², supplemented by the time-free v² = u² + 2as. Their calculus derivation is three lines: integrate a = constant to get v = u + at; integrate that to get s = ut + ½at²; and eliminating t between them gives v² = u² + 2as. The graphical route gives the same results by area: the velocity-time graph of uniform acceleration is a straight line of slope a, so the displacement is the trapezium beneath it, whose area is ½(u + v)t — equal to ut + ½at² once v = u + at is substituted. Having both derivations available is the syllabus’s deliberate design: the algebraic reader works by area, the calculus reader by integration, and either earns full marks when shown."
+        },
+        {
+          "type": "paragraph",
+          "text": "Graphs are also diagnostic tools. An x–t graph whose slope grows steeper shows acceleration; a horizontal segment shows rest; a crossing of the time axis marks the moment the particle passes the origin. A v–t graph’s slope is acceleration and its area is displacement — note displacement, not distance: a v–t curve dipping below the axis contributes negatively to displacement but positively to distance, and questions exploiting exactly that difference are common. Free fall under gravity, with a = g ≈ 9.8 m·s⁻² directed downwards, is the standard application: fix the upward direction as positive, and every thrown-ball problem reduces to the same two formulae with a = −g. The sign convention, stated once at the start of the solution, prevents the majority of errors this topic produces."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "v = u + at, s = ut + ½at², v² = u² + 2as — derive them, do not just recall.",
+            "The v–t graph of uniform acceleration is a straight line of slope a.",
+            "Area under v–t = displacement; to get distance, count areas as positive.",
+            "In free fall, choose a sign convention before substituting.",
+            "Zero velocity on a v–t graph marks the turning point of the motion."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Reading and drawing motion graphs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Graph questions test translation between three representations — verbal, graphical and algebraic — and the reliable method is to convert everything into slopes and areas before computing. Given an x–t graph, the slope at any instant is the velocity, so a steeper segment means faster motion and a negative slope means motion in the negative direction. Given a v–t graph, its slope is the acceleration and its signed area is the displacement; the total distance is the sum of the areas taken as positive. Given an a–t graph, its area gives the change in velocity. Working through all three translations for a single described motion — a car that accelerates, cruises, brakes to a stop — builds the fluency that exam questions assume, and produces the shape recognition (curved x–t with increasing slope for acceleration, flat v–t for constant velocity) that lets you answer qualitative items without any arithmetic at all."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two graph traps are worth naming. First, a curved x–t graph does not automatically mean speeding up: a parabola opening downward describes motion that accelerates negatively, and whether the speed grows or shrinks depends on the sign of the velocity at that moment. Second, the area under a v–t curve must be signed: the region between the curve and the axis below zero subtracts from displacement, and failing to notice this is the single most common source of lost marks in graph problems. The habit that prevents both errors is to annotate the graph before computing — mark where the slope is zero, where the curve crosses the axis, and which regions lie above and below it — so that the arithmetic that follows executes a plan rather than improvising one."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "x–t slope = velocity; v–t slope = acceleration; a–t area = Δv.",
+            "v–t area = displacement (signed); sum absolute areas for distance.",
+            "A curve’s steepness shows speed; its sign shows direction.",
+            "Mark turning points and axis crossings before computing anything.",
+            "Shape recognition answers qualitative questions without arithmetic."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The velocity-time graph of uniformly accelerated motion",
+      "description": "A straight line rising from initial velocity u on the vertical axis to velocity v at time t, with the slope marked a, the trapezium beneath the line shaded and labelled displacement = area = ½(u + v)t, and the rectangular portion ut distinguished from the triangular portion ½at².",
+      "labels": [
+        "Vertical intercept: initial velocity u",
+        "Slope of the line: acceleration a",
+        "Shaded area: displacement",
+        "Rectangle part: ut",
+        "Triangle part: ½at²"
+      ]
+    },
+    {
+      "caption": "Figure: A bouncing-velocity graph — displacement against distance",
+      "description": "A velocity-time plot of a ball thrown upward: velocity decreasing linearly to zero, crossing negative to a minimum, then returning; the region above the axis and the mirror region below marked with equal areas, annotations noting the upward area equals the downward area so displacement at the return is zero while distance is twice the height.",
+      "labels": [
+        "Velocity falls linearly at −g",
+        "Zero crossing: the highest point",
+        "Equal areas above and below",
+        "Displacement zero on return",
+        "Distance = 2 × maximum height"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Displacement is directed change of position; distance is total path length.",
+    "v = dx/dt is instantaneous velocity — the slope of the x–t graph.",
+    "a = dv/dt = d²x/dt²; opposite signs of v and a mean slowing down.",
+    "d(xⁿ)/dx = nxⁿ⁻¹ generates the velocity and acceleration from a position law.",
+    "Integration returns position from velocity; the constant is fixed by initial conditions.",
+    "Area under a v–t graph is displacement; take absolute areas for distance.",
+    "Uniform acceleration gives v = u + at, s = ut + ½at², v² = u² + 2as.",
+    "The trapezium area ½(u + v)t on a v–t graph derives the displacement directly.",
+    "Free fall: choose a sign convention and use a = −g consistently.",
+    "Mark turning points and axis crossings on any graph before computing."
+  ],
+  "examFocus": [
+    "Show the differentiation or integration step, not just the result.",
+    "State the sign convention at the start of any free-fall solution.",
+    "Graph answers must quote both slope and area readings.",
+    "Distinguish displacement from distance explicitly when the v–t curve crosses the axis."
+  ],
+  "vocabulary": [
+    {
+      "word": "Frame of reference",
+      "meaning": "Origin, axes and clock that make motion statements meaningful."
+    },
+    {
+      "word": "Displacement",
+      "meaning": "Directed change of position; path-independent."
+    },
+    {
+      "word": "Instantaneous velocity",
+      "meaning": "The limit of average velocity as the time interval vanishes: dx/dt."
+    },
+    {
+      "word": "Acceleration",
+      "meaning": "Rate of change of velocity with time."
+    },
+    {
+      "word": "Uniform acceleration",
+      "meaning": "Acceleration constant in magnitude and direction."
+    },
+    {
+      "word": "Calculus treatment",
+      "meaning": "Deriving kinematic laws by differentiating and integrating."
+    },
+    {
+      "word": "Turning point",
+      "meaning": "The instant where velocity passes through zero."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-rect-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A car travels 80 m north in 10 s, then 60 m south in 5 s. Its average speed for the whole journey is:",
+      "options": [
+        "9.33 m/s",
+        "1.33 m/s",
+        "4.67 m/s",
+        "10 m/s"
+      ],
+      "correctIndex": 0,
+      "answer": "9.33 m/s",
+      "explanation": "Average speed uses total distance over total time: (80 + 60)/(10 + 5) = 140/15 = 9.33 m/s. (The average velocity would instead be the net displacement 20 m over 15 s = 1.33 m/s — the distractor that tests exactly that confusion.)"
+    },
+    {
+      "id": "cbse11-phy-rect-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the position law x = 5 + 12t − 3t², the acceleration is:",
+      "options": [
+        "12 m/s²",
+        "−6 m/s²",
+        "6 m/s²",
+        "−3 m/s²"
+      ],
+      "correctIndex": 1,
+      "answer": "−6 m/s²",
+      "explanation": "Differentiate twice: v = 12 − 6t and a = −6 m/s², constant, so the motion is uniformly decelerated."
+    },
+    {
+      "id": "cbse11-phy-rect-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area under a velocity-time graph gives the particle’s:",
+      "options": [
+        "Distance travelled",
+        "Displacement",
+        "Acceleration",
+        "Speed"
+      ],
+      "correctIndex": 1,
+      "answer": "Displacement",
+      "explanation": "The signed area gives displacement; distance requires summing the absolute values of the areas above and below the axis."
+    },
+    {
+      "id": "cbse11-phy-rect-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A ball thrown upward with u = 29.4 m/s returns to the thrower’s hand after:",
+      "options": [
+        "3 s",
+        "6 s",
+        "1.5 s",
+        "9 s"
+      ],
+      "correctIndex": 1,
+      "answer": "6 s",
+      "explanation": "Time of flight = 2u/g = 2 × 29.4/9.8 = 6 s — the up-journey takes 3 s to the top and the down-journey 3 s to return."
+    },
+    {
+      "id": "cbse11-phy-rect-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The slope of a position-time graph at any instant equals the particle’s ________ .",
+      "answer": "velocity",
+      "explanation": "v = dx/dt is exactly the gradient of the tangent to the x–t curve."
+    },
+    {
+      "id": "cbse11-phy-rect-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The relation v² = u² + 2as is obtained by eliminating ________ between the other two equations of motion.",
+      "answer": "time",
+      "explanation": "Eliminating t from v = u + at and s = ut + ½at² gives the time-free equation."
+    },
+    {
+      "id": "cbse11-phy-rect-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define average velocity and instantaneous velocity, and state how they differ for a car that covers 100 km in 2 h with varying speed.",
+      "answer": "Average velocity is the total displacement divided by the total time taken: for the car, if it travelled 100 km in a straight line in 2 h, the average velocity is 100 km / 2 h = 50 km/h in the direction of travel. Instantaneous velocity is the limit of the displacement over an infinitesimally short interval at that moment — the speedometer reading — which varied throughout the journey: perhaps 60 km/h on the highway and 20 km/h through town. The two differ because average velocity discards the history of the motion and keeps only its endpoints, while instantaneous velocity reports the rate of change at one particular instant. For a journey ending where it began the average velocity would be zero while the instantaneous velocity was never zero.",
+      "explanation": "Both definitions with the limiting idea, the numeric average computed, and the explicit contrast between endpoint information and momentary information."
+    },
+    {
+      "id": "cbse11-phy-rect-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the equation v = u + at by integration of the definition of uniform acceleration, and state what the constant of integration represents.",
+      "answer": "Uniform acceleration means a is constant. By definition a = dv/dt, so dv = a dt. Integrating both sides from the initial state (v = u at t = 0) to a general time t: ∫ from u to v of dv = ∫ from 0 to t of a dt. The left side evaluates to v − u; the right side, with a constant, evaluates to a t. Hence v − u = at, that is v = u + at. The constant of integration appears when the indefinite form is used: writing ∫ dv = ∫ a dt gives v = at + C, and substituting the initial condition v = u at t = 0 fixes C = u — the constant is the initial velocity, which is why every equation of motion carries u as a parameter. Check: at t = 0 the formula returns v = u as it must, and with a = −9.8 m/s² and u = 0 it gives the free-fall velocity law v = −9.8t ✓.",
+      "explanation": "The integral set up with limits, the evaluation, and the initial condition identified as the integration constant."
+    },
+    {
+      "id": "cbse11-phy-rect-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A train starts from rest, accelerates uniformly at 2 m/s² for 20 s, then travels at constant velocity for 30 s, then decelerates uniformly to rest in 10 s. Find the total distance travelled and the average speed.",
+      "answer": "Stage 1 (acceleration): u = 0, a = 2 m/s², t = 20 s. Final velocity v = u + at = 40 m/s, and distance s₁ = ut + ½at² = 0 + ½ × 2 × 400 = 400 m. Stage 2 (constant velocity): speed 40 m/s for 30 s, so s₂ = 40 × 30 = 1200 m. Stage 3 (deceleration): from 40 m/s to 0 in 10 s, so a = (0 − 40)/10 = −4 m/s², and s₃ = ½(u + v)t = ½ × 40 × 10 = 200 m (using the trapezium area, the quickest route when acceleration is uniform). Total distance = 400 + 1200 + 200 = 1800 m, and since the motion never reverses, distance equals displacement magnitude. Total time = 20 + 30 + 10 = 60 s, so average speed = 1800/60 = 30 m/s. Checks: the average lies between the minimum (0) and maximum (40) speeds ✓; the deceleration needed to stop from 40 m/s in 10 s is −4 m/s², a plausible magnitude ✓; and summing the areas under the three-part v–t graph (½×20×40 + 30×40 + ½×10×40) reproduces 400 + 1200 + 200 ✓.",
+      "explanation": "All three stages with their distances, the total, the total time, the average speed, and the graphical area cross-check."
+    },
+    {
+      "id": "cbse11-phy-rect-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A particle moves along the x-axis with position x = t³ − 6t² + 9t (SI units). Find when it is at rest, describe the motion between the turning points, and compute the distance travelled between t = 0 and t = 4 s — explaining why distance exceeds the magnitude of displacement here.",
+      "answer": "Velocity: v = dx/dt = 3t² − 12t + 9 = 3(t² − 4t + 3) = 3(t − 1)(t − 3). The particle is at rest at t = 1 s and t = 3 s. Positions: x(0) = 0, x(1) = 1 − 6 + 9 = 4 m, x(3) = 27 − 54 + 27 = 0 m, x(4) = 64 − 96 + 36 = 4 m. Between t = 0 and t = 1 the velocity is positive (factors (−)(−) = +), so the particle moves in +x from 0 to 4 m. Between 1 and 3 s the velocity is negative ((+)(−) = −), so it returns from 4 m to 0 m. Between 3 and 4 s it is positive again ((+)(+)), moving out to 4 m. Displacement over 0 to 4 s = x(4) − x(0) = 4 − 0 = 4 m. Distance: 4 m out, 4 m back, 4 m out again = 12 m — three times the displacement magnitude, because the two reversals at the turning points make the path overlap itself. This is exactly why distance and displacement separate for reversing motion: displacement counts only the endpoints, distance counts every metre of path, and any journey containing a reversal forces distance > |displacement|. Acceleration a = 6t − 12 confirms the picture: negative before t = 2 s (slowing the initial outward motion and driving the return) and positive afterwards.",
+      "explanation": "Rest times found from the factored velocity, the position sequence computed, the three-stage path traced, distance 12 m distinguished from displacement 4 m with the reversal argument, and the acceleration checked against the turning points."
+    }
+  ]
+}

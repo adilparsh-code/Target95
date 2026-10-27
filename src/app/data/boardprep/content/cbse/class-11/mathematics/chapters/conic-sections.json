@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-conics",
+  "title": "Conic Sections",
+  "kind": "mathematics",
+  "tagline": "Circles, parabolas, ellipses and hyperbolas: one cutting plane, four curves, and the focus–directrix property behind all of them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "A cone cut at different angles produces a family of curves that share more structure than their names suggest: each has a focus, a directrix and an eccentricity, and the four conics of this syllabus differ only in the value of that one number. The chapter develops each curve from its geometric definition to its standard equation, teaches the reader to identify a conic from an equation by comparing squared terms, and uses the focus–directrix distance as the examinable property. The algebra is heavier than the preceding chapters, so each curve is paired with a worked identification of its key features.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-IV: Coordinate Geometry (14 marks shared with the Straight Lines chapter)."
+      },
+      {
+        "label": "Eccentricity",
+        "value": "e = 1 circle... circle aside: e = 1 parabola, 0 < e < 1 ellipse, e > 1 hyperbola."
+      },
+      {
+        "label": "Parabola",
+        "value": "y² = 4ax; focus (a, 0), directrix x = −a, latus rectum 4a."
+      },
+      {
+        "label": "Ellipse",
+        "value": "x²/a² + y²/b² = 1 with a > b; foci at (±c, 0), c² = a² − b²; L.R. = 2b²/a."
+      },
+      {
+        "label": "Hyperbola",
+        "value": "x²/a² − y²/b² = 1; c² = a² + b²; asymptotes y = ±(b/a)x."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the focus–directrix definition and compute eccentricity for a conic.",
+    "Derive and use the standard equations of the four conics.",
+    "Identify a conic from a general second-degree equation by comparing squared terms.",
+    "Find the focus, vertex, directrix and latus rectum of a parabola.",
+    "Determine the centre, foci and axes of an ellipse or hyperbola."
+  ],
+  "learn": [
+    {
+      "id": "definition",
+      "title": "The definition, eccentricity and the circle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every conic in this chapter is the set of points whose distance from a fixed point — the focus —bears a constant ratio to their distance from a fixed line — the directrix. That ratio is the eccentricity e, and the whole classification hangs on it: e = 1 gives a parabola (the two distances equal), 0 < e < 1 gives an ellipse (the focus-distance is always smaller, so the curve closes around the focus), and e > 1 gives a hyperbola (the focus-distance is larger, so the curve opens away in two branches). The circle enters as the special limiting ellipse in which the two foci coincide at the centre: the distance to the centre is constant, giving x² + y² = r², and its eccentricity is zero because there is no separation between foci for the ratio to see."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cutting a double cone makes the geometry tangible: a cut perpendicular to the axis gives a circle, a slightly tilted cut gives an ellipse, a cut parallel to the slant height gives a parabola, and a cut steeper than the slant height slices both nappes and gives the two branches of a hyperbola. The standard equations follow from the definitions with a little algebra, and their shape is worth memorising structurally: a parabola has one squared term and one linear term (the squared and linear powers mark the balance between focus and directrix distances); an ellipse has both squares added with positive denominators; a hyperbola has them subtracted. That sign pattern is the fastest identification test in the chapter and it is what the final lesson builds on."
+        },
+        {
+          "type": "table",
+          "caption": "The four conics at a glance",
+          "columns": [
+            "Curve",
+            "Standard equation",
+            "Eccentricity",
+            "Key features"
+          ],
+          "rows": [
+            [
+              "Circle",
+              "x² + y² = r²",
+              "0",
+              "Centre (0, 0), radius r"
+            ],
+            [
+              "Parabola",
+              "y² = 4ax",
+              "1",
+              "Focus (a, 0), directrix x = −a"
+            ],
+            [
+              "Ellipse",
+              "x²/a² + y²/b² = 1, a > b",
+              "0 < e < 1",
+              "Foci (±c, 0), c² = a² − b²"
+            ],
+            [
+              "Hyperbola",
+              "x²/a² − y²/b² = 1",
+              "e > 1",
+              "Foci (±c, 0), c² = a² + b²"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Definition: PF = e × PM for focus F and directrix line.",
+            "e = 1 parabola; 0 < e < 1 ellipse; e > 1 hyperbola; circle is the e = 0 centre case.",
+            "Circle: all points equidistant from the centre — the constant-distance definition.",
+            "The sign between the squared terms separates ellipse from hyperbola."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parabola",
+      "title": "The parabola in detail",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The parabola is the curve equidistant from focus and directrix, and from that single property its standard equation y² = 4ax follows: taking the focus at (a, 0) and the directrix x = −a, a point (x, y) on the curve satisfies √((x − a)² + y²) = x + a, and squaring cancels the squares of x and a to leave y² = 4ax. The derivation is worth doing once because it shows why only one variable is squared — the equality of the two distances forces the linear x term to survive. Key features follow directly: the vertex at the origin where the axis meets the curve, the axis of symmetry y = 0, the latus rectum (the chord through the focus perpendicular to the axis) of length 4a, and the directrix sitting at the mirror distance behind the vertex."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reversing the roles of x and y gives the left/right and upward/downward parabolas, and the sign of the linear term decides which way it opens: y² = 4ax opens right, y² = −4ax opens left, x² = 4ay opens up, x² = −4ay opens down. Exam questions usually give an equation and ask for the features, so the working pattern is: identify which variable is squared, rewrite the equation in the form with a visible coefficient of the linear term, read a from 4a = that coefficient with its sign, and list focus, vertex, directrix and latus rectum. Parabolas also model real trajectories — the path of a projectile under gravity is a parabola, and reflecting property of a parabolic dish (rays parallel to the axis reflect to the focus) is the reason satellite dishes are parabolic, a genuinely useful application worth noting in an exam answer."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "y² = 16x: features.",
+              "note": "4a = 16, so a = 4: focus (4, 0), directrix x = −4, L.R. = 16."
+            },
+            {
+              "text": "x² = −20y: features.",
+              "note": "Opens downward with 4a = 20: focus (0, −5), directrix y = 5."
+            },
+            {
+              "text": "Focus of the parabola y² = 8x.",
+              "note": "a = 2, so the focus is at (2, 0)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ellipse",
+      "title": "The ellipse: foci, axes and the string construction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An ellipse is the set of points whose distances from two foci have a constant sum — a definition with a physical realisation: a loop of string pinned at two points, with a pencil keeping it taut, traces an ellipse, and the string length is that constant sum, 2a. Placing the foci at (±c, 0) and letting the constant sum be 2a leads, after the same squaring manoeuvre as the parabola, to x²/a² + y²/b² = 1 where b² = a² − c². The semimajor axis a is the largest radius (along the long axis through the foci), the semiminor axis b is the shortest radius, and c measures how far the foci sit off-centre. Eccentricity e = c/a then runs from 0 (a circle, foci together) to nearly 1 (a long thin ellipse)."
+        },
+        {
+          "type": "paragraph",
+          "text": "The latus rectum of the ellipse — the chord through a focus perpendicular to the major axis — has length 2b²/a, obtained by setting x = c in the equation and using b² = a² − c² to simplify. Vertices lie at (±a, 0) on the major axis and (0, ±b) on the minor axis, and the centre is the midpoint of the foci. The ellipse’s applications are numerous: planetary orbits are ellipses with the sun at one focus (Kepler’s first law), whispering galleries exploit the focusing property that sound from one focus reflects to the other, and the ratio c/a distinguishes a nearly circular orbit from a elongated one. When answering exam questions, the single most common error is confusing a and b: always compare the denominators first, and take a to be the larger one when the ellipse is written in standard position."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "x²/25 + y²/16 = 1: features.",
+              "note": "a = 5, b = 4, c = 3: foci (±3, 0), L.R. = 2b²/a = 32/5."
+            },
+            {
+              "text": "Find the eccentricity of x²/9 + y²/5 = 1.",
+              "note": "c² = 9 − 5 = 4, so c = 2 and e = c/a = 2/3."
+            },
+            {
+              "text": "Constant-sum definition with foci 6 apart, sum of distances 10.",
+              "note": "2a = 10 so a = 5, c = 3, b² = 16: x²/25 + y²/16 = 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperbola",
+      "title": "The hyperbola, asymptotes and identification",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A hyperbola is the set of points whose distances from two foci differ by a constant, 2a, and its equation x²/a² − y²/b² = 1 follows from that definition in the same way the ellipse’s does — with a subtraction replacing the addition. The vertices sit at (±a, 0), the foci at (±c, 0) with c² = a² + b² (note the sign flip from the ellipse: c is now the largest of the three), and the curve has two branches that approach but never meet two slanted lines, the asymptotes y = ±(b/a)x. The rectangular hyperbola xy = c² is the special case with equal axes, and the latus rectum again measures 2b²/a. Eccentricity exceeds 1 because the focus-distance always exceeds the directrix-distance for this curve."
+        },
+        {
+          "type": "paragraph",
+          "text": "The final skill of the chapter is identifying a conic from a general second-degree equation without completing every square: compare the coefficients of x² and y². If they are equal and there is no xy term, it is a circle (after completing squares for the centre). If only one variable is squared, it is a parabola. If both are squared with the same sign, it is an ellipse; with opposite signs, a hyperbola; and if an xy term appears, the axes are rotated beyond this syllabus. When squared terms appear with unequal same-sign coefficients — say 9x² + 4y² = 36 — normalise by dividing through by the constant to reach the standard form, then read a, b and the features. Practise this identification until it is automatic: most exam marks in this topic are awarded for correctly classifying and then extracting features, not for the algebra in between."
+        },
+        {
+          "type": "table",
+          "caption": "Reading a conic from its equation",
+          "columns": [
+            "Pattern in the squared terms",
+            "Conic",
+            "Next step"
+          ],
+          "rows": [
+            [
+              "x² and y², equal positive coefficients, no xy",
+              "Circle",
+              "Complete squares for centre and radius"
+            ],
+            [
+              "Only one of x², y² present",
+              "Parabola",
+              "Identify the axis and read a from 4a"
+            ],
+            [
+              "Both present, same sign, unequal",
+              "Ellipse",
+              "Normalise to standard form; a = larger denominator"
+            ],
+            [
+              "Both present, opposite signs",
+              "Hyperbola",
+              "Normalise; c² = a² + b²"
+            ],
+            [
+              "xy term present",
+              "Rotated axes",
+              "Outside this syllabus"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "25x² + 4y² = 100: classify and describe.",
+              "note": "Ellipse: divide by 100 → x²/4 + y²/25 = 1, so a = 5 (along y), b = 2, c = √21."
+            },
+            {
+              "text": "9x² − 16y² = 144: classify.",
+              "note": "Hyperbola: x²/16 − y²/9 = 1, foci at (±5, 0) since c² = 16 + 9."
+            },
+            {
+              "text": "Classify y = 2x².",
+              "note": "Rewrite as x² = (1/2)y: only x² is squared, so it is a parabola opening upward with 4a = 1/2, i.e. a = 1/8."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A cone and the four conic sections cut from it",
+      "description": "A double cone drawn in outline with four cutting planes indicated: a horizontal cut producing a circle, a gently tilted cut producing an ellipse, a cut parallel to the slant side producing a parabola, and a steep vertical cut passing through both nappes producing the two branches of a hyperbola; each resulting curve drawn beside the cone with its name.",
+      "labels": [
+        "Cut ⊥ to axis: circle",
+        "Tilted cut: ellipse",
+        "Cut ∥ slant height: parabola",
+        "Cut through both nappes: hyperbola",
+        "Same cone, different angle"
+      ]
+    },
+    {
+      "caption": "Figure: Focus, directrix and eccentricity on a parabola",
+      "description": "A right-opening parabola with focus marked F at (a, 0), a vertical dashed directrix at x = −a, a point P on the curve with dashed segments to F and perpendicular to the directrix, both segments marked equal, and the vertex labelled where the curve crosses the axis between them.",
+      "labels": [
+        "Focus F = (a, 0)",
+        "Directrix x = −a",
+        "PF = PM (e = 1)",
+        "Vertex at the origin",
+        "Latus rectum through F, length 4a"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A conic is PF = e × PM: distance to focus over distance to directrix is constant.",
+    "e = 1 parabola, 0 < e < 1 ellipse, e > 1 hyperbola; circle is the zero-eccentricity centre case.",
+    "Parabola y² = 4ax: focus (a, 0), directrix x = −a, latus rectum 4a.",
+    "The variable that is squared tells you which way a parabola opens.",
+    "Ellipse x²/a² + y²/b² = 1: constant sum of distances to the foci; c² = a² − b².",
+    "Ellipse latus rectum = 2b²/a; take a as the larger denominator.",
+    "Hyperbola: constant difference of distances; c² = a² + b²; asymptotes y = ±(b/a)x.",
+    "Classify by the squared terms: same sign → ellipse, opposite → hyperbola, one squared → parabola.",
+    "Planetary orbits are ellipses with the sun at one focus; parabolic reflectors focus parallel rays.",
+    "Normalise any second-degree equation by dividing by the constant before reading features."
+  ],
+  "examFocus": [
+    "Always rewrite into standard form before listing features.",
+    "State which axis is major — it decides where the foci go.",
+    "Parabola: identify the orientation from the sign and the squared variable.",
+    "Give a, b, c explicitly; most mark schemes award each separately."
+  ],
+  "vocabulary": [
+    {
+      "word": "Focus (F)",
+      "meaning": "The fixed point in the focus–directrix definition."
+    },
+    {
+      "word": "Directrix",
+      "meaning": "The fixed line in the definition; the parabola’s mirror line behind the vertex."
+    },
+    {
+      "word": "Eccentricity (e)",
+      "meaning": "The constant ratio PF/PM classifying the conic."
+    },
+    {
+      "word": "Latus rectum",
+      "meaning": "The chord through a focus perpendicular to the axis."
+    },
+    {
+      "word": "Vertex",
+      "meaning": "The point where the curve crosses its axis — closest point to the directrix."
+    },
+    {
+      "word": "Asymptote",
+      "meaning": "A line the hyperbola approaches indefinitely without meeting."
+    },
+    {
+      "word": "Major / minor axis",
+      "meaning": "The longest and shortest diameters of an ellipse."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-conic-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The focus of the parabola y² = 12x is:",
+      "options": [
+        "(3, 0)",
+        "(12, 0)",
+        "(6, 0)",
+        "(0, 3)"
+      ],
+      "correctIndex": 0,
+      "answer": "(3, 0)",
+      "explanation": "4a = 12 gives a = 3, and the focus of y² = 4ax is (a, 0)."
+    },
+    {
+      "id": "cbse11-math-conic-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The eccentricity of an ellipse is:",
+      "options": [
+        "1",
+        "Greater than 1",
+        "Between 0 and 1",
+        "Zero always"
+      ],
+      "correctIndex": 2,
+      "answer": "Between 0 and 1",
+      "explanation": "An ellipse has 0 < e < 1; e = 1 is a parabola and e > 1 a hyperbola."
+    },
+    {
+      "id": "cbse11-math-conic-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In x²/49 + y²/25 = 1, the length of the latus rectum is:",
+      "options": [
+        "100/7",
+        "14",
+        "50/7",
+        "25"
+      ],
+      "correctIndex": 2,
+      "answer": "50/7",
+      "explanation": "a² = 49 and b² = 25 give a = 7, b = 5, so L.R. = 2b²/a = 50/7."
+    },
+    {
+      "id": "cbse11-math-conic-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the hyperbola x²/16 − y²/9 = 1, the foci are at:",
+      "options": [
+        "(±5, 0)",
+        "(±7, 0)",
+        "(±4, 0)",
+        "(±√7, 0)"
+      ],
+      "correctIndex": 0,
+      "answer": "(±5, 0)",
+      "explanation": "c² = a² + b² = 16 + 9 = 25, so c = 5 and the foci are (±5, 0)."
+    },
+    {
+      "id": "cbse11-math-conic-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The curve traced at a constant distance from a fixed point is a ________ .",
+      "answer": "circle",
+      "explanation": "All points equidistant from the centre form a circle of that radius."
+    },
+    {
+      "id": "cbse11-math-conic-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In 9x² + 4y² = 36 the conic is an ________ because both squared terms appear with ________ signs.",
+      "answer": "ellipse",
+      "explanation": "Same-sign squared terms with unequal coefficients identify an ellipse; normalising gives x²/4 + y²/9 = 1."
+    },
+    {
+      "id": "cbse11-math-conic-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the focus–directrix definition of a conic and the eccentricity values that distinguish the three curves.",
+      "answer": "A conic is the locus of points P such that the distance PF from a fixed point F (the focus) divided by the distance PM from a fixed line (the directrix, measured perpendicularly) is a constant e: PF/PM = e, or PF = e · PM. When e = 1 the two distances are always equal, which gives a parabola — a curve that opens without bound. When 0 < e < 1 the focus-distance is always the smaller, so the curve closes in on the focus and traces an ellipse; as e approaches 0 the foci move together and the ellipse approaches a circle, which is the constant-distance case. When e > 1 the focus-distance always exceeds the directrix-distance, the curve cannot close, and two separate branches form a hyperbola. The three values therefore partition all conics continuously: eccentricity is not a technicality but the single parameter that decides the shape.",
+      "explanation": "The ratio statement with focus and directrix identified, and the correct ranges for all three curves including the limiting circle case."
+    },
+    {
+      "id": "cbse11-math-conic-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the equation of the parabola with vertex at the origin, focus on the positive x-axis, and latus rectum of length 10.",
+      "answer": "The parabola opens to the right with vertex at the origin, so its equation has the standard form y² = 4ax with a > 0. The latus rectum of that parabola has length 4a, and the problem states 4a = 10, so a = 10/4 = 5/2. Substituting: y² = 4(5/2)x, that is y² = 10x. Verification of the features: focus at (a, 0) = (5/2, 0); directrix x = −5/2; and the latus rectum endpoints at x = 5/2 satisfy y² = 25, so y = ±5 and the chord length is 10 as required ✓. The orientation check: y² = 10x has y squared and a positive coefficient for x, so the curve opens to the right, consistent with a focus on the positive x-axis.",
+      "explanation": "The standard form chosen, a recovered from the latus rectum, the final equation, and a verification of the latus rectum length."
+    },
+    {
+      "id": "cbse11-math-conic-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the centre, foci, eccentricity and latus rectum of the ellipse 25x² + 9y² = 225.",
+      "answer": "Step 1: normalise to standard form by dividing by 225: x²/9 + y²/25 = 1. Step 2: compare denominators — 25 > 9, so a² = 25 lies under y² and b² = 9 under x²: the major axis is along the y-axis with a = 5, b = 3. Step 3: c from c² = a² − b² = 25 − 9 = 16, so c = 4, and because the major axis is vertical the foci are at (0, ±4) with the centre at the origin. Step 4: eccentricity e = c/a = 4/5. Step 5: latus rectum = 2b²/a = 2 × 9/5 = 18/5. Verification: e = 4/5 lies strictly between 0 and 1 as an ellipse’s must ✓; the vertices are (0, ±5) and co-vertices (±3, 0) ✓; and the constant-sum definition checks: distances from (0, 4) focus to a vertex (0, 5) sum correctly with the opposite vertex to give 10 = 2a ✓.",
+      "explanation": "Normalisation, the a/b assignment with the vertical major axis, all five features, and the eccentricity range check."
+    },
+    {
+      "id": "cbse11-math-conic-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Classify the conic 16x² − 25y² = 400 without completing the square, then find its asymptotes and explain why they bound the curve’s behaviour.",
+      "answer": "Classification by inspection: x² and y² both appear, but with opposite signs — plus for x², minus for y² — which is the signature of a hyperbola; no xy term means the axes are already standard. To confirm without completing anything, note only that dividing by 400 normalises: x²/25 − y²/16 = 1, which matches x²/a² − y²/b² = 1 with a = 5, b = 4, so it is a hyperbola with a horizontal transverse axis, c² = 25 + 16 = 41 giving foci at (±√41, 0). The asymptotes come from the right-hand side: replacing the 1 by 0 gives x²/25 − y²/16 = 0, which factors as (x/5 − y/4)(x/5 + y/4) = 0, so the asymptotes are y = ±(4/5)x. Their role: for large |x| or |y| the constant 1 becomes negligible compared with the squared terms, so the curve y = ±(4/5)x√(x²/25 − 1)·... more clearly, solving for y gives y = ±(4/5)√(x² − 25), and for large x the √(x² − 25) is approximately x, so y ≈ ±(4/5)x — the curve approaches the straight lines without ever reaching them, since √(x² − 25) < x strictly. That is the meaning of an asymptote: not a tangent and not a part of the curve, but the line the curve’s distance to which tends to zero as x grows. Geometrically the asymptotes are the diagonals of the fundamental rectangle with semi-axes 5 and 4, and they mark the cone-generating directions — the branches open along them, which is why they bound rather than intersect the curve: setting the equation equal to the asymptote line gives no solution at finite x.",
+      "explanation": "Classification from the sign pattern, normalised standard form with a, b, c, the asymptotes derived by setting the constant to zero, and an explanation of asymptotic behaviour with the large-x approximation."
+    }
+  ]
+}

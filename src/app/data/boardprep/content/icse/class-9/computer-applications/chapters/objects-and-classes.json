@@ -1,0 +1,437 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-9-ca-objects-classes",
+  "slug": "objects-and-classes",
+  "title": "Elementary Concept of Objects and Classes",
+  "kind": "computer-applications",
+  "tagline": "Blueprints, references, new and the dot: how one class produces objects that each keep their own state.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "Java, JDK, JRE, JVM and BlueJ are trademarks of their respective owners. This chapter reproduces no third-party text: every explanation, code listing, question and answer is original BoardPrep material written for the ICSE syllabus.",
+    "boardprep": "Original BoardPrep study material for ICSE Class IX Computer Applications, written against the Examination Year 2028 syllabus baseline registered in this repository (src/lib/icseSyllabus.js, CLASS_IX_TOPICS). Every code listing was compiled and executed with OpenJDK during authoring, and every stated output was checked against the real program."
+  },
+  "overview": {
+    "intro": "This chapter turns the vocabulary of the previous one into working code. A class declares fields for the data each object will hold and methods for the behaviour it offers; the new keyword allocates one object at a time and hands back a reference; the dot operator reaches through that reference to a field or method. Because every object owns its own field values, two students made from one class never disturb each other, and a single reference can even be pointed at a different object. Every ICSE Class IX program you write from here on is built from these mechanics.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Object-oriented Programming Concepts (ICSE Class IX)"
+      },
+      {
+        "label": "Central idea",
+        "value": "A class defines; an object holds — blueprints versus instances"
+      },
+      {
+        "label": "Creation",
+        "value": "ClassName variable = new ClassName();"
+      },
+      {
+        "label": "Access",
+        "value": "The dot operator, ., reaches an object’s fields and methods"
+      },
+      {
+        "label": "State rule",
+        "value": "Objects of one class never share field values"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Write a class with fields and methods and instantiate objects of it from main.",
+    "Explain what the new keyword allocates and what a reference variable actually stores.",
+    "Use the dot operator to set fields and call methods on a specific object.",
+    "Predict the output of programs that create two objects and modify their fields independently."
+  ],
+  "learn": [
+    {
+      "id": "blueprint",
+      "title": "From blueprint to object",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A class is a description, not a thing: declaring Student does not put a student anywhere. Only when main executes new Student() does memory get carved out for one student — space for a name, space for marks — and a reference to that space come back to the program. The reference is a handle you can pass around, print, or hand to a method; the object behind it is what actually exists. Thinking clearly about that difference is the single most useful habit this chapter teaches, because most early object-oriented bugs are really confusion between the handle and the thing it holds."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Field",
+              "meaning": "A variable declared inside a class, one copy of which exists in every object.",
+              "context": "String name; inside Student is a field every student object receives."
+            },
+            {
+              "term": "Method",
+              "meaning": "A block of behaviour declared in a class that objects of that class can perform.",
+              "context": "void display() is called on a particular object through its reference."
+            },
+            {
+              "term": "Reference variable",
+              "meaning": "A variable that stores the address of an object rather than the object itself.",
+              "context": "Student s; holds a reference; until new is called it holds nothing."
+            },
+            {
+              "term": "Instantiation",
+              "meaning": "Creating one object from a class using the new keyword.",
+              "context": "Each instantiation produces a fresh object with its own field values."
+            },
+            {
+              "term": "Dot operator",
+              "meaning": "The . that connects a reference to a field or method of the object it holds.",
+              "context": "s.marks = 82; and s.display(); both work through the dot."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creating",
+      "title": "Creating objects and giving them state",
+      "blocks": [
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "class Circle { double r; void area() { System.out.println(Math.PI * r * r); } public static void main(String[] a) { Circle c = new Circle(); c.r = 5; c.area(); } }",
+              "note": "Output: 78.53981633974483 — the object is created first, its field is then set through the dot, and its own method uses that field."
+            },
+            {
+              "text": "class Student { String name; int marks; void show() { System.out.println(name + \" scored \" + marks); } public static void main(String[] a) { Student s1 = new Student(); Student s2 = new Student(); s1.name = \"Aman\"; s1.marks = 82; s2.name = \"Riya\"; s2.marks = 91; s1.show(); s2.show(); } }",
+              "note": "Output: Aman scored 82 followed by Riya scored 91 — two objects, two independent sets of field values from one blueprint."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Notice the three-step rhythm inside main: create with new, state the object’s facts through the dot, then ask the object to act. Fields start with default values — numeric fields at zero, boolean fields false, and references such as String at null — so an object is usable immediately, although you normally overwrite the defaults with meaningful data before calling methods that depend on them."
+        }
+      ]
+    },
+    {
+      "id": "independent-state",
+      "title": "Why two objects never share field values",
+      "blocks": [
+        {
+          "type": "bullets",
+          "items": [
+            "new allocates a separate block of memory for every object, so each gets its own copy of every instance variable.",
+            "Assigning s1.marks = 82 touches only s1’s memory; s2.marks keeps its own value untouched.",
+            "The class itself stores no instance data — fields live inside objects, not inside the blueprint.",
+            "A reference can be re-pointed: after s2 = s1 both references address one object, and changes through either appear through both."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Independence is the default and it is what makes objects trustworthy: you can hand one object to a method without fearing that it silently rewrites another. The exception is deliberate — when one reference is assigned to another, both names come to address the same object, and from that moment they see the same state. Recognising both situations, independent objects versus two names for one object, is the core skill examined under this heading."
+        }
+      ]
+    },
+    {
+      "id": "reading-code",
+      "title": "Reading a class declaration properly",
+      "blocks": [
+        {
+          "type": "table",
+          "caption": "Anatomy of a small class",
+          "columns": [
+            "Line of the class",
+            "Category",
+            "What it does"
+          ],
+          "rows": [
+            [
+              "class Student {",
+              "Class declaration",
+              "Introduces the blueprint named Student"
+            ],
+            [
+              "String name;",
+              "Field (instance variable)",
+              "Declares the data every student object will hold"
+            ],
+            [
+              "void show() { ... }",
+              "Method",
+              "Declares behaviour that operates on one object’s fields"
+            ],
+            [
+              "Student s1 = new Student();",
+              "Instantiation (in main)",
+              "Allocates one object and stores its reference"
+            ],
+            [
+              "s1.marks = 82;",
+              "Member access via dot",
+              "Writes into that one object’s field"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A class declaration ends with a matching pair of braces, and inside it only two kinds of member appear in Class IX work: fields, which are declarations ending in semicolons, and methods, which are brace-terminated blocks. Within a method you may declare local variables of your own; these live only while the method runs and must never be confused with fields, which persist for as long as the object exists. Keeping that distinction clear makes every later topic — from passing objects to methods to understanding scope errors — considerably easier."
+        }
+      ]
+    },
+    {
+      "id": "common-errors",
+      "title": "The mistakes that cost marks",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Nearly every early error in this chapter comes from treating a reference as if it were an object, or forgetting that fields begin with default values. A reference declared but not initialised holds nothing, so using the dot on it fails at runtime; that is the difference between a compile-time complaint about an unknown symbol and a runtime complaint about an empty reference. Read each error message against the two columns below and the fix usually becomes obvious."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Declaring Circle c; and then writing c.r = 5; — the reference holds no object yet, so the program fails at runtime; fix it with c = new Circle(); first.",
+            "Forgetting new entirely and expecting the class name alone to produce an object — the class name alone is only a type.",
+            "Calling a method on the wrong object: s1.show() prints s1’s data, not s2’s, because the dot names the receiver.",
+            "Assuming a local variable declared inside a method survives after it ends — fields persist, local variables do not.",
+            "Mixing a field and an identically named local variable inside a method; the local shadows the field while it is in scope."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam-prep",
+      "title": "Preparing for the examination",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "This chapter is the practical heart of the unit, so expect both short definitions and a write-the-program question. For definitions, name the keyword and the operator explicitly — questions frequently award a separate mark for new and for the dot. For program questions, the mark scheme rewards a complete skeleton: class declaration, fields, one method, main, an object created with new, and output through the object’s own method. Write programs in that order and you will hit every line the scheme is looking for."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Learn the creation pattern: declare the reference, allocate with new, then use the dot.",
+            "For \"what is the output\" questions, track each object’s fields separately — that is where the marks are.",
+            "State that objects of the same class have separate copies of instance variables whenever the question mentions two objects.",
+            "In program-writing answers, always instantiate before using the dot; an unallocated reference is the classic lost mark."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Reference and object are different things",
+      "description": "Two-part diagram. On the left, the stack holds reference variable c pointing across to the right, where the heap holds one Circle object containing r = 5. A second panel shows a reference with no arrow, labelled \"declared but not instantiated — the dot fails here\".",
+      "labels": [
+        "Reference variable c",
+        "Points to object in memory",
+        "Object holds r = 5",
+        "Unallocated reference",
+        "new creates the link"
+      ]
+    },
+    {
+      "caption": "Figure: One class, two independent objects",
+      "description": "The Student class box at the top with fields name and marks, arrows down to two object boxes: student one holding Aman/82 and student two holding Riya/91. A crossed-out arrow between the two object boxes is labelled \"no sharing of field values\".",
+      "labels": [
+        "Class Student blueprint",
+        "Object 1: Aman, 82",
+        "Object 2: Riya, 91",
+        "Separate memory per object",
+        "No shared instance data"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A class declares fields and methods; it does not itself hold any data.",
+    "The new keyword allocates one object per call and returns a reference to it.",
+    "A reference variable stores an address; until new runs it holds nothing and the dot fails on it.",
+    "The dot operator accesses the fields and methods of the object the reference points to.",
+    "Every object receives its own copy of each instance variable, so objects never share field values.",
+    "Fields begin with defaults: numeric 0, boolean false, references null.",
+    "Local variables inside a method exist only while that method runs; fields live as long as the object.",
+    "Assigning one reference to another makes both names address the same object, after which changes show through both.",
+    "A method acts on the object it is called on, so s1.show() reads s1’s state, not s2’s.",
+    "The standard skeleton is class → fields → method → main → new → dot → output."
+  ],
+  "examFocus": [
+    "Definition question: class versus object, with new named as the creating keyword.",
+    "Output question: track each object’s fields separately; two objects mean two independent states.",
+    "Common-error question: using the dot on a reference that was never initialised with new.",
+    "Program question: write the full skeleton — class, fields, method, main, instantiation, output."
+  ],
+  "vocabulary": [
+    {
+      "word": "Instance variable",
+      "meaning": "A field whose memory exists separately inside every object.",
+      "context": "Each Student instance carries its own marks field."
+    },
+    {
+      "word": "new",
+      "meaning": "The keyword that allocates an object and returns a reference to it.",
+      "context": "Student s = new Student(); creates exactly one object."
+    },
+    {
+      "word": "Reference",
+      "meaning": "A named handle that points at an object in memory.",
+      "context": "The variable s holds a reference, not the object itself."
+    },
+    {
+      "word": "Dot operator",
+      "meaning": "The . used to reach a field or method of an object.",
+      "context": "s.marks = 82; writes through the dot into one object."
+    },
+    {
+      "word": "Default value",
+      "meaning": "The value a field holds before it is explicitly assigned.",
+      "context": "An int field starts at 0 and a reference field starts at null."
+    },
+    {
+      "word": "Member",
+      "meaning": "A field or a method declared inside a class.",
+      "context": "Fields and methods are the two kinds of member a class declares."
+    },
+    {
+      "word": "Instantiate",
+      "meaning": "To create an object from a class.",
+      "context": "main instantiates two Student objects in the sample program."
+    },
+    {
+      "word": "Scope",
+      "meaning": "The region of a program where a variable may be used.",
+      "context": "A local variable’s scope is the method that declares it."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cisce-9-ca-q-obj-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which keyword allocates an object of a class?",
+      "options": [
+        "new",
+        "create",
+        "object",
+        "this"
+      ],
+      "correctIndex": 0,
+      "answer": "new",
+      "explanation": "new is Java’s allocation operator: Student s = new Student(); requests memory for one Student object and stores the resulting reference in s.",
+      "commonMistake": "Writing create or object — neither is a Java keyword; allocation always uses new."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "What does the dot operator do in the expression s1.marks = 82?",
+      "options": [
+        "Writes into the marks field of the object s1 references",
+        "Creates a new field called marks in the class",
+        "Copies the value 82 into every object of the class",
+        "Converts the integer 82 into an object"
+      ],
+      "correctIndex": 0,
+      "answer": "Writes into the marks field of the object s1 references",
+      "explanation": "The dot reaches through the reference s1 to that one object’s memory, so the assignment affects only the object s1 addresses.",
+      "commonMistake": "Thinking a field assignment updates the class or all instances — each object owns its fields."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Circle c; is declared, but new is never called before c.r = 5; executes. What happens?",
+      "options": [
+        "The program compiles but fails at runtime because the reference holds no object",
+        "A compile-time error reports that r is undefined",
+        "A Circle object is created automatically",
+        "The field r is added to the class instead"
+      ],
+      "correctIndex": 0,
+      "answer": "The program compiles but fails at runtime because the reference holds no object",
+      "explanation": "The declaration is legal, so compilation succeeds, but the reference holds nothing; dereferencing it with the dot causes a runtime failure. Allocating with c = new Circle(); first fixes it.",
+      "commonMistake": "Expecting the compiler to demand new — Java checks this at runtime, not at compile time."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "After Student s2 = s1; where both references already point at objects, what is true?",
+      "options": [
+        "Both references now address the same object, so changes appear through both",
+        "s2 becomes a copy of s1 with identical but independent field values",
+        "s1 loses its object and points nowhere",
+        "The class creates a third object from the blueprint"
+      ],
+      "correctIndex": 0,
+      "answer": "Both references now address the same object, so changes appear through both",
+      "explanation": "Assigning a reference copies the address, not the object. From then on s1 and s2 are two names for one object, and a write through either is visible through both.",
+      "commonMistake": "Expecting a fresh copy — copying objects requires deliberately building a new one, not a reference assignment."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A class declares the blueprint, while an individual __________ created with the __________ keyword holds its own copy of every field, reached through the __________ operator.",
+      "answer": "object (or instance); new; dot",
+      "explanation": "The blueprint is the class, one concrete instance is an object allocated by new, and its fields and methods are reached with the dot. All three names are distinct terms in the mark scheme.",
+      "commonMistake": "Writing \"variable\" instead of object — the term being defined is the instance, not the reference that names it."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-06",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is the initial value of a freshly allocated object’s int field, and of its String field?",
+      "answer": "A freshly allocated int field starts at 0 and a String (reference) field starts at null, until the program assigns them real values.",
+      "explanation": "Java initialises every field of a new object before any statement of your code runs: numeric types to zero, boolean to false, and reference types to null. Being able to quote these defaults is expected at this level.",
+      "commonMistake": "Claiming fields start as garbage values — Java guarantees the documented defaults."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the statements that create a Circle object in a reference named c, set its radius to 5, and call its area() method.",
+      "answer": "Circle c = new Circle(); c.r = 5; c.area();",
+      "explanation": "The three statements follow the universal pattern: allocate the object with new and store its reference, set the required field through the dot, then invoke the method through the same dot so it acts on that object.",
+      "commonMistake": "Calling area() before the radius is set — the method would compute from the default value 0.0."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Write a class named Box with fields for length, width and height and a method that prints its volume, then create two Box objects in main with different dimensions and print both volumes.",
+      "answer": "class Box { double length, width, height; void volume() { System.out.println(\"Volume = \" + (length * width * height)); } public static void main(String[] args) { Box b1 = new Box(); b1.length = 4; b1.width = 5; b1.height = 6; Box b2 = new Box(); b2.length = 2; b2.width = 3; b2.height = 10; b1.volume(); b2.volume(); } } The output is Volume = 120.0 followed by Volume = 60.0. Each object receives its own three fields, so setting b1’s dimensions leaves b2 untouched, and each call to volume() computes from the fields of the object it was invoked on.",
+      "explanation": "The mark scheme looks for the class declaration, three fields, a method using those fields, two separate instantiations with new, and field assignments through the dot for each object. The second line of output proves that the objects kept independent state.",
+      "commonMistake": "Creating one object and overwriting its fields between calls — the program then prints only the second result because both calls read the same object."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-09",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Given: Student s1 = new Student(); Student s2 = new Student(); s1.marks = 82; s2.marks = 91; s1.marks = s2.marks; System.out.println(s1.marks + \" \" + s2.marks); — explain the output and the state of both objects afterwards.",
+      "answer": "The program prints 91 91. Each object began with its own field, s1.marks set to 82 and s2.marks set to 91, because separate allocations give separate memory. The line s1.marks = s2.marks; copies the value stored in s2’s field into s1’s field, so s1’s original 82 is lost and both objects now hold 91. The two objects remain separate pieces of memory throughout — copying a field value never merges the objects — but after the assignment their marks fields happen to contain the same value. The output therefore reads 91 91.",
+      "explanation": "The key idea is that field-to-field assignment copies data between objects while leaving the objects themselves distinct. Trace each statement in order: initial allocation gives defaults, each dot-assignment writes to one object, and the final assignment synchronises the values without sharing the storage.",
+      "commonMistake": "Reading s1.marks = s2.marks; as making the objects identical — only the value moves; the two objects keep their own memory."
+    },
+    {
+      "id": "cisce-9-ca-q-obj-10",
+      "type": "hots",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A classmate claims: \"If I pass an object to a method and the method sets a field, my object changes — so objects passed to methods are shared like primitives are copied.\" Evaluate this claim.",
+      "answer": "The classmate has noticed a real effect but drawn the wrong conclusion. When an object is passed to a method, what travels is a copy of the reference — like a primitive, the argument is copied — but that copy still addresses the same object. So when the method executes obj.marks = 100; it writes into the original object’s memory, and the caller sees the new value. The difference from primitives is precisely this: copying a primitive copies the value itself, so the original is untouched, whereas copying a reference copies only the address, leaving both names pointed at one object. The objects are therefore not \"shared like primitives\"; references are copied while the object behind them stays single. A method that instead reassigns its parameter — obj = new Box(); — affects only the local copy of the reference, and the caller’s reference continues to point at the original object.",
+      "explanation": "Strong answers distinguish two separate operations: writing through a reference’s object (visible outside) and reassigning the reference itself (invisible outside). The claim is half right about the symptom and wrong about the cause, and stating both parts earns the full marks.",
+      "commonMistake": "Describing objects as \"passed by reference\" without qualification — Java copies the argument either way; what makes the change visible is that both copies of the reference address one object."
+    }
+  ]
+}

@@ -111,10 +111,13 @@ export function teachingWords(chapter) {
  * @param {string} config.classSlug        class slug, e.g. "class-9"
  * @param {string} config.subjectSlug      subject slug, e.g. "biology"
  * @param {string} config.kind             the chapter kind the registry records
+ * @param {string[]} [config.kinds]        allowed kinds for subjects that mix chapter kinds (default: [kind])
+ * @param {string[]} [config.filePrefixes] allowed manifest file path prefixes (default: ['chapters/'])
  * @param {string} config.label            human name used in messages
  * @param {Array}  config.expectedChapters [{ slug, id, questions }] in reading order
  * @param {object} config.expectedTypeTotals  { mcq: n, short: n, ... }
- * @param {number} config.expectedTotalQuestions
+ * @param {number} [config.expectedTotalQuestions]
+ * @param {number} [config.examYear]       examination year every registry entry must record (default 2027)
  * @param {object} [config.floors]         overrides for DEPTH_FLOORS
  * @param {Function} [config.extraChecks]  (chapter, meta, ctx) => string[] problems
  * @param {Function} [config.subjectChecks] (ctx) => string[] problems
@@ -125,16 +128,20 @@ export function validateSubject(config) {
     classSlug,
     subjectSlug,
     kind,
+    kinds: kindList,
+    filePrefixes = ['chapters/'],
     label,
     expectedChapters,
     expectedTypeTotals,
     expectedTotalQuestions,
+    examYear = 2027,
     floors: floorOverrides = {},
     extraChecks,
     subjectChecks,
   } = config;
 
   const floors = { ...DEPTH_FLOORS, ...floorOverrides };
+  const kinds = Array.isArray(kindList) && kindList.length ? kindList : [kind];
   const errors = [];
   let assertions = 0;
 
@@ -184,17 +191,20 @@ export function validateSubject(config) {
     check(actual.slug === expected.slug, `Chapter ${index} is "${actual.slug}", expected "${expected.slug}".`);
     check(actual.id === expected.id, `Chapter "${actual.slug}" has the id "${actual.id}", expected "${expected.id}".`);
     check(actual.status === 'published', `Chapter "${actual.slug}" is not published.`);
-    check(actual.kind === kind, `Chapter "${actual.slug}" does not carry the kind "${kind}".`);
+    check(
+      kinds.includes(actual.kind),
+      `Chapter "${actual.slug}" does not carry one of the kinds "${kinds.join('", "')}".`,
+    );
     check(actual.syllabusStatus === 'listed', `Chapter "${actual.slug}" is not marked as listed in the syllabus.`);
     check(
-      Array.isArray(actual.examYears) && actual.examYears.includes(2027),
-      `Chapter "${actual.slug}" is not linked to the examination year 2027.`,
+      Array.isArray(actual.examYears) && actual.examYears.includes(examYear),
+      `Chapter "${actual.slug}" is not linked to the examination year ${examYear}.`,
     );
     check(Boolean(actual.blurb), `Chapter "${actual.slug}" has no blurb.`);
     check(Boolean(actual.file), `Chapter "${actual.slug}" has no file reference.`);
     check(
-      typeof actual.file === 'string' && actual.file.startsWith('chapters/') && actual.file.endsWith('.json'),
-      `Chapter "${actual.slug}" has a file reference outside the chapters folder.`,
+      typeof actual.file === 'string' && filePrefixes.some((prefix) => actual.file.startsWith(prefix)) && actual.file.endsWith('.json'),
+      `Chapter "${actual.slug}" has a file reference outside the allowed folders (${filePrefixes.join(', ')}).`,
     );
     check(
       typeof actual.file === 'string' && fs.existsSync(path.join(subjectDir, actual.file)),
@@ -244,7 +254,10 @@ export function validateSubject(config) {
 
     check(chapter.id === meta.id, `Chapter "${meta.slug}" has the id "${chapter.id}" but the registry has "${meta.id}".`);
     check(chapter.title === meta.title, `Chapter "${meta.slug}" has the title "${chapter.title}" but the registry has "${meta.title}".`);
-    check(chapter.kind === kind, `Chapter "${meta.slug}" does not carry the kind "${kind}".`);
+    check(
+      kinds.includes(chapter.kind),
+      `Chapter "${meta.slug}" does not carry one of the kinds "${kinds.join('", "')}".`,
+    );
     check(Boolean(chapter.tagline), `Chapter "${meta.slug}" has no tagline.`);
     check(Boolean(chapter.reviewStatus), `Chapter "${meta.slug}" has no reviewStatus.`);
     check(

@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-phy-kinetic",
+  "title": "Kinetic Theory",
+  "kind": "physics",
+  "tagline": "The molecular picture behind the gas laws: pressure as bombardment, temperature as speed.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CBSE Physics syllabus for subject code 042 registered for the Academic Year 2026-27 (CBSE, Curriculum for 2026-27, Secondary Curriculum Part 2, downloaded from cbseacademic.nic.in). No examination paper was consulted. The NCERT Physics textbooks and Laboratory Manual are identified by title only: every definition, derivation, worked numerical, figure, question and answer was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Physics (042) syllabus for the Academic Year 2026-27: every explanation, derivation, worked numerical, figure, question and answer was written for this page. Only the topics printed in the official document are taught; the document states that NCERT content excluded for 2026-27 is not to be tested, and no excluded topic is presented here as syllabus material."
+  },
+  "overview": {
+    "intro": "Kinetic theory explains the macroscopic gas laws by imagining the gas for what it is — a vast swarm of tiny, fast-moving molecules — and counting. This chapter builds the assumptions, derives the pressure of an ideal gas from molecular bombardment, identifies temperature with mean kinetic energy, introduces degrees of freedom and the equipartition theorem, and finishes with the mean free path. The great satisfaction of the topic is that the ideal gas equation, so empirical in the thermodynamics chapter, falls out of the counting as a consequence of geometry and momentum transfer.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-IX: Behaviour of Perfect Gases and Kinetic Theory of Gases (20 marks shared with Bulk Matter and Thermodynamics)."
+      },
+      {
+        "label": "Pressure",
+        "value": "p = (1/3)nmv²_rms — one third of the momentum-flux density of the molecular swarm."
+      },
+      {
+        "label": "Key result",
+        "value": "½mv²_rms = (3/2)kT — temperature is mean translational kinetic energy per molecule."
+      },
+      {
+        "label": "Equipartition",
+        "value": "Each quadratic degree of freedom carries ½kT; monatomic gases thus have Cᵥ = (3/2)R, Cₚ = (5/2)R."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State the assumptions of the kinetic theory of an ideal gas.",
+    "Derive the relation between pressure and mean square speed.",
+    "Use ½mv²_rms = (3/2)kT to connect temperature with molecular speed.",
+    "Apply degrees of freedom and equipartition to specific heat capacities.",
+    "Explain mean free path and Avogadro’s number in the molecular picture."
+  ],
+  "learn": [
+    {
+      "id": "assumptions",
+      "title": "The molecular model and the equation of state",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The kinetic theory describes an ideal gas through five assumptions: the molecules are point particles whose volume is negligible against the gas volume; they move randomly in all directions with a wide spread of speeds; they collide elastically with each other and the walls, so no energy is lost to internal modes; they exert no forces on each other except during brief collisions; and their number is enormous, so statistical averages are meaningful and stable. Each assumption is a deliberate simplification with a known cost — real molecules do have volume and do attract weakly, which is why real gases deviate from ideality at high pressure and low temperature, deviating the more as liquefaction nears. Within the idealisation, the theory’s triumph is deriving the equation of state pV = nRT from mechanics alone, via the pressure the molecular bombardment exerts."
+        },
+        {
+          "type": "paragraph",
+          "text": "The derivation’s architecture is worth carrying in the head even when the algebra is not required in full. A molecule of mass m hitting a wall elastically reverses its momentum, delivering 2mvₓ to that wall; summing over the swarm, the momentum transferred per unit time per unit area is the pressure. The random isotropy of motion means the three directions contribute equally, giving v²_rms = (v²ₓ + v²_y + v²_z)/3 per molecule, and the count of molecules per volume converts the momentum flux into p = (1/3)nmv²_rms. Combining with the identification of temperature in the next lesson yields pV = NkT — the same equation of state as the thermodynamics chapter, now explained rather than assumed. The work done in compressing a gas, which this unit also names, follows the same picture: pushing the piston means pushing against molecular bombardment, so compressing a gas does work on it at the molecular level, which is where the first law’s w ultimately comes from."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Ideal gas: point molecules, random motion, elastic collisions, no intermolecular forces.",
+            "Elastic collisions keep total molecular kinetic energy fixed.",
+            "Pressure = momentum delivered to the walls per unit area per unit time.",
+            "p = (1/3)nmv²_rms; combining with temperature gives pV = NkT.",
+            "Real gases deviate when molecular volume or attraction becomes significant."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "temperature",
+      "title": "Temperature as molecular kinetic energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The identifying equation of kinetic theory is ½mv²_rms = (3/2)kT: the mean translational kinetic energy of a molecule equals three-halves of the product of Boltzmann’s constant k = 1.38 × 10⁻²³ J/K and the absolute temperature. Its meaning is worth stating slowly — temperature is not heat, not energy of the molecule as a whole, but the average kinetic energy of translation, and it is the same for every gas at the same temperature, which is why equal temperatures of helium and argon mean equal molecular kinetic energies despite the argon atom being ten times heavier: its average speed is correspondingly lower. The root-mean-square speed follows immediately, v_rms = √(3kT/m) = √(3RT/M), and its magnitudes are startling — several hundred metres per second at room temperature, tens of times the speed of sound — made plausible only by remembering how rarely molecules actually travel far between collisions."
+        },
+        {
+          "type": "paragraph",
+          "text": "Three characteristic speeds are distinguished in the fuller theory — most probable, mean and rms, in increasing order — but the syllabus needs only the rms value and the shape of the distribution: a lopsided curve whose peak shifts upward and flattens as temperature rises. That distribution, the Maxwell-Boltzmann curve, explains a range of otherwise puzzling phenomena: at any temperature some molecules exceed the escape speed of the atmosphere (the reason hydrogen is scarce despite being produced continuously), evaporation proceeds at all temperatures because the fastest molecules always escape the liquid, and chemical reaction rates climb steeply with temperature because the reacting fraction with adequate energy grows exponentially. The temperature–speed link, once internalised, converts qualitative questions in atmospheric physics and chemistry into straightforward applications of one formula."
+        },
+        {
+          "type": "table",
+          "caption": "Speeds and energies of the molecular swarm",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Note"
+          ],
+          "rows": [
+            [
+              "Mean translational KE",
+              "½mv²_rms = (3/2)kT",
+              "Identical for all gases at equal T"
+            ],
+            [
+              "rms speed",
+              "√(3kT/m) = √(3RT/M)",
+              "Depends on molar mass M"
+            ],
+            [
+              "Boltzmann constant",
+              "k = R/N_A = 1.38 × 10⁻²³ J/K",
+              "Per molecule, where R is per mole"
+            ],
+            [
+              "Room-temperature speeds",
+              "Hundreds of m/s",
+              "Faster than sound, rarefied paths"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Compare v_rms of H₂ and O₂ at the same T.",
+              "note": "Ratio = √(M_O₂/M_H₂) = √16 = 4 — hydrogen is four times faster."
+            },
+            {
+              "text": "Mean KE of a molecule at 300 K.",
+              "note": "(3/2)(1.38 × 10⁻²³)(300) ≈ 6.2 × 10⁻²¹ J."
+            },
+            {
+              "text": "Double the absolute temperature: v_rms factor.",
+              "note": "√2 ≈ 1.41, not 2 — speed grows as the square root."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "degrees",
+      "title": "Degrees of freedom and equipartition",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A molecule needs a number of independent numbers to specify its state, and that count is its degrees of freedom f. A monatomic molecule (one atom) has three — its three spatial coordinates — and all three are translational. A diatomic molecule adds rotational freedom: it can spin about two axes perpendicular to the bond (the third axis contributes negligibly, since spinning about the bond barely changes anything quantum-mechanically), giving f = 5 at ordinary temperatures. The law of equipartition of energy, stated at the level this syllabus specifies, assigns each quadratic degree of freedom a mean energy ½kT, so the average molecular energy is (f/2)kT, and the molar heat capacity at constant volume follows as Cᵥ = (f/2)R — with Cₚ = Cᵥ + R from the work done at constant pressure."
+        },
+        {
+          "type": "paragraph",
+          "text": "The theory’s predictions for specific heat capacities were among early twentieth-century physics’ great successes and its most instructive failure. Monatomic gases: Cᵥ = (3/2)R ≈ 12.5 J/mol·K and Cₚ = (5/2)R, matching experiment beautifully. Diatomic gases at room temperature: Cᵥ = (5/2)R and Cₚ = (7/2)R, also matching — because the two rotational modes are fully active. The failure appears at low temperatures, where the rotational modes freeze out and the measured heat capacity falls toward the monatomic value, and again for polyatomic gases where vibrational modes activate only at high temperatures. Quantum mechanics, not the theory, explains the freezing: energy levels are discrete, and at low temperature the thermal energy kT is too small to excite rotation or vibration. The syllabus asks for the statement and the application, and the honest summary is that equipartition works exactly where its classical assumptions hold — a rare and valuable lesson in a physics course."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Degrees of freedom f = independent numbers specifying molecular state.",
+            "Monatomic: f = 3 (translation). Diatomic: f = 5 (+ two rotations).",
+            "Equipartition: ½kT per quadratic degree of freedom (stated in the syllabus).",
+            "Cᵥ = (f/2)R and Cₚ = Cᵥ + R for an ideal gas.",
+            "Low-temperature mode freeze-out: the quantum limit of classical equipartition."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paths",
+      "title": "Mean free path and the molecular traffic",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Mean free path λ is the average distance a molecule travels between collisions, and the ideal-gas estimate follows from simple geometry: for a molecule of diameter d sweeping through a swarm of number density n, collisions occur whenever another molecule lies within a cylinder of radius d, giving λ = 1/(√2 πd²n) — the √2 correcting for the relative motion of both partners. The magnitudes explain the paradoxes of gas behaviour: at atmospheric pressure λ is about 10⁻⁷ m, some hundred molecular diameters, so molecules fly long distances before colliding — hence the ease with which smells cross a room — while the collision frequency is around 10⁹ per second, which is why diffusion is fast even though individual journeys are tortuous. The viscosity of a gas also emerges from this picture: momentum transfer between layers comes from molecules crossing with their layers’ characteristic speeds over the mean free path, explaining both why gas viscosity rises with temperature (faster molecules carry momentum farther between collisions) and why pressure, which changes both n and λ together, has little effect."
+        },
+        {
+          "type": "paragraph",
+          "text": "Avogadro’s number enters through the same statistics: one mole of any gas at STP occupies 22.4 L, and dividing by the molecular count gives a molecular diameter of order 10⁻¹⁰ m — the size the theory needs for its λ to come out right, and one of the earliest reliable estimates of atomic dimensions. Exam questions in this area typically ask for the definitions, the proportionality statements (λ inversely proportional to n and to d²), and the qualitative account of transport phenomena; the deeper derivations are beyond what the paper demands, but the physical picture — a swarm of rapidly moving particles whose collisions mediate pressure, temperature and transport — is exactly what the examiner is testing. When answering, quote the formula, substitute in SI, and interpret the magnitude: a mean free path of 6.8 × 10⁻⁸ m at atmospheric pressure is a hundred-odd diameters, and saying so shows the number has been understood rather than produced."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mean free path λ = 1/(√2 πd²n): average distance between collisions.",
+            "At 1 atm, λ ≈ 10⁻⁷ m and collision rate ≈ 10⁹ per second.",
+            "Gas viscosity rises with temperature: faster molecules transfer momentum farther.",
+            "Pressure barely affects gas viscosity: n and λ change in offsetting ways.",
+            "One mole at STP (22.4 L) yields molecular diameters of order 10⁻¹⁰ m."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Molecular bombardment producing pressure",
+      "description": "A cubical box of side L containing a swarm of fast-moving molecules with random velocity arrows; one molecule enlarged mid-collision with the right wall, its incoming and outgoing velocity vectors drawn at equal angles and equal magnitude, and the momentum transfer 2mvₓ annotated alongside the resulting pressure contribution.",
+      "labels": [
+        "Random velocities in all directions",
+        "Elastic wall collision",
+        "Speed unchanged, direction reversed",
+        "Momentum delivered: 2mvₓ per hit",
+        "Sum over swarm = pressure"
+      ]
+    },
+    {
+      "caption": "Figure: The Maxwell–Boltzmann speed distribution",
+      "description": "A graph of molecular number against speed showing two curves: at lower temperature a taller, narrower peak at lower speed; at higher temperature a flatter, broader peak shifted right, with the rms speed marked on each curve beyond its peak and a shaded tail beyond the escape speed annotated as the molecules that can leave the atmosphere.",
+      "labels": [
+        "Peak: most probable speed",
+        "Higher T: peak shifts right and flattens",
+        "Rms speed lies above the peak",
+        "Tail beyond escape speed",
+        "Area under curve: total molecules"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Ideal gas: point molecules, random elastic collisions, no intermolecular forces.",
+    "Pressure arises from molecular bombardment: p = (1/3)nmv²_rms.",
+    "½mv²_rms = (3/2)kT — temperature measures mean translational kinetic energy.",
+    "v_rms = √(3RT/M) — lighter gases are faster at the same temperature.",
+    "Absolute zero is the temperature at which molecular motion ceases (classically).",
+    "Degrees of freedom: 3 monatomic, 5 diatomic at room temperature.",
+    "Equipartition: ½kT per quadratic degree of freedom; Cᵥ = (f/2)R, Cₚ = Cᵥ + R.",
+    "Mode freeze-out at low temperature marks the quantum limit of classical theory.",
+    "Mean free path λ = 1/(√2 πd²n) — about 100 molecular diameters at 1 atm.",
+    "Gas viscosity rises with temperature because momentum transfer grows with molecular speed."
+  ],
+  "examFocus": [
+    "Quote the assumptions before any derivation — they are method marks.",
+    "Temperature questions: translational kinetic energy, never total molecular energy.",
+    "Equipartition answers must state the degree-of-freedom count being used.",
+    "Mean free path: quote the formula and interpret the magnitude physically."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ideal gas",
+      "meaning": "Point molecules with elastic collisions and no interaction forces."
+    },
+    {
+      "word": "rms speed",
+      "meaning": "Root-mean-square molecular speed, √(3kT/m)."
+    },
+    {
+      "word": "Boltzmann constant (k)",
+      "meaning": "R per molecule, 1.38 × 10⁻²³ J/K."
+    },
+    {
+      "word": "Degrees of freedom (f)",
+      "meaning": "Independent coordinates specifying molecular state."
+    },
+    {
+      "word": "Equipartition",
+      "meaning": "½kT of mean energy per quadratic degree of freedom."
+    },
+    {
+      "word": "Mean free path (λ)",
+      "meaning": "Average distance travelled between molecular collisions."
+    },
+    {
+      "word": "Avogadro’s number (N_A)",
+      "meaning": "6.02 × 10²³ molecules per mole."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-phy-kt-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean translational kinetic energy of a molecule of an ideal gas is proportional to:",
+      "options": [
+        "Its mass",
+        "The square of its speed",
+        "The absolute temperature",
+        "The gas pressure"
+      ],
+      "correctIndex": 2,
+      "answer": "The absolute temperature",
+      "explanation": "½mv²_rms = (3/2)kT: temperature directly measures the mean translational kinetic energy, independent of the gas species."
+    },
+    {
+      "id": "cbse11-phy-kt-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The rms speed of oxygen molecules at a given temperature is v. The rms speed of hydrogen molecules at the same temperature is:",
+      "options": [
+        "v/4",
+        "4v",
+        "2v",
+        "16v"
+      ],
+      "correctIndex": 1,
+      "answer": "4v",
+      "explanation": "v_rms ∝ 1/√M, so the ratio is √(32/2) = 4 — hydrogen molecules are four times faster."
+    },
+    {
+      "id": "cbse11-phy-kt-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A monatomic ideal gas has Cᵥ equal to:",
+      "options": [
+        "(3/2)R",
+        "(5/2)R",
+        "R",
+        "(7/2)R"
+      ],
+      "correctIndex": 0,
+      "answer": "(3/2)R",
+      "explanation": "Three translational degrees of freedom give Cᵥ = (3/2)R; diatomic gases, with two extra rotational modes, give (5/2)R."
+    },
+    {
+      "id": "cbse11-phy-kt-04",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean free path of a gas molecule is inversely proportional to:",
+      "options": [
+        "The number density n",
+        "The temperature",
+        "The molecular speed",
+        "The pressure alone"
+      ],
+      "correctIndex": 0,
+      "answer": "The number density n",
+      "explanation": "λ = 1/(√2 πd²n) — doubling the density halves the average distance between collisions."
+    },
+    {
+      "id": "cbse11-phy-kt-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The constant relating molecular kinetic energy to temperature, k = R/N_A, is called the Boltzmann ________ .",
+      "answer": "constant",
+      "explanation": "Its value 1.38 × 10⁻²³ J/K is the per-molecule partner of the molar gas constant."
+    },
+    {
+      "id": "cbse11-phy-kt-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A diatomic molecule has ________ degrees of freedom at ordinary temperatures.",
+      "answer": "five",
+      "explanation": "Three translational plus two rotational; the rotation about the bond is not counted, and vibration freezes out at room temperature."
+    },
+    {
+      "id": "cbse11-phy-kt-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the assumptions of the kinetic theory of an ideal gas and explain how the pressure of the gas arises.",
+      "answer": "The assumptions are: (1) the gas consists of a very large number of extremely small molecules whose individual volume is negligible compared with the container volume; (2) the molecules are in continuous, random motion in all directions with a wide range of speeds; (3) collisions between molecules and with the walls are perfectly elastic, so total kinetic energy is conserved; (4) the molecules exert no force on each other except during the brief collisions; and (5) gravity and intermolecular attractions are negligible, so the motion is governed only by the wall impacts. Pressure arises from the molecular bombardment of the walls: each elastic collision reverses a molecule’s perpendicular momentum, delivering 2mvₓ to the wall. The vast number of impacts per second per unit area averages into a steady force, and force per unit area is the pressure — so the macroscopic push you feel on the container is the statistical sum of countless tiny momentum transfers. The derivation yields p = (1/3)nmv²_rms, tying the mechanical quantity to the molecular swarm’s mean square speed.",
+      "explanation": "All five assumptions listed, the momentum-transfer mechanism explained, and the pressure formula connected to it."
+    },
+    {
+      "id": "cbse11-phy-kt-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Derive the relation between the rms speed of gas molecules and the absolute temperature, and find v_rms for nitrogen at 300 K (M = 0.028 kg/mol).",
+      "answer": "From the kinetic-theory pressure result p = (1/3)nmv²_rms and the ideal-gas equation in molecular form p = (N/V)kT, equate the two expressions for pressure: (1/3)nmv²_rms = nkT, where n = N/V. Dividing by n: (1/3)mv²_rms = kT, so mv²_rms = 3kT and v_rms = √(3kT/m) — the rms speed is set by temperature and molecular mass alone. In molar form (multiplying numerator and denominator by Avogadro’s number): v_rms = √(3RT/M). Numerically for nitrogen at 300 K: v_rms = √(3 × 8.31 × 300/0.028) = √(7480/0.028) = √(2.67 × 10⁵) ≈ 517 m/s. Checks: the dimensions √((J/K)(K)/kg) = √(m²/s²) = m/s ✓; 517 m/s exceeds the speed of sound (~340 m/s), consistent with sound travelling by molecular collisions but not faster than the molecules themselves ✓; and hydrogen at the same temperature would be four times faster, matching the heavier-lighter comparison ✓.",
+      "explanation": "The pressure equated to the equation of state, the rms formula derived in both forms, the numeric result, and all three checks."
+    },
+    {
+      "id": "cbse11-phy-kt-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "State the law of equipartition of energy, apply it to find Cᵥ and Cₚ for a diatomic gas at room temperature, and explain why the value falls at very low temperatures.",
+      "answer": "The law of equipartition of energy states that in thermal equilibrium, each quadratic degree of freedom of a molecule contributes a mean energy of ½kT; a molecule with f degrees of freedom therefore has mean energy (f/2)kT, and per mole the internal energy is (f/2)RT. A diatomic molecule at room temperature has five active degrees of freedom — three translational and two rotational (rotation about the bond contributes nothing, and vibrational modes are not active at ordinary temperatures) — so its molar internal energy is U = (5/2)RT, giving Cᵥ = dU/dT = (5/2)R ≈ 20.8 J/mol·K. At constant pressure, heating the gas must also do the work of expansion, pΔV = RΔT per mole, so Cₚ = Cᵥ + R = (7/2)R ≈ 29.1 J/mol·K, and the ratio γ = Cₚ/Cᵥ = 1.40 — matching measurements on air, nitrogen and oxygen closely. Why the value falls at very low temperatures: the rotational energy levels of molecules are quantised, and when kT drops below the spacing between those levels, the rotational modes can no longer be excited — they freeze out — leaving only the three translational degrees of freedom, so Cᵥ falls toward (3/2)R, the monatomic value. This is a quantum effect invisible to classical physics, and it marks the boundary of equipartition’s validity: the theorem works whenever the thermal energy comfortably exceeds the level spacing for the modes in question, which is why room-temperature diatomic gases look classical while cold ones do not.",
+      "explanation": "The law stated, the f = 5 count with justification, Cᵥ and Cₚ computed with the ratio, and the freeze-out explanation identifying the quantum limit."
+    },
+    {
+      "id": "cbse11-phy-kt-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Estimate the mean free path of a nitrogen molecule at room temperature and atmospheric pressure (molecular diameter about 4 × 10⁻¹⁰ m, number density about 2.5 × 10²⁵ per m³), interpret the result physically, and explain why a gas conducts heat and diffuses far faster than a liquid despite molecules being similarly close together.",
+      "answer": "Mean free path: λ = 1/(√2 πd²n). Substituting d = 4 × 10⁻¹⁰ m and n = 2.5 × 10²⁵ m⁻³: d² = 16 × 10⁻²⁰ m², πd² = 5.03 × 10⁻¹⁹ m², and √2 πd²n = 1.414 × 5.03 × 10⁻¹⁹ × 2.5 × 10²⁵ ≈ 1.78 × 10⁷ m⁻¹, so λ ≈ 5.6 × 10⁻⁸ m — about 56 nm. Physical interpretation: at 4 × 10⁻¹⁰ m per molecule, this is roughly 140 molecular diameters — molecules fly long distances relative to their size before meeting another, which is why a smell crosses a room in seconds even though each molecule random-walks rather than streaming. Yet the collision rate is ferocious: with v_rms ≈ 500 m/s, a molecule collides about v/λ ≈ 10⁷ times per second — a molecule visiting a new position every microsecond-scale interval, which is why gas pressure equilibrates almost instantly. Faster transport than a liquid: in a liquid, molecules are essentially in permanent contact (λ of the order of one molecular diameter), so energy and momentum pass hand-to-hand slowly and orderly; in a gas, a fast molecule carries its layer’s momentum and its kinetic energy bodily across λ before handing it over — the kinetic flight does the transporting — giving gas-phase diffusion coefficients orders of magnitude larger than liquid ones and likewise for thermal conduction. It also explains gas viscosity’s rise with temperature, unlike liquids: hotter gas molecules fly faster and carry momentum farther between collisions, strengthening inter-layer transfer rather than weakening it.",
+      "explanation": "The formula with substituted numbers, the ratio-to-diameter interpretation, the collision-rate estimate, and the gas-versus-liquid transport mechanism contrasted correctly."
+    }
+  ]
+}

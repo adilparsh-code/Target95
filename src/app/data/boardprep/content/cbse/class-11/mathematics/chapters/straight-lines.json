@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "id": "cbse-11-math-lines",
+  "title": "Straight Lines",
+  "kind": "mathematics",
+  "tagline": "Slope, the family of line equations, distances and the angle between two lines — the coordinate machinery every later chapter rests on.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the official CBSE Curriculum for the Academic Year 2026-27, Secondary Curriculum Part 2 (XI-XII), Mathematics subject code 041 (cbseacademic.nic.in). No examination paper, guide, publisher solution or tuitions note was consulted. The NCERT textbook is identified by title only: every definition, derivation, worked example, figure, question and answer on this page was written for this page.",
+    "boardprep": "Original BoardPrep material written against the official CBSE Curriculum for the Academic Year 2026-27, Mathematics (041), Class XI: every explanation, formula, worked example, figure, question and answer was written for this page. All five official units are covered in their registered order, each chapter carries the formative-only topics the syllabus attaches to it, and no solution is reproduced from any published guide."
+  },
+  "overview": {
+    "intro": "The straight line is where coordinate geometry stops being bookkeeping and starts being geometry: a statement about a shape becomes an equation, and a question about intersection becomes algebra. This chapter builds slope from the tangent definition, moves through the several forms a line equation can take and when each is the right one, and finishes with the distance and angle formulas that turn figures into arithmetic. Every conic in the next chapter, and every line in space in the chapter after, inherits its working method from here.",
+    "facts": [
+      {
+        "label": "Unit",
+        "value": "Unit-IV: Coordinate Geometry (14 marks shared with the Conic Sections chapter)."
+      },
+      {
+        "label": "Slope",
+        "value": "m = tan θ = (y₂ − y₁)/(x₂ − x₁); the slope of a vertical line is undefined."
+      },
+      {
+        "label": "Forms",
+        "value": "Point-slope, two-point, slope-intercept, intercept and normal (perpendicular distance) forms."
+      },
+      {
+        "label": "Angle between lines",
+        "value": "tan φ = |(m₁ − m₂)/(1 + m₁m₂)|; parallel lines have equal slopes, perpendicular slopes multiply to −1."
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute slope from two points and from the angle with the positive x-axis.",
+    "Write a line equation in each of the standard forms and choose between them.",
+    "Find distance from a point to a line and the angle between two lines.",
+    "Test collinearity and parallelism or perpendicularity from slopes.",
+    "Reduce a general first-degree equation to slope-intercept form."
+  ],
+  "learn": [
+    {
+      "id": "slope",
+      "title": "Slope, inclination and the first equations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The slope of a line measures its steepness with sign: for a line making angle θ with the positive direction of the x-axis, the slope is m = tan θ, and because the tangent is the ratio of rise to run, this equals (y₂ − y₁)/(x₂ − x₁) for any two points on the line. The definition immediately classifies slopes: positive for a line rising to the right, negative for one falling, zero for a horizontal line, and undefined for a vertical line, where θ = 90° and tan 90° has no value. That last case is worth holding onto — it is the reason several formulas in the chapter are written with denominators that can vanish, and it is why the answer undefined must sometimes replace a number."
+        },
+        {
+          "type": "paragraph",
+          "text": "Given a point and a slope, the equation follows from the definition itself: any point (x, y) on the line must satisfy the same rise-over-run relation, which rearranges to the point-slope form y − y₁ = m(x − x₁). From it the other familiar forms descend by algebra: with two points you first compute m and then apply point-slope; with the slope and y-intercept c you get y = mx + c; and rearranging any of these into the general form Ax + By + C = 0 lets you read the slope as −A/B whenever B is non-zero. The general form is the one in which most proofs are conducted, because it treats x and y symmetrically and never special-cases a vertical line."
+        },
+        {
+          "type": "table",
+          "caption": "The standard forms of a line equation",
+          "columns": [
+            "Form",
+            "Equation",
+            "Use it when you know"
+          ],
+          "rows": [
+            [
+              "Point-slope",
+              "y − y₁ = m(x − x₁)",
+              "A point and the slope"
+            ],
+            [
+              "Two-point",
+              "(y − y₁)/(y₂ − y₁) = (x − x₁)/(x₂ − x₁)",
+              "Two points on the line"
+            ],
+            [
+              "Slope-intercept",
+              "y = mx + c",
+              "The slope and where it crosses the y-axis"
+            ],
+            [
+              "Intercept",
+              "x/a + y/b = 1",
+              "The x- and y-intercepts a and b"
+            ],
+            [
+              "General",
+              "Ax + By + C = 0",
+              "Any line; slope = −A/B"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "m = tan θ = rise/run for any two points on the line.",
+            "Horizontal line: m = 0; vertical line: slope undefined.",
+            "Points are collinear exactly when the slopes between consecutive pairs agree.",
+            "Point-slope form is the workhorse; the others are rearrangements of it."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conditions",
+      "title": "Distance, angles and the standard forms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two questions dominate exam papers in this chapter. The first is the distance from a point to a line, for which the syllabus gives the perpendicular distance formula: the distance of (x₁, y₁) from Ax + By + C = 0 is |Ax₁ + By₁ + C| divided by √(A² + B²). The denominator normalises the normal vector (A, B) so that the numerator measures true perpendicular separation rather than an arbitrary multiple; the modulus makes the distance non-negative whichever side of the line the point sits on. A companion use is the distance between two parallel lines Ax + By + C₁ = 0 and Ax + By + C₂ = 0, which is |C₁ − C₂|/√(A² + B²) — the same normalisation with the difference of the constants on top."
+        },
+        {
+          "type": "paragraph",
+          "text": "The second question is the angle between two lines. If φ is the angle between lines of slopes m₁ and m₂, then tan φ = |(m₁ − m₂)/(1 + m₁m₂)|, a formula that follows by subtracting their inclination angles and expanding tan(θ₁ − θ₂). The absolute value returns the acute angle, which is the convention unless a question asks otherwise. Its two limiting cases encode the standard tests: lines are parallel exactly when m₁ = m₂ (numerator zero, angle zero), and perpendicular exactly when m₁m₂ = −1 (denominator zero, tangent blows up to the 90° case). Those two consequences are used more often than the formula itself, and a printed question that asks for the angle between perpendicular lines is really checking whether you remember why the formula divides by 1 + m₁m₂."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Distance of (3, 4) from 3x + 4y − 10 = 0.",
+              "note": "|9 + 16 − 10|/√(9 + 16) = 15/5 = 3 units."
+            },
+            {
+              "text": "Angle between lines with slopes 1 and −1.",
+              "note": "tan φ = |(1 + 1)/(1 − 1)| — denominator 0, so φ = 90°; the lines are perpendicular."
+            },
+            {
+              "text": "Distance between 2x + 3y − 7 = 0 and 2x + 3y + 5 = 0.",
+              "note": "|−7 − 5|/√(4 + 9) = 12/√13 units."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collinearity",
+      "title": "Collinearity, families and reading equations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A general first-degree equation Ax + By + C = 0 always represents a straight line provided A and B are not both zero, and the ability to move fluently between this general form and slope-intercept form is a core skill: solve for y to read off m = −A/B and c = −C/B, and check the exceptional case B = 0 separately, where the line is vertical and has no slope. Three points are collinear when any slope computed between two of them equals the slope computed between another pair, or equivalently when the determinant of their coordinates vanishes — but the slope test is the one this syllabus develops, and it is also the natural way to prove that a triangle’s medians meet, that a centroid formula works, or that two paths describe the same line."
+        },
+        {
+          "type": "paragraph",
+          "text": "The chapter also introduces the idea of a family of lines: an equation containing a parameter describes not one line but a set of them, and questions about such equations usually ask which member satisfies an extra condition — passing through a particular point, say, or being parallel to a given line. The method is uniform: impose the condition on the general equation, solve for the parameter, and substitute back. Just as valuable is the reverse reading: recognising that x + y − 5 = 0 and 2x + 2y − 10 = 0 are the same line because one equation is a multiple of the other, and that two first-degree equations therefore represent the same line exactly when their coefficient triples are proportional."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Slope of 3x − 4y + 12 = 0.",
+              "note": "m = −A/B = 3/4; the y-intercept is 3."
+            },
+            {
+              "text": "Are (1, 2), (3, 6) and (5, 10) collinear?",
+              "note": "Both slopes equal 2, so yes — the points lie on y = 2x."
+            },
+            {
+              "text": "Which member of kx + y − 7 = 0 passes through (1, 2)?",
+              "note": "k + 2 − 7 = 0, so k = 5."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Exam technique for line problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Line problems reward a consistent procedure. Translate the geometry into slope conditions first — parallel means equal slopes, perpendicular means slopes multiply to −1, angle between means the tangent formula — then solve algebraically and only then simplify the numbers. When a question offers a figure, mark the given angle or distance on it: most errors in this chapter come from applying a formula to the wrong pair of lines or reading an intercept as a distance, and a labelled sketch prevents both. Where the question asks for an equation, state the form you are using and why: point-slope when a point and slope are known, intercept form when intercepts are given (which is often fastest), general form for the final answer since it is the most robust representation."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two verification habits are cheap and effective. First, check that your answer line actually contains the given point by substitution — an arithmetic slip shows up immediately. Second, sanity-check the geometry: a line you have computed as horizontal should have equation of the form y = k, and two lines you claim are perpendicular should have slopes whose product is close to −1. For distance answers, check the sign inside the modulus and the units. These checks take seconds and convert partial marks into full marks because they catch the sign errors that dominate this topic’s mark scheme."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sketch and label before computing.",
+            "Parallel: m₁ = m₂. Perpendicular: m₁m₂ = −1.",
+            "Distance formula divides by √(A² + B²) — never skip the normalisation.",
+            "Same line: the coefficient triples are proportional.",
+            "Verify by substituting the given point back into your equation."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Slope as rise over run on a coordinate plane",
+      "description": "A line drawn across Cartesian axes making an acute angle θ with the positive x-axis; a right triangle built under a segment of the line with the vertical leg labelled rise = y₂ − y₁, the horizontal leg run = x₂ − x₁, and the angle θ marked where the line meets the x-axis.",
+      "labels": [
+        "θ: inclination with the positive x-axis",
+        "m = tan θ",
+        "Rise = y₂ − y₁",
+        "Run = x₂ − x₁",
+        "Positive slope rises to the right"
+      ]
+    },
+    {
+      "caption": "Figure: Perpendicular distance from a point to a line",
+      "description": "A slanted line with a point P marked off it, a dashed segment drawn from P meeting the line at a right angle (a square corner marked), the length labelled d, and the line annotated Ax + By + C = 0 with the formula d = |Ax₁ + By₁ + C|/√(A² + B²) beside it.",
+      "labels": [
+        "Point (x₁, y₁)",
+        "Right angle at the foot",
+        "d: the perpendicular distance",
+        "Line Ax + By + C = 0",
+        "Normal direction (A, B)"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Slope m = tan θ = (y₂ − y₁)/(x₂ − x₁); vertical lines have no slope.",
+    "Point-slope form generates all the other forms.",
+    "General form Ax + By + C = 0 has slope −A/B when B ≠ 0.",
+    "Intercept form x/a + y/b = 1 is fastest when intercepts are given.",
+    "Collinear points give equal slopes between pairs.",
+    "Distance to a line: |Ax₁ + By₁ + C|/√(A² + B²).",
+    "Parallel lines: equal slopes. Perpendicular lines: slopes multiply to −1.",
+    "Angle between lines: tan φ = |(m₁ − m₂)/(1 + m₁m₂)|.",
+    "Same line: coefficient triples proportional.",
+    "Verify answers by substituting the given point."
+  ],
+  "examFocus": [
+    "Name the form you use — method marks are given for the setup.",
+    "The distance formula’s denominator is the standard place marks are lost.",
+    "Show the slope arithmetic for parallel and perpendicular conditions.",
+    "Reject or note the vertical-line case explicitly when B = 0."
+  ],
+  "vocabulary": [
+    {
+      "word": "Inclination (θ)",
+      "meaning": "The angle a line makes with the positive x-axis."
+    },
+    {
+      "word": "Slope (m)",
+      "meaning": "tan θ — the signed steepness of a line."
+    },
+    {
+      "word": "Intercept",
+      "meaning": "Where a line crosses an axis; a and b in intercept form."
+    },
+    {
+      "word": "Collinear",
+      "meaning": "Lying on one straight line."
+    },
+    {
+      "word": "Normal form",
+      "meaning": "A line specified by its perpendicular distance and direction from the origin."
+    },
+    {
+      "word": "Family of lines",
+      "meaning": "A one-parameter set of line equations."
+    },
+    {
+      "word": "Perpendicular distance",
+      "meaning": "Shortest separation from a point to a line, measured at a right angle."
+    }
+  ],
+  "questions": [
+    {
+      "id": "cbse11-math-lines-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The slope of the line joining (2, 3) and (6, 11) is:",
+      "options": [
+        "m = 2",
+        "m = ½",
+        "m = −2",
+        "m = 4"
+      ],
+      "correctIndex": 0,
+      "answer": "m = 2",
+      "explanation": "m = (11 − 3)/(6 − 2) = 8/4 = 2."
+    },
+    {
+      "id": "cbse11-math-lines-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A line with slope 3 passing through (1, 2) has the equation:",
+      "options": [
+        "y = 3x − 1",
+        "y = 3x + 5",
+        "x = 3y − 1",
+        "y = 3x + 2"
+      ],
+      "correctIndex": 0,
+      "answer": "y = 3x − 1",
+      "explanation": "Point-slope: y − 2 = 3(x − 1) gives y = 3x − 1; substituting (1, 2) checks it."
+    },
+    {
+      "id": "cbse11-math-lines-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance of the point (1, 1) from the line 3x + 4y − 10 = 0 is:",
+      "options": [
+        "0.6",
+        "6",
+        "5",
+        "2"
+      ],
+      "correctIndex": 0,
+      "answer": "0.6",
+      "explanation": "|3(1) + 4(1) − 10|/√(9 + 16) = |−3|/5 = 3/5 = 0.6 units: the denominator normalises the normal vector (A, B) and the modulus keeps the distance positive."
+    },
+    {
+      "id": "cbse11-math-lines-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The lines 2x − 3y = 7 and 4x − 6y = 9 are:",
+      "options": [
+        "Perpendicular",
+        "Parallel",
+        "Coincident",
+        "Intersecting at right angles"
+      ],
+      "correctIndex": 1,
+      "answer": "Parallel",
+      "explanation": "The ratios 4/2 = −6/−3 but 9/7 differs, so the lines have equal slopes and are parallel and distinct."
+    },
+    {
+      "id": "cbse11-math-lines-05",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A line parallel to the y-axis has slope equal to ________ because tan 90° has no numerical value.",
+      "answer": "undefined",
+      "explanation": "A vertical line makes angle 90° with the x-axis, where the tangent is undefined — which is why the slope formula divides by Δx."
+    },
+    {
+      "id": "cbse11-math-lines-06",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "When the product of two slopes m₁m₂ equals −1, the angle between the lines is a ________ angle.",
+      "answer": "right",
+      "explanation": "The denominator 1 + m₁m₂ of the angle formula vanishes there, making tan φ undefined and φ = 90°."
+    },
+    {
+      "id": "cbse11-math-lines-07",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the equation of the line through (2, 3) and (4, 7), giving your answer in general form.",
+      "answer": "First compute the slope: m = (7 − 3)/(4 − 2) = 4/2 = 2. Apply the point-slope form with (2, 3): y − 3 = 2(x − 2), so y − 3 = 2x − 4, that is 2x − y − 1 = 0, which is general form with A = 2, B = −1, C = −1. Check by substituting the second point: 2(4) − 7 − 1 = 0 ✓, and read the slope back as −A/B = 2 ✓. The intercepts confirm the picture: the line crosses the y-axis at −1 and the x-axis at ½, consistent with a positive slope passing through both given points.",
+      "explanation": "The slope computation, one point-slope substitution, the rearranged general form and at least one verification."
+    },
+    {
+      "id": "cbse11-math-lines-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the distance between the parallel lines 3x + 4y − 5 = 0 and 3x + 4y + 7 = 0.",
+      "answer": "Parallel lines share A and B, so the distance is |C₁ − C₂|/√(A² + B²). Here C₁ = −5, C₂ = 7, so the numerator is |−5 − 7| = 12, and √(A² + B²) = √(9 + 16) = 5. The distance is therefore 12/5 = 2.4 units. Verification: take a point on the first line, for instance (1, −2) since 3 − 8 + 5 = 0, and measure its perpendicular distance to the second line: |3(1) + 4(−2) + 7|/5 = |2|/5 = 0.4 — that is the distance from the line to a point already on the other line only if the point is on line one, which it is, giving 0.4... this disagrees, so recheck: |3 − 8 + 7|/5 = |2|/5 = 0.4, meaning the correct point-to-line arithmetic must be redone; using instead the formula directly, 12/5 = 2.4 is the standard answer, and the single-point check should use a point genuinely on the first line such as (3, −1): 9 − 4 − 5 = 0 ✓, then |9 − 4 + 7|/5 = 12/5 = 2.4 ✓.",
+      "explanation": "The parallel-line formula with correct constants and a verification point that satisfies the first line."
+    },
+    {
+      "id": "cbse11-math-lines-09",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the equation of the line through the intersection of x + y − 5 = 0 and 2x − y + 1 = 0 which is perpendicular to the line 3x + 2y − 1 = 0.",
+      "answer": "Step 1: find the intersection. Adding the equations: (x + y − 5) + (2x − y + 1) = 0 gives 3x − 4 = 0, so x = 4/3; substituting into the first, y = 5 − 4/3 = 11/3. The intersection point is (4/3, 11/3). Step 2: find the required slope. The given line 3x + 2y − 1 = 0 has slope −A/B = −3/2, so a line perpendicular to it has slope m = 2/3 (the negative reciprocal, since m₁m₂ = −1). Step 3: point-slope through (4/3, 11/3) with m = 2/3: y − 11/3 = (2/3)(x − 4/3). Multiply by 9: 9y − 33 = 6x − 8, so 6x − 9y + 25 = 0. Verification: the intersection point satisfies it — 6(4/3) − 9(11/3) + 25 = 8 − 33 + 25 = 0 ✓; the slope is −A/B = −6/(−9) = 2/3 ✓; and 2/3 × (−3/2) = −1 ✓ confirms the perpendicularity.",
+      "explanation": "All three steps with the intersection point, the negative reciprocal slope, and verification of both the point and the perpendicularity."
+    },
+    {
+      "id": "cbse11-math-lines-10",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Discuss what the equation 2x + 4y + 7 = 0 and x + 2y + 3.5 = 0 tell you about the relationship between general-form equations, and explain why the distance between these two lines is zero.",
+      "answer": "The two equations are proportional: multiplying the second by 2 gives exactly the first, since 2(x + 2y + 3.5) = 2x + 4y + 7. Two first-degree equations therefore describe the same line precisely when their coefficient triples (A, B, C) are proportional, because a common factor rescales the entire left side without changing the set of points that make it zero — the solution set is unchanged, so the geometric object is unchanged. In slope-intercept form both reduce to y = −½x − 7/4, confirming the identity directly: same slope −½, same intercept −7/4. The consequence for distance is immediate: the perpendicular distance between two coincident lines is zero, and the parallel-line formula gives it honestly — |C₁ − C₂|/√(A² + B²) with proportional constants gives |7 − 7|/5 = 0 once both are normalised to the same coefficients (equivalently |C₁ − C₂| = 0 for matched triples). This is the limiting case of the parallel family: distinct parallel lines have proportional (A, B) but non-proportional C, and their distance is positive; proportional all three collapse them into one line with zero distance. The practical lesson for solving pairs of linear equations: proportional coefficient triples mean infinitely many common solutions (the same line), equal A/B ratios but different C ratios mean no common solutions (parallel), and every other case means exactly one intersection — the trichotomy that the angle and distance formulas express geometrically.",
+      "explanation": "Full marks require the proportionality condition stated and verified by rescaling, the slope-intercept confirmation, the zero-distance calculation, and the trichotomy of line pairs explained."
+    }
+  ]
+}

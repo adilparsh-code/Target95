@@ -83,6 +83,9 @@ describe("firestore.rules: account status", { skip }, () => {
     await profile(BOB, { status: "active", disabled: false });
     await profile(DAN, { status: "inactive", disabled: true });
     await profile(LENA, {});
+    // States a partial status transition can leave behind.
+    await profile("halfdeact", { status: "inactive", disabled: true, statusSync: { target: "inactive", auth: "failed" } });
+    await profile("halfreact", { status: "inactive", disabled: true, statusSync: { target: "active", auth: "failed" } });
     await profile(MAL, { status: true, disabled: "no" });
     await profile(ADMIN, { role: "admin", status: "active", disabled: false });
     await profile(EXADMIN, { role: "admin", status: "inactive", disabled: true });
@@ -133,6 +136,27 @@ describe("firestore.rules: account status", { skip }, () => {
     });
     test("cannot read learning content", async () => {
       denied(await get(token(DAN), "questions/q1"));
+    });
+  });
+
+  describe("partial status transitions", () => {
+    test("deactivation with Auth failure: profile denies access with a valid token", async () => {
+      denied(await get(token("halfdeact"), "users/halfdeact"));
+      denied(await create(token("halfdeact"), "users/halfdeact/practiceSessions", "p1", { startedAt: "now" }));
+      denied(await get(token("halfdeact"), "questions/q1"));
+    });
+    test("reactivation with Firestore failure: Auth enabled but still denied", async () => {
+      denied(await get(token("halfreact"), "users/halfreact"));
+      denied(await create(token("halfreact"), "progress", "h1", { userId: "halfreact", chapter: "loops", questionId: "q9" }));
+    });
+    test("students cannot write status, disabled or sync fields", async () => {
+      denied(await patch(token(ALICE), `users/${ALICE}`, { statusSync: { target: "active", auth: "synced" } }));
+      denied(await patch(token(ALICE), `users/${ALICE}`, { statusUpdatedBy: ALICE }));
+      denied(await patch(token(ALICE), `users/${ALICE}`, { status: "active", disabled: false }));
+    });
+    test("admin can complete a reconciliation", async () => {
+      allowed(await patch(token(ADMIN), "users/halfreact", { status: "active", disabled: false, statusSync: { target: "active", auth: "synced" } }));
+      allowed(await get(token("halfreact"), "users/halfreact"));
     });
   });
 

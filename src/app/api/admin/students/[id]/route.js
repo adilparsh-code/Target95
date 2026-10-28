@@ -1,5 +1,6 @@
 import { adminGuard, serverError, toMillis } from "../../_helpers";
 import { getAdminAuth } from "@/app/lib/firebase-admin";
+import { transitionAccountStatus } from "@/lib/accountStatus.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -37,22 +38,23 @@ export async function PATCH(request, { params }) {
       return Response.json({ success: false, error: "Admin accounts cannot be managed here." }, { status: 403 });
     }
 
-    const disabled = status === "inactive";
-
-    // Enforce the status in Firebase Auth itself, not only in Firestore:
-    // a disabled Auth user cannot sign in, and revoking refresh tokens makes
-    // verifySessionCookie(session, true) reject any existing session at once.
-    const adminAuth = getAdminAuth();
-    await adminAuth.updateUser(id, { disabled });
-    if (disabled) await adminAuth.revokeRefreshTokens(id);
-
-    await ref.update({
-      status,
-      disabled,
-      statusUpdatedAt: new Date().toISOString(),
-      statusUpdatedBy: guard.admin.uid || "admin",
+    // Fail-closed transition across Firestore and Firebase Auth; see
+    // transitionAccountStatus() for the ordering and partial-failure handling.
+    const result = await transitionAccountStatus({
+      uid: id,
+      target: status,
+      auth: getAdminAuth(),
+      profileRef: ref,
+      actorUid: guard.admin.uid || "admin",
     });
+    if (!result.ok) {
+      return Response.json(
+        { success: false, error: result.message, outcome: result.outcome, retryable: true },
+        { status: result.httpStatus }
+      );
+    }
 
+    const disabled = status === "inactive";
     return Response.json({ success: true, student: { id, status, disabled } });
   } catch (error) {
     console.error("Admin student status error:", error);

@@ -4,7 +4,7 @@
  *
  * Runs against the local Firestore emulator only (never production):
  *   npm run test:rules
- * which wraps: firebase emulators:exec --only firestore --project demo-target95 "node --test test/firestore-rules-account-status.test.mjs"
+ * which wraps: firebase emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-listener-account-status.test.mjs"
  *
  * Uses the emulator REST API with unsigned test tokens, so no extra npm
  * dependency is needed. Skipped automatically when FIRESTORE_EMULATOR_HOST is
@@ -160,6 +160,36 @@ describe("firestore.rules: account status", { skip }, () => {
       allowed(await patch(token(ADMIN), "users/halfreact", { status: "active", disabled: false, statusSync: { target: "active", auth: "synced" } }));
       allowed(await get(token("halfreact"), "users/halfreact"));
     });
+  });
+
+  describe("token issued before deactivation", () => {
+    // Firestore rules never consult live Firebase Auth state: they see only the
+    // token's frozen claims plus the profile document. These cases pin down
+    // what that means for each deactivation outcome.
+    test("same token is denied once the profile is inactive (successful deactivation)", async () => {
+      const uid = "flip1";
+      await set(OWNER, `users/${uid}`, { uid, role: "student", status: "active", disabled: false });
+      await set(OWNER, `users/${uid}/practiceSessions/s1`, { score: 1 });
+      const oldToken = token(uid);
+      allowed(await get(oldToken, `users/${uid}/practiceSessions/s1`));
+      allowed(await get(oldToken, "questions/q1"));
+      await patch(OWNER, `users/${uid}`, { status: "inactive", disabled: true });
+      denied(await get(oldToken, `users/${uid}/practiceSessions/s1`));
+      denied(await get(oldToken, "questions/q1"));
+      denied(await create(oldToken, `users/${uid}/practiceSessions`, "s2", { startedAt: "now" }));
+      denied(await patch(oldToken, `users/${uid}`, { status: "active", disabled: false }));
+    });
+    test("RESIDUAL: if the profile write failed, the same token is still accepted (Auth disable is invisible to rules)", async () => {
+      const uid = "flip2";
+      await set(OWNER, `users/${uid}`, { uid, role: "student", status: "active", disabled: false });
+      const oldToken = token(uid);
+      // Simulates partial_auth_only: Auth disabled + revoked, profile still active.
+      // Nothing in Firestore changed, so the unexpired token still passes.
+      allowed(await get(oldToken, "questions/q1"));
+      allowed(await create(oldToken, `users/${uid}/practiceSessions`, "s1", { startedAt: "now" }));
+    });
+    // Token expiry (<= 1h) is enforced by production Firebase; the emulator
+    // accepts unsigned test tokens, so expiry is not asserted here.
   });
 
   describe("missing or malformed status fails closed", () => {

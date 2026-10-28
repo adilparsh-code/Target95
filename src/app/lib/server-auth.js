@@ -1,20 +1,13 @@
 import { getAdminAuth, getAdminDb } from "@/app/lib/firebase-admin";
-import { hasActiveProfile } from "@/lib/accountStatus.mjs";
+import { verifyActiveSession } from "@/lib/accountStatus.mjs";
 
 export async function getVerifiedSession(request) {
-  const session = request.cookies.get("session")?.value;
-  if (!session) return null;
-
-  try {
-    const decodedToken = await getAdminAuth().verifySessionCookie(session, true);
-    if (decodedToken.email_verified !== true) return null;
-    // Same fail-closed account-status check as firestore.rules: a session is
-    // only honoured while users/{uid} is active, independent of Auth state.
-    if (!(await hasActiveProfile(getAdminDb(), decodedToken.uid))) return null;
-    return decodedToken;
-  } catch {
-    return null;
-  }
+  // checkRevoked session + verified email + active users/{uid} profile
+  // (the same fail-closed invariant firestore.rules enforces).
+  return verifyActiveSession(request.cookies.get("session")?.value, {
+    auth: getAdminAuth(),
+    adminDb: getAdminDb(),
+  });
 }
 
 export async function requireAdmin(request) {

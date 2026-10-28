@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAdminAuth, getAdminDb } from "@/app/lib/firebase-admin";
-import { hasActiveProfile } from "@/lib/accountStatus.mjs";
+import { hasActiveProfile, verifyActiveSession } from "@/lib/accountStatus.mjs";
 
 const SESSION_MAX_AGE = 7 * 24 * 60 * 60;
 const SESSION_EXPIRES_IN = SESSION_MAX_AGE * 1000;
@@ -60,9 +60,8 @@ export async function GET(request) {
       return NextResponse.json({ authenticated: false }, { status: 401 });
     }
 
-    const decodedToken = await getAdminAuth().verifySessionCookie(session, true);
-
-    if (decodedToken.email_verified !== true || !(await hasActiveProfile(getAdminDb(), decodedToken.uid))) {
+    const decodedToken = await verifyActiveSession(session, { auth: getAdminAuth(), adminDb: getAdminDb() });
+    if (!decodedToken) {
       const response = NextResponse.json({ authenticated: false }, { status: 401 });
       response.cookies.delete("session");
       return response;

@@ -761,3 +761,18 @@ npm outdated
 **Maintained By**: Security Team
 
 **Review Schedule**: Quarterly
+## Account status: deactivation guarantees and reconciliation
+
+Access requires both an active `users/{uid}` profile (checked by `firestore.rules`, `verifyActiveSession` for session APIs, and `requireBlogAdmin`) and an enabled Firebase Auth user. `transitionAccountStatus` (`src/lib/accountStatus.mjs`) orders writes so every partial failure reduces access.
+
+What is and is not guaranteed:
+
+- When the profile write succeeds, Firestore rules and every server API deny the account immediately, including requests with a still-valid ID token. The emulator also shows open listeners getting no further data. Production listener behaviour has not been verified live.
+- Firestore rules cannot see Firebase Auth state. `request.auth.token` claims are frozen when the token is minted. If every profile write fails (`partial_auth_only`, HTTP 502), an ID token issued before the deactivation can still read and write the student's Firestore data until that token expires. That is at most 1 hour, and disabling the user stops it from being refreshed. Server APIs are already blocked by the revoked session. Retry the request at once to close the window.
+- Reactivation never grants access before the profile becomes active. A reactivation is rejected (HTTP 409) and rolled back if the profile changed after the admin loaded it.
+
+Finding and repairing partial transitions:
+
+1. Search the logs for `RECONCILE REQUIRED`. Each line carries `opId`, `uid`, and `target`; profiles carry `statusSync { target, auth, result, opId, at }`.
+2. Retry the same admin request. All writes are idempotent, and a deactivation retry can never reactivate.
+3. Or run `npm run reconcile:account-status`. It is a dry run by default; add `-- --uid=<uid>` for one account. Review the output, then run it again with `-- --apply`. The script only reduces access: it deactivates a profile whose Auth user is disabled, disables Auth for a non-active profile, and clears stale markers. It never activates, and it reports admin accounts without changing them.

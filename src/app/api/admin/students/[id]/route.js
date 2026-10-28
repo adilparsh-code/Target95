@@ -46,10 +46,13 @@ export async function PATCH(request, { params }) {
       auth: getAdminAuth(),
       profileRef: ref,
       actorUid: guard.admin.uid || "admin",
+      // Reactivation is rejected if the profile changed after this read
+      // (e.g. a concurrent deactivation), so deactivation always wins.
+      expectedUpdateTime: status === "active" ? userDoc.updateTime : null,
     });
     if (!result.ok) {
       return Response.json(
-        { success: false, error: result.message, outcome: result.outcome, retryable: true },
+        { success: false, error: result.message, outcome: result.outcome, opId: result.opId, retryable: true },
         { status: result.httpStatus }
       );
     }

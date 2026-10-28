@@ -69,4 +69,5 @@ jobs:
           java-version: "21"
 
       - name: Firestore rules tests (local emulator only)
-        run: npx --yes firebase-tools@14 emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-rules.test.mjs"
+        run: npx --yes firebase-tools@14 emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-rules.test.mjs test/firestore-listener-account-status.test.mjs"
+

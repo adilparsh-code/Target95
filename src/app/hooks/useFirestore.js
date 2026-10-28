@@ -224,6 +224,11 @@ export default function useFirestore() {
           ...doc.data()
         }));
         callback(data);
+      }, (err) => {
+        // Rules denied the listener (e.g. the account was deactivated) and the
+        // SDK has already ended it. Surface the error instead of failing
+        // silently; callers' local caches are left untouched on purpose.
+        setError(err?.code === "permission-denied" ? "Access denied." : err?.message || "Realtime updates stopped.");
       });
       return unsubscribe;
     } catch (err) {

@@ -26,6 +26,23 @@ test("malformed status values are normalised from Auth", () => {
   assert.deepEqual(decideAccountStatus({ status: 1 }, { exists: true, disabled: true }), { status: "inactive", disabled: true });
 });
 
+test("an active profile whose Auth user is disabled or missing becomes inactive", () => {
+  const profile = { status: "active", disabled: false };
+  assert.deepEqual(decideAccountStatus(profile, { exists: true, disabled: true }), { status: "inactive", disabled: true });
+  assert.deepEqual(decideAccountStatus(profile, { exists: false, disabled: true }), { status: "inactive", disabled: true });
+});
+
+test("the entry point runs main() when invoked by path", async () => {
+  const { spawnSync } = await import("node:child_process");
+  const { fileURLToPath } = await import("node:url");
+  const script = fileURLToPath(new URL("../scripts/backfill-account-status.mjs", import.meta.url));
+  const env = { ...process.env };
+  delete env.FIREBASE_SERVICE_ACCOUNT;
+  const result = spawnSync(process.execPath, [script], { env, encoding: "utf8" });
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /FIREBASE_SERVICE_ACCOUNT is not set/);
+});
+
 test("consistent profiles are left alone", () => {
   assert.equal(decideAccountStatus({ status: "active", disabled: false }, activeAuth), null);
   assert.equal(decideAccountStatus({ status: "inactive", disabled: true }, activeAuth), null);

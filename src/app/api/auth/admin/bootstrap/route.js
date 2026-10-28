@@ -29,6 +29,9 @@ export async function POST(request) {
     const auth = getAdminAuth();
     const user = await auth.getUserByEmail(email);
 
+    // Keep Firebase Auth consistent with the active profile written below:
+    // a disabled Auth user could not sign in as the bootstrapped admin.
+    if (user.disabled) await auth.updateUser(user.uid, { disabled: false });
     await auth.setCustomUserClaims(user.uid, { admin: true, role: "admin" });
     await getAdminDb().collection("users").doc(user.uid).set(
       { uid: user.uid, email, role: "admin", status: "active", disabled: false, updatedAt: new Date() },

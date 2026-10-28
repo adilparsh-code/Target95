@@ -9,11 +9,14 @@
  *   FIREBASE_SERVICE_ACCOUNT='<json>' node scripts/backfill-account-status.mjs           # dry run (default)
  *   FIREBASE_SERVICE_ACCOUNT='<json>' node scripts/backfill-account-status.mjs --apply   # write changes
  *
- * Never deletes anything. Only profiles whose status is missing or malformed
- * are changed. The status is derived from Firebase Auth (the trusted source):
+ * Never deletes anything. Profiles whose status is missing, malformed, or
+ * active while Firebase Auth has the user disabled or missing are changed;
+ * nothing is ever changed from inactive to active. The status is derived from Firebase Auth (the trusted source):
  * an Auth user that is disabled, missing, or already flagged disabled in the
  * profile becomes 'inactive'; everyone else becomes 'active'.
  */
+
+import { pathToFileURL } from "node:url";
 
 const VALID = new Set(["active", "inactive"]);
 
@@ -26,12 +29,12 @@ export function decideAccountStatus(profile = {}, authUser = { exists: false, di
   const status = profile?.status;
   const hasValidStatus = typeof status === "string" && VALID.has(status);
   const hasValidDisabled = typeof profile?.disabled === "boolean";
-  if (hasValidStatus && hasValidDisabled && (status === "active") === !profile.disabled) return null;
-
-  if (hasValidStatus && status === "inactive") return { status: "inactive", disabled: true };
-
-  const inactive = !authUser?.exists || authUser.disabled === true || profile?.disabled === true;
-  return inactive ? { status: "inactive", disabled: true } : { status: "active", disabled: false };
+  const authInactive = !authUser?.exists || authUser.disabled === true;
+  // Never re-enable: a profile already marked inactive or disabled stays inactive.
+  const inactive = authInactive || status === "inactive" || profile?.disabled === true;
+  const target = inactive ? { status: "inactive", disabled: true } : { status: "active", disabled: false };
+  if (hasValidStatus && hasValidDisabled && status === target.status && profile.disabled === target.disabled) return null;
+  return target;
 }
 
 async function main() {
@@ -83,7 +86,7 @@ async function main() {
   console.log(JSON.stringify({ mode: apply ? "apply" : "dry-run", ...counts }));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   main().catch((error) => {
     console.error(error);
     process.exit(1);

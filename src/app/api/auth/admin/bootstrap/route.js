@@ -31,7 +31,7 @@ export async function POST(request) {
 
     await auth.setCustomUserClaims(user.uid, { admin: true, role: "admin" });
     await getAdminDb().collection("users").doc(user.uid).set(
-      { uid: user.uid, email, role: "admin", updatedAt: new Date() },
+      { uid: user.uid, email, role: "admin", status: "active", disabled: false, updatedAt: new Date() },
       { merge: true }
     );
 

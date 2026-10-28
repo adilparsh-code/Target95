@@ -9,28 +9,60 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.token.email_verified == true;
     }
 
+    // Account status is trusted only from the server-managed profile at
+    // users/{uid}. Students cannot write status/disabled (see the update rule
+    // below), so the value cannot be client-controlled. Fails closed: a missing
+    // profile, a missing or non-'active' status, or a disabled flag that is
+    // anything other than false denies access.
+    function profilePath() {
+      return /databases/$(database)/documents/users/$(request.auth.uid);
+    }
+
+    function isActiveProfile(data) {
+      return data.get('status', null) == 'active'
+        && data.get('disabled', false) == false;
+    }
+
+    function hasActiveAccount() {
+      return exists(profilePath()) && isActiveProfile(get(profilePath()).data);
+    }
+
+    // Verified email AND an active, server-managed account.
+    function isActiveUser() {
+      return isVerifiedUser() && hasActiveAccount();
+    }
+
     function isOwner(userId) {
-      return isVerifiedUser() && request.auth.uid == userId;
+      return isActiveUser() && request.auth.uid == userId;
     }
 
     function isAdmin() {
-      return isVerifiedUser()
-        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
-        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      return isActiveUser() && get(profilePath()).data.role == 'admin';
     }
 
     function isTeacher() {
-      return isVerifiedUser()
-        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
-        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'teacher'];
+      return isActiveUser() && get(profilePath()).data.role in ['admin', 'teacher'];
     }
 
     match /users/{userId} {
-      // New users may create only their own student profile before verification.
+      // New users may create only their own student profile before
+      // verification. It must start active, never disabled, and may carry
+      // only the fields the sign-up flows write.
       allow create: if isAuthenticated()
         && request.auth.uid == userId
         && request.resource.data.uid == request.auth.uid
-        && request.resource.data.role == 'student';
+        && request.resource.data.role == 'student'
+        && request.resource.data.status == 'active'
+        && request.resource.data.keys().hasOnly([
+             'uid', 'email', 'fullName', 'avatarUrl', 'role', 'board',
+             'studentClass', 'emailVerified', 'createdAt', 'status'
+           ]);
+
+      // The sign-in flows check whether a profile exists before creating it,
+      // so the signed-in user may read their own path while it is empty.
+      allow get: if isAuthenticated()
+        && request.auth.uid == userId
+        && resource == null;
 
       // Verified users can read their own profile; admins can read user profiles.
       allow read: if isOwner(userId) || isAdmin();
@@ -72,22 +104,22 @@ service cloud.firestore {
     }
 
     match /subjects/{subjectId} {
-      allow read: if isVerifiedUser();
+      allow read: if isActiveUser();
       allow create, update, delete: if isTeacher();
     }
 
     match /chapters/{chapterId} {
-      allow read: if isVerifiedUser();
+      allow read: if isActiveUser();
       allow create, update, delete: if isTeacher();
     }
 
     match /topics/{topicId} {
-      allow read: if isVerifiedUser();
+      allow read: if isActiveUser();
       allow create, update, delete: if isTeacher();
     }
 
     match /questions/{questionId} {
-      allow read: if isVerifiedUser();
+      allow read: if isActiveUser();
       allow create, update, delete: if isTeacher();
     }
 
@@ -107,7 +139,7 @@ service cloud.firestore {
     }
 
     match /mockTests/{mockTestId} {
-      allow read: if isVerifiedUser();
+      allow read: if isActiveUser();
       allow create, update, delete: if isAdmin();
     }
 
@@ -118,7 +150,7 @@ service cloud.firestore {
     }
 
     match /leaderboard/{entryId} {
-      allow read: if isVerifiedUser();
+      allow read: if isActiveUser();
       allow write: if isAdmin();
     }
   }

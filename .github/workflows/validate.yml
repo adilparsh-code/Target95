@@ -47,3 +47,26 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=7168
         run: npm run build
+
+      - name: Unit tests
+        run: npm test
+
+  firestore-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java (Firestore emulator)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Firestore rules tests (local emulator only)
+        run: npx --yes firebase-tools@14 emulators:exec --only firestore --project demo-target95 "node --test test/firestore-rules.test.mjs"

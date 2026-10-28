@@ -149,7 +149,10 @@ describe("firestore.rules: account status", { skip }, () => {
 
   describe("missing profile", () => {
     test("may check that its own profile does not exist", async () => {
-      allowed(await get(token(GHOST), `users/${GHOST}`));
+      // Rules allowed the read; the emulator answers 404 because the
+      // document does not exist. A rules denial would be 403.
+      assert.equal(await get(token(GHOST), `users/${GHOST}`), 404);
+      denied(await get(token(GHOST), "users/nobody"));
     });
     test("gets no other access", async () => {
       denied(await create(token(GHOST), `users/${GHOST}/practiceSessions`, "p1", { startedAt: "now" }));

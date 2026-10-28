@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getVerifiedSession } from "@/app/lib/server-auth";
+import { getAdminDb } from "@/app/lib/firebase-admin";
 import { extractResponseText } from "@/app/lib/blog-ai-prompt";
 import { checkAITutorAccess } from "@/lib/entitlements";
 
@@ -18,19 +19,28 @@ export const runtime = "nodejs";
  */
 
 const MAX_QUESTION_CHARS = 2000;
-const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour, per-user, in-memory.
+const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour, per-user.
 
-const rateBuckets = new Map();
-
-function isRateLimited(uid, limit) {
-  const now = Date.now();
-  const entry = rateBuckets.get(uid);
-  if (!entry || now - entry.windowStart > RATE_WINDOW_MS) {
-    rateBuckets.set(uid, { count: 1, windowStart: now });
+/**
+ * Per-user hourly limit stored in Firestore so it holds across serverless
+ * instances and cold starts (an in-memory Map resets on each instance).
+ * Stored at users/{uid}/usage/aiTutor; only the Admin SDK writes it.
+ */
+async function isRateLimited(uid, limit) {
+  const db = getAdminDb();
+  const ref = db.collection("users").doc(uid).collection("usage").doc("aiTutor");
+  return db.runTransaction(async (tx) => {
+    const now = Date.now();
+    const snap = await tx.get(ref);
+    const data = snap.exists ? snap.data() : null;
+    if (!data || now - Number(data.windowStart || 0) > RATE_WINDOW_MS) {
+      tx.set(ref, { count: 1, windowStart: now });
+      return false;
+    }
+    if (Number(data.count || 0) >= limit) return true;
+    tx.update(ref, { count: Number(data.count || 0) + 1 });
     return false;
-  }
-  entry.count += 1;
-  return entry.count > limit;
+  });
 }
 
 function buildPrompt({ question, subject, chapter, difficulty, questionType }) {
@@ -136,7 +146,17 @@ export async function POST(request) {
     );
   }
 
-  if (isRateLimited(session.uid, access.limit)) {
+  let limited;
+  try {
+    limited = await isRateLimited(session.uid, access.limit);
+  } catch (error) {
+    console.error("AI Tutor rate-limit check failed:", error);
+    return NextResponse.json(
+      { ok: false, status: "ai_error", error: "The AI Tutor could not answer right now. Please try again in a moment." },
+      { status: 503 }
+    );
+  }
+  if (limited) {
     return NextResponse.json(
       { ok: false, status: "rate_limited", error: "You have used your AI Tutor limit for this hour. Please try again later." },
       { status: 429 }

@@ -1,5 +1,12 @@
+import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getAdminAuth, getAdminDb } from "@/app/lib/firebase-admin";
+
+function constantTimeEqual(left, right) {
+  const a = Buffer.from(String(left || ""));
+  const b = Buffer.from(String(right || ""));
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
 
 function unauthorized() {
   return NextResponse.json({ success: false, error: "Unauthorized." }, { status: 401 });
@@ -12,7 +19,7 @@ export async function POST(request) {
   if (!expectedSecret || !expectedEmail) return unauthorized();
 
   const providedSecret = request.headers.get("x-target95-bootstrap-secret") || "";
-  if (!providedSecret || providedSecret !== expectedSecret) return unauthorized();
+  if (!providedSecret || !constantTimeEqual(providedSecret, expectedSecret)) return unauthorized();
 
   try {
     const body = await request.json();
@@ -22,9 +29,12 @@ export async function POST(request) {
     const auth = getAdminAuth();
     const user = await auth.getUserByEmail(email);
 
+    // Keep Firebase Auth consistent with the active profile written below:
+    // a disabled Auth user could not sign in as the bootstrapped admin.
+    if (user.disabled) await auth.updateUser(user.uid, { disabled: false });
     await auth.setCustomUserClaims(user.uid, { admin: true, role: "admin" });
     await getAdminDb().collection("users").doc(user.uid).set(
-      { uid: user.uid, email, role: "admin", updatedAt: new Date() },
+      { uid: user.uid, email, role: "admin", status: "active", disabled: false, updatedAt: new Date() },
       { merge: true }
     );
 

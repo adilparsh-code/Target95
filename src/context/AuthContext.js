@@ -122,6 +122,7 @@ export function AuthProvider({ children }) {
         board: "ICSE",
         studentClass: "Class 10",
         emailVerified: false,
+        status: "active",
         createdAt: serverTimestamp(),
       });
       try {
@@ -165,6 +166,7 @@ export function AuthProvider({ children }) {
           board: "ICSE",
           studentClass: "Class 10",
           emailVerified: credential.user.emailVerified,
+          status: "active",
           createdAt: serverTimestamp(),
         });
       }

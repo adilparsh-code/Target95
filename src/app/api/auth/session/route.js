@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { getAdminAuth } from "@/app/lib/firebase-admin";
+import { getAdminAuth, getAdminDb } from "@/app/lib/firebase-admin";
+import { hasActiveProfile } from "@/lib/accountStatus.mjs";
 
 const SESSION_MAX_AGE = 7 * 24 * 60 * 60;
 const SESSION_EXPIRES_IN = SESSION_MAX_AGE * 1000;
@@ -35,6 +36,10 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: "Email verification required." }, { status: 403 });
     }
 
+    if (!(await hasActiveProfile(getAdminDb(), decodedToken.uid))) {
+      return NextResponse.json({ success: false, error: "This account is not active." }, { status: 403 });
+    }
+
     const sessionCookie = await adminAuth.createSessionCookie(idToken, {
       expiresIn: SESSION_EXPIRES_IN,
     });
@@ -57,8 +62,10 @@ export async function GET(request) {
 
     const decodedToken = await getAdminAuth().verifySessionCookie(session, true);
 
-    if (decodedToken.email_verified !== true) {
-      return NextResponse.json({ authenticated: false }, { status: 401 });
+    if (decodedToken.email_verified !== true || !(await hasActiveProfile(getAdminDb(), decodedToken.uid))) {
+      const response = NextResponse.json({ authenticated: false }, { status: 401 });
+      response.cookies.delete("session");
+      return response;
     }
 
     const isAdmin = decodedToken.admin === true;

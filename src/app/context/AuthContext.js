@@ -131,6 +131,7 @@ export function AuthProvider({ children }) {
         fullName: fullName,
         role: "student", // Default role
         emailVerified: false,
+        status: "active",
         createdAt: new Date(),
       });
 
@@ -259,6 +260,7 @@ export function AuthProvider({ children }) {
           fullName: userCredential.user.displayName || "",
           role: "student",
           emailVerified: userCredential.user.emailVerified,
+          status: "active",
           createdAt: new Date(),
         });
       } else {

@@ -152,7 +152,9 @@ describe("firestore.rules: account status", { skip }, () => {
     test("students cannot write status, disabled or sync fields", async () => {
       denied(await patch(token(ALICE), `users/${ALICE}`, { statusSync: { target: "active", auth: "synced" } }));
       denied(await patch(token(ALICE), `users/${ALICE}`, { statusUpdatedBy: ALICE }));
-      denied(await patch(token(ALICE), `users/${ALICE}`, { status: "active", disabled: false }));
+      // A half-reactivated student cannot finish the reactivation themselves.
+      denied(await patch(token("halfreact"), "users/halfreact", { status: "active", disabled: false }));
+      denied(await patch(token("halfdeact"), "users/halfdeact", { statusSync: { target: "inactive", auth: "synced" } }));
     });
     test("admin can complete a reconciliation", async () => {
       allowed(await patch(token(ADMIN), "users/halfreact", { status: "active", disabled: false, statusSync: { target: "active", auth: "synced" } }));

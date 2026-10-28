@@ -38,10 +38,11 @@ service cloud.firestore {
       // A normal user cannot promote themselves, change ownership, or change
       // the account email stored in the profile. Firebase Auth remains the
       // source of truth for email verification.
+      // Students may edit only their own profile fields. Status, disabled,
+      // role, plan and every other field stay admin/server-only.
       allow update: if isAdmin() || (isOwner(userId)
-        && request.resource.data.uid == resource.data.uid
-        && request.resource.data.email == resource.data.email
-        && request.resource.data.role == resource.data.role);
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['fullName', 'board', 'studentClass', 'updatedAt']));
 
       allow delete: if isAdmin();
 

@@ -17,7 +17,7 @@ export async function requireBlogAdmin(request) {
   const token = header.slice(7).trim();
   if (!token) throw new Error("Unauthorized");
 
-  const decoded = await getAdminAuth().verifyIdToken(token);
+  const decoded = await getAdminAuth().verifyIdToken(token, true);
   const email = String(decoded.email || "").toLowerCase();
   const allowed = getAllowedEmails();
 

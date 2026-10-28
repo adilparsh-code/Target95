@@ -1,4 +1,5 @@
 import { adminGuard, serverError, toMillis } from "../../_helpers";
+import { getAdminAuth } from "@/app/lib/firebase-admin";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +38,14 @@ export async function PATCH(request, { params }) {
     }
 
     const disabled = status === "inactive";
+
+    // Enforce the status in Firebase Auth itself, not only in Firestore:
+    // a disabled Auth user cannot sign in, and revoking refresh tokens makes
+    // verifySessionCookie(session, true) reject any existing session at once.
+    const adminAuth = getAdminAuth();
+    await adminAuth.updateUser(id, { disabled });
+    if (disabled) await adminAuth.revokeRefreshTokens(id);
+
     await ref.update({
       status,
       disabled,

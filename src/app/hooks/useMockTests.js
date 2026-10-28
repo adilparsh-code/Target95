@@ -93,19 +93,22 @@ export default function useMockTests() {
   }, [deleteDocument]);
 
   // Save test result
-  const saveTestResult = useCallback(async (resultData) => {
-    try {
-      const result = await addDocument("results", {
-        ...resultData,
-        completedAt: new Date().toISOString()
-      });
-      setTestHistory(prev => [result, ...prev].slice(0, 10));
-      return result;
-    } catch (err) {
-      console.error("Error saving test result:", err);
-      throw err;
-    }
-  }, [addDocument]);
+  // Results are graded and written only by the server
+  // (POST /api/mock-tests/attempts/[id]/submit); Firestore rules reject
+  // client-created results. Pass the attempt id and the raw answers.
+  const saveTestResult = useCallback(async ({ attemptId, answers } = {}) => {
+    if (!attemptId) throw new Error("A server-issued attemptId is required to save a result.");
+    const response = await fetch(`/api/mock-tests/attempts/${encodeURIComponent(attemptId)}/submit`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ answers: answers || {} }),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok || !data?.result) throw new Error(data?.error || "Unable to save the result.");
+    setTestHistory(prev => [data.result, ...prev].slice(0, 10));
+    return data.result;
+  }, []);
 
   // Fetch user's test history
   const fetchUserTestHistory = useCallback(async (userId) => {

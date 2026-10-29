@@ -25,18 +25,20 @@ export async function hasActiveProfile(adminDb, uid) {
  *     tokens and disabled Auth users),
  *   - the email is verified,
  *   - users/{uid} is an active profile (same invariant as firestore.rules).
- * Any error fails closed (null).
+ * Invalid sessions fail closed (null). Profile lookup failures propagate so
+ * callers can deny access with 503 while preserving the session cookie.
  */
 export async function verifyActiveSession(sessionCookie, { auth, adminDb }) {
   if (!sessionCookie) return null;
+  let decoded;
   try {
-    const decoded = await auth.verifySessionCookie(sessionCookie, true);
-    if (decoded?.email_verified !== true) return null;
-    if (!(await hasActiveProfile(adminDb, decoded.uid))) return null;
-    return decoded;
+    decoded = await auth.verifySessionCookie(sessionCookie, true);
   } catch {
     return null;
   }
+  if (decoded?.email_verified !== true) return null;
+  if (!(await hasActiveProfile(adminDb, decoded.uid))) return null;
+  return decoded;
 }
 
 const DEFAULT_RETRY_DELAYS_MS = [200, 800];
@@ -213,6 +215,7 @@ export async function transitionAccountStatus({
  * Reconciliation decision for one account, used by
  * scripts/reconcile-account-status.mjs. Only ever moves toward LESS access:
  *   - Auth disabled/missing but profile active  -> profile inactive
+ *   - legacy profile missing status, Auth enabled -> report for backfill
  *   - profile not active but Auth enabled        -> disable Auth + revoke
  *   - statusSync left pending/failed while both stores agree -> clear marker
  * Never enables an Auth user and never activates a profile.
@@ -226,6 +229,9 @@ export function decideReconciliation(profile, authUser) {
   const profileActive = isActiveProfile(profile);
   if (profile && profileActive && !authEnabled) {
     return { issue: "profile_active_auth_disabled", actions: ["profile:deactivate"] };
+  }
+  if (profile && !Object.prototype.hasOwnProperty.call(profile, "status") && authEnabled) {
+    return { issue: "profile_needs_backfill", actions: [] };
   }
   if (profile && !profileActive && authEnabled) {
     return { issue: "profile_inactive_auth_enabled", actions: ["auth:disable", "auth:revoke"] };

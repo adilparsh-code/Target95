@@ -10,6 +10,7 @@
  *
  * Only ever reduces access (decideReconciliation):
  *   - profile active, Auth disabled/missing -> profile set inactive
+ *   - legacy profile missing status, Auth enabled -> report for backfill
  *   - profile not active, Auth enabled      -> Auth disabled + tokens revoked
  *   - stores agree but statusSync pending/failed -> marker set to synced
  * It never enables an Auth user and never activates a profile; reactivation

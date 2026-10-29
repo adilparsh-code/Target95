@@ -311,9 +311,9 @@ describe("verifyActiveSession (server API guard)", () => {
     assert.equal(await verifyActiveSession("c", { auth: authReturning({ uid: "s1", email_verified: false }), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);
     assert.equal(await verifyActiveSession("", { auth: authReturning(verified), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);
   });
-  test("profile lookup failure fails closed", async () => {
+  test("profile lookup failure propagates without granting access", async () => {
     const brokenDb = { collection: () => ({ doc: () => ({ get: async () => { throw new Error("firestore down"); } }) }) };
-    assert.equal(await verifyActiveSession("c", { auth: authReturning(verified), adminDb: brokenDb }), null);
+    await assert.rejects(verifyActiveSession("c", { auth: authReturning(verified), adminDb: brokenDb }), /firestore down/);
   });
 });
 
@@ -327,6 +327,14 @@ describe("decideReconciliation (never increases access)", () => {
   test("partial_profile_only / partial_auth_enabled state -> disable Auth", () => {
     assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "inactive", auth: "failed" } }, enabled).actions, ["auth:disable", "auth:revoke"]);
     assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "active", auth: "synced" } }, enabled).actions, ["auth:disable", "auth:revoke"]);
+  });
+  test("legacy profiles with enabled Auth need backfill without Auth changes", () => {
+    for (const profile of [{}, { role: "student" }, { disabled: false }, { disabled: true }, { statusSync: { target: "inactive", auth: "failed" } }]) {
+      assert.deepEqual(decideReconciliation(profile, enabled), { issue: "profile_needs_backfill", actions: [] });
+    }
+    assert.equal(decideReconciliation({}, disabled), null);
+    assert.deepEqual(decideReconciliation(INACTIVE, enabled), { issue: "profile_inactive_auth_enabled", actions: ["auth:disable", "auth:revoke"] });
+    assert.deepEqual(decideReconciliation({ status: "active", disabled: true }, enabled).actions, ["auth:disable", "auth:revoke"]);
   });
   test("consistent states need nothing", () => {
     assert.equal(decideReconciliation(ACTIVE, enabled), null);

@@ -53,9 +53,13 @@ jobs:
 
   firestore-rules:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -72,5 +76,4 @@ jobs:
         run: npm ci --ignore-scripts --no-audit --no-fund
 
       - name: Firestore rules tests (local emulator only)
-        run: npx --yes firebase-tools@14 emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-listener-account-status.test.mjs"
-
+        run: npx --yes firebase-tools@14 emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-listener-account-status.test.mjs test/firestore-rules.test.mjs"

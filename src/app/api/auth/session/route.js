@@ -82,9 +82,7 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error("Session validation failed:", error);
-    const response = NextResponse.json({ authenticated: false }, { status: 401 });
-    response.cookies.delete("session");
-    return response;
+    return NextResponse.json({ error: "Session validation is temporarily unavailable." }, { status: 503 });
   }
 }
 

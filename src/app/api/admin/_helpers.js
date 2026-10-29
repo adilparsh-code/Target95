@@ -21,14 +21,23 @@ export function serverError() {
 
 /**
  * Guard a route handler: resolves the verified admin session or returns a
- * 401/403 response. Usage:
+ * 401/403 response, or 503 when session validation is unavailable. Usage:
  *   const guard = await adminGuard(request);
  *   if (!guard.ok) return guard.response;
  *   const { adminDb } = guard;
  */
 export async function adminGuard(request) {
   const { requireAdmin } = await import("@/app/lib/server-auth");
-  const admin = await requireAdmin(request);
+  let admin;
+  try {
+    admin = await requireAdmin(request);
+  } catch (error) {
+    console.error("Admin session validation failed:", error);
+    return {
+      ok: false,
+      response: NextResponse.json({ success: false, error: "Session validation is temporarily unavailable." }, { status: 503 }),
+    };
+  }
   if (!admin) {
     const session = request.cookies.get("session")?.value;
     if (!session) return { ok: false, response: unauthorized() };

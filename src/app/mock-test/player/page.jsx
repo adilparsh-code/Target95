@@ -4,38 +4,28 @@ import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "rea
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import mockTestQuestions from "../../data/mock-test/mockTestQuestions";
-import { getCBSEMockQuestions } from "../../data/cbse/mock-tests-2026-27";
 import { clearMockTestDraft, evaluateMockTestAnswer, getMockTestDraft, getMockTestResultSessionKey, saveMockTestDraft, saveMockTestResult } from "../../../lib/mocktest";
 import { trackEvent, LEARNING_EVENTS } from "@/lib/analyticsEvents";
 import { useAuth } from "@/context/AuthContext";
-import useMockTests from "@/app/hooks/useMockTests";
+import { buildMockTestPool } from "../../../lib/mocktestAttempts";
 
-const normalizeCBSEQuestion = (question) => {
-  if (!question || typeof question !== "object") return null;
-  const questionText = String(question.question || "").trim();
-  const correctAnswer = question.correctAnswer ?? question.answer;
-  if (!questionText || correctAnswer === null || correctAnswer === undefined) return null;
-  const rawType = question.questionType || question.type || "mcq";
-  const type = rawType === "output-tracing" ? "output" : rawType === "case-based" ? "case-study" : rawType;
-  return {
-    ...question,
-    category: `cbse-class-${question.classNumber}`,
-    type,
-    chapter: question.topicId || question.chapter || "all-topics",
-    answer: correctAnswer,
-    correctAnswer,
-    difficulty: question.difficulty || "medium",
-    options: Array.isArray(question.options) ? question.options : [],
-  };
-};
+// Saves the attempt on the server, which grades the raw answers itself.
+// Scores computed in the browser are display-only and never persisted.
+function submitMockAttempt(attemptId, answers) {
+  return fetch(`/api/mock-tests/attempts/${encodeURIComponent(attemptId)}/submit`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "same-origin",
+    keepalive: true,
+    body: JSON.stringify({ answers }),
+  });
+}
 function formatTime(seconds) { const m = Math.floor(seconds / 60); const s = seconds % 60; return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`; }
 function shuffleArray(items) { const result = [...items]; for (let i = result.length - 1; i > 0; i -= 1) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; } return result; }
 
 function MockTestPlayerContent() {
   const router = useRouter(); const searchParams = useSearchParams();
   const { user } = useAuth();
-  const { saveTestResult } = useMockTests();
   const category = searchParams.get("category") || "icse-class-10";
   const board = (searchParams.get("board") || (category.startsWith("cbse-") ? "CBSE" : category.startsWith("isc-") ? "ISC" : "ICSE")).toUpperCase();
   const classNumber = Number(searchParams.get("class") || category.split("-").pop() || 10);
@@ -46,37 +36,46 @@ function MockTestPlayerContent() {
   const testConfig = useMemo(() => ({ board, classNumber, subjectCode, subject, category, chapter, difficulty, type, count, mode, duration }), [board, classNumber, subjectCode, subject, category, chapter, difficulty, type, count, mode, duration]);
   const [currentIndex, setCurrentIndex] = useState(0); const [answers, setAnswers] = useState({}); const [bookmarked, setBookmarked] = useState({});
   const [timeLeft, setTimeLeft] = useState(duration * 60); const [showSubmit, setShowSubmit] = useState(false); const [draftReady, setDraftReady] = useState(false); const [submitted, setSubmitted] = useState(false); const [restoredIds, setRestoredIds] = useState(null); const submittedRef = useRef(false);
+  const [attemptId, setAttemptId] = useState(null); const [attemptError, setAttemptError] = useState(null);
+  // Signed-in students get server-chosen questions so their result can be graded and saved server-side.
+  const waitingForAttempt = Boolean(user?.uid) && !attemptId && !attemptError;
 
   const questions = useMemo(() => {
-    let pool;
-    if (board === "CBSE") {
-      pool = subjectCode
-        ? getCBSEMockQuestions(classNumber, subjectCode, 1000).map(normalizeCBSEQuestion).filter(Boolean)
-        : [];
-      if (difficulty !== "all") pool = pool.filter((q) => q.difficulty === difficulty);
-      if (type !== "mixed") pool = pool.filter((q) => q.type === type);
-      if (chapter !== "all" && chapter !== "all-topics") pool = pool.filter((q) => q.chapter === chapter);
-    } else {
-      pool = mockTestQuestions.filter((q) => q.category === category && (difficulty === "all" || q.difficulty === difficulty) && (type === "mixed" || q.type === type) && (chapter === "all" || q.chapter === chapter));
-    }
+    if (waitingForAttempt) return [];
+    const pool = buildMockTestPool(testConfig);
     if (Array.isArray(restoredIds) && restoredIds.length) { const byId = new Map(pool.map((q) => [String(q.id), q])); const restored = restoredIds.map((id) => byId.get(String(id))).filter(Boolean); if (restored.length === restoredIds.length) return restored.slice(0, count); }
     return shuffleArray(pool).slice(0, Math.min(count, pool.length));
-  }, [board, classNumber, subjectCode, category, difficulty, type, chapter, count, restoredIds]);
+  }, [testConfig, count, restoredIds, waitingForAttempt]);
   const current = questions[currentIndex] || null; const answeredCount = Object.keys(answers).length; const bookmarkedCount = Object.values(bookmarked).filter(Boolean).length; const progress = questions.length ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
-  useEffect(() => { if (!user?.uid) return; const draft = getMockTestDraft(testConfig, user.uid); if (draft?.questionIds?.length) { setRestoredIds(draft.questionIds); setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, Math.max(questions.length - 1, 0))); setAnswers(draft.answers || {}); setBookmarked(draft.bookmarked || {}); setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60)); } setDraftReady(true); }, [testConfig, duration, questions.length, user?.uid]);
-  useEffect(() => { if (user?.uid && draftReady && questions.length && !submitted) saveMockTestDraft(testConfig, { questionIds: questions.map((q) => q.id), currentIndex, answers, bookmarked, timeLeft }, user.uid); }, [draftReady, submitted, testConfig, questions, currentIndex, answers, bookmarked, timeLeft, user?.uid]);
+  useEffect(() => { if (!user?.uid) return; const draft = getMockTestDraft(testConfig, user.uid); if (draft?.questionIds?.length) { setRestoredIds(draft.questionIds); if (draft.attemptId) setAttemptId(String(draft.attemptId)); setCurrentIndex(Math.min(Number(draft.currentIndex) || 0, Math.max(questions.length - 1, 0))); setAnswers(draft.answers || {}); setBookmarked(draft.bookmarked || {}); setTimeLeft(Math.max(0, Number(draft.timeLeft) || duration * 60)); } setDraftReady(true); }, [testConfig, duration, questions.length, user?.uid]);
+  useEffect(() => { if (user?.uid && draftReady && questions.length && !submitted) saveMockTestDraft(testConfig, { attemptId, questionIds: questions.map((q) => q.id), currentIndex, answers, bookmarked, timeLeft }, user.uid); }, [draftReady, submitted, testConfig, questions, currentIndex, answers, bookmarked, timeLeft, user?.uid, attemptId]);
+  useEffect(() => {
+    if (!user?.uid || !draftReady || attemptId || attemptError || submitted) return undefined;
+    let cancelled = false;
+    fetch("/api/mock-tests/attempts", { method: "POST", headers: { "Content-Type": "application/json" }, credentials: "same-origin", body: JSON.stringify({ config: testConfig }) })
+      .then(async (response) => ({ ok: response.ok, data: await response.json().catch(() => ({})) }))
+      .then(({ ok, data }) => {
+        if (cancelled) return;
+        if (ok && data?.attemptId && Array.isArray(data.questionIds)) { setRestoredIds(data.questionIds); setCurrentIndex(0); setAnswers({}); setBookmarked({}); setTimeLeft(duration * 60); setAttemptId(String(data.attemptId)); }
+        else setAttemptError(data?.error || "unavailable");
+      })
+      .catch(() => { if (!cancelled) setAttemptError("unavailable"); });
+    return () => { cancelled = true; };
+  }, [user?.uid, draftReady, attemptId, attemptError, submitted, testConfig, duration]);
 
   const submit = useCallback(() => {
     if (submittedRef.current || submitted) return; submittedRef.current = true; setSubmitted(true); let correct = 0, wrong = 0, unanswered = 0;
     const review = questions.map((q) => { const userAnswer = answers[q.id] || ""; const answered = Boolean(userAnswer.trim()); const isCorrect = answered && evaluateMockTestAnswer(q, userAnswer); if (!answered) unanswered += 1; else if (isCorrect) correct += 1; else wrong += 1; return { question: q, userAnswer: userAnswer || "No answer", correctAnswer: q.answer, isCorrect, explanation: q.explanation, marks: q.marks || 1 }; });
     const totalQuestions = questions.length; const percentage = totalQuestions ? Math.round((correct / totalQuestions) * 100) : 0; const attempted = totalQuestions - unanswered;
     const result = { id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`, userId: user?.uid || null, completedAt: new Date().toISOString(), date: new Date().toISOString(), board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, score: correct, totalQuestions, correctAnswers: correct, correctCount: correct, wrongCount: wrong, unansweredCount: unanswered, percentage, accuracy: attempted ? Math.round((correct / attempted) * 100) : 0, timeTaken: Math.max(0, duration * 60 - timeLeft), totalTime: duration * 60, bookmarkedCount, review };
-    saveMockTestResult(result, user?.uid); if (user?.uid) saveTestResult(result).catch(() => {}); clearMockTestDraft(testConfig); sessionStorage.setItem("mock-test-result", JSON.stringify(result));
+    saveMockTestResult(result, user?.uid); if (user?.uid && attemptId) submitMockAttempt(attemptId, answers).catch(() => {}); clearMockTestDraft(testConfig); sessionStorage.setItem("mock-test-result", JSON.stringify(result));
     trackEvent(LEARNING_EVENTS.MOCK_TEST_COMPLETED, { board, chapterId: chapter, difficulty, score: correct, total: totalQuestions, percentage });
     router.push("/mock-test/result");
-  }, [submitted, questions, answers, board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, duration, timeLeft, bookmarkedCount, testConfig, router, saveTestResult, user?.uid]);
+  }, [submitted, questions, answers, board, classNumber, subjectCode, subject, category, difficulty, type, chapter, mode, duration, timeLeft, bookmarkedCount, testConfig, router, attemptId, user?.uid]);
   useEffect(() => { if (!questions.length || submitted || mode === "practice" || mode === "revision") return; const timer = setInterval(() => setTimeLeft((previous) => { if (previous <= 1) { clearInterval(timer); submit(); return 0; } return previous - 1; }), 1000); return () => clearInterval(timer); }, [questions.length, submitted, mode, submit]);
+
+  if (waitingForAttempt) return <main className="min-h-screen bg-gradient-to-b from-white to-blue-50"><Navbar /><div className="flex justify-center py-32 text-gray-700">Preparing your test…</div><Footer /></main>;
 
   if (!questions.length) return <main className="min-h-screen bg-gradient-to-b from-white to-blue-50"><Navbar /><div className="mx-auto flex max-w-2xl flex-col items-center gap-5 px-4 py-32 text-center"><h1 className="text-3xl font-bold text-gray-900">No questions available</h1><p className="text-gray-700">No questions match this board, class, subject and filter combination.</p><button onClick={() => router.push(`/mock-test?board=${board}&class=${classNumber}${subjectCode ? `&subjectCode=${subjectCode}` : ""}`)} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white">Back to Setup</button></div><Footer /></main>;
 

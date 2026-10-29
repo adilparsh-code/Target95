@@ -1,6 +1,6 @@
 import { adminGuard, serverError, toMillis } from "../../_helpers";
 import { getAdminAuth } from "@/app/lib/firebase-admin";
-import { checkAccountStatusManageable, transitionAccountStatus } from "@/lib/accountStatus.mjs";
+import { manageStudentAccountStatus } from "@/lib/accountStatus.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -28,40 +28,17 @@ export async function PATCH(request, { params }) {
       return Response.json({ success: false, error: "Status must be active or inactive." }, { status: 400 });
     }
 
-    const ref = guard.adminDb.collection("users").doc(id);
-    const userDoc = await ref.get();
-    if (!userDoc.exists) {
-      return Response.json({ success: false, error: "Student not found." }, { status: 404 });
-    }
-    // Admin protection uses BOTH the profile role and the target's Firebase
-    // Auth custom claims; an Auth lookup failure blocks the change (fail closed).
-    const auth = getAdminAuth();
-    const manageable = await checkAccountStatusManageable({ uid: id, profile: userDoc.data() || null, auth });
-    if (!manageable.ok) {
-      return Response.json({ success: false, error: manageable.message }, { status: manageable.httpStatus });
-    }
-
-    // Fail-closed transition across Firestore and Firebase Auth; see
-    // transitionAccountStatus() for the ordering and partial-failure handling.
-    const result = await transitionAccountStatus({
+    // Per-account lease, profile read, admin protection (profile role + Auth
+    // custom claims, fail closed) and the fail-closed transition all happen in
+    // manageStudentAccountStatus(); see src/lib/accountStatus.mjs.
+    const { status: httpStatus, body: payload } = await manageStudentAccountStatus({
+      db: guard.adminDb,
+      auth: getAdminAuth(),
       uid: id,
       target: status,
-      auth,
-      profileRef: ref,
       actorUid: guard.admin.uid || "admin",
-      // Reactivation is rejected if the profile changed after this read
-      // (e.g. a concurrent deactivation), so deactivation always wins.
-      expectedUpdateTime: status === "active" ? userDoc.updateTime : null,
     });
-    if (!result.ok) {
-      return Response.json(
-        { success: false, error: result.message, outcome: result.outcome, opId: result.opId, retryable: true },
-        { status: result.httpStatus }
-      );
-    }
-
-    const disabled = status === "inactive";
-    return Response.json({ success: true, student: { id, status, disabled } });
+    return Response.json(payload, { status: httpStatus });
   } catch (error) {
     console.error("Admin student status error:", error);
     return serverError();

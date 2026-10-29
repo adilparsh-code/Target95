@@ -1,41 +1,32 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
-import { isProtectedAdminAccount } from "../src/lib/accountStatus.mjs";
-import { reconcileAccounts } from "../scripts/reconcile-account-status.mjs";
+import { isProtectedAdminAccount, manageStudentAccountStatus } from "../src/lib/accountStatus.mjs";
+import { reconcileAccounts, parseArgs, main, exitCodeFor } from "../scripts/reconcile-account-status.mjs";
+import { makeFakeAccountWorld } from "./helpers/fake-account-world.mjs";
 
 /**
- * In-memory Firestore `users` collection + Firebase Auth. No credentials and
- * no network. Every mutation is recorded in `mutations`.
+ * In-memory Firestore `users` + `accountStatusLeases` and Firebase Auth (see
+ * test/helpers/fake-account-world.mjs). No credentials and no network.
+ * `mutations` lists profile and Auth writes (lease bookkeeping excluded).
  * users: { [uid]: { profile, auth?: { disabled, customClaims } | "missing" | Error } }
  */
 function makeWorld(users) {
-  const mutations = [];
-  const docFor = (uid) => ({
-    id: uid,
-    exists: true,
-    data: () => users[uid].profile,
-    ref: { update: async (fields) => { mutations.push({ op: "profile.update", uid, fields }); } },
-  });
-  const db = {
-    collection: (name) => {
-      assert.equal(name, "users");
-      return {
-        get: async () => ({ docs: Object.keys(users).map(docFor) }),
-        doc: (uid) => ({ get: async () => (users[uid] ? docFor(uid) : { id: uid, exists: false }) }),
-      };
-    },
-  };
+  const fw = makeFakeAccountWorld({ users: structuredClone(Object.fromEntries(Object.entries(users).map(([k, v]) => [k, { ...v, auth: v.auth instanceof Error ? undefined : v.auth }]))) });
+  // Errors are not structured-cloneable; serve them from a side table.
+  const errorAuth = Object.fromEntries(Object.entries(users).filter(([, u]) => u.auth instanceof Error).map(([k, u]) => [k, u.auth]));
   const auth = {
-    getUser: async (uid) => {
-      const a = users[uid].auth;
-      if (a instanceof Error) throw a;
-      if (a === "missing") throw Object.assign(new Error("no user"), { code: "auth/user-not-found" });
-      return { uid, disabled: a.disabled, customClaims: a.customClaims };
-    },
-    updateUser: async (uid, props) => { mutations.push({ op: "auth.updateUser", uid, props }); },
-    revokeRefreshTokens: async (uid) => { mutations.push({ op: "auth.revoke", uid }); },
+    ...fw.auth,
+    getUser: async (uid) => { if (errorAuth[uid]) throw errorAuth[uid]; return fw.auth.getUser(uid); },
   };
-  return { db, auth, mutations };
+  return {
+    ...fw,
+    auth,
+    get mutations() {
+      return fw.mutations
+        .filter((m) => !m.op.startsWith("accountStatusLeases"))
+        .map((m) => (m.op === "users.update" ? { ...m, op: "profile.update" } : m));
+    },
+  };
 }
 
 const lines = [];
@@ -155,5 +146,207 @@ describe("reconcileAccounts admin protection and fail-closed lookups", () => {
     assert.equal(r.scanned, 1);
     const none = await run(w, { uid: "nope" });
     assert.equal(none.scanned, 0);
+  });
+});
+
+describe("P1: failed token revocation is never treated as reconciled", () => {
+  const failedDeactivation = (auth = "failed") => ({ ...INACTIVE, role: "student", statusSync: { target: "inactive", auth, result: auth === "failed" ? "partial_profile_only" : "pending", opId: "op-1", at: "t0" } });
+
+  for (const markerAuth of ["failed", "pending"]) {
+    test(`${markerAuth} deactivation marker + disabled Auth: revoke fails -> marker kept, exit 2; retry revokes then clears`, async () => {
+      const w = makeWorld({ s1: { profile: failedDeactivation(markerAuth), auth: { disabled: true } } });
+      w.failures.revoke = 1;
+      const first = await run(w, { apply: true });
+      assert.equal(first.applyErrors, 1);
+      assert.equal(first.repaired, 0);
+      assert.equal(exitCodeFor(first), 2);
+      assert.equal(w.profile("s1").statusSync.auth, markerAuth, "marker must survive a failed revocation");
+      assert.deepEqual(w.mutations, [], "nothing written when revocation fails");
+      assert.equal(w.lease("s1"), null, "lease released after the failure");
+
+      const second = await run(w, { apply: true });
+      assert.equal(second.repaired, 1);
+      assert.equal(exitCodeFor(second), 0);
+      assert.deepEqual(w.mutations.map((m) => m.op), ["auth.revoke", "profile.update"], "revoke strictly before clearing");
+      const cleared = w.mutations[1];
+      assert.equal(cleared.fields.statusSync.auth, "synced");
+      assert.equal(cleared.fields.statusSync.target, "inactive");
+      assert.ok(cleared.precondition?.lastUpdateTime, "marker write is preconditioned");
+      assert.equal(w.authOf("s1").disabled, true, "never re-enabled");
+
+      const third = await run(w, { apply: true });
+      assert.equal(third.consistent, 1, "recovered state is stable");
+    });
+  }
+
+  test("deactivation marker with no Auth user: nothing to revoke, marker cleared", async () => {
+    const w = makeWorld({ s1: { profile: failedDeactivation(), auth: "missing" } });
+    const r = await run(w, { apply: true });
+    assert.equal(r.repaired, 1);
+    assert.deepEqual(w.mutations.map((m) => m.op), ["profile.update"]);
+  });
+
+  test("dry run reports the revocation but writes nothing", async () => {
+    lines.length = 0;
+    const w = makeWorld({ s1: { profile: failedDeactivation(), auth: { disabled: true } } });
+    const r = await run(w);
+    assert.equal(r.mode, "dry-run");
+    assert.deepEqual(w.mutations, []);
+    assert.equal(w.lease("s1"), null, "dry run takes no lease");
+    assert.ok(lines.some((l) => l.includes("would repair users/s1") && l.includes("auth:revoke, marker:clear")));
+  });
+});
+
+describe("reconcile vs PATCH coordination (per-account lease)", () => {
+  const route = (w, target) => manageStudentAccountStatus({
+    db: w.db, auth: w.auth, uid: "s1", target, actorUid: "admin1", logger: w.logger,
+    transitionOptions: { sleep: async () => {}, retryDelaysMs: [] },
+  });
+
+  test("reactivation mid-flight (Auth enabled, profile still inactive): reconcile is skipped as busy and writes nothing", async () => {
+    const w = makeWorld({ s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: true } } });
+    const gate = w.pauseAt("profileUpdate");
+    const patch = route(w, "active");
+    await gate.reached;
+    // Exactly the window the review describes: Auth enabled, profile inactive.
+    assert.equal(w.authOf("s1").disabled, false);
+    assert.equal(w.profile("s1").status, "inactive");
+    const before = w.mutations.length;
+    const r = await run(w, { apply: true, uid: "s1" });
+    assert.equal(r.busy, 1);
+    assert.equal(r.repaired, 0);
+    assert.equal(exitCodeFor(r), 2);
+    assert.equal(w.mutations.length, before, "reconcile made no Auth or profile write");
+    gate.release();
+    const res = await patch;
+    assert.equal(res.status, 200);
+    assert.equal(w.profile("s1").status, "active");
+    assert.equal(w.authOf("s1").disabled, false);
+    const after = await run(w, { apply: true, uid: "s1" });
+    assert.equal(after.consistent, 1, "no false repair after the reactivation finished");
+  });
+
+  test("reconcile mid-repair: a concurrent reactivation gets 409 and changes nothing", async () => {
+    const w = makeWorld({ s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: false } } });
+    const gate = w.pauseAt("updateUser:true");
+    const rec = run(w, { apply: true, uid: "s1" });
+    await gate.reached;
+    const before = w.mutations.length;
+    const res = await route(w, "active");
+    assert.equal(res.status, 409);
+    assert.equal(res.body.outcome, "busy");
+    assert.equal(w.mutations.length, before, "PATCH made no Auth or profile write");
+    gate.release();
+    const r = await rec;
+    assert.equal(r.repaired, 1);
+    assert.equal(w.authOf("s1").disabled, true);
+    assert.equal(w.profile("s1").status, "inactive");
+    assert.equal(w.lease("s1"), null);
+    // After reconcile releases, the admin can retry and reactivate.
+    const retry = await route(w, "active");
+    assert.equal(retry.status, 200);
+  });
+
+  test("profile changed during the repair (writer outside the lease): conflict, marker not written, exit 2", async () => {
+    const w = makeWorld({ s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: false } } });
+    const gate = w.pauseAt("updateUser:true");
+    const rec = run(w, { apply: true, uid: "s1" });
+    await gate.reached;
+    w.touchProfile("s1", { status: "active", disabled: false });
+    gate.release();
+    const r = await rec;
+    assert.equal(r.conflicts, 1);
+    assert.equal(r.repaired, 0);
+    assert.equal(exitCodeFor(r), 2);
+    assert.equal(w.profile("s1").statusSync, undefined, "no marker claims the account is synced");
+    assert.equal(w.mutations.some((m) => m.op === "profile.update"), false);
+  });
+
+  test("an unexpired lease held by another writer blocks both writers; an expired one does not", async () => {
+    const live = makeFakeAccountWorld({ users: { s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: false } } }, leases: { s1: { holder: "other", expiresAtMs: Date.now() + 60_000 } } });
+    const r = await reconcileAccounts({ db: live.db, auth: live.auth, apply: true, log: () => {} });
+    assert.equal(r.busy, 1);
+    assert.equal((await route(live, "active")).status, 409);
+    assert.equal(live.mutations.length, 0);
+
+    const stale = makeFakeAccountWorld({ users: { s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: false } } }, leases: { s1: { holder: "crashed", expiresAtMs: Date.now() - 1 } } });
+    const r2 = await reconcileAccounts({ db: stale.db, auth: stale.auth, apply: true, log: () => {} });
+    assert.equal(r2.repaired, 1);
+    assert.equal(stale.lease("s1"), null);
+  });
+
+  test("lease unavailable: reconcile skips (exit 2), PATCH returns 503, nothing written", async () => {
+    const w = makeWorld({ s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: false } } });
+    w.failures.transaction = 1;
+    const r = await run(w, { apply: true, uid: "s1" });
+    assert.equal(r.leaseErrors, 1);
+    assert.equal(exitCodeFor(r), 2);
+    w.failures.transaction = 1;
+    assert.equal((await route(w, "active")).status, 503);
+    assert.deepEqual(w.mutations, []);
+  });
+
+  test("state changed between the first read and the lease: re-decided under the lease", async () => {
+    const w = makeWorld({ s1: { profile: { ...INACTIVE, role: "student" }, auth: { disabled: false } } });
+    // Simulate an admin finishing a reactivation right after the scan read.
+    let reads = 0;
+    const db = { ...w.db, collection: (name) => {
+      const c = w.db.collection(name);
+      if (name !== "users") return c;
+      return { ...c, doc: (id) => { const ref = c.doc(id); return { ...ref, get: async () => { reads += 1; if (reads === 2) w.touchProfile("s1", { status: "active", disabled: false }); return ref.get(); } }; } };
+    } };
+    const r = await reconcileAccounts({ db, auth: w.auth, apply: true, uid: "s1", log: () => {} });
+    assert.equal(r.repaired, 0);
+    assert.equal(r.consistent, 1);
+    assert.equal(w.mutations.some((m) => m.op === "auth.updateUser"), false, "never disabled a just-reactivated user");
+  });
+});
+
+describe("CLI arguments (validated before credentials or any write)", () => {
+  test("parseArgs accepts only --apply and --uid=<uid>", () => {
+    assert.deepEqual(parseArgs([]), { apply: false, uid: "" });
+    assert.deepEqual(parseArgs(["--apply"]), { apply: true, uid: "" });
+    assert.deepEqual(parseArgs(["--uid=abc"]), { apply: false, uid: "abc" });
+    assert.deepEqual(parseArgs(["--apply", "--uid=abc"]), { apply: true, uid: "abc" });
+    for (const bad of [["--uid="], ["--apply", "--uid="], ["--uid=", "--apply"], ["--uid"], ["--uid", "abc"], ["--uid=   "], ["--uid= abc"], ["--uid=a", "--uid=b"], ["--uid=a/b"], [`--uid=${"x".repeat(129)}`], ["--aply"], ["abc"]]) {
+      assert.ok(parseArgs(bad).error, `should reject ${JSON.stringify(bad)}`);
+    }
+  });
+
+  for (const argv of [["--uid="], ["--apply", "--uid="], ["--uid"]]) {
+    test(`main ${JSON.stringify(argv)} exits 64 without loading credentials, scanning or writing`, async () => {
+      let loaded = 0;
+      const errs = [];
+      const code = await main({ argv, env: { FIREBASE_SERVICE_ACCOUNT: "{not used}" }, loadFirebase: async () => { loaded += 1; throw new Error("must not load"); }, out: () => {}, err: (l) => errs.push(l) });
+      assert.equal(code, 64);
+      assert.equal(loaded, 0, "credentials/Firebase never loaded");
+      assert.match(errs.join("\n"), /--uid requires a non-empty uid/);
+    });
+  }
+
+  test("omitted --uid keeps the full scan (dry run, fake world)", async () => {
+    const w = makeWorld({ a: { profile: { ...INACTIVE }, auth: { disabled: false } }, b: { profile: { ...ACTIVE }, auth: { disabled: false } } });
+    const out = [];
+    const code = await main({ argv: [], env: { FIREBASE_SERVICE_ACCOUNT: "x" }, loadFirebase: async () => ({ db: w.db, auth: w.auth }), out: (l) => out.push(l), err: () => {} });
+    assert.equal(code, 0);
+    const summary = JSON.parse(out.at(-1));
+    assert.equal(summary.mode, "dry-run");
+    assert.equal(summary.scanned, 2);
+    assert.deepEqual(w.mutations, []);
+  });
+
+  test("--uid=<uid> scans exactly one account; missing credentials exit 1 before loading", async () => {
+    const w = makeWorld({ a: { profile: { ...INACTIVE }, auth: { disabled: false } }, b: { profile: { ...ACTIVE }, auth: { disabled: false } } });
+    const out = [];
+    assert.equal(await main({ argv: ["--uid=a"], env: { FIREBASE_SERVICE_ACCOUNT: "x" }, loadFirebase: async () => ({ db: w.db, auth: w.auth }), out: (l) => out.push(l), err: () => {} }), 0);
+    assert.equal(JSON.parse(out.at(-1)).scanned, 1);
+    let loaded = 0;
+    assert.equal(await main({ argv: [], env: {}, loadFirebase: async () => { loaded += 1; }, out: () => {}, err: () => {} }), 1);
+    assert.equal(loaded, 0);
+  });
+
+  test("lookup errors make main exit 2", async () => {
+    const w = makeWorld({ a: { profile: { ...INACTIVE }, auth: Object.assign(new Error("x"), { code: "auth/internal-error" }) } });
+    assert.equal(await main({ argv: [], env: { FIREBASE_SERVICE_ACCOUNT: "x" }, loadFirebase: async () => ({ db: w.db, auth: w.auth }), out: () => {}, err: () => {} }), 2);
   });
 });

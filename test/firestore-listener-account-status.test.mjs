@@ -10,7 +10,7 @@
  *
  * Skipped automatically when FIRESTORE_EMULATOR_HOST is not set.
  */
-import { test, describe, after } from "node:test";
+import { test, describe, before, after } from "node:test";
 import assert from "node:assert/strict";
 
 const HOST = process.env.FIRESTORE_EMULATOR_HOST;
@@ -60,6 +60,12 @@ async function listenerFor(uid, path) {
 }
 
 describe("onSnapshot listener after account deactivation (emulator)", { skip }, () => {
+  before(async () => {
+    // Suites share one emulator and run sequentially; start from a clean
+    // database so state left by earlier rules suites cannot leak in.
+    await fetch(`http://${HOST}/emulator/v1/projects/${PROJECT}/databases/(default)/documents`, { method: "DELETE" });
+  });
+
   after(async () => {
     const { deleteApp } = await import("firebase/app");
     await Promise.all(apps.map((a) => deleteApp(a).catch(() => {})));

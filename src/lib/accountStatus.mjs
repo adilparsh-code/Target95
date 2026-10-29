@@ -19,6 +19,32 @@ export async function hasActiveProfile(adminDb, uid) {
 }
 
 /**
+ * Server-side session check used by every session-authenticated API.
+ * Returns the decoded token only when ALL hold:
+ *   - the session cookie verifies with checkRevoked=true (rejects revoked
+ *     tokens and disabled Auth users),
+ *   - the email is verified,
+ *   - users/{uid} is an active profile (same invariant as firestore.rules).
+ * Any error fails closed (null).
+ */
+export async function verifyActiveSession(sessionCookie, { auth, adminDb }) {
+  if (!sessionCookie) return null;
+  try {
+    const decoded = await auth.verifySessionCookie(sessionCookie, true);
+    if (decoded?.email_verified !== true) return null;
+    if (!(await hasActiveProfile(adminDb, decoded.uid))) return null;
+    return decoded;
+  } catch {
+    return null;
+  }
+}
+
+const DEFAULT_RETRY_DELAYS_MS = [200, 800];
+const sleepMs = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const defaultOpId = () =>
+  (globalThis.crypto?.randomUUID?.() ?? `op-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`);
+
+/**
  * Change a student's account status across Firestore and Firebase Auth so
  * that every partial failure leaves the account LESS privileged, never more.
  *
@@ -26,26 +52,37 @@ export async function hasActiveProfile(adminDb, uid) {
  *   - Firestore rules and server APIs require an active profile.
  *   - Sign-in and existing server sessions require an enabled Auth user
  *     with unrevoked refresh tokens.
+ *   - A Firebase ID token already issued stays valid for Firestore until it
+ *     expires (at most 1 hour after issue); Firestore rules see only the
+ *     token's frozen claims and the profile document, never live Auth state.
  *
  * Deactivate (target 'inactive'):
  *   1. Firestore -> inactive first. Rules and server APIs deny at once,
  *      including requests that carry a still-valid ID token.
  *   2. Auth -> disabled + revoke refresh tokens, ALWAYS attempted, even if
  *      step 1 failed, because blocking sign-in is still the safe direction.
- *   3. If step 1 failed, retry the Firestore write once after step 2.
- *   No rollback ever re-enables anything.
+ *   3. If step 1 failed, retry the Firestore write with bounded backoff.
+ *   No path ever re-enables anything.
+ *   Residual: if every Firestore attempt fails, a previously issued ID token
+ *   can still pass Firestore rules until it expires (<= 1 hour). No Firestore
+ *   rule can learn about the deactivation without a successful Firestore
+ *   write, so this window cannot be closed here; it is reported as
+ *   'partial_auth_only' and repaired by retry or the reconcile script.
  *
  * Reactivate (target 'active'):
  *   1. Auth -> enabled first. While the profile is still inactive, rules and
  *      server APIs keep denying, so this alone grants nothing.
- *   2. Firestore -> active.
+ *   2. Firestore -> active, guarded by `expectedUpdateTime` when given, so a
+ *      deactivation that landed after the caller read the profile wins.
  *   3. If step 2 fails, roll Auth back to disabled and revoke tokens issued
  *      in the gap. If the rollback also fails the account is still denied
  *      everywhere that reads the profile; it is flagged for reconciliation.
  *
- * Every write is idempotent, so retrying the same request reconciles.
+ * Every write is idempotent; retrying the same request converges, and a
+ * deactivation retry can never reactivate. Each attempt carries an opId that
+ * appears in statusSync and in every log line (no tokens or personal data).
  *
- * @returns {{ ok: boolean, httpStatus: number, outcome: string, message: string }}
+ * @returns {{ ok: boolean, httpStatus: number, outcome: string, message: string, opId: string }}
  */
 export async function transitionAccountStatus({
   uid,
@@ -53,33 +90,40 @@ export async function transitionAccountStatus({
   auth,
   profileRef,
   actorUid = "admin",
+  expectedUpdateTime = null,
   now = () => new Date().toISOString(),
   logger = console,
+  sleep = sleepMs,
+  retryDelaysMs = DEFAULT_RETRY_DELAYS_MS,
+  opId = defaultOpId(),
 }) {
   if (target !== "active" && target !== "inactive") {
     throw new Error(`Invalid account status target: ${target}`);
   }
-  const context = { uid, target, actorUid };
-  const errorInfo = (error) => ({ code: error?.code || null, message: error?.message || String(error) });
-  const profileFields = (authSync) => ({
+  const context = { opId, uid, target, actorUid };
+  const errorInfo = (error) => ({ code: error?.code ?? null, message: String(error?.message || error).slice(0, 300) });
+  const sync = (auth, result) => ({ target, auth, result, opId, at: now() });
+  const profileFields = (authSync, result) => ({
     status: target,
     disabled: target === "inactive",
     statusUpdatedAt: now(),
     statusUpdatedBy: actorUid,
-    statusSync: { target, auth: authSync, at: now() },
+    statusSync: sync(authSync, result),
   });
-  const markSync = async (authSync) => {
+  const markSync = async (authSync, result) => {
     try {
-      await profileRef.update({ statusSync: { target, auth: authSync, at: now() } });
+      await profileRef.update({ statusSync: sync(authSync, result) });
     } catch (error) {
-      logger.warn("[account-status] could not record sync marker", { ...context, authSync, error: errorInfo(error) });
+      // Access state is already correct; only the audit marker is stale.
+      logger.warn("[account-status] could not record statusSync marker", { ...context, authSync, result, error: errorInfo(error) });
     }
   };
+  const done = (ok, httpStatus, outcome, message) => ({ ok, httpStatus, outcome, message, opId });
 
   if (target === "inactive") {
     let firestoreError = null;
     try {
-      await profileRef.update(profileFields("pending"));
+      await profileRef.update(profileFields("pending", "pending"));
     } catch (error) {
       firestoreError = error;
       logger.error("[account-status] deactivate: Firestore write failed; disabling Auth anyway", { ...context, error: errorInfo(error) });
@@ -93,9 +137,10 @@ export async function transitionAccountStatus({
       authError = error;
     }
 
-    if (firestoreError) {
+    for (let i = 0; firestoreError && i < retryDelaysMs.length; i += 1) {
+      await sleep(retryDelaysMs[i]);
       try {
-        await profileRef.update(profileFields(authError ? "failed" : "synced"));
+        await profileRef.update(profileFields(authError ? "failed" : "synced", authError ? "partial_profile_only" : "deactivated"));
         firestoreError = null;
       } catch (error) {
         firestoreError = error;
@@ -103,35 +148,31 @@ export async function transitionAccountStatus({
     }
 
     if (!firestoreError && !authError) {
-      await markSync("synced");
-      return { ok: true, httpStatus: 200, outcome: "deactivated", message: "Account deactivated." };
+      await markSync("synced", "deactivated");
+      return done(true, 200, "deactivated", "Account deactivated.");
     }
 
     if (firestoreError && authError) {
       logger.error("[account-status] RECONCILE REQUIRED deactivate: Firestore write failed and Auth disable/revoke did not complete; the profile is still active", {
         ...context, firestoreError: errorInfo(firestoreError), authError: errorInfo(authError),
       });
-      return { ok: false, httpStatus: 500, outcome: "unchanged", message: "Deactivation failed. The profile is still active. Please retry." };
+      return done(false, 500, "unchanged", "Deactivation failed. The profile is still active. Please retry.");
     }
 
     if (firestoreError) {
-      logger.error("[account-status] RECONCILE REQUIRED deactivate: Auth disabled and tokens revoked, but the Firestore profile is still active", {
+      logger.error("[account-status] RECONCILE REQUIRED deactivate: Auth disabled and tokens revoked, but the Firestore profile is still active; already-issued ID tokens can reach Firestore until they expire (<= 1h)", {
         ...context, firestoreError: errorInfo(firestoreError),
       });
-      return {
-        ok: false, httpStatus: 502, outcome: "partial_auth_only",
-        message: "Sign-in and sessions are blocked, but the profile could not be updated. Retry to finish deactivation.",
-      };
+      return done(false, 502, "partial_auth_only",
+        "Sign-in and sessions are blocked, but the profile could not be updated. Retry now to finish deactivation.");
     }
 
-    await markSync("failed");
-    logger.error("[account-status] RECONCILE REQUIRED deactivate: profile is inactive (access denied) but Firebase Auth could not be disabled", {
+    await markSync("failed", "partial_profile_only");
+    logger.error("[account-status] RECONCILE REQUIRED deactivate: profile is inactive (access denied) but Firebase Auth could not be disabled or tokens not revoked", {
       ...context, authError: errorInfo(authError),
     });
-    return {
-      ok: false, httpStatus: 502, outcome: "partial_profile_only",
-      message: "Access is blocked, but Firebase Auth could not be disabled. Retry to finish deactivation.",
-    };
+    return done(false, 502, "partial_profile_only",
+      "Access is blocked, but Firebase Auth could not be disabled. Retry to finish deactivation.");
   }
 
   // target === 'active'
@@ -139,26 +180,115 @@ export async function transitionAccountStatus({
     await auth.updateUser(uid, { disabled: false });
   } catch (error) {
     logger.error("[account-status] reactivate: Auth enable failed; account remains inactive", { ...context, error: errorInfo(error) });
-    return { ok: false, httpStatus: 500, outcome: "unchanged", message: "Reactivation failed. The account is still inactive. Please retry." };
+    return done(false, 500, "unchanged", "Reactivation failed. The account is still inactive. Please retry.");
   }
 
   try {
-    await profileRef.update(profileFields("synced"));
-    return { ok: true, httpStatus: 200, outcome: "activated", message: "Account activated." };
+    const fields = profileFields("synced", "activated");
+    if (expectedUpdateTime) await profileRef.update(fields, { lastUpdateTime: expectedUpdateTime });
+    else await profileRef.update(fields);
+    return done(true, 200, "activated", "Account activated.");
   } catch (firestoreError) {
+    const conflict = firestoreError?.code === 9 || firestoreError?.code === "failed-precondition";
     try {
       await auth.updateUser(uid, { disabled: true });
       await auth.revokeRefreshTokens(uid);
-      logger.error("[account-status] reactivate: Firestore write failed; Auth rolled back to disabled", { ...context, error: errorInfo(firestoreError) });
-      return { ok: false, httpStatus: 500, outcome: "rolled_back", message: "Reactivation failed and was rolled back. The account is still inactive. Please retry." };
+      logger.error(`[account-status] reactivate: ${conflict ? "profile changed concurrently" : "Firestore write failed"}; Auth rolled back to disabled`, {
+        ...context, error: errorInfo(firestoreError),
+      });
+      return conflict
+        ? done(false, 409, "conflict", "The account was changed by another request. It is still inactive. Reload and retry.")
+        : done(false, 500, "rolled_back", "Reactivation failed and was rolled back. The account is still inactive. Please retry.");
     } catch (rollbackError) {
       logger.error("[account-status] RECONCILE REQUIRED reactivate: Firestore write and Auth rollback both failed; Auth is enabled but the profile is inactive, so access stays denied", {
         ...context, firestoreError: errorInfo(firestoreError), rollbackError: errorInfo(rollbackError),
       });
-      return {
-        ok: false, httpStatus: 502, outcome: "partial_auth_enabled",
-        message: "Reactivation did not finish. The account can sign in but still has no access. Retry to finish reactivation.",
-      };
+      return done(false, 502, "partial_auth_enabled",
+        "Reactivation did not finish. The account can sign in but still has no access. Retry to finish reactivation.");
     }
   }
+}
+
+/**
+ * True when reconciliation or the admin status route must leave an account
+ * untouched because it belongs to an administrator. Checks BOTH the Firestore profile and the authoritative
+ * Firebase Auth custom claims (requireAdmin trusts the `admin` claim), so a
+ * missing, stale or inconsistent profile role cannot expose an admin to an
+ * automated disable. Only used to skip work; it grants nothing.
+ *
+ * @param {object|null} profile     users/{uid} data
+ * @param {object|null} customClaims UserRecord.customClaims from the Admin SDK
+ */
+export function isProtectedAdminAccount(profile, customClaims) {
+  if (profile?.role === "admin") return true;
+  if (customClaims?.admin === true) return true;
+  if (customClaims?.role === "admin") return true;
+  return false;
+}
+
+/**
+ * Decides whether PATCH /api/admin/students/[id] may change this account's
+ * status. Protects administrators identified by EITHER the Firestore profile
+ * role or the authoritative Firebase Auth custom claims (see
+ * isProtectedAdminAccount), so a stale or missing profile role cannot expose a
+ * claim-admin to deactivation by another admin.
+ *
+ * Fails closed: any Auth lookup error other than auth/user-not-found blocks the
+ * change (503) and the target is never mutated. auth/user-not-found means there
+ * is no Auth record and therefore no claims; the profile role alone decides,
+ * matching scripts/reconcile-account-status.mjs. Only blocks; it grants nothing.
+ *
+ * @param {{ uid: string, profile: object|null, auth: { getUser: Function }, logger?: Console }} args
+ * @returns {Promise<{ ok: true } | { ok: false, httpStatus: number, reason: string, message: string }>}
+ */
+export async function checkAccountStatusManageable({ uid, profile, auth, logger = console }) {
+  const blockedAdmin = { ok: false, httpStatus: 403, reason: "admin", message: "Admin accounts cannot be managed here." };
+  if (isProtectedAdminAccount(profile, null)) return blockedAdmin;
+
+  let customClaims = null;
+  try {
+    const record = await auth.getUser(uid);
+    customClaims = record?.customClaims || null;
+  } catch (error) {
+    if (error?.code !== "auth/user-not-found") {
+      // Log the error code only: no message, token or personal data.
+      logger.error("[account-status] admin route: Auth lookup failed; refusing status change", { uid, code: error?.code ?? null });
+      return { ok: false, httpStatus: 503, reason: "auth_lookup_failed", message: "Could not verify this account right now. No changes were made." };
+    }
+  }
+  if (isProtectedAdminAccount(profile, customClaims)) return blockedAdmin;
+  return { ok: true };
+}
+
+/**
+ * Reconciliation decision for one account, used by
+ * scripts/reconcile-account-status.mjs. Only ever moves toward LESS access:
+ *   - Auth disabled/missing but profile active  -> profile inactive
+ *   - profile not active but Auth enabled        -> disable Auth + revoke
+ *   - statusSync left pending/failed while both stores agree -> clear marker
+ * Never enables an Auth user and never activates a profile.
+ *
+ * @param {object|null} profile   users/{uid} data (null when missing)
+ * @param {{exists:boolean, disabled:boolean}} authUser
+ * @returns {{ issue: string, actions: string[] } | null}
+ */
+export function decideReconciliation(profile, authUser) {
+  const authEnabled = authUser?.exists === true && authUser.disabled === false;
+  const profileActive = isActiveProfile(profile);
+  if (profile && profileActive && !authEnabled) {
+    return { issue: "profile_active_auth_disabled", actions: ["profile:deactivate"] };
+  }
+  if (profile && !profileActive && authEnabled) {
+    return { issue: "profile_inactive_auth_enabled", actions: ["auth:disable", "auth:revoke"] };
+  }
+  const marker = profile?.statusSync;
+  if (marker && (marker.auth === "pending" || marker.auth === "failed")) {
+    const markerMatchesState = (marker.target === "active") === profileActive;
+    // Clear only when the marker describes the state both stores now agree
+    // on; anything else is surfaced for a human, never auto-resolved.
+    return markerMatchesState
+      ? { issue: `stale_marker_${marker.auth}`, actions: ["marker:clear"] }
+      : { issue: "marker_state_mismatch", actions: [] };
+  }
+  return null;
 }

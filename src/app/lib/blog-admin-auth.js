@@ -1,5 +1,6 @@
 import crypto from "node:crypto";
-import { getAdminAuth } from "./firebase-admin";
+import { getAdminAuth, getAdminDb } from "./firebase-admin";
+import { hasActiveProfile } from "../../lib/accountStatus.mjs";
 
 function getAllowedEmails() {
   return (process.env.BLOG_ADMIN_EMAILS || "")
@@ -22,6 +23,13 @@ export async function requireBlogAdmin(request) {
   const allowed = getAllowedEmails();
 
   if (!decoded.email_verified || !email || !allowed.includes(email)) {
+    throw new Error("Forbidden");
+  }
+
+  // Same fail-closed account-status invariant as firestore.rules and the
+  // session guard: a deactivated profile loses blog-admin access at once,
+  // even if disabling the Firebase Auth user failed.
+  if (!(await hasActiveProfile(getAdminDb(), decoded.uid))) {
     throw new Error("Forbidden");
   }
 

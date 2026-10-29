@@ -1,6 +1,6 @@
 import { adminGuard, serverError, toMillis } from "../../_helpers";
 import { getAdminAuth } from "@/app/lib/firebase-admin";
-import { transitionAccountStatus } from "@/lib/accountStatus.mjs";
+import { checkAccountStatusManageable, transitionAccountStatus } from "@/lib/accountStatus.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -33,9 +33,12 @@ export async function PATCH(request, { params }) {
     if (!userDoc.exists) {
       return Response.json({ success: false, error: "Student not found." }, { status: 404 });
     }
-    const role = userDoc.data()?.role || "student";
-    if (role === "admin") {
-      return Response.json({ success: false, error: "Admin accounts cannot be managed here." }, { status: 403 });
+    // Admin protection uses BOTH the profile role and the target's Firebase
+    // Auth custom claims; an Auth lookup failure blocks the change (fail closed).
+    const auth = getAdminAuth();
+    const manageable = await checkAccountStatusManageable({ uid: id, profile: userDoc.data() || null, auth });
+    if (!manageable.ok) {
+      return Response.json({ success: false, error: manageable.message }, { status: manageable.httpStatus });
     }
 
     // Fail-closed transition across Firestore and Firebase Auth; see
@@ -43,13 +46,16 @@ export async function PATCH(request, { params }) {
     const result = await transitionAccountStatus({
       uid: id,
       target: status,
-      auth: getAdminAuth(),
+      auth,
       profileRef: ref,
       actorUid: guard.admin.uid || "admin",
+      // Reactivation is rejected if the profile changed after this read
+      // (e.g. a concurrent deactivation), so deactivation always wins.
+      expectedUpdateTime: status === "active" ? userDoc.updateTime : null,
     });
     if (!result.ok) {
       return Response.json(
-        { success: false, error: result.message, outcome: result.outcome, retryable: true },
+        { success: false, error: result.message, outcome: result.outcome, opId: result.opId, retryable: true },
         { status: result.httpStatus }
       );
     }

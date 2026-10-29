@@ -37,11 +37,22 @@ function validateUid(uid) {
 }
 
 export function parseReconcileArgs(args) {
-  const filters = args.filter((arg) => arg === "--uid" || arg.startsWith("--uid="));
+  const filters = [];
+  for (let i = 0; i < args.length; i += 1) {
+    if (args[i] === "--uid") {
+      const value = args[++i];
+      if (value === undefined || value.startsWith("--")) {
+        throw new Error("Invalid --uid: expected a following UID value.");
+      }
+      filters.push(value);
+    } else if (args[i].startsWith("--uid=")) {
+      filters.push(args[i].slice(6));
+    }
+  }
   if (filters.length > 1) throw new Error("Invalid --uid: supply the filter only once.");
   return {
     apply: args.includes("--apply"),
-    ...(filters.length ? { uid: validateUid(filters[0].slice(6)) } : {}),
+    ...(filters.length ? { uid: validateUid(filters[0]) } : {}),
   };
 }
 

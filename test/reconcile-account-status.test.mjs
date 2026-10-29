@@ -175,17 +175,22 @@ describe("reconcileAccounts admin protection and fail-closed lookups", () => {
 describe("reconciliation UID filter validation", () => {
   test("only omission permits a full scan, and valid --uid targets one document", async () => {
     assert.deepEqual(parseReconcileArgs([]), { apply: false });
-    assert.deepEqual(parseReconcileArgs(["--apply", "--uid=one"]), { apply: true, uid: "one" });
+    for (const args of [["--apply", "--uid=one"], ["--apply", "--uid", "one"], ["--uid", "one", "--apply"]]) {
+      assert.deepEqual(parseReconcileArgs(args), { apply: true, uid: "one" });
+    }
     const w = makeWorld({ one: { profile: ACTIVE, auth: { disabled: false } }, two: { profile: ACTIVE, auth: { disabled: false } } });
-    assert.equal((await run(w, parseReconcileArgs(["--uid=one"]))).scanned, 1);
-    assert.deepEqual(w.reads, [{ op: "get", uid: "one" }]);
+    for (const args of [["--uid=one"], ["--uid", "one"]]) {
+      w.reads.length = 0;
+      assert.equal((await run(w, parseReconcileArgs(args))).scanned, 1);
+      assert.deepEqual(w.reads, [{ op: "get", uid: "one" }]);
+    }
     w.reads.length = 0;
     assert.equal((await run(w, parseReconcileArgs([]))).scanned, 2);
     assert.deepEqual(w.reads, [{ op: "scan" }]);
   });
 
   test("empty, malformed, repeated and bare --uid filters are rejected", () => {
-    for (const args of [["--uid"], ["--uid="], ["--uid= "], ["--uid=one/two"], ["--uid=.."], ["--uid=__reserved__"], ["--uid=" + "a".repeat(129)], ["--uid=one", "--uid=two"]]) {
+    for (const args of [["--uid"], ["--uid", "--apply"], ["--uid", ""], ["--uid", "one/two"], ["--uid", "one", "--uid=two"], ["--uid=one", "--uid", "two"], ["--uid", "one", "--uid", "two"], ["--uid="], ["--uid= "], ["--uid=one/two"], ["--uid=.."], ["--uid=__reserved__"], ["--uid=" + "a".repeat(129)], ["--uid=one", "--uid=two"]]) {
       assert.throws(() => parseReconcileArgs(["--apply", ...args]), /Invalid --uid/);
     }
   });
@@ -205,11 +210,25 @@ describe("reconciliation UID filter validation", () => {
     const script = fileURLToPath(new URL("../scripts/reconcile-account-status.mjs", import.meta.url));
     const env = { ...process.env };
     delete env.FIREBASE_SERVICE_ACCOUNT;
-    for (const filter of ["--uid=", "--uid", "--uid=one/two"]) {
-      const result = spawnSync(process.execPath, [script, "--apply", filter], { env, encoding: "utf8" });
+    for (const filter of [["--uid="], ["--uid"], ["--uid=one/two"], ["--uid", "one/two"], ["--uid", "--apply"]]) {
+      const result = spawnSync(process.execPath, [script, "--apply", ...filter], { env, encoding: "utf8" });
       assert.equal(result.status, 1);
       assert.match(result.stderr, /Invalid --uid/);
       assert.doesNotMatch(result.stderr, /FIREBASE_SERVICE_ACCOUNT/);
+    }
+  });
+
+  test("CLI accepts both UID forms and omission before requiring credentials", async () => {
+    const { spawnSync } = await import("node:child_process");
+    const { fileURLToPath } = await import("node:url");
+    const script = fileURLToPath(new URL("../scripts/reconcile-account-status.mjs", import.meta.url));
+    const env = { ...process.env };
+    delete env.FIREBASE_SERVICE_ACCOUNT;
+    for (const args of [[], ["--uid=one"], ["--uid", "one"], ["--uid", "one", "--apply"]]) {
+      const result = spawnSync(process.execPath, [script, ...args], { env, encoding: "utf8" });
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /FIREBASE_SERVICE_ACCOUNT is not set/);
+      assert.doesNotMatch(result.stderr, /Invalid --uid/);
     }
   });
 });

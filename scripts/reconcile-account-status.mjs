@@ -14,60 +14,67 @@
  *   - stores agree but statusSync pending/failed -> marker set to synced
  * It never enables an Auth user and never activates a profile; reactivation
  * is always an explicit admin action through the API. Admin accounts are
- * reported but never modified. Logs contain uids only.
+ * reported but never modified: an account is treated as admin when its
+ * profile has role "admin" OR its Firebase Auth custom claims carry
+ * admin === true (or role "admin"). If the Auth lookup for an account fails
+ * for any reason other than user-not-found, that account is skipped and
+ * reported, never changed, and the process exits non-zero.
+ * Logs contain uids only.
  */
 
 import { pathToFileURL } from "node:url";
-import { decideReconciliation } from "../src/lib/accountStatus.mjs";
+import { decideReconciliation, isProtectedAdminAccount } from "../src/lib/accountStatus.mjs";
 
-async function main() {
-  const apply = process.argv.includes("--apply");
-  const uidArg = process.argv.find((a) => a.startsWith("--uid="))?.slice(6) || "";
-  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
-  if (!raw) {
-    console.error("FIREBASE_SERVICE_ACCOUNT is not set.");
-    process.exit(1);
-  }
-  const { cert, initializeApp } = await import("firebase-admin/app");
-  const { getAuth } = await import("firebase-admin/auth");
-  const { getFirestore } = await import("firebase-admin/firestore");
-  const app = initializeApp({ credential: cert(JSON.parse(raw)) });
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  const docs = uidArg
-    ? [await db.collection("users").doc(uidArg).get()].filter((d) => d.exists)
+/**
+ * Reconcile users/{uid} profiles against Firebase Auth. Dry run unless
+ * apply === true. Dependencies are injected so the logic is unit-testable
+ * without credentials.
+ *
+ * @param {{ db: object, auth: object, apply?: boolean, uid?: string,
+ *           log?: (line: string) => void, now?: () => string }} deps
+ */
+export async function reconcileAccounts({ db, auth, apply = false, uid = "", log = console.log, now = () => new Date().toISOString() }) {
+  const docs = uid
+    ? [await db.collection("users").doc(uid).get()].filter((d) => d.exists)
     : (await db.collection("users").get()).docs;
-  const counts = { scanned: 0, consistent: 0, repaired: 0, reported: 0, skippedAdmin: 0 };
-  const at = new Date().toISOString();
+  const counts = { scanned: 0, consistent: 0, repaired: 0, reported: 0, skippedAdmin: 0, lookupErrors: 0 };
+  const at = now();
 
   for (const doc of docs) {
     counts.scanned += 1;
     const profile = doc.data();
     let authUser = { exists: false, disabled: true };
+    let customClaims = null;
     try {
       const record = await auth.getUser(doc.id);
       authUser = { exists: true, disabled: Boolean(record.disabled) };
+      customClaims = record.customClaims || null;
     } catch (error) {
-      if (error?.code !== "auth/user-not-found") throw error;
+      if (error?.code !== "auth/user-not-found") {
+        // Fail closed: without authoritative Auth state (including admin
+        // claims) this account is never touched.
+        counts.lookupErrors += 1;
+        log(`skipped (auth lookup failed: ${error?.code || "unknown"}) users/${doc.id}`);
+        continue;
+      }
     }
     const decision = decideReconciliation(profile, authUser);
     if (!decision) {
       counts.consistent += 1;
       continue;
     }
-    if (profile?.role === "admin") {
+    if (isProtectedAdminAccount(profile, customClaims)) {
       counts.skippedAdmin += 1;
-      console.log(`report-only (admin) users/${doc.id}: ${decision.issue}`);
+      log(`report-only (admin) users/${doc.id}: ${decision.issue}`);
       continue;
     }
     if (decision.actions.length === 0) {
       counts.reported += 1;
-      console.log(`report-only users/${doc.id}: ${decision.issue}`);
+      log(`report-only users/${doc.id}: ${decision.issue}`);
       continue;
     }
-    console.log(`${apply ? "repair" : "would repair"} users/${doc.id}: ${decision.issue} -> ${decision.actions.join(", ")}`);
-    if (!apply) {
+    log(`${apply ? "repair" : "would repair"} users/${doc.id}: ${decision.issue} -> ${decision.actions.join(", ")}`);
+    if (apply !== true) {
       counts.reported += 1;
       continue;
     }
@@ -86,7 +93,24 @@ async function main() {
     }
     counts.repaired += 1;
   }
-  console.log(JSON.stringify({ mode: apply ? "apply" : "dry-run", ...counts }));
+  return { mode: apply === true ? "apply" : "dry-run", ...counts };
+}
+
+async function main() {
+  const apply = process.argv.includes("--apply");
+  const uidArg = process.argv.find((a) => a.startsWith("--uid="))?.slice(6) || "";
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
+  if (!raw) {
+    console.error("FIREBASE_SERVICE_ACCOUNT is not set.");
+    process.exit(1);
+  }
+  const { cert, initializeApp } = await import("firebase-admin/app");
+  const { getAuth } = await import("firebase-admin/auth");
+  const { getFirestore } = await import("firebase-admin/firestore");
+  const app = initializeApp({ credential: cert(JSON.parse(raw)) });
+  const summary = await reconcileAccounts({ db: getFirestore(app), auth: getAuth(app), apply, uid: uidArg });
+  console.log(JSON.stringify(summary));
+  if (summary.lookupErrors > 0) process.exitCode = 2;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

@@ -210,6 +210,23 @@ export async function transitionAccountStatus({
 }
 
 /**
+ * True when reconciliation must leave an account untouched because it belongs
+ * to an administrator. Checks BOTH the Firestore profile and the authoritative
+ * Firebase Auth custom claims (requireAdmin trusts the `admin` claim), so a
+ * missing, stale or inconsistent profile role cannot expose an admin to an
+ * automated disable. Only used to skip work; it grants nothing.
+ *
+ * @param {object|null} profile     users/{uid} data
+ * @param {object|null} customClaims UserRecord.customClaims from the Admin SDK
+ */
+export function isProtectedAdminAccount(profile, customClaims) {
+  if (profile?.role === "admin") return true;
+  if (customClaims?.admin === true) return true;
+  if (customClaims?.role === "admin") return true;
+  return false;
+}
+
+/**
  * Reconciliation decision for one account, used by
  * scripts/reconcile-account-status.mjs. Only ever moves toward LESS access:
  *   - Auth disabled/missing but profile active  -> profile inactive

@@ -210,8 +210,8 @@ export async function transitionAccountStatus({
 }
 
 /**
- * True when reconciliation must leave an account untouched because it belongs
- * to an administrator. Checks BOTH the Firestore profile and the authoritative
+ * True when reconciliation or the admin status route must leave an account
+ * untouched because it belongs to an administrator. Checks BOTH the Firestore profile and the authoritative
  * Firebase Auth custom claims (requireAdmin trusts the `admin` claim), so a
  * missing, stale or inconsistent profile role cannot expose an admin to an
  * automated disable. Only used to skip work; it grants nothing.
@@ -224,6 +224,40 @@ export function isProtectedAdminAccount(profile, customClaims) {
   if (customClaims?.admin === true) return true;
   if (customClaims?.role === "admin") return true;
   return false;
+}
+
+/**
+ * Decides whether PATCH /api/admin/students/[id] may change this account's
+ * status. Protects administrators identified by EITHER the Firestore profile
+ * role or the authoritative Firebase Auth custom claims (see
+ * isProtectedAdminAccount), so a stale or missing profile role cannot expose a
+ * claim-admin to deactivation by another admin.
+ *
+ * Fails closed: any Auth lookup error other than auth/user-not-found blocks the
+ * change (503) and the target is never mutated. auth/user-not-found means there
+ * is no Auth record and therefore no claims; the profile role alone decides,
+ * matching scripts/reconcile-account-status.mjs. Only blocks; it grants nothing.
+ *
+ * @param {{ uid: string, profile: object|null, auth: { getUser: Function }, logger?: Console }} args
+ * @returns {Promise<{ ok: true } | { ok: false, httpStatus: number, reason: string, message: string }>}
+ */
+export async function checkAccountStatusManageable({ uid, profile, auth, logger = console }) {
+  const blockedAdmin = { ok: false, httpStatus: 403, reason: "admin", message: "Admin accounts cannot be managed here." };
+  if (isProtectedAdminAccount(profile, null)) return blockedAdmin;
+
+  let customClaims = null;
+  try {
+    const record = await auth.getUser(uid);
+    customClaims = record?.customClaims || null;
+  } catch (error) {
+    if (error?.code !== "auth/user-not-found") {
+      // Log the error code only: no message, token or personal data.
+      logger.error("[account-status] admin route: Auth lookup failed; refusing status change", { uid, code: error?.code ?? null });
+      return { ok: false, httpStatus: 503, reason: "auth_lookup_failed", message: "Could not verify this account right now. No changes were made." };
+    }
+  }
+  if (isProtectedAdminAccount(profile, customClaims)) return blockedAdmin;
+  return { ok: true };
 }
 
 /**

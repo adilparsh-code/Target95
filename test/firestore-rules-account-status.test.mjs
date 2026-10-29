@@ -265,4 +265,16 @@ describe("firestore.rules: account status", { skip }, () => {
       denied(await create(token(ALICE), "questions", "s1", { question: "Q" }));
     });
   });
+
+  describe("account status leases (server-only coordination)", () => {
+    test("no client, not even an active admin, can read or write accountStatusLeases", async () => {
+      allowed(await set(OWNER, `accountStatusLeases/${ALICE}`, { uid: ALICE, holder: "admin-route:op", expiresAtMs: Date.now() + 60000 }));
+      for (const who of [ALICE, ADMIN, DAN]) {
+        denied(await get(token(who), `accountStatusLeases/${ALICE}`));
+        denied(await set(token(who), `accountStatusLeases/${ALICE}`, { uid: ALICE, holder: who, expiresAtMs: 0 }));
+        denied(await del(token(who), `accountStatusLeases/${ALICE}`));
+        denied(await create(token(who), "accountStatusLeases", `${who}-new`, { uid: who, holder: who, expiresAtMs: 0 }));
+      }
+    });
+  });
 });

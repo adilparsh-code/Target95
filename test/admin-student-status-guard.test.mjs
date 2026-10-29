@@ -1,7 +1,8 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { checkAccountStatusManageable, transitionAccountStatus } from "../src/lib/accountStatus.mjs";
+import { checkAccountStatusManageable, manageStudentAccountStatus } from "../src/lib/accountStatus.mjs";
+import { makeFakeAccountWorld } from "./helpers/fake-account-world.mjs";
 
 /**
  * Regression tests for MEDIUM-1: PATCH /api/admin/students/[id] must protect
@@ -10,37 +11,32 @@ import { checkAccountStatusManageable, transitionAccountStatus } from "../src/li
  * In-memory fakes only: no credentials, no network, no emulator.
  */
 function makeWorld({ profile, authRecord }) {
-  const mutations = [];
+  const fw = makeFakeAccountWorld({ users: { u1: { profile, auth: authRecord instanceof Error ? undefined : structuredClone(authRecord) } } });
   const lookups = [];
   const auth = {
+    ...fw.auth,
     getUser: async (uid) => {
       lookups.push(uid);
       if (authRecord instanceof Error) throw authRecord;
-      if (authRecord === "missing") throw Object.assign(new Error("no user"), { code: "auth/user-not-found" });
-      return { uid, disabled: false, customClaims: authRecord?.customClaims };
+      return fw.auth.getUser(uid);
     },
-    updateUser: async (uid, props) => { mutations.push({ op: "auth.updateUser", uid, props }); },
-    revokeRefreshTokens: async (uid) => { mutations.push({ op: "auth.revoke", uid }); },
   };
-  const profileRef = { update: async (fields) => { mutations.push({ op: "profile.update", fields }); } };
-  const logs = [];
-  const logger = {
-    error: (...a) => logs.push(["error", ...a]),
-    warn: (...a) => logs.push(["warn", ...a]),
-    info: (...a) => logs.push(["info", ...a]),
+  return {
+    ...fw, auth, lookups, profile,
+    // Profile and Auth writes only (lease bookkeeping excluded).
+    get mutations() {
+      return fw.mutations.filter((m) => !m.op.startsWith("accountStatusLeases")).map((m) => (m.op === "users.update" ? { op: "profile.update", fields: m.fields } : m));
+    },
   };
-  return { profile, auth, profileRef, mutations, lookups, logs, logger };
 }
 
-/** Mirrors the PATCH handler's order: guard first, transition only if allowed. */
+/** The real PATCH core (route.js delegates to it after adminGuard + validation). */
 async function patchFlow(world, target) {
-  const guard = await checkAccountStatusManageable({ uid: "u1", profile: world.profile, auth: world.auth, logger: world.logger });
-  if (!guard.ok) return { status: guard.httpStatus, body: { success: false, error: guard.message } };
-  const result = await transitionAccountStatus({
-    uid: "u1", target, auth: world.auth, profileRef: world.profileRef, actorUid: "admin-actor",
-    logger: world.logger, sleep: async () => {}, retryDelaysMs: [],
+  const res = await manageStudentAccountStatus({
+    db: world.db, auth: world.auth, uid: "u1", target, actorUid: "admin-actor", logger: world.logger,
+    transitionOptions: { sleep: async () => {}, retryDelaysMs: [] },
   });
-  return { status: result.ok ? 200 : result.httpStatus, body: { success: result.ok } };
+  return { status: res.status, body: res.body };
 }
 
 describe("checkAccountStatusManageable (admin student status route guard)", () => {
@@ -54,7 +50,7 @@ describe("checkAccountStatusManageable (admin student status route guard)", () =
   for (const [label, profile] of [
     ["missing profile role", { status: "active" }],
     ["stale profile role student", { role: "student", status: "active" }],
-    ["null profile data", null],
+    ["empty profile data", {}],
   ]) {
     test(`claim admin === true with ${label} stays protected`, async () => {
       const w = makeWorld({ profile, authRecord: { customClaims: { admin: true } } });
@@ -146,15 +142,27 @@ describe("PATCH /api/admin/students/[id] wiring", () => {
   const src = readFileSync(new URL("../src/app/api/admin/students/[id]/route.js", import.meta.url), "utf8");
   const patch = src.slice(src.indexOf("export async function PATCH"), src.indexOf("export async function GET"));
 
-  test("guard runs after adminGuard and before transitionAccountStatus", () => {
+  test("route delegates to manageStudentAccountStatus after adminGuard and validation", () => {
     const iGuard = patch.indexOf("adminGuard(request)");
-    const iCheck = patch.indexOf("checkAccountStatusManageable(");
-    const iTransition = patch.indexOf("transitionAccountStatus(");
-    assert.ok(iGuard > -1 && iCheck > iGuard && iTransition > iCheck);
-    assert.match(patch, /if \(!manageable\.ok\)\s*\{\s*return Response\.json/);
+    const iStatus = patch.indexOf("Status must be active or inactive.");
+    const iCore = patch.indexOf("manageStudentAccountStatus(");
+    assert.ok(iGuard > -1 && iStatus > iGuard && iCore > iStatus);
+    assert.match(patch, /db: guard\.adminDb/);
+    assert.match(patch, /Response\.json\(payload, \{ status: httpStatus \}\)/);
   });
 
-  test("legacy profile-role-only check is gone", () => {
+  test("route has no direct status write or legacy profile-role-only check", () => {
     assert.doesNotMatch(patch, /role === "admin"/);
+    assert.doesNotMatch(patch, /transitionAccountStatus\(/);
+    assert.doesNotMatch(patch, /\.update\(/);
+  });
+
+  test("missing profile is 404 with no Auth lookup or write", async () => {
+    const w = makeWorld({ profile: null, authRecord: { customClaims: {} } });
+    const res = await patchFlow(w, "inactive");
+    assert.equal(res.status, 404);
+    assert.deepEqual(w.lookups, []);
+    assert.deepEqual(w.mutations, []);
+    assert.equal(w.lease("u1"), null, "lease released");
   });
 });

@@ -27,6 +27,9 @@ function makeWorld({ profile, authDisabled, fail = {} }) {
     },
   };
   const profileRef = {
+    async get() {
+      return { exists: state.profile !== null, data: () => state.profile, updateTime: state.updateTime };
+    },
     async update(fields, precondition) {
       if (failures.profile > 0) { failures.profile -= 1; throw boom("firestore.update"); }
       if (precondition?.lastUpdateTime !== undefined && precondition.lastUpdateTime !== state.updateTime) {
@@ -277,6 +280,34 @@ describe("concurrent reactivation vs deactivation", () => {
     assert.deepEqual(access(w), DENIED);
   });
 
+  test("a duplicate reactivation preserves enabled Auth when the fresh profile is active", async () => {
+    const w = makeWorld({ profile: INACTIVE, authDisabled: true });
+    const readTime = w.state.updateTime;
+    assert.equal((await run(w, "active", { expectedUpdateTime: readTime })).ok, true);
+    const r = await run(w, "active", { expectedUpdateTime: readTime });
+    assert.equal(r.ok, true);
+    assert.equal(r.outcome, "activated");
+    assert.equal(r.httpStatus, 200);
+    assert.equal(w.state.auth.disabled, false);
+    assert.equal(w.state.auth.tokensRevokedAt, 0);
+    assert.equal(access(w).serverApiWithExistingSession, true);
+  });
+
+  test("a conflict with a missing, malformed or unreadable fresh profile still rolls Auth back", async () => {
+    for (const fresh of [null, {}, { status: "active", disabled: true }, new Error("read unavailable")]) {
+      const w = makeWorld({ profile: INACTIVE, authDisabled: true });
+      w.profileRef.get = async () => {
+        if (fresh instanceof Error) throw fresh;
+        return { exists: fresh !== null, data: () => fresh };
+      };
+      const r = await run(w, "active", { expectedUpdateTime: -1 });
+      assert.equal(r.ok, false);
+      assert.equal(r.httpStatus, 409);
+      assert.equal(w.state.auth.disabled, true);
+      assert.ok(w.state.auth.tokensRevokedAt > 0);
+    }
+  });
+
   test("reactivation with a current read succeeds", async () => {
     const w = makeWorld({ profile: INACTIVE, authDisabled: true });
     const r = await run(w, "active", { expectedUpdateTime: w.state.updateTime });
@@ -306,6 +337,19 @@ describe("verifyActiveSession (server API guard)", () => {
   test("revoked or disabled-user session is denied", async () => {
     const revoked = Object.assign(new Error("revoked"), { code: "auth/session-cookie-revoked" });
     assert.equal(await verifyActiveSession("c", { auth: authReturning(revoked), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);
+  });
+  test("known invalid, expired, disabled and missing-user errors deny credentials", async () => {
+    for (const code of ["auth/argument-error", "auth/session-cookie-expired", "auth/session-cookie-revoked", "auth/user-disabled", "auth/user-not-found"]) {
+      const error = Object.assign(new Error("invalid credential"), { code });
+      assert.equal(await verifyActiveSession("c", { auth: authReturning(error), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null, code);
+    }
+  });
+  test("Auth infrastructure and unknown failures propagate without querying profiles", async () => {
+    for (const code of ["auth/internal-error", "auth/invalid-credential", "auth/network-request-failed", "app/network-error", "auth/insufficient-permission", undefined]) {
+      const error = Object.assign(new Error("Auth unavailable"), { code });
+      const adminDb = { collection: () => assert.fail("must not query profile after Auth fails") };
+      await assert.rejects(verifyActiveSession("c", { auth: authReturning(error), adminDb }), (actual) => actual === error);
+    }
   });
   test("unverified email and missing cookie are denied", async () => {
     assert.equal(await verifyActiveSession("c", { auth: authReturning({ uid: "s1", email_verified: false }), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);

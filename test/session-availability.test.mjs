@@ -106,11 +106,21 @@ test("session GET still rejects inactive and missing profiles and clears their c
 });
 
 test("session GET rejects a revoked cookie without querying the profile", async () => {
-  state.verifyError = new Error("revoked");
+  state.verifyError = Object.assign(new Error("revoked"), { code: "auth/session-cookie-revoked" });
   const response = await GET(request());
   assert.equal(response.status, 401);
   assert.match(response.headers.get("set-cookie"), /session=;/);
   assert.equal(state.profileReads, 0);
+});
+
+test("session GET returns unavailable and preserves the cookie on Auth infrastructure errors", async () => {
+  for (const code of ["auth/internal-error", "auth/invalid-credential", "auth/network-request-failed", undefined]) {
+    state.verifyError = Object.assign(new Error("Auth unavailable"), { code });
+    const response = await GET(request());
+    assertUnavailable(response);
+    assert.equal((await response.json()).authenticated, undefined);
+    assert.equal(state.profileReads, 0);
+  }
 });
 
 test("session GET rejects missing cookies without querying Auth or Firestore", async () => {
@@ -134,6 +144,13 @@ test("admin APIs report session lookup outages as unavailable", async () => {
   assertUnavailable(guard.response);
 });
 
+test("admin APIs preserve the session and return unavailable on Auth infrastructure failure", async () => {
+  state.verifyError = Object.assign(new Error("Auth unavailable"), { code: "auth/internal-error" });
+  const guard = await adminGuard(request());
+  assert.equal(guard.ok, false);
+  assertUnavailable(guard.response);
+});
+
 test("admin APIs retain their existing missing-cookie and non-admin responses", async () => {
   assert.equal((await adminGuard(request(""))).response.status, 401);
   assert.equal((await adminGuard(request())).response.status, 403);
@@ -145,6 +162,10 @@ for (const [name, POST] of routes) {
     const response = await POST(request(), { params: Promise.resolve({ id: "attempt12345" }) });
     assertUnavailable(response);
     assert.equal((await response.json()).status, "unavailable");
+  });
+  test(`${name} returns unavailable on Auth infrastructure failure`, async () => {
+    state.verifyError = Object.assign(new Error("Auth unavailable"), { code: "auth/internal-error" });
+    assertUnavailable(await POST(request(), { params: Promise.resolve({ id: "attempt12345" }) }));
   });
   test(`${name} still denies inactive profiles`, async () => {
     state.profile = { status: "inactive", disabled: true };

@@ -18,6 +18,17 @@ export async function hasActiveProfile(adminDb, uid) {
   return snap.exists === true && isActiveProfile(snap.data());
 }
 
+// Firebase Admin's token verifier uses argument-error for malformed/signature-
+// invalid cookies, and the session/user codes below for rejected credentials.
+// Configuration, certificate-fetch, network and unknown errors must propagate.
+const INVALID_SESSION_CODES = new Set([
+  "auth/argument-error",
+  "auth/session-cookie-expired",
+  "auth/session-cookie-revoked",
+  "auth/user-disabled",
+  "auth/user-not-found",
+]);
+
 /**
  * Server-side session check used by every session-authenticated API.
  * Returns the decoded token only when ALL hold:
@@ -25,16 +36,17 @@ export async function hasActiveProfile(adminDb, uid) {
  *     tokens and disabled Auth users),
  *   - the email is verified,
  *   - users/{uid} is an active profile (same invariant as firestore.rules).
- * Invalid sessions fail closed (null). Profile lookup failures propagate so
- * callers can deny access with 503 while preserving the session cookie.
+ * Known credential errors fail closed (null). Auth infrastructure and profile
+ * lookup failures propagate so callers deny access with 503 and keep the cookie.
  */
 export async function verifyActiveSession(sessionCookie, { auth, adminDb }) {
   if (!sessionCookie) return null;
   let decoded;
   try {
     decoded = await auth.verifySessionCookie(sessionCookie, true);
-  } catch {
-    return null;
+  } catch (error) {
+    if (INVALID_SESSION_CODES.has(error?.code)) return null;
+    throw error;
   }
   if (decoded?.email_verified !== true) return null;
   if (!(await hasActiveProfile(adminDb, decoded.uid))) return null;
@@ -76,7 +88,9 @@ const defaultOpId = () =>
  *      server APIs keep denying, so this alone grants nothing.
  *   2. Firestore -> active, guarded by `expectedUpdateTime` when given, so a
  *      deactivation that landed after the caller read the profile wins.
- *   3. If step 2 fails, roll Auth back to disabled and revoke tokens issued
+ *   3. On a conflict, re-read the profile: if another reactivation already
+ *      made it active, preserve enabled Auth and return success. Otherwise,
+ *      if step 2 fails, roll Auth back to disabled and revoke tokens issued
  *      in the gap. If the rollback also fails the account is still denied
  *      everywhere that reads the profile; it is flagged for reconciliation.
  *
@@ -192,6 +206,18 @@ export async function transitionAccountStatus({
     return done(true, 200, "activated", "Account activated.");
   } catch (firestoreError) {
     const conflict = firestoreError?.code === 9 || firestoreError?.code === "failed-precondition";
+    if (conflict) {
+      try {
+        const current = await profileRef.get();
+        if (current.exists === true && isActiveProfile(current.data())) {
+          return done(true, 200, "activated", "Account activated.");
+        }
+      } catch (readError) {
+        logger.warn("[account-status] reactivate: could not re-read conflicting profile; rolling Auth back", {
+          ...context, error: errorInfo(readError),
+        });
+      }
+    }
     try {
       await auth.updateUser(uid, { disabled: true });
       await auth.revokeRefreshTokens(uid);
@@ -209,6 +235,57 @@ export async function transitionAccountStatus({
         "Reactivation did not finish. The account can sign in but still has no access. Retry to finish reactivation.");
     }
   }
+}
+
+/**
+ * True when reconciliation or the admin status route must leave an account
+ * untouched because it belongs to an administrator. Checks BOTH the Firestore profile and the authoritative
+ * Firebase Auth custom claims (requireAdmin trusts the `admin` claim), so a
+ * missing, stale or inconsistent profile role cannot expose an admin to an
+ * automated disable. Only used to skip work; it grants nothing.
+ *
+ * @param {object|null} profile     users/{uid} data
+ * @param {object|null} customClaims UserRecord.customClaims from the Admin SDK
+ */
+export function isProtectedAdminAccount(profile, customClaims) {
+  if (profile?.role === "admin") return true;
+  if (customClaims?.admin === true) return true;
+  if (customClaims?.role === "admin") return true;
+  return false;
+}
+
+/**
+ * Decides whether PATCH /api/admin/students/[id] may change this account's
+ * status. Protects administrators identified by EITHER the Firestore profile
+ * role or the authoritative Firebase Auth custom claims (see
+ * isProtectedAdminAccount), so a stale or missing profile role cannot expose a
+ * claim-admin to deactivation by another admin.
+ *
+ * Fails closed: any Auth lookup error other than auth/user-not-found blocks the
+ * change (503) and the target is never mutated. auth/user-not-found means there
+ * is no Auth record and therefore no claims; the profile role alone decides,
+ * matching scripts/reconcile-account-status.mjs. Only blocks; it grants nothing.
+ *
+ * @param {{ uid: string, profile: object|null, auth: { getUser: Function }, logger?: Console }} args
+ * @returns {Promise<{ ok: true } | { ok: false, httpStatus: number, reason: string, message: string }>}
+ */
+export async function checkAccountStatusManageable({ uid, profile, auth, logger = console }) {
+  const blockedAdmin = { ok: false, httpStatus: 403, reason: "admin", message: "Admin accounts cannot be managed here." };
+  if (isProtectedAdminAccount(profile, null)) return blockedAdmin;
+
+  let customClaims = null;
+  try {
+    const record = await auth.getUser(uid);
+    customClaims = record?.customClaims || null;
+  } catch (error) {
+    if (error?.code !== "auth/user-not-found") {
+      // Log the error code only: no message, token or personal data.
+      logger.error("[account-status] admin route: Auth lookup failed; refusing status change", { uid, code: error?.code ?? null });
+      return { ok: false, httpStatus: 503, reason: "auth_lookup_failed", message: "Could not verify this account right now. No changes were made." };
+    }
+  }
+  if (isProtectedAdminAccount(profile, customClaims)) return blockedAdmin;
+  return { ok: true };
 }
 
 /**

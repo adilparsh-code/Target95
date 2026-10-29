@@ -101,6 +101,13 @@ service cloud.firestore {
       match /practiceStatistics/{statisticsId} {
         allow read, create, update, delete: if isOwner(userId);
       }
+
+      // Server-tracked mock test attempts. Created and graded only by the
+      // Admin SDK in /api/mock-tests/attempts; students may read their own.
+      match /mockAttempts/{attemptId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow write: if false;
+      }
     }
 
     match /subjects/{subjectId} {
@@ -130,11 +137,24 @@ service cloud.firestore {
       allow update: if false;
     }
 
+    // Progress documents are self-study completion markers written by
+    // useProgress.markCompleted: { chapter, questionId, userId, completedAt }.
+    // Students may add and remove their own markers but may not write score,
+    // mark or any other field, and may not edit an existing record.
+    // Graded marks live only in /results.
+    function isCompletionMarker(data) {
+      return data.keys().hasOnly(['chapter', 'questionId', 'userId', 'completedAt'])
+        && data.keys().hasAll(['chapter', 'questionId', 'userId'])
+        && ((data.chapter is string && data.chapter.size() <= 128) || data.chapter is int)
+        && ((data.questionId is string && data.questionId.size() <= 128) || data.questionId is int)
+        && (!('completedAt' in data) || data.completedAt is string);
+    }
+
     match /progress/{progressId} {
-      allow read: if isOwner(resource.data.userId);
-      allow create: if isOwner(request.resource.data.userId);
-      allow update: if isOwner(resource.data.userId)
-        && request.resource.data.userId == resource.data.userId;
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      allow create: if isOwner(request.resource.data.userId)
+        && isCompletionMarker(request.resource.data);
+      allow update: if isAdmin();
       allow delete: if isOwner(resource.data.userId) || isAdmin();
     }
 
@@ -143,9 +163,12 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // Mock test results are written only by trusted server code
+    // (/api/mock-tests/attempts/[id]/submit) after server-side grading.
+    // No student can create or change a result, their own or anyone else's.
     match /results/{resultId} {
       allow read: if isOwner(resource.data.userId) || isAdmin();
-      allow create: if isOwner(request.resource.data.userId);
+      allow create: if false;
       allow update, delete: if isAdmin();
     }
 

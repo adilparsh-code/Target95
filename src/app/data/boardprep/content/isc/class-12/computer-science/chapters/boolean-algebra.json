@@ -1,0 +1,714 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-cs-boolean-algebra",
+  "title": "Boolean Algebra",
+  "kind": "computer-science",
+  "slug": "boolean-algebra",
+  "tagline": "Propositional logic, truth tables, Boolean laws and K-map reduction.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section A. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Boolean Algebra is the language in which computer hardware and digital logic are written. A Boolean variable can hold only one of two values, true or false, often written as 1 and 0, and Boolean operations combine these values to describe the behaviour of gates, switches and circuits. This chapter builds the topic from the ground up. It begins with the idea of a proposition and a well-formed Boolean expression, then shows how to test any expression with a truth table. After that it collects the basic laws and theorems that make simplification possible, including De Morgan's theorems, and then it turns those laws into a practical method for reducing expressions. Finally it introduces the two standard forms, sum of products and product of sums, and the minterm and maxterm representations that make those forms precise, and then it teaches Karnaugh maps as a visual way to reduce expressions up to four variables without losing any condition.",
+    "facts": [
+      { "label": "Syllabus section", "value": "Section A of the 2027 ISC Class XII Computer Science syllabus" },
+      { "label": "Exam year", "value": "2027" },
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "What the syllabus asks for", "value": "Propositional logic and well-formed formulae, truth tables, Boolean laws and theorems including De Morgan's, SOP and POS, minterms and maxterms, canonical and cardinal forms, K-map reduction up to four variables." }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain what a proposition is and decide whether a given expression is a well-formed Boolean expression.",
+    "Construct a truth table for any Boolean expression with two or three variables and use it to decide whether two expressions are equivalent.",
+    "State and apply the basic Boolean laws and theorems, including identity, null, idempotent, complement, commutative, associative and distributive laws.",
+    "State and apply De Morgan's theorems and use them to transform expressions and gate circuits.",
+    "Convert a Boolean expression into sum of products form and product of sums form.",
+    "Identify minterms and maxterms from a truth table and write a function in canonical sum of minterms form.",
+    "Reduce a Boolean expression using Boolean algebra step by step, justifying each step by naming the law used.",
+    "Draw and read a Karnaugh map for two, three and four variables, form prime implicants, and use the map to obtain a minimal sum of products expression."
+  ],
+  "learn": [
+    {
+      "id": "what-is-a-proposition",
+      "title": "Propositions and well-formed Boolean expressions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A proposition is a declarative statement that is either true or false, but not both. 'The switch is on' is a proposition because on any given occasion it has a definite truth value. 'What time is it?' is not a proposition because it is a question, and 'x is large' is not a proposition until we know what x is and what we mean by large. In Boolean Algebra we usually name propositions with letters such as P, Q and R, and we assign them the value 1 when they are true and 0 when they are false."
+        },
+        {
+          "type": "paragraph",
+          "text": "Boolean operations combine propositions. The three basic operations are AND, OR and NOT. The AND of P and Q is true only when both P and Q are true. The OR of P and Q is true when at least one of them is true; in the Boolean OR, also called the inclusive OR, the result is true when both are true as well. The NOT of P is true when P is false and false when P is true."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A proposition has a definite truth value, true or false.",
+            "The basic operations are AND, OR and NOT, often written as P AND Q, P OR Q, and NOT P, or symbolically as PQ, P + Q, and P'.",
+            "A well-formed Boolean expression is built from variables and the operations in legal combinations, with brackets used to remove ambiguity.",
+            "An expression such as P AND Q OR R is ambiguous unless brackets state the intended order, so (P AND Q) OR R and P AND (Q OR R) are different expressions."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three basic operations on propositions P and Q",
+          "columns": ["Operation", "Meaning", "True when"],
+          "rows": [
+            ["AND (P AND Q)", "Both must be true", "P is true and Q is true"],
+            ["OR (P OR Q)", "At least one is true", "P is true, or Q is true, or both"],
+            ["NOT (NOT P)", "The opposite of P", "P is false"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Most boards accept several notations for the same idea, and a good answer states the notation it is using at the start. The common choices are the word forms AND, OR and NOT, the symbolic forms dot, plus and prime, and circuit notation with gate symbols. Whatever notation is chosen, the meaning must be stated clearly and used consistently."
+        }
+      ]
+    },
+    {
+      "id": "truth-tables",
+      "title": "Truth tables",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A truth table lists every possible combination of truth values for the variables in an expression and gives the value of the whole expression for each combination. For a single variable there are two rows, for two variables there are four, and for three variables there are eight. In general, an expression with n variables has 2 to the power n rows. Building the table row by row is the safest way to reason about Boolean expressions, especially in examination questions where a small missing row can cost a mark."
+        },
+        {
+          "type": "paragraph",
+          "text": "The standard way to fill a truth table for two or three variables is to count in binary. For two variables, P and Q, the rows are 00, 01, 10, 11. For three variables, P, Q and R, the rows are 000, 001, 010, 011, 100, 101, 110, 111. The last column is then evaluated step by step, computing each sub-expression before combining them."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Build the truth table for P AND Q.",
+              "note": "Rows: (P,Q) = (0,0), (0,1), (1,0), (1,1). P AND Q is 1 only in the last row. So the column is 0, 0, 0, 1."
+            },
+            {
+              "text": "Build the truth table for P OR Q.",
+              "note": "Rows: (0,0), (0,1), (1,0), (1,1). P OR Q is 0 only in the first row. So the column is 0, 1, 1, 1."
+            },
+            {
+              "text": "Build the truth table for NOT P.",
+              "note": "One variable, two rows: P = 0 gives NOT P = 1; P = 1 gives NOT P = 0. The column is 1, 0."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Truth tables are also used to prove equivalence. Two expressions are equivalent when they have exactly the same truth values in every row. To prove an identity such as P OR (Q AND R) = (P OR Q) AND (P OR R), build the table for both sides and compare the final columns. If they match in every row, the identity is proved for all truth values. If they differ in even one row, the expressions are not equivalent."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Truth table", "meaning": "A table listing all combinations of truth values for the variables and the resulting value of the expression." },
+            { "term": "Row", "meaning": "One combination of truth values for the variables in the table." },
+            { "term": "Equivalent expressions", "meaning": "Two expressions that have identical columns in a complete truth table." },
+            { "term": "Determinate row", "meaning": "A row in which the whole expression can be evaluated without guessing." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boolean-laws-and-theorems",
+      "title": "Boolean laws and theorems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Boolean Algebra has a small set of fundamental laws that hold for every expression. Once these are known, most simplification is just a matter of applying them in the right order and stating the law used at each step. In an examination answer the working should say which law justifies each line, because the marks are often given for the justification as much as for the final expression."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Identity laws: P AND 1 = P and P OR 0 = P.",
+              "note": "ANDing with 1 changes nothing; ORing with 0 changes nothing. These are the Boolean analogues of multiplying by 1 and adding 0 in ordinary algebra, but note that the neutral elements are different: 1 for AND and 0 for OR."
+            },
+            {
+              "text": "Null laws: P AND 0 = 0 and P OR 1 = 1.",
+              "note": "ANDing with 0 always gives 0; ORing with 1 always gives 1."
+            },
+            {
+              "text": "Idempotent laws: P AND P = P and P OR P = P.",
+              "note": "Repeating the same variable with the same operation changes nothing. This is different from ordinary algebra, where P x P = P squared."
+            },
+            {
+              "text": "Complement laws: P AND (NOT P) = 0 and P OR (NOT P) = 1.",
+              "note": "A variable and its complement cannot both be true and cannot both be false at the same time; AND gives 0 and OR gives 1."
+            },
+            {
+              "text": "Involution law: NOT (NOT P) = P.",
+              "note": "Negating twice returns to the original value."
+            },
+            {
+              "text": "Commutative laws: P AND Q = Q AND P and P OR Q = Q OR P.",
+              "note": "The order of the operands does not matter for AND or OR."
+            },
+            {
+              "text": "Associative laws: (P AND Q) AND R = P AND (Q AND R) and the same for OR.",
+              "note": "When only ANDs or only ORs are involved, brackets can be moved or removed."
+            },
+            {
+              "text": "Distributive law: P AND (Q OR R) = (P AND Q) OR (P AND R), and also P OR (Q AND R) = (P OR Q) AND (P OR R).",
+              "note": "Boolean Algebra is distributive in both directions, unlike ordinary algebra where multiplication distributes over addition but not the reverse."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The most useful simplification laws beyond the basics are the absorption laws and the redundant literal laws. Absorption says that P OR (P AND Q) = P and P AND (P OR Q) = P. The redundant literal law says that P OR (NOT P AND Q) = P OR Q; this is very common in examination simplifications because it removes a term that contains a variable and its complement together with another literal."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Simplify P OR (NOT P AND Q).",
+              "note": "By the redundant literal law this equals P OR Q. One way to see it: when P is true the whole expression is true; when P is false, only the Q part can make it true, so the result is P OR Q."
+            },
+            {
+              "text": "Simplify (P AND Q) OR (P AND NOT Q).",
+              "note": "Factor out P: P AND (Q OR NOT Q). Since Q OR NOT Q = 1, this becomes P AND 1 = P."
+            },
+            {
+              "text": "Simplify P OR (P AND Q).",
+              "note": "By absorption this is simply P. The extra AND Q term is redundant."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "de-morgans-theorems",
+      "title": "De Morgan's theorems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "De Morgan's theorems are two identities that tell how NOT behaves when it is applied to a compound expression. They are among the most frequently tested results in the syllabus because they are used both in algebraic simplification and in converting circuits to use only one kind of gate."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "De Morgan's first theorem: NOT (P AND Q) = (NOT P) OR (NOT Q).",
+              "note": "The negation of an AND becomes the OR of the negations. A common mistake is to write NOT P AND NOT Q without the brackets; the correct statement is (NOT P) OR (NOT Q)."
+            },
+            {
+              "text": "De Morgan's second theorem: NOT (P OR Q) = (NOT P) AND (NOT Q).",
+              "note": "The negation of an OR becomes the AND of the negations."
+            },
+            {
+              "text": "Verify De Morgan's first theorem with a truth table.",
+              "note": "For each row, compute NOT (P AND Q) and also compute (NOT P) OR (NOT Q). The two columns are identical in every row: 1, 1, 1, 0. That proves the theorem."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "De Morgan's theorems extend to more than two variables by repeated application. For three variables, NOT (P AND Q AND R) = (NOT P) OR (NOT Q) OR (NOT R), and similarly for OR. In practice the theorem is applied to the largest sub-expression that is negated, one step at a time."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Apply De Morgan's theorem to NOT (A AND (B OR C)).",
+              "note": "Treat A AND (B OR C) as a single negated expression. First step: (NOT A) OR NOT (B OR C). Then apply De Morgan's second theorem to the remaining negation: NOT (B OR C) = (NOT B) AND (NOT C). Final result: (NOT A) OR ((NOT B) AND (NOT C))."
+            },
+            {
+              "text": "Simplify NOT (NOT P OR Q).",
+              "note": "By De Morgan's second theorem this becomes (NOT (NOT P)) AND (NOT Q), which by the involution law becomes P AND (NOT Q)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sop-pos-minterms-maxterms",
+      "title": "Sum of products, product of sums, minterms and maxterms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two standard forms are used to write Boolean functions in a canonical way. Sum of products, SOP, is an OR of AND terms, where each AND term is a product of variables or their complements. Product of sums, POS, is an AND of OR terms, where each OR term is a sum of variables or their complements. These forms matter because they connect directly to truth tables and to hardware implementation."
+        },
+        {
+          "type": "paragraph",
+          "text": "A minterm is a product term in which every variable appears exactly once, either in its true form or its complemented form. For two variables, P and Q, the minterms are P Q, P NOT Q, NOT P Q, and NOT P NOT Q. Each minterm is true in exactly one row of the truth table. A canonical sum of minterms is simply the OR of the minterms for the rows where the function is true."
+        },
+        {
+          "type": "paragraph",
+          "text": "A maxterm is an OR term in which every variable appears exactly once, either true or complemented. For two variables, the maxterms are P + Q, P + NOT Q, NOT P + Q, and NOT P + NOT Q. Each maxterm is false in exactly one row of the truth table. A canonical product of maxterms is the AND of the maxterms for the rows where the function is false."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Write the canonical SOP for a function F(P, Q) that is true when P=0, Q=0 and when P=1, Q=1.",
+              "note": "The true rows are (0,0) and (1,1). The minterms are NOT P AND NOT Q and P AND Q. Canonical SOP: F = (NOT P AND NOT Q) OR (P AND Q)."
+            },
+            {
+              "text": "Write the canonical POS for a function F(P, Q) that is false when P=0, Q=1.",
+              "note": "The false row is (0,1). The maxterm for this row is P OR NOT Q. Canonical POS: F = (P OR NOT Q)."
+            },
+            {
+              "text": "Convert the truth table row P=1, Q=0, R=0 into the corresponding minterm and maxterm.",
+              "note": "Minterm: P AND NOT Q AND NOT R. Maxterm: NOT P OR Q OR R. The minterm is true exactly for this row; the maxterm is false exactly for this row."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Two-variable minterms and maxterms",
+          "columns": ["P", "Q", "Minterm (true here)", "Maxterm (false here)"],
+          "rows": [
+            ["0", "0", "NOT P AND NOT Q", "P OR Q"],
+            ["0", "1", "NOT P AND Q", "P OR NOT Q"],
+            ["1", "0", "P AND NOT Q", "NOT P OR Q"],
+            ["1", "1", "P AND Q", "NOT P OR NOT Q"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reduction-with-boolean-algebra",
+      "title": "Reduction using Boolean algebra",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reduction means rewriting a Boolean expression into a simpler equivalent one. Simpler usually means fewer operators and fewer literals, which in hardware means fewer gates and inputs. The method is to apply the laws and theorems one step at a time, naming the law at each step, until no further simplification is possible. A good simplification lists the law used on each line, because that is what shows the reasoning."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Reduce P OR (P AND Q).",
+              "note": "P OR (P AND Q) = P by absorption. Alternatively, P OR (P AND Q) = P AND 1 OR P AND Q = P AND (1 OR Q) = P AND 1 = P."
+            },
+            {
+              "text": "Reduce (P AND Q) OR (P AND NOT Q) OR (NOT P AND Q).",
+              "note": "Group the first two: P AND (Q OR NOT Q) = P AND 1 = P. Then P OR (NOT P AND Q) = P OR Q by the redundant literal law. Final result: P OR Q."
+            },
+            {
+              "text": "Reduce NOT (NOT P AND Q) OR (P AND Q).",
+              "note": "Apply De Morgan's first theorem: NOT (NOT P AND Q) = P OR NOT Q. Then (P OR NOT Q) OR (P AND Q) = P OR (NOT Q OR (P AND Q)). Since P OR (P AND Q) = P and P OR NOT Q already covers the case when P is true, simplify to P OR NOT Q."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "When reducing, the simplest final form is not always obvious. A practical strategy is to remove double negations first, then apply De Morgan's to push negations inward, then factor common literals, then apply absorption and the redundant literal law. If the expression does not become clearly simpler, stop and check the truth table for both forms to confirm they are equivalent."
+        }
+      ]
+    },
+    {
+      "id": "karnaugh-maps",
+      "title": "Karnaugh maps up to four variables",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A Karnaugh map, or K-map, is a rearrangement of the truth table into a grid where adjacent cells differ in only one variable. This layout makes it easy to spot groups of ones that can be combined, and combining is what produces a simpler expression. The map is a tool for visual reduction, and it is especially useful for up to four variables, which is the limit set by the syllabus."
+        },
+        {
+          "type": "paragraph",
+          "text": "For two variables, the K-map has four cells arranged so that the rows and columns follow Gray code order, meaning that neighbouring cells differ in only one variable. For three variables, the map is usually drawn as two rows of four cells, with the rows representing one variable and the columns representing the other two in Gray code order 00, 01, 11, 10. For four variables, the map is a 4 by 4 grid in which both rows and columns follow Gray code order."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Draw the K-map for F(P, Q) = P OR Q.",
+              "note": "The truth table has ones in the rows (0,1), (1,0) and (1,1), and a zero in (0,0). In the 2-variable map the ones occupy three cells. The largest group of two covers the (1,0) and (1,1) cells, giving the term P, and the remaining one at (0,1) combines with the (1,1) cell to give Q. Minimal SOP: P OR Q."
+            },
+            {
+              "text": "Draw the K-map for F(P, Q, R) = P AND (Q OR R).",
+              "note": "First expand: P AND (Q OR R) = (P AND Q) OR (P AND R). The ones are in the cells where P=1 and Q=1, and where P=1 and R=1. Group the ones that are adjacent in the 3-variable map. The minimal expression is (P AND Q) OR (P AND R), which is also P AND (Q OR R)."
+            },
+            {
+              "text": "Plot F(A, B, C, D) = 1 for the minterm numbers 0, 4, 5, 12, 13 and reduce.",
+              "note": "Place a 1 in each of those cells of the 4-variable map. Group the ones into the largest possible rectangular groups of 1, 2, 4 or 8 cells. A group of four in the A=0, C=0 column and a group of four in the A=1, C=0 column give NOT C for the first and C for the second, depending on labelling; the exact minimal result depends on the variable ordering chosen. Always write the map with a stated variable order."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Group ones into rectangles of size 1, 2, 4, 8 or 16 cells; the number of cells in a group must be a power of two.",
+            "Each group should be as large as possible, and every one in the map must be covered by at least one group.",
+            "Groups may overlap; overlapping is allowed and often necessary.",
+            "Wrap-around grouping is allowed: the leftmost and rightmost columns are adjacent, and the top and bottom rows are adjacent.",
+            "Each group produces one product term by noting which variables stay constant across the group.",
+            "A group of one cell gives a full minterm; a group of two removes one variable; a group of four removes two; a group of eight removes three."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The variables that stay constant across a group are the ones that appear in the product term that group represents. If a variable is 0 throughout the group it appears complemented; if it is 1 throughout the group it appears uncomplemented; if it changes within the group it does not appear at all. The minimal SOP expression is the OR of the product terms from the essential and chosen groups."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Explain how a group of four in a 3-variable map produces a single literal.",
+              "note": "If the four cells all have P = 1 and Q and R vary within the group, then the term is simply P. The variables that change do not appear in the result."
+            },
+            {
+              "text": "Explain the common mistake of grouping non-power-of-two cells.",
+              "note": "A group of three cells is not valid. Valid groups are 1, 2, 4, 8, 16. If a group of three seems to fit, it actually means one of the ones is covered by a smaller group and another group is needed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exam-focussed-simplification",
+      "title": "Exam-focused simplification and common mistakes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Examination questions on Boolean Algebra usually test one of three things: constructing and reading a truth table, simplifying an expression with laws and theorems, or reducing a function with a K-map. A safe answer does the following: states the notation being used, draws the truth table or K-map carefully, shows the algebraic steps with the law named at each step, and then checks the result against the original with a quick truth table or with a second grouping on the map."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Literal", "meaning": "A variable or its complement, such as P or NOT P." },
+            { "term": "Product term", "meaning": "An AND of literals, such as P AND NOT Q." },
+            { "term": "Sum term", "meaning": "An OR of literals, such as P OR NOT Q." },
+            { "term": "Prime implicant", "meaning": "A maximal group of ones on a K-map that cannot be enlarged." },
+            { "term": "Essential prime implicant", "meaning": "A prime implicant that covers at least one one that no other group covers." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Always write the variable ordering on a K-map before plotting.",
+            "Do not confuse a minterm, which is true in one row, with a maxterm, which is false in one row.",
+            "Do not drop brackets when applying De Morgan's; the theorem changes an AND into an OR or vice versa, and the brackets tell you what is negated.",
+            "Do not claim an expression is simplified until you have checked that no law applies further.",
+            "When asked to prove an identity, a truth table is often faster and safer than algebra, but algebra is usually required too, so show both if time allows."
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A Boolean variable takes only two values, true and false, written as 1 and 0.",
+    "The three basic operations are AND, OR and NOT; brackets are essential to remove ambiguity.",
+    "A truth table lists all combinations of truth values and is the safest way to evaluate or prove equivalence of expressions.",
+    "The basic laws are identity, null, idempotent, complement, involution, commutative, associative and distributive.",
+    "De Morgan's theorems turn a negated AND into an OR of negations, and a negated OR into an AND of negations; brackets matter.",
+    "Absorption and the redundant literal law remove whole redundant terms: P OR (P AND Q) = P and P OR (NOT P AND Q) = P OR Q.",
+    "SOP is an OR of AND terms; POS is an AND of OR terms.",
+    "A minterm contains every variable once and is true in exactly one row; a maxterm contains every variable once and is false in exactly one row.",
+    "Canonical SOP is the OR of the minterms for the true rows; canonical POS is the AND of the maxterms for the false rows.",
+    "A K-map is a truth table drawn in Gray-code order so that adjacent cells differ in one variable; groups must be powers of two and may wrap around.",
+    "Each K-map group gives a term by keeping only the variables that stay constant across the group.",
+    "In an exam, name the law used at each simplification step and verify the result against the original expression."
+  ],
+  "examFocus": [
+    "Build a complete truth table for a two- or three-variable expression and use it to prove or disprove an identity.",
+    "Simplify an expression step by step using Boolean laws, naming each law used.",
+    "Apply De Morgan's theorems correctly, especially with brackets around negated sub-expressions.",
+    "Write a function in canonical SOP and canonical POS form from a truth table.",
+    "Map a function on a 2-, 3- or 4-variable K-map and obtain a minimal SOP expression.",
+    "Explain why a group must have size 1, 2, 4, 8 or 16 and why wrap-around groups are valid.",
+    "Use the complement and absorption laws to remove redundant literals.",
+    "State the connection between minterms, maxterms and the rows of a truth table."
+  ],
+  "vocabulary": [
+    { "word": "proposition", "meaning": "A statement that is either true or false." },
+    { "word": "Boolean variable", "meaning": "A variable whose value is either true or false, usually written as 1 or 0." },
+    { "word": "AND", "meaning": "The operation that is true only when both inputs are true." },
+    { "word": "OR", "meaning": "The inclusive operation that is true when at least one input is true." },
+    { "word": "NOT", "meaning": "The operation that inverts the truth value of its input." },
+    { "word": "well-formed expression", "meaning": "A Boolean expression built with variables and operations in a legally bracketed way." },
+    { "word": "literal", "meaning": "A variable or its complement, such as P or NOT P." },
+    { "word": "truth table", "meaning": "A table of all truth-value combinations and the resulting value of the expression." },
+    { "word": "minterm", "meaning": "A product of all variables, true in exactly one row of the truth table." },
+    { "word": "maxterm", "meaning": "A sum of all variables, false in exactly one row of the truth table." },
+    { "word": "sum of products (SOP)", "meaning": "An OR of AND terms." },
+    { "word": "product of sums (POS)", "meaning": "An AND of OR terms." },
+    { "word": "canonical form", "meaning": "A standard, fully expanded representation such as a sum of all true-row minterms." },
+    { "word": "Karnaugh map", "meaning": "A truth table arranged in Gray-code order so that adjacent cells can be grouped to simplify an expression." },
+    { "word": "prime implicant", "meaning": "A maximal group of ones on a K-map." },
+    { "word": "De Morgan's theorems", "meaning": "The two rules for distributing a negation over an AND or an OR." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-ba-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A proposition is best described as a statement that is:",
+      "options": [
+        "A) either true or false but not both",
+        "B) always true",
+        "C) always false",
+        "D) either a question or a command"
+      ],
+      "correctIndex": 0,
+      "answer": "A) either true or false but not both",
+      "explanation": "A proposition is a declarative statement that is either true or false, but not both. Questions and commands are not propositions."
+    },
+    {
+      "id": "isc-12-cs-ba-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The NOT of a true proposition is:",
+      "options": [
+        "A) true",
+        "B) false",
+        "C) both true and false",
+        "D) undefined"
+      ],
+      "correctIndex": 1,
+      "answer": "B) false",
+      "explanation": "NOT inverts the truth value, so a true proposition becomes false and a false one becomes true."
+    },
+    {
+      "id": "isc-12-cs-ba-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "P AND Q is true only when:",
+      "options": [
+        "A) P is true and Q is false",
+        "B) P is false and Q is true",
+        "C) both P and Q are true",
+        "D) at least one of P and Q is true"
+      ],
+      "correctIndex": 2,
+      "answer": "C) both P and Q are true",
+      "explanation": "AND is true only when both operands are true; it is false if either operand is false."
+    },
+    {
+      "id": "isc-12-cs-ba-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "P OR Q is false only when:",
+      "options": [
+        "A) both P and Q are false",
+        "B) P is true and Q is false",
+        "C) P is false and Q is true",
+        "D) both P and Q are true"
+      ],
+      "correctIndex": 0,
+      "answer": "A) both P and Q are false",
+      "explanation": "The Boolean OR is false only when both operands are false; in every other case it is true."
+    },
+    {
+      "id": "isc-12-cs-ba-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which law states that P AND (Q OR R) = (P AND Q) OR (P AND R)?",
+      "options": [
+        "A) Commutative law",
+        "B) Associative law",
+        "C) Distributive law",
+        "D) Complement law"
+      ],
+      "correctIndex": 2,
+      "answer": "C) Distributive law",
+      "explanation": "This is the distributive law for AND over OR. Boolean Algebra also distributes OR over AND, unlike ordinary algebra."
+    },
+    {
+      "id": "isc-12-cs-ba-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "De Morgan's first theorem states that NOT (P AND Q) equals:",
+      "options": [
+        "A) NOT P AND NOT Q",
+        "B) NOT P OR NOT Q",
+        "C) P OR Q",
+        "D) NOT P AND Q"
+      ],
+      "correctIndex": 1,
+      "answer": "B) NOT P OR NOT Q",
+      "explanation": "De Morgan's first theorem says the negation of an AND is the OR of the negations: NOT (P AND Q) = (NOT P) OR (NOT Q). Brackets matter."
+    },
+    {
+      "id": "isc-12-cs-ba-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a 3-variable Karnaugh map, the columns are usually ordered in Gray code as:",
+      "options": [
+        "A) 00, 01, 10, 11",
+        "B) 00, 01, 11, 10",
+        "C) 00, 10, 01, 11",
+        "D) 00, 11, 01, 10"
+      ],
+      "correctIndex": 1,
+      "answer": "B) 00, 01, 11, 10",
+      "explanation": "Gray-code order means adjacent cells differ in only one variable. For three variables the column order is commonly 00, 01, 11, 10."
+    },
+    {
+      "id": "isc-12-cs-ba-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A valid Karnaugh-map group must contain how many cells?",
+      "options": [
+        "A) only 1 or 2",
+        "B) only 4",
+        "C) 1, 2, 4, 8 or 16",
+        "D) any number up to 16"
+      ],
+      "correctIndex": 2,
+      "answer": "C) 1, 2, 4, 8 or 16",
+      "explanation": "Each group must be a power of two in size. Groups of 3 or 5 are not valid."
+    },
+    {
+      "id": "isc-12-cs-ba-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A group of four ones in a 3-variable K-map produces a product term containing how many literals?",
+      "options": [
+        "A) three",
+        "B) two",
+        "C) one",
+        "D) zero is impossible"
+      ],
+      "correctIndex": 2,
+      "answer": "C) one",
+      "explanation": "A group of four removes two variables, so the resulting term contains a single literal: the variable that stays constant across the group."
+    },
+    {
+      "id": "isc-12-cs-ba-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which expression is equivalent to P OR (NOT P AND Q)?",
+      "options": [
+        "A) P AND Q",
+        "B) P OR Q",
+        "C) NOT P OR Q",
+        "D) P AND NOT Q"
+      ],
+      "correctIndex": 1,
+      "answer": "B) P OR Q",
+      "explanation": "By the redundant literal law, P OR (NOT P AND Q) = P OR Q. When P is true the result is true; when P is false, Q decides."
+    },
+    {
+      "id": "isc-12-cs-ba-q-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A minterm is a product term that is true in exactly one blank of the truth table.",
+      "answer": "row",
+      "explanation": "Each minterm is true in exactly one row of the truth table."
+    },
+    {
+      "id": "isc-12-cs-ba-q-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A maxterm is a sum term that is false in exactly one blank of the truth table.",
+      "answer": "row",
+      "explanation": "Each maxterm is false in exactly one row of the truth table."
+    },
+    {
+      "id": "isc-12-cs-ba-q-13",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "The canonical sum of products for a function is the OR of the blank for the rows where the function is true.",
+      "answer": "minterms",
+      "explanation": "Canonical SOP is the OR of the minterms that correspond to the true rows."
+    },
+    {
+      "id": "isc-12-cs-ba-q-14",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "The canonical product of sums for a function is the AND of the blank for the rows where the function is false.",
+      "answer": "maxterms",
+      "explanation": "Canonical POS is the AND of the maxterms that correspond to the false rows."
+    },
+    {
+      "id": "isc-12-cs-ba-q-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "State the idempotent law for AND and explain why it is different from ordinary algebra.",
+      "answer": "The idempotent law for AND is P AND P = P. In ordinary algebra, P x P = P squared, so repeating a variable changes it; in Boolean Algebra repeating the same variable with the same operation does not change it.",
+      "explanation": "The mark is for stating the law correctly and for explaining that ordinary algebra squares the variable while Boolean Algebra does not."
+    },
+    {
+      "id": "isc-12-cs-ba-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "State the complement laws and give one example for each.",
+      "answer": "The complement laws are P AND (NOT P) = 0 and P OR (NOT P) = 1. Examples: if P is true then P AND NOT P is false, so 0; if P is false then P OR NOT P is true, so 1.",
+      "explanation": "The mark is for stating both laws and giving a sensible example or brief justification for each."
+    },
+    {
+      "id": "isc-12-cs-ba-q-17",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "State De Morgan's second theorem and use a truth table to verify it.",
+      "answer": "De Morgan's second theorem is NOT (P OR Q) = (NOT P) AND (NOT Q). The truth table has rows (0,0), (0,1), (1,0), (1,1). For each row, NOT (P OR Q) and (NOT P) AND (NOT Q) give the same result: 1, 0, 0, 0.",
+      "explanation": "The mark is for stating the theorem correctly and for showing a complete truth table with matching columns."
+    },
+    {
+      "id": "isc-12-cs-ba-q-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Draw the Karnaugh map for F(P, Q) = P OR Q, group the ones, and write the minimal sum of products expression. Explain each group you use.",
+      "answer": "The truth table has ones in (0,1), (1,0) and (1,1). On the 2-variable map these form a group of two covering (1,0) and (1,1), giving P, and a group of two covering (0,1) and (1,1), giving Q. Minimal SOP: P OR Q. The first group keeps P constant at 1; the second keeps Q constant at 1.",
+      "explanation": "The mark is for the correct map, valid groups, the correct terms for each group, and a brief explanation of which variable stays constant in each group."
+    },
+    {
+      "id": "isc-12-cs-ba-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Reduce the expression (P AND Q) OR (P AND NOT Q) OR (NOT P AND Q) using Boolean algebra, showing each step and the law used.",
+      "answer": "Step 1: (P AND Q) OR (P AND NOT Q) = P AND (Q OR NOT Q) by the distributive law. Step 2: Q OR NOT Q = 1 by the complement law, so this becomes P AND 1. Step 3: P AND 1 = P by the identity law. Step 4: the whole expression becomes P OR (NOT P AND Q). Step 5: by the redundant literal law, P OR (NOT P AND Q) = P OR Q.",
+      "explanation": "The mark is for a correct sequence of steps, each with the correct law named, ending in P OR Q."
+    },
+    {
+      "id": "isc-12-cs-ba-q-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A student simplifies P OR (NOT P AND Q) to P AND Q and claims the result is simpler. Identify the error, prove the correct result, and explain how you would check it.",
+      "answer": "The error is that the student dropped the OR incorrectly. The correct result is P OR Q, proved by the redundant literal law or by a truth table. To check, build the truth table for both P OR (NOT P AND Q) and P OR Q and confirm the columns match; or test a case such as P=false, Q=true, where the original is true but P AND Q is false.",
+      "explanation": "The mark is for identifying the error, giving the correct result, and showing a concrete check."
+    },
+    {
+      "id": "isc-12-cs-ba-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "A circuit computes F = NOT (A AND (B OR C)). Rewrite F using De Morgan's theorems so that the only negations are on single variables, then write it in sum of products form.",
+      "answer": "Apply De Morgan's first theorem: NOT (A AND (B OR C)) = NOT A OR NOT (B OR C). Then apply De Morgan's second theorem: NOT (B OR C) = NOT B AND NOT C. So F = NOT A OR (NOT B AND NOT C). In SOP form this is (NOT A) OR (NOT B AND NOT C).",
+      "explanation": "The mark is for the correct two-step application of De Morgan's and for the final SOP form, with negation only on single variables."
+    },
+    {
+      "id": "isc-12-cs-ba-q-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "Find the canonical sum of minterms for F(P, Q) where F is true when P is false or when both P and Q are true. Write the result in canonical SOP.",
+      "answer": "The true rows are (P,Q) = (0,0), (0,1) and (1,1). Their minterms are NOT P AND NOT Q, NOT P AND Q, and P AND Q. Canonical SOP: (NOT P AND NOT Q) OR (NOT P AND Q) OR (P AND Q).",
+      "explanation": "The mark is for identifying the correct true rows and writing the correct minterms for each."
+    },
+    {
+      "id": "isc-12-cs-ba-q-23",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Plot F(A, B, C) = A OR (B AND C) on a 3-variable Karnaugh map, group the ones, and write the minimal SOP expression. Show the map layout you used.",
+      "answer": "The truth table has ones wherever A=1, plus the row where A=0, B=1, C=1. On a 3-variable map the ones form a group of four where A=1, giving A, and a remaining one at (0,1,1) that pairs with the (1,1,1) cell to give B AND C. Minimal SOP: A OR (B AND C).",
+      "explanation": "The mark is for the correct plot, a valid group of four and a correct single-cell or two-cell group, and the correct final expression with a brief justification."
+    }
+  ]
+}

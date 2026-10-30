@@ -1,0 +1,674 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-cs-java-arrays-strings",
+  "title": "Arrays (Single and Double Dimensional) and String Handling",
+  "kind": "computer-science",
+  "slug": "java-arrays-strings",
+  "tagline": "1-D and 2-D arrays, matrix processing, searching and sorting on arrays, and Java String handling.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Arrays and strings are the workhorse data structures of Java programming at this level. An array is a fixed-size collection of values of the same type, stored together so that each element can be reached by its index. A string is an object that represents text, and Java treats it as immutable, which has important consequences for how string methods work. This chapter develops both topics from the ground up. It begins with single-dimensional arrays: how to declare them, how to create them, how to traverse them safely, and how to use them for simple tasks such as totals, searches and sorts. It then moves to two-dimensional arrays and matrix processing, showing row and column traversal and common matrix operations. After that it turns to string handling, covering the important methods and the immutability of String, and then it brings the two together with array-based searching and sorting. One point is made explicit throughout: in the 2027 syllabus, searching and sorting techniques are applied to single-dimensional arrays, so the chapter keeps that boundary clear.",
+    "facts": [
+      { "label": "Syllabus section", "value": "Section B (Java) of the 2027 ISC Class XII Computer Science syllabus" },
+      { "label": "Exam year", "value": "2027" },
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "Key syllabus boundary", "value": "Searching and sorting techniques are applied to single-dimensional arrays in the 2027 syllabus." }
+    ]
+  },
+  "learningOutcomes": [
+    "Declare, create and access single-dimensional arrays in Java, and explain why index 0 is the first element.",
+    "Traverse a single-dimensional array safely using the correct loop bounds, and explain the meaning of ArrayIndexOutOfBoundsException.",
+    "Perform common array operations such as summing elements, finding a value, and finding the largest or second-largest distinct value.",
+    "Explain linear search and binary search, including the prerequisite for binary search and its worst-case complexity.",
+    "Explain bubble sort and selection sort as single-dimensional array sorting techniques and state their worst-case time complexity.",
+    "Declare, create and traverse a two-dimensional rectangular array, and perform row sums, column sums, diagonal sums, transpose and searching for a value.",
+    "Explain that String objects are immutable and describe the effect of methods such as substring, replace and toUpperCase.",
+    "Use important String methods including length, charAt, substring, indexOf, toUpperCase, toLowerCase, equals and trim.",
+    "Avoid the common mistake of using == to compare String content."
+  ],
+  "learn": [
+    {
+      "id": "single-dimensional-arrays",
+      "title": "Single-dimensional arrays",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A single-dimensional array is a fixed-size sequence of values of the same type. It is created with a given length, and that length cannot change later. Each element is accessed by an integer index that runs from 0 to length minus 1. Because the first element is at index 0, the last element is at index length minus 1. Accessing any index outside that range throws ArrayIndexOutOfBoundsException at runtime, which is the error the examination most often tests when it wants to know whether a student understands array bounds."
+        },
+        {
+          "type": "paragraph",
+          "text": "An array is declared with its type and square brackets, and it is created with new and a length. For example, int[] a = new int[5] creates an array of five integers. Until values are assigned, the elements of an int array are 0, the elements of a boolean array are false, and the elements of a reference array are null. This default initialisation is useful to know, because it means an array always has a defined value in every position from the moment it is created."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Declare and create an array of five integers and print its length.",
+              "note": "int[] a = new int[5]; System.out.println(a.length); prints 5. The length is fixed from creation."
+            },
+            {
+              "text": "Assign values by index and print the third element.",
+              "note": "a[0] = 10; a[1] = 20; a[2] = 30; System.out.println(a[2]); prints 30. Remember that a[2] is the third element."
+            },
+            {
+              "text": "Create and initialise an array with an array initializer.",
+              "note": "int[] b = {3, 7, 2, 9}; declares, creates and initialises the array in one step. Its length is 4."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Array indices run from 0 to length - 1.",
+            "The last valid index is length - 1, not length.",
+            "Accessing index length or beyond throws ArrayIndexOutOfBoundsException.",
+            "An array’s length is fixed after creation.",
+            "int arrays are initialised to 0 by default."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "array", "meaning": "A fixed-size ordered collection of values of the same type." },
+            { "term": "index", "meaning": "The integer position of an element in an array, starting at 0." },
+            { "term": "length", "meaning": "The number of elements an array can hold, fixed from creation." },
+            { "term": "element", "meaning": "One value stored in an array at a particular index." },
+            { "term": "ArrayIndexOutOfBoundsException", "meaning": "The runtime exception thrown when an invalid array index is accessed." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traversing-and-basic-operations",
+      "title": "Traversing and basic operations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Traversing an array means visiting every element in turn. The safe and common way to do this is a loop with the condition i < a.length. This visits indices 0 through length - 1 exactly once and never tries the invalid index length. A loop with i <= a.length would visit one position too far and throw an exception on the last iteration. This small difference between i < a.length and i <= a.length is one of the most common bounds mistakes, and the examination often tests it."
+        },
+        {
+          "type": "paragraph",
+          "text": "Once traversal is correct, many simple operations follow the same pattern: visit every element, and maintain a running result. A sum keeps a running total, a maximum keeps a running largest value, and a count keeps a running total of matches. A search keeps a running answer until it finds the target, and a second-largest search keeps two distinct values. The key idea is that the loop body decides what to do with the current element, and the loop visits every element exactly once."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Visit every element of int[] a and print each value.",
+              "note": "for (int i = 0; i < a.length; i++) System.out.println(a[i]);. The condition i < a.length ensures the last valid index is visited."
+            },
+            {
+              "text": "Find the sum of all elements in an array.",
+              "note": "static int sum(int[] a) { int s = 0; for (int i = 0; i < a.length; i++) s += a[i]; return s; }. The loop visits every element and accumulates the total."
+            },
+            {
+              "text": "Find the second-largest distinct value in an array.",
+              "note": "Scan once while maintaining the largest and second-largest distinct values. If a new value is larger than the largest, shift the largest into second-largest and update the largest. If it is smaller than the largest but larger than the second-largest, update only the second-largest. Handle arrays with fewer than two distinct values explicitly."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Use i < a.length to visit every element safely.",
+            "Do not use i <= a.length; that visits one invalid index.",
+            "When tracking a maximum, handle the first element or initialise carefully.",
+            "When tracking a second-largest distinct value, distinguish duplicates from smaller values.",
+            "A search that fails should return a clearly documented not-found value such as -1."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "searching",
+      "title": "Searching",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Searching means looking for a particular value in an array. Linear search is the simplest method: it checks each element in order until it finds the target or reaches the end. Linear search works on any array, sorted or unsorted, and its worst-case time is proportional to the number of elements, written as O(n). In the worst case the target is not present, and every element is checked."
+        },
+        {
+          "type": "paragraph",
+          "text": "Binary search is faster but only works on a sorted array. It keeps two pointers, low and high, and examines the middle element. If the middle element is the target, the search is done. If the target is smaller, the search continues in the lower half; if larger, in the upper half. Each step halves the range, so the worst-case time is O(log n). The important prerequisite is that the array is sorted in the correct order before binary search begins. Trying binary search on an unsorted array gives wrong results, not merely slow ones."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Linear search for a key in an int array.",
+              "note": "static int linearSearch(int[] a, int key) { for (int i = 0; i < a.length; i++) if (a[i] == key) return i; return -1; }. Returns the index of the first match or -1."
+            },
+            {
+              "text": "Binary search on a sorted int array, returning the index or -1.",
+              "note": "static int binarySearch(int[] a, int key) { int low = 0, high = a.length - 1; while (low <= high) { int mid = (low + high) / 2; if (a[mid] == key) return mid; if (key < a[mid]) high = mid - 1; else low = mid + 1; } return -1; }. Worst case O(log n)."
+            },
+            {
+              "text": "Why binary search cannot be used on an unsorted array.",
+              "note": "Binary search assumes that if the target is smaller than the middle, it must be in the left half. That assumption is only true when the array is sorted. On an unsorted array the conclusion can be wrong."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Linear search works on any array and checks elements one by one.",
+            "Binary search requires a sorted array.",
+            "Binary search is faster than linear search on large sorted arrays.",
+            "Binary search compares the target to the middle element and halves the range.",
+            "The worst case for linear search is O(n); for binary search it is O(log n)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sorting",
+      "title": "Sorting",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sorting means arranging the elements of an array into order. The two sorting techniques most often discussed at this level are bubble sort and selection sort. Both are simple and both are O(n squared) in their worst case, which means their running time grows with the square of the number of elements. They are not the fastest sorting methods for large arrays, but they are important because they are easy to reason about and are frequently used in examination tracing questions."
+        },
+        {
+          "type": "paragraph",
+          "text": "Bubble sort works by comparing adjacent elements and swapping them if they are out of order. One full pass through the array moves the largest remaining value to its correct final position at the end. A second pass then handles the rest, and so on. After a full pass, the largest value seen so far is at the end. Selection sort works differently: it finds the smallest value in the unsorted part and swaps it into the front. Each pass places one more element in its final position."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "One full pass of bubble sort on [4, 1, 3, 2].",
+              "note": "Compare 4 and 1, swap to [1, 4, 3, 2]; compare 4 and 3, swap to [1, 3, 4, 2]; compare 4 and 2, swap to [1, 3, 2, 4]. After the pass the largest value 4 is at the end."
+            },
+            {
+              "text": "Bubble sort on an int array.",
+              "note": "static void bubbleSort(int[] a) { for (int i = 0; i < a.length - 1; i++) for (int j = 0; j < a.length - 1 - i; j++) if (a[j] > a[j + 1]) { int t = a[j]; a[j] = a[j + 1]; a[j + 1] = t; } }. Worst case O(n squared)."
+            },
+            {
+              "text": "Selection sort idea.",
+              "note": "For each position i, find the smallest value from i to the end and swap it into position i. Each pass places one more element correctly."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Bubble sort compares adjacent elements and swaps them if out of order.",
+            "After one full pass of bubble sort, the largest value is at the end.",
+            "Selection sort finds the minimum of the unsorted part and places it at the front.",
+            "Both bubble sort and selection sort are O(n squared) in the worst case.",
+            "Sorting is about arranging elements into ascending or descending order."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "two-dimensional-arrays",
+      "title": "Two-dimensional arrays",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A two-dimensional array is an array of arrays. It is useful for representing tables, matrices, boards and similar structured data. For a rectangular two-dimensional int array a, a.length is the number of rows, and a[i].length is the number of columns in row i. Traversing a two-dimensional array means using nested loops: the outer loop runs over rows, and the inner loop runs over columns within each row. The visit order is row by row."
+        },
+        {
+          "type": "paragraph",
+          "text": "Many matrix operations are simple extensions of array traversal. A row sum adds all the elements in one row; a column sum adds all the elements in one column; a diagonal sum adds the elements where row and column index are equal; and a transpose swaps the row and column indices, turning a[i][j] into a[j][i] for a square matrix. Searching for a value in a two-dimensional array means traversing all rows and columns until the value is found or the whole matrix has been examined."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Traverse a 3 by 2 array and list every (i, j) pair visited.",
+              "note": "For int[][] a = {{1,2},{3,4},{5,6}}, nested loops with i < a.length and j < a[i].length visit (0,0), (0,1), (1,0), (1,1), (2,0), (2,1)."
+            },
+            {
+              "text": "Print the element at row 1, column 0.",
+              "note": "a[1][0] is 3. Remember that the first index is the row and the second is the column."
+            },
+            {
+              "text": "Transpose a square matrix in place.",
+              "note": "for (int i = 0; i < n; i++) for (int j = i + 1; j < n; j++) { int t = a[i][j]; a[i][j] = a[j][i]; a[j][i] = t; }. This swaps a[i][j] and a[j][i] for each pair above the diagonal."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A 2-D array is an array of arrays.",
+            "a.length is the number of rows; a[i].length is the number of columns in row i.",
+            "Traverse with nested loops: outer over rows, inner over columns.",
+            "Visit order is row by row.",
+            "Row sum, column sum, diagonal sum and transpose are common matrix operations."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "string-handling",
+      "title": "String handling",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A String in Java is an object that represents text. The most important thing to know about String is that it is immutable, which means that once a String object is created, its characters cannot be changed. Methods such as substring, replace and toUpperCase do not modify the original string; they return a new String. This has two practical consequences. First, any method that seems to change a string is actually creating a new one. Second, comparing strings with == compares references, not content, so the correct way to compare two strings character by character is to use the equals method."
+        },
+        {
+          "type": "paragraph",
+          "text": "The important String methods to know are length, which returns the number of characters; charAt, which returns the character at a given index; substring, which returns a part of the string; indexOf, which finds the first position of a character or substring; toUpperCase and toLowerCase, which return a new string in the chosen case; equals, which compares content; equalsIgnoreCase, which compares content ignoring case; and trim, which removes leading and trailing whitespace. The substring method uses a start index and an end index, and the end index is not included, which is a frequent source of off-by-one mistakes."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Extract a substring.",
+              "note": "String s = \"COMPUTER\"; System.out.println(s.substring(2, 6)); prints MPUT, because substring(2, 6) takes indices 2, 3, 4 and 5."
+            },
+            {
+              "text": "Find a character position.",
+              "note": "String s = \"COMPUTER\"; System.out.println(s.indexOf(\"P\")); prints 3, because the first P is at index 3."
+            },
+            {
+              "text": "Compare two strings correctly.",
+              "note": "If s1 and s2 contain the same characters, s1 == s2 may still be false because they are different objects. Use s1.equals(s2) to compare content."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "String objects are immutable; methods return new strings.",
+            "substring(start, end) includes start but excludes end.",
+            "Use equals, not ==, to compare string content.",
+            "charAt(i) returns the character at index i.",
+            "indexOf finds the first occurrence of a character or substring."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combining-arrays-and-strings",
+      "title": "Combining arrays and strings",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Arrays and strings are often used together. A common task is to process the characters of a string as if they were an array, either by using charAt in a loop or by working with the string’s length. Another common task is to build a new string from an array of values, or to break a problem into an array and then process it with a string method. The same bounds discipline applies: when a loop walks through a string by index, the last valid index is length minus 1."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Count vowels in a string, case-insensitively.",
+              "note": "Convert to lowercase, iterate with charAt, and count characters that are a, e, i, o or u."
+            },
+            {
+              "text": "Reverse a string by building a new string from the end.",
+              "note": "static String reverse(String s) { String r = \"\"; for (int i = s.length() - 1; i >= 0; i--) r += s.charAt(i); return r; }. This visits indices from length - 1 down to 0."
+            },
+            {
+              "text": "A string reversal that uses the wrong bounds.",
+              "note": "A loop that starts at s.length() and tries s.charAt(s.length()) throws StringIndexOutOfBoundsException. The last valid index is length - 1."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Strings and arrays both use index 0 for the first element or character.",
+            "A string’s last valid index is length - 1.",
+            "Building a new string in a loop is acceptable for small cases.",
+            "Comparing two string-built values should use equals, not ==.",
+            "Character-by-character processing uses charAt and length."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-and-exam-traps",
+      "title": "Common mistakes and exam traps",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Array and string questions in the examination often test attention to bounds and to the difference between reference and content. The most frequent traps are using i <= a.length instead of i < a.length, using i < a.length - 1 when the loop should visit the last element, using == to compare strings, using substring(end) when substring(start, end) is needed, and forgetting that substring’s end index is excluded. Another common trap is applying binary search to an unsorted array and assuming the result is correct."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Use i < a.length for a full traversal.",
+            "Do not use == to compare string content.",
+            "Remember that substring(start, end) excludes end.",
+            "Remember that binary search requires a sorted array.",
+            "Remember that an invalid array or string index throws an exception at runtime.",
+            "Trace small examples with explicit index values before answering."
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A single-dimensional array has a fixed length and is accessed by an index from 0 to length - 1.",
+    "The last valid index is length - 1, and accessing index length throws ArrayIndexOutOfBoundsException.",
+    "A full traversal uses i < a.length so that every valid index is visited exactly once.",
+    "Linear search checks elements one by one and works on any array; its worst case is O(n).",
+    "Binary search requires a sorted array and halves the range each step; its worst case is O(log n).",
+    "Bubble sort and selection sort are simple O(n squared) single-dimensional sorting techniques.",
+    "Bubble sort compares adjacent elements and moves the largest value to the end each pass.",
+    "A two-dimensional array is an array of arrays; a.length is the number of rows and a[i].length is the number of columns in row i.",
+    "Two-dimensional arrays are traversed with nested loops, row by row.",
+    "String objects are immutable; methods such as substring, replace and toUpperCase return new strings.",
+    "Use equals, not ==, to compare string content.",
+    "substring(start, end) includes start but excludes end.",
+    "In the 2027 syllabus, searching and sorting techniques are applied to single-dimensional arrays."
+  ],
+  "examFocus": [
+    "Declare, create and access single-dimensional arrays, and explain the meaning of length and index 0.",
+    "Traverse a single-dimensional array with correct bounds and explain ArrayIndexOutOfBoundsException.",
+    "Perform common array operations: sum, search, maximum and second-largest distinct value.",
+    "Explain linear search and binary search, including the prerequisite for binary search and its complexity.",
+    "Explain bubble sort and selection sort and state their worst-case time complexity.",
+    "Explain why binary search cannot be used on an unsorted array.",
+    "Traverse a two-dimensional array and perform row sum, column sum, diagonal sum or transpose.",
+    "Explain String immutability and use important String methods correctly.",
+    "Use substring, charAt, indexOf, toUpperCase, toLowerCase, equals and trim appropriately.",
+    "Compare strings with equals, not with ==.",
+    "State the 2027 syllabus boundary: searching and sorting techniques on single-dimensional arrays."
+  ],
+  "vocabulary": [
+    { "word": "array", "meaning": "A fixed-size ordered collection of values of the same type." },
+    { "word": "index", "meaning": "The integer position of an element, starting at 0." },
+    { "word": "length", "meaning": "The number of elements an array can hold, fixed from creation." },
+    { "word": "element", "meaning": "One value stored in an array at a particular index." },
+    { "word": "traversal", "meaning": "Visiting each element of a collection in turn." },
+    { "word": "linear search", "meaning": "Searching by checking each element in order until a match is found or the array ends." },
+    { "word": "binary search", "meaning": "A faster search that works on a sorted array by halving the range of possible positions." },
+    { "word": "bubble sort", "meaning": "A sorting method that compares adjacent elements and swaps them if out of order." },
+    { "word": "selection sort", "meaning": "A sorting method that repeatedly selects the smallest remaining element and places it in position." },
+    { "word": "two-dimensional array", "meaning": "An array of arrays, often used for matrices or tables." },
+    { "word": "row", "meaning": "A horizontal line of elements in a two-dimensional array." },
+    { "word": "column", "meaning": "A vertical line of elements in a two-dimensional array." },
+    { "word": "String", "meaning": "An immutable object representing text in Java." },
+    { "word": "immutable", "meaning": "Cannot be changed after it is created; methods return new objects instead." },
+    { "word": "substring", "meaning": "A contiguous part of a string, specified by a start and end index." },
+    { "word": "equals", "meaning": "The method that compares the content of two strings." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The first element of an array a is accessed as:",
+      "options": [
+        "A) a[1]",
+        "B) a[0]",
+        "C) a.length",
+        "D) a[-1]"
+      ],
+      "correctIndex": 1,
+      "answer": "B) a[0]",
+      "explanation": "Array indices start at 0, so the first element is a[0]."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The last valid index of an array of length n is:",
+      "options": [
+        "A) n",
+        "B) n + 1",
+        "C) n - 1",
+        "D) n / 2"
+      ],
+      "correctIndex": 2,
+      "answer": "C) n - 1",
+      "explanation": "Java array indices start at 0, so the last valid index is n - 1."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which exception is thrown when an invalid array index is accessed at runtime?",
+      "options": [
+        "A) IOException",
+        "B) ArithmeticException",
+        "C) ArrayIndexOutOfBoundsException",
+        "D) NullPointerException"
+      ],
+      "correctIndex": 2,
+      "answer": "C) ArrayIndexOutOfBoundsException",
+      "explanation": "Java throws ArrayIndexOutOfBoundsException for an invalid array index."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which loop condition visits every element of int[] a exactly once?",
+      "options": [
+        "A) i <= a.length",
+        "B) i < a.length",
+        "C) i < a.length - 1",
+        "D) i == a.length"
+      ],
+      "correctIndex": 1,
+      "answer": "B) i < a.length",
+      "explanation": "Valid indices are 0 through a.length - 1, so i < a.length visits them all."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which search method works on an unsorted array?",
+      "options": [
+        "A) Binary search only",
+        "B) Linear search only",
+        "C) Both linear search and binary search",
+        "D) Neither"
+      ],
+      "correctIndex": 1,
+      "answer": "B) Linear search only",
+      "explanation": "Linear search does not require sorting; binary search requires a sorted array."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Binary search requires that the array is:",
+      "options": [
+        "A) of int type only",
+        "B) sorted in the correct order",
+        "C) of even length",
+        "D) containing no duplicates"
+      ],
+      "correctIndex": 1,
+      "answer": "B) sorted in the correct order",
+      "explanation": "Binary search assumes order; without it the halving step can be wrong."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "What is the worst-case time complexity of linear search?",
+      "options": [
+        "A) O(1)",
+        "B) O(log n)",
+        "C) O(n)",
+        "D) O(n^2)"
+      ],
+      "correctIndex": 2,
+      "answer": "C) O(n)",
+      "explanation": "In the worst case, linear search checks every element once."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "What is the worst-case time complexity of binary search?",
+      "options": [
+        "A) O(1)",
+        "B) O(log n)",
+        "C) O(n)",
+        "D) O(n^2)"
+      ],
+      "correctIndex": 1,
+      "answer": "B) O(log n)",
+      "explanation": "Each step halves the search range, so the worst case is O(log n)."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "One full pass of bubble sort on [4, 1, 3, 2] leaves the array as:",
+      "options": [
+        "A) [1, 3, 2, 4]",
+        "B) [1, 4, 3, 2]",
+        "C) [4, 1, 3, 2]",
+        "D) [1, 2, 3, 4]"
+      ],
+      "correctIndex": 0,
+      "answer": "A) [1, 3, 2, 4]",
+      "explanation": "After one pass the largest value 4 is at the end: [1, 3, 2, 4]."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "The worst-case time complexity of bubble sort is:",
+      "options": [
+        "A) O(n)",
+        "B) O(log n)",
+        "C) O(n^2)",
+        "D) O(1)"
+      ],
+      "correctIndex": 2,
+      "answer": "C) O(n^2)",
+      "explanation": "Bubble sort compares pairs across nested passes, giving O(n^2) in the worst case."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The number of elements an array can hold is called its blank.",
+      "answer": "length",
+      "explanation": "The length is the fixed number of elements the array can hold."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The integer that identifies the position of an element in an array is called its blank.",
+      "answer": "index",
+      "explanation": "An index identifies the position of an element in an array."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-13",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "To visit every element of an array a, the correct loop condition is i < a.blank.",
+      "answer": "length",
+      "explanation": "i < a.length visits every valid index exactly once."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-14",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A blank array is an array of arrays, often used for matrices.",
+      "answer": "two-dimensional",
+      "explanation": "A two-dimensional array is an array of arrays."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain why i < a.length is used instead of i <= a.length when traversing an array.",
+      "answer": "The valid indices are 0 through a.length - 1. The condition i < a.length visits every valid index exactly once and stops before the invalid index a.length. The condition i <= a.length would try to access a[a.length], which is out of bounds.",
+      "explanation": "The mark is for linking the condition to the valid index range."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain the difference between linear search and binary search.",
+      "answer": "Linear search checks each element in order and works on any array; its worst case is O(n). Binary search works only on a sorted array, compares the target to the middle element, and halves the range each step; its worst case is O(log n).",
+      "explanation": "The mark is for contrasting the two methods, their prerequisites and their complexity."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-17",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain why binary search cannot be used on an unsorted array.",
+      "answer": "Binary search assumes that if the target is smaller than the middle element it must be in the left half, and if it is larger it must be in the right half. That assumption is only true when the array is sorted. On an unsorted array the conclusion can be wrong, so the result is not reliable.",
+      "explanation": "The mark is for explaining that the halving assumption depends on order."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Write bubble sort for an int array and state its worst-case time complexity.",
+      "answer": "static void bubbleSort(int[] a) { for (int i = 0; i < a.length - 1; i++) for (int j = 0; j < a.length - 1 - i; j++) if (a[j] > a[j + 1]) { int t = a[j]; a[j] = a[j + 1]; a[j + 1] = t; } } Worst-case time complexity: O(n^2).",
+      "explanation": "The mark is for correct code and the correct complexity."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Write a method to find the second-largest distinct value in an integer array. Explain how it handles duplicates.",
+      "answer": "static int secondLargest(int[] a) { int largest = Integer.MIN_VALUE, second = Integer.MIN_VALUE; for (int v : a) { if (v > largest) { second = largest; largest = v; } else if (v < largest && v > second) { second = v; } } if (second == Integer.MIN_VALUE) return -1; return second; } Duplicates of the largest value do not change the second-largest because they are not less than the largest.",
+      "explanation": "The mark is for correct logic and a clear explanation of duplicate handling."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Trace one full pass of bubble sort on [4, 1, 3, 2] and show the array after that pass.",
+      "answer": "Compare 4 and 1, swap to [1, 4, 3, 2]; compare 4 and 3, swap to [1, 3, 4, 2]; compare 4 and 2, swap to [1, 3, 2, 4]. After the pass the array is [1, 3, 2, 4] and the largest value 4 is at the end.",
+      "explanation": "The mark is for a correct step-by-step trace and the final array."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain why using == to compare two String objects that hold the same text may give false.",
+      "answer": "== compares references, not content. Two different String objects can contain the same characters but be distinct objects, so == may be false even when the text is identical. equals compares content, so it correctly returns true when the strings have the same characters.",
+      "explanation": "The mark is for distinguishing reference comparison from content comparison."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "What does substring(2, 6) return for the string COMPUTER? Explain how the end index is used.",
+      "answer": "It returns MPUT. substring(2, 6) takes the characters at indices 2, 3, 4 and 5 and excludes index 6. COMPUTER has P at index 3, U at 4, T at 5, so the result is MPUT.",
+      "explanation": "The mark is for the correct result and the correct explanation of the excluded end index."
+    },
+    {
+      "id": "isc-12-cs-java-arrays-strings-q-23",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Describe a two-dimensional array in Java. Explain how a.length and a[i].length differ, and show how to traverse it.",
+      "answer": "A two-dimensional array is an array of arrays. a.length gives the number of rows. a[i].length gives the number of columns in row i, which may differ from row to row in a non-rectangular array. To traverse it, use nested loops: for (int i = 0; i < a.length; i++) for (int j = 0; j < a[i].length; j++) { /* process a[i][j] */ }.",
+      "explanation": "The mark is for the definition, the distinction between a.length and a[i].length, and the correct nested traversal."
+    }
+  ]
+}

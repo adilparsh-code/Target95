@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-cs-inheritance-interface",
+  "title": "Inheritance, Interfaces and Polymorphism",
+  "kind": "computer-science",
+  "slug": "inheritance-interface",
+  "tagline": "Inheritance, overriding, dynamic dispatch and interfaces in Java.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Inheritance is the idea that one class can be built from another, so that the new class begins with the members of the existing class and then adds or changes them. It is one of the central ideas of object-oriented programming, because it lets a program model a family of related things without repeating the common parts. This chapter covers the main inheritance ideas used in the 2027 syllabus: how a subclass inherits accessible members, how constructor execution works, how method overriding differs from overloading, how dynamic method dispatch chooses the actual method at runtime, and how interfaces let a class promise behaviour independently of its position in the class hierarchy. A recurring theme is the difference between what the compiler can see from the reference type and what actually happens at runtime from the object type, because that distinction is the source of many of the examination’s tracing and debugging questions.",
+    "facts": [
+      { "label": "Syllabus section", "value": "Section C of the 2027 ISC Class XII Computer Science syllabus" },
+      { "label": "Exam year", "value": "2027" },
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "What the syllabus asks for", "value": "Inheritance, interfaces and polymorphism, including overriding, dynamic method dispatch, and the distinction between overloading and overriding." }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain what inheritance is and which members a subclass inherits from its superclass.",
+    "State the order in which constructors execute in a class hierarchy and explain why that order occurs.",
+    "Override a method correctly so that it has the same signature as the inherited method.",
+    "Explain the difference between overloading and overriding with examples.",
+    "Describe dynamic method dispatch and predict which method runs when a superclass reference holds a subclass object.",
+    "Explain why a subclass-only method cannot be called through a superclass reference.",
+    "Declare and implement an interface, and explain why a class can implement many interfaces but extend only one class.",
+    "Use super to call a superclass constructor or method, and explain why super(...) must be the first statement in a constructor."
+  ],
+  "learn": [
+    {
+      "id": "what-inheritance-is",
+      "title": "What inheritance is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Inheritance is a relationship between two classes in which one class, the subclass, is a specialised version of another class, the superclass. The subclass inherits the accessible members of the superclass, so it starts with them and can use them as if it had written them itself. It may also add new fields and methods, and it may replace the implementation of an inherited method with its own version. The result is that related classes share common behaviour while still being able to differ where they need to."
+        },
+        {
+          "type": "paragraph",
+          "text": "A subclass is declared with the extends keyword. For example, class Dog extends Animal says that Dog is a kind of Animal and should inherit everything accessible from Animal. A subclass can have only one direct superclass, so Java does not allow a class to extend two classes at the same time. It can, however, implement several interfaces, which is how multiple kinds of behaviour can be added without multiple inheritance of classes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Inheritance models an is-a relationship: a Dog is an Animal.",
+            "A subclass inherits accessible members from its superclass.",
+            "A subclass can add new members, and it can override inherited methods.",
+            "A class can extend only one class.",
+            "A class can implement multiple interfaces."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "superclass", "meaning": "The class being extended; also called the parent class." },
+            { "term": "subclass", "meaning": "The class that extends another; also called the child class." },
+            { "term": "inheritance", "meaning": "The mechanism by which one class acquires the accessible members of another." },
+            { "term": "is-a relationship", "meaning": "A relationship in which one kind of object is a special kind of another." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inherited-members-and-access",
+      "title": "Inherited members and access",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A subclass inherits accessible members from its superclass. In practice this means members that are public or protected, and members with package access if the two classes are in the same package. A subclass does not inherit private members in the sense of being able to use them directly, though it may still access them indirectly through inherited or overridden methods that the superclass provides. The important examination point is that inheritance gives a subclass access to the common interface and behaviour of its superclass, but not to its private internal details."
+        },
+        {
+          "type": "paragraph",
+          "text": "A superclass reference can refer to a subclass object. That is legal because a Dog is an Animal, so wherever an Animal is expected, a Dog can be used. But the reference type limits what the compiler can check. Through an Animal reference, only members declared in Animal or its superclasses are accessible at compile time, even if the actual object is a Dog with extra methods. To call a Dog-only method through an Animal reference, you must first cast the reference to Dog, and only if the object really is a Dog."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A superclass reference holding a subclass object.",
+              "note": "Animal a = new Dog(); is legal because a Dog is an Animal. The reference type is Animal, but the object is a Dog."
+            },
+            {
+              "text": "Calling a subclass-only method through a superclass reference.",
+              "note": "a.fetch() causes a compile-time error if fetch() is declared only in Dog, because the compiler looks at the Animal type and does not see fetch(). Use ((Dog) a).fetch() only if a really refers to a Dog."
+            },
+            {
+              "text": "Accessing an inherited method through a superclass reference.",
+              "note": "If Dog overrides sound() from Animal, then a.sound() calls the overridden version even though the reference type is Animal."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A subclass inherits accessible members from its superclass.",
+            "A superclass reference can refer to a subclass object.",
+            "Compile-time member access is checked against the reference type.",
+            "Runtime method choice for overridden methods uses the actual object type.",
+            "Casting is needed to call a subclass-only member through a superclass reference."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "method-overriding",
+      "title": "Method overriding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Overriding happens when a subclass provides its own implementation of a method that it inherits from its superclass. For overriding to occur, the subclass method must have the same name, the same parameter list and a compatible return type as the inherited method. If any of those differs, the result is not overriding: a different parameter list creates overloading, and a different return type alone is not a valid overload either. Overriding is about replacing one specific inherited behaviour with another."
+        },
+        {
+          "type": "paragraph",
+          "text": "The point of overriding is that the subclass can change what happens when the inherited method is called. For example, Animal might provide a generic sound method, and Dog might override it to print Woof. The signature stays the same so that code written for Animal still compiles, but the behaviour can be specialised. This is what makes polymorphism work: code can be written for the common superclass interface, and yet the actual object can provide its own version."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A simple override.",
+              "note": "class Animal { void sound() { System.out.println(\"Generic sound\"); } } class Dog extends Animal { void sound() { System.out.println(\"Woof\"); } }. Dog.sound() overrides Animal.sound() because the signature is the same."
+            },
+            {
+              "text": "A method that looks like an override but is not.",
+              "note": "If Dog has a method with the same name but a different parameter list, it overloads, not overrides, the inherited method. For example, a method sound(String location) is not an override of sound()."
+            },
+            {
+              "text": "Changing only the return type is not enough to override.",
+              "note": "Two methods with the same name and same parameter list but different return types are not a valid override or overload. The signature must match."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Overriding requires the same name, same parameter list and a compatible return type.",
+            "Changing the parameter list creates overloading, not overriding.",
+            "Changing only the return type does not create a valid override.",
+            "Overriding replaces the inherited behaviour in the subclass.",
+            "The signature must match the inherited method for overriding to occur."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "overloading-versus-overriding",
+      "title": "Overloading versus overriding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Overloading and overriding are often confused because both involve methods with the same name, but they are fundamentally different. Overloading is about having several methods with the same name but different parameter lists, usually in the same class. The compiler decides which version to call from the arguments supplied. Overriding is about a subclass replacing an inherited method with one that has the same signature. The choice of which version runs is then made at runtime based on the actual object type."
+        },
+        {
+          "type": "paragraph",
+          "text": "The easiest way to distinguish them is to ask two questions. First, are the methods in a superclass-subclass relationship? If not, the question is probably about overloading. Second, do the methods have exactly the same parameter list? If yes, and one is in a subclass, the question is about overriding. If the parameter lists differ, it is overloading. The return type is not the deciding factor: two methods with the same name and same parameters but different return types are not a valid pair at all."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Overloading example.",
+              "note": "class Calculator { int add(int a, int b) { return a + b; } double add(double a, double b) { return a + b; } }. Same name, different parameter types: overloading."
+            },
+            {
+              "text": "Overriding example.",
+              "note": "class Animal { void sound() { ... } } class Dog extends Animal { void sound() { ... } }. Same signature in a subclass: overriding."
+            },
+            {
+              "text": "A student claims that adding a parameter creates overriding.",
+              "note": "That claim is false. Adding a parameter creates overloading, because the signatures differ."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Overloading: same name, different parameter lists.",
+            "Overriding: same name, same parameter list, in a subclass.",
+            "Overloading is resolved at compile time from the arguments.",
+            "Overriding is resolved at runtime from the actual object type.",
+            "Return type alone does not distinguish overloaded or overridden methods."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynamic-method-dispatch",
+      "title": "Dynamic method dispatch",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Dynamic method dispatch is the rule that determines which implementation of an overridden method runs at runtime. When a method is called through a superclass reference, the compiler checks that the method exists in the superclass. But at runtime the actual object type is used to choose the implementation. If the object is a Dog and Dog overrides sound, then a.sound() runs Dog’s version even though the reference type is Animal. This is why the same statement can produce different behaviour depending on what object it refers to."
+        },
+        {
+          "type": "paragraph",
+          "text": "The rule is simple but powerful. Compile-time checks use the reference type, so the compiler only guarantees that the method exists in the superclass. Runtime dispatch uses the object type, so the overridden version in the subclass is called when the object really is a subclass instance. This is also why a subclass-only method is not accessible through a superclass reference: the compiler only knows about the superclass members, and there is no overriding relationship for a method that only exists in the subclass."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Dynamic dispatch in action.",
+              "note": "Animal a = new Dog(); a.sound(); prints the Dog version if Dog overrides sound(). The reference is Animal, but the object is Dog, so the Dog version runs."
+            },
+            {
+              "text": "Why a superclass reference cannot call a subclass-only method.",
+              "note": "Animal a = new Dog(); a.fetch(); fails at compile time if fetch() is not in Animal. The compiler sees only the Animal type."
+            },
+            {
+              "text": "A cast makes the subclass method accessible.",
+              "note": "((Dog) a).fetch() compiles if a really refers to a Dog. If it does not, a ClassCastException can occur at runtime."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Overridden methods are called based on the actual object type at runtime.",
+            "Compile-time checks use the reference type.",
+            "A superclass reference can call overridden methods of a subclass object.",
+            "A subclass-only method is not accessible through a superclass reference without a cast.",
+            "Dynamic dispatch is what makes polymorphism useful."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constructors-and-super",
+      "title": "Constructors and super",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a subclass object is created, the superclass constructor always runs before the subclass constructor body executes. That is because the inherited part of the object must be initialised before the subclass adds its own initialisation. If the subclass constructor does not explicitly call a superclass constructor with super(...), the compiler inserts a call to the no-argument superclass constructor. If that constructor does not exist, the program does not compile. So a common compile-time error in inheritance is a subclass constructor that fails to call the right superclass constructor."
+        },
+        {
+          "type": "paragraph",
+          "text": "The super keyword has two common uses. super(...) calls a superclass constructor, and it must be the first statement in the subclass constructor. super.method(...) calls an overridden method from the superclass, which is useful when the subclass wants to extend rather than completely replace the inherited behaviour. These two uses are different: one calls a constructor, the other calls a method."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Constructor order in a simple hierarchy.",
+              "note": "class A { A() { System.out.println(\"A\"); } } class B extends A { B() { System.out.println(\"B\"); } } new B(); prints A then B. The superclass constructor runs first."
+            },
+            {
+              "text": "A subclass constructor that needs a superclass constructor with a parameter.",
+              "note": "If A has only A(int n), then B() must call super(someValue) as its first statement. Without that, the compiler tries to insert super() and fails."
+            },
+            {
+              "text": "Calling an overridden method from the subclass.",
+              "note": "B can call the inherited version with super.method(...). That is useful when B wants to add to the superclass behaviour rather than replace it."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The superclass constructor runs before the subclass constructor body.",
+            "If no explicit super(...) call is written, the compiler inserts super().",
+            "super(...) must be the first statement in a constructor.",
+            "super.method(...) calls the overridden version of a method.",
+            "A missing or mismatched superclass constructor causes a compile-time error."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interfaces",
+      "title": "Interfaces",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An interface is a contract that declares methods a class must provide. It describes what a class can do, without specifying in detail how it does it. A class implements an interface by providing a body for every method the interface declares, unless the class is abstract. Interfaces are useful when several unrelated classes need to support the same behaviour, because a class can implement many interfaces even though it can extend only one class."
+        },
+        {
+          "type": "paragraph",
+          "text": "An interface method is implemented by the class that implements the interface. The interface itself declares the method signature, and each implementing class supplies the body. This makes interfaces a way to say that different kinds of objects share a behaviour, even if they are not related by inheritance. For example, both Circle and Rectangle can implement Drawable, and then they can be stored together in a Drawable array and drawn through the same interface."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A simple interface and two implementations.",
+              "note": "interface Printable { void print(); } class Circle implements Printable { public void print() { ... } } class Rectangle implements Printable { public void print() { ... } }. Both provide print()."
+            },
+            {
+              "text": "Using an interface reference.",
+              "note": "Printable[] items = { new Circle(), new Rectangle() }; for (Printable p : items) p.print(); Each object’s print() runs by dynamic dispatch."
+            },
+            {
+              "text": "A class implementing several interfaces.",
+              "note": "A class can implement Printable and Serializable at the same time. This is possible because interfaces are not limited to single inheritance."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An interface declares method signatures that implementing classes must provide.",
+            "A class implements an interface with the implements keyword.",
+            "A class can implement multiple interfaces.",
+            "A class can extend only one class.",
+            "Interface references allow polymorphic use of unrelated classes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-and-exam-traps",
+      "title": "Common mistakes and exam traps",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Inheritance and polymorphism questions often test whether a student can tell the difference between reference type and object type, and between overriding and overloading. The most frequent traps are calling a subclass-only method through a superclass reference, thinking that changing only the return type creates overriding, forgetting that super(...) must be first in a constructor, and assuming that a superclass reference can always access every member of the actual object. Another common trap is confusing dynamic dispatch with overloading, because both involve multiple methods with similar names."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Compile-time access is checked against the reference type, not the object type.",
+            "Overriding requires the same signature, not just the same name.",
+            "super(...) must be the first statement in a constructor.",
+            "A subclass can implement many interfaces, but extend only one class.",
+            "Dynamic dispatch chooses the actual object’s method for overridden methods.",
+            "Casting a reference does not change the object; it changes how the compiler sees the reference."
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Inheritance lets one class acquire the accessible members of another class.",
+    "A subclass extends a superclass with extends and can add or override members.",
+    "A class can extend only one class, but can implement many interfaces.",
+    "A superclass reference can refer to a subclass object.",
+    "Compile-time member access is checked against the reference type.",
+    "Overriding requires the same name, same parameter list and compatible return type.",
+    "Overloading requires the same name with different parameter lists.",
+    "Overriding and overloading are different: override by signature, overload by parameter list.",
+    "Dynamic method dispatch chooses the overridden method based on the object type at runtime.",
+    "A subclass-only method cannot be called through a superclass reference without a cast.",
+    "The superclass constructor runs before the subclass constructor body.",
+    "super(...) must be the first statement in a constructor; super.method(...) calls an overridden method."
+  ],
+  "examFocus": [
+    "Explain what inheritance is and which members are inherited.",
+    "State the order of constructor execution in a class hierarchy and explain why.",
+    "Override a method correctly with the same signature.",
+    "Distinguish overloading from overriding with examples.",
+    "Predict which method runs when a superclass reference holds a subclass object.",
+    "Explain why a subclass-only method cannot be called through a superclass reference.",
+    "Declare and implement an interface and explain why a class can implement many interfaces.",
+    "Use super to call a superclass constructor or an overridden method.",
+    "Explain why super(...) must be the first statement in a constructor."
+  ],
+  "vocabulary": [
+    { "word": "inheritance", "meaning": "A mechanism by which one class acquires the accessible members of another." },
+    { "word": "superclass", "meaning": "The class being extended." },
+    { "word": "subclass", "meaning": "The class that extends another class." },
+    { "word": "override", "meaning": "To provide a new version of an inherited method with the same signature." },
+    { "word": "overload", "meaning": "To define several methods with the same name but different parameter lists." },
+    { "word": "dynamic method dispatch", "meaning": "Choosing the actual method implementation at runtime based on the object type." },
+    { "word": "reference type", "meaning": "The type of the variable that holds a reference, which determines compile-time access." },
+    { "word": "object type", "meaning": "The actual class of the object at runtime, which determines which overridden method runs." },
+    { "word": "interface", "meaning": "A contract that declares method signatures a class must provide." },
+    { "word": "implements", "meaning": "The keyword used to supply the methods promised by an interface." },
+    { "word": "super", "meaning": "A keyword used to call a superclass constructor or an overridden method." },
+    { "word": "constructor", "meaning": "A special method that initialises a new object." },
+    { "word": "signature", "meaning": "The method name together with its parameter types." },
+    { "word": "polymorphism", "meaning": "The ability of different objects to respond to the same method call in their own way." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-inheritance-interface-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A subclass inherits accessible members from:",
+      "options": [
+        "A) only its own class",
+        "B) its superclass",
+        "C) every class in the program",
+        "D) only interfaces"
+      ],
+      "correctIndex": 1,
+      "answer": "B) its superclass",
+      "explanation": "A subclass inherits the accessible members of its superclass."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A class can extend how many classes directly?",
+      "options": [
+        "A) none",
+        "B) one",
+        "C) two",
+        "D) as many as it likes"
+      ],
+      "correctIndex": 1,
+      "answer": "B) one",
+      "explanation": "Java allows a class to extend only one direct superclass."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A class can implement how many interfaces?",
+      "options": [
+        "A) none",
+        "B) one only",
+        "C) several",
+        "D) only if it is abstract"
+      ],
+      "correctIndex": 2,
+      "answer": "C) several",
+      "explanation": "A class can implement multiple interfaces."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "When a superclass reference holds a subclass object, which type is used at compile time to check member access?",
+      "options": [
+        "A) the object type only",
+        "B) the reference type",
+        "C) both equally",
+        "D) the constructor name"
+      ],
+      "correctIndex": 1,
+      "answer": "B) the reference type",
+      "explanation": "Compile-time member access is checked against the reference type."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which change creates an overriding relationship?",
+      "options": [
+        "A) Unrelated classes with the same method name",
+        "B) Same-signature inherited method reimplemented in a subclass",
+        "C) Different parameter list in the subclass",
+        "D) Changing only the return type"
+      ],
+      "correctIndex": 1,
+      "answer": "B) Same-signature inherited method reimplemented in a subclass",
+      "explanation": "Overriding requires inheritance and a matching method signature."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Overloading is mainly distinguished by:",
+      "options": [
+        "A) the return type",
+        "B) the parameter list",
+        "C) the class name",
+        "D) the constructor name"
+      ],
+      "correctIndex": 1,
+      "answer": "B) the parameter list",
+      "explanation": "Overloading depends on the parameter list, not the return type."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In A obj = new B(); which type determines which overridden method runs at runtime?",
+      "options": [
+        "A) the reference type A",
+        "B) the actual object type B",
+        "C) both equally",
+        "D) the constructor"
+      ],
+      "correctIndex": 1,
+      "answer": "B) the actual object type B",
+      "explanation": "Dynamic dispatch uses the actual object type at runtime."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If B extends A and A has a method m(), and B provides another m() with the same signature, then calling m() on a B object executes:",
+      "options": [
+        "A) the A version",
+        "B) the B version",
+        "C) both versions",
+        "D) neither version"
+      ],
+      "correctIndex": 1,
+      "answer": "B) the B version",
+      "explanation": "The subclass version overrides the inherited one for B objects."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A subclass constructor does not call super(n) but the superclass has only a parameterized constructor. The result is:",
+      "options": [
+        "A) the superclass no-arg constructor is used",
+        "B) a compile-time error",
+        "C) a runtime error",
+        "D) nothing special"
+      ],
+      "correctIndex": 1,
+      "answer": "B) a compile-time error",
+      "explanation": "The compiler tries to insert super(), which does not exist, so it is a compile-time error."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "super(...) in a subclass constructor must appear:",
+      "options": [
+        "A) anywhere in the constructor",
+        "B) as the first statement",
+        "C) after field initialisation",
+        "D) only in main"
+      ],
+      "correctIndex": 1,
+      "answer": "B) as the first statement",
+      "explanation": "The superclass constructor must complete before subclass initialisation."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A class that extends another class is called a blank.",
+      "answer": "subclass",
+      "explanation": "The extending class is the subclass."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The class being extended is called the blank.",
+      "answer": "superclass",
+      "explanation": "The class being extended is the superclass."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-13",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A subclass provides a new version of an inherited method with the same signature. This is called blank.",
+      "answer": "overriding",
+      "explanation": "Overriding is replacing an inherited method with one of the same signature."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-14",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Several methods with the same name but different parameter lists are called blank.",
+      "answer": "overloading",
+      "explanation": "Overloading is multiple methods with the same name and different parameter lists."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain the difference between overriding and overloading.",
+      "answer": "Overriding is when a subclass provides a new version of an inherited method with the same signature. Overloading is when there are several methods with the same name but different parameter lists, usually in the same class.",
+      "explanation": "The mark is for contrasting signature-based replacement with name-plus-parameter-list variation."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain why a superclass reference can call an overridden method of a subclass object.",
+      "answer": "The method is declared in the superclass, so the compiler allows it. At runtime, dynamic dispatch uses the actual object type, so the subclass version runs if the object is a subclass instance.",
+      "explanation": "The mark is for linking compile-time checking to the reference type and runtime dispatch to the object type."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-17",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain why super(...) must be the first statement in a subclass constructor.",
+      "answer": "The inherited part of the object must be initialised before the subclass adds its own initialisation. If super(...) is not first, the subclass body could try to use inherited fields before they are set up, so Java requires the superclass constructor call first.",
+      "explanation": "The mark is for linking the rule to the need to initialise inherited state first."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Write a superclass Shape with a method area() returning 0.0, and a subclass Circle that overrides area() to return pi * r * r. Show dynamic dispatch in main.",
+      "answer": "class Shape { double area() { return 0.0; } } class Circle extends Shape { double r; Circle(double r) { this.r = r; } double area() { return Math.PI * r * r; } } In main: Shape s = new Circle(5); System.out.println(s.area()); prints the Circle’s area because of dynamic dispatch.",
+      "explanation": "The mark is for correct classes, a correct override, and a main that demonstrates dynamic dispatch."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Explain how a subclass can extend rather than replace an overridden method.",
+      "answer": "The subclass can call the inherited version with super.methodName(...) and add extra behaviour around it. For example, a subclass display method might call super.display() first and then print something extra. That extends the superclass behaviour instead of replacing it.",
+      "explanation": "The mark is for explaining super.method() and how it extends inherited behaviour."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A student claims that changing only the return type of an inherited method creates overriding. Decide and justify.",
+      "answer": "The claim is false. Overriding requires the same signature, which includes the parameter list. Changing only the return type does not produce a valid override or overload; the signatures would still match, and Java does not allow two methods that differ only in return type in the same place.",
+      "explanation": "The mark is for rejecting the claim and explaining that signature is the deciding factor."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "A superclass reference stores a subclass object and calls a subclass-only method through the reference. Identify the error and explain two ways to deal with it.",
+      "answer": "The error is a compile-time error, because the superclass reference type does not declare that method. Two ways to deal with it are: use a subclass reference instead, or cast the reference to the subclass type if the object really is that subclass. Casting should be done carefully because it can fail at runtime if the object is not actually of that subclass type.",
+      "explanation": "The mark is for identifying the compile-time error and giving two sensible remedies."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "Explain why a class can implement several interfaces but extend only one class.",
+      "answer": "A class can extend only one class because Java does not allow multiple inheritance of classes, partly to avoid the complexity of a class having two superclasses with the same method. Interfaces avoid much of that problem because they usually declare method signatures without shared implementation, so a class can implement several of them.",
+      "explanation": "The mark is for a sensible explanation of single class inheritance and multiple interface implementation."
+    },
+    {
+      "id": "isc-12-cs-inheritance-interface-q-23",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Create an interface Printable with a method print(). Implement it in two classes with different print() behaviour, then call print() through a Printable reference in a loop.",
+      "answer": "interface Printable { void print(); } class Circle implements Printable { public void print() { System.out.println(\"Circle\"); } } class Rectangle implements Printable { public void print() { System.out.println(\"Rectangle\"); } } In main: Printable[] items = { new Circle(), new Rectangle() }; for (Printable p : items) p.print(); Each object’s print() runs by dynamic dispatch.",
+      "explanation": "The mark is for a correct interface, two correct implementations, and a loop that shows polymorphic calls."
+    }
+  ]
+}

@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-cs-java-methods",
+  "title": "Methods",
+  "kind": "computer-science",
+  "slug": "java-methods",
+  "tagline": "Methods and constructors, object as parameter and return, static and this.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A method is a named block of statements that performs a task and, optionally, returns a result. Methods are the primary way that a Java program is divided into manageable, reusable pieces, and they are also the main vehicle for the board examination's tracing, debugging and programming questions. This chapter covers how to write and use methods, how an object can be passed into a method and returned from one, how static methods differ from instance methods, and how the keyword this helps an instance method refer to the object it belongs to. It also draws a careful line between overloading and overriding, because the two are related but not the same, and confusing them is one of the common errors the examination likes to test.",
+    "facts": [
+      { "label": "Syllabus section", "value": "Section B (Java) of the 2027 ISC Class XII Computer Science syllabus" },
+      { "label": "Exam year", "value": "2027" },
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "What the syllabus asks for", "value": "Methods and constructors, object as parameter and return data type, and the use of methods in designing reusable board-level algorithms." }
+    ]
+  },
+  "learningOutcomes": [
+    "Declare and call methods with parameters and return values, and explain the role of the return type.",
+    "Pass objects to methods as parameters and return objects from methods, and trace how the reference is shared.",
+    "Distinguish static methods from instance methods and explain when each is appropriate.",
+    "Use the keyword this to refer to the current object and to distinguish instance fields from local variables.",
+    "Explain the difference between method overloading and method overriding with examples.",
+    "Write short methods that solve small, well-defined tasks and explain their pre-conditions and post-conditions.",
+    "Trace the effect of a method call on the state of the objects involved.",
+    "Identify common errors such as missing return statements, void methods that try to return a value, and parameter passing mistakes."
+  ],
+  "learn": [
+    {
+      "id": "method-basics",
+      "title": "What a method is and how to call it",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A method is a named sequence of statements that can be executed by calling it. When you call a method, control passes to the first statement of that method, the method runs, and then control returns to the point where the call was made, possibly carrying a returned value. Dividing a program into methods has two main benefits: it makes the program easier to read because each method does one identifiable job, and it avoids repetition because the same method can be called from several places."
+        },
+        {
+          "type": "paragraph",
+          "text": "A method declaration has a header and a body. The header names the method, gives its return type, and lists the parameters it expects. The body is the block of statements that runs when the method is called. If the return type is something other than void, the method must return a value of that type on every possible path through the body. If it does not, the compiler reports a missing return statement."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A method that returns the larger of two integers.",
+              "note": "static int max(int a, int b) { return (a >= b) ? a : b; }. The return type is int, the parameters are a and b, and every path returns an int."
+            },
+            {
+              "text": "A method that prints a greeting and returns nothing.",
+              "note": "static void greet(String name) { System.out.println(\"Hello, \" + name); }. The return type is void, so no return statement is needed."
+            },
+            {
+              "text": "A method that is declared to return int but sometimes reaches the end without returning.",
+              "note": "This causes a compile-time error: missing return statement. Every reachable path in a non-void method must return a value of the declared type."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Call a method by writing its name followed by parentheses containing arguments.",
+            "The number of arguments must match the number of parameters, and each argument must be compatible with the corresponding parameter type.",
+            "A method with return type void does not return a value and is called as a statement.",
+            "A method with a non-void return type returns a value that can be used in an expression or stored in a variable.",
+            "The compiler checks that a non-void method returns a value on every reachable path."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "method header", "meaning": "The first line of a method that gives its access, static or not, return type, name and parameters." },
+            { "term": "parameter", "meaning": "A variable declared in the method header that receives a value when the method is called." },
+            { "term": "argument", "meaning": "The value or expression supplied in a method call for a parameter." },
+            { "term": "return type", "meaning": "The type of value a method returns, or void if it returns nothing." },
+            { "term": "caller", "meaning": "The part of the program that invokes the method." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "methods-objects-parameters-returns",
+      "title": "Objects as parameters and as return values",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When an object reference is passed to a method, the method receives a copy of the reference, not a copy of the object itself. That means the method can access and change the object's fields through that reference, and the changes are visible to the caller after the method returns. But if the method reassigns the parameter to point to a different object, that reassignment does not affect the caller's variable, because only the local copy of the reference was changed."
+        },
+        {
+          "type": "paragraph",
+          "text": "A method can also return an object reference. If its return type is a class type, the method can return a reference to an object it created, a reference passed in, or a reference to part of the object it is working on. The caller then receives that reference and can use it like any other object reference."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A method that receives a Student object, increases its marks by 5, and returns the same reference.",
+              "note": "The caller sees the updated marks after the call because both the caller and the method refer to the same object."
+            },
+            {
+              "text": "A static method Student topper(Student a, Student b) that returns the Student with the higher marks.",
+              "note": "The method returns a reference to one of its parameters. The caller can then call any Student method on the returned reference."
+            },
+            {
+              "text": "A method void swap(Student a, Student b) that swaps the two parameter references inside the method.",
+              "note": "This does not swap the caller's variables. Only the copies of the references inside the method are exchanged."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "This reference-value behaviour is the main reason that object parameter questions appear so often in the examination. A good answer traces not just what value is printed but which object is being referenced at each step. The common mistake is to assume that a method gets its own private copy of the object; it does not. It gets a private copy of the reference."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "reference value", "meaning": "The value of a reference variable, which points to an object." },
+            { "term": "pass by value", "meaning": "Java always passes the value of the argument; for an object that value is the reference." },
+            { "term": "aliasing", "meaning": "When two references point to the same object, so a change through one is visible through the other." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "static-methods-and-this",
+      "title": "Static methods and the this keyword",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A static method belongs to the class rather than to any particular object. It can be called without creating an instance, and it cannot directly access instance fields or instance methods because there is no current object. That is why a static method cannot use this: there is no receiving object for this to refer to. If a static method needs to work with instance data, it must receive that data as a parameter or obtain it from an object passed in."
+        },
+        {
+          "type": "paragraph",
+          "text": "An instance method, by contrast, is called on a specific object and has a current object. Inside an instance method, this refers to that object. The keyword this is especially useful when a parameter or local variable hides an instance field of the same name, because this.fieldName makes it clear which one is meant."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A static method that returns the larger of two Student objects.",
+              "note": "static Student topper(Student a, Student b) { return (a.marks >= b.marks) ? a : b; }. No object is needed to call it."
+            },
+            {
+              "text": "An instance method that uses this to distinguish a field from a parameter.",
+              "note": "Student(String name, int marks) { this.name = name; this.marks = marks; }. here this.name is the field and name is the parameter."
+            },
+            {
+              "text": "A static method that attempts to print this.marks.",
+              "note": "Compile-time error: a static method has no current object, so this is not available."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Static methods are called through the class name or through an object reference, but they do not depend on any object.",
+            "Instance methods are called on an object and have access to that object's fields through this.",
+            "A static method cannot access instance members directly.",
+            "this refers to the current object inside an instance method.",
+            "Overloaded methods must differ in their parameter list; the return type alone cannot distinguish them."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "overloading-versus-overriding",
+      "title": "Overloading and overriding",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Overloading and overriding both involve methods with the same name, but they are different mechanisms and they occur in different situations. Overloading happens when two or more methods in the same class share a name but have different parameter lists. The compiler chooses which version to call based on the arguments supplied. Overriding happens when a subclass replaces an inherited method with its own version that has the same signature as the inherited one. The runtime then chooses the subclass version when the method is called through a superclass reference that holds a subclass object."
+        },
+        {
+          "type": "paragraph",
+          "text": "The key distinction is that overloading is about having multiple methods with the same name but different parameter lists in the same class or in a related class, while overriding is about redefining an inherited method in a subclass. Changing only the return type is not enough to overload a method, and changing only the parameter types creates overloading, not overriding. Board questions frequently test this distinction by giving a method that looks like an override but has different parameters."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Overloading: add(int a, int b) and add(double a, double b) in the same class.",
+              "note": "These have the same name but different parameter types, so they are overloads. The compiler chooses based on the arguments."
+            },
+            {
+              "text": "Overriding: Dog.sound() overrides Animal.sound() when both have the same signature.",
+              "note": "The subclass version replaces the inherited version for Dog objects at runtime."
+            },
+            {
+              "text": "A student claims changing only the parameter list overrides a method.",
+              "note": "That claim is false. Changing the parameter list creates overloading, not overriding. Overriding requires the same signature as the inherited method."
+            },
+            {
+              "text": "A student claims changing only the return type overloads a method.",
+              "note": "That claim is also false. Two methods with the same name and same parameter list but different return types are not a valid overload."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "overloading", "meaning": "Multiple methods with the same name but different parameter lists in the same or related context." },
+            { "term": "overriding", "meaning": "A subclass provides its own version of an inherited method with the same signature." },
+            { "term": "signature", "meaning": "The method name together with its parameter types." },
+            { "term": "runtime polymorphism", "meaning": "The selection of the actual method implementation at runtime based on the object's true type." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-errors-and-exam-traps",
+      "title": "Common errors and exam traps",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Method questions in the examination are often about noticing that something is missing or subtly wrong rather than about writing long programs. The most frequent traps are: a non-void method with a path that does not return a value; a void method that tries to return a value; a static method that tries to use this; a caller that tries to call a subclass-only method through a superclass reference; and the overloading-versus-overriding confusion."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Check every reachable path in a non-void method for a return statement.",
+            "Remember that void methods cannot return a value.",
+            "Remember that static methods have no this.",
+            "Remember that compile-time member access is checked against the reference type.",
+            "Remember that overloading depends on the parameter list, not the return type.",
+            "Trace method calls step by step and keep track of which object each reference points to."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A static method tries to print this.marks.",
+              "note": "Compile-time error: a static method has no current object, so this is not available. Use an instance method or pass a Student parameter."
+            },
+            {
+              "text": "A student writes void compare(int a, int b) { return a > b; }.",
+              "note": "Two errors: a void method cannot return a value, and the return type should be boolean, not void."
+            },
+            {
+              "text": "A subclass-only method is called through a superclass reference and causes a compile error.",
+              "note": "Compile-time member access is checked against the reference type. Use a subclass reference or a cast to call the subclass-only method."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A method is a named block of statements that can be called to perform a task and optionally return a value.",
+    "The method header gives the return type, name and parameters; the body is the block that runs on a call.",
+    "A non-void method must return a value on every reachable path, or the compiler reports a missing return statement.",
+    "When an object reference is passed to a method, the method receives a copy of the reference, so changes to the object are visible to the caller.",
+    "Reassigning the parameter inside the method does not affect the caller's variable.",
+    "A method can return an object reference, and the caller then holds that reference.",
+    "Static methods belong to the class, can be called without an object, and cannot access instance members directly or use this.",
+    "Instance methods are called on an object and use this to refer to that object's fields.",
+    "Overloading means same name with different parameter lists; overriding means redefining an inherited method with the same signature.",
+    "Changing only the return type does not create overloading.",
+    "Compile-time member access is checked against the reference type, not the actual object type.",
+    "Good method work in the examination traces what object is referenced at each step, not just what is printed."
+  ],
+  "examFocus": [
+    "Write and call methods with parameters and return values, and choose an appropriate return type.",
+    "Pass objects into methods and return objects from methods, and trace which object is referenced after the call.",
+    "Explain the difference between static and instance methods and when this is available.",
+    "Use this to distinguish an instance field from a parameter with the same name.",
+    "State the difference between overloading and overriding and give an example of each.",
+    "Identify missing return statements, void-return mistakes and static-this misuse.",
+    "Explain why a subclass-only method cannot be called through a superclass reference.",
+    "Trace short method calls and predict their effect on object state."
+  ],
+  "vocabulary": [
+    { "word": "method", "meaning": "A named block of statements that performs a task and may return a value." },
+    { "word": "parameter", "meaning": "A variable in the method header that receives a value from the caller." },
+    { "word": "argument", "meaning": "The value supplied in a method call for a parameter." },
+    { "word": "return type", "meaning": "The type of value a method returns, or void if it returns nothing." },
+    { "word": "void", "meaning": "A return type meaning the method returns no value." },
+    { "word": "static method", "meaning": "A method that belongs to the class and does not operate on a specific object." },
+    { "word": "instance method", "meaning": "A method that is called on a specific object and can use this." },
+    { "word": "this", "meaning": "A reference to the current object inside an instance method." },
+    { "word": "overloading", "meaning": "Multiple methods with the same name but different parameter lists." },
+    { "word": "overriding", "meaning": "A subclass provides a new version of an inherited method with the same signature." },
+    { "word": "signature", "meaning": "The method name together with its parameter types." },
+    { "word": "return by value", "meaning": "Java passes argument values to parameters; for objects that value is the reference." },
+    { "word": "reference", "meaning": "A value that identifies an object." },
+    { "word": "reference value", "meaning": "The value stored in a reference variable, which points to an object." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-java-methods-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A method that performs an action but does not return a value should have return type:",
+      "options": [
+        "A) int",
+        "B) boolean",
+        "C) void",
+        "D) null"
+      ],
+      "correctIndex": 2,
+      "answer": "C) void",
+      "explanation": "A void method returns no value. An int or boolean method must return a value of that type."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which keyword refers to the current object inside an instance method?",
+      "options": [
+        "A) super",
+        "B) self",
+        "C) this",
+        "D) current"
+      ],
+      "correctIndex": 2,
+      "answer": "C) this",
+      "explanation": "this refers to the object on which the instance method was called."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "When an object reference is passed to a method, what does the method receive?",
+      "options": [
+        "A) A deep copy of the object",
+        "B) A copy of the reference",
+        "C) The original variable name",
+        "D) A primitive value"
+      ],
+      "correctIndex": 1,
+      "answer": "B) A copy of the reference",
+      "explanation": "Java passes the reference by value, so the method gets a copy of the address, not a copy of the object."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A static method can be called:",
+      "options": [
+        "A) only after creating an object",
+        "B) without creating an object",
+        "C) only from main",
+        "D) only if the class has no instance fields"
+      ],
+      "correctIndex": 1,
+      "answer": "B) without creating an object",
+      "explanation": "Static methods belong to the class and can be called without any instance."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which change creates a valid overloading of a method named add?",
+      "options": [
+        "A) Same parameter list but different return type",
+        "B) Different parameter list",
+        "C) Different method name",
+        "D) Adding a comment"
+      ],
+      "correctIndex": 1,
+      "answer": "B) Different parameter list",
+      "explanation": "Overloading requires the same name with a different parameter list. Return type alone is not enough."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which situation creates method overriding?",
+      "options": [
+        "A) Two unrelated classes with the same method name",
+        "B) A subclass reimplements an inherited method with the same signature",
+        "C) A different parameter list in the same class",
+        "D) A static method with a different return type"
+      ],
+      "correctIndex": 1,
+      "answer": "B) A subclass reimplements an inherited method with the same signature",
+      "explanation": "Overriding requires inheritance and a matching method signature."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A static method tries to print this.marks. What happens?",
+      "options": [
+        "A) It prints the field value",
+        "B) It prints 0",
+        "C) Compile-time error because this is not available",
+        "D) Runtime error"
+      ],
+      "correctIndex": 2,
+      "answer": "C) Compile-time error because this is not available",
+      "explanation": "A static method has no current object, so this is not available."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "void compare(int a, int b) { return a > b; } contains:",
+      "options": [
+        "A) No error",
+        "B) One error only",
+        "C) Two errors",
+        "D) A runtime error only"
+      ],
+      "correctIndex": 2,
+      "answer": "C) Two errors",
+      "explanation": "A void method cannot return a value, and the return type should be boolean, not void."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A method is declared to return Student, but one branch ends at the closing brace without returning anything. What error occurs?",
+      "options": [
+        "A) No error because the branch may never run",
+        "B) Runtime error",
+        "C) Compile-time error: missing return statement",
+        "D) Warning only"
+      ],
+      "correctIndex": 2,
+      "answer": "C) Compile-time error: missing return statement",
+      "explanation": "Every reachable path in a non-void method must return a compatible value."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A subclass-only method is called through a superclass reference. The most likely result is:",
+      "options": [
+        "A) The subclass method runs",
+        "B) A compile-time error",
+        "C) A runtime error",
+        "D) The superclass method runs"
+      ],
+      "correctIndex": 1,
+      "answer": "B) A compile-time error",
+      "explanation": "Compile-time member access is checked against the reference type."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A parameter variable declared in the method header is called a blank.",
+      "answer": "parameter",
+      "explanation": "A parameter is the variable declared in the method header."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The value supplied in a method call for a parameter is called an blank.",
+      "answer": "argument",
+      "explanation": "An argument is the value supplied in the call."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-13",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A method with no return value has return type blank.",
+      "answer": "void",
+      "explanation": "void is the return type used when a method returns nothing."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-14",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A method that belongs to the class rather than to any object is called a blank method.",
+      "answer": "static",
+      "explanation": "A static method belongs to the class and can be called without an object."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain what happens when an object reference is passed to a method and the method changes a field of that object.",
+      "answer": "The method receives a copy of the reference, so it can access the same object as the caller. Changing the object's field through that reference changes the object itself, so the caller sees the updated field after the method returns.",
+      "explanation": "The mark is for explaining reference-by-value and that the same object is shared."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain the difference between a static method and an instance method.",
+      "answer": "A static method belongs to the class, can be called without an object, and cannot directly access instance fields or use this. An instance method is called on an object, has a current object, and can use this to refer to its fields.",
+      "explanation": "The mark is for contrasting class-level versus object-level access and the role of this."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-17",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain why a static method cannot use this.",
+      "answer": "this refers to the current object of an instance method. A static method is not called on any object, so there is no current object. Therefore this is not available in a static method.",
+      "explanation": "The mark is for linking this to the current object and explaining that static methods have no current object."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Write a static method Student topper(Student a, Student b) that returns the Student with the higher marks, and explain what the caller receives.",
+      "answer": "static Student topper(Student a, Student b) { return (a.marks >= b.marks) ? a : b; } The caller receives a reference to the Student object with the higher marks. If the two marks are equal, the first parameter is returned. The returned reference points to the same object that was passed in.",
+      "explanation": "The mark is for correct code, a correct return rule for a tie, and an explanation that the caller receives a reference to the chosen object."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Write a Student constructor that uses this to initialise the fields name and marks, and explain why this is needed here.",
+      "answer": "Student(String name, int marks) { this.name = name; this.marks = marks; } this is needed because the parameter names hide the field names. this.name refers to the field and name refers to the parameter.",
+      "explanation": "The mark is for correct use of this to distinguish fields from parameters and for a brief explanation."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A method receives a Student object, sets the parameter to a new Student object, and returns. Does the caller's variable change? Explain.",
+      "answer": "No. The method changes only its local copy of the reference. The caller's variable still points to the original object.",
+      "explanation": "The mark is for recognising that reassigning the parameter changes only the local reference."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "A student says add(int a, int b) and add(double a, double b) are overriding. Decide whether the claim is correct and give the correct term.",
+      "answer": "The claim is incorrect. These are overloaded methods because they have the same name but different parameter types and are defined in the same class. Overriding requires a subclass to redefine an inherited method with the same signature.",
+      "explanation": "The mark is for rejecting the claim, giving the correct term, and citing the reason."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "A superclass reference stores a subclass object and calls an overridden method. Which method runs and why?",
+      "answer": "The subclass method runs because of dynamic method dispatch. The actual object type determines the method implementation at runtime, even though the reference type is the superclass.",
+      "explanation": "The mark is for identifying the subclass method and explaining runtime dispatch."
+    },
+    {
+      "id": "isc-12-cs-java-methods-q-23",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain the difference between overloading and overriding with one example of each. Include the rule that distinguishes them.",
+      "answer": "Overloading is when the same class has multiple methods with the same name but different parameter lists, for example add(int a, int b) and add(double a, double b). Overriding is when a subclass provides a new version of an inherited method with the same signature, for example Dog.sound() overrides Animal.sound(). The key rule is that overloading depends on the parameter list, while overriding requires inheritance and an identical signature.",
+      "explanation": "The mark is for correct definitions, correct examples, and the rule that distinguishes them."
+    }
+  ]
+}

@@ -10,7 +10,7 @@
     "boardprep": "Original study material written by BoardPrep for the CISCE ICSE Class X Mathematics syllabus (official-verified baseline, examination year 2027). Every numerical result in this chapter was independently recomputed. No board examination paper was consulted, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "Constructions are geometric drawings performed using only a ruler (without measurement markings) and a compass. In ICSE Class X Mathematics, students are expected to perform standard constructions and, crucially, state the geometric justification for each step. This chapter covers the six constructions prescribed by the ICSE syllabus: bisecting a given angle, drawing the perpendicular bisector of a given segment, constructing a line perpendicular to a given line through a given point (on the line and off the line), constructing an angle equal to a given angle, and constructing a triangle given certain conditions. Each construction is presented with clearly numbered steps and a written justification."
+    "intro": "Constructions are geometric drawings performed using only a ruler (without measurement markings) and a compass. In ICSE Class X Mathematics, students are expected to perform standard constructions and, crucially, state the geometric justification for each step. This chapter covers the six constructions prescribed by the ICSE syllabus: bisecting a given angle, drawing the perpendicular bisector of a given segment, constructing a line perpendicular to a given line through a given point (on the line and off the line), constructing an angle equal to a given angle, and constructing a triangle given certain conditions. Each construction is presented with clearly numbered steps and a written justification.",
     "facts": [
       { "label": "Ruler (no markings)", "value": "Used only to draw straight lines through existing points; never to measure lengths." },
       { "label": "Compass", "value": "Used to transfer distances and draw arcs/circles; the pencil must not be lifted during a construction step." },
@@ -95,7 +95,7 @@
           ],
           "justification": [
             { "text": "Step 1: Circle centred at A gives that all points at that radius from A are on the circle." },
-            { "step": "2": "Circle centred at B with the same radius gives that C and D are equidistant from A and B: AC = BC and AD = BD." },
+            { "text": "Step 2: Circle centred at B with the same radius gives that C and D are equidistant from A and B: AC = BC and AD = BD." },
             { "text": "Step 3: In triangles ACD and BCD, we have AC = BC, AD = BD, and CD is common. By SSS congruence, ∠ACD = ∠BCD and ∠ADC = ∠BDC. Since CD makes adjacent angles on a straight line sum to 180°, each of ∠ACD and ∠BCD is 90°. Hence CD ⟂ AB and M (the intersection of CD and AB) is the midpoint of AB." }
           ]
         },
@@ -250,27 +250,27 @@
               "text": "Construction: To construct triangle ABC given base BC, base angle ∠B, and the difference AB − AC.",
               "steps": [
                 { "step": "1", "text": "Draw the base BC." },
-                { "step": "2", "text": "At point B, construct the given angle ∠CBX (ray BX on one side of BC)." },
-                { "step": "3", "text": "On ray BX, mark point D such that BD = AB − AC (mark the difference length from B towards X)." },
+                { "step": "2", "text": "At point B, construct the given angle ∠CBX on the side of BC in which A is to lie." },
+                { "step": "3", "text": "On ray BX, mark point D such that BD = AB − AC." },
                 { "step": "4", "text": "Join D to C." },
-                { "step": "5", "text": "Construct the perpendicular bisector of DC, meeting ray BX at point A (on the side of D towards X)." },
+                { "step": "5", "text": "Construct the perpendicular bisector of DC, meeting ray BX at point A on the side of D away from B." },
                 { "step": "6", "text": "Join A to C. Triangle ABC is the required triangle." }
               ],
               "justification": [
-                { "text": "Step 1: Drawing the base BC gives the fixed side." },
-                { "text": "Step 2: Constructing ∠CBX at B gives the fixed base angle." },
-                { "text": "Step 3: Marking BD = AB − AC on the ray ensures that the length from B to D equals the given difference." },
-                { "text": "Step 5: A lies on the perpendicular bisector of DC, so AD = AC. Since BD = AB − AC, we have AB = BD + AD = BD + AC, which gives AB − AC = BD, the given difference." },
-                { "text": "Step 6: Triangle ABC is formed with base BC, base angle ∠B, and AB − AC = BD (the given difference)." }
+                { "text": "Step 1: Drawing BC gives the fixed base." },
+                { "text": "Step 2: Constructing ∠CBX gives the fixed base angle at B." },
+                { "text": "Step 3: Marking BD = AB − AC on ray BX records the given difference along the ray from B." },
+                { "text": "Step 5: A lies on the perpendicular bisector of DC, so AD = AC. Then AB = AD + DB = AC + (AB − AC) = AB, confirming that AB − AC = BD, the given difference." },
+                { "text": "Step 6: Triangle ABC is formed with base BC, base angle ∠B, and AB − AC = BD, the given difference." }
               ]
             },
             {
               "type": "bullets",
               "items": [
-                "The length BD in step 3 must be set to the given difference AB − AC.",
+                "The length BD in step 3 must equal the given difference AB − AC.",
                 "The perpendicular bisector of DC ensures AD = AC.",
-                "The justification chains: A on perp bisector of DC → AD = AC → AB = BD + AC → AB − AC = BD.",
-                "This construction works only if the given difference satisfies the triangle inequality: AB − AC < BC < AB + AC."
+                "The justification chains: A on the perpendicular bisector of DC → AD = AC → AB = AD + DB = AC + (AB − AC) = AB.",
+                "This construction works only if the given difference satisfies the triangle inequality: AB − AC < BC."
               ]
             }
           ]
@@ -284,13 +284,312 @@
               "text": "Construction: To construct triangle ABC given base BC, base angle ∠B, and the difference AC − AB.",
               "steps": [
                 { "step": "1", "text": "Draw the base BC." },
-                { "step": "2", "text": "At point B, construct the given angle ∠CBX (ray BX on one side of BC)." },
-                { "step": "3", "text": "On ray BX, mark point D such that CD = AC − AB (from C towards X, but the construction is adjusted). Actually, the standard approach uses a different marking. Let me provide the correct construction." }
+                { "step": "2", "text": "At point B, construct the given angle ∠CBX on the side of BC in which A is to lie." },
+                { "step": "3", "text": "From B along ray BX, mark point D such that BD = AC − AB." },
+                { "step": "4", "text": "Join D to C." },
+                { "step": "5", "text": "Construct the perpendicular bisector of DC, meeting ray BX at point A on the side of D away from B." },
+                { "step": "6", "text": "Join A to C. Triangle ABC is the required triangle." }
+              ],
+              "justification": [
+                { "text": "Step 1: Drawing BC gives the fixed base." },
+                { "text": "Step 2: Constructing ∠CBX gives the fixed base angle at B." },
+                { "text": "Step 3: Marking BD = AC − AB on ray BX records the given difference along the ray from B." },
+                { "text": "Step 5: A lies on the perpendicular bisector of DC, so AD = AC. Then AC − AB = AD − AB = BD, the given difference." },
+                { "text": "Step 6: Triangle ABC is formed with base BC, base angle ∠B, and AC − AB = BD, the given difference." }
+              ]
+            },
+            {
+              "type": "bullets",
+              "items": [
+                "The length BD in step 3 must equal the given difference AC − AB.",
+                "The perpendicular bisector of DC ensures AD = AC.",
+                "The justification chains: A on the perpendicular bisector of DC → AD = AC → AC − AB = AD − AB = BD.",
+                "This construction works only if the given difference satisfies the triangle inequality: AC − AB < BC."
               ]
             }
           ]
         }
       ]
+    }
+  ],
+  "keyPoints": [
+    "Only an unmarked ruler and a compass may be used in a construction; the pencil must not be lifted during a step.",
+    "Every construction must be justified: give a geometric reason (congruence, perpendicular bisector property, isosceles triangle property, etc.) for each step.",
+    "To bisect an angle, draw arcs from the intersection points on the arms with equal radii and join the vertex to the intersection of the arcs.",
+    "The perpendicular bisector of a segment is drawn by taking arcs of equal radius (greater than half the segment) from both endpoints; the line through the two arc intersections bisects and is perpendicular to the segment.",
+    "To drop a perpendicular from a point to a line, draw a circle from the point to cut the line in two points, then draw the perpendicular bisector of that segment.",
+    "To construct an angle equal to a given angle, transfer the chord between the points where a circle cuts the given angle, using the same radius from the new vertex.",
+    "For the triangle with given base, base angle, and sum of the other two sides, the key idea is to mark the sum along the ray and use the perpendicular bisector of the segment joining the marked point to the opposite vertex.",
+    "For the triangle with given base, base angle, and difference of the other two sides, mark the difference along the ray from the base vertex and use the perpendicular bisector of the segment joining the marked point to the opposite vertex.",
+    "In the difference case, the constructed point A satisfies AD = AC, so the side difference equals the marked length BD.",
+    "Every triangle construction must satisfy the triangle inequality conditions stated in the problem."
+  ],
+  "examFocus": [
+    "State each step in order and label every point used, especially the arc-intersection points.",
+    "For every construction, include a written justification, not just the steps and a labelled diagram.",
+    "Use SSS congruence explicitly when the construction depends on equal radii from equal-length segments.",
+    "In the perpendicular-bisector construction, state why the radius must be greater than half the segment.",
+    "In the angle-equal construction, distinguish the compass radius used to cut the arms from the chord length transferred by the compass in the next step.",
+    "For the sum/difference triangle constructions, clearly identify which length is being marked (the sum or the difference) and justify why the perpendicular bisector gives the required side condition.",
+    "After completing a construction, write a short verification that the required condition is satisfied.",
+    "Do not rely on measurement for justification; constructions are assessed on reasoning, not on how accurately a ruler and protractor would match."
+  ],
+  "vocabulary": [
+    { "word": "Construction", "meaning": "A geometric figure drawn using only an unmarked ruler and a compass, with each step justified by geometric reasoning." },
+    { "word": "Unmarked ruler", "meaning": "A straightedge used only to draw straight lines through given points, not to measure lengths." },
+    { "word": "Compass", "meaning": "A tool used to draw circles and arcs and to transfer a given distance from one part of the diagram to another." },
+    { "word": "Perpendicular bisector", "meaning": "A line perpendicular to a segment that passes through its midpoint." },
+    { "word": "Angle bisector", "meaning": "A ray that divides a given angle into two equal angles.",
+      "extra": "In constructions, the angle bisector is obtained from the intersection of equal-radius arcs drawn from points on the two arms." },
+    { "word": "Justification", "meaning": "The geometric reasoning that explains why each construction step is valid, for example triangle congruence or a perpendicular bisector property." },
+    { "word": "SSS congruence", "meaning": "If the three sides of one triangle equal the three sides of another, the two triangles are congruent and their corresponding angles are equal." },
+    { "word": "Triangle inequality", "meaning": "In any triangle, the sum of any two sides is greater than the third side; the difference of any two sides is less than the third side." },
+    { "word": "Arc", "meaning": "A portion of a circle; in constructions, equal-radius arcs from two points intersect to give points equidistant from both centers." }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-construct-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a geometric construction, which two tools are permitted?",
+      "options": ["Ruler with markings and protractor", "Unmarked ruler and compass", "Protractor and divider", "Ruler with markings and compass"],
+      "correctIndex": 1,
+      "answer": "Unmarked ruler and compass",
+      "explanation": "ICSE constructions are performed using only an unmarked ruler (to draw straight lines) and a compass (to draw arcs and transfer distances). No protractor or measuring ruler is used in the justification."
+    },
+    {
+      "id": "icse-10-math-q-construct-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The line drawn through the two intersection points obtained by drawing arcs of equal radius from the two endpoints of a segment is the ______ of the segment.",
+      "answer": "perpendicular bisector",
+      "explanation": "Taking equal radii greater than half the segment from both endpoints and joining the two arc intersections produces the perpendicular bisector of the segment."
+    },
+    {
+      "id": "icse-10-math-q-construct-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "To construct the perpendicular bisector of a segment AB, the radius used in step 1 must be ______ half of AB.",
+      "options": ["equal to", "less than", "greater than", "exactly twice"],
+      "correctIndex": 2,
+      "answer": "greater than",
+      "explanation": "If the radius is not greater than half AB, the arcs drawn from A and B will not intersect, and two intersection points cannot be obtained to draw the perpendicular bisector."
+    },
+    {
+      "id": "icse-10-math-q-construct-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is the justification for saying that the ray constructed by joining the vertex of an angle to the intersection point of equal-radius arcs drawn from points on the two arms bisects the angle?",
+      "answer": "The two triangles formed are congruent by SSS.",
+      "explanation": "If E and F are points on the two arms with BE = BF (equal radii from the vertex B) and equal-radius arcs from E and F meet at G, then EG = FG. In triangles BEG and BFG, BE = BF, EG = FG, and BG is common, so the triangles are congruent by SSS. Hence ∠EBG = ∠FBG, and BG bisects ∠ABC."
+    },
+    {
+      "id": "icse-10-math-q-construct-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "To construct an angle equal to a given angle at a point P on a line l, the radius used in step 3 must equal ______, not the compass radius from step 1 or step 2.",
+      "options": ["the radius used in step 1", "the chord EF from step 1", "the length PQ from step 2", "half the given angle"],
+      "correctIndex": 1,
+      "answer": "the chord EF from step 1",
+      "explanation": "In step 1 a circle at the vertex B cuts the arms at E and F. The chord EF is the fixed distance between those two points. In step 3 this chord length EF is transferred from Q on the new circle to locate R, so that triangles BEF and PQR have three equal sides and are therefore congruent."
+    },
+    {
+      "id": "icse-10-math-q-construct-06",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A point P lies on a line l. To drop a perpendicular to l through P, we draw a circle centred at P cutting l at Q and R. Why must Q and R lie on opposite sides of P?",
+      "answer": "So that the chord QR has P as its midpoint.",
+      "explanation": "A circle centred at P with any radius cuts a line through P in two points symmetric about P. These points Q and R must lie on opposite sides of P so that P is the midpoint of QR. Then the perpendicular bisector of QR passes through P and is perpendicular to l, which is exactly the line required."
+    },
+    {
+      "id": "icse-10-math-q-construct-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A point P does not lie on a line l. Explain how to construct the perpendicular from P to l using the perpendicular-bisector construction.",
+      "answer": "Draw a circle from P to cut l at A and B; then draw the perpendicular bisector of AB, which meets l at Q; PQ is the required perpendicular.",
+      "explanation": "Draw a circle centred at P with a radius large enough to intersect l in two points A and B, so that PA = PB. Construct the perpendicular bisector of AB (Construction 2); this bisector is perpendicular to AB and passes through the midpoint of AB. Since A and B lie on l, the bisector is perpendicular to l and meets l at some point Q. The line PQ is then perpendicular to l."
+    },
+    {
+      "id": "icse-10-math-q-construct-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the triangle construction with base BC, base angle ∠B, and sum AB + AC, the point D on ray BX is marked so that BD equals ______, and the perpendicular bisector of DC meets BX at A.",
+      "options": ["AB - AC", "AB + AC", "BC", "AC - AB"],
+      "correctIndex": 1,
+      "answer": "AB + AC",
+      "explanation": "In this construction, D is marked on ray BX so that BD = AB + AC. The perpendicular bisector of DC ensures AD = AC, so AB = BD - AD = BD - AC, which gives AB + AC = BD, the given sum."
+    },
+    {
+      "id": "icse-10-math-q-construct-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In the triangle with base BC, base angle ∠B, and the sum AB + AC = 9 cm, we mark D on ray BX so that BD = 9 cm and construct the perpendicular bisector of DC, meeting BX at A. Explain why AB + AC = 9 cm in the resulting triangle.",
+      "answer": "Because A lies on the perpendicular bisector of DC, AD = AC, so AB = BD - AD = BD - AC, giving AB + AC = BD = 9 cm.",
+      "explanation": "Since A lies on the perpendicular bisector of DC, any point on that bisector is equidistant from D and C, so AD = AC. Then AB = BD - AD = BD - AC, and rearranging gives AB + AC = BD. But BD = 9 cm by construction, so AB + AC = 9 cm, as required."
+    },
+    {
+      "id": "icse-10-math-q-construct-10",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Construct a triangle ABC given BC = 6 cm, ∠B = 60°, and AB + AC = 8 cm. Describe the steps and justify the key step that makes AB + AC = 8 cm.",
+      "answer": "Draw BC = 6 cm, construct ∠CBX = 60°, mark BD = 8 cm on BX, join DC, draw the perpendicular bisector of DC meeting BX at A, join AC; then AB + AC = BD = 8 cm because AD = AC.",
+      "explanation": "Draw the base BC = 6 cm. At B, construct ray BX making ∠CBX = 60°. On BX, mark point D so that BD = 8 cm (the given sum). Join DC. Construct the perpendicular bisector of DC; let it meet BX at A. Join A to C. Since A lies on the perpendicular bisector of DC, AD = AC. Then AB = BD - AD = 8 - AC, so AB + AC = 8 cm. Hence triangle ABC satisfies BC = 6 cm, ∠B = 60°, and AB + AC = 8 cm."
+    },
+    {
+      "id": "icse-10-math-q-construct-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In the triangle construction with base BC, base angle ∠B, and the difference AB − AC (with AB > AC), the point D on ray BX is marked so that BD equals ______, and the perpendicular bisector of DC meets BX at A.",
+      "options": ["AB + AC", "AB − AC", "AC − AB", "BC"],
+      "correctIndex": 1,
+      "answer": "AB − AC",
+      "explanation": "When AB > AC, we mark D on ray BX so that BD = AB − AC. The perpendicular bisector of DC ensures AD = AC, so AB = AD + DB = AC + (AB − AC), confirming AB − AC = BD."
+    },
+    {
+      "id": "icse-10-math-q-construct-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In the triangle with base BC, base angle ∠B, and AB − AC = 4 cm (AB > AC), we mark D on ray BX with BD = 4 cm and construct the perpendicular bisector of DC meeting BX at A. Explain why AB − AC = 4 cm in the resulting triangle.",
+      "answer": "Because A lies on the perpendicular bisector of DC, AD = AC, so AB = AD + DB = AC + 4, giving AB − AC = 4 cm.",
+      "explanation": "Since A is on the perpendicular bisector of DC, AD = AC. Then AB = AD + DB = AC + DB. But DB = BD = 4 cm by construction, so AB = AC + 4 cm, i.e. AB − AC = 4 cm, as required."
+    },
+    {
+      "id": "icse-10-math-q-construct-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In the triangle with base BC, base angle ∠B, and AC − AB = 3 cm (AC > AB), we mark D on ray BX with BD = 3 cm and construct the perpendicular bisector of DC meeting BX at A. Explain why AC − AB = 3 cm in the resulting triangle.",
+      "answer": "Because A lies on the perpendicular bisector of DC, AD = AC, so AC − AB = AD − AB = DB = 3 cm.",
+      "explanation": "Since A is on the perpendicular bisector of DC, AD = AC. Then AC − AB = AD − AB = DB, and DB = BD = 3 cm by construction, so AC − AB = 3 cm, as required."
+    },
+    {
+      "id": "icse-10-math-q-construct-14",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Construct a triangle ABC given BC = 7 cm, ∠B = 50°, and AB − AC = 3 cm (AB > AC). Describe the steps and justify the key step that gives AB − AC = 3 cm.",
+      "answer": "Draw BC = 7 cm, construct ∠CBX = 50°, mark BD = 3 cm on BX, join DC, draw the perpendicular bisector of DC meeting BX at A, join AC; then AB − AC = BD = 3 cm because AD = AC.",
+      "explanation": "Draw BC = 7 cm. At B, construct ray BX with ∠CBX = 50°. On BX, mark D so that BD = 3 cm (the given difference AB − AC). Join DC. Construct the perpendicular bisector of DC and let it meet BX at A. Join A to C. Since A lies on the perpendicular bisector of DC, AD = AC. Then AB = AD + DB = AC + 3 cm, so AB − AC = 3 cm. Hence the triangle satisfies BC = 7 cm, ∠B = 50°, and AB − AC = 3 cm."
+    },
+    {
+      "id": "icse-10-math-q-construct-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Construct a triangle ABC given BC = 6 cm, ∠B = 70°, and AC − AB = 2.5 cm (AC > AB). Describe the steps and justify the key step that gives AC − AB = 2.5 cm.",
+      "answer": "Draw BC = 6 cm, construct ∠CBX = 70°, mark BD = 2.5 cm on BX, join DC, draw the perpendicular bisector of DC meeting BX at A, join AC; then AC − AB = BD = 2.5 cm because AD = AC.",
+      "explanation": "Draw BC = 6 cm. At B, construct ray BX with ∠CBX = 70°. On BX, mark D so that BD = 2.5 cm (the given difference AC − AB). Join DC. Construct the perpendicular bisector of DC and let it meet BX at A. Join A to C. Since A lies on the perpendicular bisector of DC, AD = AC. Then AC − AB = AD − AB = DB = 2.5 cm. Hence the triangle satisfies BC = 6 cm, ∠B = 70°, and AC − AB = 2.5 cm."
+    },
+    {
+      "id": "icse-10-math-q-construct-16",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The perpendicular bisector of segment DC is used in the sum/difference triangle constructions because every point on it satisfies ______.",
+      "options": ["the point is equidistant from D and C", "the point lies on BC", "the point lies on BX", "the point is the midpoint of BC"],
+      "correctIndex": 0,
+      "answer": "The point is equidistant from D and C",
+      "explanation": "By definition, any point on the perpendicular bisector of a segment is equidistant from the segment's endpoints. In these constructions we place A on the perpendicular bisector of DC, so AD = AC, which gives the required relation between the two sides."
+    },
+    {
+      "id": "icse-10-math-q-construct-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State one difference between a construction and a drawing in geometry.",
+      "answer": "A construction is justified by geometric reasoning, while a drawing may be only approximate.",
+      "explanation": "In a construction, each step is supported by logical justification using theorems and congruence, and the figure satisfies the stated conditions exactly. A drawing can be approximate and is not necessarily justified by reasoning."
+    },
+    {
+      "id": "icse-10-math-q-construct-18",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In the construction of triangle ABC with base BC, base angle ∠B, and AB + AC, a student marks D on ray BX with BD = 12 cm, joins DC, and then draws the perpendicular bisector of DC meeting BX at A. If BC = 5 cm and the construction is valid, what can you say about AB and AC in the completed triangle? Explain.",
+      "answer": "AB + AC = 12 cm, and each of AB and AC is positive and satisfies the triangle inequalities with BC = 5 cm.",
+      "explanation": "Since A lies on the perpendicular bisector of DC, AD = AC, so AB = BD - AD = 12 - AC, giving AB + AC = 12 cm. The base is BC = 5 cm. For a valid triangle we need AB + AC > BC (12 > 5, true) and each side positive. Also each of the other triangle inequalities must hold: AB + BC > AC and AC + BC > AB. Subtracting the second from the first gives AB - AC > -5 and AC - AB > -5, which are automatically satisfied for a reasonable student construction. The construction is valid provided D beyond the perpendicular bisector gives a positive AB and AC."
+    },
+    {
+      "id": "icse-10-math-q-construct-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In the construction with base BC = 6 cm, base angle ∠B = 40°, and the difference AB − AC = 4 cm (AB > AC), a student incorrectly marks D on ray BX with BD = 7 cm instead of 4 cm, then completes the construction by drawing the perpendicular bisector of DC. What condition does the resulting triangle actually satisfy? Explain.",
+      "answer": "The resulting triangle will satisfy AB − AC = 7 cm, not 4 cm.",
+      "explanation": "In the correct construction, we must mark BD equal to the given difference, here AB − AC = 4 cm, so that BD = 4 cm. Because A lies on the perpendicular bisector of DC, AD = AC, and AB = AD + DB = AC + BD, giving AB − AC = BD. If the student instead marks BD = 7 cm, then AB − AC = BD = 7 cm, so the triangle satisfies AB − AC = 7 cm, not the intended 4 cm. The error is in step 3, and the resulting triangle does not match the given difference."
+    },
+    {
+      "id": "icse-10-math-q-construct-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how the perpendicular-bisector construction can be used to drop a perpendicular from an external point P to a line l, and why the resulting line is perpendicular to l.",
+      "answer": "Draw a circle from P to cut l at A and B; construct the perpendicular bisector of AB, meeting l at Q; PQ is perpendicular to l because the perpendicular bisector of AB is perpendicular to AB, and AB lies on l, so PQ is perpendicular to l.",
+      "explanation": "From P, draw a circle of suitable radius to intersect line l in two points A and B, so PA = PB. Construct the perpendicular bisector of AB using Construction 2. Because A and B lie on l, AB is a segment of l, and the perpendicular bisector of AB is perpendicular to AB, hence perpendicular to l, and passes through the midpoint of AB. Let this bisector meet l at Q. Then PQ is the same line as the perpendicular bisector, so PQ is perpendicular to l, as required."
+    },
+    {
+      "id": "icse-10-math-q-construct-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student is asked to construct triangle ABC with base BC = 8 cm, ∠B = 60°, and AB + AC = 9 cm. They mark BD = 9 cm on ray BX and then draw the perpendicular bisector of DC, but they draw the bisector on the wrong side of D and obtain a point A between B and D. Is the construction still valid? Explain what AB + AC equals in that case.",
+      "answer": "No, the construction is not valid as intended; if A lies between B and D then AD = AC gives AB + AC = BD still, but the geometry of the diagram no longer represents the triangle with the required side conditions as drawn.",
+      "explanation": "The perpendicular bisector of DC must meet ray BX at a point A on the side of D away from B so that A is beyond D from B and the resulting triangle has the correct arrangement. If A is between B and D, then AB = BD - AD with AD = AC still gives AB + AC = BD = 9 cm algebraically, so the sum condition is numerically satisfied, but the labelled figure does not correspond to the standard construction for AB + AC, and A would not lie on the correct side of the perpendicular bisector meeting RX in the usual way. A valid construction must have A on the perpendicular bisector on the side of D away from B."
+    },
+    {
+      "id": "icse-10-math-q-construct-22",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Number of circles drawn with equal radii from the two endpoints of a segment AB when constructing its perpendicular bisector is ______, and they intersect at ______ points.",
+      "options": ["one circle, one intersection", "two circles, two intersections", "two circles, one intersection", "three circles, three intersections"],
+      "correctIndex": 1,
+      "answer": "Two circles, two intersections",
+      "explanation": "We draw one circle centred at A and another circle centred at B, both with the same radius greater than half AB. These two circles intersect at two points. Joining these two intersection points gives the perpendicular bisector of AB."
+    },
+    {
+      "id": "icse-10-math-q-construct-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain the reasoning behind marking BD = AB + AC on ray BX in the sum-of-two-sides triangle construction, and why the perpendicular bisector of DC is the correct final step. In your explanation, show how the condition AB + AC = BD arises.",
+      "answer": "BD is marked equal to the given sum AB + AC on the ray from B; then A is chosen on the perpendicular bisector of DC so that AD = AC. This makes AB = BD - AC, so AB + AC = BD, which equals the given sum.",
+      "explanation": "The given condition is AB + AC = s, where s is known. The idea is to encode this sum as a single segment BD on the ray BX from B, so BD = s. In the construction we then locate A on the perpendicular bisector of DC. Because any point on the perpendicular bisector of DC is equidistant from D and C, we get AD = AC. Using AB = BD - AD and AD = AC gives AB = BD - AC, so AB + AC = BD. But BD = s by construction, so AB + AC = s, satisfying the given condition. Thus the perpendicular bisector is the step that forces the two sides to satisfy the sum condition."
     }
   ]
 }

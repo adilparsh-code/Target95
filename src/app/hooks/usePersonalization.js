@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { curriculumClasses, getSubjectsForBoardClass } from "@/app/lib/curriculumLauncher";
 
 const STORAGE_KEY = "target95_personalization";
 

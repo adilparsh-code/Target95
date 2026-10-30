@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-phy-gravitation",
+  "title": "Gravitation",
+  "kind": "physics",
+  "tagline": "A universal force that governs falling apples, ocean tides, satellite orbits and the motion of planets, and a concise mathematical law that describes all of them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Physics). No board examination paper, textbook or commercial guide was consulted. Numerical examples and worked answers were worked out for this page.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page."
+  },
+  "overview": {
+    "intro": "Gravitation is the force that makes dropped objects fall, gives a planet its weight, and keeps the Moon in orbit around the Earth. It is also the weakest of the familiar forces at everyday scales, yet it shapes the largest motions in the universe because it is always attractive and has infinite range. This chapter studies Newton's law of gravitation, the variation of the acceleration due to gravity with place and height, gravitational potential and energy, and the motion of satellites, including the special case of geostationary orbits.",
+    "facts": [
+      { "label": "Universal law of gravitation", "value": "Every particle attracts every other particle with a force proportional to the product of their masses and inversely proportional to the square of the distance between them." },
+      { "label": "Acceleration due to gravity", "value": "At the Earth's surface, g is about 9.8 m/s^2, and it varies with altitude, depth and latitude." },
+      { "label": "Gravitational potential energy", "value": "For two masses M and m separated by r, U = - G M m / r, with zero at infinite separation." },
+      { "label": "Escape velocity", "value": "The minimum speed at the surface needed for a body to reach infinity, v_e = sqrt(2 G M / R)." }
+    ]
+  },
+  "learningOutcomes": [
+    "State Newton's universal law of gravitation and write its vector form.",
+    "Explain the distinction between mass and weight.",
+    "Describe how g varies with altitude, depth and latitude.",
+    "Define gravitational field intensity and gravitational potential.",
+    "Derive or apply expressions for orbital velocity, time period, escape velocity and binding energy for a satellite.",
+    "Explain the conditions for a geostationary satellite and compare it with a polar satellite.",
+    "State Kepler's laws of planetary motion and relate them to circular motion."
+  ],
+  "learn": [
+    {
+      "id": "universal-law",
+      "title": "Newton's law of universal gravitation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Gravity is not a local curiosity. The same force that pulls an apple to the ground also governs the Moon and the planets. Newton's law states that the force between two point masses M and m separated by a distance r is F = G M m / r^2, directed along the line joining the two masses, with G = 6.67430 x 10^-11 N m^2 / kg^2. The law is inverse-square: doubling the separation reduces the force by a factor of four. For extended bodies the law applies to the force between two point masses, but for a spherically symmetric body the attraction can be treated as if all the mass were concentrated at the centre, for points outside it."
+        },
+        {
+          "type": "table",
+          "caption": "Universal gravitation compared with everyday gravity",
+          "columns": ["Quantity", "Symbol", "Meaning"],
+          "rows": [
+            ["Gravitational constant", "G", "Universal constant appearing in Newton's law, same everywhere"],
+            ["Acceleration due to gravity at surface", "g", "Local value near the Earth's surface, about 9.8 m/s^2"],
+            ["Relation between them", "g = G M / R^2", "Surface acceleration from Earth's mass M and radius R"],
+            ["Weight", "W = m g", "Gravitational force on a body near the surface"],
+            ["Mass", "m", "Inertia of the body, unrelated to location"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Gravity is always attractive; there is no repulsive gravitational force in Newtonian physics.",
+            "A spherical shell attracts an external particle as if all its mass were at the centre.",
+            "Inside a uniform spherical shell, the net gravitational force from the shell is zero.",
+            "G is a universal constant, but g is local, because it depends on the mass and radius of the attracting body."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "variation-of-g",
+      "title": "Variation of g with altitude, depth and latitude",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The acceleration due to gravity is not a universal number. At greater altitude, the distance from the Earth's centre is larger, so the pull is weaker: g_h = g (R / (R + h))^2. For small heights h much less than R, this is approximately g_h = g (1 - 2h/R). At depth d below the surface, only the mass inside the radius (R - d) contributes to the pull, giving g_d = g (1 - d/R). Latitude also matters because the Earth rotates. The centrifugal effect reduces the apparent g most at the equator and least at the poles, and the Earth is not a perfect sphere, being slightly flattened at the poles, so g is smallest at the equator and largest at the poles."
+        },
+        {
+          "type": "table",
+          "caption": "How g changes in simple cases",
+          "columns": ["Situation", "Approximate form", "Direction of change"],
+          "rows": [
+            ["Altitude h above surface", "g_h = g (R/(R+h))^2", "g decreases with height"],
+            ["Small height h << R", "g_h = g (1 - 2h/R)", "Slightly smaller at height"],
+            ["Depth d below surface", "g_d = g (1 - d/R)", "Decreases with depth in a uniform Earth"],
+            ["Equator vs pole", "g_pole > g_equator", "Centrifugal effect and shape reduce g at equator"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If a body weighs 500 N at the Earth's surface, its weight at a height equal to the Earth's radius is W_h = m g_h = m * (g/4) = 500/4 = 125 N, because g drops by a factor 1/4 when the distance doubles.",
+              "note": "The weight falls off as the inverse square of the distance, so at two Earth radii from the centre the force is one quarter of the surface value."
+            },
+            {
+              "text": "At a depth equal to half the Earth's radius, g_d = g (1 - 0.5) = 0.5 g, so the acceleration due to gravity is half the surface value in the uniform-Earth model.",
+              "note": "The deep-Earth model assumes uniform density, which is only an idealisation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "potential-and-energy",
+      "title": "Gravitational potential and potential energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Gravitational potential at a point is the work done per unit mass to bring a small test mass from infinity to that point. For a mass M, the potential at distance r is V = - G M / r. The potential energy of a mass m at that point is U = m V = - G M m / r, with zero taken at infinity. The negative sign is important: it means gravity is attractive and energy must be supplied to separate the masses. Near the Earth's surface the simpler expression U = m g h is a local approximation, valid only when h is small compared with R."
+        },
+        {
+          "type": "table",
+          "caption": "Common gravitational energy expressions",
+          "columns": ["Expression", "When to use it", "Remarks"],
+          "rows": [
+            ["U = - G M m / r", "General two-body problem", "Zero at infinity"],
+            ["U = m g h", "Small heights near a planet's surface", "Local approximation"],
+            ["Escape velocity", "v_e = sqrt(2 G M / R)", "Speed to reach infinity from the surface"],
+            ["Orbital velocity (circular)", "v_0 = sqrt(G M / r)", "For a circular orbit of radius r"],
+            ["Binding energy", "E_b = G M m / (2 r)", "Energy required to remove a satellite from orbit"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "satellites",
+      "title": "Orbital motion and satellite types",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A satellite in a circular orbit feels a centripetal acceleration supplied by gravity: m v^2 / r = G M m / r^2, which gives the orbital speed v_0 = sqrt(G M / r). The period follows from T = 2 pi r / v_0, so T = 2 pi sqrt(r^3 / (G M)). This is the same form as Kepler's third law for circular orbits. A higher orbit has a smaller speed and a longer period. An orbit at the right height above the equator can match the Earth's rotation and appear stationary: that is a geostationary satellite, used for communications and weather observation. A polar satellite passes over the poles and covers the whole Earth as it rotates beneath."
+        },
+        {
+          "type": "table",
+          "caption": "Comparison of satellite orbits",
+          "columns": ["Property", "Geostationary", "Polar orbit"],
+          "rows": [
+            ["Orbit plane", "Equatorial plane", "Through the poles"],
+            ["Apparent motion", "Stationary over one point", "Moves over the surface"],
+            ["Period", "One sidereal day", "Shorter, depending on height"],
+            ["Main use", "Continuous coverage of one region", "Global coverage in strips"],
+            ["Coverage change", "Fixed area", "Whole Earth over time"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Escape velocity does not depend on the mass of the escaping body.",
+            "For a circular orbit, the kinetic energy is half the magnitude of the potential energy: K = -U/2.",
+            "The total energy of a bound circular orbit is negative.",
+            "Weightlessness in orbit is due to free fall, not the absence of gravity.",
+            "A satellite cannot stay stationary over the poles because that would not match the Earth's rotation."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kepler",
+      "title": "Kepler's laws and their meaning",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Kepler's laws describe planetary motion from observation before the reason for it was known. The first law says each planet moves in an ellipse with the Sun at one focus. The second law says the radius vector from the Sun to the planet sweeps out equal areas in equal times, which is a statement of conservation of angular momentum. The third law says the square of the period is proportional to the cube of the semi-major axis; for circular orbits this becomes T^2 proportional to r^3. Newton's law of gravitation later explained why these laws hold."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If a satellite orbits at radius 4R and another at radius R, the periods are in the ratio T_4 / T_1 = (4R/R)^(3/2) = 4^(3/2) = 8, so the higher satellite takes eight times longer.",
+              "note": "The period grows faster than distance because a higher orbit is both farther and slower."
+            },
+            {
+              "text": "Escape velocity from the Earth's surface is about sqrt(2 * G * M / R) = sqrt(2) times the orbital speed at the surface, about 11.2 km/s in practice.",
+              "note": "This is why reaching space requires a large speed even though there is no atmosphere at high altitude."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-misconceptions",
+      "title": "Common misconceptions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A common confusion is to treat g as constant everywhere; it is nearly constant near the surface but changes with height, depth and latitude. Another is to say there is no gravity in orbit, when in fact gravity is what keeps the satellite in orbit and astronauts float because they are falling together with their spacecraft. Students also sometimes mix up mass and weight, or assume escape velocity depends on the payload mass. It does not: escape velocity depends on the planet, not the object leaving it."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Orbital motion is free fall; the satellite is constantly falling toward the Earth but with enough sideways speed to miss it.",
+            "Gravitational potential energy is negative when zero is taken at infinity.",
+            "Escape velocity is a speed, not a force, and it is independent of the escaping body's mass.",
+            "Kepler's second law is really angular momentum conservation in disguise.",
+            "Weightlessness is a local sensation of free fall, not evidence that gravity has vanished."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Gravitational force between two masses",
+      "description": "Two point masses M and m separated by distance r, with equal and opposite force vectors along the line joining them, and labels showing the inverse-square dependence.",
+      "labels": [
+        "Mass M",
+        "Mass m",
+        "Separation r",
+        "Force on M",
+        "Force on m, equal and opposite"
+      ]
+    },
+    {
+      "caption": "Figure: Variation of g with altitude and depth",
+      "description": "A labelled diagram of the Earth showing the surface, a point above the surface at height h, and a point inside at depth d, each marked with the corresponding expression for g.",
+      "labels": [
+        "Earth's surface",
+        "Point at altitude h above surface",
+        "Point at depth d below surface",
+        "g decreases with altitude",
+        "g decreases with depth in a uniform Earth"
+      ]
+    },
+    {
+      "caption": "Figure: Circular satellite orbit and geostationary orbit",
+      "description": "A view of the Earth with a low polar orbit shown as a tilted circle and a geostationary orbit shown as a circle in the equatorial plane. The satellite positions, orbital radii and direction of motion are labelled.",
+      "labels": [
+        "Earth at centre",
+        "Low Earth orbit satellite",
+        "Geostationary orbit radius",
+        "Orbital speed decreases with radius",
+        "Geostationary satellite stays above the same equatorial point"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Newton's law of gravitation is F = G M m / r^2 and is universal.",
+    "G is a universal constant; g is the local surface acceleration and equals G M / R^2.",
+    "Weight is a force, mass is inertia; they are not the same.",
+    "g varies with altitude, depth and latitude.",
+    "Gravitational potential is V = - G M / r and potential energy is U = m V.",
+    "Orbital speed for a circular orbit is v_0 = sqrt(G M / r).",
+    "Escape velocity is v_e = sqrt(2 G M / R) and does not depend on the escaping mass.",
+    "Kepler's third law follows from Newton's law for circular orbits.",
+    "A geostationary satellite orbits in the equatorial plane with a one-day period.",
+    "Weightlessness in orbit is free fall, not absence of gravity."
+  ],
+  "examFocus": [
+    "State the zero of gravitational potential energy before using U = - G M m / r.",
+    "Distinguish mass from weight in any gravitation problem.",
+    "Use the satellite formulas with the correct radius measured from the planet's centre.",
+    "Give the direction of g when asked for variation with latitude.",
+    "Recall that escape velocity is a speed, not a force."
+  ],
+  "vocabulary": [
+    { "word": "Universal gravitation", "meaning": "The law that every mass attracts every other mass with a force proportional to the product of the masses and inversely proportional to the square of the distance." },
+    { "word": "Gravitational constant", "meaning": "The universal constant G in Newton's law of gravitation." },
+    { "word": "Acceleration due to gravity", "meaning": "The acceleration of a free-falling body near a planet's surface, g." },
+    { "word": "Gravitational potential", "meaning": "The work done per unit mass to bring a test mass from infinity to a point." },
+    { "word": "Escape velocity", "meaning": "The minimum speed to leave a planet's gravitational field from its surface." },
+    { "word": "Orbital velocity", "meaning": "The speed of a satellite in a circular orbit around a planet." },
+    { "word": "Geostationary satellite", "meaning": "A satellite whose orbital period matches the Earth's rotation and which stays above the same equatorial point." },
+    { "word": "Weight", "meaning": "The gravitational force on a body, W = m g near the surface." }
+  ],
+  "questions": [
+    {
+      "id": "isc12-phy-grav-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The gravitational force between two masses M and m separated by distance r is:",
+      "options": ["F = G M m / r", "F = G M m / r^2", "F = G M m r", "F = G M / m r^2"],
+      "correctIndex": 1,
+      "answer": "F = G M m / r^2",
+      "explanation": "Newton's universal law of gravitation uses the inverse square of the separation: F = G M m / r^2."
+    },
+    {
+      "id": "isc12-phy-grav-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of G is best described as:",
+      "options": ["Different on the Moon", "The same everywhere in the universe", "Depends on the local gravity", "Larger for heavier bodies"],
+      "correctIndex": 1,
+      "answer": "The same everywhere in the universe",
+      "explanation": "G is a universal constant; local gravity g changes from place to place, but G does not."
+    },
+    {
+      "id": "isc12-phy-grav-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the Earth's radius is R, the acceleration due to gravity at height R is approximately:",
+      "options": ["g", "g/2", "g/4", "2g"],
+      "correctIndex": 2,
+      "answer": "g/4",
+      "explanation": "At height R the distance from the centre is 2R, so g is reduced by the square factor (R/(2R))^2 = 1/4."
+    },
+    {
+      "id": "isc12-phy-grav-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The escape velocity from a planet depends on:",
+      "options": ["The mass of the escaping body only", "The radius of the planet only", "The planet's mass and radius", "The planet's mass, radius and the escaping body's mass"],
+      "correctIndex": 2,
+      "answer": "The planet's mass and radius",
+      "explanation": "Escape velocity v_e = sqrt(2 G M / R) depends on the planet, not on the object escaping."
+    },
+    {
+      "id": "isc12-phy-grav-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a satellite in a circular orbit, the kinetic energy K and the magnitude of the potential energy |U| satisfy:",
+      "options": ["K = |U|", "K = |U|/2", "|U| = 2K", "Both B and C"],
+      "correctIndex": 3,
+      "answer": "Both B and C",
+      "explanation": "For a bound circular orbit, K = -U/2, so K = |U|/2 and also |U| = 2K; these are the same statement written two ways."
+    },
+    {
+      "id": "isc12-phy-grav-06",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A geostationary satellite must orbit in the:",
+      "options": ["Polar plane", "Equatorial plane", "Any inclined plane", "Plane of the Moon's orbit"],
+      "correctIndex": 1,
+      "answer": "Equatorial plane",
+      "explanation": "Only a satellite in the equatorial plane with a one-day period can appear stationary over one point on Earth."
+    },
+    {
+      "id": "isc12-phy-grav-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The gravitational potential energy of two masses M and m separated by distance r is U = __________, taking zero at infinity.",
+      "answer": "-G M m / r",
+      "explanation": "The potential energy is negative because the force is attractive and work is required to separate the masses."
+    },
+    {
+      "id": "isc12-phy-grav-08",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A satellite orbiting with period T and orbital radius r obeys Kepler's third law, which for circular orbits says T^2 is proportional to __________.",
+      "answer": "r^3",
+      "explanation": "From T^2 = (4 pi^2 / G M) r^3, the period squared is proportional to the orbital radius cubed."
+    },
+    {
+      "id": "isc12-phy-grav-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why a person in an orbiting satellite is weightless even though gravity still acts.",
+      "answer": "The satellite and the person inside are both in free fall toward the Earth, accelerating at the same rate. There is no contact force between the person and the floor of the satellite, so the person feels weightless. Gravity is still present and provides the centripetal force for the orbit; weightlessness is the sensation of free fall, not the absence of gravity.",
+      "explanation": "Weightlessness comes from free fall, not from the vanishing of gravity."
+    },
+    {
+      "id": "isc12-phy-grav-10",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A satellite of mass 200 kg orbits the Earth in a circular orbit of radius 7.0 x 10^6 m. Take G = 6.67 x 10^-11 N m^2/kg^2 and Earth's mass M = 6.0 x 10^24 kg. Find the orbital speed and the orbital period.",
+      "answer": "Orbital speed: v = sqrt(G M / r) = sqrt(6.67 x 10^-11 * 6.0 x 10^24 / 7.0 x 10^6) = sqrt(4.002 x 10^14 / 7.0 x 10^6) = sqrt(5.717 x 10^7) = 7561 m/s, about 7.56 km/s. Period: T = 2 pi r / v = 2 pi * 7.0 x 10^6 / 7561 = 5.82 x 10^4 s, about 16.2 hours.",
+      "explanation": "Set centripetal force equal to gravity, v^2/r = G M/r^2, solve for v, then use T = 2 pi r / v for the period."
+    },
+    {
+      "id": "isc12-phy-grav-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "At what height above the Earth's surface is the acceleration due to gravity g/4? Express the answer in terms of the Earth's radius R.",
+      "answer": "Use g_h = g (R/(R+h))^2 = g/4. Then (R/(R+h))^2 = 1/4, so R/(R+h) = 1/2, giving R+h = 2R and h = R. So the height is one Earth radius above the surface.",
+      "explanation": "The height at which g falls to one quarter is one Earth radius above the surface because g varies as 1/(R+h)^2."
+    },
+    {
+      "id": "isc12-phy-grav-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A planet has a moon that orbits at radius r with period T. Another moon orbits at radius 8r. Show that its period is 8^(3/2) T and explain why the outer moon moves slower.",
+      "answer": "Kepler's third law for circular orbits: T^2 proportional to r^3. For the outer moon, T2^2 / T^2 = (8r)^3 / r^3 = 512, so T2 = sqrt(512) T = 8^(3/2) T. The outer moon moves slower because it is farther from the planet's centre; the required centripetal force is smaller and for a given central mass the orbital speed v = sqrt(G M / r) decreases with increasing r.",
+      "explanation": "The period grows faster than radius because the orbit is both larger and slower."
+    }
+  ]
+}

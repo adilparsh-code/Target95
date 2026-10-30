@@ -8,7 +8,7 @@ import HomeResumeCard from "./components/HomeResumeCard";
 import { usePersonalization } from "./hooks/usePersonalization";
 import useProgress from "./hooks/useProgress";
 import { useAuth } from "@/context/AuthContext";
-import { curriculumClasses, getSubjectsForBoardClass } from "./lib/curriculumLauncher";
+import { curriculumClasses, getClassHref, getSubjectsForBoardClass } from "./lib/curriculumLauncher";
 
 const boards = [
   { id: "cisce", label: "CISCE", detail: "(ICSE/ISC)" },
@@ -27,7 +27,7 @@ function MiniIcon({ type }) {
   return <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700">{type === "exam" ? "◷" : type === "ai" ? "✦" : "▣"}</span>;
 }
 
-export default function StitchHomeHub() {
+export default function StitchHomeHub({ launcherStatus = {} }) {
   const { board, class: selectedClass, subject, setBoard, setClass, setSubject, isHydrated } = usePersonalization();
   const { user, loading: authLoading } = useAuth();
   const { firestoreProgress, loading: progressLoading } = useProgress(user?.uid || null);
@@ -36,8 +36,14 @@ export default function StitchHomeHub() {
   const selected = selectedClass?.id || "icse-class-10";
   const currentClass = curriculumClasses[activeBoard].find((item) => item.id === selected) || curriculumClasses[activeBoard][0];
   const subjectOptions = getSubjectsForBoardClass(activeBoard, currentClass.id);
+  const publishedBySubject = launcherStatus[currentClass.id] || null;
+  const classHref = getClassHref(activeBoard, currentClass.id);
   const selectedSubject = subject && subjectOptions.some((item) => item.id === subject) ? subject : subjectOptions[0]?.id;
   const activeSubject = subjectOptions.find((item) => item.id === selectedSubject) || subjectOptions[0];
+  // A registered subject with no published chapters opens the class page, which
+  // marks it "Coming soon", rather than implying chapters that do not exist.
+  const opensClassPage = Boolean(classHref) && Boolean(publishedBySubject) && !publishedBySubject[activeSubject?.id];
+  const activeSubjectHref = opensClassPage ? classHref : activeSubject?.href;
 
   const chooseBoard = (id) => {
     setBoard(id);
@@ -82,8 +88,8 @@ export default function StitchHomeHub() {
             <div className="mt-5 grid gap-3 lg:grid-cols-[1.05fr_1fr_1.15fr_.95fr]">
               <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 1 • Board</p><div className="mt-2 grid grid-cols-2 gap-2">{boards.map((item) => <button key={item.id} type="button" onClick={() => chooseBoard(item.id)} aria-pressed={activeBoard === item.id} className={`rounded-lg border px-3 py-2 text-xs font-semibold ${activeBoard === item.id ? "border-teal-200 bg-teal-50 text-teal-700" : "border-slate-200 text-slate-600"}`}>{item.label}<span className="block text-[10px] font-normal opacity-70">{item.detail}</span></button>)}</div></div>
               <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 2 • Class</p><div className="mt-2 grid grid-cols-4 gap-1.5">{curriculumClasses[activeBoard].map((item) => <button key={item.id} type="button" onClick={() => chooseClass(item)} aria-pressed={currentClass.id === item.id} className={`flex h-9 items-center justify-center rounded-md text-xs font-bold ${currentClass.id === item.id ? "bg-blue-700 text-white" : "bg-slate-50 text-slate-600 hover:bg-blue-50"}`}>{item.label}</button>)}</div></div>
-              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => setSubject(item.id)} aria-pressed={selectedSubject === item.id} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white text-sm shadow-sm">{item.icon}</span><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
-              <div className="rounded-lg bg-blue-700 p-4 text-white"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ready to Study</p><p className="mt-1 text-sm font-bold">{currentClass.title} · {activeSubject.label}</p><Link href={activeSubject.href} className="mt-3 flex h-8 items-center justify-center rounded-md bg-white text-[11px] font-bold text-blue-700">Open Syllabus Chapters →</Link></div>
+              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => setSubject(item.id)} aria-pressed={selectedSubject === item.id} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-white text-sm shadow-sm">{item.icon}</span><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{publishedBySubject ? (publishedBySubject[item.id] ? `${publishedBySubject[item.id]} published chapter${publishedBySubject[item.id] === 1 ? "" : "s"}` : "Coming soon") : item.detail}</span></span></button>)}</div></div>
+              <div className="rounded-lg bg-blue-700 p-4 text-white"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ready to Study</p><p className="mt-1 text-sm font-bold">{currentClass.title} · {activeSubject?.label}</p><Link href={activeSubjectHref} className="mt-3 flex h-8 items-center justify-center rounded-md bg-white text-[11px] font-bold text-blue-700">{opensClassPage ? "Browse class subjects →" : "Open Syllabus Chapters →"}</Link>{classHref && !opensClassPage && <Link href={classHref} className="mt-2 flex h-8 items-center justify-center rounded-md border border-white/40 text-[11px] font-semibold text-white">All {currentClass.title} subjects →</Link>}</div>
             </div>
           </section>
 

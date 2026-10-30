@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-phy-rotational",
+  "title": "System of Particles and Rotational Motion",
+  "kind": "physics",
+  "tagline": "How a collection of particles moves as one body, why rotation needs a different language from translation, and how centre of mass, torque and moment of inertia describe rigid-body motion.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Physics). No board examination paper, textbook or commercial guide was consulted. Numerical examples and worked answers were worked out for this page.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page."
+  },
+  "overview": {
+    "intro": "In earlier chapters a body was usually treated as a point whose position could be followed with a single coordinate. That picture works for a small object, but many important motions involve a body that can both translate and rotate at the same time: a spinning top, a rolling wheel, a diver tucking in mid-air, or a ship listing in the sea. The System of Particles and Rotational Motion chapter gives a cleaner language for those situations. It replaces a single position vector with a centre of mass, adds torque and angular momentum to the force-and-momentum picture, and shows why the distribution of mass around an axis matters as much as the total mass.",
+    "facts": [
+      { "label": "Centre of mass", "value": "The point that moves as though all the mass of the system were concentrated there and all external forces acted there." },
+      { "label": "Torque", "value": "The turning effect of a force, defined as the vector product of the position vector and the force." },
+      { "label": "Angular momentum", "value": "The rotational analogue of linear momentum, defined as the vector product of position and linear momentum for a particle." },
+      { "label": "Moment of inertia", "value": "The rotational analogue of mass, depending on how far each mass element lies from the axis of rotation." }
+    ]
+  },
+  "learningOutcomes": [
+    "Define centre of mass for a two-particle system and for a simple rigid body.",
+    "State and use the relation between centre-of-mass motion and external force for a system of particles.",
+    "Define torque and angular acceleration and state the relation tau = I alpha for a rigid body.",
+    "Define angular momentum and apply conservation of angular momentum to simple situations.",
+    "Define moment of inertia and radius of gyration and write the expressions for simple shapes.",
+    "State and interpret the parallel and perpendicular axes theorems.",
+    "Compare linear quantities with their rotational analogues and recognise where the analogy holds and where it does not."
+  ],
+  "learn": [
+    {
+      "id": "system-of-particles",
+      "title": "A system of particles, not a single particle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a body has size, its different parts can move in different ways at the same time. A bat swung at a ball has one end moving faster than the other; a floating iceberg spins while it drifts; a spinning satellite can still translate across its orbit. The first step in describing such motion cleanly is to separate what happens to the whole system from what happens inside it. The whole-system motion is captured by a single point, the centre of mass, which behaves as if all the mass were gathered there and all external forces were applied there. Internal forces between the parts cannot change the motion of that point."
+        },
+        {
+          "type": "paragraph",
+          "text": "For two particles of masses m1 and m2 at positions r1 and r2, the position of the centre of mass is given by R_cm = (m1 r1 + m2 r2) / (m1 + m2). If the two masses are equal, the centre of mass lies exactly midway between them. If one mass is much larger, the centre of mass lies much closer to the larger mass. For more particles, the same idea extends by adding each term to the sum: R_cm = (m1 r1 + m2 r2 + ...)/M, where M is the total mass of the system."
+        },
+        {
+          "type": "table",
+          "caption": "Centre of mass of equally spaced masses on a line",
+          "columns": ["Configuration", "Centre of mass"],
+          "rows": [
+            ["Two equal masses at the ends of a rod", "Mid-point of the rod"],
+            ["Mass m at the origin and mass 2m at x = L", "x = (2mL)/(3m) = 2L/3, nearer the heavier mass"],
+            ["Three equal masses at x = 0, L and 2L", "x = L, the middle mass position"],
+            ["A uniform rod of length L", "At its geometrical centre for a uniform rod"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The centre of mass need not lie inside the body; a ring's centre of mass is at its centre, which is empty space.",
+            "For a uniform symmetric body, the centre of mass is at the geometric centre if symmetry is complete.",
+            "The velocity of the centre of mass is given by V_cm = (m1 v1 + m2 v2)/M, and the acceleration by a similar weighted sum.",
+            "If the net external force on a system is zero, the centre of mass moves with constant velocity, even if the parts are colliding or spinning."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rotational-quantities",
+      "title": "Rotational analogues: torque, angular momentum, moment of inertia",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Rotation is described by quantities that look like the linear quantities from earlier chapters but have a rotational meaning. Position becomes an angular position about an axis, velocity becomes angular velocity, force becomes torque, mass becomes moment of inertia, and linear momentum becomes angular momentum. These analogues are useful, but they are not identical. The most important difference is that the distribution of mass around the axis matters: a body can have the same total mass and yet spin easily or hardly at all depending on how that mass is arranged."
+        },
+        {
+          "type": "paragraph",
+          "text": "Torque is the rotational effect of a force. If a particle is at position r from a chosen origin and a force F acts on it, the torque about that origin is tau = r x F, with magnitude tau = r F sin theta, where theta is the angle between r and F. The direction is given by the right-hand rule for a cross product. Only the component of force perpendicular to r contributes to turning. A long lever arm makes a given force more effective, which is why a wrench with a longer handle is easier to use."
+        },
+        {
+          "type": "paragraph",
+          "text": "Angular momentum of a particle about a point is L = r x p = r x m v. Its magnitude is L = m v r sin theta for the same angle between r and v. The rate of change of angular momentum is related to torque in the same neat way that force is related to linear momentum: tau = dL/dt. For a rigid body rotating about a fixed axis, this becomes tau = I alpha once the body's moment of inertia I about that axis is known, where alpha is the angular acceleration."
+        },
+        {
+          "type": "table",
+          "caption": "Linear and rotational analogues",
+          "columns": ["Linear quantity", "Symbol", "Rotational analogue", "Symbol"],
+          "rows": [
+            ["Position", "x", "Angular position", "theta"],
+            ["Velocity", "v", "Angular velocity", "omega"],
+            ["Mass", "m", "Moment of inertia", "I"],
+            ["Momentum", "p = m v", "Angular momentum", "L = I omega"],
+            ["Force", "F", "Torque", "tau = I alpha"],
+            ["Kinetic energy", "1/2 m v^2", "Rotational kinetic energy", "1/2 I omega^2"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moment-of-inertia",
+      "title": "Moment of inertia and radius of gyration",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Moment of inertia is the quantity that tells how hard it is to start or stop a body rotating about a given axis. For a system of particles it is I = sum m_i r_i^2, where r_i is the perpendicular distance of the i-th particle from the axis. For a continuous body it becomes I = integral r^2 dm. The same body can have very different moments of inertia about different axes, which is why MKS-style mass alone is not enough to describe rotational motion. The radius of gyration k is defined by I = M k^2, so two bodies with the same total mass can have different moments of inertia because they have different k."
+        },
+        {
+          "type": "table",
+          "caption": "Moment of inertia for common shapes about specified axes",
+          "columns": ["Shape", "Axis", "Moment of inertia"],
+          "rows": [
+            ["Thin ring of mass M and radius R", "Through centre, perpendicular to plane", "I = M R^2"],
+            ["Thin disc of mass M and radius R", "Through centre, perpendicular to plane", "I = 1/2 M R^2"],
+            ["Solid cylinder of mass M and radius R", "Along its axis", "I = 1/2 M R^2"],
+            ["Hollow cylinder of mass M and radius R", "Along its axis", "I = M R^2"],
+            ["Thin rod of mass M and length L", "Through centre, perpendicular to rod", "I = 1/12 M L^2"],
+            ["Thin rod of mass M and length L", "Through one end, perpendicular to rod", "I = 1/3 M L^2"],
+            ["Solid sphere of mass M and radius R", "Through centre", "I = 2/5 M R^2"],
+            ["Hollow sphere of mass M and radius R", "Through centre", "I = 2/3 M R^2"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "These are formulae only; the syllabus works with these shapes rather than requiring full integration for each.",
+            "Each formula depends on the chosen axis, so always state the axis before quoting a moment of inertia.",
+            "A larger moment of inertia makes the same torque produce a smaller angular acceleration, just as a larger mass makes the same force produce a smaller linear acceleration.",
+            "For the same mass, mass farther from the axis gives a larger moment of inertia."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "axes-theorems",
+      "title": "Parallel and perpendicular axes theorems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The parallel and perpendicular axes theorems help move from one axis to another without recomputing every integral. Both apply to moment of inertia in the planar-rigidity sense, so they are most useful for flat or thin bodies and for axes related in the ways the theorems describe. They are stated rather than derived in the syllabus, and the point of learning them is to see how the moment of inertia depends on the choice of axis, not just on the shape alone."
+        },
+        {
+          "type": "table",
+          "caption": "Statements of the two common axes theorems",
+          "columns": ["Theorem", "Statement", "Use"],
+          "rows": [
+            ["Parallel axes theorem", "If I_cm is the moment of inertia about an axis through the centre of mass, then the moment of inertia about a parallel axis at distance d is I = I_cm + M d^2.", "Moving the axis parallel to itself"],
+            ["Perpendicular axes theorem", "For a plane lamina, I_z = I_x + I_y, where I_z is about an axis perpendicular to the lamina through the intersection of the in-plane axes x and y.", "Relating in-plane and perpendicular axes for flat bodies"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "A simple example: a thin rod of length L has I = (1/12) M L^2 about a perpendicular axis through its centre. The axis through one end is parallel and at distance L/2 from the centre, so I_end = (1/12) M L^2 + M (L/2)^2 = (1/12) M L^2 + (1/4) M L^2 = (1/3) M L^2. The result matches the listed formula for the end axis, which is a good check of the theorem's use."
+        }
+      ]
+    },
+    {
+      "id": "conservation-and-equations",
+      "title": "Equations of rotational motion and conservation of angular momentum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For a rigid body rotating about a fixed axis, the conditions are very close to the linear case. Torque replaces force, moment of inertia replaces mass, and angular acceleration replaces linear acceleration: tau_net = I alpha. The kinematic equations for constant angular acceleration mirror the linear ones: omega = omega_0 + alpha t, theta = theta_0 + omega_0 t + (1/2) alpha t^2, and omega^2 = omega_0^2 + 2 alpha (theta - theta_0). Rotational kinetic energy is K_rot = (1/2) I omega^2, and the total kinetic energy of a rolling body is the sum of translational and rotational parts."
+        },
+        {
+          "type": "paragraph",
+          "text": "If the net external torque about a point is zero, the angular momentum about that point is conserved. That principle explains a diver speeding up by tucking in, a skater spinning faster by pulling arms in, and the slow rotation of a planet or star when its mass distribution is spread out. For a system of particles, if the total external torque is zero, the total angular momentum stays constant. The principle is especially important when the moment of inertia changes with time, because a smaller I forces a larger omega to keep L unchanged."
+        },
+        {
+          "type": "table",
+          "caption": "Equilibrium and rotation of rigid bodies",
+          "columns": ["Condition", "Meaning"],
+          "rows": [
+            ["Translational equilibrium", "Net external force zero; centre of mass does not accelerate"],
+            ["Rotational equilibrium", "Net external torque zero about any point; angular velocity is constant"],
+            ["Static equilibrium of a rigid body", "Both net force and net torque are zero"],
+            ["Stable equilibrium", "Displacement restores the original position"],
+            ["Unstable equilibrium", "Small displacement moves the body further away"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rolling-and-example",
+      "title": "Rolling motion and a worked numerical",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Rolling motion combines translation of the centre of mass and rotation about the centre. A perfectly rolling wheel has no sliding at the point of contact, so the instantaneous speed of the contact point relative to the surface is zero. For a body rolling without slipping, v_cm = R omega, and the total kinetic energy is K = (1/2) M v_cm^2 + (1/2) I_cm omega^2. A hollow cylinder has all its mass near the rim, so more energy goes into rotation for a given speed; a solid cylinder has a smaller moment of inertia, so it accelerates more readily down the same slope. Comparing rolling bodies is a standard way to see why moment of inertia matters in a real motion."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The centre of mass of the Earth-Moon system is much closer to the Earth's centre than to the Moon's centre because the Earth is more massive.",
+              "note": "For equal masses the centre of mass is halfway, not at a mass position."
+            },
+            {
+              "text": "A solid cylinder of mass 4 kg and radius 0.25 m rolls without slipping at speed 6 m/s. The translational kinetic energy is 1/2 * 4 * 6^2 = 72 J. The rotational kinetic energy uses I = 1/2 M R^2 = 1/2 * 4 * 0.25^2 = 0.125 kg m^2, omega = v/R = 6/0.25 = 24 rad/s, so K_rot = 1/2 * 0.125 * 24^2 = 1/2 * 0.125 * 576 = 36 J. The total kinetic energy is 108 J.",
+              "note": "Here half the kinetic energy is translational and half rotational because I = 1/2 M R^2 gives K_rot = 1/4 M v^2, which is exactly half of K_trans = 1/2 M v^2."
+            },
+            {
+              "text": "If the same solid cylinder above were replaced by a hollow cylinder of the same mass, radius and speed, the rotational kinetic energy would be larger because I = M R^2, so K_rot = 1/2 M v^2, equal to the translational part.",
+              "note": "Changing the mass distribution changes the energy split even though the total mass and speed are unchanged."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-misconceptions",
+      "title": "Common misconceptions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Students often conflate mass with moment of inertia, or conflate force with torque. A smaller force can produce a larger torque if it acts far from the axis, and a heavier body is not necessarily harder to spin - its distribution matters more than its total mass. Another common confusion is treating angular momentum conservation as if it implied angular speed is always unchanged. The speed changes precisely when the moment of inertia changes. A third trap is forgetting the axis: moment of inertia is always about a chosen axis, and the same body has different values for different axes."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A skater pulling in the arms spins faster because the moment of inertia drops and angular momentum L = I omega is conserved.",
+              "note": "The spin speed increases precisely because the moment of inertia changes."
+            },
+            {
+              "text": "A hollow cylinder and a solid cylinder of the same mass and radius roll differently because their moments of inertia are 1/2 M R^2 and M R^2 respectively.",
+              "note": "Same mass and radius do not guarantee the same rolling behaviour."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Centre of mass is not the same as centre of gravity in general, though they coincide for uniform gravity.",
+            "Torque is axis-dependent; changing the reference point changes the torque even though the force is the same.",
+            "Conservation of angular momentum applies only when the net external torque is zero.",
+            "Rolling without slipping links translation and rotation; a slipping wheel does not satisfy v = R omega.",
+            "The parallel and perpendicular axes theorems are not universal; they apply in the situations the syllabus describes."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Centre of mass of a two-particle system",
+      "description": "A labelled line with two masses m1 and m2 marked at their positions, and the centre of mass shown between them, closer to the heavier mass. An arrow points to the centre of mass and a second arrow shows the motion of that point under a net external force.",
+      "labels": [
+        "Position of mass m1",
+        "Position of mass m2",
+        "Centre of mass location",
+        "Direction of net external force",
+        "Motion of the centre of mass"
+      ]
+    },
+    {
+      "caption": "Figure: Torque from a force applied off-axis",
+      "description": "A rigid rod pivoted at one end with a force applied at the free end at an angle to the rod. The diagram marks the lever arm, the force vector, the angle between r and F, and the resulting rotation direction.",
+      "labels": [
+        "Pivot point and origin for torque",
+        "Position vector r from pivot to point of application",
+        "Applied force vector F",
+        "Lever arm r sin theta",
+        "Sense of rotation produced by the torque"
+      ]
+    },
+    {
+      "caption": "Figure: Moment of inertia for a thin ring and a disc",
+      "description": "Two side-by-side shapes in the same plane: a ring of mass M and radius R, and a solid disc of the same mass and radius. Each is labelled with the mass distribution and the axis perpendicular to the plane through the centre.",
+      "labels": [
+        "Axis of rotation perpendicular to the plane",
+        "Ring: mass concentrated at distance R",
+        "Disc: mass spread from 0 to R",
+        "Result: ring and disc have different moments of inertia",
+        "Same mass, different I because of the distribution"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The centre of mass behaves as if all mass and all external force were concentrated there.",
+    "Internal forces cannot change the motion of the centre of mass.",
+    "Torque is the cross product r x F; only the perpendicular component of force matters for turning.",
+    "Angular momentum of a particle is L = r x p, and torque equals dL/dt.",
+    "For a rigid body about a fixed axis, tau = I alpha.",
+    "Moment of inertia depends on both mass and its distribution about the axis.",
+    "Rotational kinetic energy is 1/2 I omega^2.",
+    "Angular momentum is conserved when net external torque is zero.",
+    "The parallel and perpendicular axes theorems help relate moments of inertia about different axes.",
+    "Rolling combines translation and rotation, with v = R omega for pure rolling."
+  ],
+  "examFocus": [
+    "State the centre-of-mass definition before using it in a problem.",
+    "Specify the axis whenever quoting a moment of inertia.",
+    "Use tau = I alpha only for a rigid body about a fixed axis, not for any rotating object.",
+    "In angular momentum problems, state clearly what is conserved and why.",
+    "When comparing rolling bodies, distinguish translational kinetic energy from rotational kinetic energy."
+  ],
+  "vocabulary": [
+    { "word": "Centre of mass", "meaning": "The point where the weighted positions of all particles in a system balance." },
+    { "word": "Torque", "meaning": "The turning effect of a force, defined as r x F." },
+    { "word": "Angular momentum", "meaning": "The rotational analogue of momentum, L = r x p for a particle." },
+    { "word": "Moment of inertia", "meaning": "The rotational analogue of mass, I = sum m_i r_i^2 for a system of particles." },
+    { "word": "Radius of gyration", "meaning": "The distance from the axis at which the whole mass could be placed to give the same moment of inertia, k where I = M k^2." },
+    { "word": "Angular acceleration", "meaning": "The rate of change of angular velocity, alpha = d omega / dt." },
+    { "word": "Rolling without slipping", "meaning": "Motion where the instantaneous velocity of the contact point is zero, so v = R omega." },
+    { "word": "Rotational equilibrium", "meaning": "State in which the net external torque about any point is zero." }
+  ],
+  "questions": [
+    {
+      "id": "isc12-phy-rot-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The centre of mass of a uniform thin ring is located at:",
+      "options": ["A point on the ring", "The geometrical centre of the ring", "The centre of mass is not defined for a ring", "Halfway between the ring and the axis"],
+      "correctIndex": 1,
+      "answer": "The geometrical centre of the ring",
+      "explanation": "For a symmetric uniform ring, the centre of mass is at the centre of the circle, even though no material is there."
+    },
+    {
+      "id": "isc12-phy-rot-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Torque is defined as:",
+      "options": ["r dot F", "r cross F", "F cross r", "m a for a rotating body"],
+      "correctIndex": 1,
+      "answer": "r cross F",
+      "explanation": "Torque of a force about a point is the vector product of the position vector from that point to the point of application and the force."
+    },
+    {
+      "id": "isc12-phy-rot-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A particle moves in a circle of radius r with speed v. Its angular momentum about the centre has magnitude:",
+      "options": ["m v", "m v r", "m v / r", "m r^2 / v"],
+      "correctIndex": 1,
+      "answer": "m v r",
+      "explanation": "For circular motion about the centre, r and v are perpendicular, so L = m v r sin 90 = m v r."
+    },
+    {
+      "id": "isc12-phy-rot-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The moment of inertia of a solid sphere of mass M and radius R about a diameter is:",
+      "options": ["1/2 M R^2", "2/5 M R^2", "2/3 M R^2", "M R^2"],
+      "correctIndex": 1,
+      "answer": "2/5 M R^2",
+      "explanation": "For a solid sphere about a central axis, I = 2/5 M R^2. A hollow sphere has the larger value 2/3 M R^2."
+    },
+    {
+      "id": "isc12-phy-rot-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the net external torque on a system is zero, which quantity is conserved?",
+      "options": ["Linear momentum only", "Angular momentum about that point", "Kinetic energy only", "Potential energy only"],
+      "correctIndex": 1,
+      "answer": "Angular momentum about that point",
+      "explanation": "Zero net external torque means angular momentum about that point remains constant, even if the moment of inertia changes."
+    },
+    {
+      "id": "isc12-phy-rot-06",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A thin rod of length L has moment of inertia I0 about a perpendicular axis through its centre. Its moment of inertia about a perpendicular axis through one end is:",
+      "options": ["I0", "I0 + M L^2", "I0 + M (L/2)^2", "I0 / 2"],
+      "correctIndex": 2,
+      "answer": "I0 + M (L/2)^2",
+      "explanation": "The parallel axes theorem gives I_end = I0 + M d^2, with d = L/2, so the added term is M (L/2)^2."
+    },
+    {
+      "id": "isc12-phy-rot-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The moment of inertia I can be written as M k^2, where k is called the __________ of the body about the given axis.",
+      "answer": "radius of gyration",
+      "explanation": "Radius of gyration k is defined so that I = M k^2; it characterises how far the mass is effectively spread from the axis."
+    },
+    {
+      "id": "isc12-phy-rot-08",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For pure rolling motion, the velocity of the centre of mass v and the angular velocity omega are related by v = __________.",
+      "answer": "R omega",
+      "explanation": "In rolling without slipping, the instantaneous speed of the contact point is zero, giving v = R omega for a body of radius R."
+    },
+    {
+      "id": "isc12-phy-rot-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why a hollow cylinder and a solid cylinder of the same mass and radius have different moments of inertia.",
+      "answer": "Moment of inertia depends on how far the mass lies from the axis. The hollow cylinder has all its mass effectively at radius R, so I = M R^2, while the solid cylinder has mass distributed from 0 to R, so I = 1/2 M R^2. The same total mass therefore gives a larger moment of inertia when it is farther from the axis.",
+      "explanation": "The difference is not in total mass but in the radius at which the mass is concentrated."
+    },
+    {
+      "id": "isc12-phy-rot-10",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A thin rod of mass 0.6 kg and length 1.2 m rotates in a horizontal plane about a vertical axis through one end. A constant torque of 0.72 N m is applied. Find the angular acceleration and the time taken to reach 24 rad/s from rest.",
+      "answer": "Moment of inertia about the end: I = 1/3 M L^2 = 1/3 * 0.6 * (1.2)^2 = 1/3 * 0.6 * 1.44 = 0.288 kg m^2. Angular acceleration: alpha = tau / I = 0.72 / 0.288 = 2.5 rad/s^2. Time from rest: t = omega / alpha = 24 / 2.5 = 9.6 s.",
+      "explanation": "Use I = 1/3 M L^2 for the end axis, then tau = I alpha for the acceleration, and omega = alpha t for the time from rest."
+    },
+    {
+      "id": "isc12-phy-rot-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A skater spinning with arms outstretched has moment of inertia I1 and angular speed omega1. When the skater pulls in the arms, the angular speed increases. Use angular momentum conservation to explain whether the rotational kinetic energy increases, decreases, or stays the same.",
+      "answer": "Angular momentum L = I omega is conserved, so omega2 = (I1 / I2) omega1 with I2 < I1. The rotational kinetic energy is K = L^2 / (2 I). Since L is constant and I decreases, K increases. The skater does work against the centrifugal tendency of the arms, and that work supplies the increase in rotational kinetic energy, so the extra energy comes from the skater's muscles, not from angular momentum.",
+      "explanation": "Kinetic energy changes because the skater does work; conserved angular momentum alone does not imply conserved kinetic energy."
+    },
+    {
+      "id": "isc12-phy-rot-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two particles of masses 2 kg and 3 kg are separated by 1.0 m on a smooth horizontal line. They move toward each other under their mutual attractive force only. Describe the motion of the centre of mass and find its position from the 2 kg mass. Then explain what happens to the centre of mass if the particles later collide and stick.",
+      "answer": "Choose the 2 kg mass at x = 0 and the 3 kg mass at x = 1.0 m. Centre of mass: x_cm = (2 * 0 + 3 * 1.0) / (2 + 3) = 3.0 / 5 = 0.6 m from the 2 kg mass. Since the only forces are internal and mutual, the net external force is zero, so the centre of mass does not accelerate. If they collide and stick, the combined body still has the same centre of mass, and the centre of mass continues with whatever constant velocity it had. Internal forces cannot change the centre-of-mass motion.",
+      "explanation": "The centre of mass position is a weighted average, and internal forces leave that average motion unchanged."
+    }
+  ]
+}

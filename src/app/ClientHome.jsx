@@ -13,6 +13,7 @@ import AIWorkflow from "./components/AIWorkflow";
 import BoardSupport from "./components/BoardSupport";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import { usePersonalization } from "./hooks/usePersonalization";
+import { cisceCurricula } from "./data/boardprep/cisceCurricula";
 
 import dynamic from "next/dynamic";
 
@@ -29,12 +30,9 @@ const Newsletter = dynamic(() => import("./components/Newsletter"), {
 export const boardClassSubjectMap = {
   cisce: {
     title: "CISCE",
-    classes: [
-      { id: "icse-class-9", title: "ICSE Class 9", subjects: ["java", "ai"] },
-      { id: "icse-class-10", title: "ICSE Class 10", subjects: ["java", "ai"] },
-      { id: "isc-class-11", title: "ISC Class 11", subjects: ["java", "ai"] },
-      { id: "isc-class-12", title: "ISC Class 12", subjects: ["java", "ai"] },
-    ],
+    // Mirrors the BoardPrep class registries: each CISCE class carries the
+    // subjects that board/class actually registers, not Java/AI placeholders.
+    classes: cisceCurricula.map(({ id, title, subjects }) => ({ id, title, subjects: subjects.map((subject) => subject.id) })),
   },
   cbse: {
     title: "CBSE",
@@ -51,12 +49,9 @@ function getStartLearningHref(board, selectedClass) {
   if (!selectedClass?.id) return "/study";
   const subject = selectedClass.subjects?.[0];
   if (board === "cisce") {
-    if (selectedClass.id === "icse-class-9") return "/icse/class-ix";
-    if (selectedClass.id === "icse-class-10") return "/icse/class-x";
-    if (subject === "ai") return "/isc/robotics-ai/class-x";
-    if (selectedClass.id === "isc-class-11") return "/isc/class-xi";
-    if (selectedClass.id === "isc-class-12") return "/isc/class-xii";
-    return "/Java";
+    // Every CISCE class opens its BoardPrep class page. The separate Java
+    // experience keeps its own /Java entry point outside this selector.
+    return cisceCurricula.find((item) => item.id === selectedClass.id)?.href || "/Java";
   }
   return `/cbse/class/${selectedClass.id.replace("class-", "")}/subject/${subject || "402"}`;
 }

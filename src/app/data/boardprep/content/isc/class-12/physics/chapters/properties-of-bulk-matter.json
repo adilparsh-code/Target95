@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-phy-bulk-matter",
+  "title": "Properties of Bulk Matter",
+  "kind": "physics",
+  "tagline": "What happens when matter is large enough that individual atoms hardly matter: how solids deform, how fluids flow and press, and how surfaces behave at the boundary between liquid and air.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "The teaching material on this page is original BoardPrep study material written against the CISCE ISC Physics syllabus registered for Examination Year 2027 (CISCE ISC Examination Year 2027 Regulations and Syllabuses - Physics). No board examination paper, textbook or commercial guide was consulted. Numerical examples and worked answers were worked out for this page.",
+    "boardprep": "Original BoardPrep material written against the CISCE ISC Physics syllabus registered for Examination Year 2027: every explanation, table, figure specification, worked example, question and answer was written for this page."
+  },
+  "overview": {
+    "intro": "If you look at matter from far enough away, the details of atoms and molecules recede and bulk behaviour takes over. A block of steel can be stretched or compressed; water can exert pressure on the walls of a dam; oil flows through a pipe more slowly than water; and a drop of water beads up on a clean leaf. This chapter is about those collective behaviours: elasticity in solids, pressure and flow in fluids, and surface tension at liquid boundaries. It is the bridge between the particle picture of earlier chapters and the large-scale behaviour that engineers and physicists use to describe real objects.",
+    "facts": [
+      { "label": "Elasticity", "value": "The ability of a body to regain its shape after the deforming force is removed." },
+      { "label": "Stress", "value": "Force per unit area; the deforming influence." },
+      { "label": "Strain", "value": "The fractional deformation produced; the response." },
+      { "label": "Surface tension", "value": "The property of a liquid surface that makes it behave like a stretched membrane." }
+    ]
+  },
+  "learningOutcomes": [
+    "Define stress and strain and distinguish the main types of each.",
+    "State Hooke's law and define the elastic moduli: Young's modulus, bulk modulus and shear modulus.",
+    "Describe the elastic behaviour of springs and the energy stored in a stretched wire.",
+    "Explain pressure in a fluid at rest and Pascal's law and its applications.",
+    "Apply buoyancy and Archimedes' principle.",
+    "State the equation of continuity and Bernoulli's theorem and give their uses.",
+    "Describe viscosity, Stokes' law and terminal velocity.",
+    "Explain surface tension, surface energy, excess pressure in drops and bubbles, and capillarity."
+  ],
+  "learn": [
+    {
+      "id": "solids-elasticity",
+      "title": "Elasticity, stress and strain in solids",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Elasticity is the tendency of a solid to return to its original shape when a deforming force is removed. The deformation itself is measured by strain, which is a ratio and therefore dimensionless: longitudinal strain is change in length divided by original length, volume strain is change in volume divided by original volume, and shear strain is the angle of distortion or the ratio of lateral displacement to length. The cause of deformation is stress, force per unit area. Within the elastic limit the two are proportional, which is Hooke's law. Different kinds of stress produce different kinds of strain, and different materials respond differently, so we describe them with several elastic moduli rather than with a single number."
+        },
+        {
+          "type": "table",
+          "caption": "Stress, strain and elastic moduli",
+          "columns": ["Situation", "Stress", "Strain", "Modulus"],
+          "rows": [
+            ["Stretching a wire", "Tensile stress = F/A", "Longitudinal strain = delta L / L", "Young's modulus Y = stress/strain"],
+            ["Compressing a solid or fluid", "Pressure = F/A", "Volume strain = delta V / V", "Bulk modulus B = -V dP/dV"],
+            ["Shearing a block", "Shear stress = F/A", "Shear strain = theta or delta x / L", "Shear modulus G = stress/strain"],
+            ["Material within elastic limit", "Stress proportional to strain", "Reversible deformation", "Hooke's law holds"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Young's modulus measures resistance to stretching or compression along one direction.",
+            "Bulk modulus measures resistance to uniform compression in all directions.",
+            "Shear modulus measures resistance to a change of shape without volume change.",
+            "Poisson's ratio is the ratio of lateral strain to longitudinal strain and is negative for ordinary materials.",
+            "The elastic energy stored in a stretched wire is half the product of stress, strain and volume."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fluid-pressure",
+      "title": "Pressure in fluids at rest and Pascal's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A fluid at rest cannot sustain a shearing force, but it exerts pressure normal to any surface. Pressure is force per unit area and has the same value in all directions at a point in a fluid at rest. The pressure in a stationary fluid column increases with depth because of the weight of the fluid above: P = P0 + rho g h, where rho is the density, g the acceleration due to gravity and h the depth below the surface. Pascal's law says that a change in pressure applied to an enclosed fluid is transmitted undiminished to every part of the fluid and to the walls of the container. That is why a small force on a small piston can balance a large force on a large piston in a hydraulic machine."
+        },
+        {
+          "type": "table",
+          "caption": "Pressure relations in a stationary fluid",
+          "columns": ["Quantity", "Expression", "Remarks"],
+          "rows": [
+            ["Hydrostatic pressure at depth h", "P = P0 + rho g h", "From surface pressure P0 and depth h"],
+            ["Pascal's law", "Delta P transmitted equally", "Basis of hydraulic presses and brakes"],
+            ["Buoyant force", "F_b = rho g V", "Weight of displaced fluid, Archimedes' principle"],
+            ["Apparent weight in fluid", "Weight - buoyant force", "Useful for density comparisons"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A hydraulic press has a small piston of area 10 cm^2 and a large piston of area 500 cm^2. A force of 50 N on the small piston gives a pressure of 5 N/cm^2, so the large piston feels a force of 5 N/cm^2 * 500 cm^2 = 2500 N.",
+              "note": "The mechanical advantage is the ratio of the areas, not of the forces alone."
+            },
+            {
+              "text": "A cube of volume 0.001 m^3 is fully immersed in water of density 1000 kg/m^3. The buoyant force is rho g V = 1000 * 9.8 * 0.001 = 9.8 N.",
+              "note": "The buoyant force equals the weight of the displaced fluid, regardless of the object's material."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fluid-flow",
+      "title": "Fluid flow: continuity, Bernoulli and viscosity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Real fluids flow, and their flow can be smooth, called streamline or laminar flow, or chaotic, called turbulent flow, depending on speed and on a dimensionless number called the Reynolds number. A fundamental result for an ideal fluid in a pipe is the equation of continuity: the mass flow rate is the same through every cross-section, so if the density is constant, A1 v1 = A2 v2. When the pipe narrows, the fluid speeds up. Bernoulli's theorem is the energy principle for a moving fluid: along a streamline in steady flow without losses, pressure plus kinetic energy per unit volume plus potential energy per unit volume stays constant. Viscosity is internal friction in a fluid, and Stokes' law describes the viscous drag on a small sphere moving slowly through a fluid."
+        },
+        {
+          "type": "table",
+          "caption": "Flow concepts and their uses",
+          "columns": ["Concept", "Statement", "Example use"],
+          "rows": [
+            ["Equation of continuity", "A1 v1 = A2 v2 for incompressible flow", "Narrow pipe, higher speed"],
+            ["Bernoulli's theorem", "P + 1/2 rho v^2 + rho g h = constant", "Venturi meter, atomiser, Magnus effect"],
+            ["Reynolds number", "Dimensionless number predicting laminar or turbulent flow", "Pipe flow regime"],
+            ["Stokes' law", "F = 6 pi eta r v for a small sphere", "Terminal velocity of a falling drop"],
+            ["Poiseuille's formula", "Flow rate proportional to pressure difference and r^4", "Flow in narrow tubes"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Continuity is about mass conservation, not about energy.",
+            "Bernoulli's theorem links speed and pressure along a streamline when losses are ignored.",
+            "A faster-moving fluid has lower pressure in the Bernoulli sense.",
+            "Viscosity increases with the size of the object and with speed for slow motion.",
+            "Terminal velocity is reached when the net force on a falling body becomes zero."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "surface-tension",
+      "title": "Surface tension and capillarity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A liquid surface behaves as if it has a thin stretched skin. This is because molecules just inside the surface are pulled inward by the liquid molecules around them, so the surface tends to contract. The effect is measured by surface tension, force per unit length, or equivalently as surface energy per unit area. The consequence is that small drops and bubbles tend to be spherical and that curved surfaces carry an excess pressure. A soap bubble has two surfaces, so its excess pressure is greater than that of a drop of the same radius. The contact between a liquid and a solid also determines whether the liquid rises or falls in a narrow tube, which is capillarity."
+        },
+        {
+          "type": "table",
+          "caption": "Surface tension results",
+          "columns": ["Situation", "Excess pressure", "Remarks"],
+          "rows": [
+            ["Liquid drop of radius R", "Delta P = 2 sigma / R", "One curved surface"],
+            ["Soap bubble of radius R", "Delta P = 4 sigma / R", "Two surfaces"],
+            ["Capillary rise", "h = 2 sigma cos theta / (rho g r)", "Depends on contact angle and tube radius"],
+            ["Surface energy", "Energy = sigma * area", "Work done to increase surface area"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Water of surface tension 0.07 N/m forms a drop of radius 1.0 mm. The excess pressure inside the drop is 2 sigma / R = 2 * 0.07 / (1.0 x 10^-3) = 140 Pa.",
+              "note": "The pressure excess is larger for smaller drops because the curvature is greater."
+            },
+            {
+              "text": "A liquid of density 800 kg/m^3 rises 5 cm in a capillary tube of radius 0.5 mm. This rise can be used to estimate the surface tension if the contact angle and density are known.",
+              "note": "Capillary rise is a practical way to measure surface tension for liquids that wet the tube."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-misconceptions",
+      "title": "Common misconceptions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Students often think pressure in a fluid depends on the shape of the container, but in a static fluid at a given depth it depends only on the vertical depth below the free surface. Another common error is to confuse pressure with force: the same pressure over a larger area gives a larger force. Some students think buoyancy is a kind of upward pull from the fluid, when in fact it is the net result of higher pressure below than above. In fluid flow, a frequent mistake is to treat Bernoulli's theorem as universally valid, when it applies only under its own assumptions of steady, low-loss, streamline flow."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Pressure in a fluid at rest depends on depth, not on the shape or orientation of the surface.",
+            "Pascal's law is about transmitted pressure change, not about the fluid's weight.",
+            "Buoyant force equals the weight of the displaced fluid, not the weight of the object.",
+            "A small hole in a large vessel does not stop the motion of the rest of the fluid.",
+            "Surface tension acts along the surface, not along the volume of the liquid."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Stress and strain in a stretched wire",
+      "description": "A labelled wire of original length L fixed at the top and pulled at the bottom by a force F, with the extension delta L marked, together with the definitions of stress and strain beside the diagram.",
+      "labels": [
+        "Original length L",
+        "Applied force F",
+        "Cross-sectional area A",
+        "Extension delta L",
+        "Stress = F/A, strain = delta L/L"
+      ]
+    },
+    {
+      "caption": "Figure: Pressure in a fluid column",
+      "description": "A vertical column of water with the free surface at the top and depth marked downward, showing increasing pressure arrows at greater depth and the relation P = P0 + rho g h.",
+      "labels": [
+        "Free surface at pressure P0",
+        "Depth h below the surface",
+        "Pressure increases with depth",
+        "Density of the fluid",
+        "Value at depth h: P0 + rho g h"
+      ]
+    },
+    {
+      "caption": "Figure: Bernoulli's principle in a constriction",
+      "description": "A horizontal pipe that narrows in the middle, with wider sections labelled slow flow and higher pressure and the narrow section labelled fast flow and lower pressure.",
+      "labels": [
+        "Wider section, larger area",
+        "Narrower section, smaller area",
+        "Speed increases where area decreases",
+        "Pressure decreases where speed increases",
+        "Continuity and Bernoulli together explain the effect"
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Stress is force per unit area; strain is the fractional deformation.",
+    "Hooke's law holds only within the elastic limit.",
+    "Young's modulus, bulk modulus and shear modulus describe different deformations.",
+    "Pressure in a fluid column is P0 + rho g h.",
+    "Pascal's law transmits a pressure change undiminished through an enclosed fluid.",
+    "Buoyant force equals the weight of the displaced fluid.",
+    "Continuity means area times speed is constant for incompressible flow.",
+    "Bernoulli links pressure, speed and height along a streamline in ideal flow.",
+    "Viscosity is internal friction; Stokes' law gives the drag on a small sphere.",
+    "Surface tension causes excess pressure in drops, bubbles and capillaries."
+  ],
+  "examFocus": [
+    "Define stress and strain before quoting a modulus.",
+    "State whether a modulus is Young's, bulk or shear, and keep the definitions distinct.",
+    "Use the correct depth when calculating hydrostatic pressure, measured from the free surface.",
+    "State Archimedes' principle in words, not just the formula.",
+    "Apply Bernoulli's theorem only when its assumptions are reasonable."
+  ],
+  "vocabulary": [
+    { "word": "Elasticity", "meaning": "The return to original shape after deformation when the deforming force is removed." },
+    { "word": "Stress", "meaning": "Force per unit area acting on a body." },
+    { "word": "Strain", "meaning": "The fractional change in shape or size of a body under stress." },
+    { "word": "Young's modulus", "meaning": "The ratio of tensile stress to longitudinal strain within the elastic limit." },
+    { "word": "Bulk modulus", "meaning": "The ratio of pressure change to fractional volume change." },
+    { "word": "Pressure", "meaning": "Force per unit area exerted by a fluid or solid." },
+    { "word": "Pascal's law", "meaning": "A change of pressure in an enclosed fluid is transmitted equally in all directions." },
+    { "word": "Surface tension", "meaning": "The force per unit length acting along a liquid surface, or the surface energy per unit area." }
+  ],
+  "questions": [
+    {
+      "id": "isc12-phy-bulk-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Young's modulus is the ratio of:",
+      "options": ["Stress to strain in shear", "Tensile stress to longitudinal strain", "Pressure to volume strain", "Force to mass"],
+      "correctIndex": 1,
+      "answer": "Tensile stress to longitudinal strain",
+      "explanation": "Young's modulus is defined as tensile stress divided by longitudinal strain within the elastic limit."
+    },
+    {
+      "id": "isc12-phy-bulk-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The pressure at a point in a fluid at rest depends on:",
+      "options": ["The shape of the container", "The depth below the free surface", "The total volume of fluid", "The colour of the fluid"],
+      "correctIndex": 1,
+      "answer": "The depth below the free surface",
+      "explanation": "In a static fluid, pressure depends on depth, density and gravity, not on container shape."
+    },
+    {
+      "id": "isc12-phy-bulk-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "According to Pascal's law, a change in pressure applied to an enclosed fluid is:",
+      "options": ["Absorbed by the walls only", "Transmitted equally in all directions", "Reduced in the larger piston", "Transmitted only to the nearest surface"],
+      "correctIndex": 1,
+      "answer": "Transmitted equally in all directions",
+      "explanation": "Pascal's law says the change in pressure is transmitted undiminished throughout the enclosed fluid."
+    },
+    {
+      "id": "isc12-phy-bulk-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A body is partly immersed in water. The buoyant force on it equals:",
+      "options": ["The weight of the body", "The weight of the displaced water", "The volume of the body only", "The density of the body times g"],
+      "correctIndex": 1,
+      "answer": "The weight of the displaced water",
+      "explanation": "Archimedes' principle says the buoyant force equals the weight of the fluid displaced."
+    },
+    {
+      "id": "isc12-phy-bulk-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For an incompressible fluid flowing in a pipe, the equation of continuity gives:",
+      "options": ["P + 1/2 rho v^2 = constant", "A1 v1 = A2 v2", "v is the same everywhere", "rho decreases when A decreases"],
+      "correctIndex": 1,
+      "answer": "A1 v1 = A2 v2",
+      "explanation": "Continuity is the result of mass conservation for incompressible flow, so a narrow pipe has a higher speed."
+    },
+    {
+      "id": "isc12-phy-bulk-06",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A liquid drop of radius R has excess pressure inside it. A soap bubble of the same radius has:",
+      "options": ["The same excess pressure", "Half the excess pressure", "Twice the excess pressure of the drop", "Four times the excess pressure of the drop"],
+      "correctIndex": 2,
+      "answer": "Twice the excess pressure of the drop",
+      "explanation": "A drop has one surface, so excess pressure is 2 sigma / R, while a soap bubble has two surfaces, giving 4 sigma / R, twice that of the drop."
+    },
+    {
+      "id": "isc12-phy-bulk-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Hooke's law states that, within the elastic limit, stress is proportional to __________.",
+      "answer": "strain",
+      "explanation": "Within the elastic limit the deformation is proportional to the applied stress, which is the statement of Hooke's law."
+    },
+    {
+      "id": "isc12-phy-bulk-08",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The viscous drag on a small sphere at low speed is given by Stokes' law, F = __________.",
+      "answer": "6 pi eta r v",
+      "explanation": "Stokes' law for a sphere of radius r moving at speed v in a fluid of viscosity eta is F = 6 pi eta r v."
+    },
+    {
+      "id": "isc12-phy-bulk-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain the difference between pressure and force, giving one example in a hydraulic press.",
+      "answer": "Pressure is force per unit area and is the same at a point in all directions in a fluid at rest, while force is the total push or pull on a surface. In a hydraulic press, a small force on a small piston creates a pressure that is transmitted to a large piston; the same pressure over the larger area gives a larger force. Pressure is not the same as force because the same pressure can produce very different forces depending on the area.",
+      "explanation": "The distinction matters because hydraulic advantage comes from area, not from pressure being larger."
+    },
+    {
+      "id": "isc12-phy-bulk-10",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A steel wire of length 2.0 m and cross-sectional area 1.0 x 10^-6 m^2 is stretched by a load of 200 N. Take Young's modulus as 2.0 x 10^11 N/m^2. Find the extension produced and the elastic potential energy stored.",
+      "answer": "Stress = F/A = 200 / 1.0 x 10^-6 = 2.0 x 10^8 N/m^2. Strain = stress / Y = 2.0 x 10^8 / 2.0 x 10^11 = 1.0 x 10^-3. Extension delta L = strain * L = 1.0 x 10^-3 * 2.0 = 2.0 x 10^-3 m, or 2.0 mm. Elastic energy = 1/2 * stress * strain * volume = 1/2 * 2.0 x 10^8 * 1.0 x 10^-3 * (1.0 x 10^-6 * 2.0) = 1/2 * 2.0 x 10^8 * 1.0 x 10^-3 * 2.0 x 10^-6 = 0.20 J.",
+      "explanation": "First find stress and strain, then extension from strain and length, then elastic energy from half the product of stress, strain and volume."
+    },
+    {
+      "id": "isc12-phy-bulk-11",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A pipe narrows from cross-sectional area A1 to A2 = A1 / 4. The fluid is incompressible and the flow is steady. Compare the speeds and the pressures in the two sections, assuming the pipe is horizontal.",
+      "answer": "Continuity gives A1 v1 = A2 v2, so v2 = (A1/A2) v1 = 4 v1. The speed in the narrow section is four times the speed in the wider section. Bernoulli for a horizontal pipe gives P1 + 1/2 rho v1^2 = P2 + 1/2 rho v2^2, so P2 - P1 = 1/2 rho (v1^2 - v2^2) = 1/2 rho (v1^2 - 16 v1^2) = -15/2 rho v1^2. The pressure in the narrow section is lower than in the wider section because the speed is higher.",
+      "explanation": "Continuity gives the speed change; Bernoulli then shows why a faster flow can have lower pressure."
+    },
+    {
+      "id": "isc12-phy-bulk-12",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A metal cube is weighed in air and then fully immersed in water. The weight in air is 50 N and the apparent weight in water is 44 N. Find the buoyant force, the volume of the cube and its density. Take g = 10 m/s^2 and water density 1000 kg/m^3.",
+      "answer": "Buoyant force = weight in air - apparent weight = 50 - 44 = 6 N. This equals the weight of displaced water, so rho_water * g * V = 6, giving V = 6 / (1000 * 10) = 6.0 x 10^-4 m^3. The mass of the cube is 50 / 10 = 5.0 kg, so its density is mass/volume = 5.0 / 6.0 x 10^-4 = 8333 kg/m^3, about 8.33 x 10^3 kg/m^3.",
+      "explanation": "Archimedes gives the volume from the buoyant force, and the density follows from mass and volume."
+    }
+  ]
+}

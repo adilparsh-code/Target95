@@ -1,23 +1,12 @@
 import { cbseSubjectTracks } from "../data/cbse/subjects";
+import { cisceCurricula } from "../data/boardprep/cisceCurricula";
 
-const CISCE_SUBJECTS = {
-  "icse-class-9": [
-    { id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: "/Java" },
-    { id: "ai", label: "Artificial Intelligence", detail: "Robotics & AI", icon: "✦", href: "/icse/robotics-ai" },
-  ],
-  "icse-class-10": [
-    { id: "java", label: "Java", detail: "Computer Applications", icon: "☕", href: "/Java" },
-    { id: "ai", label: "Artificial Intelligence", detail: "Robotics & AI", icon: "✦", href: "/icse/robotics-ai/class-x" },
-  ],
-  "isc-class-11": [
-    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" },
-    { id: "ai", label: "Artificial Intelligence", detail: "ISC AI 883", icon: "✦", href: "/isc/artificial-intelligence/11" },
-  ],
-  "isc-class-12": [
-    { id: "java", label: "Java", detail: "Computer Science", icon: "☕", href: "/Java" },
-    { id: "ai", label: "Artificial Intelligence", detail: "ISC AI 883", icon: "✦", href: "/isc/artificial-intelligence/12" },
-  ],
-};
+// CISCE subject options come from the BoardPrep class registries (generated into
+// cisceCurricula), so the launcher never advertises subjects the board curriculum
+// does not register and every option opens a BoardPrep route instead of an
+// unrelated Java/AI learning path.
+const CISCE_BY_CLASS = Object.fromEntries(cisceCurricula.map((item) => [item.id, item]));
+const SUBJECT_ICONS = { "computer-applications": "☕", "computer-science": "⌨" };
 
 export const curriculumClasses = {
   cisce: [
@@ -36,8 +25,23 @@ export const curriculumClasses = {
 
 const subjectIcon = (code) => code === "843" ? "✦" : code === "065" ? "▦" : "⌨";
 
+// BoardPrep class page for a launcher selection; null when the board has none.
+export function getClassHref(board, classId) {
+  return board === "cisce" ? CISCE_BY_CLASS[classId]?.href || null : null;
+}
+
 export function getSubjectsForBoardClass(board, classId) {
-  if (board === "cisce") return CISCE_SUBJECTS[classId] || [];
+  if (board === "cisce") {
+    const curriculum = CISCE_BY_CLASS[classId];
+    if (!curriculum) return [];
+    return curriculum.subjects.map((subject) => ({
+      id: subject.id,
+      label: subject.label,
+      detail: curriculum.title,
+      icon: SUBJECT_ICONS[subject.id] || "▣",
+      href: subject.href,
+    }));
+  }
   if (board !== "cbse") return [];
 
   const classNumber = Number(String(classId).replace("class-", ""));

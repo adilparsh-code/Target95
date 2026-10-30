@@ -69,6 +69,17 @@ export function getChapterQuestionCounts(board, classSlug, subjectSlug) {
   return counts;
 }
 
+// Published-chapter counts per registered subject, keyed by subject slug. The
+// homepage launcher uses this so it can mark registered subjects without
+// published content instead of implying a chapter list that does not exist yet.
+export function getPublishedChapterCounts(board, classSlug) {
+  const counts = {};
+  for (const subject of getSubjects(board, classSlug) || []) {
+    counts[subject.slug] = getPublishedChapters(board, classSlug, subject.slug).length;
+  }
+  return counts;
+}
+
 export function getBoardPrepCounts() {
   let classes = 0; let subjects = 0; let chapters = 0; let questions = 0;
   for (const board of getBoards()) for (const classInfo of board.classes || []) {

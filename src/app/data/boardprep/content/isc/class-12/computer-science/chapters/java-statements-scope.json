@@ -1,25 +1,610 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-java-statements-scope",
-  "slug": "java-statements-scope",
   "title": "Statements and Scope",
   "kind": "computer-science",
+  "slug": "java-statements-scope",
   "tagline": "Java statements, blocks and variable scope.",
-  "reviewStatus": "planned",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "After variables and expressions, the next building blocks of a Java program are statements and the rules that decide which variable name refers to which declaration. A statement is an instruction that does something: it assigns a value, makes a decision, repeats work, or calls a method. A block is a grouped set of statements, and blocks are the main tool for structuring Java code and for controlling scope. This chapter develops those ideas carefully. It begins with the difference between expressions and statements, then moves to blocks and the way braces create local regions of code. After that it explains the scope of a variable: where a declaration can be seen and used, why a variable declared inside a block cannot be used outside it, and why nesting affects which declaration is meant when two variables share a name. The chapter then discusses lifetime and visibility as separate ideas, because the board examination often tests the distinction between a variable that no longer exists and one that simply cannot be seen from a particular place. As with the rest of the 2027 Java syllabus, the chapter stays within Java and does not import any separate programming-language component.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section B (Java)" },
+      { "label": "Syllabus section", "value": "Section B (Java) of the 2027 ISC Class XII Computer Science syllabus" },
       { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "What the syllabus asks for", "value": "Statements and the scope of variables, including the rules that govern where a declaration is visible." }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Distinguish expressions from statements and explain when a value is produced and when an action is performed.",
+    "Write and group statements into blocks, and explain the role of braces.",
+    "Explain the scope of a variable and the difference between where a variable is declared and where it can be used.",
+    "Trace the effect of nested blocks on which declaration is visible when two variables have the same name.",
+    "Explain that a variable declared inside a block is not accessible outside that block.",
+    "Distinguish between a variable that is out of scope and a variable that no longer exists.",
+    "Read small programs and identify the scope of each variable used.",
+    "Identify common scope mistakes such as using a variable outside its block or confusing shadowing with reassignment."
+  ],
+  "learn": [
+    {
+      "id": "expressions-versus-statements",
+      "title": "Expressions and statements",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Java has two related but different ideas: expressions, which produce values, and statements, which perform actions. An expression such as 3 + 4 or x = 7 has a value. A statement such as int x = 7; or System.out.println(x); tells the program to do something. Some statements contain expressions, but not every expression is a statement by itself. Keeping the distinction clear matters because examination questions often ask what value an expression produces separately from what effect a statement has."
+        },
+        {
+          "type": "paragraph",
+          "text": "An assignment is a special case that blends the two ideas: x = 7 is an expression that produces the value 7, and it is also a statement that stores that value in x. But other statements do not produce a useful value at all. A declaration statement introduces a variable. A method call statement invokes behaviour. A control-flow statement such as an if or a loop decides which statements run next. The common thread is that statements are the units of action."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An expression.",
+              "note": "3 + 4 is an expression with the value 7. By itself it does not store anything."
+            },
+            {
+              "text": "An assignment statement.",
+              "note": "x = 3 + 4; is a statement that stores 7 in x. The expression 3 + 4 is part of the statement."
+            },
+            {
+              "text": "A declaration statement.",
+              "note": "int x = 7; declares x and initialises it as one statement."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An expression produces a value.",
+            "A statement performs an action.",
+            "An assignment can be both an expression and a statement.",
+            "A declaration statement introduces a variable.",
+            "Control-flow statements decide the order in which other statements run."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "statement", "meaning": "A complete instruction that performs an action in a Java program." },
+            { "term": "expression", "meaning": "A piece of code that produces a value." },
+            { "term": "declaration statement", "meaning": "A statement that introduces a variable and its type." },
+            { "term": "assignment statement", "meaning": "A statement that stores a value in a variable." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blocks-and-braces",
+      "title": "Blocks and braces",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A block is a group of statements treated as one unit. In Java, a block is written with braces, as in { int x = 5; System.out.println(x); }. Blocks matter in two ways. First, they are how Java groups statements under control structures, method bodies, and constructors. Second, they create a new scope, which is the region of the program in which a declaration can be used. Anything declared inside a block can usually be used only inside that block and the blocks nested inside it."
+        },
+        {
+          "type": "paragraph",
+          "text": "The scope of a variable is the part of the program where its name is meaningful. For a local variable declared inside a block, the scope begins at the declaration and ends at the end of that block. That means if you declare int x = 5; inside a block, you cannot use x after the closing brace of that block. The compiler will report that x cannot be found, because the name is not in scope there. This rule is one of the main things the board examination tests when it asks students to read small programs and decide whether a variable can be used at a particular line."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A block with its own local variable.",
+              "note": "If int x = 5; is declared inside { }, then x is usable only inside those braces."
+            },
+            {
+              "text": "Trying to use a block variable outside.",
+              "note": "A line after the closing brace that refers to x will not compile, because x is not in scope there."
+            },
+            {
+              "text": "A block inside another block.",
+              "note": "An inner block can see variables from the outer block, but the outer block cannot see variables declared in the inner block."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A block groups statements with braces.",
+            "A block creates a scope for the variables declared inside it.",
+            "A local variable can be used only within its scope.",
+            "An inner block can see variables from an outer block.",
+            "An outer block cannot see variables declared in an inner block."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "block", "meaning": "A group of statements enclosed in braces." },
+            { "term": "scope", "meaning": "The region of a program in which a declaration is visible." },
+            { "term": "visible", "meaning": "Able to be referred to by name in the current part of the program." },
+            { "term": "nested block", "meaning": "A block that appears inside another block." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lifetime-and-visibility",
+      "title": "Lifetime, visibility and the difference between them",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "It is easy to confuse two different questions about a variable: can I see it here, and does it still exist? These are not the same. Visibility is about scope; it answers the question of whether the name can be used from a particular place in the code. Lifetime is about how long the value exists while the program runs. A local variable comes into existence when its declaration is reached and ceases to exist when the block ends. While it exists, it is visible only within its scope. After the block ends, both the variable and its storage are gone, so the question of seeing it does not arise in the same way."
+        },
+        {
+          "type": "paragraph",
+          "text": "For the purposes of the board examination at this level, the practical distinction is usually simpler: a local variable declared in a block cannot be used outside that block. If a program tries, the error is that the variable is not in scope. Students should not think of scope as a vague idea; it has a definite boundary. The opening and closing braces of a block are the main way that boundary is drawn for local variables."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A local variable exists only during its block.",
+              "note": "int x = 5; inside a block means x exists while that block is executing."
+            },
+            {
+              "text": "Calling a block variable later fails.",
+              "note": "A later reference to the same name outside the block is an error, because there is no such variable in scope there."
+            },
+            {
+              "text": "Two separate variables with the same name in different blocks.",
+              "note": "A variable x in one block is not the same as a variable x in another block, because each has its own scope."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Visibility is about where a name can be used.",
+            "Lifetime is about how long a variable exists during execution.",
+            "A local variable is visible only within its scope.",
+            "A local variable usually does not exist outside its block.",
+            "The same name in different blocks can refer to different variables."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "lifetime", "meaning": "The period during execution when a variable exists." },
+            { "term": "visibility", "meaning": "The ability to refer to a variable by name from a particular place." },
+            { "term": "out of scope", "meaning": "Outside the region where a declaration can be used." },
+            { "term": "declaration", "meaning": "The point where a name and its meaning are introduced." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shadowing-and-nested-scope",
+      "title": "Shadowing and nested scope",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When two variables with the same name exist in nested scopes, the inner one hides, or shadows, the outer one in the inner scope. This does not mean the outer variable is gone; it means that within the inner block, the name refers to the inner variable. If the inner block ends, the outer variable becomes visible again. Shadowing is one of the more subtle ideas in this chapter, and it is a frequent source of mistakes in tracing questions, because students sometimes assume that changing the inner variable also changes the outer one."
+        },
+        {
+          "type": "paragraph",
+          "text": "A simple way to think about shadowing is this: each scope has its own set of names, and when the same name appears in an inner scope, that name refers to the inner variable for the duration of the inner scope. The outer variable still exists during that time, but it is not the one reached by the name inside the inner block. This is a different situation from reassigning a variable. If there is only one variable and you assign a new value to it, all references to that variable see the change. If there are two variables with the same name in different scopes, they are separate."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Shadowing in nested blocks.",
+              "note": "If int x = 5; is declared in an outer block and int x = 10; in an inner block, the inner x is 10 inside the inner block."
+            },
+            {
+              "text": "After the inner block ends.",
+              "note": "The name x again refers to the outer variable, whose value was not changed by the inner block."
+            },
+            {
+              "text": "Avoiding confusion.",
+              "note": "The safest habit is to use distinct names in nested scopes unless the relationship is deliberate and clearly understood."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An inner variable can shadow an outer one in the inner scope.",
+            "Shadowing does not destroy the outer variable.",
+            "Inside the inner scope, the name refers to the inner variable.",
+            "Assigning to the inner variable does not change the outer one.",
+            "When the inner block ends, the outer declaration is visible again."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "shadowing", "meaning": "When an inner declaration hides an outer one with the same name in the inner scope." },
+            { "term": "inner scope", "meaning": "A scope that is nested inside another scope." },
+            { "term": "outer scope", "meaning": "A scope that contains another scope." },
+            { "term": "redeclare", "meaning": "To declare a new variable with the same name in a different scope." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statements-and-scope-in-practice",
+      "title": "Reading programs with scope",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The practical skill in this chapter is reading a small program and deciding, line by line, which variable is meant and whether a use is legal. A good reading method is to mark the scope of each variable as you read: note where it is declared, where its scope begins, and where it ends. Then, for each use of the name, check whether that use is inside the variable’s scope. If two variables share a name, decide which one is in scope at that point. Most scope errors in examination questions come from one of two mistakes: trying to use a variable outside its block, or confusing shadowing with reassignment."
+        },
+        {
+          "type": "paragraph",
+          "text": "A second practical skill is tracing the effect of a block on a variable’s value. If a variable is declared outside a block and assigned inside it, the assignment changes the outer variable because there is only one variable in scope. If a new variable is declared inside the block with the same name, the inner variable is separate, and the outer variable is unchanged. The difference is not about whether the name looks the same; it is about whether there are one or two declarations."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Using an outer variable inside a block.",
+              "note": "If int x is declared outside and modified inside a block, the same x is changed."
+            },
+            {
+              "text": "Declaring a new variable inside the block.",
+              "note": "If the block declares its own x, that is a different variable, and the outer x is untouched."
+            },
+            {
+              "text": "The safe reading habit.",
+              "note": "For each line, ask which declaration is in scope and whether the name is even visible there."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mark where each variable is declared and where its scope ends.",
+            "Check each use against the scope of the name.",
+            "Decide whether a use refers to one variable or to a shadowed one.",
+            "Remember that assignment to an in-scope variable changes that one variable.",
+            "Remember that a new declaration in an inner block creates a separate variable."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "use of a variable", "meaning": "A place where a variable name appears in code." },
+            { "term": "in scope", "meaning": "Within the region where a declaration can be used." },
+            { "term": "separate variable", "meaning": "A different variable that happens to have the same name in another scope." },
+            { "term": "trace", "meaning": "To follow the values and bindings in a program step by step." }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A statement is an action; an expression is a value.",
+    "An assignment can be both an expression and a statement.",
+    "A block groups statements with braces and creates a scope.",
+    "The scope of a local variable is the region where its name is usable.",
+    "A local variable declared in a block cannot be used outside that block.",
+    "An inner block can see variables from an outer block.",
+    "An outer block cannot see variables declared in an inner block.",
+    "Visibility is about where a name can be used; lifetime is about how long the variable exists.",
+    "Shadowing happens when an inner declaration hides an outer one with the same name.",
+    "Shadowing does not change the outer variable; it creates a separate variable in the inner scope.",
+    "Assigning to an in-scope variable changes that one variable.",
+    "Good scope reading marks each declaration and checks each use against its scope."
+  ],
+  "examFocus": [
+    "Distinguish expressions from statements.",
+    "Group statements into blocks and explain the role of braces.",
+    "State the scope of a variable and where it can be used.",
+    "Explain why a variable declared in a block cannot be used outside it.",
+    "Trace nested blocks and decide which declaration a name refers to.",
+    "Distinguish shadowing from reassignment.",
+    "Read small programs and identify the scope of each variable.",
+    "Identify scope mistakes such as using a variable outside its block."
+  ],
+  "vocabulary": [
+    { "word": "statement", "meaning": "A complete instruction that performs an action." },
+    { "word": "expression", "meaning": "A piece of code that produces a value." },
+    { "word": "block", "meaning": "A group of statements enclosed in braces." },
+    { "word": "scope", "meaning": "The region of a program in which a declaration is visible." },
+    { "word": "visible", "meaning": "Able to be referred to by name from the current position." },
+    { "word": "nested block", "meaning": "A block inside another block." },
+    { "word": "lifetime", "meaning": "The period during execution when a variable exists." },
+    { "word": "shadowing", "meaning": "When an inner declaration hides an outer one with the same name in the inner scope." },
+    { "word": "inner scope", "meaning": "A scope nested inside another scope." },
+    { "word": "outer scope", "meaning": "A scope that contains another scope." },
+    { "word": "declaration statement", "meaning": "A statement that introduces a variable and its type." },
+    { "word": "assignment statement", "meaning": "A statement that stores a value in a variable." },
+    { "word": "out of scope", "meaning": "Outside the region where a name can be used." },
+    { "word": "trace", "meaning": "To follow the values and bindings in a program step by step." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-java-statements-scope-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "In Java, a block is written with:",
+      "options": [
+        "A) Parentheses ( )",
+        "B) Braces { }",
+        "C) Square brackets [ ]",
+        "D) Angle brackets < >"
+      ],
+      "correctIndex": 1,
+      "answer": "B) Braces { }",
+      "explanation": "A Java block is a group of statements enclosed in braces."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A variable declared inside a block can usually be used:",
+      "options": [
+        "A) Only inside that block and blocks nested inside it",
+        "B) Anywhere in the program",
+        "C) Only in other methods",
+        "D) Only if it is a constant"
+      ],
+      "correctIndex": 0,
+      "answer": "A) Only inside that block and blocks nested inside it",
+      "explanation": "The scope of a local variable is the block in which it is declared and the blocks nested inside it."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which of the following is a statement rather than an expression?",
+      "options": [
+        "A) 3 + 4",
+        "B) x = 5",
+        "C) int x = 5;",
+        "D) x + y"
+      ],
+      "correctIndex": 2,
+      "answer": "C) int x = 5;",
+      "explanation": "A declaration statement introduces a variable; 3 + 4 and x + y are expressions."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "If int x = 5; is declared inside a block, what happens after the block ends?",
+      "options": [
+        "A) x can still be used with the same value",
+        "B) x is no longer in scope and cannot be used there",
+        "C) x becomes a constant",
+        "D) x is promoted to a global variable"
+      ],
+      "correctIndex": 1,
+      "answer": "B) x is no longer in scope and cannot be used there",
+      "explanation": "A local variable’s scope ends when its block ends, so it cannot be used outside."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "An inner block can see variables from an outer block:",
+      "options": [
+        "A) If those variables are in scope in the outer block",
+        "B) Only if they are declared final",
+        "C) Only if the outer block is a method",
+        "D) Never"
+      ],
+      "correctIndex": 0,
+      "answer": "A) If those variables are in scope in the outer block",
+      "explanation": "An inner block can see outer variables that are in scope, but not the reverse."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Two blocks each declare their own variable named x. Inside the second block, x refers to:",
+      "options": [
+        "A) The variable from the first block",
+        "B) The variable declared in the second block",
+        "C) Both variables at once",
+        "D) The keyword x"
+      ],
+      "correctIndex": 1,
+      "answer": "B) The variable declared in the second block",
+      "explanation": "In the second block, the local declaration is in scope, so the name refers to that inner variable."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "What is shadowing?",
+      "options": [
+        "A) Deleting a variable permanently",
+        "B) An inner declaration hiding an outer one with the same name in the inner scope",
+        "C) Assigning a value to a variable",
+        "D) Making a variable constant"
+      ],
+      "correctIndex": 1,
+      "answer": "B) An inner declaration hiding an outer one with the same name in the inner scope",
+      "explanation": "Shadowing means the inner scope’s declaration is the one reached by the name inside that scope."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If an outer variable x is 5, and an inner block declares int x = 10, what is x inside the inner block?",
+      "options": [
+        "A) 5",
+        "B) 10",
+        "C) 15",
+        "D) The variable x cannot be used there"
+      ],
+      "correctIndex": 1,
+      "answer": "B) 10",
+      "explanation": "The inner declaration shadows the outer one inside the inner block, so the name refers to the inner variable."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If int x = 5; is declared in an outer block, and an inner block declares int x = 10, what is the value of the outer x after the inner block ends?",
+      "options": [
+        "A) 5",
+        "B) 10",
+        "C) 0",
+        "D) The outer x no longer exists"
+      ],
+      "correctIndex": 0,
+      "answer": "A) 5",
+      "explanation": "The inner block’s x is separate, so the outer x still holds 5 after the inner block ends."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which statement about a local variable is correct?",
+      "options": [
+        "A) It exists for the whole program",
+        "B) It is visible only within its scope",
+        "C) It can always be used in any other method",
+        "D) It must be declared outside every block"
+      ],
+      "correctIndex": 1,
+      "answer": "B) It is visible only within its scope",
+      "explanation": "A local variable is visible only within its scope; outside that scope the name cannot be used."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-11",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A program uses the name x after the closing brace of the block in which x was declared. The likely result is:",
+      "options": [
+        "A) A runtime error",
+        "B) A compile-time error because x is not in scope",
+        "C) x automatically becomes 0",
+        "D) The program works as if x were still visible"
+      ],
+      "correctIndex": 1,
+      "answer": "B) A compile-time error because x is not in scope",
+      "explanation": "Using a block variable outside its scope is not allowed; the compiler reports that the name cannot be found."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A group of statements enclosed in braces is called a blank.",
+      "answer": "block",
+      "explanation": "A block is a group of statements written inside braces."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-13",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The region of a program in which a declaration can be used is called its blank.",
+      "answer": "scope",
+      "explanation": "Scope is the region where a name is visible and can be used."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-14",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "When an inner variable hides an outer one with the same name, the outer variable is said to be blank.",
+      "answer": "shadowed",
+      "explanation": "Shadowing means the inner declaration is the one reached by the name inside the inner scope."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "The ability to refer to a variable by name from a particular place is called its blank.",
+      "answer": "visibility",
+      "explanation": "Visibility is about whether a name can be used from a given position."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain the difference between an expression and a statement in Java.",
+      "answer": "An expression produces a value, such as 3 + 4 or x + y. A statement performs an action, such as declaring a variable or calling a method. An assignment like x = 7 is both an expression and a statement, because it produces a value and also stores it.",
+      "explanation": "The mark is for distinguishing value production from action and for recognising assignment as a blend."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain why a variable declared inside a block cannot be used outside that block.",
+      "answer": "A variable declared in a block has its scope limited to that block and any blocks nested inside it. Outside the block, the name is not in scope, so the compiler reports that it cannot be used there.",
+      "explanation": "The mark is for explaining that scope is bounded by the block."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-18",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain the difference between shadowing and reassigning a variable.",
+      "answer": "Shadowing happens when a new variable with the same name is declared in an inner scope; the inner variable is separate from the outer one, and assigning to the inner variable does not change the outer one. Reassigning means changing the value of the one variable that is in scope, so all uses of that variable see the new value.",
+      "explanation": "The mark is for distinguishing a new separate variable from a change to the existing one."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Describe how blocks create scope in Java and explain what happens to a local variable when its block ends.",
+      "answer": "A block groups statements and creates a scope. A local variable declared in a block can be used only within that block and any nested blocks. When the block ends, the local variable goes out of scope, so the name cannot be used again from that block, and the variable itself does not continue to exist outside it.",
+      "explanation": "The mark is for linking blocks to scope, stating the visibility rule, and explaining what happens at the end of the block."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Explain how nested blocks affect which declaration a name refers to when two variables have the same name. Give a short example.",
+      "answer": "When an outer block declares x and an inner block also declares x, the inner declaration is in scope inside the inner block, so the name refers to the inner variable there. The outer variable still exists, but it is shadowed inside the inner block. After the inner block ends, the name refers to the outer variable again. For example, if the outer x is 5 and the inner x is 10, then inside the inner block x is 10, and after the block x is 5.",
+      "explanation": "The mark is for explaining shadowing, the separate nature of the two variables, and a correct example."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A student sees int x = 5; in the outer block and int x = x + 5; in an inner block and says the outer x becomes 10. Decide whether the claim is correct and explain the correct result.",
+      "answer": "The claim is not correct. The inner declaration creates a new variable whose initial value comes from the x that is in scope at that point, which is the outer x, so the inner x becomes 10. The outer x is still 5, because the inner declaration does not change it.",
+      "explanation": "The mark is for identifying the separate inner variable and explaining that the outer variable is unchanged."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain how to read a small Java program to decide whether a use of x is legal. Include the role of declaration, scope, and nested blocks.",
+      "answer": "To decide whether a use of x is legal, find the declaration(s) of x and mark where each scope begins and ends. Then check whether the use is inside the scope of a declaration. If two variables named x exist in nested blocks, decide which declaration is in scope at that point. If the use is outside every block that declares x, it is an error because x is not in scope there.",
+      "explanation": "The mark is for describing the reading method and linking legality to scope and nesting."
+    },
+    {
+      "id": "isc-12-cs-java-statements-scope-q-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain why understanding scope is important for tracing and debugging Java programs, and give one example of a mistake that scope knowledge prevents.",
+      "answer": "Scope tells you which variable a name refers to and where it can be used, so it is essential for predicting program behaviour and for diagnosing errors. For example, a student who tries to use a block variable after the block ends will get a compile-time error, and understanding scope explains why. Another mistake scope knowledge prevents is assuming that a new variable inside a block changes an outer variable with the same name.",
+      "explanation": "The mark is for explaining why scope matters and for giving a concrete preventable mistake."
+    }
+  ]
 }

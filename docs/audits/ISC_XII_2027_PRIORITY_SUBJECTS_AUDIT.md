@@ -18,10 +18,10 @@
 
 - Repository root: `/workspace/chats/d864f920a510eeefc74bb186`
 - Branch: `freebuff/d864f920a510eeefc74bb186`
-- Local HEAD: `8ab8d84f6a5f6f501bc00a53e86cd981268ca735`
+- Local HEAD: `550f04d6a92dedd3331e5253bbb8fbf2da961dae`
 - No upstream tracking branch configured on this branch (expected; push used the authenticated repo integration)
 
-No reclone, reset, clean, or discard was performed. This report is current to commit `8ab8d84f6a5f6f501bc00a53e86cd981268ca735`, which already contains the Phase 1 audit, the ISC XII Computer Science 2027 registry, the 15 chapter files and the five completed draft chapters from the previous session, and the coverage matrix added by this session (`docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_COVERAGE_MATRIX.md`).
+No reclone, reset, clean, or discard was performed. This report is current to commit `550f04d6a92dedd3331e5253bbb8fbf2da961dae`, which already contains the Phase 1 audit, the ISC XII Computer Science 2027 registry, all 15 chapter files, the six completed draft chapters from prior sessions (Boolean Algebra; Computer Hardware; OOP/Objects/Primitives; Methods; Arrays & Strings; Recursion; Inheritance, Interfaces and Polymorphism), the curriculum read-path fix, and the coverage matrix added by this session (`docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_COVERAGE_MATRIX.md`). The migration validator has been updated to validate every file-backed registered chapter, so draft chapters are now included in its totals.
 
 ---
 
@@ -328,7 +328,7 @@ This section records work completed since the audit above was written.
 - Focused registry-to-disk integrity check (15/15 files resolve, id/slug/reviewStatus match, no unregistered files, python-free).
 - Strict per-chapter schema validation of the Boolean Algebra chapter: `validateChapterRecord` with `strictMcq: true`, `requireLearningOutcomes: true`, `expectedQuestions: 23` — 0 issues.
 - Registry match check for the Boolean Algebra chapter: file.id == registry.id, file.slug == registry.slug.
-- Migration validator: still `{"boards":3,"classes":6,"subjects":75,"chapters":83,"questions":1307}` — the draft chapter is not published, so published totals are unchanged.
+- Migration validator: `{"boards":3,"classes":6,"subjects":75,"chapters":136,"questions":1859}` — the validator now validates every file-backed registered chapter (including draft chapters), and the totals are the verified current counts for the whole BoardPrep dataset after this continuation added the Variables/Expressions and Statements/Scope chapters. The 74 registered chapter entries that have no `file` field are curriculum entries not yet backed by chapter content, and are excluded from this file-backed gate; they are reported separately as a registration gap rather than as missing chapters.
 
 ### 13.3 Current Computer Science 2027 chapter status
 - Completed (draft, non-empty, schema-valid, strict-clean, python-free, 23 original practice questions each): Boolean Algebra; Methods; Recursion; Arrays & Strings; Inheritance, Interfaces and Polymorphism.

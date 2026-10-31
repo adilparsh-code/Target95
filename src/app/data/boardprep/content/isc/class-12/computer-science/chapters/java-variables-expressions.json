@@ -1,25 +1,622 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-java-variables-expressions",
-  "slug": "java-variables-expressions",
   "title": "Variables, Expressions",
   "kind": "computer-science",
+  "slug": "java-variables-expressions",
   "tagline": "Java variables, constants, expressions and type rules.",
-  "reviewStatus": "planned",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "A Java program is built from values and the operations that combine them. At the centre of that idea are variables, which are named storage locations with a type, and expressions, which are the written forms that produce values. This chapter introduces those ideas carefully, because they look simple and are easy to underestimate. It begins with the distinction between declaring a variable and initialising it, then moves to the way Java uses types to check expressions before the program ever runs. After that it covers the common primitive types, how literals are written, how arithmetic expressions are formed and evaluated, and how the type of an expression is determined by the types of its parts. The chapter then discusses assignment, casting in expressions, compound operators, and the difference between integer and floating-point arithmetic, which is one of the most common sources of unexpected results in examination tracing questions. The chapter stays within the 2027 syllabus boundary: it treats variables and expressions as the foundation for the later Java topics, not as a separate programming-language component.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section B (Java)" },
+      { "label": "Syllabus section", "value": "Section B (Java) of the 2027 ISC Class XII Computer Science syllabus" },
       { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "What the syllabus asks for", "value": "Variables, constants, expressions, and the type rules that govern their use in Java programs." }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Declare and initialise variables of the common primitive types, and explain the difference between declaration and initialisation.",
+    "Explain what a type is in Java and why the compiler uses types to check expressions.",
+    "Read and evaluate arithmetic expressions involving integers, floating-point values, and mixed types, and predict the result type.",
+    "Distinguish integer division from floating-point division and explain why 7 / 2 and 7.0 / 2 give different results.",
+    "Use assignment, compound assignment, and casting correctly in expressions.",
+    "Explain the difference between a variable and a constant, and know when a constant is appropriate.",
+    "Trace short variable and expression sequences and state the final value and type of each variable.",
+    "Identify common expression errors such as integer division surprises, overflow in small integer types, and loss of precision when casting."
+  ],
+  "learn": [
+    {
+      "id": "variables-and-declarations",
+      "title": "Variables, declaration and initialisation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A variable in Java is a named storage location that holds a value of a particular type. You must tell Java two things before you can use a variable meaningfully: what type of value it will hold, and under what name it will be known. That statement is a declaration. For example, int marks; declares a variable named marks that can hold an int value. Declaring a variable makes its name available, but it does not yet put a meaningful value into it. If you try to use the variable before giving it a value, the compiler will complain, because Java requires local variables to be initialised before use."
+        },
+        {
+          "type": "paragraph",
+          "text": "An initialisation is the act of giving a variable its first value. You can declare and initialise in one step, as in int marks = 40;, or in two steps, as in int marks; followed later by marks = 40;. In practice, the one-step form is common for small programs, and the two-step form appears when the initial value is not known at the point of declaration. The important idea is that a variable only holds a well-defined value once it has been initialised, and using it before then is a mistake the compiler prevents for local variables."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Declare and initialise an int variable in one step.",
+              "note": "int marks = 40; declares marks and sets it to 40."
+            },
+            {
+              "text": "Declare first, initialise later.",
+              "note": "int total; total = 0; is valid, but using total between the two lines would be an error."
+            },
+            {
+              "text": "The same name can be used for different variables in different scopes.",
+              "note": "A local variable in one method is separate from a local variable of the same name in another method."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A declaration names a variable and says what type it holds.",
+            "An initialisation gives a variable its first value.",
+            "A local variable must be initialised before it is used.",
+            "A variable only holds the value last assigned to it.",
+            "The type of a variable does not change after declaration."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "variable", "meaning": "A named storage location that holds a value of a particular type." },
+            { "term": "declaration", "meaning": "A statement that introduces a variable name and its type." },
+            { "term": "initialisation", "meaning": "The assignment of the first value to a variable." },
+            { "term": "assignment", "meaning": "The act of storing a value in a variable, written with the = operator." },
+            { "term": "local variable", "meaning": "A variable declared inside a method or block, existing only within that scope." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "types-and-literals",
+      "title": "Types and literals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Java is a typed language. The type of a value tells you what kind of data it is and what operations can be performed on it. For the purposes of this chapter, the most important categories are the numeric primitive types: int, long, float and double, and the other common primitives such as char and boolean. A type determines not only the range of values that can be stored, but also how expressions involving the value are evaluated. For example, dividing two int values produces an int result, so 7 / 2 is 3, not 3.5. That result is often surprising to students who think of division in the everyday sense rather than in the Java sense."
+        },
+        {
+          "type": "paragraph",
+          "text": "A literal is a value written directly in the program. Each type has its own literal forms. An int literal is written as an ordinary integer such as 40 or 0. A long literal can be written with an L suffix, as in 5000000000L. A double literal is usually written with a decimal point or an exponent, as in 2.5 or 1.0E3. A float literal should carry an F suffix, as in 2.5F, because a decimal literal without a suffix is a double. A char literal is written in single quotes, as in 'A'. A boolean literal is either true or false. Knowing the literal forms matters because writing the wrong suffix or the wrong kind of quote is a common compile-time error."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Integer literals.",
+              "note": "40, 0, -7 and 100000 are int literals."
+            },
+            {
+              "text": "A long literal with the L suffix.",
+              "note": "long population = 5000000000L; is required because 5000000000 is too large for int."
+            },
+            {
+              "text": "Floating-point literals.",
+              "note": "double pi = 3.14; uses a double literal. float rate = 2.5F; uses a float literal."
+            },
+            {
+              "text": "Character and boolean literals.",
+              "note": "char grade = 'A'; and boolean passed = true; use the correct quote style and boolean keywords."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Each primitive type has its own literal form.",
+            "A decimal literal without a suffix is a double, not a float.",
+            "A long literal should carry the L suffix when it is too large for int.",
+            "A char literal uses single quotes.",
+            "true and false are the only boolean literals."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "type", "meaning": "A classification of values that determines what operations are allowed." },
+            { "term": "primitive type", "meaning": "A built-in value type such as int, double, char or boolean." },
+            { "term": "literal", "meaning": "A value written directly in the program, such as 40, 2.5F or 'A'." },
+            { "term": "int", "meaning": "A 32-bit integer primitive type." },
+            { "term": "double", "meaning": "A 64-bit floating-point primitive type, and the default type for decimal literals." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arithmetic-expressions-and-type-rules",
+      "title": "Arithmetic expressions and the type of an expression",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An expression is a piece of code that produces a value. The simplest expressions are literals and variable names. More useful expressions combine values with operators, such as a + b, price * quantity, or (x + y) / 2. Java evaluates an expression according to the types of its operands. If both operands of an arithmetic operator are int, the operation is performed in int arithmetic. If one operand is double, the operation is promoted to double arithmetic. This is why 7 / 2 is 3 but 7.0 / 2 is 3.5. The type of an expression is not the same as the type of the variable you store it in; it is determined by the expression itself."
+        },
+        {
+          "type": "paragraph",
+          "text": "Operator precedence decides the order in which parts of an expression are grouped. Multiplication and division bind more tightly than addition and subtraction, so 2 + 3 * 4 means 2 + (3 * 4), not (2 + 3) * 4. Parentheses override the default precedence and make intent explicit, so (2 + 3) * 4 is 20. When students write expressions without parentheses, they often assume the wrong order, and examination tracing questions test exactly that kind of mistake."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Integer division.",
+              "note": "7 / 2 is 3 because both operands are int. 7.0 / 2 is 3.5 because the presence of 7.0 makes the expression double."
+            },
+            {
+              "text": "Operator precedence.",
+              "note": "2 + 3 * 4 is 14, because multiplication happens first. (2 + 3) * 4 is 20."
+            },
+            {
+              "text": "Mixed-type expression.",
+              "note": "int a = 7; double d = a / 2; stores 3.0 in d, not 3.5, because a / 2 is evaluated as int division first."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The type of an arithmetic expression depends on its operands.",
+            "Two int operands give int arithmetic, so integer division truncates.",
+            "If any operand is double, the expression is evaluated in double arithmetic.",
+            "Multiplication and division have higher precedence than addition and subtraction.",
+            "Parentheses make evaluation order explicit and reduce mistakes."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "expression", "meaning": "A piece of code that produces a value." },
+            { "term": "operator", "meaning": "A symbol such as +, -, *, / or = that represents an operation." },
+            { "term": "operand", "meaning": "A value or expression on which an operator acts." },
+            { "term": "integer division", "meaning": "Division of two int values, where the fractional part is discarded." },
+            { "term": "operator precedence", "meaning": "The rule that determines the grouping of operations in an expression." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assignment-and-compound-operators",
+      "title": "Assignment, compound operators and casting in expressions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Assignment is the operation that stores a value in a variable. It is written with the = operator, as in total = total + marks. An assignment is itself an expression in Java, and in many contexts its value is the value assigned. That detail is mostly useful to know for chaining and for understanding compound operators. The important practical idea is that the variable on the left of = is updated to hold the value of the expression on the right."
+        },
+        {
+          "type": "paragraph",
+          "text": "Compound assignment operators such as +=, -= and *= combine an operation with assignment. Writing total += marks is equivalent to writing total = total + marks. These operators are convenient, but they are not magic: the same type rules apply. If total is an int and marks is an int, total += marks performs int addition. If you mix types, the same promotion rules apply as in any other expression."
+        },
+        {
+          "type": "paragraph",
+          "text": "Casting is needed when you want to convert one type to another deliberately. For example, if you want the result of an integer division to be a double, you must cast one operand to double first, as in (double) a / b. Without the cast, a / b is int division. Casting makes the conversion explicit and is one of the main tools for controlling expression types in small programs."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Compound assignment.",
+              "note": "total += marks; is equivalent to total = total + marks; for compatible types."
+            },
+            {
+              "text": "Casting to control division.",
+              "note": "double avg = (double) sum / count; forces floating-point division, while sum / count would be int division."
+            },
+            {
+              "text": "Casting can lose information.",
+              "note": "int x = (int) 3.9; stores 3, because casting a floating-point value to int truncates toward zero."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Assignment stores the value of the right-hand expression in the left-hand variable.",
+            "Compound operators such as += combine an operation with assignment.",
+            "Casting makes a type conversion explicit.",
+            "Casting a floating-point value to int truncates toward zero.",
+            "Casting is the tool for forcing a particular expression type."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "assignment operator", "meaning": "The = operator that stores a value in a variable." },
+            { "term": "compound assignment", "meaning": "An operator such as += that combines an operation with assignment." },
+            { "term": "cast", "meaning": "An explicit conversion from one type to another, written with parentheses." },
+            { "term": "promotion", "meaning": "The automatic use of a wider type when operands of different types are combined." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "variables-expressions-in-practice",
+      "title": "Putting variables and expressions together",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Once the parts are understood, the main skill is reading and writing small sequences of variable and expression work correctly. A good habit is to trace the value and type of each variable after every assignment, and to check whether any expression will produce an unexpected result because of integer division, mixed types, or a missing parentheses. Another good habit is to prefer clarity over cleverness: write (total + marks) / 2.0 rather than relying on implicit promotion when the intent is an average, and write a constant for a value that should not change."
+        },
+        {
+          "type": "paragraph",
+          "text": "Constants are variables that cannot be reassigned after initialisation. They are declared with the final keyword, as in final int MAX_MARKS = 100;. The name final signals that the value is fixed for the rest of the program. Constants are useful for meaningful fixed values such as maximum marks, conversion factors, and limits, because they make the program easier to read and prevent accidental changes. The examination often rewards the use of named constants over unnamed literals because named constants express intent."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Computing an average safely.",
+              "note": "double average = (double) total / count; forces floating-point division and avoids integer truncation."
+            },
+            {
+              "text": "A named constant.",
+              "note": "final int MAX_MARKS = 100; documents that 100 is a fixed limit, not a random literal."
+            },
+            {
+              "text": "A small tracing sequence.",
+              "note": "int x = 5; x += 3; x = x * 2; ends with x equal to 16, because the operations happen in order."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Trace variables step by step, keeping track of both value and type.",
+            "Use explicit casts or 2.0-style operands when you need floating-point arithmetic.",
+            "Prefer named constants for fixed values.",
+            "Parenthesise expressions when the default precedence is not what you intend.",
+            "Check integer division separately from floating-point division."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "constant", "meaning": "A variable declared with final that cannot be reassigned after initialisation." },
+            { "term": "trace", "meaning": "The act of following variable values through a sequence of statements." },
+            { "term": "truncation", "meaning": "Discarding the fractional part of a number, as happens in integer division and in casting to int." },
+            { "term": "precision", "meaning": "How much detail a value carries; floating-point values have limited precision." }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A variable is a named storage location with a type; it must be declared before use.",
+    "A local variable must be initialised before it is used.",
+    "A type determines what values a variable can hold and how expressions are evaluated.",
+    "A literal is a value written directly in the program, with type-specific syntax.",
+    "Integer division of two int values discards the fractional part, so 7 / 2 is 3.",
+    "The type of an arithmetic expression depends on its operands, not on the variable it is stored in.",
+    "Multiplication and division have higher precedence than addition and subtraction.",
+    "Parentheses make evaluation order explicit and reduce mistakes.",
+    "Assignment stores a value in a variable; compound operators such as += combine an operation with assignment.",
+    "Casting makes a type conversion explicit, and casting a floating-point value to int truncates toward zero.",
+    "A final variable is a constant that cannot be reassigned after initialisation.",
+    "Good expression work traces values step by step and checks for integer division surprises."
+  ],
+  "examFocus": [
+    "Declare and initialise variables of the common primitive types.",
+    "Explain the difference between declaration and initialisation.",
+    "Read and evaluate arithmetic expressions, including mixed int and double expressions.",
+    "Explain why 7 / 2 and 7.0 / 2 give different results.",
+    "Use assignment, compound assignment and casting correctly.",
+    "Explain the role of final constants and why named constants are useful.",
+    "Trace short variable and expression sequences and state the final value and type.",
+    "Identify common mistakes such as integer division truncation, missing parentheses, and unwanted loss of information when casting."
+  ],
+  "vocabulary": [
+    { "word": "variable", "meaning": "A named storage location that holds a value of a particular type." },
+    { "word": "declaration", "meaning": "A statement that introduces a variable name and its type." },
+    { "word": "initialisation", "meaning": "The assignment of the first value to a variable." },
+    { "word": "type", "meaning": "A classification of values that determines what operations are allowed." },
+    { "word": "primitive type", "meaning": "A built-in value type such as int, double, char or boolean." },
+    { "word": "literal", "meaning": "A value written directly in the program, such as 40, 2.5F or 'A'." },
+    { "word": "expression", "meaning": "A piece of code that produces a value." },
+    { "word": "operator", "meaning": "A symbol such as +, -, *, / or = that represents an operation." },
+    { "word": "integer division", "meaning": "Division of two int values, where the fractional part is discarded." },
+    { "word": "operator precedence", "meaning": "The rule that determines the grouping of operations in an expression." },
+    { "word": "assignment", "meaning": "The act of storing a value in a variable using the = operator." },
+    { "word": "compound assignment", "meaning": "An operator such as += that combines an operation with assignment." },
+    { "word": "cast", "meaning": "An explicit conversion from one type to another, written with parentheses." },
+    { "word": "constant", "meaning": "A final variable that cannot be reassigned after initialisation." },
+    { "word": "truncation", "meaning": "Discarding the fractional part of a number, as in integer division or casting to int." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A variable declaration in Java tells the compiler:",
+      "options": [
+        "A) The value the variable will always hold",
+        "B) The name of the variable and the type of value it can hold",
+        "C) The exact memory address",
+        "D) The program output"
+      ],
+      "correctIndex": 1,
+      "answer": "B) The name of the variable and the type of value it can hold",
+      "explanation": "A declaration introduces a variable name and its type; it does not fix the value the variable will hold."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which of the following is required before a local variable can be used?",
+      "options": [
+        "A) It must be declared and initialised",
+        "B) It must be declared as static",
+        "C) It must be a constant",
+        "D) It must be printed first"
+      ],
+      "correctIndex": 0,
+      "answer": "A) It must be declared and initialised",
+      "explanation": "A local variable in Java must be initialised before use; using it before initialisation is a compile-time error."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "In Java, int a = 7; int b = 2; What is a / b?",
+      "options": [
+        "A) 3.5",
+        "B) 3",
+        "C) 4",
+        "D) 2"
+      ],
+      "correctIndex": 1,
+      "answer": "B) 3",
+      "explanation": "7 / 2 is integer division because both operands are int, so the fractional part is discarded."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which literal is a double by default?",
+      "options": [
+        "A) 2.5F",
+        "B) 2.5",
+        "C) 2",
+        "D) '2'"
+      ],
+      "correctIndex": 1,
+      "answer": "B) 2.5",
+      "explanation": "A decimal literal without a suffix is a double; 2.5F is a float."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "What is the value of 2 + 3 * 4 in Java?",
+      "options": [
+        "A) 20",
+        "B) 14",
+        "C) 9",
+        "D) 11"
+      ],
+      "correctIndex": 1,
+      "answer": "B) 14",
+      "explanation": "Multiplication has higher precedence, so 3 * 4 is computed first, giving 2 + 12 = 14."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "int a = 7; double d = a / 2; What is stored in d?",
+      "options": [
+        "A) 3.5",
+        "B) 3.0",
+        "C) 3",
+        "D) 0.0"
+      ],
+      "correctIndex": 1,
+      "answer": "B) 3.0",
+      "explanation": "a / 2 is evaluated as int division first, giving 3, and then 3 is converted to double for assignment, so d is 3.0."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which expression forces floating-point division for int a and int b?",
+      "options": [
+        "A) a / b",
+        "B) (double) a / b",
+        "C) a / b * 1.0",
+        "D) a + b / 2"
+      ],
+      "correctIndex": 1,
+      "answer": "B) (double) a / b",
+      "explanation": "Casting one operand to double makes the expression double arithmetic, so division is no longer integer division."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A final variable in Java:",
+      "options": [
+        "A) Can be reassigned any number of times",
+        "B) Cannot be reassigned after initialisation",
+        "C) Must be a double",
+        "D) Is the same as a literal"
+      ],
+      "correctIndex": 1,
+      "answer": "B) Cannot be reassigned after initialisation",
+      "explanation": "A final variable is a constant; once initialised, its value cannot be changed."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "double x = 3.9; int n = (int) x; What is n?",
+      "options": [
+        "A) 3.9",
+        "B) 4",
+        "C) 3",
+        "D) 0"
+      ],
+      "correctIndex": 2,
+      "answer": "C) 3",
+      "explanation": "Casting a floating-point value to int truncates toward zero, so (int) 3.9 is 3."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which statement about literal forms is correct?",
+      "options": [
+        "A) 'A' is a string literal",
+        "B) 5000000000 can be written as an int without a suffix",
+        "C) true is a boolean literal",
+        "D) 2.5F is a double literal"
+      ],
+      "correctIndex": 2,
+      "answer": "C) true is a boolean literal",
+      "explanation": "true and false are the boolean literals; 2.5F is a float literal, and a char literal uses single quotes."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-11",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "int x = 5; x += 3; x = x * 2; What is x?",
+      "options": [
+        "A) 16",
+        "B) 13",
+        "C) 10",
+        "D) 11"
+      ],
+      "correctIndex": 0,
+      "answer": "A) 16",
+      "explanation": "x becomes 8 after x += 3, then 8 * 2 = 16."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-12",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A piece of code that produces a value is called an blank.",
+      "answer": "expression",
+      "explanation": "An expression is a piece of code that produces a value."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-13",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A value written directly in the program, such as 40 or 'A', is called a blank.",
+      "answer": "literal",
+      "explanation": "A literal is a value written directly in the source code."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-14",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Dividing two int values in Java discards the blank part of the result.",
+      "answer": "fractional",
+      "explanation": "Integer division discards the fractional part, so 7 / 2 is 3."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A variable declared with the keyword blank cannot be reassigned after initialisation.",
+      "answer": "final",
+      "explanation": "A final variable is a constant that cannot be changed after initialisation."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain the difference between int a = 7; int b = 2; and double x = 7.0; double y = 2.0; when computing a / b versus x / y.",
+      "answer": "a / b is integer division because both operands are int, so the result is 3. x / y is double division because both operands are double, so the result is 3.5. The presence of a fractional type changes the kind of division performed.",
+      "explanation": "The mark is for explaining that operand types determine the kind of division."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain why (double) a / b can give a different result from a / b when a and b are int.",
+      "answer": "a / b is evaluated as integer division first, so any fractional part is lost. In (double) a / b, the cast makes one operand double, so the division is performed in double arithmetic and the fractional part is preserved.",
+      "explanation": "The mark is for explaining that casting changes the expression type before division."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-18",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain why a local variable must be initialised before use, and what happens if it is not.",
+      "answer": "Java requires local variables to be initialised so that every use of the variable has a well-defined value. If a local variable is used before it is initialised, the compiler reports an error, because the variable does not have a guaranteed value at that point.",
+      "explanation": "The mark is for stating the rule and the compile-time result."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A program computes int total = 20; int count = 4; double avg = total / count; The intended average is 5.0, but the programmer expected 5.0 only because both values divided evenly. Explain whether the result is safe and how to make the average correct for all values.",
+      "answer": "The result happens to be correct here because 20 / 4 is exactly 5, but the code is not safe for all values. total / count is integer division, so for total = 21 and count = 4 the expression gives 5 and avg becomes 5.0. To make the average correct for all values, use (double) total / count or total / (double) count.",
+      "explanation": "The mark is for recognising that integer division is the danger and for giving a correct fix."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Explain the role of parentheses in controlling the order of evaluation, and rewrite 2 + 3 * 4 to make the addition happen first.",
+      "answer": "Parentheses override the default operator precedence and make the grouping of operations explicit. The expression 2 + 3 * 4 is evaluated as 2 + (3 * 4) because multiplication has higher precedence. To make the addition happen first, write (2 + 3) * 4, which gives 20.",
+      "explanation": "The mark is for explaining precedence, the default grouping, and the correct rewritten expression."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A student writes int score = 40; int bonus = 10; int result = score + bonus / 2; and expects result to be 25. Decide whether the result is 25 and explain the correct value.",
+      "answer": "The result is not 25. Division has higher precedence than addition, so bonus / 2 is 5, and score + 5 is 45. To get 25, the student would need (score + bonus) / 2, which is 25.",
+      "explanation": "The mark is for identifying the precedence effect and giving the correct value and fix."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain how Java uses variable types to decide the type of an arithmetic expression. Include one example where the result type is not the type the student expected.",
+      "answer": "Java determines the type of an arithmetic expression from the types of its operands. If both operands are int, the operation is int arithmetic. If any operand is double, the operation is promoted to double. For example, int a = 7; double d = a / 2; stores 3.0, not 3.5, because a / 2 is evaluated as int division before being assigned to d. The student expected a fractional result but got an integer division result first.",
+      "explanation": "The mark is for explaining operand-driven type rules and giving a concrete unexpected-result example."
+    },
+    {
+      "id": "isc-12-cs-java-variables-expressions-q-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain why named constants are useful when writing Java programs, and state one situation where a literal is less clear than a constant.",
+      "answer": "A named constant documents the meaning of a fixed value and prevents accidental changes, because it cannot be reassigned after initialisation. A literal such as 100 in several places leaves the reader unsure whether the values mean the same thing. For example, final int MAX_MARKS = 100; is clearer and safer than writing 100 directly every time the maximum is needed.",
+      "explanation": "The mark is for explaining readability, safety, and a concrete comparison with a literal."
+    }
+  ]
 }

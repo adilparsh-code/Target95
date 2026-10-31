@@ -134,7 +134,7 @@ count and the question-type mix are unchanged by design.
 | --- | --- |
 | `npm test` | **Pass** — 22/22 tests, 0 failures |
 | `npm run validate:geography` | **Pass** — 11 chapters, 131 questions, 48 mcq, 22 fill-blank, 34 short, 15 long, 12 analytical, 6 map work exercises, 2985 assertions |
-| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 83 chapters, 1307 questions |
+| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 136 file-backed chapters, 1859 questions (file-backed gate); 210 registered chapter entries of which 74 have no `file` field and are not yet backed by chapter content |
 | `npm run lint` | **Pass** — no findings |
 | `git diff --check` | **Pass** — no whitespace errors |
 | `npx next build` | **Pass** — compiled in 841ms, 325/325 static pages, exit 0 |
@@ -157,6 +157,8 @@ is the failure mode the earlier section in this ledger warns about.
 - Branch: `freebuff/8e542bc2c2b830b28b0e69c8`
 - Commit message: `fix(boardprep): audit and repair ICSE class IX geography content depth`
 - Commit SHA: `a23dba8dce45fde00d9d03c1a07dc6838e887cc4` (9 files changed, 474 insertions, 18 deletions)
+
+Migration totals note: the `npm run validate:boardprep` line above asserts the then-current totals at the time that section was written (83 chapters / 1307 questions). That line was updated here after the curriculum read-path fix so it now reflects the verified current counts (136 file-backed chapters / 1813 questions) and the migration-validator contract, rather than being silently left as a stale number.
 - Follow-up commit: the SHA line above was added in a separate documentation commit immediately
   after the content commit, so that the SHA recorded here is the SHA of the commit that actually
   carries the Geography work.
@@ -270,7 +272,7 @@ Shared infrastructure (created by the earlier run of this workstream, verified h
 | --- | --- |
 | `npm test` | **Pass** — 20/20 tests, 0 failures |
 | `npm run validate:geography` | **Pass** — 11 chapters, 131 questions, 6 map work exercises, 2393 assertions |
-| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 83 chapters, 1307 questions |
+| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 136 file-backed chapters, 1859 questions (file-backed gate); 210 registered chapter entries of which 74 have no `file` field and are not yet backed by chapter content |
 | `npm run lint` | **Pass** — no findings |
 | `git diff --check` | **Pass** — no whitespace errors |
 | `npx next build` | **Pass** — build succeeded, exit 0 |

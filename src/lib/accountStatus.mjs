@@ -84,7 +84,9 @@ const defaultOpId = () =>
  *   'partial_auth_only' and repaired by retry or the reconcile script.
  *
  * Reactivate (target 'active'):
- *   1. Auth -> enabled first. While the profile is still inactive, rules and
+ *   0. Revoke refresh tokens first, so sessions from before a deactivation
+ *      whose revocation failed can never be restored. Failure -> no change.
+ *   1. Auth -> enabled. While the profile is still inactive, rules and
  *      server APIs keep denying, so this alone grants nothing.
  *   2. Firestore -> active, guarded by `expectedUpdateTime` when given, so a
  *      deactivation that landed after the caller read the profile wins.
@@ -192,6 +194,18 @@ export async function transitionAccountStatus({
   }
 
   // target === 'active'
+  // Revoke BEFORE enabling Auth. A deactivation whose token revocation failed
+  // (partial_profile_only, or a pending/failed statusSync marker) leaves
+  // pre-deactivation sessions and refresh tokens unrevoked; enabling Auth
+  // alone would bring them back. Revoking here makes every reactivation start
+  // from a clean session state, whatever the earlier marker says. If the
+  // revocation fails nothing has changed and the account stays inactive.
+  try {
+    await auth.revokeRefreshTokens(uid);
+  } catch (error) {
+    logger.error("[account-status] reactivate: token revocation failed; Auth not enabled, account remains inactive", { ...context, error: errorInfo(error) });
+    return done(false, 500, "unchanged", "Reactivation failed. The account is still inactive. Please retry.");
+  }
   try {
     await auth.updateUser(uid, { disabled: false });
   } catch (error) {
@@ -295,6 +309,8 @@ export async function checkAccountStatusManageable({ uid, profile, auth, logger 
  *   - legacy profile missing status, Auth enabled -> report for backfill
  *   - profile not active but Auth enabled        -> disable Auth + revoke
  *   - statusSync left pending/failed while both stores agree -> clear marker
+ *     (for a deactivation marker with an existing Auth user, revoke refresh
+ *     tokens first: the failure may have been the revocation itself)
  * Never enables an Auth user and never activates a profile.
  *
  * @param {object|null} profile   users/{uid} data (null when missing)
@@ -318,9 +334,99 @@ export function decideReconciliation(profile, authUser) {
     const markerMatchesState = (marker.target === "active") === profileActive;
     // Clear only when the marker describes the state both stores now agree
     // on; anything else is surfaced for a human, never auto-resolved.
-    return markerMatchesState
-      ? { issue: `stale_marker_${marker.auth}`, actions: ["marker:clear"] }
-      : { issue: "marker_state_mismatch", actions: [] };
+    if (!markerMatchesState) return { issue: "marker_state_mismatch", actions: [] };
+    // A pending/failed DEACTIVATION marker may mean token revocation never
+    // completed (Auth disabled, revokeRefreshTokens failed). Revoke again
+    // before clearing; the script keeps the marker if revocation fails.
+    if (marker.target === "inactive" && authUser?.exists === true) {
+      return { issue: `stale_marker_${marker.auth}`, actions: ["auth:revoke", "marker:clear"] };
+    }
+    return { issue: `stale_marker_${marker.auth}`, actions: ["marker:clear"] };
   }
   return null;
+}
+
+/**
+ * Per-account mutual exclusion shared by every writer of account status:
+ * PATCH /api/admin/students/[id] (via manageStudentAccountStatus) and
+ * scripts/reconcile-account-status.mjs in --apply mode. Both acquire
+ * accountStatusLeases/{uid} in a Firestore transaction before any Auth or
+ * profile write and release it afterwards, so reconciliation can never act on
+ * the intermediate state of a reactivation (Auth enabled, profile not yet
+ * active) and a reactivation can never interleave with reconciliation writes.
+ *
+ * The collection has no client rule (firestore.rules denies by default); only
+ * the Admin SDK touches it. A lease expires after ttlMs so a crashed holder
+ * cannot block an account forever. LIMITATION: Firebase Auth writes cannot be
+ * fenced by a Firestore lease, so exclusion holds only while the holder
+ * finishes within ttlMs. Writers therefore also use update-time preconditions
+ * on profile writes and treat a precondition failure as a conflict.
+ */
+export const ACCOUNT_STATUS_LEASE_COLLECTION = "accountStatusLeases";
+export const ACCOUNT_STATUS_LEASE_TTL_MS = 120_000;
+
+export async function withAccountStatusLease({ db, uid, holder, ttlMs = ACCOUNT_STATUS_LEASE_TTL_MS, nowMs = () => Date.now(), logger = console }, fn) {
+  const ref = db.collection(ACCOUNT_STATUS_LEASE_COLLECTION).doc(uid);
+  let acquired;
+  try {
+    acquired = await db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      const data = snap.exists ? snap.data() : null;
+      if (data && data.holder !== holder && Number(data.expiresAtMs) > nowMs()) return false;
+      tx.set(ref, { uid, holder, expiresAtMs: nowMs() + ttlMs, acquiredAt: new Date(nowMs()).toISOString() });
+      return true;
+    });
+  } catch (error) {
+    logger.error("[account-status] lease acquisition failed; no change made", { uid, holder, code: error?.code ?? null });
+    return { ok: false, reason: "lease_error" };
+  }
+  if (!acquired) return { ok: false, reason: "busy" };
+  try {
+    return { ok: true, value: await fn() };
+  } finally {
+    try {
+      await db.runTransaction(async (tx) => {
+        const snap = await tx.get(ref);
+        if (snap.exists && snap.data()?.holder === holder) tx.delete(ref);
+      });
+    } catch (error) {
+      // Safe: the lease simply expires after ttlMs.
+      logger.warn("[account-status] lease release failed; it will expire", { uid, holder, code: error?.code ?? null });
+    }
+  }
+}
+
+/**
+ * Core of PATCH /api/admin/students/[id] after caller authorization and input
+ * validation. Under the per-account lease it reads the profile, applies admin
+ * protection (profile role + Auth custom claims, fail closed), and runs
+ * transitionAccountStatus with the update time read UNDER THE LEASE as the
+ * reactivation precondition.
+ *
+ * @returns {Promise<{ status: number, body: object }>}
+ */
+export async function manageStudentAccountStatus({ db, auth, uid, target, actorUid, logger = console, opId = defaultOpId(), transitionOptions = {} }) {
+  const lease = await withAccountStatusLease({ db, uid, holder: `admin-route:${opId}`, logger }, async () => {
+    const ref = db.collection("users").doc(uid);
+    const userDoc = await ref.get();
+    if (!userDoc.exists) return { status: 404, body: { success: false, error: "Student not found." } };
+    const manageable = await checkAccountStatusManageable({ uid, profile: userDoc.data() || null, auth, logger });
+    if (!manageable.ok) return { status: manageable.httpStatus, body: { success: false, error: manageable.message } };
+    const result = await transitionAccountStatus({
+      uid, target, auth, profileRef: ref, actorUid, logger, opId,
+      // Rejects reactivation if the profile changed after THIS read (taken
+      // under the lease). Changes before this read are not detected here.
+      expectedUpdateTime: target === "active" ? userDoc.updateTime : null,
+      ...transitionOptions,
+    });
+    if (!result.ok) {
+      return { status: result.httpStatus, body: { success: false, error: result.message, outcome: result.outcome, opId: result.opId, retryable: true } };
+    }
+    return { status: 200, body: { success: true, student: { id: uid, status: target, disabled: target === "inactive" } } };
+  });
+  if (lease.ok) return lease.value;
+  if (lease.reason === "busy") {
+    return { status: 409, body: { success: false, error: "Another status change for this account is in progress. No changes were made. Retry shortly.", outcome: "busy", retryable: true } };
+  }
+  return { status: 503, body: { success: false, error: "Could not start the status change. No changes were made. Please retry.", outcome: "lease_error", retryable: true } };
 }

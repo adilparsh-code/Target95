@@ -204,6 +204,49 @@ describe("reactivation", () => {
   });
 });
 
+describe("P1: failed token revocation during deactivation", () => {
+  test("Auth disabled but revocation failed: reactivation revokes BEFORE enabling, so old sessions never return", async () => {
+    const w = makeWorld({ profile: ACTIVE, authDisabled: false, fail: { revoke: 1 } });
+    assert.equal((await run(w, "inactive")).outcome, "partial_profile_only");
+    assert.equal(w.state.auth.disabled, true);
+    assert.equal(w.state.auth.tokensRevokedAt, 0, "revocation really failed");
+    assert.equal(w.state.profile.statusSync.auth, "failed");
+
+    const order = [];
+    const { updateUser, revokeRefreshTokens } = w.auth;
+    w.auth.updateUser = async (uid, p) => { order.push(`updateUser:${p.disabled}`); return updateUser(uid, p); };
+    w.auth.revokeRefreshTokens = async (uid) => { order.push("revoke"); return revokeRefreshTokens(uid); };
+    const r = await run(w, "active");
+    assert.equal(r.ok, true);
+    assert.deepEqual(order, ["revoke", "updateUser:false"]);
+    const a = access(w);
+    assert.equal(a.newSignIn, true, "fresh sign-in works");
+    assert.equal(a.serverApiWithExistingSession, false, "pre-deactivation session stays revoked");
+  });
+
+  test("reactivation whose revocation fails changes nothing (fail closed)", async () => {
+    const w = makeWorld({ profile: INACTIVE, authDisabled: true, fail: { revoke: 1 } });
+    const r = await run(w, "active");
+    assert.equal(r.ok, false);
+    assert.equal(r.outcome, "unchanged");
+    assert.equal(r.httpStatus, 500);
+    assert.equal(w.state.auth.disabled, true, "Auth never enabled");
+    assert.equal(w.state.profile.status, "inactive");
+    assert.deepEqual(access(w), DENIED);
+  });
+
+  test("deactivation retry after a failed revocation revokes and reports success", async () => {
+    const w = makeWorld({ profile: ACTIVE, authDisabled: false, fail: { revoke: 1 } });
+    assert.equal((await run(w, "inactive")).outcome, "partial_profile_only");
+    const r = await run(w, "inactive");
+    assert.equal(r.ok, true);
+    assert.equal(r.outcome, "deactivated");
+    assert.ok(w.state.auth.tokensRevokedAt > w.state.sessionIssuedAt);
+    assert.equal(w.state.profile.statusSync.auth, "synced");
+    assert.deepEqual(access(w), DENIED);
+  });
+});
+
 describe("retries, idempotency and audit trail", () => {
   test("Firestore fails twice, third attempt succeeds: fully deactivated", async () => {
     const w = makeWorld({ profile: ACTIVE, authDisabled: false, fail: { profile: 2 } });
@@ -284,13 +327,19 @@ describe("concurrent reactivation vs deactivation", () => {
     const w = makeWorld({ profile: INACTIVE, authDisabled: true });
     const readTime = w.state.updateTime;
     assert.equal((await run(w, "active", { expectedUpdateTime: readTime })).ok, true);
+    const calls = [];
+    const updateUser = w.auth.updateUser;
+    const revoke = w.auth.revokeRefreshTokens;
+    w.auth.updateUser = async (uid, fields) => { calls.push(`update:${fields.disabled}`); return updateUser(uid, fields); };
+    w.auth.revokeRefreshTokens = async (uid) => { calls.push("revoke"); return revoke(uid); };
     const r = await run(w, "active", { expectedUpdateTime: readTime });
     assert.equal(r.ok, true);
     assert.equal(r.outcome, "activated");
     assert.equal(r.httpStatus, 200);
     assert.equal(w.state.auth.disabled, false);
-    assert.equal(w.state.auth.tokensRevokedAt, 0);
-    assert.equal(access(w).serverApiWithExistingSession, true);
+    assert.deepEqual(calls, ["revoke", "update:false"]);
+    assert.ok(w.state.auth.tokensRevokedAt > w.state.sessionIssuedAt);
+    assert.equal(access(w).serverApiWithExistingSession, false);
   });
 
   test("a conflict with a missing, malformed or unreadable fresh profile still rolls Auth back", async () => {
@@ -386,7 +435,11 @@ describe("decideReconciliation (never increases access)", () => {
     assert.equal(decideReconciliation(null, enabled), null);
   });
   test("stale markers are cleared only when they match the agreed state", () => {
-    assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "inactive", auth: "pending" } }, disabled).actions, ["marker:clear"]);
+    // A deactivation marker with an existing Auth user re-revokes before clearing (P1).
+    assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "inactive", auth: "pending" } }, disabled).actions, ["auth:revoke", "marker:clear"]);
+    assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "inactive", auth: "failed" } }, disabled).actions, ["auth:revoke", "marker:clear"]);
+    assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "inactive", auth: "failed" } }, { exists: false, disabled: true }).actions, ["marker:clear"]);
+    assert.deepEqual(decideReconciliation({ ...ACTIVE, statusSync: { target: "active", auth: "pending" } }, enabled).actions, ["marker:clear"]);
     assert.deepEqual(decideReconciliation({ ...ACTIVE, statusSync: { target: "inactive", auth: "failed" } }, enabled), { issue: "marker_state_mismatch", actions: [] });
   });
   test("no decision ever enables Auth or activates a profile", () => {

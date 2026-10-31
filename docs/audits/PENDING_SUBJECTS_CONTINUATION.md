@@ -133,11 +133,14 @@ count and the question-type mix are unchanged by design.
 | Command | Result |
 | --- | --- |
 | `npm test` | **Pass** — 22/22 tests, 0 failures |
-| `npm run validate:geography` | **Pass** — 11 chapters, 131 questions, 48 mcq, 22 fill-blank, 34 short, 15 long, 12 analytical, 6 map work exercises, 2985 assertions |
-| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 136 file-backed chapters, 1859 questions (file-backed gate); 210 registered chapter entries of which 74 have no `file` field and are not yet backed by chapter content |
+| `npm run validate:geography` | **Pass** — 11 chapters, 131 questions, 48 mcq, 22 fill-blank, 34 short, 15 long, 12 analytical, 6 map work exercises, 2985 assertions|| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 136 file-backed chapters, 1859 questions (file-backed gate); 210 registered chapter entries of which 74 have no `file` field and are not yet backed by chapter content |
+|| `npm run validate:isc-class-12-computer-science-2027` | **Pass** — 15 registered chapters, 15 chapter shell files, 9 finished chapters, 207 finished-chapter questions, no Python in registry or on disk |
+|| `node scripts/checks/cs-strict-chapters-2027.mjs` | **Pass** — 9 finished CS2027 chapters all strict-clean and Python-free, 207 finished-chapter questions |
+
 | `npm run lint` | **Pass** — no findings |
 | `git diff --check` | **Pass** — no whitespace errors |
 | `npx next build` | **Pass** — compiled in 841ms, 325/325 static pages, exit 0 |
+| `npm run typecheck` | **Pass** — exit 0 |
 | Route check (headless Chromium, 11 chapter routes + the subject page) | **Pass** — every route returns 200 with its own `h1`, a four-crumb trail, the correct pager position, the right number of lesson articles and answer disclosures, at least one data table, and the six map work exercises on Map Reading; 0 console errors, 0 page errors |
 | Mobile layout (375×720, all 11 chapters, with fonts) | **Pass** — the document never overflows horizontally and no element extends past the viewport outside a horizontally scrollable table wrapper |
 | Cross-subject regression (a Physics chapter, the Chemistry subject page, the class page, the board page) | **Pass** — 0 failures |
@@ -271,8 +274,10 @@ Shared infrastructure (created by the earlier run of this workstream, verified h
 | Command | Result |
 | --- | --- |
 | `npm test` | **Pass** — 20/20 tests, 0 failures |
-| `npm run validate:geography` | **Pass** — 11 chapters, 131 questions, 6 map work exercises, 2393 assertions |
-| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 136 file-backed chapters, 1859 questions (file-backed gate); 210 registered chapter entries of which 74 have no `file` field and are not yet backed by chapter content |
+| `npm run validate:geography` | **Pass** — 11 chapters, 131 questions, 6 map work exercises, 2393 assertions|| `npm run validate:boardprep` | **Pass** — 3 boards, 6 classes, 75 subjects, 136 file-backed chapters, 1859 questions (file-backed gate); 210 registered chapter entries of which 74 have no `file` field and are not yet backed by chapter content |
+|| `npm run validate:isc-class-12-computer-science-2027` | **Pass** — 15 registered chapters, 15 chapter shell files, 9 finished chapters, 207 finished-chapter questions, no Python in registry or on disk |
+|| `node scripts/checks/cs-strict-chapters-2027.mjs` | **Pass** — 9 finished CS2027 chapters all strict-clean and Python-free, 207 finished-chapter questions |
+
 | `npm run lint` | **Pass** — no findings |
 | `git diff --check` | **Pass** — no whitespace errors |
 | `npx next build` | **Pass** — build succeeded, exit 0 |

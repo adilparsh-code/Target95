@@ -321,18 +321,18 @@ This section records work completed since the audit above was written.
   - 15 planned chapters, all `status: "planned"`, all with a matching `file` reference, `id`, `slug`, `syllabusStatus: "listed"`, `examYears: [2027]`, and syllabus-aligned blurbs.
   - Python excluded from the 2027 subject entirely; the registry and all chapter files pass a python-free check.
 - Created 15 matching planned chapter shell files under `chapters/`, one per registered chapter.
-- Authored completed draft chapters for the verified 2027 syllabus. Current completed drafts (all `reviewStatus: "draft"`, non-empty, schema-valid under strict checks, python-free, 23 original practice questions each): Boolean Algebra; Methods; Recursion; Arrays (Single and Double Dimensional) and String Handling; Inheritance, Interfaces and Polymorphism; and Computer Hardware: Logic Gates and Combinational Circuits. Computer Hardware is now finished; the other four are continuing from the previous session's drafts.
+- Authored completed draft chapters for the verified 2027 syllabus. Current completed drafts (all `reviewStatus: "draft"`, non-empty, schema-valid under strict checks, python-free, 23 original practice questions each): Boolean Algebra; Computer Hardware; OOP/Objects/Primitives; Variables/Expressions; Statements/Scope; Methods; Arrays & Strings; Recursion; Inheritance, Interfaces and Polymorphism.
 - Created a durable subject-wise coverage matrix at `docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_COVERAGE_MATRIX.md`, current to the same commit, covering all five priority subjects.
 
 ### 13.2 Verification performed on this batch
 - Focused registry-to-disk integrity check (15/15 files resolve, id/slug/reviewStatus match, no unregistered files, python-free).
 - Strict per-chapter schema validation of the Boolean Algebra chapter: `validateChapterRecord` with `strictMcq: true`, `requireLearningOutcomes: true`, `expectedQuestions: 23` — 0 issues.
 - Registry match check for the Boolean Algebra chapter: file.id == registry.id, file.slug == registry.slug.
-- Migration validator: `{"boards":3,"classes":6,"subjects":75,"chapters":136,"questions":1859}` — the validator now validates every file-backed registered chapter (including draft chapters), and the totals are the verified current counts for the whole BoardPrep dataset after this continuation added the Variables/Expressions and Statements/Scope chapters. The 74 registered chapter entries that have no `file` field are curriculum entries not yet backed by chapter content, and are excluded from this file-backed gate; they are reported separately as a registration gap rather than as missing chapters.
+- Migration validator: `{"boards":3,"classes":6,"subjects":75,"chapters":136,"questions":1859}` — the validator validates every file-backed registered chapter (including draft chapters), and the totals are the verified current counts for the whole BoardPrep dataset. The 74 registered chapter entries that have no `file` field are curriculum entries not yet backed by chapter content, and are excluded from this file-backed gate; they are reported separately as a registration gap rather than as missing chapters.
 
 ### 13.3 Current Computer Science 2027 chapter status
-- Completed (draft, non-empty, schema-valid, strict-clean, python-free, 23 original practice questions each): Boolean Algebra; Methods; Recursion; Arrays & Strings; Inheritance, Interfaces and Polymorphism.
-- Planned placeholders only (empty shells, not published, not content-complete): Computer Hardware; OOP/Objects/Primitives; Variables/Expressions; Statements/Scope; Data Structures; Stack; Queue; Singly Linked List; Binary Trees (Conceptual); Complexity and Big-O.
+- Completed (draft, non-empty, schema-valid, strict-clean, python-free, 23 original practice questions each): Boolean Algebra; Computer Hardware; OOP/Objects/Primitives; Variables/Expressions; Statements/Scope; Methods; Arrays & Strings; Recursion; Inheritance, Interfaces and Polymorphism.
+- Planned placeholders only (empty shells, not published, not content-complete): Data Structures; Stack; Queue; Singly Linked List; Binary Trees (Conceptual); Complexity and Big-O.
 - Not started in the BoardPrep layer (and not started in this batch): the remaining four priority subjects — Mathematics, Chemistry, Biology, Economics — remain "needs official-source verification".
 
 ### 13.4 What still needs to be done for ISC XII Computer Science 2027

@@ -36,14 +36,14 @@ export function getPublishedChapters(board, classSlug, subjectSlug) {
 }
 
 export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
-  const metadata = getPublishedChapters(board, classSlug, subjectSlug).find((chapter) => chapter.slug === chapterSlug);
+  // Resolve any registered chapter that carries a file field, not only the
+  // published subset. The published-only view is getPublishedChapters; this
+  // function is the general read path for the BoardPrep chapter data on disk,
+  // including draft chapters that exist as JSON but have not been published.
+  const subject = getSubject(board, classSlug, subjectSlug);
+  const metadata = (subject?.sections || []).flatMap((section) => section.groups || []).flatMap((group) => group.chapters || []).find((chapter) => chapter.slug === chapterSlug);
   if (!metadata?.file) return null;
 
-  // The chapter 'file' field in the BoardPrep subject metadata is relative to the
-  // subject directory (e.g. "chapters/genetics.json" or "language/grammar/tenses.json").
-  // A subset of chapters migrated earlier were stored nested under subject sub-directories
-  // (language/grammar/..., literature/poetry/..., etc.). The metadata file field already
-  // carries that relative path, so resolve it directly relative to the subject folder.
   const subjectDir = location(board, classSlug, subjectSlug);
   const file = path.join(subjectDir, ...metadata.file.split('/'));
 
@@ -58,12 +58,13 @@ export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
   return { ...metadata, ...read(file) };
 }
 
-// Question count per published chapter slug. Reading the chapter files is the
-// only reliable way to report a count, because the registry carries metadata
-// only and the questions live in the chapter JSON.
+// Question counts for every registered chapter that exists on disk. Reading
+// the chapter files is the only reliable way to report a count, because the
+// registry carries metadata only and the questions live in the chapter JSON.
 export function getChapterQuestionCounts(board, classSlug, subjectSlug) {
   const counts = new Map();
-  for (const chapter of getPublishedChapters(board, classSlug, subjectSlug)) {
+  const subject = getSubject(board, classSlug, subjectSlug);
+  for (const chapter of (subject?.sections || []).flatMap((section) => section.groups || []).flatMap((group) => group.chapters || [])) {
     counts.set(chapter.slug, getChapter(board, classSlug, subjectSlug, chapter.slug)?.questions?.length || 0);
   }
   return counts;
@@ -75,9 +76,15 @@ export function getBoardPrepCounts() {
     classes += 1;
     for (const subject of getSubjects(board.slug, classInfo.slug)) {
       subjects += 1;
-      for (const chapter of getPublishedChapters(board.slug, classInfo.slug, subject.slug)) {
+      // Count every registered chapter that exists on disk, not only the published
+      // subset, so the totals reflect the current BoardPrep content including draft
+      // chapters. Chapters without a resolvable file are skipped.
+      const subjectData = getSubject(board.slug, classInfo.slug, subject.slug);
+      for (const chapter of (subjectData?.sections || []).flatMap((section) => section.groups || []).flatMap((group) => group.chapters || [])) {
+        const resolved = getChapter(board.slug, classInfo.slug, subject.slug, chapter.slug);
+        if (!resolved) continue;
         chapters += 1;
-        questions += getChapter(board.slug, classInfo.slug, subject.slug, chapter.slug)?.questions?.length || 0;
+        questions += resolved.questions?.length || 0;
       }
     }
   }

@@ -2,7 +2,7 @@
 
 **Repository:** `adilparsh-code/Target95`  
 **Branch:** `freebuff/d864f920a510eeefc74bb186`  
-**Audit SHA (this report is current to):** `ddb4c349245be705df24856b7a4982299c78b31f`  
+**Audit SHA (this report is current to):** `8ab8d84f6a5f6f501bc00a53e86cd981268ca735`  
 **Scope:** ISC Class XII, examination year **2027**, five priority subjects: Mathematics, Chemistry, Biology, Computer Science, Economics.
 
 This is the durable companion to `docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_AUDIT.md`. The audit is the narrative; this matrix is the at-a-glance coverage record. Both are updated together.
@@ -289,4 +289,4 @@ Status labels for content completeness:
 
 ---
 
-*Companion to `docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_AUDIT.md`. Both are current to commit `ddb4c349245be705df24856b7a4982299c78b31f`.*
+*Companion to `docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_AUDIT.md`. Both are current to commit `8ab8d84f6a5f6f501bc00a53e86cd981268ca735`.*

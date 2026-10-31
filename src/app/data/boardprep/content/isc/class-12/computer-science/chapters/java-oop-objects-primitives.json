@@ -1,25 +1,692 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-java-oop-objects-primitives",
-  "slug": "java-oop-objects-primitives",
   "title": "OOP, Objects, Primitive Values, Wrapper Classes, Types and Casting",
   "kind": "computer-science",
+  "slug": "java-oop-objects-primitives",
   "tagline": "Object-oriented programming in Java: objects, primitives, wrappers and casting.",
-  "reviewStatus": "planned",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section B. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "Object-oriented programming is the organising idea behind the Java part of the syllabus. Instead of writing a program as one long sequence of instructions, Java programs are built from objects that combine state and behaviour. This chapter introduces that idea from the ground up. It begins with what a class and an object are, then turns to the fact that objects are accessed through references rather than copied by value, and then it explains why two references can point to the same object while two objects can still be separate entities. After that it covers primitive values and wrapper classes, the difference between holding a value directly and holding a reference, and finally types and casting, including the fact that a superclass reference can hold a subclass object and that casting is how you narrow a reference type when you need to access more specific members.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section B (Java)" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section B (Java) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Introduction to object-oriented programming using Java; objects; primitive values, wrapper classes, types and casting."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Explain what a class and an object are, and distinguish the blueprint from the instance.",
+    "Describe how objects are created with new and how references point to objects.",
+    "Explain that assigning a reference copies the reference, not the object, and identify when two variables point to the same object.",
+    "Distinguish reference equality from content equality for objects.",
+    "Explain the difference between primitive types, which hold values directly, and reference types, which hold references to objects.",
+    "Describe wrapper classes and the idea of boxing and unboxing.",
+    "Explain how a superclass reference can hold a subclass object and what that means for member access.",
+    "Describe casting as a way to narrow a reference type, and explain that the runtime still checks the actual type."
+  ],
+  "learn": [
+    {
+      "id": "oop-basics",
+      "title": "What object-oriented programming means in Java",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Object-oriented programming, OOP, is a way of organising a program around objects rather than around a list of instructions. In Java, an object is a runtime value that holds state and behaviour together. A class is the blueprint that describes what kind of state and behaviour objects of that kind have. You create an object from a class with the new operator, and the result is a reference that points to that object."
+        },
+        {
+          "type": "paragraph",
+          "text": "The key idea is that an object is not just data. It is a unit that combines data and the code that operates on that data. That combination is what makes OOP different from a purely procedural style, where data and the code that acts on it are separate. On the board examination, this distinction is often the starting point for a question: students are expected to identify where objects are created, where references are assigned, and where behaviour is invoked."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A class is a blueprint.",
+              "note": "class Student { String name; int marks; } describes the kind of object a Student is, not any particular student."
+            },
+            {
+              "text": "An object is a concrete instance.",
+              "note": "Student s = new Student(); creates one Student object and stores a reference to it in s."
+            },
+            {
+              "text": "A reference is not the object itself.",
+              "note": "If you write Student a = s; then a and s refer to the same object. Changing the object through a is visible through s."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A class describes a kind of object; an object is a concrete instance created at runtime.",
+            "new creates an object and returns a reference to it.",
+            "A reference variable stores a reference, not the object itself.",
+            "Two reference variables can point to the same object; that is called aliasing.",
+            "A class can be used as a type, so you can declare variables whose values are references to objects of that class."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "class",
+              "meaning": "A blueprint that describes the state and behaviour of objects of that kind."
+            },
+            {
+              "term": "object",
+              "meaning": "A runtime entity that holds state and behaviour together."
+            },
+            {
+              "term": "reference",
+              "meaning": "A value that points to an object; a reference variable stores this value, not the object itself."
+            },
+            {
+              "term": "instance",
+              "meaning": "An object created from a class."
+            },
+            {
+              "term": "aliasing",
+              "meaning": "When two variables refer to the same object."
+            },
+            {
+              "term": "new operator",
+              "meaning": "The operator that creates a new object and returns a reference to it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "objects-as-entities",
+      "title": "Objects as entities: state, identity and how references work",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A useful way to think about an object is as a small entity with its own identity. Two different objects of the same class are separate entities even if their fields happen to hold the same values. The reference is how you point to one particular object. When you write Student s1 = new Student() and Student s2 = new Student(), you have created two distinct objects. Comparing s1 == s2 tells you whether the two references point to the same object, not whether the two objects have equal content. That distinction is one of the most common traps in examination questions."
+        },
+        {
+          "type": "paragraph",
+          "text": "Each object has its own state. If Student has fields name and marks, then s1 and s2 each have their own name and marks. Changing s1.marks does not affect s2.marks, because they are different objects. But if you write Student s3 = s1, then s3 and s1 point to the same object, and a change through s3 is visible through s1. This is why object questions so often ask students to trace the state of several references after a series of assignments and method calls."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two objects, two references.",
+              "note": "Student a = new Student(); Student b = new Student(); a and b are different objects."
+            },
+            {
+              "text": "Two references to one object.",
+              "note": "Student c = a; now a and c point to the same object."
+            },
+            {
+              "text": "Reference equality versus content equality.",
+              "note": "a == b is false because they are different objects. a == c is true because they point to the same object. The objects may still have equal content, but == does not compare content for reference types."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Objects also have behaviour. The behaviour of an object is the methods that can be called on it. Methods are invoked on the object that the reference points to. If you call a method on a reference, you are telling that reference's object to do something. This is the object-centred view that the syllabus assumes: you write programs by making objects do work through their methods, and you pass those objects around so that other parts of the program can ask them to do work too."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Each object has its own identity and its own state, even if two objects have equal field values.",
+            "== compares references, not object content, for reference types.",
+            "Assigning one reference to another does not copy the object; it copies the reference.",
+            "A method call is directed at the object the reference points to.",
+            "Objects are passed between parts of a program through references, so several parts of a program can share and modify the same object."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "primitives-and-wrappers",
+      "title": "Primitive values and wrapper classes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Java has two kinds of values: primitives and references. The primitive types are the small, built-in value types such as int, double, char, boolean, byte, short, long and float. A primitive variable holds the actual value, not a reference to it. That is the main difference between a primitive and an object: with a primitive, the value is stored directly in the variable; with an object, the variable stores a reference to the object."
+        },
+        {
+          "type": "paragraph",
+          "text": "Wrapper classes give object form to primitive values. Each primitive type has a corresponding wrapper class: Integer for int, Double for double, Character for char, Boolean for boolean, and so on. Wrapper objects can be useful when you need a value to behave like an object, for example when storing values in a collection that only holds objects, or when you need methods associated with a numeric value. The board syllabus expects students to know that primitive values live in variables directly, while objects live elsewhere and are accessed through references."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A primitive holds the value directly.",
+              "note": "int n = 7; stores the value 7 in n."
+            },
+            {
+              "text": "A wrapper object holds a primitive value inside an object.",
+              "note": "Integer x = 7; creates an Integer object whose value is 7."
+            },
+            {
+              "text": "Boxing and unboxing.",
+              "note": "Assigning an int to an Integer, or an Integer to an int where the context allows it, involves converting between the primitive and the wrapper."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Primitive types hold values directly; reference types hold references to objects.",
+            "Each primitive type has a corresponding wrapper class.",
+            "Wrapper objects can be used where an object is required.",
+            "Converting between a primitive and its wrapper is called boxing or unboxing depending on the direction.",
+            "The exam often tests the difference between a primitive variable and an object reference variable."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "primitive type",
+              "meaning": "A built-in value type such as int, double, char or boolean that holds its value directly."
+            },
+            {
+              "term": "wrapper class",
+              "meaning": "A class such as Integer or Double that wraps a primitive value as an object."
+            },
+            {
+              "term": "boxing",
+              "meaning": "Converting a primitive value to its wrapper object form."
+            },
+            {
+              "term": "unboxing",
+              "meaning": "Extracting a primitive value from its wrapper object form."
+            },
+            {
+              "term": "reference variable",
+              "meaning": "A variable whose value is a reference to an object, not the object itself."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "types-and-casting",
+      "title": "Types and casting",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every variable and every expression in Java has a type. Types tell the compiler what kind of value a variable can hold and what operations are legal on that value. When you work with objects, the type of a reference variable is the class or interface it is declared as, and that type controls which methods and fields can be accessed through that variable. A reference variable of type Student can refer to a Student object, and it can also refer to any object of a subclass of Student, because a subclass object is also a Student in the sense required by the type system."
+        },
+        {
+          "type": "paragraph",
+          "text": "Casting is used when you need to treat a value as a different type. For reference types, casting can narrow a type. If you have a reference of type Object that actually points to a Student object, you can cast it to Student so that you can access Student-specific members. But the cast must be correct at runtime: if the object is not really a Student or a subclass of Student, the cast fails at runtime. The syllabus expects students to know both that casting is a way to tell the compiler to treat a value as a more specific type, and that the runtime check still applies."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A superclass reference can hold a subclass object.",
+              "note": "Animal a = new Dog(); is allowed because a Dog is an Animal."
+            },
+            {
+              "text": "Access is limited by the reference type.",
+              "note": "Through a, only Animal members are visible. To call a Dog-only method, you need a Dog reference or a cast."
+            },
+            {
+              "text": "A narrow cast.",
+              "note": "If Object o actually refers to a Student, then Student s = (Student) o; is valid and lets you access Student members through s."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Every variable and expression has a type, and the type controls what is accessible.",
+            "A superclass reference can hold a subclass object.",
+            "The reference type determines which members are visible without a cast.",
+            "A cast can narrow a reference type, but only if the object really is of the target type at runtime.",
+            "Wrong casts are a common source of runtime errors and are often tested."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "object-oriented-view-summary",
+      "title": "Putting it together: the object-oriented view",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The object-oriented view is the one the syllabus builds on: programs are made of objects that interact by calling each other's methods. The central ideas are simple once stated clearly. A class is a blueprint. An object is a concrete entity created from that blueprint. A reference is how you point to an object. Primitives hold values directly; objects are accessed through references. Types and casting control what can be seen and how values are treated. These ideas are not difficult on their own, but they become powerful when combined with methods, inheritance and polymorphism, and that combination is what the rest of the syllabus continues with."
+        },
+        {
+          "type": "paragraph",
+          "text": "When students first meet OOP in Java, the most valuable habit is to keep track of which reference points to which object at each step. That habit is what makes it possible to answer tracing and debugging questions correctly. A second valuable habit is to keep the difference between a primitive value and a reference clear, because mixing them up leads to confusion about what is copied, what is shared, and what == means. The rest of this chapter reinforces both habits through examples and questions."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "OOP is organised around objects that combine state and behaviour.",
+            "A class defines the blueprint; new creates objects from that blueprint.",
+            "References point to objects; assigning a reference does not copy the object.",
+            "Primitives hold values directly; objects are accessed through references.",
+            "Types and casting determine what is accessible and how values are treated."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "object-oriented programming (OOP)",
+              "meaning": "A programming style organised around objects that combine state and behaviour."
+            },
+            {
+              "term": "object as an entity",
+              "meaning": "A concrete runtime value with its own identity, state and behaviour."
+            },
+            {
+              "term": "reference equality",
+              "meaning": "Testing whether two references point to the same object, usually with ==."
+            },
+            {
+              "term": "state of an object",
+              "meaning": "The current values of an object's fields."
+            },
+            {
+              "term": "behaviour of an object",
+              "meaning": "The methods that can be called on an object."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A class is a blueprint; an object is a concrete instance created from that blueprint.",
+    "new creates an object and returns a reference to it.",
+    "A reference variable stores a reference, not the object itself.",
+    "Assigning one reference to another copies the reference, so both variables can point to the same object.",
+    "== compares references, not object content, for reference types.",
+    "Each object has its own identity and its own state, even if two objects have equal field values.",
+    "Primitive types hold values directly; reference types hold references to objects.",
+    "Wrapper classes such as Integer and Boolean give object form to primitive values.",
+    "Boxing converts a primitive to a wrapper; unboxing extracts the primitive from the wrapper.",
+    "A superclass reference can hold a subclass object, but only the superclass members are visible through it without a cast.",
+    "Casting narrows a reference type; the runtime checks that the object really is of the target type.",
+    "The object-oriented view is that programs are organised around objects that interact through method calls."
+  ],
+  "examFocus": [
+    "State the difference between a class and an object.",
+    "Describe how an object is created and how a reference refers to it.",
+    "Trace what happens when one reference is assigned to another.",
+    "Explain why a == b can be false even when two objects have the same content.",
+    "Distinguish primitive variables from reference variables.",
+    "Explain the role of wrapper classes and the idea of boxing and unboxing.",
+    "Explain how a superclass reference can hold a subclass object and what access is allowed.",
+    "Describe casting and the runtime type check behind it."
+  ],
+  "vocabulary": [
+    {
+      "word": "class",
+      "meaning": "A blueprint that describes the state and behaviour of objects of that kind."
+    },
+    {
+      "word": "object",
+      "meaning": "A runtime entity that holds state and behaviour together."
+    },
+    {
+      "word": "reference",
+      "meaning": "A value that points to an object; a reference variable stores this value, not the object itself."
+    },
+    {
+      "word": "instance",
+      "meaning": "An object created from a class."
+    },
+    {
+      "word": "aliasing",
+      "meaning": "When two variables refer to the same object."
+    },
+    {
+      "word": "primitive type",
+      "meaning": "A built-in value type such as int, double, char or boolean that holds its value directly."
+    },
+    {
+      "word": "wrapper class",
+      "meaning": "A class such as Integer or Double that wraps a primitive value as an object."
+    },
+    {
+      "word": "boxing",
+      "meaning": "Converting a primitive value to its wrapper object form."
+    },
+    {
+      "word": "unboxing",
+      "meaning": "Extracting a primitive value from its wrapper object form."
+    },
+    {
+      "word": "reference variable",
+      "meaning": "A variable whose value is a reference to an object, not the object itself."
+    },
+    {
+      "word": "reference equality",
+      "meaning": "Testing whether two references point to the same object, usually with ==."
+    },
+    {
+      "word": "object-oriented programming (OOP)",
+      "meaning": "A programming style organised around objects that combine state and behaviour."
+    },
+    {
+      "word": "superclass reference",
+      "meaning": "A reference whose type is a superclass, which can hold a subclass object."
+    },
+    {
+      "word": "casting",
+      "meaning": "Telling the compiler to treat a value as a different type, with a runtime check for reference types."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-java-oop-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "In Java, a class is best described as:",
+      "answer": "A blueprint for objects",
+      "explanation": "A class is a blueprint that describes the state and behaviour of objects of that kind.",
+      "options": [
+        "A blueprint for objects",
+        "A running program",
+        "A loop",
+        "A variable"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "When you write Student s = new Student();, the variable s holds:",
+      "answer": "A reference to the object",
+      "explanation": "s is a reference variable; it stores a reference to the object, not the object itself.",
+      "options": [
+        "The object itself",
+        "A reference to the object",
+        "The class name",
+        "The value 0"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which of the following holds its value directly, not through a reference?",
+      "answer": "An int variable",
+      "explanation": "int is a primitive type, and a primitive variable holds its value directly.",
+      "options": [
+        "An int variable",
+        "A Student reference",
+        "A String reference",
+        "An object reference"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "If Student a = new Student(); and Student b = new Student();, then a == b is usually:",
+      "answer": "False because they are different objects",
+      "explanation": "a and b refer to different objects, so reference equality is false even if the object contents happen to match.",
+      "options": [
+        "True because the objects have the same fields",
+        "False because they are different objects",
+        "True only if the fields are equal",
+        "True because both are Student references"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If Student c = a; after Student a = new Student();, then:",
+      "answer": "c refers to the same object as a",
+      "explanation": "Assigning a reference copies the reference, so c and a point to the same object.",
+      "options": [
+        "c is a copy of a's object",
+        "c refers to the same object as a",
+        "c is null",
+        "c refers to a different object"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which statement about wrapper classes is correct?",
+      "answer": "An Integer object wraps an int value",
+      "explanation": "Wrapper classes such as Integer and Boolean give object form to primitive values.",
+      "options": [
+        "Integer is a primitive type",
+        "An Integer object wraps an int value",
+        "Boolean is an object type in Java",
+        "char is a wrapper class"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A reference variable of type Animal can refer to:",
+      "answer": "An Animal object or any subclass of Animal",
+      "explanation": "A superclass reference can hold a subclass object because a subclass object is also a valid value of the superclass type.",
+      "options": [
+        "Only an Animal object",
+        "An Animal object or any subclass of Animal",
+        "Only a Dog object",
+        "Only an Object"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Through a reference of type Animal, a Dog-only method can usually be called:",
+      "answer": "Only after a cast or with a Dog reference",
+      "explanation": "Member access is checked against the reference type; a Dog-only method needs a Dog reference or a correct cast.",
+      "options": [
+        "Always, because the object is a Dog",
+        "Only after a cast or with a Dog reference",
+        "Never, even if the object is a Dog",
+        "Only if Animal has that method"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Converting an int to an Integer is an example of:",
+      "answer": "Boxing",
+      "explanation": "Boxing converts a primitive value to its wrapper object form.",
+      "options": [
+        "Unboxing",
+        "Boxing",
+        "Casting a string",
+        "Overriding"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A student writes Student a = new Student(); Student b = a; and then changes a's marks. What is the result?",
+      "answer": "Both a and b see the change because they refer to the same object",
+      "explanation": "a and b refer to the same object, so a change through one is visible through the other.",
+      "options": [
+        "Only a's marks change",
+        "Both a and b see the change because they refer to the same object",
+        "Only b's marks change",
+        "Neither changes"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-11",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which comparison is most appropriate for checking whether two Student references point to the same object?",
+      "answer": "a == b",
+      "explanation": "== tests reference equality, which tells whether two references point to the same object.",
+      "options": [
+        "a.equals(b)",
+        "a == b",
+        "a.contentEquals(b)",
+        "a.sameAs(b)"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-12",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If Object o actually refers to a Student object, what is required to access Student-specific members through o?",
+      "answer": "A valid cast to Student",
+      "explanation": "A cast tells the compiler to treat the value as a more specific type, and the runtime checks that the object really is of that type.",
+      "options": [
+        "Nothing; Object already exposes them",
+        "A valid cast to Student",
+        "A new object",
+        "A wrapper"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-13",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A variable that holds a reference to an object rather than the object itself is called a blank variable.",
+      "answer": "reference",
+      "explanation": "A reference variable stores a reference, not the object."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-14",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The keyword used to create a new object in Java is blank.",
+      "answer": "new",
+      "explanation": "new creates an object and returns a reference to it."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Converting a primitive value to its wrapper object form is called blank.",
+      "answer": "boxing",
+      "explanation": "Boxing converts a primitive to a wrapper object."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain the difference between a primitive variable and a reference variable in Java.",
+      "answer": "A primitive variable holds its value directly, while a reference variable holds a reference to an object. With a primitive, the value is stored in the variable; with an object, the variable stores the address of the object and the object itself lives elsewhere.",
+      "explanation": "The mark is for contrasting value storage and reference storage."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Explain why a == b can be false even when two Student objects have the same marks and name.",
+      "answer": "== tests reference equality, not content equality. Two different objects can have the same field values yet still be different objects, so a == b is false if a and b point to different objects.",
+      "explanation": "The mark is for distinguishing reference equality from content equality."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-18",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain what happens when one reference variable is assigned to another, and why this can be confusing in tracing questions.",
+      "answer": "The assignment copies the reference, not the object. So both variables now point to the same object. This is confusing because students sometimes assume the object was copied, and then expect changes through one variable to be invisible to the other.",
+      "explanation": "The mark is for stating that the reference is copied and that both variables then share the same object."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Describe how an object is created and used in Java, from the class blueprint to a method call on the object. Include the role of the reference.",
+      "answer": "A class is the blueprint. new Student() creates a Student object and returns a reference to it. A variable such as Student s = new Student() stores that reference. Methods and accessible fields are then used through s. Because s is a reference, assigning it to another variable does not copy the object.",
+      "explanation": "The mark is for describing the class, object creation, the reference, and a method call through the reference."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Explain why the type of a reference variable matters, using a superclass reference that holds a subclass object.",
+      "answer": "The reference type controls which members are accessible. A superclass reference can hold a subclass object, but only the superclass members are visible without a cast. To call a subclass-only method, the reference must be of the subclass type or must be cast correctly.",
+      "explanation": "The mark is for explaining type-based access and the superclass-subclass relationship."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A student says that if two Student objects have the same marks, then the two Student references must be equal. Decide whether the claim is correct and explain the correct rule.",
+      "answer": "The claim is incorrect. Reference equality checks whether the two references point to the same object, not whether their contents are equal. Two different objects can have equal content and still have unequal references.",
+      "explanation": "The mark is for rejecting the claim, stating the correct rule, and explaining reference equality."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Describe the object model of Java in terms of objects, references, primitives and wrappers. Include one example of where the object model matters in a tracing question.",
+      "answer": "Java separates primitives, which hold values directly, from objects, which are accessed through references. Wrapper objects give object form to primitives. In a tracing question, the object model matters because assigning a reference copies the reference, so several variables can share one object while primitives are copied by value.",
+      "explanation": "The mark is for describing all four ideas and giving a concrete tracing relevance."
+    },
+    {
+      "id": "isc-12-cs-java-oop-q-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Explain how the object-oriented view changes the way a program is organised compared with a purely procedural style, and identify one consequence for examination questions.",
+      "answer": "In an object-oriented program, state and behaviour are bundled into objects, and the program is organised around objects interacting through method calls. In a procedural style, data and the code that acts on it are separate. For examination questions, this means students must identify objects, references and method calls, and trace how state changes when objects interact.",
+      "explanation": "The mark is for contrasting the two styles and identifying an examination consequence."
+    }
+  ]
 }

@@ -1,25 +1,1009 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-data-structures",
-  "slug": "data-structures",
   "title": "Data Structures",
   "kind": "computer-science",
-  "tagline": "Stacks, queues, singly linked lists and binary trees, with structure-selection reasoning.",
-  "reviewStatus": "planned",
+  "slug": "data-structures",
+  "tagline": "Stacks, queues, infix-to-prefix/postfix, singly linked lists and binary trees, with structure-selection reasoning.",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "Data structures are ways of organising related values so that common operations become easy or hard. This chapter covers the structures named in Section C of the 2027 syllabus: stacks, queues, circular queues and dequeue, infix-to-prefix and infix-to-postfix conversion, singly linked lists, and conceptual binary trees. The aim is not just to define each structure, but to understand what each one makes easy, what it makes awkward, and how to choose among them.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section C" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section C (Data Structures) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Stacks, queues including circular queue and dequeue, infix-to-prefix/postfix conversion, singly linked list, binary trees conceptual, and structure-selection reasoning."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Describe what a stack is and explain its LIFO behaviour, including push, pop and peek.",
+    "Describe what a queue is and explain its FIFO behaviour, including enqueue and dequeue.",
+    "Explain why a circular queue is used and how a dequeue extends a simple queue.",
+    "Explain how infix, prefix and postfix notations differ, and why stacks help with postfix evaluation and infix conversion.",
+    "Describe a singly linked list as a chain of nodes and explain insertion, deletion, traversal and emptiness checks.",
+    "Explain why linked lists can be better than arrays for frequent middle insertions or deletions.",
+    "Describe binary tree concepts: root, leaf, subtree, sibling, height, depth, level, size and traversals.",
+    "Choose an appropriate data structure for a given situation and explain why a poor fit would be awkward."
+  ],
+  "learn": [
+    {
+      "id": "data-structures-why",
+      "title": "Why data structures matter in this syllabus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A data structure is a way of organising related values so that common operations are easy or hard to do. The syllabus does not assume that you will learn a big library of advanced data structures. Instead, it focuses on a small set of structures that show up repeatedly in computer science and in examination questions: stacks, queues, linked lists and binary trees. The point of this section is not just to know the definitions, but to understand when each structure is a sensible choice and when it is not."
+        },
+        {
+          "type": "paragraph",
+          "text": "When you choose a structure, you are choosing which operations will be convenient and which will be expensive. A stack is convenient for the last-in-first-out order that matches nested processing; a queue is convenient for first-come-first-served waiting lines; a linked list is convenient when items are inserted or removed frequently in the middle; a binary tree is convenient when the data has a natural hierarchy. The examination often asks students to decide which structure fits a given situation rather than simply to recite definitions. That decision-making is what this chapter builds toward."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A data structure is a way of organising related values and the operations that work on them.",
+            "Different structures make different operations convenient.",
+            "Choosing a structure is a design decision about what order and access patterns matter.",
+            "The syllabus focuses on stacks, queues, singly linked lists and binary trees.",
+            "The examination often tests selection of a structure to match a real situation."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "data structure",
+              "meaning": "A way of organising related values together with the operations that the organisation makes easy or hard."
+            },
+            {
+              "term": "operation",
+              "meaning": "A task such as adding, removing, reading, searching or traversing that works on a data structure."
+            },
+            {
+              "term": "LIFO",
+              "meaning": "Last in, first out: the last value added is the first value removed."
+            },
+            {
+              "term": "FIFO",
+              "meaning": "First in, first out: the first value added is the first value removed."
+            },
+            {
+              "term": "node",
+              "meaning": "A single element of a structure such as a linked list or tree, usually holding a value and links to other nodes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stacks-idea",
+      "title": "Stacks: the last-in-first-out idea",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A stack is a structure that lets you add and remove values only from one end, the top. The last value added is the first value removed, which is why a stack is described as LIFO. The two basic operations are push, which adds a value to the top, and pop, which removes the top value. You can also peek at the top value without removing it. A stack is empty when there are no values on it, and trying to pop from an empty stack is an error called underflow. If the stack has a fixed capacity and you push when it is already full, you get overflow."
+        },
+        {
+          "type": "paragraph",
+          "text": "The stack idea shows up naturally wherever processing is nested. A browser history of back buttons, the order of method calls during execution, the matching of brackets in an expression, and the evaluation of postfix expressions all behave like stacks. That is why the syllabus associates stacks with bracket matching and postfix evaluation. The key property is not the physical metaphor but the access order: the most recently added item is the one you deal with next."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Push A, then B, then C onto an empty stack.",
+              "note": "The top is now C. Popping gives C, then B, then A."
+            },
+            {
+              "text": "Bracket matching with a stack.",
+              "note": "Scan a bracket expression left to right; push opening brackets, pop and compare when you see a closing bracket. If the stack ends empty and every close matched, the brackets are balanced."
+            },
+            {
+              "text": "Postfix evaluation.",
+              "note": "Scan a postfix expression; when you see a number push it, when you see an operator pop the required operands, apply the operator and push the result."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A stack allows addition and removal only at the top.",
+            "Push adds to the top; pop removes from the top; peek reads the top without removing it.",
+            "A stack is LIFO: the last value pushed is the first value popped.",
+            "Underflow happens on pop from an empty stack; overflow happens on push to a full stack.",
+            "Stacks are useful for nested processing, bracket matching and postfix evaluation."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "stack",
+              "meaning": "A LIFO data structure that supports push, pop and peek at one end called the top."
+            },
+            {
+              "term": "push",
+              "meaning": "To add a value to the top of a stack."
+            },
+            {
+              "term": "pop",
+              "meaning": "To remove and return the top value of a stack."
+            },
+            {
+              "term": "peek",
+              "meaning": "To read the top value of a stack without removing it."
+            },
+            {
+              "term": "underflow",
+              "meaning": "Attempting to pop from an empty stack."
+            },
+            {
+              "term": "overflow",
+              "meaning": "Attempting to push onto a full stack."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queues-idea",
+      "title": "Queues: the first-in-first-out idea",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A queue is a structure that adds values at one end, the rear, and removes them from the other end, the front. The first value added is the first value removed, which is why a queue is described as FIFO. The basic operations are enqueue, which adds a value to the rear, and dequeue, which removes the value at the front. People often think of a queue as a waiting line: the person who arrives first is served first, and new arrivals join the back of the line. That metaphor matches the abstract structure exactly."
+        },
+        {
+          "type": "paragraph",
+          "text": "A simple array-based queue has a problem called false overflow. As values are dequeued from the front, the front index moves forward, and eventually the rear can no longer advance even though there is empty space earlier in the array. A circular queue avoids this by letting the rear wrap around to the beginning of the array when it reaches the end. The same idea applies to the front as values are removed. Distinguishing a linear queue from a circular queue is a standard part of the syllabus, and the examination often asks why a circular arrangement is used."
+        },
+        {
+          "type": "paragraph",
+          "text": "A dequeue, also called a double-ended queue, extends the queue idea by allowing insertion and removal at both ends. That makes it more flexible than a simple FIFO queue, because you can add or remove from either side. The syllabus mentions dequeue alongside circular queue, and students should be able to describe what extra flexibility a dequeue provides."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Enqueue 1, 2, 3 into an empty queue.",
+              "note": "Front is 1, rear is 3. Dequeue gives 1, then 2, then 3."
+            },
+            {
+              "text": "False overflow in a linear queue.",
+              "note": "If items keep being dequeued from the front and enqueued at the rear of a fixed array, the rear may hit the end while empty slots remain near the front."
+            },
+            {
+              "text": "A circular queue reuses space.",
+              "note": "By wrapping the indices around the array, a circular queue can keep using the same array until it is genuinely full."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A queue adds at the rear and removes from the front.",
+            "Enqueue adds a value to the rear; dequeue removes the front value.",
+            "A queue is FIFO: the first value enqueued is the first value dequeued.",
+            "A linear array queue can suffer false overflow because the front moves and the rear eventually hits the end.",
+            "A circular queue reuses array space by wrapping indices around.",
+            "A dequeue allows insertion and removal at both ends."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "queue",
+              "meaning": "A FIFO data structure that supports enqueue at the rear and dequeue at the front."
+            },
+            {
+              "term": "enqueue",
+              "meaning": "To add a value to the rear of a queue."
+            },
+            {
+              "term": "dequeue",
+              "meaning": "To remove and return the front value of a queue."
+            },
+            {
+              "term": "circular queue",
+              "meaning": "A queue implemented on a fixed array whose indices wrap around so that space is reused."
+            },
+            {
+              "term": "dequeue",
+              "meaning": "A double-ended queue that allows insertion and removal at both ends."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infix-prefix-postfix",
+      "title": "Infix, prefix and postfix, and why stacks help",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Expressions can be written in several notations. In infix notation, the operator sits between its operands, as in A + B. In prefix notation, the operator sits before its operands, as in + A B. In postfix notation, also called reverse Polish notation, the operator sits after its operands, as in A B +. Each notation has advantages. Infix is familiar to people, but it needs parentheses or precedence rules to remove ambiguity. Postfix has no ambiguity and is easy to evaluate with a stack, which is why postfix evaluation is a classic stack application in the syllabus."
+        },
+        {
+          "type": "paragraph",
+          "text": "Converting infix to postfix with a stack is one of the more examination-frequent tasks. The idea is to read the infix expression, output operands immediately, and use a stack to hold operators until their operands are ready. Precedence and parentheses decide when an operator leaves the stack. The same general idea works in reverse for infix-to-prefix conversion, and the stack remains the central tool because the conversion has to remember operators whose operands are not yet complete. Students do not need to memorize a long procedure as if it were a recipe; they need to understand that the stack preserves pending operators in the correct order."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Infix A + B becomes postfix A B +.",
+              "note": "The operands A and B stay in order; the operator moves to the right."
+            },
+            {
+              "text": "Infix A + B * C becomes postfix A B C * +.",
+              "note": "The multiplication has higher precedence, so its operator appears before the addition operator in postfix."
+            },
+            {
+              "text": "Postfix A B + C * means (A + B) * C.",
+              "note": "In postfix the order of evaluation follows the operands and operators without parentheses."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Infix places the operator between operands; prefix places it before; postfix places it after.",
+            "Postfix needs no parentheses and is easy to evaluate with a stack.",
+            "Infix-to-postfix conversion uses a stack to hold operators until their operands are ready.",
+            "Precedence and parentheses decide when an operator is moved from the stack to the output.",
+            "The stack is central to these conversions because it remembers pending operators in order."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "infix notation",
+              "meaning": "A notation in which the operator appears between its operands, as in A + B."
+            },
+            {
+              "term": "prefix notation",
+              "meaning": "A notation in which the operator appears before its operands, as in + A B."
+            },
+            {
+              "term": "postfix notation",
+              "meaning": "A notation in which the operator appears after its operands, as in A B +."
+            },
+            {
+              "term": "reverse Polish notation",
+              "meaning": "Another name for postfix notation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "singly-linked-list-idea",
+      "title": "Singly linked lists: a chain of nodes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A singly linked list is a chain of nodes, where each node holds a value and a link to the next node. The first node is called the head. The last node usually has a null link, meaning there is no next node. Unlike an array, a linked list does not store its elements in consecutive memory and does not have to move elements around when you insert or delete in the middle. That makes linked lists attractive when you expect frequent insertions and deletions, especially at positions other than the two ends."
+        },
+        {
+          "type": "paragraph",
+          "text": "The cost of that flexibility is that you cannot jump directly to the middle of a linked list by index. To reach the third node, you must start at the head and follow three links. That is why linked lists are good for some things and poor for others. The syllabus expects students to know the basic operations: create a node, insert a node, delete a node, traverse the list, check whether it is empty, and in some cases reverse the list or work with a sublist. The practical point is that each of these operations must follow links carefully so that no node is lost or pointed to twice by mistake."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A list with values 10, 20, 30.",
+              "note": "Head points to the node holding 10, which points to 20, which points to 30, which points to null."
+            },
+            {
+              "text": "Insert at the head.",
+              "note": "Create a new node whose next points to the current head, then make the head point to the new node. This is cheap and does not require traversing."
+            },
+            {
+              "text": "Delete a node in the middle.",
+              "note": "You must find the node before the one you want to delete, then change its next to skip the removed node. Otherwise the chain breaks."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A singly linked list is a chain of nodes, each holding a value and a link to the next node.",
+            "The first node is the head; the last node usually links to null.",
+            "Insertion and deletion in the middle do not require shifting elements, unlike an array.",
+            "Access by position requires traversal from the head.",
+            "Careful link manipulation is needed when inserting or deleting so that no node is lost or duplicated.",
+            "Common operations include traversal, insertion, deletion, reversal and emptiness checks."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "singly linked list",
+              "meaning": "A linear structure made of nodes, each holding a value and a link to the next node."
+            },
+            {
+              "term": "head",
+              "meaning": "The first node of a linked list."
+            },
+            {
+              "term": "node",
+              "meaning": "A single element of a linked list, containing data and a link to the next node."
+            },
+            {
+              "term": "link",
+              "meaning": "A reference from one node to the next node in a linked list."
+            },
+            {
+              "term": "traversal",
+              "meaning": "Visiting each node in order, usually starting from the head."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-trees-idea",
+      "title": "Binary trees: a hierarchical structure",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A binary tree is a hierarchical structure made of nodes, where each node has at most two children, usually called the left child and the right child. One node is the root. The root is the starting point for the whole tree, and every other node is reachable from the root by following child links downward. A node with no children is called a leaf. The depth or level of a node is how far it is from the root, and the height of a tree is a measure of how tall it is, often defined in terms of the longest path from the root to a leaf."
+        },
+        {
+          "type": "paragraph",
+          "text": "The syllabus treats binary trees at a conceptual level for this syllabus. That means students should be able to talk about the parts of a tree, describe common terms such as root, leaf, subtree, sibling, parent, height, depth, level and size, and understand why a binary tree is useful when data has a natural hierarchy. Traversal is the usual way to visit every node in a tree. The common traversals are inorder, preorder and postorder, and each visits nodes in a different order. Students should be able to explain what each traversal does and what kind of situation it suits."
+        },
+        {
+          "type": "paragraph",
+          "text": "Binary trees also connect to the idea of balancing and completeness. A complete binary tree packs nodes neatly, level by level, and a balanced tree keeps the height small so that operations stay efficient. These ideas are conceptual here rather than algorithmic, but they matter because they explain why the shape of a tree affects its usefulness. The examination is more likely to ask for definitions, traversals and structure-selection reasoning than to require a full implementation of self-balancing trees."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A small binary tree with root 1, left child 2 and right child 3.",
+              "note": "1 is the root; 2 and 3 are children of 1; if 2 has no children, it is a leaf."
+            },
+            {
+              "text": "Inorder traversal visits left, then node, then right.",
+              "note": "For a binary search tree this visits values in sorted order."
+            },
+            {
+              "text": "Preorder traversal visits node, then left, then right.",
+              "note": "This is useful when you want to record the root before its subtrees."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A binary tree is a tree in which each node has at most two children.",
+            "The topmost node is the root; nodes with no children are leaves.",
+            "Each node except the root has a parent; nodes sharing a parent are siblings.",
+            "A subtree is a node together with all its descendants.",
+            "Common traversals are inorder, preorder and postorder.",
+            "The shape of a tree affects its height and therefore the efficiency of operations on it.",
+            "Binary trees are useful when data naturally has a hierarchy."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "binary tree",
+              "meaning": "A tree in which each node has at most two children, usually called the left and right child."
+            },
+            {
+              "term": "root",
+              "meaning": "The topmost node of a tree, from which all other nodes are reachable."
+            },
+            {
+              "term": "leaf",
+              "meaning": "A node with no children."
+            },
+            {
+              "term": "subtree",
+              "meaning": "A node together with all of its descendants, which itself forms a tree."
+            },
+            {
+              "term": "sibling",
+              "meaning": "A node that shares the same parent as another node."
+            },
+            {
+              "term": "height",
+              "meaning": "A measure of how tall a tree is, often the length of the longest path from the root to a leaf."
+            },
+            {
+              "term": "depth",
+              "meaning": "How far a node is from the root."
+            },
+            {
+              "term": "inorder traversal",
+              "meaning": "A traversal that visits the left subtree, then the node, then the right subtree."
+            },
+            {
+              "term": "preorder traversal",
+              "meaning": "A traversal that visits the node, then the left subtree, then the right subtree."
+            },
+            {
+              "term": "postorder traversal",
+              "meaning": "A traversal that visits the left subtree, then the right subtree, then the node."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "choosing-structures",
+      "title": "Choosing a structure: what the syllabus wants you to reason about",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A recurring theme in this part of the syllabus is not just knowing each structure but choosing among them. A stack is the right choice when you need last-in-first-out behaviour or nested processing. A queue is the right choice when you need first-come-first-served order. A linked list is the right choice when insertions and deletions are frequent and you do not need fast access by position. A binary tree is the right choice when the data has a hierarchy and you want to reflect that hierarchy in the structure. These decisions are about the shape of the problem, not about memorising one correct answer for every case."
+        },
+        {
+          "type": "paragraph",
+          "text": "The examination often presents a situation and asks which structure fits best, or asks why one structure would be awkward for a given task. For example, a queue is awkward if you need to remove the most recently added item, because a queue gives you the oldest item, not the newest. A stack is awkward if you need to process items in arrival order. A linked list is awkward if you need repeated fast access by index. A binary tree is awkward if there is no natural hierarchy. Learning to state the mismatch is part of the skill the syllabus is building."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Choose a stack when the order of processing is last-in-first-out or nested.",
+            "Choose a queue when the order is first-in-first-served.",
+            "Choose a linked list when insertions and deletions are frequent and positional access is not the main concern.",
+            "Choose a binary tree when the data has a natural hierarchy.",
+            "State why a structure is a poor fit as carefully as why it is a good fit.",
+            "A mismatch is often the point of an examination question."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "structure selection",
+              "meaning": "The process of choosing a data structure that matches the operations and access patterns a problem needs."
+            },
+            {
+              "term": "mismatch",
+              "meaning": "A situation where a chosen structure makes the required operations awkward or inefficient."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A stack is LIFO; push adds to the top, pop removes from the top.",
+    "Underflow happens on pop from an empty stack; overflow happens on push to a full stack.",
+    "A queue is FIFO; enqueue adds at the rear, dequeue removes at the front.",
+    "A circular queue reuses array space by wrapping indices around and avoids false overflow.",
+    "A dequeue allows insertion and removal at both ends.",
+    "Postfix has no ambiguity and is easy to evaluate with a stack.",
+    "Infix-to-postfix conversion uses a stack to hold operators until their operands are ready.",
+    "A singly linked list is a chain of nodes, each holding a value and a link to the next node.",
+    "A linked list can insert and delete without shifting elements, but access by position requires traversal.",
+    "A binary tree is a tree in which each node has at most two children.",
+    "Common binary tree terms include root, leaf, subtree, sibling, height, depth and traversal.",
+    "Choosing a structure means matching it to the operations and access patterns a problem needs."
+  ],
+  "examFocus": [
+    "Define a stack and describe push, pop and underflow.",
+    "Define a queue and distinguish it from a stack.",
+    "Explain the purpose of a circular queue.",
+    "Explain the difference between a linear queue and a circular queue.",
+    "Describe a dequeue and what extra flexibility it gives.",
+    "Convert a small infix expression to postfix and explain the role of the stack.",
+    "Evaluate a short postfix expression step by step.",
+    "Describe a singly linked list and explain how insertion or deletion changes links.",
+    "Define binary tree terms such as root, leaf, subtree, sibling, height and traversal.",
+    "State why a given structure is a good or poor fit for a situation."
+  ],
+  "vocabulary": [
+    {
+      "word": "stack",
+      "meaning": "A LIFO data structure that supports push, pop and peek at one end called the top."
+    },
+    {
+      "word": "queue",
+      "meaning": "A FIFO data structure that supports enqueue at the rear and dequeue at the front."
+    },
+    {
+      "word": "circular queue",
+      "meaning": "A queue implemented on a fixed array whose indices wrap around so that space is reused."
+    },
+    {
+      "word": "dequeue",
+      "meaning": "A double-ended queue that allows insertion and removal at both ends."
+    },
+    {
+      "word": "underflow",
+      "meaning": "Attempting to pop from an empty stack."
+    },
+    {
+      "word": "overflow",
+      "meaning": "Attempting to push onto a full stack."
+    },
+    {
+      "word": "postfix notation",
+      "meaning": "A notation in which the operator appears after its operands, as in A B +."
+    },
+    {
+      "word": "infix notation",
+      "meaning": "A notation in which the operator appears between its operands, as in A + B."
+    },
+    {
+      "word": "prefix notation",
+      "meaning": "A notation in which the operator appears before its operands, as in + A B."
+    },
+    {
+      "word": "singly linked list",
+      "meaning": "A linear structure made of nodes, each holding data and a link to the next node."
+    },
+    {
+      "word": "head",
+      "meaning": "The first node of a linked list."
+    },
+    {
+      "word": "node",
+      "meaning": "A single element of a linked list or tree, holding data and links to other nodes."
+    },
+    {
+      "word": "binary tree",
+      "meaning": "A tree in which each node has at most two children."
+    },
+    {
+      "word": "root",
+      "meaning": "The topmost node of a tree."
+    },
+    {
+      "word": "leaf",
+      "meaning": "A node with no children."
+    },
+    {
+      "word": "subtree",
+      "meaning": "A node together with all of its descendants."
+    },
+    {
+      "word": "sibling",
+      "meaning": "A node sharing the same parent as another node."
+    },
+    {
+      "word": "inorder traversal",
+      "meaning": "A traversal that visits left, then node, then right."
+    },
+    {
+      "word": "preorder traversal",
+      "meaning": "A traversal that visits node, then left, then right."
+    },
+    {
+      "word": "postorder traversal",
+      "meaning": "A traversal that visits left, then right, then node."
+    },
+    {
+      "word": "height",
+      "meaning": "A measure of how tall a tree is, often the longest path from the root to a leaf."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-data-struct-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A stack is best described as a data structure that:",
+      "answer": "Allows insertion and removal only at one end",
+      "explanation": "A stack allows addition and removal only at the top end.",
+      "options": [
+        "Allows insertion and removal at both ends",
+        "Allows insertion and removal only at one end",
+        "Stores values in sorted order",
+        "Stores values in random order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The last value added to a stack is the:",
+      "answer": "First value removed",
+      "explanation": "A stack is LIFO, so the last value added is the first value removed.",
+      "options": [
+        "First value removed",
+        "Last value removed",
+        "Middle value removed",
+        "Only value removed"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Removing the top value from a stack is called:",
+      "answer": "popping",
+      "explanation": "Pop removes and returns the top value of a stack.",
+      "options": [
+        "pushing",
+        "popping",
+        "enqueuing",
+        "dequeueing"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The mistake of trying to remove a value from an empty stack is called:",
+      "answer": "underflow",
+      "explanation": "Underflow happens when you try to pop from an empty stack.",
+      "options": [
+        "overflow",
+        "underflow",
+        "collision",
+        "overflow/underflow mismatch"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A queue is best described as a data structure that:",
+      "answer": "Adds at one end and removes from the other, in arrival order",
+      "explanation": "A queue adds at the rear and removes from the front, in first-in-first-out order.",
+      "options": [
+        "Adds at one end and removes from the other, in arrival order",
+        "Adds and removes at the same end",
+        "Keeps values in reverse arrival order",
+        "Keeps values in alphabetical order"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The person who arrives first and is served first is the principle behind:",
+      "answer": "a queue",
+      "explanation": "A queue is FIFO, which matches first-come-first-served waiting lines.",
+      "options": [
+        "a stack",
+        "a queue",
+        "a binary tree",
+        "a linked list"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A circular queue is mainly used to avoid:",
+      "answer": "false overflow in a fixed array queue",
+      "explanation": "A circular queue wraps indices around so that empty space at the front can be reused, avoiding false overflow.",
+      "options": [
+        "the need for a rear pointer",
+        "false overflow in a fixed array queue",
+        "the need for a front pointer",
+        "the FIFO property"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A dequeue differs from a simple queue because it:",
+      "answer": "allows insertion and removal at both ends",
+      "explanation": "A dequeue, or double-ended queue, allows insertion and removal at both ends.",
+      "options": [
+        "stores values in sorted order",
+        "allows insertion and removal at both ends",
+        "has no front",
+        "has no rear"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In postfix notation, the operator appears:",
+      "answer": "after its operands",
+      "explanation": "In postfix notation the operator comes after its operands.",
+      "options": [
+        "before its operands",
+        "between its operands",
+        "after its operands",
+        "inside its operands"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Postfix A B + C * is equivalent to which infix expression?",
+      "answer": "(A + B) * C",
+      "explanation": "The postfix expression groups as (A B +) then (result C *), which is (A + B) * C.",
+      "options": [
+        "A + B + C",
+        "(A + B) * C",
+        "A + (B * C)",
+        "A * (B + C)"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which operation is a classic stack application?",
+      "answer": "evaluating a postfix expression",
+      "explanation": "Postfix evaluation is a classic stack application because the stack holds intermediate values in the correct order.",
+      "options": [
+        "sorting a random array",
+        "evaluating a postfix expression",
+        "finding the middle of an array by index",
+        "storing values in alphabetical order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a singly linked list, the link in a node points to:",
+      "answer": "the next node",
+      "explanation": "Each node in a singly linked list holds a reference to the next node.",
+      "options": [
+        "the previous node",
+        "the next node",
+        "the head",
+        "the value"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "The first node of a singly linked list is called the:",
+      "answer": "head",
+      "explanation": "The first node of a linked list is the head.",
+      "options": [
+        "tail",
+        "root",
+        "head",
+        "leaf"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which is a disadvantage of a linked list compared with an array?",
+      "answer": "Access by position requires traversal",
+      "explanation": "A linked list does not support direct access by index; reaching a position requires following links from the head.",
+      "options": [
+        "Insertion in the middle is impossible",
+        "Access by position requires traversal",
+        "Deleting a node is impossible",
+        "Values must be sorted"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-15",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A stack is a poor choice when the task requires:",
+      "answer": "processing items in arrival order",
+      "explanation": "A stack gives the newest item first, so it is a poor fit when you need first-in-first-served arrival order.",
+      "options": [
+        "processing the most recently added item first",
+        "processing items in arrival order",
+        "reversing a sequence by repeated removal",
+        "matching brackets in an expression"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-16",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A binary tree is most suitable when the data has:",
+      "answer": "a natural hierarchy",
+      "explanation": "Binary trees are useful when data naturally has a hierarchy, such as a root with children and subtrees.",
+      "options": [
+        "a natural hierarchy",
+        "strictly random access needs",
+        "no relationship among values",
+        "only one value"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-17",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A leaf in a binary tree is a node that:",
+      "answer": "has no children",
+      "explanation": "A leaf is a node with no children.",
+      "options": [
+        "has two children",
+        "has no children",
+        "is the root",
+        "is the tallest node"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-18",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Inorder traversal of a binary tree visits nodes in the order:",
+      "answer": "left, node, right",
+      "explanation": "Inorder traversal visits the left subtree, then the node, then the right subtree.",
+      "options": [
+        "node, left, right",
+        "left, node, right",
+        "right, node, left",
+        "left, right, node"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-19",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which pair of terms describes siblings in a binary tree?",
+      "answer": "Two nodes with the same parent",
+      "explanation": "Siblings are nodes that share the same parent.",
+      "options": [
+        "Two nodes with the same parent",
+        "A node and its child",
+        "The root and a leaf",
+        "A node and its subtree"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-20",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "The height of a tree is most closely related to:",
+      "answer": "the length of the longest path from the root to a leaf",
+      "explanation": "Height is typically defined by the longest path from the root to a leaf.",
+      "options": [
+        "the number of leaves only",
+        "the length of the longest path from the root to a leaf",
+        "the number of siblings",
+        "the number of roots"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A binary search tree is a good example of a binary tree being useful because it:",
+      "answer": "reflects a natural ordering hierarchy among values",
+      "explanation": "A binary search tree reflects an ordering hierarchy, which is why binary trees suit hierarchical or ordered data.",
+      "options": [
+        "stores values in no particular order",
+        "reflects a natural ordering hierarchy among values",
+        "cannot be traversed",
+        "always has exactly one leaf"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-22",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Why might a linked list be preferred to an array when many insertions happen in the middle of the list?",
+      "answer": "Because inserting in the middle does not require shifting subsequent elements",
+      "explanation": "A linked list can insert or delete in the middle by changing links, without shifting the rest of the structure like an array does.",
+      "options": [
+        "Because a linked list stores values in alphabetical order",
+        "Because inserting in the middle does not require shifting subsequent elements",
+        "Because a linked list allows direct access by index",
+        "Because a linked list has no head"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Why might a queue be a poor choice for an application that must repeatedly remove the most recently added item?",
+      "answer": "Because a queue removes the oldest item, not the newest",
+      "explanation": "A queue is FIFO, so it gives the oldest item first; it is a poor fit when you need the newest item first.",
+      "options": [
+        "Because a queue stores values only at the rear",
+        "Because a queue removes the oldest item, not the newest",
+        "Because a queue cannot hold more than one item",
+        "Because a queue is always sorted"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-24",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which traversal would you use if you wanted to visit the root before its subtrees?",
+      "answer": "preorder",
+      "explanation": "Preorder visits the node first, then its left and right subtrees.",
+      "options": [
+        "inorder",
+        "preorder",
+        "postorder",
+        "level-order traversal only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-data-struct-q-25",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a singly linked list, deleting a node in the middle usually requires access to:",
+      "answer": "the node before the one to be deleted",
+      "explanation": "To delete a middle node, you generally need the node before it so you can change its next link to skip the removed node.",
+      "options": [
+        "the node to be deleted only",
+        "the node before the one to be deleted",
+        "the tail only",
+        "the head value only"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

@@ -1,25 +1,704 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-queue",
-  "slug": "queue",
   "title": "Queue",
   "kind": "computer-science",
-  "tagline": "FIFO operations, linear versus circular queues and false overflow.",
-  "reviewStatus": "planned",
+  "slug": "queue",
+  "tagline": "FIFO queues, enqueue and dequeue, the false overflow problem in linear queues, circular queues, and dequeue as a double-ended queue.",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "A queue is a data structure for handling values in arrival order. This chapter explains what a queue is, what enqueue and dequeue do, and why a simple linear queue can suffer from false overflow. It then explains how a circular queue solves that problem by wrapping around, and it introduces the dequeue as a more flexible queue that can operate at both ends. The chapter ends by comparing queues with stacks so that the access-order difference is clear.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section C" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section C (Data Structures) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Queues with FIFO operations, linear versus circular queues, false overflow, and dequeue."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Define a queue and explain its FIFO behaviour.",
+    "Describe the enqueue and dequeue operations and the roles of front and rear.",
+    "Explain false overflow in a linear queue and why it happens.",
+    "Explain why a circular queue is used and how it wraps indices around.",
+    "Describe a dequeue and what extra flexibility it provides.",
+    "Distinguish a queue from a stack in terms of access order.",
+    "Decide when a queue is a good or poor fit for a task."
+  ],
+  "learn": [
+    {
+      "id": "queue-definition",
+      "title": "What a queue is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A queue is a data structure for storing a sequence of values where the first value added is the first value removed. It is often described as FIFO, which stands for first in, first out. The everyday metaphor is a waiting line: the person who arrives first is the first to be served, and new arrivals join at the back. In a queue data structure, values are added at one end, usually called the rear, and removed from the other end, usually called the front. That single rule is what makes a queue different from a stack."
+        },
+        {
+          "type": "paragraph",
+          "text": "A queue is not just any ordered collection. The order matters because it is fixed by arrival: the first item in is the first item out. If you want to process items in the order they arrived, a queue is the natural choice. If you want to process the most recent item first, a queue is the wrong choice because it always gives you the oldest item next. Understanding that difference is the main point of learning about queues in this syllabus."
+        }
+      ]
+    },
+    {
+      "id": "queue-operations",
+      "title": "The basic operations: enqueue and dequeue",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The two core operations of a queue are enqueue and dequeue. Enqueue adds a value to the rear of the queue. Dequeue removes the value at the front and returns it. There is often also a way to look at the front value without removing it, sometimes called peek or front. Just as with a stack, a queue implementation needs to know what to do when it is empty. Trying to dequeue from an empty queue is an underflow case. Many queue implementations also have a notion of being full when they use a fixed-size storage area."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Enqueue adds a value to the rear of the queue.",
+            "Dequeue removes and returns the front value.",
+            "Peek or front can read the front value without removing it.",
+            "Removing from an empty queue is an underflow case.",
+            "A fixed-size queue can also become full."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "enqueue",
+              "meaning": "To add a value to the rear of a queue."
+            },
+            {
+              "term": "dequeue",
+              "meaning": "To remove and return the front value of a queue."
+            },
+            {
+              "term": "front",
+              "meaning": "The end of the queue where values are removed."
+            },
+            {
+              "term": "rear",
+              "meaning": "The end of the queue where values are added."
+            },
+            {
+              "term": "FIFO",
+              "meaning": "First in, first out."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linear-queue-problem",
+      "title": "The linear array queue and the false overflow problem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A simple way to implement a queue is with an array and two pointers, one for the front and one for the rear. As values are enqueued, the rear pointer moves forward. As values are dequeued, the front pointer moves forward. This works for a while, but it has a problem. Once values have been removed from the front, the space they used is left behind in the array, and the rear pointer can eventually reach the end of the array even though there is still empty space near the front. That is called false overflow, because the queue seems full when it is not really using all the space available."
+        },
+        {
+          "type": "paragraph",
+          "text": "The name false overflow is the key clue. The queue is not genuinely full in the sense of having no space at all; it only appears full because the implementation cannot use the earlier part of the array after the front has moved past it. Recognising this problem is part of understanding why a better queue implementation is needed. The syllabus expects you to know that a simple linear queue can have this limitation and that a different organization can overcome it."
+        }
+      ]
+    },
+    {
+      "id": "circular-queue",
+      "title": "The circular queue: reusing array space",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A circular queue fixes the false overflow problem by letting the front and rear wrap around the array instead of marching straight to the end. When the rear reaches the end of the array, it goes back to the beginning if there is room there. The same idea applies to the front when values are removed. Because the indices wrap around, the queue can keep using the same array until it is genuinely full. That makes much better use of the available space than a simple linear queue."
+        },
+        {
+          "type": "paragraph",
+          "text": "The word circular is descriptive: the storage behaves as if the array is arranged in a circle rather than a straight line. In a circle, after the last position comes the first position again, so moving forward from the end wraps to the start. This is the main reason a circular queue is taught: it shows how a small change in organization can remove the false overflow limitation of a linear queue without changing the basic FIFO idea."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A circular queue with five slots.",
+              "note": "If the rear is at the last slot and the front has moved forward, the next enqueue can use an earlier empty slot because the rear wraps around."
+            },
+            {
+              "text": "A linear queue with the same five slots.",
+              "note": "The same situation could leave empty slots at the front while the rear is stuck at the end."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dequeue-definition",
+      "title": "The dequeue: a double-ended queue",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A dequeue, also called a double-ended queue, extends the queue idea by allowing insertion and removal at both ends. That means you can add at the front, add at the rear, remove from the front, and remove from the rear, depending on the implementation. This makes a dequeue more flexible than a simple FIFO queue. It is still a queue-like structure, but it gives you more options about where operations happen. The syllabus mentions dequeue alongside circular queue, so you should be able to say what extra flexibility it provides."
+        },
+        {
+          "type": "paragraph",
+          "text": "Because a dequeue can operate at both ends, it can model a wider range of situations than a simple queue. For example, it can support adding or removing from either end when that is useful. It should not be confused with a stack, because it still has front and rear ends and still supports queue-like access. The point is that it is a more general queue, not a completely different structure."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A dequeue allows insertion and removal at both ends.",
+            "It is more flexible than a simple FIFO queue.",
+            "It still has a front and a rear.",
+            "It is useful when both ends matter in a problem."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "dequeue",
+              "meaning": "A double-ended queue that allows insertion and removal at both ends."
+            },
+            {
+              "term": "double-ended queue",
+              "meaning": "Another name for a dequeue."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "queue-vs-stack",
+      "title": "Queue versus stack: the access-order difference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A queue and a stack are not opposites in the sense of being unrelated; they are just two different ways of restricting access to a sequence of values. A stack removes the most recently added value first. A queue removes the least recently added value first. That difference is the whole story. If you remember which one removes the newest item and which one removes the oldest item, you can tell them apart. The names are easy to confuse because both store values in some order and both limit where you can access them."
+        },
+        {
+          "type": "paragraph",
+          "text": "In practice, the choice depends on the job. If you are modelling a line of people waiting, you want the first person to be served first, so you want a queue. If you are modelling a pile of work where the latest task is the next one to be handled, you want a stack. If you pick the wrong one, the program still runs, but it does the wrong thing in a way that may be hard to spot. That is why both definitions and selection reasoning matter on the examination."
+        }
+      ]
+    },
+    {
+      "id": "queue-in-syllabus-context",
+      "title": "Queue in the context of the 2027 Computer Science syllabus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In the 2027 ISC Computer Science syllabus, the queue is part of the Data Structures section. You are expected to understand the basic idea of a queue, its enqueue and dequeue operations, the difference between a linear and a circular queue, why a circular queue is used, and what a dequeue adds. You are also expected to distinguish a queue from a stack and to understand the access-order idea behind FIFO. The emphasis is on the concept and the reason for the different designs, not on memorising one specific code template."
+        },
+        {
+          "type": "paragraph",
+          "text": "That means you should be able to describe enqueue and dequeue, explain false overflow and why a circular queue avoids it, say what a dequeue is, and explain when a queue is a good or poor choice. If a question goes beyond the syllabus expectations, the safest approach is to rely on the basic queue ideas and not invent extra behaviour. The syllabus topics are the ones listed here and in the broader Data Structures material on this track."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Know enqueue and dequeue.",
+            "Know what front and rear mean in a queue.",
+            "Understand false overflow in a linear queue.",
+            "Understand why a circular queue is used.",
+            "Know what a dequeue is and what extra it gives.",
+            "Distinguish a queue from a stack."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "queue",
+              "meaning": "A FIFO data structure that supports enqueue at the rear and dequeue at the front."
+            },
+            {
+              "term": "FIFO",
+              "meaning": "First in, first out."
+            },
+            {
+              "term": "false overflow",
+              "meaning": "When a linear queue appears full because the rear cannot advance even though empty space remains near the front."
+            },
+            {
+              "term": "circular queue",
+              "meaning": "A queue that wraps indices around so that array space is reused until the queue is genuinely full."
+            },
+            {
+              "term": "dequeue",
+              "meaning": "A double-ended queue that allows insertion and removal at both ends."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A queue is FIFO: first in, first out.",
+    "Enqueue adds at the rear; dequeue removes from the front.",
+    "A linear queue can suffer false overflow.",
+    "A circular queue avoids false overflow by wrapping around.",
+    "A dequeue allows insertion and removal at both ends.",
+    "A queue is a poor fit when the most recent item must be processed first.",
+    "A queue is a good fit when values must be processed in arrival order.",
+    "The syllabus expects understanding of operations, false overflow, circular queues and dequeue."
+  ],
+  "examFocus": [
+    "Define a queue and state its FIFO property.",
+    "Describe enqueue and dequeue.",
+    "Explain false overflow in a linear queue.",
+    "Explain why a circular queue is used.",
+    "Describe a dequeue and its extra flexibility.",
+    "Compare a queue with a stack.",
+    "State when a queue is a good or bad choice."
+  ],
+  "vocabulary": [
+    {
+      "word": "queue",
+      "meaning": "A FIFO data structure that supports enqueue at the rear and dequeue at the front."
+    },
+    {
+      "word": "FIFO",
+      "meaning": "First in, first out."
+    },
+    {
+      "word": "enqueue",
+      "meaning": "To add a value to the rear of a queue."
+    },
+    {
+      "word": "dequeue",
+      "meaning": "To remove and return the front value of a queue."
+    },
+    {
+      "word": "front",
+      "meaning": "The end of a queue where values are removed."
+    },
+    {
+      "word": "rear",
+      "meaning": "The end of a queue where values are added."
+    },
+    {
+      "word": "false overflow",
+      "meaning": "When a linear queue appears full because the rear cannot advance even though empty space remains near the front."
+    },
+    {
+      "word": "circular queue",
+      "meaning": "A queue that wraps indices around so that array space is reused until it is genuinely full."
+    },
+    {
+      "word": "dequeue",
+      "meaning": "A double-ended queue that allows insertion and removal at both ends."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-queue-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A queue is a data structure that follows which order?",
+      "answer": "FIFO",
+      "explanation": "A queue follows first in, first out order.",
+      "options": [
+        "LIFO",
+        "FIFO",
+        "random order",
+        "alphabetical order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "In a queue, new values are added at the:",
+      "answer": "rear",
+      "explanation": "New values are added at the rear of a queue.",
+      "options": [
+        "front",
+        "rear",
+        "middle",
+        "any position"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "In a queue, values are removed from the:",
+      "answer": "front",
+      "explanation": "Values are removed from the front of a queue.",
+      "options": [
+        "rear",
+        "front",
+        "middle",
+        "end with the most recent value"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The operation that adds a value to the rear of a queue is called:",
+      "answer": "enqueue",
+      "explanation": "Enqueue adds a value to the rear of a queue.",
+      "options": [
+        "dequeue",
+        "enqueue",
+        "push",
+        "pop"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The operation that removes the front value of a queue is called:",
+      "answer": "dequeue",
+      "explanation": "Dequeue removes the front value of a queue.",
+      "options": [
+        "enqueue",
+        "dequeue",
+        "push",
+        "peek"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A queue is best modelled by which real-life situation?",
+      "answer": "a line of people waiting for service",
+      "explanation": "A queue is modelled by a waiting line.",
+      "options": [
+        "a pile of books where the top is taken first",
+        "a line of people waiting for service",
+        "a set of random numbers",
+        "a sorted list"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "False overflow in a linear queue means:",
+      "answer": "the queue appears full even though space remains near the front",
+      "explanation": "False overflow means the queue appears full while space remains near the front.",
+      "options": [
+        "the queue is genuinely empty",
+        "the queue appears full even though space remains near the front",
+        "the queue has no rear pointer",
+        "the queue is circular"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A circular queue is mainly used to:",
+      "answer": "avoid false overflow by wrapping indices around",
+      "explanation": "A circular queue wraps indices around to reuse space and avoid false overflow.",
+      "options": [
+        "avoid false overflow by wrapping indices around",
+        "sort the queue automatically",
+        "remove values from the middle",
+        "reverse the queue"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-queue-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A dequeue differs from a simple queue because it:",
+      "answer": "allows insertion and removal at both ends",
+      "explanation": "A dequeue allows insertion and removal at both ends.",
+      "options": [
+        "is always LIFO",
+        "allows insertion and removal at both ends",
+        "cannot store more than one value",
+        "has no front"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A queue and a stack differ mainly in:",
+      "answer": "the order in which values are removed",
+      "explanation": "They differ mainly in removal order: LIFO for a stack, FIFO for a queue.",
+      "options": [
+        "the type of values they store",
+        "the order in which values are removed",
+        "whether they can store numbers",
+        "whether they have a rear"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If a queue has the values 1, 2 and 3 with 1 at the front and 3 at the rear, which value does a single dequeue remove?",
+      "answer": "The value 1 at the front",
+      "explanation": "A dequeue removes the front value first, which is 1, and then the next dequeue would remove 2.",
+      "options": [
+        "3",
+        "2",
+        "The value 1 at the front",
+        "All three values at once"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-queue-q-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a simple linear queue, the rear pointer normally:",
+      "answer": "moves forward as values are enqueued",
+      "explanation": "In a linear queue, the rear pointer moves forward as values are enqueued.",
+      "options": [
+        "moves backward only",
+        "moves forward as values are enqueued",
+        "never moves",
+        "wraps to the front automatically"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-13",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which is the main limitation of a simple linear queue?",
+      "answer": "False overflow can waste space at the front",
+      "explanation": "The main limitation of a linear queue is false overflow wasting space.",
+      "options": [
+        "It cannot store more than two values",
+        "False overflow can waste space at the front",
+        "It is always LIFO",
+        "It has no front"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-14",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A circular queue is useful because it:",
+      "answer": "lets the rear reuse space near the front by wrapping around",
+      "explanation": "A circular queue reuses space near the front by wrapping around.",
+      "options": [
+        "allows removal from the middle",
+        "lets the rear reuse space near the front by wrapping around",
+        "changes the FIFO order",
+        "removes the need for a rear pointer"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-15",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which situation is a poor match for a queue?",
+      "answer": "processing the most recently arrived item first",
+      "explanation": "Processing the most recent item first is a poor match for a queue.",
+      "options": [
+        "serving requests in arrival order",
+        "processing the most recently arrived item first",
+        "a print queue where documents wait their turn",
+        "a line of customers"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-16",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A dequeue is best described as:",
+      "answer": "a queue that supports operations at both ends",
+      "explanation": "A dequeue is a queue that supports operations at both ends.",
+      "options": [
+        "a stack that also behaves like a queue",
+        "a queue that supports operations at both ends",
+        "a circular array only",
+        "a sorted structure"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-17",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If the front of a linear queue has moved far forward, what is likely to happen before the queue is genuinely full?",
+      "answer": "The queue may appear full due to false overflow",
+      "explanation": "The queue may appear full due to false overflow.",
+      "options": [
+        "The queue may appear full due to false overflow",
+        "The queue will automatically become circular",
+        "The rear will move backward",
+        "The queue will sort itself"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-queue-q-18",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Why might a circular queue be preferred in an implementation with a fixed array?",
+      "answer": "Because it makes better use of the array space",
+      "explanation": "A circular queue makes better use of the array space.",
+      "options": [
+        "Because it never needs any pointers",
+        "Because it makes better use of the array space",
+        "Because it changes the order of removal",
+        "Because it removes the need for enqueue"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-19",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which of the following is NOT a basic queue operation?",
+      "answer": "push",
+      "explanation": "Push is a stack operation, not a basic queue operation.",
+      "options": [
+        "enqueue",
+        "dequeue",
+        "push",
+        "peek"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-queue-q-20",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A real-life line for service is a good example of:",
+      "answer": "a queue",
+      "explanation": "A line for service is a good example of a queue.",
+      "options": [
+        "a stack",
+        "a queue",
+        "a binary tree",
+        "a dequeue only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "A student says that a circular queue is needed because a linear queue can become completely empty. Decide whether the student is correct and explain why.",
+      "answer": "Not correct; the real issue is false overflow, not emptiness",
+      "explanation": "The real issue is false overflow, not emptiness.",
+      "options": [
+        "Correct, because a linear queue cannot hold values near the front",
+        "Not correct; the real issue is false overflow, not emptiness",
+        "Correct, because a linear queue is LIFO",
+        "Not correct; a linear queue has no front"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-22",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain one reason a dequeue might be chosen over a simple queue.",
+      "answer": "Because some tasks need insertion or removal at both ends",
+      "explanation": "A dequeue may be chosen when a task needs insertion or removal at both ends.",
+      "options": [
+        "Because a dequeue is always faster for every task",
+        "Because some tasks need insertion or removal at both ends",
+        "Because a dequeue is LIFO",
+        "Because a dequeue has no rear"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "In a queue, why is the first value enqueued the first value dequeued?",
+      "answer": "Because a queue removes from the front, which holds the oldest value",
+      "explanation": "A queue removes from the front, which holds the oldest value.",
+      "options": [
+        "Because the queue sorts values automatically",
+        "Because a queue removes from the front, which holds the oldest value",
+        "Because the queue is LIFO",
+        "Because the queue can only store one value"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-queue-q-24",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which operation would you use to add a value to the rear of a queue?",
+      "answer": "enqueue",
+      "explanation": "Enqueue adds a value to the rear of a queue.",
+      "options": [
+        "push",
+        "pop",
+        "enqueue",
+        "peek"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-queue-q-25",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A queue is empty when:",
+      "answer": "there are no values in it",
+      "explanation": "A queue is empty when there are no values in it.",
+      "options": [
+        "it has wrapped around once",
+        "there are no values in it",
+        "the rear is at the end",
+        "it is circular"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

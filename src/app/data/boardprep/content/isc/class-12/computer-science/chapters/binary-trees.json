@@ -1,25 +1,852 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-binary-trees",
-  "slug": "binary-trees",
   "title": "Binary Trees (Conceptual)",
   "kind": "computer-science",
-  "tagline": "Binary tree concepts: root, nodes, height, depth, traversals and completeness.",
-  "reviewStatus": "planned",
+  "slug": "binary-trees",
+  "tagline": "Binary tree concepts: root, leaf, subtree, sibling, depth, height, inorder/preorder/postorder traversals, binary search trees and tree shape.",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "A binary tree is a branching data structure in which each node has at most two children. This chapter explains the basic vocabulary of trees, including root, leaf, subtree, sibling, depth, height and level, and it describes the three common traversals: inorder, preorder and postorder. It also introduces binary search trees as a special ordered kind of binary tree and discusses why the shape of a tree matters for efficiency.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section C" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section C (Data Structures) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Binary trees conceptual: root, leaf, subtree, siblings, height, depth, level, size, degree, traversals and related ideas."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Define a binary tree and identify the root and leaves.",
+    "Explain key tree terms: parent, child, subtree, sibling, depth, level and height.",
+    "Describe inorder, preorder and postorder traversals and the order they visit nodes in.",
+    "Explain what a binary search tree is and how it differs from an ordinary binary tree.",
+    "Explain why the shape of a tree matters, including completeness and balance.",
+    "Compare a binary tree with a list or a stack in terms of structure.",
+    "State when a binary tree is a good choice for representing data."
+  ],
+  "learn": [
+    {
+      "id": "binary-tree-definition",
+      "title": "What a binary tree is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A binary tree is a tree in which each node has at most two children. By convention those children are called the left child and the right child. That simple restriction is what makes a binary tree a binary tree. A tree with no such restriction can have many children per node; a binary tree limits each node to zero, one or two children. That limit is what gives binary trees their shape and their usefulness."
+        },
+        {
+          "type": "paragraph",
+          "text": "One node is the root. The root is the topmost node of the tree and the starting point for reaching every other node. Except for the root, every node has exactly one parent, which is the node above it. A node with no children is called a leaf. A node that is not a leaf is sometimes called an internal node. These terms are not just vocabulary; they are the basic way of talking about any tree."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A binary tree is a tree where each node has at most two children.",
+            "The topmost node is the root.",
+            "Each node except the root has a parent.",
+            "A node with no children is a leaf.",
+            "Children are usually called the left child and the right child."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "binary tree",
+              "meaning": "A tree in which each node has at most two children."
+            },
+            {
+              "term": "root",
+              "meaning": "The topmost node of a tree."
+            },
+            {
+              "term": "leaf",
+              "meaning": "A node with no children."
+            },
+            {
+              "term": "parent",
+              "meaning": "The node above a given node in a tree."
+            },
+            {
+              "term": "child",
+              "meaning": "A node directly below another node in a tree."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-tree-terms",
+      "title": "Key terms: subtree, sibling, depth, height, level",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A subtree is a node together with all of its descendants. Every node in a binary tree is itself the root of a smaller binary tree. That is one reason trees are useful: they are recursive by nature, because the same idea reappears at every level. A subtree is usually named after the node at its root, so you can talk about the left subtree of a node or the right subtree of a node."
+        },
+        {
+          "type": "paragraph",
+          "text": "Nodes that share the same parent are called siblings. The depth or level of a node is how far it is from the root. The height of a tree is a measure of how tall it is, often defined by the longest path from the root to a leaf. These ideas are about position and shape rather than stored values. They matter because the shape of a tree affects how efficiently you can work with it."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A small tree with root 1, left child 2 and right child 3.",
+              "note": "2 and 3 are siblings because they share parent 1. The left subtree of 1 is rooted at 2."
+            },
+            {
+              "text": "Height and depth.",
+              "note": "If the longest path from root to leaf has two edges, the tree height is often described as 2; a node on that path has a depth equal to its distance from the root."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A subtree is a node and all of its descendants.",
+            "Siblings share the same parent.",
+            "Depth or level is distance from the root.",
+            "Height measures how tall the tree is.",
+            "These terms describe position and shape, not values."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "subtree",
+              "meaning": "A node together with all of its descendants."
+            },
+            {
+              "term": "sibling",
+              "meaning": "A node that shares the same parent as another node."
+            },
+            {
+              "term": "depth",
+              "meaning": "How far a node is from the root."
+            },
+            {
+              "term": "level",
+              "meaning": "Another way to describe the distance of a node from the root."
+            },
+            {
+              "term": "height",
+              "meaning": "A measure of how tall a tree is, often the longest path from root to leaf."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-tree-traversals",
+      "title": "Traversing a binary tree",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Traversal means visiting every node in a tree in some order. For a binary tree, the three usual depth-first traversals are inorder, preorder and postorder. Each one visits the node and its subtrees in a different sequence. In inorder, you traverse the left subtree, visit the node, then traverse the right subtree. In preorder, you visit the node first, then the left subtree, then the right subtree. In postorder, you traverse the left subtree, then the right subtree, then visit the node."
+        },
+        {
+          "type": "paragraph",
+          "text": "The difference between these orders matters because each order is useful in different situations. Inorder is often used when you want to visit values in sorted order from a binary search tree. Preorder is useful when you want to process a node before its subtrees. Postorder is useful when you need to process the subtrees before the node, for example when deleting or computing something from subtrees upward. You do not need to memorise a code template perfectly; you need to know what order each traversal visits nodes in."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Inorder: left, node, right.",
+              "note": "For a binary search tree, inorder visits values in ascending order."
+            },
+            {
+              "text": "Preorder: node, left, right.",
+              "note": "Preorder visits the root before its subtrees."
+            },
+            {
+              "text": "Postorder: left, right, node.",
+              "note": "Postorder visits the subtrees before the node."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Inorder visits left, then node, then right.",
+            "Preorder visits node, then left, then right.",
+            "Postorder visits left, then right, then node.",
+            "Different orders suit different tasks.",
+            "Inorder is often associated with sorted order in a binary search tree."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "inorder traversal",
+              "meaning": "A traversal that visits the left subtree, then the node, then the right subtree."
+            },
+            {
+              "term": "preorder traversal",
+              "meaning": "A traversal that visits the node, then the left subtree, then the right subtree."
+            },
+            {
+              "term": "postorder traversal",
+              "meaning": "A traversal that visits the left subtree, then the right subtree, then the node."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-search-tree-idea",
+      "title": "Binary search trees: a special case with ordering",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A binary search tree is a binary tree with an extra rule about ordering. For each node, the values in its left subtree are usually considered smaller, and the values in its right subtree are usually considered larger. That rule is what makes searching in a binary search tree efficient in the average case, because you can discard half the remaining tree at each step by comparing with the current node."
+        },
+        {
+          "type": "paragraph",
+          "text": "A binary search tree is still a binary tree, but not every binary tree is a binary search tree. The syllabus treats binary trees at a conceptual level, so you should be able to explain the difference: the shape is still binary, but the values are arranged with the search property in mind. That search property is also why inorder traversal of a binary search tree gives values in order."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A binary search tree adds an ordering rule to a binary tree.",
+            "Left subtree values are usually smaller; right subtree values are usually larger.",
+            "Inorder traversal of a binary search tree visits values in order.",
+            "A binary search tree is a special kind of binary tree.",
+            "Not every binary tree is a binary search tree."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "binary search tree",
+              "meaning": "A binary tree in which each node’s left subtree holds smaller values and its right subtree holds larger values, supporting efficient search."
+            },
+            {
+              "term": "search property",
+              "meaning": "The rule that orders values in a binary search tree so that search can discard half the remaining tree at each step."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-tree-shape",
+      "title": "Shape, completeness and height",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The shape of a binary tree is as important as its contents. A tree can be tall and skinny or short and broad. A complete binary tree packs nodes neatly, level by level, so that the shape is as compact as possible for the number of nodes. A balanced tree keeps the height small so that operations stay efficient. These ideas are conceptual at this stage, but they matter because a tree that is badly shaped can be much slower to search than one that is well shaped."
+        },
+        {
+          "type": "paragraph",
+          "text": "Height is a measure of how many levels a tree has, or how far the deepest leaf is from the root. A tree with small height is generally better for search, insertion and deletion, because fewer levels means fewer steps in the worst case. That is why balancing and completeness are discussed alongside binary trees: they are about keeping the tree useful rather than just logically correct."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The shape of a tree affects its usefulness.",
+            "A complete binary tree packs nodes level by level.",
+            "A balanced tree keeps the height small.",
+            "Height is tied to efficiency in search and other operations.",
+            "Shape matters even when the values are the same."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "complete binary tree",
+              "meaning": "A binary tree whose nodes are packed neatly level by level."
+            },
+            {
+              "term": "balanced tree",
+              "meaning": "A tree whose height is kept small so that operations stay efficient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-tree-applications",
+      "title": "Why binary trees are useful",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Binary trees are useful when data has a natural hierarchy. A file system, an expression tree, a family tree and a decision process can all be modelled as trees. A binary tree is especially useful when each decision point has at most two choices, or when the data can be arranged so that smaller and larger values fall to the left and right. That is the kind of situation where a binary tree is a better fit than a flat list."
+        },
+        {
+          "type": "paragraph",
+          "text": "Binary trees also connect to the idea of efficient search. If the tree is arranged as a binary search tree, searching can be much faster than scanning a list from end to end. That is why binary trees are often taught alongside searching and sorting ideas. The syllabus keeps the treatment conceptual, so the focus is on understanding what a tree is, what traversals do, and why the shape matters, not on implementing every variant."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Trees model hierarchical data.",
+            "Binary trees suit situations with two-way branching.",
+            "Binary search trees support efficient search.",
+            "Traversals let you visit every node in a chosen order.",
+            "Shape affects efficiency."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "hierarchy",
+              "meaning": "A structure in which items are arranged above and below one another."
+            },
+            {
+              "term": "expression tree",
+              "meaning": "A tree that represents an expression with operators as internal nodes and operands as leaves."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "binary-tree-vs-other-structures",
+      "title": "Binary tree versus other data structures",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A binary tree is not just another list. A list is linear: each element has at most one successor. A binary tree is branching: each node can have two successors. That means a tree can represent relationships that a list cannot represent naturally, especially hierarchy. The trade-off is that trees are more complex to traverse and reason about than a flat list."
+        },
+        {
+          "type": "paragraph",
+          "text": "Compared with a stack or a queue, a binary tree is much more flexible but also more complex. A stack and a queue impose a strict access order, while a tree allows many different orders through traversal. That flexibility is useful, but it also means you have to be clear about which order you want and why. The syllabus expects you to be able to compare these structures, not just to name them."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A list is linear; a binary tree is branching.",
+            "Trees model hierarchy more naturally than lists.",
+            "Trees allow several traversal orders.",
+            "Trees are more complex than stacks or queues.",
+            "Choose a structure based on the relationships in the data."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "branching",
+              "meaning": "Having more than one successor from a node."
+            },
+            {
+              "term": "linear structure",
+              "meaning": "A structure in which each element has at most one successor."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A binary tree has at most two children per node.",
+    "The root is the topmost node; leaves have no children.",
+    "A subtree is a node and its descendants.",
+    "Siblings share the same parent.",
+    "Inorder visits left, node, right.",
+    "Preorder visits node, left, right.",
+    "Postorder visits left, right, node.",
+    "A binary search tree adds an ordering rule to a binary tree.",
+    "Inorder traversal of a binary search tree gives values in order.",
+    "Tree shape, height and balance affect efficiency.",
+    "Binary trees suit hierarchical data better than flat lists."
+  ],
+  "examFocus": [
+    "Define a binary tree and identify its root and leaves.",
+    "Define subtree, sibling, depth and height.",
+    "Describe inorder, preorder and postorder traversals.",
+    "Explain the difference between a binary tree and a binary search tree.",
+    "Explain why tree shape matters.",
+    "Compare a binary tree with a list.",
+    "State when a binary tree is a good fit."
+  ],
+  "vocabulary": [
+    {
+      "word": "binary tree",
+      "meaning": "A tree in which each node has at most two children."
+    },
+    {
+      "word": "root",
+      "meaning": "The topmost node of a tree."
+    },
+    {
+      "word": "leaf",
+      "meaning": "A node with no children."
+    },
+    {
+      "word": "parent",
+      "meaning": "The node above a given node in a tree."
+    },
+    {
+      "word": "child",
+      "meaning": "A node directly below another node in a tree."
+    },
+    {
+      "word": "subtree",
+      "meaning": "A node together with all of its descendants."
+    },
+    {
+      "word": "sibling",
+      "meaning": "A node that shares the same parent as another node."
+    },
+    {
+      "word": "depth",
+      "meaning": "How far a node is from the root."
+    },
+    {
+      "word": "level",
+      "meaning": "Another way to describe the distance of a node from the root."
+    },
+    {
+      "word": "height",
+      "meaning": "A measure of how tall a tree is, often the longest path from root to leaf."
+    },
+    {
+      "word": "inorder traversal",
+      "meaning": "A traversal that visits left, then node, then right."
+    },
+    {
+      "word": "preorder traversal",
+      "meaning": "A traversal that visits node, then left, then right."
+    },
+    {
+      "word": "postorder traversal",
+      "meaning": "A traversal that visits left, then right, then node."
+    },
+    {
+      "word": "binary search tree",
+      "meaning": "A binary tree in which left subtree values are usually smaller and right subtree values are usually larger."
+    },
+    {
+      "word": "complete binary tree",
+      "meaning": "A binary tree whose nodes are packed neatly level by level."
+    },
+    {
+      "word": "balanced tree",
+      "meaning": "A tree whose height is kept small so that operations stay efficient."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-binary-trees-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A binary tree is a tree in which each node has at most:",
+      "answer": "two children",
+      "explanation": "In a binary tree each node has at most two children.",
+      "options": [
+        "one child",
+        "two children",
+        "three children",
+        "no children"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The topmost node of a tree is called the:",
+      "answer": "root",
+      "explanation": "The topmost node is the root.",
+      "options": [
+        "leaf",
+        "root",
+        "sibling",
+        "subtree"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A node with no children is called a:",
+      "answer": "leaf",
+      "explanation": "A node with no children is a leaf.",
+      "options": [
+        "parent",
+        "root",
+        "leaf",
+        "sibling"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Nodes that share the same parent are called:",
+      "answer": "siblings",
+      "explanation": "Nodes that share the same parent are siblings.",
+      "options": [
+        "leaves",
+        "siblings",
+        "roots",
+        "subtrees"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A subtree is:",
+      "answer": "a node and all of its descendants",
+      "explanation": "A subtree is a node and all of its descendants.",
+      "options": [
+        "a node and all of its descendants",
+        "only the root node",
+        "only the leaves",
+        "only the parent"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Inorder traversal visits nodes in the order:",
+      "answer": "left, node, right",
+      "explanation": "Inorder visits left, then node, then right.",
+      "options": [
+        "node, left, right",
+        "left, node, right",
+        "left, right, node",
+        "right, node, left"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Preorder traversal visits nodes in the order:",
+      "answer": "node, left, right",
+      "explanation": "Preorder visits node, then left, then right.",
+      "options": [
+        "node, left, right",
+        "left, node, right",
+        "left, right, node",
+        "right, node, left"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-08",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Postorder traversal visits nodes in the order:",
+      "answer": "left, right, node",
+      "explanation": "Postorder visits left, then right, then node.",
+      "options": [
+        "node, left, right",
+        "left, node, right",
+        "left, right, node",
+        "right, node, left"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-09",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The height of a tree is most closely related to:",
+      "answer": "the longest path from root to leaf",
+      "explanation": "Height is related to the longest path from root to leaf.",
+      "options": [
+        "the number of leaves only",
+        "the longest path from root to leaf",
+        "the number of siblings",
+        "the value stored at the root"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A complete binary tree is one whose nodes are packed:",
+      "answer": "level by level",
+      "explanation": "A complete binary tree packs nodes level by level.",
+      "options": [
+        "randomly",
+        "level by level",
+        "only at the root",
+        "only at the leaves"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a binary search tree, the left subtree of a node usually contains values that are:",
+      "answer": "smaller",
+      "explanation": "In a binary search tree the left subtree usually contains smaller values.",
+      "options": [
+        "larger",
+        "smaller",
+        "equal only",
+        "unrelated"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which traversal of a binary search tree visits values in sorted order?",
+      "answer": "inorder",
+      "explanation": "Inorder traversal of a binary search tree visits values in sorted order.",
+      "options": [
+        "preorder",
+        "postorder",
+        "inorder",
+        "level-order only"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A binary tree differs from a list mainly because:",
+      "answer": "a tree can branch",
+      "explanation": "A tree can branch; a list has at most one successor per element.",
+      "options": [
+        "a list has only one successor per element",
+        "a tree can branch",
+        "a list has no root",
+        "a tree cannot have leaves"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which traversal would you use if you want to process a node before its subtrees?",
+      "answer": "preorder",
+      "explanation": "Preorder processes the node before its subtrees.",
+      "options": [
+        "inorder",
+        "preorder",
+        "postorder",
+        "leaf-first traversal only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-15",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which traversal would you use if you want to process subtrees before the node?",
+      "answer": "postorder",
+      "explanation": "Postorder processes the subtrees before the node.",
+      "options": [
+        "inorder",
+        "preorder",
+        "postorder",
+        "root-first traversal only"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-16",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Depth or level of a node means:",
+      "answer": "its distance from the root",
+      "explanation": "Depth or level means its distance from the root.",
+      "options": [
+        "its stored value",
+        "its distance from the root",
+        "the number of leaves only",
+        "the height of the tree"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-17",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A balanced binary tree is generally preferred because:",
+      "answer": "it keeps the height small",
+      "explanation": "A balanced tree keeps the height small.",
+      "options": [
+        "it has more leaves",
+        "it keeps the height small",
+        "it cannot have a root",
+        "it must be empty"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-18",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A binary search tree is a:",
+      "answer": "special kind of binary tree",
+      "explanation": "A binary search tree is a special kind of binary tree.",
+      "options": [
+        "list",
+        "special kind of binary tree",
+        "stack",
+        "queue"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-19",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which structure is best when data has a natural hierarchy?",
+      "answer": "a binary tree",
+      "explanation": "A binary tree is best when data has a natural hierarchy.",
+      "options": [
+        "a stack",
+        "a queue",
+        "a binary tree",
+        "a random list"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-20",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If the longest path from the root to a leaf has 3 edges, the tree height is most often described as:",
+      "answer": "3 edges",
+      "explanation": "Height is usually described by the length of the longest path from the root to a leaf.",
+      "options": [
+        "1 edge",
+        "2 edges",
+        "3 edges",
+        "4 edges"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which statement is true of every binary tree?",
+      "answer": "Each node has at most two children",
+      "explanation": "Every node in a binary tree has at most two children.",
+      "options": [
+        "Every node has two children",
+        "Each node has at most two children",
+        "The root must have two children",
+        "Inorder traversal always gives descending order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-22",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A complete binary tree is useful because:",
+      "answer": "it packs nodes compactly level by level",
+      "explanation": "A complete binary tree packs nodes compactly level by level.",
+      "options": [
+        "it always has only one leaf",
+        "it packs nodes compactly level by level",
+        "it is always a binary search tree",
+        "it cannot be traversed"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If you want to visit the root first and then its subtrees, you choose:",
+      "answer": "preorder",
+      "explanation": "Preorder visits the root first.",
+      "options": [
+        "inorder",
+        "preorder",
+        "postorder",
+        "leaf order only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-24",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Why is a binary search tree more efficient to search than a plain list in the average case?",
+      "answer": "Because each comparison can discard a large part of the tree",
+      "explanation": "Each comparison can discard a large part of the tree.",
+      "options": [
+        "Because it has fewer nodes",
+        "Because each comparison can discard a large part of the tree",
+        "Because it is always sorted linearly",
+        "Because it has no height"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-binary-trees-q-25",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "A binary tree is a better choice than a flat list when:",
+      "answer": "the data has hierarchical relationships",
+      "explanation": "A binary tree is better when the data has hierarchical relationships.",
+      "options": [
+        "access by position is the only need",
+        "the data has hierarchical relationships",
+        "only one value is stored",
+        "the order of values is irrelevant"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

@@ -1,25 +1,824 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-linked-list",
-  "slug": "linked-list",
   "title": "Singly Linked List",
   "kind": "computer-science",
-  "tagline": "Singly linked list nodes, insertion, deletion, reversal and sublist operations.",
-  "reviewStatus": "planned",
+  "slug": "linked-list",
+  "tagline": "Singly linked list nodes, head and tail, insertion, deletion, reversal, traversal, emptiness checks, and linked-list versus array trade-offs.",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "A singly linked list is one of the simplest dynamic data structures: a chain of nodes, each holding a value and a reference to the next node. This chapter explains how a linked list is built, how to traverse it, and how to insert, delete and reverse nodes by changing references. It also compares linked lists with arrays, so you can see when a linked list is a good choice and when it is not.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section C" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section C (Data Structures) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Singly linked list: nodes, insertion, deletion, traversal, reversal, emptiness and sublist operations."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Describe a singly linked list as a chain of nodes with a head and a next reference.",
+    "Explain how traversal works and why it is central to list operations.",
+    "Explain insertion at the head, tail and middle, including the order of link updates.",
+    "Explain deletion of the head, last node and a middle node.",
+    "Describe how to reverse a singly linked list using temporary references.",
+    "Explain boundary cases such as the empty list and the single-node list.",
+    "Compare a linked list with an array in terms of access and insertion/deletion.",
+    "Decide when a linked list is a good or poor fit for a task."
+  ],
+  "learn": [
+    {
+      "id": "linked-list-definition",
+      "title": "What a singly linked list is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A singly linked list is a linear data structure made of nodes, where each node holds a value and a reference to the next node. The first node is called the head. The last node usually has a null reference, meaning there is no next node. Unlike an array, the nodes are not stored in consecutive memory, and the list does not have a fixed size in the same way an array does. A linked list grows and shrinks by adding and removing nodes as references are updated."
+        },
+        {
+          "type": "paragraph",
+          "text": "The main idea is that the list is a chain of nodes. To reach a node, you usually start at the head and follow the references one by one. You cannot jump directly to the fifth node by position the way you can with an array. That makes a linked list good for some things and awkward for others. It is good when you need to add or remove nodes without shifting a whole block of elements, and it is awkward when you need repeated fast access by position."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A linked list is a chain of nodes.",
+            "Each node holds a value and a reference to the next node.",
+            "The first node is the head; the last node usually links to null.",
+            "Nodes are not stored in consecutive memory.",
+            "Access by position requires traversal from the head."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "singly linked list",
+              "meaning": "A linear structure made of nodes, each holding data and a reference to the next node."
+            },
+            {
+              "term": "head",
+              "meaning": "The first node of a linked list."
+            },
+            {
+              "term": "node",
+              "meaning": "A single element of a linked list, holding data and a reference to the next node."
+            },
+            {
+              "term": "link",
+              "meaning": "A reference from one node to the next node in the list."
+            },
+            {
+              "term": "null",
+              "meaning": "A value that means there is no next node."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-list-traversal",
+      "title": "Traversing a linked list",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Traversal means visiting each node in order. To traverse a singly linked list, you start at the head and follow the next references until you reach null. This is the fundamental way to read the contents of a linked list. If you want to print every value, search for a value, count the nodes, or find the middle of the list, you usually traverse the list from the head."
+        },
+        {
+          "type": "paragraph",
+          "text": "Traversal is simple in concept but it is central to almost every linked list operation. Insertion, deletion and many kinds of inspection all depend on moving along the links correctly. A common mistake is to forget to advance the reference during traversal, or to stop one node too early. In an examination trace, you are often asked to follow the links step by step and say what the list looks like after each change."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Traversing a list with values 10, 20, 30.",
+              "note": "Start at the head (10), move to the next node (20), move to the next node (30), then reach null and stop."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Traversal visits nodes from head to null.",
+            "Traversal is the basic way to read a linked list.",
+            "Many operations depend on traversal.",
+            "A traversal must advance the reference until it becomes null."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-list-insertion",
+      "title": "Inserting nodes in a linked list",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Insertion is one of the operations a linked list makes relatively easy. You can insert at the head, at the tail, or in the middle. Inserting at the head is the simplest: you create a new node whose next reference points to the current head, then make the head point to the new node. That operation does not require traversing the whole list. Inserting at the tail requires reaching the last node first, unless you already keep a tail reference."
+        },
+        {
+          "type": "paragraph",
+          "text": "Inserting in the middle is where care is needed. To insert a node between two existing nodes, you must find the node before the insertion point, set the new node’s next reference to the later node, and then update the previous node’s next reference to the new node. If you get the order wrong, you can lose the rest of the list. The exact order of updates matters every time."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Insert at the head.",
+              "note": "Create a new node whose next points to the current head, then make the head point to the new node."
+            },
+            {
+              "text": "Insert after a given node.",
+              "note": "Set the new node’s next to the current node’s next, then set the current node’s next to the new node."
+            },
+            {
+              "text": "Insert in the middle.",
+              "note": "Find the node before the insertion point, link the new node in, and update the previous node’s next."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Insert at the head is cheap and does not require full traversal.",
+            "Insert at the tail usually requires reaching the last node.",
+            "Insert in the middle requires careful link updates.",
+            "The order of updates must preserve the rest of the list."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "insertion",
+              "meaning": "Adding a new node into a linked list."
+            },
+            {
+              "term": "head insertion",
+              "meaning": "Inserting a new node at the front of the list."
+            },
+            {
+              "term": "tail insertion",
+              "meaning": "Inserting a new node at the end of the list."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-list-deletion",
+      "title": "Deleting nodes from a linked list",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Deletion means removing a node from the list. The simplest case is deleting the head. You make the head point to the next node, and the old head is no longer part of the list. Deleting the last node requires finding the node before it and setting its next to null. Deleting a node in the middle requires finding the node before the one to delete, then skipping over the deleted node by linking the previous node directly to the node after it."
+        },
+        {
+          "type": "paragraph",
+          "text": "A linked list must be handled carefully during deletion because if you lose a reference to a node, you lose the rest of the list after it. That is why deletion usually works from the node before the target node rather than from the target node itself. The exam often checks whether you can trace a deletion and describe what the list looks like afterward."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Delete the head.",
+              "note": "Make the head point to the second node; the old first node is removed from the list."
+            },
+            {
+              "text": "Delete a middle node.",
+              "note": "Find the node before the target, set its next to skip the target and point to the node after it."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Delete the head by moving the head to the next node.",
+            "Delete the last node by setting the previous node’s next to null.",
+            "Delete a middle node by linking around it.",
+            "Losing a reference during deletion can drop the rest of the list."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "deletion",
+              "meaning": "Removing a node from a linked list."
+            },
+            {
+              "term": "skip",
+              "meaning": "To make a node’s next reference point past another node so that node is no longer part of the list."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-list-reversal",
+      "title": "Reversing a singly linked list",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reversing a linked list means changing the direction of the links so that the last node becomes the first and the first becomes the last. This is a classic linked list operation. The basic idea is to walk along the list and, for each node, make its next reference point to the node you came from instead of the node you are going to. You have to keep track of three references at a time: the current node, the node before it, and the node after it."
+        },
+        {
+          "type": "paragraph",
+          "text": "Reversal is not just a trick; it shows that a linked list can be reorganized by changing references without moving data. It is also a good examination topic because it requires careful use of temporary references. If you reverse a short list by hand, you can trace exactly how the head changes and how each node’s next reference is redirected."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Reversing a list 10 -> 20 -> 30.",
+              "note": "After reversal, the head becomes the node that held 30, and the links become 30 -> 20 -> 10 -> null."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Reversal changes the direction of the links.",
+            "The old tail becomes the new head.",
+            "Reversal uses temporary references to avoid losing nodes.",
+            "Reversal does not move the stored values."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "reversal",
+              "meaning": "Reversing the order of a linked list by changing the next references."
+            },
+            {
+              "term": "temporary reference",
+              "meaning": "A short-lived reference used during an operation so that no node is lost."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-list-emptiness",
+      "title": "Empty lists, length and boundary cases",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An empty linked list has no nodes. Its head is usually null, and most operations must check for that case before doing anything else. Trying to remove from an empty list, or searching an empty list, should be handled as a boundary case rather than assumed never to happen. Many linked list bugs come from forgetting the empty case or forgetting the single-node case."
+        },
+        {
+          "type": "paragraph",
+          "text": "Length is another basic property. The length of a linked list is the number of nodes it contains. To find the length, you usually traverse the entire list and count the nodes, unless you maintain a separate length variable. The single-node list is a special case worth remembering: removing the only node should leave an empty list, and inserting into an empty list should make that node the head."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An empty list has a null head.",
+            "Many operations must check for the empty case.",
+            "Length is usually found by traversal.",
+            "The single-node list is a special boundary case."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "empty list",
+              "meaning": "A linked list with no nodes."
+            },
+            {
+              "term": "length",
+              "meaning": "The number of nodes in a linked list."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-list-vs-array",
+      "title": "Linked list versus array",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A linked list and an array both store sequences of values, but they do it differently. An array stores values in consecutive memory and allows fast access by position. A linked list stores nodes with links and does not require consecutive memory. The advantage of a linked list is that you can insert and delete without moving other elements. The disadvantage is that you cannot access a node by position quickly; you have to follow the links."
+        },
+        {
+          "type": "paragraph",
+          "text": "This trade-off is a recurring theme in computer science. If your program needs frequent insertions and deletions, especially away from the ends, a linked list may be a reasonable choice. If your program needs fast access by index, an array is usually better. The syllabus expects you to understand this difference, not just to memorize the definition of a linked list."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Arrays allow fast access by position.",
+            "Linked lists allow insertion and deletion without shifting.",
+            "Linked lists do not support fast random access.",
+            "The best choice depends on the operations a program needs."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "random access",
+              "meaning": "Accessing an element directly by position."
+            },
+            {
+              "term": "sequential access",
+              "meaning": "Accessing elements in order by following links or positions one at a time."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A singly linked list is a chain of nodes linked by next references.",
+    "The head is the first node; the last node usually links to null.",
+    "Traversal visits nodes from the head to null.",
+    "Head insertion is cheap and does not require full traversal.",
+    "Middle insertion and deletion require careful link updates.",
+    "Reversal changes the direction of the next references.",
+    "Empty and single-node cases are important boundary cases.",
+    "Linked lists allow insertion and deletion without shifting elements.",
+    "Linked lists do not support fast random access.",
+    "The syllabus expects understanding of nodes, operations and trade-offs."
+  ],
+  "examFocus": [
+    "Define a singly linked list and identify the head.",
+    "Describe traversal and why it is needed.",
+    "Explain how insertion at the head works.",
+    "Explain how deletion of a middle node works.",
+    "Describe the steps of reversing a linked list.",
+    "Explain the difference between a linked list and an array.",
+    "State when a linked list is a good or bad choice.",
+    "Trace a short list after an insertion or deletion."
+  ],
+  "vocabulary": [
+    {
+      "word": "singly linked list",
+      "meaning": "A linear structure made of nodes, each holding data and a reference to the next node."
+    },
+    {
+      "word": "head",
+      "meaning": "The first node of a linked list."
+    },
+    {
+      "word": "node",
+      "meaning": "A single element of a linked list, holding data and a reference to the next node."
+    },
+    {
+      "word": "link",
+      "meaning": "A reference from one node to the next node in the list."
+    },
+    {
+      "word": "traversal",
+      "meaning": "Visiting each node in order, usually starting from the head."
+    },
+    {
+      "word": "insertion",
+      "meaning": "Adding a new node into a linked list."
+    },
+    {
+      "word": "deletion",
+      "meaning": "Removing a node from a linked list."
+    },
+    {
+      "word": "reversal",
+      "meaning": "Reversing the order of a linked list by changing the next references."
+    },
+    {
+      "word": "empty list",
+      "meaning": "A linked list with no nodes."
+    },
+    {
+      "word": "null",
+      "meaning": "A value that means there is no next node."
+    },
+    {
+      "word": "random access",
+      "meaning": "Accessing an element directly by position."
+    },
+    {
+      "word": "sequential access",
+      "meaning": "Accessing elements in order by following links or positions one at a time."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-linked-list-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A singly linked list is made of:",
+      "answer": "nodes linked by references",
+      "explanation": "A singly linked list is made of nodes linked by references to the next node.",
+      "options": [
+        "consecutive memory cells only",
+        "nodes linked by references",
+        "a single fixed-size block",
+        "keys and values only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The first node of a linked list is called the:",
+      "answer": "head",
+      "explanation": "The first node of a linked list is the head.",
+      "options": [
+        "tail",
+        "head",
+        "root",
+        "leaf"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "In a singly linked list, each node usually points to:",
+      "answer": "the next node",
+      "explanation": "Each node usually points to the next node.",
+      "options": [
+        "the previous node",
+        "the next node",
+        "the head",
+        "the value only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The last node of a singly linked list usually has a next reference of:",
+      "answer": "null",
+      "explanation": "The last node usually has a null next reference.",
+      "options": [
+        "the head",
+        "the previous node",
+        "null",
+        "itself"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "To read the contents of a linked list, you normally:",
+      "answer": "traverse from the head",
+      "explanation": "You normally traverse from the head.",
+      "options": [
+        "jump to any node by position",
+        "traverse from the head",
+        "look at the tail only",
+        "use a binary search"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "An empty linked list usually has a head of:",
+      "answer": "null",
+      "explanation": "An empty list usually has a null head.",
+      "options": [
+        "0",
+        "null",
+        "the value 1",
+        "the last node"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Inserting at the head of a linked list is usually:",
+      "answer": "cheap and does not require traversing the whole list",
+      "explanation": "Head insertion is cheap and does not require traversing the whole list.",
+      "options": [
+        "expensive because it shifts all elements",
+        "cheap and does not require traversing the whole list",
+        "impossible without a tail pointer",
+        "the same cost as deletion from the tail"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "To delete a middle node safely, you usually need access to:",
+      "answer": "the node before the one to delete",
+      "explanation": "You usually need the node before the one to delete so you can link around it.",
+      "options": [
+        "the node to delete only",
+        "the node before the one to delete",
+        "the tail only",
+        "the value only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A main advantage of a linked list over an array is that it can:",
+      "answer": "insert and delete without shifting other elements",
+      "explanation": "A linked list can insert and delete without shifting other elements.",
+      "options": [
+        "provide instant access by position",
+        "insert and delete without shifting other elements",
+        "store values in alphabetical order automatically",
+        "prevent null references"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A main disadvantage of a linked list compared with an array is that it:",
+      "answer": "does not support fast access by position",
+      "explanation": "A linked list does not support fast access by position.",
+      "options": [
+        "cannot store more than one value",
+        "does not support fast access by position",
+        "must always be sorted",
+        "has no head"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If you insert a node at the head and make its next point to the old head, the new node becomes:",
+      "answer": "the new head",
+      "explanation": "The new node becomes the new head.",
+      "options": [
+        "the tail",
+        "the second node",
+        "the new head",
+        "the last node"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "After deleting the head of a non-empty list, the new head is:",
+      "answer": "the old second node",
+      "explanation": "The new head is the old second node.",
+      "options": [
+        "null",
+        "the old second node",
+        "the old tail",
+        "unchanged"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which operation typically requires traversal to the end?",
+      "answer": "insert at the tail",
+      "explanation": "Insert at the tail usually requires reaching the end.",
+      "options": [
+        "insert at the head",
+        "delete the head",
+        "insert at the tail",
+        "peek at the head"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-14",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Reversing a singly linked list changes:",
+      "answer": "the direction of the next references",
+      "explanation": "Reversal changes the direction of the next references.",
+      "options": [
+        "the stored values",
+        "the direction of the next references",
+        "the head only",
+        "the length of the list"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-15",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "After reversing a list 10 -> 20 -> 30, the new head is the node that held:",
+      "answer": "30",
+      "explanation": "The old tail becomes the new head, so it held 30.",
+      "options": [
+        "10",
+        "20",
+        "30",
+        "null"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-16",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "When reversing a linked list, keeping a temporary reference to the next node is important because:",
+      "answer": "otherwise you may lose the rest of the list",
+      "explanation": "Without it you may lose the rest of the list while redirecting links.",
+      "options": [
+        "the list may become sorted",
+        "otherwise you may lose the rest of the list",
+        "the head never changes",
+        "null is not allowed"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-17",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "The length of a linked list is most often found by:",
+      "answer": "traversal and counting nodes",
+      "explanation": "Length is usually found by traversal and counting nodes.",
+      "options": [
+        "a single jump to the last node",
+        "traversal and counting nodes",
+        "looking at the first node only",
+        "checking the tail value only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-18",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If a linked list has only one node and you delete the head, the result is:",
+      "answer": "an empty list",
+      "explanation": "Deleting the only node leaves an empty list.",
+      "options": [
+        "a list with one node",
+        "an empty list",
+        "an error that cannot happen",
+        "a list with a null tail only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-19",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A singly linked list is a poor choice when the program needs:",
+      "answer": "fast repeated access by position",
+      "explanation": "It is a poor choice when fast repeated access by position is needed.",
+      "options": [
+        "frequent middle insertions",
+        "fast repeated access by position",
+        "easy deletion without shifting",
+        "a variable-sized sequence"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-20",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which statement is true about a singly linked list?",
+      "answer": "It stores nodes with links to the next node",
+      "explanation": "It stores nodes with links to the next node.",
+      "options": [
+        "It allows direct access to the fifth node by index",
+        "It stores nodes with links to the next node",
+        "It must always use consecutive memory",
+        "It cannot have a null head"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Why might a linked list be preferred to an array when many middle insertions occur?",
+      "answer": "Because inserting in the middle does not require shifting later elements",
+      "explanation": "Middle insertion in a linked list does not require shifting later elements.",
+      "options": [
+        "Because a linked list is always shorter",
+        "Because inserting in the middle does not require shifting later elements",
+        "Because a linked list supports instant random access",
+        "Because a linked list has no head"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-22",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "If you forget to update the previous node’s next reference during an insertion, the likely result is:",
+      "answer": "the rest of the list can become unreachable",
+      "explanation": "The rest of the list can become unreachable if the links are wrong.",
+      "options": [
+        "the list becomes sorted",
+        "the rest of the list can become unreachable",
+        "the head becomes null automatically",
+        "the list length increases by two"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "A linked list is often described as a sequential-access structure because:",
+      "answer": "it can only be read by traversing nodes in order",
+      "explanation": "It is often described as sequential-access because it is read by traversing nodes in order.",
+      "options": [
+        "it can only be read by traversing nodes in order",
+        "it allows any node to be read instantly",
+        "it must be stored in one memory block",
+        "it cannot contain null"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-24",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which traversal-related task would you most likely perform on a linked list?",
+      "answer": "Finding the middle node by walking from the head",
+      "explanation": "Finding the middle often involves walking from the head.",
+      "options": [
+        "Finding the middle node by walking from the head",
+        "Binary searching the values",
+        "Jumping directly to index 100",
+        "Accessing the last node in constant time without traversal"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-linked-list-q-25",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a linked list, what does the next reference of the last node usually mean?",
+      "answer": "It always points to null",
+      "explanation": "The last node usually has a null next reference.",
+      "options": [
+        "There is no next node",
+        "It points to the head",
+        "It always points to null",
+        "It is undefined in every case"
+      ],
+      "correctIndex": 2
+    }
+  ]
 }

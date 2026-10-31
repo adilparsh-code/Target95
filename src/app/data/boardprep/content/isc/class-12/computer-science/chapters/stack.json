@@ -1,25 +1,752 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-stack",
-  "slug": "stack",
   "title": "Stack",
   "kind": "computer-science",
-  "tagline": "LIFO operations, overflow and underflow, array implementation and postfix evaluation.",
-  "reviewStatus": "planned",
+  "slug": "stack",
+  "tagline": "LIFO stack operations, array implementation, underflow and overflow, and stack applications such as bracket matching and postfix evaluation.",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "A stack is one of the simplest and most useful data structures because it models reverse-order and nested processing directly. This chapter explains what a stack is, what its operations do, how it is commonly implemented with an array and a top pointer, and why it is a good fit for tasks like bracket matching and postfix evaluation. It also covers the boundary cases of underflow and overflow, and it contrasts a stack with a queue so that you can choose the right structure for a given job.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section C" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section C (Data Structures) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Stacks with LIFO operations, overflow and underflow, array implementation, postfix evaluation and bracket matching."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Define a stack and explain its LIFO behaviour.",
+    "Describe the push, pop and peek operations and what each one does.",
+    "Explain underflow and overflow as boundary cases for a stack.",
+    "Describe a simple array-based implementation of a stack and the role of the top pointer.",
+    "Explain why a stack is useful for nested processing and reversing order.",
+    "Explain how a stack is used in bracket matching and postfix evaluation.",
+    "Distinguish a stack from a queue in terms of access order.",
+    "Decide when a stack is a good or poor fit for a task."
+  ],
+  "learn": [
+    {
+      "id": "stack-definition",
+      "title": "What a stack is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A stack is a data structure that stores values and lets you remove only the value that was added last. It is often described as LIFO, which stands for last in, first out. The two main operations are push, which adds a value to the top, and pop, which removes and returns the top value. There is also an operation to read the top value without removing it, sometimes called peek. You can think of a stack like a pile of books: you put a new book on top, and you can only take the top book off next. That is the wrong mental model if you think the next grab must always be the newest item, but that is exactly what LIFO means in this context."
+        },
+        {
+          "type": "paragraph",
+          "text": "A stack is not the right structure for every job. If you need to remove the value that was added first, a stack is a poor fit because it removes the value that was added last. If you need to remove a value from the middle, a stack is also a poor fit because it only gives you access to the top. What a stack is good for is situations where the most recent addition is the next one to be processed. That situation appears whenever work is nested or deferred, such as matching brackets, managing method calls, or evaluating certain kinds of expressions."
+        }
+      ]
+    },
+    {
+      "id": "stack-operations",
+      "title": "The basic operations: push, pop, peek",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The three core operations are push, pop and peek. Push adds a new value to the top of the stack. Pop removes the top value and gives it back. Peek looks at the top value without changing the stack. If you define these operations, you should also handle the cases where the stack is empty. Popping from an empty stack is an error called underflow. If the stack has a fixed size and you try to push when it is already full, that is overflow. A well-defined stack implementation must say what happens in these cases rather than assume they never occur in an examination program."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Push adds a value to the top of the stack.",
+            "Pop removes and returns the top value.",
+            "Peek returns the top value without removing it.",
+            "Underflow is what happens when you pop from an empty stack.",
+            "Overflow is what happens when you push onto a full stack."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "push",
+              "meaning": "To add a value to the top of a stack."
+            },
+            {
+              "term": "pop",
+              "meaning": "To remove and return the top value of a stack."
+            },
+            {
+              "term": "peek",
+              "meaning": "To read the top value without removing it."
+            },
+            {
+              "term": "underflow",
+              "meaning": "Trying to pop from an empty stack."
+            },
+            {
+              "term": "overflow",
+              "meaning": "Trying to push onto a full stack."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stack-array-implementation",
+      "title": "Implementing a stack with an array",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "One common way to implement a stack is with an array and a separate variable that remembers where the top is. The array gives you a fixed amount of space, and the top variable tells you where the next push should go and where the next pop should read from. Each push moves the top variable to the next slot and stores the new value there. Each pop reads the value at the top and then moves the top variable back. This is simple and fast for the stack operations, because both push and pop only touch one end of the structure."
+        },
+        {
+          "type": "paragraph",
+          "text": "The trade-off is that an array-based stack has a fixed capacity. If you need more values than the array can hold, you get overflow. If you know in advance that the stack will never need more than a certain number of values, an array can be a perfectly reasonable choice. If you do not know the maximum size, you may prefer a different implementation. The syllabus does not require you to memorise a single implementation detail, but it does expect you to understand the idea that a stack is usually built so that it only touches one end of the structure."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Push 10, then 20, then 30.",
+              "note": "The top is now 30. The array slots above the old top are no longer part of the stack."
+            },
+            {
+              "text": "Pop once.",
+              "note": "You get 30 back, and the new top becomes 20."
+            },
+            {
+              "text": "Peek without popping.",
+              "note": "You read 20 without changing the stack."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stack-applications",
+      "title": "Why stacks are useful: reverse order, nesting, and matching",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Stacks are most useful when the job requires reverse order. If something arrives and then needs to be handled in the opposite order, a stack does that naturally. This is why stacks are associated with reversing sequences, with nested structure, and with situations where you need to remember what came most recently and come back to it later. A simple example is a pile of tasks where the latest task is the one you want to handle next. Another is matching opening and closing brackets: every opening bracket is remembered until its matching closing bracket appears."
+        },
+        {
+          "type": "paragraph",
+          "text": "Postfix notation is a notation where operators come after their operands. Evaluating a postfix expression is a classic stack application. You read the expression left to right, push values onto the stack, and when you reach an operator you pop the needed operands, combine them, and push the result back. The stack is exactly the structure that keeps the intermediate results in the right order. This is a frequent examination topic because it shows why a stack is not just an arbitrary data structure but the right one for a specific computational pattern."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A stack reverses order: the most recent item is handled first.",
+            "Stacks match nested structures such as brackets.",
+            "Postfix evaluation is a classic stack application.",
+            "A stack is awkward when you need first-in-first-out order.",
+            "A stack is awkward when you need to remove from the middle."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Bracket matching with a stack.",
+              "note": "Push each opening bracket. When you see a closing bracket, pop and check that it matches. If the stack is empty at the end and no mismatch occurred, the brackets are balanced."
+            },
+            {
+              "text": "Postfix A B + C *.",
+              "note": "Push A, push B, pop both for +, push the result, push C, pop both for *, push the final result."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stack-underflow-overflow",
+      "title": "Underflow, overflow, and the empty-stack case",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Underflow and overflow are not just implementation annoyances; they are part of understanding what a stack is. Underflow means you tried to pop from a stack that has nothing on it. Overflow means you tried to push onto a stack that cannot hold any more values in the implementation being used. In a fixed-size array implementation, overflow happens when the stack is full. In an implementation with dynamic space, overflow is less of a practical problem, but the idea still matters because you need to decide how the stack behaves at its limits."
+        },
+        {
+          "type": "paragraph",
+          "text": "Examination questions often include these boundary cases on purpose. A stack program that works for a few values can fail silently or crash when it reaches the empty or full case unless the boundary is handled. So when you write or trace a stack program, always ask what happens when the stack is empty before the first pop and what happens when it is full before the next push. That habit is part of what examiners are usually looking for when they ask about stack implementations."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "underflow",
+              "meaning": "Attempting to pop from an empty stack."
+            },
+            {
+              "term": "overflow",
+              "meaning": "Attempting to push onto a full stack."
+            },
+            {
+              "term": "empty stack",
+              "meaning": "A stack with no values on it."
+            },
+            {
+              "term": "full stack",
+              "meaning": "A stack that has reached its capacity in a fixed-size implementation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stack-vs-queue",
+      "title": "Stack versus queue: the access-order difference",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A stack and a queue are not the same thing, but they are easy to confuse because both store a sequence of values and both restrict how you access them. The difference is the order. A stack removes the most recently added value first. A queue removes the least recently added value first. That single difference is what determines which one is appropriate. If you are modelling a pile of plates, the most recent plate is the next one to be taken, so a stack is a good match. If you are modelling a line of people waiting for service, the first person to arrive is the first to be served, so a queue is a much better match."
+        },
+        {
+          "type": "paragraph",
+          "text": "This difference also makes each structure awkward for the other’s job. If you need to remove the earliest-added value, a stack is the wrong tool because it keeps giving you the latest value. If you need to remove the latest-added value, a queue is the wrong tool because it keeps giving you the oldest value. Knowing why a structure fits or does not fit a task is often more important than knowing the definition of the structure itself."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A stack is LIFO: last in, first out.",
+            "A queue is FIFO: first in, first out.",
+            "A stack suits nested or reverse-order processing.",
+            "A queue suits waiting in arrival order.",
+            "Picking the wrong structure is a common source of awkward code."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "LIFO",
+              "meaning": "Last in, first out."
+            },
+            {
+              "term": "FIFO",
+              "meaning": "First in, first out."
+            },
+            {
+              "term": "access order",
+              "meaning": "The order in which a data structure allows removal or access to its values."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stack-in-syllabus-context",
+      "title": "Stack in the context of the 2027 Computer Science syllabus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In the 2027 ISC Computer Science syllabus, the stack is part of the Data Structures section. The syllabus expects you to understand the basic idea of a stack, its operations, and the situations it suits, especially bracket matching and postfix evaluation. It also expects you to distinguish a stack from a queue and to understand underflow and overflow as boundary cases. The emphasis is on understanding why the structure works the way it does, not on memorising a single code template for all possible uses."
+        },
+        {
+          "type": "paragraph",
+          "text": "That means you should be able to describe what push, pop and peek do, explain what underflow and overflow mean, trace a short stack computation, and say why a stack is a good or bad fit for a given problem. You do not need to guess at advanced stack variations that are not part of the syllabus. If a question goes beyond the syllabus expectations, the safest move is to work from the core ideas you do know rather than invent extra rules."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Know the stack operations and their effects.",
+            "Know what underflow and overflow mean.",
+            "Be able to trace a small stack computation.",
+            "Know the main stack applications mentioned in the syllabus.",
+            "Be able to compare a stack with a queue."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "stack",
+              "meaning": "A LIFO data structure with push, pop and peek."
+            },
+            {
+              "term": "last in, first out",
+              "meaning": "The order in which the most recent value is the first one removed."
+            },
+            {
+              "term": "postfix evaluation",
+              "meaning": "Using a stack to evaluate an expression written in postfix notation."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A stack is LIFO: last in, first out.",
+    "Push adds to the top; pop removes from the top; peek reads the top.",
+    "Underflow happens on pop from an empty stack; overflow happens on push to a full stack.",
+    "A simple array implementation keeps a top pointer at one end.",
+    "Stacks are natural for reverse order and nested structure.",
+    "Postfix evaluation is a classic stack application.",
+    "Bracket matching is a classic stack application.",
+    "A stack is a poor fit when you need first-in-first-out order.",
+    "A stack is a poor fit when you need removal from the middle.",
+    "The syllabus expects understanding of operations and applications, not just definitions."
+  ],
+  "examFocus": [
+    "Define a stack and state its LIFO property.",
+    "Describe push, pop and peek.",
+    "Explain underflow and overflow.",
+    "Trace a short stack computation.",
+    "Explain how a stack helps in bracket matching.",
+    "Explain how a stack helps in postfix evaluation.",
+    "Compare a stack with a queue.",
+    "State when a stack is a good or bad choice."
+  ],
+  "vocabulary": [
+    {
+      "word": "stack",
+      "meaning": "A LIFO data structure that supports push, pop and peek."
+    },
+    {
+      "word": "LIFO",
+      "meaning": "Last in, first out."
+    },
+    {
+      "word": "push",
+      "meaning": "To add a value to the top of a stack."
+    },
+    {
+      "word": "pop",
+      "meaning": "To remove and return the top value of a stack."
+    },
+    {
+      "word": "peek",
+      "meaning": "To read the top value without removing it."
+    },
+    {
+      "word": "underflow",
+      "meaning": "Trying to pop from an empty stack."
+    },
+    {
+      "word": "overflow",
+      "meaning": "Trying to push onto a full stack."
+    },
+    {
+      "word": "postfix evaluation",
+      "meaning": "Using a stack to evaluate a postfix expression."
+    },
+    {
+      "word": "bracket matching",
+      "meaning": "Checking that opening and closing brackets are correctly paired, often using a stack."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-stack-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A stack is a data structure that permits removal only from:",
+      "answer": "one end, called the top",
+      "explanation": "A stack permits removal only from one end, the top.",
+      "options": [
+        "the bottom",
+        "one end, called the top",
+        "both ends",
+        "any position by index"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "LIFO stands for:",
+      "answer": "Last in, first out",
+      "explanation": "LIFO means last in, first out.",
+      "options": [
+        "Last in, first out",
+        "Least in, first out",
+        "Linear in, first out",
+        "Logical in, final out"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-stack-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which operation adds a value to the top of a stack?",
+      "answer": "push",
+      "explanation": "Push adds a value to the top of a stack.",
+      "options": [
+        "pop",
+        "peek",
+        "push",
+        "dequeue"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-stack-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which operation removes and returns the top value of a stack?",
+      "answer": "pop",
+      "explanation": "Pop removes and returns the top value.",
+      "options": [
+        "push",
+        "pop",
+        "enqueue",
+        "peek"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Which operation reads the top value without removing it?",
+      "answer": "peek",
+      "explanation": "Peek reads the top value without removing it.",
+      "options": [
+        "pop",
+        "push",
+        "peek",
+        "dequeue"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-stack-q-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Trying to pop from an empty stack is called:",
+      "answer": "underflow",
+      "explanation": "Popping from an empty stack is underflow.",
+      "options": [
+        "overflow",
+        "underflow",
+        "collision",
+        "rebalancing"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Trying to push onto a full stack is called:",
+      "answer": "overflow",
+      "explanation": "Pushing onto a full stack is overflow.",
+      "options": [
+        "underflow",
+        "overflow",
+        "mismatch",
+        "collision"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which notation is most naturally evaluated with a stack?",
+      "answer": "postfix",
+      "explanation": "Postfix evaluation is a classic stack application.",
+      "options": [
+        "infix with lots of parentheses",
+        "postfix",
+        "natural-language sentences",
+        "sorted lists only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In postfix evaluation, when you see an operator you:",
+      "answer": "pop the required operands, combine them and push the result",
+      "explanation": "In postfix evaluation, an operator causes a pop of the needed operands, a combination, and a push of the result.",
+      "options": [
+        "push it onto the stack",
+        "pop the required operands, combine them and push the result",
+        "ignore it",
+        "delete the stack"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A stack is a poor choice when the task requires:",
+      "answer": "removing items in arrival order",
+      "explanation": "A stack is poor when you need first-in-first-out arrival order.",
+      "options": [
+        "processing the most recent item first",
+        "removing items in arrival order",
+        "matching nested brackets",
+        "reversing a sequence by repeated removal"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "In a fixed-size array implementation of a stack, overflow happens when:",
+      "answer": "the stack is full",
+      "explanation": "In a fixed-size array stack, overflow happens when it is full.",
+      "options": [
+        "the stack is empty",
+        "the stack is full",
+        "the top is zero",
+        "the stack is in LIFO order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Postfix A B + C * is equivalent to which infix expression?",
+      "answer": "(A + B) * C",
+      "explanation": "(A B +) gives A + B, then (result C *) gives (A + B) * C.",
+      "options": [
+        "A + B + C",
+        "(A + B) * C",
+        "A + (B * C)",
+        "A * (B + C)"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which of the following is a typical stack application?",
+      "answer": "matching brackets in an expression",
+      "explanation": "Bracket matching is a typical stack application.",
+      "options": [
+        "a waiting line served in arrival order",
+        "matching brackets in an expression",
+        "random access by index",
+        "finding the median of an unsorted list"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If you push 1, then 2, then 3, and then pop twice, the values popped are:",
+      "answer": "3 then 2",
+      "explanation": "The first pop gives 3, the second gives 2.",
+      "options": [
+        "1 then 2",
+        "3 then 2",
+        "2 then 3",
+        "1 then 3"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-15",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which best describes the access pattern of a stack?",
+      "answer": "Only the top element can be added or removed",
+      "explanation": "A stack only adds and removes at the top.",
+      "options": [
+        "Any element can be accessed directly by index",
+        "Only the top element can be added or removed",
+        "Only the bottom element can be added or removed",
+        "Elements are always sorted"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-16",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A stack is most suitable when the computation requires:",
+      "answer": "handling the most recent item next",
+      "explanation": "A stack is most suitable when the most recent item must be handled next.",
+      "options": [
+        "first-in-first-out sequencing",
+        "handling the most recent item next",
+        "direct access to the middle element",
+        "keeping values in alphabetical order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-17",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If a stack is used to check whether brackets are balanced, the stack is used to remember:",
+      "answer": "unmatched opening brackets until their closing brackets appear",
+      "explanation": "The stack remembers unmatched opening brackets until their closing brackets appear.",
+      "options": [
+        "the final answer only",
+        "unmatched opening brackets until their closing brackets appear",
+        "the number of operators",
+        "the values of all variables"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-18",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which statement about a stack is true?",
+      "answer": "You can only remove the element that was added last among those currently stored",
+      "explanation": "A stack removes the most recently added element among those currently stored.",
+      "options": [
+        "You can remove any element by position",
+        "You can only remove the element that was added last among those currently stored",
+        "It must always be implemented with a linked list",
+        "It cannot be used to reverse order"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-19",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "When would a stack be awkward?",
+      "answer": "When you need to process items in the order they arrived",
+      "explanation": "A stack is awkward when you need arrival-order processing.",
+      "options": [
+        "When you need to reverse a sequence and handle items from the most recent to the oldest",
+        "When you need to process items in the order they arrived",
+        "When you need to match nested brackets",
+        "When you need to evaluate postfix expressions"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-20",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A stack implemented with a fixed array is best suited for situations where:",
+      "answer": "the maximum size is small and known",
+      "explanation": "A fixed array stack suits a situation where the maximum size is small and known.",
+      "options": [
+        "the maximum number of values is unknown and can grow arbitrarily",
+        "the maximum size is small and known",
+        "random access is the main requirement",
+        "values must be sorted automatically"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "In a stack, which element is removed by pop?",
+      "answer": "the element most recently pushed among those present",
+      "explanation": "Pop removes the element most recently pushed among those currently present.",
+      "options": [
+        "the bottom element",
+        "the element most recently pushed among those present",
+        "the element that was pushed first overall",
+        "the middle element"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-22",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Why is postfix evaluation a good fit for a stack?",
+      "answer": "Because the most recent operand or intermediate result is the one needed next",
+      "explanation": "Postfix evaluation needs the most recent value next, which is exactly what a stack provides.",
+      "options": [
+        "Because postfix expressions are always sorted",
+        "Because the most recent operand or intermediate result is the one needed next",
+        "Because postfix has no operators",
+        "Because postfix requires random access"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "If you need to remove the earliest-added value rather than the latest-added value, the correct structure is likely:",
+      "answer": "a queue",
+      "explanation": "The correct structure for earliest-first removal is a queue.",
+      "options": [
+        "a stack",
+        "a queue",
+        "a stack with a different name",
+        "a postfix expression"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-stack-q-24",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which of the following is NOT a stack operation?",
+      "answer": "enqueue",
+      "explanation": "Enqueue is a queue operation, not a stack operation.",
+      "options": [
+        "push",
+        "pop",
+        "peek",
+        "enqueue"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": "isc-12-cs-stack-q-25",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A stack is empty when:",
+      "answer": "there are no values on it",
+      "explanation": "A stack is empty when there are no values on it.",
+      "options": [
+        "none of its operations have ever been used",
+        "there are no values on it",
+        "it is full",
+        "the top variable is large"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

@@ -9,7 +9,7 @@ import { getBoards, getSubjects, getPublishedChapters, getSubject, getChapter, g
 //
 // The expected totals below are the verified current totals for this
 // repository, not a stale snapshot from before draft chapters were added.
-const expected = { boards: 3, classes: 6, subjects: 75, chapters: 136, questions: 1859 };
+const expected = { boards: 3, classes: 6, subjects: 75, chapters: 136, questions: 2009 };
 const counts = getBoardPrepCounts();
 const errors = [];
 for (const [key, value] of Object.entries(expected))

@@ -1,25 +1,856 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-complexity",
-  "slug": "complexity-big-o",
   "title": "Complexity and Big-O Notation",
   "kind": "computer-science",
-  "tagline": "Input size, dominant term, best/average/worst case and analysis of searching and sorting.",
-  "reviewStatus": "planned",
+  "slug": "complexity-big-o",
+  "tagline": "Input size, dominant term, best/average/worst case, and the Big-O analysis of searching and sorting algorithms.",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section C. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "Complexity and Big-O notation are about how the work of an algorithm grows as the input gets larger. This chapter explains input size and the dominant term, introduces Big-O notation in simple terms, and discusses best, average and worst case. It then applies these ideas to searching and sorting, so you can see why some algorithms scale much better than others.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section C" },
-      { "label": "Exam year", "value": "2027" },
-      { "label": "Language", "value": "Java (Java 5.0 or later)" }
+      {
+        "label": "Syllabus section",
+        "value": "Section C (Complexity and Big-O) of the 2027 ISC Class XII Computer Science syllabus"
+      },
+      {
+        "label": "Exam year",
+        "value": "2027"
+      },
+      {
+        "label": "Paper",
+        "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)"
+      },
+      {
+        "label": "What the syllabus asks for",
+        "value": "Input size, dominant term, best/average/worst case, and analysis of searching and sorting algorithms using Big-O notation."
+      }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Explain what input size and dominant term mean in complexity analysis.",
+    "Describe Big-O notation in simple terms and name common classes such as O of 1, O of n and O of n squared.",
+    "Distinguish best, average and worst case.",
+    "Explain why linear search is usually O of n in the worst case.",
+    "Explain why binary search is usually much faster on sorted data.",
+    "Discuss why simple sorting methods can be O of n squared.",
+    "Compare algorithms using Big-O for large inputs.",
+    "Reason about complexity from growth rather than memorising formulas."
+  ],
+  "learn": [
+    {
+      "id": "complexity-why",
+      "title": "Why we study complexity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Complexity is the study of how the running time or the amount of work of an algorithm grows as the input gets larger. The main reason to study it is that a program that is fast enough for a small input can become far too slow for a large input if the algorithm is poorly chosen. Two programs that produce the same result are not equally good if one does ten steps and the other does ten million steps for the same size of input."
+        },
+        {
+          "type": "paragraph",
+          "text": "Complexity does not usually depend on the exact speed of a particular computer. Instead, it is about the pattern of growth. A good complexity analysis tells you how the work changes when the input size doubles, triples or grows much larger. That is why complexity matters even before you measure actual running time on a real machine. It helps you choose algorithms that will still be acceptable when the input grows."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Complexity describes how work grows with input size.",
+            "It is about growth patterns, not exact seconds on one machine.",
+            "A better algorithm can make a huge difference for large inputs.",
+            "Complexity helps you compare algorithms, not just programs."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "complexity",
+              "meaning": "A measure of how the work of an algorithm grows as the input size grows."
+            },
+            {
+              "term": "input size",
+              "meaning": "A measure of the size of the problem, such as the number of items in a list."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "input-size-dominant-term",
+      "title": "Input size and the dominant term",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "To analyse complexity, you first decide what counts as the input size. For a list, it is often the number of elements. For an n by n table, it might be n squared. Once you know the input size, you look at how many basic steps the algorithm takes. If the total number of steps can be written as an expression, the dominant term is the part that grows fastest as the input size increases. Smaller terms and constant factors matter less for large inputs."
+        },
+        {
+          "type": "paragraph",
+          "text": "That is why complexity analysis usually drops constant factors. An algorithm that takes 2n steps and one that takes 100n steps both grow in the same basic pattern, which is proportional to n. A constant factor can matter in practice, but for growth comparison the shape of the expression matters more than the exact multiplier. This is the idea behind Big-O notation: it describes the dominant part of the growth."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Linear work.",
+              "note": "If an algorithm looks at each element once, its work often grows roughly like n."
+            },
+            {
+              "text": "Quadratic work.",
+              "note": "If an algorithm compares every pair of elements, its work often grows roughly like n squared."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First identify what counts as the input size.",
+            "Then count the basic steps as a function of that size.",
+            "The dominant term is the part that grows fastest.",
+            "Constant factors are usually ignored for growth comparison.",
+            "Big-O focuses on the dominant term."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "input size",
+              "meaning": "A measure of the size of the problem, often written as n."
+            },
+            {
+              "term": "dominant term",
+              "meaning": "The part of an expression that grows fastest as n increases."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "big-o-idea",
+      "title": "Big-O notation in simple terms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Big-O notation is a way of describing the upper growth behaviour of an algorithm in a simple form. When we say an algorithm is O of n, we mean its work grows at most like a constant times n for large inputs, ignoring smaller terms and constants. Big-O is not usually a statement about a single exact count of steps. It is a statement about the broad pattern of growth."
+        },
+        {
+          "type": "paragraph",
+          "text": "The common Big-O classes you are likely to meet are O of 1, O of n, O of n squared, and sometimes O of log n. O of 1 means constant time: the work does not depend much on the input size. O of n means the work grows roughly in proportion to the input size. O of n squared means the work grows like the square of the input size, which becomes expensive quickly. The exact formal definition is not the main point here; the patterns are."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Big-O describes a broad growth pattern.",
+            "O of 1 is constant time.",
+            "O of n grows roughly with the input size.",
+            "O of n squared grows like the square of the input size.",
+            "O of log n grows slowly as the input grows."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Big-O notation",
+              "meaning": "A notation that describes the upper growth pattern of an algorithm in simple terms."
+            },
+            {
+              "term": "O of 1",
+              "meaning": "Constant time complexity."
+            },
+            {
+              "term": "O of n",
+              "meaning": "Linear time complexity."
+            },
+            {
+              "term": "O of n squared",
+              "meaning": "Quadratic time complexity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "best-average-worst",
+      "title": "Best, average and worst case",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An algorithm can behave differently depending on the particular input it receives. The best case is the input that makes it do the least work. The worst case is the input that makes it do the most work. The average case is what happens on typical inputs. In many situations, the worst case matters most, because you want to know the maximum amount of work an algorithm might do."
+        },
+        {
+          "type": "paragraph",
+          "text": "For example, a simple search through an unsorted list may find the target immediately if it is at the very beginning, but it may have to check every element if the target is at the end or missing. That means the same algorithm can have very different work depending on the input. When people talk about complexity, they often mean the worst-case growth, unless they say otherwise."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Best case is the least work for a given algorithm.",
+            "Worst case is the most work for a given algorithm.",
+            "Average case is what happens on typical inputs.",
+            "Worst-case complexity is often the most important measure.",
+            "The same algorithm can have different cases."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "best case",
+              "meaning": "The input that makes an algorithm do the least work."
+            },
+            {
+              "term": "worst case",
+              "meaning": "The input that makes an algorithm do the most work."
+            },
+            {
+              "term": "average case",
+              "meaning": "The expected behaviour over typical inputs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "searching-complexity",
+      "title": "Complexity of searching",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Searching is one of the clearest examples of complexity. If you search a list by looking at each element in turn, that is called linear search. In the worst case, linear search may have to inspect every element, so its worst-case work is often described as O of n. That means if the list doubles in size, the worst-case work roughly doubles too."
+        },
+        {
+          "type": "paragraph",
+          "text": "If the data is arranged as a binary search tree, or if it is sorted and you use a binary search, the search can be much faster. Instead of checking every element, you can discard half of the remaining search space at each step. That gives a much slower-growing complexity, often described as O of log n in the case of binary search on sorted data. The difference between O of n and O of log n is large for big inputs."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Linear search may inspect every element in the worst case.",
+            "Linear search is often O of n in the worst case.",
+            "Binary search on sorted data is much faster.",
+            "Binary search is often O of log n.",
+            "Organising data can reduce search complexity."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "linear search",
+              "meaning": "Searching by checking elements one by one until the target is found or the list ends."
+            },
+            {
+              "term": "binary search",
+              "meaning": "A search that repeatedly halves the search space on sorted data."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sorting-complexity",
+      "title": "Complexity of sorting",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sorting is another classic area for complexity analysis. Different sorting methods have different complexities. Some simple methods compare and move elements in a way that leads to roughly n squared work in the worst case. That can be acceptable for small lists, but it becomes slow for larger ones. More efficient sorting methods grow more slowly as the input grows, which is why they are preferred for large data sets."
+        },
+        {
+          "type": "paragraph",
+          "text": "You do not need to memorise every sorting algorithm in full detail for this syllabus; you need to understand that sorting methods differ in complexity and that more efficient ones grow more slowly. Bubble sort, insertion sort and selection sort are common examples of simpler n squared methods, while more advanced methods are more efficient for large inputs. The syllabus point is that complexity is what lets you compare them."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sorting methods differ in complexity.",
+            "Simple sorts are often O of n squared in the worst case.",
+            "More efficient sorts grow more slowly.",
+            "Complexity helps explain why one sort is preferred for large data.",
+            "The same task can have several possible algorithms."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "sorting",
+              "meaning": "Arranging values into a required order."
+            },
+            {
+              "term": "O of n squared",
+              "meaning": "Quadratic time complexity, common in simple sorting methods."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comparing-complexities",
+      "title": "Comparing algorithms using Big-O",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Big-O is useful because it lets you compare algorithms at a high level. If one algorithm is O of 1 and another is O of n, the first is usually better for large inputs, even if the second is faster for tiny inputs due to a small constant. If one is O of n and another is O of n squared, the first will usually win much more dramatically as the input grows. Complexity lets you see these differences before you run the code on huge data."
+        },
+        {
+          "type": "paragraph",
+          "text": "This is why complexity is often taught alongside searching and sorting. Once you know the growth pattern of each method, you can choose a better one for large inputs. You still have to think about the trade-offs in real life, such as code simplicity and the size of the data you actually have, but complexity gives you the vocabulary to make that choice wisely."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Big-O helps compare algorithms by growth.",
+            "A smaller Big-O class usually wins for large inputs.",
+            "Small inputs can still favour a simpler algorithm.",
+            "Complexity supports intelligent choice of method.",
+            "Trade-offs still matter in practice."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "algorithm",
+              "meaning": "A step-by-step method for solving a problem."
+            },
+            {
+              "term": "trade-off",
+              "meaning": "A situation where choosing one benefit means accepting another cost."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complexity-in-syllabus-context",
+      "title": "Complexity in the context of the 2027 Computer Science syllabus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In the 2027 ISC Computer Science syllabus, complexity and Big-O are part of the Data Structures and algorithm analysis ideas in Section C. You are expected to understand input size, dominant term, best, average and worst case, and the idea of analysing searching and sorting algorithms using Big-O notation. The emphasis is on the idea, not on formal proofs. You should be able to say what O of 1, O of n and O of n squared mean in words, and why some algorithms grow faster than others."
+        },
+        {
+          "type": "paragraph",
+          "text": "You are also expected to connect complexity to searching and sorting, so you should be able to explain why linear search is usually O of n and why binary search is usually much better on sorted data. If a question asks about a method you have not met before, the safest approach is to reason from the idea of how much work grows with input size, rather than guessing at a formula you do not know."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Know what input size and dominant term mean.",
+            "Know best, average and worst case.",
+            "Know what O of 1, O of n and O of n squared mean in words.",
+            "Be able to talk about searching and sorting complexity.",
+            "Reason from growth rather than guessing at formulas."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "O of 1",
+              "meaning": "Constant time complexity."
+            },
+            {
+              "term": "O of n",
+              "meaning": "Linear time complexity."
+            },
+            {
+              "term": "O of n squared",
+              "meaning": "Quadratic time complexity."
+            },
+            {
+              "term": "Big-O notation",
+              "meaning": "A notation for describing growth in complexity."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Complexity describes growth in work as input size grows.",
+    "The dominant term is the part that grows fastest.",
+    "Big-O describes a broad growth pattern, ignoring constant factors.",
+    "O of 1 is constant time; O of n is linear; O of n squared is quadratic.",
+    "Worst-case complexity is often the most important measure.",
+    "Linear search is usually O of n in the worst case.",
+    "Binary search on sorted data is often O of log n.",
+    "Simple sorts are often O of n squared.",
+    "Big-O helps compare algorithms for large inputs.",
+    "Smaller Big-O classes usually win as input size grows."
+  ],
+  "examFocus": [
+    "Define input size and dominant term.",
+    "Describe Big-O notation in simple terms.",
+    "Distinguish best, average and worst case.",
+    "State the complexity of linear search.",
+    "State the complexity of binary search on sorted data.",
+    "Explain why O of n squared becomes expensive for large inputs.",
+    "Compare O of n and O of n squared for large inputs.",
+    "Explain why the same algorithm can have different cases."
+  ],
+  "vocabulary": [
+    {
+      "word": "complexity",
+      "meaning": "A measure of how the work of an algorithm grows as the input size grows."
+    },
+    {
+      "word": "input size",
+      "meaning": "A measure of the size of the problem, often written as n."
+    },
+    {
+      "word": "dominant term",
+      "meaning": "The part of an expression that grows fastest as n increases."
+    },
+    {
+      "word": "Big-O notation",
+      "meaning": "A notation for describing the growth of an algorithm in simple terms."
+    },
+    {
+      "word": "O of 1",
+      "meaning": "Constant time complexity."
+    },
+    {
+      "word": "O of n",
+      "meaning": "Linear time complexity."
+    },
+    {
+      "word": "O of n squared",
+      "meaning": "Quadratic time complexity."
+    },
+    {
+      "word": "best case",
+      "meaning": "The input that makes an algorithm do the least work."
+    },
+    {
+      "word": "worst case",
+      "meaning": "The input that makes an algorithm do the most work."
+    },
+    {
+      "word": "average case",
+      "meaning": "The expected behaviour over typical inputs."
+    },
+    {
+      "word": "linear search",
+      "meaning": "Searching by checking elements one by one until the target is found or the list ends."
+    },
+    {
+      "word": "binary search",
+      "meaning": "A search that repeatedly halves the search space on sorted data."
+    },
+    {
+      "word": "sorting",
+      "meaning": "Arranging values into a required order."
+    },
+    {
+      "word": "algorithm",
+      "meaning": "A step-by-step method for solving a problem."
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-complexity-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Complexity is mainly about:",
+      "answer": "how the work of an algorithm grows as input grows",
+      "explanation": "Complexity is mainly about how work grows with input size.",
+      "options": [
+        "the exact seconds on one machine",
+        "how the work of an algorithm grows as input grows",
+        "the colour of the screen",
+        "the number of programmers"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "If an algorithm looks at each element of a list once, its worst-case work is often described as:",
+      "answer": "O of n",
+      "explanation": "Looking at each element once is usually linear time, O of n.",
+      "options": [
+        "O of 1",
+        "O of n",
+        "O of n squared",
+        "O of log n"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "Big-O notation is used to describe:",
+      "answer": "the broad growth pattern of an algorithm",
+      "explanation": "Big-O describes the broad growth pattern of an algorithm.",
+      "options": [
+        "the exact number of bytes used",
+        "the broad growth pattern of an algorithm",
+        "the name of the programmer",
+        "the colour of the output"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "O of 1 means:",
+      "answer": "constant time",
+      "explanation": "O of 1 means constant time.",
+      "options": [
+        "constant time",
+        "linear time",
+        "quadratic time",
+        "exponential time"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-complexity-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "O of n squared grows:",
+      "answer": "roughly like the square of the input size",
+      "explanation": "O of n squared grows roughly like the square of the input size.",
+      "options": [
+        "slower than O of n",
+        "roughly like the square of the input size",
+        "faster than any algorithm",
+        "at the same rate as O of 1"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The input size for a list is most often:",
+      "answer": "the number of elements",
+      "explanation": "For a list the input size is most often the number of elements.",
+      "options": [
+        "the number of elements",
+        "the sum of the values",
+        "the number of colours",
+        "the number of programmers"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "id": "isc-12-cs-complexity-q-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The dominant term in a complexity expression is:",
+      "answer": "the part that grows fastest",
+      "explanation": "The dominant term is the part that grows fastest.",
+      "options": [
+        "the smallest term",
+        "the part that grows fastest",
+        "the constant factor only",
+        "the last term added"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-08",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A worst-case analysis considers:",
+      "answer": "the most work the algorithm may do",
+      "explanation": "Worst case considers the most work the algorithm may do.",
+      "options": [
+        "the easiest input",
+        "the most work the algorithm may do",
+        "the average only",
+        "the programmer’s mood"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Linear search on an unsorted list is usually:",
+      "answer": "O of n in the worst case",
+      "explanation": "Linear search is usually O of n in the worst case.",
+      "options": [
+        "O of 1 in the worst case",
+        "O of n in the worst case",
+        "O of n squared in the worst case",
+        "O of log n in the worst case"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Binary search on sorted data is usually much faster than linear search because:",
+      "answer": "it can discard half the remaining search space at each step",
+      "explanation": "Binary search can discard half the search space each step.",
+      "options": [
+        "it checks every element",
+        "it can discard half the remaining search space at each step",
+        "it uses more memory only",
+        "it ignores the input size"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-11",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Binary search on sorted data is often described as:",
+      "answer": "O of log n",
+      "explanation": "Binary search on sorted data is often described as O of log n.",
+      "options": [
+        "O of n",
+        "O of n squared",
+        "O of log n",
+        "O of 1"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-complexity-q-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "If the input size doubles and the work roughly doubles, the complexity is most likely:",
+      "answer": "O of n",
+      "explanation": "If work roughly doubles when input size doubles, it is likely O of n.",
+      "options": [
+        "O of 1",
+        "O of n",
+        "O of n squared",
+        "O of log n"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Best case for a linear search is when:",
+      "answer": "the target is at the beginning",
+      "explanation": "Best case is when the target is found at the beginning.",
+      "options": [
+        "the target is at the end",
+        "the target is at the beginning",
+        "the list is empty only",
+        "the list is sorted only"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Worst case for a linear search is when:",
+      "answer": "the target is at the end or missing",
+      "explanation": "Worst case is when the target is at the end or missing.",
+      "options": [
+        "the target is at the beginning",
+        "the target is at the end or missing",
+        "the list has one element",
+        "the target is the second element"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-15",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Simple sorting methods such as bubble sort are often:",
+      "answer": "O of n squared",
+      "explanation": "Simple sorts are often O of n squared.",
+      "options": [
+        "O of 1",
+        "O of n",
+        "O of n squared",
+        "O of log n"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-complexity-q-16",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Why is O of n squared a problem for large inputs?",
+      "answer": "Because the work grows very quickly as input grows",
+      "explanation": "O of n squared grows very quickly as input grows.",
+      "options": [
+        "Because it grows very slowly",
+        "Because the work grows very quickly as input grows",
+        "Because it is always constant",
+        "Because it has no input size"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-17",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A constant factor such as 2n versus 100n matters:",
+      "answer": "less for Big-O growth comparison than the shape",
+      "explanation": "Constant factors matter less for Big-O growth comparison than the shape.",
+      "options": [
+        "most for large n in Big-O comparison",
+        "less for Big-O growth comparison than the shape",
+        "only when n is zero",
+        "never in any analysis"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-18",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If an algorithm is O of log n, then doubling the input size usually:",
+      "answer": "adds a small amount of extra work",
+      "explanation": "For O of log n, doubling the input usually adds only a small amount of extra work.",
+      "options": [
+        "doubles the work",
+        "more than doubles the work",
+        "adds a small amount of extra work",
+        "makes the work vanish"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-complexity-q-19",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "Which is the most efficient growth pattern among these for large inputs?",
+      "answer": "O of log n is better than O of n squared but O of 1 is the most efficient of these",
+      "explanation": "O of 1 is the most efficient of these for large inputs.",
+      "options": [
+        "O of n squared",
+        "O of n",
+        "O of 1",
+        "O of log n is better than O of n squared but O of 1 is the most efficient of these"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": "isc-12-cs-complexity-q-20",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "If the longest path from root to leaf has 3 edges, the tree height is most often described as:",
+      "answer": "3 edges",
+      "explanation": "Height is usually described by the length of the longest path from the root to a leaf.",
+      "options": [
+        "1 edge",
+        "2 edges",
+        "3 edges",
+        "4 edges"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "id": "isc-12-cs-complexity-q-21",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A linear search on a list of 1000 items may need to inspect:",
+      "answer": "up to 1000 items in the worst case",
+      "explanation": "In the worst case linear search may inspect up to all 1000 items.",
+      "options": [
+        "only 1 item always",
+        "up to 1000 items in the worst case",
+        "only 2 items",
+        "no items"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-22",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Why is binary search faster than linear search on sorted data?",
+      "answer": "Because it halves the remaining search space at each step",
+      "explanation": "Binary search halves the remaining search space at each step.",
+      "options": [
+        "Because it checks all items one by one",
+        "Because it halves the remaining search space at each step",
+        "Because it ignores the middle element",
+        "Because it sorts the data automatically"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-23",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "If algorithm A is O of n and algorithm B is O of n squared, then for very large inputs:",
+      "answer": "A is usually faster",
+      "explanation": "For very large inputs the O of n algorithm is usually faster.",
+      "options": [
+        "B is usually faster",
+        "A is usually faster",
+        "they are always exactly equal",
+        "neither can run"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-24",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which statement about worst-case complexity is true?",
+      "answer": "It gives an upper bound on how bad the algorithm can be",
+      "explanation": "Worst-case complexity gives an upper bound on how bad the algorithm can be.",
+      "options": [
+        "It can be ignored because it never happens",
+        "It gives an upper bound on how bad the algorithm can be",
+        "It is always the same as best case",
+        "It only matters for tiny inputs"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "id": "isc-12-cs-complexity-q-25",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Big-O analysis is useful mainly because it:",
+      "answer": "lets you compare how algorithms scale",
+      "explanation": "Big-O lets you compare how algorithms scale.",
+      "options": [
+        "tells you the exact colour of the output",
+        "lets you compare how algorithms scale",
+        "replaces all practical testing",
+        "guarantees the fastest code on every input"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

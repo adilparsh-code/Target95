@@ -18,13 +18,10 @@
 
 - Repository root: `/workspace/chats/d864f920a510eeefc74bb186`
 - Branch: `freebuff/d864f920a510eeefc74bb186`
-- Local HEAD: `72982d57a4b734a0aa4dab3e769d8629848dd9c6`
-- Remote branch `freebuff/d864f920a510eeefc74bb186`: `72982d57a4b734a0aa4dab3e769d8629848dd9c6` — **synchronized** with local
-- Remote `origin/HEAD`: `9bbfa8cf344f893800b36ca9b7d01bc116d0867e` (default branch ref; not the branch under work)
-- Working tree: **clean**, no untracked files
+- Local HEAD: `ddb4c349245be705df24856b7a4982299c78b31f`
 - No upstream tracking branch configured on this branch (expected; push used the authenticated repo integration)
 
-No reclone, reset, clean, or discard was performed. The starting state matches the expected HEAD exactly.
+No reclone, reset, clean, or discard was performed. This report is current to commit `ddb4c349245be705df24856b7a4982299c78b31f`, which already contains the Phase 1 audit, the ISC XII Computer Science 2027 registry, the 15 chapter files and the five completed draft chapters from the previous session, and the coverage matrix added by this session (`docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_COVERAGE_MATRIX.md`).
 
 ---
 
@@ -324,7 +321,8 @@ This section records work completed since the audit above was written.
   - 15 planned chapters, all `status: "planned"`, all with a matching `file` reference, `id`, `slug`, `syllabusStatus: "listed"`, `examYears: [2027]`, and syllabus-aligned blurbs.
   - Python excluded from the 2027 subject entirely; the registry and all chapter files pass a python-free check.
 - Created 15 matching planned chapter shell files under `chapters/`, one per registered chapter.
-- Authored one syllabus-aligned completed draft chapter: **Boolean Algebra** (`chapters/boolean-algebra.json`), `reviewStatus: "draft"`, with substantial learn content, key points, exam focus, vocabulary, learning outcomes, and 23 original practice questions.
+- Authored completed draft chapters for the verified 2027 syllabus. Current completed drafts (all `reviewStatus: "draft"`, non-empty, schema-valid under strict checks, python-free, 23 original practice questions each): Boolean Algebra; Methods; Recursion; Arrays (Single and Double Dimensional) and String Handling; Inheritance, Interfaces and Polymorphism; and Computer Hardware: Logic Gates and Combinational Circuits. Computer Hardware is now finished; the other four are continuing from the previous session's drafts.
+- Created a durable subject-wise coverage matrix at `docs/audits/ISC_XII_2027_PRIORITY_SUBJECTS_COVERAGE_MATRIX.md`, current to the same commit, covering all five priority subjects.
 
 ### 13.2 Verification performed on this batch
 - Focused registry-to-disk integrity check (15/15 files resolve, id/slug/reviewStatus match, no unregistered files, python-free).

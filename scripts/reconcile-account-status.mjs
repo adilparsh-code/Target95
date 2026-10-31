@@ -20,11 +20,44 @@
  * admin === true (or role "admin"). If the Auth lookup for an account fails
  * for any reason other than user-not-found, that account is skipped and
  * reported, never changed, and the process exits non-zero.
+ *
+ * --apply coordination: every account is repaired under the per-account
+ * lease shared with PATCH /api/admin/students/[id] (withAccountStatusLease),
+ * re-read and re-decided under that lease, and every profile write carries an
+ * update-time precondition. A busy lease, a lease error, a precondition
+ * conflict or a failed action skips/flags that account (marker kept) and the
+ * process exits 2. Dry runs take no lease and write nothing.
+ *
+ * Arguments are validated before credentials are read: only --apply and
+ * --uid=<uid> or --uid <uid> are accepted. An explicit empty --uid= (or a bare
+ * --uid) is rejected with exit 64 and never becomes a full scan.
  * Logs contain uids only.
  */
 
 import { pathToFileURL } from "node:url";
-import { decideReconciliation, isProtectedAdminAccount } from "../src/lib/accountStatus.mjs";
+import { decideReconciliation, isProtectedAdminAccount, withAccountStatusLease } from "../src/lib/accountStatus.mjs";
+
+const isPreconditionFailure = (error) => error?.code === 9 || error?.code === "failed-precondition";
+
+/** Reads the profile and Auth state for one account and decides what to do. */
+async function evaluate(snap, auth) {
+  const profile = snap.data();
+  let authUser = { exists: false, disabled: true };
+  let customClaims = null;
+  try {
+    const record = await auth.getUser(snap.id);
+    authUser = { exists: true, disabled: Boolean(record.disabled) };
+    customClaims = record.customClaims || null;
+  } catch (error) {
+    if (error?.code !== "auth/user-not-found") {
+      // Fail closed: without authoritative Auth state (including admin
+      // claims) this account is never touched.
+      return { lookupError: error?.code || "unknown" };
+    }
+  }
+  const decision = decideReconciliation(profile, authUser);
+  return { profile, decision, isAdmin: isProtectedAdminAccount(profile, customClaims) };
+}
 
 /** A filter must name one Firebase UID and one Firestore document. */
 function validateUid(uid) {
@@ -47,6 +80,8 @@ export function parseReconcileArgs(args) {
       filters.push(value);
     } else if (args[i].startsWith("--uid=")) {
       filters.push(args[i].slice(6));
+    } else if (args[i] !== "--apply") {
+      throw new Error(`Unknown argument: ${args[i].slice(0, 40)}`);
     }
   }
   if (filters.length > 1) throw new Error("Invalid --uid: supply the filter only once.");
@@ -64,95 +99,132 @@ export function parseReconcileArgs(args) {
  * @param {{ db: object, auth: object, apply?: boolean, uid?: string,
  *           log?: (line: string) => void, now?: () => string }} deps
  */
-export async function reconcileAccounts({ db, auth, apply = false, uid, log = console.log, now = () => new Date().toISOString() }) {
+export async function reconcileAccounts({ db, auth, apply = false, uid, log = console.log, now = () => new Date().toISOString(), leaseOptions = {} }) {
   if (uid !== undefined) validateUid(uid);
   const docs = uid !== undefined
     ? [await db.collection("users").doc(uid).get()].filter((d) => d.exists)
     : (await db.collection("users").get()).docs;
-  const counts = { scanned: 0, consistent: 0, repaired: 0, reported: 0, skippedAdmin: 0, lookupErrors: 0, conflicts: 0 };
+  const counts = { scanned: 0, consistent: 0, repaired: 0, reported: 0, skippedAdmin: 0, lookupErrors: 0, busy: 0, leaseErrors: 0, conflicts: 0, applyErrors: 0 };
   const at = now();
+  const opId = `reconcile-${at}`;
 
   for (const doc of docs) {
     counts.scanned += 1;
-    const profile = doc.data();
-    let authUser = { exists: false, disabled: true };
-    let customClaims = null;
-    try {
-      const record = await auth.getUser(doc.id);
-      authUser = { exists: true, disabled: Boolean(record.disabled) };
-      customClaims = record.customClaims || null;
-    } catch (error) {
-      if (error?.code !== "auth/user-not-found") {
-        // Fail closed: without authoritative Auth state (including admin
-        // claims) this account is never touched.
-        counts.lookupErrors += 1;
-        log(`skipped (auth lookup failed: ${error?.code || "unknown"}) users/${doc.id}`);
-        continue;
-      }
-    }
-    const decision = decideReconciliation(profile, authUser);
-    if (!decision) {
-      counts.consistent += 1;
+    const first = await evaluate(doc, auth);
+    if (first.lookupError) {
+      counts.lookupErrors += 1;
+      log(`skipped (auth lookup failed: ${first.lookupError}) users/${doc.id}`);
       continue;
     }
-    if (isProtectedAdminAccount(profile, customClaims)) {
+    if (!first.decision) { counts.consistent += 1; continue; }
+    if (first.isAdmin) {
       counts.skippedAdmin += 1;
-      log(`report-only (admin) users/${doc.id}: ${decision.issue}`);
+      log(`report-only (admin) users/${doc.id}: ${first.decision.issue}`);
       continue;
     }
-    if (decision.actions.length === 0) {
+    if (first.decision.actions.length === 0) {
       counts.reported += 1;
-      log(`report-only users/${doc.id}: ${decision.issue}`);
+      log(`report-only users/${doc.id}: ${first.decision.issue}`);
       continue;
     }
-    log(`${apply ? "repair" : "would repair"} users/${doc.id}: ${decision.issue} -> ${decision.actions.join(", ")}`);
-    if (apply !== true) {
-      counts.reported += 1;
-      continue;
-    }
-    const marker = { target: "inactive", auth: "synced", result: "reconciled", opId: `reconcile-${at}`, at };
-    try {
-      for (const action of decision.actions) {
+    log(`${apply === true ? "repair" : "would repair"} users/${doc.id}: ${first.decision.issue} -> ${first.decision.actions.join(", ")}`);
+    if (apply !== true) { counts.reported += 1; continue; }
+
+    const lease = await withAccountStatusLease({ db, uid: doc.id, holder: `${opId}:${doc.id}`, logger: { error: () => {}, warn: () => {} }, ...leaseOptions }, async () => {
+      // Re-read and re-decide under the lease; act only on this state.
+      const snap = await db.collection("users").doc(doc.id).get();
+      if (!snap.exists) return "gone";
+      const cur = await evaluate(snap, auth);
+      if (cur.lookupError) return "lookup_error";
+      if (!cur.decision || cur.decision.actions.length === 0) return "resolved";
+      if (cur.isAdmin) return "admin";
+      const guard = { lastUpdateTime: snap.updateTime };
+      const marker = { target: "inactive", auth: "synced", result: "reconciled", opId, at };
+      let authTouched = false;
+      for (const action of cur.decision.actions) {
         if (action === "profile:deactivate") {
-          await doc.ref.update({ status: "inactive", disabled: true, statusUpdatedAt: at, statusUpdatedBy: "reconcile-script", statusSync: marker }, { lastUpdateTime: doc.updateTime });
+          await snap.ref.update({ status: "inactive", disabled: true, statusUpdatedAt: at, statusUpdatedBy: "reconcile-script", statusSync: marker }, guard);
         } else if (action === "auth:disable") {
-          await auth.updateUser(doc.id, { disabled: true });
+          await auth.updateUser(snap.id, { disabled: true });
+          authTouched = true;
         } else if (action === "auth:revoke") {
-          await auth.revokeRefreshTokens(doc.id);
-          await doc.ref.update({ statusSync: marker });
+          await auth.revokeRefreshTokens(snap.id);
+          authTouched = true;
         } else if (action === "marker:clear") {
-          await doc.ref.update({ statusSync: { ...profile.statusSync, auth: "synced", result: "reconciled", at } });
+          await snap.ref.update({ statusSync: { ...cur.profile.statusSync, auth: "synced", result: "reconciled", at } }, guard);
+          authTouched = false;
         }
       }
-    } catch (error) {
-      if (error?.code !== 9 && error?.code !== "failed-precondition") throw error;
-      counts.conflicts += 1;
-      log(`conflict users/${doc.id}: profile changed since it was read; retry reconciliation`);
+      // Record the Auth repair on the profile only if it is unchanged since
+      // the read under the lease (a precondition failure is a conflict).
+      if (authTouched) await snap.ref.update({ statusSync: marker }, guard);
+      return "repaired";
+    }).catch((error) => ({ ok: true, value: isPreconditionFailure(error) ? "conflict" : { error } }));
+
+    if (!lease.ok) {
+      if (lease.reason === "busy") { counts.busy += 1; log(`skipped (status change in progress) users/${doc.id}`); }
+      else { counts.leaseErrors += 1; log(`skipped (lease unavailable) users/${doc.id}`); }
       continue;
     }
-    counts.repaired += 1;
+    const outcome = lease.value;
+    if (outcome === "repaired") counts.repaired += 1;
+    else if (outcome === "conflict") { counts.conflicts += 1; log(`RECONCILE CONFLICT users/${doc.id}: profile changed during repair; marker not written, rerun`); }
+    else if (outcome === "lookup_error") { counts.lookupErrors += 1; log(`skipped (auth lookup failed under lease) users/${doc.id}`); }
+    else if (outcome === "admin") { counts.skippedAdmin += 1; log(`report-only (admin) users/${doc.id}`); }
+    else if (outcome === "gone" || outcome === "resolved") { counts.consistent += 1; log(`no longer needs repair users/${doc.id}`); }
+    else { counts.applyErrors += 1; log(`FAILED users/${doc.id}: ${outcome?.error?.code || "error"}; marker kept, rerun`); }
   }
   return { mode: apply === true ? "apply" : "dry-run", ...counts };
 }
 
-async function main() {
-  const options = parseReconcileArgs(process.argv.slice(2));
-  const raw = process.env.FIREBASE_SERVICE_ACCOUNT;
-  if (!raw) {
-    console.error("FIREBASE_SERVICE_ACCOUNT is not set.");
-    process.exit(1);
+/** Exit code for a summary: 2 whenever any account was skipped or flagged for safety. */
+export function exitCodeFor(summary) {
+  return summary.lookupErrors + summary.busy + summary.leaseErrors + summary.conflicts + summary.applyErrors > 0 ? 2 : 0;
+}
+
+/** Validate CLI arguments before loading credentials. */
+export function parseArgs(argv) {
+  try {
+    const options = parseReconcileArgs(argv);
+    return { apply: options.apply, uid: options.uid ?? "" };
+  } catch (error) {
+    return { error: error.message };
   }
+}
+
+export async function main({
+  argv = process.argv.slice(2),
+  env = process.env,
+  loadFirebase = defaultLoadFirebase,
+  out = console.log,
+  err = console.error,
+} = {}) {
+  const args = parseArgs(argv);
+  if (args.error) {
+    err(`${args.error} Usage: reconcile-account-status.mjs [--uid=<uid> | --uid <uid>] [--apply]`);
+    return 64;
+  }
+  const raw = env.FIREBASE_SERVICE_ACCOUNT;
+  if (!raw) {
+    err("FIREBASE_SERVICE_ACCOUNT is not set.");
+    return 1;
+  }
+  const { db, auth } = await loadFirebase(raw);
+  const summary = await reconcileAccounts({ db, auth, apply: args.apply, ...(args.uid ? { uid: args.uid } : {}), log: out });
+  out(JSON.stringify(summary));
+  return exitCodeFor(summary);
+}
+
+async function defaultLoadFirebase(raw) {
   const { cert, initializeApp } = await import("firebase-admin/app");
   const { getAuth } = await import("firebase-admin/auth");
   const { getFirestore } = await import("firebase-admin/firestore");
   const app = initializeApp({ credential: cert(JSON.parse(raw)) });
-  const summary = await reconcileAccounts({ db: getFirestore(app), auth: getAuth(app), ...options });
-  console.log(JSON.stringify(summary));
-  if (summary.lookupErrors > 0 || summary.conflicts > 0) process.exitCode = 2;
+  return { db: getFirestore(app), auth: getAuth(app) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  main().catch((error) => {
+  main().then((code) => { process.exitCode = code; }, (error) => {
     console.error(error?.code || "", error?.message || error);
     process.exit(1);
   });

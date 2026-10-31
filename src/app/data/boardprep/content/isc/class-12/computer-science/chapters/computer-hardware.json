@@ -1,25 +1,757 @@
 {
+  "schemaVersion": 1,
   "id": "isc-12-cs-computer-hardware",
-  "slug": "computer-hardware",
   "title": "Computer Hardware: Logic Gates and Combinational Circuits",
   "kind": "computer-science",
+  "slug": "computer-hardware",
   "tagline": "Logic gates, truth tables and combinational circuit building blocks.",
-  "reviewStatus": "planned",
+  "reviewStatus": "draft",
   "sourceNote": {
     "thirdParty": "",
-    "boardprep": "Planned BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section A. Syllabus structure follows the verified 2027 syllabus; full chapter content is not yet published."
+    "boardprep": "Original BoardPrep study material for the CISCE ISC Class XII Computer Science syllabus (subject code 868), examination year 2027, Section A. The syllabus topic list was taken from the verified 2027 syllabus; the explanations, examples and questions here are original and were not taken from any board examination paper, so every question is original practice and not a previous year question."
   },
   "overview": {
-    "intro": "This chapter is planned but not yet published.",
+    "intro": "This chapter builds the hardware side of Computer Science from the ground up. It starts with the logic gates that are the basic building blocks of any digital circuit, showing how each gate works, how it is drawn, and how its behaviour is written as a Boolean expression and tested with a truth table. From there it turns to the small combinational circuits that appear often in the syllabus: the half adder and the full adder, and the encoders, decoders and multiplexers that move and select data. Finally it shows why the NAND and NOR gates are called universal, and how any circuit can be rewritten to use only one kind of gate. The unifying theme is that a gate is just a physical picture of a Boolean operation, so the same laws and truth tables that were used in Boolean Algebra now describe real circuits.",
     "facts": [
-      { "label": "Syllabus section", "value": "Section A" },
+      { "label": "Syllabus section", "value": "Section A of the 2027 ISC Class XII Computer Science syllabus" },
       { "label": "Exam year", "value": "2027" },
-      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" }
+      { "label": "Paper", "value": "Paper I Theory (3 hours, 70 marks) and Paper II Practical (3 hours, 30 marks)" },
+      { "label": "What the syllabus asks for", "value": "Logic gates and combinational circuits, including the NOT, AND, OR, NAND, NOR, XOR and XNOR gates; gate symbols, Boolean expressions, truth tables and use in circuits; half and full adders; encoders, decoders and multiplexers; universal NAND and NOR gates; conversion to NAND-only or NOR-only implementations." }
     ]
   },
-  "learn": [],
-  "keyPoints": [],
-  "examFocus": [],
-  "vocabulary": [],
-  "questions": []
+  "learningOutcomes": [
+    "Describe the function of each basic logic gate and draw its standard symbol.",
+    "Write the Boolean expression and truth table for a gate and for a small gate circuit.",
+    "Trace the output of a combinational circuit step by step from its inputs and gates.",
+    "Explain the purpose of a half adder and a full adder and relate them to binary addition.",
+    "Explain the purpose of encoders, decoders and multiplexers and describe how each one works.",
+    "Show why NAND and NOR are universal gates and rewrite a simple circuit using only one kind of gate.",
+    "Distinguish between a gate, a Boolean operation and a circuit that implements it.",
+    "Identify common mistakes such as confusing gate symbols, forgetting that a gate has a fixed number of inputs, and building a truth table row incorrectly."
+  ],
+  "learn": [
+    {
+      "id": "what-a-logic-gate-is",
+      "title": "What a logic gate is",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A logic gate is a small circuit that performs one basic Boolean operation. It takes one or more binary inputs, each of which is either low or high, often written as 0 and 1, and it produces a single binary output that depends on those inputs according to a fixed rule. The gate does not remember anything and it does not decide anything; it simply combines its inputs the way the Boolean operation says. So a gate is a physical realisation of an operation such as AND or OR, and the same truth table that describes the Boolean operation also describes the gate."
+        },
+        {
+          "type": "paragraph",
+          "text": "In a digital system the inputs and outputs are voltages that represent 0 and 1. We do not usually worry about the exact voltages in a theory question; we work with 0 and 1 and with the gate's rule. What matters is that the gate has one or more inputs and exactly one output, and that its output is completely determined by its current inputs for the combinational gates discussed in this chapter. There is no memory in a single gate and no stored state in the combinational circuits built from them."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A logic gate is a physical circuit that performs one Boolean operation.",
+            "Each gate has inputs and one output, and its output depends only on the current inputs.",
+            "The same truth table that describes a Boolean operation describes the gate.",
+            "Chaining gates together builds larger combinational circuits.",
+            "A combinational circuit has no memory; its output depends only on its current inputs."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The common gates at a glance",
+          "columns": ["Gate", "Inputs", "Output is true when"],
+          "rows": [
+            ["NOT", "1", "The input is false"],
+            ["AND", "2 or more", "All inputs are true"],
+            ["OR", "2 or more", "At least one input is true"],
+            ["NAND", "2 or more", "Not all inputs are true"],
+            ["NOR", "2 or more", "All inputs are false"],
+            ["XOR", "2", "Exactly one input is true"],
+            ["XNOR", "2", "Both inputs have the same value"]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "the-basic-gates",
+      "title": "The basic gates: NOT, AND, OR",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The three simplest gates are NOT, AND and OR. They are the hardware versions of the three basic Boolean operations, and every other gate is built by combining these ideas. In an examination question you should be able to name the gate from its symbol, write its Boolean expression, fill its truth table, and say in words what it does."
+        },
+        {
+          "type": "paragraph",
+          "text": "The NOT gate has one input and one output. It inverts the input: if the input is 1 the output is 0, and if the input is 0 the output is 1. It is sometimes called an inverter. Its Boolean expression is often written as Y = NOT A or Y = A'. The NOT gate is the only one-input gate in the basic set, and it is used to flip a value or to complement a signal."
+        },
+        {
+          "type": "paragraph",
+          "text": "The AND gate gives an output of 1 only when all of its inputs are 1. With two inputs A and B, the output is 1 only when both A and B are 1. With more inputs, the same rule applies: the output is 1 only when every input is 1. Its Boolean expression is often written as Y = A AND B or Y = A B. The AND gate is like series switches in a circuit: current flows only when every switch is closed."
+        },
+        {
+          "type": "paragraph",
+          "text": "The OR gate gives an output of 1 when at least one of its inputs is 1. With two inputs A and B, the output is 1 when A is 1, when B is 1, or when both are 1. With more inputs, the output is 1 whenever any input is 1. Its Boolean expression is often written as Y = A OR B or Y = A + B. The OR gate is like parallel switches: current flows when any one switch is closed."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Write the truth table for a 2-input AND gate.",
+              "note": "Rows: (A,B) = (0,0), (0,1), (1,0), (1,1). Output = 1 only for (1,1). So the output column is 0, 0, 0, 1."
+            },
+            {
+              "text": "Write the truth table for a 2-input OR gate.",
+              "note": "Rows: (0,0), (0,1), (1,0), (1,1). Output = 0 only for (0,0). So the output column is 0, 1, 1, 1."
+            },
+            {
+              "text": "Write the truth table for a NOT gate.",
+              "note": "Rows: A = 0, 1. Output = 1, 0."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Logic gate", "meaning": "A small circuit that performs one basic Boolean operation." },
+            { "term": "Input", "meaning": "A signal into a gate, usually 0 or 1." },
+            { "term": "Output", "meaning": "The signal produced by a gate for its current inputs." },
+            { "term": "Inverter", "meaning": "Another name for the NOT gate, because it inverts the input." },
+            { "term": "Combinational circuit", "meaning": "A circuit whose output depends only on the current inputs, with no memory." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "universal-and-exclusive-gates",
+      "title": "NAND, NOR, XOR and XNOR",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The gates that matter most for this syllabus beyond the basic three are NAND, NOR, XOR and XNOR. NAND and NOR are especially important because each is universal, meaning that any Boolean function can be built using only that gate. XOR and XNOR are not universal in the same sense, but they are very useful building blocks, especially for arithmetic and comparison circuits."
+        },
+        {
+          "type": "paragraph",
+          "text": "The NAND gate is an AND gate followed by a NOT. Its output is 1 unless all inputs are 1, in which case it is 0. With two inputs A and B, the output is 0 only when both A and B are 1. Its Boolean expression is often written as Y = NOT (A AND B) or Y = (A B)'. The NAND gate is universal, and one of the most common examination tasks is rewriting a circuit so that it uses only NAND gates."
+        },
+        {
+          "type": "paragraph",
+          "text": "The NOR gate is an OR gate followed by a NOT. Its output is 1 only when all inputs are 0, in which case it is 1. With two inputs A and B, the output is 0 if either input is 1. Its Boolean expression is often written as Y = NOT (A OR B) or Y = (A + B)'. The NOR gate is also universal, and it can be used to build any circuit in the same way that a NAND gate can."
+        },
+        {
+          "type": "paragraph",
+          "text": "The XOR gate, exclusive OR, has two inputs and gives an output of 1 when exactly one of them is 1. If both inputs are the same, either both 0 or both 1, the output is 0. Its Boolean expression is often written as Y = A XOR B. XOR is the heart of binary addition, because the sum bit in one-bit addition is 1 only when the two bits are different."
+        },
+        {
+          "type": "paragraph",
+          "text": "The XNOR gate, exclusive NOR, is the opposite of XOR. Its output is 1 when both inputs are the same and 0 when they are different. Its Boolean expression is often written as Y = A XNOR B or Y = NOT (A XOR B). XNOR is useful when a circuit needs to test whether two signals are equal."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Truth table for a 2-input NAND gate.",
+              "note": "Rows: (A,B) = (0,0), (0,1), (1,0), (1,1). Output = 0 only for (1,1). So the output column is 1, 1, 1, 0."
+            },
+            {
+              "text": "Truth table for a 2-input NOR gate.",
+              "note": "Rows: (0,0), (0,1), (1,0), (1,1). Output = 1 only for (0,0). So the output column is 1, 0, 0, 0."
+            },
+            {
+              "text": "Truth table for a 2-input XOR gate.",
+              "note": "Rows: (0,0), (0,1), (1,0), (1,1). Output = 1 for (0,1) and (1,0). So the output column is 0, 1, 1, 0."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "NAND = NOT (AND): output is 0 only when all inputs are 1.",
+            "NOR = NOT (OR): output is 1 only when all inputs are 0.",
+            "XOR: output is 1 when the inputs are different.",
+            "XNOR: output is 1 when the inputs are the same.",
+            "NAND and NOR are both universal gates.",
+            "XOR and XNOR are not universal, but they are useful for addition and comparison."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gate-symbols-expressions-and-truth-tables",
+      "title": "Gate symbols, Boolean expressions and truth tables",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A gate can be described in three equivalent ways: by its symbol, by its Boolean expression, and by its truth table. A good answer can move freely between these three. The symbol is the picture used in circuit diagrams. The expression is the algebraic form, often with brackets to show the order of operations. The truth table is the complete list of input combinations and the resulting output. Any one of these usually implies the others, so if you know one well you can produce the rest."
+        },
+        {
+          "type": "paragraph",
+          "text": "Different exam boards and textbooks use slightly different symbols for the same gate. A safe approach is to draw the symbol you are using clearly, label the inputs and output, and then write the Boolean expression next to it. Never mix notations without saying which one you are using, and never assume a symbol is the only correct one. What matters is that the symbol, the expression and the truth table tell the same story."
+        },
+        {
+          "type": "paragraph",
+          "text": "When a circuit has several gates, the truth table is built by working from the inputs, through each gate in turn, to the final output. The intermediate columns for the outputs of intermediate gates are very useful, because they show the reasoning and they make it much harder to make a mistake. A common exam trap is to try to write the final column from memory without showing the intermediate steps, which leads to errors on larger circuits."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Describe a 2-input NAND gate in all three forms.",
+              "note": "Symbol: standard NAND gate symbol with A and B on the inputs and Y on the output. Expression: Y = NOT (A AND B). Truth table: (0,0)->1, (0,1)->1, (1,0)->1, (1,1)->0."
+            },
+            {
+              "text": "Describe a 2-input XOR gate in all three forms.",
+              "note": "Symbol: XOR gate symbol. Expression: Y = A XOR B. Truth table: (0,0)->0, (0,1)->1, (1,0)->1, (1,1)->0."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A gate can be described by its symbol, its Boolean expression and its truth table.",
+            "Always label inputs and outputs on a gate symbol.",
+            "State the notation you are using if more than one is common.",
+            "For larger circuits, show intermediate columns in the truth table.",
+            "The final output of a combinational circuit is fully determined by the current inputs."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "half-adder-and-full-adder",
+      "title": "Half adder and full adder",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Adders are combinational circuits that add binary digits. The simplest is the half adder, which adds two single bits and produces a sum and a carry. The half adder is called a half adder because it does not have a carry input; it can add two bits, but it cannot take into account a carry coming from a lower place. That limitation is why a full adder exists."
+        },
+        {
+          "type": "paragraph",
+          "text": "A full adder adds three bits: two bits to be added and a carry-in from the previous lower place. It produces a sum and a carry-out. The sum bit is 1 when an odd number of the three inputs are 1, and the carry-out is 1 when at least two of the three inputs are 1. A full adder is therefore the building block for adding multi-bit binary numbers one column at a time."
+        },
+        {
+          "type": "paragraph",
+          "text": "The connection between the two is simple: a full adder can be built from two half adders and an OR gate. The first half adder adds the two bits and produces a partial sum and a partial carry. The second half adder adds that partial sum to the carry-in. The two carries from the two half adders are combined with an OR gate to form the final carry-out."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Truth table for a half adder.",
+              "note": "Inputs: A, B. Outputs: Sum, Carry. Rows: (0,0)->Sum 0, Carry 0; (0,1)->Sum 1, Carry 0; (1,0)->Sum 1, Carry 0; (1,1)->Sum 0, Carry 1. The sum is the XOR of A and B; the carry is the AND of A and B."
+            },
+            {
+              "text": "Why a half adder is only a half solution.",
+              "note": "If you are adding two multi-bit numbers column by column, the lowest column can use a half adder, but every higher column also has a carry-in from the previous column. A half adder does not accept that carry-in, so a full adder is needed for the higher columns."
+            },
+            {
+              "text": "Relationship between full adder and half adders.",
+              "note": "A full adder adds A, B and Cin. Two half adders and an OR gate can do this: the first half adder adds A and B; its sum goes to the second half adder together with Cin; the final sum comes from the second half adder; the final carry is the OR of the two half adder carries."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Half adder", "meaning": "A circuit that adds two bits and produces a sum and a carry, with no carry input." },
+            { "term": "Full adder", "meaning": "A circuit that adds three bits: two bits and a carry-in, producing a sum and a carry-out." },
+            { "term": "Sum bit", "meaning": "The result bit of an addition in one column." },
+            { "term": "Carry", "meaning": "The bit carried to the next higher column when the addition in one column produces a value too large for one bit." },
+            { "term": "Carry-in", "meaning": "The carry coming into a column from the previous lower column." },
+            { "term": "Carry-out", "meaning": "The carry sent to the next higher column from the current column." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "encoders-decoders-and-multiplexers",
+      "title": "Encoders, decoders and multiplexers",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Encoders, decoders and multiplexers are three important combinational building blocks. They are not arithmetic circuits like adders; instead they move, select and translate digital signals. Each one has a clear job: an encoder converts one active input line into a smaller coded output; a decoder does the reverse, turning a coded input into one active output line; a multiplexer selects one of several inputs and passes it to a single output."
+        },
+        {
+          "type": "paragraph",
+          "text": "An encoder takes several input lines, of which usually only one is active at a time, and produces a coded binary output that tells which input is active. For example, a 4-to-2 encoder has four input lines and two output lines, and the output is the binary code of the active input. Encoders are used when several signals need to be compressed into a smaller number of bits."
+        },
+        {
+          "type": "paragraph",
+          "text": "A decoder does the opposite. It takes a binary code on a small number of input lines and activates exactly one of several output lines. For example, a 2-to-4 decoder has two inputs and four outputs, and for each input code exactly one output is active. Decoders are used to select one of several things, such as one memory location out of many."
+        },
+        {
+          "type": "paragraph",
+          "text": "A multiplexer, often called a MUX, selects one of several input signals and forwards it to a single output. It has several data inputs, one or more select inputs, and one output. The select inputs decide which data input is connected to the output. A multiplexer is like a digitally controlled switch, and it is one of the most widely used combinational circuits because it can route data without moving physical wires."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "What a 2-to-4 decoder does.",
+              "note": "It has two select inputs and four outputs. For input (0,0) one output is active; for (0,1) another output is active; and so on. Exactly one output is active for each input combination."
+            },
+            {
+              "text": "What a 4-to-1 multiplexer does.",
+              "note": "It has four data inputs, two select inputs, and one output. The two select inputs choose which one of the four data inputs appears at the output. If the select inputs are 00, the first input is chosen; if 01, the second; and so on."
+            },
+            {
+              "text": "What an encoder does in words.",
+              "note": "An encoder watches several input lines and produces a binary code for whichever one is active. If only one input is active at a time, the output code is simply the index of that input."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An encoder turns one active input line into a smaller binary code on the outputs.",
+            "A decoder turns a binary code into one active output line.",
+            "A multiplexer selects one of several inputs and sends it to one output.",
+            "A multiplexer has data inputs, select inputs and one output.",
+            "Encoders and decoders are often inverse operations of each other in spirit.",
+            "A MUX is often described as a digitally controlled switch."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "universal-gates-and-conversion",
+      "title": "Universal gates and conversion to NAND-only or NOR-only circuits",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A universal gate is one that can be used to build any combinational circuit. The NAND gate and the NOR gate are both universal. That means you can build a NOT, an AND, an OR and every other gate using only NAND gates, and the same is true using only NOR gates. In practice this matters because it allows a circuit to be built from a single kind of gate, which is simpler to manufacture and easier to analyse in some contexts."
+        },
+        {
+          "type": "paragraph",
+          "text": "The proof that NAND is universal is constructive: you show how to make the basic gates from NAND gates. A NOT gate can be made from a NAND gate by tying both inputs together. An AND gate can be made from two NAND gates: the first NAND gives the NAND of the inputs, and the second NAND acts as a NOT on that result. An OR gate can be made from three NAND gates by using De Morgan's theorem, because OR is the NAND of the complements."
+        },
+        {
+          "type": "paragraph",
+          "text": "The conversion process for a larger circuit is the same idea applied repeatedly. Start by replacing each gate with its NAND-only equivalent, or by using Boolean algebra to rewrite the expression into a form that can be implemented with one kind of gate. The aim is not to make the circuit ugly; the aim is to show that the NAND-only and NOR-only forms are equivalent to the original. In an exam, the important points are that you preserve the function and that you justify each transformation."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Build a NOT gate from a NAND gate.",
+              "note": "Tie both inputs of the NAND gate together. Then NAND(A, A) = NOT (A AND A) = NOT A. The NAND gate now acts as an inverter."
+            },
+            {
+              "text": "Build an AND gate from two NAND gates.",
+              "note": "First NAND gives NOT (A AND B). Second NAND used as a NOT gives NOT (NOT (A AND B)) = A AND B. The result is an AND gate."
+            },
+            {
+              "text": "Build an OR gate from NAND gates.",
+              "note": "By De Morgan's theorem, A OR B = NOT (NOT A AND NOT B). Build NOT A and NOT B from NAND inverters, AND them with a NAND, and then invert the result with another NAND. The final circuit uses only NAND gates."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A universal gate can implement any Boolean function.",
+            "NAND and NOR are both universal.",
+            "A NOT gate can be made by tying both inputs of a NAND or NOR gate together.",
+            "An AND gate can be built from NAND gates by adding an inverter at the output.",
+            "An OR gate can be built from NAND gates by using De Morgan's theorem.",
+            "Conversion to one kind of gate preserves the function and should be justified."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "corresponding-boolean-circuit-view",
+      "title": "The correspondence between Boolean methods, switching circuits and gates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A central idea in this part of the syllabus is that the same thing can be looked at in three ways: as a Boolean expression, as a switching circuit, and as a gate circuit. A Boolean expression is the algebraic form. A switching circuit is the same idea drawn with switches, often series for AND and parallel for OR. A gate circuit is the same idea drawn with the standard gate symbols. None of these is more correct than the others; they are three representations of the same logic."
+        },
+        {
+          "type": "paragraph",
+          "text": "Series switches correspond to AND, because current flows only when every switch is closed. Parallel switches correspond to OR, because current flows when any switch is closed. A NOT corresponds to a normally closed switch that opens when its control is active, although in practice logic is usually drawn with gate symbols rather than literal switches. The point for the syllabus is that the Boolean law and the circuit picture are the same rule seen in two languages."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Series switch for AND.",
+              "note": "Two switches in series mean both must be closed for current to flow. That is exactly the AND rule: output is true only when both inputs are true."
+            },
+            {
+              "text": "Parallel switch for OR.",
+              "note": "Two switches in parallel mean current flows if either is closed. That is the OR rule: output is true when at least one input is true."
+            },
+            {
+              "text": "Giving the same circuit in two languages.",
+              "note": "The expression Y = (A AND B) OR C can be drawn with switches in series and parallel, or with AND and OR gates, or with its truth table. All three describe the same function."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Boolean expressions, switching circuits and gate circuits describe the same logic.",
+            "Series corresponds to AND; parallel corresponds to OR.",
+            "A NOT can be shown as a normally closed switch in a switching-circuit picture.",
+            "Switching-circuit and gate views are often used to introduce the idea before gate symbols are used.",
+            "The three views should agree; if they do not, something is wrong."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-and-exam-traps",
+      "title": "Common mistakes and exam traps",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Hardware questions often look simple and then turn out to test careful reading. The most common mistakes are mixing up the gate symbols, especially NAND and NOR; forgetting that NAND and NOR are the negations of AND and OR and applying the wrong truth table; building a truth table with the wrong number of rows; and misidentifying a half adder versus a full adder. Another common trap is to assume a circuit remembers something when it is fully combinational, or to confuse a decoder with a multiplexer because both have a 'select' idea."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Do not confuse NAND with NOR; one is a negated AND, the other a negated OR.",
+            "Do not forget the brackets when you negate a compound expression.",
+            "Use 2 to the power n rows for a truth table with n inputs.",
+            "A half adder has no carry input; a full adder does.",
+            "A decoder activates one output line for a code; a MUX selects one input to pass through.",
+            "NAND and NOR are universal, but XOR and XNOR are not.",
+            "When converting to one kind of gate, check that the new circuit behaves the same."
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A logic gate is a physical circuit that performs one basic Boolean operation.",
+    "NOT, AND and OR are the basic gate building blocks.",
+    "NAND is a negated AND; NOR is a negated OR; XOR is true when the inputs differ; XNOR is true when they are the same.",
+    "Any gate or circuit can be described by its symbol, its Boolean expression, or its truth table.",
+    "A half adder adds two bits and produces a sum and a carry, with no carry input.",
+    "A full adder adds two bits and a carry-in, producing a sum and a carry-out, and can be built from two half adders and an OR gate.",
+    "An encoder converts an active input line into a binary code; a decoder does the reverse; a multiplexer selects one input to pass to the output.",
+    "NAND and NOR are universal gates, meaning any circuit can be built from only one of them.",
+    "A circuit can be rewritten to use only NAND gates, or only NOR gates, while preserving its function.",
+    "Boolean expressions, switching circuits and gate circuits are three views of the same logic: series for AND, parallel for OR.",
+    "In an exam, show intermediate columns in truth tables and label the inputs and outputs on every gate."
+  ],
+  "examFocus": [
+    "Draw or recognise the symbols for NOT, AND, OR, NAND, NOR, XOR and XNOR.",
+    "Write the Boolean expression and truth table for a gate and for a small gate circuit.",
+    "Trace a combinational circuit to find its output for a given input.",
+    "Explain the function of a half adder and a full adder and relate them to binary addition.",
+    "Explain the purpose and basic operation of an encoder, a decoder and a multiplexer.",
+    "Explain why NAND and NOR are universal and show how to build a NOT or AND from one of them.",
+    "Convert a simple circuit or expression to a NAND-only or NOR-only form.",
+    "State the correspondence between Boolean operations and series or parallel switching arrangements."
+  ],
+  "vocabulary": [
+    { "word": "logic gate", "meaning": "A small circuit that performs one basic Boolean operation on binary inputs." },
+    { "word": "combinational circuit", "meaning": "A circuit whose output depends only on the current inputs, with no memory." },
+    { "word": "NOT gate", "meaning": "A gate that inverts its input; also called an inverter." },
+    { "word": "AND gate", "meaning": "A gate whose output is true only when all inputs are true." },
+    { "word": "OR gate", "meaning": "A gate whose output is true when at least one input is true." },
+    { "word": "NAND gate", "meaning": "A gate that is false only when all inputs are true; a negated AND." },
+    { "word": "NOR gate", "meaning": "A gate that is true only when all inputs are false; a negated OR." },
+    { "word": "XOR gate", "meaning": "A gate whose output is true when exactly one input is true." },
+    { "word": "XNOR gate", "meaning": "A gate whose output is true when both inputs are equal." },
+    { "word": "universal gate", "meaning": "A gate that can be used to build any Boolean function; NAND and NOR are both universal." },
+    { "word": "half adder", "meaning": "A circuit that adds two bits and produces a sum and a carry, with no carry input." },
+    { "word": "full adder", "meaning": "A circuit that adds two bits and a carry-in and produces a sum and a carry-out." },
+    { "word": "encoder", "meaning": "A circuit that converts one active input line into a binary code on the outputs." },
+    { "word": "decoder", "meaning": "A circuit that converts a binary code into one active output line." },
+    { "word": "multiplexer", "meaning": "A circuit that selects one of several inputs and sends it to a single output." },
+    { "word": "select inputs", "meaning": "The inputs that choose which data path a multiplexer uses." },
+    { "word": "carry-in", "meaning": "The carry coming into a column of addition from the lower column." },
+    { "word": "carry-out", "meaning": "The carry sent to the next higher column from the current column." }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-cs-ch-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A logic gate with one input and one output that inverts the input is called a:",
+      "options": [
+        "A) AND gate",
+        "B) OR gate",
+        "C) NOT gate",
+        "D) XOR gate"
+      ],
+      "correctIndex": 2,
+      "answer": "C) NOT gate",
+      "explanation": "A NOT gate has one input and one output and inverts the input, so 0 becomes 1 and 1 becomes 0."
+    },
+    {
+      "id": "isc-12-cs-ch-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The output of a 2-input AND gate is 1 only when:",
+      "options": [
+        "A) at least one input is 1",
+        "B) both inputs are 1",
+        "C) both inputs are 0",
+        "D) the inputs are different"
+      ],
+      "correctIndex": 1,
+      "answer": "B) both inputs are 1",
+      "explanation": "A 2-input AND gate gives 1 only when both inputs are 1."
+    },
+    {
+      "id": "isc-12-cs-ch-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "The output of a 2-input OR gate is 0 only when:",
+      "options": [
+        "A) both inputs are 0",
+        "B) both inputs are 1",
+        "C) one input is 1",
+        "D) the inputs are different"
+      ],
+      "correctIndex": 0,
+      "answer": "A) both inputs are 0",
+      "explanation": "A 2-input OR gate gives 0 only when both inputs are 0; in every other case it gives 1."
+    },
+    {
+      "id": "isc-12-cs-ch-q-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A NAND gate is equivalent to:",
+      "options": [
+        "A) an AND gate followed by a NOT",
+        "B) an OR gate followed by a NOT",
+        "C) two NOT gates in series",
+        "D) an XOR gate followed by a NOT"
+      ],
+      "correctIndex": 0,
+      "answer": "A) an AND gate followed by a NOT",
+      "explanation": "NAND is NOT (AND), so it is an AND gate followed by a NOT."
+    },
+    {
+      "id": "isc-12-cs-ch-q-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A NOR gate gives an output of 1 only when:",
+      "options": [
+        "A) both inputs are 0",
+        "B) both inputs are 1",
+        "C) at least one input is 1",
+        "D) the inputs are different"
+      ],
+      "correctIndex": 0,
+      "answer": "A) both inputs are 0",
+      "explanation": "A NOR gate is false whenever any input is 1, so it is true only when all inputs are 0."
+    },
+    {
+      "id": "isc-12-cs-ch-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "The output of a 2-input XOR gate is 1 when:",
+      "options": [
+        "A) both inputs are the same",
+        "B) both inputs are 0",
+        "C) exactly one input is 1",
+        "D) both inputs are 1"
+      ],
+      "correctIndex": 2,
+      "answer": "C) exactly one input is 1",
+      "explanation": "XOR is an exclusive OR: it is 1 only when the two inputs differ."
+    },
+    {
+      "id": "isc-12-cs-ch-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which two gates are universal?",
+      "options": [
+        "A) AND and OR",
+        "B) NAND and NOR",
+        "C) XOR and XNOR",
+        "D) NOT and AND"
+      ],
+      "correctIndex": 1,
+      "answer": "B) NAND and NOR",
+      "explanation": "Both NAND and NOR are universal gates, meaning any Boolean function can be built from only one of them."
+    },
+    {
+      "id": "isc-12-cs-ch-q-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A half adder produces:",
+      "options": [
+        "A) a sum bit and a carry bit",
+        "B) a sum bit only",
+        "C) a carry bit only",
+        "D) a difference and a borrow"
+      ],
+      "correctIndex": 0,
+      "answer": "A) a sum bit and a carry bit",
+      "explanation": "A half adder adds two bits and produces a sum and a carry."
+    },
+    {
+      "id": "isc-12-cs-ch-q-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "Which circuit can accept a carry-in from a previous column?",
+      "options": [
+        "A) half adder",
+        "B) NOT gate",
+        "C) full adder",
+        "D) encoder"
+      ],
+      "correctIndex": 2,
+      "answer": "C) full adder",
+      "explanation": "A full adder adds two bits and a carry-in, so it can be chained across multiple columns of a binary addition."
+    },
+    {
+      "id": "isc-12-cs-ch-q-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "A multiplexer is best described as a:",
+      "options": [
+        "A) circuit that activates one output for a given code",
+        "B) circuit that converts one active input into a binary code",
+        "C) digitally controlled switch that selects one input to pass to the output",
+        "D) circuit that adds two bits"
+      ],
+      "correctIndex": 2,
+      "answer": "C) digitally controlled switch that selects one input to pass to the output",
+      "explanation": "A multiplexer selects one of several inputs and forwards it to one output under the control of its select inputs."
+    },
+    {
+      "id": "isc-12-cs-ch-q-11",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A 2-to-4 decoder has:",
+      "options": [
+        "A) 2 inputs and 4 outputs",
+        "B) 4 inputs and 2 outputs",
+        "C) 2 inputs and 2 outputs",
+        "D) 4 inputs and 4 outputs"
+      ],
+      "correctIndex": 0,
+      "answer": "A) 2 inputs and 4 outputs",
+      "explanation": "A 2-to-4 decoder has a 2-bit code input and 4 output lines, one of which is activated for each input code."
+    },
+    {
+      "id": "isc-12-cs-ch-q-12",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 3,
+      "prompt": "A 4-to-1 multiplexer needs how many select input lines?",
+      "options": [
+        "A) one",
+        "B) two",
+        "C) four",
+        "D) eight"
+      ],
+      "correctIndex": 1,
+      "answer": "B) two",
+      "explanation": "With 2 select lines you can choose among 2^2 = 4 inputs, so a 4-to-1 MUX needs 2 select lines."
+    },
+    {
+      "id": "isc-12-cs-ch-q-13",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A gate that inverts its input is called a blank.",
+      "answer": "NOT gate",
+      "explanation": "The NOT gate inverts its input, so 0 becomes 1 and 1 becomes 0."
+    },
+    {
+      "id": "isc-12-cs-ch-q-14",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A gate whose output is true only when all inputs are true is the blank gate.",
+      "answer": "AND",
+      "explanation": "An AND gate is true only when all of its inputs are true."
+    },
+    {
+      "id": "isc-12-cs-ch-q-15",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "NAND stands for blank of AND.",
+      "answer": "NOT",
+      "explanation": "NAND is the NOT of AND, that is, a negated AND."
+    },
+    {
+      "id": "isc-12-cs-ch-q-16",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "NOR stands for blank of OR.",
+      "answer": "NOT",
+      "explanation": "NOR is the NOT of OR, that is, a negated OR."
+    },
+    {
+      "id": "isc-12-cs-ch-q-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "Write the truth table for a 2-input NAND gate and state its Boolean expression.",
+      "answer": "Inputs A, B. Outputs: (0,0)->1, (0,1)->1, (1,0)->1, (1,1)->0. Boolean expression: Y = NOT (A AND B).",
+      "explanation": "The mark is for a correct truth table and a correct Boolean expression for a NAND gate."
+    },
+    {
+      "id": "isc-12-cs-ch-q-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "State the difference between a half adder and a full adder.",
+      "answer": "A half adder adds two bits and produces a sum and a carry, but has no carry input. A full adder adds two bits and a carry-in and produces a sum and a carry-out.",
+      "explanation": "The mark is for noting that the full adder has a carry-in and the half adder does not."
+    },
+    {
+      "id": "isc-12-cs-ch-q-19",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain why the NAND gate is called a universal gate.",
+      "answer": "It is called universal because any Boolean function can be built using only NAND gates. You can make NOT, AND and OR from NAND gates, and from those you can build any combinational circuit.",
+      "explanation": "The mark is for explaining that NAND can implement any function by building the basic gates from it."
+    },
+    {
+      "id": "isc-12-cs-ch-q-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "Build a NOT gate using only a NAND gate. Explain how it works.",
+      "answer": "Tie both inputs of the NAND gate together. Then the output is NOT (A AND A), which is NOT A. So the NAND gate acts as a NOT gate.",
+      "explanation": "The mark is for the correct wiring and the correct explanation that A AND A is A, so the NAND becomes a NOT."
+    },
+    {
+      "id": "isc-12-cs-ch-q-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "A circuit has inputs A and B and output Y = (A AND B) OR (A AND NOT B). Simplify the expression and identify the equivalent single gate.",
+      "answer": "Factor A: A AND (B OR NOT B) = A AND 1 = A. The circuit is equivalent to a wire from A to the output, or, in gate terms, to a buffer for A. The OR and AND combination reduces to A.",
+      "explanation": "The mark is for simplifying to A and recognising that the output equals A."
+    },
+    {
+      "id": "isc-12-cs-ch-q-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "Show how a full adder can be built from two half adders and an OR gate.",
+      "answer": "The first half adder adds A and B, producing a partial sum and a partial carry. The second half adder adds that partial sum to Cin, producing the final sum. The two partial carries are combined with an OR gate to give the final carry-out.",
+      "explanation": "The mark is for the correct use of two half adders and an OR gate to build a full adder."
+    },
+    {
+      "id": "isc-12-cs-ch-q-23",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 6,
+      "prompt": "A 4-to-1 multiplexer has inputs I0, I1, I2, I3, select inputs S1, S0 and output Y. Describe its behaviour and give the output for S1=1, S0=0 when I0=0, I1=1, I2=1, I3=0.",
+      "answer": "A 4-to-1 MUX selects one of the four data inputs according to the 2-bit select code S1 S0. For S1 S0 = 10, the selected input is I2. Since I2 = 1, the output Y is 1.",
+      "explanation": "The mark is for describing the selection rule and then applying it correctly to the given inputs."
+    }
+  ]
 }

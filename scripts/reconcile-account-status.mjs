@@ -10,6 +10,7 @@
  *
  * Only ever reduces access (decideReconciliation):
  *   - profile active, Auth disabled/missing -> profile set inactive
+ *   - legacy profile missing status, Auth enabled -> report for backfill
  *   - profile not active, Auth enabled      -> Auth disabled + tokens revoked
  *   - stores agree but statusSync pending/failed -> marker set to synced
  * It never enables an Auth user and never activates a profile; reactivation
@@ -57,6 +58,38 @@ async function evaluate(snap, auth) {
   }
   const decision = decideReconciliation(profile, authUser);
   return { profile, decision, isAdmin: isProtectedAdminAccount(profile, customClaims) };
+}
+
+/** A filter must name one Firebase UID and one Firestore document. */
+function validateUid(uid) {
+  if (typeof uid !== "string" || uid.length === 0 || uid.length > 128 || uid.trim() !== uid
+    || uid.includes("/") || Array.from(uid).some((char) => char.charCodeAt(0) < 32 || char.charCodeAt(0) === 127)
+    || uid === "." || uid === ".." || /^__.*__$/u.test(uid)) {
+    throw new Error("Invalid --uid: expected a non-empty Firebase UID of at most 128 characters naming one user document.");
+  }
+  return uid;
+}
+
+export function parseReconcileArgs(args) {
+  const filters = [];
+  for (let i = 0; i < args.length; i += 1) {
+    if (args[i] === "--uid") {
+      const value = args[++i];
+      if (value === undefined || value.startsWith("--")) {
+        throw new Error("Invalid --uid: expected a following UID value.");
+      }
+      filters.push(value);
+    } else if (args[i].startsWith("--uid=")) {
+      filters.push(args[i].slice(6));
+    } else if (args[i] !== "--apply") {
+      throw new Error(`Unknown argument: ${args[i].slice(0, 40)}`);
+    }
+  }
+  if (filters.length > 1) throw new Error("Invalid --uid: supply the filter only once.");
+  return {
+    apply: args.includes("--apply"),
+    ...(filters.length ? { uid: validateUid(filters[0]) } : {}),
+  };
 }
 
 /**
@@ -150,37 +183,14 @@ export function exitCodeFor(summary) {
   return summary.lookupErrors + summary.busy + summary.leaseErrors + summary.conflicts + summary.applyErrors > 0 ? 2 : 0;
 }
 
-/** Reject malformed filters before reading credentials or scanning. */
-function validateUid(uid) {
-  if (typeof uid !== "string" || uid.length === 0 || uid.length > 128 || uid.trim() !== uid
-    || uid.includes("/") || Array.from(uid).some((char) => char.charCodeAt(0) < 32 || char.charCodeAt(0) === 127)
-    || uid === "." || uid === ".." || /^__.*__$/u.test(uid)) {
-    throw new Error("Invalid --uid: expected a non-empty Firebase UID of at most 128 characters naming one user document.");
-  }
-  return uid;
-}
-
-export function parseReconcileArgs(args) {
-  let apply = false;
-  let uid;
-  for (let i = 0; i < args.length; i += 1) {
-    const arg = args[i];
-    if (arg === "--apply") { apply = true; continue; }
-    if (arg === "--uid" || arg.startsWith("--uid=")) {
-      if (uid !== undefined) throw new Error("Invalid --uid: supply the filter only once.");
-      const value = arg === "--uid" ? args[++i] : arg.slice(6);
-      if (value === undefined || value.startsWith("--")) throw new Error("Invalid --uid: expected a following UID value.");
-      uid = validateUid(value);
-      continue;
-    }
-    throw new Error(`Unknown argument: ${arg.slice(0, 40)}`);
-  }
-  return { apply, ...(uid === undefined ? {} : { uid }) };
-}
-
+/** Validate CLI arguments before loading credentials. */
 export function parseArgs(argv) {
-  try { return parseReconcileArgs(argv); }
-  catch (error) { return { error: error.message }; }
+  try {
+    const options = parseReconcileArgs(argv);
+    return { apply: options.apply, uid: options.uid ?? "" };
+  } catch (error) {
+    return { error: error.message };
+  }
 }
 
 export async function main({
@@ -192,7 +202,7 @@ export async function main({
 } = {}) {
   const args = parseArgs(argv);
   if (args.error) {
-    err(`${args.error} Usage: reconcile-account-status.mjs [--uid=<uid>|--uid <uid>] [--apply]`);
+    err(`${args.error} Usage: reconcile-account-status.mjs [--uid=<uid> | --uid <uid>] [--apply]`);
     return 64;
   }
   const raw = env.FIREBASE_SERVICE_ACCOUNT;
@@ -201,7 +211,7 @@ export async function main({
     return 1;
   }
   const { db, auth } = await loadFirebase(raw);
-  const summary = await reconcileAccounts({ db, auth, apply: args.apply, uid: args.uid, log: out });
+  const summary = await reconcileAccounts({ db, auth, apply: args.apply, ...(args.uid ? { uid: args.uid } : {}), log: out });
   out(JSON.stringify(summary));
   return exitCodeFor(summary);
 }

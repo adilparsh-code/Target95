@@ -1,7 +1,7 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
 import { isProtectedAdminAccount, manageStudentAccountStatus } from "../src/lib/accountStatus.mjs";
-import { reconcileAccounts, parseArgs, main, exitCodeFor } from "../scripts/reconcile-account-status.mjs";
+import { reconcileAccounts, parseReconcileArgs, parseArgs, main, exitCodeFor } from "../scripts/reconcile-account-status.mjs";
 import { makeFakeAccountWorld } from "./helpers/fake-account-world.mjs";
 
 /**
@@ -316,13 +316,12 @@ describe("reconcile vs PATCH coordination (per-account lease)", () => {
 
 describe("CLI arguments (validated before credentials or any write)", () => {
   test("parseArgs accepts --apply and both UID forms", () => {
-    assert.deepEqual(parseArgs([]), { apply: false });
-    assert.deepEqual(parseArgs(["--apply"]), { apply: true });
+    assert.deepEqual(parseArgs([]), { apply: false, uid: "" });
+    assert.deepEqual(parseArgs(["--apply"]), { apply: true, uid: "" });
     assert.deepEqual(parseArgs(["--uid=abc"]), { apply: false, uid: "abc" });
-    assert.deepEqual(parseArgs(["--apply", "--uid=abc"]), { apply: true, uid: "abc" });
     assert.deepEqual(parseArgs(["--uid", "abc"]), { apply: false, uid: "abc" });
-    assert.deepEqual(parseArgs(["--uid", "abc", "--apply"]), { apply: true, uid: "abc" });
-    for (const bad of [["--uid="], ["--apply", "--uid="], ["--uid=", "--apply"], ["--uid"], ["--uid", "--apply"], ["--uid", ""], ["--uid=.."], ["--uid=__reserved__"], ["--uid=x\n"], ["--uid", "a", "--uid=b"], ["--uid=   "], ["--uid= abc"], ["--uid=a", "--uid=b"], ["--uid=a/b"], [`--uid=${"x".repeat(129)}`], ["--aply"], ["abc"]]) {
+    assert.deepEqual(parseArgs(["--apply", "--uid=abc"]), { apply: true, uid: "abc" });
+    for (const bad of [["--uid="], ["--apply", "--uid="], ["--uid=", "--apply"], ["--uid"], ["--uid=   "], ["--uid= abc"], ["--uid=a", "--uid=b"], ["--uid=a/b"], [`--uid=${"x".repeat(129)}`], ["--aply"], ["abc"]]) {
       assert.ok(parseArgs(bad).error, `should reject ${JSON.stringify(bad)}`);
     }
   });
@@ -365,14 +364,108 @@ describe("CLI arguments (validated before credentials or any write)", () => {
   });
 });
 
+describe("reconciliation UID filter validation", () => {
+  test("only omission permits a full scan, and valid --uid targets one document", async () => {
+    assert.deepEqual(parseReconcileArgs([]), { apply: false });
+    for (const args of [["--apply", "--uid=one"], ["--apply", "--uid", "one"], ["--uid", "one", "--apply"]]) {
+      assert.deepEqual(parseReconcileArgs(args), { apply: true, uid: "one" });
+    }
+    const w = makeWorld({ one: { profile: ACTIVE, auth: { disabled: false } }, two: { profile: ACTIVE, auth: { disabled: false } } });
+    w.reads = [];
+    const originalDb = w.db;
+    w.db = { ...originalDb, collection: (name) => {
+      const collection = originalDb.collection(name);
+      if (name !== "users") return collection;
+      return { ...collection,
+        get: async () => { w.reads.push({ op: "scan" }); return collection.get(); },
+        doc: (uid) => { const ref = collection.doc(uid); return { ...ref, get: async () => { w.reads.push({ op: "get", uid }); return ref.get(); } }; },
+      };
+    } };
+    for (const args of [["--uid=one"], ["--uid", "one"]]) {
+      w.reads.length = 0;
+      assert.equal((await run(w, parseReconcileArgs(args))).scanned, 1);
+      assert.deepEqual(w.reads, [{ op: "get", uid: "one" }]);
+    }
+    w.reads.length = 0;
+    assert.equal((await run(w, parseReconcileArgs([]))).scanned, 2);
+    assert.deepEqual(w.reads, [{ op: "scan" }]);
+  });
 
-describe("UID and legacy profile safety", () => {
-  test("programmatic malformed UID never accesses the database", async () => {
-    const db = { collection: () => assert.fail("must not access database") };
-    for (const uid of ["", " ", " leading", "trailing ", "one/two", ".", "..", "__reserved__", "a".repeat(129), "one\n", null, 42]) {
-      await assert.rejects(reconcileAccounts({ db, auth: {}, apply: true, uid }), /Invalid --uid/);
+  test("empty, malformed, repeated and bare --uid filters are rejected", () => {
+    for (const args of [["--uid"], ["--uid", "--apply"], ["--uid", ""], ["--uid", "one/two"], ["--uid", "one", "--uid=two"], ["--uid=one", "--uid", "two"], ["--uid", "one", "--uid", "two"], ["--uid="], ["--uid= "], ["--uid=one/two"], ["--uid=.."], ["--uid=__reserved__"], ["--uid=" + "a".repeat(129)], ["--uid=one", "--uid=two"]]) {
+      assert.throws(() => parseReconcileArgs(["--apply", ...args]), /Invalid --uid/);
     }
   });
+
+  test("programmatic malformed UID filters are rejected before any database access", async () => {
+    const w = makeWorld({ one: { profile: ACTIVE, auth: { disabled: true } } });
+    let reads = 0;
+    const originalDb = w.db;
+    w.db = { ...originalDb, collection: (name) => { reads += 1; return originalDb.collection(name); } };
+    for (const uid of ["", " ", " leading", "trailing ", "one/two", ".", "..", "__reserved__", "a".repeat(129), "one\n", null, 42]) {
+      await assert.rejects(run(w, { apply: true, uid }), /Invalid --uid/);
+    }
+    assert.equal(reads, 0);
+    assert.deepEqual(w.mutations, []);
+  });
+
+  test("CLI rejects explicitly invalid --uid before requiring credentials or scanning", async () => {
+    const { spawnSync } = await import("node:child_process");
+    const { fileURLToPath } = await import("node:url");
+    const script = fileURLToPath(new URL("../scripts/reconcile-account-status.mjs", import.meta.url));
+    const env = { ...process.env };
+    delete env.FIREBASE_SERVICE_ACCOUNT;
+    for (const filter of [["--uid="], ["--uid"], ["--uid=one/two"], ["--uid", "one/two"], ["--uid", "--apply"]]) {
+      const result = spawnSync(process.execPath, [script, "--apply", ...filter], { env, encoding: "utf8" });
+      assert.equal(result.status, 64);
+      assert.match(result.stderr, /Invalid --uid/);
+      assert.doesNotMatch(result.stderr, /FIREBASE_SERVICE_ACCOUNT/);
+    }
+  });
+
+  test("CLI accepts both UID forms and omission before requiring credentials", async () => {
+    const { spawnSync } = await import("node:child_process");
+    const { fileURLToPath } = await import("node:url");
+    const script = fileURLToPath(new URL("../scripts/reconcile-account-status.mjs", import.meta.url));
+    const env = { ...process.env };
+    delete env.FIREBASE_SERVICE_ACCOUNT;
+    for (const args of [[], ["--uid=one"], ["--uid", "one"], ["--uid", "one", "--apply"]]) {
+      const result = spawnSync(process.execPath, [script, ...args], { env, encoding: "utf8" });
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /FIREBASE_SERVICE_ACCOUNT is not set/);
+      assert.doesNotMatch(result.stderr, /Invalid --uid/);
+    }
+  });
+});
+
+describe("reconciliation stale profile writes", () => {
+  test("deactivation requires the snapshot update time", async () => {
+    const w = makeWorld({ one: { profile: ACTIVE, auth: { disabled: true } } });
+    const updateTime = w.profileUpdateTime("one");
+    const summary = await run(w, { apply: true });
+    assert.equal(summary.repaired, 1);
+    assert.equal(summary.conflicts, 0);
+    assert.deepEqual(w.mutations[0].precondition, { lastUpdateTime: updateTime });
+    assert.equal(w.profile("one").status, "inactive");
+  });
+
+  test("concurrent reactivation is preserved and reported as a conflict", async () => {
+    const w = makeWorld({ one: { profile: ACTIVE, auth: { disabled: true } }, two: { profile: ACTIVE, auth: { disabled: true } } });
+    const gate = w.pauseAt("profileUpdate");
+    const pending = run(w, { apply: true });
+    await gate.reached;
+    w.touchProfile("one", { ...ACTIVE, statusUpdatedBy: "admin" });
+    w.authOf("one").disabled = false;
+    gate.release();
+    const summary = await pending;
+    assert.equal(summary.conflicts, 1);
+    assert.equal(summary.repaired, 1);
+    assert.equal(w.profile("one").status, "active");
+    assert.equal(w.authOf("one").disabled, false);
+    assert.equal(w.mutations.some((m) => m.uid === "one"), false);
+    assert.ok(lines.some((line) => line.includes("RECONCILE CONFLICT users/one")));
+  });
+
   test("deactivation detects a concurrent profile update and never overwrites it", async () => {
     const w = makeWorld({ one: { profile: ACTIVE, auth: { disabled: true } } });
     const gate = w.pauseAt("profileUpdate");
@@ -387,7 +480,7 @@ describe("UID and legacy profile safety", () => {
     assert.equal(w.profile("one").statusUpdatedBy, "admin");
     assert.deepEqual(w.mutations, []);
   });
-  test("legacy profiles are report-only; explicit inactivity disables and revokes", async () => {
+  test("legacy profiles are report-only and explicit inactivity still disables and revokes", async () => {
     const w = makeWorld({ legacy: { profile: { role: "student" }, auth: { disabled: false } }, inactive: { profile: INACTIVE, auth: { disabled: false } } });
     const summary = await run(w, { apply: true });
     assert.equal(summary.reported, 1);
@@ -395,6 +488,10 @@ describe("UID and legacy profile safety", () => {
     assert.equal(w.mutations.some((m) => m.uid === "legacy"), false);
     assert.deepEqual(w.mutations.filter((m) => m.uid === "inactive").map((m) => m.op), ["auth.updateUser", "auth.revoke", "profile.update"]);
   });
+});
+
+
+describe("CLI filtered execution", () => {
   test("both UID forms filter the actual CLI operation", async () => {
     for (const argv of [["--uid=a"], ["--uid", "a"]]) {
       const w = makeWorld({ a: { profile: INACTIVE, auth: { disabled: false } }, b: { profile: INACTIVE, auth: { disabled: false } } });

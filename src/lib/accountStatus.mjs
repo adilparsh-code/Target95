@@ -18,6 +18,17 @@ export async function hasActiveProfile(adminDb, uid) {
   return snap.exists === true && isActiveProfile(snap.data());
 }
 
+// Firebase Admin's token verifier uses argument-error for malformed/signature-
+// invalid cookies, and the session/user codes below for rejected credentials.
+// Configuration, certificate-fetch, network and unknown errors must propagate.
+const INVALID_SESSION_CODES = new Set([
+  "auth/argument-error",
+  "auth/session-cookie-expired",
+  "auth/session-cookie-revoked",
+  "auth/user-disabled",
+  "auth/user-not-found",
+]);
+
 /**
  * Server-side session check used by every session-authenticated API.
  * Returns the decoded token only when ALL hold:
@@ -25,18 +36,21 @@ export async function hasActiveProfile(adminDb, uid) {
  *     tokens and disabled Auth users),
  *   - the email is verified,
  *   - users/{uid} is an active profile (same invariant as firestore.rules).
- * Any error fails closed (null).
+ * Known credential errors fail closed (null). Auth infrastructure and profile
+ * lookup failures propagate so callers deny access with 503 and keep the cookie.
  */
 export async function verifyActiveSession(sessionCookie, { auth, adminDb }) {
   if (!sessionCookie) return null;
+  let decoded;
   try {
-    const decoded = await auth.verifySessionCookie(sessionCookie, true);
-    if (decoded?.email_verified !== true) return null;
-    if (!(await hasActiveProfile(adminDb, decoded.uid))) return null;
-    return decoded;
-  } catch {
-    return null;
+    decoded = await auth.verifySessionCookie(sessionCookie, true);
+  } catch (error) {
+    if (INVALID_SESSION_CODES.has(error?.code)) return null;
+    throw error;
   }
+  if (decoded?.email_verified !== true) return null;
+  if (!(await hasActiveProfile(adminDb, decoded.uid))) return null;
+  return decoded;
 }
 
 const DEFAULT_RETRY_DELAYS_MS = [200, 800];
@@ -76,7 +90,9 @@ const defaultOpId = () =>
  *      server APIs keep denying, so this alone grants nothing.
  *   2. Firestore -> active, guarded by `expectedUpdateTime` when given, so a
  *      deactivation that landed after the caller read the profile wins.
- *   3. If step 2 fails, roll Auth back to disabled and revoke tokens issued
+ *   3. On a conflict, re-read the profile: if another reactivation already
+ *      made it active, preserve enabled Auth and return success. Otherwise,
+ *      if step 2 fails, roll Auth back to disabled and revoke tokens issued
  *      in the gap. If the rollback also fails the account is still denied
  *      everywhere that reads the profile; it is flagged for reconciliation.
  *
@@ -204,6 +220,18 @@ export async function transitionAccountStatus({
     return done(true, 200, "activated", "Account activated.");
   } catch (firestoreError) {
     const conflict = firestoreError?.code === 9 || firestoreError?.code === "failed-precondition";
+    if (conflict) {
+      try {
+        const current = await profileRef.get();
+        if (current.exists === true && isActiveProfile(current.data())) {
+          return done(true, 200, "activated", "Account activated.");
+        }
+      } catch (readError) {
+        logger.warn("[account-status] reactivate: could not re-read conflicting profile; rolling Auth back", {
+          ...context, error: errorInfo(readError),
+        });
+      }
+    }
     try {
       await auth.updateUser(uid, { disabled: true });
       await auth.revokeRefreshTokens(uid);
@@ -278,6 +306,7 @@ export async function checkAccountStatusManageable({ uid, profile, auth, logger 
  * Reconciliation decision for one account, used by
  * scripts/reconcile-account-status.mjs. Only ever moves toward LESS access:
  *   - Auth disabled/missing but profile active  -> profile inactive
+ *   - legacy profile missing status, Auth enabled -> report for backfill
  *   - profile not active but Auth enabled        -> disable Auth + revoke
  *   - statusSync left pending/failed while both stores agree -> clear marker
  *     (for a deactivation marker with an existing Auth user, revoke refresh
@@ -293,6 +322,9 @@ export function decideReconciliation(profile, authUser) {
   const profileActive = isActiveProfile(profile);
   if (profile && profileActive && !authEnabled) {
     return { issue: "profile_active_auth_disabled", actions: ["profile:deactivate"] };
+  }
+  if (profile && !Object.prototype.hasOwnProperty.call(profile, "status") && authEnabled) {
+    return { issue: "profile_needs_backfill", actions: [] };
   }
   if (profile && !profileActive && authEnabled) {
     return { issue: "profile_inactive_auth_enabled", actions: ["auth:disable", "auth:revoke"] };

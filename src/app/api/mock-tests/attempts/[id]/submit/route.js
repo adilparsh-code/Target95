@@ -19,7 +19,16 @@ const ATTEMPT_ID = /^[A-Za-z0-9]{10,40}$/;
  * be submitted once.
  */
 export async function POST(request, { params }) {
-  const session = await getVerifiedSession(request);
+  let session;
+  try {
+    session = await getVerifiedSession(request);
+  } catch (error) {
+    console.error("Session validation failed:", error);
+    return NextResponse.json(
+      { ok: false, status: "unavailable", error: "Session validation is temporarily unavailable." },
+      { status: 503 }
+    );
+  }
   if (!session) {
     return NextResponse.json({ ok: false, error: "Sign in to save mock test results." }, { status: 401 });
   }

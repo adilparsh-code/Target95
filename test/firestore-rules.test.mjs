@@ -3,7 +3,7 @@
  *
  * Runs against the local Firestore emulator only (never production):
  *   npm run test:rules
- * which wraps: firebase emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-rules.test.mjs"
+ * which wraps: firebase emulators:exec --only firestore --project demo-target95 "node --test --test-concurrency=1 test/firestore-rules-account-status.test.mjs test/firestore-listener-account-status.test.mjs test/firestore-rules.test.mjs"
  *
  * Uses the emulator REST API with unsigned test tokens, so no extra npm
  * dependency is needed. Skipped automatically when FIRESTORE_EMULATOR_HOST is

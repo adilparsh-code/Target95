@@ -129,7 +129,16 @@ async function callOpenAI(prompt) {
 }
 
 export async function POST(request) {
-  const session = await getVerifiedSession(request);
+  let session;
+  try {
+    session = await getVerifiedSession(request);
+  } catch (error) {
+    console.error("Session validation failed:", error);
+    return NextResponse.json(
+      { ok: false, status: "unavailable", error: "Session validation is temporarily unavailable." },
+      { status: 503 }
+    );
+  }
   if (!session) {
     return NextResponse.json(
       { ok: false, status: "unauthenticated", error: "Sign in to use the AI Tutor." },

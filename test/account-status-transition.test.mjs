@@ -27,6 +27,9 @@ function makeWorld({ profile, authDisabled, fail = {} }) {
     },
   };
   const profileRef = {
+    async get() {
+      return { exists: state.profile !== null, data: () => state.profile, updateTime: state.updateTime };
+    },
     async update(fields, precondition) {
       if (failures.profile > 0) { failures.profile -= 1; throw boom("firestore.update"); }
       if (precondition?.lastUpdateTime !== undefined && precondition.lastUpdateTime !== state.updateTime) {
@@ -320,6 +323,40 @@ describe("concurrent reactivation vs deactivation", () => {
     assert.deepEqual(access(w), DENIED);
   });
 
+  test("a duplicate reactivation preserves enabled Auth when the fresh profile is active", async () => {
+    const w = makeWorld({ profile: INACTIVE, authDisabled: true });
+    const readTime = w.state.updateTime;
+    assert.equal((await run(w, "active", { expectedUpdateTime: readTime })).ok, true);
+    const calls = [];
+    const updateUser = w.auth.updateUser;
+    const revoke = w.auth.revokeRefreshTokens;
+    w.auth.updateUser = async (uid, fields) => { calls.push(`update:${fields.disabled}`); return updateUser(uid, fields); };
+    w.auth.revokeRefreshTokens = async (uid) => { calls.push("revoke"); return revoke(uid); };
+    const r = await run(w, "active", { expectedUpdateTime: readTime });
+    assert.equal(r.ok, true);
+    assert.equal(r.outcome, "activated");
+    assert.equal(r.httpStatus, 200);
+    assert.equal(w.state.auth.disabled, false);
+    assert.deepEqual(calls, ["revoke", "update:false"]);
+    assert.ok(w.state.auth.tokensRevokedAt > w.state.sessionIssuedAt);
+    assert.equal(access(w).serverApiWithExistingSession, false);
+  });
+
+  test("a conflict with a missing, malformed or unreadable fresh profile still rolls Auth back", async () => {
+    for (const fresh of [null, {}, { status: "active", disabled: true }, new Error("read unavailable")]) {
+      const w = makeWorld({ profile: INACTIVE, authDisabled: true });
+      w.profileRef.get = async () => {
+        if (fresh instanceof Error) throw fresh;
+        return { exists: fresh !== null, data: () => fresh };
+      };
+      const r = await run(w, "active", { expectedUpdateTime: -1 });
+      assert.equal(r.ok, false);
+      assert.equal(r.httpStatus, 409);
+      assert.equal(w.state.auth.disabled, true);
+      assert.ok(w.state.auth.tokensRevokedAt > 0);
+    }
+  });
+
   test("reactivation with a current read succeeds", async () => {
     const w = makeWorld({ profile: INACTIVE, authDisabled: true });
     const r = await run(w, "active", { expectedUpdateTime: w.state.updateTime });
@@ -350,13 +387,26 @@ describe("verifyActiveSession (server API guard)", () => {
     const revoked = Object.assign(new Error("revoked"), { code: "auth/session-cookie-revoked" });
     assert.equal(await verifyActiveSession("c", { auth: authReturning(revoked), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);
   });
+  test("known invalid, expired, disabled and missing-user errors deny credentials", async () => {
+    for (const code of ["auth/argument-error", "auth/session-cookie-expired", "auth/session-cookie-revoked", "auth/user-disabled", "auth/user-not-found"]) {
+      const error = Object.assign(new Error("invalid credential"), { code });
+      assert.equal(await verifyActiveSession("c", { auth: authReturning(error), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null, code);
+    }
+  });
+  test("Auth infrastructure and unknown failures propagate without querying profiles", async () => {
+    for (const code of ["auth/internal-error", "auth/invalid-credential", "auth/network-request-failed", "app/network-error", "auth/insufficient-permission", undefined]) {
+      const error = Object.assign(new Error("Auth unavailable"), { code });
+      const adminDb = { collection: () => assert.fail("must not query profile after Auth fails") };
+      await assert.rejects(verifyActiveSession("c", { auth: authReturning(error), adminDb }), (actual) => actual === error);
+    }
+  });
   test("unverified email and missing cookie are denied", async () => {
     assert.equal(await verifyActiveSession("c", { auth: authReturning({ uid: "s1", email_verified: false }), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);
     assert.equal(await verifyActiveSession("", { auth: authReturning(verified), adminDb: dbWith({ exists: true, data: () => ACTIVE }) }), null);
   });
-  test("profile lookup failure fails closed", async () => {
+  test("profile lookup failure propagates without granting access", async () => {
     const brokenDb = { collection: () => ({ doc: () => ({ get: async () => { throw new Error("firestore down"); } }) }) };
-    assert.equal(await verifyActiveSession("c", { auth: authReturning(verified), adminDb: brokenDb }), null);
+    await assert.rejects(verifyActiveSession("c", { auth: authReturning(verified), adminDb: brokenDb }), /firestore down/);
   });
 });
 
@@ -370,6 +420,14 @@ describe("decideReconciliation (never increases access)", () => {
   test("partial_profile_only / partial_auth_enabled state -> disable Auth", () => {
     assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "inactive", auth: "failed" } }, enabled).actions, ["auth:disable", "auth:revoke"]);
     assert.deepEqual(decideReconciliation({ ...INACTIVE, statusSync: { target: "active", auth: "synced" } }, enabled).actions, ["auth:disable", "auth:revoke"]);
+  });
+  test("legacy profiles with enabled Auth need backfill without Auth changes", () => {
+    for (const profile of [{}, { role: "student" }, { disabled: false }, { disabled: true }, { statusSync: { target: "inactive", auth: "failed" } }]) {
+      assert.deepEqual(decideReconciliation(profile, enabled), { issue: "profile_needs_backfill", actions: [] });
+    }
+    assert.equal(decideReconciliation({}, disabled), null);
+    assert.deepEqual(decideReconciliation(INACTIVE, enabled), { issue: "profile_inactive_auth_enabled", actions: ["auth:disable", "auth:revoke"] });
+    assert.deepEqual(decideReconciliation({ status: "active", disabled: true }, enabled).actions, ["auth:disable", "auth:revoke"]);
   });
   test("consistent states need nothing", () => {
     assert.equal(decideReconciliation(ACTIVE, enabled), null);

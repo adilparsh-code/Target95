@@ -10,6 +10,7 @@
  *
  * Only ever reduces access (decideReconciliation):
  *   - profile active, Auth disabled/missing -> profile set inactive
+ *   - legacy profile missing status, Auth enabled -> report for backfill
  *   - profile not active, Auth enabled      -> Auth disabled + tokens revoked
  *   - stores agree but statusSync pending/failed -> marker set to synced
  * It never enables an Auth user and never activates a profile; reactivation
@@ -28,12 +29,13 @@
  * process exits 2. Dry runs take no lease and write nothing.
  *
  * Arguments are validated before credentials are read: only --apply and
- * --uid=<non-empty uid> are accepted. An explicit empty --uid= (or a bare
+ * --uid=<uid> or --uid <uid> are accepted. An explicit empty --uid= (or a bare
  * --uid) is rejected with exit 64 and never becomes a full scan.
  * Logs contain uids only.
  */
 
 import { pathToFileURL } from "node:url";
+import { randomUUID } from "node:crypto";
 import { decideReconciliation, isProtectedAdminAccount, withAccountStatusLease } from "../src/lib/accountStatus.mjs";
 
 const isPreconditionFailure = (error) => error?.code === 9 || error?.code === "failed-precondition";
@@ -58,6 +60,38 @@ async function evaluate(snap, auth) {
   return { profile, decision, isAdmin: isProtectedAdminAccount(profile, customClaims) };
 }
 
+/** A filter must name one Firebase UID and one Firestore document. */
+function validateUid(uid) {
+  if (typeof uid !== "string" || uid.length === 0 || uid.length > 128 || uid.trim() !== uid
+    || uid.includes("/") || Array.from(uid).some((char) => char.charCodeAt(0) < 32 || char.charCodeAt(0) === 127)
+    || uid === "." || uid === ".." || /^__.*__$/u.test(uid)) {
+    throw new Error("Invalid --uid: expected a non-empty Firebase UID of at most 128 characters naming one user document.");
+  }
+  return uid;
+}
+
+export function parseReconcileArgs(args) {
+  const filters = [];
+  for (let i = 0; i < args.length; i += 1) {
+    if (args[i] === "--uid") {
+      const value = args[++i];
+      if (value === undefined || value.startsWith("--")) {
+        throw new Error("Invalid --uid: expected a following UID value.");
+      }
+      filters.push(value);
+    } else if (args[i].startsWith("--uid=")) {
+      filters.push(args[i].slice(6));
+    } else if (args[i] !== "--apply") {
+      throw new Error(`Unknown argument: ${args[i].slice(0, 40)}`);
+    }
+  }
+  if (filters.length > 1) throw new Error("Invalid --uid: supply the filter only once.");
+  return {
+    apply: args.includes("--apply"),
+    ...(filters.length ? { uid: validateUid(filters[0]) } : {}),
+  };
+}
+
 /**
  * Reconcile users/{uid} profiles against Firebase Auth. Dry run unless
  * apply === true. Dependencies are injected so the logic is unit-testable
@@ -66,14 +100,14 @@ async function evaluate(snap, auth) {
  * @param {{ db: object, auth: object, apply?: boolean, uid?: string,
  *           log?: (line: string) => void, now?: () => string }} deps
  */
-export async function reconcileAccounts({ db, auth, apply = false, uid = "", log = console.log, now = () => new Date().toISOString(), leaseOptions = {} }) {
-  if (typeof uid !== "string") throw new TypeError("uid must be a string");
-  const docs = uid
+export async function reconcileAccounts({ db, auth, apply = false, uid, log = console.log, now = () => new Date().toISOString(), leaseOptions = {} }) {
+  if (uid !== undefined) validateUid(uid);
+  const docs = uid !== undefined
     ? [await db.collection("users").doc(uid).get()].filter((d) => d.exists)
     : (await db.collection("users").get()).docs;
   const counts = { scanned: 0, consistent: 0, repaired: 0, reported: 0, skippedAdmin: 0, lookupErrors: 0, busy: 0, leaseErrors: 0, conflicts: 0, applyErrors: 0 };
   const at = now();
-  const opId = `reconcile-${at}`;
+  const opId = `reconcile-${randomUUID()}`;
 
   for (const doc of docs) {
     counts.scanned += 1;
@@ -149,29 +183,14 @@ export function exitCodeFor(summary) {
   return summary.lookupErrors + summary.busy + summary.leaseErrors + summary.conflicts + summary.applyErrors > 0 ? 2 : 0;
 }
 
-/**
- * Strict CLI parsing. Accepts only --apply and --uid=<uid>. Anything else,
- * including an explicit empty --uid=, a bare --uid, a whitespace-only or
- * repeated --uid, is an error so a mistyped single-account run can never turn
- * into a full scan.
- */
+/** Validate CLI arguments before loading credentials. */
 export function parseArgs(argv) {
-  let apply = false;
-  let uid;
-  for (const arg of argv) {
-    if (arg === "--apply") { apply = true; continue; }
-    if (arg === "--uid" || arg.startsWith("--uid=")) {
-      if (uid !== undefined) return { error: "--uid may be given only once." };
-      const value = arg === "--uid" ? "" : arg.slice("--uid=".length);
-      if (!value || !value.trim() || value !== value.trim() || value.length > 128 || value.includes("/")) {
-        return { error: "--uid requires a non-empty uid (--uid=<uid>)." };
-      }
-      uid = value;
-      continue;
-    }
-    return { error: `Unknown argument: ${arg.slice(0, 40)}` };
+  try {
+    const options = parseReconcileArgs(argv);
+    return { apply: options.apply, uid: options.uid ?? "" };
+  } catch (error) {
+    return { error: error.message };
   }
-  return { apply, uid: uid ?? "" };
 }
 
 export async function main({
@@ -183,7 +202,7 @@ export async function main({
 } = {}) {
   const args = parseArgs(argv);
   if (args.error) {
-    err(`${args.error} Usage: reconcile-account-status.mjs [--uid=<uid>] [--apply]`);
+    err(`${args.error} Usage: reconcile-account-status.mjs [--uid=<uid> | --uid <uid>] [--apply]`);
     return 64;
   }
   const raw = env.FIREBASE_SERVICE_ACCOUNT;
@@ -192,7 +211,7 @@ export async function main({
     return 1;
   }
   const { db, auth } = await loadFirebase(raw);
-  const summary = await reconcileAccounts({ db, auth, apply: args.apply, uid: args.uid, log: out });
+  const summary = await reconcileAccounts({ db, auth, apply: args.apply, ...(args.uid ? { uid: args.uid } : {}), log: out });
   out(JSON.stringify(summary));
   return exitCodeFor(summary);
 }

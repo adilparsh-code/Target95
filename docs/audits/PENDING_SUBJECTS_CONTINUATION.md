@@ -9,6 +9,142 @@ Sections are ordered newest first.
 
 ---
 
+## 2026-10-31 — ICSE Class X Mathematics: the last three empty question sets filled; full-repo executor pass
+
+### Baseline verified before any edit
+
+Working tree at HEAD `8d462e80b1f366d69a635d04c9adf9feb9f1403c`
+(`feat(boardprep): complete ISC Class XII Computer Science 2027 Data Structures,
+Stack, Queue, Linked List, Binary Trees and Complexity/Big-O chapters`), with the
+remote branch tip equal to local HEAD and no staged or unstaged tracked changes.
+A fresh whole-dataset inventory (sections → groups → chapters walk, reading every
+chapter file) measured: 75 subjects, 210 registered chapter entries, 136
+file-backed, 74 registrations without a `file` field, 136 chapter files on disk,
+2009 file-backed questions, zero published chapters, every finished chapter
+draft. The whole-dataset counts match
+`scripts/validate-boardprep-migration.mjs` before this session's edits.
+
+### The genuine gap found: ICSE Class X Mathematics
+
+Of the subject's 18 file-backed chapters, 15 carried the established finished
+format (23 original practice questions each, 345 questions in total) and three
+carried full drafted teaching content — lessons, outcomes, overview — but an
+empty `questions` array: `mensuration-solids` (registered under
+`chapters/solids.json`), `trigonometry` and `statistics`. Three draft chapters
+whose rendered pages would have shown lessons with no practice questions,
+contradicting the documented chapter convention.
+
+### Completion, following the established format
+
+Each of the three chapters received a set of 23 original practice questions
+marked `origin: "practice"`, built on each chapter's own drafted lesson
+material and vocabulary, mirroring the mix of MCQ, fill-blank, short, long and
+analytical types used by the subject's 15 finished chapters. Before the
+questions could land under the shared strict validator
+(`src/lib/boardprepContentSchema.mjs`), the three drafted shells were brought up
+to the same structurally complete state as those finished siblings:
+
+- The chapter-level `keyPoints` (8), `examFocus` (5) and `vocabulary` (8) arrays
+  that the schema requires were authored from each chapter's own lesson content.
+- The `learn` lesson examples blocks in `solids` and `trigonometry` carried their
+  worked solutions in `answer`/`explanation` fields, a shape the block renderer
+  (`src/app/components/boardprep/ChapterBlock.jsx`) never displays; the notes
+  were consolidated into the schema's `text`+`note` pair, which both satisfies
+  the validator and makes every worked example visible again on the rendered
+  chapter page. 16 example items in `solids` and 15 in `trigonometry` were
+  normalised; nothing was dropped or rewritten in that pass.
+
+Question IDs follow the existing subject pattern
+(`icse-10-math-q-solids-01` … `-23`, and the same for `-q-trig-` and
+`-q-statistics-`), all verified unique across the whole BoardPrep dataset by the
+migration validator. All three chapters remain `reviewStatus: "draft"` — this
+run did not publish anything. `question.origin` is `"practice"` on all 69
+questions, so no official PYQ is claimed anywhere.
+
+The one-off build script for this pass lives at
+`scripts/.mut/build-icse-10-math-question-sets.mjs` (uncommitted scratch, as
+with the earlier chapter builders); it is idempotent and refuses to overwrite
+non-matching question sets.
+
+### The dataset totals after completion
+
+ICSE Class X Mathematics is now 18/18 finished draft chapters with 414
+questions (345 + 69). Whole-dataset file-backed totals moved from 2009 to 2078
+questions and are asserted in `scripts/validate-boardprep-migration.mjs`
+(`expected.questions`). Dataset shape is otherwise unchanged: 3 boards, 6
+classes, 75 subjects, 136 file-backed chapters, 74 registrations still without
+a `file` field (unchanged, deliberate — see below).
+
+### Commands and results for this pass
+
+| Command | Result |
+| --- | --- |
+| `node scripts/.mut/build-icse-10-math-question-sets.mjs` | exit 0; strict validation clean for all three chapters before each save |
+| `node scripts/validate-boardprep-migration.mjs` | exit 0 — 2078 question instances, 2078 distinct ids, 0 duplicate ids, 136 file-backed chapters, 74 unfiled registrations asserted |
+| `node scripts/validate-data.mjs` | exit 0 — 0 errors, 0 warnings, 21 pre-existing info notes |
+| `node scripts/checks/cs-strict-chapters-2027.mjs` | exit 0 — 15 ISC CS 2027 chapters, 357 questions, all drafts, no Python |
+| `node scripts/checks/cs-integrity-2027.mjs` | exit 0 |
+| `node scripts/validate-isc-class-12-computer-science-2027.mjs` | exit 0 — 15 finished chapters, 357 questions |
+| `node scripts/validate-icse-class-10-physics-chemistry.mjs` | exit 0 — placeholders reported honestly |
+| `node scripts/validate-icse-ix-geography.mjs` | exit 0 |
+| `node scripts/validate-projects.mjs` | exit 0 |
+| `node scripts/validate-cisce-ai.mjs` | exit 0 |
+| `node scripts/validate-office.mjs` | exit 0 |
+| `node scripts/validate-office-routes.mjs` | exit 0 (136 valid routes/assets 200; invalid app/chapter 404) — runnable this pass because dependencies were installed from the lockfile first |
+| `node scripts/audit-links.mjs` | exit 0 |
+| `node scripts/verify-kmap-solver.mjs` | exit 0 |
+| `npm test` | exit 0 — 126 tests, 15 suites, 0 failures |
+| `npm run typecheck` | exit 0 |
+| `npm run lint` | exit 0 |
+| `npm run build` | exit 0 — full production build on the completed dataset |
+| `npm test:rules` (Firestore rules via emulators) | NOT RUN — the emulator needs `firebase-tools` and JDK-based emulators; treat out-of-environment blockers accordingly (not a content limitation) |
+
+Production-server navigation spot-check (static-exported Next build served by
+`next start`, not a claim about any deployed environment): the core journeys
+return 200 (`/`, `/study`, `/learn`, `/learn/icse`, `/learn/icse/class-10`,
+`/learn/icse/class-10/mathematics`, `/learn/icse/class-10/mathematics/gst`,
+`/learn/isc/class-12/computer-science`, `/learn/cbse/class-12/mathematics`, plus
+the three new chapter pages `/learn/icse/class-10/mathematics/{mensuration-solids
+| trigonometry | statistics}`, verified to render this pass's new content, e.g.
+"902 cm²" and "2258 2/3"); auth-protected routes (`/practice`, `/dashboard`,
+`/student/dashboard`, `/settings`, `/profile`) correctly 307 to
+`/login?next=<path>`; unknown `/mocktest` 404s because the real route is
+`/mock-test` — no UI link in the repo points at the wrong path; everything else
+404s as expected. No route defects were found requiring fixes this pass.
+
+Phase 5–6 spot audits had nothing to repair: the AI Tutor and admin AI routes
+authenticate via `getVerifiedSession`/`adminGuard` (401 unauth / 403 for
+non-admin, fail-closed), enforce per-user and plan entitlements, rate-limit per
+user in Firestore, and keep provider keys server-side with typed
+`unconfigured` fallbacks (`src/app/api/ai-tutor/route.js`,
+`src/app/api/admin/ai-generator/route.js`, `src/app/api/admin/_helpers.js`).
+Live AI-calls were not tested here (external credential + network gated);
+end-to-end AI behaviour is verified only by the passing unit/validator tests,
+not by a live call.
+
+### Evidence limitations and unchanged pending items
+
+- The **ICSE X Physics (8 chapters) and Chemistry (12 chapters) placeholders**
+  are still 20 empty chapter shells (`questions: []`, no data) and stay the
+  largest outstanding content job — not attempted in this pass, listed without
+  assumed marks counts since no syllabus-verified question-count target has been
+  established for them.
+- The **74 registrations without a `file` field** were reverified (74 not 73 or
+  75 — measured fresh, not from a stale report). They are pre-existing registry
+  planned entries broadly matching the prior audit shape (e.g. whole ICSE IX
+  Biology, most ISC XI subjects, and scattered others) and deliberately remain
+  untouched pending a decision that a syllabus-verified content set is
+  buildable for each; the associated authoritative source material for those
+  entries is not conclusively established here.
+- The **ISO-truth of syllabus text** for not-yet-verified equations and
+  terminology in the new math question sets was double-checked against the
+  drafted lessons of this same dataset (the lessons were written in an earlier
+  pass against the Likewise-verified 2027 ICSE Class X Mathematics syllabus, as
+  recorded earlier in this ledger). No invented PYQ/practical/project claims
+  exist in this pass's content.
+
+---
+
 ## 2026-10-22 — ICSE Class IX Geography: independent audit and repair
 
 ### The starting state, as actually found

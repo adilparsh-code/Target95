@@ -316,5 +316,353 @@
       ],
       "title": "Review Questions"
     }
+  ],
+  "keyPoints": [
+    "The mean of ungrouped data is Σx/n; for ungrouped frequency data it is Σfx/Σf, and for grouped data x is the class mark of each interval.",
+    "The assumed-mean method computes d = x − a for a chosen a, then mean = a + Σfd/n; with a uniform class width h, the step-deviation form is mean = a + h(Σfu)/n with u = (x − a)/h.",
+    "The median of a grouped distribution is interpolated in the median class: median = l + ((n/2 − cf)/f)h, where cf is the cumulative frequency before the class and f its frequency.",
+    "The mode of a grouped distribution is interpolated in the modal class: mode = l + ((f1 − f0)/(2f1 − f0 − f2))h with f1 the modal class frequency and f0, f2 its neighbours.",
+    "The empirical relation mode = 3 median − 2 mean is approximate and applies to moderately skewed distributions.",
+    "A less-than ogive plots cumulative frequency against the upper class boundaries; the median and quartiles are read at plot heights n/2, n/4 and 3n/4.",
+    "Quartiles split ordered data into quarters: Q1 at n/4, Q2 (the median) at n/2 and Q3 at 3n/4; the interquartile range is Q3 − Q1.",
+    "The mean of two groups combined is the weighted average (n1 mean1 + n2 mean2)/(n1 + n2), not the simple average of the two means."
+  ],
+  "examFocus": [
+    "Answer grouped-data mean questions with the method named: class-mark, assumed-mean or step-deviation; a method change mid-solution loses the method mark even if the number is right.",
+    "Form the cumulative frequency column (and the less-than ogive coordinates) before locating any median or quartile; the median class is where the cumulative count first passes n/2.",
+    "State n (the total frequency) at the top of the working; several formulas divide by it and a wrong n poisons every later number.",
+    "For a missing-frequency question, express the condition as (Σf x x)/Σf = given mean and solve for the unknown; verify with n x mean = Σf x x at the end.",
+    "When the histogram asks for the mode, read the tallest rectangle first, then interpolate with the formula; quoting the modal class itself is only half the answer."
+  ],
+  "vocabulary": [
+    {
+      "word": "Class mark",
+      "meaning": "The midpoint of a class interval, used to represent every observation of the class in mean calculations."
+    },
+    {
+      "word": "Cumulative frequency",
+      "meaning": "The running total of frequencies up to and including a class; its table underlies the ogive and the median."
+    },
+    {
+      "word": "Ogive",
+      "meaning": "The cumulative frequency graph; the less-than type joins points plotted at upper class boundaries."
+    },
+    {
+      "word": "Modal class",
+      "meaning": "The class interval with the highest frequency, inside which the grouped-mode formula interpolates."
+    },
+    {
+      "word": "Assumed mean",
+      "meaning": "A convenient central value a chosen to shorten deviations before the mean is reconstructed as a + Σfd/n."
+    },
+    {
+      "word": "Step deviation",
+      "meaning": "The quantity u = (x − a)/h for uniform class width h, which scales all deviations by the same factor."
+    },
+    {
+      "word": "Quartile",
+      "meaning": "The value below which one quarter (Q1) or three quarters (Q3) of the ordered data falls."
+    },
+    {
+      "word": "Interquartile range",
+      "meaning": "Q3 − Q1, the spread of the middle half of the data, read or computed from the ogive."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-statistics-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The class mark of the class interval 10 to 20 (exclusive classes) is:",
+      "answer": "15",
+      "explanation": "The class mark is the midpoint (10 + 20)/2 = 15 and represents each entry of the interval in mean calculations.",
+      "options": [
+        "15",
+        "10",
+        "20",
+        "30"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Averaging the class numbers the wrong way by reaching 20 + 10 = 30 and forgetting to divide by 2."
+    },
+    {
+      "id": "icse-10-math-q-statistics-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a less-than type ogive, the cumulative frequency of each class is plotted against its:",
+      "answer": "upper class boundary",
+      "explanation": "A less-than ogive accumulates the frequencies of all classes up to and including the current one, so every plotted point carries the value reached by the end of the class, which is its upper boundary.",
+      "options": [
+        "upper class boundary",
+        "lower class boundary",
+        "class mark",
+        "class width"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Choosing the lower boundary, which belongs to the more-than type ogive rather than the less-than type."
+    },
+    {
+      "id": "icse-10-math-q-statistics-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The frequency distribution of 40 students is: 0-10 (5), 10-20 (8), 20-30 (15), 30-40 (9), 40-50 (3). The median class is:",
+      "answer": "20-30",
+      "explanation": "Cumulative frequencies are 5, 13, 28, 37, 40. With n = 40 the median position is n/2 = 20, and 20 is reached for the first time in the class 20-30 (whose cumulative frequency 28 first exceeds 20).",
+      "options": [
+        "20-30",
+        "10-20",
+        "30-40",
+        "0-10"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Using the class whose frequency alone is highest (also 20-30 here) without computing the cumulative frequencies, which fails for other tables."
+    },
+    {
+      "id": "icse-10-math-q-statistics-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Every value of a data set is increased by exactly 5. The mean and the median of the new data set are:",
+      "answer": "both increased by exactly 5",
+      "explanation": "Adding a constant shifts every observation, so the sum gains 5n and the mean gains 5; the ordered positions are unchanged, so the median also gains exactly 5.",
+      "options": [
+        "both increased by exactly 5",
+        "the mean increased by 5, the median increased by 25",
+        "both unchanged",
+        "the mean increased by 5, the median unchanged"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Thinking the median must be recomputed from scratch; a uniform shift leaves the middle position intact and moves the value by the shift."
+    },
+    {
+      "id": "icse-10-math-q-statistics-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a histogram the rectangles are drawn with:",
+      "answer": "no gaps between adjacent rectangles",
+      "explanation": "Grouped data classes are continuous, so the class boundaries meet and the rectangles touch; gaps appear only between non-consecutive classes when intervals are skipped.",
+      "options": [
+        "no gaps between adjacent rectangles",
+        "a gap of one unit between every pair",
+        "gaps only for the modal class",
+        "gaps decided by the highest frequency"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Carrying over the bar-chart habit of separating every bar, which is correct for categorical data but wrong for grouped numeric data."
+    },
+    {
+      "id": "icse-10-math-q-statistics-06",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The data 3, 5, 7, 9, 11 has median 7. If the values 3 and 11 are removed, the median of the remaining data (5, 7, 9) is:",
+      "answer": "7 again",
+      "explanation": "Removing the two extreme values leaves the middle of the original ordered list intact, so the median stays 7; deleting extremes does not move the central value of an odd-sized list.",
+      "options": [
+        "7 again",
+        "5",
+        "9",
+        "cannot be determined"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Recomputing the mean and assuming the median follows it; the mean would change if the removed values are unevenly placed but the median here is untouched."
+    },
+    {
+      "id": "icse-10-math-q-statistics-07",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a grouped distribution of 40 observations the median corresponds to the ____ th value.",
+      "answer": "20",
+      "explanation": "For an even number of observations, n/2 = 20 is the position used to locate the median class (and then interpolated inside it), not the nth value.",
+      "commonMistake": "Using 40, which is the total frequency rather than the median position."
+    },
+    {
+      "id": "icse-10-math-q-statistics-08",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The modal class of a grouped distribution is the class with the ____ frequency.",
+      "answer": "highest",
+      "explanation": "The mode is the most frequent value, so the modal class is the one carrying the largest frequency; the mode formula then interpolates inside it.",
+      "commonMistake": "Choosing the last class or the first class instead of reading the largest frequency."
+    },
+    {
+      "id": "icse-10-math-q-statistics-09",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The empirical relation connecting the three averages is mode = 3 x median − ____ x mean.",
+      "answer": "2 (the coefficient of the mean in mode = 3 median − 2 mean)",
+      "explanation": "The empirical formula for a moderately skewed distribution is mode = 3 median − 2 mean, which rearranges to median = (mode + 2 mean)/3.",
+      "commonMistake": "Writing mean = 3 median − 2 mode (a valid rearrangement of the same equation, but not the one asked), or interchanging the coefficients 2 and 3."
+    },
+    {
+      "id": "icse-10-math-q-statistics-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For 40 observations the lower quartile (Q1) is the ____ th value.",
+      "answer": "10",
+      "explanation": "The lower quartile sits at the position n/4, and 40/4 = 10, so Q1 is read off the cumulative frequency graph at the 10th value.",
+      "commonMistake": "Using 20 (the median position n/2) or 30 (the upper quartile position 3n/4) instead of n/4."
+    },
+    {
+      "id": "icse-10-math-q-statistics-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the data 2, 3, 3, 4, 3, 5 the mode is ____.",
+      "answer": "3 (it appears three times)",
+      "explanation": "The value 3 appears three times while every other value appears once, so the mode of this small data set is 3.",
+      "commonMistake": "Adding the values and dividing to get 3.33, which is the mean and not the mode."
+    },
+    {
+      "id": "icse-10-math-q-statistics-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The numbers of books read by five students in a month are 6, 8, 10, 12 and 14. Find the mean.",
+      "answer": "10 books",
+      "explanation": "The sum is 6 + 8 + 10 + 12 + 14 = 50, and the mean is 50/5 = 10 books. The five consecutive even numbers are symmetric about the middle value 10, which is the mean.",
+      "commonMistake": "Reporting the median without checking the question, which here happens to coincide with the mean only because the data is symmetric; verify via the sum."
+    },
+    {
+      "id": "icse-10-math-q-statistics-13",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The frequency table: value 2 occurs 3 times, value 4 occurs 5 times, value 6 occurs 2 times. Find the mean.",
+      "answer": "3.8",
+      "explanation": "The sum is 2 x 3 + 4 x 5 + 6 x 2 = 6 + 20 + 12 = 38 across n = 3 + 5 + 2 = 10 observations, so the mean is 38/10 = 3.8.",
+      "commonMistake": "Dividing by the number of distinct values (3) instead of the total frequency (10), which gives about 12.67."
+    },
+    {
+      "id": "icse-10-math-q-statistics-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The frequency distribution of 40 students is: 0-10 (5), 10-20 (8), 20-30 (15), 30-40 (9), 40-50 (3). Using the class-mark method, find the mean.",
+      "answer": "24.25",
+      "explanation": "Class marks are 5, 15, 25, 35, 45. The sum of (frequency x class mark) is 5 x 5 + 8 x 15 + 15 x 25 + 9 x 35 + 3 x 45 = 25 + 120 + 375 + 315 + 135 = 970. Dividing by n = 40 gives 970/40 = 24.25.",
+      "commonMistake": "Multiplying the lower limits rather than the class marks, which shifts the weighted sum and the mean by 5."
+    },
+    {
+      "id": "icse-10-math-q-statistics-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "For the same distribution (class marks 5, 15, 25, 35, 45; frequencies 5, 8, 15, 9, 3), use the assumed-mean method with assumed mean a = 25 to find the mean.",
+      "answer": "24.25",
+      "explanation": "The deviations d = (class mark − 25) are −20, −10, 0, 10, 20. The products fd are −100, −80, 0, 90, 60, summing to −30. The mean is a + (Σfd)/n = 25 − 30/40 = 25 − 0.75 = 24.25, matching the class-mark method as it must.",
+      "commonMistake": "Forgetting to divide Σfd by n before adding to a, which would give a − 30 = −5, a nonsense mean below the data."
+    },
+    {
+      "id": "icse-10-math-q-statistics-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "For the same distribution, use the step-deviation method with assumed mean a = 25 and uniform class width h = 10 to find the mean.",
+      "answer": "24.25",
+      "explanation": "The step deviations u = (class mark − 25)/10 are −2, −1, 0, 1, 2. The products fu are −10, −8, 0, 9, 6, summing to −3. The mean is a + h x (Σfu)/n = 25 + 10 x (−3/40) = 25 − 0.75 = 24.25. Every method agrees once the arithmetic is exact.",
+      "commonMistake": "Multiplying by h twice, first inside u and again outside, which returns 250 and not the mean of the data."
+    },
+    {
+      "id": "icse-10-math-q-statistics-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "For the same 40-student distribution, find the median.",
+      "answer": "About 24.67",
+      "explanation": "Cumulative frequencies are 5, 13, 28, 37, 40. The median position n/2 = 20 falls in the class 20-30 (l = 20, cf below = 13, f = 15, h = 10). Median = l + ((n/2 − cf)/f) x h = 20 + ((20 − 13)/15) x 10 = 20 + 70/15 ≈ 24.67.",
+      "commonMistake": "Reaching for the modal class or using cf = 28 instead of the cumulative frequency just before the median class."
+    },
+    {
+      "id": "icse-10-math-q-statistics-18",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "For the same 40-student distribution, find the mode using the grouped-data formula.",
+      "answer": "About 25.38",
+      "explanation": "The modal class is 20-30 with l = 20, f1 = 15, f0 = 8 (the class before) and f2 = 9 (the class after). Mode = l + ((f1 − f0)/(2f1 − f0 − f2)) x h = 20 + ((15 − 8)/(30 − 8 − 9)) x 10 = 20 + (7/13) x 10 ≈ 25.38.",
+      "commonMistake": "Taking f0 and f2 from the wrong neighbouring classes, which changes the fraction to 7/8 or 7/6 and misplaces the mode."
+    },
+    {
+      "id": "icse-10-math-q-statistics-19",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "For the 40-student distribution (0-10:5, 10-20:8, 20-30:15, 30-40:9, 40-50:3), form the less-than cumulative frequency table, and use the ogive reasoning (cumulative frequencies against upper class boundaries) to find the median, the lower quartile Q1 and the upper quartile Q3, then compute the interquartile range.",
+      "answer": "Median ≈ 24.67, Q1 = 16.25, Q3 ≈ 32.22; IQR ≈ 15.97",
+      "explanation": "The less-than cumulative table is: ≤10:5, ≤20:13, ≤30:28, ≤40:37, ≤50:40. Reading positions n/4 = 10 (Q1), n/2 = 20 (median), 3n/4 = 30 (Q3): Q1 falls in 10-20: 10 + ((10 − 5)/8) x 10 = 10 + 6.25 = 16.25. Median falls in 20-30: 20 + ((20 − 13)/15) x 10 ≈ 24.67. Q3 falls in 30-40: 30 + ((30 − 28)/9) x 10 ≈ 32.22. The interquartile range is Q3 − Q1 ≈ 32.22 − 16.25 ≈ 15.97. These are exactly the values a correctly drawn ogive would give.",
+      "commonMistake": "Reading the quartiles at n/2 and 3n/4 positions from the frequency column instead of the cumulative column, or subtracting the wrong quartile pair."
+    },
+    {
+      "id": "icse-10-math-q-statistics-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "For the 40-student distribution, compute the mean, the median and the mode, then use the empirical relation to check the consistency of the three values.",
+      "answer": "Mean = 24.25, median ≈ 24.67, mode ≈ 25.38; the empirical check 3 x median − 2 x mean = 25.5 is close to the computed mode, so the three averages are consistent",
+      "explanation": "The mean from the class-mark method is 970/40 = 24.25. The median interpolated in class 20-30 is 20 + ((20 − 13)/15) x 10 ≈ 24.67. The mode interpolated in the same class is 20 + ((15 − 8)/(2 x 15 − 8 − 9)) x 10 ≈ 25.38. The empirical relation gives mode ≈ 3 x 24.67 − 2 x 24.25 = 74.0 − 48.5 = 25.5, which agrees with 25.38 to about 0.1, as expected for a moderately skewed grouped distribution where the empirical relation is approximate.",
+      "commonMistake": "Expecting the empirical relation to be exact; it is a rough check for grouped data and small discrepancies (here about 0.1) are normal."
+    },
+    {
+      "id": "icse-10-math-q-statistics-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The frequency table of 40 observations (classes 0-10, 10-20, 20-30, 30-40, 40-50) has frequencies 5, 8, f, 9, 3 and mean 24.25. Find the missing frequency f and express the total n x mean as a check.",
+      "answer": "f = 15; check: 40 x 24.25 = 970 = total of (frequency x class mark)",
+      "explanation": "The class marks are 5, 15, 25, 35, 45. The total of (frequency x class mark) is 5 x 5 + 8 x 15 + 25f + 9 x 35 + 3 x 45 = 25 + 120 + 25f + 315 + 135 = 595 + 25f. The mean condition is (595 + 25f)/40 = 24.25, so 595 + 25f = 970 and f = 375/25 = 15. Check: n x mean = 40 x 24.25 = 970 = 595 + 25 x 15 = 970, as required.",
+      "commonMistake": "Setting up 595 + 25f = 24.25 x 40 with f unmultiplied by its class mark, which between them mixes the frequency sum with the weighted sum."
+    },
+    {
+      "id": "icse-10-math-q-statistics-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Section A of a class of 30 boys has a mean test percentage of 52; the 20 girls have a mean of 40. Find the combined mean percentage of the whole class of 50.",
+      "answer": "47.2 per cent",
+      "explanation": "The combined mean is the weighted average: (30 x 52 + 20 x 40)/50 = (1560 + 800)/50 = 2360/50 = 47.2 per cent. The boys' larger size pulls the combined mean closer to 52 than to 40.",
+      "commonMistake": "Averaging 52 and 40 directly to get 46, which ignores the unequal group sizes."
+    },
+    {
+      "id": "icse-10-math-q-statistics-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "For the 40-student distribution (class marks 5, 15, 25, 35, 45 with frequencies 5, 8, 15, 9, 3), explain and verify the consistency of the mean found by the class-mark method, the assumed-mean method (a = 25) and the step-deviation method (h = 10), stating the single weighted sum each method computes.",
+      "answer": "All three methods give 24.25 because they all compute the same weighted total Σf x (class mark) = 970",
+      "explanation": "Each method is an algebraic rearrangement of the same quantity Σf x x, where x is the class mark. The class-mark method computes Σf x directly: 970. The assumed-mean method computes Σf(x − a) = 970 − 40a = 970 − 1000 = −30, then adds a back with the +Σfd/n = 25 − 0.75 step. The step-deviation method computes Σf(x − a)/h = −3, then rebuilds the mean as a + h x (Σfu)/n = 25 + 10 x (−3/40) = 24.25. Because Σf(x − a) = Σf x x − n a and Σf(x − a)/h = (Σf x x − n a)/h, the three formulas are identity-equivalent and must agree exactly, which they do at 24.25.",
+      "commonMistake": "Believing the step-deviation rounding (dividing by h) makes the answer approximate; with exact deviations the three methods agree to the last decimal."
+    }
   ]
 }

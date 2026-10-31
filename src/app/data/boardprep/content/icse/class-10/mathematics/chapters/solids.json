@@ -12,16 +12,46 @@
   "overview": {
     "intro": "This chapter extends plane geometry to three-dimensional solids. Students learn to compute the surface area and volume of the right circular cylinder, right circular cone, and sphere, as well as combinations of these solids (such as a cylinder with a conical top, or a hemisphere surmounted on a cube). The chapter also covers unit conversions (between cm³, m³, litres, and millilitres) and applies these concepts to real-world problems involving capacity, materials, and packaging.",
     "facts": [
-      { "label": "Cylinder volume", "value": "V = πr²h" },
-      { "label": "Cylinder curved surface area", "value": "CSA = 2πrh" },
-      { "label": "Cylinder total surface area", "value": "TSA = 2πr(r + h)" },
-      { "label": "Cone volume", "value": "V = (1/3)πr²h" },
-      { "label": "Cone curved surface area", "value": "CSA = πrl" },
-      { "label": "Cone total surface area", "value": "TSA = πr(r + l)" },
-      { "label": "Sphere volume", "value": "V = (4/3)πr³" },
-      { "label": "Sphere surface area", "value": "SA = 4πr³" },
-      { "label": "Hemisphere volume", "value": "V = (2/3)πr³" },
-      { "label": "Hemisphere total surface area", "value": "TSA = 3πr²" }
+      {
+        "label": "Cylinder volume",
+        "value": "V = πr²h"
+      },
+      {
+        "label": "Cylinder curved surface area",
+        "value": "CSA = 2πrh"
+      },
+      {
+        "label": "Cylinder total surface area",
+        "value": "TSA = 2πr(r + h)"
+      },
+      {
+        "label": "Cone volume",
+        "value": "V = (1/3)πr²h"
+      },
+      {
+        "label": "Cone curved surface area",
+        "value": "CSA = πrl"
+      },
+      {
+        "label": "Cone total surface area",
+        "value": "TSA = πr(r + l)"
+      },
+      {
+        "label": "Sphere volume",
+        "value": "V = (4/3)πr³"
+      },
+      {
+        "label": "Sphere surface area",
+        "value": "SA = 4πr³"
+      },
+      {
+        "label": "Hemisphere volume",
+        "value": "V = (2/3)πr³"
+      },
+      {
+        "label": "Hemisphere total surface area",
+        "value": "TSA = 3πr²"
+      }
     ]
   },
   "learningOutcomes": [
@@ -48,12 +78,37 @@
         {
           "type": "table",
           "caption": "Solid geometry formulae summary",
-          "columns": ["Solid", "Volume", "Curved Surface Area", "Total Surface Area"],
+          "columns": [
+            "Solid",
+            "Volume",
+            "Curved Surface Area",
+            "Total Surface Area"
+          ],
           "rows": [
-            ["Cylinder", "πr²h", "2πrh", "2πr(r + h)"],
-            ["Cone", "(1/3)πr²h", "πrl", "πr(r + l)"],
-            ["Sphere", "(4/3)πr³", "N/A", "4πr²"],
-            ["Hemisphere", "(2/3)πr³", "2πr²", "3πr²"]
+            [
+              "Cylinder",
+              "πr²h",
+              "2πrh",
+              "2πr(r + h)"
+            ],
+            [
+              "Cone",
+              "(1/3)πr²h",
+              "πrl",
+              "πr(r + l)"
+            ],
+            [
+              "Sphere",
+              "(4/3)πr³",
+              "N/A",
+              "4πr²"
+            ],
+            [
+              "Hemisphere",
+              "(2/3)πr³",
+              "2πr²",
+              "3πr²"
+            ]
           ]
         },
         {
@@ -80,18 +135,15 @@
           "items": [
             {
               "text": "Find the volume of a cylinder with radius 5 cm and height 10 cm.",
-              "answer": "V = π × 5² × 10 = 250π cm³ ≈ 785.4 cm³ (using π = 3.14).",
-              "explanation": "V = πr²h = π × 5² × 10 = π × 25 × 10 = 250π."
+              "note": "V = π × 5² × 10 = 250π cm³ ≈ 785.4 cm³ (using π = 3.14). V = πr²h = π × 5² × 10 = π × 25 × 10 = 250π."
             },
             {
               "text": "Find the total surface area of a cylinder with radius 3 cm and height 7 cm.",
-              "answer": "TSA = 2π × 3 × (3 + 7) = 2π × 3 × 10 = 60π cm² ≈ 188.4 cm².",
-              "explanation": "TSA = 2πr(r + h) = 2π × 3 × (3 + 7) = 2π × 3 × 10 = 60π."
+              "note": "TSA = 2π × 3 × (3 + 7) = 2π × 3 × 10 = 60π cm² ≈ 188.4 cm². TSA = 2πr(r + h) = 2π × 3 × (3 + 7) = 2π × 3 × 10 = 60π."
             },
             {
               "text": "A cylindrical water tank has radius 2 m and height 1.5 m. How many litres of water can it hold?",
-              "answer": "Volume = π × 2² × 1.5 = 6π m³ ≈ 18.84 m³. In litres: 18.84 × 1000 = 18,840 litres.",
-              "explanation": "V = πr²h = π × 2² × 1.5 = 6π m³. Since 1 m³ = 1000 litres, the capacity is 6π × 1000 ≈ 18,840 litres."
+              "note": "Volume = π × 2² × 1.5 = 6π m³ ≈ 18.84 m³. In litres: 18.84 × 1000 = 18,840 litres. V = πr²h = π × 2² × 1.5 = 6π m³. Since 1 m³ = 1000 litres, the capacity is 6π × 1000 ≈ 18,840 litres."
             }
           ]
         },
@@ -119,18 +171,15 @@
           "items": [
             {
               "text": "Find the volume of a cone with radius 6 cm and height 8 cm.",
-              "answer": "First, l = √(6² + 8²) = √(36 + 64) = √100 = 10 cm. Then V = (1/3)π × 6² × 8 = (1/3)π × 36 × 8 = 96π cm³ ≈ 301.6 cm³.",
-              "explanation": "V = (1/3)πr²h = (1/3)π × 36 × 8 = 96π. The slant height is found via Pythagoras as a subsidiary step."
+              "note": "First, l = √(6² + 8²) = √(36 + 64) = √100 = 10 cm. Then V = (1/3)π × 6² × 8 = (1/3)π × 36 × 8 = 96π cm³ ≈ 301.6 cm³. V = (1/3)πr²h = (1/3)π × 36 × 8 = 96π. The slant height is found via Pythagoras as a subsidiary step."
             },
             {
               "text": "Find the total surface area of a cone with radius 4 cm and slant height 5 cm.",
-              "answer": "TSA = π × 4 × (4 + 5) = 36π cm² ≈ 113.1 cm².",
-              "explanation": "TSA = πr(r + l) = π × 4 × (4 + 5) = 36π."
+              "note": "TSA = π × 4 × (4 + 5) = 36π cm² ≈ 113.1 cm². TSA = πr(r + l) = π × 4 × (4 + 5) = 36π."
             },
             {
               "text": "A conical tent has a base radius of 3 m and a height of 4 m. Find the curved surface area of the canvas needed.",
-              "answer": "First, l = √(3² + 4²) = 5 m. Then CSA = π × 3 × 5 = 15π m² ≈ 47.1 m².",
-              "explanation": "l = √(r² + h²) = √(9 + 16) = 5. CSA = πrl = π × 3 × 5 = 15π."
+              "note": "First, l = √(3² + 4²) = 5 m. Then CSA = π × 3 × 5 = 15π m² ≈ 47.1 m². l = √(r² + h²) = √(9 + 16) = 5. CSA = πrl = π × 3 × 5 = 15π."
             }
           ]
         },
@@ -158,18 +207,15 @@
           "items": [
             {
               "text": "Find the surface area of a sphere with radius 7 cm.",
-              "answer": "SA = 4π × 7² = 4π × 49 = 196π cm² ≈ 615.4 cm².",
-              "explanation": "SA = 4πr² = 4π × 7² = 4π × 49 = 196π."
+              "note": "SA = 4π × 7² = 4π × 49 = 196π cm² ≈ 615.4 cm². SA = 4πr² = 4π × 7² = 4π × 49 = 196π."
             },
             {
               "text": "Find the volume of a hemisphere with radius 3 cm.",
-              "answer": "V = (2/3)π × 3³ = (2/3)π × 27 = 18π cm³ ≈ 56.5 cm³.",
-              "explanation": "V = (2/3)πr³ = (2/3)π × 27 = 18π."
+              "note": "V = (2/3)π × 3³ = (2/3)π × 27 = 18π cm³ ≈ 56.5 cm³. V = (2/3)πr³ = (2/3)π × 27 = 18π."
             },
             {
               "text": "A hemispherical bowl of radius 5 cm is filled with water. How many millilitres of water does it hold? (1 cm³ = 1 mL)",
-              "answer": "V = (2/3)π × 5³ = (2/3)π × 125 = 250π/3 cm³ ≈ 261.8 mL.",
-              "explanation": "V = (2/3)πr³ = (2/3)π × 125 = 250π/3 cm³. Since 1 cm³ = 1 mL, the capacity is 250π/3 mL ≈ 261.8 mL."
+              "note": "V = (2/3)π × 5³ = (2/3)π × 125 = 250π/3 cm³ ≈ 261.8 mL. V = (2/3)πr³ = (2/3)π × 125 = 250π/3 cm³. Since 1 cm³ = 1 mL, the capacity is 250π/3 mL ≈ 261.8 mL."
             }
           ]
         },
@@ -197,18 +243,15 @@
           "items": [
             {
               "text": "A solid consists of a cylinder of radius 3 cm and height 10 cm, with a cone of radius 3 cm and height 4 cm on top. Find the total surface area.",
-              "answer": "Cylinder CSA = 2πrh = 2π × 3 × 10 = 60π. Cone CSA = πrl, where l = √(3² + 4²) = 5, so CSA = π × 3 × 5 = 15π. The cylinder's top base is covered by the cone's base, so it is not exposed. The cylinder's bottom base IS exposed: area = πr² = 9π. Total TSA = 60π + 15π + 9π = 84π cm² ≈ 263.9 cm².",
-              "explanation": "The total surface area consists of the cylinder's curved surface (60π), the cone's curved surface (15π), and the cylinder's bottom base (9π). The cylinder's top base and the cone's base are joined together and are not exposed."
+              "note": "Cylinder CSA = 2πrh = 2π × 3 × 10 = 60π. Cone CSA = πrl, where l = √(3² + 4²) = 5, so CSA = π × 3 × 5 = 15π. The cylinder's top base is covered by the cone's base, so it is not exposed. The cylinder's bottom base IS exposed: area = πr² = 9π. Total TSA = 60π + 15π + 9π = 84π cm² ≈ 263.9 cm². The total surface area consists of the cylinder's curved surface (60π), the cone's curved surface (15π), and the cylinder's bottom base (9π). The cylinder's top base and the cone's base are joined together and are not exposed."
             },
             {
               "text": "A cube of side 6 cm has a hemisphere of radius 3 cm surmounted on its top face. Find the total surface area of the resulting solid.",
-              "answer": "Cube TSA without top face = 5 × 6² = 180 cm² (five faces exposed, the top is covered by the hemisphere). Hemisphere curved surface = 2πr² = 2π × 3² = 18π. The hemisphere's flat base coincides with the cube's top face and is not added again. Total TSA = 180 + 18π cm² ≈ 236.5 cm².",
-              "explanation": "The cube has 5 exposed faces (the top face is covered by the hemisphere). The hemisphere contributes its curved surface area only; its flat base is internal and not counted."
+              "note": "Cube TSA without top face = 5 × 6² = 180 cm² (five faces exposed, the top is covered by the hemisphere). Hemisphere curved surface = 2πr² = 2π × 3² = 18π. The hemisphere's flat base coincides with the cube's top face and is not added again. Total TSA = 180 + 18π cm² ≈ 236.5 cm². The cube has 5 exposed faces (the top face is covered by the hemisphere). The hemisphere contributes its curved surface area only; its flat base is internal and not counted."
             },
             {
               "text": "A cylinder of radius 4 cm and height 12 cm has a conical hole of radius 4 cm and slant height 5 cm drilled through it. Find the volume of the remaining solid.",
-              "answer": "Cylinder volume = πr²h = π × 4² × 12 = 192π cm³. Cone volume = (1/3)πr²h, where h = √(l² − r²) = √(25 − 16) = 3, so cone volume = (1/3)π × 16 × 3 = 16π cm³. Remaining volume = 192π − 16π = 176π cm³ ≈ 552.9 cm³.",
-              "explanation": "The volume of the remaining solid is the cylinder volume minus the volume of the conical hole. The cone's vertical height is found via Pythagoras: h = √(l² − r²) = √(25 − 16) = 3 cm."
+              "note": "Cylinder volume = πr²h = π × 4² × 12 = 192π cm³. Cone volume = (1/3)πr²h, where h = √(l² − r²) = √(25 − 16) = 3, so cone volume = (1/3)π × 16 × 3 = 16π cm³. Remaining volume = 192π − 16π = 176π cm³ ≈ 552.9 cm³. The volume of the remaining solid is the cylinder volume minus the volume of the conical hole. The cone's vertical height is found via Pythagoras: h = √(l² − r²) = √(25 − 16) = 3 cm."
             }
           ]
         },
@@ -237,23 +280,19 @@
           "items": [
             {
               "text": "Convert 5000 cm³ to m³.",
-              "answer": "5000 cm³ = 5000 / 1,000,000 m³ = 0.005 m³.",
-              "explanation": "Since 1 m³ = 10⁶ cm³, divide by 1,000,000."
+              "note": "5000 cm³ = 5000 / 1,000,000 m³ = 0.005 m³. Since 1 m³ = 10⁶ cm³, divide by 1,000,000."
             },
             {
               "text": "Convert 3.5 m³ to cm³.",
-              "answer": "3.5 m³ = 3.5 × 1,000,000 cm³ = 3,500,000 cm³.",
-              "explanation": "Multiply by 10⁶."
+              "note": "3.5 m³ = 3.5 × 1,000,000 cm³ = 3,500,000 cm³. Multiply by 10⁶."
             },
             {
               "text": "A cylindrical tank of capacity 2 m³ is filled with water. How many litres of water is this?",
-              "answer": "2 m³ = 2 × 1000 = 2000 litres.",
-              "explanation": "Since 1 m³ = 1000 litres, 2 m³ = 2000 litres."
+              "note": "2 m³ = 2 × 1000 = 2000 litres. Since 1 m³ = 1000 litres, 2 m³ = 2000 litres."
             },
             {
               "text": "A tank holds 250 litres of water. Express this in m³.",
-              "answer": "250 litres = 250 / 1000 = 0.25 m³.",
-              "explanation": "Since 1 m³ = 1000 litres, divide by 1000."
+              "note": "250 litres = 250 / 1000 = 0.25 m³. Since 1 m³ = 1000 litres, divide by 1000."
             }
           ]
         },
@@ -276,8 +315,369 @@
           "type": "paragraph",
           "text": "The questions that follow move from straightforward formula applications through multi-step problems involving combined solids and unit conversions to reasoning about which faces are exposed. Work each one by identifying the solid(s), writing the relevant formula, and substituting the given values."
         }
-        
       ]
+    }
+  ],
+  "keyPoints": [
+    "For a cylinder of radius r and height h: volume V = πr²h, curved surface area = 2πrh, and total surface area = 2πr(h + r).",
+    "For a cone of radius r, vertical height h and slant height l: volume V = (1/3)πr²h, curved surface area = πrl, and total surface area = πr(r + l).",
+    "The slant height of a cone comes from Pythagoras, l = √(r² + h²), and is never the same as the vertical height h.",
+    "For a sphere of radius r: volume V = (4/3)πr³ and surface area = 4πr²; a hemisphere has half the volume, curved area 2πr² and total area 3πr².",
+    "Melting and recasting conserve volume: the original solid's volume equals the sum of the volumes of the new pieces, never their surface areas.",
+    "Lengths, areas and volumes scale by the scale factor, its square and its cube: doubling every length of a solid multiplies its surface area by 4 and its volume by 8.",
+    "Capacity conversions: 1 litre = 1000 cm³ and 1 m³ = 10⁶ cm³ = 1000 litres.",
+    "For a combined solid, list every exposed face before adding areas; the circle where two parts meet is internal and belongs to neither surface."
+  ],
+  "examFocus": [
+    "Write the radius, the height and the value of π in use at the top of the working before substituting into any formula, and keep one formula per line.",
+    "Architecture questions about melting and recasting are volume-conservation questions: compute the original volume, divide by one new piece, and only then round the count to a whole number.",
+    "A question that gives the slant height expects πrl immediately; one that gives the vertical height expects Pythagoras first. Marking which was given avoids the most common lost mark.",
+    "For a combined solid, exactly two things are asked in most papers: the total surface area of the exposed faces and the volume of the whole. Beware of the joined face in the area part.",
+    "Answers involving litres must carry the cm³-to-litre conversion explicitly; silently dividing by 1000 loses the method mark even when the number is right."
+  ],
+  "vocabulary": [
+    {
+      "word": "Slant height",
+      "meaning": "The distance along the curved face of a cone from a point on the base circle to the apex; found with Pythagoras from the radius and the vertical height."
+    },
+    {
+      "word": "Curved surface area",
+      "meaning": "The area of the lateral face only — 2πrh for a cylinder, πrl for a cone, 2πr² for a hemisphere — excluding any flat circular faces."
+    },
+    {
+      "word": "Total surface area",
+      "meaning": "The area of every exposed face of a solid, curved faces and flat circles together."
+    },
+    {
+      "word": "Hemisphere",
+      "meaning": "Half of a sphere cut by a plane through its centre; its volume is (2/3)πr³ and its flat face is a circle of area πr²."
+    },
+    {
+      "word": "Capacity",
+      "meaning": "The volume a hollow vessel can hold, usually quoted in litres where 1 litre = 1000 cm³."
+    },
+    {
+      "word": "Recasting",
+      "meaning": "Melting a solid and reforming the metal into new shapes; the total volume is unchanged by the process."
+    },
+    {
+      "word": "Combined solid",
+      "meaning": "A solid made of two or more standard solids joined, for which volumes are added but the meeting face is excluded from surface areas."
+    },
+    {
+      "word": "Cube root",
+      "meaning": "The reverse of cubing; the edge of a cube of volume 216 cm³ is ∛216 = 6 cm, used whenever volumes are scaled."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-math-q-solids-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The curved surface area of a cylinder of radius 7 cm and height 10 cm is:",
+      "answer": "440 cm²",
+      "explanation": "The curved surface area is 2πrh = 2 x (22/7) x 7 x 10 = 440 cm², since the radius 7 cancels the 7 in π = 22/7.",
+      "options": [
+        "440 cm²",
+        "154 cm²",
+        "700 cm²",
+        "880 cm²"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Using πr² h (the volume formula) instead of 2πrh, which gives 1540 cm³ and does not match any curved-area option."
+    },
+    {
+      "id": "icse-10-math-q-solids-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume of a cone of base radius 6 cm and height 7 cm is:",
+      "answer": "264 cm³",
+      "explanation": "V = (1/3)πr²h = (1/3) x (22/7) x 36 x 7 = (1/3) x 36 x 22 = 264 cm³; the factor 7 cancels and the 1/3 divides 36 into 12.",
+      "options": [
+        "264 cm³",
+        "792 cm³",
+        "352 cm³",
+        "176 cm³"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Forgetting the factor 1/3, which gives the cylinder volume 792 cm³ instead of the cone volume."
+    },
+    {
+      "id": "icse-10-math-q-solids-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The surface area of a sphere of radius 7 cm is:",
+      "answer": "616 cm²",
+      "explanation": "The surface area of a sphere is 4πr² = 4 x (22/7) x 49 = 4 x 22 x 7 = 616 cm².",
+      "options": [
+        "616 cm²",
+        "308 cm²",
+        "154 cm²",
+        "1232 cm²"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Using 2πr² (twice the base circle instead of four times it), which gives 308 cm²."
+    },
+    {
+      "id": "icse-10-math-q-solids-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The total surface area of a solid hemisphere of radius 7 cm is:",
+      "answer": "462 cm²",
+      "explanation": "A solid hemisphere has a curved face of 2πr² and a flat circular face of πr², so the total is 3πr² = 3 x (22/7) x 49 = 462 cm².",
+      "options": [
+        "462 cm²",
+        "308 cm²",
+        "924 cm²",
+        "154 cm²"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Adding the flat circle twice (or omitting it entirely), which gives 616 cm² or 308 cm² instead of 462 cm²."
+    },
+    {
+      "id": "icse-10-math-q-solids-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A sphere has the same radius as a cylinder whose height equals the sphere's diameter. The ratio of the volume of the sphere to the volume of the cylinder is:",
+      "answer": "2 : 3",
+      "explanation": "The cylinder has radius r and height 2r, so its volume is 2πr³, while the sphere's volume is (4/3)πr³. The ratio is (4/3) : 2 = 2 : 3 after multiplying both sides by 3.",
+      "options": [
+        "2 : 3",
+        "3 : 2",
+        "1 : 3",
+        "2 : 1"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Comparing the sphere with a cylinder of height r rather than 2r, which gives the familiar but here irrelevant 2 : 1 ratio."
+    },
+    {
+      "id": "icse-10-math-q-solids-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A cylinder and a cone have the same base radius and the same height. The volume of the cylinder exceeds the volume of the cube of the cone's radius by how many times the cone's volume?",
+      "answer": "3 times",
+      "explanation": "V_cylinder = πr²h and V_cone = (1/3)πr²h, so the cylinder holds exactly three times the cone; the difference is two cones' worth of volume.",
+      "options": [
+        "3 times",
+        "2 times",
+        "4 times",
+        "1/3 times"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Reporting the cylinder/cone ratio as the difference between x2 and x3 factors of other pairs of solids, forgetting that the 1/3 in the cone formula is exact."
+    },
+    {
+      "id": "icse-10-math-q-solids-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the diameter of a cylinder is doubled while its height stays the same, its curved surface area becomes:",
+      "answer": "2 times the original",
+      "explanation": "CSA = 2πrh depends linearly on r. Doubling the diameter doubles r and therefore doubles the curved surface area.",
+      "options": [
+        "2 times the original",
+        "4 times the original",
+        "8 times the original",
+        "unchanged"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Squaring the scale factor as though the area depended on r², which would be true for the circular ends but not for the 2πrh term."
+    },
+    {
+      "id": "icse-10-math-q-solids-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the radius of a sphere increases by 10 per cent, its volume increases by approximately:",
+      "answer": "33.1 per cent",
+      "explanation": "Volume depends on r³, so the scale factor is 1.1³ = 1.331, an increase of 33.1 per cent; the 10 per cent radius rise compounds through the three factors of r.",
+      "options": [
+        "33.1 per cent",
+        "10 per cent",
+        "21 per cent",
+        "30 per cent"
+      ],
+      "correctIndex": 0,
+      "commonMistake": "Adding 10 per cent three times to reach 30 per cent, which ignores the compounding (cubic) dependence of volume on radius."
+    },
+    {
+      "id": "icse-10-math-q-solids-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The total surface area of a cylinder of radius r and height h is 2πr(____ + r).",
+      "answer": "h (the height of the cylinder)",
+      "explanation": "The total surface area adds the curved face 2πrh to the two circular ends, which together are 2πr², so it factors as 2πr(h + r); the missing quantity in the bracket is the height h.",
+      "commonMistake": "Writing h/2 or 2h, which breaks the factorisation that pairs one 2 with h for the curved face and one r with π for an end."
+    },
+    {
+      "id": "icse-10-math-q-solids-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume of a hemisphere is exactly ____ the volume of the sphere with the same radius.",
+      "answer": "half",
+      "explanation": "Cutting a sphere in half by a plane through its centre produces two identical hemispheres, each carrying (1/2) x (4/3)πr³ = (2/3)πr³ of volume.",
+      "commonMistake": "Confusing volume with surface area, where the hemisphere has two-thirds of the sphere's area plus a flat circle rather than a fixed half."
+    },
+    {
+      "id": "icse-10-math-q-solids-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "1 litre equals ____ cubic centimetres.",
+      "answer": "1000",
+      "explanation": "A litre is defined as a cube 10 cm on a side, and 10³ = 1000, so capacity conversions move between litres and cm³ with a factor of exactly 1000.",
+      "commonMistake": "Dividing by 100 instead of 1000 because cm-to-metre conversions use 100; capacity uses the cube of 10, not 10."
+    },
+    {
+      "id": "icse-10-math-q-solids-12",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The volume of a cone equals ____ of the volume of the cylinder with the same base and the same height.",
+      "answer": "one third",
+      "explanation": "V_cone = (1/3)πr²h against V_cylinder = πr²h shows the cone fills exactly one third of the cylinder; three full cones refill one cylinder.",
+      "commonMistake": "Using two thirds, which is the hemisphere-to-sphere ratio rather than the cone-to-cylinder ratio."
+    },
+    {
+      "id": "icse-10-math-q-solids-13",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The total surface area of a cube of edge 5 cm is ____.",
+      "answer": "150 cm²",
+      "explanation": "A cube has six square faces each of area 5² = 25 cm², so the total surface area is 6 x 25 = 150 cm².",
+      "commonMistake": "Reporting 25 cm², which is the area of a single face rather than all six."
+    },
+    {
+      "id": "icse-10-math-q-solids-14",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A closed cylindrical tin of radius 7 cm and height 10 cm is made of sheet metal. Find its total surface area.",
+      "answer": "748 cm²",
+      "explanation": "The curved surface is 2πrh = 2 x (22/7) x 7 x 10 = 440 cm². The two ends contribute 2πr² = 2 x (22/7) x 49 = 308 cm². The total is 440 + 308 = 748 cm², which also equals 2πr(h + r) = 2 x (22/7) x 7 x 17 = 748 cm².",
+      "commonMistake": "Counting only one circular end, or multiplying 440 by 3/2 rather than adding the exact 308 cm² of the two ends."
+    },
+    {
+      "id": "icse-10-math-q-solids-15",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A right circular cone has base radius 8 cm and vertical height 15 cm. Find its slant height.",
+      "answer": "17 cm",
+      "explanation": "The slant height is the hypotenuse of the right triangle formed by the radius and the vertical height: l = √(r² + h²) = √(64 + 225) = √289 = 17 cm.",
+      "commonMistake": "Adding r and h linearly (8 + 15 = 23) instead of applying Pythagoras' theorem."
+    },
+    {
+      "id": "icse-10-math-q-solids-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A hemispherical bowl has an internal radius of 21 cm. Find its capacity in litres.",
+      "answer": "19.404 litres",
+      "explanation": "The capacity is the hemisphere volume (2/3)πr³ = (2/3) x (22/7) x 21³. Since 21³ = 9261 and 9261/21 = 441, the volume is (2 x 22 x 441) x 21/21 = 44 x 441 = 19404 cm³. Dividing by 1000 converts to 19.404 litres.",
+      "commonMistake": "Using the sphere volume 4πr³/3, which doubles the answer to 38.808 litres, or forgetting the cm³-to-litre division."
+    },
+    {
+      "id": "icse-10-math-q-solids-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A spherical ball of radius 4.2 cm is melted and recast into 8 identical smaller balls. Find the radius of each smaller ball.",
+      "answer": "2.1 cm",
+      "explanation": "Eight small balls carry eight times the volume of one small ball equal to the original, so each small ball has one eighth of the original volume. Volumes scale as the cube of the radius, so the radius scales by the cube root of 1/8 = 1/2, giving 4.2 / 2 = 2.1 cm.",
+      "commonMistake": "Halving the volume and then reporting the radius as half of 2.1 cm, which treats the radius as though it scaled linearly with volume."
+    },
+    {
+      "id": "icse-10-math-q-solids-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A solid metal sphere of radius 7 cm is melted and recast into identical small cones, each of base radius 7 cm and height 4 cm. How many cones are formed?",
+      "answer": "7 cones",
+      "explanation": "The sphere has volume (4/3)πr³ = (4/3)π x 343 = 1372π/3. Each cone has volume (1/3)πr²h = (1/3)π x 49 x 4 = 196π/3. Dividing, (1372π/3) / (196π/3) = 1372/196 = 7, so exactly 7 cones are formed with no metal wasted.",
+      "commonMistake": "Comparing surface areas rather than volumes when counting the recast pieces; melting conserves volume, not surface area."
+    },
+    {
+      "id": "icse-10-math-q-solids-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A solid toy is made from a cylinder of radius 7 cm and height 10 cm with a solid hemisphere mounted on one flat face (the same radius). Taking π = 22/7, find (i) the total surface area of the toy and (ii) its volume.",
+      "answer": "Total surface area 902 cm²; volume 2258 2/3 cm³ (about 2258.67 cm³)",
+      "explanation": "The exposed faces are the cylinder's curved surface, the cylinder's bottom circle, and the hemisphere's curved surface: 2πrh + πr² + 2πr² = 2 x (22/7) x 7 x 10 + (22/7) x 49 x 3 = 440 + 462 = 902 cm². The volume is the cylinder plus the hemisphere: πr²h + (2/3)πr³ = (22/7) x 49 x 10 + (2/3) x (22/7) x 343 = 1540 + 2156/3 = 6776/3 = 2258 2/3 cm³, that is about 2258.67 cm³.",
+      "commonMistake": "Including the contact circle twice, or subtracting the hemisphere's flat face from the mounted cylinder without checking which faces are actually exposed."
+    },
+    {
+      "id": "icse-10-math-q-solids-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A solid sphere of radius 6 cm is fully submerged in a cylindrical jar of internal radius 6 cm that already contains water. Find the rise in the water level.",
+      "answer": "8 cm",
+      "explanation": "The displaced volume equals the sphere volume (4/3)πr³. It spreads through the jar of base area πr² (same radius), so the rise is (4/3)πr³ / πr² = (4/3)r = (4/3) x 6 = 8 cm.",
+      "commonMistake": "Using the jar's diameter rather than its radius as the base dimension, which halves the base area and doubles the computed rise to 16 cm."
+    },
+    {
+      "id": "icse-10-math-q-solids-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Water from a full conical vessel of base radius 6 cm and height 21 cm is emptied into an empty cylindrical glass of base radius 3 cm. How deep does the water stand in the glass?",
+      "answer": "28 cm",
+      "explanation": "The cone holds (1/3)πr²h = (1/3)π x 36 x 21 = 252π cm³. In the cylinder the same volume stands as πR² x depth = 9π x depth, so the depth is 252π / 9π = 28 cm. The π cancels, so the answer is exact.",
+      "commonMistake": "Equating heights instead of volumes (28 would then have to come from 21 x 4/3 without justifying the 4/3), rather than dividing the cone volume by the glass base area."
+    },
+    {
+      "id": "icse-10-math-q-solids-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Three metallic cubes of edges 3 cm, 4 cm and 5 cm are melted together into a single cube. Find the edge of the new cube and verify it by computing both the sum of the three volumes and the new cube's volume.",
+      "answer": "Edge 6 cm",
+      "explanation": "The three volumes are 3³ = 27, 4³ = 64 and 5³ = 125 cm³, summing to 216 cm³. The new cube therefore has edge ∛216 = 6 cm, and 6³ = 216 cm³ confirms the conservation of volume.",
+      "commonMistake": "Adding the edges (3 + 4 + 5 = 12) instead of the volumes, which would give an edge of 12 cm and eight times the original material."
+    },
+    {
+      "id": "icse-10-math-q-solids-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solid cylinder of radius 7 cm and height 63 cm is melted and recast into identical spheres of radius 3.5 cm each. How many spheres are formed?",
+      "answer": "54 spheres",
+      "explanation": "The cylinder volume is πr²h = π x 49 x 63 = 3087π. Each sphere has volume (4/3)π r³ = (4/3)π x 42.875 = 57.1666...,π. Dividing: 3087π / ((4/3) x 42.875π) = (49 x 63) / ((4/3) x (7/2)³). Working with fractions: (4/3) x (343/8) = 343/6, so the count is 3087 / (343/6) = 3087 x 6 / 343 = 9 x 6 / 1 x 343/343 = 54 spheres exactly.",
+      "commonMistake": "Rounding the volume of one sphere to 57.17 cm³ and then dividing 3087π to get 53.99, then rounding to 53; keeping exact fractions shows the count is exactly 54."
     }
   ]
 }

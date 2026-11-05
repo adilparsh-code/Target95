@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
-import { getVerifiedSession } from "@/app/lib/server-auth";
-import { getAdminDb } from "@/app/lib/firebase-admin";
-import { extractResponseText } from "@/app/lib/blog-ai-prompt";
-import { checkAITutorAccess } from "@/lib/entitlements";
+import { getVerifiedSession } from "../../lib/server-auth.js";
+import { getAdminDb } from "../../lib/firebase-admin.js";
+
+import { extractResponseText } from "../../lib/blog-ai-prompt.js";
+import { checkAITutorAccess } from "../../lib/entitlements.js";
+
+
 
 export const runtime = "nodejs";
 

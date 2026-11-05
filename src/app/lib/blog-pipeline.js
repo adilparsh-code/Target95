@@ -4,7 +4,7 @@ import {
   buildOpenAIRequestBody,
   extractResponseText,
   parseDraftResponse,
-} from "./blog-ai-prompt";
+} from "./blog-ai-prompt.js";
 import {
   createArticle,
   getExistingArticleIndex,
@@ -14,8 +14,8 @@ import {
   markTopicDone,
   markTopicError,
   slugify,
-} from "./blog";
-import { runQualityChecks, DEFAULT_MIN_CONTENT_WORDS } from "./blog-quality-gate";
+} from "./blog.js";
+import { runQualityChecks, DEFAULT_MIN_CONTENT_WORDS } from "./blog-quality-gate.js";
 
 const DEFAULT_MODEL = "gpt-5.6-luna";
 

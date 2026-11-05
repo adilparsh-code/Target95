@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAdminDb } from "@/app/lib/firebase-admin";
+import { getAdminDb } from "../../../app/lib/firebase-admin.js";
 
 /**
  * Shared helpers for admin-only API routes.

@@ -1,11 +1,11 @@
 import { FieldValue } from "firebase-admin/firestore";
-import { TIME_SENSITIVE_CATEGORIES } from "./blog-ai-prompt";
+import { TIME_SENSITIVE_CATEGORIES } from "./blog-ai-prompt.js";
 
 export { TIME_SENSITIVE_CATEGORIES };
 
 const TOPIC_TERMINAL_STATUSES = ["done", "generating"];
 const MAX_TOPIC_ATTEMPTS = 3;
-import { getAdminDb } from "./firebase-admin";
+import { getAdminDb } from "./firebase-admin.js";
 
 export const BLOG_CATEGORIES = [
   "ai-technology",

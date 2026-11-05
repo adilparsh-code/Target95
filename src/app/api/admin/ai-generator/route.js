@@ -1,6 +1,6 @@
-import { adminGuard } from "@/app/api/admin/_helpers";
-import { cleanString, toInt } from "@/app/lib/admin-validation";
-import { extractResponseText } from "@/app/lib/blog-ai-prompt";
+import { adminGuard } from "../../../api/admin/_helpers.js";
+import { cleanString, toInt } from "../../../../app/lib/admin-validation.js";
+import { extractResponseText } from "../../../../app/lib/blog-ai-prompt.js";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

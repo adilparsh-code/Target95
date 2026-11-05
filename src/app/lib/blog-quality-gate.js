@@ -1,5 +1,5 @@
 // Target95 quality gate for AI-generated blog drafts.
-import { TIME_SENSITIVE_CATEGORIES } from "./blog-ai-prompt";
+import { TIME_SENSITIVE_CATEGORIES } from "./blog-ai-prompt.js";
 
 export const DEFAULT_MIN_CONTENT_WORDS = 350;
 

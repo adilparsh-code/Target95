@@ -1,5 +1,5 @@
-import { getAdminAuth, getAdminDb } from "@/app/lib/firebase-admin";
-import { verifyActiveSession } from "@/lib/accountStatus.mjs";
+import { getAdminAuth, getAdminDb } from "./firebase-admin.js";
+import { verifyActiveSession } from "../../lib/accountStatus.mjs";
 
 export async function getVerifiedSession(request) {
   // checkRevoked session + verified email + active users/{uid} profile

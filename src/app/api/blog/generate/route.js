@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { claimTopicForGeneration } from "../../../lib/blog";
-import { runPipelineForTopic } from "../../../lib/blog-pipeline";
-import { isAuthorizedCronRequest } from "../../../lib/blog-admin-auth";
+import { claimTopicForGeneration } from "../../../lib/blog.js";
+import { runPipelineForTopic } from "../../../lib/blog-pipeline.js";
+import { isAuthorizedCronRequest } from "../../../lib/blog-admin-auth.js";
 
 export const runtime = "nodejs";
 

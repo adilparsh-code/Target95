@@ -1,5 +1,5 @@
 import crypto from "node:crypto";
-import { getAdminAuth, getAdminDb } from "./firebase-admin";
+import { getAdminAuth, getAdminDb } from "./firebase-admin.js";
 import { hasActiveProfile } from "../../lib/accountStatus.mjs";
 
 function getAllowedEmails() {

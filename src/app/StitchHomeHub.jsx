@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import HomeResumeCard from "./components/HomeResumeCard";
+import AceMascot from "./components/AceMascot";
 import { usePersonalization } from "./hooks/usePersonalization";
 import useProgress from "./hooks/useProgress";
 import { useAuth } from "@/context/AuthContext";
@@ -73,6 +74,15 @@ export default function StitchHomeHub() {
               </div>
             </section>
           )}
+
+          <section className="mt-4 flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5" aria-labelledby="meet-ace-title">
+            <AceMascot size={64} className="h-14 w-14 sm:h-16 sm:w-16" />
+            <div>
+              <p className="stitch-eyebrow">Meet Ace</p>
+              <h2 id="meet-ace-title" className="stitch-heading mt-1 text-lg sm:text-xl">Hey, I’m Ace!</h2>
+              <p className="stitch-body mt-1 text-sm leading-6">Your study companion for reaching your Target95. Pick your board and class below to get started.</p>
+            </div>
+          </section>
 
           <section className="mt-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-end justify-between gap-4">

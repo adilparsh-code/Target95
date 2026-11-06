@@ -20,3 +20,18 @@
 .stitch-question-player .border-gray-200,.stitch-question-player .border-gray-300{border-color:var(--stitch-border)}
 .stitch-question-player .bg-gray-200{background-color:#e9edf4}
 .stitch-question-player pre{border-radius:.75rem}
+
+/* Ace — provisional Target95 study companion (homepage introduction). */
+.ace-mascot{--ace-outline:#0f172a;--ace-body:#2563eb;--ace-face:#fff;--ace-accent:#facc15;--ace-deep:#4338ca;display:block;flex-shrink:0;overflow:visible}
+.ace-mascot .ace-o{fill:var(--ace-outline)}
+.ace-mascot .ace-b{fill:var(--ace-body)}
+.ace-mascot .ace-w{fill:var(--ace-face)}
+.ace-mascot .ace-y{fill:var(--ace-accent)}
+.ace-mascot .ace-i{fill:var(--ace-deep)}
+/* One short, finite entrance: a tiny hop and a single wave, then Ace rests in a static pose. */
+.ace-mascot .ace-sprite,.ace-mascot .ace-arm-wave{transform-box:fill-box}
+.ace-mascot .ace-sprite{animation:ace-hop .7s steps(2,end) .3s 2}
+.ace-mascot .ace-arm-wave{animation:ace-wave .6s steps(2,end) .5s 2}
+@keyframes ace-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+@keyframes ace-wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.ace-mascot .ace-sprite,.ace-mascot .ace-arm-wave{animation:none}}

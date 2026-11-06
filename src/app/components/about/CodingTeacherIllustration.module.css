@@ -1,0 +1,144 @@
+/* Colours follow the existing About page palette (blue / indigo / slate). */
+.scene {
+  --scene-bg: #eef4ff;
+  --scene-glow: #dbe7ff;
+  --scene-slate: #0f172a;
+  --scene-screen: #111c33;
+  --scene-blue: #2563eb;
+  --scene-indigo: #4f46e5;
+  --scene-amber: #f59e0b;
+  --scene-skin: #f3c9a3;
+  --scene-hair: #1e293b;
+  --scene-wood: #c58a52;
+
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 480 / 360;
+  border-radius: 1.75rem;
+  overflow: hidden;
+}
+
+.backdrop { fill: var(--scene-bg); }
+.glow { fill: var(--scene-glow); opacity: 0.7; }
+.shelf { fill: var(--scene-wood); }
+.desk { fill: var(--scene-wood); }
+.deskLeg { fill: #a56f3c; }
+.chair { fill: #94a3b8; }
+.trousers { fill: #334155; }
+.shoe { fill: var(--scene-slate); }
+.shirt { fill: var(--scene-blue); }
+.collar { fill: #bfdbfe; }
+.skin { fill: var(--scene-skin); }
+.hair { fill: var(--scene-hair); }
+.lens { fill: #ffffff; fill-opacity: 0.85; stroke: var(--scene-slate); stroke-width: 2; }
+.glassesFrame { fill: none; stroke: var(--scene-slate); stroke-width: 2; stroke-linecap: round; }
+.pupil { fill: var(--scene-slate); }
+.smile { fill: none; stroke: #9a5b34; stroke-width: 2; stroke-linecap: round; }
+.armBack { fill: none; stroke: #1d4ed8; stroke-width: 14; stroke-linecap: round; }
+.armFront { fill: none; stroke: var(--scene-blue); stroke-width: 14; stroke-linecap: round; }
+
+.laptopBase { fill: #cbd5e1; }
+.laptopShell { fill: var(--scene-slate); }
+.screen { fill: var(--scene-screen); }
+.dotRed { fill: #f87171; }
+.dotAmber { fill: #fbbf24; }
+.dotGreen { fill: #4ade80; }
+
+.codeLine { transform-box: fill-box; transform-origin: left center; }
+.kw { fill: #818cf8; }
+.fn { fill: #60a5fa; }
+.str { fill: #fbbf24; }
+.num { fill: #4ade80; }
+.txt { fill: #94a3b8; }
+
+.cursor { fill: #e2e8f0; }
+
+.bookBlue { fill: var(--scene-blue); }
+.bookIndigo { fill: var(--scene-indigo); }
+.bookAmber { fill: var(--scene-amber); }
+.cap { fill: var(--scene-slate); }
+.capBase { fill: #1e293b; }
+.tassel { fill: none; stroke: var(--scene-amber); stroke-width: 3; stroke-linecap: round; }
+.pot { fill: #b45309; }
+.leaf { fill: #22c55e; }
+
+.symbol {
+  fill: var(--scene-blue);
+  opacity: 0.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Motion: subtle and finite (about 30s at most), so nothing moves indefinitely.
+   transform/opacity only, so there is no layout shift. */
+.symbol {
+  animation: float 5s ease-in-out 6 alternate;
+}
+
+.codeLine {
+  animation: typeLine 10s steps(10, end) 3 backwards;
+}
+
+.cursor {
+  animation: blink 1.1s steps(1, end) 28;
+}
+
+.handBack,
+.handFront {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tap 0.7s steps(2, end) 40 alternate;
+}
+
+.handFront {
+  animation-delay: 0.35s;
+}
+
+/* Staggered start times live here (not inline) so all animation styling stays in this module. */
+.symbolDelay0 { animation-delay: 0s; }
+.symbolDelay1 { animation-delay: 1.2s; }
+.symbolDelay2 { animation-delay: 2.4s; }
+.lineDelay0 { animation-delay: 0s; }
+.lineDelay1 { animation-delay: 0.8s; }
+.lineDelay2 { animation-delay: 1.6s; }
+.lineDelay3 { animation-delay: 2.4s; }
+.lineDelay4 { animation-delay: 3.2s; }
+.lineDelay5 { animation-delay: 4s; }
+.lineDelay6 { animation-delay: 4.8s; }
+.lineDelay7 { animation-delay: 5.6s; }
+.lineDelay8 { animation-delay: 6.4s; }
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+@keyframes typeLine {
+  0% { transform: scaleX(0); }
+  8% { transform: scaleX(1); }
+  88% { transform: scaleX(1); }
+  96%, 100% { transform: scaleX(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes tap {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2px); }
+}
+
+/* Reduced motion: static scene. All code lines are fully drawn and the cursor stays visible. */
+@media (prefers-reduced-motion: reduce) {
+  .symbol,
+  .codeLine,
+  .cursor,
+  .handBack,
+  .handFront {
+    animation: none;
+  }
+}

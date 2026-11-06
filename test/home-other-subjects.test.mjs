@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
-import { getChapter, getPublishedChapters, getPublishedSubjectCards } from '../src/lib/boardprepCurriculum.mjs';
+import { getChapter, getOtherSubjectGroups, getPublishedChapters, getPublishedSubjectCards } from '../src/lib/boardprepCurriculum.mjs';
 
 const cards = getPublishedSubjectCards();
 
@@ -28,4 +28,14 @@ test('every card links to a subject page that exists and has a readable first ch
     const [first] = getPublishedChapters(board, classSlug, subjectSlug);
     assert.ok(getChapter(board, classSlug, subjectSlug, first.slug), `${card.key} first chapter unreadable`);
   }
+});
+
+test('subject groups cover CISCE and CBSE and never place a card under the wrong board', () => {
+  const groups = getOtherSubjectGroups();
+  assert.deepEqual(groups.map((group) => group.id), ['cisce', 'cbse']);
+  const [cisce, cbse] = groups;
+  assert.ok(cisce.subjects.length > 0);
+  assert.ok(cisce.subjects.every((card) => ['icse', 'isc'].includes(card.boardSlug)));
+  assert.ok(cbse.subjects.every((card) => card.boardSlug === 'cbse'));
+  assert.equal(cisce.subjects.length + cbse.subjects.length, cards.length);
 });

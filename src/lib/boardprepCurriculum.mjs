@@ -99,7 +99,8 @@ export function getPublishedSubjectCards() {
       cards.push({
         key: `${board.slug}-${classInfo.slug}-${subject.slug}`,
         title: subject.title,
-        boardName: board.name,
+        boardSlug: board.slug,
+        boardLabel: board.slug.toUpperCase(),
         classLabel: classInfo.label,
         publishedChapters,
         href: `/learn/${board.slug}/${classInfo.slug}/${subject.slug}`,
@@ -107,4 +108,15 @@ export function getPublishedSubjectCards() {
     }
   }
   return cards;
+}
+
+// Groups the cards by exam board for the homepage. ICSE and ISC are both CISCE
+// boards. A board with no published subjects keeps an empty group so the UI can say
+// so honestly instead of hiding the board or inventing courses.
+export function getOtherSubjectGroups() {
+  const cards = getPublishedSubjectCards();
+  return [
+    { id: 'cisce', label: 'CISCE', detail: 'ICSE & ISC', subjects: cards.filter((card) => card.boardSlug !== 'cbse'), browseHref: '/learn' },
+    { id: 'cbse', label: 'CBSE', detail: 'Classes IX–XII', subjects: cards.filter((card) => card.boardSlug === 'cbse'), browseHref: '/learn/cbse' },
+  ];
 }

@@ -4,6 +4,9 @@ test('homepage Other subjects card links to real subject pages without disturbin
   await page.goto('/');
   const card = page.getByRole('region', { name: 'Other subjects' });
   await expect(card).toBeVisible();
+  await expect(card.getByRole('heading', { name: /^CISCE/ })).toBeVisible();
+  await expect(card.getByRole('heading', { name: /^CBSE/ })).toBeVisible();
+  await expect(card.getByRole('link', { name: /view the cbse curriculum/i })).toHaveAttribute('href', '/learn/cbse');
   const links = card.locator('ul a');
   expect(await links.count()).toBeGreaterThan(0);
   await expect(card.getByRole('link', { name: /browse all subjects/i })).toHaveAttribute('href', '/learn');

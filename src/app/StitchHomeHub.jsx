@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ui/ErrorBoundary";
 import HomeResumeCard from "./components/HomeResumeCard";
+import AceIntro from "./components/AceIntro";
 import { usePersonalization } from "./hooks/usePersonalization";
 import useProgress from "./hooks/useProgress";
 import { useAuth } from "@/context/AuthContext";
@@ -25,6 +26,72 @@ const chapters = [
 
 function MiniIcon({ type }) {
   return <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700">{type === "exam" ? "◷" : type === "ai" ? "✦" : "▣"}</span>;
+}
+
+const SUBJECT_CARDS = {
+  "cisce": {
+    "icse-class-9": [
+      { id: "java", label: "Java", detail: "ICSE Class 9 Computer Applications", icon: "☕", href: "/Java?class=IX", bgColor: "#fff7ed", color: "#c2410c", chapters: 19, questions: 830 },
+      { id: "ai", label: "Robotics & AI", detail: "ICSE Class 9 Robotics & AI", icon: "✦", href: "/icse/robotics-ai", bgColor: "#f3e8ff", color: "#7c3aed", chapters: 7, questions: 42 },
+    ],
+    "icse-class-10": [
+      { id: "java", label: "Java", detail: "ICSE Class 10 Computer Applications", icon: "☕", href: "/Java", bgColor: "#fff7ed", color: "#c2410c", chapters: 19, questions: 830 },
+      { id: "ai", label: "Artificial Intelligence", detail: "ICSE Class 10 AI", icon: "✦", href: "/icse/robotics-ai/class-x", bgColor: "#f3e8ff", color: "#7c3aed", chapters: 5, questions: 38 },
+    ],
+    "isc-class-11": [
+      { id: "java", label: "Computer Science", detail: "ISC Class 11 Java", icon: "☕", href: "/isc/class-xi", bgColor: "#fff7ed", color: "#c2410c", chapters: 15, questions: 210 },
+      { id: "ai", label: "Artificial Intelligence (883)", detail: "ISC Class 11 AI theory", icon: "✦", href: "/isc/artificial-intelligence/11", bgColor: "#f3e8ff", color: "#7c3aed", chapters: 6, questions: 22 },
+    ],
+    "isc-class-12": [
+      { id: "java", label: "Computer Science", detail: "ISC Class 12 Java", icon: "☕", href: "/isc/class-xii", bgColor: "#fff7ed", color: "#c2410c", chapters: 13, questions: 180 },
+      { id: "ai", label: "Artificial Intelligence (883)", detail: "ISC Class 12 AI theory", icon: "✦", href: "/isc/artificial-intelligence/12", bgColor: "#f3e8ff", color: "#7c3aed", chapters: 5, questions: 15 },
+    ],
+  },
+  "cbse": {
+    "class-9": [
+      { id: "402", label: "Information Technology", detail: "CBSE Class 9 IT (402)", icon: "💻", href: "/cbse/class/9/subject/402", bgColor: "#fffbeb", color: "#d97706", chapters: 8, questions: 60 },
+    ],
+    "class-10": [
+      { id: "402", label: "Information Technology", detail: "CBSE Class 10 IT (402)", icon: "💻", href: "/cbse/class/10/subject/402", bgColor: "#fffbeb", color: "#d97706", chapters: 8, questions: 60 },
+    ],
+    "class-11": [
+      { id: "083", label: "Computer Science", detail: "CBSE Class 11 CS (083) with Python", icon: "🐍", href: "/cbse/class/11/subject/083", bgColor: "#ecfeff", color: "#0e7490", chapters: 3, questions: 90 },
+      { id: "065", label: "Informatics Practices", detail: "CBSE Class 11 IP (065)", icon: "📊", href: "/cbse/class/11/subject/065", bgColor: "#fef3c7", color: "#b45309", chapters: 4, questions: 70 },
+      { id: "802", label: "Information Technology", detail: "CBSE Class 11 IT (802)", icon: "🧑‍💻", href: "/cbse/class/11/subject/802", bgColor: "#fffbeb", color: "#d97706", chapters: 6, questions: 55 },
+      { id: "843", label: "Artificial Intelligence", detail: "CBSE Class 11 AI (843)", icon: "🤖", href: "/cbse/class/11/subject/843", bgColor: "#f3e8ff", color: "#7c3aed", chapters: 4, questions: 28 },
+    ],
+    "class-12": [
+      { id: "083", label: "Computer Science", detail: "CBSE Class 12 CS (083) with Python", icon: "🐍", href: "/cbse/class/12/subject/083", bgColor: "#ecfeff", color: "#0e7490", chapters: 3, questions: 90 },
+      { id: "065", label: "Informatics Practices", detail: "CBSE Class 12 IP (065)", icon: "📊", href: "/cbse/class/12/subject/065", bgColor: "#fef3c7", color: "#b45309", chapters: 4, questions: 70 },
+      { id: "802", label: "Information Technology", detail: "CBSE Class 12 IT (802)", icon: "🧑‍💻", href: "/cbse/class/12/subject/802", bgColor: "#fffbeb", color: "#d97706", chapters: 6, questions: 55 },
+      { id: "843", label: "Artificial Intelligence", detail: "CBSE Class 12 AI (843)", icon: "🤖", href: "/cbse/class/12/subject/843", bgColor: "#f3e8ff", color: "#7c3aed", chapters: 4, questions: 28 },
+    ],
+  },
+};
+
+function subjectCards(board, classId) {
+  const cards = SUBJECT_CARDS[board]?.[classId];
+  if (!cards) {
+    // No context selected — show a prompt to choose board/class first
+    return [
+      {
+        id: "pick",
+        label: "Choose your board and class",
+        detail: "Select a board and class above to see your subjects",
+        icon: "🎯",
+        href: "#",
+        bgColor: "#f1f5f9",
+        color: "#475569",
+        chapters: 0,
+        questions: 0,
+        isPrompt: true,
+      },
+    ];
+  }
+  return cards.map((card) => ({
+    ...card,
+    isPrompt: false,
+  }));
 }
 
 export default function StitchHomeHub() {
@@ -97,6 +164,31 @@ export default function StitchHomeHub() {
               <div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-2"><h3 className="text-sm font-bold text-slate-900">{chapter.title}</h3><span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold text-emerald-700">{chapter.status}</span></div><p className="mt-1 text-xs text-slate-500">{chapter.detail}</p></div>
               <div className="flex shrink-0 gap-2 text-[10px] font-semibold text-slate-500"><span className="rounded-md bg-slate-50 px-2.5 py-2">Practice</span><span className="rounded-md bg-slate-50 px-2.5 py-2">PYQs</span></div>
             </Link>)}</div>
+          </section>
+
+          <AceIntro />
+
+          <section className="mt-7 border-y border-slate-200 bg-[#fafaff] py-7">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div><p className="stitch-eyebrow">Explore All Subjects</p><h2 className="stitch-heading text-2xl sm:text-3xl">Every board, every subject, one place</h2><p className="stitch-body text-sm">Pick your board and class to see the subjects available for your curriculum.</p></div>
+            </div>
+            <div className="mt-4 grid gap-3 lg:grid-cols-2 xl:grid-cols-3">
+              {subjectCards(activeBoard, currentClass.id).map((card) => (
+                <Link key={card.href} href={card.href} className="stitch-card stitch-card-hover p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-lg shadow-sm" style={{ background: card.bgColor, color: card.color }}>
+                      {card.icon}
+                    </span>
+                    <div>
+                      <h3 className="stitch-heading mt-0.5 text-base">{card.label}</h3>
+                      <p className="stitch-body mt-1 text-xs">{card.detail}</p>
+                      <p className="mt-2 text-[11px] font-semibold text-blue-700">{card.chapters} chapters · {card.questions} questions</p>
+                    </div>
+                  </div>
+                  <span className="mt-4 block text-[11px] font-semibold text-blue-700">Open {card.label}<span aria-hidden="true"> →</span></span>
+                </Link>
+              ))}
+            </div>
           </section>
 
           <section className="mt-7 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="office-learning-title">

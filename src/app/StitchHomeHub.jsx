@@ -28,7 +28,7 @@ function MiniIcon({ type }) {
   return <span aria-hidden="true" className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-700">{type === "exam" ? "◷" : type === "ai" ? "✦" : "▣"}</span>;
 }
 
-export default function StitchHomeHub() {
+export default function StitchHomeHub({ otherSubjectGroups = [] }) {
   const { board, class: selectedClass, subject, setBoard, setClass, setSubject, isHydrated } = usePersonalization();
   const { user, loading: authLoading } = useAuth();
   const { firestoreProgress, loading: progressLoading } = useProgress(user?.uid || null);
@@ -108,6 +108,45 @@ export default function StitchHomeHub() {
               <div className="flex shrink-0 gap-2 text-[10px] font-semibold text-slate-500"><span className="rounded-md bg-slate-50 px-2.5 py-2">Practice</span><span className="rounded-md bg-slate-50 px-2.5 py-2">PYQs</span></div>
             </Link>)}</div>
           </section>
+
+          {otherSubjectGroups.some((group) => group.subjects.length > 0) && (
+            <section className="mt-7 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="other-subjects-title">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="stitch-eyebrow">Beyond Computer Science</p>
+                  <h2 id="other-subjects-title" className="stitch-heading mt-1 text-2xl">Other subjects</h2>
+                  <p className="stitch-body mt-2 max-w-2xl text-sm leading-6">Study notes and practice questions for more board subjects. More chapters are added as they are verified.</p>
+                </div>
+                <Link href="/learn" className="stitch-btn stitch-btn-primary shrink-0">Browse all subjects <span aria-hidden="true">→</span></Link>
+              </div>
+              <div className="mt-5 space-y-6">
+                {otherSubjectGroups.map((group) => (
+                  <div key={group.id} aria-labelledby={`other-subjects-${group.id}`}>
+                    <h3 id={`other-subjects-${group.id}`} className="text-sm font-bold text-slate-900">{group.label} <span className="font-medium text-slate-500">({group.detail})</span></h3>
+                    {group.subjects.length > 0 ? (
+                      <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {group.subjects.map((item) => (
+                          <li key={item.key}>
+                            <Link href={item.href} className="stitch-card stitch-card-hover group flex h-full flex-col p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600">{item.boardLabel} · {item.classLabel}</span>
+                              <span className="stitch-heading mt-1 text-base">{item.title}</span>
+                              <span className="stitch-body mt-1.5 text-xs">{item.publishedChapters} chapter{item.publishedChapters === 1 ? "" : "s"} available</span>
+                              <span className="mt-3 block text-[11px] font-semibold text-blue-700">Start learning <span aria-hidden="true">→</span></span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <div className="mt-3 rounded-lg border border-dashed border-slate-300 bg-slate-50 p-4 text-xs leading-5 text-slate-600">
+                        {group.label} subject content is being verified and will appear here as chapters are published.{" "}
+                        <Link href={group.browseHref} className="font-semibold text-blue-700 underline underline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">View the {group.label} curriculum <span aria-hidden="true">→</span></Link>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           <section className="mt-7 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7" aria-labelledby="office-learning-title">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

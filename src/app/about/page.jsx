@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Button from "../components/ui/Button";
+import CodingTeacherIllustration from "../components/about/CodingTeacherIllustration";
 
 export const metadata = {
   title: "About Target95+ | Target95+",
@@ -31,6 +32,25 @@ export default function AboutPage() {
               Target95+ is designed to help ICSE and ISC Computer Science students achieve their best scores.
               We provide comprehensive practice materials, AI-powered learning, and detailed performance analytics.
             </p>
+          </div>
+        </section>
+
+        {/* Behind Target95 */}
+        <section className="px-4 pb-8 sm:px-6 lg:px-8" aria-labelledby="behind-target95-title">
+          <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <div className="lg:order-2">
+              <span className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">The story</span>
+              <h2 id="behind-target95-title" className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Behind Target95</h2>
+              <p className="mt-5 text-xl font-semibold leading-8 text-slate-800">
+                A teacher&apos;s vision. A developer&apos;s dedication. A platform built to help students learn better.
+              </p>
+              <p className="mt-5 text-base leading-8 text-slate-600 sm:text-lg">
+                Every lesson, every line of code, and every improvement reflects our commitment to making quality education more accessible and meaningful for students.
+              </p>
+            </div>
+            <div className="lg:order-1">
+              <CodingTeacherIllustration className="shadow-[0_20px_70px_-35px_rgba(37,99,235,0.45)]" />
+            </div>
           </div>
         </section>
 
@@ -152,6 +172,39 @@ export default function AboutPage() {
                 Get in Touch
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Built with Dedication / Disclaimer */}
+        <section className="px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28" aria-labelledby="dedication-title">
+          <div className="mx-auto max-w-4xl rounded-[2rem] border border-slate-200/80 bg-white p-7 shadow-[0_20px_70px_-40px_rgba(15,23,42,0.3)] sm:p-10 lg:p-12">
+            <span className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">Disclaimer</span>
+            <h2 id="dedication-title" className="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Built with Dedication. Made for Learning.</h2>
+            <div className="mt-6 space-y-4 text-base leading-8 text-slate-600">
+              <p>
+                Target95 is an educational initiative built with dedication, care, and a continuous commitment to improving the learning experience of students.
+              </p>
+              <p>
+                Every effort has been made to ensure the accuracy, quality, and reliability of the educational content available on this platform. However, despite our best efforts, human errors, unintentional inaccuracies, or technical issues may occasionally occur.
+              </p>
+              <p>
+                Target95+ is a study aid. Educational outcomes may vary, and we do not guarantee specific examination results. Our{" "}
+                <a href="/terms" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Terms of Service</a>{" "}
+                set out the full platform disclaimer.
+              </p>
+              <p className="font-semibold text-slate-800">We believe that learning is a continuous process, and so is improving our platform.</p>
+              <p>
+                If you come across any incorrect information, errors, or suggestions for improvement, we sincerely encourage you to let us know through our official contact email,{" "}
+                <a href="mailto:support@target95.com" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">support@target95.com</a>.
+              </p>
+              <p>
+                Your feedback helps us identify and correct mistakes, improve the quality of our content, and make Target95 a more reliable and valuable learning resource.
+              </p>
+            </div>
+            <p className="mt-8 border-l-4 border-blue-200 pl-5 text-lg font-semibold text-slate-900">
+              Thank you for being a part of our learning journey.
+              <span className="mt-1 block text-base font-medium text-slate-600">— Team Target95</span>
+            </p>
           </div>
         </section>
       </main>

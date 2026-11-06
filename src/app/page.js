@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import StitchHomeHub from "./StitchHomeHub";
+import { getPublishedSubjectCards } from "@/lib/boardprepCurriculum.mjs";
 
 export const metadata = {
   title: "Target95+ - Master CISCE & CBSE Computer Science with AI",
@@ -20,6 +21,7 @@ export const metadata = {
 };
 
 export default function Home() {
+  const otherSubjects = getPublishedSubjectCards();
   return (
     <div className="stitch-page relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -27,7 +29,7 @@ export default function Home() {
         <div className="absolute -right-32 top-32 h-96 w-96 rounded-full bg-indigo-200/25 blur-3xl" />
         <div className="absolute left-1/2 top-0 h-px w-[min(80vw,1000px)] -translate-x-1/2 bg-gradient-to-r from-transparent via-blue-300/50 to-transparent" />
       </div>
-      <StitchHomeHub />
+      <StitchHomeHub otherSubjects={otherSubjects} />
     </div>
   );
 }

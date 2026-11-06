@@ -83,3 +83,28 @@ export function getBoardPrepCounts() {
   }
   return { boards: getBoards().length, classes, subjects, chapters, questions };
 }
+
+// Subjects shown on the homepage "Other subjects" card. Derived from the verified
+// BoardPrep data so the card only ever lists subjects that have published chapters.
+// Computer subjects are excluded: they already have dedicated launcher paths.
+const COMPUTER_SUBJECT_SLUGS = new Set(['computer-applications', 'computer-science']);
+
+export function getPublishedSubjectCards() {
+  const cards = [];
+  for (const board of getBoards()) for (const classInfo of board.classes || []) {
+    for (const subject of getSubjects(board.slug, classInfo.slug)) {
+      if (COMPUTER_SUBJECT_SLUGS.has(subject.slug)) continue;
+      const publishedChapters = getPublishedChapters(board.slug, classInfo.slug, subject.slug).length;
+      if (!publishedChapters) continue;
+      cards.push({
+        key: `${board.slug}-${classInfo.slug}-${subject.slug}`,
+        title: subject.title,
+        boardName: board.name,
+        classLabel: classInfo.label,
+        publishedChapters,
+        href: `/learn/${board.slug}/${classInfo.slug}/${subject.slug}`,
+      });
+    }
+  }
+  return cards;
+}

@@ -24,9 +24,9 @@ const CODE_TOP = 172;
 const CODE_LEFT = 140;
 
 const FLOATING_SYMBOLS = [
-  { text: "</>", x: 52, y: 112, delay: "0s" },
-  { text: "{ }", x: 196, y: 100, delay: "1.2s" },
-  { text: "01", x: 292, y: 92, delay: "2.4s" },
+  { text: "</>", x: 52, y: 112 },
+  { text: "{ }", x: 196, y: 100 },
+  { text: "01", x: 292, y: 92 },
 ];
 
 export default function CodingTeacherIllustration({ className = "" }) {
@@ -54,13 +54,12 @@ export default function CodingTeacherIllustration({ className = "" }) {
       <rect x="388" y="42" width="12" height="34" rx="2" className={styles.bookBlue} />
 
       {/* Floating programming symbols */}
-      {FLOATING_SYMBOLS.map((symbol) => (
+      {FLOATING_SYMBOLS.map((symbol, index) => (
         <text
           key={symbol.text}
           x={symbol.x}
           y={symbol.y}
-          className={styles.symbol}
-          style={{ animationDelay: symbol.delay }}
+          className={`${styles.symbol} ${styles[`symbolDelay${index}`]}`}
         >
           {symbol.text}
         </text>
@@ -105,8 +104,7 @@ export default function CodingTeacherIllustration({ className = "" }) {
           width={width}
           height={LINE_HEIGHT - 3}
           rx="1.5"
-          className={`${styles.codeLine} ${styles[tone]}`}
-          style={{ animationDelay: `${index * 0.8}s` }}
+          className={`${styles.codeLine} ${styles[tone]} ${styles[`lineDelay${index}`]}`}
         />
       ))}
       <rect

@@ -101,6 +101,25 @@ export function buildMockTestPool(config) {
   return pool;
 }
 
+function chapterLabel(slug) {
+  return String(slug).replace(/-/g, " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+/**
+ * Chapters that actually have questions for a non-CBSE category, with counts.
+ * The setup screen uses this so students can only pick chapters that have content.
+ */
+export function getMockTestChapterOptions(category) {
+  const counts = new Map();
+  for (const question of mockTestQuestions) {
+    if (question.category !== category || !question.chapter) continue;
+    counts.set(question.chapter, (counts.get(question.chapter) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([id, count]) => ({ id, label: chapterLabel(id), count }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+}
+
 /** Pick the question ids for a new attempt. `random` is injectable for tests. */
 export function selectAttemptQuestionIds(config, random = Math.random) {
   const pool = buildMockTestPool(config);

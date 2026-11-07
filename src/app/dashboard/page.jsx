@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 import ProtectedRoute from "../components/ProtectedRoute";
 import ErrorBoundary from "../components/ui/ErrorBoundary";
 import useStudentDashboard from "@/app/hooks/useStudentDashboard";
-import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import WelcomeCard from "@/components/dashboard/WelcomeCard";
 import ContinueLearning from "@/components/dashboard/ContinueLearning";
 import SubjectGrid from "@/components/dashboard/SubjectGrid";
@@ -20,7 +19,7 @@ import StudyPlan from "@/components/dashboard/StudyPlan";
 import PerformancePanel from "@/components/dashboard/PerformancePanel";
 
 export default function DashboardPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user } = useAuth();
   const {
     loading,
     overview,
@@ -55,11 +54,7 @@ export default function DashboardPage() {
         <Navbar />
         <div className="mx-auto max-w-7xl px-4 pb-10 pt-6 sm:px-6 sm:pt-8 lg:px-8">
           <ErrorBoundary>
-            <section className="stitch-surface p-4 sm:p-6">
-              <DashboardHeader user={user} isLoading={authLoading || !user} />
-            </section>
-
-            <div className="mt-5">
+            <div>
               <WelcomeCard
                 user={user}
                 stats={dashboardStats}

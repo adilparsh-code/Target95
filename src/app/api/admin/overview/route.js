@@ -25,7 +25,10 @@ export async function GET(request) {
   try {
     const adminDb = guard.adminDb;
 
-    const [usersSnap, questionsSnap, resultsSnap, mockTestsSnap, subjectsSnap, chaptersSnap] =
+    // Exact totals use server-side count aggregation; the limited reads below are samples
+    // used only for derived metrics (averages, difficulty mix, recent activity).
+    const countOf = async (query) => (await query.count().get()).data().count;
+    const [usersSnap, questionsSnap, resultsSnap, mockTestsSnap, subjectsSnap, chaptersSnap, totalUsers, nonStudentUsers, totalQuestions, totalResults, totalSubjects, totalChapters] =
       await Promise.all([
         adminDb.collection("users").limit(2000).get(),
         adminDb.collection("questions").limit(2000).get(),
@@ -33,6 +36,12 @@ export async function GET(request) {
         adminDb.collection("mockTests").limit(500).get(),
         adminDb.collection("subjects").limit(200).get(),
         adminDb.collection("chapters").limit(500).get(),
+        countOf(adminDb.collection("users")),
+        countOf(adminDb.collection("users").where("role", "in", ["admin", "teacher"])),
+        countOf(adminDb.collection("questions")),
+        countOf(adminDb.collection("results")),
+        countOf(adminDb.collection("subjects")),
+        countOf(adminDb.collection("chapters")),
       ]);
 
     const users = usersSnap.docs.map((d) => d.data());
@@ -54,16 +63,16 @@ export async function GET(request) {
     return Response.json({
       success: true,
       overview: {
-        totalStudents: students.length,
+        totalStudents: Math.max(totalUsers - nonStudentUsers, 0),
         activeStudents,
         totalTeachers: users.filter((u) => u.role === "teacher").length,
         questionsAnswered,
         averageScore,
-        testsAttempted: results.length,
+        testsAttempted: totalResults,
         content: {
-          questions: questionsSnap.size,
-          subjects: subjectsSnap.size,
-          chapters: chaptersSnap.size,
+          questions: totalQuestions,
+          subjects: totalSubjects,
+          chapters: totalChapters,
           mockTests: tests.filter((t) => t.isActive !== false).length,
         },
         questionDifficulty: {

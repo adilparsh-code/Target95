@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { CalendarCheck, BookMarked, Sparkles } from "lucide-react";
-import { formatRelativeDate } from "@/lib/learningRoadmap";
 
 export default function StudyPlan({ roadmap = [], recommendations = [], dailyGoal = 10, solvedToday = 0, isLoading }) {
   const pending = roadmap.filter((c) => c.remaining > 0).slice(0, 3);

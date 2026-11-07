@@ -7,6 +7,9 @@ export default function DashboardCard({ title, value, subtitle, icon, trend, tre
     rose: "from-rose-500 to-rose-600",
     violet: "from-violet-500 to-violet-600",
     cyan: "from-cyan-500 to-cyan-600",
+    teal: "from-teal-500 to-teal-600",
+    green: "from-green-500 to-green-600",
+    red: "from-red-500 to-red-600",
   };
 
   const bgMap = {
@@ -17,6 +20,9 @@ export default function DashboardCard({ title, value, subtitle, icon, trend, tre
     rose: "bg-rose-50",
     violet: "bg-violet-50",
     cyan: "bg-cyan-50",
+    teal: "bg-teal-50",
+    green: "bg-green-50",
+    red: "bg-red-50",
   };
 
   const textMap = {
@@ -27,6 +33,9 @@ export default function DashboardCard({ title, value, subtitle, icon, trend, tre
     rose: "text-rose-600",
     violet: "text-violet-600",
     cyan: "text-cyan-600",
+    teal: "text-teal-600",
+    green: "text-green-600",
+    red: "text-red-600",
   };
 
   return (
@@ -34,13 +43,13 @@ export default function DashboardCard({ title, value, subtitle, icon, trend, tre
       <div className="flex items-start justify-between">
         <div className="space-y-2">
           <p className="text-sm font-medium text-gray-500">{title}</p>
-          <p className="text-3xl font-bold text-gray-900">{value.toLocaleString()}</p>
+          <p className="text-3xl font-bold text-gray-900">{typeof value === "number" ? value.toLocaleString() : value ?? "—"}</p>
           {subtitle && (
             <p className="text-xs text-gray-400">{subtitle}</p>
           )}
         </div>
-        <div className={`w-12 h-12 rounded-lg ${bgMap[color]} flex items-center justify-center text-xl group-hover:scale-110 transition-transform`}>
-          <span className={textMap[color]}>{icon}</span>
+        <div className={`w-12 h-12 rounded-lg ${bgMap[color] || bgMap.blue} flex items-center justify-center text-xl group-hover:scale-110 transition-transform`}>
+          <span className={textMap[color] || textMap.blue}>{icon}</span>
         </div>
       </div>
       {trend !== undefined && (

@@ -1,4 +1,4 @@
-import { adminGuard, serverError, toMillis, sanitizeQueryParam, safeNumber } from "../_helpers";
+import { adminGuard, serverError, toMillis, sanitizeQueryParam, safeNumber, resolveStudentClass } from "../_helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +34,7 @@ export async function GET(request) {
           uid: docSnap.id,
           fullName: data.fullName || data.name || "",
           email: data.email || "",
-          class: data.class || "",
+          class: resolveStudentClass(data),
           grade: data.board || data.grade || "",
           school: data.school || "",
           city: data.city || "",

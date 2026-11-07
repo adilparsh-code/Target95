@@ -20,9 +20,9 @@ export default function WelcomeCard({ user, stats, streak = 0, xp = null }) {
     <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-950">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
             {getGreeting()}, {firstName}! 👋
-          </h2>
+          </h1>
           <p className="mt-1 text-slate-500 dark:text-slate-400">
             You&apos;re {Math.max(target - current, 0)} questions away from today&apos;s target. Keep it up!
           </p>

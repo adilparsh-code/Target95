@@ -234,7 +234,12 @@ export function getMockTestResultSessionKey(userId) {
 
 // The player writes the finished result and the result page reads it. Both sides must go
 // through these helpers so they can never disagree about the storage key.
+// In-memory fallback so a blocked/full sessionStorage cannot lose the result between the
+// player and the result page (client-side navigation keeps module state).
+let memoryResult = null;
+
 export function storeMockTestResultForSession(result, userId) {
+  memoryResult = result?.userId === userId ? result : null;
   try {
     sessionStorage.setItem(getMockTestResultSessionKey(userId), JSON.stringify(result));
     return true;
@@ -248,13 +253,15 @@ export function readMockTestResultFromSession(userId) {
   try {
     const stored = sessionStorage.getItem(getMockTestResultSessionKey(userId));
     const parsed = stored ? JSON.parse(stored) : null;
-    return parsed?.userId === userId ? parsed : null;
+    if (parsed?.userId === userId) return parsed;
   } catch {
-    return null;
+    // fall through to the in-memory copy
   }
+  return memoryResult?.userId === userId ? memoryResult : null;
 }
 
 export function clearMockTestResultFromSession(userId) {
+  memoryResult = null;
   try { sessionStorage.removeItem(getMockTestResultSessionKey(userId)); } catch {}
 }
 

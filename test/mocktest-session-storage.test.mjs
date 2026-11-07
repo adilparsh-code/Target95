@@ -49,6 +49,17 @@ test("a draft saved for a signed-in user is only cleared when the same user id i
 test("storage failures never throw", () => {
   globalThis.sessionStorage = { getItem() { throw new Error("blocked"); }, setItem() { throw new Error("blocked"); }, removeItem() { throw new Error("blocked"); } };
   assert.equal(storeMockTestResultForSession({ userId: "a" }, "a"), false);
-  assert.equal(readMockTestResultFromSession("a"), null);
+  assert.deepEqual(readMockTestResultFromSession("a"), { userId: "a" }); // in-memory fallback
   assert.doesNotThrow(() => clearMockTestResultFromSession("a"));
+  assert.equal(readMockTestResultFromSession("a"), null);
+});
+
+test("result survives a failing sessionStorage via the in-memory fallback", () => {
+  globalThis.sessionStorage = { setItem() { throw new Error("quota"); }, getItem() { throw new Error("blocked"); }, removeItem() { throw new Error("blocked"); } };
+  const result = { userId: "u1", score: 3 };
+  assert.equal(storeMockTestResultForSession(result, "u1"), false);
+  assert.deepEqual(readMockTestResultFromSession("u1"), result);
+  assert.equal(readMockTestResultFromSession("u2"), null);
+  clearMockTestResultFromSession("u1");
+  assert.equal(readMockTestResultFromSession("u1"), null);
 });

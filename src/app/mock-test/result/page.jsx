@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { getMockTestResultSessionKey, getTopicPerformance } from "../../../lib/mocktest";
+import { clearMockTestResultFromSession, getTopicPerformance, readMockTestResultFromSession } from "../../../lib/mocktest";
 import { useAuth } from "@/context/AuthContext";
 
 export default function MockTestResultPage() {
@@ -19,9 +19,7 @@ export default function MockTestResultPage() {
         if (!authLoading) setLoading(false);
         return;
       }
-      const stored = sessionStorage.getItem(getMockTestResultSessionKey(user.uid));
-      const parsed = stored ? JSON.parse(stored) : null;
-      setResult(parsed?.userId === user.uid ? parsed : null);
+      setResult(readMockTestResultFromSession(user.uid));
     } catch {
       setResult(null);
     } finally {
@@ -44,7 +42,7 @@ export default function MockTestResultPage() {
   const setupRoute = `/mock-test?board=${encodeURIComponent(result.board || "ICSE")}&class=${encodeURIComponent(result.classNumber || 10)}${result.subjectCode ? `&subjectCode=${encodeURIComponent(result.subjectCode)}` : ""}${result.subject ? `&subject=${encodeURIComponent(result.subject)}` : ""}`;
 
   const clearAndGoToSetup = () => {
-    sessionStorage.removeItem(getMockTestResultSessionKey(user?.uid));
+    clearMockTestResultFromSession(user?.uid);
     router.push(setupRoute);
   };
 

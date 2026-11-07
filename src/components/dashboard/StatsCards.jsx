@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { BookOpen, Target, Clock3, Flame, Award, Trophy } from "lucide-react";
 
 const toneClasses = {

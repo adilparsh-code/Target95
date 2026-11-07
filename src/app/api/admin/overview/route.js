@@ -1,4 +1,4 @@
-import { adminGuard, serverError, toMillis } from "../_helpers";
+import { adminGuard, serverError, toMillis, resolveStudentClass } from "../_helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -71,7 +71,7 @@ export async function GET(request) {
           medium: questions.filter((q) => String(q.difficulty || "").toLowerCase() === "medium").length,
           hard: questions.filter((q) => String(q.difficulty || "").toLowerCase() === "hard").length,
         },
-        studentsByClass: countBy(students, "class"),
+        studentsByClass: countBy(students.map((s) => ({ class: resolveStudentClass(s) || null })), "class"),
         recentActivity: results.slice(0, 8).map((r) => ({
           completedAt: toMillis(r.completedAt),
           score: Number(r.score) || 0,

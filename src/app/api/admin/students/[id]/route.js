@@ -1,4 +1,4 @@
-import { adminGuard, serverError, toMillis } from "../../_helpers";
+import { adminGuard, serverError, toMillis, resolveStudentClass } from "../../_helpers";
 import { getAdminAuth } from "@/app/lib/firebase-admin";
 import { manageStudentAccountStatus } from "@/lib/accountStatus.mjs";
 
@@ -101,7 +101,7 @@ export async function GET(request, { params }) {
         uid: id,
         fullName: userData.fullName || userData.name || "",
         email: userData.email || "",
-        class: userData.class || "",
+        class: resolveStudentClass(userData),
         grade: userData.board || userData.grade || "",
         school: userData.school || "",
         city: userData.city || "",

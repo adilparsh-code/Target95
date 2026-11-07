@@ -96,3 +96,17 @@ test("server-selected questions all come from the configured pool", () => {
   assert.ok(ids.every((id) => poolIds.has(id)));
   assert.equal(new Set(ids).size, ids.length);
 });
+
+test("chapter options only list chapters that have questions, with correct counts", async () => {
+  const { getMockTestChapterOptions } = await import("../src/lib/mocktestAttempts.js");
+  for (const category of ["icse-class-9", "icse-class-10", "isc-class-11", "isc-class-12"]) {
+    const options = getMockTestChapterOptions(category);
+    assert.ok(options.length > 0, `${category} should offer chapters`);
+    for (const option of options) {
+      const matching = buildMockTestPool(normalizeAttemptConfig({ category, difficulty: "all", type: "mixed", chapter: option.id }));
+      assert.equal(matching.length, option.count, `${category}/${option.id} count`);
+      assert.ok(option.count > 0);
+    }
+  }
+  assert.deepEqual(getMockTestChapterOptions("not-a-category"), []);
+});

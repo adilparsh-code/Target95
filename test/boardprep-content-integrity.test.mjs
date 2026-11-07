@@ -5,7 +5,7 @@ import path from "node:path";
 
 const ROOT = path.join(process.cwd(), "src/app/data/boardprep/content");
 // Leaked drafting/self-correction text must never reach students.
-const SCRATCH = /\b(Wait[,.—-]|[Ll]et me (re|recompute|recalculate|verify|provide)|Actually,? (let|the standard)|Hmm\b|I may have made)/;
+const SCRATCH = /(\bwait\b[,.…—-]|\.\.\. wait|seems inconsistent|perhaps the|may have a typo|let me (re|recompute|recalculate|verify|provide)|actually,? (let|the standard)|\bhmm\b|i may have made)/i;
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
@@ -64,6 +64,7 @@ test("questions are well formed and free of leaked drafting text", () => {
         assert.ok(Array.isArray(q.options) && q.options.length >= 2, `${where}:${q.id} options`);
         const correct = String(q.options[q.correctIndex] ?? "").trim().toLowerCase();
         const answer = String(q.answer ?? "").trim().toLowerCase().replace(/\.$/, "");
+        assert.ok(answer, `${where}:${q.id} needs a non-empty answer`);
         assert.ok(correct && (correct === answer || correct.includes(answer) || answer.startsWith(correct)), `${where}:${q.id} answer must match options[correctIndex]`);
       }
     }

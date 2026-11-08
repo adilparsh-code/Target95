@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getBoard, getClass, getPublishedChapters, getSubjects } from '@/lib/boardprepCurriculum.mjs';
 import { notFound } from 'next/navigation';
 import SubjectCover from '@/app/components/SubjectCover';
+import AceEmptyState from '@/app/components/AceEmptyState';
 
 export async function generateMetadata({ params }) {
   const { board: boardSlug, classSlug } = await params;
@@ -15,8 +16,10 @@ export default async function ClassPage({ params }) {
   const board = getBoard(boardSlug);
   const classInfo = getClass(boardSlug, classSlug);
   if (!board || !classInfo) notFound();
+  const subjects = getSubjects(boardSlug, classSlug);
+  const hasPublishedContent = subjects.some((subject) => getPublishedChapters(boardSlug, classSlug, subject.slug).length > 0);
 
-  return <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900"><div className="mx-auto max-w-6xl"><Link href={`/learn/${boardSlug}`} className="text-sm font-medium text-slate-600">← {board.name}</Link><h1 className="mt-6 text-4xl font-bold">{classInfo.label}</h1><section className="mt-8 grid gap-5 md:grid-cols-3">{getSubjects(boardSlug, classSlug).map((subject) => {
+  return <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-900"><div className="mx-auto max-w-6xl"><Link href={`/learn/${boardSlug}`} className="text-sm font-medium text-slate-600">← {board.name}</Link><h1 className="mt-6 text-4xl font-bold">{classInfo.label}</h1>{!hasPublishedContent && <AceEmptyState className="mt-8 bg-white dark:bg-white" title="This class is on its way" message="Ace is still gathering chapters for this class. Browse the subjects below to see what is planned, or explore a class that is already live." titleClassName="text-lg font-semibold text-slate-900" messageClassName="text-sm text-slate-600"><Link href={`/learn/${boardSlug}`} className="text-sm font-semibold text-blue-700 hover:underline">Choose another class →</Link></AceEmptyState>}<section className="mt-8 grid gap-5 md:grid-cols-3">{subjects.map((subject) => {
     const publishedCount = getPublishedChapters(boardSlug, classSlug, subject.slug).length;
     const body = <><SubjectCover subjectSlug={subject.slug} classSlug={classSlug} className="-mx-5 -mt-5 mb-4 w-[calc(100%_+_2.5rem)] max-w-none rounded-t-2xl" /><div className="flex items-start justify-between gap-3"><h2 className="font-bold">{subject.title}</h2><span className={`rounded-full px-2 py-1 text-[10px] font-bold ${publishedCount ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>{publishedCount ? "Available" : "Coming soon"}</span></div><p className="mt-2 text-sm text-slate-600">{subject.description}</p>{publishedCount ? <p className="mt-3 text-xs font-semibold text-blue-700">{publishedCount} published chapter{publishedCount === 1 ? "" : "s"} →</p> : <p className="mt-3 text-xs text-slate-500">No published chapters yet.</p>}</>;
     return publishedCount ? <Link key={subject.slug} href={`/learn/${boardSlug}/${classSlug}/${subject.slug}`} className="overflow-hidden rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:ring-blue-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">{body}</Link> : <article key={subject.slug} className="overflow-hidden rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-5" aria-label={`${subject.title}: coming soon`}>{body}</article>;

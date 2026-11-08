@@ -52,6 +52,15 @@ export default function StitchHomeHub({ otherSubjectGroups = [] }) {
     setSubject(null);
   };
 
+  // A first-time visitor has no saved board/class yet (the picker shows defaults), and
+  // setSubject ignores subjects until both exist, so the click did nothing. Persist the
+  // displayed defaults first; the setters apply in order.
+  const chooseSubject = (subjectId) => {
+    if (!board) setBoard(activeBoard);
+    if (!selectedClass?.id) setClass({ id: currentClass.id, title: currentClass.title });
+    setSubject(subjectId);
+  };
+
   return (
     <main id="main-content" className="stitch-home-hub min-h-screen bg-[#f8f8fc] text-slate-900">
       <Navbar />
@@ -93,7 +102,7 @@ export default function StitchHomeHub({ otherSubjectGroups = [] }) {
             <div className="mt-5 grid gap-3 lg:grid-cols-[1.05fr_1fr_1.15fr_.95fr]">
               <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 1 • Board</p><div className="mt-2 grid grid-cols-2 gap-2">{boards.map((item) => <button key={item.id} type="button" onClick={() => chooseBoard(item.id)} aria-pressed={activeBoard === item.id} className={`rounded-lg border px-3 py-2 text-xs font-semibold ${activeBoard === item.id ? "border-teal-200 bg-teal-50 text-teal-700" : "border-slate-200 text-slate-600"}`}>{item.label}<span className="block text-[10px] font-normal opacity-70">{item.detail}</span></button>)}</div></div>
               <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 2 • Class</p><div className="mt-2 grid grid-cols-4 gap-1.5">{curriculumClasses[activeBoard].map((item) => <button key={item.id} type="button" onClick={() => chooseClass(item)} aria-pressed={currentClass.id === item.id} className={`flex h-9 items-center justify-center rounded-md text-xs font-bold ${currentClass.id === item.id ? "bg-blue-700 text-white" : "bg-slate-50 text-slate-600 hover:bg-blue-50"}`}>{item.label}</button>)}</div></div>
-              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => setSubject(item.id)} aria-pressed={selectedSubject === item.id} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><SubjectCover subjectSlug={item.id} className="h-7 w-7 shrink-0 rounded-md shadow-sm" /><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
+              <div className="rounded-lg border border-slate-200 p-3"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Step 3 • Subject</p><div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">{subjectOptions.map((item) => <button key={item.id} type="button" onClick={() => chooseSubject(item.id)} aria-pressed={selectedSubject === item.id} className={`flex items-center gap-2 rounded-md border px-3 py-2 text-left transition ${selectedSubject === item.id ? "border-blue-300 bg-blue-50 text-blue-800" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-200 hover:bg-blue-50"}`}><SubjectCover subjectSlug={item.id} className="h-7 w-7 shrink-0 rounded-md shadow-sm" /><span><span className="block text-xs font-semibold">{item.label}</span><span className="block text-[9px] opacity-70">{item.detail}</span></span></button>)}</div></div>
               <div className="rounded-lg bg-blue-700 p-4 text-white"><p className="text-[10px] font-bold uppercase tracking-widest text-blue-100">Ready to Study</p><p className="mt-1 text-sm font-bold">{currentClass.title} · {activeSubject.label}</p><Link href={activeSubject.href} className="mt-3 flex h-8 items-center justify-center rounded-md bg-white text-[11px] font-bold text-blue-700">Open Syllabus Chapters →</Link></div>
             </div>
           </section>

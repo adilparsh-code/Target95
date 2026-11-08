@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Trophy, ClipboardList, Award } from "lucide-react";
+import { Trophy, Award } from "lucide-react";
 import Button from "@/app/components/ui/Button";
+import AceEmptyState from "@/app/components/AceEmptyState";
 import { formatRelativeDate } from "@/lib/learningRoadmap";
 
 function scoreTone(percentage) {
@@ -31,13 +32,11 @@ export default function UpcomingMockTests({ mockTests = [], bestScore = 0, isLoa
           ))}
         </div>
       ) : mockTests.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center dark:border-slate-700">
-          <ClipboardList className="mx-auto mb-3 h-10 w-10 text-slate-300 dark:text-slate-600" aria-hidden="true" />
-          <p className="text-sm text-slate-500 dark:text-slate-400">No mock tests attempted yet. Simulate a real board exam to gauge readiness.</p>
-          <Link href="/mock-test" className="mt-3 inline-block">
+        <AceEmptyState className="mt-4" mascotSize={48} message="No mock tests attempted yet. Simulate a real board exam to gauge readiness.">
+          <Link href="/mock-test">
             <Button size="sm">Start your first test</Button>
           </Link>
-        </div>
+        </AceEmptyState>
       ) : (
         <ul className="mt-4 space-y-3">
           {mockTests.slice(0, 5).map((test, index) => {

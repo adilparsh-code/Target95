@@ -6,6 +6,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { clearMockTestResultFromSession, getTopicPerformance, readMockTestResultFromSession } from "../../../lib/mocktest";
 import { useAuth } from "@/context/AuthContext";
+import AceEmptyState from "@/app/components/AceEmptyState";
 
 export default function MockTestResultPage() {
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function MockTestResultPage() {
 
   if (loading || authLoading) return <ResultShell><div className="flex items-center justify-center py-24"><div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" /></div></ResultShell>;
 
-  if (!result) return <ResultShell><div className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-4 py-20 text-center"><h1 className="text-3xl font-bold text-gray-900">No results found</h1><p className="text-gray-700">Complete a mock test to see your results here.</p><button type="button" onClick={() => router.push("/mock-test")} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Take a Mock Test</button></div></ResultShell>;
+  if (!result) return <ResultShell><AceEmptyState variant="plain" className="mx-auto max-w-2xl" headingAs="h1" mascotSize={64} title="No results found" titleClassName="text-3xl font-bold text-gray-900" messageClassName="text-gray-700" message="Complete a mock test to see your results here."><button type="button" onClick={() => router.push("/mock-test")} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700">Take a Mock Test</button></AceEmptyState></ResultShell>;
 
   const review = Array.isArray(result.review) ? result.review : [];
   const categoryLabel = result.category?.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) || "Test";

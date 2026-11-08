@@ -6,7 +6,6 @@ import { getStudyChapters, resolveStudyChapter } from "../../../lib/studyCenter"
 import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
-import questionsData from "../../data/questions";
 import ChapterLayout, { CHAPTER_SECTIONS } from "../ChapterLayout";
 import ChapterSection from "../ChapterSection";
 import ChapterContentEngine from "../content/ChapterContentEngine";
@@ -97,12 +96,19 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scoped questions
+  // Practice questions come from the real chapter question bank (already scoped to
+  // this chapter on the server). The old placeholder data file held unrelated
+  // algorithm questions whose "Solve" links led to 404 pages.
   const chapterQuestions = useMemo(() => {
-    if (!questionsData) return [];
-    const allQuestions = Array.isArray(questionsData) ? questionsData : [];
-    return allQuestions.filter((q) => q.chapter === slug || q.chapter === chapter?.title);
-  }, [slug, chapter?.title]);
+    if (!questionBank) return [];
+    if (Array.isArray(questionBank)) return questionBank;
+    try {
+      const parsed = JSON.parse(questionBank);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  }, [questionBank]);
 
   // Track recently viewed once when slug changes (fixed dependency loop)
   useEffect(() => {

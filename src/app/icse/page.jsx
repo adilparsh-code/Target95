@@ -1,5 +1,6 @@
 "use client";
 
+import SubjectCover, { getTrackCoverSlug } from "../components/SubjectCover";
 import Link from "next/link";
 import { BookOpen, BrainCircuit, Sparkles } from "lucide-react";
 import Navbar from "../components/Navbar";
@@ -70,8 +71,9 @@ export default function ICSEHubPage() {
                 <Link
                   key={section.href}
                   href={section.href}
-                  className="group flex flex-col rounded-2xl border border-[var(--border)] bg-white p-6 shadow-[var(--shadow-sm)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-md)] dark:bg-slate-900"
+                  className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-6 shadow-[var(--shadow-sm)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-md)] dark:bg-slate-900"
                 >
+                  <SubjectCover subjectSlug={getTrackCoverSlug(section.title)} className="-mx-6 -mt-6 mb-5 w-[calc(100%_+_3rem)] max-w-none" />
                   <div className="flex items-center justify-between">
                     <span className="grid h-11 w-11 place-items-center rounded-xl bg-[var(--primary-light)] text-[var(--primary)]">
                       <Icon className="h-5 w-5" aria-hidden="true" />

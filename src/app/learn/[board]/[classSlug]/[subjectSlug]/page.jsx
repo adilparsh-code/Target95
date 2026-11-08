@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getChapterQuestionCounts, getSubject, getPublishedChapters } from '@/lib/boardprepCurriculum.mjs';
 import { getSubjectChapterSequence } from '@/lib/boardprepChapterNav.mjs';
 import { notFound } from 'next/navigation';
+import SubjectCover from '@/app/components/SubjectCover';
 
 export default async function SubjectPage({ params }) {
   const { board, classSlug, subjectSlug } = await params;
@@ -29,6 +30,7 @@ export default async function SubjectPage({ params }) {
         <Link href={`/learn/${board}/${classSlug}`} className="text-sm font-medium text-slate-600">
           ← Subjects
         </Link>
+        <SubjectCover subjectSlug={subjectSlug} classSlug={classSlug} className="mt-6 max-h-56 w-full rounded-2xl ring-1 ring-slate-200" />
         <h1 className="mt-6 text-4xl font-bold">{subject.title}</h1>
         <p className="mt-3 max-w-3xl text-slate-600">{subject.description}</p>
 

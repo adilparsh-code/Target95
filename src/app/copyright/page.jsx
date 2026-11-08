@@ -1,3 +1,4 @@
+import ContentSourceNotice from "../components/ContentSourceNotice";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Container from "../components/ui/Container";
@@ -18,8 +19,9 @@ export default function CopyrightPage() {
                 <section>
                   <h2 className="text-2xl font-bold text-gray-900">1. Ownership</h2>
                   <p className="mt-3">
-                    Target95+ and its original content are protected by applicable intellectual-property laws. Unless a page or item expressly states otherwise, Target95+ owns or has permission to use the original text, explanations, practice questions, solutions, examples, learning structures, graphics, software, branding, and other original materials created for the Platform.
+                    Target95+ and its original content are protected by applicable intellectual-property laws. Unless a page or item expressly states otherwise, Target95+ owns or has permission to use the software, branding, graphics, learning structures and the way the material is organised and presented. This does not extend to the underlying study content described below.
                   </p>
+                  <ContentSourceNotice className="mt-3" />
                 </section>
 
                 <section>

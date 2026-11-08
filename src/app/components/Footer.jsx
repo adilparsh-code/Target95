@@ -1,3 +1,4 @@
+import { CONTENT_SOURCE_NOTICE_SHORT } from "./ContentSourceNotice";
 import Link from "next/link";
 
 const quickLinks = [
@@ -104,7 +105,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-slate-800 pt-7 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Target95+. All rights reserved.</p>
+          <p className="max-w-xl">© 2026 Target95+. {CONTENT_SOURCE_NOTICE_SHORT}</p>
           <p>Learn smarter. Practice better. Target 95+.</p>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import ContentSourceNotice from "../components/ContentSourceNotice";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Button from "../components/ui/Button";
@@ -187,6 +188,7 @@ export default function AboutPage() {
               <p>
                 Every effort has been made to ensure the accuracy, quality, and reliability of the educational content available on this platform. However, despite our best efforts, human errors, unintentional inaccuracies, or technical issues may occasionally occur.
               </p>
+              <ContentSourceNotice />
               <p>
                 Target95+ is a study aid. Educational outcomes may vary, and we do not guarantee specific examination results. Our{" "}
                 <a href="/terms" className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700">Terms of Service</a>{" "}

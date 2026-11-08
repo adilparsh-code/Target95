@@ -1,3 +1,4 @@
+import ContentSourceNotice from "../components/ContentSourceNotice";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Container from "../components/ui/Container";
@@ -90,6 +91,7 @@ export default function TermsPage() {
                   <p className="mt-3">
                     The Platform is provided &quot;as is&quot; without warranties of any kind. We do not guarantee that the Platform will be error-free, secure, or available at all times. We are not responsible for any errors or omissions in the content. Educational outcomes may vary, and we do not guarantee specific examination results.
                   </p>
+                  <ContentSourceNotice className="mt-3" />
                 </section>
 
                 <section>

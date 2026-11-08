@@ -1,3 +1,4 @@
+import SubjectCover, { getTrackCoverSlug } from "../components/SubjectCover";
 import Link from "next/link";
 import { ArrowRight, BookOpen, BrainCircuit, Code2, GraduationCap, Sparkles } from "lucide-react";
 import Navbar from "../components/Navbar";
@@ -104,7 +105,8 @@ export default function ISCHubPage() {
               {sections.map((section) => {
                 const Icon = section.icon;
                 return (
-                  <Link key={section.href} href={section.href} className="group rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-md)] dark:bg-slate-900 sm:p-7">
+                  <Link key={section.href} href={section.href} className="group overflow-hidden rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-md)] dark:bg-slate-900 sm:p-7">
+                    <SubjectCover subjectSlug={getTrackCoverSlug(section.title)} className="-mx-6 -mt-6 mb-5 w-[calc(100%_+_3rem)] max-w-none sm:-mx-7 sm:-mt-7 sm:w-[calc(100%_+_3.5rem)]" />
                     <div className="flex items-start justify-between gap-5">
                       <div className="flex items-center gap-4">
                         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[var(--primary-light)] text-[var(--primary)]"><Icon className="h-5 w-5" /></span>

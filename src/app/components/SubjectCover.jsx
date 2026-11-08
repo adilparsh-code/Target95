@@ -7,12 +7,19 @@ const COVER_ALIASES = {
   "english-core": "english",
   "computer-applications": "computer",
   "computer-science": "computer",
+  // Home picker ids and CBSE subject codes (402/802 IT, 083 CS, 065 Informatics Practices, 843 AI).
+  java: "computer",
+  402: "computer",
+  "065": "computer",
+  "083": "computer",
+  802: "computer",
+  843: "ai",
 };
 
 const COVER_SLUGS = new Set([
   "biology", "physics", "chemistry", "mathematics", "english", "hindi", "geography", "history",
   "political-science", "economics", "business-studies", "accountancy", "sociology", "psychology",
-  "commerce", "computer",
+  "commerce", "computer", "ai",
 ]);
 
 // Subjects with artwork per class, keyed "<subject>-<classSlug>".
@@ -26,6 +33,11 @@ export function getSubjectCoverSrc(subjectSlug, classSlug) {
   if (CLASS_COVER_SLUGS.has(classCover)) return `/images/subjects/${classCover}.svg`;
   const slug = COVER_ALIASES[subjectSlug] || subjectSlug;
   return `/images/subjects/${COVER_SLUGS.has(slug) ? slug : "default"}.svg`;
+}
+
+// Robotics / AI tracks get the AI artwork; every other track here is computing.
+export function getTrackCoverSlug(title) {
+  return /\b(AI|Robotics|Artificial)\b/i.test(title) ? "ai" : "computer";
 }
 
 export default function SubjectCover({ subjectSlug, classSlug, className = "w-full" }) {

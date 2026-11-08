@@ -1,3 +1,4 @@
+import SubjectCover from '@/app/components/SubjectCover';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import CbseCurriculum2026_27 from "@/app/data/cbse/curriculum-2026-27";
@@ -41,7 +42,8 @@ export default async function ClassPage({ params }) {
         </div>
         <section className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {subjects.map((subject) => (
-            <Link key={`${classNum}-${subject.code}`} href={`/cbse/class/${classNum}/subject/${subject.code}`} className="group rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg">
+            <Link key={`${classNum}-${subject.code}`} href={`/cbse/class/${classNum}/subject/${subject.code}`} className="group overflow-hidden rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-400 hover:shadow-lg">
+              <SubjectCover subjectSlug={subject.code} className="-mx-7 -mt-7 mb-5 w-[calc(100%_+_3.5rem)] max-w-none" />
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600">Subject Code {subject.code}</p>
               <h2 className="mt-3 text-2xl font-bold text-slate-900">{subject.name}</h2>
               <p className="mt-2 text-sm text-slate-600">

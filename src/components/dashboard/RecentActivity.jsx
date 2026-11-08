@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import AceEmptyState from "@/app/components/AceEmptyState";
 import { CheckCircle, XCircle, Clock, BookOpen as ChapterIcon, Trophy } from "lucide-react";
 import { formatRelativeDate } from "@/lib/learningRoadmap";
 
@@ -22,13 +23,11 @@ export default function RecentActivity({ activities = [], isLoading }) {
           ))}
         </div>
       ) : activities.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-dashed border-slate-200 p-8 text-center dark:border-slate-700">
-          <Clock className="mx-auto mb-3 h-10 w-10 text-slate-300 dark:text-slate-600" aria-hidden="true" />
-          <p className="text-sm text-slate-500 dark:text-slate-400">No activity yet. Solve your first question to see it here.</p>
-          <Link href="/question-bank" className="mt-3 inline-block text-sm font-medium text-blue-600 hover:underline dark:text-blue-400">
+        <AceEmptyState className="mt-4" mascotSize={48} message="No activity yet. Solve your first question to see it here.">
+          <Link href="/question-bank" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-400">
             Start practicing →
           </Link>
-        </div>
+        </AceEmptyState>
       ) : (
         <ul className="mt-4 space-y-3">
           {activities.map((activity) => {

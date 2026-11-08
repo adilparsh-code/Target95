@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Button from './components/ui/Button';
+import AceMascot from './components/AceMascot';
 
 export default function NotFound() {
   return (
@@ -31,13 +32,15 @@ export default function NotFound() {
             </svg>
           </div>
 
+          <span className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-slate-200"><AceMascot size={64} /></span>
+
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Page Not Found</h1>
           <p className="text-lg md:text-xl text-slate-300 dark:text-slate-400 mb-10 max-w-xl mx-auto">Oops! The page you&apos;re looking for seems to have wandered off. Let&apos;s get you back on track.</p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href="/"><Button variant="default" size="lg" className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 border-0">Back to Home</Button></Link>
-            <Link href="/practice/setup"><Button variant="outline" size="lg" className="w-full sm:w-auto border-white/30 text-white hover:bg-white/10">Start Practice</Button></Link>
-            <Link href="/contact"><Button variant="ghost" size="lg" className="w-full sm:w-auto text-slate-300 hover:text-white hover:bg-white/10">Contact Support</Button></Link>
+            <Link href="/practice/setup"><Button variant="outline" size="lg" className="w-full sm:w-auto border-white/30! bg-white/10! text-white! hover:bg-white/20!">Start Practice</Button></Link>
+            <Link href="/contact"><Button variant="ghost" size="lg" className="w-full sm:w-auto text-slate-300! hover:text-white! hover:bg-white/10!">Contact Support</Button></Link>
           </div>
         </div>
       </div>

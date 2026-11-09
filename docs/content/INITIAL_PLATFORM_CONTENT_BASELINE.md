@@ -46,7 +46,13 @@ The chapter validator requires, among other fields:
 - keyPoints, examFocus, vocabulary;
 - non-empty questions with unique IDs and valid question structures.
 
-The curriculum loader reads subject metadata from `src/app/data/boardprep/content`. A chapter is discoverable as published only when its registry metadata has `status: "published"`; its `file` path is resolved relative to the subject directory. Navigation uses the same published status filter.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:46522a6a3f9a87a2dd9eeffca5c71dade7592f1a13c18815059ae77e8ab6ac5a -->
+
+The curriculum loader reads subject metadata from `src/app/data/boardprep/content`. A chapter is discoverable as published only when its registry metadata has `status: "published"`. `getChapter` first resolves its `file` path relative to the subject directory; if that file is missing, it checks the sibling `chapters/` directory using the basename of the registry file path. Content inventories must account for this fallback before reporting a chapter file as missing. Navigation uses the same published status filter.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 These rules apply to this BoardPrep system. Other legacy content modules must be inspected against their own contracts before being migrated or rewritten.
 
@@ -88,7 +94,13 @@ The inspected `src/app/data/cbse/CBSE_2026_27_MASTER_AUDIT.md` lists eight track
 
 The audit records 2026–27 syllabus/content mapping as completed, while question-bank and assessment audits remain pending. It also describes a later canonical content pass for these tracks. This is a repository audit claim, not independent verification of every unit, question, mock-test distribution, or student-facing route.
 
-The CBSE legacy curriculum is maintained separately in `src/app/data/cbse/curriculum-2026-27.js` and related source/registry modules. The CBSE class IX/XI BoardPrep paths do not map one-to-one to the BoardPrep board registry inspected above.
+<!-- coderabbit-ai-generated:v1 -->
+
+<!-- coderabbit-ai-generated-section:v1:8f8d65cd648cda2d9c220b55895ef54a5fd4469bdc89d3391a364d9eb4a28a43 -->
+
+The CBSE legacy curriculum is maintained separately in `src/app/data/cbse/curriculum-2026-27.js` and related source/registry modules. The separate CBSE page links Class IX at `/cbse/class/9`, while the BoardPrep CBSE registry covers only Classes XI and XII.
+
+<!-- /coderabbit-ai-generated:v1 -->
 
 The CBSE audit explicitly distinguishes:
 - 083 Computer Science (Python);

@@ -3396,39 +3396,39 @@ const chapterLoopsCombined = {
   "previousYearQuestions": [
     {
       "id": "dwhile-py-1",
-      "question": "(ICSE 2023) Write a program using do-while loop to display a menu until the user chooses to exit.",
-      "answer": "int choice;\ndo {\n    System.out.println('1. Add');\n    System.out.println('2. Subtract');\n    System.out.println('3. Exit');\n    System.out.print('Enter choice: ');\n    choice = sc.nextInt();\n    // Process choice\n} while (choice != 3);",
-      "explanation": "Do-while is perfect for menus because it guarantees the menu displays at least once."
+      "question": "Write a program using a do-while loop to keep asking for a password until the user types java123. Then display Access granted.",
+      "answer": "Scanner sc = new Scanner(System.in);\nString pwd;\ndo {\n    System.out.print(\"Enter password: \");\n    pwd = sc.nextLine();\n} while (!pwd.equals(\"java123\"));\nSystem.out.println(\"Access granted\");",
+      "explanation": "The prompt must appear at least once, which is exactly what a do-while guarantees. Compare strings with equals(), never ==."
     },
     {
       "id": "dwhile-py-2",
-      "question": "(ICSE 2023) Write a program using do-while loop to calculate the sum of first n natural numbers.",
-      "answer": "int sum = 0, i = 1;\ndo {\n    sum = sum + i;\n    i++;\n} while (i <= n);\nSystem.out.println(sum);",
-      "explanation": "Accumulator pattern: initialize sum = 0, add each number, increment i."
+      "question": "Write a program using a do-while loop to find the sum of the digits of a number. (Example: 4825 gives 19.)",
+      "answer": "int n = 4825, sum = 0;\ndo {\n    sum = sum + n % 10;\n    n = n / 10;\n} while (n > 0);\nSystem.out.println(sum);",
+      "explanation": "n % 10 extracts the last digit and n / 10 removes it. The loop stops when no digits are left. Because the body runs once before the test, the program also handles n = 0 correctly."
     },
     {
       "id": "dwhile-py-3",
-      "question": "(ICSE 2022) Write a program using do-while loop to check if a number is prime.",
-      "answer": "boolean isPrime = true;\nint i = 2;\ndo {\n    if (num % i == 0) {\n        isPrime = false;\n        break;\n    }\n    i++;\n} while (i <= num/2);",
-      "explanation": "Check divisors from 2 to num/2. If any divisor found, not prime."
+      "question": "Write a program using a do-while loop to check whether a number is a palindrome. (Example: 1331 is a palindrome.)",
+      "answer": "int num = 1331, temp = num, rev = 0;\ndo {\n    rev = rev * 10 + temp % 10;\n    temp = temp / 10;\n} while (temp > 0);\nif (rev == num)\n    System.out.println(\"Palindrome\");\nelse\n    System.out.println(\"Not a palindrome\");",
+      "explanation": "The digits are peeled off from the right and attached to rev, so rev holds the reversed number. A copy (temp) is used so the original number is still available for the comparison."
     },
     {
       "id": "dwhile-py-4",
-      "question": "(ICSE 2022) Write a program using do-while loop to reverse a number.",
-      "answer": "int reversed = 0;\ndo {\n    int digit = num % 10;\n    reversed = reversed * 10 + digit;\n    num = num / 10;\n} while (num > 0);",
-      "explanation": "Extract digits from right to left and build reversed number."
+      "question": "Write a program using a do-while loop to print the multiplication table of 7 from 7 x 1 to 7 x 10.",
+      "answer": "int n = 7, i = 1;\ndo {\n    System.out.println(n + \" x \" + i + \" = \" + (n * i));\n    i++;\n} while (i <= 10);",
+      "explanation": "i starts at 1, is printed and then incremented. The condition i <= 10 is tested after each pass, so the last line printed is 7 x 10 = 70."
     },
     {
       "id": "dwhile-py-5",
-      "question": "(ICSE 2021) Write a program using do-while loop to print the Fibonacci series up to n terms.",
-      "answer": "int a = 0, b = 1;\nSystem.out.print(a + ' ' + b);\nint i = 3;\ndo {\n    int c = a + b;\n    System.out.print(' ' + c);\n    a = b;\n    b = c;\n    i++;\n} while (i <= n);",
-      "explanation": "Each term is sum of two preceding terms. Start with 0, 1."
+      "question": "Write a program using a do-while loop to find the GCD (HCF) of 48 and 18 using Euclid's method.",
+      "answer": "int a = 48, b = 18;\ndo {\n    int r = a % b;\n    a = b;\n    b = r;\n} while (b != 0);\nSystem.out.println(\"GCD = \" + a);",
+      "explanation": "Euclid's method replaces (a, b) by (b, a % b) until the remainder is 0. Trace: (48, 18), (18, 12), (12, 6), (6, 0). The last non-zero divisor, 6, is the GCD."
     },
     {
       "id": "dwhile-py-6",
-      "question": "(ICSE 2021) Write a program using do-while loop to calculate the factorial of a number.",
-      "answer": "int fact = 1, i = 1;\ndo {\n    fact = fact * i;\n    i++;\n} while (i <= num);\nSystem.out.println(fact);",
-      "explanation": "Multiply all numbers from 1 to num. Initialize fact = 1."
+      "question": "Write a program using a do-while loop to find the sum of the series 1² + 2² + 3² + ... + n² for n = 5.",
+      "answer": "int n = 5, i = 1, sum = 0;\ndo {\n    sum = sum + i * i;\n    i++;\n} while (i <= n);\nSystem.out.println(sum);",
+      "explanation": "The squares 1, 4, 9, 16 and 25 are added one by one. Note that a do-while always runs once, so this program assumes n is at least 1."
     }
   ],
   "vivaQuestions": [
@@ -5393,25 +5393,19 @@ const chapterLoopsCombined = {
   ],
   "competencyFocusedQuestions": [
     {
-      "id": "for-audit-cisce-cfq-58",
-      "source": "CISCE ICSE Class X Competency-Focused Practice Questions",
-      "question": "Convert the following for-loop segment to an exit-controlled loop: for(k=10;k>=-1;k--) System.out.println(k*2);",
-      "answer": "Use a do-while structure with the same initialization, body and termination condition, taking care to preserve the final value and update order.",
-      "sourceUrl": "https://cisce.org/wp-content/uploads/2025/01/CFQs-ICSE_Computer-Application-Class-X.pdf"
+      "id": "for-cfq-1",
+      "question": "A student says that for (int i = 5; i > 5; i--) System.out.println(i); prints 5 once. Is the student right? What would a do-while loop with the same condition print?",
+      "answer": "The student is wrong. The condition 5 > 5 is false at the start, so the for loop does not run at all and prints nothing. A do-while version (do { System.out.println(i); i--; } while (i > 5);) prints 5 once, because its body runs before the condition is tested."
     },
     {
-      "id": "for-audit-cisce-cfq-62",
-      "source": "CISCE ICSE Class X Competency-Focused Practice Questions",
-      "question": "Consider a for loop that prints k from 1 to 5 followed by another println(k). Identify whether it executes successfully, state the error, and correct it.",
-      "answer": "It does not execute successfully because k declared in the for initialization is out of scope after the loop. Declare k before the loop if it must be used afterwards.",
-      "sourceUrl": "https://cisce.org/wp-content/uploads/2025/01/CFQs-ICSE_Computer-Application-Class-X.pdf"
+      "id": "for-cfq-2",
+      "question": "State how many times the loop body executes and the final output: int n = 1; while (n < 50) { n = n * 3; } System.out.println(n);",
+      "answer": "The body executes 4 times (n becomes 3, 9, 27 and 81). When n is 81 the condition 81 < 50 is false and the loop ends. Output: 81."
     },
     {
-      "id": "for-audit-cisce-2024",
-      "source": "CISCE ICSE 2024 Computer Applications",
-      "question": "Give the output and number of executions for: for(x=10; x>20; x++) System.out.println(x); System.out.println(x*2);",
-      "answer": "The loop executes zero times because 10>20 is false initially. The following statement then executes with x still equal to 10, so it prints 20.",
-      "sourceUrl": "https://cisce.org/wp-content/uploads/2025/11/12.-Computer-Applications.pdf"
+      "id": "for-cfq-3",
+      "question": "The loop below never stops. Explain why and correct it so that it prints 10 8 6 4 2.\nint i = 10;\nwhile (i > 0) {\n    System.out.print(i + \" \");\n}",
+      "answer": "The value of i is never changed inside the loop, so i > 0 stays true forever. Add i = i - 2; (or i -= 2;) as the last statement of the loop body. The corrected loop prints 10 8 6 4 2."
     }
   ],
   "assertionReasonQuestions": [

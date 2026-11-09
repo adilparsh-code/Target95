@@ -2912,43 +2912,43 @@ public class Main {
     },
   ],
 
-  // ========== 15. PREVIOUS YEAR QUESTIONS ==========
+  // ========== 15. BOARD-STYLE PRACTICE QUESTIONS (original) ==========
   previousYearQuestions: [
     {
       id: "string-py-1",
-      question: "(ICSE 2023) Write a program to check if a string is a palindrome.",
-      answer: "String s = 'madam';\nboolean isPalindrome = true;\nfor (int i = 0; i < s.length() / 2; i++) {\n    if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {\n        isPalindrome = false;\n        break;\n    }\n}",
-      explanation: "Compare characters from both ends moving towards center.",
+      question: "Write a program to count the vowels in a string. (Example: \"Examination\" has 6.)",
+      answer: "String s = \"Examination\";\nint count = 0;\nfor (int i = 0; i < s.length(); i++) {\n    char ch = Character.toLowerCase(s.charAt(i));\n    if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')\n        count++;\n}\nSystem.out.println(count);",
+      explanation: "Each character is converted to lower case first, so capital and small vowels are counted by the same test.",
     },
     {
       id: "string-py-2",
-      question: "(ICSE 2023) Write a program to count the frequency of a character in a string.",
-      answer: "int count = 0;\nfor (int i = 0; i < s.length(); i++) {\n    if (s.charAt(i) == target) {\n        count++;\n    }\n}",
-      explanation: "Traverse string and count occurrences of target character.",
+      question: "Write a program to change the case of every letter of a string: upper case becomes lower case and lower case becomes upper case. (Example: \"Java Is FUN\" gives \"jAVA iS fun\".)",
+      answer: "String s = \"Java Is FUN\";\nString result = \"\";\nfor (int i = 0; i < s.length(); i++) {\n    char ch = s.charAt(i);\n    if (Character.isUpperCase(ch))\n        result = result + Character.toLowerCase(ch);\n    else if (Character.isLowerCase(ch))\n        result = result + Character.toUpperCase(ch);\n    else\n        result = result + ch;\n}\nSystem.out.println(result);",
+      explanation: "Spaces and other non-letters fall into the last else and are copied unchanged. Strings are immutable, so the result is built in a new String.",
     },
     {
       id: "string-py-3",
-      question: "(ICSE 2022) Write a program to reverse a string.",
-      answer: "String reversed = '';\nfor (int i = s.length() - 1; i >= 0; i--) {\n    reversed = reversed + s.charAt(i);\n}",
-      explanation: "Traverse string from end to beginning and concatenate characters.",
+      question: "Write a program to count the words in a sentence that may contain extra spaces. (Example: \"  Learning   Java is fun \" has 4 words.)",
+      answer: "String s = \"  Learning   Java is fun \";\ns = s.trim();\nint words = 0;\nfor (int i = 0; i < s.length(); i++) {\n    if (s.charAt(i) != ' ' && (i == 0 || s.charAt(i - 1) == ' '))\n        words++;\n}\nSystem.out.println(words);",
+      explanation: "A word starts at a non-space character that is at position 0 or follows a space. Counting word starts is safe even when there are several spaces in a row; counting spaces would give a wrong answer.",
     },
     {
       id: "string-py-4",
-      question: "(ICSE 2022) Write a program to check if two strings are anagrams.",
-      answer: "char[] arr1 = s1.toCharArray();\nchar[] arr2 = s2.toCharArray();\nArrays.sort(arr1);\nArrays.sort(arr2);\nboolean isAnagram = Arrays.equals(arr1, arr2);",
-      explanation: "Convert to arrays, sort, and compare.",
+      question: "Write a program to check whether a string contains only digits.",
+      answer: "String s = \"20251\";\nboolean allDigits = true;\nfor (int i = 0; i < s.length(); i++) {\n    if (!Character.isDigit(s.charAt(i))) {\n        allDigits = false;\n        break;\n    }\n}\nSystem.out.println(allDigits ? \"Only digits\" : \"Contains other characters\");",
+      explanation: "The flag starts as true and is switched off as soon as one non-digit is found. break stops the search early. (An empty string would also report true, so check s.length() > 0 if that matters.)",
     },
     {
       id: "string-py-5",
-      question: "(ICSE 2021) Write a program to convert a string to uppercase.",
-      answer: "String upper = s.toUpperCase();\nSystem.out.println(upper);",
-      explanation: "toUpperCase() method converts all characters to uppercase.",
+      question: "Write a program to print the initials of a full name. (Example: \"Sachin Ramesh Tendulkar\" gives S.R.T.)",
+      answer: "String name = \"Sachin Ramesh Tendulkar\";\nString initials = \"\";\nfor (int i = 0; i < name.length(); i++) {\n    if (i == 0 || name.charAt(i - 1) == ' ')\n        initials = initials + name.charAt(i) + \".\";\n}\nSystem.out.println(initials);",
+      explanation: "The first letter of every word is the character at position 0 or the character that comes right after a space.",
     },
     {
       id: "string-py-6",
-      question: "(ISC 2021) Write a program to find the first non-repeating character in a string.",
-      answer: "int[] freq = new int[256];\nfor (int i = 0; i < s.length(); i++) {\n    freq[s.charAt(i)]++;\n}\nfor (int i = 0; i < s.length(); i++) {\n    if (freq[s.charAt(i)] == 1) {\n        firstNonRepeat = s.charAt(i);\n        break;\n    }\n}",
-      explanation: "Count frequencies, then find first character with frequency 1.",
+      question: "Write a program to display the longest word of a sentence.",
+      answer: "String s = \"Practice makes programming perfect\";\nString longest = \"\", word = \"\";\ns = s + \" \";\nfor (int i = 0; i < s.length(); i++) {\n    char ch = s.charAt(i);\n    if (ch != ' ')\n        word = word + ch;\n    else {\n        if (word.length() > longest.length())\n            longest = word;\n        word = \"\";\n    }\n}\nSystem.out.println(longest);",
+      explanation: "Characters are collected in word until a space is met; then word is compared with the longest word so far. A space is added at the end of the sentence so that the last word is also compared.",
     },
   ],
 

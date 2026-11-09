@@ -99,8 +99,8 @@ export default function AboutPage() {
                   icon: "🤖",
                 },
                 {
-                  title: "Previous Year Questions",
-                  description: "Access to past board exam questions with detailed solutions and explanations.",
+                  title: "Board-Style Practice Questions",
+                  description: "Original questions written in the style of board exams, with detailed solutions and explanations.",
                   icon: "📝",
                 },
                 {

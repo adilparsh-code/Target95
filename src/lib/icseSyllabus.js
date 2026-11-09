@@ -195,7 +195,7 @@ export const CLASS_X_TOPICS = [
     difficulty: "Beginner",
     estimatedTime: 90,
     description:
-      "Comprehensive revision of all Class 9 topics, advanced problem-solving using Class 9 concepts, integration of multiple Class 9 topics in single programs, previous year question practice for Class 9 topics.",
+      "Comprehensive revision of all Class 9 topics, advanced problem-solving using Class 9 concepts, integration of multiple Class 9 topics in single programs, board-style question practice for Class 9 topics.",
     isProject: false,
   },
   {

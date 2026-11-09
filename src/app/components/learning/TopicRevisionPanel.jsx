@@ -9,7 +9,7 @@ export default function TopicRevisionPanel({ topic, allTopics }) {
     <div id="revision" className="space-y-6">
       <section className="grid gap-4 lg:grid-cols-2">
         <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-bold text-gray-900">Frequently asked PYQs</h2>
+          <h2 className="text-xl font-bold text-gray-900">Board-style practice questions</h2>
           <div className="mt-4 space-y-3">
             {topic.pyqs.map((question) => <div key={question.prompt} className="rounded-xl bg-slate-50 p-4"><p className="text-xs font-semibold text-blue-700">{question.year} · {question.marks} marks</p><p className="mt-1 text-sm leading-6 text-gray-800">{question.prompt}</p></div>)}
           </div>

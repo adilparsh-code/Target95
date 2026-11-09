@@ -15,7 +15,7 @@ export default function PyqSection({ items, isCompleted }) {
   return (
     <ChapterSection
       id="previous-year-questions"
-      title="Previous Year Questions"
+      title="Board-Style Practice Questions"
       icon={<AcademicCapIcon className="w-5 h-5" />}
       estimatedTime={20}
       isCompleted={isCompleted}

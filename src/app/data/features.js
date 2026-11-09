@@ -1,8 +1,8 @@
 const features = [
   {
     icon: "📚",
-    title: "Previous Year Questions",
-    description: "Practice chapter-wise previous year questions."
+    title: "Board-Style Questions",
+    description: "Practice chapter-wise board-style questions."
   },
   {
     icon: "🤖",

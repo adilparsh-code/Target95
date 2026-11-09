@@ -7,7 +7,7 @@ import Container from "./ui/Container";
 const faqs = [
   {
     question: "Is Target95+ completely free to use?",
-    answer: "Most of our core features including access to previous year questions, study materials, and basic practice tests are completely free. We'll be introducing premium features in the future for advanced AI tutoring and personalized study plans."
+    answer: "Most of our core features including access to board-style practice questions, study materials, and basic practice tests are completely free. We'll be introducing premium features in the future for advanced AI tutoring and personalized study plans."
   },
   {
     question: "Which boards and classes do you support?",

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const features = [
   { icon: Bot, title: "AI Assisted Learning", description: "Get clear explanations and personalised help when a concept stops making sense.", href: "/ai-tutor" },
-  { icon: ClipboardCheck, title: "Previous Year Questions", description: "Practise with board-style questions and detailed solutions built for exam preparation.", href: "/question-bank" },
+  { icon: ClipboardCheck, title: "Board-Style Questions", description: "Practise with original board-style questions and detailed solutions built for exam preparation.", href: "/question-bank" },
   { icon: BarChart3, title: "Smart Progress Tracking", description: "Understand your performance and see which areas deserve more attention.", href: "/analytics" },
   { icon: Code2, title: "Interactive Practice", description: "Reinforce concepts with coding exercises, quizzes and hands-on problem solving.", href: "/practice" },
   { icon: Smartphone, title: "Learn Anywhere", description: "A responsive experience that keeps your study flow consistent across devices.", href: null },

@@ -11,7 +11,7 @@ const steps = [
   {
     icon: "📝",
     title: "Practice Questions",
-    description: "Solve chapter-wise previous year questions.",
+    description: "Solve chapter-wise board-style practice questions.",
   },
   {
     icon: "🤖",

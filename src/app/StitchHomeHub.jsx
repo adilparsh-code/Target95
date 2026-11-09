@@ -202,10 +202,10 @@ System.out.println(res);`}</code></pre><div className="mt-3 grid grid-cols-2 gap
           </section>
 
           <section className="mx-auto mt-12 max-w-3xl text-center"><p className="stitch-eyebrow">Academic Clarifications</p><h2 className="stitch-heading mt-1 text-2xl">Frequently Asked Questions</h2><div className="mt-5 space-y-2 text-left">{[
-            "How are the practice questions and mock tests aligned with ICSE & CBSE board papers?",
-            "Can I switch between Class 10 (ICSE) and Class 12 (ISC / CBSE) freely?",
-            "Are 10-year past papers (PYQs) fully solved with marking schemes?",
-          ].map((q) => <details key={q} className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm"><summary className="cursor-pointer font-semibold text-slate-800">{q}</summary><p className="mt-2 text-xs leading-5 text-slate-500">Target95 keeps board, class and chapter pathways separate so practice can remain aligned with the selected curriculum.</p></details>)}</div></section>
+            { q: "How are the practice questions and mock tests aligned with ICSE & CBSE board papers?", a: "Target95 keeps board, class and chapter pathways separate so practice can remain aligned with the selected curriculum." },
+            { q: "Can I switch between Class 10 (ICSE) and Class 12 (ISC / CBSE) freely?", a: "Target95 keeps board, class and chapter pathways separate so practice can remain aligned with the selected curriculum." },
+            { q: "Does Target95 reprint old board question papers?", a: "No. Practice questions on Target95 are written for the platform in the style of board exams. Official past papers are published by CISCE and CBSE on their own websites." },
+          ].map(({ q, a }) => <details key={q} className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm"><summary className="cursor-pointer font-semibold text-slate-800">{q}</summary><p className="mt-2 text-xs leading-5 text-slate-500">{a}</p></details>)}</div></section>
         </div>
       </ErrorBoundary>
       <Footer />

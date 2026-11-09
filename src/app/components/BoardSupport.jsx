@@ -1,7 +1,7 @@
 import { CheckCircle2, BookOpen, Code2, ArrowUpRight } from "lucide-react";
 import Container from "./ui/Container";
 
-const cisceFeatures = ["ICSE (Classes 9–10)", "ISC (Classes 11–12)", "Java & Robotics / AI", "Chapter-wise notes & summaries", "Full-length mock tests", "Previous year questions"];
+const cisceFeatures = ["ICSE (Classes 9–10)", "ISC (Classes 11–12)", "Java & Robotics / AI", "Chapter-wise notes & summaries", "Full-length mock tests", "Board-style practice questions"];
 const cbseFeatures = ["Classes 9–12", "Python Programming", "Computer Science / IP / IT", "Question Bank", "Mock Tests", "AI-assisted learning"];
 
 function BoardCard({ name, label, description, features, Icon }) {

@@ -8696,144 +8696,153 @@ const chapterConditionalsCombined = {
   "previousYearQuestions": [
     {
       "id": "py-1",
-      "question": "(ICSE 2020) Output:\nint x=5;\nif(x>5)\n    x++;\nelse\n    x--;\nSystem.out.println(x);",
+      "question": "Predict the output:\nint n = 12;\nif (n % 3 == 0)\n    n = n / 3;\nelse\n    n = n * 3;\nSystem.out.println(n);",
       "answer": "4",
-      "explanation": "5>5 false. Else: x-- = 4."
+      "explanation": "12 % 3 == 0 is true, so the if-part runs: n = 12 / 3 = 4. The else-part is skipped."
     },
     {
       "id": "py-2",
-      "question": "(ISC 2021) Output:\nint a=10,b=20,c=5;\nif(a>b)\n    if(a>c)\n        System.out.println(a);\n    else\n        System.out.println(c);\nelse\n    if(b>c)\n        System.out.println(b);\n    else\n        System.out.println(c);",
-      "answer": "20",
-      "explanation": "10>20 false. Else: 20>5 true. Prints 20."
+      "question": "Predict the output:\nint p = 7, q = 7, r = 9;\nif (p == q)\n    if (q > r)\n        System.out.println(\"P\");\n    else\n        System.out.println(\"Q\");\nelse\n    System.out.println(\"R\");",
+      "answer": "Q",
+      "explanation": "p == q is true, so the inner if is tested. q > r (7 > 9) is false, so the inner else prints Q. The last else belongs to the outer if and is skipped."
     },
     {
       "id": "py-3",
-      "question": "(ICSE 2019) Rewrite using ternary:\nif(marks>=40)\n    result=\"Pass\";\nelse\n    result=\"Fail\";",
-      "answer": "result = (marks >= 40) ? \"Pass\" : \"Fail\";"
+      "question": "Rewrite using the ternary operator:\nif (temp > 37)\n    status = \"Fever\";\nelse\n    status = \"Normal\";",
+      "answer": "status = (temp > 37) ? \"Fever\" : \"Normal\";",
+      "explanation": "The condition goes before ?, the value for true goes before :, and the value for false goes after it."
     },
     {
       "id": "py-4",
-      "question": "(ICSE 2022) What is wrong?\nint x=5;\nif(x=5)\n    System.out.println(\"Equal\");\nelse\n    System.out.println(\"Not\");",
-      "answer": "Assignment = used instead of comparison ==. Compilation error."
+      "question": "Predict the output:\nboolean found = false;\nif (found = true)\n    System.out.println(\"Found\");\nelse\n    System.out.println(\"Not found\");",
+      "answer": "Found",
+      "explanation": "found = true is an assignment, not a comparison. It stores true in found and the value of the whole expression is true, so the if-part runs. This compiles only because found is boolean; with an int it would be a compile error."
     },
     {
       "id": "py-5",
-      "question": "(ISC 2020) Output:\nint x=5;\nif(x>0)\n    if(x>10)\n        System.out.println(\">10\");\n    else\n        System.out.println(\"0-10\");\nelse\n    System.out.println(\"<=0\");",
-      "answer": "0-10",
-      "explanation": "5>0 true. 5>10 false. Inner else: prints '0-10'."
+      "question": "Predict the output:\nint score = 55;\nif (score >= 40)\n    System.out.print(\"Pass \");\nif (score >= 50)\n    System.out.print(\"Merit \");\nif (score >= 70)\n    System.out.print(\"Distinction\");",
+      "answer": "Pass Merit",
+      "explanation": "These are three separate if statements, so every condition is tested. 55 >= 40 and 55 >= 50 are true, 55 >= 70 is false."
     },
     {
       "id": "py-6",
-      "question": "(ICSE 2021) Output:\nint m=65;\nif(m>=90)\n    System.out.println(\"A\");\nelse if(m>=75)\n    System.out.println(\"B\");\nelse if(m>=60)\n    System.out.println(\"C\");\nelse\n    System.out.println(\"D\");",
-      "answer": "C",
-      "explanation": "65>=90 false. 65>=75 false. 65>=60 true. Prints C."
+      "question": "Predict the output:\nint hour = 15;\nif (hour < 12)\n    System.out.println(\"Morning\");\nelse if (hour < 17)\n    System.out.println(\"Afternoon\");\nelse if (hour < 21)\n    System.out.println(\"Evening\");\nelse\n    System.out.println(\"Night\");",
+      "answer": "Afternoon",
+      "explanation": "In an else-if ladder the first true condition wins and the rest are skipped. 15 < 12 is false, 15 < 17 is true, so Afternoon is printed."
     },
     {
       "id": "py-7",
-      "question": "(ICSE 2018) Analyze:\nint a=3,b=4,c=5;\nif(a<b&&b<c)\n    System.out.println(\"Y\");\nelse\n    System.out.println(\"N\");",
-      "answer": "Y",
-      "explanation": "3<4 true. 4<5 true. true&&true true. Prints Y."
+      "question": "Predict the output:\nint a = 8, b = 3;\nif (a > 5 || b++ > 5)\n    System.out.println(a + \" \" + b);\nelse\n    System.out.println(b);",
+      "answer": "8 3",
+      "explanation": "|| is a short-circuit operator. a > 5 is already true, so b++ > 5 is never evaluated and b stays 3."
     },
     {
       "id": "py-8",
-      "question": "(ISC 2019) Convert to if-else: int z = (x>y) ? x : y;",
-      "answer": "if(x>y) z=x; else z=y;"
+      "question": "Convert to if-else:\nint diff = (a > b) ? a - b : b - a;",
+      "answer": "int diff;\nif (a > b)\n    diff = a - b;\nelse\n    diff = b - a;",
+      "explanation": "The expression before ? becomes the if condition, the value after ? is the if-part and the value after : is the else-part."
     },
     {
       "id": "py-9",
-      "question": "(ICSE 2023) Output:\nint x=3;\nif(++x>4)\n    System.out.println(x);\nelse\n    System.out.println(x+2);",
-      "answer": "6",
-      "explanation": "++x makes x=4. 4>4 false. Else: 4+2=6."
+      "question": "Predict the output:\nint k = 4;\nif (k++ == 5)\n    System.out.println(\"Five \" + k);\nelse\n    System.out.println(\"Not five \" + k);",
+      "answer": "Not five 5",
+      "explanation": "k++ uses the old value 4 in the comparison (4 == 5 is false) and only then increases k to 5. The else-part prints the updated k."
     },
     {
       "id": "py-10",
-      "question": "(ISC 2022) Find error:\nif(x>y);\n    System.out.println(\"Greater\");\nelse\n    System.out.println(\"Smaller\");",
-      "answer": "Semicolon after if separates it from else. Compilation error."
+      "question": "Find the error:\nint a = 4;\nif (a > 2);\n    System.out.println(\"Big\");\nelse\n    System.out.println(\"Small\");",
+      "answer": "The semicolon after the if condition ends the if statement. The println after it becomes a separate statement, so the else has no matching if (compile error: 'else' without 'if'). Remove the semicolon.",
+      "explanation": "The semicolon after if (a > 2) ends the statement, so the if has an empty body."
     },
     {
       "id": "py-11",
-      "question": "(ICSE 2020) Output:\nint a=5,b=10,c=15;\nif(a>b&&a>c)\n    System.out.println(a);\nelse if(b>c)\n    System.out.println(b);\nelse\n    System.out.println(c);",
-      "answer": "15",
-      "explanation": "5>10 false (short-circuit). 10>15 false. Else prints 15."
+      "question": "Predict the output:\nint a = 14, b = 9, c = 21;\nint res = (a > b) ? ((a < c) ? a : c) : ((b < c) ? b : c);\nSystem.out.println(res);",
+      "answer": "14",
+      "explanation": "a > b is true, so the first inner ternary is used: a < c (14 < 21) is true, so res = a = 14."
     },
     {
       "id": "py-12",
-      "question": "(ISC 2021) What is the value of x?\nint x=0;\nif(x=0)\n    x=1;\nelse\n    x=2;",
-      "answer": "Compilation error",
-      "explanation": "x=0 is assignment, not boolean. Compilation error."
+      "question": "Find the error:\nint level = 2;\nif (level = 2)\n    System.out.println(\"Level two\");",
+      "answer": "level = 2 is an assignment that produces an int, but an if condition must be a boolean. Use level == 2. (Compile error: incompatible types: int cannot be converted to boolean.)",
+      "explanation": "Java needs a boolean inside if ( )."
     },
     {
       "id": "py-13",
-      "question": "(ICSE 2019) Output:\nint x=3,y=3;\nif(x!=y)\n    System.out.println(\"Diff\");\nelse\n    System.out.println(\"Same\");",
-      "answer": "Same",
-      "explanation": "3!=3 false. Else prints 'Same'."
+      "question": "Predict the output:\nString s1 = \"java\";\nString s2 = new String(\"java\");\nif (s1 == s2)\n    System.out.println(\"Same object\");\nelse\n    System.out.println(\"Different object\");\nif (s1.equals(s2))\n    System.out.println(\"Same text\");",
+      "answer": "Different object\nSame text",
+      "explanation": "== compares references. new String(\"java\") creates a separate object, so s1 == s2 is false. equals() compares the characters, so it is true."
     },
     {
       "id": "py-14",
-      "question": "(ISC 2020) Rewrite using if-else:\nString s = (n%2==0) ? \"Even\" : \"Odd\";",
-      "answer": "if(n%2==0) s=\"Even\"; else s=\"Odd\";"
+      "question": "Rewrite using if-else:\nchar type = (ch >= 'a' && ch <= 'z') ? 'L' : 'O';",
+      "answer": "char type;\nif (ch >= 'a' && ch <= 'z')\n    type = 'L';\nelse\n    type = 'O';",
+      "explanation": "The whole condition before ? becomes the if condition."
     },
     {
       "id": "py-15",
-      "question": "(ICSE 2022) Output:\nint x=5;\nif(x>0)\n    System.out.print(\"A\");\nif(x>10)\n    System.out.print(\"B\");\nelse\n    System.out.print(\"C\");",
-      "answer": "AC",
-      "explanation": "First if: 5>0 true prints A. Second if: 5>10 false, else prints C."
+      "question": "Predict the output:\nint x = 6;\nif (x > 3)\n    System.out.print(\"A\");\nif (x > 8)\n    System.out.print(\"B\");\nelse\n    System.out.print(\"C\");\nSystem.out.print(\"D\");",
+      "answer": "ACD",
+      "explanation": "The first if is independent. The else belongs to the second if. x > 8 is false, so C is printed. D is outside every if and always prints."
     },
     {
       "id": "py-16",
-      "question": "(ISC 2019) What is wrong?\nif(x>5)\n    int y=10;\nelse\n    y=20;",
-      "answer": "Cannot declare variable as single statement after if. Use braces."
+      "question": "Find the error:\nint n = 6;\nif (n > 0) {\n    int sq = n * n;\n}\nSystem.out.println(sq);",
+      "answer": "sq is declared inside the if block, so its scope ends at the closing brace. Using it afterwards is a compile error (cannot find symbol). Declare int sq before the if.",
+      "explanation": "A variable declared inside braces exists only inside them."
     },
     {
       "id": "py-17",
-      "question": "(ICSE 2021) Output:\nint a=10,b=20,c=30;\nint max=(a>b)?((a>c)?a:c):((b>c)?b:c);\nSystem.out.println(max);",
-      "answer": "30",
-      "explanation": "10>20 false. (20>30) false. Returns 30."
+      "question": "Predict the output:\nint a = 10, b = 20;\nif (!(a > b) && (b % a == 0))\n    System.out.println(\"Multiple\");\nelse\n    System.out.println(\"Not a multiple\");",
+      "answer": "Multiple",
+      "explanation": "a > b is false, so !(a > b) is true. b % a is 20 % 10 = 0, so the second condition is true as well. true && true is true."
     },
     {
       "id": "py-18",
-      "question": "(ISC 2022) Output:\nint x=0;\nif(x>0)\n    System.out.println(\"Pos\");\nelse if(x<0)\n    System.out.println(\"Neg\");\nelse\n    System.out.println(\"Zero\");",
-      "answer": "Zero",
-      "explanation": "0>0 false. 0<0 false. Else prints Zero."
+      "question": "Predict the output:\nint pts = 0;\nint n = 25;\nif (n > 10)\n    pts += 5;\nif (n > 20)\n    pts += 10;\nelse if (n > 15)\n    pts += 15;\nSystem.out.println(pts);",
+      "answer": "15",
+      "explanation": "The first if adds 5. The second if-else chain starts fresh: n > 20 is true, so 10 is added and the else-if is skipped. 5 + 10 = 15."
     },
     {
       "id": "py-19",
-      "question": "(ICSE 2023) Find error:\nint x=5;\nif(x>0){\n    System.out.println(\"Pos\");\n}else if(x<0){\n    System.out.println(\"Neg\");\n}else(x==0){\n    System.out.println(\"Zero\");\n}",
-      "answer": "Final else cannot have condition (x==0). Use else if or just else."
+      "question": "Find the error:\nint n = -4;\nif (n > 0)\n    System.out.println(\"Positive\");\nelse (n < 0)\n    System.out.println(\"Negative\");",
+      "answer": "else has no condition. To test a second condition write else if (n < 0). Written this way the compiler reports a syntax error.",
+      "explanation": "An else never takes a condition."
     },
     {
       "id": "py-20",
-      "question": "(ISC 2020) Output:\nint x=5;\nif(x%2==0)\n    System.out.println(\"Even\");\nelse\n    System.out.println(\"Odd\");\nSystem.out.println(\"Done\");",
-      "answer": "Odd\nDone",
-      "explanation": "5%2=1. 1==0 false. Else prints Odd. Then Done."
+      "question": "Predict the output:\nint m = 85;\nif (m >= 40)\n    System.out.println(\"Pass\");\nelse if (m >= 80)\n    System.out.println(\"Distinction\");",
+      "answer": "Pass",
+      "explanation": "85 >= 40 is true, so Pass is printed and the else-if is never reached. Order the conditions from the highest to the lowest range to avoid this mistake."
     },
     {
       "id": "py-21",
-      "question": "(ICSE 2018) What is the output?\nint a=0;\nif(a>0)\n    if(a>10)\n        System.out.println(\">10\");\n    else\n        System.out.println(\"0-10\");\nelse\n    System.out.println(\"<=0\");",
-      "answer": "<=0",
-      "explanation": "0>0 false. Outer else prints '<=0'."
+      "question": "Predict the output (look carefully at the else):\nint a = 0, b = 5;\nif (a > 0)\n    if (b > 0)\n        System.out.println(\"Both\");\nelse\n    System.out.println(\"Other\");",
+      "answer": "No output.",
+      "explanation": "An else always pairs with the nearest unmatched if, whatever the indentation. Here it pairs with if (b > 0). Since a > 0 is false, the whole inner statement is skipped and nothing is printed."
     },
     {
       "id": "py-22",
-      "question": "(ISC 2021) Convert to ternary:\nif(age>=18)\n    status=\"Adult\";\nelse\n    status=\"Minor\";",
-      "answer": "status = (age >= 18) ? \"Adult\" : \"Minor\";"
+      "question": "Convert to the ternary operator:\nif (units > 100)\n    rate = 6;\nelse\n    rate = 4;",
+      "answer": "rate = (units > 100) ? 6 : 4;",
+      "explanation": "The condition goes before ?, the true value after it and the false value after :."
     },
     {
       "id": "py-23",
-      "question": "(ICSE 2022) Output:\nint x=7;\nif(x>5&&x<10)\n    System.out.println(\"Yes\");\nelse\n    System.out.println(\"No\");",
-      "answer": "Yes",
-      "explanation": "7>5 true && 7<10 true. Prints Yes."
+      "question": "Predict the output:\nint x = 12;\nif (x > 10 && x < 20 && x % 5 == 0)\n    System.out.println(\"Yes\");\nelse\n    System.out.println(\"No\");",
+      "answer": "No",
+      "explanation": "The first two conditions are true, but 12 % 5 is 2, not 0. All three conditions of && must be true, so the else-part runs."
     },
     {
       "id": "py-24",
-      "question": "(ISC 2023) What is wrong?\nint x=5;\nif(x>0)\n    System.out.println(\"A\");\n    System.out.println(\"B\");\nelse\n    System.out.println(\"C\");",
-      "answer": "Missing braces. Second println is between if and else. Compilation error."
+      "question": "Find the error:\ndouble price = 99.5;\nint discount;\nif (price > 50)\n    discount = price * 0.1;\nelse\n    discount = 0;",
+      "answer": "price * 0.1 is a double, and a double cannot be stored in an int without a cast (compile error: possible lossy conversion from double to int). Declare discount as double or cast the result with (int).",
+      "explanation": "price * 0.1 is a double."
     },
     {
       "id": "py-25",
-      "question": "(ICSE 2020) Output:\nint a=5,b=5;\nif(a++>b)\n    System.out.println(\"A\");\nelse if(a==b)\n    System.out.println(\"B\");\nelse\n    System.out.println(\"C\");",
-      "answer": "C",
-      "explanation": "a++: compare 5>5 false, a=6. 6==5 false. Else prints C."
+      "question": "Predict the output:\nint a = 5, b = 5;\nif (++a > b && b++ == 5)\n    System.out.println(a + \" \" + b);\nelse\n    System.out.println(\"No\");",
+      "answer": "6 6",
+      "explanation": "++a makes a 6, and 6 > 5 is true, so the right side of && is evaluated: b++ == 5 is true (5 == 5) and then b becomes 6. Both conditions are true, so it prints 6 6."
     },
     {
       "id": "nif-py-1",

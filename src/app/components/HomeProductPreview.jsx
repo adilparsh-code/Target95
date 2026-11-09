@@ -42,7 +42,7 @@ export default function HomeProductPreview() {
                 <p className="mt-1 text-sm font-bold text-slate-900">18 / 24</p>
               </div>
               <div className="rounded-xl bg-white p-4 shadow-sm ring-1 ring-slate-200/70">
-                <p className="text-xs text-slate-500">PYQs</p>
+                <p className="text-xs text-slate-500">Practice</p>
                 <p className="mt-1 text-sm font-bold text-slate-900">8 / 10</p>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function HomeProductPreview() {
           {[
             ["01", "Learn concepts"],
             ["02", "Practice questions"],
-            ["03", "Solve PYQs"],
+            ["03", "Solve board-style questions"],
             ["04", "Take mock tests"],
           ].map(([step, label], index) => (
             <div key={step} className={`flex items-center gap-3 px-4 py-4 ${index < 3 ? "border-r border-slate-200/80" : ""}`}>

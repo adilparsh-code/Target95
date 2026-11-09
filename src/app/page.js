@@ -4,8 +4,8 @@ import { getOtherSubjectGroups } from "@/lib/boardprepCurriculum.mjs";
 
 export const metadata = {
   title: "Target95+ - Master CISCE & CBSE Computer Science with AI",
-  description: "Prepare for CISCE (ICSE & ISC) and CBSE Computer Science board exams with AI-powered learning. Practice previous year questions, solve Python programs, and score 95+ with our comprehensive platform.",
-  keywords: "CISCE computer science, ICSE computer science, ISC computer science, CBSE computer science, board exam preparation, AI learning, Python programming, previous year questions, CISCE study material, CBSE study material",
+  description: "Prepare for CISCE (ICSE & ISC) and CBSE Computer Science board exams with AI-powered learning. Practice board-style questions, solve Python programs, and score 95+ with our comprehensive platform.",
+  keywords: "CISCE computer science, ICSE computer science, ISC computer science, CBSE computer science, board exam preparation, AI learning, Python programming, board-style practice questions, CISCE study material, CBSE study material",
   openGraph: {
     title: "Target95+ - Master CISCE & CBSE Computer Science with AI",
     description: "Prepare for CISCE (ICSE & ISC) and CBSE Computer Science board exams with AI-powered learning. Score 95+ with our comprehensive platform.",

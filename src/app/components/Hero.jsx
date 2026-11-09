@@ -12,7 +12,7 @@ const boards = [
     id: "cisce",
     title: "CISCE",
     subtitle: "Council for the Indian School Certificate Examinations",
-    description: "Comprehensive study materials, previous year questions, AI-powered learning, and mock tests for ICSE (Classes 9–10) and ISC (Classes 11–12) Computer Science.",
+    description: "Comprehensive study materials, board-style practice questions, AI-powered learning, and mock tests for ICSE (Classes 9–10) and ISC (Classes 11–12) Computer Science.",
     icon: "🎓",
     color: "from-blue-600 to-indigo-700",
     bgColor: "bg-blue-50",
@@ -87,7 +87,7 @@ export default function Hero({
           </h1>
 
           <p className="mt-4 max-w-2xl mx-auto text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed">
-            Practice Previous Year Questions, Solve Python Programs, Learn with AI and Score Higher in your board exams.
+            Practice Board-Style Questions, Solve Python Programs, Learn with AI and Score Higher in your board exams.
           </p>
         </div>
 

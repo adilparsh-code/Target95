@@ -38,7 +38,7 @@ export const CHAPTER_SECTIONS = [
   { id: "practice", label: "Practice", icon: <CheckCircle2 className="h-4 w-4" />, defaultTime: 20 },
   { id: "mcqs", label: "MCQs", icon: <Circle className="h-4 w-4" />, defaultTime: 15 },
   { id: "programming", label: "Programming", icon: <Code2 className="h-4 w-4" />, defaultTime: 25 },
-  { id: "previous-year-questions", label: "Previous Year Questions", icon: <History className="h-4 w-4" />, defaultTime: 20 },
+  { id: "previous-year-questions", label: "Board-Style Practice", icon: <History className="h-4 w-4" />, defaultTime: 20 },
   { id: "mock-test", label: "Mock Test", icon: <FileQuestion className="h-4 w-4" />, defaultTime: 30 },
   { id: "ai-tutor", label: "AI Tutor", icon: <Brain className="h-4 w-4" />, defaultTime: 15 },
 ];

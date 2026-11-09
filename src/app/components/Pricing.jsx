@@ -9,7 +9,7 @@ const plans = [
     period: "forever",
     description: "Perfect for getting started with your preparation",
     features: [
-      "Access to all previous year questions",
+      "Access to all board-style practice questions",
       "Basic study materials & notes",
       "Community support",
       "Progress tracking",

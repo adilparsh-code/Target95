@@ -73,6 +73,10 @@ export const identityFor = (id) => (typeof id === 'string' && hasOwn(CANONICAL_I
 export const quarantineReasonFor = (slug) =>
   typeof slug === 'string' && hasOwn(QUARANTINED_CHAPTER_SLUGS, slug) ? QUARANTINED_CHAPTER_SLUGS[slug] : null;
 
+/** "Number Systems" / "String Handling" style chapter labels -> slug form. */
+export const slugifyChapterLabel = (label) =>
+  String(label ?? '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 /** Structural problems in the table itself (empty list = sound). */
 export function checkIdentityTable() {
   const problems = [];

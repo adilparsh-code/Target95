@@ -83,6 +83,8 @@ let cached = null;
  *   questions: import("@/content/schema.mjs").UnifiedQuestion[],
  *   quarantined: {question: import("@/content/schema.mjs").UnifiedQuestion, reason: string}[],
  *   aliasIndex: Map<string, string>,
+ *   questionIndex: Map<string, import("@/content/schema.mjs").UnifiedQuestion>,
+ *   quarantinedIndex: Map<string, {question: import("@/content/schema.mjs").UnifiedQuestion, reason: string}>,
  * }}
  */
 export function getCatalog() {
@@ -96,6 +98,9 @@ export function getCatalog() {
     questions,
     quarantined,
     aliasIndex,
+    // Question ids are unique across the catalog (the validator enforces it).
+    questionIndex: new Map(questions.map((question) => [question.id, question])),
+    quarantinedIndex: new Map(quarantined.map((entry) => [entry.question.id, entry])),
   };
   return cached;
 }

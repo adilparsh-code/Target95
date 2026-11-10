@@ -3,6 +3,7 @@
 
 import { getPracticeUrl as buildPracticeUrl } from "@/lib/practiceUrls";
 import { validateCatalog } from "@/content/validate.mjs";
+import { slugifyChapterLabel } from "@/content/identity.mjs";
 import { getMockTestQuestionPool as filterMockTestPool } from "@/lib/mocktest";
 import { getCatalog } from "./staticSource";
 
@@ -44,6 +45,37 @@ export function getMockTestQuestionPool({ chapter = "all", ...options } = {}) {
   const scoped = getQuestions({ chapter: chapter === "all" ? undefined : chapter });
   const pool = scoped.map((question) => ({ ...question, chapter: question.chapterSlug, board: question.board || "ICSE" }));
   return filterMockTestPool({ ...options, chapter: "all", questions: pool });
+}
+
+/**
+ * Resolve a saved bookmark ({ chapter, questionId }) to a question.
+ *
+ * Bookmarks are keyed by "<chapter>:<questionId>" where <chapter> is whichever
+ * slug the saving screen had (canonical, study, bank alias, or a slugified
+ * chapter title) and ids may be stored as strings or numbers. Question ids are
+ * unique, so the id finds the question and the chapter only has to be a slug the
+ * catalog recognises; a bookmark with an unknown chapter stays unresolved, as it
+ * always did. Never throws and never drops the bookmark itself.
+ *
+ * @returns {{status: "found"|"quarantined"|"missing", question: object|null, reason?: string}}
+ */
+export function resolveBookmarkedQuestion({ chapter, questionId } = {}) {
+  const { questionIndex, quarantinedIndex, aliasIndex } = getCatalog();
+  const id = String(questionId ?? "");
+  const live = questionIndex.get(id);
+  const held = live ? null : quarantinedIndex.get(id);
+  const question = live || held?.question || null;
+  if (!question) return { status: "missing", question: null };
+
+  const label = String(chapter ?? "");
+  const chapterKnown =
+    aliasIndex.has(label) ||
+    aliasIndex.has(slugifyChapterLabel(label)) ||
+    label === question.chapterSlug ||
+    slugifyChapterLabel(label) === question.chapterSlug;
+  if (!chapterKnown) return { status: "missing", question: null };
+
+  return held ? { status: "quarantined", question, reason: held.reason } : { status: "found", question };
 }
 
 /** Reuses the existing practiceUrls helper so route logic stays in one place. */

@@ -4,32 +4,13 @@ import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 import DifficultyBadge from "./DifficultyBadge";
 import useBookmarks from "../hooks/useBookmarks";
-import legacyQuestions from "../data/questions";
-import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
+import useBookmarkedQuestions from "../hooks/useBookmarkedQuestions";
 import { useAuth } from "@/context/AuthContext";
-
-// Bookmarks are created from the real question bank (and from the question
-// player), so they must be resolved against the same source. The previous
-// lookup only searched a 5-item legacy array, which made every saved bookmark
-// silently disappear from this page. Every routable chapter alias is indexed so
-// a bookmark saved from e.g. /Java/classes-objects still resolves.
-const questionIndex = new Map();
-for (const bank of Object.values(chapterQuestionBankBySlug)) {
-  for (const question of bank) {
-    questionIndex.set(`${question.chapter}:${question.id}`, question);
-  }
-}
-for (const question of legacyQuestions) {
-  questionIndex.set(`${question.chapter}:${question.id}`, question);
-}
 
 export default function BookmarksList() {
   const { user } = useAuth();
   const { bookmarks } = useBookmarks(user?.uid);
-  const bookmarkedQuestions = bookmarks.flatMap((bookmark) => {
-    const question = questionIndex.get(`${bookmark.chapter}:${bookmark.questionId}`);
-    return question ? [{ bookmark, question }] : [];
-  });
+  const { items: bookmarkedQuestions, unavailableCount } = useBookmarkedQuestions(bookmarks);
 
   return (
     <main className="min-h-screen bg-slate-100 py-16">
@@ -38,12 +19,17 @@ export default function BookmarksList() {
           <div>
             <h1 className="text-4xl font-bold text-gray-900 md:text-5xl">Bookmarked Questions</h1>
             <p className="mt-3 text-gray-700">Keep your important questions ready for revision. You have {bookmarkedQuestions.length} bookmarked {bookmarkedQuestions.length === 1 ? "question" : "questions"}.</p>
+            {unavailableCount > 0 && (
+              <p className="mt-1 text-sm text-gray-500" role="status">
+                {unavailableCount} saved {unavailableCount === 1 ? "bookmark is" : "bookmarks are"} for questions that are no longer available.
+              </p>
+            )}
           </div>
         </div>
 
         {bookmarkedQuestions.length > 0 ? (
           <div className="mt-10 grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
-            {bookmarkedQuestions.map(({ bookmark, question }) => (
+            {bookmarkedQuestions.map(({ bookmark, question, held }) => (
               <article key={`${bookmark.chapter}-${bookmark.questionId}`} className="relative flex flex-col rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:border-blue-500 hover:shadow-xl focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2">
                 <div className="p-6 flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-3">
@@ -57,14 +43,14 @@ export default function BookmarksList() {
 
                 <div className="flex items-center justify-between p-6 pt-0 gap-4">
                   <Link
-                    href={`/practice/setup?chapter=${encodeURIComponent(bookmark.chapter)}`}
+                    href={held ? "/practice/setup" : `/practice/setup?chapter=${encodeURIComponent(bookmark.chapter)}`}
                     className="inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-xl bg-blue-600 text-white font-medium transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                    aria-label={`Practice ${question.chapter} questions`}
+                    aria-label={`Practice ${bookmark.chapter} questions`}
                   >
                     <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1.5 1.5 0 008 8v4a1.5 1.5 0 001.555.832l3-2a1.5 1.5 0 000-1.664l-3-2z" clipRule="evenodd" /></svg>
                     Practice Topic
                   </Link>
-                  <BookmarkButton chapter={bookmark.chapter} questionId={question.id} className="flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-gray-200 p-2 text-gray-500 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition" aria-label="Remove bookmark" />
+                  <BookmarkButton chapter={bookmark.chapter} questionId={bookmark.questionId} className="flex items-center justify-center min-h-[44px] min-w-[44px] rounded-xl border border-gray-200 p-2 text-gray-500 hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition" aria-label="Remove bookmark" />
                 </div>
               </article>
             ))}

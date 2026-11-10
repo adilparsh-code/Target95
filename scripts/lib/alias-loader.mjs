@@ -1,6 +1,6 @@
 // Node ESM loader hooks that let `node --test` import app modules the way Next.js
 // does: the "@/" alias for src/, extensionless relative imports, and .js files
-// written as ES modules without "type": "module". Test-only; never bundled.
+// written as ES modules without "type": "module". Used by tests and content scripts only; never bundled.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";

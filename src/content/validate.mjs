@@ -84,10 +84,13 @@ export function validateQuestion(question) {
 
 /**
  * Validate a whole catalog.
- * @param {{chapters: import('./schema.mjs').UnifiedChapter[], questions: import('./schema.mjs').UnifiedQuestion[]}} catalog
+ * @param {{chapters: import('./schema.mjs').UnifiedChapter[], questions: import('./schema.mjs').UnifiedQuestion[], quarantined?: {question: import('./schema.mjs').UnifiedQuestion, reason: string}[]}} catalog
  */
-export function validateCatalog({ chapters = [], questions = [] } = {}) {
+export function validateCatalog({ chapters = [], questions = [], quarantined = [] } = {}) {
   const findings = [];
+  for (const entry of quarantined) {
+    findings.push(finding('WARNING', 'question.quarantined', `Held out of chapter selectors: ${entry.reason}`, entry.question?.id));
+  }
   const slugOwner = new Map();
 
   for (const chapter of chapters) {

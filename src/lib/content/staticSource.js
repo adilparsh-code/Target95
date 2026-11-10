@@ -1,46 +1,44 @@
-// Static content source (P0): assembles the unified catalog by WRAPPING the
-// existing systems. It changes no data and no behaviour; every legacy module
-// keeps working exactly as before. A Firestore source (P3) will export the same
+// Static content source: assembles the unified catalog by WRAPPING the existing
+// systems. It changes no data and no behaviour; every legacy module keeps
+// working exactly as before. A Firestore source (P3) will export the same
 // getCatalog() contract.
+//
+// Chapter identity comes from the explicit table in @/content/identity.mjs.
 
 import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 import { getStudyChapters, resolveStudyChapter } from "@/lib/studyCenter";
-import { CANONICAL_TO_STUDY_SLUG } from "@/lib/studyChapterIdentity";
 import { questionBankQuestions } from "@/lib/questionBank";
 import { toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
+import { canonicalIdFor, identityFor, quarantineReasonFor } from "@/content/identity.mjs";
 
 const SUBJECT_ID = "java";
 const QUESTION_SOURCE = "question-bank";
 
 function buildChapters() {
-  const canonicalSlugs = new Set(canonicalChapters.map((chapter) => chapter.slug));
   const byId = new Map();
-  const claimedAliases = new Set();
 
   // 1. Canonical javaCurriculum chapters own the identity. Their content comes
-  //    from the legacy study chapter they are mapped onto (or stub copy).
+  //    from the legacy study chapter named by the identity table (or stub copy).
   for (const canonical of canonicalChapters) {
+    const identity = identityFor(canonical.slug);
     const resolved = resolveStudyChapter(canonical.slug);
-    const studySlug = CANONICAL_TO_STUDY_SLUG[canonical.slug] || null;
-    // Several canonical chapters map onto one legacy study slug. Only the first
-    // keeps it as an alias so slug resolution stays unambiguous; the rest expose
-    // it as contentSlug and the validator reports the shared content.
-    const ownsAlias = studySlug && !canonicalSlugs.has(studySlug) && !claimedAliases.has(studySlug);
-    if (ownsAlias) claimedAliases.add(studySlug);
     byId.set(
       canonical.slug,
       toUnifiedChapter(
         { ...canonical, id: canonical.slug },
         resolved?.studyData,
-        { aliases: ownsAlias ? [studySlug] : [], contentSlug: studySlug, subject: SUBJECT_ID },
+        {
+          aliases: identity?.aliases || [],
+          contentSlug: identity?.contentSlug || null,
+          subject: SUBJECT_ID,
+        },
       ),
     );
   }
 
-  // 2. Legacy study chapters that have no canonical twin keep their own identity.
+  // 2. Study chapters with no canonical identity keep their own slug as id.
   for (const legacy of getStudyChapters()) {
-    const claimed = byId.has(legacy.slug) || claimedAliases.has(legacy.slug);
-    if (claimed) continue;
+    if (byId.has(legacy.slug) || canonicalIdFor(legacy.slug)) continue;
     byId.set(
       legacy.slug,
       toUnifiedChapter({ ...legacy, id: legacy.slug }, legacy.studyData, { contentSlug: legacy.slug, subject: SUBJECT_ID }),
@@ -59,27 +57,44 @@ function buildAliasIndex(chapters) {
   return index;
 }
 
+/** Split bank records into live questions and quarantined ones. Nothing is dropped. */
 function buildQuestions(aliasIndex) {
-  return questionBankQuestions.map((raw) => {
+  const questions = [];
+  const quarantined = [];
+
+  for (const raw of questionBankQuestions) {
     const slug = raw.chapterSlug || raw.chapter;
-    // Unresolvable slugs are kept as-is so the validator reports them as orphans
-    // instead of the engine silently dropping student-visible questions.
-    return toUnifiedQuestion(raw, { chapterId: aliasIndex.get(slug) || slug, source: QUESTION_SOURCE });
-  });
+    const chapterId = aliasIndex.get(slug) || slug;
+    const unified = toUnifiedQuestion(raw, { chapterId, source: QUESTION_SOURCE });
+    const reason = aliasIndex.has(slug) ? null : quarantineReasonFor(slug);
+    if (reason) quarantined.push({ question: unified, reason });
+    // Unresolvable and not quarantined: kept so the validator reports an orphan error.
+    else questions.push(unified);
+  }
+
+  return { questions, quarantined };
 }
 
 let cached = null;
 
-/** @returns {{chapters: import("@/content/schema.mjs").UnifiedChapter[], questions: import("@/content/schema.mjs").UnifiedQuestion[], aliasIndex: Map<string,string>}} */
+/**
+ * @returns {{
+ *   chapters: import("@/content/schema.mjs").UnifiedChapter[],
+ *   questions: import("@/content/schema.mjs").UnifiedQuestion[],
+ *   quarantined: {question: import("@/content/schema.mjs").UnifiedQuestion, reason: string}[],
+ *   aliasIndex: Map<string, string>,
+ * }}
+ */
 export function getCatalog() {
   if (cached) return cached;
   const chapters = buildChapters();
   const aliasIndex = buildAliasIndex(chapters);
-  const questions = buildQuestions(aliasIndex);
+  const { questions, quarantined } = buildQuestions(aliasIndex);
   const counts = questions.reduce((map, question) => map.set(question.chapterId, (map.get(question.chapterId) || 0) + 1), new Map());
   cached = {
     chapters: chapters.map((chapter) => ({ ...chapter, questionCount: counts.get(chapter.id) || 0 })),
     questions,
+    quarantined,
     aliasIndex,
   };
   return cached;

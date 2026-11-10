@@ -64,6 +64,8 @@ export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
     marks: Number.isFinite(raw.marks) ? raw.marks : 1,
     estimatedTime: Number.isFinite(raw.estimatedTime) ? raw.estimatedTime : 1,
     tags: asList(raw.tags).map(String),
+    board: asText(raw.board) || null,
+    subject: asText(raw.subject),
     source,
   };
 }

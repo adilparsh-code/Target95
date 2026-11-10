@@ -78,6 +78,8 @@ export const CONTENT_STATUS = Object.freeze({
  * @property {number} marks
  * @property {number} estimatedTime    minutes
  * @property {string[]} tags
+ * @property {string|null} board       ICSE / ISC / CBSE when the source records it
+ * @property {string} subject
  * @property {string} source           name of the system the record came from
  */
 

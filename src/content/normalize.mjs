@@ -125,3 +125,45 @@ export function toUnifiedChapter(base, studyData, { aliases = [], contentSlug = 
     questionCount,
   };
 }
+
+const THEORY_LIKE_TYPES = ['theory', 'case-based', 'debugging'];
+
+/**
+ * Convert a legacy question record (questionBankAdapter shape: questionType,
+ * correctAnswer, lowercase difficulty) into the shape QuestionPlayer renders
+ * (type, prompt, answer, modelAnswer, capitalised difficulty), the same shape
+ * javaChapterQuestionBank produces for the authored Java bank. Ids and every
+ * other field are preserved; nothing is invented (hint and code stay empty).
+ */
+export function recordToPlayerQuestion(record) {
+  const type = normalizeQuestionType(record.type || record.questionType);
+  const isMcq = type === 'mcq';
+  const options = isMcq ? asList(record.options).map(String) : [];
+  const correct = asText(record.correctAnswer) || (typeof record.answer === 'string' ? record.answer : '');
+  const optionIndex = isMcq ? options.findIndex((option) => option.trim() === correct.trim()) : -1;
+
+  return {
+    id: String(record.id),
+    subject: asText(record.subject),
+    board: record.board || null,
+    class: record.class || null,
+    syllabusUnit: record.syllabusUnit || '',
+    chapter: asText(record.chapterSlug) || asText(record.chapter),
+    chapterTitle: asText(record.chapter),
+    topic: asText(record.topic) || 'General',
+    difficulty: normalizeDifficulty(record.difficulty),
+    type,
+    marks: Number.isFinite(record.marks) ? record.marks : 1,
+    estimatedTime: Number.isFinite(record.estimatedTime) ? record.estimatedTime : 1,
+    question: asText(record.question) || asText(record.prompt),
+    prompt: asText(record.question) || asText(record.prompt),
+    options,
+    answer: isMcq ? Math.max(optionIndex, 0) : correct,
+    correctAnswer: correct,
+    modelAnswer: THEORY_LIKE_TYPES.includes(type) ? correct : undefined,
+    explanation: asText(record.explanation),
+    hint: '',
+    tags: asList(record.tags).map(String),
+    codeSnippet: asText(record.codeSnippet),
+  };
+}

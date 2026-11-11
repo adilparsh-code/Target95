@@ -44,9 +44,10 @@ export function getChapterQuestionRecords(slugOrId) {
 /**
  * The chapter's questions in the shape the question player renders, for the
  * /Java/[chapter]/question/[id] route. Resolves legacy and canonical slugs
- * through the same identity table, so every question a chapter page lists with a
- * player link can be opened (supplemental ICSE board questions have no player
- * shape yet and are not included). `chapter` is the slug requested.
+ * through the same identity table, so every question a chapter page lists can be
+ * opened, including the supplemental ICSE board questions (converted to the player
+ * shape). The authored bank questions keep their order; others follow. `chapter` is
+ * the slug requested.
  */
 export function getChapterPlayerQuestions(slugOrId) {
   const { playerIndex } = getCatalog();

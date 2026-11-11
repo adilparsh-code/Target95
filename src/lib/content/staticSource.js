@@ -9,7 +9,7 @@ import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 import { getStudyChapters, resolveStudyChapter } from "@/lib/studyCenter";
 import { questionBankQuestions } from "@/lib/questionBank";
 import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
-import { toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
+import { recordToPlayerQuestion, toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
 import { canonicalIdFor, identityFor, quarantineReasonFor } from "@/content/identity.mjs";
 
 const SUBJECT_ID = "java";
@@ -77,10 +77,18 @@ function buildMembership(aliasIndex) {
   return membership;
 }
 
+/**
+ * Player-shaped questions by id. The authored Java bank already has the player
+ * shape (taken as is). Records without one, the supplemental ICSE board bank,
+ * are converted so their chapter-page links open instead of 404-ing.
+ */
 function buildPlayerIndex() {
   const index = new Map();
   for (const routeQuestions of Object.values(chapterQuestionBankBySlug)) {
     for (const question of routeQuestions) if (!index.has(String(question.id))) index.set(String(question.id), question);
+  }
+  for (const record of questionBankQuestions) {
+    if (!index.has(String(record.id))) index.set(String(record.id), recordToPlayerQuestion(record));
   }
   return index;
 }

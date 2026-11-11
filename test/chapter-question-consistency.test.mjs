@@ -166,28 +166,61 @@ test("identity resolution is shared: the selector, counts and bookmarks agree on
   }
 });
 
-test("every question a chapter lists with a player link opens in the question route (except supplemental ICSE board items)", async () => {
+test("every question a chapter lists opens in the question route, including supplemental ICSE items", async () => {
   const curriculum = await import("../src/lib/curriculum.js");
   const dead = [];
+  let checked = 0;
   for (const slug of await everyRouteSlug()) {
     if (!studyCenter.resolveStudyChapter(slug)) continue;
     const playable = new Set(api.getChapterPlayerQuestions(slug).map((question) => String(question.id)));
     for (const record of api.getChapterQuestionRecords(slug)) {
+      checked += 1;
       const opens = curriculum.getQuestionContent("java", slug, record.id) || playable.has(String(record.id));
       if (!opens) dead.push(`${slug}:${record.id}`);
     }
   }
-  // The only questions without a player shape are the supplemental ICSE X board items.
-  assert.deepEqual(dead.filter((entry) => !entry.split(":")[1].startsWith("icse-")), []);
+  assert.ok(checked > 1000);
+  assert.deepEqual(dead, []);
 });
 
-test("player lists keep the requested slug, one entry per question, and the legacy order", () => {
+test("player lists keep the requested slug, one entry per question; existing lists stay a prefix", () => {
   for (const slug of ["loops", "for-loop", "data-processing-in-java", "arrays-2d"]) {
     const list = api.getChapterPlayerQuestions(slug);
     assert.ok(list.length > 0, slug);
     assert.ok(list.every((question) => question.chapter === slug));
     assert.equal(new Set(list.map((question) => question.id)).size, list.length);
   }
-  const legacy = bank.chapterQuestionBankBySlug["for-loop"].map((question) => String(question.id));
-  assert.deepEqual(api.getChapterPlayerQuestions("for-loop").map((question) => question.id), legacy);
+  // Backward compatible: what the player served before is unchanged and in the same order;
+  // only supplemental ICSE questions are appended.
+  for (const [slug, legacyList] of Object.entries(bank.chapterQuestionBankBySlug)) {
+    const ids = api.getChapterPlayerQuestions(slug).map((question) => question.id);
+    const legacyIds = legacyList.map((question) => String(question.id));
+    assert.deepEqual(ids.slice(0, legacyIds.length), legacyIds, slug);
+    assert.ok(ids.slice(legacyIds.length).every((id) => id.startsWith("icse-")), `${slug} extras`);
+  }
+});
+
+test("supplemental ICSE questions get every field the player reads, ids unchanged", () => {
+  const icse = catalog().questions.filter((question) => question.id.startsWith("icse-x-") && question.chapterIds.length > 0);
+  assert.equal(icse.length, 26, "26 of the 28 supplemental questions are chapter-mapped; 2 stay quarantined");
+  for (const question of icse) {
+    const shaped = api.getChapterPlayerQuestions(question.chapterId).find((item) => item.id === question.id);
+    assert.ok(shaped, question.id);
+    assert.equal(shaped.id, question.id);
+    assert.ok(shaped.question && shaped.prompt, "text");
+    assert.ok(["Easy", "Medium", "Hard"].includes(shaped.difficulty), "difficulty");
+    assert.ok(shaped.type && shaped.type !== "output-tracing", "type uses the shared vocabulary");
+    const answer = shaped.modelAnswer || shaped.answer;
+    assert.ok(typeof answer === "string" && answer.length > 0, `${question.id} needs an answer to reveal`);
+    assert.ok(shaped.explanation);
+    assert.deepEqual(shaped.options, []);
+  }
+});
+
+test("quarantined Number Systems questions are still not playable from any chapter", () => {
+  for (const chapter of api.getChapters()) {
+    const ids = api.getChapterPlayerQuestions(chapter.id).map((question) => question.id);
+    assert.ok(!ids.includes("icse-x-numbers-program-003") && !ids.includes("icse-x-numbers-case-004"), chapter.id);
+  }
+  assert.equal(api.getQuarantinedQuestions().length, 2);
 });

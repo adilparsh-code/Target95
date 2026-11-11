@@ -33,17 +33,17 @@ A task is COMPLETED only with evidence recorded next to it.
 | P1 | BookmarksList + study centre counts | COMPLETED | commit 29e1d30 |
 | P1-A | chapter question consistency (/study, /Java, question player) | COMPLETED | commit d0e0442 pushed; `npm test` 209/209; `next build` exit 0 (re-checked tests 2026-11-11); 0 count/list mismatches |
 | 1 | P1-A final verification | COMPLETED | remote HEAD d0e0442 == local; tests 209/209; build log ends `BUILD_EXIT 0` |
-| 2 | ICSE supplemental question player support | IN_PROGRESS | audit of the 36 dead player links started |
-| 3 | Report to the user, then wait for review | NOT_VERIFIED | |
+| 2 | ICSE supplemental question player support | COMPLETED | `recordToPlayerQuestion` adapter wired into catalog playerIndex; dead links 36 -> 0 (test no longer exempts icse-); `npm test` 211/211; eslint clean; `next build` exit 0 |
+| 3 | Report to the user, then wait for review | IN_PROGRESS | report delivered after commit; awaiting user review |
 | - | Mock-test migration | PENDING_APPROVAL | plan in P1A_ALIAS_AUDIT_AND_MOCKTEST_PLAN.md |
 | - | Alias map consolidation (steps 2-4 of the plan) | PENDING_APPROVAL | |
 | - | Quarantined Number Systems mapping | PENDING_APPROVAL | editorial decision |
 | - | PR for the P1 branch; merging PR #100 | PENDING_APPROVAL | |
 
 ## Latest verification results
-- Tests: 209 pass / 0 fail (`npm test`).
+- Tests: 211 pass / 0 fail (`npm test`).
 - Lint: clean on files changed in P1-A.
-- Build: `next build` exit 0 at d0e0442.
+- Build: `next build` exit 0 after Step 2.
 - Content validation: 0 errors, 28 warnings (18 chapters without questions, 4 shared-content groups, 3 stub chapters, 2 quarantined, 1 duplicate-option MCQ).
 
 ## Unresolved issues and dependencies
@@ -54,6 +54,4 @@ A task is COMPLETED only with evidence recorded next to it.
 - Docs `PROJECT_CONTEXT.md` and `AUDIT_REPORT.md` still mention `questions.js`.
 
 ## Exact next action
-Finish Step 2 (audit the 36 links, make `icse-x-*` questions playable with the smallest
-backward-compatible change, verify every affected link resolves), update this file,
-commit and push, then report to the user and wait for review.
+Wait for the user's review of Step 3 report. Do not start mock-test migration, P2 or P3.

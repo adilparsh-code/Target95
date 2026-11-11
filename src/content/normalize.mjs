@@ -30,10 +30,10 @@ export function normalizeQuestionType(value) {
  * Map a question already shaped by javaChapterQuestionBank (or any record with
  * the same field names) to the unified schema.
  * @param {Object} raw
- * @param {{chapterId?: string, source?: string}} [context]
+ * @param {{chapterId?: string, chapterIds?: string[], source?: string}} [context]
  * @returns {import('./schema.mjs').UnifiedQuestion}
  */
-export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
+export function toUnifiedQuestion(raw, { chapterId, chapterIds, source = 'unknown' } = {}) {
   const type = normalizeQuestionType(raw.questionType || raw.type);
   const options = type === 'mcq' ? asList(raw.options).map(String) : [];
 
@@ -50,9 +50,13 @@ export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
     ? options[answerIndex]
     : asText(raw.correctAnswer) || asText(raw.modelAnswer) || (typeof raw.answer === 'string' ? raw.answer : '');
 
+  const primaryChapterId = chapterId || asText(raw.chapterId) || asText(raw.chapter);
+
   return {
     id: String(raw.id),
-    chapterId: chapterId || asText(raw.chapterId) || asText(raw.chapter),
+    chapterId: primaryChapterId,
+    // Every chapter whose page lists this question (primary first, no duplicates).
+    chapterIds: [...new Set([primaryChapterId, ...asList(chapterIds)])].filter(Boolean),
     chapterSlug: asText(raw.chapterSlug) || asText(raw.chapter),
     type,
     difficulty: normalizeDifficulty(raw.difficulty),

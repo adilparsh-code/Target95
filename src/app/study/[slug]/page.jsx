@@ -4,7 +4,7 @@ import StudyChapter from "../../components/study/StudyChapter";
 import { notFound } from "next/navigation";
 import { resolveStudyChapter, getStudyChapters } from "../../../lib/studyCenter";
 import { getMarkdownChapterContent } from "../../../lib/markdownContent";
-import getQuestionBankChapter from "../../../lib/questionBankAdapter";
+import { getChapterQuestionRecords } from "@/lib/content";
 import { getChapterBySlug as getRichChapterBySlug } from "../../data/chapter-content";
 
 export async function generateStaticParams() {
@@ -23,9 +23,7 @@ export default async function StudyChapterPage({ params }) {
   const markdownSlug = slug === "introduction-to-java" ? "introduction" : (chapter.contentSlug || slug);
   const markdownChapter = getMarkdownChapterContent(markdownSlug);
   const richChapter = getRichChapterBySlug(chapter.contentSlug || slug);
-  const questionBankChapter = typeof getQuestionBankChapter === "function"
-    ? getQuestionBankChapter(slug)
-    : null;
+  const questionBankChapter = getChapterQuestionRecords(slug);
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">

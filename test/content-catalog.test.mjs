@@ -138,6 +138,8 @@ test("study chapters report real, identity-resolved question counts", async () =
 
   // The canonical route resolves counts the same way and no longer uses generated placeholder counts.
   assert.equal(resolveStudyChapter("for-loop").totalQuestions, getQuestions({ chapter: "for-loop" }).length);
-  assert.equal(resolveStudyChapter("while-loop").totalQuestions, 0);
+  // Sibling chapters keep the questions their routes already expose.
+  assert.equal(resolveStudyChapter("while-loop").totalQuestions, getQuestions({ chapter: "while-loop" }).length);
+  assert.ok(resolveStudyChapter("while-loop").totalQuestions > 0);
   assert.equal(resolveStudyChapter("introduction-to-oop-concepts").totalQuestions, 0);
 });

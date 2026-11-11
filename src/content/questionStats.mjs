@@ -7,6 +7,12 @@ export const QUESTION_STATS = {
     "medium": 17,
     "hard": 16
   },
+  "arrays-2d": {
+    "total": 45,
+    "easy": 16,
+    "medium": 17,
+    "hard": 12
+  },
   "classes-objects": {
     "total": 16,
     "easy": 8,
@@ -19,6 +25,12 @@ export const QUESTION_STATS = {
     "medium": 19,
     "hard": 15
   },
+  "custom-methods": {
+    "total": 45,
+    "easy": 15,
+    "medium": 18,
+    "hard": 12
+  },
   "data-types-variables": {
     "total": 45,
     "easy": 17,
@@ -30,6 +42,12 @@ export const QUESTION_STATS = {
     "easy": 6,
     "medium": 8,
     "hard": 7
+  },
+  "do-while-loop": {
+    "total": 45,
+    "easy": 15,
+    "medium": 18,
+    "hard": 12
   },
   "encapsulation": {
     "total": 47,
@@ -48,6 +66,12 @@ export const QUESTION_STATS = {
     "easy": 15,
     "medium": 18,
     "hard": 14
+  },
+  "if": {
+    "total": 45,
+    "easy": 15,
+    "medium": 18,
+    "hard": 12
   },
   "if-else": {
     "total": 45,
@@ -85,6 +109,12 @@ export const QUESTION_STATS = {
     "medium": 18,
     "hard": 15
   },
+  "nested-if": {
+    "total": 45,
+    "easy": 15,
+    "medium": 18,
+    "hard": 12
+  },
   "operators": {
     "total": 45,
     "easy": 14,
@@ -116,15 +146,27 @@ export const QUESTION_STATS = {
     "hard": 12
   },
   "string-handling": {
-    "total": 4,
-    "easy": 0,
-    "medium": 0,
-    "hard": 4
+    "total": 49,
+    "easy": 14,
+    "medium": 18,
+    "hard": 17
   },
   "strings": {
     "total": 45,
     "easy": 14,
     "medium": 18,
     "hard": 13
+  },
+  "switch": {
+    "total": 45,
+    "easy": 15,
+    "medium": 18,
+    "hard": 12
+  },
+  "while-loop": {
+    "total": 45,
+    "easy": 15,
+    "medium": 18,
+    "hard": 12
   }
 };

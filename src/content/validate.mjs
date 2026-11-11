@@ -125,7 +125,9 @@ export function validateCatalog({ chapters = [], questions = [], quarantined = [
   }
 
   const questionCounts = new Map();
-  for (const question of questions) questionCounts.set(question?.chapterId, (questionCounts.get(question?.chapterId) || 0) + 1);
+  for (const question of questions) {
+    for (const id of question?.chapterIds || [question?.chapterId]) questionCounts.set(id, (questionCounts.get(id) || 0) + 1);
+  }
   for (const chapter of chapters) {
     if (!questionCounts.get(chapter.id)) findings.push(finding('WARNING', 'chapter.no-questions', 'Chapter has no questions', chapter.id));
   }
@@ -134,8 +136,10 @@ export function validateCatalog({ chapters = [], questions = [], quarantined = [
   const seenIds = new Map();
   for (const question of questions) {
     findings.push(...validateQuestion(question));
-    if (question?.chapterId && !chapterIds.has(question.chapterId)) {
-      findings.push(finding('ERROR', 'question.orphan', `Question points at unknown chapter "${question.chapterId}"`, question.id));
+    for (const id of question?.chapterIds || [question?.chapterId]) {
+      if (id && !chapterIds.has(id)) {
+        findings.push(finding('ERROR', 'question.orphan', `Question points at unknown chapter "${id}"`, question.id));
+      }
     }
     const key = String(question?.id);
     seenIds.set(key, (seenIds.get(key) || 0) + 1);

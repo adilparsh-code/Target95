@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import StudyChapter from "../../components/study/StudyChapter";
 import { resolveStudyChapter, getStudyChapters } from "@/lib/studyCenter";
 import { getMarkdownChapterContent } from "@/lib/markdownContent";
-import getQuestionBankChapter from "@/lib/questionBankAdapter";
+import { getChapterQuestionRecords } from "@/lib/content";
 import { getChapterBySlug as getRichChapterBySlug } from "../../data/chapter-content";
 import { javaChapters as canonicalChapters } from "../../data/javaCurriculum";
 
@@ -84,9 +84,7 @@ export default async function ChapterPage({ params, searchParams }) {
   // the complete learning page.
   let questionBankJson = null;
   try {
-    if (typeof getQuestionBankChapter === "function") {
-      questionBankJson = toJsonString(getQuestionBankChapter(slug));
-    }
+    questionBankJson = toJsonString(getChapterQuestionRecords(slug));
   } catch {
     questionBankJson = null;
   }

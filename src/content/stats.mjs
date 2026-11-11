@@ -1,13 +1,16 @@
 // Pure helpers for the per-chapter question statistics snapshot.
 
-/** @param {{chapterId: string, difficulty: string}[]} questions @returns {Object<string, {total:number, easy:number, medium:number, hard:number}>} */
+/** Counts every question once per chapter that lists it (chapterIds), matching what each chapter page shows.
+ * @param {{chapterId: string, chapterIds?: string[], difficulty: string}[]} questions @returns {Object<string, {total:number, easy:number, medium:number, hard:number}>} */
 export function computeQuestionStats(questions) {
   const stats = {};
   for (const question of questions) {
-    const entry = (stats[question.chapterId] ||= { total: 0, easy: 0, medium: 0, hard: 0 });
-    entry.total += 1;
     const level = String(question.difficulty || "").toLowerCase();
-    if (level === "easy" || level === "medium" || level === "hard") entry[level] += 1;
+    for (const chapterId of new Set(question.chapterIds || [question.chapterId])) {
+      const entry = (stats[chapterId] ||= { total: 0, easy: 0, medium: 0, hard: 0 });
+      entry.total += 1;
+      if (level === "easy" || level === "medium" || level === "hard") entry[level] += 1;
+    }
   }
   return Object.fromEntries(Object.entries(stats).sort(([a], [b]) => a.localeCompare(b)));
 }

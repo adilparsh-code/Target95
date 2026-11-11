@@ -21,14 +21,39 @@ export function getChapter(slugOrId) {
 }
 
 export function getQuestions({ chapter, type, difficulty } = {}) {
-  const { questions, aliasIndex } = getCatalog();
-  const chapterId = chapter ? aliasIndex.get(chapter) || chapter : null;
-  return questions.filter(
-    (question) =>
-      (!chapterId || question.chapterId === chapterId) &&
-      (!type || question.type === type) &&
-      (!difficulty || question.difficulty === difficulty),
+  const { questions, chapterQuestions, aliasIndex } = getCatalog();
+  // A chapter scope uses chapter membership, so sibling chapters list the
+  // questions their routes already expose; without one, every question once.
+  const scoped = chapter ? chapterQuestions.get(aliasIndex.get(chapter) || chapter) || [] : questions;
+  return scoped.filter(
+    (question) => (!type || question.type === type) && (!difficulty || question.difficulty === difficulty),
   );
+}
+
+/**
+ * The questions a chapter page lists, in the legacy record shape the study
+ * components still render (questionType, chapterSlug, practiceHref...).
+ * Same membership as getQuestions({ chapter }), so counts and lists always agree.
+ * Transitional: removed once the renderers read the unified shape.
+ */
+export function getChapterQuestionRecords(slugOrId) {
+  const { recordIndex } = getCatalog();
+  return getQuestions({ chapter: slugOrId }).map((question) => recordIndex.get(question.id)).filter(Boolean);
+}
+
+/**
+ * The chapter's questions in the shape the question player renders, for the
+ * /Java/[chapter]/question/[id] route. Resolves legacy and canonical slugs
+ * through the same identity table, so every question a chapter page lists with a
+ * player link can be opened (supplemental ICSE board questions have no player
+ * shape yet and are not included). `chapter` is the slug requested.
+ */
+export function getChapterPlayerQuestions(slugOrId) {
+  const { playerIndex } = getCatalog();
+  return getQuestions({ chapter: slugOrId })
+    .map((question) => playerIndex.get(question.id))
+    .filter(Boolean)
+    .map((question) => ({ ...question, chapter: slugOrId }));
 }
 
 /** Questions held out of chapter selectors with the reason; never silently dropped. */

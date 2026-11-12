@@ -37,9 +37,9 @@ A task is COMPLETED only with evidence recorded next to it.
 | 3 | Report to the user, then wait for review | COMPLETED | Step 2 reviewed and ACCEPTED by user |
 | 4 | MockTest integration: architecture review (read-only) | COMPLETED | `MOCKTEST_INTEGRATION_ARCHITECTURE.md` written; no implementation file touched; PR #100 verified open/unmerged/clean |
 | 5 | MockTest implementation (approved 2026-11-12) | IN_PROGRESS | decisions: 230 MCQ + 95 T/F (=325), exclude CH13-MCQ-003, output, free text; T/F options ["True","False"]; flag default off; ICSE X first, IX after smoke test, ISC XI needs readiness, ISC XII unavailable; no plan gating; stacked PRs, no merges |
-| 5A | Phase A: class metadata + legacy golden fixture | COMPLETED | see commit below; npm test 212+5 golden |
-| 5B | Phase B: server pool + per-attempt delivery | NOT_VERIFIED | |
-| 5C | Phase C: legacy compat + authoritative grading | NOT_VERIFIED | |
+| 5A | Phase A: class metadata + legacy golden fixture | COMPLETED | commit e251b69; npm test 217/217 |
+| 5B | Phase B: server pool + per-attempt delivery | COMPLETED | `mocktestContent.js` (325 pool, flag `MOCKTEST_CE_CATEGORIES` default off, ICSE X/IX enableable only), `mocktestService.js`, routes POST attempts / GET attempts/[id] / GET availability; key-free payloads; npm test 245/245; committed together with 5C |
+| 5C | Phase C: legacy compat + authoritative grading | COMPLETED | `gradeAttempt` resolver (legacy direct lookup, `ce:` via server resolver), `reveal` never stored, idempotent submit (replay), late-submission flagged not rejected; golden legacy tests green; 245/245 |
 | 5D | Phase D: client integration + results | NOT_VERIFIED | |
 | 5E | Phase E: rollout flag, regression, report | NOT_VERIFIED | |
 | - | Mock-test implementation (M1-M8 in the architecture doc) | PENDING_APPROVAL | needs decisions in doc section 6.3 |

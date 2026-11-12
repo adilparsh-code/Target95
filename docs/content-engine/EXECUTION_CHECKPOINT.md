@@ -20,7 +20,7 @@ A task is COMPLETED only with evidence recorded next to it.
 ## Repository state (last verified 2026-11-11)
 - Repo: adilparsh-code/target95, working copy `/home/claude/target95` (re-clone with `git clone --depth 1` if missing).
 - Branch: `feat/content-engine-p1` (based on `main` 8cced16).
-- Last pushed commit: `d0e0442` (remote HEAD equal to local HEAD).
+- Last pushed commit: see `git log` (ed415a6 = Step 2; the mock-test architecture doc commit follows it).
 - PR #100 (`feat/content-engine-p0` -> `main`): open, not merged. P1 has no PR yet.
 - The stop hook sometimes reports "unpushed commits / no remote branch"; this is a false alarm when `git ls-remote --heads origin feat/content-engine-p1` equals local HEAD.
 - Uncommitted files: see the task log below (updated at each milestone).
@@ -34,8 +34,9 @@ A task is COMPLETED only with evidence recorded next to it.
 | P1-A | chapter question consistency (/study, /Java, question player) | COMPLETED | commit d0e0442 pushed; `npm test` 209/209; `next build` exit 0 (re-checked tests 2026-11-11); 0 count/list mismatches |
 | 1 | P1-A final verification | COMPLETED | remote HEAD d0e0442 == local; tests 209/209; build log ends `BUILD_EXIT 0` |
 | 2 | ICSE supplemental question player support | COMPLETED | `recordToPlayerQuestion` adapter wired into catalog playerIndex; dead links 36 -> 0 (test no longer exempts icse-); `npm test` 211/211; eslint clean; `next build` exit 0 |
-| 3 | Report to the user, then wait for review | IN_PROGRESS | report delivered after commit; awaiting user review |
-| - | Mock-test migration | PENDING_APPROVAL | plan in P1A_ALIAS_AUDIT_AND_MOCKTEST_PLAN.md |
+| 3 | Report to the user, then wait for review | COMPLETED | Step 2 reviewed and ACCEPTED by user |
+| 4 | MockTest integration: architecture review (read-only) | COMPLETED | `MOCKTEST_INTEGRATION_ARCHITECTURE.md` written; no implementation file touched; PR #100 verified open/unmerged/clean |
+| - | Mock-test implementation (M1-M8 in the architecture doc) | PENDING_APPROVAL | needs decisions in doc section 6.3 |
 | - | Alias map consolidation (steps 2-4 of the plan) | PENDING_APPROVAL | |
 | - | Quarantined Number Systems mapping | PENDING_APPROVAL | editorial decision |
 | - | PR for the P1 branch; merging PR #100 | PENDING_APPROVAL | |
@@ -51,7 +52,8 @@ A task is COMPLETED only with evidence recorded next to it.
 - Two Number Systems questions quarantined pending an editorial mapping.
 - `studyChapterIdentity` has 3 broken legacy entries (`if-else`, `loops`, `arrays`); fixing changes studyCenter output, needs approval.
 - `getQuestionBankChapter` has no route consumers (P2 deletion candidate, needs approval).
+- Mock-test audit: reliably auto-gradable CE questions are 230 MCQ + 95 true/false (needs fixed True/False options); 99 output questions need a grading policy; the earlier "425" figure is superseded. Legacy answer keys are already in the client bundle (pre-existing).
 - Docs `PROJECT_CONTEXT.md` and `AUDIT_REPORT.md` still mention `questions.js`.
 
 ## Exact next action
-Wait for the user's review of Step 3 report. Do not start mock-test migration, P2 or P3.
+Wait for explicit implementation approval and the section 6.3 decisions of MOCKTEST_INTEGRATION_ARCHITECTURE.md. Do not modify mock-test files, start P2/P3, or merge/rebase PR #100.

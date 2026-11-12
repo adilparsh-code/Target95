@@ -69,6 +69,8 @@ export function toUnifiedQuestion(raw, { chapterId, chapterIds, source = 'unknow
     estimatedTime: Number.isFinite(raw.estimatedTime) ? raw.estimatedTime : 1,
     tags: asList(raw.tags).map(String),
     board: asText(raw.board) || null,
+    // Class as the source records it ("ICSE IX", "ICSE X", "ISC XI"); null when it does not.
+    class: asText(raw.class) || null,
     subject: asText(raw.subject),
     source,
   };

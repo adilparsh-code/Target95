@@ -19,7 +19,7 @@ A task is COMPLETED only with evidence recorded next to it.
 
 ## Repository state (last verified 2026-11-11)
 - Repo: adilparsh-code/target95, working copy `/home/claude/target95` (re-clone with `git clone --depth 1` if missing).
-- Branch: `feat/content-engine-p1` (based on `main` 8cced16).
+- Branch: `feat/content-engine-mocktest` (stacked on `feat/content-engine-p1` @ 1178499; P1 is stacked on P0 `feat/content-engine-p0`; main 8cced16).
 - Last pushed commit: see `git log` (ed415a6 = Step 2; the mock-test architecture doc commit follows it).
 - PR #100 (`feat/content-engine-p0` -> `main`): open, not merged. P1 has no PR yet.
 - The stop hook sometimes reports "unpushed commits / no remote branch"; this is a false alarm when `git ls-remote --heads origin feat/content-engine-p1` equals local HEAD.
@@ -36,6 +36,12 @@ A task is COMPLETED only with evidence recorded next to it.
 | 2 | ICSE supplemental question player support | COMPLETED | `recordToPlayerQuestion` adapter wired into catalog playerIndex; dead links 36 -> 0 (test no longer exempts icse-); `npm test` 211/211; eslint clean; `next build` exit 0 |
 | 3 | Report to the user, then wait for review | COMPLETED | Step 2 reviewed and ACCEPTED by user |
 | 4 | MockTest integration: architecture review (read-only) | COMPLETED | `MOCKTEST_INTEGRATION_ARCHITECTURE.md` written; no implementation file touched; PR #100 verified open/unmerged/clean |
+| 5 | MockTest implementation (approved 2026-11-12) | IN_PROGRESS | decisions: 230 MCQ + 95 T/F (=325), exclude CH13-MCQ-003, output, free text; T/F options ["True","False"]; flag default off; ICSE X first, IX after smoke test, ISC XI needs readiness, ISC XII unavailable; no plan gating; stacked PRs, no merges |
+| 5A | Phase A: class metadata + legacy golden fixture | COMPLETED | see commit below; npm test 212+5 golden |
+| 5B | Phase B: server pool + per-attempt delivery | NOT_VERIFIED | |
+| 5C | Phase C: legacy compat + authoritative grading | NOT_VERIFIED | |
+| 5D | Phase D: client integration + results | NOT_VERIFIED | |
+| 5E | Phase E: rollout flag, regression, report | NOT_VERIFIED | |
 | - | Mock-test implementation (M1-M8 in the architecture doc) | PENDING_APPROVAL | needs decisions in doc section 6.3 |
 | - | Alias map consolidation (steps 2-4 of the plan) | PENDING_APPROVAL | |
 | - | Quarantined Number Systems mapping | PENDING_APPROVAL | editorial decision |

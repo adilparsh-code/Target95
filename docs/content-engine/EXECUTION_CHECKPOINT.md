@@ -38,9 +38,9 @@ A task is COMPLETED only with evidence recorded next to it.
 | 4 | MockTest integration: architecture review (read-only) | COMPLETED | `MOCKTEST_INTEGRATION_ARCHITECTURE.md` written; no implementation file touched; PR #100 verified open/unmerged/clean |
 | 5 | MockTest implementation (approved 2026-11-12) | IN_PROGRESS | decisions: 230 MCQ + 95 T/F (=325), exclude CH13-MCQ-003, output, free text; T/F options ["True","False"]; flag default off; ICSE X first, IX after smoke test, ISC XI needs readiness, ISC XII unavailable; no plan gating; stacked PRs, no merges |
 | 5A | Phase A: class metadata + legacy golden fixture | COMPLETED | commit e251b69; npm test 217/217 |
-| 5B | Phase B: server pool + per-attempt delivery | COMPLETED | `mocktestContent.js` (325 pool, flag `MOCKTEST_CE_CATEGORIES` default off, ICSE X/IX enableable only), `mocktestService.js`, routes POST attempts / GET attempts/[id] / GET availability; key-free payloads; npm test 245/245; committed together with 5C |
+| 5B | Phase B: server pool + per-attempt delivery | COMPLETED | commit e9b2c04 (with 5C). `mocktestContent.js` (325 pool, flag `MOCKTEST_CE_CATEGORIES` default off, ICSE X/IX enableable only), `mocktestService.js`, routes POST attempts / GET attempts/[id] / GET availability; key-free payloads; npm test 245/245; committed together with 5C |
 | 5C | Phase C: legacy compat + authoritative grading | COMPLETED | `gradeAttempt` resolver (legacy direct lookup, `ce:` via server resolver), `reveal` never stored, idempotent submit (replay), late-submission flagged not rejected; golden legacy tests green; 245/245 |
-| 5D | Phase D: client integration + results | NOT_VERIFIED | |
+| 5D | Phase D: client integration + results | COMPLETED | `mocktestClient/Session/Result.js`, `useMockAttemptSession`, player/result/setup pages; submit failure = visible retry, lost-response replay, stale drafts discarded with notice; npm test 263/263, eslint clean, `next build` exit 0 |
 | 5E | Phase E: rollout flag, regression, report | NOT_VERIFIED | |
 | - | Mock-test implementation (M1-M8 in the architecture doc) | PENDING_APPROVAL | needs decisions in doc section 6.3 |
 | - | Alias map consolidation (steps 2-4 of the plan) | PENDING_APPROVAL | |

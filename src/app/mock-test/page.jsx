@@ -9,6 +9,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import { buildMockTestPool, getMockTestChapterOptions, normalizeAttemptConfig } from "../../lib/mocktestAttempts";
 import ErrorBoundary from "../components/ui/ErrorBoundary";
 import { useAuth } from "@/context/AuthContext";
+import { useMockAvailability } from "@/app/hooks/useMockAttemptSession";
 
 const CBSE_SUBJECTS = { "402": "Information Technology", "083": "Computer Science", "065": "Informatics Practices", "802": "Information Technology" };
 const CBSE_CODES_BY_CLASS = { 9: ["402"], 10: ["402"], 11: ["083", "065", "802"], 12: ["083", "065", "802"] };
@@ -45,8 +46,12 @@ function MockTestContent() {
   const activeSubjectCode = activeBoard === "CBSE" ? getDefaultCBSESubjectCode(activeClass, selectedSubjectCode) : "";
   // Only offer chapters that have questions, and tell the student how many questions match, so a
   // test is never silently shorter than requested or empty after the instructions screen.
-  const chapterOptions = useMemo(() => (activeBoard === "CBSE" ? [] : getMockTestChapterOptions(category)), [activeBoard, category]);
-  const availableCount = useMemo(() => buildMockTestPool(normalizeAttemptConfig({ board: activeBoard, category, classNumber: activeClass, subjectCode: activeSubjectCode, difficulty, type, chapter })).length, [activeBoard, category, activeClass, activeSubjectCode, difficulty, type, chapter]);
+  const localChapterOptions = useMemo(() => (activeBoard === "CBSE" ? [] : getMockTestChapterOptions(category)), [activeBoard, category]);
+  const availabilityConfig = useMemo(() => normalizeAttemptConfig({ board: activeBoard, category, classNumber: activeClass, subjectCode: activeSubjectCode, difficulty, type, chapter }), [activeBoard, category, activeClass, activeSubjectCode, difficulty, type, chapter]);
+  const localAvailableCount = useMemo(() => buildMockTestPool(availabilityConfig).length, [availabilityConfig]);
+  // Counts and chapters include content-engine questions when the server has them enabled for this
+  // category; until the server answers (or if it cannot) the local legacy numbers are shown.
+  const { count: availableCount, chapters: chapterOptions } = useMockAvailability({ config: availabilityConfig, localCount: localAvailableCount, localChapters: localChapterOptions, enabled: activeBoard !== "CBSE" && Boolean(user?.uid) });
   const testLength = Math.min(count, availableCount);
   const activeSubject = activeBoard === "CBSE" ? (CBSE_SUBJECTS[activeSubjectCode] || contextSubject || "CBSE Subject") : activeBoard === "ISC" ? "Computer Science (Java)" : "Computer Applications (Java)";
 

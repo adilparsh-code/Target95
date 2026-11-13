@@ -125,3 +125,25 @@ Additional: submission failure, lost response, retry, stale draft (3 causes), ne
 
 ## 7. Setup-count flicker (fixed)
 Cause: while the server count for new filters loaded, the setup screen fell back to the local legacy-only count (often 0 for content-engine filters), flashing "No questions match" and disabling Start before jumping to the real number. Fix: `resolveAvailability` reports `pending`, keeps the previous same-category server count as a hint, shows a neutral "Checking available questions…" line, and never disables Start while pending.
+
+## 8. Preview smoke-test record (2026-11-13)
+
+Environment status: Preview deployment `https://target95-hmdp4x2v0-my-self18.vercel.app` was built by Git integration for commit `f13d0a4` (matches the branch head). The Preview flag `MOCKTEST_CE_CATEGORIES=icse-class-10` was **not** set or verified, Production env was **not** inspected, and no test account was available: the Vercel connector failed for the session, the sandbox has no Vercel/Firebase credentials, and the Preview host is unreachable from it. A browser smoke test therefore could not be run. Every browser item is BLOCKED; "automated equivalent" is in-memory evidence only (fake Firestore, local build), not Preview evidence.
+
+| # | Check | Preview browser result | Automated equivalent (not a substitute) |
+|---|---|---|---|
+| 1 | ICSE X questions load | BLOCKED | content-engine pool/start tests |
+| 2 | Only eligible questions delivered | BLOCKED | pool = 230 MCQ + 95 T/F, exclusions test |
+| 3 | No answer keys before submission | BLOCKED | start/resume payload audit over the whole pool |
+| 4 | Navigation | BLOCKED | none (UI); local page render only |
+| 5 | Draft recovery | BLOCKED | resume tests (same questions, same order, server clock wins) |
+| 6 | Failed submit and retry | BLOCKED | network failure / lost response retry tests |
+| 7 | Server grading correct | BLOCKED | grading tests |
+| 8 | Result page shows server score | BLOCKED | result-page data test |
+| 9 | Duplicate submit returns stored result | BLOCKED | idempotent replay test |
+| 10 | Late submission matches docs | BLOCKED | late-submission test |
+| 11 | Global search exposes no answers mid-attempt | BLOCKED on Preview; PASS locally (production build, Playwright: only answer-free index chunk loaded, bank chunk not loaded) | search-index tests, bundle audit |
+| 12 | Legacy-only configuration works | BLOCKED | golden legacy tests, flag-off tests |
+
+### Chunk-match investigation
+Explanation-text matches in chunks loaded on the player page were traced: (a) `371o93lt...` is the legacy 28-question bank with real answers and explanations, loaded with the mock-test pages (not by search); (b) `366x40...` is study chapter prose; (c) the answer-free index match is a question text equal to another question's explanation sentence. No content-engine answer key is present. Legacy answers are visible in the client bundle (known residual risk 2 above), so answer-key security is verified for content-engine questions only, not for the legacy 28.

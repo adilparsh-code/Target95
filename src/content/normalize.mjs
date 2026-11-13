@@ -7,6 +7,37 @@ import { classifyContentStatus } from './validate.mjs';
 const asList = (value) => (Array.isArray(value) ? value.filter((item) => item !== null && item !== undefined) : []);
 const asText = (value) => (typeof value === 'string' ? value : '');
 
+/**
+ * Build canonical chapter associations from the question bank's per-route
+ * chapter map. One authored question can belong to several granular routes
+ * while retaining one stable question ID.
+ */
+export function buildQuestionChapterAssociations(chapterQuestionBankBySlug = {}, aliasIndex = new Map()) {
+  const associations = new Map();
+
+  for (const [chapterSlug, questions] of Object.entries(chapterQuestionBankBySlug)) {
+    const chapterId = aliasIndex.get(chapterSlug) || chapterSlug;
+    for (const question of Array.isArray(questions) ? questions : []) {
+      const questionId = String(question?.id ?? "");
+      if (!questionId) continue;
+      const chapterIds = associations.get(questionId) || new Set();
+      chapterIds.add(chapterId);
+      associations.set(questionId, chapterIds);
+    }
+  }
+
+  return new Map([...associations].map(([id, chapterIds]) => [id, [...chapterIds]]));
+}
+
+/** True when a question belongs to its primary or any mapped sibling chapter. */
+export function questionBelongsToChapter(question, chapterId) {
+  return Boolean(
+    chapterId &&
+    (question?.chapterId === chapterId ||
+      (Array.isArray(question?.chapterIds) && question.chapterIds.includes(chapterId)))
+  );
+}
+
 /** "easy" / "EASY" / "Beginner" -> one of DIFFICULTIES (unknown values pass through). */
 export function normalizeDifficulty(value) {
   const text = String(value ?? '').trim().toLowerCase();
@@ -30,10 +61,10 @@ export function normalizeQuestionType(value) {
  * Map a question already shaped by javaChapterQuestionBank (or any record with
  * the same field names) to the unified schema.
  * @param {Object} raw
- * @param {{chapterId?: string, source?: string}} [context]
+ * @param {{chapterId?: string, chapterIds?: string[], source?: string}} [context]
  * @returns {import('./schema.mjs').UnifiedQuestion}
  */
-export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
+export function toUnifiedQuestion(raw, { chapterId, chapterIds = [], source = 'unknown' } = {}) {
   const type = normalizeQuestionType(raw.questionType || raw.type);
   const options = type === 'mcq' ? asList(raw.options).map(String) : [];
 
@@ -49,10 +80,13 @@ export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
   const answer = type === 'mcq' && answerIndex !== null && options[answerIndex]
     ? options[answerIndex]
     : asText(raw.correctAnswer) || asText(raw.modelAnswer) || (typeof raw.answer === 'string' ? raw.answer : '');
+  const primaryChapterId = chapterId || asText(raw.chapterId) || asText(raw.chapter);
+  const associatedChapterIds = [...new Set([primaryChapterId, ...asList(chapterIds).map(String)].filter(Boolean))];
 
   return {
     id: String(raw.id),
-    chapterId: chapterId || asText(raw.chapterId) || asText(raw.chapter),
+    chapterId: primaryChapterId,
+    chapterIds: associatedChapterIds,
     chapterSlug: asText(raw.chapterSlug) || asText(raw.chapter),
     type,
     difficulty: normalizeDifficulty(raw.difficulty),

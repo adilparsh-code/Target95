@@ -66,7 +66,8 @@ export const CONTENT_STATUS = Object.freeze({
 /**
  * @typedef {Object} UnifiedQuestion
  * @property {string} id
- * @property {string} chapterId        unified chapter id (see identity model)
+ * @property {string} chapterId        primary unified chapter id (see identity model)
+ * @property {string[]} chapterIds     every canonical chapter route this question belongs to
  * @property {string} chapterSlug      slug the question was authored under
  * @property {string} type             one of QUESTION_TYPES
  * @property {string} difficulty       one of DIFFICULTIES

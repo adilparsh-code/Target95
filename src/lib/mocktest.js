@@ -1,4 +1,3 @@
-import questions from "../app/data/questions.js";
 import { getCBSEQuestionConfig } from "../app/data/cbse/question-config-2026-27.js";
 
 const VALID_CHAPTERS = new Set(["all", "introduction", "variables-data-types", "operators", "if-else", "loops", "methods", "arrays", "strings", "constructor"]);
@@ -40,7 +39,9 @@ export function getMockTestQuestionPool({ board = DEFAULT_BOARD, chapter = "all"
   const safeChapter = VALID_CHAPTERS.has(chapter) ? chapter : "all";
   const safeDifficulty = VALID_DIFFICULTIES.has(difficulty) ? difficulty : "all";
   const safeType = VALID_TYPES.has(type) ? type : "mixed";
-  const pool = Array.isArray(providedQuestions) ? providedQuestions : questions;
+  // The pool is supplied by the caller (see getMockTestQuestionPool in @/lib/content).
+  // This module stays free of app-data imports so node tests can load it.
+  const pool = Array.isArray(providedQuestions) ? providedQuestions : [];
   const boardKey = getBoardKey(board);
 
   return pool.filter((question) => {

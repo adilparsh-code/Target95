@@ -1,11 +1,24 @@
 import javaChapters from "../app/data/javaChapters";
-import questions from "../app/data/questions";
+import { canonicalIdFor } from "@/content/identity.mjs";
+import { QUESTION_STATS } from "@/content/questionStats.mjs";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
 import { adaptStudyChapterIdentity, studySlugForCanonical } from "@/lib/studyChapterIdentity";
 import { javaChapters as canonicalChapters } from "../app/data/javaCurriculum";
 import { getChapterBySlug as getRichChapterBySlug } from "../app/data/chapter-content";
 
 export const STUDY_PROGRESS_STORAGE_KEY = "target95-study-progress";
+
+const EMPTY_QUESTION_STATS = Object.freeze({ total: 0, easy: 0, medium: 0, hard: 0 });
+
+/**
+ * Real question counts for a chapter slug, resolved through the canonical
+ * identity table (so legacy and canonical slugs of one chapter agree). Counts
+ * come from a snapshot of the unified catalog; a chapter with none counts 0.
+ */
+function getQuestionCounts(slug) {
+  const { total, easy, medium, hard } = QUESTION_STATS[canonicalIdFor(slug) || slug] || EMPTY_QUESTION_STATS;
+  return { totalQuestions: total, easyCount: easy, mediumCount: medium, hardCount: hard };
+}
 
 const chapterStudyData = {
   "introduction-to-oop-concepts": {
@@ -1495,10 +1508,7 @@ export function getStudyChapters(filters = {}) {
   
   return javaChapters.map((legacyChapter) => {
     const chapter = adaptStudyChapterIdentity(legacyChapter);
-    const chapterQuestions = questions.filter((item) => item.chapter === chapter.slug);
-    const easyCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "easy").length;
-    const mediumCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "medium").length;
-    const hardCount = chapterQuestions.filter((item) => item.difficulty.toLowerCase() === "hard").length;
+    const { totalQuestions, easyCount, mediumCount, hardCount } = getQuestionCounts(chapter.slug);
 
     let difficulty;
     if (hardCount > easyCount && hardCount > mediumCount) {
@@ -1556,12 +1566,12 @@ export function getStudyChapters(filters = {}) {
         topic: chapter.title,
         difficulty,
       }),
-      totalQuestions: chapterQuestions.length,
+      totalQuestions,
       easyCount,
       mediumCount,
       hardCount,
       difficulty,
-      estimatedStudyTime: `${Math.max(10, chapterQuestions.length * 2)} min`,
+      estimatedStudyTime: `${Math.max(10, totalQuestions * 2)} min`,
       studyData: {
         ...sd,
         syntax: sd.syntax || [],
@@ -1605,6 +1615,7 @@ export function resolveStudyChapter(slug) {
   if (aliasChapter) {
     return {
       ...aliasChapter,
+      ...getQuestionCounts(slug),
       slug,
       requestSlug: slug,
       canonicalSlug: canonical ? slug : aliasChapter.canonicalSlug || null,
@@ -1625,7 +1636,8 @@ export function resolveStudyChapter(slug) {
       legacySlug: null,
       contentSlug: null,
       estimatedStudyTime: `${canonical.estimatedTime || 30} min`,
-      totalQuestions: canonical.questionCount ?? (Array.isArray(canonical.questions) ? canonical.questions.length : 0),
+      // Real counts only: canonical.questions is generated placeholder content.
+      ...getQuestionCounts(slug),
       studyData: {
         intro: canonical.description || "",
         concepts: canonical.topics || [],

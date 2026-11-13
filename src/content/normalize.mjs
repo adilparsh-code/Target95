@@ -30,10 +30,10 @@ export function normalizeQuestionType(value) {
  * Map a question already shaped by javaChapterQuestionBank (or any record with
  * the same field names) to the unified schema.
  * @param {Object} raw
- * @param {{chapterId?: string, source?: string}} [context]
+ * @param {{chapterId?: string, chapterIds?: string[], source?: string}} [context]
  * @returns {import('./schema.mjs').UnifiedQuestion}
  */
-export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
+export function toUnifiedQuestion(raw, { chapterId, chapterIds, source = 'unknown' } = {}) {
   const type = normalizeQuestionType(raw.questionType || raw.type);
   const options = type === 'mcq' ? asList(raw.options).map(String) : [];
 
@@ -50,9 +50,13 @@ export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
     ? options[answerIndex]
     : asText(raw.correctAnswer) || asText(raw.modelAnswer) || (typeof raw.answer === 'string' ? raw.answer : '');
 
+  const primaryChapterId = chapterId || asText(raw.chapterId) || asText(raw.chapter);
+
   return {
     id: String(raw.id),
-    chapterId: chapterId || asText(raw.chapterId) || asText(raw.chapter),
+    chapterId: primaryChapterId,
+    // Every chapter whose page lists this question (primary first, no duplicates).
+    chapterIds: [...new Set([primaryChapterId, ...asList(chapterIds)])].filter(Boolean),
     chapterSlug: asText(raw.chapterSlug) || asText(raw.chapter),
     type,
     difficulty: normalizeDifficulty(raw.difficulty),
@@ -64,6 +68,8 @@ export function toUnifiedQuestion(raw, { chapterId, source = 'unknown' } = {}) {
     marks: Number.isFinite(raw.marks) ? raw.marks : 1,
     estimatedTime: Number.isFinite(raw.estimatedTime) ? raw.estimatedTime : 1,
     tags: asList(raw.tags).map(String),
+    board: asText(raw.board) || null,
+    subject: asText(raw.subject),
     source,
   };
 }
@@ -117,5 +123,47 @@ export function toUnifiedChapter(base, studyData, { aliases = [], contentSlug = 
     contentStatus: classifyContentStatus(sections),
     sections,
     questionCount,
+  };
+}
+
+const THEORY_LIKE_TYPES = ['theory', 'case-based', 'debugging'];
+
+/**
+ * Convert a legacy question record (questionBankAdapter shape: questionType,
+ * correctAnswer, lowercase difficulty) into the shape QuestionPlayer renders
+ * (type, prompt, answer, modelAnswer, capitalised difficulty), the same shape
+ * javaChapterQuestionBank produces for the authored Java bank. Ids and every
+ * other field are preserved; nothing is invented (hint and code stay empty).
+ */
+export function recordToPlayerQuestion(record) {
+  const type = normalizeQuestionType(record.type || record.questionType);
+  const isMcq = type === 'mcq';
+  const options = isMcq ? asList(record.options).map(String) : [];
+  const correct = asText(record.correctAnswer) || (typeof record.answer === 'string' ? record.answer : '');
+  const optionIndex = isMcq ? options.findIndex((option) => option.trim() === correct.trim()) : -1;
+
+  return {
+    id: String(record.id),
+    subject: asText(record.subject),
+    board: record.board || null,
+    class: record.class || null,
+    syllabusUnit: record.syllabusUnit || '',
+    chapter: asText(record.chapterSlug) || asText(record.chapter),
+    chapterTitle: asText(record.chapter),
+    topic: asText(record.topic) || 'General',
+    difficulty: normalizeDifficulty(record.difficulty),
+    type,
+    marks: Number.isFinite(record.marks) ? record.marks : 1,
+    estimatedTime: Number.isFinite(record.estimatedTime) ? record.estimatedTime : 1,
+    question: asText(record.question) || asText(record.prompt),
+    prompt: asText(record.question) || asText(record.prompt),
+    options,
+    answer: isMcq ? Math.max(optionIndex, 0) : correct,
+    correctAnswer: correct,
+    modelAnswer: THEORY_LIKE_TYPES.includes(type) ? correct : undefined,
+    explanation: asText(record.explanation),
+    hint: '',
+    tags: asList(record.tags).map(String),
+    codeSnippet: asText(record.codeSnippet),
   };
 }

@@ -1,8 +1,10 @@
-// Content selectors (P0). The single read API for chapters and questions.
-// Nothing imports this yet; P1 repoints the UI onto it one consumer at a time.
+// Content selectors. The single read API for chapters and questions.
+// P1 repoints the UI onto it one consumer at a time.
 
 import { getPracticeUrl as buildPracticeUrl } from "@/lib/practiceUrls";
 import { validateCatalog } from "@/content/validate.mjs";
+import { slugifyChapterLabel } from "@/content/identity.mjs";
+import { getMockTestQuestionPool as filterMockTestPool } from "@/lib/mocktest";
 import { getCatalog } from "./staticSource";
 
 export function getChapters({ subject } = {}) {
@@ -19,14 +21,87 @@ export function getChapter(slugOrId) {
 }
 
 export function getQuestions({ chapter, type, difficulty } = {}) {
-  const { questions, aliasIndex } = getCatalog();
-  const chapterId = chapter ? aliasIndex.get(chapter) || chapter : null;
-  return questions.filter(
-    (question) =>
-      (!chapterId || question.chapterId === chapterId) &&
-      (!type || question.type === type) &&
-      (!difficulty || question.difficulty === difficulty),
+  const { questions, chapterQuestions, aliasIndex } = getCatalog();
+  // A chapter scope uses chapter membership, so sibling chapters list the
+  // questions their routes already expose; without one, every question once.
+  const scoped = chapter ? chapterQuestions.get(aliasIndex.get(chapter) || chapter) || [] : questions;
+  return scoped.filter(
+    (question) => (!type || question.type === type) && (!difficulty || question.difficulty === difficulty),
   );
+}
+
+/**
+ * The questions a chapter page lists, in the legacy record shape the study
+ * components still render (questionType, chapterSlug, practiceHref...).
+ * Same membership as getQuestions({ chapter }), so counts and lists always agree.
+ * Transitional: removed once the renderers read the unified shape.
+ */
+export function getChapterQuestionRecords(slugOrId) {
+  const { recordIndex } = getCatalog();
+  return getQuestions({ chapter: slugOrId }).map((question) => recordIndex.get(question.id)).filter(Boolean);
+}
+
+/**
+ * The chapter's questions in the shape the question player renders, for the
+ * /Java/[chapter]/question/[id] route. Resolves legacy and canonical slugs
+ * through the same identity table, so every question a chapter page lists can be
+ * opened, including the supplemental ICSE board questions (converted to the player
+ * shape). The authored bank questions keep their order; others follow. `chapter` is
+ * the slug requested.
+ */
+export function getChapterPlayerQuestions(slugOrId) {
+  const { playerIndex } = getCatalog();
+  return getQuestions({ chapter: slugOrId })
+    .map((question) => playerIndex.get(question.id))
+    .filter(Boolean)
+    .map((question) => ({ ...question, chapter: slugOrId }));
+}
+
+/** Questions held out of chapter selectors with the reason; never silently dropped. */
+export function getQuarantinedQuestions() {
+  return getCatalog().quarantined;
+}
+
+/**
+ * Mock-test pool over the unified questions. mocktest.js owns the filtering
+ * rules; this only supplies the pool and resolves legacy chapter slugs
+ * (e.g. "introduction", "loops") to canonical chapters first.
+ */
+export function getMockTestQuestionPool({ chapter = "all", ...options } = {}) {
+  const scoped = getQuestions({ chapter: chapter === "all" ? undefined : chapter });
+  const pool = scoped.map((question) => ({ ...question, chapter: question.chapterSlug, board: question.board || "ICSE" }));
+  return filterMockTestPool({ ...options, chapter: "all", questions: pool });
+}
+
+/**
+ * Resolve a saved bookmark ({ chapter, questionId }) to a question.
+ *
+ * Bookmarks are keyed by "<chapter>:<questionId>" where <chapter> is whichever
+ * slug the saving screen had (canonical, study, bank alias, or a slugified
+ * chapter title) and ids may be stored as strings or numbers. Question ids are
+ * unique, so the id finds the question and the chapter only has to be a slug the
+ * catalog recognises; a bookmark with an unknown chapter stays unresolved, as it
+ * always did. Never throws and never drops the bookmark itself.
+ *
+ * @returns {{status: "found"|"quarantined"|"missing", question: object|null, reason?: string}}
+ */
+export function resolveBookmarkedQuestion({ chapter, questionId } = {}) {
+  const { questionIndex, quarantinedIndex, aliasIndex } = getCatalog();
+  const id = String(questionId ?? "");
+  const live = questionIndex.get(id);
+  const held = live ? null : quarantinedIndex.get(id);
+  const question = live || held?.question || null;
+  if (!question) return { status: "missing", question: null };
+
+  const label = String(chapter ?? "");
+  const chapterKnown =
+    aliasIndex.has(label) ||
+    aliasIndex.has(slugifyChapterLabel(label)) ||
+    label === question.chapterSlug ||
+    slugifyChapterLabel(label) === question.chapterSlug;
+  if (!chapterKnown) return { status: "missing", question: null };
+
+  return held ? { status: "quarantined", question, reason: held.reason } : { status: "found", question };
 }
 
 /** Reuses the existing practiceUrls helper so route logic stays in one place. */
@@ -36,6 +111,6 @@ export function getPracticeUrl(chapter) {
 }
 
 export function getCatalogFindings() {
-  const { chapters, questions } = getCatalog();
-  return validateCatalog({ chapters, questions });
+  const { chapters, questions, quarantined } = getCatalog();
+  return validateCatalog({ chapters, questions, quarantined });
 }

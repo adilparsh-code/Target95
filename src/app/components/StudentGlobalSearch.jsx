@@ -3,8 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getStudyChapters, resolveStudyChapter, searchStudyContent } from "../../lib/studyCenter";
-import { questions as practiceQuestions } from "../data/questions";
+import { getStudyChapters, searchStudyContent } from "../../lib/studyCenter";
 import { getCBSEChapters } from "../data/cbse/chapters";
 import { getCBSEPracticeQuestions } from "../data/cbse/question-bank-2026-27";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -18,6 +17,13 @@ const typeIcons = {
   subject: "📘",
 };
 
+const QUESTION_TITLE_MAX = 90;
+
+const truncate = (text, max) => (text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text);
+
+// Question board -> personalization board id. Questions without a board are Java (CISCE).
+const toBoardId = (board) => (String(board || "").toUpperCase() === "CBSE" ? "cbse" : "cisce");
+
 const typeColors = {
   topic: "text-blue-600 bg-blue-50",
   chapter: "text-emerald-600 bg-emerald-50",
@@ -30,6 +36,7 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [results, setResults] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [contentApi, setContentApi] = useState(null);
   const inputRef = useRef(null);
   const router = useRouter();
   
@@ -58,6 +65,18 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
       setSelectedIndex(-1);
     }
   }, [isOpen]);
+
+  // The unified question catalog is large; load it only once search is first opened.
+  useEffect(() => {
+    if (!isOpen || contentApi) return undefined;
+    let cancelled = false;
+    import("@/lib/content").then((api) => {
+      if (!cancelled) setContentApi(api);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [isOpen, contentApi]);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -119,51 +138,45 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
     });
 
     // Search practice questions with board/class filtering
-    const searchableQuestions = isCBSEContext
-      ? getCBSEPracticeQuestions(cbseClassNumber, cbseSubjectCode)
-      : practiceQuestions;
-    searchableQuestions.forEach((q, idx) => {
-      const searchText = [
-        q.title,
-        q.question,
-        q.chapter,
-        q.subject,
-        ...(q.tags || []),
-      ]
-        .join(" ")
-        .toLowerCase();
-
-      if (searchText.includes(term)) {
-        // Filter by board if personalization is active
-        if (activeBoard && !isCBSEContext) {
-          const questionBoard = q.board || (q.subject === 'python' ? 'cbse' : 'cisce');
-          if (questionBoard !== activeBoard) {
-            return;
-          }
-        }
-
-        const questionChapterSlug = q.chapter
-          ? String(q.chapter).trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
-          : "";
-        const resolvedQuestionChapter = questionChapterSlug ? resolveStudyChapter(questionChapterSlug) : null;
-
+    if (isCBSEContext) {
+      getCBSEPracticeQuestions(cbseClassNumber, cbseSubjectCode).forEach((q, idx) => {
+        const searchText = [q.title, q.question, q.chapter, q.subject, ...(q.tags || [])].join(" ").toLowerCase();
+        if (!searchText.includes(term)) return;
         matched.push({
           id: `question-${q.slug || idx}`,
           title: q.title,
           description: `${q.chapter} · ${q.difficulty} · ${q.type}`,
-          href: isCBSEContext
-            ? `/practice/setup?board=CBSE&class=${cbseClassNumber}&subjectCode=${encodeURIComponent(cbseSubjectCode)}`
-            : resolvedQuestionChapter ? `/Java/${resolvedQuestionChapter.slug}` : "/question-bank",
+          href: `/practice/setup?board=CBSE&class=${cbseClassNumber}&subjectCode=${encodeURIComponent(cbseSubjectCode)}`,
           type: "question",
           chapter: q.chapter,
           difficulty: q.difficulty,
         });
-      }
-    });
+      });
+    } else if (contentApi) {
+      contentApi.getQuestions().forEach((q) => {
+        const questionChapter = contentApi.getChapter(q.chapterId);
+        const searchText = [q.question, questionChapter?.title, q.chapterSlug, q.subject, ...q.tags]
+          .join(" ")
+          .toLowerCase();
+        if (!searchText.includes(term)) return;
+        // Filter by board if personalization is active
+        if (activeBoard && toBoardId(q.board) !== activeBoard) return;
+
+        matched.push({
+          id: `question-${q.id}`,
+          title: truncate(q.question, QUESTION_TITLE_MAX),
+          description: `${questionChapter?.title || q.chapterSlug} · ${q.difficulty} · ${q.type}`,
+          href: questionChapter ? `/Java/${questionChapter.slug}` : "/question-bank",
+          type: "question",
+          chapter: questionChapter?.slug || q.chapterSlug,
+          difficulty: q.difficulty,
+        });
+      });
+    }
 
     setResults(matched.slice(0, 12));
     setSelectedIndex(-1);
-  }, [debouncedQuery, chapters, activeBoard, activeClass, isCBSEContext, cbseClassNumber, cbseSubjectCode]);
+  }, [debouncedQuery, chapters, contentApi, activeBoard, activeClass, isCBSEContext, cbseClassNumber, cbseSubjectCode]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {

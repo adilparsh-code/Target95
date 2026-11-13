@@ -84,10 +84,13 @@ export function validateQuestion(question) {
 
 /**
  * Validate a whole catalog.
- * @param {{chapters: import('./schema.mjs').UnifiedChapter[], questions: import('./schema.mjs').UnifiedQuestion[]}} catalog
+ * @param {{chapters: import('./schema.mjs').UnifiedChapter[], questions: import('./schema.mjs').UnifiedQuestion[], quarantined?: {question: import('./schema.mjs').UnifiedQuestion, reason: string}[]}} catalog
  */
-export function validateCatalog({ chapters = [], questions = [] } = {}) {
+export function validateCatalog({ chapters = [], questions = [], quarantined = [] } = {}) {
   const findings = [];
+  for (const entry of quarantined) {
+    findings.push(finding('WARNING', 'question.quarantined', `Held out of chapter selectors: ${entry.reason}`, entry.question?.id));
+  }
   const slugOwner = new Map();
 
   for (const chapter of chapters) {
@@ -122,7 +125,9 @@ export function validateCatalog({ chapters = [], questions = [] } = {}) {
   }
 
   const questionCounts = new Map();
-  for (const question of questions) questionCounts.set(question?.chapterId, (questionCounts.get(question?.chapterId) || 0) + 1);
+  for (const question of questions) {
+    for (const id of question?.chapterIds || [question?.chapterId]) questionCounts.set(id, (questionCounts.get(id) || 0) + 1);
+  }
   for (const chapter of chapters) {
     if (!questionCounts.get(chapter.id)) findings.push(finding('WARNING', 'chapter.no-questions', 'Chapter has no questions', chapter.id));
   }
@@ -131,8 +136,10 @@ export function validateCatalog({ chapters = [], questions = [] } = {}) {
   const seenIds = new Map();
   for (const question of questions) {
     findings.push(...validateQuestion(question));
-    if (question?.chapterId && !chapterIds.has(question.chapterId)) {
-      findings.push(finding('ERROR', 'question.orphan', `Question points at unknown chapter "${question.chapterId}"`, question.id));
+    for (const id of question?.chapterIds || [question?.chapterId]) {
+      if (id && !chapterIds.has(id)) {
+        findings.push(finding('ERROR', 'question.orphan', `Question points at unknown chapter "${id}"`, question.id));
+      }
     }
     const key = String(question?.id);
     seenIds.set(key, (seenIds.get(key) || 0) + 1);

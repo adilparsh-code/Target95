@@ -121,3 +121,37 @@ export async function loadAttemptSession({ uid, config, duration, count, api, dr
     canGoOffline: legacyPool().length > 0,
   };
 }
+
+/**
+ * What the setup screen should show for the current filters.
+ *
+ * While the server count for the current filters is loading, the local (legacy-only) count
+ * is NOT shown as if it were the answer: for content-engine categories it is far too low
+ * (often 0), which made the status line flash "No questions match" before jumping to the
+ * real number. Instead `pending` is true and the previous server count for the same
+ * category is kept as a stale hint. Without a server (disabled / CBSE / signed out) the
+ * local numbers are the truth and nothing is pending.
+ */
+export function resolveAvailability({ enabled, remote, configKey, category, localCount, localChapters }) {
+  if (!enabled) return { count: localCount, chapters: localChapters, pending: false };
+  const chapters = remote?.category === category ? remote.chapters : localChapters;
+  if (remote?.key === configKey) return { count: remote.count, chapters, pending: false };
+  const sameCategory = remote?.category === category;
+  return { count: sameCategory ? remote.count : localCount, chapters, pending: true };
+}
+
+/**
+ * View model for the player's "couldn't load your test" screen. Kept pure so the error
+ * state (message shown, which actions exist, that Retry is always offered) is testable
+ * without a DOM. `canGoOffline` is only true for network failures, never for auth errors.
+ */
+export function buildPlayerErrorView(error) {
+  const actions = [{ id: "retry", label: "Retry", primary: true }];
+  if (error?.canGoOffline) actions.push({ id: "offline", label: "Continue without saving" });
+  actions.push({ id: "back", label: "Back to Setup" });
+  return {
+    title: "We couldn't load your test",
+    message: error?.message || "Something went wrong while loading your test. Please try again.",
+    actions,
+  };
+}

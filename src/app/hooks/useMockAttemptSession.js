@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { clearMockTestDraft, getMockTestDraft } from "@/lib/mocktest";
 import { buildMockTestPool } from "@/lib/mocktestAttempts";
 import { availabilityRequest, describeFailure, resumeAttemptRequest, startAttemptRequest } from "@/lib/mocktestClient";
-import { loadAttemptSession, loadLocalSession } from "@/lib/mocktestSession";
+import { loadAttemptSession, loadLocalSession, resolveAvailability } from "@/lib/mocktestSession";
 
 // React StrictMode (dev) runs effects twice; without this the test would be started twice and
 // leave an orphaned attempt. In-flight (and just-settled) loads are shared for a moment.
@@ -83,12 +83,5 @@ export function useMockAvailability({ config, localCount, localChapters, enabled
     return () => { cancelled = true; clearTimeout(timer); };
   }, [enabled, configKey]);
 
-  // The count follows every filter; the chapter list only follows the category, so the
-  // dropdown does not flicker back to the local list while a new count is loading.
-  const countCurrent = enabled && remote?.key === configKey;
-  const chaptersCurrent = enabled && remote?.category === config.category;
-  return {
-    count: countCurrent ? remote.count : localCount,
-    chapters: chaptersCurrent ? remote.chapters : localChapters,
-  };
+  return resolveAvailability({ enabled, remote, configKey, category: config.category, localCount, localChapters });
 }

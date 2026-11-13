@@ -310,3 +310,29 @@ test("availability request carries only filter fields and returns counts", async
   assert.match(seen[0], /difficulty=hard/);
   assert.doesNotMatch(seen[0], /answer|explanation/);
 });
+
+test("setup screen: no 'no questions' flash while the server count loads; stale same-category count kept", () => {
+  const base = { enabled: true, configKey: "k2", category: "icse-class-10", localCount: 0, localChapters: ["local"] };
+  // First load: nothing from the server yet -> pending, never presented as a confirmed number.
+  assert.equal(session.resolveAvailability({ ...base, remote: null }).pending, true);
+  // Filter changed: previous server count for the same category is kept as a hint while pending.
+  const stale = session.resolveAvailability({ ...base, remote: { key: "k1", category: "icse-class-10", count: 120, chapters: ["srv"] } });
+  assert.deepEqual([stale.count, stale.pending, stale.chapters], [120, true, ["srv"]]);
+  // Different category: server data for another category must not leak in.
+  const other = session.resolveAvailability({ ...base, remote: { key: "k1", category: "icse-class-9", count: 99, chapters: ["x"] } });
+  assert.deepEqual([other.count, other.pending, other.chapters], [0, true, ["local"]]);
+  // Current answer arrives.
+  const fresh = session.resolveAvailability({ ...base, remote: { key: "k2", category: "icse-class-10", count: 7, chapters: ["srv"] } });
+  assert.deepEqual([fresh.count, fresh.pending], [7, false]);
+  // No server (disabled/CBSE/signed out): local numbers are the truth, never pending.
+  assert.deepEqual(session.resolveAvailability({ ...base, enabled: false, remote: null, localCount: 5 }), { count: 5, chapters: ["local"], pending: false });
+});
+
+test("player error state: message shown, Retry always offered, offline only when allowed", () => {
+  const network = session.buildPlayerErrorView({ message: "Network problem.", canGoOffline: true });
+  assert.equal(network.message, "Network problem.");
+  assert.deepEqual(network.actions.map((a) => a.id), ["retry", "offline", "back"]);
+  const auth = session.buildPlayerErrorView({ message: "Please sign in again.", canGoOffline: false });
+  assert.deepEqual(auth.actions.map((a) => a.id), ["retry", "back"]);
+  assert.ok(session.buildPlayerErrorView(undefined).message.length > 10, "falls back to a readable message");
+});

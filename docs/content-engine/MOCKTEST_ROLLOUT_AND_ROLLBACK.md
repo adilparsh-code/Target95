@@ -92,7 +92,7 @@ Local drafts hold ids and answers. On resume the questions are re-delivered by `
 | 17 | Forged payloads | `mocktest-content-engine` (forged answers/ids/scores); oversized answers in `mocktest-attempts` |
 | 18 | Flag off | `mocktest-content-engine` (flag off; resume and grade after flag off; default environment) |
 | 19 | Bundle check | `npm run check:mocktest-bundle` (needs a build; not part of `npm test`) |
-| 20 | Rate limit / open-attempt cap | **Not implemented** (see section 5) |
+| 20 | Rate limit / open-attempt cap | **Deliberately not implemented** (see section 6) |
 | 21 | Full test suite, lint, build | run and recorded in `EXECUTION_CHECKPOINT.md` |
 | 22 | Setup counts equal server pool sizes | Partly: every chapter option for ICSE IX and X equals its pool, and flag-off equals legacy. The full difficulty x type grid is not exhaustively tested |
 | 23 | Player shows an error, not a local shuffle, when the API fails | Session-loader level (`mocktest-client-flow`). The React screen itself is not rendered in a test |
@@ -101,10 +101,27 @@ Additional: submission failure, lost response, retry, stale draft (3 causes), ne
 
 ## 5. Known limits and residual risks (not hidden)
 
-1. **Global search still ships the whole catalog on demand.** `StudentGlobalSearch` lazy-loads the content catalog (which includes answers and explanations for all content-engine questions) the first time search is opened, on any page, including during a mock test. The bundle audit confirms no mock-test page loads the bank statically (0 chunks), but one on-demand chunk holds all 325 candidate answers. A student who opens search mid-test and inspects the network can read them. Fix: give search an answer-free generated index (a small follow-up, not done because it changes the search feature). The same questions are also visible with answers in the practice player by design.
+1. **Global search (RESOLVED in the security-hardening pass).** `StudentGlobalSearch` now loads an answer-free generated index (`src/content/searchIndex.mjs`: id, question text, chapter, board, difficulty, type only). The bundle audit confirms the 325 answers/explanations are reachable only from practice routes (`/bookmarks`, `/question-bank`), by design, where answers are visible. Regenerate with `npm run generate:search-index` when content changes (a test fails if it is stale).
 2. **Legacy answers remain in the client bundle** (28 legacy questions and CBSE). Unchanged by choice (approved scope); moving them to server delivery uses the same endpoints.
 3. **No rate limit or open-attempt cap.** A cap on `in_progress` attempts would lock out students who abandon tests, because attempts never expire. It needs an expiry rule first. Deferred.
 4. **Late submissions are accepted.** See section 3.
 5. **Not verified in a browser or against real Firebase.** All flows were exercised against an in-memory Firestore double and the real service code, plus a production build. End-to-end behaviour (auth cookies, real transactions) is covered only by the smoke checklist above.
 6. **Output questions (99) stay excluded** until a grading policy is approved.
 7. **Setup count flicker:** while a new count is loading from the server the local legacy count is shown briefly.
+
+## 6. Rate limiting and abandoned attempts (decision record)
+
+**Decision: no rate limit and no open-attempt cap in this release.** Reasons:
+- Attempts never expire. `in_progress` attempts are created whenever a student opens the player and never closed if the student leaves. A cap on open attempts would therefore lock genuine students out after a few abandoned tabs, and there is no expiry job to reclaim them.
+- The cap needs an expiry rule first (proposal: treat an `in_progress` attempt older than duration + 120 s grace, or 24 h for practice mode, as abandoned and excluded from the cap). That is a data/behaviour change and is PENDING_APPROVAL.
+
+**Implications of leaving it out (accepted for Preview, review before production):**
+- Storage growth: each start writes one `users/{uid}/mockAttempts/{id}` document (question ids only, no text). Abandoned attempts accumulate; cost is small but unbounded per user.
+- Abuse: a signed-in user can start attempts in a loop. Every start is authenticated, writes one small document, and reveals no answer keys, so the exposure is cost/noise, not data leakage. Mitigate before production with a per-user start rate limit (for example 10 starts per minute) in the route, or platform-level limits.
+- Question harvesting: pre-submission payloads contain no keys; repeated starts only reveal question text, which is already searchable.
+- Abandoned attempts are harmless to grading: they are never graded, and a draft pointing at one is resumed or discarded with a notice (404/409/410 handling).
+
+**Preserved protections (unchanged and tested):** duplicate-submit is idempotent (second submit returns the stored result with `replay: true`, no regrade); a failed submit shows a visible Retry and keeps the draft; the setup-count and error-state view models are covered by `test/mocktest-client-flow.test.mjs`.
+
+## 7. Setup-count flicker (fixed)
+Cause: while the server count for new filters loaded, the setup screen fell back to the local legacy-only count (often 0 for content-engine filters), flashing "No questions match" and disabling Start before jumping to the real number. Fix: `resolveAvailability` reports `pending`, keeps the previous same-category server count as a hint, shows a neutral "Checking available questions…" line, and never disables Start while pending.

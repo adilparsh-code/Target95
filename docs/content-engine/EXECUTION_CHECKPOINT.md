@@ -45,15 +45,15 @@ A task is COMPLETED only with evidence recorded next to it.
 | 6 | Report mock-test implementation to user, wait for review | COMPLETED | accepted conditionally 2026-11-13; PR #102 (`feat/content-engine-mocktest` -> `feat/content-engine-p1`) open, not merged; #100/#101 untouched |
 | 7 | Security hardening: answer-free global-search projection | COMPLETED | `searchProjection.mjs` + generated `searchIndex.mjs` (allow-listed columns), `StudentGlobalSearch` no longer imports the catalog; `test/search-index.test.mjs` 11 tests inspect the serialized payload; bundle audit PASS with positive control; runtime Playwright check: opening search on the player loads only the answer-free index chunk, bank chunk not loaded; npm test 276/276, eslint clean, `next build` exit 0 |
 | 7b | Pre-existing `searchStudyContent` TypeError (`examples.some` on grouped examples; also on main) | COMPLETED | guard added in `studyCenter.js` + regression test; search returns results at runtime, 0 page errors |
-| 8 | Setup-count flicker, player error-state test, rate-limit documentation | PENDING | next action |
-| 9 | Preview deployment (icse-class-10 only) and smoke checklist | PENDING | needs Vercel + Firebase test account access |
+| 8 | Setup-count flicker, player error-state test, rate-limit documentation | COMPLETED | `resolveAvailability` (pending state, no false "no questions"), `buildPlayerErrorView` + 2 tests; rollout doc sections 6-7; npm test 278/278, eslint clean, `next build` exit 0, bundle audit PASS |
+| 9 | Preview deployment (icse-class-10 only) and smoke checklist | BLOCKED | Vercel connector disconnected mid-session (502); no Vercel CLI, no Firebase credentials or test account in this sandbox. Git-integration preview build exists (status: success) but the flag was NOT set on it and no smoke test was run. Exact next action: user sets `MOCKTEST_CE_CATEGORIES=icse-class-10` for the Preview environment only, supplies test accounts, then run the checklist in MOCKTEST_ROLLOUT_AND_ROLLBACK.md section 1 |
 | - | Enable the flag in any environment; ISC XI readiness; output-question grading policy; attempt expiry/rate limit | PENDING_APPROVAL | see MOCKTEST_ROLLOUT_AND_ROLLBACK.md section 5 |
 | - | Alias map consolidation (steps 2-4 of the plan) | PENDING_APPROVAL | |
 | - | Quarantined Number Systems mapping | PENDING_APPROVAL | editorial decision |
 | - | PR for the P1 branch; merging PR #100 | PENDING_APPROVAL | |
 
 ## Latest verification results
-- Tests: 276 pass / 0 fail (`npm test`) after Step 7.
+- Tests: 278 pass / 0 fail (`npm test`) after Step 8.
 - Lint: clean on files changed in P1-A.
 - Build: `next build` exit 0 after Step 2.
 - Content validation: 0 errors, 28 warnings (18 chapters without questions, 4 shared-content groups, 3 stub chapters, 2 quarantined, 1 duplicate-option MCQ).

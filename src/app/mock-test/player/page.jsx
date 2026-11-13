@@ -1,5 +1,6 @@
 "use client";
 
+import { buildPlayerErrorView } from "@/lib/mocktestSession";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Navbar from "../../components/Navbar";
@@ -115,10 +116,10 @@ function MockTestPlayerContent() {
   if (attempt.phase === "loading") return <main className={PAGE_SHELL}><Navbar /><div className="flex justify-center py-32 text-gray-700">Preparing your test…</div><Footer /></main>;
 
   if (attempt.phase === "error") {
-    return <StatusScreen title="We couldn't load your test" message={attempt.error.message}>
-      <button onClick={attempt.retry} className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white">Retry</button>
-      {attempt.error.canGoOffline && <button onClick={attempt.goOffline} className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900">Continue without saving</button>}
-      <button onClick={backToSetup} className="rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900">Back to Setup</button>
+    const view = buildPlayerErrorView(attempt.error);
+    const handlers = { retry: attempt.retry, offline: attempt.goOffline, back: backToSetup };
+    return <StatusScreen title={view.title} message={view.message}>
+      {view.actions.map((action) => <button key={action.id} onClick={handlers[action.id]} className={action.primary ? "rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white" : "rounded-xl border border-gray-300 bg-white px-6 py-3 font-semibold text-gray-900"}>{action.label}</button>)}
     </StatusScreen>;
   }
 

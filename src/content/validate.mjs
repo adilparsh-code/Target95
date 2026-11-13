@@ -122,7 +122,15 @@ export function validateCatalog({ chapters = [], questions = [] } = {}) {
   }
 
   const questionCounts = new Map();
-  for (const question of questions) questionCounts.set(question?.chapterId, (questionCounts.get(question?.chapterId) || 0) + 1);
+  for (const question of questions) {
+    const associatedChapterIds = new Set([
+      question?.chapterId,
+      ...(Array.isArray(question?.chapterIds) ? question.chapterIds : []),
+    ].filter(Boolean));
+    for (const chapterId of associatedChapterIds) {
+      questionCounts.set(chapterId, (questionCounts.get(chapterId) || 0) + 1);
+    }
+  }
   for (const chapter of chapters) {
     if (!questionCounts.get(chapter.id)) findings.push(finding('WARNING', 'chapter.no-questions', 'Chapter has no questions', chapter.id));
   }
@@ -131,8 +139,14 @@ export function validateCatalog({ chapters = [], questions = [] } = {}) {
   const seenIds = new Map();
   for (const question of questions) {
     findings.push(...validateQuestion(question));
-    if (question?.chapterId && !chapterIds.has(question.chapterId)) {
-      findings.push(finding('ERROR', 'question.orphan', `Question points at unknown chapter "${question.chapterId}"`, question.id));
+    const associatedChapterIds = new Set([
+      question?.chapterId,
+      ...(Array.isArray(question?.chapterIds) ? question.chapterIds : []),
+    ].filter(Boolean));
+    for (const chapterId of associatedChapterIds) {
+      if (!chapterIds.has(chapterId)) {
+        findings.push(finding('ERROR', 'question.orphan', 'Question points at unknown chapter "' + chapterId + '"', question.id));
+      }
     }
     const key = String(question?.id);
     seenIds.set(key, (seenIds.get(key) || 0) + 1);

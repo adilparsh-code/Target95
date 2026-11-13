@@ -7,7 +7,9 @@ import {
   validateQuestion,
 } from "../src/content/validate.mjs";
 import {
+  buildQuestionChapterAssociations,
   normalizeDifficulty,
+  questionBelongsToChapter,
   toUnifiedChapter,
   toUnifiedQuestion,
 } from "../src/content/normalize.mjs";
@@ -68,4 +70,46 @@ test("validateCatalog flags orphans, duplicate ids, slug collisions and shared c
   for (const expected of ["chapter.slug-collision", "chapter.shared-content", "question.duplicate-id", "question.orphan", "chapter.no-questions"]) {
     assert.ok(codes.includes(expected), `missing ${expected}`);
   }
+});
+
+
+test("broad question-bank questions remain available to every granular sibling chapter", () => {
+  const aliasIndex = new Map([
+    ["loops", "for-loop"],
+    ["for-loop", "for-loop"],
+    ["while-loop", "while-loop"],
+    ["do-while-loop", "do-while-loop"],
+    ["arrays", "arrays-1d"],
+    ["arrays-1d", "arrays-1d"],
+    ["arrays-2d", "arrays-2d"],
+  ]);
+  const questionBankBySlug = {
+    loops: [{ id: "loop-q1" }],
+    "for-loop": [{ id: "loop-q1" }],
+    "while-loop": [{ id: "loop-q1" }],
+    "do-while-loop": [{ id: "loop-q1" }],
+    arrays: [{ id: "array-q1" }],
+    "arrays-1d": [{ id: "array-q1" }],
+    "arrays-2d": [{ id: "array-q1" }],
+  };
+
+  const associations = buildQuestionChapterAssociations(questionBankBySlug, aliasIndex);
+  assert.deepEqual(associations.get("loop-q1"), ["for-loop", "while-loop", "do-while-loop"]);
+  assert.deepEqual(associations.get("array-q1"), ["arrays-1d", "arrays-2d"]);
+
+  const loopQuestion = toUnifiedQuestion(
+    { id: "loop-q1", type: "theory", question: "Explain loop control.", modelAnswer: "A loop repeats statements." },
+    { chapterId: "for-loop", chapterIds: associations.get("loop-q1") },
+  );
+  for (const chapterId of ["for-loop", "while-loop", "do-while-loop"]) {
+    assert.equal(questionBelongsToChapter(loopQuestion, chapterId), true);
+  }
+  assert.equal(questionBelongsToChapter(loopQuestion, "arrays-2d"), false);
+
+  const chapters = ["for-loop", "while-loop", "do-while-loop"].map((id) =>
+    toUnifiedChapter({ id, slug: id, title: id }, { theory: "Loop theory" }),
+  );
+  const findings = validateCatalog({ chapters, questions: [loopQuestion] });
+  assert.equal(findings.some((finding) => finding.code === "chapter.no-questions"), false);
+  assert.equal(findings.some((finding) => finding.code === "question.orphan"), false);
 });

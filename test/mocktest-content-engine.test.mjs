@@ -349,3 +349,20 @@ test("the two quarantined Number Systems questions never reach any attempt", asy
     assert.ok(body.questionIds.every((id) => !id.includes("icse-x-numbers")));
   }
 });
+
+test("rollout guardrails: ISC XI and ISC XII are not enableable; default process environment serves no content-engine questions", () => {
+  assert.deepEqual([...content.ENABLEABLE_CONTENT_CATEGORIES].sort(), ["icse-class-10", "icse-class-9"]);
+  assert.ok(!(content.CONTENT_CATEGORIES_ENV in process.env) || process.env[content.CONTENT_CATEGORIES_ENV] === "", "test environment must not set the flag");
+  assert.deepEqual(content.getEnabledContentCategories(), []);
+  assert.deepEqual(content.buildContentPool(cfg({ category: "icse-class-10" })), []);
+});
+
+test("CBSE attempts are unaffected by the content-engine integration", async () => {
+  const ctx = newTestContext();
+  const raw = { category: "cbse-class-10", board: "CBSE", classNumber: 10, subjectCode: "402", difficulty: "all", type: "mixed", count: 5 };
+  const legacyIds = attempts.selectAttemptQuestionIds(attempts.normalizeAttemptConfig(raw), () => 0.3);
+  const { status, body } = await service.startAttempt({ ...ctx, uid: "alice", rawConfig: raw, env: ENV_ALL, random: () => 0.3 });
+  assert.equal(status, legacyIds.length ? 200 : 404);
+  assert.deepEqual(body.questionIds ?? [], legacyIds);
+  assert.ok((body.questionIds ?? []).every((id) => !id.startsWith("ce:")));
+});

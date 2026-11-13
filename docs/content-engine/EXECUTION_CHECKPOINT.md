@@ -36,19 +36,20 @@ A task is COMPLETED only with evidence recorded next to it.
 | 2 | ICSE supplemental question player support | COMPLETED | `recordToPlayerQuestion` adapter wired into catalog playerIndex; dead links 36 -> 0 (test no longer exempts icse-); `npm test` 211/211; eslint clean; `next build` exit 0 |
 | 3 | Report to the user, then wait for review | COMPLETED | Step 2 reviewed and ACCEPTED by user |
 | 4 | MockTest integration: architecture review (read-only) | COMPLETED | `MOCKTEST_INTEGRATION_ARCHITECTURE.md` written; no implementation file touched; PR #100 verified open/unmerged/clean |
-| 5 | MockTest implementation (approved 2026-11-12) | IN_PROGRESS | decisions: 230 MCQ + 95 T/F (=325), exclude CH13-MCQ-003, output, free text; T/F options ["True","False"]; flag default off; ICSE X first, IX after smoke test, ISC XI needs readiness, ISC XII unavailable; no plan gating; stacked PRs, no merges |
+| 5 | MockTest implementation (approved 2026-11-12) | COMPLETED | decisions: 230 MCQ + 95 T/F (=325), exclude CH13-MCQ-003, output, free text; T/F options ["True","False"]; flag default off; ICSE X first, IX after smoke test, ISC XI needs readiness, ISC XII unavailable; no plan gating; stacked PRs, no merges |
 | 5A | Phase A: class metadata + legacy golden fixture | COMPLETED | commit e251b69; npm test 217/217 |
 | 5B | Phase B: server pool + per-attempt delivery | COMPLETED | commit e9b2c04 (with 5C). `mocktestContent.js` (325 pool, flag `MOCKTEST_CE_CATEGORIES` default off, ICSE X/IX enableable only), `mocktestService.js`, routes POST attempts / GET attempts/[id] / GET availability; key-free payloads; npm test 245/245; committed together with 5C |
 | 5C | Phase C: legacy compat + authoritative grading | COMPLETED | `gradeAttempt` resolver (legacy direct lookup, `ce:` via server resolver), `reveal` never stored, idempotent submit (replay), late-submission flagged not rejected; golden legacy tests green; 245/245 |
-| 5D | Phase D: client integration + results | COMPLETED | `mocktestClient/Session/Result.js`, `useMockAttemptSession`, player/result/setup pages; submit failure = visible retry, lost-response replay, stale drafts discarded with notice; npm test 263/263, eslint clean, `next build` exit 0 |
-| 5E | Phase E: rollout flag, regression, report | NOT_VERIFIED | |
-| - | Mock-test implementation (M1-M8 in the architecture doc) | PENDING_APPROVAL | needs decisions in doc section 6.3 |
+| 5D | Phase D: client integration + results | COMPLETED | commit 1a9c5c5. `mocktestClient/Session/Result.js`, `useMockAttemptSession`, player/result/setup pages; submit failure = visible retry, lost-response replay, stale drafts discarded with notice; npm test 263/263, eslint clean, `next build` exit 0 |
+| 5E | Phase E: rollout flag, regression, bundle audit, docs | COMPLETED | `MOCKTEST_ROLLOUT_AND_ROLLBACK.md`, `scripts/check-mocktest-bundle.mjs` (PASS: 0 static mock-test chunks embed the bank; 1 on-demand catalog chunk via global search), flag default OFF tested; npm test 265/265, eslint clean, `next build` exit 0 |
+| 6 | Report mock-test implementation to user, wait for review | IN_PROGRESS | branch pushed; no PR created for it; no merges |
+| - | Enable the flag in any environment; ISC XI readiness; output-question grading policy; search answer-free index; attempt expiry/rate limit | PENDING_APPROVAL | see MOCKTEST_ROLLOUT_AND_ROLLBACK.md section 5 |
 | - | Alias map consolidation (steps 2-4 of the plan) | PENDING_APPROVAL | |
 | - | Quarantined Number Systems mapping | PENDING_APPROVAL | editorial decision |
 | - | PR for the P1 branch; merging PR #100 | PENDING_APPROVAL | |
 
 ## Latest verification results
-- Tests: 211 pass / 0 fail (`npm test`).
+- Tests: 265 pass / 0 fail (`npm test`).
 - Lint: clean on files changed in P1-A.
 - Build: `next build` exit 0 after Step 2.
 - Content validation: 0 errors, 28 warnings (18 chapters without questions, 4 shared-content groups, 3 stub chapters, 2 quarantined, 1 duplicate-option MCQ).
@@ -62,4 +63,4 @@ A task is COMPLETED only with evidence recorded next to it.
 - Docs `PROJECT_CONTEXT.md` and `AUDIT_REPORT.md` still mention `questions.js`.
 
 ## Exact next action
-Wait for explicit implementation approval and the section 6.3 decisions of MOCKTEST_INTEGRATION_ARCHITECTURE.md. Do not modify mock-test files, start P2/P3, or merge/rebase PR #100.
+Wait for the user's review of the mock-test implementation report. Do not enable the flag, start P2/P3, merge or rebase PR #100 / any PR, or force-push.

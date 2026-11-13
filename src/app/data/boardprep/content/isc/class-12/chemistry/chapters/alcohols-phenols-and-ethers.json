@@ -1,0 +1,768 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-chemistry-ch-alcohols-phenols-and-ethers",
+  "title": "Alcohols, Phenols and Ethers",
+  "kind": "chemistry",
+  "tagline": "Hydroxy compounds from preparation to acidity: Lucas test, dehydration mechanism, phenol's resonance-stabilised acidity, Kolbe and Reimer-Tiemann, and Williamson ether synthesis.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Chemistry syllabus (Unit 7 — Alcohols, Phenols and Ethers; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the Unit 7 description in the ISC Chemistry (862) Revised Syllabus 2025, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Chemistry (862) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Alcohols, phenols and ethers all contain oxygen bonded to carbon, and their chemistry is decided by what else that oxygen is attached to. In an alcohol the oxygen is on an sp3 carbon, so the O-H bond is polar and the compound is a very weak acid, while the lone pairs on oxygen make it a nucleophile and a hydrogen-bond acceptor. In a phenol the oxygen is attached directly to a benzene ring, and the lone pair can be delocalised into the ring; the resulting phenoxide ion is stabilised by resonance, which makes phenol about a million times more acidic than ethanol. In an ether the oxygen is bonded to two carbon atoms and carries no hydrogen, so ethers cannot donate hydrogen bonds, boil far below the alcohols of the same mass, and are comparatively unreactive. The unit covers the classification and nomenclature of all three families, the preparation of alcohols by hydration, hydroboration, Grignard addition, reduction and fermentation, the reactions of alcohols including esterification and dehydration with their mechanisms, the acidic character of phenol and its electrophilic substitution including Kolbe's and Reimer-Tiemann reactions, and the Williamson synthesis and cleavage of ethers. Distinguishing primary, secondary and tertiary alcohols by the Lucas test runs through the whole unit.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Unit 7 — Alcohols, Phenols and Ethers (Organic Chemistry)"
+      },
+      {
+        "label": "Section weightage",
+        "value": "Organic Chemistry carries 31 marks in the 70-mark theory paper"
+      },
+      {
+        "label": "Boiling point of ethanol",
+        "value": "351 K, far above the 248 K of dimethyl ether, because only the alcohol can form intermolecular hydrogen bonds"
+      },
+      {
+        "label": "Acidity",
+        "value": "Phenol, pKa about 10, is far more acidic than water, pKa 15.7, which is more acidic than ethanol, pKa about 16"
+      },
+      {
+        "label": "Lucas reagent",
+        "value": "Anhydrous zinc chloride in concentrated hydrochloric acid; tertiary alcohols turn cloudy at once"
+      },
+      {
+        "label": "Dehydration",
+        "value": "Concentrated sulphuric acid at 443 K gives ethene from ethanol, and the ease of dehydration is tertiary > secondary > primary"
+      },
+      {
+        "label": "Oxidation",
+        "value": "Primary alcohols give aldehydes and then acids, secondary alcohols give ketones, tertiary alcohols resist oxidation"
+      },
+      {
+        "label": "Kolbe's reaction",
+        "value": "Sodium phenoxide with carbon dioxide at about 400 K and pressure gives salicylic acid after acidification"
+      },
+      {
+        "label": "Reimer-Tiemann reaction",
+        "value": "Phenol with chloroform and sodium hydroxide gives salicylaldehyde"
+      },
+      {
+        "label": "Williamson synthesis",
+        "value": "An alkoxide with an alkyl halide gives an ether, and the yield is best with a primary halide"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Classify alcohols as monohydric, dihydric or polyhydric, and as primary, secondary or tertiary, and name alcohols, phenols and ethers by the IUPAC system.",
+    "Explain the effect of hydrogen bonding on the boiling points and water solubility of alcohols and ethers.",
+    "Describe the preparation of alcohols by hydration of alkenes, hydroboration-oxidation, Grignard addition, reduction of carbonyl compounds and hydrolysis of alkyl halides.",
+    "Explain the acidic character of alcohols and phenols, and account for the much greater acidity of phenol in terms of resonance stabilisation of the phenoxide ion.",
+    "Describe the reactions of alcohols including esterification and dehydration with their mechanisms, and distinguish primary, secondary and tertiary alcohols by the Lucas test.",
+    "Describe the preparation and electrophilic substitution reactions of phenol, including Kolbe's reaction and the Reimer-Tiemann reaction.",
+    "Describe the Williamson synthesis of ethers, the cleavage of ethers by hydrogen iodide and the uses of ethers."
+  ],
+  "learn": [
+    {
+      "id": "classification-nomenclature-properties",
+      "title": "Classification, nomenclature and physical properties",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Alcohols are classified by the number of hydroxyl groups they contain. A monohydric alcohol has one, as in ethanol; a dihydric alcohol has two, as in ethylene glycol; and a polyhydric alcohol has three or more, as in glycerol. They are also classified by the carbon that carries the hydroxyl group: a primary alcohol has that carbon attached to one other carbon, a secondary alcohol to two, and a tertiary alcohol to three. Phenols contain a hydroxyl group attached directly to a benzene ring, and are named as derivatives of phenol, with the carbon bearing the hydroxyl group always numbered one. Ethers have the general formula R-O-R', and in the common system the two groups are named before the word ether, as in diethyl ether, while the IUPAC system names the smaller group as an alkoxy substituent, as in methoxyethane."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Monohydric alcohol",
+              "meaning": "An alcohol containing one hydroxyl group per molecule, for example ethanol."
+            },
+            {
+              "term": "Dihydric alcohol",
+              "meaning": "An alcohol containing two hydroxyl groups per molecule, for example ethane-1,2-diol."
+            },
+            {
+              "term": "Phenol",
+              "meaning": "A compound in which a hydroxyl group is attached directly to an aromatic ring carbon, so the oxygen lone pair is conjugated with the ring."
+            },
+            {
+              "term": "Ether",
+              "meaning": "A compound of the form R-O-R' in which oxygen is bonded to two carbon atoms and carries no hydrogen."
+            },
+            {
+              "term": "Alkoxy group",
+              "meaning": "The group formed when an alcohol loses the hydrogen of its hydroxyl group, used as a substituent prefix in ether nomenclature."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The physical properties of alcohols are dominated by hydrogen bonding. The O-H bond is strongly polar, so alcohol molecules attract one another through hydrogen bonds between the hydrogen of one hydroxyl group and the oxygen lone pair of another. Breaking these bonds requires extra energy, so alcohols boil much higher than alkanes or ethers of comparable mass: ethanol boils at 351 K while dimethyl ether, with the same molecular formula C2H6O, boils at 248 K. The same hydrogen bonding allows alcohols to dissolve in water, because the hydroxyl group can both donate and accept hydrogen bonds with water molecules. Solubility falls as the hydrocarbon part grows, since the non-polar chain cannot interact with water, so methanol and ethanol mix with water in all proportions while decanol is nearly insoluble."
+        },
+        {
+          "type": "table",
+          "caption": "Table: Boiling points of compounds of comparable mass",
+          "columns": [
+            "Compound",
+            "Molar mass, g mol^-1",
+            "Boiling point, K",
+            "Hydrogen bonding"
+          ],
+          "rows": [
+            [
+              "Ethane",
+              "30",
+              "184",
+              "none"
+            ],
+            [
+              "Ethanol",
+              "46",
+              "351",
+              "intermolecular O-H ... O"
+            ],
+            [
+              "Dimethyl ether",
+              "46",
+              "248",
+              "none, no O-H hydrogen"
+            ],
+            [
+              "Propan-1-ol",
+              "60",
+              "370",
+              "intermolecular O-H ... O"
+            ],
+            [
+              "Butan-1-ol",
+              "74",
+              "391",
+              "intermolecular O-H ... O"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Lower alcohols are colourless liquids with a characteristic smell and a burning taste; higher ones are oily or waxy solids.",
+            "Boiling points increase with chain length and decrease with branching, because branching reduces the surface contact between molecules.",
+            "Alcohols are neutral to litmus but react with sodium metal to liberate hydrogen, which shows that the hydroxyl hydrogen is weakly acidic.",
+            "Phenol is only slightly soluble in cold water but very soluble in hot water and in ethanol and ether.",
+            "Ethers are much more volatile than the isomeric alcohols and are poor solvents for ionic compounds but excellent solvents for organic substances."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "preparation-of-alcohols",
+      "title": "Methods of preparation of alcohols",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Alcohols can be made by adding water across a double bond, by adding a Grignard reagent to a carbonyl compound, by reducing a carbonyl compound, by hydrolysing an alkyl halide, or by treating a primary amine with nitrous acid, which replaces the amino group by a hydroxyl group. Direct hydration of an alkene uses steam and an acid catalyst and follows Markovnikov's rule, giving the more substituted alcohol. Indirect hydration passes the alkene through concentrated sulphuric acid to form an alkyl hydrogen sulphate, which is then hydrolysed. Hydroboration-oxidation reverses the regiochemistry: diborane adds across the double bond with the boron on the less substituted carbon, and oxidation with alkaline hydrogen peroxide replaces the boron by a hydroxyl group, so the product is the anti-Markovnikov alcohol. Propene therefore gives propan-2-ol by direct hydration but propan-1-ol by hydroboration-oxidation."
+        },
+        {
+          "type": "paragraph",
+          "text": "The Grignard route is the most general way of making a specific alcohol, because the size of the alcohol is controlled by the choice of carbonyl compound. Methanal gives a primary alcohol, any other aldehyde gives a secondary alcohol, and a ketone gives a tertiary alcohol, since the carbon of the carbonyl group becomes the carbon bearing the hydroxyl group and the alkyl group of the Grignard reagent becomes a new carbon-carbon bond. Reduction of a carbonyl compound with lithium aluminium hydride or sodium borohydride gives the same alcohols more directly, and hydrolysis of an alkyl halide with aqueous alkali gives an alcohol with the same carbon skeleton."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Hydration of propene with steam and phosphoric acid gives propan-2-ol by Markovnikov addition.",
+            "Hydroboration-oxidation of propene with diborane followed by hydrogen peroxide in alkali gives propan-1-ol.",
+            "Ethanal with methylmagnesium bromide followed by hydrolysis gives propan-2-ol.",
+            "Propanone with methylmagnesium bromide followed by hydrolysis gives 2-methylpropan-2-ol.",
+            "Bromoethane with aqueous sodium hydroxide gives ethanol by hydrolysis.",
+            "Ethanal reduced with lithium aluminium hydride or with hydrogen over nickel gives ethanol.",
+            "Methanol is manufactured from synthesis gas, carbon monoxide and hydrogen, over a zinc oxide and chromium oxide catalyst at high pressure, the Bosch process.",
+            "Ethanol is manufactured by the fermentation of sugars with zymase from yeast, and the reaction is carried out below about 310 K because the enzyme is destroyed at higher temperatures."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Which Grignard reagent and which carbonyl compound would you use to prepare 2-methylpropan-2-ol?",
+              "note": "2-Methylpropan-2-ol is a tertiary alcohol with three methyl groups on the hydroxyl-bearing carbon, so a ketone is needed. Propanone with methylmagnesium bromide gives it directly, and ethyl ethanoate with two equivalents of methylmagnesium bromide also gives it, because an ester accepts two additions of the same Grignard reagent; the ketone route is the simpler one."
+            },
+            {
+              "text": "Why does fermentation stop producing ethanol once the concentration reaches about 14 percent?",
+              "note": "Ethanol is toxic to the yeast that produces it, so above about 14 percent by volume the enzyme zymase is deactivated and fermentation stops. Higher concentrations are obtained by distillation, not by fermentation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "reactions-of-alcohols",
+      "title": "Reactions of alcohols and the Lucas test",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The reactions of alcohols fall into three groups: reactions in which the O-H bond is broken, reactions in which the C-O bond is broken, and oxidation. Breaking the O-H bond happens when an alcohol reacts with sodium to give sodium ethoxide and hydrogen, which shows that the hydroxyl hydrogen is acidic, though far less so than the hydrogen of a carboxylic acid. Breaking the C-O bond happens in esterification, in reaction with hydrogen halides, with phosphorus halides and with thionyl chloride. Esterification with a carboxylic acid is catalysed by acid and goes by nucleophilic acyl substitution: the oxygen of the alcohol attacks the carbonyl carbon of the acid, a tetrahedral intermediate forms, water is eliminated and the ester is produced. The reaction is reversible, so it is driven forward by removing water or by using an excess of one reactant."
+        },
+        {
+          "type": "paragraph",
+          "text": "Dehydration of an alcohol with concentrated sulphuric acid or with hot alumina removes water and gives an alkene, and it proceeds through a carbocation in the case of secondary and tertiary alcohols, so the ease of dehydration follows the stability of that carbocation: tertiary > secondary > primary. Rearrangements are common, because a secondary carbocation can shift a hydride or an alkyl group to become a more stable tertiary one. Oxidation depends on the class of alcohol: a primary alcohol is oxidised first to an aldehyde and then to a carboxylic acid, a secondary alcohol is oxidised to a ketone and cannot be oxidised further without breaking the carbon chain, and a tertiary alcohol has no hydrogen on the hydroxyl-bearing carbon, so it resists oxidation and needs vigorous conditions that cleave the molecule."
+        },
+        {
+          "type": "table",
+          "caption": "Table: Distinguishing primary, secondary and tertiary alcohols by the Lucas test",
+          "columns": [
+            "Alcohol",
+            "Carbocation formed",
+            "Observation with Lucas reagent",
+            "Oxidation product with acidified dichromate"
+          ],
+          "rows": [
+            [
+              "Primary",
+              "unstable primary carbocation",
+              "no cloudiness at room temperature, cloudiness only on heating",
+              "aldehyde, then carboxylic acid"
+            ],
+            [
+              "Secondary",
+              "moderately stable secondary carbocation",
+              "cloudiness within about five minutes",
+              "ketone"
+            ],
+            [
+              "Tertiary",
+              "stable tertiary carbocation",
+              "immediate cloudiness",
+              "no simple oxidation product"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "The Lucas test uses anhydrous zinc chloride dissolved in concentrated hydrochloric acid. The reagent replaces the hydroxyl group by chlorine, and the alkyl chloride formed is insoluble in the aqueous reagent, so it appears as a cloudiness or a separate layer. The rate of the substitution depends on how readily the carbocation forms, which is why the tertiary alcohol reacts at once, the secondary alcohol within a few minutes, and the primary alcohol only on heating. The test therefore distinguishes the three classes in a single experiment, and it is the standard answer to any question asking how to tell primary, secondary and tertiary alcohols apart."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "How would you convert ethanol into ethanoic acid, and how would you stop the oxidation at ethanal?",
+              "note": "Ethanol with acidified potassium dichromate under reflux gives ethanoic acid, because the aldehyde first formed is oxidised further. To stop at ethanal, the aldehyde is distilled out of the reaction mixture as soon as it forms, or a milder oxidant such as pyridinium chlorochromate is used."
+            },
+            {
+              "text": "Explain why propan-1-ol is oxidised to propanoic acid but propan-2-ol only to propanone.",
+              "note": "Propan-1-ol is primary, so the carbon bearing the hydroxyl group still has a hydrogen after the first oxidation, and that hydrogen allows a second oxidation to the acid. Propan-2-ol is secondary, so the carbon bearing the hydroxyl group has no hydrogen once the ketone is formed, and further oxidation would require breaking a carbon-carbon bond."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phenols",
+      "title": "Phenols: preparation, acidity and reactions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Phenol is prepared industrially from cumene, which is made from benzene and propene; oxidation of cumene gives cumene hydroperoxide, which is cleaved by acid into phenol and acetone, so the process yields two valuable products at once. In the laboratory phenol is made by the Dow process from chlorobenzene with sodium hydroxide at high temperature and pressure, by heating benzene sulphonic acid with sodium hydroxide, or by hydrolysing a diazonium salt. The cumene route dominates industry because it avoids the severe conditions of the Dow process and produces acetone as a by-product."
+        },
+        {
+          "type": "paragraph",
+          "text": "Phenol is far more acidic than an alcohol because the phenoxide ion it forms on losing a proton is stabilised by resonance. In phenoxide the negative charge is delocalised from the oxygen into the ring, onto the ortho and para carbons, so the ion is much more stable than an alkoxide ion, in which the charge is localised on a single oxygen. Phenol therefore dissolves in sodium hydroxide to give sodium phenoxide, whereas ethanol does not react with sodium hydroxide at all. Phenol is still a weaker acid than a carboxylic acid, and it does not liberate carbon dioxide from sodium bicarbonate, which is the standard test that separates a phenol from a carboxylic acid."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "With sodium hydroxide phenol gives sodium phenoxide, showing its acidic character; ethanol does not react.",
+            "With sodium metal phenol gives sodium phenoxide and hydrogen, as an alcohol does.",
+            "With zinc dust on heating phenol is reduced to benzene.",
+            "With acetyl chloride or acetic anhydride phenol forms phenyl acetate, an ester, but the reaction is slower than for an alcohol because the oxygen lone pair is partly delocalised into the ring.",
+            "With phosphorus pentachloride phenol gives chlorobenzene, though in poor yield.",
+            "Bromination with bromine water gives 2,4,6-tribromophenol as a white precipitate, because the hydroxyl group activates the ring strongly.",
+            "Nitration with dilute nitric acid gives a mixture of ortho and para nitrophenol, and sulphonation gives mainly para phenol sulphonic acid.",
+            "Kolbe's reaction: sodium phenoxide with carbon dioxide at about 400 K and pressure gives salicylic acid after acidification.",
+            "Reimer-Tiemann reaction: phenol with chloroform and aqueous sodium hydroxide gives salicylaldehyde.",
+            "Neutral ferric chloride gives a violet colour with phenol, and coupling with a diazonium salt gives an orange azo dye; both are tests for phenol."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why does phenol give 2,4,6-tribromophenol with bromine water while benzene needs a catalyst and gives only monobromobenzene?",
+              "note": "The hydroxyl group donates electron density into the ring by resonance, which activates the ring towards electrophilic attack and makes the ortho and para positions especially reactive. The activation is strong enough that no Lewis acid is needed and all three positions react, and the product precipitates because the ring is now crowded and the molecule is less soluble."
+            },
+            {
+              "text": "Explain why phenol does not react with sodium bicarbonate but ethanoic acid does.",
+              "note": "Sodium bicarbonate liberates carbon dioxide only when the acid is stronger than carbonic acid. A carboxylic acid, with pKa about 5, is stronger, so it reacts. Phenol, with pKa about 10, is weaker than carbonic acid, so it forms no carbon dioxide, and this difference is the standard chemical test that distinguishes a phenol from a carboxylic acid."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ethers",
+      "title": "Ethers: the Williamson synthesis, cleavage and uses",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ethers are prepared by the Williamson synthesis, in which a sodium alkoxide reacts with an alkyl halide in a nucleophilic substitution. The alkoxide is the nucleophile, the halide is the substrate and the oxygen of the alkoxide becomes the ether oxygen. The reaction works best when the halide is primary, because secondary and especially tertiary halides are attacked mainly by elimination rather than substitution, and a tertiary alkoxide is itself bulky and a poor nucleophile. For an unsymmetrical ether the two groups must be chosen so that the more substituted group comes from the alkoxide and the less substituted group from the halide. Anisole, methoxybenzene, is made from sodium phenoxide and methyl iodide, and is the standard aryl ether in the syllabus."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ethers are relatively unreactive because the oxygen carries no hydrogen to donate and its lone pairs are sterically shielded by the two alkyl groups. They are not attacked by bases, by dilute acids or by most oxidising and reducing agents, which is why they are widely used as solvents for Grignard reactions and for other moisture-sensitive chemistry. The important reaction is cleavage by concentrated hydrogen iodide. The ether oxygen is protonated, iodide then attacks one of the alkyl groups and displaces the other as an alcohol, and if the hydrogen iodide is in excess the alcohol is converted further into an alkyl iodide. When the two groups differ, the attack occurs on the smaller, less hindered group, so methyl propyl ether with one equivalent of hydrogen iodide gives iodomethane and propan-1-ol."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Williamson synthesis: R-O-Na + R'-X gives R-O-R' + NaX, with the best yields from primary halides.",
+            "Anisole is prepared from sodium phenoxide and methyl iodide, or from phenol with dimethyl sulphate in alkali.",
+            "With chlorine in the dark, ethers undergo substitution on the alkyl groups rather than on the oxygen.",
+            "On long exposure to air and light, ethers form explosive peroxides, which is why they are stored in dark bottles and tested before distillation.",
+            "With phosphorus pentachloride an ether gives the alkyl chlorides and phosphorus oxychloride.",
+            "With excess concentrated hydrogen iodide an ether gives two molecules of alkyl iodide.",
+            "Ethers are used as solvents for Grignard reagents, for fats, oils and resins, and diethyl ether was formerly used as a general anaesthetic.",
+            "Anisole undergoes electrophilic substitution on the ring, with the methoxy group directing ortho and para, giving bromination, nitration and Friedel-Crafts products."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why can diethyl ether not be prepared in good yield from bromoethane and sodium ethoxide in the presence of a strong base at high temperature?",
+              "note": "At high temperature ethoxide acts as a base rather than a nucleophile and eliminates hydrogen bromide from bromoethane, giving ethene instead of the ether. The Williamson synthesis therefore works best at moderate temperature with a primary halide and an alkoxide that is not strongly basic relative to the halide."
+            },
+            {
+              "text": "Predict the products of the reaction of methyl propyl ether with one equivalent of concentrated hydrogen iodide.",
+              "note": "The reagent cleaves the smaller alkyl group, so iodide attacks the methyl group and displaces the propoxide, giving iodomethane and propan-1-ol. With excess hydrogen iodide the propan-1-ol is then converted into 1-iodopropane."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Alcohols are classified as monohydric, dihydric or polyhydric by the number of hydroxyl groups, and as primary, secondary or tertiary by the carbon that carries the hydroxyl group.",
+    "Hydrogen bonding raises the boiling points of alcohols far above those of isomeric ethers and makes the lower alcohols miscible with water.",
+    "Direct hydration of an alkene follows Markovnikov's rule, while hydroboration-oxidation gives the anti-Markovnikov alcohol.",
+    "A Grignard reagent with methanal gives a primary alcohol, with another aldehyde a secondary alcohol, and with a ketone a tertiary alcohol.",
+    "Phenol is about a million times more acidic than ethanol because the phenoxide ion is stabilised by resonance delocalisation of the negative charge into the ring.",
+    "Phenol dissolves in sodium hydroxide but does not liberate carbon dioxide from sodium bicarbonate, which distinguishes it from a carboxylic acid.",
+    "The Lucas test distinguishes primary, secondary and tertiary alcohols by the rate at which cloudiness appears with zinc chloride in concentrated hydrochloric acid.",
+    "Dehydration of alcohols is easiest for tertiary and hardest for primary alcohols, because it proceeds through a carbocation.",
+    "Primary alcohols are oxidised to aldehydes and then acids, secondary alcohols to ketones, and tertiary alcohols resist oxidation.",
+    "Kolbe's reaction gives salicylic acid and the Reimer-Tiemann reaction gives salicylaldehyde, both by attack on the activated ring of phenol."
+  ],
+  "examFocus": [
+    "Distinguishing primary, secondary and tertiary alcohols by the Lucas test and by oxidation products.",
+    "Explaining the acidity of phenol in terms of resonance stabilisation of the phenoxide ion, with comparison to ethanol and to carboxylic acids.",
+    "Writing the mechanism of esterification and of acid-catalysed dehydration of an alcohol.",
+    "Using a Grignard reagent and a chosen carbonyl compound to prepare a named alcohol.",
+    "Writing equations for Kolbe's reaction and the Reimer-Tiemann reaction, and for the bromination of phenol.",
+    "Describing the Williamson synthesis and explaining why primary halides give the best yields.",
+    "Describing the cleavage of an ether by hydrogen iodide and predicting the products for an unsymmetrical ether."
+  ],
+  "vocabulary": [
+    {
+      "word": "Hydroxyl group",
+      "meaning": "The -OH group, whose polar O-H bond allows hydrogen bonding and gives alcohols their characteristic properties."
+    },
+    {
+      "word": "Monohydric alcohol",
+      "meaning": "An alcohol with one hydroxyl group per molecule, such as ethanol."
+    },
+    {
+      "word": "Primary alcohol",
+      "meaning": "An alcohol in which the carbon carrying the hydroxyl group is attached to exactly one other carbon."
+    },
+    {
+      "word": "Phenol",
+      "meaning": "A hydroxy compound in which the hydroxyl group is attached directly to an aromatic ring, making it far more acidic than an alcohol."
+    },
+    {
+      "word": "Phenoxide ion",
+      "meaning": "The anion formed when phenol loses a proton, stabilised by delocalisation of the negative charge into the ring."
+    },
+    {
+      "word": "Esterification",
+      "meaning": "The acid-catalysed reaction of an alcohol with a carboxylic acid to give an ester and water."
+    },
+    {
+      "word": "Dehydration",
+      "meaning": "Removal of water from an alcohol by concentrated sulphuric acid or hot alumina to give an alkene."
+    },
+    {
+      "word": "Lucas reagent",
+      "meaning": "Anhydrous zinc chloride in concentrated hydrochloric acid, used to classify alcohols by the rate at which the alkyl chloride separates."
+    },
+    {
+      "word": "Kolbe's reaction",
+      "meaning": "Carboxylation of sodium phenoxide with carbon dioxide to give salicylic acid."
+    },
+    {
+      "word": "Reimer-Tiemann reaction",
+      "meaning": "Formylation of phenol with chloroform and sodium hydroxide to give salicylaldehyde."
+    },
+    {
+      "word": "Williamson synthesis",
+      "meaning": "The preparation of an ether by the nucleophilic substitution of an alkyl halide by a sodium alkoxide."
+    },
+    {
+      "word": "Alkoxide",
+      "meaning": "The anion formed when an alcohol loses the hydrogen of its hydroxyl group, a strong base and a good nucleophile."
+    },
+    {
+      "word": "Ether cleavage",
+      "meaning": "The breaking of a C-O bond of an ether by concentrated hydrogen iodide, giving an alcohol and an alkyl iodide."
+    },
+    {
+      "word": "Cumene process",
+      "meaning": "The industrial preparation of phenol and acetone by the oxidation of cumene followed by acid cleavage of the hydroperoxide."
+    },
+    {
+      "word": "Azo dye test",
+      "meaning": "Coupling of phenol with a diazonium salt in mild alkali to give an orange azo compound, used to identify phenol."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Hydrogen bonding in ethanol and its absence in dimethyl ether",
+      "description": "Two molecules of ethanol are drawn with a dashed line from the hydrogen of the hydroxyl group of one to the oxygen lone pair of the other, showing the intermolecular hydrogen bond. Beside them two molecules of dimethyl ether are drawn with no such dashed line, because their oxygen carries no hydrogen. A water molecule is also shown hydrogen bonding to an ethanol molecule through both its hydrogen and its oxygen.",
+      "labels": [
+        "O-H bond of ethanol",
+        "oxygen lone pair",
+        "intermolecular hydrogen bond",
+        "dimethyl ether with no O-H hydrogen",
+        "water molecule",
+        "hydrogen bond from water to ethanol oxygen",
+        "hydrogen bond from ethanol hydrogen to water oxygen"
+      ]
+    },
+    {
+      "caption": "Figure: Resonance stabilisation of the phenoxide ion",
+      "description": "Phenol is shown losing a proton to give the phenoxide ion. Four resonance structures of phenoxide are drawn, in which the negative charge moves from the oxygen onto the ortho and para ring carbons, with the carbon-oxygen bond gaining double-bond character. The delocalisation of charge over four positions is the reason the ion is unusually stable.",
+      "labels": [
+        "phenol with hydroxyl group",
+        "proton leaving",
+        "phenoxide ion",
+        "negative charge on oxygen",
+        "negative charge at ortho carbon",
+        "negative charge at para carbon",
+        "partial double bond between carbon and oxygen",
+        "delocalised charge over the ring"
+      ]
+    },
+    {
+      "caption": "Figure: Mechanism of acid-catalysed dehydration of ethanol",
+      "description": "Ethanol is protonated on the hydroxyl oxygen by the acid catalyst, and water leaves to give the ethyl carbocation. A base then removes a hydrogen from the adjacent carbon, and the electron pair forms the carbon-carbon double bond of ethene while the catalyst is regenerated. The sequence is drawn in three stages with curved arrows.",
+      "labels": [
+        "ethanol",
+        "proton from the acid catalyst",
+        "protonated alcohol",
+        "water leaving group",
+        "ethyl carbocation",
+        "base removing a beta hydrogen",
+        "ethene double bond forming",
+        "regenerated acid catalyst"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-chem-q-alcohols-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following has the highest boiling point?",
+      "options": [
+        "Propane",
+        "Ethanol",
+        "Dimethyl ether",
+        "Ethane"
+      ],
+      "correctIndex": 1,
+      "answer": "Ethanol",
+      "explanation": "Ethanol molecules form intermolecular hydrogen bonds through the O-H group, so more energy is needed to separate them. Dimethyl ether has the same molecular formula but no O-H hydrogen, and propane and ethane have only van der Waals forces, so all three boil well below ethanol.",
+      "commonMistake": "Choosing dimethyl ether because it has the same molecular formula as ethanol."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Phenol is much more acidic than ethanol because:",
+      "options": [
+        "phenol contains a benzene ring, which is electron donating",
+        "the O-H bond of phenol is weaker than that of ethanol",
+        "the phenoxide ion is stabilised by delocalisation of the negative charge into the ring",
+        "ethanol is a stronger base than phenol"
+      ],
+      "correctIndex": 2,
+      "answer": "the phenoxide ion is stabilised by delocalisation of the negative charge into the ring",
+      "explanation": "When phenol loses a proton the negative charge on the oxygen is delocalised onto the ortho and para carbons of the ring by resonance, which stabilises the ion greatly. In ethoxide the charge stays on a single oxygen, so the ion is much less stable and ethanol is a far weaker acid.",
+      "commonMistake": "Assuming that the benzene ring donates electrons and therefore stabilises the anion, when the stabilisation comes from delocalisation of the charge."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which alcohol gives immediate cloudiness with Lucas reagent at room temperature?",
+      "options": [
+        "propan-2-ol",
+        "methanol",
+        "2-methylpropan-2-ol",
+        "propan-1-ol"
+      ],
+      "correctIndex": 2,
+      "answer": "2-methylpropan-2-ol",
+      "explanation": "2-Methylpropan-2-ol is tertiary, so it ionises to a tertiary carbocation that is stabilised by three alkyl groups. The chloride forms at once and the insoluble alkyl chloride shows as cloudiness, whereas the secondary alcohol takes several minutes and the primary alcohols react only on heating.",
+      "commonMistake": "Choosing propan-2-ol, which is secondary and gives cloudiness only after about five minutes."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The ease of dehydration of alcohols with concentrated sulphuric acid follows the order:",
+      "options": [
+        "all three react at the same rate",
+        "secondary > tertiary > primary",
+        "primary > secondary > tertiary",
+        "tertiary > secondary > primary"
+      ],
+      "correctIndex": 3,
+      "answer": "tertiary > secondary > primary",
+      "explanation": "Dehydration proceeds through a carbocation when the alcohol is secondary or tertiary, and the stability order of carbocations is tertiary > secondary > primary. The more stable the carbocation, the lower the activation energy and the faster the dehydration.",
+      "commonMistake": "Reversing the order by thinking that the less hindered primary alcohol must react fastest, which is the SN2 pattern."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-05",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement about phenol is correct?",
+      "options": [
+        "It reacts with sodium bicarbonate but not with sodium hydroxide",
+        "It reacts with neither sodium hydroxide nor sodium bicarbonate",
+        "It reacts with sodium hydroxide but does not liberate carbon dioxide from sodium bicarbonate",
+        "It reacts with both, liberating carbon dioxide in each case"
+      ],
+      "correctIndex": 2,
+      "answer": "It reacts with sodium hydroxide but does not liberate carbon dioxide from sodium bicarbonate",
+      "explanation": "Phenol is acidic enough to be neutralised by sodium hydroxide, giving sodium phenoxide, but it is weaker than carbonic acid, so it cannot displace carbon dioxide from a bicarbonate. Carboxylic acids, which are stronger than carbonic acid, do give carbon dioxide, and that difference is the standard test between the two.",
+      "commonMistake": "Assuming that any acidic compound will liberate carbon dioxide from bicarbonate."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The Williamson synthesis gives the best yield of an ether when the alkyl halide used is:",
+      "options": [
+        "aryl",
+        "secondary",
+        "primary",
+        "tertiary"
+      ],
+      "correctIndex": 2,
+      "answer": "primary",
+      "explanation": "The alkoxide attacks the halide by an SN2 pathway, so an unhindered primary halide is substituted efficiently. Secondary halides give considerable elimination, tertiary halides give almost entirely elimination, and aryl halides are unreactive towards nucleophilic substitution.",
+      "commonMistake": "Choosing the tertiary halide because tertiary halides are most reactive in SN1, which is not the mechanism operating here."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Oxidation of propan-2-ol with acidified potassium dichromate gives:",
+      "options": [
+        "propene",
+        "propanone",
+        "propanal",
+        "propanoic acid"
+      ],
+      "correctIndex": 1,
+      "answer": "propanone",
+      "explanation": "Propan-2-ol is a secondary alcohol, so oxidation removes the hydrogen from the hydroxyl-bearing carbon and forms a carbonyl group without any further change. The product is the ketone propanone, which resists further oxidation because its carbonyl carbon carries no hydrogen.",
+      "commonMistake": "Choosing propanoic acid, which would require a primary alcohol."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following does not react with sodium metal to liberate hydrogen?",
+      "options": [
+        "Diethyl ether",
+        "Phenol",
+        "Ethanol",
+        "Propan-1-ol"
+      ],
+      "correctIndex": 0,
+      "answer": "Diethyl ether",
+      "explanation": "Sodium liberates hydrogen from compounds that have a hydrogen attached to an electronegative atom such as oxygen. Ethanol, propan-1-ol and phenol all have an O-H group, but diethyl ether has oxygen bonded to two carbon atoms and no hydrogen on oxygen, so it does not react.",
+      "commonMistake": "Assuming that any oxygen-containing compound will react with sodium."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Phenol gives a violet colouration with neutral ______ solution.",
+      "answer": "ferric chloride",
+      "explanation": "Phenol forms a coloured complex with iron(III) ions, giving a violet colour with neutral ferric chloride. The test is characteristic of phenols and is not given by alcohols, which is why it is used to distinguish ethanol from phenol.",
+      "commonMistake": "Writing copper sulphate, which does not give this test."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Ethanol heated with concentrated sulphuric acid at 443 K gives ______ as the main organic product.",
+      "answer": "ethene",
+      "explanation": "At 443 K concentrated sulphuric acid dehydrates ethanol, removing the hydroxyl group and a hydrogen from the adjacent carbon to form the carbon-carbon double bond of ethene. At a lower temperature of about 413 K the same reagents give diethyl ether instead.",
+      "commonMistake": "Writing diethyl ether, which is formed at the lower temperature."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The Reimer-Tiemann reaction of phenol with chloroform and sodium hydroxide gives ______.",
+      "answer": "salicylaldehyde",
+      "explanation": "Chloroform and alkali generate dichlorocarbene, which attacks the activated ring of phenoxide mainly at the ortho position. Hydrolysis of the intermediate gives salicylaldehyde, that is 2-hydroxybenzaldehyde.",
+      "commonMistake": "Writing salicylic acid, which is the product of Kolbe's reaction with carbon dioxide."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why phenol is more acidic than ethanol, referring to the species formed when each loses a proton.",
+      "answer": "Phenol loses a proton to give the phenoxide ion, in which the negative charge is delocalised from the oxygen onto the ortho and para carbons of the ring by resonance, so the ion is stabilised over four positions. Ethanol loses a proton to give the ethoxide ion, in which the charge remains localised on a single oxygen atom. The greater stability of the phenoxide ion makes phenol far more willing to lose its proton, so phenol is more acidic.",
+      "explanation": "The comparison is between the stabilities of the two conjugate bases, and resonance delocalisation is what makes the phenoxide ion the more stable of the two.",
+      "commonMistake": "Saying that phenol is acidic because it contains a benzene ring, without explaining the delocalisation of charge."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-13",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Ethanol and dimethyl ether have the same molecular formula, yet ethanol boils at 351 K and dimethyl ether at 248 K. Explain.",
+      "answer": "Ethanol has a hydrogen attached directly to oxygen, so its molecules form intermolecular hydrogen bonds, and extra energy is needed to break these before the liquid can vaporise. Dimethyl ether has oxygen bonded only to carbon and no hydrogen on oxygen, so it cannot donate a hydrogen bond and its molecules are held together only by weaker dipole-dipole and van der Waals forces. The hydrogen bonding in ethanol is therefore responsible for its much higher boiling point.",
+      "explanation": "Both molecules have the same molar mass, so the difference cannot be a mass effect; it comes entirely from the different hydrogen-bonding capability of the two functional groups.",
+      "commonMistake": "Attributing the difference to molecular mass, which is identical for the two compounds."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Describe how the Lucas test distinguishes propan-1-ol, propan-2-ol and 2-methylpropan-2-ol.",
+      "answer": "Lucas reagent is anhydrous zinc chloride in concentrated hydrochloric acid and converts the alcohol into the alkyl chloride, which separates as a cloudiness because it is insoluble in the reagent. 2-Methylpropan-2-ol is tertiary and gives cloudiness immediately at room temperature. Propan-2-ol is secondary and gives cloudiness within about five minutes. Propan-1-ol is primary and gives no cloudiness at room temperature, reacting only on heating.",
+      "explanation": "The rate of cloudiness follows the stability of the carbocation formed in the substitution, so the test separates the three classes of alcohol in a single experiment.",
+      "commonMistake": "Reversing the order and expecting the primary alcohol to react fastest."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Give the equation for the reaction of phenol with sodium hydroxide and explain why the reaction goes essentially to completion.",
+      "answer": "C6H5OH + NaOH gives C6H5ONa + H2O. The reaction is essentially complete because phenol is a stronger acid than water, so the equilibrium lies towards the phenoxide ion, and the phenolic proton is removed by the hydroxide. The phenoxide ion is stabilised by resonance, which is what makes phenol acidic enough for this reaction to occur, unlike ethanol.",
+      "explanation": "Acid-base equilibria favour the weaker acid and the weaker base, so phenol reacting with hydroxide to give phenoxide and water shows that phenol is the stronger acid of the two.",
+      "commonMistake": "Writing that phenol is neutralised because it is a strong acid, when it is only weakly acidic."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain how a Grignard reagent can be used to prepare a primary, a secondary and a tertiary alcohol, giving one equation for each.",
+      "answer": "A Grignard reagent adds across the carbonyl double bond to give a magnesium alkoxide, which is hydrolysed by dilute acid to the alcohol, and the carbon of the carbonyl group becomes the carbon bearing the hydroxyl group. With methanal the product is a primary alcohol, because the carbonyl carbon carries two hydrogens and gains only one new carbon group: CH3MgBr + HCHO gives, after hydrolysis, ethanol. With any other aldehyde the product is a secondary alcohol, because the carbonyl carbon already carries one alkyl group: CH3MgBr + CH3CHO gives, after hydrolysis, propan-2-ol. With a ketone the product is a tertiary alcohol, because the carbonyl carbon carries two alkyl groups: CH3MgBr + CH3COCH3 gives, after hydrolysis, 2-methylpropan-2-ol.",
+      "explanation": "The class of alcohol is determined entirely by how many alkyl groups are already attached to the carbonyl carbon, which is why the three cases follow from the three kinds of carbonyl compound.",
+      "commonMistake": "Forgetting the hydrolysis step, or placing the new alkyl group on the wrong carbon."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe the chemical properties of phenol with respect to its acidic character, its reaction with bromine water, Kolbe's reaction and the Reimer-Tiemann reaction.",
+      "answer": "Phenol is acidic because the phenoxide ion formed on loss of a proton is stabilised by resonance, so it dissolves in sodium hydroxide to give sodium phenoxide and reacts with sodium metal to give hydrogen. With bromine water it gives 2,4,6-tribromophenol as a white precipitate without any catalyst, because the hydroxyl group activates the ring strongly towards electrophilic substitution and directs ortho and para. In Kolbe's reaction sodium phenoxide is treated with carbon dioxide at about 400 K under pressure, and acidification gives salicylic acid, with the carboxyl group entering mainly ortho to the hydroxyl group. In the Reimer-Tiemann reaction phenol is treated with chloroform and aqueous sodium hydroxide, and dichlorocarbene attacks the ring to give salicylaldehyde after hydrolysis.",
+      "explanation": "All four reactions depend on the same feature, the electron-rich ring activated by the hydroxyl group, and the two named reactions are simply different electrophiles attacking the ortho position.",
+      "commonMistake": "Writing that bromination of phenol needs a Lewis acid catalyst, which is true for benzene but not for phenol."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe the Williamson synthesis of ethers, explain why primary halides are preferred, and describe the cleavage of an ether by hydrogen iodide.",
+      "answer": "In the Williamson synthesis a sodium alkoxide reacts with an alkyl halide, and the oxygen of the alkoxide displaces the halide to become the ether oxygen: R-O-Na + R'-X gives R-O-R' + NaX. The reaction is a nucleophilic substitution, so a primary halide gives the best yield because the carbon is unhindered and substitution competes successfully with elimination; secondary halides give appreciable elimination and tertiary halides give almost only elimination. Cleavage by concentrated hydrogen iodide begins with protonation of the ether oxygen, after which iodide attacks one alkyl group and displaces the other as an alcohol. With excess hydrogen iodide the alcohol is converted further into an alkyl iodide, and for an unsymmetrical ether the smaller group is attacked, so methyl propyl ether gives iodomethane and propan-1-ol.",
+      "explanation": "Both the formation and the cleavage of an ether are nucleophilic substitutions at carbon, which is why the same steric preference for the less hindered group appears in both.",
+      "commonMistake": "Stating that cleavage attacks the larger group, when iodide attacks the smaller, less hindered one."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Convert ethanol into propan-1-ol, naming the reagents and the intermediate at each stage.",
+      "answer": "Ethanol is first converted into bromoethane by heating with phosphorus tribromide, or with hydrogen bromide and sulphuric acid. Bromoethane is then heated with potassium cyanide in aqueous ethanol to give propanenitrile, which contains one more carbon than bromoethane. Propanenitrile is reduced with lithium aluminium hydride, or with hydrogen over a nickel catalyst, to give propan-1-ol. The sequence is ethanol to bromoethane to propanenitrile to propan-1-ol.",
+      "explanation": "The only way to lengthen the chain by one carbon in this syllabus is through cyanide, and the nitrile is then reduced to the primary alcohol, so the route is a standard three-step conversion.",
+      "commonMistake": "Trying to add a carbon directly to ethanol, which no reagent in the syllabus does."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "10.0 g of ethanol is oxidised to ethanoic acid with acidified potassium dichromate. Calculate the mass of ethanoic acid obtained if the yield is 85 percent. Molar masses: ethanol 46.0, ethanoic acid 60.0 g mol^-1.",
+      "answer": "Moles of ethanol = 10.0 / 46.0 = 0.217 mol. One mole of ethanol gives one mole of ethanoic acid, so the theoretical mass is 0.217 x 60.0 = 13.0 g. At 85 percent yield the actual mass is 0.85 x 13.0 = 11.1 g of ethanoic acid.",
+      "explanation": "The oxidation converts the primary alcohol through the aldehyde to the acid without changing the number of carbon atoms, so the stoichiometry is one to one and only the yield correction remains.",
+      "commonMistake": "Using the molar mass of ethanal, which is the intermediate rather than the final product."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Arrange phenol, 4-nitrophenol and 4-methylphenol in order of increasing acidity and explain the order.",
+      "answer": "The order of increasing acidity is 4-methylphenol, then phenol, then 4-nitrophenol. A methyl group releases electron density by its inductive effect, which destabilises the phenoxide ion and makes 4-methylphenol a weaker acid than phenol. A nitro group withdraws electron density strongly by both its inductive and its resonance effects, which stabilises the phenoxide ion and makes 4-nitrophenol a much stronger acid. Since the acid strength depends on the stability of the conjugate base, electron-withdrawing substituents increase acidity and electron-releasing substituents decrease it.",
+      "explanation": "The substituent effects are largest at the para position because that is one of the positions onto which the negative charge is delocalised, so a group there can stabilise or destabilise the ion most effectively.",
+      "commonMistake": "Treating the methyl group as electron withdrawing because carbon is more electronegative than hydrogen."
+    },
+    {
+      "id": "isc-12-chem-q-alcohols-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Give one chemical test to distinguish each of the following pairs, stating the observation: ethanol and phenol, propan-1-ol and propan-2-ol, ethanol and diethyl ether, phenol and benzoic acid.",
+      "answer": "Ethanol and phenol are distinguished by neutral ferric chloride: phenol gives a violet colour, ethanol gives no colour. Propan-1-ol and propan-2-ol are distinguished by Lucas reagent: propan-2-ol gives cloudiness within about five minutes, while propan-1-ol reacts only on heating. Ethanol and diethyl ether are distinguished by sodium metal: ethanol liberates hydrogen with brisk effervescence, while diethyl ether does not react. Phenol and benzoic acid are distinguished by sodium bicarbonate: benzoic acid liberates carbon dioxide, while phenol gives no gas.",
+      "explanation": "Each test exploits a specific structural difference: the phenolic hydroxyl for the iron complex, the carbocation stability for the Lucas test, the acidic hydroxyl hydrogen for sodium, and the relative acid strength for the bicarbonate test.",
+      "commonMistake": "Using the ferric chloride test for the phenol and carboxylic acid pair, since benzoic acid also gives a coloured complex with iron(III)."
+    }
+  ]
+}

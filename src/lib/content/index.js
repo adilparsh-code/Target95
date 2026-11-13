@@ -4,6 +4,7 @@
 import { getPracticeUrl as buildPracticeUrl } from "@/lib/practiceUrls";
 import { validateCatalog } from "@/content/validate.mjs";
 import { getCatalog } from "./staticSource";
+import { questionBelongsToChapter } from "@/content/normalize.mjs";
 
 export function getChapters({ subject } = {}) {
   const { chapters } = getCatalog();
@@ -23,7 +24,7 @@ export function getQuestions({ chapter, type, difficulty } = {}) {
   const chapterId = chapter ? aliasIndex.get(chapter) || chapter : null;
   return questions.filter(
     (question) =>
-      (!chapterId || question.chapterId === chapterId) &&
+      (!chapterId || questionBelongsToChapter(question, chapterId)) &&
       (!type || question.type === type) &&
       (!difficulty || question.difficulty === difficulty),
   );

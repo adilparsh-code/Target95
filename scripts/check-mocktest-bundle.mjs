@@ -33,17 +33,18 @@ const probes = sentinels.map((item) => ({ id: item.id, text: plain(item.text) })
 
 const readText = (file) => fs.readFileSync(file, "utf8");
 const sourceIds = questions.map((q) => q.sourceId);
-// A chunk "contains the content-engine bank" when it embeds catalog ids (unique to the data) or a
-// large number of explanation fragments. One to a few fragment matches are ordinary phrases that
-// also exist in study chapters or in the legacy mock-test bank (reported separately, see below).
+// A chunk "contains the content-engine bank" when it embeds a large number of explanation
+// fragments (answer-bearing text). Question ids alone do NOT count: the answer-free search
+// projection legitimately carries ids and question text. One to a few fragment matches are
+// ordinary phrases that also exist in study chapters or in the legacy mock-test bank.
 const MIN_PROBES_FOR_BANK = 10;
 function scan(file) {
   const content = readText(file);
   const ids = sourceIds.filter((id) => content.includes(`"${id}"`) || content.includes(`'${id}'`)).length;
   const fragments = probes.filter((probe) => content.includes(probe.text)).length;
-  return { ids, fragments, isBank: ids > 0 || fragments >= MIN_PROBES_FOR_BANK };
+  return { ids, fragments, isBank: fragments >= MIN_PROBES_FOR_BANK, answerFreeIndex: fragments < MIN_PROBES_FOR_BANK && ids >= 100 };
 }
-const countHits = (file) => { const { ids, fragments, isBank } = scan(file); return isBank ? Math.max(ids, fragments) : 0; };
+const countHits = (file) => { const { fragments, isBank } = scan(file); return isBank ? fragments : 0; };
 const overlapOnly = (file) => { const { ids, fragments, isBank } = scan(file); return !isBank && fragments > 0 ? fragments : 0; };
 
 // Static chunks of a route: every `static/chunks/*.js` named in its client-reference manifest
@@ -57,6 +58,20 @@ function staticChunksFor(routeDir) {
   return [...chunks];
 }
 
+// Chunk-to-chunk references: dynamic imports appear as "static/chunks/<name>.js" literals.
+const chunkRefs = (chunk) => {
+  const file = path.join(nextDir, chunk);
+  if (!fs.existsSync(file)) return [];
+  return [...new Set([...readText(file).matchAll(/static\/chunks\/[A-Za-z0-9_\-./]+?\.js/g)].map((match) => match[0]))];
+};
+// Everything a route can load: its static chunks plus every chunk reachable through dynamic imports.
+function reachableChunks(start) {
+  const seen = new Set(start);
+  const queue = [...start];
+  while (queue.length) for (const next of chunkRefs(queue.shift())) if (!seen.has(next)) { seen.add(next); queue.push(next); }
+  return [...seen];
+}
+
 const ROUTES = ["mock-test", "mock-test/instructions", "mock-test/player", "mock-test/result"];
 let failures = 0;
 console.log(`Probes: ${probes.length} explanation fragments from ${questions.length} deliverable questions.`);
@@ -67,6 +82,21 @@ for (const route of ROUTES) {
   console.log(`/${route}: ${chunks.length} static chunks, ${hits.length} embed the content-engine bank, ${overlaps.length} share a few phrases with legacy/study text`);
   for (const item of hits) { console.log(`  LEAK ${item.chunk} (${item.hits} matches)`); failures += 1; }
   for (const item of overlaps) console.log(`  note ${item.chunk}: ${item.n} explanation phrase(s) also present in legacy/study copy (not the bank)`);
+  // Dynamic reachability: anything the page can load on demand (global search in the Navbar included).
+  const reachable = reachableChunks(chunks);
+  const dynamicBank = reachable.filter((chunk) => !chunks.includes(chunk) && countHits(path.join(nextDir, chunk)) > 0);
+  const dynamicIndex = reachable.filter((chunk) => !chunks.includes(chunk) && scan(path.join(nextDir, chunk)).answerFreeIndex);
+  console.log(`  reachable on demand: ${reachable.length - chunks.length} more chunks; ${dynamicIndex.length} answer-free search index, ${dynamicBank.length} embedding the bank`);
+  for (const chunk of dynamicBank) { console.log(`  LEAK (on demand) ${chunk}`); failures += 1; }
+}
+
+// Positive control: the practice routes DO ship the bank. If the detector cannot see it there,
+// a clean result above would mean nothing, so fail loudly.
+for (const route of ["bookmarks", "question-bank"]) {
+  const chunks = staticChunksFor(route);
+  const found = reachableChunks(chunks).filter((chunk) => countHits(path.join(nextDir, chunk)) > 0);
+  console.log(`control /${route}: detector sees ${found.length} bank chunk(s)${found.length ? " (expected)" : " - DETECTOR BROKEN"}`);
+  if (!found.length) failures += 1;
 }
 
 const onDemand = [];
@@ -82,7 +112,7 @@ const walk = (dir) => {
 };
 walk(path.join(nextDir, "static/chunks"));
 console.log(`Client chunks anywhere that contain content-engine answer text: ${onDemand.length}`);
-for (const item of onDemand) console.log(`  ${item.file} (${item.hits} probes) - loaded on demand, not by the mock-test pages`);
+for (const item of onDemand) console.log(`  static/${item.file.replace(/^static\//, "")} (${item.hits} probes) - only reachable from practice routes (verified above)`);
 
-if (failures > 0) { console.error(`FAIL: ${failures} static mock-test chunk(s) expose answer text.`); process.exit(1); }
-console.log("PASS: no mock-test route loads content-engine answer text statically.");
+if (failures > 0) { console.error(`FAIL: ${failures} mock-test chunk(s) expose or can reach answer text.`); process.exit(1); }
+console.log("PASS: no mock-test route loads, or can reach on demand, content-engine answer text.");

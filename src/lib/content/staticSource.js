@@ -7,7 +7,8 @@ import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 import { getStudyChapters, resolveStudyChapter } from "@/lib/studyCenter";
 import { CANONICAL_TO_STUDY_SLUG } from "@/lib/studyChapterIdentity";
 import { questionBankQuestions } from "@/lib/questionBank";
-import { toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
+import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
+import { buildQuestionChapterAssociations, toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
 
 const SUBJECT_ID = "java";
 const QUESTION_SOURCE = "question-bank";
@@ -60,11 +61,15 @@ function buildAliasIndex(chapters) {
 }
 
 function buildQuestions(aliasIndex) {
+  const chapterIdsByQuestionId = buildQuestionChapterAssociations(chapterQuestionBankBySlug, aliasIndex);
+
   return questionBankQuestions.map((raw) => {
     const slug = raw.chapterSlug || raw.chapter;
     // Unresolvable slugs are kept as-is so the validator reports them as orphans
     // instead of the engine silently dropping student-visible questions.
-    return toUnifiedQuestion(raw, { chapterId: aliasIndex.get(slug) || slug, source: QUESTION_SOURCE });
+    const chapterId = aliasIndex.get(slug) || slug;
+    const chapterIds = chapterIdsByQuestionId.get(String(raw.id)) || [chapterId];
+    return toUnifiedQuestion(raw, { chapterId, chapterIds, source: QUESTION_SOURCE });
   });
 }
 
@@ -76,7 +81,13 @@ export function getCatalog() {
   const chapters = buildChapters();
   const aliasIndex = buildAliasIndex(chapters);
   const questions = buildQuestions(aliasIndex);
-  const counts = questions.reduce((map, question) => map.set(question.chapterId, (map.get(question.chapterId) || 0) + 1), new Map());
+  const counts = new Map();
+  for (const question of questions) {
+    const chapterIds = question.chapterIds || [question.chapterId];
+    for (const chapterId of new Set(chapterIds)) {
+      counts.set(chapterId, (counts.get(chapterId) || 0) + 1);
+    }
+  }
   cached = {
     chapters: chapters.map((chapter) => ({ ...chapter, questionCount: counts.get(chapter.id) || 0 })),
     questions,

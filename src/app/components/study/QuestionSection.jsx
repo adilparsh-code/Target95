@@ -87,7 +87,7 @@ export default function QuestionSection({ chapter, questions }) {
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <Link
-                    href={q.board === "ICSE" && q.practiceHref ? q.practiceHref : `/Java/${chapter}/question/${q.id}`}
+                    href={`/Java/${chapter}/question/${q.id}`}
                     className="rounded-xl bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-700"
                   >
                     Solve

@@ -14,12 +14,20 @@
 import mockTestQuestions from "../app/data/mock-test/mockTestQuestions.js";
 import { getCBSEMockQuestions } from "../app/data/cbse/mock-tests-2026-27.js";
 import { evaluateMockTestAnswer, sanitizeText } from "./mocktest.js";
+import { canonicalIdFor } from "../content/identity.mjs";
 
 export const MAX_ATTEMPT_QUESTIONS = 100;
 export const MAX_ATTEMPT_DURATION_MINUTES = 300;
 export const MAX_ANSWER_CHARS = 5000;
 /** Grace period for network latency when checking the time limit. */
 export const SUBMIT_GRACE_SECONDS = 120;
+
+/**
+ * Content-engine questions enter an attempt under a namespaced id so they can never
+ * collide with the 28 legacy numeric ids (or CBSE ids). Legacy ids are never prefixed.
+ */
+export const CONTENT_ID_PREFIX = "ce:";
+export const isContentQuestionId = (id) => String(id).startsWith(CONTENT_ID_PREFIX);
 
 const VALID_BOARDS = new Set(["ICSE", "ISC", "CBSE"]);
 const VALID_MODES = new Set(["exam", "practice"]);
@@ -78,6 +86,17 @@ export function normalizeAttemptConfig(raw = {}) {
   return { board, category, classNumber, subjectCode, subject, difficulty, type, chapter, mode, count, duration };
 }
 
+/**
+ * A legacy question matches a chapter filter when the slugs are equal or name the same
+ * canonical chapter ("arrays" and "arrays-1d"). Strictly wider than the old equality test,
+ * so every filter that matched before still matches the same questions.
+ */
+function chapterMatches(questionChapter, selectedChapter) {
+  if (questionChapter === selectedChapter) return true;
+  const canonical = canonicalIdFor(selectedChapter);
+  return Boolean(canonical) && canonicalIdFor(questionChapter) === canonical;
+}
+
 /** The filtered question pool for a configuration (same rules as the player). */
 export function buildMockTestPool(config) {
   const { board, classNumber, subjectCode, category, difficulty, type, chapter } = config;
@@ -95,7 +114,7 @@ export function buildMockTestPool(config) {
         q.category === category &&
         (difficulty === "all" || q.difficulty === difficulty) &&
         (type === "mixed" || q.type === type) &&
-        (chapter === "all" || q.chapter === chapter)
+        (chapter === "all" || chapterMatches(q.chapter, chapter))
     );
   }
   return pool;
@@ -120,9 +139,13 @@ export function getMockTestChapterOptions(category) {
     .sort((a, b) => a.label.localeCompare(b.label));
 }
 
-/** Pick the question ids for a new attempt. `random` is injectable for tests. */
-export function selectAttemptQuestionIds(config, random = Math.random) {
-  const pool = buildMockTestPool(config);
+/**
+ * Pick the question ids for a new attempt. `random` is injectable for tests.
+ * `extraPool` adds server-built content-engine questions (already namespaced);
+ * without it the behaviour is exactly the legacy one.
+ */
+export function selectAttemptQuestionIds(config, random = Math.random, { extraPool = [] } = {}) {
+  const pool = extraPool.length ? [...buildMockTestPool(config), ...extraPool] : buildMockTestPool(config);
   const shuffled = [...pool];
   for (let i = shuffled.length - 1; i > 0; i -= 1) {
     const j = Math.floor(random() * (i + 1));
@@ -148,21 +171,67 @@ export function sanitizeAnswers(questionIds, rawAnswers) {
   return answers;
 }
 
+const legacyQuestionsById = new Map(mockTestQuestions.map((question) => [String(question.id), question]));
+
+/**
+ * Fields a student may see before submitting. Everything else (answer, answerIndex,
+ * correctAnswer, explanation, hint, tags) stays on the server. Used for every
+ * pre-submission payload, legacy and content-engine alike.
+ */
+export function toClientQuestion(question) {
+  return {
+    id: String(question.id),
+    type: String(question.type || "mcq"),
+    difficulty: String(question.difficulty || ""),
+    question: String(question.question || question.prompt || ""),
+    options: Array.isArray(question.options) ? question.options.map(String) : [],
+    marks: Number(question.marks) > 0 ? Number(question.marks) : 1,
+    topic: String(question.topic || ""),
+    chapter: String(question.chapter || ""),
+  };
+}
+
+/** Post-submission reveal: what the student sees after the server has graded. */
+export function buildReveal(questions) {
+  return questions.map((question) => ({
+    questionId: String(question.id),
+    correctAnswer: String(question.answer ?? question.correctAnswer ?? ""),
+    explanation: String(question.explanation || ""),
+  }));
+}
+
+/**
+ * Resolve the stored question ids of an attempt to full (server-side) questions.
+ * Legacy ids resolve directly from the bundled bank, falling back to the config pool
+ * (CBSE). Namespaced ids resolve through `resolveContentQuestion`, which only the
+ * server supplies. Returns undefined entries for anything that cannot be resolved.
+ */
+export function resolveAttemptQuestions(config, questionIds, { resolveContentQuestion } = {}) {
+  let configPool = null;
+  return questionIds.map((id) => {
+    if (isContentQuestionId(id)) return resolveContentQuestion ? resolveContentQuestion(id) : undefined;
+    const legacy = legacyQuestionsById.get(id);
+    if (legacy) return legacy;
+    configPool ||= new Map(buildMockTestPool(config).map((q) => [String(q.id), q]));
+    return configPool.get(id);
+  });
+}
+
 /**
  * Grade an attempt. `attempt` must be the server-stored record
  * ({ config, questionIds, startedAtMs }); answers are the raw client answers.
  * Throws when the stored questions no longer resolve, so a result is never
- * saved against an incomplete question set.
+ * saved against an incomplete question set. Returns `reveal` separately from the
+ * stored fields: it is sent to the student after grading and is never persisted.
  */
-export function gradeAttempt(attempt, rawAnswers, { nowMs = Date.now() } = {}) {
+export function gradeAttempt(attempt, rawAnswers, { nowMs = Date.now(), resolveContentQuestion } = {}) {
   const config = normalizeAttemptConfig(attempt?.config);
   const questionIds = Array.isArray(attempt?.questionIds) ? attempt.questionIds.map(String) : [];
   if (!questionIds.length || questionIds.length > MAX_ATTEMPT_QUESTIONS || new Set(questionIds).size !== questionIds.length) {
     throw new Error("Invalid attempt question set.");
   }
 
-  const byId = new Map(buildMockTestPool(config).map((q) => [String(q.id), q]));
-  const questions = questionIds.map((id) => byId.get(id));
+  const questions = resolveAttemptQuestions(config, questionIds, { resolveContentQuestion });
   if (questions.some((q) => !q)) throw new Error("Attempt questions could not be resolved.");
 
   const answers = sanitizeAnswers(questionIds, rawAnswers);
@@ -172,8 +241,9 @@ export function gradeAttempt(attempt, rawAnswers, { nowMs = Date.now() } = {}) {
   let marksObtained = 0;
   let totalMarks = 0;
 
-  const review = questions.map((q) => {
-    const userAnswer = answers[String(q.id)] || "";
+  const review = questions.map((q, index) => {
+    const id = questionIds[index];
+    const userAnswer = answers[id] || "";
     const answered = Boolean(sanitizeText(userAnswer));
     const isCorrect = answered && evaluateMockTestAnswer(q, userAnswer);
     const marks = Number(q.marks) > 0 ? Number(q.marks) : 1;
@@ -183,7 +253,8 @@ export function gradeAttempt(attempt, rawAnswers, { nowMs = Date.now() } = {}) {
       correct += 1;
       marksObtained += marks;
     } else wrong += 1;
-    return { questionId: String(q.id), userAnswer: userAnswer || "No answer", isCorrect, marks };
+    const entry = { questionId: id, userAnswer: userAnswer || "No answer", isCorrect, marks };
+    return isContentQuestionId(id) ? { ...entry, source: "content-engine" } : entry;
   });
 
   const totalQuestions = questions.length;
@@ -207,7 +278,10 @@ export function gradeAttempt(attempt, rawAnswers, { nowMs = Date.now() } = {}) {
     accuracy: attempted ? Math.round((correct / attempted) * 100) : 0,
     timeTaken: Math.min(elapsed, totalTime),
     totalTime,
+    // Late submissions are graded and flagged, never rejected: the flag is for display and
+    // analytics. The recorded time is capped at the test duration.
     lateSubmission: elapsed > totalTime + SUBMIT_GRACE_SECONDS,
+    reveal: buildReveal(questions),
   };
 }
 
@@ -217,7 +291,8 @@ export function gradeAttempt(attempt, rawAnswers, { nowMs = Date.now() } = {}) {
  */
 export function buildResultDocument({ uid, attemptId, graded, nowIso = new Date().toISOString() }) {
   if (!uid || typeof uid !== "string") throw new Error("A verified user id is required.");
-  const { config, ...scores } = graded;
+  // `reveal` carries answer keys: it goes to the student, never into the stored result.
+  const { config, reveal: _reveal, ...scores } = graded;
   return {
     userId: uid,
     attemptId: String(attemptId),

@@ -143,3 +143,13 @@ test("study chapters report real, identity-resolved question counts", async () =
   assert.ok(resolveStudyChapter("while-loop").totalQuestions > 0);
   assert.equal(resolveStudyChapter("introduction-to-oop-concepts").totalQuestions, 0);
 });
+
+test("questions carry their class label, so class IX/X/XI can be filtered without guessing from chapters", () => {
+  const { questions, quarantined } = catalog();
+  const counts = {};
+  for (const question of questions) counts[question.class] = (counts[question.class] || 0) + 1;
+  // 549 ICSE X records, 2 of them quarantined and therefore not live.
+  assert.deepEqual(counts, { "ICSE IX": 269, "ICSE X": 547, "ISC XI": 40 });
+  assert.ok(questions.every((question) => question.class), "no live question may lack a class");
+  for (const entry of quarantined) assert.equal(entry.question.class, "ICSE X");
+});

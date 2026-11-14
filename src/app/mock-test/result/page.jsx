@@ -54,6 +54,9 @@ export default function MockTestResultPage() {
         <h1 className="mt-3 text-3xl font-bold text-gray-900 sm:text-4xl">Test Complete!</h1>
         <p className="mt-3 text-base leading-7 text-gray-700">{categoryLabel} — {result.difficulty ? `${result.difficulty.charAt(0).toUpperCase()}${result.difficulty.slice(1)} Difficulty` : "Mixed Difficulty"}</p>
         <p className="mt-1 text-sm text-gray-600">{result.board || "ICSE"} • Class {result.classNumber || "—"}{result.subjectCode ? ` • Code ${result.subjectCode}` : ""}{result.subject ? ` • ${result.subject}` : ""}</p>
+        {result.source === "server-graded" && <p className="mt-3 text-sm font-semibold text-green-700">Scored and saved by Target95.</p>}
+        {result.source === "local" && <p role="status" className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">This test was not connected to your account, so this result is shown on this device only and was not saved.</p>}
+        {result.lateSubmission && <p role="status" className="mt-3 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">This test was submitted after the time limit. It was scored, and the recorded time is capped at the test duration.</p>}
       </div>
 
       <section className="grid gap-6 lg:grid-cols-2" aria-label="Performance analysis">

@@ -36,7 +36,7 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [results, setResults] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const [contentApi, setContentApi] = useState(null);
+  const [searchApi, setSearchApi] = useState(null);
   const inputRef = useRef(null);
   const router = useRouter();
   
@@ -66,17 +66,19 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
     }
   }, [isOpen]);
 
-  // The unified question catalog is large; load it only once search is first opened.
+  // Question search reads an answer-free projection (ids, question text, chapter, tags, difficulty,
+  // type only; no answers or explanations), loaded when search is first opened. It deliberately does
+  // not import the content catalog: search is available on every page, including during a mock test.
   useEffect(() => {
-    if (!isOpen || contentApi) return undefined;
+    if (!isOpen || searchApi) return undefined;
     let cancelled = false;
-    import("@/lib/content").then((api) => {
-      if (!cancelled) setContentApi(api);
+    import("@/lib/content/searchIndex").then((api) => {
+      if (!cancelled) setSearchApi(api);
     });
     return () => {
       cancelled = true;
     };
-  }, [isOpen, contentApi]);
+  }, [isOpen, searchApi]);
 
   useEffect(() => {
     if (!query.trim()) {
@@ -152,23 +154,18 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
           difficulty: q.difficulty,
         });
       });
-    } else if (contentApi) {
-      contentApi.getQuestions().forEach((q) => {
-        const questionChapter = contentApi.getChapter(q.chapterId);
-        const searchText = [q.question, questionChapter?.title, q.chapterSlug, q.subject, ...q.tags]
-          .join(" ")
-          .toLowerCase();
-        if (!searchText.includes(term)) return;
+    } else if (searchApi) {
+      searchApi.searchQuestions(term).forEach((q) => {
         // Filter by board if personalization is active
         if (activeBoard && toBoardId(q.board) !== activeBoard) return;
 
         matched.push({
           id: `question-${q.id}`,
           title: truncate(q.question, QUESTION_TITLE_MAX),
-          description: `${questionChapter?.title || q.chapterSlug} · ${q.difficulty} · ${q.type}`,
-          href: questionChapter ? `/Java/${questionChapter.slug}` : "/question-bank",
+          description: `${q.chapterTitle || q.chapterSlug} · ${q.difficulty} · ${q.type}`,
+          href: q.chapterSlugResolved ? `/Java/${q.chapterSlugResolved}` : "/question-bank",
           type: "question",
-          chapter: questionChapter?.slug || q.chapterSlug,
+          chapter: q.chapterSlugResolved || q.chapterSlug,
           difficulty: q.difficulty,
         });
       });
@@ -176,7 +173,7 @@ export default function StudentGlobalSearch({ isOpen, onClose, personalization }
 
     setResults(matched.slice(0, 12));
     setSelectedIndex(-1);
-  }, [debouncedQuery, chapters, contentApi, activeBoard, activeClass, isCBSEContext, cbseClassNumber, cbseSubjectCode]);
+  }, [debouncedQuery, chapters, searchApi, activeBoard, activeClass, isCBSEContext, cbseClassNumber, cbseSubjectCode]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {

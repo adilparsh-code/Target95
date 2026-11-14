@@ -80,6 +80,7 @@ export const CONTENT_STATUS = Object.freeze({
  * @property {number} estimatedTime    minutes
  * @property {string[]} tags
  * @property {string|null} board       ICSE / ISC / CBSE when the source records it
+ * @property {string|null} class       class label as recorded ("ICSE IX", "ICSE X", "ISC XI"), null when unknown
  * @property {string} subject
  * @property {string} source           name of the system the record came from
  */

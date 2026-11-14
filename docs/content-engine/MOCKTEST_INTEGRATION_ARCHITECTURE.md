@@ -1,6 +1,6 @@
 # Mock-test integration: architecture review and proposal
 
-Status: PROPOSAL ONLY. Read-only audit. No mock-test implementation file, the 28-question bank, attempt persistence, or the two quarantined Number Systems questions were touched. Implementation needs explicit approval.
+Status: PROPOSAL (audit). **Implemented 2026-11-12 on `feat/content-engine-mocktest`; see `MOCKTEST_ROLLOUT_AND_ROLLBACK.md` for what shipped, the flag, rollback and the test traceability.** Differences from this proposal: the second submit replays the stored result (200) instead of returning 409; ISC XI is not enableable by the flag; no rate limit; the bundle audit also reports one on-demand catalog chunk (global search). Original text follows. Read-only audit. No mock-test implementation file, the 28-question bank, attempt persistence, or the two quarantined Number Systems questions were touched. Implementation needs explicit approval.
 
 Audit date 2026-11-11, branch `feat/content-engine-p1` @ `ed415a6`.
 

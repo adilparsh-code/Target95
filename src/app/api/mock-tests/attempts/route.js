@@ -2,14 +2,15 @@ import { NextResponse } from "next/server";
 import { FieldValue } from "firebase-admin/firestore";
 import { getVerifiedSession } from "@/app/lib/server-auth";
 import { getAdminDb } from "@/app/lib/firebase-admin";
-import { normalizeAttemptConfig, selectAttemptQuestionIds } from "@/lib/mocktestAttempts";
 
 export const runtime = "nodejs";
 
 /**
  * POST /api/mock-tests/attempts
- * Starts a server-tracked mock test attempt. The server chooses the question
- * ids and records the start time; the client only receives the ids to render.
+ * Starts a server-tracked mock test attempt. The server chooses the question ids (legacy
+ * questions plus, when enabled for the category, content-engine questions) and records the
+ * start time. The response carries the questions the student may see BEFORE submitting:
+ * text and options only, never answers or explanations.
  * Stored at users/{uid}/mockAttempts/{attemptId}, writable only by the Admin SDK.
  */
 export async function POST(request) {
@@ -34,24 +35,15 @@ export async function POST(request) {
     return NextResponse.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const config = normalizeAttemptConfig(body?.config);
-  const questionIds = selectAttemptQuestionIds(config);
-  if (!questionIds.length) {
-    return NextResponse.json({ ok: false, error: "No questions are available for this test." }, { status: 404 });
-  }
-
   try {
-    const ref = getAdminDb().collection("users").doc(session.uid).collection("mockAttempts").doc();
-    const startedAtMs = Date.now();
-    await ref.set({
-      userId: session.uid,
-      config,
-      questionIds,
-      startedAtMs,
-      status: "in_progress",
-      createdAt: FieldValue.serverTimestamp(),
+    const { startAttempt } = await import("@/lib/mocktestService");
+    const { status, body: payload } = await startAttempt({
+      db: getAdminDb(),
+      uid: session.uid,
+      rawConfig: body?.config,
+      serverTimestamp: () => FieldValue.serverTimestamp(),
     });
-    return NextResponse.json({ ok: true, attemptId: ref.id, questionIds, duration: config.duration, startedAtMs });
+    return NextResponse.json(payload, { status, headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("Mock test attempt start failed:", error);
     return NextResponse.json({ ok: false, error: "Unable to start the test right now." }, { status: 500 });

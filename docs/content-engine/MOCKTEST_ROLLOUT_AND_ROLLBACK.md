@@ -128,7 +128,7 @@ Cause: while the server count for new filters loaded, the setup screen fell back
 
 ## 8. Preview smoke-test record (2026-11-13)
 
-Environment status: Preview deployment `https://target95-hmdp4x2v0-my-self18.vercel.app` was built by Git integration for commit `f13d0a4` (matches the branch head). The Preview flag `MOCKTEST_CE_CATEGORIES=icse-class-10` was **not** set or verified, Production env was **not** inspected, and no test account was available: the Vercel connector failed for the session, the sandbox has no Vercel/Firebase credentials, and the Preview host is unreachable from it. A browser smoke test therefore could not be run. Every browser item is BLOCKED; "automated equivalent" is in-memory evidence only (fake Firestore, local build), not Preview evidence.
+Environment status (updated 2026-11-14): the flag `MOCKTEST_CE_CATEGORIES=icse-class-10` is set for the **Preview** target, scoped to branch `feat/content-engine-mocktest`, and verified by read-back. Production holds 6 variables (all `NEXT_PUBLIC_FIREBASE_*`) and no flag. Preview deployment `dpl_Tus4uimud1nnwHnjZSZXRfwVTBeo` (`https://target95-i0q36y845-my-self18.vercel.app`) was built from commit `17cd94d` and is READY. The project has no Preview-scoped Firebase variables, so Preview cannot validate sessions: `GET /api/mock-tests/availability` returned 503 `Session validation is temporarily unavailable`, and `/mock-test/player` redirects to `/login`. No test accounts exist. A browser smoke test therefore could not be run. Every browser item is BLOCKED; "automated equivalent" is in-memory evidence only (fake Firestore, local build), not Preview evidence.
 
 | # | Check | Preview browser result | Automated equivalent (not a substitute) |
 |---|---|---|---|

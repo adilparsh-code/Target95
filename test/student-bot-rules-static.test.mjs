@@ -15,7 +15,9 @@ function block(source, header) {
   const start = source.indexOf(header);
   assert.ok(start >= 0, `missing ${header}`);
   let depth = 0;
-  for (let i = source.indexOf('{', start); i < source.length; i += 1) {
+  // The block opens at the last '{' on the header line (earlier ones are path variables).
+  const open = source.lastIndexOf('{', source.indexOf('\n', start));
+  for (let i = open; i < source.length; i += 1) {
     if (source[i] === '{') depth += 1;
     if (source[i] === '}') { depth -= 1; if (depth === 0) return source.slice(start, i + 1); }
   }

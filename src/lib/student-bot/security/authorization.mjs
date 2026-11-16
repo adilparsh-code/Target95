@@ -1,7 +1,7 @@
 // Student-only gate over the project's verified session. Fail-closed: any
 // doubt is a denial, and a verifier failure is reported as "unavailable"
 // rather than silently allowing access.
-export async function authorizeStudent(request, { getSession }) {
+export async function authorizeStudent(request, { getSession, getProfileRole }) {
   let session;
   try {
     session = await getSession(request);
@@ -15,6 +15,21 @@ export async function authorizeStudent(request, { getSession }) {
   // claim (default student). Only plain students may use the bot.
   const role = session.admin === true ? 'admin' : session.role || 'student';
   if (role !== 'student') {
+    return { ok: false, status: 403, code: 'forbidden_role', error: 'The study assistant is for student accounts.' };
+  }
+  // Custom claims are only set for admins, so a teacher usually has no `role`
+  // claim. The server-managed profile (the same source firestore.rules trusts)
+  // is therefore checked too, and anything other than 'student' is denied.
+  if (typeof getProfileRole !== 'function') {
+    return { ok: false, status: 503, code: 'auth_unavailable', error: 'Sign-in check is temporarily unavailable.' };
+  }
+  let profileRole;
+  try {
+    profileRole = await getProfileRole(session.uid);
+  } catch {
+    return { ok: false, status: 503, code: 'auth_unavailable', error: 'Sign-in check is temporarily unavailable.' };
+  }
+  if (profileRole !== 'student') {
     return { ok: false, status: 403, code: 'forbidden_role', error: 'The study assistant is for student accounts.' };
   }
   return { ok: true, uid: session.uid };

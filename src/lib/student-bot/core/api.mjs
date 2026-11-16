@@ -33,8 +33,8 @@ async function readJson(request) {
 }
 
 // auth -> rate limit -> body. Failing closed at each step.
-async function gate(request, { getSession, deps }) {
-  const auth = await authorizeStudent(request, { getSession });
+async function gate(request, { getSession, getProfileRole, deps }) {
+  const auth = await authorizeStudent(request, { getSession, getProfileRole });
   if (!auth.ok) return { response: fail(auth.status, auth.code, auth.error) };
   try {
     const limit = await checkRateLimit({ db: deps.db, uid: auth.uid, now: deps.now() });

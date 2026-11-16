@@ -9,7 +9,8 @@ import { makeFakeBotDb } from './helpers/fake-bot-db.mjs';
 import { CONTEXT, makeDeps } from './helpers/bot-deps.mjs';
 
 const req = {};
-const withSession = (session) => authorizeStudent(req, { getSession: async () => session });
+const asStudent = async () => 'student';
+const withSession = (session, getProfileRole = asStudent) => authorizeStudent(req, { getSession: async () => session, getProfileRole });
 
 test('unauthenticated request is 401', async () => {
   assert.equal((await withSession(null)).status, 401);
@@ -20,7 +21,7 @@ test('unauthenticated request is 401', async () => {
 });
 
 test('verifier failure is 503 (fail closed), never an allow', async () => {
-  const result = await authorizeStudent(req, { getSession: async () => { throw new Error('auth down'); } });
+  const result = await authorizeStudent(req, { getSession: async () => { throw new Error('auth down'); }, getProfileRole: asStudent });
   assert.equal(result.ok, false);
   assert.equal(result.status, 503);
 });
@@ -35,7 +36,7 @@ test('admin, teacher and unknown roles are 403; students pass', async () => {
 });
 
 test('the uid always comes from the session, never from request data', async () => {
-  const result = await authorizeStudent({ body: { uid: 'attacker', studentId: 'attacker' } }, { getSession: async () => ({ uid: 'real' }) });
+  const result = await authorizeStudent({ body: { uid: 'attacker', studentId: 'attacker' } }, { getSession: async () => ({ uid: 'real' }), getProfileRole: asStudent });
   assert.equal(result.uid, 'real');
 });
 
@@ -48,7 +49,7 @@ test('inactive users are rejected by the real session verifier the bot uses', as
   for (const profile of [{ status: 'suspended', role: 'student' }, { status: 'active', disabled: true, role: 'student' }, null]) {
     const adminDb = { collection: () => ({ doc: () => ({ get: async () => ({ exists: Boolean(profile), data: () => profile }) }) }) };
     const session = await verifyActiveSession('cookie', { auth, adminDb });
-    const result = await authorizeStudent(req, { getSession: async () => session });
+    const result = await authorizeStudent(req, { getSession: async () => session, getProfileRole: asStudent });
     assert.equal(result.status, 401, JSON.stringify(profile));
   }
 });
@@ -152,4 +153,13 @@ test('progress source drops foreign-owned rows even if one is planted under my p
   const { deps } = makeDeps({ seed });
   const res = await handleMessage({ message: 'my progress', context: {}, uid: 'a', deps });
   assert.ok(!/5\/5/.test(res.text));
+});
+
+test('profile role is authoritative: no claim + profile teacher/admin/missing is 403; lookup errors are 503', async () => {
+  for (const role of ['teacher', 'admin', undefined, null, 'STUDENT']) {
+    assert.equal((await withSession({ uid: 'x' }, async () => role)).status, 403, String(role));
+  }
+  assert.equal((await withSession({ uid: 'x' }, async () => { throw new Error('down'); })).status, 503);
+  assert.equal((await authorizeStudent(req, { getSession: async () => ({ uid: 'x' }) })).status, 503, 'no role lookup configured must fail closed');
+  assert.equal((await withSession({ uid: 'x' }, async (uid) => (uid === 'x' ? 'student' : 'teacher'))).ok, true);
 });

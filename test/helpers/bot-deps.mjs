@@ -21,3 +21,6 @@ export function makeDeps({ seed = {}, now = 1_700_000_000_000, rng = () => 0.5, 
   };
   return { deps, fake, logs };
 }
+
+// Role lookup against the same fake db: users/{uid}.role, like production.
+export const profileRoleFrom = (db) => async (uid) => (await db.collection('users').doc(uid).get()).data()?.role;

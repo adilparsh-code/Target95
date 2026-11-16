@@ -8,7 +8,7 @@ import { makeQuestionLoader } from '../src/lib/student-bot/handlers/quiz.mjs';
 const student = (uid = 'student-a') => async () => ({ uid, role: 'student' });
 const post = (body, { type = 'application/json', raw = false } = {}) =>
   new Request('http://localhost/api/student-bot/chat', { method: 'POST', headers: { 'content-type': type }, body: raw ? body : JSON.stringify(body) });
-const ctxFor = (deps, getSession = student()) => ({ getSession, deps });
+const ctxFor = (deps, getSession = student(), role = 'student') => ({ getSession, getProfileRole: async () => role, deps });
 const read = async (res) => ({ status: res.status, body: await res.json(), headers: res.headers });
 
 test('chat: unauthenticated -> 401, with no reply and no database access', async () => {
@@ -126,4 +126,27 @@ test('health: reports only AI configuration, no secrets, no auth required', asyn
   const { deps } = makeDeps();
   const r = await read(handleHealthRequest({ deps }));
   assert.deepEqual(r.body, { ok: true, ai: { configured: false }, mode: 'deterministic' });
+});
+
+test('chat: a teacher WITHOUT a role claim is still rejected via the profile role', async () => {
+  const { deps, fake } = makeDeps();
+  // Token carries no role/admin claim (as for every non-admin account today).
+  for (const profileRole of ['teacher', 'admin', undefined, null, 'Student', '']) {
+    const r = await handleChatRequest(post({ message: 'help' }), { getSession: async () => ({ uid: 't1' }), getProfileRole: async () => profileRole, deps });
+    assert.equal(r.status, 403, String(profileRole));
+  }
+  assert.equal(fake.paths().length, 0, 'denied callers must not reach the rate limiter or any data');
+});
+
+test('chat: profile lookup failure or missing lookup fails closed with 503', async () => {
+  const { deps } = makeDeps();
+  const failing = { getSession: student(), getProfileRole: async () => { throw new Error('firestore down'); }, deps };
+  assert.equal((await handleChatRequest(post({ message: 'help' }), failing)).status, 503);
+  assert.equal((await handleChatRequest(post({ message: 'help' }), { getSession: student(), deps })).status, 503);
+});
+
+test('quiz submit: claim-less teacher is rejected too', async () => {
+  const { deps } = makeDeps();
+  const r = await handleQuizSubmitRequest(post({ answers: { q: 0 } }), 'abcdefgh12', ctxFor(deps, async () => ({ uid: 't1' }), 'teacher'));
+  assert.equal(r.status, 403);
 });

@@ -15,6 +15,7 @@ export function getRouteContext() {
   const db = getAdminDb();
   return {
     getSession: getVerifiedSession,
+    getProfileRole: async (uid) => (await db.collection("users").doc(uid).get()).data()?.role,
     deps: {
       db,
       boardprep,

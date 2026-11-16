@@ -17,7 +17,7 @@ No pre-existing failures were found in these three. (`build`, `validate:*` and `
 - Session auth is `getVerifiedSession(request)` (`src/app/lib/server-auth.js`): cookie + verified email + active `users/{uid}` profile, fail-closed. The bot reuses it and adds no auth system.
 - Existing student progress (`src/lib/progress/storage.js`) is **browser localStorage only**. The server cannot read it. The only server-side student records are `users/{uid}/mockAttempts`. So "MY PROGRESS" reports (a) the student's own mock-test attempts and (b) the bot's own quiz attempts. Local device progress is never presented as server fact.
 - BoardPrep adapter `src/lib/boardprepCurriculum.mjs` already filters to `status === 'published'`. 94 of 206 chapters are published; all have a chapter file. Many carry `syllabusStatus: "unverified"` — the bot says so instead of implying verified syllabus.
-- Java practice data (`src/app/data/programming/java/questions.js`, ~19 problems) has no hints field. The bot only shows fields that exist (`algorithm` is shown as the hint step, `code` as the sample solution). Nothing is invented.
+- Java practice data (`src/app/data/programming/java/questions.js`, 40 problems) has no hints field. The bot only shows fields that exist (`algorithm` is shown as the hint step, `code` as the sample solution). Nothing is invented.
 - `src/proxy.js` is not touched. API routes enforce auth themselves; the page shows a sign-in link on a 401.
 
 ## Module layout (all new, isolated)
@@ -94,5 +94,11 @@ Security tests do not mock away the checks under test: authorization is tested t
 
 - Chat history is localStorage only (prototype, per spec). No server conversation store; no `conversations` route.
 - Computer Applications chapters are not published in BoardPrep yet, so the bot will honestly report none.
-- Java practice has ~19 problems and no hints field.
+- Java practice has 40 problems and no hints field (the stored `algorithm` text is the hint).
 - Student code is never executed.
+
+## Implementation notes (as built)
+
+- Chapter gating: 24 of the 94 published chapters fail the strict `validateChapterRecord` (missing vocabulary, or question-level answer errors). The adapter blocks a chapter only on structural errors and filters invalid MCQs one by one, so study text stays available and no invalid question is ever served. 65 chapters have fewer than 5 valid MCQs; quizzes are then shorter (minimum 3) and say so.
+- `validate:boardprep` fails on untouched `main` too (hard-coded expected counts 83/1307 vs actual 94/1380). Not modified.
+- Firestore emulator tests (`test/firestore-rules-student-bot.test.mjs`) need the emulator jar, which could not be downloaded in the build sandbox. Only the static guard ran there.

@@ -1746,7 +1746,9 @@ export function searchStudyContent(query, filters = {}) {
     if (sd.relatedTopics && sd.relatedTopics.some((rt) => rt.toLowerCase().includes(q))) matchReasons.push("related-topics");
 
     // Examples
-    if (sd.examples && sd.examples.some((e) => e.title.toLowerCase().includes(q) || e.code.toLowerCase().includes(q))) matchReasons.push("examples");
+    // Some chapters store examples grouped by level ({ basic, intermediate, advanced }) instead of a flat list.
+    const exampleList = Array.isArray(sd.examples) ? sd.examples : Object.values(sd.examples || {}).flat();
+    if (exampleList.some((e) => String(e?.title || "").toLowerCase().includes(q) || String(e?.code || "").toLowerCase().includes(q))) matchReasons.push("examples");
 
     if (matchReasons.length > 0) {
       results.push({

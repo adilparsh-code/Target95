@@ -3,7 +3,6 @@ import { LIMITS } from '../config/commands.mjs';
 const QUESTION_ID = /^[A-Za-z0-9_.-]{1,96}$/;
 const SLUG = /^[a-z0-9][a-z0-9.-]{0,63}$/;
 // Control characters except tab and newline.
-// eslint-disable-next-line no-control-regex
 const CONTROL = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/;
 
 const fail = (code, message) => ({ ok: false, code, message });

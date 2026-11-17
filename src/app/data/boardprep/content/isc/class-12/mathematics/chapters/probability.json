@@ -1,0 +1,778 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-probability",
+  "title": "Probability",
+  "kind": "mathematics",
+  "tagline": "Conditional probability, independence, Bayes' theorem and the mean of a random variable.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 7 — Probability; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Topic selection follows the Unit 7 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 7 carries 10 of the 80 theory marks and develops probability as a tool for reasoning with incomplete information. Conditional probability measures how likely an event is once another event is known to have occurred, and the multiplication theorem turns that idea into a rule for joint occurrence. Independence is the special case in which knowing one event changes nothing about the other. The theorem of total probability breaks a complicated event into cases that form a partition, and Bayes' theorem reverses the conditioning to update a prior belief in the light of evidence. The unit closes by attaching numbers to outcomes: a random variable takes numerical values with specified probabilities, and its mean summarises the distribution by a single expected value.",
+    "facts": [
+      {
+        "label": "Unit weightage",
+        "value": "10 of 80 theory marks"
+      },
+      {
+        "label": "Paper I",
+        "value": "Theory, 3 hours, 80 marks"
+      },
+      {
+        "label": "Paper II",
+        "value": "Project work, 20 marks"
+      },
+      {
+        "label": "Examination year",
+        "value": "2027"
+      },
+      {
+        "label": "Syllabus structure",
+        "value": "Seven compulsory units, no optional section"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Compute conditional probabilities using P(A|B) = P(A ∩ B)/P(B) and interpret the result as probability restricted to a reduced sample space.",
+    "Apply the multiplication theorem to find the probability of the intersection of two or more events.",
+    "Distinguish independent events from mutually exclusive events and test independence using P(A ∩ B) = P(A)P(B).",
+    "Use a partition of the sample space and the theorem of total probability to compute P(A).",
+    "Apply Bayes' theorem to find posterior probabilities and explain how evidence updates a prior probability.",
+    "Construct the probability distribution of a discrete random variable and verify that its probabilities sum to 1.",
+    "Calculate the mean (expected value) of a discrete random variable and interpret it in context."
+  ],
+  "learn": [
+    {
+      "id": "conditional-probability-and-multiplication",
+      "title": "Conditional probability and the multiplication theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The probability of an event A may change when we learn that another event B has occurred. Conditional probability captures this by restricting attention to outcomes in B: only the part of A that lies inside B remains possible, and it is measured relative to B rather than to the whole sample space. This idea immediately gives the multiplication theorem, which expresses the probability that two events occur together as a product of one probability and one conditional probability."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Conditional probability of A given B: P(A|B) = P(A ∩ B)/P(B), defined when P(B) > 0.",
+            "Symmetrically, P(B|A) = P(A ∩ B)/P(A) when P(A) > 0.",
+            "Multiplication theorem: P(A ∩ B) = P(B)P(A|B) = P(A)P(B|A).",
+            "For three events, P(A ∩ B ∩ C) = P(A)P(B|A)P(C|A ∩ B), extending the same reasoning step by step.",
+            "Conditional probability satisfies the usual probability rules on the reduced sample space B: 0 ≤ P(A|B) ≤ 1, P(S|B) = 1, and P(A′|B) = 1 − P(A|B).",
+            "If A and B are mutually exclusive, A ∩ B = ∅ and therefore P(A|B) = 0 when P(B) > 0."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Reading conditional probability in two ways",
+          "columns": [
+            "Expression",
+            "Meaning",
+            "When it is defined"
+          ],
+          "rows": [
+            [
+              "P(A|B)",
+              "Probability of A given that B has occurred",
+              "P(B) > 0"
+            ],
+            [
+              "P(B|A)",
+              "Probability of B given that A has occurred",
+              "P(A) > 0"
+            ],
+            [
+              "P(A ∩ B)",
+              "Probability that A and B occur together",
+              "Always, for events in the sample space"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A fair die is rolled once. Find the probability that the number is even given that it is greater than 3.",
+              "note": "Let B be the event that the number is greater than 3, so B = {4, 5, 6} and P(B) = 3/6. The numbers that are even and greater than 3 are 4 and 6, so A ∩ B = {4, 6} and P(A ∩ B) = 2/6. Hence P(A|B) = (2/6)/(3/6) = 2/3. Restricting to B leaves three equally likely outcomes, of which two are even."
+            },
+            {
+              "text": "Two cards are drawn without replacement from a standard pack. Find the probability that both are aces.",
+              "note": "The probability that the first card is an ace is 4/52. Given that an ace has been drawn, 3 aces remain in 51 cards, so P(second ace | first ace) = 3/51. By the multiplication theorem, P(both aces) = (4/52)(3/51) = 1/221."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "independent-events",
+      "title": "Independent and dependent events",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two events are independent when the occurrence of one does not affect the probability of the other. In that case conditioning does nothing, so P(A|B) = P(A) and the multiplication theorem reduces to a simple product. Independence is a property of probabilities, not a visual feature of the events, and it must not be confused with being mutually exclusive."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Independence: A and B are independent if P(A ∩ B) = P(A)P(B). Equivalently P(A|B) = P(A) when P(B) > 0.",
+            "If A and B are independent, then so are A and B′, A′ and B, and A′ and B′.",
+            "Mutually exclusive events cannot occur together, so A ∩ B = ∅. If both have positive probability, they are dependent, because knowing that B occurred forces P(A|B) = 0.",
+            "Independence is common in repeated trials with replacement or with physically separate devices; dependence is common in draws without replacement.",
+            "For three events, pairwise independence does not by itself guarantee that P(A ∩ B ∩ C) = P(A)P(B)P(C); the syllabus, however, usually uses independence in the direct product sense given in a problem.",
+            "To test independence from data, compare P(A ∩ B) with P(A)P(B) rather than guessing from the description."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Independent events and mutually exclusive events compared",
+          "columns": [
+            "Property",
+            "Independent events",
+            "Mutually exclusive events"
+          ],
+          "rows": [
+            [
+              "Intersection",
+              "P(A ∩ B) = P(A)P(B)",
+              "A ∩ B = ∅, so P(A ∩ B) = 0"
+            ],
+            [
+              "Effect of knowing B",
+              "P(A|B) = P(A)",
+              "P(A|B) = 0 when P(B) > 0"
+            ],
+            [
+              "Can both have positive probability?",
+              "Yes",
+              "Yes, but then they cannot be independent"
+            ],
+            [
+              "Typical example",
+              "Two coin tosses",
+              "Getting a 2 and getting a 5 on one die roll"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A fair coin is tossed and a fair die is rolled. Find the probability of getting a head and an even number.",
+              "note": "The coin and the die do not influence each other, so the events are independent. P(head) = 1/2 and P(even) = 3/6 = 1/2, hence P(head and even) = (1/2)(1/2) = 1/4."
+            },
+            {
+              "text": "Two cards are drawn one after another without replacement from a standard pack. Are the events ‘first card is a king’ and ‘second card is a king’ independent?",
+              "note": "P(first king) = 4/52 = 1/13. But P(second king | first king) = 3/51 = 1/17, which is different from 1/13, so the events are dependent. Removing a card changes the composition of the pack, and with it the probability of the second event."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "total-probability",
+      "title": "The theorem of total probability",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Many probability questions describe an outcome that can arise through several different cases. If those cases cover every possibility without overlapping, they form a partition of the sample space, and the probability of the outcome is the sum of its probabilities through each case. This is the theorem of total probability. It is the natural companion of a tree diagram, in which each branch gives one term of the sum."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A partition of the sample space is a collection of events E₁, E₂, …, Eₙ that are pairwise mutually exclusive and whose union is the whole sample space.",
+            "Theorem of total probability: if E₁, …, Eₙ form a partition and A is any event, then P(A) = Σ P(Eᵢ)P(A|Eᵢ).",
+            "Each term P(Eᵢ)P(A|Eᵢ) is the probability that case Eᵢ occurs and A occurs through that case.",
+            "The probabilities P(Eᵢ) are often called prior probabilities of the cases, and P(A|Eᵢ) the likelihood of A under case Eᵢ.",
+            "Before applying the theorem, check that the cases are exhaustive and do not overlap, and that every conditional probability is taken given the correct case.",
+            "A two-case partition is common: for example a defective item comes from machine I or from machine II."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Box I contains 3 red and 2 blue balls, and Box II contains 2 red and 4 blue balls. A box is chosen at random and one ball is drawn from it. Find the probability that the ball is red.",
+              "note": "Let E₁ be choosing Box I and E₂ choosing Box II, so P(E₁) = P(E₂) = 1/2. Then P(red|E₁) = 3/5 and P(red|E₂) = 2/6 = 1/3. By total probability, P(red) = (1/2)(3/5) + (1/2)(1/3) = 3/10 + 1/6 = (9 + 5)/30 = 14/30 = 7/15."
+            },
+            {
+              "text": "A factory has three machines A, B and C producing 30%, 45% and 25% of the output, with defect rates 2%, 3% and 4% respectively. Find the probability that a randomly chosen item is defective.",
+              "note": "The machines form a partition by source. P(defective) = 0.30×0.02 + 0.45×0.03 + 0.25×0.04 = 0.006 + 0.0135 + 0.010 = 0.0295, so the probability is 59/2000. Each term is the fraction of all items that are both produced by that machine and defective."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bayes-theorem",
+      "title": "Bayes' theorem and posterior probabilities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The theorem of total probability gives the chance of observing an outcome A. Bayes' theorem answers the reverse question: given that A has been observed, how likely is it that a particular case Eᵢ was responsible? It combines the prior probability of each case with the likelihood of the observation under that case, and then renormalises by the total probability of the observation. The result is a posterior probability, an updated belief after seeing the evidence."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Bayes' theorem: if E₁, …, Eₙ form a partition and P(A) > 0, then P(Eᵢ|A) = P(Eᵢ)P(A|Eᵢ) / Σ P(Eⱼ)P(A|Eⱼ).",
+            "The numerator is the probability of case Eᵢ producing A; the denominator is the total probability of A over all cases.",
+            "P(Eᵢ) is the prior probability, P(A|Eᵢ) the likelihood, and P(Eᵢ|A) the posterior probability.",
+            "The posterior probabilities of all the cases given A add to 1, because A must have come from some case in the partition.",
+            "A case with a small prior can still have a large posterior if the observation is much more likely under that case than under the others.",
+            "In worked solutions it is helpful to compute the denominator explicitly as a sum of branch products before dividing."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The parts of Bayes' theorem",
+          "columns": [
+            "Quantity",
+            "Symbol",
+            "Role"
+          ],
+          "rows": [
+            [
+              "Prior of case i",
+              "P(Eᵢ)",
+              "Probability of the case before the observation"
+            ],
+            [
+              "Likelihood",
+              "P(A|Eᵢ)",
+              "Probability of the observation if case i holds"
+            ],
+            [
+              "Joint term",
+              "P(Eᵢ)P(A|Eᵢ)",
+              "Probability that case i occurs and produces A"
+            ],
+            [
+              "Posterior of case i",
+              "P(Eᵢ|A)",
+              "Updated probability of the case given A"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Using the box example: Box I has 3 red and 2 blue balls, Box II has 2 red and 4 blue balls. A box is chosen at random and a red ball is drawn. Find the probability that it came from Box I.",
+              "note": "From total probability, P(red) = (1/2)(3/5) + (1/2)(1/3) = 7/15. The joint probability for Box I and red is (1/2)(3/5) = 3/10. By Bayes' theorem, P(Box I | red) = (3/10)/(7/15) = (3/10)×(15/7) = 9/14. Although the boxes were equally likely at first, the red draw makes Box I more likely because it contains a higher proportion of red balls."
+            },
+            {
+              "text": "A test for a condition is positive in 95% of cases where the condition is present and in 4% of cases where it is absent. The condition is present in 2% of the population. If a person tests positive, find the probability that the condition is present.",
+              "note": "Let C be having the condition and P a positive test. Then P(C)=0.02, P(C′)=0.98, P(P|C)=0.95 and P(P|C′)=0.04. So P(P)=0.02×0.95 + 0.98×0.04 = 0.019 + 0.0392 = 0.0582. Hence P(C|P)=0.019/0.0582 = 190/582 = 95/291, which is about 0.326. Even with a positive test, the condition is still less likely than not because the condition is rare and false positives occur."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "random-variables-distribution-and-mean",
+      "title": "Random variables, probability distributions and mean",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A random variable assigns a numerical value to each outcome of a random experiment. When the variable takes a finite or countable set of values, its probability distribution is the list of those values together with the probability of each. The probabilities must be non-negative and add to 1. The mean, or expected value, is the weighted average of the values, using their probabilities as weights, and it represents the long-run average value of the variable over many repetitions of the experiment."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A discrete random variable X takes values x₁, x₂, …, xₙ with probabilities p₁, p₂, …, pₙ, where each pᵢ ≥ 0 and Σ pᵢ = 1.",
+            "The probability distribution is often written as a table pairing each value xᵢ with P(X = xᵢ).",
+            "Mean (expected value): E(X) = μ = Σ xᵢ pᵢ.",
+            "E(X) need not be one of the possible values of X; for example the mean score on a fair die is 3.5.",
+            "To find the distribution from an experiment, list the numerical value produced by each outcome and add the probabilities of outcomes that give the same value.",
+            "A missing probability in a distribution can be found from the condition Σ pᵢ = 1, provided the value is non-negative."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Probability distribution of the score on a fair die",
+          "columns": [
+            "x",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "rows": [
+            [
+              "P(X = x)",
+              "1/6",
+              "1/6",
+              "1/6",
+              "1/6",
+              "1/6",
+              "1/6"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A fair coin is tossed twice. Let X be the number of heads. Find the probability distribution and the mean of X.",
+              "note": "The sample space is {HH, HT, TH, TT}. X takes the value 0 for TT, 1 for HT or TH, and 2 for HH, so P(X=0)=1/4, P(X=1)=2/4=1/2 and P(X=2)=1/4. These add to 1. The mean is E(X)=0×(1/4)+1×(1/2)+2×(1/4)=0 + 1/2 + 1/2 = 1."
+            },
+            {
+              "text": "The random variable X has the distribution P(X=1)=0.2, P(X=2)=k, P(X=3)=0.5. Find k and E(X).",
+              "note": "The probabilities sum to 1, so 0.2 + k + 0.5 = 1 and k = 0.3. Then E(X)=1×0.2 + 2×0.3 + 3×0.5 = 0.2 + 0.6 + 1.5 = 2.3. The mean 2.3 lies between 1 and 3 even though X never takes the value 2.3."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solving-probability-problems",
+      "title": "Choosing the right probability rule",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The rules in this unit answer different questions, and choosing the wrong one is a common source of error. Conditional probability restricts to a given event, the multiplication theorem builds an intersection, total probability adds over cases, Bayes' theorem reverses the conditioning, and the mean summarises a distribution. A clear first step is to name the events, decide what is given and what is required, and then select the rule that matches that relationship."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "If the question states ‘given that’ or restricts the sample space, use conditional probability.",
+            "If the question asks for A and B together, use the multiplication theorem, with independence only when it is stated or justified.",
+            "If an outcome can happen through several disjoint cases, compute it case by case with total probability.",
+            "If the question asks which case produced an observed outcome, use Bayes' theorem.",
+            "If a numerical value is attached to each outcome, build the probability distribution and compute the mean by Σ xᵢpᵢ.",
+            "Check every answer for sense: probabilities must lie between 0 and 1, conditional and posterior probabilities over a partition must add correctly, and a mean must lie between the smallest and largest possible values."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An urn contains 4 white and 6 black balls. Two balls are drawn in succession without replacement. Find the probability that the second ball is white.",
+              "note": "The second ball can be white in two disjoint ways: white then white, or black then white. By the multiplication theorem and total probability, P = (4/10)(3/9) + (6/10)(4/9) = 12/90 + 24/90 = 36/90 = 2/5. Conditioning on the first draw is essential because the draws are without replacement."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Conditional probability is P(A|B) = P(A ∩ B)/P(B), defined when P(B) > 0, and represents probability on the reduced sample space B.",
+    "The multiplication theorem states P(A ∩ B) = P(A)P(B|A) = P(B)P(A|B).",
+    "Events A and B are independent when P(A ∩ B) = P(A)P(B); mutually exclusive events with positive probability are not independent.",
+    "If E₁, …, Eₙ form a partition, the theorem of total probability gives P(A) = Σ P(Eᵢ)P(A|Eᵢ).",
+    "Bayes' theorem reverses the conditioning: P(Eᵢ|A) = P(Eᵢ)P(A|Eᵢ) / Σ P(Eⱼ)P(A|Eⱼ).",
+    "A discrete random variable has a probability distribution with pᵢ ≥ 0 and Σ pᵢ = 1.",
+    "The mean or expected value is E(X) = Σ xᵢpᵢ and may differ from every actual value of X.",
+    "A probability must lie between 0 and 1, and a correct posterior distribution over a partition sums to 1.",
+    "In without-replacement problems the probabilities change after each draw, so independence cannot be assumed.",
+    "Naming the events and identifying what is given before calculating prevents most probability errors."
+  ],
+  "examFocus": [
+    "Computing P(A|B) from a reduced sample space or from P(A ∩ B) and P(B).",
+    "Using the multiplication theorem for successive draws, especially distinguishing with and without replacement.",
+    "Testing independence by comparing P(A ∩ B) with P(A)P(B), and explaining why mutually exclusive events are not independent.",
+    "Setting up a partition and applying the theorem of total probability, often with a tree diagram in mind.",
+    "Applying Bayes' theorem to find the probability of a source or cause given an observed outcome.",
+    "Constructing a probability distribution table and using Σ pᵢ = 1 to find an unknown probability.",
+    "Calculating the mean E(X) = Σ xᵢpᵢ and interpreting it as a long-run average.",
+    "Checking answers for reasonableness: totals equal to 1, probabilities in [0, 1], and a sensible posterior."
+  ],
+  "vocabulary": [
+    {
+      "word": "Conditional probability",
+      "meaning": "The probability of an event given that another event has occurred, written P(A|B)."
+    },
+    {
+      "word": "Multiplication theorem",
+      "meaning": "The rule P(A ∩ B) = P(A)P(B|A) for the probability of two events occurring together."
+    },
+    {
+      "word": "Independent events",
+      "meaning": "Events for which the occurrence of one does not affect the probability of the other."
+    },
+    {
+      "word": "Mutually exclusive events",
+      "meaning": "Events that cannot occur together, so A ∩ B = ∅."
+    },
+    {
+      "word": "Partition",
+      "meaning": "A set of pairwise disjoint events whose union is the entire sample space."
+    },
+    {
+      "word": "Theorem of total probability",
+      "meaning": "The rule P(A) = Σ P(Eᵢ)P(A|Eᵢ) for an event A over a partition."
+    },
+    {
+      "word": "Prior probability",
+      "meaning": "The probability of a case before observing the evidence, such as P(Eᵢ)."
+    },
+    {
+      "word": "Posterior probability",
+      "meaning": "The updated probability of a case after observing the evidence, such as P(Eᵢ|A)."
+    },
+    {
+      "word": "Bayes' theorem",
+      "meaning": "The rule giving P(Eᵢ|A) in terms of prior probabilities and likelihoods."
+    },
+    {
+      "word": "Random variable",
+      "meaning": "A function that assigns a numerical value to each outcome of an experiment."
+    },
+    {
+      "word": "Probability distribution",
+      "meaning": "A table or rule giving each value of a random variable with its probability."
+    },
+    {
+      "word": "Expected value",
+      "meaning": "The mean E(X) = Σ xᵢpᵢ of a random variable."
+    },
+    {
+      "word": "Likelihood",
+      "meaning": "The probability of the observed event under a particular case, P(A|Eᵢ)."
+    },
+    {
+      "word": "Sample space",
+      "meaning": "The set of all possible outcomes of a random experiment."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Conditional probability as a reduced sample space",
+      "description": "A rectangle represents the sample space S and two overlapping circles inside it represent events A and B. The overlap is shaded and labelled A ∩ B, and the circle for B is outlined more heavily to show that, given B, only outcomes inside B remain possible. A side note indicates that P(A|B) is the ratio of the area of the overlap to the area of B.",
+      "labels": [
+        "sample space S",
+        "event A",
+        "event B",
+        "intersection A ∩ B",
+        "reduced sample space B",
+        "ratio P(A ∩ B)/P(B)"
+      ]
+    },
+    {
+      "caption": "Figure: A probability tree for total probability and Bayes' theorem",
+      "description": "A tree diagram begins at a single node and splits into two branches labelled E₁ and E₂ with probabilities P(E₁) and P(E₂). From each of these nodes two further branches lead to A and A′, labelled with the conditional probabilities P(A|E₁), P(A′|E₁), P(A|E₂) and P(A′|E₂). The products along the A branches are highlighted as the terms whose sum is P(A) and whose ratio gives a posterior probability.",
+      "labels": [
+        "cases E₁ and E₂",
+        "prior probabilities P(E₁), P(E₂)",
+        "conditional branches to A and A′",
+        "branch products P(Eᵢ)P(A|Eᵢ)",
+        "sum giving P(A)",
+        "posterior ratio P(E₁|A)"
+      ]
+    },
+    {
+      "caption": "Figure: A probability distribution shown as a bar chart",
+      "description": "A bar chart plots the values x = 0, 1 and 2 of a random variable on the horizontal axis and their probabilities 1/4, 1/2 and 1/4 on the vertical axis. The bars have heights equal to these probabilities, and a marker on the horizontal axis at x = 1 indicates the mean E(X), showing that the mean is the balance point of the distribution rather than necessarily the tallest bar.",
+      "labels": [
+        "values x = 0, 1, 2",
+        "probabilities 1/4, 1/2, 1/4",
+        "bars of the distribution",
+        "total probability equal to 1",
+        "mean E(X) at 1",
+        "balance point of the distribution"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-prob-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If P(B) = 0.5 and P(A ∩ B) = 0.2, then P(A|B) is",
+      "options": [
+        "0.4",
+        "0.1",
+        "0.7",
+        "0.25"
+      ],
+      "correctIndex": 0,
+      "answer": "0.4",
+      "explanation": "By definition, P(A|B) = P(A ∩ B)/P(B) = 0.2/0.5 = 0.4. The conditional probability is the share of B that also belongs to A, so it is larger than P(A ∩ B) because it is measured relative to B rather than to the whole sample space.",
+      "commonMistake": "Multiplying 0.2 by 0.5 instead of dividing, which would give the intersection only if the events were independent with those probabilities."
+    },
+    {
+      "id": "isc-12-maths-q-prob-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A and B are independent events with P(A) = 0.3 and P(B) = 0.4, then P(A ∩ B) is",
+      "options": [
+        "0.7",
+        "0.12",
+        "0.1",
+        "0.75"
+      ],
+      "correctIndex": 1,
+      "answer": "0.12",
+      "explanation": "For independent events, P(A ∩ B) = P(A)P(B) = 0.3 × 0.4 = 0.12. Independence allows the joint probability to be found as a product without knowing a conditional probability.",
+      "commonMistake": "Adding the probabilities to obtain 0.7, which would not be the probability of the intersection and would in any case exceed 1 if the events were larger."
+    },
+    {
+      "id": "isc-12-maths-q-prob-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two events A and B with positive probabilities are mutually exclusive. Which statement is correct?",
+      "options": [
+        "P(A ∩ B) = P(A)P(B)",
+        "P(A|B) = P(A)",
+        "P(A ∩ B) = 0 and the events are not independent",
+        "P(A ∪ B) = P(A)P(B)"
+      ],
+      "correctIndex": 2,
+      "answer": "P(A ∩ B) = 0 and the events are not independent",
+      "explanation": "Mutually exclusive events cannot occur together, so P(A ∩ B) = 0. If P(A) and P(B) are both positive, then P(A)P(B) > 0, which is different from 0, so the events cannot be independent.",
+      "commonMistake": "Assuming that events which cannot happen together must be independent, when in fact knowing one occurred makes the other impossible."
+    },
+    {
+      "id": "isc-12-maths-q-prob-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A random variable X has the distribution P(X=0)=0.2, P(X=1)=0.5, P(X=2)=0.3. The mean of X is",
+      "options": [
+        "1.0",
+        "0.9",
+        "1.5",
+        "1.1"
+      ],
+      "correctIndex": 3,
+      "answer": "1.1",
+      "explanation": "The mean is E(X) = Σ xᵢpᵢ = 0×0.2 + 1×0.5 + 2×0.3 = 0 + 0.5 + 0.6 = 1.1. The value 1.1 is a weighted average and does not have to be one of the possible values of X.",
+      "commonMistake": "Averaging the values 0, 1 and 2 to get 1.0 without weighting them by their probabilities."
+    },
+    {
+      "id": "isc-12-maths-q-prob-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a discrete random variable, the sum of all probabilities in its distribution is",
+      "options": [
+        "one",
+        "zero",
+        "equal to the mean",
+        "equal to the number of values"
+      ],
+      "correctIndex": 0,
+      "answer": "one",
+      "explanation": "The values of the random variable account for all possible outcomes of the experiment, so their probabilities must add to 1. This condition is often used to find a missing probability in a distribution table.",
+      "commonMistake": "Confusing the sum of the probabilities with the sum of the values xᵢ, which has no fixed total."
+    },
+    {
+      "id": "isc-12-maths-q-prob-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Events E₁ and E₂ form a partition of the sample space with P(E₁)=0.6, P(E₂)=0.4, P(A|E₁)=0.3 and P(A|E₂)=0.5. Then P(A) is",
+      "options": [
+        "0.8",
+        "0.38",
+        "0.4",
+        "0.2"
+      ],
+      "correctIndex": 1,
+      "answer": "0.38",
+      "explanation": "By the theorem of total probability, P(A)=P(E₁)P(A|E₁)+P(E₂)P(A|E₂)=0.6×0.3 + 0.4×0.5 = 0.18 + 0.20 = 0.38. Each term is the probability that A occurs through one of the two mutually exclusive cases.",
+      "commonMistake": "Averaging 0.3 and 0.5 to get 0.4, which ignores the fact that the two cases do not occur with equal probability."
+    },
+    {
+      "id": "isc-12-maths-q-prob-07",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A factory uses machine M₁ for 40% of its items and machine M₂ for 60%. The defect rates are 1% for M₁ and 2% for M₂. If an item is defective, the probability that it was produced by M₁ is",
+      "options": [
+        "2/5",
+        "1/2",
+        "3/4",
+        "1/4"
+      ],
+      "correctIndex": 3,
+      "answer": "1/4",
+      "explanation": "P(defective)=0.4×0.01 + 0.6×0.02 = 0.004 + 0.012 = 0.016. The joint probability for M₁ and defective is 0.004, so by Bayes' theorem P(M₁|defective)=0.004/0.016 = 1/4. Although M₂ has only twice the defect rate, it produces more items, so it accounts for three quarters of the defective ones.",
+      "commonMistake": "Answering 1/3 by comparing 1% and 2% alone and ignoring the different proportions of items produced by the two machines."
+    },
+    {
+      "id": "isc-12-maths-q-prob-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A fair die is rolled. Let A be getting an even number and B be getting a number greater than 3. Then P(A|B) is",
+      "options": [
+        "1/3",
+        "1/2",
+        "2/3",
+        "1/6"
+      ],
+      "correctIndex": 2,
+      "answer": "2/3",
+      "explanation": "Given B = {4, 5, 6}, the favourable outcomes in B are 4 and 6, so 2 of the 3 equally likely outcomes in B are even. Hence P(A|B)=2/3. Equivalently, P(A ∩ B)=2/6 and P(B)=3/6, giving (2/6)/(3/6)=2/3.",
+      "commonMistake": "Using the whole sample space and answering 1/2 instead of restricting to the outcomes in B."
+    },
+    {
+      "id": "isc-12-maths-q-prob-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A and B are independent events, then P(A ∩ B) = ______.",
+      "answer": "P(A)P(B)",
+      "explanation": "Independence means that the occurrence of B does not change the probability of A, so P(A|B)=P(A) and the multiplication theorem reduces to P(A ∩ B)=P(B)P(A|B)=P(A)P(B).",
+      "commonMistake": "Writing P(A)+P(B), which is not the probability of the intersection and can exceed 1."
+    },
+    {
+      "id": "isc-12-maths-q-prob-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mean of a discrete random variable X with values xᵢ and probabilities pᵢ is E(X) = ______.",
+      "answer": "Σ xᵢpᵢ",
+      "explanation": "The mean is the probability-weighted average of the possible values: each value is multiplied by the probability with which it occurs, and the products are added over all values of X.",
+      "commonMistake": "Writing Σ pᵢ, which equals 1 for any valid distribution rather than giving the mean."
+    },
+    {
+      "id": "isc-12-maths-q-prob-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If E₁ and E₂ form a partition of the sample space, then P(A) = P(E₁)P(A|E₁) + ______.",
+      "answer": "P(E₂)P(A|E₂)",
+      "explanation": "The theorem of total probability adds the probability that A occurs through each case of the partition. With two cases, the second term is the contribution from E₂, namely P(E₂)P(A|E₂).",
+      "commonMistake": "Writing P(E₂)P(E₂|A), which reverses the conditioning and belongs to Bayes' theorem rather than to total probability."
+    },
+    {
+      "id": "isc-12-maths-q-prob-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If P(A) = 0.4, P(B) = 0.5 and P(A ∩ B) = 0.2, find P(A|B) and state whether A and B are independent.",
+      "answer": "P(A|B) = P(A ∩ B)/P(B) = 0.2/0.5 = 0.4. Since P(A|B) = 0.4 = P(A), the occurrence of B does not change the probability of A, so A and B are independent. Equivalently, P(A)P(B) = 0.4 × 0.5 = 0.2 = P(A ∩ B).",
+      "explanation": "Either comparison, P(A|B) with P(A) or P(A ∩ B) with P(A)P(B), is sufficient to test independence. Here both confirm independence.",
+      "commonMistake": "Computing P(A|B) correctly but concluding dependence because the events are not mutually exclusive."
+    },
+    {
+      "id": "isc-12-maths-q-prob-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A bag contains 5 red and 3 black balls. Two balls are drawn at random without replacement. Find the probability that both are red.",
+      "answer": "The probability that the first ball is red is 5/8. Given that a red ball has been removed, 4 red balls remain out of 7, so the probability that the second is red is 4/7. By the multiplication theorem, P(both red) = (5/8)(4/7) = 20/56 = 5/14.",
+      "explanation": "Because the draws are without replacement, the second probability is conditioned on the first outcome. The simplified fraction 5/14 is obtained by dividing numerator and denominator by 4.",
+      "commonMistake": "Using 5/8 for both draws, which would be correct only if the first ball were replaced before the second draw."
+    },
+    {
+      "id": "isc-12-maths-q-prob-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The probability distribution of a random variable X is given by P(X=−1)=0.1, P(X=0)=k, P(X=1)=0.2 and P(X=2)=0.4. Find k and the mean of X.",
+      "answer": "Since the probabilities sum to 1, 0.1 + k + 0.2 + 0.4 = 1, giving k = 0.3. The mean is E(X) = (−1)(0.1) + 0(0.3) + 1(0.2) + 2(0.4) = −0.1 + 0 + 0.2 + 0.8 = 0.9.",
+      "explanation": "The negative value contributes negatively to the mean, so each term xᵢpᵢ must include the sign of xᵢ. The result 0.9 lies between the smallest value −1 and the largest value 2, as a mean must.",
+      "commonMistake": "Dropping the minus sign on the first term and obtaining 1.1 instead of 0.9."
+    },
+    {
+      "id": "isc-12-maths-q-prob-15",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two fair dice are thrown. Find the probability that the sum is 8 given that the sum is even.",
+      "answer": "The sums that are even are 2, 4, 6, 8, 10 and 12, which occur in 1, 3, 5, 5, 3 and 1 ways respectively, so P(even sum) = 18/36 = 1/2. The sum 8 occurs in 5 ways, namely (2,6), (3,5), (4,4), (5,3) and (6,2), so P(sum 8 and even) = 5/36. Therefore P(sum 8 | even sum) = (5/36)/(18/36) = 5/18.",
+      "explanation": "The condition restricts the sample space to the 18 equally likely outcomes with an even sum, of which 5 give a total of 8. Counting the even-sum outcomes directly avoids missing any of the six possible even totals.",
+      "commonMistake": "Dividing 5 by 36 instead of by 18, which gives the unconditional probability of sum 8 rather than the conditional probability."
+    },
+    {
+      "id": "isc-12-maths-q-prob-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Bag I contains 3 white and 4 black balls, and Bag II contains 4 white and 5 black balls. One bag is chosen at random and a ball is drawn from it. Find the probability that the ball drawn is white.",
+      "answer": "Let E₁ be the event that Bag I is chosen and E₂ that Bag II is chosen, so P(E₁) = P(E₂) = 1/2. The probability of drawing a white ball from Bag I is P(W|E₁) = 3/7, and from Bag II is P(W|E₂) = 4/9. By the theorem of total probability, P(W) = P(E₁)P(W|E₁) + P(E₂)P(W|E₂) = (1/2)(3/7) + (1/2)(4/9) = 3/14 + 2/9 = (27 + 28)/126 = 55/126.",
+      "explanation": "The two bags form a partition because exactly one bag is chosen and the choices are mutually exclusive. The final fraction is obtained by using the common denominator 126 for 14 and 9.",
+      "commonMistake": "Adding 3/7 and 4/9 directly without multiplying each by the probability 1/2 of choosing the corresponding bag."
+    },
+    {
+      "id": "isc-12-maths-q-prob-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A fair coin is tossed three times. Let X be the number of heads obtained. Find the probability distribution of X and hence find its mean.",
+      "answer": "The sample space has 2³ = 8 equally likely outcomes. The number of heads is 0 in 1 outcome (TTT), 1 in 3 outcomes, 2 in 3 outcomes and 3 in 1 outcome (HHH). Therefore the distribution is P(X=0)=1/8, P(X=1)=3/8, P(X=2)=3/8 and P(X=3)=1/8. The probabilities add to 1. The mean is E(X)=0×(1/8)+1×(3/8)+2×(3/8)+3×(1/8)=(0 + 3 + 6 + 3)/8 = 12/8 = 3/2.",
+      "explanation": "Each probability is the number of outcomes giving that value of X divided by 8. The mean 3/2 agrees with the symmetry of the distribution, which is centred halfway between 0 and 3.",
+      "commonMistake": "Assigning probability 1/4 to each of the four values 0, 1, 2, 3, which ignores the fact that 1 and 2 heads occur in more outcomes than 0 or 3 heads."
+    },
+    {
+      "id": "isc-12-maths-q-prob-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "There are three identical boxes. Box I contains 2 gold and 3 silver coins, Box II contains 3 gold and 2 silver coins, and Box III contains 4 gold and 1 silver coin. A box is chosen at random and a coin drawn from it is found to be gold. Find the probability that it was drawn from Box III.",
+      "answer": "Let E₁, E₂ and E₃ denote choosing Box I, II and III, so P(E₁)=P(E₂)=P(E₃)=1/3. The probabilities of drawing a gold coin are P(G|E₁)=2/5, P(G|E₂)=3/5 and P(G|E₃)=4/5. By total probability, P(G)=(1/3)(2/5)+(1/3)(3/5)+(1/3)(4/5)=(2+3+4)/15=9/15=3/5. By Bayes' theorem, P(E₃|G)=[(1/3)(4/5)]/(3/5)=(4/15)/(3/5)=4/9.",
+      "explanation": "The numerator is the probability that Box III is chosen and a gold coin is drawn, while the denominator is the total probability of drawing a gold coin from any box. The posterior 4/9 is larger than the prior 1/3 because Box III contains the highest proportion of gold coins.",
+      "commonMistake": "Using 4/5 as the answer, which is P(G|E₃), the probability of gold given Box III, rather than the reversed probability P(E₃|G)."
+    },
+    {
+      "id": "isc-12-maths-q-prob-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A speaks the truth in 70% of cases and B in 80% of cases. In what percentage of cases are they likely to contradict each other in stating the same fact?",
+      "answer": "Let T_A and T_B be the events that A and B speak the truth. Assuming their statements are independent, P(T_A)=0.7, P(T_A′)=0.3, P(T_B)=0.8 and P(T_B′)=0.2. They contradict each other when one speaks the truth and the other does not: P(contradiction)=P(T_A ∩ T_B′)+P(T_A′ ∩ T_B)=0.7×0.2 + 0.3×0.8 = 0.14 + 0.24 = 0.38. Therefore they contradict each other in 38% of cases.",
+      "explanation": "The two ways of contradicting are mutually exclusive, so their probabilities are added, and each is a product because the speakers are taken to be independent. The complementary event, agreeing, would have probability 0.7×0.8 + 0.3×0.2 = 0.62.",
+      "commonMistake": "Including the case where both are wrong as a contradiction; if both make the same false statement they agree, but in this standard model contradiction means one true and one false."
+    },
+    {
+      "id": "isc-12-maths-q-prob-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In a college, 60% of the students are boys and 40% are girls. It is known that 5% of boys and 10% of girls wear spectacles. A student is selected at random and is found to wear spectacles. Find the probability that the student is a girl.",
+      "answer": "Let B be the event that the student is a boy, G that the student is a girl, and S that the student wears spectacles. Then P(B)=0.60, P(G)=0.40, P(S|B)=0.05 and P(S|G)=0.10. By total probability, P(S)=P(B)P(S|B)+P(G)P(S|G)=0.60×0.05 + 0.40×0.10 = 0.03 + 0.04 = 0.07. By Bayes' theorem, P(G|S)=P(G)P(S|G)/P(S)=0.04/0.07 = 4/7.",
+      "explanation": "Although girls form only 40% of the college, the higher spectacle rate among girls raises the posterior probability to 4/7 once a spectacle-wearer is observed. The denominator 0.07 is the overall proportion of students who wear spectacles.",
+      "commonMistake": "Answering 0.10 by taking P(S|G) as the required probability, which confuses the probability of wearing spectacles given that the student is a girl with the reverse probability."
+    },
+    {
+      "id": "isc-12-maths-q-prob-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A random variable X has the following probability distribution: P(X=0)=1/6, P(X=1)=1/2, P(X=2)=3/10 and P(X=3)=1/30. Verify that this is a valid probability distribution and find the mean of X.",
+      "answer": "Each probability is non-negative. Their sum is 1/6 + 1/2 + 3/10 + 1/30 = (5 + 15 + 9 + 1)/30 = 30/30 = 1, so the distribution is valid. The mean is E(X)=0×(1/6)+1×(1/2)+2×(3/10)+3×(1/30)=0 + 1/2 + 3/5 + 1/10 = (5 + 6 + 1)/10 = 12/10 = 6/5.",
+      "explanation": "Verification requires both non-negativity and a total of 1; checking only one of these is not enough. The mean 6/5 = 1.2 lies between 0 and 3 and is pulled above 1 because the values 2 and 3 carry positive probability.",
+      "commonMistake": "Adding the fractions with a wrong common denominator and concluding that the distribution is invalid, or forgetting to include the term 0×(1/6) and making a sign or place error in the remaining sum."
+    },
+    {
+      "id": "isc-12-maths-q-prob-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A purse contains 2 silver and 4 copper coins. A second purse contains 4 silver and 3 copper coins. If a coin is drawn at random from one of the two purses, find the probability that it is a silver coin. If the coin drawn is silver, find the probability that it came from the second purse.",
+      "answer": "Let E₁ and E₂ be the events that the coin is drawn from the first and second purse respectively, so P(E₁)=P(E₂)=1/2. Let S be drawing a silver coin. Then P(S|E₁)=2/6=1/3 and P(S|E₂)=4/7. By the theorem of total probability, P(S)=P(E₁)P(S|E₁)+P(E₂)P(S|E₂)=(1/2)(1/3)+(1/2)(4/7)=1/6 + 2/7=(7 + 12)/42=19/42. By Bayes' theorem, P(E₂|S)=P(E₂)P(S|E₂)/P(S)=(2/7)/(19/42)=(2/7)×(42/19)=12/19.",
+      "explanation": "The first part finds the overall chance of silver by weighting each purse's silver proportion by the chance of choosing that purse. The second part reverses the conditioning: given that the coin is silver, the second purse is more likely because 4/7 is greater than 1/3, and Bayes' theorem quantifies this as 12/19.",
+      "commonMistake": "Using 4/7 as the final answer to the second part, which is the probability of silver given the second purse rather than the probability of the second purse given silver."
+    }
+  ]
+}

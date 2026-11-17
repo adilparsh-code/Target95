@@ -1,0 +1,1169 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-emi-ac",
+  "title": "Electromagnetic Induction and Alternating Currents",
+  "kind": "physics",
+  "tagline": "Faraday's and Lenz's laws, self and mutual induction, eddy currents, the AC generator and transformer, and the steady-state behaviour of resistors, inductors and capacitors in AC circuits.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus, subject code 861, examination year 2027, academic session 2026-27. The topic coverage follows the official CISCE syllabus unit Electromagnetic Induction and Alternating Currents. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "This unit joins two ideas that are physically continuous but are often examined separately: the generation of an electromotive force by a changing magnetic environment, and the steady behaviour of circuits supplied by an alternating source. The chapter begins with magnetic flux as the quantity that links a circuit to a magnetic field, then states Faraday's laws of electromagnetic induction and Lenz's law, which gives induction its sign and its physical sense as a tendency to oppose the change that produced it. From there the chapter moves to inductance as the circuit's memory of current: self-inductance and mutual inductance, the energy stored in a magnetic field, eddy currents and their uses and losses, the AC generator as a direct application of Faraday's law, and the transformer as the device that transfers energy between circuits by mutual induction. The second half treats alternating currents and AC circuits: the sinusoidal voltage and current, the reactances of an inductor and a capacitor, the phase differences they introduce, the series LCR circuit with its resonance and Q-factor, and the power consumed in an AC circuit with its power factor.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Electromagnetic Induction and Alternating Currents"
+      },
+      {
+        "label": "Theory marks in unit",
+        "value": "Included in the 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Magnetic flux",
+        "value": "phi = B A cos theta for a plane surface in a uniform field"
+      },
+      {
+        "label": "Faraday's law",
+        "value": "Induced emf is proportional to the rate of change of flux linkage"
+      },
+      {
+        "label": "Lenz's law",
+        "value": "The induced emf opposes the change in magnetic flux that produced it"
+      },
+      {
+        "label": "Self-inductance",
+        "value": "L = phi / I; energy U = 1/2 L I^2"
+      },
+      {
+        "label": "Mutual inductance",
+        "value": "M relates the flux in one coil to the current in another"
+      },
+      {
+        "label": "AC generator emf",
+        "value": "e = N B A omega sin omega t for a coil rotating in a uniform field"
+      },
+      {
+        "label": "Transformer equation",
+        "value": "V_s / V_p ~= N_s / N_p for an ideal transformer"
+      },
+      {
+        "label": "Inductive reactance",
+        "value": "X_L = omega L; capacitive reactance X_C = 1 / (omega C)"
+      },
+      {
+        "label": "Series LCR resonance",
+        "value": "omega_0 = 1 / sqrt(LC); Q-factor = omega_0 L / R"
+      },
+      {
+        "label": "Power in AC",
+        "value": "P = V_rms I_rms cos phi, where cos phi is the power factor"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Define magnetic flux and flux linkage, and calculate the flux through a plane surface in a uniform magnetic field.",
+    "State Faraday's laws of electromagnetic induction and Lenz's law, and explain how they determine the magnitude and direction of an induced emf.",
+    "Apply Faraday's law to moving conductors, rotating coils and changing fields, including motional emf problems.",
+    "Define self-inductance and mutual inductance, derive the energy stored in an inductor, and describe eddy currents and their applications and disadvantages.",
+    "Explain the working of an AC generator and a transformer, including the induced emf equation and the ideal transformer relationships.",
+    "Distinguish DC and AC, define the rms value and reactance, and relate rms quantities to peak values for sinusoidal sources.",
+    "Analyse series LR, LC and LCR AC circuits, including phase difference and the phasor picture.",
+    "Derive the resonance condition for a series LCR circuit, explain the Q-factor, and calculate the power and power factor in an AC circuit."
+  ],
+  "learn": [
+    {
+      "id": "magnetic-flux-and-faradays-law",
+      "title": "Magnetic flux and Faraday's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Magnetic flux is the quantity that links a magnetic field to a surface, and it is the central idea in electromagnetic induction. For a plane surface of area A placed in a uniform magnetic field B, the flux is phi = B A cos theta, where theta is the angle between the field and the normal to the surface. The flux is greatest when the surface is perpendicular to the field and zero when the field is parallel to the surface. If the field is not uniform or the surface is not plane, the flux is defined by the surface integral phi = B.dA. Magnetic flux has the SI unit weber (Wb), and one weber is the flux that produces one volt when it changes uniformly in one second."
+        },
+        {
+          "type": "paragraph",
+          "text": "Faraday's laws of electromagnetic induction describe what happens when the flux through a circuit changes. The first law states that an emf is induced in a circuit whenever the magnetic flux linked with the circuit changes, and the induced emf lasts as long as the change continues. The second law states that the magnitude of the induced emf is directly proportional to the rate of change of flux linkage. For a coil of N turns, the induced emf is magnitude |e| = N |d phi / dt|, where phi is the flux through one turn. This is the quantitative heart of induction: a steady flux produces nothing, but a changing flux produces an emf."
+        },
+        {
+          "type": "paragraph",
+          "text": "The change of flux can happen in several ways. The field can change in magnitude at a fixed coil, the coil can change orientation in a fixed field, the coil can move into or out of a field, or the area of the circuit exposed to the field can change. All of these are the same phenomenon viewed from different frames, and each can be handled by thinking directly about the flux. A simple and important special case is motional emf: a straight conductor of length L moving with speed v perpendicular to a uniform field B develops an emf e = B L v if the motion is perpendicular to both the field and the conductor. This result can be obtained either from the magnetic force on the charges in the conductor or from the rate at which the conductor sweeps out flux."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A circular coil of radius 0.1 m is placed with its plane perpendicular to a uniform field of 0.5 T. Find the flux through the coil.",
+              "note": "Area A = pi r^2 = pi (0.1)^2 = 0.0314 m^2. phi = B A = 0.5 x 0.0314 = 0.0157 Wb. Because the plane is perpendicular to the field, the normal is parallel to the field and theta = 0, so cos theta = 1."
+            },
+            {
+              "text": "The same coil is then rotated so that its plane becomes parallel to the field in 0.2 s. Find the average induced emf.",
+              "note": "Initial flux phi_i = 0.0157 Wb, final flux phi_f = 0, so |e| = N |delta phi / delta t| = 1 x 0.0157 / 0.2 = 0.0785 V if the coil has one turn. For N turns the emf is N times larger. The emf is not constant during the rotation unless the rotation is uniform and we use the instantaneous derivative."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Ways of changing magnetic flux",
+          "columns": [
+            "Change",
+            "What varies",
+            "Example"
+          ],
+          "rows": [
+            [
+              "Field changes",
+              "B at the coil",
+              "Field switched on or off near a coil"
+            ],
+            [
+              "Orientation changes",
+              "theta",
+              "Coil rotated in a uniform field"
+            ],
+            [
+              "Area changes",
+              "A in the field",
+              "Sliding loop or shrinking loop"
+            ],
+            [
+              "Position changes",
+              "Coil in or out of field",
+              "Magnet moved into a coil"
+            ],
+            [
+              "Motional emf",
+              "Conductor cutting flux",
+              "Straight rod moving in a uniform field"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lenz-law-and-direction",
+      "title": "Lenz's law and direction of induced emf",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Lenz's law fixes the direction of the induced emf and the induced current. It states that the direction of the induced emf is such that it opposes the change in magnetic flux that produced it. This is not an extra law but a consequence of energy conservation built into Faraday's law: if the induced emf aided the change instead of opposing it, a small change would produce a larger change and the system would run away, supplying energy from nothing. The minus sign in the full expression e = - N d phi / dt is the mathematical statement of Lenz's law."
+        },
+        {
+          "type": "paragraph",
+          "text": "A practical way to use Lenz's law is to follow the change of flux and then ask what induced current would oppose that change. If the flux through a coil increases, the induced current flows in the direction that produces a flux opposing the increase; if the flux decreases, the induced current produces a flux that tries to maintain it. The right-hand grip rule connects the direction of the induced current to the direction of the flux it creates. This reasoning is more reliable than trying to remember separate rules for each situation, because the same idea works for a magnet moving into a coil, a coil moving out of a field, a changing field, or a changing area."
+        },
+        {
+          "type": "paragraph",
+          "text": "The opposition is not only to flux change but also to motion. When a magnet is pushed into a coil, the induced current sets up a field that repels the approaching magnet, so mechanical work is needed to move it. That mechanical work is what is converted into electrical energy and then, if the circuit is resistive, into heat. In a generator the mechanical work of turning the coil is what supplies the electrical output, and Lenz's law is the reason a generator is not free: the induced current creates a torque that opposes the motion."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The north pole of a bar magnet is moved towards a closed coil. State the direction of the induced current as seen from the magnet side.",
+              "note": "The flux through the coil due to the magnet increases as the magnet approaches. The induced current must oppose this increase, so it produces a north pole on the magnet-facing side of the coil. By the right-hand grip rule, the current seen from the magnet side is anti-clockwise. The coil effectively repels the approaching north pole."
+            },
+            {
+              "text": "The same magnet is now pulled away. What changes?",
+              "note": "The flux through the coil decreases, so the induced current now tries to maintain it. The magnet-facing side becomes a south pole to attract the receding north pole, and the current seen from the magnet side reverses to clockwise. The emf is still present, but its sign is reversed."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Lenz's law",
+              "meaning": "The direction of an induced emf is such that it opposes the change in magnetic flux that produced it."
+            },
+            {
+              "term": "Flux linkage",
+              "meaning": "The product N phi for a coil of N turns, where phi is the flux through one turn."
+            },
+            {
+              "term": "Motional emf",
+              "meaning": "An emf induced in a conductor moving through a magnetic field, e = B L v for straight motion perpendicular to B and the conductor."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications-of-faradays-law",
+      "title": "Applications of Faraday's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Faraday's law applies to any situation where flux changes, and three applications are especially important for this unit. The first is the induction of emf in a straight rod moving in a magnetic field. If a rod of length L moves with speed v perpendicular to a uniform field B and perpendicular to its own length, the charges in the rod experience a magnetic force q v B along the rod, which separates positive and negative charge until the resulting electric field balances the magnetic force. The induced emf between the ends is e = B L v, and it is the same result obtained from the rate of sweeping out flux."
+        },
+        {
+          "type": "paragraph",
+          "text": "The second application is a rod moving on conducting rails in a magnetic field. If the rod completes a circuit with a resistor R, the flux through the rectangular loop increases as the rod moves, inducing an emf B L v and a current B L v / R. The current-carrying rod then experiences a magnetic force opposing its motion, and this is the Lenz's law force that makes the generator do work. The power dissipated in the resistor equals the mechanical power needed to keep the rod moving at constant speed, which is a clean illustration of energy conservation."
+        },
+        {
+          "type": "paragraph",
+          "text": "The third application is a coil rotating uniformly in a uniform magnetic field, which is exactly the working of an AC generator. If a coil of N turns, area A, rotates with angular speed omega in a field B, the flux is phi = B A cos omega t and the induced emf is e = - N d phi / dt = N B A omega sin omega t. The emf varies sinusoidally, its peak value is N B A omega, and this is the origin of alternating current. The same idea applies to any rotating loop, and the sinusoidality follows from the cosine variation of flux with angle."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A rod of length 0.5 m moves at 4 m s^-1 perpendicular to a uniform field of 0.2 T. Find the induced emf.",
+              "note": "e = B L v = 0.2 x 0.5 x 4 = 0.4 V. The ends of the rod are at different potentials because the magnetic force on the charges separates them along the rod."
+            },
+            {
+              "text": "A generator coil has 200 turns and area 0.01 m^2, rotates at 100 rad s^-1 in a field of 0.1 T. Find the peak emf.",
+              "note": "Peak emf = N B A omega = 200 x 0.1 x 0.01 x 100 = 20 V. If the coil rotates at 50 Hz, omega = 2 pi f, and the peak emf is proportional to the frequency as well as the field and area."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Induced emf in standard situations",
+          "columns": [
+            "Situation",
+            "Flux or quantity",
+            "Induced emf"
+          ],
+          "rows": [
+            [
+              "Straight rod moving in uniform field",
+              "Not needed directly",
+              "e = B L v"
+            ],
+            [
+              "Coil in changing uniform field",
+              "phi = B A cos theta",
+              "|e| = N A cos theta |dB/dt|"
+            ],
+            [
+              "Coil rotating with constant omega",
+              "phi = B A cos omega t",
+              "e = N B A omega sin omega t"
+            ],
+            [
+              "Magnet approaching a coil",
+              "phi increases with time",
+              "e opposes the increase"
+            ],
+            [
+              "Rod on rails with resistor R",
+              "phi = B L x",
+              "e = B L v, I = B L v / R"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "self-inductance-and-mutual-inductance",
+      "title": "Self-inductance and mutual inductance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Inductance is the circuit property that links current to flux. When a current I flows in a coil, it produces a magnetic flux through the coil itself. The self-inductance L is defined by phi = L I, where phi is the flux linkage of the coil due to its own current. If the current changes, the flux changes and a self-induced emf appears: e = - L dI/dt. The minus sign is Lenz's law: the self-induced emf opposes the change in current. This is why an inductor resists changes in current; it is the electrical analogue of inertia."
+        },
+        {
+          "type": "paragraph",
+          "text": "The SI unit of inductance is the henry (H). A coil has an inductance of one henry if a rate of change of current of one ampere per second induces an emf of one volt. For a long solenoid of length l, cross-sectional area A and N turns, the self-inductance is L = mu0 N^2 A / l, assuming a uniform field inside and no magnetic material. If a core of relative permeability mu_r is present, L = mu0 mu_r N^2 A / l. The inductance depends on geometry and on the magnetic properties of the core, which is why iron-core inductors have much larger inductance than air-core ones."
+        },
+        {
+          "type": "paragraph",
+          "text": "Mutual inductance M describes the flux linkage in one coil due to the current in another. If a current I_p in a primary coil produces a flux linkage N_s phi_s in a secondary coil, then N_s phi_s = M I_p, and a changing primary current induces an emf e_s = - M dI_p/dt in the secondary. The same mutual inductance appears in the reverse direction: a changing secondary current induces an emf in the primary. Mutual inductance depends on the geometry, the number of turns, and the coupling between the coils, and it is the basis of the transformer."
+        },
+        {
+          "type": "paragraph",
+          "text": "An inductor stores energy in its magnetic field. The energy stored for a current I is U = 1/2 L I^2. This energy is supplied by the source while the current is building up against the back emf, and it is returned to the circuit when the current decreases. The energy density in a magnetic field is u = B^2 / (2 mu0) in vacuum, which is the magnetic analogue of the electric energy density. These results connect inductance to the field picture and are the reason inductors are used to store and transfer energy."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A coil has a self-inductance of 0.2 H. If the current through it changes from 2 A to 5 A in 0.1 s, find the magnitude of the induced emf.",
+              "note": "|e| = L |delta I / delta t| = 0.2 x (3 / 0.1) = 0.2 x 30 = 6 V. The induced emf opposes the increase in current."
+            },
+            {
+              "text": "An inductor of 0.5 H carries a current of 4 A. Find the energy stored.",
+              "note": "U = 1/2 L I^2 = 0.5 x 0.5 x 16 = 4 J. This energy is stored in the magnetic field and is returned if the current is reduced."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Self-inductance",
+              "meaning": "The property L of a coil such that its own flux linkage is L I; the self-induced emf is -L dI/dt."
+            },
+            {
+              "term": "Mutual inductance",
+              "meaning": "The property M such that a current I in one coil produces a flux linkage M I in a neighbouring coil."
+            },
+            {
+              "term": "Henry",
+              "meaning": "The SI unit of inductance; one henry gives one volt for one ampere per second of current change."
+            },
+            {
+              "term": "Back emf",
+              "meaning": "The emf induced in a coil opposing the change in its own current."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eddy-currents",
+      "title": "Eddy currents",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Eddy currents are circulating currents induced in a bulk conductor when the magnetic flux through it changes. If a solid metal plate or block is moved through a magnetic field, or placed in a changing field, the changing flux induces circulating currents in the conductor, much like eddies in a fluid, hence the name. These currents heat the conductor and produce magnetic forces that oppose the motion, a fact that is both useful and wasteful depending on the application. The induced currents are largest in good conductors and in thick sections, because low resistance allows large currents and more material lets the currents circulate."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two important applications exploit eddy currents. The first is electromagnetic damping, as in a moving coil galvanometer or a mechanical balance, where a metal former or damping vane experiences eddy currents that oppose motion and bring the system to rest quickly without a separate frictional damper. The second is induction heating, where a high-frequency alternating field induces large eddy currents in a conductive workpiece, heating it rapidly and selectively. Magnetic braking in trains and amusement park rides is another application, where a moving metal disc in a magnetic field experiences opposing forces from eddy currents."
+        },
+        {
+          "type": "paragraph",
+          "text": "Eddy currents are also a source of loss in transformers and motors. In a solid iron core the changing flux would induce large eddy currents and cause heating and energy waste. To reduce this, cores are laminated: built from thin sheets insulated from each other, with the plane of the sheets perpendicular to the direction of the induced currents. This increases the resistance of the circulating paths and reduces the eddy currents and the associated loss. Laminations are therefore a practical necessity, not optional detail, for efficient transformers and AC machines."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why are transformer cores laminated rather than built from a solid block of iron?",
+              "note": "A solid core would allow large eddy currents to circulate in the changing flux, causing substantial heating and energy loss. Laminations break the circulating paths into thin insulated layers, increasing the resistance of the eddy current paths and reducing the loss. The core still carries the magnetic flux well, but the eddy currents are suppressed."
+            },
+            {
+              "text": "A metal disc swings between the poles of a magnet and stops quickly. Explain.",
+              "note": "As the disc moves through the field, eddy currents are induced in it. By Lenz's law these currents produce magnetic forces that oppose the motion, so the disc is damped and stops quickly. This is electromagnetic damping in action."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Eddy currents are induced circulating currents in a bulk conductor in a changing magnetic field.",
+            "They oppose the motion or change that produced them, by Lenz's law.",
+            "They are useful in electromagnetic damping, induction heating and magnetic braking.",
+            "They are a loss mechanism in transformers and motors, reduced by laminated cores.",
+            "They are larger in good conductors, thick sections and higher rates of flux change."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ac-generator-and-transformer",
+      "title": "AC generator and transformer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An AC generator is a direct application of Faraday's law. The essential parts are a coil that can rotate in a magnetic field, a field system that provides the flux, and a way to collect the induced emf, usually slip rings for an AC output. As the coil rotates, the flux through it varies as phi = B A cos theta, and with uniform rotation theta = omega t, so the flux is phi = B A cos omega t. The induced emf is e = - N d phi / dt = N B A omega sin omega t. The emf varies sinusoidally with time, its peak value is N B A omega, and the frequency is the rotational frequency. This is the reason a generator produces alternating, not constant, emf: the flux varies smoothly and symmetrically as the coil turns."
+        },
+        {
+          "type": "paragraph",
+          "text": "In a practical generator the coil is often the rotor and the field is produced by electromagnets, and the same principle applies to large power-station generators. The mechanical work of turning the coil is what supplies the electrical energy, and Lenz's law guarantees that the induced current creates a torque opposing the motion. In other words, a generator is not a source of free energy; the mechanical input is converted into electrical output, with losses in the resistances, eddy currents, hysteresis and friction."
+        },
+        {
+          "type": "paragraph",
+          "text": "A transformer is a device that transfers electrical energy from one circuit to another by mutual induction, usually with a change of voltage. It consists of two coils, the primary and the secondary, wound on a common laminated iron core. An alternating current in the primary produces a changing flux in the core, which links both coils. The same changing flux induces an emf in each coil: in the primary e_p = - N_p d phi / dt and in the secondary e_s = - N_s d phi / dt. For an ideal transformer, with no losses and negligible coil resistance, the terminal voltages are proportional to the number of turns, V_s / V_p = N_s / N_p. The currents are related by the inverse ratio for an ideal transformer, I_s / I_p ~= N_p / N_s, because the power input equals the power output, V_p I_p = V_s I_s."
+        },
+        {
+          "type": "paragraph",
+          "text": "A step-up transformer has more turns on the secondary than on the primary, so the voltage is increased and the current is reduced. A step-down transformer does the opposite. Transformers are the reason alternating current, and not direct current, is used for long-distance power transmission: the voltage can be stepped up for transmission to reduce the current and therefore the I^2 R loss in the lines, and then stepped down for safe use. A transformer does not work with a steady DC input, because a constant flux induces no emf; only a changing flux transfers energy from primary to secondary."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A transformer has 200 turns on the primary and 1000 turns on the secondary. If the primary is connected to 230 V AC, find the secondary voltage.",
+              "note": "V_s / V_p = N_s / N_p gives V_s = 230 x 1000 / 200 = 1150 V. This is a step-up transformer. If the secondary current is 0.5 A in an ideal transformer, the primary current is I_p = I_s x N_s / N_p = 0.5 x 1000 / 200 = 2.5 A."
+            },
+            {
+              "text": "Explain why a transformer does not work with a steady DC supply.",
+              "note": "A steady DC current produces a constant flux in the core, so d phi / dt is zero and no emf is induced in the secondary. There is also no back emf in the primary once the current is steady, so the primary would draw a large current limited only by its resistance, which could overheat the coil. A transformer needs a changing flux, which is why it is used with AC."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Transformer summary",
+          "columns": [
+            "Quantity",
+            "Relation",
+            "Ideal assumption"
+          ],
+          "rows": [
+            [
+              "Voltage ratio",
+              "V_s / V_p = N_s / N_p",
+              "No losses, negligible resistance"
+            ],
+            [
+              "Current ratio",
+              "I_s / I_p ~= N_p / N_s",
+              "Input power equals output power"
+            ],
+            [
+              "Flux linkage",
+              "Same flux in both coils",
+              "Perfect magnetic coupling"
+            ],
+            [
+              "DC input",
+              "No secondary emf",
+              "Constant flux gives d phi / dt = 0"
+            ],
+            [
+              "Step-up",
+              "N_s > N_p, V_s > V_p",
+              "Current decreased"
+            ],
+            [
+              "Step-down",
+              "N_s < N_p, V_s < V_p",
+              "Current increased"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alternating-currents-and-rms-values",
+      "title": "Alternating currents and RMS values",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An alternating current is one whose magnitude and direction vary periodically, usually sinusoidally. The simplest form is i = I_0 sin omega t and v = V_0 sin omega t, where I_0 and V_0 are the peak values and omega = 2 pi f is the angular frequency. The period T is 1 / f and the frequency f is the number of complete cycles per second. The sinusoid is important because it is the natural output of a rotating generator and because it is the basis for the analysis of AC circuits and of power transmission with transformers."
+        },
+        {
+          "type": "paragraph",
+          "text": "The root mean square, or RMS, value is the effective value of an alternating quantity. It is defined so that the heating effect in a resistor is the same as a DC current of the same value. For a sinusoidal current, I_rms = I_0 / sqrt(2), and likewise V_rms = V_0 / sqrt(2). These relations are exact for a sine wave, and they are the reason household voltages are quoted as RMS values: 230 V AC means V_rms = 230 V, with a peak of about 325 V. The power dissipated in a resistor is P = I_rms^2 R = V_rms^2 / R, using the RMS values just as for DC."
+        },
+        {
+          "type": "paragraph",
+          "text": "The reactance of a component in AC is the analogue of resistance, but it depends on frequency and on the component. For an inductor, the current lags the voltage, and the inductive reactance is X_L = omega L = 2 pi f L. For a capacitor, the current leads the voltage, and the capacitive reactance is X_C = 1 / (omega C) = 1 / (2 pi f C). As frequency increases, an inductor opposes the current more and a capacitor opposes it less. A resistor has the same V and I in phase in AC, with no reactance, so its behaviour is the simplest: V_rms = I_rms R at every frequency."
+        },
+        {
+          "type": "table",
+          "caption": "AC circuit quantities",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "Sinusoidal current",
+              "i = I_0 sin omega t",
+              "Peak I_0, angular frequency omega"
+            ],
+            [
+              "RMS current",
+              "I_rms = I_0 / sqrt(2)",
+              "For a sine wave only"
+            ],
+            [
+              "RMS voltage",
+              "V_rms = V_0 / sqrt(2)",
+              "For a sine wave only"
+            ],
+            [
+              "Inductive reactance",
+              "X_L = omega L",
+              "Current lags voltage by 90 degrees"
+            ],
+            [
+              "Capacitive reactance",
+              "X_C = 1 / (omega C)",
+              "Current leads voltage by 90 degrees"
+            ],
+            [
+              "Resistive impedance",
+              "R",
+              "V and I in phase"
+            ],
+            [
+              "Frequency",
+              "f = omega / 2 pi",
+              "Cycles per second"
+            ],
+            [
+              "Period",
+              "T = 1 / f",
+              "Time for one cycle"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ac-circuits-lr-lc-lcr",
+      "title": "AC circuits: LR, LC and LCR",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The series LR circuit illustrates the phase shift introduced by an inductor. When a sinusoidal voltage is applied to a resistor and inductor in series, the current is the same through both, but the voltage across the resistor is in phase with the current, while the voltage across the inductor leads the current by 90 degrees. The total impedance is Z = sqrt(R^2 + X_L^2), and the phase difference between the applied voltage and the current is given by tan phi = X_L / R. The current is I_rms = V_rms / Z, and the power consumed is P = V_rms I_rms cos phi = I_rms^2 R. The inductor does not dissipate power; only the resistor does. The power factor cos phi tells you how much of the apparent power is actually used."
+        },
+        {
+          "type": "paragraph",
+          "text": "The series LC circuit is the basis of oscillation and resonance. The impedances of the inductor and capacitor have opposite frequency dependence: X_L grows with frequency and X_C falls. The total reactance is X_L - X_C, and at a particular frequency the two cancel exactly, leaving only the resistance. That frequency is the resonance frequency, omega_0 = 1 / sqrt(LC), or f_0 = 1 / (2 pi sqrt(LC)). At resonance the current is maximum for a given voltage, and the voltages across the inductor and capacitor can be much larger than the applied voltage, though they are 180 degrees out of phase and cancel in the series sum. This is the principle behind tuning circuits and filters."
+        },
+        {
+          "type": "paragraph",
+          "text": "The series LCR circuit is the general case, with resistance, inductance and capacitance in series. The impedance is Z = sqrt(R^2 + (X_L - X_C)^2), the phase difference is tan phi = (X_L - X_C) / R, and the current is I_rms = V_rms / Z. At resonance, X_L = X_C, Z = R is minimum, and the current and power are maximum. The sharpness of resonance is measured by the Q-factor, Q = omega_0 L / R = 1 / (R) sqrt(L/C), which is large for a high inductance and low resistance and small for a broad resonance. The Q-factor also compares the resonant voltage across L or C with the applied voltage."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A series LCR circuit has R = 10 ohm, L = 0.1 H and C = 100 microfarad, and is connected to a 120 V RMS source. Find the resonance frequency.",
+              "note": "omega_0 = 1 / sqrt(LC) = 1 / sqrt(0.1 x 100 x 10^-6) = 1 / sqrt(10^-5) = 1 / 0.003162 = 316.2 rad s^-1. f_0 = omega_0 / 2 pi = 50.3 Hz. At resonance the impedance is 10 ohm and the current is 120 / 10 = 12 A RMS."
+            },
+            {
+              "text": "A series LR circuit has R = 20 ohm and L = 0.05 H and is connected to a 50 Hz, 200 V RMS source. Find the current and power factor.",
+              "note": "X_L = 2 pi f L = 2 pi x 50 x 0.05 = 15.71 ohm. Z = sqrt(20^2 + 15.71^2) = sqrt(400 + 246.7) = sqrt(646.7) = 25.43 ohm. I = 200 / 25.43 = 7.87 A. Power factor = R / Z = 20 / 25.43 = 0.786. Power = V I cos phi = 200 x 7.87 x 0.786 = 1238 W, or I^2 R = 7.87^2 x 20 = 1238 W."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Series AC circuits",
+          "columns": [
+            "Circuit",
+            "Impedance",
+            "Phase",
+            "Resonance"
+          ],
+          "rows": [
+            [
+              "R only",
+              "Z = R",
+              "phi = 0",
+              "Not applicable"
+            ],
+            [
+              "L only",
+              "Z = X_L",
+              "phi = +90 degrees (current lags)",
+              "Not applicable"
+            ],
+            [
+              "C only",
+              "Z = X_C",
+              "phi = -90 degrees (current leads)",
+              "Not applicable"
+            ],
+            [
+              "R and L",
+              "Z = sqrt(R^2 + X_L^2)",
+              "tan phi = X_L / R",
+              "No resonance"
+            ],
+            [
+              "R and C",
+              "Z = sqrt(R^2 + X_C^2)",
+              "tan phi = -X_C / R",
+              "No resonance"
+            ],
+            [
+              "L and C",
+              "Z = |X_L - X_C|",
+              "phi = 0 when X_L = X_C",
+              "Yes, at omega_0 = 1/sqrt(LC)"
+            ],
+            [
+              "R, L and C",
+              "Z = sqrt(R^2 + (X_L - X_C)^2)",
+              "tan phi = (X_L - X_C)/R",
+              "Yes, current maximum at omega_0"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power-in-ac-and-revision",
+      "title": "Power in AC and revision",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The power in an AC circuit is not simply V_rms I_rms, because the voltage and current may not be in phase. The average power is P = V_rms I_rms cos phi, where cos phi is the power factor. The product V_rms I_rms is called the apparent power, and the ratio of the true power to the apparent power is the power factor. A purely resistive circuit has a power factor of 1, a purely inductive or capacitive circuit has a power factor of 0, and a mixed circuit lies between them. Power factor matters in transmission because a low power factor means more current is needed for the same true power, which increases the I^2 R losses and the required conductor size."
+        },
+        {
+          "type": "paragraph",
+          "text": "The energy stored in an inductor is U = 1/2 L I^2, and the energy stored in a capacitor is U = 1/2 C V^2. In an AC circuit these energies are exchanged between the magnetic and electric fields each half cycle, but none of this energy is consumed in ideal reactive components. The only real energy consumption is in the resistances, which is why the true power depends only on the resistive part of the circuit and on the in-phase component of the current. This distinction between stored energy and consumed energy is one of the central conceptual points of the unit."
+        },
+        {
+          "type": "paragraph",
+          "text": "The key ideas of the unit are: changing flux induces emf; Lenz's law gives the direction and the minus sign; inductance is the circuit's reluctance to change current; the AC generator is Faraday's law in rotating form; the transformer links voltage to turns ratio; RMS values are the effective AC values; reactances depend on frequency; resonance happens when X_L = X_C; and the power factor tells you how much of the apparent power is real. If you can move between the flux picture, the emf equation, the inductor's memory of current, and the phasor picture of phase, you can handle most of this unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Magnetic flux is phi = B A cos theta; induced emf is e = - N d phi / dt.",
+            "Lenz's law means the induced emf opposes the change in flux.",
+            "Motional emf for a rod is e = B L v for motion perpendicular to B and the rod.",
+            "Self-inductance L relates flux to current: e = - L dI/dt, energy U = 1/2 L I^2.",
+            "Mutual inductance M links one coil's current to the other's flux.",
+            "Eddy currents are induced in bulk conductors; they are useful but lossy, and laminations reduce them.",
+            "An AC generator emf is e = N B A omega sin omega t for a coil rotating at omega.",
+            "An ideal transformer has V_s / V_p = N_s / N_p and V_p I_p = V_s I_s.",
+            "RMS values: I_rms = I_0 / sqrt(2); V_rms = V_0 / sqrt(2) for a sine wave.",
+            "X_L = omega L; X_C = 1 / (omega C); current lags in an inductor, leads in a capacitor.",
+            "Series LCR resonance at omega_0 = 1 / sqrt(LC); Q = omega_0 L / R.",
+            "Average power P = V_rms I_rms cos phi; the power factor is cos phi."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Quick formula sheet for EMI and AC",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "When to use"
+          ],
+          "rows": [
+            [
+              "Flux through a plane surface",
+              "phi = B A cos theta",
+              "Uniform field, flat surface"
+            ],
+            [
+              "Induced emf, coil",
+              "|e| = N |d phi / dt|",
+              "Flux change in a coil"
+            ],
+            [
+              "Motional emf",
+              "e = B L v",
+              "Rod moving perpendicular to B and itself"
+            ],
+            [
+              "Self-induced emf",
+              "e = - L dI/dt",
+              "Current changing in a coil"
+            ],
+            [
+              "Self-inductance of a solenoid",
+              "L = mu0 N^2 A / l",
+              "Long air-core solenoid"
+            ],
+            [
+              "Energy in an inductor",
+              "U = 1/2 L I^2",
+              "Current I in inductance L"
+            ],
+            [
+              "Transformer voltage ratio",
+              "V_s / V_p = N_s / N_p",
+              "Ideal transformer"
+            ],
+            [
+              "Transformer current ratio",
+              "I_s / I_p ~= N_p / N_s",
+              "Ideal transformer, power conserved"
+            ],
+            [
+              "Peak emf of AC generator",
+              "E_0 = N B A omega",
+              "Coil rotating uniformly"
+            ],
+            [
+              "RMS for a sine wave",
+              "X_rms = X_0 / sqrt(2)",
+              "Sinusoidal source"
+            ],
+            [
+              "Inductive reactance",
+              "X_L = omega L",
+              "Inductor at frequency f"
+            ],
+            [
+              "Capacitive reactance",
+              "X_C = 1 / (omega C)",
+              "Capacitor at frequency f"
+            ],
+            [
+              "Series LCR impedance",
+              "Z = sqrt(R^2 + (X_L - X_C)^2)",
+              "Series R, L and C"
+            ],
+            [
+              "Resonance angular frequency",
+              "omega_0 = 1 / sqrt(LC)",
+              "X_L = X_C"
+            ],
+            [
+              "Q-factor",
+              "Q = omega_0 L / R",
+              "Sharpness of resonance"
+            ],
+            [
+              "Average AC power",
+              "P = V_rms I_rms cos phi",
+              "Phase difference phi"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A changing magnetic flux through a circuit induces an emf; the magnitude is N times the rate of change of flux.",
+    "Lenz's law gives the direction: the induced emf opposes the flux change that produced it.",
+    "Motional emf for a straight rod moving perpendicular to B and its length is e = B L v.",
+    "Self-inductance L is the flux linkage per unit current; the back emf is -L dI/dt and the stored energy is 1/2 L I^2.",
+    "Mutual inductance M links the current in one coil to the flux linkage in another and is the basis of the transformer.",
+    "Eddy currents are induced circulating currents in bulk conductors; laminations reduce eddy-current losses in transformers and motors.",
+    "An AC generator produces e = N B A omega sin omega t because the flux through the rotating coil varies as cos omega t.",
+    "An ideal transformer has V_s / V_p = N_s / N_p and V_p I_p = V_s I_s; it does not work with steady DC.",
+    "RMS values for a sine wave are I_rms = I_0 / sqrt(2) and V_rms = V_0 / sqrt(2).",
+    "Reactances depend on frequency: X_L = omega L increases with f, X_C = 1/(omega C) decreases with f.",
+    "In a series LCR circuit, resonance occurs when X_L = X_C, the impedance is minimum, and the current and power are maximum.",
+    "Average AC power is P = V_rms I_rms cos phi, where cos phi is the power factor."
+  ],
+  "examFocus": [
+    "State Lenz's law in words and use it to find the direction of an induced current; never quote only the minus sign without explaining what it means.",
+    "In a motional emf question, state clearly that the motion, field and length are mutually perpendicular, because e = B L v assumes that geometry.",
+    "When deriving the generator emf, write the flux as phi = B A cos omega t and differentiate it; the sinusoidality follows directly from that step.",
+    "For a transformer, state the ideal assumptions: no losses, perfect coupling, negligible coil resistance; the turns ratio result depends on them.",
+    "In AC circuit problems, work in RMS values unless a peak value is specifically asked for, and remember that only the resistive part consumes real power.",
+    "At resonance, write both that X_L = X_C and that Z = R, because students often give the condition without the consequence for the impedance and current.",
+    "Distinguish stored magnetic energy in an inductor from dissipated joules in a resistor; the inductor does not consume power in the steady AC state."
+  ],
+  "vocabulary": [
+    {
+      "word": "Magnetic flux",
+      "meaning": "The measure of magnetic field through a surface; phi = B A cos theta for a plane surface in a uniform field."
+    },
+    {
+      "word": "Flux linkage",
+      "meaning": "The product N phi of turns and flux through one turn, which determines the induced emf."
+    },
+    {
+      "word": "Electromagnetic induction",
+      "meaning": "The production of an emf by a changing magnetic flux."
+    },
+    {
+      "word": "Faraday's law",
+      "meaning": "The induced emf is proportional to the rate of change of flux linkage; magnitude |e| = N |d phi / dt|."
+    },
+    {
+      "word": "Lenz's law",
+      "meaning": "The direction of induced emf is such that it opposes the change in flux that produced it."
+    },
+    {
+      "word": "Motional emf",
+      "meaning": "An emf induced in a conductor moving through a magnetic field, e = B L v for straight motion perpendicular to B and the conductor."
+    },
+    {
+      "word": "Self-inductance",
+      "meaning": "The property L such that a coil's own flux linkage is L I and the self-induced emf is -L dI/dt."
+    },
+    {
+      "word": "Mutual inductance",
+      "meaning": "The property M such that a current I in one coil produces a flux linkage M I in a neighbouring coil."
+    },
+    {
+      "word": "Eddy current",
+      "meaning": "A circulating induced current in a bulk conductor in a changing magnetic field."
+    },
+    {
+      "word": "AC generator",
+      "meaning": "A device that produces an alternating emf by rotating a coil in a magnetic field, using Faraday's law."
+    },
+    {
+      "word": "Transformer",
+      "meaning": "A device that transfers energy between circuits by mutual induction, with V_s / V_p = N_s / N_p ideally."
+    },
+    {
+      "word": "RMS value",
+      "meaning": "The root mean square value of an alternating quantity; I_rms = I_0 / sqrt(2) for a sinusoid."
+    },
+    {
+      "word": "Reactance",
+      "meaning": "The opposition to AC current offered by an inductor or capacitor, depending on frequency."
+    },
+    {
+      "word": "Inductive reactance",
+      "meaning": "X_L = omega L; the voltage leads the current by 90 degrees."
+    },
+    {
+      "word": "Capacitive reactance",
+      "meaning": "X_C = 1 / (omega C); the current leads the voltage by 90 degrees."
+    },
+    {
+      "word": "Impedance",
+      "meaning": "The total opposition in an AC circuit, combining resistance and reactance."
+    },
+    {
+      "word": "Resonance",
+      "meaning": "The condition X_L = X_C in a series LCR circuit, where the impedance is minimum and the current is maximum."
+    },
+    {
+      "word": "Q-factor",
+      "meaning": "The sharpness of resonance, Q = omega_0 L / R for a series LCR circuit."
+    },
+    {
+      "word": "Power factor",
+      "meaning": "The ratio of true power to apparent power, cos phi, in an AC circuit."
+    },
+    {
+      "word": "Alternating current",
+      "meaning": "A current whose magnitude and direction vary periodically, usually sinusoidally."
+    },
+    {
+      "word": "Peak value",
+      "meaning": "The maximum value of an alternating quantity in a cycle."
+    },
+    {
+      "word": "Phase difference",
+      "meaning": "The angle by which the voltage leads or lags the current in an AC circuit."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Flux through a plane surface in a magnetic field",
+      "description": "A rectangular surface placed in a uniform magnetic field, with the normal to the surface shown as a dashed arrow. The angle theta between the field and the normal is marked. When the surface is perpendicular to the field, theta = 0 and the flux is maximum; when the surface is parallel to the field, theta = 90 degrees and the flux is zero. The field lines are shown as evenly spaced parallel arrows.",
+      "labels": [
+        "magnetic field B",
+        "plane surface A",
+        "normal to surface",
+        "angle theta",
+        "maximum flux at theta = 0",
+        "zero flux at theta = 90"
+      ]
+    },
+    {
+      "caption": "Figure: Induced emf in a coil rotated in a uniform magnetic field",
+      "description": "A coil of N turns rotating with angular speed omega in a uniform magnetic field directed to the right. As the coil rotates, the flux through it varies as B A cos theta, where theta = omega t. The induced emf is proportional to the rate of change of this flux and is shown as a sinusoidal graph below the coil. The coil, field, rotation arrow and the emf graph are all labelled.",
+      "labels": [
+        "rotating coil",
+        "magnetic field B",
+        "angular speed omega",
+        "flux phi = B A cos omega t",
+        "emf e = N B A omega sin omega t",
+        "sinusoidal emf"
+      ]
+    },
+    {
+      "caption": "Figure: Ideal transformer and AC circuit symbols",
+      "description": "A step-up transformer with the primary coil on the left with fewer turns, the secondary coil on the right with more turns, and the laminated iron core linking them. Alternating current is fed into the primary and a higher voltage is produced in the secondary. Circuit symbols for a resistor, inductor and capacitor are shown beside it, with the direction of the phase shift indicated: in a resistor voltage and current are in phase, in an inductor the current lags, and in a capacitor the current leads.",
+      "labels": [
+        "primary coil",
+        "secondary coil",
+        "laminated core",
+        "primary voltage V_p",
+        "secondary voltage V_s",
+        "N_p turns",
+        "N_s turns",
+        "resistor symbol",
+        "inductor symbol",
+        "capacitor symbol",
+        "current lags voltage",
+        "current leads voltage"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-emi-ac-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The magnetic flux through a coil is 0.02 Wb and it changes to 0.08 Wb in 0.1 s. If the coil has 50 turns, the magnitude of the induced emf is:",
+      "options": [
+        "30 V",
+        "0.3 V",
+        "3 V",
+        "0.03 V"
+      ],
+      "correctIndex": 0,
+      "answer": "30 V",
+      "explanation": "|e| = N |delta phi / delta t| = 50 x (0.08 - 0.02) / 0.1 = 50 x 0.6 = 30 V. The flux change is 0.06 Wb and the rate of change is 0.6 Wb s^-1, so with 50 turns the induced emf is 30 V.",
+      "commonMistake": "Using the final flux instead of the change in flux, or forgetting the number of turns."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Lenz's law states that the direction of an induced emf is such that it ______ the change in magnetic flux that produced it.",
+      "answer": "opposes",
+      "explanation": "The induced emf opposes the change in flux, which is why the full Faraday's law expression has a minus sign, e = - N d phi / dt. This opposition is a consequence of energy conservation.",
+      "commonMistake": "Writing 'causes' or 'increases' instead of 'opposes'."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A straight rod of length L moves with speed v perpendicular to a magnetic field B and perpendicular to its own length. The induced emf is proportional to:",
+      "options": [
+        "B L / v",
+        "B L v",
+        "B / (L v)",
+        "B^2 L v"
+      ],
+      "correctIndex": 1,
+      "answer": "B L v",
+      "explanation": "For a rod moving perpendicular to both B and its length, the motional emf is e = B L v. Each factor matters: stronger field, longer rod, and faster motion all increase the emf.",
+      "commonMistake": "Confusing this with the power relation, or omitting one of the three factors."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the direction of the induced current when the north pole of a magnet is moved into a coil, and explain it with Lenz's law.",
+      "answer": "The induced current flows so that the end of the coil facing the magnet becomes a north pole, opposing the approaching magnet; as seen from the magnet side the current is anti-clockwise.",
+      "explanation": "The flux through the coil increases as the north pole approaches, so Lenz's law requires the induced current to produce a flux opposing that increase. A north pole on the magnet-facing side repels the approaching north pole, and the right-hand grip rule gives the anti-clockwise direction from the magnet side.",
+      "commonMistake": "Forgetting to relate the direction to the pole produced on the coil face, or giving the direction without explaining the opposition."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-05",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Define self-inductance and derive the expression for the energy stored in an inductor.",
+      "answer": "Self-inductance L is defined by N phi = L I, or equivalently by the self-induced emf e = -L dI/dt. The energy stored is U = 1/2 L I^2, obtained by integrating the power I e against dt as the current builds up.",
+      "explanation": "As the current grows from 0 to I, the back emf is -L dI/dt and the work done against it per unit time is I L dI/dt. Integrating from 0 to I gives U = integral of L I dI = 1/2 L I^2. This energy is stored in the magnetic field of the inductor.",
+      "commonMistake": "Writing U = L I^2 without the one-half, or deriving the energy without integrating the work done against the back emf."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why is the core of a transformer laminated?",
+      "options": [
+        "To increase the magnetic flux in the core",
+        "To make the transformer work with DC",
+        "To reduce eddy currents and the associated heating loss",
+        "To increase the number of turns in the coils"
+      ],
+      "correctIndex": 2,
+      "answer": "To reduce eddy currents and the associated heating loss",
+      "explanation": "Laminating the core breaks the paths of the circulating eddy currents, increasing their resistance and reducing the currents and the heating loss. The core still carries the magnetic flux well, but the eddy-current losses are greatly reduced.",
+      "commonMistake": "Thinking laminations increase flux or allow DC operation, when their purpose is to reduce loss."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-07",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a transformer does not work with a steady DC supply, but does work with AC.",
+      "answer": "A steady DC current produces a constant flux in the core, so d phi / dt is zero and no emf is induced in the secondary; no energy is transferred. An AC current produces a continuously changing flux, so d phi / dt is non-zero and emf is induced in both coils, transferring energy from primary to secondary.",
+      "explanation": "The transformer relies on mutual induction, which requires a changing flux. A steady DC input gives a constant flux after the initial switch-on transient, so the secondary emf is zero. With AC, the flux changes continuously, and the same flux links both coils, producing the voltage transformation.",
+      "commonMistake": "Saying the primary draws no current with DC, when in fact a steady DC can produce a dangerously large current limited only by the coil resistance."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-08",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a sinusoidal current, the RMS value is related to the peak value by:",
+      "options": [
+        "I_rms = I_0 / 2",
+        "I_rms = I_0 sqrt(2)",
+        "I_rms = 2 I_0",
+        "I_rms = I_0 / sqrt(2)"
+      ],
+      "correctIndex": 3,
+      "answer": "I_rms = I_0 / sqrt(2)",
+      "explanation": "For a sinusoidal current, the RMS value is I_0 / sqrt(2), which is about 0.707 I_0. This is the value that gives the same heating effect in a resistor as a DC current of the same magnitude.",
+      "commonMistake": "Confusing I_0 / sqrt(2) with I_0 / 2, which would be the average of a rectified sine and is not the RMS value."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-09",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Define inductive reactance and state how it varies with frequency.",
+      "answer": "Inductive reactance is X_L = omega L = 2 pi f L. It increases linearly with frequency, so an inductor offers more opposition to higher frequencies.",
+      "explanation": "The back emf in an inductor is proportional to the rate of change of current, which is larger at higher frequencies, so the opposition to current increases. This is why inductors tend to block high frequencies and pass low frequencies.",
+      "commonMistake": "Saying the reactance decreases with frequency, which is true for a capacitor but not for an inductor."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a series LCR circuit at resonance, the impedance is:",
+      "options": [
+        "Minimum and equal to R",
+        "Maximum and equal to R",
+        "Minimum and equal to X_L",
+        "Maximum and equal to X_C"
+      ],
+      "correctIndex": 0,
+      "answer": "Minimum and equal to R",
+      "explanation": "At resonance X_L = X_C, so the reactances cancel and Z = sqrt(R^2 + 0) = R, which is the minimum possible impedance. The current and power are therefore maximum at resonance.",
+      "commonMistake": "Thinking the impedance is maximum at resonance, when it is in fact minimum for a series circuit."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-11",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A series LCR circuit has R = 20 ohm, L = 0.2 H and C = 25 microfarad, connected to a 200 V RMS AC source. Find the resonance frequency and the current at resonance.",
+      "answer": "f_0 = 71.2 Hz; I_rms = 10 A",
+      "explanation": "omega_0 = 1/sqrt(LC) = 1/sqrt(0.2 x 25 x 10^-6) = 1/sqrt(5 x 10^-6) = 1/0.002236 = 447.2 rad s^-1. f_0 = omega_0/2 pi = 71.2 Hz. At resonance Z = R = 20 ohm, so I_rms = 200/20 = 10 A. The resonance frequency depends only on L and C, and the current at resonance depends only on R and V_rms.",
+      "commonMistake": "Using the wrong units for capacitance or inductance, or forgetting that at resonance the impedance is R, not the individual reactances."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why the average power consumed in a pure inductor in an AC circuit is zero.",
+      "answer": "In a pure inductor the voltage leads the current by 90 degrees, so the instantaneous power v i oscillates symmetrically about zero over each cycle. The energy stored in the magnetic field during one quarter cycle is returned to the source in the next, so no net energy is consumed.",
+      "explanation": "The average of sin omega t times cos omega t over a full cycle is zero, so P_avg = V_rms I_rms cos 90 = 0. The inductor stores energy magnetically and releases it, but it does not dissipate power. Only the resistive part of a circuit consumes real power.",
+      "commonMistake": "Thinking the inductor 'consumes' the energy it stores, when the stored energy is exchanged but not lost in an ideal inductor."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-13",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The peak emf of an AC generator coil is E_0 = N B A omega. If the angular speed is doubled, the peak emf:",
+      "options": [
+        "Halves",
+        "Doubles",
+        "Quadruples",
+        "Does not change"
+      ],
+      "correctIndex": 1,
+      "answer": "Doubles",
+      "explanation": "The peak emf is proportional to omega, so doubling omega doubles the peak emf, all else being equal. The frequency of the output also doubles.",
+      "commonMistake": "Thinking the emf depends on omega squared, when it comes from a single differentiation of the flux."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-14",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In an ideal transformer, the ratio of secondary voltage to primary voltage equals the ratio of ______ to ______.",
+      "answer": "secondary turns to primary turns",
+      "explanation": "For an ideal transformer, V_s / V_p = N_s / N_p, because the same flux links both coils and the induced emf is proportional to the number of turns.",
+      "commonMistake": "Reversing the ratio or using currents instead of turns."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Distinguish between the average power and the apparent power in an AC circuit.",
+      "answer": "Apparent power is V_rms I_rms, while average power is V_rms I_rms cos phi, where cos phi is the power factor. Apparent power includes the power that is stored and returned by reactive components, while average power is the actual energy consumed per unit time.",
+      "explanation": "Reactive components store and return energy each cycle, so V_rms I_rms overstates the real consumption. The power factor cos phi separates the real part from the apparent part, and a low power factor means more current is needed for the same real power.",
+      "commonMistake": "Treating V_rms I_rms as the real power even when the circuit is not purely resistive."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-16",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a series LR circuit, the phase difference between the voltage and the current is:",
+      "options": [
+        "Current leads the voltage",
+        "They are in phase",
+        "Voltage leads the current",
+        "Phase difference is 180 degrees"
+      ],
+      "correctIndex": 2,
+      "answer": "Voltage leads the current",
+      "explanation": "In an inductor the voltage leads the current by 90 degrees, and in a series LR circuit the total voltage leads the current by an angle between 0 and 90 degrees, given by tan phi = X_L / R. The resistor part is in phase, but the inductor makes the overall voltage lead.",
+      "commonMistake": "Confusing the lead of voltage over current for an inductor with the lead of current over voltage for a capacitor."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-17",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Derive the resonance frequency of a series LCR circuit and explain the significance of the Q-factor.",
+      "answer": "Resonance occurs when X_L = X_C, i.e. omega L = 1/(omega C), giving omega_0 = 1/sqrt(LC). The Q-factor, Q = omega_0 L / R, measures the sharpness of resonance: a high Q means a narrow, high peak in current near the resonant frequency.",
+      "explanation": "At resonance the impedance is minimum and purely resistive, so the current is maximum and the voltages across L and C can be much larger than the applied voltage. The Q-factor compares the reactive voltage at resonance with the applied voltage and indicates how selectively the circuit responds to its resonant frequency.",
+      "commonMistake": "Deriving omega_0 but not explaining what Q means, or confusing Q with the power factor."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A rod of length 0.4 m moves at 3 m s^-1 perpendicular to a uniform field of 0.5 T. Find the induced emf and explain the direction of the force on the rod if it carries a current in a complete circuit.",
+      "answer": "Induced emf = 0.6 V; the magnetic force on the current-carrying rod opposes the motion, as required by Lenz's law.",
+      "explanation": "e = B L v = 0.5 x 0.4 x 3 = 0.6 V. If the ends are connected through a resistor, a current flows, and the magnetic force on the rod is I L B, directed opposite to the motion. This opposing force is the mechanical cost of generating the electrical power, and the mechanical power input equals the electrical power dissipated.",
+      "commonMistake": "Omitting the direction of the opposing force or forgetting that the rod does not generate energy for free."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-19",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The capacitance of a capacitor in AC is most effective at opposing the current at ______ frequencies.",
+      "answer": "low",
+      "explanation": "Capacitive reactance X_C = 1/(omega C) is large at low frequencies and small at high frequencies, so a capacitor opposes low-frequency current more than high-frequency current.",
+      "commonMistake": "Confusing the behaviour of a capacitor with that of an inductor, which opposes high frequencies."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-20",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The power factor of a purely resistive AC circuit is:",
+      "options": [
+        "0, because the circuit is not reactive",
+        "0.5, because the real power is half the apparent power",
+        "sqrt(2), because the peak value is larger than the RMS value",
+        "1, because voltage and current are in phase"
+      ],
+      "correctIndex": 3,
+      "answer": "1, because voltage and current are in phase",
+      "explanation": "In a purely resistive circuit the voltage and current are in phase, so the power factor cos phi = cos 0 = 1. All the apparent power is real power, and there is no reactive power.",
+      "commonMistake": "Choosing an answer that describes a reactive circuit, when a purely resistive circuit has a power factor of 1."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain the meaning of the Q-factor of a series LCR circuit and state one factor that increases it.",
+      "answer": "The Q-factor measures the sharpness of resonance; a higher Q means a sharper and taller current peak near the resonant frequency. It increases with larger L or smaller R, because Q = omega_0 L / R.",
+      "explanation": "A high Q circuit responds selectively to a narrow band of frequencies around resonance, which is useful in tuning and filtering. A low Q circuit has a broad response. The Q-factor also equals the ratio of the reactive voltage at resonance to the applied voltage.",
+      "commonMistake": "Describing Q only as a number without explaining sharpness of resonance or the dependence on L and R."
+    },
+    {
+      "id": "isc-12-physics-q-emi-ac-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A 200 V RMS AC source at 50 Hz is connected across a 0.1 H inductor with negligible resistance. Find the current and explain why no real power is consumed.",
+      "answer": "X_L = 31.4 ohm; I_rms = 6.37 A; no real power is consumed because the voltage leads the current by 90 degrees, so the average power is zero.",
+      "explanation": "X_L = 2 pi f L = 2 pi x 50 x 0.1 = 31.4 ohm. I_rms = 200/31.4 = 6.37 A. The instantaneous power is v i = V_0 I_0 sin omega t cos omega t, whose average over a cycle is zero. The inductor stores energy magnetically and returns it, so the net energy consumed is zero.",
+      "commonMistake": "Calculating I_rms but then treating V_rms I_rms as the real power, forgetting the 90-degree phase difference."
+    }
+  ]
+}

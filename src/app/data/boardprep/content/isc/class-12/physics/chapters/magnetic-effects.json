@@ -1,0 +1,835 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-magnetic-effects",
+  "title": "Magnetic Effects of Current and Magnetism",
+  "kind": "physics",
+  "tagline": "Oersted's discovery, the Biot-Savart law, Ampere's circuital law, the force on moving charges and current-carrying conductors, the moving coil galvanometer, and the magnetic behaviour of matter.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus, subject code 861, examination year 2027, academic session 2026-27. The topic coverage follows the official CISCE syllabus unit Magnetic Effects of Current and Magnetism. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Magnetic effects of current and magnetism bring together two halves of the same phenomenon: the magnetic field created by moving charges, and the force that such a field exerts on moving charges and on current-carrying conductors. The chapter opens with Oersted's observation that a current-carrying wire deflects a compass needle, which showed that electricity and magnetism are not separate but linked. From that starting point the chapter builds the Biot-Savart law for the field of a current element, Ampere's circuital law for highly symmetric situations, the expressions for the force on a moving charge and on a current-carrying conductor, the torque on a current loop, the moving coil galvanometer as a measurement device, and finally the magnetic properties of matter, including the idea of magnetic dipole moment and the classifications of magnetic materials.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Magnetic Effects of Current and Magnetism"
+      },
+      {
+        "label": "Theory marks in unit",
+        "value": "16 marks (as reproduced from syllabus mirrors; UNVERIFIED against the CISCE PDF)"
+      },
+      {
+        "label": "Oersted's experiment",
+        "value": "A current-carrying conductor produces a magnetic field around it"
+      },
+      {
+        "label": "Biot-Savart law",
+        "value": "dB = (mu0 / 4 pi) I dl x r / r^3"
+      },
+      {
+        "label": "Ampere's circuital law",
+        "value": "Integral of B.dl around a closed loop equals mu0 I_enclosed"
+      },
+      {
+        "label": "Force on a moving charge",
+        "value": "F = q v x B"
+      },
+      {
+        "label": "Force on a conductor",
+        "value": "F = I L x B"
+      },
+      {
+        "label": "Torque on a coil",
+        "value": "tau = N I A x B"
+      },
+      {
+        "label": "Magnetic dipole moment",
+        "value": "M = N I A, direction by right-hand rule"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe Oersted's experiment and explain that a current-carrying conductor produces a magnetic field.",
+    "State the Biot-Savart law and use it to find the magnetic field due to a straight wire and a circular loop.",
+    "State Ampere's circuital law and apply it to find the field inside and outside a long straight conductor and a solenoid.",
+    "Define the Tesla and Gauss as units of magnetic field.",
+    "Derive and use the expression for the force on a moving charge in a magnetic field, including the helical motion of a charged particle.",
+    "Derive and use the force on a current-carrying conductor, including the force between parallel current-carrying wires.",
+    "Define the magnetic dipole moment of a current loop and find the torque on a coil in a uniform magnetic field.",
+    "Explain the construction and working of a moving coil galvanometer and its conversion to an ammeter and a voltmeter.",
+    "Classify magnetic materials as diamagnetic, paramagnetic and ferromagnetic, and relate them to susceptibility."
+  ],
+  "learn": [
+    {
+      "id": "oersteds-discovery-and-magnetic-field",
+      "title": "Oersted's discovery and the magnetic field",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1820 Hans Christian Oersted noticed that a compass needle placed near a wire carrying a current was deflected. This was the first clear evidence that electricity and magnetism are connected: a moving charge, in the form of a current, produces a magnetic field. Before this, magnetism and electricity were regarded as unrelated phenomena, and the discovery immediately opened the search for the laws governing the magnetic effect of currents."
+        },
+        {
+          "type": "paragraph",
+          "text": "The magnetic field B is the fundamental quantity used to describe the magnetic influence of a current or a magnet. It is a vector field, like the electric field, but it is defined through the force it exerts on a moving charge rather than on a stationary one. The SI unit of magnetic field is the tesla, and a smaller common unit is the gauss, where 1 tesla equals 10^4 gauss. The Earth's magnetic field is of order 0.5 gauss, which is why a small current-carrying coil can produce a visibly larger field nearby."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Magnetic field",
+              "meaning": "A vector field produced by moving charges and magnets; it exerts a force on moving charges and current-carrying conductors."
+            },
+            {
+              "term": "Tesla",
+              "meaning": "The SI unit of magnetic field; 1 T = 1 N A^-1 m^-1."
+            },
+            {
+              "term": "Gauss",
+              "meaning": "A non-SI unit of magnetic field; 1 T = 10^4 G."
+            },
+            {
+              "term": "Oersted's experiment",
+              "meaning": "The demonstration that a current-carrying wire deflects a compass needle, showing that current produces a magnetic field."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "biot-savart-law",
+      "title": "Biot-Savart law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Biot-Savart law gives the magnetic field produced by a small element of a current-carrying conductor. If a conductor carries a current I and an infinitesimal element dl produces a field dB at a point P, then the magnitude of dB is proportional to I, to the length dl, to the sine of the angle between dl and the line joining the element to P, and inversely proportional to the square of that distance. In vector form, dB = (mu0 / 4 pi) I dl x r / r^3, where r is the vector from the element to the field point and mu0 is the permeability of free space."
+        },
+        {
+          "type": "paragraph",
+          "text": "The constant mu0 / 4 pi appears because of the SI system; mu0 itself is the permeability of free space and equals 4 pi x 10^-7 N A^-2. The direction of dB is given by the right-hand rule applied to the cross product: if the thumb points along dl and the fingers towards r, the palm faces the direction of dB. This is why a straight current-carrying wire produces a circular magnetic field around it."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two standard results follow directly from the Biot-Savart law and are worth knowing. For a very long straight wire carrying current I, the magnetic field at a perpendicular distance r is B = mu0 I / 2 pi r. For a circular loop of radius R carrying current I, the field at the centre is B = mu0 I / 2R, directed along the axis of the loop by the right-hand rule. For a point on the axis of the loop, the field is more complicated, but the centre is the simplest and most common case."
+        },
+        {
+          "type": "table",
+          "caption": "Magnetic fields from the Biot-Savart law",
+          "columns": [
+            "Source",
+            "Field",
+            "Direction",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "Long straight wire",
+              "B = mu0 I / 2 pi r",
+              "Circular around the wire",
+              "By right-hand thumb rule"
+            ],
+            [
+              "Centre of circular loop",
+              "B = mu0 I / 2R",
+              "Along the axis",
+              "Right-hand rule"
+            ],
+            [
+              "Circular arc at centre",
+              "B = (mu0 I / 4 pi R) x angle",
+              "Along the axis",
+              "Proportional to the subtended angle"
+            ],
+            [
+              "Solenoid (inside)",
+              "B = mu0 n I",
+              "Along the axis",
+              "n is turns per unit length"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A long straight wire carries a current of 5 A. Find the magnetic field at a point 2 cm from the wire.",
+              "note": "B = mu0 I / 2 pi r = (4 pi x 10^-7) x 5 / (2 pi x 0.02) = 2 x 10^-7 x 5 / 0.02 = 10^-5 T. The field is small but measurable; it circles the wire according to the right-hand rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ampere-circuital-law",
+      "title": "Ampere's circuital law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ampere's circuital law is the magnetic counterpart of Gauss's law in electrostatics. It relates the magnetic field around a closed loop to the current passing through the loop. Written in integral form, it says that the line integral of B around a closed loop equals mu0 times the net current enclosed by the loop: integral B.dl = mu0 I_enclosed. The law is always true for steady currents, but it is useful for finding B only when the symmetry of the current distribution makes B constant in magnitude along the chosen loop."
+        },
+        {
+          "type": "paragraph",
+          "text": "The most important applications are the same ones that Gauss's law handles in electrostatics, because symmetry makes the integral collapse to a simple product. For a long straight wire, a circular Amperian loop of radius r gives B x 2 pi r = mu0 I, so B = mu0 I / 2 pi r, which is the same result as the Biot-Savart law. For a long solenoid with n turns per unit length carrying current I, a rectangular Amperian loop inside the solenoid gives B = mu0 n I along the axis, and the field outside is negligible. For a toroid, the field is confined within the core and varies with radius."
+        },
+        {
+          "type": "paragraph",
+          "text": "The sign convention in Ampere's law is important: the direction of the enclosed current is taken by the right-hand rule, with the fingers curling in the direction of the loop and the thumb pointing in the direction of positive current. If the current passes through the loop in the opposite sense, it is taken as negative. This is the same kind of orientation convention that appears in Gauss's law and in the definition of flux."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Ampere's circuital law",
+              "meaning": "Integral B.dl = mu0 I_enclosed around a closed loop."
+            },
+            {
+              "term": "Amperian loop",
+              "meaning": "A closed path chosen to exploit symmetry when applying Ampere's law."
+            },
+            {
+              "term": "Solenoid",
+              "meaning": "A long coil of wire; inside it the field is nearly uniform."
+            },
+            {
+              "term": "Toroid",
+              "meaning": "A solenoid bent into a circle; the field is confined inside the core."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "force-on-moving-charge-and-conductor",
+      "title": "Force on a moving charge and a conductor",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A magnetic field exerts a force on a moving charge, and the force is given by F = q v x B. The magnitude is F = q v B sin theta, where theta is the angle between v and B. The force is zero if the charge is stationary or if it moves parallel to the field, and it is greatest when the motion is perpendicular to the field. The direction is given by the right-hand rule for the cross product: for a positive charge, the fingers curl from v to B and the thumb points along F; for a negative charge the force is opposite."
+        },
+        {
+          "type": "paragraph",
+          "text": "Because the magnetic force is always perpendicular to the velocity, it does no work. It can change the direction of motion but not the speed, so the kinetic energy of the particle is unchanged by the magnetic force alone. This leads to the common motion of a charged particle in a uniform field: if it enters perpendicular to the field, it moves in a circle of radius r = m v / q B, and if it enters at an angle, it follows a helix."
+        },
+        {
+          "type": "paragraph",
+          "text": "The force on a current-carrying conductor is a direct consequence of the force on moving charges. If a straight conductor of length L carries a current I in a uniform field B, the force is F = I L x B, with magnitude F = I L B sin theta. The force between two parallel current-carrying wires then follows: parallel currents attract and antiparallel currents repel, with a force per unit length F / L = mu0 I1 I2 / 2 pi d. This force is the basis of the definition of the ampere in the older SI system."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A proton of mass 1.67 x 10^-27 kg travels at 2 x 10^6 m s^-1 perpendicular to a field of 0.1 T. Find the radius of its circular path.",
+              "note": "r = m v / q B = (1.67 x 10^-27) x (2 x 10^6) / (1.6 x 10^-19 x 0.1) = 3.34 x 10^-21 / 1.6 x 10^-20 = 0.20875 m, approximately 0.21 m. The proton moves in a circle because the magnetic force provides the centripetal force."
+            },
+            {
+              "text": "Two parallel wires 1 m apart each carry 1 A in the same direction. Find the force per unit length.",
+              "note": "F / L = mu0 I1 I2 / 2 pi d = (4 pi x 10^-7) x 1 x 1 / (2 pi x 1) = 2 x 10^-7 N m^-1. The force is attractive for parallel currents."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "F = q v x B; magnitude F = q v B sin theta.",
+            "Magnetic force does no work; only direction, not speed, changes.",
+            "Circular motion when v is perpendicular to B: r = m v / q B.",
+            "Helical motion when v has a component along B.",
+            "Force on a straight conductor: F = I L x B.",
+            "Parallel currents attract; antiparallel currents repel."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "torque-on-a-current-loop",
+      "title": "Torque on a current loop",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A current-carrying loop placed in a uniform magnetic field experiences a torque but no net force, because the forces on opposite sides of the loop are equal and opposite. If the loop has area A and carries a current I, the magnetic dipole moment is M = N I A, where N is the number of turns and the direction of M is given by the right-hand rule: curl the fingers in the direction of the current and the thumb points along M. The torque on the loop is tau = M x B, with magnitude tau = M B sin theta."
+        },
+        {
+          "type": "paragraph",
+          "text": "The torque tends to align the plane of the coil with the field in the sense that the magnetic moment aligns with B. This is the operating principle of the moving coil galvanometer, where a coil suspended in a radial magnetic field experiences a torque proportional to the current, and the deflection is read against a scale. The radial field is important because it keeps the plane of the coil parallel to the field lines regardless of deflection, so the torque remains proportional to current throughout the range."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A rectangular coil of area 4 x 10^-4 m^2 has 50 turns and carries 20 mA in a field of 0.1 T. Find the maximum torque.",
+              "note": "M = N I A = 50 x 0.02 x 4 x 10^-4 = 4 x 10^-4 A m^2. Maximum torque = M B = 4 x 10^-4 x 0.1 = 4 x 10^-5 N m. The torque is maximum when the plane of the coil is parallel to the field."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Magnetic dipole moment",
+              "meaning": "M = N I A for a current loop; direction by right-hand rule."
+            },
+            {
+              "term": "Torque on a coil",
+              "meaning": "tau = M x B; maximum when M is perpendicular to B."
+            },
+            {
+              "term": "Radial magnetic field",
+              "meaning": "A field in which the lines are always parallel to the plane of the coil, used in galvanometers."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moving-coil-galvanometer",
+      "title": "Moving coil galvanometer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A moving coil galvanometer is a sensitive device for detecting and measuring small currents. It consists of a coil suspended between the poles of a magnet, with a spring providing the restoring torque. When a current passes through the coil, the magnetic torque deflects it against the spring, and the deflection is proportional to the current if the field is radial. The current sensitivity is the deflection per unit current, and the voltage sensitivity is the deflection per unit voltage."
+        },
+        {
+          "type": "paragraph",
+          "text": "To convert a galvanometer into an ammeter, a low resistance called a shunt is connected in parallel, so that most of the current bypasses the coil and only a known small fraction flows through it. To convert it into a voltmeter, a high resistance is connected in series, so that the device measures the potential difference across the combination. These conversions are standard and depend on the resistance of the galvanometer and the range required."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A galvanometer of resistance 50 ohm gives full-scale deflection for 1 mA. Find the shunt needed to convert it into an ammeter of range 1 A.",
+              "note": "Let shunt be S. The voltage across galvanometer and shunt is the same, so (1 - 0.001) S = S x 0.999 = 0.001 x 50, so S = 0.05 / 0.999 = 0.05005 ohm approximately. The shunt is very small because most current must bypass the coil."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Conversion of a galvanometer",
+          "columns": [
+            "Instrument",
+            "Connection",
+            "Added resistance",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "Ammeter",
+              "Shunt in parallel",
+              "Low resistance",
+              "Bypass most current"
+            ],
+            [
+              "Voltmeter",
+              "High resistance in series",
+              "High resistance",
+              "Limit current through coil"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "magnetic-materials",
+      "title": "Magnetic materials",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Magnetic materials are classified by how they respond to an external field. Diamagnetic materials are weakly repelled by a magnet; their susceptibility is small and negative, and they develop a weak opposing magnetisation. Paramagnetic materials are weakly attracted; their susceptibility is small and positive, and their magnetisation is in the direction of the applied field but disappears when the field is removed. Ferromagnetic materials are strongly attracted and can retain magnetisation; their susceptibility is large and positive, and they consist of domains that align under a field."
+        },
+        {
+          "type": "paragraph",
+          "text": "The distinction is rooted in the atomic origin of magnetism. In diamagnetic materials, the induced magnetisation opposes the field due to the change in orbital motion of electrons. In paramagnetic materials, atoms have permanent magnetic moments that align partially with the field but are scrambled by thermal motion. In ferromagnetic materials, the moments are coupled into domains that can be aligned over large regions, giving a large and often permanent magnetisation. In all cases, the susceptibility chi measures the degree of magnetisation per unit applied field."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Diamagnetic: repelled, chi negative and small; examples include water and copper.",
+            "Paramagnetic: weakly attracted, chi positive and small; examples include aluminium and oxygen.",
+            "Ferromagnetic: strongly attracted, chi large and positive; examples include iron, cobalt and nickel.",
+            "Magnetisation M is the magnetic moment per unit volume.",
+            "Relative permeability mu_r = 1 + chi expresses how much a material enhances the field."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revision-and-important-points",
+      "title": "Important points and revision",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Magnetic effects of current and magnetism are built from a small set of laws: the Biot-Savart law for the field of a current element, Ampere's law for symmetric distributions, the Lorentz force F = q v x B, the force on a conductor F = I L x B, the torque on a loop tau = M x B, and the classification of magnetic materials by susceptibility. If you can apply each law to its standard case and keep the direction conventions straight, you can handle most questions in this unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A current produces a magnetic field; Oersted's experiment was the first demonstration.",
+            "Biot-Savart: dB = (mu0 / 4 pi) I dl x r / r^3.",
+            "Field of a long straight wire: B = mu0 I / 2 pi r.",
+            "Ampere's law: integral B.dl = mu0 I_enclosed; use with symmetry.",
+            "Force on a charge: F = q v x B; magnetic force does no work.",
+            "Force on a conductor: F = I L x B; parallel currents attract.",
+            "Magnetic moment M = N I A; torque tau = M x B.",
+            "Moving coil galvanometer uses a radial field and a spring; shunt for ammeter, series resistance for voltmeter.",
+            "Diamagnetic: repelled; paramagnetic: weakly attracted; ferromagnetic: strongly attracted and can be permanent."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Quick formula sheet for Magnetic Effects",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "When to use"
+          ],
+          "rows": [
+            [
+              "Field of long wire",
+              "B = mu0 I / 2 pi r",
+              "Straight wire, perpendicular distance r"
+            ],
+            [
+              "Field at loop centre",
+              "B = mu0 I / 2R",
+              "Circular loop, at centre"
+            ],
+            [
+              "Ampere's law",
+              "integral B.dl = mu0 I_enclosed",
+              "Symmetric current distribution"
+            ],
+            [
+              "Solenoid field",
+              "B = mu0 n I",
+              "Long solenoid, inside"
+            ],
+            [
+              "Force on charge",
+              "F = q v x B",
+              "Moving charge in B"
+            ],
+            [
+              "Radius of circular path",
+              "r = m v / q B",
+              "v perpendicular to B"
+            ],
+            [
+              "Force on conductor",
+              "F = I L x B",
+              "Straight conductor in B"
+            ],
+            [
+              "Force between wires",
+              "F / L = mu0 I1 I2 / 2 pi d",
+              "Two parallel wires"
+            ],
+            [
+              "Magnetic moment",
+              "M = N I A",
+              "Current loop"
+            ],
+            [
+              "Torque on coil",
+              "tau = M B sin theta",
+              "Coil in uniform B"
+            ],
+            [
+              "Galvanometer current",
+              "I proportional to deflection",
+              "Radial field, spring control"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Oersted's experiment showed that a current-carrying conductor produces a magnetic field.",
+    "The Biot-Savart law gives the field of a current element; for a long straight wire B = mu0 I / 2 pi r.",
+    "Ampere's circuital law, integral B.dl = mu0 I_enclosed, gives the field in symmetric cases.",
+    "A moving charge experiences F = q v x B, which does no work and can produce circular or helical motion.",
+    "A current-carrying conductor experiences F = I L x B; parallel currents attract and antiparallel currents repel.",
+    "A current loop has magnetic moment M = N I A and experiences torque tau = M x B.",
+    "The moving coil galvanometer uses a radial magnetic field and a spring; a shunt converts it to an ammeter, a series resistance to a voltmeter.",
+    "Magnetic materials are classified as diamagnetic, paramagnetic or ferromagnetic by their susceptibility."
+  ],
+  "examFocus": [
+    "In force problems, state the direction of F with the right-hand rule and include the cross-product dependence on theta before substituting numbers.",
+    "Remember that the magnetic force does no work; if a question asks for energy change due to a magnetic field alone, the answer is zero.",
+    "For Ampere's law, draw the Amperian loop, state why B is constant on it, and give the enclosed current with the correct sign.",
+    "In galvanometer conversion, use the parallel-shunt formula for an ammeter and the series-resistance formula for a voltmeter, and check that the added resistance is small or large as expected.",
+    "For magnetic materials, relate the sign of susceptibility to the type of material rather than memorising examples alone."
+  ],
+  "vocabulary": [
+    {
+      "word": "Magnetic field",
+      "meaning": "A vector field that exerts a force on moving charges and current-carrying conductors."
+    },
+    {
+      "word": "Biot-Savart law",
+      "meaning": "The law giving the magnetic field of a current element."
+    },
+    {
+      "word": "Tesla",
+      "meaning": "The SI unit of magnetic field."
+    },
+    {
+      "word": "Lorentz force",
+      "meaning": "The total force on a charge in electric and magnetic fields; F = q (E + v x B)."
+    },
+    {
+      "word": "Magnetic dipole moment",
+      "meaning": "M = N I A for a current loop; direction by right-hand rule."
+    },
+    {
+      "word": "Moving coil galvanometer",
+      "meaning": "A sensitive current-measuring device using a coil in a radial magnetic field."
+    },
+    {
+      "word": "Shunt",
+      "meaning": "A low resistance in parallel with a galvanometer to make an ammeter."
+    },
+    {
+      "word": "Diamagnetic",
+      "meaning": "A material weakly repelled by a magnet; negative susceptibility."
+    },
+    {
+      "word": "Ferromagnetic",
+      "meaning": "A material strongly attracted by a magnet; large positive susceptibility."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Magnetic field around a straight current-carrying wire",
+      "description": "A vertical wire carrying current upward, with circular magnetic field lines shown around it. The circles are closest near the wire and get weaker farther away. Arrows on the circles follow the right-hand thumb rule: when the thumb points up along the current, the fingers curl in the direction of the field.",
+      "labels": [
+        "current direction",
+        "magnetic field line",
+        "right-hand thumb rule",
+        "field strength decreases with distance"
+      ]
+    },
+    {
+      "caption": "Figure: Force on a current-carrying conductor",
+      "description": "A straight conductor placed in a uniform magnetic field, with current flowing through it. An arrow labelled F shows the force perpendicular to both the current direction and the field direction. A small right-angle symbol indicates the cross-product relationship.",
+      "labels": [
+        "current I",
+        "magnetic field B",
+        "force F",
+        "right-angle cross product"
+      ]
+    },
+    {
+      "caption": "Figure: Moving coil galvanometer",
+      "description": "A coil suspended between the poles of a magnet with a radial magnetic field, a spring providing restoring torque, and a pointer reading a scale. The diagram shows the deflection proportional to current and labels the coil, magnet, spring and pointer.",
+      "labels": [
+        "coil",
+        "radial magnetic field",
+        "spring",
+        "pointer",
+        "scale",
+        "current in coil"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-magnetic-effects-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of magnetic field is:",
+      "options": [
+        "Tesla",
+        "Gauss",
+        "Weber",
+        "Henry"
+      ],
+      "correctIndex": 0,
+      "answer": "Tesla",
+      "explanation": "The tesla is the SI unit of magnetic field, defined from the force on a current-carrying conductor. The gauss is a non-SI unit, the weber is a unit of magnetic flux, and the henry is a unit of inductance.",
+      "commonMistake": "Choosing gauss, which is a common unit but not the SI unit."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A stationary charge experiences ______ force in a magnetic field.",
+      "answer": "no",
+      "explanation": "The magnetic force is F = q v x B, which depends on velocity. A stationary charge has v = 0, so the magnetic force is zero. This is why magnets do not affect stationary charges.",
+      "commonMistake": "Thinking a magnetic field exerts a force on any charge, forgetting the velocity dependence."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The direction of the magnetic field around a straight current-carrying wire is found by:",
+      "options": [
+        "Left-hand rule",
+        "Right-hand thumb rule",
+        "Fleming's right-hand rule",
+        "Fleming's left-hand rule"
+      ],
+      "correctIndex": 1,
+      "answer": "Right-hand thumb rule",
+      "explanation": "If the thumb of the right hand points along the current, the curl of the fingers gives the direction of the magnetic field around the wire. The other rules are used for force and induced emf, not for the field of a straight wire.",
+      "commonMistake": "Confusing the thumb rule with Fleming's left-hand or right-hand rules, which apply to force and induction."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the Biot-Savart law in vector form.",
+      "answer": "dB = (mu0 / 4 pi) I dl x r / r^3, where dl is the current element, r is the vector from the element to the field point, and mu0 is the permeability of free space.",
+      "explanation": "The cross product gives the direction of the field, and the inverse-square dependence gives the magnitude. The law is the magnetic counterpart of Coulomb's law for a point charge.",
+      "commonMistake": "Writing the scalar form without the cross product and missing the directional information."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A long straight wire carries current I. The magnetic field at a distance r is B. If the current is doubled and the distance is halved, the new field is:",
+      "options": [
+        "2 B",
+        "B",
+        "4 B",
+        "8 B"
+      ],
+      "correctIndex": 2,
+      "answer": "4 B",
+      "explanation": "B = mu0 I / 2 pi r. Doubling I gives a factor of 2, halving r gives another factor of 2, so the field becomes 4 B. The field is proportional to current and inversely to distance.",
+      "commonMistake": "Changing only one quantity and missing the combined factor."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-06",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Using Ampere's circuital law, find the magnetic field inside a long straight conductor of radius R carrying a uniform current I, at a distance r from the axis with r less than R.",
+      "answer": "B = (mu0 I r) / (2 pi R^2)",
+      "explanation": "For r less than R, the current enclosed is the current in the area pi r^2, which is I r^2 / R^2. A circular Amperian loop of radius r gives B x 2 pi r = mu0 I r^2 / R^2, so B = mu0 I r / 2 pi R^2. The field increases linearly with r inside the conductor.",
+      "commonMistake": "Using the full current I instead of the enclosed current, which gives the outside-field formula by mistake."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The magnetic force on a moving charge does:",
+      "options": [
+        "Positive work",
+        "Negative work",
+        "Work equal to the change in kinetic energy",
+        "No work"
+      ],
+      "correctIndex": 3,
+      "answer": "No work",
+      "explanation": "The magnetic force is perpendicular to the velocity, so it does no work and cannot change the kinetic energy. It can only change the direction of motion.",
+      "commonMistake": "Thinking the magnetic field changes the speed, rather than only the direction."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-08",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A proton moves perpendicular to a uniform magnetic field. Describe its path.",
+      "answer": "It moves in a circle. The magnetic force provides the centripetal force, so the radius is r = m v / q B and the speed is constant.",
+      "explanation": "Because the force is always perpendicular to velocity, the motion is circular with constant speed. If the velocity were not perpendicular, the path would be a helix.",
+      "commonMistake": "Saying the path is straight or parabolic, which would apply to an electric field or no field."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Two long parallel wires 0.5 m apart carry currents of 4 A and 6 A in the same direction. Find the force per unit length between them and state whether it is attractive or repulsive.",
+      "answer": "9.6 x 10^-6 N m^-1, attractive",
+      "explanation": "F / L = mu0 I1 I2 / 2 pi d = (4 pi x 10^-7) x 4 x 6 / (2 pi x 0.5) = 16 x 10^-7 x 6 / 1 = 9.6 x 10^-6 N m^-1. Parallel currents attract, so the force is attractive.",
+      "commonMistake": "Getting the sign wrong and calling the force repulsive for parallel currents."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The magnetic dipole moment of a current loop is:",
+      "options": [
+        "N I A",
+        "I / A",
+        "B A",
+        "mu0 I A"
+      ],
+      "correctIndex": 0,
+      "answer": "N I A",
+      "explanation": "The magnetic moment is the product of the number of turns, the current and the area, M = N I A, with direction given by the right-hand rule. It is the quantity that determines the torque in a magnetic field.",
+      "commonMistake": "Including mu0, which appears in field formulas but not in the definition of moment."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The torque on a current loop in a uniform magnetic field is tau = ______.",
+      "answer": "M x B",
+      "explanation": "The torque is the cross product of the magnetic moment and the field, tau = M x B, with magnitude M B sin theta. The torque tends to align M with B.",
+      "commonMistake": "Writing M B without the cross product and missing the directional aspect."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why is a radial magnetic field used in a moving coil galvanometer?",
+      "answer": "A radial field keeps the plane of the coil parallel to the field lines at all deflections, so the torque is proportional to the current throughout the range and the scale is linear.",
+      "explanation": "Without a radial field, the torque would vary with the angle of the coil, and the deflection would not be proportional to current. The radial field is the key feature that makes the galvanometer linear.",
+      "commonMistake": "Thinking the radial field increases the strength of the magnet alone, rather than making the torque proportional to current."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-13",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A galvanometer of resistance 100 ohm gives full-scale deflection for 2 mA. Find the series resistance needed to convert it into a voltmeter of range 10 V.",
+      "answer": "4900 ohm",
+      "explanation": "Full-scale voltage across the galvanometer is Vg = I Rg = 0.002 x 100 = 0.2 V. The remaining voltage 10 - 0.2 = 9.8 V must be dropped across the series resistor R, so R = 9.8 / 0.002 = 4900 ohm. The series resistance is large because a voltmeter must limit the current.",
+      "commonMistake": "Using the galvanometer current directly without subtracting the voltage drop across the galvanometer itself."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why parallel currents attract and antiparallel currents repel.",
+      "answer": "Each wire produces a magnetic field that acts on the other wire. For parallel currents, the field of one wire exerts a force on the other that pulls them together; for antiparallel currents, the force pushes them apart. Equivalently, the force per unit length is F / L = mu0 I1 I2 / 2 pi d, with attraction for parallel currents and repulsion for antiparallel ones.",
+      "explanation": "The result can be seen from the cross product form F = I L x B: the directions of the fields and currents determine whether the force is towards or away from the other wire. The rule parallel-attract, antiparallel-repel is one of the classic outcomes of electromagnetism.",
+      "commonMistake": "Reciting the rule without connecting it to the field produced by one wire acting on the other."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-15",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Which material has a large positive magnetic susceptibility?",
+      "options": [
+        "Copper",
+        "Iron",
+        "Water",
+        "Aluminium"
+      ],
+      "correctIndex": 1,
+      "answer": "Iron",
+      "explanation": "Iron is ferromagnetic, with a large positive susceptibility, so it is strongly attracted to a magnet and can be strongly magnetised. Copper and water are diamagnetic, aluminium is paramagnetic, and both have much smaller susceptibility.",
+      "commonMistake": "Choosing aluminium, which is paramagnetic but not ferromagnetic, and thus has a much smaller susceptibility."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-16",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A circular coil of 20 turns and radius 5 cm carries a current of 2 A. Find the magnetic field at the centre.",
+      "answer": "5.0265 x 10^-4 T",
+      "explanation": "B = mu0 N I / 2R = (4 pi x 10^-7) x 20 x 2 / (2 x 0.05) = (1.6 pi x 10^-5) / 0.1 = 16 pi x 10^-5 = 5.0265 x 10^-4 T. The field is along the axis of the coil by the right-hand rule.",
+      "commonMistake": "Using the straight-wire formula instead of the loop-centre formula."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-17",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A material with negative magnetic susceptibility is called ______.",
+      "answer": "diamagnetic",
+      "explanation": "Diamagnetic materials have a small negative susceptibility, meaning they develop a weak magnetisation opposite to the applied field and are weakly repelled. This distinguishes them from paramagnetic and ferromagnetic materials.",
+      "commonMistake": "Answering 'paramagnetic' or 'ferromagnetic', which have positive susceptibility."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-18",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State one difference between a paramagnet and a ferromagnet.",
+      "answer": "A paramagnet has a small positive susceptibility and loses its magnetisation when the field is removed, while a ferromagnet has a large positive susceptibility and can retain magnetisation as a permanent magnet.",
+      "explanation": "The key difference is the strength of the response and the ability to retain magnetisation, which comes from the domain structure of ferromagnets. Paramagnets have no domains and only a weak alignment.",
+      "commonMistake": "Saying both are strongly attracted, which confuses paramagnets with ferromagnets."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A charged particle enters a uniform magnetic field at an angle theta to the field. Describe the resulting path and give the radius of the circular component.",
+      "answer": "The path is a helix. The perpendicular component v sin theta gives circular motion of radius r = m v sin theta / q B, and the parallel component v cos theta gives a constant motion along the field.",
+      "explanation": "The velocity is resolved into components parallel and perpendicular to B. The perpendicular component produces circular motion while the parallel component is unaffected, so the combination is a helix. If theta is 0 or 90 degrees, the helix reduces to a straight line or a circle.",
+      "commonMistake": "Treating the whole velocity as perpendicular and ignoring the parallel component that produces the pitch of the helix."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-20",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The force on a current-carrying conductor in a magnetic field is largest when the conductor is:",
+      "options": [
+        "Parallel to the field",
+        "At 45 degrees to the field",
+        "Perpendicular to the field",
+        "At any angle, because force is independent of angle"
+      ],
+      "correctIndex": 2,
+      "answer": "Perpendicular to the field",
+      "explanation": "The force is F = I L x B, with magnitude I L B sin theta. It is maximum when theta is 90 degrees, that is, when the conductor is perpendicular to the field, and zero when it is parallel.",
+      "commonMistake": "Thinking the force is the same at all angles, forgetting the sin theta dependence."
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-21",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI value of the permeability of free space μ₀ is:",
+      "answer": "4π × 10⁻⁷ N A⁻²",
+      "explanation": "The permeability of free space μ₀ is the constant appearing in the Biot–Savart law and Ampere’s circuital law; its SI value is 4π × 10⁻⁷ N A⁻² (or H m⁻¹).",
+      "commonMistake": "Confusing μ₀ with ε₀ (permittivity of free space) or with Coulomb’s constant.",
+      "options": [
+        "8.85 × 10⁻¹² C² N⁻¹ m⁻²",
+        "9 × 10⁹ N m² C⁻²",
+        "6.63 × 10⁻³⁴ J s",
+        "4π × 10⁻⁷ N A⁻²"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "id": "isc-12-physics-q-magnetic-effects-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why is a moving coil galvanometer not used directly to measure large currents?",
+      "answer": "It is a sensitive device designed for small currents; large currents would damage the coil or give a deflection beyond its range. A shunt is used to bypass most of the current, converting it into an ammeter that can measure larger currents safely.",
+      "explanation": "The galvanometer's coil has a small full-scale current, so it cannot handle large currents directly. The shunt allows the measurement of large currents while only a small known fraction flows through the coil.",
+      "commonMistake": "Saying the galvanometer is inaccurate for large currents alone, without mentioning the damage and range limitation that the shunt addresses."
+    }
+  ]
+}

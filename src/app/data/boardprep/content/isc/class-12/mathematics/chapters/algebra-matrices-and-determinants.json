@@ -1,0 +1,638 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-algebra-matrices-and-determinants",
+  "title": "Matrices and Determinants",
+  "kind": "mathematics",
+  "tagline": "Matrix algebra, determinants and the solution of linear systems by adjoint and Martin's rule.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 2 — Algebra: Matrices and Determinants; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the Unit 2 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 2 carries 10 of the 80 theory marks and is built around one central idea: a rectangular array can be treated as a single algebraic object. Matrices record coefficients and data, and their addition, scalar multiplication and product obey rules that look familiar until multiplication refuses to commute and a non-zero product can be the zero matrix. Determinants assign to a square matrix a single number that detects singularity: a non-zero determinant means the matrix is invertible and the associated system of equations has a unique solution. The same determinant machinery gives the area of a triangle, the adjoint and inverse of a matrix, and Martin's rule for solving systems in two or three variables while classifying them as consistent or inconsistent.",
+    "facts": [
+      { "label": "Unit weightage", "value": "10 of 80 theory marks" },
+      { "label": "Paper I", "value": "Theory, 3 hours, 80 marks" },
+      { "label": "Paper II", "value": "Project work, 20 marks" },
+      { "label": "Examination year", "value": "2027" },
+      { "label": "Syllabus structure", "value": "Seven compulsory units, no optional section" }
+    ]
+  },
+  "learningOutcomes": [
+    "Identify types of matrices, state their order, and test equality, transpose, symmetry and skew symmetry.",
+    "Perform addition, scalar multiplication and matrix multiplication, and recognise non-commutativity and zero divisors.",
+    "Evaluate determinants of order 2 and 3 using minors, cofactors and properties that simplify computation.",
+    "Use determinants to find the area of a triangle and to test collinearity of three points.",
+    "Compute the adjoint and inverse of a non-singular square matrix and verify A(adj A) = |A|I.",
+    "Solve a system of linear equations by the matrix method and by Martin's rule for two or three variables.",
+    "Classify a system as consistent with a unique solution, consistent with infinitely many solutions, or inconsistent."
+  ],
+  "learn": [
+    {
+      "id": "matrices-and-their-algebra",
+      "title": "Matrices, types and the algebra of addition and multiplication",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A matrix is a rectangular arrangement of numbers or functions in rows and columns. A matrix of order m × n has m rows and n columns, and its entries are written aᵢⱼ, where i is the row number and j the column number. Two matrices are equal only when they have the same order and every corresponding entry is the same. The order is therefore part of the identity of a matrix, not a detail that can be ignored when comparing or combining them."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Order of a matrix", "meaning": "The pair m × n giving the number of rows and columns." },
+            { "term": "Row matrix and column matrix", "meaning": "Matrices of order 1 × n and m × 1 respectively." },
+            { "term": "Square matrix", "meaning": "A matrix with the same number of rows and columns, of order n × n." },
+            { "term": "Diagonal and scalar matrix", "meaning": "A square matrix with non-diagonal entries zero; a scalar matrix is a diagonal matrix with all diagonal entries equal." },
+            { "term": "Identity matrix I", "meaning": "A square matrix with 1 on the principal diagonal and 0 elsewhere, acting as the multiplicative identity." },
+            { "term": "Zero or null matrix O", "meaning": "A matrix in which every entry is 0; it acts as the additive identity." },
+            { "term": "Transpose Aᵀ", "meaning": "The matrix obtained by interchanging rows and columns, so (Aᵀ)ᵢⱼ = aⱼᵢ." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Addition and subtraction are defined only for matrices of the same order and are performed entry by entry.",
+            "Scalar multiplication multiplies every entry of the matrix by the same number k, so (kA)ᵢⱼ = k aᵢⱼ.",
+            "The product AB is defined only when the number of columns of A equals the number of rows of B; if A is m × n and B is n × p then AB is m × p.",
+            "The (i, j) entry of AB is the dot product of the i-th row of A with the j-th column of B: (AB)ᵢⱼ = Σ aᵢₖ bₖⱼ.",
+            "Matrix multiplication is associative and distributive over addition, but it is not commutative in general: AB need not equal BA even when both are defined.",
+            "The product of two non-zero matrices can be the zero matrix, so AB = O does not force A = O or B = O."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Operations and the conditions under which they are defined",
+          "columns": ["Operation", "Condition", "Resulting order or value"],
+          "rows": [
+            ["A + B", "A and B have the same order m × n", "m × n, with entries aᵢⱼ + bᵢⱼ"],
+            ["kA", "k is any scalar, A any matrix", "Same order as A, every entry multiplied by k"],
+            ["AB", "Columns of A = rows of B (A is m × n, B is n × p)", "m × p, by row-by-column multiplication"],
+            ["Aᵀ", "A any matrix of order m × n", "n × m, rows and columns interchanged"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If A is 2 × 3 and B is 3 × 2, find the orders of AB and BA.",
+              "note": "AB is defined because A has 3 columns and B has 3 rows, so AB is 2 × 2. BA is also defined because B has 2 columns and A has 2 rows, so BA is 3 × 3. Both products exist but they have different orders, which already shows they cannot be equal."
+            },
+            {
+              "text": "A non-zero product equal to the zero matrix: A = [[1, −1],[−1, 1]] and B = [[1, 1],[1, 1]].",
+              "note": "AB = [[1−1, 1−1],[−1+1, −1+1]] = [[0, 0],[0, 0]] even though neither A nor B is the zero matrix. In matrix algebra, a factor cannot be cancelled merely because a product is zero."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "symmetric-skew-and-invertible-matrices",
+      "title": "Symmetric, skew symmetric and invertible matrices",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The transpose links a matrix to its mirror image across the principal diagonal, and the comparison of A with Aᵀ separates square matrices into symmetric and skew symmetric types. A different comparison, of A with the identity, leads to invertibility: an inverse is a matrix that cancels A by multiplication, but such a matrix exists only when A is square and non-singular."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Symmetric matrix: Aᵀ = A, so aᵢⱼ = aⱼᵢ for all i, j. The entries are mirrored across the principal diagonal.",
+            "Skew symmetric matrix: Aᵀ = −A, so aᵢⱼ = −aⱼᵢ. Taking i = j gives aᵢᵢ = −aᵢᵢ, hence every diagonal entry of a skew symmetric matrix is 0.",
+            "Any square matrix can be written uniquely as the sum of a symmetric and a skew symmetric matrix: A = (1/2)(A + Aᵀ) + (1/2)(A − Aᵀ).",
+            "Properties of transpose: (Aᵀ)ᵀ = A, (A + B)ᵀ = Aᵀ + Bᵀ, (kA)ᵀ = kAᵀ and (AB)ᵀ = BᵀAᵀ, with the order reversed in a product.",
+            "Invertible matrix: a square matrix A is invertible if there exists a matrix B of the same order with AB = BA = I. The inverse is written A⁻¹ and, when it exists, it is unique.",
+            "Only a square matrix can be invertible. A matrix with determinant zero is singular and has no inverse."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Symmetric and skew symmetric parts of a square matrix",
+          "columns": ["Part", "Formula", "Defining property"],
+          "rows": [
+            ["Symmetric part", "P = (1/2)(A + Aᵀ)", "Pᵀ = P"],
+            ["Skew symmetric part", "Q = (1/2)(A − Aᵀ)", "Qᵀ = −Q"],
+            ["Reconstruction", "A = P + Q", "The decomposition is unique"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Express A = [[1, 5],[3, 2]] as the sum of a symmetric and a skew symmetric matrix.",
+              "note": "Aᵀ = [[1, 3],[5, 2]], so P = (1/2)(A + Aᵀ) = [[1, 4],[4, 2]] and Q = (1/2)(A − Aᵀ) = [[0, 1],[−1, 0]]. Here Pᵀ = P, Qᵀ = −Q and P + Q = A, as required."
+            },
+            {
+              "text": "Uniqueness of the inverse: if AB = BA = I and AC = CA = I, then B = C.",
+              "note": "B = BI = B(AC) = (BA)C = IC = C. The argument uses associativity and the identity property, and it shows that the notation A⁻¹ is unambiguous whenever an inverse exists."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "determinants-properties-and-area",
+      "title": "Determinants, their properties and the area of a triangle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "To every square matrix A of order n there corresponds a number called its determinant, written |A| or det(A). For a 2 × 2 matrix [[a, b],[c, d]] the value is ad − bc. For a 3 × 3 matrix the value is obtained by expansion along any row or column using minors and cofactors, and its sign and magnitude are controlled by a set of properties that make evaluation far shorter than direct expansion."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Minor Mᵢⱼ of the element aᵢⱼ is the determinant of the submatrix left after deleting row i and column j.",
+            "Cofactor Aᵢⱼ = (−1)^(i+j) Mᵢⱼ. The determinant is the sum of each element of a row or column multiplied by its own cofactor.",
+            "The value of a determinant is unchanged if its rows and columns are interchanged, so |Aᵀ| = |A|.",
+            "Interchanging any two rows or two columns changes the sign of the determinant.",
+            "If two rows or two columns are identical or proportional, the determinant is 0.",
+            "Multiplying one row or column by k multiplies the determinant by k; for an n × n matrix, |kA| = kⁿ|A|.",
+            "Adding a multiple of one row to another row (or one column to another column) leaves the determinant unchanged.",
+            "If each element of a row or column is written as a sum of two terms, the determinant can be expressed as the sum of two determinants."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Expansion of a 3 × 3 determinant by the first row",
+          "columns": ["Step", "Expression", "Purpose"],
+          "rows": [
+            ["Write the matrix", "|a₁ b₁ c₁; a₂ b₂ c₂; a₃ b₃ c₃|", "Fix the row or column to be used for expansion"],
+            ["Attach cofactors", "+a₁|b₂ c₂; b₃ c₃| − b₁|a₂ c₂; a₃ c₃| + c₁|a₂ b₂; a₃ b₃|", "Alternate signs by (−1)^(1+j)"],
+            ["Evaluate minors", "a₁(b₂c₃ − b₃c₂) − b₁(a₂c₃ − a₃c₂) + c₁(a₂b₃ − a₃b₂)", "Each minor is a 2 × 2 determinant"],
+            ["Choose wisely", "Expand along a row or column with zeros", "Zeros remove terms and shorten the work"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate |1 2 3; 2 3 1; 3 1 2| by expanding along the first row.",
+              "note": "The value is 1(3·2 − 1·1) − 2(2·2 − 3·1) + 3(2·1 − 3·3) = 1(5) − 2(1) + 3(−7) = 5 − 2 − 21 = −18."
+            },
+            {
+              "text": "Area of the triangle with vertices (1, 3), (0, 0) and (k, 0).",
+              "note": "Area = (1/2)|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)| = (1/2)|1(0 − 0) + 0(0 − 3) + k(3 − 0)| = (1/2)|3k|. The points are collinear when this area is 0, that is when k = 0."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adjoint-inverse-and-linear-systems",
+      "title": "Adjoint, inverse and the solution of linear systems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The cofactors of a square matrix, arranged and transposed, form its adjoint. The adjoint is the bridge between a matrix and its inverse: multiplying A by adj(A) produces |A|I, so dividing by |A| yields the inverse whenever |A| is non-zero. Written in matrix form, a system of linear equations AX = B is solved by multiplying on the left by A⁻¹, and Martin's rule is the same solution stated in terms of determinants."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Adjoint of A: the transpose of the cofactor matrix, written adj(A). For each entry, find its cofactor and then place it at the transposed position.",
+            "Fundamental identity: A(adj A) = (adj A)A = |A|I for any square matrix A.",
+            "Inverse: if |A| ≠ 0 then A⁻¹ = (1/|A|) adj(A). If |A| = 0, A is singular and has no inverse.",
+            "For a 2 × 2 matrix [[a, b],[c, d]] with ad − bc ≠ 0, the inverse is (1/(ad − bc))[[d, −b],[−c, a]].",
+            "Matrix method for AX = B: if |A| ≠ 0 the unique solution is X = A⁻¹B.",
+            "Martin's rule (determinant form): for a system with coefficient determinant Δ, replace the column of a variable by the constants to form Δ₁, Δ₂, Δ₃, and obtain x = Δ₁/Δ, y = Δ₂/Δ, z = Δ₃/Δ when Δ ≠ 0."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Consistency of the system AX = B (A square of order n)",
+          "columns": ["Condition on A", "Condition on (adj A)B", "Nature of the system"],
+          "rows": [
+            ["|A| ≠ 0", "Not required", "Consistent, unique solution X = A⁻¹B"],
+            ["|A| = 0", "(adj A)B ≠ O", "Inconsistent, no solution"],
+            ["|A| = 0", "(adj A)B = O", "Consistent or inconsistent; may have infinitely many solutions or none"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Inverse of a 2 × 2 matrix: A = [[2, 3],[1, 4]].",
+              "note": "Here |A| = 2·4 − 3·1 = 5 ≠ 0 and adj(A) = [[4, −3],[−1, 2]], so A⁻¹ = (1/5)[[4, −3],[−1, 2]]. A quick check gives A A⁻¹ = (1/5)[[5, 0],[0, 5]] = I."
+            },
+            {
+              "text": "Solving 2x + 3y = 5 and x + 4y = 6 by the matrix method.",
+              "note": "With A = [[2, 3],[1, 4]], X = [[x],[y]] and B = [[5],[6]], the solution is X = A⁻¹B = (1/5)[[4, −3],[−1, 2]][[5],[6]] = (1/5)[[2],[7]], so x = 2/5 and y = 7/5. Substitution confirms both equations."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "martins-rule-and-consistency",
+      "title": "Martin's rule for two and three variables and the test for consistency",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Martin's rule writes the matrix solution X = A⁻¹B in a form that can be computed directly from determinants. It is especially convenient for two and three variables because each unknown is the ratio of two determinants: the denominator is the determinant of the coefficients, and the numerator is the determinant obtained by replacing the column of that unknown with the column of constants. The denominator therefore decides whether the method gives a single answer at all, and the case Δ = 0 must be read together with the numerators and with (adj A)B."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "For a₁x + b₁y = c₁, a₂x + b₂y = c₂, let Δ = |a₁ b₁; a₂ b₂|, Δ₁ = |c₁ b₁; c₂ b₂| and Δ₂ = |a₁ c₁; a₂ c₂|. If Δ ≠ 0 then x = Δ₁/Δ and y = Δ₂/Δ.",
+            "For three equations in x, y, z, define Δ as the 3 × 3 coefficient determinant and Δ₁, Δ₂, Δ₃ by replacing the first, second and third columns by the constants. If Δ ≠ 0 then x = Δ₁/Δ, y = Δ₂/Δ and z = Δ₃/Δ.",
+            "If Δ ≠ 0 the system is consistent and has exactly one solution; geometrically, three planes meet in a single point.",
+            "If Δ = 0 and at least one of Δ₁, Δ₂, Δ₃ is non-zero, the equations contradict one another and the system is inconsistent.",
+            "If Δ = 0 and Δ₁ = Δ₂ = Δ₃ = 0, the system may be consistent with infinitely many solutions or inconsistent; the equations must be examined further, for example through (adj A)B or by elimination.",
+            "Before computing, simplify the determinant using properties (row or column operations) to create zeros and reduce arithmetic."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve by Martin's rule: x + y + z = 6, x + 2y + 3z = 14, x + 4y + 9z = 36.",
+              "note": "Δ = |1 1 1; 1 2 3; 1 4 9| = 2, Δ₁ = |6 1 1; 14 2 3; 36 4 9| = 2, Δ₂ = |1 6 1; 1 14 3; 1 36 9| = 4 and Δ₃ = |1 1 6; 1 2 14; 1 4 36| = 6. Hence x = 1, y = 2 and z = 3, and substitution verifies the three equations."
+            },
+            {
+              "text": "Test consistency: x + y = 2 and 2x + 2y = 5.",
+              "note": "Here Δ = |1 1; 2 2| = 0 but Δ₁ = |2 1; 5 2| = −1 ≠ 0. The lines are parallel and distinct, so the system is inconsistent and has no solution, which matches the determinant test."
+            },
+            {
+              "text": "Test consistency: x + y = 2 and 2x + 2y = 4.",
+              "note": "Here Δ = 0, Δ₁ = 0 and Δ₂ = 0, and the second equation is twice the first. The system is consistent with infinitely many solutions of the form (t, 2 − t). When every determinant is zero the equations may be dependent rather than contradictory."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A matrix is defined by its order and its entries; addition requires equal orders, while multiplication requires columns of the first to equal rows of the second.",
+    "Matrix multiplication is associative and distributive but not commutative, and AB = O does not imply A = O or B = O.",
+    "A square matrix is symmetric when Aᵀ = A and skew symmetric when Aᵀ = −A; every square matrix is the sum of its symmetric and skew symmetric parts.",
+    "A square matrix is invertible only when it is non-singular, and its inverse, when it exists, is unique.",
+    "The determinant can be expanded along any row or column using cofactors, and row or column operations that create zeros simplify its evaluation.",
+    "Interchanging two rows changes the sign, identical or proportional rows make the determinant zero, and |kA| = kⁿ|A| for an n × n matrix.",
+    "The area of a triangle with vertices (x₁, y₁), (x₂, y₂), (x₃, y₃) is (1/2)|x₁(y₂ − y₃) + x₂(y₃ − y₁) + x₃(y₁ − y₂)|, and zero area means collinearity.",
+    "For any square matrix A, A(adj A) = (adj A)A = |A|I, and when |A| ≠ 0 the inverse is A⁻¹ = (1/|A|) adj(A).",
+    "For AX = B with |A| ≠ 0, the unique solution is X = A⁻¹B; by Martin's rule each variable is a ratio of determinants.",
+    "If |A| = 0 the system is inconsistent when (adj A)B ≠ O, and when (adj A)B = O it may have infinitely many solutions or none."
+  ],
+  "examFocus": [
+    "Showing non-commutativity or a non-zero pair whose product is the zero matrix, using a small 2 × 2 example.",
+    "Expressing a given square matrix as the sum of a symmetric and a skew symmetric matrix.",
+    "Evaluating a 3 × 3 determinant efficiently by using properties to create zeros before expansion.",
+    "Using the determinant formula for the area of a triangle and deducing the condition for three points to be collinear.",
+    "Finding the adjoint and inverse of a 2 × 2 or 3 × 3 matrix and verifying the result by multiplication.",
+    "Solving a system of two or three linear equations by the matrix inverse method or by Martin's rule.",
+    "Testing consistency from |A| and (adj A)B and stating clearly whether the system has a unique solution, infinitely many solutions or no solution."
+  ],
+  "vocabulary": [
+    { "word": "Matrix", "meaning": "A rectangular array of numbers or functions arranged in rows and columns." },
+    { "word": "Order", "meaning": "The size m × n of a matrix, giving its number of rows and columns." },
+    { "word": "Transpose", "meaning": "The matrix Aᵀ formed by interchanging the rows and columns of A." },
+    { "word": "Symmetric matrix", "meaning": "A square matrix equal to its transpose, so Aᵀ = A." },
+    { "word": "Skew symmetric matrix", "meaning": "A square matrix whose transpose is its negative, so Aᵀ = −A." },
+    { "word": "Identity matrix", "meaning": "A square matrix I with ones on the principal diagonal and zeros elsewhere." },
+    { "word": "Invertible matrix", "meaning": "A square matrix A for which a matrix A⁻¹ exists with AA⁻¹ = A⁻¹A = I." },
+    { "word": "Determinant", "meaning": "A scalar value associated with a square matrix, written |A|, that indicates singularity and scale." },
+    { "word": "Minor", "meaning": "The determinant of the submatrix obtained by deleting the row and column of an element." },
+    { "word": "Cofactor", "meaning": "The signed minor (−1)^(i+j) Mᵢⱼ used in determinant expansion and in the adjoint." },
+    { "word": "Singular matrix", "meaning": "A square matrix whose determinant is zero and which therefore has no inverse." },
+    { "word": "Non-singular matrix", "meaning": "A square matrix whose determinant is non-zero and which therefore has an inverse." },
+    { "word": "Adjoint", "meaning": "The transpose of the cofactor matrix of a square matrix, written adj(A)." },
+    { "word": "Consistent system", "meaning": "A system of linear equations that has at least one solution." },
+    { "word": "Martin's rule", "meaning": "The determinant form of the solution of a linear system, giving each variable as a ratio such as x = Δ₁/Δ." }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Row-by-column multiplication that produces one entry of a matrix product",
+      "description": "A 2 × 3 matrix A is drawn on the left and a 3 × 2 matrix B on the right, with the product AB shown as a 2 × 2 matrix in the centre. The first row of A and the second column of B are highlighted, and arrows run from a₁₁ to b₁₂, from a₁₂ to b₂₂ and from a₁₃ to b₃₂. The three pairwise products are added to give the circled entry in row 1, column 2 of AB. The picture makes clear that the number of columns of A must match the number of rows of B.",
+      "labels": [
+        "matrix A with highlighted first row",
+        "matrix B with highlighted second column",
+        "matching inner dimension 3",
+        "pairwise products a₁₁b₁₂, a₁₂b₂₂, a₁₃b₃₂",
+        "sum placed at row 1, column 2 of AB",
+        "product matrix of order 2 × 2"
+      ]
+    },
+    {
+      "caption": "Figure: Cofactor signs and the 2 × 2 minor left after deleting a row and a column",
+      "description": "A 3 × 3 grid of elements aᵢⱼ is shown with the sign pattern +, −, + on the first row, −, +, − on the second and +, −, + on the third, indicating (−1)^(i+j). Row 1 and column 2 are shaded out to isolate the 2 × 2 block of elements that remain; this block is labelled the minor M₁₂, and the cofactor A₁₂ is shown as −M₁₂ because the sign at position (1, 2) is negative.",
+      "labels": [
+        "3 × 3 determinant grid",
+        "alternating cofactor sign pattern",
+        "deleted row 1",
+        "deleted column 2",
+        "remaining 2 × 2 minor M₁₂",
+        "cofactor A₁₂ = −M₁₂"
+      ]
+    },
+    {
+      "caption": "Figure: Area of a triangle from coordinates and the collinear case",
+      "description": "Two coordinate diagrams are placed side by side. On the left, three non-collinear points (x₁, y₁), (x₂, y₂) and (x₃, y₃) form a triangle whose area is half the absolute value of the determinant expression. On the right, the third point is moved onto the line joining the first two, the triangle collapses to a segment, and the area becomes zero, illustrating the determinant test for collinearity.",
+      "labels": [
+        "axes and three vertices",
+        "triangle with positive area",
+        "third point sliding onto the base line",
+        "collapsed triangle of zero area",
+        "collinear points when determinant value is zero"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-algebra-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A is a matrix of order 2 × 3 and B is a matrix of order 3 × 4, then the order of AB is",
+      "options": [
+        "3 × 3",
+        "2 × 4",
+        "4 × 2",
+        "2 × 3"
+      ],
+      "correctIndex": 1,
+      "answer": "2 × 4",
+      "explanation": "The product AB is defined because the number of columns of A equals the number of rows of B. The resulting matrix takes the number of rows from A and the number of columns from B, so its order is 2 × 4.",
+      "commonMistake": "Reversing the order to 4 × 2 by reading the dimensions from right to left instead of taking rows of the first and columns of the second."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A = [[2, −1],[3, 4]], then the value of |A| is",
+      "options": [
+        "11",
+        "5",
+        "−5",
+        "−11"
+      ],
+      "correctIndex": 0,
+      "answer": "11",
+      "explanation": "For a 2 × 2 matrix [[a, b],[c, d]] the determinant is ad − bc. Here |A| = (2)(4) − (−1)(3) = 8 + 3 = 11.",
+      "commonMistake": "Writing ad + bc and obtaining 5, or mishandling the sign of the product (−1)(3)."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A is a square matrix, then A is skew symmetric when",
+      "options": [
+        "Aᵀ = A",
+        "AAᵀ = I",
+        "Aᵀ = −A",
+        "|A| = 0"
+      ],
+      "correctIndex": 2,
+      "answer": "Aᵀ = −A",
+      "explanation": "A skew symmetric matrix is defined by the condition Aᵀ = −A, which forces aⱼᵢ = −aᵢⱼ for every pair of indices and makes every diagonal entry zero. The condition Aᵀ = A defines a symmetric matrix instead.",
+      "commonMistake": "Confusing the conditions for symmetric and skew symmetric matrices and choosing Aᵀ = A."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area of the triangle with vertices (1, 2), (3, 6) and (5, 10) is",
+      "options": [
+        "4 square units",
+        "2 square units",
+        "8 square units",
+        "0 square units"
+      ],
+      "correctIndex": 3,
+      "answer": "0 square units",
+      "explanation": "Using the determinant formula, area = (1/2)|1(6 − 10) + 3(10 − 2) + 5(2 − 6)| = (1/2)|−4 + 24 − 20| = 0. The three points are collinear, so they do not form a triangle of positive area.",
+      "commonMistake": "Assuming three different points always form a triangle and reporting a non-zero area without evaluating the determinant."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A is a 3 × 3 matrix and |A| = 4, then |2A| is",
+      "options": [
+        "8",
+        "32",
+        "12",
+        "16"
+      ],
+      "correctIndex": 1,
+      "answer": "32",
+      "explanation": "Multiplying a matrix of order n by a scalar k multiplies the determinant by kⁿ, because each of the n rows is multiplied by k. Here n = 3 and k = 2, so |2A| = 2³|A| = 8 × 4 = 32.",
+      "commonMistake": "Treating the scalar as if it multiplies the determinant once and writing 2 × 4 = 8."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a square matrix A, the identity A(adj A) is equal to",
+      "options": [
+        "|A|I",
+        "adj(A) + |A|I",
+        "A⁻¹",
+        "I"
+      ],
+      "correctIndex": 0,
+      "answer": "|A|I",
+      "explanation": "For any square matrix A, the product of A with its adjoint gives the determinant times the identity matrix: A(adj A) = (adj A)A = |A|I. Dividing by |A| when it is non-zero yields the formula for A⁻¹.",
+      "commonMistake": "Writing A(adj A) = I and forgetting the factor |A|, which is only absent after dividing through by a non-zero determinant."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-07",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The system x + y = 3 and 2x + 2y = 7 is",
+      "options": [
+        "consistent with a unique solution",
+        "consistent with infinitely many solutions",
+        "inconsistent with no solution",
+        "consistent only when x = y"
+      ],
+      "correctIndex": 2,
+      "answer": "inconsistent with no solution",
+      "explanation": "The coefficient determinant is Δ = |1 1; 2 2| = 0, while Δ₁ = |3 1; 7 2| = −1 ≠ 0. A zero denominator with a non-zero numerator means the equations represent parallel, distinct lines and the system is inconsistent.",
+      "commonMistake": "Seeing Δ = 0 and immediately concluding infinitely many solutions, without checking whether the numerators are also zero."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A is an invertible matrix of order 2 and |A| = 10, then |adj A| is",
+      "options": [
+        "100",
+        "1/10",
+        "1",
+        "10"
+      ],
+      "correctIndex": 3,
+      "answer": "10",
+      "explanation": "For an n × n matrix, |adj A| = |A|^(n−1). Here n = 2 and |A| = 10, so |adj A| = 10^(1) = 10. The same result follows by writing adj(A) for a 2 × 2 matrix and taking its determinant directly.",
+      "commonMistake": "Assuming |adj A| is always equal to |A|², which holds only for 3 × 3 matrices."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A square matrix A is singular if and only if |A| = ______.",
+      "answer": "zero",
+      "explanation": "A singular matrix is, by definition, one with determinant zero. Because A⁻¹ = (1/|A|) adj(A) requires division by |A|, a zero determinant means no inverse exists.",
+      "commonMistake": "Writing 1, which is the determinant of the identity matrix rather than the condition for singularity."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the system AX = B with A a square matrix, if |A| = 0 and (adj A)B = O, the system may be consistent with infinitely many solutions or ______.",
+      "answer": "inconsistent",
+      "explanation": "When |A| = 0 and (adj A)B is the zero matrix, the determinant test alone does not settle the system: the equations may be dependent, giving infinitely many solutions, or they may still be contradictory. The case (adj A)B ≠ O is the one that guarantees inconsistency.",
+      "commonMistake": "Assuming that (adj A)B = O always guarantees infinitely many solutions and forgetting the inconsistent possibility."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For any square matrix A, the value of A − Aᵀ is a ______ matrix.",
+      "answer": "skew symmetric",
+      "explanation": "Taking the transpose, (A − Aᵀ)ᵀ = Aᵀ − (Aᵀ)ᵀ = Aᵀ − A = −(A − Aᵀ). Since its transpose equals its negative, A − Aᵀ satisfies the definition of a skew symmetric matrix.",
+      "commonMistake": "Answering symmetric, which is the property of A + Aᵀ rather than A − Aᵀ."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If A = [[1, 2],[3, 4]] and B = [[2, 0],[1, 3]], find AB and BA, and state whether AB = BA.",
+      "answer": "AB = [[1·2 + 2·1, 1·0 + 2·3],[3·2 + 4·1, 3·0 + 4·3]] = [[4, 6],[10, 12]]. BA = [[2·1 + 0·3, 2·2 + 0·4],[1·1 + 3·3, 1·2 + 3·4]] = [[2, 4],[10, 14]]. Since corresponding entries differ, AB ≠ BA.",
+      "explanation": "Each entry of a product is a row-by-column dot product, so changing the order changes which rows meet which columns. The example shows concretely that matrix multiplication is not commutative even when both products are 2 × 2 matrices.",
+      "commonMistake": "Multiplying corresponding entries in the same position, which would give an elementwise product rather than the matrix product."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Express A = [[2, 3],[5, 7]] as the sum of a symmetric matrix and a skew symmetric matrix.",
+      "answer": "Aᵀ = [[2, 5],[3, 7]]. The symmetric part is P = (1/2)(A + Aᵀ) = (1/2)[[4, 8],[8, 14]] = [[2, 4],[4, 7]]. The skew symmetric part is Q = (1/2)(A − Aᵀ) = (1/2)[[0, −2],[2, 0]] = [[0, −1],[1, 0]]. Therefore A = P + Q.",
+      "explanation": "The formulas P = (1/2)(A + Aᵀ) and Q = (1/2)(A − Aᵀ) always produce a symmetric and a skew symmetric matrix because (A + Aᵀ)ᵀ = A + Aᵀ and (A − Aᵀ)ᵀ = −(A − Aᵀ). Adding P and Q reconstructs A exactly.",
+      "commonMistake": "Forgetting the factor 1/2 in one of the parts, which makes the sum equal to 2A instead of A."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the inverse of the matrix A = [[3, 1],[5, 2]].",
+      "answer": "The determinant is |A| = (3)(2) − (1)(5) = 1, which is non-zero, so A is invertible. For a 2 × 2 matrix, adj(A) = [[2, −1],[−5, 3]], hence A⁻¹ = (1/1)[[2, −1],[−5, 3]] = [[2, −1],[−5, 3]].",
+      "explanation": "The 2 × 2 adjoint is obtained by swapping the diagonal entries and changing the signs of the off-diagonal entries. Because |A| = 1, the inverse is the adjoint itself, and the check A A⁻¹ = I confirms the result.",
+      "commonMistake": "Swapping the off-diagonal entries instead of changing their signs, which produces the transpose of the correct adjoint."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-15",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Using determinants, find the value of k for which the points (2, 3), (k, 6) and (5, 9) are collinear.",
+      "answer": "The points are collinear when the area of the triangle they form is zero, so (1/2)|2(6 − 9) + k(9 − 3) + 5(3 − 6)| = 0. This gives |2(−3) + 6k + 5(−3)| = |−6 + 6k − 15| = |6k − 21| = 0, hence 6k = 21 and k = 7/2.",
+      "explanation": "Collinearity is the geometric statement that the triangle has collapsed, and the determinant formula turns that statement into a linear equation in k. The absolute value does not affect the solution because the expression inside it must be zero.",
+      "commonMistake": "Forgetting the factor 1/2 and then trying to compensate incorrectly, or expanding the determinant with a sign error in one of the three products."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Using properties of determinants, evaluate |1 a a²; 1 b b²; 1 c c²| and factorise the result.",
+      "answer": "Apply R₂ → R₂ − R₁ and R₃ → R₃ − R₁, which leave the determinant unchanged: |1 a a²; 0 b − a b² − a²; 0 c − a c² − a²|. Expanding along the first column gives 1·|b − a b² − a²; c − a c² − a²| = (b − a)(c − a)|1 b + a; 1 c + a|, after taking (b − a) from R₂ and (c − a) from R₃. The remaining 2 × 2 determinant is (c + a) − (b + a) = c − b. Therefore the value is (b − a)(c − a)(c − b) = (a − b)(b − c)(c − a).",
+      "explanation": "Row operations of the form Rᵢ → Rᵢ + kRⱼ do not change the determinant, and they create zeros that reduce a 3 × 3 determinant to a single 2 × 2 one. Factoring common terms from rows at the end reveals the standard Vandermonde product.",
+      "commonMistake": "Expanding the original determinant directly, which is longer and makes the factorisation easy to miss, or changing the sign incorrectly when rearranging (c − b) to (b − c)."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the inverse of A = [[1, 2, 3],[0, 1, 4],[5, 6, 0]] using the adjoint method.",
+      "answer": "First compute |A| by expanding along the first column: |A| = 1(1·0 − 4·6) − 0 + 5(2·4 − 3·1) = 1(−24) + 5(5) = 1. The cofactors are A₁₁ = −24, A₁₂ = 20, A₁₃ = −5, A₂₁ = 18, A₂₂ = −15, A₂₃ = 4, A₃₁ = 5, A₃₂ = −4, A₃₃ = 1. The adjoint is the transpose of the cofactor matrix: adj(A) = [[−24, 18, 5],[20, −15, −4],[−5, 4, 1]]. Since |A| = 1, A⁻¹ = adj(A) = [[−24, 18, 5],[20, −15, −4],[−5, 4, 1]].",
+      "explanation": "The adjoint method requires the determinant, all nine cofactors with correct signs, and a transpose of the cofactor matrix before dividing by |A|. Here the determinant is 1, so the inverse equals the adjoint, but the transpose step is still essential.",
+      "commonMistake": "Writing the cofactor matrix as the adjoint without transposing it, which produces the transpose of the correct inverse."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Using Martin's rule, solve the system x + y + z = 6, x − y + z = 2 and 2x + y − z = 1.",
+      "answer": "The coefficient determinant is Δ = |1 1 1; 1 −1 1; 2 1 −1| = 1((−1)(−1) − 1·1) − 1(1·(−1) − 1·2) + 1(1·1 − (−1)·2) = 0 − 1(−3) + 3 = 6. Replacing columns by the constants gives Δ₁ = |6 1 1; 2 −1 1; 1 1 −1| = 6, Δ₂ = |1 6 1; 1 2 1; 2 1 −1| = 12 and Δ₃ = |1 1 6; 1 −1 2; 2 1 1| = 18. Therefore x = Δ₁/Δ = 1, y = Δ₂/Δ = 2 and z = Δ₃/Δ = 3.",
+      "explanation": "Because Δ ≠ 0, Martin's rule guarantees a unique solution and each variable is obtained by dividing the corresponding replaced-column determinant by Δ. Substituting x = 1, y = 2, z = 3 back into the three equations confirms the result.",
+      "commonMistake": "Replacing the wrong column when forming Δ₁, Δ₂ or Δ₃, or forgetting that the constants column always replaces the column of the variable being solved for."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If A = [[3, 1],[−1, 2]], show that A² − 5A + 7I = O and hence find A⁻¹.",
+      "answer": "Compute A² = [[3, 1],[−1, 2]][[3, 1],[−1, 2]] = [[8, 5],[−5, 3]]. Then A² − 5A + 7I = [[8, 5],[−5, 3]] − [[15, 5],[−5, 10]] + [[7, 0],[0, 7]] = [[0, 0],[0, 0]] = O. From A² − 5A = −7I we get A(A − 5I) = −7I, and multiplying on the left by A⁻¹ (which exists since |A| = 7 ≠ 0) gives A − 5I = −7A⁻¹. Hence A⁻¹ = (1/7)(5I − A) = (1/7)([[5, 0],[0, 5]] − [[3, 1],[−1, 2]]) = (1/7)[[2, −1],[1, 3]].",
+      "explanation": "The matrix satisfies its own quadratic relation, and rearranging that relation isolates A⁻¹ without computing cofactors. The step that justifies multiplying by A⁻¹ is that |A| = 7 ≠ 0, so the inverse exists and can be brought in on either side.",
+      "commonMistake": "Dividing by the matrix A as if it were a number instead of multiplying by A⁻¹, or assuming the inverse exists without checking that |A| ≠ 0."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Using properties of determinants, prove that |a+b b+c c+a; b+c c+a a+b; c+a a+b b+c| = 2|a b c; b c a; c a b|.",
+      "answer": "Let Δ denote the left-hand determinant. Apply C₁ → C₁ + C₂ + C₃: Δ = |2(a+b+c) b+c c+a; 2(a+b+c) c+a a+b; 2(a+b+c) a+b b+c| = 2(a+b+c)|1 b+c c+a; 1 c+a a+b; 1 a+b b+c|. Now apply R₂ → R₂ − R₁ and R₃ → R₃ − R₁: = 2(a+b+c)|1 b+c c+a; 0 a−b b−c; 0 b−c c−a| = 2(a+b+c)[(a−b)(c−a) − (b−c)²]. Expanding and simplifying gives 2(a+b+c)(ab + bc + ca − a² − b² − c²) = 2(3abc − a³ − b³ − c³). The right-hand determinant |a b c; b c a; c a b| expands to the same value 3abc − a³ − b³ − c³, hence the two sides are equal.",
+      "explanation": "The proof combines column and row operations to factor out 2(a+b+c) and reduce the determinant to a 2 × 2 form, then shows that both determinants simplify to the same symmetric expression. Each operation used is of the type that leaves a determinant unchanged, apart from the scalar factor extracted from a column.",
+      "commonMistake": "Applying C₁ → C₁ + C₂ + C₃ but forgetting that every entry in the new first column becomes 2(a+b+c), which loses the factor 2 in the final result."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Use the matrix method to solve 2x + 3y + 3z = 5, x − 2y + z = −4 and 3x − y − 2z = 3, and verify your solution.",
+      "answer": "Write the system as AX = B with A = [[2, 3, 3],[1, −2, 1],[3, −1, −2]], X = [[x],[y],[z]] and B = [[5],[−4],[3]]. Expanding, |A| = 2((−2)(−2) − 1(−1)) − 3(1(−2) − 1·3) + 3(1(−1) − (−2)·3) = 2(5) − 3(−5) + 3(5) = 40. The cofactors give adj(A) = [[5, 3, 9],[5, −13, 1],[5, 11, −7]], so A⁻¹ = (1/40)[[5, 3, 9],[5, −13, 1],[5, 11, −7]]. Then X = A⁻¹B = (1/40)[[5·5 + 3(−4) + 9·3],[5·5 + (−13)(−4) + 1·3],[5·5 + 11(−4) + (−7)·3]] = (1/40)[[40],[80],[−40]] = [[1],[2],[−1]]. Verification: 2(1) + 3(2) + 3(−1) = 5, 1 − 2(2) + (−1) = −4 and 3(1) − 2 − 2(−1) = 3, so the solution is correct.",
+      "explanation": "The matrix method requires a non-zero determinant, the adjoint formed by transposing the cofactor matrix, and the product X = A⁻¹B. Verification by substitution is the final safeguard, because a single sign error in any cofactor would still produce a neat-looking but wrong triple.",
+      "commonMistake": "Computing the cofactor matrix correctly but omitting the transpose when forming the adjoint, which inverts the roles of rows and columns in the solution."
+    },
+    {
+      "id": "isc-12-maths-q-algebra-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Examine the consistency of the system x + 2y − z = 3, 3x − y + 2z = 1 and 2x − 2y + 3z = 2. If it is consistent, state the nature of its solutions.",
+      "answer": "Form A = [[1, 2, −1],[3, −1, 2],[2, −2, 3]] and B = [[3],[1],[2]]. The determinant is |A| = 1((−1)·3 − 2(−2)) − 2(3·3 − 2·2) + (−1)(3(−2) − (−1)·2) = 1(1) − 2(5) + (−1)(−4) = −5. Since |A| ≠ 0, the system is consistent and has a unique solution given by X = A⁻¹B.",
+      "explanation": "For a square system, a non-zero coefficient determinant settles the question immediately: the matrix is invertible, so exactly one triple (x, y, z) satisfies all three equations. The cases requiring (adj A)B arise only when |A| = 0.",
+      "commonMistake": "Proceeding to compute (adj A)B even when |A| is non-zero, which is unnecessary because the unique-solution case is already established."
+    }
+  ]
+}

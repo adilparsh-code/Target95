@@ -1,0 +1,856 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-dual-nature",
+  "title": "Dual Nature of Radiation and Matter",
+  "kind": "physics",
+  "tagline": "The photoelectric effect, the photon model of light and de Broglie matter waves, treated in the ISC XII syllabus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus (Unit 7 — Dual Nature of Radiation and Matter; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the syllabus topics registered for this chapter; UNVERIFIED against the primary CISCE PDF in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC 2027 Physics syllabus (Unit 7 — Dual Nature of Radiation and Matter); no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "This chapter is about the experiment that forced physics to abandon a purely wave picture of light, and about the idea that matter has a wave side too. The photoelectric effect shows that light delivers its energy to matter in discrete packets rather than continuously: below a certain frequency no electrons are emitted no matter how intense the light, and above it electrons appear almost instantly with a maximum kinetic energy that depends on frequency alone. Einstein explained all of this in 1905 by treating light as a stream of photons of energy h nu, and his equation h nu = phi_0 + K_max is the central result of the chapter. The photon picture also fixes the energy and momentum carried by radiation, p = h / lambda, which becomes the bridge to matter waves. In 1924 de Broglie proposed the reverse idea: a particle of momentum p behaves like a wave of wavelength lambda = h / p. Three years later Davisson and Germer diffracted electrons from a nickel crystal and found exactly this wavelength, and G. P. Thomson obtained diffraction rings with thin films. The chapter therefore ends with wave-particle duality: neither a pure wave nor a pure particle description is complete, and the description that applies depends on the experiment being performed. The numerical work is mainly about photon energy, stopping potential, threshold wavelength and de Broglie wavelengths of accelerated electrons.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Dual Nature of Radiation and Matter"
+      },
+      {
+        "label": "Syllabus topics",
+        "value": "Photoelectric effect; matter waves; dual nature of radiation and matter"
+      },
+      {
+        "label": "Planck constant",
+        "value": "h = 6.63 x 10^-34 J s = 4.14 x 10^-15 eV s"
+      },
+      {
+        "label": "Speed of light",
+        "value": "c = 3.00 x 10^8 m s^-1"
+      },
+      {
+        "label": "Useful product",
+        "value": "h c = 1240 eV nm, so photon energy in eV is 1240 / lambda(nm)"
+      },
+      {
+        "label": "Photon energy",
+        "value": "E = h nu = h c / lambda"
+      },
+      {
+        "label": "Photon momentum",
+        "value": "p = h / lambda = E / c, with zero rest mass"
+      },
+      {
+        "label": "Einstein photoelectric equation",
+        "value": "h nu = phi_0 + K_max, where phi_0 is the work function"
+      },
+      {
+        "label": "Stopping potential",
+        "value": "e V_0 = K_max"
+      },
+      {
+        "label": "Threshold condition",
+        "value": "h nu_0 = phi_0, so lambda_0 = h c / phi_0"
+      },
+      {
+        "label": "de Broglie wavelength",
+        "value": "lambda = h / p = h / (m v)"
+      },
+      {
+        "label": "Electron accelerated through V volts",
+        "value": "lambda = 12.27 / sqrt(V) angstrom = 1.227 / sqrt(V) nm"
+      },
+      {
+        "label": "Davisson-Germer result",
+        "value": "54 V electrons diffracted from nickel at about 50 degrees, giving a wavelength close to the de Broglie value"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe the photoelectric effect and state its experimental laws, including threshold frequency, instantaneous emission and the dependence of saturation current on intensity.",
+    "Define work function, threshold frequency and stopping potential, and relate them to the photon energy.",
+    "Derive and apply Einstein's photoelectric equation h nu = phi_0 + K_max to numerical problems.",
+    "Explain why the wave theory of light cannot account for the threshold frequency, the instantaneous emission or the frequency dependence of the maximum kinetic energy.",
+    "State de Broglie's hypothesis and calculate the de Broglie wavelength of an electron accelerated through a potential difference.",
+    "Describe the Davisson-Germer experiment and explain how electron diffraction confirms the wave nature of matter.",
+    "Explain wave-particle duality and give examples of devices that depend on the particle nature of radiation."
+  ],
+  "learn": [
+    {
+      "id": "photoelectric-effect-observations",
+      "title": "The photoelectric effect and its experimental laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When light of sufficiently high frequency falls on a metal surface, electrons are ejected from the surface. This is the photoelectric effect, first noticed by Hertz in 1887 while he was studying spark discharges, and studied quantitatively by Hallwachs and later by Lenard. In the standard arrangement the metal surface is the cathode inside an evacuated tube fitted with a quartz window so that ultraviolet light can enter, and a second electrode collects the emitted electrons. A variable potential difference is applied between the two electrodes and the resulting current is measured with a sensitive ammeter. When the collector is made positive, the photoelectrons are accelerated and the current rises until it saturates. When the collector is made negative, the electrons are retarded, and the current falls to zero at a particular retarding potential called the stopping potential."
+        },
+        {
+          "type": "paragraph",
+          "text": "The experiment gives results that no wave theory of light can explain. Emission does not begin at all until the frequency of the incident light exceeds a value characteristic of the metal, the threshold frequency. Below that frequency the metal emits nothing, however intense the light and however long it is left on. Above the threshold, emission begins within about a nanosecond of the light arriving, even for extremely feeble light. The maximum kinetic energy of the emitted electrons grows linearly with the frequency of the light but does not depend on its intensity; doubling the intensity leaves the stopping potential unchanged. What intensity does change is the number of electrons emitted per second, and therefore the saturation current, which is proportional to the intensity for a fixed frequency above the threshold. These regularities are summarised as the laws of photoelectric emission."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Photoelectric effect",
+              "meaning": "The emission of electrons from a metal surface when electromagnetic radiation of sufficiently high frequency falls on it."
+            },
+            {
+              "term": "Work function",
+              "meaning": "The minimum energy needed to remove an electron from the surface of a particular metal, usually quoted in electron volts."
+            },
+            {
+              "term": "Threshold frequency",
+              "meaning": "The lowest frequency of incident radiation that can eject electrons from a given metal surface; below it no emission occurs."
+            },
+            {
+              "term": "Stopping potential",
+              "meaning": "The smallest retarding potential difference that just prevents the fastest photoelectrons from reaching the collector, so that the photocurrent becomes zero."
+            },
+            {
+              "term": "Saturation current",
+              "meaning": "The maximum photocurrent, reached when every emitted electron is collected; it is proportional to the intensity of the incident light."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Table: Work functions and threshold wavelengths of some metals",
+          "columns": [
+            "Metal",
+            "Work function (eV)",
+            "Threshold wavelength (nm)"
+          ],
+          "rows": [
+            [
+              "Caesium",
+              "2.14",
+              "579"
+            ],
+            [
+              "Potassium",
+              "2.30",
+              "539"
+            ],
+            [
+              "Sodium",
+              "2.28",
+              "544"
+            ],
+            [
+              "Zinc",
+              "4.30",
+              "288"
+            ],
+            [
+              "Copper",
+              "4.65",
+              "267"
+            ],
+            [
+              "Platinum",
+              "5.65",
+              "220"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A metal has threshold wavelength 600 nm. Find its work function in eV.",
+              "note": "phi_0 = h c / lambda_0 = 1240 / 600 = 2.07 eV. A photon of exactly 600 nm just supplies this energy, so electrons are emitted with zero kinetic energy."
+            },
+            {
+              "text": "Light of wavelength 250 nm falls on zinc (work function 4.30 eV). Does emission occur, and what is the maximum kinetic energy?",
+              "note": "Photon energy = 1240 / 250 = 4.96 eV, which exceeds 4.30 eV, so emission occurs with K_max = 4.96 - 4.30 = 0.66 eV. Light of 350 nm would give 3.54 eV, below the work function, so no emission at all."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "einstein-photoelectric-equation",
+      "title": "Einstein's photon explanation and the photoelectric equation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Einstein's explanation in 1905 was that light is not delivered continuously but in discrete quanta, later called photons, each carrying energy h nu. A photon is absorbed as a whole by a single electron in the metal, so the electron receives an all-or-nothing amount of energy rather than a steady trickle. To escape from the surface the electron must pay the work function phi_0, the minimum binding energy of the metal. Whatever energy is left appears as kinetic energy of the escaping electron. The fastest electrons are those that lose nothing on the way out, so their kinetic energy is the maximum kinetic energy, and the energy balance is Einstein's photoelectric equation: h nu = phi_0 + K_max."
+        },
+        {
+          "type": "paragraph",
+          "text": "The equation immediately reproduces every experimental law. Emission requires h nu to be at least phi_0, which defines the threshold frequency nu_0 = phi_0 / h and the threshold wavelength lambda_0 = h c / phi_0. The maximum kinetic energy is K_max = h nu - phi_0, a linear function of frequency with slope h and intercept minus phi_0, and it contains no intensity at all. Intensity determines how many photons arrive per second, and therefore how many electrons are ejected per second, which is why the saturation current is proportional to intensity. Because a single photon carries enough energy to free an electron as soon as it is absorbed, emission is instantaneous rather than requiring a build-up of energy, which is what a wave picture would demand. The stopping potential is related to the maximum kinetic energy by e V_0 = K_max, so V_0 = (h nu - phi_0) / e."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Threshold: no emission unless h nu >= phi_0, whatever the intensity.",
+            "Maximum kinetic energy: K_max = h nu - phi_0, linear in frequency, independent of intensity.",
+            "Saturation current: proportional to the intensity of the incident light at fixed frequency above threshold.",
+            "Instantaneous emission: the delay is less than about 10^-9 s, consistent with single-photon absorption.",
+            "Stopping potential: V_0 = (h nu - phi_0) / e, different for different metals because phi_0 differs.",
+            "Graph of K_max against nu: a straight line of slope h whose intercept on the frequency axis is nu_0."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the threshold frequency of a metal of work function 2.0 eV.",
+              "note": "nu_0 = phi_0 / h = (2.0 x 1.6 x 10^-19) / (6.63 x 10^-34) = 4.8 x 10^14 Hz, in the red part of the visible spectrum."
+            },
+            {
+              "text": "Light of 400 nm falls on a metal of work function 2.0 eV. Find K_max and the stopping potential.",
+              "note": "Photon energy = 1240 / 400 = 3.10 eV, so K_max = 1.10 eV and V_0 = 1.10 V. The same light on caesium (2.14 eV) gives 0.96 eV and 0.96 V."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "photon-model-and-intensity",
+      "title": "The photon, intensity and the failure of the wave theory",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A photon is a quantum of electromagnetic radiation with energy E = h nu and momentum p = h / lambda, zero rest mass, and speed c in free space. The momentum relation follows from the relativistic energy-momentum relation for a massless particle, E = p c, together with E = h nu = h c / lambda. Photons are not small classical particles with definite paths; they are the discrete amounts in which radiation exchanges energy and momentum with matter. The intensity of a beam is the energy crossing unit area per second, and in photon language it equals the number of photons crossing unit area per second multiplied by h nu. A beam of given intensity therefore contains fewer photons per second when the frequency is high than when it is low, and a very intense low-frequency beam may still contain photons each too feeble to free an electron."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Wave theory predicts that energy arrives continuously, so any frequency should eventually eject electrons after a long enough exposure; experiment shows a sharp threshold frequency.",
+            "Wave theory predicts that brighter light gives faster electrons; experiment shows K_max independent of intensity.",
+            "Wave theory predicts a measurable time lag while energy builds up in the metal; experiment shows emission within about 10^-9 s even for very faint light.",
+            "Wave theory has no way to produce a maximum kinetic energy at all, because the wave energy would be shared among many electrons over time.",
+            "The photon picture accounts for all three failures at once: energy is delivered in indivisible amounts h nu to individual electrons."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A 1.0 mW helium-neon laser emits light of wavelength 632.8 nm. How many photons does it emit per second?",
+              "note": "Each photon has energy 1240 / 632.8 = 1.96 eV = 3.14 x 10^-19 J. The rate is 1.0 x 10^-3 / 3.14 x 10^-19 = 3.2 x 10^15 photons per second, a vast number, which is why the beam still looks continuous."
+            },
+            {
+              "text": "Find the momentum of a photon of wavelength 500 nm.",
+              "note": "p = h / lambda = 6.63 x 10^-34 / 5.0 x 10^-7 = 1.33 x 10^-27 kg m s^-1. For comparison an electron of the same wavelength has momentum 1.33 x 10^-27 kg m s^-1 but kinetic energy of only about 6 eV."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "de-broglie-matter-waves",
+      "title": "de Broglie's hypothesis and matter waves",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In 1924 Louis de Broglie asked the reverse question: if radiation, which we think of as waves, also behaves as particles, why should matter, which we think of as particles, not behave as waves? He proposed that a particle of mass m moving with speed v has an associated wavelength lambda = h / p = h / (m v), where p is its momentum. The argument is a symmetry argument. For a photon, E = h nu and E = p c give p = h nu / c = h / lambda, so momentum and wavelength are linked by Planck's constant. de Broglie assumed the same relation holds for every particle, with p = m v for a slow-moving particle. The wavelength is called the de Broglie wavelength and the associated disturbance a matter wave."
+        },
+        {
+          "type": "paragraph",
+          "text": "For an electron accelerated from rest through a potential difference V, the kinetic energy is e V, so p = sqrt(2 m e V) and lambda = h / sqrt(2 m e V). Substituting the electron mass and charge gives the handy result lambda = 12.27 / sqrt(V) angstrom, or 1.227 / sqrt(V) nm, with V in volts. For a particle of kinetic energy K the same formula reads lambda = h / sqrt(2 m K). The wavelength falls as the mass and the speed increase, which is why wave effects are obvious for electrons and unobservable for everyday objects: an electron of a few tens of electron volts has a wavelength of the order of an interatomic spacing, so a crystal can act as a diffraction grating for it, while a cricket ball has a wavelength far smaller than any physical aperture."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "lambda = h / p = h / (m v) for a particle of mass m and speed v.",
+            "Accelerated charge: lambda = h / sqrt(2 m q V), and for electrons lambda = 12.27 / sqrt(V) angstrom.",
+            "Given kinetic energy: lambda = h / sqrt(2 m K).",
+            "Thermal particles: lambda = h / sqrt(3 m k T) using the root-mean-square speed.",
+            "Heavier or faster particles have shorter wavelengths, which is why macroscopic objects show no observable wave behaviour.",
+            "Wave behaviour becomes observable when the wavelength is comparable to the size of the diffracting object, such as the spacing of atoms in a crystal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the de Broglie wavelength of an electron accelerated through 100 V.",
+              "note": "lambda = 12.27 / sqrt(100) = 1.23 angstrom, comparable to the spacing of atomic planes in a crystal, so electron diffraction is observable."
+            },
+            {
+              "text": "Estimate the de Broglie wavelength of a 0.16 kg cricket ball moving at 40 m s^-1.",
+              "note": "p = 6.4 kg m s^-1, so lambda = 6.63 x 10^-34 / 6.4 = 1.0 x 10^-34 m. This is about 10^19 times smaller than a nucleus, so no experiment could detect diffraction."
+            },
+            {
+              "text": "An electron and a proton have the same kinetic energy. Compare their de Broglie wavelengths.",
+              "note": "lambda is proportional to 1 / sqrt(m), so lambda_e / lambda_p = sqrt(m_p / m_e) = sqrt(1836) = 42.8. The lighter electron has the longer wavelength."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "davisson-germer-diffraction",
+      "title": "The Davisson-Germer experiment and electron diffraction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The decisive test came in 1927. Davisson and Germer directed a beam of electrons at a nickel crystal and measured the intensity of the scattered electrons as a function of angle. During the experiment the nickel target was accidentally heated and recrystallised, which turned it into a single crystal with regular atomic planes, and the scattered intensity then showed sharp maxima at particular angles, exactly like the diffraction pattern of X-rays. The angles satisfied the Bragg condition 2 d sin(theta) = n lambda, using the known spacing d of the nickel planes. The wavelength extracted from the diffraction pattern agreed with h / p for the accelerating voltage used. In the same year George Thomson, working independently, passed electron beams through thin films and obtained concentric diffraction rings, again matching the de Broglie prediction."
+        },
+        {
+          "type": "paragraph",
+          "text": "These experiments settled the question: electrons, long regarded as the clearest example of particles, diffract and interfere like waves, with a wavelength given by de Broglie's relation. The result is not a curiosity. Electron diffraction is now a standard method for studying surface structure and thin films, and the wave nature of electrons is the basis of the electron microscope, whose resolving power is set by the very short de Broglie wavelength of accelerated electrons rather than by the wavelength of visible light."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A beam of electrons of known energy is scattered from a crystal surface.",
+            "The scattered intensity shows maxima at specific angles, a diffraction pattern rather than a smooth classical scattering.",
+            "The pattern obeys the Bragg relation 2 d sin(theta) = n lambda, with d known from X-ray measurements of the same crystal.",
+            "The wavelength obtained this way equals h / p, confirming lambda = h / (m v).",
+            "The experiment works only because the electron wavelength is comparable to atomic spacing, of the order of an angstrom.",
+            "G. P. Thomson's thin-film experiment produced diffraction rings and gave independent confirmation."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Table: Evidence for the wave and particle descriptions",
+          "columns": [
+            "Observation",
+            "Description supported",
+            "Reason"
+          ],
+          "rows": [
+            [
+              "Interference and diffraction of light",
+              "Wave",
+              "Requires superposition of amplitudes from different paths"
+            ],
+            [
+              "Photoelectric effect",
+              "Particle",
+              "Energy is delivered in indivisible quanta h nu to single electrons"
+            ],
+            [
+              "Compton scattering",
+              "Particle",
+              "Photon momentum h / lambda is transferred in a collision"
+            ],
+            [
+              "Electron diffraction from a crystal",
+              "Wave nature of matter",
+              "Maxima satisfy the Bragg condition with lambda = h / p"
+            ],
+            [
+              "Definite tracks and impacts of electrons",
+              "Particle nature of matter",
+              "Detectors record localised arrivals with definite momentum"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In a Davisson-Germer type experiment, electrons accelerated through 54 V are diffracted from nickel planes of spacing 0.91 angstrom. Estimate the diffraction angle for the first-order maximum.",
+              "note": "lambda = 12.27 / sqrt(54) = 1.67 angstrom. From 2 d sin(theta) = lambda, sin(theta) = 1.67 / (2 x 0.91) = 0.917, so theta = 66 degrees, close to the observed angle. The agreement is the point of the experiment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dual-nature-applications",
+      "title": "Wave-particle duality and the photoelectric cell",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The lesson of the photoelectric effect and of electron diffraction is that neither a pure wave nor a pure particle description is complete. Light propagates and interferes as a wave, yet exchanges energy and momentum as photons. Matter propagates and diffracts as a wave, yet is detected as localised particles with definite mass, charge and momentum. This is wave-particle duality, and the two descriptions are complementary rather than contradictory: an experiment that measures interference reveals the wave aspect, while an experiment that measures the energy or momentum transferred reveals the particle aspect, and no single experiment shows both in full. The classical pictures are limiting descriptions that work when Planck's constant can be treated as negligible compared with the quantities in the problem."
+        },
+        {
+          "type": "paragraph",
+          "text": "The photoelectric effect is used directly in the photoelectric cell, or photocell, aevacuated tube with a photosensitive cathode and an anode. Light of frequency above the threshold of the cathode coating releases electrons, and the resulting current operates a relay or a counter. Because the current responds to the number of photons arriving, a photocell converts light intensity into an electrical signal, and because it responds only above a threshold frequency it can be made selectively sensitive to a particular part of the spectrum. Photocells are used in automatic door openers, burglar alarms, smoke detectors, counting and sorting machines, exposure meters and sound reproduction from film soundtracks, and the photomultiplier tube extends the same principle to the detection of single photons. The photovoltaic solar cell also converts light into electrical energy, although its mechanism is the separation of electron-hole pairs at a semiconductor junction rather than emission into vacuum."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Wave aspect: interference, diffraction and polarisation of light; diffraction of electrons and neutrons.",
+            "Particle aspect: photoelectric effect, Compton scattering, pair production, and the localised tracks of particles.",
+            "Complementarity: the description that applies is fixed by the experiment, not chosen at will.",
+            "Correspondence: wave optics reduces to ray optics when the wavelength is negligible compared with the apparatus.",
+            "Photocell: light above the threshold frequency releases electrons, giving a current proportional to intensity.",
+            "Applications: automatic doors, alarms, smoke detectors, counters, light meters and photomultipliers.",
+            "Electron microscope: short de Broglie wavelength allows resolution far beyond the optical limit."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Explain why a photocell with a caesium cathode responds to visible light but not to infrared radiation of the same intensity.",
+              "note": "Caesium has a work function of about 2.14 eV, corresponding to a threshold wavelength near 579 nm. Visible light has a shorter wavelength and therefore a higher photon energy than this threshold, while infrared photons have lower energy, so no single photon can free an electron however many arrive."
+            },
+            {
+              "text": "Why does a highly intense red light fail to operate a photocell whose threshold is in the green?",
+              "note": "The photon energy of red light is below the work function of the cathode, so each photon is too weak to eject an electron. Intensity only increases the number of such photons, and a large number of individually insufficient photons cannot add up because absorption is all-or-nothing."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The photoelectric effect is the emission of electrons from a metal surface when radiation of frequency above a threshold falls on it.",
+    "Below the threshold frequency no emission occurs, however intense the radiation; above it emission is practically instantaneous.",
+    "The saturation photocurrent is proportional to the intensity of the incident light at fixed frequency.",
+    "The maximum kinetic energy of photoelectrons depends on the frequency of the light and on the metal, not on the intensity.",
+    "Einstein's photoelectric equation is h nu = phi_0 + K_max, with e V_0 = K_max.",
+    "The threshold frequency and wavelength satisfy h nu_0 = phi_0 and lambda_0 = h c / phi_0.",
+    "A photon has energy E = h nu, momentum p = h / lambda and zero rest mass.",
+    "de Broglie proposed that every particle has a wavelength lambda = h / p = h / (m v).",
+    "For electrons accelerated through V volts, lambda = 12.27 / sqrt(V) angstrom.",
+    "Davisson and Germer diffracted electrons from a nickel crystal and confirmed the de Broglie wavelength.",
+    "Wave-particle duality means that wave and particle descriptions are complementary, and the experiment determines which is appropriate."
+  ],
+  "examFocus": [
+    "Deriving and applying Einstein's photoelectric equation, including the graph of K_max against frequency and the meaning of its slope and intercepts.",
+    "Numerical problems on threshold wavelength, work function, photon energy in eV and stopping potential.",
+    "Explaining the three failures of the wave theory of light in the photoelectric effect.",
+    "Calculating de Broglie wavelengths for electrons accelerated through a potential difference and comparing particles of different mass.",
+    "Describing the Davisson-Germer experiment and stating how the diffraction result confirms lambda = h / p.",
+    "Explaining the working of a photocell and why it responds to frequency rather than merely to intensity.",
+    "Using photon flux to relate the power of a monochromatic source to the number of photons emitted per second."
+  ],
+  "vocabulary": [
+    {
+      "word": "Photoelectric effect",
+      "meaning": "The emission of electrons from a metal surface when radiation of sufficiently high frequency is incident on it."
+    },
+    {
+      "word": "Work function",
+      "meaning": "The minimum energy required to remove an electron from the surface of a given metal, usually expressed in electron volts."
+    },
+    {
+      "word": "Threshold frequency",
+      "meaning": "The lowest frequency of incident radiation that can cause photoelectric emission from a given surface."
+    },
+    {
+      "word": "Threshold wavelength",
+      "meaning": "The longest wavelength of radiation that can cause photoelectric emission from a given surface, equal to h c / phi_0."
+    },
+    {
+      "word": "Stopping potential",
+      "meaning": "The retarding potential difference that just stops the fastest photoelectrons, so the photocurrent becomes zero."
+    },
+    {
+      "word": "Saturation current",
+      "meaning": "The maximum photocurrent obtained when all emitted electrons are collected, proportional to the light intensity."
+    },
+    {
+      "word": "Photon",
+      "meaning": "A quantum of electromagnetic radiation carrying energy h nu and momentum h / lambda, with zero rest mass."
+    },
+    {
+      "word": "Photon flux",
+      "meaning": "The number of photons crossing unit area per unit time, which determines the intensity of a beam for a given frequency."
+    },
+    {
+      "word": "Planck constant",
+      "meaning": "The fundamental constant h = 6.63 x 10^-34 J s linking the energy of a quantum to its frequency."
+    },
+    {
+      "word": "Matter wave",
+      "meaning": "The wave associated with a moving particle, of wavelength lambda = h / p, proposed by de Broglie."
+    },
+    {
+      "word": "de Broglie wavelength",
+      "meaning": "The wavelength h / p associated with a particle of momentum p, observable when it is comparable to the size of apertures or atomic spacing."
+    },
+    {
+      "word": "Electron diffraction",
+      "meaning": "The bending and interference of an electron beam by a crystal lattice, demonstrating the wave nature of electrons."
+    },
+    {
+      "word": "Davisson-Germer experiment",
+      "meaning": "The 1927 scattering of electrons from a nickel crystal that first confirmed the de Broglie wavelength."
+    },
+    {
+      "word": "Bragg condition",
+      "meaning": "The relation 2 d sin(theta) = n lambda for constructive interference of waves scattered from parallel crystal planes."
+    },
+    {
+      "word": "Wave-particle duality",
+      "meaning": "The principle that radiation and matter show both wave and particle properties, with the appropriate description depending on the experiment."
+    },
+    {
+      "word": "Photocell",
+      "meaning": "A device in which light above a threshold frequency releases electrons from a photosensitive cathode, producing a current."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Apparatus for studying the photoelectric effect",
+      "description": "An evacuated glass tube with a quartz window. Light enters through the window and falls on a metal cathode. Emitted electrons travel to a collector anode, and a variable potential difference is applied between cathode and anode, with an ammeter measuring the photocurrent. The figure labels the light beam, the quartz window, the photosensitive cathode, the anode, the variable source and the ammeter, and shows the direction of electron flow.",
+      "labels": [
+        "monochromatic light beam",
+        "quartz window transmitting ultraviolet",
+        "evacuated tube",
+        "photosensitive metal cathode",
+        "collector anode",
+        "variable potential difference source",
+        "ammeter measuring photocurrent",
+        "emitted photoelectrons crossing the gap",
+        "reversing the source retards the electrons"
+      ]
+    },
+    {
+      "caption": "Figure: Maximum kinetic energy against frequency",
+      "description": "A straight-line graph with frequency on the horizontal axis and maximum kinetic energy on the vertical axis. The line is parallel for all metals but shifted according to the work function. For a given metal the line has slope equal to Planck's constant, cuts the frequency axis at the threshold frequency, and cuts the energy axis at minus the work function. The figure marks the threshold frequency, the slope h and the intercept minus phi_0.",
+      "labels": [
+        "frequency axis",
+        "maximum kinetic energy axis",
+        "straight line of slope h",
+        "threshold frequency nu_0 at the horizontal intercept",
+        "intercept minus phi_0 on the vertical axis",
+        "second line for a metal of larger work function",
+        "no emission to the left of the threshold",
+        "parallel lines mean the same slope h for every metal"
+      ]
+    },
+    {
+      "caption": "Figure: Photocurrent against applied potential",
+      "description": "Two curves of photocurrent against the potential difference between collector and cathode, one for low intensity and one for higher intensity at the same frequency. Both curves saturate at different currents but meet the potential axis at the same stopping potential on the negative side. The figure labels the saturation current for each intensity, the common stopping potential, and the retarding region where the current falls to zero.",
+      "labels": [
+        "photocurrent axis",
+        "applied potential difference axis",
+        "higher intensity curve with larger saturation current",
+        "lower intensity curve with smaller saturation current",
+        "common stopping potential on the negative side",
+        "saturation region where all emitted electrons are collected",
+        "retarding region",
+        "zero current at the stopping potential"
+      ]
+    },
+    {
+      "caption": "Figure: Davisson-Germer electron diffraction geometry",
+      "description": "An electron gun accelerates electrons through a known potential difference and directs them at a nickel crystal surface. A movable detector measures the scattered electron intensity at various angles. The crystal is shown with parallel atomic planes of spacing d, and the path difference between waves scattered from adjacent planes is indicated for the Bragg condition.",
+      "labels": [
+        "electron gun",
+        "accelerating potential difference V",
+        "nickel crystal with parallel atomic planes",
+        "spacing d between planes",
+        "movable detector",
+        "scattering angle theta",
+        "diffracted intensity maximum",
+        "path difference 2 d sin(theta)",
+        "incident and scattered electron beams"
+      ]
+    },
+    {
+      "caption": "Figure: de Broglie wavelength against accelerating voltage",
+      "description": "A curve showing how the de Broglie wavelength of an electron decreases as the accelerating potential difference increases, following lambda proportional to one over the square root of V. The axes are labelled and a few representative points are marked, illustrating why higher-energy electrons probe finer structure.",
+      "labels": [
+        "accelerating voltage axis",
+        "de Broglie wavelength axis",
+        "curve falling as one over root V",
+        "marked point at 100 V with wavelength about 1.2 angstrom",
+        "marked point at 10000 V with wavelength about 0.12 angstrom",
+        "shorter wavelength at higher voltage",
+        "region where wavelength is comparable to atomic spacing"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-dual-nature-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Photoelectric emission from a metal surface takes place only when the incident radiation has:",
+      "options": [
+        "a frequency greater than or equal to the threshold frequency of the metal",
+        "an intensity greater than a fixed minimum value",
+        "a wavelength longer than the threshold wavelength of the metal",
+        "a speed greater than the speed of light in the metal"
+      ],
+      "correctIndex": 0,
+      "answer": "a frequency greater than or equal to the threshold frequency of the metal",
+      "explanation": "Each photon must carry at least the work function of the metal, so emission requires h nu to be at least phi_0. This is a condition on frequency, not on intensity or wavelength in the way the other options suggest.",
+      "commonMistake": "Assuming that very bright light of any colour will eventually eject electrons."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The frequency of light falling on a photosensitive surface is kept fixed and above the threshold, while its intensity is doubled. Then:",
+      "options": [
+        "the stopping potential doubles and the saturation current is unchanged",
+        "the saturation photocurrent doubles and the stopping potential is unchanged",
+        "both the saturation current and the stopping potential double",
+        "neither the saturation current nor the stopping potential changes"
+      ],
+      "correctIndex": 1,
+      "answer": "the saturation photocurrent doubles and the stopping potential is unchanged",
+      "explanation": "Doubling the intensity doubles the number of photons arriving per second, so twice as many electrons are emitted and the saturation current doubles. Each photon still has the same energy h nu, so the maximum kinetic energy and hence the stopping potential are unchanged.",
+      "commonMistake": "Believing that brighter light gives faster photoelectrons."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Einstein's photoelectric equation for light of frequency nu incident on a metal of work function phi_0 is:",
+      "options": [
+        "h nu = phi_0 - K_max",
+        "phi_0 = h nu + K_max",
+        "h nu = phi_0 + K_max",
+        "K_max = h nu + phi_0"
+      ],
+      "correctIndex": 2,
+      "answer": "h nu = phi_0 + K_max",
+      "explanation": "The energy of the absorbed photon is used partly to overcome the work function and the rest appears as the maximum kinetic energy of the electron, so h nu = phi_0 + K_max.",
+      "commonMistake": "Adding the work function to the photon energy instead of subtracting it."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A metal has a work function of 2.0 eV. Its threshold wavelength is closest to:",
+      "options": [
+        "310 nm",
+        "1240 nm",
+        "248 nm",
+        "620 nm"
+      ],
+      "correctIndex": 3,
+      "answer": "620 nm",
+      "explanation": "lambda_0 = h c / phi_0 = 1240 eV nm / 2.0 eV = 620 nm. This lies in the red-orange part of the visible spectrum.",
+      "commonMistake": "Using 1240 divided by twice the work function, which gives 310 nm."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An electron is accelerated from rest through a potential difference V. Its de Broglie wavelength is proportional to:",
+      "options": [
+        "1 / sqrt(V)",
+        "sqrt(V)",
+        "1 / V",
+        "V"
+      ],
+      "correctIndex": 0,
+      "answer": "1 / sqrt(V)",
+      "explanation": "The kinetic energy is e V, so the momentum is sqrt(2 m e V) and the wavelength h / sqrt(2 m e V) varies as 1 / sqrt(V).",
+      "commonMistake": "Assuming the wavelength is inversely proportional to V rather than to its square root."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The momentum of a photon of wavelength lambda is:",
+      "options": [
+        "h lambda",
+        "h / lambda",
+        "h c / lambda",
+        "lambda / h"
+      ],
+      "correctIndex": 1,
+      "answer": "h / lambda",
+      "explanation": "For a photon E = h c / lambda and E = p c, so p = h / lambda. The quantity h c / lambda is the photon energy, not its momentum.",
+      "commonMistake": "Confusing photon energy with photon momentum."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The Davisson-Germer experiment is important because it demonstrated:",
+      "options": [
+        "the particle nature of light",
+        "the existence of the nucleus",
+        "the wave nature of electrons",
+        "the quantisation of atomic energy levels"
+      ],
+      "correctIndex": 2,
+      "answer": "the wave nature of electrons",
+      "explanation": "Electrons scattered from a nickel crystal produced diffraction maxima satisfying the Bragg condition with a wavelength equal to h / p, which confirmed de Broglie's matter-wave hypothesis.",
+      "commonMistake": "Attributing the experiment to the photoelectric effect rather than to electron diffraction."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a given photosensitive surface, the stopping potential depends on:",
+      "options": [
+        "the intensity of the incident radiation",
+        "the time for which the radiation falls on the surface",
+        "the area of the illuminated surface",
+        "the frequency of the incident radiation"
+      ],
+      "correctIndex": 3,
+      "answer": "the frequency of the incident radiation",
+      "explanation": "The stopping potential is set by the maximum kinetic energy, e V_0 = h nu - phi_0, which involves the frequency and the work function but not the intensity, exposure time or area.",
+      "commonMistake": "Expecting a brighter beam to require a larger stopping potential."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The minimum frequency of incident radiation below which no photoelectric emission occurs from a given surface is called the ______ frequency.",
+      "answer": "threshold",
+      "explanation": "The threshold frequency nu_0 satisfies h nu_0 = phi_0, where phi_0 is the work function of the surface. Below it no single photon carries enough energy to free an electron.",
+      "commonMistake": "Writing 'cut-off' for the frequency when cut-off is normally used for the wavelength."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The de Broglie wavelength of a particle of mass m moving with speed v is given by lambda = ______.",
+      "answer": "h / (m v)",
+      "explanation": "de Broglie's relation states that lambda = h / p, and for a particle of mass m moving with speed v the momentum is p = m v, giving lambda = h / (m v).",
+      "commonMistake": "Inverting the expression and writing m v / h."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The stopping potential in a photoelectric experiment depends on the ______ of the incident radiation and not on its intensity.",
+      "answer": "frequency",
+      "explanation": "The stopping potential is fixed by the maximum kinetic energy, which equals h nu minus the work function. Intensity changes only the number of photoelectrons, not their maximum energy.",
+      "commonMistake": "Writing 'amplitude' or 'brightness' in place of frequency."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State any two observations of the photoelectric effect that cannot be explained by the wave theory of light.",
+      "answer": "The existence of a threshold frequency below which no emission occurs however intense the light, and the fact that the maximum kinetic energy of the photoelectrons depends on frequency but not on intensity. The near-instantaneous emission even for very faint light is a third such observation.",
+      "explanation": "A wave delivers energy continuously and spread over the surface, so it would predict emission at any frequency after a sufficient delay, and faster electrons for brighter light. Neither prediction is observed, whereas the photon picture explains both the threshold and the intensity independence of K_max directly.",
+      "commonMistake": "Giving the dependence of saturation current on intensity as a failure of wave theory, when wave theory actually predicts that correctly."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-13",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define work function and threshold frequency, and state the relation between them.",
+      "answer": "The work function is the minimum energy needed to remove an electron from the surface of a metal. The threshold frequency is the lowest frequency of incident radiation that can eject electrons from that surface. They are related by phi_0 = h nu_0, or nu_0 = phi_0 / h.",
+      "explanation": "A photon of the threshold frequency carries exactly the work function, so an electron freed by it escapes with zero kinetic energy. Photons of lower frequency carry less than phi_0 and cannot eject an electron at all.",
+      "commonMistake": "Defining the threshold frequency as the frequency at which the photocurrent becomes maximum."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-14",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Calculate the energy, in electron volts, of a photon of wavelength 500 nm.",
+      "answer": "E = 1240 / 500 = 2.48 eV, which is about 3.97 x 10^-19 J.",
+      "explanation": "Using E = h c / lambda with h c = 1240 eV nm converts the wavelength in nanometres directly into electron volts. The same value in joules follows by multiplying by 1.6 x 10^-19.",
+      "commonMistake": "Forgetting to convert nanometres to metres when using h c = 1.99 x 10^-25 J m."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State de Broglie's hypothesis and write the expression for the de Broglie wavelength of an electron accelerated from rest through a potential difference V.",
+      "answer": "de Broglie proposed that every moving particle has an associated wave of wavelength lambda = h / p, where p is its momentum. For an electron accelerated through V volts, the kinetic energy is e V, so lambda = h / sqrt(2 m e V), numerically 12.27 / sqrt(V) angstrom.",
+      "explanation": "The hypothesis extends the photon relation p = h / lambda to matter. Substituting the electron mass and charge and expressing the result in angstroms gives the standard shortcut with V in volts.",
+      "commonMistake": "Writing lambda = h / (m V) instead of using the square root of the kinetic energy."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State Einstein's photoelectric equation and use it to explain the laws of photoelectric emission.",
+      "answer": "Einstein's equation is h nu = phi_0 + K_max, with e V_0 = K_max. It explains the threshold: emission requires h nu >= phi_0, giving nu_0 = phi_0 / h. It explains the frequency dependence: K_max = h nu - phi_0 increases linearly with frequency and is independent of intensity. It explains the intensity dependence of the current: intensity fixes the number of photons per second and hence the number of photoelectrons, so the saturation current is proportional to intensity. It also explains instantaneous emission, because a single photon can supply the whole escape energy at once.",
+      "explanation": "The equation is an energy balance for one photon absorbed by one electron. Because each photon carries energy h nu and is absorbed indivisibly, the maximum kinetic energy is fixed by frequency alone, while intensity controls only how many such absorption events occur per second.",
+      "commonMistake": "Explaining the intensity dependence of the current using K_max rather than the number of photons."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe the Davisson-Germer experiment and explain how its results confirmed the wave nature of electrons.",
+      "answer": "A beam of electrons accelerated through a known potential difference was directed at a nickel crystal and the scattered intensity was measured as a function of angle. Sharp maxima appeared at particular angles, showing diffraction rather than smooth classical scattering. The angles obeyed the Bragg condition 2 d sin(theta) = n lambda with the known plane spacing d, and the wavelength obtained agreed with h / p for the accelerating voltage. Since a wavelength deduced from diffraction matched the de Broglie prediction, the experiment confirmed that electrons behave as waves.",
+      "explanation": "Diffraction maxima can only arise from interference between waves scattered from different crystal planes. The quantitative agreement with lambda = h / sqrt(2 m e V) rules out any classical explanation and directly verifies de Broglie's relation.",
+      "commonMistake": "Describing the experiment as measuring the charge-to-mass ratio of the electron."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Using the photon picture, explain why the photoelectric current increases with intensity while the stopping potential does not.",
+      "answer": "Intensity is the energy crossing unit area per second, which for fixed frequency equals the number of photons per second multiplied by h nu. A brighter beam therefore delivers more photons per second, each photon can eject one electron, so more electrons are emitted per second and the saturation current rises in proportion. The stopping potential, however, is fixed by the maximum kinetic energy of a single electron, K_max = h nu - phi_0. Since increasing the intensity does not change the energy of each photon, the fastest electrons still leave with the same kinetic energy, so the same retarding potential just stops them. Intensity changes the number of emission events, not the energy per event.",
+      "explanation": "The key distinction is between the number of photons and the energy per photon. Saturation current counts electrons, so it follows the number of photons; stopping potential measures the energy of the fastest electron, so it follows the energy per photon.",
+      "commonMistake": "Saying that more intense light gives electrons more energy, which would wrongly increase the stopping potential."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Light of wavelength 400 nm is incident on a metal surface of work function 2.14 eV. Calculate the maximum kinetic energy of the emitted photoelectrons and the stopping potential.",
+      "answer": "Photon energy = 1240 / 400 = 3.10 eV. K_max = 3.10 - 2.14 = 0.96 eV. The stopping potential is V_0 = K_max / e = 0.96 V.",
+      "explanation": "Subtracting the work function from the photon energy gives the maximum kinetic energy in electron volts, which is numerically equal to the stopping potential in volts because the electron charge converts eV to V.",
+      "commonMistake": "Leaving the answer as 0.96 eV for the stopping potential instead of 0.96 V."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "An electron and a proton are each accelerated from rest through the same potential difference of 100 V. Calculate the de Broglie wavelength of the electron and compare it with that of the proton.",
+      "answer": "For the electron lambda = 12.27 / sqrt(100) = 1.23 angstrom. For equal kinetic energy the wavelength varies as 1 / sqrt(m), so lambda_e / lambda_p = sqrt(m_p / m_e) = sqrt(1836) = 42.8. Hence lambda_p = 0.0287 angstrom, about 43 times shorter than the electron wavelength.",
+      "explanation": "Both particles gain the same kinetic energy e V, so their momenta differ by the square root of their masses. The lighter electron therefore has the longer de Broglie wavelength.",
+      "commonMistake": "Assuming equal momenta rather than equal kinetic energies, which would give equal wavelengths."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A source emits 100 W of monochromatic light of wavelength 600 nm uniformly in all directions. Assuming all the power is radiated as photons, calculate the number of photons emitted per second and the total momentum carried away per second.",
+      "answer": "Each photon has energy h c / lambda = 1.99 x 10^-25 / 6.0 x 10^-7 = 3.32 x 10^-19 J, that is 2.07 eV. The emission rate is 100 / 3.32 x 10^-19 = 3.0 x 10^20 photons per second. Each photon carries momentum h / lambda = 1.11 x 10^-27 kg m s^-1, so the total momentum per second is 3.0 x 10^20 x 1.11 x 10^-27 = 3.3 x 10^-7 kg m s^-2, that is a force of about 3.3 x 10^-7 N on the source.",
+      "explanation": "Dividing the power by the energy of one photon gives the photon rate, and multiplying by the momentum of one photon gives the momentum delivered per second, which by Newton's second law is the force. The force is tiny, which is why radiation pressure is not noticed in everyday life.",
+      "commonMistake": "Using the photon energy instead of the photon momentum when computing the force."
+    },
+    {
+      "id": "isc-12-physics-q-dual-nature-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The threshold wavelength of a metal is 500 nm. Light of wavelength 300 nm is incident on it. Calculate the maximum kinetic energy and the maximum speed of the emitted photoelectrons.",
+      "answer": "Work function = 1240 / 500 = 2.48 eV. Incident photon energy = 1240 / 300 = 4.13 eV. K_max = 4.13 - 2.48 = 1.65 eV = 2.64 x 10^-19 J. Then v_max = sqrt(2 K / m) = sqrt(2 x 2.64 x 10^-19 / 9.11 x 10^-31) = sqrt(5.8 x 10^11) = 7.6 x 10^5 m s^-1.",
+      "explanation": "The work function follows from the threshold wavelength, and the photon energy from the incident wavelength. Their difference is the maximum kinetic energy, which is converted to joules before using the non-relativistic kinetic energy formula to find the speed.",
+      "commonMistake": "Forgetting to convert the kinetic energy from electron volts to joules before calculating the speed."
+    }
+  ]
+}

@@ -1,0 +1,880 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-electronic-devices",
+  "title": "Electronic Devices",
+  "kind": "physics",
+  "tagline": "Semiconductors, p-n junction diodes, bipolar junction transistors and logic gates treated as the electronic devices of the ISC XII syllabus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus (Unit 9 — Electronic Devices; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the syllabus topics registered for this chapter; UNVERIFIED against the primary CISCE PDF in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC 2027 Physics syllabus (Unit 9 — Electronic Devices); no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Electronic devices is the part of physics that connects the behaviour of semiconductors to the small circuits and logic elements used in modern electronics. The chapter starts from the fact that pure semiconductors have a resistivity between that of conductors and insulators, and that their conductivity can be changed dramatically by adding small amounts of impurities. The two most important impurity types give n-type and p-type materials, in which the majority charge carriers are electrons and holes respectively. The central device is the p-n junction diode, which conducts easily in one direction and blocks current in the other, and it can be used in forward bias, reverse bias, as a rectifier, and with special operating points for light emission and detection. The next important device is the transistor, especially the bipolar junction transistor, which can amplify a small signal at its input and is also the building block of digital switching circuits. The chapter ends with logic gates, which are the simplest digital circuits made from transistors and diodes and which implement the basic Boolean operations used in all digital systems.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Electronic Devices"
+      },
+      {
+        "label": "Theory marks context",
+        "value": "Unit 9 in the reproduced 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Energy gap",
+        "value": "semiconductors have a small forbidden energy gap, typically about 1 eV for silicon"
+      },
+      {
+        "label": "n-type doping",
+        "value": "pentavalent impurity gives extra free electrons as majority carriers"
+      },
+      {
+        "label": "p-type doping",
+        "value": "trivalent impurity gives holes as majority carriers"
+      },
+      {
+        "label": "p-n junction depletion region",
+        "value": "a region near the junction depleted of free carriers, with an internal potential barrier"
+      },
+      {
+        "label": "Forward bias",
+        "value": "p-side positive relative to n-side; barrier reduced; current flows easily"
+      },
+      {
+        "label": "Reverse bias",
+        "value": "p-side negative relative to n-side; barrier increased; only small reverse current flows"
+      },
+      {
+        "label": "Diode rectifier",
+        "value": "converts alternating current to a unidirectional output using the diode's one-way conduction"
+      },
+      {
+        "label": "Transistor current relation",
+        "value": "I_E = I_C + I_B for a bipolar junction transistor"
+      },
+      {
+        "label": "Common-emitter current gain",
+        "value": "beta = I_C / I_B"
+      },
+      {
+        "label": "Logic gate truth table",
+        "value": "lists the output for every combination of inputs"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish conductors, semiconductors and insulators in terms of energy bands and conductivity.",
+    "Explain the formation of n-type and p-type semiconductors by doping and identify the majority and minority carriers in each.",
+    "Describe the formation of a p-n junction, the depletion region and the potential barrier.",
+    "Explain the action of a p-n junction diode under forward and reverse bias, and use a diode as a rectifier.",
+    "Describe the structure of a bipolar junction transistor and explain the relation between emitter, collector and base currents.",
+    "Explain the use of a transistor as a switch and as an amplifier in simple qualitative terms.",
+    "State the truth tables and basic action of common logic gates such as NOT, AND, OR, NAND and NOR."
+  ],
+  "learn": [
+    {
+      "id": "semiconductor-basics",
+      "title": "Energy bands and semiconductors",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a solid, the allowed electron energies are grouped into bands separated by forbidden gaps. The two bands most important for electrical conduction are the valence band, which is filled with valence electrons in an insulator or a pure semiconductor, and the conduction band, which is normally empty or only partly filled. In a conductor, the conduction band is partly filled or overlaps the valence band, so electrons can move freely. In an insulator, the gap between the valence band and the conduction band is large, so very few electrons can reach the conduction band. In a semiconductor, the gap is small, so thermal energy can excite a small number of electrons from the valence band into the conduction band, leaving behind positively charged vacancies called holes."
+        },
+        {
+          "type": "paragraph",
+          "text": "A hole behaves like a positive charge carrier because when an electron moves away from a site, an adjacent electron can fill the vacancy, making it appear that the hole has moved in the opposite direction. Current in a pure semiconductor is due to equal numbers of electrons and holes generated together, and it is relatively small. The electrical behaviour of a semiconductor can be changed enormously by adding a very small amount of impurity, a process called doping. This is what makes semiconductors so useful for electronic devices."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Valence band: band of energy levels filled with valence electrons.",
+            "Conduction band: higher energy band where electrons can move freely and conduct current.",
+            "Forbidden gap: energy range between valence and conduction bands where no allowed states exist.",
+            "Semiconductor: small forbidden gap, so some electrons are thermally excited into the conduction band.",
+            "Hole: a vacancy left when an electron leaves the valence band; behaves as a positive charge carrier.",
+            "Doping: adding impurity atoms to change the conductivity of a semiconductor."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why does the conductivity of a pure semiconductor increase with temperature?",
+              "note": "As temperature increases, more electron-hole pairs are thermally generated, so there are more charge carriers available for conduction. This is opposite to a metal, whose resistance usually increases with temperature."
+            },
+            {
+              "text": "What is the difference between an electron and a hole as charge carriers?",
+              "note": "An electron is a negatively charged carrier in the conduction band. A hole is the absence of an electron in the valence band and behaves effectively as a positively charged carrier. In a pure semiconductor both are present in equal numbers."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "doping-n-type-p-type",
+      "title": "n-type and p-type semiconductors",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a pure semiconductor such as silicon is doped with a small amount of a pentavalent impurity, that is an atom with five valence electrons, four of its electrons form covalent bonds with the surrounding silicon atoms, and the fifth electron becomes a free electron. The material is then n-type because the majority carriers are negatively charged electrons. The impurity atom is called a donor because it donates an electron to the conduction band. The number of free electrons is much larger than the number of holes, but the crystal is still electrically neutral overall because each donor ion has an extra positive nuclear charge that balances the donated electron."
+        },
+        {
+          "type": "paragraph",
+          "text": "If the semiconductor is doped with a trivalent impurity, an atom with three valence electrons, then one bond is missing an electron and a hole is created. The material is p-type because holes are the majority carriers. The trivalent impurity is called an acceptor because it accepts an electron, creating a hole. In p-type material, holes are the majority carriers and electrons are the minority carriers. Again, the material remains electrically neutral overall; the apparent charge carrier imbalance is only in the mobile carriers, not in the total charge."
+        },
+        {
+          "type": "table",
+          "caption": "Comparison of n-type and p-type semiconductors",
+          "columns": [
+            "Property",
+            "n-type",
+            "p-type"
+          ],
+          "rows": [
+            [
+              "Doping impurity",
+              "Pentavalent",
+              "Trivalent"
+            ],
+            [
+              "Donor or acceptor",
+              "Donor",
+              "Acceptor"
+            ],
+            [
+              "Majority carriers",
+              "Electrons",
+              "Holes"
+            ],
+            [
+              "Minority carriers",
+              "Holes",
+              "Electrons"
+            ],
+            [
+              "Net charge of material",
+              "Neutral",
+              "Neutral"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A silicon crystal is doped with phosphorus. What type of semiconductor is formed?",
+              "note": "Phosphorus has five valence electrons, so it is a donor impurity. The crystal becomes n-type, with electrons as the majority carriers."
+            },
+            {
+              "text": "A silicon crystal is doped with boron. What type of semiconductor is formed?",
+              "note": "Boron has three valence electrons, so it is an acceptor impurity. The crystal becomes p-type, with holes as the majority carriers."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p-n-junction-and-depletion",
+      "title": "p-n junction and depletion region",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a p-type material and an n-type material are joined together, a p-n junction is formed. Near the junction, free electrons from the n-side diffuse into the p-side and combine with holes, while holes from the p-side diffuse into the n-side. This leaves a region near the junction that is depleted of free charge carriers, called the depletion region. The uncovered fixed charges on each side, negative donor ions on the n-side and positive acceptor ions on the p-side, create an internal electric field and a potential barrier that opposes further diffusion. The result is a junction that can be biased to let current flow mainly in one direction."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "p-n junction: boundary between p-type and n-type materials.",
+            "Depletion region: zone near the junction depleted of free carriers.",
+            "Potential barrier: built-in voltage that opposes further carrier diffusion.",
+            "Diffusion current: carriers moving from high concentration to low concentration.",
+            "Drift current: carriers moving under the internal electric field.",
+            "The junction is the basis of the diode, photodiode and LED."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why does a p-n junction have a depletion region?",
+              "note": "Because carriers diffuse across the junction and recombine near it, leaving behind fixed charged ions. These ions create an internal field that sweeps carriers back, so a region nearly free of mobile carriers is formed and a potential barrier builds up."
+            },
+            {
+              "text": "Is the p-n junction neutral overall?",
+              "note": "Yes. The depletion region contains fixed positive and negative ions, but the junction as a whole is electrically neutral. The charges are simply separated over a small distance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diode-bias-and-rectifier",
+      "title": "Biasing a diode and diode as rectifier",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A p-n junction diode is used by applying an external voltage across it. In forward bias, the p-side is connected to the positive terminal and the n-side to the negative terminal. This reduces the potential barrier, the depletion region becomes narrower, and current begins to flow once the applied voltage is large enough to overcome the barrier. In reverse bias, the p-side is connected to the negative terminal and the n-side to the positive terminal. This increases the potential barrier and widens the depletion region, and only a very small reverse current flows until the breakdown voltage is reached. This one-way behaviour is what makes the diode useful as a rectifier."
+        },
+        {
+          "type": "paragraph",
+          "text": "A rectifier converts alternating current into a unidirectional output. In a half-wave rectifier, only one half of each AC cycle passes through the diode; the other half is blocked. In a full-wave rectifier, both halves of the cycle are used, usually with a centre-tapped transformer and two diodes or with a bridge rectifier using four diodes. The output is then smoothed with a capacitor. The syllabus treatment is mainly qualitative and semi-quantitative, focusing on the one-way action of the diode and the idea of the output waveform."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Forward bias: reduces barrier; current flows easily.",
+            "Reverse bias: increases barrier; only small reverse current.",
+            "Diode conducts mainly in one direction.",
+            "Half-wave rectifier: only one half-cycle is passed.",
+            "Full-wave rectifier: both half-cycles are used.",
+            "LED: a diode that emits light when forward biased.",
+            "Photodiode: a diode operated in reverse bias to detect light."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In which bias does a p-n junction diode conduct most easily?",
+              "note": "In forward bias. The applied voltage opposes the internal barrier, so the depletion region narrows and current flows once the barrier is sufficiently reduced."
+            },
+            {
+              "text": "What does a half-wave rectifier do to a sinusoidal AC input?",
+              "note": "It passes one half of each cycle and blocks the other half, so the output consists of a series of unidirectional pulses, one for each input cycle."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transistor-bipolar",
+      "title": "Bipolar junction transistor",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A bipolar junction transistor is a three-terminal device made of three layers of semiconductor material, either n-p-n or p-n-p. The three regions are the emitter, the base and the collector. The base is very thin and lightly doped compared with the emitter and collector. A small current into the base controls a much larger current from the emitter to the collector. In a common-emitter arrangement, a small change in the base current produces a much larger change in the collector current, which is the basis of amplification. The transistor is called bipolar because both electrons and holes participate in the conduction."
+        },
+        {
+          "type": "paragraph",
+          "text": "For a transistor in normal active operation, the emitter-base junction is forward biased and the collector-base junction is reverse biased. The emitter injects carriers into the base, most of which are swept into the collector because the base is thin. The currents are related by I_E = I_C + I_B. The current gain in the common-emitter configuration is beta = I_C / I_B, which can be fairly large. Because a small base current controls a larger collector current, the transistor can be used both as a switch, where it is either fully off or fully on, and as an amplifier, where small signal variations are amplified."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "BJT: three-layer device, n-p-n or p-n-p.",
+            "Emitter: supplies the majority carriers.",
+            "Base: thin and lightly doped; controls the current.",
+            "Collector: collects the carriers.",
+            "Current relation: I_E = I_C + I_B.",
+            "Current gain: beta = I_C / I_B.",
+            "Transistor can act as a switch or as an amplifier."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If a transistor has I_B = 20 microamperes and I_C = 2 mA, find beta.",
+              "note": "beta = I_C / I_B = 2 x 10^-3 / 20 x 10^-6 = 100. So the collector current is 100 times the base current."
+            },
+            {
+              "text": "In a transistor, if I_C = 4.8 mA and I_E = 5.0 mA, find I_B.",
+              "note": "I_E = I_C + I_B, so I_B = I_E - I_C = 5.0 - 4.8 = 0.2 mA. This relationship is useful for checking circuit values."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transistor-switch-and-amplifier",
+      "title": "Transistor as switch and as amplifier",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A transistor can act as a switch by operating it in two regions. In one region the transistor is cut off, with very little collector current, which corresponds to the off state. In the other region it is saturated, with a large collector current limited mainly by the external circuit, which corresponds to the on state. A small base current can move the transistor from off to on, so the transistor can switch a larger load on or off using a small control signal. This is the basis of many digital circuits."
+        },
+        {
+          "type": "paragraph",
+          "text": "As an amplifier, the transistor is biased so that it operates in the active region, where the collector current changes nearly proportionally with the base current. A small input signal applied to the base produces a larger output variation at the collector. The output is an amplified replica of the input shape, though in a common-emitter amplifier the output is inverted relative to the input. The detailed design of amplifiers uses biasing, load resistors, and coupling, but the basic physics idea is the current control provided by the transistor."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Cutoff: transistor off; collector current very small.",
+            "Saturation: transistor on; collector current large.",
+            "Active region: transistor used for amplification.",
+            "Switch: base current changes between cutoff and saturation.",
+            "Amplifier: small input variations produce larger output variations.",
+            "Common-emitter amplifier: output is inverted relative to the input."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Which transistor bias conditions correspond to the off state in switching?",
+              "note": "Cutoff, with very small or zero base current, so the collector current is very small. The transistor behaves like an open switch."
+            },
+            {
+              "text": "Which transistor bias conditions correspond to the on state in switching?",
+              "note": "Saturation, with enough base current to make the collector current as large as the external circuit allows. The transistor behaves like a closed switch."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "logic-gates",
+      "title": "Logic gates",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Logic gates are the simplest digital circuits. Each gate has one or more inputs and one output, and its output is determined by a Boolean function of the inputs. The common gates are NOT, AND, OR, NAND, NOR and sometimes XOR. Their behaviour is described by truth tables, which list the output for every combination of inputs. Inputs and outputs are usually represented by high and low voltage levels, which stand for 1 and 0. Transistors and diodes can be used to build these gates, and combinations of gates form the basis of all digital logic circuits."
+        },
+        {
+          "type": "paragraph",
+          "text": "The NOT gate has one input and one output; the output is the opposite of the input. The AND gate gives a high output only when all its inputs are high. The OR gate gives a high output when at least one input is high. The NAND gate is an AND gate followed by a NOT, so its output is low only when all inputs are high. The NOR gate is an OR gate followed by a NOT, so its output is high only when all inputs are low. These gates are the basic building blocks of digital electronics."
+        },
+        {
+          "type": "table",
+          "caption": "Truth tables for basic logic gates",
+          "columns": [
+            "Input A",
+            "Input B",
+            "NOT A",
+            "A AND B",
+            "A OR B",
+            "A NAND B",
+            "A NOR B"
+          ],
+          "rows": [
+            [
+              "0",
+              "0",
+              "1",
+              "0",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "0",
+              "1",
+              "1",
+              "0",
+              "1",
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0",
+              "0",
+              "0",
+              "1",
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "1",
+              "0",
+              "1",
+              "1",
+              "0",
+              "0"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "What is the output of a two-input NAND gate when both inputs are 1?",
+              "note": "The output is 0. A NAND gate gives 0 only when all inputs are 1; otherwise it gives 1."
+            },
+            {
+              "text": "What is the output of a two-input NOR gate when one input is 1 and the other is 0?",
+              "note": "The output is 0. A NOR gate gives 1 only when both inputs are 0; otherwise it gives 0."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Semiconductors have a small forbidden energy gap, so thermal excitation produces some free electrons and holes.",
+    "Doping with a pentavalent impurity gives n-type material with electrons as majority carriers.",
+    "Doping with a trivalent impurity gives p-type material with holes as majority carriers.",
+    "A p-n junction has a depletion region and a built-in potential barrier.",
+    "Forward bias reduces the barrier and allows current; reverse bias increases the barrier and only a small reverse current flows.",
+    "A diode can be used as a rectifier to convert AC into a unidirectional output.",
+    "An LED is a forward-biased diode that emits light; a photodiode detects light in reverse bias.",
+    "In a bipolar junction transistor, I_E = I_C + I_B and the current gain beta = I_C / I_B.",
+    "A transistor can act as a switch in cutoff and saturation, and as an amplifier in the active region.",
+    "Logic gates implement basic Boolean functions; truth tables show their input-output behaviour."
+  ],
+  "examFocus": [
+    "Distinguish majority and minority carriers in n-type and p-type materials.",
+    "Remember that doped semiconductors are electrically neutral overall; doping changes carriers, not net charge.",
+    "Describe the depletion region and its behaviour under forward and reverse bias clearly.",
+    "Use I_E = I_C + I_B correctly in transistor problems.",
+    "Know the difference between the on state and off state of a transistor switch.",
+    "State the truth tables of NOT, AND, OR, NAND and NOR accurately.",
+    "Do not confuse the diode's one-way conduction with the transistor's current-control action."
+  ],
+  "vocabulary": [
+    {
+      "word": "Semiconductor",
+      "meaning": "A material with electrical conductivity between that of a conductor and an insulator, whose conductivity can be changed by doping or temperature."
+    },
+    {
+      "word": "Valence band",
+      "meaning": "The energy band containing the valence electrons of a solid."
+    },
+    {
+      "word": "Conduction band",
+      "meaning": "The higher energy band where electrons can move freely and contribute to conduction."
+    },
+    {
+      "word": "Forbidden gap",
+      "meaning": "The energy range between the valence band and the conduction band where no electron states are allowed."
+    },
+    {
+      "word": "Hole",
+      "meaning": "A vacancy in the valence band that behaves effectively as a positively charged carrier."
+    },
+    {
+      "word": "Doping",
+      "meaning": "The intentional addition of impurity atoms to a semiconductor to change its conductivity."
+    },
+    {
+      "word": "n-type semiconductor",
+      "meaning": "A semiconductor doped with donor impurities so that electrons are the majority carriers."
+    },
+    {
+      "word": "p-type semiconductor",
+      "meaning": "A semiconductor doped with acceptor impurities so that holes are the majority carriers."
+    },
+    {
+      "word": "Donor impurity",
+      "meaning": "A pentavalent impurity that donates free electrons to the conduction band."
+    },
+    {
+      "word": "Acceptor impurity",
+      "meaning": "A trivalent impurity that accepts electrons and creates holes in the valence band."
+    },
+    {
+      "word": "p-n junction",
+      "meaning": "The boundary between p-type and n-type semiconductor materials."
+    },
+    {
+      "word": "Depletion region",
+      "meaning": "The region near a p-n junction depleted of free charge carriers."
+    },
+    {
+      "word": "Potential barrier",
+      "meaning": "The built-in voltage across a p-n junction that opposes further diffusion of carriers."
+    },
+    {
+      "word": "Forward bias",
+      "meaning": "Biasing a p-n junction with the p-side positive relative to the n-side, reducing the barrier."
+    },
+    {
+      "word": "Reverse bias",
+      "meaning": "Biasing a p-n junction with the p-side negative relative to the n-side, increasing the barrier."
+    },
+    {
+      "word": "Diode",
+      "meaning": "A two-terminal device that conducts current mainly in one direction due to a p-n junction."
+    },
+    {
+      "word": "Rectifier",
+      "meaning": "A circuit that converts alternating current into a unidirectional output using a diode or diodes."
+    },
+    {
+      "word": "LED",
+      "meaning": "Light-emitting diode, a forward-biased p-n junction that emits light when conduction occurs."
+    },
+    {
+      "word": "Photodiode",
+      "meaning": "A p-n junction operated in reverse bias to detect light by generating a current proportional to the incident light."
+    },
+    {
+      "word": "Transistor",
+      "meaning": "A three-terminal semiconductor device used for switching and amplification."
+    },
+    {
+      "word": "Bipolar junction transistor",
+      "meaning": "A transistor with both electron and hole carriers, made of three layers n-p-n or p-n-p."
+    },
+    {
+      "word": "Emitter",
+      "meaning": "The transistor terminal that supplies the majority carriers into the base."
+    },
+    {
+      "word": "Base",
+      "meaning": "The thin, lightly doped central region of a transistor that controls the current."
+    },
+    {
+      "word": "Collector",
+      "meaning": "The transistor terminal that collects the carriers from the base."
+    },
+    {
+      "word": "Logic gate",
+      "meaning": "A basic digital circuit that performs a Boolean operation on one or more inputs and produces an output."
+    },
+    {
+      "word": "Truth table",
+      "meaning": "A table listing the output of a logic gate for every combination of inputs."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: p-n junction with depletion region",
+      "description": "A diagram of a p-n junction showing the p-side on the left and the n-side on the right, with a narrow depletion region near the junction. The fixed acceptor ions on the p-side and donor ions on the n-side are indicated, together with the internal electric field direction and the potential barrier. The figure labels the p-region, the n-region, the depletion region, the immobile ions, the internal field, and the direction that opposes further diffusion.",
+      "labels": [
+        "p-type region",
+        "n-type region",
+        "depletion region near the junction",
+        "negative fixed ions on the n-side",
+        "positive fixed ions on the p-side",
+        "internal electric field direction",
+        "potential barrier",
+        "diffusion of carriers initially",
+        "direction of barrier opposing diffusion"
+      ]
+    },
+    {
+      "caption": "Figure: Diode forward bias and reverse bias",
+      "description": "Two circuits side by side. One shows a p-n junction diode in forward bias, with the p-side to the positive terminal, the depletion region narrow, and current flowing. The other shows reverse bias, with the p-side to the negative terminal, the depletion region wider, and only a very small reverse current. The figure labels the bias connections, the diode symbol, the depletion region in each case, and the direction of easy current flow.",
+      "labels": [
+        "forward bias: p-side to positive terminal",
+        "reverse bias: p-side to negative terminal",
+        "depletion region narrow in forward bias",
+        "depletion region wide in reverse bias",
+        "easy current flow in forward bias",
+        "very small reverse current",
+        "diode circuit symbol",
+        "direction of conventional current",
+        "barrier reduced in forward bias"
+      ]
+    },
+    {
+      "caption": "Figure: Bipolar junction transistor and current directions",
+      "description": "A diagram of an n-p-n transistor showing the emitter, base and collector regions, with the thin base region emphasised. The current directions for emitter, base and collector are shown, together with the relation I_E = I_C + I_B. The figure labels the three terminals, the base region, the injected carriers, the large collector current controlled by the small base current, and the current relation.",
+      "labels": [
+        "n-p-n transistor",
+        "emitter",
+        "base",
+        "collector",
+        "thin base region",
+        "emitter current I_E",
+        "base current I_B",
+        "collector current I_C",
+        "I_E = I_C + I_B",
+        "small base current controls large collector current"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-electronic-devices-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In an n-type semiconductor, the majority charge carriers are:",
+      "options": [
+        "electrons",
+        "holes",
+        "protons",
+        "positive ions fixed in the lattice"
+      ],
+      "correctIndex": 0,
+      "answer": "electrons",
+      "explanation": "In n-type material, donor impurities provide extra free electrons, so electrons are the majority carriers. The material is still electrically neutral overall.",
+      "commonMistake": "Thinking that n-type material has a net negative charge."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A p-n junction diode conducts most easily when it is:",
+      "options": [
+        "reverse biased",
+        "forward biased",
+        "removed from the circuit",
+        "heated strongly only"
+      ],
+      "correctIndex": 1,
+      "answer": "forward biased",
+      "explanation": "In forward bias the applied voltage opposes the internal barrier, the depletion region narrows, and current begins to flow once the barrier is sufficiently reduced.",
+      "commonMistake": "Thinking the diode conducts equally well in both directions."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The depletion region in a p-n junction is the region that is:",
+      "options": [
+        "full of free electrons only",
+        "full of holes only",
+        "nearly free of free charge carriers",
+        "metal-like in conductivity"
+      ],
+      "correctIndex": 2,
+      "answer": "nearly free of free charge carriers",
+      "explanation": "The depletion region is depleted of mobile electrons and holes and contains mainly fixed charged ions. It is the basis of the built-in potential barrier.",
+      "commonMistake": "Thinking the depletion region is a conducting metal-like layer."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a bipolar junction transistor, the relation between currents is:",
+      "options": [
+        "I_C = I_E + I_B",
+        "I_B = I_C + I_E",
+        "I_E = I_C - I_B",
+        "I_E = I_C + I_B"
+      ],
+      "correctIndex": 3,
+      "answer": "I_E = I_C + I_B",
+      "explanation": "The emitter current splits into the collector current and the base current, so I_E = I_C + I_B.",
+      "commonMistake": "Reversing the relation and thinking the collector current is the sum of the other two."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A common-emitter transistor has I_B = 30 microamperes and I_C = 3 mA. Its current gain beta is:",
+      "options": [
+        "100",
+        "30",
+        "3",
+        "10"
+      ],
+      "correctIndex": 0,
+      "answer": "100",
+      "explanation": "beta = I_C / I_B = 3 x 10^-3 / 30 x 10^-6 = 100. So the collector current is 100 times the base current.",
+      "commonMistake": "Dividing I_B by I_C or mixing up micro and milli units."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which gate gives an output of 1 only when both inputs are 0?",
+      "options": [
+        "NAND",
+        "NOR",
+        "OR",
+        "AND"
+      ],
+      "correctIndex": 1,
+      "answer": "NOR",
+      "explanation": "A NOR gate gives 1 only when all inputs are 0. If either input is 1, the output is 0.",
+      "commonMistake": "Confusing NOR with NAND or OR."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A p-type semiconductor is formed by doping silicon with:",
+      "options": [
+        "a pentavalent impurity",
+        "an insulator",
+        "a trivalent impurity",
+        "a conductor"
+      ],
+      "correctIndex": 2,
+      "answer": "a trivalent impurity",
+      "explanation": "A trivalent impurity has three valence electrons and creates holes, so the material becomes p-type with holes as majority carriers.",
+      "commonMistake": "Thinking p-type means pentavalent doping."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a common-emitter amplifier, the output is:",
+      "options": [
+        "identical in phase to the input",
+        "always zero",
+        "only positive",
+        "inverted relative to the input"
+      ],
+      "correctIndex": 3,
+      "answer": "inverted relative to the input",
+      "explanation": "In a common-emitter amplifier, an increase in base current tends to increase collector current through the load, which reduces the output voltage. The output is therefore inverted relative to the input.",
+      "commonMistake": "Thinking the common-emitter amplifier produces an output exactly in phase with the input."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A hole in a semiconductor behaves as a ______ charge carrier.",
+      "answer": "positive",
+      "explanation": "A hole is the absence of an electron in the valence band and behaves effectively as a positively charged carrier.",
+      "commonMistake": "Writing 'negative' or 'neutral' instead of 'positive'."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The thin central region of a bipolar junction transistor is called the ______.",
+      "answer": "base",
+      "explanation": "The base is the thin, lightly doped middle region that controls the flow of carriers from emitter to collector.",
+      "commonMistake": "Writing 'middle' or 'gate' instead of 'base'."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A NOT gate has ______ input(s) and one output.",
+      "answer": "one",
+      "explanation": "A NOT gate has a single input and produces the logical opposite of that input at its output.",
+      "commonMistake": "Writing 'two' or 'many' instead of 'one'."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between n-type and p-type semiconductors in terms of majority carriers.",
+      "answer": "In n-type semiconductors, donor impurities provide extra free electrons, and electrons are the majority carriers. In p-type semiconductors, acceptor impurities create holes, and holes are the majority carriers. In both cases the material is electrically neutral overall.",
+      "explanation": "The answer should name the majority carrier in each type and mention that the material is neutral overall.",
+      "commonMistake": "Stating that one type is negatively charged and the other positively charged overall."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain what happens to the depletion region when a p-n junction is reverse biased.",
+      "answer": "In reverse bias, the p-side is made negative relative to the n-side, which increases the potential barrier and widens the depletion region. The electric field opposes the motion of the majority carriers, so only a very small reverse current flows until breakdown occurs.",
+      "explanation": "The answer should mention the widening of the depletion region and the increase in the barrier.",
+      "commonMistake": "Saying that reverse bias removes the depletion region or makes the diode conduct freely."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is the function of a rectifier?",
+      "answer": "A rectifier converts an alternating current input into a unidirectional output by using the one-way conduction of a diode or diodes. A half-wave rectifier passes only one half of each cycle, while a full-wave rectifier uses both half-cycles.",
+      "explanation": "The answer should mention conversion of AC to a unidirectional output and the role of the diode's one-way conduction.",
+      "commonMistake": "Saying a rectifier changes voltage level without mentioning unidirectional output."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the truth table for a two-input AND gate.",
+      "answer": "For an AND gate, the output is 0, 0, 0, 1 for input combinations 00, 01, 10, 11. In words, the output is 1 only when both inputs are 1.",
+      "explanation": "The answer should list the four input combinations and give the correct outputs.",
+      "commonMistake": "Giving an OR-like truth table where the output is 1 if at least one input is 1."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe the formation of a p-n junction and explain how the depletion region develops.",
+      "answer": "When p-type and n-type materials are joined, free electrons from the n-side diffuse into the p-side and recombine with holes, and holes diffuse in the opposite direction. This leaves uncovered fixed negative donor ions on the n-side and fixed positive acceptor ions on the p-side near the junction. These ions create an internal electric field and a potential barrier that oppose further diffusion. The result is a narrow depletion region almost free of mobile carriers, with a built-in potential across it.",
+      "explanation": "The answer should describe carrier diffusion, recombination, the exposed fixed charges, and the resulting barrier and depletion region.",
+      "commonMistake": "Saying that charges are created at the junction rather than that fixed charges are uncovered by diffusion."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A transistor has I_E = 6.0 mA and I_C = 5.8 mA. Find I_B. If beta = I_C / I_B, calculate beta as well.",
+      "answer": "I_B = I_E - I_C = 6.0 - 5.8 = 0.2 mA. beta = I_C / I_B = 5.8 / 0.2 = 29.",
+      "explanation": "The solution uses the current relation to get I_B and then uses beta = I_C / I_B.",
+      "commonMistake": "Adding instead of subtracting, or mixing units when calculating beta."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how a transistor can be used as a switch. What are the on and off states in terms of transistor regions?",
+      "answer": "A transistor can act as a switch because a small base current can control whether a much larger collector current flows. In the off state, the base current is very small or zero, the transistor is in cutoff, and the collector current is very small, so the switch is open. In the on state, enough base current is applied to drive the transistor into saturation, the collector current becomes large, and the switch is closed. The transition between these states can be fast, which is why transistors are used in digital switching circuits.",
+      "explanation": "The answer should connect off with cutoff and on with saturation, and mention current control by the base.",
+      "commonMistake": "Saying the transistor switches by changing the supply voltage only, without mention of base current control."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two semiconductors have the same size and shape, but one is doped more heavily than the other. Which one will generally have the lower resistance at room temperature, and why?",
+      "answer": "The more heavily doped semiconductor will generally have the lower resistance because doping increases the number of mobile charge carriers, so the conductivity is higher. Resistance depends on the number of available carriers as well as the geometry and mobility, and for two samples of the same size and shape the one with more carriers has the lower resistance.",
+      "explanation": "The reasoning should connect doping to increased carrier concentration and therefore to lower resistance.",
+      "commonMistake": "Thinking that a semiconductor always has higher resistance than a metal regardless of doping, and so giving a vague qualitative answer."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A student claims that in a p-n junction, the depletion region is caused by positive charges moving into the n-side. Identify the error and give the correct idea.",
+      "answer": "The error is to think that mobile positive charges move into the n-side. In a p-n junction, the depletion region forms because electrons from the n-side and holes from the p-side diffuse and recombine near the junction, leaving behind fixed ions. The fixed negative ions are on the n-side and the fixed positive ions are on the p-side. The region is depleted of mobile carriers, not filled with moving positive charges.",
+      "explanation": "The correction should emphasise diffusion and recombination, and the fixed nature of the ions in the depletion region.",
+      "commonMistake": "Treating the depletion region as a region of accumulated free positive charge."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A logic circuit has two inputs A and B and gives output 1 only when A and B are different. Which logic gate is this, and what is its truth table?",
+      "answer": "The gate is an XOR gate. Its truth table is: for inputs 00, 01, 10, 11, the outputs are 0, 1, 1, 0. The output is 1 only when the inputs are different, and 0 when they are the same.",
+      "explanation": "The answer should identify the XOR gate and give the correct truth table for different inputs.",
+      "commonMistake": "Giving the truth table of OR or NAND instead of XOR."
+    },
+    {
+      "id": "isc-12-physics-q-electronic-devices-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why a transistor amplifier needs to be biased properly. What could go wrong if the base current is too small or too large?",
+      "answer": "Proper biasing places the transistor in the active region, where the collector current varies nearly linearly with the base current, so small input signals are amplified without severe distortion. If the base current is too small, the transistor may stay in cutoff for part of the signal, and the negative part of the input may be clipped. If the base current is too large, the transistor may enter saturation for part of the signal, and the positive part may be clipped. In both cases the output is distorted and the amplifier no longer works linearly over the whole signal.",
+      "explanation": "The answer should connect bias to the active region and describe clipping due to cutoff and saturation.",
+      "commonMistake": "Saying that biasing only affects the power supply and not the signal waveform."
+    }
+  ]
+}

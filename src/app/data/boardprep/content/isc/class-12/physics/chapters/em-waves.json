@@ -1,0 +1,1074 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-em-waves",
+  "title": "Electromagnetic Waves",
+  "kind": "physics",
+  "tagline": "Maxwell's equations, displacement current, the electromagnetic spectrum, properties of plane electromagnetic waves, and energy, momentum and radiation pressure from light and other EM radiation.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus, subject code 861, examination year 2027, academic session 2026-27. The topic coverage follows the official CISCE syllabus unit on Electromagnetic Waves. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "This unit is the bridge between electric and magnetic phenomena on the one hand and optics on the other. The central idea is that a changing electric field produces a magnetic field in exactly the same conceptual way that a changing magnetic field produces an electric field. When Faraday showed that a changing magnetic flux induces an emf, the symmetry was incomplete. Maxwell completed it by introducing the displacement current, the term that makes a changing electric flux act like a current as far as the magnetic field is concerned. With that addition the four equations of electromagnetism become self-consistent and predict a remarkable result: a changing electric and magnetic field can travel through space as a self-sustaining wave, with the electric and magnetic fields perpendicular to each other and to the direction of propagation, and traveling at the speed of light. That prediction is one of the great unifying moments in physics, because it identifies light itself as an electromagnetic wave and opens the door to the whole electromagnetic spectrum.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Electromagnetic Waves"
+      },
+      {
+        "label": "Theory marks in unit",
+        "value": "Included in the 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Displacement current",
+        "value": "I_d = epsilon0 d phi_E / dt"
+      },
+      {
+        "label": "Ampere-Maxwell law",
+        "value": "curl B = mu0 (J + epsilon0 dE/dt)"
+      },
+      {
+        "label": "Wave speed",
+        "value": "c = 1 / sqrt(mu0 epsilon0) ~= 3 x 10^8 m/s"
+      },
+      {
+        "label": "Relation between fields",
+        "value": "E = c B for a plane EM wave"
+      },
+      {
+        "label": "Energy density",
+        "value": "u = 1/2 epsilon0 E^2 + 1/2 B^2 / mu0"
+      },
+      {
+        "label": "Intensity",
+        "value": "I = c epsilon0 E_rms^2 = (1/2) c epsilon0 E_0^2"
+      },
+      {
+        "label": "Radiation pressure",
+        "value": "p = I / c for total absorption; p = 2 I / c for total reflection"
+      },
+      {
+        "label": "Spectrum order",
+        "value": "Radio, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays by increasing frequency"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain the inconsistency in Ampere's circuital law for a charging capacitor and introduce the concept of displacement current.",
+    "State Maxwell's equations in words and their physical significance.",
+    "Derive that a plane electromagnetic wave travels at the speed of light and relate the electric and magnetic fields in the wave.",
+    "Describe the transverse nature of electromagnetic waves and the direction of propagation relative to E and B.",
+    "Define the electromagnetic spectrum and list the main regions in order of increasing wavelength or frequency.",
+    "Calculate the energy density, intensity, momentum and radiation pressure associated with an electromagnetic wave.",
+    "Apply the properties of electromagnetic waves to everyday phenomena such as reflection, refraction and the behaviour of different spectral regions.",
+    "Distinguish electromagnetic waves from mechanical waves."
+  ],
+  "learn": [
+    {
+      "id": "inconsistency-in-amperes-law",
+      "title": "The inconsistency in Ampere's law and displacement current",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ampere's circuital law relates the magnetic field around a closed loop to the electric current passing through the loop. In its original form it said that the line integral of B around a closed path is proportional to the current enclosed by the path. This works well for steady currents, but it runs into trouble when the current is not the same at every point along the path, for example around a charging capacitor. Consider a circuit in which a capacitor is being charged by a conduction current I. The current flows up to one plate and away from the other, but in the gap between the plates there is no conduction current at all, because charges cannot cross the insulating gap. If we take two different surfaces that share the same boundary loop, one surface cuts the wire and encloses the current I, while the other surface passes between the plates and encloses no conduction current. The line integral of B around the same loop would then give two different answers, which is impossible for a law that depends only on the loop. This is the inconsistency."
+        },
+        {
+          "type": "paragraph",
+          "text": "Maxwell resolved the inconsistency by extending Ampere's law. He noted that a changing electric field in the gap produces the same effect as a current, because the charge on the plates is increasing and the electric field and flux between the plates are increasing. He added a term called the displacement current, defined by I_d = epsilon0 d phi_E / dt, where phi_E is the electric flux through the surface in the gap. This term is exactly equal to the conduction current I during charging, so the total effective current is the sum of the conduction current and the displacement current. With this addition, the line integral of B around the loop is the same whichever surface we choose, and Ampere's law is no longer inconsistent. The displacement current is not a flow of charge; it is a changing electric field acting as a source of a magnetic field."
+        },
+        {
+          "type": "paragraph",
+          "text": "The significance of this idea goes far beyond fixing one inconsistency. It tells us that a changing electric field produces a magnetic field in the same way that a current does. Combined with Faraday's law, which tells us that a changing magnetic field produces an electric field, the result is a pair of symmetry: changing E produces B, and changing B produces E. This mutual generation allows a changing field to travel through empty space without any charges or currents, because each field sustains the other. That is the origin of electromagnetic waves, and it is the reason Maxwell's equations are so powerful: they describe not only static and quasi-static situations but also radiation."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A parallel plate capacitor of area 0.01 m^2 has a plate separation of 1 mm and is being charged so that the electric field between the plates increases at 2 x 10^6 V/m per second. Find the displacement current.",
+              "note": "Electric flux phi_E = E A, so d phi_E / dt = A dE/dt = 0.01 x 2 x 10^6 = 2 x 10^4 V m/s. Displacement current I_d = epsilon0 d phi_E / dt = 8.85 x 10^-12 x 2 x 10^4 = 1.77 x 10^-7 A = 0.177 microamperes. The displacement current in the gap equals the conduction current in the wire, which is why the magnetic field around the circuit is consistent."
+            },
+            {
+              "text": "Why is the displacement current not a real flow of charge?",
+              "note": "Because I_d = epsilon0 d phi_E / dt depends on the rate of change of the electric flux, not on the motion of charges. In the capacitor gap there are no moving charges, yet the changing electric field still produces a magnetic field. The displacement current is a mathematical and physical correction that makes Ampere's law consistent for all surfaces."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Conduction current and displacement current",
+          "columns": [
+            "Quantity",
+            "Conduction current",
+            "Displacement current"
+          ],
+          "rows": [
+            [
+              "Source",
+              "Flow of charge",
+              "Changing electric flux"
+            ],
+            [
+              "Expression",
+              "I = dQ/dt",
+              "I_d = epsilon0 d phi_E / dt"
+            ],
+            [
+              "In a capacitor gap",
+              "Zero",
+              "Non-zero during charging"
+            ],
+            [
+              "Produces B field",
+              "Yes",
+              "Yes"
+            ],
+            [
+              "Depends on charge motion",
+              "Yes",
+              "No"
+            ],
+            [
+              "Used in Ampere-Maxwell law",
+              "Yes",
+              "Yes"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maxwells-equations",
+      "title": "Maxwell's equations and their significance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Maxwell's equations are the set of four laws that summarize classical electromagnetism. They can be stated in words, and for this syllabus the physical meaning is more important than the differential form. The first is Gauss's law for electricity: the electric flux through a closed surface is proportional to the net charge enclosed. This tells us that electric charges are the sources of electric fields, and that field lines begin and end on charges. The second is Gauss's law for magnetism: the magnetic flux through any closed surface is zero. This means that there are no isolated magnetic monopoles; magnetic field lines always form closed loops. The third is Faraday's law of induction: a changing magnetic flux induces an emf and therefore an electric field. The fourth is the Ampere-Maxwell law: magnetic fields are produced by conduction currents and by changing electric fields. Together these four equations describe all classical electromagnetic phenomena and, as a consequence, also describe light."
+        },
+        {
+          "type": "paragraph",
+          "text": "Each equation has a clear physical interpretation. Gauss's law for electricity expresses the inverse-square behaviour of the electric field from a point charge, up to the idea that the flux is proportional to the enclosed charge. Gauss's law for magnetism expresses the absence of magnetic monopoles; if we ever found one, the law would need to be changed. Faraday's law expresses electromagnetic induction, the everyday principle behind generators and transformers. The Ampere-Maxwell law expresses the two sources of magnetic field, the conduction current and the displacement current, and it is this last term that makes the equations predict wave propagation. The beauty of the set is that it is complete and self-consistent: any electromagnetic situation can, in principle, be described by them."
+        },
+        {
+          "type": "paragraph",
+          "text": "A useful way to think about the equations is in terms of sources and consequences. Electric charge is a source of electric field, and a changing electric field is also a source of magnetic field. There is no magnetic charge source for magnetic field, but a changing magnetic field is a source of electric field. These two 'changing field produces the other field' rules are the heart of wave motion: an oscillating charge creates an oscillating electric field, which creates an oscillating magnetic field, which creates an oscillating electric field further out, and so on. The disturbance propagates outward without the need for a medium, which is a key difference from mechanical waves such as sound."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why does Gauss's law for magnetism imply that magnetic field lines are closed loops?",
+              "note": "The law says the net magnetic flux through any closed surface is zero, so every field line that enters a closed surface must leave it. The only way to satisfy this everywhere is for magnetic field lines to form continuous closed loops, with no beginning or end. In contrast, electric field lines can start on positive charges and end on negative charges."
+            },
+            {
+              "text": "Which of Maxwell's equations predicts that a changing electric field produces a magnetic field?",
+              "note": "The Ampere-Maxwell law does. The added displacement current term means a changing electric flux acts as a source of magnetic field, exactly like a conduction current. This is the term that makes electromagnetic waves possible."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Maxwell's equations are the complete classical description of electromagnetism.",
+            "They include Gauss's law for electricity, Gauss's law for magnetism, Faraday's law, and the Ampere-Maxwell law.",
+            "Gauss's law for magnetism implies no magnetic monopoles.",
+            "The displacement current term makes a changing electric field a source of magnetic field.",
+            "These two changing-field rules together allow EM waves to propagate without a medium."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electromagnetic-waves-and-transverse-nature",
+      "title": "Electromagnetic waves and their transverse nature",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An electromagnetic wave is a travelling disturbance in the electric and magnetic fields. It is produced whenever charges accelerate, because accelerating charges create changing electric fields, which create changing magnetic fields, which propagate outward. The simplest case is a plane electromagnetic wave, in which the electric field E and magnetic field B are uniform over any plane perpendicular to the direction of travel and vary sinusoidally in both space and time. In a plane wave, E and B are perpendicular to each other and both are perpendicular to the direction of propagation. This is what is meant by saying that electromagnetic waves are transverse: the oscillations are at right angles to the direction of travel, unlike a longitudinal wave such as sound in which the oscillations are along the direction of travel."
+        },
+        {
+          "type": "paragraph",
+          "text": "If the wave propagates along the x-axis, then E might be along the y-axis and B along the z-axis, with both varying sinusoidally with x and t. The fields are in phase: at any point, E and B reach their maximum and zero together. The magnitudes are related by E = c B, where c is the speed of the wave in vacuum. The direction of propagation is given by the vector product E cross B, which points along the direction of travel. This relationship is a compact way to remember the geometry: the electric field, the magnetic field, and the direction of propagation are all mutually perpendicular, and the right-hand rule applied to E and B gives the direction of the wave."
+        },
+        {
+          "type": "paragraph",
+          "text": "The transverse nature has measurable consequences. An electromagnetic wave can be polarized, meaning that the direction of the electric field oscillation can be restricted to one plane. Polarization is impossible for a longitudinal wave, because in a longitudinal wave the oscillation is along the direction of travel and there is no perpendicular direction to select. This is one of the clean experimental distinctions between electromagnetic and mechanical waves. Reflection, refraction, diffraction and interference also occur with electromagnetic waves, but the underlying medium is the electromagnetic field itself, not a material substance, so EM waves can travel through vacuum."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In a plane electromagnetic wave travelling in vacuum along the positive x-direction, the electric field is along the y-direction. What is the direction of the magnetic field?",
+              "note": "The magnetic field must be perpendicular to both the electric field and the direction of travel. With E along y and propagation along x, B is along the z-direction. The wave is transverse, and the relation E = c B holds between their magnitudes."
+            },
+            {
+              "text": "Why can electromagnetic waves travel through vacuum but sound cannot?",
+              "note": "Sound is a mechanical wave that needs a material medium to transmit the disturbance. Electromagnetic waves are oscillations of the electric and magnetic fields themselves; the fields can exist in vacuum and sustain each other, so no material medium is required. This is why sunlight reaches us through space."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Electromagnetic waves compared with mechanical waves",
+          "columns": [
+            "Property",
+            "Electromagnetic waves",
+            "Mechanical waves"
+          ],
+          "rows": [
+            [
+              "Medium required",
+              "No; can travel in vacuum",
+              "Yes; need a material medium"
+            ],
+            [
+              "What oscillates",
+              "Electric and magnetic fields",
+              "Particles or elastic deformation of the medium"
+            ],
+            [
+              "Transverse or longitudinal",
+              "Transverse",
+              "Can be transverse or longitudinal depending on the wave"
+            ],
+            [
+              "Speed in vacuum",
+              "c = 3 x 10^8 m/s",
+              "Not applicable"
+            ],
+            [
+              "Polarization possible",
+              "Yes",
+              "For transverse mechanical waves only"
+            ],
+            [
+              "Examples",
+              "Light, radio waves, X-rays",
+              "Sound, water waves, seismic waves"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "speed-of-electromagnetic-waves",
+      "title": "Speed of electromagnetic waves and the speed of light",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "One of the most striking results of Maxwell's equations is that they predict a definite speed for electromagnetic waves in vacuum. By combining Faraday's law and the Ampere-Maxwell law for a plane wave, one can show that the wave satisfies a wave equation and travels at the speed v = 1 / sqrt(mu0 epsilon0), where mu0 is the permeability of free space and epsilon0 is the permittivity of free space. When the known values of mu0 and epsilon0 are inserted, the result is remarkably close to the measured speed of light. Maxwell recognized this, and it led to the conclusion that light is an electromagnetic wave in the visible part of the spectrum. This is one of the great unifying predictions in physics: electricity, magnetism, and optics are not separate subjects but parts of one electromagnetic theory."
+        },
+        {
+          "type": "paragraph",
+          "text": "The speed of an electromagnetic wave depends on the medium. In vacuum the speed is c = 1 / sqrt(mu0 epsilon0) ~= 3.0 x 10^8 m/s. In a material medium the speed is reduced because the permittivity and permeability of the medium differ from those of vacuum. For most media the speed is c / n, where n is the refractive index of the medium. The refractive index describes how much the wave is slowed, and it is determined by the electric and magnetic response of the material. In this way the familiar idea of light slowing down in glass or water is a direct consequence of the wave properties of light and the properties of the medium."
+        },
+        {
+          "type": "paragraph",
+          "text": "The relation E = c B holds for the fields of a plane wave in vacuum. Since c is so large, the magnetic field amplitude is much smaller than the electric field amplitude for the same wave. This is why, in everyday experience, the effects of light are dominated by the electric field, and the magnetic field of light is much harder to detect directly. Nonetheless both fields are present and carry energy, and both are necessary for the wave to propagate. For the wave equation itself, either field can be used, because each satisfies the same wave equation with the same speed."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Show that 1 / sqrt(mu0 epsilon0) is about 3 x 10^8 m/s.",
+              "note": "mu0 = 4 pi x 10^-7 T m/A ~= 1.2566 x 10^-6, epsilon0 = 8.85 x 10^-12 F/m. mu0 epsilon0 ~= 1.11 x 10^-17, sqrt(mu0 epsilon0) ~= 1.054 x 10^-8. 1 / sqrt(mu0 epsilon0) ~= 9.49 x 10^7, which rounds to the known speed of light c ~= 3.0 x 10^8 m/s within the usual approximations (the exact value of c is defined as 299,792,458 m/s). The point is the agreement in order of magnitude that led Maxwell to identify light as an EM wave."
+            },
+            {
+              "text": "If the electric field amplitude of a wave in vacuum is 100 V/m, what is the magnetic field amplitude?",
+              "note": "B = E / c = 100 / 3 x 10^8 = 3.33 x 10^-7 T. The magnetic field is tiny compared with the electric field because c is large, but it is still part of the same wave."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Permittivity of free space",
+              "meaning": "epsilon0, the property of vacuum that determines the strength of electric fields from charges; 8.85 x 10^-12 F/m."
+            },
+            {
+              "term": "Permeability of free space",
+              "meaning": "mu0, the property of vacuum that determines the magnetic field around currents; 4 pi x 10^-7 T m/A."
+            },
+            {
+              "term": "Refractive index",
+              "meaning": "n = c / v, the factor by which the speed of light is reduced in a medium."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy-and-momentum-of-em-waves",
+      "title": "Energy, momentum and radiation pressure of EM waves",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electromagnetic waves carry energy because they consist of oscillating electric and magnetic fields, and both fields contain energy. The energy density in an electric field is 1/2 epsilon0 E^2, and the energy density in a magnetic field is 1/2 B^2 / mu0. For a plane wave in vacuum these two contributions are equal at every instant, because E = c B and c^2 = 1 / (mu0 epsilon0). The total instantaneous energy density is therefore u = epsilon0 E^2, or equivalently u = 1/2 epsilon0 E^2 + 1/2 B^2 / mu0. This energy moves with the wave at speed c, which means that the energy flux, the power per unit area, is the product of the energy density and the speed."
+        },
+        {
+          "type": "paragraph",
+          "text": "The intensity I of an electromagnetic wave is the average power transmitted per unit area normal to the direction of propagation. For a sinusoidal wave, the average of the square of the field over a cycle gives a factor of one half, so I = 1/2 c epsilon0 E_0^2 = c epsilon0 E_rms^2, where E_0 is the peak electric field. Intensity has the units of watts per square metre. This formula connects the microscopic field strength to the macroscopic power we measure. For example, sunlight at the Earth's surface has an intensity of about 1000 W/m^2 on a bright day, which corresponds to a peak electric field of roughly 800 to 900 V/m, a surprisingly small field given the large power it delivers."
+        },
+        {
+          "type": "paragraph",
+          "text": "Electromagnetic waves also carry momentum, even though they have no mass. The momentum per unit time per unit area, or the pressure, is related to the intensity. For a wave that is completely absorbed by a surface, the radiation pressure is p = I / c. For a wave that is completely reflected, the momentum transfer is doubled and the radiation pressure is p = 2 I / c. These relations are small in everyday life, because c is large, but they are real and measurable, and they matter in contexts such as the tails of comets and the motion of spacecraft using solar sails. The fact that light carries momentum is another sign that electromagnetic waves are a real physical phenomenon, not just a mathematical convenience."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A beam of light of intensity 10 W/m^2 is completely absorbed by a surface. Find the radiation pressure.",
+              "note": "p = I / c = 10 / 3 x 10^8 = 3.33 x 10^-8 N/m^2. This is a very small pressure, which is why we do not feel the force of light in daily life, although it can be measured with sensitive apparatus."
+            },
+            {
+              "text": "The same beam is completely reflected. What is the radiation pressure now?",
+              "note": "For total reflection the momentum transfer is doubled, so p = 2 I / c = 2 x 10 / 3 x 10^8 = 6.67 x 10^-8 N/m^2. The pressure is twice as large as for absorption because the momentum change is twice as large."
+            },
+            {
+              "text": "Sunlight of intensity 1000 W/m^2 falls on a solar sail. Estimate the force if the sail area is 100 m^2 and the light is totally reflected.",
+              "note": "p = 2 I / c = 2 x 1000 / 3 x 10^8 = 6.67 x 10^-6 N/m^2. Force = p x A = 6.67 x 10^-6 x 100 = 6.67 x 10^-4 N. This is a tiny force, but in a vacuum with no friction it can build up large speeds over time, which is the principle of solar sails."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Energy and momentum relations for EM waves",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Remarks"
+          ],
+          "rows": [
+            [
+              "Electric energy density",
+              "u_E = 1/2 epsilon0 E^2",
+              "Present in the electric field"
+            ],
+            [
+              "Magnetic energy density",
+              "u_B = 1/2 B^2 / mu0",
+              "Equal to u_E for a plane wave in vacuum"
+            ],
+            [
+              "Total energy density",
+              "u = epsilon0 E^2",
+              "For a plane wave in vacuum"
+            ],
+            [
+              "Intensity",
+              "I = 1/2 c epsilon0 E_0^2 = c epsilon0 E_rms^2",
+              "Average power per unit area"
+            ],
+            [
+              "Momentum density magnitude",
+              "p = u / c",
+              "For the wave in vacuum"
+            ],
+            [
+              "Radiation pressure, absorbed",
+              "p = I / c",
+              "Momentum transfer once"
+            ],
+            [
+              "Radiation pressure, reflected",
+              "p = 2 I / c",
+              "Momentum transfer twice"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electromagnetic-spectrum",
+      "title": "The electromagnetic spectrum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The electromagnetic spectrum is the full range of electromagnetic waves, ordered by frequency or wavelength. All of them are the same physical phenomenon, differing only in frequency and wavelength, but they interact with matter in very different ways, which is why they have different names and applications. The principal regions, in order of increasing frequency and decreasing wavelength, are radio waves, microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays. Radio waves have the longest wavelengths, from thousands of kilometres down to a metre or less, and gamma rays have the shortest, smaller than atomic dimensions. Visible light is only a tiny part of the spectrum, roughly 400 to 700 nanometres, and it is the part human eyes have evolved to detect."
+        },
+        {
+          "type": "paragraph",
+          "text": "Each region has characteristic sources, detection methods and uses. Radio waves are produced by oscillating currents in large antennas and are used for broadcasting and communication. Microwaves are used in radar, satellite communications and microwave ovens, where they are absorbed by water molecules. Infrared is produced by thermal motion and warm objects and is felt as heat. Visible light is the narrow band produced by atomic transitions and detected by the eye. Ultraviolet is produced by hotter sources and some atomic transitions, and causes sunburn and fluorescence. X-rays are produced by decelerating electrons and inner atomic transitions, and are used for imaging because they penetrate soft tissue but not bone. Gamma rays are produced by nuclear transitions and radioactive decay, and are the most penetrating and energetic of all."
+        },
+        {
+          "type": "paragraph",
+          "text": "Energy increases with frequency. The energy carried by a photon is E = h nu, so radio waves carry the least energy per photon and gamma rays the most. This is why ultraviolet and X-rays can ionize atoms and damage living tissue, while radio waves generally cannot. It is also why shielding requirements differ from one region to another. The boundaries between regions are not sharp; they are conventional divisions based on how the radiation is produced and detected. The spectrum is continuous, and the names are just convenient labels for the different regimes of interaction with matter."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Arrange the following in order of increasing frequency: ultraviolet, microwaves, visible light, X-rays.",
+              "note": "Microwaves, visible light, ultraviolet, X-rays. Microwave ovens and communications use the lowest of these frequencies; visible light is next; ultraviolet is beyond violet and causes sunburn; X-rays have the highest frequency of the four and are used for medical imaging."
+            },
+            {
+              "text": "Which region of the spectrum is used in microwave ovens, and why does it heat food?",
+              "note": "Microwaves are used. They are absorbed by water molecules in food, and the absorbed energy increases the thermal motion of the molecules, heating the food. The microwaves do not ionize atoms, so they heat by rotation and vibration of molecules rather than by breaking bonds."
+            },
+            {
+              "text": "Why are X-rays more dangerous than visible light of the same intensity?",
+              "note": "Each X-ray photon carries far more energy than a visible photon, because E = h nu and X-rays have a much higher frequency. Even at the same intensity, the number of photons is much smaller for X-rays, but each photon can ionize atoms and damage cells, so the biological risk is greater."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Electromagnetic spectrum",
+          "columns": [
+            "Region",
+            "Wavelength",
+            "Frequency",
+            "Typical source",
+            "Typical use or effect"
+          ],
+          "rows": [
+            [
+              "Radio waves",
+              "Metres to kilometres",
+              "Lowest",
+              "Oscillating currents in antennas",
+              "Broadcasting and communication"
+            ],
+            [
+              "Microwaves",
+              "Millimetres to centimetres",
+              "Low but higher than radio",
+              "Oscillating currents and magnetrons",
+              "Radar, satellite links, ovens"
+            ],
+            [
+              "Infrared",
+              "Micrometres",
+              "Higher than microwaves",
+              "Thermal motion and warm bodies",
+              "Heating, thermal imaging, remote controls"
+            ],
+            [
+              "Visible light",
+              "400-700 nanometres",
+              "Middle of the spectrum",
+              "Atomic transitions",
+              "Vision, illumination, photography"
+            ],
+            [
+              "Ultraviolet",
+              "10-400 nanometres",
+              "Higher than visible",
+              "Hot sources and atomic transitions",
+              "Fluorescence, sunburn, sterilization"
+            ],
+            [
+              "X-rays",
+              "0.01-10 nanometres",
+              "High",
+              "Decelerating electrons and inner transitions",
+              "Medical imaging, diffraction"
+            ],
+            [
+              "Gamma rays",
+              "Shorter than about 0.01 nm",
+              "Highest",
+              "Nuclear transitions",
+              "Radiotherapy, nuclear physics"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "properties-and-applications",
+      "title": "Properties and applications of electromagnetic waves",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electromagnetic waves have a set of general properties that follow from Maxwell's equations and from their transverse nature. They travel in vacuum at the speed of light defined above. They are transverse, with E and B perpendicular to each other and to the direction of propagation. They carry energy and momentum, which is why they can exert pressure and transfer energy across empty space. They can be reflected, refracted, diffracted and interfered, all the wave behaviours that we also see in light, which is consistent with the identification of light as an electromagnetic wave. They can be polarized, which again points to their transverse character. They do not require a material medium, which distinguishes them from sound and other mechanical waves."
+        },
+        {
+          "type": "paragraph",
+          "text": "The applications of electromagnetic waves span the whole spectrum and our daily lives. Radio and microwaves carry radio, television and mobile signals. Infrared is used in remote controls, thermal imaging and heating. Visible light underpins vision, photography and the internet's fibre-optic links, where light is transmitted through glass with very low loss. Ultraviolet is used in fluorescence, sterilization and in detecting forged banknotes. X-rays are used in medical and dental imaging and in security scanning. Gamma rays are used in cancer treatment and in studying nuclear processes. The same physics produces all of these, but the different frequencies interact with matter in different ways, which determines their uses."
+        },
+        {
+          "type": "paragraph",
+          "text": "It is worth remembering that the properties of a wave do not change from one region of the spectrum to another; only the frequency, wavelength, and interaction with matter change. Radio waves are governed by the same Maxwell equations as visible light or X-rays. This is why experiments with radio waves confirm the same physics as experiments with light, and why the identification of light as an electromagnetic wave is so important. It unifies a huge range of phenomena under one theory."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why can microwaves carry information through fog better than visible light in some situations?",
+              "note": "Microwaves have longer wavelengths than visible light, so they are scattered less by small fog droplets. This is why microwave radar and communications can work in conditions where visible-light imaging is degraded by scattering. The physics is the same wave physics, but the interaction depends on the wavelength compared with the size of the scattering particles."
+            },
+            {
+              "text": "Give two uses of X-rays and explain why they are suitable for them.",
+              "note": "X-rays are used for medical imaging because they penetrate soft tissue but are absorbed more by bone, producing contrast. They are also used for diffraction by crystals because their wavelength is comparable to the spacing between atoms, so they can reveal atomic structure. Their penetrating power and short wavelength make them suitable for both."
+            },
+            {
+              "text": "Explain why a TV remote control works in infrared but not in visible light.",
+              "note": "The remote uses an infrared LED because infrared is invisible to the eye, so the signals are not distracting, and because it is easy to generate and detect at low cost. The infrared pulses encode the command. Visible light could carry signals too, but infrared is more convenient and less easily confused with ambient visible light."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "EM waves travel at c in vacuum and slower in media, with v = c / n.",
+            "They are transverse: E and B are perpendicular to each other and to the direction of travel.",
+            "They carry energy and momentum and can exert radiation pressure.",
+            "They can be reflected, refracted, diffracted, interfered and polarized.",
+            "They require no material medium.",
+            "The spectrum is continuous; the named regions differ by frequency, wavelength and interaction with matter.",
+            "Energy per photon increases with frequency, E = h nu, which is why UV, X-rays and gamma rays are more ionizing."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revision-and-exam-focus",
+      "title": "Revision and exam focus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The quickest way to revise this unit is to keep the symmetry in view: changing magnetic flux produces an electric field, and changing electric flux produces a magnetic field, and those two rules together produce waves. The key equations are I_d = epsilon0 d phi_E / dt for the displacement current, c = 1 / sqrt(mu0 epsilon0) for the wave speed, E = c B for the field relation, u = epsilon0 E^2 for the energy density in vacuum, I = 1/2 c epsilon0 E_0^2 for the intensity, and p = I / c or p = 2 I / c for the radiation pressure. The spectrum is the same wave physics at different frequencies, so always relate the application to the frequency and the way the radiation interacts with matter. When a question asks about the transverse nature, be ready to mention polarization and the E-cross-B direction of propagation."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Displacement current I_d = epsilon0 d phi_E / dt fixes the inconsistency in Ampere's law for a charging capacitor.",
+            "Maxwell's equations are the complete classical description of electromagnetism and predict EM waves.",
+            "Gauss's law for magnetism implies no magnetic monopoles; magnetic field lines are closed loops.",
+            "EM waves are transverse; E and B are perpendicular to each other and to the direction of propagation.",
+            "Wave speed in vacuum c = 1 / sqrt(mu0 epsilon0) ~= 3 x 10^8 m/s; E = c B.",
+            "Energy density u = epsilon0 E^2; intensity I = 1/2 c epsilon0 E_0^2.",
+            "Radiation pressure is I/c for absorption and 2I/c for reflection; momentum is transferred even though there is no mass.",
+            "The spectrum runs from radio waves through microwaves, infrared, visible, ultraviolet, X-rays and gamma rays, by increasing frequency and decreasing wavelength.",
+            "Energy per photon E = h nu; higher-frequency waves are more ionizing.",
+            "EM waves need no medium; mechanical waves do."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Quick formula sheet for electromagnetic waves",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "When to use"
+          ],
+          "rows": [
+            [
+              "Displacement current",
+              "I_d = epsilon0 d phi_E / dt",
+              "Charging capacitor, inconsistency with Ampere's law"
+            ],
+            [
+              "Wave speed in vacuum",
+              "c = 1 / sqrt(mu0 epsilon0)",
+              "Link between electricity and light"
+            ],
+            [
+              "Field relation in vacuum",
+              "E = c B",
+              "Plane wave amplitudes in vacuum"
+            ],
+            [
+              "Electric energy density",
+              "u_E = 1/2 epsilon0 E^2",
+              "Energy in an electric field"
+            ],
+            [
+              "Magnetic energy density",
+              "u_B = 1/2 B^2 / mu0",
+              "Energy in a magnetic field"
+            ],
+            [
+              "Total energy density in vacuum",
+              "u = epsilon0 E^2",
+              "Planar wave, equal E and B contributions"
+            ],
+            [
+              "Intensity from peak E-field",
+              "I = 1/2 c epsilon0 E_0^2",
+              "Average power per unit area"
+            ],
+            [
+              "Intensity from rms E-field",
+              "I = c epsilon0 E_rms^2",
+              "When rms values are known"
+            ],
+            [
+              "Radiation pressure, absorption",
+              "p = I / c",
+              "Surface absorbs the wave"
+            ],
+            [
+              "Radiation pressure, reflection",
+              "p = 2 I / c",
+              "Surface reflects the wave"
+            ],
+            [
+              "Photon energy",
+              "E = h nu",
+              "Energy of a single quantum; higher for larger nu"
+            ],
+            [
+              "Refractive index",
+              "n = c / v",
+              "Speed of light in a medium"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A changing electric field produces a magnetic field, just as a conduction current does; the displacement current I_d = epsilon0 d phi_E / dt fixes the inconsistency in Ampere's law for a charging capacitor.",
+    "Maxwell's equations are the complete classical description of electromagnetism; the Ampere-Maxwell law includes the displacement current and makes electromagnetic waves possible.",
+    "Gauss's law for magnetism implies that magnetic monopoles do not exist and magnetic field lines are closed loops.",
+    "Electromagnetic waves are transverse; the electric and magnetic fields are perpendicular to each other and to the direction of propagation, with E = c B in vacuum.",
+    "Maxwell's equations predict a wave speed c = 1 / sqrt(mu0 epsilon0) equal to the measured speed of light, which identified light as an electromagnetic wave.",
+    "EM waves carry energy and momentum; the energy density is u = epsilon0 E^2, the intensity is I = 1/2 c epsilon0 E_0^2, the radiation pressure is I/c on absorption and 2I/c on reflection.",
+    "The electromagnetic spectrum is a continuous range from radio waves through microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays, differing by frequency and by how they interact with matter.",
+    "Energy per photon increases with frequency, E = h nu, which is why ultraviolet, X-rays and gamma rays are more ionizing and hazardous than visible or radio waves.",
+    "EM waves require no material medium; mechanical waves do. Polarization is possible for EM waves because they are transverse."
+  ],
+  "examFocus": [
+    "Be able to state why Ampere's law is inconsistent for a charging capacitor and how the displacement current fixes it; do not just write the formula without the reasoning.",
+    "Sketch or describe a plane electromagnetic wave with the correct relative directions of E, B and the propagation direction.",
+    "Remember that E = c B means the magnetic field amplitude is much smaller than the electric field amplitude, and be ready to compute one from the other.",
+    "Distinguish energy density, intensity and radiation pressure clearly; these are related but different quantities with different formulas.",
+    "Order the spectral regions by frequency and wavelength and link each region to a sensible source or use rather than only listing them.",
+    "If asked about ionizing radiation, tie the danger to the photon energy E = h nu and the frequency of the radiation, not just to intensity.",
+    "Use the transverse nature to explain polarization and to distinguish EM waves from longitudinal mechanical waves such as sound."
+  ],
+  "vocabulary": [
+    {
+      "word": "Maxwell's equations",
+      "meaning": "The four equations that summarize classical electromagnetism: Gauss's law for electricity, Gauss's law for magnetism, Faraday's law and the Ampere-Maxwell law."
+    },
+    {
+      "word": "Displacement current",
+      "meaning": "The term epsilon0 d phi_E / dt added by Maxwell so that a changing electric flux acts as a source of magnetic field. This makes Ampere's law consistent for all surfaces, including those that pass through the gap of a charging capacitor."
+    },
+    {
+      "word": "Ampere-Maxwell law",
+      "meaning": "The law that magnetic fields are produced by both conduction currents and changing electric fields."
+    },
+    {
+      "word": "Electromagnetic wave",
+      "meaning": "A travelling oscillation of electric and magnetic fields that propagates through space without needing a material medium."
+    },
+    {
+      "word": "Transverse wave",
+      "meaning": "A wave in which the oscillation is perpendicular to the direction of propagation."
+    },
+    {
+      "word": "Plane electromagnetic wave",
+      "meaning": "A wave in which E and B are uniform over planes perpendicular to the direction of travel and vary sinusoidally in space and time."
+    },
+    {
+      "word": "Displacement current",
+      "meaning": "The term epsilon0 d phi_E / dt added by Maxwell so that a changing electric flux acts as a source of magnetic field. This makes Ampere's law consistent for all surfaces, including those that pass through the gap of a charging capacitor."
+    },
+    {
+      "word": "Wave equation for EM fields",
+      "meaning": "The equation showing that E and B satisfy a wave equation and travel at speed c in vacuum."
+    },
+    {
+      "word": "Energy density of an EM wave",
+      "meaning": "The energy per unit volume carried by the electric and magnetic fields; u = epsilon0 E^2 for a plane wave in vacuum."
+    },
+    {
+      "word": "Intensity",
+      "meaning": "The average power per unit area normal to the direction of propagation; I = 1/2 c epsilon0 E_0^2 for a sinusoidal wave."
+    },
+    {
+      "word": "Radiation pressure",
+      "meaning": "The pressure exerted by an EM wave on a surface; I/c for absorption and 2I/c for reflection."
+    },
+    {
+      "word": "Electromagnetic spectrum",
+      "meaning": "The full range of electromagnetic waves ordered by frequency or wavelength."
+    },
+    {
+      "word": "Radio waves",
+      "meaning": "The lowest-frequency region of the spectrum, used for broadcasting and communication."
+    },
+    {
+      "word": "Microwaves",
+      "meaning": "Electromagnetic waves of millimetre to centimetre wavelength, used in radar, satellite links and ovens."
+    },
+    {
+      "word": "Infrared",
+      "meaning": "Electromagnetic radiation felt as heat, produced by thermal motion and warm objects."
+    },
+    {
+      "word": "Visible spectrum",
+      "meaning": "The narrow band of electromagnetic waves from about 400 to 700 nanometres that the human eye detects."
+    },
+    {
+      "word": "Ultraviolet",
+      "meaning": "Electromagnetic radiation of higher frequency than visible light, capable of causing fluorescence and sunburn."
+    },
+    {
+      "word": "X-rays",
+      "meaning": "High-frequency electromagnetic waves produced by decelerating electrons and inner atomic transitions, used in imaging and diffraction."
+    },
+    {
+      "word": "Gamma rays",
+      "meaning": "The highest-frequency electromagnetic waves, produced by nuclear transitions, used in medicine and nuclear physics."
+    },
+    {
+      "word": "Photon",
+      "meaning": "A quantum of electromagnetic radiation with energy E = h nu, where nu is the frequency."
+    },
+    {
+      "word": "Refractive index",
+      "meaning": "n = c / v, the factor by which the speed of light is reduced in a medium."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Displacement current in a charging capacitor",
+      "description": "A circuit with a battery charging a parallel plate capacitor through a wire. One surface S1 cuts the wire and encloses the conduction current I. Another surface S2 passes through the gap between the plates and encloses no conduction current, but the electric field and flux between the plates are increasing with time. The displacement current I_d = epsilon0 d phi_E / dt through S2 is shown as equal to I, so the magnetic field around the loop is the same for both surfaces. The gap electric field lines are shown between the plates, with the field increasing as the charge grows.",
+      "labels": [
+        "conduction current I",
+        "displacement current I_d",
+        "capacitor plates",
+        "gap with increasing electric field",
+        "surface S1 cutting the wire",
+        "surface S2 in the gap",
+        "magnetic field loop",
+        "equal I and I_d"
+      ]
+    },
+    {
+      "caption": "Figure: Transverse plane electromagnetic wave",
+      "description": "A plane electromagnetic wave travelling in vacuum along the positive x-direction. The electric field E is shown oscillating along the y-direction, the magnetic field B oscillating along the z-direction, and the direction of propagation along x. The three directions are mutually perpendicular, and E and B are in phase, with their peaks and zero crossings aligned. A right-hand rule from E to B gives the direction of propagation. The wave is labelled to show the transverse nature and the E = c B amplitude relation.",
+      "labels": [
+        "propagation direction x",
+        "electric field E along y",
+        "magnetic field B along z",
+        "transverse oscillation",
+        "E and B in phase",
+        "E = c B",
+        "right-hand rule gives direction"
+      ]
+    },
+    {
+      "caption": "Figure: Electromagnetic spectrum",
+      "description": "A continuous coloured bar showing the electromagnetic spectrum from the longest wavelengths on the left to the shortest on the right. The named regions are marked in order: radio waves, microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays. The visible band is shown as a small rainbow segment around the middle. The wavelength and frequency increase in opposite directions, and the applications or sources for each region are listed alongside.",
+      "labels": [
+        "radio waves",
+        "microwaves",
+        "infrared",
+        "visible light",
+        "ultraviolet",
+        "X-rays",
+        "gamma rays",
+        "wavelength increases left to right",
+        "frequency increases right to left",
+        "visible spectrum 400-700 nm"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-em-waves-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a charging parallel plate capacitor, the displacement current between the plates is:",
+      "options": [
+        "equal to the conduction current in the wire",
+        "zero because there is no moving charge in the gap",
+        "larger than the conduction current in the wire",
+        "independent of the rate of change of the electric field"
+      ],
+      "correctIndex": 0,
+      "answer": "equal to the conduction current in the wire",
+      "explanation": "I_d = epsilon0 d phi_E / dt. During charging the electric flux between the plates increases at the same rate that charge arrives, so the displacement current equals the conduction current. This is why the magnetic field around the circuit is consistent whichever surface we choose.",
+      "commonMistake": "Thinking the displacement current is zero in the gap, when in fact it is exactly the term that makes the magnetic field consistent with the conduction current."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Maxwell added the ______ current to Ampere's law to make it consistent when the electric flux is changing.",
+      "answer": "displacement",
+      "explanation": "The displacement current is the term epsilon0 d phi_E / dt. It makes a changing electric field act as a source of magnetic field, just like a conduction current.",
+      "commonMistake": "Writing 'conduction' or 'induced' instead of 'displacement'."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Gauss's law for magnetism implies that:",
+      "options": [
+        "electric charges can exist in isolation",
+        "magnetic monopoles do not exist",
+        "magnetic field lines can begin and end",
+        "magnetic fields are produced only by currents"
+      ],
+      "correctIndex": 1,
+      "answer": "magnetic monopoles do not exist",
+      "explanation": "Gauss's law for magnetism says the net magnetic flux through any closed surface is zero. This means every magnetic field line that enters a closed surface leaves it, so field lines form closed loops and there are no isolated magnetic charges.",
+      "commonMistake": "Confusing it with Gauss's law for electricity, which does allow isolated charges to exist."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why a changing electric field produces a magnetic field.",
+      "answer": "A changing electric field produces a magnetic field because Maxwell's displacement current term shows that the rate of change of electric flux acts as a source of magnetic field, exactly like a conduction current. This effect is required to keep Ampere's law consistent for surfaces in a charging capacitor.",
+      "explanation": "The physical reason is the displacement current: I_d = epsilon0 d phi_E / dt. The magnetic field is not produced by moving charges in this case, but by the changing electric field itself. Together with Faraday's law, this mutual generation of fields allows waves to propagate.",
+      "commonMistake": "Attributing the magnetic field to a conduction current in the gap, when there are none."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a plane electromagnetic wave travelling in vacuum along the positive x-direction, the electric field is along the y-direction. The magnetic field is along the:",
+      "options": [
+        "negative y-direction",
+        "positive x-direction",
+        "positive z-direction",
+        "direction of the electric field"
+      ],
+      "correctIndex": 2,
+      "answer": "positive z-direction",
+      "explanation": "The magnetic field must be perpendicular to both E and the direction of propagation. With E along y and propagation along x, B is along z. The right-hand rule from E to B points along the propagation direction.",
+      "commonMistake": "Choosing the direction of E or the direction of propagation instead of the third perpendicular direction."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-06",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain how Maxwell's equations predict electromagnetic waves.",
+      "answer": "Maxwell's equations include Faraday's law, a changing magnetic field produces an electric field, and the Ampere-Maxwell law, a changing electric field produces a magnetic field. An oscillating charge creates an oscillating electric field, which creates an oscillating magnetic field, which in turn creates an oscillating electric field further out. The disturbance propagates outward as a self-sustaining wave at speed c = 1/sqrt(mu0 epsilon0), with E and B perpendicular to each other and to the direction of propagation.",
+      "explanation": "The two changing-field rules together mean that a time-varying field can travel without a medium, because each field sustains the other. The wave equation follows from combining the two laws, and the predicted speed matches the measured speed of light, identifying light as an electromagnetic wave.",
+      "commonMistake": "Quoting the equations without explaining how the mutual generation leads to propagation."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The speed of an electromagnetic wave in vacuum is given by c = 1 / sqrt(mu0 epsilon0). This result shows that:",
+      "options": [
+        "electric and magnetic fields are unrelated",
+        "all waves need a medium",
+        "the speed of light depends on the amplitude of the wave",
+        "light is an electromagnetic wave"
+      ],
+      "correctIndex": 3,
+      "answer": "light is an electromagnetic wave",
+      "explanation": "The predicted speed comes from the electric and magnetic constants mu0 and epsilon0 and matches the measured speed of light. This led Maxwell to conclude that light is an electromagnetic wave in the visible part of the spectrum.",
+      "commonMistake": "Thinking the formula is unrelated to light, when it is exactly the identification of light with EM waves."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-08",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A plane electromagnetic wave in vacuum has an electric field amplitude of 300 V/m. Find the magnetic field amplitude.",
+      "answer": "B = 1.0 x 10^-6 T",
+      "explanation": "B = E / c = 300 / 3 x 10^8 = 1.0 x 10^-6 T. The magnetic field amplitude is much smaller than the electric field amplitude because c is large, but both fields are part of the same wave.",
+      "commonMistake": "Using E = B / c or inverting the relation, which gives a much larger B."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The total energy density of a plane electromagnetic wave in vacuum is equal to:",
+      "options": [
+        "epsilon0 E^2, the sum of equal electric and magnetic contributions",
+        "1/2 epsilon0 E^2, the electric part only",
+        "B^2 / mu0, the magnetic part only",
+        "epsilon0 E^2 + B^2 / mu0, the two parts added together"
+      ],
+      "correctIndex": 0,
+      "answer": "epsilon0 E^2, the sum of equal electric and magnetic contributions",
+      "explanation": "For a plane wave in vacuum the electric and magnetic energy densities are equal, u_E = u_B = 1/2 epsilon0 E^2, so the total is u = epsilon0 E^2. The sum of the two equal contributions is the intended answer; the last option is not the usual simplified expression for a plane vacuum wave.",
+      "commonMistake": "Giving only the electric or only the magnetic part, when both are present and equal in a plane vacuum wave."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-10",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Define the intensity of an electromagnetic wave and give its formula in terms of the peak electric field.",
+      "answer": "Intensity is the average power transmitted per unit area normal to the direction of propagation. For a sinusoidal wave in vacuum it is I = 1/2 c epsilon0 E_0^2, where E_0 is the peak electric field.",
+      "explanation": "The factor one half comes from averaging the square of the sinusoidal field over a cycle. Intensity has units of W/m^2 and connects the field strength to the power we measure.",
+      "commonMistake": "Omitting the one-half factor or using the instantaneous E^2 instead of the average."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-11",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A beam of light of intensity 200 W/m^2 is completely reflected from a surface. Find the radiation pressure and explain why it is twice as large as for absorption.",
+      "answer": "p = 2 I / c = 1.33 x 10^-6 N/m^2; the pressure is twice as large because the momentum transferred to the surface is doubled when the wave is reflected.",
+      "explanation": "For total absorption the momentum transferred per unit time per unit area is I / c. For total reflection the momentum change is twice that because the wave's momentum is reversed, so p = 2 I / c = 2 x 200 / 3 x 10^8 = 1.33 x 10^-6 N/m^2. The pressure is small because c is large, but it is real and measurable.",
+      "commonMistake": "Using I / c for reflection or forgetting why the factor of two appears."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-12",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why can electromagnetic waves travel through vacuum but sound cannot?",
+      "answer": "Electromagnetic waves are oscillations of the electric and magnetic fields, and these fields can exist and sustain each other in vacuum. Sound is a mechanical wave that needs a material medium to transmit the disturbance from particle to particle.",
+      "explanation": "The difference is in what is oscillating. EM waves oscillate fields, which need no material substance. Sound oscillates matter, which requires a medium. This is also why EM waves can be polarized, while longitudinal sound waves cannot.",
+      "commonMistake": "Saying that EM waves 'carry their own medium', rather than that the fields themselves are the oscillating entity."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-13",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The regions of the electromagnetic spectrum in order of increasing frequency are:",
+      "options": [
+        "gamma rays, X-rays, ultraviolet, visible, infrared, microwaves, radio",
+        "radio, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays",
+        "visible, infrared, ultraviolet, radio, microwaves, X-rays, gamma rays",
+        "radio, infrared, microwaves, visible, ultraviolet, gamma rays, X-rays"
+      ],
+      "correctIndex": 1,
+      "answer": "radio, microwaves, infrared, visible, ultraviolet, X-rays, gamma rays",
+      "explanation": "Radio waves have the lowest frequency and gamma rays the highest. Visible light is only a small band in the middle. This ordering by frequency is the standard way to remember the spectrum.",
+      "commonMistake": "Putting microwaves after infrared, or reversing the order."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-14",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Each photon carries energy E = h ______.",
+      "answer": "nu",
+      "explanation": "The energy of a photon is E = h nu, where nu is the frequency. Higher frequency photons carry more energy, which is why ultraviolet, X-rays and gamma rays are more ionizing.",
+      "commonMistake": "Writing 'f' or a symbol other than the frequency; the relationship uses nu or f depending on notation."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Arrange ultraviolet, microwaves, visible light and X-rays in order of increasing wavelength.",
+      "answer": "X-rays, visible light, ultraviolet, microwaves.",
+      "explanation": "Wavelength is inversely related to frequency, so the lowest wavelength goes with the highest frequency. X-rays have the highest frequency and shortest wavelength; microwaves have the lowest frequency and longest wavelength of the four.",
+      "commonMistake": "Reversing the order or placing visible light at the wrong end."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-16",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Which of the following statements about electromagnetic waves is true?",
+      "options": [
+        "They need a material medium to travel",
+        "Their magnetic field is stronger than their electric field",
+        "They are transverse and can be polarized",
+        "They are longitudinal waves"
+      ],
+      "correctIndex": 2,
+      "answer": "They are transverse and can be polarized",
+      "explanation": "EM waves are transverse, with E and B perpendicular to the direction of travel, so they can be polarized. They need no medium, and in vacuum E = c B, so the electric field amplitude is larger, not the magnetic field.",
+      "commonMistake": "Thinking that EM waves, despite being transverse, cannot be polarized."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-17",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Explain the significance of the displacement current. Why did Maxwell introduce it, and what major prediction followed?",
+      "answer": "Maxwell introduced the displacement current to fix the inconsistency in Ampere's law for a charging capacitor, where surfaces through the gap enclose no conduction current. The displacement current I_d = epsilon0 d phi_E / dt makes the magnetic field consistent for all surfaces. Its major consequence is that a changing electric field produces a magnetic field, which together with Faraday's law predicts electromagnetic waves travelling at the speed of light.",
+      "explanation": "Without the displacement current, Ampere's law gives different results for different surfaces, which is impossible. With it, the equations become consistent and symmetric, and the symmetry predicts wave propagation. The predicted speed matches the measured speed of light, unifying electromagnetism and optics.",
+      "commonMistake": "Describing the displacement current as a real flow of charge, rather than a changing electric flux acting as a source of magnetic field."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A microwave oven uses microwaves to heat food. Explain why microwaves are suitable for this and why they do not ionize atoms.",
+      "answer": "Microwaves are suitable because they are absorbed by water molecules in food, increasing the rotational and vibrational energy of the molecules and thus heating the food. They do not ionize atoms because their photon energy h nu is far too low to remove electrons from atoms.",
+      "explanation": "Suitability comes from absorption by water at these frequencies, which turns electromagnetic energy into thermal energy. The non-ionizing nature follows from the photon energy, not from the intensity. This is why microwave ovens heat without causing the ionization damage associated with X-rays.",
+      "commonMistake": "Saying that microwaves ionize the water, when they heat it by molecular rotation and vibration."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-19",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a totally absorbing surface, the radiation pressure is ______ / c, where the numerator is the intensity of the incident wave.",
+      "answer": "I (the intensity of the incident wave)",
+      "explanation": "For total absorption the radiation pressure is p = I / c, with I the intensity. For total reflection the pressure is 2 I / c, because the momentum transfer is doubled. The numerator is the intensity, not the energy density.",
+      "commonMistake": "Using the energy density or confusing the intensity I with the electric field or magnetic field."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-20",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Which property is a direct consequence of the transverse nature of electromagnetic waves?",
+      "options": [
+        "The need for a medium",
+        "A speed slower than c in vacuum",
+        "Longitudinal oscillations along the direction of travel",
+        "Polarization"
+      ],
+      "correctIndex": 3,
+      "answer": "Polarization",
+      "explanation": "Only transverse waves can be polarized, because polarization selects a direction of oscillation perpendicular to the direction of travel. Longitudinal waves have no such perpendicular direction, so polarization is impossible for them.",
+      "commonMistake": "Thinking that polarization is a property of all waves, when it signals that a wave is transverse."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-21",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why the magnetic field of light is much harder to detect directly than its electric field, even though both are present.",
+      "answer": "The magnetic field amplitude is much smaller than the electric field amplitude because B = E / c and c is large, so the magnetic field is tiny for typical light intensities, making its direct effect harder to observe.",
+      "explanation": "In vacuum the two fields carry equal energy density, because the magnetic term B^2 / 2 mu0 equals the electric term epsilon0 E^2 / 2 when E = c B. But the extremely small B amplitude makes its direct effect much harder to observe in ordinary experiments.",
+      "commonMistake": "Thinking that the magnetic field is absent or unimportant, when it is present and carries equal energy density."
+    },
+    {
+      "id": "isc-12-physics-q-em-waves-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A solar sail of area 200 m^2 is in space and sunlight of intensity 1000 W/m^2 falls on it and is totally reflected. Estimate the force on the sail.",
+      "answer": "F = 2 I A / c = 1.33 x 10^-3 N",
+      "explanation": "Radiation pressure for total reflection is p = 2 I / c = 2 x 1000 / 3 x 10^8 = 6.67 x 10^-6 N/m^2. Force = p A = 6.67 x 10^-6 x 200 = 1.33 x 10^-3 N. The force is small, but in a vacuum with no friction it can accelerate the sail over time, which is why solar sails are feasible.",
+      "commonMistake": "Using I A / c instead of 2 I A / c, or forgetting to multiply by the area."
+    }
+  ]
+}

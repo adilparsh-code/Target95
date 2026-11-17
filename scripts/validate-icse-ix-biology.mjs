@@ -4,7 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { validateChapterRecord } from '../src/lib/boardprepContentSchema.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = resolve('/workspace/chats/e416fc825b754c70b52799ac');
+// Resolve the repository root from this module's own location (<repo>/scripts/..)
+// so the validator runs from any checkout, worktree or CI runner, whatever the
+// current working directory is.
+const ROOT = resolve(__dirname, '..');
 
 const CHAPTER_DIR = join(ROOT, 'src/app/data/boardprep/content/icse/class-9/biology/chapters');
 const SUBJECT_PATH = join(ROOT, 'src/app/data/boardprep/content/icse/class-9/biology/subject.json');

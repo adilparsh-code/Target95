@@ -1,125 +1,85 @@
-# P2/P3 Continuation Ledger — ICSE Class IX Biology (BoardPrep)
-
-This ledger records the resume point and the work actually done in this session,
-because the prior Freebuff session stopped unexpectedly and the P2/P3 brief
-named files and paths that were not present in the workspace.
-
-Sections are ordered newest first.
-
 ---
 
-## 2026-11-10 — Resume: inventory the actual workspace, then author ICSE Class IX Biology
+## Event log
 
-### The interrupted P2/P3 state, as actually found
+### 2026-11-10 — Strict scope lock: ISC XII first, ICSE X second, ICSE IX/ISC XI frozen
 
-The prior session description referenced a P2/P3 continuation ledger and a Biology
-work plan and described an 11-chapter ICSE Class IX Biology implementation that was
-partially complete. **Neither continuation ledger nor work plan exists in this
-workspace.** A filesystem scan for `P2P3_CONTINUATION_LEDGER.md` and `Biology_WORK_PLAN.md`
-returned nothing; the Git branch is `freebuff/e416fc825b754c70b52799ac`, whose latest
-commits are the current `main` merge history for Hindi grammar, original-board-style
-questions, subject covers, and Ace empty states. The prior session's named files are
-therefore not recoverable from this checkout; the actual resume point is the workspace
-as it is right now.
+This session replaced the prior Class IX Biology continuation intent with the explicit
+EDI/LLM priority decision: finish ISC Class XII first, then ICSE Class X, and freeze
+ICSE Class IX and ISC Class XI. Under the strict scope lock, new academic development is
+permitted only for:
 
-### The Biology starting state, as actually measured
+- ISC Class XII — Priority 1
+- ICSE Class X — Priority 2
 
-I inspected the real tree rather than assuming from the brief:
+That includes legacy modules outside BoardPrep, wherever they already exist in the
+repository and are part of the registered ICSE X task set.
 
-- **`src/app/data/boardprep/content/icse/class-9/biology/subject.json` exists.**
-  It is a valid `schemaVersion: 1` BoardPrep subject registry with an
-  `official-verified` 2027 syllabus baseline and **eleven planned chapters**:
+ICSE Class IX and ISC Class XI are frozen. No new development on them. Existing files,
+reports, partial work and uncommitted changes for those classes are preserved exactly.
 
-  | Group | Slug | id | status | file field |
-  | --- | --- | --- | --- | --- |
-  | Basic Biology & Flowering Plants | the-cell | icse-9-bio-cell | planned | none |
-  | Basic Biology & Flowering Plants | tissues | icse-9-bio-tissues | planned | none |
-  | Basic Biology & Flowering Plants | flower | icse-9-bio-flower | planned | none |
-  | Basic Biology & Flowering Plants | pollination-and-fertilisation | icse-9-bio-pollination-fertilisation | planned | none |
-  | Plant Physiology | seeds-and-germination | icse-9-bio-seeds-germination | planned | none |
-  | Plant Physiology | respiration-in-plants | icse-9-bio-respiration-plants | planned | none |
-  | Plant Physiology | absorption-by-roots | icse-9-bio-absorption-roots | planned | none |
-  | Plant Physiology | transpiration | icse-9-bio-transpiration | planned | none |
-  | Diversity & Microorganisms | diversity-in-animal-kingdom | icse-9-bio-animal-kingdom | planned | none |
-  | Diversity & Microorganisms | economic-importance-of-bacteria-and-fungi | icse-9-bio-bacteria-fungi | planned | none |
-  | Human Anatomy & Physiology | nutrition | icse-9-bio-nutrition | planned | none |
+ICSE Class IX Biology is explicitly preserved as-is and is now paused, not abandoned:
 
-- **No chapter files exist.** The folder
-  `src/app/data/boardprep/content/icse/class-9/biology/` contains only
-  `subject.json`. There is no `chapters/` directory and no questions.
-- **The shared BoardPrep infrastructure already exists** for other subjects and is
-  reusable here: `src/lib/boardprepContentSchema.mjs`, `src/lib/boardprepChapterNav.mjs`,
-  `src/lib/boardprepCurriculum.mjs`, and the Geography validator
-  `scripts/validate-icse-ix-geography.mjs` as the exact template for a Biology validator.
-- **ICSE Class X Biology is already fully populated** in the same schema:
-  twelve chapters under `src/app/data/boardprep/content/icse/class-10/biology/chapters/`
-  (cell-cycle-and-cell-division, chemical-coordination-in-plants, circulatory-system,
-  endocrine-system, excretory-system, genetics, nervous-system, photosynthesis,
-  population, reproductive-system, sense-organs, transpiration, absorption-by-roots),
-  each with its own questions. That is the content template for the Class IX tone,
-  structure, source note and question style.
+- 11 chapter files
+- 132 questions
+- Reported 11/11 schema validation pass
+- Validator: `scripts/validate-icse-ix-biology.mjs`
+- Subject registry: `src/app/data/boardprep/content/icse/class-9/biology/subject.json`
 
-### Decision made on resume
+For this priority shift:
 
-There is no prior Biology chapter content, no P2/P3 continuation ledger, and no
-Biology validator to resume. The correct next action is not to search harder for a
-phantom checkpoint; it is to start the Biology implementation from the existing
-`subject.json` baseline and the existing BoardPrep schema, exactly as the Geography
-run did, and to track progress here.
+- Do not publish or modify the ICSE IX Biology registry.
+- Do not continue authoring ICSE IX Biology chapters.
+- Do not touch the preserved ICSE IX Biology chapter files or validator.
 
-Target for this resume:
-- 11 chapters, 12 questions each, 132 questions total.
-- Completion state in `subject.json`: `status: "published"`, `file: "chapters/<slug>.json"`.
-- Every chapter validated against `src/lib/boardprepContentSchema.mjs`.
-- Subject-level validator `scripts/validate-icse-ix-biology.mjs` so the work is
-  reproducible and the counts cannot drift.
-- Final consistency against the existing migration validator
-  `scripts/validate-boardprep-migration.mjs`.
+Before changing work, I verified the actual repository state and updated this ledger
+with the measured facts. The key corrections relative to the prior indication:
 
-### What is explicitly preserved
+- ISC XII is not merely "empty commits for boardprep content". Every ISC XII subject
+  exists as a `subject.json` and directory scaffold, but **no ISC XII chapter files
+  exist in the committed tree**. ISC XII is a complete set of empty subject registries.
 
-- `src/app/data/boardprep/content/icse/class-9/biology/subject.json` — the only
-  existing Biology file; updated in place to publish the chapters, never replaced.
-- All existing Robotics/AI modifications already present in the workspace: nothing in
-  this task touches Robotics/AI files or their mentions.
-- All existing reports, artifacts and temporary scripts that were already here before
-  this resume; the Biology work only adds new Biology files and updates the one Biology
-  subject registry.
-- All unrelated uncommitted changes; `git status` was checked at the start and no
-  destructive Git command is used.
+- ICSE X has two subjects with chapter directories and published registries
+  (biology, hindi), one subject with a chapter directory whose registry is still
+  `planned` for all chapters (mathematics), and five other subjects that are still
+  empty shells (chemistry, computer-applications, english, geography, history-civics,
+  physics).
 
-### Restrictions observed
+- `getBoardPrepCounts()` is now `{ boards: 3, classes: 6, subjects: 75, chapters: 94,
+  questions: 1380 }`, while the migration validator expects `{ boards: 3, classes: 6,
+  subjects: 75, chapters: 83, questions: 1307 }`. The validator currently reports
+  `chapters: expected 83, found 94` and `questions: expected 1307, found 1380`.
 
-- No `git add/commit/push/merge` in this session.
-- No dependency installation without approval.
-- No overwrite of already completed chapters — there are none yet for Biology, so
-  every chapter is authored fresh against the schema; the one existing file is only
-  edited to publish.
+- The validator report line is the authoritative end-of-run summary; earlier console
+  output only summarises the first failures.
 
----
+- ICSE Class IX Biology is paused. Its chapter files and validator are preserved, and
+  no new Class IX Biology chapter work is started in this priority phase.
 
-### Resume checkpoint summary (start of session)
+### Push blocker recorded
 
-- **Completed batches:** none for Biology in this workspace.
-- **Created Biology files:** 1 (`subject.json`, pre-existing).
-- **Chapter files created:** 0 of 11.
-- **Questions authored:** 0 of 132.
-- **Validators:** shared schema exists; Biology-specific validator does not yet exist.
-- **Exact next action:** author Chapter 1, `the-cell.json`, 12 questions, then validate,
-  then publish it in `subject.json`, then continue to tissues.
+A prior priority phase intended to checkpoint and push the Class IX Biology recovery
+work. That push did not complete because this environment cannot authenticate the
+repository's `origin` remote from inside the workspace:
 
----
+- HTTPS push failed with authentication failure.
+- SSH push failed with `Permission denied (publickey)`.
 
-### Checkpoint report format (used if the session stops again)
+That blocker is recorded here so any later checkpoint action does not assume the remote
+is reachable. The intended mechanism remains a descriptive checkpoint commit on
+`freebuff/e416fc825b754c70b52799ac`, with re-verification of remote divergence before
+any push, and stopping rather than forcing if divergence or conflict appears.
 
-When leaving a checkpoint, this file will carry:
-- Completed batches (chapter name, file path, question count).
-- Created files.
-- Validation results (schema pass/fail, migration validator pass/fail, counts).
-- Remaining tasks (chapter list with status per chapter).
-- Exact next action (next chapter file to write, or next validation to run).
+### Current uncommitted working-tree state
 
-No completion will be claimed here until the migration validator reports
-`3 boards, 6 classes, 75 subjects, <chapters> chapters, <questions> questions`
-with the Biology increments included, and the Biology validator reports
-`11 chapters, 132 questions` with zero schema errors.
+- `P2P3_CONTINUATION_LEDGER.md` — modified in this session.
+- `artifacts/`, `scripts/artifacts/`, `scripts/check-node-paths.mjs`,
+  `scripts/samples/`, `scripts/validate-icse-ix-biology.mjs`,
+  `src/app/data/boardprep/content/icse/class-9/biology/chapters/` — unmodified from the
+  prior recovery session; preserved as-is.
+
+### Exact next action
+
+Begin ISC XII content recovery from the existing empty subject scaffolds, starting with
+ISC Class XII Physics, and update this ledger with each completed subject batch and its
+validated evidence. Class IX Biology is not touched.

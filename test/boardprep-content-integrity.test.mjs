@@ -60,6 +60,25 @@ test("chapter file ids match the id listed in subject.json", () => {
   }
 });
 
+test("ICSE Hindi questions are not recycled across classes", () => {
+  // The migration validator scopes prompts per class, and its prompt key used to
+  // strip Devanagari entirely, so the Class X letter bank could repeat the Class IX
+  // questions verbatim without any check failing.
+  const normalize = (prompt) => String(prompt ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  const hindiFiles = chapterFiles.filter((file) => /content[\\/]icse[\\/]class-(9|10)[\\/]hindi[\\/]chapters[\\/]/.test(file));
+  assert.ok(hindiFiles.length > 0, "expected ICSE Hindi chapter files");
+  const seen = new Map();
+  for (const file of hindiFiles) {
+    const chapter = JSON.parse(fs.readFileSync(file, "utf8"));
+    for (const q of chapter.questions || []) {
+      const key = normalize(q.prompt);
+      if (key.length < 12) continue;
+      assert.ok(!seen.has(key), `${q.id} repeats the prompt of ${seen.get(key)}`);
+      seen.set(key, q.id);
+    }
+  }
+});
+
 test("questions are well formed and free of leaked drafting text", () => {
   const seen = new Set();
   for (const file of chapterFiles) {

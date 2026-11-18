@@ -19,7 +19,9 @@ const METADATA_FILES = new Set(['board.json', 'class.json', 'subject.json']);
 // Stems shorter than this are blanks or bare formulae that may legitimately repeat.
 const MIN_PROMPT_KEY = 12;
 // Leading articles are dropped so "The SI unit…" and "SI unit…" count as one prompt.
-const promptKey = (prompt) => String(prompt ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/^(the|a|an) /, '');
+// \p{L} keeps non-Latin prompts distinct: an ASCII-only filter flattened every
+// Devanagari prompt to an empty string, so Hindi duplicates were never checked.
+const promptKey = (prompt) => String(prompt ?? '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/^(the|a|an) /, '');
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {

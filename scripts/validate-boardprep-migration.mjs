@@ -18,7 +18,8 @@ const CONTENT_ROOT = path.join(process.cwd(), 'src/app/data/boardprep/content');
 const METADATA_FILES = new Set(['board.json', 'class.json', 'subject.json']);
 // Stems shorter than this are blanks or bare formulae that may legitimately repeat.
 const MIN_PROMPT_KEY = 12;
-const promptKey = (prompt) => String(prompt ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+// Leading articles are dropped so "The SI unit…" and "SI unit…" count as one prompt.
+const promptKey = (prompt) => String(prompt ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/^(the|a|an) /, '');
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {

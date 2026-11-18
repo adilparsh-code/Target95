@@ -30,21 +30,22 @@ export function getSubject(board, classSlug, subjectSlug) {
   return fs.existsSync(file) ? read(file) : null;
 }
 
-export function getPublishedChapters(board, classSlug, subjectSlug) {
+export function getAllChapterMetadata(board, classSlug, subjectSlug) {
   const subject = getSubject(board, classSlug, subjectSlug);
-  return (subject?.sections || []).flatMap((section) => section.groups || []).flatMap((group) => group.chapters || []).filter((chapter) => chapter.status === 'published');
+  return (subject?.sections || []).flatMap((section) => section.groups || []).flatMap((group) => group.chapters || []);
 }
 
-export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
-  const metadata = getPublishedChapters(board, classSlug, subjectSlug).find((chapter) => chapter.slug === chapterSlug);
-  if (!metadata?.file) return null;
+export function getPublishedChapters(board, classSlug, subjectSlug) {
+  return getAllChapterMetadata(board, classSlug, subjectSlug).filter((chapter) => chapter.status === 'published');
+}
 
-  // The chapter 'file' field in the BoardPrep subject metadata is relative to the
-  // subject directory (e.g. "chapters/genetics.json" or "language/grammar/tenses.json").
-  // A subset of chapters migrated earlier were stored nested under subject sub-directories
-  // (language/grammar/..., literature/poetry/..., etc.). The metadata file field already
-  // carries that relative path, so resolve it directly relative to the subject folder.
-  const subjectDir = location(board, classSlug, subjectSlug);
+// The chapter 'file' field in the BoardPrep subject metadata is relative to the
+// subject directory (e.g. "chapters/genetics.json" or "language/grammar/tenses.json").
+// A subset of chapters migrated earlier were stored nested under subject sub-directories
+// (language/grammar/..., literature/poetry/..., etc.). The metadata file field already
+// carries that relative path, so resolve it directly relative to the subject folder.
+function readChapterFile(metadata, subjectDir) {
+  if (!metadata?.file) return null;
   const file = path.join(subjectDir, ...metadata.file.split('/'));
 
   if (!fs.existsSync(file)) {
@@ -56,6 +57,23 @@ export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
     return null;
   }
   return { ...metadata, ...read(file) };
+}
+
+// Published-only read used by pages and navigation: planned material must never
+// leak into the UI just because its file exists.
+export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
+  const metadata = getPublishedChapters(board, classSlug, subjectSlug).find((chapter) => chapter.slug === chapterSlug);
+  if (!metadata?.file) return null;
+  return readChapterFile(metadata, location(board, classSlug, subjectSlug));
+}
+
+// Status-agnostic read for validators and audits. It resolves any registered
+// chapter that has a backing file, so planned and draft banks are checked with
+// the same rules as published ones. Never use this to render a chapter.
+export function getChapterRecord(board, classSlug, subjectSlug, chapterSlug) {
+  const metadata = getAllChapterMetadata(board, classSlug, subjectSlug).find((chapter) => chapter.slug === chapterSlug);
+  if (!metadata?.file) return null;
+  return readChapterFile(metadata, location(board, classSlug, subjectSlug));
 }
 
 // Question count per published chapter slug. Reading the chapter files is the

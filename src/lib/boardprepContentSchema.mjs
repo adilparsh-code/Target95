@@ -74,6 +74,17 @@ export function isPlaceholderText(value) {
   return PLACEHOLDER_ANSWER.test(trimmed);
 }
 
+// A one-character answer such as "6", "-2" or the variable "y" is complete for a
+// numeric or algebraic question, so the prose-length rule must not reject it.
+const NUMERIC_ANSWER = /^[-−+]?\d+(?:[./]\d+)?$/;
+const SINGLE_SYMBOL_ANSWER = /^[A-Za-z]$/;
+
+export function isMeaningfulAnswer(value) {
+  const text = String(value ?? '').trim();
+  if (text.length >= MIN_ANSWER_LENGTH) return true;
+  return NUMERIC_ANSWER.test(text) || SINGLE_SYMBOL_ANSWER.test(text);
+}
+
 function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
@@ -341,7 +352,7 @@ export function validateQuestion(question, chapterId = '', { strictMcq = false }
   }
   if (isPlaceholderText(question.answer)) {
     pushIssue(issues, 'question.answer', `${where} has a blank or placeholder answer.`);
-  } else if (String(question.answer).trim().length < MIN_ANSWER_LENGTH) {
+  } else if (!isMeaningfulAnswer(question.answer)) {
     pushIssue(issues, 'question.answer', `${where} has an answer that is too short to be meaningful.`);
   }
   if (isPlaceholderText(question.explanation)) {

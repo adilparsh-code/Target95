@@ -1,0 +1,768 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-atoms-nuclei",
+  "title": "Atoms and Nuclei",
+  "kind": "physics",
+  "tagline": "Atomic models, the hydrogen spectrum, radioactivity, nuclear binding and mass-energy equivalence treated in the ISC XII syllabus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus (Unit 8 — Atoms and Nuclei; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the syllabus topics registered for this chapter; UNVERIFIED against the primary CISCE PDF in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC 2027 Physics syllabus (Unit 8 — Atoms and Nuclei); no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "This chapter brings together two related stories: the structure of the atom and the structure and behaviour of the nucleus. The first part is about how we came to understand that atoms have a tiny dense nucleus and electrons around it, and how the hydrogen spectrum gave a crucial clue that the classical picture was incomplete. The second part is about what happens inside the nucleus: the forces that hold it together, the energy released when nuclei rearrange themselves, and the spontaneous process of radioactivity. The most important results are the Bohr model for hydrogen-like atoms, the Rydberg formula for the spectral series, the radioactive decay law and half-life, the binding energy and mass defect, and the equivalence of mass and energy E = m c^2 applied to nuclear reactions. A central theme is that atoms and nuclei are quantum systems, so classical mechanics alone is not enough, but simple quantised models give a powerful and syllabus-appropriate description.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Atoms and Nuclei"
+      },
+      {
+        "label": "Theory marks context",
+        "value": "Unit 8 in the reproduced 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Gold foil scattering",
+        "value": "most alpha particles pass through; a few are deflected at large angles, indicating a small dense nucleus"
+      },
+      {
+        "label": "Bohr radius",
+        "value": "a_0 = 0.529 angstrom for hydrogen ground state in the Bohr model"
+      },
+      {
+        "label": "Bohr energy levels",
+        "value": "E_n = -13.6 eV / n^2 for hydrogen"
+      },
+      {
+        "label": "Rydberg formula",
+        "value": "1/lambda = R (1/n1^2 - 1/n2^2) for hydrogen spectral lines"
+      },
+      {
+        "label": "Rydberg constant",
+        "value": "R ≈ 1.097 x 10^7 m^-1"
+      },
+      {
+        "label": "Radioactive decay law",
+        "value": "N = N_0 e^{-lambda t}, with decay constant lambda"
+      },
+      {
+        "label": "Half-life",
+        "value": "T_1/2 = ln 2 / lambda"
+      },
+      {
+        "label": "Mean life",
+        "value": "tau = 1 / lambda = T_1/2 / ln 2"
+      },
+      {
+        "label": "Mass-energy equivalence",
+        "value": "E = m c^2, with energy released when mass decreases in a nuclear reaction"
+      },
+      {
+        "label": "Binding energy",
+        "value": "the energy needed to separate a nucleus into its individual protons and neutrons"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe Thomson's, Rutherford's and Bohr's models of the atom and the key idea of each.",
+    "Explain the alpha particle scattering experiment and what it revealed about the nuclear atom.",
+    "State the postulates of the Bohr model for hydrogen and derive the energy levels and the radius of the nth orbit.",
+    "Use the Rydberg formula to relate the wavelength of hydrogen spectral lines to the initial and final orbits.",
+    "State the radioactive decay law and define half-life and mean life, and use them in simple numerical problems.",
+    "Explain the concept of nuclear binding energy, mass defect and the conversion of mass into energy via E = m c^2.",
+    "Distinguish between nuclear fission and nuclear fusion and explain why both can release energy."
+  ],
+  "learn": [
+    {
+      "id": "atomic-models-history",
+      "title": "From Thomson to Rutherford to Bohr",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The earliest useful model of the atom after the discovery of the electron was Thomson's model, in which the atom was pictured as a sphere of positive charge with negatively charged electrons embedded in it, rather like a pudding with plums. This model could not explain the large-angle scattering of alpha particles that was later observed. Rutherford's alpha particle scattering experiment changed the picture dramatically. Most alpha particles passed straight through a thin gold foil, but a very small fraction were deflected through large angles, and a few nearly reversed direction. The only way to explain this was to suppose that almost all the mass and the positive charge of the atom are concentrated in a very small central region, the nucleus, surrounded by electrons at relatively large distances."
+        },
+        {
+          "type": "paragraph",
+          "text": "Rutherford's nuclear model was a major advance, but it had a difficulty. According to classical electromagnetism, an electron revolving around a nucleus would continuously radiate energy and spiral into the nucleus in a very short time. A stable atom therefore could not be explained by the Rutherford model alone and by ordinary classical physics. Bohr improved the model for hydrogen-like atoms by introducing quantised orbits. He assumed that electrons move in certain allowed circular orbits without radiating, and that radiation occurs only when an electron jumps from one allowed orbit to another. The energy of the emitted photon is the difference between the two orbit energies."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Thomson model: atom as a sphere of positive charge with embedded electrons.",
+            "Rutherford model: atom has a small, dense, positively charged nucleus.",
+            "Most alpha particles pass through gold foil with little or no deflection.",
+            "A few alpha particles are deflected at large angles, implying a concentrated nucleus.",
+            "Classical Rutherford atom: orbiting electron would radiate energy and collapse into the nucleus.",
+            "Bohr model: only certain orbits are allowed, and radiation occurs on transitions between them."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "What feature of the alpha particle scattering experiment showed that the atom has a nucleus?",
+              "note": "The fact that a very small number of alpha particles were scattered through very large angles, including nearly backwards, showed that the positive charge and most of the mass must be concentrated in a very small central region. If the positive charge had been spread out, such large deflections would not have occurred."
+            },
+            {
+              "text": "Why was the Rutherford model not considered complete?",
+              "note": "Because classical physics predicted that an orbiting electron would radiate continuously and lose energy, eventually spiralling into the nucleus. This would make atoms unstable, which is not what is observed. Bohr introduced quantised orbits to address this."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bohr-model-hydrogen",
+      "title": "Bohr model of the hydrogen atom",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Bohr model applies specifically to hydrogen and hydrogen-like single-electron ions such as He+ and Li2+. In the model the electron moves in circular orbits around the nucleus, but only those orbits are allowed in which the angular momentum is an integer multiple of h/(2 pi). For an orbit labelled by the principal quantum number n, the angular momentum is m_e v r = n h/(2 pi). Combining this with the centripetal condition from the Coulomb force, e^2/(4 pi epsilon_0 r^2) = m_e v^2/r, gives the radius of the nth orbit as r_n = n^2 a_0, where a_0 is the Bohr radius, about 0.529 angstrom. The total energy of the electron in the nth orbit works out to E_n = -13.6 eV / n^2 for hydrogen."
+        },
+        {
+          "type": "paragraph",
+          "text": "The negative energy means the electron is bound to the nucleus; n = 1 is the lowest energy state, called the ground state, with energy -13.6 eV. The energy levels are discrete, and a transition from a higher level n_i to a lower level n_f produces a photon whose energy is the difference E_{n_i} - E_{n_f}. The frequency of the photon is h nu = E_{n_i} - E_{n_f}, and the wavelength follows from c = nu lambda. Transitions from higher orbits down to n = 1 produce the Lyman series in the ultraviolet, to n = 2 the Balmer series in the visible and near ultraviolet, and to n = 3 the Paschen series in the infrared."
+        },
+        {
+          "type": "table",
+          "caption": "Hydrogen spectral series used in syllabus work",
+          "columns": [
+            "Series",
+            "Lower level",
+            "Region of spectrum"
+          ],
+          "rows": [
+            [
+              "Lyman",
+              "n = 1",
+              "Ultraviolet"
+            ],
+            [
+              "Balmer",
+              "n = 2",
+              "Visible and near ultraviolet"
+            ],
+            [
+              "Paschen",
+              "n = 3",
+              "Infrared"
+            ],
+            [
+              "Brackett",
+              "n = 4",
+              "Infrared"
+            ],
+            [
+              "Pfund",
+              "n = 5",
+              "Infrared"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the radius of the second orbit in hydrogen according to the Bohr model.",
+              "note": "r_n = n^2 a_0, so r_2 = 4 a_0 = 4 x 0.529 ≈ 2.12 angstrom. The radius increases as n squared."
+            },
+            {
+              "text": "Find the energy of an electron in the n = 3 state of hydrogen.",
+              "note": "E_3 = -13.6 / 3^2 = -13.6 / 9 ≈ -1.51 eV. The electron is less tightly bound at higher n, and E approaches zero as n becomes large."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hydrogen-spectrum-rydberg",
+      "title": "The hydrogen spectrum and the Rydberg formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a hydrogen discharge tube is examined with a spectroscope, the light is not continuous but consists of a series of sharp spectral lines. Balmer found that the visible lines of hydrogen could be described by a simple formula. Later, Rydberg generalised it. The wavenumber of a spectral line is given by 1/lambda = R (1/n1^2 - 1/n2^2), where n1 is the lower level, n2 is the upper level with n2 greater than n1, and R is the Rydberg constant, about 1.097 x 10^7 m^-1. For the Balmer series n1 = 2, and the first visible line, H-alpha, corresponds to n2 = 3. This formula is a direct consequence of the Bohr energy levels and was a strong early success for the model."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Hydrogen spectrum: a line spectrum, not a continuous spectrum.",
+            "Rydberg formula: 1/lambda = R (1/n1^2 - 1/n2^2), n2 greater than n1.",
+            "Balmer series: n1 = 2, visible lines.",
+            "Lyman series: n1 = 1, ultraviolet.",
+            "Rydberg constant R ≈ 1.097 x 10^7 m^-1.",
+            "H-alpha: n2 = 3 to n1 = 2 in the Balmer series."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the wavelength of the first Balmer line (n2 = 3 to n1 = 2) in hydrogen.",
+              "note": "1/lambda = R (1/4 - 1/9) = R (5/36). So lambda = 36/(5R) ≈ 36/(5 x 1.097 x 10^7) ≈ 6.56 x 10^-7 m = 656 nm, which is the red H-alpha line."
+            },
+            {
+              "text": "Find the wavelength of the Lyman-alpha line (n2 = 2 to n1 = 1).",
+              "note": "1/lambda = R (1/1 - 1/4) = R (3/4). So lambda = 4/(3R) ≈ 4/(3 x 1.097 x 10^7) ≈ 1.22 x 10^-7 m = 122 nm, in the ultraviolet."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "radioactivity-and-decay",
+      "title": "Radioactivity and the decay law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Radioactivity is the spontaneous emission of radiation by certain unstable nuclei. The three common types are alpha, beta and gamma radiation. Alpha particles are helium nuclei, beta particles are electrons or positrons, and gamma rays are high-energy photons. Radioactive decay is a random process at the level of individual nuclei: we cannot predict when one particular nucleus will decay, but for a large sample we can describe the average rate. The number of undecayed nuclei N decreases with time according to the decay law N = N_0 e^{-lambda t}, where lambda is the decay constant. The activity, or decay rate, is proportional to N and is also governed by the same exponential law."
+        },
+        {
+          "type": "paragraph",
+          "text": "The half-life T_1/2 is the time taken for half the nuclei in a sample to decay. It is related to the decay constant by T_1/2 = ln 2 / lambda. The mean life tau is the average lifetime of a nucleus before it decays, and is tau = 1 / lambda = T_1/2 / ln 2. A key point is that the half-life does not depend on the physical or chemical state of the sample; it is a nuclear property. After one half-life half the original sample remains undecayed, after two half-lives one quarter remains, after three one eighth remains, and so on."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Radioactivity: spontaneous nuclear decay.",
+            "Alpha, beta and gamma rays are the common emissions.",
+            "Decay law: N = N_0 e^{-lambda t}.",
+            "Half-life T_1/2 = ln 2 / lambda.",
+            "Mean life tau = 1 / lambda.",
+            "After n half-lives, fraction remaining = (1/2)^n.",
+            "Half-life is independent of temperature, pressure and chemical form."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A radioactive sample has half-life 5 years. What fraction remains after 15 years?",
+              "note": "15 years is three half-lives, so the fraction remaining is (1/2)^3 = 1/8."
+            },
+            {
+              "text": "If the decay constant lambda is 0.02 per year, find the half-life.",
+              "note": "T_1/2 = ln 2 / lambda ≈ 0.693 / 0.02 ≈ 34.65 years."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nucleus-binding-energy",
+      "title": "Nuclear binding energy and mass defect",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The nucleus is made of protons and neutrons, collectively called nucleons. The mass of a stable nucleus is always less than the total mass of its separate protons and neutrons. This missing mass is called the mass defect, and it has been converted into the binding energy that holds the nucleus together. If Delta m is the mass defect, then the binding energy is E_b = Delta m c^2. The binding energy per nucleon is a good indicator of stability: in general, nuclei around iron have the highest binding energy per nucleon and are therefore among the most stable."
+        },
+        {
+          "type": "paragraph",
+          "text": "The mass-energy equivalence E = m c^2 is central to nuclear physics because the energies involved in nuclear processes are much larger than the energy changes in ordinary chemical reactions. When nucleons come together to form a nucleus, the system loses mass and energy is released; to break the nucleus apart, the same amount of energy must be supplied. This is why energy can be released both in nuclear fission, where a heavy nucleus splits, and in nuclear fusion, where light nuclei combine."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mass defect: difference between the mass of separated nucleons and the mass of the nucleus.",
+            "Binding energy: E_b = Delta m c^2.",
+            "Binding energy per nucleon is a measure of nuclear stability.",
+            "E = m c^2 relates mass change to energy released in a nuclear reaction.",
+            "Fission: a heavy nucleus splits into lighter ones.",
+            "Fusion: light nuclei combine to form a heavier one.",
+            "Both fission and fusion can release energy if the products are more tightly bound."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The mass defect of a nucleus is 0.008 u. Find the binding energy in MeV.",
+              "note": "1 u corresponds to about 931.5 MeV, so E_b = 0.008 x 931.5 ≈ 7.45 MeV. The conversion factor from mass to energy is important in nuclear problems."
+            },
+            {
+              "text": "Why does iron have one of the highest binding energies per nucleon?",
+              "note": "Iron lies near the peak of the binding energy per nucleon curve. Nuclei near the peak are especially stable. Lighter nuclei can release energy by fusion, and heavier nuclei can release energy by fission, both moving toward greater stability."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transmutations-and-safety",
+      "title": "Nuclear reactions, fission and fusion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a nuclear reaction, nuclei change into other nuclei. Conservation of charge and mass number (or nucleon number) are the basic constraints: the total number of nucleons and the total charge are conserved in the reaction, even though the individual nuclei change. Fission of a heavy nucleus such as uranium can be induced by neutron capture, and it releases energy together with more neutrons, which can in turn induce further fissions in a chain reaction. Fusion of light nuclei such as deuterium and tritium requires high temperatures so that the nuclei can overcome their mutual repulsion, and it is the source of energy in stars and in hydrogen bombs. Controlled fusion on Earth remains a major scientific goal."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "In a nuclear equation, nucleon number and charge are conserved.",
+            "Fission: heavy nucleus splits after neutron capture, releasing energy and neutrons.",
+            "Chain reaction: released neutrons may induce further fissions.",
+            "Fusion: light nuclei combine at high temperature, releasing energy.",
+            "Outward pressure in a star is balanced by gravity; nuclear fusion powers the star.",
+            "Radiation safety depends on type of radiation, exposure time, distance and shielding."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A uranium nucleus undergoes fission after absorbing a neutron and produces two smaller nuclei plus a few neutrons. What basic quantities are conserved?",
+              "note": "Total nucleon number and total charge are conserved. The total mass of the products is slightly less than the total mass of the original nucleus plus neutron, and the missing mass is released as energy."
+            },
+            {
+              "text": "Why is very high temperature needed for fusion?",
+              "note": "Because positively charged nuclei repel each other electrostatically. A very high temperature gives the nuclei enough kinetic energy to get close enough for the short-range attractive nuclear force to take over and allow fusion."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Rutherford's alpha scattering experiment showed that the atom has a small, dense, positively charged nucleus.",
+    "The Bohr model for hydrogen assumes quantised angular momentum and gives r_n = n^2 a_0 and E_n = -13.6/n^2 eV.",
+    "The hydrogen spectrum is a line spectrum, described by the Rydberg formula 1/lambda = R (1/n1^2 - 1/n2^2).",
+    "The Lyman series corresponds to transitions to n = 1, the Balmer series to n = 2, and the Paschen series to n = 3.",
+    "Radioactive decay follows N = N_0 e^{-lambda t}, with half-life T_1/2 = ln 2 / lambda and mean life tau = 1 / lambda.",
+    "After n half-lives, the undecayed fraction is (1/2)^n.",
+    "The mass defect is the difference between the mass of separated nucleons and the mass of the nucleus.",
+    "Binding energy is E_b = Delta m c^2; the binding energy per nucleon indicates nuclear stability.",
+    "Mass-energy equivalence is the basis for the energy released in fission and fusion.",
+    "In nuclear equations, nucleon number and charge are conserved."
+  ],
+  "examFocus": [
+    "Know the difference between the Lyman, Balmer and Paschen series and which transitions they involve.",
+    "Use the Rydberg formula carefully, identifying n1 and n2 correctly.",
+    "Remember that the ground state energy of hydrogen is -13.6 eV, and that energies of excited states are less negative.",
+    "Use the half-life formula correctly for fractions remaining and for activity.",
+    "Do not confuse half-life with mean life; T_1/2 = ln 2 / lambda and tau = 1 / lambda.",
+    "When calculating binding energy from mass defect, use the correct conversion 1 u ≈ 931.5 MeV if that form is used in the problem.",
+    "In fission and fusion questions, state clearly why energy is released: the products are more tightly bound per nucleon than the reactants."
+  ],
+  "vocabulary": [
+    {
+      "word": "Atomic model",
+      "meaning": "A model describing the structure of an atom, such as Thomson's, Rutherford's or Bohr's model."
+    },
+    {
+      "word": "Nucleus",
+      "meaning": "The small, dense, positively charged central part of an atom containing protons and neutrons."
+    },
+    {
+      "word": "Gold foil experiment",
+      "meaning": "Rutherford's alpha particle scattering experiment that provided evidence for the nuclear atom."
+    },
+    {
+      "word": "Alpha particle",
+      "meaning": "A helium nucleus emitted in some radioactive decays; it has charge +2e and mass number 4."
+    },
+    {
+      "word": "Bohr model",
+      "meaning": "A quantised model of the hydrogen atom in which electrons occupy certain allowed orbits with fixed energies."
+    },
+    {
+      "word": "Bohr radius",
+      "meaning": "The radius of the lowest orbit in hydrogen in the Bohr model, about 0.529 angstrom."
+    },
+    {
+      "word": "Principal quantum number",
+      "meaning": "The integer n labelling the allowed Bohr orbits, with n = 1, 2, 3 and so on."
+    },
+    {
+      "word": "Ground state",
+      "meaning": "The lowest energy state of an atom, corresponding to n = 1 in hydrogen."
+    },
+    {
+      "word": "Excited state",
+      "meaning": "Any energy state of an atom higher than the ground state."
+    },
+    {
+      "word": "Spectral series",
+      "meaning": "A group of spectral lines such as the Lyman, Balmer or Paschen series, corresponding to transitions to a given lower level."
+    },
+    {
+      "word": "Rydberg formula",
+      "meaning": "The formula 1/lambda = R (1/n1^2 - 1/n2^2) for the hydrogen spectrum."
+    },
+    {
+      "word": "Radioactivity",
+      "meaning": "The spontaneous emission of radiation by unstable nuclei."
+    },
+    {
+      "word": "Decay constant",
+      "meaning": "The constant lambda in the radioactive decay law, related to the probability of decay per unit time."
+    },
+    {
+      "word": "Half-life",
+      "meaning": "The time taken for half the nuclei in a sample to decay, T_1/2 = ln 2 / lambda."
+    },
+    {
+      "word": "Mean life",
+      "meaning": "The average lifetime of a radioactive nucleus, tau = 1 / lambda."
+    },
+    {
+      "word": "Mass defect",
+      "meaning": "The difference between the total mass of the separate nucleons and the mass of the nucleus."
+    },
+    {
+      "word": "Binding energy",
+      "meaning": "The energy equivalent of the mass defect; the energy needed to separate a nucleus into individual nucleons."
+    },
+    {
+      "word": "Fission",
+      "meaning": "The splitting of a heavy nucleus into lighter nuclei with the release of energy."
+    },
+    {
+      "word": "Fusion",
+      "meaning": "The combining of light nuclei into a heavier nucleus with the release of energy."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Rutherford alpha particle scattering geometry",
+      "description": "A schematic of the Rutherford experiment. An alpha particle source, a thin gold foil, and a detector that can be moved to different angles are shown. Most alpha particles pass straight through with little or no deflection, but a few are scattered through large angles. The figure labels the source, the gold foil, the forward-going undeflected particles, the small number of large-angle scattered particles, and the implication of a small dense nucleus.",
+      "labels": [
+        "alpha particle source",
+        "thin gold foil",
+        "most particles pass through with little deflection",
+        "a few particles scattered through large angles",
+        "detector at various angles",
+        "small dense positively charged nucleus",
+        "electrons orbiting at large distances",
+        "implication of a nuclear atom",
+        "line showing a large-angle scattering event"
+      ]
+    },
+    {
+      "caption": "Figure: Bohr orbits for hydrogen and a transition",
+      "description": "Several concentric circular Bohr orbits around the nucleus, labelled n = 1, 2, 3 and 4, with the radius increasing as n squared. An arrow shows a transition from a higher orbit n_i to a lower orbit n_f, with a photon emitted whose energy equals the difference in the two levels. The figure labels the orbits, the nucleus, the transition arrow, the emitted photon, and the discrete energy levels.",
+      "labels": [
+        "nucleus",
+        "first Bohr orbit n = 1",
+        "second Bohr orbit n = 2",
+        "higher orbit n = 3",
+        "higher orbit n = 4",
+        "radius increases as n^2",
+        "transition from n_i to n_f",
+        "emitted photon with energy equal to level difference",
+        "discrete energy levels"
+      ]
+    },
+    {
+      "caption": "Figure: Binding energy per nucleon curve",
+      "description": "A graph of binding energy per nucleon against mass number A. The curve rises rapidly at low A, peaks around iron, and then gradually falls for heavier nuclei. Lighter nuclei can release energy by fusion, and heavier nuclei by fission, both moving toward the peak. The figure labels the iron peak, the rise for light nuclei, the slow fall for heavy nuclei, and the direction of energy release for fusion and fission.",
+      "labels": [
+        "binding energy per nucleon on the vertical axis",
+        "mass number A on the horizontal axis",
+        "rise for light nuclei",
+        "peak near iron",
+        "gradual fall for heavy nuclei",
+        "fusion releases energy for light nuclei",
+        "fission releases energy for heavy nuclei",
+        "indicates relative nuclear stability"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In Rutherford's alpha particle scattering experiment, most alpha particles:",
+      "options": [
+        "passed straight through the gold foil with little or no deflection",
+        "were reflected straight back",
+        "were absorbed by the foil",
+        "were deflected through exactly 90 degrees"
+      ],
+      "correctIndex": 0,
+      "answer": "passed straight through the gold foil with little or no deflection",
+      "explanation": "Most alpha particles passed through the foil almost undeflected, which showed that most of the atom is empty space. Only a small fraction were deflected at large angles by the small dense nucleus.",
+      "commonMistake": "Thinking that most alpha particles bounced back in the experiment."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radius of the nth Bohr orbit in hydrogen is proportional to:",
+      "options": [
+        "n",
+        "n^2",
+        "1/n",
+        "1/n^2"
+      ],
+      "correctIndex": 1,
+      "answer": "n^2",
+      "explanation": "In the Bohr model, r_n is proportional to n^2, so the second orbit is four times the radius of the first, and so on.",
+      "commonMistake": "Thinking the radius is proportional to n instead of n^2."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The Balmer series in hydrogen corresponds to transitions ending at:",
+      "options": [
+        "n = 1",
+        "n = 3",
+        "n = 2",
+        "n = infinity"
+      ],
+      "correctIndex": 2,
+      "answer": "n = 2",
+      "explanation": "The Balmer series is the set of transitions from higher levels down to n = 2, which gives the visible and near-ultraviolet lines.",
+      "commonMistake": "Confusing the Balmer series with the Lyman series, which ends at n = 1."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the half-life of a radioactive sample is T, then after a time 3T the fraction remaining undecayed is:",
+      "options": [
+        "1/4",
+        "1/2",
+        "1/3",
+        "1/8"
+      ],
+      "correctIndex": 3,
+      "answer": "1/8",
+      "explanation": "After one half-life half remains, after two half-lives one quarter remains, and after three half-lives one eighth remains. This is (1/2)^3 = 1/8.",
+      "commonMistake": "Thinking that after three half-lives one third remains."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The binding energy of a nucleus is the energy equivalent of its:",
+      "options": [
+        "mass defect",
+        "total mass",
+        "radius",
+        "volume"
+      ],
+      "correctIndex": 0,
+      "answer": "mass defect",
+      "explanation": "The binding energy E_b equals the mass defect times c^2. It is the energy equivalent of the missing mass that holds the nucleus together.",
+      "commonMistake": "Thinking binding energy is directly the total mass of the nucleus."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The ground state energy of hydrogen is -13.6 eV. The energy of the n = 2 state is:",
+      "options": [
+        "-6.8 eV",
+        "-3.4 eV",
+        "-27.2 eV",
+        "0 eV"
+      ],
+      "correctIndex": 1,
+      "answer": "-3.4 eV",
+      "explanation": "E_n = -13.6 / n^2 eV. For n = 2, E_2 = -13.6 / 4 = -3.4 eV.",
+      "commonMistake": "Dividing by 2 instead of 4, or getting the sign wrong."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which process releases energy by combining light nuclei?",
+      "options": [
+        "nuclear fission",
+        "radioactive decay",
+        "nuclear fusion",
+        "chemical combustion"
+      ],
+      "correctIndex": 2,
+      "answer": "nuclear fusion",
+      "explanation": "Fusion is the combining of light nuclei into a heavier one with a release of energy when the products are more tightly bound.",
+      "commonMistake": "Confusing fusion with fission, which involves splitting a heavy nucleus."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The Rydberg formula for hydrogen spectral lines is:",
+      "options": [
+        "lambda = R (n1^2 - n2^2)",
+        "1/lambda = R (n2^2 - n1^2)",
+        "lambda = R (1/n1 - 1/n2)",
+        "1/lambda = R (1/n1^2 - 1/n2^2)"
+      ],
+      "correctIndex": 3,
+      "answer": "1/lambda = R (1/n1^2 - 1/n2^2)",
+      "explanation": "The Rydberg formula for hydrogen is 1/lambda = R (1/n1^2 - 1/n2^2), with n2 greater than n1. It gives the wavenumber of the spectral line.",
+      "commonMistake": "Omitting the squares or using the difference in the wrong order."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radius of the first Bohr orbit in hydrogen is called the ______.",
+      "answer": "Bohr radius",
+      "explanation": "The Bohr radius a_0 is the radius of the lowest orbit in hydrogen, about 0.529 angstrom.",
+      "commonMistake": "Writing 'atomic radius' or 'electron radius' instead of 'Bohr radius'."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In radioactive decay, N = N_0 e^{-lambda t}, where lambda is called the ______.",
+      "answer": "decay constant",
+      "explanation": "The decay constant lambda is the proportionality factor in the decay law and is related to half-life by T_1/2 = ln 2 / lambda.",
+      "commonMistake": "Writing 'half-life' or 'mean life' instead of 'decay constant'."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The missing mass in a nucleus is called the ______ defect.",
+      "answer": "mass",
+      "explanation": "The mass defect is the difference between the total mass of the separated nucleons and the mass of the nucleus. Its energy equivalent is the binding energy.",
+      "commonMistake": "Writing 'energy' or 'atomic' defect instead of 'mass' defect."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What did Rutherford's alpha particle scattering experiment reveal about the structure of the atom?",
+      "answer": "It revealed that the atom has a small, dense, positively charged nucleus in which most of the mass and positive charge are concentrated, surrounded by electrons at relatively large distances, with most of the atom being empty space. This was shown by the fact that most alpha particles passed straight through, but a few were deflected through large angles.",
+      "explanation": "The answer should mention the nuclear atom and the evidence from the scattering pattern.",
+      "commonMistake": "Attributing the result to the Thomson model or to electrons causing large-angle deflection."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the relation between half-life and decay constant.",
+      "answer": "The half-life T_1/2 and decay constant lambda are related by T_1/2 = ln 2 / lambda, where ln 2 is about 0.693. A larger decay constant means a shorter half-life.",
+      "explanation": "The answer should give the formula and note the inverse relationship.",
+      "commonMistake": "Writing T_1/2 = lambda or getting the factor of ln 2 in the wrong place."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "What is meant by the binding energy per nucleon, and why is it useful?",
+      "answer": "The binding energy per nucleon is the total binding energy of a nucleus divided by its number of nucleons. It is useful because it gives a measure of nuclear stability: nuclei with a higher binding energy per nucleon are more stable, and the variation of this quantity with mass number explains why fusion of light nuclei and fission of heavy nuclei can release energy.",
+      "explanation": "The answer should define the quantity and explain its use as a stability indicator.",
+      "commonMistake": "Treating binding energy per nucleon as the same as the total binding energy."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the hydrogen spectrum consist of discrete lines rather than a continuous spectrum?",
+      "answer": "Because the energy levels of the hydrogen atom are quantised. Light is emitted only when an electron jumps from one allowed energy level to another, and each such jump produces a photon of a definite energy. Since the energies are discrete, the emitted wavelengths are also discrete, giving a line spectrum.",
+      "explanation": "The answer should connect discrete lines to discrete energy levels and photon emission in transitions.",
+      "commonMistake": "Attributing the line spectrum to the continuous spectrum of the source or to the instrument."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the postulates of the Bohr model for hydrogen and explain how it accounts for the hydrogen spectrum.",
+      "answer": "The main postulates are: electrons revolve in certain stable orbits without radiating; only orbits with angular momentum m_e v r = n h/(2 pi) are allowed; radiation is emitted or absorbed only when an electron jumps between allowed orbits, with the photon energy equal to the difference in the orbit energies. Because the allowed energies are discrete, the emitted photons have discrete energies and hence discrete wavelengths, which gives the line spectrum. The Rydberg formula follows from these energy levels.",
+      "explanation": "The answer should give the key postulates and connect them to the existence of discrete spectral lines.",
+      "commonMistake": "Describing the Bohr model as just a planetary model without the quantisation postulates."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A radioactive isotope has half-life 10 days. A sample has 8000 undecayed nuclei at t = 0. Find the number of undecayed nuclei remaining after 30 days.",
+      "answer": "30 days is three half-lives, so the remaining number is 8000 x (1/2)^3 = 8000 / 8 = 1000 nuclei.",
+      "explanation": "The solution should express the elapsed time as a number of half-lives and multiply the initial amount by (1/2)^n.",
+      "commonMistake": "Dividing by 3 instead of using the exponential halving process."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Calculate the energy released when a mass of 0.001 u is converted completely into energy. Use 1 u = 931.5 MeV.",
+      "answer": "E = m c^2 = 0.001 u = 0.001 x 931.5 MeV ≈ 0.9315 MeV. So about 0.93 MeV of energy is released.",
+      "explanation": "The solution uses the mass-energy conversion factor 1 u ≈ 931.5 MeV and multiplies by the given mass defect.",
+      "commonMistake": "Giving the answer in joules without converting, or using the wrong conversion factor."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Two samples of the same radioactive isotope are compared. Sample A has twice the number of nuclei of sample B at the start. Compare their half-lives and their activities.",
+      "answer": "The half-lives are the same, because half-life is a property of the isotope and does not depend on the sample size. However, the activity is proportional to the number of undecayed nuclei, so sample A has twice the activity of sample B at the start, and its activity remains twice that of sample B at every later time as long as the same isotope is involved.",
+      "explanation": "The comparison should separate the constant half-life from the size-dependent activity.",
+      "commonMistake": "Thinking that the larger sample has a different half-life."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why is the hydrogen atom stable in the Bohr model but would be unstable in a purely classical Rutherford atom?",
+      "answer": "In the classical Rutherford atom, an orbiting electron would continuously radiate electromagnetic energy and spiral into the nucleus, so the atom would be unstable. In the Bohr model, the electron is allowed to exist in certain stable orbits without radiating, and radiation occurs only on transitions between them. This quantisation prevents the collapse and gives stable stationary states, including the ground state.",
+      "explanation": "The answer should contrast classical radiation and energy loss with Bohr's stable quantised orbits.",
+      "commonMistake": "Saying the Rutherford model had no nucleus or that Bohr changed the charge on the nucleus."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A hydrogen atom emits a photon in the Balmer series. What are the possible final and initial states? If the photon has the longest wavelength in the Balmer series, what transition is involved?",
+      "answer": "For the Balmer series, the final state is always n = 2, and the initial state can be n = 3, 4, 5 and so on. The longest wavelength in the series corresponds to the smallest energy difference, which is the transition from n = 3 to n = 2, the H-alpha line.",
+      "explanation": "The answer should identify the lower level for Balmer and then select the smallest possible energy gap for the longest wavelength.",
+      "commonMistake": "Confusing longest wavelength with highest energy and choosing a large n instead of n = 3 to n = 2."
+    },
+    {
+      "id": "isc-12-physics-q-atoms-nuclei-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why both nuclear fission and nuclear fusion can release energy, even though one involves splitting and the other combining. What feature of nuclei determines this?",
+      "answer": "It is the binding energy per nucleon that determines whether energy is released. The binding energy per nucleon curve rises steeply for light nuclei, peaks around iron, and falls slowly for heavier nuclei. When light nuclei fuse, the products are more tightly bound per nucleon and the system loses mass, releasing energy. When a very heavy nucleus fissions, the products are also more tightly bound per nucleon than the original heavy nucleus, so energy is again released. In both cases, the reaction moves the nuclei toward the higher binding energy per nucleon region near the peak.",
+      "explanation": "The answer should use the binding energy per nucleon curve to explain why both fission and fusion can be exothermic.",
+      "commonMistake": "Saying that fission and fusion both release energy for the same reason, or claiming that mass is conserved exactly in the reaction."
+    }
+  ]
+}

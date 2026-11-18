@@ -1,0 +1,734 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-calculus",
+  "title": "Calculus",
+  "kind": "mathematics",
+  "tagline": "Continuity, differentiation, applications, integration, areas and differential equations.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 3 — Calculus; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Topic selection follows the Unit 3 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 3 is the largest unit of the paper and carries 35 of the 80 theory marks, so it decides the grade of most candidates. It runs in one continuous arc. Continuity asks whether a curve has no break at a point; differentiability asks whether it also has a well-defined tangent direction there. Once derivatives can be computed, they answer questions about motion, growth, monotonicity, tangents and optima. Reversing differentiation produces integration, which measures accumulated change, and the definite integral turns that into areas. Differential equations then describe a relationship between a quantity and its own rate of change, and their solutions recover the quantity.",
+    "facts": [
+      { "label": "Unit weightage", "value": "35 of 80 theory marks" },
+      { "label": "Paper I", "value": "Theory, 3 hours, 80 marks" },
+      { "label": "Paper II", "value": "Project work, 20 marks" },
+      { "label": "Examination year", "value": "2027" },
+      { "label": "Syllabus structure", "value": "Seven compulsory units, no optional section" }
+    ]
+  },
+  "learningOutcomes": [
+    "Test continuity of a function at a point and on an interval, and identify a removable discontinuity.",
+    "Differentiate composite, implicit, parametric, exponential and logarithmic functions, and quote the derivatives of the inverse trigonometric functions.",
+    "Compute second-order derivatives and use them to verify a given differential relation.",
+    "Apply derivatives to rates of change, intervals of increase and decrease, and equations of tangents and normals.",
+    "Locate local maxima and minima with the first and second derivative tests and find absolute extrema on a closed interval, including the endpoints.",
+    "Evaluate indefinite integrals by substitution, by parts and by partial fractions, and definite integrals using the fundamental theorem and standard properties.",
+    "Find the area bounded by a curve and the axes or between two curves, and solve first-order differential equations that are variable separable, homogeneous or linear."
+  ],
+  "learn": [
+    {
+      "id": "continuity-and-differentiability",
+      "title": "Continuity and differentiability at a point",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A function f is continuous at x = a when three separate things hold: f(a) is defined, the limit of f(x) as x approaches a exists, and that limit equals f(a). Continuity on an interval means continuity at every interior point, with one-sided continuity at the endpoints. Every polynomial, sine, cosine and exponential function is continuous everywhere, and sums, products, quotients and composites of continuous functions are continuous wherever they are defined. A point where continuity fails is called a discontinuity, and the most repairable kind is the removable one."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Removable discontinuity: the limit exists but is not equal to f(a), or f(a) is not defined. Redefining f(a) as the limit removes the break.",
+            "Jump discontinuity: the left-hand and right-hand limits both exist but differ, as with a step function.",
+            "Infinite discontinuity: the function grows without bound near the point, as 1/x does at x = 0.",
+            "f is differentiable at a when the limit of (f(a + h) − f(a))/h as h approaches 0 exists; this limit is f′(a), the slope of the tangent.",
+            "Differentiability implies continuity, but continuity does not imply differentiability: |x| is continuous at 0 yet has no tangent there.",
+            "A function fails to be differentiable where it has a corner, a vertical tangent, or a discontinuity."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Standard derivatives used throughout the unit",
+          "columns": ["Function", "Derivative", "Condition"],
+          "rows": [
+            ["xⁿ", "n xⁿ⁻¹", "Any real n where xⁿ is defined"],
+            ["eˣ and aˣ", "eˣ and aˣ log a", "a > 0, a ≠ 1"],
+            ["log x", "1/x", "x > 0"],
+            ["sin x and cos x", "cos x and −sin x", "All real x"],
+            ["tan x", "sec² x", "x ≠ (2n + 1)π/2"],
+            ["sin⁻¹x and cos⁻¹x", "1/√(1 − x²) and −1/√(1 − x²)", "|x| < 1"],
+            ["tan⁻¹x", "1/(1 + x²)", "All real x"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find k so that f(x) = (x² − 4)/(x − 2) for x ≠ 2 and f(2) = k is continuous at x = 2.",
+              "note": "For x ≠ 2 the expression factors as (x − 2)(x + 2)/(x − 2) = x + 2, so the limit at x = 2 is 4. Continuity requires k = 4. The original formula is undefined at x = 2, so this is a removable discontinuity."
+            },
+            {
+              "text": "Show that f(x) = |x| is continuous but not differentiable at x = 0.",
+              "note": "Continuity: as x approaches 0 from either side, |x| approaches 0 = f(0). Differentiability: for h > 0 the difference quotient is (h − 0)/h = 1, while for h < 0 it is (−h − 0)/h = −1. The two one-sided limits differ, so f′(0) does not exist even though the function is continuous."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "differentiation-techniques",
+      "title": "Chain rule, implicit, logarithmic and parametric differentiation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Most functions met in the paper are built from simpler ones, and the chain rule is the tool that differentiates a composition. If y depends on u and u depends on x, then dy/dx = (dy/du)(du/dx). Every technique in this lesson is either a consequence of the chain rule or a way of arranging a problem so that the chain rule applies cleanly."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Chain rule: differentiate the outer function, keep the inner function unchanged, and multiply by the derivative of the inner function.",
+            "Product rule: (uv)′ = u′v + uv′; quotient rule: (u/v)′ = (u′v − uv′)/v², with v ≠ 0.",
+            "Implicit differentiation: differentiate both sides with respect to x, treating y as a function of x and attaching dy/dx whenever y is differentiated, then solve for dy/dx.",
+            "Logarithmic differentiation: take logarithms of both sides first, which turns products into sums and powers into multiples; this is the standard method for y = x^x and for products of several factors.",
+            "Parametric differentiation: if x = f(t) and y = g(t), then dy/dx = (dy/dt)/(dx/dt), provided dx/dt ≠ 0.",
+            "Derivative of the inverse trigonometric functions is obtained from the chain rule applied to the identity sin(sin⁻¹x) = x."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Differentiate y = sin(x² + 1).",
+              "note": "The outer function is sine and the inner function is x² + 1, whose derivative is 2x. Hence dy/dx = cos(x² + 1) · 2x = 2x cos(x² + 1)."
+            },
+            {
+              "text": "Find dy/dx for x² + y² = 25.",
+              "note": "Differentiating term by term with respect to x gives 2x + 2y(dy/dx) = 0, so dy/dx = −x/y for y ≠ 0. At a point where y = 0 the tangent is vertical and the derivative is not defined, which the formula signals by its zero denominator."
+            },
+            {
+              "text": "Differentiate y = x^x for x > 0.",
+              "note": "Taking logarithms, log y = x log x. Differentiating implicitly with respect to x gives (1/y)(dy/dx) = log x + 1, so dy/dx = x^x(1 + log x). Differentiating x^x as a power would be wrong because both the base and the exponent vary."
+            },
+            {
+              "text": "Find dy/dx when x = a cos t and y = a sin t.",
+              "note": "Here dx/dt = −a sin t and dy/dt = a cos t, so dy/dx = (a cos t)/(−a sin t) = −cot t, provided sin t ≠ 0. The result agrees with differentiating x² + y² = a² implicitly, which gives dy/dx = −x/y = −cot t."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "second-order-derivatives",
+      "title": "Second-order derivatives",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The derivative of the derivative is the second-order derivative, written d²y/dx² or f″(x). It measures how the slope itself is changing, so a positive second derivative means the slope is increasing and the curve bends upwards. Second derivatives appear directly in the second derivative test for maxima and minima, and many examination questions ask for a second derivative to be computed and substituted into a given relation."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Differentiate once to obtain dy/dx, then differentiate that result again with respect to x.",
+            "For parametric curves, d²y/dx² is found by differentiating dy/dx with respect to t and dividing by dx/dt.",
+            "When a relation such as y″ + y = 0 is to be verified, compute y′ and y″ and substitute; the identity must hold for all x in the domain.",
+            "The sign of f″ controls concavity: f″ > 0 on an interval means the curve is concave upwards there, f″ < 0 concave downwards."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If y = A sin x + B cos x, show that y″ + y = 0.",
+              "note": "y′ = A cos x − B sin x and y″ = −A sin x − B cos x = −y. Hence y″ + y = 0 for every x, whatever the constants A and B."
+            },
+            {
+              "text": "If y = eˣ sin x, show that y″ − 2y′ + 2y = 0.",
+              "note": "By the product rule y′ = eˣ(sin x + cos x). Differentiating again, y″ = eˣ(sin x + cos x) + eˣ(cos x − sin x) = 2eˣ cos x. Substituting, 2eˣ cos x − 2eˣ(sin x + cos x) + 2eˣ sin x = 0."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rate-of-change-monotonicity-tangents",
+      "title": "Rates of change, increasing and decreasing functions, tangents and normals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A derivative is a rate of change, and when several quantities vary with time the chain rule links their rates. Monotonicity is read from the sign of the first derivative on an interval, and the tangent and normal at a point are the two lines through that point with slopes f′(a) and −1/f′(a) respectively."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Related rates: if y depends on x and x depends on t, then dy/dt = (dy/dx)(dx/dt). Write every quantity in terms of one variable before differentiating.",
+            "f is strictly increasing on an interval when f′(x) > 0 there, and strictly decreasing when f′(x) < 0; points where f′ = 0 are candidates for a change of direction.",
+            "The tangent at (a, f(a)) is y − f(a) = f′(a)(x − a); the normal is y − f(a) = −(1/f′(a))(x − a) when f′(a) ≠ 0.",
+            "A horizontal tangent has f′(a) = 0; a vertical tangent occurs where f′ is undefined, and the normal is then horizontal.",
+            "When f′(a) = 0 the normal is vertical, with equation x = a."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "The radius of a circle increases at 0.5 cm/s. How fast is the area increasing when the radius is 7 cm?",
+              "note": "A = πr², so dA/dt = 2πr(dr/dt) = 2π(7)(0.5) = 7π cm²/s. The answer is positive because the area grows as the radius grows."
+            },
+            {
+              "text": "Find the intervals on which f(x) = x³ − 3x is increasing or decreasing.",
+              "note": "f′(x) = 3x² − 3 = 3(x − 1)(x + 1). This is positive for x < −1 and for x > 1, and negative for −1 < x < 1. So f is increasing on (−∞, −1) and on (1, ∞), and decreasing on (−1, 1)."
+            },
+            {
+              "text": "Find the tangent and normal to y = x² at the point (2, 4).",
+              "note": "Here dy/dx = 2x, so the slope at x = 2 is 4. The tangent is y − 4 = 4(x − 2), that is y = 4x − 4. The normal has slope −1/4 and equation y − 4 = −(1/4)(x − 2), that is x + 4y = 18."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maxima-and-minima",
+      "title": "Local and absolute maxima and minima",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A local maximum is a point where the function is at least as large as at every nearby point, and a local minimum is defined in the same way with the inequality reversed. Candidates are the critical points, where f′(x) = 0 or f′ does not exist. Two tests decide which kind each candidate is: the first derivative test reads the sign change of f′ across the point, and the second derivative test reads the sign of f″ at the point. On a closed interval the absolute maximum and minimum must also be compared with the values at the endpoints."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First derivative test: if f′ changes from positive to negative at c, f has a local maximum there; from negative to positive, a local minimum; no sign change, neither.",
+            "Second derivative test: if f′(c) = 0 and f″(c) < 0, f has a local maximum at c; if f″(c) > 0, a local minimum; if f″(c) = 0 the test is inconclusive and the first derivative test must be used.",
+            "Absolute extrema on [a, b]: evaluate f at every critical point inside the interval and at both endpoints, then compare.",
+            "In a word problem, write the quantity to be optimised as a function of one variable using the given constraint, state the physical domain, and check that the critical point lies inside it.",
+            "A critical point that is a maximum of the formula may be outside the physical domain, in which case the optimum is at an endpoint."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the local maxima and minima of f(x) = x³ − 3x² + 2.",
+              "note": "f′(x) = 3x² − 6x = 3x(x − 2), so the critical points are x = 0 and x = 2. Since f″(x) = 6x − 6, f″(0) = −6 < 0 gives a local maximum f(0) = 2, and f″(2) = 6 > 0 gives a local minimum f(2) = 8 − 12 + 2 = −2."
+            },
+            {
+              "text": "Find the absolute maximum and minimum of f(x) = x³ − 3x on [−2, 3].",
+              "note": "The critical points are x = ±1. Evaluating, f(−2) = −2, f(−1) = 2, f(1) = −2 and f(3) = 18. The absolute maximum is 18 at x = 3, and the absolute minimum is −2, attained at both x = −2 and x = 1. The endpoint x = 3 supplies the maximum, which shows why endpoints must be checked."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "indefinite-integration",
+      "title": "Indefinite integrals: substitution, by parts and partial fractions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Integration reverses differentiation, so every standard derivative read backwards gives a standard integral, and every result carries an arbitrary constant because a constant differentiates to zero. Three techniques cover almost every question in the paper: substitution, which reverses the chain rule; integration by parts, which reverses the product rule; and partial fractions, which turns a rational function into pieces that match standard forms."
+        },
+        {
+          "type": "table",
+          "caption": "Standard integrals and the method that produces them",
+          "columns": ["Integral", "Result", "Method"],
+          "rows": [
+            ["∫ xⁿ dx, n ≠ −1", "xⁿ⁺¹/(n + 1) + C", "Direct power rule"],
+            ["∫ (1/x) dx", "log|x| + C", "Absolute value because x may be negative"],
+            ["∫ eˣ dx", "eˣ + C", "Direct"],
+            ["∫ cos x dx", "sin x + C", "Direct"],
+            ["∫ dx/(1 + x²)", "tan⁻¹x + C", "Standard inverse tangent form"],
+            ["∫ dx/√(1 − x²)", "sin⁻¹x + C", "Standard inverse sine form"],
+            ["∫ f′(x)/f(x) dx", "log|f(x)| + C", "Substitution u = f(x)"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Substitution: choose u so that du appears in the integrand, rewrite the whole integral in terms of u, integrate, then substitute back.",
+            "For definite integrals, substitution also changes the limits; alternatively evaluate the antiderivative and substitute the original limits.",
+            "By parts: ∫u dv = uv − ∫v du. Choose u as the factor that simplifies when differentiated, following the order inverse trigonometric, logarithmic, algebraic, trigonometric, exponential.",
+            "Partial fractions: factor the denominator completely, write the proper fraction as a sum of simpler fractions with unknown numerators, and solve for them by substituting convenient values of x or by comparing coefficients.",
+            "A repeated linear factor needs one term for each power, and an irreducible quadratic factor needs a linear numerator.",
+            "Always include the constant of integration in an indefinite integral, and never cancel it away when comparing two answers."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate ∫ x/(x² + 1) dx.",
+              "note": "Take u = x² + 1, so du = 2x dx and x dx = du/2. The integral becomes (1/2)∫du/u = (1/2)log|u| + C = (1/2)log(x² + 1) + C, with no absolute value needed because x² + 1 > 0."
+            },
+            {
+              "text": "Evaluate ∫ x cos x dx.",
+              "note": "Take u = x and dv = cos x dx, so du = dx and v = sin x. Then ∫x cos x dx = x sin x − ∫sin x dx = x sin x + cos x + C. Differentiating the answer returns x cos x, which confirms it."
+            },
+            {
+              "text": "Evaluate ∫ dx/((x − 1)(x + 2)).",
+              "note": "Write 1/((x − 1)(x + 2)) = A/(x − 1) + B/(x + 2). Then 1 = A(x + 2) + B(x − 1). Putting x = 1 gives A = 1/3, and putting x = −2 gives B = −1/3. The integral is (1/3)log|x − 1| − (1/3)log|x + 2| + C."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "definite-integrals-and-area",
+      "title": "Definite integrals, their properties and area",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The fundamental theorem of calculus joins the two halves of the subject: if F is any antiderivative of f, then the definite integral of f from a to b is F(b) − F(a). The definite integral is a number, not a family of functions, and the constant of integration cancels in the subtraction. Its properties allow a difficult integral to be transformed into an easy one, most usefully the reflection property and the splitting of the interval at a point where the integrand changes formula."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "∫ₐᵇ f(x) dx = −∫ᵦᵃ f(x) dx, and ∫ₐᵃ f(x) dx = 0.",
+            "∫ₐᵇ f(x) dx = ∫ₐᵇ f(a + b − x) dx; this reflection property evaluates integrals of the form sin x/(sin x + cos x).",
+            "∫ₐᵇ f(x) dx = ∫ₐᶜ f(x) dx + ∫𝚌ᵇ f(x) dx for any c between a and b.",
+            "For an even function on [−a, a], ∫₋ₐᵃ f = 2∫₀ᵃ f; for an odd function the integral over [−a, a] is 0.",
+            "Area under a curve y = f(x) from a to b is ∫ₐᵇ |f(x)| dx, so a portion below the axis contributes a positive area only after the sign is removed.",
+            "Area between two curves is ∫ₐᵇ (upper − lower) dx over the interval between their points of intersection.",
+            "When the curves cross inside the interval, split the integral at every intersection and add the absolute values of the pieces."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate ∫₀¹ x/(1 + x²) dx.",
+              "note": "An antiderivative is (1/2)log(1 + x²). Substituting the limits gives (1/2)log 2 − (1/2)log 1 = (1/2)log 2, a positive number as expected because the integrand is positive on [0, 1]."
+            },
+            {
+              "text": "Find the area enclosed between y = x² and y = 2x.",
+              "note": "The curves meet where x² = 2x, that is x = 0 and x = 2. On (0, 2) the line is above the parabola, so the area is ∫₀²(2x − x²) dx = [x² − x³/3]₀² = 4 − 8/3 = 4/3 square units."
+            },
+            {
+              "text": "Evaluate ∫₀^{π/2} sin x/(sin x + cos x) dx.",
+              "note": "Let I be the integral. Replacing x by π/2 − x turns the integrand into cos x/(cos x + sin x), so I also equals ∫₀^{π/2} cos x/(sin x + cos x) dx. Adding the two expressions, 2I = ∫₀^{π/2} 1 dx = π/2, hence I = π/4."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "differential-equations",
+      "title": "Differential equations: order, degree and three standard methods",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A differential equation relates an unknown function to its derivatives. Its order is the order of the highest derivative present, and its degree is the power of that highest derivative after the equation has been cleared of fractions and radicals in the derivatives. A solution containing as many arbitrary constants as the order is the general solution; fixing the constants from given conditions gives a particular solution. Three first-order forms cover the syllabus: variable separable, homogeneous, and linear."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Order: the highest derivative in the equation. Degree: the exponent of that highest derivative when the equation is a polynomial in all the derivatives.",
+            "Variable separable: if dy/dx = f(x)g(y), separate as dy/g(y) = f(x) dx and integrate both sides, taking care of any value of y that makes g(y) = 0.",
+            "Homogeneous: if dy/dx is a function of y/x alone, put y = vx, so dy/dx = v + x(dv/dx), which reduces the equation to separable form in v and x.",
+            "Linear: dy/dx + Py = Q with P and Q functions of x. The integrating factor is e^{∫P dx}, and multiplying through makes the left side the derivative of y times the integrating factor.",
+            "Formation: to form the differential equation of a family of curves, differentiate as many times as there are arbitrary constants and eliminate them.",
+            "A particular solution is obtained by substituting the given condition into the general solution and solving for the constant."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Solve dy/dx = (1 + y²)/(1 + x²).",
+              "note": "Separating, dy/(1 + y²) = dx/(1 + x²), so tan⁻¹y = tan⁻¹x + C. If y = 1 when x = 0, then π/4 = 0 + C, so C = π/4 and tan⁻¹y = tan⁻¹x + π/4. Taking tangents gives y = (1 + x)/(1 − x)."
+            },
+            {
+              "text": "Solve dy/dx = (x + y)/x.",
+              "note": "The right-hand side is 1 + y/x, a function of y/x, so the equation is homogeneous. Put y = vx: then v + x(dv/dx) = 1 + v, so x(dv/dx) = 1 and dv = dx/x. Hence v = log|x| + C and y = x log|x| + Cx."
+            },
+            {
+              "text": "Solve dy/dx + y = eˣ.",
+              "note": "This is linear with P = 1 and Q = eˣ, so the integrating factor is e^{∫1 dx} = eˣ. Multiplying through gives eˣ(dy/dx) + eˣy = e^{2x}, that is d/dx(y eˣ) = e^{2x}. Integrating, y eˣ = (1/2)e^{2x} + C, so y = (1/2)eˣ + Ce^{−x}."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Continuity at a point needs the function value, the limit and their equality; differentiability additionally needs the difference quotient to have a two-sided limit.",
+    "Differentiability implies continuity, but |x| at 0 shows that continuity does not imply differentiability.",
+    "The chain rule dy/dx = (dy/du)(du/dx) underlies implicit, logarithmic and parametric differentiation.",
+    "Logarithmic differentiation is required when both base and exponent vary, as in y = x^x.",
+    "For parametric curves dy/dx = (dy/dt)/(dx/dt), provided dx/dt ≠ 0.",
+    "A second derivative measures the rate of change of the slope and decides the second derivative test.",
+    "f is increasing where f′ > 0 and decreasing where f′ < 0; critical points are where f′ = 0 or f′ fails to exist.",
+    "Local extrema are classified by a sign change of f′ or by the sign of f″; absolute extrema on a closed interval also require the endpoint values.",
+    "Every indefinite integral carries an arbitrary constant, and the constant cancels in a definite integral evaluated as F(b) − F(a).",
+    "The area between two curves is the integral of upper minus lower between consecutive intersection points, with the sign handled by splitting the interval."
+  ],
+  "examFocus": [
+    "Deciding the value of a constant that makes a piecewise function continuous, and testing differentiability at the join.",
+    "Differentiating a product or quotient that also requires the chain rule, with correct signs inside the inner derivative.",
+    "Logarithmic differentiation of y = x^x or of a product of several powers.",
+    "Finding dy/dx for an implicit relation and evaluating it at a stated point, with the vertical-tangent case noted.",
+    "Verifying a relation such as y″ − 2y′ + 2y = 0 for a given exponential-trigonometric function.",
+    "Related-rate problems in which two quantities varying with time are linked by a geometric formula.",
+    "Optimisation word problems: forming the function, restricting the domain and checking the critical point against the endpoints.",
+    "Evaluating a definite integral by a property such as ∫₀ᵃ f(x) dx = ∫₀ᵃ f(a − x) dx rather than by a lengthy antiderivative.",
+    "Solving a first-order differential equation and applying the initial condition to obtain the particular solution."
+  ],
+  "vocabulary": [
+    { "word": "Continuity", "meaning": "The property that the limit of the function at a point equals the value of the function there." },
+    { "word": "Removable discontinuity", "meaning": "A break at which the limit exists but differs from the function value or the value is undefined." },
+    { "word": "Differentiability", "meaning": "The existence of a finite derivative, equivalently of a unique tangent slope, at a point." },
+    { "word": "Chain rule", "meaning": "The rule dy/dx = (dy/du)(du/dx) for differentiating a composite function." },
+    { "word": "Implicit differentiation", "meaning": "Differentiating an equation in x and y directly, attaching dy/dx to every derivative of y." },
+    { "word": "Logarithmic differentiation", "meaning": "Taking logarithms of both sides before differentiating, used when base and exponent both vary." },
+    { "word": "Parametric form", "meaning": "Describing a curve by x = f(t) and y = g(t) with a common parameter t." },
+    { "word": "Second derivative", "meaning": "The derivative of the first derivative, measuring how the slope changes." },
+    { "word": "Critical point", "meaning": "A point where the first derivative is zero or does not exist." },
+    { "word": "Local maximum", "meaning": "A value at least as large as all nearby values of the function." },
+    { "word": "Absolute extremum", "meaning": "The largest or smallest value of a function on a stated closed interval, endpoints included." },
+    { "word": "Antiderivative", "meaning": "A function whose derivative is the given integrand; indefinite integrals differ by constants." },
+    { "word": "Integration by parts", "meaning": "The rule ∫u dv = uv − ∫v du, reversing the product rule." },
+    { "word": "Order of a differential equation", "meaning": "The order of the highest derivative appearing in the equation." },
+    { "word": "Integrating factor", "meaning": "The factor e^{∫P dx} that makes a linear first-order equation exact." }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Three kinds of discontinuity and the differentiable case",
+      "description": "Four small panels are drawn side by side. The first shows a curve with a single missing point that can be filled in, illustrating a removable discontinuity. The second shows a step with two different one-sided limits, a jump discontinuity. The third shows a branch shooting upwards beside a vertical asymptote, an infinite discontinuity. The fourth shows a smooth curve through the point with a single tangent line drawn, and the label notes that here the left-hand and right-hand difference quotients agree, so the function is differentiable.",
+      "labels": [
+        "removable hole",
+        "jump with unequal one-sided limits",
+        "vertical asymptote",
+        "smooth curve through the point",
+        "equal one-sided difference quotients",
+        "point of differentiability"
+      ]
+    },
+    {
+      "caption": "Figure: Sign chart of the derivative and the shape of the curve",
+      "description": "A number line is marked with the critical points of a cubic. Above the line, plus signs are written on the outer intervals and a minus sign on the middle interval, recording where the derivative is positive and negative. Below the line, an arrow rises, turns at the first critical point, falls, and turns again at the second, so the picture shows a local maximum where the derivative changes from plus to minus and a local minimum where it changes from minus to plus.",
+      "labels": [
+        "critical point x = c₁",
+        "critical point x = c₂",
+        "plus interval where f′ > 0",
+        "minus interval where f′ < 0",
+        "rising then falling curve",
+        "local maximum at c₁",
+        "local minimum at c₂"
+      ]
+    },
+    {
+      "caption": "Figure: Area between two curves found by a vertical strip",
+      "description": "The parabola y = x² and the line y = 2x are drawn, meeting at the origin and at the point (2, 4). The region between them is shaded. A thin vertical strip at a general position x is drawn from the parabola up to the line, with its height labelled 2x − x² and its width labelled dx, showing that the area is the integral of the height of the strip over the interval between the intersection points.",
+      "labels": [
+        "parabola y = x²",
+        "line y = 2x",
+        "intersection points x = 0 and x = 2",
+        "shaded enclosed region",
+        "vertical strip of height 2x − x²",
+        "strip width dx",
+        "integration limits 0 and 2"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-calculus-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The function f(x) = |x| at x = 0 is",
+      "options": [
+        "continuous and differentiable",
+        "continuous but not differentiable",
+        "neither continuous nor differentiable",
+        "differentiable but not continuous"
+      ],
+      "correctIndex": 1,
+      "answer": "continuous but not differentiable",
+      "explanation": "As x approaches 0 from either side, |x| approaches 0 = f(0), so the function is continuous. The difference quotient is 1 for h > 0 and −1 for h < 0, so the two one-sided limits differ and no derivative exists at 0.",
+      "commonMistake": "Concluding that a continuous function must have a tangent everywhere, which fails at a corner such as the one in |x| at 0."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-02",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If y = sin(cos x²), then dy/dx is",
+      "options": [
+        "−2x sin(x²) cos(cos x²)",
+        "2x sin(x²) cos(cos x²)",
+        "−2x cos(x²) sin(cos x²)",
+        "2x cos(x²) cos(cos x²)"
+      ],
+      "correctIndex": 0,
+      "answer": "−2x sin(x²) cos(cos x²)",
+      "explanation": "The outer function is sine, differentiated to cosine of the same inner expression. The inner function cos x² differentiates to −sin(x²) · 2x, so the chain rule gives dy/dx = cos(cos x²) · (−2x sin x²) = −2x sin(x²) cos(cos x²).",
+      "commonMistake": "Differentiating cos x² as −sin x² and dropping the factor 2x from the derivative of x²."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of ∫ x eˣ dx is",
+      "options": [
+        "x eˣ + eˣ + C",
+        "(x + 1)eˣ + C",
+        "x eˣ − eˣ + C",
+        "(x²/2)eˣ + C"
+      ],
+      "correctIndex": 2,
+      "answer": "x eˣ − eˣ + C",
+      "explanation": "Integrating by parts with u = x and dv = eˣ dx gives v = eˣ, so ∫x eˣ dx = x eˣ − ∫eˣ dx = x eˣ − eˣ + C. Differentiating this result returns x eˣ, which confirms it.",
+      "commonMistake": "Adding the two terms and obtaining x eˣ + eˣ, which differentiates to (x + 2)eˣ instead of x eˣ."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The order and degree of the differential equation (d²y/dx²)³ + (dy/dx)² + y = 0 are",
+      "options": [
+        "order 3, degree 2",
+        "order 2, degree 2",
+        "order 1, degree 3",
+        "order 2, degree 3"
+      ],
+      "correctIndex": 3,
+      "answer": "order 2, degree 3",
+      "explanation": "The highest derivative present is the second derivative, so the order is 2. The equation is a polynomial in its derivatives and the highest derivative is raised to the power 3, so the degree is 3.",
+      "commonMistake": "Reading the degree from the power of the first derivative, which gives 3 as the order and 2 as the degree instead of the reverse."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The function f(x) = x³ − 3x is increasing on",
+      "options": [
+        "(−1, 1)",
+        "(−∞, −1) ∪ (1, ∞)",
+        "(1, ∞) only",
+        "(−∞, 1)"
+      ],
+      "correctIndex": 1,
+      "answer": "(−∞, −1) ∪ (1, ∞)",
+      "explanation": "f′(x) = 3x² − 3 = 3(x − 1)(x + 1), which is positive when x < −1 and when x > 1, and negative between the roots. The function is therefore increasing on both outer intervals and decreasing only on (−1, 1).",
+      "commonMistake": "Giving only (1, ∞) and overlooking the left-hand interval on which the derivative is also positive."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of ∫₀^{π/2} sin²x dx is",
+      "options": [
+        "π/4",
+        "π/2",
+        "π",
+        "1"
+      ],
+      "correctIndex": 0,
+      "answer": "π/4",
+      "explanation": "Using sin²x = (1 − cos 2x)/2, the integral becomes (1/2)[x − (sin 2x)/2] from 0 to π/2, which is (1/2)(π/2) = π/4. The sine term vanishes at both limits.",
+      "commonMistake": "Answering π/2 by treating sin²x as if it averaged 1 over the interval instead of 1/2."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-07",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If x² + y² = 25 and y > 0, the value of dy/dx at x = 1 is",
+      "options": [
+        "1/(2√6)",
+        "−2√6",
+        "−1/(2√6)",
+        "−1/24"
+      ],
+      "correctIndex": 2,
+      "answer": "−1/(2√6)",
+      "explanation": "Differentiating implicitly gives 2x + 2y(dy/dx) = 0, so dy/dx = −x/y. At x = 1 the positive y is √24 = 2√6, hence dy/dx = −1/(2√6). The negative sign is expected because the upper semicircle falls as x increases.",
+      "commonMistake": "Substituting y = 25 − 1² = 24 and using that as the denominator instead of the square root 2√6."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area enclosed between y = x² and y = x is",
+      "options": [
+        "1/3 square unit",
+        "1/2 square unit",
+        "1/12 square unit",
+        "1/6 square unit"
+      ],
+      "correctIndex": 3,
+      "answer": "1/6 square unit",
+      "explanation": "The curves meet at x = 0 and x = 1, and the line lies above the parabola between them. The area is ∫₀¹(x − x²) dx = 1/2 − 1/3 = 1/6.",
+      "commonMistake": "Integrating x² − x instead of x − x² and reporting a negative area, or using the intersection points 0 and 1 but forgetting to subtract the parabola."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If y = log(sin x), then dy/dx = ______.",
+      "answer": "cot x",
+      "explanation": "By the chain rule, dy/dx = (1/sin x) · cos x = cot x, defined wherever sin x ≠ 0. Writing the answer as cos x/sin x is equivalent.",
+      "commonMistake": "Differentiating log as 1/x and writing 1/sin x, which omits the derivative of the inner function."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of ∫ dx/(x² + 4) is ______.",
+      "answer": "(1/2)tan⁻¹(x/2) + C",
+      "explanation": "Writing x² + 4 = 4(1 + (x/2)²) and substituting u = x/2 gives (1/2)∫du/(1 + u²) = (1/2)tan⁻¹(x/2) + C. The factor 1/2 comes from dx = 2 du and must not be omitted.",
+      "commonMistake": "Quoting tan⁻¹(x/2) + C directly, which forgets the factor 1/2 produced by the substitution."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The degree of the differential equation (dy/dx)² + sin(dy/dx) = 0 is ______.",
+      "answer": "not defined",
+      "explanation": "Degree is defined only when the equation is a polynomial in the derivatives. Here sin(dy/dx) appears, so the equation cannot be written as a polynomial in dy/dx and its degree is not defined, even though its order is clearly 1.",
+      "commonMistake": "Reporting degree 2 from the squared term, when the presence of the sine term prevents the equation from having a degree at all."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Differentiate y = x^x, where x > 0.",
+      "answer": "Taking logarithms, log y = x log x. Differentiating both sides with respect to x gives (1/y)(dy/dx) = log x + 1, so dy/dx = y(1 + log x) = x^x(1 + log x).",
+      "explanation": "The base and the exponent both depend on x, so neither the power rule nor the exponential rule applies alone. Taking logarithms converts the expression into a product, and implicit differentiation then recovers dy/dx.",
+      "commonMistake": "Applying the power rule and writing x · x^(x−1), which treats the exponent as a constant."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If x = a(cos t + t sin t) and y = a(sin t − t cos t), find dy/dx.",
+      "answer": "dx/dt = a(−sin t + sin t + t cos t) = a t cos t and dy/dt = a(cos t − cos t + t sin t) = a t sin t. Hence dy/dx = (dy/dt)/(dx/dt) = (a t sin t)/(a t cos t) = tan t, for t ≠ 0 and cos t ≠ 0.",
+      "explanation": "Each derivative is computed by the product rule, and the terms that cancel are the ones produced by differentiating t sin t and t cos t. Dividing removes the common factor a t, leaving tan t.",
+      "commonMistake": "Differentiating t sin t as sin t only, which loses the term t cos t and prevents the cancellation."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Evaluate ∫₀¹ x e^{x²} dx.",
+      "answer": "Put u = x², so du = 2x dx and x dx = du/2. When x = 0, u = 0, and when x = 1, u = 1. The integral becomes (1/2)∫₀¹ eᵘ du = (1/2)(e − 1).",
+      "explanation": "The substitution is suggested by the fact that the derivative of x² is 2x, which is present up to a constant factor. Changing the limits with the substitution avoids having to convert back to x.",
+      "commonMistake": "Substituting u = x² but keeping the limits 0 and 1 in terms of x², which silently changes the interval of integration."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-15",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the equation of the tangent to the curve y = x² − 4x + 3 at the point where x = 3.",
+      "answer": "At x = 3, y = 9 − 12 + 3 = 0, so the point is (3, 0). The derivative is dy/dx = 2x − 4, which equals 2 at x = 3. The tangent is y − 0 = 2(x − 3), that is 2x − y − 6 = 0.",
+      "explanation": "The point of contact supplies one point and the derivative supplies the slope, which is all the point-slope form needs. Checking by substitution confirms that (3, 0) satisfies the final equation.",
+      "commonMistake": "Using the value of y as the slope, or substituting x = 3 into the derivative before finding the y-coordinate of the point."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that f(x) = x sin(1/x) for x ≠ 0 and f(0) = 0 is continuous but not differentiable at x = 0.",
+      "answer": "For x ≠ 0, |f(x) − f(0)| = |x sin(1/x)| ≤ |x|, because |sin(1/x)| ≤ 1. As x approaches 0 this bound approaches 0, so the limit of f(x) at 0 is 0 = f(0) and f is continuous there. For differentiability, the difference quotient at 0 is (f(h) − f(0))/h = (h sin(1/h))/h = sin(1/h) for h ≠ 0. As h approaches 0, 1/h runs through ever larger values and sin(1/h) oscillates between −1 and 1 without settling, so the limit does not exist and f is not differentiable at 0.",
+      "explanation": "Continuity is proved by squeezing the function between −|x| and |x|. Differentiability fails for a subtler reason than a corner: the difference quotient itself has no limit, so there is no tangent slope at all, and the curve oscillates infinitely often near the origin.",
+      "commonMistake": "Cancelling h to obtain sin(1/h) and then claiming the limit is 0 because the function is bounded, when bounded oscillation is precisely what prevents a limit."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Evaluate ∫ x/((x − 1)(x + 2)) dx by the method of partial fractions.",
+      "answer": "Write x/((x − 1)(x + 2)) = A/(x − 1) + B/(x + 2), so x = A(x + 2) + B(x − 1). Putting x = 1 gives 1 = 3A, so A = 1/3; putting x = −2 gives −2 = −3B, so B = 2/3. Hence the integral is (1/3)log|x − 1| + (2/3)log|x + 2| + C.",
+      "explanation": "The numerator has lower degree than the denominator, so the fraction is proper and the partial-fraction form applies directly. Substituting the roots of the denominator is the fastest way to find the constants, and the absolute values keep the logarithms defined on both sides of the excluded points.",
+      "commonMistake": "Writing the numerators as Ax and Bx instead of constants, or dropping the absolute value signs and losing the part of the domain where x < −2."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the local maximum and local minimum values of f(x) = 2x³ − 15x² + 36x − 10.",
+      "answer": "f′(x) = 6x² − 30x + 36 = 6(x² − 5x + 6) = 6(x − 2)(x − 3), so the critical points are x = 2 and x = 3. Also f″(x) = 12x − 30. At x = 2, f″(2) = −6 < 0, so f has a local maximum f(2) = 16 − 60 + 72 − 10 = 18. At x = 3, f″(3) = 6 > 0, so f has a local minimum f(3) = 54 − 135 + 108 − 10 = 17.",
+      "explanation": "The derivative factors cleanly, so both critical points are found exactly, and the second derivative decides the type without a sign chart. Substituting each critical point into the original function, not into the derivative, gives the extreme values.",
+      "commonMistake": "Reporting 2 and 3 as the maximum and minimum values themselves instead of substituting them into f to obtain 18 and 17."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve the differential equation dy/dx = (1 + y²)/(1 + x²), given that y = 1 when x = 0.",
+      "answer": "Separating the variables, dy/(1 + y²) = dx/(1 + x²). Integrating both sides gives tan⁻¹y = tan⁻¹x + C. Applying the condition x = 0, y = 1 gives tan⁻¹1 = tan⁻¹0 + C, so C = π/4. Hence tan⁻¹y = tan⁻¹x + π/4. Taking tangents and using tan(A + B) = (tan A + tan B)/(1 − tan A tan B) with tan(tan⁻¹x) = x, y = (x + 1)/(1 − x).",
+      "explanation": "The equation is variable separable because the right-hand side is a product of a function of y and a function of x. The initial condition fixes the constant, and the final step needs the tangent addition formula to express y explicitly rather than leaving it inside an inverse tangent.",
+      "commonMistake": "Leaving the answer as tan⁻¹y = tan⁻¹x + C without using the initial condition, or substituting y = 1 into the wrong side so that C comes out as −π/4."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the area enclosed between the parabola y = x² and the line y = 2x.",
+      "answer": "Solving x² = 2x gives x(x − 2) = 0, so the curves meet at x = 0 and x = 2, with corresponding points (0, 0) and (2, 4). Between these values 2x − x² = x(2 − x) > 0, so the line is above the parabola. The area is ∫₀²(2x − x²) dx = [x² − x³/3]₀² = (4 − 8/3) − 0 = 4/3 square units.",
+      "explanation": "The intersection points supply the limits, and testing a point between them decides which curve is upper. Integrating upper minus lower over that interval gives a positive area without any need to split the integral.",
+      "commonMistake": "Integrating from 0 to 2 without checking which function is larger, or using the y-values 0 and 4 as limits instead of the x-values of the intersection points."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A rectangle with sides parallel to the coordinate axes is inscribed in the circle x² + y² = 25. Find the dimensions of the rectangle of largest area and the maximum area.",
+      "answer": "Let the vertex in the first quadrant be (x, y) with x² + y² = 25, so the rectangle has sides 2x and 2y and area A = 4xy = 4x√(25 − x²) for 0 < x < 5. Squaring, A² = 16x²(25 − x²); maximising A is the same as maximising A² because both are positive. Let S = x²(25 − x²) = 25x² − x⁴, so dS/dx = 50x − 4x³ = 2x(25 − 2x²), which vanishes at x² = 25/2, that is x = 5/√2. Since d²S/dx² = 50 − 12x² is negative at x² = 25/2, this gives a maximum. Then y = 5/√2 as well, so the rectangle is a square of side 2x = 10/√2 = 5√2, and its area is (5√2)² = 50 square units.",
+      "explanation": "The constraint x² + y² = 25 removes one variable, and the endpoint values x = 0 and x = 5 give zero area, so the interior critical point is the maximum. The second derivative confirms the type without a sign chart, and the answer is geometrically sensible: the largest inscribed rectangle is the square.",
+      "commonMistake": "Maximising the half-area xy and then reporting xy = 12.5 as the total area instead of multiplying by 4, or forgetting to check that the critical point lies in 0 < x < 5."
+    },
+    {
+      "id": "isc-12-maths-q-calculus-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Evaluate ∫₀^{π/2} sin x/(sin x + cos x) dx using a property of definite integrals.",
+      "answer": "Let I = ∫₀^{π/2} sin x/(sin x + cos x) dx. Using ∫₀ᵃ f(x) dx = ∫₀ᵃ f(a − x) dx with a = π/2, replacing x by π/2 − x turns sin x into cos x and cos x into sin x, so I = ∫₀^{π/2} cos x/(cos x + sin x) dx. Adding the two expressions for I gives 2I = ∫₀^{π/2} (sin x + cos x)/(sin x + cos x) dx = ∫₀^{π/2} 1 dx = π/2. Hence I = π/4.",
+      "explanation": "The reflection property pairs the integral with a second copy in which the integrand's numerator and denominator are exchanged, and the two copies add to the constant integrand 1. This avoids finding an antiderivative, which would be far longer.",
+      "commonMistake": "Adding the integrands without also adding the two copies of I, which leads to the false conclusion I = π/2 instead of 2I = π/2."
+    }
+  ]
+}

@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 1,
+  "id": "icse-10-phy-refraction-through-a-lens",
+  "title": "Refraction through a Lens",
+  "kind": "physics",
+  "tagline": "Understand convex and concave lenses, image formation and lens formula applications.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "ICSE Class 10 Physics syllabus scope for the named chapter (inferred from standard board-prescribed topic titles); CISCE primary document not directly fetched in this environment. Content independently authored for Target95 BoardPrep.",
+    "boardprep": "Original explanations, examples, figure descriptions and practice questions drafted for revision; not copied from textbooks or question banks."
+  },
+  "overview": {
+    "intro": "Lenses refract light to converge or diverge rays and form images. This chapter covers convex and concave lenses, key terms such as principal axis, focus and focal length, ray diagrams for image formation, sign convention, lens formula and magnification, and practical uses of lenses. Accurate diagrams and consistent sign usage are essential for solving numerical and conceptual questions.",
+    "facts": [
+      {
+        "label": "Convex lens",
+        "value": "Converging lens; can form real or virtual images"
+      },
+      {
+        "label": "Concave lens",
+        "value": "Diverging lens; forms virtual, erect, diminished images"
+      },
+      {
+        "label": "Lens formula",
+        "value": "1/v - 1/u = 1/f (with sign convention)"
+      },
+      {
+        "label": "Magnification",
+        "value": "m = v/u = h'/h"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Identify types of lenses and define principal focus, focal length and optical centre.",
+    "Draw ray diagrams for image formation by convex and concave lenses.",
+    "Apply sign convention, lens formula and magnification in calculations.",
+    "Describe characteristics of images for different object positions.",
+    "Explain common applications of lenses in daily life and instruments."
+  ],
+  "learn": [
+    {
+      "id": "lens-terms-and-types",
+      "title": "Types of Lenses and Key Terms",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A lens is a transparent refracting medium bounded by two surfaces, at least one of which is curved. A convex (converging) lens is thicker at the centre and converges parallel rays to a principal focus, while a concave (diverging) lens is thinner at the centre and diverges parallel rays as if from a principal focus. Each lens has two principal foci and two centres of curvature."
+        },
+        {
+          "type": "paragraph",
+          "text": "Important terms include optical centre (O), principal axis, principal focus (F), focal length (f) and aperture. A ray passing through the optical centre goes undeviated (for a thin lens). Understanding these terms is necessary for constructing ray diagrams and applying formulae correctly."
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Principal focus",
+              "meaning": "Point where rays parallel to principal axis converge or appear to diverge after refraction."
+            },
+            {
+              "term": "Focal length",
+              "meaning": "Distance between optical centre and principal focus of a lens."
+            },
+            {
+              "term": "Optical centre",
+              "meaning": "Point in a lens through which a ray passes without deviation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "image-formation-convex",
+      "title": "Image Formation by a Convex Lens",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A convex lens can form real or virtual images depending on the position of the object. When the object is beyond 2F, the image is real, inverted and diminished between F and 2F. At 2F, the image is real, inverted and same size at 2F. Between F and 2F, the image is real, inverted and magnified beyond 2F. At F, rays emerge parallel and image is formed at infinity."
+        },
+        {
+          "type": "paragraph",
+          "text": "When the object is between F and the optical centre, the convex lens forms a virtual, erect and magnified image on the same side as the object. This principle is used in a simple magnifying glass. Ray diagrams typically use at least two principal rays: one parallel to axis passing through focus, and one through optical centre."
+        },
+        {
+          "type": "table",
+          "caption": "Image by convex lens (summary)",
+          "columns": [
+            "Object position",
+            "Image position",
+            "Nature/size"
+          ],
+          "rows": [
+            [
+              "Beyond 2F",
+              "Between F and 2F",
+              "Real, inverted, diminished"
+            ],
+            [
+              "At 2F",
+              "At 2F",
+              "Real, inverted, same size"
+            ],
+            [
+              "Between F and 2F",
+              "Beyond 2F",
+              "Real, inverted, magnified"
+            ],
+            [
+              "Between F and O",
+              "Same side as object",
+              "Virtual, erect, magnified"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "image-formation-concave",
+      "title": "Image Formation by a Concave Lens",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A concave lens always forms a virtual, erect and diminished image for a real object, regardless of object position. The image is formed between the focus and the optical centre on the same side of the lens as the object. Because of this property, concave lenses are used to correct myopia and in some optical devices."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ray diagrams for concave lenses use principal rays such as a ray parallel to the principal axis appearing to diverge from the focus, and a ray directed towards the optical centre passing undeviated. The point from which refracted rays appear to come gives the position of the virtual image."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Concave lens image is always virtual, erect and smaller than object.",
+            "Image moves closer to focus as object moves farther away.",
+            "Diverging action makes concave lenses useful for correcting short-sightedness.",
+            "Use dotted lines to represent virtual rays/images in diagrams."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "formula-and-sign-convention",
+      "title": "Lens Formula, Magnification and Sign Convention",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The lens formula relates object distance (u), image distance (v) and focal length (f): 1/v - 1/u = 1/f. Magnification m is given by m = v/u = h'/h, where h' is image height and h is object height. Magnification indicates size and, by sign, the nature/orientation of the image according to the chosen convention."
+        },
+        {
+          "type": "paragraph",
+          "text": "A common Cartesian sign convention takes the optical centre as origin and principal axis as reference: distances measured in the direction of incident light are positive, opposite are negative; heights above axis are positive, below negative. Focal length is positive for convex lenses and negative for concave lenses in this convention. Consistency in signs is critical for correct results."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Convex lens: f positive; real image usually gives v positive and m negative (inverted).",
+              "note": "Virtual image formed on same side as object gives v negative."
+            },
+            {
+              "text": "Concave lens: f negative, v negative, m positive and less than 1.",
+              "note": "Image is virtual, erect and diminished."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications-and-numericals",
+      "title": "Applications and Numerical Practice",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Convex lenses are used in magnifying glasses, cameras, projectors and corrective lenses for hypermetropia, while concave lenses are used in spectacles for myopia and in some optical systems to diverge light. Choosing the correct lens depends on whether convergence or divergence and the required image type are needed."
+        },
+        {
+          "type": "paragraph",
+          "text": "In numerical problems, list given values with signs, substitute into 1/v - 1/u = 1/f, and solve carefully. Calculate magnification to determine image size and orientation. Always state the nature of the image (real/virtual, erect/inverted, magnified/diminished/same size) along with position where required."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Write the sign convention used if not specified.",
+            "Convert all distances to the same unit before calculation.",
+            "Check whether the answer matches expected image nature for the lens.",
+            "Draw a rough ray diagram to verify numerical results."
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Principal rays for a convex lens.",
+      "description": "Ray parallel to axis refracted through focus and ray through optical centre undeviated forming an image."
+    },
+    {
+      "caption": "Image formation positions for convex lens.",
+      "description": "Set of diagrams showing object at different positions and corresponding image characteristics."
+    },
+    {
+      "caption": "Image formation by a concave lens.",
+      "description": "Parallel ray diverging as if from focus producing a virtual, erect, diminished image on object side."
+    }
+  ],
+  "keyPoints": [
+    "Convex lenses converge light; concave lenses diverge light.",
+    "Key terms include optical centre, principal axis, principal focus and focal length.",
+    "Convex lenses can form real or virtual images depending on object position.",
+    "Concave lenses always form virtual, erect and diminished images for real objects.",
+    "Lens formula: 1/v - 1/u = 1/f; magnification: m = v/u = h'/h.",
+    "Consistent sign convention is essential for correct numerical answers.",
+    "Ray diagrams use principal rays to locate images.",
+    "Image nature should be stated as real/virtual, erect/inverted and size.",
+    "Convex lens as magnifier requires object between F and optical centre.",
+    "Applications depend on image properties produced by each lens."
+  ],
+  "examFocus": [
+    "Draw ray diagrams for standard object positions for convex and concave lenses.",
+    "State image characteristics for each case clearly.",
+    "Apply lens formula and magnification with correct signs.",
+    "Define principal focus, focal length and optical centre.",
+    "Explain use of convex lens as magnifying glass and concave lens in myopia correction.",
+    "Interpret positive/negative values of v, f and m.",
+    "Present numerical steps with units and final image description."
+  ],
+  "vocabulary": [
+    {
+      "word": "Lens",
+      "meaning": "A transparent refracting medium that converges or diverges light rays."
+    },
+    {
+      "word": "Convex lens",
+      "meaning": "A converging lens thicker at the centre than at the edges."
+    },
+    {
+      "word": "Concave lens",
+      "meaning": "A diverging lens thinner at the centre than at the edges."
+    },
+    {
+      "word": "Principal axis",
+      "meaning": "Line joining centres of curvature and passing through the optical centre."
+    },
+    {
+      "word": "Principal focus",
+      "meaning": "Point where rays parallel to principal axis converge or appear to diverge."
+    },
+    {
+      "word": "Focal length",
+      "meaning": "Distance between optical centre and principal focus."
+    },
+    {
+      "word": "Optical centre",
+      "meaning": "Point of a lens through which light passes without deviation."
+    },
+    {
+      "word": "Magnification",
+      "meaning": "Ratio of image height to object height, also equal to v/u."
+    },
+    {
+      "word": "Real image",
+      "meaning": "Image formed by actual convergence of rays that can be obtained on a screen."
+    },
+    {
+      "word": "Virtual image",
+      "meaning": "Image formed by apparent divergence of rays that cannot be obtained on a screen."
+    },
+    {
+      "word": "Sign convention",
+      "meaning": "Set of rules assigning positive/negative signs to distances and heights in optics."
+    },
+    {
+      "word": "Lens formula",
+      "meaning": "Relation 1/v - 1/u = 1/f connecting object distance, image distance and focal length."
+    }
+  ],
+  "questions": [
+    {
+      "id": "icse-10-phy-q-lens-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A convex lens is also called a:",
+      "options": [
+        "converging lens",
+        "diverging lens",
+        "plane lens",
+        "reflecting lens"
+      ],
+      "correctIndex": 0,
+      "answer": "converging lens",
+      "explanation": "A convex lens converges parallel rays to a focus.",
+      "commonMistake": "Concave lenses are diverging lenses."
+    },
+    {
+      "id": "icse-10-phy-q-lens-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A concave lens always forms an image that is:",
+      "options": [
+        "real and inverted",
+        "virtual, erect and diminished",
+        "real and magnified",
+        "virtual and inverted"
+      ],
+      "correctIndex": 1,
+      "answer": "virtual, erect and diminished",
+      "explanation": "For a real object, a concave lens produces a virtual, erect and smaller image on the same side.",
+      "commonMistake": "Real images cannot be formed by a concave lens for real objects."
+    },
+    {
+      "id": "icse-10-phy-q-lens-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "prompt": "A convex lens forms a virtual, erect and magnified image when the object is placed:",
+      "options": [
+        "at infinity",
+        "beyond 2F",
+        "between F and optical centre",
+        "at 2F"
+      ],
+      "correctIndex": 2,
+      "answer": "between F and optical centre",
+      "explanation": "This is the principle of a simple magnifying glass.",
+      "commonMistake": "Beyond F, a convex lens forms real images (except at F giving image at infinity)."
+    },
+    {
+      "id": "icse-10-phy-q-lens-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "prompt": "The lens formula is:",
+      "options": [
+        "1/f = 1/v + 1/u",
+        "v/u = 1/f",
+        "f = v + u",
+        "1/v - 1/u = 1/f"
+      ],
+      "correctIndex": 3,
+      "answer": "1/v - 1/u = 1/f",
+      "explanation": "With Cartesian sign convention, the lens formula is 1/v - 1/u = 1/f.",
+      "commonMistake": "Mirror formula has a different sign form; use the lens formula here."
+    },
+    {
+      "id": "icse-10-phy-q-lens-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "prompt": "Magnification produced by a lens is given by:",
+      "options": [
+        "v/u",
+        "u/v",
+        "f/u",
+        "u/f"
+      ],
+      "correctIndex": 0,
+      "answer": "v/u",
+      "explanation": "Magnification m = height of image/height of object = v/u.",
+      "commonMistake": "Keep image distance in the numerator and object distance in the denominator."
+    },
+    {
+      "id": "icse-10-phy-q-lens-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A ray passing through the optical centre of a thin lens:",
+      "options": [
+        "is reflected back",
+        "passes undeviated",
+        "always passes through focus",
+        "becomes parallel to axis"
+      ],
+      "correctIndex": 1,
+      "answer": "passes undeviated",
+      "explanation": "For a thin lens, a ray through the optical centre emerges without deviation.",
+      "commonMistake": "This is a standard principal ray used in lens diagrams."
+    },
+    {
+      "id": "icse-10-phy-q-lens-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "prompt": "For a concave lens, the focal length is taken as:",
+      "options": [
+        "positive",
+        "zero",
+        "negative",
+        "infinite"
+      ],
+      "correctIndex": 2,
+      "answer": "negative",
+      "explanation": "In Cartesian sign convention, focal length of a concave (diverging) lens is negative.",
+      "commonMistake": "Convex lens focal length is positive in the same convention."
+    },
+    {
+      "id": "icse-10-phy-q-lens-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "prompt": "An object placed at 2F of a convex lens forms an image that is:",
+      "options": [
+        "virtual and magnified",
+        "real and diminished",
+        "virtual and erect",
+        "real, inverted and same size at 2F"
+      ],
+      "correctIndex": 3,
+      "answer": "real, inverted and same size at 2F",
+      "explanation": "At 2F, a convex lens forms a real, inverted image of equal size at 2F on the other side.",
+      "commonMistake": "Diminished image forms when object is beyond 2F."
+    },
+    {
+      "id": "icse-10-phy-q-lens-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "prompt": "A lens that is thicker at the centre than at the edges is called a ________ lens.",
+      "answer": "convex",
+      "explanation": "Convex lenses bulge outward and converge light rays.",
+      "commonMistake": "Concave lenses are thinner at the centre."
+    },
+    {
+      "id": "icse-10-phy-q-lens-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "prompt": "The point in a lens through which a ray passes without deviation is called the ________ centre.",
+      "answer": "optical",
+      "explanation": "The optical centre is a key reference point for ray diagrams.",
+      "commonMistake": "Do not confuse optical centre with principal focus."
+    },
+    {
+      "id": "icse-10-phy-q-lens-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "prompt": "A concave lens is used to correct ________ (short-sightedness).",
+      "answer": "myopia",
+      "explanation": "Concave lenses diverge rays to move the image back onto the retina for a myopic eye.",
+      "commonMistake": "Hypermetropia is corrected using convex lenses."
+    },
+    {
+      "id": "icse-10-phy-q-lens-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "prompt": "Define focal length of a lens.",
+      "answer": "Focal length of a lens is the distance between its optical centre and principal focus.",
+      "explanation": "It indicates the converging or diverging power of the lens.",
+      "commonMistake": "Measure from optical centre, not from the lens surface edge."
+    },
+    {
+      "id": "icse-10-phy-q-lens-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "prompt": "State two uses of a convex lens.",
+      "answer": "A convex lens is used as a magnifying glass when the object is placed between its focus and optical centre, and in cameras/projectors to form real images. It is also used to correct hypermetropia.",
+      "explanation": "Uses depend on whether a real or magnified virtual image is required.",
+      "commonMistake": "Give uses appropriate to convex lenses, not concave lenses."
+    },
+    {
+      "id": "icse-10-phy-q-lens-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "State the characteristics of the image formed by a concave lens for a real object.",
+      "answer": "For a real object at any position, a concave lens forms an image that is virtual, erect and diminished, located between the focus and the optical centre on the same side as the object.",
+      "explanation": "These characteristics are independent of the object's distance from the lens.",
+      "commonMistake": "A concave lens does not form a real image of a real object."
+    },
+    {
+      "id": "icse-10-phy-q-lens-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "prompt": "An object is placed between F and 2F of a convex lens. Describe the image formed.",
+      "answer": "When an object is placed between F and 2F of a convex lens, the image is formed beyond 2F on the other side of the lens. The image is real, inverted and magnified.",
+      "explanation": "This case is used in projectors to obtain an enlarged real image.",
+      "commonMistake": "Do not confuse this with the magnifying glass case (object between F and O)."
+    },
+    {
+      "id": "icse-10-phy-q-lens-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "Draw/describe ray diagrams to show image formation by a convex lens when the object is (i) beyond 2F and (ii) between F and optical centre.",
+      "answer": "(i) Beyond 2F: draw a ray parallel to the principal axis refracted through F on the other side, and a ray through optical centre passing undeviated. The rays meet between F and 2F, forming a real, inverted, diminished image. (ii) Between F and optical centre: draw the same principal rays; after refraction they diverge on the other side and appear to meet on the same side as the object when extended backward, forming a virtual, erect, magnified image.",
+      "explanation": "Real images form where refracted rays actually meet; virtual images form where they appear to meet.",
+      "commonMistake": "Use dotted lines for virtual rays/extensions and label F, 2F and O."
+    },
+    {
+      "id": "icse-10-phy-q-lens-17",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "Explain the sign convention used for lenses and apply it to state the signs of u, v and f for a concave lens forming an image of a real object.",
+      "answer": "In Cartesian sign convention, all distances are measured from the optical centre. Distances measured in the direction of incident light are positive and opposite to it are negative. Heights above the principal axis are positive and below are negative. For a concave lens with a real object placed on the side from which light comes, object distance u is negative (measured opposite to incident light), image distance v is negative (virtual image on same side as object), and focal length f is negative because the lens is diverging.",
+      "explanation": "Consistent sign assignment is necessary before using lens formula.",
+      "commonMistake": "Do not mix different sign conventions in the same calculation."
+    },
+    {
+      "id": "icse-10-phy-q-lens-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "An object 4 cm high is placed 30 cm from a convex lens of focal length 20 cm. Find the position, nature and size of the image.",
+      "answer": "Using sign convention, u = -30 cm, f = +20 cm. Lens formula: 1/v - 1/u = 1/f ⇒ 1/v - 1/(-30) = 1/20 ⇒ 1/v + 1/30 = 1/20 ⇒ 1/v = 1/20 - 1/30 = (3-2)/60 = 1/60, so v = +60 cm. Magnification m = v/u = 60/(-30) = -2. Image height h' = m × h = -2 × 4 = -8 cm. The image is formed 60 cm on the other side of the lens, real, inverted and magnified (8 cm high).",
+      "explanation": "Positive v indicates a real image on the opposite side; negative magnification indicates inversion.",
+      "commonMistake": "Substitute u with correct sign and interpret the sign of v and m properly."
+    },
+    {
+      "id": "icse-10-phy-q-lens-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "Why can a concave lens not be used as a magnifying glass? Explain using image characteristics.",
+      "answer": "A magnifying glass must produce a virtual, erect and magnified image of a close object. A concave lens always forms a virtual and erect image, but the image is diminished for a real object at any position. Since it cannot magnify the object, a concave lens is unsuitable as a magnifying glass; a convex lens used with the object between F and optical centre provides the required magnification.",
+      "explanation": "Magnification greater than 1 in size is necessary for a magnifying glass.",
+      "commonMistake": "Virtual and erect alone are not sufficient; size must be magnified."
+    },
+    {
+      "id": "icse-10-phy-q-lens-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "prompt": "A student obtains a sharp image of a distant object on a screen using a convex lens. What does the distance between the lens and screen represent? Explain.",
+      "answer": "Rays from a distant object are nearly parallel to the principal axis. A convex lens converges parallel rays at its principal focus, forming a real, inverted image at the focus. Therefore, when a sharp image of a distant object is obtained on the screen, the distance between the lens and the screen is approximately equal to the focal length of the lens.",
+      "explanation": "This method is commonly used to estimate focal length experimentally.",
+      "commonMistake": "The object must be very far away for rays to be treated as parallel."
+    },
+    {
+      "id": "icse-10-phy-q-lens-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 5,
+      "prompt": "An object is placed 15 cm from a concave lens of focal length 10 cm. Calculate the image distance and magnification, and describe the image.",
+      "answer": "Using sign convention, u = -15 cm, f = -10 cm. Lens formula: 1/v - 1/u = 1/f ⇒ 1/v - 1/(-15) = 1/(-10) ⇒ 1/v + 1/15 = -1/10 ⇒ 1/v = -1/10 - 1/15 = (-3 - 2)/30 = -5/30 = -1/6, so v = -6 cm. Magnification m = v/u = (-6)/(-15) = 0.4. The image is formed 6 cm from the lens on the same side as the object, and it is virtual, erect and diminished (0.4 times the object size).",
+      "explanation": "Negative v confirms a virtual image on the object side; positive m less than 1 confirms erect and diminished.",
+      "commonMistake": "Apply negative signs for both u and f for a concave lens in Cartesian convention."
+    },
+    {
+      "id": "icse-10-phy-q-lens-22",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "prompt": "How does moving an object from beyond 2F towards F affect the image formed by a convex lens?",
+      "answer": "When the object is beyond 2F, the image is real, inverted and diminished between F and 2F. As the object moves towards 2F, the image moves towards 2F and increases in size, becoming equal to the object at 2F. When the object moves between 2F and F, the image moves beyond 2F and becomes magnified. At F, the image is formed at infinity. Thus, as the object approaches F, the real image moves farther away and becomes larger.",
+      "explanation": "Object and image positions change in opposite directions for real image formation by a convex lens.",
+      "commonMistake": "State changes in position, size and nature clearly for each range."
+    }
+  ]
+}

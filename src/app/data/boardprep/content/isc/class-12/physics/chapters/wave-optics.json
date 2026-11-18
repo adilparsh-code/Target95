@@ -1,0 +1,759 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-wave-optics",
+  "title": "Wave Optics",
+  "kind": "physics",
+  "tagline": "Huygens' principle, interference, diffraction and polarisation treated as the wave character of light in the ISC XII syllabus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus (Unit 6 — Optics, wave optics portion; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the syllabus topics registered for this chapter; UNVERIFIED against the primary CISCE PDF in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC 2027 Physics syllabus (Unit 6 — Optics); no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Wave optics is the branch of optics that describes light as a wave. That description becomes necessary whenever two or more light contributions overlap and combine, or when light passes near an obstacle or an opening whose size is not much larger than the wavelength. In the ISC syllabus the wave side of optics is built on Huygens' principle, which lets us predict the shape of a wavefront at a later time from its shape at an earlier time, and on the idea of superposition, which is the reason waves can interfere. The chapter then develops the two most important experimental results that established the wave nature of light: interference, as in Young's double slit experiment, and diffraction, as in the single slit pattern and the diffraction grating. Polarisation is included because it shows that light is a transverse wave and gives a clean experimental distinction between wave optics and ray optics. Throughout the chapter the emphasis is on the physical meaning of the formulas, the conditions under which they apply, and the difference between the ideal patterns derived here and the patterns actually seen in the laboratory.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Optics — wave optics portion"
+      },
+      {
+        "label": "Theory marks context",
+        "value": "Unit 6 Optics in the reproduced 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Huygens' principle",
+        "value": "each point on a wavefront acts as a source of secondary wavelets, and the new wavefront is the envelope of those wavelets"
+      },
+      {
+        "label": "Superposition",
+        "value": "when two or more waves overlap, the resultant displacement is the sum of the individual displacements"
+      },
+      {
+        "label": "Coherent sources",
+        "value": "sources with a constant phase difference and the same frequency, needed for steady interference"
+      },
+      {
+        "label": "Young's double slit",
+        "value": "fringe spacing beta = lambda D / d for small angles in air"
+      },
+      {
+        "label": "Fringe width",
+        "value": "beta = lambda D / d, where D is the screen distance and d is the slit separation"
+      },
+      {
+        "label": "Single slit minima",
+        "value": "a sin theta = n lambda for n = 1, 2, 3,..."
+      },
+      {
+        "label": "Diffraction grating",
+        "value": "d sin theta = n lambda for normal incidence"
+      },
+      {
+        "label": "Polarisation by scattering",
+        "value": "scattered light at 90 degrees to the incident beam is linearly polarised"
+      },
+      {
+        "label": "Brewster's law",
+        "value": "tan i_B = n for complete polarisation of the reflected ray"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State Huygens' principle and use it to explain reflection, refraction and the shape of wavefronts for plane and spherical waves.",
+    "Explain the principle of superposition and distinguish coherent from incoherent sources, including the conditions needed for sustained interference.",
+    "Describe Young's double slit experiment, derive the condition for bright and dark fringes, and obtain the fringe width formula.",
+    "Explain single slit diffraction, state the condition for minima and the position of the central maximum, and compare the diffraction pattern with the interference pattern.",
+    "State the grating equation d sin theta = n lambda and use it to find wavelength or grating spacing.",
+    "Explain polarisation by scattering and by reflection, state Brewster's law, and describe the use of polaroids."
+  ],
+  "learn": [
+    {
+      "id": "huygens-principle",
+      "title": "Huygens' principle and wavefronts",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Huygens' principle is a geometrical construction for predicting how a wavefront moves. It says that every point on a wavefront can be treated as a source of secondary wavelets that spread out in the forward direction at the speed of light. After a time t, the new wavefront is the surface that is tangent to all these wavelets. This idea is enough to explain the advance of both plane and spherical wavefronts. A plane wavefront stays plane, a spherical wavefront stays spherical, and when a wavefront strikes a boundary, the same construction gives the reflected and refracted wavefronts and leads back to the ordinary laws of reflection and refraction."
+        },
+        {
+          "type": "paragraph",
+          "text": "A wavefront is a surface on which the phase of the wave is the same. For a point source the wavefronts are concentric spheres, and at large distances a small patch of a spherical wavefront is approximately plane. Rays are perpendicular to wavefronts and point in the direction of energy travel. The important point of wave optics is that Huygens' construction is not just a picture; it can be used to derive reflection and refraction and to lay the foundation for interference and diffraction."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Wavefront: surface of constant phase.",
+            "Ray: line perpendicular to the wavefront, in the direction of energy propagation.",
+            "Huygens' construction gives the reflected and refracted wavefronts from a boundary.",
+            "Plane wave: wavefronts are parallel planes; spherical wave: wavefronts are concentric spheres.",
+            "The principle is the starting point for the wave explanation of interference and diffraction."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Use Huygens' principle to explain why the angle of incidence equals the angle of reflection.",
+              "note": "Draw a plane wavefront hitting a mirror at an angle. The part of the wavefront that reaches the mirror first acts as a source of a secondary wavelet, while the rest of the wavefront is still travelling. Constructing the envelope of the wavelets gives a reflected wavefront whose geometry forces the angle of reflection to equal the angle of incidence."
+            },
+            {
+              "text": "Sketch the wavefronts before and after refraction at a plane surface and indicate how Huygens' construction gives Snell's law.",
+              "note": "When a plane wavefront moves from a rarer to a denser medium, the wavelets on the denser side travel more slowly. The envelope of the wavelets is bent toward the normal, and the geometry of the construction yields n1 sin i = n2 sin r."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "superposition-and-coherence",
+      "title": "Superposition and coherence",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The principle of superposition says that when two or more waves arrive at the same point, the resultant displacement at that point is the vector sum of the displacements that each wave would have produced on its own. For light this principle is what makes interference possible. If two waves arrive in phase, their electric fields add and the light is brighter; if they arrive out of phase, they can partly or completely cancel. Superposition itself is simple, but steady observable interference requires coherent sources. Two sources are coherent if they have the same frequency and a constant phase difference. If the phase difference changes randomly and rapidly, the interference fringes will change far too quickly for the eye or a detector to see a steady pattern, and the result will be uniform illumination."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Superposition: resultant displacement equals the sum of the individual displacements.",
+            "Interference is the consequence of superposition of coherent waves.",
+            "Constructive interference: waves arrive in phase, path difference = n lambda.",
+            "Destructive interference: waves arrive out of phase, path difference = (2n + 1) lambda/2.",
+            "Coherent sources: same frequency and constant phase difference.",
+            "Two separate ordinary light sources are not coherent because their phase difference varies randomly."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Explain why two different sodium lamps do not produce a stable interference pattern.",
+              "note": "Each lamp emits light waves with a phase that varies randomly and is not linked to the phase of the other lamp. The phase difference between the two sources changes too quickly to give a steady pattern, so no stable fringes are seen."
+            },
+            {
+              "text": "Why is a single source often split into two in interference experiments?",
+              "note": "Splitting light from one source guarantees that the two beams come from the same original wave and therefore have a constant phase relationship. This is the origin of coherence in Young's experiment and in many other interference arrangements."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "youngs-double-slit",
+      "title": "Young's double slit experiment",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Young's double slit experiment is the standard demonstration of the interference of light. Light from a single source falls on two very narrow slits S1 and S2, which act as two coherent sources because the light reaching them comes from the same original wavefront. The light from the two slits overlaps on a screen placed at some distance D, and a pattern of alternate bright and dark fringes is seen. For small angles the path difference between the two slits at a point on the screen is approximately d sin theta, and the bright fringes occur where that path difference is n lambda. The position of the nth bright fringe from the central maximum is given by y_n = n lambda D / d, and the fringe width, which is the distance between successive bright fringes, is beta = lambda D / d."
+        },
+        {
+          "type": "paragraph",
+          "text": "The central fringe is bright because at the centre the two paths are equal and the waves arrive in phase. The bright and dark fringes are equally spaced only in the small-angle approximation. If the apparatus is immersed in a medium of refractive index n, the wavelength becomes lambda/n and the fringe width decreases by the same factor. The experiment is historically important because it showed that light can interfere, which is a wave phenomenon, and that the fringe spacing can be used to measure the wavelength of light."
+        },
+        {
+          "type": "table",
+          "caption": "Conditions and results for Young's double slit interference in air",
+          "columns": [
+            "Quantity",
+            "Expression",
+            "Remarks"
+          ],
+          "rows": [
+            [
+              "Path difference at angle theta",
+              "d sin theta",
+              "Small-angle approximation used for simple results"
+            ],
+            [
+              "Bright fringe condition",
+              "d sin theta = n lambda",
+              "n = 0, 1, 2,..."
+            ],
+            [
+              "Dark fringe condition",
+              "d sin theta = (2n + 1) lambda/2",
+              "n = 0, 1, 2,..."
+            ],
+            [
+              "Central fringe",
+              "n = 0",
+              "Bright, equal path from both slits"
+            ],
+            [
+              "Fringe width",
+              "beta = lambda D / d",
+              "Distance between successive bright fringes"
+            ],
+            [
+              "Wavelength in medium",
+              "lambda/n",
+              "Fringe width decreases by factor n in a medium"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In Young's double slit experiment the slits are 0.5 mm apart and the screen is 1 m away. The fringe width is 1 mm. Find the wavelength used.",
+              "note": "beta = lambda D / d, so lambda = beta d / D = (1 x 10^-3)(0.5 x 10^-3) / 1 = 5 x 10^-7 m = 500 nm. This lies in the visible region and is typical for a greenish yellow source."
+            },
+            {
+              "text": "If the same apparatus is immersed in water of refractive index 4/3, what happens to the fringe width?",
+              "note": "The wavelength in water is lambda/ (4/3), so the fringe width becomes beta/(4/3), that is, it decreases to 3/4 of its value in air."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diffraction-single-slit",
+      "title": "Single slit diffraction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Diffraction is the bending and spreading of waves when they pass an obstacle or through an aperture. In single slit diffraction, a narrow slit of width a is illuminated by monochromatic light, and the light spreads out beyond the slit to form a pattern on a screen. Unlike ray optics, which would predict a sharp image of the slit, the wave picture gives a broad central bright region with much weaker secondary maxima on either side. The condition for the dark fringes (minima) in the single slit pattern is a sin theta = n lambda, with n = 1, 2, 3 and so on, but n = 0 is not a minimum because the central maximum corresponds to n = 0."
+        },
+        {
+          "type": "paragraph",
+          "text": "The central maximum is much wider and brighter than the secondary maxima. The first minima on either side occur at a sin theta = plus or minus lambda, so the angular width of the central maximum is 2 lambda / a. As the slit is made narrower, the central maximum becomes broader, which is the opposite of what ray optics would suggest. This spreading is the clearest everyday sign that light behaves as a wave. The diffraction pattern is due to the interference of wavelets from different parts of the same slit, which is why a single opening is enough to produce a pattern."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Single slit minima: a sin theta = n lambda, n = 1, 2, 3,...",
+            "Central maximum: n = 0, extends between a sin theta = -lambda and a sin theta = +lambda.",
+            "Angular width of central maximum: 2 lambda / a.",
+            "Secondary maxima are much weaker than the central maximum.",
+            "Narrower slit: broader diffraction pattern.",
+            "Diffraction is strong when the slit width is comparable to the wavelength."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Light of wavelength 600 nm falls on a single slit of width 0.1 mm. Find the angle of the first minimum.",
+              "note": "a sin theta = lambda, so sin theta = lambda / a = (600 x 10^-9) / (0.1 x 10^-3) = 6 x 10^-3. For such a small angle, theta is about 0.34 degrees."
+            },
+            {
+              "text": "In the same setup, what is the angular width of the central maximum?",
+              "note": "Angular width = 2 lambda / a = 2 x 6 x 10^-3 = 1.2 x 10^-2 radians, which is about 0.69 degrees. This is the angle between the first minimum on one side and the first minimum on the other side."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diffraction-grating",
+      "title": "Diffraction grating",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A diffraction grating is a device with a very large number of parallel slits or lines very close together. The spacing between adjacent slits is d, called the grating element. When monochromatic light of wavelength lambda is incident normally on the grating, the diffracted light is concentrated in certain directions given by d sin theta = n lambda, where n is the order of the maximum, n = 0, 1, 2 and so on. The central maximum with n = 0 is the undeflected beam, and the higher orders appear at larger angles. Because there are many slits, the maxima are very sharp and bright compared with the broad two-slit pattern."
+        },
+        {
+          "type": "paragraph",
+          "text": "The grating is one of the most accurate ways of measuring wavelength. If the grating spacing d is known and the angle for a given order is measured, the wavelength follows from d sin theta = n lambda. The number of lines per unit length is often given instead of d. If a grating has N lines per metre, then d = 1/N. Gratings can be transmission gratings, where light passes through, or reflection gratings, where light is reflected from closely spaced grooves. Both obey the same basic grating equation for normal incidence."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Grating equation for normal incidence: d sin theta = n lambda, n = 0, 1, 2,...",
+            "Grating element d = 1/N when N is the number of lines per metre.",
+            "Central maximum: n = 0, white light is undeviated.",
+            "Higher orders are spread out like a spectrum for white light.",
+            "Many slits give sharp, bright principal maxima.",
+            "Gratings are used to measure wavelengths and to separate spectral components."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A grating has 5000 lines per cm. Find the grating element d in metres.",
+              "note": "N = 5000 lines per cm = 5 x 10^5 lines per metre, so d = 1/N = 1/(5 x 10^5) = 2 x 10^-6 m = 2000 nm."
+            },
+            {
+              "text": "Using the same grating, light of wavelength 600 nm is incident normally. Find the angle of the first-order maximum.",
+              "note": "d sin theta = lambda, so sin theta = lambda / d = 600 / 2000 = 0.3, so theta = arcsin(0.3) ≈ 17.5 degrees."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polarisation",
+      "title": "Polarisation of light",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Polarisation shows that light is a transverse wave. In an ordinary beam of light the electric field vibrates in many directions perpendicular to the direction of propagation. A polariser is a material that transmits only the component of the electric field along a particular direction, so the transmitted light is linearly polarised. The most common classroom examples are polarisation by scattering and polarisation by reflection. Scattered light at 90 degrees to the direction of the incident sunlight is largely linearly polarised. Light reflected from a non-metallic surface at a particular angle, called Brewster's angle, is completely polarised parallel to the surface."
+        },
+        {
+          "type": "paragraph",
+          "text": "Brewster's law states that when light is incident at Brewster's angle i_B, the reflected ray and the refracted ray are at right angles to each other, and the reflected light is completely polarised. Brewster's law is tan i_B = n, where n is the refractive index of the denser medium relative to the rarer one. A polaroid sheet can be used as an analyser: if linearly polarised light passes through a polaroid and the polaroid is rotated, the intensity varies between a maximum and a minimum. For completely unpolarised light the transmitted intensity does not change on rotation."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Linearly polarised light: electric field vibrates in one plane only.",
+            "Polaroid: transmits the component of the electric field along its pass axis.",
+            "Polarisation by scattering: light scattered at 90 degrees is polarised.",
+            "Brewster's law: tan i_B = n, with reflected and refracted rays perpendicular.",
+            "Malus's law: transmitted intensity I = I_0 cos^2 theta for the angle between the polarisation direction and the analyser pass axis.",
+            "Unpolarised light through a polaroid: intensity is halved for an ideal polariser."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find Brewster's angle for glass of refractive index 1.5.",
+              "note": "tan i_B = n = 1.5, so i_B = arctan(1.5) ≈ 56.3 degrees. At this angle the reflected light is completely polarised."
+            },
+            {
+              "text": "Plane polarised light of intensity I_0 passes through an analyser whose pass axis makes 60 degrees with the polarisation direction. Find the transmitted intensity.",
+              "note": "By Malus's law, I = I_0 cos^2 60 = I_0 (1/2)^2 = I_0/4. The transmitted intensity is one quarter of the incident polarised intensity."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Huygens' principle says each point on a wavefront is a source of secondary wavelets, and the new wavefront is their envelope.",
+    "Superposition of coherent waves produces interference; steady fringes require a constant phase difference and the same frequency.",
+    "In Young's experiment the bright fringes satisfy d sin theta = n lambda and the fringe width is beta = lambda D / d.",
+    "The fringe width decreases in a medium because the wavelength decreases to lambda/n.",
+    "Single slit diffraction minima occur at a sin theta = n lambda, n not zero, and the central maximum is the widest and brightest part of the pattern.",
+    "A diffraction grating gives sharp principal maxima at d sin theta = n lambda and is used for wavelength measurement.",
+    "Polarisation demonstrates that light is a transverse wave.",
+    "Brewster's law gives the angle of complete polarisation by reflection: tan i_B = n.",
+    "Malus's law gives the transmitted intensity through an analyser: I = I_0 cos^2 theta.",
+    "The difference between interference and diffraction is helpful, not absolute: both come from superposition of wavelets, but interference is usually taught for two or a few sources and diffraction for a single aperture or many closely spaced slits."
+  ],
+  "examFocus": [
+    "Distinguish between interference fringes and diffraction bands: interference gives equally spaced fringes in the small-angle approximation, diffraction gives a wide central maximum with weaker secondary bands.",
+    "Know when to use the small-angle approximation and when it is not appropriate.",
+    "State that coherence, not just superposition, is needed for sustained interference.",
+    "Use the correct sign for n in the single slit minima condition and remember that n = 0 is the central maximum, not a minimum.",
+    "Convert lines per cm or per mm into grating element d before using d sin theta = n lambda.",
+    "Use Brewster's law and Malus's law correctly, and remember what each angle refers to.",
+    "Be able to explain what each experiment shows about the nature of light: interference and diffraction for the wave nature, polarisation for the transverse nature."
+  ],
+  "vocabulary": [
+    {
+      "word": "Wave optics",
+      "meaning": "The description of light as a wave, used when superposition, interference, diffraction or polarisation are important."
+    },
+    {
+      "word": "Wavefront",
+      "meaning": "A surface on which the phase of the wave is the same at a given instant."
+    },
+    {
+      "word": "Ray",
+      "meaning": "A line perpendicular to a wavefront, pointing in the direction of energy propagation."
+    },
+    {
+      "word": "Huygens' principle",
+      "meaning": "The construction in which every point on a wavefront acts as a source of secondary wavelets, and the new wavefront is the envelope of those wavelets."
+    },
+    {
+      "word": "Superposition",
+      "meaning": "The principle that the resultant displacement where waves overlap is the sum of the displacements of the individual waves."
+    },
+    {
+      "word": "Interference",
+      "meaning": "The redistribution of light intensity produced when two or more coherent waves superpose."
+    },
+    {
+      "word": "Coherent sources",
+      "meaning": "Sources with the same frequency and a constant phase difference, capable of producing a sustained interference pattern."
+    },
+    {
+      "word": "Fringe width",
+      "meaning": "The distance between successive bright or dark fringes in an interference pattern; for Young's experiment beta = lambda D / d."
+    },
+    {
+      "word": "Diffraction",
+      "meaning": "The bending and spreading of waves around an obstacle or through an aperture, prominent when the opening is comparable with the wavelength."
+    },
+    {
+      "word": "Single slit diffraction",
+      "meaning": "The pattern produced when monochromatic light passes through a narrow slit, with a broad central maximum and weaker secondary maxima."
+    },
+    {
+      "word": "Diffraction grating",
+      "meaning": "A device with many equally spaced parallel slits or lines that produces sharp principal maxima at d sin theta = n lambda."
+    },
+    {
+      "word": "Grating element",
+      "meaning": "The spacing d between adjacent slits or lines of a grating; d = 1/N when N is the number of lines per metre."
+    },
+    {
+      "word": "Polarisation",
+      "meaning": "The restriction of the electric field vibrations of light to a particular direction or plane."
+    },
+    {
+      "word": "Linearly polarised light",
+      "meaning": "Light in which the electric field vibrates in one plane only."
+    },
+    {
+      "word": "Brewster's angle",
+      "meaning": "The angle of incidence at which reflected light is completely polarised; tan i_B = n."
+    },
+    {
+      "word": "Malus's law",
+      "meaning": "The law that the transmitted intensity of plane polarised light through an analyser is I = I_0 cos^2 theta."
+    },
+    {
+      "word": "Polaroid",
+      "meaning": "A sheet polariser that transmits only the component of light along its pass axis and is used to produce or analyse polarisation."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Huygens' construction for a plane wavefront advancing",
+      "description": "A plane wavefront advancing to the right, with small circular secondary wavelets drawn from points on the wavefront. The envelope of the wavelets forms the new plane wavefront ahead of the old one. The rays are shown as short arrows perpendicular to the wavefronts. The figure is labelled to show the wavefront, the secondary wavelets, the envelope, and the constant speed of advance of the wavefront.",
+      "labels": [
+        "plane wavefront",
+        "secondary wavelets from points on the wavefront",
+        "envelope forming the new wavefront",
+        "ray perpendicular to the wavefront",
+        "direction of propagation",
+        "same wavefront spacing upstream and downstream"
+      ]
+    },
+    {
+      "caption": "Figure: Young's double slit interference pattern and geometry",
+      "description": "A schematic of Young's double slit experiment. A single source illuminates two slits S1 and S2, and the two beams overlap on a screen at distance D. Bright and dark fringes are shown on the screen with the central bright fringe labelled. The geometry shows the slit separation d, the screen distance D, the position y_n of the nth fringe, and the path difference between the two slits. The labels identify the sources, the overlapping region, and the fringe spacing beta.",
+      "labels": [
+        "single source",
+        "slits S1 and S2",
+        "coherent secondary sources",
+        "overlapping beams",
+        "screen at distance D",
+        "central bright fringe",
+        "nth bright fringe at y_n",
+        "fringe width beta",
+        "slit separation d",
+        "path difference for the nth fringe"
+      ]
+    },
+    {
+      "caption": "Figure: Single slit diffraction pattern and minimum condition",
+      "description": "The single slit diffraction intensity pattern on a screen, with a wide bright central maximum, weaker secondary maxima on each side, and minima labelled by a sin theta = n lambda for n = 1, 2, 3. Below it, a diagram of the slit shows the division of the slit into pairs of points whose contributions cancel at the first minimum. The figure conveys both the observed intensity shape and the simple minimum condition used in syllabus problems.",
+      "labels": [
+        "central bright maximum",
+        "secondary maxima",
+        "first minima on either side",
+        "minima condition a sin theta = n lambda",
+        "slit of width a",
+        "division of slit for the first minimum",
+        "destructive interference from paired points",
+        "intensity falls away from the centre"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-wave-optics-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Huygens' principle states that:",
+      "options": [
+        "every point on a wavefront acts as a source of secondary wavelets",
+        "light travels only in straight lines",
+        "the speed of light depends on the intensity of the source",
+        "only particles can explain reflection"
+      ],
+      "correctIndex": 0,
+      "answer": "every point on a wavefront acts as a source of secondary wavelets",
+      "explanation": "Huygens' principle says each point on a primary wavefront is a source of secondary wavelets, and the new wavefront is the envelope of those wavelets. This construction explains the advance of the wavefront and leads to reflection and refraction.",
+      "commonMistake": "Treating Huygens' principle as a statement about particles or about straight-line travel only."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two sources are coherent if they have:",
+      "options": [
+        "the same amplitude only",
+        "the same frequency and a constant phase difference",
+        "different frequencies and a variable phase difference",
+        "the same intensity only"
+      ],
+      "correctIndex": 1,
+      "answer": "the same frequency and a constant phase difference",
+      "explanation": "Coherent sources must maintain a constant phase relationship, which requires the same frequency and a phase difference that does not vary randomly. Without coherence there is no steady interference pattern.",
+      "commonMistake": "Thinking that equal amplitude or equal intensity alone makes sources coherent."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In Young's double slit experiment the fringe width beta is given by:",
+      "options": [
+        "beta = d / lambda D",
+        "beta = lambda D d",
+        "beta = lambda D / d",
+        "beta = d / lambda"
+      ],
+      "correctIndex": 2,
+      "answer": "beta = lambda D / d",
+      "explanation": "For small angles in Young's experiment, the fringe width is beta = lambda D / d, where D is the screen distance and d is the slit separation. Larger D or larger lambda increases the fringe spacing, and larger d decreases it.",
+      "commonMistake": "Writing the fraction upside down and getting beta proportional to d instead of inversely proportional to d."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The central fringe in Young's double slit experiment is:",
+      "options": [
+        "dark",
+        "absent",
+        "coloured only under white light",
+        "bright"
+      ],
+      "correctIndex": 3,
+      "answer": "bright",
+      "explanation": "At the centre the two paths from the slits are equal, so the path difference is zero and the waves arrive in phase. The central fringe is therefore bright.",
+      "commonMistake": "Thinking the central point must be dark because it lies between two slits."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a single slit diffraction pattern, the condition for a minimum is:",
+      "options": [
+        "a sin theta = n lambda, n = 1, 2, 3,...",
+        "a sin theta = n lambda, n = 0, 1, 2,...",
+        "d sin theta = n lambda",
+        "sin theta = n lambda / D"
+      ],
+      "correctIndex": 0,
+      "answer": "a sin theta = n lambda, n = 1, 2, 3,...",
+      "explanation": "For a single slit of width a, the minima occur at a sin theta = n lambda with n = 1, 2, 3 and so on. n = 0 corresponds to the central maximum, not a minimum.",
+      "commonMistake": "Including n = 0 among the minima and then claiming the central point is a minimum."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The angular width of the central maximum in a single slit diffraction pattern is:",
+      "options": [
+        "lambda / a",
+        "2 lambda / a",
+        "a / lambda",
+        "lambda / (2a)"
+      ],
+      "correctIndex": 1,
+      "answer": "2 lambda / a",
+      "explanation": "The first minima occur at a sin theta = plus or minus lambda, so the angular width of the central maximum is 2 lambda / a. A narrower slit gives a wider central maximum.",
+      "commonMistake": "Taking only one side of the central maximum and giving lambda / a instead of the full angular width."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A diffraction grating has N lines per metre. The grating element d is:",
+      "options": [
+        "d = N",
+        "d = 1 / (2N)",
+        "d = 1 / N",
+        "d = N / 2"
+      ],
+      "correctIndex": 2,
+      "answer": "d = 1 / N",
+      "explanation": "If there are N lines per metre, the spacing between adjacent lines is d = 1/N. This d is then used in the grating equation d sin theta = n lambda.",
+      "commonMistake": "Using N directly as the spacing without taking the reciprocal, especially when the line density is given per cm or per mm."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "According to Brewster's law, the reflected light is completely polarised when:",
+      "options": [
+        "sin i_B = n",
+        "i_B = 45 degrees always",
+        "the refracted ray is absent",
+        "tan i_B = n"
+      ],
+      "correctIndex": 3,
+      "answer": "tan i_B = n",
+      "explanation": "Brewster's law is tan i_B = n, where i_B is Brewster's angle and n is the relative refractive index. At this angle the reflected and refracted rays are perpendicular and the reflected light is completely polarised.",
+      "commonMistake": "Using sin i_B = n or assuming Brewster's angle is always 45 degrees."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In Young's double slit experiment the fringe width is directly proportional to the wavelength ______ and the screen distance D.",
+      "answer": "lambda",
+      "explanation": "Fringe width beta = lambda D / d is directly proportional to lambda and D and inversely proportional to the slit separation d.",
+      "commonMistake": "Writing 'd' or 'n' instead of the wavelength symbol lambda."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two independent sodium lamps cannot produce a stable interference pattern because they are not ______.",
+      "answer": "coherent",
+      "explanation": "Independent sources have random and unrelated phase changes, so the phase difference varies too quickly for a stable pattern. Coherent sources are needed.",
+      "commonMistake": "Writing 'bright' or 'monochromatic' instead of 'coherent'."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Unpolarised sunlight scattered at 90 degrees to the direction of the incident beam is largely ______ polarised.",
+      "answer": "linearly",
+      "explanation": "Scattering at right angles to the incident sunlight polarises the scattered light predominantly in the plane perpendicular to the original direction, which is why sky light can be strongly polarised.",
+      "commonMistake": "Writing 'unpolarised' or 'circular' instead of 'linearly'."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Huygens' principle in one or two sentences.",
+      "answer": "Huygens' principle states that every point on a wavefront acts as a source of secondary wavelets that spread out in the forward direction at the speed of light, and that the new wavefront at a later instant is the envelope of these secondary wavelets.",
+      "explanation": "The answer should mention both the secondary wavelets and the envelope idea. This is the standard short statement used in syllabus work.",
+      "commonMistake": "Giving only the wavelet part and omitting the envelope that actually defines the new wavefront."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the fringe width in Young's experiment decrease when the apparatus is immersed in water?",
+      "answer": "When the apparatus is in water, the wavelength becomes lambda/n, where n is the refractive index of water. Since fringe width beta = lambda D / d, replacing lambda by lambda/n makes the fringe width smaller by the factor 1/n, so the fringes become closer together.",
+      "explanation": "The key step is that the wavelength decreases in a medium, and the fringe width is proportional to the wavelength in the medium.",
+      "commonMistake": "Thinking the fringe width increases in water because water is denser, or forgetting to use the reduced wavelength."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between interference and diffraction as studied in this chapter.",
+      "answer": "Interference is the superposition of waves from two or a few coherent sources, producing a pattern of alternate bright and dark fringes, as in Young's double slit. Diffraction is the bending and spreading of waves when they pass an obstacle or aperture, and the single slit pattern has a broad central maximum with weaker secondary maxima. In practice both come from superposition, but the textbook distinction is that interference is usually treated for separate sources and diffraction for a single aperture or many closely spaced slits.",
+      "explanation": "The answer should contrast the origin of the patterns and the appearance of the central region, while noting the underlying superposition connection.",
+      "commonMistake": "Treating interference and diffraction as completely unrelated phenomena instead of both being superposition effects."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State Brewster's law and explain what happens to the reflected rays at Brewster's angle.",
+      "answer": "Brewster's law states that when light is incident at Brewster's angle i_B on a denser medium, tan i_B = n, where n is the refractive index of the denser medium. At this angle the reflected ray and the refracted ray are perpendicular, and the reflected ray is completely plane polarised.",
+      "explanation": "The answer should give the law and mention both the perpendicular relationship between reflected and refracted rays and the complete polarisation of the reflected ray.",
+      "commonMistake": "Giving the formula without stating that the reflected ray is completely polarised or that the reflected and refracted rays are perpendicular."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe Young's double slit experiment and derive the expression for fringe width.",
+      "answer": "A single source illuminates two narrow slits S1 and S2, which act as coherent sources because the light reaching them comes from the same wavefront. The light from the two slits overlaps on a screen at distance D and produces alternate bright and dark fringes. At a point on the screen at small angle theta from the centre, the path difference is approximately d sin theta. Bright fringes occur where d sin theta = n lambda and dark fringes where d sin theta = (2n + 1) lambda/2. For small angles sin theta is approximately y/D, so the position of the nth bright fringe is y_n = n lambda D / d. The fringe width beta = y_{n+1} - y_n = lambda D / d.",
+      "explanation": "The derivation should go from the path difference to the bright and dark conditions and then to the small-angle position and fringe width, rather than merely quoting beta.",
+      "commonMistake": "Stating beta = lambda D / d without showing the path difference or the small-angle step that links geometry to the formula."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Derive the condition for minima in a single slit diffraction pattern and explain why the central maximum is the widest.",
+      "answer": "In single slit diffraction, treat the slit of width a as made up of many point sources across its width. Consider the first minimum. Divide the slit into two equal halves. For a direction theta such that a sin theta = lambda, the path difference between wavelets from the top and the middle of the slit is lambda/2, so each point in the top half cancels a corresponding point in the bottom half. The contributions cancel across the whole slit, giving a minimum at a sin theta = lambda. Repeating the cancellation argument for pairs of halves gives minima at a sin theta = n lambda with n = 1, 2, 3. The central maximum lies between the first minima at a sin theta = -lambda and a sin theta = +lambda, so its angular width is 2 lambda / a. It is the widest part of the pattern and also the brightest because the contributions from the whole slit add constructively around theta = 0.",
+      "explanation": "The expected derivation uses the half-width cancellation argument for the first minimum and then states the general minimum condition, with the central maximum width following directly from the first minima on either side.",
+      "commonMistake": "Using the two-slit bright fringe condition for a single slit or writing a sin theta = n lambda with n starting from zero as a minimum."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A grating has 6000 lines per cm. Monochromatic light of wavelength 500 nm is incident normally. Find the highest order visible and the angle of the first-order maximum.",
+      "answer": "N = 6000 lines per cm = 6 x 10^5 lines per metre, so d = 1/N = 1/(6 x 10^5) ≈ 1.667 x 10^-6 m = 1667 nm. The grating equation is d sin theta = n lambda. For the first order, sin theta = n lambda / d = 500 / 1667 ≈ 0.30, so theta ≈ 17.5 degrees. The maximum possible order has sin theta ≤ 1, so n_max ≤ d / lambda = 1667 / 500 ≈ 3.33. The highest integer order is therefore n = 3.",
+      "explanation": "The solution should convert line density to d, use d sin theta = lambda for the first order, then use the sin theta ≤ 1 condition to find the highest order.",
+      "commonMistake": "Using N directly as d, or giving a non-integer order such as 3.33 as the highest order."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In Young's experiment the fringe width is measured as 0.8 mm for a certain wavelength. The slit separation is then halved and the screen distance is doubled. What is the new fringe width and why?",
+      "answer": "Fringe width beta = lambda D / d. If d is halved and D is doubled, the new beta is proportional to (2D) / (d/2) = 4 D / d, which is four times the original beta. So the new fringe width is 4 x 0.8 = 3.2 mm. The reason is that beta is proportional to D and inversely proportional to d, and both changes increase beta.",
+      "explanation": "The reasoning should separate the effect of halving d and doubling D and combine them multiplicatively.",
+      "commonMistake": "Changing only one of the two factors and then giving the wrong new fringe width."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "In a single slit pattern the central maximum is much brighter than the secondary maxima. Explain why this happens without using a full intensity integral.",
+      "answer": "In the central direction theta = 0, all wavelets from the slit travel the same path and arrive in phase, so they all add constructively. The result is a large resultant amplitude and a very bright central maximum. Away from the centre, different parts of the slit contribute with different phases. At the secondary maxima the contributions partly reinforce, but never as completely as at the centre, because some cancellation is always present. Near the minima, paired contributions cancel almost exactly. This is why the central maximum is the brightest and widest part of the pattern.",
+      "explanation": "The explanation should emphasise that the central maximum corresponds to complete constructive addition from the whole slit, while the secondary maxima involve only partial reinforcement.",
+      "commonMistake": "Attributing the brightness only to the width of the central maximum without mentioning the phase relationships across the slit."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "White light is used in Young's double slit experiment. What is seen at the centre and on either side? Explain the colours near the centre.",
+      "answer": "At the centre the path difference is zero for all wavelengths, so all colours overlap in phase and the central fringe is white. On either side, the first bright fringe for each wavelength occurs at a position that depends on lambda, because beta = lambda D / d. Since blue light has a shorter wavelength than red light, the blue bright fringe is closer to the centre than the red bright fringe. As a result the first coloured fringe is blue near the centre and red further out, and the pattern becomes a broad spectrum spread sideways. For higher orders the colours overlap more and the fringes get less distinct.",
+      "explanation": "The answer should describe the white central fringe and the wavelength-dependent spreading that produces the first coloured fringes, with blue nearer the centre than red.",
+      "commonMistake": "Saying the central fringe is coloured or reversing the order of blue and red relative to the centre."
+    },
+    {
+      "id": "isc-12-physics-q-wave-optics-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Plane polarised light of intensity I_0 passes through two polaroids. The first polaroid makes an angle 30 degrees with the polarisation direction of the incident light, and the second is crossed relative to the first. What fraction of I_0 emerges from the second polaroid?",
+      "answer": "After the first polaroid, the transmitted intensity is I_1 = I_0 cos^2 30 = I_0 (sqrt(3)/2)^2 = 3 I_0/4, and the emerging light is polarised along the first polaroid's pass axis. The second polaroid is crossed relative to the first, so its pass axis makes 90 degrees with the first. The light reaching it is polarised at 90 degrees to its pass axis, so the transmitted intensity is I_2 = I_1 cos^2 90 = 0. No light emerges from the second polaroid.",
+      "explanation": "The calculation should apply Malus's law twice: once for the first polaroid relative to the incident polarisation, and once for the analyser relative to the light after the first polaroid.",
+      "commonMistake": "Applying Malus's law only once or treating the crossed polaroids as if they still transmit the light after the first polaroid."
+    }
+  ]
+}

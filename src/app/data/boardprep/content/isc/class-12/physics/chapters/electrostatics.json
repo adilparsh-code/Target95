@@ -1,0 +1,961 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-electrostatics",
+  "title": "Electrostatics",
+  "kind": "physics",
+  "tagline": "Electric charge, Coulomb's law, electric fields and dipoles, Gauss's theorem, and the potential and energy of charge arrangements.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus, subject code 861, examination year 2027, academic session 2026-27. The topic coverage follows the official CISCE syllabus unit Electrostatics. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Electrostatics is the study of electric charges at rest and the fields and potentials they produce. The chapter opens from the most basic property of matter — that charge exists in two kinds and is conserved — through the force between point charges, the idea of an electric field as a property of the space around a charge, the behaviour of a pair of equal and opposite charges as an electric dipole, and the powerful but restricted result known as Gauss's theorem. It then moves from the force picture to the energy picture, defining electric potential and potential difference and showing how the work done in moving a charge relates to potential. The final ideas are conductors, dielectrics, capacitors and the energy stored in a capacitor, because these are the objects in which electrostatic ideas become useful in practice.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Electrostatics"
+      },
+      {
+        "label": "Theory marks in unit",
+        "value": "14 marks (as reproduced from syllabus mirrors; UNVERIFIED against the CISCE PDF)"
+      },
+      {
+        "label": "Charge types",
+        "value": "Positive and negative; like charges repel, unlike charges attract"
+      },
+      {
+        "label": "Conservation",
+        "value": "Total charge in an isolated system is conserved"
+      },
+      {
+        "label": "Quantisation",
+        "value": "Charge exists in integer multiples of the elementary charge e"
+      },
+      {
+        "label": "Electric field of a point charge",
+        "value": "E = (1 / 4 pi epsilon0) Q / r^2, directed radially"
+      },
+      {
+        "label": "Gauss's theorem",
+        "value": "Flux through a closed surface equals charge enclosed divided by epsilon0"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe electric charge, its conservation, quantisation and the distinction between conductors and insulators.",
+    "State Coulomb's law and use it to find the force between point charges, including the effect of a medium.",
+    "Define electric field and electric field lines, and sketch the field for a point charge, a dipole and simple charge arrangements.",
+    "Define electric dipole moment and find the torque on a dipole in a uniform electric field.",
+    "State Gauss's theorem and apply it to find the field due to an infinitely long straight wire, a plane sheet and a spherical shell.",
+    "Define electric potential and potential difference, and relate potential to field.",
+    "Calculate the potential and potential energy of charge arrangements, including a dipole in a field.",
+    "Explain capacitance, dielectric constant and the effect of a dielectric on a capacitor.",
+    "Derive the energy stored in a capacitor and use the result in numerical problems."
+  ],
+  "learn": [
+    {
+      "id": "electric-charge-and-its-properties",
+      "title": "Electric charge and its properties",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Every object that can participate in electrical phenomena contains electric charge. Charge is a fundamental property of matter, much as mass is, and it comes in two varieties labelled positive and negative. The sign convention is historical rather than deep: a glass rod rubbed with silk is said to acquire positive charge and a plastic rod rubbed with fur negative charge. What matters for physics is the behaviour, not the label. Charges of the same sign repel each other, charges of opposite sign attract, and the force acts along the straight line joining them."
+        },
+        {
+          "type": "paragraph",
+          "text": "Two conservation laws accompany this simple picture. First, charge is conserved: in an isolated system the total charge does not change, whether charges are transferred, separated or recombined. If a glass rod becomes positively charged, the silk becomes equally negatively charged, so the total remains zero. Second, charge is quantised: at the macroscopic level charge appears to vary continuously, but on the atomic scale every charge is an integer multiple of the elementary charge e, the magnitude of the charge on a single electron or proton. This means that although we usually treat charge as a continuous variable in electrostatic calculations, the underlying reality is discrete."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Charge exists in two kinds, positive and negative, and the force between them is along the line joining the charges.",
+            "Like charges repel, unlike charges attract.",
+            "Total charge in an isolated system is conserved.",
+            "Charge is quantised in multiples of the elementary charge.",
+            "A conductor allows charge to move through it; an insulator does not."
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Electric charge",
+              "meaning": "A fundamental property of matter that causes it to experience an electric force. It exists in two signs and is conserved and quantised."
+            },
+            {
+              "term": "Conductor",
+              "meaning": "A material in which charge can move freely, such as a metal, so that charge can redistribute over its surface."
+            },
+            {
+              "term": "Insulator",
+              "meaning": "A material in which charge is not free to move, so charge tends to remain where it is placed."
+            },
+            {
+              "term": "Elementary charge",
+              "meaning": "The magnitude of the charge on a single electron or proton, the quantum of charge."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coulombs-law",
+      "title": "Coulomb's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Coulomb's law is the quantitative expression of the force between two point charges at rest. If two point charges Q1 and Q2 are separated by a distance r in vacuum, the magnitude of the force between them is proportional to the product of the charges and inversely proportional to the square of the distance. The force acts along the straight line joining the charges, is repulsive for like signs and attractive for unlike signs. Written as an equation, the magnitude is F = (1 / 4 pi epsilon0) |Q1 Q2| / r^2, where epsilon0 is the permittivity of free space."
+        },
+        {
+          "type": "paragraph",
+          "text": "The constant 1 / 4 pi epsilon0 is often written as k for brevity, and in SI units its value is approximately 9 x 10^9 N m^2 C^-2. This large number is why even modest charges can produce surprisingly large forces at small distances. When the charges are in a medium other than vacuum, the force is reduced by the permittivity of the medium. For a medium of permittivity epsilon, the force becomes F = (1 / 4 pi epsilon) |Q1 Q2| / r^2, and the relative permittivity or dielectric constant K is defined by K = epsilon / epsilon0, so that in a medium F = F_vacuum / K."
+        },
+        {
+          "type": "paragraph",
+          "text": "The vector form is the important one for most problems, because force has direction. If r12 is the vector from charge 1 to charge 2, the force on charge 2 due to charge 1 is F12 = (1 / 4 pi epsilon0) Q1 Q2 / r^3 r12. The sign of the product Q1 Q2 then handles repulsion or attraction automatically: a positive product gives a force along r12, a negative product gives a force opposite to it. This is the form you should reach for when more than two charges are present, because the principle of superposition then lets you add the forces on a charge as vectors."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two point charges of +2 microcoulomb and -3 microcoulomb are 10 cm apart in vacuum. Find the magnitude and nature of the force between them.",
+              "note": "F = (9 x 10^9) x (2 x 10^-6) x (3 x 10^-6) / (0.1)^2 = 5.4 N. The charges are unlike, so the force is attractive."
+            },
+            {
+              "text": "The same charges are placed in a medium of dielectric constant 6. Find the new force.",
+              "note": "F_medium = F_vacuum / K = 5.4 / 6 = 0.9 N. The force is reduced because the medium is polarised by the charges."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Summary of Coulomb's law parameters",
+          "columns": [
+            "Quantity",
+            "Symbol",
+            "SI unit",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "Force magnitude",
+              "F",
+              "newton (N)",
+              "Proportional to product of charges, inversely to square of distance"
+            ],
+            [
+              "Coulomb constant",
+              "k = 1 / 4 pi epsilon0",
+              "N m^2 C^-2",
+              "Approximately 9 x 10^9 in vacuum"
+            ],
+            [
+              "Permittivity of free space",
+              "epsilon0",
+              "F m^-1",
+              "Relates field to charge in vacuum"
+            ],
+            [
+              "Dielectric constant",
+              "K = epsilon / epsilon0",
+              "dimensionless",
+              "Reduces force in a medium"
+            ],
+            [
+              "Distance",
+              "r",
+              "metre (m)",
+              "Separation of point charges, centre to centre"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electric-field",
+      "title": "Electric field",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The electric field is a way of describing the influence a charge has on the space around it without requiring another charge to be present. The electric field at a point is defined as the force that would act on a small positive test charge placed at that point, divided by the magnitude of the test charge. If a charge q0 experiences a force F at a point, the electric field there is E = F / q0. The test charge is imagined to be vanishingly small so that it does not disturb the distribution of charges producing the field."
+        },
+        {
+          "type": "paragraph",
+          "text": "For a point charge Q, the magnitude of the field at a distance r is E = (1 / 4 pi epsilon0) Q / r^2. The direction is away from a positive charge and towards a negative charge. This is precisely the same inverse-square dependence as Coulomb's law, because the field is essentially the force per unit charge. The superposition principle applies to fields as it does to forces: the field due to several charges is the vector sum of the fields due to each charge separately."
+        },
+        {
+          "type": "paragraph",
+          "text": "Electric field lines make the field picture visual. A field line is an imaginary curve whose tangent at any point gives the direction of the field at that point. The density of lines is a guide to the strength of the field: where lines are close together the field is strong, where they are far apart it is weak. The rules for drawing field lines are worth remembering. Lines start on positive charges and end on negative charges, they never cross, and the number of lines leaving or entering a charge is proportional to its magnitude. A uniform field, such as that between two parallel plates, is represented by parallel equally spaced lines."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two point charges +Q and +Q are placed 2 m apart. Find the electric field at the midpoint.",
+              "note": "At the midpoint each charge produces a field of magnitude E1 = (1 / 4 pi epsilon0) Q / (1)^2 directed away from itself. The two fields are equal in magnitude and opposite in direction, so the resultant field at the midpoint is zero. This is a common trap: identical charges give zero field at the midpoint, but the potential is not zero there."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Electric field",
+              "meaning": "The force per unit positive test charge at a point in space; a vector quantity."
+            },
+            {
+              "term": "Test charge",
+              "meaning": "A vanishingly small positive charge used to probe the field without disturbing the source charges."
+            },
+            {
+              "term": "Field line",
+              "meaning": "An imaginary line whose tangent gives the direction of the electric field; its density gives a guide to the field strength."
+            },
+            {
+              "term": "Uniform electric field",
+              "meaning": "A field whose magnitude and direction are the same at all points, represented by parallel equally spaced lines."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electric-dipole",
+      "title": "Electric dipole",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An electric dipole is a pair of equal and opposite point charges separated by a small distance. The dipole is a useful idealisation because it captures the behaviour of many real charge distributions, from polar molecules to the charges on a capacitor plate, and it has its own characteristic field and potential. The defining quantity is the electric dipole moment p, a vector of magnitude p = Q x 2a, where Q is the magnitude of each charge and 2a is the separation. The direction of p is from the negative charge to the positive charge."
+        },
+        {
+          "type": "paragraph",
+          "text": "The field of a dipole falls off more rapidly than the field of a single charge. On the axis of the dipole, at a point far away compared with the separation, the field is approximately E = (1 / 4 pi epsilon0) 2p / r^3, directed along the dipole moment. On the perpendicular bisector, the field is approximately E = (1 / 4 pi epsilon0) p / r^3, directed opposite to the dipole moment. Both results depend on the cube of the distance, which is the signature of a dipole: it is weaker and more directional than a single charge."
+        },
+        {
+          "type": "paragraph",
+          "text": "When a dipole is placed in a uniform external electric field E, it experiences no net force, because the two equal and opposite charges feel equal and opposite forces. It does, however, experience a torque that tends to align the dipole with the field. The torque is tau = p x E, with magnitude pE sin theta, where theta is the angle between p and E. The potential energy of a dipole in a uniform field is U = -p.E = -pE cos theta, with the zero of energy taken when the dipole is perpendicular to the field."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A dipole of moment 6 x 10^-6 C m is placed in a uniform field of 2 x 10^5 N C^-1 at an angle of 60 degrees. Find the torque.",
+              "note": "tau = pE sin theta = (6 x 10^-6) x (2 x 10^5) x sin 60 = 1.2 x 0.866 = 1.0392 N m, approximately 1.04 N m. The torque tends to reduce the angle and align the dipole with the field."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Field of a short dipole at large distances",
+          "columns": [
+            "Position",
+            "Field magnitude",
+            "Direction"
+          ],
+          "rows": [
+            [
+              "On the axis",
+              "(1 / 4 pi epsilon0) 2p / r^3",
+              "Along p"
+            ],
+            [
+              "On the perpendicular bisector",
+              "(1 / 4 pi epsilon0) p / r^3",
+              "Opposite to p"
+            ],
+            [
+              "General point (short dipole)",
+              "Depends on angle and r^3",
+              "Not purely axial or perpendicular"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electric-flux-and-gauss-theorem",
+      "title": "Electric flux and Gauss's theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electric flux is a measure of how much electric field passes through a surface. If a small area dA has a normal making an angle theta with the field E, the flux through it is d phi = E dA cos theta. For a uniform field and a flat surface, phi = E A cos theta. The flux is greatest when the field is perpendicular to the surface and zero when it is parallel. This is the same cosine factor that appears in work and in flow: flux is the dot product of the field with the area vector."
+        },
+        {
+          "type": "paragraph",
+          "text": "Gauss's theorem is one of the most powerful results in electrostatics, and it is also one of the most restricted. It states that the total electric flux through a closed surface is equal to the net charge enclosed divided by epsilon0. Written out, phi = E.dS = Q_enclosed / epsilon0, where the integral is over a closed surface. The theorem is always true for any closed surface, but it is useful for calculating the field only when the symmetry of the charge distribution makes E constant in magnitude over the surface and either parallel or perpendicular to it everywhere."
+        },
+        {
+          "type": "paragraph",
+          "text": "Three standard applications are so common that they should be known by heart, not because they are magic but because they illustrate how symmetry converts a difficult integral into a simple algebra problem. For an infinitely long straight wire with linear charge density lambda, a cylindrical Gaussian surface gives E = lambda / 2 pi epsilon0 r, directed radially. For an infinite plane sheet with surface charge density sigma, a pillbox gives E = sigma / 2 epsilon0 on each side. For a thin spherical shell of radius R with charge Q, the field outside is as if all the charge were at the centre, E = (1 / 4 pi epsilon0) Q / r^2, and the field inside is zero."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An infinite plane sheet has a surface charge density of 8.85 x 10^-12 C m^-2. Find the electric field near the sheet.",
+              "note": "E = sigma / 2 epsilon0. Using epsilon0 = 8.85 x 10^-12 F m^-1 gives E = (8.85 x 10^-12) / (2 x 8.85 x 10^-12) = 0.5 N C^-1. The field is uniform and directed away from the sheet if sigma is positive."
+            },
+            {
+              "text": "A point charge Q is at the centre of a spherical surface of radius r. Show that Gauss's theorem gives the inverse-square law.",
+              "note": "By symmetry E is radial and constant on the sphere, so phi = E x 4 pi r^2 = Q / epsilon0, giving E = (1 / 4 pi epsilon0) Q / r^2. This is in fact how Coulomb's law can be inferred from Gauss's theorem and spherical symmetry."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Electric flux",
+              "meaning": "A measure of the electric field passing through a surface; d phi = E.dA."
+            },
+            {
+              "term": "Gaussian surface",
+              "meaning": "A closed surface chosen to exploit symmetry when applying Gauss's theorem."
+            },
+            {
+              "term": "Linear charge density",
+              "meaning": "Charge per unit length, denoted lambda."
+            },
+            {
+              "term": "Surface charge density",
+              "meaning": "Charge per unit area, denoted sigma."
+            },
+            {
+              "term": "Gauss's theorem",
+              "meaning": "The total flux through a closed surface equals the enclosed charge divided by epsilon0."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electric-potential-and-potential-energy",
+      "title": "Electric potential and potential energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The electric potential at a point is the work done per unit positive charge in bringing a charge from infinity to that point without acceleration. For a point charge Q, V = (1 / 4 pi epsilon0) Q / r. Potential is a scalar, which is why it is often easier to work with than the field: potentials add algebraically, not as vectors. The potential at infinity is taken as zero by convention, which is the natural reference when the source is localised. Potential difference, or voltage, is the work done per unit charge in moving between two points."
+        },
+        {
+          "type": "paragraph",
+          "text": "The relation between potential and field is central. The field is the negative gradient of the potential, meaning that the field points in the direction of steepest decrease of potential. For one dimension this gives E = -dV/dr, and the minus sign matters: if the potential falls along a direction, the field points that way. This means you can find the field from the potential and vice versa, and in many problems the scalar potential is the quicker route."
+        },
+        {
+          "type": "paragraph",
+          "text": "The potential energy of a system of charges is the work needed to assemble them from infinity. For two point charges Q1 and Q2 separated by r, U = (1 / 4 pi epsilon0) Q1 Q2 / r. For a dipole p in a uniform field E, U = -pE cos theta. The sign of the potential energy tells you whether the configuration is stable or unstable: a dipole aligned with the field has the lowest potential energy and is most stable, while one anti-aligned has the highest."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two charges +2 microcoulomb and -2 microcoulomb are 5 cm apart. Find the potential at the midpoint.",
+              "note": "Potential is scalar and does not cancel for unlike charges. V = (9 x 10^9)(2 x 10^-6)/0.025 + (9 x 10^9)(-2 x 10^-6)/0.025 = 0. Wait — these are equal and opposite, so V = 0. The field at the midpoint is not zero, because the fields add as vectors and point from the positive to the negative charge."
+            },
+            {
+              "text": "Three charges each +1 microcoulomb are at the corners of an equilateral triangle of side 1 m. Find the potential energy of the system.",
+              "note": "U = (9 x 10^9)(1 x 10^-6)^2 / 1 for each pair, times 3 pairs, so U = 3 x 9 x 10^-3 = 0.027 J. All pairs are alike, so the result is simply 3 times a single pair."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Potential and field compared",
+          "columns": [
+            "Quantity",
+            "Type",
+            "Point charge",
+            "Dipole at large r"
+          ],
+          "rows": [
+            [
+              "Electric field",
+              "Vector",
+              "proportional to 1 / r^2",
+              "proportional to 1 / r^3"
+            ],
+            [
+              "Electric potential",
+              "Scalar",
+              "proportional to 1 / r",
+              "proportional to 1 / r^2"
+            ],
+            [
+              "Cancellation",
+              "Field",
+              "vector cancellation possible",
+              "depends on orientation"
+            ],
+            [
+              "Cancellation",
+              "Potential",
+              "algebraic cancellation",
+              "depends on sign of charges"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conductors-dielectrics-and-capacitance",
+      "title": "Conductors, dielectrics and capacitance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A conductor in electrostatic equilibrium has several striking properties. The electric field inside a conductor is zero, because any field would cause the free charges to move until they cancelled it. Any net charge on a conductor resides on its surface, and the field just outside is perpendicular to the surface with magnitude sigma / epsilon0. The whole conductor is at the same potential, which is why conductors are used to define an equipotential. These results are what make electrostatic shielding possible: a hollow metal shell protects anything inside from external fields."
+        },
+        {
+          "type": "paragraph",
+          "text": "A dielectric is an insulating material placed in an electric field. The field polarises the dielectric, shifting positive and negative charges slightly in opposite directions and producing an internal field that opposes the applied field. The result is a reduction of the net field inside the dielectric by the factor K, the dielectric constant. In a capacitor, introducing a dielectric increases the capacitance by the same factor."
+        },
+        {
+          "type": "paragraph",
+          "text": "A capacitor is a device that stores charge and energy by separating opposite charges. The capacitance C is defined by Q = C V, where Q is the magnitude of the charge on one plate and V is the potential difference. For a parallel plate capacitor with plate area A and separation d, C = epsilon0 A / d in vacuum, and C = K epsilon0 A / d with a dielectric. The energy stored is U = 1/2 C V^2 = 1/2 Q V = Q^2 / 2C, and this energy resides in the electric field between the plates."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A parallel plate capacitor has plates of area 0.01 m^2 and separation 1 mm. Find its capacitance in vacuum.",
+              "note": "C = epsilon0 A / d = (8.85 x 10^-12) x 0.01 / 0.001 = 8.85 x 10^-11 F, or 88.5 pF. The small value is typical: real capacitors achieve useful capacitance by using large area and very small separation, often with dielectrics."
+            },
+            {
+              "text": "The same capacitor is filled with a dielectric of constant 5. Find the new capacitance and the energy stored when charged to 10 V.",
+              "note": "C = 5 x 88.5 pF = 442.5 pF. U = 1/2 C V^2 = 0.5 x (442.5 x 10^-12) x 100 = 2.2125 x 10^-8 J. The dielectric both increases the capacitance and allows the capacitor to store more energy at the same voltage."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Capacitance",
+              "meaning": "The charge stored per unit potential difference; C = Q / V."
+            },
+            {
+              "term": "Dielectric constant",
+              "meaning": "The factor K by which a dielectric reduces the field and increases the capacitance compared with vacuum."
+            },
+            {
+              "term": "Equipotential",
+              "meaning": "A surface on which the potential is the same at every point; the electric field is perpendicular to it."
+            },
+            {
+              "term": "Electrostatic shielding",
+              "meaning": "The protection of a region from external electric fields by enclosing it in a conductor."
+            },
+            {
+              "term": "Energy density of electric field",
+              "meaning": "Energy stored per unit volume in the field; u = 1/2 epsilon0 E^2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revision-and-important-points",
+      "title": "Important points and revision",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electrostatics is built on a small set of rules that recur in every problem: Coulomb's law for force, the electric field as force per unit charge, the dipole moment and its torque, Gauss's theorem as the symmetry tool, potential as a scalar easier than the field, and the capacitor as the device that stores charge and energy. If you can derive each of these from the definition, and translate between force, field, potential and energy, you can handle most questions in this unit."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "State Coulomb's law in vector form and use superposition for more than two charges.",
+            "Define electric field and sketch field lines for point charges and dipoles.",
+            "Remember the dipole field falls as 1 / r^3 and the torque is p x E.",
+            "Use Gauss's theorem only when symmetry makes E constant over the Gaussian surface.",
+            "Treat potential as a scalar; add it algebraically and remember E = -dV/dr.",
+            "For a conductor at equilibrium: field inside is zero, charge is on the surface, the conductor is equipotential.",
+            "Capacitance increases by the dielectric constant; the stored energy is 1/2 C V^2."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Quick formula sheet for Electrostatics",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "When to use"
+          ],
+          "rows": [
+            [
+              "Force between point charges",
+              "F = (1 / 4 pi epsilon0) |Q1 Q2| / r^2",
+              "Two point charges in vacuum"
+            ],
+            [
+              "Force in a medium",
+              "F = F_vacuum / K",
+              "Charges in a dielectric medium"
+            ],
+            [
+              "Electric field of a point charge",
+              "E = (1 / 4 pi epsilon0) Q / r^2",
+              "Field due to a single point charge"
+            ],
+            [
+              "Dipole moment",
+              "p = Q x 2a",
+              "Defining the dipole"
+            ],
+            [
+              "Torque on a dipole",
+              "tau = pE sin theta",
+              "Dipole in a uniform field"
+            ],
+            [
+              "Field of a short dipole on axis",
+              "E = (1 / 4 pi epsilon0) 2p / r^3",
+              "Far point on the dipole axis"
+            ],
+            [
+              "Flux through a surface",
+              "phi = E A cos theta",
+              "Uniform field and flat area"
+            ],
+            [
+              "Gauss's theorem",
+              "phi = Q_enclosed / epsilon0",
+              "Closed surface, especially with symmetry"
+            ],
+            [
+              "Field of infinite line",
+              "E = lambda / 2 pi epsilon0 r",
+              "Infinitely long straight wire"
+            ],
+            [
+              "Field of infinite sheet",
+              "E = sigma / 2 epsilon0",
+              "Infinite plane sheet"
+            ],
+            [
+              "Potential of a point charge",
+              "V = (1 / 4 pi epsilon0) Q / r",
+              "From infinity to a point"
+            ],
+            [
+              "Potential energy of two charges",
+              "U = (1 / 4 pi epsilon0) Q1 Q2 / r",
+              "Assembling two point charges"
+            ],
+            [
+              "Capacitance",
+              "C = Q / V",
+              "Any capacitor"
+            ],
+            [
+              "Parallel plate capacitor",
+              "C = epsilon0 A / d",
+              "Vacuum, flat plates"
+            ],
+            [
+              "Energy stored in a capacitor",
+              "U = 1/2 C V^2",
+              "Charged capacitor"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Electric charge is conserved and quantised; like charges repel and unlike charges attract.",
+    "Coulomb's law gives the force between point charges as inversely proportional to the square of the distance.",
+    "The electric field is the force per unit positive charge; field lines indicate direction and strength.",
+    "A dipole has moment p = Q x 2a, a torque p x E in a uniform field, and potential energy -p.E.",
+    "Gauss's theorem relates flux through a closed surface to enclosed charge; use it only with symmetry.",
+    "Electric potential is a scalar; it adds algebraically and is related to field by E = -dV/dr.",
+    "Inside a conductor at equilibrium the field is zero, charge is on the surface, and the conductor is equipotential.",
+    "A dielectric reduces the field by the dielectric constant and increases a capacitor's capacitance by the same factor.",
+    "A capacitor stores energy as 1/2 C V^2, equal to the energy stored in the electric field between its plates."
+  ],
+  "examFocus": [
+    "When a numerical involves more than two charges, draw a clear free-body diagram for the charge in question and add the individual forces as vectors before substituting numbers.",
+    "Write the direction of each vector force explicitly; a correct magnitude with a missing or wrong sign loses marks.",
+    "Remember that field and potential behave differently: the field cancels at the midpoint of two equal like charges, but the potential does not necessarily cancel there.",
+    "Gauss's theorem earns marks only if you state the symmetry, the Gaussian surface, the constancy of E over the surface, and the enclosed charge.",
+    "In capacitor problems keep the order clear: first capacitance, then charge or energy, and check whether a dielectric is present before you calculate."
+  ],
+  "vocabulary": [
+    {
+      "word": "Electric charge",
+      "meaning": "The fundamental property of matter that gives rise to electric force; conserved and quantised."
+    },
+    {
+      "word": "Point charge",
+      "meaning": "An idealised charge with negligible size, used when the distance between charges is large compared with their dimensions."
+    },
+    {
+      "word": "Electric field",
+      "meaning": "The force per unit positive charge at a point in space; a vector."
+    },
+    {
+      "word": "Electric dipole",
+      "meaning": "A pair of equal and opposite charges separated by a small distance."
+    },
+    {
+      "word": "Electric dipole moment",
+      "meaning": "A vector of magnitude Q times separation, directed from negative to positive charge."
+    },
+    {
+      "word": "Electric flux",
+      "meaning": "A measure of electric field through a surface; d phi = E.dA."
+    },
+    {
+      "word": "Gauss's theorem",
+      "meaning": "The total flux through a closed surface equals the enclosed charge divided by epsilon0."
+    },
+    {
+      "word": "Electric potential",
+      "meaning": "Work done per unit charge in bringing a charge from infinity to a point."
+    },
+    {
+      "word": "Capacitance",
+      "meaning": "The charge stored per unit potential difference; C = Q / V."
+    },
+    {
+      "word": "Dielectric constant",
+      "meaning": "The factor by which a dielectric reduces the field and increases the capacitance compared with vacuum."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Electric field lines around an electric dipole",
+      "description": "Two equal and opposite charges, negative on the left and positive on the right, with curved field lines starting on the positive charge and ending on the negative charge. The lines are closest between the charges, showing the strongest field there, and spread out farther away. A small arrow labelled p points from the negative charge to the positive charge, marking the dipole moment.",
+      "labels": [
+        "positive charge",
+        "negative charge",
+        "field line",
+        "strongest field between charges",
+        "dipole moment p"
+      ]
+    },
+    {
+      "caption": "Figure: Gauss's theorem for an infinite line charge",
+      "description": "A long straight line of charge with cylindrical symmetry, surrounded by a cylindrical Gaussian surface of radius r and length L. Field lines are radial and evenly spaced, perpendicular to the curved surface. The flat ends of the cylinder have no flux because the field is parallel to them. The diagram shows the enclosed charge Q_enclosed = lambda L and the resulting field E = lambda / 2 pi epsilon0 r.",
+      "labels": [
+        "line charge",
+        "Gaussian cylinder",
+        "radial field lines",
+        "no flux through flat ends",
+        "enclosed charge"
+      ]
+    },
+    {
+      "caption": "Figure: A parallel plate capacitor with a dielectric",
+      "description": "Two parallel plates, one with positive charge and one with negative charge, facing each other with a uniform field between them. A slab of dielectric fills the space between the plates. Labels show the plate area A, the separation d, the dielectric constant K, the charge Q on each plate and the potential difference V across the plates.",
+      "labels": [
+        "positive plate",
+        "negative plate",
+        "electric field between plates",
+        "dielectric slab",
+        "area A",
+        "separation d",
+        "potential difference V"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-electrostatics-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement about electric charge is correct?",
+      "options": [
+        "Charge is conserved in an isolated system",
+        "Charge can be created from nothing in an insulator",
+        "Charge is always positive",
+        "The charge on an electron is 1 C"
+      ],
+      "correctIndex": 0,
+      "answer": "Charge is conserved in an isolated system",
+      "explanation": "Charge is conserved: the total charge in an isolated system does not change, because any charge gained by one body is lost by another. Charge comes in both signs, and the elementary charge on an electron is about -1.6 x 10^-19 C, not 1 C.",
+      "commonMistake": "Thinking charge can appear or disappear, rather than being transferred."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The force between two point charges in vacuum is F. If a medium of dielectric constant 4 is introduced between them, the new force is:",
+      "options": [
+        "4 F",
+        "F / 4",
+        "F / 2",
+        "F"
+      ],
+      "correctIndex": 1,
+      "answer": "F / 4",
+      "explanation": "In a medium the force is reduced by the dielectric constant K, so F_medium = F_vacuum / K. With K = 4 the new force is F / 4. The medium polarises and partially shields the charges from each other.",
+      "commonMistake": "Multiplying by K instead of dividing, which would increase the force instead of reducing it."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-03",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The electric field at a point is defined as the force on a small ______ test charge placed at that point, divided by the magnitude of the test charge.",
+      "answer": "positive",
+      "explanation": "The test charge is taken as vanishingly small and positive by convention, so that its sign does not affect the definition and it does not disturb the source charges. The field is then F / q0 in the direction of the force on a positive charge.",
+      "commonMistake": "Forgetting that the convention is a positive test charge, which fixes the direction of the field."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Two equal positive point charges are placed a fixed distance apart. The electric field at the midpoint is:",
+      "options": [
+        "Non-zero and directed towards one charge",
+        "Non-zero and directed away from both",
+        "Zero, because the fields cancel",
+        "Equal to the field of one charge at that point"
+      ],
+      "correctIndex": 2,
+      "answer": "Zero, because the fields cancel",
+      "explanation": "Each charge produces an equal magnitude field at the midpoint, directed away from itself. Because the charges are identical, the two fields are equal and opposite at the midpoint and cancel. The potential at the midpoint is not zero, because potential is a scalar and adds algebraically for two positive charges.",
+      "commonMistake": "Confusing field and potential and assuming the potential is also zero at the midpoint."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State Gauss's theorem and explain why it is useful for finding the electric field only for certain charge distributions.",
+      "answer": "Gauss's theorem states that the total electric flux through a closed surface equals the enclosed charge divided by epsilon0. It is useful for finding E only when the symmetry makes E constant in magnitude over the surface and either parallel or perpendicular to it everywhere, so the flux integral reduces to a simple algebraic product.",
+      "explanation": "The theorem is always true, but to solve for E we need E to be able to come outside the integral. That happens for an infinite line, an infinite plane and a spherical shell, where symmetry determines the direction and constancy of E on a suitable Gaussian surface. Without that symmetry the theorem is still correct but does not give E directly.",
+      "commonMistake": "Claiming Gauss's theorem is only true for symmetric situations, rather than only directly useful for them."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-06",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two point charges +2 x 10^-6 C and -2 x 10^-6 C are 10 cm apart in vacuum. Find the magnitude of the force between them and state whether it is attractive or repulsive.",
+      "answer": "5.4 N, attractive",
+      "explanation": "F = (1 / 4 pi epsilon0) |Q1 Q2| / r^2 = (9 x 10^9) x (2 x 10^-6) x (2 x 10^-6) / (0.1)^2 = 5400 x 10^-3 = 5.4 N. The charges are unlike, so the force is attractive. The magnitude depends on the product of the magnitudes, and the sign of the product determines attraction or repulsion.",
+      "commonMistake": "Using the distance in centimetres without converting to metres, which gives a result 10,000 times too large."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-07",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Define electric dipole moment and write the expression for the torque on a dipole in a uniform electric field.",
+      "answer": "The dipole moment is p = Q x 2a, directed from the negative to the positive charge. The torque is tau = p x E, with magnitude pE sin theta.",
+      "explanation": "The dipole moment measures the strength and orientation of the dipole; the torque tends to align the dipole with the field. The cross product form shows that the torque is zero when p is parallel or antiparallel to E, and maximum when they are perpendicular.",
+      "commonMistake": "Forgetting the direction of p is from negative to positive, which reverses signs in orientation problems."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-08",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Using Gauss's theorem, derive the electric field due to an infinite straight wire with uniform linear charge density lambda.",
+      "answer": "E = lambda / 2 pi epsilon0 r, radially outward if lambda is positive",
+      "explanation": "Choose a cylindrical Gaussian surface of radius r and length L coaxial with the wire. By symmetry E is radial and constant over the curved surface, and there is no flux through the flat ends. Flux = E x 2 pi r L = Q_enclosed / epsilon0 = lambda L / epsilon0, so E = lambda / 2 pi epsilon0 r. The field is directed radially outward for a positive line charge and inward for a negative one.",
+      "commonMistake": "Including flux through the flat ends, or forgetting that the field is not constant over the curved surface if the wire is finite."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-09",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A short electric dipole is placed in a uniform electric field at an angle of 90 degrees to the field. Its potential energy is:",
+      "options": [
+        "Maximum and positive",
+        "Maximum and negative",
+        "Minimum",
+        "Zero"
+      ],
+      "correctIndex": 3,
+      "answer": "Zero",
+      "explanation": "The potential energy is U = -pE cos theta. At theta = 90 degrees, cos theta = 0, so U = 0 by the usual convention where zero energy is taken at 90 degrees. The dipole experiences maximum torque here but has zero potential energy.",
+      "commonMistake": "Connecting maximum torque with maximum or minimum potential energy, when they depend on different trigonometric functions."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-10",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain why the electric field inside a conductor in electrostatic equilibrium is zero, and why any net charge resides on its surface.",
+      "answer": "If a field existed inside, free electrons would move until they produced an opposing field that cancelled it; equilibrium is reached only when the internal field is zero. Any net charge must then reside on the surface, because if charge were inside, Gauss's theorem over a surface just inside the conductor would enclose charge and give a non-zero field, contradicting equilibrium.",
+      "explanation": "The argument uses both the mobility of charge in a conductor and Gauss's theorem. The interior field is zero, the conductor is equipotential, and the surface charge arranges itself so the field just outside is perpendicular to the surface. This is the basis of electrostatic shielding.",
+      "commonMistake": "Saying the field is zero because the conductor is neutral, when the argument depends on equilibrium and charge mobility, not neutrality."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-11",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The electric potential at a point due to a point charge Q at distance r is:",
+      "options": [
+        "(1 / 4 pi epsilon0) Q / r",
+        "(1 / 4 pi epsilon0) Q / r^2",
+        "(1 / 4 pi epsilon0) Q r",
+        "(1 / 4 pi epsilon0) Q r^2"
+      ],
+      "correctIndex": 0,
+      "answer": "(1 / 4 pi epsilon0) Q / r",
+      "explanation": "Potential is a scalar and varies as 1 / r for a point charge, not as 1 / r^2 like the field. The 1 / r form reflects that potential is the work done per unit charge, which integrates the inverse-square field over distance.",
+      "commonMistake": "Using the same 1 / r^2 form as the field and forgetting that potential and field are different quantities."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-12",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A parallel plate capacitor has plate area 0.02 m^2 and separation 0.5 mm. It is charged to 12 V. Find the capacitance in vacuum, the charge on each plate, and the energy stored.",
+      "answer": "C = 3.54 x 10^-10 F, Q = 4.25 x 10^-9 C, U = 2.549 x 10^-8 J",
+      "explanation": "C = epsilon0 A / d = (8.85 x 10^-12) x 0.02 / 0.0005 = 3.54 x 10^-10 F. Q = C V = 3.54 x 10^-10 x 12 = 4.248 x 10^-9 C. U = 1/2 C V^2 = 0.5 x 3.54 x 10^-10 x 144 = 2.5488 x 10^-8 J. The same energy can be written as 1/2 Q V or Q^2 / 2C, which gives the same number and is a useful check.",
+      "commonMistake": "Mixing millimetres and metres, or using U = C V^2 without the factor of one-half."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-13",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The electric field just outside a charged conductor is ______ to the surface.",
+      "answer": "perpendicular",
+      "explanation": "If there were a component of field along the surface, charges would move along it and the conductor would not be in equilibrium. In equilibrium the surface is equipotential and the field is perpendicular to it.",
+      "commonMistake": "Thinking the field can be at any angle, rather than being constrained to the perpendicular by equilibrium."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-14",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A short dipole is placed in a uniform electric field. Derive the potential energy of the dipole and explain the orientation that gives the most stable configuration.",
+      "answer": "U = -p.E = -pE cos theta. The most stable orientation is when the dipole is aligned with the field (theta = 0), because then U = -pE is minimum.",
+      "explanation": "The work done to rotate the dipole into the field is stored as potential energy, and the negative sign means the field does work when the dipole aligns. The stable equilibrium is alignment with the field, the unstable equilibrium is anti-alignment, and the zero of energy is conventionally taken at perpendicular orientation.",
+      "commonMistake": "Taking the sign of the energy as arbitrary without explaining why alignment is the minimum, rather than the maximum."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-15",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The electric flux through a closed surface is 5.0 x 10^-9 N m^2 C^-1. The net charge enclosed is:",
+      "options": [
+        "5.0 x 10^-9 C",
+        "4.425 x 10^-20 C",
+        "5.65 x 10^-11 C",
+        "1.77 x 10^-28 C"
+      ],
+      "correctIndex": 1,
+      "answer": "4.425 x 10^-20 C",
+      "explanation": "By Gauss's theorem, phi = Q_enclosed / epsilon0, so Q_enclosed = phi x epsilon0 = 5.0 x 10^-9 x 8.85 x 10^-12 = 4.425 x 10^-20 C. The enclosed charge is not equal to the flux; the flux is the charge divided by epsilon0.",
+      "commonMistake": "Taking the flux value itself as the enclosed charge, forgetting the factor of epsilon0."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-16",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State two differences between electric field and electric potential.",
+      "answer": "Electric field is a vector, electric potential is a scalar. The field of a point charge falls as 1 / r^2, while the potential falls as 1 / r. The field is the negative gradient of the potential, E = -dV/dr.",
+      "explanation": "These differences explain why potential is often easier to add: scalars add algebraically, while fields require vector addition. The gradient relation also shows that if you know the potential everywhere, you can recover the field.",
+      "commonMistake": "Listing only that one is vector and one is scalar without giving a second, physically meaningful difference."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-17",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The dielectric constant K of a material is defined as:",
+      "options": [
+        "epsilon / epsilon0",
+        "epsilon0 / epsilon",
+        "both epsilon / epsilon0 and E_vacuum / E_medium",
+        "E_vacuum / E_medium"
+      ],
+      "correctIndex": 2,
+      "answer": "both epsilon / epsilon0 and E_vacuum / E_medium",
+      "explanation": "The dielectric constant is epsilon / epsilon0 by definition, and because the field inside a dielectric is reduced by the same factor, K also equals E_vacuum / E_medium. Both expressions describe the same physical property: the factor by which the material polarises.",
+      "commonMistake": "Treating the two equivalent forms as different definitions and choosing only one."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Three charges each of +1 microcoulomb are placed at the corners of an equilateral triangle of side 0.5 m. Find the total potential energy of the system.",
+      "answer": "0.054 J",
+      "explanation": "There are three identical pairs. U = 3 x (1 / 4 pi epsilon0) Q^2 / r = 3 x (9 x 10^9) x (1 x 10^-6)^2 / 0.5 = 3 x 9 x 10^-3 / 0.5 = 0.054 J. Each pair contributes an equal amount, so the total is three times a single pair.",
+      "commonMistake": "Counting only one pair or confusing side length with the distance used in the formula."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-19",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "The energy stored in a charged capacitor can be written as U = 1/2 C V^2 = 1/2 Q V = ______.",
+      "answer": "Q^2 / 2C",
+      "explanation": "All three forms are equivalent, because Q = C V. The form Q^2 / 2C is especially useful when you know the charge and capacitance but not the voltage. Each form is a different rearrangement of the same energy stored in the electric field.",
+      "commonMistake": "Forgetting that the three forms are interchangeable and using the wrong one for the given quantities."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A charge Q is split into two parts q and Q - q and placed at a fixed separation. Find the condition for the force between them to be maximum.",
+      "answer": "The force is maximum when q = Q / 2.",
+      "explanation": "F is proportional to q(Q - q) = Q q - q^2. Differentiating gives Q - 2q = 0, so q = Q / 2. This is a maximum because the second derivative is negative. The result is intuitive: the force is largest when the two charges are equal.",
+      "commonMistake": "Assuming the maximum occurs when one charge is as large as possible, instead of maximising the product q(Q - q)."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-21",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a scalar quantity?",
+      "options": [
+        "Electric field",
+        "Force on a charge",
+        "Torque on a dipole",
+        "Electric potential"
+      ],
+      "correctIndex": 3,
+      "answer": "Electric potential",
+      "explanation": "Electric potential is a scalar; the field, force and torque are vectors. This is why potentials from several charges add algebraically, while fields require vector addition.",
+      "commonMistake": "Choosing electric field because the question mentions charge, even though the field is a vector."
+    },
+    {
+      "id": "isc-12-physics-q-electrostatics-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "What is electrostatic shielding? Explain briefly how it works.",
+      "answer": "Electrostatic shielding is the protection of a region from external electric fields by enclosing it in a conductor. It works because the field inside a conductor in equilibrium is zero; charges on the outer surface rearrange to cancel the external field inside the enclosure.",
+      "explanation": "A hollow metal shell provides shielding because the interior field is zero regardless of the external field, as long as the shell is a conductor and there is no charge inside. This is why sensitive equipment is often housed in metal enclosures.",
+      "commonMistake": "Thinking shielding requires grounding, when the basic effect follows from the zero interior field in equilibrium."
+    }
+  ]
+}

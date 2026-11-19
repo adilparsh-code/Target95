@@ -38,7 +38,7 @@ const ChapterSection = forwardRef(function ChapterSection(
     <section
       ref={ref}
       id={id}
-      className={`mb-10 scroll-mt-24 ${className}`}
+      className={`mb-10 scroll-mt-44 ${className}`}
     >
       <div className="mb-5 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm">

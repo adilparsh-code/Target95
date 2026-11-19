@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { getChapterContent, hasSectionContent } from "../../../lib/chapterContent";
+import { isSectionCompleted } from "../../../lib/study/chapterSections.mjs";
 import {
   LearningObjectivesSection,
   TheorySection,
@@ -30,7 +31,7 @@ export default function ChapterContentEngine({ chapter, content = null, question
     [chapter, resolvedContent, questions]
   );
 
-  const isCompleted = (id) => completedSections.includes(`section-${id}`);
+  const isCompleted = (id) => isSectionCompleted(completedSections, id);
 
   return (
     <div className="space-y-10">

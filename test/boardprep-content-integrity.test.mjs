@@ -80,3 +80,32 @@ test("questions are well formed and free of leaked drafting text", () => {
     }
   }
 });
+
+test("ICSE X Mathematics MCQ banks keep their structure and one keyed option each", () => {
+  // Content audit regression: 18 planned chapters, 22 questions each, 8 MCQs,
+  // no repeated prompts inside the subject, and answer always equal to the
+  // keyed option text (option-position fixes must not desynchronise them).
+  const dir = path.join(ROOT, "icse/class-10/mathematics/chapters");
+  const prompts = new Map();
+  let mcqs = 0;
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json"))) {
+    const chapter = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
+    const where = path.relative(ROOT, path.join(dir, file));
+    assert.equal(chapter.reviewStatus, "draft", `${where} must stay draft`);
+    assert.equal((chapter.questions || []).length, 22, `${where} question count`);
+    const chapterMcqs = (chapter.questions || []).filter((q) => q.type === "mcq");
+    assert.equal(chapterMcqs.length, 8, `${where} MCQ count`);
+    for (const q of chapterMcqs) {
+      mcqs += 1;
+      assert.equal(q.options.length, 4, `${where}:${q.id} option count`);
+      assert.equal(q.options[q.correctIndex], q.answer, `${where}:${q.id} keyed option`);
+      const key = q.prompt.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+      assert.ok(!prompts.has(key), `${where}:${q.id} repeats ${prompts.get(key)}`);
+      prompts.set(key, q.id);
+    }
+  }
+  assert.equal(mcqs, 144, "ICSE X Mathematics must carry 144 MCQs");
+  assert.equal([
+    "icse-10-math-q-sim-16",
+  ].every((id) => [...prompts.values()].includes(id)), true, "audited MCQ id remains present");
+});

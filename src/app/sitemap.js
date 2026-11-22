@@ -4,8 +4,10 @@ import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 import { getBoards, getPublishedChapters, getSubjects } from "@/lib/boardprepCurriculum.mjs";
 
 import { officeApps } from "@/data/office";
+import { resolveSiteConfig } from "@/lib/siteConfig.mjs";
 
-const siteUrl = "https://target95.web.app";
+const site = resolveSiteConfig();
+const siteUrl = site.origin;
 const lastModified = "2026-10-15";
 
 // Every routable /Java/[chapter] page (same slugs the route pre-renders),
@@ -79,6 +81,8 @@ function newestDate(articles) {
 }
 
 export default async function sitemap() {
+  // Non-production deployments publish no sitemap at all.
+  if (!site.indexable) return [];
   const articles = await listPublishedArticles(200);
   const blogEntries = [
     {

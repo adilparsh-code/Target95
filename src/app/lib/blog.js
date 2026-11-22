@@ -6,6 +6,7 @@ export { TIME_SENSITIVE_CATEGORIES };
 const TOPIC_TERMINAL_STATUSES = ["done", "generating"];
 const MAX_TOPIC_ATTEMPTS = 3;
 import { getAdminDb } from "./firebase-admin";
+import { resolveSiteConfig } from "../../lib/siteConfig.mjs";
 
 export const BLOG_CATEGORIES = [
   "ai-technology",
@@ -165,7 +166,7 @@ export async function listPublishedArticlesByCategory(category, limit = 30) {
 }
 
 // Mirrors metadataBase in src/app/layout.js and siteUrl in src/app/sitemap.js.
-export const BLOG_SITE_URL = "https://target95.web.app";
+export const BLOG_SITE_URL = resolveSiteConfig().origin;
 
 export function articlePath(article) {
   return `/blog/${article.category}/${article.slug}`;

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { NOINDEX_VALUE, canonicalLinkHeader, resolveSiteConfig } from "@/lib/siteConfig.mjs";
 
 const protectedPrefixes = [
   "/admin",
@@ -14,19 +15,20 @@ const protectedPrefixes = [
   "/profile",
   "/rewards",
   "/settings",
+  "/student-bot",
   "/teacher",
 ];
 
 const authPages = new Set(["/login", "/register", "/forgot-password"]);
-const canonicalOrigin = "https://target95.web.app";
 
 function noindex(response) {
-  response.headers.set("X-Robots-Tag", "noindex, nofollow");
+  response.headers.set("X-Robots-Tag", NOINDEX_VALUE);
   return response;
 }
 
 export function proxy(request) {
   const { pathname } = request.nextUrl;
+  const site = resolveSiteConfig();
   const session = request.cookies.get("session")?.value;
   const isProtected = protectedPrefixes.some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
@@ -46,12 +48,15 @@ export function proxy(request) {
   }
 
   const response = NextResponse.next();
+  // Non-production deployments (staging, previews) are never indexable and
+  // never advertise a canonical URL.
+  if (!site.indexable) return noindex(response);
   if (isProtected || authPages.has(pathname)) return noindex(response);
 
   // Public pages receive a query-free HTTP canonical. The lowercase Java
   // aliases redirect before this can be indexed, while their /Java targets
   // retain their explicit route metadata.
-  response.headers.set("Link", `<${canonicalOrigin}${pathname}>; rel=\"canonical\"`);
+  response.headers.set("Link", canonicalLinkHeader(site, pathname));
   return response;
 }
 

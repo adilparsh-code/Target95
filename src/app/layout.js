@@ -6,6 +6,9 @@ import AdaptiveLight from "./components/AdaptiveLight";
 import PWAPrompt from "./components/PWAPrompt";
 import OfflineBanner from "./components/OfflineBanner";
 import IOSInstallPrompt from "./components/IOSInstallPrompt";
+import { resolveSiteConfig } from "@/lib/siteConfig.mjs";
+
+const site = resolveSiteConfig();
 
 export const metadata = {
   title: {
@@ -29,12 +32,14 @@ export const metadata = {
   authors: [{ name: "Target95+" }],
   creator: "Target95+",
   publisher: "Target95+",
-  metadataBase: new URL("https://target95.web.app"),
+  metadataBase: new URL(site.origin),
+  // Non-production deployments are never indexed (production metadata is unchanged).
+  ...(site.indexable ? {} : { robots: { index: false, follow: false } }),
   openGraph: {
     title: "Target95+ | ICSE, ISC & CBSE Computer Learning",
     description:
       "Master ICSE, ISC & CBSE with AI-powered practice, mock tests, and progress tracking.",
-    url: "https://target95.web.app",
+    url: site.origin,
     siteName: "Target95+",
     locale: "en_US",
     type: "website",

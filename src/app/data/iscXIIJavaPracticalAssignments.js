@@ -181,7 +181,7 @@ export const ISC_XII_JAVA_PRACTICALS = [
     ],
     "code": "import java.util.*;\nclass BinarySearchCount {\n    public static void main(String args[]) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n        int key = sc.nextInt(), low = 0, high = n - 1;\n        int comparisons = 0, position = -1;\n        while (low <= high) {\n            int mid = low + (high - low) / 2;\n            comparisons++;\n            if (a[mid] == key) { position = mid; break; }\n            if (key < a[mid]) high = mid - 1;\n            else low = mid + 1;\n        }\n        System.out.println(\"Position = \" + (position == -1 ? -1 : position + 1));\n        System.out.println(\"Comparisons = \" + comparisons);\n    }\n}",
     "sampleInput": "7\n3 8 12 19 25 31 44\n25",
-    "sampleOutput": "Position = 5\nComparisons = 2",
+    "sampleOutput": "Position = 5\nComparisons = 3",
     "concepts": [
       "Binary search",
       "Sorted input",
@@ -249,8 +249,8 @@ export const ISC_XII_JAVA_PRACTICALS = [
       "Display the product matrix."
     ],
     "code": "import java.util.*;\nclass MatrixMultiply {\n    public static void main(String args[]) {\n        Scanner sc = new Scanner(System.in);\n        int r1 = sc.nextInt(), c1 = sc.nextInt();\n        int r2 = sc.nextInt(), c2 = sc.nextInt();\n        if (c1 != r2) { System.out.println(\"Multiplication not possible\"); return; }\n        int[][] a = new int[r1][c1], b = new int[r2][c2], p = new int[r1][c2];\n        for (int i = 0; i < r1; i++)\n            for (int j = 0; j < c1; j++) a[i][j] = sc.nextInt();\n        for (int i = 0; i < r2; i++)\n            for (int j = 0; j < c2; j++) b[i][j] = sc.nextInt();\n        for (int i = 0; i < r1; i++)\n            for (int j = 0; j < c2; j++)\n                for (int k = 0; k < c1; k++) p[i][j] += a[i][k] * b[k][j];\n        for (int i = 0; i < r1; i++) {\n            for (int j = 0; j < c2; j++) System.out.print(p[i][j] + \" \");\n            System.out.println();\n        }\n    }\n}",
-    "sampleInput": "2 2\n2 3\n2 2\n1 4\n5 2",
-    "sampleOutput": "17 14\n23 20",
+    "sampleInput": "2 2\n2 2\n1 4\n5 2\n3 1\n2 6",
+    "sampleOutput": "11 25\n19 17",
     "concepts": [
       "2D arrays",
       "Triple nested loop",

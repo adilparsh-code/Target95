@@ -34,7 +34,7 @@ export function createSearchPostHandler({ getSession, getDb, search, logger = co
     );
 
     try {
-      const result = search(input.query, input.filters);
+      const result = await search(input.query, input.filters);
       return json(result, 200, { "X-RateLimit-Limit": "30", "X-RateLimit-Remaining": String(rate.remaining) });
     } catch (error) {
       logger.error("Web Engine internal search failed.", { code: error?.code || "unknown" });

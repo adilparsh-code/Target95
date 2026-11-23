@@ -106,7 +106,7 @@ export const ICSE_CLASS_X_CONTENT = [
     theory: [
       { heading: "One-dimensional arrays", body: "An array stores a fixed number of values of one declared type. Its valid indexes are 0 through length - 1. Use arr.length to obtain the number of elements; length is a field for arrays, not a method." },
       { heading: "Searching and sorting", body: "Linear search checks elements one by one and works on unsorted data. Binary search repeatedly halves the search interval and requires the array to be sorted. Bubble sort compares adjacent values; selection sort repeatedly selects the smallest remaining value." },
-      { heading: "Two-dimensional arrays", body: "A two-dimensional array is an array whose elements are row arrays. Use a.length for the number of rows and a[i].length for the number of columns in row i. Nested loops commonly process rows first and columns second." }
+      { heading: "Two-dimensional arrays", body: "A two-dimensional array is an array whose elements are row arrays. Use a.length for the number of rows and a[i].length for the number of columns in row i. Nested loops commonly process rows first and columns second. An array can be passed to a method as an argument; the method receives a copy of the reference and can update the elements of the same array." }
     ],
     workedExamples: [
       { title: "Find the largest value", code: `class ArrayMaximum {
@@ -149,7 +149,7 @@ export const ICSE_CLASS_X_CONTENT = [
     theory: [
       { heading: "String as an object", body: "String is a class in Java. A String object is immutable: methods such as toUpperCase, replace and substring return a result; they do not change the original object." },
       { heading: "Indexes and common methods", body: "String indexes begin at zero. length() returns the number of characters, charAt(i) returns one char, substring(begin, end) includes begin and excludes end, and indexOf returns -1 when the requested character or text is absent." },
-      { heading: "Comparing strings", body: "Use equals() for case-sensitive content equality and equalsIgnoreCase() when case should be ignored. The == operator compares object references, not String contents. compareTo() gives lexicographic ordering; do not assume its result is only -1, 0 or 1." }
+      { heading: "Comparing strings", body: "Use equals() for case-sensitive content equality and equalsIgnoreCase() when case should be ignored. The == operator compares object references, not String contents. compareTo() gives lexicographic ordering; do not assume its result is only -1, 0 or 1. StringBuilder is mutable: append, insert and delete operations modify its character sequence, unlike String methods that return new String values." }
     ],
     workedExamples: [
       { title: "Trace String methods", code: `class StringTrace {
@@ -184,7 +184,7 @@ export const ICSE_CLASS_X_CONTENT = [
     remember: ["A method signature is based on name + parameter types/order, not return type.", "Static members belong to the class; instance members belong to objects.", "private supports encapsulation by restricting direct outside access.", "Use this when parameter names hide instance variable names."],
     theory: [
       { heading: "Class, object and members", body: "A class defines a type. Its fields represent state and its methods define behaviour. An object is an instance created from the class; instance members belong to an object, while static members belong to the class." },
-      { heading: "Encapsulation and access", body: "Encapsulation keeps data and related methods together and controls access to internal state. private members are accessible within their declaring class; public members are accessible wherever the class is accessible. Use methods to validate and update private fields." },
+      { heading: "Encapsulation and access", body: "Encapsulation keeps data and related methods together and controls access to internal state. private members are accessible within their declaring class; public members are accessible wherever the class is accessible. A member with no access modifier has package access; protected also permits access to subclasses, subject to Java package and inheritance rules. Use methods to validate and update private fields. A has-a relationship represents association, where one class contains or uses an object of another class." },
       { heading: "Parameters and return values", body: "Java passes every argument by value. For an object argument, the copied value is the reference, so a method can change the referenced object's fields but cannot replace the caller's reference variable." }
     ],
     workedExamples: [

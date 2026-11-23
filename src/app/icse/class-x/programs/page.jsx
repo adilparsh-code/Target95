@@ -11,7 +11,7 @@ export default function ClassXProgramsPage() {
         <header className="mt-6 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
           <p className="text-sm font-semibold uppercase tracking-wider text-slate-500">ICSE • Computer Applications • Class X</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Java Programming Practice</h1>
-          <p className="mt-3 max-w-3xl text-slate-600">20 recommended programs covering the Class X programming progression. Normal programming/lab work is kept separate from the Disruptive Technologies written project.</p>
+          <p className="mt-3 max-w-3xl text-slate-600">CISCE requires a minimum of 15 laboratory assignments; this expanded practice set contains 20 programs covering the Class X programming progression. Normal programming/lab work is kept separate from the Disruptive Technologies written project.</p>
           <div className="mt-5 flex flex-wrap gap-2 text-sm"><span className="rounded-full bg-slate-100 px-3 py-1">20 programs</span><span className="rounded-full bg-slate-100 px-3 py-1">Easy → Hard</span><span className="rounded-full bg-slate-100 px-3 py-1">No mandatory algorithm/flowchart</span></div>
         </header>
         <section className="mt-8 grid gap-5 md:grid-cols-2">

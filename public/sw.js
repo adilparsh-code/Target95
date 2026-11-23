@@ -27,8 +27,6 @@ self.addEventListener('install', (event) => {
       caches.open(CACHE_NAME).then((cache) => {
         return cache.addAll(STATIC_ASSETS);
       }),
-      // Enable navigation preload if supported
-      self.registration?.navigationPreload?.enable(),
     ]).then(() => self.skipWaiting())
   );
 });
@@ -44,6 +42,8 @@ self.addEventListener('activate', (event) => {
             .map((name) => caches.delete(name))
         );
       }),
+      // Navigation preload needs an active worker, so enable it here (not in install)
+      self.registration?.navigationPreload?.enable().catch(() => {}),
       // Take control of all clients immediately
       self.clients.claim(),
     ])

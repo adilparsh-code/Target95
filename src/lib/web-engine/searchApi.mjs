@@ -26,7 +26,6 @@ export function validateSearchPayload(value) {
   if (classId && !Object.hasOwn(CLASS_BOARD, classId)) return invalid("Class filter is not supported.");
   const classBoard = classId ? CLASS_BOARD[classId] : null;
   if (board && classBoard && board !== classBoard && !(board === "CISCE" && classBoard !== "CBSE")) return invalid("Board and class filters do not match.");
-  if ((board === "ICSE" || board === "ISC") && classBoard !== board) return invalid("Select a matching class for the chosen CISCE board.");
 
   const subject = raw.subject === undefined ? null : String(raw.subject).trim().toLowerCase();
   if (subject) {

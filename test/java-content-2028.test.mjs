@@ -26,6 +26,18 @@ test("ICSE Class X lesson content remains mapped to all eight official topic IDs
   assert.ok(strings.practicalTasks.some((item) => /replace\(char, char\)/i.test(item)));
 });
 
+test("ICSE Class X disruptive technologies cover the prescribed 2028 topics", () => {
+  const disruptive = ICSE_CLASS_X_CONTENT.find((item) => item.topicId === "x-disruptive-technologies");
+  const text = [
+    ...disruptive.learningObjectives,
+    ...disruptive.keyConcepts,
+    ...disruptive.remember,
+  ].join(" ").toLowerCase();
+  for (const topic of ["cyber hygiene", "cyber laws", "artificial intelligence", "blockchain", "internet of things", "robotics", "5g", "cloud computing"]) {
+    assert.ok(text.includes(topic), `Missing prescribed disruptive technology topic: ${topic}`);
+  }
+});
+
 test("ISC Class XII practical distribution matches the 2028 syllabus", () => {
   assert.equal(ISC_XII_JAVA_PRACTICALS.length, 20);
   assert.equal(new Set(ISC_XII_JAVA_PRACTICALS.map((item) => item.id)).size, 20);

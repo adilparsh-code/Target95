@@ -9,7 +9,52 @@ const scoreFor = (title, term, fallback = 0.55) => {
   return fallback;
 };
 const toBoardId = (board) => (String(board || "").toUpperCase() === "CBSE" ? "cbse" : "cisce");
-const classNumberFrom = (value) => Number(String(value?.id || value || "").match(/(9|10|11|12)$/)?.[1] || 0);
+const classNumberFrom = (value) => {
+  const id = String(value?.id || value || "");
+  return Number(id.match(/(?:cbse-class-|class-)?(9|10|11|12)$/)?.[1] || 0);
+};
+const classIdFrom = (value) => String(value?.id || value || "");
+
+const CISCE_CLASS_FILTERS = Object.freeze({
+  "icse-class-9": { board: "ICSE", class: "ICSE IX" },
+  "icse-class-10": { board: "ICSE", class: "ICSE X" },
+  "isc-class-11": { board: "ISC", class: "ISC XI" },
+  "isc-class-12": { board: "ISC", class: "ISC XII" },
+});
+
+const CISCE_SUBJECT_FILTERS = Object.freeze({
+  java: ["computer applications", "computer science"],
+  "computer-applications": ["computer applications"],
+  "computer-science": ["computer science"],
+});
+
+function matchesCisceMetadata(chapter, filters) {
+  if (!chapter || typeof chapter !== "object") return false;
+  const board = String(chapter.board || "").toUpperCase();
+  if (filters.board === "cisce" && !["ICSE", "ISC"].includes(board)) return false;
+
+  const classId = classIdFrom(filters.class);
+  const expectedClass = CISCE_CLASS_FILTERS[classId];
+  if (classId && (!expectedClass || board !== expectedClass.board || chapter.class !== expectedClass.class)) return false;
+
+  const subject = String(filters.subject || "").toLowerCase();
+  if (subject) {
+    const allowedSubjects = CISCE_SUBJECT_FILTERS[subject];
+    if (!allowedSubjects || !allowedSubjects.includes(String(chapter.subject || "").toLowerCase())) return false;
+  }
+  return true;
+}
+
+function buildStudyMetadataIndex(chapters = []) {
+  const bySlug = new Map();
+  const byCanonicalId = new Map();
+  for (const chapter of chapters) {
+    if (chapter?.slug) bySlug.set(String(chapter.slug), chapter);
+    if (chapter?.canonicalId) byCanonicalId.set(String(chapter.canonicalId), chapter);
+    if (chapter?.canonicalSlug) bySlug.set(String(chapter.canonicalSlug), chapter);
+  }
+  return { bySlug, byCanonicalId };
+}
 
 /**
  * Build the internal Target95 search adapter from existing first-party sources.
@@ -20,6 +65,7 @@ export function createInternalSearchAdapter(sources) {
   const {
     searchOfficeContent,
     searchStudyContent,
+    getStudyChapters,
     searchQuestions,
     getCBSEChapters,
     getCBSEPracticeQuestions,
@@ -79,31 +125,40 @@ export function createInternalSearchAdapter(sources) {
         });
       }
     } else if (!isCBSE) {
+      const studyMetadata = getStudyChapters?.({ board: filters.board, class: filters.class }) || [];
       const study = searchStudyContent?.(term, { board: filters.board, class: filters.class }) || { chapters: [] };
-      for (const chapter of study.chapters || []) {
+      const index = buildStudyMetadataIndex([...studyMetadata, ...(study.chapters || [])]);
+      const metadataFor = (chapter) =>
+        index.bySlug.get(String(chapter?.slug || "")) ||
+        index.byCanonicalId.get(String(chapter?.canonicalId || "")) ||
+        chapter;
+
+      for (const item of study.chapters || []) {
+        const chapter = metadataFor(item);
+        if (!matchesCisceMetadata(chapter, filters)) continue;
         results.push({
           id: `chapter-${chapter.slug}`,
           type: "chapter",
           title: chapter.title,
           snippet: chapter.studyData?.intro || "",
           href: `/study/${encodeURIComponent(chapter.slug)}`,
-          board: filters.board || null,
-          class: filters.class?.id || filters.class || null,
-          chapterId: chapter.canonicalId || chapter.slug,
+          board: chapter.board || null,
+          class: chapter.class || null,
+          chapterId: chapter.canonicalId || chapter.canonicalSlug || chapter.slug,
           score: scoreFor(chapter.title, term),
         });
 
-        for (const [index, concept] of (chapter.studyData?.concepts || []).entries()) {
+        for (const [conceptIndex, concept] of (chapter.studyData?.concepts || []).entries()) {
           if (!String(concept).toLowerCase().includes(term)) continue;
           results.push({
-            id: `concept-${chapter.slug}-${index}`,
+            id: `concept-${chapter.slug}-${conceptIndex}`,
             type: "topic",
             title: concept,
             snippet: `Concept in ${chapter.title}`,
             href: `/study/${encodeURIComponent(chapter.slug)}`,
-            board: filters.board || null,
-            class: filters.class?.id || filters.class || null,
-            chapterId: chapter.canonicalId || chapter.slug,
+            board: chapter.board || null,
+            class: chapter.class || null,
+            chapterId: chapter.canonicalId || chapter.canonicalSlug || chapter.slug,
             score: scoreFor(concept, term),
           });
         }
@@ -111,13 +166,19 @@ export function createInternalSearchAdapter(sources) {
 
       for (const question of searchQuestions?.(term) || []) {
         if (filters.board && toBoardId(question.board) !== board) continue;
+        const chapter = metadataFor({
+          slug: question.chapterSlugResolved || question.chapterSlug,
+          canonicalId: question.chapterId,
+        });
+        if ((filters.class || filters.subject) && !matchesCisceMetadata(chapter, filters)) continue;
         results.push({
           id: `question-${question.id}`,
           type: "question",
           title: question.question,
           snippet: [question.chapterTitle || question.chapterSlug, question.difficulty, question.type].filter(Boolean).join(" · "),
           href: question.chapterSlugResolved ? `/Java/${encodeURIComponent(question.chapterSlugResolved)}` : "/question-bank",
-          board: question.board || null,
+          board: question.board || chapter.board || null,
+          class: chapter.class || null,
           chapterId: question.chapterId || null,
           score: scoreFor(question.question, term),
         });

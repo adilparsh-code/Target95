@@ -51,7 +51,18 @@ export const ISC_XII_TOPICS = [
 ];
 
 export const ISC_XII_PRACTICAL = {
-  projects: 1,
+  javaAssignmentsMinimum: 20,
+  pythonAssignmentsMinimum: 5,
+  totalAssignmentsMinimum: 25,
+  javaAssignmentBreakdown: {
+    methodsObjectParameterReturn: 5,
+    singleDimensionalArrays: 3,
+    doubleDimensionalArrays: 5,
+    stringHandling: 4,
+    inheritance: 3,
+  },
+  practicalExamProblems: 3,
+  practicalExamAttempts: 1,
   practicalLanguage: "Java",
 };
 

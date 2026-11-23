@@ -62,7 +62,9 @@ export function AuthProvider({ children }) {
       } catch {
         // Keep the safe generic message when the response is not JSON.
       }
-      throw new Error(message);
+      const sessionError = new Error(message);
+      sessionError.code = SESSION_ERROR_CODE;
+      throw sessionError;
     }
   };
 
@@ -93,9 +95,7 @@ export function AuthProvider({ children }) {
       } catch {
         // Ignore cleanup failures and return the original safe error.
       }
-      const message = authError?.message?.startsWith("We could not create a secure session") || authError?.message === "Email verification required."
-        ? authError.message
-        : getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -133,7 +133,7 @@ export function AuthProvider({ children }) {
       }
       return { success: true, user: credential.user, message: "Account created. Please verify your email before signing in." };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -181,9 +181,7 @@ export function AuthProvider({ children }) {
       } catch {
         // Ignore cleanup failures and return the original safe error.
       }
-      const message = authError?.message?.startsWith("We could not create a secure session")
-        ? authError.message
-        : getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -201,7 +199,7 @@ export function AuthProvider({ children }) {
       await sendPasswordResetEmail(auth, email.trim().toLowerCase());
       return { success: true, message: "Password reset email sent. Check your inbox." };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -219,7 +217,7 @@ export function AuthProvider({ children }) {
       await sendEmailVerification(auth.currentUser);
       return { success: true, message: "Verification email sent. Check your inbox." };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -236,9 +234,7 @@ export function AuthProvider({ children }) {
       setUser(profileUser);
       return { success: true, user: profileUser };
     } catch (authError) {
-      const message = authError?.message?.startsWith("We could not create a secure session")
-        ? authError.message
-        : getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -259,7 +255,7 @@ export function AuthProvider({ children }) {
       setUser((current) => ({ ...current, ...safeUpdates }));
       return { success: true };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -291,7 +287,7 @@ export function AuthProvider({ children }) {
       }
       return { success: true };
     } catch (authError) {
-      const message = getAuthMessage(authError.code);
+      const message = resolveAuthMessage(authError);
       setError(message);
       return { success: false, message };
     }
@@ -308,6 +304,23 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   return useContext(AuthContext);
+}
+
+const SESSION_ERROR_CODE = "session/failed";
+const GENERIC_AUTH_MESSAGE = "We could not complete that request. Please try again.";
+
+// Server session errors are already safe, user-facing strings, so show them
+// as-is. Anything unmapped is logged so the real cause (for example a Firestore
+// "permission-denied") is visible instead of hiding behind the generic message.
+function resolveAuthMessage(authError) {
+  if (authError?.code === SESSION_ERROR_CODE && authError.message) {
+    return authError.message;
+  }
+  const message = getAuthMessage(authError?.code);
+  if (message === GENERIC_AUTH_MESSAGE) {
+    console.error("[auth] Unmapped error:", authError?.code, authError?.message);
+  }
+  return message;
 }
 
 function getAuthMessage(code) {
@@ -327,7 +340,7 @@ function getAuthMessage(code) {
     "auth/too-many-requests": "Too many attempts. Please try again later.",
     "auth/user-disabled": "This account has been disabled. Please contact support.",
   };
-  return messages[code] || "We could not complete that request. Please try again.";
+  return messages[code] || GENERIC_AUTH_MESSAGE;
 }
 
 function getFirebaseConfigurationMessage() {

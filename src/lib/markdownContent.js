@@ -173,19 +173,33 @@ function parseKeyTerms(lines) {
 
 function parseMcqs(lines) {
   const mcqs = [];
+  const seenIds = new Set();
   let current = null;
   let options = [];
 
   const flush = () => {
     if (!current) return;
-    const answerIndex = options.findIndex((option) => /✓|\*\*?correct\*\*/i.test(option));
+    const keyed = [];
+    options.forEach((option, index) => {
+      if (/✓|\*\*?correct\*\*/i.test(option)) keyed.push(index);
+    });
+    // Exactly one marked option is a valid key. Missing or ambiguous keys are
+    // reported as invalid; they are never defaulted to option A.
+    let error = null;
+    if (options.length < 2) error = "fewer than 2 options";
+    else if (keyed.length === 0) error = "missing answer key (no ✓ on any option)";
+    else if (keyed.length > 1) error = `ambiguous answer key (${keyed.length} options marked)`;
+    if (!error && seenIds.has(current.id)) error = "duplicate question number";
+    seenIds.add(current.id);
     mcqs.push({
       id: current.id,
       question: current.question,
       options: options.map((option) =>
         option.replace(/^[-*]\s+[A-D][.)]\s*/i, "").replace(/\s*✓\s*$/, "").trim()
       ),
-      answer: answerIndex >= 0 ? answerIndex : 0,
+      answer: error ? null : keyed[0],
+      valid: !error,
+      error,
       explanation: current.explanation || "",
     });
     current = null;
@@ -208,13 +222,32 @@ function parseMcqs(lines) {
       continue;
     }
 
-    if (current && options.length && !trimmed.startsWith("-") && !trimmed.startsWith("*")) {
+    // Sub-headings and rules ("### Application-Based MCQs", "---") are
+    // structure, not the previous question's explanation.
+    if (current && options.length && !trimmed.startsWith("-") && !trimmed.startsWith("*") && !trimmed.startsWith("#")) {
       current.explanation = trimmed;
     }
   }
 
   flush();
   return mcqs;
+}
+
+const MCQ_SECTION_HEADING = /^(mcqs?|multiple[- ]choice(?: questions)?)\b/;
+
+/**
+ * Parse only the real MCQ section (the "## MCQs" top-level section), so
+ * numbered practice, programming or output questions elsewhere in the file are
+ * never mistaken for MCQs. Returns every parsed item (valid or not) plus the
+ * list of validation errors.
+ */
+export function parseMarkdownMcqs(markdown) {
+  const section = splitTopLevelSections(String(markdown || "")).find((item) =>
+    MCQ_SECTION_HEADING.test(normalizeHeading(item.heading))
+  );
+  const mcqs = section ? parseMcqs(section.body) : [];
+  const errors = mcqs.filter((q) => !q.valid).map((q) => ({ id: q.id, error: q.error }));
+  return { mcqs, errors };
 }
 
 function parseProgrammingQuestions(lines) {
@@ -304,7 +337,9 @@ function parseMarkdownContent(markdown) {
     });
   }
 
-  content.mcqs = parseMcqs(markdown.split("\n"));
+  const parsedMcqs = parseMarkdownMcqs(markdown);
+  content.mcqs = parsedMcqs.mcqs;
+  content.mcqErrors = parsedMcqs.errors;
   content.programmingQuestions = parseProgrammingQuestions(markdown.split("\n"));
 
   const introSection = sections.find((section) => normalizeHeading(section.heading).includes("evolution"));

@@ -19,6 +19,12 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Setup Java (ISC practical compilation tests)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
       - name: Verify lockfile matches package manifest
         shell: bash
         run: |

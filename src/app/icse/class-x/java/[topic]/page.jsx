@@ -40,17 +40,23 @@ export default async function ICSEClassXJavaTopicPage({ params }) {
         <Section title="Learning objectives">
           {Array.isArray(content.learningObjectives) && <ul className="list-disc space-y-2 pl-5 leading-7">{content.learningObjectives.map((item) => <li key={item}>{item}</li>)}</ul>}
         </Section>
+        <Section title="Theory">
+          {Array.isArray(content.theory) && <div className="space-y-5">{content.theory.map((item) => <div key={item.heading}><h3 className="font-bold">{item.heading}</h3><p className="mt-2 leading-7 text-slate-600 dark:text-slate-300">{item.body}</p></div>)}</div>}
+        </Section>
         <Section title="Key concepts">
           {Array.isArray(content.keyConcepts) && <ul className="list-disc space-y-2 pl-5 leading-7">{content.keyConcepts.map((item) => <li key={item}>{item}</li>)}</ul>}
         </Section>
         <Section title="Remember">
           {Array.isArray(content.remember) && <ul className="list-disc space-y-2 pl-5 leading-7">{content.remember.map((item) => <li key={item}>{item}</li>)}</ul>}
         </Section>
+        <Section title="Solved examples">
+          {Array.isArray(content.workedExamples) && <div className="space-y-6">{content.workedExamples.map((example) => <article key={example.title}><h3 className="font-bold">{example.title}</h3><pre className="mt-3 overflow-x-auto rounded-xl bg-slate-950 p-4 text-xs leading-6 text-slate-100"><code>{example.code}</code></pre><p className="mt-3 text-sm font-semibold">Output</p><pre className="mt-1 overflow-x-auto rounded-lg bg-slate-100 p-3 text-sm text-slate-900 dark:bg-slate-800 dark:text-slate-100">{example.output}</pre><ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-600 dark:text-slate-300">{example.explanation.map((line) => <li key={line}>{line}</li>)}</ul></article>)}</div>}
+        </Section>
         <Section title="Multiple-choice questions">
           {Array.isArray(content.mcqs) && <div className="space-y-4">{content.mcqs.map((item) => <details key={item.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-700"><summary className="cursor-pointer font-semibold">{item.question}</summary><ul className="mt-3 space-y-2 text-sm">{item.options.map((option) => <li key={option}>{option}</li>)}</ul><p className="mt-3 text-sm font-bold">Correct option: {item.correctAnswer}</p><p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{item.explanation}</p></details>)}</div>}
         </Section>
         <Section title="Board-style practice">
-          {Array.isArray(content.practice) && <div className="space-y-4">{content.practice.map((item) => <details key={item.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-700"><summary className="cursor-pointer font-semibold">{item.question}</summary><p className="mt-3 text-sm text-slate-600 dark:text-slate-300"><span className="font-bold">Suggested answer:</span> {item.answer}</p><p className="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">{item.marks} marks · {item.difficulty} · {item.type}</p></details>)}</div>}
+          {Array.isArray(content.practice) && <div className="space-y-4">{content.practice.map((item) => <details key={item.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-700"><summary className="cursor-pointer font-semibold">{item.question}</summary><p className="mt-3 text-sm text-slate-600 dark:text-slate-300"><span className="font-bold">Answer guidance:</span> {item.answer}</p><p className="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-500">{item.marks} marks · {item.difficulty} · {item.type}</p></details>)}</div>}
         </Section>
         <Section title="Practical tasks">
           {Array.isArray(content.practicalTasks) && <ul className="list-disc space-y-2 pl-5 leading-7">{content.practicalTasks.map((item) => <li key={item}>{item}</li>)}</ul>}

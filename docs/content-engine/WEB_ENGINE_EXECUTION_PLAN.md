@@ -1,6 +1,6 @@
 # Target95 Web Engine — execution plan and repository audit
 
-Status: Phase 0 audit recorded; implementation has not started.
+Status: Phase 0 audit recorded; Phase 1 pure contract and tests authored (execution not yet verified).
 Branch: `feat/web-engine-foundation`
 Base: `feat/content-engine-mocktest` (stacked on P1; no PR has been merged by this work).
 
@@ -104,6 +104,15 @@ Existing ACE / StudentGlobalSearch UI
 - Do not install packages or introduce a paid provider until the provider is selected.
 - Preserve current internal search behaviour and answer-free projection guarantees.
 - Do not claim external search is implemented until a real provider integration is configured and verified.
+
+## Work started on 2026-11-23
+
+- Created `feat/web-engine-foundation` from the current `feat/content-engine-mocktest` head; no existing branch or PR was changed.
+- Added `src/lib/web-engine/searchContract.mjs`: pure query validation, safe first-party path validation, HTTP(S)-only external URL validation, result DTO normalisation, score bounding, lane separation and deduplication.
+- Added `test/web-engine-search-contract.test.mjs` covering invalid queries, unsafe paths/URLs, URL fragment removal, lane separation, ranking and deduplication.
+- Added `npm run test:web-engine` and included the new test in `npm test`.
+- These files were committed through GitHub's repository API. No local runtime is available in this session, so tests, lint and build have **not** been run. Do not treat them as passing until executed in a development workspace.
+- No UI, API route, external provider, secrets, Firebase, Vercel, MockTest logic or feature flags were changed.
 
 ## Next implementation task
 

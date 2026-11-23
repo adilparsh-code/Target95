@@ -417,6 +417,7 @@ def word_frequency(words):
       "A linked list is a sequence of nodes where each node stores data and a reference (pointer) to the next node. The last node's next is null.",
       "A binary tree is a hierarchical structure: each node has at most two children (left and right). Traversals are inorder, preorder and postorder.",
       "Linked list operations: insert at head O(1), insert at tail O(n) without a tail pointer, search O(n), delete O(n).",
+      "For a singly linked list, practise insertion, deletion by value, reversal, retrieving a node by position, extracting a sublist, and checking whether the list is empty.",
       "Stack time complexity: push O(1), pop O(1), peek O(1). Queue time complexity: enqueue O(1), dequeue O(1) with a proper (circular or linked) implementation.",
       "Arrays provide O(1) indexed access; linked structures emphasise dynamic size and efficient insertion/deletion at known positions.",
       "Choose a structure based on required operations: stack for undo/backtracking/expression evaluation, queue for scheduling/BFS, linked list for dynamic insertion, tree for hierarchical search.",
@@ -475,6 +476,81 @@ class Queue {
         size--;
         return value;
     }
+}
+
+// Singly linked list: insertion, deletion, reversal and sublist extraction
+class Node {
+    int data;
+    Node next;
+    Node(int data) { this.data = data; }
+}
+
+class SinglyLinkedList {
+    Node head;
+
+    boolean isEmpty() { return head == null; }
+
+    void insertAtHead(int value) {
+        Node node = new Node(value);
+        node.next = head;
+        head = node;
+    }
+
+    boolean deleteFirst(int key) {
+        if (head == null) return false;
+        if (head.data == key) {
+            head = head.next;
+            return true;
+        }
+        Node current = head;
+        while (current.next != null && current.next.data != key)
+            current = current.next;
+        if (current.next == null) return false;
+        current.next = current.next.next;
+        return true;
+    }
+
+    void reverse() {
+        Node previous = null, current = head;
+        while (current != null) {
+            Node nextNode = current.next;
+            current.next = previous;
+            previous = current;
+            current = nextNode;
+        }
+        head = previous;
+    }
+
+    Node getAt(int index) {
+        if (index < 0) return null;
+        Node current = head;
+        for (int i = 0; current != null && i < index; i++)
+            current = current.next;
+        return current;
+    }
+
+    SinglyLinkedList extractSublist(int start, int count) {
+        if (start < 0 || count < 0)
+            throw new IllegalArgumentException("Index and count must be non-negative");
+        SinglyLinkedList result = new SinglyLinkedList();
+        Node current = getAt(start);
+        for (int i = 0; i < count && current != null; i++) {
+            result.insertAtTail(current.data);
+            current = current.next;
+        }
+        return result;
+    }
+
+    void insertAtTail(int value) {
+        Node node = new Node(value);
+        if (head == null) {
+            head = node;
+            return;
+        }
+        Node current = head;
+        while (current.next != null) current = current.next;
+        current.next = node;
+    }
 }`,
     practice: [
       { type: "tracing", question: "Trace: push(10), push(20), push(30), pop(), push(40), pop(), pop() on a stack. List the values returned by each pop.", answer: "pop() returns 30, then 40, then 20." },
@@ -484,6 +560,9 @@ class Queue {
       { type: "debugging", question: "A stack's pop() method does not check whether the stack is empty before decrementing top. What can go wrong?", answer: "If the stack is empty, top becomes -1 and the next access is data[-1], causing ArrayIndexOutOfBoundsException (stack underflow)." },
       { type: "programming", question: "Write a Java method that uses a stack to reverse a string.", answer: "Push each character onto the stack, then pop all characters and concatenate them to form the reversed string." },
       { type: "programming", question: "Write a Java class for a singly linked list with methods to insert at head and display all nodes.", answer: "Define a Node class with int data and Node next. The LinkedList class holds a head reference. insertAtHead creates a new node, sets its next to head, and updates head." },
+      { type: "tracing", question: "A singly linked list is 5→10→15→20→null. Reverse the list, then delete the first occurrence of 10. State the final list.", answer: "After reversal: 20→15→10→5→null. After deleting 10: 20→15→5→null." },
+      { type: "programming", question: "Write methods to reverse a singly linked list iteratively and retrieve the node at a zero-based index.", answer: "For reversal, maintain previous, current and nextNode references and reverse one link per iteration. For retrieval, start at head and advance index times; return null if the index is invalid or beyond the list." },
+      { type: "programming", question: "Write a method that extracts up to count nodes from a singly linked list starting at a zero-based index, without changing the original list.", answer: "Validate start and count, locate the start node, then copy at most count values into a new list. Stop early if the original list ends." },
       { type: "mcq", question: "Which data structure uses LIFO order?", options: ["A) Queue", "B) Stack", "C) Linked List", "D) Array"], answer: "B", explanation: "A stack removes the most recently added element first." },
       { type: "mcq", question: "What is the time complexity of push and pop on a stack?", options: ["A) O(n)", "B) O(log n)", "C) O(1)", "D) O(n²)"], answer: "C", explanation: "Push and pop only access the top element, so they are O(1)." },
       { type: "reasoning", question: "When is a stack preferable to a queue, and when is a queue preferable?", answer: "Use a stack when the problem requires last-in-first-out processing (undo, recursive call modelling, expression evaluation). Use a queue when the problem requires first-in-first-out processing (task scheduling, BFS, print spooling)." },
@@ -616,6 +695,7 @@ class Queue {
       "Enqueue and dequeue are O(1) when front and rear are maintained. Shifting every remaining element on dequeue is O(n) and is not the ISC-preferred design.",
       "Overflow: enqueue on a full queue. Underflow: dequeue on an empty queue.",
       "A linked-list queue uses a tail pointer so enqueue at the tail and dequeue at the head are both O(1).",
+      "A deque (double-ended queue) permits insertion and deletion at both the front and the rear. It is different from an ordinary FIFO queue because either end can be used for both operations.",
       "Applications: print spooling, customer service, BFS, CPU scheduling, buffering.",
     ],
     workedExample: "Circular queue capacity 3. enqueue(A), enqueue(B), enqueue(C) → full. dequeue() → A. enqueue(D) reuses index 0. Contents in FIFO order: B, C, D.",
@@ -649,6 +729,50 @@ class Queue {
         return val;
     }
 }
+
+// Deque implemented with a circular array
+class IntDeque {
+    int[] data;
+    int front = 0, size = 0;
+
+    IntDeque(int capacity) {
+        if (capacity <= 0) throw new IllegalArgumentException("Capacity must be positive");
+        data = new int[capacity];
+    }
+
+    boolean isEmpty() { return size == 0; }
+    boolean isFull() { return size == data.length; }
+
+    void addFirst(int value) {
+        if (isFull()) { System.out.println("Overflow"); return; }
+        front = (front - 1 + data.length) % data.length;
+        data[front] = value;
+        size++;
+    }
+
+    void addLast(int value) {
+        if (isFull()) { System.out.println("Overflow"); return; }
+        int rear = (front + size) % data.length;
+        data[rear] = value;
+        size++;
+    }
+
+    int removeFirst() {
+        if (isEmpty()) { System.out.println("Underflow"); return -1; }
+        int value = data[front];
+        front = (front + 1) % data.length;
+        size--;
+        return value;
+    }
+
+    int removeLast() {
+        if (isEmpty()) { System.out.println("Underflow"); return -1; }
+        int rear = (front + size - 1) % data.length;
+        int value = data[rear];
+        size--;
+        return value;
+    }
+}
 // enqueue 10,20,30 (full); dequeue -> 10; enqueue 40
 // FIFO remaining: 20, 30, 40`,
     practice: [
@@ -660,6 +784,8 @@ class Queue {
       { type: "programming", question: "Implement a CircularQueue in Java with enqueue, dequeue, peek, isEmpty and isFull using modulo wrapping and a size field.", answer: "rear = (rear+1)%cap on enqueue; front = (front+1)%cap on dequeue; reject enqueue when size==cap and dequeue when size==0." },
       { type: "programming", question: "Write a method that simulates a printer queue: enqueue job names, then dequeue and print until empty.", answer: "Use a queue of strings. enqueue each job, then while (!isEmpty()) print dequeue(). Jobs emerge in arrival order." },
       { type: "programming", question: "Using two stacks, implement a queue (enqueue and dequeue). State the amortised cost.", answer: "inStack for enqueue (O(1)). dequeue: if outStack is empty, pop all from inStack onto outStack, then pop outStack. Amortised O(1) dequeue." },
+      { type: "tracing", question: "A deque is empty. Perform addLast(10), addFirst(5), addLast(20), removeFirst(), removeLast(). Give both removed values and the final deque.", answer: "removeFirst() returns 5; removeLast() returns 20. The deque contains only 10." },
+      { type: "programming", question: "Implement a fixed-capacity circular-array deque with addFirst, addLast, removeFirst and removeLast. State how overflow and underflow are detected.", answer: "Track front and size. Compute the rear as (front + size) % capacity. Wrap front backward for addFirst and forward for removeFirst. Reject insertions when size equals capacity and removals when size is zero." },
       { type: "mcq", question: "Which order does a standard queue follow?", options: ["A) LIFO", "B) FIFO", "C) Sorted order", "D) Random"], answer: "B", explanation: "First in, first out." },
       { type: "mcq", question: "What causes false overflow in a linear array queue?", options: ["A) front == 0", "B) rear reaches the last index while earlier cells are free", "C) size == 0", "D) peek on one element"], answer: "B", explanation: "Without wrapping, freed front cells cannot be reused." },
       { type: "mcq", question: "Which problem is best modelled with a queue?", options: ["A) Undo", "B) Recursion", "C) Print spooling", "D) Postfix evaluation"], answer: "C", explanation: "Jobs should print in the order they arrived." },

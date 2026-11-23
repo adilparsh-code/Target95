@@ -5,11 +5,13 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import { ISC_XII_JAVA_PRACTICALS } from "../src/app/data/iscXIIJavaPracticalAssignments.js";
+import icseClass10Programs from "../src/app/data/icseClass10Programs.js";
 
-test("all ISC XII Java practicals compile and match their published sample runs", () => {
-  const root = mkdtempSync(join(tmpdir(), "target95-isc-java-"));
+test("all ICSE X and ISC XII Java programs compile and match their published sample runs", () => {
+  const root = mkdtempSync(join(tmpdir(), "target95-java-samples-"));
+  const programs = [...icseClass10Programs, ...ISC_XII_JAVA_PRACTICALS];
   try {
-    for (const item of ISC_XII_JAVA_PRACTICALS) {
+    for (const item of programs) {
       const workDir = join(root, item.id);
       mkdirSync(workDir);
       const sourcePath = join(workDir, "Assignment.java");

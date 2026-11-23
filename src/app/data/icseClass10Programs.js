@@ -28,7 +28,7 @@ class SelectionSortNames {
   }
   for(int i=0;i<n;i++) System.out.println(names[i]);
  }
-}`,sampleInput:'4\\nZara\\nAman\\nRiya\\nBilal',sampleOutput:'Aman\\nBilal\\nRiya\\nZara',concepts:['String array','selection sort','compareToIgnoreCase']},
+}`,sampleInput:'4\nZara\nAman\nRiya\nBilal',sampleOutput:'Aman\nBilal\nRiya\nZara',concepts:['String array','selection sort','compareToIgnoreCase']},
  {id:'x-prog-08',title:'Alphabetical Sorting of a String Array',topic:'String Arrays',difficulty:'Medium',question:'Accept names into a one-dimensional String array and arrange them in alphabetical order using bubble sort.',variables:'String names[]; int i,j; String temp',code:`import java.util.*;
 class SortNames {
  public static void main(String args[]) {

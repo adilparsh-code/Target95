@@ -34,7 +34,7 @@ export function validateSearchPayload(value) {
       if (!classId || CBSE_SUBJECT[classId] !== subject) return invalid("CBSE subject must match the selected class.");
     } else if (!CISCE_SUBJECTS.has(subject)) return invalid("CISCE subject filter is not supported.");
   }
-  const normalizedBoard = board === "CBSE" || classBoard === "CBSE" ? "cbse" : (board || classBoard ? "cisce" : undefined);
+  const normalizedBoard = board === "CBSE" || classBoard === "CBSE" ? "cbse" : (board === "ICSE" || board === "ISC" ? board.toLowerCase() : (board || classBoard ? "cisce" : undefined));
   return { ok: true, query: query.query, filters: {
     ...(normalizedBoard ? { board: normalizedBoard } : {}),
     ...(classId ? { class: classId } : {}),

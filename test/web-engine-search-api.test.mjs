@@ -21,9 +21,11 @@ function fakeDb({ count = 0, windowStart = 1000 } = {}) {
 
 test("validates bounded query and supported board/class/subject combinations", () => {
   assert.deepEqual(validateSearchPayload({ query: " Java arrays ", filters: { board: "ICSE", class: "icse-class-10", subject: "computer-applications" } }), {
-    ok: true, query: "Java arrays", filters: { board: "cisce", class: "icse-class-10", subject: "computer-applications" },
+    ok: true, query: "Java arrays", filters: { board: "icse", class: "icse-class-10", subject: "computer-applications" },
   });
   assert.deepEqual(validateSearchPayload({ query: "data", filters: { board: "CBSE", class: "cbse-class-10", subject: "402" } }).filters, { board: "cbse", class: "cbse-class-10", subject: "402" });
+  assert.equal(validateSearchPayload({ query: "inheritance", filters: { board: "ISC" } }).filters.board, "isc");
+  assert.equal(validateSearchPayload({ query: "arrays", filters: { board: "ICSE" } }).filters.board, "icse");
   assert.equal(validateSearchPayload({ query: "data", filters: { board: "ISC", class: "icse-class-10" } }).ok, false);
   assert.equal(validateSearchPayload({ query: "data", filters: { board: "CBSE", class: "cbse-class-10", subject: "083" } }).ok, false);
   assert.equal(validateSearchPayload({ query: "data", uid: "attacker" }).ok, false);
@@ -73,7 +75,7 @@ test("route uses verified session identity and returns only safe search DTOs", a
   });
   const response = await handler(req({ query: "arrays", filters: { board: "ICSE", class: "icse-class-10" } }));
   assert.equal(response.status, 200);
-  assert.deepEqual(received, { query: "arrays", filters: { board: "cisce", class: "icse-class-10" } });
+  assert.deepEqual(received, { query: "arrays", filters: { board: "icse", class: "icse-class-10" } });
   const body = await response.json();
   assert.equal(body.internalResults[0].title, "Arrays");
   assert.equal(JSON.stringify(body).includes("answer"), false);

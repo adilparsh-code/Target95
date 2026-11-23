@@ -257,10 +257,10 @@ static String reverse(String s) {
       {
         type: "image",
         title: "Java Interfaces",
-        explanation: "An interface declares method signatures with no body. Any class can implement an interface and must provide its own version of every method; a class extends only one class but can implement multiple interfaces.",
+        explanation: "Conceptually, an interface is a contract describing method prototypes. For ISC 2028, understand this relationship and its purpose; interface implementation programs are not required.",
         src: "/visuals/icse-java/java-interfaces.svg",
         alt: "Diagram showing interface Drawable implemented separately by Circle and Rectangle, each providing its own draw() method.",
-        caption: "Matches this page's own example: interface Drawable { void draw(); } implemented by Circle and Rectangle, called through a Drawable[] array."
+        caption: "Conceptual relationship only: classes may provide behaviour described by an interface; the ISC 2028 syllabus requires conceptual understanding, not implementation code."
       }
     ],
     overview: "Use inheritance to model genuine superclass/subclass relationships, override methods and understand runtime polymorphism. Interfaces are conceptual only in the ISC 2028 syllabus; students should explain the concept rather than write implementation programs.",

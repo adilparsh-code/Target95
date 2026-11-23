@@ -56,8 +56,34 @@ export function filterQuestionBank(questions, filters) {
   });
 }
 
+// allJavaChapterQuestions is de-duplicated by id for the global bank (an id must
+// appear once in the all-questions list), so a question shared by several route
+// aliases (introduction/introduction-to-java, loops/for-loop/while-loop/
+// do-while-loop, constructor/constructors, ...) is tagged with only the FIRST
+// alias. Per-chapter lookups must therefore read the per-slug bank, not the
+// global list, or every other alias loses its authored questions.
+const chapterQuestionCache = new Map();
+
 export function getQuestionBankChapter(slug) {
-  return questionBankQuestions.filter((q) => q.chapterSlug === slug);
+  const key = String(slug || "");
+  if (chapterQuestionCache.has(key)) return chapterQuestionCache.get(key);
+
+  const result = [];
+  const seen = new Set(); // duplicate protection stays: one entry per id per chapter
+  const add = (question) => {
+    if (seen.has(question.id)) return;
+    seen.add(question.id);
+    result.push(question);
+  };
+
+  const aliased = Object.prototype.hasOwnProperty.call(chapterQuestionBankBySlug, key)
+    ? chapterQuestionBankBySlug[key]
+    : null;
+  if (Array.isArray(aliased)) aliased.map(normalizeQuestion).forEach(add);
+  questionBankQuestions.filter((q) => q.chapterSlug === key).forEach(add);
+
+  chapterQuestionCache.set(key, result);
+  return result;
 }
 
 export default getQuestionBankChapter;

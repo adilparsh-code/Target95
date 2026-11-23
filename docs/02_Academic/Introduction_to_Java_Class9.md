@@ -1023,8 +1023,8 @@ Same Java Bytecode (.class file)
    - C) .byte
    - D) .txt
 
-4. **Which of the following is the correct entry point for a Java program?**
-   - A) main()
+4. **Which method is the entry point of a Java application?**
+   - A) main() ✓
    - B) start()
    - C) run()
    - D) execute()
@@ -1050,10 +1050,10 @@ Same Java Bytecode (.class file)
 ### Application-Based MCQs (5 questions)
 
 8. **Which of the following is a valid class declaration for a Java program?**
-   - A) class MyClass
-   - B) public class MyClass ✓
-   - C) both A and B
-   - D) none
+   - A) class MyClass { }
+   - B) public class MyClass { }
+   - C) Both A and B ✓
+   - D) None
 
 9. **Which line of code correctly prints "Hello ICSE" to the console?**
    - A) `System.out.println("Hello ICSE")` ✓

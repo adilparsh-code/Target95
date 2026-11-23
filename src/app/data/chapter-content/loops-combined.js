@@ -1874,8 +1874,8 @@ const chapterLoopsCombined = {
     {
       "id": "for-ob-46",
       "question": "for (int i = 1; i <= 5; i++) {\n    for (int j = 5; j >= i; j--) {\n        System.out.print(j);\n    }\n    System.out.println();\n}",
-      "answer": "54321\n4321\n321\n21\n1",
-      "explanation": "Row i: j goes from 5 down to i. Row 1: 54321. Row 2: 4321. etc."
+      "answer": "54321\n5432\n543\n54\n5",
+      "explanation": "Row i: j goes from 5 down to i, so every row starts at 5. Row 1: 54321. Row 2: 5432. Row 3: 543. Row 4: 54. Row 5: 5."
     },
     {
       "id": "for-ob-47",
@@ -2078,8 +2078,8 @@ const chapterLoopsCombined = {
     {
       "id": "dwhile-ob-24",
       "question": "int i = 1;\ndo {\n    int j = 1;\n    do {\n        System.out.print(j);\n        j++;\n    } while (j <= i);\n    int k = i - 1;\n    do {\n        System.out.print(k);\n        k--;\n    } while (k >= 1);\n    System.out.println();\n    i++;\n} while (i <= 4);",
-      "answer": "1\n121\n12321\n1234321",
-      "explanation": "Row i: ascending 1..i then descending i-1..1. Palindrome pattern."
+      "answer": "10\n121\n12321\n1234321",
+      "explanation": "Row i: ascending 1..i then descending i-1..1. For i = 1, k starts at 0 but a do-while body always runs once, so it prints 0 and then stops: row 1 is 10. Rows 2-4 are palindromes: 121, 12321, 1234321."
     },
     {
       "id": "dwhile-ob-25",
@@ -4974,7 +4974,7 @@ const chapterLoopsCombined = {
         "The body does not execute",
         "Compilation always fails"
       ],
-      "answer": "The body does not execute",
+      "answer": 2,
       "difficulty": "easy",
       "explanation": "The while loop checks its condition before entering the body."
     },
@@ -4987,7 +4987,7 @@ const chapterLoopsCombined = {
         "if",
         "class"
       ],
-      "answer": "while",
+      "answer": 0,
       "difficulty": "medium",
       "explanation": "A sentinel-controlled process naturally maps to a while condition."
     },
@@ -5000,7 +5000,7 @@ const chapterLoopsCombined = {
         "6",
         "111"
       ],
-      "answer": "321",
+      "answer": 1,
       "difficulty": "medium",
       "explanation": "% 10 extracts digits from right to left."
     },
@@ -5013,7 +5013,7 @@ const chapterLoopsCombined = {
         "Move i declaration inside every iteration",
         "Replace while with if"
       ],
-      "answer": "Update i toward 10",
+      "answer": 1,
       "difficulty": "medium",
       "explanation": "The control variable must make progress toward the terminating condition."
     },
@@ -5026,7 +5026,7 @@ const chapterLoopsCombined = {
         "After the program ends",
         "Never"
       ],
-      "answer": "For each required outer-loop iteration",
+      "answer": 1,
       "difficulty": "hard",
       "explanation": "Otherwise the inner loop may not execute again after its first completion."
     },
@@ -5224,15 +5224,15 @@ const chapterLoopsCombined = {
     },
     {
       "id": "dwhile-mcq-17",
-      "question": "What is the output?\nint i = 10;\ndo {\n    System.out.print(i--);\n} while (i >= 7);",
+      "question": "What happens when this code is compiled?\ndo {\n    int n = 5;\n    n--;\n} while (n > 0);",
       "options": [
-        "1098",
-        "987",
-        "9876",
-        "Compilation error"
+        "It compiles and the loop runs 5 times",
+        "It compiles and the loop runs once",
+        "Compilation error: n is not visible in the while condition",
+        "It compiles but throws a runtime error"
       ],
-      "answer": 0,
-      "explanation": "Prints 10, 9, 8. Post-decrement: prints current value then decrements. Loop runs while i >= 7."
+      "answer": 2,
+      "explanation": "The variable n is declared inside the braces { } of the do block, so its scope is that block only. It is created when the body runs and is gone at the closing brace. The condition while (n > 0) is written after the closing brace, outside the block, so the compiler cannot find n and reports \"cannot find symbol\". To fix it, declare n before the do statement, for example int n = 5; do { n--; } while (n > 0); so that the body and the condition can both use it."
     },
     {
       "id": "dwhile-mcq-18",
@@ -5264,10 +5264,10 @@ const chapterLoopsCombined = {
       "options": [
         "1245",
         "12345",
-        "12 45",
+        "Prints 12, then runs forever (infinite loop)",
         "Compilation error"
       ],
-      "answer": 0,
+      "answer": 2,
       "explanation": "Prints 1, 2. When i == 3, continue skips the rest. But i is never incremented, so infinite loop! This is a trick question."
     },
     {
@@ -5291,8 +5291,8 @@ const chapterLoopsCombined = {
         "5",
         "Compilation error"
       ],
-      "answer": 2,
-      "explanation": "i increments in body and in condition. After loop: i = 5. Prints 5."
+      "answer": 1,
+      "explanation": "i = 0. Body: i becomes 1; condition 1 < 3 is true, then i becomes 2. Body: i becomes 3; condition 3 < 3 is false, but i++ still runs, so i becomes 4. Prints 4."
     },
     {
       "id": "dwhile-mcq-23",
@@ -5308,27 +5308,27 @@ const chapterLoopsCombined = {
     },
     {
       "id": "dwhile-mcq-24",
-      "question": "What is the output?\nint i = 5;\ndo {\n    System.out.print(i--);\n} while (i > 0);",
+      "question": "What is the output?\nint sum = 0;\nint i = 1;\ndo {\n    sum += i;\n    i++;\n} while (i <= 4);\nSystem.out.println(sum);",
       "options": [
-        "54321",
-        "543210",
-        "4321",
+        "6",
+        "10",
+        "15",
         "Compilation error"
       ],
-      "answer": 0,
-      "explanation": "Prints 5, 4, 3, 2, 1. Post-decrement prints current value then decrements."
+      "answer": 1,
+      "explanation": "sum collects 1 + 2 + 3 + 4 = 10. After the pass with i = 4, i becomes 5 and the condition 5 <= 4 is false, so the loop ends and 10 is printed."
     },
     {
       "id": "dwhile-mcq-25",
-      "question": "What is the output?\nint i = 1;\ndo {\n    System.out.print(i++);\n} while (i <= 3);",
+      "question": "What is the output?\nint i = 10;\ndo {\n    System.out.print(i);\n    i++;\n} while (i < 5);",
       "options": [
-        "123",
-        "012",
-        "1234",
+        "Nothing is printed",
+        "10",
+        "10 11 12 13 14",
         "Compilation error"
       ],
-      "answer": 0,
-      "explanation": "Prints 1, 2, 3. The loop runs 3 times with i = 1, 2, 3."
+      "answer": 1,
+      "explanation": "The body of a do-while always runs first, so 10 is printed. Only then is the condition i < 5 checked: i is now 11, so 11 < 5 is false and the loop ends. A do-while therefore executes its body at least once, even when the condition is false from the start."
     },
     {
       "id": "dwhile-mcq-26",
@@ -5363,8 +5363,8 @@ const chapterLoopsCombined = {
         "10987",
         "Compilation error"
       ],
-      "answer": 0,
-      "explanation": "Prints 10, 9, 8. Post-decrement: prints current value then decrements. Loop runs while i >= 7."
+      "answer": 2,
+      "explanation": "Prints 10, 9, 8, 7. Post-decrement: prints current value then decrements. After printing 7, i becomes 6 and 6 >= 7 is false, so the loop stops."
     },
     {
       "id": "dwhile-mcq-29",

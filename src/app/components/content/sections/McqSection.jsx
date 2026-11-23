@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ChapterSection from "../../ChapterSection";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
+import { isMcqSelectionCorrect } from "../../../../lib/study/mcqAnswers.mjs";
 
 export default function McqSection({ items, isCompleted }) {
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -23,7 +24,7 @@ export default function McqSection({ items, isCompleted }) {
       <div className="space-y-4">
         {items.map((q, idx) => {
           const selected = selectedAnswers[q.id];
-          const isCorrect = selected !== undefined && selected === q.answer;
+          const isCorrect = isMcqSelectionCorrect(selected, q.answer);
 
           return (
             <div

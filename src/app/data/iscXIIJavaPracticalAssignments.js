@@ -362,9 +362,9 @@ export const ISC_XII_JAVA_PRACTICALS = [
       "Replace a selected range.",
       "Delete an unwanted range and display the final text."
     ],
-    "code": "class StringBufferEditor {\n    public static void main(String args[]) {\n        StringBuffer text = new StringBuffer(\"Java\");\n        text.append(\" Language\");\n        text.insert(5, \"Programming \");\n        text.replace(0, 4, \"Core Java\");\n        text.delete(10, 22);\n        System.out.println(text);\n    }\n}",
+    "code": "class StringBufferEditor {\n    public static void main(String args[]) {\n        StringBuffer text = new StringBuffer(\"Java\");\n        text.append(\" Language\");\n        text.insert(5, \"Core \");\n        text.replace(0, 4, \"Core\");\n        text.delete(5, 10);\n        System.out.println(text);\n    }\n}",
     "sampleInput": "No keyboard input",
-    "sampleOutput": "Core Java Language",
+    "sampleOutput": "Core Language",
     "concepts": [
       "StringBuffer",
       "Mutable character sequence",

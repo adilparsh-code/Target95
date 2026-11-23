@@ -179,7 +179,7 @@ export function createInternalSearchAdapter(sources) {
           canonicalId: question.chapterId,
         });
         if (!matchesCisceMetadata(chapter, filters)) continue;
-        if (question.board && String(question.board).toUpperCase() !== String(chapter.board || "").toUpperCase()) continue;
+        if (question.board && chapter.board && String(question.board).toUpperCase() !== String(chapter.board).toUpperCase()) continue;
         results.push({
           id: `question-${question.id}`,
           type: "question",

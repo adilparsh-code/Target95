@@ -48,7 +48,8 @@ test("response keeps internal and external lanes separate, ranked and deduplicat
     ],
   });
   assert.equal(response.query, "Java arrays");
-  assert.deepEqual(response.internalResults.map((item) => item.id), ["chapter-1", "q-1"]);
+  // The duplicate question keeps its highest score (0.9), so it ranks ahead of the chapter (0.8).
+  assert.deepEqual(response.internalResults.map((item) => item.id), ["q-1", "chapter-1"]);
   assert.equal(response.webResults.length, 1);
   assert.equal(response.internalResults[0].source, "target95");
   assert.equal(response.webResults[0].source, "web");

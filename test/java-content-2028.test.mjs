@@ -35,6 +35,11 @@ test("ISC Class XII practical distribution matches the 2028 syllabus", () => {
   assert.equal(count("Double-dimensional arrays"), 5);
   assert.equal(count("String handling"), 4);
   assert.equal(count("Inheritance"), 3);
+  const methodAssignments = ISC_XII_JAVA_PRACTICALS.filter((item) => item.category === "Methods");
+  assert.equal(methodAssignments.length, 5);
+  for (const item of methodAssignments) {
+    assert.match(item.code, /static\\s+(Student|Book|Account|Rectangle|Employee)\\s+\\w+\\s*\\(/);
+  }
   assert.equal(ISC_XII_PRACTICAL.javaAssignmentsMinimum, 20);
   assert.equal(ISC_XII_PRACTICAL.pythonAssignmentsMinimum, 5);
   assert.equal(ISC_XII_PRACTICAL.totalAssignmentsMinimum, 25);

@@ -240,21 +240,15 @@ export function AuthProvider({ children }) {
       const provider = new GoogleAuthProvider();
       const userCredential = await signInWithPopup(auth, provider);
 
-      // Exchange the ID token for an httpOnly session cookie used by server APIs.
-      if (userCredential.user.emailVerified) {
-        const session = await createSessionCookie(userCredential.user);
-        if (!session.success) {
-          await signOut(auth);
-          setLoading(false);
-          return { success: false, message: session.message };
-        }
-      }
-      
-      // Check if user exists in Firestore, if not create profile
-      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+      // Resolve or create the Firestore profile BEFORE minting the server
+      // session. The session endpoint requires users/{uid} to exist and be
+      // active, so doing this in the opposite order rejects first-time Google
+      // users even though Firebase Authentication has created their account.
+      const userRef = doc(db, "users", userCredential.user.uid);
+      const userDoc = await getDoc(userRef);
       let role = "student";
       if (!userDoc.exists()) {
-        await setDoc(doc(db, "users", userCredential.user.uid), {
+        await setDoc(userRef, {
           uid: userCredential.user.uid,
           email: userCredential.user.email,
           fullName: userCredential.user.displayName || "",
@@ -266,7 +260,18 @@ export function AuthProvider({ children }) {
       } else {
         role = userDoc.data().role || "student";
       }
-      
+
+      // Exchange the ID token for an httpOnly session cookie only after the
+      // profile exists. The server independently verifies active status.
+      if (userCredential.user.emailVerified) {
+        const session = await createSessionCookie(userCredential.user);
+        if (!session.success) {
+          await signOut(auth);
+          setLoading(false);
+          return { success: false, message: session.message };
+        }
+      }
+
       setLoading(false);
       return { success: true, user: { ...userCredential.user, role } };
     } catch (err) {

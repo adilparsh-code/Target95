@@ -110,10 +110,12 @@ Existing ACE / StudentGlobalSearch UI
 - Created `feat/web-engine-foundation` from the current `feat/content-engine-mocktest` head; no existing branch or PR was changed.
 - Added `src/lib/web-engine/searchContract.mjs`: pure query validation, safe first-party path validation, HTTP(S)-only external URL validation, result DTO normalisation, score bounding, lane separation and deduplication.
 - Added `test/web-engine-search-contract.test.mjs` covering invalid queries, unsafe paths/URLs, URL fragment removal, lane separation, ranking and deduplication.
+- Added `src/lib/web-engine/internalSearch.mjs`, an injectable adapter that maps the existing Office, study chapter/concept, CBSE and answer-free question search sources into the common first-party DTO. It copies only display-safe fields and preserves the existing board/class routing rules.
+- Added `test/web-engine-internal-search.test.mjs` for source composition, CBSE class/subject filtering, navigation URLs and answer/explanation exclusion. Registered both test files in `npm test` and `npm run test:web-engine`.
 - Added `npm run test:web-engine` and included the new test in `npm test`.
 - These files were committed through GitHub's repository API. No local runtime is available in this session, so tests, lint and build have **not** been run. Do not treat them as passing until executed in a development workspace.
 - No UI, API route, external provider, secrets, Firebase, Vercel, MockTest logic or feature flags were changed.
 
 ## Next implementation task
 
-Complete a focused adapter/consumer audit on this branch: identify all internal source modules and their data shapes, confirm which can safely run server-side without importing client-only modules, and map each current result type to a stable response DTO. Then implement the pure normalisation/ranking/deduplication contract with tests before touching UI or external provider integration.
+Wire the adapter to the verified server-safe first-party modules and expose it through an authenticated, rate-limited internal search endpoint. Before doing so, complete the import-safety check for CBSE data modules and verify that the answer-free generated question index is the only question source imported. Keep external provider integration separate until a provider is selected.

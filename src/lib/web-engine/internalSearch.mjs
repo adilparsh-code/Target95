@@ -8,7 +8,6 @@ const scoreFor = (title, term, fallback = 0.55) => {
   if (value.includes(term)) return 0.8;
   return fallback;
 };
-const toBoardId = (board) => (String(board || "").toUpperCase() === "CBSE" ? "cbse" : "cisce");
 const classNumberFrom = (value) => {
   const id = String(value?.id || value || "");
   return Number(id.match(/(?:cbse-class-|class-)?(9|10|11|12)$/)?.[1] || 0);
@@ -30,17 +29,21 @@ const CISCE_SUBJECT_FILTERS = Object.freeze({
 
 function matchesCisceMetadata(chapter, filters) {
   if (!chapter || typeof chapter !== "object") return false;
-  const board = String(chapter.board || "").toUpperCase();
-  if (filters.board === "cisce" && !["ICSE", "ISC"].includes(board)) return false;
+  const chapterBoard = String(chapter.board || "").toUpperCase();
+  const selectedBoard = String(filters.board || "").toLowerCase();
+  if (selectedBoard === "cisce" && !["ICSE", "ISC"].includes(chapterBoard)) return false;
+  if (selectedBoard === "icse" && chapterBoard !== "ICSE") return false;
+  if (selectedBoard === "isc" && chapterBoard !== "ISC") return false;
 
   const classId = classIdFrom(filters.class);
   const expectedClass = CISCE_CLASS_FILTERS[classId];
-  if (classId && (!expectedClass || board !== expectedClass.board || chapter.class !== expectedClass.class)) return false;
+  if (classId && (!expectedClass || chapterBoard !== expectedClass.board || chapter.class !== expectedClass.class)) return false;
 
   const subject = String(filters.subject || "").toLowerCase();
   if (subject) {
     const allowedSubjects = CISCE_SUBJECT_FILTERS[subject];
-    if (!allowedSubjects || !allowedSubjects.includes(String(chapter.subject || "").toLowerCase())) return false;
+    const actualSubject = String(chapter.subject || "").toLowerCase();
+    if (!allowedSubjects || !allowedSubjects.some((allowed) => actualSubject.includes(allowed))) return false;
   }
   return true;
 }
@@ -77,20 +80,26 @@ export function createInternalSearchAdapter(sources) {
     const term = parsed.query.toLowerCase();
     const board = String(filters.board || "").toLowerCase();
     const isCBSE = board === "cbse";
+    const hasAcademicFilters = Boolean(board || filters.class || filters.subject);
     const classNumber = classNumberFrom(filters.class);
     const subjectCode = String(filters.subject || (classNumber <= 10 ? "402" : "083"));
 
     const results = [];
 
-    for (const item of searchOfficeContent?.(term) || []) {
-      results.push({
-        id: item.id,
-        type: item.type || "chapter",
-        title: item.title,
-        snippet: item.description,
-        href: item.href,
-        score: scoreFor(item.title, term),
-      });
+    // Office content has no board/class/subject metadata. Exclude it when an
+    // academic filter is active rather than leaking unrelated results into a
+    // board-specific search.
+    if (!hasAcademicFilters) {
+      for (const item of searchOfficeContent?.(term) || []) {
+        results.push({
+          id: item.id,
+          type: item.type || "chapter",
+          title: item.title,
+          snippet: item.description,
+          href: item.href,
+          score: scoreFor(item.title, term),
+        });
+      }
     }
 
     if (isCBSE && classNumber && getCBSEChapters && getCBSEPracticeQuestions) {
@@ -165,12 +174,12 @@ export function createInternalSearchAdapter(sources) {
       }
 
       for (const question of searchQuestions?.(term) || []) {
-        if (filters.board && toBoardId(question.board) !== board) continue;
         const chapter = metadataFor({
           slug: question.chapterSlugResolved || question.chapterSlug,
           canonicalId: question.chapterId,
         });
-        if ((filters.class || filters.subject) && !matchesCisceMetadata(chapter, filters)) continue;
+        if (!matchesCisceMetadata(chapter, filters)) continue;
+        if (question.board && String(question.board).toUpperCase() !== String(chapter.board || "").toUpperCase()) continue;
         results.push({
           id: `question-${question.id}`,
           type: "question",

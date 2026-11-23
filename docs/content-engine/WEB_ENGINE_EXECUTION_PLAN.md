@@ -120,3 +120,14 @@ Existing ACE / StudentGlobalSearch UI
 ## Next implementation task
 
 Execute `npm run test:web-engine`, the full test suite, lint and build in a Node-enabled workspace. Fix any failures before moving to Phase 2. Then implement the authenticated, rate-limited internal search endpoint. Keep external provider integration separate until a provider is selected.
+
+
+## Phase 2 — authenticated internal search API
+
+- Started on feat/web-engine-api, stacked directly on feat/web-engine-foundation; PR #108 remains open and unchanged.
+- Added POST /api/search as a Node.js, server-only route. It uses getVerifiedSession; caller-supplied identity, role, tenant or entitlement fields are rejected rather than trusted.
+- Added strict request allow-lists for query and filters, 240-character query validation, a 4 KiB streaming body cap, and supported CBSE/CISCE board/class/subject combinations.
+- Added a Firestore transaction-based per-user limit of 30 requests per 60-second window under users/{verifiedUid}/usage/webSearch. Rate-limit storage failure denies the request with 503.
+- The route calls only the server-only searchTarget95Content composition root. The response uses the existing allow-listed internal search DTO and disables caching; no client identity, answer key, explanation, student identifier or raw source record is returned.
+- Added injectable handler tests for unauthenticated access, server-derived identity, request validation, body limits, rate limiting, storage/auth failures and answer/explanation privacy.
+- Phase 2 CI and full application checks are pending. Do not merge or deploy until checks and code review pass.

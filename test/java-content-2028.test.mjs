@@ -39,7 +39,7 @@ test("ISC Class XII practical distribution matches the 2028 syllabus", () => {
   assert.equal(ISC_XII_PRACTICAL.pythonAssignmentsMinimum, 5);
   assert.equal(ISC_XII_PRACTICAL.totalAssignmentsMinimum, 25);
   const secondLargest = ISC_XII_JAVA_PRACTICALS.find((item) => item.id === "ISC12-A01");
-  assert.match(secondLargest.code, /second == Long\\.MIN_VALUE/);
+  assert.match(secondLargest.code, /second == Long\.MIN_VALUE/);
   for (const item of ISC_XII_JAVA_PRACTICALS) {
     assert.match(item.code, /class\s+[A-Za-z_$][\w$]*/);
     assert.match(item.code, /static void main\s*\(/);

@@ -318,7 +318,7 @@ export const ISC_XII_JAVA_PRACTICALS = [
     ],
     "code": "import java.util.*;\nclass WordCount {\n    public static void main(String args[]) {\n        Scanner sc = new Scanner(System.in);\n        String line = sc.nextLine();\n        StringTokenizer st = new StringTokenizer(line);\n        int count = 0;\n        while (st.hasMoreTokens()) { st.nextToken(); count++; }\n        System.out.println(\"Words = \" + count);\n    }\n}",
     "sampleInput": "Java makes problem solving interesting",
-    "sampleOutput": "Words = 6",
+    "sampleOutput": "Words = 5",
     "concepts": [
       "StringTokenizer",
       "Tokens",

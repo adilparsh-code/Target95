@@ -405,7 +405,7 @@ def word_frequency(words):
 class Stack {
     int[] data;
     int top = -1;
-    Stack(int capacity) { data = new int[capacity]; }
+    Stack(int capacity) {\n        if (capacity <= 0) throw new IllegalArgumentException("Capacity must be positive");\n        data = new int[capacity];\n    }
     boolean isEmpty() { return top == -1; }
     boolean isFull() { return top == data.length - 1; }
     void push(int x) {
@@ -432,7 +432,7 @@ class Stack {
 class Queue {
     int[] data;
     int front = 0, rear = -1, size = 0;
-    Queue(int capacity) { data = new int[capacity]; }
+    Queue(int capacity) {\n        if (capacity <= 0) throw new IllegalArgumentException("Capacity must be positive");\n        data = new int[capacity];\n    }
     boolean isEmpty() { return size == 0; }
     boolean isFull() { return size == data.length; }
     void enqueue(int x) {

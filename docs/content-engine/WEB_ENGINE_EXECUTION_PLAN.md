@@ -1,6 +1,6 @@
 # Target95 Web Engine — execution plan and repository audit
 
-Status: Phase 0 audit recorded; Phase 1 pure contract and tests authored (execution not yet verified).
+Status: Phase 0 audit recorded; Phase 1 adapter, server-only source composition and unit tests authored (execution not yet verified).
 Branch: `feat/web-engine-foundation`
 Base: `feat/content-engine-mocktest` (stacked on P1; no PR has been merged by this work).
 
@@ -111,6 +111,7 @@ Existing ACE / StudentGlobalSearch UI
 - Added `src/lib/web-engine/searchContract.mjs`: pure query validation, safe first-party path validation, HTTP(S)-only external URL validation, result DTO normalisation, score bounding, lane separation and deduplication.
 - Added `test/web-engine-search-contract.test.mjs` covering invalid queries, unsafe paths/URLs, URL fragment removal, lane separation, ranking and deduplication.
 - Added `src/lib/web-engine/internalSearch.mjs`, an injectable adapter that maps the existing Office, study chapter/concept, CBSE and answer-free question search sources into the common first-party DTO. It copies only display-safe fields and preserves the existing board/class routing rules.
+- Added `src/lib/web-engine/internalSources.js` as the server-only composition root. It wires the existing Office search, study-center search, generated answer-free CISCE question index, CBSE chapter registry and CBSE practice source into the adapter. CBSE source records contain answer-bearing fields, so the composition root is protected with Next.js `server-only`; only allow-listed result fields leave the adapter.
 - Added `test/web-engine-internal-search.test.mjs` for source composition, CBSE class/subject filtering, navigation URLs and answer/explanation exclusion. Registered both test files in `npm test` and `npm run test:web-engine`.
 - Added `npm run test:web-engine` and included the new test in `npm test`.
 - These files were committed through GitHub's repository API. No local runtime is available in this session, so tests, lint and build have **not** been run. Do not treat them as passing until executed in a development workspace.
@@ -118,4 +119,4 @@ Existing ACE / StudentGlobalSearch UI
 
 ## Next implementation task
 
-Wire the adapter to the verified server-safe first-party modules and expose it through an authenticated, rate-limited internal search endpoint. Before doing so, complete the import-safety check for CBSE data modules and verify that the answer-free generated question index is the only question source imported. Keep external provider integration separate until a provider is selected.
+Execute `npm run test:web-engine`, the full test suite, lint and build in a Node-enabled workspace. Fix any failures before moving to Phase 2. Then implement the authenticated, rate-limited internal search endpoint. Keep external provider integration separate until a provider is selected.

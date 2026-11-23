@@ -1,120 +1,124 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { consumeSearchRateLimit, readBoundedJson, validateSearchPayload } from "../src/lib/web-engine/searchApi.mjs";
-import { createSearchPostHandler } from "../src/lib/web-engine/searchRouteHandler.mjs";
+import { createInternalSearchAdapter } from "../src/lib/web-engine/internalSearch.mjs";
 
-const req = (body) => new Request("https://target95.invalid/api/search", {
-  method: "POST", headers: { "content-type": "application/json" },
-  body: typeof body === "string" ? body : JSON.stringify(body),
-});
-function fakeDb({ count = 0, windowStart = 1000 } = {}) {
-  const state = { count, windowStart, exists: count > 0 };
-  const db = {
-    collection: () => db, doc: () => db,
-    runTransaction: async (callback) => callback({
-      get: async () => ({ exists: state.exists, data: () => ({ count: state.count, windowStart: state.windowStart }) }),
-      set: (_ref, next) => Object.assign(state, next, { exists: true }),
-    }),
+test("internal adapter combines existing office, study, concept and answer-free question sources", () => {
+  const chapter = {
+    slug: "arrays",
+    canonicalId: "arrays-1d",
+    title: "Arrays",
+    board: "ICSE",
+    class: "ICSE X",
+    subject: "Computer Applications",
+    studyData: { intro: "Array basics", concepts: ["Array traversal", "Sorting"] },
   };
-  return { db, state };
-}
-
-test("validates bounded query and supported board/class/subject combinations", () => {
-  assert.deepEqual(validateSearchPayload({ query: " Java arrays ", filters: { board: "ICSE", class: "icse-class-10", subject: "computer-applications" } }), {
-    ok: true, query: "Java arrays", filters: { board: "icse", class: "icse-class-10", subject: "computer-applications" },
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => [{ id: "office-word-1", title: "Word Tables", description: "Create tables", href: "/office/word/tables", type: "chapter" }],
+    searchStudyContent: () => ({ chapters: [chapter] }),
+    getStudyChapters: () => [chapter],
+    searchQuestions: () => [{
+      id: "q-1", question: "How does array traversal work?", chapterTitle: "Arrays", chapterSlugResolved: "arrays",
+      chapterId: "arrays-1d", board: "ICSE", difficulty: "easy", type: "mcq",
+      answer: "MUST NEVER BE COPIED", explanation: "MUST NEVER BE COPIED",
+    }],
   });
-  assert.deepEqual(validateSearchPayload({ query: "data", filters: { board: "CBSE", class: "cbse-class-10", subject: "402" } }).filters, { board: "cbse", class: "cbse-class-10", subject: "402" });
-  assert.equal(validateSearchPayload({ query: "inheritance", filters: { board: "ISC" } }).filters.board, "isc");
-  assert.equal(validateSearchPayload({ query: "arrays", filters: { board: "ICSE" } }).filters.board, "icse");
-  assert.equal(validateSearchPayload({ query: "data", filters: { board: "ISC", class: "icse-class-10" } }).ok, false);
-  assert.equal(validateSearchPayload({ query: "data", filters: { board: "CBSE", class: "cbse-class-10", subject: "083" } }).ok, false);
-  assert.equal(validateSearchPayload({ query: "data", uid: "attacker" }).ok, false);
-  assert.equal(validateSearchPayload({ query: "data", role: "admin" }).ok, false);
-  assert.equal(validateSearchPayload({ query: "x".repeat(241) }).ok, false);
-  assert.equal(validateSearchPayload({ query: "data", filters: { tenantId: "other" } }).ok, false);
+
+  const response = search("array", { board: "cisce", class: { id: "icse-class-10" } });
+  assert.equal(response.ok, true);
+  assert.deepEqual(response.internalResults.map((item) => item.id), [
+    "chapter-arrays", "concept-arrays-0", "question-q-1",
+  ]);
+  assert.equal(JSON.stringify(response).includes("MUST NEVER BE COPIED"), false);
+  assert.equal(response.internalResults.find((item) => item.id === "question-q-1").href, "/Java/arrays");
+  assert.equal(response.internalResults.find((item) => item.id === "chapter-arrays").class, "ICSE X");
+  assert.equal(response.internalResults.find((item) => item.id === "chapter-arrays").board, "ICSE");
 });
 
-test("reads valid JSON and rejects oversized, malformed and missing bodies", async () => {
-  assert.deepEqual((await readBoundedJson(req({ query: "arrays" }))).value, { query: "arrays" });
-  assert.equal((await readBoundedJson(req("x".repeat(5000)))).ok, false);
-  assert.equal((await readBoundedJson(req("{bad json"))).ok, false);
-  assert.equal((await readBoundedJson(new Request("https://target95.invalid/api/search", { method: "POST" }))).ok, false);
-});
-
-test("Firestore transaction rate limit is atomic and windowed", async () => {
-  const { db, state } = fakeDb({ count: 1, windowStart: 10000 });
-  assert.equal((await consumeSearchRateLimit(db, "verified-uid", { now: 10100, limit: 2, windowMs: 60000 })).limited, false);
-  assert.equal(state.count, 2);
-  assert.equal((await consumeSearchRateLimit(db, "verified-uid", { now: 10200, limit: 2, windowMs: 60000 })).limited, true);
-  assert.equal((await consumeSearchRateLimit(db, "verified-uid", { now: 80000, limit: 2, windowMs: 60000 })).limited, false);
-  assert.equal(state.count, 1);
-});
-
-test("route rejects unauthenticated users before reading or searching", async () => {
-  let searched = false;
-  const handler = createSearchPostHandler({
-    getSession: async () => null, getDb: () => { throw new Error("must not run"); },
-    search: () => { searched = true; },
+test("CISCE class and subject filters use source metadata rather than echoing client filters", () => {
+  const chapters = [
+    {
+      slug: "arrays", canonicalId: "arrays-1d", title: "Arrays", board: "ICSE", class: "ICSE X",
+      subject: "Computer Applications", studyData: { intro: "Array basics", concepts: [] },
+    },
+    {
+      slug: "introduction", canonicalId: "introduction-to-java", title: "Introduction to Java", board: "ICSE", class: "ICSE IX",
+      subject: "Computer Applications", studyData: { intro: "Java basics", concepts: [] },
+    },
+  ];
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => [],
+    getStudyChapters: () => chapters,
+    searchStudyContent: () => ({ chapters }),
+    searchQuestions: () => [
+      { id: "q-x", question: "Array traversal", chapterId: "arrays-1d", chapterSlugResolved: "arrays", board: "ICSE" },
+      { id: "q-ix", question: "Array introduction", chapterId: "introduction-to-java", chapterSlugResolved: "introduction", board: "ICSE" },
+    ],
   });
-  assert.equal((await handler(req({ query: "arrays" }))).status, 401);
-  assert.equal(searched, false);
+
+  const response = search("array", {
+    board: "cisce",
+    class: "icse-class-10",
+    subject: "computer-applications",
+  });
+  assert.deepEqual(response.internalResults.map((item) => item.id), ["chapter-arrays", "question-q-x"]);
+  assert.equal(response.internalResults[0].class, "ICSE X");
+  assert.equal(response.internalResults[0].board, "ICSE");
+  assert.equal(JSON.stringify(response).includes("ICSE IX"), false);
 });
 
-test("route uses verified session identity and returns only safe search DTOs", async () => {
-  const { db } = fakeDb();
+test("CBSE adapter uses the selected class and subject and emits only safe DTO fields", () => {
   let received;
-  const handler = createSearchPostHandler({
-    getSession: async () => ({ uid: "verified-user", role: "student" }), getDb: () => db,
-    search: (query, filters) => {
-      received = { query, filters };
-      return { ok: true, status: "ok", query, internalResults: [{
-        id: "chapter-arrays", source: "target95", type: "chapter", title: "Arrays", snippet: "Array basics",
-        href: "/Java/arrays", score: 0.9, board: "ICSE", class: "ICSE X", chapterId: "arrays-1d", retrievedAt: null,
-      }], webResults: [] };
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => [],
+    getCBSEChapters: (classNumber, subjectCode) => {
+      received = [classNumber, subjectCode];
+      return [{ id: "cbse-10-402-u1", title: "Data Handling", unitTitle: "Data", unitId: "u1", learningObjectives: [] }];
+    },
+    getCBSEPracticeQuestions: (classNumber, subjectCode) => {
+      received = [classNumber, subjectCode];
+      return [{ id: "q-2", title: "Data tables", question: "Search data tables", chapter: "Data", answer: "SECRET" }];
     },
   });
-  const response = await handler(req({ query: "arrays", filters: { board: "ICSE", class: "icse-class-10" } }));
-  assert.equal(response.status, 200);
-  assert.deepEqual(received, { query: "arrays", filters: { board: "icse", class: "icse-class-10" } });
-  const body = await response.json();
-  assert.equal(body.internalResults[0].title, "Arrays");
-  assert.equal(JSON.stringify(body).includes("answer"), false);
-  assert.equal(JSON.stringify(body).includes("explanation"), false);
-  assert.equal(JSON.stringify(body).includes("verified-user"), false);
+
+  const response = search("data", { board: "cbse", class: "cbse-class-10", subject: "402" });
+  assert.deepEqual(received, [10, "402"]);
+  assert.equal(response.internalResults.length, 2);
+  assert.equal(JSON.stringify(response).includes("SECRET"), false);
+  assert.equal(response.internalResults[0].href, "/cbse/class/10/subject/402/unit/u1");
 });
 
-test("route fails closed when session verification or Firestore is unavailable", async () => {
-  const authFailure = createSearchPostHandler({ getSession: async () => { throw new Error("auth down"); }, getDb: () => ({}), search: () => ({}), logger: { error() {} } });
-  assert.equal((await authFailure(req({ query: "arrays" }))).status, 503);
-  const dbFailure = createSearchPostHandler({ getSession: async () => ({ uid: "verified-user" }), getDb: () => ({ collection() { throw new Error("db down"); } }), search: () => ({}), logger: { error() {} } });
-  assert.equal((await dbFailure(req({ query: "arrays" }))).status, 503);
-});
-
-test("rate-limited route returns 429 without executing search", async () => {
-  const { db } = fakeDb({ count: 30, windowStart: Date.now() });
-  let searched = false;
-  const handler = createSearchPostHandler({ getSession: async () => ({ uid: "verified-user" }), getDb: () => db, search: () => { searched = true; return {}; }, logger: { error() {} } });
-  assert.equal((await handler(req({ query: "arrays" }))).status, 429);
-  assert.equal(searched, false);
-});
-
-
-test("route awaits asynchronous search implementations and converts rejections to 503", async () => {
-  const { db } = fakeDb();
-  const handler = createSearchPostHandler({
-    getSession: async () => ({ uid: "verified-user" }),
-    getDb: () => db,
-    search: async () => ({ ok: true, status: "ok", query: "arrays", internalResults: [], webResults: [] }),
+test("invalid query returns an empty, typed response without calling sources", () => {
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => { throw new Error("must not run"); },
   });
-  const success = await handler(req({ query: "arrays" }));
-  assert.equal(success.status, 200);
-  assert.equal((await success.json()).ok, true);
+  const response = search("   ");
+  assert.equal(response.ok, false);
+  assert.deepEqual(response.internalResults, []);
+});
 
-  const failing = createSearchPostHandler({
-    getSession: async () => ({ uid: "verified-user" }),
-    getDb: () => db,
-    search: async () => { throw new Error("provider failure"); },
-    logger: { error() {} },
+
+test("board-only filters distinguish ICSE from ISC and exclude unclassified office content", () => {
+  const chapters = [
+    { slug: "icse-arrays", title: "Arrays", board: "ICSE", class: "ICSE X", subject: "Computer Applications", studyData: { concepts: [] } },
+    { slug: "isc-inheritance", title: "Inheritance", board: "ISC", class: "ISC XI", subject: "Computer Science", studyData: { concepts: [] } },
+  ];
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => [{ id: "office", title: "Arrays", href: "/office" }],
+    getStudyChapters: () => chapters,
+    searchStudyContent: (term) => ({ chapters: chapters.filter((chapter) => chapter.title.toLowerCase().includes(term)) }),
+    searchQuestions: () => [],
   });
-  assert.equal((await failing(req({ query: "arrays" }))).status, 503);
+  assert.deepEqual(search("arrays", { board: "icse" }).internalResults.map((x) => x.id), ["chapter-icse-arrays"]);
+  assert.deepEqual(search("inheritance", { board: "isc" }).internalResults.map((x) => x.id), ["chapter-isc-inheritance"]);
+  assert.equal(search("arrays", { board: "isc" }).internalResults.length, 0);
+});
+
+test("computer-science subject matches the source registry's Computer Science (Java) label", () => {
+  const chapter = { slug: "java", title: "Java", board: "ISC", class: "ISC XI", subject: "Computer Science (Java)", studyData: { concepts: [] } };
+  const search = createInternalSearchAdapter({
+    getStudyChapters: () => [chapter],
+    searchStudyContent: () => ({ chapters: [chapter] }),
+    searchQuestions: () => [],
+  });
+  assert.deepEqual(search("java", { board: "isc", subject: "computer-science" }).internalResults.map((x) => x.id), ["chapter-java"]);
 });

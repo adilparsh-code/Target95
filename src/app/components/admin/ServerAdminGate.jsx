@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import { headers as nextHeaders } from "next/headers";
 import { requireAdmin } from "@/app/lib/server-auth";
 import AdminAccessDenied from "./AdminAccessDenied";
@@ -17,11 +18,9 @@ export default async function ServerAdminGate({ children }) {
     .map((part) => part.trim())
     .find((part) => part.startsWith("session="));
 
-  const request = new Request("http://local", {
-    // Rebuild the cookie header with the original name. requireAdmin() reads
-    // request.cookies.get("session"), so passing only the raw token would make
-    // every server-side admin check fail (and would also make the gate diverge
-    // from the API authorization path).
+  // NextRequest provides the cookies API consumed by requireAdmin().
+  // A native Web Request has no request.cookies property.
+  const request = new NextRequest("http://local", {
     headers: { cookie: session || "" },
   });
   const admin = await requireAdmin(request);

@@ -95,3 +95,30 @@ test("invalid query returns an empty, typed response without calling sources", (
   assert.equal(response.ok, false);
   assert.deepEqual(response.internalResults, []);
 });
+
+
+test("board-only filters distinguish ICSE from ISC and exclude unclassified office content", () => {
+  const chapters = [
+    { slug: "icse-arrays", title: "Arrays", board: "ICSE", class: "ICSE X", subject: "Computer Applications", studyData: { concepts: [] } },
+    { slug: "isc-inheritance", title: "Inheritance", board: "ISC", class: "ISC XI", subject: "Computer Science", studyData: { concepts: [] } },
+  ];
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => [{ id: "office", title: "Arrays", href: "/office" }],
+    getStudyChapters: () => chapters,
+    searchStudyContent: () => ({ chapters }),
+    searchQuestions: () => [],
+  });
+  assert.deepEqual(search("arrays", { board: "icse" }).internalResults.map((x) => x.id), ["chapter-icse-arrays"]);
+  assert.deepEqual(search("inheritance", { board: "isc" }).internalResults.map((x) => x.id), ["chapter-isc-inheritance"]);
+  assert.equal(search("arrays", { board: "isc" }).internalResults.length, 0);
+});
+
+test("computer-science subject matches the source registry's Computer Science (Java) label", () => {
+  const chapter = { slug: "java", title: "Java", board: "ISC", class: "ISC XI", subject: "Computer Science (Java)", studyData: { concepts: [] } };
+  const search = createInternalSearchAdapter({
+    getStudyChapters: () => [chapter],
+    searchStudyContent: () => ({ chapters: [chapter] }),
+    searchQuestions: () => [],
+  });
+  assert.deepEqual(search("java", { board: "isc", subject: "computer-science" }).internalResults.map((x) => x.id), ["chapter-java"]);
+});

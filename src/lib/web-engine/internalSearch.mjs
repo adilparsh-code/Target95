@@ -78,7 +78,7 @@ export function createInternalSearchAdapter(sources) {
           score: scoreFor(question.title || question.question, term),
         });
       }
-    } else {
+    } else if (!isCBSE) {
       const study = searchStudyContent?.(term, { board: filters.board, class: filters.class }) || { chapters: [] };
       for (const chapter of study.chapters || []) {
         results.push({

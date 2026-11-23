@@ -27,6 +27,8 @@ String replacement practicals use `replace(char, char)`, matching the prescribed
 - `/icse/class-x/lessons/[topic]` — lesson content
 - `/icse/class-x/programs` — recommended 20 Java programs
 
+The Disruptive Technologies lesson explicitly covers all Class X syllabus headings: Cyber hygiene, Cyber laws, Artificial Intelligence, Blockchain technology, Internet of Things, Robotics, 5G technology and Cloud computing.
+
 ## ISC Class XII
 
 ### Java theory scope

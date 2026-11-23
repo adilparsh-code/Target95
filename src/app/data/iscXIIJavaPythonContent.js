@@ -120,18 +120,27 @@ System.out.println(winner.name); // Priya`,
       "Common matrix operations: row sum, column sum, diagonal sum, transpose, and searching for a value.",
     ],
     workedExample: "For an n-element array, use for (int i = 0; i < a.length; i++) to visit every valid index exactly once. For binary search, maintain low and high pointers and compute mid = (low + high) / 2 each iteration.",
-    workedExampleCode: `// Linear search
-static int linearSearch(int[] arr, int key) {
-    for (int i = 0; i < arr.length; i++)
-        if (arr[i] == key) return i;
-    return -1;
-}
-// String reversal
-static String reverse(String s) {
-    String result = "";
-    for (int i = s.length() - 1; i >= 0; i--)
-        result += s.charAt(i);
-    return result;
+    workedExampleCode: `class ArrayStringExample {
+    static int linearSearch(int[] arr, int key) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == key) return i;
+        }
+        return -1;
+    }
+
+    static String reverse(String s) {
+        String result = "";
+        for (int i = s.length() - 1; i >= 0; i--) {
+            result += s.charAt(i);
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] values = {4, 7, 2, 5, 9};
+        System.out.println(linearSearch(values, 5));
+        System.out.println(reverse("ISC"));
+    }
 }`,
     practice: [
       { type: "tracing", question: "Trace a two-dimensional array traversal for int[][] a = {{1,2},{3,4},{5,6}} and list every (i,j) index pair visited by nested loops.", answer: "(0,0),(0,1),(1,0),(1,1),(2,0),(2,1). Use i < a.length and j < a[i].length." },
@@ -180,15 +189,21 @@ static String reverse(String s) {
       "Mutual recursion occurs when method A calls method B and method B calls method A; both must have base cases.",
     ],
     workedExample: "factorial(4) calls factorial(3), factorial(2), factorial(1), then returns 1, 2, 6, 24. The call sequence goes down to the base case and the return sequence multiplies back up.",
-    workedExampleCode: `static int factorial(int n) {
-    if (n <= 1) return 1;          // base case
-    return n * factorial(n - 1);   // recursive case
+    workedExampleCode: `class RecursionExample {
+    static int factorial(int n) {
+        if (n <= 1) return 1;          // base case
+        return n * factorial(n - 1);   // recursive case
+    }
+
+    public static void main(String[] args) {
+        System.out.println(factorial(4));
+    }
 }
-// Trace for n=4:
+// Trace:
 // factorial(4) -> 4 * factorial(3)
 // factorial(3) -> 3 * factorial(2)
 // factorial(2) -> 2 * factorial(1)
-// factorial(1) -> 1  (base case)
+// factorial(1) -> 1 (base case)
 // Returns: 1 -> 2 -> 6 -> 24`,
     practice: [
       { type: "tracing", question: "Trace factorial(5) including the full call sequence and return sequence.", answer: "Calls: 5→4→3→2→1. Returns: 1→2→6→24→120." },
@@ -267,14 +282,20 @@ static String reverse(String s) {
     workedExampleCode: `class Animal {
     void sound() { System.out.println("Generic sound"); }
 }
+
 class Dog extends Animal {
-    void sound() { System.out.println("Woof"); }  // overrides
+    @Override
+    void sound() { System.out.println("Woof"); }
     void fetch() { System.out.println("Fetching!"); }
 }
-// In main:
-Animal a = new Dog();  // superclass reference, subclass object
-a.sound();   // prints "Woof" — dynamic dispatch
-// a.fetch(); // compile error: fetch() not in Animal`,
+
+class InheritanceDemo {
+    public static void main(String[] args) {
+        Animal a = new Dog();
+        a.sound(); // Dynamic dispatch invokes Dog.sound().
+        // a.fetch(); // Does not compile: fetch() is not declared in Animal.
+    }
+}`,
     practice: [
       { type: "tracing", question: "Trace constructor execution for: class A { A() { System.out.println('A'); } } class B extends A { B() { System.out.println('B'); } } new B();", answer: "Output: A then B. The superclass constructor runs first." },
       { type: "tracing", question: "Predict the output: Animal a = new Dog(); a.sound(); where Dog overrides sound() to print 'Woof'.", answer: "Woof. Dynamic method dispatch selects Dog's implementation at runtime." },
@@ -602,6 +623,7 @@ class Queue {
     int[] data;
     int front = 0, rear = -1, size = 0, cap;
     CircularQueue(int cap) {
+        if (cap <= 0) throw new IllegalArgumentException("Capacity must be positive");
         this.cap = cap;
         data = new int[cap];
     }
@@ -628,7 +650,7 @@ class Queue {
     }
 }
 // enqueue 10,20,30 (full); dequeue -> 10; enqueue 40
-// FIFO remaining: 20, 20's front, then 30, 40`,
+// FIFO remaining: 20, 30, 40`,
     practice: [
       { type: "tracing", question: "Empty queue. enqueue(5), enqueue(8), dequeue(), enqueue(3), dequeue(), dequeue(). List each dequeue result and the final state.", answer: "dequeue returns 5, then 8, then 3. The queue is then empty." },
       { type: "tracing", question: "Linear array capacity 3: enqueue(1), enqueue(2), enqueue(3), dequeue(), dequeue(). Can enqueue(4) succeed without shifting or wrapping? Explain.", answer: "No. rear is already at index 2 (last cell) even though two front cells are free. This is false overflow; a circular queue or a shift would be required." },

@@ -97,3 +97,24 @@ test("rate-limited route returns 429 without executing search", async () => {
   assert.equal((await handler(req({ query: "arrays" }))).status, 429);
   assert.equal(searched, false);
 });
+
+
+test("route awaits asynchronous search implementations and converts rejections to 503", async () => {
+  const { db } = fakeDb();
+  const handler = createSearchPostHandler({
+    getSession: async () => ({ uid: "verified-user" }),
+    getDb: () => db,
+    search: async () => ({ ok: true, status: "ok", query: "arrays", internalResults: [], webResults: [] }),
+  });
+  const success = await handler(req({ query: "arrays" }));
+  assert.equal(success.status, 200);
+  assert.equal((await success.json()).ok, true);
+
+  const failing = createSearchPostHandler({
+    getSession: async () => ({ uid: "verified-user" }),
+    getDb: () => db,
+    search: async () => { throw new Error("provider failure"); },
+    logger: { error() {} },
+  });
+  assert.equal((await failing(req({ query: "arrays" }))).status, 503);
+});

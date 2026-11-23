@@ -10,6 +10,7 @@ test("ICSE Class X has 20 unique recommended Java programs", () => {
   assert.equal(icseClass10Programs.length, 20);
   assert.equal(new Set(icseClass10Programs.map((item) => item.id)).size, 20);
   assert.ok(icseClass10Programs.some((item) => item.title === "Alphabetical Sorting of a String Array"));
+  assert.ok(icseClass10Programs.some((item) => item.title === "Alphabetical Selection Sort of a String Array"));
   assert.ok(icseClass10Programs.some((item) => item.title === "Linear Search in a String Array"));
   assert.ok(!icseClass10Programs.some((item) => /matrix/i.test(item.title)));
   const replace = icseClass10Programs.find((item) => item.id === "x-prog-14");

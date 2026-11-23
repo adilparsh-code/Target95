@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  web-engine-api-tests:
+  web-engine-api-checks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,3 +30,9 @@ jobs:
         run: npm test
       - name: Run ESLint
         run: npm run lint
+      - name: Run repository typecheck
+        run: npm run typecheck
+      - name: Build application
+        env:
+          NODE_OPTIONS: --max-old-space-size=7168
+        run: npm run build

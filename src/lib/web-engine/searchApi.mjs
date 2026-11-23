@@ -1,88 +1,210 @@
 import { normalizeSearchQuery } from "./searchContract.mjs";
 
-export const SEARCH_API_LIMITS = Object.freeze({ bodyBytes: 4096, requestsPerWindow: 30, windowMs: 60_000 });
+export const SEARCH_API_LIMITS = Object.freeze({
+  bodyBytes: 4096,
+  requestsPerWindow: 30,
+  windowMs: 60_000,
+});
+
 const TOP_KEYS = new Set(["query", "filters"]);
 const FILTER_KEYS = new Set(["board", "class", "subject"]);
-const CLASS_BOARD = Object.freeze({
-  "cbse-class-9": "CBSE", "cbse-class-10": "CBSE", "cbse-class-11": "CBSE", "cbse-class-12": "CBSE",
-  "icse-class-9": "ICSE", "icse-class-10": "ICSE", "isc-class-11": "ISC", "isc-class-12": "ISC",
+
+const CLASS_FILTERS = Object.freeze({
+  "cbse-class-9": { board: "CBSE", classNumber: 9, group: "cbse" },
+  "cbse-class-10": { board: "CBSE", classNumber: 10, group: "cbse" },
+  "cbse-class-11": { board: "CBSE", classNumber: 11, group: "cbse" },
+  "cbse-class-12": { board: "CBSE", classNumber: 12, group: "cbse" },
+  "icse-class-9": { board: "ICSE", classNumber: 9, group: "icse" },
+  "icse-class-10": { board: "ICSE", classNumber: 10, group: "icse" },
+  "isc-class-11": { board: "ISC", classNumber: 11, group: "isc" },
+  "isc-class-12": { board: "ISC", classNumber: 12, group: "isc" },
 });
-const CBSE_SUBJECT = Object.freeze({ "cbse-class-9": "402", "cbse-class-10": "402", "cbse-class-11": "083", "cbse-class-12": "083" });
-const CISCE_SUBJECTS = new Set(["java", "computer-applications", "computer-science"]);
-const invalid = (error) => ({ ok: false, status: "invalid_request", error });
 
-export function validateSearchPayload(value) {
-  if (!value || typeof value !== "object" || Array.isArray(value)) return invalid("Request body must be a JSON object.");
-  if (Object.keys(value).some((key) => !TOP_KEYS.has(key))) return invalid("Request body contains unsupported fields.");
-  const query = normalizeSearchQuery(value.query);
-  if (!query.ok) return invalid(query.reason);
-  const raw = value.filters === undefined ? {} : value.filters;
-  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return invalid("Filters must be an object.");
-  if (Object.keys(raw).some((key) => !FILTER_KEYS.has(key))) return invalid("Filters contain unsupported fields.");
+const CBSE_SUBJECTS_BY_CLASS = Object.freeze({
+  9: ["402"],
+  10: ["402"],
+  11: ["083", "065", "802"],
+  12: ["083", "065", "802"],
+});
 
-  const board = raw.board === undefined ? null : String(raw.board).trim().toUpperCase();
-  if (board && !["CBSE", "CISCE", "ICSE", "ISC"].includes(board)) return invalid("Board must be CBSE, CISCE, ICSE or ISC.");
-  const classId = raw.class === undefined ? null : String(raw.class).trim().toLowerCase();
-  if (classId && !Object.hasOwn(CLASS_BOARD, classId)) return invalid("Class filter is not supported.");
-  const classBoard = classId ? CLASS_BOARD[classId] : null;
-  if (board && classBoard && board !== classBoard && !(board === "CISCE" && classBoard !== "CBSE")) return invalid("Board and class filters do not match.");
+const CISCE_SUBJECTS_BY_GROUP = Object.freeze({
+  all: ["java", "computer-applications", "computer-science"],
+  icse: ["java", "computer-applications"],
+  isc: ["java", "computer-science"],
+});
 
-  const subject = raw.subject === undefined ? null : String(raw.subject).trim().toLowerCase();
-  if (subject) {
-    if (classBoard === "CBSE" || board === "CBSE") {
-      if (!classId || CBSE_SUBJECT[classId] !== subject) return invalid("CBSE subject must match the selected class.");
-    } else if (!CISCE_SUBJECTS.has(subject)) return invalid("CISCE subject filter is not supported.");
-  }
-  const normalizedBoard = board === "CBSE" || classBoard === "CBSE" ? "cbse" : (board === "ICSE" || board === "ISC" ? board.toLowerCase() : (board || classBoard ? "cisce" : undefined));
-  return { ok: true, query: query.query, filters: {
-    ...(normalizedBoard ? { board: normalizedBoard } : {}),
-    ...(classId ? { class: classId } : {}),
-    ...(subject ? { subject } : {}),
-  } };
+const invalid = (error, status = "invalid_request") => ({ ok: false, status, error });
+
+function hasOnlyKeys(value, allowed) {
+  return Object.keys(value).every((key) => allowed.has(key));
 }
 
+function normalizeBoard(board, classInfo) {
+  if (board === "CBSE" || classInfo?.group === "cbse") return "cbse";
+  if (board === "ICSE") return "icse";
+  if (board === "ISC") return "isc";
+  if (board === "CISCE" || classInfo?.group === "icse" || classInfo?.group === "isc") return "cisce";
+  return undefined;
+}
+
+/**
+ * Validate the public request shape and canonicalise Target95 identifiers.
+ * Identity, role, tenant and entitlement fields are deliberately not accepted.
+ */
+export function validateSearchPayload(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value) || !hasOnlyKeys(value, TOP_KEYS)) {
+    return invalid("Request body must contain only query and filters.");
+  }
+
+  const query = normalizeSearchQuery(value.query);
+  if (!query.ok) return invalid(query.reason, query.status);
+
+  const raw = value.filters === undefined ? {} : value.filters;
+  if (!raw || typeof raw !== "object" || Array.isArray(raw) || !hasOnlyKeys(raw, FILTER_KEYS)) {
+    return invalid("Filters must contain only board, class and subject.", "invalid_filters");
+  }
+
+  let board;
+  let classId;
+  let subject;
+  let classInfo = null;
+
+  if (Object.hasOwn(raw, "board")) {
+    if (typeof raw.board !== "string" || !raw.board.trim()) {
+      return invalid("Board must be CBSE, CISCE, ICSE or ISC.", "invalid_filters");
+    }
+    board = raw.board.trim().toUpperCase();
+    if (!["CBSE", "CISCE", "ICSE", "ISC"].includes(board)) {
+      return invalid("Board must be CBSE, CISCE, ICSE or ISC.", "invalid_filters");
+    }
+  }
+
+  if (Object.hasOwn(raw, "class")) {
+    if (typeof raw.class !== "string" || !raw.class.trim()) {
+      return invalid("Class filter is not supported.", "invalid_filters");
+    }
+    classId = raw.class.trim().toLowerCase();
+    classInfo = CLASS_FILTERS[classId] || null;
+    if (!classInfo) return invalid("Class filter is not supported.", "invalid_filters");
+
+    if (board) {
+      const compatible =
+        board === classInfo.board ||
+        (board === "CISCE" && classInfo.group !== "cbse");
+      if (!compatible) return invalid("Board and class filters do not match.", "invalid_filters");
+    } else {
+      board = classInfo.board;
+    }
+  }
+
+  if (Object.hasOwn(raw, "subject")) {
+    if (typeof raw.subject !== "string" || !raw.subject.trim()) {
+      return invalid("Subject filter is not supported.", "invalid_filters");
+    }
+    subject = raw.subject.trim().toLowerCase();
+  }
+
+  if (board === "CBSE" && !classInfo) {
+    return invalid("Select a CBSE class before searching CBSE content.", "invalid_filters");
+  }
+  if (subject && !board) {
+    return invalid("Select a board or class when filtering by subject.", "invalid_filters");
+  }
+
+  if (subject && board === "CBSE") {
+    const allowed = CBSE_SUBJECTS_BY_CLASS[classInfo.classNumber] || [];
+    if (!allowed.includes(subject)) {
+      return invalid("Subject is not available for the selected CBSE class.", "invalid_filters");
+    }
+  }
+
+  if (subject && board !== "CBSE") {
+    const group = classInfo?.group || (board === "ICSE" ? "icse" : board === "ISC" ? "isc" : "all");
+    if (!CISCE_SUBJECTS_BY_GROUP[group].includes(subject)) {
+      return invalid("Subject is not available for the selected CISCE class.", "invalid_filters");
+    }
+  }
+
+  const normalizedBoard = normalizeBoard(board, classInfo);
+  const filters = {};
+  if (normalizedBoard) filters.board = normalizedBoard;
+  if (classId) filters.class = classId;
+  if (subject) filters.subject = subject;
+
+  return { ok: true, query: query.query, filters };
+}
+
+/**
+ * Read JSON with a streamed byte cap. Content-Length is an early check only;
+ * the actual bytes read from the stream are always counted.
+ */
 export async function readBoundedJson(request, maxBytes = SEARCH_API_LIMITS.bodyBytes) {
-  const declared = Number(request.headers?.get?.("content-length") || 0);
-  if (declared > maxBytes) return { ok: false, error: "Request body is too large." };
-  if (!request.body?.getReader) return { ok: false, error: "Request body is required." };
+  const contentType = request.headers?.get?.("content-type") || "";
+  if (!/^application\/json(?:\s*;|$)/i.test(contentType)) {
+    return { ok: false, status: 415, code: "unsupported_media_type", error: "Send a JSON request body." };
+  }
+
+  const contentLength = request.headers?.get?.("content-length");
+  if (contentLength !== null && contentLength !== undefined) {
+    if (!/^\d+$/.test(contentLength)) {
+      return { ok: false, status: 400, code: "invalid_request", error: "Invalid Content-Length header." };
+    }
+    if (Number(contentLength) > maxBytes) {
+      return { ok: false, status: 413, code: "payload_too_large", error: "Search request body is too large." };
+    }
+  }
+
+  if (!request.body || typeof request.body.getReader !== "function") {
+    return { ok: false, status: 400, code: "invalid_request", error: "A JSON request body is required." };
+  }
+
   const reader = request.body.getReader();
   const chunks = [];
-  let total = 0;
+  let totalBytes = 0;
+
   try {
     while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      total += value.byteLength;
-      if (total > maxBytes) { await reader.cancel(); return { ok: false, error: "Request body is too large." }; }
-      chunks.push(value);
+      const part = await reader.read();
+      if (part.done) break;
+      const chunk = part.value instanceof Uint8Array ? part.value : new Uint8Array(part.value);
+      totalBytes += chunk.byteLength;
+      if (totalBytes > maxBytes) {
+        try {
+          await reader.cancel();
+        } catch {
+          // Cancellation is best effort after rejecting an oversized body.
+        }
+        return { ok: false, status: 413, code: "payload_too_large", error: "Search request body is too large." };
+      }
+      chunks.push(chunk);
     }
   } catch {
-    return { ok: false, error: "Request body could not be read." };
+    return { ok: false, status: 400, code: "invalid_request", error: "Could not read the JSON request body." };
+  } finally {
+    try {
+      reader.releaseLock();
+    } catch {
+      // A cancelled stream may already have released its reader.
+    }
   }
-  try {
-    const bytes = new Uint8Array(total);
-    let offset = 0;
-    for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-    return { ok: true, value: JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes)) };
-  } catch {
-    return { ok: false, error: "Request body must contain valid UTF-8 JSON." };
-  }
-}
 
-export async function consumeSearchRateLimit(db, uid, { now = Date.now(), limit = SEARCH_API_LIMITS.requestsPerWindow, windowMs = SEARCH_API_LIMITS.windowMs } = {}) {
-  if (!db || typeof uid !== "string" || !uid) throw new TypeError("A verified user and Firestore database are required.");
-  const ref = db.collection("users").doc(uid).collection("usage").doc("webSearch");
-  return db.runTransaction(async (tx) => {
-    const snap = await tx.get(ref);
-    const data = snap.exists ? snap.data() : null;
-    const start = Number(data?.windowStart || 0);
-    const count = Number(data?.count || 0);
-    if (!snap.exists || !Number.isFinite(start) || now - start >= windowMs || now < start) {
-      tx.set(ref, { count: 1, windowStart: now });
-      return { limited: false, remaining: Math.max(0, limit - 1), resetAt: now + windowMs };
-    }
-    if (!Number.isFinite(count) || count >= limit) return { limited: true, remaining: 0, resetAt: start + windowMs };
-    tx.set(ref, { count: count + 1, windowStart: start });
-    return { limited: false, remaining: Math.max(0, limit - count - 1), resetAt: start + windowMs };
-  });
+  const bytes = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+
+  let source;
+  try {
+    source = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+  } catch {
+    return { ok: false, status: 400, code: "invalid_request", error: "Request body must be valid UTF-8 JSON." };
+  }
+
+  try {
+    return { ok: true, value: JSON.parse(source) };
+  } catch {
+    return { ok: false, status: 400, code: "invalid_request", error: "Invalid JSON request body." };
+  }
 }

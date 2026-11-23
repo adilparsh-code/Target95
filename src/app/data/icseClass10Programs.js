@@ -13,7 +13,22 @@ export const icseClass10Programs = [
  {id:'x-prog-04',title:'Linear Search',topic:'Arrays',difficulty:'Medium',question:'Search for a given element in an array using linear search and display its position if found.',variables:'int a[], key, position',code:`import java.util.*;\nclass LinearSearch {\n public static void main(String args[]) {\n  Scanner sc=new Scanner(System.in); int n=sc.nextInt(); int a[]=new int[n];\n  for(int i=0;i<n;i++)a[i]=sc.nextInt(); int key=sc.nextInt(),pos=-1;\n  for(int i=0;i<n;i++)if(a[i]==key){pos=i;break;}\n  if(pos>=0)System.out.println("Found at position "+(pos+1));else System.out.println("Not Found");\n }\n}`,sampleInput:'5\n11 25 8 19 31\n19',sampleOutput:'Found at position 4',concepts:['linear search','array traversal']},
  {id:'x-prog-05',title:'Binary Search',topic:'Arrays',difficulty:'Medium',question:'Search for an element in a sorted integer array using binary search.',variables:'int a[], key, low, high, mid',code:`import java.util.*;\nclass BinarySearch {\n public static void main(String args[]) {\n  Scanner sc=new Scanner(System.in); int n=sc.nextInt(); int a[]=new int[n];\n  for(int i=0;i<n;i++)a[i]=sc.nextInt(); int key=sc.nextInt();\n  int low=0,high=n-1,pos=-1;\n  while(low<=high){int mid=(low+high)/2;if(a[mid]==key){pos=mid;break;}else if(a[mid]<key)low=mid+1;else high=mid-1;}\n  if(pos>=0)System.out.println("Found at position "+(pos+1));else System.out.println("Not Found");\n }\n}`,sampleInput:'6\n4 9 15 22 31 40\n22',sampleOutput:'Found at position 4',concepts:['binary search','sorted array']},
  {id:'x-prog-06',title:'Bubble Sort',topic:'Arrays',difficulty:'Medium',question:'Sort an array of integers in ascending order using bubble sort.',variables:'int a[], i, j, temp',code:`import java.util.*;\nclass BubbleSort {\n public static void main(String args[]) {\n  Scanner sc=new Scanner(System.in); int n=sc.nextInt(); int a[]=new int[n]; for(int i=0;i<n;i++)a[i]=sc.nextInt();\n  for(int i=0;i<n-1;i++)for(int j=0;j<n-1-i;j++)if(a[j]>a[j+1]){int t=a[j];a[j]=a[j+1];a[j+1]=t;}\n  for(int x:a)System.out.print(x+" ");\n }\n}`,sampleInput:'5\n9 3 7 1 5',sampleOutput:'1 3 5 7 9',concepts:['sorting','nested loops']},
- {id:'x-prog-07',title:'Selection Sort',topic:'Arrays',difficulty:'Medium',question:'Sort an integer array in ascending order using selection sort.',variables:'int a[], i, j, min, temp',code:`import java.util.*;\nclass SelectionSort {\n public static void main(String args[]) {\n  Scanner sc=new Scanner(System.in); int n=sc.nextInt(); int a[]=new int[n]; for(int i=0;i<n;i++)a[i]=sc.nextInt();\n  for(int i=0;i<n-1;i++){int min=i;for(int j=i+1;j<n;j++)if(a[j]<a[min])min=j;int t=a[i];a[i]=a[min];a[min]=t;}\n  for(int x:a)System.out.print(x+" ");\n }\n}`,sampleInput:'5\n64 25 12 22 11',sampleOutput:'11 12 22 25 64',concepts:['selection sort','nested loops']},
+ {id:'x-prog-07',title:'Alphabetical Selection Sort of a String Array',topic:'String Arrays',difficulty:'Medium',question:'Accept names into a one-dimensional String array and arrange them in alphabetical order using selection sort.',variables:'String names[]; int i,j,min; String temp',code:`import java.util.*;
+class SelectionSortNames {
+ public static void main(String args[]) {
+  Scanner sc=new Scanner(System.in);
+  int n=sc.nextInt(); sc.nextLine();
+  String names[]=new String[n];
+  for(int i=0;i<n;i++) names[i]=sc.nextLine();
+  for(int i=0;i<n-1;i++) {
+   int min=i;
+   for(int j=i+1;j<n;j++)
+    if(names[j].compareToIgnoreCase(names[min])<0) min=j;
+   String t=names[i]; names[i]=names[min]; names[min]=t;
+  }
+  for(int i=0;i<n;i++) System.out.println(names[i]);
+ }
+}`,sampleInput:'4\\nZara\\nAman\\nRiya\\nBilal',sampleOutput:'Aman\\nBilal\\nRiya\\nZara',concepts:['String array','selection sort','compareToIgnoreCase']},
  {id:'x-prog-08',title:'Alphabetical Sorting of a String Array',topic:'String Arrays',difficulty:'Medium',question:'Accept names into a one-dimensional String array and arrange them in alphabetical order using bubble sort.',variables:'String names[]; int i,j; String temp',code:`import java.util.*;
 class SortNames {
  public static void main(String args[]) {

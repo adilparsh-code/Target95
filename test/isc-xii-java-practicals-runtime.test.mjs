@@ -49,7 +49,7 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
       if (item.id === "ISC12-A01") {
         const boundaryRun = spawnSync("java", ["-cp", workDir, mainClass], {
           encoding: "utf8",
-          input: "2\\n-1 -2147483648\\n",
+          input: "2\n-1 -2147483648\n",
           timeout: 10000,
         });
         assert.equal(boundaryRun.status, 0, `${item.id} failed on Integer.MIN_VALUE boundary input:\\n${boundaryRun.stderr}`);

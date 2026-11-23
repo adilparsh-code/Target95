@@ -49,7 +49,7 @@ export const ISC_XII_JAVA_PRACTICALS = [
       "Object return type",
       "Reference comparison"
     ]
-  },,
+  },
   {
     "id": "ISC12-M03",
     "topicKey": "methods-object-parameter-return",
@@ -95,7 +95,7 @@ export const ISC_XII_JAVA_PRACTICALS = [
       "Object return type",
       "Calling an instance method"
     ]
-  },,
+  },
   {
     "id": "ISC12-M05",
     "topicKey": "methods-object-parameter-return",

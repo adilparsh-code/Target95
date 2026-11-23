@@ -5,7 +5,7 @@ export const ISC_XII_JAVA_PYTHON_CONTENT = {
     diagrams: [
       {
         type: "image",
-        title: "Passing Objects by Reference-Value",
+        title: "Passing Object References by Value",
         explanation: "A method parameter receives a copy of the object reference, not a copy of the object. Changing a field through that reference is visible to the caller, but reassigning the parameter itself is not.",
         src: "/visuals/icse-java/java-object-reference-passing.svg",
         alt: "Two-panel diagram: one showing a field change through a passed reference visible to the caller, the other showing a swap() of local reference copies that does not affect the caller's variables.",
@@ -42,7 +42,7 @@ Student winner = Student.topper(s1, s2);
 System.out.println(winner.name); // Priya`,
     practice: [
       { type: "tracing", question: "A method receives a Student object, increments its marks by 5, and returns the same reference. The caller prints marks before and after the call. What does the caller see?", answer: "The caller sees the updated marks after the call because both the caller and the method reference the same object in memory." },
-      { type: "tracing", question: "Trace: Student a = new Student('Ali', 70); Student b = a; b.marks = 90; System.out.println(a.marks);", answer: "90. Both a and b refer to the same object, so changing b.marks also changes a.marks." },
+      { type: "tracing", question: "Trace: Student a = new Student("Ali", 70); Student b = a; b.marks = 90; System.out.println(a.marks);", answer: "90. Both a and b refer to the same object, so changing b.marks also changes a.marks." },
       { type: "debugging", question: "A method is declared to return Student but one branch reaches the closing brace without a return statement. What error occurs and when?", answer: "A compile-time error: 'missing return statement'. Every reachable path in a non-void method must return a compatible value." },
       { type: "debugging", question: "A student writes: void compare(int a, int b) { return a > b; }. Identify two errors.", answer: "(1) A void method cannot return a value. (2) The return type should be boolean, not void." },
       { type: "programming", question: "Write a method that accepts two Student objects and returns the one with the greater marks. Handle a tie by returning the first argument.", answer: "Compare the marks fields and return the appropriate Student reference; if marks are equal, return the first parameter." },
@@ -401,23 +401,59 @@ def word_frequency(words):
       "Choose a structure based on required operations: stack for undo/backtracking/expression evaluation, queue for scheduling/BFS, linked list for dynamic insertion, tree for hierarchical search.",
     ],
     workedExample: "Stack trace: push(A), push(B), push(C), pop() → C, push(D), pop() → D, pop() → B. Queue trace: enqueue(A), enqueue(B), dequeue() → A, enqueue(C), dequeue() → B. Tree: root 8 with left 3 and right 10 has inorder 3, 8, 10.",
-    workedExampleCode: `// Stack using array (ISC style)
+    workedExampleCode: `// Array stack with explicit overflow and underflow checks
 class Stack {
     int[] data;
     int top = -1;
-    Stack(int size) { data = new int[size]; }
-    void push(int x) { data[++top] = x; }
-    int pop() { return data[top--]; }
-    int peek() { return data[top]; }
+    Stack(int capacity) { data = new int[capacity]; }
     boolean isEmpty() { return top == -1; }
+    boolean isFull() { return top == data.length - 1; }
+    void push(int x) {
+        if (isFull()) {
+            System.out.println("Overflow");
+            return;
+        }
+        data[++top] = x;
+    }
+    int pop() {
+        if (isEmpty()) {
+            System.out.println("Underflow");
+            return -1;
+        }
+        return data[top--];
+    }
+    int peek() {
+        if (isEmpty()) return -1;
+        return data[top];
+    }
 }
-// Queue using array
+
+// Circular array queue reuses freed positions
 class Queue {
     int[] data;
     int front = 0, rear = -1, size = 0;
-    Queue(int cap) { data = new int[cap]; }
-    void enqueue(int x) { data[++rear] = x; size++; }
-    int dequeue() { size--; return data[front++]; }
+    Queue(int capacity) { data = new int[capacity]; }
+    boolean isEmpty() { return size == 0; }
+    boolean isFull() { return size == data.length; }
+    void enqueue(int x) {
+        if (isFull()) {
+            System.out.println("Overflow");
+            return;
+        }
+        rear = (rear + 1) % data.length;
+        data[rear] = x;
+        size++;
+    }
+    int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Underflow");
+            return -1;
+        }
+        int value = data[front];
+        front = (front + 1) % data.length;
+        size--;
+        return value;
+    }
 }`,
     practice: [
       { type: "tracing", question: "Trace: push(10), push(20), push(30), pop(), push(40), pop(), pop() on a stack. List the values returned by each pop.", answer: "pop() returns 30, then 40, then 20." },

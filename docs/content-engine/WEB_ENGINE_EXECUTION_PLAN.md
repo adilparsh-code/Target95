@@ -1,6 +1,6 @@
 # Target95 Web Engine — execution plan and repository audit
 
-Status: Phase 0 audit recorded; Phase 1 adapter, server-only source composition and unit tests authored (execution not yet verified).
+Status: Phase 0 audit recorded; Phase 1 adapter and server-only source composition implemented. The focused Web Engine test suite passed in GitHub Actions for both push and pull_request events on 2026-11-23.
 Branch: `feat/web-engine-foundation`
 Base: `feat/content-engine-mocktest` (stacked on P1; no PR has been merged by this work).
 
@@ -114,7 +114,7 @@ Existing ACE / StudentGlobalSearch UI
 - Added `src/lib/web-engine/internalSources.js` as the server-only composition root. It wires the existing Office search, study-center search, generated answer-free CISCE question index, CBSE chapter registry and CBSE practice source into the adapter. CBSE source records contain answer-bearing fields, so the composition root is protected with Next.js `server-only`; only allow-listed result fields leave the adapter.
 - Added `test/web-engine-internal-search.test.mjs` for source composition, CBSE class/subject filtering, navigation URLs and answer/explanation exclusion. Registered both test files in `npm test` and `npm run test:web-engine`.
 - Added `npm run test:web-engine` and included the new test in `npm test`.
-- These files were committed through GitHub's repository API. No local runtime is available in this session, so tests, lint and build have **not** been run. Do not treat them as passing until executed in a development workspace.
+- These files were committed through GitHub's repository API. GitHub Actions run 45236168398 (push) and run 45236182929 (pull_request) both completed successfully on commit 6b49e80603fe43ba6789a9823249fd84c0f5384b, including npm ci and npm run test:web-engine. Lint, typecheck and production build have not been run for this Phase 1 branch.
 - No UI, API route, external provider, secrets, Firebase, Vercel, MockTest logic or feature flags were changed.
 
 ## Next implementation task

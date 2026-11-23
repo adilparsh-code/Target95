@@ -133,7 +133,7 @@ export const ISC_XII_JAVA_PRACTICALS = [
       "Do not treat a duplicate of the largest value as the second largest.",
       "Report when fewer than two distinct values exist."
     ],
-    "code": "import java.util.*;\nclass SecondLargest {\n    public static void main(String args[]) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n        int largest = Integer.MIN_VALUE, second = Integer.MIN_VALUE;\n        for (int x : a) {\n            if (x > largest) { second = largest; largest = x; }\n            else if (x > second && x != largest) second = x;\n        }\n        if (second == Integer.MIN_VALUE) System.out.println(\"No second distinct value\");\n        else System.out.println(\"Second largest = \" + second);\n    }\n}",
+    "code": "import java.util.*;\nclass SecondLargest {\n    public static void main(String args[]) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] a = new int[n];\n        for (int i = 0; i < n; i++) a[i] = sc.nextInt();\n        long largest = Long.MIN_VALUE, second = Long.MIN_VALUE;\n        for (int x : a) {\n            if (x > largest) { second = largest; largest = x; }\n            else if (x > second && x != largest) second = x;\n        }\n        if (second == Integer.MIN_VALUE) System.out.println(\"No second distinct value\");\n        else System.out.println(\"Second largest = \" + second);\n    }\n}",
     "sampleInput": "6\n12 45 45 29 8 37",
     "sampleOutput": "Second largest = 37",
     "concepts": [

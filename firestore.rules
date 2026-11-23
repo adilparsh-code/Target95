@@ -125,9 +125,11 @@ service cloud.firestore {
       allow create, update, delete: if isTeacher();
     }
 
+    // Question documents may contain answer keys and explanations. Keep the
+    // full records server/teacher-only; student delivery must use an
+    // answer-free projection or a server-graded attempt endpoint.
     match /questions/{questionId} {
-      allow read: if isActiveUser();
-      allow create, update, delete: if isTeacher();
+      allow read, create, update, delete: if isTeacher();
     }
 
     match /bookmarks/{bookmarkId} {

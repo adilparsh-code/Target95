@@ -81,6 +81,12 @@ describe("firestore.rules", { skip }, () => {
     await set(OWNER, `progress/aliceMarker`, { userId: ALICE, chapter: "loops", questionId: "q1", completedAt: "2026-10-28T00:00:00Z" });
     await set(OWNER, `progress/bobMarker`, { userId: BOB, chapter: "loops", questionId: "q1" });
     await set(OWNER, `users/${ALICE}/mockAttempts/att1`, { userId: ALICE, status: "in_progress", questionIds: ["1001"] });
+    // Admin-authored question documents include answer keys and explanations.
+    await set(OWNER, "questions/answerKey", {
+      question: "What is a loop?",
+      answer: "A control structure that repeats instructions.",
+      explanation: "It repeats a block while a condition is true.",
+    });
   });
 
   describe("results (mock test scores)", () => {
@@ -180,6 +186,12 @@ describe("firestore.rules", { skip }, () => {
   });
 
   describe("teacher content workflows", () => {
+    test("students cannot read answer-bearing question documents; teachers and admins can", async () => {
+      denied(await get(token(ALICE), "questions/answerKey"));
+      allowed(await get(token(TEACHER), "questions/answerKey"));
+      allowed(await get(token(ADMIN), "questions/answerKey"));
+    });
+
     test("teacher can create questions, student cannot", async () => {
       allowed(await create(token(TEACHER), "questions", "tq1", { question: "What is a loop?" }));
       denied(await create(token(ALICE), "questions", "sq1", { question: "x" }));

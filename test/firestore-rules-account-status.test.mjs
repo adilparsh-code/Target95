@@ -107,8 +107,10 @@ describe("firestore.rules: account status", { skip }, () => {
       allowed(await create(token(ALICE), "progress", "a1", { userId: ALICE, chapter: "loops", questionId: "q2" }));
       allowed(await create(token(ALICE), "bookmarks", "b1", { userId: ALICE, questionId: "q2" }));
     });
-    test("reads learning content", async () => {
-      allowed(await get(token(ALICE), "questions/q1"));
+    test("student cannot read answer-bearing question documents; staff can", async () => {
+      denied(await get(token(ALICE), "questions/q1"));
+      allowed(await get(token(TEACHER), "questions/q1"));
+      allowed(await get(token(ADMIN), "questions/q1"));
     });
     test("cannot change own status, disabled or role", async () => {
       denied(await patch(token(ALICE), `users/${ALICE}`, { status: "inactive" }));
@@ -172,10 +174,8 @@ describe("firestore.rules: account status", { skip }, () => {
       await set(OWNER, `users/${uid}/practiceSessions/s1`, { score: 1 });
       const oldToken = token(uid);
       allowed(await get(oldToken, `users/${uid}/practiceSessions/s1`));
-      allowed(await get(oldToken, "questions/q1"));
       await patch(OWNER, `users/${uid}`, { status: "inactive", disabled: true });
       denied(await get(oldToken, `users/${uid}/practiceSessions/s1`));
-      denied(await get(oldToken, "questions/q1"));
       denied(await create(oldToken, `users/${uid}/practiceSessions`, "s2", { startedAt: "now" }));
       denied(await patch(oldToken, `users/${uid}`, { status: "active", disabled: false }));
     });
@@ -185,7 +185,6 @@ describe("firestore.rules: account status", { skip }, () => {
       const oldToken = token(uid);
       // Simulates partial_auth_only: Auth disabled + revoked, profile still active.
       // Nothing in Firestore changed, so the unexpired token still passes.
-      allowed(await get(oldToken, "questions/q1"));
       allowed(await create(oldToken, `users/${uid}/practiceSessions`, "s1", { startedAt: "now" }));
     });
     // Token expiry (<= 1h) is enforced by production Firebase; the emulator
@@ -230,7 +229,6 @@ describe("firestore.rules: account status", { skip }, () => {
         uid: "gina", email: "gina@example.com", fullName: "Gina", avatarUrl: "", role: "student", board: "ICSE",
         studentClass: "Class 10", emailVerified: true, createdAt: "2026-10-28T00:00:00Z", status: "active",
       }));
-      allowed(await get(token("gina"), "questions/q1"));
     });
   });
 

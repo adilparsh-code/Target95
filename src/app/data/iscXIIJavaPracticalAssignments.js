@@ -31,25 +31,25 @@ export const ISC_XII_JAVA_PRACTICALS = [
     "id": "ISC12-M02",
     "topicKey": "methods-object-parameter-return",
     "category": "Methods",
-    "title": "Reverse an Array through a Returned Array",
+    "title": "Return the Book with Lower Price",
     "difficulty": "Medium",
-    "objective": "Pass a one-dimensional integer array to a method and return a new array containing the elements in reverse order.",
-    "variables": "int[] source, int[] reversed",
+    "objective": "Pass two Book objects to a static method and return the reference to the book with the lower price. On a tie, return the first book.",
+    "variables": "Book a, Book b, Book cheaper",
     "algorithm": [
-      "Create and initialise the source array.",
-      "Pass the array to reverseArray().",
-      "Create a new array of equal length inside the method.",
-      "Copy elements from the end of source to the beginning of the returned array."
+      "Create two Book objects using a parameterised constructor.",
+      "Pass both object references to lowerPriced().",
+      "Compare the prices and return the reference to the less expensive book.",
+      "Display the returned object's title and price."
     ],
-    "code": "class ArrayReturn {\n    static int[] reverseArray(int[] a) {\n        int[] result = new int[a.length];\n        for (int i = 0; i < a.length; i++)\n            result[i] = a[a.length - 1 - i];\n        return result;\n    }\n    public static void main(String args[]) {\n        int[] data = {12, 25, 31, 48};\n        int[] answer = reverseArray(data);\n        for (int x : answer) System.out.print(x + \" \");\n    }\n}",
+    "code": "class Book {\n    String title;\n    double price;\n    Book(String t, double p) { title = t; price = p; }\n}\nclass LowerPriceMethod {\n    static Book lowerPriced(Book a, Book b) {\n        if (a.price <= b.price) return a;\n        return b;\n    }\n    public static void main(String args[]) {\n        Book b1 = new Book(\"Java\", 450);\n        Book b2 = new Book(\"Python\", 520);\n        Book result = lowerPriced(b1, b2);\n        System.out.println(result.title + \" \" + result.price);\n    }\n}",
     "sampleInput": "No keyboard input",
-    "sampleOutput": "48 31 25 12",
+    "sampleOutput": "Java 450.0",
     "concepts": [
-      "Array as parameter",
-      "Array return type",
-      "New array creation"
+      "Object as argument",
+      "Object return type",
+      "Reference comparison"
     ]
-  },
+  },,
   {
     "id": "ISC12-M03",
     "topicKey": "methods-object-parameter-return",
@@ -77,25 +77,25 @@ export const ISC_XII_JAVA_PRACTICALS = [
     "id": "ISC12-M04",
     "topicKey": "methods-object-parameter-return",
     "category": "Methods",
-    "title": "Return an Array of Even Values",
+    "title": "Return the Rectangle with Greater Area",
     "difficulty": "Hard",
-    "objective": "Pass an integer array to a method and return a compact array containing only its even elements.",
-    "variables": "int[] values, int count, int[] evenValues",
+    "objective": "Pass two Rectangle objects to a static method and return the object having the greater area.",
+    "variables": "Rectangle r1, Rectangle r2, Rectangle larger",
     "algorithm": [
-      "Count the even elements in a first traversal.",
-      "Create a result array of exactly that size.",
-      "Copy even elements into the result array.",
-      "Return and display the result."
+      "Create two Rectangle objects using a parameterised constructor.",
+      "Pass both objects to largerRectangle().",
+      "Calculate the area of each rectangle and compare the results.",
+      "Return and display the rectangle with the greater area."
     ],
-    "code": "class EvenArray {\n    static int[] getEven(int[] a) {\n        int count = 0;\n        for (int x : a) if (x % 2 == 0) count++;\n        int[] result = new int[count];\n        int k = 0;\n        for (int x : a) if (x % 2 == 0) result[k++] = x;\n        return result;\n    }\n    public static void main(String args[]) {\n        int[] data = {7, 12, 5, 18, 21, 24};\n        int[] even = getEven(data);\n        for (int x : even) System.out.print(x + \" \");\n    }\n}",
+    "code": "class Rectangle {\n    double length, breadth;\n    Rectangle(double l, double b) { length = l; breadth = b; }\n    double area() { return length * breadth; }\n}\nclass RectangleMethod {\n    static Rectangle largerRectangle(Rectangle a, Rectangle b) {\n        if (a.area() >= b.area()) return a;\n        return b;\n    }\n    public static void main(String args[]) {\n        Rectangle r1 = new Rectangle(4, 5);\n        Rectangle r2 = new Rectangle(6, 3);\n        Rectangle result = largerRectangle(r1, r2);\n        System.out.println(result.length + \" x \" + result.breadth + \" = \" + result.area());\n    }\n}",
     "sampleInput": "No keyboard input",
-    "sampleOutput": "12 18 24",
+    "sampleOutput": "4.0 x 5.0 = 20.0",
     "concepts": [
-      "Array parameter",
-      "Array return",
-      "Two-pass processing"
+      "Objects as arguments",
+      "Object return type",
+      "Calling an instance method"
     ]
-  },
+  },,
   {
     "id": "ISC12-M05",
     "topicKey": "methods-object-parameter-return",

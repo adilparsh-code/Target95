@@ -45,6 +45,20 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
       const actual = execution.stdout.replace(/\r\n/g, "\n").trimEnd();
       const expected = item.sampleOutput.replace(/\r\n/g, "\n").trimEnd();
       assert.equal(actual, expected, `${item.id} (${item.title}) sample output mismatch`);
+
+      if (item.id === "ISC12-A01") {
+        const boundaryRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: "2\\n-1 -2147483648\\n",
+          timeout: 10000,
+        });
+        assert.equal(boundaryRun.status, 0, `${item.id} failed on Integer.MIN_VALUE boundary input:\\n${boundaryRun.stderr}`);
+        assert.equal(
+          boundaryRun.stdout.trimEnd(),
+          "Second largest = -2147483648",
+          "Second Largest must preserve Integer.MIN_VALUE as a valid distinct result",
+        );
+      }
     }
   } finally {
     rmSync(root, { recursive: true, force: true });

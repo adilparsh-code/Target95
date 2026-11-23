@@ -14,7 +14,7 @@ export const SEARCH_LIMITS = Object.freeze({
 });
 
 const RESULT_TYPES = new Set(["chapter", "topic", "question", "subject", "document", "web"]);
-const SOURCE_TYPES = new Set(["target95", "web"]);
+const RESPONSE_STATUSES = new Set(["ok", "internal_only", "web_only", "internal_unavailable", "web_unavailable", "provider_unconfigured"]);
 
 const cleanText = (value, max) => String(value ?? "").replace(/\s+/g, " ").trim().slice(0, max);
 
@@ -135,7 +135,7 @@ export function buildSearchResponse({ query, internalResults = [], webResults = 
 
   return {
     ok: true,
-    status: SOURCE_TYPES.has(status) ? status : "ok",
+    status: RESPONSE_STATUSES.has(status) ? status : "ok",
     query: normalizedQuery.query,
     internalResults: internal,
     webResults: external,

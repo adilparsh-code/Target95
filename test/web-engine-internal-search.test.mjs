@@ -26,7 +26,7 @@ test("internal adapter combines existing office, study, concept and answer-free 
   const response = search("array", { board: "cisce", class: { id: "icse-class-10" } });
   assert.equal(response.ok, true);
   assert.deepEqual(response.internalResults.map((item) => item.id), [
-    "chapter-arrays", "concept-arrays-0", "question-q-1", "office-word-1",
+    "chapter-arrays", "concept-arrays-0", "question-q-1",
   ]);
   assert.equal(JSON.stringify(response).includes("MUST NEVER BE COPIED"), false);
   assert.equal(response.internalResults.find((item) => item.id === "question-q-1").href, "/Java/arrays");
@@ -94,4 +94,31 @@ test("invalid query returns an empty, typed response without calling sources", (
   const response = search("   ");
   assert.equal(response.ok, false);
   assert.deepEqual(response.internalResults, []);
+});
+
+
+test("board-only filters distinguish ICSE from ISC and exclude unclassified office content", () => {
+  const chapters = [
+    { slug: "icse-arrays", title: "Arrays", board: "ICSE", class: "ICSE X", subject: "Computer Applications", studyData: { concepts: [] } },
+    { slug: "isc-inheritance", title: "Inheritance", board: "ISC", class: "ISC XI", subject: "Computer Science", studyData: { concepts: [] } },
+  ];
+  const search = createInternalSearchAdapter({
+    searchOfficeContent: () => [{ id: "office", title: "Arrays", href: "/office" }],
+    getStudyChapters: () => chapters,
+    searchStudyContent: (term) => ({ chapters: chapters.filter((chapter) => chapter.title.toLowerCase().includes(term)) }),
+    searchQuestions: () => [],
+  });
+  assert.deepEqual(search("arrays", { board: "icse" }).internalResults.map((x) => x.id), ["chapter-icse-arrays"]);
+  assert.deepEqual(search("inheritance", { board: "isc" }).internalResults.map((x) => x.id), ["chapter-isc-inheritance"]);
+  assert.equal(search("arrays", { board: "isc" }).internalResults.length, 0);
+});
+
+test("computer-science subject matches the source registry's Computer Science (Java) label", () => {
+  const chapter = { slug: "java", title: "Java", board: "ISC", class: "ISC XI", subject: "Computer Science (Java)", studyData: { concepts: [] } };
+  const search = createInternalSearchAdapter({
+    getStudyChapters: () => [chapter],
+    searchStudyContent: () => ({ chapters: [chapter] }),
+    searchQuestions: () => [],
+  });
+  assert.deepEqual(search("java", { board: "isc", subject: "computer-science" }).internalResults.map((x) => x.id), ["chapter-java"]);
 });

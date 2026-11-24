@@ -1,8 +1,9 @@
 # Target95 Web Engine — execution plan and repository audit
 
-Status: Phase 0 audit recorded; Phase 1 adapter and server-only source composition implemented. The focused Web Engine test suite passed in GitHub Actions for both push and pull_request events on 2026-11-23.
-Branch: `feat/web-engine-foundation`
-Base: `feat/content-engine-mocktest` (stacked on P1; no PR has been merged by this work).
+Status: Phase 1 internal search foundation and Phase 2 authenticated internal search API are verified green. The Phase 2 branch is synced to the latest Phase 1 head; both push and pull-request workflows passed on 2026-11-24.
+Phase 1 branch: `feat/web-engine-foundation`
+Phase 2 branch: `feat/web-engine-api`
+Phase 1 base: `feat/content-engine-mocktest` (stacked on P1; no PR has been merged by this work).
 
 ## Product intent
 
@@ -21,8 +22,8 @@ The existing ACE identity and UI should be reused. Do not create a second mascot
 - PR #100 (P0 schema/normalizer/validator/static adapter) is merged.
 - PR #103 (grouped-examples search crash fix) is merged.
 - PR #101 (P1 canonical identity, chapter selectors, search/bookmark migration) is open, head `6fa5c48`.
-- PR #102 (MockTest content-engine delivery and answer-free search projection) is open, head `7e5f864`, based on P1.
-- This branch is based on `feat/content-engine-mocktest` so it can reuse the answer-free search projection. No existing branch or PR is modified. No PR is merged.
+- PR #102 (MockTest content-engine delivery and answer-free search projection) is open, head `7e5f864`.
+- Phase 1 is stacked on `feat/content-engine-mocktest`; Phase 2 is stacked on Phase 1. No existing branch or PR is modified. No PR is merged.
 
 ## Existing capabilities to reuse
 
@@ -55,11 +56,11 @@ Existing ACE / StudentGlobalSearch UI
         Query validation + limits
                  |
         Search orchestrator
-           /          \
+           /          \\
           v            v
  Target95 adapters   External provider adapter
  (first-party)       (server-only credentials)
-          \            /
+          \\            /
            v          v
       Normalise + rank + deduplicate
                  |
@@ -71,26 +72,25 @@ Existing ACE / StudentGlobalSearch UI
        UI renders distinct source lanes
 ```
 
-### API contract (proposal; implement only after adapter audit)
+## API contract
 
-- One authenticated server endpoint, preferably `POST /api/search`, with explicit `scope: "internal" | "web" | "all"`.
+- One authenticated server endpoint: `POST /api/search`, with an explicit internal-only response lane in Phase 2.
 - Input is a bounded query and optional validated board/class/subject filters. Never trust client-supplied uid, role, entitlement or project identifiers.
 - Internal results include stable ids, canonical chapter identity, result type, safe display text and first-party href.
-- External results include title, snippet, canonical HTTP(S) URL, domain, provider/source label and retrieval timestamp. No fabricated citations.
+- External results are reserved for a later provider phase; Phase 2 returns an empty external lane.
 - Response separates `internalResults` and `webResults`; it must not merge away source provenance.
-- Return typed statuses for unauthenticated, invalid query, rate-limited, provider-unconfigured, provider-unavailable and success.
-- Keep all external provider keys server-only. Do not send student profile data, email, uid or personal learning history to the external provider.
+- Keep all external provider keys server-only. Do not send student profile data, email, uid or personal learning history to an external provider.
 - Treat external snippets/pages as untrusted data. Never execute embedded instructions or render raw HTML.
-- Enforce query length, result count, timeout, per-user rate limits and provider response size. Avoid logging raw student queries or secrets.
-- Fail gracefully: internal search remains usable if external search is unconfigured or down, and vice versa.
+- Enforce query length, result count, body size and per-user rate limits. Avoid logging raw student queries or secrets.
+- Fail closed when session validation, rate limiting or internal search is unavailable.
 
 ## Phased implementation
 
 | Phase | Work | Exit criteria |
 |---|---|---|
-| 0 | Repository and product audit | Existing sources, consumers, contracts, privacy and dependencies documented |
+| 0 | Repository and product audit | Existing sources, contracts, privacy and dependencies documented |
 | 1 | Pure contracts + internal server adapters | Unit tests prove parity with current first-party search and answer-key exclusion |
-| 2 | Authenticated API + orchestration | Auth, validation, rate limits, timeout, typed failures and stable response contract tested |
+| 2 | Authenticated API + orchestration | Auth, authorization, validation, rate limits and safe response DTO tested |
 | 3 | External provider adapter | Provider selected; server-only key; schema validation, URL validation, attribution and failure tests |
 | 4 | Existing UI integration | Extend existing ACE/search surface; preserve keyboard, mobile, filters and route behaviour |
 | 5 | QA and rollout | Unit/integration/browser checks; no answer leakage; Preview-only rollout and rollback plan |
@@ -105,18 +105,28 @@ Existing ACE / StudentGlobalSearch UI
 - Preserve current internal search behaviour and answer-free projection guarantees.
 - Do not claim external search is implemented until a real provider integration is configured and verified.
 
-## Work started on 2026-11-23
+## Phase 1 — completed and verified
 
-- Created `feat/web-engine-foundation` from the current `feat/content-engine-mocktest` head; no existing branch or PR was changed.
 - Added `src/lib/web-engine/searchContract.mjs`: pure query validation, safe first-party path validation, HTTP(S)-only external URL validation, result DTO normalisation, score bounding, lane separation and deduplication.
-- Added `test/web-engine-search-contract.test.mjs` covering invalid queries, unsafe paths/URLs, URL fragment removal, lane separation, ranking and deduplication.
-- Added `src/lib/web-engine/internalSearch.mjs`, an injectable adapter that maps the existing Office, study chapter/concept, CBSE and answer-free question search sources into the common first-party DTO. It copies only display-safe fields and preserves the existing board/class routing rules.
-- Added `src/lib/web-engine/internalSources.js` as the server-only composition root. It wires the existing Office search, study-center search, generated answer-free CISCE question index, CBSE chapter registry and CBSE practice source into the adapter. CBSE source records contain answer-bearing fields, so the composition root is protected with Next.js `server-only`; only allow-listed result fields leave the adapter.
-- Added `test/web-engine-internal-search.test.mjs` for source composition, CBSE class/subject filtering, navigation URLs and answer/explanation exclusion. Registered both test files in `npm test` and `npm run test:web-engine`.
-- Added `npm run test:web-engine` and included the new test in `npm test`.
-- These files were committed through GitHub's repository API. GitHub Actions run 45236168398 (push) and run 45236182929 (pull_request) both completed successfully on commit 6b49e80603fe43ba6789a9823249fd84c0f5384b, including npm ci and npm run test:web-engine. Lint, typecheck and production build have not been run for this Phase 1 branch.
-- No UI, API route, external provider, secrets, Firebase, Vercel, MockTest logic or feature flags were changed.
+- Added `src/lib/web-engine/internalSearch.mjs`, an injectable first-party adapter for Office, study chapters/concepts, CBSE chapters/practice and the answer-free CISCE question index.
+- Added `src/lib/web-engine/internalSources.js` as the `server-only` composition root.
+- Added focused contract and adapter tests and registered them in `npm test` / `npm run test:web-engine`.
+- Corrected the duplicate-result ranking assertion in commit `6b49e80603fe43ba6789a9823249fd84c0f5384b`; the expected order retains the duplicate question's highest score.
+- Focused Phase 1 review found three filter defects: board-only ICSE/ISC searches could cross-match, `Computer Science (Java)` did not match the `computer-science` subject filter, and unclassified Office results appeared in academic searches. Fixed these in `internalSearch.mjs` and added regression coverage. Current Phase 1 head `8bf715902eed801d31663fc3cb01fe16a0115c8d` passed push run [45298647431](https://github.com/adilparsh-code/Target95/actions/runs/45298647431) and pull-request run [45298656270](https://github.com/adilparsh-code/Target95/actions/runs/45298656270) on 2026-11-24.
+- The later Phase 2 branch review tightened the Phase 1 adapter so ICSE/ISC board-only searches remain distinct, academic filters exclude unclassified Office results, and subject matching handles the registry's `Computer Science (Java)` label.
+- Phase 1 lint, typecheck and production build were not part of its focused workflow and are not claimed as verified.
+
+## Phase 2 — authenticated internal API
+
+- Implemented on `feat/web-engine-api`, stacked directly on `feat/web-engine-foundation`; draft PR #114 targets Phase 1.
+- Added `POST /api/search` as a Node.js server-only route using `getVerifiedSession` and the server-only `searchTarget95Content` composition root.
+- The route allows only student, teacher and admin roles derived from the verified session. Client-supplied uid, role, tenant and entitlement fields are rejected.
+- Added strict top-level and filter allow-lists, a 4 KiB streamed JSON body cap, 240-character query validation and supported CBSE/CISCE class/subject combinations.
+- Added a Firestore transaction-backed limit of 30 requests per verified user per 60-second window under `users/{uid}/usage/webSearch`. The limiter stores only count and windowStart and fails closed if Firestore is unavailable.
+- The API re-normalises results through the Phase 1 contract, returns only safe internal DTO fields, uses private no-store caching and keeps the external lane empty.
+- Added focused tests for authentication, role authorization, body limits, filter validation, rate-limit isolation/window reset, failure handling and answer/explanation/private-record exclusion.
+- The Phase 2 push and pull-request runs [45298520832](https://github.com/adilparsh-code/Target95/actions/runs/45298520832) and [45298524411](https://github.com/adilparsh-code/Target95/actions/runs/45298524411) passed focused Web Engine tests, the full repository regression suite, ESLint, repository typecheck and the production Next.js build on 2026-11-24. These runs used the same source tree as the subsequent stack-sync merge commit.
 
 ## Next implementation task
 
-Execute `npm run test:web-engine`, the full test suite, lint and build in a Node-enabled workspace. Fix any failures before moving to Phase 2. Then implement the authenticated, rate-limited internal search endpoint. Keep external provider integration separate until a provider is selected.
+After Phase 2 CI is green, proceed to Phase 3 only after a web-search provider is explicitly selected. Keep provider credentials server-only, send no student identity or learning history externally, and do not integrate or deploy the UI until the internal API has passed review.

@@ -1,6 +1,6 @@
 # Target95 Web Engine — execution plan and repository audit
 
-Status: Phase 1 internal search foundation is verified green. Phase 2 authenticated internal search API is implemented and verified green by both push and pull-request workflows on 2026-11-23.
+Status: Phase 1 internal search foundation and Phase 2 authenticated internal search API are verified green. The Phase 2 branch is synced to the latest Phase 1 head; both push and pull-request workflows passed on 2026-11-24.
 Phase 1 branch: `feat/web-engine-foundation`
 Phase 2 branch: `feat/web-engine-api`
 Phase 1 base: `feat/content-engine-mocktest` (stacked on P1; no PR has been merged by this work).
@@ -112,7 +112,7 @@ Existing ACE / StudentGlobalSearch UI
 - Added `src/lib/web-engine/internalSources.js` as the `server-only` composition root.
 - Added focused contract and adapter tests and registered them in `npm test` / `npm run test:web-engine`.
 - Corrected the duplicate-result ranking assertion in commit `6b49e80603fe43ba6789a9823249fd84c0f5384b`; the expected order retains the duplicate question's highest score.
-- Current Phase 1 head `a289af7fb1760a831dadbf1bd8aa0fafde7f5020` passed both push run [45254550077](https://github.com/adilparsh-code/Target95/actions/runs/45254550077) and pull-request run [45254561339](https://github.com/adilparsh-code/Target95/actions/runs/45254561339) on 2026-11-23. Those runs executed `npm ci --ignore-scripts --no-audit --no-fund` and `npm run test:web-engine`.
+- Focused Phase 1 review found three filter defects: board-only ICSE/ISC searches could cross-match, `Computer Science (Java)` did not match the `computer-science` subject filter, and unclassified Office results appeared in academic searches. Fixed these in `internalSearch.mjs` and added regression coverage. Current Phase 1 head `8bf715902eed801d31663fc3cb01fe16a0115c8d` passed push run [45298647431](https://github.com/adilparsh-code/Target95/actions/runs/45298647431) and pull-request run [45298656270](https://github.com/adilparsh-code/Target95/actions/runs/45298656270) on 2026-11-24.
 - The later Phase 2 branch review tightened the Phase 1 adapter so ICSE/ISC board-only searches remain distinct, academic filters exclude unclassified Office results, and subject matching handles the registry's `Computer Science (Java)` label.
 - Phase 1 lint, typecheck and production build were not part of its focused workflow and are not claimed as verified.
 
@@ -125,7 +125,7 @@ Existing ACE / StudentGlobalSearch UI
 - Added a Firestore transaction-backed limit of 30 requests per verified user per 60-second window under `users/{uid}/usage/webSearch`. The limiter stores only count and windowStart and fails closed if Firestore is unavailable.
 - The API re-normalises results through the Phase 1 contract, returns only safe internal DTO fields, uses private no-store caching and keeps the external lane empty.
 - Added focused tests for authentication, role authorization, body limits, filter validation, rate-limit isolation/window reset, failure handling and answer/explanation/private-record exclusion.
-- The latest Phase 2 push and pull-request runs [45275068885](https://github.com/adilparsh-code/Target95/actions/runs/45275068885) and [45275079542](https://github.com/adilparsh-code/Target95/actions/runs/45275079542) passed focused Web Engine tests, the full repository regression suite, ESLint, repository typecheck and the production Next.js build on 2026-11-23.
+- The Phase 2 push and pull-request runs [45298520832](https://github.com/adilparsh-code/Target95/actions/runs/45298520832) and [45298524411](https://github.com/adilparsh-code/Target95/actions/runs/45298524411) passed focused Web Engine tests, the full repository regression suite, ESLint, repository typecheck and the production Next.js build on 2026-11-24. These runs used the same source tree as the subsequent stack-sync merge commit.
 
 ## Next implementation task
 

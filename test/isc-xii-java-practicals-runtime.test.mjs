@@ -59,6 +59,18 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
           "Second Largest must preserve Integer.MIN_VALUE as a valid distinct result",
         );
       }
+
+      if (item.id === "x-prog-01" || item.id === "x-prog-02") {
+        for (const invalidSize of ["0", "-2"]) {
+          const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
+            encoding: "utf8",
+            input: invalidSize + "\\n",
+            timeout: 10000,
+          });
+          assert.equal(invalidRun.status, 0, `${item.id} should reject n=${invalidSize} without crashing`);
+          assert.match(invalidRun.stdout, /Enter a positive number of (students|elements)\\./);
+        }
+      }
     }
   } finally {
     rmSync(root, { recursive: true, force: true });

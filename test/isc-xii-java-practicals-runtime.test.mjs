@@ -64,11 +64,11 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
         for (const invalidSize of ["0", "-2"]) {
           const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
             encoding: "utf8",
-            input: invalidSize + "\\n",
+            input: invalidSize + "\n",
             timeout: 10000,
           });
           assert.equal(invalidRun.status, 0, `${item.id} should reject n=${invalidSize} without crashing`);
-          assert.match(invalidRun.stdout, /Enter a positive number of (students|elements)\\./);
+          assert.match(invalidRun.stdout, /Enter a positive number of (students|elements)\./);
         }
       }
     }

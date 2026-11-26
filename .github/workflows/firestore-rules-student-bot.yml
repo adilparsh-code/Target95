@@ -1,0 +1,50 @@
+name: Firestore Rules (Student Bot)
+
+# Runs the full Firestore rules suite (`npm run test:rules`) against the LOCAL
+# emulator only. It uses the demo project "demo-target95", needs no secrets, and
+# never connects to target95-staging or production. It does not deploy anything.
+on:
+  push:
+    branches: [feature/target95-student-whatsapp-bot]
+    paths:
+      - firestore.rules
+      - firestore.indexes.json
+      - firebase.json
+      - test/firestore-*.test.mjs
+      - package.json
+      - package-lock.json
+      - .github/workflows/firestore-rules-student-bot.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firestore-rules-student-bot-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  firestore-rules:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java (Firestore emulator)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Firestore rules tests (local emulator only)
+        run: npm run test:rules

@@ -2,9 +2,9 @@ name: Target95 Validation
 
 on:
   push:
-    branches: [main, development]
+    branches: [main, development, 'feat/**', 'audit/**']
   pull_request:
-    branches: [main, development]
+    branches: [main, development, 'feat/**', 'audit/**']
 
 jobs:
   validate:

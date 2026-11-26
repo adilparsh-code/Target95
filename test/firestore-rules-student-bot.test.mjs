@@ -38,7 +38,10 @@ const fields = (obj) => ({ fields: Object.fromEntries(Object.entries(obj).map(([
 async function call(method, path, auth, body, query = "") {
   const res = await fetch(`${BASE}/${path}${query}`, {
     method,
-    headers: { Authorization: `Bearer ${auth}`, "Content-Type": "application/json" },
+    // An unauthenticated caller sends no Authorization header at all. An empty
+    // "Bearer " header is malformed, and the emulator answers it with a 500
+    // instead of evaluating the rules, so it never exercised the deny path.
+    headers: { ...(auth ? { Authorization: `Bearer ${auth}` } : {}), "Content-Type": "application/json" },
     body: body ? JSON.stringify(body) : undefined,
   });
   return res.status;

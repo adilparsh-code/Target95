@@ -70,3 +70,16 @@ Do not describe the Java/Python library as fully copyright-cleared until the unr
 - Complete the theory and SVG provenance inventory.
 - Then audit the five ISC XII Python assignments and the remaining Python content.
 - Keep all changes on this audit branch / associated pull request; do not merge or deploy to production as part of this audit.
+
+## ISC Class XII Python assignment gap — verified against 2028 syllabus
+
+The repository's ISC Class XII academic alignment document records the CISCE minimum as **5 Python assignments**: one Strings, two Lists and two Tuples. The current student content file `src/app/data/iscXIIJavaPythonContent.js` contains a general Python theory/practice section, including five programming-style practice prompts, but this is not a five-assignment practical register with the prescribed category distribution, full problem statements, algorithms, source code, sample input/output and validation. Do not count those five prompts as the five practical assignments.
+
+### Current findings
+- Existing section key: `python` (Programming in Python), with 3 linked SVG diagrams.
+- Existing practice array: 14 mixed items (tracing, debugging, programming, MCQ and reasoning); the 5 programming-type items are practice questions, not five formally distributed practical assignments.
+- Official category target to implement and validate: Strings 1, Lists 2, Tuples 2.
+- The 20 Java practical assignments are separately stored in `src/app/data/iscXIIJavaPracticalAssignments.js`; their completeness does not satisfy the separate Python minimum.
+
+### Release action
+Create a separate Python practical data module with exactly five original, syllabus-aligned assignments distributed Strings 1 / Lists 2 / Tuples 2. Each assignment should include its own objective, algorithm, Python 3 source, sample input, expected output, edge cases and tests. Validate each program with automated execution and verify the renderer exposes the five practicals as a distinct practical section. Record the author/source evidence for each item. No similarity scan or legal copyright clearance has been performed; this audit is a scope finding, not a legal conclusion.

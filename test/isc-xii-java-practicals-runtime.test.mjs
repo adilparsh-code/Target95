@@ -71,6 +71,25 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
           assert.match(invalidRun.stdout, /Enter a positive number of (students|elements)\./);
         }
       }
+
+      const invalidDimensionInputs = {
+        "ISC12-A01": "0\\n",
+        "ISC12-A02": "-1\\n",
+        "ISC12-A03": "0\\n",
+        "ISC12-D01": "0 2\\n",
+        "ISC12-D02": "2 0\\n",
+        "ISC12-D03": "0 1 1 1\\n",
+        "ISC12-D04": "0\\n",
+      };
+      if (invalidDimensionInputs[item.id]) {
+        const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: invalidDimensionInputs[item.id],
+          timeout: 10000,
+        });
+        assert.equal(invalidRun.status, 0, item.id + " should reject non-positive dimensions without crashing");
+        assert.match(invalidRun.stdout, /must be positive|Enter a positive/);
+      }
     }
   } finally {
     rmSync(root, { recursive: true, force: true });

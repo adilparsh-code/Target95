@@ -34,7 +34,7 @@ Fail-closed behaviour: no Meta settings gives 503; a bad signature gives 401 bef
 2. Copy the app secret, the phone number id and a **permanent** access token (a system-user token, not the 24-hour test token) into the server environment as `WHATSAPP_APP_SECRET`, `WHATSAPP_PHONE_NUMBER_ID`, `WHATSAPP_ACCESS_TOKEN`. Choose a long random `WHATSAPP_VERIFY_TOKEN`. Never commit these.
 3. In the Meta app, set the callback URL to `https://<host>/api/student-bot/whatsapp` and the verify token, then subscribe to the `messages` field.
 4. **Preview deployments are behind Vercel Deployment Protection, so Meta cannot reach them.** Use a Production deployment or a protected-bypass setup that the owner approves; this branch changes neither.
-5. Real students need a verified business, an approved display name and, for messages outside the 24-hour customer window, approved message templates. Pricing is per conversation category and changes; check Meta's pricing page before estimating cost.
+5. Real students need a verified business, an approved display name and, for messages outside the 24-hour customer window, approved message templates. Meta bills per delivered message (since 1 July 2025; it was per conversation before), by message category and country. Per Meta's pricing page, each business number gets 1,000 free service messages a month and service replies in the 24-hour window are charged beyond that from 1 October 2026. Rates change, so check https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing before estimating cost.
 
 ## Suggested order
 

@@ -52,7 +52,7 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
           input: "2\n-1 -2147483648\n",
           timeout: 10000,
         });
-        assert.equal(boundaryRun.status, 0, `${item.id} failed on Integer.MIN_VALUE boundary input:\\n${boundaryRun.stderr}`);
+        assert.equal(boundaryRun.status, 0, `${item.id} failed on Integer.MIN_VALUE boundary input:\n${boundaryRun.stderr}`);
         assert.equal(
           boundaryRun.stdout.trimEnd(),
           "Second largest = -2147483648",
@@ -73,13 +73,13 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
       }
 
       const invalidDimensionInputs = {
-        "ISC12-A01": "0\\n",
-        "ISC12-A02": "-1\\n",
-        "ISC12-A03": "0\\n",
-        "ISC12-D01": "0 2\\n",
-        "ISC12-D02": "2 0\\n",
-        "ISC12-D03": "0 1 1 1\\n",
-        "ISC12-D04": "0\\n",
+        "ISC12-A01": "0\n",
+        "ISC12-A02": "-1\n",
+        "ISC12-A03": "0\n",
+        "ISC12-D01": "0 2\n",
+        "ISC12-D02": "2 0\n",
+        "ISC12-D03": "0 1 1 1\n",
+        "ISC12-D04": "0\n",
       };
       if (invalidDimensionInputs[item.id]) {
         const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {

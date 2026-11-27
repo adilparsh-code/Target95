@@ -72,6 +72,19 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
         }
       }
 
+      if (["ISC12-A01", "ISC12-A02", "ISC12-A03"].includes(item.id)) {
+        const invalidSizes = item.id === "ISC12-A02" ? ["0", "-1"] : ["0", "-2"];
+        for (const invalidSize of invalidSizes) {
+          const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
+            encoding: "utf8",
+            input: invalidSize + "\n",
+            timeout: 10000,
+          });
+          assert.equal(invalidRun.status, 0, item.id + " should reject n=" + invalidSize + " without crashing");
+          assert.match(invalidRun.stdout, /Enter a positive number of elements/);
+        }
+      }
+
       const invalidDimensionInputs = {
         "ISC12-A01": "0\n",
         "ISC12-A02": "-1\n",

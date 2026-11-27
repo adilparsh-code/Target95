@@ -1,6 +1,6 @@
 # Student Learning Bot — Architecture and Test Plan
 
-Status: prototype. A WhatsApp-style web chat at `/student-bot`. There is **no** WhatsApp, Meta or paid-AI dependency.
+Status: prototype. A WhatsApp-style web chat at `/student-bot`, plus a WhatsApp Cloud API webhook (`/api/student-bot/whatsapp`) that is built and unit-tested but **not live**: it needs the owner decisions in `WHATSAPP_PLAN.md`. There is no paid-AI dependency.
 
 ## Baseline (before any bot code, branch from `main` @ 20d73d6)
 
@@ -31,7 +31,8 @@ src/lib/student-bot/
   adapters/boardprep.mjs     published-only read model over boardprepCurriculum
   adapters/programming.mjs   Java practice source (fixture-injectable)
   adapters/ai.mjs            AI provider interface; deterministic when unconfigured
-  adapters/transport.mjs     transport boundary (web now, WhatsApp Cloud API later)
+  adapters/whatsapp-{signature,payload,format,sender}.mjs   WhatsApp Cloud API transport pieces
+  core/whatsapp-api.mjs      framework-neutral webhook (verify, POST, identity gate)
   handlers/{help,catalog,explain,quiz,practice,progress}.mjs
   security/input-validation.mjs  size/shape/control-char checks
   security/authorization.mjs     student-only gate over getVerifiedSession

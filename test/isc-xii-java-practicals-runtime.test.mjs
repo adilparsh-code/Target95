@@ -88,7 +88,7 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
       if (["ISC12-D01", "ISC12-D02"].includes(item.id)) {
         const invalidLargeRun = spawnSync("java", ["-cp", workDir, mainClass], {
           encoding: "utf8",
-          input: "50000 50000\\n",
+          input: "50000 50000\n",
           timeout: 10000,
         });
         assert.equal(invalidLargeRun.status, 0, item.id + " should reject oversized matrices safely");

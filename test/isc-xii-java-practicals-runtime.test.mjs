@@ -60,7 +60,7 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
         );
       }
 
-      if (item.id === "x-prog-01" || item.id === "x-prog-02") {
+      if (["x-prog-01", "x-prog-02", "x-prog-03", "x-prog-04", "x-prog-05", "x-prog-06", "x-prog-07", "x-prog-08", "x-prog-09"].includes(item.id)) {
         for (const invalidSize of ["0", "-2"]) {
           const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
             encoding: "utf8",

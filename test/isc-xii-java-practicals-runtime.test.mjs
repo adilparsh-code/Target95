@@ -95,6 +95,24 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
         assert.match(invalidLargeRun.stdout, /Matrix dimensions exceed the supported limit/);
       }
 
+      if (item.id === "ISC12-D03") {
+        const oversizedOperandsRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: "50000 50000\\n50000 50000\\n",
+          timeout: 10000,
+        });
+        assert.equal(oversizedOperandsRun.status, 0, "ISC12-D03 should reject oversized operand matrices safely");
+        assert.match(oversizedOperandsRun.stdout, /Matrix dimensions exceed the supported limit/);
+
+        const oversizedResultRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: "1001 1\\n1 1001\\n",
+          timeout: 10000,
+        });
+        assert.equal(oversizedResultRun.status, 0, "ISC12-D03 should reject an oversized result matrix safely");
+        assert.match(oversizedResultRun.stdout, /Matrix dimensions exceed the supported limit/);
+      }
+
       const invalidDimensionInputs = {
         "ISC12-A01": "0\n",
         "ISC12-A02": "-1\n",

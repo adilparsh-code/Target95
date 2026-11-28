@@ -52,12 +52,84 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
           input: "2\n-1 -2147483648\n",
           timeout: 10000,
         });
-        assert.equal(boundaryRun.status, 0, `${item.id} failed on Integer.MIN_VALUE boundary input:\\n${boundaryRun.stderr}`);
+        assert.equal(boundaryRun.status, 0, `${item.id} failed on Integer.MIN_VALUE boundary input:\n${boundaryRun.stderr}`);
         assert.equal(
           boundaryRun.stdout.trimEnd(),
           "Second largest = -2147483648",
           "Second Largest must preserve Integer.MIN_VALUE as a valid distinct result",
         );
+      }
+
+      if (["x-prog-01", "x-prog-02", "x-prog-03", "x-prog-04", "x-prog-05", "x-prog-06", "x-prog-07", "x-prog-08", "x-prog-09"].includes(item.id)) {
+        for (const invalidSize of ["0", "-2"]) {
+          const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
+            encoding: "utf8",
+            input: invalidSize + "\n",
+            timeout: 10000,
+          });
+          assert.equal(invalidRun.status, 0, `${item.id} should reject n=${invalidSize} without crashing`);
+          assert.match(invalidRun.stdout, /Enter a positive number of (students|elements)\./);
+        }
+      }
+
+      if (["ISC12-A01", "ISC12-A02", "ISC12-A03"].includes(item.id)) {
+        const invalidSizes = item.id === "ISC12-A02" ? ["0", "-1"] : ["0", "-2"];
+        for (const invalidSize of invalidSizes) {
+          const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
+            encoding: "utf8",
+            input: invalidSize + "\n",
+            timeout: 10000,
+          });
+          assert.equal(invalidRun.status, 0, item.id + " should reject n=" + invalidSize + " without crashing");
+          assert.match(invalidRun.stdout, /Enter a positive number of elements/);
+        }
+      }
+
+      if (["ISC12-D01", "ISC12-D02"].includes(item.id)) {
+        const invalidLargeRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: "50000 50000\n",
+          timeout: 10000,
+        });
+        assert.equal(invalidLargeRun.status, 0, item.id + " should reject oversized matrices safely");
+        assert.match(invalidLargeRun.stdout, /Matrix dimensions exceed the supported limit/);
+      }
+
+      if (item.id === "ISC12-D03") {
+        const oversizedOperandsRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: "50000 50000\n50000 50000\n",
+          timeout: 10000,
+        });
+        assert.equal(oversizedOperandsRun.status, 0, "ISC12-D03 should reject oversized operand matrices safely");
+        assert.match(oversizedOperandsRun.stdout, /Matrix dimensions exceed the supported limit/);
+
+        const oversizedResultRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: "1001 1\n1 1001\n",
+          timeout: 10000,
+        });
+        assert.equal(oversizedResultRun.status, 0, "ISC12-D03 should reject an oversized result matrix safely");
+        assert.match(oversizedResultRun.stdout, /Matrix dimensions exceed the supported limit/);
+      }
+
+      const invalidDimensionInputs = {
+        "ISC12-A01": "0\n",
+        "ISC12-A02": "-1\n",
+        "ISC12-A03": "0\n",
+        "ISC12-D01": "0 2\n",
+        "ISC12-D02": "2 0\n",
+        "ISC12-D03": "0 1 1 1\n",
+        "ISC12-D04": "0\n",
+      };
+      if (invalidDimensionInputs[item.id]) {
+        const invalidRun = spawnSync("java", ["-cp", workDir, mainClass], {
+          encoding: "utf8",
+          input: invalidDimensionInputs[item.id],
+          timeout: 10000,
+        });
+        assert.equal(invalidRun.status, 0, item.id + " should reject non-positive dimensions without crashing");
+        assert.match(invalidRun.stdout, /must be positive|Enter a positive/);
       }
     }
   } finally {

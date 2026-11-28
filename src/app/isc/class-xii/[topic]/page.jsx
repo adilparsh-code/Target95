@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getISCXIIJavaPythonContent, ISC_XII_JAVA_PYTHON_CONTENT } from "@/app/data/iscXIIJavaPythonContent";
 import { ISC_XII_JAVA_PRACTICALS } from "@/app/data/iscXIIJavaPracticalAssignments";
+import { ISC_XII_PYTHON_PRACTICALS } from "@/app/data/iscXIIJavaPythonPracticalAssignments";
 
 export function generateStaticParams() {
   return Object.keys(ISC_XII_JAVA_PYTHON_CONTENT).map((topic) => ({ topic }));
@@ -181,6 +182,34 @@ export default async function ISCClassXIITopicPage({ params }) {
             </section>
           );
         })()}
+
+        {topic === "python" && (
+          <section className="mt-8 rounded-3xl border border-amber-200 bg-amber-50 p-7 dark:border-amber-900 dark:bg-amber-950/20">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-amber-700 dark:text-amber-400">CISCE 2028 practical file</p>
+            <h2 className="mt-2 text-2xl font-black">Python practical assignments ({ISC_XII_PYTHON_PRACTICALS.length})</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Five assignments are organized in the prescribed distribution: 1 Strings, 2 Lists and 2 Tuples. Each includes an algorithm, Python 3 solution and sample input/output.</p>
+            <div className="mt-5 grid gap-4">
+              {ISC_XII_PYTHON_PRACTICALS.map((item, index) => (
+                <details key={item.id} className="rounded-2xl border border-amber-200 bg-white p-5 dark:border-amber-900 dark:bg-slate-900">
+                  <summary className="cursor-pointer">
+                    <span className="text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">{item.id} · {item.category} · {item.difficulty}</span>
+                    <span className="mt-1 block font-bold">{index + 1}. {item.title}</span>
+                  </summary>
+                  <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.objective}</p>
+                  <p className="mt-3 text-xs font-bold uppercase tracking-wider text-slate-500">Algorithm</p>
+                  <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm leading-6">{item.algorithm.map((step, i) => <li key={i}>{step}</li>)}</ol>
+                  <p className="mt-4 text-xs font-bold uppercase tracking-wider text-slate-500">Python 3 solution</p>
+                  <pre className="mt-2 overflow-x-auto rounded-xl bg-slate-950 p-4 text-xs leading-6 text-slate-100"><code>{item.code}</code></pre>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    <div><p className="text-xs font-bold uppercase tracking-wider text-slate-500">Sample input</p><pre className="mt-1 whitespace-pre-wrap text-sm">{item.sampleInput}</pre></div>
+                    <div><p className="text-xs font-bold uppercase tracking-wider text-slate-500">Expected output</p><pre className="mt-1 whitespace-pre-wrap text-sm">{item.sampleOutput}</pre></div>
+                  </div>
+                  <p className="mt-3 text-xs text-slate-500">Concepts: {item.concepts.join(" · ")}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="mt-8">
           <h2 className="text-2xl font-black">Board practice</h2>

@@ -61,7 +61,7 @@ CISCE specifies a minimum of 25 Class XII assignments: 20 Java and 5 Python. The
 | Inheritance | 3 |
 | **Total Java** | **20** |
 
-The Python assignment minimum is 5 (one Strings, two Lists, two Tuples). The terminal practical paper presents three Java programming problems; the candidate attempts one.
+The Python assignment minimum is 5 (one Strings, two Lists, two Tuples). The five student-facing assignments are stored in `src/app/data/iscXIIJavaPythonPracticalAssignments.js` and rendered in the Programming in Python lesson with an algorithm, Python 3 source, sample input and expected output. Their distribution and sample executions are covered by `test/isc-xii-python-practicals-runtime.test.mjs`. The terminal practical paper presents three Java programming problems; the candidate attempts one.
 
 The 20 Java assignments live in `src/app/data/iscXIIJavaPracticalAssignments.js` and are rendered on the relevant lesson pages with an algorithm outline, Java source, sample input and expected output.
 

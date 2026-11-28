@@ -2,10 +2,8 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import StudyChapter from "../../components/study/StudyChapter";
 import { notFound } from "next/navigation";
-import { resolveStudyChapter, getStudyChapters } from "../../../lib/studyCenter";
-import { getMarkdownChapterContent } from "../../../lib/markdownContent";
-import getQuestionBankChapter from "../../../lib/questionBankAdapter";
-import { getChapterBySlug as getRichChapterBySlug } from "../../data/chapter-content";
+import { getStudyChapters } from "../../../lib/studyCenter";
+import { getChapterPageData } from "../../../lib/content";
 
 export async function generateStaticParams() {
   const chapters = getStudyChapters() || [];
@@ -16,16 +14,8 @@ export async function generateStaticParams() {
 
 export default async function StudyChapterPage({ params }) {
   const { slug } = await params;
-  const chapter = resolveStudyChapter(slug);
-
-  if (!chapter) notFound();
-
-  const markdownSlug = slug === "introduction-to-java" ? "introduction" : (chapter.contentSlug || slug);
-  const markdownChapter = getMarkdownChapterContent(markdownSlug);
-  const richChapter = getRichChapterBySlug(chapter.contentSlug || slug);
-  const questionBankChapter = typeof getQuestionBankChapter === "function"
-    ? getQuestionBankChapter(slug)
-    : null;
+  const pageData = getChapterPageData(slug);
+  if (!pageData) notFound();
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-blue-50">
@@ -33,8 +23,8 @@ export default async function StudyChapterPage({ params }) {
       <div className="h-20 sm:h-24 lg:h-28" />
       <StudyChapter
         slug={slug}
-        markdownContent={richChapter ?? markdownChapter?.content ?? null}
-        questionBank={questionBankChapter}
+        markdownContent={pageData.content}
+        questionBank={pageData.questions}
       />
       <Footer />
     </main>

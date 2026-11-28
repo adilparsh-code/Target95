@@ -7,6 +7,11 @@ import BookmarkButton from "./BookmarkButton";
 import CompletionToggle from "./CompletionToggle";
 import ReportIssueModal from "./ReportIssueModal";
 import Link from "next/link";
+import {
+  QUESTION_PREVIEW_LIMIT,
+  getQuestionHref,
+  getVisibleQuestions,
+} from "../../../lib/study/chapterSections.mjs";
 
 const difficultyVariants = {
   Easy: "secondary",
@@ -23,6 +28,9 @@ const typeLabels = {
 export default function QuestionSection({ chapter, questions }) {
   const [reportModal, setReportModal] = useState(null);
   const [expandedExplanations, setExpandedExplanations] = useState({});
+  const [showAll, setShowAll] = useState(false);
+  const total = Array.isArray(questions) ? questions.length : 0;
+  const visibleQuestions = getVisibleQuestions(questions, showAll);
 
   const toggleExplanation = (id) => {
     setExpandedExplanations((prev) => ({
@@ -37,21 +45,23 @@ export default function QuestionSection({ chapter, questions }) {
         <div>
           <h2 className="text-xl font-bold text-gray-900">Practice Questions</h2>
           <p className="mt-1 text-sm text-gray-600">
-            {questions.length} question{questions.length !== 1 ? "s" : ""} for this chapter
+            {total} question{total !== 1 ? "s" : ""} for this chapter
           </p>
         </div>
-        <Link
-          href={`/Java/${chapter}`}
-          className="inline-flex items-center gap-1 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
-        >
-          Practice All
-          <ChevronRightIcon className="h-4 w-4" />
-        </Link>
+        {total > 0 && (
+          <Link
+            href={getQuestionHref(questions[0], chapter)}
+            className="inline-flex items-center gap-1 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+          >
+            Practice All
+            <ChevronRightIcon className="h-4 w-4" />
+          </Link>
+        )}
       </div>
 
       <div className="mt-6 space-y-4">
-        {questions.length > 0 ? (
-          questions.slice(0, 10).map((q) => (
+        {total > 0 ? (
+          visibleQuestions.map((q) => (
             <div
               key={q.id}
               className="rounded-2xl border border-gray-200 bg-gray-50 p-4 transition hover:border-blue-300"
@@ -87,7 +97,7 @@ export default function QuestionSection({ chapter, questions }) {
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   <Link
-                    href={`/Java/${chapter}/question/${q.id}`}
+                    href={getQuestionHref(q, chapter)}
                     className="rounded-xl bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-blue-700"
                   >
                     Solve
@@ -131,15 +141,19 @@ export default function QuestionSection({ chapter, questions }) {
         )}
       </div>
 
-      {questions.length > 10 && (
+      {total > QUESTION_PREVIEW_LIMIT && (
         <div className="mt-4 text-center">
-          <Link
-            href={`/Java/${chapter}`}
+          <button
+            type="button"
+            onClick={() => setShowAll((value) => !value)}
+            aria-expanded={showAll}
             className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-800 transition"
           >
-            View all {questions.length} questions
-            <ChevronRightIcon className="h-4 w-4" />
-          </Link>
+            {showAll
+              ? `Show first ${QUESTION_PREVIEW_LIMIT} only`
+              : `View all ${total} questions`}
+            <ChevronRightIcon className={`h-4 w-4 transition-transform ${showAll ? "-rotate-90" : "rotate-90"}`} />
+          </button>
         </div>
       )}
 

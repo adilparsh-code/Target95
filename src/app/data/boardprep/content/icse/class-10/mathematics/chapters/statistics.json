@@ -12,13 +12,34 @@
   "overview": {
     "intro": "Statistics is the study of collection, organisation, analysis, interpretation, and presentation of data. In ICSE Class X, students learn to compute the central tendency measures (mean, median, mode) for both ungrouped (raw) data and grouped data (using the class-mark method, assumed-mean method, and step-deviation method). The chapter also covers graphical representation of cumulative frequency data using ogives (less-than and more-than), and the interpretation of these graphs to find the median. The focus is on ungrouped and grouped frequency distributions, and the comparison of mean, median, and mode as measures of central tendency.",
     "facts": [
-      { "label": "Mean of ungrouped data", "value": "Σx / n" },
-      { "label": "Mean of grouped data (class-mark method)", "value": "Σfxi / Σfi" },
-      { "label": "Mean of grouped data (assumed-mean method)", "value": "A + Σfiui / Σfi" },
-      { "label": "Mean of grouped data (step-deviation method)", "value": "A + (h / Σfi) Σfiui" },
-      { "label": "Mode from histogram", "value": "The x-value of the highest frequency class peak." },
-      { "label": "Median from ogive", "value": "The x-value where the less-than ogive crosses the (n/2)th cumulative frequency." },
-      { "label": "Empirical relation", "value": "Mode ≈ 3 × Median − 2 × Mean." }
+      {
+        "label": "Mean of ungrouped data",
+        "value": "Σx / n"
+      },
+      {
+        "label": "Mean of grouped data (class-mark method)",
+        "value": "Σfxi / Σfi"
+      },
+      {
+        "label": "Mean of grouped data (assumed-mean method)",
+        "value": "A + Σfiui / Σfi"
+      },
+      {
+        "label": "Mean of grouped data (step-deviation method)",
+        "value": "A + (h / Σfi) Σfiui"
+      },
+      {
+        "label": "Mode from histogram",
+        "value": "The x-value of the highest frequency class peak."
+      },
+      {
+        "label": "Median from ogive",
+        "value": "The x-value where the less-than ogive crosses the (n/2)th cumulative frequency."
+      },
+      {
+        "label": "Empirical relation",
+        "value": "Mode ≈ 3 × Median − 2 × Mean."
+      }
     ]
   },
   "learningOutcomes": [
@@ -40,7 +61,7 @@
           "text": "Statistics begins with the collection of data — facts or figures collected with a specific purpose. The data may be ungrouped (raw) or grouped into classes or intervals. The two main areas of study at ICSE Class X level are measures of central tendency (which describe the centre of the data) and graphical representation (which gives a visual picture of the data's distribution). The three measures of central tendency are the mean (average), the median (middle value), and the mode (most frequent value). For any frequency distribution, the empirical relation Mode ≈ 3 × Median − 2 × Mean often holds approximately."
         },
         {
-          "type": "diagram",
+          "type": "paragraph",
           "text": "A brief overview showing: raw data → array → frequency distribution → measures of central tendency → graphical representation (histogram, ogive)."
         },
         {
@@ -67,13 +88,11 @@
           "items": [
             {
               "text": "Find the mean of the following weights (in kg) of 5 bags of rice: 5.2, 5.6, 5.4, 5.8, 5.5.",
-              "answer": "Mean = (5.2 + 5.6 + 5.4 + 5.8 + 5.5) / 5 = 27.5 / 5 = 5.5 kg.",
-              "explanation": "Sum of observations = 27.5, number of observations = 5, mean = 27.5 / 5 = 5.5 kg."
+              "note": "Sum of observations = 27.5, number of observations = 5, mean = 27.5 / 5 = 5.5 kg."
             },
             {
               "text": "The marks obtained by 7 students in a test are: 42, 55, 36, 60, 48, 39, 50. Find the mean marks.",
-              "answer": "Mean = (42 + 55 + 36 + 60 + 48 + 39 + 50) / 7 = 330 / 7 ≈ 47.14.",
-              "explanation": "Sum = 330, n = 7, mean ≈ 47.14."
+              "note": "Sum = 330, n = 7, mean ≈ 47.14."
             }
           ]
         },
@@ -100,8 +119,7 @@
           "items": [
             {
               "text": "The following table gives the distribution of 100 students according to their marks:\n\n| Marks | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n|-------|------|-------|-------|-------|-------|\n| Students | 5 | 10 | 20 | 30 | 35 |\n\nFind the mean marks using the class-mark method.",
-              "answer": "Mean = Σfxi / Σfi = 3300 / 100 = 33.",
-              "explanation": "Class-marks: 5, 15, 25, 35, 45. Products fx: 5 × 5 = 25, 10 × 15 = 150, 20 × 25 = 500, 30 × 35 = 1050, 35 × 45 = 1575. Σf = 100 and Σfx = 25 + 150 + 500 + 1050 + 1575 = 3300. Mean = 3300 / 100 = 33."
+              "note": "Class-marks: 5, 15, 25, 35, 45. Products fx: 5 × 5 = 25, 10 × 15 = 150, 20 × 25 = 500, 30 × 35 = 1050, 35 × 45 = 1575. Σf = 100 and Σfx = 25 + 150 + 500 + 1050 + 1575 = 3300. Mean = 3300 / 100 = 33."
             }
           ]
         },
@@ -129,8 +147,7 @@
           "items": [
             {
               "text": "The following distribution gives the ages of 50 employees in a company:\n\n| Age (years) | 20–30 | 30–40 | 40–50 | 50–60 | 60–70 |\n|-------------|-------|-------|-------|-------|-------|\n| Employees | 5 | 10 | 15 | 10 | 10 |\n\nFind the mean age using the assumed-mean method with A = 45.",
-              "answer": "Class-marks: 25, 35, 45, 55, 65. Deviations: −20, −10, 0, 10, 20. fi di: 5×(−20) = −100, 10×(−10) = −100, 15×0 = 0, 10×10 = 100, 10×20 = 200. Σfi = 50, Σfi di = −100 − 100 + 0 + 100 + 200 = 100. Mean = A + Σfi di / Σfi = 45 + 100 / 50 = 45 + 2 = 47 years.",
-              "explanation": "Choose A = 45 (a class-mark near the centre). Compute xi and di for each class. Σfi di = 100. Mean = 45 + 100/50 = 47."
+              "note": "Choose A = 45 (a class-mark near the centre). Compute xi and di for each class. Σfi di = 100. Mean = 45 + 100/50 = 47."
             }
           ]
         },
@@ -143,7 +160,8 @@
             "This method gives the same result as the class-mark method but simplifies computation."
           ]
         }
-      ]
+      ],
+      "title": "Lesson"
     },
     {
       "id": "stats-step-deviation",
@@ -158,8 +176,7 @@
           "items": [
             {
               "text": "The following distribution gives the weekly expenditure (in ₹) of 25 families in a locality:\n\n| Expenditure | 0–1000 | 1000–2000 | 2000–3000 | 3000–4000 | 4000–5000 |\n|-------------|---------|------------|------------|-------------|-------------|\n| Families | 5 | 8 | 6 | 4 | 2 |\n\nFind the mean weekly expenditure using the step-deviation method with A = 2500 and h = 1000.",
-              "answer": "Class-marks: 500, 1500, 2500, 3500, 4500. ui = di / h = (xi − A) / h = (−2000, −1000, 0, 1000, 2000) / 1000 = −2, −1, 0, 1, 2. fi ui: 5×(−2) = −10, 8×(−1) = −8, 6×0 = 0, 4×1 = 4, 2×2 = 4. Σfi = 25, Σfi ui = −10 − 8 + 0 + 4 + 4 = −10. Mean = A + (h / Σfi) Σfiui = 2500 + (1000 / 25) × (−10) = 2500 − 400 = ₹2100.",
-              "explanation": "Choose A = 2500, h = 1000. Compute class-marks and ui. Σfi ui = −10. Mean = 2500 + (1000/25) × (−10) = 2500 − 400 = 2100."
+              "note": "Choose A = 2500, h = 1000. Compute class-marks and ui. Σfi ui = −10. Mean = 2500 + (1000/25) × (−10) = 2500 − 400 = 2100."
             }
           ]
         },
@@ -172,7 +189,8 @@
             "This is the most efficient method when both conditions hold."
           ]
         }
-      ]
+      ],
+      "title": "Lesson"
     },
     {
       "id": "stats-ogive",
@@ -187,8 +205,7 @@
           "items": [
             {
               "text": "The following distribution gives the heights (in cm) of 100 plants:\n\n| Height (cm) | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n|-------------|------|-------|-------|-------|-------|\n| No. of plants | 5 | 10 | 20 | 30 | 35 |\n\nDraw the less-than ogive and find the median height graphically.",
-              "answer": "Less-than cumulative frequencies: 5, 15, 35, 65, 100. n = 100, so n/2 = 50. On the less-than ogive, find the point at 50 on the y-axis, project horizontally to the curve, then vertically down to the x-axis. The median is approximately 34 cm. Using the formula: median class = 30–40 (since cumulative frequency just exceeds 50), L = 30, CF = 35 (cumulative frequency before median class), f = 30, h = 10. Median = L + [(n/2 − CF) / f] × h = 30 + [(50 − 35) / 30] × 10 = 30 + (15/30) × 10 = 30 + 5 = 35 cm.",
-              "explanation": "The less-than cumulative frequencies are 5, 15, 35, 65, 100. n/2 = 50 falls in the class 30–40 (cumulative frequency 35 just before, 65 just after). Using the formula: L = 30, CF = 35, f = 30, h = 10. Median = 30 + [(50 − 35) / 30] × 10 = 30 + 5 = 35 cm."
+              "note": "The less-than cumulative frequencies are 5, 15, 35, 65, 100. n/2 = 50 falls in the class 30–40 (cumulative frequency 35 just before, 65 just after). Using the formula: L = 30, CF = 35, f = 30, h = 10. Median = 30 + [(50 − 35) / 30] × 10 = 30 + 5 = 35 cm."
             }
           ]
         },
@@ -202,7 +219,8 @@
             "Always verify the graphical result with the formula."
           ]
         }
-      ]
+      ],
+      "title": "Lesson"
     },
     {
       "id": "stats-mode-histogram",
@@ -217,8 +235,7 @@
           "items": [
             {
               "text": "The following distribution gives the marks obtained by 80 students in a test:\n\n| Marks | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 | 50–60 |\n|-------|------|-------|-------|-------|-------|-------|\n| Students | 5 | 10 | 15 | 20 | 18 | 12 |\n\nFind the mode using (i) the histogram and (ii) the formula.",
-              "answer": "(i) The modal class is 30–40 (highest frequency 20). The mode from the histogram is approximately 34. (ii) Using the formula: L = 30, f = 20, f₁ = 15, f₂ = 18, h = 10. Mode = 30 + [(20 − 15) / (2 × 20 − 15 − 18)] × 10 = 30 + [5 / (40 − 33)] × 10 = 30 + (5 / 7) × 10 ≈ 30 + 7.14 = 37.14.",
-              "explanation": "(i) The highest bar in the histogram is in the 30–40 class, so the modal class is 30–40; the graphical mode is at the peak, approximately 34. (ii) Using the mode formula with the given frequencies."
+              "note": "(i) The highest bar in the histogram is in the 30–40 class, so the modal class is 30–40; the graphical mode is at the peak, approximately 34. (ii) Using the mode formula with the given frequencies."
             }
           ]
         },
@@ -231,7 +248,8 @@
             "If two classes have the same highest frequency, the distribution is bimodal (two modes)."
           ]
         }
-      ]
+      ],
+      "title": "Lesson"
     },
     {
       "id": "stats-empirical-relation",
@@ -246,13 +264,11 @@
           "items": [
             {
               "text": "If the mean of a distribution is 30 and the median is 28, find the approximate mode.",
-              "answer": "Mode ≈ 3 × 28 − 2 × 30 = 84 − 60 = 24.",
-              "explanation": "Using the empirical relation Mode ≈ 3 × Median − 2 × Mean = 3 × 28 − 2 × 30 = 24."
+              "note": "Using the empirical relation Mode ≈ 3 × Median − 2 × Mean = 3 × 28 − 2 × 30 = 24."
             },
             {
               "text": "If the mode of a distribution is 35 and the mean is 40, find the approximate median.",
-              "answer": "35 ≈ 3 × Median − 2 × 40, so 3 × Median = 35 + 80 = 115, and Median ≈ 38.33.",
-              "explanation": "Rearranging the empirical relation: 3 × Median ≈ Mode + 2 × Mean = 35 + 80 = 115, so Median ≈ 38.33."
+              "note": "Rearranging the empirical relation: 3 × Median ≈ Mode + 2 × Mean = 35 + 80 = 115, so Median ≈ 38.33."
             }
           ]
         },
@@ -265,7 +281,8 @@
             "Always state that the result is approximate."
           ]
         }
-      ]
+      ],
+      "title": "Lesson"
     },
     {
       "id": "stats-variability",
@@ -285,7 +302,8 @@
             "These topics are noted for completeness; the ICSE Class X focus is on mean, median, mode, and graphical representation."
           ]
         }
-      ]
+      ],
+      "title": "Lesson"
     },
     {
       "id": "review-questions",
@@ -295,7 +313,8 @@
           "type": "paragraph",
           "text": "The questions that follow move from computing means of raw and grouped data through constructing ogives and finding the mode to using the empirical relation and solving application problems. Work each one by organising the data, choosing the right method, and showing all steps."
         }
-      ]
+      ],
+      "title": "Lesson"
     }
   ],
   "questions": [
@@ -306,8 +325,13 @@
       "marks": 1,
       "origin": "practice",
       "prompt": "The mean of the first 5 prime numbers (2, 3, 5, 7, 11) is _____.",
-      "options": ["5.2", "5.6", "5.8", "6.0"],
-      "correctIndex": 1,
+      "options": [
+        "5.6",
+        "5.2",
+        "5.8",
+        "6.0"
+      ],
+      "correctIndex": 0,
       "answer": "5.6",
       "explanation": "Mean = (2 + 3 + 5 + 7 + 11) / 5 = 28 / 5 = 5.6."
     },
@@ -318,8 +342,13 @@
       "marks": 1,
       "origin": "practice",
       "prompt": "The mean of the first 10 whole numbers (0, 1, 2, …, 9) is _____.",
-      "options": ["4.5", "4.0", "5.0", "5.5"],
-      "correctIndex": 0,
+      "options": [
+        "4.0",
+        "4.5",
+        "5.0",
+        "5.5"
+      ],
+      "correctIndex": 1,
       "answer": "4.5",
       "explanation": "Mean = (0 + 1 + 2 + … + 9) / 10 = 45 / 10 = 4.5."
     },
@@ -367,26 +396,6 @@
       "explanation": "For n = 80, n/2 = 40. Draw a horizontal line from 40 on the y-axis to meet the less-than ogive, then drop a perpendicular to the x-axis. The x-value where it lands is the median."
     },
     {
-      "id": "icse-10-math-q-stats-07",
-      "type": "short",
-      "difficulty": "medium",
-      "marks": 2,
-      "origin": "practice",
-      "prompt": "The mode of a distribution is 42 and the mean is 45. Using the empirical relation, find the approximate median.",
-      "answer": "Mode ≈ 3 × Median − 2 × Mean, so 42 ≈ 3 × Median − 2 × 45, giving 3 × Median = 42 + 90 = 132, and Median ≈ 44.",
-      "explanation": "Rearranging: 3 × Median ≈ Mode + 2 × Mean = 42 + 90 = 132, so Median ≈ 44."
-    },
-    {
-      "id": "icse-10-math-q-stats-08",
-      "type": "short",
-      "difficulty": "medium",
-      "marks": 2,
-      "origin": "practice",
-      "prompt": "The following distribution gives the heights of 50 plants:\n\n| Height (cm) | 0–10 | 10–20 | 20–30 | 30–40 | 40–50 |\n|-------------|------|-------|-------|-------|-------|\n| No. of plants | 5 | 10 | 15 | 10 | 10 |\n\nFind the mode using the formula.",
-      "answer": "Modal class = 20–30. Mode = 20 + [(15 – 10) / (2 × 15 – 10 – 10)] × 10 = 20 + (5 / 10) × 10 = 25 cm.",
-      "explanation": "The frequencies are 5, 10, 15, 10, 10. The highest frequency is 15, in the class 20–30, so the modal class is 20–30. Here L = 20, f = 15, f₁ = 10 (frequency before), f₂ = 10 (frequency after) and h = 10. Mode = L + [(f – f₁) / (2f – f₁ – f₂)] × h = 20 + [(15 – 10) / (30 – 10 – 10)] × 10 = 20 + (5 / 10) × 10 = 25."
-    },
-    {
       "id": "icse-10-math-q-stats-09",
       "type": "long",
       "difficulty": "hard",
@@ -396,6 +405,308 @@
       "answer": "(i) Mean = 33. (ii) Median = 35. (iii) Mode = 41.25. (iv) 3 × 35 – 2 × 33 = 39, which is reasonably close to the mode 41.25, so the relation holds approximately.",
       "explanation": "(i) Class-marks: 5, 15, 25, 35, 45. With A = 35 and h = 10, ui = (xi – 35) / 10 = –3, –2, –1, 0, 1. fiui: 5×(–3) = –15, 10×(–2) = –20, 20×(–1) = –20, 30×0 = 0, 35×1 = 35. Σfi = 100 and Σfiui = –20. Mean = 35 + (10 / 100) × (–20) = 35 – 2 = 33. (ii) n = 100, so n/2 = 50. Cumulative frequencies: 5, 15, 35, 65, 100. The median class is 30–40, with L = 30, cf = 35, f = 30, h = 10. Median = 30 + [(50 – 35) / 30] × 10 = 30 + 5 = 35. (iii) The highest frequency is 35, in the class 40–50, so the modal class is 40–50. L = 40, f = 35, f₁ = 30, f₂ = 0 (no class follows) and h = 10. Mode = 40 + [(35 – 30) / (2 × 35 – 30 – 0)] × 10 = 40 + (5 / 40) × 10 = 41.25. (iv) 3 × Median – 2 × Mean = 3 × 35 – 2 × 33 = 105 – 66 = 39, which is close to 41.25.",
       "commonMistake": "Errors in computing class-marks, deviations, cumulative frequencies, or applying the mode/median formulae incorrectly."
+    },
+    {
+      "id": "icse-10-math-q-stats-10",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The mode of a data set is the value that:",
+      "options": [
+        "is the middle value",
+        "is the average",
+        "occurs most frequently",
+        "is the range"
+      ],
+      "correctIndex": 2,
+      "answer": "occurs most frequently",
+      "explanation": "Mode is the observation or class with the highest frequency in the data."
+    },
+    {
+      "id": "icse-10-math-q-stats-11",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The median of ordered data divides the data into:",
+      "options": [
+        "three equal parts",
+        "unequal parts",
+        "parts in ratio 1:2",
+        "two equal parts"
+      ],
+      "correctIndex": 3,
+      "answer": "two equal parts",
+      "explanation": "Median is the central value such that half the observations lie below it and half above it (for ordered data)."
+    },
+    {
+      "id": "icse-10-math-q-stats-12",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a class interval 10–20 in continuous grouped data, the class mark is:",
+      "options": [
+        "15",
+        "10",
+        "20",
+        "30"
+      ],
+      "correctIndex": 0,
+      "answer": "15",
+      "explanation": "Class mark = (lower limit + upper limit)/2 = (10 + 20)/2 = 15."
+    },
+    {
+      "id": "icse-10-math-q-stats-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Cumulative frequency for a class is obtained by:",
+      "options": [
+        "subtracting frequencies",
+        "adding frequencies up to that class",
+        "multiplying class mark by frequency",
+        "dividing by total frequency"
+      ],
+      "correctIndex": 1,
+      "answer": "adding frequencies up to that class",
+      "explanation": "Cumulative frequency is the running total of frequencies from the first class up to the given class."
+    },
+    {
+      "id": "icse-10-math-q-stats-14",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a histogram for continuous classes, the bars are:",
+      "options": [
+        "separated by gaps",
+        "drawn as lines only",
+        "adjacent with no gaps",
+        "drawn horizontally only"
+      ],
+      "correctIndex": 2,
+      "answer": "adjacent with no gaps",
+      "explanation": "Continuous class intervals are represented by adjacent rectangles in a histogram, with no gaps between bars."
+    },
+    {
+      "id": "icse-10-math-q-stats-15",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An ogive is a graph of:",
+      "options": [
+        "frequencies against class marks only",
+        "raw data values",
+        "mode against median",
+        "cumulative frequencies against class boundaries"
+      ],
+      "correctIndex": 3,
+      "answer": "cumulative frequencies against class boundaries",
+      "explanation": "An ogive plots cumulative frequency against upper or lower class boundaries to estimate median and quartiles."
+    },
+    {
+      "id": "icse-10-math-q-stats-16",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The arithmetic mean of 4, 6 and 8 is ______.",
+      "answer": "6 (mean)",
+      "explanation": "Mean = (4 + 6 + 8)/3 = 18/3 = 6."
+    },
+    {
+      "id": "icse-10-math-q-stats-17",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In grouped data, the class with the highest frequency is called the ______ class.",
+      "answer": "modal",
+      "explanation": "The modal class contains the mode and is identified by the maximum frequency."
+    },
+    {
+      "id": "icse-10-math-q-stats-18",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For n observations, the median is the value at the middle position when data are arranged in ______ order.",
+      "answer": "ascending or descending",
+      "explanation": "Data must be ordered (ascending or descending) before locating the median position."
+    },
+    {
+      "id": "icse-10-math-q-stats-19",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the mean of the following data: values 5, 10, 15, 20 with frequencies 3, 5, 8, 4 respectively.",
+      "answer": "13.25.",
+      "explanation": "Compute Σf = 3 + 5 + 8 + 4 = 20 and Σfx = (5×3) + (10×5) + (15×8) + (20×4) = 15 + 50 + 120 + 80 = 265. Mean = Σfx/Σf = 265/20 = 13.25."
+    },
+    {
+      "id": "icse-10-math-q-stats-20",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The marks obtained by 7 students are 12, 15, 13, 18, 15, 16, 15. Find the mean, median and mode of the data.",
+      "answer": "Mean = 104/7 ≈ 14.86, Median = 15, Mode = 15.",
+      "explanation": "Sum = 12+15+13+18+15+16+15 = 104, mean = 104/7. Ordered data: 12,13,15,15,15,16,18 so median (4th value) = 15. Mode is the most frequent value = 15."
+    },
+    {
+      "id": "icse-10-math-q-stats-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A student uses the highest class limit instead of class mark to calculate mean for grouped data. Analyse the effect on the result.",
+      "answer": "Using upper class limits instead of class marks will generally overestimate the mean (for positive data), because each class is represented by a value higher than its midpoint. The class mark (midpoint) better represents the average of values within the interval under the grouping assumption.",
+      "explanation": "Mean for grouped data assumes observations are centred around class marks; systematically shifting representatives upward biases Σfx upward and increases the computed mean."
+    },
+    {
+      "id": "icse-10-math-q-stats-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two data sets have the same mean but different ranges. Analyse what this indicates about the data.",
+      "answer": "The same mean indicates similar average values, but different ranges show different spread/variability. The set with larger range has values more widely dispersed, while the one with smaller range is more consistent around the mean.",
+      "explanation": "Mean measures central tendency, whereas range measures dispersion; together they give a fuller description than mean alone."
+    },
+    {
+      "id": "icse-10-math-q-stats-23",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "In drawing a 'less than' ogive, a student plots cumulative frequencies against lower class limits. Analyse the mistake and state the correct procedure.",
+      "answer": "For a 'less than' ogive, cumulative frequencies must be plotted against upper class boundaries (or upper limits, as appropriate for continuous classes) because each cumulative frequency represents the number of observations less than that upper boundary. Plotting against lower limits misplaces points and gives an incorrect curve/median.",
+      "explanation": "The coordinate pair should represent (upper boundary, cumulative frequency up to that class) so that reading N/2 gives the correct median."
+    },
+    {
+      "id": "icse-10-math-q-stats-24",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A data set has mode 20 and median 18. A student concludes the mean must be 16. Analyse this conclusion using the empirical relationship.",
+      "answer": "The conclusion is not certain as an exact value, but the empirical relationship for moderately skewed distributions is Mode ≈ 3 Median − 2 Mean. Substituting gives 20 ≈ 3(18) − 2 Mean = 54 − 2 Mean, so 2 Mean ≈ 34 and Mean ≈ 17. The student's value 16 is an incorrect application; moreover the relationship is approximate, not a proof for all data sets.",
+      "explanation": "Empirical relation provides an estimate under suitable conditions; exact mean must be computed from data, and the student's arithmetic/assumption is flawed."
+    }
+  ],
+  "keyPoints": [
+    "Statistics deals with collection, organisation, presentation, analysis and interpretation of data.",
+    "Ungrouped data can be organised into frequency distributions; grouped data uses class intervals and frequencies.",
+    "Mean of ungrouped data is the sum of observations divided by the number of observations; for grouped data use direct, assumed mean or step-deviation methods.",
+    "Median is the middle value when data are arranged in order; for grouped data it is found using the median class and interpolation formula.",
+    "Mode is the value with highest frequency; for grouped data it is estimated using the modal class formula.",
+    "Cumulative frequency is the running total of frequencies and is used to draw ogives and locate median/quartiles.",
+    "A histogram represents grouped continuous data with adjacent rectangles whose areas are proportional to frequencies.",
+    "An ogive (cumulative frequency curve) can be 'less than' or 'more than' type and helps estimate median and quartiles graphically.",
+    "Class mark is the midpoint of a class interval and represents the class in mean calculations for grouped data.",
+    "Choose mean, median or mode appropriately based on the nature of data and what measure of central tendency is required."
+  ],
+  "examFocus": [
+    "Prepare a correct frequency/cumulative frequency table before applying formulas or drawing graphs.",
+    "For grouped mean, show class marks, deviations (if used), f×x or f×d products and totals clearly.",
+    "Identify median class as the class where cumulative frequency first reaches or exceeds N/2 and substitute correctly in the formula.",
+    "Identify modal class as the class with highest frequency and use correct f1, f0, f2 and class size in the mode formula.",
+    "When drawing histogram or ogive, choose suitable scales, label axes, mark class boundaries/points accurately and title the graph.",
+    "For ogive median, draw a horizontal line from N/2 to the curve and a vertical line to the axis; read the value carefully.",
+    "Check whether class intervals are continuous; adjust boundaries if given as inclusive classes where required.",
+    "Write final statistical measures with appropriate units/interpretation and verify calculations for arithmetic accuracy."
+  ],
+  "vocabulary": [
+    {
+      "word": "Frequency",
+      "meaning": "The number of times an observation or class occurs in the data."
+    },
+    {
+      "word": "Class interval",
+      "meaning": "A group or range into which data values are placed in grouped data."
+    },
+    {
+      "word": "Class mark",
+      "meaning": "The midpoint of a class interval, calculated as (lower limit + upper limit)/2."
+    },
+    {
+      "word": "Cumulative frequency",
+      "meaning": "The running total of frequencies up to a given class."
+    },
+    {
+      "word": "Mean",
+      "meaning": "The average value, obtained by dividing the sum of observations by their number."
+    },
+    {
+      "word": "Median",
+      "meaning": "The middle value of ordered data, dividing it into two equal parts."
+    },
+    {
+      "word": "Mode",
+      "meaning": "The value or class with the highest frequency."
+    },
+    {
+      "word": "Histogram",
+      "meaning": "A graphical representation of grouped data using adjacent rectangles."
+    },
+    {
+      "word": "Ogive",
+      "meaning": "A cumulative frequency curve used to estimate median and quartiles."
+    },
+    {
+      "word": "Modal class",
+      "meaning": "The class interval with the greatest frequency."
+    },
+    {
+      "word": "Median class",
+      "meaning": "The class interval containing the median in grouped data."
+    },
+    {
+      "word": "Range",
+      "meaning": "The difference between the highest and lowest values in the data."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Histogram for grouped data",
+      "description": "A histogram shows class intervals on the horizontal axis and frequencies on the vertical axis. Adjacent rectangles are drawn with bases equal to class intervals and heights proportional to frequencies, with no gaps between bars for continuous classes. Axes are labelled and a suitable scale is indicated.",
+      "labels": [
+        "Class intervals",
+        "Frequency axis",
+        "Adjacent bars",
+        "No gaps",
+        "Scale",
+        "Title"
+      ]
+    },
+    {
+      "caption": "Less-than ogive and median",
+      "description": "A smooth curve is plotted with upper class boundaries on the x-axis and cumulative frequencies on the y-axis, rising from left to right. A horizontal line from N/2 on the y-axis meets the ogive and drops vertically to the x-axis to indicate the median value.",
+      "labels": [
+        "Upper class boundaries",
+        "Cumulative frequency",
+        "Less-than ogive",
+        "N/2 level",
+        "Median on x-axis",
+        " plotted points"
+      ]
+    },
+    {
+      "caption": "Mean, median and mode in grouped data",
+      "description": "A grouped frequency table excerpt is shown alongside indications of class mark for mean calculation, median class where cumulative frequency crosses N/2, and modal class with highest frequency. Arrows point to the elements used in each formula, clarifying how each measure is identified.",
+      "labels": [
+        "Class mark",
+        "f×x",
+        "Cumulative frequency",
+        "Median class",
+        "Modal class",
+        "Central tendency measures"
+      ]
     }
   ]
 }

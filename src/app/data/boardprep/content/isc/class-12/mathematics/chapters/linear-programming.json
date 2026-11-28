@@ -1,0 +1,721 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-linear-programming",
+  "title": "Linear Programming",
+  "kind": "mathematics",
+  "tagline": "Formulating two-variable problems, graphing the feasible region and finding an optimum by corner points.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 6 — Linear Programming; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Topic selection follows the Unit 6 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 6 carries 5 of the 80 theory marks and is concerned with choosing the best value of a linear objective, such as profit or cost, when the variables are restricted by linear inequalities. In the two-variable case every inequality is a half-plane, and the set of points satisfying all of them is the feasible region. Because the objective is linear, its largest or smallest value on a bounded convex feasible region is attained at a corner point, which turns an optimisation problem into a short geometric search. The task is therefore to translate a word problem faithfully, graph the region correctly, identify all its vertices, and compare the objective at each vertex.",
+    "facts": [
+      {
+        "label": "Unit weightage",
+        "value": "5 of 80 theory marks"
+      },
+      {
+        "label": "Paper I",
+        "value": "Theory, 3 hours, 80 marks"
+      },
+      {
+        "label": "Paper II",
+        "value": "Project work, 20 marks"
+      },
+      {
+        "label": "Examination year",
+        "value": "2027"
+      },
+      {
+        "label": "Syllabus structure",
+        "value": "Seven compulsory units, no optional section"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Identify the decision variables, the linear objective function and the linear constraints in a word problem.",
+    "Formulate a linear programming problem in standard form, including the non-negativity restrictions.",
+    "Graph the feasible region for a two-variable problem and decide whether it is bounded, unbounded or infeasible.",
+    "Determine the corner points of the feasible region by solving the equations of the bounding lines.",
+    "Use the corner point method to find the optimal value of the objective function on a bounded region.",
+    "Handle unbounded regions by comparing the objective at the corner points and testing the open direction of the region.",
+    "Solve problems with up to three non-trivial constraints and report the solution as an optimal point together with the optimal value."
+  ],
+  "learn": [
+    {
+      "id": "lp-terminology-and-formulation",
+      "title": "Decision variables, objective function and formulation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A linear programming problem (LPP) asks for the maximum or minimum of a linear expression in two or more variables, subject to linear inequalities and the condition that the variables cannot be negative. The quantities to be chosen are the decision variables, the expression to be optimised is the objective function, and the inequalities expressing the limited resources or requirements are the constraints. Correct formulation is the most important step, because a correct graph of a wrong model solves the wrong problem."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Decision variables are usually written x and y for two-variable problems and represent the quantities chosen by the planner.",
+            "Objective function: an expression Z = ax + by that is to be maximised (profit, output) or minimised (cost, time).",
+            "Constraints: linear inequalities such as 2x + y ≤ 100; non-trivial constraints come from the problem statement, while x ≥ 0 and y ≥ 0 are the non-negativity restrictions.",
+            "Advantages: the method is systematic and makes the trade-off between scarce resources explicit. Limitations: it assumes linearity, certainty and divisibility, which real problems may only approximate.",
+            "A standard formulation states the objective, lists every constraint, and ends with x ≥ 0, y ≥ 0.",
+            "A point (x, y) that satisfies every constraint, including non-negativity, is a feasible solution; one that fails any constraint is infeasible."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "From a word problem to a linear programming model",
+          "columns": [
+            "Word-problem element",
+            "Mathematical meaning",
+            "Typical form"
+          ],
+          "rows": [
+            [
+              "Quantity to choose",
+              "Decision variables",
+              "x units of A, y units of B"
+            ],
+            [
+              "What is to be optimised",
+              "Objective function",
+              "Maximise Z = ax + by"
+            ],
+            [
+              "Resource or requirement limit",
+              "Constraint",
+              "px + qy ≤ r or ≥ r"
+            ],
+            [
+              "Physical restriction",
+              "Non-negativity",
+              "x ≥ 0, y ≥ 0"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A workshop makes two items, P and Q. Each P needs 2 hours of cutting and 1 hour of finishing, and each Q needs 1 hour of cutting and 2 hours of finishing. At most 10 cutting hours and 12 finishing hours are available. If the profit is ₹60 per P and ₹50 per Q, formulate the LPP to maximise profit.",
+              "note": "Let x be the number of P and y the number of Q. Then maximise Z = 60x + 50y subject to 2x + y ≤ 10 (cutting), x + 2y ≤ 12 (finishing), and x ≥ 0, y ≥ 0. Each coefficient in a constraint is read directly from the corresponding resource line of the statement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphing-feasible-regions",
+      "title": "Graphing constraints and identifying the feasible region",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In two variables, each linear inequality ax + by ≤ c or ax + by ≥ c represents a half-plane bounded by the line ax + by = c. The feasible region is the intersection of all these half-planes with the first quadrant. It may be a bounded polygon, an unbounded region extending to infinity, or empty if the constraints are contradictory. The graph is the picture on which the optimisation is carried out, so the boundary lines and the correct side of each must be drawn with care."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "To graph ax + by ≤ c, draw the line ax + by = c (a solid line, because equality is allowed) and shade the side that satisfies the inequality.",
+            "The origin test: if (0, 0) does not lie on the line, substitute it into the inequality; shade the origin side when the inequality is true and the opposite side when it is false.",
+            "For a line through the origin the origin test fails, so test any convenient point not on the line, such as (1, 0) or (0, 1).",
+            "The feasible region is the common shaded area. If no point satisfies every constraint simultaneously, the problem is infeasible and has no solution.",
+            "A bounded region is enclosed on all sides by the constraint lines; an unbounded region is open in at least one direction.",
+            "Corner points (vertices) are intersections of boundary lines that lie inside the feasible region. Each candidate intersection must be checked against every constraint."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Common boundary lines and how to choose the half-plane",
+          "columns": [
+            "Constraint",
+            "Boundary line",
+            "Test for the correct side"
+          ],
+          "rows": [
+            [
+              "x + 2y ≤ 8",
+              "x + 2y = 8",
+              "Origin gives 0 ≤ 8, so shade the origin side"
+            ],
+            [
+              "2x + y ≥ 6",
+              "2x + y = 6",
+              "Origin gives 0 ≥ 6 (false), so shade away from the origin"
+            ],
+            [
+              "x ≥ 0, y ≥ 0",
+              "Axes",
+              "First quadrant including the axes"
+            ],
+            [
+              "y ≤ 3",
+              "Horizontal line y = 3",
+              "Shade below the line"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Shade the feasible region for x + y ≤ 6, x + 2y ≤ 8, x ≥ 0, y ≥ 0.",
+              "note": "The line x + y = 6 meets the axes at (6, 0) and (0, 6); the line x + 2y = 8 meets the axes at (8, 0) and (0, 4). Both inequalities are satisfied at the origin, so the feasible region is the quadrilateral with vertices (0, 0), (6, 0), (4, 2) and (0, 4), where (4, 2) is the intersection of the two lines."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "corner-point-method",
+      "title": "The corner point method and optimal solutions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The corner point (or vertex) method rests on a simple geometric fact: for a linear objective on a convex polygon, the level lines Z = ax + by are parallel straight lines, and the extreme value is reached when this family of lines last touches the feasible region, which happens at a vertex (or, in special cases, along an entire edge). Therefore, once the region is drawn, it is enough to evaluate Z at every corner point and compare the values."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "List all corner points of the feasible region, including intercepts with the axes and intersections of the constraint lines that lie inside the region.",
+            "Compute Z = ax + by at each corner point and record the values in a table.",
+            "For a bounded region, the largest of these values is the maximum and the smallest is the minimum; no point inside the region can beat a vertex.",
+            "If two adjacent corner points give the same optimal value, every point on the edge joining them is also optimal (infinitely many optimal solutions).",
+            "Reject any intersection that violates a constraint, even if it lies on two boundary lines, because it is not a corner of the feasible region.",
+            "State the answer as both the optimal point (x, y) and the optimal value Z, with units where the problem supplies them."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Evaluating the objective at corner points",
+          "columns": [
+            "Corner point",
+            "Substitution in Z = 60x + 50y",
+            "Value of Z"
+          ],
+          "rows": [
+            [
+              "(0, 0)",
+              "0 + 0",
+              "0"
+            ],
+            [
+              "(5, 0)",
+              "300 + 0",
+              "300"
+            ],
+            [
+              "(8/3, 14/3)",
+              "160 + 700/3",
+              "1180/3"
+            ],
+            [
+              "(0, 6)",
+              "0 + 300",
+              "300"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Maximise Z = 60x + 50y subject to 2x + y ≤ 10, x + 2y ≤ 12, x ≥ 0, y ≥ 0.",
+              "note": "The corner points are (0, 0), (5, 0), (8/3, 14/3) and (0, 6), where (8/3, 14/3) is the intersection of 2x + y = 10 and x + 2y = 12. The values of Z are 0, 300, 1180/3 ≈ 393.33 and 300, so the maximum is 1180/3 at x = 8/3, y = 14/3. If the problem required whole items, the nearest feasible integer points would need a separate check."
+            },
+            {
+              "text": "Minimise Z = 3x + 2y subject to x + y ≥ 5, x + 2y ≥ 6, x ≥ 0, y ≥ 0.",
+              "note": "The feasible region is unbounded above and to the right, with corner points (6, 0), (4, 1) and (0, 5). The values of Z at these points are 18, 14 and 10. Since Z increases without bound as x or y grows, the smallest corner value 10 at (0, 5) is the minimum, and the region has no maximum."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unbounded-and-infeasible-cases",
+      "title": "Unbounded, infeasible and multiple optimal solutions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Not every LPP has a unique bounded answer. The feasible region may be empty, in which case no solution exists. It may be unbounded, in which case a maximum may fail to exist even though a minimum does, or vice versa. And the optimal value may occur at two adjacent vertices, making every point of the joining edge optimal. Each of these cases must be recognised and stated correctly rather than forced into the bounded-unique template."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Infeasible problem: the constraints have no common point, so the feasible region is empty and there is neither a maximum nor a minimum.",
+            "Unbounded region: if Z can be made arbitrarily large in the open direction, the maximum does not exist; if Z can be made arbitrarily small, the minimum does not exist.",
+            "To confirm a minimum M on an unbounded region, draw the open half-plane ax + by < M and check that it has no point in common with the feasible region.",
+            "To confirm that no maximum exists, show that the half-plane ax + by > M (for the largest corner value M) still overlaps the feasible region.",
+            "Multiple optimal solutions occur when the objective line ax + by = M coincides with an edge of the feasible region; every point of that edge, including the two end vertices, is optimal.",
+            "The corner point method still finds the candidate optimal value; the unbounded or multiple-solution test is an additional step, not a different method."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Maximise Z = x + y subject to x − y ≥ 1, −x + y ≥ 1, x ≥ 0, y ≥ 0.",
+              "note": "The first constraint requires x ≥ y + 1 and the second requires y ≥ x + 1, which cannot both hold for any real x and y. The feasible region is therefore empty and the problem has no feasible solution."
+            },
+            {
+              "text": "Maximise Z = 4x + 2y subject to x + 2y ≥ 4, 3x + y ≥ 3, x ≥ 0, y ≥ 0.",
+              "note": "The corner points of the unbounded feasible region are (0, 3), (2/5, 9/5) and (4, 0), with Z values 6, 26/5 and 16. The largest corner value is 16 at (4, 0), but the open half-plane 4x + 2y > 16 still meets the feasible region (for example at (5, 0)), so Z can be made larger without bound and there is no maximum."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solving-word-problems",
+      "title": "Solving complete two-variable word problems",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A complete solution is a chain: define the variables, write the model, graph the region, list the corner points, evaluate the objective, and state the conclusion in the language of the problem. Because the syllabus limits problems to two variables and up to three non-trivial constraints, the graph can always be drawn and every vertex found by solving a pair of linear equations. The working should show those intersection calculations, since they are where arithmetic errors usually occur."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Define x and y clearly, including their units and the meaning of non-integer values if the context requires whole units.",
+            "Translate every sentence that limits a resource into one inequality, and check that the direction of each inequality matches the words ‘at most’, ‘at least’ or ‘exactly’.",
+            "Solve the boundary equations in pairs to obtain the corner points; a point that satisfies the two equations but violates a third constraint must be discarded.",
+            "Present the corner-point evaluation in a small table so that the comparison is transparent.",
+            "If the optimum occurs at a point with fractional coordinates but the context demands whole units, identify and test the feasible integer points nearest to that vertex.",
+            "Finish with a sentence stating the optimal decision and the optimal value, for example ‘the maximum profit is ₹… when … units of each item are made’."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A small producer makes tables and chairs. Each table needs 4 hours of carpentry and 2 hours of finishing, and each chair needs 3 hours of carpentry and 1 hour of finishing. The workshop has 24 carpentry hours and 10 finishing hours available. The profit is ₹200 per table and ₹150 per chair. Find how many of each should be made to maximise profit, assuming whole units.",
+              "note": "Let x tables and y chairs be made. Maximise Z = 200x + 150y subject to 4x + 3y ≤ 24, 2x + y ≤ 10, x ≥ 0, y ≥ 0. The corner points are (0, 0), (5, 0), (3, 4) and (0, 8), with Z values 0, 1000, 1200 and 1200. The maximum profit is ₹1200, attained at (3, 4) and at (0, 8) and therefore at every feasible integer point on the edge joining them, namely (0, 8), (1, 20/3) is not integral but (3, 4) is; the integer optimal choices on that edge are (0, 8) and (3, 4)."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A linear programming problem has decision variables, a linear objective function Z = ax + by, linear constraints and non-negativity restrictions x ≥ 0, y ≥ 0.",
+    "A feasible solution satisfies every constraint; the feasible region is the common region of all the corresponding half-planes in the first quadrant.",
+    "The feasible region may be bounded, unbounded or empty (infeasible).",
+    "Corner points are intersections of boundary lines that lie inside the feasible region and must be checked against all constraints.",
+    "For a bounded region, the maximum and minimum of Z occur at corner points of the feasible region.",
+    "If two adjacent vertices give the same optimal value, every point of the edge joining them is optimal.",
+    "On an unbounded region, the largest or smallest corner value may fail to be an optimum and the open half-plane test must be applied.",
+    "A complete answer states the optimal point (x, y) and the optimal value of Z, with units where appropriate.",
+    "Problems in this syllabus use two variables and up to three non-trivial constraints, so a graph and pairwise intersection of lines are sufficient.",
+    "When the context requires whole units, a fractional corner optimum must be followed by a check of the nearest feasible integer points."
+  ],
+  "examFocus": [
+    "Formulating an LPP from a word problem: defining variables, writing Z and translating each resource sentence into the correct inequality.",
+    "Drawing boundary lines accurately and choosing the correct half-plane, including the case where the origin lies on a boundary line.",
+    "Finding corner points by solving pairs of linear equations and rejecting intersections that violate another constraint.",
+    "Evaluating Z at every corner point and identifying the maximum or minimum on a bounded region.",
+    "Recognising and stating an unbounded case where no maximum (or no minimum) exists, using the open half-plane test.",
+    "Recognising multiple optimal solutions when the objective line is parallel to an edge of the feasible region.",
+    "Stating the final answer in context, with the optimal values of the variables and the optimal value of Z.",
+    "Checking nearest integer feasible points when a fractional corner solution is not allowed by the problem."
+  ],
+  "vocabulary": [
+    {
+      "word": "Decision variables",
+      "meaning": "The quantities chosen in the problem, usually x and y."
+    },
+    {
+      "word": "Objective function",
+      "meaning": "The linear expression Z = ax + by to be maximised or minimised."
+    },
+    {
+      "word": "Constraint",
+      "meaning": "A linear inequality or equation restricting the decision variables."
+    },
+    {
+      "word": "Non-negativity restrictions",
+      "meaning": "The conditions x ≥ 0 and y ≥ 0 required by the context."
+    },
+    {
+      "word": "Feasible solution",
+      "meaning": "A point that satisfies all the constraints."
+    },
+    {
+      "word": "Feasible region",
+      "meaning": "The set of all feasible solutions, shown as the common shaded region."
+    },
+    {
+      "word": "Infeasible problem",
+      "meaning": "A problem whose constraints have no common solution."
+    },
+    {
+      "word": "Corner point",
+      "meaning": "A vertex of the feasible region, found as an intersection of boundary lines."
+    },
+    {
+      "word": "Optimal solution",
+      "meaning": "A feasible solution that gives the maximum or minimum value of Z."
+    },
+    {
+      "word": "Optimal value",
+      "meaning": "The maximum or minimum value attained by the objective function."
+    },
+    {
+      "word": "Bounded region",
+      "meaning": "A feasible region enclosed on all sides."
+    },
+    {
+      "word": "Unbounded region",
+      "meaning": "A feasible region that extends without limit in some direction."
+    },
+    {
+      "word": "Corner point method",
+      "meaning": "The method of comparing Z at every vertex of the feasible region."
+    },
+    {
+      "word": "Multiple optimal solutions",
+      "meaning": "The case where the optimal value occurs at more than one point, typically along an edge."
+    },
+    {
+      "word": "Half-plane",
+      "meaning": "The region on one side of a straight line, representing a linear inequality."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A bounded feasible region with its corner points marked",
+      "description": "The first quadrant is drawn with the lines x + y = 6 and x + 2y = 8. The half-planes x + y ≤ 6 and x + 2y ≤ 8 are shaded towards the origin, and their common area with the axes forms a quadrilateral. The vertices (0, 0), (6, 0), (4, 2) and (0, 4) are marked with dots, and the point (4, 2) is labelled as the intersection of the two sloping boundary lines.",
+      "labels": [
+        "x and y axes",
+        "line x + y = 6",
+        "line x + 2y = 8",
+        "shaded feasible region",
+        "corner points (0,0), (6,0), (4,2), (0,4)",
+        "intersection (4,2)"
+      ]
+    },
+    {
+      "caption": "Figure: An unbounded feasible region and a family of objective lines",
+      "description": "The constraints x + y ≥ 5 and x + 2y ≥ 6 are graphed in the first quadrant, shading the region away from the origin so that it opens to the upper right without bound. The corner points (6, 0), (4, 1) and (0, 5) are marked. Several parallel lines of the form 3x + 2y = k are drawn across the region, showing that smaller values of k touch the region nearer the origin while larger values extend indefinitely into it.",
+      "labels": [
+        "constraints x + y ≥ 5 and x + 2y ≥ 6",
+        "unbounded shaded region",
+        "corner points (6,0), (4,1), (0,5)",
+        "parallel objective lines 3x + 2y = k",
+        "direction of increasing Z",
+        "open side of the region"
+      ]
+    },
+    {
+      "caption": "Figure: Multiple optimal solutions along an edge of the feasible region",
+      "description": "A bounded feasible polygon is shown with one of its edges lying exactly along an objective line Z = 4x + 2y = 12. The two end vertices of that edge are marked and give the same value of Z, and several points along the edge are indicated to show that every point of the segment is an optimal solution while points inside the polygon give smaller values.",
+      "labels": [
+        "feasible polygon",
+        "edge coinciding with Z = 12",
+        "two optimal corner points",
+        "interior points with smaller Z",
+        "direction of increasing Z",
+        "segment of optimal solutions"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-lp-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a linear programming problem, the function to be maximised or minimised is called the",
+      "options": [
+        "objective function",
+        "constraint function",
+        "feasible function",
+        "decision region"
+      ],
+      "correctIndex": 0,
+      "answer": "objective function",
+      "explanation": "The objective function is the linear expression, usually written Z = ax + by, whose value is to be made as large or as small as possible subject to the constraints. The constraints are the inequalities that restrict the variables, not the function being optimised.",
+      "commonMistake": "Calling the inequalities the objective function and the expression Z a constraint."
+    },
+    {
+      "id": "isc-12-maths-q-lp-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The point (2, 3) is feasible for which of the following systems?",
+      "options": [
+        "x + y ≤ 4, x ≥ 0, y ≥ 0",
+        "2x + y ≤ 6, x ≥ 0, y ≥ 0",
+        "x + 2y ≤ 10, x + y ≤ 6, x ≥ 0, y ≥ 0",
+        "x + y ≥ 7, x ≥ 0, y ≥ 0"
+      ],
+      "correctIndex": 2,
+      "answer": "x + 2y ≤ 10, x + y ≤ 6, x ≥ 0, y ≥ 0",
+      "explanation": "Substituting (2, 3) gives 2 + 6 = 8 ≤ 10 and 2 + 3 = 5 ≤ 6, and both coordinates are non-negative, so every constraint is satisfied. In the first option 2 + 3 = 5 ≤ 4 is false, in the second 4 + 3 = 7 ≤ 6 is false, and in the fourth 5 ≥ 7 is false.",
+      "commonMistake": "Checking only one constraint and assuming the point is feasible without testing the rest."
+    },
+    {
+      "id": "isc-12-maths-q-lp-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The feasible region of a linear programming problem is always a",
+      "options": [
+        "convex polygonal region",
+        "circle",
+        "triangle only",
+        "region with curved boundary"
+      ],
+      "correctIndex": 0,
+      "answer": "convex polygonal region",
+      "explanation": "Each linear constraint defines a half-plane, and the intersection of half-planes is a convex set bounded by straight lines, so in two variables it is a convex polygonal region (possibly unbounded or empty). It need not be a triangle, and it cannot have a curved boundary when all constraints are linear.",
+      "commonMistake": "Assuming the region must always be a triangle because many textbook examples use three constraints."
+    },
+    {
+      "id": "isc-12-maths-q-lp-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a bounded feasible region, the maximum value of Z = 3x + 4y occurs at",
+      "options": [
+        "the origin only",
+        "the midpoint of an edge",
+        "a corner point of the feasible region",
+        "every interior point"
+      ],
+      "correctIndex": 2,
+      "answer": "a corner point of the feasible region",
+      "explanation": "A linear objective takes its extreme values on a bounded convex region at a vertex. It may also take the same value along an entire edge, but that edge still includes corner points, so at least one corner point is always optimal.",
+      "commonMistake": "Choosing the midpoint of an edge, which is optimal only in the special case where the whole edge is optimal."
+    },
+    {
+      "id": "isc-12-maths-q-lp-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The corner points of a bounded feasible region are (0, 0), (4, 0), (3, 2) and (0, 3). The maximum value of Z = 5x + 2y is",
+      "options": [
+        "six",
+        "nineteen",
+        "fifteen",
+        "twenty"
+      ],
+      "correctIndex": 3,
+      "answer": "twenty",
+      "explanation": "Evaluating Z at the corner points gives 0 at (0, 0), 20 at (4, 0), 19 at (3, 2) and 6 at (0, 3). The largest of these values is 20, so the maximum is 20 at (4, 0).",
+      "commonMistake": "Stopping at the first corner point tested, or confusing the maximum of Z with the maximum x-coordinate."
+    },
+    {
+      "id": "isc-12-maths-q-lp-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The system x − y ≥ 1, y − x ≥ 1, x ≥ 0, y ≥ 0 has",
+      "options": [
+        "a bounded feasible region",
+        "an unbounded feasible region",
+        "exactly one feasible solution",
+        "no feasible solution"
+      ],
+      "correctIndex": 3,
+      "answer": "no feasible solution",
+      "explanation": "The first inequality gives x ≥ y + 1 while the second gives y ≥ x + 1, so together they require x ≥ x + 2, which is impossible. No point satisfies both constraints, and the feasible region is empty.",
+      "commonMistake": "Shading both half-planes without noticing that they do not overlap anywhere in the plane."
+    },
+    {
+      "id": "isc-12-maths-q-lp-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the maximum value of Z occurs at (2, 4) and at (4, 2), then Z is also maximum at",
+      "options": [
+        "(0, 0) only",
+        "(3, 3) on the segment joining them",
+        "every point inside the feasible region",
+        "no other point"
+      ],
+      "correctIndex": 1,
+      "answer": "(3, 3) on the segment joining them",
+      "explanation": "When two adjacent vertices give the same optimal value of a linear objective, every point on the edge joining them gives that same value. The midpoint (3, 3) lies on that edge and is therefore also optimal, while interior points need not be.",
+      "commonMistake": "Assuming a linear program can have exactly two optimal points and no others."
+    },
+    {
+      "id": "isc-12-maths-q-lp-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The feasible region for x + y ≥ 4, x ≥ 0, y ≥ 0 is unbounded. For Z = 2x + 3y, this region has",
+      "options": [
+        "no minimum and no maximum",
+        "a minimum but no maximum",
+        "a maximum but no minimum",
+        "both a minimum and a maximum"
+      ],
+      "correctIndex": 1,
+      "answer": "a minimum but no maximum",
+      "explanation": "The corner points on the boundary of this unbounded region are (4, 0) and (0, 4), where Z is 8 and 12. The half-plane 2x + 3y < 8 does not meet the feasible region, so 8 is the minimum, but 2x + 3y can be made arbitrarily large as x or y increases, so there is no maximum.",
+      "commonMistake": "Assuming that an unbounded region has neither a maximum nor a minimum without testing the direction of the objective."
+    },
+    {
+      "id": "isc-12-maths-q-lp-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The conditions x ≥ 0 and y ≥ 0 in a linear programming problem are called ______ restrictions.",
+      "answer": "non-negativity",
+      "explanation": "They require the decision variables to be zero or positive, which reflects the fact that quantities such as numbers of items, hours or kilograms cannot be negative in the model.",
+      "commonMistake": "Calling them non-trivial constraints, which instead refers to the resource or requirement inequalities stated in the problem."
+    },
+    {
+      "id": "isc-12-maths-q-lp-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A point of the feasible region which is an intersection of two boundary lines is called a ______ point.",
+      "answer": "corner",
+      "explanation": "Corner points, or vertices, are the candidates at which a linear objective attains its extreme values on a bounded feasible region, which is why the method is called the corner point method.",
+      "commonMistake": "Writing interior point, which describes a point strictly inside the region rather than on its boundary."
+    },
+    {
+      "id": "isc-12-maths-q-lp-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the constraints of an LPP cannot be satisfied simultaneously, the problem is called ______.",
+      "answer": "infeasible",
+      "explanation": "An infeasible problem has an empty feasible region, so there is no point at which all constraints hold and therefore no optimal solution exists.",
+      "commonMistake": "Calling it unbounded, which means the feasible region extends without limit rather than being empty."
+    },
+    {
+      "id": "isc-12-maths-q-lp-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A baker makes loaves and buns. Each loaf uses 300 g of flour and each bun uses 100 g. At most 3 kg of flour is available. If x loaves and y buns are made, write the flour constraint and the non-negativity restrictions.",
+      "answer": "Converting 3 kg to 3000 g, the flour constraint is 300x + 100y ≤ 3000, which simplifies to 3x + y ≤ 30. The non-negativity restrictions are x ≥ 0 and y ≥ 0.",
+      "explanation": "The units must be consistent before writing the inequality, so 3 kg is written as 3000 g. Dividing by 100 keeps the constraint equivalent and makes later calculations simpler.",
+      "commonMistake": "Writing 300x + 100y ≤ 3 by mixing grams with kilograms."
+    },
+    {
+      "id": "isc-12-maths-q-lp-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the corner points of the feasible region defined by x + y ≤ 4, x + 3y ≤ 6, x ≥ 0, y ≥ 0.",
+      "answer": "The intercepts on the axes inside the region are (0, 0), (4, 0) from x + y = 4 with y = 0, and (0, 2) from x + 3y = 6 with x = 0. Solving x + y = 4 and x + 3y = 6 gives 2y = 2, so y = 1 and x = 3. The point (3, 1) satisfies all constraints, so the corner points are (0, 0), (4, 0), (3, 1) and (0, 2).",
+      "explanation": "Every intersection of boundary lines is a candidate, but only those satisfying every constraint are corners of the feasible region. Here (0, 4) and (6, 0) fail the other inequality and are therefore rejected.",
+      "commonMistake": "Listing (0, 4) or (6, 0) as corner points without checking them against the second constraint."
+    },
+    {
+      "id": "isc-12-maths-q-lp-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the maximum value of Z = 4x + 3y subject to x + y ≤ 5, 2x + y ≤ 8, x ≥ 0, y ≥ 0.",
+      "answer": "The corner points are (0, 0), (4, 0), (3, 2) and (0, 5). The values of Z are 0, 16, 18 and 15 respectively. Therefore the maximum value is 18 at (3, 2).",
+      "explanation": "The point (3, 2) is the intersection of x + y = 5 and 2x + y = 8, and it satisfies both inequalities as equalities. Comparing Z at all four vertices ensures that no better value is missed.",
+      "commonMistake": "Finding the intersection (3, 2) but not checking Z at the axis intercepts, where the maximum can sometimes occur."
+    },
+    {
+      "id": "isc-12-maths-q-lp-15",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Show that the linear programming problem of maximising Z = x + 2y subject to x − y ≥ 0, 2y ≤ x + 2, x ≥ 0, y ≥ 0 has no maximum value.",
+      "answer": "The corner points of the feasible region are (0, 0), (0, 1) and (2, 2). The values of Z at these points are 0, 2 and 6. However, the region is unbounded: for every t ≥ 2 the point (2t, t + 1) satisfies x − y = t − 1 ≥ 0 and 2y = 2t + 2 = x + 2, so it is feasible, and Z = x + 2y = 2t + 2(t + 1) = 4t + 2 can be made arbitrarily large. Therefore the problem has no maximum value.",
+      "explanation": "A largest corner value is not a maximum when the objective can grow without bound along the unbounded part of the feasible region. Exhibiting the feasible family (2t, t + 1), t ≥ 2, with Z = 4t + 2 increasing indefinitely settles the question.",
+      "commonMistake": "Reporting the largest corner value, 6, as the maximum without testing whether Z can increase along the unbounded part of the region."
+    },
+    {
+      "id": "isc-12-maths-q-lp-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A firm produces two products, A and B. Each unit of A requires 1 hour on machine M₁ and 3 hours on machine M₂, and each unit of B requires 2 hours on M₁ and 1 hour on M₂. Machine M₁ is available for at most 12 hours and M₂ for at most 15 hours. The profit is ₹40 per unit of A and ₹30 per unit of B. Formulate the problem and determine the number of units of each product that maximises the profit.",
+      "answer": "Let x units of A and y units of B be produced. Maximise Z = 40x + 30y subject to x + 2y ≤ 12, 3x + y ≤ 15, x ≥ 0, y ≥ 0. The corner points are (0, 0), (5, 0), (18/5, 21/5) and (0, 6). The values of Z are 0, 200, 270 and 180. Hence the maximum profit is ₹270 at x = 18/5 and y = 21/5. If only whole units are allowed, the feasible integer points near this vertex must be checked separately; (3, 4) gives Z = 240 and (4, 3) is not feasible because 4 + 6 > 12.",
+      "explanation": "The coefficients in the constraints come directly from the machine-hour rows of the statement. The intersection (18/5, 21/5) is found by solving x + 2y = 12 and 3x + y = 15 simultaneously, giving 5y = 21 and x = 12 − 42/5 = 18/5.",
+      "commonMistake": "Interchanging the machine constraints and writing 2x + y ≤ 12, which corresponds to reading the table by columns instead of by rows."
+    },
+    {
+      "id": "isc-12-maths-q-lp-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Minimise Z = 5x + 7y subject to 2x + y ≥ 8, x + 2y ≥ 10, x ≥ 0, y ≥ 0.",
+      "answer": "The feasible region is unbounded with corner points (10, 0), (2, 4) and (0, 8). The values of Z at these points are 50, 38 and 56. The smallest corner value is 38 at (2, 4). Because Z = 5x + 7y increases without bound as x or y grows in the open direction of this region, 38 is the overall minimum and there is no maximum. (Equivalently, the open half-plane 5x + 7y < 38 does not meet the feasible region, since the objective level can be decreased only by moving towards the origin, where the constraints fail.)",
+      "explanation": "The intersection (2, 4) comes from solving 2x + y = 8 and x + 2y = 10. Because the region is unbounded away from the origin while Z grows in that direction, the smallest corner value is the overall minimum.",
+      "commonMistake": "Assuming an unbounded region cannot have a minimum and reporting that the problem has no solution."
+    },
+    {
+      "id": "isc-12-maths-q-lp-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Maximise Z = x + y subject to x + 2y ≤ 10, 2x + y ≤ 12, x − y ≤ 2, x ≥ 0, y ≥ 0.",
+      "answer": "The corner points of the feasible region are (0, 0), (2, 0), (16/3, 4/3), (14/3, 8/3) and (0, 5). The values of Z = x + y at these points are 0, 2, 20/3, 22/3 and 5. The greatest value is 22/3, attained at (14/3, 8/3), which is the intersection of 2x + y = 12 and x + 2y = 10. This point satisfies all three non-trivial constraints: 28/3 + 8/3 = 12, 14/3 + 16/3 = 10 and x − y = 14/3 − 8/3 = 2 ≤ 2. Therefore the maximum value of Z is 22/3 at (14/3, 8/3).",
+      "explanation": "With three non-trivial constraints, each candidate intersection must be tested against the third inequality. The point (14/3, 8/3) lies on all three boundary lines 2x + y = 12, x + 2y = 10 and x − y = 2, so it is a genuine corner of the feasible region and gives the largest value of Z.",
+      "commonMistake": "Including an intersection that satisfies only two of the three constraints, or omitting a corner formed by a pair that has not been considered."
+    },
+    {
+      "id": "isc-12-maths-q-lp-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A diet planner must supply at least 8 units of vitamin A and 10 units of vitamin B. Food X provides 2 units of A and 2 units of B per kilogram at a cost of ₹30 per kg, and food Y provides 1 unit of A and 2 units of B per kilogram at a cost of ₹20 per kg. Formulate the problem to minimise cost and find the minimum cost.",
+      "answer": "Let x kg of X and y kg of Y be used. Minimise Z = 30x + 20y subject to 2x + y ≥ 8 (vitamin A), 2x + 2y ≥ 10 which simplifies to x + y ≥ 5 (vitamin B), and x ≥ 0, y ≥ 0. The feasible region is unbounded with corner points (5, 0), (3, 2) and (0, 8). The costs are 150, 130 and 160. Since Z increases without bound in the open direction of this region, the minimum cost is ₹130 at 3 kg of X and 2 kg of Y.",
+      "explanation": "The vitamin B constraint simplifies because both sides are divisible by 2, which does not change the region. The unbounded region has no maximum for a cost function that grows with x and y, but the smallest corner value is still the minimum.",
+      "commonMistake": "Writing the vitamin constraints with ≤ instead of ≥, which would model an upper limit on vitamins rather than a requirement."
+    },
+    {
+      "id": "isc-12-maths-q-lp-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve graphically and state the nature of the solution: maximise Z = 3x + 2y subject to x + y ≤ 4, x + y ≥ 6, x ≥ 0, y ≥ 0.",
+      "answer": "The constraint x + y ≤ 4 requires every feasible point to lie on or below the line x + y = 4, while x + y ≥ 6 requires every feasible point to lie on or above the line x + y = 6. Since a point cannot satisfy y ≤ 4 − x and y ≥ 6 − x at the same time, the two half-planes have no common point. The feasible region is empty, so the problem is infeasible and there is no maximum value of Z.",
+      "explanation": "Infeasibility is a property of the constraints, not of the objective function. Changing Z would not create a solution, because no point satisfies all four constraints simultaneously.",
+      "commonMistake": "Attempting to find corner points by solving x + y = 4 and x + y = 6, which are parallel lines and therefore have no intersection."
+    },
+    {
+      "id": "isc-12-maths-q-lp-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A manufacturer makes two models of lamps, standard and deluxe. Each standard lamp needs 2 hours of assembly and 1 hour of finishing, and each deluxe lamp needs 1 hour of assembly and 2 hours of finishing. There are 100 assembly hours and 80 finishing hours available. The profit is ₹150 on a standard lamp and ₹100 on a deluxe lamp. Determine the production plan that maximises profit and state the maximum profit. If the profit on a deluxe lamp rises to ₹150, describe how the optimal solution changes.",
+      "answer": "Let x standard and y deluxe lamps be made. The constraints are 2x + y ≤ 100, x + 2y ≤ 80, x ≥ 0, y ≥ 0. For Z = 150x + 100y, the corner points are (0, 0), (50, 0), (40, 20) and (0, 40), with Z values 0, 7500, 8000 and 4000, so the maximum profit is ₹8000 at (40, 20). If the profit on a deluxe lamp becomes ₹150, the objective is Z = 150x + 150y. The values at the same corner points are 0, 7500, 9000 and 6000, so the maximum is now ₹9000 at (40, 20). The optimal point is unchanged here because (40, 20) still gives the largest total of 150(x + y), but in general a change in coefficients can move the optimum to a different vertex or create multiple optimal solutions along an edge.",
+      "explanation": "The corner points depend only on the constraints, so they remain the same when the objective changes. Re-evaluating Z at those fixed points is enough to find the new optimum, and comparing the direction of the objective line with the edges of the region explains whether the optimal vertex can move.",
+      "commonMistake": "Recomputing the feasible region from scratch after changing the objective, or assuming that a higher coefficient always moves the optimum to an axis intercept."
+    },
+    {
+      "id": "isc-12-maths-q-lp-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Maximise Z = 2x + 4y subject to x + 2y ≤ 5, x + y ≤ 4, x ≥ 0, y ≥ 0. Show that the problem has multiple optimal solutions and describe them.",
+      "answer": "The corner points of the feasible region are (0, 0), (4, 0), (3, 1) and (0, 5/2). The values of Z = 2x + 4y are 0, 8, 10 and 10. The maximum value 10 occurs at (3, 1) and at (0, 5/2). These two points are adjacent vertices joined by the boundary line x + 2y = 5, and on that entire edge Z = 2x + 4y = 2(x + 2y) = 10. Therefore every point on the segment joining (3, 1) and (0, 5/2) that lies in the feasible region is an optimal solution, and the maximum value of Z is 10.",
+      "explanation": "Multiple optimal solutions arise because the objective line 2x + 4y = 10 is parallel to the constraint boundary x + 2y = 5. The corner point method still locates the optimal value, but the equality of Z at two adjacent vertices signals that the whole edge is optimal.",
+      "commonMistake": "Reporting only one of the two vertices as the answer and missing the infinitely many optimal points on the joining edge."
+    }
+  ]
+}

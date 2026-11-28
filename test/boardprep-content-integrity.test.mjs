@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { getChapter, getChapterRecord } from "../src/lib/boardprepCurriculum.mjs";
 
 const ROOT = path.join(process.cwd(), "src/app/data/boardprep/content");
 // Leaked drafting/self-correction text must never reach students.
@@ -30,6 +31,15 @@ function listedChapters(subjectFile) {
   visit(subject);
   return out;
 }
+
+test("planned chapters stay hidden from readers but remain readable for validation", () => {
+  // The migration validator used to see only published chapters because the read
+  // model filtered on status, so planned banks escaped every content check.
+  const planned = getChapterRecord("icse", "class-10", "mathematics", "trigonometry");
+  assert.ok(planned, "planned chapter file must be readable for validation");
+  assert.ok(planned.questions.length > 0);
+  assert.equal(getChapter("icse", "class-10", "mathematics", "trigonometry"), null);
+});
 
 test("every chapter file is valid JSON", () => {
   for (const file of chapterFiles) {

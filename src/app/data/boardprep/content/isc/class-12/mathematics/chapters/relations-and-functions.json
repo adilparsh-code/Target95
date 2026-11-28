@@ -1,0 +1,647 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-relations-and-functions",
+  "title": "Relations and Functions",
+  "kind": "mathematics",
+  "tagline": "Equivalence relations, invertible functions and the principal branches of the inverse trigonometric functions.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 1 — Relations and Functions; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the Unit 1 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 1 carries 10 of the 80 theory marks and is where the language of the whole paper is set. A relation on a set is tested for three properties — reflexive, symmetric, transitive — and a relation that has all three is an equivalence relation, which cuts the set into disjoint classes. A function is a relation of a special kind, and the questions that follow are about whether it is one to one, whether it is onto, and therefore whether it can be reversed. The same idea of reversing a function, applied to the trigonometric functions after their domains are cut down to a branch on which they are one to one, produces the inverse trigonometric functions and their principal values.",
+    "facts": [
+      { "label": "Unit weightage", "value": "10 of 80 theory marks" },
+      { "label": "Paper I", "value": "Theory, 3 hours, 80 marks" },
+      { "label": "Paper II", "value": "Project work, 20 marks" },
+      { "label": "Examination year", "value": "2027" },
+      { "label": "Syllabus structure", "value": "Seven compulsory units, no optional section" }
+    ]
+  },
+  "learningOutcomes": [
+    "Decide whether a given relation on a set is reflexive, symmetric, transitive or an equivalence relation, with a proof or a counterexample.",
+    "Prove that divisibility and congruence relations on the integers are equivalence relations and describe their equivalence classes.",
+    "Test a function for one to one, onto and bijective behaviour, and count functions and one to one functions between finite sets.",
+    "Compose two functions and invert a bijection, including restricting the domain so that a function becomes invertible.",
+    "State the domain, range and principal value branch of each inverse trigonometric function and evaluate principal values.",
+    "Simplify expressions such as sin⁻¹(sin x) using the principal branch rather than cancelling blindly.",
+    "Solve equations built from inverse trigonometric functions, checking each root against the condition under which the addition formula was applied."
+  ],
+  "learn": [
+    {
+      "id": "relations-and-their-types",
+      "title": "Relations and the three properties that define an equivalence relation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The Cartesian product A × B is the set of all ordered pairs (a, b) with a in A and b in B. If A has m elements and B has n elements then A × B has mn elements. A relation from A to B is any subset of A × B, and a relation on A is any subset of A × A. Because a relation is a set, two relations are equal exactly when they contain the same ordered pairs, and the empty set is a perfectly legal relation."
+        },
+        {
+          "type": "terms",
+          "items": [
+            { "term": "Relation", "meaning": "A subset of A × B; the set of ordered pairs that satisfy the stated rule." },
+            { "term": "Domain of a relation", "meaning": "The set of all first elements of the pairs in the relation." },
+            { "term": "Range of a relation", "meaning": "The set of all second elements of the pairs in the relation." },
+            { "term": "Co-domain", "meaning": "The set B in which the second elements are allowed to lie; it may be larger than the range." },
+            { "term": "Identity relation", "meaning": "The relation I = {(a, a) : a ∈ A}, which pairs every element with itself and nothing else." },
+            { "term": "Universal relation", "meaning": "The relation A × A, which contains every possible ordered pair." },
+            { "term": "Empty relation", "meaning": "The relation with no ordered pairs at all." }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Reflexive: (a, a) ∈ R for every a in A. A relation that fails on even one element is not reflexive.",
+            "Symmetric: whenever (a, b) ∈ R, the pair (b, a) must also be in R.",
+            "Transitive: whenever (a, b) ∈ R and (b, c) ∈ R, the pair (a, c) must also be in R.",
+            "Equivalence relation: reflexive, symmetric and transitive at the same time.",
+            "A relation can be symmetric and transitive yet fail to be reflexive, so the three tests must be run separately. The relation {(1,2), (2,1)} on {1,2,3} is symmetric, but it is not reflexive and it is not transitive because (1,1) is missing."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The three defining properties, tested on the set A = {1, 2, 3}",
+          "columns": ["Property", "Condition on the ordered pairs", "Example on {1, 2, 3}"],
+          "rows": [
+            ["Reflexive", "(a, a) ∈ R for every a in A", "{(1,1), (2,2), (3,3), (1,2)}"],
+            ["Symmetric", "(a, b) ∈ R implies (b, a) ∈ R", "{(1,2), (2,1), (1,1)}"],
+            ["Transitive", "(a, b) and (b, c) in R imply (a, c) in R", "{(1,2), (2,3), (1,3)}"],
+            ["Equivalence", "All three of the above", "{(1,1), (2,2), (3,3), (1,2), (2,1)}"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Counting relations is a matter of counting subsets. A relation from A to B is a subset of A × B, which has mn elements, so there are 2^(mn) relations from A to B. A relation on a set of n elements is a subset of the n² pairs, so there are 2^(n²) relations on it. A reflexive relation must contain the n diagonal pairs and may contain any of the remaining n² − n pairs, which gives 2^(n² − n) reflexive relations; a symmetric relation is fixed by its choices on and above the diagonal, which gives 2^(n(n+1)/2) symmetric relations. Equivalence relations are not counted by a single formula at this level and are found by listing the partitions of the set."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "On A = {1, 2, 3}, the relation R = {(1,1), (2,2), (3,3), (1,2), (2,1)}.",
+              "note": "Every element is paired with itself, so R is reflexive; (1,2) and (2,1) occur together, so R is symmetric; the only pair that could be composed is (1,2) with (2,1), which requires (1,1), and it is present, so R is transitive. R is therefore an equivalence relation, and its classes are {1, 2} and {3}."
+            },
+            {
+              "text": "On the set of real numbers, R = {(a, b) : a ≤ b}.",
+              "note": "a ≤ a is true, so R is reflexive. If a ≤ b and b ≤ c then a ≤ c, so R is transitive. But 1 ≤ 2 does not give 2 ≤ 1, so R is not symmetric. This is an order relation, not an equivalence relation."
+            },
+            {
+              "text": "On A = {1, 2, 3}, the relation R = {(1,2), (2,1)}.",
+              "note": "Not reflexive, because (1,1) is missing. It is symmetric, because each pair occurs with its reverse. It is not transitive: (1,2) and (2,1) are both in R, which would require (1,1) in R, and (1,1) is absent. A single missing pair is enough to destroy transitivity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions-one-one-and-onto",
+      "title": "Functions: one to one, onto and counting them",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A function f from A to B is a relation in which every element of A appears exactly once as a first element. The set A is the domain, B is the co-domain, and the set of values actually taken is the range, which is a subset of the co-domain. The distinction between co-domain and range is what makes the word onto meaningful: a function is onto when the two sets coincide."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "One to one (injective): distinct elements of the domain have distinct images. Equivalently, f(a) = f(b) forces a = b, which is the form used in proofs.",
+            "Many to one: two different elements of the domain share an image. A quadratic on the whole real line is the standard example.",
+            "Into: the range is a proper subset of the co-domain, so some element of the co-domain is never reached.",
+            "Onto (surjective): every element of the co-domain is the image of at least one element of the domain.",
+            "Bijective: one to one and onto together. Only a bijection can be inverted.",
+            "Composite function: (g ∘ f)(x) = g(f(x)), defined only when the range of f lies inside the domain of g. Composition is not commutative in general.",
+            "For finite sets, a one to one function from A to A is automatically onto, and an onto function from A to A is automatically one to one. This is false for infinite sets."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Counting functions between finite sets, where A has m elements and B has n elements",
+          "columns": ["What is being counted", "Number of such functions", "Remark"],
+          "rows": [
+            ["All functions from A to B", "n^m", "Each of the m elements chooses one of n images freely"],
+            ["One to one functions from A to B", "nPm, which is 0 when m > n", "The images must be distinct, so they are chosen and arranged"],
+            ["Onto functions from A to B", "0 when m < n, otherwise counted case by case", "No compact formula is required at this level"],
+            ["Bijections from A to B", "n! when m = n, otherwise 0", "A bijection is an arrangement of the n elements"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "f : R → R, f(x) = 2x + 3.",
+              "note": "If 2a + 3 = 2b + 3 then a = b, so f is one to one. For any real y, x = (y − 3)/2 is real and f(x) = y, so f is onto. Hence f is a bijection, and f⁻¹(x) = (x − 3)/2."
+            },
+            {
+              "text": "f : R → R, f(x) = x².",
+              "note": "f(2) = f(−2) = 4, so f is not one to one. Negative numbers are never produced, so f is not onto. Changing the co-domain to [0, ∞) makes it onto but still not one to one; changing the domain to [0, ∞) as well makes it both."
+            },
+            {
+              "text": "The number of one to one functions from a set of 3 elements to a set of 5 elements.",
+              "note": "The first element has 5 choices, the second 4 and the third 3, so the count is 5 × 4 × 3 = 60, that is 5P3. The number of all functions would be 5³ = 125, and 125 − 60 functions are many to one."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inverse-of-a-function",
+      "title": "Invertible functions and their graphs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A function f : A → B is invertible when there is a function f⁻¹ : B → A that undoes it, so that f⁻¹(f(x)) = x for every x in A and f(f⁻¹(y)) = y for every y in B. Such an inverse exists exactly when f is a bijection: one to one so that no value has to be sent back to two places, and onto so that every element of B has somewhere to come from. When f is not one to one on its whole domain, the standard trick is to restrict the domain to an interval on which f is one to one, and then invert on that interval."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "To find an inverse algebraically, write y = f(x), solve for x in terms of y, and then interchange the names x and y.",
+            "The domain of f⁻¹ is the range of f, and the range of f⁻¹ is the domain of f.",
+            "The graph of f⁻¹ is the reflection of the graph of f in the line y = x, because the point (a, b) lies on f exactly when (b, a) lies on f⁻¹.",
+            "If f and g are invertible then (g ∘ f)⁻¹ = f⁻¹ ∘ g⁻¹, with the order reversed.",
+            "A strictly increasing or strictly decreasing function on an interval is one to one there, which is why monotonic pieces of a curve can be inverted even when the whole curve cannot."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Show that f(x) = x² + 4x + 7 on R is not one to one, then invert it on a suitable interval.",
+              "note": "Completing the square gives f(x) = (x + 2)² + 3, so f(−1) = f(−3) = 4 and f is not one to one on R. On the interval [−2, ∞) the function is strictly increasing, hence one to one, with range [3, ∞). There y − 3 = (x + 2)² and x + 2 ≥ 0, so x = √(y − 3) − 2, giving f⁻¹(x) = √(x − 3) − 2 for x ≥ 3."
+            },
+            {
+              "text": "Find the inverse of f(x) = (x − 2)/(x − 3), where x ≠ 3.",
+              "note": "Write y = (x − 2)/(x − 3), so y(x − 3) = x − 2 and x(y − 1) = 3y − 2, giving x = (3y − 2)/(y − 1). The value y = 1 never occurs because it would require −2 = −3, so f⁻¹(x) = (3x − 2)/(x − 1) for x ≠ 1. The excluded value has moved from 3 in the domain of f to 1 in the range of f."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inverse-trigonometric-functions",
+      "title": "Inverse trigonometric functions and principal value branches",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "None of the six trigonometric functions is one to one on its full domain, because each repeats its values every period. To invert them the domain is cut down to a branch on which the function is one to one and takes every value of its range exactly once. The inverse defined on that branch is written with a capital-letter meaning of the same symbol: sin⁻¹x is the unique angle in the principal value branch whose sine is x. The branch is part of the definition, not a convention that can be changed in the middle of a problem."
+        },
+        {
+          "type": "table",
+          "caption": "Domain and principal value branch of the six inverse trigonometric functions",
+          "columns": ["Function", "Domain", "Principal value branch"],
+          "rows": [
+            ["sin⁻¹x", "[−1, 1]", "[−π/2, π/2]"],
+            ["cos⁻¹x", "[−1, 1]", "[0, π]"],
+            ["tan⁻¹x", "All real numbers", "(−π/2, π/2)"],
+            ["cot⁻¹x", "All real numbers", "(0, π)"],
+            ["sec⁻¹x", "x ≤ −1 or x ≥ 1", "[0, π] excluding π/2"],
+            ["cosec⁻¹x", "x ≤ −1 or x ≥ 1", "[−π/2, π/2] excluding 0"]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin⁻¹x is the angle in [−π/2, π/2], so it is negative for negative x and never exceeds π/2.",
+            "cos⁻¹x is the angle in [0, π], so it is never negative and cos⁻¹(−1) = π.",
+            "tan⁻¹x lies strictly between −π/2 and π/2, so tan⁻¹(1) = π/4 and tan⁻¹(−1) = −π/4.",
+            "cot⁻¹x lies strictly between 0 and π, so cot⁻¹(−1) = 3π/4, not −π/4.",
+            "The inverse sine and inverse cosine graphs are reflections of the restricted sine and cosine curves in y = x; the inverse tangent graph has two horizontal asymptotes at ±π/2.",
+            "sin⁻¹(sin x) equals x only when x lies in the principal branch. For x = 5π/6, which is outside [−π/2, π/2], the value is π − 5π/6 = π/6."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Evaluate cos⁻¹(−1/2).",
+              "note": "The angle must lie in [0, π] and have cosine −1/2. The angle 2π/3 lies in that branch, so cos⁻¹(−1/2) = 2π/3. The answer 4π/3 has the right cosine but lies outside the branch and is therefore rejected."
+            },
+            {
+              "text": "Evaluate tan⁻¹(−1) + sin⁻¹(−1/2).",
+              "note": "tan⁻¹(−1) = −π/4 because −1 is in the range of tangent and −π/4 lies in (−π/2, π/2). Also sin⁻¹(−1/2) = −π/6 because −π/6 lies in [−π/2, π/2]. The sum is −π/4 − π/6 = −5π/12."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inverse-trigonometric-identities-and-equations",
+      "title": "Properties of inverse trigonometric functions and equations built from them",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The elementary properties come in three groups. The complementary pair sin⁻¹x + cos⁻¹x = π/2 (and tan⁻¹x + cot⁻¹x = π/2, sec⁻¹x + cosec⁻¹x = π/2) follows from the branches being chosen as the two acute-or-obtuse possibilities. The negative-argument rules such as sin⁻¹(−x) = −sin⁻¹x and cos⁻¹(−x) = π − cos⁻¹x follow from symmetry of the branches. The addition formulae such as tan⁻¹x + tan⁻¹y = tan⁻¹((x + y)/(1 − xy)) are the ones that carry a condition, and that condition is where most marks are lost."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin⁻¹x + cos⁻¹x = π/2 for all x in [−1, 1].",
+            "tan⁻¹x + cot⁻¹x = π/2 for all real x; sec⁻¹x + cosec⁻¹x = π/2 for x ≤ −1 or x ≥ 1.",
+            "sin⁻¹(−x) = −sin⁻¹x and tan⁻¹(−x) = −tan⁻¹x, but cos⁻¹(−x) = π − cos⁻¹x.",
+            "tan⁻¹x + tan⁻¹y = tan⁻¹((x + y)/(1 − xy)) when xy < 1; when xy > 1 the sum is π + tan⁻¹((x + y)/(1 − xy)) provided x and y are both positive.",
+            "2tan⁻¹x = tan⁻¹(2x/(1 − x²)) for |x| < 1, and 2tan⁻¹x = π − tan⁻¹(2x/(x² − 1)) for x > 1.",
+            "3tan⁻¹x = tan⁻¹((3x − x³)/(1 − 3x²)) for |x| < 1/√3.",
+            "sin⁻¹x ± sin⁻¹y has no single tidy formula, so such expressions are usually evaluated by taking sine or cosine of both sides."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Prove that tan⁻¹(1/2) + tan⁻¹(1/3) = π/4.",
+              "note": "Here xy = 1/6 < 1, so the addition formula applies directly: the sum is tan⁻¹((1/2 + 1/3)/(1 − 1/6)) = tan⁻¹((5/6)/(5/6)) = tan⁻¹(1) = π/4."
+            },
+            {
+              "text": "Prove that sin⁻¹(3/5) + sin⁻¹(8/17) = cos⁻¹(36/85).",
+              "note": "Let A = sin⁻¹(3/5) and B = sin⁻¹(8/17), both acute. Then cos A = 4/5 and cos B = 15/17. Now cos(A + B) = (4/5)(15/17) − (3/5)(8/17) = (60 − 24)/85 = 36/85, and A + B lies in (0, π) where cosine is one to one, so A + B = cos⁻¹(36/85)."
+            },
+            {
+              "text": "Solve tan⁻¹2x + tan⁻¹3x = π/4.",
+              "note": "Taking tangent of both sides gives 5x/(1 − 6x²) = 1, so 6x² + 5x − 1 = 0 and x = 1/6 or x = −1. The formula was applied on the assumption 6x² < 1, which fails at x = −1, and indeed tan⁻¹(−2) + tan⁻¹(−3) = −3π/4 rather than π/4. Only x = 1/6 survives the check."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A relation on A is a subset of A × A; reflexivity, symmetry and transitivity are three independent tests.",
+    "An equivalence relation is reflexive, symmetric and transitive, and it partitions the set into disjoint equivalence classes.",
+    "Congruence modulo n and divisibility by n are the standard equivalence relations on the integers.",
+    "There are 2^(mn) relations from an m-element set to an n-element set, and 2^(n²) relations on an n-element set.",
+    "A function is one to one when f(a) = f(b) forces a = b, and onto when its range equals its co-domain.",
+    "Only a bijection is invertible; restricting the domain is the usual way to make a function one to one.",
+    "The graph of f⁻¹ is the reflection of the graph of f in y = x, and the domain and range swap.",
+    "sin⁻¹, cos⁻¹ and tan⁻¹ have principal value branches [−π/2, π/2], [0, π] and (−π/2, π/2).",
+    "sin⁻¹(sin x) = x only inside the principal branch; outside it the value must be reduced into the branch.",
+    "The addition formula for tan⁻¹ carries the condition xy < 1, and every root of the resulting equation must be checked against it."
+  ],
+  "examFocus": [
+    "Proving that a stated relation is an equivalence relation, then writing down its equivalence classes.",
+    "Showing that a function is not one to one or not onto by producing an explicit pair of inputs or an unreached output.",
+    "Showing that a rational function is bijective on its stated domain and finding its inverse, as in f(x) = (x − 2)/(x − 3).",
+    "Evaluating principal values, especially of negative arguments, where the branch decides between two plausible answers.",
+    "Simplifying expressions such as sin⁻¹(sin 5π/6) or cos⁻¹(cos 7π/6) where the angle is outside the branch.",
+    "Proving identities such as tan⁻¹(1/2) + tan⁻¹(1/3) = π/4 or sin⁻¹(3/5) + sin⁻¹(8/17) = cos⁻¹(36/85).",
+    "Solving inverse trigonometric equations and rejecting the extraneous root produced by the addition formula."
+  ],
+  "vocabulary": [
+    { "word": "Cartesian product", "meaning": "The set A × B of all ordered pairs (a, b) with a in A and b in B." },
+    { "word": "Relation", "meaning": "Any subset of a Cartesian product; a rule that links elements of one set to another." },
+    { "word": "Domain", "meaning": "The set of first elements of the ordered pairs, or the set on which a function is defined." },
+    { "word": "Range", "meaning": "The set of values a relation or function actually attains." },
+    { "word": "Co-domain", "meaning": "The set in which the outputs are allowed to lie; the range is a subset of it." },
+    { "word": "Reflexive", "meaning": "A relation in which every element is related to itself." },
+    { "word": "Symmetric", "meaning": "A relation in which (a, b) always brings (b, a) with it." },
+    { "word": "Transitive", "meaning": "A relation in which (a, b) and (b, c) always bring (a, c) with them." },
+    { "word": "Equivalence relation", "meaning": "A relation that is reflexive, symmetric and transitive, and so partitions the set." },
+    { "word": "Equivalence class", "meaning": "The set of all elements related to a given element by an equivalence relation." },
+    { "word": "Injective", "meaning": "One to one: different inputs always produce different outputs." },
+    { "word": "Surjective", "meaning": "Onto: every element of the co-domain is the image of some element of the domain." },
+    { "word": "Bijection", "meaning": "A function that is both one to one and onto, and therefore invertible." },
+    { "word": "Composite function", "meaning": "The function g ∘ f defined by (g ∘ f)(x) = g(f(x))." },
+    { "word": "Principal value branch", "meaning": "The restricted range on which an inverse trigonometric function is defined, such as [−π/2, π/2] for sin⁻¹." }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Graph of a function and its inverse reflected in the line y = x",
+      "description": "The line y = x is drawn as a dashed diagonal. A curve rising steadily from left to right represents f, and its mirror image across the dashed line represents f⁻¹. One point (a, b) is marked on the curve of f and the point (b, a) is marked on the curve of f⁻¹, with dashed guide lines to the axes showing that the coordinates have been interchanged. The two curves meet on the line y = x at the fixed point of the function.",
+      "labels": [
+        "axes",
+        "dashed line y = x",
+        "curve of f",
+        "curve of f⁻¹ as the mirror image",
+        "point (a, b) on f",
+        "point (b, a) on f⁻¹",
+        "guide lines to the axes",
+        "common point on y = x"
+      ]
+    },
+    {
+      "caption": "Figure: Principal value branch of sin⁻¹x obtained from the restricted sine curve",
+      "description": "The sine curve is drawn on the left with the portion between −π/2 and π/2 picked out in bold, because only that piece is one to one. On the right the bold piece is reflected in y = x to give the graph of sin⁻¹x, which runs from (−1, −π/2) to (1, π/2). The vertical extent of the inverse graph is the principal value branch, and the parts of the sine curve outside the bold piece have no counterpart on the inverse graph.",
+      "labels": [
+        "restricted sine curve between −π/2 and π/2",
+        "discarded parts of the sine curve",
+        "line y = x as mirror",
+        "graph of sin⁻¹x",
+        "endpoint (−1, −π/2)",
+        "endpoint (1, π/2)",
+        "vertical range showing the branch"
+      ]
+    },
+    {
+      "caption": "Figure: Directed graph picture of an equivalence relation on a three-element set",
+      "description": "Three points labelled 1, 2 and 3 are drawn. Each point carries a loop, showing reflexivity. Points 1 and 2 are joined by a pair of arrows pointing in opposite directions, showing symmetry. Point 3 has only its loop, so the picture falls into two separate clusters, which are the equivalence classes {1, 2} and {3}. No arrow crosses from the {1, 2} cluster to 3, which is what it means for the classes to be disjoint.",
+      "labels": [
+        "point 1",
+        "point 2",
+        "point 3",
+        "loop at each point",
+        "opposite arrows between 1 and 2",
+        "cluster {1, 2}",
+        "cluster {3}",
+        "no arrow between the clusters"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-relations-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "On the set A = {1, 2, 3}, the relation R = {(1,1), (2,2), (3,3), (1,2), (2,1)} is",
+      "options": [
+        "reflexive and symmetric but not transitive",
+        "reflexive, symmetric and transitive",
+        "only reflexive",
+        "symmetric and transitive but not reflexive"
+      ],
+      "correctIndex": 1,
+      "answer": "reflexive, symmetric and transitive",
+      "explanation": "Every element is paired with itself, so R is reflexive. The pairs (1,2) and (2,1) occur together, so R is symmetric. The only composition available is (1,2) with (2,1), which requires (1,1), and (1,1) is present, so R is transitive and therefore an equivalence relation.",
+      "commonMistake": "Checking symmetry only on the pair (1,2) and then forgetting to test transitivity at all."
+    },
+    {
+      "id": "isc-12-maths-q-relations-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If set A has m elements and set B has n elements, the number of relations from A to B is",
+      "options": [
+        "2^(mn)",
+        "2^(m+n)",
+        "m^n",
+        "mn"
+      ],
+      "correctIndex": 0,
+      "answer": "2^(mn)",
+      "explanation": "A relation from A to B is a subset of A × B. The Cartesian product has mn elements, so it has 2^(mn) subsets, and each subset is a different relation. The value m^n counts functions from A to B, not relations.",
+      "commonMistake": "Confusing the number of relations, 2^(mn), with the number of functions, n^m."
+    },
+    {
+      "id": "isc-12-maths-q-relations-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If f : R → R is defined by f(x) = 3x − 5, then f⁻¹(x) is",
+      "options": [
+        "3x + 5",
+        "(x + 5)/3",
+        "(x − 5)/3",
+        "1/(3x − 5)"
+      ],
+      "correctIndex": 1,
+      "answer": "(x + 5)/3",
+      "explanation": "Write y = 3x − 5 and solve for x: x = (y + 5)/3. Interchanging the names gives f⁻¹(x) = (x + 5)/3. Checking, f((x + 5)/3) = x + 5 − 5 = x, as required.",
+      "commonMistake": "Applying the operations in the same order as f instead of reversing them, which gives (x − 5)/3."
+    },
+    {
+      "id": "isc-12-maths-q-relations-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The principal value of sin⁻¹(−1/2) is",
+      "options": [
+        "7π/6",
+        "5π/6",
+        "−π/3",
+        "−π/6"
+      ],
+      "correctIndex": 3,
+      "answer": "−π/6",
+      "explanation": "The principal value branch of sin⁻¹ is [−π/2, π/2]. The angle in that interval whose sine is −1/2 is −π/6. The angles 7π/6 and 5π/6 have the same sine but lie outside the branch, so they are not principal values.",
+      "commonMistake": "Reporting 7π/6 because it satisfies sin(7π/6) = −1/2, without checking the branch."
+    },
+    {
+      "id": "isc-12-maths-q-relations-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of cos⁻¹(cos 5π/6) is",
+      "options": [
+        "π/6",
+        "7π/6",
+        "5π/6",
+        "−π/6"
+      ],
+      "correctIndex": 2,
+      "answer": "5π/6",
+      "explanation": "The branch of cos⁻¹ is [0, π], and 5π/6 already lies in that interval, so cos⁻¹(cos 5π/6) = 5π/6. No adjustment is needed because the angle is inside the branch.",
+      "commonMistake": "Applying the reflection rule that would be needed only if the angle lay outside [0, π]."
+    },
+    {
+      "id": "isc-12-maths-q-relations-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If f : [0, ∞) → [0, ∞) is defined by f(x) = x², then f⁻¹(x) is",
+      "options": [
+        "x²",
+        "1/x²",
+        "√x",
+        "−√x"
+      ],
+      "correctIndex": 2,
+      "answer": "√x",
+      "explanation": "On [0, ∞) the squaring function is strictly increasing and takes every value in [0, ∞), so it is a bijection. Its inverse is the positive square root, f⁻¹(x) = √x, which also maps [0, ∞) onto [0, ∞).",
+      "commonMistake": "Offering ±√x, which is not a function, because an inverse must give exactly one output for each input."
+    },
+    {
+      "id": "isc-12-maths-q-relations-07",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of one to one functions from a set with 3 elements to a set with 5 elements is",
+      "options": [
+        "10",
+        "125",
+        "243",
+        "60"
+      ],
+      "correctIndex": 3,
+      "answer": "60",
+      "explanation": "The three domain elements must receive different images, so the first has 5 choices, the second 4 and the third 3. The count is 5 × 4 × 3 = 60, which is 5P3. The value 125 = 5³ counts all functions, and 243 = 3⁵ counts functions in the other direction.",
+      "commonMistake": "Using 5C3 = 10 by choosing the images without arranging them among the three domain elements."
+    },
+    {
+      "id": "isc-12-maths-q-relations-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of tan⁻¹2 + tan⁻¹3 is",
+      "options": [
+        "3π/4",
+        "π/2",
+        "π/4",
+        "−π/4"
+      ],
+      "correctIndex": 0,
+      "answer": "3π/4",
+      "explanation": "Here xy = 6 > 1 and both arguments are positive, so the sum is π + tan⁻¹((2 + 3)/(1 − 6)) = π + tan⁻¹(−1) = π − π/4 = 3π/4. The sum exceeds π/2 because the product of the two arguments exceeds 1.",
+      "commonMistake": "Applying tan⁻¹x + tan⁻¹y = tan⁻¹((x + y)/(1 − xy)) without the π correction when xy > 1, which gives tan⁻¹(−1) = −π/4 instead of 3π/4."
+    },
+    {
+      "id": "isc-12-maths-q-relations-09",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of equivalence relations on the set {1, 2} is ______.",
+      "answer": "two",
+      "explanation": "An equivalence relation corresponds to a partition of the set. The set {1, 2} has two partitions, {1}, {2} and {1, 2}, which give the identity relation {(1,1), (2,2)} and the universal relation {(1,1), (2,2), (1,2), (2,1)}.",
+      "commonMistake": "Counting only the universal relation and forgetting that the identity relation is also an equivalence relation."
+    },
+    {
+      "id": "isc-12-maths-q-relations-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For every x in [−1, 1], the value of sin⁻¹x + cos⁻¹x is ______.",
+      "answer": "π/2",
+      "explanation": "The branches of sin⁻¹ and cos⁻¹ are chosen so that the two angles are complementary. For any x in [−1, 1], sin⁻¹x lies in [−π/2, π/2] and cos⁻¹x lies in [0, π], and their sum is the constant π/2, which can be checked directly at x = 0, 1 and −1.",
+      "commonMistake": "Writing π, which is the sum of the maximum values of the two branches rather than the value of the identity."
+    },
+    {
+      "id": "isc-12-maths-q-relations-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If f : R → R is defined by f(x) = x³, then f⁻¹(x) = ______.",
+      "answer": "x^(1/3)",
+      "explanation": "Cubing is a bijection on the real numbers because it is strictly increasing and every real number is a cube. Solving y = x³ gives x = y^(1/3), so the inverse is the cube root function f⁻¹(x) = x^(1/3).",
+      "commonMistake": "Writing 1/x³, which is the reciprocal of the cube and not its inverse function."
+    },
+    {
+      "id": "isc-12-maths-q-relations-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Show that the relation R = {(a, b) : a ≤ b} on the set of real numbers is reflexive and transitive but not symmetric.",
+      "answer": "For any real a, a ≤ a, so (a, a) ∈ R and R is reflexive. If a ≤ b and b ≤ c then a ≤ c, so (a, c) ∈ R and R is transitive. But 1 ≤ 2 while 2 ≤ 1 is false, so (1, 2) ∈ R and (2, 1) ∉ R, which shows that R is not symmetric.",
+      "explanation": "Reflexivity and transitivity are inherited from the order property of real numbers, whereas symmetry fails as soon as the two numbers are different, because a ≤ b and b ≤ a together force a = b. One counterexample pair is enough to disprove symmetry.",
+      "commonMistake": "Trying to prove symmetry with equal numbers, where a ≤ b and b ≤ a both hold, instead of using two different numbers."
+    },
+    {
+      "id": "isc-12-maths-q-relations-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the principal value of tan⁻¹(−1) + cos⁻¹(−1/2) + sin⁻¹(−1/2).",
+      "answer": "tan⁻¹(−1) = −π/4, cos⁻¹(−1/2) = 2π/3 and sin⁻¹(−1/2) = −π/6. The sum is −π/4 + 2π/3 − π/6 = (−3π + 8π − 2π)/12 = 3π/12 = π/4.",
+      "explanation": "Each term must be taken in its own principal branch: (−π/2, π/2) for tan⁻¹, [0, π] for cos⁻¹ and [−π/2, π/2] for sin⁻¹. Placing cos⁻¹(−1/2) in the second quadrant as 2π/3 and the other two in the fourth quadrant is what makes the arithmetic work out to π/4.",
+      "commonMistake": "Writing cos⁻¹(−1/2) = −π/3, which lies outside the branch [0, π] of the inverse cosine."
+    },
+    {
+      "id": "isc-12-maths-q-relations-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Show that f : R → R defined by f(x) = 4x + 3 is invertible and find f⁻¹.",
+      "answer": "If f(a) = f(b) then 4a + 3 = 4b + 3, so a = b and f is one to one. For any real y, x = (y − 3)/4 is real and f(x) = y, so f is onto. Hence f is a bijection and is invertible, with f⁻¹(x) = (x − 3)/4.",
+      "explanation": "An invertible function on R must be both one to one and onto, and a non-constant linear function with a non-zero coefficient has both properties. The inverse is found by solving y = 4x + 3 for x and then renaming y as x.",
+      "commonMistake": "Showing only that f is one to one and concluding invertibility without checking that every real number is attained."
+    },
+    {
+      "id": "isc-12-maths-q-relations-15",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Prove that sin⁻¹(3/5) + sin⁻¹(8/17) = cos⁻¹(36/85).",
+      "answer": "Let A = sin⁻¹(3/5) and B = sin⁻¹(8/17), so sin A = 3/5, cos A = 4/5, sin B = 8/17 and cos B = 15/17, with A and B both acute. Then cos(A + B) = cos A cos B − sin A sin B = (4/5)(15/17) − (3/5)(8/17) = 60/85 − 24/85 = 36/85. Since A + B lies between 0 and π, where cosine is one to one, A + B = cos⁻¹(36/85).",
+      "explanation": "Taking cosine of the left-hand side is the natural move because the right-hand side is an inverse cosine. The step that earns the second mark is the range argument: cosine is one to one on (0, π), and A + B lies there because both angles are acute.",
+      "commonMistake": "Computing sin(A + B) instead of cos(A + B), which gives 77/85 and does not match the stated right-hand side."
+    },
+    {
+      "id": "isc-12-maths-q-relations-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that the relation R = {(a, b) : a − b is divisible by 3} on the set of integers is an equivalence relation, and write down the equivalence class of 1.",
+      "answer": "Reflexive: a − a = 0 = 3 × 0, so (a, a) ∈ R for every integer a. Symmetric: if a − b = 3k then b − a = 3(−k), so (a, b) ∈ R implies (b, a) ∈ R. Transitive: if a − b = 3k and b − c = 3m then a − c = 3(k + m), so (a, b) and (b, c) in R imply (a, c) ∈ R. Hence R is an equivalence relation. The class of 1 is the set of all integers b with 1 − b divisible by 3, that is [1] = {…, −5, −2, 1, 4, 7, …} = {3k + 1 : k ∈ Z}.",
+      "explanation": "All three properties reduce to arithmetic with multiples of 3: zero is a multiple, the negative of a multiple is a multiple, and the sum of two multiples is a multiple. The equivalence class then collects every integer that differs from 1 by a multiple of 3, so the integers split into the three classes of remainders 0, 1 and 2.",
+      "commonMistake": "Proving the three properties only for positive integers, when the relation is stated on the whole set of integers and negative multiples must be allowed."
+    },
+    {
+      "id": "isc-12-maths-q-relations-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Let N = {1, 2, 3, …} and let f : N → N be defined by f(n) = n + 1 if n is odd and f(n) = n − 1 if n is even. Show that f is bijective and find f⁻¹.",
+      "answer": "The function swaps each consecutive pair: f(1) = 2, f(2) = 1, f(3) = 4, f(4) = 3, and so on. One to one: if m and n are both odd then m + 1 = n + 1 gives m = n; if both are even then m − 1 = n − 1 gives m = n; and an odd value of f is even while an even value of f is odd, so a value from an odd input can never equal a value from an even input. Onto: every natural number k arises, because k = f(k − 1) when k is even and k is odd gives k = f(k + 1) with k + 1 even. Hence f is a bijection, and since f undoes itself, f⁻¹ = f.",
+      "explanation": "The pairing (1,2), (3,4), (5,6) partitions N into blocks of two, and f exchanges the two members of each block. An involution of this kind is its own inverse, which is why f⁻¹ has exactly the same formula as f. Both the odd-to-even and even-to-odd cases must be handled separately in each part of the proof.",
+      "commonMistake": "Assuming N contains 0, in which case f(0) = −1 is not in N and f is no longer onto; the domain must be read as {1, 2, 3, …} as stated."
+    },
+    {
+      "id": "isc-12-maths-q-relations-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Solve tan⁻¹2x + tan⁻¹3x = π/4.",
+      "answer": "Taking tangent of both sides, (2x + 3x)/(1 − 6x²) = 1, so 5x = 1 − 6x² and 6x² + 5x − 1 = 0. Factorising, (6x − 1)(x + 1) = 0, so x = 1/6 or x = −1. The addition formula used requires 2x · 3x < 1, that is 6x² < 1. For x = 1/6, 6x² = 1/6 < 1, so it is acceptable. For x = −1, 6x² = 6 > 1 and in fact tan⁻¹(−2) + tan⁻¹(−3) = −3π/4, not π/4, so x = −1 is rejected. The only solution is x = 1/6.",
+      "explanation": "Squaring or taking tangents always produces candidates, never conclusions, so every root must be tested against the condition under which the formula was applied. Here that condition separates the two roots cleanly, and the rejected root is the one that would have given the sum −3π/4.",
+      "commonMistake": "Accepting both roots and losing a mark, because tangent is periodic and the equation is not equivalent to the polynomial obtained by taking tangents."
+    },
+    {
+      "id": "isc-12-maths-q-relations-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Prove that tan⁻¹(1/2) + tan⁻¹(1/3) = π/4, and deduce the value of tan⁻¹(1/2) − π/4 in terms of an inverse tangent.",
+      "answer": "Since (1/2)(1/3) = 1/6 < 1, the addition formula applies without correction: tan⁻¹(1/2) + tan⁻¹(1/3) = tan⁻¹(((1/2) + (1/3))/(1 − 1/6)) = tan⁻¹((5/6)/(5/6)) = tan⁻¹(1) = π/4. Rearranging, tan⁻¹(1/2) − π/4 = −tan⁻¹(1/3) = tan⁻¹(−1/3), using the odd property of the inverse tangent.",
+      "explanation": "The whole proof rests on the product test xy < 1, which here gives 1/6 and so avoids the π correction that would otherwise be needed. The deduction then only requires moving one term across and using tan⁻¹(−x) = −tan⁻¹x.",
+      "commonMistake": "Applying the formula and then adding π to the answer out of habit, which would give 5π/4 and contradict the fact that both angles are acute."
+    },
+    {
+      "id": "isc-12-maths-q-relations-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Let A = R − {3} and B = R − {1}. Show that f : A → B defined by f(x) = (x − 2)/(x − 3) is bijective, and find f⁻¹.",
+      "answer": "One to one: if (a − 2)/(a − 3) = (b − 2)/(b − 3) then (a − 2)(b − 3) = (b − 2)(a − 3), so ab − 3a − 2b + 6 = ab − 3b − 2a + 6, which simplifies to −a = −b and hence a = b. Onto: let y be any element of B, so y ≠ 1, and set x = (3y − 2)/(y − 1). This x is defined because y ≠ 1, and x ≠ 3 because x = 3 would force 3y − 2 = 3y − 3, that is −2 = −3, which is false. Substituting, f(x) = ((3y − 2)/(y − 1) − 2)/((3y − 2)/(y − 1) − 3) = ((3y − 2 − 2y + 2)/(y − 1))/((3y − 2 − 3y + 3)/(y − 1)) = (y/1)/(1/1) = y. Hence f is onto, so f is bijective, and f⁻¹(y) = (3y − 2)/(y − 1).",
+      "explanation": "The excluded value 3 in the domain and the excluded value 1 in the co-domain are exactly what make the function a bijection onto B: as x approaches 3 the function grows without bound, and the value 1 is never attained because it would require −2 = −3. Writing f⁻¹(x) = (3x − 2)/(x − 1) with x ≠ 1 completes the answer.",
+      "commonMistake": "Showing only one to one behaviour and then asserting onto without producing the preimage formula and verifying that it avoids the excluded value 3."
+    },
+    {
+      "id": "isc-12-maths-q-relations-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve 2tan⁻¹(cos x) = tan⁻¹(2 cosec x) for the principal solution.",
+      "answer": "For |cos x| < 1, 2tan⁻¹(cos x) = tan⁻¹(2cos x/(1 − cos²x)) = tan⁻¹(2cos x/sin²x). The equation therefore requires 2cos x/sin²x = 2/sin x, and since sin x ≠ 0 we may cancel 2/sin x to get cos x/sin x = 1, that is tan x = 1. The principal solution is x = π/4, for which sin x and cos x are both positive, so both sides are defined and equal.",
+      "explanation": "The doubling formula for tan⁻¹ is valid here because |cos x| < 1 for every real x, so no correction term is needed. After cancelling, the equation collapses to tan x = 1, and the check that sin x ≠ 0 and cos x > 0 confirms x = π/4 as the principal solution.",
+      "commonMistake": "Cancelling sin x without noting sin x ≠ 0, which would silently admit the spurious solution x = 0 even though cosec x is undefined there."
+    },
+    {
+      "id": "isc-12-maths-q-relations-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "The function f : R → R is defined by f(x) = x² + 4x + 7. Show that f is not one to one, find the largest interval containing −2 on which f is invertible, and find f⁻¹ on that interval.",
+      "answer": "Completing the square, f(x) = (x + 2)² + 3. Since f(−1) = f(−3) = 4 with −1 ≠ −3, f is not one to one on R. The parabola has its vertex at x = −2, and on the interval [−2, ∞) the function is strictly increasing, so it is one to one there; on any larger interval containing −2 it would again contain a pair of symmetric points and fail to be one to one. On [−2, ∞) the range is [3, ∞). Solving y = (x + 2)² + 3 with x + 2 ≥ 0 gives x = √(y − 3) − 2, so f⁻¹ : [3, ∞) → [−2, ∞) is f⁻¹(x) = √(x − 3) − 2.",
+      "explanation": "The vertex form identifies both the failure of injectivity and the correct restriction: the two arms of the parabola give the same values, and keeping one arm removes the duplication. The largest such interval containing the vertex is the right arm [−2, ∞), on which the square root is taken with the positive sign.",
+      "commonMistake": "Choosing the interval (−∞, −2] and writing f⁻¹(x) = √(x − 3) − 2 anyway, which has the wrong sign for the left arm where x + 2 ≤ 0."
+    }
+  ]
+}

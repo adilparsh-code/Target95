@@ -1,0 +1,706 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-vector-algebra",
+  "title": "Vector Algebra",
+  "kind": "mathematics",
+  "tagline": "Components, section formula, dot and cross products, projections and areas.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 4 — Vector Algebra; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Topic selection follows the Unit 4 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 4 carries 5 of the 80 theory marks and supplies the language used later in three-dimensional geometry. A vector is a quantity with both magnitude and direction, written as a directed line segment and, once unit vectors along the axes are fixed, as a triple of components. Addition follows the triangle law and scalar multiplication stretches or reverses a vector. Two products then do the real work: the dot product returns a scalar and measures the angle between vectors, which makes it the test for perpendicularity and the tool for projections; the cross product returns a vector perpendicular to both, and its magnitude measures the area of the parallelogram they span.",
+    "facts": [
+      { "label": "Unit weightage", "value": "5 of 80 theory marks" },
+      { "label": "Paper I", "value": "Theory, 3 hours, 80 marks" },
+      { "label": "Paper II", "value": "Project work, 20 marks" },
+      { "label": "Examination year", "value": "2027" },
+      { "label": "Syllabus structure", "value": "Seven compulsory units, no optional section" }
+    ]
+  },
+  "learningOutcomes": [
+    "Express a vector in component form, find its magnitude and direction, and write the unit vector along it.",
+    "Convert between the components of a vector and its direction ratios and direction cosines, using l² + m² + n² = 1 to find a missing direction cosine.",
+    "Identify equal, negative, parallel and collinear vectors and use the component test for parallelism.",
+    "Add and subtract vectors and multiply by scalars, and use the section formula for internal and external division.",
+    "Compute dot products, find the angle between two vectors, and decide perpendicularity from a zero dot product.",
+    "Find scalar and vector projections of one vector on another.",
+    "Compute cross products by determinant expansion, use them to test parallelism, and find the area of a parallelogram or triangle.",
+    "Prove simple geometrical statements, such as collinearity of three points or the bisection of the diagonals of a parallelogram, using vector methods."
+  ],
+  "learn": [
+    {
+      "id": "vectors-magnitude-and-components",
+      "title": "Vectors, magnitude, components and types of vectors",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A scalar has magnitude only; a vector has magnitude and direction. Geometrically a vector is a directed line segment, and its length is its magnitude, written |a|. Two vectors are equal when they have the same magnitude and the same direction, no matter where they are drawn, which is why a vector can be translated freely. Once a coordinate system is chosen, a vector in space is written as a = a₁i + a₂j + a₃k, where i, j and k are the unit vectors along the x, y and z axes and a₁, a₂, a₃ are the components."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Magnitude: |a| = √(a₁² + a₂² + a₃²); the magnitude is never negative and is zero only for the zero vector.",
+            "Unit vector: â = a/|a|, defined for a ≠ 0; it has magnitude 1 and the direction of a.",
+            "Position vector: the vector from the origin to a point P(x, y, z), namely OP = xi + yj + zk.",
+            "Equal vectors have equal components; the negative −a has the same magnitude and the opposite direction.",
+            "Parallel vectors: b = λa for some scalar λ, equivalently their components are proportional. Collinear vectors are parallel vectors drawn along the same line.",
+            "Zero vector: magnitude 0 and no fixed direction; it is the identity for addition.",
+            "A vector whose components are all non-negative in the first octant points away from the origin; the signs of the components record the octant."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Vector types and their component conditions",
+          "columns": ["Type", "Component condition", "Example"],
+          "rows": [
+            ["Equal vectors", "a₁ = b₁, a₂ = b₂, a₃ = b₃", "2i + j and 2i + j"],
+            ["Negative vectors", "b = −a", "i − j and −i + j"],
+            ["Parallel vectors", "b = λa for some scalar λ", "2i + 4j and i + 2j with λ = 1/2"],
+            ["Unit vector", "a₁² + a₂² + a₃² = 1", "(3i + 4j)/5"],
+            ["Zero vector", "Every component is 0", "0i + 0j + 0k"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the magnitude and unit vector of a = 2i − 3j + 6k.",
+              "note": "|a| = √(4 + 9 + 36) = √49 = 7, so â = (2i − 3j + 6k)/7. Checking, |â| = √(4 + 9 + 36)/7 = 1, as a unit vector must be."
+            },
+            {
+              "text": "Find the position vector of the point dividing the join of A(1, 2, 3) and B(4, 6, 3) in the ratio 1 : 1.",
+              "note": "The ratio 1 : 1 gives the midpoint, whose coordinates are the averages (5/2, 4, 3), so the position vector is (5/2)i + 4j + 3k. This is the section formula with m = n = 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "direction-ratios-and-direction-cosines",
+      "title": "Direction ratios and direction cosines of a vector",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The direction of a vector can be recorded without its length. If a = a₁i + a₂j + a₃k makes angles α, β and γ with the positive x, y and z axes, then cos α = a₁/|a|, cos β = a₂/|a| and cos γ = a₃/|a|. These three numbers are the direction cosines, and they are exactly the components of the unit vector along a. Any three numbers proportional to the components are called direction ratios, and they fix the same direction without being normalised."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Direction ratios of a are any three numbers a, b, c proportional to a₁, a₂, a₃; they are not unique, since any non-zero multiple describes the same direction.",
+            "Direction cosines are l = a₁/|a|, m = a₂/|a| and n = a₃/|a|, so (l, m, n) is the unit vector along a.",
+            "Always l² + m² + n² = 1, because the unit vector has length 1; direction ratios need not satisfy any such relation.",
+            "The angles α, β and γ lie in [0, π], so a direction cosine may be negative when the vector points into an octant with negative components.",
+            "Direction cosines are unique once the sense of the vector is fixed; reversing the vector changes the sign of all three.",
+            "Applied to the line joining two points, the direction ratios are the differences of the coordinates, which is the starting point of three-dimensional geometry."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "From components to direction cosines",
+          "columns": ["Vector", "Magnitude", "Direction cosines"],
+          "rows": [
+            ["3i + 4j", "5", "(3/5, 4/5, 0)"],
+            ["i + j + k", "√3", "(1/√3, 1/√3, 1/√3)"],
+            ["2i − j + 2k", "3", "(2/3, −1/3, 2/3)"],
+            ["6k", "6", "(0, 0, 1)"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the direction cosines of 2i + 3j + 6k.",
+              "note": "The magnitude is √(4 + 9 + 36) = 7, so the direction cosines are (2/7, 3/7, 6/7). Checking, 4/49 + 9/49 + 36/49 = 49/49 = 1, which is the relation every set of direction cosines must satisfy."
+            },
+            {
+              "text": "A vector makes angles 45° and 60° with the positive x and y axes. Find its possible angles with the z axis.",
+              "note": "Here l² = 1/2 and m² = 1/4, so n² = 1 − 3/4 = 1/4 and n = ±1/2. Hence γ = 60° or γ = 120°; both are possible because the vector may point above or below the xy-plane."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "addition-and-section-formula",
+      "title": "Addition, scalar multiplication and the section formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Vectors add component by component, and geometrically the sum is the diagonal of the parallelogram built on the two vectors, or equivalently the third side of the triangle formed by placing them head to tail. Multiplication by a scalar k changes the length by the factor |k| and reverses the direction when k is negative. These two operations combine in the section formula, which locates any point on a line joining two given points."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Triangle law: AB + BC = AC. Parallelogram law: if a and b are adjacent sides, the diagonal is a + b.",
+            "Component form: a + b = (a₁ + b₁)i + (a₂ + b₂)j + (a₃ + b₃)k, and ka = ka₁i + ka₂j + ka₃k.",
+            "Subtraction: a − b = a + (−b), the vector from the tip of b to the tip of a when both start at the same point.",
+            "Section formula (internal): if P divides AB in the ratio m : n, then OP = (m OB + n OA)/(m + n).",
+            "Section formula (external): if P divides AB externally in the ratio m : n, then OP = (m OB − n OA)/(m − n), with m ≠ n.",
+            "Midpoint: the case m = n gives OP = (OA + OB)/2.",
+            "Scalar multiplication is distributive over addition: k(a + b) = ka + kb, and (k + l)a = ka + la."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "If a = i + 2j − k and b = 3i − j + 2k, find 2a − 3b.",
+              "note": "2a = 2i + 4j − 2k and 3b = 9i − 3j + 6k. Subtracting component by component, 2a − 3b = (2 − 9)i + (4 + 3)j + (−2 − 6)k = −7i + 7j − 8k."
+            },
+            {
+              "text": "Find the position vector of the point dividing AB internally in the ratio 2 : 3, where A(1, 2, 3) and B(6, 7, 8).",
+              "note": "With m = 2 and n = 3, OP = (2·OB + 3·OA)/5 = (2(6i + 7j + 8k) + 3(i + 2j + 3k))/5 = (15i + 20j + 25k)/5 = 3i + 4j + 5k. The point (3, 4, 5) lies two-fifths of the way from A to B, which is consistent with the ratio."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dot-product-and-projections",
+      "title": "The scalar product: angle, perpendicularity and projection",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The scalar or dot product of two vectors is the number a·b = |a||b| cos θ, where θ is the angle between them, taken between 0 and π. In components, a·b = a₁b₁ + a₂b₂ + a₃b₃, which is usually the faster route. Because cos θ carries the sign, the dot product also reports whether the angle is acute, right or obtuse, and because a zero dot product means cos θ = 0, it is the standard test for perpendicularity."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "a·b = |a||b| cos θ, so cos θ = (a·b)/(|a||b|) for non-zero vectors.",
+            "a·b is positive for an acute angle, zero for a right angle and negative for an obtuse angle.",
+            "Perpendicularity: a ⊥ b exactly when a·b = 0, for non-zero a and b.",
+            "Properties: a·b = b·a, a·(b + c) = a·b + a·c, and (ka)·b = k(a·b). Also a·a = |a|².",
+            "Scalar projection of a on b: the length of the shadow of a along b, equal to a·b/|b| = a·b̂. It is negative when the angle is obtuse.",
+            "Vector projection of a on b: (a·b̂)b̂ = (a·b/|b|²) b, a vector along b with the scalar projection as its magnitude.",
+            "The dot product is a scalar, so writing a·b as a vector or equating it to a vector is meaningless."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Interpreting the sign of the dot product",
+          "columns": ["Sign of a·b", "Value of cos θ", "Angle between the vectors"],
+          "rows": [
+            ["Positive", "cos θ > 0", "Acute, 0 ≤ θ < π/2"],
+            ["Zero", "cos θ = 0", "Right angle, θ = π/2"],
+            ["Negative", "cos θ < 0", "Obtuse, π/2 < θ ≤ π"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the angle between a = i + j and b = j + k.",
+              "note": "a·b = 0 + 1 + 0 = 1, |a| = |b| = √2, so cos θ = 1/2 and θ = π/3. Both vectors have the same length, and the angle is acute as the positive dot product predicts."
+            },
+            {
+              "text": "Find λ so that a = 2i + λj + k and b = i − 2j + 3k are perpendicular.",
+              "note": "Perpendicularity requires a·b = 0, so 2 − 2λ + 3 = 0, giving λ = 5/2. Substituting back, a·b = 2 − 5 + 3 = 0, which confirms the value."
+            },
+            {
+              "text": "Find the projection of a = 3i + 2j − k on b = i + j + k.",
+              "note": "a·b = 3 + 2 − 1 = 4 and |b| = √3, so the scalar projection is 4/√3. The vector projection is (a·b/|b|²)b = (4/3)(i + j + k), which has magnitude 4/√3 and points along b."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cross-product-and-areas",
+      "title": "The vector product: perpendicularity, parallelism and area",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The vector or cross product a × b is a vector of magnitude |a||b| sin θ, perpendicular to both a and b, with direction given by the right-hand rule. In components it is computed by expanding a determinant whose first row is i, j, k and whose second and third rows are the components of a and b. Because sin θ vanishes for parallel vectors, the cross product is the standard test for parallelism, and because |a × b| is the area of the parallelogram spanned by a and b, it is also the standard tool for areas."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Component formula: a × b = (a₂b₃ − a₃b₂)i − (a₁b₃ − a₃b₁)j + (a₁b₂ − a₂b₁)k.",
+            "|a × b| = |a||b| sin θ is the area of the parallelogram with adjacent sides a and b; half of it is the area of the triangle.",
+            "a × b = −(b × a), so the cross product is anticommutative; this is the most common sign error in the paper.",
+            "a × a = 0, and a × b = 0 exactly when a and b are parallel or one of them is the zero vector.",
+            "The cross product is distributive over addition: a × (b + c) = a × b + a × c.",
+            "i × j = k, j × k = i and k × i = j, while j × i = −k and so on around the cycle.",
+            "Area of a triangle with vertices A, B and C is (1/2)|AB × AC|, using two sides drawn from the same vertex."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "The two products side by side",
+          "columns": ["Feature", "Dot product a·b", "Cross product a × b"],
+          "rows": [
+            ["Result", "A scalar", "A vector perpendicular to both"],
+            ["Formula", "|a||b| cos θ", "|a||b| sin θ, with direction by the right-hand rule"],
+            ["Zero means", "The vectors are perpendicular", "The vectors are parallel"],
+            ["Useful for", "Angles, projections, work", "Areas, parallelism, moments"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find a × b for a = 2i + 3j − k and b = i − j + 2k.",
+              "note": "Expanding, a × b = i(3·2 − (−1)(−1)) − j(2·2 − (−1)·1) + k(2(−1) − 3·1) = i(6 − 1) − j(4 + 1) + k(−2 − 3) = 5i − 5j − 5k. Checking, (a × b)·a = 10 − 15 + 5 = 0 and (a × b)·b = 5 + 5 − 10 = 0, as a perpendicular vector must satisfy."
+            },
+            {
+              "text": "Find the area of the parallelogram with adjacent sides a = 2i + j and b = i + 2j.",
+              "note": "a × b = (0)i − (0)j + (2·2 − 1·1)k = 3k, so |a × b| = 3 and the area is 3 square units. The triangle formed by the same two sides would have area 1.5 square units."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collinearity-and-geometrical-proofs",
+      "title": "Collinearity and geometrical proofs with vectors",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Vector methods turn many geometry statements into short algebraic arguments. The key move is to translate the geometry into vector relations between position vectors, then use the tests already established: parallelism from proportional components, perpendicularity from a zero dot product, and equal lengths from equal magnitudes. Three points are collinear exactly when the vector joining one pair is a scalar multiple of the vector joining another pair through a common point."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Three points A, B, C are collinear when AB = λAC for some scalar λ, since both vectors then act along the same line through A.",
+            "Four points are coplanar when one of the vectors joining them can be written as a combination of two others in the plane, or equivalently when the relevant scalar triple product vanishes; the triple product is not required by this unit, so coplanarity questions are handled by direct component equations.",
+            "The diagonals of a parallelogram bisect each other, which follows by showing that both diagonals have the same midpoint vector.",
+            "The line joining the midpoints of two sides of a triangle is parallel to the third side and half its length.",
+            "The angle in a semicircle is a right angle: with diameter endpoints at a and −a and a point p on the circle, |p| = |a|, and (p − a)·(p + a) = |p|² − |a|² = 0.",
+            "A quadrilateral is a parallelogram when one pair of opposite sides is equal and parallel, which in vector form means AB = DC."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Show that A(1, 2, 3), B(4, 5, 6) and C(7, 8, 9) are collinear.",
+              "note": "AB = 3i + 3j + 3k and AC = 6i + 6j + 6k = 2AB. Since AC is a scalar multiple of AB and both pass through A, the three points lie on one line, and B is the midpoint of AC."
+            },
+            {
+              "text": "Show that the diagonals of a parallelogram bisect each other.",
+              "note": "Let the parallelogram have vertices O, A, B and C with OA = a and OB = b, so C has position vector a + b. The diagonal OC has midpoint (a + b)/2, and the diagonal AB has midpoint (a + b)/2 as well. The two midpoints coincide, so the diagonals bisect each other."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "choosing-the-right-product",
+      "title": "Choosing between the dot and cross product",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Almost every vector problem in the paper is decided by one question: does the question ask about an angle, a length or a projection, or does it ask about an area or a perpendicular direction? The first group calls for the dot product, the second for the cross product. When both appear, as in the identity |a × b|² + (a·b)² = |a|²|b|², the two products describe the same pair of vectors from complementary angles."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Angle, perpendicularity, projection, work done and component along a direction: use the dot product.",
+            "Area of a parallelogram or triangle, a vector perpendicular to two given vectors, and the parallelism test: use the cross product.",
+            "When a vector is required to be perpendicular to two given vectors, it must be parallel to their cross product.",
+            "When a vector is required to make a stated angle with a given vector, begin with the dot product equation for cos θ.",
+            "When several conditions are given, write each as an equation in the unknown components and solve the resulting system.",
+            "Identities to remember: |a ± b|² = |a|² ± 2a·b + |b|², and |a × b|² + (a·b)² = |a|²|b|²."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find a vector of magnitude 6 parallel to 2a − b + 3c, where a = i + j + k, b = 2i − j + 3k and c = i − 2j + k.",
+              "note": "First 2a − b + 3c = (2, 2, 2) − (2, −1, 3) + (3, −6, 3) = (3, −3, 2). Its magnitude is √(9 + 9 + 4) = √22, so the required vector is (6/√22)(3i − 3j + 2k) = (18i − 18j + 12k)/√22. The negative of this vector is equally valid, since the question fixes magnitude and parallelism but not sense."
+            },
+            {
+              "text": "A unit vector makes equal angles with the positive coordinate axes. Find it.",
+              "note": "Let the vector be l i + m j + n k with l = m = n = t. The unit condition gives 3t² = 1, so t = 1/√3, and the vector is (i + j + k)/√3. The other solution with all components negative points into the opposite octant and is also unit, so the sign must be fixed by the wording of the question."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A vector has magnitude and direction; in components a = a₁i + a₂j + a₃k with |a| = √(a₁² + a₂² + a₃²).",
+    "The unit vector along a is â = a/|a|, and it has magnitude 1 with the direction of a; its components are the direction cosines l, m, n, which satisfy l² + m² + n² = 1.",
+    "Direction ratios are any three numbers proportional to the components, while direction cosines are obtained by dividing the components by the magnitude.",
+    "Vectors are parallel exactly when their components are proportional, and equal when all components agree.",
+    "Addition is component-wise, and the section formula OP = (m OB + n OA)/(m + n) gives internal division in the ratio m : n.",
+    "The dot product a·b = |a||b| cos θ = a₁b₁ + a₂b₂ + a₃b₃ is a scalar; a zero value means perpendicularity.",
+    "The scalar projection of a on b is a·b/|b|, and the vector projection is (a·b/|b|²)b.",
+    "The cross product a × b is perpendicular to both vectors, with magnitude |a||b| sin θ; it is anticommutative, so a × b = −(b × a).",
+    "The area of the parallelogram on a and b is |a × b|, and the area of the triangle is half of that.",
+    "Three points A, B, C are collinear when AB is a scalar multiple of AC.",
+    "The identity |a × b|² + (a·b)² = |a|²|b|² links the two products and is the quickest route to many mixed questions."
+  ],
+  "examFocus": [
+    "Finding the unit vector along a given vector and a vector of stated magnitude parallel to it.",
+    "Finding the direction cosines of a vector and completing a set of direction cosines from l² + m² + n² = 1.",
+    "Using the section formula for an internal or external division, with the ratio read carefully.",
+    "Finding the angle between two vectors and deciding whether it is acute, right or obtuse from the sign of the dot product.",
+    "Finding an unknown component from a perpendicularity condition.",
+    "Computing scalar and vector projections, and distinguishing the two in the final answer.",
+    "Expanding a cross product by determinant and checking the result by dotting it with each original vector.",
+    "Finding the area of a triangle from three vertices by taking two sides from one vertex.",
+    "Proving collinearity of three points, or a standard parallelogram or semicircle result, by vector methods."
+  ],
+  "vocabulary": [
+    { "word": "Scalar", "meaning": "A quantity with magnitude only, such as mass or temperature." },
+    { "word": "Vector", "meaning": "A quantity with both magnitude and direction, represented by a directed line segment." },
+    { "word": "Magnitude", "meaning": "The length of a vector, written |a|." },
+    { "word": "Unit vector", "meaning": "A vector of magnitude 1, obtained as a/|a|." },
+    { "word": "Components", "meaning": "The scalar multipliers of i, j and k in the expression of a vector." },
+    { "word": "Direction cosines", "meaning": "The cosines of the angles a vector makes with the positive coordinate axes, equal to its components divided by its magnitude." },
+    { "word": "Direction ratios", "meaning": "Any three numbers proportional to the components of a vector, fixing its direction without normalisation." },
+    { "word": "Position vector", "meaning": "The vector from the origin to a point, giving the point's coordinates as components." },
+    { "word": "Collinear vectors", "meaning": "Parallel vectors lying along the same line." },
+    { "word": "Section formula", "meaning": "The rule giving the position vector of a point dividing a segment in a stated ratio." },
+    { "word": "Dot product", "meaning": "The scalar |a||b| cos θ, equal to a₁b₁ + a₂b₂ + a₃b₃." },
+    { "word": "Scalar projection", "meaning": "The signed length of the shadow of one vector along another, equal to a·b/|b|." },
+    { "word": "Vector projection", "meaning": "The vector along b whose length is the scalar projection, equal to (a·b/|b|²)b." },
+    { "word": "Cross product", "meaning": "The vector |a||b| sin θ perpendicular to both, computed by a determinant." },
+    { "word": "Anticommutative", "meaning": "Reversing the order changes the sign, as in a × b = −(b × a)." },
+    { "word": "Right-hand rule", "meaning": "The convention fixing the direction of a cross product." },
+    { "word": "Coplanar vectors", "meaning": "Vectors lying in, or parallel to, one common plane." }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Components of a vector in space and the unit vectors along the axes",
+      "description": "A set of three mutually perpendicular axes is drawn with unit vectors i, j and k marked along them. A vector a runs from the origin to a point P, and dashed lines drop from P to the coordinate planes to show its components a₁, a₂ and a₃ along the three axes. A second shorter arrow along a shows the unit vector â, parallel to a but of length one, illustrating that dividing a vector by its magnitude changes only its length.",
+      "labels": [
+        "x, y and z axes",
+        "unit vectors i, j, k",
+        "vector a from the origin",
+        "components a₁, a₂, a₃",
+        "dashed projections to the coordinate planes",
+        "unit vector â along a"
+      ]
+    },
+    {
+      "caption": "Figure: Scalar projection of b on a as the shadow length",
+      "description": "Two vectors a and b are drawn from a common point O, with the angle θ between them marked. A perpendicular is dropped from the tip of b onto the line of a, meeting it at Q. The segment OQ is labelled as the scalar projection of b on a, equal to |b| cos θ, and the vector from O to Q is labelled as the vector projection. A second panel shows the same construction with an obtuse angle, where Q falls on the extension of a behind O and the scalar projection is negative.",
+      "labels": [
+        "vectors a and b from O",
+        "angle θ between them",
+        "perpendicular from the tip of b",
+        "foot Q on the line of a",
+        "scalar projection OQ = |b| cos θ",
+        "vector projection along a",
+        "obtuse case with negative projection"
+      ]
+    },
+    {
+      "caption": "Figure: Cross product magnitude as the area of a parallelogram",
+      "description": "A parallelogram is drawn with adjacent sides a and b from a common vertex, and the height h from the tip of b to the line of a is marked. The area is labelled |a|h, and since h = |b| sin θ, the area is |a||b| sin θ, which is the magnitude of a × b. A third arrow perpendicular to the plane of the parallelogram is labelled a × b, with a small right-hand symbol indicating the direction convention.",
+      "labels": [
+        "adjacent sides a and b",
+        "angle θ between them",
+        "height h = |b| sin θ",
+        "area = |a||b| sin θ",
+        "normal vector a × b",
+        "right-hand rule direction"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-vector-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a = 2i − j + 3k and b = i + 2j − k, then a·b is",
+      "options": [
+        "3",
+        "−3",
+        "−7",
+        "1"
+      ],
+      "correctIndex": 1,
+      "answer": "−3",
+      "explanation": "The dot product is the sum of the products of corresponding components: (2)(1) + (−1)(2) + (3)(−1) = 2 − 2 − 3 = −3. The negative value shows that the angle between the vectors is obtuse.",
+      "commonMistake": "Adding the components of each vector first and then multiplying, which ignores the pairing of components."
+    },
+    {
+      "id": "isc-12-maths-q-vector-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The direction cosines of the vector 2i + 3j + 6k are",
+      "options": [
+        "(2/7, 3/7, 6/7)",
+        "(2, 3, 6)",
+        "(2/11, 3/11, 6/11)",
+        "(2/7, 3/7, 1/7)"
+      ],
+      "correctIndex": 0,
+      "answer": "(2/7, 3/7, 6/7)",
+      "explanation": "The magnitude is √(4 + 9 + 36) = √49 = 7, so each component is divided by 7 to give (2/7, 3/7, 6/7). Checking, the squares add to 4/49 + 9/49 + 36/49 = 1, as direction cosines must.",
+      "commonMistake": "Dividing by the sum of the components, 2 + 3 + 6 = 11, instead of by the magnitude 7."
+    },
+    {
+      "id": "isc-12-maths-q-vector-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a and b are non-zero vectors with a·b = 0, then the angle between them is",
+      "options": [
+        "0",
+        "π",
+        "π/2",
+        "π/4"
+      ],
+      "correctIndex": 2,
+      "answer": "π/2",
+      "explanation": "Since a·b = |a||b| cos θ and neither magnitude is zero, the dot product can vanish only when cos θ = 0. The angle in [0, π] with zero cosine is π/2, so the vectors are perpendicular.",
+      "commonMistake": "Reading a zero dot product as meaning the vectors are parallel, which corresponds to a cross product of zero instead."
+    },
+    {
+      "id": "isc-12-maths-q-vector-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a = i + j and b = i − j, then a × b is",
+      "options": [
+        "2k",
+        "0",
+        "i − j",
+        "−2k"
+      ],
+      "correctIndex": 3,
+      "answer": "−2k",
+      "explanation": "Expanding the determinant, a × b = (1·0 − 0·(−1))i − (1·0 − 0·1)j + (1·(−1) − 1·1)k = −2k. The result is perpendicular to both a and b, as every cross product must be.",
+      "commonMistake": "Reporting 2k by reversing the order of the factors, since b × a = 2k and the cross product is anticommutative."
+    },
+    {
+      "id": "isc-12-maths-q-vector-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The area of the parallelogram with adjacent sides a = 2i + j and b = i + 2j is",
+      "options": [
+        "5 square units",
+        "3 square units",
+        "√5 square units",
+        "6 square units"
+      ],
+      "correctIndex": 1,
+      "answer": "3 square units",
+      "explanation": "a × b = (2·2 − 1·1)k = 3k, so |a × b| = 3 and the area is 3 square units. The value 5 would be the product of the magnitudes, which overcounts because the sides are not perpendicular.",
+      "commonMistake": "Multiplying |a||b| = √5 · √5 = 5, which is the area only when the sides are perpendicular."
+    },
+    {
+      "id": "isc-12-maths-q-vector-06",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The position vector of the midpoint of the segment joining A(2, 1, 3) and B(4, 5, 1) is",
+      "options": [
+        "2i + 3j + 2k",
+        "3i + 2j + 3k",
+        "3i + 3j + 2k",
+        "4i + 5j + k"
+      ],
+      "correctIndex": 2,
+      "answer": "3i + 3j + 2k",
+      "explanation": "The midpoint has coordinates that are the averages of the coordinates of A and B: ((2 + 4)/2, (1 + 5)/2, (3 + 1)/2) = (3, 3, 2), giving 3i + 3j + 2k.",
+      "commonMistake": "Averaging only one coordinate, or subtracting the coordinates and halving the difference instead of averaging."
+    },
+    {
+      "id": "isc-12-maths-q-vector-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a and b are non-zero parallel vectors, then a × b is",
+      "options": [
+        "the zero vector",
+        "a unit vector",
+        "the vector a + b",
+        "a vector of magnitude |a||b|"
+      ],
+      "correctIndex": 0,
+      "answer": "the zero vector",
+      "explanation": "Parallel vectors have angle 0 or π between them, so sin θ = 0 and |a × b| = |a||b| sin θ = 0. The only vector of magnitude zero is the zero vector, which is why parallelism is tested by a vanishing cross product.",
+      "commonMistake": "Choosing the option with magnitude |a||b|, which is the value reached when the angle is a right angle, not when the vectors are parallel."
+    },
+    {
+      "id": "isc-12-maths-q-vector-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The projection of a = 2i + 3j on b = i + j is",
+      "options": [
+        "5",
+        "10",
+        "5√2",
+        "5/√2"
+      ],
+      "correctIndex": 3,
+      "answer": "5/√2",
+      "explanation": "The scalar projection is a·b/|b| = (2 + 3)/√2 = 5/√2. The value 5 is the dot product itself, and 5√2 would result from multiplying by |b| instead of dividing.",
+      "commonMistake": "Reporting the dot product 5 as the projection and forgetting to divide by the magnitude of b."
+    },
+    {
+      "id": "isc-12-maths-q-vector-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The magnitude of the vector i + j + k is ______.",
+      "answer": "√3",
+      "explanation": "The magnitude is the square root of the sum of the squares of the components: √(1 + 1 + 1) = √3. The unit vector in that direction is therefore (i + j + k)/√3.",
+      "commonMistake": "Adding the components to obtain 3 and reporting the magnitude as 3 instead of √3."
+    },
+    {
+      "id": "isc-12-maths-q-vector-10",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a·b = |a||b| for two non-zero vectors, the angle between them is ______.",
+      "answer": "zero",
+      "explanation": "Dividing the given relation by |a||b| gives cos θ = 1, and the only angle in [0, π] with cosine 1 is 0. The vectors therefore point in the same direction, which is the case of positive parallelism.",
+      "commonMistake": "Answering π, which corresponds to a·b = −|a||b| and to vectors pointing in opposite directions."
+    },
+    {
+      "id": "isc-12-maths-q-vector-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The unit vector in the direction of 4i − 3j is ______.",
+      "answer": "(4i − 3j)/5",
+      "explanation": "The magnitude of 4i − 3j is √(16 + 9) = 5, so the unit vector is obtained by dividing the vector by 5. The negative sign on the j component is preserved, so the unit vector points into the fourth quadrant of the xy-plane.",
+      "commonMistake": "Dropping the minus sign while dividing, which changes the direction even though the magnitude is still 1."
+    },
+    {
+      "id": "isc-12-maths-q-vector-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the angle between the vectors a = i + j and b = j + k.",
+      "answer": "a·b = 0 + 1 + 0 = 1 and |a| = |b| = √2, so cos θ = 1/(√2 · √2) = 1/2. Hence θ = π/3, that is 60°.",
+      "explanation": "Both magnitudes are equal, so the cosine reduces to the dot product divided by 2. The positive value confirms an acute angle, consistent with the geometric picture of two face diagonals of a cube meeting at 60°.",
+      "commonMistake": "Dividing the dot product by |a| + |b| = 2√2 instead of by |a||b| = 2, or reading cos θ = 1/2 as π/6 instead of π/3."
+    },
+    {
+      "id": "isc-12-maths-q-vector-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the value of λ for which a = 2i + λj + k and b = i − 2j + 3k are perpendicular.",
+      "answer": "Perpendicularity requires a·b = 0, so (2)(1) + (λ)(−2) + (1)(3) = 0, that is 5 − 2λ = 0. Hence λ = 5/2.",
+      "explanation": "The dot product is the only condition needed, and it gives a linear equation in λ. Substituting λ = 5/2 back into the dot product gives 2 − 5 + 3 = 0, which confirms the answer.",
+      "commonMistake": "Setting the cross product to zero, which would instead make the vectors parallel, or making a sign error on the −2λ term."
+    },
+    {
+      "id": "isc-12-maths-q-vector-14",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the area of the triangle with vertices A(1, 1, 1), B(2, 3, 4) and C(4, 5, 3).",
+      "answer": "AB = i + 2j + 3k and AC = 3i + 4j + 2k. Then AB × AC = (2·2 − 3·4)i − (1·2 − 3·3)j + (1·4 − 2·3)k = −8i + 7j − 2k, whose magnitude is √(64 + 49 + 4) = √117 = 3√13. The area is half of this, (3√13)/2 square units.",
+      "explanation": "Two sides drawn from the same vertex A are used, because their cross product spans the parallelogram and the triangle is exactly half of it. Taking sides from different vertices would give a vector that is not the one needed for the area.",
+      "commonMistake": "Forgetting the factor 1/2 and reporting 3√13 as the area of the triangle, which is the area of the parallelogram instead."
+    },
+    {
+      "id": "isc-12-maths-q-vector-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the position vector of the point dividing the join of A(1, 2, 3) and B(6, 7, 8) internally in the ratio 2 : 3.",
+      "answer": "With m = 2 and n = 3, the section formula gives (2·OB + 3·OA)/5 = (2(6i + 7j + 8k) + 3(i + 2j + 3k))/5 = (15i + 20j + 25k)/5 = 3i + 4j + 5k.",
+      "explanation": "The point lies closer to A than to B because the larger share of the ratio, 3, is attached to A in the formula. Dividing the total 15, 20, 25 by 5 gives the coordinates (3, 4, 5), which lie on the segment as expected.",
+      "commonMistake": "Interchanging m and n and placing the point at two-thirds of the way from A instead of two-fifths."
+    },
+    {
+      "id": "isc-12-maths-q-vector-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "If a = i + j + k, b = 2i − j + 3k and c = i − 2j + k, find a vector of magnitude 6 units parallel to 2a − b + 3c.",
+      "answer": "First compute 2a = 2i + 2j + 2k, b = 2i − j + 3k and 3c = 3i − 6j + 3k. Then 2a − b + 3c = (2 − 2 + 3)i + (2 + 1 − 6)j + (2 − 3 + 3)k = 3i − 3j + 2k. Its magnitude is √(9 + 9 + 4) = √22. The required vector is 6/√22 times this, that is (18i − 18j + 12k)/√22, and its negative is equally valid because the question fixes only magnitude and parallelism.",
+      "explanation": "The combination is formed first, then normalised and scaled to the required length. Multiplying by 6/√22 rather than by 6 keeps the magnitude at exactly 6, since the unit vector already has length 1.",
+      "commonMistake": "Multiplying the combination by 6 without dividing by √22, which gives a vector of magnitude 6√22 instead of 6."
+    },
+    {
+      "id": "isc-12-maths-q-vector-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Show that the points A(−2, 3, 5), B(1, 2, 3) and C(7, 0, −1) are collinear.",
+      "answer": "The position vectors are OA = −2i + 3j + 5k, OB = i + 2j + 3k and OC = 7i − j − k. Then AB = OB − OA = 3i − j − 2k and AC = OC − OA = 9i − 3j − 6k = 3(3i − j − 2k) = 3AB. Since AC is a scalar multiple of AB and both pass through A, the three points lie on one line. Moreover B divides AC internally in the ratio 1 : 2.",
+      "explanation": "Collinearity is established by showing that two vectors with a common endpoint are parallel, which is the component proportionality test. The scalar 3 also locates B on the segment, since AB is one-third of AC.",
+      "commonMistake": "Comparing AB with BC and finding them not proportional, then concluding that the points are not collinear; the correct comparison must use vectors sharing a common endpoint."
+    },
+    {
+      "id": "isc-12-maths-q-vector-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Using position vectors, prove that the diagonals of a parallelogram bisect each other.",
+      "answer": "Let the parallelogram be OACB with OA = a and OB = b, so that the fourth vertex C has position vector a + b. The diagonal OC joins the origin to a + b, so its midpoint has position vector (a + b)/2. The other diagonal AB joins a to b, so its midpoint has position vector (a + b)/2 as well. The two midpoints coincide, hence each diagonal bisects the other.",
+      "explanation": "The proof only needs the parallelogram law for addition and the midpoint formula; no coordinates are required. Because the two midpoint vectors are identical, the diagonals meet at their common midpoint, which is exactly the statement to be proved.",
+      "commonMistake": "Placing the fourth vertex at a − b or b − a, which describes a different quadrilateral and invalidates the midpoint comparison."
+    },
+    {
+      "id": "isc-12-maths-q-vector-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the scalar projection and the vector projection of a = 3i + 2j − k on b = i + j + k.",
+      "answer": "a·b = 3 + 2 − 1 = 4 and |b| = √3, so the scalar projection is a·b/|b| = 4/√3. The vector projection is (a·b/|b|²)b = (4/3)(i + j + k), which has magnitude 4/√3 and lies along b.",
+      "explanation": "The scalar projection is a signed length and can be negative when the angle is obtuse, while the vector projection is the actual vector along b with that length. Dividing by |b|² in the vector formula is what keeps the magnitude equal to the scalar projection.",
+      "commonMistake": "Dividing by |b| instead of |b|² when forming the vector projection, which produces a vector of the wrong length."
+    },
+    {
+      "id": "isc-12-maths-q-vector-20",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the area of the triangle with vertices A(1, 2, 3), B(3, −1, 2) and C(2, 3, −1).",
+      "answer": "AB = 2i − 3j − k and AC = i + j − 4k. Then AB × AC = ((−3)(−4) − (−1)(1))i − ((2)(−4) − (−1)(1))j + ((2)(1) − (−3)(1))k = 13i + 7j + 5k, whose magnitude is √(169 + 49 + 25) = √243 = 9√3. The area of the triangle is half of this, (9√3)/2 square units.",
+      "explanation": "Each component of the cross product is a 2 × 2 determinant, and the middle component carries a minus sign that is easy to lose. The parallelogram area 9√3 is then halved because a triangle is half of the parallelogram on the same two sides.",
+      "commonMistake": "Dropping the minus sign in front of the j component, which changes the magnitude and therefore the area."
+    },
+    {
+      "id": "isc-12-maths-q-vector-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Prove that |a × b|² + (a·b)² = |a|²|b|² for any two vectors a and b.",
+      "answer": "Write a·b = |a||b| cos θ and |a × b| = |a||b| sin θ, where θ is the angle between the vectors. Then (a·b)² = |a|²|b|² cos²θ and |a × b|² = |a|²|b|² sin²θ. Adding, |a × b|² + (a·b)² = |a|²|b|²(cos²θ + sin²θ) = |a|²|b|², using the Pythagorean identity.",
+      "explanation": "The identity expresses the fact that the dot and cross products measure the same pair of vectors along perpendicular directions: one carries the cosine component and the other the sine component of the product of magnitudes. It also shows why both products cannot vanish at once unless one vector is zero.",
+      "commonMistake": "Writing |a × b| = |a||b| cos θ, which exchanges the roles of sine and cosine and makes the identity collapse incorrectly."
+    },
+    {
+      "id": "isc-12-maths-q-vector-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If a = 2i + 3j − k and b = i − j + 2k, find a vector c of magnitude 3 units that is perpendicular to both a and b.",
+      "answer": "A vector perpendicular to both a and b must be parallel to a × b. Expanding, a × b = (3·2 − (−1)(−1))i − (2·2 − (−1)(1))j + (2(−1) − 3·1)k = 5i − 5j − 5k, so a × b = 5(i − j − k) and its magnitude is 5√3. The unit vector in that direction is (i − j − k)/√3, and multiplying by 3 gives c = √3(i − j − k) = √3 i − √3 j − √3 k, whose magnitude is 3. The vector −c is the other valid answer.",
+      "explanation": "The cross product supplies the direction, because it is perpendicular to both given vectors, and scaling to length 3 fixes the magnitude. Two answers are possible because the condition fixes the line but not the sense along it, so a complete answer states either one and notes the sign ambiguity.",
+      "commonMistake": "Normalising with the magnitude 5 of the component vector (1, −1, −1) instead of the magnitude 5√3 of the actual cross product, which gives a vector of the wrong length."
+    }
+  ]
+}

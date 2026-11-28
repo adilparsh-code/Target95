@@ -6,6 +6,7 @@ import { validateCatalog } from "@/content/validate.mjs";
 import { slugifyChapterLabel } from "@/content/identity.mjs";
 import { getMockTestQuestionPool as filterMockTestPool } from "@/lib/mocktest";
 import { getCatalog } from "./staticSource";
+import { questionBelongsToChapter } from "@/content/normalize.mjs";
 
 export function getChapters({ subject } = {}) {
   const { chapters } = getCatalog();
@@ -21,12 +22,13 @@ export function getChapter(slugOrId) {
 }
 
 export function getQuestions({ chapter, type, difficulty } = {}) {
-  const { questions, chapterQuestions, aliasIndex } = getCatalog();
-  // A chapter scope uses chapter membership, so sibling chapters list the
-  // questions their routes already expose; without one, every question once.
-  const scoped = chapter ? chapterQuestions.get(aliasIndex.get(chapter) || chapter) || [] : questions;
-  return scoped.filter(
-    (question) => (!type || question.type === type) && (!difficulty || question.difficulty === difficulty),
+  const { questions, aliasIndex } = getCatalog();
+  const chapterId = chapter ? aliasIndex.get(chapter) || chapter : null;
+  return questions.filter(
+    (question) =>
+      (!chapterId || questionBelongsToChapter(question, chapterId)) &&
+      (!type || question.type === type) &&
+      (!difficulty || question.difficulty === difficulty),
   );
 }
 

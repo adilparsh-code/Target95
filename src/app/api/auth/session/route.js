@@ -52,7 +52,16 @@ export async function POST(request) {
     });
 
     const response = jsonResponse({ success: true });
-    response.headers.set("Set-Cookie", "session=" + sessionCookie + "; HttpOnly; Path=/" + (process.env.NODE_ENV === "production" ? "; Secure; SameSite=Strict" : ""));
+    const options = sessionCookieOptions();
+    const cookieParts = [
+      `session=${sessionCookie}`,
+      `Path=${options.path}`,
+      `Max-Age=${options.maxAge}`,
+      "SameSite=Strict",
+    ];
+    if (options.httpOnly) cookieParts.push("HttpOnly");
+    if (options.secure) cookieParts.push("Secure");
+    response.headers.set("Set-Cookie", cookieParts.join("; "));
     return response;
   } catch (error) {
     console.error("Session creation failed:", error);

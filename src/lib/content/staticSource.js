@@ -9,7 +9,7 @@ import { javaChapters as canonicalChapters } from "@/app/data/javaCurriculum";
 import { getStudyChapters, resolveStudyChapter } from "@/lib/studyCenter";
 import { questionBankQuestions } from "@/lib/questionBank";
 import { chapterQuestionBankBySlug } from "@/lib/javaChapterQuestionBank";
-import { recordToPlayerQuestion, toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
+import { buildQuestionChapterAssociations, recordToPlayerQuestion, toUnifiedChapter, toUnifiedQuestion } from "@/content/normalize.mjs";
 import { canonicalIdFor, identityFor, quarantineReasonFor } from "@/content/identity.mjs";
 
 const SUBJECT_ID = "java";
@@ -64,19 +64,6 @@ function buildAliasIndex(chapters) {
  * the identity table, so sibling chapters (while-loop, arrays-2d, nested-if...)
  * keep the questions they already expose, with no second alias map to maintain.
  */
-function buildMembership(aliasIndex) {
-  const membership = new Map();
-  for (const [routeSlug, routeQuestions] of Object.entries(chapterQuestionBankBySlug)) {
-    const chapterId = aliasIndex.get(routeSlug) || routeSlug;
-    for (const question of routeQuestions) {
-      const id = String(question.id);
-      if (!membership.has(id)) membership.set(id, new Set());
-      membership.get(id).add(chapterId);
-    }
-  }
-  return membership;
-}
-
 /**
  * Player-shaped questions by id. The authored Java bank already has the player
  * shape (taken as is). Records without one, the supplemental ICSE board bank,
@@ -97,14 +84,14 @@ function buildPlayerIndex() {
 function buildQuestions(aliasIndex) {
   const questions = [];
   const quarantined = [];
-  const membership = buildMembership(aliasIndex);
+  const membership = buildQuestionChapterAssociations(chapterQuestionBankBySlug, aliasIndex);
 
   for (const raw of questionBankQuestions) {
     const slug = raw.chapterSlug || raw.chapter;
     const chapterId = aliasIndex.get(slug) || slug;
     const unified = toUnifiedQuestion(raw, {
       chapterId,
-      chapterIds: [...(membership.get(String(raw.id)) || [])],
+      chapterIds: membership.get(String(raw.id)) || [],
       source: QUESTION_SOURCE,
     });
     const reason = aliasIndex.has(slug) ? null : quarantineReasonFor(slug);

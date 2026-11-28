@@ -1,0 +1,748 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-chemistry-ch-electrochemistry",
+  "title": "Electrochemistry",
+  "kind": "chemistry",
+  "tagline": "Galvanic cells, the Nernst equation, conductance, electrolysis and commercial cells in the ISC XII syllabus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Chemistry syllabus (Unit 2 — Electrochemistry; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the unit description in the ISC Chemistry syllabus; UNVERIFIED against the primary CISCE PDF in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Chemistry (862) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Electrochemistry is the study of the interconversion of chemical and electrical energy. A galvanic cell converts the energy of a spontaneous redox reaction into electrical work, while an electrolytic cell uses electrical work to drive a non-spontaneous reaction. The central quantity is the electrode potential, measured against the standard hydrogen electrode, and the cell EMF is the difference between the cathode and anode potentials. The Nernst equation extends this to non-standard concentrations and is the working tool for calculating cell EMF, equilibrium constants and the pH of a solution from a measured potential. The relation between the Gibbs energy change and the EMF, delta G = minus n F E, connects thermodynamics with electrochemistry. The second half of the unit is about conduction in solution: specific conductance, molar and equivalent conductance, their variation with concentration, and Kohlrausch's law, which allows the molar conductance at infinite dilution of a weak electrolyte to be obtained from strong electrolytes. The unit closes with Faraday's laws of electrolysis and with commercial cells, including the dry cell, the lead accumulator and the hydrogen-oxygen fuel cell, together with the electrochemical mechanism of rusting.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Unit 2 — Electrochemistry (Physical Chemistry)"
+      },
+      {
+        "label": "Section weightage",
+        "value": "Physical Chemistry carries 25 marks in the 70-mark theory paper"
+      },
+      {
+        "label": "Faraday constant",
+        "value": "F = 96500 C mol^-1"
+      },
+      {
+        "label": "Standard hydrogen electrode",
+        "value": "Pt | H2 (1 bar) | H+ (1 M), assigned a potential of exactly 0.00 V at 298 K"
+      },
+      {
+        "label": "Nernst equation at 298 K",
+        "value": "E = E° - (0.0591 / n) log Q, where Q is the reaction quotient"
+      },
+      {
+        "label": "Gibbs energy and EMF",
+        "value": "delta G = -n F E, and delta G° = -n F E°"
+      },
+      {
+        "label": "Equilibrium constant",
+        "value": "log K = n E° / 0.0591 at 298 K"
+      },
+      {
+        "label": "Specific conductance",
+        "value": "kappa = cell constant / resistance, unit S cm^-1 or S m^-1"
+      },
+      {
+        "label": "Molar conductance",
+        "value": "Lambda_m = 1000 kappa / M for kappa in S cm^-1 and M in mol L^-1"
+      },
+      {
+        "label": "Kohlrausch's law",
+        "value": "Lambda°m for a weak electrolyte is the sum of the limiting molar conductances of its ions"
+      },
+      {
+        "label": "Faraday's first law",
+        "value": "mass deposited = (M / n F) x charge passed"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Describe the construction and working of a galvanic cell and explain the function of the salt bridge.",
+    "Define standard electrode potential and explain how it is measured against the standard hydrogen electrode.",
+    "Apply the Nernst equation to calculate cell EMF at non-standard concentrations and to relate EMF to equilibrium constant and Gibbs energy.",
+    "Distinguish electronic from electrolytic conduction and define specific, molar and equivalent conductance with their units.",
+    "Explain the variation of molar conductance with concentration and apply Kohlrausch's law, including its use for weak electrolytes.",
+    "State and apply Faraday's laws of electrolysis to calculate the amount of substance deposited or liberated.",
+    "Describe the dry cell, the lead accumulator and the hydrogen-oxygen fuel cell, and explain the electrochemical mechanism of rusting."
+  ],
+  "learn": [
+    {
+      "id": "galvanic-cells-and-electrode-potential",
+      "title": "Galvanic cells, electrode potentials and the salt bridge",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A galvanic cell produces electrical work from a spontaneous redox reaction by separating the oxidation and reduction half-reactions into two compartments. In the Daniell cell a zinc rod dips into zinc sulphate solution and a copper rod dips into copper sulphate solution. Zinc is oxidised at the anode, releasing electrons that travel through the external circuit to the copper cathode, where copper ions are reduced and deposited. The two solutions are connected by a salt bridge, a tube of agar gel containing potassium chloride or potassium nitrate, which completes the circuit by allowing ions to migrate without mixing the two solutions. Without the salt bridge the charge imbalance would stop the reaction almost immediately. The cell EMF is the potential difference between the electrodes when no current is drawn, and it is measured with a high-resistance voltmeter or a potentiometer so that the cell is not disturbed."
+        },
+        {
+          "type": "paragraph",
+          "text": "A single electrode potential cannot be measured on its own, only the difference between two electrodes. The standard hydrogen electrode is therefore chosen as the reference and given the value zero at all temperatures. It consists of a platinum plate coated with platinum black, dipped in a solution of hydrogen ions of unit activity, with hydrogen gas at one bar bubbled over it. The standard electrode potential of any other electrode is the EMF of a cell in which that electrode is the cathode and the standard hydrogen electrode is the anode, measured under standard conditions of unit activity and 298 K. By convention the standard reduction potentials are tabulated; a positive value means the electrode is a better electron acceptor than hydrogen, and the species is a stronger oxidising agent."
+        },
+        {
+          "type": "paragraph",
+          "text": "By international convention the tabulated potentials are standard reduction potentials, so the EMF of a cell is E°cathode minus E°anode, both taken as reduction potentials."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Anode: oxidation, electrons released, negative electrode in a galvanic cell.",
+            "Cathode: reduction, electrons consumed, positive electrode in a galvanic cell.",
+            "Cell EMF: E_cell = E_cathode - E_anode, using reduction potentials for both.",
+            "Salt bridge: completes the circuit, maintains electrical neutrality and prevents mixing of the solutions.",
+            "A positive standard EMF means the cell reaction is spontaneous under standard conditions.",
+            "Standard conditions: unit activity (about 1 M) for solutes, 1 bar for gases, pure solids and liquids, 298 K."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Calculate the standard EMF of the Daniell cell, given E°(Zn2+/Zn) = -0.76 V and E°(Cu2+/Cu) = +0.34 V.",
+              "note": "Copper is the cathode because its reduction potential is higher. E°cell = 0.34 - (-0.76) = 1.10 V. The positive value confirms that zinc dissolving and copper depositing is spontaneous."
+            },
+            {
+              "text": "Why is the standard hydrogen electrode assigned a potential of zero rather than measured directly?",
+              "note": "Only potential differences between electrodes can be measured, never an absolute single electrode potential. Assigning the hydrogen electrode the value zero at all temperatures fixes the scale and lets every other electrode potential be reported as a difference from it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nernst-equation-and-thermodynamics",
+      "title": "The Nernst equation, Gibbs energy and equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The standard EMF applies only when every species is in its standard state. For a general cell reaction the EMF depends on the concentrations through the Nernst equation, E = E° - (R T / n F) ln Q, where n is the number of electrons transferred and Q is the reaction quotient written with products in the numerator and reactants in the denominator, each raised to its stoichiometric coefficient. At 298 K the equation is usually written E = E° - (0.0591 / n) log Q. For the Daniell cell, Q = [Zn2+] / [Cu2+], so raising the zinc ion concentration lowers the EMF while raising the copper ion concentration raises it. When all concentrations are one molar the logarithm vanishes and the EMF equals the standard value."
+        },
+        {
+          "type": "paragraph",
+          "text": "The electrical work done by a cell is related to the Gibbs energy change of the reaction by delta G = minus n F E. A spontaneous cell reaction has a positive EMF and a negative Gibbs energy change, so the cell can do electrical work. At equilibrium the cell is dead, E = 0 and delta G = 0, and substituting into the Nernst equation gives log K = n E° / 0.0591 at 298 K. This relation lets an equilibrium constant be obtained from standard potentials alone, which is useful because many equilibrium constants are difficult to measure directly. The same relation also explains why a cell EMF falls as the reaction proceeds: the concentrations of products rise and reactants fall, so Q increases and E decreases until it reaches zero at equilibrium."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Nernst equation: E = E° - (0.0591 / n) log Q at 298 K.",
+            "Q uses activities or, for dilute solutions, molar concentrations; pure solids and liquids are omitted.",
+            "Increasing the concentration of a reactant raises E; increasing the concentration of a product lowers E.",
+            "delta G = -n F E and delta G° = -n F E°, with F = 96500 C mol^-1.",
+            "At equilibrium E = 0 and delta G = 0, giving log K = n E° / 0.0591.",
+            "A cell with E° greater than about 0.059 V per electron transferred has K much greater than one."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "For the Daniell cell with [Zn2+] = 0.10 M and [Cu2+] = 0.010 M, calculate the EMF at 298 K.",
+              "note": "Q = 0.10 / 0.010 = 10 and n = 2, so E = 1.10 - (0.0591 / 2) x log 10 = 1.10 - 0.0296 = 1.07 V. Lowering the copper ion concentration has reduced the EMF below its standard value."
+            },
+            {
+              "text": "Calculate the standard Gibbs energy change for the Daniell cell reaction.",
+              "note": "delta G° = -n F E° = -2 x 96500 x 1.10 = -212300 J mol^-1 = -212.3 kJ mol^-1. The negative sign shows that the reaction is spontaneous under standard conditions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conductance-in-electrolytes",
+      "title": "Conductance, molar conductance and Kohlrausch's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Conduction through a metal is electronic: electrons move without any transfer of matter, and the resistance rises with temperature because the lattice vibrations scatter them more strongly. Conduction through an electrolyte solution is electrolytic: current is carried by the movement of ions, matter is transferred and chemical changes occur at the electrodes, and the conductance increases with temperature because ions move more freely and the viscosity falls. The resistance of a solution is measured with a conductivity cell using alternating current to prevent polarisation, and the cell constant, the ratio of the distance between the electrodes to their area, is determined with a solution of known conductance. Specific conductance, also called conductivity, is the reciprocal of resistivity and is the conductance of a one centimetre cube of the solution; its SI unit is S m^-1, though S cm^-1 is still common."
+        },
+        {
+          "type": "paragraph",
+          "text": "Specific conductance depends on the number of ions per unit volume, so it is not convenient for comparing different electrolytes. Molar conductance is defined as the conductance of a solution containing one mole of electrolyte, Lambda_m = kappa / C, and in the usual units Lambda_m = 1000 kappa / M when kappa is in S cm^-1 and M is in mol L^-1; its unit is S cm^2 mol^-1. As a solution is diluted the number of ions per unit volume falls, so specific conductance decreases, but the degree of dissociation of a weak electrolyte rises and the ions are further apart, so the molar conductance increases and approaches a limiting value at infinite dilution. For strong electrolytes the increase is small and nearly linear in the square root of concentration. Kohlrausch's law states that at infinite dilution each ion contributes independently to the molar conductance, so the limiting molar conductance of an electrolyte is the sum of the limiting ionic conductances. This lets the limiting molar conductance of a weak electrolyte, which cannot be measured directly, be calculated from strong electrolytes, and the degree of dissociation follows as alpha = Lambda_m / Lambda°m."
+        },
+        {
+          "type": "table",
+          "caption": "Table: Conductance quantities and their units",
+          "columns": [
+            "Quantity",
+            "Symbol or relation",
+            "Common unit"
+          ],
+          "rows": [
+            [
+              "Resistance",
+              "R = 1 / G",
+              "ohm"
+            ],
+            [
+              "Specific conductance",
+              "kappa = G x cell constant",
+              "S cm^-1 or S m^-1"
+            ],
+            [
+              "Molar conductance",
+              "Lambda_m = 1000 kappa / M",
+              "S cm^2 mol^-1"
+            ],
+            [
+              "Equivalent conductance",
+              "Lambda_eq = 1000 kappa / N",
+              "S cm^2 eq^-1"
+            ],
+            [
+              "Degree of dissociation",
+              "alpha = Lambda_m / Lambda°m",
+              "dimensionless"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A conductivity cell with cell constant 1.25 cm^-1 has a resistance of 250 ohm when filled with a 0.05 M solution. Calculate the specific and molar conductance.",
+              "note": "kappa = 1.25 / 250 = 0.005 S cm^-1. Then Lambda_m = 1000 x 0.005 / 0.05 = 100 S cm^2 mol^-1. The molar conductance is large because the solution is moderately concentrated."
+            },
+            {
+              "text": "Calculate the limiting molar conductance of acetic acid from Lambda°(CH3COONa) = 91.0, Lambda°(HCl) = 426.2 and Lambda°(NaCl) = 126.4 S cm^2 mol^-1.",
+              "note": "By Kohlrausch's law, Lambda°(CH3COOH) = 91.0 + 426.2 - 126.4 = 390.8 S cm^2 mol^-1. The sodium and chloride ions cancel when the three strong electrolytes are combined."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electrolysis-and-faradays-laws",
+      "title": "Electrolysis and Faraday's laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In an electrolytic cell an external source drives a non-spontaneous reaction. The cathode is negative and attracts cations, which are reduced there, while the anode is positive and attracts anions, which are oxidised. Faraday's first law states that the mass of substance deposited or liberated at an electrode is proportional to the quantity of charge passed, m = Z Q, where Z is the electrochemical equivalent. Faraday's second law states that when the same charge is passed through different electrolytes, the masses deposited are proportional to their equivalent masses, or equivalently that one mole of electrons, 96500 coulombs, deposits one equivalent of any substance. Together the laws give m = (M / n F) x Q, where M is the molar mass and n the number of electrons involved in the electrode reaction."
+        },
+        {
+          "type": "paragraph",
+          "text": "The quantity of charge is Q = I t for a steady current, so the mass deposited can be calculated directly from the current and the time. The laws are used in electroplating, in the refining of metals such as copper, in the manufacture of chlorine and sodium hydroxide by electrolysis of brine, and in coulometry, where the charge passed is used as a measure of the amount of substance reacted. The current efficiency of an industrial process is the ratio of the mass actually deposited to the mass predicted by Faraday's laws, expressed as a percentage; values below 100 percent arise from side reactions such as the evolution of hydrogen at the cathode."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "First law: m proportional to Q, with m = Z I t.",
+            "Second law: for the same charge, masses deposited are in the ratio of equivalent masses.",
+            "One faraday, 96500 C, deposits one equivalent, that is M / n moles, of a substance.",
+            "Charge: Q = I t, in coulombs when I is in amperes and t in seconds.",
+            "Current efficiency = actual mass deposited / theoretical mass x 100 percent.",
+            "Applications: electroplating, electrorefining, electrolysis of brine, coulometric analysis."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A current of 0.50 A is passed through copper sulphate solution for one hour. Calculate the mass of copper deposited. M(Cu) = 63.5 g mol^-1.",
+              "note": "Q = 0.50 x 3600 = 1800 C. Moles of electrons = 1800 / 96500 = 0.01865 mol. Copper is deposited by a two-electron reduction, so moles of copper = 0.00933 mol and mass = 0.00933 x 63.5 = 0.59 g."
+            },
+            {
+              "text": "How long would it take a current of 2.0 A to deposit 1.0 g of silver? M(Ag) = 108 g mol^-1, one electron per silver ion.",
+              "note": "Moles of silver = 1.0 / 108 = 0.00926 mol, requiring 0.00926 x 96500 = 893 C. Time = 893 / 2.0 = 447 s, about 7.5 minutes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commercial-cells-and-corrosion",
+      "title": "Dry cell, lead accumulator, fuel cell and corrosion",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A primary cell cannot be recharged because its electrode reactions are not readily reversed. The common dry cell has a zinc container as the anode, a carbon rod with a manganese dioxide paste as the cathode, and an ammonium chloride and zinc chloride paste as the electrolyte. The zinc is oxidised and manganese dioxide is reduced, giving an EMF of about 1.5 V. A secondary cell can be recharged because its reactions are reversible. In the lead accumulator, lead is the anode, lead dioxide packed on a lead grid is the cathode and dilute sulphuric acid is the electrolyte; discharge converts both electrodes to lead sulphate and consumes sulphuric acid, and charging reverses these reactions and restores the acid concentration, which is why the density of the electrolyte indicates the state of charge. A fuel cell converts the chemical energy of a continuously supplied fuel directly into electricity; in the hydrogen-oxygen fuel cell hydrogen is oxidised at the anode and oxygen reduced at the cathode, with water as the only product, so the cell is efficient and clean and is used in spacecraft."
+        },
+        {
+          "type": "paragraph",
+          "text": "Rusting of iron is an electrochemical process. At a region of the surface that acts as the anode, iron is oxidised to iron(II) ions, releasing electrons that travel through the metal to a cathodic region where oxygen and water are reduced, producing hydroxide ions. The iron(II) ions and hydroxide ions meet and precipitate iron(II) hydroxide, which is further oxidised by air to hydrated iron(III) oxide, the reddish-brown rust. The process needs both oxygen and water, which is why painting, oiling, galvanising with zinc, and alloying to form stainless steel all slow it down: they either exclude water and oxygen or make the iron the cathode of a galvanic couple. Galvanising protects iron even when the zinc layer is scratched, because zinc is more reactive and corrodes preferentially, protecting the iron beneath."
+        },
+        {
+          "type": "table",
+          "caption": "Table: Commercial cells and their electrode reactions",
+          "columns": [
+            "Cell",
+            "Anode reaction",
+            "Cathode reaction",
+            "Approximate EMF"
+          ],
+          "rows": [
+            [
+              "Dry cell (Leclanche)",
+              "Zn to Zn2+ plus 2 electrons",
+              "MnO2 reduced with water",
+              "1.5 V"
+            ],
+            [
+              "Lead accumulator (discharge)",
+              "Pb plus sulphate to lead sulphate plus 2 electrons",
+              "PbO2 plus sulphate and 4 hydrogen ions plus 2 electrons to lead sulphate and water",
+              "2.0 V"
+            ],
+            [
+              "Hydrogen-oxygen fuel cell",
+              "Hydrogen oxidised to hydrogen ions",
+              "Oxygen plus hydrogen ions plus electrons to water",
+              "about 1.2 V per cell"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Why can a lead accumulator be recharged while a dry cell cannot?",
+              "note": "The lead accumulator is a secondary cell whose discharge products, lead sulphate on both electrodes, can be converted back to lead and lead dioxide by passing current in the reverse direction. In a dry cell the products cannot be reconverted conveniently and the zinc container is consumed, so the cell is discarded when exhausted."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "A galvanic cell converts the energy of a spontaneous redox reaction into electrical energy; oxidation occurs at the anode and reduction at the cathode.",
+    "The salt bridge completes the circuit and maintains electrical neutrality without mixing the solutions.",
+    "Standard electrode potentials are reduction potentials measured against the standard hydrogen electrode, which is assigned zero.",
+    "Cell EMF equals the cathode potential minus the anode potential.",
+    "The Nernst equation E = E° - (0.0591 / n) log Q gives the EMF at any concentration at 298 K.",
+    "delta G = -n F E links the EMF to the Gibbs energy change, and log K = n E° / 0.0591 links it to the equilibrium constant.",
+    "Electrolytic conduction involves the movement of ions and chemical change, and it improves with temperature, unlike metallic conduction.",
+    "Specific conductance falls on dilution while molar conductance rises towards a limiting value at infinite dilution.",
+    "Kohlrausch's law gives the limiting molar conductance of a weak electrolyte as the sum of ionic contributions.",
+    "Faraday's laws give the mass deposited as m = (M / n F) x Q, with Q = I t.",
+    "The dry cell is primary, the lead accumulator is secondary, and the hydrogen-oxygen fuel cell produces only water.",
+    "Rusting is an electrochemical process requiring both oxygen and water, and galvanising protects iron by sacrificial corrosion of zinc."
+  ],
+  "examFocus": [
+    "Calculating standard cell EMF from standard reduction potentials and deciding whether a reaction is spontaneous.",
+    "Applying the Nernst equation to find the EMF at given concentrations, including concentration cells.",
+    "Relating EMF to Gibbs energy and to the equilibrium constant, and calculating delta G from E.",
+    "Numericals on specific conductance, molar conductance and the degree of dissociation.",
+    "Applying Kohlrausch's law to obtain the limiting molar conductance of a weak electrolyte.",
+    "Faraday's law calculations of mass deposited or volume of gas liberated for a given current and time.",
+    "Describing the dry cell, lead accumulator and fuel cell, and explaining the electrochemical mechanism of rusting."
+  ],
+  "vocabulary": [
+    {
+      "word": "Electrochemistry",
+      "meaning": "The branch of chemistry that studies the interconversion of chemical energy and electrical energy in cells and electrolytic processes."
+    },
+    {
+      "word": "Galvanic cell",
+      "meaning": "A device in which a spontaneous redox reaction is separated into two half-cells to produce electrical energy."
+    },
+    {
+      "word": "Electrode potential",
+      "meaning": "The potential developed by an electrode in contact with its ions, measured relative to the standard hydrogen electrode."
+    },
+    {
+      "word": "Standard hydrogen electrode",
+      "meaning": "The reference electrode Pt | H2 (1 bar) | H+ (1 M), assigned a potential of zero at all temperatures."
+    },
+    {
+      "word": "Salt bridge",
+      "meaning": "A tube of gel containing an inert electrolyte that connects two half-cells, completing the circuit and maintaining neutrality."
+    },
+    {
+      "word": "EMF",
+      "meaning": "The maximum potential difference between the electrodes of a cell when no current is drawn, equal to E_cathode minus E_anode."
+    },
+    {
+      "word": "Nernst equation",
+      "meaning": "The relation giving the electrode or cell potential at non-standard concentrations in terms of the standard potential and the reaction quotient."
+    },
+    {
+      "word": "Specific conductance",
+      "meaning": "The conductance of a one centimetre cube of solution, the reciprocal of resistivity, symbol kappa."
+    },
+    {
+      "word": "Molar conductance",
+      "meaning": "The conductance of a solution containing one mole of electrolyte, equal to 1000 kappa divided by molarity."
+    },
+    {
+      "word": "Kohlrausch's law",
+      "meaning": "At infinite dilution the molar conductance of an electrolyte is the sum of the limiting molar conductances of its individual ions."
+    },
+    {
+      "word": "Faraday's laws",
+      "meaning": "The mass deposited or liberated at an electrode is proportional to the charge passed and to the equivalent mass of the substance."
+    },
+    {
+      "word": "Fuel cell",
+      "meaning": "A cell in which the reactants are supplied continuously from outside so that it produces electricity as long as fuel is available."
+    },
+    {
+      "word": "Lead accumulator",
+      "meaning": "A reversible secondary cell with lead and lead dioxide electrodes in dilute sulphuric acid, giving about 2 V per cell."
+    },
+    {
+      "word": "Rusting",
+      "meaning": "The electrochemical corrosion of iron in the presence of oxygen and water, producing hydrated iron(III) oxide."
+    },
+    {
+      "word": "Galvanising",
+      "meaning": "Coating iron with zinc so that the zinc corrodes preferentially and protects the iron from rusting."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: The Daniell cell",
+      "description": "Two beakers, one containing zinc sulphate solution with a zinc rod and the other containing copper sulphate solution with a copper rod. A wire with a voltmeter connects the rods, and a salt bridge joins the two solutions. The figure shows electrons flowing from zinc to copper in the external circuit and marks the anode and cathode.",
+      "labels": [
+        "zinc anode",
+        "copper cathode",
+        "zinc sulphate solution",
+        "copper sulphate solution",
+        "salt bridge containing potassium chloride",
+        "voltmeter measuring cell EMF",
+        "electron flow from zinc to copper",
+        "zinc dissolving as Zn2+",
+        "copper depositing from Cu2+"
+      ]
+    },
+    {
+      "caption": "Figure: Standard hydrogen electrode",
+      "description": "A platinum foil coated with platinum black dipping into a solution of hydrogen ions of unit activity. Hydrogen gas at one bar is bubbled over the platinum, and the electrode is connected through a salt bridge to the electrode under study. The figure labels the gas inlet, the platinum surface, the acid solution and the connection to the second half-cell.",
+      "labels": [
+        "hydrogen gas inlet at 1 bar",
+        "platinum foil coated with platinum black",
+        "solution of H+ of unit activity",
+        "gas outlet",
+        "salt bridge to the other half-cell",
+        "reference potential fixed at 0.00 V",
+        "hydrogen oxidised to H+ or H+ reduced to hydrogen"
+      ]
+    },
+    {
+      "caption": "Figure: Variation of molar conductance with concentration",
+      "description": "A graph of molar conductance against the square root of concentration. A strong electrolyte gives a straight line of small negative slope, extrapolated to the intercept at infinite dilution. A weak electrolyte gives a curve that rises steeply as concentration approaches zero and cannot be extrapolated reliably, illustrating why Kohlrausch's law is needed for weak electrolytes.",
+      "labels": [
+        "square root of concentration axis",
+        "molar conductance axis",
+        "straight line for a strong electrolyte",
+        "steep curve for a weak electrolyte",
+        "intercept giving limiting molar conductance",
+        "region where the weak electrolyte curve cannot be extrapolated",
+        "molar conductance rises as concentration falls"
+      ]
+    },
+    {
+      "caption": "Figure: Lead accumulator during discharge",
+      "description": "A cell with a lead anode and a lead dioxide cathode immersed in dilute sulphuric acid, separated by porous insulators. Arrows show the electrode reactions and the flow of electrons through the external circuit, with lead sulphate forming on both electrodes and the acid being consumed.",
+      "labels": [
+        "lead anode",
+        "lead dioxide cathode on lead grid",
+        "dilute sulphuric acid electrolyte",
+        "porous separator",
+        "electron flow in the external circuit",
+        "lead sulphate forming on the anode",
+        "lead sulphate forming on the cathode",
+        "acid concentration falling during discharge"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-chem-q-electrochemistry-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a galvanic cell, oxidation takes place at the:",
+      "options": [
+        "anode, which is the negative electrode",
+        "cathode, which is the positive electrode",
+        "anode, which is the positive electrode",
+        "cathode, which is the negative electrode"
+      ],
+      "correctIndex": 0,
+      "answer": "anode, which is the negative electrode",
+      "explanation": "At the anode the electrode material loses electrons, so the electrode becomes the source of electrons in the external circuit and is the negative terminal. Reduction and electron consumption occur at the positive cathode.",
+      "commonMistake": "Applying the electrolytic cell convention, where the anode is positive."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The standard electrode potential of the standard hydrogen electrode at 298 K is taken as:",
+      "options": [
+        "1.00 V",
+        "0.00 V",
+        "-0.76 V",
+        "0.34 V"
+      ],
+      "correctIndex": 1,
+      "answer": "0.00 V",
+      "explanation": "The hydrogen electrode is the reference against which all other electrode potentials are measured, so by convention its standard potential is fixed at exactly zero at every temperature.",
+      "commonMistake": "Confusing the reference value with the standard potential of zinc or copper."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The function of the salt bridge in a galvanic cell is to:",
+      "options": [
+        "supply electrons to the cathode",
+        "prevent any flow of current",
+        "complete the circuit and maintain electrical neutrality of the two solutions",
+        "increase the EMF of the cell above its standard value"
+      ],
+      "correctIndex": 2,
+      "answer": "complete the circuit and maintain electrical neutrality of the two solutions",
+      "explanation": "Ions migrate through the salt bridge to balance the charge that builds up as the electrode reactions proceed. Without it the accumulation of charge would stop the reaction, and the bridge also prevents the two solutions from mixing.",
+      "commonMistake": "Saying that the salt bridge carries electrons, when it carries ions."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the cell Zn | Zn2+ || Cu2+ | Cu, the standard EMF is 1.10 V. The standard Gibbs energy change for the cell reaction is about:",
+      "options": [
+        "+212 kJ mol^-1",
+        "-106 kJ mol^-1",
+        "-1.10 kJ mol^-1",
+        "-212 kJ mol^-1"
+      ],
+      "correctIndex": 3,
+      "answer": "-212 kJ mol^-1",
+      "explanation": "delta G° = -n F E° = -2 x 96500 x 1.10 = -212300 J mol^-1, which is -212 kJ mol^-1. The negative sign shows that the reaction is spontaneous.",
+      "commonMistake": "Using n = 1 instead of n = 2, which halves the magnitude."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "On diluting a solution of a strong electrolyte, its specific conductance and its molar conductance respectively:",
+      "options": [
+        "decrease and increase",
+        "increase and decrease",
+        "both increase",
+        "both decrease"
+      ],
+      "correctIndex": 0,
+      "answer": "decrease and increase",
+      "explanation": "Dilution reduces the number of ions per unit volume, so the specific conductance falls. The molar conductance, which is the conductance per mole, rises because the ions are further apart and interact less, approaching a limiting value at infinite dilution.",
+      "commonMistake": "Assuming both quantities change in the same direction on dilution."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-06",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Kohlrausch's law is particularly useful because it allows:",
+      "options": [
+        "the EMF of a cell to be measured without a voltmeter",
+        "the limiting molar conductance of a weak electrolyte to be calculated from strong electrolytes",
+        "the degree of dissociation of a strong electrolyte to be measured directly",
+        "the mass deposited in electrolysis to be found without knowing the current"
+      ],
+      "correctIndex": 1,
+      "answer": "the limiting molar conductance of a weak electrolyte to be calculated from strong electrolytes",
+      "explanation": "The limiting molar conductance of a weak electrolyte cannot be obtained by extrapolation because its molar conductance curve rises too steeply near zero concentration. Kohlrausch's law builds it from the limiting ionic conductances of strong electrolytes that contain the same ions.",
+      "commonMistake": "Thinking the law applies only to strong electrolytes, when its main use is for weak ones."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "At equilibrium in a galvanic cell:",
+      "options": [
+        "the cell EMF is maximum and the Gibbs energy change is minimum",
+        "the cell EMF is zero and the Gibbs energy change is negative",
+        "the cell EMF is zero and the Gibbs energy change is zero",
+        "the reaction quotient is zero"
+      ],
+      "correctIndex": 2,
+      "answer": "the cell EMF is zero and the Gibbs energy change is zero",
+      "explanation": "A cell delivers no more electrical work once the reaction has reached equilibrium, so E = 0 and delta G = -n F E = 0. At that point Q equals K, which is the basis of the relation log K = n E° / 0.0591.",
+      "commonMistake": "Believing that the EMF stays at its standard value until the reactants are exhausted."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "One faraday of charge passed through silver nitrate solution deposits:",
+      "options": [
+        "two moles of silver",
+        "half a mole of silver",
+        "one equivalent of oxygen",
+        "one mole of silver"
+      ],
+      "correctIndex": 3,
+      "answer": "one mole of silver",
+      "explanation": "Silver is deposited by a one-electron reduction, Ag+ + e- gives Ag, so one mole of electrons deposits one mole of silver. For copper, which needs two electrons, one faraday deposits half a mole.",
+      "commonMistake": "Assuming one faraday always deposits one mole regardless of the number of electrons."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The relation between the standard Gibbs energy change and the standard EMF of a cell is delta G° = ______.",
+      "answer": "-n F E°",
+      "explanation": "The electrical work done by a reversible cell is n F E, so the Gibbs energy change of the cell reaction is its negative, delta G° = -n F E°, with n the number of electrons transferred and F the Faraday constant.",
+      "commonMistake": "Omitting the minus sign, which would reverse the spontaneity conclusion."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The molar conductance of a solution is given by Lambda_m = ______ when kappa is in S cm^-1 and M is the molarity.",
+      "answer": "1000 kappa / M",
+      "explanation": "The factor 1000 converts the volume from litres to cubic centimetres so that the units come out as S cm^2 mol^-1.",
+      "commonMistake": "Forgetting the factor of 1000 and reporting kappa divided by M."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The electrolyte used in a lead accumulator is dilute ______ acid.",
+      "answer": "sulphuric",
+      "explanation": "Dilute sulphuric acid is the electrolyte in the lead accumulator. Its concentration falls during discharge as lead sulphate forms and rises again on charging, so its density is used to check the state of charge.",
+      "commonMistake": "Writing hydrochloric acid, which would not support the reversible lead sulphate chemistry."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between electronic and electrolytic conduction.",
+      "answer": "Electronic conduction occurs in metals and graphite, where electrons carry the current without any transfer of matter, and the conductance decreases as temperature rises because the ions of the lattice vibrate more and scatter the electrons. Electrolytic conduction occurs in solutions of electrolytes and in molten salts, where ions carry the current, matter is transferred and chemical changes occur at the electrodes, and the conductance increases with temperature because the ions move more easily through a less viscous medium.",
+      "explanation": "The two mechanisms differ in the charge carriers and in whether matter is transported, and this difference explains the opposite temperature dependence.",
+      "commonMistake": "Saying that both types of conduction improve on heating."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the Nernst equation for the electrode reaction Zn2+ + 2e- gives Zn and explain the effect of increasing the zinc ion concentration on the electrode potential.",
+      "answer": "For the reduction Zn2+ + 2e- gives Zn, the Nernst equation at 298 K is E = E° - (0.0591 / 2) log (1 / [Zn2+]), which can be written E = E° + (0.0591 / 2) log [Zn2+]. Increasing the zinc ion concentration raises the electrode potential, because a higher concentration of the oxidised form makes reduction more favourable.",
+      "explanation": "The reaction quotient for a reduction contains the reduced form over the oxidised form, and zinc is a pure solid so only the ion concentration appears. A larger [Zn2+] in the numerator of the reversed quotient increases E.",
+      "commonMistake": "Putting the ion concentration in the denominator when writing the reduction quotient."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does the EMF of a galvanic cell decrease as the cell reaction proceeds?",
+      "answer": "As the reaction proceeds the concentration of the products increases and that of the reactants decreases, so the reaction quotient Q increases. Since E = E° - (0.0591 / n) log Q, an increase in Q lowers the EMF. The cell finally becomes dead when equilibrium is reached, Q equals K and E becomes zero.",
+      "explanation": "The driving force of the cell is the difference between the actual composition and the equilibrium composition, and that difference shrinks as the reaction consumes reactants.",
+      "commonMistake": "Attributing the fall to the salt bridge or to the electrodes wearing out."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Calculate the EMF at 298 K of the cell Zn | Zn2+ (0.1 M) || Cu2+ (0.01 M) | Cu, given E°cell = 1.10 V.",
+      "answer": "The cell reaction is Zn + Cu2+ gives Zn2+ + Cu, with n = 2 and Q = [Zn2+] / [Cu2+] = 0.1 / 0.01 = 10. Then E = 1.10 - (0.0591 / 2) log 10 = 1.10 - 0.0296 = 1.07 V.",
+      "explanation": "The Nernst term is small because the ratio of concentrations is only ten. Lowering the copper ion concentration relative to the zinc ion concentration reduces the driving force below the standard value.",
+      "commonMistake": "Inverting the concentration ratio, which would give 1.13 V instead of 1.07 V."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Describe the construction and working of the Daniell cell, and explain the role of each component.",
+      "answer": "The Daniell cell consists of a zinc rod dipping into zinc sulphate solution and a copper rod dipping into copper sulphate solution, the two solutions being connected by a salt bridge. Zinc, the more reactive metal, is oxidised at the anode, Zn gives Zn2+ + 2e-, and the electrons travel through the external circuit to the copper cathode, where copper ions are reduced, Cu2+ + 2e- gives Cu. The overall reaction is Zn + Cu2+ gives Zn2+ + Cu, which is spontaneous and gives a standard EMF of 1.10 V. The salt bridge allows ions to migrate between the compartments so that electrical neutrality is maintained, and the voltmeter measures the potential difference without drawing appreciable current. The zinc electrode gradually dissolves while copper is deposited on the copper electrode.",
+      "explanation": "Separating the two half-reactions prevents the oxidant and reductant from reacting directly, so the electron transfer is forced through the external circuit where it can do work.",
+      "commonMistake": "Describing the salt bridge as the path for electrons rather than for ions."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain the variation of molar conductance with concentration for strong and weak electrolytes, and state Kohlrausch's law and one use of it.",
+      "answer": "For a strong electrolyte the molar conductance increases only slightly on dilution and the graph of molar conductance against the square root of concentration is a straight line that can be extrapolated to give the limiting molar conductance at infinite dilution. For a weak electrolyte the molar conductance rises steeply as the concentration approaches zero because dilution increases the degree of dissociation, and the curve cannot be extrapolated reliably. Kohlrausch's law states that at infinite dilution the molar conductance of an electrolyte is the sum of the limiting molar conductances of its constituent ions. It is used to calculate the limiting molar conductance of a weak electrolyte from strong electrolytes containing the same ions, for example acetic acid from sodium acetate, hydrochloric acid and sodium chloride, and hence to find its degree of dissociation.",
+      "explanation": "At infinite dilution the ions are so far apart that they do not interact, so each ion contributes independently and the contributions are additive.",
+      "commonMistake": "Stating that molar conductance decreases on dilution."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-18",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Explain the electrochemical mechanism of rusting of iron and describe two methods used to prevent it.",
+      "answer": "Rusting is an electrochemical process that requires both oxygen and water. At an anodic region of the iron surface the metal is oxidised, Fe gives Fe2+ + 2e-, and the electrons travel through the iron to a cathodic region where dissolved oxygen and water are reduced, O2 + 2H2O + 4e- gives 4OH-. The iron(II) ions and hydroxide ions meet and precipitate iron(II) hydroxide, which is oxidised by air to hydrated iron(III) oxide, the reddish-brown rust. Prevention follows from breaking either the electrical contact or the supply of water and oxygen. Painting or oiling forms a barrier that excludes water and oxygen, and galvanising coats the iron with zinc, which is more reactive and corrodes preferentially, protecting the iron even where the coating is scratched.",
+      "explanation": "Because the process is a galvanic couple on the metal surface, anything that prevents the anodic or cathodic half-reaction stops the corrosion, which is why barrier coatings and sacrificial coatings both work.",
+      "commonMistake": "Claiming that rusting is a direct combination of iron with oxygen that needs no water."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Calculate the standard EMF of a cell in which the reaction is Fe + Cu2+ gives Fe2+ + Cu, given E°(Fe2+/Fe) = -0.44 V and E°(Cu2+/Cu) = +0.34 V. Also calculate delta G° for the reaction.",
+      "answer": "Iron is oxidised and copper is reduced, so E°cell = 0.34 - (-0.44) = 0.78 V with n = 2. Then delta G° = -n F E° = -2 x 96500 x 0.78 = -150540 J mol^-1, about -150.5 kJ mol^-1.",
+      "explanation": "The cathode potential minus the anode potential gives the standard EMF, and the Gibbs energy follows from the two-electron transfer. The negative Gibbs energy confirms that iron displaces copper from solution.",
+      "commonMistake": "Subtracting in the wrong order, which gives -0.78 V and a non-spontaneous conclusion."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "The conductivity of a 0.02 M solution of an electrolyte is 2.4 x 10^-3 S cm^-1. Calculate its molar conductance.",
+      "answer": "Lambda_m = 1000 kappa / M = 1000 x 2.4 x 10^-3 / 0.02 = 2.4 / 0.02 = 120 S cm^2 mol^-1.",
+      "explanation": "The factor 1000 converts litres to cubic centimetres, and dividing by the molarity converts the conductance of the solution into the conductance per mole of electrolyte.",
+      "commonMistake": "Omitting the 1000 and reporting 0.12 S cm^2 mol^-1."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A current of 3.0 A is passed through acidified water for 30 minutes. Calculate the volume of hydrogen and of oxygen liberated at 298 K and 1 bar, taking the molar volume as 24.5 L mol^-1.",
+      "answer": "Charge = 3.0 x 1800 = 5400 C, so moles of electrons = 5400 / 96500 = 0.0560 mol. Hydrogen is produced by 2H+ + 2e- gives H2, so moles of hydrogen = 0.0280 mol and its volume is 0.0280 x 24.5 = 0.686 L. Oxygen is produced by 2H2O gives O2 + 4H+ + 4e-, so moles of oxygen = 0.0560 / 4 = 0.0140 mol and its volume is 0.0140 x 24.5 = 0.343 L, exactly half the volume of hydrogen.",
+      "explanation": "The volume ratio follows from the stoichiometry of the two electrode reactions: four electrons give one molecule of oxygen but two molecules of hydrogen, so hydrogen is produced in twice the amount.",
+      "commonMistake": "Using the same number of electrons for both gases and obtaining equal volumes."
+    },
+    {
+      "id": "isc-12-chem-q-electrochemistry-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "For a cell reaction with n = 2 and E°cell = 0.46 V, calculate the equilibrium constant at 298 K and state whether the reaction is spontaneous under standard conditions.",
+      "answer": "log K = n E° / 0.0591 = 2 x 0.46 / 0.0591 = 0.92 / 0.0591 = 15.57, so K = 10^15.57 = 3.7 x 10^15. The positive E° and the very large equilibrium constant show that the reaction goes almost to completion and is strongly spontaneous under standard conditions.",
+      "explanation": "The relation log K = n E° / 0.0591 follows from setting E = 0 and Q = K in the Nernst equation. A large positive E° therefore corresponds to a large equilibrium constant.",
+      "commonMistake": "Forgetting the factor n, which changes the exponent by a factor of two."
+    }
+  ]
+}

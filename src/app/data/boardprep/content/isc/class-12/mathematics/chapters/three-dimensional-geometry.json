@@ -1,0 +1,672 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-maths-ch-three-dimensional-geometry",
+  "title": "Three-Dimensional Geometry",
+  "kind": "mathematics",
+  "tagline": "Direction cosines, lines in space, skew lines, planes and the angles and distances between them.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Mathematics syllabus (Unit 5 — Three-Dimensional Geometry; subject code 860, examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Topic selection follows the Unit 5 description in the ISC Mathematics (860) 2027 syllabus, read from a publicly hosted copy of the syllabus document rather than the cisce.org original, so the exact wording of the unit description is UNVERIFIED in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC Mathematics (860) syllabus for examinations in 2027; no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Unit 5 carries 6 of the 80 theory marks and turns the vectors of Unit 4 into equations. A direction in space is fixed by direction ratios, and the direction cosines are the cosines of the angles the line makes with the axes, tied together by l² + m² + n² = 1. A line is then a point plus a direction, written either in vector form r = a + λb or in Cartesian symmetric form. Two lines in space need not meet at all: lines that are neither parallel nor intersecting are skew, and the shortest distance between them is measured along their common perpendicular. A plane is a point plus a normal, and the same dot product that gave projections now gives the angle between two planes, the angle between a line and a plane, and the perpendicular distance from a point to a plane.",
+    "facts": [
+      { "label": "Unit weightage", "value": "6 of 80 theory marks" },
+      { "label": "Paper I", "value": "Theory, 3 hours, 80 marks" },
+      { "label": "Paper II", "value": "Project work, 20 marks" },
+      { "label": "Examination year", "value": "2027" },
+      { "label": "Syllabus structure", "value": "Seven compulsory units, no optional section" }
+    ]
+  },
+  "learningOutcomes": [
+    "Find the distance between two points in space and write the direction ratios and direction cosines of the line joining them.",
+    "Use the relation l² + m² + n² = 1 to find an unknown direction cosine and to test a triple of numbers for being direction cosines.",
+    "Write the vector and Cartesian equations of a line through a point and parallel to a given vector, and of a line through two points.",
+    "Find the angle between two lines and apply the conditions for parallel and perpendicular lines.",
+    "Decide whether two lines intersect, are parallel or are skew, and find the shortest distance between skew lines.",
+    "Write the equation of a plane in normal, general and intercept form, including the coordinate planes, and find a plane through three points.",
+    "Find the angle between two planes, the angle between a line and a plane, and the distance of a point from a plane, including the foot of the perpendicular."
+  ],
+  "learn": [
+    {
+      "id": "coordinates-direction-ratios-and-cosines",
+      "title": "Points in space: distance, direction ratios and direction cosines",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A point in space is fixed by three coordinates measured along three mutually perpendicular axes meeting at the origin. The distance between P(x₁, y₁, z₁) and Q(x₂, y₂, z₂) is the length of the vector PQ, so it is the square root of the sum of the squares of the differences of the coordinates. The same difference vector supplies the direction of the line PQ: its components are direction ratios, and dividing them by the length turns them into direction cosines."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Distance: PQ = √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²).",
+            "Direction ratios of PQ are the components x₂ − x₁, y₂ − y₁, z₂ − z₁; any non-zero multiple of them describes the same direction.",
+            "Direction cosines are l = (x₂ − x₁)/PQ, m = (y₂ − y₁)/PQ and n = (z₂ − z₁)/PQ, the cosines of the angles the line makes with the positive x, y and z axes.",
+            "Fundamental relation: l² + m² + n² = 1 for every line, because the three squared cosines add to the squared length divided by itself.",
+            "Direction ratios need not satisfy any relation, but the direction cosines obtained from them must; numbers satisfying l² + m² + n² = 1 are direction cosines only if they also correspond to a real direction, which they always do in space.",
+            "The coordinate axes have direction cosines (1, 0, 0), (0, 1, 0) and (0, 0, 1), and the coordinate planes are x = 0, y = 0 and z = 0."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Direction ratios and direction cosines of a line joining two points",
+          "columns": ["Quantity", "Formula", "Relation between them"],
+          "rows": [
+            ["Direction ratios", "a = x₂ − x₁, b = y₂ − y₁, c = z₂ − z₁", "Any non-zero multiple gives the same line direction"],
+            ["Length PQ", "√(a² + b² + c²)", "Always positive for distinct points"],
+            ["Direction cosines", "l = a/PQ, m = b/PQ, n = c/PQ", "l² + m² + n² = 1"],
+            ["Angle with an axis", "cos α = l, cos β = m, cos γ = n", "α, β, γ lie in [0, π]"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the distance and the direction cosines of the line joining A(1, 2, 3) and B(4, 6, 3).",
+              "note": "AB = (3, 4, 0) and AB = √(9 + 16 + 0) = 5, so the distance is 5 units and the direction cosines are (3/5, 4/5, 0). The third cosine being zero means the line is parallel to the xy-plane, which is consistent with both points having z = 3."
+            },
+            {
+              "text": "A line makes angles 90° and 60° with the positive x and y axes. Find the possible angles with the z axis.",
+              "note": "Using l² + m² + n² = 1, we get 0 + 1/4 + n² = 1, so n² = 3/4 and n = ±√3/2. Hence γ = 30° or γ = 150°. Both are genuine solutions because a direction cosine may be negative, corresponding to a line pointing into the lower half-space."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations-of-a-line",
+      "title": "Equations of a line, and the angle between two lines",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A line is determined by one point on it and one direction. In vector form, if the line passes through the point with position vector a and is parallel to b, then every point on it has position vector r = a + λb for some real λ. Writing the three components separately gives the Cartesian equations, usually presented in symmetric form with the direction ratios in the denominators."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Vector form: r = a + λb, where a is the position vector of a point on the line and b is any vector parallel to it.",
+            "Cartesian form through (x₁, y₁, z₁) with direction ratios a, b, c: (x − x₁)/a = (y − y₁)/b = (z − z₁)/c.",
+            "Through two points: (x − x₁)/(x₂ − x₁) = (y − y₁)/(y₂ − y₁) = (z − z₁)/(z₂ − z₁), using the difference vector as the direction.",
+            "If one direction ratio is zero, the symmetric form is not written with a zero denominator; for example a line parallel to the xy-plane with c = 0 is described by (x − x₁)/a = (y − y₁)/b and z = z₁.",
+            "The coordinate axes are the lines y = z = 0 (x-axis), z = x = 0 (y-axis) and x = y = 0 (z-axis); a line parallel to the x-axis through (x₁, y₁, z₁) has y = y₁ and z = z₁.",
+            "Angle between two lines: cos θ = |b₁·b₂|/(|b₁||b₂|), using the absolute value so that the acute angle is reported.",
+            "Parallel lines have b₁ = λb₂, so their direction ratios are proportional; perpendicular lines have b₁·b₂ = 0."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Forms of the equation of a line",
+          "columns": ["Form", "Equation", "Data needed"],
+          "rows": [
+            ["Vector", "r = a + λb", "A point a and a parallel vector b"],
+            ["Cartesian symmetric", "(x − x₁)/a = (y − y₁)/b = (z − z₁)/c", "A point and the direction ratios"],
+            ["Through two points", "(x − x₁)/(x₂ − x₁) = (y − y₁)/(y₂ − y₁) = (z − z₁)/(z₂ − z₁)", "The two points"],
+            ["Parallel to an axis", "Two fixed coordinates and one free", "The axis and the fixed coordinates"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the vector and Cartesian equations of the line through (1, 2, 3) parallel to 2i − j + 2k.",
+              "note": "Vector form: r = (i + 2j + 3k) + λ(2i − j + 2k). Cartesian form: (x − 1)/2 = (y − 2)/(−1) = (z − 3)/2. Any non-zero multiple of (2, −1, 2) may replace these direction ratios without changing the line."
+            },
+            {
+              "text": "Find the angle between the lines with direction ratios (1, 2, 2) and (2, −2, 1).",
+              "note": "The dot product is 2 − 4 + 2 = 0, so the cosine of the angle is 0 and the lines are perpendicular, meeting at π/2. Each direction vector has length 3, but that is irrelevant once the dot product vanishes."
+            },
+            {
+              "text": "Find the angle between the line with direction ratios (1, 2, 2) and the line joining (1, 0, 0) to (2, 2, 2).",
+              "note": "The second direction is (1, 2, 2), identical to the first, so the lines are parallel and the angle is 0. Identical direction ratios, not merely proportional ones with the same sign, give parallel lines."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "skew-lines-and-shortest-distance",
+      "title": "Intersecting, parallel and skew lines and the shortest distance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Two lines in space may be parallel, may intersect at a point, or may do neither. The third case is new in three dimensions and cannot occur in a plane: such lines are skew. For two lines r = a₁ + λb₁ and r = a₂ + μb₂, the vector a₂ − a₁ joins a point of the first line to a point of the second. The scalar (a₂ − a₁)·(b₁ × b₂) measures how far the second line is displaced out of the plane containing the first line and the direction b₂, and when it is zero the lines are coplanar and therefore meet or are parallel."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The lines intersect, and are therefore coplanar, exactly when (a₂ − a₁)·(b₁ × b₂) = 0 and b₁ is not parallel to b₂.",
+            "If b₁ × b₂ = 0 the lines are parallel; they are then either distinct or coincident, and the distance between them is |(a₂ − a₁) × b₁|/|b₁|.",
+            "Shortest distance between skew lines: d = |(a₂ − a₁)·(b₁ × b₂)|/|b₁ × b₂|. The numerator is a scalar triple product and the denominator is the area of the parallelogram on the two directions.",
+            "The shortest distance is measured along the common perpendicular, which is parallel to b₁ × b₂.",
+            "In Cartesian form, the same formula is used with a₂ − a₁ as the vector between the two stated points and (a₁, b₁, c₁), (a₂, b₂, c₂) as the two direction triples.",
+            "If the computed distance is zero, the lines intersect; a non-zero distance with non-proportional directions means the lines are skew."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the shortest distance between r = (i + 2j + k) + λ(i − j + k) and r = (2i − j − k) + μ(2i + j + 2k).",
+              "note": "Here a₂ − a₁ = i − 3j − 2k and b₁ × b₂ = (1, −1, 1) × (2, 1, 2) = (−3, 0, 3), so |b₁ × b₂| = 3√2. The scalar product is (1)(−3) + (−3)(0) + (−2)(3) = −9, so d = 9/(3√2) = 3√2/2 units. The directions are not proportional, so the lines are skew."
+            },
+            {
+              "text": "Show that the lines r = (i + j) + λ(2i − j + k) and r = (2i + 3j) + μ(4i − 2j + 2k) are parallel and find the distance between them.",
+              "note": "The second direction is twice the first, so the lines are parallel. Here a₂ − a₁ = i + 2j and b = 2i − j + k. Then (a₂ − a₁) × b = (2·1 − 0·(−1))i − (1·1 − 0·2)j + (1(−1) − 2·2)k = 2i − j − 5k, whose magnitude is √30, and |b| = √6, so the distance is √30/√6 = √5 units."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations-of-a-plane",
+      "title": "Equations of a plane in normal, general and intercept form",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A plane is fixed by a point on it and a vector perpendicular to it, called the normal. If n is a normal and the plane passes through the point with position vector a, then every point r of the plane satisfies (r − a)·n = 0, which expands to r·n = a·n = d. In coordinates this becomes ax + by + cz = d, and dividing by d when it is non-zero produces the intercept form."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Vector normal form: r·n = d, where n is perpendicular to the plane and d = a·n for any point a on it.",
+            "Cartesian general form: ax + by + cz = d, with normal vector ai + bj + ck.",
+            "Intercept form: x/p + y/q + z/r = 1, where p, q and r are the non-zero intercepts on the three axes.",
+            "The coordinate planes are z = 0 (the xy-plane, normal k), y = 0 (the xz-plane, normal j) and x = 0 (the yz-plane, normal i).",
+            "A plane through three non-collinear points A, B, C has normal AB × AC, and its equation follows from (r − OA)·(AB × AC) = 0.",
+            "A plane parallel to a given plane ax + by + cz = d has the same normal, so its equation is ax + by + cz = d′ for a different constant d′.",
+            "A plane through the intersection of two planes is written as a linear combination of their equations; this is a convenient construction when the intersection line is known."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Standard plane equations and the data they need",
+          "columns": ["Form", "Equation", "Data needed"],
+          "rows": [
+            ["Normal (vector)", "r·n = d", "A normal n and the constant d"],
+            ["General (Cartesian)", "ax + by + cz = d", "Components of the normal and d"],
+            ["Intercept", "x/p + y/q + z/r = 1", "The three non-zero axis intercepts"],
+            ["Through a point, given normal", "a(x − x₁) + b(y − y₁) + c(z − z₁) = 0", "A point and the normal"],
+            ["Through three points", "(r − OA)·(AB × AC) = 0", "Three non-collinear points"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the equation of the plane through (1, 2, 3) with normal 2i − j + 2k.",
+              "note": "The condition is 2(x − 1) − (y − 2) + 2(z − 3) = 0, which simplifies to 2x − y + 2z = 6. Substituting (1, 2, 3) back gives 2 − 2 + 6 = 6, confirming that the point lies on the plane."
+            },
+            {
+              "text": "Find the plane through the points A(1, 2, 3), B(2, 1, 4) and C(4, 0, 1).",
+              "note": "AB = i − j + k and AC = 3i − 2j − 2k, so AB × AC = 4i + 5j + k. Using A, the plane is 4(x − 1) + 5(y − 2) + (z − 3) = 0, that is 4x + 5y + z = 17. Substituting B and C checks the equation: 8 + 5 + 4 = 17 and 16 + 0 + 1 = 17."
+            },
+            {
+              "text": "Find the intercepts of the plane 2x + 3y + 4z = 12 on the axes.",
+              "note": "Setting y = z = 0 gives x = 6; setting x = z = 0 gives y = 4; setting x = y = 0 gives z = 3. The intercept form is therefore x/6 + y/4 + z/3 = 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angles-and-distances-with-planes",
+      "title": "Angles between planes and lines, and distance from a plane",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Angles involving planes are angles between vectors. The angle between two planes is the angle between their normals, and the angle between a line and a plane is the complement of the angle between the line and the normal, which is why a sine appears in the formula. The distance from a point to a plane is the length of the perpendicular, obtained by projecting the vector from any point of the plane to the given point onto the normal."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Angle between planes r·n₁ = d₁ and r·n₂ = d₂: cos θ = |n₁·n₂|/(|n₁||n₂|).",
+            "Perpendicular planes: n₁·n₂ = 0. Parallel planes: n₁ = λn₂, and they coincide only if the constants agree after scaling.",
+            "Angle between the line r = a + λb and the plane r·n = d: sin θ = |b·n|/(|b||n|), where θ is the angle between the line and the plane.",
+            "A line is parallel to a plane exactly when b·n = 0, and perpendicular to it when b is parallel to n.",
+            "Distance of the point (x₀, y₀, z₀) from ax + by + cz = d: |ax₀ + by₀ + cz₀ − d|/√(a² + b² + c²).",
+            "Distance between two parallel planes ax + by + cz = d₁ and ax + by + cz = d₂: |d₁ − d₂|/√(a² + b² + c²), after making the coefficients identical.",
+            "The foot of the perpendicular from a point to a plane is found by moving from the point along the normal by the signed distance, and the distance itself is the absolute value."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Formulae for angles and distances in three dimensions",
+          "columns": ["Quantity", "Formula", "Note"],
+          "rows": [
+            ["Angle between lines", "cos θ = |b₁·b₂|/(|b₁||b₂|)", "Uses direction vectors"],
+            ["Angle between planes", "cos θ = |n₁·n₂|/(|n₁||n₂|)", "Uses normal vectors"],
+            ["Angle between line and plane", "sin θ = |b·n|/(|b||n|)", "Complement of the angle with the normal"],
+            ["Point to plane distance", "|ax₀ + by₀ + cz₀ − d|/√(a² + b² + c²)", "Absolute value makes it non-negative"]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the distance of the point (1, 2, 3) from the plane 2x − 2y + z = 5.",
+              "note": "Substituting, 2 − 4 + 3 − 5 = −4 and √(4 + 4 + 1) = 3, so the distance is 4/3 units. The negative value inside the absolute value means the point lies on the side of the plane opposite to the direction of the normal."
+            },
+            {
+              "text": "Find the angle between the planes 2x + y − 2z = 8 and x + 2y + 2z = 10.",
+              "note": "The normals are (2, 1, −2) and (1, 2, 2), whose dot product is 2 + 2 − 4 = 0. The planes are therefore perpendicular and the angle between them is π/2, so no inverse cosine needs to be evaluated."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "line-plane-intersection",
+      "title": "Intersection of a line and a plane, and the foot of the perpendicular",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A line and a plane have three possible relationships: the line may lie in the plane, meet it at exactly one point, or be parallel to it without meeting. Substituting the parametric form of the line into the equation of the plane decides which case holds and produces the intersection point when there is one. The same substitution technique gives the foot of the perpendicular from a point to a plane, which is the point used to measure the distance."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Substitute r = a + λb into r·n = d to obtain a single equation (a·n) + λ(b·n) = d.",
+            "If b·n ≠ 0 there is exactly one solution λ, so the line meets the plane at one point.",
+            "If b·n = 0 and a·n = d, every point of the line satisfies the plane equation, so the line lies in the plane.",
+            "If b·n = 0 and a·n ≠ d, the equation has no solution and the line is parallel to the plane but not contained in it.",
+            "Foot of the perpendicular from P to a plane: write the line through P along the normal, substitute into the plane equation, and solve for the parameter.",
+            "The distance from P to the plane is the length of the segment from P to that foot, and it agrees with the direct distance formula."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find where the line r = (i + j + k) + λ(2i − j + 2k) meets the plane r·(2i + j − k) = 3.",
+              "note": "Substituting gives (2 + 1 − 1) + λ(4 − 1 − 2) = 3, that is 2 + λ = 3, so λ = 1. The point is (1 + 2, 1 − 1, 1 + 2) = (3, 0, 3). Checking in the plane equation, 6 + 0 − 3 = 3, as required."
+            },
+            {
+              "text": "Find the foot of the perpendicular from P(1, 2, 3) to the plane 2x − y + 2z = 9.",
+              "note": "The normal is (2, −1, 2) and the signed distance from P is (2 − 2 + 6 − 9)/3 = −1. Moving from P along the normal by 1 unit in the positive normal direction gives (1, 2, 3) + (1/3)(2, −1, 2) = (5/3, 5/3, 11/3). Substituting confirms 10/3 − 5/3 + 22/3 = 27/3 = 9, so the foot lies on the plane and the distance is 1 unit."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "The distance between P(x₁, y₁, z₁) and Q(x₂, y₂, z₂) is √((x₂ − x₁)² + (y₂ − y₁)² + (z₂ − z₁)²).",
+    "Direction ratios are the components of a direction vector; direction cosines are those components divided by the length, and l² + m² + n² = 1.",
+    "A line is r = a + λb in vector form, or (x − x₁)/a = (y − y₁)/b = (z − z₁)/c in Cartesian form.",
+    "The angle between two lines satisfies cos θ = |b₁·b₂|/(|b₁||b₂|); parallel lines have proportional directions and perpendicular lines have a zero dot product.",
+    "Two lines are coplanar exactly when (a₂ − a₁)·(b₁ × b₂) = 0; otherwise they are skew.",
+    "The shortest distance between skew lines is |(a₂ − a₁)·(b₁ × b₂)|/|b₁ × b₂|, measured along the common perpendicular.",
+    "A plane is r·n = d or ax + by + cz = d, with n = ai + bj + ck; the coordinate planes are x = 0, y = 0 and z = 0.",
+    "The angle between two planes satisfies cos θ = |n₁·n₂|/(|n₁||n₂|), and the angle between a line and a plane satisfies sin θ = |b·n|/(|b||n|).",
+    "The distance of (x₀, y₀, z₀) from ax + by + cz = d is |ax₀ + by₀ + cz₀ − d|/√(a² + b² + c²).",
+    "Substituting the parametric line into the plane equation decides whether the line meets the plane, lies in it, or is parallel to it."
+  ],
+  "examFocus": [
+    "Finding direction cosines from two points and using l² + m² + n² = 1 to complete a set.",
+    "Writing the equation of a line through one point or through two points in both vector and Cartesian form.",
+    "Finding the angle between two lines from their direction ratios, with the absolute value ensuring an acute angle.",
+    "Testing whether two lines intersect by solving their equations simultaneously, and identifying the skew case when no solution exists.",
+    "Applying the shortest-distance formula for skew lines, including careful evaluation of the scalar triple product.",
+    "Finding the equation of a plane through three points by taking the cross product of two side vectors.",
+    "Finding the angle between two planes, or between a line and a plane, from the normals rather than from the lines themselves.",
+    "Finding the distance of a point from a plane and the coordinates of the foot of the perpendicular."
+  ],
+  "vocabulary": [
+    { "word": "Direction ratios", "meaning": "Three numbers proportional to the components of a direction vector." },
+    { "word": "Direction cosines", "meaning": "The cosines of the angles a line makes with the positive coordinate axes." },
+    { "word": "Symmetric form", "meaning": "The Cartesian form of a line equation with the direction ratios in the denominators." },
+    { "word": "Skew lines", "meaning": "Lines in space that are neither parallel nor intersecting." },
+    { "word": "Coplanar lines", "meaning": "Lines that lie in a single common plane, and therefore meet or are parallel." },
+    { "word": "Common perpendicular", "meaning": "The line perpendicular to both skew lines, along which their shortest distance is measured." },
+    { "word": "Normal vector", "meaning": "A vector perpendicular to a plane, whose components are the coefficients in the plane equation." },
+    { "word": "Intercept form", "meaning": "The plane equation x/p + y/q + z/r = 1 written using its three axis intercepts." },
+    { "word": "Collinear points", "meaning": "Points lying on one straight line." },
+    { "word": "Coplanar points", "meaning": "Points lying in one plane." },
+    { "word": "Foot of the perpendicular", "meaning": "The point where the perpendicular from a point meets a plane or line." },
+    { "word": "Angle between a line and a plane", "meaning": "The angle between the line and its projection on the plane, whose sine is |b·n|/(|b||n|)." },
+    { "word": "Scalar triple product", "meaning": "The number (a₂ − a₁)·(b₁ × b₂) measuring the displacement of one line out of the plane of the other." },
+    { "word": "Parallel planes", "meaning": "Planes with proportional normal vectors and different constants." },
+    { "word": "Position vector", "meaning": "The vector from the origin to a point, used as a in the equation r = a + λb." }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Direction cosines of a line as angles with the three axes",
+      "description": "A line is drawn through the origin with its direction vector marked, and the angles α, β and γ that it makes with the positive x, y and z axes are shown one at a time in three small panels. The cosines of these angles are labelled l, m and n, and the relation l² + m² + n² = 1 is written beside them, since the three squared components of a unit direction add to one.",
+      "labels": [
+        "line through the origin",
+        "direction vector of the line",
+        "angle α with the x-axis",
+        "angle β with the y-axis",
+        "angle γ with the z-axis",
+        "direction cosines l, m, n",
+        "relation l² + m² + n² = 1"
+      ]
+    },
+    {
+      "caption": "Figure: Two skew lines and their common perpendicular",
+      "description": "Two lines are drawn in different directions, one above the other and not meeting however far they are extended. A short segment joins the nearest pair of points, one on each line, and is marked as perpendicular to both. The direction of this segment is parallel to the cross product of the two direction vectors, and the figure labels its length as the shortest distance between the lines.",
+      "labels": [
+        "first line with direction b₁",
+        "second line with direction b₂",
+        "lines not parallel and not meeting",
+        "common perpendicular segment",
+        "shortest distance d",
+        "direction parallel to b₁ × b₂",
+        "points of nearest approach"
+      ]
+    },
+    {
+      "caption": "Figure: Plane with normal vector and the perpendicular distance from a point",
+      "description": "A plane is drawn as a tilted rectangle with its normal vector n rising from a point on it. A point P lies off the plane, and a dashed segment drops from P perpendicular to the plane, meeting it at the foot Q. The angle between n and the vector from the plane to P is marked, and the length PQ is labelled as the distance from the point to the plane, equal to the projection of that vector onto the unit normal.",
+      "labels": [
+        "plane with normal n",
+        "point P off the plane",
+        "foot Q of the perpendicular",
+        "distance PQ",
+        "angle between n and the vector to P",
+        "projection onto the unit normal"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-maths-q-3d-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The direction cosines of the line joining the points (1, 2, 3) and (4, 6, 3) are",
+      "options": [
+        "(3/5, 4/5, 0)",
+        "(3, 4, 0)",
+        "(3/5, 4/5, 1)",
+        "(1/5, 4/5, 0)"
+      ],
+      "correctIndex": 0,
+      "answer": "(3/5, 4/5, 0)",
+      "explanation": "The direction ratios are (4 − 1, 6 − 2, 3 − 3) = (3, 4, 0), whose length is √(9 + 16) = 5. Dividing each ratio by 5 gives (3/5, 4/5, 0), and the squares add to 9/25 + 16/25 = 1.",
+      "commonMistake": "Reporting the direction ratios (3, 4, 0) as direction cosines without dividing by the length."
+    },
+    {
+      "id": "isc-12-maths-q-3d-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If l, m and n are the direction cosines of a line, then l² + m² + n² is equal to",
+      "options": [
+        "zero",
+        "one",
+        "two",
+        "three"
+      ],
+      "correctIndex": 1,
+      "answer": "one",
+      "explanation": "The direction cosines are the components of a unit vector along the line, so their squares must add to the square of its length, which is 1. This relation is the standard way to find a missing direction cosine.",
+      "commonMistake": "Confusing the sum of the squares with the sum of the cosines, which has no fixed value."
+    },
+    {
+      "id": "isc-12-maths-q-3d-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The angle between the lines with direction ratios (1, 2, 2) and (2, −2, 1) is",
+      "options": [
+        "0",
+        "π/3",
+        "π/2",
+        "π/4"
+      ],
+      "correctIndex": 2,
+      "answer": "π/2",
+      "explanation": "The dot product of the direction vectors is (1)(2) + (2)(−2) + (2)(1) = 2 − 4 + 2 = 0. A zero dot product means the cosine of the angle is zero, so the lines are perpendicular and the angle is π/2.",
+      "commonMistake": "Computing the angle as cos⁻¹(0/9) and treating the zero as an error instead of recognising perpendicularity."
+    },
+    {
+      "id": "isc-12-maths-q-3d-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The shortest distance between two skew lines is measured along",
+      "options": [
+        "the line joining their midpoints",
+        "the direction of the first line",
+        "the normal to both lines",
+        "the common perpendicular"
+      ],
+      "correctIndex": 3,
+      "answer": "the common perpendicular",
+      "explanation": "The shortest segment joining two skew lines is perpendicular to both of them, which is why its length is computed by projecting the vector between the lines onto the direction of b₁ × b₂. Any other joining segment is longer.",
+      "commonMistake": "Assuming the shortest segment joins the midpoints of the given finite portions, which is true only in special symmetric configurations."
+    },
+    {
+      "id": "isc-12-maths-q-3d-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance of the point (1, 2, 3) from the plane 2x − 2y + z = 5 is",
+      "options": [
+        "4/3 units",
+        "4 units",
+        "2/3 units",
+        "12 units"
+      ],
+      "correctIndex": 0,
+      "answer": "4/3 units",
+      "explanation": "Substituting the point into the plane expression gives 2 − 4 + 3 − 5 = −4, and the normal has length √(4 + 4 + 1) = 3. The distance is |−4|/3 = 4/3 units.",
+      "commonMistake": "Forgetting to divide by the length of the normal and answering 4 units."
+    },
+    {
+      "id": "isc-12-maths-q-3d-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The equation of the plane whose intercepts on the x, y and z axes are 2, 3 and 4 respectively is",
+      "options": [
+        "x/2 + y/3 + z/4 = 0",
+        "x/2 + y/3 + z/4 = 1",
+        "2x + 3y + 4z = 1",
+        "x/4 + y/3 + z/2 = 1"
+      ],
+      "correctIndex": 1,
+      "answer": "x/2 + y/3 + z/4 = 1",
+      "explanation": "The intercept form is x/p + y/q + z/r = 1 with p, q, r the intercepts on the three axes, so here it is x/2 + y/3 + z/4 = 1. Setting y = z = 0 gives x = 2, confirming the x-intercept.",
+      "commonMistake": "Writing the intercepts as coefficients of x, y and z, which corresponds to a different plane entirely."
+    },
+    {
+      "id": "isc-12-maths-q-3d-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The direction ratios of the line x = 1 + 2λ, y = 2 − λ, z = 3 + 2λ are",
+      "options": [
+        "(1, 2, 3)",
+        "(2, 1, 2)",
+        "(2, −1, 2)",
+        "(−2, 1, −2)"
+      ],
+      "correctIndex": 2,
+      "answer": "(2, −1, 2)",
+      "explanation": "The direction ratios are the coefficients of the parameter λ in the three parametric equations, so they are 2, −1 and 2. The numbers (1, 2, 3) are the coordinates of the point through which the line passes.",
+      "commonMistake": "Reading the constant terms as the direction ratios and the coefficients as the point."
+    },
+    {
+      "id": "isc-12-maths-q-3d-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A line makes angles 90° and 60° with the positive x and y axes. The angle it makes with the positive z axis is",
+      "options": [
+        "60° or 120°",
+        "45° or 135°",
+        "90°",
+        "30° or 150°"
+      ],
+      "correctIndex": 3,
+      "answer": "30° or 150°",
+      "explanation": "Using l² + m² + n² = 1, we have 0 + 1/4 + n² = 1, so n² = 3/4 and n = ±√3/2. The angle with the z axis therefore satisfies cos γ = ±√3/2, giving γ = 30° or γ = 150°, and both are possible because the line may point upwards or downwards.",
+      "commonMistake": "Taking only the positive root and reporting 30°, which loses the second valid orientation of the line."
+    },
+    {
+      "id": "isc-12-maths-q-3d-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The direction cosines of the z-axis are ______.",
+      "answer": "(0, 0, 1)",
+      "explanation": "The z-axis makes an angle of 90° with the x-axis, 90° with the y-axis and 0° with the z-axis, so its direction cosines are cos 90°, cos 90° and cos 0°, that is (0, 0, 1). The squares add to 1, as required.",
+      "commonMistake": "Writing (1, 0, 0), which are the direction cosines of the x-axis."
+    },
+    {
+      "id": "isc-12-maths-q-3d-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The plane r·(2i + 3j − k) = 7 has normal vector ______.",
+      "answer": "2i + 3j − k",
+      "explanation": "In the normal form r·n = d, the vector n multiplying r is the normal to the plane. Here n = 2i + 3j − k, so the plane is perpendicular to that vector and 7 is the projection of any of its points onto it.",
+      "commonMistake": "Reading the constant 7 as part of the normal, which would give a different plane."
+    },
+    {
+      "id": "isc-12-maths-q-3d-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The distance between the parallel planes 2x − y + 2z = 8 and 2x − y + 2z = −4 is ______.",
+      "answer": "4 units",
+      "explanation": "The coefficients are already identical, so the distance is |8 − (−4)|/√(4 + 1 + 4) = 12/3 = 4. Writing the second plane as 2x − y + 2z + 4 = 0 and applying the point-to-plane formula to any point of the first plane gives the same value.",
+      "commonMistake": "Adding the constants instead of subtracting them, or omitting the division by the length 3 of the normal."
+    },
+    {
+      "id": "isc-12-maths-q-3d-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the distance between the points A(1, 2, 3) and B(4, 6, 3).",
+      "answer": "AB = √((4 − 1)² + (6 − 2)² + (3 − 3)²) = √(9 + 16 + 0) = √25 = 5, so the distance is 5 units.",
+      "explanation": "The z-coordinates are equal, so the segment lies in a plane parallel to the xy-plane and the distance reduces to the two-dimensional distance √(3² + 4²). The three-dimensional formula gives the same value because the third difference is zero.",
+      "commonMistake": "Adding the differences instead of their squares and obtaining √7."
+    },
+    {
+      "id": "isc-12-maths-q-3d-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the direction cosines of the line joining the points (2, −1, 3) and (4, 3, 1).",
+      "answer": "The direction ratios are (4 − 2, 3 − (−1), 1 − 3) = (2, 4, −2), whose length is √(4 + 16 + 4) = √24 = 2√6. The direction cosines are therefore (2/(2√6), 4/(2√6), −2/(2√6)) = (1/√6, 2/√6, −1/√6).",
+      "explanation": "Each direction ratio is divided by the same length, so the three results have squares adding to 1. The negative third component means the line points in the negative z direction as the parameter increases.",
+      "commonMistake": "Dividing by √24 without simplifying the factor 2, then failing to check that l² + m² + n² = 1."
+    },
+    {
+      "id": "isc-12-maths-q-3d-14",
+      "type": "short",
+      "difficulty": "hard",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the angle between the line with direction ratios (1, 2, 2) and the plane 2x − y + 2z = 5.",
+      "answer": "The direction vector is b = (1, 2, 2) with |b| = 3, and the plane has normal n = (2, −1, 2) with |n| = 3. Then sin θ = |b·n|/(|b||n|) = |2 − 2 + 4|/9 = 4/9, so θ = sin⁻¹(4/9).",
+      "explanation": "The angle between a line and a plane is the complement of the angle between the line and the normal, so the cosine formula for vectors becomes a sine formula here. Using the dot product without switching to sine would give the angle with the normal instead.",
+      "commonMistake": "Reporting cos⁻¹(4/9) as the angle between the line and the plane, which is actually the angle between the line and the normal."
+    },
+    {
+      "id": "isc-12-maths-q-3d-15",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the equation of the plane passing through (1, 2, 3) with normal vector 2i − j + 2k.",
+      "answer": "The plane is 2(x − 1) − 1(y − 2) + 2(z − 3) = 0, which simplifies to 2x − y + 2z − 6 = 0, that is 2x − y + 2z = 6.",
+      "explanation": "Expanding the normal form (r − a)·n = 0 and collecting terms gives the general form directly. Substituting (1, 2, 3) into the final equation gives 2 − 2 + 6 = 6, confirming that the point lies on the plane.",
+      "commonMistake": "Writing 2x − y + 2z = 0 by forgetting to evaluate the constant from the given point."
+    },
+    {
+      "id": "isc-12-maths-q-3d-16",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the shortest distance between the lines r = (i + 2j + k) + λ(i − j + k) and r = (2i − j − k) + μ(2i + j + 2k).",
+      "answer": "Take a₁ = i + 2j + k, b₁ = i − j + k, a₂ = 2i − j − k and b₂ = 2i + j + 2k. Then a₂ − a₁ = i − 3j − 2k. Expanding, b₁ × b₂ = ((−1)(2) − (1)(1))i − ((1)(2) − (1)(2))j + ((1)(1) − (−1)(2))k = −3i + 3k, so |b₁ × b₂| = √(9 + 9) = 3√2. The scalar product is (a₂ − a₁)·(b₁ × b₂) = (1)(−3) + (−3)(0) + (−2)(3) = −9. Hence the shortest distance is |−9|/(3√2) = 3/√2 = (3√2)/2 units. Since the directions are not proportional and the distance is non-zero, the lines are skew.",
+      "explanation": "The numerator is a scalar triple product, computed as a dot product of the vector between the lines with the cross product of their directions, and the denominator is the magnitude of that cross product. Rationalising the answer is optional but standard, and the non-zero result confirms the skew case.",
+      "commonMistake": "Using the vector between the wrong pair of points, or forgetting the modulus and reporting a negative distance."
+    },
+    {
+      "id": "isc-12-maths-q-3d-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the equation of the plane passing through the points A(1, 2, 3), B(2, 1, 4) and C(4, 0, 1).",
+      "answer": "AB = i − j + k and AC = 3i − 2j − 2k. Then AB × AC = ((−1)(−2) − (1)(−2))i − ((1)(−2) − (1)(3))j + ((1)(−2) − (−1)(3))k = 4i + 5j + k. Using A, the plane is 4(x − 1) + 5(y − 2) + 1(z − 3) = 0, that is 4x + 5y + z = 17. Substituting B gives 8 + 5 + 4 = 17 and substituting C gives 16 + 0 + 1 = 17, so both points lie on the plane.",
+      "explanation": "The cross product of two side vectors is perpendicular to the plane they span, which makes it the normal. The constant is then fixed by substituting any one of the three points, and the other two provide a check.",
+      "commonMistake": "Using AB and BC as the two side vectors without checking that they share the point B, or dropping the minus sign in the j component of the cross product."
+    },
+    {
+      "id": "isc-12-maths-q-3d-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the distance of the point P(1, 2, 3) from the plane 2x − y + 2z = 9, and the coordinates of the foot of the perpendicular from P to the plane.",
+      "answer": "The distance is |2(1) − 2 + 2(3) − 9|/√(4 + 1 + 4) = |−3|/3 = 1 unit. For the foot, move from P along the normal (2, −1, 2), whose length is 3. The signed distance is (2 − 2 + 6 − 9)/3 = −1, so the foot is P − (−1)(2, −1, 2)/3 = (1, 2, 3) + (2/3, −1/3, 2/3) = (5/3, 5/3, 11/3). Checking, 2(5/3) − 5/3 + 2(11/3) = (10 − 5 + 22)/3 = 9, so the foot lies on the plane.",
+      "explanation": "The distance formula gives the length directly, and the foot is found by travelling from P along the unit normal by the signed distance. The negative sign means the foot lies in the direction opposite to the normal as P sees it, so the correction is added rather than subtracted.",
+      "commonMistake": "Moving along the normal by the distance without regard to the signed value, which places the foot on the wrong side of the plane."
+    },
+    {
+      "id": "isc-12-maths-q-3d-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the lines (x − 1)/2 = (y − 2)/3 = (z − 3)/4 and (x − 4)/5 = (y − 1)/2 = z/1 intersect, and find their point of intersection.",
+      "answer": "Write the first line as (1 + 2s, 2 + 3s, 3 + 4s) and the second as (4 + 5t, 1 + 2t, t). Equating coordinates gives 1 + 2s = 4 + 5t, 2 + 3s = 1 + 2t and 3 + 4s = t. Substituting t = 3 + 4s into the second equation gives 2 + 3s = 1 + 6 + 8s, so −5 = 5s and s = −1. Then t = 3 − 4 = −1. Checking the first equation, 1 + 2(−1) = −1 and 4 + 5(−1) = −1, so all three equations are satisfied. The point is (1 − 2, 2 − 3, 3 − 4) = (−1, −1, −1).",
+      "explanation": "Two lines intersect when a single pair of parameter values satisfies all three coordinate equations. Solving two equations and checking the third is the standard approach, and the check is essential because a solution of only two equations need not lie on both lines.",
+      "commonMistake": "Solving two of the three equations and declaring intersection without verifying the third, which is exactly where skew lines fail."
+    },
+    {
+      "id": "isc-12-maths-q-3d-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the angle between the planes 2x + y − 2z = 8 and x + 2y + 2z = 10, and find the equation of the plane through (1, 1, 1) parallel to the first plane.",
+      "answer": "The normals are n₁ = (2, 1, −2) and n₂ = (1, 2, 2), with n₁·n₂ = 2 + 2 − 4 = 0, so cos θ = 0 and the planes are perpendicular, meeting at π/2. A plane parallel to the first has the same normal, so its equation is 2x + y − 2z = k. Substituting (1, 1, 1) gives k = 2 + 1 − 2 = 1, so the required plane is 2x + y − 2z = 1.",
+      "explanation": "The angle between planes is the angle between their normals, and a zero dot product means perpendicular planes. Parallel planes share their normal vector and differ only in the constant, which the given point determines.",
+      "commonMistake": "Using the direction vectors of the planes instead of their normals, or assuming parallel planes must have equal constants."
+    },
+    {
+      "id": "isc-12-maths-q-3d-21",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A line makes angles α, β and γ with the positive coordinate axes. Prove that sin²α + sin²β + sin²γ = 2.",
+      "answer": "The direction cosines of the line are cos α, cos β and cos γ, so cos²α + cos²β + cos²γ = 1. Replacing each cosine squared by 1 − sin² of the same angle gives (1 − sin²α) + (1 − sin²β) + (1 − sin²γ) = 1, that is 3 − (sin²α + sin²β + sin²γ) = 1. Hence sin²α + sin²β + sin²γ = 2.",
+      "explanation": "The proof is a direct substitution of the identity sin²θ + cos²θ = 1 into the fundamental direction cosine relation. It holds for every line in space, independently of its particular direction.",
+      "commonMistake": "Starting from sin²α + sin²β + sin²γ = 1 by analogy with the cosine relation, which is exactly the statement being disproved."
+    },
+    {
+      "id": "isc-12-maths-q-3d-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Show that the line r = (2i − j + k) + λ(i − k) is parallel to the plane r·(2i − j + 2k) = 3, and find the distance between the line and the plane.",
+      "answer": "The direction of the line is b = i − k and the normal of the plane is n = 2i − j + 2k. Their dot product is (1)(2) + (0)(−1) + (−1)(2) = 0, so the line is parallel to the plane. To find the distance, take the point (2, −1, 1) on the line and apply the point-to-plane formula: |2(2) − (−1) + 2(1) − 3|/√(4 + 1 + 4) = |4 + 1 + 2 − 3|/3 = 4/3. Since every point of the line is at the same distance from a plane parallel to it, the distance between the line and the plane is 4/3 units.",
+      "explanation": "Parallelism is established by the zero dot product of direction and normal, which also guarantees that all points of the line are equidistant from the plane. That is what allows the distance to be computed from any single convenient point on the line.",
+      "commonMistake": "Using a point that is not on the line, or reporting a zero distance after finding the line parallel to the plane."
+    }
+  ]
+}

@@ -7,6 +7,16 @@ import { sanitizeText } from "../../../lib/mocktest";
 import useStudyProgress from "../../hooks/useStudyProgress";
 import useRecentlyViewed from "../../hooks/useRecentlyViewed";
 import ChapterLayout, { CHAPTER_SECTIONS } from "../ChapterLayout";
+import {
+  OBSERVER_THRESHOLDS,
+  createAutoProgressTracker,
+  findRenderedSections,
+  isSectionCompleted,
+  isSectionViewed,
+  normalizeSectionId,
+  pickActiveSectionId,
+  sectionsAtReadingLine,
+} from "../../../lib/study/chapterSections.mjs";
 import ChapterSection from "../ChapterSection";
 import ChapterContentEngine from "../content/ChapterContentEngine";
 import { classIXJavaChapters } from "../../data/javaCurriculum";
@@ -35,12 +45,22 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
   const { progress, updateProgress } = useStudyProgress();
   const { addRecentlyViewed } = useRecentlyViewed();
   
-  const [completedSections, setCompletedSections] = useState([]);
+  // Section state is tagged with the slug it was measured for, so viewed
+  // sections from a previous chapter can never leak into the next one when the
+  // route param changes without a remount.
+  const [sectionState, setSectionState] = useState({ slug: null, available: null, viewed: [] });
+  const completedSections = useMemo(
+    () => (sectionState.slug === slug ? sectionState.viewed : []),
+    [sectionState, slug]
+  );
+  const availableSectionIds = sectionState.slug === slug ? sectionState.available : null;
   const [readingProgress, setReadingProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [activeSection, setActiveSection] = useState("learning-objectives");
-  
-  const sectionRefs = useRef({});
+  const [activeSection, setActiveSection] = useState(null);
+
+  const renderedSectionsRef = useRef([]);
+  const renderedSlugRef = useRef(null);
+  const [autoProgress] = useState(createAutoProgressTracker);
   const contentRef = useRef(null);
 
   // Safely parse markdownContent if passed as JSON string
@@ -60,12 +80,11 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  // ChapterLayout already scrolls to the element; this only records the active
+  // section. Canonical ids are the bare rendered ids ("theory"); legacy
+  // "section-theory" values are normalised.
   const scrollToSection = useCallback((sectionId) => {
-    const element = document.getElementById(`section-${sectionId}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    setActiveSection(sectionId);
+    setActiveSection(normalizeSectionId(sectionId));
   }, []);
 
   // Track scroll position for progress bar and active section
@@ -80,14 +99,28 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
         setReadingProgress(Math.min(currentProgress, 100));
       }
 
-      const sectionEntries = Object.entries(sectionRefs.current);
-      for (const [id, ref] of sectionEntries) {
-        if (ref) {
-          const rect = ref.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(id);
-            break;
-          }
+      const rendered = renderedSectionsRef.current;
+      if (rendered.length > 0) {
+        const activeId = pickActiveSectionId(
+          rendered.map(({ id, element }) => ({ id, top: element.getBoundingClientRect().top }))
+        );
+        if (activeId) setActiveSection(activeId);
+
+        // Very tall sections never cross another IntersectionObserver threshold,
+        // so also count a section as viewed once it covers the reading line.
+        const atLine = sectionsAtReadingLine(
+          rendered.map(({ id, element }) => {
+            const rect = element.getBoundingClientRect();
+            return { id, top: rect.top, bottom: rect.bottom };
+          }),
+          window.innerHeight
+        );
+        if (atLine.length > 0) {
+          setSectionState((previous) => {
+            if (previous.slug !== renderedSlugRef.current) return previous;
+            const added = atLine.filter((id) => !previous.viewed.includes(id));
+            return added.length ? { ...previous, viewed: [...previous.viewed, ...added] } : previous;
+          });
         }
       }
     };
@@ -117,47 +150,62 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
     }
   }, [slug]);
 
-  // Track which sections have been viewed into view (fixed infinite loop trigger)
+  // Discover the sections that are really rendered (canonical bare ids), then
+  // observe exactly those elements. Missing optional sections are simply absent.
   useEffect(() => {
-    if (!slug) return;
+    if (!slug || !chapter) return undefined;
+
+    autoProgress.reset(); // new chapter visit: drop applied status and any manual override
+    const rendered = findRenderedSections((id) => document.getElementById(id));
+    renderedSectionsRef.current = rendered;
+    renderedSlugRef.current = slug;
+    setSectionState({ slug, available: rendered.map((item) => item.id), viewed: [] });
+    setActiveSection((previous) =>
+      rendered.some((item) => item.id === previous) ? previous : rendered[0]?.id ?? null
+    );
+
+    // Legacy deep links (#section-theory) resolve to the canonical id.
+    const hashId = normalizeSectionId(window.location.hash);
+    if (hashId) {
+      const target = document.getElementById(hashId);
+      if (target) target.scrollIntoView({ block: "start" });
+    }
+
+    if (typeof IntersectionObserver === "undefined" || rendered.length === 0) return undefined;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const sectionId = entry.target.id;
-            setCompletedSections((prev) => {
-              if (prev.includes(sectionId)) return prev;
-              return [...prev, sectionId];
-            });
-          }
+        const seen = entries.filter(isSectionViewed).map((entry) => normalizeSectionId(entry.target.id));
+        if (seen.length === 0) return;
+        setSectionState((previous) => {
+          if (previous.slug !== slug) return previous;
+          const added = seen.filter((id, index) => !previous.viewed.includes(id) && seen.indexOf(id) === index);
+          return added.length ? { ...previous, viewed: [...previous.viewed, ...added] } : previous;
         });
       },
-      { threshold: 0.3 }
+      { threshold: OBSERVER_THRESHOLDS }
     );
-
-    const elements = CHAPTER_SECTIONS
-      .map((s) => document.getElementById(`section-${s.id}`))
-      .filter(Boolean);
-
-    elements.forEach((el) => observer.observe(el));
+    rendered.forEach((item) => observer.observe(item.element));
 
     return () => {
-      elements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+      renderedSectionsRef.current = [];
+      renderedSlugRef.current = null;
     };
-  }, [slug]);
+  }, [slug, chapter, markdownContent, questionBank, autoProgress]);
 
-  // Sync completion progress separately from observer to prevent loop
+  // Reading can advance the stored status (never downgrade, never repeat, never
+  // override a manual choice). Rules live in decideAutoProgress().
   useEffect(() => {
-    if (!slug) return;
-    const currentStatus = progress[slug] ?? "Not Started";
-
-    if (completedSections.length >= 4 && currentStatus === "Not Started") {
-      updateProgress(slug, "Studying");
-    } else if (completedSections.length >= CHAPTER_SECTIONS.length && currentStatus !== "Completed") {
-      updateProgress(slug, "Completed");
-    }
-  }, [completedSections.length, slug, progress, updateProgress]);
+    if (!slug || !availableSectionIds) return;
+    const next = autoProgress.evaluate({
+      renderedIds: availableSectionIds,
+      viewedIds: completedSections,
+      currentStatus: progress[slug] ?? "Not Started",
+    });
+    if (!next) return;
+    updateProgress(slug, next);
+  }, [availableSectionIds, completedSections, slug, progress, updateProgress, autoProgress]);
 
   if (!chapter) {
     return (
@@ -191,7 +239,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
     .map((s) => ({
       id: s.id,
       label: s.label,
-      completed: completedSections.includes(`section-${s.id}`),
+      completed: isSectionCompleted(completedSections, s.id),
     }));
 
   const progressPercentage = readingSections.length > 0
@@ -214,6 +262,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
       nextChapter={nextChapter}
       readingProgress={readingProgress}
       activeSection={activeSection}
+      availableSectionIds={availableSectionIds}
       onSectionChange={scrollToSection}
       completedSections={completedSections}
       sectionTimes={sectionTimes}
@@ -224,7 +273,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
     >
       <div ref={contentRef}>
         {/* Chapter Header / Hero Section */}
-        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 mb-8" id="section-learning-objectives">
+        <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8 mb-8" id="chapter-header">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-gray-700">Study Chapter</p>
@@ -255,7 +304,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
                   <button
                     key={option}
                     type="button"
-                    onClick={() => updateProgress(slug, option)}
+                    onClick={() => { autoProgress.markManual(); updateProgress(slug, option); }}
                     className={`rounded-full px-3 py-1 text-sm font-semibold transition ${
                       status === option
                         ? "bg-blue-100 text-gray-900 shadow-sm"
@@ -286,7 +335,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
             title="Prerequisites"
             icon={<ChevronDoubleRightIcon className="w-5 h-5" />}
             estimatedTime={2}
-            isCompleted={completedSections.includes("section-prerequisites")}
+            isCompleted={isSectionCompleted(completedSections, "prerequisites")}
           >
             <div className="mt-4 flex flex-wrap gap-2">
               {studyData.prerequisites.map((prereq) => {
@@ -337,7 +386,7 @@ export default function StudyChapter({ slug, markdownContent = null, questionBan
             title="Overview"
             icon={<BookOpenIcon className="w-5 h-5" />}
             estimatedTime={5}
-            isCompleted={completedSections.includes("section-overview")}
+            isCompleted={isSectionCompleted(completedSections, "overview")}
           >
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{studyData.intro}</p>
           </ChapterSection>

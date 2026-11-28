@@ -7,6 +7,8 @@
  * chapter sources may use slightly different shapes.
  */
 
+import { resolveMcqAnswer } from "./study/mcqAnswers.mjs";
+
 export function getChapterContent(chapter, content = null, questions = null) {
   const sd = chapter?.studyData || {};
 
@@ -479,11 +481,18 @@ function normalizeMcqs(questionBankMcqs, contentMcqs) {
     if (seen.has(dedupeKey)) return;
     seen.add(dedupeKey);
 
+    const options = Array.isArray(q.options) ? q.options : [];
+    // One answer contract (see lib/study/mcqAnswers.mjs): `answer` is the
+    // option index. Legacy option-text answers are resolved to an index; an
+    // unresolvable key is never shown as a gradable question (no silent "A").
+    const resolved = resolveMcqAnswer(q.correctAnswer ?? q.answer, options);
+    if (!resolved.valid) return;
+
     mcqs.push({
       id: q.id,
       question: q.question,
-      options: Array.isArray(q.options) ? q.options : [],
-      answer: q.correctAnswer ?? q.answer,
+      options,
+      answer: resolved.index,
       explanation: normalizeExplanation(q.explanation),
       difficulty: q.difficulty,
       marks: q.marks,

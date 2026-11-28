@@ -1,5 +1,6 @@
 import questionBank from "@/app/data/question-bank";
 import { resolveChapterMetadata } from "@/lib/icseSyllabus";
+import { resolveBankMcqAnswer } from "@/lib/study/mcqAnswers.mjs";
 
 /**
  * Canonical Java chapter question bank.
@@ -54,16 +55,15 @@ const TYPE_BY_CATEGORY = {
   vivaQuestions: "theory",
 };
 
-function letterToIndex(letter) {
-  const n = String(letter || "").trim().toUpperCase().charCodeAt(0) - 65;
-  return Number.isFinite(n) && n >= 0 && n <= 25 ? n : null;
-}
-
 function stripOptionPrefix(option) {
   return String(option).replace(/^[A-Ea-e][).:]\s*/, "").trim();
 }
 
-function normalizeRealQuestion(raw, type, targetSlug) {
+// MCQs whose answer key cannot be resolved. They are withheld from every
+// student-facing list and reported here (and by `npm run validate:mcqs`).
+export const invalidBankQuestions = [];
+
+export function normalizeRealQuestion(raw, type, targetSlug, onInvalid) {
   const meta = resolveChapterMetadata(targetSlug);
   const isMcq = type === "mcq";
   const options = Array.isArray(raw.options)
@@ -72,11 +72,13 @@ function normalizeRealQuestion(raw, type, targetSlug) {
 
   let answerIndex = null;
   if (isMcq) {
-    answerIndex = raw.correctAnswer
-      ? letterToIndex(raw.correctAnswer)
-      : typeof raw.answer === "number"
-        ? raw.answer
-        : null;
+    const resolved = resolveBankMcqAnswer(raw, options.length);
+    if (!resolved.valid) {
+      // Never substitute option A for an unresolvable key: drop and report.
+      if (typeof onInvalid === "function") onInvalid({ id: String(raw.id), reason: resolved.reason });
+      return null;
+    }
+    answerIndex = resolved.index;
   }
 
   // Programming/other authored categories use different field names than the
@@ -105,7 +107,7 @@ function normalizeRealQuestion(raw, type, targetSlug) {
     question: questionText,
     prompt: questionText,
     options: isMcq ? options : [],
-    answer: isMcq ? (answerIndex ?? 0) : answerValue,
+    answer: isMcq ? answerIndex : answerValue,
     correctAnswer: isMcq ? correctText : answerValue,
     modelAnswer: isTheoryLike ? answerValue : undefined,
     explanation: raw.explanation || raw.logic || "",
@@ -129,7 +131,10 @@ function buildChapterQuestionBank() {
       const items = chapter[category];
       if (!Array.isArray(items)) continue;
       for (const item of items) {
-        normalized.push(normalizeRealQuestion(item, TYPE_BY_CATEGORY[category], targetSlugs[0]));
+        const question = normalizeRealQuestion(item, TYPE_BY_CATEGORY[category], targetSlugs[0], (problem) =>
+          invalidBankQuestions.push({ ...problem, bankSlug, category })
+        );
+        if (question) normalized.push(question);
       }
     }
 

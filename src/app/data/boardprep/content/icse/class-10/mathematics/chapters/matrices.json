@@ -12,11 +12,26 @@
   "overview": {
     "intro": "A matrix is a rectangular array of numbers enclosed in brackets, and it is an object in its own right rather than a table of data. Almost every operation on matrices is governed by one question, which is whether the orders are compatible. Addition and subtraction require identical orders. Multiplication requires the inner dimensions to agree, and it produces the outer ones. That single idea explains why a great many seemingly natural expressions are meaningless, and it is the first thing to check before computing anything. This chapter builds order and equality, then addition, subtraction and scalar multiplication, then the row-by-column product, and finally the two special matrices that behave like the numbers zero and one: the zero matrix and the identity matrix.",
     "facts": [
-      { "label": "Order of a matrix", "value": "rows by columns, written 2 x 3 for two rows and three columns" },
-      { "label": "Addition and subtraction", "value": "defined only for matrices of identical order, performed entry by entry" },
-      { "label": "Multiplication", "value": "a p by q matrix may multiply a q by r matrix, giving a p by r matrix" },
-      { "label": "Zero matrix", "value": "every entry zero; adding it changes nothing and multiplying by it gives zero" },
-      { "label": "Identity matrix", "value": "ones on the main diagonal and zeros elsewhere; multiplying by it changes nothing" }
+      {
+        "label": "Order of a matrix",
+        "value": "rows by columns, written 2 x 3 for two rows and three columns"
+      },
+      {
+        "label": "Addition and subtraction",
+        "value": "defined only for matrices of identical order, performed entry by entry"
+      },
+      {
+        "label": "Multiplication",
+        "value": "a p by q matrix may multiply a q by r matrix, giving a p by r matrix"
+      },
+      {
+        "label": "Zero matrix",
+        "value": "every entry zero; adding it changes nothing and multiplying by it gives zero"
+      },
+      {
+        "label": "Identity matrix",
+        "value": "ones on the main diagonal and zeros elsewhere; multiplying by it changes nothing"
+      }
     ]
   },
   "learningOutcomes": [
@@ -43,12 +58,30 @@
         {
           "type": "terms",
           "items": [
-            { "term": "Matrix", "meaning": "A rectangular array of numbers in brackets, treated as a single mathematical object." },
-            { "term": "Order", "meaning": "The number of rows followed by the number of columns, written m by n." },
-            { "term": "Entry", "meaning": "A single number in the array, addressed by its row then its column." },
-            { "term": "Square matrix", "meaning": "A matrix with the same number of rows and columns." },
-            { "term": "Row matrix", "meaning": "A matrix with exactly one row." },
-            { "term": "Column matrix", "meaning": "A matrix with exactly one column." }
+            {
+              "term": "Matrix",
+              "meaning": "A rectangular array of numbers in brackets, treated as a single mathematical object."
+            },
+            {
+              "term": "Order",
+              "meaning": "The number of rows followed by the number of columns, written m by n."
+            },
+            {
+              "term": "Entry",
+              "meaning": "A single number in the array, addressed by its row then its column."
+            },
+            {
+              "term": "Square matrix",
+              "meaning": "A matrix with the same number of rows and columns."
+            },
+            {
+              "term": "Row matrix",
+              "meaning": "A matrix with exactly one row."
+            },
+            {
+              "term": "Column matrix",
+              "meaning": "A matrix with exactly one column."
+            }
           ]
         },
         {
@@ -90,12 +123,37 @@
         {
           "type": "table",
           "caption": "Adding and subtracting two by two matrices",
-          "columns": ["Operation", "First matrix", "Second matrix", "Result"],
+          "columns": [
+            "Operation",
+            "First matrix",
+            "Second matrix",
+            "Result"
+          ],
           "rows": [
-            ["A + B", "2 1 / 3 4", "1 5 / 6 2", "3 6 / 9 6"],
-            ["A - B", "2 1 / 3 4", "1 5 / 6 2", "1 -4 / -3 2"],
-            ["2A", "2 1 / 3 4", "scalar 2", "4 2 / 6 8"],
-            ["B + A", "1 5 / 6 2", "2 1 / 3 4", "3 6 / 9 6, as for A + B"]
+            [
+              "A + B",
+              "2 1 / 3 4",
+              "1 5 / 6 2",
+              "3 6 / 9 6"
+            ],
+            [
+              "A - B",
+              "2 1 / 3 4",
+              "1 5 / 6 2",
+              "1 -4 / -3 2"
+            ],
+            [
+              "2A",
+              "2 1 / 3 4",
+              "scalar 2",
+              "4 2 / 6 8"
+            ],
+            [
+              "B + A",
+              "1 5 / 6 2",
+              "2 1 / 3 4",
+              "3 6 / 9 6, as for A + B"
+            ]
           ]
         },
         {
@@ -159,12 +217,42 @@
         {
           "type": "table",
           "caption": "Row by column computation of AB",
-          "columns": ["Product entry", "Row of A", "Column of B", "Working", "Value"],
+          "columns": [
+            "Product entry",
+            "Row of A",
+            "Column of B",
+            "Working",
+            "Value"
+          ],
           "rows": [
-            ["Row 1, column 1", "2 1", "1 / 6", "2 x 1 + 1 x 6", "8"],
-            ["Row 1, column 2", "2 1", "5 / 2", "2 x 5 + 1 x 2", "12"],
-            ["Row 2, column 1", "3 4", "1 / 6", "3 x 1 + 4 x 6", "27"],
-            ["Row 2, column 2", "3 4", "5 / 2", "3 x 5 + 4 x 2", "23"]
+            [
+              "Row 1, column 1",
+              "2 1",
+              "1 / 6",
+              "2 x 1 + 1 x 6",
+              "8"
+            ],
+            [
+              "Row 1, column 2",
+              "2 1",
+              "5 / 2",
+              "2 x 5 + 1 x 2",
+              "12"
+            ],
+            [
+              "Row 2, column 1",
+              "3 4",
+              "1 / 6",
+              "3 x 1 + 4 x 6",
+              "27"
+            ],
+            [
+              "Row 2, column 2",
+              "3 4",
+              "5 / 2",
+              "3 x 5 + 4 x 2",
+              "23"
+            ]
           ]
         },
         {
@@ -248,11 +336,27 @@
         {
           "type": "table",
           "caption": "The identity matrix of order two and its effect",
-          "columns": ["Product", "Computation", "Result"],
+          "columns": [
+            "Product",
+            "Computation",
+            "Result"
+          ],
           "rows": [
-            ["A times I, A = 2 1 / 3 4", "2 x 1 + 1 x 0, 2 x 0 + 1 x 1 / 3 x 1 + 4 x 0, 3 x 0 + 4 x 1", "2 1 / 3 4, that is A"],
-            ["I times I", "1 x 1 + 0 x 0, 1 x 0 + 0 x 1 / 0 x 1 + 1 x 0, 0 x 0 + 1 x 1", "1 0 / 0 1, that is I"],
-            ["O times I", "every entry zero", "the zero matrix O"]
+            [
+              "A times I, A = 2 1 / 3 4",
+              "2 x 1 + 1 x 0, 2 x 0 + 1 x 1 / 3 x 1 + 4 x 0, 3 x 0 + 4 x 1",
+              "2 1 / 3 4, that is A"
+            ],
+            [
+              "I times I",
+              "1 x 1 + 0 x 0, 1 x 0 + 0 x 1 / 0 x 1 + 1 x 0, 0 x 0 + 1 x 1",
+              "1 0 / 0 1, that is I"
+            ],
+            [
+              "O times I",
+              "every entry zero",
+              "the zero matrix O"
+            ]
           ]
         },
         {
@@ -312,13 +416,43 @@
         {
           "type": "table",
           "caption": "Checking AB against BA for A = 2 1 / 3 4 and B = 1 5 / 6 2",
-          "columns": ["Check", "Working", "Expected", "Result"],
+          "columns": [
+            "Check",
+            "Working",
+            "Expected",
+            "Result"
+          ],
           "rows": [
-            ["Order of AB", "2 by 2 times 2 by 2", "2 by 2", "confirmed"],
-            ["Entry 1,1 of AB", "2 x 1 + 1 x 6", "8", "8"],
-            ["Entry 1,1 of BA", "1 x 2 + 5 x 3", "17", "17"],
-            ["Are AB and BA equal", "8 against 17 in position 1,1", "not equal", "not equal"],
-            ["Sum of entries of AB", "8 + 12 + 27 + 23", "70", "70"]
+            [
+              "Order of AB",
+              "2 by 2 times 2 by 2",
+              "2 by 2",
+              "confirmed"
+            ],
+            [
+              "Entry 1,1 of AB",
+              "2 x 1 + 1 x 6",
+              "8",
+              "8"
+            ],
+            [
+              "Entry 1,1 of BA",
+              "1 x 2 + 5 x 3",
+              "17",
+              "17"
+            ],
+            [
+              "Are AB and BA equal",
+              "8 against 17 in position 1,1",
+              "not equal",
+              "not equal"
+            ],
+            [
+              "Sum of entries of AB",
+              "8 + 12 + 27 + 23",
+              "70",
+              "70"
+            ]
           ]
         },
         {
@@ -350,42 +484,95 @@
   ],
   "figures": [
     {
-      "caption": "How a row meets a column in matrix multiplication",
-      "description": "Two matrices shown side by side with a wide gap between them. The first matrix has its top row shaded and an arrow labelled row one extending from it; the second matrix has its left column shaded and an arrow labelled column one extending down it. Between the two matrices, a bracket pairs the three entries of the shaded row with the three entries of the shaded column, and each pair is annotated with a multiplication sign. Below, a box labelled dot product shows the three products being added, and an arrow points from that box to the top left entry of a third matrix, the product, which is shaded to indicate that this is where the value lands.",
-      "labels": ["Row of the first matrix", "Column of the second matrix", "Pairwise products", "Add them", "Product entry"]
+      "id": "mat-fig-1",
+      "title": "Order of a matrix",
+      "description": "A matrix labeled with m rows and n columns illustrating order m × n and element positions a_ij.",
+      "alt": "Matrix showing rows, columns and order"
     },
     {
-      "caption": "Order compatibility for multiplication and for addition",
-      "description": "Two flow diagrams stacked vertically. The upper diagram, headed multiplication, shows a box marked p by q meeting a box marked q by r through a diamond labelled do the inner counts match; the yes branch leads to a box marked p by r and the no branch to a box marked undefined. The lower diagram, headed addition, shows two boxes meeting a diamond labelled are the orders identical, with the yes branch leading to a box marked same order retained and the no branch to a box marked undefined.",
-      "labels": ["p by q", "q by r", "Inner counts match", "p by r", "Undefined", "Orders identical"]
+      "id": "mat-fig-2",
+      "title": "Row-by-column multiplication",
+      "description": "Diagram showing row i of A and column j of B multiplied elementwise and summed to give entry (i,j) of AB.",
+      "alt": "Row by column product for matrix multiplication"
+    },
+    {
+      "id": "mat-fig-3",
+      "title": "Identity and zero matrices",
+      "description": "Examples of 2×2 identity and zero matrices with their effect on another matrix under multiplication/addition.",
+      "alt": "Identity and zero matrix examples"
     }
   ],
   "keyPoints": [
-    "The order of a matrix is quoted rows first, then columns, and it governs every operation.",
-    "Addition and subtraction require identical orders and act entry by entry.",
-    "A p by q matrix multiplies a q by r matrix to give a p by r matrix; the inner counts must match.",
-    "Matrix multiplication combines a row of the first with a column of the second by multiply and add.",
-    "Matrix multiplication is not commutative: AB and BA are generally different, and sometimes one is undefined.",
-    "The zero matrix adds to nothing and annihilates every product, making it a zero divisor.",
-    "The identity matrix has ones on the main diagonal and leaves any compatible matrix unchanged.",
-    "A square matrix may be squared; a non-square one cannot be multiplied by itself."
+    "A matrix is a rectangular array of numbers arranged in rows and columns; its order is rows × columns (m × n).",
+    "Two matrices are equal if they have the same order and all corresponding elements are equal.",
+    "Matrices of the same order can be added or subtracted by adding/subtracting corresponding elements.",
+    "Scalar multiplication multiplies every element of a matrix by the scalar.",
+    "Matrix product AB is defined when columns of A equal rows of B; if A is m×n and B is n×p, AB is m×p.",
+    "Element (i,j) of AB is the dot product of row i of A and column j of B.",
+    "Matrix multiplication is not commutative in general (AB ≠ BA), even when both products are defined.",
+    "Identity matrix I acts as multiplicative identity: AI = IA = A (for compatible orders).",
+    "Zero matrix has all elements 0; A + O = A and AO = O (compatible). AB = O does not imply A = O or B = O.",
+    "Use correct order checks and element-wise operations to avoid common errors."
   ],
   "examFocus": [
-    "State the expected order of every result before computing it; an answer of the wrong shape cannot earn full credit.",
-    "Write a product entry as an explicit chain, for example 2 x 1 + 1 x 6 = 8, so partial credit survives an arithmetic slip.",
-    "Recheck one product entry using a different row-column pairing, since the pairing is where errors concentrate.",
-    "Never rearrange a matrix product as you would with numbers; compute both AB and BA when the question involves each.",
-    "When recovering a scalar from a matrix equation, verify that every entry gives the same value before reporting it."
+    "State the order of matrices clearly and check compatibility before addition or multiplication.",
+    "Perform row-by-column multiplication systematically: write each element’s computation to avoid errors.",
+    "Show that AB and BA can differ by computing both when asked (non-commutativity).",
+    "Use equality of matrices to form equations from corresponding elements and solve for unknowns.",
+    "Apply identity and zero matrix properties correctly (I leaves matrix unchanged; zero gives zero).",
+    "For scalar multiplication, multiply every entry, not just selected ones.",
+    "In equations like 2A + X = B, rearrange to X = B − 2A and compute stepwise.",
+    "Keep rows/columns aligned neatly in working to prevent element misplacement."
   ],
   "vocabulary": [
-    { "word": "Matrix", "meaning": "A rectangular array of numbers in brackets treated as one mathematical object." },
-    { "word": "Order", "meaning": "The dimensions of a matrix, given as the number of rows followed by the number of columns." },
-    { "word": "Entry", "meaning": "An individual number within a matrix, located by its row and column." },
-    { "word": "Square matrix", "meaning": "A matrix with equal numbers of rows and columns, the only kind that can be multiplied by itself." },
-    { "word": "Row by column", "meaning": "The rule for forming each entry of a product: multiply matching entries of a row and a column, then add." },
-    { "word": "Zero matrix", "meaning": "The matrix with every entry zero, which is the additive identity of matrix algebra." },
-    { "word": "Identity matrix", "meaning": "The square matrix with ones on the main diagonal and zeros elsewhere, which leaves compatible matrices unchanged." },
-    { "word": "Main diagonal", "meaning": "The entries running from the top left to the bottom right of a square matrix." }
+    {
+      "meaning": "A rectangular array of numbers arranged in rows and columns.",
+      "word": "Matrix"
+    },
+    {
+      "meaning": "The size of a matrix given as number of rows × number of columns.",
+      "word": "Order (dimension)"
+    },
+    {
+      "meaning": "An individual number in a matrix, identified by its row and column.",
+      "word": "Element (entry)"
+    },
+    {
+      "meaning": "A matrix with only one row.",
+      "word": "Row matrix"
+    },
+    {
+      "meaning": "A matrix with only one column.",
+      "word": "Column matrix"
+    },
+    {
+      "meaning": "A matrix with equal numbers of rows and columns.",
+      "word": "Square matrix"
+    },
+    {
+      "meaning": "A matrix in which all elements are zero.",
+      "word": "Zero (null) matrix"
+    },
+    {
+      "meaning": "A square matrix with 1s on the main diagonal and 0s elsewhere.",
+      "word": "Identity matrix"
+    },
+    {
+      "meaning": "Multiplication of every element of a matrix by a number (scalar).",
+      "word": "Scalar multiplication"
+    },
+    {
+      "meaning": "An operation producing AB using row-by-column dot products when orders are compatible.",
+      "word": "Matrix multiplication"
+    },
+    {
+      "meaning": "Matrices whose orders allow a given operation (same order for addition; inner dimensions equal for multiplication).",
+      "word": "Compatible matrices"
+    },
+    {
+      "meaning": "Condition that matrices have same order and all corresponding elements equal.",
+      "word": "Equality of matrices"
+    }
   ],
   "questions": [
     {
@@ -395,7 +582,12 @@
       "marks": 1,
       "origin": "practice",
       "prompt": "The order of the matrix with rows 1 2 3 and 4 5 6 is:",
-      "options": ["2 by 3", "3 by 2", "2 by 2", "6 by 1"],
+      "options": [
+        "2 by 3",
+        "3 by 2",
+        "2 by 2",
+        "6 by 1"
+      ],
       "correctIndex": 0,
       "answer": "2 by 3",
       "explanation": "There are two horizontal rows and three vertical columns, and the convention quotes rows first, so the order is 2 by 3. Reversing the convention gives 3 by 2, which describes a differently shaped matrix altogether.",
@@ -409,26 +601,33 @@
       "origin": "practice",
       "prompt": "A 2 by 3 matrix can be added to:",
       "options": [
-        "A 2 by 3 matrix only",
         "Any matrix of order 3 by 2",
+        "A 2 by 3 matrix only",
         "Any square matrix",
         "Any matrix with the same number of entries"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "answer": "A 2 by 3 matrix only",
       "explanation": "Addition is defined entry by entry, so the two matrices must occupy exactly the same positions; that requires identical order. A matrix with the same total number of entries but a different shape still cannot be added, because the entries would have to be matched inconsistently.",
       "commonMistake": "Matching on the count of entries rather than on the shape."
     },
     {
       "id": "icse-10-math-q-mat-03",
-      "type": "fill-blank",
+      "type": "mcq",
       "difficulty": "medium",
       "marks": 2,
       "origin": "practice",
-      "prompt": "If A has rows 2 1 and 3 4 and B has rows 1 5 and 6 2, then A plus B has top left entry ______.",
-      "answer": "The top left entry is 3",
-      "explanation": "Addition is entry by entry, so the top left entry of the sum is 2 + 1 = 3. The full sum has rows 3 6 and 9 6, obtained by adding the corresponding entries of A and B.",
-      "commonMistake": "Multiplying the entries instead of adding, which would give 2."
+      "prompt": "If A = [[2,1],[3,4]] and B = [[1,5],[6,2]], the top-left entry of A + B is:",
+      "answer": "3.",
+      "explanation": "Add corresponding elements: top-left is 2 + 1 = 3.",
+      "commonMistake": "Multiplying the entries instead of adding, which would give 2.",
+      "options": [
+        "2",
+        "3.",
+        "4",
+        "7"
+      ],
+      "correctIndex": 1
     },
     {
       "id": "icse-10-math-q-mat-04",
@@ -443,14 +642,21 @@
     },
     {
       "id": "icse-10-math-q-mat-05",
-      "type": "short",
+      "type": "mcq",
       "difficulty": "medium",
-      "marks": 3,
+      "marks": 2,
       "origin": "practice",
-      "prompt": "State whether the product A C exists when A has order 2 by 2 and C has order 2 by 3, and give the order of the product if it does.",
-      "answer": "Yes, A C exists and has order 2 by 3",
-      "explanation": "For A C the inner counts are the number of columns of A, which is 2, and the number of rows of C, which is also 2; they agree, so the product is defined. The result takes the outer dimensions, rows of A and columns of C, giving order 2 by 3. Reversing the operands would pair 3 against 2 and fail.",
-      "commonMistake": "Checking only that both matrices are non-empty, rather than comparing the inner dimensions."
+      "prompt": "If A is 2×2 and C is 2×3, the product AC:",
+      "answer": "Yes, order 2×3",
+      "explanation": "Columns of A (2) equal rows of C (2), so AC exists and has order 2×3.",
+      "commonMistake": "Checking only that both matrices are non-empty, rather than comparing the inner dimensions.",
+      "options": [
+        "No, not defined",
+        "Yes, order 2×2",
+        "Yes, order 2×3",
+        "Yes, order 3×2"
+      ],
+      "correctIndex": 2
     },
     {
       "id": "icse-10-math-q-mat-06",
@@ -476,7 +682,7 @@
     },
     {
       "id": "icse-10-math-q-mat-08",
-      "type": "long",
+      "type": "analytical",
       "difficulty": "hard",
       "marks": 5,
       "origin": "practice",
@@ -493,12 +699,12 @@
       "origin": "practice",
       "prompt": "The identity matrix of order 2 is:",
       "options": [
-        "Rows 1 0 and 0 1",
         "Rows 1 1 and 1 1",
         "Rows 0 0 and 0 0",
+        "Rows 1 0 and 0 1",
         "Rows 1 0 and 1 0"
       ],
-      "correctIndex": 0,
+      "correctIndex": 2,
       "answer": "Rows 1 0 and 0 1",
       "explanation": "The identity carries ones on the main diagonal from top left to bottom right and zeros elsewhere, and multiplying any compatible matrix by it returns that matrix unchanged. The all-ones matrix does not have this property, and the all-zero matrix is the zero matrix instead.",
       "commonMistake": "Confusing the identity with the matrix of all ones, which changes entries when used in a product."
@@ -527,14 +733,21 @@
     },
     {
       "id": "icse-10-math-q-mat-12",
-      "type": "short",
+      "type": "mcq",
       "difficulty": "medium",
-      "marks": 3,
+      "marks": 2,
       "origin": "practice",
-      "prompt": "Find k if kA has rows 10 5 and 15 20 when A has rows 2 1 and 3 4.",
-      "answer": "k = 5",
-      "explanation": "Comparing the top left entries gives 2k = 10, so k = 5. The remaining entries confirm it: 1 x 5 = 5 in position 1,2, 3 x 5 = 15 in position 2,1 and 4 x 5 = 20 in position 2,2. Since all four agree, the scalar exists and the matrices are consistent.",
-      "commonMistake": "Reporting k = 10 from the top left entry without dividing by 2."
+      "prompt": "If kA = [[10,5],[15,20]] where A = [[2,1],[3,4]], then k equals:",
+      "answer": "5.",
+      "explanation": "Scalar k multiplies every element: k×2 = 10 gives k = 5 (and other entries confirm).",
+      "commonMistake": "Reporting k = 10 from the top left entry without dividing by 2.",
+      "options": [
+        "2",
+        "4",
+        "10",
+        "5."
+      ],
+      "correctIndex": 3
     },
     {
       "id": "icse-10-math-q-mat-13",
@@ -544,12 +757,12 @@
       "origin": "practice",
       "prompt": "Which of these statements about matrices is true?",
       "options": [
-        "A times C may exist while C times A does not",
         "If A times C exists then C times A exists",
         "Matrix multiplication is always commutative",
-        "Any two matrices can be added"
+        "Any two matrices can be added",
+        "A times C may exist while C times A does not"
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "answer": "A times C may exist while C times A does not",
       "explanation": "Take A of order 2 by 2 and C of order 2 by 3. Then A C pairs 2 with 2 and exists, giving order 2 by 3, while C A pairs 3 with 2 and is undefined. The existence of one product says nothing about the reversed one, and the other three statements are all false for the reasons given.",
       "commonMistake": "Assuming that a product working one way guarantees it works the other way as well."
@@ -594,7 +807,12 @@
       "marks": 1,
       "origin": "practice",
       "prompt": "The result of multiplying a 3 by 2 matrix by a 2 by 4 matrix has order:",
-      "options": ["3 by 4", "2 by 2", "3 by 2", "4 by 3"],
+      "options": [
+        "3 by 4",
+        "2 by 2",
+        "3 by 2",
+        "4 by 3"
+      ],
       "correctIndex": 0,
       "answer": "3 by 4",
       "explanation": "The inner counts are both 2, so the product exists, and the result takes the outer dimensions: the rows of the first factor and the columns of the second, giving 3 by 4. The inner dimension disappears from the answer because it is consumed by the row-by-column process.",
@@ -635,18 +853,18 @@
     },
     {
       "id": "icse-10-math-q-mat-21",
-      "type": "fill-blank",
+      "type": "long",
       "difficulty": "medium",
       "marks": 2,
       "origin": "practice",
-      "prompt": "If A has order 2 by 2 and the zero matrix has order 2 by 2, then A plus the zero matrix equals ______.",
+      "prompt": "Show that adding a 2×2 zero matrix to A = [[2,1],[3,4]] leaves A unchanged, and explain why the zero matrix is the additive identity.",
       "answer": "A itself",
-      "explanation": "Adding zero to each entry leaves every entry of A unchanged, so the sum is A. This makes the zero matrix the additive identity of matrix algebra, playing the role of the number zero, and it requires the orders to match just as any other addition does.",
+      "explanation": "A + O = [[2+0,1+0],[3+0,4+0]] = [[2,1],[3,4]] = A. The zero matrix acts as additive identity because adding 0 to each corresponding element does not change any entry.",
       "commonMistake": "Reporting the zero matrix, which would be the result of multiplying rather than adding."
     },
     {
       "id": "icse-10-math-q-mat-22",
-      "type": "short",
+      "type": "analytical",
       "difficulty": "hard",
       "marks": 4,
       "origin": "practice",
@@ -654,17 +872,6 @@
       "answer": "Neither factor is zero yet the product is zero, so from A C equals zero one cannot infer C equals zero",
       "explanation": "Take A with rows 2 1 / 3 4, which is certainly non-zero, and let C be the 2 by 3 zero matrix. Their product is the 2 by 3 zero matrix because every entry of the product contains a zero factor, so A C equals zero while A itself is not zero. Cancelling A would force C to be zero only if matrix arithmetic obeyed the cancellation law, and this example disproves that, showing that matrices behave unlike non-zero real numbers in this respect.",
       "commonMistake": "Importing the rule that a product of non-zero quantities is non-zero, which holds for real numbers but not for matrices."
-    },
-    {
-      "id": "icse-10-math-q-mat-23",
-      "type": "long",
-      "difficulty": "medium",
-      "marks": 4,
-      "origin": "practice",
-      "prompt": "Compute 2(A + B) and also 2A + 2B for A = rows 2 1 / 3 4 and B = rows 1 5 / 6 2, and comment on the results.",
-      "answer": "Both equal rows 6 12 and 18 12",
-      "explanation": "A + B = rows 3 6 / 9 6, so 2(A + B) doubles every entry to rows 6 12 / 18 12. Separately, 2A = rows 4 2 / 6 8 and 2B = rows 2 10 / 12 4, and their sum entry by entry is rows 6 12 / 18 12. The two results are identical, confirming that scalar multiplication distributes over matrix addition, as expected since each underlying operation is just ordinary addition of numbers.",
-      "commonMistake": "Scaling only the first matrix when forming 2A + 2B, which gives rows 5 7 and 15 12 instead."
     }
   ]
 }

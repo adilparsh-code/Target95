@@ -1,0 +1,918 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-current-electricity",
+  "title": "Current Electricity",
+  "kind": "physics",
+  "tagline": "Drift velocity and mobility, Ohm's law and its microscopic basis, resistance and resistivity, Kirchhoff's laws, and the potentiometer as a precise measuring device.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus, subject code 861, examination year 2027, academic session 2026-27. The topic coverage follows the official CISCE syllabus unit Current Electricity. No board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Current electricity is the study of charges in motion through conductors and the laws that govern that motion. The chapter begins with the microscopic picture: a conductor carries charge because free electrons drift under an applied field, so a current is not a flow of some new fluid but the net motion of the electrons already present in the metal. From drift velocity and mobility the macroscopic Ohm's law emerges, along with the definitions of resistance, resistivity and conductivity. The chapter then treats the practical behaviour of real conductors — the V-I characteristic, the temperature dependence of resistance, and the distinction between ohmic and non-ohmic behaviour — before moving to the two general laws that solve any circuit, Kirchhoff's current and voltage laws, and the potentiometer, which is the most accurate way to compare EMFs and internal resistances in this unit.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Current Electricity"
+      },
+      {
+        "label": "Theory marks in unit",
+        "value": "Included in the 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Electric current",
+        "value": "Rate of flow of charge; I = dQ/dt"
+      },
+      {
+        "label": "Drift velocity",
+        "value": "Average velocity of free electrons in a conductor under an electric field"
+      },
+      {
+        "label": "Ohm's law",
+        "value": "V = I R for an ohmic conductor"
+      },
+      {
+        "label": "Resistance and resistivity",
+        "value": "R = rho L / A; resistivity depends on material and temperature"
+      },
+      {
+        "label": "Kirchhoff's laws",
+        "value": "Current law: sum of currents at a junction is zero; voltage law: sum of potential differences around a closed loop is zero"
+      },
+      {
+        "label": "Potentiometer",
+        "value": "Compares EMFs and internal resistances using null deflection"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "Explain electric current as the rate of flow of charge and distinguish conventional current from electron flow.",
+    "Define drift velocity and mobility, and derive the relation between current and drift velocity.",
+    "State Ohm's law and distinguish ohmic and non-ohmic conductors using the V-I characteristic.",
+    "Define resistance, resistivity, conductivity and their SI units, and relate resistance to geometry.",
+    "Describe the temperature dependence of resistance and resistivity.",
+    "Apply Kirchhoff's current and voltage laws to simple networks, including Wheatstone bridge conditions.",
+    "Explain the principle of a potentiometer and use it to compare EMFs and measure internal resistance.",
+    "Solve numerical problems involving series and parallel combinations, EMF, terminal voltage and internal resistance."
+  ],
+  "learn": [
+    {
+      "id": "electric-current-and-drift-velocity",
+      "title": "Electric current and drift velocity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Electric current is the rate at which charge crosses a section of a conductor. If a charge dQ passes through a cross-section in time dt, the current is I = dQ/dt. The SI unit is the ampere, which is the flow of one coulomb per second. By convention the direction of current is the direction in which positive charge would move, so in a metal current is taken to flow opposite to the actual motion of electrons. This convention is historical and does not affect calculations, but it is important to keep it in mind when interpreting circuit diagrams."
+        },
+        {
+          "type": "paragraph",
+          "text": "The microscopic origin of current in a metal is the drift of free electrons. In a conductor at room temperature the free electrons move rapidly and randomly between collisions, with no net direction, so there is no current. When an electric field is applied along the conductor, each electron experiences a force and gains a small average velocity in the direction opposite to the field. This average velocity is the drift velocity v_d, and it is very small compared with the random thermal speeds. The current is related to the drift velocity by I = n e A v_d, where n is the number of free electrons per unit volume, e is the magnitude of the electron charge, A is the cross-sectional area, and v_d is the drift velocity."
+        },
+        {
+          "type": "paragraph",
+          "text": "The relation shows the physical basis of current: a larger cross-section, a higher carrier density or a faster drift all increase the current. The mobility mu is defined as the drift velocity per unit electric field, mu = v_d / E, and it is a property of the material. A material with high mobility conducts well because the electrons respond more readily to an applied field. These microscopic ideas connect the measurable current to the structure of the conductor and lead directly to the macroscopic law of Ohm."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A copper wire of cross-sectional area 1.0 x 10^-6 m^2 carries a current of 2 A. If the free electron density is 8.5 x 10^28 m^-3, find the drift velocity.",
+              "note": "v_d = I / (n e A) = 2 / (8.5 x 10^28 x 1.6 x 10^-19 x 1.0 x 10^-6) = 2 / (1.36 x 10^4) = 1.47 x 10^-4 m s^-1, approximately 0.15 mm per second. The drift is slow, despite the large current, because there are so many charge carriers."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Electric current",
+              "meaning": "The rate of flow of charge past a cross-section; I = dQ/dt."
+            },
+            {
+              "term": "Drift velocity",
+              "meaning": "The average velocity of free electrons in a conductor under an electric field."
+            },
+            {
+              "term": "Mobility",
+              "meaning": "Drift velocity per unit electric field; mu = v_d / E."
+            },
+            {
+              "term": "Free electron density",
+              "meaning": "Number of free electrons per unit volume in a conductor."
+            },
+            {
+              "term": "Conventional current",
+              "meaning": "The direction in which positive charge is taken to flow, opposite to electron flow in a metal."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ohms-law-and-resistance",
+      "title": "Ohm's law and resistance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ohm's law states that the current through a conductor is directly proportional to the potential difference across its ends, provided physical conditions such as temperature remain constant. In equation form, V = I R, where R is the resistance. The law is empirical and holds well for metallic conductors over a moderate range of conditions, but it is not universal: semiconductors, filament lamps and many other devices are non-ohmic and do not satisfy a constant ratio of V to I."
+        },
+        {
+          "type": "paragraph",
+          "text": "Resistance is the opposition a conductor offers to the flow of current. From the microscopic picture, R = V / I = (E L) / (n e A v_d). Using v_d = mu E and the relation between mobility and relaxation time, one can derive R = (m L) / (n e^2 mu A), which shows that resistance depends on the length and cross-section of the conductor and on the material properties. The resistivity rho is defined by R = rho L / A, so rho is an intrinsic property of the material, independent of shape. Conductivity sigma is the reciprocal of resistivity, sigma = 1 / rho, and it is often more convenient when dealing with good conductors."
+        },
+        {
+          "type": "paragraph",
+          "text": "The temperature dependence of resistance is one of the most important practical features. For most metals, resistance increases with temperature because the increased thermal vibration of the lattice increases the collision rate and reduces the mean free time between collisions. For small temperature ranges, R_T = R_0 [1 + alpha (T - T_0)], where alpha is the temperature coefficient of resistance. For semiconductors and insulators the behaviour is opposite: resistance falls with temperature because more charge carriers are released. The distinction is a frequent examination point because it tests whether the student understands that resistance depends on both carrier density and mobility."
+        },
+        {
+          "type": "table",
+          "caption": "Resistance and resistivity summarised",
+          "columns": [
+            "Quantity",
+            "Symbol",
+            "Relation",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "Current",
+              "I",
+              "I = dQ/dt",
+              "Rate of flow of charge"
+            ],
+            [
+              "Resistance",
+              "R",
+              "R = V / I",
+              "Opposition to current"
+            ],
+            [
+              "Resistivity",
+              "rho",
+              "R = rho L / A",
+              "Material property, depends on temperature"
+            ],
+            [
+              "Conductivity",
+              "sigma",
+              "sigma = 1 / rho",
+              "Ease of conduction"
+            ],
+            [
+              "Drift-velocity relation",
+              "I = n e A v_d",
+              "Microscopic basis of current",
+              "Links current to carrier density, area and drift"
+            ],
+            [
+              "Temperature coefficient",
+              "alpha",
+              "R_T = R_0 [1 + alpha (T - T_0)]",
+              "Small-range approximation"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A wire of length 2 m and cross-sectional area 0.5 mm^2 has resistivity 1.7 x 10^-8 ohm m. Find its resistance.",
+              "note": "R = rho L / A = (1.7 x 10^-8) x 2 / (0.5 x 10^-6) = 3.4 x 10^-2 / 10^-6 x 0.5 = 0.068 ohm. The very low resistance is typical of a copper wire; large resistance requires either a long thin wire or a poor conductor."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electrical-energy-and-power",
+      "title": "Electrical energy and power",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a current flows through a conductor, electrical energy is converted into other forms, usually heat. The power delivered to a device is the rate of doing work, P = V I. Using Ohm's law, this can also be written as P = I^2 R or P = V^2 / R, depending on what is held constant in the problem. These three forms are equivalent and interchangeable, and choosing the right one saves time: if the current and resistance are known, P = I^2 R is the quickest; if the voltage and resistance are known, P = V^2 / R is better."
+        },
+        {
+          "type": "paragraph",
+          "text": "Energy is power multiplied by time, so the electrical energy supplied is W = P t = V I t. In practice the commercial unit of energy is the kilowatt-hour, which is the energy consumed by a 1 kilowatt device running for one hour. One kilowatt-hour is 3.6 x 10^6 joules. Questions on billing or comparison of appliances therefore require converting between watts, kilowatts, hours and joules, and remembering that power is the instantaneous rate while energy is the total over time."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A heater rated at 1500 W is run for 3 hours. Find the energy consumed in kilowatt-hours.",
+              "note": "Energy = 1500 W x 3 h = 4500 Wh = 4.5 kWh. If 1 kWh costs a given rate, the cost is 4.5 times that rate. The power rating is the rate of consumption, not the total energy."
+            },
+            {
+              "text": "A 12 ohm resistor carries a current of 2 A. Find the power dissipated.",
+              "note": "P = I^2 R = 4 x 12 = 48 W. Alternatively V = I R = 24 V and P = V I = 48 W, or P = V^2 / R = 576 / 12 = 48 W. All three give the same result."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Power is the rate of energy conversion; P = V I = I^2 R = V^2 / R.",
+            "Energy is power times time; W = V I t.",
+            "The commercial unit is the kilowatt-hour; 1 kWh = 3.6 x 10^6 J.",
+            "In series, the same current flows, so P = I^2 R means the larger resistance dissipates more power.",
+            "In parallel, the same voltage is applied, so P = V^2 / R means the smaller resistance dissipates more power."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cells-emf-and-internal-resistance",
+      "title": "Cells, EMF and internal resistance",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A cell supplies electrical energy by converting chemical energy, and its performance is described by two quantities: the electromotive force (EMF) and the internal resistance. The EMF, denoted E or script E, is the potential difference across the terminals of the cell when no current is drawn. It is a measure of the energy per unit charge the cell can supply, not a force in the mechanical sense despite the name. The internal resistance r is the resistance of the materials inside the cell; it causes the terminal voltage to fall when a current is drawn."
+        },
+        {
+          "type": "paragraph",
+          "text": "When a cell of EMF E and internal resistance r supplies a current I to an external load R, the terminal voltage is V = E - I r. The lost volts I r are the voltage drop inside the cell. This relation explains why a battery appears weaker under load: the terminal voltage drops not because the EMF has changed but because part of the EMF is used up pushing the current through the internal resistance. The maximum current the cell can deliver in a short circuit would be E / r, though in practice such a discharge is damaging and brief."
+        },
+        {
+          "type": "paragraph",
+          "text": "Cells can be combined in series or parallel to change the effective EMF and internal resistance. In series, the EMFs add and the internal resistances add, so the total EMF is the sum and the total internal resistance is the sum. In parallel, the EMF is the same as that of one cell if all cells are identical, while the internal resistance is reduced, because the same EMFs oppose each other only if they are equal. Mixed groupings are also possible, and they are analysed by reducing series and parallel combinations step by step."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A cell of EMF 1.5 V and internal resistance 0.5 ohm is connected to a 4.5 ohm resistor. Find the current and terminal voltage.",
+              "note": "Total resistance = 4.5 + 0.5 = 5.0 ohm. I = E / (R + r) = 1.5 / 5 = 0.3 A. Terminal voltage V = E - I r = 1.5 - 0.3 x 0.5 = 1.35 V. The terminal voltage is less than the EMF because of the internal drop."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "EMF",
+              "meaning": "Electromotive force; the terminal potential difference of a cell when no current is drawn."
+            },
+            {
+              "term": "Internal resistance",
+              "meaning": "The resistance within a cell that causes the terminal voltage to fall under load."
+            },
+            {
+              "term": "Terminal voltage",
+              "meaning": "The potential difference across the terminals of a cell when a current is flowing; V = E - I r."
+            },
+            {
+              "term": "Lost volts",
+              "meaning": "The voltage drop I r inside the cell when current is drawn."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "series-and-parallel-combinations",
+      "title": "Series and parallel combinations of resistors",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Resistors in series all carry the same current, so the total resistance is the sum of the individual resistances: R_series = R1 + R2 + R3 + ... . The same current flows through each, and the total potential difference is shared in proportion to the resistances. This is the simplest combination, and it is used whenever the current is to be the same through several components."
+        },
+        {
+          "type": "paragraph",
+          "text": "Resistors in parallel all have the same potential difference across them, so the reciprocal of the total resistance is the sum of the reciprocals: 1 / R_parallel = 1 / R1 + 1 / R2 + 1 / R3 + ... . The total current divides among the branches in inverse proportion to the resistances, so the smallest resistance carries the largest current. Parallel combinations are used to split current and to provide alternative paths, and the rule that the total resistance is less than the smallest individual resistance is a useful sanity check."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Two resistors 6 ohm and 3 ohm are connected in parallel. Find the equivalent resistance.",
+              "note": "1 / R = 1 / 6 + 1 / 3 = 1 / 6 + 2 / 6 = 3 / 6 = 1 / 2, so R = 2 ohm. The equivalent resistance is less than either resistor, which is the expected result for a parallel combination."
+            },
+            {
+              "text": "The same resistors are now connected in series with a 12 V supply. Find the current and the voltage across the 6 ohm resistor.",
+              "note": "R = 6 + 3 = 9 ohm. I = 12 / 9 = 1.33 A. Voltage across 6 ohm = I x 6 = 8 V. The 6 ohm resistor takes two-thirds of the voltage, as expected from the ratio of resistances."
+            }
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Series: same current, resistances add.",
+            "Parallel: same voltage, reciprocals add.",
+            "In series, the larger resistor takes the larger share of voltage.",
+            "In parallel, the smaller resistor takes the larger share of current.",
+            "The equivalent resistance in parallel is always less than the smallest individual resistance."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kirchhoffs-laws",
+      "title": "Kirchhoff's laws",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Kirchhoff's laws are the two general rules that solve any circuit, even one too complicated for series and parallel reduction. Kirchhoff's current law, also called the junction rule, states that the algebraic sum of currents at any junction is zero. This is a direct consequence of the conservation of charge: charge cannot pile up at a junction, so the current entering must equal the current leaving. The sign convention is that currents entering are taken as positive and leaving as negative, or the reverse, as long as it is applied consistently."
+        },
+        {
+          "type": "paragraph",
+          "text": "Kirchhoff's voltage law, also called the loop rule, states that the algebraic sum of the potential differences around any closed loop is zero. This is a consequence of the conservation of energy and the fact that the electric field is conservative: a charge that returns to its starting point has undergone no net change in potential energy. Around a loop, the EMFs and the IR drops sum to zero, with the sign of each term taken according to the direction of travel. The usual practice is to go around the loop in one direction, taking an EMF as positive when it tends to drive current in that direction and an IR drop as positive when the resistance is traversed in the direction of the current."
+        },
+        {
+          "type": "paragraph",
+          "text": "The two laws together are sufficient to solve any network. For a circuit with n junctions and b branches, you write the current law at n - 1 independent junctions and the voltage law around enough independent loops to give b independent equations. The solution then gives every current and voltage. The Wheatstone bridge is an important special case: when the ratio of resistances in one arm equals the ratio in the other, the galvanometer shows no deflection, and the bridge is said to be balanced."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "In a Wheatstone bridge, P = 2 ohm, Q = 4 ohm, R = 3 ohm. Find the value of S for balance.",
+              "note": "Balance condition: P / Q = R / S, so 2 / 4 = 3 / S, giving S = 6 ohm. At balance no current flows through the galvanometer, and the bridge can be used to compare or measure an unknown resistance."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Kirchhoff's laws at a glance",
+          "columns": [
+            "Law",
+            "Statement",
+            "Basis",
+            "Use"
+          ],
+          "rows": [
+            [
+              "Current law",
+              "Sum of currents at a junction is zero",
+              "Conservation of charge",
+              "Junction equations"
+            ],
+            [
+              "Voltage law",
+              "Sum of potential differences around a loop is zero",
+              "Conservation of energy",
+              "Loop equations"
+            ],
+            [
+              "Wheatstone balance",
+              "P / Q = R / S",
+              "Zero galvanometer current",
+              "Comparing resistances"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "potentiometer",
+      "title": "Potentiometer",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A potentiometer is a long uniform wire over which a constant current flows, so that the potential drop along the wire is proportional to the length. It is the most accurate device in this unit for comparing EMFs and measuring internal resistance, because it uses a null method: at the balance point no current is drawn from the cell being measured, so the measured EMF is not affected by the internal resistance. This is a key advantage over a voltmeter, which always draws some current."
+        },
+        {
+          "type": "paragraph",
+          "text": "To compare the EMFs of two cells, each cell is connected in turn in the potentiometer circuit and the balance length is found for each. The EMFs are then proportional to the balance lengths, so E1 / E2 = l1 / l2, provided the same current flows in the potentiometer wire for both measurements. To measure the internal resistance of a cell, the balance length is found first with the cell on its own (open circuit, giving EMF), and then with a known resistance connected across the cell so that current flows (giving terminal voltage). The internal resistance follows from the drop in balance length."
+        },
+        {
+          "type": "paragraph",
+          "text": "The principle is simple: if the potential drop per unit length is k, then the balance length l gives a terminal potential difference V = k l. For a cell at open circuit, V is the EMF, and for a cell under load, V is the terminal voltage. Because the potentiometer measures potential difference without drawing current from the cell under test, it is the natural choice whenever high accuracy is needed and the cell's internal resistance matters."
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A potentiometer balances a cell of EMF 1.5 V at a length of 60 cm. The same cell, connected through a 5 ohm resistor, balances at 48 cm. Find the internal resistance.",
+              "note": "E / V = l1 / l2 = 60 / 48 = 5 / 4, so V = (4 / 5) E = 1.2 V. Current I = V / R = 1.2 / 5 = 0.24 A. From V = E - I r, r = (E - V) / I = (1.5 - 1.2) / 0.24 = 0.3 / 0.24 = 1.25 ohm. The internal resistance is found from the ratio of balance lengths, without measuring current directly."
+            }
+          ]
+        },
+        {
+          "type": "terms",
+          "items": [
+            {
+              "term": "Potentiometer",
+              "meaning": "A device using a long uniform wire to compare EMFs and measure internal resistance by a null method."
+            },
+            {
+              "term": "Balance point",
+              "meaning": "The position on the potentiometer wire at which the galvanometer shows no deflection."
+            },
+            {
+              "term": "Null method",
+              "meaning": "A measurement made when the detector current is zero, so the measured quantity is not disturbed."
+            },
+            {
+              "term": "Potential gradient",
+              "meaning": "The potential drop per unit length along the potentiometer wire."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "revision-and-important-points",
+      "title": "Important points and revision",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Current electricity reduces to a small set of relationships that every problem uses: the definition of current, the drift-velocity formula, Ohm's law and its microscopic basis, the resistance and resistivity formulas, the temperature dependence, the power formulas, and the circuit laws. The main source of error is not the formulas themselves but mixing up which quantity is constant in a given situation — current in series, voltage in parallel, EMF in an open circuit, terminal voltage under load — and forgetting the internal resistance of a cell when it matters."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Current is rate of flow of charge; I = dQ/dt.",
+            "I = n e A v_d; drift velocity is small but the carrier density is large.",
+            "Ohm's law: V = I R, valid for ohmic conductors; distinguish from non-ohmic behaviour.",
+            "R = rho L / A; resistivity depends on material and temperature.",
+            "For metals, resistance increases with temperature; for semiconductors, it decreases.",
+            "Power: P = V I = I^2 R = V^2 / R; energy: W = V I t.",
+            "Terminal voltage V = E - I r; internal resistance matters under load.",
+            "Series: same current; parallel: same voltage.",
+            "Kirchhoff's laws: conservation of charge at junctions, conservation of energy around loops.",
+            "Potentiometer uses a null method; balance lengths compare EMFs and internal resistances."
+          ]
+        },
+        {
+          "type": "table",
+          "caption": "Quick formula sheet for Current Electricity",
+          "columns": [
+            "Quantity",
+            "Formula",
+            "When to use"
+          ],
+          "rows": [
+            [
+              "Current",
+              "I = dQ/dt",
+              "Rate of flow of charge"
+            ],
+            [
+              "Drift velocity",
+              "I = n e A v_d",
+              "Microscopic basis of current"
+            ],
+            [
+              "Ohm's law",
+              "V = I R",
+              "Ohmic conductor"
+            ],
+            [
+              "Resistance",
+              "R = rho L / A",
+              "From material and geometry"
+            ],
+            [
+              "Temperature dependence",
+              "R_T = R_0 [1 + alpha (T - T_0)]",
+              "Small temperature range"
+            ],
+            [
+              "Power",
+              "P = V I = I^2 R = V^2 / R",
+              "Rate of energy conversion"
+            ],
+            [
+              "Energy",
+              "W = V I t",
+              "Total electrical energy"
+            ],
+            [
+              "Terminal voltage",
+              "V = E - I r",
+              "Cell under load"
+            ],
+            [
+              "Series resistance",
+              "R = R1 + R2 + ...",
+              "Same current"
+            ],
+            [
+              "Parallel resistance",
+              "1 / R = 1 / R1 + 1 / R2 + ...",
+              "Same voltage"
+            ],
+            [
+              "Wheatstone balance",
+              "P / Q = R / S",
+              "Balanced bridge"
+            ],
+            [
+              "Potentiometer comparison",
+              "E1 / E2 = l1 / l2",
+              "Same potentiometer current"
+            ],
+            [
+              "Internal resistance from potentiometer",
+              "r = R (l1 / l2 - 1)",
+              "Balance lengths with and without load"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Electric current is the rate of flow of charge; in metals it is carried by drifting free electrons.",
+    "Drift velocity is related to current by I = n e A v_d, and mobility relates drift velocity to electric field.",
+    "Ohm's law states V = I R for ohmic conductors, while resistivity R = rho L / A is an intrinsic material property.",
+    "Resistance increases with temperature for metals and decreases for semiconductors.",
+    "Power is P = V I = I^2 R = V^2 / R, and energy is power times time.",
+    "The terminal voltage of a cell is V = E - I r, where r is the internal resistance.",
+    "In series the same current flows and resistances add; in parallel the same voltage is applied and reciprocals add.",
+    "Kirchhoff's current law expresses conservation of charge at junctions; the voltage law expresses conservation of energy around loops.",
+    "A potentiometer uses a null method to compare EMFs and measure internal resistance without drawing current from the cell under test."
+  ],
+  "examFocus": [
+    "In circuit problems, decide first whether the current or the voltage is the same across the parts in question; series means same current, parallel means same voltage.",
+    "When internal resistance is involved, always write V = E - I r explicitly and stop using the terminal voltage as if it were the EMF.",
+    "In a Wheatstone bridge, state the balance condition and the consequence that the galvanometer current is zero at balance.",
+    "For a potentiometer, remember that the balance length is proportional to the potential difference only if the potentiometer current is the same for both measurements.",
+    "Keep units consistent, especially for area and length when calculating resistance from resistivity."
+  ],
+  "vocabulary": [
+    {
+      "word": "Electric current",
+      "meaning": "The rate of flow of charge past a cross-section; I = dQ/dt."
+    },
+    {
+      "word": "Drift velocity",
+      "meaning": "The average velocity of free electrons in a conductor under an electric field."
+    },
+    {
+      "word": "Mobility",
+      "meaning": "Drift velocity per unit electric field."
+    },
+    {
+      "word": "Resistance",
+      "meaning": "The ratio of potential difference to current; R = V / I."
+    },
+    {
+      "word": "Resistivity",
+      "meaning": "The intrinsic property rho such that R = rho L / A."
+    },
+    {
+      "word": "EMF",
+      "meaning": "Electromotive force; the terminal potential difference of a cell when no current is drawn."
+    },
+    {
+      "word": "Internal resistance",
+      "meaning": "The resistance inside a cell that reduces the terminal voltage under load."
+    },
+    {
+      "word": "Terminal voltage",
+      "meaning": "The voltage across a cell's terminals when current is flowing."
+    },
+    {
+      "word": "Kirchhoff's current law",
+      "meaning": "The algebraic sum of currents at a junction is zero."
+    },
+    {
+      "word": "Kirchhoff's voltage law",
+      "meaning": "The algebraic sum of potential differences around a closed loop is zero."
+    },
+    {
+      "word": "Potentiometer",
+      "meaning": "A device that compares EMFs and measures internal resistance by a null method."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Drift of free electrons in a conductor",
+      "description": "A metal conductor with free electrons shown as small dots moving in random directions between collisions with ions. An electric field is applied along the conductor, and the dots acquire a slow average drift opposite to the field. The diagram separates the fast random motion from the small net drift and labels the drift velocity v_d.",
+      "labels": [
+        "conductor",
+        "free electron",
+        "random thermal motion",
+        "electric field direction",
+        "drift velocity v_d"
+      ]
+    },
+    {
+      "caption": "Figure: A cell with internal resistance in a circuit",
+      "description": "A circuit diagram showing a cell of EMF E and internal resistance r connected to an external resistor R. The terminal voltage V is marked across the cell, and the relation V = E - I r is shown with an arrow indicating the lost volts I r inside the cell.",
+      "labels": [
+        "EMF E",
+        "internal resistance r",
+        "external resistor R",
+        "terminal voltage V",
+        "current I",
+        "lost volts I r"
+      ]
+    },
+    {
+      "caption": "Figure: Potentiometer circuit for comparing EMFs",
+      "description": "A potentiometer wire AB with a driving cell and a rheostat, and a galvanometer connected through a two-way switch to two cells whose EMFs are to be compared. The diagram shows the balance points at lengths l1 and l2 on the wire and the relation E1 / E2 = l1 / l2.",
+      "labels": [
+        "potentiometer wire",
+        "driving cell",
+        "galvanometer",
+        "cell 1",
+        "cell 2",
+        "balance length l1",
+        "balance length l2"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-current-electricity-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The SI unit of electric current is:",
+      "options": [
+        "Ampere",
+        "Volt",
+        "Ohm",
+        "Coulomb"
+      ],
+      "correctIndex": 0,
+      "answer": "Ampere",
+      "explanation": "The ampere is the unit of current, defined from the flow of charge per unit time. The coulomb is the unit of charge, the volt is the unit of potential difference, and the ohm is the unit of resistance.",
+      "commonMistake": "Confusing ampere and coulomb, because current and charge are closely related."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-02",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In a metal, the conventional direction of current is opposite to the direction of ______ flow.",
+      "answer": "electron",
+      "explanation": "Conventional current is taken as the direction in which positive charge would move. In a metal, charge is carried by electrons, so the actual electron flow is opposite to the conventional current direction.",
+      "commonMistake": "Forgetting the convention and answering 'current' or 'charge' instead of the specific carrier."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The drift velocity of electrons in a typical conductor is:",
+      "options": [
+        "Nearly the speed of light",
+        "Very small, of order 10^-4 m s^-1",
+        "In the order of 10 m s^-1",
+        "Zero unless the wire is superconducting"
+      ],
+      "correctIndex": 1,
+      "answer": "Very small, of order 10^-4 m s^-1",
+      "explanation": "The drift velocity is small because the free electron density is very large, so even a modest current involves a slow average motion. The random thermal motion is much faster, but it does not contribute to current.",
+      "commonMistake": "Assuming that current flows at the speed of the signal, rather than at the slow drift of the individual electrons."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Define resistivity and state how it depends on the dimensions of the conductor.",
+      "answer": "Resistivity is the intrinsic property rho such that R = rho L / A. It does not depend on the dimensions of the conductor; it depends on the material and temperature.",
+      "explanation": "Resistance increases with length and decreases with area, but resistivity is independent of shape. This is the distinction between resistance, which is a property of a particular object, and resistivity, which is a property of the material.",
+      "commonMistake": "Saying resistivity depends on length or area, which confuses resistance with resistivity."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A wire of length L and area A has resistance R. If a second wire of the same material has length 2L and area A/2, its resistance is:",
+      "options": [
+        "2 R",
+        "R",
+        "4 R",
+        "8 R"
+      ],
+      "correctIndex": 2,
+      "answer": "4 R",
+      "explanation": "R = rho L / A. The new resistance is rho (2L) / (A/2) = 4 rho L / A = 4 R. Doubling the length doubles the resistance, halving the area doubles it again, so the total is four times.",
+      "commonMistake": "Changing only one of length or area and missing the combined factor."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-06",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Derive the relation I = n e A v_d for the current in a conductor.",
+      "answer": "I = n e A v_d",
+      "explanation": "Consider a conductor of cross-sectional area A with n free electrons per unit volume. In time t, electrons move a distance v_d t, so the charge crossing a section is the charge in a cylinder of volume A v_d t, which is n e A v_d t. Current I = charge / time = n e A v_d. The derivation shows that current is proportional to carrier density, charge, area and drift velocity.",
+      "commonMistake": "Omitting the area or the carrier density and ending with I proportional to v_d alone."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-07",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The temperature coefficient of resistance of a metal is:",
+      "options": [
+        "Negative",
+        "Zero",
+        "Always infinite",
+        "Positive"
+      ],
+      "correctIndex": 3,
+      "answer": "Positive",
+      "explanation": "For metals, resistance increases with temperature because lattice vibrations increase the collision rate. Hence the temperature coefficient is positive. For semiconductors it is negative, because more carriers are released as temperature rises.",
+      "commonMistake": "Applying the metal behaviour to all materials, ignoring the difference from semiconductors."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-08",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "State two differences between ohmic and non-ohmic conductors.",
+      "answer": "An ohmic conductor obeys V = I R with a constant resistance, so its V-I graph is a straight line through the origin. A non-ohmic conductor does not have a constant V/I ratio, so its V-I graph is curved; examples include filament lamps and diodes.",
+      "explanation": "The distinction is about whether resistance is constant for different voltages. It is not about whether the device conducts, because non-ohmic devices still conduct but not proportionally.",
+      "commonMistake": "Thinking non-ohmic means the device does not obey Ohm's law in any sense, rather than that its resistance varies with voltage or current."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-09",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "A cell of EMF 2.0 V and internal resistance 0.8 ohm is connected to a 3.2 ohm resistor. Find the current, the terminal voltage and the power dissipated in the load.",
+      "answer": "I = 0.5 A, V = 1.6 V, P = 0.8 W",
+      "explanation": "Total resistance = 3.2 + 0.8 = 4.0 ohm. I = E / (R + r) = 2.0 / 4.0 = 0.5 A. Terminal voltage V = E - I r = 2.0 - 0.5 x 0.8 = 1.6 V. Power in the load P = I^2 R = 0.25 x 3.2 = 0.8 W. The terminal voltage is less than the EMF because of the internal drop.",
+      "commonMistake": "Using the EMF directly as the terminal voltage and ignoring the internal resistance drop."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-10",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Three resistors each of resistance R are connected in parallel. The equivalent resistance is:",
+      "options": [
+        "R / 3",
+        "3 R",
+        "R",
+        "2 R / 3"
+      ],
+      "correctIndex": 0,
+      "answer": "R / 3",
+      "explanation": "1 / R_eq = 1 / R + 1 / R + 1 / R = 3 / R, so R_eq = R / 3. In parallel, the equivalent resistance is less than the smallest individual resistance, and here it is one-third of one resistor.",
+      "commonMistake": "Adding the resistances directly as in series, which gives 3 R instead of R / 3."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-11",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Kirchhoff's current law is a consequence of the conservation of ______.",
+      "answer": "charge",
+      "explanation": "The current law states that the total current entering a junction equals the total current leaving, which is equivalent to saying charge does not accumulate at the junction. This is a direct expression of charge conservation.",
+      "commonMistake": "Answering 'energy' or 'current' instead of the conserved quantity, which is charge."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State Kirchhoff's voltage law and give the basis for it.",
+      "answer": "Kirchhoff's voltage law states that the algebraic sum of the potential differences around any closed loop is zero. It is based on conservation of energy: a charge returning to its starting point has no net change in potential energy.",
+      "explanation": "The law applies to any closed loop, not just simple series circuits. It is especially useful when multiple EMFs and junctions are present, because series and parallel rules alone are not sufficient.",
+      "commonMistake": "Thinking the law applies only to a single loop or only to circuits with one EMF."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-13",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a balanced Wheatstone bridge with P = 10 ohm, Q = 20 ohm and R = 5 ohm, the unknown S is:",
+      "options": [
+        "20 ohm",
+        "10 ohm",
+        "5 ohm",
+        "40 ohm"
+      ],
+      "correctIndex": 1,
+      "answer": "10 ohm",
+      "explanation": "Balance condition: P / Q = R / S, so 10 / 20 = 5 / S, giving S = 10 ohm. At balance no current flows through the galvanometer, and the ratio condition determines the unknown",
+      "commonMistake": "Using the ratio upside down or equating sums instead of ratios."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-14",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain why the terminal voltage of a cell is less than its EMF when a current is drawn.",
+      "answer": "The terminal voltage is V = E - I r. When current flows, some of the EMF is used up pushing the current through the internal resistance r, so the voltage available at the terminals is reduced by the lost volts I r.",
+      "explanation": "The EMF is the open-circuit voltage; the terminal voltage is the voltage under load. The difference is not because the EMF changes but because of the internal drop. This is why a battery appears weaker when heavily loaded.",
+      "commonMistake": "Thinking the EMF itself falls under load, rather than the terminal voltage falling because of internal resistance."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-15",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 5,
+      "origin": "practice",
+      "prompt": "Two resistors 6 ohm and 3 ohm are connected in parallel, and this combination is connected in series with a 2 ohm resistor across a 10 V supply. Find the total current and the voltage across the 3 ohm resistor.",
+      "answer": "Total current = 2 A; voltage across 3 ohm = 4 V",
+      "explanation": "Parallel equivalent = (6 x 3) / (6 + 3) = 18 / 9 = 2 ohm. Total resistance = 2 + 2 = 4 ohm. Total current = 10 / 4 = 2 A. Voltage across the parallel combination = 2 x 2 = 4 V, and both resistors have 4 V across them. Current through the 3 ohm resistor = 4 / 3 = 1.33 A, but the voltage across it is 4 V.",
+      "commonMistake": "Using the total current through the 3 ohm resistor instead of first finding the parallel voltage."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-16",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The commercial unit of electrical energy is:",
+      "options": [
+        "Joule",
+        "Watt",
+        "Kilowatt-hour",
+        "Kilowatt"
+      ],
+      "correctIndex": 2,
+      "answer": "Kilowatt-hour",
+      "explanation": "The kilowatt-hour is the energy consumed by a 1 kilowatt device in one hour, and it is the unit used for domestic billing. The joule is the SI unit of energy, while watt and kilowatt are units of power.",
+      "commonMistake": "Choosing joule, which is the correct SI unit but not the commercial unit used for billing."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-17",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "How does a potentiometer differ from a voltmeter in measuring EMF?",
+      "answer": "A potentiometer uses a null method and draws no current from the cell at the balance point, so it measures the EMF directly. A voltmeter draws some current, so it measures the terminal voltage, which may be less than the EMF due to internal resistance.",
+      "explanation": "The null method is the advantage: because no current is drawn, the measurement is not affected by the internal resistance. This is why the potentiometer is preferred for comparing EMFs accurately.",
+      "commonMistake": "Thinking both devices measure EMF equally well, when the voltmeter actually measures terminal voltage under a small load."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-18",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A potentiometer balances a cell of EMF 1.018 V at 50.9 cm. Another cell balances at 60.0 cm with the same potentiometer current. Find the EMF of the second cell.",
+      "answer": "1.2 V",
+      "explanation": "E1 / E2 = l1 / l2, so E2 = E1 x (l2 / l1) = 1.018 x (60 / 50.9) = 1.018 x 1.179 = 1.2 V approximately. The same potentiometer current is essential for the proportionality to hold.",
+      "commonMistake": "Forgetting that the potentiometer current must be the same, or inverting the ratio of lengths."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-19",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A cell balances on a potentiometer at length l1 with no external resistance, and at length l2 when a resistance R is connected across it. Derive an expression for the internal resistance.",
+      "answer": "r = R (l1 / l2 - 1)",
+      "explanation": "With no load, E is proportional to l1. With load, terminal voltage V is proportional to l2. So E / V = l1 / l2. Also V = E - I r and I = V / R. Substituting gives E / V = 1 + r / R = l1 / l2, so r = R (l1 / l2 - 1). This uses only the balance lengths and the known external resistance.",
+      "commonMistake": "Stopping at E / V = l1 / l2 without relating V to I and r through the external resistance."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-20",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The resistance of a conductor does not depend on:",
+      "options": [
+        "The length",
+        "The cross-sectional area",
+        "The material",
+        "The potential difference applied"
+      ],
+      "correctIndex": 3,
+      "answer": "The potential difference applied",
+      "explanation": "Resistance is a property of the conductor determined by its length, area, material and temperature, not by the applied voltage. If the material is ohmic, the ratio V/I is constant, but the resistance itself does not depend on V.",
+      "commonMistake": "Thinking that a larger voltage causes a larger resistance, when in fact it causes a larger current."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-21",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "In a series circuit, the same ______ flows through each component, and the total voltage is the ______ of the individual voltages.",
+      "answer": "current; sum",
+      "explanation": "In series, current is the same everywhere, and the supply voltage is shared among the components in proportion to their resistances. The total voltage is the sum of the individual voltage drops.",
+      "commonMistake": "Saying the voltage is the same in series, which is the parallel case."
+    },
+    {
+      "id": "isc-12-physics-q-current-electricity-22",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State Ohm's law in words and write the equation relating resistance, potential difference and current.",
+      "answer": "Ohm's law states that the current through a conductor is directly proportional to the potential difference across it, provided temperature and other physical conditions remain constant. The equation is V = I R.",
+      "explanation": "The condition about constant temperature is important because resistance can change with temperature, and then the simple proportionality no longer holds. The equation V = I R is the quantitative expression of the law.",
+      "commonMistake": "Omitting the condition that physical conditions remain constant, which is part of the law."
+    }
+  ]
+}

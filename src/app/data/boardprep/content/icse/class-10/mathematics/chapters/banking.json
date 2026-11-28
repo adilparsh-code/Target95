@@ -12,10 +12,22 @@
   "overview": {
     "intro": "A recurring deposit account is a savings scheme in which a customer deposits a fixed sum every month for a chosen number of months and receives the whole of it back with interest at maturity. Because the instalments arrive at different times, each one has been with the bank for a different length of time, and the interest is simple interest computed separately on each instalment. This chapter builds that idea from the ground up: counting how long each instalment has been held, summing those durations, condensing the sum into the single recurring deposit formula, and then running the formula in every direction to recover the instalment, the rate or the term from a given maturity value. A comparison with a fixed deposit closes the chapter and explains why the two schemes pay differently for the same total outlay.",
     "facts": [
-      { "label": "Monthly instalment", "value": "A fixed sum P deposited on the same date every month for n months" },
-      { "label": "Interest", "value": "Simple interest on each instalment for the months it has been held" },
-      { "label": "Recurring deposit formula", "value": "I = P x n x (n + 1) x r / 2400, where r is the rate per cent per annum" },
-      { "label": "Maturity value", "value": "MV = P x n + I, the total deposited plus the interest earned" }
+      {
+        "label": "Monthly instalment",
+        "value": "A fixed sum P deposited on the same date every month for n months"
+      },
+      {
+        "label": "Interest",
+        "value": "Simple interest on each instalment for the months it has been held"
+      },
+      {
+        "label": "Recurring deposit formula",
+        "value": "I = P x n x (n + 1) x r / 2400, where r is the rate per cent per annum"
+      },
+      {
+        "label": "Maturity value",
+        "value": "MV = P x n + I, the total deposited plus the interest earned"
+      }
     ]
   },
   "learningOutcomes": [
@@ -42,10 +54,22 @@
         {
           "type": "terms",
           "items": [
-            { "term": "Instalment (P)", "meaning": "The fixed sum deposited every month, usually anywhere from a few hundred to a few thousand rupees." },
-            { "term": "Term (n)", "meaning": "The number of monthly instalments, so a two-year account has n equal to 24." },
-            { "term": "Rate (r)", "meaning": "The rate of interest quoted per annum, applied to each instalment for the months it is held." },
-            { "term": "Maturity value (MV)", "meaning": "The amount the customer receives at the end, being the total deposited plus the interest." }
+            {
+              "term": "Instalment (P)",
+              "meaning": "The fixed sum deposited every month, usually anywhere from a few hundred to a few thousand rupees."
+            },
+            {
+              "term": "Term (n)",
+              "meaning": "The number of monthly instalments, so a two-year account has n equal to 24."
+            },
+            {
+              "term": "Rate (r)",
+              "meaning": "The rate of interest quoted per annum, applied to each instalment for the months it is held."
+            },
+            {
+              "term": "Maturity value (MV)",
+              "meaning": "The amount the customer receives at the end, being the total deposited plus the interest."
+            }
           ]
         },
         {
@@ -70,20 +94,72 @@
         {
           "type": "table",
           "caption": "Holding period of each instalment in a twelve month account",
-          "columns": ["Instalment month", "Months held", "Running total of months"],
+          "columns": [
+            "Instalment month",
+            "Months held",
+            "Running total of months"
+          ],
           "rows": [
-            ["1", "12", "12"],
-            ["2", "11", "23"],
-            ["3", "10", "33"],
-            ["4", "9", "42"],
-            ["5", "8", "50"],
-            ["6", "7", "57"],
-            ["7", "6", "63"],
-            ["8", "5", "68"],
-            ["9", "4", "72"],
-            ["10", "3", "75"],
-            ["11", "2", "77"],
-            ["12", "1", "78"]
+            [
+              "1",
+              "12",
+              "12"
+            ],
+            [
+              "2",
+              "11",
+              "23"
+            ],
+            [
+              "3",
+              "10",
+              "33"
+            ],
+            [
+              "4",
+              "9",
+              "42"
+            ],
+            [
+              "5",
+              "8",
+              "50"
+            ],
+            [
+              "6",
+              "7",
+              "57"
+            ],
+            [
+              "7",
+              "6",
+              "63"
+            ],
+            [
+              "8",
+              "5",
+              "68"
+            ],
+            [
+              "9",
+              "4",
+              "72"
+            ],
+            [
+              "10",
+              "3",
+              "75"
+            ],
+            [
+              "11",
+              "2",
+              "77"
+            ],
+            [
+              "12",
+              "1",
+              "78"
+            ]
           ]
         },
         {
@@ -130,12 +206,32 @@
         {
           "type": "table",
           "caption": "A 24 month account with an instalment of 500 rupees at 8 per cent per annum",
-          "columns": ["Quantity", "Working", "Value"],
+          "columns": [
+            "Quantity",
+            "Working",
+            "Value"
+          ],
           "rows": [
-            ["Total months held", "24 x 25 / 2", "300"],
-            ["Interest", "500 x 24 x 25 x 8 / 2400", "1000.00"],
-            ["Total deposited", "500 x 24", "12000.00"],
-            ["Maturity value", "12000.00 + 1000.00", "13000.00"]
+            [
+              "Total months held",
+              "24 x 25 / 2",
+              "300"
+            ],
+            [
+              "Interest",
+              "500 x 24 x 25 x 8 / 2400",
+              "1000.00"
+            ],
+            [
+              "Total deposited",
+              "500 x 24",
+              "12000.00"
+            ],
+            [
+              "Maturity value",
+              "12000.00 + 1000.00",
+              "13000.00"
+            ]
           ]
         },
         {
@@ -223,11 +319,31 @@
         {
           "type": "table",
           "caption": "Same total outlay of 24000 rupees at 8 per cent per annum for one year",
-          "columns": ["Scheme", "Amount with the bank", "Interest", "Return at the end"],
+          "columns": [
+            "Scheme",
+            "Amount with the bank",
+            "Interest",
+            "Return at the end"
+          ],
           "rows": [
-            ["Fixed deposit, lump sum", "24000 from the first day", "24000 x 8 / 100 = 1920", "25920.00"],
-            ["Recurring deposit, 2000 monthly", "growing from 2000 to 24000", "2000 x 12 x 13 x 8 / 2400 = 1040", "25040.00"],
-            ["Difference", "same total paid in", "1920 - 1040 = 880", "25920 - 25040 = 880"]
+            [
+              "Fixed deposit, lump sum",
+              "24000 from the first day",
+              "24000 x 8 / 100 = 1920",
+              "25920.00"
+            ],
+            [
+              "Recurring deposit, 2000 monthly",
+              "growing from 2000 to 24000",
+              "2000 x 12 x 13 x 8 / 2400 = 1040",
+              "25040.00"
+            ],
+            [
+              "Difference",
+              "same total paid in",
+              "1920 - 1040 = 880",
+              "25920 - 25040 = 880"
+            ]
           ]
         },
         {
@@ -282,40 +398,95 @@
   ],
   "figures": [
     {
-      "caption": "How long each instalment has been with the bank",
-      "description": "A bar diagram with twelve bars of decreasing height, labelled month one to month twelve from left to right. The first bar is tallest and annotated twelve months held, and each later bar is one step shorter until the final bar, annotated one month held. Above the bars a bracket spans all twelve and is labelled 78 instalment-months in total, equal to twelve times thirteen divided by two.",
-      "labels": ["Month 1", "Month 12", "Months held", "78 instalment-months", "Closing bracket"]
+      "id": "bank-fig-1",
+      "title": "Monthly instalments on a timeline",
+      "description": "A horizontal timeline showing equal monthly deposits P at month 1 to month n, with the first deposit held longest and the last for one month, illustrating instalment-months.",
+      "alt": "Timeline of recurring deposit instalments"
     },
     {
-      "caption": "Maturity value as deposit plus interest",
-      "description": "A stacked bar diagram of two segments. The lower, much taller segment is the total deposited, labelled P times n. The upper, shorter segment is the interest, labelled P times n times n plus one times r over 2400. The full bar is bracketed and labelled maturity value. Beside it a second, slightly taller bar shows the same total held as a fixed deposit lump sum, with a bracket marking the excess that the recurring deposit does not earn.",
-      "labels": ["Total deposited", "Interest", "Maturity value", "Fixed deposit comparison", "Difference"]
+      "id": "bank-fig-2",
+      "title": "Maturity value components",
+      "description": "A stacked bar showing total deposits (Pn) and interest (I) combining to form maturity value MV = Pn + I.",
+      "alt": "Maturity value as deposits plus interest"
+    },
+    {
+      "id": "bank-fig-3",
+      "title": "RD versus lump-sum deposit",
+      "description": "Comparison diagram showing gradual RD deposits accumulating to the same total as a lump-sum fixed deposit, explaining why RD earns less interest over the same term.",
+      "alt": "Comparison of recurring deposit and fixed deposit"
     }
   ],
   "keyPoints": [
-    "A recurring deposit pays simple interest on each instalment for the number of months that instalment has been held.",
-    "The holding periods run from n down to 1 and sum to n times n plus one over two.",
-    "The interest is I = P x n x (n + 1) x r / 2400, where r is the rate per cent per annum.",
-    "The maturity value is the total deposited, P times n, plus the interest.",
-    "To recover the instalment, factor P times n out of the maturity value and divide once.",
-    "To recover the rate, use r = 2400 times the interest divided by P times n times n plus one.",
-    "To recover the term, solve the resulting quadratic and keep the positive whole number root.",
-    "A recurring deposit earns roughly half the interest of a fixed deposit of the same total at the same rate, because the money arrives late."
+    "A Recurring Deposit (RD) is a scheme where a fixed instalment is deposited every month for a chosen period and earns interest.",
+    "Total deposit (principal sum of instalments) = monthly instalment P × number of months n.",
+    "Instalment-months (equivalent principal for 1 month) = P × n(n + 1)/2.",
+    "Interest on RD (simple interest) is I = P × n(n + 1) × r / (2 × 12 × 100) = P n(n+1)r / 2400, where r is rate % per annum.",
+    "Maturity value MV = total deposit + interest = Pn + I.",
+    "The divisor 2400 comes from 100 (percentage), 12 (months per year) and 2 (from sum 1+2+...+n).",
+    "Each instalment earns interest only for the months it remains in the account; the first for n months, the last for 1 month.",
+    "RD interest is less than interest on the same total deposited as a lump-sum fixed deposit for the full term, because money is deposited gradually.",
+    "Given any three of P, n, r, I, MV, the unknown can be found by forming and solving the appropriate equation.",
+    "Always check units (months, per annum rate) and verify by substitution when finding P, n or r."
   ],
   "examFocus": [
-    "State the total deposited first, then the interest with its full substitution, then the maturity value as their sum; three visible lines are worth credit.",
-    "The divisor 2400 combines the percentage, the months in a year and the factor of two from the sum of the first n numbers; writing it as 100 x 12 x 2 shows the marker you understand it.",
-    "When the term is unknown, do not stop at the quadratic formula: substitute the candidate whole number back and confirm the maturity value.",
-    "Quote interest and money to two decimal places where the working produces them, and do not round the instalment-months count at any stage."
+    "Write the RD interest formula with correct substitution of P, n and r before calculating.",
+    "Compute n(n+1)/2 or n(n+1) carefully to avoid arithmetic errors in instalment-months.",
+    "Distinguish total deposit (Pn) from maturity value (Pn + I) in the final answer.",
+    "When asked to find P, n or r, rearrange the formula stepwise and state the answer with units.",
+    "For ‘months to term’ problems, select the positive integer root and reject impossible values.",
+    "In comparison questions (RD vs fixed/lump sum), calculate both interests/values and explain the difference clearly.",
+    "Remember the last instalment earns interest for 1 month and the first for n months.",
+    "Verify answers by substituting back into I or MV when time permits."
   ],
   "vocabulary": [
-    { "word": "Recurring deposit", "meaning": "A savings account in which a fixed sum is deposited every month for a chosen term and returned with interest at maturity." },
-    { "word": "Instalment", "meaning": "The fixed monthly sum paid into a recurring deposit account." },
-    { "word": "Term", "meaning": "The number of monthly instalments in the account, denoted n in the formula." },
-    { "word": "Instalment-months", "meaning": "One instalment held for one month; the total is the sum of the first n natural numbers." },
-    { "word": "Maturity value", "meaning": "The amount received at the end of the term, being the total deposited plus the simple interest earned." },
-    { "word": "Fixed deposit", "meaning": "A lump sum placed with the bank for a term, earning simple interest on the whole amount from the first day." },
-    { "word": "Simple interest", "meaning": "Interest computed on the original sum alone, with no interest ever earning further interest." }
+    {
+      "meaning": "A savings scheme with regular monthly instalments for a fixed term earning interest.",
+      "word": "Recurring Deposit (RD)"
+    },
+    {
+      "meaning": "The fixed amount deposited every month.",
+      "word": "Instalment (P)"
+    },
+    {
+      "meaning": "The duration of the deposit in months.",
+      "word": "Term (n)"
+    },
+    {
+      "meaning": "The annual percentage rate at which interest is calculated.",
+      "word": "Rate of interest (r)"
+    },
+    {
+      "meaning": "The sum of months each instalment is held, equal to n(n+1)/2 in total units.",
+      "word": "Instalment-months"
+    },
+    {
+      "meaning": "The amount earned on deposits over the term, calculated as simple interest on instalment-months.",
+      "word": "Interest (I)"
+    },
+    {
+      "meaning": "The total amount received at the end, equal to total deposits plus interest.",
+      "word": "Maturity value (MV)"
+    },
+    {
+      "meaning": "The effective amount on which interest is computed via instalment-months.",
+      "word": "Principal (RD context)"
+    },
+    {
+      "meaning": "A lump-sum deposit held for a fixed term, used for comparison with RD.",
+      "word": "Fixed deposit"
+    },
+    {
+      "meaning": "For each year; annual rate used in RD calculations.",
+      "word": "Per annum"
+    },
+    {
+      "meaning": "A three-month period; sometimes used in banking contexts (RD interest is usually credited as per scheme).",
+      "word": "Quarter"
+    },
+    {
+      "meaning": "Face or stated value; distinguish from amounts actually deposited/received.",
+      "word": "Nominal value (context)"
+    }
   ],
   "questions": [
     {
@@ -344,25 +515,25 @@
       "origin": "practice",
       "prompt": "The interest on a recurring deposit is best described as:",
       "options": [
-        "Simple interest on each instalment for the months it is held",
         "Compound interest on each instalment annually",
+        "Simple interest on each instalment for the months it is held",
         "Simple interest on the total deposited for the whole term",
         "Compound interest on the average balance"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "answer": "Simple interest on each instalment for the months it is held",
       "explanation": "No interest is ever added to the account and made to earn further interest, so every instalment earns a single flat return for the time it has been with the bank. That is precisely why the calculation reduces to a count of instalment-months rather than to compounding.",
       "commonMistake": "Applying compound interest, which would require the balance to be recomputed at each period."
     },
     {
       "id": "icse-10-math-q-bank-03",
-      "type": "fill-blank",
+      "type": "short",
       "difficulty": "easy",
       "marks": 2,
       "origin": "practice",
-      "prompt": "A depositor pays 2000 rupees every month for 12 months. The total amount deposited is ______ rupees.",
+      "prompt": "A depositor pays 2000 rupees every month for 12 months. Find the total amount deposited.",
       "answer": "24000",
-      "explanation": "The total deposited is the instalment multiplied by the number of months: 2000 x 12 = 24000 rupees. This figure is the principal of the account, and the maturity value will exceed it by the interest earned.",
+      "explanation": "Total amount deposited = monthly instalment × number of months = 2000 × 12 = 24000 rupees.",
       "commonMistake": "Quoting the maturity value instead of the amount actually paid in."
     },
     {
@@ -378,25 +549,39 @@
     },
     {
       "id": "icse-10-math-q-bank-05",
-      "type": "short",
+      "type": "mcq",
       "difficulty": "medium",
-      "marks": 3,
+      "marks": 2,
       "origin": "practice",
-      "prompt": "Ravi deposits 2000 rupees every month for 12 months at 8 per cent per annum. Find the interest and the maturity value.",
-      "answer": "Interest = 1040 rupees and maturity value = 25040 rupees",
-      "explanation": "Interest = P x n x (n + 1) x r / 2400 = 2000 x 12 x 13 x 8 / 2400. Working the numerator, 12 x 13 = 156 and 156 x 8 = 1248, so 2000 x 1248 / 2400 = 2496000 / 2400 = 1040 rupees. Total deposited = 2000 x 12 = 24000 rupees, so the maturity value is 24000 + 1040 = 25040 rupees.",
-      "commonMistake": "Dividing by 1200 instead of 2400, which applies the annual rate without allowing for the months and doubles the interest."
+      "prompt": "Ravi deposits ₹2000 every month for 12 months at 8% per annum in a recurring deposit. The interest and maturity value are:",
+      "answer": "Interest ₹1040, MV ₹25040",
+      "explanation": "I = Pn(n+1)r/2400 = 2000×12×13×8/2400 = 1040. MV = Pn + I = 24000 + 1040 = 25040 rupees.",
+      "commonMistake": "Dividing by 1200 instead of 2400, which applies the annual rate without allowing for the months and doubles the interest.",
+      "options": [
+        "Interest ₹960, MV ₹24960",
+        "Interest ₹1040, MV ₹24040",
+        "Interest ₹2080, MV ₹26080",
+        "Interest ₹1040, MV ₹25040"
+      ],
+      "correctIndex": 3
     },
     {
       "id": "icse-10-math-q-bank-06",
-      "type": "short",
+      "type": "mcq",
       "difficulty": "medium",
-      "marks": 3,
+      "marks": 2,
       "origin": "practice",
-      "prompt": "Find the maturity value of a recurring deposit of 1200 rupees per month for 12 months at 10 per cent per annum.",
-      "answer": "15180 rupees",
-      "explanation": "Total deposited = 1200 x 12 = 14400 rupees. Interest = 1200 x 12 x 13 x 10 / 2400 = 1200 x 1560 / 2400 = 1872000 / 2400 = 780 rupees. Maturity value = 14400 + 780 = 15180 rupees. As a check, 780 is 5.4 per cent of the 14400 deposited, which is a sensible return for twelve months at ten per cent on an average balance of about half the total.",
-      "commonMistake": "Omitting the addition and reporting 780 as though it were the amount received."
+      "prompt": "The maturity value of a recurring deposit of ₹1200 per month for 12 months at 10% per annum is:",
+      "answer": "₹15180",
+      "explanation": "I = 1200×12×13×10/2400 = 780. MV = 1200×12 + 780 = 14400 + 780 = 15180 rupees.",
+      "commonMistake": "Omitting the addition and reporting 780 as though it were the amount received.",
+      "options": [
+        "₹14400",
+        "₹15000",
+        "₹15180",
+        "₹15600"
+      ],
+      "correctIndex": 2
     },
     {
       "id": "icse-10-math-q-bank-07",
@@ -411,7 +596,7 @@
     },
     {
       "id": "icse-10-math-q-bank-08",
-      "type": "long",
+      "type": "analytical",
       "difficulty": "hard",
       "marks": 5,
       "origin": "practice",
@@ -439,12 +624,12 @@
       "origin": "practice",
       "prompt": "A recurring deposit that matures at a value just above the total deposited has interest that is:",
       "options": [
-        "A modest fraction of the total deposited",
         "Approximately equal to the total deposited",
+        "A modest fraction of the total deposited",
         "Greater than the total deposited",
         "Zero, because the account pays no interest"
       ],
-      "correctIndex": 0,
+      "correctIndex": 1,
       "answer": "A modest fraction of the total deposited",
       "explanation": "Because each instalment is held for at most the full term and the average holding period is roughly half of it, the interest at ordinary rates comes to a few per cent of the amount paid in. An interest figure comparable to the deposit would imply a rate applied monthly rather than annually.",
       "commonMistake": "Applying the annual rate each month, which produces an interest figure many times too large."
@@ -462,14 +647,21 @@
     },
     {
       "id": "icse-10-math-q-bank-12",
-      "type": "short",
+      "type": "mcq",
       "difficulty": "easy",
       "marks": 2,
       "origin": "practice",
-      "prompt": "State the formula for the maturity value of a recurring deposit in terms of the instalment P, the term n in months, and the interest I.",
-      "answer": "MV = P x n + I",
-      "explanation": "The depositor pays in P rupees for each of n months, so the amount deposited is P times n, and the bank adds the simple interest I earned on those instalments. The maturity value is their sum, and it must always exceed P times n while remaining below the same total held as a lump sum for the whole term.",
-      "commonMistake": "Writing P times n times I, which multiplies rather than adds the interest."
+      "prompt": "The maturity value of a recurring deposit in terms of instalment P, term n months and interest I is:",
+      "answer": "MV = P × n + I",
+      "explanation": "Maturity value equals the total of all instalments plus interest earned: MV = P × n + I.",
+      "commonMistake": "Writing P times n times I, which multiplies rather than adds the interest.",
+      "options": [
+        "MV = P + n + I",
+        "MV = P × n × I",
+        "MV = P × n + I",
+        "MV = I − P × n"
+      ],
+      "correctIndex": 2
     },
     {
       "id": "icse-10-math-q-bank-13",
@@ -501,12 +693,12 @@
       "origin": "practice",
       "prompt": "If the monthly instalment is doubled while the term and rate are unchanged, the maturity value:",
       "options": [
-        "Doubles exactly",
         "Stays the same",
         "Triples",
-        "Quadruples"
+        "Quadruples",
+        "Doubles exactly"
       ],
-      "correctIndex": 0,
+      "correctIndex": 3,
       "answer": "Doubles exactly",
       "explanation": "Both the total deposited, P times n, and the interest, P times n times n plus one times r over 2400, are linear in P. Doubling P therefore doubles each of them separately, and their sum, the maturity value, doubles as well. An account of 4000 per month for twelve months at eight per cent gives 48000 plus 2080, which is 50080, exactly twice 25040.",
       "commonMistake": "Expecting the interest to quadruple, which would be true of a change in the term rather than in the instalment."
@@ -586,7 +778,7 @@
     },
     {
       "id": "icse-10-math-q-bank-22",
-      "type": "short",
+      "type": "analytical",
       "difficulty": "hard",
       "marks": 4,
       "origin": "practice",
@@ -594,17 +786,6 @@
       "answer": "The term is 15 months",
       "explanation": "Total deposited = 800n and interest = 800 x n x (n + 1) x 6 / 2400 = 2 n (n + 1). So 800n + 2n (n + 1) = 12480, that is 2n squared plus 802n minus 12480 equals zero, or n squared plus 401n minus 6240 equals zero. Rather than reach for the quadratic formula, substitute sensible whole numbers: n = 15 gives a deposit of 800 x 15 = 12000 and an interest of 2 x 15 x 16 = 480, so 12000 + 480 = 12480 rupees, which is exactly the given maturity value. The root is fifteen, and the substitution is the cleanest proof of it.",
       "commonMistake": "Reporting a fractional or negative quadratic root as though it were a number of months; only a positive whole number describes a term."
-    },
-    {
-      "id": "icse-10-math-q-bank-23",
-      "type": "long",
-      "difficulty": "medium",
-      "marks": 3,
-      "origin": "practice",
-      "prompt": "Find the interest earned on a recurring deposit of 2000 rupees per month for 24 months at 10 per cent per annum, and state the maturity value.",
-      "answer": "Interest = 5000 rupees and maturity value = 53000 rupees",
-      "explanation": "Total deposited = 2000 x 24 = 48000 rupees. The instalment-months total is 24 x 25 / 2 = 300. Interest = 2000 x 24 x 25 x 10 / 2400 = 2000 x 6000 / 2400 = 2000 x 2.5 = 5000 rupees. Maturity value = 48000 + 5000 = 53000 rupees. As a check the interest is 5000 / 48000 x 100 = 10.42 per cent of the deposit, which is reasonable given an average holding period of about twelve and a half months at ten per cent.",
-      "commonMistake": "Dividing by 2400 twice, or using n squared for 24, which gives 576 and an interest of 4800 rupees."
     }
   ]
 }

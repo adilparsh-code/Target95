@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import {
   ChevronLeft,
@@ -23,25 +23,40 @@ import {
 } from "lucide-react";
 import Navbar from "./Navbar";
 import ReadingProgressIndicator from "./study/ReadingProgressIndicator";
+import {
+  SECTION_DEFINITIONS,
+  getAdjacentSectionId,
+  isSectionCompleted,
+  normalizeSectionId,
+} from "../../lib/study/chapterSections.mjs";
 
-export const CHAPTER_SECTIONS = [
-  { id: "overview", label: "Overview", icon: <BookOpen className="h-4 w-4" />, defaultTime: 5 },
-  { id: "learning-objectives", label: "Learning Objectives", icon: <Zap className="h-4 w-4" />, defaultTime: 3 },
-  { id: "prerequisites", label: "Prerequisites", icon: <Circle className="h-4 w-4" />, defaultTime: 2 },
-  { id: "theory", label: "Theory", icon: <BookOpen className="h-4 w-4" />, defaultTime: 15 },
-  { id: "definitions", label: "Definitions", icon: <FileText className="h-4 w-4" />, defaultTime: 5 },
-  { id: "key-terms", label: "Key Terms", icon: <ScrollText className="h-4 w-4" />, defaultTime: 5 },
-  { id: "examples", label: "Examples", icon: <Code2 className="h-4 w-4" />, defaultTime: 20 },
-  { id: "diagrams", label: "Diagrams", icon: <FileText className="h-4 w-4" />, defaultTime: 10 },
-  { id: "important-notes", label: "Important Notes", icon: <Lightbulb className="h-4 w-4" />, defaultTime: 8 },
-  { id: "common-mistakes", label: "Common Mistakes", icon: <AlertTriangle className="h-4 w-4" />, defaultTime: 7 },
-  { id: "practice", label: "Practice", icon: <CheckCircle2 className="h-4 w-4" />, defaultTime: 20 },
-  { id: "mcqs", label: "MCQs", icon: <Circle className="h-4 w-4" />, defaultTime: 15 },
-  { id: "programming", label: "Programming", icon: <Code2 className="h-4 w-4" />, defaultTime: 25 },
-  { id: "previous-year-questions", label: "Board-Style Practice", icon: <History className="h-4 w-4" />, defaultTime: 20 },
-  { id: "mock-test", label: "Mock Test", icon: <FileQuestion className="h-4 w-4" />, defaultTime: 30 },
-  { id: "ai-tutor", label: "AI Tutor", icon: <Brain className="h-4 w-4" />, defaultTime: 15 },
-];
+const SECTION_ICONS = {
+  overview: <BookOpen className="h-4 w-4" />,
+  "learning-objectives": <Zap className="h-4 w-4" />,
+  prerequisites: <Circle className="h-4 w-4" />,
+  theory: <BookOpen className="h-4 w-4" />,
+  definitions: <FileText className="h-4 w-4" />,
+  "key-terms": <ScrollText className="h-4 w-4" />,
+  examples: <Code2 className="h-4 w-4" />,
+  diagrams: <FileText className="h-4 w-4" />,
+  "important-notes": <Lightbulb className="h-4 w-4" />,
+  "common-mistakes": <AlertTriangle className="h-4 w-4" />,
+  practice: <CheckCircle2 className="h-4 w-4" />,
+  mcqs: <Circle className="h-4 w-4" />,
+  output: <FileQuestion className="h-4 w-4" />,
+  programming: <Code2 className="h-4 w-4" />,
+  "previous-year-questions": <History className="h-4 w-4" />,
+  "revision-notes": <ScrollText className="h-4 w-4" />,
+  "mock-test": <FileQuestion className="h-4 w-4" />,
+  "ai-tutor": <Brain className="h-4 w-4" />,
+};
+
+// Ids, labels and times live in src/lib/study/chapterSections.mjs (shared with
+// the progress logic and tests). The id here is the canonical rendered id.
+export const CHAPTER_SECTIONS = SECTION_DEFINITIONS.map((definition) => ({
+  ...definition,
+  icon: SECTION_ICONS[definition.id] ?? <Circle className="h-4 w-4" />,
+}));
 
 export default function ChapterLayout({
   children,
@@ -51,6 +66,7 @@ export default function ChapterLayout({
   nextChapter,
   readingProgress,
   activeSection,
+  availableSectionIds = null,
   onSectionChange,
   completedSections = [],
   sectionTimes = {},
@@ -60,17 +76,36 @@ export default function ChapterLayout({
   chapterQuery = "",
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const sectionRefs = useRef({});
+
+  // Only sections that really exist on the page are navigable. Until the page
+  // reports what it rendered (availableSectionIds === null) every entry is shown.
+  const navSections = Array.isArray(availableSectionIds)
+    ? availableSectionIds
+        .map((id) => CHAPTER_SECTIONS.find((item) => item.id === id))
+        .filter(Boolean)
+    : CHAPTER_SECTIONS;
+  const navIds = navSections.map((item) => item.id);
+  const activeId = normalizeSectionId(activeSection);
+  const activeIndex = navIds.indexOf(activeId);
+  const activeLabel = navSections[activeIndex]?.label;
+  const previousId = getAdjacentSectionId(navIds, activeId, "previous");
+  const nextId = getAdjacentSectionId(navIds, activeId, "next");
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(`section-${sectionId}`) || sectionRefs.current[sectionId];
-    if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
-    onSectionChange?.(sectionId);
+    const canonicalId = normalizeSectionId(sectionId);
+    const element = document.getElementById(canonicalId);
+    // A section that is not on the page must never leave navigation in a broken state.
+    if (!element) {
+      setSidebarOpen(false);
+      return;
+    }
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+    onSectionChange?.(canonicalId);
     setSidebarOpen(false);
   };
 
-  const completedCount = completedSections.length;
-  const totalSections = CHAPTER_SECTIONS.length;
+  const completedCount = navSections.filter((item) => isSectionCompleted(completedSections, item.id)).length;
+  const totalSections = navSections.length;
   const progressPercentage = totalSections > 0 ? Math.round((completedCount / totalSections) * 100) : 0;
   const computerScienceHref = catalogHref;
 
@@ -111,9 +146,9 @@ export default function ChapterLayout({
           <nav className="min-h-0 flex-1 overflow-y-auto px-3 py-4" aria-label="Chapter topics">
             <p className="px-2 pb-2 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-400">Topics</p>
             <ul className="space-y-1">
-              {CHAPTER_SECTIONS.map((section) => {
-                const isCompleted = completedSections.includes(section.id) || completedSections.includes(`section-${section.id}`);
-                const isActive = activeSection === section.id;
+              {navSections.map((section) => {
+                const isCompleted = isSectionCompleted(completedSections, section.id);
+                const isActive = activeId === section.id;
                 const sectionTime = sectionTimes[section.id] || getSectionTime(section.id);
                 return (
                   <li key={section.id}>
@@ -153,9 +188,9 @@ export default function ChapterLayout({
           />
 
           <div className="sticky top-[116px] z-20 mb-7 rounded-2xl border border-slate-200 bg-white/95 p-2 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-950/95"><div className="flex items-center justify-between gap-2">
-            <button type="button" onClick={() => { const index = CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection); if (index > 0) scrollToSection(CHAPTER_SECTIONS[index - 1].id); }} disabled={CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection) === 0} className="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 disabled:pointer-events-none disabled:opacity-30 sm:px-4 sm:text-sm dark:text-slate-300 dark:hover:bg-slate-900"><ChevronLeft className="h-4 w-4" /><span className="hidden sm:inline">Previous topic</span><span className="sm:hidden">Prev</span></button>
-            <div className="min-w-0 text-center"><p className="truncate text-xs font-bold text-slate-900 sm:text-sm dark:text-white">{CHAPTER_SECTIONS.find((item) => item.id === activeSection)?.label}</p><p className="text-[10px] text-slate-400 sm:text-xs">Topic {CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection) + 1} of {CHAPTER_SECTIONS.length}</p></div>
-            <button type="button" onClick={() => { const index = CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection); if (index < CHAPTER_SECTIONS.length - 1) scrollToSection(CHAPTER_SECTIONS[index + 1].id); }} disabled={CHAPTER_SECTIONS.findIndex((item) => item.id === activeSection) === CHAPTER_SECTIONS.length - 1} className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:px-4 sm:text-sm dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"><span className="hidden sm:inline">Next topic</span><span className="sm:hidden">Next</span><ChevronRight className="h-4 w-4" /></button>
+            <button type="button" onClick={() => previousId && scrollToSection(previousId)} disabled={!previousId} className="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-100 disabled:pointer-events-none disabled:opacity-30 sm:px-4 sm:text-sm dark:text-slate-300 dark:hover:bg-slate-900"><ChevronLeft className="h-4 w-4" /><span className="hidden sm:inline">Previous topic</span><span className="sm:hidden">Prev</span></button>
+            <div className="min-w-0 text-center"><p className="truncate text-xs font-bold text-slate-900 sm:text-sm dark:text-white">{activeLabel}</p><p className="text-[10px] text-slate-400 sm:text-xs">{activeIndex >= 0 ? `Topic ${activeIndex + 1} of ${navIds.length}` : `${navIds.length} topics`}</p></div>
+            <button type="button" onClick={() => nextId && scrollToSection(nextId)} disabled={!nextId} className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-800 disabled:pointer-events-none disabled:opacity-30 sm:px-4 sm:text-sm dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200"><span className="hidden sm:inline">Next topic</span><span className="sm:hidden">Next</span><ChevronRight className="h-4 w-4" /></button>
           </div></div>
 
           <div className="chapter-content">{children}</div>

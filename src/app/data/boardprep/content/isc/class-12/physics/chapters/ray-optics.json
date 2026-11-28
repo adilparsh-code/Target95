@@ -1,0 +1,878 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-12-physics-ch-ray-optics",
+  "title": "Ray Optics",
+  "kind": "physics",
+  "tagline": "Reflection, refraction, total internal reflection, lenses, prisms and optical instruments treated with the paraxial ray model used in the ISC XII syllabus.",
+  "reviewStatus": "draft",
+  "sourceNote": {
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XII Physics syllabus (Unit 6 — Optics, ray optics portion; examination year 2027). No board examination paper was consulted, so every question is original practice and not a previous year question. Sub-topic selection follows the syllabus topics registered for this chapter; UNVERIFIED against the primary CISCE PDF in this environment.",
+    "thirdParty": "Based on the publicly documented CISCE ISC 2027 Physics syllabus (Unit 6 — Optics); no textbook passage has been reproduced."
+  },
+  "overview": {
+    "intro": "Ray optics is the branch of optics that treats light as travelling along straight-line rays, except where reflection or refraction changes the ray direction at a surface. It is an excellent model when the features the light encounters are much larger than the wavelength of light, so that diffraction and interference can be ignored. This chapter covers the rules that govern how rays behave at plane and curved surfaces, how images are formed by mirrors and lenses, how prisms split and bend light, how total internal reflection gives us optical fibres and mirages, and how a few standard optical instruments work. The mathematical core is the paraxial or small-angle approximation, in which sin theta is approximately theta and the standard mirror, lens and prism formulas are accurate enough for syllabus work.",
+    "facts": [
+      {
+        "label": "Syllabus unit",
+        "value": "Optics — ray optics portion"
+      },
+      {
+        "label": "Theory marks context",
+        "value": "Unit 6 Optics in the reproduced 70-mark theory structure; UNVERIFIED against the CISCE PDF"
+      },
+      {
+        "label": "Reflection law",
+        "value": "angle of incidence = angle of reflection, with the incident ray, reflected ray and normal all in one plane"
+      },
+      {
+        "label": "Snell's law",
+        "value": "n1 sin i = n2 sin r"
+      },
+      {
+        "label": "Refractive index",
+        "value": "n = c / v, ratio of speed of light in vacuum to speed in the medium"
+      },
+      {
+        "label": "Critical angle",
+        "value": "sin C = n2 / n1 for n1 greater than n2"
+      },
+      {
+        "label": "Mirror formula",
+        "value": "1/f = 1/v + 1/u with the Cartesian sign convention"
+      },
+      {
+        "label": "Lens maker's formula",
+        "value": "1/f = (n - 1)(1/R1 - 1/R2) for a thin lens in air"
+      },
+      {
+        "label": "Thin lens formula",
+        "value": "1/f = 1/v - 1/u with the Cartesian sign convention"
+      },
+      {
+        "label": "Power of a lens",
+        "value": "P = 1/f with f in metres, unit dioptre"
+      },
+      {
+        "label": "Prism deviation",
+        "value": "delta = i1 + i2 - A, minimum when the ray passes symmetrically"
+      },
+      {
+        "label": "Angular magnification",
+        "value": "for an instrument, ratio of the angle subtended by the image to the angle subtended by the object at the unaided eye"
+      }
+    ]
+  },
+  "learningOutcomes": [
+    "State and apply the laws of reflection and refraction, and use Snell's law with the definition of refractive index.",
+    "Derive and use the mirror formula and magnification formula for concave and convex mirrors under the paraxial approximation, with the Cartesian sign convention.",
+    "Derive and use the thin lens formula, lens maker's formula and the power of a lens, including combinations of lenses in contact.",
+    "Explain total internal reflection, define the critical angle, and give examples such as mirages and optical fibres.",
+    "Analyse a prism, define angle of deviation and minimum deviation, and state the relation between refractive index and minimum deviation.",
+    "Describe the working of simple optical instruments including the human eye, simple and compound microscopes and the astronomical telescope, with their magnifying powers."
+  ],
+  "learn": [
+    {
+      "id": "reflection-at-mirrors",
+      "title": "Reflection at plane and curved mirrors",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Reflection is the change in direction of a light ray when it strikes a surface and bounces back into the same medium. The law of reflection is simple and exact for any smooth surface: the angle of incidence equals the angle of reflection, and the incident ray, the reflected ray and the normal all lie in the same plane. For a plane mirror this produces a virtual, erect image that is the same size as the object and is as far behind the mirror as the object is in front. The magnification is +1. For most syllabus problems the interesting cases are curved mirrors, where the law of reflection is applied locally at each point on the surface by using the normal to the surface at the point of incidence."
+        },
+        {
+          "type": "paragraph",
+          "text": "A spherical mirror is a part of a spherical surface. The centre of the sphere is the centre of curvature C, and the radius of curvature is R. The midpoint of the mirror is the pole P. The straight line through the pole and the centre of curvature is the principal axis. Parallel rays close to the axis, after reflection, meet at or appear to come from the principal focus F, which lies on the principal axis at a distance f from the pole. For a spherical mirror in the paraxial approximation the focal length and radius of curvature are related by f = R/2. The two kinds are concave, which converges parallel rays to a real focus, and convex, which diverges them so that the focus appears to be behind the mirror."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Concave mirror: converging; can form real or virtual images depending on object position.",
+            "Convex mirror: diverging; always forms a virtual, erect and diminished image.",
+            "Paraxial rays: rays close to and nearly parallel to the principal axis, for which the small-angle approximations hold.",
+            "Aperture: the effective width of the mirror that actually reflects the rays used in the image.",
+            "Centre of curvature C and radius of curvature R: the centre and radius of the sphere of which the mirror is a part."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An object is placed 20 cm in front of a concave mirror of focal length 15 cm. Find the image position, nature and magnification.",
+              "note": "Use the mirror formula 1/f = 1/v + 1/u. With the Cartesian sign convention, f = -15 cm and u = -20 cm, so 1/v = -1/15 + 1/20 = -1/60 and v = -60 cm. The image is real and inverted. Magnification m = -v/u = -3, so the image is three times the object and inverted."
+            },
+            {
+              "text": "An object is placed 10 cm in front of a convex mirror of focal length 12 cm. Find the image position and nature.",
+              "note": "With f = +12 cm and u = -10 cm, 1/v = 1/12 + 1/10 = 11/60, so v = 60/11 ≈ 5.45 cm. The positive v means the image is behind the mirror, virtual, erect and diminished."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mirror-formula-and-magnification",
+      "title": "Mirror formula and magnification",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The mirror formula is one of the central results of ray optics. For a spherical mirror obeying the paraxial approximation, the object distance u, the image distance v and the focal length f satisfy 1/f = 1/v + 1/u. The sign convention used in the ISC syllabus is the Cartesian sign convention: the pole is the origin, distances measured in the direction of the incident light are positive and those opposite to it are negative. For a mirror, if the object is placed in front of the mirror, u is negative. For a concave mirror f is negative and for a convex mirror f is positive. The magnification produced by a mirror is m = -v/u = h'/h, where h' is the image height and h is the object height. A negative magnification means the image is inverted, and a positive one means it is erect."
+        },
+        {
+          "type": "table",
+          "caption": "Image formation by a concave mirror for different object positions",
+          "columns": [
+            "Object position",
+            "Image position",
+            "Nature",
+            "Magnification"
+          ],
+          "rows": [
+            [
+              "At infinity",
+              "At focus F",
+              "Real, inverted, highly diminished",
+              "m ≈ 0"
+            ],
+            [
+              "Beyond C",
+              "Between F and C",
+              "Real, inverted, diminished",
+              "m less than 1"
+            ],
+            [
+              "At C",
+              "At C",
+              "Real, inverted, same size",
+              "m = -1"
+            ],
+            [
+              "Between C and F",
+              "Beyond C",
+              "Real, inverted, enlarged",
+              "m greater than 1"
+            ],
+            [
+              "At F",
+              "At infinity",
+              "Real, inverted, highly enlarged",
+              "m large"
+            ],
+            [
+              "Between F and P",
+              "Behind the mirror",
+              "Virtual, erect, enlarged",
+              "m greater than 1"
+            ]
+          ]
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Use 1/f = 1/v + 1/u with the Cartesian sign convention for every numerical.",
+            "A real image is formed on the same side as the object for a mirror and can be caught on a screen; a virtual image is behind the mirror and cannot.",
+            "Magnification m = -v/u gives both size and orientation in one sign.",
+            "In ray diagrams, use at least two of the standard rays: a ray parallel to the axis reflects through the focus; a ray through the focus reflects parallel to the axis; a ray through the centre of curvature reflects back on itself."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refraction-and-snell-law",
+      "title": "Refraction and Snell's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Refraction is the bending of a light ray when it passes from one medium to another because the speed of light is different in the two media. The amount of bending is governed by Snell's law, which in its usual form is n1 sin i = n2 sin r, where i is the angle of incidence and r is the angle of refraction, both measured from the normal. The refractive index of a medium is defined as n = c/v, the ratio of the speed of light in vacuum to the speed in the medium. From this definition the relative refractive index of medium 2 with respect to medium 1 is n21 = n2/n1 = v1/v2."
+        },
+        {
+          "type": "paragraph",
+          "text": "When light goes from a rarer to a denser medium it bends towards the normal; when it goes from a denser to a rarer medium it bends away from the normal. Two consequences follow immediately. First, the wavelength changes when light enters a new medium but the frequency does not; only the speed and wavelength change. Second, there is a limiting case: if light in the denser medium strikes the boundary at a large enough angle, no refracted ray escapes into the rarer medium. This is total internal reflection, discussed in the next section."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Refractive index n = c/v is always greater than or equal to 1 for material media in this syllabus.",
+            "Snell's law: n1 sin i = n2 sin r.",
+            "Frequency is unchanged by refraction; speed and wavelength both scale as 1/n.",
+            "Relative refractive index n21 = n2/n1 = v1/v2.",
+            "The principle of reversibility means a ray retraces its path if the direction is reversed."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A light ray in air is incident on a glass surface at 30 degrees to the normal. If the refractive index of glass is 1.5, find the angle of refraction.",
+              "note": "Using Snell's law, 1.0 sin 30 = 1.5 sin r, so sin r = 1/3 and r = arcsin(1/3) ≈ 19.5 degrees. The ray bends towards the normal, as expected for air to glass."
+            },
+            {
+              "text": "A small object lies at the bottom of a tank filled with water of refractive index 4/3 to a depth of 45 cm. Find the apparent depth when viewed normally from above.",
+              "note": "For nearly normal viewing, apparent depth = real depth / n = 45 / (4/3) = 33.75 cm. The bottom appears raised by about 11.25 cm."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "total-internal-reflection",
+      "title": "Total internal reflection and its applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Total internal reflection occurs when light travelling from a denser medium to a rarer medium is incident at an angle greater than the critical angle. The critical angle C is defined by sin C = n2/n1, where n1 is the refractive index of the denser medium and n2 is the refractive index of the rarer medium. At the critical angle the refracted ray grazes the boundary, making an angle of 90 degrees, and for any larger angle all the light is reflected back into the denser medium with no transmitted ray. The reflection is complete, with no loss by transmission, which is why total internal reflection is so important in optical fibres and in several natural phenomena."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Total internal reflection requires light to go from a denser to a rarer medium.",
+            "Critical angle sin C = n_rarer / n_denser.",
+            "For a water-air boundary, sin C = 1/(4/3) = 3/4, so C ≈ 48.6 degrees.",
+            "Optical fibres guide light by total internal reflection along a thin glass core surrounded by a lower-index cladding.",
+            "Mirages and looming are explained by total internal reflection in layers of air with different temperatures and densities.",
+            "A diamond sparkles because of a high refractive index and a small critical angle, so light undergoes many total internal reflections inside it."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the critical angle for total internal reflection for light going from glass of refractive index 1.5 to air.",
+              "note": "sin C = 1/1.5 = 2/3, so C = arcsin(2/3) ≈ 41.8 degrees. Any ray in the glass incident on the glass-air boundary at a larger angle is totally internally reflected."
+            },
+            {
+              "text": "A step-index optical fibre has core refractive index 1.50 and cladding refractive index 1.48. Find the critical angle at the core-cladding boundary.",
+              "note": "sin C = 1.48/1.50 = 74/75, so C = arcsin(74/75) ≈ 81.6 degrees. Rays striking the boundary at a greater angle are guided by total internal reflection along the fibre."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refraction-at-spherical-surfaces",
+      "title": "Refraction at a spherical surface and lens formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When a spherical refracting surface separates two media, paraxial rays obey a relation that is the refraction analogue of the mirror formula. For a surface of radius R, with refractive index n1 on the object side and n2 on the image side, the relation is n2/v - n1/u = (n2 - n1)/R, using the Cartesian sign convention. This single surface formula is the starting point for the thin lens formula. A thin lens is two such surfaces close together, and for a lens in air the combination gives the lens maker's formula, 1/f = (n - 1)(1/R1 - 1/R2), where R1 and R2 are the radii of curvature of the two surfaces with their proper signs."
+        },
+        {
+          "type": "paragraph",
+          "text": "The thin lens formula itself is 1/f = 1/v - 1/u. The sign convention is the same Cartesian one: distances measured against the direction of the incident light are negative. For a convex lens f is positive, for a concave lens f is negative. Magnification for a lens is m = v/u, and the image is erect when m is positive and inverted when m is negative. A convex lens can form real or virtual images depending on object position, while a concave lens always gives a virtual, erect and diminished image."
+        },
+        {
+          "type": "table",
+          "caption": "Image formation by a convex lens for different object positions",
+          "columns": [
+            "Object position",
+            "Image position",
+            "Nature",
+            "Magnification"
+          ],
+          "rows": [
+            [
+              "At infinity",
+              "At focus on the other side",
+              "Real, inverted, highly diminished",
+              "m ≈ 0"
+            ],
+            [
+              "Beyond 2F",
+              "Between F and 2F on the other side",
+              "Real, inverted, diminished",
+              "m less than 1"
+            ],
+            [
+              "At 2F",
+              "At 2F on the other side",
+              "Real, inverted, same size",
+              "m = -1"
+            ],
+            [
+              "Between F and 2F",
+              "Beyond 2F on the other side",
+              "Real, inverted, enlarged",
+              "m greater than 1"
+            ],
+            [
+              "At F",
+              "At infinity",
+              "Real, inverted, highly enlarged",
+              "m large"
+            ],
+            [
+              "Between F and the lens",
+              "On the same side as object",
+              "Virtual, erect, enlarged",
+              "m greater than 1"
+            ]
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "An object is placed 30 cm from a convex lens of focal length 10 cm. Find the image position and magnification.",
+              "note": "With f = +10 cm and u = -30 cm, 1/v = 1/10 - 1/30 = 1/15, so v = +15 cm. The image is on the opposite side, real and inverted. Magnification m = v/u = -1/2, so the image is half the object size and inverted."
+            },
+            {
+              "text": "An object is placed 20 cm from a concave lens of focal length 15 cm. Find the image position.",
+              "note": "f = -15 cm and u = -20 cm, so 1/v = -1/15 - 1/20 = -7/60 and v = -60/7 ≈ -8.6 cm. The image is on the same side as the object, virtual, erect and diminished."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lens-maker-power-combination",
+      "title": "Lens maker's formula, power and combination of lenses",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The power of a lens is a useful practical measure of its converging or diverging strength. It is defined as P = 1/f when f is in metres, and its unit is the dioptre, symbol D. A converging lens of focal length 0.5 m has a power of +2 D, and a diverging lens of focal length -0.4 m has a power of -2.5 D. For thin lenses placed in contact, the combined focal length F is given by 1/F = 1/f1 + 1/f2 + ..., or equivalently P = P1 + P2 + ... This simple addition works because the lenses are close enough that the image formed by the first is immediately the object for the second. For separated lenses the combination is more involved and is not part of this particular section."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Power P = 1/f with f in metres; unit dioptre D.",
+            "Converging lenses have positive power, diverging lenses have negative power.",
+            "For thin lenses in contact, P = P1 + P2 + ... and 1/F = 1/f1 + 1/f2 + ...",
+            "A combination can be converging even if one lens is diverging, provided the net power is positive.",
+            "Power is the quantity opticians use to prescribe spectacle lenses."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "Find the power of a lens of focal length 25 cm. Is it converging or diverging?",
+              "note": "f = +25 cm = +0.25 m, so P = 1/0.25 = +4 D. The positive sign shows it is a converging lens, such as a convex lens."
+            },
+            {
+              "text": "A convex lens of focal length 20 cm and a concave lens of focal length 50 cm are placed in contact. Find the focal length and nature of the combination.",
+              "note": "f1 = +20 cm, f2 = -50 cm, so 1/F = 1/20 - 1/50 = 3/100 and F = 100/3 ≈ 33.3 cm. The combination is converging, though weaker than the convex lens alone."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prisms-and-deviation",
+      "title": "Prisms, deviation and minimum deviation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A prism is a transparent wedge-shaped piece of material with two plane faces inclined to each other at an angle A, called the refracting angle or prism angle. A ray of light entering one face is refracted, travels through the prism, and is refracted again when it leaves. The net change in direction of the ray is the angle of deviation delta. If the angle of incidence at the first face is i1 and the angle of emergence at the second face is i2, the deviation is delta = i1 + i2 - A. For a given prism and wavelength, the deviation depends on the angle of incidence, and there is one particular angle of incidence for which the deviation is minimum."
+        },
+        {
+          "type": "paragraph",
+          "text": "At minimum deviation the ray passes through the prism symmetrically: i1 = i2, the angle of incidence equals the angle of emergence, and the ray inside the prism makes equal angles with the two faces. In this symmetric position the refractive index of the prism material can be found from the prism angle A and the minimum deviation delta_m: n = sin((A + delta_m)/2) / sin(A/2). This is one of the standard results used in numerical problems. Prisms are also used for dispersion, splitting white light into its constituent colours because the refractive index of glass is slightly different for different wavelengths."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Deviation delta = i1 + i2 - A.",
+            "Minimum deviation occurs for symmetric passage through the prism.",
+            "At minimum deviation, n = sin((A + delta_m)/2) / sin(A/2).",
+            "Dispersion is the splitting of light into colours because n depends on wavelength.",
+            "A thin prism of small angle A produces a small deviation delta = (n - 1)A for near-normal incidence."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A thin glass prism of small angle 4 degrees has refractive index 1.5. Find the deviation for a near-normal incident ray.",
+              "note": "For a small-angle prism with near-normal incidence, delta = (n - 1)A = 0.5 x 4 = 2 degrees."
+            },
+            {
+              "text": "A prism has refracting angle 60 degrees and produces a minimum deviation of 30 degrees for a certain wavelength. Find the refractive index.",
+              "note": "n = sin((A + delta_m)/2) / sin(A/2) = sin(45)/sin(30) = (1/sqrt(2)) / (1/2) = sqrt(2) ≈ 1.414."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "optical-instruments",
+      "title": "Optical instruments: eye, microscopes and telescope",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Optical instruments are devices that use lenses and mirrors to produce a magnified or otherwise useful image of an object. The most important measure of their performance is magnifying power, which for an instrument is the ratio of the angle subtended by the image at the eye to the angle subtended by the object at the unaided eye. This is different from linear magnification and is the reason large astronomical telescopes are useful even when the picture on the retina is small. The standard instruments in this syllabus are the human eye, the simple microscope or magnifying glass, the compound microscope and the astronomical telescope in normal and near-point adjustment."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Near point D is the closest distance at which the unaided eye can see clearly; standard value 25 cm.",
+            "Simple microscope magnifying power: M = 1 + D/f when image at near point; M = D/f when image at infinity.",
+            "Compound microscope: objective forms a real enlarged image, eyepiece acts as a simple microscope to view it.",
+            "Compound microscope magnifying power M = (L/f_o)(1 + D/f_e) for image at near point, where L is the tube length.",
+            "Astronomical telescope in normal adjustment: M = f_o/f_e, with final image at infinity.",
+            "Astronomical telescope with final image at near point: M = (f_o/f_e)(1 + f_e/D).",
+            "Terrestrial telescopes use an erecting system so the image is upright; the astronomical telescope gives an inverted image."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            {
+              "text": "A simple microscope has focal length 5 cm. Find its magnifying power when the image is formed at the near point D = 25 cm.",
+              "note": "M = 1 + D/f = 1 + 25/5 = 6. If the image were at infinity, M = D/f = 5."
+            },
+            {
+              "text": "An astronomical telescope has objective focal length 100 cm and eyepiece focal length 5 cm. Find the magnifying power in normal adjustment and the tube length.",
+              "note": "In normal adjustment, M = f_o/f_e = 100/5 = 20, and the tube length is f_o + f_e = 105 cm."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "keyPoints": [
+    "Reflection and refraction are governed by simple laws: angle of incidence equals angle of reflection, and n1 sin i = n2 sin r for refraction.",
+    "Refractive index n = c/v; frequency stays constant when light crosses a boundary, while speed and wavelength change.",
+    "The mirror formula 1/f = 1/v + 1/u and lens formula 1/f = 1/v - 1/u both follow from the paraxial approximation and the Cartesian sign convention.",
+    "Magnification for a mirror is m = -v/u and for a lens is m = v/u; the sign tells orientation.",
+    "Total internal reflection occurs only when light goes from a denser to a rarer medium and the angle of incidence exceeds the critical angle, sin C = n_rarer/n_denser.",
+    "The thin lens maker's formula is 1/f = (n - 1)(1/R1 - 1/R2), and the power P = 1/f in dioptres.",
+    "Thin lenses in contact add their powers: P = P1 + P2 + ...",
+    "For a prism, deviation delta = i1 + i2 - A, and at minimum deviation n = sin((A + delta_m)/2) / sin(A/2).",
+    "Magnifying power, not linear magnification, is the key figure of merit for optical instruments; in normal adjustment an astronomical telescope has M = f_o/f_e.",
+    "In ray optics problems, always state and apply the Cartesian sign convention explicitly before substituting numbers."
+  ],
+  "examFocus": [
+    "Use the Cartesian sign convention correctly; many mark losses come from signs rather than from the formula itself.",
+    "Distinguish mirror and lens formulas — 1/f = 1/v + 1/u for mirrors and 1/f = 1/v - 1/u for thin lenses in the same sign convention.",
+    "Know which formulas are paraxial approximations and where the small-angle assumption matters.",
+    "State clearly when an image is real or virtual, erect or inverted, enlarged or diminished, and whether it can be caught on a screen.",
+    "For prisms, remember that minimum deviation is the symmetric case and that the n = sin((A + delta_m)/2)/sin(A/2) result is a standard syllabus derivation.",
+    "For instruments, be able to give magnifying power both at the near point and at infinity, and explain why normal adjustment is convenient.",
+    "Watch the units: power in dioptres requires the focal length in metres, and near-point values are often taken as 25 cm."
+  ],
+  "vocabulary": [
+    {
+      "word": "Ray optics",
+      "meaning": "The model of light as straight-line rays used when features are large compared with the wavelength and wave effects such as diffraction can be ignored."
+    },
+    {
+      "word": "Reflection",
+      "meaning": "The bouncing back of light from a surface, governed by the law that the angle of incidence equals the angle of reflection."
+    },
+    {
+      "word": "Refraction",
+      "meaning": "The bending of light when it passes from one medium to another because the light changes speed."
+    },
+    {
+      "word": "Spherical mirror",
+      "meaning": "A mirror whose reflecting surface is a part of a sphere; concave mirrors converge and convex mirrors diverge paraxial rays."
+    },
+    {
+      "word": "Principal focus",
+      "meaning": "The point on the principal axis where parallel paraxial rays after reflection or refraction meet, or appear to come from."
+    },
+    {
+      "word": "Focal length",
+      "meaning": "The distance of the principal focus from the pole of a mirror or the optical centre of a lens, with sign according to the Cartesian convention."
+    },
+    {
+      "word": "Paraxial approximation",
+      "meaning": "The small-angle approximation used for rays close to the principal axis, in which sin theta, tan theta and theta itself are treated as approximately equal."
+    },
+    {
+      "word": "Real image",
+      "meaning": "An image formed by the actual convergence of rays, which can be caught on a screen; it is formed on the same side as the object for a mirror."
+    },
+    {
+      "word": "Virtual image",
+      "meaning": "An image formed where the rays appear to diverge from, which cannot be caught on a screen; for a mirror it lies behind the mirror."
+    },
+    {
+      "word": "Total internal reflection",
+      "meaning": "The complete reflection of light back into the denser medium when it strikes the boundary at an angle greater than the critical angle."
+    },
+    {
+      "word": "Critical angle",
+      "meaning": "The angle of incidence in the denser medium for which the angle of refraction in the rarer medium is 90 degrees; sin C = n_rarer/n_denser."
+    },
+    {
+      "word": "Prism",
+      "meaning": "A wedge-shaped transparent piece of material with a refracting angle A, used for deviation and dispersion of light."
+    },
+    {
+      "word": "Minimum deviation",
+      "meaning": "The smallest angle of deviation produced by a prism for a given wavelength, occurring when the ray passes symmetrically through the prism."
+    },
+    {
+      "word": "Lens maker's formula",
+      "meaning": "The relation 1/f = (n - 1)(1/R1 - 1/R2) giving the focal length of a thin lens from its refractive index and surface radii."
+    },
+    {
+      "word": "Power of a lens",
+      "meaning": "The reciprocal of the focal length in metres; P = 1/f, unit dioptre D; positive for converging, negative for diverging lenses."
+    },
+    {
+      "word": "Magnifying power",
+      "meaning": "The ratio of the angle subtended by the final image at the eye to the angle subtended by the object at the unaided eye."
+    },
+    {
+      "word": "Near point D",
+      "meaning": "The closest distance at which the unaided eye can form a clear image; the standard value used in textbook problems is 25 cm."
+    },
+    {
+      "word": "Normal adjustment",
+      "meaning": "The arrangement of a telescope in which the final image is at infinity and the eye is relaxed, so the tube length is f_o + f_e."
+    },
+    {
+      "word": "Dispersion",
+      "meaning": "The splitting of white light into its constituent colours because the refractive index of the material differs slightly for different wavelengths."
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Reflection at a plane mirror and image formation",
+      "description": "A point object in front of a plane mirror with two rays drawn from the object to the mirror. The reflected rays diverge after reflection, and their backward extensions meet behind the mirror at the virtual image location, which is as far behind the mirror as the object is in front. The normal at the point of incidence is shown. The law of reflection is illustrated: the angle of incidence equals the angle of reflection, and the incident ray, reflected ray and normal are all in the same plane.",
+      "labels": [
+        "object",
+        "plane mirror",
+        "normal at point of incidence",
+        "angle of incidence",
+        "angle of reflection",
+        "virtual image behind the mirror",
+        "incident ray",
+        "reflected ray",
+        "equal angles"
+      ]
+    },
+    {
+      "caption": "Figure: Concave mirror image formation for an object beyond the centre of curvature",
+      "description": "A concave mirror with its pole P, focus F and centre of curvature C marked on the principal axis. An object beyond C produces a real, inverted image between F and C. Two standard rays are shown: one parallel to the axis that reflects through F, and one through C that reflects back on itself; their intersection locates the image. The image is shown smaller than the object and inverted.",
+      "labels": [
+        "concave mirror",
+        "pole P",
+        "focus F",
+        "centre of curvature C",
+        "principal axis",
+        "object",
+        "real inverted image between F and C",
+        "ray parallel to axis reflects through F",
+        "ray through C reflects back on itself",
+        "image below the axis"
+      ]
+    },
+    {
+      "caption": "Figure: Refraction at a spherical surface and the thin lens",
+      "description": "A spherical refracting surface separating two media of refractive indices n1 and n2, with radius R marked and the normal at the point of incidence shown. Below it, a thin convex lens is shown with its two surfaces, optical centre, focal points on both sides and principal axis. A parallel ray entering the lens converges at the principal focus. The figure is labelled to connect the single-surface refraction idea to the thin lens result and to show the sign convention by the directions of distances.",
+      "labels": [
+        "spherical refracting surface",
+        "radius of curvature R",
+        "normal at point of incidence",
+        "refractive index n1 on object side",
+        "refractive index n2 on image side",
+        "thin convex lens",
+        "optical centre",
+        "principal focus on the other side",
+        "parallel ray converges at focus",
+        "principal axis"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "isc-12-physics-q-ray-optics-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The refractive index of a medium is defined as:",
+      "options": [
+        "the speed of light in vacuum divided by the speed of light in the medium",
+        "the speed of light in the medium divided by the speed of light in vacuum",
+        "the ratio of the wavelength in the medium to the wavelength in vacuum",
+        "the angle of incidence divided by the angle of refraction"
+      ],
+      "correctIndex": 0,
+      "answer": "the speed of light in vacuum divided by the speed of light in the medium",
+      "explanation": "n = c/v, where c is the speed of light in vacuum and v is the speed in the medium. This ratio is always at least 1 for material media in this syllabus.",
+      "commonMistake": "Confusing n = c/v with n = v/c and then getting the ratio upside down."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A ray of light travelling in air enters glass of refractive index 1.5. The ray bends:",
+      "options": [
+        "away from the normal",
+        "towards the normal",
+        "along the normal only",
+        "in a direction independent of the refractive index"
+      ],
+      "correctIndex": 1,
+      "answer": "towards the normal",
+      "explanation": "When light enters a denser medium, n2 greater than n1, Snell's law gives a smaller angle in the denser medium, so the ray bends towards the normal.",
+      "commonMistake": "Thinking the ray always bends away from the normal regardless of whether the medium is denser or rarer."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a spherical mirror in the paraxial approximation, the focal length f and the radius of curvature R are related by:",
+      "options": [
+        "f = R",
+        "f = 2R",
+        "f = R/2",
+        "f = R/4"
+      ],
+      "correctIndex": 2,
+      "answer": "f = R/2",
+      "explanation": "In the paraxial approximation, parallel rays close to the axis meet at the focus, and the focal length is half the radius of curvature, f = R/2.",
+      "commonMistake": "Forgetting the factor of two and equating f and R directly."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-04",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which mirror always forms a virtual, erect and diminished image of a real object?",
+      "options": [
+        "concave mirror",
+        "plane mirror",
+        "parabolic mirror",
+        "convex mirror"
+      ],
+      "correctIndex": 3,
+      "answer": "convex mirror",
+      "explanation": "A convex mirror is diverging; for any real object it produces a virtual, erect image that is smaller than the object and behind the mirror.",
+      "commonMistake": "Confusing convex and concave mirrors and thinking a concave mirror always gives a virtual image."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-05",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Total internal reflection can occur only when light:",
+      "options": [
+        "travels from a denser medium to a rarer medium and the angle of incidence exceeds the critical angle",
+        "travels from a rarer medium to a denser medium",
+        "is incident normally on a boundary",
+        "is reflected from a plane mirror"
+      ],
+      "correctIndex": 0,
+      "answer": "travels from a denser medium to a rarer medium and the angle of incidence exceeds the critical angle",
+      "explanation": "Total internal reflection requires light to go from a higher-index to a lower-index medium and to strike the boundary at an angle greater than the critical angle, sin C = n_rarer/n_denser.",
+      "commonMistake": "Thinking total internal reflection can happen going from air into glass."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An object is placed in front of a concave mirror of focal length 20 cm. If the image is real and magnified, the object distance is most likely:",
+      "options": [
+        "more than 40 cm",
+        "between 20 cm and 40 cm",
+        "less than 20 cm",
+        "exactly 40 cm"
+      ],
+      "correctIndex": 1,
+      "answer": "between 20 cm and 40 cm",
+      "explanation": "In the Cartesian convention, f = -20 cm and R = -40 cm. An object between F and C, that is between 20 cm and 40 cm, gives a real, inverted and magnified image beyond C.",
+      "commonMistake": "Misplacing the object region for a real, magnified image and putting it beyond C."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two thin lenses of powers +5 D and -2 D are placed in contact. Their combined power is:",
+      "options": [
+        "-3 D",
+        "+7 D",
+        "+3 D",
+        "-7 D"
+      ],
+      "correctIndex": 2,
+      "answer": "+3 D",
+      "explanation": "For thin lenses in contact, the powers add: P = P1 + P2 = 5 + (-2) = +3 D. The combination is converging because the net power is positive.",
+      "commonMistake": "Adding the focal lengths instead of the powers, or forgetting the negative sign of the diverging lens."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-08",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A prism has refracting angle A and produces minimum deviation delta_m. The refractive index of its material is given by:",
+      "options": [
+        "n = sin(A/2) / sin((A + delta_m)/2)",
+        "n = sin(A) / sin(delta_m)",
+        "n = sin(delta_m) / sin(A)",
+        "n = sin((A + delta_m)/2) / sin(A/2)"
+      ],
+      "correctIndex": 3,
+      "answer": "n = sin((A + delta_m)/2) / sin(A/2)",
+      "explanation": "At minimum deviation the ray passes symmetrically, and the standard result is n = sin((A + delta_m)/2) / sin(A/2).",
+      "commonMistake": "Mixing up the numerator and denominator in the minimum deviation formula."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-09",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "A ray of light travelling from a denser medium to a rarer medium is totally internally reflected when the angle of incidence is greater than the ______ angle.",
+      "answer": "critical",
+      "explanation": "The critical angle is the angle of incidence in the denser medium for which the angle of refraction in the rarer medium is 90 degrees; larger angles give total internal reflection.",
+      "commonMistake": "Writing 'refraction' or 'limiting' instead of 'critical'."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-10",
+      "type": "fill-blank",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The power of a lens of focal length 0.5 m is ______ dioptre.",
+      "answer": "+2 dioptre",
+      "explanation": "P = 1/f with f in metres gives P = 1/0.5 = 2 D. The positive sign means a converging lens.",
+      "commonMistake": "Giving the answer in centimetres or forgetting to convert f to metres."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-11",
+      "type": "fill-blank",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a thin convex lens, the thin lens formula in the Cartesian sign convention is 1/f = 1/v - ______.",
+      "answer": "1/u",
+      "explanation": "The thin lens formula is 1/f = 1/v - 1/u, with u negative for a real object placed in front of the lens in the Cartesian sign convention.",
+      "commonMistake": "Writing 1/v + 1/u, which is the mirror formula, not the lens formula."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-12",
+      "type": "short",
+      "difficulty": "easy",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the two laws of reflection and mention what they imply for the image formed by a plane mirror.",
+      "answer": "Reflection obeys two laws: (1) the angle of incidence equals the angle of reflection, and (2) the incident ray, the reflected ray and the normal all lie in the same plane. For a plane mirror these laws lead to a virtual, erect image that is the same size as the object and is as far behind the mirror as the object is in front.",
+      "explanation": "The laws of reflection are exact for any smooth surface; the plane mirror image properties follow from them together with simple geometry of equal angles.",
+      "commonMistake": "Giving only one law or forgetting to state the plane containing the rays and the normal."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define total internal reflection and write the condition for it to occur.",
+      "answer": "Total internal reflection is the complete reflection of light back into a denser medium when it strikes the boundary with a rarer medium at an angle greater than the critical angle. The conditions are that light must travel from a denser to a rarer medium and the angle of incidence must exceed the critical angle, sin C = n_rarer/n_denser.",
+      "explanation": "This is a standard definition and condition pair; the critical angle formula should be stated along with the denser-to-rarer requirement.",
+      "commonMistake": "Omitting the denser-to-rarer condition or giving a critical angle greater than 90 degrees."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the lens maker's formula for a thin lens in air and explain the meaning of each symbol.",
+      "answer": "The lens maker's formula is 1/f = (n - 1)(1/R1 - 1/R2). Here f is the focal length of the lens in air, n is the refractive index of the lens material, and R1 and R2 are the radii of curvature of the two surfaces with their proper signs according to the Cartesian sign convention.",
+      "explanation": "This is the standard thin lens in air formula; the signs of R1 and R2 matter when substituting actual numbers.",
+      "commonMistake": "Dropping the minus sign between the two curvature terms and writing 1/R1 + 1/R2."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between real and virtual images with one example of each from mirrors.",
+      "answer": "A real image is formed by the actual convergence of rays and can be obtained on a screen; for a concave mirror it is formed on the same side as the object when the object is beyond the focus. A virtual image is formed where rays only appear to diverge from and cannot be obtained on a screen; for a concave mirror it is formed behind the mirror when the object is between the focus and the pole, and for a convex mirror it is always virtual.",
+      "explanation": "The key distinctions are actual ray convergence versus apparent divergence and whether a screen can catch the image.",
+      "commonMistake": "Saying a virtual image is formed in front of the mirror or that it can be projected."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-16",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Derive the mirror formula 1/f = 1/v + 1/u for a concave mirror using a ray diagram and the paraxial approximation.",
+      "answer": "For a concave mirror with an object placed beyond the focus, draw the object as an upright arrow on the principal axis. Consider a point on the object and two paraxial rays: one parallel to the principal axis, which after reflection passes through the focus F; and one that passes through the centre of curvature C and reflects back on itself. These reflected rays meet at a point that forms the tip of the real inverted image. Using similar triangles formed by the object and image heights and their distances from the mirror, and the small-angle approximation, the ray geometry gives 1/f = 1/v + 1/u. The derivation relies on the paraxial approximation because it replaces sin theta and tan theta with theta and treats the focus as midway between the pole and the centre of curvature.",
+      "explanation": "The expected answer sketches the two standard rays, identifies the similar triangles relating object and image sizes to u, v and f, and invokes the paraxial approximation rather than performing a full wave-optics derivation.",
+      "commonMistake": "Using the wrong sign and writing 1/v - 1/u, which is the lens formula, not the mirror formula."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-17",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "State the thin lens formula and the Cartesian sign convention. Use it to find the nature, position and magnification of the image formed by a convex lens of focal length 15 cm when an object is placed 20 cm from it.",
+      "answer": "The thin lens formula is 1/f = 1/v - 1/u. The Cartesian sign convention uses the optical centre as the origin, measures distances against the direction of the incident light as negative, and takes distances in the direction of the incident light as positive. For a convex lens f is positive and for a real object u is negative. With f = +15 cm and u = -20 cm, 1/v = 1/f + 1/u = 1/15 - 1/20 = 4/60 - 3/60 = 1/60, so v = +60 cm. The image is on the opposite side of the lens, so it is real and inverted. Magnification m = v/u = 60/(-20) = -3, so the image is three times the object size and inverted.",
+      "explanation": "The mark scheme expects the formula, the sign convention, the correct substitution, the result v = +60 cm, and the conclusion that the image is real, inverted and magnified.",
+      "commonMistake": "Using the mirror formula or getting the sign of u wrong so that v comes out negative."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-18",
+      "type": "long",
+      "difficulty": "medium",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Explain with a ray diagram how a convex lens forms a virtual magnified image. State the conditions under which this happens.",
+      "answer": "A convex lens forms a virtual, erect and magnified image when the object lies between the optical centre and the principal focus. In the ray diagram, draw the object close to the lens on the incident-light side. Take a ray from the object tip parallel to the principal axis; after refraction it passes through the focus on the other side. Take a second ray through the optical centre, which passes straight through undeviated. These two rays diverge after the lens, and their backward extensions meet on the same side as the object. That meeting point is the tip of the virtual image, which is larger than the object and erect. The conditions are that the object distance is less than the focal length and the lens is converging, so the rays leave the lens still diverging but from a larger apparent source.",
+      "explanation": "The answer should explain both rays, show the backward extensions, identify the image as virtual, erect and magnified, and state that the object must be inside the focal length.",
+      "commonMistake": "Drawing the image on the opposite side of the lens or claiming the virtual image is real and inverted."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-19",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "A small fish is inside water of refractive index 4/3. A bird is directly above it in air. To the fish, where does the bird appear to be relative to its actual position? Explain your reasoning.",
+      "answer": "To the fish, the bird appears higher than its actual position. The fish is in the denser medium looking into the rarer medium, so the light from the bird entering the water is refracted away from the normal. In the fish's view, the virtual image of the bird is formed by extending the rays backward into the air, which places the image farther from the water surface than the real bird. In the near-normal approximation the apparent distance is increased compared with the real distance because of the reversal of the usual apparent-depth formula when the rarer medium is viewed from the denser one.",
+      "explanation": "The key point is the direction of viewing: a denser-to-rarer view raises the apparent object, which is the opposite of the usual apparent-depth problem where an object in the denser medium looks shallower.",
+      "commonMistake": "Applying the apparent-depth formula in the wrong direction and concluding the bird looks lower."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-20",
+      "type": "analytical",
+      "difficulty": "medium",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Why does a diamond sparkle more than a glass imitation of similar size? Give a physical explanation based on the ray optics covered in this chapter.",
+      "answer": "A diamond has a high refractive index, around 2.42, so its critical angle at the diamond-air boundary is small, about arcsin(1/2.42) ≈ 24 degrees. Light entering the diamond therefore strikes the internal faces at angles that are very often greater than this critical angle and undergoes total internal reflection several times inside the stone before it emerges. The cut of a diamond is designed to maximise this effect so that most of the light entering the top returns through the top, producing strong sparkle and fire. A glass imitation has a lower refractive index and a larger critical angle, so a larger fraction of light leaks out through the sides rather than being totally internally reflected.",
+      "explanation": "The explanation should connect high refractive index, small critical angle, multiple total internal reflections, and the shaping of the stone.",
+      "commonMistake": "Attributing diamond sparkle mainly to dispersion alone and not mentioning total internal reflection and the critical angle."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-21",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "An object is placed in front of a concave mirror. A student claims that if the object is at the focus, the image is formed at the centre of curvature. Identify the error and state where the image actually forms, supporting your answer with the mirror formula.",
+      "answer": "The student is wrong. If the object is at the focus of a concave mirror, u = -f. Using the mirror formula, 1/v = 1/f - 1/u = 1/f - 1/(-f) = 1/f + 1/f = 2/f, so v is not equal to the radius of curvature; in fact 1/v = 2/f means v = f/2, but the physically meaningful case here is that the object at the focus sends rays that become parallel after reflection, so the image is formed at infinity. The mirror formula reflects this as the limit: when u approaches -f, v grows without bound, meaning the reflected rays are parallel and meet only at infinity. The image at the centre of curvature occurs when the object is at the centre of curvature, not at the focus.",
+      "explanation": "The expected reasoning is that an object at the focus produces a parallel reflected beam, so the image is at infinity, not at C; the mirror formula should be used to show that v becomes very large.",
+      "commonMistake": "Substituting u = -f into 1/f = 1/v + 1/u and concluding v = f/2 without interpreting the parallel-ray limit correctly."
+    },
+    {
+      "id": "isc-12-physics-q-ray-optics-22",
+      "type": "analytical",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Two lenses of focal lengths 10 cm and -20 cm are placed 5 cm apart on the same axis, with the convex lens first. An object is placed 15 cm in front of the convex lens. Find where the final image is formed and its nature. Explain the reasoning step by step.",
+      "answer": "Treat the combination as two successive lenses. For the first convex lens, f1 = +10 cm, u1 = -15 cm, so 1/v1 = 1/10 + 1/(-15) = 3/30 - 2/30 = 1/30, giving v1 = +30 cm on the far side of the first lens. This image acts as the object for the second lens. Since the lenses are 5 cm apart, the object for the second lens is 30 - 5 = 25 cm beyond it, so u2 = -25 cm. For the second lens, f2 = -20 cm, so 1/v2 = 1/f2 + 1/u2 = -1/20 - 1/25 = -5/100 - 4/100 = -9/100, giving v2 = -100/9 ≈ -11.1 cm. The negative v2 means the final image is on the same side of the second lens as its object, so it is virtual, erect relative to that intermediate image, and located about 11.1 cm in front of the diverging lens. The intermediate image was real and inverted, so the final image is inverted relative to the original object.",
+      "explanation": "The answer should show the first lens image position, convert it into the object distance for the second lens using the separation, then apply the lens formula again and interpret the final sign.",
+      "commonMistake": "Ignoring the 5 cm separation and using u2 = -30 cm, or adding the powers as if the lenses were in contact."
+    }
+  ]
+}

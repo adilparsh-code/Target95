@@ -98,7 +98,7 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
       if (item.id === "ISC12-D03") {
         const oversizedOperandsRun = spawnSync("java", ["-cp", workDir, mainClass], {
           encoding: "utf8",
-          input: "50000 50000\\n50000 50000\\n",
+          input: "50000 50000\n50000 50000\n",
           timeout: 10000,
         });
         assert.equal(oversizedOperandsRun.status, 0, "ISC12-D03 should reject oversized operand matrices safely");
@@ -106,7 +106,7 @@ test("all ICSE X and ISC XII Java programs compile and match their published sam
 
         const oversizedResultRun = spawnSync("java", ["-cp", workDir, mainClass], {
           encoding: "utf8",
-          input: "1001 1\\n1 1001\\n",
+          input: "1001 1\n1 1001\n",
           timeout: 10000,
         });
         assert.equal(oversizedResultRun.status, 0, "ISC12-D03 should reject an oversized result matrix safely");

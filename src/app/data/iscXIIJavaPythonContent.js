@@ -789,4 +789,8 @@ static int maxOf(int[] a) {
   },
 };
 
+export const ISC_XII_JAVA_PYTHON_CONTENT_TOPICS = Object.keys(ISC_XII_JAVA_PYTHON_CONTENT);
+
 export const getISCXIIJavaPythonContent = (slug) => ISC_XII_JAVA_PYTHON_CONTENT[slug] ?? null;
+
+export const isISCXIIJavaPythonTopic = (slug) => ISC_XII_JAVA_PYTHON_CONTENT_TOPICS.includes(slug);

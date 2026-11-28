@@ -35,6 +35,26 @@ jobs:
         shell: bash
         run: npm run validate:data
 
+      - name: Validate BoardPrep registry
+        shell: bash
+        run: npm run validate:boardprep
+
+      - name: Validate CISCE AI content
+        shell: bash
+        run: npm run validate:cisce-ai
+
+      - name: Validate project packages
+        shell: bash
+        run: npm run validate:projects
+
+      - name: Lint
+        shell: bash
+        run: npm run lint
+
+      - name: Typecheck
+        shell: bash
+        run: npm run typecheck
+
       - name: Audit chapter content
         shell: bash
         run: npm run audit:chapters

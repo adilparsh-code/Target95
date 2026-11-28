@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getISCXIIJavaPythonContent, ISC_XII_JAVA_PYTHON_CONTENT } from "@/app/data/iscXIIJavaPythonContent";
+import { getISCXIIJavaPythonContent, ISC_XII_JAVA_PYTHON_CONTENT_TOPICS } from "@/app/data/iscXIIJavaPythonContent";
 
 export function generateStaticParams() {
-  return Object.keys(ISC_XII_JAVA_PYTHON_CONTENT).map((topic) => ({ topic }));
+  return ISC_XII_JAVA_PYTHON_CONTENT_TOPICS.map((topic) => ({ topic }));
 }
 
 const TYPE_LABELS = {

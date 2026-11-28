@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-pnc",
+  "title": "Permutations and Combinations",
+  "kind": "mathematics",
+  "tagline": "Counting principle, factorial notation, permutations, combinations and their formulas, the connection between them, and simple applications.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Permutations and combinations are the mathematics of counting. They are needed whenever we want to know how many ways a selection or arrangement can be made, without actually listing every possibility. The key idea is the fundamental principle of counting: if one task can be done in m ways and a second in n ways, then both together can be done in m x n ways. From that principle come factorials, permutations and combinations. The most important skill in this chapter is deciding whether order matters before choosing a formula.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Permutations and Combinations" },
+      { "label": "Core ideas", "value": "Fundamental principle of counting; factorial notation; permutations; combinations; formulas for nPr and nCr; relation between them; simple applications" }
+    ]
+  },
+  "learningOutcomes": [
+    "Use the fundamental principle of counting.",
+    "State and use factorial notation.",
+    "Distinguish permutations from combinations.",
+    "Use the formulas for nPr and nCr.",
+    "Use the relation between permutations and combinations.",
+    "Solve simple counting problems."
+  ],
+  "learn": [
+    {
+      "id": "counting-principle",
+      "title": "Fundamental principle of counting",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The fundamental principle of counting says that if one experiment or task has m possible outcomes and another has n possible outcomes, then doing both in succession gives m x n possible outcomes, provided the choices are independent. This is the starting point for almost all counting problems. Many apparently complicated questions are just a chain of such choices, and the work is to identify the stages correctly."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "If one task has m ways and another has n ways, both have m x n ways.",
+            "The principle extends to more than two tasks.",
+            "It applies when the choices are independent.",
+            "It is the basis for formulas for permutations and combinations."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a person has 3 shirts and 2 trousers, the number of outfits is 3 x 2 = 6, because each shirt can be paired with each trouser.", "note": "The key step is to represent the problem as a sequence of independent choices." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "factorial",
+      "title": "Factorial notation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Factorial notation is a compact way to write the product of the integers from 1 up to n. That product is written n! and read 'n factorial'. By convention, 0! = 1. Factorials appear in the formulas for permutations and combinations, so being comfortable with them is essential. They also grow very quickly, which is why counting problems can produce large numbers."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "n! = n(n-1)(n-2)...2 x 1.",
+            "0! = 1.",
+            "Factorials are used in nPr and nCr.",
+            "Factorials grow very fast."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "5! = 5 x 4 x 3 x 2 x 1 = 120. Also, 1! = 1 and 0! = 1.", "note": "Remembering 0! = 1 is important, because it often appears in formulas and special cases." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "permutations",
+      "title": "Permutations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A permutation is an arrangement of objects in a definite order. When order matters, we count permutations. The number of permutations of r objects chosen from n distinct objects is nPr = n! / (n-r)!. This counts the ordered selections of r objects. You can think of it as making a sequence of choices: first choose the first object, then the second, and so on, and then multiply the numbers of choices."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A permutation is an arrangement where order matters.",
+            "nPr = n! / (n-r)!.",
+            "It counts ordered selections of r objects from n.",
+            "The formula comes from successive choices."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The number of ways to arrange 2 books chosen from 4 on a shelf is 4P2 = 4 x 3 = 12, because the order on the shelf matters.", "note": "If the same two books were simply selected into a pile, order would not matter and the count would be smaller." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combinations",
+      "title": "Combinations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A combination is a selection of objects where order does not matter. The number of combinations of r objects chosen from n distinct objects is nCr = n! / [r! (n-r)!]. This is smaller than nPr because it removes the r! different orderings of the same r objects. A useful identity is nCr = nCn-r, which often makes a problem easier."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A combination is a selection where order does not matter.",
+            "nCr = n! / [r! (n-r)!].",
+            "Combinations count unordered selections.",
+            "nCr = nCn-r is a useful check."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The number of ways to choose 3 students from 8 for a committee is 8C3 = 56, because the order of choice does not matter.", "note": "If the three students were to be given different roles, the problem would become a permutation, not a combination." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relation-between-permutations-and-combinations",
+      "title": "Relation between permutations and combinations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Permutations and combinations are related by the formula nPr = r! nCr. This says that if we first choose r objects in nCr ways and then arrange them in r! ways, we get the total number of permutations. This relation is useful both for understanding and for checking answers. It also explains why combinations are smaller than permutations of the same size."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "nPr = r! nCr.",
+            "A permutation is an ordered combination.",
+            "The relation helps verify answers.",
+            "It explains why nPr >= nCr for the same n and r."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For n = 4 and r = 2, 4P2 = 12 and 4C2 = 6, and 4P2 = 2! x 4C2 = 2 x 6 = 12.", "note": "If your permutation and combination answers are not related by this factor, you may have confused the problem." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "simple-applications",
+      "title": "Simple applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus includes simple applications, which means using the formulas in straightforward counts rather than very complicated restricted cases. Typical problems involve selecting objects, forming numbers, or counting arrangements under clear conditions. The main caution is to decide first whether order matters, and then to use the right formula or small step-by-step counting."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Decide first whether order matters.",
+            "Use nPr for ordered arrangements.",
+            "Use nCr for selections.",
+            "Break a problem into stages when helpful."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Choosing 2 out of 5 people for a team gives 5C2 = 10 ways. Arranging those 2 people in two specific positions gives 5P2 = 20 ways.", "note": "The same numbers can give different counts depending on whether order matters." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Permutation versus combination",
+      "description": "A simple illustration showing that an ordered arrangement and an unordered selection of the same objects can give different counts.",
+      "labels": ["ordered arrangement", "unordered selection", "order matters", "order does not matter"]
+    }
+  ],
+  "keyPoints": [
+    "The fundamental principle of counting multiplies the number of ways at each stage.",
+    "n! = n(n-1)...2 x 1 and 0! = 1.",
+    "A permutation is an arrangement; order matters.",
+    "A combination is a selection; order does not matter.",
+    "nPr = n! / (n-r)! and nCr = n! / [r! (n-r)!].",
+    "nPr = r! nCr relates the two ideas.",
+    "Deciding whether order matters is the first step."
+  ],
+  "examFocus": [
+    "If the problem asks for arrangements in specific positions, use permutations; if it asks for groups or selections, use combinations.",
+    "If you are unsure, count in two ways or relate nPr and nCr to check consistency."
+  ],
+  "vocabulary": [
+    { "word": "Permutation", "meaning": "An arrangement of objects in a definite order." },
+    { "word": "Combination", "meaning": "A selection of objects where order does not matter." },
+    { "word": "Factorial", "meaning": "The product n! = n(n-1)...2 x 1, with 0! = 1." },
+    { "word": "Fundamental principle of counting", "meaning": "The rule that successive independent choices multiply the number of possibilities." },
+    { "word": "nPr", "meaning": "The number of permutations of r objects chosen from n distinct objects." },
+    { "word": "nCr", "meaning": "The number of combinations of r objects chosen from n distinct objects." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-pnc-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The value of 0! is:",
+      "options": ["0", "1", "Infinity", "Undefined"],
+      "correctIndex": 1,
+      "answer": "1",
+      "explanation": "By convention, 0! = 1.",
+      "commonMistake": "Thinking 0! = 0 because 0 has no positive factors."
+    },
+    {
+      "id": "isc-11-math-pnc-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of ways to select 3 students from 8 for a committee is:",
+      "options": ["8P3", "8C3", "3P8", "3C8"],
+      "correctIndex": 1,
+      "answer": "8C3",
+      "explanation": "Selection where order does not matter is a combination, so 8C3 is correct.",
+      "commonMistake": "Using permutation because the problem mentions three students."
+    },
+    {
+      "id": "isc-11-math-pnc-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find 5P2 and 5C2.",
+      "answer": "5P2 = 5 x 4 = 20; 5C2 = (5 x 4) / 2 = 10.",
+      "explanation": "Use nPr = n!/(n-r)! and nCr = n!/(r!(n-r)!).",
+      "commonMistake": "Forgetting to divide by r! for combinations."
+    },
+    {
+      "id": "isc-11-math-pnc-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the relation between nPr and nCr.",
+      "answer": "nPr = r! nCr, because a permutation is an ordered combination.",
+      "explanation": "Choosing r objects gives nCr selections, and arranging them gives r! orders.",
+      "commonMistake": "Writing nCr = r! nPr, which reverses the relation."
+    },
+    {
+      "id": "isc-11-math-pnc-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A group of 8 people contains 5 boys and 3 girls. In how many ways can a committee of 3 be formed if it must contain exactly 2 boys and 1 girl?",
+      "answer": "Choose 2 boys from 5 in 5C2 = 10 ways, and 1 girl from 3 in 3C1 = 3 ways. Total = 10 x 3 = 30 ways.",
+      "explanation": "The committee is a selection, so combinations are used for each part, and the parts are chosen independently.",
+      "commonMistake": "Using permutations for the selection, or adding the two counts instead of multiplying."
+    }
+  ]
+}

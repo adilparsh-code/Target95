@@ -1,12 +1,19 @@
-import { NextResponse } from "next/server";
-import { FieldValue } from "firebase-admin/firestore";
 import { getVerifiedSession } from "@/app/lib/server-auth";
 import { getAdminDb } from "@/app/lib/firebase-admin";
+import { FieldValue } from "firebase-admin/firestore";
 import { buildResultDocument, gradeAttempt } from "@/lib/mocktestAttempts";
 
 export const runtime = "nodejs";
 
 const ATTEMPT_ID = /^[A-Za-z0-9]{10,40}$/;
+
+function jsonResponse(body, init = {}) {
+  const response = new Response(JSON.stringify(body), {
+    headers: { "Content-Type": "application/json" },
+    ...init,
+  });
+  return response;
+}
 
 /**
  * POST /api/mock-tests/attempts/[id]/submit
@@ -24,25 +31,25 @@ export async function POST(request, { params }) {
     session = await getVerifiedSession(request);
   } catch (error) {
     console.error("Session validation failed:", error);
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "unavailable", error: "Session validation is temporarily unavailable." },
       { status: 503 }
     );
   }
   if (!session) {
-    return NextResponse.json({ ok: false, error: "Sign in to save mock test results." }, { status: 401 });
+    return jsonResponse({ ok: false, error: "Sign in to save mock test results." }, { status: 401 });
   }
 
   const { id } = await params;
   if (!ATTEMPT_ID.test(String(id || ""))) {
-    return NextResponse.json({ ok: false, error: "Invalid attempt id." }, { status: 400 });
+    return jsonResponse({ ok: false, error: "Invalid attempt id." }, { status: 400 });
   }
 
   let body;
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
+    return jsonResponse({ ok: false, error: "Invalid JSON body." }, { status: 400 });
   }
 
   const db = getAdminDb();
@@ -65,11 +72,11 @@ export async function POST(request, { params }) {
     });
 
     if (result.status !== 200) {
-      return NextResponse.json({ ok: false, error: result.error }, { status: result.status });
+      return jsonResponse({ ok: false, error: result.error }, { status: result.status });
     }
-    return NextResponse.json({ ok: true, result: { id, ...result.doc } });
+    return jsonResponse({ ok: true, result: { id, ...result.doc } });
   } catch (error) {
     console.error("Mock test submission failed:", error);
-    return NextResponse.json({ ok: false, error: "Unable to save the result right now." }, { status: 500 });
+    return jsonResponse({ ok: false, error: "Unable to save the result right now." }, { status: 500 });
   }
 }

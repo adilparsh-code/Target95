@@ -1,10 +1,17 @@
-import { NextResponse } from "next/server";
-import { FieldValue } from "firebase-admin/firestore";
 import { getVerifiedSession } from "@/app/lib/server-auth";
 import { getAdminDb } from "@/app/lib/firebase-admin";
+import { FieldValue } from "firebase-admin/firestore";
 import { normalizeAttemptConfig, selectAttemptQuestionIds } from "@/lib/mocktestAttempts";
 
 export const runtime = "nodejs";
+
+function jsonResponse(body, init = {}) {
+  const response = new Response(JSON.stringify(body), {
+    headers: { "Content-Type": "application/json" },
+    ...init,
+  });
+  return response;
+}
 
 /**
  * POST /api/mock-tests/attempts
@@ -18,26 +25,26 @@ export async function POST(request) {
     session = await getVerifiedSession(request);
   } catch (error) {
     console.error("Session validation failed:", error);
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "unavailable", error: "Session validation is temporarily unavailable." },
       { status: 503 }
     );
   }
   if (!session) {
-    return NextResponse.json({ ok: false, error: "Sign in to save mock test results." }, { status: 401 });
+    return jsonResponse({ ok: false, error: "Sign in to save mock test results." }, { status: 401 });
   }
 
   let body;
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
+    return jsonResponse({ ok: false, error: "Invalid JSON body." }, { status: 400 });
   }
 
   const config = normalizeAttemptConfig(body?.config);
   const questionIds = selectAttemptQuestionIds(config);
   if (!questionIds.length) {
-    return NextResponse.json({ ok: false, error: "No questions are available for this test." }, { status: 404 });
+    return jsonResponse({ ok: false, error: "No questions are available for this test." }, { status: 404 });
   }
 
   try {
@@ -51,9 +58,9 @@ export async function POST(request) {
       status: "in_progress",
       createdAt: FieldValue.serverTimestamp(),
     });
-    return NextResponse.json({ ok: true, attemptId: ref.id, questionIds, duration: config.duration, startedAtMs });
+    return jsonResponse({ ok: true, attemptId: ref.id, questionIds, duration: config.duration, startedAtMs });
   } catch (error) {
     console.error("Mock test attempt start failed:", error);
-    return NextResponse.json({ ok: false, error: "Unable to start the test right now." }, { status: 500 });
+    return jsonResponse({ ok: false, error: "Unable to start the test right now." }, { status: 500 });
   }
 }

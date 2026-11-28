@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-straight-line",
+  "title": "Straight Lines",
+  "kind": "mathematics",
+  "tagline": "Slope, equations of a line, angle between lines, parallel and perpendicular conditions, and distance from a point to a line — the ISC Class XI coordinate geometry treatment of straight lines.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question. The official CISCE ISC Class XI Mathematics syllabus treats this topic under '3. Coordinate Geometry' as '(i) Straight Lines', so the chapter is titled 'Straight Lines' to match the official syllabus phrasing."
+  },
+  "overview": {
+    "intro": "The straight line is one of the simplest but most useful curves in coordinate geometry. A line can be described in many equivalent ways: by its slope, by a point and a direction, by two points, by its intercepts, or by a general linear equation. The point of learning several forms is not to memorise them for their own sake, but to be able to choose the most convenient one for the problem in front of you. This chapter develops the main equations of a line and the basic facts about angles, parallelism, perpendicularity and distance.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Coordinate Geometry — Straight Lines" },
+      { "label": "Core ideas", "value": "Slope; equations in various forms; angle between two lines; conditions for parallel and perpendicular lines; distance of a point from a line; distance between parallel lines" }
+    ]
+  },
+  "learningOutcomes": [
+    "Calculate the slope of a line from points or from its equation.",
+    "Write the equation of a line in point-slope, slope-intercept, two-point, intercept and general forms.",
+    "Find the angle between two straight lines using their slopes.",
+    "State and apply the conditions for parallel and perpendicular lines.",
+    "Find the perpendicular distance from a point to a line.",
+    "Choose the most useful form of the equation for a given problem."
+  ],
+  "learn": [
+    {
+      "id": "slope-and-direction",
+      "title": "Slope and direction",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The slope of a non-vertical line tells us how steeply it rises or falls. If two points (x_1,y_1) and (x_2,y_2) lie on the line, the slope is (y_2 - y_1)/(x_2 - x_1), provided the line is not vertical. A line that rises from left to right has positive slope; one that falls has negative slope; a horizontal line has slope zero; a vertical line has no defined slope. The slope is the same between any two points on the same line, which is why a straight line has a constant direction."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Slope is the ratio of vertical change to horizontal change.",
+            "A line has the same slope between any two of its points.",
+            "Horizontal lines have slope 0.",
+            "Vertical lines have undefined slope.",
+            "The sign of the slope tells whether the line rises or falls from left to right."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a line passes through (1,2) and (4,8), the slope is (8 - 2)/(4 - 1) = 6/3 = 2. This means that for every 1 unit the x-coordinate increases, the y-coordinate increases by 2.", "note": "Slope expresses the line's rate of change of y with respect to x." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations-of-a-line",
+      "title": "Equations of a line",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A straight line can be represented by an equation in x and y. Different forms are useful in different situations. The slope-intercept form y = mx + c is convenient when the slope and y-intercept are known. The point-slope form y - y_1 = m(x - x_1) is useful when the slope and one point are known. The two-point form is derived from the slope expression and is useful when two points are known. The intercept form x/a + y/b = 1 is convenient when the x- and y-intercepts are known, and the general form Ax + By + C = 0 covers all straight lines."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "y = mx + c is slope-intercept form.",
+            "y - y_1 = m(x - x_1) is point-slope form.",
+            "The two-point form uses two given points.",
+            "x/a + y/b = 1 is intercept form when a and b are the intercepts.",
+            "Ax + By + C = 0 is the general linear equation."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A line with slope -3 passing through (2,5) has equation y - 5 = -3(x - 2). This can be left in that form or rearranged to y = -3x + 11, depending on what is required.", "note": "The same line can be written in several ways; the algebra connects them." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angle-between-lines",
+      "title": "Angle between two lines",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "If two non-vertical lines have slopes m_1 and m_2, the angle between them is related to the difference of the slopes. The formula for the tangent of the acute or given angle between the lines is tan(theta) = |(m_2 - m_1)/(1 + m_1 m_2)|, provided the lines are not perpendicular. The important idea is that the angle depends only on the slopes, not on where the lines are located. Parallel lines have equal slopes, and perpendicular lines have slopes whose product is -1 (when both slopes are defined)."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The angle between two lines depends on their slopes.",
+            "Parallel lines have the same slope.",
+            "Perpendicular lines satisfy m_1 m_2 = -1 when both slopes are defined.",
+            "The formula with tan(theta) is useful when the slopes are known.",
+            "Vertical and horizontal cases must be treated separately."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Two lines with slopes 2 and -1/2 are perpendicular because 2 * (-1/2) = -1. They meet at right angles, even though they may cross at any point on the plane.", "note": "The perpendicular condition is about slopes, not about where the lines intersect." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "distance-from-a-point",
+      "title": "Distance from a point to a line",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The perpendicular distance from a point to a line is the shortest distance between them. If the line is given in general form Ax + By + C = 0 and the point is (x_1,y_1), the perpendicular distance is |Ax_1 + By_1 + C|/sqrt(A^2 + B^2). This formula is useful in many geometry problems because it turns a geometric idea, shortest distance, into a direct calculation. The distance between two parallel lines can be found by taking any point on one line and finding its perpendicular distance to the other."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The perpendicular distance is the shortest distance from a point to a line.",
+            "The formula uses the absolute value of Ax_1 + By_1 + C divided by sqrt(A^2 + B^2).",
+            "The distance between parallel lines can be found by the same principle.",
+            "Care is needed with signs; distance is always non-negative.",
+            "The formula works for any line written in general form."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The distance from (1,2) to the line 3x + 4y - 5 = 0 is |3*1 + 4*2 - 5|/sqrt(3^2 + 4^2) = |3 + 8 - 5|/5 = 6/5. The result is positive because distance is a length.", "note": "The absolute value is what makes the answer a distance rather than a signed quantity." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Slope of a line",
+      "description": "A line through two points showing vertical and horizontal change.",
+      "labels": ["rise", "run", "slope = rise/run"]
+    },
+    {
+      "caption": "Figure: Perpendicular distance from a point to a line",
+      "description": "A point and a line with the perpendicular segment joining them.",
+      "labels": ["point", "line", "perpendicular distance"]
+    }
+  ],
+  "keyPoints": [
+    "A straight line can be described in several equivalent forms.",
+    "Slope measures the line's direction and is constant along the line.",
+    "Different forms of the equation are useful in different situations.",
+    "Parallel lines have equal slopes; perpendicular lines have slopes whose product is -1.",
+    "The angle between two lines comes from their slopes.",
+    "The shortest distance from a point to a line is the perpendicular distance.",
+    "The general form Ax + By + C = 0 is a common way to work with distance and angles."
+  ],
+  "examFocus": [
+    "If a question gives two points, start by finding the slope before choosing the equation form.",
+    "When asked for a distance, check whether the perpendicular distance is being asked for rather than a horizontal or vertical offset.",
+    "Be careful with vertical and horizontal lines, because slope formulas do not apply to vertical lines in the usual way."
+  ],
+  "vocabulary": [
+    { "word": "Slope", "meaning": "The ratio of vertical change to horizontal change along a line." },
+    { "word": "Intercept", "meaning": "The point where a line meets an axis; the x-intercept is on the x-axis, the y-intercept on the y-axis." },
+    { "word": "Parallel lines", "meaning": "Lines in a plane that have the same direction and do not meet." },
+    { "word": "Perpendicular lines", "meaning": "Lines that meet at a right angle." },
+    { "word": "General form", "meaning": "The equation Ax + By + C = 0 representing a straight line." },
+    { "word": "Perpendicular distance", "meaning": "The shortest distance from a point to a line measured along a perpendicular." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-straight-line-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The slope of a horizontal line is:",
+      "options": ["1", "0", "-1", "undefined"],
+      "correctIndex": 1,
+      "answer": "0",
+      "explanation": "A horizontal line has no vertical change, so its slope is 0.",
+      "commonMistake": "Thinking a flat line has no slope in the sense of zero rather than undefined."
+    },
+    {
+      "id": "isc-11-math-straight-line-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Two lines with slopes 3 and -1/3 are:",
+      "options": ["parallel", "perpendicular", "the same line", "neither parallel nor perpendicular"],
+      "correctIndex": 1,
+      "answer": "perpendicular",
+      "explanation": "Their slopes multiply to -1, which is the condition for perpendicular lines.",
+      "commonMistake": "Thinking that only equal slopes give a special relationship."
+    },
+    {
+      "id": "isc-11-math-straight-line-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the slope of the line through (2,5) and (6,13).",
+      "answer": "The slope is (13 - 5)/(6 - 2) = 8/4 = 2.",
+      "explanation": "Slope is vertical change divided by horizontal change.",
+      "commonMistake": "Inverting the ratio or subtracting the coordinates in the wrong order."
+    },
+    {
+      "id": "isc-11-math-straight-line-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the equation of the line with slope 4 and y-intercept -3.",
+      "answer": "y = 4x - 3.",
+      "explanation": "In slope-intercept form, y = mx + c, replace m with 4 and c with -3.",
+      "commonMistake": "Mixing up the slope and the intercept signs."
+    },
+    {
+      "id": "isc-11-math-straight-line-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 3,
+      "origin": "practice",
+      "prompt": "Find the perpendicular distance from the point (1,2) to the line 3x + 4y - 5 = 0.",
+      "answer": "The distance is |3*1 + 4*2 - 5|/sqrt(3^2 + 4^2) = |3 + 8 - 5|/5 = 6/5.",
+      "explanation": "The perpendicular distance formula gives |Ax_1 + By_1 + C|/sqrt(A^2 + B^2).",
+      "commonMistake": "Forgetting the absolute value or using the line's coefficients incorrectly."
+    }
+  ]
+}

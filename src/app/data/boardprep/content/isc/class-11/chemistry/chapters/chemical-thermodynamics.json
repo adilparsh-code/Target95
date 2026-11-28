@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-chem-thermodynamics",
+  "title": "Chemical Thermodynamics",
+  "kind": "chemistry",
+  "tagline": "Systems, state functions, the first law, internal energy and enthalpy, heat capacity, Hess's law, and introductory entropy and Gibbs energy.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Chemistry syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Chemistry registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Thermodynamics is the study of energy and how it changes in chemical and physical processes. In this chapter we learn how to describe a system and its surroundings, how to tell whether a quantity is a state function, and how the first law of thermodynamics relates heat, work and internal energy. We then study enthalpy, which is useful for reactions carried out at constant pressure, and we use Hess's law to find enthalpy changes from other known changes. Finally, we introduce entropy and Gibbs energy as guides to whether a process is likely to occur.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Chemical Thermodynamics" },
+      { "label": "Core ideas", "value": "Systems and surroundings; state functions; first law; internal energy and enthalpy; heat capacity; Hess's law; entropy; Gibbs energy and spontaneity" }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish open, closed and isolated systems.",
+    "Explain the difference between state functions and path functions.",
+    "State the first law of thermodynamics and use Delta U = q + w.",
+    "Define enthalpy and relate it to heat at constant pressure.",
+    "Apply Hess's law to find an unknown enthalpy change.",
+    "Explain the basic meaning of entropy and Gibbs energy."
+  ],
+  "learn": [
+    {
+      "id": "systems-and-state-functions",
+      "title": "Systems, surroundings and state functions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A system is the part of the universe we choose to study, and the surroundings are everything else. Systems may be open, closed or isolated, depending on whether matter and energy can cross the boundary. A state function is a property that depends only on the current state of the system, not on the path taken to reach that state. Internal energy, enthalpy and entropy are state functions, while heat and work are not."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "System: the part being studied.",
+            "Surroundings: everything else.",
+            "Open, closed and isolated systems differ by what can cross the boundary.",
+            "State functions depend only on state."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The change in altitude when climbing a hill is a state function: it does not matter whether you take the steep path or the winding path. The effort spent, however, depends on the path.", "note": "Internal energy is like altitude change; heat and work are more like effort." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first-law",
+      "title": "The first law of thermodynamics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law says that energy cannot be created or destroyed; it can only be transferred or converted from one form to another. For a system, the change in internal energy equals the heat added to the system plus the work done on the system. In chemistry, work done on the system is usually taken as positive. The law is a statement of energy conservation applied to thermal and chemical processes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Energy is conserved.",
+            "Delta U = q + w.",
+            "Work done on the system is often taken as positive in chemistry.",
+            "q and w depend on the path; Delta U does not."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a system absorbs 40 J of heat and does 10 J of work on the surroundings, then Delta U = 40 - 10 = 30 J, because the work done by the system reduces its internal energy in the usual sign convention.", "note": "The sign of work depends on the convention; always state which one you are using." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enthalpy",
+      "title": "Enthalpy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Enthalpy is defined as H = U + pV, and it is especially useful for processes at constant pressure. For a reaction at constant pressure, the heat exchanged is equal to the change in enthalpy, under ordinary conditions. The sign of Delta H tells us whether the reaction releases heat, as in exothermic reactions, or absorbs heat, as in endothermic reactions. Balanced thermochemical equations must be read with care, because reversing or scaling the equation changes Delta H."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Enthalpy H = U + pV.",
+            "At constant pressure, heat exchanged = Delta H.",
+            "Exothermic: Delta H is negative.",
+            "Endothermic: Delta H is positive.",
+            "Reversing a reaction changes the sign of Delta H."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a reaction releases 80 kJ of heat when one mole of a substance reacts, then Delta H is -80 kJ for the forward reaction and +80 kJ for the reverse reaction.", "note": "Reversing a reaction always changes the sign of Delta H." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heat-capacity",
+      "title": "Heat capacity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Heat capacity is the amount of heat needed to raise the temperature of a substance by one degree. Specific heat capacity is the heat needed per unit mass. These ideas are used when energy is transferred as heat and temperature changes, such as when a hot metal is placed in water. They are a simple but important application of the first law."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heat capacity C = q / Delta T.",
+            "Specific heat capacity c = q / (m Delta T).",
+            "Larger heat capacity means a smaller temperature change for the same heat.",
+            "Used in thermal mixing problems."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Water has a high specific heat capacity, so it warms and cools slowly compared with many other substances.", "note": "This is one reason water is useful for storing and transferring heat." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hesss-law",
+      "title": "Hess's law",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Hess's law says that the total enthalpy change for a reaction is the same whether it occurs in one step or several steps. This is because enthalpy is a state function. It means we can add and subtract thermochemical equations, as long as we obey the same rules as for ordinary algebra: reversing an equation changes the sign, and multiplying the equation multiplies the enthalpy change by the same factor."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Total Delta H is independent of the route.",
+            "The rule works because enthalpy is a state function.",
+            "Reversing a step reverses the sign of Delta H.",
+            "Scaling a step scales Delta H."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If one path to a product has Delta H = +20 kJ and another step has Delta H = -55 kJ, the overall enthalpy change is -35 kJ, the sum of the two.", "note": "Hess's law turns seemingly different routes into a simple sum." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "entropy-and-gibbs-energy",
+      "title": "Entropy and Gibbs energy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Entropy is a state function that measures the spread of energy and the number of ways a system can be arranged. In introductory thermodynamics, it is used as a guide to the direction of change. Gibbs energy combines enthalpy and entropy into a single quantity used for spontaneity at constant temperature and pressure. A process is spontaneous when Delta G is negative, non-spontaneous when it is positive, and at equilibrium when it is zero."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Entropy is a state function related to disorder or energy dispersal.",
+            "Gibbs energy combines enthalpy and entropy.",
+            "Delta G = Delta H - T Delta S.",
+            "Delta G < 0 means spontaneous at constant T and p.",
+            "Delta G = 0 means equilibrium."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "An endothermic reaction can still be spontaneous if the increase in entropy is large enough, because the -T Delta S term can outweigh the positive Delta H.", "note": "Spontaneity is not decided by enthalpy alone." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: State function versus path function",
+      "description": "A schematic comparison showing that change in altitude depends only on start and end points, while path length depends on the route taken.",
+      "labels": ["start", "end", "state function: altitude change", "path function: path length"]
+    }
+  ],
+  "keyPoints": [
+    "A system is the part under study; surroundings are everything else.",
+    "State functions depend only on state; heat and work are path functions.",
+    "The first law is energy conservation: Delta U = q + w.",
+    "Enthalpy H = U + pV, and at constant pressure Delta H = q.",
+    "Exothermic reactions have negative Delta H; endothermic reactions have positive Delta H.",
+    "Hess's law lets us add enthalpy changes along different routes.",
+    "Delta G = Delta H - T Delta S; negative Delta G means spontaneous at constant T and p."
+  ],
+  "examFocus": [
+    "Always state the sign convention for work before using Delta U = q + w, because different books use different conventions.",
+    "When using Hess's law, reverse or scale the equations carefully, and change the sign or multiply the Delta H accordingly."
+  ],
+  "vocabulary": [
+    { "word": "System", "meaning": "The part of the universe being studied." },
+    { "word": "Surroundings", "meaning": "Everything outside the system." },
+    { "word": "State function", "meaning": "A property that depends only on the current state of the system." },
+    { "word": "Internal energy", "meaning": "The total energy of a system, symbol U." },
+    { "word": "Enthalpy", "meaning": "The function H = U + pV, useful for constant-pressure processes." },
+    { "word": "Hess's law", "meaning": "The principle that the total enthalpy change depends only on initial and final states." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-chem-thermodynamics-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is a state function?",
+      "options": ["Heat", "Work", "Enthalpy", "Path length"],
+      "correctIndex": 2,
+      "answer": "Enthalpy",
+      "explanation": "Enthalpy is a state function; it depends only on the state of the system.",
+      "commonMistake": "Choosing heat or work, which depend on the path."
+    },
+    {
+      "id": "isc-11-chem-thermodynamics-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The first law of thermodynamics is essentially a statement of:",
+      "options": ["Conservation of energy", "Conservation of mass", "Increasing entropy", "Conservation of momentum"],
+      "correctIndex": 0,
+      "answer": "Conservation of energy",
+      "explanation": "The first law is the energy conservation principle applied to systems.",
+      "commonMistake": "Thinking it is about entropy or about mass alone."
+    },
+    {
+      "id": "isc-11-chem-thermodynamics-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Define enthalpy and state when heat exchanged equals Delta H.",
+      "answer": "Enthalpy is H = U + pV. At constant pressure, the heat exchanged at constant pressure equals the change in enthalpy, Delta H = q_p.",
+      "explanation": "Enthalpy is useful because it simplifies heat changes at constant pressure.",
+      "commonMistake": "Saying Delta H equals heat in all situations, without mentioning constant pressure."
+    },
+    {
+      "id": "isc-11-chem-thermodynamics-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Reversing a reaction changes Delta H in what way?",
+      "answer": "The sign of Delta H reverses. If the forward reaction has Delta H, the reverse reaction has -Delta H.",
+      "explanation": "Reverse direction means the heat absorbed and released are interchanged.",
+      "commonMistake": "Keeping the same sign, or changing the magnitude without changing the sign."
+    },
+    {
+      "id": "isc-11-chem-thermodynamics-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A reaction has Delta H = +20 kJ and Delta S = +0.10 kJ/K. Is it spontaneous at 300 K?",
+      "answer": "Delta G = Delta H - T Delta S = 20 - 300 x 0.10 = 20 - 30 = -10 kJ. Since Delta G is negative, the reaction is spontaneous at 300 K.",
+      "explanation": "Even though the reaction is endothermic, the entropy term is large enough to make Delta G negative.",
+      "commonMistake": "Assuming an endothermic reaction cannot be spontaneous, without calculating Delta G."
+    }
+  ]
+}

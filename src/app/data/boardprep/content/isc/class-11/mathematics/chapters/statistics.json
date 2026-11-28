@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-xi-math-statistics",
+  "title": "Statistics",
+  "kind": "mathematics",
+  "tagline": "Measures of dispersion: range, mean deviation, variance and standard deviation for ungrouped and grouped data.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "An average tells us where a set of numbers is centred, but it does not tell us how spread out the numbers are. Two classes can have the same mean mark and yet be very different in how consistent the students are. This chapter studies measures of dispersion: the range, mean deviation, variance and standard deviation. These describe how spread out observations are around a centre. We use them for ungrouped data and for grouped data, and we learn to calculate them carefully with the correct reference value and the correct weighting when frequencies are present.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Statistics and Probability" },
+      { "label": "Chapter", "value": "Statistics" },
+      { "label": "Core ideas", "value": "Range; mean deviation about mean and median; variance and standard deviation for ungrouped data; variance and standard deviation for grouped data; frequency-weighted calculations" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define range and explain what it tells us.",
+    "Find mean deviation about the mean and about the median.",
+    "Find variance and standard deviation for ungrouped data.",
+    "Find variance and standard deviation for grouped data.",
+    "Use frequency weights correctly when data are grouped.",
+    "Distinguish variance from standard deviation."
+  ],
+  "learn": [
+    {
+      "id": "range",
+      "title": "Range",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The simplest measure of dispersion is the range, which is the difference between the largest and smallest observations. It is easy to compute and gives a quick idea of spread, but it uses only the two extreme values. That means it can be disturbed by a single unusually large or small observation. It is a useful first impression, but not a complete picture of variation."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Range = largest value - smallest value.",
+            "It uses only the extremes.",
+            "It is easy to compute.",
+            "It is sensitive to outliers."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For the numbers 4, 7, 9, 12 and 18, the range is 18 - 4 = 14. The range says how far apart the ends are, but it does not tell us much about the middle values.", "note": "The range is a start, not the whole story." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mean-deviation",
+      "title": "Mean deviation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Mean deviation measures spread by taking the average of the absolute deviations from a chosen centre. It can be calculated about the mean or about the median. Absolute deviations are used because simple deviations from the mean would cancel out to zero. Mean deviation is easy to understand, but variance and standard deviation are more common in further work because they use squared deviations, which are easier to handle algebraically."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Mean deviation uses absolute deviations.",
+            "It can be taken about the mean or the median.",
+            "Absolute deviations avoid cancellation.",
+            "Variance and standard deviation use squares instead."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For the numbers 2, 4, 6, 8, the mean is 5 and the absolute deviations are 3, 1, 1, 3. Their mean is (3+1+1+3)/4 = 2, so the mean deviation about the mean is 2.", "note": "The calculation is straightforward, but it is only one measure of spread." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "variance-and-standard-deviation",
+      "title": "Variance and standard deviation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Variance is the mean of the squared deviations from the chosen centre. Standard deviation is the positive square root of the variance. Standard deviation is in the same units as the original data, which makes it easier to interpret, while variance is often easier in formulas. For ungrouped data, each observation is used directly. For grouped data, each observation is replaced by its class mark and weighted by its frequency, so the calculation must include the frequency in every step."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Variance uses squared deviations.",
+            "Standard deviation is the square root of variance.",
+            "Standard deviation is in the original units.",
+            "Grouped data uses class marks and frequencies.",
+            "Do not forget the frequency in grouped calculations."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For 2, 4, 6, 8, the mean is 5 and the squared deviations are 9, 1, 1, 9. Their mean is 20/4 = 5, so the variance is 5 and the standard deviation is sqrt(5).", "note": "The variance is 5, but the standard deviation is about 2.24, which is in the same unit as the data." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grouped-data",
+      "title": "Statistics for grouped data",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When data are grouped into classes, we usually do not know the exact observations, only the number of observations in each class. The usual method is to take the class mark as the representative value for each class and then multiply by the frequency. The mean, variance and standard deviation are then computed from these frequency-weighted values. The choice of reference point can affect the form of the calculation, so it is important to state which centre is being used."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Class mark represents each class.",
+            "Frequencies weight the class marks.",
+            "The calculation must include every frequency.",
+            "The reference value must be stated and used consistently."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For a class 10-20 with frequency 4, the class mark is 15. If 4 is the frequency, the contribution to the mean is based on 15 x 4, not just 15 alone.", "note": "Forgetting to multiply by the frequency is a common error in grouped-data problems." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Spread around the mean",
+      "description": "A simple diagram showing how the same mean can come from two data sets with different spreads.",
+      "labels": ["set A: tightly clustered", "set B: widely spread", "same mean", "different spread"]
+    }
+  ],
+  "keyPoints": [
+    "Range is the difference between the largest and smallest values.",
+    "Mean deviation uses absolute deviations from a centre.",
+    "Variance is the mean of squared deviations.",
+    "Standard deviation is the square root of variance.",
+    "Grouped data use class marks and frequencies.",
+    "Variance and standard deviation are related but not the same.",
+    "Always check the reference value used in the calculation."
+  ],
+  "examFocus": [
+    "When data are grouped, do not treat the class mark as if it had frequency 1; include the frequency in every step.",
+    "If the question asks for variance, give variance; if it asks for standard deviation, give standard deviation and not its square."
+  ],
+  "vocabulary": [
+    { "word": "Range", "meaning": "The difference between the largest and smallest values in a data set." },
+    { "word": "Mean deviation", "meaning": "The average of the absolute deviations from a chosen centre." },
+    { "word": "Variance", "meaning": "The mean of the squared deviations from a chosen centre." },
+    { "word": "Standard deviation", "meaning": "The positive square root of the variance." },
+    { "word": "Class mark", "meaning": "The midpoint of a class interval used as a representative value in grouped data." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-statistics-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The range of the numbers 3, 7, 11, 15 is:",
+      "options": ["4", "11", "12", "15"],
+      "correctIndex": 2,
+      "answer": "12",
+      "explanation": "Range = 15 - 3 = 12.",
+      "commonMistake": "Taking the largest value alone, or the difference between the middle values."
+    },
+    {
+      "id": "isc-11-math-statistics-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Standard deviation is:",
+      "options": ["The square of variance", "The positive square root of variance", "The mean of absolute deviations", "The sum of the data"],
+      "correctIndex": 1,
+      "answer": "The positive square root of variance",
+      "explanation": "Standard deviation is the positive square root of variance.",
+      "commonMistake": "Confusing variance and standard deviation."
+    },
+    {
+      "id": "isc-11-math-statistics-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the mean deviation about the mean for 2, 4, 6, 8.",
+      "answer": "Mean = 5; absolute deviations = 3, 1, 1, 3; mean deviation = 8/4 = 2.",
+      "explanation": "Take absolute deviations from the mean and average them.",
+      "commonMistake": "Using signed deviations, which would cancel to zero."
+    },
+    {
+      "id": "isc-11-math-statistics-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If variance is 9, what is the standard deviation?",
+      "answer": "3",
+      "explanation": "Standard deviation = sqrt(9) = 3.",
+      "commonMistake": "Giving 81, the square of the variance, instead of the square root."
+    },
+    {
+      "id": "isc-11-math-statistics-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the range, mean, and standard deviation of 4, 6, 8, 10, 12.",
+      "answer": "Range = 12 - 4 = 8. Mean = (4+6+8+10+12)/5 = 40/5 = 8. Deviations from 8 are -4, -2, 0, 2, 4; squares are 16, 4, 0, 4, 16; sum of squares = 40; variance = 40/5 = 8; standard deviation = sqrt(8) = 2 sqrt2.",
+      "explanation": "The range uses extremes, the mean uses the sum, and the variance and standard deviation use squared deviations from the mean.",
+      "commonMistake": "Using n-1 instead of n for the variance when the question specifies the mean of squared deviations, or mixing variance and standard deviation."
+    }
+  ]
+}

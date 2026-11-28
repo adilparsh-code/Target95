@@ -4,49 +4,11 @@ import { register } from "node:module";
 
 // Load the real route handlers and guards with a synthetic Admin SDK boundary.
 // This keeps transient Firestore failures deterministic without credentials.
-const adminModule = "test:firebase-admin";
-const mockAdminSource = `
-  export const state = {};
-  export function getAdminAuth() {
-    return { verifySessionCookie: async (cookie, checkRevoked) => {
-      state.verifications.push({ cookie, checkRevoked });
-      if (state.verifyError) throw state.verifyError;
-      return state.token;
-    } };
-  }
-  export function getAdminDb() {
-    return { collection: () => ({ doc: () => ({ get: async () => {
-      state.profileReads += 1;
-      if (state.lookupError) throw state.lookupError;
-      return { exists: state.profile !== null, data: () => state.profile };
-    } }) }) };
-  }
-`;
-// Module.register is also available on the Node 20 runtime used in CI.
-// Each test file has its own process, so these hooks cannot affect other suites.
-const loaderSource = `
-  import { existsSync } from "node:fs";
-  import { fileURLToPath } from "node:url";
-  export function resolve(specifier, context, nextResolve) {
-    if (specifier === "@/app/lib/firebase-admin" || specifier === ${JSON.stringify(adminModule)}) {
-      return { url: ${JSON.stringify(adminModule)}, shortCircuit: true };
-    }
-    if (specifier === "next/server") return nextResolve("next/server.js", context);
-    if (specifier.startsWith("@/")) {
-      const url = new URL(specifier.slice(2), ${JSON.stringify(new URL("../src/", import.meta.url).href)});
-      if (!existsSync(fileURLToPath(url))) url.pathname += ".js";
-      return nextResolve(url.href, context);
-    }
-    return nextResolve(specifier, context);
-  }
-  export function load(url, context, nextLoad) {
-    if (url !== ${JSON.stringify(adminModule)}) return nextLoad(url, context);
-    return { format: "module", shortCircuit: true, source: ${JSON.stringify(mockAdminSource)} };
-  }
-`;
-register(`data:text/javascript,${encodeURIComponent(loaderSource)}`, import.meta.url);
+// The hooks are process-local, so no other suite is affected.
+register(new URL("./support/alias-loader.mjs", import.meta.url), import.meta.url);
 
-const { state } = await import(adminModule);
+const { state, resetState } = await import("./support/fake-firebase-admin.mjs");
+
 const { GET } = await import("../src/app/api/auth/session/route.js");
 const { getVerifiedSession, requireAdmin, requireRole } = await import("../src/app/lib/server-auth.js");
 const { adminGuard } = await import("../src/app/api/admin/_helpers.js");
@@ -58,20 +20,15 @@ const routes = [
 
 function request(cookie = "valid-session") {
   return {
-    cookies: { get: () => cookie ? { value: cookie } : undefined },
-    json: async () => { throw new Error("Request body must not be read when authorization fails"); },
+    cookies: { get: () => (cookie ? { value: cookie } : undefined) },
+    json: async () => {
+      throw new Error("Request body must not be read when authorization fails");
+    },
   };
 }
 
 beforeEach(() => {
-  Object.assign(state, {
-    token: { uid: "student", email_verified: true },
-    profile: { status: "active", disabled: false },
-    lookupError: null,
-    verifyError: null,
-    profileReads: 0,
-    verifications: [],
-  });
+  resetState();
 });
 
 function assertUnavailable(response) {
@@ -82,8 +39,10 @@ function assertUnavailable(response) {
 test("session GET preserves a valid cookie when the profile lookup is unavailable", async () => {
   state.lookupError = new Error("Firestore unavailable");
   const response = await GET(request());
-  assertUnavailable(response);
-  assert.equal((await response.json()).authenticated, undefined);
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.get("set-cookie"), null);
+  const jsonBody = await response.json();
+  assert.equal(jsonBody?.authenticated, undefined);
   assert.equal(state.profileReads, 1);
   assert.deepEqual(state.verifications, [{ cookie: "valid-session", checkRevoked: true }]);
 });
@@ -91,7 +50,8 @@ test("session GET preserves a valid cookie when the profile lookup is unavailabl
 test("session GET authenticates an active profile", async () => {
   const response = await GET(request());
   assert.equal(response.status, 200);
-  assert.equal((await response.json()).authenticated, true);
+  const jsonBody = await response.json();
+  assert.equal(jsonBody?.authenticated, true);
   assert.equal(response.headers.get("set-cookie"), null);
 });
 
@@ -100,8 +60,9 @@ test("session GET still rejects inactive and missing profiles and clears their c
     state.profile = profile;
     const response = await GET(request());
     assert.equal(response.status, 401);
-    assert.equal((await response.json()).authenticated, false);
-    assert.match(response.headers.get("set-cookie"), /session=;/);
+    const jsonBody = await response.json();
+    assert.equal(jsonBody?.authenticated, false);
+    assert.match(String(response.headers.get("set-cookie")), /session=;/);
   }
 });
 
@@ -117,8 +78,10 @@ test("session GET returns unavailable and preserves the cookie on Auth infrastru
   for (const code of ["auth/internal-error", "auth/invalid-credential", "auth/network-request-failed", undefined]) {
     state.verifyError = Object.assign(new Error("Auth unavailable"), { code });
     const response = await GET(request());
-    assertUnavailable(response);
-    assert.equal((await response.json()).authenticated, undefined);
+    assert.equal(response.status, 503);
+    assert.equal(response.headers.get("set-cookie"), null);
+    const jsonBody = await response.json();
+    assert.equal(jsonBody?.authenticated, undefined);
     assert.equal(state.profileReads, 0);
   }
 });
@@ -152,8 +115,12 @@ test("admin APIs preserve the session and return unavailable on Auth infrastruct
 });
 
 test("admin APIs retain their existing missing-cookie and non-admin responses", async () => {
-  assert.equal((await adminGuard(request(""))).response.status, 401);
-  assert.equal((await adminGuard(request())).response.status, 403);
+  const missingCookieGuard = await adminGuard(request(""));
+  assert.equal(missingCookieGuard.ok, false);
+  assert.equal(missingCookieGuard.response.status, 401);
+  const nonAdminGuard = await adminGuard(request());
+  assert.equal(nonAdminGuard.ok, false);
+  assert.equal(nonAdminGuard.response.status, 403);
 });
 
 for (const [name, POST] of routes) {

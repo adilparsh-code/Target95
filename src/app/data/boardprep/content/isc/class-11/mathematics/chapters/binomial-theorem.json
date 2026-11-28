@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-binomial",
+  "title": "Binomial Theorem",
+  "kind": "mathematics",
+  "tagline": "Expansion for positive integral index, Pascal's triangle, general and middle terms, and simple applications.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "The binomial theorem gives a compact formula for expanding a power of a binomial such as (x + y)^n when n is a positive integer. Rather than multiplying out the brackets repeatedly, we can use the theorem to write any term of the expansion directly. This chapter builds from the pattern of coefficients and Pascal's triangle to the general term formula and the idea of middle term(s), and then uses these results in simple problems.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Binomial Theorem" },
+      { "label": "Core ideas", "value": "Expansion for positive integral index; statement and proof; Pascal's triangle; general term; middle term(s); simple applications" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the binomial theorem for a positive integral index.",
+    "Find coefficients using Pascal's triangle or binomial coefficients.",
+    "Write the general term T_{r+1}.",
+    "Identify the middle term or terms of an expansion.",
+    "Use the theorem in simple coefficient and term-finding problems.",
+    "Watch the sign carefully when the second term is negative."
+  ],
+  "learn": [
+    {
+      "id": "the-theorem",
+      "title": "The binomial theorem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For a positive integer n, the binomial theorem says that (x + y)^n = C(0,n)x^n + C(1,n)x^{n-1}y + C(2,n)x^{n-2}y^2 + ... + C(n,n)y^n, where C(r,n) is the binomial coefficient n!/(r!(n-r)!). The expansion has n + 1 terms. In each term, the exponent of x decreases by 1 while the exponent of y increases by 1, and the sum of the two exponents is always n. This pattern is the key to writing terms quickly."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The theorem applies for positive integral n.",
+            "There are n + 1 terms in the expansion.",
+            "The sum of the exponents in each term is n.",
+            "The coefficient of x^{n-r} y^r is nCr.",
+            "Pascal's triangle gives the coefficients for small n."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "In (x + y)^4, the powers of x go from 4 down to 0, while the powers of y go from 0 up to 4. The coefficients are 1, 4, 6, 4, 1, from Pascal's triangle.", "note": "Writing out the pattern first helps avoid sign and index errors later." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pascals-triangle",
+      "title": "Pascal's triangle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Pascal's triangle is a compact way to remember binomial coefficients for small powers. Each row begins and ends with 1, and every other number is the sum of the two numbers above it. The nth row gives the coefficients of (x + y)^n. The triangle is also related to the identity nCr = n-1C(r-1) + n-1Cr, which is why the numbers build up the way they do."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Each row gives the coefficients of a binomial expansion.",
+            "The row for n = 0 is 1; for n = 1 it is 1, 1; for n = 2 it is 1, 2, 1.",
+            "Each entry is the sum of the two entries above it.",
+            "Pascal's identity is nCr = n-1C(r-1) + n-1Cr."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For n = 3, the row is 1, 3, 3, 1, so (x + y)^3 = x^3 + 3x^2y + 3xy^2 + y^3.", "note": "The triangle is a quick way to get coefficients, but for larger n it is easier to use the formula directly." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general-term",
+      "title": "General term",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The general term in the expansion of (x + y)^n is T_{r+1} = nCr x^{n-r} y^r, where r = 0, 1, 2, ..., n. This is one of the most useful formulas in the chapter, because it lets us find any specific term without expanding the whole expression. The index r starts at 0, so T_1 corresponds to r = 0 and T_{r+1} is the (r+1)th term."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "T_{r+1} = nCr x^{n-r} y^r.",
+            "r starts at 0.",
+            "T_1 is the first term, for r = 0.",
+            "The formula is used to find a particular term or coefficient."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "In (2x - y)^4, the third term has r = 2, so T_3 = 4C2 (2x)^2 (-y)^2 = 6(4x^2)(y^2) = 24x^2 y^2. The minus sign disappears because the power is even.", "note": "The sign of a term depends on the power to which the negative part is raised." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "middle-term",
+      "title": "Middle term(s)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "If n is even, the expansion has one middle term, which is the (n/2 + 1)th term. If n is odd, there are two middle terms. Finding the middle term means identifying the correct r from the position of the term. This is a small but important technical point, because using r instead of r+1 for the term number is a common mistake."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "If n is even, there is one middle term.",
+            "If n is odd, there are two middle terms.",
+            "The term number is r + 1, not r.",
+            "Find r from the position of the term."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For (x + y)^4, n is even, so there is one middle term, the 3rd term, with r = 2.", "note": "With odd n, such as n = 5, there are two middle terms, the 3rd and 4th." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "simple-applications",
+      "title": "Simple applications",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The syllabus asks for simple applications, which usually means finding a particular coefficient, a particular term, or using the expansion to evaluate or compare expressions. The main caution is to decide the values of x, y and n carefully and to keep track of signs, especially when y is negative. The general term formula is often the fastest way to proceed."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Common tasks: find a coefficient, find a term, or evaluate a simple case.",
+            "Identify x, y and n carefully.",
+            "Watch the sign of y if it is negative.",
+            "Use the general term to avoid full expansion."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "To find the coefficient of x^2 in (1 + 2x)^5, use T_{r+1} = 5Cr (2x)^r. For x^2, take r = 2, giving coefficient 5C2 * 2^2 = 10 * 4 = 40.", "note": "It is easy to forget to raise the coefficient 2 to the power r; that is part of the term." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Pascal's triangle",
+      "description": "A small Pascal's triangle showing the first few rows and the way each entry is the sum of the two above it.",
+      "labels": ["n=0", "n=1", "n=2", "n=3", "each entry is the sum of the two above"]
+    }
+  ],
+  "keyPoints": [
+    "The binomial theorem applies for positive integral n.",
+    "There are n + 1 terms in the expansion.",
+    "The sum of the exponents of x and y in each term is n.",
+    "T_{r+1} = nCr x^{n-r} y^r is the general term.",
+    "Pascal's triangle gives coefficients for small n.",
+    "If n is even, there is one middle term; if n is odd, there are two.",
+    "Watch the sign of y when it is negative and raised to a power."
+  ],
+  "examFocus": [
+    "Remember that T_{r+1} means the (r+1)th term; confusing T_r with T_{r+1} is a common mistake.",
+    "When y is negative, determine the sign from the power r, not from the sign in the binomial alone."
+  ],
+  "vocabulary": [
+    { "word": "Binomial", "meaning": "An expression with two terms, such as x + y." },
+    { "word": "Binomial coefficient", "meaning": "The number nCr that appears as the coefficient in a binomial expansion." },
+    { "word": "General term", "meaning": "The formula that gives any term of the expansion, T_{r+1}." },
+    { "word": "Middle term", "meaning": "The central term(s) of the expansion when n is even or odd." },
+    { "word": "Pascal's triangle", "meaning": "A triangular arrangement of numbers giving binomial coefficients." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-binomial-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of terms in the expansion of (x + y)^6 is:",
+      "options": ["6", "7", "8", "12"],
+      "correctIndex": 1,
+      "answer": "7",
+      "explanation": "For n = 6, there are 6 + 1 = 7 terms.",
+      "commonMistake": "Saying the number of terms is n."
+    },
+    {
+      "id": "isc-11-math-binomial-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In (x + y)^n, the coefficient of x^{n-r} y^r is:",
+      "options": ["nPr", "nCr", "rCr", "nCr-1"],
+      "correctIndex": 1,
+      "answer": "nCr",
+      "explanation": "The coefficient is the binomial coefficient nCr.",
+      "commonMistake": "Using permutation notation instead of combination notation."
+    },
+    {
+      "id": "isc-11-math-binomial-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the middle term of (x + y)^4.",
+      "answer": "The middle term is the 3rd term, T_3 = 4C2 x^2 y^2 = 6x^2 y^2.",
+      "explanation": "For n = 4, the middle term is the (4/2 + 1)th term, with r = 2.",
+      "commonMistake": "Taking r = 3 or 4 because the term number is 3 or 4, rather than r = 2."
+    },
+    {
+      "id": "isc-11-math-binomial-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the coefficient of x^2 in (1 + 2x)^5.",
+      "answer": "The coefficient is 40.",
+      "explanation": "The term with x^2 has r = 2, giving 5C2 * 2^2 = 10 * 4 = 40.",
+      "commonMistake": "Forgetting to raise 2 to the power 2."
+    },
+    {
+      "id": "isc-11-math-binomial-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the 4th term in the expansion of (x - 2)^5.",
+      "answer": "The 4th term has r = 3, so T_4 = 5C3 x^2 (-2)^3 = 10 x^2 (-8) = -80 x^2.",
+      "explanation": "The 4th term uses r = 3; the power of -2 is odd, so the sign is negative.",
+      "commonMistake": "Miscounting the value of r from the term number, or getting the sign wrong."
+    }
+  ]
+}

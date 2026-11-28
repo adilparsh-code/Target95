@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-probability",
+  "title": "Probability",
+  "kind": "mathematics",
+  "tagline": "Random experiments, sample spaces, events, mutually exclusive and exhaustive events, and probability of not, and and or.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Probability is the mathematics of uncertainty. It gives a way to say how likely an event is, based on the possible outcomes of a random experiment. In this chapter we start with random experiments and sample spaces, then define events as subsets of the sample space. We study sure and impossible events, mutually exclusive events, exhaustive events, and the probability of an event. Finally we use set ideas to handle not, and and or in probability, including the addition relationship.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Statistics and Probability" },
+      { "label": "Chapter", "value": "Probability" },
+      { "label": "Core ideas", "value": "Random experiment; sample space; event; sure and impossible events; mutually exclusive and exhaustive events; probability of an event; not, and, or; addition relationship" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define random experiment and sample space.",
+    "Define an event and give examples.",
+    "Distinguish sure, impossible, mutually exclusive and exhaustive events.",
+    "Find the probability of an event in simple cases.",
+    "Use set notation for not, and and or.",
+    "Use the addition relationship P(A or B) = P(A) + P(B) - P(A and B)."
+  ],
+  "learn": [
+    {
+      "id": "random-experiments-and-sample-space",
+      "title": "Random experiments and sample space",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A random experiment is one that can be repeated under the same conditions but whose outcome cannot be predicted with certainty. Tossing a coin, rolling a die or drawing a card are common examples. The set of all possible outcomes is the sample space. For a die, the sample space is {1, 2, 3, 4, 5, 6}. Listing the sample space clearly is the first step in any probability problem."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A random experiment has uncertain outcomes.",
+            "Sample space is the set of all possible outcomes.",
+            "Outcomes are elements of the sample space.",
+            "Listing the sample space helps avoid mistakes."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For a coin tossed twice, the sample space is {HH, HT, TH, TT} if order matters, so there are four outcomes.", "note": "The definition of the sample space must match the question; order may or may not matter." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "events",
+      "title": "Events",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An event is a subset of the sample space. It may consist of one outcome or several. The event that a die shows an even number is {2, 4, 6}. The event that it shows a number greater than 4 is {5, 6}. Simple events have one outcome, and compound events have more than one. Describing the event clearly makes the probability calculation much easier."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An event is a subset of the sample space.",
+            "It may contain one or more outcomes.",
+            "Simple events have one outcome; compound events have more.",
+            "Describe the event precisely before counting."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For a die, the event 'even number' is {2, 4, 6}, which has three outcomes.", "note": "The probability will depend on how many outcomes are in the event and how many are in the sample space." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sure-impossible-mutually-exclusive",
+      "title": "Sure, impossible, mutually exclusive and exhaustive events",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A sure event is one that always occurs; its probability is 1. An impossible event never occurs; its probability is 0. Two events are mutually exclusive if they cannot occur together. If A and B are mutually exclusive, then P(A and B) = 0. Events are exhaustive if together they cover the whole sample space. These ideas are useful because they simplify probability calculations and describe the relationships between events."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sure event has probability 1.",
+            "Impossible event has probability 0.",
+            "Mutually exclusive events cannot occur together.",
+            "Exhaustive events cover the sample space.",
+            "For mutually exclusive events, intersection is empty."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "When a die is rolled, 'getting a number from 1 to 6' is a sure event. Getting a 7 is impossible. 'Getting an even number' and 'getting an odd number' are mutually exclusive.", "note": "Mutually exclusive does not mean the events are the same as exhaustive." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "probability-of-an-event",
+      "title": "Probability of an event",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In simple cases where all outcomes are equally likely, the probability of an event is the number of outcomes favourable to the event divided by the total number of outcomes in the sample space. This definition is the starting point for most elementary probability problems. The probability always lies between 0 and 1, and the sum of the probabilities of all outcomes in the sample space is 1."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Probability = favourable outcomes / total outcomes, when equally likely.",
+            "Probability is between 0 and 1.",
+            "The sum of all outcome probabilities is 1.",
+            "The sample space must be described correctly."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For a die, the probability of an even number is 3/6 = 1/2, because there are three favourable outcomes out of six.", "note": "The fraction can often be simplified, but the count of outcomes is what matters first." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "not-and-or",
+      "title": "Not, and, or",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Probability problems are easier when events are expressed in set language. The complement of an event A, written A', is the event that A does not happen, and P(A') = 1 - P(A). The event A and B is the intersection; A or B is the union. For any two events, P(A or B) = P(A) + P(B) - P(A and B). If A and B are mutually exclusive, the intersection term is zero and the formula becomes P(A) + P(B)."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "P(A') = 1 - P(A).",
+            "A and B is the intersection.",
+            "A or B is the union.",
+            "P(A or B) = P(A) + P(B) - P(A and B).",
+            "If mutually exclusive, P(A or B) = P(A) + P(B)."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If P(A) = 0.6 and P(B) = 0.4 and A and B are mutually exclusive, then P(A or B) = 0.6 + 0.4 = 1. If they are not mutually exclusive, subtract P(A and B) once.", "note": "The subtraction removes the double counting of the overlap." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Union and intersection",
+      "description": "A Venn diagram showing two events as overlapping regions, with the union and intersection marked.",
+      "labels": ["A", "B", "A and B", "A or B", "overlap counted once"]
+    }
+  ],
+  "keyPoints": [
+    "A sample space is the set of all possible outcomes.",
+    "An event is a subset of the sample space.",
+    "Sure event probability = 1; impossible event probability = 0.",
+    "Mutually exclusive events cannot happen together.",
+    "Probability = favourable outcomes / total outcomes when equally likely.",
+    "P(A or B) = P(A) + P(B) - P(A and B).",
+    "If mutually exclusive, P(A or B) = P(A) + P(B)."
+  ],
+  "examFocus": [
+    "List the sample space explicitly before counting favourable outcomes; an incomplete sample space is the most common source of error.",
+    "If A and B are not mutually exclusive, subtract P(A and B) when finding P(A or B)."
+  ],
+  "vocabulary": [
+    { "word": "Random experiment", "meaning": "An experiment with uncertain outcomes that can be repeated." },
+    { "word": "Sample space", "meaning": "The set of all possible outcomes of a random experiment." },
+    { "word": "Event", "meaning": "A subset of the sample space." },
+    { "word": "Mutually exclusive events", "meaning": "Events that cannot occur together." },
+    { "word": "Exhaustive events", "meaning": "Events whose union is the whole sample space." },
+    { "word": "Probability", "meaning": "A number between 0 and 1 measuring how likely an event is." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-probability-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The probability of an impossible event is:",
+      "options": ["0", "1", "0.5", "Depends on the experiment only"],
+      "correctIndex": 0,
+      "answer": "0",
+      "explanation": "An impossible event has probability 0.",
+      "commonMistake": "Saying it depends on the experiment without recognising it is impossible."
+    },
+    {
+      "id": "isc-11-math-probability-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If two events cannot occur together, they are called:",
+      "options": ["Exhaustive", "Mutually exclusive", "Independent", "Equal"],
+      "correctIndex": 1,
+      "answer": "Mutually exclusive",
+      "explanation": "Mutually exclusive events cannot happen at the same time.",
+      "commonMistake": "Confusing mutually exclusive with exhaustive or independent."
+    },
+    {
+      "id": "isc-11-math-probability-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "A die is rolled. Find the probability of getting an even number.",
+      "answer": "Even outcomes are 2, 4, 6, so probability = 3/6 = 1/2.",
+      "explanation": "Three favourable outcomes out of six equally likely outcomes.",
+      "commonMistake": "Counting 1, 3, 5 instead of 2, 4, 6."
+    },
+    {
+      "id": "isc-11-math-probability-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the formula for P(A or B).",
+      "answer": "P(A or B) = P(A) + P(B) - P(A and B).",
+      "explanation": "The union formula avoids double counting the overlap.",
+      "commonMistake": "Forgetting to subtract the intersection when the events can occur together."
+    },
+    {
+      "id": "isc-11-math-probability-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A card is drawn from a well-shuffled pack of 52 cards. Find the probability that it is a king or a heart.",
+      "answer": "P(king or heart) = P(king) + P(heart) - P(king and heart) = 4/52 + 13/52 - 1/52 = 16/52 = 4/13.",
+      "explanation": "There are 4 kings and 13 hearts, but the king of hearts is counted twice, so it must be subtracted once.",
+      "commonMistake": "Adding 4/52 and 13/52 without subtracting the king of hearts."
+    }
+  ]
+}

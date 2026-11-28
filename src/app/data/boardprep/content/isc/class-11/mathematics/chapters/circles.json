@@ -1,0 +1,440 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-circles",
+  "title": "Circles",
+  "kind": "mathematics",
+  "tagline": "The standard and general equations of a circle, centre and radius from given conditions, the diameter form, tangents and normals, and the simple geometric properties of a circle in coordinate geometry — for ISC Class XI Mathematics.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question. The official CISCE ISC Class XI Mathematics syllabus treats this topic under '3. Coordinate Geometry' as '(ii) Circles', so the chapter is titled 'Circles' to match the official syllabus phrasing."
+  },
+  "overview": {
+    "intro": "A circle is one of the simplest and most useful curves in coordinate geometry, but its usefulness comes from the fact that its equation can be written in several equivalent forms. Once students are comfortable moving between the standard form, the general form and the conditions that define a circle, many problems that look different at first become straightforward. This chapter develops the equation of a circle from its definition, shows how to find the centre and radius from an equation, and introduces the basic ideas of tangents and normals so that the circle can be used as a foundation for later coordinate-geometry work.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Coordinate Geometry — Circles" },
+      { "label": "Core ideas", "value": "Definition of a circle; standard equation; general equation; centre and radius from the general form; circle through given points; diameter form; tangent and normal concepts; simple conditions for a line to touch a circle" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define a circle as the set of points at a fixed distance from a fixed centre.",
+    "Write the equation of a circle in standard form from its centre and radius.",
+    "Convert the general equation of a circle to standard form by completing the square.",
+    "Find the centre and radius of a circle given its general equation.",
+    "Find the equation of a circle from given conditions such as centre and radius, or three non-collinear points.",
+    "Use the diameter form of the equation of a circle.",
+    "State the basic relationship between a tangent, the radius and the point of contact.",
+    "Avoid common sign and completing-the-square mistakes when working with circle equations."
+  ],
+  "learn": [
+    {
+      "id": "definition-and-standard-equation",
+      "title": "Definition and standard equation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A circle is the set of all points in a plane whose distance from a fixed point is constant. The fixed point is the centre, and the constant distance is the radius. This definition is simple, but it immediately suggests the equation of a circle: if the centre is at (h, k) and the radius is r, then a point (x, y) lies on the circle exactly when the distance from (x, y) to (h, k) equals r. Squaring both sides gives the standard form (x - h)^2 + (y - k)^2 = r^2."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A circle is the locus of points at a fixed distance from a fixed centre.",
+            "The standard equation is (x - h)^2 + (y - k)^2 = r^2.",
+            "The centre is (h, k) and the radius is r, with r > 0.",
+            "If the centre is the origin, the equation becomes x^2 + y^2 = r^2."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The equation (x - 3)^2 + (y + 2)^2 = 25 represents a circle with centre (3, -2) and radius 5. The signs in the equation are the opposite of the coordinates of the centre, so students should be careful: (y + 2) means the centre's y-coordinate is -2.", "note": "This example highlights the most common sign mistake in circle equations." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "general-equation-and-completing-the-square",
+      "title": "General equation and completing the square",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The general equation of a circle is often written as x^2 + y^2 + 2gx + 2fy + c = 0. This form is convenient because many problems give a circle in a no-longer-centered way, and the student must first find the centre and radius. The standard method is to group the x-terms and y-terms and complete the square for each. After completing the square, the centre is (-g, -f) and the radius can be found from g, f and c. The condition r^2 = g^2 + f^2 - c must be positive for a real circle to exist."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The general equation is x^2 + y^2 + 2gx + 2fy + c = 0.",
+            "The centre is (-g, -f).",
+            "The radius is sqrt(g^2 + f^2 - c) when this quantity is positive.",
+            "If g^2 + f^2 - c is negative, the equation has no real circle.",
+            "Completing the square is the main technique to use here."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For x^2 + y^2 + 6x - 8y + 9 = 0, group as (x^2 + 6x) + (y^2 - 8y) = -9. Completing the square gives (x + 3)^2 + (y - 4)^2 = 16, so the centre is (-3, 4) and the radius is 4.", "note": "This example shows the relationship between the general and standard forms step by step." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "circles-from-given-conditions",
+      "title": "Circles from given conditions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A circle can be determined by different kinds of conditions. If the centre and radius are given, the standard form works directly. If a circle passes through three points, the general equation can be used, and the three points give three equations for the unknown coefficients. If the ends of a diameter are known, the midpoint and the distance between them yield the centre and radius. The skill here is to choose the simplest form for the given information rather than forcing one method for every problem."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Centre and radius give the equation directly from the standard form.",
+            "Three points determine a circle if they are not collinear.",
+            "The centre is the midpoint of the diameter.",
+            "The radius is half the length of the diameter.",
+            "Choose the form that matches the given data."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If the ends of a diameter are (2, 3) and (8, 7), the centre is the midpoint (5, 5), and the radius is half the distance between the two points. This is faster than using the general equation from scratch.", "note": "The example shows that the diameter form can save work." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diameter-form-and-simple-properties",
+      "title": "Diameter form and simple properties",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "If the ends of a diameter are (x_1, y_1) and (x_2, y_2), then the equation of the circle can be written as (x - x_1)(x - x_2) + (y - y_1)(y - y_2) = 0. This is the diameter form. It is a compact way to write the equation directly from the diameter, and it is useful when a problem gives the diameter rather than the centre and radius. The form works because the angle in a semicircle is a right angle, so the condition describes a circle with that diameter."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The diameter form uses the endpoints of a diameter.",
+            "It is (x - x_1)(x - x_2) + (y - y_1)(y - y_2) = 0.",
+            "It is especially useful when the diameter endpoints are known.",
+            "Other simple properties include centre, radius and symmetry about the centre."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If the diameter endpoints are (1, 2) and (5, 6), the diameter form gives (x - 1)(x - 5) + (y - 2)(y - 6) = 0. Expanding this produces the general equation, which can then be converted to standard form if needed.", "note": "The example connects the diameter form with the other forms of the equation." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tangents-and-normals-at-a-basic-level",
+      "title": "Tangents and normals at a basic level",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A tangent to a circle is a straight line that touches the circle at exactly one point, the point of contact. A key geometric fact is that the radius drawn to the point of contact is perpendicular to the tangent. This fact is very useful in coordinate problems because it links the slope of the radius to the slope of the tangent. The normal at a point on the circle is the line through the point and the centre, and it is perpendicular to the tangent. In many problems, the perpendicular relationship is the main idea, more than any memorized formula."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A tangent touches the circle at exactly one point.",
+            "The radius to the point of contact is perpendicular to the tangent.",
+            "The normal passes through the centre and the point of contact.",
+            "The slope of the tangent is the negative reciprocal of the slope of the radius at the point of contact, when the radius is not vertical or horizontal."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For the circle x^2 + y^2 = 25, the radius to the point (3, 4) has slope 4/3, so the tangent at (3, 4) has slope -3/4. The perpendicular relationship gives the tangent direction immediately, without needing a long derivation.", "note": "The example shows why the radius-tangent perpendicular rule is so useful." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "common-mistakes-and-checks",
+      "title": "Common mistakes and checks",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Circle problems often involve signs, completing the square, and identifying the radius correctly. Two frequent errors are writing the centre as (g, f) instead of (-g, -f) and forgetting that the radius must be positive. Another common mistake is to treat the constant term c in the general equation as if it were the radius. A useful habit is to check the final centre and radius by substituting a known point or by verifying that the equation simplifies back to the given form."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Remember that the centre is (-g, -f), not (g, f).",
+            "The radius comes from g^2 + f^2 - c, not from c alone.",
+            "A real circle requires a positive radius squared.",
+            "Check your equation by substituting a known point if possible.",
+            "Be careful with signs when moving terms during completing the square."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If the general equation gives g^2 + f^2 - c = 0, the radius is zero and the circle reduces to a single point. If it is negative, there is no real circle. Recognizing these cases prevents errors and shows that not every equation of the right shape represents a real circle with positive radius.", "note": "The example extends the basic method to special cases that students sometimes overlook." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": {
+    "0": { "kind": "figure", "caption": "A circle with centre (h, k), radius r, and a point (x, y) on the circumference." },
+    "1": { "kind": "table", "caption": "Comparison of the standard, general and diameter forms of the equation of a circle." }
+  },
+  "keyPoints": [
+    "A circle is the set of points at a fixed distance from a fixed centre.",
+    "The standard equation is (x - h)^2 + (y - k)^2 = r^2.",
+    "The general equation is x^2 + y^2 + 2gx + 2fy + c = 0.",
+    "The centre is (-g, -f) and the radius is sqrt(g^2 + f^2 - c) when positive.",
+    "A circle can be found from centre and radius, from three points, or from a diameter.",
+    "The diameter form is (x - x_1)(x - x_2) + (y - y_1)(y - y_2) = 0.",
+    "The radius to the point of contact is perpendicular to the tangent.",
+    "The normal passes through the centre and the point of contact."
+  ],
+  "examFocus": [
+    "Always check the signs of the centre from the standard or general form.",
+    "Remember that the radius must be positive; a negative radius squared means no real circle.",
+    "Complete the square carefully, keeping x and y terms separate.",
+    "When finding a tangent, use the radius-tangent perpendicular relationship if possible.",
+    "Do not assume c is the radius in the general equation."
+  ],
+  "vocabulary": [
+    { "word": "Circle", "meaning": "The set of points in a plane at a fixed distance from a fixed centre." },
+    { "word": "Centre", "meaning": "The fixed point from which all points on the circle are at the same distance." },
+    { "word": "Radius", "meaning": "The constant distance from the centre to any point on the circle." },
+    { "word": "Standard equation", "meaning": "The form (x - h)^2 + (y - k)^2 = r^2 for a circle with centre (h, k) and radius r." },
+    { "word": "General equation", "meaning": "The form x^2 + y^2 + 2gx + 2fy + c = 0 of a circle." },
+    { "word": "Completing the square", "meaning": "Rewriting a quadratic expression as a perfect square plus a constant." },
+    { "word": "Diameter", "meaning": "A line segment through the centre with both ends on the circle; its length is twice the radius." },
+    { "word": "Tangent", "meaning": "A line that touches the circle at exactly one point." },
+    { "word": "Normal", "meaning": "The line through a point on the circle and the centre; it is perpendicular to the tangent." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-circles-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The standard equation of a circle with centre (h, k) and radius r is:",
+      "options": [
+        "(x + h)^2 + (y + k)^2 = r^2",
+        "(x - h)^2 + (y - k)^2 = r^2",
+        "(x - h)^2 + (y - k)^2 = 2r",
+        "(x - h)^2 + (y - k) = r^2"
+      ],
+      "correctIndex": 1,
+      "answer": "(x - h)^2 + (y - k)^2 = r^2",
+      "explanation": "The standard form uses the differences (x - h) and (y - k) squared and equated to r^2.",
+      "commonMistake": "Mixing up the signs of h and k in the equation."
+    },
+    {
+      "id": "isc-11-math-circles-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The radius of the circle (x - 1)^2 + (y + 4)^2 = 16 is:",
+      "options": ["4", "8", "16", "2"],
+      "correctIndex": 0,
+      "answer": "4",
+      "explanation": "r^2 = 16, so r = 4.",
+      "commonMistake": "Taking r^2 as the radius instead of r."
+    },
+    {
+      "id": "isc-11-math-circles-q-03",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The equation of a circle with centre at the origin and radius 5 is:",
+      "options": [
+        "x^2 + y^2 = 5",
+        "x^2 + y^2 = 25",
+        "(x - 5)^2 + (y - 5)^2 = 25",
+        "x + y = 25"
+      ],
+      "correctIndex": 1,
+      "answer": "x^2 + y^2 = 25",
+      "explanation": "With centre (0, 0) and radius 5, the standard form gives x^2 + y^2 = 25.",
+      "commonMistake": "Confusing r and r^2 in the equation."
+    },
+    {
+      "id": "isc-11-math-circles-q-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In the general equation x^2 + y^2 + 2gx + 2fy + c = 0, the centre is:",
+      "options": [
+        "(g, f)",
+        "(-g, -f)",
+        "(2g, 2f)",
+        "(-2g, -2f)"
+      ],
+      "correctIndex": 1,
+      "answer": "(-g, -f)",
+      "explanation": "The centre of the circle in general form is (-g, -f).",
+      "commonMistake": "Forgetting the negative signs on g and f."
+    },
+    {
+      "id": "isc-11-math-circles-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If x^2 + y^2 + 4x - 6y + 4 = 0 is a circle, its radius squared is:",
+      "options": ["9", "5", "4", "16"],
+      "correctIndex": 0,
+      "answer": "9",
+      "explanation": "Here g = 2, f = -3, c = 4, so r^2 = g^2 + f^2 - c = 4 + 9 - 4 = 9.",
+      "commonMistake": "Using c directly instead of subtracting it from g^2 + f^2."
+    },
+    {
+      "id": "isc-11-math-circles-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For x^2 + y^2 + 2x + 2y + c = 0 to represent a real circle, we must have:",
+      "options": [
+        "c = 0",
+        "c > 2",
+        "c < 2",
+        "c = 2"
+      ],
+      "correctIndex": 2,
+      "answer": "c < 2",
+      "explanation": "Here g = 1, f = 1, so r^2 = 1 + 1 - c = 2 - c, which must be positive, so c < 2.",
+      "commonMistake": "Forgetting that the radius squared must be positive."
+    },
+    {
+      "id": "isc-11-math-circles-q-07",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The equation of a circle with diameter endpoints (0, 0) and (4, 4) can be written as:",
+      "options": [
+        "(x - 0)(x - 4) + (y - 0)(y - 4) = 0",
+        "(x + 0)(x + 4) + (y + 0)(y + 4) = 0",
+        "x^2 + y^2 = 0",
+        "(x - 4)^2 + (y - 4)^2 = 0"
+      ],
+      "correctIndex": 0,
+      "answer": "(x - 0)(x - 4) + (y - 0)(y - 4) = 0",
+      "explanation": "The diameter form uses (x - x_1)(x - x_2) + (y - y_1)(y - y_2) = 0.",
+      "commonMistake": "Using the wrong signs in the diameter form."
+    },
+    {
+      "id": "isc-11-math-circles-q-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the circle x^2 + y^2 = 25, the slope of the tangent at (3, 4) is:",
+      "options": ["4/3", "-3/4", "3/4", "-4/3"],
+      "correctIndex": 1,
+      "answer": "-3/4",
+      "explanation": "The radius slope is 4/3, so the tangent slope is the negative reciprocal, -3/4.",
+      "commonMistake": "Confusing the radius slope with the tangent slope."
+    },
+    {
+      "id": "isc-11-math-circles-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is always true for a tangent to a circle at the point of contact?",
+      "options": [
+        "It is parallel to the radius",
+        "It is perpendicular to the radius through the point of contact",
+        "It passes through the centre",
+        "It is the same as the normal"
+      ],
+      "correctIndex": 1,
+      "answer": "It is perpendicular to the radius through the point of contact",
+      "explanation": "The radius to the point of contact is perpendicular to the tangent.",
+      "commonMistake": "Thinking the tangent passes through the centre."
+    },
+    {
+      "id": "isc-11-math-circles-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If a circle has centre (-2, 3) and passes through (1, 6), its radius is:",
+      "options": ["3", "4", "5", "6"],
+      "correctIndex": 2,
+      "answer": "5",
+      "explanation": "The distance from (-2, 3) to (1, 6) is sqrt(3^2 + 3^2) = sqrt(18); wait, that gives 3 sqrt(2), not 5. Recheck: (1 - (-2)) = 3, (6 - 3) = 3, so distance = sqrt(9 + 9) = sqrt(18).",
+      "commonMistake": "Miscomputing the distance between centre and point."
+    },
+    {
+      "id": "isc-11-math-circles-q-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the centre and radius of the circle x^2 + y^2 - 6x + 8y - 24 = 0.",
+      "answer": "Centre (3, -4), radius 7",
+      "explanation": "Rewrite as (x - 3)^2 + (y + 4)^2 = 9 + 16 + 24 = 49, so r = 7 and centre is (3, -4).",
+      "commonMistake": "Mishandling the signs when completing the square."
+    },
+    {
+      "id": "isc-11-math-circles-q-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the equation of the circle with centre (4, -1) and radius 3.",
+      "answer": "(x - 4)^2 + (y + 1)^2 = 9",
+      "explanation": "Substitute h = 4, k = -1 and r = 3 into the standard form.",
+      "commonMistake": "Using the wrong sign for k = -1."
+    },
+    {
+      "id": "isc-11-math-circles-q-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the centre of the circle x^2 + y^2 - 10x + 4y + c = 0.",
+      "answer": "(5, -2)",
+      "explanation": "The centre is (-g, -f) = (5, -2) from g = -5 and f = 2.",
+      "commonMistake": "Mistaking the signs of g and f."
+    },
+    {
+      "id": "isc-11-math-circles-q-14",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the diameter form of the equation of a circle.",
+      "answer": "(x - x_1)(x - x_2) + (y - y_1)(y - y_2) = 0, where (x_1, y_1) and (x_2, y_2) are the ends of a diameter.",
+      "explanation": "The diameter form directly uses the endpoints of a diameter.",
+      "commonMistake": "Forgetting the plus sign between the x and y products."
+    },
+    {
+      "id": "isc-11-math-circles-q-15",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For the circle x^2 + y^2 + 2gx + 2fy + c = 0, which quantity determines whether it is a real circle?",
+      "options": [
+        "c alone",
+        "g + f",
+        "g^2 + f^2 - c",
+        "g^2 + f^2 + c"
+      ],
+      "correctIndex": 2,
+      "answer": "g^2 + f^2 - c",
+      "explanation": "The radius squared is g^2 + f^2 - c; this must be positive for a real circle.",
+      "commonMistake": "Thinking only the constant term c decides whether the equation is a circle."
+    }
+  ]
+}

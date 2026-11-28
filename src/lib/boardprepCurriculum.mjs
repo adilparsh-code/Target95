@@ -53,6 +53,13 @@ export function getChapter(board, classSlug, subjectSlug, chapterSlug) {
     // sibling chapters/ folder only when the primary relative-path resolution misses.
     const sibling = path.join(subjectDir, '..', 'chapters', path.basename(metadata.file));
     if (fs.existsSync(sibling)) return { ...metadata, ...read(sibling) };
+
+    // Some subjects store chapter JSON inside the subject folder itself (for
+    // example under chapters/<file>). Try resolving relative to the subject
+    // directory without assuming the exact depth.
+    const alt = path.join(subjectDir, metadata.file);
+    if (fs.existsSync(alt)) return { ...metadata, ...read(alt) };
+
     return null;
   }
   return { ...metadata, ...read(file) };

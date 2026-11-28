@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-complex-numbers",
+  "title": "Complex Numbers",
+  "kind": "mathematics",
+  "tagline": "The need for complex numbers, i and its powers, algebraic operations, conjugate, modulus, Argand plane, cube roots of unity.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Some equations have no real solutions. For example, x^2 = -1 has no real number solution because no real number squared gives a negative number. To deal with this, mathematicians introduced a new kind of number, the complex number. The basic unit is i, defined by i^2 = -1. A complex number is written as a + ib, where a and b are real numbers. This chapter develops the algebra of complex numbers, their geometric picture on the Argand plane, and a few important results such as the cube roots of unity.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Complex Numbers and Quadratic Equations" },
+      { "label": "Core ideas", "value": "i = sqrt(-1); integral powers of i; a + ib form; addition, subtraction, multiplication and division; conjugate; modulus; Argand plane; cube roots of unity and their properties" }
+    ]
+  },
+  "learningOutcomes": [
+    "State the definition of i and its integral powers.",
+    "Express a complex number in the form a + ib.",
+    "Add, subtract, multiply and divide complex numbers.",
+    "Find the conjugate and modulus of a complex number and use their basic properties.",
+    "Identify real and imaginary parts and locate a complex number on the Argand plane.",
+    "Use the basic properties of the cube roots of unity."
+  ],
+  "learn": [
+    {
+      "id": "the-need-for-complex-numbers",
+      "title": "Why we need complex numbers",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Real numbers are enough for many equations, but not for all of them. The equation x^2 + 1 = 0 has no real solution, because the square of any real number is non-negative. To solve such equations, we define a new number i with the property i^2 = -1. Once this is done, every quadratic equation has a solution in the complex number system. This is one reason complex numbers are not just an artificial extension; they complete the number system for polynomial equations."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "i is defined by i^2 = -1.",
+            "A complex number has the form a + ib with a, b real.",
+            "Real numbers are a special case with b = 0.",
+            "Complex numbers let every quadratic equation have a solution."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The equation x^2 + 1 = 0 has solutions i and -i, which are not real but are complex.", "note": "The point is not that i is 'imaginary' in the everyday sense; it is a number that extends the system so that equations like this can be solved." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algebraic-operations",
+      "title": "Adding, subtracting, multiplying and dividing",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Complex numbers are added and subtracted by treating i like a variable, but remembering that i^2 = -1. To multiply, expand as usual and then replace i^2 by -1. To divide, multiply numerator and denominator by the conjugate of the denominator so that the denominator becomes a real number. Once the denominator is real, the result can be written clearly in the form a + ib."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Addition and subtraction are done by combining real parts and imaginary parts separately.",
+            "Multiplication expands like ordinary algebra and uses i^2 = -1.",
+            "Division uses the conjugate of the denominator.",
+            "The result of any arithmetic operation can be written as a + ib with a, b real."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If z1 = 2 + 3i and z2 = 1 + i, then z1 + z2 = 3 + 4i and z1 - z2 = 1 + 2i. For multiplication, (2 + 3i)(1 + i) = 2 + 2i + 3i + 3i^2 = 2 + 5i - 3 = -1 + 5i.", "note": "The key step in multiplication is that i^2 becomes -1, which changes the final real part." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conjugate-and-modulus",
+      "title": "Conjugate and modulus",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For a complex number z = a + ib, the conjugate is a - ib. Conjugation changes the sign of the imaginary part only. It is useful because z times its conjugate gives a^2 + b^2, which is a real number. The modulus of z is the distance from the origin to the point (a, b) in the Argand plane, and its square is exactly a^2 + b^2. These ideas connect algebra with geometry."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The conjugate of a + ib is a - ib.",
+            "Conjugation changes only the sign of the imaginary part.",
+            "z times conjugate z equals |z|^2.",
+            "The modulus is sqrt(a^2 + b^2).",
+            "The modulus is the distance from the origin in the Argand plane."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For z = 2 - 3i, the conjugate is 2 + 3i and the modulus is sqrt(2^2 + (-3)^2) = sqrt13. Then z times its conjugate is 13, confirming |z|^2 = a^2 + b^2.", "note": "This example shows both the algebraic and geometric meanings of modulus and conjugate." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "argand-plane",
+      "title": "The Argand plane",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A complex number a + ib can be represented as the point (a, b) in a plane called the Argand plane. The horizontal axis usually represents the real part, and the vertical axis represents the imaginary part. This picture is more than a convenience; it turns operations on complex numbers into geometric ideas. Addition becomes vector addition, and the modulus becomes the length of the position vector."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The Argand plane has a real axis and an imaginary axis.",
+            "a + ib is plotted as (a, b).",
+            "The modulus is the distance from (0, 0) to (a, b).",
+            "Geometry helps explain addition and the meaning of conjugate."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The complex number 2 + 3i corresponds to the point (2, 3), and its conjugate 2 - 3i is the reflection of that point across the real axis.", "note": "The reflection picture is one reason conjugation is so useful; it reverses the sign of the imaginary coordinate only." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cube-roots-of-unity",
+      "title": "Cube roots of unity",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The cube roots of unity are the numbers whose cube is 1. The obvious one is 1, but there are two others, which are complex. They satisfy 1 + omega + omega^2 = 0 and omega^3 = 1. These properties are useful in simplifying expressions involving these numbers and in solving certain equations. They also give a neat example of how complex numbers are not just a fix for one equation but a structure with their own identities."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The cube roots of unity are 1, omega and omega^2.",
+            "omega^3 = 1.",
+            "1 + omega + omega^2 = 0.",
+            "omega^2 is the conjugate of omega.",
+            "These rules help simplify expressions that contain omega."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If an expression contains omega + omega^2, it can be replaced by -1, because 1 + omega + omega^2 = 0 implies omega + omega^2 = -1.", "note": "The cube roots of unity are a small but rich set of examples that show how complex numbers behave in a closed system." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Argand plane for a complex number and its conjugate",
+      "description": "A point a + ib and its reflection a - ib across the real axis, with the modulus shown as the distance from the origin.",
+      "labels": ["real axis", "imaginary axis", "a + ib", "conjugate a - ib", "modulus |z|"]
+    }
+  ],
+  "keyPoints": [
+    "i is defined by i^2 = -1.",
+    "A complex number is written a + ib with a, b real.",
+    "Addition and multiplication use ordinary algebra with i^2 = -1.",
+    "Division is done by multiplying numerator and denominator by the conjugate of the denominator.",
+    "The conjugate of a + ib is a - ib.",
+    "The modulus is sqrt(a^2 + b^2) and equals the distance from the origin in the Argand plane.",
+    "The cube roots of unity satisfy omega^3 = 1 and 1 + omega + omega^2 = 0."
+  ],
+  "examFocus": [
+    "When dividing, always rationalise the denominator by multiplying by the conjugate; leaving i in the denominator is usually not the final form.",
+    "When finding modulus, do not forget the square root; a^2 + b^2 is |z|^2, not |z|."
+  ],
+  "vocabulary": [
+    { "word": "Complex number", "meaning": "A number of the form a + ib where a and b are real and i^2 = -1." },
+    { "word": "Real part", "meaning": "The a in a + ib." },
+    { "word": "Imaginary part", "meaning": "The b in a + ib." },
+    { "word": "Conjugate", "meaning": "The number a - ib for z = a + ib." },
+    { "word": "Modulus", "meaning": "The distance from the origin to a + ib, equal to sqrt(a^2 + b^2)." },
+    { "word": "Argand plane", "meaning": "A plane in which a complex number a + ib is represented by the point (a, b)." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-complex-numbers-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "By definition, i^2 equals:",
+      "options": ["1", "-1", "0", "sqrt(-1) only as a symbol with no value"],
+      "correctIndex": 1,
+      "answer": "-1",
+      "explanation": "The symbol i is defined so that i^2 = -1.",
+      "commonMistake": "Thinking i^2 = 1 because of forgetting the negative."
+    },
+    {
+      "id": "isc-11-math-complex-numbers-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The conjugate of 3 + 4i is:",
+      "options": ["-3 - 4i", "-3 + 4i", "3 - 4i", "3 + 4i"],
+      "correctIndex": 2,
+      "answer": "3 - 4i",
+      "explanation": "Conjugation changes the sign of the imaginary part only.",
+      "commonMistake": "Negating the real part as well, or leaving the sign unchanged."
+    },
+    {
+      "id": "isc-11-math-complex-numbers-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the modulus of z = 2 - 3i.",
+      "answer": "sqrt13",
+      "explanation": "The modulus is sqrt(2^2 + (-3)^2) = sqrt(4 + 9) = sqrt13.",
+      "commonMistake": "Forgetting the square root, or squaring -3 incorrectly as -9."
+    },
+    {
+      "id": "isc-11-math-complex-numbers-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Simplify (2 + i)(3 - i) and write it in the form a + ib.",
+      "answer": "7 + i",
+      "explanation": "(2 + i)(3 - i) = 6 - 2i + 3i - i^2 = 6 + i + 1 = 7 + i.",
+      "commonMistake": "Forgetting that -i^2 becomes +1, or combining the real and imaginary parts incorrectly."
+    },
+    {
+      "id": "isc-11-math-complex-numbers-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If omega is a complex cube root of unity, simplify omega^2 + omega + 1 and omega^4 + omega.",
+      "answer": "omega^2 + omega + 1 = 0 because the cube roots of unity satisfy 1 + omega + omega^2 = 0. omega^4 + omega = omega + omega = 2 omega, because omega^4 = omega^3 * omega = 1 * omega = omega.",
+      "explanation": "The simplification uses the defining properties of the cube roots of unity.",
+      "commonMistake": "Forgetting omega^3 = 1 when reducing omega^4, or not recognising that the sum of all three cube roots is 0."
+    }
+  ]
+}

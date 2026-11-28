@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-trigonometry",
+  "title": "Trigonometric Functions",
+  "kind": "mathematics",
+  "tagline": "Radians, the unit circle, signs, identities including sum, difference and double-angle, and the graphs of trigonometric functions.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "Trigonometry begins with two ideas: the measurement of angles, and the relationship between angles and ratios of sides in a right triangle. In Class XI we go beyond right triangles by using the unit circle, which lets us define the trigonometric functions for all angles and see directly why they repeat periodically. This chapter builds from radian measure and the unit-circle definitions to the signs of the functions in different quadrants, the most important identity sin^2 x + cos^2 x = 1, and the compound-angle identities for sums and differences. It also includes the graphs of the trigonometric functions, which show the periodic behaviour that makes trigonometry useful in so many situations.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Trigonometric Functions" },
+      { "label": "Core ideas", "value": "Degree and radian measure; unit circle definition; signs by quadrant; sin^2 x + cos^2 x = 1; sum and difference identities; double-angle identities; graphs of sin x, cos x, tan x, sec x, cosec x and cot x" }
+    ]
+  },
+  "learningOutcomes": [
+    "Convert between degrees and radians.",
+    "Define the trigonometric functions using the unit circle.",
+    "Determine the sign of each trigonometric function in each quadrant.",
+    "Use the identity sin^2 x + cos^2 x = 1 to simplify expressions.",
+    "Apply compound-angle and double-angle identities to evaluate or simplify expressions.",
+    "Sketch and interpret the graphs of the basic trigonometric functions."
+  ],
+  "learn": [
+    {
+      "id": "angle-measure",
+      "title": "Degree and radian measure",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Angles can be measured in degrees or radians. A full turn is 360 degrees or 2 pi radians. Radian measure is especially useful in higher mathematics because it links arc length and angle directly: an arc of length r on a circle of radius r subtends an angle of 1 radian. To convert, remember that 180 degrees equals pi radians. Many formulas in trigonometry and calculus are simplest when angles are in radians, so it is worth getting used to working in radians early."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "360 degrees = 2 pi radians.",
+            "180 degrees = pi radians.",
+            "To convert degrees to radians, multiply by pi / 180.",
+            "To convert radians to degrees, multiply by 180 / pi.",
+            "Radian measure makes arc length and angle relations simple."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "90 degrees = pi/2 radians, 180 degrees = pi radians, and 60 degrees = pi/3 radians.", "note": "The important values to remember are the ones tied to 30, 45 and 60 degrees, and their radian equivalents." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit-circle-and-signs",
+      "title": "Unit circle definition and signs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "On the unit circle, a point at angle theta has coordinates (cos theta, sin theta). This definition works for any angle, not just the acute angles of a right triangle, and it explains the signs of the trigonometric functions in each quadrant. In the first quadrant both sin and cos are positive. In the second quadrant sin is positive and cos is negative. In the third quadrant both are negative, and in the fourth quadrant cos is positive and sin is negative. The tangent is the ratio sin / cos, so its sign follows from the signs of sin and cos."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "On the unit circle, the point at angle theta is (cos theta, sin theta).",
+            "cos theta is the x-coordinate, sin theta is the y-coordinate.",
+            "tan theta = sin theta / cos theta, when cos theta is not zero.",
+            "Signs of sin and cos change by quadrant; tan follows from their signs."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If theta is in the second quadrant, sin theta is positive and cos theta is negative, so tan theta is negative. This matches the fact that the x-coordinate is negative and the y-coordinate is positive in the second quadrant.", "note": "The unit circle is a good sanity check: if you end up with signs that contradict the quadrant, something has gone wrong." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "core-identity-and-expression-work",
+      "title": "The core identity and simplifying expressions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The most important identity in this chapter is sin^2 x + cos^2 x = 1. It comes straight from the unit circle, because the coordinates of any point on the unit circle satisfy x^2 + y^2 = 1. From this identity, we can derive related forms by dividing by cos^2 x or sin^2 x. It is also the basis for simplifying many expressions and checking whether a claimed identity could possibly be true."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin^2 x + cos^2 x = 1 is the fundamental identity.",
+            "Dividing by cos^2 x gives tan^2 x + 1 = sec^2 x, when defined.",
+            "Dividing by sin^2 x gives 1 + cot^2 x = cosec^2 x, when defined.",
+            "Use the identity to simplify expressions or to find one function from another."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If sin x = 3/5 and x is acute, then cos x = 4/5, from cos^2 x = 1 - sin^2 x = 1 - 9/25 = 16/25 and cos x positive in the first quadrant.", "note": "Remember to choose the correct sign from the quadrant; cos x could be -4/5 if the angle were in the second quadrant." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compound-and-double-angle",
+      "title": "Sum, difference and double-angle identities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Compound-angle identities let us rewrite the sine or cosine of a sum or difference in terms of the sine and cosine of the parts. These identities are powerful because they let us combine angles and break them apart. Once we have them, double-angle identities follow immediately by putting equal angles into the sum formulas. They are used for simplification, evaluation, and for building more complicated results from simple ones."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin(A + B) = sin A cos B + cos A sin B.",
+            "sin(A - B) = sin A cos B - cos A sin B.",
+            "cos(A + B) = cos A cos B - sin A sin B.",
+            "cos(A - B) = cos A cos B + sin A sin B.",
+            "Double-angle formulas come from setting B = A in the sum formulas."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "sin(30 deg + 60 deg) = sin 30 cos 60 + cos 30 sin 60 = (1/2)(1/2) + (sqrt3/2)(sqrt3/2) = 1/4 + 3/4 = 1, which matches sin 90 deg = 1.", "note": "This example is a useful check that the identity is being applied in the right direction." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs-of-trigonometric-functions",
+      "title": "Graphs of the trigonometric functions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The trigonometric functions are periodic, which means their values repeat after a fixed interval. The graph of sin x is a wave starting at 0, rising to 1, falling back through 0 to -1, and returning to 0 over one period of 2 pi. Cosine is similar but shifted. Tangent has a different shape: it repeats every pi and has vertical asymptotes where cos theta = 0. Knowing these graphs helps you interpret identities, solve equations, and understand the behaviour of the functions beyond a single triangle."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "sin x and cos x have period 2 pi.",
+            "tan x has period pi.",
+            "Graphs show amplitude, period, and intercepts clearly.",
+            "tan x has vertical asymptotes where cos x = 0."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The graph of sin x crosses the x-axis at multiples of pi, reaches a maximum of 1 at pi/2, and reaches a minimum of -1 at 3 pi / 2.", "note": "The graph is a quick way to see which values the function can and cannot take." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Graph of sin x over one period",
+      "description": "A wave showing the key points of the sine function from 0 to 2 pi, including intercepts, maximum and minimum.",
+      "labels": ["0", "pi/2", "pi", "3 pi/2", "2 pi", "maximum = 1", "minimum = -1"]
+    },
+    {
+      "caption": "Figure: Graph of tan x over one period",
+      "description": "A tangent curve showing the repeating pattern and the vertical asymptotes between branches.",
+      "labels": ["asymptote", "period = pi", "crosses axis at multiples of pi"]
+    }
+  ],
+  "keyPoints": [
+    "Radian measure is based on pi radians = 180 degrees.",
+    "On the unit circle, sin theta is the y-coordinate and cos theta is the x-coordinate.",
+    "The signs of sin and cos change by quadrant; tan follows from their signs.",
+    "sin^2 x + cos^2 x = 1 is the fundamental identity.",
+    "Compound-angle identities rewrite sin and cos of sums and differences.",
+    "tan x has period pi and vertical asymptotes where cos x = 0."
+  ],
+  "examFocus": [
+    "When using identities, keep radians and degrees straight; if the question is in degrees, convert only at the end if needed, and watch for formulas that assume radian measure.",
+    "Check the quadrant before choosing the sign of a square root from an identity."
+  ],
+  "vocabulary": [
+    { "word": "Radian", "meaning": "A unit of angle measure such that an arc of length r on a circle of radius r subtends an angle of 1 radian." },
+    { "word": "Unit circle", "meaning": "A circle of radius 1 used to define the trigonometric functions for all angles." },
+    { "word": "Periodic function", "meaning": "A function whose values repeat after a fixed interval." },
+    { "word": "Compound-angle identity", "meaning": "An identity that expresses the trigonometric function of a sum or difference in terms of the functions of the separate angles." },
+    { "word": "Amplitude", "meaning": "The maximum distance of a periodic graph from its midline." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-trigonometry-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "180 degrees is equal to:",
+      "options": ["pi/2 radians", "pi radians", "2 pi radians", "pi/4 radians"],
+      "correctIndex": 1,
+      "answer": "pi radians",
+      "explanation": "180 degrees = pi radians because a full turn is 360 degrees = 2 pi radians.",
+      "commonMistake": "Mixing up the conversions for 180 degrees and 90 degrees."
+    },
+    {
+      "id": "isc-11-math-trigonometry-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "On the unit circle, the point corresponding to angle theta is:",
+      "options": ["(sin theta, cos theta)", "(cos theta, sin theta)", "(tan theta, sec theta)", "(1, theta)"],
+      "correctIndex": 1,
+      "answer": "(cos theta, sin theta)",
+      "explanation": "By the unit-circle definition, the point at angle theta has coordinates (cos theta, sin theta).",
+      "commonMistake": "Reversing the order of cos and sin."
+    },
+    {
+      "id": "isc-11-math-trigonometry-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If sin x = 3/5 and x is acute, find cos x.",
+      "answer": "cos x = 4/5",
+      "explanation": "cos^2 x = 1 - sin^2 x = 1 - 9/25 = 16/25, so cos x = 4/5 because x is acute and cos x is positive in the first quadrant.",
+      "commonMistake": "Forgetting the quadrant and writing cos x = -4/5, or stopping at cos^2 x = 16/25 without choosing the sign."
+    },
+    {
+      "id": "isc-11-math-trigonometry-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the identity for sin(A + B).",
+      "answer": "sin(A + B) = sin A cos B + cos A sin B",
+      "explanation": "This is the compound-angle identity for the sine of a sum.",
+      "commonMistake": "Mixing up the signs or swapping the sin/cos order."
+    },
+    {
+      "id": "isc-11-math-trigonometry-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Use the appropriate identity to find sin 75 deg by writing 75 deg as 45 deg + 30 deg.",
+      "answer": "sin 75 deg = sin(45 deg + 30 deg) = sin 45 cos 30 + cos 45 sin 30 = (sqrt2/2)(sqrt3/2) + (sqrt2/2)(1/2) = (sqrt6 + sqrt2)/4.",
+      "explanation": "The compound-angle formula for sin(A + B) gives the answer after substituting the standard values for 45 and 30 degrees.",
+      "commonMistake": "Using the wrong identity, reversing the terms, or making an arithmetic error with the surds."
+    }
+  ]
+}

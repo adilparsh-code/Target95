@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-relations",
+  "title": "Relations and Functions",
+  "kind": "mathematics",
+  "tagline": "Ordered pairs, Cartesian product, relations as subsets, functions, domain, co-domain, range, and standard real-valued functions.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A relation is a way of linking elements of one set to elements of another. That idea is everywhere in mathematics, but it is not yet specific enough to describe a rule that gives exactly one output for each input. A function is the special kind of relation that does that. In this chapter you meet ordered pairs, the Cartesian product of sets, relations as subsets of a Cartesian product, and then functions with their domain, co-domain and range. The chapter also looks at several standard real-valued functions whose graphs and domain/range behaviour are worth knowing.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Sets and Functions" },
+      { "label": "Chapter", "value": "Relations and Functions" },
+      { "label": "Core ideas", "value": "Ordered pairs; Cartesian product; relation as a subset; domain, co-domain, range; function as a relation with exactly one output per input; standard real-valued functions and their graphs" }
+    ]
+  },
+  "learningOutcomes": [
+    "Form ordered pairs and Cartesian products of sets.",
+    "Describe a relation as a subset of a Cartesian product and identify its domain, co-domain and range.",
+    "Decide whether a given relation is a function and justify the decision.",
+    "Distinguish co-domain from range.",
+    "Find the domain and range of several standard real-valued functions and interpret their graphs."
+  ],
+  "learn": [
+    {
+      "id": "ordered-pairs-and-cartesian-product",
+      "title": "Ordered pairs and Cartesian product",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "An ordered pair is a pair of elements written in a fixed order, so the pair (1, 2) is not the same as (2, 1) unless the two entries happen to be equal. The Cartesian product of two sets A and B is the set of all ordered pairs whose first element comes from A and whose second element comes from B. This product is the playground on which relations and functions are built."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "An ordered pair is written with a fixed order: order matters.",
+            "A x B is the set of ordered pairs (a, b) with a in A and b in B.",
+            "If A has m elements and B has n elements, then A x B has m x n elements.",
+            "A x B and B x A are generally different."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If A = {1, 2} and B = {x, y}, then A x B = {(1, x), (1, y), (2, x), (2, y)}. B x A is different: it is {(x, 1), (x, 2), (y, 1), (y, 2)}.", "note": "Swapping the sets swaps the order in every pair, so the Cartesian product is not symmetric in general." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "relations",
+      "title": "Relations as subsets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A relation from set A to set B is any subset of A x B. That is a very general idea. It allows one element of A to be linked to several elements of B, to none at all, or to exactly one. Because of this generality, not every relation is a function. To reason about a relation, it helps to list its ordered pairs, draw an arrow diagram, or describe it by a condition."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A relation from A to B is a subset of A x B.",
+            "The domain of a relation is the set of first coordinates that appear.",
+            "The co-domain is the set B we are relating into.",
+            "The range is the set of second coordinates that actually appear."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If A = {1, 2, 3} and B = {a, b}, then R = {(1, a), (2, a), (3, b)} is a relation from A to B. Its domain is A, its co-domain is B, and its range is {a, b}.", "note": "The domain is the set of inputs used, the range is the set of outputs actually reached, and the co-domain is the target set we started with." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions as special relations",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A function is a relation in which every element of the domain is paired with exactly one element of the co-domain. This is the key restriction. A relation may send one input to several outputs, but then it is not a function. Functions also have a precise language: the domain is the set of all inputs, the co-domain is the specified target set, and the range is the set of outputs actually attained. The range may be smaller than the co-domain."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A function assigns exactly one output to each input in its domain.",
+            "Every function is a relation, but not every relation is a function.",
+            "Co-domain and range are not the same thing in general.",
+            "The range depends on which outputs actually occur."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If f : R -> R is defined by f(x) = x^2, the domain is all real numbers and the co-domain is all real numbers, but the range is [0, infinity), because a square is never negative and every non-negative real number is a square of some real input.", "note": "This example is a good test of the co-domain vs range distinction: the function never produces a negative output." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard-functions",
+      "title": "Standard real-valued functions",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Several functions appear so often that it is worth knowing their names, their graphs and their domain/range behaviour. Among the common ones are the constant function, identity function, polynomial functions, rational functions, modulus function, signum function, exponential function, logarithmic function and greatest-integer function. The graph often makes the behaviour much clearer than words alone."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Constant function: same output for every input.",
+            "Identity function: output equals input.",
+            "Modulus function: outputs the non-negative size of a number.",
+            "Greatest-integer function: gives the greatest integer less than or equal to the input.",
+            "Exponential and logarithmic functions have restricted ranges or domains, so their graphs are good to know."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The modulus function f(x) = |x| maps -3 to 3 and 2 to 2. Its graph is a V shape, and its range is all non-negative reals.", "note": "The modulus removes the sign, so the range cannot include negative numbers." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Relation versus function",
+      "description": "An arrow diagram showing a relation that is not a function next to one that is a function, with one input mapped to two outputs in the first case.",
+      "labels": ["domain element", "co-domain element", "two outputs for one input", "exactly one output per input"]
+    }
+  ],
+  "keyPoints": [
+    "An ordered pair keeps its order; (a, b) is not generally the same as (b, a).",
+    "A x B is the set of all ordered pairs with first component in A and second in B.",
+    "A relation from A to B is a subset of A x B.",
+    "A function is a relation that assigns exactly one output to each input.",
+    "Co-domain is the target set; range is the set of outputs actually reached.",
+    "Standard real-valued functions are worth learning by name, graph and domain/range behaviour."
+  ],
+  "examFocus": [
+    "If asked for the range, give the actual outputs, not the co-domain; the two are often not equal.",
+    "To show a relation is a function, check that no input has more than one output."
+  ],
+  "vocabulary": [
+    { "word": "Ordered pair", "meaning": "A pair of elements written in fixed order, so the order matters." },
+    { "word": "Cartesian product", "meaning": "The set of all ordered pairs formed from two sets." },
+    { "word": "Relation", "meaning": "A subset of a Cartesian product linking elements of one set to elements of another." },
+    { "word": "Domain", "meaning": "The set of all inputs in a relation or function." },
+    { "word": "Co-domain", "meaning": "The target set into which a function is declared to map." },
+    { "word": "Range", "meaning": "The set of outputs actually taken by a function." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-relations-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A = {1, 2} and B = {x, y}, then A x B has how many elements?",
+      "options": ["2", "4", "6", "8"],
+      "correctIndex": 1,
+      "answer": "4",
+      "explanation": "A has 2 elements and B has 2 elements, so A x B has 2 x 2 = 4 ordered pairs.",
+      "commonMistake": "Adding the set sizes instead of multiplying them."
+    },
+    {
+      "id": "isc-11-math-relations-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement best describes a function?",
+      "options": ["Every input has at least one output", "Every input has exactly one output", "Every output has exactly one input", "A function cannot be given by ordered pairs"],
+      "correctIndex": 1,
+      "answer": "Every input has exactly one output",
+      "explanation": "The defining property of a function is that each input has exactly one output.",
+      "commonMistake": "Thinking a function means every output has exactly one input, which is different."
+    },
+    {
+      "id": "isc-11-math-relations-q-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Let A = {1, 2, 3} and B = {a, b}. Consider R = {(1, a), (2, a), (3, b)}. Then the range of R is:",
+      "options": ["{a}", "{b}", "{a, b}", "{1, 2, 3}"],
+      "correctIndex": 2,
+      "answer": "{a, b}",
+      "explanation": "The range is the set of second coordinates that actually appear: a and b.",
+      "commonMistake": "Choosing the co-domain instead of the range, or listing the domain."
+    },
+    {
+      "id": "isc-11-math-relations-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Is the relation {(2, 1), (2, 4)} from real numbers to real numbers a function? Give a reason.",
+      "answer": "No, because the input 2 is paired with two different outputs, 1 and 4.",
+      "explanation": "A function must assign exactly one output to each input, so one input having two outputs rules it out.",
+      "commonMistake": "Saying it is a function because each entry is an ordered pair."
+    },
+    {
+      "id": "isc-11-math-relations-q-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "For f(x) = |x|, what is the range if the domain is all real numbers?",
+      "answer": "The range is all non-negative real numbers, [0, infinity).",
+      "explanation": "The modulus function never produces a negative value, and every non-negative value is achieved.",
+      "commonMistake": "Giving the whole real line as the range."
+    },
+    {
+      "id": "isc-11-math-relations-q-06",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Let A = {1, 2, 3, 4}, B = {a, b, c} and R = {(1, a), (2, a), (2, c), (3, b)}. Find the domain, co-domain and range of R, and state whether R is a function from A to B.",
+      "answer": "Domain of R = {1, 2, 3}; co-domain = {a, b, c}; range = {a, b, c}. R is not a function from A to B because 2 is paired with two different outputs, a and c, and 4 is not paired with any output.",
+      "explanation": "The domain comes from the first coordinates, the range from the second coordinates, the co-domain is B, and a function from A to B must assign exactly one output to every element of A.",
+      "commonMistake": "Calling R a function just because each ordered pair looks fine individually, or forgetting to check both that one input has no two outputs and that every element of A is used."
+    }
+  ]
+}

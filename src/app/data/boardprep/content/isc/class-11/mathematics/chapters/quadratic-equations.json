@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-quadratics",
+  "title": "Quadratic Equations",
+  "kind": "mathematics",
+  "tagline": "Quadratic equations with real coefficients, the discriminant, relation between roots and coefficients, and solution in the complex number system.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A quadratic equation is an equation of the form ax^2 + bx + c = 0, with a not equal to zero. When a, b and c are real, the equation may have two real solutions, one repeated real solution, or two non-real complex solutions. The discriminant tells us which case we are in before we even solve the equation. This chapter covers the quadratic formula, the discriminant and what it means, the relationship between the roots and the coefficients, and the fact that any quadratic with real coefficients can be solved completely once we allow complex numbers.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Complex Numbers and Quadratic Equations" },
+      { "label": "Core ideas", "value": "ax^2 + bx + c = 0; quadratic formula; discriminant; nature of roots; sum and product of roots; equations reducible to quadratic form" }
+    ]
+  },
+  "learningOutcomes": [
+    "Write a quadratic equation in standard form and identify a, b and c.",
+    "Use the quadratic formula to solve a quadratic equation.",
+    "Use the discriminant to predict whether the roots are real and distinct, real and repeated, or non-real.",
+    "Use the relations sum of roots = -b/a and product of roots = c/a.",
+    "Solve equations that reduce to quadratic form.",
+    "Solve a quadratic with real coefficients whose roots are complex."
+  ],
+  "learn": [
+    {
+      "id": "standard-form-and-the-formula",
+      "title": "Standard form and the quadratic formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A quadratic equation is any equation that can be written as ax^2 + bx + c = 0 with a not equal to zero. Before applying any formula, it is essential to put the equation into this standard form. The quadratic formula says that the solutions are x = (-b +- sqrt(b^2 - 4ac)) / (2a). The symbol +- is important; it means there are generally two solutions, one for the plus sign and one for the minus sign."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A quadratic equation in standard form is ax^2 + bx + c = 0, a not equal to 0.",
+            "Identify a, b and c correctly, including their signs.",
+            "The quadratic formula is x = (-b +- sqrt(b^2 - 4ac)) / (2a).",
+            "The +- sign usually gives two solutions."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For x^2 - 4x + 13 = 0, a = 1, b = -4 and c = 13. Then the discriminant is b^2 - 4ac = 16 - 52 = -36, so x = (4 +- sqrt(-36)) / 2 = 2 +- 3i.", "note": "The negative discriminant is what tells us the roots are non-real; we then use i to express them." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "discriminant-and-nature-of-roots",
+      "title": "Discriminant and nature of roots",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The discriminant of ax^2 + bx + c = 0 is Delta = b^2 - 4ac. Its sign tells us the nature of the roots before we solve. If Delta is greater than zero, there are two distinct real roots. If Delta is equal to zero, there is one repeated real root. If Delta is less than zero, the roots are non-real complex conjugates. The discriminant is useful because it lets us anticipate the answer and check it after we solve."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Delta = b^2 - 4ac.",
+            "Delta > 0 gives two distinct real roots.",
+            "Delta = 0 gives one repeated real root.",
+            "Delta < 0 gives non-real complex conjugate roots.",
+            "Use the discriminant to check your final answers."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For x^2 + 6x + 9 = 0, Delta = 36 - 36 = 0, so there is one repeated real root at -3. For x^2 + x + 1 = 0, Delta = 1 - 4 = -3, so the roots are non-real.", "note": "The repeated-root case is easy to miss because students often still write two roots as if Delta were positive." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sum-and-product-of-roots",
+      "title": "Sum and product of roots",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "For a quadratic with roots alpha and beta, the sum and product of the roots are related to the coefficients: alpha + beta = -b/a and alpha beta = c/a. These relations are useful because they let us work with the roots without solving the equation directly. They also let us reconstruct a quadratic equation if we know its sum and product of roots, or simplify expressions that involve the roots."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sum of roots = -b/a.",
+            "Product of roots = c/a.",
+            "These relations hold for the solutions of ax^2 + bx + c = 0.",
+            "They are useful for checking solutions and for building related expressions."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For x^2 - 5x + 6 = 0, the sum of the roots is 5 and the product is 6, which matches the roots 2 and 3.", "note": "This checks both ways: the roots give the sum and product, and the sum and product identify the equation." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equations-reducible-to-quadratic",
+      "title": "Equations reducible to quadratic form",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Not every equation that looks complicated is a quadratic at first sight, but many can be reduced to one by a substitution. A common case is an equation where the variable appears only as its square, or where a repeated expression can be replaced by a new variable. Once the equation is reduced, solve it as a quadratic and then translate the solutions back to the original variable."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Look for a substitution that turns the equation into ax^2 + bx + c = 0.",
+            "After solving, return to the original variable.",
+            "Check all solutions in the original equation.",
+            "Some substitutions can introduce extraneous possibilities, so check carefully."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If an equation involves x^4 and x^2, substituting t = x^2 can turn it into a quadratic in t. After finding t, remember that x = +- sqrt(t) if t is non-negative.", "note": "The final step is to get back to the original variable; stopping at t is not the complete answer." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Discriminant and root type",
+      "description": "A simple summary connecting the sign of the discriminant with the type of roots a quadratic equation has.",
+      "labels": ["Delta > 0", "two distinct real roots", "Delta = 0", "one repeated real root", "Delta < 0", "non-real complex roots"]
+    }
+  ],
+  "keyPoints": [
+    "Put a quadratic equation into standard form before using any formula.",
+    "The quadratic formula is x = (-b +- sqrt(b^2 - 4ac)) / (2a).",
+    "The discriminant b^2 - 4ac determines the nature of the roots.",
+    "Sum of roots = -b/a, product of roots = c/a.",
+    "A quadratic with real coefficients may have real or complex roots.",
+    "Equations that are not obviously quadratic may be reducible to one by substitution."
+  ],
+  "examFocus": [
+    "When a quadratic has real coefficients and a negative discriminant, write the roots as complex conjugates, not as two unrelated numbers.",
+    "Use the sum and product of roots to check your answer; if they do not match -b/a and c/a, the solution is wrong."
+  ],
+  "vocabulary": [
+    { "word": "Quadratic equation", "meaning": "An equation of the form ax^2 + bx + c = 0 with a not equal to 0." },
+    { "word": "Discriminant", "meaning": "The expression b^2 - 4ac, which determines the nature of the roots." },
+    { "word": "Root of an equation", "meaning": "A value of the variable that satisfies the equation." },
+    { "word": "Complex conjugate", "meaning": "For a + ib, the complex conjugate is a - ib." },
+    { "word": "Reducible equation", "meaning": "An equation that can be turned into a simpler form by a substitution." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-quadratics-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a quadratic equation ax^2 + bx + c = 0, the discriminant is:",
+      "options": ["b^2 + 4ac", "b^2 - 4ac", "4ac - b^2", "-b/a"],
+      "correctIndex": 1,
+      "answer": "b^2 - 4ac",
+      "explanation": "The discriminant is b^2 - 4ac, and its sign determines the nature of the roots.",
+      "commonMistake": "Reversing the sign or confusing it with the sum of roots."
+    },
+    {
+      "id": "isc-11-math-quadratics-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If the discriminant of a quadratic with real coefficients is zero, then the roots are:",
+      "options": ["Two distinct real roots", "One repeated real root", "Two non-real complex roots", "No real or complex solution"],
+      "correctIndex": 1,
+      "answer": "One repeated real root",
+      "explanation": "A discriminant of zero means the quadratic has one repeated real root.",
+      "commonMistake": "Writing two distinct roots, or thinking zero discriminant means no roots."
+    },
+    {
+      "id": "isc-11-math-quadratics-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the discriminant of 2x^2 - 4x + 3 = 0 and state the nature of its roots.",
+      "answer": "Delta = (-4)^2 - 4(2)(3) = 16 - 24 = -8, which is negative, so the roots are non-real complex conjugates.",
+      "explanation": "The negative discriminant means the square root in the formula is imaginary.",
+      "commonMistake": "Stating the roots are real because the coefficients are real, or miscalculating 4ac."
+    },
+    {
+      "id": "isc-11-math-quadratics-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If the roots of x^2 - 7x + k = 0 have product 12, find k.",
+      "answer": "k = 12",
+      "explanation": "Product of roots = c/a = k/1 = k, so k = 12.",
+      "commonMistake": "Confusing sum of roots with product of roots."
+    },
+    {
+      "id": "isc-11-math-quadratics-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Solve x^2 - 4x + 13 = 0 and verify the sum and product of the roots.",
+      "answer": "Delta = 16 - 52 = -36, so x = (4 +- 6i)/2 = 2 +- 3i. Sum of roots = (2 + 3i) + (2 - 3i) = 4 = -b/a, and product = (2 + 3i)(2 - 3i) = 4 + 9 = 13 = c/a.",
+      "explanation": "The solutions are complex conjugates, and their sum and product match the coefficients.",
+      "commonMistake": "Writing the roots as 2 + 6i and 2 - 6i, or forgetting that the square root of -36 is 6i."
+    }
+  ]
+}

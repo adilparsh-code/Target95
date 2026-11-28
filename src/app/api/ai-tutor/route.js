@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { getVerifiedSession } from "@/app/lib/server-auth";
 import { getAdminDb } from "@/app/lib/firebase-admin";
 import { extractResponseText } from "@/app/lib/blog-ai-prompt";
@@ -20,6 +19,14 @@ export const runtime = "nodejs";
 
 const MAX_QUESTION_CHARS = 2000;
 const RATE_WINDOW_MS = 60 * 60 * 1000; // 1 hour, per-user.
+
+function jsonResponse(body, init = {}) {
+  const response = new Response(JSON.stringify(body), {
+    headers: { "Content-Type": "application/json" },
+    ...init,
+  });
+  return response;
+}
 
 /**
  * Per-user hourly limit stored in Firestore so it holds across serverless
@@ -134,13 +141,13 @@ export async function POST(request) {
     session = await getVerifiedSession(request);
   } catch (error) {
     console.error("Session validation failed:", error);
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "unavailable", error: "Session validation is temporarily unavailable." },
       { status: 503 }
     );
   }
   if (!session) {
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "unauthenticated", error: "Sign in to use the AI Tutor." },
       { status: 401 }
     );
@@ -149,7 +156,7 @@ export async function POST(request) {
   // Plan-aware limit from the entitlements foundation (session claims only).
   const access = checkAITutorAccess(session);
   if (!access.allowed) {
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "forbidden", error: "Your plan does not include the AI Tutor." },
       { status: 403 }
     );
@@ -160,13 +167,13 @@ export async function POST(request) {
     limited = await isRateLimited(session.uid, access.limit);
   } catch (error) {
     console.error("AI Tutor rate-limit check failed:", error);
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "ai_error", error: "The AI Tutor could not answer right now. Please try again in a moment." },
       { status: 503 }
     );
   }
   if (limited) {
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "rate_limited", error: "You have used your AI Tutor limit for this hour. Please try again later." },
       { status: 429 }
     );
@@ -176,12 +183,12 @@ export async function POST(request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Invalid JSON body." }, { status: 400 });
+    return jsonResponse({ ok: false, error: "Invalid JSON body." }, { status: 400 });
   }
 
   const question = String(body?.question || "").trim().slice(0, MAX_QUESTION_CHARS);
   if (!question) {
-    return NextResponse.json({ ok: false, error: "A question is required." }, { status: 400 });
+    return jsonResponse({ ok: false, error: "A question is required." }, { status: 400 });
   }
 
   const context = {
@@ -193,19 +200,19 @@ export async function POST(request) {
 
   try {
     const aiResponse = await callOpenAI(buildPrompt({ question, ...context }));
-    return NextResponse.json({ ok: true, status: "ok", response: aiResponse });
+    return jsonResponse({ ok: true, status: "ok", response: aiResponse });
   } catch (error) {
     const message = String(error?.message || "AI request failed.");
 
     if (message.includes("OPENAI_API_KEY is not configured")) {
-      return NextResponse.json(
+      return jsonResponse(
         { ok: false, status: "unconfigured", error: "AI Tutor is not configured yet. Please check back soon." },
         { status: 503 }
       );
     }
 
     console.error("AI Tutor request failed:", message);
-    return NextResponse.json(
+    return jsonResponse(
       { ok: false, status: "ai_error", error: "The AI Tutor could not answer right now. Please try again in a moment." },
       { status: 502 }
     );

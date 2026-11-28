@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { getAdminDb } from "@/app/lib/firebase-admin";
 
 /**
@@ -7,16 +6,24 @@ import { getAdminDb } from "@/app/lib/firebase-admin";
  * convenience only; authorization is enforced here on the server.
  */
 
+function jsonResponse(body, init = {}) {
+  const response = new Response(JSON.stringify(body), {
+    headers: { "Content-Type": "application/json" },
+    ...init,
+  });
+  return response;
+}
+
 export function unauthorized() {
-  return NextResponse.json({ success: false, error: "Unauthorized." }, { status: 401 });
+  return jsonResponse({ success: false, error: "Unauthorized." }, { status: 401 });
 }
 
 export function forbidden() {
-  return NextResponse.json({ success: false, error: "Admin access required." }, { status: 403 });
+  return jsonResponse({ success: false, error: "Admin access required." }, { status: 403 });
 }
 
 export function serverError() {
-  return NextResponse.json({ success: false, error: "Unable to load admin data." }, { status: 500 });
+  return jsonResponse({ success: false, error: "Unable to load admin data." }, { status: 500 });
 }
 
 /**
@@ -35,12 +42,15 @@ export async function adminGuard(request) {
     console.error("Admin session validation failed:", error);
     return {
       ok: false,
-      response: NextResponse.json({ success: false, error: "Session validation is temporarily unavailable." }, { status: 503 }),
+      response: jsonResponse({ success: false, error: "Session validation is temporarily unavailable." }, { status: 503 }),
     };
   }
   if (!admin) {
-    const session = request.cookies.get("session")?.value;
-    if (!session) return { ok: false, response: unauthorized() };
+    const sessionCookie = request.cookies?.get?.("session")?.value ?? "";
+    if (!sessionCookie) {
+      const response = jsonResponse({ success: false, error: "Unauthorized." }, { status: 401 });
+      return { ok: false, response };
+    }
     return { ok: false, response: forbidden() };
   }
   return { ok: true, adminDb: getAdminDb(), admin };

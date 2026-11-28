@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-rotational",
+  "title": "System of Particles and Rotational Motion",
+  "kind": "physics",
+  "tagline": "Centre of mass, centre-of-mass motion and momentum conservation, torque and angular momentum, rotational equilibrium and rotation, moment of inertia and radius of gyration.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Physics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Physics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "So far, much of mechanics has treated objects as if all their mass were concentrated at a single point. That picture is useful, but many important motions involve rotation and distributed mass. This chapter extends mechanics to systems of particles and to rigid bodies that rotate. The central ideas are centre of mass, which lets us separate translation from rotation, and torque and angular momentum, which are the rotational analogues of force and linear momentum. We finish with moment of inertia, which measures how hard it is to change a body’s rotation.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "System of Particles and Rotational Motion" },
+      { "label": "Core ideas", "value": "Centre of mass; centre-of-mass motion and conservation of momentum; centre of gravity and moments; torque; angular momentum; rotational equilibrium; rigid-body rotation and equations of motion; moment of inertia and radius of gyration; linear-rotational comparison" }
+    ]
+  },
+  "learningOutcomes": [
+    "Find the centre of mass of a two-particle system and describe it for more general systems.",
+    "Explain why the centre of mass obeys simple laws of motion.",
+    "Distinguish torque from force.",
+    "State the conditions for translational and rotational equilibrium.",
+    "Use the rotational equations of motion for fixed-axis rotation.",
+    "Define moment of inertia and radius of gyration.",
+    "Compare linear and rotational quantities."
+  ],
+  "learn": [
+    {
+      "id": "centre-of-mass",
+      "title": "Centre of mass",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The centre of mass of a system is the point where the total mass can be thought of as concentrated for many purposes. For two particles, the centre of mass lies along the line joining them, and its position depends on the masses. For a larger system, the centre of mass is the mass-weighted average of the positions of all the particles. The important idea is that the centre of mass moves as if all the mass were there and all the external forces acted there."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The centre of mass is the mass-weighted average position.",
+            "For two particles, it lies on the line joining them.",
+            "The centre of mass moves as if total mass were there and total external force acted there.",
+            "It simplifies the study of systems and collisions."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "In a two-particle system, if one mass is larger, the centre of mass is closer to the larger mass. If the masses are equal, the centre of mass is at the midpoint.", "note": "The centre of mass is not necessarily inside the material of the object; it is a mathematical average position." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "motion-of-the-centre-of-mass",
+      "title": "Motion of the centre of mass",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The motion of the centre of mass of a system is governed by the total external force. If the total external force is zero, the centre of mass does not accelerate. This leads to conservation of momentum for the system: if no external force acts, the total momentum stays constant. This idea is powerful because it holds even when the parts of the system are colliding or exploding relative to each other."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The centre of mass moves under the total external force.",
+            "If total external force is zero, the centre-of-mass acceleration is zero.",
+            "Total momentum is conserved when external force is zero.",
+            "Internal forces cannot change the total momentum."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A person walking inside a boat causes the boat to move slightly in the opposite direction, because the centre of mass of the person-plus-boat system must keep its overall motion consistent with the external forces.", "note": "Conservation of momentum is about the whole system, not just one part of it." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "torque",
+      "title": "Torque",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Torque is the turning effect of a force. It depends on the magnitude of the force, the distance from the axis of rotation, and the angle between the force and the lever arm. A force can be large and yet produce zero torque if it acts directly toward or away from the axis. Torque is a vector, and for fixed-axis rotation its direction matters mainly in determining whether it tends to rotate the body one way or the other."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Torque is the rotational analogue of force.",
+            "It depends on force, distance from the axis and the angle.",
+            "A force through the axis produces zero torque.",
+            "For fixed-axis rotation, torque is related to angular acceleration."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "It is easier to open a door by pushing far from the hinges than near them, because the same force produces more torque when the distance from the axis is larger.", "note": "That is why handles are placed far from the hinges; the idea is torque, not just force." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angular-momentum",
+      "title": "Angular momentum",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Angular momentum is the rotational analogue of linear momentum. A body rotating about a fixed axis has angular momentum related to its moment of inertia and angular speed. If no external torque acts, angular momentum is conserved. This explains many phenomena in which a rotating body changes shape and so changes its rotation speed, such as a skater pulling in arms."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Angular momentum is the rotational analogue of linear momentum.",
+            "For fixed-axis rotation, angular momentum involves moment of inertia and angular speed.",
+            "Angular momentum is conserved when no external torque acts.",
+            "Changing shape can change rotation speed."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A spinning skater pulling in arms reduces the moment of inertia, so the angular speed increases if angular momentum is conserved.", "note": "This is a classic illustration of conservation of angular momentum, not of a force making the skater spin faster." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rotational-equilibrium",
+      "title": "Rotational equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A rigid body is in rotational equilibrium if the total external torque on it is zero. For full equilibrium, both the total force and the total torque must be zero. This is useful for problems involving balances, beams and objects supported at several points. The principle of moments is a direct application of rotational equilibrium."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Rotational equilibrium requires zero resultant external torque.",
+            "Full equilibrium also requires zero resultant external force.",
+            "The principle of moments balances clockwise and anticlockwise torques.",
+            "Choosing an axis wisely often simplifies a problem."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A beam balanced on a pivot is in equilibrium when the clockwise and anticlockwise moments about the pivot are equal.", "note": "A body can be balanced even if different forces act on it, provided the torques cancel." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moment-of-inertia",
+      "title": "Moment of inertia and radius of gyration",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Moment of inertia is the rotational analogue of mass. It depends not only on total mass but also on how that mass is distributed about the axis of rotation. Bodies with more mass far from the axis are harder to rotate. The radius of gyration is a way of describing moment of inertia as if all the mass were at a single distance from the axis. Standard results are known for simple shapes, but each applies to the stated axis."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Moment of inertia measures resistance to change in rotation.",
+            "It depends on mass distribution and the axis chosen.",
+            "Radius of gyration gives an equivalent single distance for the mass.",
+            "Simple shapes have standard moments of inertia for specific axes."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "A thin ring has a larger moment of inertia than a solid disc of the same mass and radius when both rotate about their symmetry axis, because more mass is farther from the axis.", "note": "This is why moment of inertia is not just a function of mass; the distribution matters." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Centre of mass of a two-particle system",
+      "description": "A line joining two particles with the centre of mass marked closer to the larger mass.",
+      "labels": ["m1", "m2", "centre of mass", "closer to larger mass"]
+    },
+    {
+      "caption": "Figure: Torque and lever arm",
+      "description": "A force applied at a distance from a pivot, with the lever arm shown.",
+      "labels": ["pivot", "force", "lever arm", "angle between force and lever arm"]
+    }
+  ],
+  "keyPoints": [
+    "The centre of mass is the mass-weighted average position of a system.",
+    "The centre of mass moves as if all mass were there and all external force acted there.",
+    "Total momentum is conserved when no external force acts.",
+    "Torque is the turning effect of a force and depends on the lever arm.",
+    "Rotational equilibrium requires zero total external torque.",
+    "Angular momentum is conserved when no external torque acts.",
+    "Moment of inertia depends on both mass and its distribution about the axis."
+  ],
+  "examFocus": [
+    "When solving torque problems, choose an axis that simplifies the calculation by removing unknown forces from the equation.",
+    "Do not treat moment of inertia as depending only on mass; the distribution relative to the axis is what matters."
+  ],
+  "vocabulary": [
+    { "word": "Centre of mass", "meaning": "The point whose motion represents the overall motion of a system under external forces." },
+    { "word": "Torque", "meaning": "The turning effect of a force about an axis, equal to force times lever arm times the sine of the angle." },
+    { "word": "Angular momentum", "meaning": "The rotational analogue of linear momentum, related to moment of inertia and angular speed." },
+    { "word": "Moment of inertia", "meaning": "The rotational analogue of mass, depending on mass distribution about the axis." },
+    { "word": "Radius of gyration", "meaning": "The distance at which all mass could be placed to give the same moment of inertia." },
+    { "word": "Equilibrium", "meaning": "A state in which resultant force and resultant torque are both zero." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-phy-rotational-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The centre of mass of a two-particle system lies:",
+      "options": ["At the midpoint always", "On the line joining the particles", "At the heavier particle only", "Outside the two particles always"],
+      "correctIndex": 1,
+      "answer": "On the line joining the particles",
+      "explanation": "For two particles, the centre of mass lies on the line joining them, nearer the heavier one.",
+      "commonMistake": "Thinking it is always at the midpoint, or that it must be inside the heavier particle."
+    },
+    {
+      "id": "isc-11-phy-rotational-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Torque is the rotational analogue of:",
+      "options": ["Momentum", "Energy", "Force", "Velocity"],
+      "correctIndex": 2,
+      "answer": "Force",
+      "explanation": "Torque plays the role for rotation that force plays for translation.",
+      "commonMistake": "Matching torque with momentum or energy instead of force."
+    },
+    {
+      "id": "isc-11-phy-rotational-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the condition for rotational equilibrium of a rigid body.",
+      "answer": "The resultant external torque about any axis must be zero.",
+      "explanation": "If total external torque is zero, the body is in rotational equilibrium.",
+      "commonMistake": "Confusing rotational equilibrium with translational equilibrium alone."
+    },
+    {
+      "id": "isc-11-phy-rotational-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does a skater spin faster when they pull in their arms?",
+      "answer": "Pulling in arms reduces the moment of inertia, so angular speed increases if angular momentum is conserved.",
+      "explanation": "This is a conservation of angular momentum effect, not an increase in applied torque.",
+      "commonMistake": "Saying the skater works harder and therefore spins faster, as if force alone explains it."
+    },
+    {
+      "id": "isc-11-phy-rotational-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "A thin ring and a solid disc have the same mass and radius. Which has the greater moment of inertia about their symmetry axis, and why?",
+      "answer": "The ring has the greater moment of inertia because all its mass is at the same distance from the axis, while the disc’s mass is spread from the centre outward, so more of it is closer to the axis.",
+      "explanation": "Moment of inertia depends on how far mass is from the axis, not just on total mass.",
+      "commonMistake": "Saying they are equal because the mass and radius are the same."
+    }
+  ]
+}

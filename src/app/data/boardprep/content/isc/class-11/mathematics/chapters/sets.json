@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-sets",
+  "title": "Sets",
+  "kind": "mathematics",
+  "tagline": "Collection, representation, types of sets, subsets, power sets, universal sets and set operations.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A set is a well-defined collection of distinct objects. That simple idea is one of the foundations of modern mathematics, because almost every mathematical object can be built from sets or described using set language. In this chapter you meet the basic vocabulary of sets: roster and set-builder notation, finite and infinite sets, empty and singleton sets, subsets, the power set, the universal set, and the operations of union, intersection, difference and complement. The chapter also includes Venn diagrams, which give a visual way to think about sets and their relationships.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Sets and Functions" },
+      { "label": "Chapter", "value": "Sets" },
+      { "label": "Core ideas", "value": "Well-defined collections; roster and set-builder form; finite and infinite sets; empty and singleton sets; subsets; power set; universal set; union, intersection, difference and complement" }
+    ]
+  },
+  "learningOutcomes": [
+    "Define a set and represent it using roster and set-builder notation.",
+    "Identify finite, infinite, empty and singleton sets.",
+    "Use the ideas of subset, proper subset and power set correctly.",
+    "Perform union, intersection, difference and complement operations and interpret them with Venn diagrams."
+  ],
+  "learn": [
+    {
+      "id": "what-is-a-set",
+      "title": "Sets and their representation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A set is a well-defined collection of distinct objects. The objects are called elements or members of the set. The phrase well-defined is important: to know whether a collection is a set, we must be able to decide unambiguously whether a given object belongs to it. The collection of all even numbers less than 10 is a set, but the collection of all difficult books is not, because difficulty is a matter of opinion."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A set is a well-defined collection of distinct objects.",
+            "The objects in a set are called elements or members.",
+            "The symbol \u2208 means 'is an element of'; \u2209 means 'is not an element of'.",
+            "Sets are usually named with capital letters, and their elements with lowercase letters."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The set of vowels in the English alphabet can be written as A = {a, e, i, o, u}. Here a \u2208 A, but b \u2209 A.", "note": "The order of elements does not matter, and repeated elements are not listed more than once." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notation-and-types",
+      "title": "Roster form, set-builder form and types of sets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A set can be described in two common ways. In roster form, all the elements are listed inside braces. In set-builder form, the set is described by a property that its elements satisfy. The same set can often be written in both forms. Sets may be finite, meaning they have a countable number of elements, or infinite, meaning they go on without end. A set with no elements is called the empty set or null set, and a set with exactly one element is a singleton set."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Roster form: list the elements, for example {1, 2, 3}.",
+            "Set-builder form: describe a property, for example {x : x is a prime number less than 10}.",
+            "A finite set has a countable number of elements.",
+            "An infinite set does not have a finite number of elements.",
+            "The empty set, denoted \u2205 or {}, contains no elements.",
+            "A singleton set contains exactly one element, for example {7}."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The set {x : x \u2209 N and x < 5} can be written in roster form as {1, 2, 3, 4}. The set of all natural numbers is infinite and cannot be fully listed in roster form.", "note": "Set-builder form is especially useful for infinite sets." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "subsets-and-power-set",
+      "title": "Subsets, power sets and universal sets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A set A is a subset of a set B if every element of A is also an element of B. This is written A \u2286 B. Every set is a subset of itself, and the empty set is a subset of every set. A proper subset is a subset that is not equal to the whole set. The power set of a set is the collection of all its subsets. If a set has n elements, its power set has 2^n elements. In any discussion, there is usually a universal set that contains all the objects under consideration, and complement is defined relative to that universal set."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A \u2286 B means every element of A is in B.",
+            "A \u2282 B means A is a proper subset of B.",
+            "The empty set is a subset of every set.",
+            "The power set P(A) is the set of all subsets of A.",
+            "If n(A) = n, then n[P(A)] = 2^n.",
+            "The universal set U is the set of all objects under discussion."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If A = {1, 2}, then P(A) = {\u2205, {1}, {2}, {1, 2}}, so the power set has 2^2 = 4 elements.", "note": "Do not forget the empty set and the set itself when listing all subsets." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "operations",
+      "title": "Operations on sets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Sets can be combined and compared using operations. The union of A and B is the set of all elements that belong to A, to B, or to both. The intersection is the set of elements common to both A and B. The difference A - B is the set of elements in A that are not in B. The complement of A, usually written A', is the set of all elements of the universal set that are not in A. Venn diagrams with overlapping circles give a useful picture of these ideas."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A \u222a B is the union: elements in A or B or both.",
+            "A \u2229 B is the intersection: elements common to A and B.",
+            "A - B is the difference: elements in A but not in B.",
+            "A' is the complement: elements of U that are not in A.",
+            "Venn diagrams help visualise union, intersection, difference and complement."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If A = {1, 2, 3} and B = {2, 3, 4}, then A \u222a B = {1, 2, 3, 4}, A \u2229 B = {2, 3} and A - B = {1}.", "note": "Union merges the sets; intersection keeps only the common part." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: Venn diagram for union and intersection",
+      "description": "Two overlapping circles representing sets A and B, with the union shaded one way and the intersection shaded another.",
+      "labels": ["A", "B", "A \u222a B", "A \u2229 B", "elements in both"]
+    }
+  ],
+  "keyPoints": [
+    "A set is a well-defined collection of distinct objects.",
+    "Rosters and set-builder forms are two common ways to describe a set.",
+    "The empty set is a subset of every set; every set is a subset of itself.",
+    "The power set of a set with n elements has 2^n elements.",
+    "Union, intersection, difference and complement are the basic set operations.",
+    "Venn diagrams give a visual way to combine and compare sets."
+  ],
+  "examFocus": [
+    "When asked to list a power set, include the empty set and the whole set as well as the intermediate subsets.",
+    "Be careful with subset and proper-subset symbols; A \u2286 B allows equality, A \u2282 B does not."
+  ],
+  "vocabulary": [
+    { "word": "Set", "meaning": "A well-defined collection of distinct objects." },
+    { "word": "Element", "meaning": "An object belonging to a set." },
+    { "word": "Subset", "meaning": "A set whose elements are all contained in another set." },
+    { "word": "Power set", "meaning": "The set of all subsets of a given set." },
+    { "word": "Union", "meaning": "The set of elements belonging to either of two sets or to both." },
+    { "word": "Intersection", "meaning": "The set of elements common to two sets." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-sets-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is the empty set?",
+      "options": ["{0}", "{1}", "\u2205", "{x : x is a prime number}"],
+      "correctIndex": 2,
+      "answer": "\u2205",
+      "explanation": "The empty set contains no elements and is denoted by \u2205 or {}.",
+      "commonMistake": "Thinking {0} is the empty set because it has one element."
+    },
+    {
+      "id": "isc-11-math-sets-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The number of subsets of a set with 3 elements is:",
+      "options": ["3", "6", "8", "9"],
+      "correctIndex": 2,
+      "answer": "8",
+      "explanation": "A set with n elements has 2^n subsets; 2^3 = 8.",
+      "commonMistake": "Forgetting that the empty set and the set itself are included."
+    },
+    {
+      "id": "isc-11-math-sets-q-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "If A = {1, 2, 3} and B = {2, 3, 4}, then A \u2229 B is:",
+      "options": ["{1, 4}", "{2, 3}", "{1, 2, 3, 4}", "\u2205"],
+      "correctIndex": 1,
+      "answer": "{2, 3}",
+      "explanation": "The intersection is the set of elements common to both A and B.",
+      "commonMistake": "Confusing intersection with union."
+    },
+    {
+      "id": "isc-11-math-sets-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Write the set {x : x is a natural number less than 6} in roster form.",
+      "answer": "{1, 2, 3, 4, 5}",
+      "explanation": "The natural numbers less than 6 are 1, 2, 3, 4 and 5.",
+      "commonMistake": "Including 0 or 6, depending on the convention being used."
+    },
+    {
+      "id": "isc-11-math-sets-q-05",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "If A = {1, 2, 3}, write two different proper subsets of A.",
+      "answer": "Examples: {1}, {2, 3}. Any nonempty subset of A that is not equal to A is acceptable.",
+      "explanation": "A proper subset must be a subset that is not equal to the whole set.",
+      "commonMistake": "Including A itself as a proper subset."
+    },
+    {
+      "id": "isc-11-math-sets-q-06",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "If U = {1, 2, 3, 4, 5, 6}, A = {1, 2, 3} and B = {3, 4, 5}, find A \u222a B, A \u2229 B, A - B and A'.",
+      "answer": "A \u222a B = {1, 2, 3, 4, 5}; A \u2229 B = {3}; A - B = {1, 2}; A' = {4, 5, 6}.",
+      "explanation": "Union merges the sets, intersection keeps the common element, difference removes elements of B from A, and complement is taken relative to U.",
+      "commonMistake": "Taking the complement relative to A instead of the universal set U."
+    }
+  ]
+}

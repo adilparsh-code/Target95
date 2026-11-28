@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-phy-heat-thermodynamics",
+  "title": "Heat and Thermodynamics",
+  "kind": "physics",
+  "tagline": "Thermal equilibrium, temperature, heat, specific heat and latent heat, the zeroth, first and second laws of thermodynamics, thermodynamic processes, and the basic meaning of entropy and irreversibility at the ISC Class XI level.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Physics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Physics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question. The official CISCE ISC Class XI Physics syllabus treats this topic under thermodynamics, so the content follows that syllabus framing."
+  },
+  "overview": {
+    "intro": "Thermodynamics is the study of heat, work, temperature and energy, but it is more than that: it is a set of very general rules about what energy can and cannot do. Many students begin this chapter thinking of heat simply as 'something hot things have'. The first step is to replace that image with more precise ideas: temperature is a measure of the thermal state of a body and determines the direction of heat flow, while heat itself is energy in transit because of a temperature difference. Once that distinction is clear, the laws of thermodynamics are much easier to understand, because each law is really a restriction on how energy can be transferred or transformed.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Thermodynamics" },
+      { "label": "Core ideas", "value": "Heat and temperature; thermal equilibrium; zeroth law; specific heat capacity; latent heat; first law of thermodynamics; work done by a gas; thermodynamic processes; second law; reversible and irreversible processes; basic meaning of entropy" }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish between heat and temperature and explain the direction of heat flow.",
+    "State the zeroth law of thermodynamics and explain its significance.",
+    "Define specific heat capacity and latent heat, and use them in simple numerical problems.",
+    "State the first law of thermodynamics and relate it to the conservation of energy.",
+    "Calculate work done by or on a gas in simple processes.",
+    "Distinguish between isothermal, adiabatic, isobaric and isochoric processes at a basic level.",
+    "State the second law of thermodynamics and explain its meaning in simple terms.",
+    "Describe reversible and irreversible processes and explain why some processes are irreversible."
+  ],
+  "learn": [
+    {
+      "id": "heat-temperature-and-thermal-equilibrium",
+      "title": "Heat, temperature and thermal equilibrium",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Temperature is not the same thing as heat. Temperature is a measure of the hotness or coldness of a body and determines the direction of heat flow. Heat is energy transferred between bodies because of a temperature difference. When two bodies at different temperatures are placed in contact, heat flows from the hotter to the colder until they reach the same temperature. At that point they are in thermal equilibrium. This is an everyday observation, but it becomes powerful when stated generally, because it leads directly to the zeroth law."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Temperature determines the direction of heat flow.",
+            "Heat is energy in transit, not energy contained in the same sense as internal energy.",
+            "Two bodies in thermal equilibrium have the same temperature.",
+            "A thermometer works by reaching thermal equilibrium with the body being measured."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a hot metal ball is placed in water, heat flows from the ball to the water until both are at the same temperature. The water warms and the ball cools, but the energy lost by the ball equals the energy gained by the water if no heat escapes.", "note": "The example links the idea of heat flow to energy conservation before the first law is formally stated." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zeroth-law-and-temperature-measurement",
+      "title": "The zeroth law and temperature measurement",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The zeroth law of thermodynamics says that if two systems are each in thermal equilibrium with a third system, then they are in thermal equilibrium with each other. This sounds almost obvious, but it is important because it justifies the use of a thermometer. The third system is the thermometer, and the law guarantees that if the thermometer reads the same temperature for two different bodies, those bodies will also be in equilibrium with one another. Without this idea, temperature would be little more than a label."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The zeroth law states that thermal equilibrium is transitive.",
+            "It justifies temperature measurement with a thermometer.",
+            "It allows temperature to be treated as a property of a system."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a thermometer reads the same value when placed first in water A and then in water B, the zeroth law tells us that water A and water B are in thermal equilibrium with each other.", "note": "The example shows why the law is practical, not merely formal." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "specific-heat-capacity-and-latent-heat",
+      "title": "Specific heat capacity and latent heat",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "When heat is supplied to a body, its temperature usually rises. The amount of heat needed to raise the temperature depends on the mass of the body and on the substance it is made of. This substance-dependent property is the specific heat capacity, defined as the heat required to raise unit mass of a substance by one degree. Water has a high specific heat capacity, which is why it is good at storing and transporting thermal energy. A related idea is latent heat, which is the heat absorbed or released during a change of state at constant temperature. Latent heat explains why ice can melt without a rise in temperature."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Specific heat capacity is the heat needed to raise unit mass by one degree.",
+            "Different substances have different specific heat capacities.",
+            "Latent heat is absorbed or released during a change of state.",
+            "During melting or boiling, temperature remains constant even though heat is being supplied."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "To raise the temperature of 1 kg of water by 1°C requires a certain amount of heat; to raise the same mass of copper by the same temperature requires much less heat. During melting of ice, heat is absorbed, but the temperature stays at the melting point until the change of state is complete.", "note": "The example separates sensible heat from latent heat clearly." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "first-law-of-thermodynamics",
+      "title": "The first law of thermodynamics",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The first law of thermodynamics is the law of conservation of energy applied to thermal systems. It states that the heat supplied to a system is equal to the increase in its internal energy plus the work done by the system on its surroundings. In other words, energy cannot be created or destroyed, only transferred or transformed. For a gas in a cylinder, for example, heating it may raise its internal energy, expand it against a piston, or do both. The first law keeps track of all these possibilities."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "The first law is the conservation of energy for thermodynamic systems.",
+            "Heat supplied equals the increase in internal energy plus work done by the system.",
+            "Internal energy is the energy stored in the system due to molecular motion and interactions.",
+            "Work can be done by expansion or compression."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a gas is compressed quickly, work is done on the gas, and its temperature can rise. If a gas expands and pushes a piston, it does work, and if no heat is supplied, its internal energy may decrease. The first law helps decide which effect happens in a given situation.", "note": "The example shows that temperature change is not always due to direct heating." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thermodynamic-processes-and-work",
+      "title": "Thermodynamic processes and work",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A thermodynamic process is any change in the state of a system. The state of a gas can be described by quantities such as pressure, volume and temperature. Different processes are identified by which of these quantities stays constant. In an isothermal process the temperature remains constant; in an adiabatic process no heat enters or leaves; in an isobaric process the pressure remains constant; in an isochoric process the volume remains constant. These are idealizations, but they are extremely useful for reasoning about real processes."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Isobaric: constant pressure.",
+            "Isochoric: constant volume.",
+            "Isothermal: constant temperature.",
+            "Adiabatic: no heat exchange with surroundings.",
+            "Work done by a gas is related to the change in volume."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a gas is heated in a cylinder with a movable piston and the pressure stays constant, the gas expands and does work. If the piston is locked in place, the volume cannot change and no work is done by expansion, even though the gas is heated. The same heat input can therefore produce different results depending on the process.", "note": "The example shows why the path matters in thermodynamics." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "second-law-and-irreversibility",
+      "title": "The second law and irreversibility",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "The second law of thermodynamics is one of the most important and also one of the most misunderstood laws in physics. In simple terms, it places restrictions on the direction of natural processes. Heat does not flow spontaneously from a colder body to a hotter body, and no heat engine can convert heat completely into work. The second law introduces the idea that some processes are irreversible: they can happen naturally in one direction but not in the opposite direction without outside intervention. This is why a cup of hot tea cools down but does not spontaneously become hot again by taking heat from the room."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Heat does not flow spontaneously from cold to hot.",
+            "No engine can convert heat completely into work.",
+            "Real processes are often irreversible.",
+            "The second law gives a direction to natural processes.",
+            "Entropy is a measure introduced by the second law."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "If a gas expands into an evacuated container, it spreads out and does not gather itself back into one corner by itself. The reverse process is not impossible in the sense of violating energy conservation, but it does not happen spontaneously. That is the kind of one-way behavior the second law captures.", "note": "The example connects irreversibility to a concrete everyday observation." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": {
+    "0": { "kind": "figure", "caption": "A gas in a cylinder with a movable piston, showing how expansion can do work." },
+    "1": { "kind": "table", "caption": "Summary of common thermodynamic processes and what stays constant." }
+  },
+  "keyPoints": [
+    "Temperature determines the direction of heat flow; heat is energy in transit.",
+    "The zeroth law justifies temperature measurement.",
+    "Specific heat capacity relates heat supplied to temperature rise for a given mass.",
+    "Latent heat is absorbed or released during a change of state at constant temperature.",
+    "The first law is energy conservation applied to heat and work.",
+    "The second law restricts the direction of natural processes and makes many processes irreversible.",
+    "A heat engine cannot convert all heat into work.",
+    "Reversible and irreversible processes are not equally possible in both directions."
+  ],
+  "examFocus": [
+    "Do not confuse heat and temperature; state which is which when answering.",
+    "Remember that latent heat is associated with a change of state at constant temperature.",
+    "Use the first law carefully, keeping signs for heat supplied and work done clear.",
+    "State the second law in a precise way, not as a vague statement about 'things cooling down'.",
+    "Do not claim that the second law forbids every reverse process; it forbids spontaneous reverse processes of the natural kind."
+  ],
+  "vocabulary": [
+    { "word": "Heat", "meaning": "Energy transferred between bodies because of a temperature difference." },
+    { "word": "Temperature", "meaning": "A measure of the thermal state of a body that determines the direction of heat flow." },
+    { "word": "Thermal equilibrium", "meaning": "The state in which two bodies in contact have the same temperature and no net heat flows between them." },
+    { "word": "Zeroth law", "meaning": "The law stating that if two bodies are each in thermal equilibrium with a third, they are in thermal equilibrium with each other." },
+    { "word": "Specific heat capacity", "meaning": "The heat required to raise the temperature of unit mass of a substance by one degree." },
+    { "word": "Latent heat", "meaning": "The heat absorbed or released during a change of state at constant temperature." },
+    { "word": "Internal energy", "meaning": "The energy stored in a system due to the motion and interactions of its molecules." },
+    { "word": "First law", "meaning": "The law of conservation of energy applied to thermodynamic systems." },
+    { "word": "Second law", "meaning": "The law that restricts the direction of natural processes and introduces irreversibility and entropy." },
+    { "word": "Adiabatic process", "meaning": "A process in which no heat enters or leaves the system." },
+    { "word": "Entropy", "meaning": "A quantity that helps express the direction of natural change and the unavailability of energy for work." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-phy-heat-thermo-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Heat flows spontaneously from a body at higher temperature to a body at lower temperature because:",
+      "options": [
+        "Temperature is the same as heat",
+        "Temperature determines the direction of heat flow",
+        "Hot bodies contain no internal energy",
+        "Heat always flows from cold to hot"
+      ],
+      "correctIndex": 1,
+      "answer": "Temperature determines the direction of heat flow",
+      "explanation": "Temperature difference determines the natural direction of heat flow.",
+      "commonMistake": "Treating temperature and heat as the same thing."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Thermal equilibrium between two bodies means that:",
+      "options": [
+        "Both have the same mass",
+        "Both have the same temperature",
+        "Both are solids",
+        "No energy exists in either body"
+      ],
+      "correctIndex": 1,
+      "answer": "Both have the same temperature",
+      "explanation": "Thermal equilibrium means the two bodies have the same temperature.",
+      "commonMistake": "Thinking equilibrium depends on mass or material rather than temperature."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-03",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The zeroth law of thermodynamics is important because it:",
+      "options": [
+        "Explains why heat flows",
+        "Justifies the measurement of temperature",
+        "Defines entropy",
+        "States that energy is conserved"
+      ],
+      "correctIndex": 1,
+      "answer": "Justifies the measurement of temperature",
+      "explanation": "The zeroth law allows temperature to be measured consistently using a thermometer.",
+      "commonMistake": "Confusing the zeroth law with the first or second law."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-04",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Water has a high specific heat capacity. This means that:",
+      "options": [
+        "It heats up quickly",
+        "It requires a large amount of heat to raise its temperature",
+        "It cannot change state",
+        "It has no internal energy"
+      ],
+      "correctIndex": 1,
+      "answer": "It requires a large amount of heat to raise its temperature",
+      "explanation": "A high specific heat capacity means much heat is needed for a given temperature rise.",
+      "commonMistake": "Confusing high specific heat with fast heating."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-05",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Latent heat of fusion refers to the heat needed for:",
+      "options": [
+        "Raising temperature without changing state",
+        "Changing a solid into a liquid at constant temperature",
+        "Raising the boiling point",
+        "Cooling a gas"
+      ],
+      "correctIndex": 1,
+      "answer": "Changing a solid into a liquid at constant temperature",
+      "explanation": "Latent heat of fusion is the heat required for melting at the melting point.",
+      "commonMistake": "Thinking latent heat raises temperature during a change of state."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-06",
+      "type": "mcq",
+      "difficulty": "medium",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The first law of thermodynamics is a statement of:",
+      "options": [
+        "Conservation of momentum",
+        "Conservation of energy",
+        "Increase of entropy",
+        "Direction of heat flow only"
+      ],
+      "correctIndex": 1,
+      "answer": "Conservation of energy",
+      "explanation": "The first law applies conservation of energy to heat, work and internal energy.",
+      "commonMistake": "Attributing the first law only to heat flow rather than to energy conservation."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-07",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "In an adiabatic compression of a gas:",
+      "options": [
+        "Heat enters the gas from outside",
+        "No heat enters or leaves the gas",
+        "The temperature must remain constant",
+        "No work is done"
+      ],
+      "correctIndex": 1,
+      "answer": "No heat enters or leaves the gas",
+      "explanation": "In an adiabatic process there is no heat exchange with the surroundings.",
+      "commonMistake": "Thinking adiabatic means temperature or pressure must stay constant."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-08",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which statement about the second law of thermodynamics is correct?",
+      "options": [
+        "Heat can always be fully converted into work",
+        "Heat does not flow spontaneously from cold to hot",
+        "All processes are reversible",
+        "Internal energy is always constant"
+      ],
+      "correctIndex": 1,
+      "answer": "Heat does not flow spontaneously from cold to hot",
+      "explanation": "The second law restricts spontaneous heat flow from cold to hot.",
+      "commonMistake": "Believing that any reverse process is impossible rather than that natural ones are restricted."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-09",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "No heat engine can be 100% efficient because:",
+      "options": [
+        "Energy is destroyed in the engine",
+        "Some heat must be rejected to a colder body",
+        "Work cannot be obtained from heat",
+        "Temperature can never be measured"
+      ],
+      "correctIndex": 1,
+      "answer": "Some heat must be rejected to a colder body",
+      "explanation": "The second law implies that a heat engine cannot convert all absorbed heat into work.",
+      "commonMistake": "Thinking that better engineering could make efficiency exactly 100%."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-10",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "An isothermal process is one in which:",
+      "options": [
+        "Pressure remains constant",
+        "Volume remains constant",
+        "Temperature remains constant",
+        "No work is done"
+      ],
+      "correctIndex": 2,
+      "answer": "Temperature remains constant",
+      "explanation": "In an isothermal process the temperature of the system stays constant.",
+      "commonMistake": "Mixing up isothermal, isobaric and isochoric processes."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-11",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Distinguish between heat and temperature.",
+      "answer": "Temperature is a measure of the hotness or coldness of a body and determines the direction of heat flow; heat is energy transferred between bodies because of a temperature difference.",
+      "explanation": "Heat and temperature are related but not identical; temperature is a state property, heat is energy in transit.",
+      "commonMistake": "Using the words interchangeably."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-12",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "State the first law of thermodynamics in words.",
+      "answer": "The heat supplied to a system equals the increase in its internal energy plus the work done by the system.",
+      "explanation": "The first law connects heat, internal energy and work.",
+      "commonMistake": "Omitting the work term or the internal energy change."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-13",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Why does melting ice absorb heat without a rise in temperature?",
+      "answer": "Because the heat supplied is used as latent heat to change the state from solid to liquid, not to raise the temperature.",
+      "explanation": "During a change of state, heat changes the arrangement of molecules rather than the temperature.",
+      "commonMistake": "Assuming that all supplied heat must raise temperature."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-14",
+      "type": "mcq",
+      "difficulty": "hard",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "Which of the following is an example of an irreversible process?",
+      "options": [
+        "A perfect slow compression with no friction in an ideal model",
+        "Heat flowing from a hot body to a cold body in nature",
+        "A purely theoretical reversible cycle",
+        "A system at rest in equilibrium"
+      ],
+      "correctIndex": 1,
+      "answer": "Heat flowing from a hot body to a cold body in nature",
+      "explanation": "Natural heat flow from hot to cold is irreversible in everyday conditions.",
+      "commonMistake": "Thinking any spontaneous process is automatically reversible."
+    },
+    {
+      "id": "isc-11-phy-heat-thermo-q-15",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Explain why a gas expands into an evacuated container and does not gather itself back spontaneously.",
+      "answer": "The expansion is irreversible because the natural process is one-way; although energy is conserved, the second law says such a spontaneous gathering back does not occur.",
+      "explanation": "The example illustrates irreversibility and the role of the second law.",
+      "commonMistake": "Claiming the reverse is impossible because it violates energy conservation rather than because it is non-spontaneous."
+    }
+  ]
+}

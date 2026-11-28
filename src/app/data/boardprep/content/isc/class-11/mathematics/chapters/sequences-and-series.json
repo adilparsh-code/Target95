@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "id": "isc-11-math-sequences",
+  "title": "Sequences and Series",
+  "kind": "mathematics",
+  "tagline": "Sequences and series, arithmetic and geometric progressions, arithmetic and geometric means, infinite geometric series, and standard special sums.",
+  "reviewStatus": "published",
+  "sourceNote": {
+    "thirdParty": "",
+    "boardprep": "Original study material written by BoardPrep for the CISCE ISC Class XI Mathematics syllabus (official-verified baseline, examination year 2027). Syllabus unit and chapter title were taken from the official-verified ISC Mathematics registry entry; no board examination paper was consulted, so every question is original practice and not a previous year question."
+  },
+  "overview": {
+    "intro": "A sequence is an ordered list of numbers, and a series is the sum of the terms of a sequence. This chapter deals with two especially important kinds of sequences: arithmetic progressions, where each term increases by a fixed amount, and geometric progressions, where each term is multiplied by a fixed number. We study the general term and the sum of terms for both, the relations between arithmetic and geometric means, the special case of an infinite geometric series, and a few standard sums that appear again and again.",
+    "facts": [
+      { "label": "Syllabus unit", "value": "Sequences and Series" },
+      { "label": "Core ideas", "value": "Arithmetic progression; arithmetic mean; geometric progression; finite and infinite geometric series; geometric mean; relation between A.M. and G.M.; standard special sums" }
+    ]
+  },
+  "learningOutcomes": [
+    "Distinguish a sequence from a series.",
+    "Identify arithmetic and geometric progressions.",
+    "Use the general term and sum formulas for A.P. and G.P.",
+    "Find arithmetic and geometric means.",
+    "Use the infinite G.P. sum when appropriate.",
+    "Use standard sum formulas for n, n^2 and n^3."
+  ],
+  "learn": [
+    {
+      "id": "sequences-and-series",
+      "title": "Sequences and series",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "A sequence is a list of numbers written in a definite order, such as 2, 5, 8, 11, ... A series is what you get when you add the terms of a sequence, such as 2 + 5 + 8 + 11 + ... The distinction matters because many questions ask for a term of the sequence and others ask for the sum of several terms. An arithmetic progression has a constant difference between consecutive terms, and a geometric progression has a constant ratio."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "A sequence is an ordered list.",
+            "A series is the sum of terms.",
+            "A.P. has a constant common difference.",
+            "G.P. has a constant common ratio."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "3, 7, 11, 15 is an A.P. with common difference 4. 3, 6, 12, 24 is a G.P. with common ratio 2.", "note": "The first is about addition of a fixed amount; the second is about repeated multiplication." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arithmetic-progression",
+      "title": "Arithmetic progression",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In an A.P. with first term a and common difference d, the nth term is T_n = a + (n-1)d, and the sum of the first n terms is S_n = n/2[2a + (n-1)d]. The formula for the nth term is useful when you want one specific term, and the sum formula is useful when you want the total of a block of terms. If three numbers are in A.P., the middle one is the arithmetic mean of the other two."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "T_n = a + (n-1)d for an A.P.",
+            "S_n = n/2[2a + (n-1)d].",
+            "Arithmetic mean of a and c is (a+c)/2.",
+            "The sum formula uses the number of terms n."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For the A.P. 3, 7, 11, 15, a = 3 and d = 4, so the 10th term is 3 + 9(4) = 39, and the sum of the first 10 terms is 10/2(3 + 39) = 210.", "note": "The same term 39 appears in both the nth term and the sum formula, which is a good check." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "geometric-progression",
+      "title": "Geometric progression",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In a G.P. with first term a and common ratio r, the nth term is T_n = a r^{n-1}, and for r not equal to 1 the sum of the first n terms is S_n = a(1 - r^n)/(1 - r). If |r| is less than 1, the infinite geometric series has a finite sum S_infinity = a/(1 - r). The convergence condition is essential; if |r| is greater than or equal to 1, the infinite sum does not exist in the simple sense."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "T_n = a r^{n-1} for a G.P.",
+            "S_n = a(1 - r^n)/(1 - r) for r not equal to 1.",
+            "S_infinity = a/(1 - r) when |r| < 1.",
+            "If |r| >= 1, the infinite sum is not finite."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "For 3, 6, 12, 24, the 4th term is 3(2^3) = 24. The infinite sum does not exist here because r = 2, which is not less than 1.", "note": "The rule for an infinite sum is not just a formula; it has a condition that must be checked." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "means",
+      "title": "Arithmetic and geometric means",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "If a, A, c are in A.P., then A is the arithmetic mean of a and c, so A = (a+c)/2. If a, G, c are in G.P. and a and c are positive, then G is the geometric mean, so G = sqrt(ac). For positive numbers, the arithmetic mean is greater than or equal to the geometric mean. These ideas are useful for inserting numbers between two given numbers and for comparing averages."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Arithmetic mean = (a+c)/2.",
+            "Geometric mean = sqrt(ac) for positive numbers.",
+            "For positive numbers, A >= G.",
+            "Means are useful for inserting terms."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "Between 2 and 8, the arithmetic mean is (2+8)/2 = 5, and the geometric mean is sqrt(2 x 8) = 4. Here 5 > 4, as expected.", "note": "The inequality A >= G is strict unless the two numbers are equal." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "standard-sums",
+      "title": "Standard sums of natural numbers",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Several sums appear so often that it is worth knowing them directly. The sum of the first n natural numbers is n(n+1)/2. The sum of the squares of the first n natural numbers is n(n+1)(2n+1)/6. The sum of the cubes of the first n natural numbers is [n(n+1)/2]^2. These are used in many problems where terms are not given explicitly but follow a simple pattern."
+        },
+        {
+          "type": "bullets",
+          "items": [
+            "Sum of first n natural numbers = n(n+1)/2.",
+            "Sum of squares = n(n+1)(2n+1)/6.",
+            "Sum of cubes = [n(n+1)/2]^2.",
+            "These are standard results worth remembering."
+          ]
+        },
+        {
+          "type": "examples",
+          "items": [
+            { "text": "The sum of the first 5 natural numbers is 5(6)/2 = 15, and the sum of the squares 1^2 + 2^2 + 3^2 + 4^2 + 5^2 is 5(6)(11)/6 = 55.", "note": "These formulas save time and reduce errors when summing long lists." }
+          ]
+        }
+      ]
+    }
+  ],
+  "figures": [
+    {
+      "caption": "Figure: A.P. and G.P. growth",
+      "description": "A simple comparison showing how an arithmetic progression adds a fixed amount each step, while a geometric progression multiplies by a fixed ratio.",
+      "labels": ["A.P.: add d each step", "G.P.: multiply by r each step", "difference constant", "ratio constant"]
+    }
+  ],
+  "keyPoints": [
+    "A sequence is an ordered list; a series is its sum.",
+    "A.P. has constant difference; G.P. has constant ratio.",
+    "A.P. nth term: a + (n-1)d; sum: n/2[2a + (n-1)d].",
+    "G.P. nth term: a r^{n-1}; sum: a(1 - r^n)/(1 - r).",
+    "Infinite G.P. sum = a/(1 - r) only if |r| < 1.",
+    "A.M. = (a+c)/2, G.M. = sqrt(ac) for positive a, c.",
+    "Standard sums for n, n^2 and n^3 are worth knowing."
+  ],
+  "examFocus": [
+    "Before using the infinite G.P. sum, check that |r| < 1.",
+    "When finding the nth term of a G.P., remember the exponent is n-1, not n."
+  ],
+  "vocabulary": [
+    { "word": "Sequence", "meaning": "An ordered list of numbers." },
+    { "word": "Series", "meaning": "The sum of the terms of a sequence." },
+    { "word": "Arithmetic progression", "meaning": "A sequence in which each term differs from the previous one by a constant amount." },
+    { "word": "Geometric progression", "meaning": "A sequence in which each term is multiplied by a constant to get the next." },
+    { "word": "Common difference", "meaning": "The fixed amount added in an arithmetic progression." },
+    { "word": "Common ratio", "meaning": "The fixed multiplier in a geometric progression." }
+  ],
+  "questions": [
+    {
+      "id": "isc-11-math-sequences-q-01",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "The nth term of an A.P. with first term a and common difference d is:",
+      "options": ["a + nd", "a + (n-1)d", "a - (n-1)d", "n + (a-1)d"],
+      "correctIndex": 1,
+      "answer": "a + (n-1)d",
+      "explanation": "The nth term is a + (n-1)d.",
+      "commonMistake": "Using n instead of n-1 in the formula."
+    },
+    {
+      "id": "isc-11-math-sequences-q-02",
+      "type": "mcq",
+      "difficulty": "easy",
+      "marks": 1,
+      "origin": "practice",
+      "prompt": "For a G.P. with r = 2, the infinite sum:",
+      "options": ["Exists and is finite", "Does not exist as a finite sum", "Is always zero", "Depends only on a"],
+      "correctIndex": 1,
+      "answer": "Does not exist as a finite sum",
+      "explanation": "An infinite G.P. sum exists only if |r| < 1.",
+      "commonMistake": "Applying a/(1 - r) without checking the value of r."
+    },
+    {
+      "id": "isc-11-math-sequences-q-03",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Find the 10th term and the sum of the first 10 terms of the A.P. 3, 7, 11, 15.",
+      "answer": "T_10 = 3 + 9(4) = 39; S_10 = 10/2(3 + 39) = 210.",
+      "explanation": "Use the A.P. formulas with a = 3, d = 4.",
+      "commonMistake": "Using n instead of n-1, or mixing the sum and nth-term formulas."
+    },
+    {
+      "id": "isc-11-math-sequences-q-04",
+      "type": "short",
+      "difficulty": "medium",
+      "marks": 2,
+      "origin": "practice",
+      "prompt": "Insert one arithmetic mean between 6 and 14.",
+      "answer": "The arithmetic mean is (6 + 14)/2 = 10.",
+      "explanation": "The mean is exactly in the middle of the two numbers.",
+      "commonMistake": "Using the geometric mean, or adding the numbers without dividing by 2."
+    },
+    {
+      "id": "isc-11-math-sequences-q-05",
+      "type": "long",
+      "difficulty": "hard",
+      "marks": 4,
+      "origin": "practice",
+      "prompt": "Find the sum of the first 20 natural numbers and the sum of their squares.",
+      "answer": "Sum = 20(21)/2 = 210; sum of squares = 20(21)(41)/6 = 2870.",
+      "explanation": "Use the standard sum formulas.",
+      "commonMistake": "Using the wrong formula, or forgetting the factor in the square-sum formula."
+    }
+  ]
+}

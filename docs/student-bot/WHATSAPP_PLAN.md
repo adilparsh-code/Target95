@@ -4,6 +4,15 @@ Purpose (from the owner): most students stay on WhatsApp and few will use the we
 
 Status: the WhatsApp transport is **built and unit-tested, but not live**. Nothing here has been connected to Meta, deployed to Firebase, or tested with a real phone.
 
+## WhatsApp Channel (live in code, off until the link is set)
+
+The owner created a WhatsApp Channel. The website connects to it in both directions without any student data:
+
+- `NEXT_PUBLIC_WHATSAPP_CHANNEL_URL` (public link, `https://whatsapp.com/channel/<id>`) turns on the footer "WhatsApp Channel" link and the end-of-chapter bar (Share on WhatsApp, Copy post, Follow our Channel). Unset = those Channel links are hidden. Set it in Vercel for the environment you want, then redeploy (`NEXT_PUBLIC_*` is inlined at build time).
+- "Copy post" gives a plain-text post (chapter title, link back to the chapter, Channel link). Paste it into the Channel by hand. Shared links carry no query string, tracking or study state.
+- Posting to a Channel automatically is **not** done. Meta's official Business API has no Channel endpoint as far as we could find, and the only automation route is an unofficial third party that links your WhatsApp account by QR code, which risks a ban and hands that third party access. Do not use it.
+- Code: `src/lib/whatsappChannel.mjs`, `src/app/components/ChapterShareBar.jsx`, `WhatsAppChannelLink.jsx`, used in `ChapterLayout.jsx` and `Footer.jsx`.
+
 ## What exists (all in this branch)
 
 | Piece | File | Notes |

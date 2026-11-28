@@ -1,5 +1,6 @@
 import { CONTENT_SOURCE_NOTICE_SHORT } from "./ContentSourceNotice";
 import Link from "next/link";
+import WhatsAppChannelLink from "./WhatsAppChannelLink";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -100,6 +101,9 @@ export default function Footer() {
                   {item.platform}
                 </a>
               ))}
+              <WhatsAppChannelLink className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-xs font-medium text-slate-400 transition-all hover:-translate-y-0.5 hover:border-slate-700 hover:text-white">
+                WhatsApp Channel
+              </WhatsAppChannelLink>
             </div>
           </div>
         </div>

@@ -22,6 +22,7 @@ import {
   Clock,
 } from "lucide-react";
 import Navbar from "./Navbar";
+import ChapterShareBar from "./ChapterShareBar";
 import ReadingProgressIndicator from "./study/ReadingProgressIndicator";
 
 export const CHAPTER_SECTIONS = [
@@ -159,6 +160,8 @@ export default function ChapterLayout({
           </div></div>
 
           <div className="chapter-content">{children}</div>
+
+          <ChapterShareBar title={chapterTitle} />
 
           <div className="mt-14 border-t border-slate-200 pt-8 dark:border-slate-800"><div className="grid gap-3 sm:grid-cols-2">
             {prevChapter ? <Link href={`/study/${prevChapter.slug}`} className="group rounded-2xl border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-slate-900"><span className="text-xs font-semibold text-slate-400">Previous chapter</span><span className="mt-1 flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white"><ChevronLeft className="h-4 w-4" />{prevChapter.title}</span></Link> : <div className="rounded-2xl border border-slate-200/70 bg-slate-50 p-5 text-sm text-slate-400 dark:border-slate-800 dark:bg-slate-900/60">This is the first chapter.</div>}
